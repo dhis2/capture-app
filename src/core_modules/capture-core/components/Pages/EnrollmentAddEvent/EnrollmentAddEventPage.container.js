@@ -91,7 +91,7 @@ export const EnrollmentAddEventPage = () => {
                 teiDisplayName={teiDisplayName}
                 trackedEntityName={trackedEntityName}
                 stageName={selectedProgramStage?.stageForm.name}
-                eventDateLabel={selectedProgramStage?.stageForm?.getLabel('eventDate')}
+                eventDateLabel={selectedProgramStage?.stageForm.getLabel('eventDate')}
                 enrollmentsAsOptions={enrollmentsAsOptions}
                 onSetOrgUnitId={handleSetOrgUnitId}
                 onResetOrgUnitId={handleResetOrgUnitId}
