@@ -6,6 +6,7 @@ import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './mainPage.types';
 import { MainPageStatuses } from './MainPage.constants';
 import { WithoutOrgUnitSelectedMessage } from './WithoutOrgUnitSelectedMessage/WithoutOrgUnitSelectedMessage';
+import { WithoutCategorySelectedMessage } from './WithoutCategorySelectedMessage/WithoutCategorySelectedMessage';
 
 const getStyles = () => ({
     listContainer: {
@@ -22,6 +23,11 @@ const MainPagePlain = ({ MainPageStatus, setShowAccessible, programId, classes, 
                     programId={programId}
                     setShowAccessible={setShowAccessible}
                 />
+            )
+        }
+        {
+            MainPageStatus === MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED && (
+                <WithoutCategorySelectedMessage />
             )
         }
         {
