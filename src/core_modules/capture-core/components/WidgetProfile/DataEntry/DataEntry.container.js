@@ -1,61 +1,39 @@
 // @flow
-import React, { useState, useMemo } from 'react';
-import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { NoticeBoxes } from './NoticeBoxes.container';
 import type { Props } from './dataEntry.types';
-import { DataEntry } from '../../DataEntry';
+import { DataEntryComponent } from './DataEntry.component';
 import { useLifecycle } from './hooks';
-import { getUpdateFieldActions } from './actions';
+import { getUpdateFieldActions } from './dataEntry.actions';
 
-export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditModal, mergedAttributes }: Props) => {
+export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditModal, trackedEntityInstanceAttributes }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
     const dispatch = useDispatch();
-    const [startUpdate, setStartUpdate] = useState(false);
-    const trackedEntityName: string = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
+    const [saveAttempted, setSaveAttempted] = useState(false);
 
-    const context = useLifecycle({
+    const dataEntryContext = useLifecycle({
         programAPI,
         orgUnitId,
-        mergedAttributes,
+        trackedEntityInstanceAttributes,
         dataEntryId,
         itemId,
+        toggleEditModal,
     });
+    const { trackedEntityName, ...context } = dataEntryContext;
+    const onUpdateFormField = useCallback((...args: Array<any>) => dispatch(getUpdateFieldActions(context, ...args)), [dispatch, context]);
 
     return (
-        <div>
-            {toggleEditModal && (
-                <Modal large onClose={onCancel} dataTest="modal-edit-profile">
-                    <ModalTitle>{i18n.t(`Edit ${trackedEntityName}`)}</ModalTitle>
-                    <ModalContent>
-                        {i18n.t(
-                            'Change information about this {{trackedEntityName}} here. To change information about this enrollment, use the Edit button in the in the Enrollment box on this dashboard',
-                            { trackedEntityName, interpolation: { escapeValue: false } },
-                        )}
-                        <DataEntry
-                            id={dataEntryId}
-                            formFoundation={context.formFoundation}
-                            onUpdateFormField={(...args: Array<any>) =>
-                                dispatch(getUpdateFieldActions(context, ...args))
-                            }
-                            saveAttempted={undefined}
-                        />
-                        <NoticeBoxes dataEntryId={dataEntryId} itemId={itemId} onComplete={startUpdate} />
-                    </ModalContent>
-                    <ModalActions>
-                        <ButtonStrip end>
-                            <Button onClick={onCancel} secondary>
-                                {i18n.t('Cancel without saving')}
-                            </Button>
-                            <Button onClick={() => setStartUpdate(true)} primary>
-                                {i18n.t('Save changes')}
-                            </Button>
-                        </ButtonStrip>
-                    </ModalActions>
-                </Modal>
-            )}
-        </div>
+        <DataEntryComponent
+            dataEntryId={dataEntryId}
+            itemId={itemId}
+            onCancel={onCancel}
+            onSave={() => setSaveAttempted(true)}
+            saveAttempted={saveAttempted}
+            toggleEditModal={toggleEditModal}
+            trackedEntityName={trackedEntityName}
+            formFoundation={context.formFoundation}
+            onUpdateFormField={onUpdateFormField}
+        />
     );
 };

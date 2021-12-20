@@ -5,9 +5,9 @@ import { NoticeBox } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
 
-const prepareMessages = (rulesEffectsGeneral, rulesEffectsMessages, onComplete, type) => {
+const prepareMessages = (rulesEffectsGeneral, rulesEffectsMessages, saveAttempted, type) => {
     let messages = rulesEffectsGeneral && rulesEffectsGeneral[type] ? rulesEffectsGeneral[type] : [];
-    if (onComplete) {
+    if (saveAttempted) {
         messages =
             rulesEffectsGeneral && rulesEffectsGeneral[`${type}OnComplete`]
                 ? [...messages, ...rulesEffectsGeneral[`${type}OnComplete`]]
@@ -29,11 +29,11 @@ const prepareMessages = (rulesEffectsGeneral, rulesEffectsMessages, onComplete, 
 export const NoticeBoxes = ({
     dataEntryId,
     itemId,
-    onComplete,
+    saveAttempted,
 }: {
     dataEntryId: string,
     itemId: string,
-    onComplete: boolean,
+    saveAttempted: boolean,
 }) => {
     const ruleId = `${dataEntryId}-${itemId}`;
     const { rulesEffectsGeneralErrors, rulesEffectsGeneralWarnings, rulesEffectsMessages } = useSelector(store => ({
@@ -41,8 +41,8 @@ export const NoticeBoxes = ({
         rulesEffectsGeneralWarnings: store.rulesEffectsGeneralWarnings && store.rulesEffectsGeneralWarnings[ruleId],
         rulesEffectsMessages: store.rulesEffectsMessages && store.rulesEffectsMessages[ruleId],
     }));
-    const errors = prepareMessages(rulesEffectsGeneralErrors, rulesEffectsMessages, onComplete, 'error');
-    const warnings = prepareMessages(rulesEffectsGeneralWarnings, rulesEffectsMessages, onComplete, 'warning');
+    const errors = prepareMessages(rulesEffectsGeneralErrors, rulesEffectsMessages, saveAttempted, 'error');
+    const warnings = prepareMessages(rulesEffectsGeneralWarnings, rulesEffectsMessages, saveAttempted, 'warning');
 
     return (
         <>

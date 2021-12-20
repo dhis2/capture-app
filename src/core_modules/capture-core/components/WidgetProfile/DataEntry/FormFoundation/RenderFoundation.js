@@ -157,6 +157,6 @@ export const buildFormFoundation = async (program: any) => {
 };
 
 export const build = async (program: any, setFormFoundation?: (formFoundation: RenderFoundation) => void) => {
-    const formFoundation = await buildFormFoundation(program);
+    const formFoundation = await buildFormFoundation(program) || {};
     setFormFoundation && setFormFoundation(formFoundation);
 };

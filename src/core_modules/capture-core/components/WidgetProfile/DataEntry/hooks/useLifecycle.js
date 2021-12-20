@@ -2,29 +2,31 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import type {
-    OrgUnit,
-    TrackedEntityAttributes,
-    OptionSets,
-    ProgramRulesContainer,
-} from 'capture-core-utils/rulesEngine';
+import type { OrgUnit, TrackedEntityAttributes, OptionSets, ProgramRulesContainer } from 'capture-core-utils/rulesEngine';
 import { useProgramRules, useConstants } from './index';
-import { getOpenDataEntryActions } from '../actions';
+import { getOpenDataEntryActions } from '../dataEntry.actions';
 import { buildRulesContainer } from '../ProgramRules';
-import { buildFormFoundation } from '../FormFoundation';
+import {
+    buildFormFoundation,
+    buildFormValues,
+    processProgramTrackedEntityAttributes,
+    processOptionSets,
+} from '../FormFoundation';
 
 export const useLifecycle = ({
     programAPI,
     orgUnitId,
-    mergedAttributes,
+    trackedEntityInstanceAttributes,
     dataEntryId,
     itemId,
+    toggleEditModal,
 }: {
     programAPI: any,
     orgUnitId: string,
-    mergedAttributes: Array<any>,
+    trackedEntityInstanceAttributes: Array<any>,
     dataEntryId: string,
     itemId: string,
+    toggleEditModal: boolean,
 }) => {
     // TODO: Getting the entire state object is bad and this needs to be refactored.
     // The problem is the helper methods that take the entire state object.
@@ -36,88 +38,48 @@ export const useLifecycle = ({
     const dispatch = useDispatch();
     const [rulesContainer, setRulesContainer] = useState<ProgramRulesContainer>({});
     const [formFoundation, setFormFoundation] = useState<any>({});
+    const [formValues, setFormValues] = useState<any>({});
 
+    const trackedEntityName: string = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
     const orgUnit: OrgUnit = useMemo(() => ({ id: orgUnitId, name: '' }), [orgUnitId]);
-    const trackedEntityAttributes: TrackedEntityAttributes = useMemo(
-        () =>
-            programAPI?.programTrackedEntityAttributes?.reduce(
-                (acc, currentValue) => ({
-                    ...acc,
-                    [currentValue.trackedEntityAttribute.id]: currentValue.trackedEntityAttribute,
-                }),
-                {},
-            ),
-        [programAPI],
-    );
-    const optionSets: OptionSets = useMemo(
-        () =>
-            Object.values(trackedEntityAttributes)?.reduce(
-                (acc, currentValue) =>
-                    // $FlowFixMe[incompatible-type]
-                    (currentValue.optionSet ? { ...acc, [currentValue.optionSet.id]: currentValue.optionSet } : acc),
-                {},
-            ),
-        [trackedEntityAttributes],
-    );
-    const formValues = useMemo(
-        () =>
-            mergedAttributes.reduce(
-                (acc, currentValue) => ({ ...acc, [currentValue.reactKey]: currentValue.value }),
-                {},
-            ),
-        [mergedAttributes],
-    );
+    const programTrackedEntityAttributes: TrackedEntityAttributes = useMemo(() => processProgramTrackedEntityAttributes(programAPI), [programAPI]);
+    const optionSets: OptionSets = useMemo(() => processOptionSets(programTrackedEntityAttributes), [programTrackedEntityAttributes]);
 
     useEffect(() => {
-        if (!loadingProgramRules && constants && Object.entries(formFoundation).length === 0) {
+        if (toggleEditModal && !loadingProgramRules && constants) {
             buildFormFoundation(programAPI, setFormFoundation);
-            buildRulesContainer({
-                programAPI,
-                setRulesContainer,
-                programRules,
-                constants,
-            });
+            buildRulesContainer({ programAPI, setRulesContainer, programRules, constants });
         }
-    }, [programAPI, loadingProgramRules, programRules, formFoundation, constants]);
+    }, [programAPI, loadingProgramRules, programRules, constants, toggleEditModal]);
 
     useEffect(() => {
-        if (
-            rulesContainer &&
-            Object.entries(rulesContainer).length > 0 &&
-            formFoundation &&
-            Object.entries(formFoundation).length > 0
-        ) {
-            dispatch(
-                getOpenDataEntryActions({
-                    orgUnit,
-                    dataEntryId,
-                    itemId,
-                    foundation: formFoundation,
-                    trackedEntityAttributes,
-                    optionSets,
-                    rulesContainer,
-                    formValues,
-                }),
-            );
+        if (toggleEditModal && Object.entries(formFoundation).length > 0) {
+            Object.entries(formValues).length === 0 && buildFormValues(formFoundation, trackedEntityInstanceAttributes, setFormValues, { orgUnitCode: orgUnit.id });
+
+            Object.entries(formValues).length > 0 && Object.entries(rulesContainer).length > 0 &&
+                dispatch(
+                    getOpenDataEntryActions({
+                        orgUnit,
+                        dataEntryId,
+                        itemId,
+                        foundation: formFoundation,
+                        trackedEntityAttributes: programTrackedEntityAttributes,
+                        optionSets,
+                        rulesContainer,
+                        formValues,
+                    }),
+                );
         }
-    }, [
-        dispatch,
-        orgUnit,
-        formFoundation,
-        trackedEntityAttributes,
-        optionSets,
-        rulesContainer,
-        formValues,
-        dataEntryId,
-        itemId,
-    ]);
+    }, [dispatch, orgUnit, formFoundation, programTrackedEntityAttributes, trackedEntityInstanceAttributes, optionSets, rulesContainer, formValues, dataEntryId, itemId, toggleEditModal]);
+
 
     return {
         orgUnit,
-        trackedEntityAttributes,
+        trackedEntityAttributes: programTrackedEntityAttributes,
         optionSets,
         rulesContainer,
         formFoundation,
         state,
+        trackedEntityName,
     };
 };

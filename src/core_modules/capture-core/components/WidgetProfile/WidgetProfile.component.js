@@ -100,7 +100,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                     onCancel={() => setToggleEditModal(false)}
                     programAPI={program}
                     orgUnitId={orgUnitId}
-                    mergedAttributes={mergeAttributes()}
+                    trackedEntityInstanceAttributes={trackedEntityInstances.attributes}
                 />
             )}
         </div>
