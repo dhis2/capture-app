@@ -1,6 +1,6 @@
 // @flow
 
-export const effectActions = {
+export const effectActions = Object.freeze({
     ASSIGN_VALUE: 'ASSIGN',
     HIDE_FIELD: 'HIDEFIELD',
     SHOW_ERROR: 'SHOWERROR',
@@ -17,4 +17,4 @@ export const effectActions = {
     SHOW_OPTION_GROUP: 'SHOWOPTIONGROUP',
     SCHEDULE_MESSAGE: 'SCHEDULEMESSAGE',
     SEND_MESSAGE: 'SENDMESSAGE',
-};
+});

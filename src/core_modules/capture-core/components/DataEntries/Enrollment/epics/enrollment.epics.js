@@ -1,19 +1,11 @@
 // @flow
-import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { errorCreator } from 'capture-core-utils';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
 import { actionTypes } from '../actions/enrollment.actions';
-import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../metaData';
-import { getCurrentClientValues, getCurrentClientMainData } from '../../../../rules/actionsCreator';
-import type { FieldData } from '../../../../rules/actionsCreator';
+import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
+import { getCurrentClientValues, getCurrentClientMainData, type FieldData } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-
-const errorMessages = {
-    PROGRAM_NOT_FOUND: 'Program not found',
-    NOT_TRACKER_PROGRAM: 'Program is not a tracker program',
-};
 
 type Context = {
     dataEntryId: string,
@@ -28,55 +20,21 @@ const runRulesOnEnrollmentUpdate =
         const state = store.value;
         const { programId, dataEntryId, itemId, orgUnit, uid } = context;
         const formId = getDataEntryKey(dataEntryId, itemId);
-        let trackerProgram: TrackerProgram;
-        try {
-            const program = getProgramFromProgramIdThrowIfNotFound(programId);
-            if (!(program instanceof TrackerProgram)) {
-                log.error(
-                    errorCreator(
-                        errorMessages.NOT_TRACKER_PROGRAM)(
-                        { method: 'openNewEnrollmentInDataEntryEpic', program }),
-                );
-            } else {
-                trackerProgram = program;
-            }
-        } catch (error) {
-            log.error(
-                errorCreator(
-                    errorMessages.PROGRAM_NOT_FOUND)(
-                    { method: 'openNewEnrollmentInDataEntryEpic', error, programId }),
-            );
-        }
-
-        const foundation = trackerProgram && trackerProgram.enrollment.enrollmentForm;
-        if (!trackerProgram || !foundation) {
-            return runRulesOnUpdateFieldBatch(
-                trackerProgram,
-                foundation,
-                formId,
-                dataEntryId,
-                itemId,
-                orgUnit,
-                null,
-                null,
-                searchActions,
-                uid,
-            );
-        }
-
+        const program = getTrackerProgramThrowIfNotFound(programId);
+        const foundation = program.enrollment.enrollmentForm;
         const currentTEIValues = getCurrentClientValues(state, foundation, formId, fieldData);
         const currentEnrollmentValues =
             getCurrentClientMainData(state, itemId, dataEntryId, foundation);
 
         return runRulesOnUpdateFieldBatch(
-            trackerProgram,
+            program,
             foundation,
             formId,
             dataEntryId,
             itemId,
             orgUnit,
             currentEnrollmentValues,
-            currentTEIValues,
+            currentTEIValues ?? undefined,
             searchActions,
             uid,
         );
