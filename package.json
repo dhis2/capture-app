@@ -94,7 +94,7 @@
     "@dhis2/cypress-commands": "^8.0.6",
     "@dhis2/cypress-plugins": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "concurrently": "^6.5.0",
+    "concurrently": "^6.5.1",
     "cypress": "^7",
     "cypress-cucumber-preprocessor": "^4",
     "docdash": "^1.2.0",
