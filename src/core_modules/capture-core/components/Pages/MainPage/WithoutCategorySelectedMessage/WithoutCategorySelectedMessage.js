@@ -1,9 +1,13 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { colors } from '@dhis2/ui';
+// $FlowFixMe
+import { shallowEqual, useSelector } from 'react-redux';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
+import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 
 const styles = {
     incompleteMessageContainer: {
@@ -15,32 +19,43 @@ const styles = {
         gap: '4px',
         textAlign: 'center',
     },
-    incompleteMessageButton: {
-        background: 'none',
-        color: 'inherit',
-        border: 'none',
-        padding: 0,
-        font: 'inherit',
-        cursor: 'pointer',
-        outline: 'inherit',
-        textDecoration: 'underline',
-        '&:hover': {
-            color: colors.grey900,
-        },
-    },
 };
 
-const WithoutCategorySelectedMessagePlain = ({ classes }) => (
-    <div
-        className={classes.incompleteMessageContainer}
-        data-test={'without-category-selected-message'}
-    >
-        <IncompleteSelectionsMessage>
-            <div className={classes.incompleteMessageContent}>
-                <span>{i18n.t('Please select a category.')}</span>
-            </div>
-        </IncompleteSelectionsMessage>
-    </div>
-);
+const errorMessages = {
+    MISSING_CATEGORY: 'Missing or invalid category options',
+    GENERIC_ERROR: 'An error has occured. See log for details',
+};
+
+const WithoutCategorySelectedMessagePlain = ({ programId, classes }) => {
+    const { program } = useProgramInfo(programId);
+    const { categories } = useSelector(({ currentSelections }) => ({
+        categories: currentSelections.categories,
+    }), shallowEqual);
+
+    if (!program.categoryCombination) {
+        log.error(errorCreator(errorMessages.MISSING_CATEGORY)({ programId }));
+        throw Error(i18n.t(errorMessages.GENERIC_ERROR));
+    }
+
+    const programCategories = [...program.categoryCombination.categories.values()];
+    const missingCategoriesInSelection = programCategories.filter(category => !categories || !categories[category.id]);
+    const categoryDisplayName = missingCategoriesInSelection[0].name;
+
+    return (
+        <div
+            className={classes.incompleteMessageContainer}
+            data-test={'without-category-selected-message'}
+        >
+            <IncompleteSelectionsMessage>
+                <div className={classes.incompleteMessageContent}>
+                    <span>{i18n.t('Please select {{category}}.', {
+                        category: categoryDisplayName,
+                        interpolation: { escapeValue: false },
+                    })}</span>
+                </div>
+            </IncompleteSelectionsMessage>
+        </div>
+    );
+};
 
 export const WithoutCategorySelectedMessage = withStyles(styles)(WithoutCategorySelectedMessagePlain);
