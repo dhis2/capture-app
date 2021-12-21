@@ -43,8 +43,8 @@ export const initTeiWorkingListsView = ({
         filtersOnlyMetaForDataFetching,
         querySingleResource,
         absoluteApiPath })
-        .then(({ teis, request }) =>
-            initListViewSuccess(storeId, {
+        .then(({ teis, request }) => {
+            return (initListViewSuccess(storeId, {
                 recordContainers: teis,
                 pagingData: {
                     rowsPerPage: pageSize,
@@ -60,7 +60,8 @@ export const initTeiWorkingListsView = ({
                         orgUnitId,
                     },
                 },
-            }),
+            }));
+        },
         ).catch((error) => {
             log.error(errorCreator('An error occurred when initializing the working list view')({ error }));
             return initListViewError(storeId, i18n.t('Working list could not be loaded'));
