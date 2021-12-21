@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type { EventsData, EventData } from 'capture-core-utils/rulesEngine/rulesEngine.types';
+import type { EventsData, EventData } from 'capture-core-utils/rulesEngine';
 import { getApi } from '../d2/d2Instance';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';

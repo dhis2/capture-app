@@ -3,23 +3,27 @@ import log from 'loglevel';
 import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import { typeKeys } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
-
+import { getStructureEvents } from './helpers';
 import type {
+    VariableServiceInput,
     ProgramRuleVariable,
     EventData,
+    EventsData,
     EventsDataContainer,
     OptionSets,
+    Enrollment,
+    OrgUnit,
+    TEIValues,
+    Constants,
+} from './variableService.types';
+
+import type {
     DataElement,
     DataElements,
     TrackedEntityAttribute,
     TrackedEntityAttributes,
-    Enrollment,
-    OrgUnit,
     RuleVariable,
     RuleVariables,
-    TEIValues,
-    Constants,
-    RulesEngineInput,
     IDateUtils,
 } from '../../rulesEngine.types';
 
@@ -72,6 +76,7 @@ export class VariableService {
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
+    structureEvents: (currentEvent?: EventData, events?: EventsData) => EventsDataContainer;
     constructor(
         onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
         dateUtils: IDateUtils,
@@ -87,20 +92,24 @@ export class VariableService {
             [variableSourceTypes.TEI_ATTRIBUTE]: this.getVariableForSelectedEntityAttributes,
             [variableSourceTypes.CALCULATED_VALUE]: this.getVariableForCalculatedValue,
         };
+
+        this.structureEvents = getStructureEvents(dateUtils.compareDates);
     }
 
     getVariables({
-        programRulesContainer,
+        programRuleVariables,
         currentEvent: executingEvent,
-        eventsContainer,
+        otherEvents,
         dataElements,
         selectedEntity,
         trackedEntityAttributes,
         selectedEnrollment,
         selectedOrgUnit,
         optionSets,
-    }: RulesEngineInput) {
-        const programVariables = programRulesContainer.programRulesVariables || [];
+        constants,
+    }: VariableServiceInput) {
+        const eventsContainer = this.structureEvents(executingEvent, otherEvents);
+
         const sourceData = {
             executingEvent,
             eventsContainer,
@@ -112,7 +121,7 @@ export class VariableService {
             selectedOrgUnit,
         };
 
-        const variables = programVariables.reduce((accVariables, programVariable) => {
+        const variables = (programRuleVariables ?? []).reduce((accVariables, programVariable) => {
             let variable;
             const variableKey = programVariable.displayName;
 
@@ -165,7 +174,7 @@ export class VariableService {
         const variablesWithContextVariables = { ...variables, ...this.getContextVariables(sourceData) };
 
         // add constant variables
-        const variablesWithContextAndConstantVariables = { ...variablesWithContextVariables, ...this.getConstantVariables(programRulesContainer.constants) };
+        const variablesWithContextAndConstantVariables = { ...variablesWithContextVariables, ...this.getConstantVariables(constants) };
 
         return variablesWithContextAndConstantVariables;
     }

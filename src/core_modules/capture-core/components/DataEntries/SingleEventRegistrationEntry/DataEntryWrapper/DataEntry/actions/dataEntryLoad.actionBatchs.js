@@ -3,7 +3,7 @@ import { actionCreator } from '../../../../../../actions/actions.utils';
 import { actionTypes } from './dataEntry.actions';
 import { loadNewDataEntry } from '../../../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import { getRulesActionsForEvent } from '../../../../../../rules/actionsCreator';
+import { getApplicableRuleEffectsForEventProgram, updateRulesEffects } from '../../../../../../rules';
 import type { RenderFoundation, EventProgram } from '../../../../../../metaData';
 import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
 import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../../index';
@@ -49,36 +49,32 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 ];
 
 export const openNewEventInDataEntry =
-    (program: ?EventProgram, foundation: ?RenderFoundation, orgUnit: Object) => {
+    (program: EventProgram, foundation: ?RenderFoundation, orgUnit: Object) => {
         const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
 
-        const rulesActions = getRulesActionsForEvent(
+        const effects = getApplicableRuleEffectsForEventProgram({
             program,
-            foundation,
-            formId,
             orgUnit,
-        );
+        });
 
         return [
             ...dataEntryActions,
-            ...rulesActions,
+            updateRulesEffects(effects, formId),
             actionCreator(actionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY)(),
         ];
     };
 
-export const resetDataEntry = (program: ?EventProgram, foundation: ?RenderFoundation, orgUnit: Object) => {
+export const resetDataEntry = (program: EventProgram, foundation: ?RenderFoundation, orgUnit: Object) => {
     const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
 
-    const rulesActions = getRulesActionsForEvent(
+    const effects = getApplicableRuleEffectsForEventProgram({
         program,
-        foundation,
-        formId,
         orgUnit,
-    );
+    });
 
     return [
         ...dataEntryActions,
-        ...rulesActions,
+        updateRulesEffects(effects, formId),
         actionCreator(actionTypes.RESET_DATA_ENTRY)(),
     ];
 };

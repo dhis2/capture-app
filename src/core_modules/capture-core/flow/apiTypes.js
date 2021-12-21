@@ -14,7 +14,7 @@ declare type ApiEnrollmentEvent = {|
     trackedEntityInstance: string,
     enrollment: string,
     enrollmentStatus: string,
-    status: string,
+    status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
     eventDate: string,
     dueDate: string,
     lastUpdated: string,

@@ -51,7 +51,7 @@ declare type CaptureClientEvent = {
     trackedEntityInstanceId?: string,
     enrollmentId?: string,
     enrollmentStatus?: string,
-    status: string,
+    status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
     eventDate: string,
     dueDate: string,
     completedDate: string,
