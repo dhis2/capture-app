@@ -52,12 +52,6 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
 
-
-    const formatValue = (value, valueType) => {
-        const convertToClientValue = convertServerToClient(value, valueType);
-        return convertClientToView(convertToClientValue, valueType);
-    };
-
     const getListAttributes = useCallback(async () => {
         if (programsData && trackedEntityInstancesData) {
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
@@ -76,7 +70,7 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
                                 foundAttribute.value, querySingleResource,
                             );
                         } else {
-                            value = foundAttribute.value;
+                            value = convertServerToClient(foundAttribute.value, foundAttribute.valueType);
                         }
                     }
 
@@ -109,7 +103,7 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
                 const selectedOption = optionSet.options.find(option => option.code === clientValue);
                 value = selectedOption && selectedOption.name;
             } else {
-                value = formatValue(clientValue, valueType);
+                value = convertClientToView(clientValue, valueType);
             }
             return {
                 reactKey, key, value,
