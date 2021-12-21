@@ -4,6 +4,7 @@
 /* eslint-disable no-restricted-syntax */
 
 import isFunction from 'd2-utilizr/lib/isFunction';
+import type { ProgramRule } from 'capture-core-utils/rulesEngine';
 import type { Icon } from '../Icon';
 import type { RenderFoundation } from '../RenderFoundation';
 import type { RelationshipType } from '../RelationshipType';
@@ -20,8 +21,10 @@ export class ProgramStage {
     _reportDateToUse: string;
     _minDaysFromStart: number;
     _icon: Icon | void;
+    _programRules: Array<ProgramRule>;
 
     constructor(initFn: ?(_this: ProgramStage) => void) {
+        this.programRules = [];
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -118,5 +121,12 @@ export class ProgramStage {
 
     set minDaysFromStart(minDays: number = 0) {
         this._minDaysFromStart = minDays;
+    }
+
+    set programRules(programRules: Array<ProgramRule>) {
+        this._programRules = programRules;
+    }
+    get programRules(): Array<ProgramRule> {
+        return this._programRules;
     }
 }
