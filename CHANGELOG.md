@@ -1,3 +1,10 @@
+## [1.62.13](https://github.com/dhis2/capture-app/compare/v1.62.12...v1.62.13) (2021-12-21)
+
+
+### Bug Fixes
+
+* [DHIS2-12126] Capture crash when navigating back from event with CategoryOption ([2e476f0](https://github.com/dhis2/capture-app/commit/2e476f0a3e6f23dd33e0fdf12673fa2fe97645a8))
+
 ## [1.62.12](https://github.com/dhis2/capture-app/compare/v1.62.11...v1.62.12) (2021-12-18)
 
 
