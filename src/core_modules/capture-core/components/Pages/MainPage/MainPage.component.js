@@ -27,7 +27,9 @@ const MainPagePlain = ({ MainPageStatus, setShowAccessible, programId, classes, 
         }
         {
             MainPageStatus === MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED && (
-                <WithoutCategorySelectedMessage />
+                <WithoutCategorySelectedMessage
+                    programId={programId}
+                />
             )
         }
         {
