@@ -38,7 +38,7 @@ export const withInternalChangeHandler = () =>
             }
 
             render() {
-                const { onChange, onSave, value, ...passOnProps } = this.props;
+                const { onChange, value, ...passOnProps } = this.props;
                 const stateValue = this.state.value;
 
                 return (

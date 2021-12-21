@@ -24,7 +24,6 @@ export const Validated = ({
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
-    widgetReducerName,
     ...passOnProps
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
