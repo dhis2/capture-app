@@ -225,6 +225,7 @@ const getSaveHandler = (
                 hasGeneralErrors,
                 inProgressList,
                 calculatedFoundation,
+                fieldsValidated,
                 ...passOnProps
             } = this.props;
 

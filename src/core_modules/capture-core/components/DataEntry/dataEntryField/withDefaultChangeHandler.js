@@ -37,7 +37,7 @@ export const withDefaultChangeHandler = () =>
             }
 
             render() {
-                const { onChange, value, ...passOnProps } = this.props;
+                const { onChange, onSave, value, ...passOnProps } = this.props;
                 const stateValue = this.state.value;
 
                 return (

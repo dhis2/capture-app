@@ -468,7 +468,7 @@ export class FormBuilder extends React.Component<Props> {
             .keys(this.props.fieldsUI)
             .every((key) => {
                 const fieldUI = this.props.fieldsUI[key];
-                if (typesToCheck) {
+                if (typesToCheck && fieldUI.errorType) {
                     const isCheckable = typesToCheck.includes(fieldUI.errorType);
                     if (!isCheckable) {
                         return true;
