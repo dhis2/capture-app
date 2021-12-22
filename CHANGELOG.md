@@ -1,3 +1,10 @@
+## [1.62.14](https://github.com/dhis2/capture-app/compare/v1.62.13...v1.62.14) (2021-12-22)
+
+
+### Bug Fixes
+
+* [DHIS2-12124] Category option not required for viewing WorkingList ([#2365](https://github.com/dhis2/capture-app/issues/2365)) ([f927956](https://github.com/dhis2/capture-app/commit/f9279563036e940942aba9b3a65658cda21e5618))
+
 ## [1.62.13](https://github.com/dhis2/capture-app/compare/v1.62.12...v1.62.13) (2021-12-21)
 
 
