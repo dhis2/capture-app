@@ -14,5 +14,5 @@ export const useProgramMetadata = (programId: string) => {
         },
     }), [programId]));
 
-    return { error, programMetadata: !loading && data.programData };
+    return { error, programMetadata: !loading && data.programData ? data.programData : undefined };
 };

@@ -18,9 +18,11 @@ import {
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
-    getRulesActionsForEvent,
-} from '../../../../../../rules/actionsCreator';
-import { getProgramAndStageForProgram } from '../../../../../../metaData/helpers';
+    getApplicableRuleEffectsForEventProgram,
+    updateRulesEffects,
+    type FieldData,
+} from '../../../../../../rules';
+import { getProgramAndStageForProgram, getEventProgramThrowIfNotFound } from '../../../../../../metaData/helpers';
 import {
     getDefaultMainConfig as getDefaultMainColumnConfig,
     getMetaDataConfig as getColumnMetaDataConfig,
@@ -28,17 +30,15 @@ import {
 import {
     resetList,
 } from '../../RecentlyAddedEventsList';
-import type {
-    FieldData,
-} from '../../../../../../rules/actionsCreator';
 import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 import { getStageForEventProgram } from '../../../../../../metaData/helpers/EventProgram/getStageForEventProgram';
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
+import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram, EventProgram } from '../../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
+import { programCollection } from '../../../../../../metaDataMemoryStores';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
@@ -87,6 +87,11 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             return page === 'new';
         }),
         filter((action) => {
+            const { programId } = store.value.currentSelections;
+            const program = programCollection.get(programId);
+            if (!(program instanceof EventProgram)) {
+                return false;
+            }
             const type = action.type;
             const triggeringActionType = action.payload && action.payload.triggeringActionType;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
@@ -95,6 +100,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                     lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID,
                 ].includes(triggeringActionType);
             }
+
             return true;
         }),
         map(() => {
@@ -174,42 +180,26 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const programId = state.currentSelections.programId;
-    const stageId = state.router.location.query.stageId;
-
-    const metadataContainer = getProgramAndStageForProgram(programId, stageId);
 
     const orgUnitId = state.currentSelections.orgUnitId;
     const orgUnit = state.organisationUnits[orgUnitId];
 
-    let rulesActions;
-    if (metadataContainer.error) {
-        const foundation = metadataContainer.stage ? metadataContainer.stage.stageForm : null;
-        rulesActions = getRulesActionsForEvent(
-            metadataContainer.program,
-            foundation,
-            formId,
-            orgUnit,
-        );
-    } else {
-        // $FlowFixMe[cannot-resolve-name] automated comment
-        const foundation: RenderFoundation = metadataContainer.stage.stageForm;
-        const programStageId = foundation.id;
-        const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
-        const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
-        const currentEventData = { ...currentEventValues, ...currentEventMainData, programStageId };
+    const program = getEventProgramThrowIfNotFound(programId);
 
-        rulesActions = getRulesActionsForEvent(
-            metadataContainer.program,
-            foundation,
-            formId,
-            orgUnit,
-            currentEventData,
-            [currentEventData],
-        );
-    }
+    const foundation = program.stage.stageForm;
+    const programStageId = foundation.id;
+    const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
+    const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
+    const currentEvent = { ...currentEventValues, ...currentEventMainData, programStageId };
+
+    const effects = getApplicableRuleEffectsForEventProgram({
+        program,
+        orgUnit,
+        currentEvent,
+    });
 
     return batchActions([
-        ...rulesActions,
+        updateRulesEffects(effects, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,

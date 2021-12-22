@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 // $FlowFixMe
 import { useSelector, useDispatch } from 'react-redux';
 import { useDataQuery } from '@dhis2/app-runtime';
-import { setCommonEnrollmentSiteData } from './enrollment.actions';
+import { setCommonEnrollmentSiteData } from '../enrollment.actions';
+import type { Output } from './useCommonEnrollmentDomainData.types';
 
-export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: string, programId: string) => {
+export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: string, programId: string): Output => {
     const dispatch = useDispatch();
 
     const {

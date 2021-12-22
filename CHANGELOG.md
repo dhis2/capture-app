@@ -1,3 +1,24 @@
+## [1.62.13](https://github.com/dhis2/capture-app/compare/v1.62.12...v1.62.13) (2021-12-21)
+
+
+### Bug Fixes
+
+* [DHIS2-12126] Capture crash when navigating back from event with CategoryOption ([2e476f0](https://github.com/dhis2/capture-app/commit/2e476f0a3e6f23dd33e0fdf12673fa2fe97645a8))
+
+## [1.62.12](https://github.com/dhis2/capture-app/compare/v1.62.11...v1.62.12) (2021-12-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([92d8b4c](https://github.com/dhis2/capture-app/commit/92d8b4c6355109a402f758ea9c4c81718d52d231))
+
+## [1.62.11](https://github.com/dhis2/capture-app/compare/v1.62.10...v1.62.11) (2021-12-17)
+
+
+### Bug Fixes
+
+* [TECH-870] Stabilise and improve rules execution ([1761a9c](https://github.com/dhis2/capture-app/commit/1761a9c43f2724188573d5d150aa34751df719f8))
+
 ## [1.62.10](https://github.com/dhis2/capture-app/compare/v1.62.9...v1.62.10) (2021-12-13)
 
 
