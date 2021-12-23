@@ -151,7 +151,7 @@ const getIncidentDateSettings = () => {
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
             calendarMaxMoment: !props.enrollmentMetadata.allowFutureIncidentDate ? moment() : undefined,
         }),
-        getPropName: () => 'incidentDate',
+        getPropName: () => 'occurredAt',
         getValidatorContainers: (props: Object) =>
             getIncidentDateValidatorContainer(props.enrollmentMetadata.allowFutureIncidentDate),
         getMeta: () => ({

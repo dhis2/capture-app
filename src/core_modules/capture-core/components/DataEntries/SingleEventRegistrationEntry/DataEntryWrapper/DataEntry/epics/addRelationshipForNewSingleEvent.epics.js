@@ -111,7 +111,7 @@ export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable) 
         ofType(newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS),
         map((action) => {
             const meta = action.meta;
-            if (meta.relationshipData) {
+            if (meta.relationshipData?.length) {
                 const eventId = action.payload.response.importSummaries[0].reference;
                 const relationshipData = action.meta.relationshipData.map((r) => {
                     const clientRelationship = {

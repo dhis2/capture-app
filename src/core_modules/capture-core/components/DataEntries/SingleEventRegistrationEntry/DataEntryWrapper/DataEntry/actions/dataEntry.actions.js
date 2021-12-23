@@ -64,7 +64,7 @@ export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object, rel
     return actionCreator(actionType)({ selections }, {
         offline: {
             effect: {
-                url: 'events',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
             },
