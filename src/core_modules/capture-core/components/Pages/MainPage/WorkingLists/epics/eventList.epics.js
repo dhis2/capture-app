@@ -32,6 +32,7 @@ export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =
                             programId,
                             orgUnitId,
                             categories,
+                            ouMode: orgUnitId ? 'SELECTED' : 'ACCESSIBLE',
                         },
                         defaultSpecification: defaultConfig,
                         listId,
