@@ -2,13 +2,14 @@
 import type { Program } from 'capture-core/metaData';
 import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
+import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
 export type Props = {|
     program: Program,
     enrollmentId: string,
     teiId: string,
-    events: ?Array<ApiEnrollmentEvent>,
-    stages: Array<Stage>,
+    events: ?Array<Event>,
+    stages?: Array<Stage>,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
     onDelete: () => void,

@@ -15,6 +15,7 @@ import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addE
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 export const Validated = ({
     program,
+    stage,
     formFoundation,
     onSaveExternal,
     onSaveSuccessActionType,
@@ -31,8 +32,10 @@ export const Validated = ({
     const { error, orgUnit } = useOrganisationUnit(orgUnitId, 'displayName, code');
     const rulesExecutionDependenciesClientFormatted =
         useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
+
     const ready = useLifecycle({
         program,
+        stage,
         formFoundation,
         orgUnit,
         dataEntryId,
@@ -87,6 +90,7 @@ export const Validated = ({
     return (
         <SaveHandlerHOC
             {...passOnProps}
+            stage={stage}
             ready={ready}
             id={dataEntryId}
             itemId={itemId}

@@ -1,7 +1,12 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
-import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
+import {
+    getApplicableRuleEffectsForEventProgram,
+    getApplicableRuleEffectsForTrackerProgram,
+    updateRulesEffects,
+} from '../../../rules';
 import type { RenderFoundation, Program } from '../../../metaData';
 import { effectMethods } from '../../../trackerOffline';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
@@ -18,7 +23,7 @@ import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { EventProgram, TrackerProgram } from '../../../metaData/Program';
 import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
-import type { Event } from '../../Pages/Enrollment/EnrollmentPageDefault/types/common.types';
+import type { Event } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData'; // TODO: This module/widget should not have a dependency to this
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
 
 export const batchActionTypes = {
@@ -106,7 +111,7 @@ export const openEventForEditInDataEntry = (
             onConvertOut: convertStatusOut,
         },
     ];
-    const key = getDataEntryKey(dataEntryId, itemId);
+    const formId = getDataEntryKey(dataEntryId, itemId);
     const { eventContainer, dataEntryValues, formValues } = loadedValues;
     const dataEntryActions =
         getLoadActions(
@@ -120,23 +125,33 @@ export const openEventForEditInDataEntry = (
                 eventId: eventContainer.event.eventId,
             },
         );
-    const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
-    const stage = program instanceof TrackerProgram ? getStageFromEvent(eventContainer.event)?.stage : undefined;
-    const allEventsData = program instanceof EventProgram || !allEvents
-        ? [eventDataForRulesEngine]
-        : [...prepareEnrollmentEventsForRulesEngine(allEvents, eventDataForRulesEngine)];
+    const currentEvent = { ...eventContainer.event, ...eventContainer.values };
+
+    let effects;
+    if (program instanceof TrackerProgram) {
+        const stage = getStageFromEvent(eventContainer.event)?.stage;
+        if (!stage) {
+            throw Error(i18n.t('stage not found in rules execution'));
+        }
+        // TODO: Add attributeValues & enrollmentData
+        effects = getApplicableRuleEffectsForTrackerProgram({
+            program,
+            stage,
+            orgUnit,
+            currentEvent,
+            otherEvents: allEvents ? prepareEnrollmentEventsForRulesEngine(allEvents) : undefined,
+        });
+    } else if (program instanceof EventProgram) {
+        effects = getApplicableRuleEffectsForEventProgram({
+            program,
+            orgUnit,
+            currentEvent,
+        });
+    }
 
     return [
         ...dataEntryActions,
-        ...getRulesActionsForEvent(
-            program,
-            foundation,
-            key,
-            orgUnit,
-            eventDataForRulesEngine,
-            allEventsData,
-            stage,
-        ),
+        updateRulesEffects(effects, formId),
         actionCreator(actionTypes.OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY)(),
     ];
 };
