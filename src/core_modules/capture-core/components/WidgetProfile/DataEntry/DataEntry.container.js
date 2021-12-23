@@ -6,7 +6,7 @@ import { DataEntryComponent } from './DataEntry.component';
 import { useLifecycle } from './hooks';
 import { getUpdateFieldActions } from './dataEntry.actions';
 
-export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditModal, trackedEntityInstanceAttributes }: Props) => {
+export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, trackedEntityInstanceAttributes }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
     const dispatch = useDispatch();
@@ -18,7 +18,6 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditMo
         trackedEntityInstanceAttributes,
         dataEntryId,
         itemId,
-        toggleEditModal,
     });
     const { trackedEntityName, ...context } = dataEntryContext;
     const onUpdateFormField = useCallback((...args: Array<any>) => dispatch(getUpdateFieldActions(context, ...args)), [dispatch, context]);
@@ -30,7 +29,6 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditMo
             onCancel={onCancel}
             onSave={() => setSaveAttempted(true)}
             saveAttempted={saveAttempted}
-            toggleEditModal={toggleEditModal}
             trackedEntityName={trackedEntityName}
             formFoundation={context.formFoundation}
             onUpdateFormField={onUpdateFormField}

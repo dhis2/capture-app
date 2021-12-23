@@ -13,9 +13,8 @@ Then('the user can see the program rules effect in the indicator widget', () => 
 });
 
 When('the user sets the birthday date to the current date', () => {
-    cy.get('[data-test="modal-edit-profile"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(8)
+    cy.get('[data-test="modal-edit-profile"]').find('[data-test="capture-ui-input"]').eq(8).clear()
+        .blur()
         .type(moment().format('YYYY-MM-DD'))
         .blur();
 });

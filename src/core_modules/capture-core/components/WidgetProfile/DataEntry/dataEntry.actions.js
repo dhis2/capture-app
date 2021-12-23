@@ -1,16 +1,11 @@
 // @flow
 import uuid from 'uuid/v4';
 import { batchActions } from 'redux-batched-actions';
-import type {
-    OrgUnit,
-    TrackedEntityAttributes,
-    OptionSets,
-    ProgramRulesContainer,
-} from 'capture-core-utils/rulesEngine';
+import type { OrgUnit, TrackedEntityAttributes, OptionSets, ProgramRulesContainer, EventsData, DataElements, Enrollment } from 'capture-core-utils/rulesEngine';
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import type { RenderFoundation } from '../../../metaData';
-import type { FieldData } from '../../../rules/actionsCreator';
-import { getCurrentClientValues, getCurrentClientMainData } from '../../../rules/actionsCreator';
+import type { FieldData } from '../../../rules';
+import { getCurrentClientValues } from '../../../rules';
 import { loadNewDataEntry } from '../../DataEntry/actions/dataEntryLoadNew.actions';
 import { rulesExecutedPostUpdateField } from '../../DataEntry/actions/dataEntry.actions';
 import { startRunRulesPostUpdateField } from '../../DataEntry';
@@ -38,12 +33,15 @@ type Context = {
     optionSets: OptionSets,
     rulesContainer: ProgramRulesContainer,
     formFoundation: RenderFoundation,
+    otherEvents?: ?EventsData,
+    dataElements: ?DataElements,
+    enrollment?: ?Enrollment,
     state: ReduxState,
 };
 
 export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction<any, any>) => {
     const uid = uuid();
-    const { orgUnit, trackedEntityAttributes, optionSets, rulesContainer, formFoundation, state } = context;
+    const { orgUnit, trackedEntityAttributes, optionSets, rulesContainer, formFoundation, state, otherEvents, dataElements, enrollment } = context;
     const { dataEntryId, itemId, elementId, value, uiState } = innerAction.payload || {};
     const fieldData: FieldData = {
         elementId,
@@ -52,16 +50,17 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
     };
     const formId = `${dataEntryId}-${itemId}`;
     const currentTEIValues = getCurrentClientValues(state, formFoundation, formId, fieldData);
-    const currentEnrollmentValues = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation);
     const rulesActions = getRulesActionsForTEI({
         foundation: formFoundation,
         formId,
         orgUnit,
-        enrollmentData: currentEnrollmentValues,
+        enrollmentData: enrollment,
         teiValues: currentTEIValues,
         trackedEntityAttributes,
         optionSets,
         rulesContainer,
+        otherEvents,
+        dataElements,
     });
 
     return batchActions(
@@ -76,36 +75,15 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
 };
 
 export const getOpenDataEntryActions = ({
-    orgUnit,
     dataEntryId,
     itemId,
-    foundation,
-    trackedEntityAttributes,
-    optionSets,
-    rulesContainer,
     formValues,
 }: {
-    orgUnit: OrgUnit,
     dataEntryId: string,
     itemId: string,
-    foundation: ?RenderFoundation,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-    optionSets: OptionSets,
-    rulesContainer: ProgramRulesContainer,
     formValues: { [key: string]: any },
 }) =>
     batchActions(
-        [
-            ...loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude),
-            addFormData(`${dataEntryId}-${itemId}`, formValues),
-            ...getRulesActionsForTEI({
-                foundation,
-                formId: `${dataEntryId}-${itemId}`,
-                orgUnit,
-                trackedEntityAttributes,
-                optionSets,
-                rulesContainer,
-            }),
-        ],
+        [...loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude), addFormData(`${dataEntryId}-${itemId}`, formValues)],
         batchActionTypes.OPEN_DATA_ENTRY_PROFILE_ACTION_BATCH,
     );

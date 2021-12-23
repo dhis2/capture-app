@@ -4,11 +4,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { pipe, errorCreator } from 'capture-core-utils';
 
-import type {
-    CachedProgramTrackedEntityAttribute,
-    CachedTrackedEntityAttribute,
-    CachedOptionSet,
-} from '../../../../storageControllers/cache.types';
+import type { ProgramTrackedEntityAttribute, TrackedEntityAttribute, OptionSet as OptionSetType } from './types';
 import {
     DataElement,
     DateDataElement,
@@ -29,7 +25,7 @@ const OPTION_SET_NOT_FOUND = 'Optionset not found';
 const TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND =
     'TrackedEntityAttributeId missing from programTrackedEntityAttribute or trackedEntityAttribute not found';
 
-const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute: CachedTrackedEntityAttribute) =>
+const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute: TrackedEntityAttribute) =>
     new DataElementUnique((dataEntry) => {
         dataEntry.scope = trackedEntityAttribute.orgunitScope
             ? dataElementUniqueScope.ORGANISATION_UNIT
@@ -92,9 +88,9 @@ const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute
 
 const setBaseProperties = async (
     dataElement: DataElement,
-    optionSets: Array<CachedOptionSet>,
-    programTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
-    trackedEntityAttribute: CachedTrackedEntityAttribute,
+    optionSets: Array<OptionSetType>,
+    programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
+    trackedEntityAttribute: TrackedEntityAttribute,
 ) => {
     dataElement.id = trackedEntityAttribute.id;
     dataElement.compulsory = programTrackedEntityAttribute.mandatory;
@@ -123,9 +119,9 @@ const setBaseProperties = async (
 };
 
 const buildBaseDataElement = async (
-    optionSets: Array<CachedOptionSet>,
-    programTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
-    trackedEntityAttribute: CachedTrackedEntityAttribute,
+    optionSets: Array<OptionSetType>,
+    programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
+    trackedEntityAttribute: TrackedEntityAttribute,
 ) => {
     const dataElement = new DataElement();
     dataElement.type = trackedEntityAttribute.valueType;
@@ -134,9 +130,9 @@ const buildBaseDataElement = async (
 };
 
 const buildDateDataElement = async (
-    optionSets: Array<CachedOptionSet>,
-    programTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
-    trackedEntityAttribute: CachedTrackedEntityAttribute,
+    optionSets: Array<OptionSetType>,
+    programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
+    trackedEntityAttribute: TrackedEntityAttribute,
 ) => {
     const dateDataElement = new DateDataElement();
     dateDataElement.type = dataElementTypes.DATE;
@@ -147,7 +143,7 @@ const buildDateDataElement = async (
 
 const buildOptionSet = async (
     dataElement: DataElement,
-    optionSets: Array<CachedOptionSet>,
+    optionSets: Array<OptionSetType>,
     optionSetId: string,
     renderOptionsAsRadio: ?boolean,
 ) => {
@@ -202,9 +198,9 @@ export const buildTetFeatureType = (featureType: 'POINT' | 'POLYGON') => {
 };
 
 export const buildDataElement = (
-    programTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
-    trackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-    optionSets: Array<CachedOptionSet>,
+    programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSetType>,
 ) => {
     const trackedEntityAttribute =
         programTrackedEntityAttribute.trackedEntityAttributeId &&

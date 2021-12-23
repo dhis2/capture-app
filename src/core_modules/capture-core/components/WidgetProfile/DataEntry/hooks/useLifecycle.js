@@ -1,17 +1,20 @@
 // @flow
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import type { OrgUnit, TrackedEntityAttributes, OptionSets, ProgramRulesContainer } from 'capture-core-utils/rulesEngine';
-import { useProgramRules, useConstants } from './index';
+import { useOrganisationUnit } from 'capture-core/dataQueries/useOrganisationUnit';
+import type { OrgUnit, TrackedEntityAttributes, OptionSets, ProgramRulesContainer, DataElements } from 'capture-core-utils/rulesEngine';
+import { RenderFoundation } from '../../../../metaData';
 import { getOpenDataEntryActions } from '../dataEntry.actions';
-import { buildRulesContainer } from '../ProgramRules';
 import {
-    buildFormFoundation,
-    buildFormValues,
-    processProgramTrackedEntityAttributes,
-    processOptionSets,
-} from '../FormFoundation';
+    useFormFoundation,
+    useRulesContainer,
+    useFormValues,
+    useEvents,
+    useDataElements,
+    useOptionSets,
+    useProgramTrackedEntityAttributes,
+} from './index';
+import { getRulesActionsForTEI } from '../ProgramRules';
 
 export const useLifecycle = ({
     programAPI,
@@ -19,59 +22,79 @@ export const useLifecycle = ({
     trackedEntityInstanceAttributes,
     dataEntryId,
     itemId,
-    toggleEditModal,
 }: {
     programAPI: any,
     orgUnitId: string,
     trackedEntityInstanceAttributes: Array<any>,
     dataEntryId: string,
     itemId: string,
-    toggleEditModal: boolean,
 }) => {
+    const dispatch = useDispatch();
     // TODO: Getting the entire state object is bad and this needs to be refactored.
     // The problem is the helper methods that take the entire state object.
     // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
-
-    const { programRules, loading: loadingProgramRules } = useProgramRules(programAPI.id);
-    const { constants } = useConstants();
-    const dispatch = useDispatch();
-    const [rulesContainer, setRulesContainer] = useState<ProgramRulesContainer>({});
-    const [formFoundation, setFormFoundation] = useState<any>({});
-    const [formValues, setFormValues] = useState<any>({});
-
+    const enrollment = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
+    const dataElements: DataElements = useDataElements(programAPI);
+    const otherEvents = useEvents(enrollment, programAPI);
+    const orgUnit: ?OrgUnit = useOrganisationUnit(orgUnitId).orgUnit;
+    const staticPatternValues = { orgUnitCode: orgUnit?.code || orgUnitId };
+    const rulesContainer: ProgramRulesContainer = useRulesContainer(programAPI);
+    const formFoundation: RenderFoundation = useFormFoundation(programAPI);
+    const formValues = useFormValues({ formFoundation, trackedEntityInstanceAttributes, staticPatternValues });
+    const programTrackedEntityAttributes: TrackedEntityAttributes = useProgramTrackedEntityAttributes(programAPI);
+    const optionSets: OptionSets = useOptionSets(programTrackedEntityAttributes, dataElements);
     const trackedEntityName: string = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
-    const orgUnit: OrgUnit = useMemo(() => ({ id: orgUnitId, name: '' }), [orgUnitId]);
-    const programTrackedEntityAttributes: TrackedEntityAttributes = useMemo(() => processProgramTrackedEntityAttributes(programAPI), [programAPI]);
-    const optionSets: OptionSets = useMemo(() => processOptionSets(programTrackedEntityAttributes), [programTrackedEntityAttributes]);
 
     useEffect(() => {
-        if (toggleEditModal && !loadingProgramRules && constants) {
-            buildFormFoundation(programAPI, setFormFoundation);
-            buildRulesContainer({ programAPI, setRulesContainer, programRules, constants });
+        if (Object.entries(formValues).length > 0) {
+            dispatch(
+                getOpenDataEntryActions({
+                    dataEntryId,
+                    itemId,
+                    formValues,
+                }),
+            );
         }
-    }, [programAPI, loadingProgramRules, programRules, constants, toggleEditModal]);
+    }, [dispatch, formValues, dataEntryId, itemId]);
 
     useEffect(() => {
-        if (toggleEditModal && Object.entries(formFoundation).length > 0) {
-            Object.entries(formValues).length === 0 && buildFormValues(formFoundation, trackedEntityInstanceAttributes, setFormValues, { orgUnitCode: orgUnit.id });
-
-            Object.entries(formValues).length > 0 && Object.entries(rulesContainer).length > 0 &&
-                dispatch(
-                    getOpenDataEntryActions({
-                        orgUnit,
-                        dataEntryId,
-                        itemId,
-                        foundation: formFoundation,
-                        trackedEntityAttributes: programTrackedEntityAttributes,
-                        optionSets,
-                        rulesContainer,
-                        formValues,
-                    }),
-                );
+        if (
+            orgUnit &&
+            Object.entries(orgUnit).length > 0 &&
+            Object.entries(formFoundation).length > 0 &&
+            Object.entries(formValues).length > 0 &&
+            Object.entries(rulesContainer).length > 0
+        ) {
+            dispatch(
+                ...getRulesActionsForTEI({
+                    foundation: formFoundation,
+                    formId: `${dataEntryId}-${itemId}`,
+                    orgUnit,
+                    trackedEntityAttributes: programTrackedEntityAttributes,
+                    optionSets,
+                    rulesContainer,
+                    otherEvents,
+                    dataElements,
+                    enrollmentData: enrollment,
+                }),
+            );
         }
-    }, [dispatch, orgUnit, formFoundation, programTrackedEntityAttributes, trackedEntityInstanceAttributes, optionSets, rulesContainer, formValues, dataEntryId, itemId, toggleEditModal]);
-
+    }, [
+        dispatch,
+        orgUnit,
+        formFoundation,
+        programTrackedEntityAttributes,
+        trackedEntityInstanceAttributes,
+        optionSets,
+        rulesContainer,
+        formValues,
+        dataEntryId,
+        itemId,
+        otherEvents,
+        dataElements,
+        enrollment,
+    ]);
 
     return {
         orgUnit,
@@ -81,5 +104,8 @@ export const useLifecycle = ({
         formFoundation,
         state,
         trackedEntityName,
+        otherEvents,
+        dataElements,
+        enrollment,
     };
 };

@@ -13,33 +13,28 @@ export const DataEntryComponent = ({
     onSave,
     saveAttempted,
     onUpdateFormField,
-    toggleEditModal,
     trackedEntityName,
     formFoundation,
 }: PlainProps) => (
-    <div>
-        {toggleEditModal && (
-            <Modal large onClose={onCancel} dataTest="modal-edit-profile">
-                <ModalTitle>{i18n.t(`Edit ${trackedEntityName}`)}</ModalTitle>
-                <ModalContent>
-                    {i18n.t(
-                        'Change information about this {{trackedEntityName}} here. To change information about this enrollment, use the Edit button in the in the Enrollment box on this dashboard',
-                        { trackedEntityName, interpolation: { escapeValue: false } },
-                    )}
-                    <DataEntry id={dataEntryId} formFoundation={formFoundation} onUpdateFormField={onUpdateFormField} saveAttempted={saveAttempted} />
-                    <NoticeBoxes dataEntryId={dataEntryId} itemId={itemId} saveAttempted={saveAttempted} />
-                </ModalContent>
-                <ModalActions>
-                    <ButtonStrip end>
-                        <Button onClick={onCancel} secondary>
-                            {i18n.t('Cancel without saving')}
-                        </Button>
-                        <Button onClick={onSave} primary>
-                            {i18n.t('Save changes')}
-                        </Button>
-                    </ButtonStrip>
-                </ModalActions>
-            </Modal>
-        )}
-    </div>
+    <Modal large onClose={onCancel} dataTest="modal-edit-profile">
+        <ModalTitle>{i18n.t(`Edit ${trackedEntityName}`)}</ModalTitle>
+        <ModalContent>
+            {i18n.t(
+                'Change information about this {{trackedEntityName}} here. To change information about this enrollment, use the Edit button in the in the Enrollment box on this dashboard',
+                { trackedEntityName, interpolation: { escapeValue: false } },
+            )}
+            <DataEntry id={dataEntryId} formFoundation={formFoundation} onUpdateFormField={onUpdateFormField} saveAttempted={saveAttempted} />
+            <NoticeBoxes dataEntryId={dataEntryId} itemId={itemId} saveAttempted={saveAttempted} />
+        </ModalContent>
+        <ModalActions>
+            <ButtonStrip end>
+                <Button onClick={onCancel} secondary>
+                    {i18n.t('Cancel without saving')}
+                </Button>
+                <Button onClick={onSave} primary>
+                    {i18n.t('Save changes')}
+                </Button>
+            </ButtonStrip>
+        </ModalActions>
+    </Modal>
 );

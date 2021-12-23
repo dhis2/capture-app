@@ -13,7 +13,7 @@ const fields =
     'programStages[id,access,autoGenerateEvent,openAfterEnrollment,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,displayName,description,executionDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,' +
         'dataEntryForm[id,htmlCode],' +
         'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],' +
-        'programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,optionSetValue,style,optionSet[id]]]' +
+        'programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,optionSetValue,style,optionSet[id,displayName,version,valueType,options[id,displayName,code,style, translations]]]]' +
     '],' +
     'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,displayShortName,displayFormName,description,valueType,optionSetValue,unique,orgunitScope,pattern,translations[property,locale,value],optionSet[id,displayName,version,valueType,options[id,displayName,code,style, translations]]],displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate],' +
     'trackedEntityType[id,access,displayName,minAttributesRequiredToSearch,featureType,trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],translations[property,locale,value]],' +

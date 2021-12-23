@@ -1,11 +1,10 @@
 // @flow
 import type { ProgramRulesContainer } from 'capture-core-utils/rulesEngine';
-import { getTrackedEntityAttributeId, getProgramId, getProgramRuleActions } from '../FormFoundation';
+import { getTrackedEntityAttributeId, getProgramId, getProgramRuleActions } from '../helpers';
 import { getRulesAndVariablesFromProgramIndicators } from '../../../../metaDataMemoryStoreBuilders/programs/getRulesAndVariablesFromIndicators';
 
 const addProgramVariables = (program, programRuleVariables) => {
-    program.programRulesVariables = programRuleVariables
-        .filter(programRulesVariable => programRulesVariable.programRuleVariableSourceType === 'TEI_ATTRIBUTE')
+    program.programRuleVariables = programRuleVariables
         .map(programRulesVariable => ({
             ...programRulesVariable,
             programId: getProgramId(programRulesVariable),
@@ -49,7 +48,7 @@ const addRulesAndVariablesFromProgramIndicators = (program, programIndicators) =
     const { rules, variables } = getRulesAndVariablesFromProgramIndicators(indicators, program.id);
 
     if (variables) {
-        program.programRulesVariables = [...program.programRulesVariables, ...variables];
+        program.programRuleVariables = [...program.programRuleVariables, ...variables];
     }
     if (rules) {
         program.programRules = [...program.programRules, ...rules];

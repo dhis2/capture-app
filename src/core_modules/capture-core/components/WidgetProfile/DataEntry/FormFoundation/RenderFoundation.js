@@ -10,7 +10,7 @@ import type {
 } from '../../../../storageControllers/cache.types';
 import { RenderFoundation, Section } from '../../../../metaData';
 import { buildDataElement, buildTetFeatureType } from './DataElement';
-import { getProgramTrackedEntityAttributes, getTrackedEntityTypeId } from './convertors';
+import { getProgramTrackedEntityAttributes, getTrackedEntityTypeId } from '../helpers';
 
 const getFeatureType = (featureType: ?string) =>
     (featureType ? capitalizeFirstLetter(featureType.toLowerCase()) : 'None');

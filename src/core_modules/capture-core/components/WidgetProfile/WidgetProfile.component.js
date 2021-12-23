@@ -94,9 +94,8 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
             >
                 {renderProfile()}
             </Widget>
-            {!loading && !error && showEdit && (
+            {!loading && !error && showEdit && toggleEditModal && (
                 <DataEntry
-                    toggleEditModal={toggleEditModal}
                     onCancel={() => setToggleEditModal(false)}
                     programAPI={program}
                     orgUnitId={orgUnitId}

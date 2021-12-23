@@ -7,14 +7,37 @@ import type {
     TrackedEntityAttributes,
     OptionSets,
     ProgramRulesContainer,
+    EventsData,
+    DataElements,
 } from 'capture-core-utils/rulesEngine';
 import { rulesEngine } from '../../../../rules/rulesEngine';
 import type { RenderFoundation } from '../../../../metaData';
-import { postProcessRulesEffects } from '../../../../rules/actionsCreator/postProcessRulesEffects';
-import { updateRulesEffects } from '../../../../rules/actionsCreator/rulesEngine.actions';
+import { updateRulesEffects, postProcessRulesEffects, buildEffectsHierarchy } from '../../../../rules';
 
-const getRulesActions = (rulesEffects: ?OutputEffects, foundation: ?RenderFoundation, formId: string) => {
-    const effectsHierarchy = postProcessRulesEffects(rulesEffects, foundation);
+const getEnrollmentForRulesExecution = enrollment =>
+    enrollment && {
+        // $FlowFixMe[prop-missing]
+        enrollmentId: enrollment.enrollment,
+        enrollmentDate: enrollment.enrollmentDate,
+        incidentDate: enrollment.incidentDate,
+    };
+
+const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>
+    dataElements &&
+    Object.values(dataElements).reduce(
+        (acc, dataElement: any) => ({
+            ...acc,
+            [dataElement.id]: {
+                id: dataElement.id,
+                valueType: dataElement.type,
+                optionSetId: dataElement.optionSet && dataElement.optionSet.id,
+            },
+        }),
+        {},
+    );
+
+const getRulesActions = (rulesEffects: OutputEffects, foundation: RenderFoundation, formId: string) => {
+    const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(rulesEffects, foundation));
     return [updateRulesEffects(effectsHierarchy, formId)];
 };
 
@@ -27,8 +50,10 @@ export const getRulesActionsForTEI = ({
     trackedEntityAttributes,
     optionSets,
     rulesContainer,
+    otherEvents,
+    dataElements,
 }: {
-    foundation: ?RenderFoundation,
+    foundation: RenderFoundation,
     formId: string,
     orgUnit: OrgUnit,
     enrollmentData?: ?Enrollment,
@@ -36,18 +61,19 @@ export const getRulesActionsForTEI = ({
     trackedEntityAttributes: ?TrackedEntityAttributes,
     optionSets: OptionSets,
     rulesContainer: ProgramRulesContainer,
+    otherEvents?: ?EventsData,
+    dataElements: ?DataElements,
 }) => {
-    const effects = rulesEngine.getProgramRuleEffects({
+    const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
         programRulesContainer: rulesContainer,
         currentEvent: null,
-        eventsContainer: null,
-        dataElements: null,
-        selectedEntity: teiValues,
+        otherEvents,
+        dataElements: getDataElementsForRulesExecution(dataElements),
         trackedEntityAttributes,
-        selectedEnrollment: enrollmentData,
+        selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData),
+        selectedEntity: teiValues,
         selectedOrgUnit: orgUnit,
         optionSets,
     });
-    const rulesEffects = effects.length > 0 ? effects : null;
-    return getRulesActions(rulesEffects, foundation, formId);
+    return getRulesActions(effects, foundation, formId);
 };
