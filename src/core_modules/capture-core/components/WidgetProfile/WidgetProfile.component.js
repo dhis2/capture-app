@@ -1,22 +1,19 @@
 // @flow
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { errorCreator } from 'capture-core-utils';
-import { useDataQuery, useDataEngine } from '@dhis2/app-runtime';
-import { makeQuerySingleResource } from 'capture-core/utils/api';
+import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
-import { convertValue as convertServerToClient } from '../../converters/serverToClient';
-import { subValueGetterByElementType } from './getSubValueForTei';
+import { useListAttributes } from './hooks';
 import type { Props } from './widgetProfile.types';
 
 export const WidgetProfile = ({ teiId, programId }: Props) => {
-    const dataEngine = useDataEngine();
     const [open, setOpenStatus] = useState(true);
-    const [listAttributes, setListAttributes] = useState([]);
+
     const programsQuery = useMemo(() => ({
         programs: {
             resource: 'programs',
@@ -52,48 +49,7 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
 
-    const getListAttributes = useCallback(async () => {
-        if (programsData && trackedEntityInstancesData) {
-            const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
-
-            const { programs: { programTrackedEntityAttributes } } = programsData;
-            const { trackedEntityInstances: { attributes } } = trackedEntityInstancesData;
-            const computedAttributes = await programTrackedEntityAttributes
-                .filter(item => item.displayInList)
-                .reduce(async (promisedAcc, currentTEA) => {
-                    const { displayInList, trackedEntityAttribute: { id, displayName, optionSet } } = currentTEA;
-                    const foundAttribute = attributes.find(item => item.attribute === id);
-                    let value;
-                    if (foundAttribute) {
-                        if (subValueGetterByElementType[foundAttribute.valueType]) {
-                            value = await subValueGetterByElementType[foundAttribute.valueType](
-                                foundAttribute.value, querySingleResource,
-                            );
-                        } else {
-                            value = convertServerToClient(foundAttribute.value, foundAttribute.valueType);
-                        }
-                    }
-
-                    const acc = await promisedAcc;
-
-                    return [...acc, {
-                        reactKey: id,
-                        key: displayName,
-                        optionSet,
-                        displayInList,
-                        value,
-                        valueType: foundAttribute?.valueType,
-                    }];
-                }, Promise.resolve([]));
-
-            setListAttributes(computedAttributes);
-        }
-    }, [programsData, trackedEntityInstancesData, dataEngine]);
-
-    useEffect(() => {
-        getListAttributes();
-    }, [getListAttributes]);
-
+    const listAttributes = useListAttributes(programsData, trackedEntityInstancesData);
 
     const displayInListAttributes = useMemo(() => listAttributes
         .filter(item => item.displayInList)
