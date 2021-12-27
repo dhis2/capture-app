@@ -112,17 +112,14 @@ export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable) 
         map((action) => {
             const meta = action.meta;
             if (meta.relationshipData?.length) {
-                const eventId = action.payload.response.importSummaries[0].reference;
-                const relationshipData = action.meta.relationshipData.map((r) => {
-                    const clientRelationship = {
-                        ...r,
-                        from: {
-                            ...r.from,
-                            id: eventId,
-                        },
-                    };
-                    return clientRelationship;
-                });
+                const eventId = action.payload.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
+                const relationshipData = action.meta.relationshipData.map(relationship => ({
+                    ...relationship,
+                    from: {
+                        ...relationship.from,
+                        id: eventId,
+                    },
+                }));
                 return saveNewEventRelationships(relationshipData, action.meta.selections, action.meta.triggerAction);
             }
             if (meta.triggerAction === newEventDataEntryActionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE) {

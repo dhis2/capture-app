@@ -79,7 +79,7 @@ export const startSaveNewEventRelationships = (serverData: Object, selections: O
     actionCreator(actionTypes.START_SAVE_NEW_EVENT_RELATIONSHIPS)({ selections }, {
         offline: {
             effect: {
-                url: 'relationships',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
             },
