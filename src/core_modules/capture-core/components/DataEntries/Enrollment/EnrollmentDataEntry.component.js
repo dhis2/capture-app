@@ -104,7 +104,7 @@ const getEnrollmentDateSettings = () => {
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
             calendarMaxMoment: !props.enrollmentMetadata.allowFutureEnrollmentDate ? moment() : undefined,
         }),
-        getPropName: () => 'enrollmentDate',
+        getPropName: () => 'enrolledAt',
         getValidatorContainers: (props: Object) =>
             getEnrollmentDateValidatorContainer(props.enrollmentMetadata.allowFutureEnrollmentDate),
         getMeta: () => ({
