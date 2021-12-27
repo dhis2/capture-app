@@ -97,11 +97,13 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
             const values = formsValues['newPageDataEntryId-newTei'];
             return saveNewTrackedEntityInstance(
                 {
-                    attributes: deriveAttributesFromFormValues(values),
-                    geometry: deriveGeometryFromFormValues(values),
-                    enrollments: [],
-                    orgUnit: orgUnitId,
-                    trackedEntityType: trackedEntityTypeId,
+                    trackedEntities: [{
+                        attributes: deriveAttributesFromFormValues(values),
+                        geometry: deriveGeometryFromFormValues(values),
+                        enrollments: [],
+                        orgUnit: orgUnitId,
+                        trackedEntityType: trackedEntityTypeId,
+                    }],
                 });
         }),
     );
@@ -109,13 +111,13 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
 export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED),
-        flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
+        flatMap(({ payload }) => {
             const {
                 currentSelections: { orgUnitId },
             } = store.value;
 
             return of(navigateToEnrollmentOverview({
-                teiId: reference,
+                teiId: payload.bundleReport.typeReportMap.TRACKED_ENTITY.objectReports[0].uid,
                 orgUnitId,
             }));
         }),

@@ -149,7 +149,7 @@ export const startSaveNewEventAddAnother =
     return actionCreator(actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER)({ selections }, {
         offline: {
             effect: {
-                url: 'events',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
                 clientId,
