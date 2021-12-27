@@ -41,7 +41,7 @@ export const convertToClientTeis = (apiTeis: ApiTeis, columnsMetaForDataFetching
             );
 
             return {
-                id: tei.trackedEntityInstance,
+                id: tei.trackedEntity,
                 record,
             };
         });

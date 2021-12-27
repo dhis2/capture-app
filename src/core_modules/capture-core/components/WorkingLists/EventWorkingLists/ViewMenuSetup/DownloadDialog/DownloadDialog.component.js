@@ -3,7 +3,7 @@
 import React, { PureComponent, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Tooltip } from '@material-ui/core';
 import { Button } from '@dhis2/ui';
 import { getApi } from '../../../../../d2/d2Instance';
 import type { Props } from './downloadDialog.types';
@@ -39,16 +39,15 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
 
     static getUrl() {
         const baseUrl = getApi().baseUrl;
-        return `${baseUrl}/events/query`;
+        return `${baseUrl}/tracker/events`;
     }
 
     renderButtons() {
-        const { request = {}, programStageId, classes } = this.props;
+        const { request = {}, classes } = this.props;
         const url = DownloadDialogPlain.getUrl();
         const { pageSize, page, ...paramsFromRequest } = request.queryParams || {};
         const paramsObject = {
             ...paramsFromRequest,
-            programStage: programStageId,
             skipPaging: 'true',
         };
         const searchParamsString = DownloadDialogPlain.getUrlEncodedParamsString(paramsObject);
@@ -75,13 +74,22 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
                 >
                     <a
                         download="events.xml"
-                        href={`${url}.xml?${searchParamsString}`}
+                        // href={`${url}.xml?${searchParamsString}`}
                         className={classes.downloadLink}
                     >
-                        <Button>
-                            {i18n.t('Download as XML')}
-                        </Button>
+                        <Tooltip
+                            title={i18n.t('XML is currently not supported')}
+                        >
+                            <div>
+                                <Button
+                                    disabled
+                                >
+                                    {i18n.t('Download as XML')}
+                                </Button>
+                            </div>
+                        </Tooltip>
                     </a>
+
                 </div>
                 <div>
                     <a
