@@ -23,7 +23,7 @@ export const saveNewTrackedEntityInstance = candidateForRegistration =>
         {
             offline: {
                 effect: {
-                    url: 'trackedEntityInstances',
+                    url: 'tracker?async=false',
                     method: effectMethods.POST,
                     data: candidateForRegistration,
                 },
@@ -47,7 +47,7 @@ export const saveNewTrackedEntityInstanceWithEnrollment = candidateForRegistrati
         {
             offline: {
                 effect: {
-                    url: 'trackedEntityInstances',
+                    url: 'tracker?async=false',
                     method: effectMethods.POST,
                     data: candidateForRegistration,
                 },

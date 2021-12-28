@@ -29,18 +29,20 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
     }
 
     return {
-        ...mainDataServerValues,
-        program: state.currentSelections.programId,
-        programStage: formFoundation.id,
-        orgUnit: state.currentSelections.orgUnitId,
-        ...getApiCategoriesArgument(state.currentSelections.categories),
-        dataValues: Object
-            .keys(formServerValues)
-            .map(key => ({
-                dataElement: key,
-                value: formServerValues[key],
-            }))
-            .filter(({ value }) => value != null),
+        events: [{
+            ...mainDataServerValues,
+            program: state.currentSelections.programId,
+            programStage: formFoundation.id,
+            orgUnit: state.currentSelections.orgUnitId,
+            ...getApiCategoriesArgument(state.currentSelections.categories),
+            dataValues: Object
+                .keys(formServerValues)
+                .map(key => ({
+                    dataElement: key,
+                    value: formServerValues[key],
+                }))
+                .filter(({ value }) => value != null),
+        }],
     };
 };
 

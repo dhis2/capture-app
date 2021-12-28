@@ -1,11 +1,11 @@
 // @flow
 
 export const labelKeys = {
-    INCIDENT_DATE: 'incidentDate',
-    ENROLLMENT_DATE: 'enrollmentDate',
+    OCCURED_AT: 'occurredAt',
+    ENROLLED_AT: 'enrolledAt',
 };
 
 export const defaultLabelValues = {
-    INCIDENT_DATE: 'Incident date',
-    ENROLLMENT_DATE: 'Enrollment date',
+    OCCURED_AT: 'Incident date',
+    ENROLLED_AT: 'Enrollment date',
 };
