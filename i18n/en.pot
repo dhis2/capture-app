@@ -1061,6 +1061,15 @@ msgstr "Profile widget could not be loaded. Please try again later"
 msgid "Person Profile"
 msgstr "Person Profile"
 
+msgid "You can’t add any more events in this program"
+msgstr ""
+
+msgid "Cancel without saving"
+msgstr ""
+
+msgid "Choose a stage for a new event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
 
