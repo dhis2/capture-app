@@ -1,3 +1,10 @@
+## [1.62.17](https://github.com/dhis2/capture-app/compare/v1.62.16...v1.62.17) (2021-12-28)
+
+
+### Bug Fixes
+
+* [TECH-669] Validate input params on EnrollmentEventNew ([52cf77d](https://github.com/dhis2/capture-app/commit/52cf77df5af77283c2b2aa65361db1efe705fede))
+
 ## [1.62.16](https://github.com/dhis2/capture-app/compare/v1.62.15...v1.62.16) (2021-12-28)
 
 
