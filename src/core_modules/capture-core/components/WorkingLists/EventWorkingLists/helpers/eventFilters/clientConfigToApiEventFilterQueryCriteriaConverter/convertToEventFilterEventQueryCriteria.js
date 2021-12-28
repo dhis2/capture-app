@@ -144,9 +144,9 @@ const getMainFilter = (filter: Object): Object => {
             status: filterValues.in[0],
         };
         break;
-    case 'eventDate':
+    case 'occuredAt':
         mainValue = {
-            eventDate: filterValues.dateFilter,
+            occuredAt: filterValues.dateFilter,
         };
         break;
     case 'assignee':

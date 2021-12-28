@@ -19,7 +19,7 @@ export function convertMainEventClientToServer(event: Object) {
         let convertedValue;
 
         switch (key) {
-        case 'eventDate':
+        case 'occuredAt':
         case 'dueDate':
         case 'completedDate':
             convertedValue = convertClientToServer(value, dataElementTypes.DATE);
