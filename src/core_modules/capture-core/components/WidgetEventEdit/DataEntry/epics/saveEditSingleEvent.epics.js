@@ -45,16 +45,18 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
             }
 
             const serverData = {
-                ...mainDataServerValues,
-                dataValues: Object
-                    .keys(formServerValues)
-                    .map(key => ({
-                        dataElement: key,
-                        value: formServerValues[key],
-                    })),
+                events: [{
+                    ...mainDataServerValues,
+                    dataValues: Object
+                        .keys(formServerValues)
+                        .map(key => ({
+                            dataElement: key,
+                            value: formServerValues[key],
+                        })),
+                }],
             };
 
-            return startSaveEditEventAfterReturnedToMainPage(eventId, serverData, state.currentSelections);
+            return startSaveEditEventAfterReturnedToMainPage(serverData, state.currentSelections);
         }));
 
 export const saveEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
