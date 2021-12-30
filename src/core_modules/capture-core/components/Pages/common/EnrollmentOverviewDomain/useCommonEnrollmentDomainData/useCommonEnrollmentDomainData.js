@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { setCommonEnrollmentSiteData } from '../enrollment.actions';
 import type { Output } from './useCommonEnrollmentDomainData.types';
+import { useRefetchTrackedEntityInstance } from '../../../../WidgetProfile';
 
 export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: string, programId: string): Output => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         attributeValues: data?.trackedEntityInstance?.attributes,
     };
 
+    useRefetchTrackedEntityInstance(refetch);
     useEffect(() => {
         if (fetchedEnrollmentData.reference) {
             dispatch(setCommonEnrollmentSiteData(

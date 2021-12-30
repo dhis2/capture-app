@@ -191,6 +191,7 @@ import {
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
 import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
+import { updateTeiEpic, updateTeiSucceededEpic, updateTeiFailedEpic } from '../core_modules/capture-core/components/WidgetProfile';
 import {
     startNewEnrollmentDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
@@ -360,4 +361,7 @@ export const epics = combineEpics(
     addNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,
     scheduleNewEnrollmentEventEpic,
+    updateTeiEpic,
+    updateTeiSucceededEpic,
+    updateTeiFailedEpic,
 );

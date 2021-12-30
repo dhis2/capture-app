@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
-"PO-Revision-Date: 2021-12-21T16:14:01.098Z\n"
+"POT-Creation-Date: 2021-12-28T12:35:51.176Z\n"
+"PO-Revision-Date: 2021-12-28T12:35:51.176Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1100,17 +1100,29 @@ msgstr ""
 "information about this enrollment, use the Edit button in the in the "
 "Enrollment box on this dashboard"
 
+msgid " Loading..."
+msgstr " Loading..."
+
 msgid "Save changes"
 msgstr "Save changes"
 
 msgid "Profile"
 msgstr "Profile"
 
-msgid "There are errors in this form"
-msgstr "There are errors in this form"
+msgid "There is a problem with this form"
+msgstr "There is a problem with this form"
 
 msgid "There are warnings in this form"
 msgstr "There are warnings in this form"
+
+msgid "There was a problem saving changes"
+msgstr "There was a problem saving changes"
+
+msgid "Try again or contact your system administrator for support"
+msgstr "Try again or contact your system administrator for support"
+
+msgid "Fix errors in the form to continue."
+msgstr "Fix errors in the form to continue."
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
@@ -1296,6 +1308,9 @@ msgstr "Error saving enrollment"
 
 msgid "Error saving the enrollment event"
 msgstr "Error saving the enrollment event"
+
+msgid "The Tracked entity instance was updated succesfully"
+msgstr "The Tracked entity instance was updated succesfully"
 
 msgid "tracked entity instance"
 msgstr "tracked entity instance"

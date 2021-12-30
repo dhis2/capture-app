@@ -36,7 +36,7 @@ export const deriveTeiName = (attributes: Array<any>, trackedEntityType: string,
 
 export const useTeiDisplayName = (teiId: string, programId: string) => {
     const [teiDisplayName, setTeiDisplayName] = useState('');
-    const { error, data } = useDataQuery(
+    const { error, data, refetch } = useDataQuery(
         useMemo(
             () => ({
                 trackedEntityInstances: {
@@ -64,6 +64,7 @@ export const useTeiDisplayName = (teiId: string, programId: string) => {
 
     return {
         error,
+        refetch,
         teiDisplayName,
     };
 };

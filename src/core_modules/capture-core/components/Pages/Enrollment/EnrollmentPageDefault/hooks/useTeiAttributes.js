@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useTeiAttributes = (teiId: string) => {
-    const { data, error, loading } = useDataQuery(
+    const { data, error, loading, refetch } = useDataQuery(
         useMemo(
             () => ({
                 trackedEntityInstance: {
@@ -18,6 +18,7 @@ export const useTeiAttributes = (teiId: string) => {
 
     return {
         error,
+        refetch,
         attributes: !loading && data?.trackedEntityInstance?.attributes,
     };
 };

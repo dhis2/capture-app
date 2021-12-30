@@ -68,14 +68,16 @@ const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute
                 });
             }
             return requestPromise.then((result) => {
-                const trackedEntityInstance = (result.trackedEntityInstances && result.trackedEntityInstances[0]) || {};
+                const otherTrackedEntityInstances = result?.trackedEntityInstances?.filter(item => item.trackedEntityInstance !== contextProps.trackedEntityInstanceId) || [];
+                const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
+
                 const data = {
                     id: trackedEntityInstance.trackedEntityInstance,
                     tetId: trackedEntityInstance.trackedEntityType,
                 };
 
                 return {
-                    valid: result.trackedEntityInstances.length === 0,
+                    valid: otherTrackedEntityInstances.length === 0,
                     data,
                 };
             });

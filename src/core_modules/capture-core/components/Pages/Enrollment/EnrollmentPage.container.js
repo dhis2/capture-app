@@ -17,6 +17,8 @@ import { useEnrollmentInfo } from './useEnrollmentInfo';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { getScopeInfo } from '../../../metaData';
 import { buildEnrollmentsAsOptions, useSetEnrollmentId } from '../../ScopeSelector';
+import { useRefetchTrackedEntityInstance } from '../../WidgetProfile';
+import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
@@ -95,10 +97,12 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
         }),
         shallowEqual,
     );
-    const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    const { tetId, enrollments } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const { trackedEntityName } = getScopeInfo(tetId);
+    const { teiDisplayName, refetch } = useTeiDisplayName(teiId, programId);
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
 
+    useRefetchTrackedEntityInstance(refetch);
     useEffect(() => {
         dispatch(fetchEnrollmentPageInformation());
     },
