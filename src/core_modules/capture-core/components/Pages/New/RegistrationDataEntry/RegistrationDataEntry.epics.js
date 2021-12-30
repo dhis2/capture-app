@@ -70,8 +70,8 @@ const deriveEvents = ({ stages, enrolledAt, occurredAt, programId, orgUnitId }) 
                   ?
                   {
                       status: 'ACTIVE',
-                      eventDate: dateToUseInActiveStatus,
-                      dueDate: dateToUseInActiveStatus,
+                      occurredAt: dateToUseInActiveStatus,
+                      scheduledAt: dateToUseInActiveStatus,
                   }
                   :
                   {
