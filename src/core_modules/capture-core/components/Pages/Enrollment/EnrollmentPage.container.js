@@ -97,7 +97,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
         }),
         shallowEqual,
     );
-    const { tetId, enrollments } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    const { tetId, enrollments, teiDisplayName: cachedTeiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const { trackedEntityName } = getScopeInfo(tetId);
     const { teiDisplayName, refetch } = useTeiDisplayName(teiId, programId);
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
@@ -120,7 +120,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
             programId={programId}
             orgUnitId={orgUnitId}
             enrollmentId={enrollmentId}
-            teiDisplayName={teiDisplayName}
+            teiDisplayName={teiDisplayName || cachedTeiDisplayName}
             trackedEntityName={trackedEntityName}
             enrollmentsAsOptions={enrollmentsAsOptions}
             enrollmentPageStatus={useComputedEnrollmentPageStatus()}
