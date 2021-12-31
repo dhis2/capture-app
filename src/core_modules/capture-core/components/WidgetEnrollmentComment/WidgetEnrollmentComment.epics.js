@@ -18,9 +18,11 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
             const { firstName, surname, userName } = getCurrentUser();
             const clientId = uuid();
 
+            // Setting events to empty array temporary - causing import error
             const serverData = {
                 enrollments: [{
                     ...state.enrollmentDomain.enrollment,
+                    events: [],
                     notes: [{ value: note }],
                 }],
             };
