@@ -22,7 +22,7 @@ export const startAddNoteForEnrollment = (enrollmentId: string, serverData: Obje
     actionCreator(actionTypes.START_ADD_NOTE_FOR_ENROLLMENT)({ selections, context }, {
         offline: {
             effect: {
-                url: `enrollments/${enrollmentId}/note`,
+                url: 'tracker?async=false&importStrategy=UPDATE',
                 method: effectMethods.POST,
                 data: serverData,
             },
