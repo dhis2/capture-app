@@ -29,7 +29,7 @@ export const startSaveEventNote = (eventId: string, serverData: Object, selectio
     actionCreator(actionTypes.START_SAVE_EVENT_NOTE)({ selections, clientId }, {
         offline: {
             effect: {
-                url: `events/${eventId}/note`,
+                url: 'tracker?async=false&importStrategy=UPDATE',
                 method: effectMethods.POST,
                 data: serverData,
             },
