@@ -13,7 +13,6 @@ import {
     buildEnrollmentsAsOptions,
 } from '../../../ScopeSelector';
 import { useTeiDisplayName } from '../../common/EnrollmentOverviewDomain/useTeiDisplayName';
-import { getScopeInfo } from '../../../../metaData';
 
 export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, enrollment?: Object) => {
     const { setOrgUnitId } = useSetOrgUnitId();
@@ -34,8 +33,6 @@ export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, en
     const handleResetEventId = useCallback(() => resetEventId('enrollmentEventNew'), [resetEventId]);
 
     const { teiDisplayName, error: teiDisplayNameError } = useTeiDisplayName(teiId, programId);
-    const { trackedEntityName } = enrollment ?
-        getScopeInfo(enrollment.trackedEntityType) : { trackedEntityName: undefined };
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollment || {}], programId);
 
     return {
@@ -47,7 +44,6 @@ export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, en
         handleResetStageId,
         handleResetEventId,
         teiDisplayName,
-        trackedEntityName,
         enrollmentsAsOptions,
         teiSelectorFailure: Boolean(teiDisplayNameError),
         userInteractionInProgress,

@@ -61,8 +61,8 @@ export const EnrollmentAddEventPage = () => {
         events: enrollment?.events,
         attributeValues,
         enrollmentData: {
-            enrollmentDate: enrollment?.enrollmentDate,
-            incidentDate: enrollment?.incidentDate,
+            enrolledAt: enrollment?.enrolledAt,
+            occurredAt: enrollment?.occurredAt,
             enrollmentId: enrollment?.enrollment,
         },
     }), [enrollment, attributeValues]);
@@ -76,7 +76,6 @@ export const EnrollmentAddEventPage = () => {
         handleResetStageId,
         handleResetEventId,
         teiDisplayName,
-        trackedEntityName,
         enrollmentsAsOptions,
         teiSelectorFailure,
         userInteractionInProgress,
@@ -89,9 +88,10 @@ export const EnrollmentAddEventPage = () => {
                 orgUnitId={orgUnitId}
                 enrollmentId={enrollmentId}
                 teiDisplayName={teiDisplayName}
-                trackedEntityName={trackedEntityName}
+                // $FlowFixMe - Tracker programs should have trackedEntityType
+                trackedEntityName={program?.trackedEntityType?.name}
                 stageName={selectedProgramStage?.stageForm.name}
-                eventDateLabel={selectedProgramStage?.stageForm.getLabel('eventDate')}
+                eventDateLabel={selectedProgramStage?.stageForm.getLabel('occurredAt')}
                 enrollmentsAsOptions={enrollmentsAsOptions}
                 onSetOrgUnitId={handleSetOrgUnitId}
                 onResetOrgUnitId={handleResetOrgUnitId}

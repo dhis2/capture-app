@@ -25,21 +25,21 @@ export type Event = {|
 |};
 
 export type EnrollmentData = {|
-    created: string,
+    createdAt: string,
     createdAtClient: string,
     deleted: boolean,
     enrollment: string,
-    enrollmentDate: string,
+    enrolledAt: string,
     events: Array<Event>,
-    incidentDate: ?string,
-    lastUpdated: string,
-    lastUpdatedAtClient: string,
+    occurredAt: ?string,
+    updatedAt: string,
+    updatedAtClient: string,
     orgUnit: string,
     orgUnitName: string,
     program: string,
     status: string,
     storedBy: string,
-    trackedEntityInstance: string,
+    trackedEntity: string,
     trackedEntityType: string,
 |};
 
