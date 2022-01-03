@@ -6,7 +6,7 @@ import { getCurrentUser } from 'capture-core/d2/d2Instance';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import { convertValue as convertListValue } from '../../../../converters/clientToList';
-import { dataElementTypes } from '../../../../metaData';
+import { dataElementTypes, getEventProgramThrowIfNotFound } from '../../../../metaData';
 import {
     actionTypes as viewEventNotesActionTypes,
     batchActionTypes as viewEventNotesBatchActionTypes,
@@ -21,6 +21,8 @@ import {
     removeNote,
     setNotes,
 } from '../../../Notes/notes.actions';
+import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
+import { convertMainEventClientToServer } from '../../../../events/mainConverters';
 
 
 const noteKey = 'viewEvent';
@@ -53,14 +55,28 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
         map((action) => {
             const state = store.value;
             const payload = action.payload;
-
             const eventId = state.viewEventPage.eventId;
+            const eventContainer = state.viewEventPage.loadedValues.eventContainer;
+            const { event: clientMainValues, values: clientValues } = eventContainer;
+            const program = getEventProgramThrowIfNotFound(clientMainValues.programId);
+            const formFoundation = program.stage.stageForm;
+            const formServerValues = formFoundation.convertValues(clientValues, convertToServerValue);
+            const mainDataServerValues: Object = convertMainEventClientToServer(clientMainValues);
+
             // $FlowFixMe[prop-missing] automated comment
             const userName = getCurrentUser().username;
 
             const serverData = {
-                event: eventId,
-                notes: [{ value: payload.note }],
+                events: [{
+                    ...mainDataServerValues,
+                    notes: [{ value: payload.note }, ...mainDataServerValues.notes],
+                    dataValues: Object
+                        .keys(formServerValues)
+                        .map(key => ({
+                            dataElement: key,
+                            value: formServerValues[key],
+                        })),
+                }],
             };
 
             const clientNote = {

@@ -22,7 +22,7 @@ type ApiTEIEvent = {
     enrollment?: string,
     enrollmentStatus?: string,
     status: string,
-    occuredAt: string,
+    occurredAt: string,
     dueDate: string,
     completedDate: string,
     dataValues: Array<ApiDataValue>,
@@ -64,7 +64,7 @@ const mapEventInputKeyToOutputKey = {
 
 function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
-    if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
+    if (inputKey === 'occurredAt' || inputKey === 'scheduledAt' || inputKey === 'completedAt') {
         convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
@@ -138,7 +138,7 @@ async function convertToClientEvent(event: ApiTEIEvent) {
 export async function getEvent(eventId: string): Promise<?ClientEventContainer> {
     const api = getApi();
     const apiRes = await api
-        .get(`events/${eventId}`);
+        .get(`tracker/events/${eventId}`);
 
     const eventContainer = await convertToClientEvent(apiRes);
     return eventContainer;

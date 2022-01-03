@@ -111,7 +111,7 @@ const viewModeComponent = withDefaultFieldContainer()(
 
 const buildReportDateSettingsFn = () => {
     const dataElement = new DataElement((o) => {
-        o.id = 'eventDate';
+        o.id = 'occurredAt';
         o.type = dataElementTypes.DATE;
     });
 

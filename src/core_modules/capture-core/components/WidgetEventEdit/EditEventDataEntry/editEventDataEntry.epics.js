@@ -105,14 +105,16 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
 
             const serverData = {
-                ...mainDataServerValues,
-                dataValues: Object
-                    .keys(formServerValues)
-                    .map(key => ({
-                        dataElement: key,
-                        value: formServerValues[key],
-                    }))
-                    .filter(({ value }) => value != null),
+                events: [{
+                    ...mainDataServerValues,
+                    dataValues: Object
+                        .keys(formServerValues)
+                        .map(key => ({
+                            dataElement: key,
+                            value: formServerValues[key],
+                        }))
+                        .filter(({ value }) => value != null),
+                }],
             };
 
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
