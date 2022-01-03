@@ -34,7 +34,7 @@ export const loadViewEventDataEntry =
         const itemId = viewEventIds.itemId;
         const dataEntryPropsToInclude = [
             {
-                id: 'eventDate',
+                id: 'occurredAt',
                 type: 'DATE',
             },
             {

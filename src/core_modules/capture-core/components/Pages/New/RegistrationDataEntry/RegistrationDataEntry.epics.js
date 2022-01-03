@@ -49,10 +49,10 @@ const deriveGeometryFromFormValues = (formValues = {}) =>
         .reduce((acc, currentKey) => (standardGeoJson(formValues[currentKey])), undefined);
 
 
-const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnitId }) => {
-    // in case we have a program that does not have an incident date, such as Malaria case diagnosis,
-    // we want the incident to default to enrollmentDate
-    const sanitisedIncidentDate = incidentDate || enrollmentDate;
+const deriveEvents = ({ stages, enrolledAt, occurredAt, programId, orgUnitId }) => {
+    // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
+    // we want the incident to default to enrollmentDate (enrolledAt)
+    const sanitisedIncidentDate = occurredAt || enrolledAt;
     return [...stages.values()]
         .filter(({ autoGenerateEvent }) => autoGenerateEvent)
         .map(({
@@ -62,8 +62,8 @@ const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnit
             openAfterEnrollment,
             minDaysFromStart,
         }) => {
-            const dateToUseInActiveStatus = reportDateToUseInActiveStatus === 'enrollmentDate' ? enrollmentDate : sanitisedIncidentDate;
-            const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrollmentDate : sanitisedIncidentDate;
+            const dateToUseInActiveStatus = reportDateToUseInActiveStatus === 'enrollmentDate' ? enrolledAt : sanitisedIncidentDate;
+            const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrolledAt : sanitisedIncidentDate;
 
             const eventInfo =
               openAfterEnrollment
@@ -77,7 +77,7 @@ const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnit
                   {
                       status: 'SCHEDULE',
                       // for schedule type of events we want to add the standard interval days to the date
-                      dueDate: moment(dateToUseInScheduleStatus).add(minDaysFromStart, 'days').format('YYYY-MM-DD'),
+                      scheduledAt: moment(dateToUseInScheduleStatus).add(minDaysFromStart, 'days').format('YYYY-MM-DD'),
                   };
 
             return {
@@ -97,11 +97,13 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
             const values = formsValues['newPageDataEntryId-newTei'];
             return saveNewTrackedEntityInstance(
                 {
-                    attributes: deriveAttributesFromFormValues(values),
-                    geometry: deriveGeometryFromFormValues(values),
-                    enrollments: [],
-                    orgUnit: orgUnitId,
-                    trackedEntityType: trackedEntityTypeId,
+                    trackedEntities: [{
+                        attributes: deriveAttributesFromFormValues(values),
+                        geometry: deriveGeometryFromFormValues(values),
+                        enrollments: [],
+                        orgUnit: orgUnitId,
+                        trackedEntityType: trackedEntityTypeId,
+                    }],
                 });
         }),
     );
@@ -109,13 +111,13 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
 export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED),
-        flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
+        flatMap(({ payload: { bundleReport: { typeReportMap } } }) => {
             const {
                 currentSelections: { orgUnitId },
             } = store.value;
 
             return of(navigateToEnrollmentOverview({
-                teiId: reference,
+                teiId: typeReportMap.TRACKED_ENTITY.objectReports[0].uid,
                 orgUnitId,
             }));
         }),
@@ -126,29 +128,29 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map(() => {
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
-            const { incidentDate, enrollmentDate, geometry } = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || { };
+            const { occurredAt, enrolledAt, geometry } = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || { };
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
             const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
-            const events = deriveEvents({ stages, enrollmentDate, incidentDate, programId, orgUnitId });
-
-
+            const events = deriveEvents({ stages, enrolledAt, occurredAt, programId, orgUnitId });
             return saveNewTrackedEntityInstanceWithEnrollment(
                 {
-                    attributes: deriveAttributesFromFormValues(values),
-                    geometry: deriveGeometryFromFormValues(values),
-                    enrollments: [
-                        {
-                            geometry: standardGeoJson(geometry),
-                            incidentDate,
-                            enrollmentDate,
-                            program: programId,
-                            orgUnit: orgUnitId,
-                            status: 'ACTIVE',
-                            events,
-                        },
-                    ],
-                    orgUnit: orgUnitId,
-                    trackedEntityType: trackedEntityType.id,
+                    trackedEntities: [{
+                        orgUnit: orgUnitId,
+                        trackedEntityType: trackedEntityType.id,
+                        geometry: deriveGeometryFromFormValues(values),
+                        enrollments: [
+                            {
+                                geometry: standardGeoJson(geometry),
+                                occurredAt,
+                                enrolledAt,
+                                program: programId,
+                                orgUnit: orgUnitId,
+                                status: 'ACTIVE',
+                                attributes: deriveAttributesFromFormValues(values),
+                                events,
+                            },
+                        ],
+                    }],
                 });
         }),
     );
@@ -156,13 +158,13 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
 export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED),
-        flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
+        flatMap(({ payload: { bundleReport: { typeReportMap } } }) => {
             const {
                 currentSelections: { orgUnitId, programId },
             } = store.value;
 
             return of(navigateToEnrollmentOverview({
-                teiId: reference,
+                teiId: typeReportMap.TRACKED_ENTITY.objectReports[0].uid,
                 orgUnitId,
                 programId,
             }));

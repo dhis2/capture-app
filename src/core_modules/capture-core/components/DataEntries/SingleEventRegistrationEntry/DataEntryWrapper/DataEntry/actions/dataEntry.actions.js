@@ -64,7 +64,7 @@ export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object, rel
     return actionCreator(actionType)({ selections }, {
         offline: {
             effect: {
-                url: 'events',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
             },
@@ -79,7 +79,7 @@ export const startSaveNewEventRelationships = (serverData: Object, selections: O
     actionCreator(actionTypes.START_SAVE_NEW_EVENT_RELATIONSHIPS)({ selections }, {
         offline: {
             effect: {
-                url: 'relationships',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
             },
@@ -149,7 +149,7 @@ export const startSaveNewEventAddAnother =
     return actionCreator(actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER)({ selections }, {
         offline: {
             effect: {
-                url: 'events',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
                 clientId,
