@@ -8,7 +8,7 @@ import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
-import { useListAttributes } from './hooks';
+import { useClientAttributesWithSubvalues } from './hooks';
 import type { Props } from './widgetProfile.types';
 
 export const WidgetProfile = ({ teiId, programId }: Props) => {
@@ -49,9 +49,9 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
 
-    const listAttributes = useListAttributes(programsData, trackedEntityInstancesData);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(programsData, trackedEntityInstancesData);
 
-    const displayInListAttributes = useMemo(() => listAttributes
+    const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
         .map(({ optionSet, reactKey, key, value: clientValue, valueType }) => {
             let value;
@@ -64,7 +64,7 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
             return {
                 reactKey, key, value,
             };
-        }), [listAttributes]);
+        }), [clientAttributesWithSubvalues]);
 
     const renderProfile = () => {
         if (loading) {

@@ -34,7 +34,7 @@ type InputTEIData = {
     }
 }
 
-export const useListAttributes = (programsData: InputProgramData, trackedEntityInstancesData: InputTEIData) => {
+export const useClientAttributesWithSubvalues = (programsData: InputProgramData, trackedEntityInstancesData: InputTEIData) => {
     const dataEngine = useDataEngine();
 
     const [listAttributes, setListAttributes] = useState([]);
@@ -46,7 +46,6 @@ export const useListAttributes = (programsData: InputProgramData, trackedEntityI
             const { programs: { programTrackedEntityAttributes } } = programsData;
             const { trackedEntityInstances: { attributes } } = trackedEntityInstancesData;
             const computedAttributes = await programTrackedEntityAttributes
-                .filter(item => item.displayInList)
                 .reduce(async (promisedAcc, currentTEA) => {
                     const { displayInList, trackedEntityAttribute: { id, displayName, optionSet } } = currentTEA;
                     const foundAttribute = attributes.find(item => item.attribute === id);
