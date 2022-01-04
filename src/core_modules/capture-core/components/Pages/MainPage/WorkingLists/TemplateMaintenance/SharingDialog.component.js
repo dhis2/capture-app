@@ -24,13 +24,11 @@ const SharingDialog = (props: Props) => {
         externalAccess,
         publicAccess,
         userAccesses,
-        userGroupAccesses,
     }) =>
         onClose({
             externalAccess,
             publicAccess,
             userAccesses: userAccesses.map(({ id, access }) => ({ id, access })),
-            userGroupAccesses: userGroupAccesses.map(({ id, access }) => ({ id, access })),
         }),
     [onClose]);
 
