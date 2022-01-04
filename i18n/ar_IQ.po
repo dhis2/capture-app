@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
+"POT-Creation-Date: 2021-11-29T10:05:06.420Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -804,14 +804,14 @@ msgstr "فشل البحث عن الوحدة التنظيمية. للحصول ع�
 msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
 
+msgid "Set coordinate"
+msgstr "ضبط الإحداثية"
+
 msgid "Latitude"
 msgstr ""
 
 msgid "Longitude"
 msgstr ""
-
-msgid "Set coordinate"
-msgstr "ضبط الإحداثية"
 
 msgid "Date"
 msgstr "التاريخ"
