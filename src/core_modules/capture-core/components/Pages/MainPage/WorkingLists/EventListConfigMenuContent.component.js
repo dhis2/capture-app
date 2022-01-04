@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import EventListLoader from './EventListLoader.component';
@@ -30,6 +30,7 @@ type Props = {
     onAddTemplate: Function,
     onUpdateTemplate: Function,
     onDeleteTemplate: Function,
+    onSetTemplateSharingSettings: Function,
     defaultConfig: Map<string, Object>,
     currentListIsModified: boolean,
     classes: Object,
@@ -46,43 +47,49 @@ const EventListConfigMenuContent = (props: Props) => {
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
+        onSetTemplateSharingSettings,
         defaultConfig,
         currentListIsModified,
         classes,
         ...passOnProps
     } = props;
-    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = React.useState(null);
-    const templateMaintenanceInstance = React.useRef(null);
+    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = useState(null);
+    const templateMaintenanceInstance = useRef(null);
 
-    const closeHandler = React.useCallback(() => {
+    const handleClose = useCallback(() => {
         setMaintenanceDialogOpenMode(null);
     }, []);
 
-    const updateTemplateHandler = React.useCallback((...args) => {
+    const handleUpdateTemplate = useCallback((...args) => {
         setMaintenanceDialogOpenMode(null);
         onUpdateTemplate(...args);
     }, [onUpdateTemplate]);
 
-    const addTemplateHandler = React.useCallback((...args) => {
+    const handleAddTemplate = useCallback((...args) => {
         setMaintenanceDialogOpenMode(null);
         onAddTemplate(...args);
     }, [onAddTemplate]);
 
-    const deleteTemplateHandler = React.useCallback((...args) => {
+    const handleDeleteTemplate = useCallback((...args) => {
         setMaintenanceDialogOpenMode(null);
         onDeleteTemplate(...args);
     }, [onDeleteTemplate]);
 
-    const getSaveItem = React.useCallback(() => ({
+    const handleSetSharingSettings = useCallback((...args) => {
+        setMaintenanceDialogOpenMode(null);
+        onSetTemplateSharingSettings && onSetTemplateSharingSettings(...args, listId);
+    }, [onSetTemplateSharingSettings, listId]);
+
+    const getSaveItem = useCallback(() => ({
         key: 'save',
         clickHandler: () => {
             // $FlowFixMe[incompatible-use] automated comment
-            templateMaintenanceInstance.current.updateTemplateHandler();
+            templateMaintenanceInstance.current.handleUpdateTemplate();
         },
         element: i18n.t('Update view'),
     }), []);
 
-    const getSaveAsItem = React.useCallback((isDefaultView: boolean, isModified: boolean) => {
+    const getSaveAsItem = useCallback((isDefaultView: boolean, isModified: boolean) => {
         if (isDefaultView && !isModified) {
             return {
                 key: 'saveAs',
@@ -99,7 +106,7 @@ const EventListConfigMenuContent = (props: Props) => {
         };
     }, []);
 
-    const getDeleteItem = React.useCallback(() => ({
+    const getDeleteItem = useCallback(() => ({
         key: 'delete',
         clickHandler: () => {
             setMaintenanceDialogOpenMode(dialogModes.DELETE);
@@ -113,7 +120,7 @@ const EventListConfigMenuContent = (props: Props) => {
         classes.delete,
     ]);
 
-    const getShareItem = React.useCallback(() => ({
+    const getShareItem = useCallback(() => ({
         key: 'share',
         clickHandler: () => {
             setMaintenanceDialogOpenMode(dialogModes.SHARING);
@@ -121,17 +128,17 @@ const EventListConfigMenuContent = (props: Props) => {
         element: i18n.t('Share view...'),
     }), []);
 
-    const getSavedViewSubHeader = React.useCallback((viewName: string) => ({
+    const getSavedViewSubHeader = useCallback((viewName: string) => ({
         key: 'savedViewSubHeader',
         subHeader: viewName.length > 30 ? `${viewName.substring(0, 27)}...` : viewName,
     }), []);
 
     // eslint-disable-next-line complexity
-    const customMenuContents = React.useMemo(() => {
+    const customMenuContents = useMemo(() => {
         const currentViewContents = [];
         const savedViewContents = [];
 
-        const { access, isDefault, notPreserved, displayName } = currentTemplate;
+        const { access, isDefault, notPreserved, name } = currentTemplate;
 
         currentViewContents.push(getSaveAsItem(!!isDefault, currentListIsModified));
 
@@ -148,7 +155,7 @@ const EventListConfigMenuContent = (props: Props) => {
         }
 
         if (savedViewContents.length > 0) {
-            savedViewContents.splice(0, 0, getSavedViewSubHeader(displayName));
+            savedViewContents.splice(0, 0, getSavedViewSubHeader(name));
         }
 
         return [
@@ -181,16 +188,17 @@ const EventListConfigMenuContent = (props: Props) => {
                 // $FlowFixMe[incompatible-type] automated comment
                 ref={templateMaintenanceInstance}
                 listId={listId}
-                onClose={closeHandler}
+                onClose={handleClose}
                 mode={maintenanceDialogOpenMode}
                 currentTemplate={currentTemplate}
                 filters={filters}
                 sortById={sortById}
                 sortByDirection={sortByDirection}
                 columnOrder={columnOrder}
-                onAddTemplate={addTemplateHandler}
-                onUpdateTemplate={updateTemplateHandler}
-                onDeleteTemplate={deleteTemplateHandler}
+                onAddTemplate={handleAddTemplate}
+                onUpdateTemplate={handleUpdateTemplate}
+                onDeleteTemplate={handleDeleteTemplate}
+                onSetSharingSettings={handleSetSharingSettings}
                 defaultConfig={defaultConfig}
             />
         </React.Fragment>
