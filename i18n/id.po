@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
+"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -157,6 +157,9 @@ msgstr "Pengguna yang ditetapkan"
 
 msgid "Search for user"
 msgstr "Cari pengguna"
+
+msgid "Complete event"
+msgstr "Even lengkap"
 
 msgid "Basic info"
 msgstr "Info dasar"
@@ -723,6 +726,9 @@ msgstr ""
 msgid "Registered events"
 msgstr "Even terdaftar"
 
+msgid "Please select {{category}}."
+msgstr ""
+
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
 
@@ -1037,6 +1043,9 @@ msgstr ""
 msgid "This event doesn't have any comments"
 msgstr ""
 
+msgid "stage not found in rules execution"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Even selesai"
 
@@ -1082,6 +1091,9 @@ msgid "Person Profile"
 msgstr "Profil Orang"
 
 msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "This event is not yet preserved and cannot be edited"
 msgstr ""
 
 msgid "Show {{ rest }} more"

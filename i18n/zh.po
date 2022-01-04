@@ -1,14 +1,14 @@
 # 
 # Translators:
-# 晓东 林 <13981924470@126.com>, 2021
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# 晓东 林 <13981924470@126.com>, 2021
 # easylin <lin_xd@126.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
+"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -148,6 +148,9 @@ msgstr "分配的用户"
 
 msgid "Search for user"
 msgstr "搜索用户 "
+
+msgid "Complete event"
+msgstr "完成事件"
 
 msgid "Basic info"
 msgstr "基本信息"
@@ -694,6 +697,9 @@ msgstr "本次活动暂无反馈"
 msgid "Registered events"
 msgstr "登记的事件"
 
+msgid "Please select {{category}}."
+msgstr "请选择 {{category}}."
+
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "或者在{{program}}中查看您可以访问的所有记录"
 
@@ -991,6 +997,9 @@ msgstr "写一篇关于该事件的评论"
 msgid "This event doesn't have any comments"
 msgstr "此事件没有任何评论"
 
+msgid "stage not found in rules execution"
+msgstr "在规则执行中找不到阶段"
+
 msgid "Event completed"
 msgstr "事件完成"
 
@@ -1039,6 +1048,9 @@ msgstr "人物简介"
 
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
+
+msgid "This event is not yet preserved and cannot be edited"
+msgstr "此事件尚未保留且无法编辑"
 
 msgid "Show {{ rest }} more"
 msgstr "显示 {{ rest}} 更多"

@@ -1,6 +1,6 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
-import { getRulesActionsForTEI } from '../../../../rules/actionsCreator';
+import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import { RenderFoundation, TrackerProgram } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
@@ -39,8 +39,8 @@ export const batchActionTypes = {
 };
 
 export const openDataEntryForNewEnrollmentBatchAsync = async (
-    program: ?TrackerProgram,
-    foundation: ?RenderFoundation,
+    program: TrackerProgram,
+    foundation: RenderFoundation,
     orgUnit: Object,
     dataEntryId: string,
     extraActions: Array<ReduxAction<any, any>> = [],
@@ -64,19 +64,10 @@ export const openDataEntryForNewEnrollmentBatchAsync = async (
                     }, {}),
             );
 
-    let rulesActions;
-    if (program && foundation) {
-        rulesActions = getRulesActionsForTEI(
-            program,
-            foundation,
-            formId,
-            orgUnit,
-            {},
-            {},
-        );
-    } else {
-        rulesActions = [];
-    }
+    const effects = getApplicableRuleEffectsForTrackerProgram({
+        program,
+        orgUnit,
+    });
 
     return batchActions([
         openDataEntryForNewEnrollment(
@@ -88,7 +79,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async (
                 }, {}),
         ),
         ...dataEntryActions,
-        ...rulesActions,
+        updateRulesEffects(effects, formId),
         ...extraActions,
     ], batchActionTypes.OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH);
 };

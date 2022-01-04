@@ -141,6 +141,7 @@ const StageDetailPlain = (props: Props) => {
 
                 const cells = headerColumns.map(({ id }) => (
                     <Tooltip
+                        key={`${id}-${row.id}`}
                         content={i18n.t('This event is not yet preserved and cannot be edited')}
                         closeDelay={50}
                     >

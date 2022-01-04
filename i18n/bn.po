@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
+"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Bengali (https://www.transifex.com/hisp-uio/teams/100509/bn/)\n"
@@ -143,6 +143,9 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
+msgstr ""
+
+msgid "Complete event"
 msgstr ""
 
 msgid "Basic info"
@@ -689,6 +692,9 @@ msgstr ""
 msgid "Registered events"
 msgstr ""
 
+msgid "Please select {{category}}."
+msgstr ""
+
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
 
@@ -986,6 +992,9 @@ msgstr ""
 msgid "This event doesn't have any comments"
 msgstr ""
 
+msgid "stage not found in rules execution"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1031,6 +1040,9 @@ msgid "Person Profile"
 msgstr ""
 
 msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "This event is not yet preserved and cannot be edited"
 msgstr ""
 
 msgid "Show {{ rest }} more"

@@ -117,7 +117,6 @@ function addProgramRules(d2ProgramRules: Array<ProgramRule>) {
                     const rulesForStage = rulesByStage[stageKey];
                     const programStage = program.getStage(stageKey);
                     if (programStage) {
-                        // $FlowFixMe[prop-missing] automated comment
                         programStage.programRules = rulesForStage;
                     }
                 });

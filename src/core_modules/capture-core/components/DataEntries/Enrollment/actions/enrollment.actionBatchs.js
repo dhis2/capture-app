@@ -5,7 +5,7 @@ import type {
     Enrollment,
     TEIValues,
 } from 'capture-core-utils/rulesEngine';
-import { getRulesActionsForTEI } from '../../../../rules/actionsCreator';
+import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import type { TrackerProgram, RenderFoundation } from '../../../../metaData';
 import { startRunRulesPostUpdateField } from '../../../DataEntry';
@@ -18,31 +18,26 @@ export const batchActionTypes = {
 };
 
 export const runRulesOnUpdateFieldBatch = (
-    program: ?TrackerProgram,
-    foundation: ?RenderFoundation,
+    program: TrackerProgram,
+    foundation: RenderFoundation,
     formId: string,
     dataEntryId: string,
     itemId: string,
     orgUnit: Object,
-    enrollment: ?Enrollment,
-    teiValues: ?TEIValues,
+    enrollmentData?: Enrollment,
+    attributeValues?: TEIValues,
     extraActions: Array<ReduxAction<any, any>> = [],
     uid: string,
 ) => {
-    let rulesActions = [];
-    if (program && foundation) {
-        rulesActions = getRulesActionsForTEI(
-            program,
-            foundation,
-            formId,
-            orgUnit,
-            enrollment,
-            teiValues,
-        );
-    }
+    const effects = getApplicableRuleEffectsForTrackerProgram({
+        program,
+        orgUnit,
+        enrollmentData,
+        attributeValues,
+    });
 
     return batchActions([
-        ...rulesActions,
+        updateRulesEffects(effects, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
         ...extraActions,
     ], batchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT);
