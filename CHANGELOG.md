@@ -1,3 +1,10 @@
+## [1.62.18](https://github.com/dhis2/capture-app/compare/v1.62.17...v1.62.18) (2022-01-04)
+
+
+### Bug Fixes
+
+* cypress test with hardcored 2021 year ([#2390](https://github.com/dhis2/capture-app/issues/2390)) ([b658b10](https://github.com/dhis2/capture-app/commit/b658b10195e2e8dc16a8990ea26fc79ae3450b78))
+
 ## [1.62.17](https://github.com/dhis2/capture-app/compare/v1.62.16...v1.62.17) (2021-12-28)
 
 
