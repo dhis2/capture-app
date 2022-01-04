@@ -23,12 +23,12 @@ type Request = {
 };
 
 export function useOrgUnitGroups(orgUnitId: ?string): ?Array<OrgUnitGroup> {
-    const lastRequest = useRef<Request>({ orgUnitId, requestId: 0, fetching: false });
+    const lastRequest = useRef<Request>({ orgUnitId: undefined, requestId: 0, fetching: false });
     const [orgUnitGroups, setOrgUnitGroups] = useState();
 
     let currentRequestId;
 
-    if (orgUnitId && orgUnitId != lastRequest.current.orgUnitId) {
+    if (orgUnitId && orgUnitId !== lastRequest.current.orgUnitId) {
         currentRequestId = lastRequest.current.requestId + 1;
         lastRequest.current = {
             orgUnitId,
