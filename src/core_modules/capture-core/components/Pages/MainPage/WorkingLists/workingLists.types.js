@@ -109,6 +109,7 @@ export type CommonQueryData = {|
     programId: string,
     orgUnitId: string,
     categories: ?Object,
+    ouMode: string,
 |}
 
 export type ColumnConfig = {
