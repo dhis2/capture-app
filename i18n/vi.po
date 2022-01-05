@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
+"POT-Creation-Date: 2021-11-29T10:05:06.420Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -812,14 +812,14 @@ msgstr "Tìm kiếm đơn vị không thành công. Xem nhật ký để biết 
 msgid "tracked entity instance"
 msgstr "thực thể được theo dõi"
 
+msgid "Set coordinate"
+msgstr "Đặt tọa độ"
+
 msgid "Latitude"
 msgstr "Vĩ độ"
 
 msgid "Longitude"
 msgstr "Kinh độ"
-
-msgid "Set coordinate"
-msgstr "Đặt tọa độ"
 
 msgid "Date"
 msgstr "Ngày"
