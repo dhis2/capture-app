@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-12-07T16:17:10.207Z\n"
+"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -697,6 +697,9 @@ msgstr "本次活动暂无反馈"
 msgid "Registered events"
 msgstr "登记的事件"
 
+msgid "Please select {{category}}."
+msgstr "请选择 {{category}}."
+
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "或者在{{program}}中查看您可以访问的所有记录"
 
@@ -995,7 +998,7 @@ msgid "This event doesn't have any comments"
 msgstr "此事件没有任何评论"
 
 msgid "stage not found in rules execution"
-msgstr ""
+msgstr "在规则执行中找不到阶段"
 
 msgid "Event completed"
 msgstr "事件完成"

@@ -6,7 +6,7 @@ import { DataEntryComponent } from './DataEntry.component';
 import { useLifecycle } from './hooks';
 import { getUpdateFieldActions } from './dataEntry.actions';
 
-export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, trackedEntityInstanceAttributes }: Props) => {
+export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, clientAttributesWithSubvalues }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, trackedEntit
     const dataEntryContext = useLifecycle({
         programAPI,
         orgUnitId,
-        trackedEntityInstanceAttributes,
+        clientAttributesWithSubvalues,
         dataEntryId,
         itemId,
     });

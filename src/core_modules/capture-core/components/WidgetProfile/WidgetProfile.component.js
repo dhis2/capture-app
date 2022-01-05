@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacersNum } from '@dhis2/ui';
@@ -10,10 +10,9 @@ import { errorCreator } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
-import { convertValue as convertServerToClient } from '../../converters/serverToClient';
 import type { Props } from './widgetProfile.types';
 import { DataEntry } from './DataEntry';
-import { useProgram, useTrackedEntityInstances } from './hooks';
+import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues } from './hooks';
 
 const styles = {
     header: {
@@ -38,29 +37,22 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
 
-    const formatValue = (value, valueType) => {
-        const convertToClientValue = convertServerToClient(value, valueType);
-        return convertClientToView(convertToClientValue, valueType);
-    };
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstances);
 
-    const mergeAttributes = () => {
-        const { programTrackedEntityAttributes } = program;
-        const { attributes } = trackedEntityInstances;
-
-        return programTrackedEntityAttributes
-            .filter(item => item.displayInList)
-            .reduce((acc, curr) => {
-                const foundAttribute = attributes.find(item => item.attribute === curr.trackedEntityAttribute.id);
-
-                acc.push({
-                    reactKey: curr.trackedEntityAttribute.id,
-                    key: curr.trackedEntityAttribute.displayName,
-                    value: formatValue(foundAttribute?.value, foundAttribute?.valueType),
-                });
-
-                return acc;
-            }, []);
-    };
+    const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
+        .filter(item => item.displayInList)
+        .map(({ optionSet, attribute, key, value: clientValue, valueType }) => {
+            let value;
+            if (optionSet && optionSet.id) {
+                const selectedOption = optionSet.options.find(option => option.code === clientValue);
+                value = selectedOption && selectedOption.name;
+            } else {
+                value = convertClientToView(clientValue, valueType);
+            }
+            return {
+                attribute, key, value,
+            };
+        }), [clientAttributesWithSubvalues]);
 
     const renderProfile = () => {
         if (loading) {
@@ -72,7 +64,10 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
             return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
         }
 
-        return <FlatList dataTest="profile-widget-flatlist" list={mergeAttributes()} />;
+        return (<FlatList
+            dataTest="profile-widget-flatlist"
+            list={displayInListAttributes}
+        />);
     };
 
     return (
@@ -99,7 +94,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                     onCancel={() => setToggleEditModal(false)}
                     programAPI={program}
                     orgUnitId={orgUnitId}
-                    trackedEntityInstanceAttributes={trackedEntityInstances.attributes}
+                    clientAttributesWithSubvalues={clientAttributesWithSubvalues}
                 />
             )}
         </div>

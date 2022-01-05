@@ -15,5 +15,5 @@ export type Props = {|
     programAPI: any,
     orgUnitId: string,
     onCancel: () => void,
-    trackedEntityInstanceAttributes: Array<any>,
+    clientAttributesWithSubvalues: Array<any>,
 |};

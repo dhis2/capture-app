@@ -1,3 +1,45 @@
+## [1.62.18](https://github.com/dhis2/capture-app/compare/v1.62.17...v1.62.18) (2022-01-04)
+
+
+### Bug Fixes
+
+* cypress test with hardcored 2021 year ([#2390](https://github.com/dhis2/capture-app/issues/2390)) ([b658b10](https://github.com/dhis2/capture-app/commit/b658b10195e2e8dc16a8990ea26fc79ae3450b78))
+
+## [1.62.17](https://github.com/dhis2/capture-app/compare/v1.62.16...v1.62.17) (2021-12-28)
+
+
+### Bug Fixes
+
+* [TECH-669] Validate input params on EnrollmentEventNew ([52cf77d](https://github.com/dhis2/capture-app/commit/52cf77df5af77283c2b2aa65361db1efe705fede))
+
+## [1.62.16](https://github.com/dhis2/capture-app/compare/v1.62.15...v1.62.16) (2021-12-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([78727e5](https://github.com/dhis2/capture-app/commit/78727e5769717f9579e0aa3be9737669cf590858))
+
+## [1.62.15](https://github.com/dhis2/capture-app/compare/v1.62.14...v1.62.15) (2021-12-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b1a6301](https://github.com/dhis2/capture-app/commit/b1a630104ab92eaa54a787e08ce49d3a31e8e811))
+
+## [1.62.14](https://github.com/dhis2/capture-app/compare/v1.62.13...v1.62.14) (2021-12-22)
+
+
+### Bug Fixes
+
+* [DHIS2-12124] Category option not required for viewing WorkingList ([#2365](https://github.com/dhis2/capture-app/issues/2365)) ([f927956](https://github.com/dhis2/capture-app/commit/f9279563036e940942aba9b3a65658cda21e5618))
+
+## [1.62.13](https://github.com/dhis2/capture-app/compare/v1.62.12...v1.62.13) (2021-12-21)
+
+
+### Bug Fixes
+
+* [DHIS2-12126] Capture crash when navigating back from event with CategoryOption ([2e476f0](https://github.com/dhis2/capture-app/commit/2e476f0a3e6f23dd33e0fdf12673fa2fe97645a8))
+
 ## [1.62.12](https://github.com/dhis2/capture-app/compare/v1.62.11...v1.62.12) (2021-12-18)
 
 

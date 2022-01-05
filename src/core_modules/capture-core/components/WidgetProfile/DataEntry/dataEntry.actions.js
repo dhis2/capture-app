@@ -12,7 +12,7 @@ import { startRunRulesPostUpdateField } from '../../DataEntry';
 import { getRulesActionsForTEI } from './ProgramRules';
 import { addFormData } from '../../D2Form/actions/form.actions';
 
-const batchActionTypes = {
+const dataEntryActionTypes = {
     UPDATE_FIELD_PROFILE_ACTION_BATCH: 'UpdateFieldProfileActionBatch',
     OPEN_DATA_ENTRY_PROFILE_ACTION_BATCH: 'OpenDataEntryProfileActionBatch',
 };
@@ -70,7 +70,7 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
             rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
         ],
-        batchActionTypes.UPDATE_FIELD_PROFILE_ACTION_BATCH,
+        dataEntryActionTypes.UPDATE_FIELD_PROFILE_ACTION_BATCH,
     );
 };
 
@@ -85,5 +85,5 @@ export const getOpenDataEntryActions = ({
 }) =>
     batchActions(
         [...loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude), addFormData(`${dataEntryId}-${itemId}`, formValues)],
-        batchActionTypes.OPEN_DATA_ENTRY_PROFILE_ACTION_BATCH,
+        dataEntryActionTypes.OPEN_DATA_ENTRY_PROFILE_ACTION_BATCH,
     );

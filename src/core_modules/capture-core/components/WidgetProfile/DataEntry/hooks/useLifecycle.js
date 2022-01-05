@@ -19,13 +19,13 @@ import { getRulesActionsForTEI } from '../ProgramRules';
 export const useLifecycle = ({
     programAPI,
     orgUnitId,
-    trackedEntityInstanceAttributes,
+    clientAttributesWithSubvalues,
     dataEntryId,
     itemId,
 }: {
     programAPI: any,
     orgUnitId: string,
-    trackedEntityInstanceAttributes: Array<any>,
+    clientAttributesWithSubvalues: Array<any>,
     dataEntryId: string,
     itemId: string,
 }) => {
@@ -41,7 +41,7 @@ export const useLifecycle = ({
     const staticPatternValues = { orgUnitCode: orgUnit?.code || orgUnitId };
     const rulesContainer: ProgramRulesContainer = useRulesContainer(programAPI);
     const formFoundation: RenderFoundation = useFormFoundation(programAPI);
-    const formValues = useFormValues({ formFoundation, trackedEntityInstanceAttributes, staticPatternValues });
+    const { formValues, clientValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues, staticPatternValues });
     const programTrackedEntityAttributes: TrackedEntityAttributes = useProgramTrackedEntityAttributes(programAPI);
     const optionSets: OptionSets = useOptionSets(programTrackedEntityAttributes, dataElements);
     const trackedEntityName: string = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
@@ -63,7 +63,7 @@ export const useLifecycle = ({
             orgUnit &&
             Object.entries(orgUnit).length > 0 &&
             Object.entries(formFoundation).length > 0 &&
-            Object.entries(formValues).length > 0 &&
+            Object.entries(clientValues).length > 0 &&
             Object.entries(rulesContainer).length > 0
         ) {
             dispatch(
@@ -72,6 +72,7 @@ export const useLifecycle = ({
                     formId: `${dataEntryId}-${itemId}`,
                     orgUnit,
                     trackedEntityAttributes: programTrackedEntityAttributes,
+                    teiValues: clientValues,
                     optionSets,
                     rulesContainer,
                     otherEvents,
@@ -85,10 +86,10 @@ export const useLifecycle = ({
         orgUnit,
         formFoundation,
         programTrackedEntityAttributes,
-        trackedEntityInstanceAttributes,
+        clientAttributesWithSubvalues,
         optionSets,
         rulesContainer,
-        formValues,
+        clientValues,
         dataEntryId,
         itemId,
         otherEvents,

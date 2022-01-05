@@ -55,12 +55,17 @@ const MainPageContainer = () => {
     const MainPageStatus = useMemo(() => {
         const selectedProgram = programId && programCollection.get(programId);
         if (selectedProgram?.categoryCombination) {
-            if (!categories) return MainPageStatuses.SHOW_WORKING_LIST;
+            if (!categories) return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             const programCategories = Array.from(selectedProgram.categoryCombination.categories.values());
 
             if (programCategories.some(category => !categories || !categories[category.id])) {
                 return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             }
+
+            if (!orgUnitId && !showAllAccessible) {
+                return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
+            }
+
             return MainPageStatuses.SHOW_WORKING_LIST;
         }
 

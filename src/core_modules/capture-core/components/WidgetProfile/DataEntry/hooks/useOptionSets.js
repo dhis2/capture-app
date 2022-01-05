@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import type { TrackedEntityAttributes, DataElements } from 'capture-core-utils/rulesEngine';
 
 const getOptionSets = array =>
+    array &&
     Object.values(array)?.reduce(
         (acc, currentValue) =>
             // $FlowFixMe[incompatible-type]
