@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import { withLabel as UIWithLabel } from 'capture-ui';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
-import { withDataElementDescription } from './withDataElementDescription';
+import { withDescription } from './withDescription';
 
 const getStyles = (theme: Theme) => ({
     label: {
@@ -130,6 +130,7 @@ export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.Comp
 
     const Label = (props: Props) => {
         const { label, required, icon, classes, dataElementDescription } = props;
+        console.log(props);
         return (
             <div
                 className={classes.container}
@@ -151,7 +152,7 @@ export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.Comp
             </div>
         );
     };
-    const LabelWithStyles = withDataElementDescription()(withStyles(getStylesLabel)(Label));
+    const LabelWithStyles = withDescription()(withStyles(getStylesLabel)(Label));
     const ProjectLabelHOC = withStyles(getStyles)((props: Props) => {
         const { label, required, icon, ...passOnProps } = props;
         const { classes, ...propsWithoutClasses } = props;

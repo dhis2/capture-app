@@ -13,6 +13,7 @@ const getStylesLabel = () => ({
     },
     popOverContainer: {
         padding: `${spacers.dp8} ${spacers.dp12}`,
+        wordBreak: 'break-word',
     },
     label: {
         fontWeight: 600,
@@ -23,7 +24,7 @@ const getStylesLabel = () => ({
 type State = {
     popOverOpen: boolean
 }
-export const withDataElementDescription = () =>
+export const withDescription = () =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(getStylesLabel)(class DataElementDescription extends React.Component<Object, State> {
             iconRef: any;
@@ -65,9 +66,7 @@ export const withDataElementDescription = () =>
             }
 
             render() {
-                const { dataElement, classes, ...passOnProps } = this.props;
-                const description = dataElement && dataElement.description;
-                const url = dataElement && dataElement.url;
+                const { description, url, classes, ...passOnProps } = this.props;
 
                 if (!description && !url) {
                     return <InnerComponent {...passOnProps} />;
