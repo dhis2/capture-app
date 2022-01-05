@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-05T10:50:57.680Z\n"
-"PO-Revision-Date: 2022-01-05T10:50:57.680Z\n"
+"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
+"PO-Revision-Date: 2021-12-21T16:14:01.098Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1099,6 +1099,14 @@ msgstr "Person Profile"
 
 msgid "Edit"
 msgstr "Edit"
+msgid "You can’t add any more events in this program"
+msgstr ""
+
+msgid "Cancel without saving"
+msgstr ""
+
+msgid "Choose a stage for a new event"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
