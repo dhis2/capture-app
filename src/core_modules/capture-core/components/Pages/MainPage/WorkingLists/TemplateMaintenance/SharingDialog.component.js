@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useCallback } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import D2UISharingDialog from '@dhis2/d2-ui-sharing-dialog';
 import { getD2 } from '../../../../../d2';
@@ -12,7 +12,7 @@ const getStyles = () => ({
 });
 
 type Props = {
-    onClose: () => void,
+    onClose: Function,
     open: boolean,
     templateId: string,
     classes: Object,
@@ -20,11 +20,23 @@ type Props = {
 
 const SharingDialog = (props: Props) => {
     const { onClose, open, templateId, classes } = props;
+    const handleClose = useCallback(({
+        externalAccess,
+        publicAccess,
+        userAccesses,
+    }) =>
+        onClose({
+            externalAccess,
+            publicAccess,
+            userAccesses: userAccesses.map(({ id, access }) => ({ id, access })),
+        }),
+    [onClose]);
+
     return (
         <D2UISharingDialog
             open={open}
             id={templateId}
-            onRequestClose={onClose}
+            onRequestClose={handleClose}
             type={'eventFilter'}
             d2={getD2()}
             className={classes.dialog}
