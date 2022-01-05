@@ -8,12 +8,12 @@ import type { RenderFoundation } from '../../../metaData';
 const getFunctionFromString = (functionAsString: string) => Function(`return ${functionAsString}`)();
 
 export function convertDataEntryValuesToClientValues(
-    dataEntryValues: Object,
+    dataEntryValues: ?Object,
     dataEntryValuesMeta: Object,
     foundation: RenderFoundation,
 ) {
     if (!dataEntryValues) {
-        return null;
+        return undefined;
     }
     const eventValues = Object
         .keys(dataEntryValues)

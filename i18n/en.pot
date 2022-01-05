@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-12-02T13:26:20.780Z\n"
-"PO-Revision-Date: 2021-12-02T13:26:20.780Z\n"
+"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
+"PO-Revision-Date: 2021-12-21T16:14:01.098Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -648,6 +648,18 @@ msgstr "Create a new event in this program."
 msgid "View working list in this program."
 msgstr "View working list in this program."
 
+msgid "Page is missing required values from URL"
+msgstr "Page is missing required values from URL"
+
+msgid "Program is not valid"
+msgstr "Program is not valid"
+
+msgid "Org unit is not valid with current program"
+msgstr "Org unit is not valid with current program"
+
+msgid "There was an error opening the Page"
+msgstr "There was an error opening the Page"
+
 msgid "Enrollment{{escape}} New Event"
 msgstr "Enrollment{{escape}} New Event"
 
@@ -662,6 +674,9 @@ msgstr "There are no feedbacks for this event"
 
 msgid "There are no indicators for this event"
 msgstr "There are no indicators for this event"
+
+msgid "Program stage is invalid"
+msgstr "Program stage is invalid"
 
 msgid "Report"
 msgstr "Report"
@@ -701,6 +716,9 @@ msgstr "There are no feedback for this event"
 
 msgid "Registered events"
 msgstr "Registered events"
+
+msgid "Please select {{category}}."
+msgstr "Please select {{category}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "Or see all records accessible to you in {{program}} "
@@ -1008,6 +1026,9 @@ msgstr "Write a comment about this event"
 msgid "This event doesn't have any comments"
 msgstr "This event doesn't have any comments"
 
+msgid "stage not found in rules execution"
+msgstr "stage not found in rules execution"
+
 msgid "Event completed"
 msgstr "Event completed"
 
@@ -1054,6 +1075,15 @@ msgstr "Profile widget could not be loaded. Please try again later"
 
 msgid "Person Profile"
 msgstr "Person Profile"
+
+msgid "You can’t add any more events in this program"
+msgstr ""
+
+msgid "Cancel without saving"
+msgstr ""
+
+msgid "Choose a stage for a new event"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"

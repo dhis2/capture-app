@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-12-02T13:26:20.780Z\n"
+"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Pashto (https://www.transifex.com/hisp-uio/teams/100509/ps/)\n"
@@ -692,6 +692,9 @@ msgstr ""
 msgid "Registered events"
 msgstr "ثبت شوې پېښې"
 
+msgid "Please select {{category}}."
+msgstr ""
+
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
 
@@ -987,6 +990,9 @@ msgid "Write a comment about this event"
 msgstr ""
 
 msgid "This event doesn't have any comments"
+msgstr ""
+
+msgid "stage not found in rules execution"
 msgstr ""
 
 msgid "Event completed"

@@ -10,7 +10,6 @@ import type {
     OutputEffects,
     RuleVariables,
     RulesEngineInput,
-    EventData,
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
     IDateUtils,
@@ -219,9 +218,9 @@ export class RulesEngine {
     */
 
     getProgramRuleEffects({
-        programRulesContainer,
+        programRulesContainer: { programRules, programRuleVariables, constants },
         currentEvent,
-        eventsContainer,
+        otherEvents,
         dataElements,
         trackedEntityAttributes,
         selectedEntity,
@@ -230,32 +229,19 @@ export class RulesEngine {
         optionSets,
     }: RulesEngineInput): OutputEffects {
         const variablesHash = this.variableService.getVariables({
-            programRulesContainer,
-            currentEvent,
-            eventsContainer,
+            programRuleVariables,
+            currentEvent: currentEvent ?? undefined,
+            otherEvents: otherEvents ?? undefined,
             dataElements,
             selectedEntity,
             trackedEntityAttributes,
             selectedEnrollment,
             selectedOrgUnit,
             optionSets,
+            constants,
         });
 
-        // Sort the event arrays from earliest to latest registration
-        if (eventsContainer) {
-            const compareEvents = (first: EventData, second: EventData): number => (
-                this.dateUtils.compareDates(first.eventDate, second.eventDate)
-            );
-            eventsContainer.all.sort(compareEvents);
-            if (eventsContainer.byStage) {
-                for (const programStageId of Object.keys(eventsContainer.byStage)) {
-                    eventsContainer.byStage[programStageId].sort(compareEvents);
-                }
-            }
-        }
-
         const dhisFunctions = d2Functions(this.dateUtils, this.variableService, variablesHash);
-        const programRules = programRulesContainer.programRules;
 
         if (!programRules) {
             return [];

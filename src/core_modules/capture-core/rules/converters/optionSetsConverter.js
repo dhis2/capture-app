@@ -6,7 +6,7 @@ import type {
 import type {
     OptionSet,
     OptionSets,
-} from 'capture-core-utils/rulesEngine/rulesEngine.types';
+} from 'capture-core-utils/rulesEngine';
 
 function convertOptionSet(optionSet: CachedOptionSet): OptionSet {
     const options = optionSet.options.map((option: CachedOption) => ({

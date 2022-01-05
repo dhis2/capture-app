@@ -37,7 +37,7 @@ export function getRulesEffectsProcessor(
 ) {
     const idNamesArray = [idNames.DATA_ELEMENT_ID, idNames.TRACKED_ENTITY_ATTRIBUTE_ID];
 
-    function createEffectsWithExistingIds(
+    function createEffectsForConfiguredDataTypes(
         effect: ProgramRuleEffect,
         getOutputEffect: () => any): any {
         return idNamesArray
@@ -55,7 +55,7 @@ export function getRulesEffectsProcessor(
     function createErrorDetectionEffect(
         effect: ProgramRuleEffect,
         type: $Values<typeof effectActions>): any {
-        const result = createEffectsWithExistingIds(effect, (): any => ({
+        const result = createEffectsForConfiguredDataTypes(effect, (): any => ({
             type,
             message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         }));
@@ -107,7 +107,9 @@ export function getRulesEffectsProcessor(
 
     function createAssignValueEffect(
         effect: ProgramRuleEffect,
-        element: DataElement | TrackedEntityAttribute): AssignOutputEffect {
+        element: DataElement | TrackedEntityAttribute,
+        targetDataType: $Values<typeof rulesEngineEffectTargetDataTypes>,
+    ): AssignOutputEffect {
         const normalizedValue = normalizeRuleVariable(effect.data, element.valueType);
         const outputValue = convertNormalizedValueToOutputValue(normalizedValue, element.valueType);
 
@@ -115,6 +117,7 @@ export function getRulesEffectsProcessor(
             type: effectActions.ASSIGN_VALUE,
             id: element.id,
             value: outputValue,
+            targetDataType,
         };
     }
 
@@ -124,16 +127,26 @@ export function getRulesEffectsProcessor(
         trackedEntityAttributes: ?TrackedEntityAttributes): Array<AssignOutputEffect> {
         const effects = [];
         if (dataElements && effect.dataElementId && dataElements[effect.dataElementId]) {
-            effects.push(createAssignValueEffect(effect, dataElements[effect.dataElementId]));
+            effects.push(createAssignValueEffect(
+                effect,
+                dataElements[effect.dataElementId],
+                rulesEngineEffectTargetDataTypes.DATA_ELEMENT),
+            );
         }
-        if (trackedEntityAttributes && effect.trackedEntityAttributeId && trackedEntityAttributes[effect.trackedEntityAttributeId]) {
-            effects.push(createAssignValueEffect(effect, trackedEntityAttributes[effect.trackedEntityAttributeId]));
+        if (trackedEntityAttributes &&
+            effect.trackedEntityAttributeId &&
+            trackedEntityAttributes[effect.trackedEntityAttributeId]) {
+            effects.push(createAssignValueEffect(
+                effect,
+                trackedEntityAttributes[effect.trackedEntityAttributeId],
+                rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE),
+            );
         }
         return effects;
     }
 
     function processHideField(effect: ProgramRuleEffect): Array<HideOutputEffect> {
-        return createEffectsWithExistingIds(effect, () => ({
+        return createEffectsForConfiguredDataTypes(effect, () => ({
             type: effectActions.HIDE_FIELD,
         }));
     }
@@ -166,7 +179,7 @@ export function getRulesEffectsProcessor(
     }
 
     function processMakeCompulsory(effect: ProgramRuleEffect): Array<CompulsoryEffect> {
-        return createEffectsWithExistingIds(effect, () => ({
+        return createEffectsForConfiguredDataTypes(effect, () => ({
             type: effectActions.MAKE_COMPULSORY,
         }));
     }
@@ -197,21 +210,21 @@ export function getRulesEffectsProcessor(
     }
 
     function processHideOptionGroup(effect: ProgramRuleEffect): any {
-        return createEffectsWithExistingIds(effect, () => ({
+        return createEffectsForConfiguredDataTypes(effect, () => ({
             type: effectActions.HIDE_OPTION_GROUP,
             optionGroupId: effect.optionGroupId,
         }));
     }
 
     function processHideOption(effect: ProgramRuleEffect): any {
-        return createEffectsWithExistingIds(effect, () => ({
+        return createEffectsForConfiguredDataTypes(effect, () => ({
             type: effectActions.HIDE_OPTION,
             optionId: effect.optionId,
         }));
     }
 
     function processShowOptionGroup(effect: ProgramRuleEffect): any {
-        return createEffectsWithExistingIds(effect, () => ({
+        return createEffectsForConfiguredDataTypes(effect, () => ({
             type: effectActions.SHOW_OPTION_GROUP,
             optionGroupId: effect.optionGroupId,
         }));
