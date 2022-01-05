@@ -130,7 +130,6 @@ export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.Comp
 
     const Label = (props: Props) => {
         const { label, required, icon, classes, dataElementDescription } = props;
-        console.log(props);
         return (
             <div
                 className={classes.container}
