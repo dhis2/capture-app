@@ -1,4 +1,15 @@
 // @flow
+import type {
+    ProgramRuleVariable,
+    EventData,
+    EventsData,
+    TEIValues,
+    Enrollment,
+    OrgUnit,
+    OptionSets,
+    CompareDates,
+    Constants,
+} from './services/VariableService';
 import { typeof effectActions, typeof rulesEngineEffectTargetDataTypes } from './constants';
 
 export type OutputEffect = {
@@ -70,78 +81,16 @@ export type ProgramRule = {
     priority: number,
     condition: string,
     description?: ?string,
-    displayName: string,
+    displayName: string, // TODO: Refactor and remove
     programId: string,
     programStageId?: ?string,
     programRuleActions: Array<ProgramRuleAction>,
 };
 
-export type ProgramRuleVariable = {
-    id: string,
-    displayName: string,
-    programRuleVariableSourceType: string,
-    programId: string,
-    dataElementId?: ?string,
-    trackedEntityAttributeId?: ?string,
-    programStageId?: ?string,
-    useNameForOptionSet?: ?boolean,
-};
-
-type Option = {
-    id: string,
-    code: string,
-    displayName: string,
-};
-
-export type OptionSet = {
-    id: string,
-    displayName: string,
-    options: Array<Option>,
-};
-
-export type OptionSets = {
-    [id: string]: OptionSet,
-}
-
-type Constant = {
-    id: string,
-    displayName: string,
-    value: any,
-};
-
-export type Constants = Array<Constant>;
-
 export type ProgramRulesContainer = {
-    programRulesVariables: ?Array<ProgramRuleVariable>,
+    programRuleVariables: ?Array<ProgramRuleVariable>,
     programRules: ?Array<ProgramRule>,
     constants?: ?Constants,
-};
-
-type EventMain = {
-    eventId?: string,
-    programId?: string,
-    programStageId?: string,
-    orgUnitId?: string,
-    orgUnitName?: string,
-    trackedEntityInstanceId?: string,
-    enrollmentId?: string,
-    enrollmentStatus?: string,
-    status?: string,
-    eventDate?: string,
-    dueDate?: string,
-};
-
-export type EventValues = {
-    [elementId: string]: any,
-};
-
-export type EventData = EventValues & EventMain;
-
-export type EventsData = Array<EventData>;
-
-export type EventsDataContainer = {
-    all: EventsData,
-    byStage: { [stageId: string]: EventsData },
 };
 
 export type DataElement = {
@@ -174,29 +123,14 @@ export type TrackedEntityAttributes = {
     [id: string]: TrackedEntityAttribute
 };
 
-export type Enrollment = {
-    enrollmentDate?: string,
-    incidentDate?: string,
-    enrollmentId?: string,
-};
-
-export type TEIValues = {
-    [attributeId: string]: any,
-};
-
-export type OrgUnit = {
-    id: string,
-    name: string,
-};
-
 export type RulesEngineInput = {|
     programRulesContainer: ProgramRulesContainer,
-    currentEvent: ?EventData,
-    eventsContainer: ?EventsDataContainer,
+    currentEvent?: ?EventData,
+    otherEvents?: ?EventsData,
     dataElements: ?DataElements,
-    selectedEntity: ?TEIValues,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-    selectedEnrollment: ?Enrollment,
+    selectedEntity?: ?TEIValues,
+    trackedEntityAttributes?: ?TrackedEntityAttributes,
+    selectedEnrollment?: ?Enrollment,
     selectedOrgUnit: OrgUnit,
     optionSets: OptionSets,
 |}
@@ -209,7 +143,7 @@ export interface IDateUtils {
     weeksBetween(firstRulesDate: string, secondRulesDate: string): number;
     monthsBetween(firstRulesDate: string, secondRulesDate: string): number;
     yearsBetween(firstRulesDate: string, secondRulesDate: string): number;
-    compareDates(firstRulesDate: string, secondRulesDate: string): number;
+    +compareDates: CompareDates;
     addDays(rulesDate: string, daysToAdd: string): string;
 }
 

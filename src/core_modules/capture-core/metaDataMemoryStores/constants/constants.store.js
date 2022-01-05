@@ -1,11 +1,11 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 
-type Constant = {
+type Constant = {|
     id: string,
     displayName: string,
     value: any,
-};
+|};
 
 class ConstantStore {
     _constants: ?Array<Constant>;

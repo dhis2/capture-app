@@ -22,6 +22,7 @@ const getSuggestedDateByNextScheduleDate = (id, eventData) => {
 
 const getSuggestedDateByStandardInterval = (standardInterval, eventData) => {
     const events = eventData
+        .filter(event => event.eventDate)
         .map(event => ({ eventDate: convertDate(event.eventDate) }))
         .sort(sortByMostRecentDate);
     if (!events.length) { return undefined; }
@@ -29,7 +30,6 @@ const getSuggestedDateByStandardInterval = (standardInterval, eventData) => {
     return moment(events[0].eventDate).add(standardInterval, 'days').format();
 };
 
-/* eslint-disable complexity */
 /**
  * Based on this docs https://docs.google.com/document/d/1I9-xc1oA95cWb64MHmIJXTHXQnxzi1SJ3RUmiuzSh78/edit#heading=h.6omlcjr0bk5n
  * to determine the suggested schedule date
