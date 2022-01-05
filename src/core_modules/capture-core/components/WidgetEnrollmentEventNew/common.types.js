@@ -1,12 +1,5 @@
 // @flow
-import type { OrgUnitGroup } from 'capture-core-utils/rulesEngine';
-
-export type OrgUnit = {
-    id: string,
-    name: string,
-    code: string,
-    groups: Array<OrgUnitGroup>,
-};
+export type { OrgUnit } from 'capture-core-utils/rulesEngine';
 
 export type ExternalSaveHandler = (eventServerValues: Object, uid: string) => void;
 

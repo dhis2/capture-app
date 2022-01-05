@@ -51,10 +51,16 @@ export type Enrollment = {
     +enrollmentId?: string,
 };
 
-export type OrgUnit = {
+export type OrgUnitGroup = {
     id: string,
     name: string,
     code: string,
+};
+
+export type OrgUnit = {
+    id: string,
+    name: string,
+    groups: Array<OrgUnitGroup>,
 };
 
 type Option = {

@@ -7,6 +7,7 @@ export type {
     TEIValues,
     Enrollment,
     OrgUnit,
+    OrgUnitGroup,
     OptionSet,
     OptionSets,
     CompareDates,

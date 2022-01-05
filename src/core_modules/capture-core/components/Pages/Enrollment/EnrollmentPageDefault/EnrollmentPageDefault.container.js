@@ -7,12 +7,12 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useCommonEnrollmentDomainData, updateEnrollmentAttributeValues } from '../../common/EnrollmentOverviewDomain';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
+import { useOrganisationUnit } from '../../../../dataQueries';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
     useProgramMetadata,
     useHideWidgetByRuleLocations,
     useProgramStages,
-    useOrganisationUnit,
     useRuleEffects,
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';

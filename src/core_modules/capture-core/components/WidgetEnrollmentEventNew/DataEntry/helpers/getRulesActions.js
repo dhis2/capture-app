@@ -8,7 +8,7 @@ import {
     updateRulesEffects,
 } from '../../../../rules';
 import type { RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
-import type { OrgUnit, EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
+import type { EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
 
 export const getRulesActions = ({
     state, // temporary

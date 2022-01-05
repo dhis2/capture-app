@@ -10,5 +10,6 @@ export type {
     OptionSet,
     OptionSets,
     OrgUnit,
+    OrgUnitGroup,
     ProgramRuleVariable,
 } from './services/VariableService';
