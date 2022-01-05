@@ -1,6 +1,6 @@
 // @flow
 import React, { type ComponentType, useContext, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { Grid, Paper, withStyles } from '@material-ui/core';
@@ -56,8 +56,13 @@ const DialogButtons = ({ onCancel, onSave }) => (
     </>
 );
 
-const CardListButton = (({ teiId, orgUnitId, programId }) => {
+const CardListButton = (({ teiId, orgUnitId }) => {
     const dispatch = useDispatch();
+    const { programId } = useSelector(({
+        router: {
+            location: { query },
+        },
+    }) => ({ programId: query.programId }));
 
     return (
         <Button
@@ -104,7 +109,6 @@ const RegistrationDataEntryPlain = ({
         <CardListButton
             teiId={item.id}
             orgUnitId={item.tei.orgUnit}
-            programId={item.tei.programOwners[0].program}
         />
     ), []);
 
