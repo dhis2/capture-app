@@ -6,7 +6,7 @@ import {
 } from '../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { loadOrgUnitCaptureRootsSuccess, loadOrgUnitSearchRootsSuccess } from './init.actions';
 
-const defaultFields = 'id,displayName,path,publicAccess,access,lastUpdated,children[id,displayName,publicAccess,access,path,children::isNotEmpty]';
+const defaultFields = 'id,displayName,code,path,publicAccess,access,lastUpdated,children[id,displayName,code,publicAccess,access,path,children::isNotEmpty]';
 
 function loadCaptureOrgUnitRootsAsync() {
     const currentUser = getCurrentUser();
@@ -46,6 +46,7 @@ async function getOrgUnitCaptureRootsAction() {
         .map(unit => ({
             id: unit.id,
             path: unit.path,
+            code: unit.code,
             displayName: unit.displayName,
         }));
     return loadOrgUnitCaptureRootsSuccess(captureRootsForStore);
@@ -58,6 +59,7 @@ async function getOrgUnitSearchRootsAction() {
         .map(unit => ({
             id: unit.id,
             path: unit.path,
+            code: unit.code,
             displayName: unit.displayName,
         }));
     return loadOrgUnitSearchRootsSuccess(searchRootsForStore);

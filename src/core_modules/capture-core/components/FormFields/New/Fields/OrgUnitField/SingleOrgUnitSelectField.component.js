@@ -67,6 +67,7 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
             id: orgUnit.id,
             name: orgUnit.displayName,
             path: orgUnit.path,
+            code: orgUnit.code,
         });
     }
 
