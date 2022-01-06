@@ -113,8 +113,12 @@ export type apiProgramStage = {
     repeatable?: boolean
 };
 
-type apiProgramTrackedEntityAttribute = {
-    trackedEntityAttribute: { id: string },
+export type apiProgramTrackedEntityAttribute = {
+    trackedEntityAttribute: {
+        id: string,
+        displayName?: ?string,
+        optionSet?: ?apiOptionSet
+    },
     displayInList: boolean,
     searchable: boolean,
     mandatory: boolean,
