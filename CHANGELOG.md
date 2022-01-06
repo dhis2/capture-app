@@ -1,3 +1,10 @@
+## [1.62.19](https://github.com/dhis2/capture-app/compare/v1.62.18...v1.62.19) (2022-01-06)
+
+
+### Bug Fixes
+
+* [DHIS2-12139] add programId to navigation ([#2332](https://github.com/dhis2/capture-app/issues/2332)) ([ea013cf](https://github.com/dhis2/capture-app/commit/ea013cf4a64ea933f17b4b51c9533f0786e0abed))
+
 ## [1.62.18](https://github.com/dhis2/capture-app/compare/v1.62.17...v1.62.18) (2022-01-04)
 
 
