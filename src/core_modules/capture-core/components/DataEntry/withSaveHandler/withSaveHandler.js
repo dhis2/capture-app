@@ -117,7 +117,14 @@ const getSaveHandler = (
             return !this.props.hasGeneralErrors;
         }
 
-        validateForm() {
+        shouldComplete(saveType?: ?string) {
+            if (onIsCompleting) {
+                return onIsCompleting(this.props);
+            }
+            return saveType === 'COMPLETE';
+        }
+
+        validateForm(saveType?: ?string) {
             const formInstance = this.formInstance;
             if (!formInstance) {
                 log.error(
@@ -130,7 +137,7 @@ const getSaveHandler = (
                 };
             }
 
-            const isCompleting = !!(onIsCompleting && onIsCompleting(this.props));
+            const isCompleting = this.shouldComplete(saveType);
 
             const isValid =
                 formInstance.validateFormScrollToFirstFailedField({ isCompleting })
@@ -149,7 +156,7 @@ const getSaveHandler = (
                 return;
             }
 
-            const { error: validateFormError, isValid: isFormValid } = this.validateForm();
+            const { error: validateFormError, isValid: isFormValid } = this.validateForm(saveType);
             if (validateFormError) {
                 return;
             }
