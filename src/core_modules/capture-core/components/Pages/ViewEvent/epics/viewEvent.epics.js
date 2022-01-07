@@ -28,6 +28,7 @@ import {
 } from '../../NewRelationship/newRelationship.actions';
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
+import { urlArguments } from '../../../../utils/url';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -143,9 +144,9 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
             const orgUnitId = state.currentSelections.orgUnitId;
             const showaccessible = state.currentSelections.showaccessible;
             if (showaccessible && !orgUnitId) {
-                return push(`/?programId=${programId}&all`);
+                return push(`/?${urlArguments({ programId })}&all`);
             }
-            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+            return push(`/?${urlArguments({ programId, orgUnitId })}`);
         }));
 
 export const openAddRelationshipForViewEventEpic = (action$: InputObservable) =>
