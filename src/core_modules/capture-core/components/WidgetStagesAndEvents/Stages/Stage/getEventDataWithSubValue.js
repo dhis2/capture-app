@@ -28,8 +28,8 @@ const getOrganisationUnitSubvalue = async (keys: Array<string>) => {
     const { organisationUnits = [] } = await getApi().get(`organisationUnits?filter=id:in:[${ids}]`);
 
     return organisationUnits
-        .reduce((acc, { id, displayName: name }) => {
-            acc[id] = { id, name };
+        .reduce((acc, { id, displayName: name, code }) => {
+            acc[id] = { id, name, code };
             return acc;
         }, {});
 };

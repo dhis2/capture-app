@@ -15,7 +15,7 @@ const getOrganisationUnitSubvalue = async (key: string, querySingleResource: Que
         resource: 'organisationUnits',
         id: key,
         params: {
-            fields: 'id,name',
+            fields: 'id,name,code',
         },
     });
     return { ...organisationUnit };

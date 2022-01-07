@@ -50,6 +50,7 @@ const subValueGetterByElementType = {
                 code: res.code,
                 name: res.displayName,
                 path: res.path,
+                code: res.code,
             }))
             .catch((error) => {
                 log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));

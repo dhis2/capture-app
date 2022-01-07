@@ -61,6 +61,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props> {
         this.props.onBlur({
             id: orgUnit.id,
             name: orgUnit.displayName,
+            code: orgUnit.code,
             path: orgUnit.path,
         });
     }

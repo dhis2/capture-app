@@ -50,8 +50,8 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
                 .organisationUnits
                 .list({
                     fields: [
-                        'id,displayName,path,publicAccess,access,lastUpdated',
-                        'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
+                        'id,displayName,code,path,publicAccess,access,lastUpdated',
+                        'children[id,displayName,code,publicAccess,access,path,children::isNotEmpty]',
                     ].join(','),
                     paging: true,
                     withinUserSearchHierarchy: true,
@@ -76,6 +76,7 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
                 .map(unit => ({
                     id: unit.id,
                     path: unit.path,
+                    code: unit.code,
                     displayName: unit.displayName,
                 }));
             return filteredOrgUnitsRetrieved(resultContainer.searchId, regUnits, resultContainer.searchText);

@@ -32,10 +32,11 @@ const getTeisWithSubvaluesPlain = (querySingleResource: QuerySingleResource, abs
         const { organisationUnits = [] } = await querySingleResource({ resource: 'organisationUnits', params: { filter: `id:in:[${ids}]` } });
 
         return organisationUnits
-            .reduce((acc, { id, displayName: name }) => {
+            .reduce((acc, { id, displayName: name, code }) => {
                 acc[id] = {
                     id,
                     name,
+                    code,
                 };
                 return acc;
             }, {});

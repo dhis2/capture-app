@@ -6,7 +6,7 @@ import {
 } from '../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { loadOrgUnitCaptureRootsSuccess, loadOrgUnitSearchRootsSuccess } from './init.actions';
 
-const defaultFields = 'id,displayName,path,publicAccess,access,lastUpdated,children[id,displayName,publicAccess,access,path,children::isNotEmpty]';
+const defaultFields = 'id,displayName,code,path,publicAccess,access,lastUpdated,children[id,displayName,code,publicAccess,access,path,children::isNotEmpty]';
 
 function loadCaptureOrgUnitRootsAsync() {
     const currentUser = getCurrentUser();
@@ -47,6 +47,7 @@ async function getOrgUnitCaptureRootsAction() {
             id: unit.id,
             path: unit.path,
             displayName: unit.displayName,
+            code: unit.code,
         }));
     return loadOrgUnitCaptureRootsSuccess(captureRootsForStore);
 }
@@ -59,6 +60,7 @@ async function getOrgUnitSearchRootsAction() {
             id: unit.id,
             path: unit.path,
             displayName: unit.displayName,
+            code: unit.code,
         }));
     return loadOrgUnitSearchRootsSuccess(searchRootsForStore);
 }
