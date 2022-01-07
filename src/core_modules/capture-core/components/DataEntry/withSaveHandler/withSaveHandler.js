@@ -15,6 +15,7 @@ import { type RenderFoundation } from '../../../metaData';
 import { MessagesDialogContents } from './MessagesDialogContents';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
 import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { newEventSaveTypes } from '../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/newEventSaveTypes';
 
 type Props = {
     classes: Object,
@@ -121,7 +122,7 @@ const getSaveHandler = (
             if (onIsCompleting) {
                 return onIsCompleting(this.props);
             }
-            return saveType === 'COMPLETE';
+            return [addEventSaveTypes.COMPLETE, newEventSaveTypes.SAVEANDCOMPLETE].includes(saveType);
         }
 
         validateForm(saveType?: ?string) {
