@@ -30,6 +30,7 @@ export const initEventListEpic = (action$: InputObservable) =>
                             programId,
                             orgUnitId,
                             categories,
+                            ouMode: orgUnitId ? 'SELECTED' : 'ACCESSIBLE',
                         },
                         columnsMetaForDataFetching,
                         categoryCombinationId,
