@@ -13,7 +13,7 @@ export type Event = {|
     enrollmentStatus: string,
     event: string,
     occurredAt: string,
-    lastUpdated: string,
+    updatedAt: string,
     orgUnit: string,
     orgUnitName: string,
     program: string,
