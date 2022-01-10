@@ -46,7 +46,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
-    const lastUpdated = Math.max.apply(null, events.map(e => new Date(e.lastUpdated).getTime()));
+    const lastUpdated = Math.max.apply(null, events.map(e => new Date(e.updatedAt).getTime()));
 
     return (<div className={classes.container}>
         {
