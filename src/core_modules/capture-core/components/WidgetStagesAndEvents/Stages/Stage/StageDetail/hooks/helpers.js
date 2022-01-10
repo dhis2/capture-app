@@ -7,12 +7,12 @@ import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
 import { Comments } from '../Comments.component';
 
-const isEventOverdue = (event: ApiEnrollmentEvent) => moment(event.dueDate).isBefore(moment().startOf('day'))
+const isEventOverdue = (event: ApiEnrollmentEvent) => moment(event.scheduledAt).isBefore(moment().startOf('day'))
     && event.status === statusTypes.SCHEDULE;
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
-    const dueDate = moment(event.dueDate);
+    const dueDate = moment(event.scheduledAt);
     const dueDateFromNow = dueDate.from(today);
     const daysUntilDueDate = dueDate.diff(today, 'days');
 
@@ -25,7 +25,7 @@ const getEventStatus = (event: ApiEnrollmentEvent) => {
     }
 
     if (event.status === statusTypes.SCHEDULE) {
-        if (!event.dueDate || !daysUntilDueDate) {
+        if (!event.scheduledAt || !daysUntilDueDate) {
             return { status: statusTypes.SCHEDULE, options: undefined };
         }
 
