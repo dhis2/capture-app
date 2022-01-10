@@ -1,3 +1,4 @@
+import moment from 'moment';
 import '../sharedSteps';
 
 beforeEach(() => {
@@ -374,7 +375,7 @@ And('you are in Child programme registration page', () => {
 And('you fill the form with age 0', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(9)
-        .type('2021-01-01')
+        .type(moment().format('YYYY-MM-DD'))
         .blur();
 });
 
