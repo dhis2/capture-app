@@ -6,5 +6,5 @@ export const actionTypes = {
         'WidgetEventEdit.StartShowEditEventDataEntry',
 };
 
-export const startShowEditEventDataEntry = () =>
-    actionCreator(actionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY)();
+export const startShowEditEventDataEntry = (orgUnit: Object) =>
+    actionCreator(actionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY)({ orgUnit });

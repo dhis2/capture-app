@@ -42,11 +42,11 @@ import {
 export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
-        map(() => {
+        map((action) => {
             const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
-            const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
+            const { orgUnit } = action.payload;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
                 return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
@@ -74,7 +74,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
             const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
             const prevEventMainData = state.viewEventPage.loadedValues.eventContainer.event;
-            const formFoundation = payload.formFoundation;
+            const { formFoundation, orgUnit } = payload;
             const { formClientValues, dataEntryClientValues } = convertDataEntryToClientValues(
                 formFoundation,
                 formValues,
@@ -102,8 +102,6 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                 },
             };
 
-            const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
-
             const serverData = {
                 ...mainDataServerValues,
                 dataValues: Object
@@ -125,12 +123,19 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                 return batchActions([
                     updateEventContainer(eventContainer, orgUnit),
                     updateEnrollmentEvents(eventId, serverData),
-                    startSaveEditEventDataEntry(eventId, serverData, state.currentSelections, enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT),
+                    startSaveEditEventDataEntry(
+                        eventId,
+                        serverData,
+                        state.currentSelections,
+                        orgUnit,
+                        enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT,
+                        enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT,
+                    ),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }
             return batchActions([
                 updateEventContainer(eventContainer, orgUnit),
-                startSaveEditEventDataEntry(eventId, serverData, state.currentSelections),
+                startSaveEditEventDataEntry(eventId, serverData, state.currentSelections, orgUnit),
             ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
         }));
 
@@ -160,7 +165,7 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             const meta = action.meta;
             const viewEventPage = state.viewEventPage;
             const eventContainer = viewEventPage.loadedValues.eventContainer;
-            const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
+            const { orgUnit } = action.payload;
             let actions = [updateEventContainer(eventContainer, orgUnit)];
 
             if (meta.triggerAction === enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT) {

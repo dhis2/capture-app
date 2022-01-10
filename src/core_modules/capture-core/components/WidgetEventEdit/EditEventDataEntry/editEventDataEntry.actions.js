@@ -20,11 +20,11 @@ export const actionTypes = {
 export const cancelEditEventDataEntry = () =>
     actionCreator(actionTypes.CANCEL_EDIT_EVENT_DATA_ENTRY)();
 
-export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)({ itemId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] });
+export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: Object, orgUnit: Object) =>
+    actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)({ itemId, dataEntryId, formFoundation, orgUnit }, { skipLogging: ['formFoundation'] });
 
 
-export const startSaveEditEventDataEntry = (eventId: string, serverData: Object, selections: Object, triggerActionCommit?: ?string, triggerActionRollback?: ?string) =>
+export const startSaveEditEventDataEntry = (eventId: string, serverData: Object, selections: Object, orgUnit: Object, triggerActionCommit?: ?string, triggerActionRollback?: ?string) =>
     actionCreator(actionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY)({ selections }, {
         offline: {
             effect: {
@@ -33,7 +33,7 @@ export const startSaveEditEventDataEntry = (eventId: string, serverData: Object,
                 data: serverData,
             },
             commit: { type: actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED, meta: { selections, eventId, triggerAction: triggerActionCommit } },
-            rollback: { type: actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED, meta: { selections, eventId, triggerAction: triggerActionRollback } },
+            rollback: { type: actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED, meta: { selections, eventId, triggerAction: triggerActionRollback }, payload: { orgUnit } },
         },
     });
 

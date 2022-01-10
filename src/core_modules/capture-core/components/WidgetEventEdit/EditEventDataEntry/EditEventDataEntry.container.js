@@ -31,7 +31,7 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: Object): any => ({
     onUpdateDataEntryField: (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
@@ -70,7 +70,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
-        dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation));
+        const { orgUnit } = ownProps;
+        dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation, orgUnit));
     },
     onCancel: () => {
         window.scrollTo(0, 0);

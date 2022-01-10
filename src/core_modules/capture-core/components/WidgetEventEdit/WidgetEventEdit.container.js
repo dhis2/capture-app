@@ -11,6 +11,7 @@ import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { pageMode } from '../Pages/EnrollmentEditEvent/EnrollmentEditEventPage.constants';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
+import { useOrganisationUnit } from '../../dataQueries';
 
 const styles = {
     header: {
@@ -45,6 +46,12 @@ export const WidgetEventEditPlain = ({
     onGoBack,
 }: Props) => {
     const dispatch = useDispatch();
+    const orgUnitId = useSelector(({
+        router: {
+            location: { query },
+        },
+    }) => query.orgUnitId);
+    const { orgUnit } = useOrganisationUnit(orgUnitId);
     const currentPageMode = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent) ? pageMode.EDIT : pageMode.VIEW;
 
     return (
@@ -59,7 +66,7 @@ export const WidgetEventEditPlain = ({
                     small
                     secondary
                     className={classes.button}
-                    onClick={() => dispatch(startShowEditEventDataEntry())}
+                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit))}
                 >
                     <IconEdit24 />
                     {i18n.t('Edit event')}
@@ -92,6 +99,7 @@ export const WidgetEventEditPlain = ({
                     ) : (
                         <EditEventDataEntry
                             formFoundation={programStage.stageForm}
+                            orgUnit={orgUnit}
                         />
                     )}
                 </div>
