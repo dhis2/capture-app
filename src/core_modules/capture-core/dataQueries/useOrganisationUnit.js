@@ -2,7 +2,6 @@
 import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import log from 'loglevel';
-import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
 import { errorCreator } from '../../capture-core-utils';
 
 export const useOrganisationUnit = (orgUnitId: string, fields?: string) => {
@@ -24,8 +23,6 @@ export const useOrganisationUnit = (orgUnitId: string, fields?: string) => {
         },
     );
 
-    const groups = useOrgUnitGroups(orgUnitId);
-
     useEffect(() => {
         refetch({ variables: { orgUnitId } });
     }, [refetch, orgUnitId]);
@@ -38,16 +35,15 @@ export const useOrganisationUnit = (orgUnitId: string, fields?: string) => {
 
     useEffect(() => {
         setOrgUnit(
-            (loading || !called || error || !groups) ?
+            (loading || !called || error) ?
                 undefined : {
                     id: orgUnitId,
                     name: data?.organisationUnits?.displayName,
                     code: data?.organisationUnits?.code,
-                    groups,
                     ...data,
                 },
         );
-    }, [orgUnitId, groups, data, loading, called, error]);
+    }, [orgUnitId, data, loading, called, error]);
 
     return {
         error,

@@ -1,5 +1,5 @@
 // @flow
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
@@ -28,6 +28,8 @@ export const useLifecycle = ({
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
 }) => {
     const dispatch = useDispatch();
+    const delayRulesExecutionRef = useRef(false);
+    const [rulesExecutionTrigger, setRulesExecutionTrigger] = useState(1);
 
     const dataEntryReadyRef = useRef(false);
     useEffect(() => {
@@ -35,6 +37,7 @@ export const useLifecycle = ({
             ...getOpenDataEntryActions(dataEntryId, itemId),
         ]));
         dataEntryReadyRef.current = true;
+        delayRulesExecutionRef.current = true;
     }, [dispatch, dataEntryId, itemId, program, formFoundation]);
 
     const eventsRef = useRef();
@@ -47,7 +50,10 @@ export const useLifecycle = ({
     // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
-        if (orgUnit) {
+        if (delayRulesExecutionRef.current) {
+            delayRulesExecutionRef.current = false;
+            setRulesExecutionTrigger(-rulesExecutionTrigger);
+        } else if (orgUnit) {
             dispatch(batchActions([
                 getRulesActions({
                     state,

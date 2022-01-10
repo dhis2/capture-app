@@ -14,7 +14,7 @@ export type ContainerProps = {|
     formFoundation: RenderFoundation,
     teiId: string,
     enrollmentId: string,
-    orgUnitId: string,
+    orgUnit: OrgUnit,
     rulesExecutionDependencies: RulesExecutionDependencies,
     onSaveExternal?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,

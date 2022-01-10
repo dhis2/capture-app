@@ -1,10 +1,8 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
 import { withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
-import { useOrganisationUnit } from '../../../dataQueries';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';
 import { requestSaveEvent } from './validated.actions';
@@ -20,7 +18,7 @@ export const Validated = ({
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
-    orgUnitId,
+    orgUnit,
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
@@ -29,7 +27,6 @@ export const Validated = ({
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
 
-    const { error, orgUnit } = useOrganisationUnit(orgUnitId, 'displayName, code');
     const rulesExecutionDependenciesClientFormatted =
         useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
 
@@ -59,8 +56,8 @@ export const Validated = ({
             formFoundation: formFoundationArgument,
             completed,
             programId: program.id,
-            orgUnitId,
-            orgUnitName: orgUnit?.name || '',
+            orgUnitId: orgUnit.id,
+            orgUnitName: orgUnit.name || '',
             teiId,
             enrollmentId,
             onSaveExternal,
@@ -70,7 +67,6 @@ export const Validated = ({
     }, [
         dispatch,
         program.id,
-        orgUnitId,
         orgUnit,
         teiId,
         enrollmentId,
@@ -78,14 +74,6 @@ export const Validated = ({
         onSaveSuccessActionType,
         onSaveErrorActionType,
     ]);
-
-    if (error) {
-        return (
-            <div>
-                {i18n.t('organisation unit could not be retrieved. Please try again later.')}
-            </div>
-        );
-    }
 
     return (
         <SaveHandlerHOC
