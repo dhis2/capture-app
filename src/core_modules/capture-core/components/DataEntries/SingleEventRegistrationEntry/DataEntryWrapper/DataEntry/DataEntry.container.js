@@ -37,8 +37,7 @@ const makeMapStateToProps = () => {
             error: !props.formFoundation ?
                 i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
             programName: programNameSelector(state),
-            orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&
-          state.organisationUnits[state.currentSelections.orgUnitId].name,
+            orgUnitName: state.orgUnit?.name,
             stageName: props.stage?.name,
             isAddEventInStage };
     };

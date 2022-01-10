@@ -10,11 +10,12 @@ import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './eventWorkingListsReduxProvider.types';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
+import { useOrganisationUnit } from '../../../../dataQueries';
 
 export const EventWorkingListsReduxProvider = ({ storeId, programId, programStageId, orgUnitId }: Props) => {
     const dispatch = useDispatch();
     const { program } = useProgramInfo(programId);
-
+    const { orgUnit } = useOrganisationUnit(orgUnitId);
     const { currentTemplateId, templates, ...commonStateManagementRestProps }
         = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
 
@@ -29,8 +30,8 @@ export const EventWorkingListsReduxProvider = ({ storeId, programId, programStag
 
     const onSelectListRow = useCallback(({ id }) => {
         window.scrollTo(0, 0);
-        dispatch(openViewEventPage(id));
-    }, [dispatch]);
+        dispatch(openViewEventPage(id, orgUnit));
+    }, [dispatch, orgUnit]);
 
     const onDeleteEvent = useCallback((eventId: string) => {
         dispatch(requestDeleteEvent(eventId, storeId));

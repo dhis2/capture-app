@@ -30,30 +30,26 @@ import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
 import { buildUrlQueryString } from '../../../../utils/routing';
 
-export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
+export const getEventOpeningFromEventListEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        switchMap(({ payload: { eventId } }) => {
-            const state = store.value;
-            return getEvent(eventId)
-                .then((eventContainer) => {
-                    if (!eventContainer) {
-                        return openViewEventPageFailed(
-                            i18n.t('Event could not be loaded. Are you sure it exists?'));
-                    }
-                    const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
-                    return startOpenEventForView(eventContainer, orgUnit);
-                })
-                .catch((error) => {
-                    const { message, details } = getErrorMessageAndDetails(error);
-                    log.error(
-                        errorCreator(
-                            message ||
-                            i18n.t('Event could not be loaded'))(details));
+        switchMap(({ payload: { eventId, orgUnit } }) => getEvent(eventId)
+            .then((eventContainer) => {
+                if (!eventContainer) {
                     return openViewEventPageFailed(
                         i18n.t('Event could not be loaded. Are you sure it exists?'));
-                });
-        }));
+                }
+                return startOpenEventForView(eventContainer, orgUnit);
+            })
+            .catch((error) => {
+                const { message, details } = getErrorMessageAndDetails(error);
+                log.error(
+                    errorCreator(
+                        message ||
+                            i18n.t('Event could not be loaded'))(details));
+                return openViewEventPageFailed(
+                    i18n.t('Event could not be loaded. Are you sure it exists?'));
+            })));
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

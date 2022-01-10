@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Button } from '@dhis2/ui';
@@ -10,6 +11,7 @@ import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.co
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
+import { useOrganisationUnit } from '../../../../dataQueries';
 
 const getStyles = ({ typography }) => ({
     flexContainer: {
@@ -60,7 +62,8 @@ const NewEventDataEntryWrapperPlain = ({
         return isCustom;
     };
     const isCustomForm = checkIfCustomForm();
-
+    const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
+    const { orgUnit } = useOrganisationUnit(orgUnitId);
     return (
         <Paper className={classes.paper}>
             <div className={classes.title} >
@@ -97,6 +100,7 @@ const NewEventDataEntryWrapperPlain = ({
                     stage={stage}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}
+                    orgUnit={orgUnit}
                 />
                 <EventsList />
             </div>

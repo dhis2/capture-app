@@ -1,5 +1,6 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { withStyles, Tooltip } from '@material-ui/core/';
 import { IconFileDocument24 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -9,6 +10,7 @@ import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.compon
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
 import type { ProgramStage } from '../../../../metaData';
+import { useOrganisationUnit } from '../../../../dataQueries';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -37,7 +39,7 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     showEditEvent: ?boolean,
-    onOpenEditEvent: () => void,
+    onOpenEditEvent: (orgUnit: Object) => void,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
     classes: {
@@ -50,16 +52,17 @@ type Props = {
     },
 };
 
-class EventDetailsSectionPlain extends Component<Props> {
-    renderDataEntryContainer = () => {
-        const {
-            classes,
-            onOpenEditEvent,
-            showEditEvent,
-            programStage,
-            eventAccess,
-            ...passOnProps } = this.props;
-
+const EventDetailsSectionPlain = (props: Props) => {
+    const {
+        classes,
+        onOpenEditEvent,
+        showEditEvent,
+        programStage,
+        eventAccess,
+        ...passOnProps } = props;
+    const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
+    const { orgUnit } = useOrganisationUnit(orgUnitId);
+    const renderDataEntryContainer = () => {
         const formFoundation = programStage.stageForm;
         return (
             <div className={classes.dataEntryContainer}>
@@ -77,15 +80,9 @@ class EventDetailsSectionPlain extends Component<Props> {
                 }
             </div>
         );
-    }
+    };
 
-    renderActionsContainer = () => {
-        const {
-            classes,
-            onOpenEditEvent,
-            showEditEvent,
-            eventAccess,
-        } = this.props;
+    const renderActionsContainer = () => {
         const canEdit = eventAccess.write;
         return (
             <div className={classes.actionsContainer}>
@@ -95,7 +92,7 @@ class EventDetailsSectionPlain extends Component<Props> {
                         <Button
                             className={classes.button}
                             variant="raised"
-                            onClick={onOpenEditEvent}
+                            onClick={() => onOpenEditEvent(orgUnit)}
                             disabled={!canEdit}
                         >
                             {i18n.t('Edit event')}
@@ -106,26 +103,22 @@ class EventDetailsSectionPlain extends Component<Props> {
                 }
             </div>
         );
-    }
+    };
 
-    render() {
-        const {
-            classes,
-        } = this.props;
-        return (
-            <div className={classes.container}>
-                <ViewEventSection
-                    header={<ViewEventSectionHeader text={i18n.t('Event details')} icon={IconFileDocument24} />}
-                >
-                    <div className={classes.content}>
-                        {this.renderDataEntryContainer()}
-                        {this.renderActionsContainer()}
-                    </div>
-                </ViewEventSection>
-            </div>
-        );
-    }
-}
+
+    return (
+        <div className={classes.container}>
+            <ViewEventSection
+                header={<ViewEventSectionHeader text={i18n.t('Event details')} icon={IconFileDocument24} />}
+            >
+                <div className={classes.content}>
+                    {renderDataEntryContainer()}
+                    {renderActionsContainer()}
+                </div>
+            </ViewEventSection>
+        </div>
+    );
+};
 
 
 export const EventDetailsSection = withStyles(getStyles)(EventDetailsSectionPlain);

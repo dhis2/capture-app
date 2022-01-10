@@ -10,8 +10,8 @@ const mapStateToProps = (state: ReduxState) => ({
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
-    onOpenEditEvent: () => {
-        dispatch(startShowEditEventDataEntry());
+    onOpenEditEvent: (orgUnit: Object) => {
+        dispatch(startShowEditEventDataEntry(orgUnit));
     },
 });
 
