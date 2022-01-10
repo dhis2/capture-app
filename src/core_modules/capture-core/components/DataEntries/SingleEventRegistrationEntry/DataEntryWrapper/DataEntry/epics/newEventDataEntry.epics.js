@@ -176,13 +176,10 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         }));
 
 
-const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
+const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, orgUnit: Object, fieldData?: ?FieldData) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const programId = state.currentSelections.programId;
-
-    const orgUnitId = state.currentSelections.orgUnitId;
-    const orgUnit = state.organisationUnits[orgUnitId];
 
     const program = getEventProgramThrowIfNotFound(programId);
 
@@ -212,8 +209,8 @@ export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputO
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
-            const { dataEntryId, itemId, uid } = action.payload;
-            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid);
+            const { dataEntryId, itemId, uid, orgUnit } = action.payload;
+            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, orgUnit);
         }));
 
 export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -222,11 +219,11 @@ export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
-            const { dataEntryId, itemId, uid, elementId, value, uiState } = action.payload;
+            const { dataEntryId, itemId, uid, elementId, value, orgUnit, uiState } = action.payload;
             const fieldData: FieldData = {
                 elementId,
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, fieldData);
+            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, orgUnit, fieldData);
         }));

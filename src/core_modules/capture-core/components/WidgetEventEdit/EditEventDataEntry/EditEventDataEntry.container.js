@@ -35,20 +35,21 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: Object): any => (
     onUpdateDataEntryField: (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
+        const { orgUnit } = ownProps;
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid }),
+            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid, orgUnit }),
         ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
     },
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
-
+        const { orgUnit } = ownProps;
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid }),
+            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid, orgUnit }),
         ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
     },
     onStartAsyncUpdateField: (
@@ -58,10 +59,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: Object): any => (
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) => {
             const uid = uuid();
+            const { orgUnit } = ownProps;
             return batchActions([
                 successInnerAction,
                 startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-                startRunRulesOnUpdateForEditSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid }),
+                startRunRulesOnUpdateForEditSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid, orgUnit }),
             ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH);
         };
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
