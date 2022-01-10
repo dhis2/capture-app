@@ -6,8 +6,10 @@ import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
+    const eventOccurredAt = state.events[state.viewEventPage.eventId]?.occurredAt;
     return {
         ready: !state.activePage.isDataEntryLoading && !eventDetailsSection.loading,
+        eventStatus: eventOccurredAt ? 'occurredAt' : 'scheduledAt',
     };
 };
 

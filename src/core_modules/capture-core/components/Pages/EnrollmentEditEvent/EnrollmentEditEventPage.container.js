@@ -13,7 +13,6 @@ import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefaul
 import { buildUrlQueryString } from '../../../utils/routing';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
-import { getScopeInfo } from '../../../metaData';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 
@@ -50,10 +49,11 @@ export const EnrollmentEditEventPage = () => {
     const onGoBack = () => history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
-    const { trackedEntityName } = getScopeInfo(enrollmentSite?.trackedEntityType);
+    // $FlowFixMe
+    const trackedEntityName = program?.trackedEntityType?.name;
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
-    const eventDataConvertValue = convertValue(event?.eventDate, dataElementTypes.DATETIME);
+    const eventDataConvertValue = convertValue((event?.occurredAt || event?.scheduledAt), dataElementTypes.DATETIME);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
 
     let pageStatus = pageStatuses.MISSING_DATA;

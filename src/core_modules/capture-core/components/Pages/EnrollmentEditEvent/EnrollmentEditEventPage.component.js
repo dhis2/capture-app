@@ -146,7 +146,7 @@ const EnrollmentEditEventPagePain = ({
                                 },
                             ]}
                             selectedValue="alwaysPreselected"
-                            title={programStage.stageForm.getLabel('eventDate')}
+                            title={programStage.stageForm.getLabel('occurredAt') || programStage.stageForm.getLabel('scheduledAt')}
                             isUserInteractionInProgress={isUserInteractionInProgress}
                         />
                     </Grid>
