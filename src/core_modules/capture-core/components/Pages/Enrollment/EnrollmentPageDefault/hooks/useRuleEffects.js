@@ -38,8 +38,8 @@ const useEventsData = (enrollment, program) => {
         enrollmentId: event.enrollment,
         enrollmentStatus: event.enrollmentStatus,
         status: event.status,
-        eventDate: convertDate(event.eventDate),
-        dueDate: convertDate(event.dueDate),
+        occurredAt: convertDate(event.occurredAt),
+        scheduledAt: convertDate(event.scheduledAt),
         ...getClientFormattedDataValuesAsObject(event.dataValues, elementsById),
     })), [elementsById, enrollment]);
 };
