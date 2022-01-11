@@ -24,6 +24,8 @@ const baseComponentStylesVertical = {
 };
 
 const getBaseProps = (metaData: MetaDataElement) => ({
+    description: metaData.description,
+    url: metaData.url,
     styles: baseComponentStyles,
     label: metaData.formName,
     metaCompulsory: metaData.compulsory,
