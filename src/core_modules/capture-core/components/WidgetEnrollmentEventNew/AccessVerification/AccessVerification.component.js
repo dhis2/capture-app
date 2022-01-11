@@ -4,7 +4,7 @@ import { Validated } from '../Validated';
 import { NoAccess } from './NoAccess.component';
 import type { Props } from './accessVerification.types';
 
-export const AccessVerificationComponent = ({ eventAccess, onCancel, ...passOnProps }: Props) => {
+export const AccessVerificationComponent = ({ eventAccess, onCancel, widgetReducerName, ...passOnProps }: Props) => {
     if (!eventAccess.write) {
         return (
             <NoAccess
