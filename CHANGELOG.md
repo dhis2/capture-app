@@ -1,3 +1,10 @@
+## [1.63.1](https://github.com/dhis2/capture-app/compare/v1.63.0...v1.63.1) (2022-01-11)
+
+
+### Bug Fixes
+
+* [DHIS2-11837] Saving message for compulsory fields ([#2368](https://github.com/dhis2/capture-app/issues/2368)) ([75474cf](https://github.com/dhis2/capture-app/commit/75474cf94ea40b45dde8ea4d491f11e3606f27c3))
+
 # [1.63.0](https://github.com/dhis2/capture-app/compare/v1.62.20...v1.63.0) (2022-01-11)
 
 
