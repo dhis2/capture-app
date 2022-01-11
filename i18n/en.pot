@@ -463,6 +463,12 @@ msgstr "Clear"
 msgid "No results"
 msgstr "No results"
 
+msgid "Description"
+msgstr "Description"
+
+msgid "URL"
+msgstr "URL"
+
 msgid "Icon for {{field}}"
 msgstr "Icon for {{field}}"
 
