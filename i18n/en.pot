@@ -447,6 +447,12 @@ msgstr ""
 msgid "No results"
 msgstr ""
 
+msgid "Description"
+msgstr "Description"
+
+msgid "URL"
+msgstr "URL"
+
 msgid "Icon for {{field}}"
 msgstr ""
 
