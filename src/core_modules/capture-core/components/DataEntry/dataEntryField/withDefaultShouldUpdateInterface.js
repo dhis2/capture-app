@@ -10,7 +10,7 @@ type Props = {
 
 export const withDefaultShouldUpdateInterface = () =>
     (InnerComponent: React.ComponentType<any>) =>
-        class ShuoldFieldUpdateInterface extends React.Component<Props> {
+        class ShouldFieldUpdateInterface extends React.Component<Props> {
             shouldComponentUpdate(nextProps: Props) {
                 const pureCheck = ['value', 'touched', 'validationAttempted', 'validationError'];
                 // $FlowFixMe[prop-missing] automated comment
