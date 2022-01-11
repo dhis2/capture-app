@@ -1,3 +1,11 @@
+# [1.63.0](https://github.com/dhis2/capture-app/compare/v1.62.20...v1.63.0) (2022-01-11)
+
+
+### Features
+
+* [DHIS2-11953] Quick actions-widget in enrollment dashboard ([#2195](https://github.com/dhis2/capture-app/issues/2195)) ([4b9c748](https://github.com/dhis2/capture-app/commit/4b9c7488f6fee1e26ede0ea795bd4cbb01cb4bfe))
+* [DHIS2-5345] implement data element description and url popover ([#2326](https://github.com/dhis2/capture-app/issues/2326)) ([9a0d6f1](https://github.com/dhis2/capture-app/commit/9a0d6f13ac1158ff14dedd75f897663c55dbe722))
+
 ## [1.62.20](https://github.com/dhis2/capture-app/compare/v1.62.19...v1.62.20) (2022-01-07)
 
 
