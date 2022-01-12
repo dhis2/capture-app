@@ -1,3 +1,32 @@
+## [1.63.1](https://github.com/dhis2/capture-app/compare/v1.63.0...v1.63.1) (2022-01-11)
+
+
+### Bug Fixes
+
+* [DHIS2-11837] Saving message for compulsory fields ([#2368](https://github.com/dhis2/capture-app/issues/2368)) ([75474cf](https://github.com/dhis2/capture-app/commit/75474cf94ea40b45dde8ea4d491f11e3606f27c3))
+
+# [1.63.0](https://github.com/dhis2/capture-app/compare/v1.62.20...v1.63.0) (2022-01-11)
+
+
+### Features
+
+* [DHIS2-11953] Quick actions-widget in enrollment dashboard ([#2195](https://github.com/dhis2/capture-app/issues/2195)) ([4b9c748](https://github.com/dhis2/capture-app/commit/4b9c7488f6fee1e26ede0ea795bd4cbb01cb4bfe))
+* [DHIS2-5345] implement data element description and url popover ([#2326](https://github.com/dhis2/capture-app/issues/2326)) ([9a0d6f1](https://github.com/dhis2/capture-app/commit/9a0d6f13ac1158ff14dedd75f897663c55dbe722))
+
+## [1.62.20](https://github.com/dhis2/capture-app/compare/v1.62.19...v1.62.20) (2022-01-07)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([36a00b6](https://github.com/dhis2/capture-app/commit/36a00b66f13380a6bb791ea25d7786d976e25441))
+
+## [1.62.19](https://github.com/dhis2/capture-app/compare/v1.62.18...v1.62.19) (2022-01-06)
+
+
+### Bug Fixes
+
+* [DHIS2-12139] add programId to navigation ([#2332](https://github.com/dhis2/capture-app/issues/2332)) ([ea013cf](https://github.com/dhis2/capture-app/commit/ea013cf4a64ea933f17b4b51c9533f0786e0abed))
+
 ## [1.62.18](https://github.com/dhis2/capture-app/compare/v1.62.17...v1.62.18) (2022-01-04)
 
 
