@@ -1,3 +1,10 @@
+## [1.63.2](https://github.com/dhis2/capture-app/compare/v1.63.1...v1.63.2) (2022-01-12)
+
+
+### Bug Fixes
+
+* [DHIS2-11862] get program config ([#2425](https://github.com/dhis2/capture-app/issues/2425)) ([e57462c](https://github.com/dhis2/capture-app/commit/e57462c53b6e0f3ed1b352002194c9cccae5bfcc))
+
 ## [1.63.1](https://github.com/dhis2/capture-app/compare/v1.63.0...v1.63.1) (2022-01-11)
 
 
