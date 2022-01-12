@@ -62,8 +62,8 @@ export const withInternalFilterHandler = () =>
                         .organisationUnits
                         .list({
                             fields: [
-                                'id,displayName,path,publicAccess,access,lastUpdated',
-                                'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
+                                'id,displayName,code,path,publicAccess,access,lastUpdated',
+                                'children[id,displayName,code,publicAccess,access,path,children::isNotEmpty]',
                             ].join(','),
                             paging: false,
                             query: filterText,
