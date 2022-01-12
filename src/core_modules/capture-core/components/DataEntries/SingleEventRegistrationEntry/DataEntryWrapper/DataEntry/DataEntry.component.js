@@ -424,7 +424,7 @@ const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(Save
 type Props = {
     formFoundation: RenderFoundation,
     programName: string,
-    orgUnitName: string,
+    orgUnit: Object,
     stageName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: Object,
@@ -525,18 +525,17 @@ class NewEventDataEntry extends Component<Props> {
     }
 
     getSavingText() {
-        const { orgUnitName, programName, stageName, isAddEventInStage } = this.props;
-
+        const { orgUnit, programName, stageName, isAddEventInStage } = this.props;
         if (isAddEventInStage) {
             return (<span>
                 {i18n.t('Saving to {{stageName}} for {{programName}} in {{orgUnitName}}',
-                    { orgUnitName, stageName, programName, interpolation: { escapeValue: false } })}
+                    { orgUnitName: orgUnit?.name, stageName, programName, interpolation: { escapeValue: false } })}
             </span>);
         }
 
         return (<span>
             {i18n.t('Saving to {{programName}} in {{orgUnitName}}',
-                { orgUnitName, programName, interpolation: { escapeValue: false } })}
+                { orgUnitName: orgUnit?.name, programName, interpolation: { escapeValue: false } })}
         </span>);
     }
 
@@ -558,7 +557,6 @@ class NewEventDataEntry extends Component<Props> {
             onUpdateField,
             onStartAsyncUpdateField,
             programName, // eslint-disable-line
-            orgUnitName, // eslint-disable-line
             classes,
             onSave,
             onSetSaveTypes,
