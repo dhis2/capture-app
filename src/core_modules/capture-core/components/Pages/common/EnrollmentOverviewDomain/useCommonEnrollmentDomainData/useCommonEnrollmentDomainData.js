@@ -17,7 +17,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
 
     const { data, error, refetch } = useDataQuery({
         trackedEntityInstance: {
-            resource: 'trackedEntityInstances',
+            resource: 'tracker/trackedEntities',
             id: ({ variables: { teiId: updatedTeiId } }) => updatedTeiId,
             params: ({ variables: { programId: updatedProgramId } }) => ({
                 program: updatedProgramId,

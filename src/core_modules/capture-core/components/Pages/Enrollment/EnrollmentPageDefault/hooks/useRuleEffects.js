@@ -38,8 +38,8 @@ const useEventsData = (enrollment, program) => {
         enrollmentId: event.enrollment,
         enrollmentStatus: event.enrollmentStatus,
         status: event.status,
-        eventDate: convertDate(event.eventDate),
-        dueDate: convertDate(event.dueDate),
+        occurredAt: convertDate(event.occurredAt),
+        scheduledAt: convertDate(event.scheduledAt),
         ...getClientFormattedDataValuesAsObject(event.dataValues, elementsById),
     })), [elementsById, enrollment]);
 };
@@ -49,11 +49,11 @@ const useEnrollmentData = enrollment => useMemo(() => {
         return undefined;
     }
 
-    const { enrollment: enrollmentId, enrollmentDate, incidentDate } = enrollment;
+    const { enrollment: enrollmentId, enrolledAt, occurredAt } = enrollment;
 
     return {
-        enrollmentDate: convertDate(enrollmentDate),
-        incidentDate: incidentDate ? convertDate(incidentDate) : undefined,
+        enrolledAt: convertDate(enrolledAt),
+        occurredAt: occurredAt ? convertDate(occurredAt) : undefined,
         enrollmentId,
     };
 }, [enrollment]);

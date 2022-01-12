@@ -61,8 +61,8 @@ export const EnrollmentAddEventPage = () => {
         events: enrollment?.events,
         attributeValues,
         enrollmentData: {
-            enrollmentDate: enrollment?.enrollmentDate,
-            incidentDate: enrollment?.incidentDate,
+            enrolledAt: enrollment?.enrolledAt,
+            occurredAt: enrollment?.occurredAt,
             enrollmentId: enrollment?.enrollment,
         },
     }), [enrollment, attributeValues]);

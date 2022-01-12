@@ -115,10 +115,10 @@ const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }: Object
     const clientValueA = dataA[columnName];
     const clientValueB = dataB[columnName];
     const options = {
-        eventDateA: dataA.eventDate,
-        eventDateB: dataB.eventDate,
-        dueDateA: dataA.dueDate,
-        dueDateB: dataB.dueDate,
+        eventDateA: dataA.occurredAt,
+        eventDateB: dataB.occurredAt,
+        dueDateA: dataA.scheduledAt,
+        dueDateB: dataB.scheduledAt,
     };
     return sortForTypes[type](clientValueA, clientValueB, direction, options);
 };

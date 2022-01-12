@@ -26,7 +26,7 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
 
     const trackedEntityInstancesQuery = useMemo(() => ({
         trackedEntityInstances: {
-            resource: 'trackedEntityInstances',
+            resource: 'tracker/trackedEntities',
             id: teiId,
             params: {
                 program: programId,

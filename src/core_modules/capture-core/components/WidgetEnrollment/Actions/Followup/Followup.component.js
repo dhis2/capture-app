@@ -5,14 +5,14 @@ import i18n from '@dhis2/d2-i18n';
 import type { Props } from './followup.types';
 
 export const Followup = ({ enrollment, onUpdate }: Props) =>
-    (enrollment.followup ? (
+    (enrollment.followUp ? (
         <MenuItem
             dense
             dataTest="widget-enrollment-actions-followup-remove"
             onClick={() =>
                 onUpdate({
                     ...enrollment,
-                    followup: false,
+                    followUp: false,
                 })
             }
             icon={<IconFlag16 />}
@@ -25,7 +25,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) =>
             onClick={() =>
                 onUpdate({
                     ...enrollment,
-                    followup: true,
+                    followUp: true,
                 })
             }
             icon={<IconFlag16 />}

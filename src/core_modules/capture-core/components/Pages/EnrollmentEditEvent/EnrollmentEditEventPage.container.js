@@ -53,7 +53,7 @@ export const EnrollmentEditEventPage = () => {
     const { trackedEntityName } = getScopeInfo(enrollmentSite?.trackedEntityType);
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
-    const eventDataConvertValue = convertValue(event?.eventDate, dataElementTypes.DATETIME);
+    const eventDataConvertValue = convertValue(event?.occurredAt, dataElementTypes.DATETIME);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
 
     let pageStatus = pageStatuses.MISSING_DATA;
