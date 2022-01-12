@@ -85,7 +85,7 @@ const fieldsParam = 'id,version,displayName,displayShortName,description,program
 'userRoles[id,displayName],' +
 'programStages[id,access,autoGenerateEvent,openAfterEnrollment,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,displayName,description,executionDateLabel,formType,featureType,validationStrategy,enableUserAssignment,dataEntryForm[id,htmlCode],' +
 'programStageSections[id,displayName,sortOrder,dataElements[id]],programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],' +
-'dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,optionSetValue,style,optionSet[id]]]],' +
+'dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,url,optionSetValue,style,optionSet[id]]]],' +
 'programTrackedEntityAttributes[trackedEntityAttribute[id],displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate]';
 
 export const storePrograms = (programIds: Array<string>) => {

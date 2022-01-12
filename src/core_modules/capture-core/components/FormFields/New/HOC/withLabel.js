@@ -3,6 +3,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { withLabel as UIWithLabel } from 'capture-ui';
+import { withDescription } from './withDescription';
 
 const getStyles = (theme: Theme) => ({
     label: {
@@ -65,6 +66,7 @@ type Props = {
         iconContainer: string,
         icon: string,
     },
+    dataElementDescription?: ?React.Element<any>
 };
 
 type HOCParams = {
@@ -129,17 +131,11 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
     };
 
     const Label = (props: Props) => {
-        const { label, required, icon, classes } = props;
-
+        const { label, required, icon, classes, dataElementDescription } = props;
         return (
             <div
                 className={classes.container}
             >
-                <CalculatedLabel
-                    label={label || ''}
-                    required={required}
-                    requiredClass={classes.required}
-                />
                 <div
                     className={classes.iconContainer}
                 >
@@ -149,11 +145,16 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
                         iconClass={classes.icon}
                     />
                 </div>
+                <CalculatedLabel
+                    label={label || ''}
+                    required={required}
+                    requiredClass={classes.required}
+                />
+                {dataElementDescription}
             </div>
         );
     };
-    const LabelWithStyles = withStyles(getStylesLabel)(Label);
-
+    const LabelWithStyles = withDescription()(withStyles(getStylesLabel)(Label));
     const ProjectLabelHOC = withStyles(getStyles)((props: Props) => {
         const { label, required, icon, ...passOnProps } = props;
         const { classes, ...propsWithoutClasses } = props;

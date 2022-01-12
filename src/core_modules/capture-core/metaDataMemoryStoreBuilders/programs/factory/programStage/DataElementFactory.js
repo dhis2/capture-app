@@ -92,6 +92,7 @@ class DataElementFactory {
         dataElement.compulsory = cachedProgramStageDataElement.compulsory;
         dataElement.disabled = false;
         dataElement.icon = await DataElementFactory._buildDataElementIconAsync(cachedDataElement.style);
+        dataElement.url = cachedDataElement.url;
 
         if (cachedDataElement.optionSet && cachedDataElement.optionSet.id) {
             dataElement.optionSet = await this.optionSetFactory.build(
