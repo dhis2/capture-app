@@ -40,14 +40,14 @@ export default class OrgUnitTree extends React.Component {
               .list({
                   level: 1,
                   paging: false,
-                  fields: 'id,path,displayName,children::isNotEmpty',
+                  fields: 'id,path,code,displayName,children::isNotEmpty',
               })
               .then((root) => {
                   const { value: selectedPath } = this.props;
                   const list = root.toArray();
                   this.setState({
                       list: list.map((item) => {
-                          const { path, displayName } = item;
+                          const { path, displayName, code } = item;
                           const open = selectedPath && selectedPath.startsWith(path) && selectedPath !== path;
                           if (open) {
                               this.fetchNode(path, true);
@@ -57,6 +57,7 @@ export default class OrgUnitTree extends React.Component {
                               open,
                               value: path,
                               label: displayName,
+                              code,
                               children: [],
                           };
                       }),
@@ -76,7 +77,7 @@ export default class OrgUnitTree extends React.Component {
               .list({
                   paging: false,
                   filter: `id:in:[${id}]`,
-                  fields: ':all,displayName,path,children[id,displayName,path,children]',
+                  fields: ':all,displayName,code,path,children[id,displayName,code,path,children]',
               })
               .then((r) => {
                   const organisationUnits = r.toArray();
@@ -100,6 +101,7 @@ export default class OrgUnitTree extends React.Component {
                           open,
                           children,
                           value: v.path,
+                          code: v.code,
                           label: v.displayName,
                       });
                   }

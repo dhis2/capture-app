@@ -46,8 +46,8 @@ export const filterFormFieldOrgUnitsEpic = (action$: InputObservable) =>
                 .organisationUnits
                 .list({
                     fields: [
-                        'id,displayName,path,publicAccess,access,lastUpdated',
-                        'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
+                        'id,displayName,code,path,publicAccess,access,lastUpdated',
+                        'children[id,displayName,publicAccess,access,code,path,children::isNotEmpty]',
                     ].join(','),
                     paging: false,
                     query: searchText,
@@ -72,6 +72,7 @@ export const filterFormFieldOrgUnitsEpic = (action$: InputObservable) =>
                 .map(unit => ({
                     id: unit.id,
                     path: unit.path,
+                    code: unit.code,
                     displayName: unit.displayName,
                 }));
             return filteredFormFieldOrgUnitsRetrieved(formId, elementId, orgUnits);

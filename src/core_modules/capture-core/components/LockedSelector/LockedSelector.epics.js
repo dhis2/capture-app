@@ -60,6 +60,7 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
             .then(response => setCurrentOrgUnitBasedOnUrl({
                 id: response.id,
                 name: response.displayName,
+                code: response.code,
             }),
             )
             .catch(() =>
