@@ -39,7 +39,7 @@ export const WidgetEventSchedule = ({
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
 
     const eventCountInOrgUnit = events
-        .filter(event => moment(event.dueDate).format('YYYY-MM-DD') === scheduleDate).length;
+        .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
