@@ -1,43 +1,23 @@
 // @flow
 import type { ProgramRulesContainer } from 'capture-core-utils/rulesEngine';
-import { getTrackedEntityAttributeId, getProgramId, getProgramRuleActions } from '../helpers';
+import { getTrackedEntityAttributeId, getProgramId, getProgramRuleActions, getProgramStageId } from '../helpers';
 import { getRulesAndVariablesFromProgramIndicators } from '../../../../metaDataMemoryStoreBuilders/programs/getRulesAndVariablesFromIndicators';
 
 const addProgramVariables = (program, programRuleVariables) => {
-    program.programRuleVariables = programRuleVariables
-        .map(programRulesVariable => ({
-            ...programRulesVariable,
-            programId: getProgramId(programRulesVariable),
-            trackedEntityAttributeId: getTrackedEntityAttributeId(programRulesVariable),
-        }));
+    program.programRuleVariables = programRuleVariables.map(programRulesVariable => ({
+        ...programRulesVariable,
+        programId: getProgramId(programRulesVariable),
+        trackedEntityAttributeId: getTrackedEntityAttributeId(programRulesVariable),
+    }));
 };
 
 const addProgramRules = (program, programRules) => {
-    const filteredProgramRules = programRules.map(programRule => ({
+    program.programRules = programRules.map(programRule => ({
         ...programRule,
         programId: getProgramId(programRule),
+        programStageId: getProgramStageId(programRule),
         programRuleActions: getProgramRuleActions(programRule.programRuleActions),
     }));
-    const mainRules = filteredProgramRules.filter(rule => !rule.programStageId);
-
-    const rulesByStage = filteredProgramRules
-        .filter(rule => rule.programStageId)
-        .reduce((accRulesByStage, programRule) => {
-            const programStageId = programRule.programStageId || '';
-            accRulesByStage[programStageId] = accRulesByStage[programStageId] || [];
-            accRulesByStage[programStageId].push(programRule);
-            return accRulesByStage;
-        }, {});
-
-    program.programRules = mainRules;
-    Object.keys(rulesByStage).forEach((stageKey) => {
-        const rulesForStage = rulesByStage[stageKey];
-        const programStage = program.getStage(stageKey);
-        if (programStage) {
-            // $FlowFixMe[prop-missing] automated comment
-            programStage.programRules = rulesForStage;
-        }
-    });
 };
 
 const addRulesAndVariablesFromProgramIndicators = (program, programIndicators) => {
@@ -72,7 +52,6 @@ export const buildRulesContainer = async ({
     programRuleVariables && addProgramVariables(rulesContainer, programRuleVariables);
     programRules && addProgramRules(rulesContainer, programRules);
     programIndicators && addRulesAndVariablesFromProgramIndicators(rulesContainer, programIndicators);
-
     rulesContainer.constants = constants;
 
     setRulesContainer(rulesContainer);

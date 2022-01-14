@@ -3,6 +3,7 @@ import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useOrganisationUnit } from 'capture-core/dataQueries/useOrganisationUnit';
 import type { OrgUnit, TrackedEntityAttributes, OptionSets, ProgramRulesContainer, DataElements } from 'capture-core-utils/rulesEngine';
+import { cleanUpDataEntry } from '../../../DataEntry';
 import { RenderFoundation } from '../../../../metaData';
 import { getOpenDataEntryActions } from '../dataEntry.actions';
 import {
@@ -38,10 +39,9 @@ export const useLifecycle = ({
     const dataElements: DataElements = useDataElements(programAPI);
     const otherEvents = useEvents(enrollment, programAPI);
     const orgUnit: ?OrgUnit = useOrganisationUnit(orgUnitId).orgUnit;
-    const staticPatternValues = { orgUnitCode: orgUnit?.code || orgUnitId };
     const rulesContainer: ProgramRulesContainer = useRulesContainer(programAPI);
     const formFoundation: RenderFoundation = useFormFoundation(programAPI);
-    const { formValues, clientValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues, staticPatternValues });
+    const { formValues, clientValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues, orgUnit });
     const programTrackedEntityAttributes: TrackedEntityAttributes = useProgramTrackedEntityAttributes(programAPI);
     const optionSets: OptionSets = useOptionSets(programTrackedEntityAttributes, dataElements);
     const trackedEntityName: string = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
@@ -56,6 +56,9 @@ export const useLifecycle = ({
                 }),
             );
         }
+        return () => {
+            dispatch(cleanUpDataEntry(dataEntryId));
+        };
     }, [dispatch, formValues, dataEntryId, itemId]);
 
     useEffect(() => {

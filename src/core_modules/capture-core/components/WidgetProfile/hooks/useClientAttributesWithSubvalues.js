@@ -18,6 +18,7 @@ type InputProgramData = {
                 }>,
             },
             valueType?: string,
+            unique: boolean,
         },
         displayInList: boolean,
     }>,
@@ -50,7 +51,7 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
             const computedAttributes = await programTrackedEntityAttributes.reduce(async (promisedAcc, currentTEA) => {
                 const {
                     displayInList,
-                    trackedEntityAttribute: { id, displayName, optionSet, valueType },
+                    trackedEntityAttribute: { id, displayName, optionSet, valueType, unique },
                 } = currentTEA;
                 const foundAttribute = attributes.find(item => item.attribute === id);
                 let value;
@@ -73,6 +74,7 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
                         optionSet,
                         displayInList,
                         value,
+                        unique,
                         valueType: foundAttribute?.valueType || valueType,
                     },
                 ];
