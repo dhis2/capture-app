@@ -463,6 +463,12 @@ msgstr "Clear"
 msgid "No results"
 msgstr "No results"
 
+msgid "Description"
+msgstr "Description"
+
+msgid "URL"
+msgstr "URL"
+
 msgid "Icon for {{field}}"
 msgstr "Icon for {{field}}"
 
@@ -606,6 +612,21 @@ msgstr "No indicator output for this enrollment yet"
 
 msgid "No feedback for this enrollment yet"
 msgstr "No feedback for this enrollment yet"
+
+msgid "Quick actions"
+msgstr ""
+
+msgid "New Event"
+msgstr ""
+
+msgid "Schedule an event"
+msgstr ""
+
+msgid "Make referral"
+msgstr ""
+
+msgid "No available program stages"
+msgstr ""
 
 msgid "Program stage not found"
 msgstr "Program stage not found"

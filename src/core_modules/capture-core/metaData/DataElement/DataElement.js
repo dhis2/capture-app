@@ -33,6 +33,7 @@ export class DataElement {
     _icon: Icon | void;
     _unique: ?Unique;
     _searchable: ?boolean;
+    _url: ?string;
 
     constructor(initFn: ?(_this: DataElement) => void) {
         this._displayInReports = true;
@@ -142,6 +143,14 @@ export class DataElement {
 
     get searchable(): ?boolean {
         return this._searchable;
+    }
+
+    set url(url: string) {
+        this._url = url;
+    }
+
+    get url(): ?string {
+        return this._url;
     }
 
     * getPropertyNames(): Generator<string, void, void> {

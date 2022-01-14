@@ -395,14 +395,6 @@ class DataEntryPlain extends Component<Props> {
         this.relationshipsInstance = instance;
     }
 
-    handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, type: $Values<typeof addEventSaveTypes>) => {
-        if (type === addEventSaveTypes.COMPLETE) {
-            this.props.onSave(itemId, dataEntryId, formFoundation, true);
-        } else {
-            this.props.onSave(itemId, dataEntryId, formFoundation);
-        }
-    }
-
     render() {
         const {
             onUpdateField,
@@ -421,7 +413,6 @@ class DataEntryPlain extends Component<Props> {
                     id={id}
                     onUpdateFormField={onUpdateField}
                     onUpdateFormFieldAsync={onStartAsyncUpdateField}
-                    onSave={this.handleSave}
                     fieldOptions={this.fieldOptions}
                     dataEntrySections={this.dataEntrySections}
                     relationshipsRef={this.setRelationshipsInstance}

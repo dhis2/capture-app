@@ -14,5 +14,5 @@ export const useScheduleConfigFromProgram = (programId: string) => {
     }), [programId]));
 
 
-    return { error, programConfig: !loading && data };
+    return { error, programConfig: !loading && data?.programConfig };
 };
