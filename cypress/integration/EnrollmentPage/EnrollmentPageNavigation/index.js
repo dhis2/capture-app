@@ -131,7 +131,7 @@ Then('you see the enrollment page but there is no org unit id in the url', () =>
 });
 
 When('you reset the enrollment selection', () => {
-    cy.contains('[data-test="single-locked-select"]', '2018-08-07 15:47')
+    cy.contains('[data-test="single-locked-select"]', '2023-07-01 12:05')
         .find('[data-test="reset-selection-button"]')
         .click();
 });
