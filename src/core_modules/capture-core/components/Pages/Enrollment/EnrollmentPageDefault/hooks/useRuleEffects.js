@@ -53,7 +53,7 @@ const useEnrollmentData = enrollment => useMemo(() => {
 
     return {
         enrolledAt: convertDate(enrolledAt),
-        incidentDate: occurredAt ? convertDate(occurredAt) : undefined,
+        occurredAt: occurredAt ? convertDate(occurredAt) : undefined,
         enrollmentId,
     };
 }, [enrollment]);
