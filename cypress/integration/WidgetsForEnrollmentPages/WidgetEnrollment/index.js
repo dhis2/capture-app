@@ -20,7 +20,7 @@ Then('the user sees the enrollment date', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-icon-calendar"]').should('exist');
         cy.get('[data-test="widget-enrollment-enrollment-date"]')
-            .contains('Date of enrollment 2022-08-01 02:00')
+            .contains('Date of enrollment 2022-08-01')
             .should('exist');
     });
 });
