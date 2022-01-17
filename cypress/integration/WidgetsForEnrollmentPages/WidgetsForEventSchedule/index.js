@@ -10,7 +10,7 @@ Then('you choose a schedule date', () => {
         cy.get("[data-test='capture-ui-input']").eq(0).should('have.value', '2021-08-01');
         cy.get("[data-test='capture-ui-input']").eq(0)
             .clear()
-            .type('2021-10-20')
+            .type('2022-08-01')
             .blur();
     });
 });
