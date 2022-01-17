@@ -1,121 +1,95 @@
-// @flow
-import React, { useCallback, useMemo } from 'react';
-// $FlowFixMe
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { useProgramInfo } from '../../../hooks/useProgramInfo';
-import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
-import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
-import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
-import { useWidgetDataFromStore } from './hooks';
-import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
-import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
-import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
-export const EnrollmentAddEventPage = () => {
-    const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
-    const history = useHistory();
-    const dispatch = useDispatch();
+import React, { useMemo } from 'react';
+import i18n from '@dhis2/d2-i18n';
+import { NoticeBox, spacersNum } from '@dhis2/ui';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
+import { useLocationQuery } from '../../../utils/routing';
+import {
+    IdTypes,
+    useValidatedIDsFromCache,
+} from '../../../utils/cachedDataHooks/useValidatedIDsFromCache';
+import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
+import { EnrollmentAddEventPageStatuses } from './EnrollmentAddEventPage.constants';
+import { LoadingMaskForPage } from '../../LoadingMasks';
+import { type Props } from './EnrollmentAddEventPage.types';
 
-    const handleCancel = useCallback(() => {
-        history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
-    }, [history, orgUnitId, programId, teiId, enrollmentId]);
-
-    const handleSave = useCallback(
-        (data, uid) => {
-            history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
-            dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
-        },
-        [history, orgUnitId, programId, teiId, enrollmentId, dispatch],
-    );
-
-    const handleDelete = useCallback(() => {
-        dispatch(deleteEnrollment({ enrollmentId }));
-        history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
-    }, [dispatch, enrollmentId, history, orgUnitId, programId, teiId]);
-
-    const widgetReducerName = 'enrollmentEvent-newEvent';
-
-    const dataEntryHasChanges = useSelector(state => getDataEntryHasChanges(state, widgetReducerName));
-
-    // TODO: Validate query params
-    // This includes prechecking that we got a valid program stage and move the program stage logic in this file to useEnrollmentAddEventTopBar
-    // Ticket: https://jira.dhis2.org/browse/TECH-669
-    const { program } = useProgramInfo(programId);
-    const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
-    const outputEffects = useWidgetDataFromStore(widgetReducerName);
-    const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
+const styles = {
+    informativeMessage: {
+        marginLeft: spacersNum.dp16,
+        marginTop: spacersNum.dp24,
+        marginRight: spacersNum.dp16,
+    },
+};
+const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
+    const { teiId, programId, orgUnitId, enrollmentId } = useLocationQuery();
+    const { valid: validIds, loading, error: validatedIdsError } = useValidatedIDsFromCache({ programId, orgUnitId });
     const {
         enrollment,
         attributeValues,
         error: commonDataError,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
 
-    const rulesExecutionDependencies = useMemo(() => ({
-        events: enrollment?.events,
-        attributeValues,
-        enrollmentData: {
-            enrollmentDate: enrollment?.enrollmentDate,
-            incidentDate: enrollment?.incidentDate,
-            enrollmentId: enrollment?.enrollment,
-        },
-    }), [enrollment, attributeValues]);
+    // $FlowFixMe
+    const pageIsInvalid = (!loading && !Object.values(validIds)
+        ?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
+    const pageStatus = useMemo(() => {
+        if (!programId || !enrollmentId || !teiId) {
+            return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
+        }
+        // $FlowFixMe[prop-missing]
+        if (pageIsInvalid && validIds[IdTypes.PROGRAM_ID]?.valid && !validIds[IdTypes.ORG_UNIT_ID]?.valid) {
+            return EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID;
+        }
+        // $FlowFixMe[prop-missing]
+        if (pageIsInvalid && !validIds[IdTypes.PROGRAM_ID]?.valid) {
+            return EnrollmentAddEventPageStatuses.PROGRAM_INVALID;
+        }
+        if (pageIsInvalid) {
+            return EnrollmentAddEventPageStatuses.PAGE_INVALID;
+        }
+        if (loading) {
+            return EnrollmentAddEventPageStatuses.LOADING;
+        }
+        return EnrollmentAddEventPageStatuses.DEFAULT;
+    }, [enrollmentId, loading, pageIsInvalid, programId, teiId, validIds]);
+    if (pageStatus === EnrollmentAddEventPageStatuses.LOADING) {
+        return <LoadingMaskForPage/>;
+    }
 
-    const {
-        handleSetOrgUnitId,
-        handleResetOrgUnitId,
-        handleResetProgramId,
-        handleResetEnrollmentId,
-        handleResetTeiId,
-        handleResetStageId,
-        handleResetEventId,
-        teiDisplayName,
-        trackedEntityName,
-        enrollmentsAsOptions,
-        teiSelectorFailure,
-        userInteractionInProgress,
-    } = useEnrollmentAddEventTopBar(teiId, programId, enrollment);
-
+    if (pageStatus === EnrollmentAddEventPageStatuses.DEFAULT) {
+        return (
+            <EnrollmentAddEventPageDefault
+                enrollment={enrollment}
+                attributeValues={attributeValues}
+                commonDataError={Boolean(commonDataError)}
+            />
+        );
+    }
     return (
-        <>
-            <EnrollmentAddEventTopBar
-                programId={programId}
-                orgUnitId={orgUnitId}
-                enrollmentId={enrollmentId}
-                teiDisplayName={teiDisplayName}
-                trackedEntityName={trackedEntityName}
-                stageName={selectedProgramStage?.stageForm.name}
-                eventDateLabel={selectedProgramStage?.stageForm.getLabel('eventDate')}
-                enrollmentsAsOptions={enrollmentsAsOptions}
-                onSetOrgUnitId={handleSetOrgUnitId}
-                onResetOrgUnitId={handleResetOrgUnitId}
-                onResetProgramId={handleResetProgramId}
-                onResetEnrollmentId={handleResetEnrollmentId}
-                onResetTeiId={handleResetTeiId}
-                onResetStageId={handleResetStageId}
-                onResetEventId={handleResetEventId}
-                userInteractionInProgress={userInteractionInProgress}
-                teiSelectorFailure={teiSelectorFailure}
-                enrollmentSelectorFailure={Boolean(commonDataError)}
-            />
-            <EnrollmentAddEventPageComponent
-                programId={programId}
-                stageId={stageId}
-                orgUnitId={orgUnitId}
-                teiId={teiId}
-                enrollmentId={enrollmentId}
-                onSave={handleSave}
-                onCancel={handleCancel}
-                onDelete={handleDelete}
-                widgetEffects={outputEffects}
-                hideWidgets={hideWidgets}
-                widgetReducerName={widgetReducerName}
-                rulesExecutionDependencies={rulesExecutionDependencies}
-                pageFailure={Boolean(commonDataError)}
-                ready={Boolean(enrollment)}
-                dataEntryHasChanges={dataEntryHasChanges}
-            />
-        </>
+        <div className={classes.informativeMessage}>
+            <NoticeBox
+                error
+                title={'An error has occurred'}
+            >
+                {pageStatus === EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES && (
+                    i18n.t('Page is missing required values from URL')
+                )}
+
+                {pageStatus === EnrollmentAddEventPageStatuses.PROGRAM_INVALID && (
+                    i18n.t('Program is not valid')
+                )}
+
+                {pageStatus === EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID && (
+                    i18n.t('Org unit is not valid with current program')
+                )}
+
+                {pageStatus === EnrollmentAddEventPageStatuses.PAGE_INVALID && (
+                    i18n.t('There was an error opening the Page')
+                )}
+            </NoticeBox>
+        </div>
     );
 };
+
+export const EnrollmentAddEventPage = withStyles(styles)(EnrollmentAddEventPagePlain);

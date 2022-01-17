@@ -15,6 +15,7 @@ import { type RenderFoundation } from '../../../metaData';
 import { MessagesDialogContents } from './MessagesDialogContents';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
 import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { newEventSaveTypes } from '../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/newEventSaveTypes';
 
 type Props = {
     classes: Object,
@@ -117,7 +118,14 @@ const getSaveHandler = (
             return !this.props.hasGeneralErrors;
         }
 
-        validateForm() {
+        shouldComplete(saveType?: ?string) {
+            if (onIsCompleting) {
+                return onIsCompleting(this.props);
+            }
+            return [addEventSaveTypes.COMPLETE, newEventSaveTypes.SAVEANDCOMPLETE].includes(saveType);
+        }
+
+        validateForm(saveType?: ?string) {
             const formInstance = this.formInstance;
             if (!formInstance) {
                 log.error(
@@ -130,7 +138,7 @@ const getSaveHandler = (
                 };
             }
 
-            const isCompleting = !!(onIsCompleting && onIsCompleting(this.props));
+            const isCompleting = this.shouldComplete(saveType);
 
             const isValid =
                 formInstance.validateFormScrollToFirstFailedField({ isCompleting })
@@ -149,7 +157,7 @@ const getSaveHandler = (
                 return;
             }
 
-            const { error: validateFormError, isValid: isFormValid } = this.validateForm();
+            const { error: validateFormError, isValid: isFormValid } = this.validateForm(saveType);
             if (validateFormError) {
                 return;
             }
@@ -225,6 +233,7 @@ const getSaveHandler = (
                 hasGeneralErrors,
                 inProgressList,
                 calculatedFoundation,
+                fieldsValidated,
                 ...passOnProps
             } = this.props;
 
