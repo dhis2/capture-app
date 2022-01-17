@@ -28,7 +28,7 @@ Then('the user sees the enrollment date', () => {
 Then('the user sees the incident date', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-incident-date"]')
-            .contains('Date of birth 2021-08-01')
+            .contains('Date of birth 2022-08-01')
             .should('exist');
     });
 });
