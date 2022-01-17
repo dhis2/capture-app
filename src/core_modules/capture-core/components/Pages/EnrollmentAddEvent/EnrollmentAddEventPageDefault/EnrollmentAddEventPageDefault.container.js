@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox } from '@dhis2/ui';
 import { useLocationQuery } from '../../../../utils/routing';
-import { navigateToEnrollmentPage } from './EnrollmentAddEventPageDefault.actions';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
@@ -18,6 +17,9 @@ import {
 import { updateEnrollmentEventsWithoutId } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
+import {
+    navigateToEnrollmentOverview,
+} from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
 export const EnrollmentAddEventPageDefault = ({
     enrollment,
@@ -29,13 +31,13 @@ export const EnrollmentAddEventPageDefault = ({
     const dispatch = useDispatch();
 
     const handleCancel = useCallback(() => {
-        dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
+        dispatch(navigateToEnrollmentOverview({ programId, orgUnitId, teiId, enrollmentId }));
     }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
         (data, uid) => {
             dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
-            dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
+            dispatch(navigateToEnrollmentOverview({ programId, orgUnitId, teiId, enrollmentId }));
         },
         [dispatch, programId, orgUnitId, teiId, enrollmentId],
     );
@@ -43,7 +45,7 @@ export const EnrollmentAddEventPageDefault = ({
     const handleDelete = useCallback(() => {
         dispatch(batchActions([
             deleteEnrollment({ enrollmentId }),
-            navigateToEnrollmentPage(programId, orgUnitId, teiId),
+            navigateToEnrollmentOverview({ programId, orgUnitId, teiId }),
         ]));
     }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
