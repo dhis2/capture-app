@@ -1,3 +1,10 @@
+## [1.63.3](https://github.com/dhis2/capture-app/compare/v1.63.2...v1.63.3) (2022-01-18)
+
+
+### Bug Fixes
+
+* [DHIS2-12324] Change label to enrollmentDate in ScopeSelector ([79af895](https://github.com/dhis2/capture-app/commit/79af8956083f0ffcea10b066d930ae383b383dc8))
+
 ## [1.63.2](https://github.com/dhis2/capture-app/compare/v1.63.1...v1.63.2) (2022-01-12)
 
 
