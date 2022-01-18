@@ -1,4 +1,4 @@
-
+// @flow
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
@@ -31,8 +31,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
 
     // $FlowFixMe
-    const pageIsInvalid = (!loading && !Object.values(validIds)
-        ?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
+    const pageIsInvalid = (!loading && !Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
     const pageStatus = useMemo(() => {
         if (!programId || !enrollmentId || !teiId) {
             return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
@@ -53,8 +52,9 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
         }
         return EnrollmentAddEventPageStatuses.DEFAULT;
     }, [enrollmentId, loading, pageIsInvalid, programId, teiId, validIds]);
+
     if (pageStatus === EnrollmentAddEventPageStatuses.LOADING) {
-        return <LoadingMaskForPage/>;
+        return <LoadingMaskForPage />;
     }
 
     if (pageStatus === EnrollmentAddEventPageStatuses.DEFAULT) {
@@ -66,6 +66,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
             />
         );
     }
+
     return (
         <div className={classes.informativeMessage}>
             <NoticeBox
