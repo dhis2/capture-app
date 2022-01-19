@@ -109,25 +109,30 @@ export function getGeneratedUniqueValuesAsync(
         .all(itemContainerPromises);
 }
 
-
-export const getUniqueValuesForAttributesWithoutValue = async (foundation: ?RenderFoundation, attributes: Object, staticPatternValues: StaticPatternValues) => {
+export const getUniqueValuesForAttributesWithoutValue = async (
+    foundation: ?RenderFoundation,
+    attributes: Object,
+    staticPatternValues: StaticPatternValues,
+) => {
     if (!foundation) {
         return {};
     }
-    const uniqueAttributesWithoutValue = attributes.filter(attribute => attribute.unique && !attribute.value);
+    const uniqueDataElements = foundation.getElements().filter(dataElement => dataElement.unique && dataElement.unique.generatable);
 
-    if (uniqueAttributesWithoutValue && uniqueAttributesWithoutValue.length > 0) {
-        const uniqueDataElementsWithoutValue = foundation
-            .getElements()
-            .filter(
-                dataElement =>
-                    dataElement.unique &&
-                    dataElement.unique.generatable &&
-                    uniqueAttributesWithoutValue.find(uniqueAttributeWithoutValue => uniqueAttributeWithoutValue.attribute === dataElement.id),
-            );
+    if (uniqueDataElements && uniqueDataElements.length > 0) {
+        const uniqueDataElementsWithoutValue = uniqueDataElements.reduce((acc, dataElement) => {
+            const matchedApiAttribute = attributes.find(attribute => attribute.attribute === dataElement.id);
+            if (matchedApiAttribute) {
+                if (matchedApiAttribute.unique && !matchedApiAttribute.value) {
+                    acc = [...acc, dataElement];
+                }
+            } else {
+                acc = [...acc, dataElement];
+            }
+            return acc;
+        }, []);
 
         let uniqueValues = {};
-
         for (const dataElement of uniqueDataElementsWithoutValue) {
             const id = dataElement.id;
             const cacheItem = getActiveUniqueItemFromCache(id, {});
