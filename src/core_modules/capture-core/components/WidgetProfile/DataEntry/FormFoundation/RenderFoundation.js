@@ -12,8 +12,7 @@ import { RenderFoundation, Section } from '../../../../metaData';
 import { buildDataElement, buildTetFeatureType } from './DataElement';
 import { getProgramTrackedEntityAttributes, getTrackedEntityTypeId } from '../helpers';
 
-const getFeatureType = (featureType: ?string) =>
-    (featureType ? capitalizeFirstLetter(featureType.toLowerCase()) : 'None');
+const getFeatureType = (featureType: ?string) => (featureType ? capitalizeFirstLetter(featureType.toLowerCase()) : 'None');
 
 const buildTetFeatureTypeField = (trackedEntityType: CachedTrackedEntityType) => {
     if (!trackedEntityType) {
@@ -29,10 +28,7 @@ const buildTetFeatureTypeField = (trackedEntityType: CachedTrackedEntityType) =>
     return buildTetFeatureType(featureType);
 };
 
-const buildTetFeatureTypeSection = async (
-    programTrackedEntityTypeId: string,
-    trackedEntityType: CachedTrackedEntityType,
-) => {
+const buildTetFeatureTypeSection = async (programTrackedEntityTypeId: string, trackedEntityType: CachedTrackedEntityType) => {
     const featureTypeField = buildTetFeatureTypeField(trackedEntityType);
 
     if (!featureTypeField) {
@@ -71,15 +67,16 @@ const buildMainSection = async (
 };
 
 const buildElementsForSection = async (
-    programTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
+    programTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
     trackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
     optionSets: Array<CachedOptionSet>,
     section: Section,
 ) => {
-    await programTrackedEntityAttributes?.forEach(async (trackedEntityAttribute) => {
+    for (const trackedEntityAttribute of programTrackedEntityAttributes) {
+        // eslint-disable-next-line no-await-in-loop
         const element = await buildDataElement(trackedEntityAttribute, trackedEntityAttributes, optionSets);
         element && section.addElement(element);
-    });
+    }
     return section;
 };
 
@@ -129,11 +126,8 @@ export const buildFormFoundation = async (program: any) => {
 
         programTrackedEntityAttributes &&
             (await programSections.forEach(async (programSection) => {
-                const programTrackedEntityAttributesFiltered = programTrackedEntityAttributes.filter(
-                    trackedEntityAttribute =>
-                        programSection.trackedEntityAttributes.includes(
-                            trackedEntityAttribute.trackedEntityAttributeId,
-                        ),
+                const programTrackedEntityAttributesFiltered = programTrackedEntityAttributes.filter(trackedEntityAttribute =>
+                    programSection.trackedEntityAttributes.includes(trackedEntityAttribute.trackedEntityAttributeId),
                 );
                 section = await buildSection(
                     programTrackedEntityAttributesFiltered,
@@ -145,18 +139,13 @@ export const buildFormFoundation = async (program: any) => {
                 section && renderFoundation.addSection(section);
             }));
     } else {
-        section = await buildMainSection(
-            trackedEntityType,
-            trackedEntityAttributes,
-            optionSets,
-            programTrackedEntityAttributes,
-        );
+        section = await buildMainSection(trackedEntityType, trackedEntityAttributes, optionSets, programTrackedEntityAttributes);
         section && renderFoundation.addSection(section);
     }
     return renderFoundation;
 };
 
 export const build = async (program: any, setFormFoundation?: (formFoundation: RenderFoundation) => void) => {
-    const formFoundation = await buildFormFoundation(program) || {};
+    const formFoundation = (await buildFormFoundation(program)) || {};
     setFormFoundation && setFormFoundation(formFoundation);
 };

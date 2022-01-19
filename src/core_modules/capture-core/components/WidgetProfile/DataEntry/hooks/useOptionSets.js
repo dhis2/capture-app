@@ -9,16 +9,14 @@ const getOptionSets = array =>
         // $FlowFixMe[incompatible-use]
         const { optionSet } = currentValue;
         if (optionSet) {
-            const { valueType, displayName, options, id } = optionSet;
+            const { valueType, options, id } = optionSet;
             return {
                 ...acc,
                 [id]: {
                     ...optionSet,
-                    displayName: convertServerToClient(displayName, valueType),
                     options: options.map(option => ({
                         ...option,
                         code: convertServerToClient(option.code, valueType),
-                        displayName: convertServerToClient(option.displayName, valueType),
                     })),
                 },
             };

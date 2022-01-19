@@ -108,3 +108,40 @@ export function getGeneratedUniqueValuesAsync(
     return Promise
         .all(itemContainerPromises);
 }
+
+
+export const getUniqueValuesForAttributesWithoutValue = async (foundation: ?RenderFoundation, attributes: Object, staticPatternValues: StaticPatternValues) => {
+    if (!foundation) {
+        return {};
+    }
+    const uniqueAttributesWithoutValue = attributes.filter(attribute => attribute.unique && !attribute.value);
+
+    if (uniqueAttributesWithoutValue && uniqueAttributesWithoutValue.length > 0) {
+        const uniqueDataElementsWithoutValue = foundation
+            .getElements()
+            .filter(
+                dataElement =>
+                    dataElement.unique &&
+                    dataElement.unique.generatable &&
+                    uniqueAttributesWithoutValue.find(uniqueAttributeWithoutValue => uniqueAttributeWithoutValue.attribute === dataElement.id),
+            );
+
+        let uniqueValues = {};
+
+        for (const dataElement of uniqueDataElementsWithoutValue) {
+            const id = dataElement.id;
+            const cacheItem = getActiveUniqueItemFromCache(id, {});
+            if (cacheItem) {
+                uniqueValues = { ...uniqueValues, ...{ [id]: cacheItem.value } };
+            } else {
+                // eslint-disable-next-line no-await-in-loop
+                const generateUniqueValue = await generateUniqueValueAsync(id, staticPatternValues).then(value => ({
+                    [id]: value,
+                }));
+                uniqueValues = { ...uniqueValues, ...generateUniqueValue };
+            }
+        }
+        return uniqueValues;
+    }
+    return {};
+};

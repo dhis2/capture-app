@@ -1,22 +1,13 @@
 // @flow
 import { useState, useEffect, useRef } from 'react';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
-import { getGeneratedUniqueValuesAsync } from '../../../DataEntries/common/TEIAndEnrollment';
+import { getUniqueValuesForAttributesWithoutValue } from '../../../DataEntries/common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToForm } from '../../../../converters';
 
 type StaticPatternValues = {
     orgUnitCode: string,
 };
-
-const mergeUniqueValues = (uniqueValues, apiValues) =>
-    Object.keys(apiValues).reduce((acc, key) => {
-        const uniqueValue = uniqueValues.find(value => value.id === key);
-        return uniqueValue && apiValues[key] === undefined ? { ...acc, [key]: uniqueValue.item.value } : { ...acc, [key]: apiValues[key] };
-    }, {});
-
-const shouldGenerateUniqueValues = clientAttributesWithSubvalues =>
-    !clientAttributesWithSubvalues.every(attribute => (attribute.unique && attribute.value) || !attribute.unique);
 
 const buildFormValues = async (
     foundation: ?RenderFoundation,
@@ -25,19 +16,14 @@ const buildFormValues = async (
     setFormValues: (values: any) => void,
     setClientValues: (values: any) => void,
 ) => {
-    let clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
-    let formValues = clientAttributesWithSubvalues?.reduce(
+    const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
+    const formValues = clientAttributesWithSubvalues?.reduce(
         (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
         {},
     );
-
-    if (shouldGenerateUniqueValues(clientAttributesWithSubvalues)) {
-        const generatedUniqueValues = await getGeneratedUniqueValuesAsync(foundation, {}, staticPatternValues);
-        formValues = mergeUniqueValues(generatedUniqueValues, formValues);
-        clientValues = mergeUniqueValues(generatedUniqueValues, clientValues);
-    }
-    setFormValues && setFormValues(formValues);
-    setClientValues && setClientValues(clientValues);
+    const uniqueValues = await getUniqueValuesForAttributesWithoutValue(foundation, clientAttributesWithSubvalues, staticPatternValues);
+    setFormValues && setFormValues({ ...formValues, ...uniqueValues });
+    setClientValues && setClientValues({ ...clientValues, ...uniqueValues });
 };
 
 export const useFormValues = ({
