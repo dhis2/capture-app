@@ -1,6 +1,6 @@
 // @flow
 import type { QuerySingleResource } from 'capture-core/utils/api';
-import { dataElementTypes } from '../../metaData';
+import { dataElementTypes } from '../../../metaData';
 
 const getImageOrFileResourceSubvalue = async (key: string, querySingleResource: QuerySingleResource) => {
     const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: key });

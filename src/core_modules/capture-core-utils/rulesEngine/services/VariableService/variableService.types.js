@@ -53,6 +53,7 @@ export type Enrollment = {
 export type OrgUnit = {
     id: string,
     name: string,
+    code: string,
 };
 
 type Option = {

@@ -1,59 +1,47 @@
 // @flow
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
+import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { Button, spacersNum } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { errorCreator } from 'capture-core-utils';
-import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
-import { useClientAttributesWithSubvalues } from './hooks';
 import type { Props } from './widgetProfile.types';
+import { DataEntry } from './DataEntry';
+import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues } from './hooks';
 
-export const WidgetProfile = ({ teiId, programId }: Props) => {
+const styles = {
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: spacersNum.dp8,
+        justifyContent: 'space-between',
+        width: '100%',
+    },
+};
+
+const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = '', classes }: Props) => {
     const [open, setOpenStatus] = useState(true);
-
-    const programsQuery = useMemo(() => ({
-        programs: {
-            resource: 'programs',
-            id: programId,
-            params: {
-                fields:
-                ['programTrackedEntityAttributes[id,displayInList,trackedEntityAttribute[id,displayName,valueType,optionSet[id,options[code,name]]]'],
-            },
-        },
-    }), [programId]);
-
-    const trackedEntityInstancesQuery = useMemo(() => ({
-        trackedEntityInstances: {
-            resource: 'trackedEntityInstances',
-            id: teiId,
-            params: {
-                program: programId,
-            },
-        },
-    }), [teiId, programId]);
-
-
-    const {
-        loading: programsLoading,
-        data: programsData,
-        error: programsError,
-    } = useDataQuery(programsQuery);
+    const [toggleEditModal, setToggleEditModal] = useState(false);
+    const { loading: programsLoading, program, error: programsError } = useProgram(programId);
     const {
         loading: trackedEntityInstancesLoading,
-        data: trackedEntityInstancesData,
+        trackedEntityInstances,
         error: trackedEntityInstancesError,
-    } = useDataQuery(trackedEntityInstancesQuery);
+    } = useTrackedEntityInstances(teiId, programId);
+
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
 
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(programsData, trackedEntityInstancesData);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstances);
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
-        .map(({ optionSet, reactKey, key, value: clientValue, valueType }) => {
+        .map(({ optionSet, attribute, key, value: clientValue, valueType }) => {
             let value;
             if (optionSet && optionSet.id) {
                 const selectedOption = optionSet.options.find(option => option.code === clientValue);
@@ -62,7 +50,7 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
                 value = convertClientToView(clientValue, valueType);
             }
             return {
-                reactKey, key, value,
+                attribute, key, value,
             };
         }), [clientAttributesWithSubvalues]);
 
@@ -83,17 +71,34 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
     };
 
     return (
-        <div
-            data-test="profile-widget"
-        >
+        <div data-test="profile-widget">
             <Widget
-                header={i18n.t('Person Profile')}
+                header={
+                    <div className={classes.header}>
+                        <div> {i18n.t('Person Profile')} </div>
+                        {showEdit && (
+                            <Button onClick={() => setToggleEditModal(true)} small>
+                                {i18n.t('Edit')}
+                            </Button>
+                        )}
+                    </div>
+                }
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
                 {renderProfile()}
             </Widget>
+            {!loading && !error && showEdit && toggleEditModal && (
+                <DataEntry
+                    onCancel={() => setToggleEditModal(false)}
+                    programAPI={program}
+                    orgUnitId={orgUnitId}
+                    clientAttributesWithSubvalues={clientAttributesWithSubvalues}
+                />
+            )}
         </div>
     );
 };
+
+export const WidgetProfile: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetProfilePlain);

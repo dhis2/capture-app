@@ -1,2 +1,2 @@
 // @flow
-export { getGeneratedUniqueValuesAsync } from './getGeneratedUniqueValuesAsync';
+export { getGeneratedUniqueValuesAsync, getUniqueValuesForAttributesWithoutValue } from './getGeneratedUniqueValuesAsync';
