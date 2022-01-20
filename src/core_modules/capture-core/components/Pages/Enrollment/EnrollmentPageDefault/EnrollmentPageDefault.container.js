@@ -75,6 +75,7 @@ export const EnrollmentPageDefault = () => {
     return (
         <EnrollmentPageDefaultComponent
             teiId={teiId}
+            orgUnitId={orgUnitId}
             program={program}
             // $FlowFixMe
             stages={stages}

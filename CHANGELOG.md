@@ -1,3 +1,17 @@
+# [1.64.0](https://github.com/dhis2/capture-app/compare/v1.63.4...v1.64.0) (2022-01-20)
+
+
+### Features
+
+* [DHIS2-11633][DHIS2-11878] edit profile widget ([#2174](https://github.com/dhis2/capture-app/issues/2174)) ([9787b30](https://github.com/dhis2/capture-app/commit/9787b30d22fa30df883d46ebeb780622f1152a31)), closes [#2263](https://github.com/dhis2/capture-app/issues/2263)
+
+## [1.63.4](https://github.com/dhis2/capture-app/compare/v1.63.3...v1.63.4) (2022-01-20)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([444f8e2](https://github.com/dhis2/capture-app/commit/444f8e21621e3cec1e1bd7c521bf55308f59a253))
+
 ## [1.63.3](https://github.com/dhis2/capture-app/compare/v1.63.2...v1.63.3) (2022-01-18)
 
 

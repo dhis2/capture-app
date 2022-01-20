@@ -1,6 +1,6 @@
 Feature: The user interacts with the widgets on the enrollment dashboard
 
-  # Scenarios linked to the enrollment add event
+  # Scenarios linked to the enrollment dashboard
   Scenario: The profile widget can be closed on the enrollment dashboard
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     And you see the widget with data-test profile-widget
@@ -13,6 +13,22 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     When you click the widget toggle open close button with data-test profile-widget
     And you click the widget toggle open close button with data-test profile-widget
     Then the profile details should be displayed
+
+  Scenario: The profile edit modal widget can be closed and reopened on the enrollment dashboard
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    And you see the widget with data-test profile-widget
+    When the user clicks the element containing the text: Edit
+    Then the user sees the edit profile modal
+    When the user clicks the element containing the text: Cancel without saving
+
+  Scenario: The TEI rules are triggered correctly in the profile edit modal widget
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=ek4WWAgXX5i
+    And you see the widget with data-test profile-widget
+    When the user clicks the element containing the text: Edit
+    Then the user sees the edit profile modal
+    And the user don't see the following text: The womans age is outside the normal range. With the birthdate entered, the age would be: 0
+    And the user sets the birthday date to the current date
+    Then the user see the following text: The womans age is outside the normal range. With the birthdate entered, the age would be: 0
 
   Scenario: User can close the Enrollment Widget
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE

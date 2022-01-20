@@ -108,3 +108,45 @@ export function getGeneratedUniqueValuesAsync(
     return Promise
         .all(itemContainerPromises);
 }
+
+export const getUniqueValuesForAttributesWithoutValue = async (
+    foundation: ?RenderFoundation,
+    attributes: Object,
+    staticPatternValues: StaticPatternValues,
+) => {
+    if (!foundation) {
+        return {};
+    }
+    const uniqueDataElements = foundation.getElements().filter(dataElement => dataElement.unique && dataElement.unique.generatable);
+
+    if (uniqueDataElements && uniqueDataElements.length > 0) {
+        const uniqueDataElementsWithoutValue = uniqueDataElements.reduce((acc, dataElement) => {
+            const matchedApiAttribute = attributes.find(attribute => attribute.attribute === dataElement.id);
+            if (matchedApiAttribute) {
+                if (matchedApiAttribute.unique && !matchedApiAttribute.value) {
+                    acc = [...acc, dataElement];
+                }
+            } else {
+                acc = [...acc, dataElement];
+            }
+            return acc;
+        }, []);
+
+        let uniqueValues = {};
+        for (const dataElement of uniqueDataElementsWithoutValue) {
+            const id = dataElement.id;
+            const cacheItem = getActiveUniqueItemFromCache(id, {});
+            if (cacheItem) {
+                uniqueValues = { ...uniqueValues, ...{ [id]: cacheItem.value } };
+            } else {
+                // eslint-disable-next-line no-await-in-loop
+                const generateUniqueValue = await generateUniqueValueAsync(id, staticPatternValues).then(value => ({
+                    [id]: value,
+                }));
+                uniqueValues = { ...uniqueValues, ...generateUniqueValue };
+            }
+        }
+        return uniqueValues;
+    }
+    return {};
+};
