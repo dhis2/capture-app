@@ -1,5 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
+import { pipe } from 'capture-core-utils';
 import { flatMap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import moment from 'moment';
@@ -8,11 +9,13 @@ import {
     saveNewTrackedEntityInstance,
     saveNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
-import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
+import { getTrackerProgramThrowIfNotFound, dataElementTypes } from '../../../../metaData';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { convertValue as convertToServer } from '../../../../converters/clientToServer';
+import { convertFormToClient, convertClientToServer } from '../../../../converters';
+
+const convertFn = pipe(convertFormToClient, convertClientToServer);
 
 const geometryType = (key) => {
     const types = ['Point', 'None', 'Polygon'];
@@ -96,7 +99,7 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
             const { currentSelections: { orgUnitId, trackedEntityTypeId }, formsValues } = store.value;
             const values = formsValues['newPageDataEntryId-newTei'];
             const formFoundation = action.payload?.formFoundation;
-            const formServerValues = formFoundation?.convertValues(values, convertToServer);
+            const formServerValues = formFoundation?.convertValues(values, convertFn);
             return saveNewTrackedEntityInstance(
                 {
                     attributes: deriveAttributesFromFormValues(formServerValues),
@@ -133,8 +136,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
             const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
             const events = deriveEvents({ stages, enrollmentDate, incidentDate, programId, orgUnitId });
             const formFoundation = action.payload?.formFoundation;
-            const formServerValues = formFoundation?.convertValues(values, convertToServer);
-
+            const formServerValues = formFoundation?.convertValues(values, convertFn);
 
             return saveNewTrackedEntityInstanceWithEnrollment(
                 {
@@ -143,8 +145,8 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
                     enrollments: [
                         {
                             geometry: standardGeoJson(geometry),
-                            incidentDate,
-                            enrollmentDate,
+                            incidentDate: convertFn(incidentDate, dataElementTypes.DATE),
+                            enrollmentDate: convertFn(enrollmentDate, dataElementTypes.DATE),
                             program: programId,
                             orgUnit: orgUnitId,
                             status: 'ACTIVE',
