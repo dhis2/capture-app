@@ -1,3 +1,10 @@
+# [1.64.0](https://github.com/dhis2/capture-app/compare/v1.63.4...v1.64.0) (2022-01-20)
+
+
+### Features
+
+* [DHIS2-11633][DHIS2-11878] edit profile widget ([#2174](https://github.com/dhis2/capture-app/issues/2174)) ([9787b30](https://github.com/dhis2/capture-app/commit/9787b30d22fa30df883d46ebeb780622f1152a31)), closes [#2263](https://github.com/dhis2/capture-app/issues/2263)
+
 ## [1.63.4](https://github.com/dhis2/capture-app/compare/v1.63.3...v1.63.4) (2022-01-20)
 
 
