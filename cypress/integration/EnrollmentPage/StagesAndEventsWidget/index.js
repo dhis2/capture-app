@@ -107,11 +107,11 @@ Then('there should be 5 rows in the table', () => {
 
 Then('the default list should be displayed', () => {
     const rows = [
-        '2020-07-13|Bumbeh MCHP',
-        '2020-07-12|Bumbeh MCHP',
-        '2020-07-11|Bumbeh MCHP',
-        '2020-07-10|Bumbeh MCHP',
-        '2020-07-09|Bumbeh MCHP',
+        '2021-07-13|Bumbeh MCHP',
+        '2021-07-12|Bumbeh MCHP',
+        '2021-07-11|Bumbeh MCHP',
+        '2021-07-10|Bumbeh MCHP',
+        '2021-07-09|Bumbeh MCHP',
     ];
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')
@@ -149,11 +149,11 @@ When(/^you sort list asc by (.*)$/, (columnName) => {
 
 Then('the sorted list by Report date asc should be displayed', () => {
     const rows = [
-        '2020-07-13|Bumbeh MCHP',
-        '2020-07-12|Bumbeh MCHP',
-        '2020-07-11|Bumbeh MCHP',
-        '2020-07-10|Bumbeh MCHP',
-        '2020-07-09|Bumbeh MCHP',
+        '2021-07-13|Bumbeh MCHP',
+        '2021-07-12|Bumbeh MCHP',
+        '2021-07-11|Bumbeh MCHP',
+        '2021-07-10|Bumbeh MCHP',
+        '2021-07-09|Bumbeh MCHP',
     ];
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')

@@ -60,6 +60,7 @@ export type CachedDataElement = {
     optionSetValue: boolean,
     optionSet: { id: string },
     style: CachedStyle,
+    url: string,
 };
 
 export type CachedProgramStageDataElement = {

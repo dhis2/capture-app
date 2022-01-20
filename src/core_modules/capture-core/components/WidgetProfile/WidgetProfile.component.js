@@ -8,18 +8,19 @@ import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
-import { convertValue as convertServerToClient } from '../../converters/serverToClient';
+import { useClientAttributesWithSubvalues } from './hooks';
 import type { Props } from './widgetProfile.types';
 
 export const WidgetProfile = ({ teiId, programId }: Props) => {
     const [open, setOpenStatus] = useState(true);
+
     const programsQuery = useMemo(() => ({
         programs: {
             resource: 'programs',
             id: programId,
             params: {
                 fields:
-                ['programTrackedEntityAttributes[id,displayInList,trackedEntityAttribute[id,displayName,valueType]]'],
+                ['programTrackedEntityAttributes[id,displayInList,trackedEntityAttribute[id,displayName,valueType,optionSet[id,options[code,name]]]'],
             },
         },
     }), [programId]);
@@ -48,31 +49,22 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
 
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(programsData, trackedEntityInstancesData);
 
-    const formatValue = (value, valueType) => {
-        const convertToClientValue = convertServerToClient(value, valueType);
-        return convertClientToView(convertToClientValue, valueType);
-    };
-
-    const mergeAttributes = () => {
-        const { programs: { programTrackedEntityAttributes } } = programsData;
-        const { trackedEntityInstances: { attributes } } = trackedEntityInstancesData;
-
-        return programTrackedEntityAttributes
-            .filter(item => item.displayInList)
-            .reduce((acc, curr) => {
-                const foundAttribute = attributes
-                    .find(item => item.attribute === curr.trackedEntityAttribute.id);
-
-                acc.push({
-                    reactKey: curr.trackedEntityAttribute.id,
-                    key: curr.trackedEntityAttribute.displayName,
-                    value: formatValue(foundAttribute?.value, foundAttribute?.valueType),
-                });
-
-                return acc;
-            }, []);
-    };
+    const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
+        .filter(item => item.displayInList)
+        .map(({ optionSet, reactKey, key, value: clientValue, valueType }) => {
+            let value;
+            if (optionSet && optionSet.id) {
+                const selectedOption = optionSet.options.find(option => option.code === clientValue);
+                value = selectedOption && selectedOption.name;
+            } else {
+                value = convertClientToView(clientValue, valueType);
+            }
+            return {
+                reactKey, key, value,
+            };
+        }), [clientAttributesWithSubvalues]);
 
     const renderProfile = () => {
         if (loading) {
@@ -86,7 +78,7 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
 
         return (<FlatList
             dataTest="profile-widget-flatlist"
-            list={mergeAttributes()}
+            list={displayInListAttributes}
         />);
     };
 
