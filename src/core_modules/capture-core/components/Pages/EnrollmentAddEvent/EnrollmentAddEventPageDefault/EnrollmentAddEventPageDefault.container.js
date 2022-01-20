@@ -1,11 +1,11 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
-import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
+import { useHistory } from 'react-router-dom';
 import { NoticeBox } from '@dhis2/ui';
-import { useLocationQuery } from '../../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
@@ -17,9 +17,6 @@ import {
 import { updateEnrollmentEventsWithoutId } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
-import {
-    navigateToEnrollmentOverview,
-} from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
 export const EnrollmentAddEventPageDefault = ({
     enrollment,
@@ -28,26 +25,25 @@ export const EnrollmentAddEventPageDefault = ({
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const handleCancel = useCallback(() => {
-        dispatch(navigateToEnrollmentOverview({ programId, orgUnitId, teiId, enrollmentId }));
-    }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
+        history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+    }, [history, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
         (data, uid) => {
             dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
-            dispatch(navigateToEnrollmentOverview({ programId, orgUnitId, teiId, enrollmentId }));
+            history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [dispatch, programId, orgUnitId, teiId, enrollmentId],
+        [dispatch, history, programId, orgUnitId, teiId, enrollmentId],
     );
 
     const handleDelete = useCallback(() => {
-        dispatch(batchActions([
-            deleteEnrollment({ enrollmentId }),
-            navigateToEnrollmentOverview({ programId, orgUnitId, teiId }),
-        ]));
-    }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
+        dispatch(deleteEnrollment({ enrollmentId }));
+        history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+    }, [dispatch, enrollmentId, history, programId, orgUnitId, teiId]);
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
