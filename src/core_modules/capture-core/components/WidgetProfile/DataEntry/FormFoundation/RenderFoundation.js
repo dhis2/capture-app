@@ -123,12 +123,12 @@ export const buildFormFoundation = async (program: any) => {
             section = await buildTetFeatureTypeSection(trackedEntityTypeId, trackedEntityType);
             section && renderFoundation.addSection(section);
         }
-
-        programTrackedEntityAttributes &&
-            (await programSections.forEach(async (programSection) => {
+        if (programTrackedEntityAttributes) {
+            for (const programSection of programSections) {
                 const programTrackedEntityAttributesFiltered = programTrackedEntityAttributes.filter(trackedEntityAttribute =>
                     programSection.trackedEntityAttributes.includes(trackedEntityAttribute.trackedEntityAttributeId),
                 );
+                // eslint-disable-next-line no-await-in-loop
                 section = await buildSection(
                     programTrackedEntityAttributesFiltered,
                     trackedEntityAttributes,
@@ -137,7 +137,8 @@ export const buildFormFoundation = async (program: any) => {
                     programSection.id,
                 );
                 section && renderFoundation.addSection(section);
-            }));
+            }
+        }
     } else {
         section = await buildMainSection(trackedEntityType, trackedEntityAttributes, optionSets, programTrackedEntityAttributes);
         section && renderFoundation.addSection(section);
