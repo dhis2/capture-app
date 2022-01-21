@@ -111,17 +111,17 @@ const viewModeComponent = withDefaultFieldContainer()(
 
 const buildReportDateSettingsFn = () => {
     const dataElement = new DataElement((o) => {
-        o.id = 'occurredAt';
+        o.id = 'scheduledAt';
         o.type = dataElementTypes.DATE;
     });
 
     const reportDateSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: props.formFoundation.getLabel(dataElement.id),
+            label: props.formFoundation.getLabel(props.eventStatus),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getPropName: () => dataElement.id,
+        getPropName: (props: Object) => props.eventStatus,
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,

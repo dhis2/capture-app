@@ -206,7 +206,7 @@ class NotesPlain extends React.Component<Props, State> {
                                     {n.storedBy}
                                 </div>
                                 <div className={classes.noteItemDate} data-test="comment-date">
-                                    {n.storedDate}
+                                    {n.storedAt}
                                 </div>
                             </div>
                             <div data-test="comment-text">

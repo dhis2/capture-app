@@ -39,7 +39,7 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
             const notes = (eventContainer && eventContainer.event && eventContainer.event.notes) || [];
             const convertedNotes = notes.map(note => ({
                 ...note,
-                storedDate: convertListValue(note.storedDate, dataElementTypes.DATETIME),
+                storedAt: convertListValue(note.storedAt, dataElementTypes.DATETIME),
             }));
             // Load event relationships
 
@@ -82,7 +82,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
             const clientNote = {
                 value: payload.note,
                 storedBy: userName,
-                storedDate: convertListValue(moment().toISOString(), dataElementTypes.DATETIME),
+                storedAt: convertListValue(moment().toISOString(), dataElementTypes.DATETIME),
                 clientId: uuid(),
             };
             return batchActions([

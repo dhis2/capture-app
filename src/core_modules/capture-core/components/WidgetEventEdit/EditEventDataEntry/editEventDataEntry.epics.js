@@ -87,7 +87,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
             if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedDate) {
-                mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+                mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
             }
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
