@@ -40,16 +40,16 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         ofType(NavigateToEnrollmentOverviewActionTypes.NAVIGATE_TO_ENROLLMENT_OVERVIEW),
         switchMap((action) => {
             const { teiId, programId, enrollmentId = 'AUTO' } = action.payload;
-            const { dataStore, userDataStore } = store.value.useNewDashboard;
+            const { dataStore, userDataStore } = store.value.useOldDashboard;
             const orgUnitId = action.payload.orgUnitId || store.value.workingListsListRecords?.teiList[teiId]?.programOwners[programId]?.ownerOrgUnit;
 
             if (dataStore || userDataStore) {
-                if (userDataStore?.[programId] === false) {
+                if (userDataStore?.[programId]) {
                     redirectToTracker({ dependencies, store, teiId, orgUnitId });
                     return EMPTY;
                 }
 
-                if (userDataStore?.[programId] !== true && dataStore?.[programId] === false) {
+                if (userDataStore?.[programId] !== false && dataStore?.[programId]) {
                     redirectToTracker({ dependencies, store, teiId, orgUnitId });
                     return EMPTY;
                 }
