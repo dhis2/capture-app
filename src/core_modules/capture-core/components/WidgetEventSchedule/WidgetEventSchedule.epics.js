@@ -37,7 +37,7 @@ export const scheduleNewEnrollmentEventEpic = (action$: InputObservable) =>
             }] };
 
             onSaveExternal && onSaveExternal(serverData, uid, onSaveSuccessActionType, onSaveErrorActionType);
-            return scheduleEvent(serverData, uid);
+            return scheduleEvent(serverData, uid, onSaveSuccessActionType, onSaveErrorActionType);
         }),
     );
 
