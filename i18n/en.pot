@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
-"PO-Revision-Date: 2021-12-21T16:14:01.098Z\n"
+"POT-Creation-Date: 2022-01-21T07:58:05.383Z\n"
+"PO-Revision-Date: 2022-01-21T07:58:05.383Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -614,19 +614,19 @@ msgid "No feedback for this enrollment yet"
 msgstr "No feedback for this enrollment yet"
 
 msgid "Quick actions"
-msgstr ""
+msgstr "Quick actions"
 
 msgid "New Event"
-msgstr ""
+msgstr "New Event"
 
 msgid "Schedule an event"
-msgstr ""
+msgstr "Schedule an event"
 
 msgid "Make referral"
-msgstr ""
+msgstr "Make referral"
 
 msgid "No available program stages"
-msgstr ""
+msgstr "No available program stages"
 
 msgid "Program stage not found"
 msgstr "Program stage not found"
@@ -1097,14 +1097,8 @@ msgstr "Profile widget could not be loaded. Please try again later"
 msgid "Person Profile"
 msgstr "Person Profile"
 
-msgid "You can’t add any more events in this program"
-msgstr ""
-
-msgid "Cancel without saving"
-msgstr ""
-
-msgid "Choose a stage for a new event"
-msgstr ""
+msgid "TEI's Relationships"
+msgstr "TEI's Relationships"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
