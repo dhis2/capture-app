@@ -1,3 +1,10 @@
+# [1.65.0](https://github.com/dhis2/capture-app/compare/v1.64.0...v1.65.0) (2022-01-21)
+
+
+### Features
+
+* [DHIS2-12301] enable default enrollment dashboard ([#2416](https://github.com/dhis2/capture-app/issues/2416)) ([25381ca](https://github.com/dhis2/capture-app/commit/25381ca474d83e1591411f87bc2e243f4c42e305))
+
 # [1.64.0](https://github.com/dhis2/capture-app/compare/v1.63.4...v1.64.0) (2022-01-20)
 
 
