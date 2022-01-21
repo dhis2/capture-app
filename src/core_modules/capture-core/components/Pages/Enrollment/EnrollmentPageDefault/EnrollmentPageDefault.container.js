@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useRef } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
@@ -18,11 +18,13 @@ import {
 import { buildUrlQueryString } from '../../../../utils/routing';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
+import { useRelationshipTypes } from '../../../WidgetTrackedEntityRelationship/hooks';
 
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const renderRelationshipRef = useRef();
     const { enrollmentId, programId, teiId, orgUnitId } = useSelector(
         ({
             router: {
@@ -36,6 +38,7 @@ export const EnrollmentPageDefault = () => {
                 orgUnitId: query.orgUnitId,
             }), shallowEqual);
     const { orgUnit } = useOrganisationUnit(orgUnitId);
+    const { relationshipTypes } = useRelationshipTypes();
 
     const program = useTrackerProgram(programId);
     const {
@@ -98,6 +101,8 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
+            renderRelationshipRef={renderRelationshipRef}
+            relationshipTypes={relationshipTypes}
         />
     );
 };

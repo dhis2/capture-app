@@ -13,10 +13,14 @@ import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 import { EnrollmentQuickActions } from './EnrollmentQuickActions';
+import {
+    WidgetTrackedEntityRelationship,
+} from '../../../WidgetTrackedEntityRelationship/WidgetTrackedEntityRelationship';
 
 const getStyles = ({ typography }) => ({
     columns: {
         display: 'flex',
+        position: 'relative',
     },
     leftColumn: {
         flexGrow: 3,
@@ -56,10 +60,12 @@ export const EnrollmentPageDefaultPlain = ({
     hideWidgets,
     classes,
     onEventClick,
+    renderRelationshipRef,
+    relationshipTypes,
 }: PlainProps) => (
     <>
         <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
-        <div className={classes.columns}>
+        <div className={classes.columns} ref={renderRelationshipRef}>
             <div className={classes.leftColumn}>
                 <EnrollmentQuickActions
                     stages={stages}
@@ -74,6 +80,10 @@ export const EnrollmentPageDefaultPlain = ({
                 />
             </div>
             <div className={classes.rightColumn}>
+                <WidgetTrackedEntityRelationship
+                    relationshipTypes={relationshipTypes}
+                    renderRef={renderRelationshipRef}
+                />
                 <WidgetEnrollmentComment />
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />

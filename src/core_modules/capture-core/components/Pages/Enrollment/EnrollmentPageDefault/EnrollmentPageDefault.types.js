@@ -3,6 +3,7 @@ import type { Program } from 'capture-core/metaData';
 import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import type { RelationshipType } from '../../../../metaData';
 
 export type Props = {|
     program: Program,
@@ -17,6 +18,8 @@ export type Props = {|
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,
     onEventClick: (eventId: string, stageId: string) => void,
+    renderRelationshipRef: Object,
+    relationshipTypes: ?Array<RelationshipType>
 |};
 
 export type PlainProps = {|
