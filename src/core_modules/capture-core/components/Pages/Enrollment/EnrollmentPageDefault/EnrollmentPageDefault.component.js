@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { spacersNum } from '@dhis2/ui';
+import { spacersNum, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
@@ -12,6 +12,7 @@ import { WidgetFeedback } from '../../../WidgetFeedback';
 import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
+import { EnrollmentQuickActions } from './EnrollmentQuickActions';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -21,6 +22,9 @@ const getStyles = ({ typography }) => ({
         flexGrow: 3,
         flexShrink: 1,
         width: 872,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp16,
     },
     rightColumn: {
         flexGrow: 1,
@@ -29,7 +33,7 @@ const getStyles = ({ typography }) => ({
         width: 360,
         display: 'flex',
         flexDirection: 'column',
-        gap: '12px',
+        gap: spacers.dp16,
     },
     title: {
         ...typography.title,
@@ -41,6 +45,7 @@ const getStyles = ({ typography }) => ({
 export const EnrollmentPageDefaultPlain = ({
     program,
     teiId,
+    orgUnitId,
     events,
     enrollmentId,
     stages,
@@ -56,6 +61,10 @@ export const EnrollmentPageDefaultPlain = ({
         <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
+                <EnrollmentQuickActions
+                    stages={stages}
+                    events={events}
+                />
                 <WidgetStagesAndEvents
                     stages={stages}
                     events={events}
@@ -80,7 +89,7 @@ export const EnrollmentPageDefaultPlain = ({
                         emptyText={i18n.t('No feedback for this enrollment yet')}
                     />
                 )}
-                <WidgetProfile teiId={teiId} programId={program.id} />
+                <WidgetProfile teiId={teiId} programId={program.id} showEdit orgUnitId={orgUnitId} />
                 {enrollmentId !== 'AUTO' && <WidgetEnrollment
                     teiId={teiId}
                     enrollmentId={enrollmentId}
