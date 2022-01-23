@@ -14,5 +14,11 @@
   "env": {
     "dhis2DataTestPrefix": "capture-app",
     "networkMode": "live"
+  },
+  "component": {
+    "componentFolder": "src",
+    "testFiles": "**/__tests__/*spec.{js,jsx,ts,tsx}",
+    "viewportHeight": 500,
+    "viewportWidth": 700
   }
 }

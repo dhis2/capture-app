@@ -6,6 +6,7 @@
   "serverVersion": "37",
   "private": true,
   "dependencies": {
+    "@cypress/react": "^5.12.1",
     "@dhis2/app-runtime": "^3.2.7",
     "@dhis2/d2-i18n": "^1.1.0",
     "@dhis2/d2-icons": "^1.0.1",
@@ -88,6 +89,7 @@
     "@babel/plugin-transform-flow-strip-types": "^7.16.7",
     "@babel/preset-env": "^7.16.10",
     "@babel/preset-react": "^7.16.7",
+    "@cypress/webpack-dev-server": "^1.8.0",
     "@dhis2/cli-app-scripts": "^8.3.2",
     "@dhis2/cli-helpers-engine": "^3.2.1",
     "@dhis2/cli-utils-cypress": "^9.0.1",
@@ -118,7 +120,8 @@
     "jsdoc-babel": "^0.5.0",
     "jsdoc-export-default-interop": "^0.3.1",
     "redux-devtools-extension": "^2.13.9",
-    "wait-on": "^6.0.0"
+    "wait-on": "^6.0.0",
+    "webpack-dev-server": "^4.7.3"
   },
   "peerDependencies": {
     "capture-core": "1",
