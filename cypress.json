@@ -17,7 +17,7 @@
   },
   "component": {
     "componentFolder": "src",
-    "testFiles": "**/__tests__/*spec.{js,jsx,ts,tsx}",
+    "testFiles": "**/__cytests__/*spec.{js,jsx,ts,tsx}",
     "viewportHeight": 500,
     "viewportWidth": 700
   }
