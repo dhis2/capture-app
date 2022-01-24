@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
-"PO-Revision-Date: 2021-12-21T16:14:01.098Z\n"
+"POT-Creation-Date: 2022-01-24T10:34:13.643Z\n"
+"PO-Revision-Date: 2022-01-24T10:34:13.643Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -614,19 +614,19 @@ msgid "No feedback for this enrollment yet"
 msgstr "No feedback for this enrollment yet"
 
 msgid "Quick actions"
-msgstr ""
+msgstr "Quick actions"
 
 msgid "New Event"
-msgstr ""
+msgstr "New Event"
 
 msgid "Schedule an event"
-msgstr ""
+msgstr "Schedule an event"
 
 msgid "Make referral"
-msgstr ""
+msgstr "Make referral"
 
 msgid "No available program stages"
-msgstr ""
+msgstr "No available program stages"
 
 msgid "Program stage not found"
 msgstr "Program stage not found"
@@ -1120,14 +1120,6 @@ msgstr "Person Profile"
 
 msgid "Edit"
 msgstr "Edit"
-msgid "You can’t add any more events in this program"
-msgstr ""
-
-msgid "Cancel without saving"
-msgstr ""
-
-msgid "Choose a stage for a new event"
-msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
@@ -1206,6 +1198,9 @@ msgstr "Inactive"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
+
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr "an error occurred loading Tracked entity instance lists"
 
 msgid "Update view"
 msgstr "Update view"

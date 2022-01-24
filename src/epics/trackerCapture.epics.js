@@ -34,6 +34,12 @@ import {
     addTemplateEpic,
     deleteTemplateEpic,
 } from 'capture-core/components/WorkingLists/EventWorkingLists';
+import {
+    retrieveTemplatesEpic as retrieveTEITemplatesEpic,
+    updateTemplateEpic as updateTEITemplateEpic,
+    addTemplateEpic as addTEITemplateEpic,
+    deleteTemplateEpic as deleteTEITemplateEpic,
+} from 'capture-core/components/WorkingLists/TeiWorkingLists';
 
 import {
     fetchDataStoreEpic,
@@ -243,6 +249,10 @@ export const epics = combineEpics(
     updateTemplateEpic,
     addTemplateEpic,
     deleteTemplateEpic,
+    retrieveTEITemplatesEpic,
+    updateTEITemplateEpic,
+    addTEITemplateEpic,
+    deleteTEITemplateEpic,
     requestDeleteEventEpic,
     openNewEventInDataEntryEpic,
     resetDataEntryForNewEventEpic,

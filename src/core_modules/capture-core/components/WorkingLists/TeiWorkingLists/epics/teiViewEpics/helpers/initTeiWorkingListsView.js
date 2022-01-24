@@ -11,15 +11,22 @@ import {
 import type { Input } from './initTeiWorkingListsView.types';
 
 const getClientFilters = (criteria = {}) => {
-    // Build logic later when we actually have some non static templates
-    const { programStatus } = criteria;
+    const { programStatus, enrollmentDate } = criteria;
+    let filters = {};
 
-    return programStatus ? {
-        programStatus: {
-            usingOptionSet: true,
-            values: [programStatus],
-        },
-    } : {};
+    if (programStatus) {
+        filters = { ...filters,
+            programStatus: {
+                usingOptionSet: true,
+                values: [programStatus],
+            },
+        };
+    }
+    if (enrollmentDate) {
+        filters = { ...filters, enrollmentDate };
+    }
+    // TODO blocked by https://jira.dhis2.org/browse/DHIS2-12376. Need to know the shape of trackedEntityInstanceFilters and add it to the query.
+    return filters;
 };
 
 export const initTeiWorkingListsView = ({

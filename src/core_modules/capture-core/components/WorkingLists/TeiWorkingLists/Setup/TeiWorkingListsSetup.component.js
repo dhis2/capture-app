@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import {
     dataElementTypes,
@@ -11,9 +12,15 @@ import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
 
+const DEFAULT_TEMPLATES_LENGTH = 1;
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
     (currentTemplateId && templates.find(template => template.id === currentTemplateId)) || templates[0],
 [templates, currentTemplateId]);
+
+const useApiTemplate = () => {
+    const workingListsTemplatesTEI = useSelector(({ workingListsTemplates }) => workingListsTemplates.teiList);
+    return workingListsTemplatesTEI && workingListsTemplatesTEI.templates;
+};
 
 const useStaticTemplates = () => useMemo(() => ([{
     id: 'default',
@@ -177,7 +184,10 @@ export const TeiWorkingListsSetup = ({
     const defaultColumns = useDefaultColumnConfig(program, orgUnitId);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
-    const templates = useStaticTemplates();
+    const apiTemplates = useApiTemplate();
+    const staticTemplates = useStaticTemplates();
+    const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
+
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
         defaultColumns,

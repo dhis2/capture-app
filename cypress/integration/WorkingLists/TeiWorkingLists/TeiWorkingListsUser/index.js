@@ -9,6 +9,10 @@ Given('you open the main page with Ngelehun and child programme context', () => 
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and malaria focus investigation program context', () => {
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+});
+
 Then('the default working list should be displayed', () => {
     const names = [
         'Filona',
@@ -289,5 +293,15 @@ Then('the list should display data ordered ascendingly by first name', () => {
                     .contains(names[index - 1])
                     .should('exist');
             }
+        });
+});
+
+
+Then('the user sees the custom TEI working lists', () => {
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .within(() => {
+            cy.contains('Events assigned to me').should('exist');
+            cy.contains('Cases not yet assigned').should('exist');
+            cy.contains('Ongoing foci responses').should('exist');
         });
 });
