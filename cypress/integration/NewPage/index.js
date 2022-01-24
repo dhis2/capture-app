@@ -338,6 +338,7 @@ And('you fill in a unique first name', () => {
 });
 
 And('you click the save new submit button', () => {
+    cy.wait(5000);
     cy.contains('Save new')
         .click();
 });
