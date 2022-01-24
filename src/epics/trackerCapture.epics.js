@@ -34,12 +34,6 @@ import {
     addTemplateEpic,
     deleteTemplateEpic,
 } from 'capture-core/components/WorkingLists/EventWorkingLists';
-import {
-    retrieveTemplatesEpic as retrieveTEITemplatesEpic,
-    updateTemplateEpic as updateTEITemplateEpic,
-    addTemplateEpic as addTEITemplateEpic,
-    deleteTemplateEpic as deleteTEITemplateEpic,
-} from 'capture-core/components/WorkingLists/TeiWorkingLists';
 
 import {
     fetchDataStoreEpic,
@@ -196,7 +190,11 @@ import {
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
-import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
+import { initTeiViewEpic, updateTeiListEpic,
+    retrieveTemplatesEpic as retrieveTEITemplatesEpic,
+    updateTemplateEpic as updateTEITemplateEpic,
+    addTemplateEpic as addTEITemplateEpic,
+    deleteTemplateEpic as deleteTEITemplateEpic } from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
 import {
     startNewEnrollmentDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
