@@ -338,7 +338,6 @@ And('you fill in a unique first name', () => {
 });
 
 And('you click the save new submit button', () => {
-    cy.wait(5000);
     cy.contains('Save new')
         .click();
 });
@@ -443,4 +442,8 @@ And('you see validation errors on the WHO RMNCH program registration page', () =
     cy.get('[data-test="registration-page-content"]')
         .find('[data-test="error-message"]')
         .should('have.length', 4);
+});
+
+And('you wait one second', () => {
+    cy.wait(1000);
 });

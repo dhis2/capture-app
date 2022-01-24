@@ -158,5 +158,6 @@ Feature: User creates a new entries from the registration page
 
   Scenario: New person in Tracker Program > Submitting without filling the form shows errors underneath the fields
     Given you are in the WNCH PNC program registration page
+    And you wait one second
     And you click the save new submit button
     Then you see validation errors on the WHO RMNCH program registration page
