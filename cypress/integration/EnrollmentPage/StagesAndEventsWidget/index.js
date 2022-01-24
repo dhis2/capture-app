@@ -31,11 +31,10 @@ Then('the stages and events widget should be closed', () => {
         });
 });
 
-And('you see the first 5 events in the table', () => {
+And('you see the first 5 stages in the table', () => {
     cy.get('[data-test="stages-and-events-widget"]').within(() => {
         cy.get('[data-test="widget-contents"]').should('exist');
-        cy.get('[data-test="widget-contents"]').find('[data-test="stage-content"]').should('have.length', 5);
-        cy.get('[data-test="stage-content"]').eq(2).contains('Antenatal care visit').should('exist');
+        cy.get('[data-test="stage-content"]').should('have.length', 5);
     });
 });
 
@@ -107,11 +106,11 @@ Then('there should be 5 rows in the table', () => {
 
 Then('the default list should be displayed', () => {
     const rows = [
-        '2020-07-13|Bumbeh MCHP',
-        '2020-07-12|Bumbeh MCHP',
-        '2020-07-11|Bumbeh MCHP',
-        '2020-07-10|Bumbeh MCHP',
-        '2020-07-09|Bumbeh MCHP',
+        '2021-07-13|Bumbeh MCHP',
+        '2021-07-12|Bumbeh MCHP',
+        '2021-07-11|Bumbeh MCHP',
+        '2021-07-10|Bumbeh MCHP',
+        '2021-07-09|Bumbeh MCHP',
     ];
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')
@@ -149,11 +148,11 @@ When(/^you sort list asc by (.*)$/, (columnName) => {
 
 Then('the sorted list by Report date asc should be displayed', () => {
     const rows = [
-        '2020-07-13|Bumbeh MCHP',
-        '2020-07-12|Bumbeh MCHP',
-        '2020-07-11|Bumbeh MCHP',
-        '2020-07-10|Bumbeh MCHP',
-        '2020-07-09|Bumbeh MCHP',
+        '2021-07-13|Bumbeh MCHP',
+        '2021-07-12|Bumbeh MCHP',
+        '2021-07-11|Bumbeh MCHP',
+        '2021-07-10|Bumbeh MCHP',
+        '2021-07-09|Bumbeh MCHP',
     ];
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')

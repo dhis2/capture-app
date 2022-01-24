@@ -18,7 +18,7 @@ Feature: User interacts with Stages and Events Widget
     Scenario: User can view the list of events
         Given you open the enrollment page which has multiples events and stages
         Then the default list should be displayed
-        And you see the first 5 events in the table
+        And you see the first 5 stages in the table
         And you see the first 5 rows in Antenatal care visit event
         And you see buttons in the footer list
 
@@ -47,8 +47,8 @@ Feature: User interacts with Stages and Events Widget
 
     Scenario: User can go to Add new page by clicking New event in stage
         Given you open the enrollment page which has multiples events and stages
-        When you click New Antenatal care visit event
-        Then you should navigate to Add new page #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
+        When you click New First antenatal care visit event
+        Then you should navigate to Add new page #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=WZbXY0S00lP
 
     Scenario: User can go to Add new page by clicking New event in stage even if there is no event
         Given you open the enrollment page which has multiples events and stages
