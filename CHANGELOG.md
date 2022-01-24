@@ -1,3 +1,10 @@
+## [1.65.1](https://github.com/dhis2/capture-app/compare/v1.65.0...v1.65.1) (2022-01-24)
+
+
+### Bug Fixes
+
+* [DHIS2-12473] calculated program rule variables ([a492efd](https://github.com/dhis2/capture-app/commit/a492efd1e034d9495057dd07ccf17d3b1331345a))
+
 # [1.65.0](https://github.com/dhis2/capture-app/compare/v1.64.0...v1.65.0) (2022-01-21)
 
 
