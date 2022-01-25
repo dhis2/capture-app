@@ -28,10 +28,10 @@ export const useLifecycle = ({
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
 }) => {
     const dispatch = useDispatch();
-    const delayRulesExecutionRef = useRef(false);
     const [rulesExecutionTrigger, setRulesExecutionTrigger] = useState(1);
 
     const dataEntryReadyRef = useRef(false);
+    const delayRulesExecutionRef = useRef(false);
     useEffect(() => {
         dispatch(batchActions([
             ...getOpenDataEntryActions(dataEntryId, itemId),
@@ -84,6 +84,7 @@ export const useLifecycle = ({
         stage,
         dataEntryId,
         itemId,
+        rulesExecutionTrigger,
     ]);
 
     const rulesReady =

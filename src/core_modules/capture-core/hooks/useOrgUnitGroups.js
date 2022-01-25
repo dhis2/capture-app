@@ -1,20 +1,7 @@
 // @flow
 import { useState, useEffect, useRef } from 'react';
-import { getUserStorageController } from 'capture-core/storageControllers';
 import type { OrgUnitGroup } from 'capture-core-utils/rulesEngine';
-
-async function getAssociatedOrgUnitGroups(orgUnitId: string): any {
-    const storageController = getUserStorageController();
-    const orgUnitGroups = await storageController.getAll(
-        'organisationUnitGroups', {
-            project: item => ({ id: item.id, code: item.code }),
-            onIDBGetRequest: source => source
-                .index('organisationUnitId')
-                .openCursor(window.IDBKeyRange.only(orgUnitId)),
-        },
-    );
-    return orgUnitGroups;
-}
+import { getAssociatedOrgUnitGroups } from '../rules/getRulesEngineOrgUnit';
 
 type Request = {
     orgUnitId: ?string,

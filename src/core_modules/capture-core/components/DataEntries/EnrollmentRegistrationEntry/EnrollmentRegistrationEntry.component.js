@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { useRulesEngineOrgUnit } from '../../../hooks/useRulesEngineOrgUnit';
 import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
@@ -47,22 +48,23 @@ const EnrollmentRegistrationEntryPlain =
 
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-      const orgUnit = useCurrentOrgUnitInfo();
+      const orgUnitId = useCurrentOrgUnitInfo().id;
+      const orgUnit = useRulesEngineOrgUnit(orgUnitId);
 
       const navigateToWorkingListsPage = () => {
           const url =
             scopeType === scopeTypes.TRACKER_PROGRAM
                 ?
-                buildUrlQueryString({ programId: selectedScopeId, orgUnitId: orgUnit.id })
+                buildUrlQueryString({ programId: selectedScopeId, orgUnitId })
                 :
-                buildUrlQueryString({ orgUnitId: orgUnit.id });
+                buildUrlQueryString({ orgUnitId });
           return push(`/?${url}`);
       };
 
       return (
           <>
               {
-                  scopeType === scopeTypes.TRACKER_PROGRAM && formId &&
+                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
                   <>
                       <EnrollmentDataEntry
                           orgUnit={orgUnit}

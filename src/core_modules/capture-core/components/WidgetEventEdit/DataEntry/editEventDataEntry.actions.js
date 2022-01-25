@@ -1,5 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
@@ -97,7 +98,7 @@ export const openEventForEditInDataEntry = ({
         dataEntryValues: Object,
         formValues: Object,
     },
-    orgUnit: Object,
+    orgUnit: OrgUnit,
     foundation: RenderFoundation,
     program: Program | EventProgram | TrackerProgram,
     enrollment?: EnrollmentData,

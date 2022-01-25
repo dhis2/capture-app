@@ -17,7 +17,7 @@ export const editEventPageDesc = createReducerDescription({
         newState.loadError = action.payload;
         return newState;
     },
-    [editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state) => {
+    [editEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state) => {
         const newState = { ...state };
         newState.isLoading = false;
         newState.dataEntryIsLoading = true;

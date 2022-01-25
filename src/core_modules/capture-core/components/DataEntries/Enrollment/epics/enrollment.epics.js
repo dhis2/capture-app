@@ -1,4 +1,5 @@
 // @flow
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
@@ -12,7 +13,7 @@ type Context = {
     itemId: string,
     uid: string,
     programId: string,
-    orgUnit: string,
+    orgUnit: OrgUnit,
 }
 
 const runRulesOnEnrollmentUpdate =

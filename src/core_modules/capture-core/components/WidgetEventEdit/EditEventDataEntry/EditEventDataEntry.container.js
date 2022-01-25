@@ -2,6 +2,7 @@
 import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import {
@@ -32,26 +33,26 @@ const mapStateToProps = (state: ReduxState) => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
-    onUpdateDataEntryField: (innerAction: ReduxAction<any, any>) => {
+    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid }),
+            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid, orgUnit }),
         ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
     },
-    onUpdateField: (innerAction: ReduxAction<any, any>) => {
+    onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
 
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid }),
+            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid, orgUnit }),
         ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
     },
-    onStartAsyncUpdateField: (
+    onStartAsyncUpdateField: (orgUnit: OrgUnit) => (
         innerAction: ReduxAction<any, any>,
         dataEntryId: string,
         itemId: string,
@@ -61,7 +62,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
             return batchActions([
                 successInnerAction,
                 startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-                startRunRulesOnUpdateForEditSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid }),
+                startRunRulesOnUpdateForEditSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid, orgUnit }),
             ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH);
         };
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;

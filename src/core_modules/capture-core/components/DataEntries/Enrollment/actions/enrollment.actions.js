@@ -1,4 +1,5 @@
 // @flow
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -9,7 +10,7 @@ export const startRunRulesOnUpdateForNewEnrollment = (
     payload: Object,
     uid: string,
     programId: string,
-    orgUnit: Object,
+    orgUnit: OrgUnit,
 ) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(
         { innerPayload: payload, uid, programId, orgUnit });

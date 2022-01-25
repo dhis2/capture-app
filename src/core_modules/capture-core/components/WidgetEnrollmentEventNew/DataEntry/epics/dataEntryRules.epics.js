@@ -113,6 +113,7 @@ export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (action$: InputObs
                 itemId,
                 uid,
                 orgUnit,
+                history,
                 rulesExecutionDependenciesClientFormatted,
                 fieldData,
             );

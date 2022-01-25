@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
@@ -257,7 +258,8 @@ const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,
-    onUpdateField: (innerAction: ReduxAction<any, any>) => void,
+    orgUnit: OrgUnit,
+    onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: Object,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
@@ -300,6 +302,7 @@ class EditEventDataEntryPlain extends Component<Props> {
     }
     render() {
         const {
+            orgUnit,
             onUpdateField,
             onStartAsyncUpdateField,
             classes,
@@ -309,8 +312,8 @@ class EditEventDataEntryPlain extends Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={'singleEvent'}
-                onUpdateFormField={onUpdateField}
-                onUpdateFormFieldAsync={onStartAsyncUpdateField}
+                onUpdateFormField={onUpdateField(orgUnit)}
+                onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
                 {...passOnProps}

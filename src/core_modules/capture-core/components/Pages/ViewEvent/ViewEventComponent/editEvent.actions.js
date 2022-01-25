@@ -1,11 +1,11 @@
 // @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 
 export const actionTypes = {
     EDIT_EVENT_FROM_URL: 'EditEventFromUrl',
     EVENT_FROM_URL_RETRIEVED: 'EventFromUrlRetrievedForEditEvent',
     EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED: 'EventFromUrlCouldNotBeRetrievedForEditEvent',
-    ORG_UNIT_RETRIEVED_ON_URL_UPDATE: 'OrgUnitRetrievedForEditEventOnUrlUpdate',
     ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE: 'OrgUnitRetrievalFailedForEditEventOnUrlUpdate',
     ADD_EVENT_NOTE: 'AddEventNote',
     REMOVE_EVENT_NOTE: 'RemoveEventNote',
@@ -14,11 +14,8 @@ export const actionTypes = {
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)(message);
 
-export const eventFromUrlRetrieved = (eventContainer: Object, prevProgramId: ?string) =>
-    actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)({ eventContainer, prevProgramId });
-
-export const orgUnitRetrievedOnUrlUpdate = (orgUnit: Object, eventContainer: Object) =>
-    actionCreator(actionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE)({ orgUnit, eventContainer });
+export const eventFromUrlRetrieved = (eventContainer: Object, orgUnit: OrgUnit, prevProgramId: ?string) =>
+    actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)({ eventContainer, orgUnit, prevProgramId });
 
 export const orgUnitCouldNotBeRetrievedOnUrlUpdate = (eventContainer: Object) =>
     actionCreator(actionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE)({ eventContainer });

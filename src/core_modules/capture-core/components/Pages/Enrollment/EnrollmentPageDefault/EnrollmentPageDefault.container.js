@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useCommonEnrollmentDomainData, updateEnrollmentAttributeValues } from '../../common/EnrollmentOverviewDomain';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
-import { useOrganisationUnit } from '../../../../dataQueries';
+import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
     useProgramMetadata,
@@ -23,7 +23,7 @@ export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const { orgUnit } = useOrganisationUnit(orgUnitId);
+    const orgUnit = useRulesEngineOrgUnit(orgUnitId);
 
     const program = useTrackerProgram(programId);
     const {

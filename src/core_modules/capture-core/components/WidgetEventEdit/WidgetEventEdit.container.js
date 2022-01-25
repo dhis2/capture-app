@@ -11,6 +11,8 @@ import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { pageMode } from '../Pages/EnrollmentEditEvent/EnrollmentEditEventPage.constants';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
+import { useRulesEngineOrgUnit } from '../../hooks/useRulesEngineOrgUnit';
+import { useLocationQuery } from '../../utils/routing';
 
 const styles = {
     header: {
@@ -46,8 +48,9 @@ export const WidgetEventEditPlain = ({
 }: Props) => {
     const dispatch = useDispatch();
     const currentPageMode = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent) ? pageMode.EDIT : pageMode.VIEW;
+    const orgUnit = useRulesEngineOrgUnit(useLocationQuery().orgUnitId);
 
-    return (
+    return !!orgUnit && (
         <div data-test="widget-enrollment-event">
             <div className={classes.menu}>
                 <Button small secondary className={classes.button} onClick={onGoBack}>
@@ -59,7 +62,7 @@ export const WidgetEventEditPlain = ({
                     small
                     secondary
                     className={classes.button}
-                    onClick={() => dispatch(startShowEditEventDataEntry())}
+                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit))}
                 >
                     <IconEdit24 />
                     {i18n.t('Edit event')}
@@ -92,6 +95,7 @@ export const WidgetEventEditPlain = ({
                     ) : (
                         <EditEventDataEntry
                             formFoundation={programStage.stageForm}
+                            orgUnit={orgUnit}
                         />
                     )}
                 </div>

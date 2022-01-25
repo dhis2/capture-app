@@ -60,6 +60,7 @@ export type OrgUnitGroup = {
 export type OrgUnit = {
     id: string,
     name: string,
+    code: string,
     groups: Array<OrgUnitGroup>,
 };
 
