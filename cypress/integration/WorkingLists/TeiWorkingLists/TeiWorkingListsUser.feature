@@ -80,9 +80,10 @@ When you change rows per page to 10
 Then the list should display 10 rows of data
 And for a tracker program the page navigation should show that you are on the first page
 
-Scenario: Show teis ordered ascendingly by first name 
-Given you open the main page with Ngelehun and child programme context
-When you click the first name column header
-Then the sort arrow should indicate ascending order
-And the list should display data ordered ascendingly by first name
-And for a tracker program the page navigation should show that you are on the first page
+# TODO - Commenting out because of bug in BE (DHIS2-12505)
+#Scenario: Show teis ordered ascendingly by first name
+#Given you open the main page with Ngelehun and child programme context
+#When you click the first name column header
+#Then the sort arrow should indicate ascending order
+#And the list should display data ordered ascendingly by first name
+#And for a tracker program the page navigation should show that you are on the first page

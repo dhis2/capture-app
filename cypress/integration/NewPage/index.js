@@ -443,3 +443,7 @@ And('you see validation errors on the WHO RMNCH program registration page', () =
         .find('[data-test="error-message"]')
         .should('have.length', 4);
 });
+
+And('you wait one second', () => {
+    cy.wait(1000);
+});

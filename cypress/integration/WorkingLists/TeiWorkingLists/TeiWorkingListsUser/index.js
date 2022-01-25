@@ -11,21 +11,21 @@ Given('you open the main page with Ngelehun and child programme context', () => 
 
 Then('the default working list should be displayed', () => {
     const names = [
-        'Filona',
-        'Gertrude',
-        'Frank',
-        'Maria',
-        'Joe',
-        'Anthony',
-        'Alan',
-        'Heather',
+        'John',
         'Andrea',
         'Donald',
+        'Heather',
+        'Gertrude',
         'Frances',
+        'Anthony',
+        'Alan',
+        'Maria',
+        'Filona',
+        'Joe',
+        'Donald',
         'Julia',
         'Elizabeth',
-        'Donald',
-        'Wayne',
+        'Frank',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -48,11 +48,11 @@ When('you select the working list called completed enrollments', () => {
 
 Then('the list should display teis with a completed enrollment', () => {
     const names = [
-        'Filona Ryder',
-        'Gertrude Fjordsen',
-        'Frank Fjordsen',
-        'Emma Johnson',
         'Alan Thompson',
+        'Gertrude Fjordsen',
+        'Emma Johnson',
+        'Filona Ryder',
+        'Frank Fjordsen',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -126,21 +126,21 @@ Then('the assignee filter button should show that unassigned filter is in effect
 
 Then('the list should display teis with an active enrollment and unassinged events', () => {
     const names = [
-        'Maria',
-        'Joe',
-        'Anthony',
-        'Alan',
-        'Heather',
+        'John',
         'Andrea',
         'Donald',
+        'Johnny',
+        'Heather',
         'Frances',
+        'Anthony',
+        'Alan',
+        'Maria',
+        'Donna',
+        'Joe',
+        'Wayne',
+        'Donald',
         'Julia',
         'Elizabeth',
-        'Donald',
-        'Wayne',
-        'Johnny',
-        'Donna',
-        'Sharon',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -157,8 +157,8 @@ Then('the list should display teis with an active enrollment and unassinged even
 
 Then('the list should display teis with John as the first name', () => {
     const names = [
-        'Johnny',
         'John',
+        'Johnny',
         'John',
     ];
 
@@ -199,21 +199,21 @@ Then('the registering unit should display in the list', () => {
 
 Then('the list should display data for the second page', () => {
     const names = [
+        'Lily',
         'Johnny',
+        'Emma',
+        'Jack',
+        'Tom',
+        'Alan',
+        'Tim',
+        'Noah',
+        'Anna',
         'Donna',
+        'Emily',
+        'Wayne',
         'Sharon',
         'Scott',
-        'Tom',
-        'Emma',
-        'Alan',
-        'Anna',
-        'Jack',
-        'Tim',
         'James',
-        'Noah',
-        'Emily',
-        'Lily',
-        'Olvia',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -230,16 +230,16 @@ Then('the list should display data for the second page', () => {
 
 Then('the list should display 10 rows of data', () => {
     const names = [
-        'Filona',
-        'Gertrud',
-        'Frank',
-        'Maria',
-        'Joe',
-        'Anthony',
-        'Alan',
-        'Heather',
+        'John',
         'Andrea',
-        'Donald',
+        'Alan',
+        'Maria',
+        'Heather',
+        'Filona',
+        'Joe',
+        'Gertrude',
+        'Anthony',
+        'Frank',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
