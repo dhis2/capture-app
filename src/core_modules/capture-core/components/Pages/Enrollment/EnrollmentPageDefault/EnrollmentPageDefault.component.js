@@ -13,6 +13,7 @@ import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 import { EnrollmentQuickActions } from './EnrollmentQuickActions';
+import { WidgetRelationship } from '../../../WidgetRelationship';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -76,6 +77,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetEnrollmentComment />
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
+                <WidgetRelationship teiId={teiId} />
                 {!hideWidgets.indicator && (
                     <WidgetIndicator
                         indicators={widgetEffects?.indicators}

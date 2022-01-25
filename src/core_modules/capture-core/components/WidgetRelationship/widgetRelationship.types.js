@@ -2,5 +2,6 @@
 
 
 export type Props = {|
-    teiId: string
+    teiId: string,
+    ...CssClasses,
 |};
