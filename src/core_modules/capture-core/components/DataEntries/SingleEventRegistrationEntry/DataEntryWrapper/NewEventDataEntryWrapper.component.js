@@ -10,6 +10,8 @@ import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.co
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
+import { OrgUnitFetcher } from '../../../OrgUnitFetcher';
+import { useSelector } from 'react-redux';
 
 const getStyles = ({ typography }) => ({
     flexContainer: {
@@ -50,6 +52,8 @@ const NewEventDataEntryWrapperPlain = ({
     onFormLayoutDirectionChange,
 }: Props) => {
     const { id: programId } = useCurrentProgramInfo();
+    const orgUnitId =
+      useSelector(({ currentSelections }) => currentSelections.orgUnitId);
     const titleText = useScopeTitleText(programId);
     const checkIfCustomForm = () => {
         let isCustom = false;
@@ -62,45 +66,47 @@ const NewEventDataEntryWrapperPlain = ({
     const isCustomForm = checkIfCustomForm();
 
     return (
-        <Paper className={classes.paper}>
-            <div className={classes.title} >
-                {i18n.t('New {{titleText}}', {
-                    titleText,
-                    interpolation: { escapeValue: false },
-                })}
-            </div>
-
-            <div className={classes.flexContainer}>
-                <div className={classes.flexEnd}>
-                    {
-                        isCustomForm ?
-                            null
-                            :
-                            <Button
-                                onClick={() => onFormLayoutDirectionChange(!formHorizontal)}
-                                small
-                            >
-                                {
-                                    formHorizontal
-                                        ?
-                                        i18n.t('Switch to form view')
-                                        :
-                                        i18n.t('Switch to row view')
-                                }
-                            </Button>
-
-                    }
+        <OrgUnitFetcher orgUnitId={orgUnitId}>
+            <Paper className={classes.paper}>
+                <div className={classes.title} >
+                    {i18n.t('New {{titleText}}', {
+                        titleText,
+                        interpolation: { escapeValue: false },
+                    })}
                 </div>
-            </div>
-            <div className={classes.marginLeft}>
-                <DataEntry
-                    stage={stage}
-                    formFoundation={formFoundation}
-                    formHorizontal={formHorizontal}
-                />
-                <EventsList />
-            </div>
-        </Paper>
+
+                <div className={classes.flexContainer}>
+                    <div className={classes.flexEnd}>
+                        {
+                            isCustomForm ?
+                                null
+                                :
+                                <Button
+                                    onClick={() => onFormLayoutDirectionChange(!formHorizontal)}
+                                    small
+                                >
+                                    {
+                                        formHorizontal
+                                            ?
+                                            i18n.t('Switch to form view')
+                                            :
+                                            i18n.t('Switch to row view')
+                                    }
+                                </Button>
+
+                        }
+                    </div>
+                </div>
+                <div className={classes.marginLeft}>
+                    <DataEntry
+                        stage={stage}
+                        formFoundation={formFoundation}
+                        formHorizontal={formHorizontal}
+                    />
+                    <EventsList />
+                </div>
+            </Paper>
+        </OrgUnitFetcher>
     );
 };
 
