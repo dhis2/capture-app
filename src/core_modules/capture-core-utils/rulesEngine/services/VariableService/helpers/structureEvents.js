@@ -34,7 +34,9 @@ export const getStructureEvents = (compareDates: CompareDates) => {
     return (currentEvent: EventData = {}, otherEvents: EventsData = []) => {
         const otherEventsFiltered = otherEvents
             .filter(event => event.eventDate &&
-                    [eventStatuses.COMPLETED, eventStatuses.ACTIVE, eventStatuses.VISITED].includes(event.status));
+                    [eventStatuses.COMPLETED, eventStatuses.ACTIVE, eventStatuses.VISITED].includes(event.status) &&
+                    event.eventId !== currentEvent.eventId,
+            );
 
         const events = [...otherEventsFiltered, currentEvent]
             .sort(compareEvents);

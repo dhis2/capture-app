@@ -23,7 +23,8 @@ import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { EventProgram, TrackerProgram } from '../../../metaData/Program';
 import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
-import type { Event } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData'; // TODO: This module/widget should not have a dependency to this
+import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../helpers';
+import type { EnrollmentData, AttributeValue } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
 
 export const batchActionTypes = {
@@ -79,7 +80,18 @@ function getLoadActions(
     ];
 }
 
-export const openEventForEditInDataEntry = (
+export const openEventForEditInDataEntry = ({
+    loadedValues: {
+        eventContainer,
+        dataEntryValues,
+        formValues,
+    },
+    orgUnit,
+    foundation,
+    program,
+    enrollment,
+    attributeValues,
+}: {
     loadedValues: {
         eventContainer: Object,
         dataEntryValues: Object,
@@ -88,8 +100,9 @@ export const openEventForEditInDataEntry = (
     orgUnit: Object,
     foundation: RenderFoundation,
     program: Program | EventProgram | TrackerProgram,
-    allEvents?: ?Array<Event>,
-) => {
+    enrollment?: EnrollmentData,
+    attributeValues?: Array<AttributeValue>,
+}) => {
     const dataEntryId = editEventIds.dataEntryId;
     const itemId = editEventIds.itemId;
     const dataEntryPropsToInclude = [
@@ -112,7 +125,6 @@ export const openEventForEditInDataEntry = (
         },
     ];
     const formId = getDataEntryKey(dataEntryId, itemId);
-    const { eventContainer, dataEntryValues, formValues } = loadedValues;
     const dataEntryActions =
         getLoadActions(
             dataEntryId,
@@ -139,7 +151,11 @@ export const openEventForEditInDataEntry = (
             stage,
             orgUnit,
             currentEvent,
-            otherEvents: allEvents ? prepareEnrollmentEventsForRulesEngine(allEvents) : undefined,
+            otherEvents: prepareEnrollmentEventsForRulesEngine(
+                enrollment?.events.filter(event => event.event !== currentEvent.eventId),
+            ),
+            enrollmentData: getEnrollmentForRulesEngine(enrollment),
+            attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
         });
     } else if (program instanceof EventProgram) {
         effects = getApplicableRuleEffectsForEventProgram({

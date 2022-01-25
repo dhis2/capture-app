@@ -122,7 +122,7 @@ export async function getEnrollmentEvents() {
 }
 
 export const prepareEnrollmentEventsForRulesEngine =
-    (apiEvents: Array<ApiEnrollmentEvent>, currentEvent?: EventData): EventsData =>
+    (apiEvents?: Array<ApiEnrollmentEvent> = [], currentEvent?: EventData): EventsData =>
         apiEvents
             .map(apiEvent => (currentEvent && currentEvent.eventId === apiEvent.event
                 ? currentEvent
