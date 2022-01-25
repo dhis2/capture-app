@@ -5,15 +5,10 @@ import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
-    actionTypes as editEventActionTypes,
-} from '../../../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
-import {
-    openEventForEditInDataEntry,
-    prerequisitesErrorOpeningEventForEditInDataEntry,
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramAndStageFromEvent, getProgramThrowIfNotFound } from '../../../../metaData';
+import { getProgramThrowIfNotFound } from '../../../../metaData';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
@@ -26,29 +21,7 @@ import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEven
 import { EventProgram, TrackerProgram } from '../../../../metaData/Program';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/getEnrollmentEvents';
-
-export const openEditEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(
-            editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
-            editEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
-            editEventActionTypes.START_OPEN_EVENT_FOR_EDIT,
-        ),
-        map((action) => {
-            const state = store.value;
-            const eventContainer = action.payload.eventContainer;
-            const orgUnit = action.payload.orgUnit;
-
-            const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
-            if (metadataContainer.error) {
-                return prerequisitesErrorOpeningEventForEditInDataEntry(metadataContainer.error);
-            }
-            const foundation = metadataContainer.stage.stageForm;
-            const program = metadataContainer.program;
-
-
-            return batchActions(openEventForEditInDataEntry(eventContainer, orgUnit, foundation, program, state.enrollmentDomain.enrollment?.events));
-        }));
+import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../../helpers';
 
 const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
     const state = store.value;
@@ -72,18 +45,22 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
     const currentEventValues = foundation ? getCurrentClientValues(state, foundation, formId, fieldData) : {};
     const currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
     // $FlowFixMe
-    const currentEvent = { ...currentEventValues, ...currentEventMainData };
+    const currentEvent = { ...currentEventValues, ...currentEventMainData, eventId };
 
     let effects;
     if (program instanceof TrackerProgram) {
-        const otherEvents = state.enrollmentDomain.enrollments?.events;
-        // TODO: Add attributeValues & enrollmentData
+        const { enrollment, attributeValues } = state.enrollmentDomain;
+
         effects = getApplicableRuleEffectsForTrackerProgram({
             program,
             stage,
             orgUnit,
             currentEvent,
-            otherEvents: otherEvents ? prepareEnrollmentEventsForRulesEngine(otherEvents) : undefined,
+            otherEvents: prepareEnrollmentEventsForRulesEngine(
+                enrollment?.events.filter(enrollmentEvent => enrollmentEvent.event !== currentEvent.eventId),
+            ),
+            enrollmentData: getEnrollmentForRulesEngine(enrollment),
+            attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
         });
     } else {
         effects = getApplicableRuleEffectsForEventProgram({
