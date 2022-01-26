@@ -29,7 +29,7 @@ Then(/^you see the following (.*)$/, (message) => {
 Then('the program stages should be displayed', () => {
     cy.get('[data-test="stages-and-events-widget"]')
         .within(() => {
-            cy.contains('Antenatal care visit').should('exist');
+            cy.contains('Second antenatal care visit').should('exist');
             cy.contains('Care at birth').should('exist');
         });
 });

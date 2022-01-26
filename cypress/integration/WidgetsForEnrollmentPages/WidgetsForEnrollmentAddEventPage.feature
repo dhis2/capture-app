@@ -1,6 +1,6 @@
 Feature: The user interacts with the widgets on the enrollment add event page
 
-    # Scenarios linked to the enrollment dashboard
+  # Scenarios linked to the enrollment dashboard
   Scenario: The profile widget can be closed on the enrollment dashboard
     Given you land on the enrollment add event page by having typed #/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
     And you see the widget with data-test profile-widget
@@ -35,7 +35,7 @@ Feature: The user interacts with the widgets on the enrollment add event page
     And the user sees the owner organisation unit
     And the user sees the last update date
 
-  # TODO DHIS2-11482 - The test cases related with enrollment status edit are flaky. Move them to unit tests. 
+  # TODO DHIS2-11482 - The test cases related with enrollment status edit are flaky. Move them to unit tests.
   # Scenario: User can modify the enrollment from Active to Complete
   #   Given you land on the enrollment add event page by having typed #/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
   #   And the enrollment widget should be opened
