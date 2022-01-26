@@ -1,18 +1,13 @@
 // @flow
-import moment from 'moment';
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import type { TeiWorkingListsTemplates } from '../../types';
+import { dataElementTypes } from '../../../../../metaData';
+import { convertToClientConfig } from '../../helpers/TEIFilters/apiTEIFilterToClientConfigConverter';
 
 type ApiConfig = {
     trackedEntityInstanceFilters: Array<Object>,
     pager: Object,
 };
-
-const getEnrollmentDate = enrollmentCreatedPeriod => ({
-    le: moment().subtract(enrollmentCreatedPeriod.periodFrom, 'days').format('YYYY-MM-DD'),
-    ge: moment().subtract(enrollmentCreatedPeriod.periodTo, 'days').format('YYYY-MM-DD'),
-    type: 'ABSOLUTE',
-});
 
 const getApiTEIFilters = async (programId: string, querySingleResource: QuerySingleResource) => {
     const apiRes: ApiConfig = await querySingleResource({
@@ -45,14 +40,14 @@ export const getTemplates = (
         return {
             templates: [
                 defaultTemplate,
-                // TODO blocked by https://jira.dhis2.org/browse/DHIS2-12376. Need to get all the trackedEntityInstanceFilters fields.
+                // TODO blocked by https://jira.dhis2.org/browse/DHIS2-12376. Need to get all the trackedEntityInstanceFilters fields and convert them to client
                 ...apiTEIFilters.map(({ displayName, sortOrder, enrollmentStatus, enrollmentCreatedPeriod, id, access }) => ({
                     id,
                     name: displayName,
                     order: sortOrder,
                     criteria: {
                         programStatus: enrollmentStatus,
-                        ...(enrollmentCreatedPeriod && { enrollmentDate: getEnrollmentDate(enrollmentCreatedPeriod) }),
+                        ...(enrollmentCreatedPeriod && { enrollmentDate: convertToClientConfig(enrollmentCreatedPeriod, dataElementTypes.DATE) }),
                     },
                     access,
                 })),
