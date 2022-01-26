@@ -9,20 +9,17 @@ import {
     DataTableCell,
     DataTableColumnHeader,
 } from '@dhis2/ui';
-import { useComputeTEI } from '../../hooks/useComputeTEI';
 
 type Props = {
-    from: Object,
-    to: Object,
+    headers: Array<Object>,
+    relationshipAttributes: Array<Object>,
      ...CssClasses,
 }
 
 const styles = { };
 
 const RelationshipTablePlain = (props: Props) => {
-    const { classes, from, to } = props;
-    const { headers, commonAttributes } = useComputeTEI(from, to);
-
+    const { classes, headers, relationshipAttributes } = props;
     function renderHeader() {
         const headerCells = headers
             .map(column => (
@@ -30,7 +27,7 @@ const RelationshipTablePlain = (props: Props) => {
                     key={column.id}
                     name={column.id}
                 >
-                    {column.displayName}
+                    {column.label}
                 </DataTableColumnHeader>
             ));
         return (
@@ -42,13 +39,13 @@ const RelationshipTablePlain = (props: Props) => {
         );
     }
     const renderRelationshipRows = () => {
-        if (!commonAttributes) {
+        if (!relationshipAttributes) {
             return null;
         }
-        return Object.keys(commonAttributes).map(teiId => (
-            <DataTableRow id={teiId}>
-                {headers.map(({ attributeId }) => (<DataTableCell key={attributeId}>
-                    {commonAttributes[teiId][attributeId].value}
+        return relationshipAttributes.map(({ id: teiId, attributes }) => (
+            <DataTableRow key={teiId}>
+                {headers.map(({ id }) => (<DataTableCell key={id}>
+                    {attributes.find(att => att.attribute === id).value}
                 </DataTableCell>
                 ))}
             </DataTableRow>

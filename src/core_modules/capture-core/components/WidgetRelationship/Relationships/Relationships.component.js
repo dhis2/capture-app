@@ -3,9 +3,11 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { spacersNum, spacers, colors } from '@dhis2/ui';
 import { RelationshipTable } from './RelationshipTable';
+import { useComputeTEIRelationship } from '../hooks/useComputeTEI';
 
 type Props = {
     teiRelationship: Object,
+    teiId: string,
     ...CssClasses,
 }
 
@@ -23,21 +25,23 @@ const styles = {
         paddingBottom: spacersNum.dp16,
     },
 };
-const RelationshipsPlain = ({ teiRelationship, classes }: Props) => (
-    <div
+const RelationshipsPlain = ({ teiId, teiRelationship, classes }: Props) => {
+    const { relationshipsByType, headersByType } = useComputeTEIRelationship(teiId, teiRelationship);
+
+    return (<div
         data-test="relationships"
         className={classes.container}
     >
         {
-            teiRelationship ? teiRelationship.map((relationship) => {
-                const { relationshipName, from, to } = relationship;
-                return (<div className={classes.wrapper}>
+            relationshipsByType ? relationshipsByType.map((relationship) => {
+                const { relationshipName, id, ...passOnProps } = relationship;
+                return (<div key={id} className={classes.wrapper}>
                     <div className={classes.title} >{relationshipName}</div>
-                    <RelationshipTable from={from} to={to} />
+                    <RelationshipTable headers={headersByType[id]} {...passOnProps} />
                 </div>);
             }) : null
         }
-    </div>
-);
+    </div>);
+};
 
 export const Relationships: ComponentType<Props> = withStyles(styles)(RelationshipsPlain);

@@ -10,7 +10,6 @@ import { Relationships } from './Relationships/';
 export const WidgetRelationship = ({ teiId }: Props) => {
     const [open, setOpenStatus] = useState(true);
     const { teiRelationship } = useTeiRelationship(teiId);
-
     return (
         <div
             data-test="relationship-widget"

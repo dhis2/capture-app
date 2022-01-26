@@ -1,22 +1,43 @@
 // @flow
 import { useMemo } from 'react';
 
-export const useComputeTEI = (from: Object, to: Object) => {
+
+const getRelationshipAttributes = (bidirectional: boolean, teiId: string, from: Object, to: Object) => {
     const { attributes: fromAttributes, trackedEntityInstance: fromTeiId } = from.trackedEntityInstance;
     const { attributes: toAttributes, trackedEntityInstance: toTeiId } = to.trackedEntityInstance;
-    const { headers, commonAttributes } = useMemo(() => fromAttributes
-        .reduce((acc, currentAttr) => {
-            const attributeId = currentAttr.attribute;
-            const toAttr = toAttributes.find(item => item.attribute === attributeId);
-            if (toAttr) {
-                acc.commonAttributes[toTeiId] = { ...acc.commonAttributes[toTeiId] ?? [], [attributeId]: toAttr };
-                acc.commonAttributes[fromTeiId] = {
-                    ...acc.commonAttributes[fromTeiId] ?? [], [attributeId]: currentAttr,
-                };
-                acc.headers.push({ attributeId, displayName: currentAttr.displayName });
-            }
-            return acc;
-        }, { commonAttributes: {}, headers: [] }), [fromAttributes, toAttributes, fromTeiId, toTeiId]);
 
-    return { headers, commonAttributes };
+    if (!bidirectional) { return { id: toTeiId, attributes: toAttributes }; }
+
+    return fromTeiId !== teiId
+        ? { id: fromTeiId, attributes: fromAttributes }
+        : { id: toTeiId, attributes: toAttributes };
+};
+
+export const useComputeTEIRelationship = (teiId: string, teiRelationships: Array<Object>) => {
+    const relationshipsByType = useMemo(() => teiRelationships && teiRelationships.reduce((acc, currentRelationship) => {
+        const { relationshipType: typeId, relationshipName, bidirectional, from, to } = currentRelationship;
+        const typeExist = acc.find(item => item.id === typeId);
+        const relationshipAttributes = getRelationshipAttributes(bidirectional, teiId, from, to);
+
+        if (typeExist) {
+            typeExist.relationshipAttributes.push(relationshipAttributes);
+        } else {
+            acc.push({
+                id: typeId,
+                relationshipName,
+                relationshipAttributes: [relationshipAttributes],
+            });
+        }
+        return acc;
+    }, []), [teiId, teiRelationships]);
+    const headersByType = relationshipsByType.reduce((acc, { id, relationshipAttributes }) => {
+        acc[id] = relationshipAttributes.reduce((accAttr, { attributes }) => {
+            accAttr.push(attributes.map(item => ({ id: item.attribute, label: item.displayName })));
+            return accAttr;
+        }, []).reduce((p, current) => p.filter(e => current.find(item => item.id === e.id)));
+
+        return acc;
+    }, []);
+
+    return { relationshipsByType, headersByType };
 };
