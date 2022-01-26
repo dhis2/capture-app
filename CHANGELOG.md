@@ -1,3 +1,10 @@
+# [1.66.0](https://github.com/dhis2/capture-app/compare/v1.65.1...v1.66.0) (2022-01-26)
+
+
+### Features
+
+* [TECH-927] Tests for category combo combination ([1dc8a79](https://github.com/dhis2/capture-app/commit/1dc8a7970e569197cf69b09ec7f5802aaa335e58))
+
 ## [1.65.1](https://github.com/dhis2/capture-app/compare/v1.65.0...v1.65.1) (2022-01-24)
 
 
