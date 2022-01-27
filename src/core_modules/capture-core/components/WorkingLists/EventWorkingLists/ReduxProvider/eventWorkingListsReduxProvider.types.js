@@ -1,5 +1,5 @@
 // @flow
-import type { Program } from '../../../../metaData';
+import type { Program, ProgramStage } from '../../../../metaData';
 import type {
     CancelLoadTemplates,
     CancelLoadView,
@@ -41,8 +41,8 @@ import type {
 
 export type Props = $ReadOnly<{|
     storeId: string,
-    programId: string,
-    programStageId: string,
+    program: Program,
+    programStage: ProgramStage,
     orgUnitId: string
 |}>;
 
@@ -89,7 +89,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: Program,
-    programStageId: string,
+    programStage: ProgramStage,
     recordsOrder?: RecordsOrder,
     rowsPerPage?: number,
     sortByDirection?: string,
