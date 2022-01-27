@@ -48,7 +48,7 @@ export const EnrollmentPageDefault = () => {
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata?.programStages);
     const { relationshipsByType, headersByType } = useComputeTEIRelationships(teiId, relationships);
-    console.log({ relationshipsByType, headersByType });
+
     if (programMetaDataError || enrollmentsError) {
         log.error(errorCreator('Enrollment page could not be loaded')(
             { programMetaDataError, enrollmentsError },

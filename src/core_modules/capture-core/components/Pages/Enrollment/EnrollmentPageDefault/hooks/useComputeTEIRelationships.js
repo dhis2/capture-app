@@ -31,6 +31,7 @@ export const useComputeTEIRelationships = (teiId: string, relationships?: ?{[key
         }
         return acc;
     }, []), [teiId, relationships]);
+    // this will change after https://jira.dhis2.org/browse/DHIS2-12249 is done
     const headersByType = useMemo(() => relationshipsByType &&
     relationshipsByType.reduce((acc, { id, relationshipAttributes }) => {
         acc[id] = relationshipAttributes.reduce((accAttr, { attributes }) => {
