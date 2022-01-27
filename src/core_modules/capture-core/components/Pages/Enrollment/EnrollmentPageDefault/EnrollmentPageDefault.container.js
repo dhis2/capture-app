@@ -14,6 +14,7 @@ import {
     useProgramStages,
     useOrganisationUnit,
     useRuleEffects,
+    useComputeTEIRelationships,
 } from './hooks';
 import { buildUrlQueryString } from '../../../../utils/routing';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
@@ -42,10 +43,12 @@ export const EnrollmentPageDefault = () => {
         error: enrollmentsError,
         enrollment,
         attributeValues,
+        relationships,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata?.programStages);
-
+    const { relationshipsByType, headersByType } = useComputeTEIRelationships(teiId, relationships);
+    console.log({ relationshipsByType, headersByType });
     if (programMetaDataError || enrollmentsError) {
         log.error(errorCreator('Enrollment page could not be loaded')(
             { programMetaDataError, enrollmentsError },
@@ -91,6 +94,7 @@ export const EnrollmentPageDefault = () => {
             stages={stages}
             events={enrollment?.events}
             enrollmentId={enrollmentId}
+            relationships={{ relationshipsByType, headersByType }}
             onDelete={onDelete}
             onViewAll={onViewAll}
             onCreateNew={onCreateNew}

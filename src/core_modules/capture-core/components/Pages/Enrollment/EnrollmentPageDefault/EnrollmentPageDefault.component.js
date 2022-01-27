@@ -48,6 +48,7 @@ export const EnrollmentPageDefaultPlain = ({
     teiId,
     events,
     enrollmentId,
+    relationships,
     stages,
     onDelete,
     onViewAll,
@@ -77,7 +78,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetEnrollmentComment />
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
-                <WidgetRelationship teiId={teiId} />
+                <WidgetRelationship title={i18n.t("TEI's Relationships")} relationships={relationships} />
                 {!hideWidgets.indicator && (
                     <WidgetIndicator
                         indicators={widgetEffects?.indicators}

@@ -1,8 +1,8 @@
 // @flow
 import { useMemo } from 'react';
+import { type TEIData, type TEIRelationship } from '../../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
-
-const getRelationshipAttributes = (bidirectional: boolean, teiId: string, from: Object, to: Object) => {
+const getRelationshipAttributes = (bidirectional: boolean, teiId: string, from: TEIData, to: TEIData) => {
     const { attributes: fromAttributes, trackedEntityInstance: fromTeiId } = from.trackedEntityInstance;
     const { attributes: toAttributes, trackedEntityInstance: toTeiId } = to.trackedEntityInstance;
 
@@ -13,8 +13,9 @@ const getRelationshipAttributes = (bidirectional: boolean, teiId: string, from: 
         : { id: toTeiId, attributes: toAttributes };
 };
 
-export const useComputeTEIRelationship = (teiId: string, teiRelationships: Array<Object>) => {
-    const relationshipsByType = useMemo(() => teiRelationships && teiRelationships.reduce((acc, currentRelationship) => {
+export const useComputeTEIRelationships = (teiId: string, relationships?: ?{[key: string]: Array<TEIRelationship>}) => {
+    const relationshipsByType = useMemo(() => relationships &&
+    relationships[teiId].reduce((acc, currentRelationship) => {
         const { relationshipType: typeId, relationshipName, bidirectional, from, to } = currentRelationship;
         const typeExist = acc.find(item => item.id === typeId);
         const relationshipAttributes = getRelationshipAttributes(bidirectional, teiId, from, to);
@@ -29,15 +30,16 @@ export const useComputeTEIRelationship = (teiId: string, teiRelationships: Array
             });
         }
         return acc;
-    }, []), [teiId, teiRelationships]);
-    const headersByType = relationshipsByType.reduce((acc, { id, relationshipAttributes }) => {
+    }, []), [teiId, relationships]);
+    const headersByType = useMemo(() => relationshipsByType &&
+    relationshipsByType.reduce((acc, { id, relationshipAttributes }) => {
         acc[id] = relationshipAttributes.reduce((accAttr, { attributes }) => {
             accAttr.push(attributes.map(item => ({ id: item.attribute, label: item.displayName })));
             return accAttr;
         }, []).reduce((p, current) => p.filter(e => current.find(item => item.id === e.id)));
 
         return acc;
-    }, []);
+    }, {}), [relationshipsByType]);
 
-    return { relationshipsByType, headersByType };
+    return { relationshipsByType: relationshipsByType ?? [], headersByType: headersByType ?? {} };
 };

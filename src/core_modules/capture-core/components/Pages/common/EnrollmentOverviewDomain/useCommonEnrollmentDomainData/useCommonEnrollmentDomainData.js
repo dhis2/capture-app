@@ -1,5 +1,5 @@
 // @flow
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 // $FlowFixMe
 import { useSelector, useDispatch } from 'react-redux';
 import { useDataQuery } from '@dhis2/app-runtime';
@@ -13,6 +13,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         enrollmentId: storedEnrollmentId,
         enrollment: storedEnrollment,
         attributeValues: storedAttributeValues,
+        relationships: storedRelationships,
     } = useSelector(({ enrollmentDomain }) => enrollmentDomain);
 
     const { data, error, refetch } = useDataQuery({
@@ -28,11 +29,31 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         lazy: true,
     });
 
+    const {
+        data: relationshipsData,
+        error: relationshipsError,
+        refetch: refetchRelationships,
+    } = useDataQuery(
+        useMemo(
+            () => ({
+                teiRelationships: {
+                    resource: 'relationships',
+                    params: ({ variables: { teiId: updatedTeiId } }) => ({
+                        tei: updatedTeiId,
+                    }),
+                },
+            }),
+            [],
+        ),
+        { lazy: true },
+    );
+
     const fetchedEnrollmentData = {
         reference: data,
         enrollment: data?.trackedEntityInstance?.enrollments
             ?.find(enrollment => enrollment.enrollment === enrollmentId),
         attributeValues: data?.trackedEntityInstance?.attributes,
+        relationships: relationshipsData?.teiRelationships,
     };
 
     useEffect(() => {
@@ -41,6 +62,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
                 fetchedEnrollmentData.enrollment,
                 fetchedEnrollmentData.attributeValues
                     .map(({ attribute, value }) => ({ id: attribute, value })),
+                { [teiId]: fetchedEnrollmentData.relationships },
             ));
         }
     }, [
@@ -48,21 +70,25 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         fetchedEnrollmentData.reference,
         fetchedEnrollmentData.enrollment,
         fetchedEnrollmentData.attributeValues,
+        fetchedEnrollmentData.relationships,
+        teiId,
     ]);
 
     useEffect(() => {
         if (storedEnrollmentId !== enrollmentId) {
             refetch({ variables: { teiId, programId } });
+            refetchRelationships({ variables: { teiId } });
         }
-    }, [refetch, storedEnrollmentId, enrollmentId, teiId, programId]);
+    }, [refetch, refetchRelationships, storedEnrollmentId, enrollmentId, teiId, programId]);
 
     const inEffectData = enrollmentId === storedEnrollmentId ? {
         enrollment: storedEnrollment,
         attributeValues: storedAttributeValues,
-    } : { enrollment: undefined, attributeValues: undefined };
+        relationships: storedRelationships,
+    } : { enrollment: undefined, attributeValues: undefined, relationships: undefined };
 
     return {
-        error,
+        error: error || relationshipsError,
         ...inEffectData,
     };
 };
