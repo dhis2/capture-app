@@ -1,7 +1,8 @@
 // @flow
 import React, { useCallback, useMemo, useEffect } from 'react';
 import log from 'loglevel';
-import { createHashHistory as createHistory, type HashHistory } from 'history';
+import { useHistory } from 'react-router-dom';
+import { type HashHistory } from 'history';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
 import { DisplayException } from 'capture-core/utils/exceptions';
@@ -29,6 +30,7 @@ export const AppLoader = (props: Props) => {
     const { onRunApp, onCacheExpired } = props;
     const [loadError, setLoadError] = React.useState(null);
     const { querySingleResource, mutate, absoluteApiPath } = useApiUtils();
+    const history = useHistory();
 
     const logError = useCallback((error) => {
         if (error instanceof Error) {
@@ -45,7 +47,6 @@ export const AppLoader = (props: Props) => {
                 querySingleResource,
                 absoluteApiPath,
             );
-            const history = createHistory();
             const store = getStore(
                 history, {
                     querySingleResource,
@@ -53,7 +54,7 @@ export const AppLoader = (props: Props) => {
                     absoluteApiPath,
                 },
                 // $FlowFixMe[prop-missing] automated comment
-                () => onRunApp(store, history));
+                () => onRunApp(store));
         } catch (error) {
             let message = 'The application could not be loaded.';
             if (error && error instanceof DisplayException) {
@@ -76,6 +77,7 @@ export const AppLoader = (props: Props) => {
         querySingleResource,
         mutate,
         absoluteApiPath,
+        history,
     ]);
 
     useEffect(() => {

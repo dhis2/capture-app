@@ -3,7 +3,6 @@
 import './app.css';
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { HashRouter as Router } from 'react-router-dom';
 import D2UIApp from '@dhis2/d2-ui-app';
 import { AppContents } from './AppContents.component';
 
@@ -16,11 +15,9 @@ export const App = ({ store }: Props) => (
         <Provider
             store={store}
         >
-            <Router>
-                <D2UIApp>
-                    <AppContents />
-                </D2UIApp>
-            </Router>
+            <D2UIApp>
+                <AppContents />
+            </D2UIApp>
         </Provider>
     </React.Fragment>
 );
