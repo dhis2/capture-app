@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
-"PO-Revision-Date: 2021-12-21T16:14:01.098Z\n"
+"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
+"PO-Revision-Date: 2022-01-28T15:06:33.964Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -141,7 +141,7 @@ msgid "Search for user"
 msgstr ""
 
 msgid "Complete event"
-msgstr "Complete event"
+msgstr ""
 
 msgid "Basic info"
 msgstr ""
@@ -448,10 +448,10 @@ msgid "No results"
 msgstr ""
 
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 msgid "Icon for {{field}}"
 msgstr ""
@@ -671,7 +671,7 @@ msgid "Registered events"
 msgstr ""
 
 msgid "Please select {{category}}."
-msgstr "Please select {{category}}."
+msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
@@ -971,7 +971,7 @@ msgid "This event doesn't have any comments"
 msgstr ""
 
 msgid "stage not found in rules execution"
-msgstr "stage not found in rules execution"
+msgstr ""
 
 msgid "Event completed"
 msgstr ""
@@ -1021,6 +1021,9 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Working list could not be loaded"
+msgstr ""
+
 msgid "Delete event"
 msgstr ""
 
@@ -1037,9 +1040,6 @@ msgid "Download with current filters"
 msgstr ""
 
 msgid "Download data..."
-msgstr ""
-
-msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "an error occurred loading working lists"
