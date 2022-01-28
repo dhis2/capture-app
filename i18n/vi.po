@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2021
-# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2022
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
+"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: phil_dhis2, 2021\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -154,6 +154,9 @@ msgstr "Người dùng được chỉ định"
 
 msgid "Search for user"
 msgstr "Tìm kiếm người dùng"
+
+msgid "Complete event"
+msgstr "Hoàn tất chương trình"
 
 msgid "Basic info"
 msgstr "Thông tin cơ bản"
@@ -468,6 +471,12 @@ msgstr "Xóa"
 msgid "No results"
 msgstr "Không có kết quả"
 
+msgid "Description"
+msgstr "Miêu tả"
+
+msgid "URL"
+msgstr "Đường dẫn URL"
+
 msgid "Icon for {{field}}"
 msgstr ""
 
@@ -686,6 +695,9 @@ msgstr ""
 
 msgid "Registered events"
 msgstr "Sự kiện đã đăng ký"
+
+msgid "Please select {{category}}."
+msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
@@ -1001,6 +1013,9 @@ msgstr ""
 msgid "This event doesn't have any comments"
 msgstr ""
 
+msgid "stage not found in rules execution"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1049,6 +1064,9 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Working list could not be loaded"
+msgstr "Không thể tải danh sách làm việc"
+
 msgid "Delete event"
 msgstr "Xóa sự kiện"
 
@@ -1066,9 +1084,6 @@ msgstr "Tải xuống với các bộ lọc hiện tại"
 
 msgid "Download data..."
 msgstr "Tải xuống dữ liệu ..."
-
-msgid "Working list could not be loaded"
-msgstr "Không thể tải danh sách làm việc"
 
 msgid "an error occurred loading working lists"
 msgstr "đã xảy ra lỗi khi tải danh sách làm việc"

@@ -1,13 +1,13 @@
 # 
 # Translators:
-# trendspotter <jirka.p@volny.cz>, 2021
+# trendspotter <jirka.p@volny.cz>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
+"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
+"Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -152,6 +152,9 @@ msgstr "Přiřazený uživatel"
 
 msgid "Search for user"
 msgstr "Hledat uživatele"
+
+msgid "Complete event"
+msgstr "Dokončit událost"
 
 msgid "Basic info"
 msgstr "Základní informace"
@@ -465,6 +468,12 @@ msgstr "Vyčistit"
 msgid "No results"
 msgstr "Žádné výsledky"
 
+msgid "Description"
+msgstr "Popis"
+
+msgid "URL"
+msgstr "URL"
+
 msgid "Icon for {{field}}"
 msgstr "Ikona pro {{field}}"
 
@@ -690,6 +699,9 @@ msgstr "K této události není žádná zpětná vazba"
 
 msgid "Registered events"
 msgstr "Registrované události"
+
+msgid "Please select {{category}}."
+msgstr "Vyberte prosím {{category}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "Nebo zobrazit všechny záznamy, které máte k dispozici v {{program}}"
@@ -1005,6 +1017,9 @@ msgstr "Napište komentář k této události"
 msgid "This event doesn't have any comments"
 msgstr "Tato událost nemá žádné komentáře"
 
+msgid "stage not found in rules execution"
+msgstr "fáze nebyla nalezena v provádění pravidel"
+
 msgid "Event completed"
 msgstr "Událost dokončena"
 
@@ -1053,6 +1068,9 @@ msgstr "{{ scheduledEvents }} naplánováno"
 msgid "Stages and Events"
 msgstr "Fáze a události"
 
+msgid "Working list could not be loaded"
+msgstr "Pracovní seznam nelze načíst"
+
 msgid "Delete event"
 msgstr "Smazat událost"
 
@@ -1070,9 +1088,6 @@ msgstr "Stáhnout s aktuálními filtry"
 
 msgid "Download data..."
 msgstr "Stáhnout data ..."
-
-msgid "Working list could not be loaded"
-msgstr "Pracovní seznam nelze načíst"
 
 msgid "an error occurred loading working lists"
 msgstr "při načítání pracovních seznamů došlo k chybě"

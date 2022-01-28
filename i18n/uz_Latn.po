@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Yury Rogachev <yury@dhis2.org>, 2021
+# Yury Rogachev <yury@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
+"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -154,6 +154,9 @@ msgstr "Tavsiya etilgan foydalanuvchi"
 
 msgid "Search for user"
 msgstr "Foydalanuvchini izlash"
+
+msgid "Complete event"
+msgstr ""
 
 msgid "Basic info"
 msgstr "Аsosiy maʼlumot"
@@ -474,6 +477,12 @@ msgstr "Аниқ"
 msgid "No results"
 msgstr "Natija yoʼq"
 
+msgid "Description"
+msgstr "Tavsif"
+
+msgid "URL"
+msgstr "URL"
+
 msgid "Icon for {{field}}"
 msgstr ""
 
@@ -693,6 +702,9 @@ msgstr ""
 
 msgid "Registered events"
 msgstr "Roʼyxatdan oʼtgan hodisa/tadbirlar"
+
+msgid "Please select {{category}}."
+msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
@@ -1010,6 +1022,9 @@ msgstr ""
 msgid "This event doesn't have any comments"
 msgstr ""
 
+msgid "stage not found in rules execution"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1058,6 +1073,9 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Working list could not be loaded"
+msgstr "Ishchi roʼyxatni yuklab boʼlmadi"
+
 msgid "Delete event"
 msgstr "Hodisa/Tadbirni oʼchirib tashlash"
 
@@ -1075,9 +1093,6 @@ msgstr "Joriy Filtrlar asosida yuklash"
 
 msgid "Download data..."
 msgstr "Maʼlumotlarni yuklab olish ..."
-
-msgid "Working list could not be loaded"
-msgstr "Ishchi roʼyxatni yuklab boʼlmadi"
 
 msgid "an error occurred loading working lists"
 msgstr "ishchi roʼyxatni yuklashda xatolik yuz berdi"
