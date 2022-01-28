@@ -2,8 +2,7 @@
 
 import React, { Component, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -19,13 +18,13 @@ import type { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
-import { buildUrlQueryString } from '../../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const EmptyPrograms = ({ classes, handleResetOrgUnit }) => {
     const { push } = useHistory();
-    const pathname: string = useSelector(({ router: { location } }) => location.pathname);
-    const { enrollmentId, teiId, orgUnitId } = useSelector(({ router: { location: { query } } }) => query);
+    const { pathname } = useLocation();
+    const { enrollmentId, teiId, orgUnitId } = useLocationQuery();
 
 
     useEffect(() => {
