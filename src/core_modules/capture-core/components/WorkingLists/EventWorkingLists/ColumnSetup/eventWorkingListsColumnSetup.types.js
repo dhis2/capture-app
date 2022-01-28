@@ -1,12 +1,12 @@
 // @flow
-import { Program } from '../../../../metaData';
+import { Program, ProgramStage } from '../../../../metaData';
 import type { CustomColumnOrder } from '../../WorkingListsCommon';
 import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { EventWorkingListsReduxOutputProps } from '../ReduxProvider';
 
 type ExtractedProps = {|
     program: Program,
-    programStageId: string,
+    programStage: ProgramStage,
     customColumnOrder?: CustomColumnOrder,
     onLoadView: Function,
     onUpdateList: Function,
