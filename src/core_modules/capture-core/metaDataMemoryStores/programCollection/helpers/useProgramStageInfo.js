@@ -74,7 +74,7 @@ export const useProgramStageInfo = (programStageId?: string, programId?: string)
                     }
                     return Boolean(result);
                 });
-                return result || createErrorResult('program stage not found');
+                return result || createErrorResult('Program stage not found');
             },
         ].some((compute) => {
             programStageInfo = compute();
