@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
-import { Program, ProgramStage } from '../../../metaData';
 import { programCollection } from '../programCollection';
+import type { Program, ProgramStage } from '../../../metaData';
 
 type ErrorResult = {|
     error: string,
