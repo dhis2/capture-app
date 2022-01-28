@@ -18,8 +18,8 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
     const { data, error, refetch } = useDataQuery({
         trackedEntityInstance: {
             resource: 'trackedEntityInstances',
-            id: ({ variables: { teiId: updatedTeiId } }) => updatedTeiId,
-            params: ({ variables: { programId: updatedProgramId } }) => ({
+            params: ({ variables: { programId: updatedProgramId, teiId: updatedTeiId } }) => ({
+                trackedEntityInstance: updatedTeiId,
                 program: updatedProgramId,
                 fields: ['enrollments[*],attributes'],
             }),
@@ -30,9 +30,9 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
 
     const fetchedEnrollmentData = {
         reference: data,
-        enrollment: data?.trackedEntityInstance?.enrollments
+        enrollment: data?.trackedEntityInstance?.trackedEntityInstances?.[0]?.enrollments
             ?.find(enrollment => enrollment.enrollment === enrollmentId),
-        attributeValues: data?.trackedEntityInstance?.attributes,
+        attributeValues: data?.trackedEntityInstance?.trackedEntityInstances?.[0]?.attributes,
     };
 
     useEffect(() => {
