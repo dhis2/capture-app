@@ -1,3 +1,10 @@
+## [1.66.3](https://github.com/dhis2/capture-app/compare/v1.66.2...v1.66.3) (2022-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-12480] working lists download ([d47fb4c](https://github.com/dhis2/capture-app/commit/d47fb4c2eff71e0f2aa5a116101d1360d09358af))
+
 ## [1.66.2](https://github.com/dhis2/capture-app/compare/v1.66.1...v1.66.2) (2022-01-28)
 
 
