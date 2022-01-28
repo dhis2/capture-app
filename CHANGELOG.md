@@ -1,3 +1,10 @@
+## [1.66.2](https://github.com/dhis2/capture-app/compare/v1.66.1...v1.66.2) (2022-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-11804] add missing dependencies to rules engine execution ([a83c7cd](https://github.com/dhis2/capture-app/commit/a83c7cd92919ede4a4dad8f52d03cecb011eda83))
+
 ## [1.66.1](https://github.com/dhis2/capture-app/compare/v1.66.0...v1.66.1) (2022-01-27)
 
 
