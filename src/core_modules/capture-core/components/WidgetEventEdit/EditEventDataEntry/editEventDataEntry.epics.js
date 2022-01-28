@@ -54,10 +54,18 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
 
             const program = metadataContainer.program;
             const foundation = metadataContainer.stage.stageForm;
+            const { enrollment, attributeValues } = state.enrollmentDomain;
 
             return batchActions([
                 showEditEventDataEntry(),
-                ...openEventForEditInDataEntry(loadedValues, orgUnit, foundation, program, state.enrollmentDomain.enrollment?.events),
+                ...openEventForEditInDataEntry({
+                    loadedValues,
+                    orgUnit,
+                    foundation,
+                    program,
+                    enrollment,
+                    attributeValues,
+                }),
             ]);
         }));
 
