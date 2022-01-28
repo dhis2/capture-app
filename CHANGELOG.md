@@ -1,3 +1,10 @@
+## [1.66.4](https://github.com/dhis2/capture-app/compare/v1.66.3...v1.66.4) (2022-01-28)
+
+
+### Bug Fixes
+
+* [TECH-776] use URL params from useLocationQuery & history ([56edf84](https://github.com/dhis2/capture-app/commit/56edf844ebacbef8e382b5330c756a9a4b73534f))
+
 ## [1.66.3](https://github.com/dhis2/capture-app/compare/v1.66.2...v1.66.3) (2022-01-28)
 
 
