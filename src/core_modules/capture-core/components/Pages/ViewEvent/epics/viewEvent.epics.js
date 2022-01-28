@@ -141,7 +141,7 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
 export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
-        map(() => {
+        switchMap(() => {
             const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
@@ -149,10 +149,14 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
 
             if (showaccessible && !orgUnitId) {
                 history.push(`/?programId=${programId}&all`);
-                return resetLocationChange();
+                return new Promise((resolve) => {
+                    setTimeout(() => resolve(resetLocationChange()), 0);
+                });
             }
             history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
-            return resetLocationChange();
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }));
 
 export const openAddRelationshipForViewEventEpic = (action$: InputObservable) =>

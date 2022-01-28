@@ -2,7 +2,6 @@
 import React, { useCallback, useMemo, useEffect } from 'react';
 import log from 'loglevel';
 import { useHistory } from 'react-router-dom';
-import { type HashHistory } from 'history';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
 import { DisplayException } from 'capture-core/utils/exceptions';
@@ -13,7 +12,7 @@ import { initializeAsync } from './init';
 import { getStore } from '../../store/getStore';
 
 type Props = {
-    onRunApp: (store: ReduxStore, history: HashHistory) => void,
+    onRunApp: (store: ReduxStore) => void,
     onCacheExpired: Function,
 };
 
