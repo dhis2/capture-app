@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2021
-# 晓东 林 <13981924470@126.com>, 2021
-# phil_dhis2, 2021
-# easylin <lin_xd@126.com>, 2021
+# easylin <lin_xd@126.com>, 2022
+# phil_dhis2, 2022
+# 晓东 林 <13981924470@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
+"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -151,6 +151,9 @@ msgstr "指派的用户"
 
 msgid "Search for user"
 msgstr "搜索用户 "
+
+msgid "Complete event"
+msgstr "完成事件"
 
 msgid "Basic info"
 msgstr "基本信息"
@@ -456,6 +459,12 @@ msgstr "清除"
 msgid "No results"
 msgstr "无结果"
 
+msgid "Description"
+msgstr "描述"
+
+msgid "URL"
+msgstr "URL"
+
 msgid "Icon for {{field}}"
 msgstr "{{field}} 的图标"
 
@@ -675,6 +684,9 @@ msgstr "本次活动暂无反馈"
 
 msgid "Registered events"
 msgstr "登记的事件"
+
+msgid "Please select {{category}}."
+msgstr "请选择 {{category}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "或者在{{program}}中查看您可以访问的所有记录"
@@ -976,6 +988,9 @@ msgstr "写一篇关于该事件的评论"
 msgid "This event doesn't have any comments"
 msgstr "此事件没有任何评论"
 
+msgid "stage not found in rules execution"
+msgstr "在规则执行中找不到阶段"
+
 msgid "Event completed"
 msgstr "事件完成"
 
@@ -1024,6 +1039,9 @@ msgstr "{{scheduledEvents}} 已调度"
 msgid "Stages and Events"
 msgstr "阶段和事件"
 
+msgid "Working list could not be loaded"
+msgstr "工作列表不能载入"
+
 msgid "Delete event"
 msgstr "删除事件"
 
@@ -1041,9 +1059,6 @@ msgstr "随着过滤器下载"
 
 msgid "Download data..."
 msgstr "下载数据"
-
-msgid "Working list could not be loaded"
-msgstr "工作列表不能载入"
 
 msgid "an error occurred loading working lists"
 msgstr "载入工作列表发生错误"

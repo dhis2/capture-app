@@ -1,14 +1,14 @@
 # 
 # Translators:
-# phil_dhis2, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
+# Viktor Varland <viktor@dhis2.org>, 2022
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
+"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Urdu (https://www.transifex.com/hisp-uio/teams/100509/ur/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -147,6 +147,9 @@ msgstr ""
 
 msgid "Search for user"
 msgstr ""
+
+msgid "Complete event"
+msgstr "مکمل ایونٹ"
 
 msgid "Basic info"
 msgstr ""
@@ -452,6 +455,12 @@ msgstr "کلیئر"
 msgid "No results"
 msgstr ""
 
+msgid "Description"
+msgstr "تفصیلات"
+
+msgid "URL"
+msgstr "یو آر ایل"
+
 msgid "Icon for {{field}}"
 msgstr ""
 
@@ -670,6 +679,9 @@ msgstr ""
 
 msgid "Registered events"
 msgstr "رجسٹرڈ واقعات"
+
+msgid "Please select {{category}}."
+msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
@@ -971,6 +983,9 @@ msgstr ""
 msgid "This event doesn't have any comments"
 msgstr ""
 
+msgid "stage not found in rules execution"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1019,6 +1034,9 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Working list could not be loaded"
+msgstr ""
+
 msgid "Delete event"
 msgstr ""
 
@@ -1035,9 +1053,6 @@ msgid "Download with current filters"
 msgstr ""
 
 msgid "Download data..."
-msgstr ""
-
-msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "an error occurred loading working lists"

@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2021
-# Caroline Hesthagen Holen <caroline@devotta.no>, 2021
-# Karoline Tufte Lien <karoline@dhis2.org>, 2021
+# Karoline Tufte Lien <karoline@dhis2.org>, 2022
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
+"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
+"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -154,6 +154,9 @@ msgstr "Tildelt programbruker"
 
 msgid "Search for user"
 msgstr "Søk etter bruker"
+
+msgid "Complete event"
+msgstr "Fullfør hendelse"
 
 msgid "Basic info"
 msgstr "Grunnleggende informasjon"
@@ -470,6 +473,12 @@ msgstr "Fjern"
 msgid "No results"
 msgstr "Ingen resultater"
 
+msgid "Description"
+msgstr "Beskrivelse"
+
+msgid "URL"
+msgstr "URL"
+
 msgid "Icon for {{field}}"
 msgstr "Ikon for {{field}}"
 
@@ -696,6 +705,9 @@ msgstr "Det er ingen tilbakemeldinger for denne hendelsen"
 
 msgid "Registered events"
 msgstr "Registrerte hendelser"
+
+msgid "Please select {{category}}."
+msgstr "Velg {{kategori}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "Eller se alle opptegnelser som er tilgjengelige for deg i {{program}}"
@@ -1009,6 +1021,9 @@ msgstr "Skriv en kommentar om denne hendelsen"
 msgid "This event doesn't have any comments"
 msgstr "Denne hendelsen har ingen kommentarer"
 
+msgid "stage not found in rules execution"
+msgstr "fase ikke funnet i regelutførelse"
+
 msgid "Event completed"
 msgstr "Hendelse fullført"
 
@@ -1057,6 +1072,9 @@ msgstr "{{ scheduledEvents }} planlagt"
 msgid "Stages and Events"
 msgstr "Faser og hendelser"
 
+msgid "Working list could not be loaded"
+msgstr "Arbeidslisten kunne ikke lastes inn"
+
 msgid "Delete event"
 msgstr "Slett hendelse"
 
@@ -1074,9 +1092,6 @@ msgstr "Last ned med gjeldende filtre"
 
 msgid "Download data..."
 msgstr "Last ned data..."
-
-msgid "Working list could not be loaded"
-msgstr "Arbeidslisten kunne ikke lastes inn"
 
 msgid "an error occurred loading working lists"
 msgstr "en feil oppstod ved lasting av arbeidslister"

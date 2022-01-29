@@ -1,17 +1,17 @@
 # 
 # Translators:
 # KRG HIS <antonia.bezenchek@informa.pro>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Antonia Bezenchek <antonia@informa.pro>, 2021
-# Hamza Assada <7amza.it@gmail.com>, 2021
-# phil_dhis2, 2021
+# phil_dhis2, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
+# Hamza Assada <7amza.it@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
+"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: phil_dhis2, 2021\n"
+"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,6 +156,9 @@ msgstr "المستخدم المعين"
 
 msgid "Search for user"
 msgstr "البحث عن مستخدم"
+
+msgid "Complete event"
+msgstr "إكمال الحدث"
 
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
@@ -466,6 +469,12 @@ msgstr "مسح"
 msgid "No results"
 msgstr "لا توجد نتائج"
 
+msgid "Description"
+msgstr "الوصف"
+
+msgid "URL"
+msgstr "عنوان URL"
+
 msgid "Icon for {{field}}"
 msgstr ""
 
@@ -684,6 +693,9 @@ msgstr ""
 
 msgid "Registered events"
 msgstr "الأحداث المسجلة"
+
+msgid "Please select {{category}}."
+msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
@@ -991,6 +1003,9 @@ msgstr ""
 msgid "This event doesn't have any comments"
 msgstr ""
 
+msgid "stage not found in rules execution"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1039,6 +1054,9 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Working list could not be loaded"
+msgstr "تعذر تحميل قائمة العمل"
+
 msgid "Delete event"
 msgstr "حذف الحدث"
 
@@ -1056,9 +1074,6 @@ msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
 
 msgid "Download data..."
 msgstr "تنزيل البيانات"
-
-msgid "Working list could not be loaded"
-msgstr "تعذر تحميل قائمة العمل"
 
 msgid "an error occurred loading working lists"
 msgstr "حدث خطأ اثناء تحميل قوائم العمل"

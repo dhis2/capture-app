@@ -1,21 +1,21 @@
 # 
 # Translators:
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Marta Vila <marta@dhis2.org>, 2021
 # Pablo Pajuelo Cabezas <ppajuelo@quadram.mobi>, 2021
 # ericbp <ericbarredap@gmail.com>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
 # Alison Andrade <aandrade@ippfwhr.org>, 2021
-# phil_dhis2, 2021
-# Prabhjot Singh, 2021
+# Viktor Varland <viktor@dhis2.org>, 2022
+# Prabhjot Singh, 2022
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
+"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Prabhjot Singh, 2021\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,6 +162,9 @@ msgstr "Usuario asignado"
 
 msgid "Search for user"
 msgstr "Buscar usuario"
+
+msgid "Complete event"
+msgstr "Completar el evento"
 
 msgid "Basic info"
 msgstr "Información básica"
@@ -480,6 +483,12 @@ msgstr "Limpiar"
 msgid "No results"
 msgstr "No hay resultados"
 
+msgid "Description"
+msgstr "Descripción"
+
+msgid "URL"
+msgstr "URL"
+
 msgid "Icon for {{field}}"
 msgstr "Icono de {{campo}}"
 
@@ -709,6 +718,9 @@ msgstr ""
 
 msgid "Registered events"
 msgstr "Eventos registrados"
+
+msgid "Please select {{category}}."
+msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
@@ -1031,6 +1043,9 @@ msgstr ""
 msgid "This event doesn't have any comments"
 msgstr ""
 
+msgid "stage not found in rules execution"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Evento completado"
 
@@ -1081,6 +1096,9 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Etapas y eventos"
 
+msgid "Working list could not be loaded"
+msgstr "No se pudo cargar la lista de trabajo"
+
 msgid "Delete event"
 msgstr "Eliminar evento"
 
@@ -1098,9 +1116,6 @@ msgstr "Descargar con filtros actuales"
 
 msgid "Download data..."
 msgstr "Descargar datos"
-
-msgid "Working list could not be loaded"
-msgstr "No se pudo cargar la lista de trabajo"
 
 msgid "an error occurred loading working lists"
 msgstr "se produjo un error al cargar listas de trabajo"
