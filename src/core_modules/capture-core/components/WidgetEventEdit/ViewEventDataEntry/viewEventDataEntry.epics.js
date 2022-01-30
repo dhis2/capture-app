@@ -61,7 +61,16 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
             }
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
-            return from(loadViewEventDataEntry(eventContainer, orgUnit, foundation, program, state.enrollmentDomain.enrollment?.events))
+            const { enrollment, attributeValues } = state.enrollmentDomain;
+
+            return from(loadViewEventDataEntry({
+                eventContainer,
+                orgUnit,
+                foundation,
+                program,
+                enrollment,
+                attributeValues,
+            }))
                 .pipe(
                     map(item => batchActions(item)),
                 );

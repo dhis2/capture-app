@@ -25,23 +25,22 @@ import { normalizeRuleVariable } from './commonUtils/normalizeRuleVariable';
  * @param data
  * @param variablesHash
  */
-function updateVariableHashWhenActionIsAssignValue(variableToAssign: string, data: any, variablesHash: RuleVariables) {
-    const variableHash = variablesHash[variableToAssign];
+function updateVariable(variableToAssign: string, data: any, variablesHash: RuleVariables) {
+    const variableHashKey = variableToAssign.replace('#{', '').replace('A{', '').replace('}', '');
+    const variableHash = variablesHash[variableHashKey];
 
     if (!variableHash) {
         // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-        log.warn(`Variable ${variableToAssign} was not defined.`);
+        log.warn(`Variable ${variableHashKey} was not defined.`);
     } else {
-        // buildAssignVariable
-        // todo according to types this must be a bug
         const { variableType } = variableHash;
         let variableValue = normalizeRuleVariable(data, variableType);
         if (variableValue && isString(variableValue)) {
             variableValue = `'${variableValue}'`;
         }
 
-        variablesHash[variableToAssign] = {
-            ...variablesHash[variableToAssign],
+        variablesHash[variableHashKey] = {
+            ...variableHash,
             variableValue,
             variableType,
             hasValue: true,
@@ -289,7 +288,6 @@ export class RulesEngine {
                             location,
                             dataElementId,
                             trackedEntityAttributeId,
-                            programRuleVariableId,
                             programStageId,
                             programStageSectionId,
                             optionGroupId,
@@ -304,11 +302,8 @@ export class RulesEngine {
                             ruleEffectData = trimQuotes(evaluatedRuleEffectData);
                         }
 
-                        if (action === effectActions.ASSIGN_VALUE) {
-                            [dataElementId, trackedEntityAttributeId, programRuleVariableId]
-                                .filter(idString => idString)
-                                // $FlowExpectedError (doesn't recognise that the filter transforms ?string into string)
-                                .map(idString => updateVariableHashWhenActionIsAssignValue(idString, ruleEffectData, variablesHash));
+                        if (action === effectActions.ASSIGN_VALUE && content) { // the program rule variable id is found in the content key
+                            updateVariable(content, ruleEffectData, variablesHash);
                         }
 
                         return {

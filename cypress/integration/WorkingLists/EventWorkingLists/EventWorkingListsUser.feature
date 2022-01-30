@@ -80,7 +80,7 @@ When you change rows per page to 10
 Then the list should display 10 rows of data
 And for an event program the page navigation should show that you are on the first page
 
-Scenario: Show events ordered ascendingly by report date 
+Scenario: Show events ordered ascendingly by report date
 Given you open the main page with Ngelehun and malaria case context
 When you click the report date column header
 Then the sort arrow should indicate ascending order
@@ -101,3 +101,12 @@ And you save the view as dateFilterWorkingList
 And you refresh the page
 And you open the dateFilterWorkingList
 Then the admission filter should be in effect
+
+Scenario: User is promted with message to select Category
+Given you open the main page with Ngelehun and Contraceptives Voucher Program
+Then you are told to select Implementing Partner
+
+Scenario: The user can see the working list when selecting Category
+Given you open the main page with Ngelehun and Contraceptives Voucher Program
+When the user selects CARE International
+Then the working list should be displayed

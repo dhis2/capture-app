@@ -21,8 +21,8 @@ export type PropsFromRedux ={|
 |}
 
 export type OwnProps ={|
-  +fallbackTriggered: boolean,
-  +availableSearchOptions: AvailableSearchOptions,
+    fallbackTriggered: boolean,
+    availableSearchOptions: AvailableSearchOptions,
 |}
 
 export type DispatchersFromRedux = {|

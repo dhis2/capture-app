@@ -1,8 +1,8 @@
-
 // @flow
-export type Props = $ReadOnly<{|
+
+export type Props = {|
     storeId: string,
-    programId: string,
-    programStageId: string,
-    orgUnitId: string
-|}>;
+    orgUnitId: string,
+    programId?: string,
+    programStageId?: string,
+|};

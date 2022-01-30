@@ -21,7 +21,6 @@ const styles = {
         marginRight: spacersNum.dp16,
     },
 };
-
 const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     const { teiId, programId, orgUnitId, enrollmentId } = useLocationQuery();
     const { valid: validIds, loading, error: validatedIdsError } = useValidatedIDsFromCache({ programId, orgUnitId });

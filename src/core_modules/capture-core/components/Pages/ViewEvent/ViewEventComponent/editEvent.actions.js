@@ -7,7 +7,6 @@ export const actionTypes = {
     EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED: 'EventFromUrlCouldNotBeRetrievedForEditEvent',
     ORG_UNIT_RETRIEVED_ON_URL_UPDATE: 'OrgUnitRetrievedForEditEventOnUrlUpdate',
     ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE: 'OrgUnitRetrievalFailedForEditEventOnUrlUpdate',
-    START_OPEN_EVENT_FOR_EDIT: 'StartOpenEventForEditInDataEntry',
     ADD_EVENT_NOTE: 'AddEventNote',
     REMOVE_EVENT_NOTE: 'RemoveEventNote',
 };

@@ -1,6 +1,6 @@
 // @flow
 import React, { type ComponentType, useContext, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { Grid, Paper, withStyles } from '@material-ui/core';
@@ -14,6 +14,7 @@ import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { useLocationQuery } from '../../../../utils/routing';
 
 const getStyles = ({ typography }) => ({
     paper: {
@@ -58,11 +59,7 @@ const DialogButtons = ({ onCancel, onSave }) => (
 
 const CardListButton = (({ teiId, orgUnitId }) => {
     const dispatch = useDispatch();
-    const { programId } = useSelector(({
-        router: {
-            location: { query },
-        },
-    }) => ({ programId: query.programId }));
+    const { programId } = useLocationQuery();
 
     return (
         <Button

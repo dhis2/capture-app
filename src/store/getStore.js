@@ -5,7 +5,6 @@ import { createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { enableBatching } from 'redux-batched-actions';
 import { createLogger } from 'redux-logger';
-import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { buildReducersFromDescriptions } from 'capture-core/trackerRedux/trackerReducer';
 import { environments } from 'capture-core/constants/environments';
 import type { BrowserHistory, HashHistory } from 'history';
@@ -18,13 +17,12 @@ import { epics } from '../epics/trackerCapture.epics';
 
 export function getStore(
     history: BrowserHistory | HashHistory,
-    apiUtils: ApiUtils,
+    apiUtils: ApiUtilsWithoutHistory,
     onRehydrated: () => void) {
     const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
 
     const rootReducer = combineReducers({
         ...reducersFromDescriptions,
-        router: connectRouter(history),
     });
 
     // https://github.com/redux-offline/redux-offline/blob/32e4c98ec782672347b42a7936631df5c6340b77/docs/api/config.md
@@ -41,12 +39,11 @@ export function getStore(
         persistOptions: getPersistOptions(),
     });
 
-    apiUtils.history = history;
     const epicMiddleware = createEpicMiddleware({
-        dependencies: apiUtils,
+        dependencies: { ...apiUtils, history },
     });
 
-    const middleware = [epicMiddleware, routerMiddleware(history), offlineMiddleware];
+    const middleware = [epicMiddleware, offlineMiddleware];
 
     if (process.env.NODE_ENV !== environments.prod) {
         middleware.push(createLogger({ collapsed: true, diff: true }));

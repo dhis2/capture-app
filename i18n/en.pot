@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-21T18:49:46.745Z\n"
-"PO-Revision-Date: 2022-01-21T18:49:46.745Z\n"
+"POT-Creation-Date: 2022-01-30T14:59:03.316Z\n"
+"PO-Revision-Date: 2022-01-30T14:59:03.316Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1175,6 +1175,9 @@ msgstr "New TEI - Relationship handler"
 msgid "New Relationship"
 msgstr "New Relationship"
 
+msgid "Working list could not be loaded"
+msgstr "Working list could not be loaded"
+
 msgid "Delete event"
 msgstr "Delete event"
 
@@ -1192,9 +1195,6 @@ msgstr "Download with current filters"
 
 msgid "Download data..."
 msgstr "Download data..."
-
-msgid "Working list could not be loaded"
-msgstr "Working list could not be loaded"
 
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
