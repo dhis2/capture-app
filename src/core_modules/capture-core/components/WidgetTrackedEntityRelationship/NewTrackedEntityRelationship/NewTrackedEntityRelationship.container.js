@@ -1,13 +1,15 @@
 // @flow
 import React, { useCallback, useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
-import { colors } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../Widget';
 import { NewTrackedEntityRelationshipComponent } from './NewTrackedEntityRelationship.component';
 import { NewTEIRelationshipStatuses } from '../WidgetTrackedEntityRelationship.const';
 import type { Props } from './NewTrackedEntityRelationship.types';
+import { useFilteredRelationshipTypes } from '../hooks';
+import { LinkButton } from '../../Buttons/LinkButton.component';
+import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
+import { useLocationQuery } from '../../../utils/routing';
 
 const styles = {
     container: {
@@ -16,17 +18,37 @@ const styles = {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#fff',
-        borderRadius: 3,
-        borderStyle: 'solid',
-        borderColor: colors.grey400,
-        borderWidth: 1,
+        backgroundColor: '#FAFAFA',
+    },
+    bar: {
+        color: '#494949',
+        padding: '8px',
+        display: 'inline-block',
+        fontSize: '14px',
+        borderRadius: '4px',
+        marginBottom: '10px',
+        backgroundColor: '#E9EEF4',
+    },
+    linkText: {
+        backgroundColor: 'transparent',
+        fontSize: 'inherit',
+        color: 'inherit',
     },
 };
 
-export const NewTrackedEntityRelationshipPlain = ({ renderRef, showDialog, hideDialog, classes, ...passOnProps }: Props) => {
+export const NewTrackedEntityRelationshipPlain = ({
+    renderRef,
+    showDialog,
+    hideDialog,
+    relationshipTypes,
+    trackedEntityType,
+    classes,
+    ...passOnProps
+}: Props) => {
     const [selectedRelationshipType, setSelectedRelationshipType] = useState();
     const [creationMode, setCreationMode] = useState();
+    const { programId } = useLocationQuery();
+    const filteredRelationshipTypes = useFilteredRelationshipTypes(relationshipTypes, trackedEntityType, programId);
 
     const pageStatus = useMemo(() => {
         if (!selectedRelationshipType) {
@@ -37,7 +59,6 @@ export const NewTrackedEntityRelationshipPlain = ({ renderRef, showDialog, hideD
         }
         return NewTEIRelationshipStatuses.DEFAULT;
     }, [creationMode, selectedRelationshipType]);
-
 
     const onSelectRelationshipType = useCallback(
         relationshipType => setSelectedRelationshipType(relationshipType), [],
@@ -54,20 +75,28 @@ export const NewTrackedEntityRelationshipPlain = ({ renderRef, showDialog, hideD
     }
 
     return ReactDOM.createPortal((
-        <div className={classes.container}>
-            <Widget
-                noncollapsible
-                borderless
-                header={<p>{i18n.t('New TEI - Relationship handler')}</p>}
-            >
-                <NewTrackedEntityRelationshipComponent
-                    onSelectType={onSelectRelationshipType}
-                    pageStatus={pageStatus}
-                    onCancel={onCancel}
-                    {...passOnProps}
-                />
-            </Widget>
-        </div>
+        <>
+            <div className={classes.container}>
+                <div className={classes.bar}>
+                    <LinkButton onClick={onCancel} className={classes.linkText}>
+                        Go back without saving relationship
+                    </LinkButton>
+                </div>
+                <Widget
+                    noncollapsible
+                    header={<Breadcrumbs />}
+                >
+                    <NewTrackedEntityRelationshipComponent
+                        relationshipTypes={filteredRelationshipTypes}
+                        trackedEntityType={trackedEntityType}
+                        programId={programId}
+                        pageStatus={pageStatus}
+                        onSelectType={onSelectRelationshipType}
+                        {...passOnProps}
+                    />
+                </Widget>
+            </div>
+        </>
     ), renderRef.current);
 };
 

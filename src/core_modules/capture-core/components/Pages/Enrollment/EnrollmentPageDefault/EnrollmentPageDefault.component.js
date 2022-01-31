@@ -18,9 +18,11 @@ import {
 } from '../../../WidgetTrackedEntityRelationship/WidgetTrackedEntityRelationship';
 
 const getStyles = ({ typography }) => ({
+    container: {
+        position: 'relative',
+    },
     columns: {
         display: 'flex',
-        position: 'relative',
     },
     leftColumn: {
         flexGrow: 3,
@@ -63,9 +65,12 @@ export const EnrollmentPageDefaultPlain = ({
     renderRelationshipRef,
     relationshipTypes,
 }: PlainProps) => (
-    <>
+    <div
+        className={classes.container}
+        ref={renderRelationshipRef}
+    >
         <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
-        <div className={classes.columns} ref={renderRelationshipRef}>
+        <div className={classes.columns} >
             <div className={classes.leftColumn}>
                 <EnrollmentQuickActions
                     stages={stages}
@@ -82,6 +87,8 @@ export const EnrollmentPageDefaultPlain = ({
             <div className={classes.rightColumn}>
                 <WidgetTrackedEntityRelationship
                     relationshipTypes={relationshipTypes}
+                    // $FlowFixMe
+                    trackedEntityType={program.trackedEntityType.id}
                     renderRef={renderRelationshipRef}
                 />
                 <WidgetEnrollmentComment />
@@ -108,7 +115,7 @@ export const EnrollmentPageDefaultPlain = ({
                 />}
             </div>
         </div>
-    </>
+    </div>
 );
 
 

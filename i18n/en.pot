@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-30T14:59:03.316Z\n"
-"PO-Revision-Date: 2022-01-30T14:59:03.316Z\n"
+"POT-Creation-Date: 2022-01-31T19:19:52.073Z\n"
+"PO-Revision-Date: 2022-01-31T19:19:52.073Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1160,6 +1160,9 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
+msgid "New TEI Relationship"
+msgstr "New TEI Relationship"
+
 msgid "Link to an existing person"
 msgstr "Link to an existing person"
 
@@ -1168,9 +1171,6 @@ msgstr "Create new"
 
 msgid "An error occurred"
 msgstr "An error occurred"
-
-msgid "New TEI - Relationship handler"
-msgstr "New TEI - Relationship handler"
 
 msgid "New Relationship"
 msgstr "New Relationship"
