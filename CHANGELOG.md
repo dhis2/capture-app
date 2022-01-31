@@ -1,3 +1,38 @@
+## [1.66.4](https://github.com/dhis2/capture-app/compare/v1.66.3...v1.66.4) (2022-01-28)
+
+
+### Bug Fixes
+
+* [TECH-776] use URL params from useLocationQuery & history ([56edf84](https://github.com/dhis2/capture-app/commit/56edf844ebacbef8e382b5330c756a9a4b73534f))
+
+## [1.66.3](https://github.com/dhis2/capture-app/compare/v1.66.2...v1.66.3) (2022-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-12480] working lists download ([d47fb4c](https://github.com/dhis2/capture-app/commit/d47fb4c2eff71e0f2aa5a116101d1360d09358af))
+
+## [1.66.2](https://github.com/dhis2/capture-app/compare/v1.66.1...v1.66.2) (2022-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-11804] add missing dependencies to rules engine execution ([a83c7cd](https://github.com/dhis2/capture-app/commit/a83c7cd92919ede4a4dad8f52d03cecb011eda83))
+
+## [1.66.1](https://github.com/dhis2/capture-app/compare/v1.66.0...v1.66.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7003144](https://github.com/dhis2/capture-app/commit/70031441e22a3628c97d03152224460b29dc8848))
+
+# [1.66.0](https://github.com/dhis2/capture-app/compare/v1.65.1...v1.66.0) (2022-01-26)
+
+
+### Features
+
+* [TECH-927] Tests for category combo combination ([1dc8a79](https://github.com/dhis2/capture-app/commit/1dc8a7970e569197cf69b09ec7f5802aaa335e58))
+
 ## [1.65.1](https://github.com/dhis2/capture-app/compare/v1.65.0...v1.65.1) (2022-01-24)
 
 

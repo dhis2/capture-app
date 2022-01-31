@@ -19,6 +19,7 @@ import {
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import type { OwnProps } from './LockedSelector.types';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
+import { useLocationQuery } from '../../utils/routing';
 
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, organisationUnits) => {
     // because we want the orgUnit to be fetched and stored
@@ -30,32 +31,9 @@ const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, organisationUni
     return !lockedSelectorLoads;
 };
 
-const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string, pathname: string } =>
-    useSelector(({
-        currentSelections: {
-            programId: selectedProgramId,
-            orgUnitId: selectedOrgUnitId,
-        },
-        router: {
-            location: {
-                query: {
-                    programId: routerProgramId,
-                    orgUnitId: routerOrgUnitId,
-                },
-                pathname,
-            },
-        },
-    }) =>
-        ({
-            selectedProgramId: routerProgramId || selectedProgramId,
-            selectedOrgUnitId: routerOrgUnitId || selectedOrgUnitId,
-            pathname,
-        }),
-    );
-
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
-    const { selectedOrgUnitId } = useUrlQueries();
+    const { orgUnitId: selectedOrgUnitId } = useLocationQuery();
     const { pathname } = useLocation();
     const pageFetchesOrgUnit = !pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
 
@@ -159,7 +137,11 @@ export const LockedSelector: ComponentType<OwnProps> =
           },
           [pageToPush, customActionsOnProgramIdReset, dispatch]);
 
-      const { selectedOrgUnitId, selectedProgramId } = useUrlQueries();
+      const { orgUnitId: urlOrgUnit, programId: urlProgramId } = useLocationQuery();
+      const { orgUnitId, programId } = useSelector(({ currentSelections }) => ({
+          orgUnitId: urlOrgUnit || currentSelections.orgUnitId,
+          programId: urlProgramId || currentSelections.programId,
+      }));
 
       const lockedSelectorLoads: string =
         useSelector(({ activePage }) => activePage.lockedSelectorLoads);
@@ -168,7 +150,7 @@ export const LockedSelector: ComponentType<OwnProps> =
       const organisationUnits: Object =
         useSelector(({ organisationUnits: orgUnits }) => orgUnits);
 
-      const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, organisationUnits);
+      const ready = deriveReadiness(lockedSelectorLoads, orgUnitId, organisationUnits);
 
       useComponentLifecycle();
 
@@ -186,8 +168,8 @@ export const LockedSelector: ComponentType<OwnProps> =
               onSetCategoryOption={dispatchOnSetCategoryOption}
               onSetProgramId={dispatchOnSetProgramId}
               onSetOrgUnit={dispatchOnSetOrgUnit}
-              selectedOrgUnitId={selectedOrgUnitId}
-              selectedProgramId={selectedProgramId}
+              selectedOrgUnitId={orgUnitId}
+              selectedProgramId={programId}
               isUserInteractionInProgress={isUserInteractionInProgress}
               ready={ready}
           />

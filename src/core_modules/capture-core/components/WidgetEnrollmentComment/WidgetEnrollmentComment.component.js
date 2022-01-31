@@ -4,10 +4,11 @@ import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestAddNoteForEnrollment } from './WidgetEnrollmentComment.actions';
 import { WidgetComment } from '../WidgetComment';
+import { useLocationQuery } from '../../utils/routing';
 
 export const WidgetEnrollmentComment = () => {
     const dispatch = useDispatch();
-    const enrollmentId = useSelector(({ router }) => router.location.query.enrollmentId);
+    const { enrollmentId } = useLocationQuery();
     const comments = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment?.notes ?? []);
 
     const onAddComment = (newCommentValue) => {
