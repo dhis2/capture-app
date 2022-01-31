@@ -1,6 +1,5 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { push } from 'connected-react-router';
 import { map } from 'rxjs/operators';
 import {
     actionTypes as newEventDataEntryActionTypes,
@@ -14,8 +13,10 @@ import {
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
+import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../../../utils/routing';
+import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
-export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map((action) => {
@@ -26,20 +27,19 @@ export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStor
             const { formClientValues, mainDataClientValues }
                 = getNewEventClientValues(state, dataEntryKey, formFoundation);
             const serverData =
-                getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues, completed);
+                getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues, history, completed);
 
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return startSaveNewEventAndReturnToList(serverData, relationshipData, state.currentSelections);
         }));
 
-export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map(() => {
-            const state = store.value;
-            const { enrollmentId, programId, orgUnitId, teiId } = state.router.location.query;
-
-            return push(`/enrollment?programId=${programId}&orgUnitId=${orgUnitId}&teiId=${teiId}&enrollmentId=${enrollmentId}`);
+            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
+            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+            return resetLocationChange();
         }));
 
 

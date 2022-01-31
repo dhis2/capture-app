@@ -14,8 +14,8 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRel
     <div>
         <LockedSelector
             isUserInteractionInProgress={isUserInteractionInProgress}
-            customActionsOnProgramIdReset={[customOrgUnitIdIdReset()]}
-            customActionsOnOrgUnitIdReset={[customProgramIdReset()]}
+            customActionsOnProgramIdReset={[customProgramIdReset()]}
+            customActionsOnOrgUnitIdReset={[customOrgUnitIdIdReset()]}
         />
 
         {

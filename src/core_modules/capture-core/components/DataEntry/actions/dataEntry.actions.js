@@ -27,6 +27,7 @@ export const actionTypes = {
     ADD_DATA_ENTRY_RELATIONSHIP: 'AddDataEntryRelationship',
     DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS: 'DataEntryRelationshipAlreadyExists',
     LOAD_EDIT_DATA_ENTRY: 'LoadEditDataEntry',
+    CLEAN_UP_DATA_ENTRY: 'CleanUpDataEntry',
 };
 
 // COMPLETE
@@ -150,3 +151,5 @@ export const relationshipAlreadyExists =
 export const loadEditDataEntry =
     (args: Object) =>
         actionCreator(actionTypes.LOAD_EDIT_DATA_ENTRY)(args);
+
+export const cleanUpDataEntry = (dataEntryId: string) => actionCreator(actionTypes.CLEAN_UP_DATA_ENTRY)({ dataEntryId });

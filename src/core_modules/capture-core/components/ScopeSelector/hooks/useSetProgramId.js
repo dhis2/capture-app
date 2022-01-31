@@ -1,12 +1,11 @@
 // @flow
-import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import { getUrlQueries } from '../../../utils/url';
 import { buildUrlQueryString } from '../../../utils/routing';
 
 export const useSetProgramId = () => {
     const history = useHistory();
-    const pathname: string = useSelector(({ router: { location } }) => location.pathname);
+    const { pathname } = useLocation();
 
     const setProgramId = (programId: string, pageToPush: string = pathname) => {
         const restOfQueries = getUrlQueries();

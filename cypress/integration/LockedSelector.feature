@@ -169,7 +169,7 @@ Feature: User uses the LockedSelector to navigate
    And you see the enrollment page
 
   Scenario: Enrollment page > Fallback for tei missing name
-    Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollment?enrollment?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8&teiId=dNpxRu1mWG5
+    Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollment?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8&teiId=dNpxRu1mWG5
     Then you see the tei id on the scope selector
 
   #Enrollment event edit page

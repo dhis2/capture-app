@@ -310,7 +310,7 @@ And('you fill in the hemoglobin', () => {
 
 And('you are navigated to the working list', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?programId=lxAQ7Zs9VYR&orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/orgUnitId=DiszpKrYNg8&programId=lxAQ7Zs9VYR`);
 
     cy.get('[data-test="event-working-lists"]')
         .contains('2021-01-01')
@@ -340,11 +340,6 @@ And('you fill in a unique first name', () => {
 And('you click the save new submit button', () => {
     cy.contains('Save new')
         .click();
-});
-
-Then('you are navigated to the Tracker Capture', () => {
-    cy.url().should('include', 'dashboard?tei=');
-    cy.url().should('include', 'ou=DiszpKrYNg8&tracked_entity_type=nEenWmSyUEp');
 });
 
 Then('you see the possible duplicates modal', () => {
@@ -415,11 +410,6 @@ And('you fill in child programme first name with value that has duplicates', () 
         .eq(4)
         .type('Sarah')
         .blur();
-});
-
-Then('you are navigated to the WHO RMNCH program in Tracker Capture app', () => {
-    cy.url().should('include', 'dashboard?tei=');
-    cy.url().should('include', 'ou=DiszpKrYNg8&program=WSGAb5XwJ3Y');
 });
 
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {

@@ -119,13 +119,14 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
 
     render() {
         // If orgUnit is set in Redux state.
-        if (this.props.selectedOrgUnitId) {
+        const { selectedOrgUnit, selectedOrgUnitId } = this.props;
+        if (selectedOrgUnitId && selectedOrgUnit) {
             return (
                 <div data-test="org-unit-selector-container">
                     <Paper square elevation={0} className={this.props.classes.selectedPaper}>
                         <h4 className={this.props.classes.title}>{ i18n.t('Selected registering unit') }</h4>
                         <div className={this.props.classes.selectedItemContainer}>
-                            <div>{this.props.selectedOrgUnit.name}</div>
+                            <div>{selectedOrgUnit.name}</div>
                             <div className={this.props.classes.selectedItemClear}>
                                 <IconButton data-test="reset-selection-button" className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
                                     <IconCross24 />

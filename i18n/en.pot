@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-31T16:25:02.079Z\n"
-"PO-Revision-Date: 2022-01-31T16:25:02.079Z\n"
+"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
+"PO-Revision-Date: 2022-01-28T15:06:33.964Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -144,7 +144,7 @@ msgid "Search for user"
 msgstr "Search for user"
 
 msgid "Complete event"
-msgstr "Complete event"
+msgstr ""
 
 msgid "Basic info"
 msgstr "Basic info"
@@ -464,10 +464,10 @@ msgid "No results"
 msgstr "No results"
 
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 msgid "Icon for {{field}}"
 msgstr "Icon for {{field}}"
@@ -739,7 +739,7 @@ msgid "Registered events"
 msgstr "Registered events"
 
 msgid "Please select {{category}}."
-msgstr "Please select {{category}}."
+msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "Or see all records accessible to you in {{program}} "
@@ -1048,7 +1048,7 @@ msgid "This event doesn't have any comments"
 msgstr "This event doesn't have any comments"
 
 msgid "stage not found in rules execution"
-msgstr "stage not found in rules execution"
+msgstr ""
 
 msgid "Event completed"
 msgstr "Event completed"
@@ -1091,11 +1091,43 @@ msgstr "Event comments"
 msgid "Write a comment about this scheduled event"
 msgstr "Write a comment about this scheduled event"
 
+msgid ""
+"Change information about this {{trackedEntityName}} here. To change "
+"information about this enrollment, use the Edit button in the in the "
+"Enrollment box on this dashboard"
+msgstr ""
+"Change information about this {{trackedEntityName}} here. To change "
+"information about this enrollment, use the Edit button in the in the "
+"Enrollment box on this dashboard"
+
+msgid "Save changes"
+msgstr "Save changes"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "There are errors in this form"
+msgstr "There are errors in this form"
+
+msgid "There are warnings in this form"
+msgstr "There are warnings in this form"
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
 msgid "Person Profile"
 msgstr "Person Profile"
+
+msgid "Edit"
+msgstr "Edit"
+msgid "You can’t add any more events in this program"
+msgstr ""
+
+msgid "Cancel without saving"
+msgstr ""
+
+msgid "Choose a stage for a new event"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
@@ -1135,6 +1167,9 @@ msgstr "{{ scheduledEvents }} scheduled"
 
 msgid "Stages and Events"
 msgstr "Stages and Events"
+
+msgid "Working list could not be loaded"
+msgstr ""
 
 msgid "Delete event"
 msgstr "Delete event"
@@ -1234,9 +1269,6 @@ msgstr "Program not found"
 
 msgid "Program is not a tracker program"
 msgstr "Program is not a tracker program"
-
-msgid "Profile"
-msgstr "Profile"
 
 msgid "Error saving event"
 msgstr "Error saving event"
