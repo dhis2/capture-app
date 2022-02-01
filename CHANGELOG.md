@@ -1,3 +1,10 @@
+## [1.66.5](https://github.com/dhis2/capture-app/compare/v1.66.4...v1.66.5) (2022-02-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12247] fix render loop in enrollment page ([#2380](https://github.com/dhis2/capture-app/issues/2380)) ([78bc285](https://github.com/dhis2/capture-app/commit/78bc285b3f584550a2d8bc670392f0d6cc25c192))
+
 ## [1.66.4](https://github.com/dhis2/capture-app/compare/v1.66.3...v1.66.4) (2022-01-28)
 
 
