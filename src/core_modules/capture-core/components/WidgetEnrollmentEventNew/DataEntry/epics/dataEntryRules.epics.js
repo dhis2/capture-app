@@ -18,6 +18,7 @@ import {
 } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../../common.types';
+import { deriveURLParamsFromLocation } from '../../../../utils/routing';
 
 const runRulesForNewEvent = (
     store: ReduxStore,
@@ -25,13 +26,13 @@ const runRulesForNewEvent = (
     itemId: string,
     uid: string,
     orgUnit: OrgUnit,
+    history: Object,
     { events, attributeValues, enrollmentData }: RulesExecutionDependenciesClientFormatted,
     fieldData?: ?FieldData,
 ) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
-    const programId = state.router.location.query.programId;
-    const stageId = state.router.location.query.stageId;
+    const { programId, stageId } = deriveURLParamsFromLocation();
 
     const program = getTrackerProgramThrowIfNotFound(programId);
     const stage = program.getStage(stageId);
@@ -63,7 +64,7 @@ const runRulesForNewEvent = (
     );
 };
 
-export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH),
         map(actionBatch =>
@@ -77,11 +78,12 @@ export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (action$:
                 itemId,
                 uid,
                 orgUnit,
+                history,
                 rulesExecutionDependenciesClientFormatted,
             );
         }));
 
-export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH),
         map(actionBatch =>
@@ -110,6 +112,7 @@ export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (action$: InputObs
                 itemId,
                 uid,
                 orgUnit,
+                history,
                 rulesExecutionDependenciesClientFormatted,
                 fieldData,
             );

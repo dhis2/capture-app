@@ -1,8 +1,6 @@
 // @flow
-import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-
 import {
     actionTypes as editEventDataEntryActionTypes,
     noWorkingListUpdateNeededAfterUpdateCancelled,
@@ -10,6 +8,8 @@ import {
 } from '../editEventDataEntry.actions';
 
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
+import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../utils/routing';
+import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -32,12 +32,11 @@ export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore)
             return noWorkingListUpdateNeededAfterUpdateCancelled();
         }));
 
-export const cancelEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const cancelEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const state = store.value;
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
-            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+            const { programId, orgUnitId } = deriveURLParamsFromLocation();
+            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            return resetLocationChange();
         }));
