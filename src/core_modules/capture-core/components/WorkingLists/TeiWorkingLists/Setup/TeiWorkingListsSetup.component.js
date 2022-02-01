@@ -11,6 +11,7 @@ import { WorkingListsBase } from '../../WorkingListsBase';
 import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
+import { MAIN_FILTERS } from '../constants';
 
 const DEFAULT_TEMPLATES_LENGTH = 1;
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
@@ -74,7 +75,7 @@ const useStaticTemplates = () => useMemo(() => ([{
 }]), []);
 
 const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel } }: TrackerProgram) => useMemo(() => [{
-    id: 'programStatus',
+    id: MAIN_FILTERS.PROGRAM_STATUS,
     type: dataElementTypes.TEXT,
     header: i18n.t('Enrollment status'),
     options: [
@@ -86,7 +87,7 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
         programStatus: rawFilter.split(':')[1],
     }),
 }, {
-    id: 'enrollmentDate',
+    id: MAIN_FILTERS.ENROLLMENT_DATE,
     type: dataElementTypes.DATE,
     header: enrollmentDateLabel,
     transformRecordsFilter: (filter: Array<string> | string) => {
@@ -109,7 +110,7 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
         return queryArgs;
     },
 }, {
-    id: 'incidentDate',
+    id: MAIN_FILTERS.INCIDENT_DATE,
     type: dataElementTypes.DATE,
     header: incidentDateLabel,
     transformRecordsFilter: (filter: Array<string> | string) => {
@@ -132,7 +133,7 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
         return queryArgs;
     },
 }, {
-    id: 'assignee',
+    id: MAIN_FILTERS.ASSIGNEE,
     type: dataElementTypes.ASSIGNEE,
     header: i18n.t('Assigned to'),
     transformRecordsFilter: (rawFilter: Object) => rawFilter,

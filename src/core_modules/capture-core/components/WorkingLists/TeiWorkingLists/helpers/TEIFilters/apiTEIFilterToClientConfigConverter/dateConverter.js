@@ -39,7 +39,7 @@ const getRelativePeriod = (periodFrom, periodTo) => {
     return null;
 };
 
-export const convertValue = (dateFilter: {periodFrom: number, periodTo: number}): DateFilterData | null => {
+export const convertValue = (dateFilter: {periodFrom: number, periodTo: number}): DateFilterData => {
     const { periodFrom, periodTo } = dateFilter;
     const period = getRelativePeriod(periodFrom, periodTo);
 

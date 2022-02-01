@@ -9,6 +9,8 @@ import {
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
+import { dataElementTypes } from '../../../../../../metaData';
+import { convertToClientConfig } from '../../../helpers/TEIFilters/apiTEIFilterToClientConfigConverter';
 
 const getClientFilters = (criteria = {}) => {
     const { programStatus, enrollmentDate } = criteria;
@@ -23,9 +25,8 @@ const getClientFilters = (criteria = {}) => {
         };
     }
     if (enrollmentDate) {
-        filters = { ...filters, enrollmentDate };
+        filters = { ...filters, enrollmentDate: convertToClientConfig(enrollmentDate, dataElementTypes.DATE) };
     }
-    // TODO blocked by https://jira.dhis2.org/browse/DHIS2-12376. Need to know the shape of trackedEntityInstanceFilters and add it to the query.
     return filters;
 };
 

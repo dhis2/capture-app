@@ -40,11 +40,6 @@ const getFilterByType = {
 };
 
 export function convertToClientConfig(value: any, type: $Keys<typeof dataElementTypes>) {
-    // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
-    if (!value || !getFilterByType[type]) {
-        return null;
-    }
-
     // $FlowFixMe dataElementTypes flow error
-    return getFilterByType[type] ? getFilterByType[type](value) : value;
+    return (!value || !getFilterByType[type]) ? value : getFilterByType[type](value);
 }
