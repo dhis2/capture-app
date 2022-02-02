@@ -69,7 +69,6 @@ export type ProgramRuleAction = {
     programStageId?: ?string,
     programStageSectionId?: ?string,
     trackedEntityAttributeId?: ?string,
-    programRuleVariableId?: ?string,
     optionGroupId: ?string,
     optionId: ?string,
     style?: ?Object,

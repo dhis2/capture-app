@@ -69,7 +69,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     },
     [enrollmentPageActionTypes.PAGE_OPEN]: (state) => {
         const newState = { ...state };
-        newState.page = null;
+        newState.page = 'enrollment';
         return newState;
     },
     [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state) => {
@@ -97,6 +97,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [LOCATION_CHANGE]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = false;
+        return newState;
+    },
+    [setCurrentSelectionsActionTypes.RESET_LOCATION_CHANGE]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = false;
         return newState;

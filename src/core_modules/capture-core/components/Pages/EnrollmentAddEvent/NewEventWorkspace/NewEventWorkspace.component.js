@@ -13,6 +13,7 @@ import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
 import { addEnrollmentEventPageDefaultActionTypes } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import type { Props } from './newEventWorkspace.types';
+import { useLocationQuery } from '../../../../utils/routing';
 
 const styles = () => ({
     innerWrapper: {
@@ -32,9 +33,9 @@ const NewEventWorkspacePlain = ({
     classes,
     ...passOnProps
 }: Props) => {
-    const selectedTab = useSelector(({ router: { location } }) => location.query.tab);
+    const { tab } = useLocationQuery();
     const { events, enrollmentDate, incidentDate } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
-    const [mode, setMode] = useState(selectedTab ?? tabMode.REPORT);
+    const [mode, setMode] = useState(tab ?? tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);

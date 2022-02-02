@@ -9,11 +9,9 @@ import { EventWorkingListsColumnSetup } from '../ColumnSetup';
 import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './eventWorkingListsReduxProvider.types';
-import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 
-export const EventWorkingListsReduxProvider = ({ storeId, programId, programStageId, orgUnitId }: Props) => {
+export const EventWorkingListsReduxProvider = ({ storeId, program, programStage, orgUnitId }: Props) => {
     const dispatch = useDispatch();
-    const { program } = useProgramInfo(programId);
 
     const { currentTemplateId, templates, ...commonStateManagementRestProps }
         = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
@@ -40,7 +38,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, programId, programStag
         <EventWorkingListsColumnSetup
             {...commonStateManagementRestProps}
             program={program}
-            programStageId={programStageId}
+            programStage={programStage}
             orgUnitId={orgUnitId}
             currentTemplate={currentTemplate}
             templates={templates}
