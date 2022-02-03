@@ -34,7 +34,10 @@ const RelationshipTypeSelectorPlain = ({ relationshipTypes, trackedEntityType, p
     const renderButtons = (relationship) => {
         const defaultButton = (
             <Button
-                onClick={() => onSelectType(relationship.id)}
+                onClick={() => onSelectType({
+                    id: relationship.id,
+                    constraint: 'from',
+                })}
                 secondary
             >
                 {relationship.fromToName}
@@ -61,7 +64,10 @@ const RelationshipTypeSelectorPlain = ({ relationshipTypes, trackedEntityType, p
                     <div style={{ display: 'flex', gap: '8px' }}>
                         {fromConstraintValid && (
                             <Button
-                                onClick={() => onSelectType(relationship.id)}
+                                onClick={() => onSelectType({
+                                    id: relationship.id,
+                                    constraint: 'from',
+                                })}
                                 secondary
                             >
                                 {relationship.fromToName}
@@ -69,7 +75,10 @@ const RelationshipTypeSelectorPlain = ({ relationshipTypes, trackedEntityType, p
                         )}
                         {toConstraintValid && (
                             <Button
-                                onClick={() => onSelectType(relationship.id)}
+                                onClick={() => onSelectType({
+                                    id: relationship.id,
+                                    constraint: 'to',
+                                })}
                                 secondary
                             >
                                 {relationship.toFromName}
@@ -84,7 +93,10 @@ const RelationshipTypeSelectorPlain = ({ relationshipTypes, trackedEntityType, p
             if (relationship.toConstraint.trackedEntityType?.id === trackedEntityType) {
                 return (
                     <Button
-                        onClick={() => onSelectType(relationship.id)}
+                        onClick={() => onSelectType({
+                            id: relationship.id,
+                            constraint: 'to',
+                        })}
                         secondary
                     >
                         {relationship.toFromName}
