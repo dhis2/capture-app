@@ -9,6 +9,7 @@ export const actionTypes = {
     RESET_CATEGORY_SELECTIONS: 'resetCategorySelections',
     GO_BACK_TO_LIST_CONTEXT: 'goBackToListContext',
     RESET_PROGRAM_ID_BASE: 'resetProgramIdBase',
+    RESET_LOCATION_CHANGE: 'resetLocationChange',
 };
 
 export const setOrgUnitId =
@@ -32,3 +33,6 @@ export const goBackToListContext =
 
 export const resetProgramIdBase =
     () => actionCreator(actionTypes.RESET_PROGRAM_ID_BASE)();
+
+export const resetLocationChange =
+    () => actionCreator(actionTypes.RESET_LOCATION_CHANGE)();

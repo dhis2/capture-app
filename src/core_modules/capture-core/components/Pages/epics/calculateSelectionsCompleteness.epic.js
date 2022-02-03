@@ -7,7 +7,7 @@ import {
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
-import { pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
+import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
 
 type CurrentSelectionsState = {
     programId?: ?string,
@@ -45,7 +45,7 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
             crossPageActionTypes.UPDATE_SHOW_ACCESSIBLE_STATUS,
         ),
         filter(() => {
-            const { pathname } = store.value.router.location;
+            const pathname = getLocationPathname();
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map((action) => {

@@ -494,3 +494,23 @@ Then('the admission filter should be in effect', () => {
                 });
         });
 });
+
+Given('you open the main page with Ngelehun and Contraceptives Voucher Program', () => {
+    cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=kla3mAPgvCH');
+});
+
+Then(/^you are told to select (.*)$/, (text) => {
+    cy.contains(`Please select ${text}`);
+});
+
+When('the user selects CARE International', () => {
+    cy.get('[data-test="virtualized-select"]')
+        .type('CARE Internatio');
+    cy.contains('CARE International')
+        .click();
+});
+
+Then('the working list should be displayed', () => {
+    cy.get('[data-test="main-page-working-list"]')
+        .find('tr');
+});

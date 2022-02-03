@@ -1,6 +1,5 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
 import { catchError, filter, flatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
@@ -16,8 +15,9 @@ import {
     completeUrlUpdate,
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
-import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
-import { buildUrlQueryString } from '../../utils/routing';
+import { deriveUrlQueries, getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
+import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../utils/routing';
+import { resetLocationChange } from './QuickSelector/actions/QuickSelector.actions';
 
 const derivePayloadFromAction = (batchPayload, actionType) => {
     // $FlowFixMe
@@ -27,56 +27,75 @@ const derivePayloadFromAction = (batchPayload, actionType) => {
 
 const orgUnitsQuery = id => ({ resource: 'organisationUnits', id });
 
-export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore) =>
+export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
-        map(({ payload: { orgUnitId, pageToPush } }) => {
+        switchMap(({ payload: { orgUnitId, pageToPush } }) => {
             const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
             if (programId) {
                 const programContainsOrgUnitId = programCollection.get(programId)?.organisationUnits[orgUnitId];
                 if (orgUnitId && !programContainsOrgUnitId) {
-                    return push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, orgUnitId })}`);
+                    history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, orgUnitId })}`);
+                    return new Promise((resolve) => {
+                        setTimeout(() => resolve(resetLocationChange()), 0);
+                    });
                 }
             }
-
-            return push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, orgUnitId })}`);
+            history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, orgUnitId })}`);
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }));
 
-export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
+export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH),
-        map(({ payload: batchPayload }) => {
+        switchMap(({ payload: batchPayload }) => {
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
             const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            return push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+            history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }));
 
-export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
+export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.PROGRAM_ID_SET),
-        map(({ payload: { programId, pageToPush } }) => {
+        switchMap(({ payload: { programId, pageToPush } }) => {
             const queries = deriveUrlQueries(store.value);
 
-            return push(`/${pageToPush}?${buildUrlQueryString({ ...queries, programId })}`);
+            history.push(`/${pageToPush}?${buildUrlQueryString({ ...queries, programId })}`);
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }));
 
-export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
+export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH),
-        map(({ payload: batchPayload }) => {
+        switchMap(({ payload: batchPayload }) => {
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
             const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            return push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+            history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }),
     );
 
-export const startAgainEpic = (action$: InputObservable) =>
+export const startAgainEpic = (action$: InputObservable, store: InputObservable, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.AGAIN_START),
-        map(() => push('/')));
+        switchMap(() => {
+            history.push('/');
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
+        }));
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (
     action$: InputObservable,
@@ -108,7 +127,7 @@ export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable
         filter(action => !action.payload.nextProps.orgUnitId),
         map(() => setEmptyOrgUnitBasedOnUrl()));
 
-export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
+export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.FROM_URL_UPDATE_COMPLETE,
@@ -116,11 +135,11 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
             lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET,
         ),
         filter(() => {
-            const { location: { pathname } } = store.value.router;
+            const pathname = getLocationPathname();
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map(() => {
-            const { programId, orgUnitId } = store.value.currentSelections;
+            const { programId, orgUnitId } = deriveURLParamsFromLocation();
 
             if (programId) {
                 const program = programCollection.get(programId);
@@ -152,31 +171,36 @@ export const fetchOrgUnitEpic = (
         catchError(() => of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
     );
 
-export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.TEI_SELECTION_RESET),
-        map(() => {
-            const { query: { programId, orgUnitId } } = store.value.router.location;
+        switchMap(() => {
+            const { programId, orgUnitId } = deriveURLParamsFromLocation();
 
-            return push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }),
     );
 
-export const setEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+export const setEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET),
         map(({ payload: { enrollmentId } }) => {
-            const { query: { programId, orgUnitId, teiId } } = store.value.router.location;
+            const { programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
 
-            return push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+            return resetLocationChange();
         }),
     );
 
-export const resetEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+export const resetEnrollmentSelectionEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
         map(() => {
-            const { query: { orgUnitId, programId, teiId } } = store.value.router.location;
-            return push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+            const { orgUnitId, programId, teiId } = deriveURLParamsFromLocation();
+            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+            return resetLocationChange();
         }),
     );

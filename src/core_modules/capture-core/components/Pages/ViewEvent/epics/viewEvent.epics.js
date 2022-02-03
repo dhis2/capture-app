@@ -2,7 +2,6 @@
 import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
-import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../../../../d2';
@@ -28,6 +27,7 @@ import {
 } from '../../NewRelationship/newRelationship.actions';
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
+import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -99,10 +99,13 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
                 });
         }));
 
-export const openViewPageLocationChangeEpic = (action$: InputObservable) =>
+export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        map(({ payload: { eventId } }) => push(`/viewEvent?viewEventId=${eventId}`)));
+        map(({ payload: { eventId } }) => {
+            history.push(`/viewEvent?viewEventId=${eventId}`);
+            return resetLocationChange();
+        }));
 
 export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -135,18 +138,25 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             return noWorkingListUpdateNeededOnBackToMainPage();
         }));
 
-export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
-        map(() => {
+        switchMap(() => {
             const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             const showaccessible = state.currentSelections.showaccessible;
+
             if (showaccessible && !orgUnitId) {
-                return push(`/?${buildUrlQueryString({ programId })}&all`);
+                history.push(`/?programId=${programId}&all`);
+                return new Promise((resolve) => {
+                    setTimeout(() => resolve(resetLocationChange()), 0);
+                });
             }
-            return push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }));
 
 export const openAddRelationshipForViewEventEpic = (action$: InputObservable) =>

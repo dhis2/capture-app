@@ -28,15 +28,12 @@ const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
 
 export const EventWorkingListsColumnSetup = ({
     program,
-    programStageId,
+    programStage,
     customColumnOrder,
     onLoadView,
     onUpdateList,
     ...passOnProps
 }: Props) => {
-    const programStage = program.stages.get(programStageId);
-
-    // $FlowFixMe
     const defaultColumns = useDefaultColumnConfig(programStage);
     const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView);
     const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList);
@@ -46,7 +43,7 @@ export const EventWorkingListsColumnSetup = ({
         <CurrentViewChangesResolver
             {...passOnProps}
             program={program}
-            programStageId={programStageId}
+            programStageId={programStage.id}
             columns={columns}
             defaultColumns={defaultColumns}
             onLoadView={injectColumnMetaToLoadList}

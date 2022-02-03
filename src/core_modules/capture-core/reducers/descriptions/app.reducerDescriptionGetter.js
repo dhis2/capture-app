@@ -101,6 +101,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = false;
         return newState;
     },
+    [setCurrentSelectionsActionTypes.RESET_LOCATION_CHANGE]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = false;
+        return newState;
+    },
     [OFFLINE_STATUS_CHANGED]: (state, action) => {
         if (action.payload.online) {
             const newState = {

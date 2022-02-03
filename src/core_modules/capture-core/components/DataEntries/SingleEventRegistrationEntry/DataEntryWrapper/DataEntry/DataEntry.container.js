@@ -22,15 +22,16 @@ import {
     makeProgramNameSelector,
 } from './dataEntry.selectors';
 import { type RenderFoundation } from '../../../../../metaData';
-import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
-import { withErrorMessageHandler } from '../../../../../HOC/withErrorMessageHandler';
+import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
 import typeof { newEventSaveTypes } from './newEventSaveTypes';
+import { getLocationPathname } from '../../../../../utils/url';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
     const mapStateToProps = (state: ReduxState, props: Object) => {
-        const isAddEventInStage = state.router.location.query.pathname === '/enrollmentEventNew';
+        const pathname = getLocationPathname();
+        const isAddEventInStage = (pathname === '/enrollmentEventNew');
 
         return { recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
             ready: !state.activePage.isDataEntryLoading,
