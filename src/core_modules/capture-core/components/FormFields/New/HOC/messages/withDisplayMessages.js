@@ -45,10 +45,10 @@ const messageTypes = {
 };
 
 type Props = {
-    validatingMessage?: ?string,
-    errorMessage?: ?(string | Object),
-    warningMessage?: ?string,
-    infoMessage?: ?string,
+    validatingMessage?: ?string | ?Array<string>,
+    errorMessage?: ?(string | Object | ?Array<string>),
+    warningMessage?: ?string | ?Array<string>,
+    infoMessage?: ?string | ?Array<string>,
     classes: {
         base: string,
         error: string,
@@ -96,7 +96,11 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                     data-test="error-message"
                     className={classNames(baseClass, messageClass)}
                 >
-                    {text}
+                    {typeof text === 'string' ? text : text.map(message => (
+                        <span>
+                            {message}<br />
+                        </span>
+                    ))}
                 </div>
             );
         }
