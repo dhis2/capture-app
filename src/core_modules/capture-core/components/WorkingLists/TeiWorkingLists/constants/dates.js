@@ -8,3 +8,8 @@ export const PERIODS = {
     LAST_3_MONTHS: 'LAST_3_MONTHS',
     CUSTOM_RANGE: 'CUSTOM_RANGE',
 };
+
+export const DATE_TYPES = {
+    ABSOLUTE: 'ABSOLUTE',
+    RELATIVE: 'RELATIVE',
+};

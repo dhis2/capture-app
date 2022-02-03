@@ -1,8 +1,7 @@
 // @flow
 import moment from 'moment';
 import { type DateFilterData } from '../../../../WorkingListsBase';
-import { PERIODS } from '../../../constants';
-import { apiDateFilterTypes } from '../../../../EventWorkingLists/constants';
+import { PERIODS, DATE_TYPES } from '../../../constants';
 
 const getRelativePeriod = (periodFrom, periodTo) => {
     const today = moment();
@@ -39,20 +38,20 @@ const getRelativePeriod = (periodFrom, periodTo) => {
     return null;
 };
 
-export const convertValue = (dateFilter: {periodFrom: number, periodTo: number}): DateFilterData => {
+export const convertValue = (dateFilter: { periodFrom: number, periodTo: number }): DateFilterData => {
     const { periodFrom, periodTo } = dateFilter;
     const period = getRelativePeriod(periodFrom, periodTo);
 
     if (period) {
         return {
             period,
-            type: apiDateFilterTypes.RELATIVE,
+            type: DATE_TYPES.RELATIVE,
         };
     }
 
     return {
         ge: moment().add(periodFrom, 'days').format('YYYY-MM-DD'),
         le: moment().add(periodTo, 'days').format('YYYY-MM-DD'),
-        type: apiDateFilterTypes.ABSOLUTE,
+        type: DATE_TYPES.ABSOLUTE,
     };
 };

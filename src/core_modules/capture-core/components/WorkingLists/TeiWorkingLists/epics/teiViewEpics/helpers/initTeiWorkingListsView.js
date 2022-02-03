@@ -9,11 +9,10 @@ import {
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
-import { dataElementTypes } from '../../../../../../metaData';
-import { convertToClientConfig } from '../../../helpers/TEIFilters/apiTEIFilterToClientConfigConverter';
+import { convertEnrollmentDateToClient, convertDataElementFilters } from '../../../helpers/TEIFilters/apiTEIFilterToClientConfigConverter';
 
-const getClientFilters = (criteria = {}) => {
-    const { programStatus, enrollmentDate } = criteria;
+const getClientFilters = (criteria = {}, columnsMetaForDataFetching) => {
+    const { programStatus, enrollmentDate, attributeValueFilters } = criteria;
     let filters = {};
 
     if (programStatus) {
@@ -25,7 +24,10 @@ const getClientFilters = (criteria = {}) => {
         };
     }
     if (enrollmentDate) {
-        filters = { ...filters, enrollmentDate: convertToClientConfig(enrollmentDate, dataElementTypes.DATE) };
+        filters = { ...filters, enrollmentDate: convertEnrollmentDateToClient(enrollmentDate) };
+    }
+    if (attributeValueFilters?.length > 0) {
+        filters = { ...filters, ...convertDataElementFilters(attributeValueFilters, columnsMetaForDataFetching) };
     }
     return filters;
 };
@@ -44,7 +46,7 @@ export const initTeiWorkingListsView = ({
     const sortByDirection = 'desc';
     const pageSize = 15;
     const page = 1;
-    const filters = getClientFilters(selectedTemplate.criteria);
+    const filters = getClientFilters(selectedTemplate.criteria, columnsMetaForDataFetching);
     const apiFilters = buildFilterQueryArgs(filters, { columns: columnsMetaForDataFetching, filtersOnly: filtersOnlyMetaForDataFetching, storeId, isInit: true });
     return getTeiListData({ programId, orgUnitId, pageSize, page, sortById, sortByDirection, filters: apiFilters }, {
         columnsMetaForDataFetching,

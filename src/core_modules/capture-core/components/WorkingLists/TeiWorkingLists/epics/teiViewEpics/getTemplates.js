@@ -38,17 +38,19 @@ export const getTemplates = (
         return {
             templates: [
                 defaultTemplate,
-                // TODO blocked by https://jira.dhis2.org/browse/DHIS2-12376. Need to get the attributeValueFilters and convert them to client
-                ...apiTEIFilters.map(({ displayName, sortOrder, enrollmentStatus, enrollmentCreatedPeriod, id, access /* attributeValueFilters */ }) => ({
-                    id,
-                    name: displayName,
-                    order: sortOrder,
-                    criteria: {
-                        programStatus: enrollmentStatus,
-                        enrollmentDate: enrollmentCreatedPeriod,
-                    },
-                    access,
-                })),
+                ...apiTEIFilters.map(
+                    ({ displayName, sortOrder, enrollmentStatus, enrollmentCreatedPeriod, id, access, attributeValueFilters }) => ({
+                        id,
+                        name: displayName,
+                        order: sortOrder,
+                        criteria: {
+                            programStatus: enrollmentStatus,
+                            enrollmentDate: enrollmentCreatedPeriod,
+                            attributeValueFilters,
+                        },
+                        access,
+                    }),
+                ),
             ],
             defaultTemplateId: defaultTemplate.id,
         };
