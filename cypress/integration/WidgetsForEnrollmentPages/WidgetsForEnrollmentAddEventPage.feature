@@ -1,6 +1,6 @@
 Feature: The user interacts with the widgets on the enrollment add event page
 
-  # Scenarios linked to the enrollment dashboard
+  # Scenarios linked to the enrollment add event
   Scenario: The profile widget can be closed on the enrollment dashboard
     Given you land on the enrollment add event page by having typed #/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
     And you see the widget with data-test profile-widget
@@ -95,4 +95,4 @@ Feature: The user interacts with the widgets on the enrollment add event page
     Then you should see tabs: Report,Schedule,Refer
     When you click switch tab to Schedule
     Then you should see Schedule tab
-    And you should see suggested date: 2021-08-01
+    And you should see suggested date: 2022-08-01

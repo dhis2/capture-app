@@ -3,7 +3,7 @@ import React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
@@ -16,7 +16,7 @@ import {
     useRuleEffects,
     useComputeTEIRelationships,
 } from './hooks';
-import { buildUrlQueryString } from '../../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 
@@ -24,18 +24,7 @@ import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { enrollmentId, programId, teiId, orgUnitId } = useSelector(
-        ({
-            router: {
-                location: { query },
-            },
-        },
-        ) => (
-            { enrollmentId: query.enrollmentId,
-                teiId: query.teiId,
-                programId: query.programId,
-                orgUnitId: query.orgUnitId,
-            }), shallowEqual);
+    const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit } = useOrganisationUnit(orgUnitId);
 
     const program = useTrackerProgram(programId);
@@ -89,6 +78,7 @@ export const EnrollmentPageDefault = () => {
     return (
         <EnrollmentPageDefaultComponent
             teiId={teiId}
+            orgUnitId={orgUnitId}
             program={program}
             // $FlowFixMe
             stages={stages}

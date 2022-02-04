@@ -5,7 +5,7 @@ import { errorCreator } from 'capture-core-utils';
 import { programCollection } from '../../../../metaDataMemoryStores/programCollection/programCollection';
 
 const programIdSelector = state => state.currentSelections.programId;
-const programStageIdSelector = state => state.router.location.query.stageId;
+const programStageIdSelector = state => state.currentSelections.stageId;
 
 // $FlowFixMe[missing-annot] automated comment
 export const makeFormFoundationSelector = () => createSelector(

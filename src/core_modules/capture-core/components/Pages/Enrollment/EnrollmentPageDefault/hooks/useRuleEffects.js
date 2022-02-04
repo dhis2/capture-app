@@ -69,7 +69,7 @@ export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeVa
     const attributeValues = useMemo(() => apiAttributeValues &&
         apiAttributeValues
             .reduce((acc, { id, value }) => {
-                acc[id] = convertValue(value, attributesObject[id].type);
+                acc[id] = convertValue(value, attributesObject[id]?.type);
                 return acc;
             }, {}), [apiAttributeValues, attributesObject]);
 

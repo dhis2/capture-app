@@ -9,37 +9,41 @@ import {
     resetTeiSelection,
     setEnrollmentSelection,
 } from '../LockedSelector.actions';
-import { deriveUrlQueries } from '../../../utils/url';
+import { getLocationPathname, getUrlQueries } from '../../../utils/url';
 import { getScopeInfo } from '../../../metaData';
 
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments
         .filter(({ program }) => program === selectedProgramId)
-        .map(({ created, enrollment }) => (
+        .map(({ enrollmentDate, enrollment }) => (
             {
-                label: convertValue(created, dataElementTypes.DATETIME),
+                label: convertValue(enrollmentDate, dataElementTypes.DATETIME),
                 value: enrollment,
             }
         ));
 
 const mapStateToProps = (state: Object) => {
-    const { orgUnitId, programId } = deriveUrlQueries(state);
+    const { orgUnitId: urlOrgUnitId, programId: urlProgramId, enrollmentId } = getUrlQueries();
+    const pathname = getLocationPathname();
+    // TODO - Remove the currentSelections & pathname link
     const {
-        router: { location: { pathname, query: { enrollmentId } } },
-        currentSelections: { categoriesMeta },
+        currentSelections: { programId: stateProgramId, orgUnitId: stateOrgUnit, categoriesMeta },
         organisationUnits,
         enrollmentPage: { enrollments, teiDisplayName, tetId },
     } = state;
 
-    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
+    const selectedOrgUnitId = urlOrgUnitId || stateOrgUnit;
+    const selectedProgramId = urlProgramId || stateProgramId;
+
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, selectedProgramId);
     const { trackedEntityName } = getScopeInfo(tetId);
 
     const enrollmentLockedSelectReady = Array.isArray(enrollments);
     return {
-        selectedProgramId: programId,
-        selectedOrgUnitId: orgUnitId,
+        selectedProgramId,
+        selectedOrgUnitId,
         selectedCategories: categoriesMeta,
-        selectedOrgUnit: orgUnitId ? organisationUnits[orgUnitId] : null,
+        selectedOrgUnit: selectedOrgUnitId ? organisationUnits[selectedOrgUnitId] : null,
         currentPage: pathname.substring(1),
         selectedTeiName: teiDisplayName,
         selectedTetName: trackedEntityName,

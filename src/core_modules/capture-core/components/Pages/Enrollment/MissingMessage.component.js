@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
-import { buildUrlQueryString } from '../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
@@ -25,14 +25,7 @@ const useMissingStatus = () => {
     const dispatch = useDispatch();
     const [missingStatus, setStatus] = useState(null);
 
-    const { programId, enrollmentId } =
-      useSelector(({ router: { location: { query } } }) =>
-          ({
-              teiId: query.teidId,
-              programId: query.programId,
-              enrollmentId: query.enrollmentId,
-          }),
-      );
+    const { programId, enrollmentId } = useLocationQuery();
 
     const { scopeType, tetId: scopeTetId } = useScopeInfo(programId);
     const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
@@ -72,16 +65,13 @@ const useNavigations = () => {
     const history = useHistory();
     const { tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
-    const selectedProgramId: string =
-      useSelector(({ router: { location: { query } } }) => query.programId);
-    const selectedOrgUnitId: string =
-      useSelector(({ router: { location: { query } } }) => query.orgUnitId);
+    const { programId, orgUnitId } = useLocationQuery();
     const navigateToProgramRegistrationPage = () =>
-        history.push(`/new?${buildUrlQueryString({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToEventWorkingList = () =>
-        history.push(`/?${buildUrlQueryString({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
+        history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToTetRegistrationPage = () =>
-        history.push(`/new?${buildUrlQueryString({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId, trackedEntityTypeId: tetId })}`);
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId: tetId })}`);
 
     return { navigateToProgramRegistrationPage, navigateToEventWorkingList, navigateToTetRegistrationPage };
 };
@@ -98,11 +88,10 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
     const { navigateToProgramRegistrationPage, navigateToEventWorkingList } = useNavigations();
     const { missingStatus } = useMissingStatus();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
-    const selectedProgramId: string =
-      useSelector(({ router: { location: { query } } }) => query.programId);
+    const { programId } = useLocationQuery();
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
-    const { programName, trackedEntityName: selectedTetName } = useScopeInfo(selectedProgramId);
+    const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
     return (<>
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&

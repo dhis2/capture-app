@@ -1,9 +1,8 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { push } from 'connected-react-router';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
-import { concat, from, of } from 'rxjs';
+import { from, of } from 'rxjs';
 import moment from 'moment';
 import {
     enrollmentPageActionTypes,
@@ -14,7 +13,7 @@ import {
     startFetchingTeiFromEnrollmentId,
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
-import { buildUrlQueryString } from '../../../utils/routing';
+import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
@@ -47,12 +46,11 @@ const fetchTeiStream = (teiId, querySingleResource) =>
             }),
         );
 
-export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
+export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_FETCH),
         map(() => {
-            const { query: { enrollmentId, teiId } } = store.value.router.location;
-
+            const { enrollmentId, teiId } = deriveURLParamsFromLocation();
             if (enrollmentId) {
                 return startFetchingTeiFromEnrollmentId();
             } else if (teiId) {
@@ -67,7 +65,7 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH),
         flatMap(() => {
-            const { query: { enrollmentId, programId, orgUnitId, teiId } } = store.value.router.location;
+            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
             if (enrollmentId === 'AUTO') {
                 return of(openEnrollmentPage({
                     programId,
@@ -98,31 +96,27 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
         flatMap(() => {
-            const { query: { teiId } } = store.value.router.location;
+            const { teiId } = deriveURLParamsFromLocation();
 
             return fetchTeiStream(teiId, querySingleResource);
         }),
     );
 
-export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PAGE_OPEN),
         flatMap(({ payload: { enrollmentId, programId, orgUnitId, teiId } }) => {
             const {
-                query: {
-                    enrollmentId: queryEnrollment,
-                    orgUnitId: queryOrgUnitId,
-                    programId: queryProgramId,
-                    teiId: queryTeiId,
-                },
-            } = store.value.router.location;
+                enrollmentId: queryEnrollment,
+                orgUnitId: queryOrgUnitId,
+                programId: queryProgramId,
+                teiId: queryTeiId,
+            } = deriveURLParamsFromLocation();
             const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
             if (!urlCompleted) {
-                return concat(
-                    of(push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`)),
-                    fetchTeiStream(teiId, querySingleResource),
-                );
+                history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+                return fetchTeiStream(teiId, querySingleResource);
             }
             return fetchTeiStream(teiId, querySingleResource);
         },

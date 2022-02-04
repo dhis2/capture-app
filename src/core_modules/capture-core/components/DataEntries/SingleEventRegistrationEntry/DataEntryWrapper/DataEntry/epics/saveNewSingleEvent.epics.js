@@ -1,5 +1,4 @@
 // @flow
-import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import {
@@ -9,6 +8,9 @@ import {
 
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
+import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../../../utils/routing';
+import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { getLocationPathname } from '../../../../../../utils/url';
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -25,16 +27,18 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             return startSaveNewEventAfterReturnedToMainPage(serverData, relationshipData, state.currentSelections);
         }));
 
-export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const state = store.value;
-            if (state.router.location.pathname === '/enrollmentEventNew') {
-                const { enrollmentId } = state.router.location.query;
-                return push(`/enrollment?enrollmentId=${enrollmentId}`);
+            const pathname = getLocationPathname();
+            const { enrollmentId, programId, orgUnitId } = deriveURLParamsFromLocation();
+
+            if (pathname === '/enrollmentEventNew') {
+                history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
+                return resetLocationChange();
             }
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
-            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+
+            history.push(`/${buildUrlQueryString({ programId, orgUnitId })}`);
+            return resetLocationChange();
         }));

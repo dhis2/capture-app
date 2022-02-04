@@ -16,18 +16,22 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         relationships: storedRelationships,
     } = useSelector(({ enrollmentDomain }) => enrollmentDomain);
 
-    const { data, error, refetch } = useDataQuery({
-        trackedEntityInstance: {
-            resource: 'trackedEntityInstances',
-            id: ({ variables: { teiId: updatedTeiId } }) => updatedTeiId,
-            params: ({ variables: { programId: updatedProgramId } }) => ({
-                program: updatedProgramId,
-                fields: ['enrollments[*],attributes'],
+    const { data, error, refetch } = useDataQuery(
+        useMemo(
+            () => ({
+                trackedEntityInstance: {
+                    resource: 'trackedEntityInstances',
+                    id: ({ variables: { teiId: updatedTeiId } }) => updatedTeiId,
+                    params: ({ variables: { programId: updatedProgramId } }) => ({
+                        program: updatedProgramId,
+                        fields: ['enrollments[*],attributes'],
+                    }),
+                },
             }),
-        },
-    }, {
-        lazy: true,
-    });
+            [],
+        ),
+        { lazy: true },
+    );
 
     const {
         data: relationshipsData,

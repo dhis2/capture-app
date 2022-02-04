@@ -17,7 +17,12 @@ import type { ClientEventContainer } from '../../../events/eventRequests';
 import { TrackerProgram, EventProgram } from '../../../metaData/Program';
 import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
-import type { Event } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData'; // TODO: This module/widget should not have a dependency to this
+import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../helpers';
+import type {
+    EnrollmentData,
+    AttributeValue,
+} from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+
 
 export const actionTypes = {
     VIEW_EVENT_DATA_ENTRY_LOADED: 'ViewEventDataEntryLoadedForViewSingleEvent',
@@ -29,7 +34,21 @@ function getAssignee(clientAssignee: ?Object) {
 }
 
 export const loadViewEventDataEntry =
-    async (eventContainer: ClientEventContainer, orgUnit: Object, foundation: RenderFoundation, program: Program, allEvents?: ?Array<Event>) => {
+    async ({
+        eventContainer,
+        orgUnit,
+        foundation,
+        program,
+        enrollment,
+        attributeValues,
+    }: {
+        eventContainer: ClientEventContainer,
+        orgUnit: Object,
+        foundation: RenderFoundation,
+        program: Program,
+        enrollment?: EnrollmentData,
+        attributeValues?: Array<AttributeValue>,
+    }) => {
         const dataEntryId = viewEventIds.dataEntryId;
         const itemId = viewEventIds.itemId;
         const dataEntryPropsToInclude = [
@@ -74,13 +93,17 @@ export const loadViewEventDataEntry =
             if (!stage) {
                 throw Error(i18n.t('stage not found in rules execution'));
             }
-            // TODO: Add attributeValues & enrollmentData
+
             effects = getApplicableRuleEffectsForTrackerProgram({
                 program,
                 stage,
                 orgUnit,
                 currentEvent,
-                otherEvents: allEvents ? prepareEnrollmentEventsForRulesEngine(allEvents) : undefined,
+                otherEvents: prepareEnrollmentEventsForRulesEngine(
+                    enrollment?.events.filter(event => event.event !== currentEvent.eventId),
+                ),
+                enrollmentData: getEnrollmentForRulesEngine(enrollment),
+                attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
             });
         } else if (program instanceof EventProgram) {
             effects = getApplicableRuleEffectsForEventProgram({

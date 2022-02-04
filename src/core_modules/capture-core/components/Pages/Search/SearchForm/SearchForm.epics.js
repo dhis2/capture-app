@@ -1,8 +1,7 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { catchError, flatMap, map, startWith } from 'rxjs/operators';
-import { concat, empty, from, of } from 'rxjs';
-import { push } from 'connected-react-router';
+import { catchError, flatMap, map, startWith, switchMap } from 'rxjs/operators';
+import { concat, empty, from, of, EMPTY } from 'rxjs';
 import {
     searchPageActionTypes,
     fallbackPushPage,
@@ -275,12 +274,11 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
         }),
     );
 
-export const fallbackPushPageEpic = (action$: InputObservable) =>
+export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED),
-        map(({ payload: { orgUnitId, trackedEntityTypeId } }) => push({
-            pathname: '/search',
-            search: `?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`,
-            state: { fallback: true },
-        })),
+        switchMap(({ payload: { orgUnitId, trackedEntityTypeId } }) => {
+            history.push(`/search?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`);
+            return EMPTY;
+        }),
     );
