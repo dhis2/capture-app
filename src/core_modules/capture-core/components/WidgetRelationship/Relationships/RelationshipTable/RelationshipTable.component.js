@@ -1,6 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
+import React from 'react';
 import {
     DataTableBody,
     DataTableHead,
@@ -16,9 +15,7 @@ type Props = {
      ...CssClasses,
 }
 
-const styles = { };
-
-const RelationshipTablePlain = (props: Props) => {
+export const RelationshipTable = (props: Props) => {
     const { classes, headers, relationshipAttributes } = props;
     function renderHeader() {
         const headerCells = headers
@@ -31,9 +28,7 @@ const RelationshipTablePlain = (props: Props) => {
                 </DataTableColumnHeader>
             ));
         return (
-            <DataTableRow
-                className={classes.row}
-            >
+            <DataTableRow>
                 {headerCells}
             </DataTableRow>
         );
@@ -53,9 +48,7 @@ const RelationshipTablePlain = (props: Props) => {
     };
 
     return (
-        <DataTable
-            className={classes.table}
-        >
+        <DataTable>
             <DataTableHead>
                 {renderHeader()}
             </DataTableHead>
@@ -65,6 +58,3 @@ const RelationshipTablePlain = (props: Props) => {
         </DataTable>
     );
 };
-
-
-export const RelationshipTable: ComponentType<Props> = withStyles(styles)(RelationshipTablePlain);

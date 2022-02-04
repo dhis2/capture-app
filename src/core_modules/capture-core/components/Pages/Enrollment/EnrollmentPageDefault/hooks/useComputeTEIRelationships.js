@@ -14,8 +14,7 @@ const getRelationshipAttributes = (bidirectional: boolean, teiId: string, from: 
 };
 
 export const useComputeTEIRelationships = (teiId: string, relationships?: ?{[key: string]: Array<TEIRelationship>}) => {
-    const relationshipsByType = useMemo(() => relationships &&
-    relationships[teiId].reduce((acc, currentRelationship) => {
+    const relationshipsByType = useMemo(() => (relationships?.[teiId]?.reduce((acc, currentRelationship) => {
         const { relationshipType: typeId, relationshipName, bidirectional, from, to } = currentRelationship;
         const typeExist = acc.find(item => item.id === typeId);
         const relationshipAttributes = getRelationshipAttributes(bidirectional, teiId, from, to);
@@ -30,17 +29,17 @@ export const useComputeTEIRelationships = (teiId: string, relationships?: ?{[key
             });
         }
         return acc;
-    }, []), [teiId, relationships]);
+    }, [])), [teiId, relationships]);
+
     // this will change after https://jira.dhis2.org/browse/DHIS2-12249 is done
-    const headersByType = useMemo(() => relationshipsByType &&
-    relationshipsByType.reduce((acc, { id, relationshipAttributes }) => {
+    const headersByType = useMemo(() => (relationshipsByType?.reduce((acc, { id, relationshipAttributes }) => {
         acc[id] = relationshipAttributes.reduce((accAttr, { attributes }) => {
             accAttr.push(attributes.map(item => ({ id: item.attribute, label: item.displayName })));
             return accAttr;
         }, []).reduce((p, current) => p.filter(e => current.find(item => item.id === e.id)));
 
         return acc;
-    }, {}), [relationshipsByType]);
+    }, {})), [relationshipsByType]);
 
     return { relationshipsByType: relationshipsByType ?? [], headersByType: headersByType ?? {} };
 };
