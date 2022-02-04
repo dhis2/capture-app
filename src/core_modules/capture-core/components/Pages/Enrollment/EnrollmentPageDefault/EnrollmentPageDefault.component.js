@@ -79,7 +79,11 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetEnrollmentComment />
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
-                <WidgetRelationship title={i18n.t("TEI's Relationships")} relationships={relationships} />
+                <WidgetRelationship
+                    title={i18n.t("TEI's Relationships")}
+                    relationships={relationships}
+                    onAddRelationship={() => {}}
+                />
                 {!hideWidgets.indicator && (
                     <WidgetIndicator
                         indicators={widgetEffects?.indicators}

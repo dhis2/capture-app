@@ -84,6 +84,7 @@ export const EnrollmentPageDefault = () => {
             stages={stages}
             events={enrollment?.events}
             enrollmentId={enrollmentId}
+            // $FlowFixMe
             relationships={{ relationshipsByType, headersByType }}
             onDelete={onDelete}
             onViewAll={onViewAll}

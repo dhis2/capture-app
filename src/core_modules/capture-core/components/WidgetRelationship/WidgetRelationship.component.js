@@ -5,7 +5,7 @@ import { Widget } from '../Widget';
 import type { Props } from './widgetRelationship.types';
 import { Relationships } from './Relationships/';
 
-export const WidgetRelationship = ({ relationships, title }: Props) => {
+export const WidgetRelationship = ({ relationships, title, onAddRelationship }: Props) => {
     const [open, setOpenStatus] = useState(true);
 
     return (
@@ -25,7 +25,7 @@ export const WidgetRelationship = ({ relationships, title }: Props) => {
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                <Relationships {...relationships} />
+                <Relationships {...relationships} onAddRelationship={onAddRelationship} />
             </Widget>
         </div>
     );

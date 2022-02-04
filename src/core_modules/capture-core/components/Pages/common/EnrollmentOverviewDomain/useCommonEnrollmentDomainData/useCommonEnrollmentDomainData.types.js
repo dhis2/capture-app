@@ -62,19 +62,25 @@ export type TEIData = {|
     }
 |}
 
+export type EventData = {|
+    event: Event
+|}
+
+export type RelationshipData = TEIData | EventData
+
 export type TEIRelationship = {|
     relationshipType: string,
     relationshipName: string,
     relationship: string,
     bidirectional: boolean,
-    from: TEIData,
-    to: TEIData
+    from: RelationshipData,
+    to: RelationshipData
 |}
 
 export type OutputRelationship = {
     id: string,
     relationshipName: string,
-    relationshipAttributes: Array<{ id: string, attributes: Array<TEIAttribute>}>
+    relationshipAttributes: Array<{ id: string, attributes: Array<RelationshipData>}>
 }
 
 export type Output = {|

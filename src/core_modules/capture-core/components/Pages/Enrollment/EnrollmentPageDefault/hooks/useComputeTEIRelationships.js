@@ -1,16 +1,30 @@
 // @flow
 import { useMemo } from 'react';
-import { type TEIData, type TEIRelationship } from '../../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import type {
+    TEIRelationship, RelationshipData,
+} from '../../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
-const getRelationshipAttributes = (bidirectional: boolean, teiId: string, from: TEIData, to: TEIData) => {
-    const { attributes: fromAttributes, trackedEntityInstance: fromTeiId } = from.trackedEntityInstance;
-    const { attributes: toAttributes, trackedEntityInstance: toTeiId } = to.trackedEntityInstance;
+const getRelationshipAttributes = (
+    bidirectional: boolean,
+    teiId: string,
+    from: RelationshipData,
+    to: RelationshipData,
+) => {
+    if (from.event) {
+        return {
+            id: from.event.event, attributes: from.event.dataValues,
+        };
+    }
+    if (to.trackedEntityInstance) {
+        const { attributes: fromAttributes, trackedEntityInstance: fromTeiId } = from.trackedEntityInstance;
+        const { attributes: toAttributes, trackedEntityInstance: toTeiId } = to.trackedEntityInstance;
 
-    if (!bidirectional) { return { id: toTeiId, attributes: toAttributes }; }
-
-    return fromTeiId !== teiId
-        ? { id: fromTeiId, attributes: fromAttributes }
-        : { id: toTeiId, attributes: toAttributes };
+        if (!bidirectional) { return { id: toTeiId, attributes: toAttributes }; }
+        return fromTeiId !== teiId
+            ? { id: fromTeiId, attributes: fromAttributes }
+            : { id: toTeiId, attributes: toAttributes };
+    }
+    return {};
 };
 
 export const useComputeTEIRelationships = (teiId: string, relationships?: ?{[key: string]: Array<TEIRelationship>}) => {
@@ -18,7 +32,6 @@ export const useComputeTEIRelationships = (teiId: string, relationships?: ?{[key
         const { relationshipType: typeId, relationshipName, bidirectional, from, to } = currentRelationship;
         const typeExist = acc.find(item => item.id === typeId);
         const relationshipAttributes = getRelationshipAttributes(bidirectional, teiId, from, to);
-
         if (typeExist) {
             typeExist.relationshipAttributes.push(relationshipAttributes);
         } else {
@@ -30,11 +43,11 @@ export const useComputeTEIRelationships = (teiId: string, relationships?: ?{[key
         }
         return acc;
     }, [])), [teiId, relationships]);
-
     // this will change after https://jira.dhis2.org/browse/DHIS2-12249 is done
     const headersByType = useMemo(() => (relationshipsByType?.reduce((acc, { id, relationshipAttributes }) => {
         acc[id] = relationshipAttributes.reduce((accAttr, { attributes }) => {
-            accAttr.push(attributes.map(item => ({ id: item.attribute, label: item.displayName })));
+            // $FlowFixMe
+            accAttr.push(attributes.map(item => ({ id: item.attribute ?? item.dataElement, label: item.displayName })));
             return accAttr;
         }, []).reduce((p, current) => p.filter(e => current.find(item => item.id === e.id)));
 

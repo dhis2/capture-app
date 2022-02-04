@@ -39,10 +39,13 @@ export const RelationshipTable = (props: Props) => {
         }
         return relationshipAttributes.map(({ id: teiId, attributes }) => (
             <DataTableRow key={teiId}>
-                {headers.map(({ id }) => (<DataTableCell key={id}>
-                    {attributes.find(att => att.attribute === id).value}
-                </DataTableCell>
-                ))}
+                {headers.map(({ id }) => {
+                    const attribute = attributes.find(att => att.attribute === id || att.dataElement === id);
+                    return (<DataTableCell key={id}>
+                        {attribute?.value}
+                    </DataTableCell>
+                    );
+                })}
             </DataTableRow>
         ));
     };
