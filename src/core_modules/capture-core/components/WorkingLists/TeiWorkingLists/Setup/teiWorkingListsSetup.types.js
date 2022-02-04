@@ -6,6 +6,9 @@ import type {
     RecordsOrder,
     UpdateList,
     InitialViewConfig,
+    AddTemplate,
+    DeleteTemplate,
+    UpdateTemplate,
 } from '../../WorkingListsCommon';
 import type { FiltersData } from '../../WorkingListsBase';
 import type { LoadTeiView, TeiRecords } from '../types';
@@ -13,6 +16,9 @@ import type { LoadTeiView, TeiRecords } from '../types';
 type ExtractedProps = $ReadOnly<{|
     customColumnOrder?: CustomColumnOrder,
     onLoadView: LoadTeiView,
+    onAddTemplate: AddTemplate,
+    onDeleteTemplate: DeleteTemplate,
+    onUpdateTemplate: UpdateTemplate,
     onUpdateList: UpdateList,
     program: TrackerProgram,
     records?: TeiRecords,

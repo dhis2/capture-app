@@ -89,4 +89,20 @@ Then the registering unit should display in the list
 
 Scenario: The TEI custom working lists is loaded
 Given you open the main page with Ngelehun and malaria focus investigation program context
-Then the user sees the custom TEI working lists
+Then you see the custom TEI working lists
+And you can load the view with the name Events assigned to me
+
+Scenario: The user creates, updates and deletes a TEI custom working list
+Given you open the main page with Ngelehun and malaria focus investigation program context
+And you see the custom TEI working lists
+And you set the enrollment status filter to completed
+And you apply the current filter
+When you save the list with the name My custom list
+Then the new custom TEI working list is created
+And the enrollment status filter button should show that the completed filter is in effect
+When you set the enrollment status filter to active
+And you apply the current filter
+When you update the list with the name My custom list
+Then the enrollment status filter button should show that the active filter is in effect
+And you delete the name My custom list
+Then the custom TEI is deleted
