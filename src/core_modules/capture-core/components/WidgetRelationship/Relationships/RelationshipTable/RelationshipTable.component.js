@@ -16,7 +16,7 @@ type Props = {
 }
 
 export const RelationshipTable = (props: Props) => {
-    const { classes, headers, relationshipAttributes } = props;
+    const { headers, relationshipAttributes } = props;
     function renderHeader() {
         const headerCells = headers
             .map(column => (
