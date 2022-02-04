@@ -93,7 +93,7 @@ Then you see the custom TEI working lists
 And you can load the view with the name Events assigned to me
 
 Scenario: The user creates, updates and deletes a TEI custom working list
-Given you open the main page with Ngelehun and malaria focus investigation program context
+Given you open the main page with Ngelehun and child programme context
 And you see the custom TEI working lists
 And you set the enrollment status filter to completed
 And you apply the current filter
