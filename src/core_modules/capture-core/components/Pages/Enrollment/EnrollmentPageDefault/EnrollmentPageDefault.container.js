@@ -36,7 +36,7 @@ export const EnrollmentPageDefault = () => {
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata?.programStages);
-    const { relationshipsByType, headersByType } = useComputeTEIRelationships(teiId, relationships);
+    const { relationshipsByType } = useComputeTEIRelationships(teiId, relationships);
 
     if (programMetaDataError || enrollmentsError) {
         log.error(errorCreator('Enrollment page could not be loaded')(
@@ -85,7 +85,7 @@ export const EnrollmentPageDefault = () => {
             events={enrollment?.events}
             enrollmentId={enrollmentId}
             // $FlowFixMe
-            relationships={{ relationshipsByType, headersByType }}
+            relationships={{ relationshipsByType }}
             onDelete={onDelete}
             onViewAll={onViewAll}
             onCreateNew={onCreateNew}

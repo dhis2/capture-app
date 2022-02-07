@@ -27,7 +27,7 @@ const styles = {
         overflow: 'scroll',
     },
 };
-const RelationshipsPlain = ({ relationshipsByType, headersByType, classes, onAddRelationship }: Props) => (
+const RelationshipsPlain = ({ relationshipsByType, classes, onAddRelationship }: Props) => (
     <div
         data-test="relationships"
         className={classes.container}
@@ -37,7 +37,7 @@ const RelationshipsPlain = ({ relationshipsByType, headersByType, classes, onAdd
                 const { relationshipName, id, ...passOnProps } = relationship;
                 return (<div key={id} className={classes.wrapper}>
                     <div className={classes.title} >{relationshipName}</div>
-                    <RelationshipTable headers={headersByType[id]} {...passOnProps} />
+                    <RelationshipTable {...passOnProps} />
                 </div>);
             }) : null
         }

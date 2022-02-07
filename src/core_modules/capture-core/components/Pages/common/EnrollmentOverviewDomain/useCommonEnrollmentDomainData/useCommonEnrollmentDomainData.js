@@ -66,7 +66,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
                 fetchedEnrollmentData.enrollment,
                 fetchedEnrollmentData.attributeValues
                     .map(({ attribute, value }) => ({ id: attribute, value })),
-                { [teiId]: fetchedEnrollmentData.relationships },
+                fetchedEnrollmentData.relationships,
             ));
         }
     }, [
