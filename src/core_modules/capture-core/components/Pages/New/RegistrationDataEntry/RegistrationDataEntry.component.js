@@ -1,6 +1,7 @@
 // @flow
 import React, { type ComponentType, useContext, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+// $FlowFixMe
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { Grid, Paper, withStyles } from '@material-ui/core';
@@ -106,6 +107,32 @@ const RegistrationDataEntryPlain = ({
         />
     ), []);
 
+    const ExistingUniqueValueDialogActions = useCallback(({ teiId }) => {
+        const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+        const { pathname, search } = useLocation(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+        const { programId, orgUnitId, trackedEntityTypeId } =
+            useSelector(({ router: { location: { query } } }) => ({ // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+                programId: query.programId,
+                orgUnitId: query.orgUnitId,
+                trackedEntityTypeId: query.trackedEntityTypeId,
+            }), shallowEqual);
+
+        return (
+            <Button
+                dataTest="existing-unique-value-link-tei-button"
+                primary
+                onClick={() => dispatch(navigateToTrackedEntityDashboard(
+                    teiId,
+                    orgUnitId,
+                    programId ? `program=${programId}` : `tracked_entity_type=${trackedEntityTypeId}`,
+                    `${pathname}${search}`,
+                ))}
+            >
+                {i18n.t('View dashboard')}
+            </Button>
+        );
+    }, []);
+
     return (
         <>
             {
@@ -147,6 +174,7 @@ const RegistrationDataEntryPlain = ({
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
+                                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                                 />
                             </Grid>
                             {
@@ -195,6 +223,7 @@ const RegistrationDataEntryPlain = ({
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
+                                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                                 />
                             </Grid>
                             {

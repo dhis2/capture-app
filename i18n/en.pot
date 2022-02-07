@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-11T15:12:43.396Z\n"
-"PO-Revision-Date: 2022-02-11T15:12:43.396Z\n"
+"POT-Creation-Date: 2022-03-02T12:32:54.352Z\n"
+"PO-Revision-Date: 2022-03-02T12:32:54.352Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -283,9 +283,6 @@ msgid "Show registered {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Registered person"
-msgstr ""
-
-msgid "Link"
 msgstr ""
 
 msgid "validation failed"
@@ -728,6 +725,9 @@ msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"

@@ -15,6 +15,7 @@ const RelationshipTrackedEntityInstance =
       duplicatesReviewPageSize,
       renderDuplicatesDialogActions,
       renderDuplicatesCardActions,
+      ExistingUniqueValueDialogActions,
   }: Props) => {
       const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
       const { trackedEntityType } = teiRegistrationMetadata || {};
@@ -31,6 +32,7 @@ const RelationshipTrackedEntityInstance =
               duplicatesReviewPageSize={duplicatesReviewPageSize}
               renderDuplicatesDialogActions={renderDuplicatesDialogActions}
               renderDuplicatesCardActions={renderDuplicatesCardActions}
+              ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
           />
       );
   };
