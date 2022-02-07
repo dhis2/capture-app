@@ -9,6 +9,7 @@ export type PlainProps = {|
     onCancel: () => void,
     onSave: () => void,
     onUpdateFormField: () => void,
+    onGetValidationContext: () => Object,
 |};
 
 export type Props = {|

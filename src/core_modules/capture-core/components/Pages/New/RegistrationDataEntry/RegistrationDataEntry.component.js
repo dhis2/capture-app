@@ -109,6 +109,25 @@ const RegistrationDataEntryPlain = ({
         />
     ), []);
 
+    const ExistingUniqueValueDialogActions = useCallback(({ teiId }) => {
+        const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+        const { programId, orgUnitId } = useLocationQuery(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+
+        return (
+            <Button
+                dataTest="existing-unique-value-link-tei-button"
+                primary
+                onClick={() => dispatch(navigateToEnrollmentOverview({
+                    teiId,
+                    orgUnitId,
+                    programId,
+                }))}
+            >
+                {programId ? i18n.t('View enrollment') : i18n.t('View dashboard')}
+            </Button>
+        );
+    }, []);
+
     return (
         <>
             {
@@ -150,6 +169,7 @@ const RegistrationDataEntryPlain = ({
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
+                                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                                 />
                             </Grid>
                             {
@@ -198,6 +218,7 @@ const RegistrationDataEntryPlain = ({
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
+                                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                                 />
                             </Grid>
                             {

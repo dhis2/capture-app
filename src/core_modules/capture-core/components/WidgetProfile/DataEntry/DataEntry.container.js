@@ -22,6 +22,11 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, clientAttrib
     const { trackedEntityName, ...context } = dataEntryContext;
     const onUpdateFormField = useCallback((...args: Array<any>) => dispatch(getUpdateFieldActions(context, ...args)), [dispatch, context]);
 
+    const getValidationContext = useCallback(() => ({
+        programId: programAPI.id,
+        orgUnitId,
+    }), [programAPI, orgUnitId]);
+
     return (
         <DataEntryComponent
             dataEntryId={dataEntryId}
@@ -32,6 +37,7 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, clientAttrib
             trackedEntityName={trackedEntityName}
             formFoundation={context.formFoundation}
             onUpdateFormField={onUpdateFormField}
+            onGetValidationContext={getValidationContext}
         />
     );
 };
