@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
-"PO-Revision-Date: 2022-02-23T09:14:01.289Z\n"
+"POT-Creation-Date: 2022-03-01T13:50:45.247Z\n"
+"PO-Revision-Date: 2022-03-01T13:50:45.247Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -286,9 +286,6 @@ msgid "Show registered {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Registered person"
-msgstr ""
-
-msgid "Link"
 msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
@@ -607,7 +604,7 @@ msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr "Choose an enrollment to view the dashboard."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr ""
@@ -689,6 +686,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -699,6 +699,9 @@ msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
