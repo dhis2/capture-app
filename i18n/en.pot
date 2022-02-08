@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
-"PO-Revision-Date: 2022-01-28T15:06:33.964Z\n"
+"POT-Creation-Date: 2022-02-08T13:46:49.745Z\n"
+"PO-Revision-Date: 2022-02-08T13:46:49.745Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -144,7 +144,7 @@ msgid "Search for user"
 msgstr "Search for user"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Complete event"
 
 msgid "Basic info"
 msgstr "Basic info"
@@ -464,10 +464,10 @@ msgid "No results"
 msgstr "No results"
 
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "Icon for {{field}}"
 msgstr "Icon for {{field}}"
@@ -631,6 +631,15 @@ msgstr "Make referral"
 msgid "No available program stages"
 msgstr "No available program stages"
 
+msgid "TET name"
+msgstr "TET name"
+
+msgid "Created date"
+msgstr "Created date"
+
+msgid "Program stage name"
+msgstr "Program stage name"
+
 msgid "Program stage not found"
 msgstr "Program stage not found"
 
@@ -742,7 +751,7 @@ msgid "Registered events"
 msgstr "Registered events"
 
 msgid "Please select {{category}}."
-msgstr ""
+msgstr "Please select {{category}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "Or see all records accessible to you in {{program}} "
@@ -1051,7 +1060,7 @@ msgid "This event doesn't have any comments"
 msgstr "This event doesn't have any comments"
 
 msgid "stage not found in rules execution"
-msgstr ""
+msgstr "stage not found in rules execution"
 
 msgid "Event completed"
 msgstr "Event completed"
@@ -1123,14 +1132,6 @@ msgstr "Person Profile"
 
 msgid "Edit"
 msgstr "Edit"
-msgid "You can’t add any more events in this program"
-msgstr ""
-
-msgid "Cancel without saving"
-msgstr ""
-
-msgid "Choose a stage for a new event"
-msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
@@ -1172,7 +1173,7 @@ msgid "Stages and Events"
 msgstr "Stages and Events"
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "Working list could not be loaded"
 
 msgid "Delete event"
 msgstr "Delete event"
@@ -1191,9 +1192,6 @@ msgstr "Download with current filters"
 
 msgid "Download data..."
 msgstr "Download data..."
-
-msgid "Working list could not be loaded"
-msgstr "Working list could not be loaded"
 
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"

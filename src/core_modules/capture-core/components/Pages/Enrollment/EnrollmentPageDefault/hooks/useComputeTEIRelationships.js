@@ -1,9 +1,12 @@
 // @flow
 import { useCallback, useEffect, useState } from 'react';
 import moment from 'moment';
+import i18n from '@dhis2/d2-i18n';
 import {
     getCachedSingleResourceFromKeyAsync,
 } from '../../../../../MetaDataStoreUtils/MetaDataStoreUtils';
+import { getProgramAndStageFromEvent, getTrackedEntityTypeThrowIfNotFound }
+    from '../../../../../metaData';
 import { userStores } from '../../../../../storageControllers/stores';
 import type {
     TEIRelationship, RelationshipData,
@@ -43,7 +46,9 @@ const getRelationshipAttributes = (
 
     if (to?.trackedEntityInstance && to?.trackedEntityInstance?.trackedEntityInstance !== teiId) {
         const displayFields = getDisplayFields(toConstraint.relationshipEntity);
-        const attributes = getAttributes(to.trackedEntityInstance.attributes, displayFields, { ...relationship });
+        const tet = getTrackedEntityTypeThrowIfNotFound(toConstraint.trackedEntityType.id);
+        const attributes = getAttributes(to.trackedEntityInstance.attributes, displayFields,
+            { ...relationship, trackedEntityTypeName: tet.name });
 
         return {
             id: to.trackedEntityInstance.trackedEntityInstance,
@@ -55,7 +60,9 @@ const getRelationshipAttributes = (
     } else if (bidirectional && from?.trackedEntityInstance &&
         from?.trackedEntityInstance?.trackedEntityInstance !== teiId) {
         const displayFields = getDisplayFields(fromConstraint.relationshipEntity);
-        const attributes = getAttributes(from.trackedEntityInstance.attributes, displayFields, { ...relationship });
+        const tet = getTrackedEntityTypeThrowIfNotFound(toConstraint.trackedEntityType.id);
+        const attributes = getAttributes(from.trackedEntityInstance.attributes, displayFields,
+            { ...relationship, trackedEntityTypeName: tet.name });
 
         return {
             id: from.trackedEntityInstance.trackedEntityInstance,
@@ -66,7 +73,17 @@ const getRelationshipAttributes = (
         };
     } else if (bidirectional && from?.event) {
         const displayFields = getDisplayFields(fromConstraint.relationshipEntity);
-        const attributes = getAttributes(from.event, displayFields, { ...from.event });
+        // $FlowFixMe
+        const { stage, program } = getProgramAndStageFromEvent({
+            evenId: from.event.event,
+            programId: from.event.program,
+            programStageId: from.event.programStage,
+        });
+        const attributes = getAttributes(from.event, displayFields, {
+            ...from.event,
+            programName: program?.name,
+            programStageName: stage?.stageForm?.name,
+        });
 
         return {
             id: from.event.event,
@@ -92,7 +109,10 @@ const getDisplayFieldsFromAPI = {
     ],
     [relationshipEntities.PROGRAM_STAGE_INSTANCE]: [
         { id: 'orgUnitName', label: 'Organisation unit' },
-        { id: 'program', label: 'Program' },
+        { id: 'program',
+            label: 'Program',
+            convertValue: props => props.programName,
+        },
         { id: 'eventDate',
             label: 'Event date',
             convertValue: props => moment(props.eventDate).format('YYYY-MM-DD'),
@@ -104,21 +124,21 @@ const getDisplayFieldsFromAPI = {
 const getBaseConfigHeaders = {
     [relationshipEntities.TRACKED_ENTITY_INSTANCE]: [{
         id: 'tetName',
-        label: 'TET name',
-        convertValue: props => props.trackedEntityType?.displayName,
+        label: i18n.t('TET name'),
+        convertValue: props => props.trackedEntityTypeName,
     }, {
         id: 'createdDate',
-        label: 'Created date',
+        label: i18n.t('Created date'),
         convertValue: props => moment(props.created).format('YYYY-MM-DD'),
     }],
     [relationshipEntities.PROGRAM_STAGE_INSTANCE]: [{
         id: 'programStageName',
-        label: 'Program stage name',
-        convertValue: props => props.programStage?.name,
+        label: i18n.t('Program stage name'),
+        convertValue: props => props.programStageName,
     },
     {
         id: 'createdDate',
-        label: 'Created date',
+        label: i18n.t('Created date'),
         convertValue: props => moment(props.created).format('YYYY-MM-DD'),
     }],
 };
