@@ -57,8 +57,8 @@ export const EnrollmentAddEventPageDefault = ({
         events: enrollment?.events,
         attributeValues,
         enrollmentData: {
-            enrollmentDate: enrollment?.enrollmentDate,
-            incidentDate: enrollment?.incidentDate,
+            enrolledAt: enrollment?.enrolledAt,
+            occurredAt: enrollment?.occurredAt,
             enrollmentId: enrollment?.enrollment,
         },
     }), [enrollment, attributeValues]);
@@ -98,7 +98,7 @@ export const EnrollmentAddEventPageDefault = ({
                 teiDisplayName={teiDisplayName}
                 trackedEntityName={trackedEntityName}
                 stageName={selectedProgramStage?.stageForm.name}
-                eventDateLabel={selectedProgramStage?.stageForm.getLabel('eventDate')}
+                eventDateLabel={selectedProgramStage?.stageForm.getLabel('occurredAt')}
                 enrollmentsAsOptions={enrollmentsAsOptions}
                 onSetOrgUnitId={handleSetOrgUnitId}
                 onResetOrgUnitId={handleResetOrgUnitId}
