@@ -7,12 +7,13 @@ import type {
     UpdateList,
     InitialViewConfig,
 } from '../../WorkingListsCommon';
-import type { FiltersData } from '../../WorkingListsBase';
+import type { FiltersData, SetTemplateSharingSettings } from '../../WorkingListsBase';
 import type { LoadTeiView, TeiRecords } from '../types';
 
 type ExtractedProps = $ReadOnly<{|
     customColumnOrder?: CustomColumnOrder,
     onLoadView: LoadTeiView,
+    onSetTemplateSharingSettings: SetTemplateSharingSettings,
     onUpdateList: UpdateList,
     program: TrackerProgram,
     records?: TeiRecords,
@@ -22,6 +23,7 @@ type ExtractedProps = $ReadOnly<{|
     filters?: FiltersData,
     sortById?: string,
     sortByDirection?: string,
+    storeId: string,
 |}>;
 
 export type Props = $ReadOnly<{|

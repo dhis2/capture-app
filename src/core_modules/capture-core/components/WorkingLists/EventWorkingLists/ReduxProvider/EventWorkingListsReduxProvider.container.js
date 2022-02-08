@@ -37,6 +37,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
     return (
         <EventWorkingListsColumnSetup
             {...commonStateManagementRestProps}
+            storeId={storeId}
             program={program}
             programStage={programStage}
             orgUnitId={orgUnitId}

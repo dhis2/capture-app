@@ -16,6 +16,7 @@ const TemplateMaintenancePlain = (props: Props, ref) => {
         onUpdateTemplate,
         onDeleteTemplate,
         onSetSharingSettings,
+        storeId,
         ...passOnProps
     } = props;
 
@@ -63,6 +64,7 @@ const TemplateMaintenancePlain = (props: Props, ref) => {
                 open={mode === dialogModes.SHARING}
                 templateId={currentTemplate.id}
                 onClose={handleSetSharingSettings}
+                storeId={storeId}
             />
         </>
     );

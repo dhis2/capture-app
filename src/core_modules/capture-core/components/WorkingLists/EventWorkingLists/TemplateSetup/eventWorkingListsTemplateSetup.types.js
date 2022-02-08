@@ -21,6 +21,7 @@ type ExtractedProps = $ReadOnly<{|
     onUpdateTemplate: Function,
     onDeleteTemplate: Function,
     templates?: EventWorkingListsTemplates,
+    storeId: string,
 |}>;
 
 type RestProps = $Rest<EventWorkingListsDataSourceSetupOutputProps, ExtractedProps>;
@@ -41,4 +42,5 @@ export type EventWorkingListsTemplateSetupOutputProps = {|
     onUpdateTemplate: UpdateTemplate,
     onDeleteTemplate: DeleteTemplate,
     templates?: WorkingListTemplates,
+    storeId: string,
 |};

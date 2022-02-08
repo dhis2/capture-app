@@ -5,6 +5,11 @@ import D2UISharingDialog from '@dhis2/d2-ui-sharing-dialog';
 import { getD2 } from '../../../../d2';
 import type { Props } from './sharingDialog.types';
 
+const SHARING_DIALOG_TYPE = {
+    teiList: 'trackedEntityInstanceFilter',
+    eventList: 'eventFilter',
+};
+
 const styles = {
     dialog: {
         width: 1000,
@@ -12,7 +17,7 @@ const styles = {
     },
 };
 
-const SharingDialogPlain = ({ onClose, open, templateId, classes }: Props) => {
+const SharingDialogPlain = ({ onClose, open, templateId, classes, storeId }: Props) => {
     const handleClose = useCallback(({
         externalAccess,
         publicAccess,
@@ -32,7 +37,7 @@ const SharingDialogPlain = ({ onClose, open, templateId, classes }: Props) => {
             open={open}
             id={templateId}
             onRequestClose={handleClose}
-            type={'eventFilter'}
+            type={SHARING_DIALOG_TYPE[storeId] || ''}
             d2={getD2()}
             className={classes.dialog}
         />

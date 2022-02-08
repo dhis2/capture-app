@@ -90,3 +90,10 @@ Then the registering unit should display in the list
 Scenario: The TEI custom working lists is loaded
 Given you open the main page with Ngelehun and malaria focus investigation program context
 Then the user sees the custom TEI working lists
+
+Scenario: The TEI custom working can be shared
+Given you open the main page with Ngelehun and malaria focus investigation program context
+And the user sees the custom TEI working lists
+And you can load the view with the name Events assigned to me
+When you change the sharing settings
+Then you see the new sharing settings
