@@ -5,6 +5,7 @@ import { convertDataEntryToClientValues } from '../../../../../DataEntry/common/
 import { convertValue as convertToServerValue } from '../../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../../events/mainConverters';
 import { type RenderFoundation } from '../../../../../../metaData';
+import { deriveURLParamsFromLocation } from '../../../../../../utils/routing';
 
 const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
     if (!categories) {
@@ -50,11 +51,12 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
     formFoundation: RenderFoundation,
     formClientValues: Object,
     mainDataClientValues: Object,
+    history: Object,
     completed?: boolean,
 ) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
-    const { teiId, enrollmentId, programId, orgUnitId } = state.router.location.query;
+    const { teiId, enrollmentId, programId, orgUnitId } = deriveURLParamsFromLocation();
 
     if (!mainDataServerValues.status) {
         mainDataServerValues.status = completed ? 'ACTIVE' : 'COMPLETED';

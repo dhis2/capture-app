@@ -28,4 +28,5 @@ export {
     rulesExecutedPostUpdateField,
 } from './actions/dataEntry.actions';
 export { actionTypes as loadNewActionTypes } from './actions/dataEntryLoadNew.actions';
-export { actionTypes as loadEditActionTypes } from './actions/dataEntry.actions';
+export { actionTypes as loadEditActionTypes, cleanUpDataEntry } from './actions/dataEntry.actions';
+

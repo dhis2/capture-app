@@ -4,7 +4,7 @@ import { dataElementTypes } from '../../metaData/DataElement';
 export const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments
         .filter(({ program }) => program === selectedProgramId)
-        .map(({ createdAt, enrollment }) => ({
-            label: convertValue(createdAt, dataElementTypes.DATETIME),
+        .map(({ enrolledAt, enrollment }) => ({
+            label: convertValue(enrolledAt, dataElementTypes.DATETIME),
             value: enrollment,
         }));

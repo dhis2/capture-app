@@ -23,7 +23,9 @@ const baseComponentStylesVertical = {
     },
 };
 
-const getBaseProps = ({ formName, compulsory, disabled, unique, icon }: DataElement) => ({
+const getBaseProps = ({ formName, compulsory, disabled, unique, icon, description, url }: DataElement) => ({
+    description,
+    url,
     styles: baseComponentStyles,
     label: formName,
     metaCompulsory: compulsory,

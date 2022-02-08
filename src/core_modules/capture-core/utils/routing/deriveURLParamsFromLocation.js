@@ -1,9 +1,9 @@
 // @flow
 
 export const deriveURLParamsFromLocation = (): {| [key: string]: string |} => {
-    const urlSearch = window.location.hash.split('?');
-    return [...new URLSearchParams(urlSearch[1]).entries()].reduce((accParams, entry) => {
-        accParams[entry[0]] = entry[1];
+    const urlSearchParamString = window.location.hash.split('?')[1];
+    return [...new URLSearchParams(urlSearchParamString).entries()].reduce((accParams, [key, value]) => {
+        accParams[key] = value;
         return accParams;
     }, {});
 };

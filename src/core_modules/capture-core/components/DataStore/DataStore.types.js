@@ -1,9 +1,9 @@
 // @flow
 
 export const actionTypes = {
-    FETCH_DATA_STORE: 'useNewDashboard.FetchDataStore',
+    FETCH_DATA_STORE: 'useOldDashboard.FetchDataStore',
 };
 
-export type UseNewDashboard = {|
+export type UseOldDashboard = {|
     [key: string]: string,
 |}

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 // $FlowFixMe
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
@@ -10,7 +10,7 @@ import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
-import { buildUrlQueryString } from '../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertValue } from '../../../converters/clientToView';
@@ -19,21 +19,7 @@ import { dataElementTypes } from '../../../metaData/DataElement';
 export const EnrollmentEditEventPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { programId, stageId, teiId, enrollmentId, orgUnitId, eventId } = useSelector(
-        ({
-            router: {
-                location: { query },
-            },
-        }) => ({
-            programId: query.programId,
-            stageId: query.stageId,
-            teiId: query.teiId,
-            orgUnitId: query.orgUnitId,
-            enrollmentId: query.enrollmentId,
-            eventId: query.eventId,
-        }),
-        shallowEqual,
-    );
+    const { programId, stageId, teiId, enrollmentId, orgUnitId, eventId } = useLocationQuery();
     const { program } = useProgramInfo(programId);
     const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);

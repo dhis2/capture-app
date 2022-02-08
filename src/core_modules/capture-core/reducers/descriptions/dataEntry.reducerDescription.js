@@ -47,6 +47,7 @@ export const dataEntriesDesc = createReducerDescription({
         };
         return newState;
     },
+    [actionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
 }, 'dataEntries');
 
 export const dataEntriesUIDesc = createReducerDescription({

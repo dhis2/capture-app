@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
 // $FlowFixMe
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
 import type { EnrollmentPageStatus } from './EnrollmentPage.types';
 import {
@@ -17,15 +17,11 @@ import { useEnrollmentInfo } from './useEnrollmentInfo';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { getScopeInfo } from '../../../metaData';
 import { buildEnrollmentsAsOptions, useSetEnrollmentId } from '../../ScopeSelector';
+import { useLocationQuery } from '../../../utils/routing';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
-    const { teiId, programId, enrollmentId } =
-        useSelector(({ router: { location: { query } } }) => ({
-            teiId: query.teidId,
-            programId: query.programId,
-            enrollmentId: query.enrollmentId,
-        }), shallowEqual);
+    const { teiId, programId, enrollmentId } = useLocationQuery();
 
     const { scopeType } = useScopeInfo(programId);
     const { setEnrollmentId } = useSetEnrollmentId();
@@ -61,12 +57,7 @@ const useComputedEnrollmentPageStatus = () => {
     const enrollmentPageStatus: EnrollmentPageStatus =
     useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
 
-    const { teiId, programId, enrollmentId } =
-        useSelector(({ router: { location: { query } } }) => ({
-            teiId: query.teiId,
-            programId: query.programId,
-            enrollmentId: query.enrollmentId,
-        }), shallowEqual);
+    const { teiId, programId, enrollmentId } = useLocationQuery();
 
     return useMemo(() => {
         if (enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
@@ -86,15 +77,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     useComponentLifecycle();
 
     const dispatch = useDispatch();
-    const { programId, orgUnitId, enrollmentId, teiId } = useSelector(
-        ({ router: { location: { query } } }) => ({
-            teiId: query.teiId,
-            programId: query.programId,
-            orgUnitId: query.orgUnitId,
-            enrollmentId: query.enrollmentId,
-        }),
-        shallowEqual,
-    );
+    const { programId, orgUnitId, enrollmentId, teiId } = useLocationQuery();
     const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const { trackedEntityName } = getScopeInfo(tetId);
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);

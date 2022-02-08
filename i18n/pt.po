@@ -4,14 +4,14 @@
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
-# David Júnior <davidjr.mondlane@gmail.com>, 2021
+# David Júnior <davidjr.mondlane@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-12-07T16:17:10.207Z\n"
+"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: David Júnior <davidjr.mondlane@gmail.com>, 2021\n"
+"Last-Translator: David Júnior <davidjr.mondlane@gmail.com>, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,7 +68,7 @@ msgid "Async field update failed"
 msgstr "Falha na actualização do campo assíncrono"
 
 msgid "A value is required"
-msgstr "Um valor é obrigatório"
+msgstr "Deve fornecer um valor"
 
 msgid "Please provide a valid number"
 msgstr "Por favor, forneça um número válido"
@@ -722,6 +722,9 @@ msgstr "Não há feedback para este evento"
 
 msgid "Registered events"
 msgstr "Eventos registrados"
+
+msgid "Please select {{category}}."
+msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "Ou veja todos os registros acessíveis a você no {{program}}"

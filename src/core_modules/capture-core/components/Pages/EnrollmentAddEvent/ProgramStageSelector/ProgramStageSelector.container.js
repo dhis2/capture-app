@@ -8,7 +8,7 @@ import { Widget } from '../../../Widget';
 import { errorCreator } from '../../../../../capture-core-utils';
 import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
 import type { Props } from './ProgramStageSelector.types';
-import { useProgramFromIndexedDB } from '../../../../utils/cachedData/useProgramFromIndexedDB';
+import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 
 

@@ -14,6 +14,7 @@ import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { useLocationQuery } from '../../../../utils/routing';
 
 const getStyles = ({ typography }) => ({
     paper: {
@@ -58,6 +59,7 @@ const DialogButtons = ({ onCancel, onSave }) => (
 
 const CardListButton = (({ teiId, orgUnitId }) => {
     const dispatch = useDispatch();
+    const { programId } = useLocationQuery();
 
     return (
         <Button
@@ -66,7 +68,9 @@ const CardListButton = (({ teiId, orgUnitId }) => {
             onClick={() => dispatch(navigateToEnrollmentOverview({
                 teiId,
                 orgUnitId,
-            }))}
+                programId,
+            }))
+            }
         >
             {i18n.t('View dashboard')}
         </Button>

@@ -1,78 +1,58 @@
 // @flow
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
+import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { Button, spacersNum } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { errorCreator } from 'capture-core-utils';
-import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
-import { convertValue as convertServerToClient } from '../../converters/serverToClient';
 import type { Props } from './widgetProfile.types';
+import { DataEntry } from './DataEntry';
+import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues } from './hooks';
 
-export const WidgetProfile = ({ teiId, programId }: Props) => {
+const styles = {
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: spacersNum.dp8,
+        justifyContent: 'space-between',
+        width: '100%',
+    },
+};
+
+const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = '', classes }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    const programsQuery = useMemo(() => ({
-        programs: {
-            resource: 'programs',
-            id: programId,
-            params: {
-                fields:
-                ['programTrackedEntityAttributes[id,displayInList,trackedEntityAttribute[id,displayName,valueType]]'],
-            },
-        },
-    }), [programId]);
-
-    const trackedEntityInstancesQuery = useMemo(() => ({
-        trackedEntityInstances: {
-            resource: 'tracker/trackedEntities',
-            id: teiId,
-            params: {
-                program: programId,
-            },
-        },
-    }), [teiId, programId]);
-
-
-    const {
-        loading: programsLoading,
-        data: programsData,
-        error: programsError,
-    } = useDataQuery(programsQuery);
+    const [toggleEditModal, setToggleEditModal] = useState(false);
+    const { loading: programsLoading, program, error: programsError } = useProgram(programId);
     const {
         loading: trackedEntityInstancesLoading,
-        data: trackedEntityInstancesData,
+        trackedEntityInstances,
         error: trackedEntityInstancesError,
-    } = useDataQuery(trackedEntityInstancesQuery);
+    } = useTrackedEntityInstances(teiId, programId);
+
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
 
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstances);
 
-    const formatValue = (value, valueType) => {
-        const convertToClientValue = convertServerToClient(value, valueType);
-        return convertClientToView(convertToClientValue, valueType);
-    };
-
-    const mergeAttributes = () => {
-        const { programs: { programTrackedEntityAttributes } } = programsData;
-        const { trackedEntityInstances: { attributes } } = trackedEntityInstancesData;
-
-        return programTrackedEntityAttributes
-            .filter(item => item.displayInList)
-            .reduce((acc, curr) => {
-                const foundAttribute = attributes
-                    .find(item => item.attribute === curr.trackedEntityAttribute.id);
-
-                acc.push({
-                    reactKey: curr.trackedEntityAttribute.id,
-                    key: curr.trackedEntityAttribute.displayName,
-                    value: formatValue(foundAttribute?.value, foundAttribute?.valueType),
-                });
-
-                return acc;
-            }, []);
-    };
+    const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
+        .filter(item => item.displayInList)
+        .map(({ optionSet, attribute, key, value: clientValue, valueType }) => {
+            let value;
+            if (optionSet && optionSet.id) {
+                const selectedOption = optionSet.options.find(option => option.code === clientValue);
+                value = selectedOption && selectedOption.name;
+            } else {
+                value = convertClientToView(clientValue, valueType);
+            }
+            return {
+                attribute, key, value,
+            };
+        }), [clientAttributesWithSubvalues]);
 
     const renderProfile = () => {
         if (loading) {
@@ -86,22 +66,39 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
 
         return (<FlatList
             dataTest="profile-widget-flatlist"
-            list={mergeAttributes()}
+            list={displayInListAttributes}
         />);
     };
 
     return (
-        <div
-            data-test="profile-widget"
-        >
+        <div data-test="profile-widget">
             <Widget
-                header={i18n.t('Person Profile')}
+                header={
+                    <div className={classes.header}>
+                        <div> {i18n.t('Person Profile')} </div>
+                        {showEdit && (
+                            <Button onClick={() => setToggleEditModal(true)} small>
+                                {i18n.t('Edit')}
+                            </Button>
+                        )}
+                    </div>
+                }
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
                 {renderProfile()}
             </Widget>
+            {!loading && !error && showEdit && toggleEditModal && (
+                <DataEntry
+                    onCancel={() => setToggleEditModal(false)}
+                    programAPI={program}
+                    orgUnitId={orgUnitId}
+                    clientAttributesWithSubvalues={clientAttributesWithSubvalues}
+                />
+            )}
         </div>
     );
 };
+
+export const WidgetProfile: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetProfilePlain);

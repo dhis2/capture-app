@@ -1,7 +1,8 @@
 // @flow
 import { pageKeys } from '../components/App/withAppUrlSync';
+import { deriveURLParamsFromLocation } from './routing';
 
-type Url = {
+export type Url = {
     programId?: string,
     orgUnitId?: string,
     trackedEntityTypeId?: string,
@@ -19,17 +20,15 @@ export const deriveUrlQueries = (state: Object) => {
             orgUnitId: selectedOrgUnitId,
             trackedEntityTypeId: selectedTet,
         },
-        router: {
-            location: {
-                query: {
-                    programId: routerProgramId,
-                    orgUnitId: routerOrgUnitId,
-                    trackedEntityTypeId: routerTet,
-                    teiId,
-                    enrollmentId,
-                },
-            } },
     } = state;
+    const {
+        programId: routerProgramId,
+        orgUnitId: routerOrgUnitId,
+        trackedEntityTypeId: routerTet,
+        teiId,
+        enrollmentId,
+    } = deriveURLParamsFromLocation();
+
     const programId = routerProgramId || selectedProgramId;
     const orgUnitId = routerOrgUnitId || selectedOrgUnitId;
     const trackedEntityTypeId = routerTet || selectedTet;
@@ -42,6 +41,11 @@ export const deriveUrlQueries = (state: Object) => {
         enrollmentId,
     };
 };
+
+export const getLocationPathname = () => window.location.pathname;
+
+// TODO - This will be removed when the link to tracker capture is removed
+export const getLocationSearch = () => window.location.search;
 
 export const getUrlQueries = (): Url => {
     const split = window.location.href.split('?');

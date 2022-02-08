@@ -7,7 +7,7 @@ import { programCollection } from 'capture-core/metaDataMemoryStores/programColl
 import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
-import { buildUrlQueryString } from '../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 
 const mapStateToProps = (state: ReduxState) => ({
@@ -18,17 +18,8 @@ const mapStateToProps = (state: ReduxState) => ({
 const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const { showAllAccessible } = useSelector(
-        ({
-            router: {
-                location: {
-                    query,
-                },
-            },
-        }) => ({
-            showAllAccessible: query.hasOwnProperty('all'),
-        }));
+    const { all } = useLocationQuery();
+    const showAllAccessible = all !== undefined;
 
     const {
         currentSelectionsComplete,
@@ -55,12 +46,17 @@ const MainPageContainer = () => {
     const MainPageStatus = useMemo(() => {
         const selectedProgram = programId && programCollection.get(programId);
         if (selectedProgram?.categoryCombination) {
-            if (!categories) return MainPageStatuses.SHOW_WORKING_LIST;
+            if (!categories) return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             const programCategories = Array.from(selectedProgram.categoryCombination.categories.values());
 
             if (programCategories.some(category => !categories || !categories[category.id])) {
                 return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             }
+
+            if (!orgUnitId && !showAllAccessible) {
+                return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
+            }
+
             return MainPageStatuses.SHOW_WORKING_LIST;
         }
 
