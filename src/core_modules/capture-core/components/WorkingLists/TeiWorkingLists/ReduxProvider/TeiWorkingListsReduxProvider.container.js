@@ -15,7 +15,6 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
         lastTransaction,
         lastTransactionOnListDataRefresh,
         listDataRefreshTimestamp,
-        onSetTemplateSharingSettings,
         records,
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
@@ -34,6 +33,7 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
     return (
         <TeiWorkingListsSetup
             {...commonStateManagementProps}
+            storeId={storeId}
             onSelectListRow={onSelectListRow}
             onLoadTemplates={onLoadTemplates}
             program={program}
