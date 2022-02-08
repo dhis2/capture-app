@@ -1,5 +1,6 @@
 // @flow
-import { useCallback, useMemo, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import moment from 'moment';
 import {
     getCachedSingleResourceFromKeyAsync,
 } from '../../../../../MetaDataStoreUtils/MetaDataStoreUtils';
@@ -13,68 +14,70 @@ const getRelationshipAttributes = (
     teiId: string,
     from: RelationshipData,
     to: RelationshipData,
-    headers: Array<{id: string, label: string}>,
-    options: Object,
+    relationship: Object,
 ) => {
-    const { bidirectional } = relationshipType;
-    const getId = () => {
-        if (bidirectional) {
-            return from.event.event;
-        }
+    const { bidirectional, fromToName, toFromName, toConstraint, fromConstraint } = relationshipType;
 
-        if (to.trackedEntityInstance.trackedEntityInstance !== teiId) {
-            return to.trackedEntityInstance.trackedEntityInstance;
+    const getAttributes = (attributes, displayFields, options) => displayFields.map((item) => {
+        if (item.convertValue) {
+            return {
+                id: item.id,
+                value: item.convertValue(options),
+            };
         }
-        return teiId;
+        const attributeItem = Array.isArray(attributes)
+            ? attributes.find(({ attribute }) => attribute === item.id)?.value : attributes[item.id];
+        return {
+            id: item.id,
+            value: attributeItem,
+        };
+    });
+
+    const getDisplayFields = (type) => {
+        let displayFields = getDisplayFieldsFromAPI[type];
+        if (!displayFields.length) {
+            displayFields = getBaseConfigHeaders[type];
+        }
+        return displayFields;
     };
 
-    const getAttributes = () => {
-        let returnAttributes = [];
-        if (bidirectional) {
-            returnAttributes = headers.map((item) => {
-                if (item.convertValue) {
-                    return {
-                        id: item.id,
-                        value: item.convertValue(options),
-                    };
-                }
-                const attributeItem = from.event.dataValues.find(({ dataElement }) => dataElement === item.id);
-                return {
-                    id: item.id,
-                    value: attributeItem.value,
-                };
-            });
-        } else if (from.trackedEntityInstance) {
-            const { attributes: fromAttributes, trackedEntityInstance: fromTeiId } = from.trackedEntityInstance;
-            const { attributes: toAttributes } = to.trackedEntityInstance;
+    if (to?.trackedEntityInstance && to?.trackedEntityInstance?.trackedEntityInstance !== teiId) {
+        const displayFields = getDisplayFields(toConstraint.relationshipEntity);
+        const attributes = getAttributes(to.trackedEntityInstance.attributes, displayFields, { ...relationship });
 
-            if (fromTeiId !== teiId) {
-                returnAttributes = fromAttributes;
-            } else {
-                returnAttributes = toAttributes;
-            }
-            returnAttributes = headers.map((item) => {
-                if (item.convertValue) {
-                    return {
-                        id: item.id,
-                        value: item.convertValue(options),
-                    };
-                }
-                const attributeItem = returnAttributes.find(({ attribute }) => attribute === item.id);
-                return {
-                    id: item.id,
-                    value: attributeItem.value,
-                };
-            });
-        }
+        return {
+            id: to.trackedEntityInstance.trackedEntityInstance,
+            relationshipName: fromToName,
+            relationshipProgram: toConstraint.program,
+            attributes,
+            displayFields,
+        };
+    } else if (bidirectional && from?.trackedEntityInstance &&
+        from?.trackedEntityInstance?.trackedEntityInstance !== teiId) {
+        const displayFields = getDisplayFields(fromConstraint.relationshipEntity);
+        const attributes = getAttributes(from.trackedEntityInstance.attributes, displayFields, { ...relationship });
 
-        return returnAttributes;
-    };
+        return {
+            id: from.trackedEntityInstance.trackedEntityInstance,
+            relationshipName: toFromName,
+            relationshipProgram: fromConstraint.program,
+            attributes,
+            displayFields,
+        };
+    } else if (bidirectional && from?.event?.event) {
+        const displayFields = getDisplayFields(fromConstraint.relationshipEntity);
+        const attributes = getAttributes(from.event, displayFields, { ...from.event });
 
-    return {
-        id: getId(),
-        attributes: getAttributes(),
-    };
+        return {
+            id: from.event.event,
+            relationshipName: toFromName,
+            relationshipProgram: fromConstraint.program,
+            attributes,
+            displayFields,
+        };
+    }
+
+    return {};
 };
 
 const relationshipEntities = {
@@ -82,7 +85,21 @@ const relationshipEntities = {
     PROGRAM_STAGE_INSTANCE: 'PROGRAM_STAGE_INSTANCE',
 };
 
-const getDisplayFields = () => [{ id: 'zDhUuAYrxNC', label: 'Last name' }, { id: 'w75KJ2mc4zz', label: 'First name' }];
+const getDisplayFieldsFromAPI = {
+    [relationshipEntities.TRACKED_ENTITY_INSTANCE]: [
+        { id: 'w75KJ2mc4zz', label: 'First name' },
+        { id: 'zDhUuAYrxNC', label: 'Last name' },
+    ],
+    [relationshipEntities.PROGRAM_STAGE_INSTANCE]: [
+        { id: 'orgUnitName', label: 'Organisation unit' },
+        { id: 'program', label: 'Program' },
+        { id: 'eventDate',
+            label: 'Event date',
+            convertValue: props => moment(props.eventDate).format('YYYY-MM-DD'),
+        },
+        { id: 'status', label: 'Status' },
+    ],
+};
 
 const getBaseConfigHeaders = {
     [relationshipEntities.TRACKED_ENTITY_INSTANCE]: [{
@@ -92,7 +109,7 @@ const getBaseConfigHeaders = {
     }, {
         id: 'createdDate',
         label: 'Created date',
-        convertValue: props => props.created,
+        convertValue: props => moment(props.created).format('YYYY-MM-DD'),
     }],
     [relationshipEntities.PROGRAM_STAGE_INSTANCE]: [{
         id: 'programStageName',
@@ -102,9 +119,10 @@ const getBaseConfigHeaders = {
     {
         id: 'createdDate',
         label: 'Created date',
-        convertValue: props => props.created,
+        convertValue: props => moment(props.created).format('YYYY-MM-DD'),
     }],
 };
+
 export const useComputeTEIRelationships = (teiId: string, relationships?: Array<TEIRelationship>) => {
     const [relationshipsByType, setRelationshipByType] = useState([]);
 
@@ -112,38 +130,26 @@ export const useComputeTEIRelationships = (teiId: string, relationships?: Array<
         const groupped = [];
         if (!relationships) { return; }
         for await (const relationship of relationships) {
-            const { relationshipType: typeId, from, to, created } = relationship;
+            const { relationshipType: typeId, from, to } = relationship;
 
             const typeExist = groupped.find(item => item.id === typeId);
-            const {
-                bidirectional,
-                toFromName,
-                fromToName,
-                fromConstraint,
-            } = await getCachedSingleResourceFromKeyAsync(userStores.RELATIONSHIP_TYPES, typeId)
+            const relationshipType = await getCachedSingleResourceFromKeyAsync(userStores.RELATIONSHIP_TYPES, typeId)
                 .then(result => result.response);
 
-            let displayFields = getDisplayFields();
-            if (!displayFields.length) {
-                displayFields = getBaseConfigHeaders[fromConstraint.relationshipEntity];
-            }
-
-            console.log({ displayFields });
-            const relationshipAttributes = getRelationshipAttributes(
-                bidirectional, teiId, from, to, displayFields, { created },
+            const { relationshipName, displayFields, ...relationshipAttributes } = getRelationshipAttributes(
+                relationshipType, teiId, from, to, { relationship },
             );
             if (typeExist) {
                 typeExist.relationshipAttributes.push(relationshipAttributes);
             } else {
                 groupped.push({
                     id: typeId,
-                    relationshipName: bidirectional ? toFromName : fromToName,
+                    relationshipName,
                     relationshipAttributes: [relationshipAttributes],
                     headers: displayFields,
                 });
             }
         }
-
 
         setRelationshipByType(groupped);
     }, [relationships, teiId]);
