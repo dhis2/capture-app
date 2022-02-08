@@ -87,5 +87,5 @@ export type Output = {|
     error?: any,
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
-    relationships?: {[key: string]: Array<TEIRelationship>}
+    relationships?: Array<TEIRelationship>
 |};

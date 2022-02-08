@@ -64,7 +64,7 @@ const getRelationshipAttributes = (
             attributes,
             displayFields,
         };
-    } else if (bidirectional && from?.event?.event) {
+    } else if (bidirectional && from?.event) {
         const displayFields = getDisplayFields(fromConstraint.relationshipEntity);
         const attributes = getAttributes(from.event, displayFields, { ...from.event });
 
@@ -129,6 +129,7 @@ export const useComputeTEIRelationships = (teiId: string, relationships?: Array<
     const computeData = useCallback(async () => {
         const groupped = [];
         if (!relationships) { return; }
+        // $FlowFixMe
         for await (const relationship of relationships) {
             const { relationshipType: typeId, from, to } = relationship;
 
