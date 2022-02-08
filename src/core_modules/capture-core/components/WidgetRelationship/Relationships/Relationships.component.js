@@ -14,7 +14,7 @@ type Props = {
 
 const styles = {
     container: {
-        padding: `0 ${spacers.dp16} ${spacers.dp6} ${spacers.dp16}`,
+        padding: `0 ${spacers.dp16} ${spacers.dp24} ${spacers.dp16}`,
     },
     title: {
         fontWeight: 500,
