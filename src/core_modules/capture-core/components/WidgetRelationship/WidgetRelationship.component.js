@@ -16,7 +16,7 @@ export const WidgetRelationship = ({ relationships, title, onAddRelationship }: 
                 header={<div>
                     <span>{title}</span>
                     {relationships && <Chip dense>
-                        {relationships.relationshipsByType.length}
+                        {relationships.count}
                     </Chip>
                     }
                 </div>

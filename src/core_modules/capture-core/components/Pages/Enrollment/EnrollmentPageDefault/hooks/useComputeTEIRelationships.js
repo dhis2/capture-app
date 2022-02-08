@@ -137,16 +137,16 @@ export const useComputeTEIRelationships = (teiId: string, relationships?: Array<
             const relationshipType = await getCachedSingleResourceFromKeyAsync(userStores.RELATIONSHIP_TYPES, typeId)
                 .then(result => result.response);
 
-            const { relationshipName, displayFields, ...relationshipAttributes } = getRelationshipAttributes(
+            const { relationshipName, displayFields, id, attributes } = getRelationshipAttributes(
                 relationshipType, teiId, from, to, { relationship },
             );
             if (typeExist) {
-                typeExist.relationshipAttributes.push(relationshipAttributes);
+                typeExist.relationshipAttributes.push({ id, attributes });
             } else {
                 groupped.push({
                     id: typeId,
                     relationshipName,
-                    relationshipAttributes: [relationshipAttributes],
+                    relationshipAttributes: [{ id, attributes }],
                     headers: displayFields,
                 });
             }

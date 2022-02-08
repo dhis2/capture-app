@@ -84,8 +84,10 @@ export const EnrollmentPageDefault = () => {
             stages={stages}
             events={enrollment?.events}
             enrollmentId={enrollmentId}
-            // $FlowFixMe
-            relationships={{ relationshipsByType }}
+            relationships={{
+                relationshipsByType,
+                count: relationships && relationships.length,
+            }}
             onDelete={onDelete}
             onViewAll={onViewAll}
             onCreateNew={onCreateNew}

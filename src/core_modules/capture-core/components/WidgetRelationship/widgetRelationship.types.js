@@ -1,9 +1,12 @@
 // @flow
-
+import type { OutputRelationship } from '../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
 export type Props = {|
-    relationships: Object,
+    relationships: {
+        relationshipsByType?: ?Array<OutputRelationship>,
+        count: ?number,
+    },
     title: string,
-    onAddRelationship: void,
+    onAddRelationship: () => void,
     ...CssClasses,
 |};
