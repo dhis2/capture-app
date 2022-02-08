@@ -45,11 +45,19 @@ Then('the default working list should be displayed', () => {
 });
 
 When('you select the working list called completed enrollments', () => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]').contains('Completed enrollments').click();
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .contains('Completed enrollments')
+        .click();
 });
 
 Then('the list should display teis with a completed enrollment', () => {
-    const names = ['Filona Ryder', 'Gertrude Fjordsen', 'Frank Fjordsen', 'Emma Johnson', 'Alan Thompson'];
+    const names = [
+        'Filona Ryder',
+        'Gertrude Fjordsen',
+        'Frank Fjordsen',
+        'Emma Johnson',
+        'Alan Thompson',
+    ];
 
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
