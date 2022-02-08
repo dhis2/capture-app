@@ -75,7 +75,6 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         fetchedEnrollmentData.enrollment,
         fetchedEnrollmentData.attributeValues,
         fetchedEnrollmentData.relationships,
-        teiId,
     ]);
 
     useEffect(() => {
