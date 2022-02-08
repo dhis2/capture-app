@@ -12,5 +12,7 @@ export const openNewRegistrationPageFromLockedSelectorEpic = (action$: InputObse
         map(() => {
             const { orgUnitId, programId } = deriveURLParamsFromLocation();
             history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
-            return resetLocationChange();
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }));

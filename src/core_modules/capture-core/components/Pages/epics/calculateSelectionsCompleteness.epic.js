@@ -8,7 +8,6 @@ import {
 } from '../actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
-import { deriveURLParamsFromLocation } from '../../../utils/routing';
 
 type CurrentSelectionsState = {
     programId?: ?string,
@@ -19,8 +18,7 @@ type CurrentSelectionsState = {
 };
 
 const calculateCompleteStatus = (state: CurrentSelectionsState) => {
-    const { orgUnitId, programId } = deriveURLParamsFromLocation();
-    if ((!orgUnitId && !state.orgUnitId) || (!programId && !state.programId) || state.categoryCheckInProgress) {
+    if (!state.orgUnitId || !state.programId || state.categoryCheckInProgress) {
         return false;
     }
 
