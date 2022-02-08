@@ -1,3 +1,10 @@
+## [1.66.6](https://github.com/dhis2/capture-app/compare/v1.66.5...v1.66.6) (2022-02-02)
+
+
+### Bug Fixes
+
+* add validationContext for Unique Ids ([#2470](https://github.com/dhis2/capture-app/issues/2470)) ([ea19c5c](https://github.com/dhis2/capture-app/commit/ea19c5c5e36cca1dce2b79495e07a1c556d3eee7))
+
 ## [1.66.5](https://github.com/dhis2/capture-app/compare/v1.66.4...v1.66.5) (2022-02-01)
 
 
