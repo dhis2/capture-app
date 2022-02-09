@@ -2167,10 +2167,10 @@
     update-notifier "^3.0.0"
     yargs "^13.1.0"
 
-"@dhis2/cli-utils-cypress@^9.0.1":
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/@dhis2/cli-utils-cypress/-/cli-utils-cypress-9.0.1.tgz#0f4c2eea102da09589cf1ca1530e3c849bd29b71"
-  integrity sha512-c3+rLqFBXgF9a6TDeuLj7Q/NEaoc3YJR3Ga43OV8M4NnkkJ8X8wzd4dDYgM9oaxfil44VBQU9xzjp4tBZg++oA==
+"@dhis2/cli-utils-cypress@^9.0.2":
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-utils-cypress/-/cli-utils-cypress-9.0.2.tgz#c3ab5afaffd380579d97f35ff93a69a10000dbb3"
+  integrity sha512-LM6qeghtMOGvjf3lMjKJX4+z0zfzxeAN5Y7J+ShJNs0ErelL/Y+GJiHZRwO766tSgp63wpvjSq1WOoN1UdT6Pw==
   dependencies:
     "@dhis2/cli-helpers-engine" "^2.3.0"
     fs-extra "^8.1.0"
