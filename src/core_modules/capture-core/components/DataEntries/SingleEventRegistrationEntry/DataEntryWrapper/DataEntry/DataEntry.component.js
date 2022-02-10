@@ -446,7 +446,6 @@ type Props = {
     theme: Theme,
     formHorizontal: ?boolean,
     recentlyAddedRelationshipId?: ?string,
-    isAddEventInStage: boolean,
 };
 type DataEntrySection = {
     placement: $Values<typeof placements>,
@@ -525,19 +524,16 @@ class NewEventDataEntry extends Component<Props> {
     }
 
     getSavingText() {
-        const { orgUnitName, programName, stageName, isAddEventInStage } = this.props;
+        const { orgUnitName, programName } = this.props;
 
-        if (isAddEventInStage) {
-            return (<span>
-                {i18n.t('Saving to {{stageName}} for {{programName}} in {{orgUnitName}}',
-                    { orgUnitName, stageName, programName, interpolation: { escapeValue: false } })}
-            </span>);
-        }
-
-        return (<span>
-            {i18n.t('Saving to {{programName}} in {{orgUnitName}}',
-                { orgUnitName, programName, interpolation: { escapeValue: false } })}
-        </span>);
+        return (
+            <span>
+                {
+                    i18n.t('Saving to {{programName}} in {{orgUnitName}}',
+                        { orgUnitName, programName, interpolation: { escapeValue: false } })
+                }
+            </span>
+        );
     }
 
     renderHorizontal = () => {
