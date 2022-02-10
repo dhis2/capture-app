@@ -3,6 +3,6 @@
 export type Note = {
     clientId: string,
     storedBy: string,
-    storedAt: string,
+    storedDate: string,
     value: string,
 };
