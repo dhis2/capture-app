@@ -80,7 +80,6 @@ const CommentSectionPlain = ({
     comments,
     handleAddComment,
     classes,
-    className,
 }: Props) => {
     const [isEditing, setEditing] = useState(false);
     const [newCommentValue, setNewCommentValue] = useState('');

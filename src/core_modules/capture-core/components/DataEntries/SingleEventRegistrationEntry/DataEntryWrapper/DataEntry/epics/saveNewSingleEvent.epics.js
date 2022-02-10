@@ -10,7 +10,6 @@ import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../../../utils/routing';
 import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
-import { getLocationPathname } from '../../../../../../utils/url';
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -31,13 +30,7 @@ export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: 
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const pathname = getLocationPathname();
-            const { enrollmentId, programId, orgUnitId } = deriveURLParamsFromLocation();
-
-            if (pathname === '/enrollmentEventNew') {
-                history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
-                return resetLocationChange();
-            }
+            const { programId, orgUnitId } = deriveURLParamsFromLocation();
 
             history.push(`/${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();
