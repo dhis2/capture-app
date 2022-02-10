@@ -41,7 +41,7 @@ const InfoBoxPlain = ({ scheduleDate, suggestedScheduleDate, eventCountInOrgUnit
             <div className={classes.textBox}>
                 <div className={classes.textBold}>{i18n.t('Schedule date info')}</div>
                 <div className={classes.textLine}>{scheduleDate === suggestedScheduleDate ?
-                    i18n.t(`This date is the the suggested scheduled date based on the intervals defined, 
+                    i18n.t(`This date is the suggested scheduled date based on the intervals defined, 
                     it can be adjusted if needed.`)
                     :
                     i18n.t(
