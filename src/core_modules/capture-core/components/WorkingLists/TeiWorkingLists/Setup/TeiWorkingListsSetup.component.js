@@ -79,7 +79,7 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
         programStatus: rawFilter.split(':')[1],
     }),
 }, {
-    id: 'enrollmentDate',
+    id: 'enrolledAt',
     type: dataElementTypes.DATE,
     header: enrollmentDateLabel,
     transformRecordsFilter: (filter: Array<string> | string) => {
@@ -102,7 +102,7 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
         return queryArgs;
     },
 }, {
-    id: 'incidentDate',
+    id: 'occurredAt',
     type: dataElementTypes.DATE,
     header: incidentDateLabel,
     transformRecordsFilter: (filter: Array<string> | string) => {

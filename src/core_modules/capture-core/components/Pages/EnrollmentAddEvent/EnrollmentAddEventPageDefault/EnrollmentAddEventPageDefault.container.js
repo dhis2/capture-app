@@ -52,6 +52,8 @@ export const EnrollmentAddEventPageDefault = ({
     const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
+    // $FlowFixMe
+    const trackedEntityName = program?.trackedEntityType?.name;
 
     const rulesExecutionDependencies = useMemo(() => ({
         events: enrollment?.events,
@@ -72,7 +74,6 @@ export const EnrollmentAddEventPageDefault = ({
         handleResetStageId,
         handleResetEventId,
         teiDisplayName,
-        trackedEntityName,
         enrollmentsAsOptions,
         teiSelectorFailure,
         userInteractionInProgress,

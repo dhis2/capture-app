@@ -8,7 +8,7 @@ import { convertServerRelationshipToClient } from './convertServerToClient';
 
 async function getRelationships(queryParams: Object, relationshipTypes: Array<RelationshipType>) {
     const api = getApi();
-    const apiRes = await api.get('relationships', { ...queryParams });
+    const apiRes = await api.get('tracker/relationships', { ...queryParams });
     return apiRes && isArray(apiRes) ? apiRes.map(rel => convertServerRelationshipToClient(rel, relationshipTypes)) : null;
 }
 
