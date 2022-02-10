@@ -16,18 +16,15 @@ type Props = {
     handleAddComment: (text: string) => void,
     placeholder: string,
     emptyCommentMessage: string,
-    className?: string,
     ...CssClasses
 }
 
 const styles = {
     item: {
-        '&:not(:first-child)': {
-            marginTop: spacersNum.dp16,
-        },
         '&:not(:last-child)': {
             marginBottom: spacersNum.dp16,
         },
+        marginTop: spacersNum.dp16,
         padding: '12px',
         background: '#F3F5F7',
         display: 'flex',
@@ -126,7 +123,7 @@ const CommentSectionPlain = ({
 
     return (
         <div className={classes.wrapper}>
-            <div className={cx(classes.commentsWrapper, className)}>
+            <div className={classes.commentsWrapper}>
                 {comments
                     .sort((a, b) => moment(a.lastUpdated).valueOf() - moment(b.lastUpdated).valueOf())
                     .map(comment => <CommentItem key={`comment-item-${comment.note}-`} {...comment} />)

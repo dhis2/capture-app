@@ -33,9 +33,6 @@ const styles = () => ({
         flexGrow: 1,
         flexShrink: 0,
     },
-    commentSection: {
-        paddingTop: spacersNum.dp16,
-    },
 });
 
 const WidgetEventSchedulePlain = ({
@@ -79,7 +76,6 @@ const WidgetEventSchedulePlain = ({
             sectionName={i18n.t('Event comments')}
         >
             <CommentSection
-                className={classes.commentSection}
                 comments={comments}
                 placeholder={i18n.t('Write a comment about this scheduled event')}
                 handleAddComment={onAddComment}
