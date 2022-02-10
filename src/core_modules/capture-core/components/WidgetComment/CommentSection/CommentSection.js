@@ -16,6 +16,7 @@ type Props = {
     handleAddComment: (text: string) => void,
     placeholder: string,
     emptyCommentMessage: string,
+    className?: string,
     ...CssClasses
 }
 
@@ -82,6 +83,7 @@ const CommentSectionPlain = ({
     comments,
     handleAddComment,
     classes,
+    className,
 }: Props) => {
     const [isEditing, setEditing] = useState(false);
     const [newCommentValue, setNewCommentValue] = useState('');
@@ -124,7 +126,7 @@ const CommentSectionPlain = ({
 
     return (
         <div className={classes.wrapper}>
-            <div className={classes.commentsWrapper}>
+            <div className={cx(classes.commentsWrapper, className)}>
                 {comments
                     .sort((a, b) => moment(a.lastUpdated).valueOf() - moment(b.lastUpdated).valueOf())
                     .map(comment => <CommentItem key={`comment-item-${comment.note}-`} {...comment} />)

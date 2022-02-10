@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
-"PO-Revision-Date: 2022-01-28T15:06:33.964Z\n"
+"POT-Creation-Date: 2022-02-10T08:59:56.631Z\n"
+"PO-Revision-Date: 2022-02-10T08:59:56.631Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -144,7 +144,7 @@ msgid "Search for user"
 msgstr "Search for user"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Complete event"
 
 msgid "Basic info"
 msgstr "Basic info"
@@ -464,10 +464,10 @@ msgid "No results"
 msgstr "No results"
 
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "Icon for {{field}}"
 msgstr "Icon for {{field}}"
@@ -614,19 +614,19 @@ msgid "No feedback for this enrollment yet"
 msgstr "No feedback for this enrollment yet"
 
 msgid "Quick actions"
-msgstr ""
+msgstr "Quick actions"
 
 msgid "New Event"
-msgstr ""
+msgstr "New Event"
 
 msgid "Schedule an event"
-msgstr ""
+msgstr "Schedule an event"
 
 msgid "Make referral"
-msgstr ""
+msgstr "Make referral"
 
 msgid "No available program stages"
-msgstr ""
+msgstr "No available program stages"
 
 msgid "Program stage not found"
 msgstr "Program stage not found"
@@ -739,7 +739,7 @@ msgid "Registered events"
 msgstr "Registered events"
 
 msgid "Please select {{category}}."
-msgstr ""
+msgstr "Please select {{category}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "Or see all records accessible to you in {{program}} "
@@ -1048,7 +1048,7 @@ msgid "This event doesn't have any comments"
 msgstr "This event doesn't have any comments"
 
 msgid "stage not found in rules execution"
-msgstr ""
+msgstr "stage not found in rules execution"
 
 msgid "Event completed"
 msgstr "Event completed"
@@ -1060,21 +1060,29 @@ msgid "Schedule date info"
 msgstr "Schedule date info"
 
 msgid ""
-"This date is the the auto-suggested date based on the intervals defined, \n"
+"This date is the the suggested scheduled date based on the intervals "
+"defined, \n"
 "                    it can be adjusted if needed."
 msgstr ""
-"This date is the the auto-suggested date based on the intervals defined, \n"
+"This date is the the suggested scheduled date based on the intervals "
+"defined, \n"
 "                    it can be adjusted if needed."
 
-msgid "This date is {{difference}} days {{position}} the auto-suggested date."
-msgstr "This date is {{difference}} days {{position}} the auto-suggested date."
+msgid "This date is {{count}} days {{position}} the suggested date."
+msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgstr[0] "This date is {{count}} day {{position}} the suggested date."
+msgstr[1] "This date is {{count}} days {{position}} the suggested date."
 
-msgid ""
-"There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
-"this day."
-msgstr ""
-"There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
-"this day."
+msgid "after"
+msgstr "after"
+
+msgid "before"
+msgstr "before"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[1] "There are {{count}} scheduled events in {{orgUnitName}} on this day."
 
 msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1120,14 +1128,6 @@ msgstr "Person Profile"
 
 msgid "Edit"
 msgstr "Edit"
-msgid "You can’t add any more events in this program"
-msgstr ""
-
-msgid "Cancel without saving"
-msgstr ""
-
-msgid "Choose a stage for a new event"
-msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
@@ -1169,7 +1169,7 @@ msgid "Stages and Events"
 msgstr "Stages and Events"
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "Working list could not be loaded"
 
 msgid "Delete event"
 msgstr "Delete event"
@@ -1188,9 +1188,6 @@ msgstr "Download with current filters"
 
 msgid "Download data..."
 msgstr "Download data..."
-
-msgid "Working list could not be loaded"
-msgstr "Working list could not be loaded"
 
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
