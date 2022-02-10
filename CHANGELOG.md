@@ -1,3 +1,17 @@
+## [1.66.8](https://github.com/dhis2/capture-app/compare/v1.66.7...v1.66.8) (2022-02-10)
+
+
+### Bug Fixes
+
+* [DHIS2-12558] Fix random errors in production builds ([b82f23b](https://github.com/dhis2/capture-app/commit/b82f23bda4a9b39aaa9f7fce4dddc66a0c0e5cf0))
+
+## [1.66.7](https://github.com/dhis2/capture-app/compare/v1.66.6...v1.66.7) (2022-02-08)
+
+
+### Bug Fixes
+
+* [DHIS2-12472] List all messages related to field ([e8c60da](https://github.com/dhis2/capture-app/commit/e8c60daa2088b3d9512f2111ff558f8865b863a6))
+
 ## [1.66.6](https://github.com/dhis2/capture-app/compare/v1.66.5...v1.66.6) (2022-02-02)
 
 
