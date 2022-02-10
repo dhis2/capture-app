@@ -1,3 +1,10 @@
+## [1.66.9](https://github.com/dhis2/capture-app/compare/v1.66.8...v1.66.9) (2022-02-10)
+
+
+### Bug Fixes
+
+* [TECH-929] i18n plural and padding ([#2504](https://github.com/dhis2/capture-app/issues/2504)) ([a23bd15](https://github.com/dhis2/capture-app/commit/a23bd15d1cc6f001a647e18f0db8f4f56c7df46f))
+
 ## [1.66.8](https://github.com/dhis2/capture-app/compare/v1.66.7...v1.66.8) (2022-02-10)
 
 
