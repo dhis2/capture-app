@@ -1,6 +1,7 @@
 // @flow
 import moment from 'moment';
 import { PERIODS, DATE_TYPES } from '../../../constants';
+import type { ApiPeriodDate } from '../../../types';
 
 type AbsoluteDateFilterData = {|
     type: 'ABSOLUTE',
@@ -42,5 +43,5 @@ const relativeConvertersForPeriods = (filter: RelativeDateFilterData) => {
 
 const absoluteConvertersForPeriods = (filter: AbsoluteDateFilterData) => getApiShape(moment(), moment(filter.ge), moment(filter.le));
 
-export const convertValue = (filter: any): { periodFrom: number, periodTo: number } | null =>
+export const convertValue = (filter: any): ApiPeriodDate | null =>
     (filter.type === DATE_TYPES.ABSOLUTE ? absoluteConvertersForPeriods(filter) : relativeConvertersForPeriods(filter));

@@ -207,15 +207,18 @@ export const TeiWorkingListsSetup = ({
         (name) => {
             const mainFilters = convertToTEIFilterMainFilters({ filters, mainFilters: filtersOnly });
             const attributeValueFilters = convertToTEIFilterAttributes({ filters, attributeValueFilters: columns });
-            const criteria = { ...mainFilters, attributeValueFilters };
+            const visibleColumnIds = columns && columns.filter(({ visible }) => visible).map(({ id }) => id);
+            const criteria = { ...mainFilters,
+                attributeValueFilters,
+                order: `${sortById}:${sortByDirection}`,
+                displayOrderColumns: visibleColumnIds };
             const data = {
                 program: { id: program.id },
                 clientId: uuid(),
                 sortById,
                 sortByDirection,
                 filters,
-                visibleColumnIds: columns && columns.filter(({ visible }) => visible).map(({ id }) => id),
-                attributeValueFilters,
+                visibleColumnIds,
             };
             onAddTemplate(name, criteria, data);
         },
@@ -226,15 +229,19 @@ export const TeiWorkingListsSetup = ({
         (template) => {
             const mainFilters = convertToTEIFilterMainFilters({ filters, mainFilters: filtersOnly });
             const attributeValueFilters = convertToTEIFilterAttributes({ filters, attributeValueFilters: columns });
-            const criteria = { ...mainFilters, attributeValueFilters };
+            const visibleColumnIds = columns && columns.filter(({ visible }) => visible).map(({ id }) => id);
+            const criteria = { ...mainFilters,
+                attributeValueFilters,
+                order: `${sortById}:${sortByDirection}`,
+                displayOrderColumns: visibleColumnIds,
+            };
             const data = {
                 program: { id: program.id },
                 clientId: uuid(),
                 sortById,
                 sortByDirection,
                 filters,
-                visibleColumnIds: columns && columns.filter(({ visible }) => visible).map(({ id }) => id),
-                attributeValueFilters,
+                visibleColumnIds,
             };
             onUpdateTemplate(template, criteria, data);
         },

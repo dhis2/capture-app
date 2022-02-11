@@ -52,13 +52,18 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
                 program,
                 storeId,
                 clientId,
-                criteria: { programStatus, enrollmentDate, attributeValueFilters },
+                criteria: { programStatus, enrollmentDate, incidentDate, attributeValueFilters, order, displayOrderColumns, assignedUserMode, assignedUsers },
             } = action.payload;
             const trackedEntityInstanceFilters = {
                 name,
                 program,
+                order,
+                displayOrderColumns,
+                ...(assignedUserMode && { assignedUserMode }),
+                ...(assignedUsers?.length > 0 && { assignedUsers }),
                 ...(programStatus && { enrollmentStatus: programStatus }),
                 ...(enrollmentDate && { enrollmentCreatedPeriod: enrollmentDate }),
+                ...(incidentDate && { incidentDate }),
                 ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
             };
 
@@ -142,12 +147,26 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore, 
                 storeId,
                 criteria,
             } = action.payload;
-            const { programStatus, enrollmentDate, attributeValueFilters } = criteria;
+            const {
+                programStatus,
+                enrollmentDate,
+                incidentDate,
+                attributeValueFilters,
+                order,
+                displayOrderColumns,
+                assignedUserMode,
+                assignedUsers,
+            } = criteria;
             const trackedEntityInstanceFilters = {
                 name,
                 program,
+                order,
+                displayOrderColumns,
+                ...(assignedUserMode && { assignedUserMode }),
+                ...(assignedUsers?.length > 0 && { assignedUsers }),
                 ...(programStatus && { enrollmentStatus: programStatus }),
                 ...(enrollmentDate && { enrollmentCreatedPeriod: enrollmentDate }),
+                ...(incidentDate && { incidentDate }),
                 ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
             };
 

@@ -60,6 +60,11 @@ const getFilterByType = {
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
+const getAssigneeFilter = filter => ({
+    assignedUserMode: filter.assignedUserMode,
+    assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
+});
+
 export const convertToTEIFilterMainFilters = ({ filters, mainFilters }: { filters: Object, mainFilters: Array<{ id: string, type: string }> }) =>
     Object.keys(filters).reduce((acc, key) => {
         const filter = filters[key];
@@ -76,14 +81,11 @@ export const convertToTEIFilterMainFilters = ({ filters, mainFilters }: { filter
         case MAIN_FILTERS.ENROLLMENT_DATE:
             mainValue = convertEnrollmentDateFilter(filter);
             break;
-            // Not supported by the API
         case MAIN_FILTERS.INCIDENT_DATE:
-            mainValue = null;
+            mainValue = convertEnrollmentDateFilter(filter);
             break;
-            // Not supported by the API
         case MAIN_FILTERS.ASSIGNEE:
-            mainValue = null;
-            break;
+            return { ...acc, ...getAssigneeFilter(filter) };
         default:
             mainValue = null;
             break;

@@ -26,8 +26,8 @@ type ExtractedProps = $ReadOnly<{|
     currentTemplateId?: string,
     initialViewConfig: InitialViewConfig,
     filters?: FiltersData,
-    sortById?: string,
-    sortByDirection?: string,
+    sortById: string,
+    sortByDirection: string,
 |}>;
 
 export type Props = $ReadOnly<{|
