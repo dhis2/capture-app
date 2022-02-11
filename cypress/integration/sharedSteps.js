@@ -145,3 +145,7 @@ Then('you should see no results found', () => {
     cy.contains('No results found')
         .should('exist');
 });
+
+And('you are navigated to the enrollment page without enrollment', () => {
+    cy.url().should('include', 'enrollment?orgUnitId');
+});
