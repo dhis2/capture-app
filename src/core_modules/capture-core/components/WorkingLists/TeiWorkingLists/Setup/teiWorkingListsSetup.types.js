@@ -20,6 +20,7 @@ type ExtractedProps = $ReadOnly<{|
     onAddTemplate: AddTemplate,
     onDeleteTemplate: DeleteTemplate,
     onUpdateTemplate: UpdateTemplate,
+    onSetTemplateSharingSettings: SetTemplateSharingSettings,
     onUpdateList: UpdateList,
     program: TrackerProgram,
     records?: TeiRecords,
@@ -30,6 +31,7 @@ type ExtractedProps = $ReadOnly<{|
     storeId: string,
     sortById: string,
     sortByDirection: string,
+    storeId: string,
 |}>;
 
 export type Props = $ReadOnly<{|

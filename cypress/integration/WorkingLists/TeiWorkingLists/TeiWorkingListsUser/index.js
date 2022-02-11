@@ -377,6 +377,7 @@ When('you see the new sharing settings', () => {
                 cy.contains('Kevin Boateng').should('not.exist');
             }),
     );
+});
 When('you save the list with the name My custom list', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
