@@ -111,6 +111,7 @@ export const updateTeiRequest = ({
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
+    formFoundation,
 }: {
     itemId: string,
     dataEntryId: string,
@@ -120,6 +121,7 @@ export const updateTeiRequest = ({
     onSaveExternal?: (eventServerValues: any, uid: string) => void,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
+    formFoundation: RenderFoundation,
 }) =>
     actionCreator(dataEntryActionTypes.TEI_UPDATE_REQUEST)({
         itemId,
@@ -127,6 +129,7 @@ export const updateTeiRequest = ({
         orgUnitId,
         trackedEntityTypeId,
         trackedEntityInstanceId,
+        formFoundation,
         onSaveExternal,
         onSaveSuccessActionType,
         onSaveErrorActionType,

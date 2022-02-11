@@ -30,9 +30,13 @@ export const DataEntry = ({
         itemId,
     });
     const { trackedEntityName, ...context } = dataEntryContext;
+    const { formFoundation } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
-    const onGetValidationContext = useCallback(() => ({ orgUnitId, programId: programAPI.id, trackedEntityInstanceId }), [orgUnitId, programAPI, trackedEntityInstanceId]);
+    const onGetValidationContext = useCallback(
+        () => ({ orgUnitId, programId: programAPI.id, trackedEntityInstanceId }),
+        [orgUnitId, programAPI, trackedEntityInstanceId],
+    );
     const onUpdateFormField = useCallback((...args: Array<any>) => dispatch(getUpdateFieldActions(context, ...args)), [dispatch, context]);
     const onSave = useCallback(() => {
         setSaveAttempted(true);
@@ -48,6 +52,7 @@ export const DataEntry = ({
                     onSaveExternal,
                     onSaveSuccessActionType,
                     onSaveErrorActionType,
+                    formFoundation,
                 }),
             );
         }
@@ -59,13 +64,14 @@ export const DataEntry = ({
         trackedEntityInstanceId,
         programAPI,
         formValidated,
+        formFoundation,
         onSaveExternal,
         onSaveSuccessActionType,
         onSaveErrorActionType,
     ]);
 
     return (
-        Object.entries(context.formFoundation).length > 0 && (
+        Object.entries(formFoundation).length > 0 && (
             <DataEntryComponent
                 dataEntryId={dataEntryId}
                 itemId={itemId}
@@ -73,7 +79,7 @@ export const DataEntry = ({
                 onSave={onSave}
                 saveAttempted={saveAttempted}
                 trackedEntityName={trackedEntityName}
-                formFoundation={context.formFoundation}
+                formFoundation={formFoundation}
                 onUpdateFormField={onUpdateFormField}
                 modalState={modalState}
                 onGetValidationContext={onGetValidationContext}

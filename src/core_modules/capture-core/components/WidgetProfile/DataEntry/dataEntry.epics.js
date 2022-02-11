@@ -1,10 +1,13 @@
 // @flow
 import { ofType } from 'redux-observable';
 import uuid from 'uuid/v4';
+import { pipe } from 'capture-core-utils';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
+import { convertFormToClient, convertClientToServer } from '../../../converters';
 import { dataEntryActionTypes, updateTei, saveSucceed, setTeiModalState, TEI_MODAL_STATE } from './dataEntry.actions';
 
+const convertFn = pipe(convertFormToClient, convertClientToServer);
 const geometryType = (key) => {
     const types = ['Point', 'None', 'Polygon'];
     return types.find(type => key.toLowerCase().includes(type.toLowerCase()));
@@ -50,15 +53,17 @@ export const updateTeiEpic = (action$: InputObservable, store: ReduxStore) =>
                 orgUnitId,
                 trackedEntityTypeId,
                 trackedEntityInstanceId,
+                formFoundation,
                 onSaveExternal,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
             } = action.payload;
-
             const values = formsValues[`${dataEntryId}-${itemId}`];
+            const formServerValues = formFoundation?.convertValues(values, convertFn);
+
             const serverData = {
-                attributes: deriveAttributesFromFormValues(values),
-                geometry: deriveGeometryFromFormValues(values),
+                attributes: deriveAttributesFromFormValues(formServerValues),
+                geometry: deriveGeometryFromFormValues(formServerValues),
                 trackedEntityInstance: trackedEntityInstanceId,
                 trackedEntityType: trackedEntityTypeId,
                 orgUnit: orgUnitId,
