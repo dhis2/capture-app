@@ -12,7 +12,7 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
         resource: 'trackedEntityInstanceFilters',
         params: {
             filter: `program.id:eq:${programId}`,
-            fields: 'id,displayName,enrollmentStatus,enrollmentCreatedPeriod,attributeValueFilters,sortOrder,access',
+            fields: 'id,displayName,enrollmentStatus,enrollmentCreatedPeriod,incidentDate,order,displayColumnOrder,attributeValueFilters,sortOrder,access,assignedUserMode,assignedUsers',
         },
     });
     return apiRes && apiRes.trackedEntityInstanceFilters ? apiRes.trackedEntityInstanceFilters : [];
@@ -33,19 +33,39 @@ export const getTemplates = (
                 write: false,
                 manage: false,
             },
+            criteria: {
+                order: 'regDate:desc',
+            },
         };
-
         return {
             templates: [
                 defaultTemplate,
                 ...apiTEIFilters.map(
-                    ({ displayName, sortOrder, enrollmentStatus, enrollmentCreatedPeriod, id, access, attributeValueFilters }) => ({
+                    ({
+                        displayName,
+                        sortOrder,
+                        enrollmentStatus,
+                        enrollmentCreatedPeriod,
+                        id,
+                        access,
+                        attributeValueFilters,
+                        incidentDate,
+                        order,
+                        displayColumnOrder,
+                        assignedUserMode,
+                        assignedUsers,
+                    }) => ({
                         id,
                         name: displayName,
                         order: sortOrder,
                         criteria: {
                             programStatus: enrollmentStatus,
                             enrollmentDate: enrollmentCreatedPeriod,
+                            incidentDate,
+                            order,
+                            displayColumnOrder,
+                            assignedUserMode,
+                            assignedUsers,
                             attributeValueFilters,
                         },
                         access,

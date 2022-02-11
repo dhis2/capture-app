@@ -1,3 +1,4 @@
 // @flow
-export { convertDataElementFilters } from './convertToClientConfig';
-export { convertValue as convertEnrollmentDateToClient } from './dateConverter';
+export { convertToClientConfig } from './convertToClientConfig';
+export { convertValue as convertPeriodDateToClient } from './convertPeriodDateToClient';
+export { convertValue as convertSortOrder } from './convertSortToClient';

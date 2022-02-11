@@ -1,5 +1,6 @@
 // @flow
 import moment from 'moment';
+import type { QuerySingleResource } from 'capture-core/utils/api';
 import { getOptionSetFilter } from './optionSet';
 import {
     filterTypesObject,
@@ -15,9 +16,11 @@ import type {
     ApiDataFilterBoolean,
     ApiDataFilterDate,
     ApiDataFilterOptionSet,
+    ApiTEIQueryCriteria,
     TeiColumnsMetaForDataFetching,
 } from '../../../types';
-import { DATE_TYPES } from '../../../constants';
+import { DATE_TYPES, ASSIGNEE_MODES } from '../../../constants';
+import { convertPeriodDateToClient } from './index';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
     const value = filter.like;
@@ -72,7 +75,7 @@ const getFilterByType = {
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-export const convertDataElementFilters = (filters: Array<ApiDataFilter>, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching): Object =>
+const convertDataElementFilters = (filters: Array<ApiDataFilter>, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching): Object =>
     filters.reduce((acc, serverFilter: ApiDataFilter) => {
         const element = columnsMetaForDataFetching.get(serverFilter.attribute);
 
@@ -89,3 +92,60 @@ export const convertDataElementFilters = (filters: Array<ApiDataFilter>, columns
 
         return value ? { ...acc, [serverFilter.attribute]: value } : acc;
     }, {});
+
+const getAssigneeFilter = async (assignedUsers: ?Array<string>, querySingleResource: QuerySingleResource) => {
+    // DHIS2-12500 - The UI element provides suport for only one user
+    const assignedUserId = assignedUsers && assignedUsers.length > 0 && assignedUsers[0];
+    if (!assignedUserId) {
+        return null;
+    }
+    const user = await querySingleResource({
+        resource: `userLookup/${assignedUserId}`,
+    });
+    if (!user || !user.displayName) {
+        return null;
+    }
+    const { id, displayName: name, username } = user;
+    return { id, name, username };
+};
+
+export const convertToClientConfig = async (
+    TEIQueryCriteria: ?ApiTEIQueryCriteria,
+    columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
+    querySingleResource: QuerySingleResource,
+) => {
+    let filters = {};
+    if (!TEIQueryCriteria) {
+        return filters;
+    }
+    const { programStatus, enrollmentDate, incidentDate, assignedUserMode, assignedUsers, attributeValueFilters } = TEIQueryCriteria;
+
+    if (programStatus) {
+        filters = {
+            ...filters,
+            programStatus: {
+                usingOptionSet: true,
+                values: [programStatus],
+            },
+        };
+    }
+    if (enrollmentDate) {
+        filters = { ...filters, enrollmentDate: convertPeriodDateToClient(enrollmentDate) };
+    }
+    if (incidentDate) {
+        filters = { ...filters, incidentDate: convertPeriodDateToClient(incidentDate) };
+    }
+    if (assignedUserMode && assignedUserMode !== ASSIGNEE_MODES.PROVIDED) {
+        filters = { ...filters, assignee: { assignedUserMode } };
+    }
+    if (assignedUserMode && assignedUserMode === ASSIGNEE_MODES.PROVIDED && assignedUsers) {
+        const assignedUser = await getAssigneeFilter(assignedUsers, querySingleResource);
+        if (assignedUser) {
+            filters = { ...filters, assignee: { assignedUserMode, assignedUser } };
+        }
+    }
+    if (attributeValueFilters && attributeValueFilters.length > 0) {
+        filters = { ...filters, ...convertDataElementFilters(attributeValueFilters, columnsMetaForDataFetching) };
+    }
+    return filters;
+};

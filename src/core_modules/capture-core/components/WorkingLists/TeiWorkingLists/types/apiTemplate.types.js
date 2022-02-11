@@ -33,6 +33,19 @@ type ApiDataFilterCommon = {|
     attribute: string,
 |};
 
+export type ApiPeriodDate = { periodFrom: number, periodTo: number };
+
+export type ApiTEIQueryCriteria = {|
+    programStatus?: ?string,
+    incidentDate?: ?ApiPeriodDate,
+    enrollmentDate?: ?ApiPeriodDate,
+    order?: ?string,
+    displayColumnOrder?: ?Array<string>,
+    assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
+    assignedUsers?: Array<string>,
+    attributeValueFilters?: ?Array<any>,
+|};
+
 export type ApiDataFilter = (
     | ApiDataFilterText
     | ApiDataFilterNumeric
