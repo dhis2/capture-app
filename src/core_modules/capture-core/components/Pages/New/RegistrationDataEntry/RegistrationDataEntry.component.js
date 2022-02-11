@@ -85,7 +85,7 @@ const RegistrationDataEntryPlain = ({
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType } = useScopeInfo(selectedScopeId);
-    const { registrationMetaData } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
 
     const handleRegistrationScopeSelection = (id) => {
@@ -143,7 +143,7 @@ const RegistrationDataEntryPlain = ({
                                     selectedScopeId={selectedScopeId}
                                     enrollmentMetadata={registrationMetaData}
                                     saveButtonText={i18n.t('Save new')}
-                                    onSave={onSaveWithEnrollment}
+                                    onSave={() => onSaveWithEnrollment(formFoundation)}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
@@ -191,7 +191,7 @@ const RegistrationDataEntryPlain = ({
                                     selectedScopeId={selectedScopeId}
                                     teiRegistrationMetadata={registrationMetaData}
                                     saveButtonText={i18n.t('Save new')}
-                                    onSave={onSaveWithoutEnrollment}
+                                    onSave={() => onSaveWithoutEnrollment(formFoundation)}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
