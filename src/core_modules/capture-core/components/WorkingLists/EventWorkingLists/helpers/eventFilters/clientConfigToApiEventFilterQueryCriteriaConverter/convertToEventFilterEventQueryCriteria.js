@@ -146,7 +146,7 @@ const getMainFilter = (filter: Object): Object => {
         break;
     case 'occurredAt':
         mainValue = {
-            occurredAt: filterValues.dateFilter,
+            eventDate: filterValues.dateFilter,
         };
         break;
     case 'assignee':
@@ -179,7 +179,7 @@ const structureFilters = (apiFilters: Array<Object>, columns: ColumnsForConverte
         dataFilters: [],
     });
 
-const getSortOrder = (sortById: string, sortByDirection: string) => `${sortById}:${sortByDirection}`;
+const getSortOrder = (sortById: string, sortByDirection: string) => `${sortById === 'occurredAt' ? 'eventDate' : sortById}:${sortByDirection}`;
 
 const getColumnsOrder = (columns: Array<ColumnForConverter>) =>
     columns
@@ -202,7 +202,7 @@ export const convertToEventFilterEventQueryCriteria = ({
         () => typeConvertFilters(filters, columns),
         convertedFilters => structureFilters(convertedFilters, columns),
     )();
-    const displayColumnOrderCriteria = getColumnsOrder([...columns.values()]);
+    const displayColumnOrderCriteria = getColumnsOrder([...columns.values()])?.map(column => (column === 'occurredAt' ? 'eventDate' : column));
 
     return {
         ...filtersCriteria,
