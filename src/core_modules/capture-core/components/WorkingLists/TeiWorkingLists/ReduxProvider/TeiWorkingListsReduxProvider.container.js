@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { TeiWorkingListsSetup } from '../Setup';
-import { useWorkingListsCommonStateManagement, fetchTemplatesSuccess, fetchTemplates } from '../../WorkingListsCommon';
+import { useWorkingListsCommonStateManagement, fetchTemplates } from '../../WorkingListsCommon';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { TEI_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './teiWorkingListsReduxProvider.types';
@@ -11,14 +11,10 @@ import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnro
 export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: Props) => {
     const program = useTrackerProgram(programId);
 
-    // Being pragmatic here, disabling behavior we will implement later
     const {
         lastTransaction,
         lastTransactionOnListDataRefresh,
         listDataRefreshTimestamp,
-        onAddTemplate,
-        onUpdateTemplate,
-        onDeleteTemplate,
         records,
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
@@ -26,7 +22,6 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
 
     const onLoadTemplates = useCallback(() => {
         dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE));
-        dispatch(fetchTemplatesSuccess([], 'default', storeId));
     }, [dispatch, programId, storeId]);
 
     const onSelectListRow = useCallback(({ id }) => dispatch(navigateToEnrollmentOverview({
