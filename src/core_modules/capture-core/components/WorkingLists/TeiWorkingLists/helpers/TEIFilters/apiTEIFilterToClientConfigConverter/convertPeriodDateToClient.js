@@ -2,6 +2,7 @@
 import moment from 'moment';
 import { type DateFilterData } from '../../../../WorkingListsBase';
 import { PERIODS, DATE_TYPES } from '../../../constants';
+import type { ApiPeriodDate } from '../../../types';
 
 const getRelativePeriod = (periodFrom, periodTo) => {
     const today = moment();
@@ -38,7 +39,7 @@ const getRelativePeriod = (periodFrom, periodTo) => {
     return null;
 };
 
-export const convertValue = (dateFilter: { periodFrom: number, periodTo: number }): DateFilterData => {
+export const convertValue = (dateFilter: ApiPeriodDate): DateFilterData => {
     const { periodFrom, periodTo } = dateFilter;
     const period = getRelativePeriod(periodFrom, periodTo);
 
