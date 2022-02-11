@@ -134,7 +134,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             if (program instanceof TrackerProgram) {
                 return batchActions([
                     updateEventContainer(eventContainer, orgUnit),
-                    updateEnrollmentEvents(eventId, serverData),
+                    updateEnrollmentEvents(eventId, serverData.events[0]),
                     startSaveEditEventDataEntry(eventId, serverData, state.currentSelections, enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }
