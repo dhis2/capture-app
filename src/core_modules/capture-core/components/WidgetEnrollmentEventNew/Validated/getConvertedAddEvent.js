@@ -34,7 +34,7 @@ export const getAddEventEnrollmentServerData = ({
         mainDataServerValues.status = completed ? 'COMPLETED' : 'ACTIVE';
     }
     if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+        mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
     }
 
     return {

@@ -94,7 +94,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
             const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
-            if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedDate) {
+            if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedAt) {
                 mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
             }
 

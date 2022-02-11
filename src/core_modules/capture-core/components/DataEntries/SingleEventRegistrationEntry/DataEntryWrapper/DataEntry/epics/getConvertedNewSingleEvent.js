@@ -26,7 +26,7 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
     if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+        mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
     }
 
     return {
@@ -62,7 +62,7 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
         mainDataServerValues.status = completed ? 'ACTIVE' : 'COMPLETED';
     }
     if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+        mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
     }
 
     return {
