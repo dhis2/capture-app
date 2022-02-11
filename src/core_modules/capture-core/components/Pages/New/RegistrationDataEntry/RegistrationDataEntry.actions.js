@@ -14,8 +14,8 @@ export const registrationFormActionTypes = {
 };
 
 // without enrollment
-export const startSavingNewTrackedEntityInstance = () =>
-    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START)();
+export const startSavingNewTrackedEntityInstance = formFoundation =>
+    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START)({ formFoundation });
 
 export const saveNewTrackedEntityInstance = candidateForRegistration =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE)(
@@ -39,8 +39,8 @@ export const saveNewTrackedEntityInstance = candidateForRegistration =>
     );
 
 // with enrollment
-export const startSavingNewTrackedEntityInstanceWithEnrollment = () =>
-    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START)();
+export const startSavingNewTrackedEntityInstanceWithEnrollment = formFoundation =>
+    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START)({ formFoundation });
 
 export const saveNewTrackedEntityInstanceWithEnrollment = candidateForRegistration =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE)({ ...candidateForRegistration },
