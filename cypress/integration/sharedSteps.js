@@ -140,3 +140,7 @@ Then(/^the user ?(.*) see the following text: (.*)$/, (not, message) =>
 And('you navigated to the enrollment dashboard page', () => {
     cy.url().should('include', 'enrollment?enrollmentId');
 });
+
+And('you are navigated to the enrollment page without enrollment', () => {
+    cy.url().should('include', 'enrollment?orgUnitId');
+});
