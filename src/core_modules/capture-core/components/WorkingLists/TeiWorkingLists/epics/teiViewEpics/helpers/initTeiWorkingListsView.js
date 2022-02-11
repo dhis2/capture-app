@@ -9,30 +9,9 @@ import {
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
-import { convertEnrollmentDateToClient, convertDataElementFilters } from '../../../helpers/TEIFilters/apiTEIFilterToClientConfigConverter';
+import { convertToClientConfig, convertSortOrder } from '../../../helpers/TEIFilters/apiTEIFilterToClientConfigConverter';
 
-const getClientFilters = (criteria = {}, columnsMetaForDataFetching) => {
-    const { programStatus, enrollmentDate, attributeValueFilters } = criteria;
-    let filters = {};
-
-    if (programStatus) {
-        filters = { ...filters,
-            programStatus: {
-                usingOptionSet: true,
-                values: [programStatus],
-            },
-        };
-    }
-    if (enrollmentDate) {
-        filters = { ...filters, enrollmentDate: convertEnrollmentDateToClient(enrollmentDate) };
-    }
-    if (attributeValueFilters?.length > 0) {
-        filters = { ...filters, ...convertDataElementFilters(attributeValueFilters, columnsMetaForDataFetching) };
-    }
-    return filters;
-};
-
-export const initTeiWorkingListsView = ({
+export const initTeiWorkingListsViewAsync = async ({
     programId,
     orgUnitId,
     storeId,
@@ -42,11 +21,11 @@ export const initTeiWorkingListsView = ({
     querySingleResource,
     absoluteApiPath,
 }: Input) => {
-    const sortById = 'regDate';
-    const sortByDirection = 'desc';
+    const { sortById, sortByDirection } = convertSortOrder(selectedTemplate?.criteria?.order);
+    const customColumnOrder = selectedTemplate?.criteria?.displayColumnOrder?.map(order => ({ id: order, visible: true }));
     const pageSize = 15;
     const page = 1;
-    const filters = getClientFilters(selectedTemplate.criteria, columnsMetaForDataFetching);
+    const filters = await convertToClientConfig(selectedTemplate.criteria, columnsMetaForDataFetching, querySingleResource);
     const apiFilters = buildFilterQueryArgs(filters, { columns: columnsMetaForDataFetching, filtersOnly: filtersOnlyMetaForDataFetching, storeId, isInit: true });
     return getTeiListData({ programId, orgUnitId, pageSize, page, sortById, sortByDirection, filters: apiFilters }, {
         columnsMetaForDataFetching,
@@ -69,6 +48,7 @@ export const initTeiWorkingListsView = ({
                         programId,
                         orgUnitId,
                     },
+                    customColumnOrder,
                 },
             }),
         ).catch((error) => {
