@@ -478,7 +478,7 @@ msgid "Description"
 msgstr "Tavsif"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "Icon for {{field}}"
 msgstr ""
@@ -636,7 +636,7 @@ msgid "Schedule an event"
 msgstr ""
 
 msgid "Make referral"
-msgstr ""
+msgstr "Yoʼnalish yarating"
 
 msgid "No available program stages"
 msgstr ""
@@ -1140,7 +1140,7 @@ msgid "Person Profile"
 msgstr ""
 
 msgid "Edit"
-msgstr ""
+msgstr "Tahrirlash"
 
 msgid "New {{ eventName }} event"
 msgstr ""

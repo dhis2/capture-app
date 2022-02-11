@@ -1,20 +1,20 @@
 # 
 # Translators:
 # Farida Sibuea <farida_sibuea@yahoo.com>, 2021
-# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
 # phil_dhis2, 2021
 # Carwoto Sa'an <carwoto@gmail.com>, 2021
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022
+# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-02-09T13:29:42.807Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -480,7 +480,7 @@ msgid "Description"
 msgstr "Deskripsi"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "Icon for {{field}}"
 msgstr "Ikon untuk {{field}}"
@@ -1152,7 +1152,7 @@ msgid "Person Profile"
 msgstr "Profil Orang"
 
 msgid "Edit"
-msgstr ""
+msgstr "Sunting"
 
 msgid "New {{ eventName }} event"
 msgstr ""

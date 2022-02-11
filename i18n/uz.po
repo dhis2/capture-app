@@ -472,10 +472,10 @@ msgid "No results"
 msgstr "Натижа йўқ"
 
 msgid "Description"
-msgstr ""
+msgstr "Тавсиф"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "Icon for {{field}}"
 msgstr "Белгиси {{field}}"
@@ -635,7 +635,7 @@ msgid "Schedule an event"
 msgstr ""
 
 msgid "Make referral"
-msgstr ""
+msgstr "Йўналиш яратинг"
 
 msgid "No available program stages"
 msgstr ""
@@ -1098,7 +1098,7 @@ msgid_plural "This date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 
 msgid "after"
-msgstr ""
+msgstr "кейин"
 
 msgid "before"
 msgstr "олдин"
@@ -1131,7 +1131,7 @@ msgid ""
 msgstr ""
 
 msgid "Save changes"
-msgstr ""
+msgstr "Ўзгартиришни сақлаш"
 
 msgid "Profile"
 msgstr "Профил"
@@ -1150,7 +1150,7 @@ msgid "Person Profile"
 msgstr "Шахс профили"
 
 msgid "Edit"
-msgstr ""
+msgstr "Таҳрирлаш"
 
 msgid "New {{ eventName }} event"
 msgstr ""
