@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
+import uuid from 'uuid/v4';
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -11,6 +12,7 @@ import { WorkingListsBase } from '../../WorkingListsBase';
 import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
+import { convertToTEIFilterMainFilters, convertToTEIFilterAttributes } from '../helpers/TEIFilters/clientConfigToApiTEIFilterQueryConverter';
 import { MAIN_FILTERS } from '../constants';
 
 const DEFAULT_TEMPLATES_LENGTH = 1;
@@ -180,6 +182,9 @@ export const TeiWorkingListsSetup = ({
     sortById,
     sortByDirection,
     orgUnitId,
+    onAddTemplate,
+    onUpdateTemplate,
+    onDeleteTemplate,
     ...passOnProps
 }: Props) => {
     const defaultColumns = useDefaultColumnConfig(program, orgUnitId);
@@ -198,12 +203,62 @@ export const TeiWorkingListsSetup = ({
         sortByDirection,
     });
 
+    const injectArgumentsForAddTemplate = useCallback(
+        (name) => {
+            const mainFilters = convertToTEIFilterMainFilters({ filters, mainFilters: filtersOnly });
+            const attributeValueFilters = convertToTEIFilterAttributes({ filters, attributeValueFilters: columns });
+            const visibleColumnIds = columns && columns.filter(({ visible }) => visible).map(({ id }) => id);
+            const criteria = { ...mainFilters,
+                attributeValueFilters,
+                order: `${sortById}:${sortByDirection}`,
+                displayOrderColumns: visibleColumnIds };
+            const data = {
+                program: { id: program.id },
+                clientId: uuid(),
+                sortById,
+                sortByDirection,
+                filters,
+                visibleColumnIds,
+            };
+            onAddTemplate(name, criteria, data);
+        },
+        [onAddTemplate, filters, filtersOnly, columns, sortById, sortByDirection, program.id],
+    );
+
+    const injectArgumentsForUpdateTemplate = useCallback(
+        (template) => {
+            const mainFilters = convertToTEIFilterMainFilters({ filters, mainFilters: filtersOnly });
+            const attributeValueFilters = convertToTEIFilterAttributes({ filters, attributeValueFilters: columns });
+            const visibleColumnIds = columns && columns.filter(({ visible }) => visible).map(({ id }) => id);
+            const criteria = { ...mainFilters,
+                attributeValueFilters,
+                order: `${sortById}:${sortByDirection}`,
+                displayOrderColumns: visibleColumnIds,
+            };
+            const data = {
+                program: { id: program.id },
+                clientId: uuid(),
+                sortById,
+                sortByDirection,
+                filters,
+                visibleColumnIds,
+            };
+            onUpdateTemplate(template, criteria, data);
+        },
+        [onUpdateTemplate, filters, filtersOnly, columns, sortById, sortByDirection, program.id],
+    );
+
+    const injectArgumentsForDeleteTemplate = useCallback(template => onDeleteTemplate(template, program.id), [onDeleteTemplate, program.id]);
+
     return (
         <WorkingListsBase
             {...passOnProps}
             currentTemplate={useCurrentTemplate(templates, currentTemplateId)}
             templates={templates}
             columns={columns}
+            onAddTemplate={injectArgumentsForAddTemplate}
+            onUpdateTemplate={injectArgumentsForUpdateTemplate}
+            onDeleteTemplate={injectArgumentsForDeleteTemplate}
             filtersOnly={filtersOnly}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectDataFetchingMetaToLoadList(defaultColumns, filtersOnly, onLoadView)}
