@@ -10,7 +10,7 @@ import {
     saveNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
-import { getTrackerProgramThrowIfNotFound, scopeTypes } from '../../../../metaData';
+import { getTrackerProgramThrowIfNotFound, scopeTypes, dataElementTypes } from '../../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
