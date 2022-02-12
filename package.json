@@ -117,7 +117,7 @@
     "jsdoc-babel": "^0.5.0",
     "jsdoc-export-default-interop": "^0.3.1",
     "redux-devtools-extension": "^2.13.9",
-    "wait-on": "^6.0.0"
+    "wait-on": "^6.0.1"
   },
   "peerDependencies": {
     "capture-core": "1",
