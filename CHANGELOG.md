@@ -1,3 +1,31 @@
+## [1.66.10](https://github.com/dhis2/capture-app/compare/v1.66.9...v1.66.10) (2022-02-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([003b893](https://github.com/dhis2/capture-app/commit/003b893537d65b1419c9d8fdf7d6f7a4d85b94a6))
+
+## [1.66.9](https://github.com/dhis2/capture-app/compare/v1.66.8...v1.66.9) (2022-02-10)
+
+
+### Bug Fixes
+
+* [TECH-929] i18n plural and padding ([#2504](https://github.com/dhis2/capture-app/issues/2504)) ([a23bd15](https://github.com/dhis2/capture-app/commit/a23bd15d1cc6f001a647e18f0db8f4f56c7df46f))
+
+## [1.66.8](https://github.com/dhis2/capture-app/compare/v1.66.7...v1.66.8) (2022-02-10)
+
+
+### Bug Fixes
+
+* [DHIS2-12558] Fix random errors in production builds ([b82f23b](https://github.com/dhis2/capture-app/commit/b82f23bda4a9b39aaa9f7fce4dddc66a0c0e5cf0))
+
+## [1.66.7](https://github.com/dhis2/capture-app/compare/v1.66.6...v1.66.7) (2022-02-08)
+
+
+### Bug Fixes
+
+* [DHIS2-12472] List all messages related to field ([e8c60da](https://github.com/dhis2/capture-app/commit/e8c60daa2088b3d9512f2111ff558f8865b863a6))
+
 ## [1.66.6](https://github.com/dhis2/capture-app/compare/v1.66.5...v1.66.6) (2022-02-02)
 
 

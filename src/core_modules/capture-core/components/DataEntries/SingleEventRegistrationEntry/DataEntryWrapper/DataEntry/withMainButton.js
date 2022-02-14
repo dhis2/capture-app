@@ -8,7 +8,6 @@ import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { type RenderFoundation } from '../../../../../metaData';
 import { SimpleSplitButton, Button } from '../../../../Buttons';
 import { getDataEntryHasChanges } from '../../getNewEventDataEntryHasChanges';
-import { getLocationPathname } from '../../../../../utils/url';
 
 type Props = {
     onSave: (saveType: $Values<typeof newEventSaveTypes>) => void,
@@ -114,24 +113,11 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 </div>);
         }
 
-        renderCompleteButton = () => {
-            const { text, ...buttonProps } = this.getButtonDefinition(buttonTypes.SAVEANDCOMPLETE);
-            return (
-                <Button
-                    {...buttonProps}
-                    primary
-                >
-                    {text}
-                </Button>
-            );
-        }
-
         render() {
             const {
                 saveTypes,
                 dataEntryHasChanges,
                 hasRecentlyAddedEvents,
-                isCreateNew,
                 formHorizontal,
                 onSave,
                 finalInProgress,
@@ -141,18 +127,15 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             const buttons = formHorizontal ?
                 this.getFormHorizontalButtons(dataEntryHasChanges, hasRecentlyAddedEvents) :
                 this.getFormVerticalButtons(dataEntryHasChanges, hasRecentlyAddedEvents, saveTypes);
+
             // $FlowFixMe[extra-arg] automated comment
-            const mainButton = isCreateNew ?
-                this.renderCreateNewButton() :
-                this.renderMultiButton(buttons, hasWriteAccess);
-            const completeButton = isCreateNew ? this.renderCompleteButton() : null;
+            const mainButton = this.renderMultiButton(buttons, hasWriteAccess);
             return (
                 // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     // $FlowFixMe[prop-missing] automated comment
                     ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     mainButton={mainButton}
-                    completeButton={completeButton}
                     formHorizontal={formHorizontal}
                     {...passOnProps}
                 />
@@ -165,13 +148,11 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     const key = getDataEntryKey(props.id, itemId);
     const dataEntryHasChanges = getDataEntryHasChanges(state);
     const hasRecentlyAddedEvents = state.recentlyAddedEvents && Object.keys(state.recentlyAddedEvents).length > 0;
-    const isCreateNew = getLocationPathname() === '/enrollmentEventNew';
     return {
         saveTypes: state.newEventPage.saveTypes,
         finalInProgress: state.dataEntriesUI[key] && state.dataEntriesUI[key].finalInProgress,
         dataEntryHasChanges,
         hasRecentlyAddedEvents,
-        isCreateNew,
     };
 };
 
