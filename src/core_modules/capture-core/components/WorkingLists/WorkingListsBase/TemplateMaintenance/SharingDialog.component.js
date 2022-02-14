@@ -37,7 +37,7 @@ const SharingDialogPlain = ({ onClose, open, templateId, classes, storeId }: Pro
             open={open}
             id={templateId}
             onRequestClose={handleClose}
-            type={SHARING_DIALOG_TYPE[storeId] || ''}
+            type={SHARING_DIALOG_TYPE[storeId]}
             d2={getD2()}
             className={classes.dialog}
         />
