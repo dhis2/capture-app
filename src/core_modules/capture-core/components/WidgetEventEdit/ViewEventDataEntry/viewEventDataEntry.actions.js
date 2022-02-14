@@ -57,6 +57,10 @@ export const loadViewEventDataEntry =
                 type: 'DATE',
             },
             {
+                id: 'scheduledAt',
+                type: 'DATE',
+            },
+            {
                 clientId: 'geometry',
                 dataEntryId: 'geometry',
                 onConvertIn: getConvertGeometryIn(foundation),

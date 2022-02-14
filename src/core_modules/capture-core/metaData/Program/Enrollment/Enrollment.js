@@ -21,7 +21,7 @@ export class Enrollment {
 
     constructor(initFn: ?(_this: Enrollment) => void) {
         this._labels = {
-            [labelKeys.OCCURED_AT]: defaultLabelValues.OCCURED_AT,
+            [labelKeys.OCCURRED_AT]: defaultLabelValues.OCCURRED_AT,
             [labelKeys.ENROLLED_AT]: defaultLabelValues.ENROLLED_AT,
         };
 
@@ -42,10 +42,10 @@ export class Enrollment {
     }
 
     set incidentDateLabel(label: string) {
-        this._labels[labelKeys.OCCURED_AT] = label;
+        this._labels[labelKeys.OCCURRED_AT] = label;
     }
     get incidentDateLabel(): string {
-        return this._labels[labelKeys.OCCURED_AT];
+        return this._labels[labelKeys.OCCURRED_AT];
     }
 
     set enrollmentDateLabel(label: string) {
