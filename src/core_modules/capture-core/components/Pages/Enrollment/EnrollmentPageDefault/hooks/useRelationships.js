@@ -9,7 +9,7 @@ import { userStores } from '../../../../../storageControllers/stores';
 import type {
     InputRelationship, RelationshipData,
 } from '../../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
-import { getDisplayFieldsFromAPI, getBaseConfigHeaders } from './constants';
+import { getDisplayFieldsFromAPI, getBaseConfigHeaders, relationshipWidgetTypes } from './constants';
 
 /* eslint-disable complexity */
 const getRelationshipAttributes = (
@@ -56,7 +56,7 @@ const getRelationshipAttributes = (
             relationshipProgram: toConstraint.program,
             attributes,
             displayFields,
-            isTeiRelationship: true,
+            widgetType: relationshipWidgetTypes.TET_RELATIONSHIP,
         };
     } else if (bidirectional && from?.trackedEntityInstance &&
         from?.trackedEntityInstance?.trackedEntityInstance !== teiId) {
@@ -71,7 +71,7 @@ const getRelationshipAttributes = (
             relationshipProgram: fromConstraint.program,
             attributes,
             displayFields,
-            isTeiRelationship: true,
+            widgetType: relationshipWidgetTypes.TET_RELATIONSHIP,
         };
     } else if (bidirectional && from?.event) {
         const displayFields = getDisplayFields(fromConstraint.relationshipEntity);
@@ -93,7 +93,7 @@ const getRelationshipAttributes = (
             relationshipProgram: fromConstraint.program,
             attributes,
             displayFields,
-            isTeiRelationship: true,
+            widgetType: relationshipWidgetTypes.EVENT_RELATIONSHIP,
         };
     } else if (from.enrollment && from.enrollment.enrollment) {
         const displayFields = getDisplayFields(fromConstraint.relationshipEntity);
@@ -106,6 +106,7 @@ const getRelationshipAttributes = (
             isTeiRelationship: false,
             attributes,
             displayFields,
+            widgetType: relationshipWidgetTypes.ENROLLMENT_RELATIONSHIP,
         };
     }
 
@@ -152,18 +153,27 @@ export const useRelationships = (teiId: string, relationships?: Array<InputRelat
         computeData();
     }, [computeData]);
 
-    const { teiRelationships, enrollmentRelationships } = relationshipsByType
-        .reduce((acc, { isTeiRelationship, ...currentRel }) => {
-            if (isTeiRelationship) {
+    const { teiRelationships, enrollmentRelationships, eventRelationships } = relationshipsByType
+        .reduce((acc, { widgetType, ...currentRel }) => {
+            switch (widgetType) {
+            case relationshipWidgetTypes.TET_RELATIONSHIP:
                 acc.teiRelationships.push(currentRel);
-            } else {
+                break;
+            case relationshipWidgetTypes.ENROLLMENT_RELATIONSHIP:
                 acc.enrollmentRelationships.push(currentRel);
+                break;
+            case relationshipWidgetTypes.EVENT_RELATIONSHIP:
+                acc.eventRelationships.push(currentRel);
+                break;
+            default:
+                break;
             }
             return acc;
-        }, { teiRelationships: [], enrollmentRelationships: [] });
+        }, { teiRelationships: [], enrollmentRelationships: [], eventRelationships: [] });
 
     return {
         teiRelationships,
         enrollmentRelationships,
+        eventRelationships,
     };
 };

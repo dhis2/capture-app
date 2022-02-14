@@ -8,6 +8,11 @@ export const relationshipEntities = Object.freeze({
     PROGRAM_INSTANCE: 'PROGRAM_INSTANCE',
 });
 
+export const relationshipWidgetTypes = Object.freeze({
+    TET_RELATIONSHIP: 'TET_RELATIONSHIP',
+    ENROLLMENT_RELATIONSHIP: 'ENROLLMENT_RELATIONSHIP',
+    EVENT_RELATIONSHIP: 'EVENT_RELATIONSHIP',
+});
 
 // this will change after https://jira.dhis2.org/browse/DHIS2-12249 is done
 export const getDisplayFieldsFromAPI = {
