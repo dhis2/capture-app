@@ -88,20 +88,11 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
             return Object.keys(effects).reduce((accMessagesByIdInCurrentEffects, key) => {
                 accMessagesByIdInCurrentEffects[key] = accMessagesByIdInCurrentEffects[key] || {};
 
-                if (effects[key]?.length > 1) {
-                    const effectsByKey = effects[key];
-                    // $FlowFixMe[prop-missing] automated comment
-                    const typeKey = mapMessageEffectTypeToStateKey[effectsByKey[0].type];
-                    // $FlowFixMe[prop-missing] automated comment
-                    accMessagesByIdInCurrentEffects[key][typeKey] = effectsByKey.map(effect => effect.message);
-                    return accMessagesByIdInCurrentEffects;
-                }
-
-                const effect = effects[key][0];
+                const effectsByKey = effects[key];
                 // $FlowFixMe[prop-missing] automated comment
-                const typeKey = mapMessageEffectTypeToStateKey[effect.type];
+                const typeKey = mapMessageEffectTypeToStateKey[effectsByKey[0].type];
                 // $FlowFixMe[prop-missing] automated comment
-                accMessagesByIdInCurrentEffects[key][typeKey] = effect.message;
+                accMessagesByIdInCurrentEffects[key][typeKey] = effectsByKey.map(effect => effect.message);
                 return accMessagesByIdInCurrentEffects;
             }, accMessagesById);
         }, {});
