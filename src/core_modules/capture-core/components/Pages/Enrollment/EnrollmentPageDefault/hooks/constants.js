@@ -5,6 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 export const relationshipEntities = Object.freeze({
     TRACKED_ENTITY_INSTANCE: 'TRACKED_ENTITY_INSTANCE',
     PROGRAM_STAGE_INSTANCE: 'PROGRAM_STAGE_INSTANCE',
+    PROGRAM_INSTANCE: 'PROGRAM_INSTANCE',
 });
 
 
@@ -26,6 +27,13 @@ export const getDisplayFieldsFromAPI = {
         },
         { id: 'status', label: 'Status' },
     ],
+    [relationshipEntities.PROGRAM_INSTANCE]: [
+        { id: 'orgUnitName', label: 'Organisation unit' },
+        { id: 'enrollmentDate',
+            label: 'Enrollment date',
+            convertValue: props => moment(props.enrollmentDate).format('YYYY-MM-DD'),
+        },
+    ],
 };
 
 export const getBaseConfigHeaders = {
@@ -44,6 +52,11 @@ export const getBaseConfigHeaders = {
         convertValue: props => props.programStageName,
     },
     {
+        id: 'createdDate',
+        label: i18n.t('Created date'),
+        convertValue: props => moment(props.created).format('YYYY-MM-DD'),
+    }],
+    [relationshipEntities.PROGRAM_INSTANCE]: [{
         id: 'createdDate',
         label: i18n.t('Created date'),
         convertValue: props => moment(props.created).format('YYYY-MM-DD'),

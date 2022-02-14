@@ -55,20 +55,24 @@ export type TEIAttribute = {|
     valueType: string,
 |}
 
-export type TEIData = {|
+export type TEIRelationshipData = {|
     trackedEntityInstance: {
         trackedEntityInstance: string,
         attributes: Array<TEIAttribute>
     }
 |}
 
-export type EventData = {|
+export type EventRelationshipData = {|
     event: Event
 |}
 
-export type RelationshipData = TEIData | EventData
+export type EnrollmentRelationshipData = {|
+    enrollment: EnrollmentData
+|}
 
-export type TEIRelationship = {|
+export type RelationshipData = TEIRelationshipData | EventRelationshipData | EnrollmentRelationshipData
+
+export type InputRelationship = {|
     relationshipType: string,
     relationshipName: string,
     relationship: string,
@@ -87,5 +91,5 @@ export type Output = {|
     error?: any,
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
-    relationships?: Array<TEIRelationship>
+    relationships?: Array<InputRelationship>
 |};

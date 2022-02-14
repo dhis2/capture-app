@@ -7,10 +7,11 @@ import { getProgramAndStageFromEvent, getTrackedEntityTypeThrowIfNotFound }
     from '../../../../../metaData';
 import { userStores } from '../../../../../storageControllers/stores';
 import type {
-    TEIRelationship, RelationshipData,
+    InputRelationship, RelationshipData,
 } from '../../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { getDisplayFieldsFromAPI, getBaseConfigHeaders } from './constants';
 
+/* eslint-disable complexity */
 const getRelationshipAttributes = (
     relationshipType: Object,
     teiId: string,
@@ -55,6 +56,7 @@ const getRelationshipAttributes = (
             relationshipProgram: toConstraint.program,
             attributes,
             displayFields,
+            isTeiRelationship: true,
         };
     } else if (bidirectional && from?.trackedEntityInstance &&
         from?.trackedEntityInstance?.trackedEntityInstance !== teiId) {
@@ -69,6 +71,7 @@ const getRelationshipAttributes = (
             relationshipProgram: fromConstraint.program,
             attributes,
             displayFields,
+            isTeiRelationship: true,
         };
     } else if (bidirectional && from?.event) {
         const displayFields = getDisplayFields(fromConstraint.relationshipEntity);
@@ -90,6 +93,19 @@ const getRelationshipAttributes = (
             relationshipProgram: fromConstraint.program,
             attributes,
             displayFields,
+            isTeiRelationship: true,
+        };
+    } else if (from.enrollment && from.enrollment.enrollment) {
+        const displayFields = getDisplayFields(fromConstraint.relationshipEntity);
+        const attributes = getAttributes(from.enrollment, displayFields,
+            { ...from.enrollment });
+
+        return {
+            id: from.enrollment.enrollment,
+            relationshipName: toFromName,
+            isTeiRelationship: false,
+            attributes,
+            displayFields,
         };
     }
 
@@ -97,23 +113,25 @@ const getRelationshipAttributes = (
 };
 
 
-export const useComputeTEIRelationships = (teiId: string, relationships?: Array<TEIRelationship>) => {
+export const useRelationships = (teiId: string, relationships?: Array<InputRelationship>) => {
     const [relationshipsByType, setRelationshipByType] = useState([]);
 
     const computeData = useCallback(async () => {
         const groupped = [];
+
         if (!relationships) { return; }
         // $FlowFixMe
         for await (const relationship of relationships) {
             const { relationshipType: typeId, from, to } = relationship;
+            const relationshipType = await getCachedSingleResourceFromKeyAsync(
+                userStores.RELATIONSHIP_TYPES, typeId,
+            ).then(result => result.response);
 
-            const typeExist = groupped.find(item => item.id === typeId);
-            const relationshipType = await getCachedSingleResourceFromKeyAsync(userStores.RELATIONSHIP_TYPES, typeId)
-                .then(result => result.response);
-
-            const { relationshipName, displayFields, id, attributes } = getRelationshipAttributes(
+            const { relationshipName, displayFields, id, attributes, isTeiRelationship } = getRelationshipAttributes(
                 relationshipType, teiId, from, to, { relationship },
             );
+            const typeExist = groupped.find(item => item.id === typeId);
+
             if (typeExist) {
                 typeExist.relationshipAttributes.push({ id, attributes });
             } else {
@@ -122,6 +140,7 @@ export const useComputeTEIRelationships = (teiId: string, relationships?: Array<
                     relationshipName,
                     relationshipAttributes: [{ id, attributes }],
                     headers: displayFields,
+                    isTeiRelationship,
                 });
             }
         }
@@ -133,5 +152,18 @@ export const useComputeTEIRelationships = (teiId: string, relationships?: Array<
         computeData();
     }, [computeData]);
 
-    return { relationshipsByType };
+    const { teiRelationships, enrollmentRelationships } = relationshipsByType
+        .reduce((acc, { isTeiRelationship, ...currentRel }) => {
+            if (isTeiRelationship) {
+                acc.teiRelationships.push(currentRel);
+            } else {
+                acc.enrollmentRelationships.push(currentRel);
+            }
+            return acc;
+        }, { teiRelationships: [], enrollmentRelationships: [] });
+
+    return {
+        teiRelationships,
+        enrollmentRelationships,
+    };
 };

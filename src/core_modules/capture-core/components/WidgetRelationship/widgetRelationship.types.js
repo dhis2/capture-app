@@ -2,10 +2,7 @@
 import type { OutputRelationship } from '../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
 export type Props = {|
-    relationships: {
-        relationshipsByType?: ?Array<OutputRelationship>,
-        count: ?number,
-    },
+    relationships: Array<OutputRelationship>,
     title: string,
     onAddRelationship: () => void,
     ...CssClasses,

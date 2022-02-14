@@ -10,10 +10,8 @@ export type Props = {|
     teiId: string,
     events: ?Array<Event>,
     stages?: Array<Stage>,
-    relationships: ?{
-        relationshipsByType?: ?Array<OutputRelationship>,
-        count?: ?number,
-    },
+    teiRelationships: Array<OutputRelationship>,
+    enrollmentRelationships: Array<OutputRelationship>,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
     orgUnitId: string,

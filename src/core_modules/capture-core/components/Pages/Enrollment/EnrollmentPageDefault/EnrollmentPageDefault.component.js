@@ -49,7 +49,7 @@ export const EnrollmentPageDefaultPlain = ({
     orgUnitId,
     events,
     enrollmentId,
-    relationships,
+    teiRelationships,
     stages,
     onDelete,
     onViewAll,
@@ -81,7 +81,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetWarning warning={widgetEffects?.warnings} />
                 <WidgetRelationship
                     title={i18n.t("TEI's Relationships")}
-                    relationships={relationships}
+                    relationships={teiRelationships}
                     onAddRelationship={() => {}}
                 />
                 {!hideWidgets.indicator && (

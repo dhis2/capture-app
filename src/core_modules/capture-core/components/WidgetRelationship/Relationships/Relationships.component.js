@@ -6,7 +6,7 @@ import { spacersNum, spacers, colors, Button } from '@dhis2/ui';
 import { RelationshipTable } from './RelationshipTable';
 
 type Props = {
-    relationshipsByType: Object,
+    relationships: Object,
     headersByType: Object,
     onAddRelationship: void,
     ...CssClasses,
@@ -27,13 +27,13 @@ const styles = {
         overflow: 'scroll',
     },
 };
-const RelationshipsPlain = ({ relationshipsByType, classes, onAddRelationship }: Props) => (
+const RelationshipsPlain = ({ relationships, classes, onAddRelationship }: Props) => (
     <div
         data-test="relationships"
         className={classes.container}
     >
         {
-            relationshipsByType ? relationshipsByType.map((relationship) => {
+            relationships ? relationships.map((relationship) => {
                 const { relationshipName, id, ...passOnProps } = relationship;
                 return (<div key={id} className={classes.wrapper}>
                     <div className={classes.title} >{relationshipName}</div>

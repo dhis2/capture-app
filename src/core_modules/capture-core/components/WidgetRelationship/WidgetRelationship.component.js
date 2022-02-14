@@ -7,7 +7,7 @@ import { Relationships } from './Relationships/';
 
 export const WidgetRelationship = ({ relationships, title, onAddRelationship }: Props) => {
     const [open, setOpenStatus] = useState(true);
-
+    const count = relationships.reduce((acc, curr) => { acc += curr.relationshipAttributes.length; return acc; }, 0);
     return (
         <div
             data-test="relationship-widget"
@@ -16,7 +16,7 @@ export const WidgetRelationship = ({ relationships, title, onAddRelationship }: 
                 header={<div>
                     <span>{title}</span>
                     {relationships && <Chip dense>
-                        {relationships.count}
+                        {count}
                     </Chip>
                     }
                 </div>
@@ -25,7 +25,7 @@ export const WidgetRelationship = ({ relationships, title, onAddRelationship }: 
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                <Relationships {...relationships} onAddRelationship={onAddRelationship} />
+                <Relationships relationships={relationships} onAddRelationship={onAddRelationship} />
             </Widget>
         </div>
     );
