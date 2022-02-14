@@ -103,7 +103,6 @@ const getRelationshipAttributes = (
         return {
             id: from.enrollment.enrollment,
             relationshipName: toFromName,
-            isTeiRelationship: false,
             attributes,
             displayFields,
             widgetType: relationshipWidgetTypes.ENROLLMENT_RELATIONSHIP,
@@ -128,7 +127,7 @@ export const useRelationships = (teiId: string, relationships?: Array<InputRelat
                 userStores.RELATIONSHIP_TYPES, typeId,
             ).then(result => result.response);
 
-            const { relationshipName, displayFields, id, attributes, isTeiRelationship } = getRelationshipAttributes(
+            const { relationshipName, displayFields, id, attributes, widgetType } = getRelationshipAttributes(
                 relationshipType, teiId, from, to, { relationship },
             );
             const typeExist = groupped.find(item => item.id === typeId);
@@ -141,7 +140,7 @@ export const useRelationships = (teiId: string, relationships?: Array<InputRelat
                     relationshipName,
                     relationshipAttributes: [{ id, attributes }],
                     headers: displayFields,
-                    isTeiRelationship,
+                    widgetType,
                 });
             }
         }
