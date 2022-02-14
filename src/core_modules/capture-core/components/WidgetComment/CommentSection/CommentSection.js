@@ -21,12 +21,10 @@ type Props = {
 
 const styles = {
     item: {
-        '&:not(:first-child)': {
-            marginTop: spacersNum.dp16,
-        },
         '&:not(:last-child)': {
             marginBottom: spacersNum.dp16,
         },
+        marginTop: spacersNum.dp16,
         padding: '12px',
         background: '#F3F5F7',
         display: 'flex',
