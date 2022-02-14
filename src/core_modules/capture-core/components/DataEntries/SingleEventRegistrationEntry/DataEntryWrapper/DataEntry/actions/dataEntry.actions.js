@@ -92,7 +92,7 @@ export const startSaveTeiForNewEventRelationship = (teiPayload: Object, selectio
     actionCreator(actionTypes.START_SAVE_TEI_FOR_NEW_EVENT_RELATIONSHIPS)({ selections }, {
         offline: {
             effect: {
-                url: 'trackedEntityInstances',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: teiPayload,
             },
