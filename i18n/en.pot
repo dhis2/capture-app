@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-10T13:15:26.973Z\n"
-"PO-Revision-Date: 2022-02-10T13:15:26.973Z\n"
+"POT-Creation-Date: 2022-02-15T09:59:36.798Z\n"
+"PO-Revision-Date: 2022-02-15T09:59:36.798Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1174,9 +1174,6 @@ msgstr "Delete event"
 
 msgid "Download as JSON"
 msgstr "Download as JSON"
-
-msgid "XML is currently not supported"
-msgstr "XML is currently not supported"
 
 msgid "Download as XML"
 msgstr "Download as XML"

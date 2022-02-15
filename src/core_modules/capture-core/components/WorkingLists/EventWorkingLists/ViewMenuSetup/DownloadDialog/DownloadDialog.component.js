@@ -3,7 +3,7 @@
 import React, { PureComponent, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Tooltip } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { Button } from '@dhis2/ui';
 import { getApi } from '../../../../../d2/d2Instance';
 import type { Props } from './downloadDialog.types';
@@ -39,7 +39,7 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
 
     static getUrl() {
         const baseUrl = getApi().baseUrl;
-        return `${baseUrl}/tracker/events`;
+        return `${baseUrl}/events/query`;
     }
 
     renderButtons() {
@@ -74,22 +74,13 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
                 >
                     <a
                         download="events.xml"
-                        // href={`${url}.xml?${searchParamsString}`}
+                        href={`${url}.xml?${searchParamsString}`}
                         className={classes.downloadLink}
                     >
-                        <Tooltip
-                            title={i18n.t('XML is currently not supported')}
-                        >
-                            <div>
-                                <Button
-                                    disabled
-                                >
-                                    {i18n.t('Download as XML')}
-                                </Button>
-                            </div>
-                        </Tooltip>
+                        <Button>
+                            {i18n.t('Download as XML')}
+                        </Button>
                     </a>
-
                 </div>
                 <div>
                     <a
