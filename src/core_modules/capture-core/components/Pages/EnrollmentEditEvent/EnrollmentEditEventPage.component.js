@@ -28,6 +28,7 @@ import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLock
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { TopBarActions } from '../../TopBarActions';
 import { WidgetEventComment } from '../../WidgetEventComment';
+import { WidgetRelationship } from '../../WidgetRelationship';
 
 const styles = ({ typography }) => ({
     page: {
@@ -62,6 +63,7 @@ const EnrollmentEditEventPagePain = ({
     teiId,
     enrollmentId,
     programId,
+    teiRelationships,
     enrollmentsAsOptions,
     trackedEntityName,
     teiDisplayName,
@@ -183,6 +185,11 @@ const EnrollmentEditEventPagePain = ({
                         <WidgetEventComment itemId={mode} dataEntryId="singleEvent" />
                         <WidgetError error={widgetEffects.errors} />
                         <WidgetWarning warning={widgetEffects.warnings} />
+                        <WidgetRelationship
+                            title={i18n.t("TEI's Relationships")}
+                            relationships={teiRelationships}
+                            onAddRelationship={() => {}}
+                        />
                         {!hideWidgets.feedback && (
                             <WidgetFeedback
                                 emptyText={i18n.t('There are no feedback for this event')}

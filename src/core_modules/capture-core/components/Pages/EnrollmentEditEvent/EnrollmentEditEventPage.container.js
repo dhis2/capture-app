@@ -9,7 +9,7 @@ import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
-import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
+import { useHideWidgetByRuleLocations, useRelationships } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
@@ -34,7 +34,7 @@ export const EnrollmentEditEventPage = () => {
         dispatch(deleteEnrollment({ enrollmentId }));
     };
     const onGoBack = () => history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
-    const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
+    const { enrollment: enrollmentSite, relationships } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     const { trackedEntityName } = getScopeInfo(enrollmentSite?.trackedEntityType);
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
@@ -48,6 +48,7 @@ export const EnrollmentEditEventPage = () => {
             ? (pageStatus = pageStatuses.DEFAULT)
             : (pageStatus = pageStatuses.MISSING_DATA);
     } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
+    const { teiRelationships } = useRelationships(teiId, relationships);
 
     return (
         <EnrollmentEditEventPageComponent
@@ -57,6 +58,7 @@ export const EnrollmentEditEventPage = () => {
             onGoBack={onGoBack}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
+            teiRelationships={teiRelationships}
             teiId={teiId}
             enrollmentId={enrollmentId}
             enrollmentsAsOptions={enrollmentsAsOptions}
