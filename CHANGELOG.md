@@ -1,3 +1,10 @@
+## [1.66.12](https://github.com/dhis2/capture-app/compare/v1.66.11...v1.66.12) (2022-02-16)
+
+
+### Bug Fixes
+
+* [DHIS2-12584] fix complete status ([#2522](https://github.com/dhis2/capture-app/issues/2522)) ([d89026c](https://github.com/dhis2/capture-app/commit/d89026ccb9b7162f0ac55fe6830576a34e064e9f))
+
 ## [1.66.11](https://github.com/dhis2/capture-app/compare/v1.66.10...v1.66.11) (2022-02-15)
 
 
