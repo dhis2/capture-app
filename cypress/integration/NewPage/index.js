@@ -371,7 +371,7 @@ And('you fill the form with age 0', () => {
 
 And('you see validation warning on birth date', () => {
     cy.get('[data-test="registration-page-content"]')
-        .contains('The womans age is outside the normal range. With the birthdate entered, the age would be: 0')
+        .contains('The womans age is outside the normal range. With the birthdate entered, the age would be:')
         .should('exist');
 });
 

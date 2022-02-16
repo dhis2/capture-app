@@ -57,7 +57,7 @@ export type ApiDataFilter = (
 export type ApiEventQueryCriteria = {|
     dataFilters?: ?Array<ApiDataFilter>,
     order?: ?string,
-    eventDate?: ?Object,
+    occurredAt?: ?Object,
     status?: ?string,
     displayColumnOrder?: ?Array<string>,
     assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',

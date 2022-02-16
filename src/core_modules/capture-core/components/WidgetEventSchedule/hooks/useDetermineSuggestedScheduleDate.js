@@ -46,15 +46,15 @@ type Props = {
     programConfig: {
         displayIncidentDate?: boolean
     },
-    enrollmentDate: string,
-    incidentDate: string,
+    enrolledAt: string,
+    occurredAt: string,
     eventData: Array<Object>
 }
 export const useDetermineSuggestedScheduleDate = ({
     programStageScheduleConfig,
     programConfig,
-    enrollmentDate,
-    incidentDate,
+    enrolledAt,
+    occurredAt,
     eventData,
 }: Props) => {
     if (!programStageScheduleConfig) { return undefined; }
@@ -71,9 +71,9 @@ export const useDetermineSuggestedScheduleDate = ({
         () => {
             let suggestedScheduleDate;
             if (generatedByEnrollmentDate || !programConfig.displayIncidentDate) {
-                suggestedScheduleDate = moment(enrollmentDate).add(minDaysFromStart, 'days').format();
+                suggestedScheduleDate = moment(enrolledAt).add(minDaysFromStart, 'days').format();
             } else {
-                suggestedScheduleDate = moment(incidentDate).add(minDaysFromStart, 'days').format();
+                suggestedScheduleDate = moment(occurredAt).add(minDaysFromStart, 'days').format();
             }
             return suggestedScheduleDate;
         },

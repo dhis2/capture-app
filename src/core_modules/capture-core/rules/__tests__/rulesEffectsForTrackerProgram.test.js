@@ -9,7 +9,7 @@ test('TEI rules engine effects with functions and effects', () => {
     const optionSets = {};
     const teiValues = {};
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
-    const enrollmentData = { enrollmentDate: '2020-05-14T22:00:00.000Z' };
+    const enrollmentData = { enrolledAt: '2020-05-14T22:00:00.000Z' };
 
     // when
     const rulesEffects = rulesEngine.getProgramRuleEffects({

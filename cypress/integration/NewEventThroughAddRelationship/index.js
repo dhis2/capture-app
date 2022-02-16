@@ -5,7 +5,7 @@ beforeEach(() => {
 });
 
 When('you add data to the form', () => {
-    cy.get('[data-test="dataentry-field-eventDate"]')
+    cy.get('[data-test="dataentry-field-occurredAt"]')
         .find('input')
         .type('2020-01-01')
         .blur();
@@ -19,17 +19,17 @@ When('you add data to the form', () => {
 
 When('you submit the form', () => {
     cy.server();
-    cy.route('POST', '**/events').as('postEvent');
+    cy.route('POST', '**/tracker?async=false').as('postData');
     cy.get('[data-test="dhis2-uicore-splitbutton-button"]')
         .click();
 });
 
 Then('the event should be sent to the server successfully', () => {
-    cy.wait('@postEvent', { timeout: 30000 })
+    cy.wait('@postData', { timeout: 30000 })
         .then((result) => {
             expect(result.status).to.equal(200);
             // clean up
-            const id = result.response.body.response.importSummaries[0].reference;
+            const id = result.response.body.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
             cy.buildApiUrl('events', id)
                 .then((eventUrl) => {
                     cy.request('DELETE', eventUrl);
@@ -53,7 +53,7 @@ When('you fill in the registration details', () => {
         .type('Female', { force: true })
         .wait(500)
         .type('{enter}', { force: true });
-    cy.get('[data-test="dataentry-field-incidentDate"]')
+    cy.get('[data-test="dataentry-field-occurredAt"]')
         .find('input')
         .type('2020-01-01')
         .blur();
@@ -68,36 +68,18 @@ When('you submit the registration form', () => {
 
 When('you submit the event form with the associated relationship to the newly created person', () => {
     cy.server();
-    cy.route('POST', '**/events').as('postEvent');
-    cy.route('POST', '**/trackedEntityInstances').as('postTrackedEntityInstance');
-    cy.route('POST', '**/relationships').as('postRelationship');
+    cy.route('POST', '**/tracker?async=false').as('postData');
     cy.get('[data-test="dhis2-uicore-splitbutton-button"]')
         .click();
 });
 
 Then('the data should be sent to the server successfully', () => {
-    cy.wait('@postTrackedEntityInstance', { timeout: 30000 }).should('have.property', 'status', 200);
-    cy.wait('@postEvent', { timeout: 20000 }).should('have.property', 'status', 200);
-    cy.wait('@postRelationship', { timeout: 20000 }).should('have.property', 'status', 200);
+    cy.wait('@postData', { timeout: 20000 }).should('have.property', 'status', 200);
 
-    // clean up
-    cy.get('@postRelationship').then((result) => {
-        const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildApiUrl('relationships', id)
-            .then((relationshipUrl) => {
-                cy.request('DELETE', relationshipUrl);
-            });
-    });
-    cy.get('@postTrackedEntityInstance').then((result) => {
-        const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildApiUrl('trackedEntityInstances', id)
-            .then((trackedEntityInstanceUrl) => {
-                cy.request('DELETE', trackedEntityInstanceUrl);
-            });
-    });
-    cy.get('@postEvent').then((result) => {
-        const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildApiUrl('events', id)
+    cy.get('@postData').then((result) => {
+        const eventId = result.response.body.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
+
+        cy.buildApiUrl('events', eventId)
             .then((eventUrl) => {
                 cy.request('DELETE', eventUrl);
             });
@@ -120,28 +102,19 @@ When('you search for an existing unique id and link to the person', () => {
 
 When('you submit the event form with the associated relationship to the already existing person', () => {
     cy.server();
-    cy.route('POST', '**/events').as('postEvent');
-    cy.route('POST', '**/relationships').as('postRelationship');
+    cy.route('POST', '**/tracker?async=false').as('postData');
     cy.get('[data-test="dhis2-uicore-splitbutton-button"]')
         .click();
 });
 
 
 Then('the event and relationship should be sent to the server successfully', () => {
-    cy.wait('@postEvent', { timeout: 20000 }).should('have.property', 'status', 200);
-    cy.wait('@postRelationship', { timeout: 20000 }).should('have.property', 'status', 200);
+    cy.wait('@postData', { timeout: 20000 }).should('have.property', 'status', 200);
 
-    // clean up
-    cy.get('@postRelationship').then((result) => {
-        const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildApiUrl('relationships', id)
-            .then((relationshipUrl) => {
-                cy.request('DELETE', relationshipUrl);
-            });
-    });
-    cy.get('@postEvent').then((result) => {
-        const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildApiUrl('events', id)
+    cy.get('@postData').then((result) => {
+        const eventId = result.response.body.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
+
+        cy.buildApiUrl('events', eventId)
             .then((eventUrl) => {
                 cy.request('DELETE', eventUrl);
             });
