@@ -1,14 +1,14 @@
 # 
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2019
-# phil_dhis2, 2021
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
+"POT-Creation-Date: 2022-02-15T09:59:36.798Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2021\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Tetum (Tetun) (https://www.transifex.com/hisp-uio/teams/100509/tet/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -161,9 +161,6 @@ msgid "Relationships"
 msgstr ""
 
 msgid "Assignee"
-msgstr ""
-
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
@@ -455,6 +452,12 @@ msgstr "Hamós"
 msgid "No results"
 msgstr ""
 
+msgid "Description"
+msgstr "Deskrisaun"
+
+msgid "URL"
+msgstr ""
+
 msgid "Icon for {{field}}"
 msgstr ""
 
@@ -600,6 +603,21 @@ msgstr ""
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
+msgid "Quick actions"
+msgstr ""
+
+msgid "New Event"
+msgstr ""
+
+msgid "Schedule an event"
+msgstr ""
+
+msgid "Make referral"
+msgstr ""
+
+msgid "No available program stages"
+msgstr ""
+
 msgid "Program stage not found"
 msgstr ""
 
@@ -638,6 +656,18 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Page is missing required values from URL"
+msgstr ""
+
+msgid "Program is not valid"
+msgstr ""
+
+msgid "Org unit is not valid with current program"
+msgstr ""
+
+msgid "There was an error opening the Page"
+msgstr ""
+
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
@@ -651,6 +681,9 @@ msgid "There are no feedbacks for this event"
 msgstr ""
 
 msgid "There are no indicators for this event"
+msgstr ""
+
+msgid "Program stage is invalid"
 msgstr ""
 
 msgid "Report"
@@ -971,6 +1004,9 @@ msgstr ""
 msgid "This enrollment doesn't have any comments"
 msgstr ""
 
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1005,17 +1041,24 @@ msgid "Schedule date info"
 msgstr ""
 
 msgid ""
-"This date is the the auto-suggested date based on the intervals defined, \n"
+"This date is the suggested scheduled date based on the intervals defined, \n"
 "                    it can be adjusted if needed."
 msgstr ""
 
-msgid "This date is {{difference}} days {{position}} the auto-suggested date."
+msgid "This date is {{count}} days {{position}} the suggested date."
+msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+
+msgid "after"
 msgstr ""
 
-msgid ""
-"There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
-"this day."
+msgid "before"
 msgstr ""
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1033,11 +1076,32 @@ msgstr ""
 msgid "Write a comment about this scheduled event"
 msgstr ""
 
+msgid ""
+"Change information about this {{trackedEntityName}} here. To change "
+"information about this enrollment, use the Edit button in the in the "
+"Enrollment box on this dashboard"
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
+msgid "Profile"
+msgstr "Perfil"
+
+msgid "There are errors in this form"
+msgstr ""
+
+msgid "There are warnings in this form"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
 msgstr ""
+
+msgid "Edit"
+msgstr "Edita"
 
 msgid "New {{ eventName }} event"
 msgstr ""
@@ -1078,6 +1142,9 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Working list could not be loaded"
+msgstr ""
+
 msgid "Delete event"
 msgstr ""
 
@@ -1094,9 +1161,6 @@ msgid "Download with current filters"
 msgstr ""
 
 msgid "Download data..."
-msgstr ""
-
-msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "an error occurred loading working lists"
@@ -1176,9 +1240,6 @@ msgstr ""
 
 msgid "Program is not a tracker program"
 msgstr ""
-
-msgid "Profile"
-msgstr "Perfil"
 
 msgid "Error saving event"
 msgstr ""

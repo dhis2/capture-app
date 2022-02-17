@@ -27,7 +27,7 @@ type InputProgramData = {
 type InputAttribute = {
     attribute: string,
     code: string,
-    created: string,
+    createdAt: string,
     displayName: string,
     lastUpdated: string,
     value: string,

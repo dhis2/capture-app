@@ -34,7 +34,7 @@ export const initEventWorkingListAsync = async (
         sortById,
         sortByDirection,
         filters: buildFilterQueryArgs(filters, { columns: columnsMetaForDataFetching, storeId, isInit: true }),
-        fields: 'dataValues,eventDate,event,status,orgUnit,program,programType,lastUpdated,created,assignedUser,assignedUserDisplayName,assignedUserUsername',
+        fields: 'dataValues,occurredAt,event,status,orgUnit,program,programType,updatedAt,createdAt,assignedUser,assignedUserDisplayName,assignedUserUsername',
         ...commonQueryData,
     };
 

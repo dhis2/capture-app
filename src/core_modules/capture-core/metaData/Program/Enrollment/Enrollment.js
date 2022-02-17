@@ -21,8 +21,8 @@ export class Enrollment {
 
     constructor(initFn: ?(_this: Enrollment) => void) {
         this._labels = {
-            [labelKeys.INCIDENT_DATE]: defaultLabelValues.INCIDENT_DATE,
-            [labelKeys.ENROLLMENT_DATE]: defaultLabelValues.ENROLLMENT_DATE,
+            [labelKeys.OCCURRED_AT]: defaultLabelValues.OCCURRED_AT,
+            [labelKeys.ENROLLED_AT]: defaultLabelValues.ENROLLED_AT,
         };
 
         this._optionFlags = {
@@ -42,17 +42,17 @@ export class Enrollment {
     }
 
     set incidentDateLabel(label: string) {
-        this._labels[labelKeys.INCIDENT_DATE] = label;
+        this._labels[labelKeys.OCCURRED_AT] = label;
     }
     get incidentDateLabel(): string {
-        return this._labels[labelKeys.INCIDENT_DATE];
+        return this._labels[labelKeys.OCCURRED_AT];
     }
 
     set enrollmentDateLabel(label: string) {
-        this._labels[labelKeys.ENROLLMENT_DATE] = label;
+        this._labels[labelKeys.ENROLLED_AT] = label;
     }
     get enrollmentDateLabel(): string {
-        return this._labels[labelKeys.ENROLLMENT_DATE];
+        return this._labels[labelKeys.ENROLLED_AT];
     }
 
     set allowFutureEnrollmentDate(isAllowed: boolean) {
