@@ -123,7 +123,6 @@ export const buildFormFoundation = async (program: any) => {
             section = await buildTetFeatureTypeSection(trackedEntityTypeId, trackedEntityType);
             section && renderFoundation.addSection(section);
         }
-
         if (programTrackedEntityAttributes) {
             for (const programSection of programSections) {
                 const programTrackedEntityAttributesFiltered = programTrackedEntityAttributes.filter(trackedEntityAttribute =>

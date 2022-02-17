@@ -55,13 +55,13 @@ const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute
             let requestPromise;
             if (dataEntry.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                 const orgUnitId = contextProps.orgUnitId;
-                requestPromise = getApi().get('trackedEntityInstances', {
+                requestPromise = getApi().get('tracker/trackedEntities', {
                     program: contextProps.programId,
                     ou: orgUnitId,
                     filter: `${dataElement.id}:EQ:${serverValue}`,
                 });
             } else {
-                requestPromise = getApi().get('trackedEntityInstances', {
+                requestPromise = getApi().get('tracker/trackedEntities', {
                     program: contextProps.programId,
                     ouMode: 'ACCESSIBLE',
                     filter: `${dataElement.id}:EQ:${serverValue}`,

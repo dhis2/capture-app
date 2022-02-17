@@ -25,7 +25,7 @@ When(/^the user sets the first name to (.*)$/, (name) => {
 When('the user clicks the save button', () => {
     cy.intercept({
         method: 'POST',
-        url: '**/trackedEntityInstances',
+        url: '**/tracker?async=false',
     }).as('postTrackedEntityInstance');
     cy.get('[data-test="modal-edit-profile"]').within(() => {
         cy.get('[data-test="dhis2-uicore-button"]').eq(1).click();

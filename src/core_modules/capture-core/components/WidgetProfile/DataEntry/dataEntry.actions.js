@@ -149,7 +149,7 @@ export const updateTei = ({
         {
             offline: {
                 effect: {
-                    url: 'trackedEntityInstances',
+                    url: 'tracker?async=false',
                     method: effectMethods.POST,
                     data: serverData,
                 },
