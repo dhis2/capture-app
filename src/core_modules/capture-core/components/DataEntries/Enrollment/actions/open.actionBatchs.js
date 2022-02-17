@@ -9,6 +9,7 @@ import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer 
 import { convertGeometryOut } from '../../converters';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
+import { addFormData } from '../../../D2Form/actions/form.actions';
 
 const itemId = 'newEnrollment';
 
@@ -16,13 +17,13 @@ type DataEntryPropsToInclude = Array<Object>;
 
 const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
-        id: 'enrollmentDate',
+        id: 'enrolledAt',
         type: 'DATE',
         // $FlowFixMe[incompatible-call] automated comment
         validatorContainers: getEnrollmentDateValidatorContainer(),
     },
     {
-        id: 'incidentDate',
+        id: 'occurredAt',
         type: 'DATE',
         // $FlowFixMe[incompatible-call] automated comment
         validatorContainers: getIncidentDateValidatorContainer(),
@@ -38,15 +39,25 @@ export const batchActionTypes = {
     OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH: 'OpenDataEntryForNewEnrollmentBatch',
 };
 
-export const openDataEntryForNewEnrollmentBatchAsync = async (
+export const openDataEntryForNewEnrollmentBatchAsync = async ({
+    program,
+    foundation,
+    orgUnit,
+    dataEntryId,
+    extraActions = [],
+    extraDataEntryProps = [],
+    generatedUniqueValuesCache = {},
+    formValues,
+}: {
     program: TrackerProgram,
     foundation: RenderFoundation,
     orgUnit: Object,
     dataEntryId: string,
-    extraActions: Array<ReduxAction<any, any>> = [],
-    extraDataEntryProps: Array<Object> = [],
-    generatedUniqueValuesCache: Object = {},
-) => {
+    extraActions?: Array<ReduxAction<any, any>>,
+    extraDataEntryProps?: Array<Object>,
+    generatedUniqueValuesCache?: ?Object,
+    formValues: { [key: string]: any },
+}) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
 
     const generatedItemContainers = await
@@ -56,7 +67,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async (
                 dataEntryId,
                 itemId,
                 [...dataEntryPropsToInclude, ...extraDataEntryProps],
-                { enrollmentDate: convertDateObjectToDateFormatString(new Date()) },
+                { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
                 generatedItemContainers
                     .reduce((accValuesByKey, container) => {
                         accValuesByKey[container.id] = container.item.value;
@@ -64,6 +75,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async (
                     }, {}),
             );
 
+    const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const effects = getApplicableRuleEffectsForTrackerProgram({
         program,
         orgUnit,
@@ -79,6 +91,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async (
                 }, {}),
         ),
         ...dataEntryActions,
+        addFormDataActions,
         updateRulesEffects(effects, formId),
         ...extraActions,
     ], batchActionTypes.OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH);

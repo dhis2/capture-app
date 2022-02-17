@@ -41,21 +41,23 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
             const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
-            if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedDate) {
-                mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+            if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedAt) {
+                mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
             }
 
             const serverData = {
-                ...mainDataServerValues,
-                dataValues: Object
-                    .keys(formServerValues)
-                    .map(key => ({
-                        dataElement: key,
-                        value: formServerValues[key],
-                    })),
+                events: [{
+                    ...mainDataServerValues,
+                    dataValues: Object
+                        .keys(formServerValues)
+                        .map(key => ({
+                            dataElement: key,
+                            value: formServerValues[key],
+                        })),
+                }],
             };
 
-            return startSaveEditEventAfterReturnedToMainPage(eventId, serverData, state.currentSelections);
+            return startSaveEditEventAfterReturnedToMainPage(serverData, state.currentSelections);
         }));
 
 export const saveEditEventLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>

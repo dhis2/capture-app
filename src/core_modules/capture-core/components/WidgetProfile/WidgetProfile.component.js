@@ -38,6 +38,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
     const error = programsError || trackedEntityInstancesError;
 
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstances);
+    console.log(clientAttributesWithSubvalues)
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)

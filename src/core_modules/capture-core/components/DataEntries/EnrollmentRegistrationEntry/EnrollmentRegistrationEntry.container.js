@@ -6,21 +6,20 @@ import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEn
 import { startNewEnrollmentDataEntryInitialisation } from './EnrollmentRegistrationEntry.actions';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { scopeTypes } from '../../../metaData';
+import { useLifecycle } from './hooks';
 
 const useInitialiseEnrollmentRegistration = (selectedScopeId, dataEntryId) => {
     const dispatch = useDispatch();
     const { scopeType } = useScopeInfo(selectedScopeId);
-    const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
-    const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { formId, formFoundation, formValues, selectedOrgUnitId } = useLifecycle({selectedScopeId});
     const registrationFormReady = !!formId;
+    console.log('useInitialiseEnrollmentRegistration', formValues);
     useEffect(() => {
         if (registrationFormReady && scopeType === scopeTypes.TRACKER_PROGRAM) {
             dispatch(
                 startNewEnrollmentDataEntryInitialisation(
-                    { selectedOrgUnitId, selectedScopeId, dataEntryId, formFoundation },
+                    { selectedOrgUnitId, selectedScopeId, dataEntryId, formFoundation, formValues },
                 ),
             );
         }
@@ -31,6 +30,7 @@ const useInitialiseEnrollmentRegistration = (selectedScopeId, dataEntryId) => {
         selectedOrgUnitId,
         registrationFormReady,
         formFoundation,
+        formValues,
         dispatch,
     ]);
 };

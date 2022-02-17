@@ -1,3 +1,24 @@
+## [1.67.1](https://github.com/dhis2/capture-app/compare/v1.67.0...v1.67.1) (2022-02-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4af4ac5](https://github.com/dhis2/capture-app/commit/4af4ac5e4869654105df6bfdcfb5e476eaa1d243))
+
+# [1.67.0](https://github.com/dhis2/capture-app/compare/v1.66.12...v1.67.0) (2022-02-16)
+
+
+### Features
+
+* [TECH-928] New tracker endpoints in capture ([13fe8ab](https://github.com/dhis2/capture-app/commit/13fe8ab6a82a9df6c7b20515e73f971f408b2e5b))
+
+## [1.66.12](https://github.com/dhis2/capture-app/compare/v1.66.11...v1.66.12) (2022-02-16)
+
+
+### Bug Fixes
+
+* [DHIS2-12584] fix complete status ([#2522](https://github.com/dhis2/capture-app/issues/2522)) ([d89026c](https://github.com/dhis2/capture-app/commit/d89026ccb9b7162f0ac55fe6830576a34e064e9f))
+
 ## [1.66.11](https://github.com/dhis2/capture-app/compare/v1.66.10...v1.66.11) (2022-02-15)
 
 

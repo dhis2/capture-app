@@ -15,7 +15,7 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: Input
     action$.pipe(
         ofType(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
-        switchMap(({ selectedOrgUnitId, selectedScopeId: programId, dataEntryId, formFoundation }) => {
+        switchMap(({ selectedOrgUnitId, selectedScopeId: programId, dataEntryId, formFoundation, formValues }) => {
             if (selectedOrgUnitId) {
                 let trackerProgram: ?TrackerProgram;
                 try {
@@ -27,12 +27,13 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: Input
                     return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
                 }
 
-                const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
-                    trackerProgram,
-                    formFoundation,
-                    { id: selectedOrgUnitId },
+                const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync({
+                    program: trackerProgram,
+                    foundation: formFoundation,
+                    orgUnit: { id: selectedOrgUnitId },
                     dataEntryId,
-                );
+                    formValues,
+                });
 
                 return from(openEnrollmentPromise);
             }

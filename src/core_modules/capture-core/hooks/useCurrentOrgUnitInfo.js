@@ -10,4 +10,10 @@ export const useCurrentOrgUnitInfo = (): {| id: string, name: string |} =>
                 currentSelections: { orgUnitId },
             }) =>
             organisationUnits[orgUnitId] && organisationUnits[orgUnitId].name),
+        code: useSelector((
+            {
+                organisationUnits,
+                currentSelections: { orgUnitId },
+            }) =>
+            organisationUnits[orgUnitId] && organisationUnits[orgUnitId].code),
     });

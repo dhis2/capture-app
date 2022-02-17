@@ -48,6 +48,7 @@ export const useLifecycle = ({
 
     useEffect(() => {
         if (Object.entries(formValues).length > 0) {
+            console.log(formValues);
             dispatch(
                 getOpenDataEntryActions({
                     dataEntryId,
