@@ -75,6 +75,7 @@ const useComputedEnrollmentPageStatus = () => {
 
 export const EnrollmentPage: ComponentType<{||}> = () => {
     useComponentLifecycle();
+
     const dispatch = useDispatch();
     const { programId, orgUnitId, enrollmentId, teiId } = useLocationQuery();
     const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
