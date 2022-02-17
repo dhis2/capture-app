@@ -8,9 +8,14 @@ export const trackedEntityInstanceDesc = createReducerDescription(
             const { modalState } = action.payload;
             return { ...state, modalState };
         },
+        [dataEntryActionTypes.SET_TEI_ATTRIBUTE_VALUES]: (state, action) => {
+            const { attributeValues } = action.payload;
+            return { ...state, attributeValues };
+        },
     },
     'trackedEntityInstance',
     {
         modalState: TEI_MODAL_STATE.CLOSE,
+        attributeValues: [],
     },
 );

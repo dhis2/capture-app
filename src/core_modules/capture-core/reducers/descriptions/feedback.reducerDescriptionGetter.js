@@ -26,7 +26,6 @@ import { workingListsCommonActionTypes } from '../../components/WorkingLists/Wor
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
-import { profileActionTypes } from '../../components/WidgetProfile';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?Node) {
     const newState = [...state];
@@ -44,16 +43,6 @@ function getErrorFeedback(message: string, action?: ?Node) {
         action,
         feedbackType: 'ERROR',
     };
-}
-
-function addSuccessFeedback(state: ReduxState, message: string, action?: ?Node) {
-    const newState = [...state];
-    newState.push({
-        message,
-        action,
-        feedbackType: 'SUCCESS',
-    });
-    return newState;
 }
 
 export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescription({
@@ -140,7 +129,5 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, i18n.t('Error saving enrollment')),
     [enrollmentSiteActionTypes.SAVE_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error saving the enrollment event')),
-    [profileActionTypes.UPDATE_SUCCEED]: state =>
-        addSuccessFeedback(state, i18n.t('The Tracked entity instance was updated succesfully')),
 }, 'feedbacks', []);
 

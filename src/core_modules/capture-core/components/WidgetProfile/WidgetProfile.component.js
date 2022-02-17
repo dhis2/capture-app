@@ -1,7 +1,7 @@
 // @flow
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -13,7 +13,7 @@ import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
 import type { Props } from './widgetProfile.types';
 import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues } from './hooks';
-import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, setTeiModalState, useRefetchTrackedEntityInstance } from './DataEntry';
+import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, setTeiModalState, getTeiDisplayName } from './DataEntry';
 
 const styles = {
     header: {
@@ -25,22 +25,23 @@ const styles = {
     },
 };
 
-const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = '', classes }: Props) => {
+const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = '', onUpdateTeiAttributeValues, classes }: Props) => {
     const dispatch = useDispatch();
     const [open, setOpenStatus] = useState(true);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
+    const { storedAttributeValues, modalState } = useSelector(({ trackedEntityInstance }) => ({
+        storedAttributeValues: trackedEntityInstance?.attributeValues,
+        modalState: trackedEntityInstance?.modalState || TEI_MODAL_STATE.CLOSE }));
     const {
         loading: trackedEntityInstancesLoading,
-        trackedEntityInstances,
         error: trackedEntityInstancesError,
-        refetch,
-    } = useTrackedEntityInstances(teiId, programId);
+        trackedEntityInstanceAttributes,
+    } = useTrackedEntityInstances(teiId, programId, storedAttributeValues);
 
-    const { trackedEntityInstance: { modalState } } = useRefetchTrackedEntityInstance(refetch);
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
-
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstances);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
+    const teiDisplayName = getTeiDisplayName(storedAttributeValues, clientAttributesWithSubvalues, teiId);
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
@@ -56,6 +57,12 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                 attribute, key, value,
             };
         }), [clientAttributesWithSubvalues]);
+
+    useEffect(() => {
+        if (storedAttributeValues?.length > 0) {
+            onUpdateTeiAttributeValues && onUpdateTeiAttributeValues(storedAttributeValues, teiDisplayName);
+        }
+    }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
 
     const renderProfile = () => {
         if (loading) {
@@ -92,8 +99,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
             >
                 {renderProfile()}
             </Widget>
-            {!loading && !error && showEdit &&
-                (modalState === TEI_MODAL_STATE.OPEN || modalState === TEI_MODAL_STATE.OPEN_DISABLE || modalState === TEI_MODAL_STATE.OPEN_ERROR) && (
+            {!loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE && (
                 <DataEntry
                     onCancel={() => dispatch(setTeiModalState(TEI_MODAL_STATE.CLOSE))}
                     programAPI={program}

@@ -34,26 +34,21 @@ type InputAttribute = {
     valueType: string,
 };
 
-type InputTEIData = {
-    attributes: Array<InputAttribute>,
-};
-
-export const useClientAttributesWithSubvalues = (program: InputProgramData, trackedEntityInstances: InputTEIData) => {
+export const useClientAttributesWithSubvalues = (program: InputProgramData, trackedEntityInstanceAttributes: Array<InputAttribute>) => {
     const dataEngine = useDataEngine();
 
     const [listAttributes, setListAttributes] = useState([]);
 
     const getListAttributes = useCallback(async () => {
-        if (program && trackedEntityInstances) {
+        if (program && trackedEntityInstanceAttributes) {
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const { programTrackedEntityAttributes } = program;
-            const { attributes } = trackedEntityInstances;
             const computedAttributes = await programTrackedEntityAttributes.reduce(async (promisedAcc, currentTEA) => {
                 const {
                     displayInList,
                     trackedEntityAttribute: { id, displayName, optionSet, valueType, unique },
                 } = currentTEA;
-                const foundAttribute = attributes.find(item => item.attribute === id);
+                const foundAttribute = trackedEntityInstanceAttributes?.find(item => item.attribute === id);
                 let value;
                 if (foundAttribute) {
                     if (subValueGetterByElementType[foundAttribute.valueType]) {
@@ -82,7 +77,7 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
 
             setListAttributes(computedAttributes);
         }
-    }, [program, trackedEntityInstances, dataEngine]);
+    }, [program, trackedEntityInstanceAttributes, dataEngine]);
 
     useEffect(() => {
         getListAttributes();

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-09T13:29:42.807Z\n"
-"PO-Revision-Date: 2022-02-09T13:29:42.807Z\n"
+"POT-Creation-Date: 2022-02-17T06:52:19.276Z\n"
+"PO-Revision-Date: 2022-02-17T06:52:19.276Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1127,6 +1127,9 @@ msgstr "There was a problem saving changes"
 msgid "Try again or contact your system administrator for support"
 msgstr "Try again or contact your system administrator for support"
 
+msgid "tracked entity instance"
+msgstr "tracked entity instance"
+
 msgid "Fix errors in the form to continue."
 msgstr "Fix errors in the form to continue."
 
@@ -1306,12 +1309,6 @@ msgstr "Error saving enrollment"
 
 msgid "Error saving the enrollment event"
 msgstr "Error saving the enrollment event"
-
-msgid "The Tracked entity instance was updated succesfully"
-msgstr "The Tracked entity instance was updated succesfully"
-
-msgid "tracked entity instance"
-msgstr "tracked entity instance"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"

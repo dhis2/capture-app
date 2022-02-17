@@ -27,7 +27,6 @@ export const TEI_MODAL_STATE = {
     OPEN_ERROR: 'OpenWithErrors',
     OPEN_DISABLE: 'OpenAndDisabled',
     CLOSE: 'Close',
-    CLOSE_UPDATE: 'CloseAndUpdate',
 };
 
 export const dataEntryActionTypes = {
@@ -37,9 +36,8 @@ export const dataEntryActionTypes = {
     TEI_UPDATE_REQUEST: 'TeiSaveRequest',
     TEI_UPDATE_SUCCESS: 'TeiUpdateSucess',
     TEI_UPDATE_ERROR: 'TeiUpdateError',
-    UPDATE_SUCCEED: 'UPDATE_SUCCEED',
-    UPDATE_FAILED: 'UPDATE_FAILED',
     SET_TEI_MODAL_STATE: 'SetTeiModalState',
+    SET_TEI_ATTRIBUTE_VALUES: 'SetTeiAttributeValues',
 };
 const dataEntryPropsToInclude: Array<Object> = [
     {
@@ -98,9 +96,9 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
         dataEntryActionTypes.UPDATE_FIELD_PROFILE_ACTION_BATCH,
     );
 };
-export const saveSucceed = () => actionCreator(dataEntryActionTypes.UPDATE_SUCCEED)();
-export const saveFailed = () => actionCreator(dataEntryActionTypes.UPDATE_FAILED)();
+
 export const setTeiModalState = (modalState: string) => actionCreator(dataEntryActionTypes.SET_TEI_MODAL_STATE)({ modalState });
+export const setTeiAttributeValues = (attributeValues: Array<{ [key: string]: string }>) => actionCreator(dataEntryActionTypes.SET_TEI_ATTRIBUTE_VALUES)({ attributeValues });
 
 export const updateTeiRequest = ({
     itemId,
@@ -155,8 +153,8 @@ export const updateTei = ({
                     method: effectMethods.POST,
                     data: serverData,
                 },
-                commit: onSaveSuccessActionType && { type: onSaveSuccessActionType, meta: { serverData, uid } },
-                rollback: onSaveErrorActionType && { type: onSaveErrorActionType, meta: { serverData, uid } },
+                commit: { type: onSaveSuccessActionType, meta: { serverData, uid } },
+                rollback: { type: onSaveErrorActionType, meta: { serverData, uid } },
             },
         },
     );
