@@ -22,7 +22,7 @@ type ApiTEIEvent = {
     enrollment?: string,
     enrollmentStatus?: string,
     status: string,
-    eventDate: string,
+    occurredAt: string,
     dueDate: string,
     completedDate: string,
     dataValues: Array<ApiDataValue>,
@@ -64,7 +64,7 @@ const mapEventInputKeyToOutputKey = {
 
 function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
-    if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
+    if (inputKey === 'occurredAt' || inputKey === 'scheduledAt' || inputKey === 'completedAt') {
         convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
@@ -138,7 +138,7 @@ async function convertToClientEvent(event: ApiTEIEvent) {
 export async function getEvent(eventId: string): Promise<?ClientEventContainer> {
     const api = getApi();
     const apiRes = await api
-        .get(`events/${eventId}`);
+        .get(`tracker/events/${eventId}`);
 
     const eventContainer = await convertToClientEvent(apiRes);
     return eventContainer;
@@ -147,13 +147,13 @@ export async function getEvent(eventId: string): Promise<?ClientEventContainer> 
 export async function getEvents(queryParams: Object) {
     const api = getApi();
     const req = {
-        url: 'events',
+        url: 'tracker/events',
         queryParams,
     };
     const apiRes = await api
         .get(req.url, { ...req.queryParams });
 
-    const eventContainers = apiRes && apiRes.events ? await apiRes.events.reduce(async (accEventsPromise, apiEvent) => {
+    const eventContainers = apiRes && apiRes.instances ? await apiRes.instances.reduce(async (accEventsPromise, apiEvent) => {
         const accEvents = await accEventsPromise;
         const eventContainer = await convertToClientEvent(apiEvent);
         if (eventContainer) {

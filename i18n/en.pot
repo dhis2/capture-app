@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-31T19:19:52.073Z\n"
-"PO-Revision-Date: 2022-01-31T19:19:52.073Z\n"
+"POT-Creation-Date: 2022-02-17T19:25:03.181Z\n"
+"PO-Revision-Date: 2022-02-17T19:25:03.181Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -160,9 +160,6 @@ msgstr "Relationships"
 
 msgid "Assignee"
 msgstr "Assignee"
-
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{programName}} in {{orgUnitName}}"
@@ -1026,6 +1023,9 @@ msgstr "Write a comment about this enrollment"
 msgid "This enrollment doesn't have any comments"
 msgstr "This enrollment doesn't have any comments"
 
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
 
@@ -1060,21 +1060,27 @@ msgid "Schedule date info"
 msgstr "Schedule date info"
 
 msgid ""
-"This date is the the auto-suggested date based on the intervals defined, \n"
+"This date is the suggested scheduled date based on the intervals defined, \n"
 "                    it can be adjusted if needed."
 msgstr ""
-"This date is the the auto-suggested date based on the intervals defined, \n"
+"This date is the suggested scheduled date based on the intervals defined, \n"
 "                    it can be adjusted if needed."
 
-msgid "This date is {{difference}} days {{position}} the auto-suggested date."
-msgstr "This date is {{difference}} days {{position}} the auto-suggested date."
+msgid "This date is {{count}} days {{position}} the suggested date."
+msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgstr[0] "This date is {{count}} day {{position}} the suggested date."
+msgstr[1] "This date is {{count}} days {{position}} the suggested date."
 
-msgid ""
-"There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
-"this day."
-msgstr ""
-"There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
-"this day."
+msgid "after"
+msgstr "after"
+
+msgid "before"
+msgstr "before"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[1] "There are {{count}} scheduled events in {{orgUnitName}} on this day."
 
 msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"

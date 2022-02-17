@@ -40,7 +40,7 @@ When(/^you click the checkbox number (.*)$/, (eq) => {
 When(/^you click the (.*) button/, (buttonText) => {
     cy.intercept({
         method: 'POST',
-        url: '**/events',
+        url: '**/tracker?async=false',
     }).as('postEvents');
 
     cy.get('[data-test="dhis2-uicore-button"]')

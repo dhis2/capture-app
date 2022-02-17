@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
-    moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
+    moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
 
 
 const getSuitableEnrollmentId = (enrollments) => {

@@ -14,8 +14,8 @@ export type AttributeValueServerFormatted = {|
 |};
 
 export type EnrollmentData = {|
-    enrollmentDate?: string,
-    incidentDate?: string,
+    enrolledAt?: string,
+    occurredAt?: string,
     enrollmentId: string,
 |};
 

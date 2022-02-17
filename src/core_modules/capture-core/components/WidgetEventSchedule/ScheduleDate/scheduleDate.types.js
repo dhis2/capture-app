@@ -4,10 +4,10 @@
 export type Props = {|
     stageId: string,
     programId: string,
-    enrollmentDate: string,
+    enrolledAt: string,
     scheduleDate?: ?string,
     setScheduleDate: (date: string) => void,
-    incidentDate: string,
+    occurredAt: string,
     eventData: Array<Object>,
     eventCountInOrgUnit: number,
     suggestedScheduleDate?: ?string,
