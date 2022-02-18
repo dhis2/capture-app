@@ -68,7 +68,7 @@ const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute
                 });
             }
             return requestPromise.then((result) => {
-                const otherTrackedEntityInstances = result?.trackedEntityInstances?.filter(item => item.trackedEntityInstance !== contextProps.trackedEntityInstanceId) || [];
+                const otherTrackedEntityInstances = result?.instances?.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId) || [];
                 const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
 
                 const data = {

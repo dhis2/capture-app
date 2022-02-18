@@ -11,7 +11,7 @@ const prepareMessages = (rulesEffectsGeneral, rulesEffectsMessages, saveAttempte
 
         messages = Object.values(rulesEffectsMessages).reduce(
             (acc, rulesEffectsMessage: any) =>
-                (acc = rulesEffectsMessage[`${type}OnComplete`] ? [...acc, { message: rulesEffectsMessage[`${type}OnComplete`], id: uuid() }] : acc),
+                (rulesEffectsMessage[`${type}OnComplete`] ? [...acc, { message: rulesEffectsMessage[`${type}OnComplete`], id: uuid() }] : acc),
             messages,
         );
     }
