@@ -20,7 +20,7 @@
     "@popperjs/core": "^2.11.2",
     "@react-leaflet/core": "^1.1.1",
     "@redux-offline/redux-offline": "^2.6.0",
-    "autosuggest-highlight": "^3.2.0",
+    "autosuggest-highlight": "^3.2.1",
     "classnames": "^2.3.1",
     "d2": "^31",
     "d2-manifest": "^1.0.0",
