@@ -19,4 +19,11 @@ export type Props = {|
     relationshipTypes: ?Array<RelationshipType>,
     renderRef: Object,
     trackedEntityType: string,
+    programId: string,
+|}
+
+export type RelationshipsForCurrentTEI = {|
+    relationshipTypes: Array<RelationshipType>,
+    programId: string,
+    trackedEntityType: string,
 |}

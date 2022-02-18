@@ -18,7 +18,6 @@ export type Props = {|
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,
     onEventClick: (eventId: string, stageId: string) => void,
-    renderRelationshipRef: Object,
     relationshipTypes: ?Array<RelationshipType>
 |};
 

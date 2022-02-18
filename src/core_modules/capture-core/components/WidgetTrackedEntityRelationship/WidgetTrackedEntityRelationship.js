@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship/NewTrackedEntityRelationship.container';
 import type { Props } from './WidgetTrackedEntityRelationship.types';
 
-export const WidgetTrackedEntityRelationship = ({ relationshipTypes, renderRef, trackedEntityType }: Props) => {
+export const WidgetTrackedEntityRelationship = ({ ...PassOnProps }: Props) => {
     const [showDialog, setShowDialog] = useState(false);
 
     const changeDialogView = useCallback(() => {
@@ -21,11 +21,9 @@ export const WidgetTrackedEntityRelationship = ({ relationshipTypes, renderRef, 
             </Button>
 
             <NewTrackedEntityRelationship
-                relationshipTypes={relationshipTypes}
-                renderRef={renderRef}
-                trackedEntityType={trackedEntityType}
                 showDialog={showDialog}
                 hideDialog={changeDialogView}
+                {...PassOnProps}
             />
         </>
     );

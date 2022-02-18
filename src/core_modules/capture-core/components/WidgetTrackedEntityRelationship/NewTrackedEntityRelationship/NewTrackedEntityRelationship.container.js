@@ -2,11 +2,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 import { withStyles } from '@material-ui/core';
+import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../../Widget';
 import { NewTrackedEntityRelationshipComponent } from './NewTrackedEntityRelationship.component';
 import { NewTEIRelationshipStatuses } from '../WidgetTrackedEntityRelationship.const';
 import type { Props } from './NewTrackedEntityRelationship.types';
-import { useFilteredRelationshipTypes } from '../hooks';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
 import { useLocationQuery } from '../../../utils/routing';
@@ -48,7 +48,6 @@ export const NewTrackedEntityRelationshipPlain = ({
     const [selectedRelationshipType, setSelectedRelationshipType] = useState();
     const [creationMode, setCreationMode] = useState();
     const { programId } = useLocationQuery();
-    const filteredRelationshipTypes = useFilteredRelationshipTypes(relationshipTypes, trackedEntityType, programId);
 
     const pageStatus = useMemo(() => {
         if (!selectedRelationshipType) {
@@ -61,14 +60,19 @@ export const NewTrackedEntityRelationshipPlain = ({
     }, [creationMode, selectedRelationshipType]);
 
     const onSelectRelationshipType = useCallback(
-        relationshipType => setSelectedRelationshipType(relationshipType), [],
-    );
+        relationshipType => setSelectedRelationshipType(relationshipType),
+        []);
 
     const onCancel = useCallback(() => {
         hideDialog();
         setSelectedRelationshipType();
         setCreationMode();
     }, [hideDialog]);
+
+    const onResetRelationshipType = useCallback(() => {
+        setSelectedRelationshipType();
+        setCreationMode();
+    }, []);
 
     if (!showDialog || !renderRef.current) {
         return null;
@@ -79,15 +83,20 @@ export const NewTrackedEntityRelationshipPlain = ({
             <div className={classes.container}>
                 <div className={classes.bar}>
                     <LinkButton onClick={onCancel} className={classes.linkText}>
-                        Go back without saving relationship
+                        {i18n.t('Go back without saving relationship')}
                     </LinkButton>
                 </div>
                 <Widget
                     noncollapsible
-                    header={<Breadcrumbs />}
+                    header={<Breadcrumbs
+                        pageStatus={pageStatus}
+                        selectedRelationshipType={selectedRelationshipType}
+                        onResetRelationshipType={onResetRelationshipType}
+                        creationMode={creationMode}
+                    />}
                 >
                     <NewTrackedEntityRelationshipComponent
-                        relationshipTypes={filteredRelationshipTypes}
+                        relationshipTypes={relationshipTypes}
                         trackedEntityType={trackedEntityType}
                         programId={programId}
                         pageStatus={pageStatus}

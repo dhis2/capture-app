@@ -1,5 +1,5 @@
 // @flow
-import React, { useRef } from 'react';
+import React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
@@ -24,7 +24,6 @@ import { useRelationshipTypes } from '../../../WidgetTrackedEntityRelationship/h
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const renderRelationshipRef = useRef();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit } = useOrganisationUnit(orgUnitId);
     const { relationshipTypes } = useRelationshipTypes();
@@ -90,7 +89,6 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
-            renderRelationshipRef={renderRelationshipRef}
             relationshipTypes={relationshipTypes}
         />
     );

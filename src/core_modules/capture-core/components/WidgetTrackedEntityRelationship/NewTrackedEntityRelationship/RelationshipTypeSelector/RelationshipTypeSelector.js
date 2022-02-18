@@ -1,132 +1,44 @@
 // @flow
-import { Button, spacers } from '@dhis2/ui';
-import React, { useMemo } from 'react';
+import React from 'react';
+import { spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
+import { useFilteredRelationshipTypes, useRelationshipsForCurrentTEI } from '../../hooks';
+import { RelationshipSelectorRow } from '../RelationshipSelectorRow/RelationshipSelectorRow';
 
 const styles = {
     container: {
         padding: spacers.dp16,
         paddingTop: 0,
     },
-    typeselector: {
+    typeSelector: {
         display: 'flex',
         flexDirection: 'column',
         gap: spacers.dp8,
         marginBottom: spacers.dp16,
     },
-    dualButtonContainer: {
-        display: 'flex',
-        gap: spacers.dp8,
-    },
-    selectorButton: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: spacers.dp4,
-        marginBottom: spacers.dp8,
-    },
-    title: {
-        fontWeight: 500,
-        marginBottom: spacers.dp4,
-    },
 };
 
-const RelationshipTypeSelectorPlain = ({ relationshipTypes, trackedEntityType, programId, onSelectType, classes }) => useMemo(() => {
-    const renderButtons = (relationship) => {
-        const defaultButton = (
-            <Button
-                onClick={() => onSelectType({
-                    id: relationship.id,
-                    constraint: 'from',
-                })}
-                secondary
-            >
-                {relationship.fromToName}
-            </Button>
-        );
-
-        const { fromConstraint, toConstraint } = relationship;
-        if (relationship.bidirectional) {
-            if (relationship.fromConstraint.trackedEntityType?.id === trackedEntityType && relationship.toConstraint.trackedEntityType?.id === trackedEntityType) {
-                let fromConstraintValid = true;
-                let toConstraintValid = true;
-                if (fromConstraint.program) {
-                    if ((fromConstraint.program?.id !== programId) || (fromConstraint?.trackedEntityType.id !== trackedEntityType)) {
-                        fromConstraintValid = false;
-                    }
-                }
-                if (toConstraint.program) {
-                    if ((toConstraint.program?.id !== programId) || (toConstraint?.trackedEntityType.id !== trackedEntityType)) {
-                        toConstraintValid = false;
-                    }
-                }
-
-                return (
-                    <div style={{ display: 'flex', gap: '8px' }}>
-                        {fromConstraintValid && (
-                            <Button
-                                onClick={() => onSelectType({
-                                    id: relationship.id,
-                                    constraint: 'from',
-                                })}
-                                secondary
-                            >
-                                {relationship.fromToName}
-                            </Button>
-                        )}
-                        {toConstraintValid && (
-                            <Button
-                                onClick={() => onSelectType({
-                                    id: relationship.id,
-                                    constraint: 'to',
-                                })}
-                                secondary
-                            >
-                                {relationship.toFromName}
-                            </Button>
-                        )}
-                    </div>
-                );
-            }
-            if (relationship.fromConstraint.trackedEntityType?.id === trackedEntityType) {
-                return defaultButton;
-            }
-            if (relationship.toConstraint.trackedEntityType?.id === trackedEntityType) {
-                return (
-                    <Button
-                        onClick={() => onSelectType({
-                            id: relationship.id,
-                            constraint: 'to',
-                        })}
-                        secondary
-                    >
-                        {relationship.toFromName}
-                    </Button>
-                );
-            }
-        }
-
-        return defaultButton;
-    };
+const RelationshipTypeSelectorPlain = ({ relationshipTypes, trackedEntityType, programId, onSelectType, classes }) => {
+    const filteredRelationshipTypes = useFilteredRelationshipTypes(relationshipTypes, trackedEntityType, programId);
+    const relationshipsForCurrentTEI = useRelationshipsForCurrentTEI({
+        relationshipTypes: filteredRelationshipTypes,
+        programId,
+        trackedEntityType,
+    });
 
     return (
         <div className={classes.container}>
-            <div className={classes.typeselector}>
-                {relationshipTypes?.map(relationship => (
-                    <div
+            <div className={classes.typeSelector}>
+                {relationshipsForCurrentTEI.map(relationship => (
+                    <RelationshipSelectorRow
                         key={relationship.id}
-                        className={classes.selectorButton}
-                    >
-                        <div className={classes.title}>
-                            {relationship.displayName}
-                        </div>
-                        <div>
-                            {renderButtons(relationship)}
-                        </div>
-                    </div>
+                        relationship={relationship}
+                        onSelectType={onSelectType}
+                    />
                 ))}
             </div>
         </div>
     );
-}, [classes, onSelectType, programId, relationshipTypes, trackedEntityType]);
+};
 
 export const RelationshipTypeSelector = withStyles(styles)(RelationshipTypeSelectorPlain);

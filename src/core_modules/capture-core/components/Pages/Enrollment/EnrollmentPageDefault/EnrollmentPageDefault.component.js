@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useRef } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -62,61 +62,64 @@ export const EnrollmentPageDefaultPlain = ({
     hideWidgets,
     classes,
     onEventClick,
-    renderRelationshipRef,
     relationshipTypes,
-}: PlainProps) => (
-    <div
-        className={classes.container}
-        ref={renderRelationshipRef}
-    >
-        <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
-        <div className={classes.columns} >
-            <div className={classes.leftColumn}>
-                <EnrollmentQuickActions
-                    stages={stages}
-                    events={events}
-                />
-                <WidgetStagesAndEvents
-                    stages={stages}
-                    events={events}
-                    onViewAll={onViewAll}
-                    onCreateNew={onCreateNew}
-                    onEventClick={onEventClick}
-                />
-            </div>
-            <div className={classes.rightColumn}>
-                <WidgetTrackedEntityRelationship
-                    relationshipTypes={relationshipTypes}
-                    // $FlowFixMe
-                    trackedEntityType={program.trackedEntityType.id}
-                    renderRef={renderRelationshipRef}
-                />
-                <WidgetEnrollmentComment />
-                <WidgetError error={widgetEffects?.errors} />
-                <WidgetWarning warning={widgetEffects?.warnings} />
-                {!hideWidgets.indicator && (
-                    <WidgetIndicator
-                        indicators={widgetEffects?.indicators}
-                        emptyText={i18n.t('No indicator output for this enrollment yet')}
+}: PlainProps) => {
+    const renderRelationshipRef = useRef();
+    return (
+        <div
+            className={classes.container}
+            ref={renderRelationshipRef}
+        >
+            <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
+            <div className={classes.columns}>
+                <div className={classes.leftColumn}>
+                    <EnrollmentQuickActions
+                        stages={stages}
+                        events={events}
                     />
-                )}
-                {!hideWidgets.feedback && (
-                    <WidgetFeedback
-                        feedback={widgetEffects?.feedbacks}
-                        emptyText={i18n.t('No feedback for this enrollment yet')}
+                    <WidgetStagesAndEvents
+                        stages={stages}
+                        events={events}
+                        onViewAll={onViewAll}
+                        onCreateNew={onCreateNew}
+                        onEventClick={onEventClick}
                     />
-                )}
-                <WidgetProfile teiId={teiId} programId={program.id} showEdit orgUnitId={orgUnitId} />
-                {enrollmentId !== 'AUTO' && <WidgetEnrollment
-                    teiId={teiId}
-                    enrollmentId={enrollmentId}
-                    programId={program.id}
-                    onDelete={onDelete}
-                />}
+                </div>
+                <div className={classes.rightColumn}>
+                    <WidgetTrackedEntityRelationship
+                        relationshipTypes={relationshipTypes}
+                        // $FlowFixMe
+                        trackedEntityType={program.trackedEntityType.id}
+                        renderRef={renderRelationshipRef}
+                        programId={program.id}
+                    />
+                    <WidgetEnrollmentComment />
+                    <WidgetError error={widgetEffects?.errors} />
+                    <WidgetWarning warning={widgetEffects?.warnings} />
+                    {!hideWidgets.indicator && (
+                        <WidgetIndicator
+                            indicators={widgetEffects?.indicators}
+                            emptyText={i18n.t('No indicator output for this enrollment yet')}
+                        />
+                    )}
+                    {!hideWidgets.feedback && (
+                        <WidgetFeedback
+                            feedback={widgetEffects?.feedbacks}
+                            emptyText={i18n.t('No feedback for this enrollment yet')}
+                        />
+                    )}
+                    <WidgetProfile teiId={teiId} programId={program.id} showEdit orgUnitId={orgUnitId} />
+                    {enrollmentId !== 'AUTO' && <WidgetEnrollment
+                        teiId={teiId}
+                        enrollmentId={enrollmentId}
+                        programId={program.id}
+                        onDelete={onDelete}
+                    />}
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 
 export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(
