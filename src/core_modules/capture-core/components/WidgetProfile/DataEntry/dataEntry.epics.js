@@ -62,11 +62,15 @@ export const updateTeiEpic = (action$: InputObservable, store: ReduxStore) =>
             const formServerValues = formFoundation?.convertValues(values, convertFn);
 
             const serverData = {
-                attributes: deriveAttributesFromFormValues(formServerValues),
-                geometry: deriveGeometryFromFormValues(formServerValues),
-                trackedEntityInstance: trackedEntityInstanceId,
-                trackedEntityType: trackedEntityTypeId,
-                orgUnit: orgUnitId,
+                trackedEntities: [
+                    {
+                        attributes: deriveAttributesFromFormValues(formServerValues),
+                        geometry: deriveGeometryFromFormValues(formServerValues),
+                        trackedEntity: trackedEntityInstanceId,
+                        trackedEntityType: trackedEntityTypeId,
+                        orgUnit: orgUnitId,
+                    },
+                ],
             };
 
             onSaveExternal && onSaveExternal(serverData, uid);
@@ -83,7 +87,7 @@ export const updateTeiSucceededEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(dataEntryActionTypes.TEI_UPDATE_SUCCESS),
         map((action) => {
-            const attributeValues = action.meta?.serverData?.attributes || [];
+            const attributeValues = action.meta?.serverData?.trackedEntities[0]?.attributes || [];
             return batchActions([setTeiModalState(TEI_MODAL_STATE.CLOSE), setTeiAttributeValues(attributeValues)]);
         }),
     );
