@@ -60,8 +60,8 @@ export const getTemplates = (
                         order: sortOrder,
                         criteria: {
                             programStatus: enrollmentStatus,
-                            enrollmentDate: enrollmentCreatedPeriod,
-                            incidentDate,
+                            enrolledAt: enrollmentCreatedPeriod,
+                            occurredAt: incidentDate,
                             order,
                             displayColumnOrder,
                             assignedUserMode,

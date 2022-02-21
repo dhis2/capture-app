@@ -109,7 +109,7 @@ const getAssigneeFilter = async (assignedUsers: ?Array<string>, querySingleResou
     return { id, name, username };
 };
 
-export const convertToClientConfig = async (
+export const convertToClientFilters = async (
     TEIQueryCriteria: ?ApiTEIQueryCriteria,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
     querySingleResource: QuerySingleResource,
@@ -118,7 +118,7 @@ export const convertToClientConfig = async (
     if (!TEIQueryCriteria) {
         return filters;
     }
-    const { programStatus, enrollmentDate, incidentDate, assignedUserMode, assignedUsers, attributeValueFilters } = TEIQueryCriteria;
+    const { programStatus, enrolledAt, occurredAt, assignedUserMode, assignedUsers, attributeValueFilters } = TEIQueryCriteria;
 
     if (programStatus) {
         filters = {
@@ -129,11 +129,11 @@ export const convertToClientConfig = async (
             },
         };
     }
-    if (enrollmentDate) {
-        filters = { ...filters, enrollmentDate: convertPeriodDateToClient(enrollmentDate) };
+    if (enrolledAt) {
+        filters = { ...filters, enrolledAt: convertPeriodDateToClient(enrolledAt) };
     }
-    if (incidentDate) {
-        filters = { ...filters, incidentDate: convertPeriodDateToClient(incidentDate) };
+    if (occurredAt) {
+        filters = { ...filters, occurredAt: convertPeriodDateToClient(occurredAt) };
     }
     if (assignedUserMode && assignedUserMode !== ASSIGNEE_MODES.PROVIDED) {
         filters = { ...filters, assignee: { assignedUserMode } };

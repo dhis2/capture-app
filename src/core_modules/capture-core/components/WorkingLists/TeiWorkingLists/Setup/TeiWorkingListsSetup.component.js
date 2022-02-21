@@ -1,7 +1,6 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
 import uuid from 'uuid/v4';
-import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import {
     dataElementTypes,
@@ -19,11 +18,6 @@ const DEFAULT_TEMPLATES_LENGTH = 1;
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
     (currentTemplateId && templates.find(template => template.id === currentTemplateId)) || templates[0],
 [templates, currentTemplateId]);
-
-const useApiTemplate = () => {
-    const workingListsTemplatesTEI = useSelector(({ workingListsTemplates }) => workingListsTemplates.teiList);
-    return workingListsTemplatesTEI && workingListsTemplatesTEI.templates;
-};
 
 const useStaticTemplates = () => useMemo(() => ([{
     id: 'default',
@@ -89,7 +83,7 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
         programStatus: rawFilter.split(':')[1],
     }),
 }, {
-    id: MAIN_FILTERS.ENROLLMENT_DATE,
+    id: MAIN_FILTERS.ENROLLED_AT,
     type: dataElementTypes.DATE,
     header: enrollmentDateLabel,
     transformRecordsFilter: (filter: Array<string> | string) => {
@@ -112,7 +106,7 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
         return queryArgs;
     },
 }, {
-    id: MAIN_FILTERS.INCIDENT_DATE,
+    id: MAIN_FILTERS.OCCURED_AT,
     type: dataElementTypes.DATE,
     header: incidentDateLabel,
     transformRecordsFilter: (filter: Array<string> | string) => {
@@ -182,6 +176,7 @@ export const TeiWorkingListsSetup = ({
     sortById,
     sortByDirection,
     orgUnitId,
+    apiTemplates,
     onAddTemplate,
     onUpdateTemplate,
     onDeleteTemplate,
@@ -190,7 +185,6 @@ export const TeiWorkingListsSetup = ({
     const defaultColumns = useDefaultColumnConfig(program, orgUnitId);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
-    const apiTemplates = useApiTemplate();
     const staticTemplates = useStaticTemplates();
     const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
 

@@ -78,10 +78,10 @@ export const convertToTEIFilterMainFilters = ({ filters, mainFilters }: { filter
         case MAIN_FILTERS.PROGRAM_STATUS:
             mainValue = filter.values[0];
             break;
-        case MAIN_FILTERS.ENROLLMENT_DATE:
+        case MAIN_FILTERS.ENROLLED_AT:
             mainValue = convertEnrollmentDateFilter(filter);
             break;
-        case MAIN_FILTERS.INCIDENT_DATE:
+        case MAIN_FILTERS.OCCURED_AT:
             mainValue = convertEnrollmentDateFilter(filter);
             break;
         case MAIN_FILTERS.ASSIGNEE:

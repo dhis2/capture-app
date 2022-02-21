@@ -37,8 +37,8 @@ export type ApiPeriodDate = { periodFrom: number, periodTo: number };
 
 export type ApiTEIQueryCriteria = {|
     programStatus?: ?string,
-    incidentDate?: ?ApiPeriodDate,
-    enrollmentDate?: ?ApiPeriodDate,
+    occurredAt?: ?ApiPeriodDate,
+    enrolledAt?: ?ApiPeriodDate,
     order?: ?string,
     displayColumnOrder?: ?Array<string>,
     assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
