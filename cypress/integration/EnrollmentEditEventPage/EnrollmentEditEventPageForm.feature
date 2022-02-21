@@ -34,7 +34,7 @@ When the user clicks on the cancel button
 And the user see the following text: Enrollment: View Event
 
 Scenario: The tracker program rules are triggered correctly for the Child Program.
-Given the user lands on the enrollment event page by having typed #enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=tIJu6iqQxNV&enrollmentId=CCBLMntFuzb&stageId=A03MvHHogjR&eventId=V1CerIi3sdL
+Given the user lands on the enrollment event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=tIJu6iqQxNV&enrollmentId=CCBLMntFuzb&stageId=A03MvHHogjR&eventId=V1CerIi3sdL
 And the user see the following text: Apgar Score
 When the user clicks on the edit button
 And the user set the apgar score to 3

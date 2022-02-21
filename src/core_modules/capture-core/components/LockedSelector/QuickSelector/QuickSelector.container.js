@@ -15,9 +15,9 @@ import { getScopeInfo } from '../../../metaData';
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments
         .filter(({ program }) => program === selectedProgramId)
-        .map(({ enrollmentDate, enrollment }) => (
+        .map(({ enrolledAt, enrollment }) => (
             {
-                label: convertValue(enrollmentDate, dataElementTypes.DATETIME),
+                label: convertValue(enrolledAt, dataElementTypes.DATETIME),
                 value: enrollment,
             }
         ));

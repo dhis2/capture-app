@@ -59,7 +59,7 @@ function convertMainProperties(apiEvent: ApiEnrollmentEvent): (CaptureClientEven
                 // $FlowFixMe[prop-missing] automated comment
                 const valueToConvert = apiEvent[inputKey];
                 let convertedValue;
-                if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
+                if (inputKey === 'occurredAt' || inputKey === 'scheduledAt' || inputKey === 'completedAt') {
                     convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
                 } else {
                     convertedValue = valueToConvert;

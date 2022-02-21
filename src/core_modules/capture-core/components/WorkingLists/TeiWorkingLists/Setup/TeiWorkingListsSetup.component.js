@@ -98,16 +98,16 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
             queryArgs = filter
                 .reduce((acc, filterPart: string) => {
                     if (filterPart.startsWith('ge')) {
-                        acc.programStartDate = filterPart.replace('ge:', '');
+                        acc.enrollmentEnrolledAfter = filterPart.replace('ge:', '');
                     } else {
-                        acc.programEndDate = filterPart.replace('le:', '');
+                        acc.enrollmentEnrolledBefore = filterPart.replace('le:', '');
                     }
                     return acc;
                 }, {});
         } else if (filter.startsWith('ge')) {
-            queryArgs.programStartDate = filter.replace('ge:', '');
+            queryArgs.enrollmentEnrolledAfter = filter.replace('ge:', '');
         } else {
-            queryArgs.programEndDate = filter.replace('le:', '');
+            queryArgs.enrollmentEnrolledBefore = filter.replace('le:', '');
         }
         return queryArgs;
     },
@@ -121,16 +121,16 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
             queryArgs = filter
                 .reduce((acc, filterPart: string) => {
                     if (filterPart.startsWith('ge')) {
-                        acc.programIncidentStartDate = filterPart.replace('ge:', '');
+                        acc.enrollmentOccurredAfter = filterPart.replace('ge:', '');
                     } else {
-                        acc.programIncidentEndDate = filterPart.replace('le:', '');
+                        acc.enrollmentOccurredBefore = filterPart.replace('le:', '');
                     }
                     return acc;
                 }, {});
         } else if (filter.startsWith('ge')) {
-            queryArgs.programIncidentStartDate = filter.replace('ge:', '');
+            queryArgs.enrollmentOccurredBefore = filter.replace('ge:', '');
         } else {
-            queryArgs.programIncidentEndDate = filter.replace('le:', '');
+            queryArgs.enrollmentOccurredBefore = filter.replace('le:', '');
         }
         return queryArgs;
     },
