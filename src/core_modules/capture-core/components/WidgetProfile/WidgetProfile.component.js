@@ -41,7 +41,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
-    const teiDisplayName = getTeiDisplayName(storedAttributeValues, clientAttributesWithSubvalues, teiId);
+    const teiDisplayName = getTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
