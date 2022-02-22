@@ -1,8 +1,10 @@
 // @flow
+import { useHistory } from 'react-router-dom';
 import { useDataMutation } from '@dhis2/app-runtime';
 import React from 'react';
 import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';
+import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../utils/routing';
 
 const enrollmentUpdate = {
     resource: 'tracker?async=false&importStrategy=UPDATE',
@@ -20,6 +22,7 @@ const enrollmentDelete = {
 };
 
 export const Actions = ({ enrollment = {}, refetch, onDelete, ...passOnProps }: Props) => {
+    const history = useHistory();
     const [updateMutation, { loading: updateLoading }] = useDataMutation(
         enrollmentUpdate,
         {
@@ -35,7 +38,8 @@ export const Actions = ({ enrollment = {}, refetch, onDelete, ...passOnProps }: 
         },
     );
     const onHandleAddNew = () => {
-
+        const { programId, orgUnitId } = deriveURLParamsFromLocation();
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
     };
 
     return (
