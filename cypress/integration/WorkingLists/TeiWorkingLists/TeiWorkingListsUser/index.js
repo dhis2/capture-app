@@ -9,6 +9,10 @@ Given('you open the main page with Ngelehun and child programme context', () => 
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and malaria focus investigation program context', () => {
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+});
+
 Then('the default working list should be displayed', () => {
     const names = [
         'Filona',
@@ -289,5 +293,74 @@ Then('the list should display data ordered ascendingly by first name', () => {
                     .contains(names[index - 1])
                     .should('exist');
             }
+        });
+});
+
+
+Then('you see the custom TEI working lists', () => {
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .within(() => {
+            cy.contains('Events assigned to me').should('exist');
+            cy.contains('Cases not yet assigned').should('exist');
+            cy.contains('Ongoing foci responses').should('exist');
+        });
+});
+
+When('you save the list with the name My custom list', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.contains('Save current view')
+        .click();
+    cy.get('[data-test="view-name-content"]')
+        .type('My custom list');
+    cy.server();
+    cy.route('POST', '**/trackedEntityInstanceFilters**').as('newTrackedEntityInstanceFilters');
+    cy.get('button')
+        .contains('Save')
+        .click();
+    cy.wait('@newTrackedEntityInstanceFilters', { timeout: 30000 });
+});
+
+When('you update the list with the name My custom list', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.server();
+    cy.route('PUT', '**/trackedEntityInstanceFilters/**').as('editTrackedEntityInstanceFilters');
+    cy.contains('Update view')
+        .click();
+    cy.wait('@editTrackedEntityInstanceFilters', { timeout: 30000 });
+});
+
+Then('you can load the view with the name Events assigned to me', () => {
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .within(() => {
+            cy.contains('Events assigned to me').click();
+        });
+});
+
+When('you delete the name My custom list', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.contains('Delete view')
+        .click();
+    cy.server();
+    cy.route('DELETE', '**/trackedEntityInstanceFilters/**').as('deleteTrackedEntityInstanceFilters');
+    cy.get('button')
+        .contains('Confirm')
+        .click();
+    cy.wait('@deleteTrackedEntityInstanceFilters', { timeout: 30000 });
+});
+
+Then('the new custom TEI working list is created', () => {
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .within(() => {
+            cy.contains('My custom list').should('exist');
+        });
+});
+
+Then('the custom TEI is deleted', () => {
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .within(() => {
+            cy.contains('My custom list').should('not.exist');
         });
 });
