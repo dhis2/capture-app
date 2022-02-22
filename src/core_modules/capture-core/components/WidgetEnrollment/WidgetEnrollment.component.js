@@ -44,6 +44,7 @@ export const WidgetEnrollmentPlain = ({
     enrollment = {},
     program = {},
     ownerOrgUnit = {},
+    tetId,
     refetch,
     error,
     loading,
@@ -199,6 +200,8 @@ export const WidgetEnrollmentPlain = ({
                             </div>
                         )}
                         <Actions
+                            tetId={tetId}
+                            onlyEnrollOnce={program.onlyEnrollOnce}
                             enrollment={enrollment}
                             refetch={refetch}
                             onDelete={onDelete}

@@ -20,6 +20,8 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
 
     return {
         error,
+        tetId: !loading &&
+            data?.trackedEntityInstances?.trackedEntityType,
         ownerOrgUnit:
             !loading &&
             data?.trackedEntityInstances?.programOwners[0]?.orgUnit,

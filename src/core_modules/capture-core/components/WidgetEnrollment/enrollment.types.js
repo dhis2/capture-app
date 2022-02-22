@@ -15,6 +15,7 @@ export type PlainProps = {|
     refetch: QueryRefetchFunction,
     error?: FetchError,
     loading: boolean,
+    tetId: string,
     onDelete: () => void,
     ...CssClasses,
 |};
