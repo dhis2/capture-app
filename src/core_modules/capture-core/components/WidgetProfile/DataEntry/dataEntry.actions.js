@@ -36,7 +36,7 @@ export const dataEntryActionTypes = {
     TEI_UPDATE_REQUEST: 'TeiSaveRequest',
     TEI_UPDATE_SUCCESS: 'TeiUpdateSucess',
     TEI_UPDATE_ERROR: 'TeiUpdateError',
-    SET_TEI_MODAL_STATE: 'SetTeiModalState',
+    SET_TEI_MODAL_ERROR: 'SetTeiModalError',
     SET_TEI_ATTRIBUTE_VALUES: 'SetTeiAttributeValues',
 };
 const dataEntryPropsToInclude: Array<Object> = [
@@ -97,7 +97,7 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
     );
 };
 
-export const setTeiModalState = (modalState: string) => actionCreator(dataEntryActionTypes.SET_TEI_MODAL_STATE)({ modalState });
+export const setTeiModalError = (hasError: boolean) => actionCreator(dataEntryActionTypes.SET_TEI_MODAL_ERROR)({ hasError });
 export const setTeiAttributeValues = (attributeValues: Array<{ [key: string]: string }>) => actionCreator(dataEntryActionTypes.SET_TEI_ATTRIBUTE_VALUES)({ attributeValues });
 
 export const updateTeiRequest = ({

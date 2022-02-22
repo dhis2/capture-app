@@ -5,7 +5,7 @@ import { pipe } from 'capture-core-utils';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { convertFormToClient, convertClientToServer } from '../../../converters';
-import { dataEntryActionTypes, updateTei, setTeiModalState, setTeiAttributeValues, TEI_MODAL_STATE } from './dataEntry.actions';
+import { dataEntryActionTypes, updateTei, setTeiModalError, setTeiAttributeValues } from './dataEntry.actions';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 const geometryType = (key) => {
@@ -88,12 +88,12 @@ export const updateTeiSucceededEpic = (action$: InputObservable) =>
         ofType(dataEntryActionTypes.TEI_UPDATE_SUCCESS),
         map((action) => {
             const attributeValues = action.meta?.serverData?.trackedEntities[0]?.attributes || [];
-            return batchActions([setTeiModalState(TEI_MODAL_STATE.CLOSE), setTeiAttributeValues(attributeValues)]);
+            return batchActions([setTeiAttributeValues(attributeValues)]);
         }),
     );
 
 export const updateTeiFailedEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(dataEntryActionTypes.TEI_UPDATE_ERROR),
-        map(() => setTeiModalState(TEI_MODAL_STATE.OPEN_ERROR)),
+        map(() => setTeiModalError(true)),
     );

@@ -4,12 +4,13 @@ import { useDispatch } from 'react-redux';
 import type { Props } from './dataEntry.types';
 import { DataEntryComponent } from './DataEntry.component';
 import { useLifecycle, useFormValidations } from './hooks';
-import { getUpdateFieldActions, updateTeiRequest, setTeiModalState, TEI_MODAL_STATE } from './dataEntry.actions';
+import { getUpdateFieldActions, updateTeiRequest, setTeiModalError } from './dataEntry.actions';
 
 export const DataEntry = ({
     programAPI,
     orgUnitId,
     onCancel,
+    onDisable,
     clientAttributesWithSubvalues,
     modalState,
     trackedEntityInstanceId,
@@ -41,7 +42,8 @@ export const DataEntry = ({
     const onSave = useCallback(() => {
         setSaveAttempted(true);
         if (formValidated) {
-            dispatch(setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE));
+            onDisable();
+            dispatch(setTeiModalError(false));
             dispatch(
                 updateTeiRequest({
                     itemId,
@@ -68,6 +70,7 @@ export const DataEntry = ({
         onSaveExternal,
         onSaveSuccessActionType,
         onSaveErrorActionType,
+        onDisable,
     ]);
 
     return (

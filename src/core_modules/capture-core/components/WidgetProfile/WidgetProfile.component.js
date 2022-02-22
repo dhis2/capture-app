@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -13,7 +13,7 @@ import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
 import type { Props } from './widgetProfile.types';
 import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues } from './hooks';
-import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, setTeiModalState, getTeiDisplayName } from './DataEntry';
+import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, getTeiDisplayName } from './DataEntry';
 
 const styles = {
     header: {
@@ -26,12 +26,12 @@ const styles = {
 };
 
 const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = '', onUpdateTeiAttributeValues, classes }: Props) => {
-    const dispatch = useDispatch();
     const [open, setOpenStatus] = useState(true);
+    const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
-    const { storedAttributeValues, modalState } = useSelector(({ trackedEntityInstance }) => ({
+    const { storedAttributeValues, hasError } = useSelector(({ trackedEntityInstance }) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
-        modalState: trackedEntityInstance?.modalState || TEI_MODAL_STATE.CLOSE }));
+        hasError: trackedEntityInstance?.hasError }));
     const {
         loading: trackedEntityInstancesLoading,
         error: trackedEntityInstancesError,
@@ -59,7 +59,12 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
         }), [clientAttributesWithSubvalues]);
 
     useEffect(() => {
+        hasError && setTeiModalState(TEI_MODAL_STATE.OPEN_ERROR);
+    }, [hasError]);
+
+    useEffect(() => {
         if (storedAttributeValues?.length > 0) {
+            setTeiModalState(TEI_MODAL_STATE.CLOSE);
             onUpdateTeiAttributeValues && onUpdateTeiAttributeValues(storedAttributeValues, teiDisplayName);
         }
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
@@ -87,7 +92,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                     <div className={classes.header}>
                         <div> {i18n.t('Person Profile')} </div>
                         {showEdit && (
-                            <Button onClick={() => dispatch(setTeiModalState(TEI_MODAL_STATE.OPEN))} small>
+                            <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} small>
                                 {i18n.t('Edit')}
                             </Button>
                         )}
@@ -101,7 +106,8 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
             </Widget>
             {!loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE && (
                 <DataEntry
-                    onCancel={() => dispatch(setTeiModalState(TEI_MODAL_STATE.CLOSE))}
+                    onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
+                    onDisable={() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE)}
                     programAPI={program}
                     orgUnitId={orgUnitId}
                     clientAttributesWithSubvalues={clientAttributesWithSubvalues}
