@@ -1220,6 +1220,9 @@ msgstr "Inactive"
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
 
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr "an error occurred loading Tracked entity instance lists"
+
 msgid "Update view"
 msgstr "Update view"
 

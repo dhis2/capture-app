@@ -1,7 +1,7 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "1.67.1",
+  "version": "1.67.2",
   "cacheVersion": "1",
   "serverVersion": "37",
   "private": true,
@@ -20,7 +20,7 @@
     "@popperjs/core": "^2.11.2",
     "@react-leaflet/core": "^1.1.1",
     "@redux-offline/redux-offline": "^2.6.0",
-    "autosuggest-highlight": "^3.2.0",
+    "autosuggest-highlight": "^3.2.1",
     "classnames": "^2.3.1",
     "d2": "^31",
     "d2-manifest": "^1.0.0",
@@ -82,7 +82,7 @@
     "i18n:add": "d2-app-scripts i18n extract && git add ./i18n/"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.4",
+    "@babel/core": "^7.17.5",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-transform-flow-strip-types": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
