@@ -7,7 +7,7 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
         useMemo(
             () => ({
                 trackedEntityInstances: {
-                    resource: 'trackedEntityInstances',
+                    resource: 'tracker/trackedEntities',
                     id: teiId,
                     params: {
                         program: programId,

@@ -34,7 +34,7 @@ const NewEventWorkspacePlain = ({
     ...passOnProps
 }: Props) => {
     const { tab } = useLocationQuery();
-    const { events, enrollmentDate, incidentDate } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
+    const { events, enrolledAt, occurredAt } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(tab ?? tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
@@ -97,8 +97,8 @@ const NewEventWorkspacePlain = ({
                         teiId={teiId}
                         eventData={events}
                         enrollmentId={enrollmentId}
-                        enrollmentDate={enrollmentDate}
-                        incidentDate={incidentDate}
+                        enrolledAt={enrolledAt}
+                        occurredAt={occurredAt}
                         onSaveSuccessActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_SUCCESS}
                         onSaveErrorActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR}
                         onSave={onSave}

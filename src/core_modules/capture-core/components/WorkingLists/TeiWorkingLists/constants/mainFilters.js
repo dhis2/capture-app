@@ -1,6 +1,6 @@
 export const MAIN_FILTERS = {
     PROGRAM_STATUS: 'programStatus',
-    ENROLLMENT_DATE: 'enrollmentDate',
-    INCIDENT_DATE: 'incidentDate',
+    ENROLLED_AT: 'enrolledAt',
+    OCCURED_AT: 'occurredAt',
     ASSIGNEE: 'assignee',
 };

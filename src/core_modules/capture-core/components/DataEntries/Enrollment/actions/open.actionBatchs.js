@@ -16,13 +16,13 @@ type DataEntryPropsToInclude = Array<Object>;
 
 const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
-        id: 'enrollmentDate',
+        id: 'enrolledAt',
         type: 'DATE',
         // $FlowFixMe[incompatible-call] automated comment
         validatorContainers: getEnrollmentDateValidatorContainer(),
     },
     {
-        id: 'incidentDate',
+        id: 'occurredAt',
         type: 'DATE',
         // $FlowFixMe[incompatible-call] automated comment
         validatorContainers: getIncidentDateValidatorContainer(),
@@ -56,7 +56,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async (
                 dataEntryId,
                 itemId,
                 [...dataEntryPropsToInclude, ...extraDataEntryProps],
-                { enrollmentDate: convertDateObjectToDateFormatString(new Date()) },
+                { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
                 generatedItemContainers
                     .reduce((accValuesByKey, container) => {
                         accValuesByKey[container.id] = container.item.value;

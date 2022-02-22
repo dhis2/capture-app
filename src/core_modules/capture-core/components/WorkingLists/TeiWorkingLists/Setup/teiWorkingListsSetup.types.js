@@ -10,7 +10,7 @@ import type {
     DeleteTemplate,
     UpdateTemplate,
 } from '../../WorkingListsCommon';
-import type { FiltersData, SetTemplateSharingSettings } from '../../WorkingListsBase';
+import type { FiltersData, WorkingListTemplates, SetTemplateSharingSettings } from '../../WorkingListsBase';
 import type { LoadTeiView, TeiRecords } from '../types';
 
 type ExtractedProps = $ReadOnly<{|
@@ -30,6 +30,7 @@ type ExtractedProps = $ReadOnly<{|
     sortById: string,
     sortByDirection: string,
     storeId: string,
+    apiTemplates: WorkingListTemplates
 |}>;
 
 export type Props = $ReadOnly<{|

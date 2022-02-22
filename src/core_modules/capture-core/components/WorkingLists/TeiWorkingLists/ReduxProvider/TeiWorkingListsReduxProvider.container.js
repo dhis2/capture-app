@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TeiWorkingListsSetup } from '../Setup';
 import { useWorkingListsCommonStateManagement, fetchTemplates } from '../../WorkingListsCommon';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
@@ -8,8 +8,14 @@ import { TEI_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './teiWorkingListsReduxProvider.types';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
+const useApiTemplate = () => {
+    const workingListsTemplatesTEI = useSelector(({ workingListsTemplates }) => workingListsTemplates.teiList);
+    return workingListsTemplatesTEI && workingListsTemplatesTEI.templates;
+};
+
 export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: Props) => {
     const program = useTrackerProgram(programId);
+    const apiTemplates = useApiTemplate();
 
     const {
         lastTransaction,
@@ -39,6 +45,7 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
             program={program}
             records={records}
             orgUnitId={orgUnitId}
+            apiTemplates={apiTemplates}
         />
     );
 };

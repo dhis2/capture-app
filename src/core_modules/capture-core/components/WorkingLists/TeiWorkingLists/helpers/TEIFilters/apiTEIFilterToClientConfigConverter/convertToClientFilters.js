@@ -15,12 +15,12 @@ import type {
     ApiDataFilterText,
     ApiDataFilterBoolean,
     ApiDataFilterDate,
+    ApiDataFilterDateContents,
     ApiDataFilterOptionSet,
     ApiTEIQueryCriteria,
     TeiColumnsMetaForDataFetching,
 } from '../../../types';
 import { DATE_TYPES, ASSIGNEE_MODES } from '../../../constants';
-import { convertPeriodDateToClient } from './index';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
     const value = filter.like;
@@ -40,7 +40,7 @@ const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterD
     value: true,
 });
 
-const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => {
+const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
     if (dateFilter.type === DATE_TYPES.RELATIVE) {
         return {
             type: dateFilter.type,
@@ -54,6 +54,8 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => {
         le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
     };
 };
+
+const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => getDateFilterContent(dateFilter);
 
 const isOptionSetFilter = (type, filter: ApiDataFilterOptionSet) => {
     if ([filterTypesObject.BOOLEAN].includes(type)) {
@@ -109,16 +111,16 @@ const getAssigneeFilter = async (assignedUsers: ?Array<string>, querySingleResou
     return { id, name, username };
 };
 
-export const convertToClientConfig = async (
+export const convertToClientFilters = async (
     TEIQueryCriteria: ?ApiTEIQueryCriteria,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
     querySingleResource: QuerySingleResource,
-) => {
+): { [id: string]: any } => {
     let filters = {};
     if (!TEIQueryCriteria) {
         return filters;
     }
-    const { programStatus, enrollmentDate, incidentDate, assignedUserMode, assignedUsers, attributeValueFilters } = TEIQueryCriteria;
+    const { programStatus, enrolledAt, occurredAt, assignedUserMode, assignedUsers, attributeValueFilters } = TEIQueryCriteria;
 
     if (programStatus) {
         filters = {
@@ -129,11 +131,11 @@ export const convertToClientConfig = async (
             },
         };
     }
-    if (enrollmentDate) {
-        filters = { ...filters, enrollmentDate: convertPeriodDateToClient(enrollmentDate) };
+    if (enrolledAt) {
+        filters = { ...filters, enrolledAt: getDateFilterContent(enrolledAt) };
     }
-    if (incidentDate) {
-        filters = { ...filters, incidentDate: convertPeriodDateToClient(incidentDate) };
+    if (occurredAt) {
+        filters = { ...filters, occurredAt: getDateFilterContent(occurredAt) };
     }
     if (assignedUserMode && assignedUserMode !== ASSIGNEE_MODES.PROVIDED) {
         filters = { ...filters, assignee: { assignedUserMode } };

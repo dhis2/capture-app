@@ -9,7 +9,7 @@ import {
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
-import { convertToClientConfig, convertSortOrder } from '../../../helpers/TEIFilters/apiTEIFilterToClientConfigConverter';
+import { convertToClientFilters, convertSortOrder, getCustomColumnsConfiguration } from '../../../helpers/TEIFilters';
 
 export const initTeiWorkingListsViewAsync = async ({
     programId,
@@ -22,10 +22,10 @@ export const initTeiWorkingListsViewAsync = async ({
     absoluteApiPath,
 }: Input) => {
     const { sortById, sortByDirection } = convertSortOrder(selectedTemplate?.criteria?.order);
-    const customColumnOrder = selectedTemplate?.criteria?.displayColumnOrder?.map(order => ({ id: order, visible: true }));
+    const customColumnOrder = getCustomColumnsConfiguration(selectedTemplate?.criteria?.displayColumnOrder, columnsMetaForDataFetching);
     const pageSize = 15;
     const page = 1;
-    const filters = await convertToClientConfig(selectedTemplate.criteria, columnsMetaForDataFetching, querySingleResource);
+    const filters = await convertToClientFilters(selectedTemplate.criteria, columnsMetaForDataFetching, querySingleResource);
     const apiFilters = buildFilterQueryArgs(filters, { columns: columnsMetaForDataFetching, filtersOnly: filtersOnlyMetaForDataFetching, storeId, isInit: true });
     return getTeiListData({ programId, orgUnitId, pageSize, page, sortById, sortByDirection, filters: apiFilters }, {
         columnsMetaForDataFetching,
