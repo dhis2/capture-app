@@ -2,7 +2,6 @@
 import log from 'loglevel';
 import moment from 'moment';
 import { errorCreator } from 'capture-core-utils';
-import { convertValue as convertEnrollmentDateFilter } from './dateConverter';
 import { convertValue as getApiOptionSetFilter } from './optionSet';
 import { filterTypesObject, type BooleanFilterData, type TextFilterData, type NumericFilterData } from '../../../../WorkingListsBase';
 import { MAIN_FILTERS, DATE_TYPES } from '../../../constants';
@@ -79,10 +78,10 @@ export const convertToTEIFilterMainFilters = ({ filters, mainFilters }: { filter
             mainValue = filter.values[0];
             break;
         case MAIN_FILTERS.ENROLLED_AT:
-            mainValue = convertEnrollmentDateFilter(filter);
+            mainValue = getDateFilter(filter)?.dateFilter;
             break;
         case MAIN_FILTERS.OCCURED_AT:
-            mainValue = convertEnrollmentDateFilter(filter);
+            mainValue = getDateFilter(filter)?.dateFilter;
             break;
         case MAIN_FILTERS.ASSIGNEE:
             return { ...acc, ...getAssigneeFilter(filter) };
