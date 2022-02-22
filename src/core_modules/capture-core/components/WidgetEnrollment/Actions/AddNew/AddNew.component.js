@@ -20,10 +20,10 @@ export const AddNew = ({ enrollment, onlyEnrollOnce, tetId, onAddNew }: Props) =
     if (!isCompleted) {
         return null;
     }
-    const tet = tetId ? getTrackedEntityTypeThrowIfNotFound(tetId) : {};
+    const tetName = tetId ? getTrackedEntityTypeThrowIfNotFound(tetId)?.name : '';
 
     return (onlyEnrollOnce ? <Tooltip
-        content={i18n.t('Only one enrollment per {{tetName}} is allowed in this program', { tetName: tet?.name })}
+        content={i18n.t('Only one enrollment per {{tetName}} is allowed in this program', { tetName })}
     >
         <AddNewItem
             disabled={onlyEnrollOnce}
