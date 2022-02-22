@@ -1,3 +1,10 @@
+# [1.68.0](https://github.com/dhis2/capture-app/compare/v1.67.2...v1.68.0) (2022-02-22)
+
+
+### Features
+
+* [DHIS2-9280][DHIS2-9279][DHIS2-9282][DHIS2-9284][DHIS2-12575] TEI custom views ([#2453](https://github.com/dhis2/capture-app/issues/2453)) ([56cf6ec](https://github.com/dhis2/capture-app/commit/56cf6ec3818833efec861a953a98782a34bc0ff2)), closes [#2487](https://github.com/dhis2/capture-app/issues/2487)
+
 ## [1.67.2](https://github.com/dhis2/capture-app/compare/v1.67.1...v1.67.2) (2022-02-18)
 
 
