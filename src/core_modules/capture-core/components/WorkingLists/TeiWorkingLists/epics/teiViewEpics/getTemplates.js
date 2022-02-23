@@ -55,7 +55,7 @@ export const getTemplates = (
                             displayColumnOrder,
                             assignedUserMode,
                             assignedUsers,
-                        },
+                        } = {},
                     }) => ({
                         id,
                         name: displayName,
