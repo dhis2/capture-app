@@ -1,5 +1,4 @@
 // @flow
-import { useHistory } from 'react-router-dom';
 import { useDataMutation } from '@dhis2/app-runtime';
 import React from 'react';
 import { ActionsComponent } from './Actions.component';
