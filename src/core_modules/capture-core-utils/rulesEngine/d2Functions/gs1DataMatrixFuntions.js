@@ -225,7 +225,7 @@ const aiFixedLengthMap = {
     41: 10,
 };
 
-const removeGS1Identifier = (value) => { value.substring(3); };
+const removeGS1Identifier = value => value.substring(3);
 
 const getApplicationIdentifier = (gs1Group) => {
     for (const element of gs1Elements.keys()) {
