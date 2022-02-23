@@ -29,7 +29,7 @@ type ExtractedProps = $ReadOnly<{|
     filters?: FiltersData,
     sortById: string,
     sortByDirection: string,
-    storeId: string,
+    templateSharingType: string,
     apiTemplates: WorkingListTemplates
 |}>;
 

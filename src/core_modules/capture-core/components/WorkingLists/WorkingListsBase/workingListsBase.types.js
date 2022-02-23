@@ -208,7 +208,7 @@ export type InterfaceProps = $ReadOnly<{|
     updatingWithDialog: boolean,
     viewPreloaded?: boolean,
     programStageId?: string,
-    storeId: string,
+    templateSharingType: string,
 |}>;
 
 export type WorkingListsOutputProps = InterfaceProps;

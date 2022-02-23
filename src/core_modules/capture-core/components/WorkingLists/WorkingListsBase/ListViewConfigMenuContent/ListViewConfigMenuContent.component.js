@@ -22,7 +22,7 @@ const ListViewConfigMenuContentPlain = (props: Props) => {
         currentViewHasTemplateChanges,
         classes,
         customListViewMenuContents,
-        storeId,
+        templateSharingType,
         ...passOnProps
     } = props;
     const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = useState(null);
@@ -168,7 +168,7 @@ const ListViewConfigMenuContentPlain = (props: Props) => {
                 onUpdateTemplate={handleUpdateTemplate}
                 onDeleteTemplate={handleDeleteTemplate}
                 onSetSharingSettings={handleSetSharingSettings}
-                storeId={storeId}
+                templateSharingType={templateSharingType}
             />
         </React.Fragment>
     );

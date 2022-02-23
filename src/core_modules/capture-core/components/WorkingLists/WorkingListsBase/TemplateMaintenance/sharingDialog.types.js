@@ -5,6 +5,6 @@ export type Props = {|
     onClose: (sharingSettings: SharingSettings) => void,
     open: boolean,
     templateId: string,
-    storeId: string,
+    templateSharingType: string,
     ...CssClasses,
 |};
