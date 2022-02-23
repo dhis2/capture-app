@@ -38,8 +38,8 @@ export const Actions = ({ enrollment = {}, refetch, onDelete, ...passOnProps }: 
         },
     );
     const onHandleAddNew = () => {
-        const { programId, orgUnitId } = deriveURLParamsFromLocation();
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
+        const { programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
 
     return (
