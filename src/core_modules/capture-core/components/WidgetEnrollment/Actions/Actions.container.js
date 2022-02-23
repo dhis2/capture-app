@@ -4,7 +4,6 @@ import { useDataMutation } from '@dhis2/app-runtime';
 import React from 'react';
 import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';
-import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../utils/routing';
 
 const enrollmentUpdate = {
     resource: 'tracker?async=false&importStrategy=UPDATE',
@@ -37,17 +36,12 @@ export const Actions = ({ enrollment = {}, refetch, onDelete, ...passOnProps }: 
             onComplete: onDelete,
         },
     );
-    const onHandleAddNew = () => {
-        const { programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
-    };
 
     return (
         <ActionsComponent
             enrollment={enrollment}
             onUpdate={updateMutation}
             onDelete={deleteMutation}
-            onAddNew={onHandleAddNew}
             loading={updateLoading || deleteLoading}
             {...passOnProps}
         />

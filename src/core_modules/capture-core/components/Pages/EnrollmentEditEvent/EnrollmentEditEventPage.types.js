@@ -16,6 +16,7 @@ export type PlainProps = {|
     eventDate?: string,
     enrollmentsAsOptions: Array<Object>,
     onDelete: () => void,
+    onAddNew: () => void,
     onGoBack: () => void,
     pageStatus: string,
     ...CssClasses,

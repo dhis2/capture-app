@@ -6,6 +6,7 @@ export type Props = {|
     enrollmentId: string,
     programId: string,
     onDelete: () => void,
+    onAddNew: () => void,
 |};
 
 export type PlainProps = {|
@@ -17,5 +18,6 @@ export type PlainProps = {|
     loading: boolean,
     tetId: string,
     onDelete: () => void,
+    onAddNew: () => void,
     ...CssClasses,
 |};

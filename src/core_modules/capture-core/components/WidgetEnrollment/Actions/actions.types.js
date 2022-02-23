@@ -5,6 +5,7 @@ export type Props = {|
     enrollment: Object,
     refetch: QueryRefetchFunction,
     onDelete: () => void,
+    onAddNew: () => void,
     onlyEnrollOnce: boolean,
     tetId: string,
 |};

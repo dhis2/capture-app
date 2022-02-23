@@ -7,7 +7,7 @@ import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
 import type { Props } from './enrollment.types';
 
-export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete }: Props) => {
+export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onAddNew }: Props) => {
     const {
         error: errorEnrollment,
         enrollment,
@@ -26,6 +26,7 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete }: P
             ownerOrgUnit={{ id: ownerOrgUnit, displayName }}
             loading={!(enrollment && program && displayName)}
             onDelete={onDelete}
+            onAddNew={onAddNew}
             error={
                 errorEnrollment ||
                 errorProgram ||

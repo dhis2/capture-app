@@ -72,6 +72,10 @@ export const EnrollmentPageDefault = () => {
         history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId, eventId, stageId })}`);
     };
 
+    const onAddNew = () => {
+        history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
+    };
+
     return (
         <EnrollmentPageDefaultComponent
             teiId={teiId}
@@ -81,6 +85,7 @@ export const EnrollmentPageDefault = () => {
             stages={stages}
             events={enrollment?.events}
             enrollmentId={enrollmentId}
+            onAddNew={onAddNew}
             onDelete={onDelete}
             onViewAll={onViewAll}
             onCreateNew={onCreateNew}
