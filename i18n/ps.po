@@ -1183,6 +1183,9 @@ msgstr "غېرې فعال دی"
 msgid "Working list could not be updated"
 msgstr ""
 
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr ""
+
 msgid "Update view"
 msgstr ""
 
