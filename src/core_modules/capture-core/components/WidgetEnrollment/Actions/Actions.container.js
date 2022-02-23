@@ -20,7 +20,6 @@ const enrollmentDelete = {
 };
 
 export const Actions = ({ enrollment = {}, refetch, onDelete, ...passOnProps }: Props) => {
-    const history = useHistory();
     const [updateMutation, { loading: updateLoading }] = useDataMutation(
         enrollmentUpdate,
         {
