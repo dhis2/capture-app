@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-15T09:59:36.798Z\n"
-"PO-Revision-Date: 2022-02-15T09:59:36.798Z\n"
+"POT-Creation-Date: 2022-02-18T09:40:06.420Z\n"
+"PO-Revision-Date: 2022-02-18T09:40:06.420Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -761,6 +761,9 @@ msgstr "Create for"
 
 msgid "You can also choose a program from the top bar and create in that program"
 msgstr "You can also choose a program from the top bar and create in that program"
+
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr "New Enrollment in program{{escape}} {{programName}}"
 
 msgid "Save new"
 msgstr "Save new"

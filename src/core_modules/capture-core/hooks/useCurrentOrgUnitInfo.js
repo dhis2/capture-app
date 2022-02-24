@@ -1,7 +1,7 @@
 // @flow
 import { useSelector } from 'react-redux';
 
-export const useCurrentOrgUnitInfo = (): {| id: string, name: string |} =>
+export const useCurrentOrgUnitInfo = (): {| id: string, name: string, code: string |} =>
     ({
         id: useSelector(({ currentSelections: { orgUnitId } }) => orgUnitId),
         name: useSelector((

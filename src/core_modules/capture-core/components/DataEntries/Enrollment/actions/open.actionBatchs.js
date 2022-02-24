@@ -48,6 +48,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     extraDataEntryProps = [],
     generatedUniqueValuesCache = {},
     formValues,
+    clientValues,
 }: {
     program: TrackerProgram,
     foundation: RenderFoundation,
@@ -57,9 +58,9 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     extraDataEntryProps?: Array<Object>,
     generatedUniqueValuesCache?: ?Object,
     formValues: { [key: string]: any },
+    clientValues: { [key: string]: any },
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
-
     const generatedItemContainers = await
     getGeneratedUniqueValuesAsync(foundation, generatedUniqueValuesCache, { orgUnitCode: orgUnit.code });
     const dataEntryActions =
@@ -79,6 +80,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     const effects = getApplicableRuleEffectsForTrackerProgram({
         program,
         orgUnit,
+        attributeValues: clientValues,
     });
 
     return batchActions([

@@ -137,7 +137,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
             const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
             const events = deriveEvents({ stages, enrolledAt, occurredAt, programId, orgUnitId });
-            const formFoundation = action.payload?.formFoundation;
+            const { formFoundation, teiId: trackedEntity } = action.payload;
             const formServerValues = formFoundation?.convertValues(values, convertFn);
 
             return saveNewTrackedEntityInstanceWithEnrollment(
@@ -158,6 +158,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
                         ],
                         orgUnit: orgUnitId,
                         trackedEntityType: trackedEntityType.id,
+                        ...(trackedEntity && { trackedEntity }),
                     }],
                 });
         }),

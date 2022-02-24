@@ -6,16 +6,22 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
             () => ({
-                trackedEntityInstances: {
-                    resource: 'trackedEntityInstances',
+                trackedEntityInstance: {
+                    resource: 'tracker/trackedEntities',
                     id: teiId,
                     params: {
                         program: programId,
+                        fields: ['attributes'],
                     },
                 },
             }),
             [teiId, programId],
         ),
     );
-    return { error, loading, trackedEntityInstances: !loading && data?.trackedEntityInstances };
+
+    return {
+        error,
+        loading,
+        trackedEntityInstanceAttributes: !loading && data?.trackedEntityInstance.attributes,
+    };
 };
