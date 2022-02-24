@@ -17,7 +17,7 @@ type InputProgramData = {
                     name: string,
                 }>,
             },
-            valueType?: string,
+            valueType: string,
             unique: boolean,
         },
         displayInList: boolean,
@@ -51,11 +51,11 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
                 const foundAttribute = trackedEntityInstanceAttributes?.find(item => item.attribute === id);
                 let value;
                 if (foundAttribute) {
-                    if (subValueGetterByElementType[foundAttribute.valueType]) {
-                        value = await subValueGetterByElementType[foundAttribute.valueType](foundAttribute.value, querySingleResource);
+                    if (subValueGetterByElementType[valueType]) {
+                        value = await subValueGetterByElementType[valueType](foundAttribute.value, querySingleResource);
                     } else {
                         // $FlowFixMe dataElementTypes flow error
-                        value = convertServerToClient(foundAttribute.value, foundAttribute.valueType);
+                        value = convertServerToClient(foundAttribute.value, valueType);
                     }
                 }
 
@@ -70,7 +70,7 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
                         displayInList,
                         value,
                         unique,
-                        valueType: foundAttribute?.valueType || valueType,
+                        valueType,
                     },
                 ];
             }, Promise.resolve([]));

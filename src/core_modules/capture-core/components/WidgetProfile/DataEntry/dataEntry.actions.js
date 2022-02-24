@@ -38,6 +38,7 @@ export const dataEntryActionTypes = {
     TEI_UPDATE_ERROR: 'TeiUpdateError',
     SET_TEI_MODAL_ERROR: 'SetTeiModalError',
     SET_TEI_ATTRIBUTE_VALUES: 'SetTeiAttributeValues',
+    CLEAN_TEI_MODAL: 'CleanTeiModal',
 };
 const dataEntryPropsToInclude: Array<Object> = [
     {
@@ -99,6 +100,7 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
 
 export const setTeiModalError = (hasError: boolean) => actionCreator(dataEntryActionTypes.SET_TEI_MODAL_ERROR)({ hasError });
 export const setTeiAttributeValues = (attributeValues: Array<{ [key: string]: string }>) => actionCreator(dataEntryActionTypes.SET_TEI_ATTRIBUTE_VALUES)({ attributeValues });
+export const cleanTeiModal = () => actionCreator(dataEntryActionTypes.CLEAN_TEI_MODAL)();
 
 export const updateTeiRequest = ({
     itemId,

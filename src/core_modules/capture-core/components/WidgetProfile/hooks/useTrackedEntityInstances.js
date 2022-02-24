@@ -32,18 +32,18 @@ export const useTrackedEntityInstances = (teiId: string, programId: string, stor
 
     useEffect(() => {
         if (data?.trackedEntityInstance?.attributes?.length > 0) {
-            setTrackedEntityInstanceAttributes(data?.trackedEntityInstance?.attributes);
+            setTrackedEntityInstanceAttributes(
+                data?.trackedEntityInstance?.attributes.map(({ attribute, value }) => ({
+                    attribute,
+                    value,
+                })),
+            );
         }
     }, [data?.trackedEntityInstance?.attributes]);
 
     useEffect(() => {
         if (storedAttributeValues?.length > 0) {
-            setTrackedEntityInstanceAttributes(teiAttributes =>
-                teiAttributes.map(teiAttribute => ({
-                    ...teiAttribute,
-                    value: storedAttributeValues.find(stored => stored.attribute === teiAttribute.attribute)?.value || teiAttribute.value,
-                })),
-            );
+            setTrackedEntityInstanceAttributes(storedAttributeValues);
         }
     }, [storedAttributeValues]);
 
