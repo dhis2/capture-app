@@ -1,39 +1,41 @@
 // @flow
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { startNewEnrollmentDataEntryInitialisation } from '../EnrollmentRegistrationEntry.actions';
+import { scopeTypes, getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import { useLocationQuery } from '../../../../utils/routing';
+import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
-import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import { useRegistrationFormInfoForSelectedScope } from '../../common/useRegistrationFormInfoForSelectedScope';
-import { useFormValues, useTrackedEntityInstances, useClientAttributesWithSubvalues } from './index';
+import { useFormValues, useTrackedEntityInstances } from './index';
 
-export const useLifecycle = ({ selectedScopeId }: { selectedScopeId: string }) => {
+export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
     const { teiId, programId } = useLocationQuery();
-    const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const dataEntryReadyRef = useRef(false);
+    const dispatch = useDispatch();
+    const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]);
     const program = getTrackerProgramThrowIfNotFound(programId);
     const orgUnit = useCurrentOrgUnitInfo();
-    const {
-        loading: trackedEntityInstancesLoading,
-        trackedEntityInstances,
-        error: trackedEntityInstancesError,
-    } = useTrackedEntityInstances(teiId, programId);
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstances);
+    const { scopeType } = useScopeInfo(selectedScopeId);
+    const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { trackedEntityInstanceAttributes } = useTrackedEntityInstances(teiId, programId);
+    const { formValues, clientValues } = useFormValues({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation });
+    const registrationFormReady = (teiId && Object.entries(formValues).length > 0 && Object.entries(clientValues).length > 0) || !teiId;
 
-    const { formValues, clientValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues, orgUnit });
-    console.log(clientAttributesWithSubvalues);
-
-    // const formValues = {
-    //     XH2qFfTfRTB: undefined,
-    //     cejWyOfXge6: 'Male',
-    //     lZGmxYbs97q: '7607463',
-    //     vTKipVM0GsX: undefined,
-    //     w75KJ2mc4zz: 'John',
-    //     zDhUuAYrxNC: 'Kelly',
-    // };
-
-    return {
-        formValues,
-        clientValues,
-        formId,
-        formFoundation,
-        selectedOrgUnitId: orgUnit.id,
-    };
+    useEffect(() => {
+        if (dataEntryReadyRef.current === false && registrationFormReady && scopeType === scopeTypes.TRACKER_PROGRAM) {
+            dataEntryReadyRef.current = true;
+            dispatch(
+                startNewEnrollmentDataEntryInitialisation({
+                    selectedOrgUnitId: orgUnit.id,
+                    selectedScopeId,
+                    dataEntryId,
+                    formFoundation,
+                    formValues,
+                    clientValues,
+                }),
+            );
+        }
+    }, [scopeType, dataEntryId, selectedScopeId, orgUnit, registrationFormReady, formFoundation, formValues, clientValues, dispatch]);
+    return { teiId, ready, skipDuplicateCheck: !!teiId };
 };
