@@ -2,7 +2,7 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { SearchGroup } from '../../../../metaData';
+import type { SearchGroup } from '../../../../metaData';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from '../../../TeiSearch/TeiSearchResults/TeiSearchResults.container';
 import { SearchProgramSelector } from '../../../TeiSearch/SearchProgramSelector/SearchProgramSelector.container';
