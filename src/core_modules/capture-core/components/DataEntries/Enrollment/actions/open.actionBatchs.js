@@ -1,7 +1,7 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
-import { TrackerProgram } from '../../../../metaData';
+import type { TrackerProgram } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewEnrollment } from './open.actions';

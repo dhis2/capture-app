@@ -433,3 +433,21 @@ And('you see validation errors on the WHO RMNCH program registration page', () =
         .find('[data-test="error-message"]')
         .should('have.length', 4);
 });
+
+
+And('you are in Child programme reenrollment page', () => {
+    cy.visit('/#/new?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp');
+});
+
+
+And('you see the form prefield with existing TEI attributes values', () => {
+    cy.get('[data-test="registration-page-content"]').within(() => {
+        cy.contains('New Enrollment in program: Child Programme').should('exist');
+        cy.contains('First name').should('exist');
+        cy.get('[data-test="capture-ui-input"]').eq(4).should('have.value', 'Anna');
+        cy.contains('Last name').should('exist');
+        cy.get('[data-test="capture-ui-input"]').eq(5).should('have.value', 'Jones');
+        cy.contains('Gender').should('exist');
+        cy.contains('Female').should('exist');
+    });
+});

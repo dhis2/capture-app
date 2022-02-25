@@ -93,7 +93,7 @@ const useClientAttributesWithSubvalues = (program: InputProgramData, attributes:
 
 const buildFormValues = async (
     foundation: ?RenderFoundation,
-    clientAttributesWithSubvalues: Array<any> = [],
+    clientAttributesWithSubvalues: Array<any>,
     staticPatternValues: StaticPatternValues,
     setFormValues: (values: any) => void,
     setClientValues: (values: any) => void,

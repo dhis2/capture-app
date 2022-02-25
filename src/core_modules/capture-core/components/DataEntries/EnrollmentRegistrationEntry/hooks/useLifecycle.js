@@ -17,7 +17,7 @@ export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
     const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]);
     const program = getProgramThrowIfNotFound(programId);
     const orgUnitId = useCurrentOrgUnitInfo()?.id;
-    // https://jira.dhis2.org/browse/DHIS2-12387 some cases the orgUnit code is missing. Get it from the API for now.
+    // https://jira.dhis2.org/browse/DHIS2-12387 some cases the orgUnit code is missing in the Redux store. Get it from the API for now.
     const orgUnit = useOrganisationUnit(orgUnitId)?.orgUnit;
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
