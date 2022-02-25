@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { useOrganisationUnit } from 'capture-core/dataQueries/useOrganisationUnit';
 import { startNewEnrollmentDataEntryInitialisation } from '../EnrollmentRegistrationEntry.actions';
-import { scopeTypes, getTrackerProgramThrowIfNotFound } from '../../../../metaData';
+import { scopeTypes, getProgramThrowIfNotFound } from '../../../../metaData';
 import { useLocationQuery } from '../../../../utils/routing';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
@@ -15,7 +15,7 @@ export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
     const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]);
-    const program = getTrackerProgramThrowIfNotFound(programId);
+    const program = getProgramThrowIfNotFound(programId);
     const orgUnitId = useCurrentOrgUnitInfo()?.id;
     // https://jira.dhis2.org/browse/DHIS2-12387 some cases the orgUnit code is missing. Get it from the API for now.
     const orgUnit = useOrganisationUnit(orgUnitId)?.orgUnit;
