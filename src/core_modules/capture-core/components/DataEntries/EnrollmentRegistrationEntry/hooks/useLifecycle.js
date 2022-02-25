@@ -1,6 +1,7 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
+import { useOrganisationUnit } from 'capture-core/dataQueries/useOrganisationUnit';
 import { startNewEnrollmentDataEntryInitialisation } from '../EnrollmentRegistrationEntry.actions';
 import { scopeTypes, getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import { useLocationQuery } from '../../../../utils/routing';
@@ -15,7 +16,9 @@ export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
     const dispatch = useDispatch();
     const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]);
     const program = getTrackerProgramThrowIfNotFound(programId);
-    const orgUnit = useCurrentOrgUnitInfo();
+    const orgUnitId = useCurrentOrgUnitInfo()?.id;
+    // https://jira.dhis2.org/browse/DHIS2-12387 some cases the orgUnit code is missing. Get it from the API for now.
+    const orgUnit = useOrganisationUnit(orgUnitId)?.orgUnit;
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const { trackedEntityInstanceAttributes } = useTrackedEntityInstances(teiId, programId);
@@ -32,7 +35,7 @@ export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
             dataEntryReadyRef.current = true;
             dispatch(
                 startNewEnrollmentDataEntryInitialisation({
-                    selectedOrgUnitId: orgUnit.id,
+                    selectedOrgUnitId: orgUnit?.id,
                     selectedScopeId,
                     dataEntryId,
                     formValues,
