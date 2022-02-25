@@ -19,23 +19,28 @@ export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const { trackedEntityInstanceAttributes } = useTrackedEntityInstances(teiId, programId);
-    const { formValues, clientValues } = useFormValues({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation });
-    const registrationFormReady = (teiId && Object.entries(formValues).length > 0 && Object.entries(clientValues).length > 0) || !teiId;
+    const { formValues, clientValues, formValuesReadyRef } = useFormValues({
+        program,
+        trackedEntityInstanceAttributes,
+        orgUnit,
+        formFoundation,
+        teiId,
+    });
 
     useEffect(() => {
-        if (dataEntryReadyRef.current === false && registrationFormReady && scopeType === scopeTypes.TRACKER_PROGRAM) {
+        if (dataEntryReadyRef.current === false && formValuesReadyRef.current === true && scopeType === scopeTypes.TRACKER_PROGRAM) {
             dataEntryReadyRef.current = true;
             dispatch(
                 startNewEnrollmentDataEntryInitialisation({
                     selectedOrgUnitId: orgUnit.id,
                     selectedScopeId,
                     dataEntryId,
-                    formFoundation,
                     formValues,
                     clientValues,
                 }),
             );
         }
-    }, [scopeType, dataEntryId, selectedScopeId, orgUnit, registrationFormReady, formFoundation, formValues, clientValues, dispatch]);
+    }, [scopeType, dataEntryId, selectedScopeId, orgUnit, formValuesReadyRef, formValues, clientValues, dispatch]);
+
     return { teiId, ready, skipDuplicateCheck: !!teiId };
 };

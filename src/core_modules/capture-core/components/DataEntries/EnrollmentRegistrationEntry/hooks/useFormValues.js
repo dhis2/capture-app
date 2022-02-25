@@ -39,6 +39,7 @@ type InputForm = {
     trackedEntityInstanceAttributes: Array<InputAttribute>,
     orgUnit: OrgUnit,
     formFoundation: RenderFoundation,
+    teiId: ?string,
 };
 
 type StaticPatternValues = {
@@ -96,6 +97,7 @@ const buildFormValues = async (
     staticPatternValues: StaticPatternValues,
     setFormValues: (values: any) => void,
     setClientValues: (values: any) => void,
+    formValuesReadyRef: { current: boolean },
 ) => {
     const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
     const formValues = clientAttributesWithSubvalues?.reduce(
@@ -105,27 +107,26 @@ const buildFormValues = async (
     const uniqueValues = await getUniqueValuesForAttributesWithoutValue(foundation, clientAttributesWithSubvalues, staticPatternValues);
     setFormValues && setFormValues({ ...formValues, ...uniqueValues });
     setClientValues && setClientValues({ ...clientValues, ...uniqueValues });
+    formValuesReadyRef.current = true;
 };
 
-export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation }: InputForm) => {
+export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId }: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
+    const formValuesReadyRef = useRef<any>(false);
     const [formValues, setFormValues] = useState<any>({});
     const [clientValues, setClientValues] = useState<any>({});
-    const formValuesReadyRef = useRef(false);
 
     useEffect(() => {
         if (
             orgUnit?.code &&
-            clientAttributesWithSubvalues.length > 0 &&
             Object.entries(formFoundation).length > 0 &&
-            Object.entries(formValues).length === 0 &&
-            formValuesReadyRef.current === false
+            formValuesReadyRef.current === false &&
+            ((teiId && clientAttributesWithSubvalues.length > 0) || !teiId)
         ) {
             const staticPatternValues = { orgUnitCode: orgUnit.code };
-            formValuesReadyRef.current = true;
-            buildFormValues(formFoundation, clientAttributesWithSubvalues, staticPatternValues, setFormValues, setClientValues);
+            buildFormValues(formFoundation, clientAttributesWithSubvalues, staticPatternValues, setFormValues, setClientValues, formValuesReadyRef);
         }
-    }, [formFoundation, clientAttributesWithSubvalues, formValues, formValuesReadyRef, orgUnit]);
+    }, [formFoundation, clientAttributesWithSubvalues, formValues, formValuesReadyRef, orgUnit, teiId]);
 
-    return { formValues, clientValues };
+    return { formValues, clientValues, formValuesReadyRef };
 };
