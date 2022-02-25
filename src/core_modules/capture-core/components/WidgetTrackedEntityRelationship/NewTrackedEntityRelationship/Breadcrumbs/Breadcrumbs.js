@@ -18,6 +18,7 @@ const styles = {
 const BreadcrumbsPlain = ({
     selectedRelationshipType,
     onResetRelationshipType,
+    onResetCreationMode,
     pageStatus,
     classes,
 }) => {
@@ -35,6 +36,16 @@ const BreadcrumbsPlain = ({
                     <LinkButton onClick={onResetRelationshipType}>{initialText}</LinkButton>
                     {renderSlash()}
                     <span>{selectedRelationshipType.displayName}</span>
+                </>
+            )}
+
+            {pageStatus === NewTEIRelationshipStatuses.LINK_TO_EXISTING && (
+                <>
+                    <LinkButton onClick={onResetRelationshipType}>{initialText}</LinkButton>
+                    {renderSlash()}
+                    <LinkButton onClick={onResetCreationMode}>{selectedRelationshipType.displayName}</LinkButton>
+                    {renderSlash()}
+                    <span>{'Search'}</span>
                 </>
             )}
         </div>

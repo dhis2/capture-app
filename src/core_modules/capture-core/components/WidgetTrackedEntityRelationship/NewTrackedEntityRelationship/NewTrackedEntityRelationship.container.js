@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback, useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import * as ReactDOM from 'react-dom';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
@@ -10,6 +11,8 @@ import type { Props } from './NewTrackedEntityRelationship.types';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
 import { useLocationQuery } from '../../../utils/routing';
+import { creationModeStatuses } from './NewTrackedEntityRelationship.const';
+import { requestSaveRelationshipForTei, startTeiSearchForWidget } from './NewTrackedEntityRelationship.actions';
 
 const styles = {
     container: {
@@ -47,7 +50,32 @@ export const NewTrackedEntityRelationshipPlain = ({
 }: Props) => {
     const [selectedRelationshipType, setSelectedRelationshipType] = useState();
     const [creationMode, setCreationMode] = useState();
-    const { programId } = useLocationQuery();
+    const { programId, teiId } = useLocationQuery();
+    const dispatch = useDispatch();
+
+    const handleAddRelationship = useCallback((linkedTei) => {
+        if (selectedRelationshipType) {
+            const {
+                constraintSide,
+                id,
+            } = selectedRelationshipType;
+            const linkedTeiConstraintSide: string = constraintSide !== 'from' ? 'from' : 'to';
+
+            const serverData = {
+                relationships: [{
+                    relationshipType: id,
+                    [constraintSide]: {
+                        trackedEntity: teiId,
+                    },
+                    [linkedTeiConstraintSide]: {
+                        trackedEntity: linkedTei,
+                    },
+                }],
+            };
+
+            dispatch(requestSaveRelationshipForTei({ serverData }));
+        }
+    }, [dispatch, selectedRelationshipType, teiId]);
 
     const pageStatus = useMemo(() => {
         if (!selectedRelationshipType) {
@@ -55,6 +83,9 @@ export const NewTrackedEntityRelationshipPlain = ({
         }
         if (!creationMode) {
             return NewTEIRelationshipStatuses.MISSING_CREATION_MODE;
+        }
+        if (creationMode === creationModeStatuses.SEARCH) {
+            return NewTEIRelationshipStatuses.LINK_TO_EXISTING;
         }
         return NewTEIRelationshipStatuses.DEFAULT;
     }, [creationMode, selectedRelationshipType]);
@@ -74,6 +105,15 @@ export const NewTrackedEntityRelationshipPlain = ({
         setCreationMode();
     }, []);
 
+    const onResetCreationMode = useCallback(() => {
+        setCreationMode();
+    }, []);
+
+    const onSetCreationMode = useCallback((value) => {
+        setCreationMode(value);
+        dispatch(startTeiSearchForWidget({ selectedRelationshipType }));
+    }, [dispatch, selectedRelationshipType]);
+
     if (!showDialog || !renderRef.current) {
         return null;
     }
@@ -92,15 +132,17 @@ export const NewTrackedEntityRelationshipPlain = ({
                         pageStatus={pageStatus}
                         selectedRelationshipType={selectedRelationshipType}
                         onResetRelationshipType={onResetRelationshipType}
-                        creationMode={creationMode}
+                        onResetCreationMode={onResetCreationMode}
                     />}
                 >
                     <NewTrackedEntityRelationshipComponent
                         relationshipTypes={relationshipTypes}
                         trackedEntityType={trackedEntityType}
+                        addRelationship={handleAddRelationship}
                         programId={programId}
                         pageStatus={pageStatus}
                         onSelectType={onSelectRelationshipType}
+                        onSetCreationMode={onSetCreationMode}
                         {...passOnProps}
                     />
                 </Widget>

@@ -4,6 +4,11 @@ import { Button, IconSearch16, IconAdd16, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { NewTEIRelationshipStatuses } from '../WidgetTrackedEntityRelationship.const';
 import { RelationshipTypeSelector } from './RelationshipTypeSelector/RelationshipTypeSelector';
+import { creationModeStatuses } from './NewTrackedEntityRelationship.const';
+import { TeiSearch } from './TeiSearch/TeiSearch.container';
+import {
+    TeiRelationshipSearchResults,
+} from '../../Pages/NewRelationship/TeiRelationship/SearchResults/TeiRelationshipSearchResults.component';
 
 const styles = {
     container: {
@@ -19,7 +24,7 @@ const styles = {
     },
 };
 
-const NewTrackedEntityRelationshipComponentPlain = ({ pageStatus, classes, ...PassOnProps }) => {
+const NewTrackedEntityRelationshipComponentPlain = ({ pageStatus, onSetCreationMode, addRelationship, classes, ...PassOnProps }) => {
     if (pageStatus === NewTEIRelationshipStatuses.MISSING_RELATIONSHIP_TYPE) {
         return (
             <RelationshipTypeSelector
@@ -32,7 +37,10 @@ const NewTrackedEntityRelationshipComponentPlain = ({ pageStatus, classes, ...Pa
         return (
             <div className={classes.container}>
                 <div className={classes.creationselector}>
-                    <Button className={classes.creationselector}>
+                    <Button
+                        className={classes.creationselector}
+                        onClick={() => onSetCreationMode(creationModeStatuses.SEARCH)}
+                    >
                         <IconSearch16 />
                         <p>{i18n.t('Link to an existing person')}</p>
                     </Button>
@@ -41,6 +49,23 @@ const NewTrackedEntityRelationshipComponentPlain = ({ pageStatus, classes, ...Pa
                         <p>{i18n.t('Create new')}</p>
                     </Button>
                 </div>
+            </div>
+        );
+    }
+
+    if (pageStatus === NewTEIRelationshipStatuses.LINK_TO_EXISTING) {
+        return (
+            <div className={classes.container}>
+                <TeiSearch
+                    resultsPageSize={5}
+                    id="relationshipTeiSearch"
+                    getResultsView={viewProps => (
+                        <TeiRelationshipSearchResults
+                            onAddRelationship={addRelationship}
+                            {...viewProps}
+                        />
+                    )}
+                />
             </div>
         );
     }
