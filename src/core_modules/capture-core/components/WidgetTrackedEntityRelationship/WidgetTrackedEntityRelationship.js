@@ -23,6 +23,7 @@ export const WidgetTrackedEntityRelationship = ({ ...PassOnProps }: Props) => {
             <NewTrackedEntityRelationship
                 showDialog={showDialog}
                 hideDialog={changeDialogView}
+                setShowDialog={setShowDialog}
                 {...PassOnProps}
             />
         </>

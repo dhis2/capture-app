@@ -42,6 +42,7 @@ const styles = {
 export const NewTrackedEntityRelationshipPlain = ({
     renderRef,
     showDialog,
+    setShowDialog,
     hideDialog,
     relationshipTypes,
     trackedEntityType,
@@ -74,8 +75,9 @@ export const NewTrackedEntityRelationshipPlain = ({
             };
 
             dispatch(requestSaveRelationshipForTei({ serverData }));
+            setShowDialog();
         }
-    }, [dispatch, selectedRelationshipType, teiId]);
+    }, [dispatch, selectedRelationshipType, setShowDialog, teiId]);
 
     const pageStatus = useMemo(() => {
         if (!selectedRelationshipType) {
