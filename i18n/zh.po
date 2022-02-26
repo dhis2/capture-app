@@ -936,7 +936,7 @@ msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"
 
 msgid "open the Tracker Capture app"
-msgstr "打开跟踪随访APP"
+msgstr "打开跟踪随访采集APP"
 
 msgid "Save comment"
 msgstr "保存注释"
@@ -1189,7 +1189,7 @@ msgid "Working list could not be updated"
 msgstr "工作清单无法更新"
 
 msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
+msgstr "加载跟踪的实体实例列表时出错"
 
 msgid "Update view"
 msgstr "更新视图"
