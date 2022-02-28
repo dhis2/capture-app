@@ -52,7 +52,16 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
                 program,
                 storeId,
                 clientId,
-                criteria: { programStatus, enrolledAt, occurredAt, attributeValueFilters, order, displayOrderColumns, assignedUserMode, assignedUsers },
+                criteria: {
+                    programStatus,
+                    enrolledAt,
+                    occurredAt,
+                    attributeValueFilters,
+                    order,
+                    displayOrderColumns,
+                    assignedUserMode,
+                    assignedUsers,
+                },
             } = action.payload;
             const trackedEntityInstanceFilters = {
                 name,
@@ -142,26 +151,25 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore, 
         filter(({ payload: { workingListsType } }) => workingListsType === TEI_WORKING_LISTS_TYPE),
         concatMap((action) => {
             const {
-                template: { id, name },
+                template: { id, name, externalAccess, publicAccess, user, userGroupAccesses, userAccesses },
                 program,
                 storeId,
                 criteria,
             } = action.payload;
-            const {
-                programStatus,
-                enrolledAt,
-                occurredAt,
-                attributeValueFilters,
-                order,
-                displayOrderColumns,
-                assignedUserMode,
-                assignedUsers,
-            } = criteria;
+
+            const { programStatus, enrolledAt, occurredAt, attributeValueFilters, order, displayOrderColumns, assignedUserMode, assignedUsers } =
+                criteria;
+
             const trackedEntityInstanceFilters = {
                 name,
                 program,
                 order,
                 displayOrderColumns,
+                externalAccess,
+                publicAccess,
+                user,
+                userGroupAccesses,
+                userAccesses,
                 ...(assignedUserMode && { assignedUserMode }),
                 ...(assignedUsers?.length > 0 && { assignedUsers }),
                 ...(programStatus && { enrollmentStatus: programStatus }),

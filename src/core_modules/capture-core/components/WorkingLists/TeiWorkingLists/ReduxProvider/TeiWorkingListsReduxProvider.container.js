@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TeiWorkingListsSetup } from '../Setup';
-import { useWorkingListsCommonStateManagement, fetchTemplates } from '../../WorkingListsCommon';
+import { useWorkingListsCommonStateManagement, fetchTemplates, TEMPLATE_SHARING_TYPE } from '../../WorkingListsCommon';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { TEI_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './teiWorkingListsReduxProvider.types';
@@ -21,7 +21,6 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
         lastTransaction,
         lastTransactionOnListDataRefresh,
         listDataRefreshTimestamp,
-        onSetTemplateSharingSettings,
         records,
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
@@ -40,6 +39,7 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
     return (
         <TeiWorkingListsSetup
             {...commonStateManagementProps}
+            templateSharingType={TEMPLATE_SHARING_TYPE[storeId]}
             onSelectListRow={onSelectListRow}
             onLoadTemplates={onLoadTemplates}
             program={program}

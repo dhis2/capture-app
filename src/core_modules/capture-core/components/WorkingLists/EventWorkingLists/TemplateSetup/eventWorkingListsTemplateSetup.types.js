@@ -41,4 +41,5 @@ export type EventWorkingListsTemplateSetupOutputProps = {|
     onUpdateTemplate: UpdateTemplate,
     onDeleteTemplate: DeleteTemplate,
     templates?: WorkingListTemplates,
+    templateSharingType: string,
 |};
