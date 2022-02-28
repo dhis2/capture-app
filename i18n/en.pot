@@ -1102,17 +1102,32 @@ msgstr ""
 "information about this enrollment, use the Edit button in the in the "
 "Enrollment box on this dashboard"
 
+msgid " Loading..."
+msgstr " Loading..."
+
 msgid "Save changes"
 msgstr "Save changes"
 
 msgid "Profile"
 msgstr "Profile"
 
-msgid "There are errors in this form"
-msgstr "There are errors in this form"
+msgid "There is a problem with this form"
+msgstr "There is a problem with this form"
 
 msgid "There are warnings in this form"
 msgstr "There are warnings in this form"
+
+msgid "There was a problem saving changes"
+msgstr "There was a problem saving changes"
+
+msgid "Try again or contact your system administrator for support"
+msgstr "Try again or contact your system administrator for support"
+
+msgid "tracked entity instance"
+msgstr "tracked entity instance"
+
+msgid "Fix errors in the form to continue."
+msgstr "Fix errors in the form to continue."
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
@@ -1293,9 +1308,6 @@ msgstr "Error saving enrollment"
 
 msgid "Error saving the enrollment event"
 msgstr "Error saving the enrollment event"
-
-msgid "tracked entity instance"
-msgstr "tracked entity instance"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
