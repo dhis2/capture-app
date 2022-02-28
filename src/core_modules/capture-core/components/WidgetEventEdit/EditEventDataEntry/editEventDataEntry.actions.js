@@ -28,8 +28,8 @@ export const startSaveEditEventDataEntry = (eventId: string, serverData: Object,
     actionCreator(actionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY)({ selections }, {
         offline: {
             effect: {
-                url: `events/${eventId}`,
-                method: effectMethods.UPDATE,
+                url: 'tracker?async=false&importStrategy=UPDATE',
+                method: effectMethods.POST,
                 data: serverData,
             },
             commit: { type: actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED, meta: { selections, eventId, triggerAction: triggerActionCommit } },

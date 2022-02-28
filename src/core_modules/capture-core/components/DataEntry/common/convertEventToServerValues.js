@@ -17,7 +17,7 @@ export function getServerValuesToSaveFromMainEvent(event: CaptureClientEvent) {
         .reduce((accServerEvent, inputKey) => {
             const valueToConvert = event[inputKey];
             let convertedValue;
-            if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
+            if (inputKey === 'occurredAt' || inputKey === 'scheduledAt' || inputKey === 'completedAt') {
                 convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
             } else {
                 convertedValue = valueToConvert;

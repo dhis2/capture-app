@@ -130,7 +130,7 @@ const getSortOrder = (order: ?string) => {
     const sortOrderParts = order && order.split(':');
     if (!sortOrderParts || sortOrderParts.length !== 2) {
         return {
-            sortById: 'eventDate',
+            sortById: 'occurredAt',
             sortByDirection: 'desc',
         };
     }
@@ -181,14 +181,14 @@ const getMainDataFilters = async (
         return [];
     }
 
-    const { eventDate, status, assignedUserMode, assignedUsers } = eventQueryCriteria;
+    const { occurredAt, status, assignedUserMode, assignedUsers } = eventQueryCriteria;
     const filters = [];
     if (status) {
         // $FlowFixMe
         filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status').type), id: 'status' });
     }
-    if (eventDate) {
-        filters.push({ ...getDateFilter({ dateFilter: eventDate }), id: 'eventDate' });
+    if (occurredAt) {
+        filters.push({ ...getDateFilter({ dateFilter: occurredAt }), id: 'occurredAt' });
     }
     if (assignedUserMode) {
         filters.push({ ...(await getAssigneeFilter(assignedUserMode, assignedUsers)), id: 'assignee' });

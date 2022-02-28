@@ -15,6 +15,7 @@ export const DataEntryComponent = ({
     onUpdateFormField,
     trackedEntityName,
     formFoundation,
+    onGetValidationContext,
 }: PlainProps) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
         <ModalTitle>{i18n.t(`Edit ${trackedEntityName}`)}</ModalTitle>
@@ -23,7 +24,13 @@ export const DataEntryComponent = ({
                 'Change information about this {{trackedEntityName}} here. To change information about this enrollment, use the Edit button in the in the Enrollment box on this dashboard',
                 { trackedEntityName, interpolation: { escapeValue: false } },
             )}
-            <DataEntry id={dataEntryId} formFoundation={formFoundation} onUpdateFormField={onUpdateFormField} saveAttempted={saveAttempted} />
+            <DataEntry
+                id={dataEntryId}
+                formFoundation={formFoundation}
+                onUpdateFormField={onUpdateFormField}
+                saveAttempted={saveAttempted}
+                onGetValidationContext={onGetValidationContext}
+            />
             <NoticeBoxes dataEntryId={dataEntryId} itemId={itemId} saveAttempted={saveAttempted} />
         </ModalContent>
         <ModalActions>

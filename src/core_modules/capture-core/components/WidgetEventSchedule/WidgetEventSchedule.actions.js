@@ -52,7 +52,7 @@ export const scheduleEvent = (
     actionCreator(scheduleEventWidgetActionTypes.EVENT_SCHEDULE)({}, {
         offline: {
             effect: {
-                url: 'events',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
             },

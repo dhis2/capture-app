@@ -42,7 +42,14 @@ export const deriveUrlQueries = (state: Object) => {
     };
 };
 
-export const getLocationPathname = () => window.location.pathname;
+export const getLocationPathname = () => {
+    const pathname = window.location.href.split('#')[1];
+    try {
+        return pathname.split('?')[0];
+    } catch {
+        return pathname;
+    }
+};
 
 // TODO - This will be removed when the link to tracker capture is removed
 export const getLocationSearch = () => window.location.search;

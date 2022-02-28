@@ -15,7 +15,7 @@ import {
 } from './helpers';
 import { SORT_DIRECTION } from './constants';
 
-const baseKeys = [{ id: 'status' }, { id: 'eventDate' }, { id: 'orgUnitName' }, { id: 'dueDate' }, { id: 'comments' }];
+const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'comments' }];
 const basedFieldTypes = [
     { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
@@ -113,7 +113,7 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
             return acc;
         }, []);
         return [
-            ...baseColumns.filter(col => (hideDueDate ? col.id !== 'dueDate' : true)),
+            ...baseColumns.filter(col => (hideDueDate ? col.id !== 'scheduledAt' : true)),
             ...dataElementHeaders];
     }, [dataElements, hideDueDate]);
 

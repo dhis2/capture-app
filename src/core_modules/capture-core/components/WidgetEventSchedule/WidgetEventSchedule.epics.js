@@ -25,9 +25,9 @@ export const scheduleNewEnrollmentEventEpic = (action$: InputObservable) =>
 
 
             const serverData = { events: [{
-                dueDate: scheduleDate,
+                scheduledAt: scheduleDate,
                 dataValues: [],
-                trackedEntityInstance: teiId,
+                trackedEntity: teiId,
                 orgUnit: orgUnitId,
                 enrollment: enrollmentId,
                 program: programId,
