@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-15T09:59:36.798Z\n"
+"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -644,12 +644,8 @@ msgstr ""
 "Program {{programName}} má kategorie. Chcete-li zobrazit ovládací panel, "
 "vyberte všechny kategorie."
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
-"Existuje několik zápisů pro tento program. Zvolte zápis pro zobrazení "
-"řídicího panelu."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} není v tomto programu zapsán."
@@ -1131,17 +1127,32 @@ msgstr ""
 "informace o tomto zápisu, použijte tlačítko Upravit v poli Zápis na tomto "
 "ovládacím panelu"
 
+msgid " Loading..."
+msgstr ""
+
 msgid "Save changes"
 msgstr "Uložit změny"
 
 msgid "Profile"
 msgstr "Profil"
 
-msgid "There are errors in this form"
-msgstr "V tomto formuláři jsou chyby"
+msgid "There is a problem with this form"
+msgstr ""
 
 msgid "There are warnings in this form"
 msgstr "V tomto formuláři jsou varování"
+
+msgid "There was a problem saving changes"
+msgstr ""
+
+msgid "Try again or contact your system administrator for support"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr "sledovaná instance entity"
+
+msgid "Fix errors in the form to continue."
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
@@ -1169,6 +1180,9 @@ msgstr "Přejít na celou {{ eventName }}"
 
 msgid "This stage can only have one event"
 msgstr "Tato fáze může mít pouze jednu událost"
+
+msgid "Events could not be retrieved. Please try again later."
+msgstr ""
 
 msgid "Report date"
 msgstr "Datum zprávy"
@@ -1322,9 +1336,6 @@ msgstr "Při ukládání zápisu došlo k chybě"
 
 msgid "Error saving the enrollment event"
 msgstr "Chyba při ukládání události zápisu"
-
-msgid "tracked entity instance"
-msgstr "sledovaná instance entity"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
