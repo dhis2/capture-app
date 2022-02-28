@@ -1,3 +1,10 @@
+# [1.70.0](https://github.com/dhis2/capture-app/compare/v1.69.0...v1.70.0) (2022-02-28)
+
+
+### Features
+
+* [DHIS2-10950] update tracked entity attributes  ([#2444](https://github.com/dhis2/capture-app/issues/2444)) ([3e9a4d9](https://github.com/dhis2/capture-app/commit/3e9a4d928e72d0b28f94c95ceff5a67fa964f3a0)), closes [#2263](https://github.com/dhis2/capture-app/issues/2263)
+
 # [1.69.0](https://github.com/dhis2/capture-app/compare/v1.68.1...v1.69.0) (2022-02-28)
 
 
