@@ -1,7 +1,7 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "1.67.2",
+  "version": "1.68.1",
   "cacheVersion": "1",
   "serverVersion": "37",
   "private": true,
@@ -87,7 +87,7 @@
     "@babel/plugin-transform-flow-strip-types": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "@dhis2/cli-app-scripts": "^8.3.2",
+    "@dhis2/cli-app-scripts": "^8.3.3",
     "@dhis2/cli-helpers-engine": "^3.2.1",
     "@dhis2/cli-utils-cypress": "^9.0.2",
     "@dhis2/cypress-commands": "^8.0.6",

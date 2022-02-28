@@ -1230,6 +1230,9 @@ msgstr "Фаол эмас"
 msgid "Working list could not be updated"
 msgstr "Ишчи рўйхатни янгилаб бўлмади"
 
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr ""
+
 msgid "Update view"
 msgstr "Янгиланган кўриниш"
 
