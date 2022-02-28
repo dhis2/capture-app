@@ -1,3 +1,11 @@
+## [1.70.1](https://github.com/dhis2/capture-app/compare/v1.70.0...v1.70.1) (2022-02-28)
+
+
+### Bug Fixes
+
+* [DHIS2-12134] fix pending schedule event ([#2446](https://github.com/dhis2/capture-app/issues/2446)) ([6bbbbaf](https://github.com/dhis2/capture-app/commit/6bbbbaf06029a756f3828d38751466c233fd8fa1))
+* [DHIS2-12528] fix View dashboard navigation from search page ([#2529](https://github.com/dhis2/capture-app/issues/2529)) ([af789ab](https://github.com/dhis2/capture-app/commit/af789ab8c9762ef584b203d399426d8156db72e3))
+
 # [1.70.0](https://github.com/dhis2/capture-app/compare/v1.69.0...v1.70.0) (2022-02-28)
 
 
