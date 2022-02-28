@@ -102,6 +102,7 @@ export type apiProgramStage = {
     displayName: string,
     description?: ?string,
     executionDateLabel?: ?string,
+    dueDateLabel?: ?string,
     formType: string,
     featureType: string,
     validationStrategy: string,

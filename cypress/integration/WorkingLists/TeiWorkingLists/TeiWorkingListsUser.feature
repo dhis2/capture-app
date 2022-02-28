@@ -86,3 +86,29 @@ Then the registering unit should display in the list
 # Then the sort arrow should indicate ascending order
 # And the list should display data ordered ascendingly by first name
 # And for a tracker program the page navigation should show that you are on the first page
+
+Scenario: The TEI custom working lists is loaded
+Given you open the main page with Ngelehun and malaria focus investigation program context
+Then you see the custom TEI working lists
+And you can load the view with the name Events assigned to me
+
+Scenario: The user creates, updates and deletes a TEI custom working list
+Given you open the main page with Ngelehun and child programme context
+And you set the enrollment status filter to completed
+And you apply the current filter
+When you save the list with the name My custom list
+Then the new custom TEI working list is created
+And the enrollment status filter button should show that the completed filter is in effect
+When you set the enrollment status filter to active
+And you apply the current filter
+When you update the list with the name My custom list
+Then the enrollment status filter button should show that the active filter is in effect
+And you delete the name My custom list
+Then the custom TEI is deleted
+
+Scenario: The TEI custom working can be shared
+Given you open the main page with Ngelehun and malaria focus investigation program context
+And you see the custom TEI working lists
+And you can load the view with the name Events assigned to me
+When you change the sharing settings
+Then you see the new sharing settings

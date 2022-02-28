@@ -64,7 +64,6 @@ const NewEventDataEntryWrapperPlain = ({
         return isCustom;
     };
     const isCustomForm = checkIfCustomForm();
-
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
             <Paper className={classes.paper}>

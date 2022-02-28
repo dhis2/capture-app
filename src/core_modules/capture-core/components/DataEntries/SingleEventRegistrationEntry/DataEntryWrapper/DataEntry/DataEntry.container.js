@@ -24,25 +24,19 @@ import {
 import { type RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
 import typeof { newEventSaveTypes } from './newEventSaveTypes';
-import { getLocationPathname } from '../../../../../utils/url';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
-    const mapStateToProps = (state: ReduxState, props: Object) => {
-        const pathname = getLocationPathname();
-        const isAddEventInStage = (pathname === '/enrollmentEventNew');
-
-        return { recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
+    const mapStateToProps = (state: ReduxState, props: Object) =>
+        ({ recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
             ready: !state.activePage.isDataEntryLoading,
             error: !props.formFoundation ?
                 i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
             programName: programNameSelector(state),
             orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&
-          state.organisationUnits[state.currentSelections.orgUnitId].name,
-            stageName: props.stage?.name,
-            isAddEventInStage };
-    };
+                state.organisationUnits[state.currentSelections.orgUnitId].name,
+        });
 
 
     // $FlowFixMe[not-an-object] automated comment

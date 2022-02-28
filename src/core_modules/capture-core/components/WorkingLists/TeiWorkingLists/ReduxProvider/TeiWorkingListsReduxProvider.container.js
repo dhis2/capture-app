@@ -1,25 +1,26 @@
 // @flow
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TeiWorkingListsSetup } from '../Setup';
-import { useWorkingListsCommonStateManagement, fetchTemplatesSuccess, fetchTemplates } from '../../WorkingListsCommon';
+import { useWorkingListsCommonStateManagement, fetchTemplates, TEMPLATE_SHARING_TYPE } from '../../WorkingListsCommon';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { TEI_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './teiWorkingListsReduxProvider.types';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
+const useApiTemplate = () => {
+    const workingListsTemplatesTEI = useSelector(({ workingListsTemplates }) => workingListsTemplates.teiList);
+    return workingListsTemplatesTEI && workingListsTemplatesTEI.templates;
+};
+
 export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: Props) => {
     const program = useTrackerProgram(programId);
+    const apiTemplates = useApiTemplate();
 
-    // Being pragmatic here, disabling behavior we will implement later
     const {
         lastTransaction,
         lastTransactionOnListDataRefresh,
         listDataRefreshTimestamp,
-        onAddTemplate,
-        onUpdateTemplate,
-        onDeleteTemplate,
-        onSetTemplateSharingSettings,
         records,
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
@@ -27,7 +28,6 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
 
     const onLoadTemplates = useCallback(() => {
         dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE));
-        dispatch(fetchTemplatesSuccess([], 'default', storeId));
     }, [dispatch, programId, storeId]);
 
     const onSelectListRow = useCallback(({ id }) => dispatch(navigateToEnrollmentOverview({
@@ -39,11 +39,13 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
     return (
         <TeiWorkingListsSetup
             {...commonStateManagementProps}
+            templateSharingType={TEMPLATE_SHARING_TYPE[storeId]}
             onSelectListRow={onSelectListRow}
             onLoadTemplates={onLoadTemplates}
             program={program}
             records={records}
             orgUnitId={orgUnitId}
+            apiTemplates={apiTemplates}
         />
     );
 };

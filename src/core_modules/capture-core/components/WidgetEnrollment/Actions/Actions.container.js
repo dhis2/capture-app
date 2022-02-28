@@ -5,15 +5,18 @@ import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';
 
 const enrollmentUpdate = {
-    resource: 'enrollments',
-    type: 'update',
-    id: ({ enrollment }) => enrollment,
-    data: enrollment => enrollment,
+    resource: 'tracker?async=false&importStrategy=UPDATE',
+    type: 'create',
+    data: enrollment => ({
+        enrollments: [enrollment],
+    }),
 };
 const enrollmentDelete = {
-    resource: 'enrollments',
-    type: 'delete',
-    id: ({ enrollment }) => enrollment,
+    resource: 'tracker?async=false&importStrategy=DELETE',
+    type: 'create',
+    data: enrollment => ({
+        enrollments: [enrollment],
+    }),
 };
 
 export const Actions = ({ enrollment = {}, refetch, onDelete }: Props) => {

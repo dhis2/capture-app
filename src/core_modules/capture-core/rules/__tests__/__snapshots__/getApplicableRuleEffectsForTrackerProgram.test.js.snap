@@ -107,9 +107,9 @@ Object {
     ],
   },
   "selectedEnrollment": Object {
-    "enrollmentDate": "2021-05-31T00:00:00.000",
+    "enrolledAt": "2021-05-31T00:00:00.000",
     "enrollmentId": "vVtmDlsu3me",
-    "incidentDate": "2021-05-31T00:00:00.000",
+    "occurredAt": "2021-05-31T00:00:00.000",
   },
   "selectedEntity": Object {
     "lZGmxYbs96q": "1995-12-17T03:24:00",

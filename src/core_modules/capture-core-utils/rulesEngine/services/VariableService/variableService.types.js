@@ -45,8 +45,8 @@ export type TEIValues = {
 };
 
 export type Enrollment = {
-    +enrollmentDate?: string,
-    +incidentDate?: string,
+    +enrolledAt?: string,
+    +occurredAt?: string,
     +enrollmentId?: string,
 };
 

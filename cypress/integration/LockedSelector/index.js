@@ -349,7 +349,7 @@ And('you reset the event selection', () => {
 And('you see message explaining you need to select an enrollment', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
     cy.get('[data-test="enrollment-page-content"]')
-        .contains('There are multiple enrollments for this program. Choose an enrollment to view the dashboard.');
+        .contains('Choose an enrollment to view the dashboard.');
 });
 
 And('you select the Child Programme', () => {

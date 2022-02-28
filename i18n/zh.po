@@ -1,16 +1,16 @@
 # 
 # Translators:
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
-# 晓东 林 <13981924470@126.com>, 2021
-# easylin <lin_xd@126.com>, 2021
+# 晓东 林 <13981924470@126.com>, 2022
+# phil_dhis2, 2022
+# easylin <lin_xd@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
+"POT-Creation-Date: 2022-02-15T09:59:36.798Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,9 +166,6 @@ msgstr "关系"
 
 msgid "Assignee"
 msgstr "分配者"
-
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr "为 {{orgUnitName}} 中的 {{programName}} 保存到 {{stageName}}"
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "保存到 {{orgUnitName}} 中的 {{programName}}"
@@ -459,6 +456,12 @@ msgstr "清除"
 msgid "No results"
 msgstr "无结果"
 
+msgid "Description"
+msgstr "描述"
+
+msgid "URL"
+msgstr "URL"
+
 msgid "Icon for {{field}}"
 msgstr "{{field}}的图标"
 
@@ -604,6 +607,21 @@ msgstr "此注册尚无指标输出"
 msgid "No feedback for this enrollment yet"
 msgstr "此注册尚无反馈"
 
+msgid "Quick actions"
+msgstr "快速行动"
+
+msgid "New Event"
+msgstr "新事件"
+
+msgid "Schedule an event"
+msgstr "安排事件"
+
+msgid "Make referral"
+msgstr "生成转诊/迁移"
+
+msgid "No available program stages"
+msgstr "没有可用的项目阶段"
+
 msgid "Program stage not found"
 msgstr "未找到项目阶段"
 
@@ -643,6 +661,18 @@ msgstr "在此项目中创建一个新事件。"
 msgid "View working list in this program."
 msgstr "查看此项目中的工作清单。"
 
+msgid "Page is missing required values from URL"
+msgstr "页面缺少 URL 中的必需值"
+
+msgid "Program is not valid"
+msgstr "项目无效"
+
+msgid "Org unit is not valid with current program"
+msgstr "机构对当前项目无效"
+
+msgid "There was an error opening the Page"
+msgstr "打开页面时出错"
+
 msgid "Enrollment{{escape}} New Event"
 msgstr "登记{{escape}}新事件"
 
@@ -657,6 +687,9 @@ msgstr "本次事件暂无反馈"
 
 msgid "There are no indicators for this event"
 msgstr "此事件没有指标"
+
+msgid "Program stage is invalid"
+msgstr "项目阶段无效"
 
 msgid "Report"
 msgstr "报表"
@@ -976,6 +1009,9 @@ msgstr "写一篇关于这个注册的评论"
 msgid "This enrollment doesn't have any comments"
 msgstr "本次注册没有任何评论"
 
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "为 {{orgUnitName}} 中的 {{programName}} 保存到 {{stageName}}"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "无法检索组织机构。请稍后再试。"
 
@@ -1010,19 +1046,26 @@ msgid "Schedule date info"
 msgstr "预定日期信息"
 
 msgid ""
-"This date is the the auto-suggested date based on the intervals defined, \n"
+"This date is the suggested scheduled date based on the intervals defined, \n"
 "                    it can be adjusted if needed."
 msgstr ""
-"此日期是根据定义的间隔自动建议的日期，\n"
+"此日期是根据定义的时间间隔建议的计划日期，\n"
 "                    如果需要，可以对其进行调整。"
 
-msgid "This date is {{difference}} days {{position}} the auto-suggested date."
-msgstr "此日期是自动建议的日期 {{difference}} 天 {{position}}。"
+msgid "This date is {{count}} days {{position}} the suggested date."
+msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgstr[0] "此日期是建议日期 {{count}} 天 {{position}}。"
 
-msgid ""
-"There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
-"this day."
-msgstr "这一天在 {{orgUnitName}} 有 {{eventCountInOrgUnit}} 安排的活动。"
+msgid "after"
+msgstr "后"
+
+msgid "before"
+msgstr "前"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "今天在 {{orgUnitName}} 有 {{count}} 个已经安排的事件。"
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1040,11 +1083,32 @@ msgstr "事件评论、注释"
 msgid "Write a comment about this scheduled event"
 msgstr "写一篇关于这个预定事件的评论"
 
+msgid ""
+"Change information about this {{trackedEntityName}} here. To change "
+"information about this enrollment, use the Edit button in the in the "
+"Enrollment box on this dashboard"
+msgstr "在此处更改有关此 {{trackedEntityName}} 的信息。要更改有关此注册的信息，请使用此仪表板上“注册”框中的“编辑”按钮"
+
+msgid "Save changes"
+msgstr "保存修改"
+
+msgid "Profile"
+msgstr "简历"
+
+msgid "There are errors in this form"
+msgstr "这个表单有错误"
+
+msgid "There are warnings in this form"
+msgstr "此表单中有警告"
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
 msgid "Person Profile"
 msgstr "人物简介"
+
+msgid "Edit"
+msgstr "编辑"
 
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
@@ -1085,6 +1149,9 @@ msgstr "{{scheduledEvents}} 已调度"
 msgid "Stages and Events"
 msgstr "阶段与活动"
 
+msgid "Working list could not be loaded"
+msgstr "工作列表不能载入"
+
 msgid "Delete event"
 msgstr "删除事件"
 
@@ -1103,9 +1170,6 @@ msgstr "随着过滤器下载"
 msgid "Download data..."
 msgstr "下载数据"
 
-msgid "Working list could not be loaded"
-msgstr "工作列表不能载入"
-
 msgid "an error occurred loading working lists"
 msgstr "载入工作列表发生错误"
 
@@ -1123,6 +1187,9 @@ msgstr "闲置"
 
 msgid "Working list could not be updated"
 msgstr "工作清单无法更新"
+
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr ""
 
 msgid "Update view"
 msgstr "更新视图"
@@ -1183,9 +1250,6 @@ msgstr "没有发现项目"
 
 msgid "Program is not a tracker program"
 msgstr "项目不是跟踪随访项目"
-
-msgid "Profile"
-msgstr "简历"
 
 msgid "Error saving event"
 msgstr "保存时间错误"
