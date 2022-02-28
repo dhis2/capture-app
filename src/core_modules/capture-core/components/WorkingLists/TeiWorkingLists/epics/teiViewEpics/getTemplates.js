@@ -12,7 +12,7 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
         resource: 'trackedEntityInstanceFilters',
         params: {
             filter: `program.id:eq:${programId}`,
-            fields: 'id,displayName,sortOrder,entityQueryCriteria,access',
+            fields: 'id,displayName,sortOrder,entityQueryCriteria,access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
         },
     });
     return apiRes && apiRes.trackedEntityInstanceFilters ? apiRes.trackedEntityInstanceFilters : [];
@@ -56,6 +56,11 @@ export const getTemplates = (
                             assignedUserMode,
                             assignedUsers,
                         } = {},
+                        externalAccess,
+                        publicAccess,
+                        user,
+                        userAccesses,
+                        userGroupAccesses,
                     }) => ({
                         id,
                         name: displayName,
@@ -71,6 +76,11 @@ export const getTemplates = (
                             attributeValueFilters,
                         },
                         access,
+                        externalAccess,
+                        publicAccess,
+                        user,
+                        userAccesses,
+                        userGroupAccesses,
                     }),
                 ),
             ],

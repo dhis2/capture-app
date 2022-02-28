@@ -153,7 +153,7 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore, 
         filter(({ payload: { workingListsType } }) => workingListsType === TEI_WORKING_LISTS_TYPE),
         concatMap((action) => {
             const {
-                template: { id, name },
+                template: { id, name, externalAccess, publicAccess, user, userGroupAccesses, userAccesses },
                 program,
                 storeId,
                 criteria,
@@ -163,6 +163,11 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore, 
             const trackedEntityInstanceFilters = {
                 name,
                 program,
+                externalAccess,
+                publicAccess,
+                user,
+                userGroupAccesses,
+                userAccesses,
                 entityQueryCriteria: {
                     displayOrderColumns,
                     order,
