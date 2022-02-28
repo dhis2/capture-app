@@ -1232,6 +1232,9 @@ msgstr "Inaktif"
 msgid "Working list could not be updated"
 msgstr "Daftar kerja tidak dapat diperbarui"
 
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr ""
+
 msgid "Update view"
 msgstr "Perbarui tampilan"
 
