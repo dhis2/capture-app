@@ -1,3 +1,24 @@
+# [1.70.0](https://github.com/dhis2/capture-app/compare/v1.69.0...v1.70.0) (2022-02-28)
+
+
+### Features
+
+* [DHIS2-10950] update tracked entity attributes  ([#2444](https://github.com/dhis2/capture-app/issues/2444)) ([3e9a4d9](https://github.com/dhis2/capture-app/commit/3e9a4d928e72d0b28f94c95ceff5a67fa964f3a0)), closes [#2263](https://github.com/dhis2/capture-app/issues/2263)
+
+# [1.69.0](https://github.com/dhis2/capture-app/compare/v1.68.1...v1.69.0) (2022-02-28)
+
+
+### Bug Fixes
+
+* [DHIS2-11280] add default program value ([#2435](https://github.com/dhis2/capture-app/issues/2435)) ([1bfe387](https://github.com/dhis2/capture-app/commit/1bfe387e0a8c4b329eddcdb91b4c0c797d1f3fa8))
+* [DHIS2-12158] fix missing enrollment message ([#2535](https://github.com/dhis2/capture-app/issues/2535)) ([21e1bcf](https://github.com/dhis2/capture-app/commit/21e1bcffe6c57672aff420f6e1990b5967e800be))
+* [TECH-986] fix test orders ([#2540](https://github.com/dhis2/capture-app/issues/2540)) ([0ad8270](https://github.com/dhis2/capture-app/commit/0ad82701197a62776dacc01c86a00cb8e3bb29db))
+
+
+### Features
+
+* [DHIS2-9281] share view ([#2508](https://github.com/dhis2/capture-app/issues/2508)) ([c0e7fe5](https://github.com/dhis2/capture-app/commit/c0e7fe5d451cf1771b4602766f2c9262b357d614)), closes [#2487](https://github.com/dhis2/capture-app/issues/2487)
+
 ## [1.68.1](https://github.com/dhis2/capture-app/compare/v1.68.0...v1.68.1) (2022-02-23)
 
 

@@ -189,6 +189,7 @@ import {
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
+import { updateTeiEpic, updateTeiSucceededEpic, updateTeiFailedEpic } from '../core_modules/capture-core/components/WidgetProfile';
 import { initTeiViewEpic, updateTeiListEpic,
     retrieveTemplatesEpic as retrieveTEITemplatesEpic,
     updateTemplateEpic as updateTEITemplateEpic,
@@ -366,4 +367,7 @@ export const epics = combineEpics(
     addNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,
     scheduleNewEnrollmentEventEpic,
+    updateTeiEpic,
+    updateTeiSucceededEpic,
+    updateTeiFailedEpic,
 );
