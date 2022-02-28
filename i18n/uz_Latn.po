@@ -1220,6 +1220,9 @@ msgstr "Faol emas"
 msgid "Working list could not be updated"
 msgstr ""
 
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr ""
+
 msgid "Update view"
 msgstr "Yangilangan koʼrinish"
 
