@@ -1156,6 +1156,9 @@ msgstr "Go to full {{ eventName }}"
 msgid "This stage can only have one event"
 msgstr "This stage can only have one event"
 
+msgid "Events could not be retrieved. Please try again later."
+msgstr "Events could not be retrieved. Please try again later."
+
 msgid "Report date"
 msgstr "Report date"
 
