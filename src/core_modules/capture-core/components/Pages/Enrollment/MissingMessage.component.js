@@ -115,7 +115,7 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
         {
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('There are multiple enrollments for this program. Choose an enrollment to view the dashboard.')}
+                {i18n.t('Choose an enrollment to view the dashboard.')}
             </IncompleteSelectionsMessage>
 
         }

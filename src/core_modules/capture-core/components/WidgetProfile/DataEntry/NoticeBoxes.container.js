@@ -1,72 +1,44 @@
 // @flow
 import React from 'react';
-import uuid from 'uuid/v4';
 import { NoticeBox } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { useSelector } from 'react-redux';
-
-const prepareMessages = (rulesEffectsGeneral, rulesEffectsMessages, saveAttempted, type) => {
-    let messages = rulesEffectsGeneral && rulesEffectsGeneral[type] ? rulesEffectsGeneral[type] : [];
-    if (saveAttempted) {
-        messages =
-            rulesEffectsGeneral && rulesEffectsGeneral[`${type}OnComplete`]
-                ? [...messages, ...rulesEffectsGeneral[`${type}OnComplete`]]
-                : messages;
-
-        messages =
-            rulesEffectsMessages &&
-            Object.values(rulesEffectsMessages).reduce(
-                (acc, rulesEffectsMessage: any) =>
-                    (acc = rulesEffectsMessage[`${type}OnComplete`]
-                        ? [...acc, { message: rulesEffectsMessage[`${type}OnComplete`], id: uuid() }]
-                        : acc),
-                messages,
-            );
-    }
-    return messages;
-};
 
 export const NoticeBoxes = ({
-    dataEntryId,
-    itemId,
-    saveAttempted,
+    errorsMessages = [],
+    warningsMessages = [],
+    hasApiError = false,
 }: {
-    dataEntryId: string,
-    itemId: string,
-    saveAttempted: boolean,
-}) => {
-    const ruleId = `${dataEntryId}-${itemId}`;
-    const { rulesEffectsGeneralErrors, rulesEffectsGeneralWarnings, rulesEffectsMessages } = useSelector(store => ({
-        rulesEffectsGeneralErrors: store.rulesEffectsGeneralErrors && store.rulesEffectsGeneralErrors[ruleId],
-        rulesEffectsGeneralWarnings: store.rulesEffectsGeneralWarnings && store.rulesEffectsGeneralWarnings[ruleId],
-        rulesEffectsMessages: store.rulesEffectsMessages && store.rulesEffectsMessages[ruleId],
-    }));
-    const errors = prepareMessages(rulesEffectsGeneralErrors, rulesEffectsMessages, saveAttempted, 'error');
-    const warnings = prepareMessages(rulesEffectsGeneralWarnings, rulesEffectsMessages, saveAttempted, 'warning');
-
-    return (
-        <>
-            <br />
-            {errors && errors.length > 0 && (
-                <NoticeBox title={i18n.t('There are errors in this form')} error>
-                    <ul>
-                        {errors.map(error => (
-                            <li key={error.id}> {error.message} </li>
-                        ))}
-                    </ul>
-                </NoticeBox>
-            )}
-            <br />
-            {warnings && warnings.length > 0 && (
-                <NoticeBox title={i18n.t('There are warnings in this form')} warning>
-                    <ul>
-                        {warnings.map(warning => (
-                            <li key={warning.id}> {warning.message} </li>
-                        ))}
-                    </ul>
-                </NoticeBox>
-            )}
-            <br />
-        </>
-    );
-};
+    errorsMessages: Array<{ id: string, message: string }>,
+    warningsMessages: Array<{ id: string, message: string }>,
+    hasApiError?: boolean,
+}) => (
+    <>
+        <br />
+        {errorsMessages && errorsMessages.length > 0 && (
+            <NoticeBox title={i18n.t('There is a problem with this form')} error>
+                <ul>
+                    {errorsMessages?.map(error => (
+                        <li key={error.id}> {error.message} </li>
+                    ))}
+                </ul>
+            </NoticeBox>
+        )}
+        <br />
+        {warningsMessages && warningsMessages.length > 0 && (
+            <NoticeBox title={i18n.t('There are warnings in this form')} warning>
+                <ul>
+                    {warningsMessages?.map(warning => (
+                        <li key={warning.id}> {warning.message} </li>
+                    ))}
+                </ul>
+            </NoticeBox>
+        )}
+        <br />
+        {hasApiError && (
+            <NoticeBox title={i18n.t('There was a problem saving changes')} error>
+                {i18n.t('Try again or contact your system administrator for support')}
+            </NoticeBox>
+        )}
+        <br />
+    </>
+);
