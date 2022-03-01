@@ -1,3 +1,10 @@
+## [1.72.1](https://github.com/dhis2/capture-app/compare/v1.72.0...v1.72.1) (2022-03-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12714] Add V{event_date} to rules engine ([7ed2eb5](https://github.com/dhis2/capture-app/commit/7ed2eb557fcd2f79ce870b2eaf6d6db9019bc266))
+
 # [1.72.0](https://github.com/dhis2/capture-app/compare/v1.71.0...v1.72.0) (2022-03-01)
 
 
