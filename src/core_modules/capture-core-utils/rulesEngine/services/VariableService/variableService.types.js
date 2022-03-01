@@ -6,6 +6,7 @@ export type ProgramRuleVariable = {
     id: string,
     displayName: string,
     programRuleVariableSourceType: string,
+    valueType: string,
     programId: string,
     dataElementId?: ?string,
     trackedEntityAttributeId?: ?string,
