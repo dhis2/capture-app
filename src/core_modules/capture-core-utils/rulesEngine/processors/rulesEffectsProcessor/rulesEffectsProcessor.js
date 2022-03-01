@@ -185,12 +185,13 @@ export function getRulesEffectsProcessor(
     }
 
     function processDisplayText(effect: ProgramRuleEffect): any {
+        const message = effect.displayContent ? effect.displayContent : effect.content;
         return {
             type: effectActions.DISPLAY_TEXT,
             id: effect.location,
             displayText: {
                 id: effect.id,
-                message: `${effect.displayContent} ${sanitiseFalsy(effect.data)}`,
+                message: `${message} ${sanitiseFalsy(effect.data)}`,
                 ...effect.style,
             },
         };
