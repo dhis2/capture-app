@@ -9,6 +9,7 @@ import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
+import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
@@ -70,12 +71,14 @@ const MainPageContainer = () => {
     [categories, currentSelectionsComplete, orgUnitId, programId, showAllAccessible]);
 
     return (
-        <MainPageComponent
-            MainPageStatus={MainPageStatus}
-            programId={programId}
-            orgUnitId={orgUnitId}
-            setShowAccessible={setShowAccessible}
-        />
+        <OrgUnitFetcher orgUnitId={orgUnitId}>
+            <MainPageComponent
+                MainPageStatus={MainPageStatus}
+                programId={programId}
+                orgUnitId={orgUnitId}
+                setShowAccessible={setShowAccessible}
+            />
+        </OrgUnitFetcher>
     );
 };
 
