@@ -406,7 +406,7 @@ describe('Event rules engine effects with functions and effects', () => {
         ],
         [
             {
-                oZg33kd9taw: 'Male', qrur9Dvnyt5: 0, eventDate: '2020-04-30T22:00:00.000Z',
+                oZg33kd9taw: 'Male', qrur9Dvnyt5: 0, occurredAt: '2020-04-30T22:00:00.000Z',
             },
             [
                 { type: 'DISPLAYTEXT', displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = 10" } },
@@ -438,7 +438,7 @@ describe('Event rules engine effects with functions and effects', () => {
         ],
         [
             {
-                oZg33kd9taw: 'Male', qrur9Dvnyt5: 1000000000, eventDate: '2020-04-30T22:00:00.000Z',
+                oZg33kd9taw: 'Male', qrur9Dvnyt5: 1000000000, occurredAt: '2020-04-30T22:00:00.000Z',
             },
             [
                 { type: 'DISPLAYTEXT', displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = 10" } },
