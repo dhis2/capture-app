@@ -112,7 +112,7 @@ const RegistrationDataEntryPlain = ({
         />
     ), []);
 
-    const ExistingUniqueValueDialogActions = useCallback(({ teiId }) => {
+    const ExistingUniqueValueDialogActions = useCallback(({ teiId: existingTeiId }) => {
         const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
         const { programId, orgUnitId } = useLocationQuery(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
 
@@ -121,7 +121,7 @@ const RegistrationDataEntryPlain = ({
                 dataTest="existing-unique-value-link-tei-button"
                 primary
                 onClick={() => dispatch(navigateToEnrollmentOverview({
-                    teiId,
+                    teiId: existingTeiId,
                     orgUnitId,
                     programId,
                 }))}
