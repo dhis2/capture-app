@@ -301,9 +301,6 @@ msgstr "Show registered {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Registered person"
 
-msgid "Link"
-msgstr "Link"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Leaving this page will discard the changes you made to this event."
 
@@ -752,6 +749,9 @@ msgstr "Save as new"
 msgid "View dashboard"
 msgstr "View dashboard"
 
+msgid "View enrollment"
+msgstr "View enrollment"
+
 msgid "Create for"
 msgstr "Create for"
 
@@ -766,6 +766,9 @@ msgstr "Save new"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Save new {{trackedEntityTypeName}} and link"
+
+msgid "Link"
+msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Save as new {{trackedEntityName}}"
