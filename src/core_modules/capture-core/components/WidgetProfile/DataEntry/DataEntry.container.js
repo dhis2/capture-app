@@ -34,11 +34,13 @@ export const DataEntry = ({
     const { formFoundation } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
-    const onGetValidationContext = useCallback(
-        () => ({ orgUnitId, programId: programAPI.id, trackedEntityInstanceId }),
-        [orgUnitId, programAPI, trackedEntityInstanceId],
-    );
     const onUpdateFormField = useCallback((...args: Array<any>) => dispatch(getUpdateFieldActions(context, ...args)), [dispatch, context]);
+    const getValidationContext = useCallback(() => ({
+        programId: programAPI.id,
+        orgUnitId,
+        trackedEntityInstanceId,
+    }), [programAPI, orgUnitId, trackedEntityInstanceId]);
+
     const onSave = useCallback(() => {
         setSaveAttempted(true);
         if (formValidated) {
@@ -85,7 +87,7 @@ export const DataEntry = ({
                 formFoundation={formFoundation}
                 onUpdateFormField={onUpdateFormField}
                 modalState={modalState}
-                onGetValidationContext={onGetValidationContext}
+                onGetValidationContext={getValidationContext}
                 errorsMessages={errorsMessages}
                 warningsMessages={warningsMessages}
             />
