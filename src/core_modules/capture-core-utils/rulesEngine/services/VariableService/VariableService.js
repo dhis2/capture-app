@@ -269,7 +269,8 @@ export class VariableService {
         );
     }
 
-    getVariableForSelectedEntityAttributes(programVariable: ProgramRuleVariable,
+    getVariableForSelectedEntityAttributes(
+        programVariable: ProgramRuleVariable,
         sourceData: SourceData): ?RuleVariable {
         // $FlowFixMe[incompatible-type] automated comment
         const trackedEntityAttributeId: string = programVariable.trackedEntityAttributeId;
@@ -322,7 +323,10 @@ export class VariableService {
         }
 
         const value = VariableService.getDataElementValueForVariable(dataElementValue,
-            dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
+            dataElementId,
+            programVariable.useNameForOptionSet,
+            sourceData.dataElements,
+            sourceData.optionSets);
 
         const valueType =
             (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
