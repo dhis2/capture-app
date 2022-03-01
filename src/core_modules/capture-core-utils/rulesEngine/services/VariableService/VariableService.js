@@ -277,11 +277,13 @@ export class VariableService {
         const attribute: TrackedEntityAttribute = sourceData.trackedEntityAttributes[trackedEntityAttributeId];
         const attributeValue = sourceData.selectedEntity ? sourceData.selectedEntity[trackedEntityAttributeId] : null;
 
+        const valueType = (programVariable.useNameForOptionSet && attribute.optionSetId) ? 'TEXT' : attribute.valueType;
+
         const hasValue = !!attributeValue || attributeValue === 0 || attributeValue === false;
         if (!hasValue) {
             return this.buildVariable(
                 EMPTY_STRING,
-                attribute.valueType, {
+                valueType, {
                     variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
                     useNameForOptionSet: programVariable.useNameForOptionSet,
                 },
@@ -297,7 +299,7 @@ export class VariableService {
         );
         return this.buildVariable(
             variableValue,
-            attribute.valueType, {
+            valueType, {
                 variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
                 useNameForOptionSet: programVariable.useNameForOptionSet,
             },
@@ -321,9 +323,13 @@ export class VariableService {
 
         const value = VariableService.getDataElementValueForVariable(dataElementValue,
             dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
+
+        const valueType =
+            (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
+
         return this.buildVariable(
             value,
-            dataElement.valueType, {
+            valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
                 variableEventDate: executingEvent.occurredAt,
                 useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -367,10 +373,14 @@ export class VariableService {
         }
 
         const dataElementValue = eventWithValue[dataElementId];
+
+        const valueType =
+            (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
+
         const value = VariableService.getDataElementValueForVariable(dataElementValue, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
         return this.buildVariable(
             value,
-            dataElement.valueType, {
+            valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
                 variableEventDate: eventWithValue.occurredAt,
                 useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -409,10 +419,12 @@ export class VariableService {
         }
 
         const dataElementValue = eventWithValue[dataElementId];
+        const valueType =
+            (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
         const value = VariableService.getDataElementValueForVariable(dataElementValue, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
         return this.buildVariable(
             value,
-            dataElement.valueType, {
+            valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
                 variableEventDate: eventWithValue.occurredAt,
                 useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -463,10 +475,12 @@ export class VariableService {
         }
 
         const dataElementValue = eventWithValue[dataElementId];
+        const valueType =
+            (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
         const value = VariableService.getDataElementValueForVariable(dataElementValue, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
         return this.buildVariable(
             value,
-            dataElement.valueType, {
+            valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
                 variableEventDate: eventWithValue.occurredAt,
                 useNameForOptionSet: programVariable.useNameForOptionSet,
