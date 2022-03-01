@@ -1,3 +1,10 @@
+# [1.72.0](https://github.com/dhis2/capture-app/compare/v1.71.0...v1.72.0) (2022-03-01)
+
+
+### Features
+
+* [TECH-893] Ensure org unit updated in redux ([#2456](https://github.com/dhis2/capture-app/issues/2456)) ([1e72bd2](https://github.com/dhis2/capture-app/commit/1e72bd21f752c932b064b10589aba59a47561c18))
+
 # [1.71.0](https://github.com/dhis2/capture-app/compare/v1.70.2...v1.71.0) (2022-03-01)
 
 
