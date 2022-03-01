@@ -38,7 +38,8 @@ export const DataEntry = ({
     const getValidationContext = useCallback(() => ({
         programId: programAPI.id,
         orgUnitId,
-    }), [programAPI, orgUnitId]);
+        trackedEntityInstanceId,
+    }), [programAPI, orgUnitId, trackedEntityInstanceId]);
 
     const onSave = useCallback(() => {
         setSaveAttempted(true);
