@@ -100,7 +100,7 @@ const CommentSectionPlain = ({
         setEditing(false);
     }, [handleAddComment, newCommentValue]);
 
-    const CommentItem = ({ value, lastUpdated, lastUpdatedBy }) => (
+    const CommentItem = ({ value, storedAt, lastUpdatedBy }) => (
         <div data-test="comment-item" className={cx(classes.item)}>
             <div className={classes.avatar} /> {/* TODO: add avatar */}
             <div className={classes.rightColumn}>
@@ -109,7 +109,7 @@ const CommentSectionPlain = ({
                         {lastUpdatedBy.firstName} {' '} {lastUpdatedBy.surname}
                     </span>}
                     <span className={cx(classes.headerText, classes.lastUpdated)}>
-                        {moment(lastUpdated).fromNow()}
+                        {moment(storedAt).fromNow()}
                     </span>
                 </div>
                 <div className={classes.body}>
@@ -124,7 +124,7 @@ const CommentSectionPlain = ({
         <div className={classes.wrapper}>
             <div className={classes.commentsWrapper}>
                 {comments
-                    .sort((a, b) => moment(a.lastUpdated).valueOf() - moment(b.lastUpdated).valueOf())
+                    .sort((a, b) => moment(a.storedAt).valueOf() - moment(b.storedAt).valueOf())
                     .map(comment => <CommentItem key={`comment-item-${comment.note}-`} {...comment} />)
                 }
                 {comments.length === 0 &&

@@ -37,7 +37,7 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
             const notes = (eventContainer && eventContainer.event && eventContainer.event.notes) || [];
             const convertedNotes = notes.map(note => ({
                 ...note,
-                storedDate: convertListValue(note.storedDate, dataElementTypes.DATETIME),
+                storedDate: convertListValue(note.storedAt, dataElementTypes.DATETIME),
             }));
             // Load event relationships
 

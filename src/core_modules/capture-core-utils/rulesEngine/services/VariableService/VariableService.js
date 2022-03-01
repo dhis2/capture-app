@@ -502,14 +502,14 @@ export class VariableService {
 
         if (executingEvent) {
             variables.event_date = this.buildVariable(
-                executingEvent.eventDate,
+                executingEvent.occurredAt,
                 typeKeys.DATE, {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                 },
             );
 
             variables.due_date = this.buildVariable(
-                executingEvent.dueDate,
+                executingEvent.scheduledAt,
                 typeKeys.DATE, {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                 },
@@ -541,7 +541,7 @@ export class VariableService {
 
         if (selectedEnrollment) {
             variables.enrollment_date = this.buildVariable(
-                selectedEnrollment.enrollmentDate,
+                selectedEnrollment.enrolledAt,
                 typeKeys.DATE, {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                 },
@@ -569,7 +569,7 @@ export class VariableService {
             );
 
             variables.incident_date = this.buildVariable(
-                selectedEnrollment.incidentDate,
+                selectedEnrollment.occurredAt,
                 typeKeys.DATE, {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                 },

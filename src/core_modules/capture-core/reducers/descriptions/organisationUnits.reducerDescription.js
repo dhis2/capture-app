@@ -7,6 +7,7 @@ import { lockedSelectorActionTypes } from '../../components/LockedSelector/Locke
 import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import { set as setStoreRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { actionTypes as initActionTypes } from '../../init/init.actions';
+import { actionTypes as orgUnitFetcherActionTypes } from '../../components/OrgUnitFetcher/OrgUnitFetcher.actions';
 
 export const organisationUnitDesc = createReducerDescription({
     [editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {
@@ -35,6 +36,9 @@ export const organisationUnitDesc = createReducerDescription({
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, action) => ({
         ...state,
         [action.payload.orgUnit.id]: action.payload.orgUnit,
+    }),
+    [orgUnitFetcherActionTypes.FETCH_ORG_UNIT_SUCCESS]: (state, action) => ({
+        ...state, [action.payload.id]: action.payload,
     }),
 }, 'organisationUnits');
 

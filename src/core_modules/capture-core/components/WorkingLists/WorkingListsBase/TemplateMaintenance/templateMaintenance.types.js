@@ -20,4 +20,5 @@ export type Props = {
     onUpdateTemplate: UpdateTemplate,
     onDeleteTemplate: DeleteTemplate,
     onSetSharingSettings: SetTemplateSharingSettings,
+    templateSharingType: string,
 };

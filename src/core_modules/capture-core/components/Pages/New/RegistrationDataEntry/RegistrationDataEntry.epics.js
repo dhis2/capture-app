@@ -52,10 +52,10 @@ const deriveGeometryFromFormValues = (formValues = {}) =>
         .reduce((acc, currentKey) => (standardGeoJson(formValues[currentKey])), undefined);
 
 
-const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnitId }) => {
-    // in case we have a program that does not have an incident date, such as Malaria case diagnosis,
-    // we want the incident to default to enrollmentDate
-    const sanitisedIncidentDate = incidentDate || enrollmentDate;
+const deriveEvents = ({ stages, enrolledAt, occurredAt, programId, orgUnitId }) => {
+    // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
+    // we want the incident to default to enrollmentDate (enrolledAt)
+    const sanitisedIncidentDate = occurredAt || enrolledAt;
     return [...stages.values()]
         .filter(({ autoGenerateEvent }) => autoGenerateEvent)
         .map(({
@@ -65,22 +65,22 @@ const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnit
             openAfterEnrollment,
             minDaysFromStart,
         }) => {
-            const dateToUseInActiveStatus = reportDateToUseInActiveStatus === 'enrollmentDate' ? enrollmentDate : sanitisedIncidentDate;
-            const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrollmentDate : sanitisedIncidentDate;
+            const dateToUseInActiveStatus = reportDateToUseInActiveStatus === 'enrollmentDate' ? enrolledAt : sanitisedIncidentDate;
+            const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrolledAt : sanitisedIncidentDate;
 
             const eventInfo =
               openAfterEnrollment
                   ?
                   {
                       status: 'ACTIVE',
-                      eventDate: dateToUseInActiveStatus,
-                      dueDate: dateToUseInActiveStatus,
+                      occurredAt: dateToUseInActiveStatus,
+                      scheduledAt: dateToUseInActiveStatus,
                   }
                   :
                   {
                       status: 'SCHEDULE',
                       // for schedule type of events we want to add the standard interval days to the date
-                      dueDate: moment(dateToUseInScheduleStatus).add(minDaysFromStart, 'days').format('YYYY-MM-DD'),
+                      scheduledAt: moment(dateToUseInScheduleStatus).add(minDaysFromStart, 'days').format('YYYY-MM-DD'),
                   };
 
             return {
@@ -102,11 +102,13 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
             const formServerValues = formFoundation?.convertValues(values, convertFn);
             return saveNewTrackedEntityInstance(
                 {
-                    attributes: deriveAttributesFromFormValues(formServerValues),
-                    geometry: deriveGeometryFromFormValues(formServerValues),
-                    enrollments: [],
-                    orgUnit: orgUnitId,
-                    trackedEntityType: trackedEntityTypeId,
+                    trackedEntities: [{
+                        attributes: deriveAttributesFromFormValues(formServerValues),
+                        geometry: deriveGeometryFromFormValues(formServerValues),
+                        enrollments: [],
+                        orgUnit: orgUnitId,
+                        trackedEntityType: trackedEntityTypeId,
+                    }],
                 });
         }),
     );
@@ -114,13 +116,13 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
 export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED),
-        flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
+        flatMap(({ payload: { bundleReport: { typeReportMap } } }) => {
             const {
                 currentSelections: { orgUnitId },
             } = store.value;
 
             return of(navigateToEnrollmentOverview({
-                teiId: reference,
+                teiId: typeReportMap.TRACKED_ENTITY.objectReports[0].uid,
                 orgUnitId,
             }));
         }),
@@ -131,30 +133,33 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
-            const { incidentDate, enrollmentDate, geometry } = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || { };
+            const { occurredAt, enrolledAt, geometry } = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || { };
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
             const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
-            const events = deriveEvents({ stages, enrollmentDate, incidentDate, programId, orgUnitId });
-            const formFoundation = action.payload?.formFoundation;
+            const events = deriveEvents({ stages, enrolledAt, occurredAt, programId, orgUnitId });
+            const { formFoundation, teiId: trackedEntity } = action.payload;
             const formServerValues = formFoundation?.convertValues(values, convertFn);
 
             return saveNewTrackedEntityInstanceWithEnrollment(
                 {
-                    attributes: deriveAttributesFromFormValues(formServerValues),
-                    geometry: deriveGeometryFromFormValues(formServerValues),
-                    enrollments: [
-                        {
-                            geometry: standardGeoJson(geometry),
-                            incidentDate: convertFn(incidentDate, dataElementTypes.DATE),
-                            enrollmentDate: convertFn(enrollmentDate, dataElementTypes.DATE),
-                            program: programId,
-                            orgUnit: orgUnitId,
-                            status: 'ACTIVE',
-                            events,
-                        },
-                    ],
-                    orgUnit: orgUnitId,
-                    trackedEntityType: trackedEntityType.id,
+                    trackedEntities: [{
+                        geometry: deriveGeometryFromFormValues(formServerValues),
+                        enrollments: [
+                            {
+                                geometry: standardGeoJson(geometry),
+                                occurredAt: convertFn(occurredAt, dataElementTypes.DATE),
+                                enrolledAt: convertFn(enrolledAt, dataElementTypes.DATE),
+                                program: programId,
+                                orgUnit: orgUnitId,
+                                attributes: deriveAttributesFromFormValues(formServerValues),
+                                status: 'ACTIVE',
+                                events,
+                            },
+                        ],
+                        orgUnit: orgUnitId,
+                        trackedEntityType: trackedEntityType.id,
+                        ...(trackedEntity && { trackedEntity }),
+                    }],
                 });
         }),
     );
@@ -162,13 +167,13 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
 export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED),
-        flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
+        flatMap(({ payload: { bundleReport: { typeReportMap } } }) => {
             const {
                 currentSelections: { orgUnitId, programId },
             } = store.value;
 
             return of(navigateToEnrollmentOverview({
-                teiId: reference,
+                teiId: typeReportMap.TRACKED_ENTITY.objectReports[0].uid,
                 orgUnitId,
                 programId,
             }));

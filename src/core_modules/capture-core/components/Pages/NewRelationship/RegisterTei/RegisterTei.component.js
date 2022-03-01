@@ -83,6 +83,16 @@ const RegisterTeiPlain = ({
         />
     ), [trackedEntityName]);
 
+    const ExistingUniqueValueDialogActions = useCallback(({ teiId, attributeValues }) => (
+        <Button
+            dataTest="existing-unique-value-link-tei-button"
+            primary
+            onClick={() => { onLink(teiId, attributeValues); }}
+        >
+            {i18n.t('Link')}
+        </Button>
+    ), [onLink]);
+
     const handleSave = useCallback(() => {
         onSave(itemId, dataEntryId);
     }, [onSave, itemId, dataEntryId]);
@@ -98,6 +108,7 @@ const RegisterTeiPlain = ({
                     duplicatesReviewPageSize={resultsPageSize}
                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                     renderDuplicatesCardActions={renderDuplicatesCardActions}
+                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                 />
             </div>
             <DataEntryWidgetOutput

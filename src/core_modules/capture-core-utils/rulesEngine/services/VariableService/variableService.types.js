@@ -23,8 +23,8 @@ type EventMain = {
     +enrollmentId?: string,
     +enrollmentStatus?: string,
     +status?: $Values<eventStatuses>,
-    +eventDate?: string,
-    +dueDate?: string,
+    +occurredAt?: string,
+    +scheduledAt?: string,
 };
 
 export type EventValues = {
@@ -45,8 +45,8 @@ export type TEIValues = {
 };
 
 export type Enrollment = {
-    +enrollmentDate?: string,
-    +incidentDate?: string,
+    +enrolledAt?: string,
+    +occurredAt?: string,
     +enrollmentId?: string,
 };
 
