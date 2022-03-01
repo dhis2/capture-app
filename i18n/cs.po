@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
+"POT-Creation-Date: 2022-03-01T13:50:45.247Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -308,9 +308,6 @@ msgstr "Zobrazit registrovaného {{trackedEntityTypeName}}"
 
 msgid "Registered person"
 msgstr "Registrovaná osoba"
-
-msgid "Link"
-msgstr "Odkaz"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
@@ -632,12 +629,8 @@ msgstr ""
 "Program {{programName}} má kategorie. Chcete-li zobrazit ovládací panel, "
 "vyberte všechny kategorie."
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
-msgstr ""
-"Existuje několik zápisů pro tento program. Zvolte zápis pro zobrazení "
-"řídicího panelu."
+msgid "Choose an enrollment to view the dashboard."
+msgstr "Chcete-li zobrazit ovládací panel, vyberte zápis."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} není v tomto programu zapsán."
@@ -721,6 +714,9 @@ msgstr "Uložit jako nové"
 msgid "View dashboard"
 msgstr "Zobrazit ovládací panel"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Vytvořit pro"
 
@@ -733,6 +729,9 @@ msgstr "Uložit nový"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
+
+msgid "Link"
+msgstr "Odkaz"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Uložit jako nový {{trackedEntityName}}"

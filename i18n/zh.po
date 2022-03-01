@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
+"POT-Creation-Date: 2022-03-01T13:50:45.247Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -299,9 +299,6 @@ msgstr "显示登记的 {{attributeName}} "
 
 msgid "Registered person"
 msgstr "注册的人"
-
-msgid "Link"
-msgstr "链接"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "离开此页面将放弃您对此事件所做的更改。"
@@ -620,10 +617,8 @@ msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} 有类别。选择所有类别以查看仪表板。"
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
-msgstr "该计划有多个注册。选择一个注册以查看仪表板。"
+msgid "Choose an enrollment to view the dashboard."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "该项目未注册{{teiDisplayName}} 。"
@@ -706,6 +701,9 @@ msgstr "另存为新的"
 msgid "View dashboard"
 msgstr "查看仪表盘"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "为创建"
 
@@ -718,6 +716,9 @@ msgstr "保存新的"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
+
+msgid "Link"
+msgstr "链接"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "另存为新的 {{trackedEntityName}}"
