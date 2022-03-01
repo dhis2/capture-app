@@ -55,27 +55,29 @@ const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute
             let requestPromise;
             if (dataEntry.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                 const orgUnitId = contextProps.orgUnitId;
-                requestPromise = getApi().get('trackedEntityInstances', {
+                requestPromise = getApi().get('tracker/trackedEntities', {
                     program: contextProps.programId,
                     ou: orgUnitId,
                     filter: `${dataElement.id}:EQ:${serverValue}`,
                 });
             } else {
-                requestPromise = getApi().get('trackedEntityInstances', {
+                requestPromise = getApi().get('tracker/trackedEntities', {
                     program: contextProps.programId,
                     ouMode: 'ACCESSIBLE',
                     filter: `${dataElement.id}:EQ:${serverValue}`,
                 });
             }
             return requestPromise.then((result) => {
-                const trackedEntityInstance = (result.trackedEntityInstances && result.trackedEntityInstances[0]) || {};
+                const otherTrackedEntityInstances = result?.instances?.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId) || [];
+                const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
+
                 const data = {
                     id: trackedEntityInstance.trackedEntityInstance,
                     tetId: trackedEntityInstance.trackedEntityType,
                 };
 
                 return {
-                    valid: result.trackedEntityInstances.length === 0,
+                    valid: otherTrackedEntityInstances.length === 0,
                     data,
                 };
             });

@@ -85,9 +85,10 @@ const RegistrationDataEntryPlain = ({
     onSaveWithoutEnrollment,
     onSaveWithEnrollment,
     dataEntryIsReady,
+    teiId,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
-    const { scopeType } = useScopeInfo(selectedScopeId);
+    const { scopeType, programName } = useScopeInfo(selectedScopeId);
     const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
 
@@ -132,10 +133,16 @@ const RegistrationDataEntryPlain = ({
                 scopeType === scopeTypes.TRACKER_PROGRAM &&
                 <Paper className={classes.paper}>
                     <div className={classes.title} >
-                        {i18n.t('New {{titleText}}', {
-                            titleText,
-                            interpolation: { escapeValue: false },
-                        })}
+                        {
+                            teiId ? i18n.t('New Enrollment in program{{escape}} {{programName}}', {
+                                escape: ':',
+                                programName,
+                                interpolation: { escapeValue: false },
+                            }) : i18n.t('New {{titleText}}', {
+                                titleText,
+                                interpolation: { escapeValue: false },
+                            })
+                        }
                     </div>
 
                     <div className={classes.registrationContainer}>

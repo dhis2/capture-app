@@ -9,12 +9,21 @@ export type PlainProps = {|
     onCancel: () => void,
     onSave: () => void,
     onUpdateFormField: () => void,
-    onGetValidationContext: () => any,
+    onGetValidationContext: () => Object,
+    modalState: string,
+    errorsMessages: Array<{ id: string, message: string }>,
+    warningsMessages: Array<{ id: string, message: string }>,
 |};
 
 export type Props = {|
     programAPI: any,
     orgUnitId: string,
     onCancel: () => void,
+    onDisable: () => void,
     clientAttributesWithSubvalues: Array<any>,
+    trackedEntityInstanceId: string,
+    onSaveSuccessActionType?: string,
+    onSaveErrorActionType?: string,
+    modalState: string,
+    onSaveExternal?: (eventServerValues: any, uid: string) => void,
 |};

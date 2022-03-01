@@ -113,7 +113,7 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (
             return from(querySingleResource(orgUnitsQuery(action.payload.nextProps.orgUnitId)))
                 .pipe(
                     flatMap(response =>
-                        of(setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }))),
+                        of(setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName, code: response.code }))),
                     catchError(() =>
                         of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
                     startWith(startLoading()),
@@ -165,8 +165,8 @@ export const fetchOrgUnitEpic = (
         switchMap(({ payload: { orgUnitId } }) =>
             from(querySingleResource(orgUnitsQuery(orgUnitId)))
                 .pipe(
-                    map(({ id, displayName: name }) =>
-                        setCurrentOrgUnitBasedOnUrl({ id, name })),
+                    map(({ id, displayName: name, code }) =>
+                        setCurrentOrgUnitBasedOnUrl({ id, name, code })),
                 )),
         catchError(() => of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
     );

@@ -364,3 +364,76 @@ Then('the custom TEI is deleted', () => {
             cy.contains('My custom list').should('not.exist');
         });
 });
+
+When('you change the sharing settings', () => {
+    // Making post requests using the old d2 library doesn't work for cypress tests atm
+    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
+    cy.buildApiUrl('sharing?type=trackedEntityInstanceFilter&id=PpGINOT00UX').then(sharingUrl =>
+        cy
+            .request('POST', sharingUrl, {
+                meta: {
+                    allowPublicAccess: true,
+                    allowExternalAccess: false,
+                },
+                object: {
+                    id: 'PpGINOT00UX',
+                    name: 'Events assigned to me',
+                    displayName: 'Events assigned to me',
+                    publicAccess: '--------',
+                    user: {
+                        id: 'GOLswS44mh8',
+                        name: 'Tom Wakiki',
+                    },
+                    userGroupAccesses: [],
+                    userAccesses: [
+                        {
+                            id: 'OYLGMiazHtW',
+                            name: 'Kevin Boateng',
+                            displayName: 'Kevin Boateng',
+                            access: 'rw------',
+                        },
+                    ],
+                    externalAccess: false,
+                },
+            })
+            .then(() => {
+                cy.get('[data-test="list-view-menu-button"]').click();
+                cy.contains('Share view').click();
+                cy.get('[placeholder="Enter names"]').type('Boateng');
+                cy.contains('Kevin Boateng').parent().click();
+                cy.contains('Close').click();
+            }),
+    );
+});
+
+When('you see the new sharing settings', () => {
+    // Making post requests using the old d2 library doesn't work for cypress tests atm
+    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
+    cy.buildApiUrl('sharing?type=trackedEntityInstanceFilter&id=PpGINOT00UX').then(sharingUrl =>
+        cy
+            .request('POST', sharingUrl, {
+                meta: {
+                    allowPublicAccess: true,
+                    allowExternalAccess: false,
+                },
+                object: {
+                    id: 'PpGINOT00UX',
+                    name: 'Events assigned to me',
+                    displayName: 'Events assigned to me',
+                    publicAccess: '--------',
+                    user: {
+                        id: 'GOLswS44mh8',
+                        name: 'Tom Wakiki',
+                    },
+                    userGroupAccesses: [],
+                    userAccesses: [],
+                    externalAccess: false,
+                },
+            })
+            .then(() => {
+                cy.get('[data-test="list-view-menu-button"]').click();
+                cy.contains('Share view').click();
+                cy.contains('Kevin Boateng').should('not.exist');
+            }),
+    );
+});

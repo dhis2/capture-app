@@ -9,6 +9,7 @@ const {
     COMMON_ENROLLMENT_SITE_DATA_SET,
     UPDATE_ENROLLMENT_EVENTS,
     UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID,
+    UPDATE_ENROLLMENT_ATTRIBUTE_VALUES,
     ROLLBACK_ENROLLMENT_EVENT,
     ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID,
     COMMIT_ENROLLMENT_EVENT,
@@ -84,6 +85,10 @@ export const enrollmentDomainDesc = createReducerDescription(
             });
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
+        [UPDATE_ENROLLMENT_ATTRIBUTE_VALUES]: (state, { payload: { attributeValues } }) => ({
+            ...state,
+            attributeValues,
+        }),
         [enrollmentNoteActionTypes.ADD_ENROLLMENT_NOTE]:
         (state, { payload: { note } }) => ({
             ...state,
