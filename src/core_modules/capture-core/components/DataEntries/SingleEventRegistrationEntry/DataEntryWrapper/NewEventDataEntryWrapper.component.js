@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Paper } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -11,7 +10,6 @@ import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.co
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
-import { OrgUnitFetcher } from '../../../OrgUnitFetcher';
 
 const getStyles = ({ typography }) => ({
     flexContainer: {
@@ -52,8 +50,6 @@ const NewEventDataEntryWrapperPlain = ({
     onFormLayoutDirectionChange,
 }: Props) => {
     const { id: programId } = useCurrentProgramInfo();
-    const orgUnitId =
-      useSelector(({ currentSelections }) => currentSelections.orgUnitId);
     const titleText = useScopeTitleText(programId);
     const checkIfCustomForm = () => {
         let isCustom = false;
@@ -65,47 +61,45 @@ const NewEventDataEntryWrapperPlain = ({
     };
     const isCustomForm = checkIfCustomForm();
     return (
-        <OrgUnitFetcher orgUnitId={orgUnitId}>
-            <Paper className={classes.paper}>
-                <div className={classes.title} >
-                    {i18n.t('New {{titleText}}', {
-                        titleText,
-                        interpolation: { escapeValue: false },
-                    })}
-                </div>
+        <Paper className={classes.paper}>
+            <div className={classes.title} >
+                {i18n.t('New {{titleText}}', {
+                    titleText,
+                    interpolation: { escapeValue: false },
+                })}
+            </div>
 
-                <div className={classes.flexContainer}>
-                    <div className={classes.flexEnd}>
-                        {
-                            isCustomForm ?
-                                null
-                                :
-                                <Button
-                                    onClick={() => onFormLayoutDirectionChange(!formHorizontal)}
-                                    small
-                                >
-                                    {
-                                        formHorizontal
-                                            ?
-                                            i18n.t('Switch to form view')
-                                            :
-                                            i18n.t('Switch to row view')
-                                    }
-                                </Button>
+            <div className={classes.flexContainer}>
+                <div className={classes.flexEnd}>
+                    {
+                        isCustomForm ?
+                            null
+                            :
+                            <Button
+                                onClick={() => onFormLayoutDirectionChange(!formHorizontal)}
+                                small
+                            >
+                                {
+                                    formHorizontal
+                                        ?
+                                        i18n.t('Switch to form view')
+                                        :
+                                        i18n.t('Switch to row view')
+                                }
+                            </Button>
 
-                        }
-                    </div>
+                    }
                 </div>
-                <div className={classes.marginLeft}>
-                    <DataEntry
-                        stage={stage}
-                        formFoundation={formFoundation}
-                        formHorizontal={formHorizontal}
-                    />
-                    <EventsList />
-                </div>
-            </Paper>
-        </OrgUnitFetcher>
+            </div>
+            <div className={classes.marginLeft}>
+                <DataEntry
+                    stage={stage}
+                    formFoundation={formFoundation}
+                    formHorizontal={formHorizontal}
+                />
+                <EventsList />
+            </div>
+        </Paper>
     );
 };
 
