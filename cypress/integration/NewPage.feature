@@ -160,3 +160,9 @@ Feature: User creates a new entries from the registration page
     Given you are in the WNCH PNC program registration page
     And you click the save new submit button
     Then you see validation errors on the WHO RMNCH program registration page
+
+### New enrollment of existing TEI
+
+  Scenario: New enrollment of existing TEI > The TEI form is prefield with the attributes values
+    Given you are in Child programme reenrollment page
+    Then you see the form prefield with existing TEI attributes values
