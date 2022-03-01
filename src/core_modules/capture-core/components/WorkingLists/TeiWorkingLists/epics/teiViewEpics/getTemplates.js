@@ -12,7 +12,7 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
         resource: 'trackedEntityInstanceFilters',
         params: {
             filter: `program.id:eq:${programId}`,
-            fields: 'id,displayName,enrollmentStatus,enrollmentCreatedPeriod,incidentDate,order,displayColumnOrder,attributeValueFilters,sortOrder,assignedUserMode,assignedUsers,access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
+            fields: 'id,displayName,sortOrder,entityQueryCriteria,access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
         },
     });
     return apiRes && apiRes.trackedEntityInstanceFilters ? apiRes.trackedEntityInstanceFilters : [];
@@ -44,16 +44,18 @@ export const getTemplates = (
                     ({
                         displayName,
                         sortOrder,
-                        enrollmentStatus,
-                        enrollmentCreatedPeriod,
                         id,
-                        attributeValueFilters,
-                        incidentDate,
-                        order,
-                        displayColumnOrder,
-                        assignedUserMode,
-                        assignedUsers,
                         access,
+                        entityQueryCriteria: {
+                            enrollmentStatus,
+                            enrollmentCreatedDate,
+                            enrollmentIncidentDate,
+                            order,
+                            attributeValueFilters,
+                            displayColumnOrder,
+                            assignedUserMode,
+                            assignedUsers,
+                        } = {},
                         externalAccess,
                         publicAccess,
                         user,
@@ -65,8 +67,8 @@ export const getTemplates = (
                         order: sortOrder,
                         criteria: {
                             programStatus: enrollmentStatus,
-                            enrolledAt: enrollmentCreatedPeriod,
-                            occurredAt: incidentDate,
+                            enrolledAt: enrollmentCreatedDate,
+                            occurredAt: enrollmentIncidentDate,
                             order,
                             displayColumnOrder,
                             assignedUserMode,
