@@ -302,9 +302,6 @@ msgstr "إظهار الـ {{trackedEntityTypeName}} المسجلة"
 msgid "Registered person"
 msgstr "الشخص المسجل"
 
-msgid "Link"
-msgstr "ربط"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "ستؤدي مغادرة هذه الصفحة إلى تجاهل التغييرات التي أجريتها على هذا الحدث."
@@ -754,6 +751,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -761,11 +761,17 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
+
+msgid "Link"
+msgstr "ربط"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""

@@ -308,9 +308,6 @@ msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
 msgid "Registered person"
 msgstr "Người đã đăng ký"
 
-msgid "Link"
-msgstr "Liên kết"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Rời khỏi trang ngày sẽ hủy các thay đổi bạn đã thực hiện cho sự kiện này."
@@ -760,6 +757,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr "Xem bảng điều khiển"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -767,11 +767,17 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Lưu {{trackedEntityTypeName}} mới và liên kết"
+
+msgid "Link"
+msgstr "Liên kết"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""

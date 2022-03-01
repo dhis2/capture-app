@@ -292,9 +292,6 @@ msgstr ""
 msgid "Registered person"
 msgstr ""
 
-msgid "Link"
-msgstr ""
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
@@ -743,6 +740,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -750,10 +750,16 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
