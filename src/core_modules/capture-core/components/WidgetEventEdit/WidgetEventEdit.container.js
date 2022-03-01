@@ -50,7 +50,7 @@ export const WidgetEventEditPlain = ({
     const currentPageMode = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent) ? pageMode.EDIT : pageMode.VIEW;
     const orgUnit = useRulesEngineOrgUnit(useLocationQuery().orgUnitId);
 
-    return !!orgUnit && (
+    return orgUnit ? (
         <div data-test="widget-enrollment-event">
             <div className={classes.menu}>
                 <Button small secondary className={classes.button} onClick={onGoBack}>
@@ -101,7 +101,7 @@ export const WidgetEventEditPlain = ({
                 </div>
             </Widget>
         </div>
-    );
+    ) : null;
 };
 export const WidgetEventEdit: ComponentType<$Diff<Props, CssClasses>> =
     withStyles(styles)(WidgetEventEditPlain);

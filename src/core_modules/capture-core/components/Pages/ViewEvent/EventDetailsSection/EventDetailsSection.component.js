@@ -108,7 +108,7 @@ const EventDetailsSectionPlain = (props: Props) => {
     };
 
 
-    return (
+    return orgUnit ? (
         <div className={classes.container}>
             <ViewEventSection
                 header={<ViewEventSectionHeader text={i18n.t('Event details')} icon={IconFileDocument24} />}
@@ -119,7 +119,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                 </div>
             </ViewEventSection>
         </div>
-    );
+    ) : null;
 };
 
 

@@ -259,8 +259,9 @@ const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 type Props = {
     formFoundation: ?RenderFoundation,
     orgUnit: OrgUnit,
+    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
     onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: Object,
+    onStartAsyncUpdateField: (orgUnit: OrgUnit) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
     classes: {
@@ -303,6 +304,7 @@ class EditEventDataEntryPlain extends Component<Props> {
     render() {
         const {
             orgUnit,
+            onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
             classes,
@@ -312,6 +314,7 @@ class EditEventDataEntryPlain extends Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={'singleEvent'}
+                onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
                 onUpdateFormField={onUpdateField(orgUnit)}
                 onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
                 fieldOptions={this.fieldOptions}

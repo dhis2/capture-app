@@ -7,9 +7,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Button } from '@dhis2/ui';
 import { DataEntry } from './DataEntry/DataEntry.container';
 import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
-import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
+import { useRulesEngine } from './useRulesEngine';
+import type { PlainProps } from './NewEventDataEntryWrapper.types';
 
 const getStyles = ({ typography }) => ({
     flexContainer: {
@@ -34,22 +35,16 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-type Props = {
-    ...CssClasses,
-    formHorizontal: ?boolean,
-    onFormLayoutDirectionChange: (formHorizontal: boolean) => void,
-    formFoundation: ?RenderFoundation,
-    stage: ?ProgramStage,
-}
-
 const NewEventDataEntryWrapperPlain = ({
     classes,
     formFoundation,
     formHorizontal,
     stage,
     onFormLayoutDirectionChange,
-}: Props) => {
+}: PlainProps) => {
     const { id: programId } = useCurrentProgramInfo();
+    const rulesReady = useRulesEngine({ programId, formFoundation });
+
     const titleText = useScopeTitleText(programId);
     const checkIfCustomForm = () => {
         let isCustom = false;
@@ -60,7 +55,8 @@ const NewEventDataEntryWrapperPlain = ({
         return isCustom;
     };
     const isCustomForm = checkIfCustomForm();
-    return (
+
+    return rulesReady && (
         <Paper className={classes.paper}>
             <div className={classes.title} >
                 {i18n.t('New {{titleText}}', {

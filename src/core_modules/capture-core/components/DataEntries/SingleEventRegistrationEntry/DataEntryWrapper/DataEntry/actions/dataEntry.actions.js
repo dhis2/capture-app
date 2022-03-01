@@ -7,7 +7,6 @@ export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForNewSingleEventActionsBatch',
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
     OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenNewEventInDataEntryActionsBatch',
-    RESET_DATA_ENTRY_ACTIONS_BATCH: 'ResetDataEntryForNewEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForNewSingleEventActionsBatch',
     SAVE_NEW_EVENT_ADD_ANOTHER_BATCH: 'SaveNewEventAddAnotherBatch',
     SAVE_NEW_EVENT_IN_STAGE_BATCH: 'SaveNewEventInStageBatch',
@@ -30,7 +29,6 @@ export const actionTypes = {
     NEW_EVENT_SAVED_ADD_ANOTHER: 'NewEventSavedAddAnother',
     SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER: 'SaveFailedForNewEventAddAnother',
     SET_NEW_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',
-    RESET_DATA_ENTRY: 'ResetDataEntryForNewEvent',
     ADD_NEW_EVENT_NOTE: 'AddNewEventNote',
     NEW_EVENT_OPEN_NEW_RELATIONSHIP: 'NewEventOpenNewRelationship',
     SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS: 'SaveNewEventRelationshipsIfExists',
@@ -101,6 +99,8 @@ export const startSaveTeiForNewEventRelationship = (teiPayload: Object, selectio
         },
     });
 
+export const openNewEventInDataEntry = () =>
+    actionCreator(actionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY)();
 
 export const cancelNewEventAndReturnToMainPage = () =>
     actionCreator(actionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)();

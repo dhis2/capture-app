@@ -53,7 +53,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
 
             const program = metadataContainer.program;
             const foundation = metadataContainer.stage.stageForm;
-            const orgUnit = action.payLoad.orgUnit;
+            const orgUnit = action.payload.orgUnit;
             const { enrollment, attributeValues } = state.enrollmentDomain;
 
             return batchActions([

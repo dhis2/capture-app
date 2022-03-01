@@ -2,9 +2,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
 import type { TrackerProgram, ProgramStage, RenderFoundation } from '../../../metaData';
-import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../common.types';
+import type { RulesExecutionDependenciesClientFormatted } from '../common.types';
 
 export const useLifecycle = ({
     program,
@@ -51,6 +52,8 @@ export const useLifecycle = ({
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
         if (delayRulesExecutionRef.current) {
+            // getRulesActions depends on settings in the redux store that are being managed through getOpenDataEntryActions.
+            // The purpose of the following lines of code is to make sure the redux store is ready before calling getRulesActions.
             delayRulesExecutionRef.current = false;
             setRulesExecutionTrigger(-rulesExecutionTrigger);
         } else if (orgUnit) {
@@ -70,8 +73,8 @@ export const useLifecycle = ({
             ]));
             eventsRef.current = eventsRulesDependency;
             attributesRef.current = attributesValuesRulesDependency;
-            orgUnitRef.current = orgUnit;
             enrollmentDataRef.current = enrollmentDataRulesDependency;
+            orgUnitRef.current = orgUnit;
         }
     // Ignoring state (due to various reasons, bottom line being that field updates are handled in epic)
     // eslint-disable-next-line react-hooks/exhaustive-deps

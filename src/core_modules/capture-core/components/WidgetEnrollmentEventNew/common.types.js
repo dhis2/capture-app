@@ -1,6 +1,4 @@
 // @flow
-export type { OrgUnit } from 'capture-core-utils/rulesEngine';
-
 export type ExternalSaveHandler = (eventServerValues: Object, uid: string) => void;
 
 export type AttributeValueServerFormatted = {|

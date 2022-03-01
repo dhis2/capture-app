@@ -1,20 +1,15 @@
 // @flow
-import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { errorCreator } from 'capture-core-utils';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
+    openNewEventInDataEntry,
     cancelOpenNewEventInDataEntry,
     batchActionTypes,
 } from '../actions/dataEntry.actions';
-import {
-    openNewEventInDataEntry,
-    resetDataEntry,
-} from '../actions/dataEntryLoad.actionBatchs';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
@@ -22,7 +17,8 @@ import {
     updateRulesEffects,
     type FieldData,
 } from '../../../../../../rules';
-import { getProgramAndStageForProgram, getEventProgramThrowIfNotFound } from '../../../../../../metaData/helpers';
+import { getOpenDataEntryActions } from '../';
+import { getEventProgramThrowIfNotFound } from '../../../../../../metaData/helpers';
 import {
     getDefaultMainConfig as getDefaultMainColumnConfig,
     getMetaDataConfig as getColumnMetaDataConfig,
@@ -39,41 +35,12 @@ import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram, EventProgram } 
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
 import { programCollection } from '../../../../../../metaDataMemoryStores';
-import { deriveURLParamsFromLocation } from '../../../../../../utils/routing';
 
-const errorMessages = {
-    PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
-};
-
-
-export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const resetDataEntryForNewEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
-        map(() => {
-            const state = store.value;
-            const programId = state.currentSelections.programId;
-            const { stageId: programStageId } = deriveURLParamsFromLocation();
-
-            const orgUnitId = state.currentSelections.orgUnitId;
-            const orgUnit = state.organisationUnits[orgUnitId];
-            const metadataContainer = getProgramAndStageForProgram(programId, programStageId);
-            if (metadataContainer.error) {
-                log.error(
-                    errorCreator(
-                        errorMessages.PROGRAM_OR_STAGE_NOT_FOUND)(
-                        { method: 'resetDataEntryForNewEventEpic' }),
-                );
-            }
-
-            const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
-            return batchActions(
-
-                // $FlowFixMe[incompatible-call] automated comment
-                [...resetDataEntry(metadataContainer.program, foundation, orgUnit)],
-                batchActionTypes.RESET_DATA_ENTRY_ACTIONS_BATCH,
-            );
-        }));
-
+        map(() => (batchActions(getOpenDataEntryActions()))),
+    );
 
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -107,29 +74,9 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         map(() => {
             const state = store.value;
             const selectionsComplete = state.currentSelections.complete;
-            if (!selectionsComplete) {
-                return cancelOpenNewEventInDataEntry();
-            }
-            const programId = state.currentSelections.programId;
-            const { stageId: programStageId } = deriveURLParamsFromLocation();
-
-            const orgUnitId = state.currentSelections.orgUnitId;
-            const orgUnit = state.organisationUnits[orgUnitId];
-            const metadataContainer = getProgramAndStageForProgram(programId, programStageId);
-            if (metadataContainer.error) {
-                log.error(
-                    errorCreator(
-                        errorMessages.PROGRAM_OR_STAGE_NOT_FOUND)(
-                        { method: 'openNewEventInDataEntryEpic' }),
-                );
-            }
-            const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
-            return batchActions(
-
-                // $FlowFixMe[incompatible-call] automated comment
-                [...openNewEventInDataEntry(metadataContainer.program, foundation, orgUnit)],
-                batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
-            );
+            return selectionsComplete
+                ? openNewEventInDataEntry()
+                : cancelOpenNewEventInDataEntry();
         }));
 
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>

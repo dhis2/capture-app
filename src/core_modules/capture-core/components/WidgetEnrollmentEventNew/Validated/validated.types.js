@@ -1,8 +1,8 @@
 // @flow
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import type { ProgramStage, RenderFoundation, TrackerProgram } from '../../../metaData';
 import { typeof addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import type {
-    OrgUnit,
     ExternalSaveHandler,
     RulesExecutionDependencies,
     RulesExecutionDependenciesClientFormatted,
