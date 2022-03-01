@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -64,27 +64,43 @@ const getAllFieldsWithValue = (
         return acc;
     }, {});
 
-
 const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: Array<ApiEnrollmentEvent>) => {
-    const [dataSource, setDataSource] = React.useState([]);
+    const [value, setValue] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const computeData = useCallback(async () => {
+        try {
+            setLoading(true);
+            const dataElementsByType = await groupRecordsByType(events, dataElements);
+            const eventsData = [];
+            for (const event of events) {
+                const eventId = event.event;
+                const predefinedFields = baseFields.reduce((acc, field) => {
+                    acc[field.id] = convertServerToClient(getValueByKeyFromEvent(event, field), field.type);
+                    return acc;
+                }, {});
 
-    const computeData = async () => {
-        const dataElementsByType = await groupRecordsByType(events, dataElements);
-        const eventsData = [];
-        for (const event of events) {
-            const eventId = event.event;
-            const predefinedFields = baseFields.reduce((acc, field) => {
-                acc[field.id] = convertServerToClient(getValueByKeyFromEvent(event, field), field.type);
-                return acc;
-            }, {});
-
-            const allFields = getAllFieldsWithValue(eventId, dataElements, dataElementsByType);
-            eventsData.push({ id: eventId, pendingApiResponse: event.pendingApiResponse, ...predefinedFields, ...allFields });
+                const allFields = getAllFieldsWithValue(eventId, dataElements, dataElementsByType);
+                eventsData.push({
+                    id: eventId,
+                    pendingApiResponse: event.pendingApiResponse,
+                    ...predefinedFields,
+                    ...allFields,
+                });
+            }
+            setValue(eventsData);
+        } catch (e) {
+            setError(e);
+        } finally {
+            setLoading(false);
         }
-        setDataSource(eventsData);
-    };
+    }, [events, dataElements]);
 
-    return { computeData, dataSource };
+    useEffect(() => {
+        computeData();
+    }, [computeData]);
+
+    return { value, error, loading };
 };
 
 const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean) => {

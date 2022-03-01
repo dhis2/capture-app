@@ -71,7 +71,8 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     render() {
-        const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
+        const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions, onResetCategoryOption } = this.props;
+
         return (
             <div data-test={'scope-selector'}>
                 <QuickSelector
@@ -82,9 +83,11 @@ class ScopeSelectorClass extends Component<Props, State> {
                     onResetOrgUnitId={this.handleOpenOrgUnitWarning}
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
+                    onResetCategoryOption={onResetCategoryOption}
                     selectedOrgUnitId={this.props.selectedOrgUnitId}
                     selectedProgramId={this.props.selectedProgramId}
                     selectedOrgUnit={this.props.selectedOrgUnit}
+                    selectedCategories={this.props.selectedCategories}
                 >
                     {this.props.children}
                 </QuickSelector>

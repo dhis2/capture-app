@@ -1,7 +1,7 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import type { ComponentType } from 'react';
 import { NewPageComponent } from './NewPage.component';
 import {
@@ -42,7 +42,8 @@ const useUserWriteAccess = (scopeId) => {
 export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { orgUnitId: queryOrgUnitId } = useLocationQuery();
+    const [selectedCategories, setSelectedCategories] = useState();
+    const { orgUnitId: queryOrgUnitId, teiId } = useLocationQuery();
 
     const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
@@ -68,6 +69,7 @@ export const NewPage: ComponentType<{||}> = () => {
     // This is combo category selection. When you have selected a program but
     // the selection is incomplete we want the user to see a specific message
     const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
+    console.log(selectedCategories, missingCategories);
 
     const orgUnitSelectionIncomplete: boolean = useSelector(({ currentSelections: { orgUnitId, complete } }) => !(queryOrgUnitId || orgUnitId) && !complete);
 
@@ -106,5 +108,10 @@ export const NewPage: ComponentType<{||}> = () => {
             error={error}
             ready={ready}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            programId={programId}
+            orgUnitId={orgUnitId}
+            teiId={teiId}
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
         />);
 };

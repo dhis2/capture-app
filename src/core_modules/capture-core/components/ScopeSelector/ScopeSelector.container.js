@@ -29,10 +29,14 @@ export const ScopeSelector: ComponentType<OwnProps> =
       isUserInteractionInProgress = false,
       selectedProgramId,
       selectedOrgUnitId,
+      selectedCategories,
       onSetProgramId,
       onSetOrgUnit,
+      onSetCategoryOption,
       onResetProgramId,
       onResetOrgUnitId,
+      onResetCategoryOption,
+      onResetAllCategoryOptions,
       children,
   }) => {
       const dispatch = useDispatch();
@@ -60,20 +64,23 @@ export const ScopeSelector: ComponentType<OwnProps> =
       const dispatchOnSetCategoryOption = useCallback(
           (categoryId: string, categoryOption: Object) => {
               dispatch(setCategoryOptionFromScopeSelector(categoryId, categoryOption));
+              onSetCategoryOption(categoryId, categoryOption);
           },
-          [dispatch]);
+          [dispatch, onSetCategoryOption]);
 
       const dispatchOnResetCategoryOption = useCallback(
           (categoryId: string) => {
               dispatch(resetCategoryOptionFromScopeSelector(categoryId));
+              onResetCategoryOption(categoryId);
           },
-          [dispatch]);
+          [dispatch, onResetCategoryOption]);
 
       const dispatchOnResetAllCategoryOptions = useCallback(
           () => {
               dispatch(resetAllCategoryOptionsFromScopeSelector());
+              onResetAllCategoryOptions();
           },
-          [dispatch]);
+          [dispatch, onResetAllCategoryOptions]);
 
       const dispatchOnResetOrgUnitId = useCallback(
           () => {
@@ -103,14 +110,15 @@ export const ScopeSelector: ComponentType<OwnProps> =
           <ScopeSelectorComponent
               onResetProgramId={dispatchOnResetProgramId}
               onResetOrgUnitId={dispatchOnResetOrgUnitId}
-              onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
-              onResetCategoryOption={dispatchOnResetCategoryOption}
-              onSetCategoryOption={dispatchOnSetCategoryOption}
+              onResetAllCategoryOptions={onResetAllCategoryOptions}
+              onResetCategoryOption={onResetCategoryOption}
+              onSetCategoryOption={onSetCategoryOption}
               onSetProgramId={onSetProgramId}
               onSetOrgUnit={handleSetOrgUnit}
               selectedOrgUnit={selectedOrgUnit}
               selectedOrgUnitId={selectedOrgUnitId}
               selectedProgramId={selectedProgramId}
+              selectedCategories={selectedCategories}
               isUserInteractionInProgress={isUserInteractionInProgress}
               ready={ready}
           >

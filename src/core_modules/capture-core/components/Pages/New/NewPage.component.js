@@ -5,7 +5,7 @@ import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { LockedSelector } from '../../LockedSelector';
+import { NewPageTopBar } from './TopBar';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { newPageStatuses } from './NewPage.constants';
@@ -13,7 +13,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { cleanUpDataEntry } from './NewPage.actions';
+import { LockedSelector } from '../../LockedSelector';
 
 const getStyles = () => ({
     container: {
@@ -38,10 +38,14 @@ const NewPagePlain = ({
     missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
     isUserInteractionInProgress,
+    orgUnitId,
+    programId,
+    teiId,
+    selectedCategories,
+    setSelectedCategories,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
-
     useEffect(() => {
         setScopeId(currentScopeId);
     }, [scopeType, currentScopeId]);
@@ -67,16 +71,14 @@ const NewPagePlain = ({
         <LockedSelector
             pageToPush="new"
             isUserInteractionInProgress={isUserInteractionInProgress}
-            customActionsOnProgramIdReset={[
-                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
-            ]}
-            customActionsOnOrgUnitIdReset={[
-                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
-            ]}
+        />
+        <NewPageTopBar
+            orgUnitId={orgUnitId}
+            programId={programId}
+            teiId={teiId}
+            isUserInteractionInProgress={isUserInteractionInProgress}
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
         />
         <div data-test="registration-page-content" className={classes.container} >
             {

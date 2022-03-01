@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-15T09:59:36.798Z\n"
+"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -649,12 +649,8 @@ msgid ""
 msgstr ""
 "{{programName}} har kategorier. Velg alle kategorier for å se dashbordet."
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
-"Det er flere registreringer i dette programmet. Velg en registreringg for å "
-"se dashbordet."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
@@ -1123,16 +1119,31 @@ msgid ""
 "Enrollment box on this dashboard"
 msgstr ""
 
+msgid " Loading..."
+msgstr ""
+
 msgid "Save changes"
 msgstr "Lagre endringer"
 
 msgid "Profile"
 msgstr "Profil"
 
-msgid "There are errors in this form"
+msgid "There is a problem with this form"
 msgstr ""
 
 msgid "There are warnings in this form"
+msgstr ""
+
+msgid "There was a problem saving changes"
+msgstr ""
+
+msgid "Try again or contact your system administrator for support"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr "Sporet enhetforekomst"
+
+msgid "Fix errors in the form to continue."
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
@@ -1161,6 +1172,9 @@ msgstr "Gå til hele {{ eventName }}"
 
 msgid "This stage can only have one event"
 msgstr "Denne fasen kan bare ha en hendelse"
+
+msgid "Events could not be retrieved. Please try again later."
+msgstr ""
 
 msgid "Report date"
 msgstr "Rapporteringsdato"
@@ -1221,6 +1235,9 @@ msgstr "Inaktiv"
 
 msgid "Working list could not be updated"
 msgstr "Arbeidslisten kunne ikke oppdateres"
+
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr ""
 
 msgid "Update view"
 msgstr "Oppdater visning"
@@ -1311,9 +1328,6 @@ msgstr "Feil ved lagring av registrering"
 
 msgid "Error saving the enrollment event"
 msgstr "Feil under lagring av hendelsen"
-
-msgid "tracked entity instance"
-msgstr "Sporet enhetforekomst"
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"
