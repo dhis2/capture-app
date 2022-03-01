@@ -110,7 +110,7 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                 TETType.teiRegistration.form,
                 orgUnit,
                 DATA_ENTRY_ID,
-                [initializeRegisterTei(null, orgUnit)],
+                [initializeRegisterTei(suggestedProgramId, orgUnit)],
                 state.generatedUniqueValuesCache[DATA_ENTRY_ID],
             );
 
