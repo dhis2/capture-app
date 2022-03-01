@@ -17,6 +17,7 @@ export type Props = {|
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,
     onEventClick: (eventId: string, stageId: string) => void,
+    onUpdateTeiAttributeValues: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
 |};
 
 export type PlainProps = {|

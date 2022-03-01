@@ -139,12 +139,10 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
         ...state,
         page: 'new',
-        locationSwitchInProgress: true,
     }),
     [topBarActionsActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
         ...state,
         page: 'new',
-        locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
@@ -170,11 +168,9 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [lockedSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
         page: 'search',
-        locationSwitchInProgress: true,
     }),
     [topBarActionsActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
         page: 'search',
-        locationSwitchInProgress: true,
     }),
 }, 'app');

@@ -16,6 +16,8 @@ export type OwnProps = $ReadOnly<{|
   renderDuplicatesCardActions?: RenderCustomCardActions,
   renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
   ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
+  teiId?: ?string,
+  skipDuplicateCheck?: ?boolean,
 |}>;
 
 type ContainerProps = {|

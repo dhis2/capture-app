@@ -1,3 +1,116 @@
+## [1.70.2](https://github.com/dhis2/capture-app/compare/v1.70.1...v1.70.2) (2022-03-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e5868a5](https://github.com/dhis2/capture-app/commit/e5868a595f5c5d60489e91bc81ef25a15ee180db))
+
+## [1.70.1](https://github.com/dhis2/capture-app/compare/v1.70.0...v1.70.1) (2022-02-28)
+
+
+### Bug Fixes
+
+* [DHIS2-12134] fix pending schedule event ([#2446](https://github.com/dhis2/capture-app/issues/2446)) ([6bbbbaf](https://github.com/dhis2/capture-app/commit/6bbbbaf06029a756f3828d38751466c233fd8fa1))
+* [DHIS2-12528] fix View dashboard navigation from search page ([#2529](https://github.com/dhis2/capture-app/issues/2529)) ([af789ab](https://github.com/dhis2/capture-app/commit/af789ab8c9762ef584b203d399426d8156db72e3))
+
+# [1.70.0](https://github.com/dhis2/capture-app/compare/v1.69.0...v1.70.0) (2022-02-28)
+
+
+### Features
+
+* [DHIS2-10950] update tracked entity attributes  ([#2444](https://github.com/dhis2/capture-app/issues/2444)) ([3e9a4d9](https://github.com/dhis2/capture-app/commit/3e9a4d928e72d0b28f94c95ceff5a67fa964f3a0)), closes [#2263](https://github.com/dhis2/capture-app/issues/2263)
+
+# [1.69.0](https://github.com/dhis2/capture-app/compare/v1.68.1...v1.69.0) (2022-02-28)
+
+
+### Bug Fixes
+
+* [DHIS2-11280] add default program value ([#2435](https://github.com/dhis2/capture-app/issues/2435)) ([1bfe387](https://github.com/dhis2/capture-app/commit/1bfe387e0a8c4b329eddcdb91b4c0c797d1f3fa8))
+* [DHIS2-12158] fix missing enrollment message ([#2535](https://github.com/dhis2/capture-app/issues/2535)) ([21e1bcf](https://github.com/dhis2/capture-app/commit/21e1bcffe6c57672aff420f6e1990b5967e800be))
+* [TECH-986] fix test orders ([#2540](https://github.com/dhis2/capture-app/issues/2540)) ([0ad8270](https://github.com/dhis2/capture-app/commit/0ad82701197a62776dacc01c86a00cb8e3bb29db))
+
+
+### Features
+
+* [DHIS2-9281] share view ([#2508](https://github.com/dhis2/capture-app/issues/2508)) ([c0e7fe5](https://github.com/dhis2/capture-app/commit/c0e7fe5d451cf1771b4602766f2c9262b357d614)), closes [#2487](https://github.com/dhis2/capture-app/issues/2487)
+
+## [1.68.1](https://github.com/dhis2/capture-app/compare/v1.68.0...v1.68.1) (2022-02-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1b9507e](https://github.com/dhis2/capture-app/commit/1b9507eea4968460fd175b71c19034e32b7f49cf))
+
+# [1.68.0](https://github.com/dhis2/capture-app/compare/v1.67.2...v1.68.0) (2022-02-22)
+
+
+### Features
+
+* [DHIS2-9280][DHIS2-9279][DHIS2-9282][DHIS2-9284][DHIS2-12575] TEI custom views ([#2453](https://github.com/dhis2/capture-app/issues/2453)) ([56cf6ec](https://github.com/dhis2/capture-app/commit/56cf6ec3818833efec861a953a98782a34bc0ff2)), closes [#2487](https://github.com/dhis2/capture-app/issues/2487)
+
+## [1.67.2](https://github.com/dhis2/capture-app/compare/v1.67.1...v1.67.2) (2022-02-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7083b6f](https://github.com/dhis2/capture-app/commit/7083b6f86021bc662894f6ecc33b3bd93ff46621))
+
+## [1.67.1](https://github.com/dhis2/capture-app/compare/v1.67.0...v1.67.1) (2022-02-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4af4ac5](https://github.com/dhis2/capture-app/commit/4af4ac5e4869654105df6bfdcfb5e476eaa1d243))
+
+# [1.67.0](https://github.com/dhis2/capture-app/compare/v1.66.12...v1.67.0) (2022-02-16)
+
+
+### Features
+
+* [TECH-928] New tracker endpoints in capture ([13fe8ab](https://github.com/dhis2/capture-app/commit/13fe8ab6a82a9df6c7b20515e73f971f408b2e5b))
+
+## [1.66.12](https://github.com/dhis2/capture-app/compare/v1.66.11...v1.66.12) (2022-02-16)
+
+
+### Bug Fixes
+
+* [DHIS2-12584] fix complete status ([#2522](https://github.com/dhis2/capture-app/issues/2522)) ([d89026c](https://github.com/dhis2/capture-app/commit/d89026ccb9b7162f0ac55fe6830576a34e064e9f))
+
+## [1.66.11](https://github.com/dhis2/capture-app/compare/v1.66.10...v1.66.11) (2022-02-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0706606](https://github.com/dhis2/capture-app/commit/070660601a50586ce4f2cb98fb5e1ba6b4ec0985))
+
+## [1.66.10](https://github.com/dhis2/capture-app/compare/v1.66.9...v1.66.10) (2022-02-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([003b893](https://github.com/dhis2/capture-app/commit/003b893537d65b1419c9d8fdf7d6f7a4d85b94a6))
+
+## [1.66.9](https://github.com/dhis2/capture-app/compare/v1.66.8...v1.66.9) (2022-02-10)
+
+
+### Bug Fixes
+
+* [TECH-929] i18n plural and padding ([#2504](https://github.com/dhis2/capture-app/issues/2504)) ([a23bd15](https://github.com/dhis2/capture-app/commit/a23bd15d1cc6f001a647e18f0db8f4f56c7df46f))
+
+## [1.66.8](https://github.com/dhis2/capture-app/compare/v1.66.7...v1.66.8) (2022-02-10)
+
+
+### Bug Fixes
+
+* [DHIS2-12558] Fix random errors in production builds ([b82f23b](https://github.com/dhis2/capture-app/commit/b82f23bda4a9b39aaa9f7fce4dddc66a0c0e5cf0))
+
+## [1.66.7](https://github.com/dhis2/capture-app/compare/v1.66.6...v1.66.7) (2022-02-08)
+
+
+### Bug Fixes
+
+* [DHIS2-12472] List all messages related to field ([e8c60da](https://github.com/dhis2/capture-app/commit/e8c60daa2088b3d9512f2111ff558f8865b863a6))
+
 ## [1.66.6](https://github.com/dhis2/capture-app/compare/v1.66.5...v1.66.6) (2022-02-02)
 
 

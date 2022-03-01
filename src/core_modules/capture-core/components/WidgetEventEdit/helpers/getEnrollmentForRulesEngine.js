@@ -5,10 +5,10 @@ import type {
     EnrollmentData,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
-export const getEnrollmentForRulesEngine = ({ enrollmentDate, incidentDate, enrollment }: EnrollmentData = {}): { enrollmentId: string, enrollmentDate: string, incidentDate?: string } => ({
+export const getEnrollmentForRulesEngine = ({ enrolledAt, occurredAt, enrollment }: EnrollmentData = {}): { enrollmentId: string, enrolledAt: string, occurredAt?: string } => ({
     enrollmentId: enrollment,
     // $FlowFixMe
-    enrollmentDate: convertServerToClient(enrollmentDate, dataElementTypes.DATE),
+    enrolledAt: convertServerToClient(enrolledAt, dataElementTypes.DATE),
     // $FlowFixMe
-    incidentDate: convertServerToClient(incidentDate, dataElementTypes.DATE),
+    occurredAt: convertServerToClient(occurredAt, dataElementTypes.DATE),
 });

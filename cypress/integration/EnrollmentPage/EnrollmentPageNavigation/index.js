@@ -139,5 +139,5 @@ When('you reset the enrollment selection', () => {
 Then('you see message explaining you need to select an enrollment', () => {
     cy.url().should('not.include', 'enrollmentId');
     cy.get('[data-test="enrollment-page-content"]')
-        .contains('There are multiple enrollments for this program. Choose an enrollment to view the dashboard.');
+        .contains('Choose an enrollment to view the dashboard.');
 });

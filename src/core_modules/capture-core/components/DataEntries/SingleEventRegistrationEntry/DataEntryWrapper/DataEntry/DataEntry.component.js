@@ -128,7 +128,6 @@ const createComponentProps = (props: Object, componentProps: Object) => ({
 });
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
-
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
         withCalculateMessages(overrideMessagePropNames)(
@@ -153,12 +152,12 @@ const buildReportDateSettingsFn = () => {
         getComponent: () => reportDateComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
-            label: props.formFoundation.getLabel('eventDate'),
+            label: props.formFoundation.getLabel('occurredAt'),
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
         }),
-        getPropName: () => 'eventDate',
+        getPropName: () => 'occurredAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
@@ -446,7 +445,6 @@ type Props = {
     theme: Theme,
     formHorizontal: ?boolean,
     recentlyAddedRelationshipId?: ?string,
-    isAddEventInStage: boolean,
 };
 type DataEntrySection = {
     placement: $Values<typeof placements>,
@@ -525,19 +523,16 @@ class NewEventDataEntry extends Component<Props> {
     }
 
     getSavingText() {
-        const { orgUnitName, programName, stageName, isAddEventInStage } = this.props;
+        const { orgUnitName, programName } = this.props;
 
-        if (isAddEventInStage) {
-            return (<span>
-                {i18n.t('Saving to {{stageName}} for {{programName}} in {{orgUnitName}}',
-                    { orgUnitName, stageName, programName, interpolation: { escapeValue: false } })}
-            </span>);
-        }
-
-        return (<span>
-            {i18n.t('Saving to {{programName}} in {{orgUnitName}}',
-                { orgUnitName, programName, interpolation: { escapeValue: false } })}
-        </span>);
+        return (
+            <span>
+                {
+                    i18n.t('Saving to {{programName}} in {{orgUnitName}}',
+                        { orgUnitName, programName, interpolation: { escapeValue: false } })
+                }
+            </span>
+        );
     }
 
     renderHorizontal = () => {
@@ -587,7 +582,6 @@ class NewEventDataEntry extends Component<Props> {
             </div>
         );
     }
-
 
     render() {
         return (

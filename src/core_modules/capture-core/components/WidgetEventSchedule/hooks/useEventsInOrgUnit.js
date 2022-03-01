@@ -7,15 +7,15 @@ export const useEventsInOrgUnit = (orgUnitId: string, selectedDate: string) => {
         useMemo(
             () => ({
                 events: {
-                    resource: 'events',
+                    resource: 'tracker/events',
                     params: ({ variables: { orgUnitId: id, selectedDate: date } }) => ({
                         orgUnit: id,
-                        startDate: date,
-                        endDate: date,
+                        occurredAfter: date,
+                        occurredBefore: date,
                         skipPaging: true,
                         status: 'SCHEDULE',
                         ouMode: 'SELECTED',
-                        fields: 'dueDate',
+                        fields: 'scheduledAt',
                     }),
                 },
             }),
@@ -31,5 +31,5 @@ export const useEventsInOrgUnit = (orgUnitId: string, selectedDate: string) => {
         }
     }, [refetch, orgUnitId, selectedDate]);
 
-    return { error, events: !loading && data ? data.events.events : [] };
+    return { error, events: !loading && data ? data.events.instances : [] };
 };

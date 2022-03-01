@@ -128,7 +128,7 @@ export const saveRelationshipAfterSavingTeiForViewEventEpic = (action$: InputObs
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS),
         map((action) => {
-            const teiId = action.payload.response.importSummaries[0].reference;
+            const teiId = action.payload.bundleReport.typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const { clientData, selections, clientId } = action.meta;
             const to = clientData.to;
             to.data = null;
@@ -157,7 +157,7 @@ export const relationshipSavedForViewEventEpic = (action$: InputObservable, stor
             const state = store.value;
             const relationship = state.relationships[relationshipKey].find(r => r.clientId === action.meta.clientId);
 
-            const relationshipId = action.payload.response.importSummaries[0].reference;
+            const relationshipId = action.payload.bundleReport.typeReportMap.RELATIONSHIP.objectReports[0].uid;
             const updatedRelationship = {
                 ...relationship,
                 id: relationshipId,
