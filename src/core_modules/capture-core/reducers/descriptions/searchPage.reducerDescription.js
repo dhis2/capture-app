@@ -6,6 +6,7 @@ export const searchPageStatus = {
     INITIAL: 'INITIAL',
     LOADING: 'LOADING',
     NO_RESULTS: 'NO_RESULTS',
+    NO_RESULTS_WITH_FALLBACK: 'NO_RESULTS_WITH_FALLBACK',
     SHOW_RESULTS: 'SHOW_RESULTS',
     ERROR: 'ERROR',
     TOO_MANY_RESULTS: 'TOO_MANY_RESULTS',
@@ -35,6 +36,10 @@ export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW]: state => ({
         ...state,
         searchStatus: searchPageStatus.NO_RESULTS,
+    }),
+    [searchPageActionTypes.SEARCH_RESULTS_EMPTY_WITH_FALLBACK_VIEW]: state => ({
+        ...state,
+        searchStatus: searchPageStatus.NO_RESULTS_WITH_FALLBACK,
     }),
     [searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW]: state => ({
         ...state,

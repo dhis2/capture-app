@@ -8,6 +8,7 @@ import {
     fallbackSearch,
     saveCurrentSearchInfo,
     showEmptyResultsViewOnSearchPage,
+    showEmptyResultsWithFallbackViewOnSearchPage,
     showErrorViewOnSearchPage,
     showLoadingViewOnSearchPage,
     showSuccessResultsViewOnSearchPage,
@@ -49,6 +50,7 @@ const searchViaUniqueIdStream = (queryArgs, attributes, programId) =>
                     programId,
                 }));
             }
+            console.log({ searchResults });
             return of(showEmptyResultsViewOnSearchPage());
         }),
         startWith(showLoadingViewOnSearchPage()),
@@ -95,8 +97,8 @@ const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
                     pagingData.currentPage,
                 );
             }
-
-            return showEmptyResultsViewOnSearchPage();
+            console.log({ searchResults });
+            return showEmptyResultsWithFallbackViewOnSearchPage();
         }),
         startWith(showLoadingViewOnSearchPage()),
         catchError(handleErrors),
