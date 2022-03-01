@@ -228,8 +228,7 @@ const aiFixedLengthMap = {
 const removeGS1Identifier = value => value.substring(3);
 
 const getApplicationIdentifier = (gs1Group) => {
-    for (const element of gs1Elements.keys()) {
-        let ai = gs1Elements.get(element);
+    for (let ai of gs1Elements.values()) {
         if (ai.endsWith('*')) {
             ai = ai.substring(0, ai.length - 1);
         }
@@ -262,7 +261,7 @@ const translateKey = (keyToTranslate) => {
     }
 };
 
-const dataMap = new Map();
+let dataMap;
 
 const handleGroupData = (gs1Group) => {
     if (gs1Group) {
@@ -273,20 +272,31 @@ const handleGroupData = (gs1Group) => {
             nextValueLength = gs1GroupLength;
         }
 
-        dataMap.set(ai, gs1Group.substring(2, nextValueLength));
+        dataMap.set(ai, gs1Group.substring(ai.length, nextValueLength));
         handleGroupData(gs1Group.substring(nextValueLength));
     }
 };
 
+const dataMatrixMappedCache = {};
+
 const extractGS1DataMatrixValue = (key, dataMatrix) => {
     const keyToReturn = translateKey(key);
+    const ai = gs1Elements.get(keyToReturn);
+
+    if (dataMatrixMappedCache[dataMatrix]) {
+        return dataMatrixMappedCache[dataMatrix].get(ai);
+    }
+
+    dataMap = new Map();
 
     const gs1Groups = removeGS1Identifier(dataMatrix).split(gs1Elements.get('GS1_GROUP_SEPARATOR'));
     gs1Groups.forEach((gs1Group) => {
         handleGroupData(gs1Group);
     });
 
-    return dataMap.get(gs1Elements.get(keyToReturn));
+    dataMatrixMappedCache[dataMatrix] = dataMap;
+
+    return dataMap.get(ai);
 };
 
 export const extractDataMatrixValue = (key, dataMatrix) => {
