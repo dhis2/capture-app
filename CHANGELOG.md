@@ -1,3 +1,11 @@
+# [1.71.0](https://github.com/dhis2/capture-app/compare/v1.70.2...v1.71.0) (2022-03-01)
+
+
+### Features
+
+* [DHIS2-12141] TEI Re enrollment  ([#2541](https://github.com/dhis2/capture-app/issues/2541)) ([09b7642](https://github.com/dhis2/capture-app/commit/09b7642a7bcb4a934689cbb88f8a5a51adf38c87))
+* [DHIS2-12575] adapt the requests to the latest TEIfilters API shape. ([#2536](https://github.com/dhis2/capture-app/issues/2536)) ([b98f052](https://github.com/dhis2/capture-app/commit/b98f052b62e23c07e7562b95d38183b7548bcfe7))
+
 ## [1.70.2](https://github.com/dhis2/capture-app/compare/v1.70.1...v1.70.2) (2022-03-01)
 
 
