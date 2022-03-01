@@ -14,6 +14,7 @@ import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { useLocationQuery } from '../../../../utils/routing';
 
 const getStyles = ({ typography }) => ({
     paper: {
@@ -112,6 +113,25 @@ const RegistrationDataEntryPlain = ({
         />
     ), []);
 
+    const ExistingUniqueValueDialogActions = useCallback(({ teiId: existingTeiId }) => {
+        const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+        const { programId, orgUnitId } = useLocationQuery(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+
+        return (
+            <Button
+                dataTest="existing-unique-value-link-tei-button"
+                primary
+                onClick={() => dispatch(navigateToEnrollmentOverview({
+                    teiId: existingTeiId,
+                    orgUnitId,
+                    programId,
+                }))}
+            >
+                {programId ? i18n.t('View enrollment') : i18n.t('View dashboard')}
+            </Button>
+        );
+    }, []);
+
     return (
         <>
             {
@@ -153,6 +173,7 @@ const RegistrationDataEntryPlain = ({
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
+                                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                                 />
                             </Grid>
                             {
@@ -201,6 +222,7 @@ const RegistrationDataEntryPlain = ({
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
+                                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                                 />
                             </Grid>
                             {
