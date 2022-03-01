@@ -3,7 +3,7 @@
   "homepage": ".",
   "version": "1.72.1",
   "cacheVersion": "1",
-  "serverVersion": "37",
+  "serverVersion": "38",
   "private": true,
   "dependencies": {
     "@dhis2/app-runtime": "^3.3.0",
