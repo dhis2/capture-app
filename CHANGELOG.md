@@ -1,3 +1,11 @@
+## [1.72.2](https://github.com/dhis2/capture-app/compare/v1.72.1...v1.72.2) (2022-03-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12557] Unique TEAs ([00164e2](https://github.com/dhis2/capture-app/commit/00164e26b9e801e6df62556abff1794e0b39e30d))
+* up cache version for 2.38 ([2c74c35](https://github.com/dhis2/capture-app/commit/2c74c35258093eba2cfb18dcedc276b9372c27e8))
+
 ## [1.72.1](https://github.com/dhis2/capture-app/compare/v1.72.0...v1.72.1) (2022-03-01)
 
 
