@@ -108,10 +108,10 @@ const RegistrationDataEntryPlain = ({
     ), []);
 
     const ExistingUniqueValueDialogActions = useCallback(({ teiId }) => {
-        const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
-        const { pathname, search } = useLocation(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+        const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks
+        const { pathname, search } = useLocation(); // eslint-disable-line react-hooks/rules-of-hooks
         const { programId, orgUnitId, trackedEntityTypeId } =
-            useSelector(({ router: { location: { query } } }) => ({ // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+            useSelector(({ router: { location: { query } } }) => ({ // eslint-disable-line react-hooks/rules-of-hooks
                 programId: query.programId,
                 orgUnitId: query.orgUnitId,
                 trackedEntityTypeId: query.trackedEntityTypeId,
