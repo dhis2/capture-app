@@ -15,11 +15,11 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
       const dispatch = useDispatch();
 
       const dispatchOnSaveWithoutEnrollment = useCallback(
-          () => { dispatch(startSavingNewTrackedEntityInstance()); },
+          (formFoundation) => { dispatch(startSavingNewTrackedEntityInstance(formFoundation)); },
           [dispatch]);
 
       const dispatchOnSaveWithEnrollment = useCallback(
-          () => { dispatch(startSavingNewTrackedEntityInstanceWithEnrollment()); },
+          (formFoundation) => { dispatch(startSavingNewTrackedEntityInstanceWithEnrollment(formFoundation)); },
           [dispatch]);
 
       const dataEntryIsReady = useSelector(({ dataEntries }) => (!!dataEntries[dataEntryId]));
