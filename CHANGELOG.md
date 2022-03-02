@@ -1,3 +1,10 @@
+# [1.74.0](https://github.com/dhis2/capture-app/compare/v1.73.0...v1.74.0) (2022-03-02)
+
+
+### Features
+
+* [DHIS2-12137] support translation of program rule actions ([#2561](https://github.com/dhis2/capture-app/issues/2561)) ([3d02c2f](https://github.com/dhis2/capture-app/commit/3d02c2f53fd32818938b41469fa76da675221d4b))
+
 # [1.73.0](https://github.com/dhis2/capture-app/compare/v1.72.2...v1.73.0) (2022-03-02)
 
 
