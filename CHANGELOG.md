@@ -1,3 +1,33 @@
+## [1.72.2](https://github.com/dhis2/capture-app/compare/v1.72.1...v1.72.2) (2022-03-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12557] Unique TEAs ([00164e2](https://github.com/dhis2/capture-app/commit/00164e26b9e801e6df62556abff1794e0b39e30d))
+* up cache version for 2.38 ([2c74c35](https://github.com/dhis2/capture-app/commit/2c74c35258093eba2cfb18dcedc276b9372c27e8))
+
+## [1.72.1](https://github.com/dhis2/capture-app/compare/v1.72.0...v1.72.1) (2022-03-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12714] Add V{event_date} to rules engine ([7ed2eb5](https://github.com/dhis2/capture-app/commit/7ed2eb557fcd2f79ce870b2eaf6d6db9019bc266))
+
+# [1.72.0](https://github.com/dhis2/capture-app/compare/v1.71.0...v1.72.0) (2022-03-01)
+
+
+### Features
+
+* [TECH-893] Ensure org unit updated in redux ([#2456](https://github.com/dhis2/capture-app/issues/2456)) ([1e72bd2](https://github.com/dhis2/capture-app/commit/1e72bd21f752c932b064b10589aba59a47561c18))
+
+# [1.71.0](https://github.com/dhis2/capture-app/compare/v1.70.2...v1.71.0) (2022-03-01)
+
+
+### Features
+
+* [DHIS2-12141] TEI Re enrollment  ([#2541](https://github.com/dhis2/capture-app/issues/2541)) ([09b7642](https://github.com/dhis2/capture-app/commit/09b7642a7bcb4a934689cbb88f8a5a51adf38c87))
+* [DHIS2-12575] adapt the requests to the latest TEIfilters API shape. ([#2536](https://github.com/dhis2/capture-app/issues/2536)) ([b98f052](https://github.com/dhis2/capture-app/commit/b98f052b62e23c07e7562b95d38183b7548bcfe7))
+
 ## [1.70.2](https://github.com/dhis2/capture-app/compare/v1.70.1...v1.70.2) (2022-03-01)
 
 
