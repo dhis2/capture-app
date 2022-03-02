@@ -29,7 +29,6 @@ import { searchScopes } from './SearchPage.constants';
 import { ResultsPageSizeContext } from '../shared-contexts';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
 import { cleanFallbackRelatedData } from './SearchPage.actions';
-import { SearchFallbackButton } from './SearchFallbackButton';
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {
@@ -128,7 +127,6 @@ const Index = ({
     const searchGroupsForSelectedScope =
       (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : []);
 
-console.log({ searchGroupsForSelectedScope })
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
         cleanSearchRelatedInfo();
@@ -195,10 +193,6 @@ console.log({ searchGroupsForSelectedScope })
                                     </ButtonStrip>
                                 </ModalActions>
                             </Modal>
-                        }
-                        
-                        { searchStatus === searchPageStatus.NO_RESULTS_WITH_FALLBACK &&
-                            <SearchFallbackButton availableSearchOptions={availableSearchOptions}/>
                         }
 
                         {

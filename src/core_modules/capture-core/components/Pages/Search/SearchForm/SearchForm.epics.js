@@ -8,7 +8,6 @@ import {
     fallbackSearch,
     saveCurrentSearchInfo,
     showEmptyResultsViewOnSearchPage,
-    showEmptyResultsWithFallbackViewOnSearchPage,
     showErrorViewOnSearchPage,
     showLoadingViewOnSearchPage,
     showSuccessResultsViewOnSearchPage,
@@ -50,7 +49,6 @@ const searchViaUniqueIdStream = (queryArgs, attributes, programId) =>
                     programId,
                 }));
             }
-            console.log({ searchResults });
             return of(showEmptyResultsViewOnSearchPage());
         }),
         startWith(showLoadingViewOnSearchPage()),
@@ -97,8 +95,11 @@ const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
                     pagingData.currentPage,
                 );
             }
-            console.log({ searchResults });
-            return showEmptyResultsWithFallbackViewOnSearchPage();
+
+            return showSuccessResultsViewOnSearchPage(
+                searchResults,
+                1,
+            );
         }),
         startWith(showLoadingViewOnSearchPage()),
         catchError(handleErrors),
@@ -241,7 +242,6 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
                     })),
                 );
             }
-
             return empty();
         }),
     );
@@ -267,8 +267,7 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
                     if (searchResults.length > 0) {
                         return showSuccessResultsViewOnSearchPage(searchResults, pagingData.currentPage);
                     }
-
-                    return of(showEmptyResultsViewOnSearchPage());
+                    return showEmptyResultsViewOnSearchPage();
                 }),
                 startWith(showLoadingViewOnSearchPage()),
                 catchError(handleErrors),

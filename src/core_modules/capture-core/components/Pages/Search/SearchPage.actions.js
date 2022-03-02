@@ -7,7 +7,6 @@ export const searchPageActionTypes = {
     VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH: 'SearchViaAttributesOnScopeTrackedEntityType',
     SEARCH_RESULTS_LOADING_VIEW: 'SearchResultsLoadingView',
     SEARCH_RESULTS_EMPTY_VIEW: 'SearchResultsEmptyView',
-    SEARCH_RESULTS_EMPTY_WITH_FALLBACK_VIEW: 'SearchResultsEmptyWithFallbackView',
     SEARCH_RESULTS_SUCCESS_VIEW: 'SearchResultsSuccessView',
     SEARCH_RESULTS_ERROR_VIEW: 'SearchResultsErrorView',
     SEARCH_RESULTS_TOO_MANY_VIEW: 'SearchResultsTooManyView',
@@ -60,9 +59,6 @@ export const showLoadingViewOnSearchPage = () =>
 
 export const showEmptyResultsViewOnSearchPage = () =>
     actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW)();
-
-export const showEmptyResultsWithFallbackViewOnSearchPage = () =>
-    actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_WITH_FALLBACK_VIEW)();
 
 export const showSuccessResultsViewOnSearchPage = (searchResults, currentPage) =>
     actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW)({ searchResults, currentPage });
