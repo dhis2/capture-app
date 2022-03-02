@@ -483,7 +483,7 @@ export class FormBuilder extends React.Component<Props> {
         const propFields = this.props.fields;
         return propFields.reduce((invalidFieldsContainer, field) => {
             const fieldUI = this.props.fieldsUI[field.id];
-            if (!fieldUI.valid) {
+            if (!fieldUI?.valid) {
                 invalidFieldsContainer.push({
                     prop: field,
                     instance: this.fieldInstances.get(field.id),
