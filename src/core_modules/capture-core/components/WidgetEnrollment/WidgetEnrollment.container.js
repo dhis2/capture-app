@@ -18,7 +18,7 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
     const { error: errorOwnerOrgUnit, ownerOrgUnit, tetId, enrollments } = useTrackedEntityInstances(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
 
-    const canAddNew = enrollments.every(item => item.status === plainStatus.ACTIVE);
+    const canAddNew = enrollments.every(item => item.status !== plainStatus.ACTIVE);
 
     return (
         <WidgetEnrollmentComponent
