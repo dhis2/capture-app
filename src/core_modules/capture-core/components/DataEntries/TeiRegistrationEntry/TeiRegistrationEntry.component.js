@@ -45,11 +45,12 @@ const TeiRegistrationEntryPlain =
       fieldOptions,
       classes,
       onPostProcessErrorMessage,
+      trackedEntityName,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
 
-      const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
+      const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
       const orgUnit = useCurrentOrgUnitInfo();
 
@@ -113,7 +114,7 @@ const TeiRegistrationEntryPlain =
 
 export const TeiRegistrationEntryComponent: ComponentType<Props> =
   compose(
-      withErrorMessagePostProcessor(),
+      withErrorMessagePostProcessor((({ trackedEntityName }) => trackedEntityName)),
       withDuplicateCheckOnSave(),
       withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => {
           const form = teiRegistrationMetadata && teiRegistrationMetadata.form;

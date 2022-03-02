@@ -289,6 +289,7 @@ type PreEnrollmentDataEntryProps = {
     onUpdateDataEntryField: Function,
     onStartAsyncUpdateField: Function,
     onGetUnsavedAttributeValues?: ?Function,
+    teiId?: ?string,
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
@@ -303,10 +304,11 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
 
 export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit, onGetUnsavedAttributeValues, programId } = this.props;
+        const { orgUnit, onGetUnsavedAttributeValues, programId, teiId } = this.props;
         return {
             programId,
             orgUnitId: orgUnit.id,
+            trackedEntityInstanceId: teiId,
             onGetUnsavedAttributeValues,
         };
     }

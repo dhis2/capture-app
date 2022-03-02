@@ -65,9 +65,9 @@ const useNavigations = () => {
     const history = useHistory();
     const { tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
-    const { programId, orgUnitId } = useLocationQuery();
+    const { programId, orgUnitId, teiId } = useLocationQuery();
     const navigateToProgramRegistrationPage = () =>
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     const navigateToEventWorkingList = () =>
         history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToTetRegistrationPage = () =>

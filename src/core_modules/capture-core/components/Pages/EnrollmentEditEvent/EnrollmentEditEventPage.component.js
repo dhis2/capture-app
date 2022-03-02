@@ -28,6 +28,7 @@ import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLock
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { TopBarActions } from '../../TopBarActions';
 import { WidgetEventComment } from '../../WidgetEventComment';
+import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 
 const styles = ({ typography }) => ({
     page: {
@@ -85,7 +86,7 @@ const EnrollmentEditEventPagePain = ({
     const isUserInteractionInProgress = mode === pageMode.EDIT;
 
     return (
-        <>
+        <OrgUnitFetcher orgUnitId={orgUnitId}>
             <ScopeSelector
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
@@ -205,7 +206,7 @@ const EnrollmentEditEventPagePain = ({
                     </div>
                 </div>
             </div>
-        </>
+        </OrgUnitFetcher>
     );
 };
 

@@ -66,14 +66,16 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
             const trackedEntityInstanceFilters = {
                 name,
                 program,
-                order,
-                displayOrderColumns,
-                ...(assignedUserMode && { assignedUserMode }),
-                ...(assignedUsers?.length > 0 && { assignedUsers }),
-                ...(programStatus && { enrollmentStatus: programStatus }),
-                ...(enrolledAt && { enrollmentCreatedPeriod: enrolledAt }),
-                ...(occurredAt && { incidentDate: occurredAt }),
-                ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
+                entityQueryCriteria: {
+                    displayOrderColumns,
+                    order,
+                    ...(assignedUserMode && { assignedUserMode }),
+                    ...(assignedUsers?.length > 0 && { assignedUsers }),
+                    ...(programStatus && { enrollmentStatus: programStatus }),
+                    ...(enrolledAt && { enrollmentCreatedDate: enrolledAt }),
+                    ...(occurredAt && { enrollmentIncidentDate: occurredAt }),
+                    ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
+                },
             };
 
             const requestPromise = mutate({
@@ -156,26 +158,26 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore, 
                 storeId,
                 criteria,
             } = action.payload;
-
             const { programStatus, enrolledAt, occurredAt, attributeValueFilters, order, displayOrderColumns, assignedUserMode, assignedUsers } =
                 criteria;
-
             const trackedEntityInstanceFilters = {
                 name,
                 program,
-                order,
-                displayOrderColumns,
                 externalAccess,
                 publicAccess,
                 user,
                 userGroupAccesses,
                 userAccesses,
-                ...(assignedUserMode && { assignedUserMode }),
-                ...(assignedUsers?.length > 0 && { assignedUsers }),
-                ...(programStatus && { enrollmentStatus: programStatus }),
-                ...(enrolledAt && { enrollmentCreatedPeriod: enrolledAt }),
-                ...(occurredAt && { incidentDate: occurredAt }),
-                ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
+                entityQueryCriteria: {
+                    displayOrderColumns,
+                    order,
+                    ...(assignedUserMode && { assignedUserMode }),
+                    ...(assignedUsers?.length > 0 && { assignedUsers }),
+                    ...(programStatus && { enrollmentStatus: programStatus }),
+                    ...(enrolledAt && { enrollmentCreatedDate: enrolledAt }),
+                    ...(occurredAt && { enrollmentIncidentDate: occurredAt }),
+                    ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
+                },
             };
 
             const requestPromise = mutate({
