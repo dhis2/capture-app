@@ -242,6 +242,7 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
                     })),
                 );
             }
+
             return empty();
         }),
     );

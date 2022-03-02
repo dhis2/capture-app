@@ -73,7 +73,6 @@ const useFallbackTriggered = (): boolean => {
     return fallback;
 };
 
-/* eslint-disable */
 const Index = ({
     showInitialSearchPage,
     navigateToMainPage,
@@ -126,6 +125,7 @@ const Index = ({
 
     const searchGroupsForSelectedScope =
       (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : []);
+
 
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
