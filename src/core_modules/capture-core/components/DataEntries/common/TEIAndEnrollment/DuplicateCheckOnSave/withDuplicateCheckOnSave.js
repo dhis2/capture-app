@@ -35,6 +35,7 @@ export const withDuplicateCheckOnSave = () => (WrappedComponent: ComponentType<a
     duplicatesReviewPageSize,
     renderDuplicatesCardActions,
     renderDuplicatesDialogActions,
+    skipDuplicateCheck,
     ...passOnProps
 }: Props) => {
     const { metadata, scopeType, passOnMetadata } = getMetadataInfo(enrollmentMetadata, teiRegistrationMetadata);
@@ -74,7 +75,7 @@ export const withDuplicateCheckOnSave = () => (WrappedComponent: ComponentType<a
             <WrappedComponent
                 {...passOnProps}
                 {...passOnMetadata}
-                onSave={handleSaveAttempt}
+                onSave={skipDuplicateCheck ? onSave : handleSaveAttempt}
                 id={id}
                 selectedScopeId={selectedScopeId}
             />

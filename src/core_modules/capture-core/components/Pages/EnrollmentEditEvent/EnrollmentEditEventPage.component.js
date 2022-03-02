@@ -29,6 +29,7 @@ import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { TopBarActions } from '../../TopBarActions';
 import { WidgetEventComment } from '../../WidgetEventComment';
 import { WidgetRelationship } from '../../WidgetRelationship';
+import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 
 const styles = ({ typography }) => ({
     page: {
@@ -87,7 +88,7 @@ const EnrollmentEditEventPagePain = ({
     const isUserInteractionInProgress = mode === pageMode.EDIT;
 
     return (
-        <>
+        <OrgUnitFetcher orgUnitId={orgUnitId}>
             <ScopeSelector
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
@@ -148,7 +149,7 @@ const EnrollmentEditEventPagePain = ({
                                 },
                             ]}
                             selectedValue="alwaysPreselected"
-                            title={programStage.stageForm.getLabel('eventDate')}
+                            title={programStage.stageForm.getLabel('occurredAt')}
                             isUserInteractionInProgress={isUserInteractionInProgress}
                         />
                     </Grid>
@@ -212,7 +213,7 @@ const EnrollmentEditEventPagePain = ({
                     </div>
                 </div>
             </div>
-        </>
+        </OrgUnitFetcher>
     );
 };
 

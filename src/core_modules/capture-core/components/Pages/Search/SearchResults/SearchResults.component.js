@@ -45,6 +45,7 @@ const buttonStyles = (theme: Theme) => ({
 const CardListButtons = withStyles(buttonStyles)(
     ({
         currentSearchScopeId,
+        currentSearchScopeType,
         id,
         orgUnitId,
         enrollmentType,
@@ -67,16 +68,32 @@ const CardListButtons = withStyles(buttonStyles)(
 
         const navigationButtonsState = deriveNavigationButtonState(enrollmentType);
 
+        const onHandleClick = () => {
+            switch (currentSearchScopeType) {
+            case searchScopes.PROGRAM:
+                dispatch(navigateToEnrollmentOverview({
+                    teiId: id,
+                    programId: currentSearchScopeId,
+                    orgUnitId,
+                }));
+                break;
+            case searchScopes.TRACKED_ENTITY_TYPE:
+                dispatch(navigateToEnrollmentOverview({
+                    teiId: id,
+                    orgUnitId,
+                }));
+                break;
+            default:
+                break;
+            }
+        };
+
         return (
             <>
                 <Button
                     small
                     dataTest="view-dashboard-button"
-                    onClick={() => dispatch(navigateToEnrollmentOverview({
-                        teiId: id,
-                        programId: currentSearchScopeId,
-                        orgUnitId,
-                    }))}
+                    onClick={onHandleClick}
                 >
                     {i18n.t('View dashboard')}
                 </Button>
@@ -86,11 +103,7 @@ const CardListButtons = withStyles(buttonStyles)(
                         small
                         className={classes.buttonMargin}
                         dataTest="view-active-enrollment-button"
-                        onClick={() => dispatch(navigateToEnrollmentOverview({
-                            teiId: id,
-                            programId: currentSearchScopeId,
-                            orgUnitId,
-                        }))}
+                        onClick={onHandleClick}
                     >
                         {i18n.t('View active enrollment')}
                     </Button>
@@ -101,11 +114,7 @@ const CardListButtons = withStyles(buttonStyles)(
                         small
                         className={classes.buttonMargin}
                         dataTest="re-enrollment-button"
-                        onClick={() => dispatch(navigateToEnrollmentOverview({
-                            teiId: id,
-                            programId: currentSearchScopeId,
-                            orgUnitId,
-                        }))}
+                        onClick={onHandleClick}
                     >
                         {i18n.t('Re-enroll')} {programName && `${i18n.t('in')} ${programName}`}
                     </Button>

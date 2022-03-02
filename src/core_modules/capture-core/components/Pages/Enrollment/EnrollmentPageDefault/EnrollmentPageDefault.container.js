@@ -1,11 +1,11 @@
 // @flow
-import React from 'react';
+import React, { useCallback } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
+import { useCommonEnrollmentDomainData, updateEnrollmentAttributeValues } from '../../common/EnrollmentOverviewDomain';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
@@ -17,9 +17,8 @@ import {
     useRelationships,
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
-import { deleteEnrollment } from '../EnrollmentPage.actions';
+import { deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
-
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
@@ -74,6 +73,10 @@ export const EnrollmentPageDefault = () => {
     const onEventClick = (eventId: string, stageId: string) => {
         history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId, eventId, stageId })}`);
     };
+    const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
+        dispatch(updateEnrollmentAttributeValues(updatedAttributeValues));
+        dispatch(updateTeiDisplayName(teiDisplayName));
+    }, [dispatch]);
 
     return (
         <EnrollmentPageDefaultComponent
@@ -92,6 +95,7 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
+            onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
         />
     );
 };

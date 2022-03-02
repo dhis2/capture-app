@@ -6,5 +6,6 @@ export type Props = {|
     trackedEntityType: string,
     orgUnitId: string,
     showEdit?: ?boolean,
+    onUpdateTeiAttributeValues?: ?(attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
     ...CssClasses,
 |};

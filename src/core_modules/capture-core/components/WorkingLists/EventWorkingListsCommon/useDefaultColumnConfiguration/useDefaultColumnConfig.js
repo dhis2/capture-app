@@ -16,11 +16,11 @@ import type {
 
 const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
     const baseFields = [{
-        id: mainPropertyNames.EVENT_DATE,
+        id: mainPropertyNames.OCCURRED_AT,
         visible: true,
         // $FlowFixMe[prop-missing] automated comment
         type: elementTypeKeys.DATE,
-        header: stage.stageForm.getLabel(mainPropertyNames.EVENT_DATE),
+        header: stage.stageForm.getLabel(mainPropertyNames.OCCURRED_AT),
     }, {
         id: mainPropertyNames.EVENT_STATUS,
         visible: true,

@@ -18,8 +18,8 @@ const getEnrollmentForRulesExecution = enrollment =>
     enrollment && {
         // $FlowFixMe[prop-missing]
         enrollmentId: enrollment.enrollment,
-        enrollmentDate: enrollment.enrollmentDate,
-        incidentDate: enrollment.incidentDate,
+        enrolledAt: enrollment.enrolledAt,
+        occurredAt: enrollment.occurredAt,
     };
 
 const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>

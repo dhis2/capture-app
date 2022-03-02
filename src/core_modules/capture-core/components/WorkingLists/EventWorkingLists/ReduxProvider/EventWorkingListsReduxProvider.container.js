@@ -6,7 +6,7 @@ import {
     requestDeleteEvent,
 } from '../eventWorkingLists.actions';
 import { EventWorkingListsColumnSetup } from '../ColumnSetup';
-import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
+import { useWorkingListsCommonStateManagement, TEMPLATE_SHARING_TYPE } from '../../WorkingListsCommon';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './eventWorkingListsReduxProvider.types';
 
@@ -37,6 +37,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
     return (
         <EventWorkingListsColumnSetup
             {...commonStateManagementRestProps}
+            templateSharingType={TEMPLATE_SHARING_TYPE[storeId]}
             program={program}
             programStage={programStage}
             orgUnitId={orgUnitId}
