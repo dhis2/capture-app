@@ -3,7 +3,6 @@ import { IconAdd16, MenuItem, Tooltip } from '@dhis2/ui';
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './addNew.types';
-import { plainStatus } from '../../constants/status.const';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../metaData';
 
 const AddNewItem = ({ onClick, ...passOnProps }: Object) => (<MenuItem
@@ -15,9 +14,8 @@ const AddNewItem = ({ onClick, ...passOnProps }: Object) => (<MenuItem
     {...passOnProps}
 />);
 
-export const AddNew = ({ enrollment, onlyEnrollOnce, tetId, onAddNew }: Props) => {
-    const isCompleted = enrollment.status === plainStatus.COMPLETED;
-    if (!isCompleted) {
+export const AddNew = ({ canAddNew, onlyEnrollOnce, tetId, onAddNew }: Props) => {
+    if (!canAddNew) {
         return null;
     }
     const tetName = tetId ? getTrackedEntityTypeThrowIfNotFound(tetId)?.name : '';

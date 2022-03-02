@@ -9,7 +9,7 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
                 trackedEntityInstances: {
                     resource: `tracker/trackedEntities/${teiId}`,
                     params: {
-                        fields: ['programOwners[ownerOrgUnit]'],
+                        fields: ['programOwners[ownerOrgUnit],enrollments'],
                         program: [programId],
                     },
                 },
@@ -25,5 +25,6 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
         ownerOrgUnit:
             !loading &&
             data?.trackedEntityInstances?.programOwners[0]?.orgUnit,
+        enrollments: !loading && data?.trackedEntityInstances ? data?.trackedEntityInstances?.enrollments : [],
     };
 };

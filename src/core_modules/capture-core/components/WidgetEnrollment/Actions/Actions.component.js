@@ -25,6 +25,7 @@ const styles = {
 export const ActionsPlain = ({
     enrollment = {},
     tetId,
+    canAddNew,
     onUpdate,
     onDelete,
     onAddNew,
@@ -46,7 +47,7 @@ export const ActionsPlain = ({
                             <AddNew
                                 onlyEnrollOnce={onlyEnrollOnce}
                                 tetId={tetId}
-                                enrollment={enrollment}
+                                canAddNew={canAddNew}
                                 onAddNew={onAddNew}
                             />
                             <Complete

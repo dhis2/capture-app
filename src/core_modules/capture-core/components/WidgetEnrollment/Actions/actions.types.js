@@ -6,6 +6,7 @@ export type Props = {|
     refetch: QueryRefetchFunction,
     onDelete: () => void,
     onAddNew: () => void,
+    canAddNew: boolean,
     onlyEnrollOnce: boolean,
     tetId: string,
 |};
@@ -16,6 +17,7 @@ export type PlainProps = {|
     onDelete: (arg: Object) => void,
     onAddNew: (arg: Object) => void,
     loading: boolean,
+    canAddNew: boolean,
     onlyEnrollOnce: boolean,
     tetId: string,
     ...CssClasses,

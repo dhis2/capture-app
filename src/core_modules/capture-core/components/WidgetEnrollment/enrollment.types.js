@@ -17,6 +17,7 @@ export type PlainProps = {|
     error?: FetchError,
     loading: boolean,
     tetId: string,
+    canAddNew: boolean,
     onDelete: () => void,
     onAddNew: () => void,
     ...CssClasses,

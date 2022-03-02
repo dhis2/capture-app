@@ -48,6 +48,7 @@ export const WidgetEnrollmentPlain = ({
     refetch,
     error,
     loading,
+    canAddNew,
     onDelete,
     onAddNew,
 }: PlainProps) => {
@@ -207,6 +208,7 @@ export const WidgetEnrollmentPlain = ({
                             refetch={refetch}
                             onDelete={onDelete}
                             onAddNew={onAddNew}
+                            canAddNew={canAddNew}
                         />
                     </div>
                 )}

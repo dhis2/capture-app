@@ -1,7 +1,7 @@
 // @flow
 
 export type Props = {|
-    enrollment: Object,
+    canAddNew: boolean,
     onlyEnrollOnce: boolean,
     tetId: string,
     onAddNew: (arg: Object) => void,
