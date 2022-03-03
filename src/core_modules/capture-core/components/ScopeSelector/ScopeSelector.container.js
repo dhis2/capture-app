@@ -3,9 +3,6 @@ import React, { type ComponentType, useEffect, useCallback, useState } from 'rea
 import { useDispatch, useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
 import {
-    setCategoryOptionFromScopeSelector,
-    resetCategoryOptionFromScopeSelector,
-    resetAllCategoryOptionsFromScopeSelector,
     resetProgramIdBatchAction,
     resetOrgUnitIdBatchAction,
 } from './ScopeSelector.actions';
@@ -60,27 +57,6 @@ export const ScopeSelector: ComponentType<OwnProps> =
           setSelectedOrgUnit(orgUnitObject);
           onSetOrgUnit(orgUnitId);
       };
-
-      const dispatchOnSetCategoryOption = useCallback(
-          (categoryId: string, categoryOption: Object) => {
-              dispatch(setCategoryOptionFromScopeSelector(categoryId, categoryOption));
-              onSetCategoryOption(categoryId, categoryOption);
-          },
-          [dispatch, onSetCategoryOption]);
-
-      const dispatchOnResetCategoryOption = useCallback(
-          (categoryId: string) => {
-              dispatch(resetCategoryOptionFromScopeSelector(categoryId));
-              onResetCategoryOption(categoryId);
-          },
-          [dispatch, onResetCategoryOption]);
-
-      const dispatchOnResetAllCategoryOptions = useCallback(
-          () => {
-              dispatch(resetAllCategoryOptionsFromScopeSelector());
-              onResetAllCategoryOptions();
-          },
-          [dispatch, onResetAllCategoryOptions]);
 
       const dispatchOnResetOrgUnitId = useCallback(
           () => {

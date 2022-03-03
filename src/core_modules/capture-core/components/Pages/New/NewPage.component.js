@@ -10,22 +10,17 @@ import { Button } from '@dhis2/ui';
 import { NewPageTopBar } from './TopBar';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import { newPageStatuses } from './NewPage.constants';
+import { NEW_TEI_DATA_ENTRY_ID, newPageStatuses } from './NewPage.constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { LockedSelector } from '../../LockedSelector';
 
 const getStyles = () => ({
     container: {
         padding: '24px 24px 16px 24px',
     },
 });
-
-export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
-export const NEW_SINGLE_EVENT_DATA_ENTRY_ID = 'singleEvent';
-export const NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID = 'relationship';
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
@@ -40,11 +35,7 @@ const NewPagePlain = ({
     missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
     isUserInteractionInProgress,
-    orgUnitId,
     programId,
-    teiId,
-    selectedCategories,
-    setSelectedCategories,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
@@ -71,17 +62,10 @@ const NewPagePlain = ({
     const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
 
     return (<>
-        <LockedSelector
-            pageToPush="new"
-            isUserInteractionInProgress={isUserInteractionInProgress}
-        />
         <NewPageTopBar
             orgUnitId={orgUnitId}
             programId={programId}
-            teiId={teiId}
             isUserInteractionInProgress={isUserInteractionInProgress}
-            selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
         />
         <div data-test="registration-page-content" className={classes.container} >
             {

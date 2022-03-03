@@ -1,38 +1,58 @@
 // @flow
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@material-ui/core';
-import { batchActions } from 'redux-batched-actions';
-import { ScopeSelector, useSetProgramId, useSetOrgUnitId, useResetProgramId, useResetOrgUnitId, useResetTeiId } from '../../ScopeSelector';
+import {
+    ScopeSelector,
+    useSetProgramId,
+    useSetOrgUnitId,
+    useResetProgramId,
+    useResetOrgUnitId,
+    setCategoryOptionFromScopeSelector,
+    resetCategoryOptionFromScopeSelector,
+    resetAllCategoryOptionsFromScopeSelector,
+} from '../../ScopeSelector';
 import { TopBarActions } from '../../TopBarActions';
-import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
-import type { Props } from './topBar.types';
 import { cleanUpDataEntry } from './NewPage.actions';
-// should move in outside EnrollmentOverviewDomain
-import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
-import { useProgramInfo } from '../../../hooks/useProgramInfo';
+import {
+    NEW_TEI_DATA_ENTRY_ID,
+    NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID,
+    NEW_SINGLE_EVENT_DATA_ENTRY_ID,
+} from './NewPage.constants';
 
-// is this duplicate?
-export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
-export const NEW_SINGLE_EVENT_DATA_ENTRY_ID = 'singleEvent';
-export const NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID = 'relationship';
+type TopBarProps = {
+    programId?: string,
+    orgUnitId?: string,
+    isUserInteractionInProgress: boolean,
+};
 
-export const NewPageTopBar = ({
-    programId,
-    orgUnitId,
-    teiId,
-    isUserInteractionInProgress,
-    selectedCategories,
-    setSelectedCategories,
-    teiContext: { trackedEntityName, teiDisplayName },
-}) => {
+export const NewPageTopBar = ({ programId, orgUnitId, isUserInteractionInProgress }: TopBarProps) => {
     const dispatch = useDispatch();
     const { setProgramId } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
 
     const { resetProgramId } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
-    const { resetTeiId } = useResetTeiId();
+
+    const { selectedCategories } = useSelector(({ currentSelections }) => ({
+        selectedCategories: currentSelections.categoriesMeta,
+    }));
+
+    const dispatchOnSetCategoryOption = useCallback(
+        (categoryOption: Object, categoryId: string) => {
+            dispatch(setCategoryOptionFromScopeSelector(categoryId, categoryOption));
+        },
+        [dispatch],
+    );
+    const dispatchOnResetCategoryOption = useCallback(
+        (categoryId: string) => {
+            dispatch(resetCategoryOptionFromScopeSelector(categoryId));
+        },
+        [dispatch],
+    );
+    const dispatchOnResetAllCategoryOptions = useCallback(() => {
+        dispatch(resetAllCategoryOptionsFromScopeSelector());
+    }, [dispatch]);
 
     return (
         <ScopeSelector
@@ -41,12 +61,9 @@ export const NewPageTopBar = ({
             selectedCategories={selectedCategories}
             onSetProgramId={id => setProgramId(id)}
             onSetOrgUnit={id => setOrgUnitId(id)}
-            onSetCategoryOption={(categoryOption, categoryId) => setSelectedCategories({ [categoryId]: categoryOption })}
-            onResetAllCategoryOptions={() => setSelectedCategories()}
-            onResetCategoryOption={categoryId => {
-                const { [categoryId]: remove, ...rest } = selectedCategories;
-                setSelectedCategories(rest);
-            }}
+            onSetCategoryOption={dispatchOnSetCategoryOption}
+            onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
+            onResetCategoryOption={dispatchOnResetCategoryOption}
             onResetOrgUnitId={() => resetOrgUnitId()}
             onResetProgramId={() => resetProgramId()}
             customActionsOnProgramIdReset={[
@@ -59,33 +76,8 @@ export const NewPageTopBar = ({
                 cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
                 cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
             ]}
-            isUserInteractionInProgress={isUserInteractionInProgress}>
-            {teiId && (
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                    <SingleLockedSelect
-                        ready={trackedEntityName && teiDisplayName}
-                        onClear={() => {
-                            dispatch(
-                                batchActions([
-                                    cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
-                                    cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
-                                    cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
-                                ]),
-                            );
-                            // resetTeiId()
-                        }}
-                        options={[
-                            {
-                                label: teiDisplayName,
-                                value: 'alwaysPreselected',
-                            },
-                        ]}
-                        selectedValue="alwaysPreselected"
-                        title={trackedEntityName}
-                        isUserInteractionInProgress={isUserInteractionInProgress}
-                    />
-                </Grid>
-            )}
+            isUserInteractionInProgress={isUserInteractionInProgress}
+        >
             <Grid item xs={12} sm={6} md={6} lg={2}>
                 <TopBarActions
                     selectedProgramId={programId}

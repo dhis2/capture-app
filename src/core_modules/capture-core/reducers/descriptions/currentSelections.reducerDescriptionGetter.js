@@ -16,6 +16,7 @@ import {
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
+import { scopeSelectorActionTypes } from '../../components/ScopeSelector';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
 
@@ -215,6 +216,19 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return resetCategoryOption(state, categoryId);
     },
     [lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET]: state => ({
+        ...state,
+        categories: undefined,
+        categoriesMeta: undefined,
+    }),
+    [scopeSelectorActionTypes.CATEGORY_OPTION_SET]: (state, action) => {
+        const { categoryId, categoryOption } = action.payload;
+        return setCategoryOption(state, categoryId, categoryOption);
+    },
+    [scopeSelectorActionTypes.CATEGORY_OPTION_RESET]: (state, action) => {
+        const { categoryId } = action.payload;
+        return resetCategoryOption(state, categoryId);
+    },
+    [scopeSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET]: state => ({
         ...state,
         categories: undefined,
         categoriesMeta: undefined,

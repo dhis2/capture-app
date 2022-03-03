@@ -8,10 +8,14 @@ export type OwnProps = $ReadOnly<{|
   pageToPush?: string,
   selectedOrgUnitId?: string,
   selectedProgramId?: string,
+  selectedCategories?: { [categoryId: string]: { writeAccess: boolean } },
   onSetProgramId?: (id: string) => void,
   onResetProgramId: () => void,
   onSetOrgUnit: (id: string, orgUnit: Object) => void,
   onResetOrgUnitId: () => void,
+  onSetCategoryOption?: (categoryOption: Object, categoryId: string) => void,
+  onResetAllCategoryOptions?: () => void,
+  onResetCategoryOption?: (categoryId: string) => void,
   children: Node,
 |}>
 
@@ -19,22 +23,13 @@ export type PropsFromRedux = $ReadOnly<{|
   ready: boolean,
 |}>
 
-export type DispatchersFromRedux = $ReadOnly<{|
-  onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
-  onResetCategoryOption: (categoryId: string) => void,
-  onResetAllCategoryOptions: () => void,
-|}>
-
-
 export type Props = {|
   ...OwnProps,
   ...CssClasses,
-  ...DispatchersFromRedux,
   ...PropsFromRedux,
   selectedOrgUnit: Object,
   onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
 |}
-
 
 export type State = {|
   openOrgUnitWarning: boolean;
