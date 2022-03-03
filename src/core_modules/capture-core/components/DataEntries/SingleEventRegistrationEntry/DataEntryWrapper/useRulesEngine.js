@@ -2,22 +2,22 @@
 import { useEffect, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
-import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { getEventProgramThrowIfNotFound } from '../../../../metaData';
-import { useLocationQuery } from '../../../../utils/routing';
 import { getRulesActions } from './DataEntry';
 import type { RenderFoundation } from '../../../../metaData';
 
 export const useRulesEngine = ({
     programId,
+    orgUnit,
     formFoundation,
 }: {
     programId: string,
+    orgUnit: ?OrgUnit,
     formFoundation: RenderFoundation,
 }) => {
     const dispatch = useDispatch();
     const program = useMemo(() => getEventProgramThrowIfNotFound(programId), [programId]);
-    const orgUnit = useRulesEngineOrgUnit(useLocationQuery().orgUnitId);
     const orgUnitRef = useRef();
 
     // TODO: Getting the entire state object is bad and this needs to be refactored.

@@ -1,5 +1,6 @@
 // @flow
 
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
 
@@ -20,8 +21,8 @@ export const actionTypes = {
 export const cancelEditEventDataEntry = () =>
     actionCreator(actionTypes.CANCEL_EDIT_EVENT_DATA_ENTRY)();
 
-export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)({ itemId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] });
+export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: Object, orgUnit: OrgUnit) =>
+    actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)({ itemId, dataEntryId, formFoundation, orgUnit }, { skipLogging: ['formFoundation'] });
 
 
 export const startSaveEditEventDataEntry = (eventId: string, serverData: Object, selections: Object, triggerActionCommit?: ?string, triggerActionRollback?: ?string) =>

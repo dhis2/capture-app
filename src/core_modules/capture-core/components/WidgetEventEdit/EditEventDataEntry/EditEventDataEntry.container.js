@@ -69,9 +69,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
 
         dispatch(startAsyncUpdateFieldForEditEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
-    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+    onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
-        dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation));
+        dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation, orgUnit));
     },
     onCancel: () => {
         window.scrollTo(0, 0);

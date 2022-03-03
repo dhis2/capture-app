@@ -1,5 +1,6 @@
 // @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 
 export const actionTypes = {
     VIEW_EVENT_FROM_URL: 'ViewEventFromUrl',
@@ -65,7 +66,7 @@ export const updateWorkingListPendingOnBackToMainPage = () =>
 export const openAddRelationship = () =>
     actionCreator(actionTypes.VIEW_EVENT_OPEN_NEW_RELATIONSHIP)();
 
-export const updateEventContainer = (eventContainer: Object, orgUnit: Object) =>
+export const updateEventContainer = (eventContainer: Object, orgUnit: OrgUnit) =>
     actionCreator(actionTypes.UPDATE_EVENT_CONTAINER)({ eventContainer, orgUnit });
 
 export const openViewEventPageFailed = (error: string) =>

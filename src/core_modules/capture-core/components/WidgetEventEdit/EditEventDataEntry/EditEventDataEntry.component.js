@@ -262,7 +262,7 @@ type Props = {
     onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
     onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: (orgUnit: OrgUnit) => void,
-    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
     classes: {
         dataEntryContainer: string,
@@ -307,6 +307,7 @@ class EditEventDataEntryPlain extends Component<Props> {
             onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
+            onSave,
             classes,
             ...passOnProps
         } = this.props;
@@ -317,6 +318,7 @@ class EditEventDataEntryPlain extends Component<Props> {
                 onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
                 onUpdateFormField={onUpdateField(orgUnit)}
                 onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
+                onSave={onSave(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
                 {...passOnProps}

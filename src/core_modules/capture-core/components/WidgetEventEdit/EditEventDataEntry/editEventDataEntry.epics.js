@@ -110,7 +110,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                 },
             };
 
-            const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
+            const orgUnit = payload.orgUnit;
 
             const serverData = {
                 events: [{

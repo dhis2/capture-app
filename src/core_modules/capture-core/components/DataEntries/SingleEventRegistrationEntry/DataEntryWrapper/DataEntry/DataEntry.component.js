@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import { type OrgUnit } from 'capture-core-utils/rulesEngine';
 import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
 import { withCancelButton } from '../../../../DataEntry/withCancelButton';
 import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';
@@ -423,10 +424,12 @@ const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(Save
 type Props = {
     formFoundation: RenderFoundation,
     programName: string,
+    orgUnit: OrgUnit,
     orgUnitName: string,
     stageName: string,
-    onUpdateField: (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: Object,
+    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
+    onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
+    onStartAsyncUpdateField: (orgUnit: OrgUnit) => Object,
     onSetSaveTypes: (saveTypes: ?Array<$Values<typeof newEventSaveTypes>>) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onSaveEventInStage: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => void,
@@ -550,9 +553,11 @@ class NewEventDataEntry extends Component<Props> {
 
     renderContent = () => {
         const {
+            onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
             programName, // eslint-disable-line
+            orgUnit,
             orgUnitName, // eslint-disable-line
             classes,
             onSave,
@@ -567,8 +572,9 @@ class NewEventDataEntry extends Component<Props> {
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <WrappedDataEntry
                         id={'singleEvent'}
-                        onUpdateFormField={onUpdateField}
-                        onUpdateFormFieldAsync={onStartAsyncUpdateField}
+                        onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
+                        onUpdateFormField={onUpdateField(orgUnit)}
+                        onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
                         onSave={this.handleSave}
                         fieldOptions={this.fieldOptions}
                         dataEntrySections={this.dataEntrySections}

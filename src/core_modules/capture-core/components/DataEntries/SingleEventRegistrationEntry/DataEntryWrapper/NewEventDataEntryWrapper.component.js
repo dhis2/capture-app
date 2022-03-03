@@ -9,6 +9,8 @@ import { DataEntry } from './DataEntry/DataEntry.container';
 import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
+import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
+import { useLocationQuery } from '../../../../utils/routing';
 import { useRulesEngine } from './useRulesEngine';
 import type { PlainProps } from './NewEventDataEntryWrapper.types';
 
@@ -43,7 +45,8 @@ const NewEventDataEntryWrapperPlain = ({
     onFormLayoutDirectionChange,
 }: PlainProps) => {
     const { id: programId } = useCurrentProgramInfo();
-    const rulesReady = useRulesEngine({ programId, formFoundation });
+    const orgUnit = useRulesEngineOrgUnit(useLocationQuery().orgUnitId);
+    const rulesReady = useRulesEngine({ programId, orgUnit, formFoundation });
 
     const titleText = useScopeTitleText(programId);
     const checkIfCustomForm = () => {
@@ -90,6 +93,7 @@ const NewEventDataEntryWrapperPlain = ({
             <div className={classes.marginLeft}>
                 <DataEntry
                     stage={stage}
+                    orgUnit={orgUnit}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}
                 />
