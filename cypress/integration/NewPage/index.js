@@ -195,7 +195,7 @@ When('you are navigated to the Child Programme registration page with program se
 });
 
 When('you have Child Programme selected', () => {
-    cy.get('[data-test="locked-selector"]')
+    cy.get('[data-test="scope-selector"]')
         .contains('Child Programme');
 });
 
