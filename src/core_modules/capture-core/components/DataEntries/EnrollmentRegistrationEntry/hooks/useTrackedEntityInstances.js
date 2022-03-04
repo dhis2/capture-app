@@ -1,27 +1,31 @@
 // @flow
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useTrackedEntityInstances = (teiId: string, programId: string) => {
-    const { error, loading, data } = useDataQuery(
+    const { loading, data, refetch } = useDataQuery(
         useMemo(
             () => ({
                 trackedEntityInstance: {
                     resource: 'tracker/trackedEntities',
-                    id: teiId,
+                    id: ({ variables: { id } }) => id,
                     params: {
                         program: programId,
                         fields: ['attributes'],
                     },
                 },
             }),
-            [teiId, programId],
+            [programId],
         ),
     );
 
+    useEffect(() => {
+        if (teiId) {
+            refetch({ variables: { id: teiId } });
+        }
+    }, [refetch, teiId]);
+
     return {
-        error,
-        loading,
-        trackedEntityInstanceAttributes: !loading && data?.trackedEntityInstance.attributes,
+        trackedEntityInstanceAttributes: teiId ? !loading && data?.trackedEntityInstance.attributes : undefined,
     };
 };

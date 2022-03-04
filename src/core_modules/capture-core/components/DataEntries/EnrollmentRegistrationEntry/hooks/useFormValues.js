@@ -54,33 +54,38 @@ const useClientAttributesWithSubvalues = (program: InputProgramData, attributes:
         if (program && attributes) {
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const { attributes: programTrackedEntityAttributes } = program;
-            const computedAttributes = await programTrackedEntityAttributes?.reduce(async (promisedAcc, programTrackedEntityAttribute) => {
-                const { id, formName, optionSet, type, unique } = programTrackedEntityAttribute;
-                const foundAttribute = attributes?.find(item => item.attribute === id);
-                let value;
-                if (foundAttribute) {
-                    if (subValueGetterByElementType[type]) {
-                        value = await subValueGetterByElementType[type](foundAttribute.value, querySingleResource);
-                    } else {
-                        // $FlowFixMe dataElementTypes flow error
-                        value = convertServerToClient(foundAttribute.value, type);
+            const computedAttributes = await programTrackedEntityAttributes?.reduce(
+                async (promisedAcc, programTrackedEntityAttribute) => {
+                    const { id, formName, optionSet, type, unique } = programTrackedEntityAttribute;
+                    const foundAttribute = attributes?.find(item => item.attribute === id);
+                    let value;
+                    if (foundAttribute) {
+                        if (subValueGetterByElementType[type]) {
+                            value = await subValueGetterByElementType[type](foundAttribute.value, querySingleResource);
+                        } else {
+                            // $FlowFixMe dataElementTypes flow error
+                            value = convertServerToClient(foundAttribute.value, type);
+                        }
                     }
-                }
 
-                const acc = await promisedAcc;
-                return [
-                    ...acc,
-                    {
-                        attribute: id,
-                        key: formName,
-                        optionSet,
-                        value,
-                        unique,
-                        valueType: type,
-                    },
-                ];
-            }, Promise.resolve([]));
+                    const acc = await promisedAcc;
+                    return [
+                        ...acc,
+                        {
+                            attribute: id,
+                            key: formName,
+                            optionSet,
+                            value,
+                            unique,
+                            valueType: type,
+                        },
+                    ];
+                },
+                Promise.resolve([]),
+            );
             setListAttributes(computedAttributes);
+        } else {
+            setListAttributes([]);
         }
     }, [program, attributes, dataEngine]);
 
@@ -99,34 +104,63 @@ const buildFormValues = async (
     setClientValues: (values: any) => void,
     formValuesReadyRef: { current: boolean },
 ) => {
-    const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
-    const formValues = clientAttributesWithSubvalues?.reduce(
-        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
+    const clientValues = clientAttributesWithSubvalues?.reduce(
+        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }),
         {},
     );
-    const uniqueValues = await getUniqueValuesForAttributesWithoutValue(foundation, clientAttributesWithSubvalues, staticPatternValues);
+    const formValues = clientAttributesWithSubvalues?.reduce(
+        (acc, currentValue) => ({
+            ...acc,
+            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType),
+        }),
+        {},
+    );
+    const uniqueValues = await getUniqueValuesForAttributesWithoutValue(
+        foundation,
+        clientAttributesWithSubvalues,
+        staticPatternValues,
+    );
     setFormValues && setFormValues({ ...formValues, ...uniqueValues });
     setClientValues && setClientValues({ ...clientValues, ...uniqueValues });
     formValuesReadyRef.current = true;
 };
 
-export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId }: InputForm) => {
+export const useFormValues = ({
+    program,
+    trackedEntityInstanceAttributes,
+    orgUnit,
+    formFoundation,
+    teiId,
+}: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const formValuesReadyRef = useRef<any>(false);
     const [formValues, setFormValues] = useState<any>({});
     const [clientValues, setClientValues] = useState<any>({});
+    const areAttributesWithSubvaluesReady =
+        (teiId && clientAttributesWithSubvalues.length > 0) || (!teiId && clientAttributesWithSubvalues.length === 0);
+
+    useEffect(() => {
+        formValuesReadyRef.current = false;
+    }, [teiId]);
 
     useEffect(() => {
         if (
             orgUnit?.code &&
             Object.entries(formFoundation).length > 0 &&
             formValuesReadyRef.current === false &&
-            ((teiId && clientAttributesWithSubvalues.length > 0) || !teiId)
+            areAttributesWithSubvaluesReady
         ) {
             const staticPatternValues = { orgUnitCode: orgUnit.code };
-            buildFormValues(formFoundation, clientAttributesWithSubvalues, staticPatternValues, setFormValues, setClientValues, formValuesReadyRef);
+            buildFormValues(
+                formFoundation,
+                clientAttributesWithSubvalues,
+                staticPatternValues,
+                setFormValues,
+                setClientValues,
+                formValuesReadyRef,
+            );
         }
-    }, [formFoundation, clientAttributesWithSubvalues, formValues, formValuesReadyRef, orgUnit, teiId]);
+    }, [formFoundation, clientAttributesWithSubvalues, formValuesReadyRef, orgUnit, areAttributesWithSubvaluesReady]);
 
     return { formValues, clientValues, formValuesReadyRef };
 };
