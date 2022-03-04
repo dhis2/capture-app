@@ -1,3 +1,11 @@
+## [99.9.10](https://github.com/dhis2/capture-app/compare/v99.9.9...v99.9.10) (2022-03-04)
+
+
+### Bug Fixes
+
+* [DHIS2-12727] [DHIS2-12726] Error when trying to create new events with relationship ([ea83f75](https://github.com/dhis2/capture-app/commit/ea83f756f6e4e9b0cd29a7fcaaa98be8f8529fae))
+* [DHIS2-12727] [DHIS2-12726] Error when trying to create new events with relationship ([873c3c0](https://github.com/dhis2/capture-app/commit/873c3c0ba547877d12413605a3312874b6113ddb))
+
 # [1.74.0](https://github.com/dhis2/capture-app/compare/v1.73.0...v1.74.0) (2022-03-02)
 
 
