@@ -11,8 +11,8 @@ cypress.env.json
 /build
 /buildzip
 
-# docs
-/docs
+# jsdoc
+/jsdoc
 
 # misc
 .DS_Store
