@@ -314,9 +314,6 @@ msgstr "Mostrar {{trackedEntityTypeName}} registrado"
 msgid "Registered person"
 msgstr "Pessoa registrada"
 
-msgid "Link"
-msgstr "Ligação"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Sair desta página descartará as alterações feitas neste evento."
 
@@ -773,6 +770,9 @@ msgstr "Salvar como novo"
 msgid "View dashboard"
 msgstr "Ver painel de controle"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Criar para"
 
@@ -782,11 +782,17 @@ msgstr ""
 "Você também pode escolher um programa na barra superior e criar nesse "
 "programa"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "Salvar novo"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Salve o novo {{trackedEntityTypeName}} e vincule-o"
+
+msgid "Link"
+msgstr "Ligação"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Salvar como novo {{trackedEntityName}}"

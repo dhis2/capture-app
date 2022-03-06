@@ -297,9 +297,6 @@ msgstr "显示登记的 {{attributeName}} "
 msgid "Registered person"
 msgstr "注册的人"
 
-msgid "Link"
-msgstr "链接"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "离开此页面将放弃您对此事件所做的更改。"
 
@@ -749,6 +746,9 @@ msgstr "另存为新"
 msgid "View dashboard"
 msgstr "查看仪表盘"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "为创建"
 
@@ -756,11 +756,17 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr "您也可以从顶部栏中选择一个项目并在该项目中创建"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "保存新"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
+
+msgid "Link"
+msgstr "链接"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "另存为新的{{trackedEntityName}}"
