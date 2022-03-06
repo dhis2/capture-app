@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
+"POT-Creation-Date: 2022-03-01T13:50:45.247Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -310,9 +310,6 @@ msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
 
 msgid "Registered person"
 msgstr "Người đã đăng ký"
-
-msgid "Link"
-msgstr "Liên kết"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -632,9 +629,7 @@ msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -717,6 +712,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr "Xem bảng điều khiển"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -729,6 +727,9 @@ msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Lưu {{trackedEntityTypeName}} mới và liên kết"
+
+msgid "Link"
+msgstr "Liên kết"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""

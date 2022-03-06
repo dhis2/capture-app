@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
+"POT-Creation-Date: 2022-03-01T13:50:45.247Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -327,9 +327,6 @@ msgstr "Afficher le {{Nom de type d'entité suivie}} enregistré"
 
 msgid "Registered person"
 msgstr "Personne inscrite"
-
-msgid "Link"
-msgstr "Lien"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -658,12 +655,8 @@ msgstr ""
 "{{programName}} a des catégories. Choisir toutes les catégories pour "
 "afficher le tableau de bord."
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
-"Il y a plusieurs inscriptions à ce programme. Choisir une inscription pour "
-"afficher le tableau de bord."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} n'est pas inscrit à ce programme"
@@ -749,6 +742,9 @@ msgstr "Enregistrer comme nouveau"
 msgid "View dashboard"
 msgstr "Voir le tableau de bord"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Créer pour"
 
@@ -763,6 +759,9 @@ msgstr "Enregistrer nouveau"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Enregistrer le nouveau {{trackedEntityTypeName}} et le lien"
+
+msgid "Link"
+msgstr "Lien"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Enregistrer comme un nouveau {{trackedEntityName}}"

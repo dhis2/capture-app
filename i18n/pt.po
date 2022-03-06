@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-01-28T15:06:33.964Z\n"
+"POT-Creation-Date: 2022-03-01T13:50:45.247Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -314,9 +314,6 @@ msgstr "Mostrar {{trackedEntityTypeName}} registrado"
 
 msgid "Registered person"
 msgstr "Pessoa cadastrada"
-
-msgid "Link"
-msgstr "Link"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Sair desta página descartará as alterações feitas neste evento."
@@ -640,12 +637,8 @@ msgstr ""
 "{{programName}} tem categorias. Escolha todas as categorias para visualizar "
 "o painel."
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
-"Existem várias inscrições para este programa. Escolha um registro para "
-"visualizar o painel."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} não está inscrito neste programa."
@@ -730,6 +723,9 @@ msgstr "Salvar como novo"
 msgid "View dashboard"
 msgstr "Ver painel"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Criar para"
 
@@ -743,6 +739,9 @@ msgstr "Salvar novo"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Salve o novo {{trackedEntityTypeName}} e o link"
+
+msgid "Link"
+msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Salvar como novo {{trackedEntityName}}"
