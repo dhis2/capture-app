@@ -309,9 +309,6 @@ msgstr "Vis registrert {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Registrert person"
 
-msgid "Link"
-msgstr "Link"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
@@ -768,6 +765,9 @@ msgstr "Lagre som ny"
 msgid "View dashboard"
 msgstr "Vis dashbord"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Opprett for"
 
@@ -776,11 +776,17 @@ msgid ""
 msgstr ""
 "Du kan også velge et program fra topplinjen og opprette i det programmet"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "Lagre ny"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Opprett ny {{trackedEntityTypeName}} og link"
+
+msgid "Link"
+msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Lagre som ny {{trackedEntityName}}"
