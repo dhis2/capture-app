@@ -8,7 +8,7 @@ export type Props = {|
     onAddNew: () => void,
     canAddNew: boolean,
     onlyEnrollOnce: boolean,
-    tetId: string,
+    tetName: string,
 |};
 
 export type PlainProps = {|
@@ -19,7 +19,7 @@ export type PlainProps = {|
     loading: boolean,
     canAddNew: boolean,
     onlyEnrollOnce: boolean,
-    tetId: string,
+    tetName: string,
     ...CssClasses,
 |};
 

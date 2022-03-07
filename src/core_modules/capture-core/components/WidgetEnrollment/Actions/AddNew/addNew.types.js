@@ -3,6 +3,6 @@
 export type Props = {|
     canAddNew: boolean,
     onlyEnrollOnce: boolean,
-    tetId: string,
+    tetName: string,
     onAddNew: (arg: Object) => void,
 |};

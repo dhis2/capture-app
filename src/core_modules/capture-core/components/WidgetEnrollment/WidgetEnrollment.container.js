@@ -15,7 +15,7 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
         refetch,
     } = useEnrollment(enrollmentId);
     const { error: errorProgram, program } = useProgram(programId);
-    const { error: errorOwnerOrgUnit, ownerOrgUnit, tetId, enrollments } = useTrackedEntityInstances(teiId, programId);
+    const { error: errorOwnerOrgUnit, ownerOrgUnit, enrollments } = useTrackedEntityInstances(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
 
     const canAddNew = enrollments.every(item => item.status !== plainStatus.ACTIVE);
@@ -26,7 +26,6 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
             canAddNew={canAddNew}
             program={program}
             refetch={refetch}
-            tetId={tetId}
             ownerOrgUnit={{ id: ownerOrgUnit, displayName }}
             loading={!(enrollment && program && displayName)}
             onDelete={onDelete}

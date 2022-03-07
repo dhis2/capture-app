@@ -24,7 +24,7 @@ const styles = {
 
 export const ActionsPlain = ({
     enrollment = {},
-    tetId,
+    tetName,
     canAddNew,
     onUpdate,
     onDelete,
@@ -46,7 +46,7 @@ export const ActionsPlain = ({
                         <FlyoutMenu dense maxWidth="250px">
                             <AddNew
                                 onlyEnrollOnce={onlyEnrollOnce}
-                                tetId={tetId}
+                                tetName={tetName}
                                 canAddNew={canAddNew}
                                 onAddNew={onAddNew}
                             />

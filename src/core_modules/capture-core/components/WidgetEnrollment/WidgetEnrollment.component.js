@@ -44,7 +44,6 @@ export const WidgetEnrollmentPlain = ({
     enrollment = {},
     program = {},
     ownerOrgUnit = {},
-    tetId,
     refetch,
     error,
     loading,
@@ -202,7 +201,7 @@ export const WidgetEnrollmentPlain = ({
                             </div>
                         )}
                         <Actions
-                            tetId={tetId}
+                            tetName={program.trackedEntityType.displayName}
                             onlyEnrollOnce={program.onlyEnrollOnce}
                             enrollment={enrollment}
                             refetch={refetch}

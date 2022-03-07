@@ -16,7 +16,6 @@ export type PlainProps = {|
     refetch: QueryRefetchFunction,
     error?: FetchError,
     loading: boolean,
-    tetId: string,
     canAddNew: boolean,
     onDelete: () => void,
     onAddNew: () => void,
