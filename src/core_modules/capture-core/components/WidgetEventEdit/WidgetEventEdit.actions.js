@@ -8,4 +8,4 @@ export const actionTypes = {
 };
 
 export const startShowEditEventDataEntry = (orgUnit: OrgUnit) =>
-    actionCreator(actionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY)(orgUnit);
+    actionCreator(actionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY)({ orgUnit });
