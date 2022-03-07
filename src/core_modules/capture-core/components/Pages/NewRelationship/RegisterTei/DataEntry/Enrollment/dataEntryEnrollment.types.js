@@ -2,7 +2,10 @@
 import type { Node } from 'react';
 import type { Enrollment } from '../../../../../../metaData';
 import type { RenderCustomCardActions } from '../../../../../CardList';
-import type { SaveForEnrollmentAndTeiRegistration } from '../../../../../DataEntries';
+import type {
+    SaveForEnrollmentAndTeiRegistration,
+    ExistingUniqueValueDialogActionsComponent,
+} from '../../../../../DataEntries';
 
 export type Props = {|
     theme: Theme,
@@ -12,4 +15,5 @@ export type Props = {|
     duplicatesReviewPageSize: number,
     renderDuplicatesCardActions?: RenderCustomCardActions,
     renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForEnrollmentAndTeiRegistration) => Node,
+    ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
 |};
