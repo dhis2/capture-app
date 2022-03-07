@@ -1,3 +1,10 @@
+## [99.9.13](https://github.com/dhis2/capture-app/compare/v99.9.12...v99.9.13) (2022-03-07)
+
+
+### Bug Fixes
+
+* displayColumnOrder name ([#2586](https://github.com/dhis2/capture-app/issues/2586)) ([0e98781](https://github.com/dhis2/capture-app/commit/0e98781e994c671002b834bac98b6729e29286cc))
+
 ## [99.9.12](https://github.com/dhis2/capture-app/compare/v99.9.11...v99.9.12) (2022-03-07)
 
 
