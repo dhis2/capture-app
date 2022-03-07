@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-15T09:59:36.798Z\n"
+"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -318,9 +318,6 @@ msgstr "Mostrar {{trackedEntityTypeName}} registrado"
 
 msgid "Registered person"
 msgstr "Persona registrada"
-
-msgid "Link"
-msgstr "Enlace"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -662,12 +659,8 @@ msgstr ""
 "{{programName}} tiene categorías. Elija todas las categorías para ver el "
 "tablero."
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
-"Hay varias inscripciones para este programa. Elija una inscripción para ver "
-"el tablero."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} no está inscrito en este programa."
@@ -785,6 +778,9 @@ msgstr "Guardar como nuevo"
 msgid "View dashboard"
 msgstr "Ver tablero"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Crear para"
 
@@ -794,11 +790,17 @@ msgstr ""
 "También puede elegir un programa de la barra superior y crear en ese "
 "programa"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "Guardar nuevo"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Guardar el nuevo {{trackedEntityTypeName}} y el enlace"
+
+msgid "Link"
+msgstr "Enlace"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Guardar como nuevo {{trackedEntityName}}"
@@ -1144,16 +1146,31 @@ msgid ""
 "Enrollment box on this dashboard"
 msgstr ""
 
+msgid " Loading..."
+msgstr ""
+
 msgid "Save changes"
 msgstr "Guardar cambios"
 
 msgid "Profile"
 msgstr "Perfil"
 
-msgid "There are errors in this form"
+msgid "There is a problem with this form"
 msgstr ""
 
 msgid "There are warnings in this form"
+msgstr ""
+
+msgid "There was a problem saving changes"
+msgstr ""
+
+msgid "Try again or contact your system administrator for support"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr "instancia de entidad rastreada"
+
+msgid "Fix errors in the form to continue."
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
@@ -1183,6 +1200,9 @@ msgid "Go to full {{ eventName }}"
 msgstr ""
 
 msgid "This stage can only have one event"
+msgstr ""
+
+msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Report date"
@@ -1337,9 +1357,6 @@ msgstr "Error al guardar la inscripción"
 
 msgid "Error saving the enrollment event"
 msgstr ""
-
-msgid "tracked entity instance"
-msgstr "instancia de entidad rastreada"
 
 msgid "Set coordinate"
 msgstr "Establecer coordenadas"

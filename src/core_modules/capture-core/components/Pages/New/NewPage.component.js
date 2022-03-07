@@ -1,8 +1,10 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { LockedSelector } from '../../LockedSelector';
@@ -62,6 +64,7 @@ const NewPagePlain = ({
         showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
     ]);
+    const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
 
     return (<>
         <LockedSelector
@@ -86,7 +89,7 @@ const NewPagePlain = ({
                         message={i18n.t("You don't have access to create an event in the current selections")}
                     />
                     :
-                    <>
+                    <OrgUnitFetcher orgUnitId={orgUnitId}>
                         {
                             newPageStatus === newPageStatuses.DEFAULT &&
                             <RegistrationDataEntry
@@ -131,7 +134,7 @@ const NewPagePlain = ({
                             })()
                         }
 
-                    </>
+                    </OrgUnitFetcher>
             }
         </div>
     </>);

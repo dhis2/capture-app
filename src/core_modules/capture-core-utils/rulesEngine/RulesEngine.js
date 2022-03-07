@@ -293,6 +293,7 @@ export class RulesEngine {
                             optionGroupId,
                             optionId,
                             content,
+                            displayContent,
                             style,
                         }) => {
                         let ruleEffectData;
@@ -318,6 +319,7 @@ export class RulesEngine {
                             optionGroupId,
                             optionId,
                             content,
+                            displayContent,
                             style,
                         };
                     });

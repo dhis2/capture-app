@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-15T09:59:36.798Z\n"
+"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -324,9 +324,6 @@ msgstr "Afficher le {{Nom de type d'entité suivie}} enregistré"
 
 msgid "Registered person"
 msgstr "Personne inscrite"
-
-msgid "Link"
-msgstr "Lien"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -670,12 +667,8 @@ msgstr ""
 "{{programName}} a des catégories. Choisir toutes les catégories pour "
 "afficher le tableau de bord."
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
-"Il y a plusieurs inscriptions à ce programme. Choisir une inscription pour "
-"afficher le tableau de bord."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} n'est pas inscrit à ce programme"
@@ -794,6 +787,9 @@ msgstr "Enregistrer comme nouveau"
 msgid "View dashboard"
 msgstr "Voir le tableau de bord"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Créer pour"
 
@@ -803,11 +799,17 @@ msgstr ""
 "Vous pouvez également choisir un programme dans la barre supérieure et créer"
 " dans ce programme"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "Enregistrer nouveau"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Enregistrer le nouveau {{trackedEntityTypeName}} et le lien"
+
+msgid "Link"
+msgstr "Lien"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Enregistrer comme un nouveau {{trackedEntityName}}"
@@ -1151,16 +1153,31 @@ msgid ""
 "Enrollment box on this dashboard"
 msgstr ""
 
+msgid " Loading..."
+msgstr ""
+
 msgid "Save changes"
 msgstr "Sauvegarder les modifications"
 
 msgid "Profile"
 msgstr "Profil"
 
-msgid "There are errors in this form"
+msgid "There is a problem with this form"
 msgstr ""
 
 msgid "There are warnings in this form"
+msgstr ""
+
+msgid "There was a problem saving changes"
+msgstr ""
+
+msgid "Try again or contact your system administrator for support"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr "instance d'entité suivie"
+
+msgid "Fix errors in the form to continue."
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
@@ -1188,6 +1205,9 @@ msgid "Go to full {{ eventName }}"
 msgstr ""
 
 msgid "This stage can only have one event"
+msgstr ""
+
+msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Report date"
@@ -1342,9 +1362,6 @@ msgstr "Erreur lors de l'enregistrement de l'inscription"
 
 msgid "Error saving the enrollment event"
 msgstr ""
-
-msgid "tracked entity instance"
-msgstr "instance d'entité suivie"
 
 msgid "Set coordinate"
 msgstr "Définir les coordonnées"
