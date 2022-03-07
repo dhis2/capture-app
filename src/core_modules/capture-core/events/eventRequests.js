@@ -73,18 +73,24 @@ function getConvertedValue(valueToConvert: any, inputKey: string) {
 }
 
 function getAssignee(apiEvent: ApiTEIEvent) {
-    if (!(apiEvent.assignedUserUsername && apiEvent.assignedUser)) {
+    if (!(apiEvent.assignedUser)) {
+        return undefined;
+    }
+
+    const { uid, firstName, surname, username } = apiEvent.assignedUser;
+
+    if (!firstName || !surname) {
         return undefined;
     }
 
     return {
-        id: apiEvent.assignedUser,
-        username: apiEvent.assignedUserUsername,
-        name: apiEvent.assignedUserDisplayName,
+        id: uid,
+        username,
+        name: `${firstName} ${surname}`,
     };
 }
 function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
-    const skipProps = ['dataValues', 'assignedUserUsername', 'assignedUser', 'assignedUserDisplayName'];
+    const skipProps = ['dataValues', 'assignedUser'];
 
     return Object
         .keys(apiEvent)
