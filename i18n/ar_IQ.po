@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-11T15:12:43.396Z\n"
+"POT-Creation-Date: 2022-03-02T12:32:54.352Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2022\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -302,9 +302,6 @@ msgstr "إظهار الـ {{trackedEntityTypeName}} المسجلة"
 
 msgid "Registered person"
 msgstr "الشخص المسجل"
-
-msgid "Link"
-msgstr "ربط"
 
 msgid "validation failed"
 msgstr "فشل التحقق من الصحة"
@@ -750,6 +747,9 @@ msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
+
+msgid "Link"
+msgstr "ربط"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""

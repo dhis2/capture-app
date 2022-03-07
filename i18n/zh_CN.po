@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-11T15:12:43.396Z\n"
+"POT-Creation-Date: 2022-03-02T12:32:54.352Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -294,9 +294,6 @@ msgstr "显示登记的 {{attributeName}} "
 
 msgid "Registered person"
 msgstr "注册的人"
-
-msgid "Link"
-msgstr "链接"
 
 msgid "validation failed"
 msgstr "验证失败"
@@ -742,6 +739,9 @@ msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
+
+msgid "Link"
+msgstr "链接"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""

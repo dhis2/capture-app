@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-11T15:12:43.396Z\n"
+"POT-Creation-Date: 2022-03-02T12:32:54.352Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -310,9 +310,6 @@ msgstr "Mostrar {{trackedEntityTypeName}} registrado"
 
 msgid "Registered person"
 msgstr "Pessoa cadastrada"
-
-msgid "Link"
-msgstr "Link"
 
 msgid "validation failed"
 msgstr "falha na validação"
@@ -769,6 +766,9 @@ msgstr "Salvar novo"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Salve o novo {{trackedEntityTypeName}} e o link"
+
+msgid "Link"
+msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Salvar como novo {{trackedEntityName}}"

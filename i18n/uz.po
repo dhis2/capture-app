@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-11T15:12:43.396Z\n"
+"POT-Creation-Date: 2022-03-02T12:32:54.352Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -311,9 +311,6 @@ msgstr "Рўйхатдан ўтган {{trackedEntityTypeName}} ни кўрса�
 
 msgid "Registered person"
 msgstr "Рўйхатдан ўтган шахс"
-
-msgid "Link"
-msgstr "Ҳавола"
 
 msgid "validation failed"
 msgstr "Тасдиқлаш амалга ошмади"
@@ -771,6 +768,9 @@ msgstr "Янгисини сақлаш"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Янги {{trackedEntityTypeName}} ва ҳаволани сақлаш"
+
+msgid "Link"
+msgstr "Ҳавола"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Янги {{trackedEntityName}} сифатида сақлаш"

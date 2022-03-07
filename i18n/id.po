@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-11T15:12:43.396Z\n"
+"POT-Creation-Date: 2022-03-02T12:32:54.352Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -314,9 +314,6 @@ msgstr "Tampilkan {{trackedEntityTypeName}} yang telah terdaftar"
 
 msgid "Registered person"
 msgstr "Orang yang terdaftar"
-
-msgid "Link"
-msgstr "Tautan"
 
 msgid "validation failed"
 msgstr "validasi gagal"
@@ -773,6 +770,9 @@ msgstr "Simpan baru"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Simpan {{trackedEntityTypeName}} baru dan tautan"
+
+msgid "Link"
+msgstr "Tautan"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Simpan sebagai {{trackedEntityName}} baru"
