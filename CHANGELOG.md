@@ -1,3 +1,10 @@
+## [99.9.12](https://github.com/dhis2/capture-app/compare/v99.9.11...v99.9.12) (2022-03-07)
+
+
+### Bug Fixes
+
+* fiter options ([35949c5](https://github.com/dhis2/capture-app/commit/35949c50339bd6c2312202da4c14d40859ef38ab))
+
 ## [99.9.11](https://github.com/dhis2/capture-app/compare/v99.9.10...v99.9.11) (2022-03-06)
 
 
