@@ -315,9 +315,6 @@ msgstr "Tampilkan {{trackedEntityTypeName}} terdaftar"
 msgid "Registered person"
 msgstr "Orang yang terdaftar"
 
-msgid "Link"
-msgstr "Tautan"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada even "
@@ -776,6 +773,9 @@ msgstr "Simpan sebagai baru"
 msgid "View dashboard"
 msgstr "Lihat dasbor"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Buat untuk"
 
@@ -784,11 +784,17 @@ msgid ""
 msgstr ""
 "Anda juga dapat memilih program dari bilah atas dan membuat program tersebut"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "Simpan baru"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Simpan {{trackedEntityTypeName}} baru dan tautan"
+
+msgid "Link"
+msgstr "Tautan"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Simpan sebagai {{trackedEntityName}} baru"
