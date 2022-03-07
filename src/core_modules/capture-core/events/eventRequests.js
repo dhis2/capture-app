@@ -26,9 +26,12 @@ type ApiTEIEvent = {
     dueDate: string,
     completedDate: string,
     dataValues: Array<ApiDataValue>,
-    assignedUser?: ?string,
-    assignedUserUsername?: ?string,
-    assignedUserDisplayName?: ?string,
+    assignedUser?: ?{|
+        uid: string,
+        username: string,
+        firstName: string,
+        surname: string,
+    |},
 };
 
 export type ClientEventContainer = {
