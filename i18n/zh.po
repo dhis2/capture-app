@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2021
-# easylin <lin_xd@126.com>, 2022
 # phil_dhis2, 2022
 # 晓东 林 <13981924470@126.com>, 2022
+# easylin <lin_xd@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-01T13:50:45.247Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -618,7 +618,7 @@ msgid ""
 msgstr "{{programName}} 有类别。选择所有类别以查看仪表板。"
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr ""
+msgstr "选择一个注册以查看仪表板。"
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "该项目未注册{{teiDisplayName}} 。"
@@ -702,7 +702,7 @@ msgid "View dashboard"
 msgstr "查看仪表盘"
 
 msgid "View enrollment"
-msgstr ""
+msgstr "查看注册"
 
 msgid "Create for"
 msgstr "为创建"
