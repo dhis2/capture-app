@@ -1,3 +1,17 @@
+# [99.10.0](https://github.com/dhis2/capture-app/compare/v99.9.14...v99.10.0) (2022-03-08)
+
+
+### Features
+
+* [DHIS2-12514] Add new option in enrollment widget ([#2531](https://github.com/dhis2/capture-app/issues/2531)) ([8c0e792](https://github.com/dhis2/capture-app/commit/8c0e792ba6d47e8315326e90d0b8839ddf0c3df8))
+
+## [99.9.14](https://github.com/dhis2/capture-app/compare/v99.9.13...v99.9.14) (2022-03-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([859e3d1](https://github.com/dhis2/capture-app/commit/859e3d114e228069f1d4d0b0592b4a801fa8695a))
+
 ## [99.9.13](https://github.com/dhis2/capture-app/compare/v99.9.12...v99.9.13) (2022-03-07)
 
 
