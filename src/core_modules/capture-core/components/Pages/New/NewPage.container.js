@@ -16,6 +16,7 @@ import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissin
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useTrackedEntityInstances } from './hooks';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { programCollection } from '../../../metaDataMemoryStores/programCollection/programCollection';
 
 const useUserWriteAccess = (scopeId) => {
     const scope = getScopeFromScopeId(scopeId);
@@ -43,13 +44,13 @@ export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { orgUnitId, programId, teiId } = useLocationQuery();
-    const program = programId && getProgramThrowIfNotFound(programId);
+    const program = programId && programCollection.get(programId);
     const { trackedEntityInstanceAttributes } = useTrackedEntityInstances(teiId, programId);
     // $FlowFixMe
     const trackedEntityType = program?.trackedEntityType;
     const teiDisplayName =
-        trackedEntityInstanceAttributes && deriveTeiName(trackedEntityInstanceAttributes, trackedEntityType?.id, teiId);
-
+        trackedEntityInstanceAttributes &&
+        deriveTeiName(trackedEntityInstanceAttributes, trackedEntityType?.id || '', teiId);
 
     const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
