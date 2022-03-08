@@ -19,7 +19,7 @@ const enrollmentDelete = {
     }),
 };
 
-export const Actions = ({ enrollment = {}, refetch, onDelete }: Props) => {
+export const Actions = ({ enrollment = {}, refetch, onDelete, ...passOnProps }: Props) => {
     const [updateMutation, { loading: updateLoading }] = useDataMutation(
         enrollmentUpdate,
         {
@@ -34,12 +34,14 @@ export const Actions = ({ enrollment = {}, refetch, onDelete }: Props) => {
             onComplete: onDelete,
         },
     );
+
     return (
         <ActionsComponent
             enrollment={enrollment}
             onUpdate={updateMutation}
             onDelete={deleteMutation}
             loading={updateLoading || deleteLoading}
+            {...passOnProps}
         />
     );
 };
