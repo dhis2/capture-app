@@ -125,3 +125,23 @@ And('you select the MNCH PNC program', () => {
         .click();
 });
 
+Then(/^the user clicks the element containing the text: (.*)$/, (text) => {
+    cy.contains(text).click();
+});
+
+Then(/^the current url is (.*)$/, (url) => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}${url}`);
+});
+
+Then(/^the user ?(.*) see the following text: (.*)$/, (not, message) =>
+    cy.contains(message).should(not ? 'not.exist' : 'exist'),
+);
+
+And('you navigated to the enrollment dashboard page', () => {
+    cy.url().should('include', 'enrollment?enrollmentId');
+});
+
+Then('you should see no results found', () => {
+    cy.contains('No results found')
+        .should('exist');
+});
