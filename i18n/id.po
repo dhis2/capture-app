@@ -3,17 +3,17 @@
 # phil_dhis2, 2019
 # Carwoto Sa'an <carwoto@gmail.com>, 2021
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
+# Viktor Varland <viktor@dhis2.org>, 2022
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-24T08:26:37.113Z\n"
+"POT-Creation-Date: 2022-03-02T12:32:54.352Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021\n"
+"Last-Translator: Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -315,9 +315,6 @@ msgstr "Tampilkan {{trackedEntityTypeName}} yang telah terdaftar"
 msgid "Registered person"
 msgstr "Orang yang terdaftar"
 
-msgid "Link"
-msgstr "Tautan"
-
 msgid "validation failed"
 msgstr "validasi gagal"
 
@@ -473,6 +470,12 @@ msgstr "Hapus"
 
 msgid "No results"
 msgstr "Tidak ada hasil"
+
+msgid "Description"
+msgstr "Deskripsi"
+
+msgid "URL"
+msgstr "URL"
 
 msgid "start typing to search"
 msgstr "mulai mengetik untuk mencari"
@@ -767,6 +770,9 @@ msgstr "Simpan baru"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Simpan {{trackedEntityTypeName}} baru dan tautan"
+
+msgid "Link"
+msgstr "Tautan"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Simpan sebagai {{trackedEntityName}} baru"

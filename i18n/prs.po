@@ -1,13 +1,13 @@
 # 
 # Translators:
-# phil_dhis2, 2021
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-24T08:26:37.113Z\n"
+"POT-Creation-Date: 2022-03-02T12:32:54.352Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: phil_dhis2, 2021\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Persian (Afghanistan) (https://www.transifex.com/hisp-uio/teams/100509/fa_AF/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -292,9 +292,6 @@ msgstr ""
 msgid "Registered person"
 msgstr ""
 
-msgid "Link"
-msgstr ""
-
 msgid "validation failed"
 msgstr ""
 
@@ -450,6 +447,12 @@ msgstr "پاک کردن"
 
 msgid "No results"
 msgstr ""
+
+msgid "Description"
+msgstr "شرح"
+
+msgid "URL"
+msgstr "نشانی اینترنتی"
 
 msgid "start typing to search"
 msgstr ""
@@ -732,6 +735,9 @@ msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"

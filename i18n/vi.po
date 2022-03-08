@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2021
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-24T08:26:37.113Z\n"
+"POT-Creation-Date: 2022-03-02T12:32:54.352Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -309,9 +309,6 @@ msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
 msgid "Registered person"
 msgstr "Người đã đăng ký"
 
-msgid "Link"
-msgstr "Liên kết"
-
 msgid "validation failed"
 msgstr "xác thực không thành công"
 
@@ -467,6 +464,12 @@ msgstr "Xóa"
 
 msgid "No results"
 msgstr "Không có kết quả"
+
+msgid "Description"
+msgstr "Miêu tả"
+
+msgid "URL"
+msgstr "Đường dẫn URL"
 
 msgid "start typing to search"
 msgstr "bắt đầu nhập để tìm kiếm"
@@ -750,6 +753,9 @@ msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Lưu {{trackedEntityTypeName}} mới và liên kết"
+
+msgid "Link"
+msgstr "Liên kết"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
