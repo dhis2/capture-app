@@ -11,7 +11,7 @@ import {
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { getScopeFromScopeId, TrackerProgram, TrackedEntityType, getProgramThrowIfNotFound } from '../../../metaData';
+import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useTrackedEntityInstances } from './hooks';
