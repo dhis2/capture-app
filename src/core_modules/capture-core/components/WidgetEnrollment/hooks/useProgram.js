@@ -10,7 +10,7 @@ export const useProgram = (programId: string) => {
                     resource: `programs/${programId}`,
                     params: {
                         fields: [
-                            'displayIncidentDate,incidentDateLabel,enrollmentDateLabel',
+                            'displayIncidentDate,incidentDateLabel,enrollmentDateLabel,onlyEnrollOnce,trackedEntityType[displayName]',
                         ],
                     },
                 },

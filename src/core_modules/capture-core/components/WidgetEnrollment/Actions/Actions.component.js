@@ -7,6 +7,7 @@ import { Cancel } from './Cancel';
 import { Complete } from './Complete';
 import { Delete } from './Delete';
 import { Followup } from './Followup';
+import { AddNew } from './AddNew';
 import type { PlainProps } from './actions.types';
 import { LoadingMaskForButton } from '../../LoadingMasks';
 
@@ -23,9 +24,13 @@ const styles = {
 
 export const ActionsPlain = ({
     enrollment = {},
+    tetName,
+    canAddNew,
     onUpdate,
     onDelete,
+    onAddNew,
     loading,
+    onlyEnrollOnce,
     classes,
 }: PlainProps) => (
     <>
@@ -39,6 +44,12 @@ export const ActionsPlain = ({
                 <span>
                     {loading ? null : (
                         <FlyoutMenu dense maxWidth="250px">
+                            <AddNew
+                                onlyEnrollOnce={onlyEnrollOnce}
+                                tetName={tetName}
+                                canAddNew={canAddNew}
+                                onAddNew={onAddNew}
+                            />
                             <Complete
                                 enrollment={enrollment}
                                 onUpdate={onUpdate}
