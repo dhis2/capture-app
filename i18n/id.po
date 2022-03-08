@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
+"POT-Creation-Date: 2022-03-02T09:35:41.822Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -992,6 +992,12 @@ msgstr "Tindakan pendaftaran"
 
 msgid "We are processing your request."
 msgstr "Kami sedang memproses permintaan Anda."
+
+msgid "Add new"
+msgstr "Tambahkan baru"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr ""
 
 msgid "Reactivate"
 msgstr "Mengaktifkan kembali"
