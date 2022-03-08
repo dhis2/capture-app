@@ -100,13 +100,13 @@ const CommentSectionPlain = ({
         setEditing(false);
     }, [handleAddComment, newCommentValue]);
 
-    const CommentItem = ({ value, storedAt, lastUpdatedBy }) => (
+    const CommentItem = ({ value, storedAt, createdBy }) => (
         <div data-test="comment-item" className={cx(classes.item)}>
             <div className={classes.avatar} /> {/* TODO: add avatar */}
             <div className={classes.rightColumn}>
                 <div className={classes.header}>
-                    {lastUpdatedBy && <span className={cx(classes.headerText, classes.name)}>
-                        {lastUpdatedBy.firstName} {' '} {lastUpdatedBy.surname}
+                    {createdBy && <span className={cx(classes.headerText, classes.name)}>
+                        {createdBy.firstName} {' '} {createdBy.surname}
                     </span>}
                     <span className={cx(classes.headerText, classes.lastUpdated)}>
                         {moment(storedAt).fromNow()}
