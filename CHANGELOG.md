@@ -1,3 +1,10 @@
+# [99.10.0](https://github.com/dhis2/capture-app/compare/v99.9.14...v99.10.0) (2022-03-08)
+
+
+### Features
+
+* [DHIS2-12514] Add new option in enrollment widget ([#2531](https://github.com/dhis2/capture-app/issues/2531)) ([8c0e792](https://github.com/dhis2/capture-app/commit/8c0e792ba6d47e8315326e90d0b8839ddf0c3df8))
+
 ## [99.9.14](https://github.com/dhis2/capture-app/compare/v99.9.13...v99.9.14) (2022-03-08)
 
 
