@@ -11,9 +11,11 @@ import {
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
+import { getScopeFromScopeId, TrackerProgram, TrackedEntityType, getProgramThrowIfNotFound } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { useTrackedEntityInstances } from './hooks';
+import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 
 const useUserWriteAccess = (scopeId) => {
     const scope = getScopeFromScopeId(scopeId);
@@ -40,7 +42,14 @@ const useUserWriteAccess = (scopeId) => {
 export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { orgUnitId, programId } = useLocationQuery();
+    const { orgUnitId, programId, teiId } = useLocationQuery();
+    const program = programId && getProgramThrowIfNotFound(programId);
+    const { trackedEntityInstanceAttributes } = useTrackedEntityInstances(teiId, programId);
+    // $FlowFixMe
+    const trackedEntityType = program?.trackedEntityType;
+    const teiDisplayName =
+        trackedEntityInstanceAttributes && deriveTeiName(trackedEntityInstanceAttributes, trackedEntityType?.id, teiId);
+
 
     const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
@@ -105,5 +114,9 @@ export const NewPage: ComponentType<{||}> = () => {
             ready={ready}
             isUserInteractionInProgress={isUserInteractionInProgress}
             programId={programId}
+            teiId={teiId}
+            trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
+            trackedEntityName={trackedEntityType?.name}
+            teiDisplayName={teiDisplayName}
         />);
 };

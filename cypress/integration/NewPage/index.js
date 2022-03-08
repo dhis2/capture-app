@@ -451,3 +451,10 @@ And('you see the form prefield with existing TEI attributes values', () => {
         cy.contains('Female').should('exist');
     });
 });
+
+And('the scope selector has the TEI context', () => {
+    cy.get('[data-test="scope-selector"]').within(() => {
+        cy.contains('Selected person').should('exist');
+        cy.contains('Anna Jones').should('exist');
+    });
+});

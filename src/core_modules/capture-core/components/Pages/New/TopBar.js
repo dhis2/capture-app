@@ -8,9 +8,11 @@ import {
     useSetOrgUnitId,
     useResetProgramId,
     useResetOrgUnitId,
+    useResetTeiId,
     setCategoryOptionFromScopeSelector,
     resetCategoryOptionFromScopeSelector,
     resetAllCategoryOptionsFromScopeSelector,
+    SingleLockedSelect,
 } from '../../ScopeSelector';
 import { TopBarActions } from '../../TopBarActions';
 import { cleanUpDataEntry } from './NewPage.actions';
@@ -23,16 +25,27 @@ import {
 type TopBarProps = {
     programId?: string,
     orgUnitId?: string,
+    teiId?: string,
+    trackedEntityName?: string,
+    teiDisplayName?: string,
     isUserInteractionInProgress: boolean,
 };
 
-export const NewPageTopBar = ({ programId, orgUnitId, isUserInteractionInProgress }: TopBarProps) => {
+export const NewPageTopBar = ({
+    programId,
+    orgUnitId,
+    teiId,
+    isUserInteractionInProgress,
+    trackedEntityName = '',
+    teiDisplayName = '',
+}: TopBarProps) => {
     const dispatch = useDispatch();
     const { setProgramId } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
 
-    const { resetProgramId } = useResetProgramId();
+    const { resetProgramIdAndTeiId } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
+    const { resetTeiId } = useResetTeiId();
 
     const { selectedCategories } = useSelector(({ currentSelections }) => ({
         selectedCategories: currentSelections.categoriesMeta,
@@ -65,7 +78,7 @@ export const NewPageTopBar = ({ programId, orgUnitId, isUserInteractionInProgres
             onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
             onResetCategoryOption={dispatchOnResetCategoryOption}
             onResetOrgUnitId={() => resetOrgUnitId()}
-            onResetProgramId={() => resetProgramId()}
+            onResetProgramId={() => resetProgramIdAndTeiId()}
             customActionsOnProgramIdReset={[
                 cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
                 cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
@@ -78,6 +91,23 @@ export const NewPageTopBar = ({ programId, orgUnitId, isUserInteractionInProgres
             ]}
             isUserInteractionInProgress={isUserInteractionInProgress}
         >
+            {teiId && (
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready={!!(trackedEntityName && teiDisplayName)}
+                        onClear={() => resetTeiId()}
+                        options={[
+                            {
+                                label: teiDisplayName,
+                                value: 'alwaysPreselected',
+                            },
+                        ]}
+                        selectedValue="alwaysPreselected"
+                        title={trackedEntityName}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
+                    />
+                </Grid>
+            )}
             <Grid item xs={12} sm={6} md={6} lg={2}>
                 <TopBarActions
                     selectedProgramId={programId}

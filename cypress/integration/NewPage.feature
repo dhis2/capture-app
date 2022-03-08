@@ -166,3 +166,4 @@ Feature: User creates a new entries from the registration page
   Scenario: New enrollment of existing TEI > The TEI form is prefield with the attributes values
     Given you are in Child programme reenrollment page
     Then you see the form prefield with existing TEI attributes values
+    And the scope selector has the TEI context

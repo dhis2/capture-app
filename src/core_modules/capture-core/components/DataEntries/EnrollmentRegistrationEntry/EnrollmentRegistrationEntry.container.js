@@ -5,8 +5,22 @@ import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEn
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
 
-export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, ...passOnProps }) => {
-    const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id);
+export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
+    selectedScopeId,
+    id,
+    trackedEntityInstanceAttributes,
+    ...passOnProps
+}) => {
+    const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes);
 
-    return <EnrollmentRegistrationEntryComponent {...passOnProps} selectedScopeId={selectedScopeId} id={id} ready={ready} teiId={teiId} skipDuplicateCheck={skipDuplicateCheck} />;
+    return (
+        <EnrollmentRegistrationEntryComponent
+            {...passOnProps}
+            selectedScopeId={selectedScopeId}
+            id={id}
+            ready={ready}
+            teiId={teiId}
+            skipDuplicateCheck={skipDuplicateCheck}
+        />
+    );
 };
