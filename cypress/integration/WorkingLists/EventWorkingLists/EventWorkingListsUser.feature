@@ -6,34 +6,34 @@ Then the default working list should be displayed
 And rows per page should be set to 15
 And for an event program the page navigation should show that you are on the first page
 
-#Scenario: Show only events assigned to anyone using the predefined working list
-#Given you open the main page with Ngelehun and malaria case context
-#When you select the working list called events assigned to anyone
-#Then the assigned to filter button should show that the anyone filter is in effect
-#And the list should display events assigned to anyone
-#And rows per page should be set to 15
-#And for an event program the page navigation should show that you are on the first page
-#
-#Scenario: Show only events assigned to anyone using the filter
-#Given you open the main page with Ngelehun and malaria case context
-#When you set the assignee filter to anyone
-#And you apply the current filter
-#Then the assigned to filter button should show that the anyone filter is in effect
-#And the list should display events assigned to anyone
-#And rows per page should be set to 15
-#And for an event program the page navigation should show that you are on the first page
-#
-#Scenario: Show only active events assigned to anyone using the filter
-#Given you open the main page with Ngelehun and malaria case context
-#When you set the assignee filter to anyone
-#And you apply the current filter
-#And you set the status filter to active
-#And you apply the current filter
-#Then the assigned to filter button should show that the anyone filter is in effect
-#And the status filter button should show that the active filter is in effect
-#And the list should display active events that are assigned to anyone
-#And rows per page should be set to 15
-#And for an event program the page navigation should show that you are on the first page
+Scenario: Show only events assigned to anyone using the predefined working list
+Given you open the main page with Ngelehun and malaria case context
+When you select the working list called events assigned to anyone
+Then the assigned to filter button should show that the anyone filter is in effect
+And the list should display events assigned to anyone
+And rows per page should be set to 15
+And for an event program the page navigation should show that you are on the first page
+
+Scenario: Show only events assigned to anyone using the filter
+Given you open the main page with Ngelehun and malaria case context
+When you set the assignee filter to anyone
+And you apply the current filter
+Then the assigned to filter button should show that the anyone filter is in effect
+And the list should display events assigned to anyone
+And rows per page should be set to 15
+And for an event program the page navigation should show that you are on the first page
+
+Scenario: Show only active events assigned to anyone using the filter
+Given you open the main page with Ngelehun and malaria case context
+When you set the assignee filter to anyone
+And you apply the current filter
+And you set the status filter to active
+And you apply the current filter
+Then the assigned to filter button should show that the anyone filter is in effect
+And the status filter button should show that the active filter is in effect
+And the list should display active events that are assigned to anyone
+And rows per page should be set to 15
+And for an event program the page navigation should show that you are on the first page
 
 Scenario: Show only events where age is between 10 and 20 using the filter
 Given you open the main page with Ngelehun and malaria case context
