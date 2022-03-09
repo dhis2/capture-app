@@ -6,7 +6,7 @@
 >
 > The Capture app serves as a replacement for the Event Capture app. In the future, the Tracker Capture app and the Data Entry app will also be incorporated into the Capture app.
 
-In the Capture app you register events that occurred at a particular time and place. An event can happen at any given point in time. This stands in contrast to routine data, which is captured for predefined, regular intervals. Events are sometimes called cases or records. In DHIS2, events are linked to a program. The Capture app lets you select the organisation unit and program and specify a date when an event happened, before entering information for the event.
+A In the Capture app you register events that occurred at a particular time and place. An event can happen at any given point in time. This stands in contrast to routine data, which is captured for predefined, regular intervals. Events are sometimes called cases or records. In DHIS2, events are linked to a program. The Capture app lets you select the organisation unit and program and specify a date when an event happened, before entering information for the event.
 
 ## Register an event { #capture_register_event } 
 
