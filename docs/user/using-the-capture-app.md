@@ -18,7 +18,7 @@ In the Capture app you register events that occurred at a particular time and pl
 
     You will only see programs associated with the selected organisation unit and programs you have access to, and that are shared with your user group through data level sharing.
 
-4. If the program has a category combination set the category option will have to be selected.
+4. test
 
 5. Click **New**.
 
