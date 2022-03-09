@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
+"POT-Creation-Date: 2022-03-02T09:35:41.822Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -314,9 +314,6 @@ msgstr "Tampilkan {{trackedEntityTypeName}} terdaftar"
 
 msgid "Registered person"
 msgstr "Orang yang terdaftar"
-
-msgid "Link"
-msgstr "Tautan"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -776,6 +773,9 @@ msgstr "Simpan sebagai baru"
 msgid "View dashboard"
 msgstr "Lihat dasbor"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Buat untuk"
 
@@ -784,11 +784,17 @@ msgid ""
 msgstr ""
 "Anda juga dapat memilih program dari bilah atas dan membuat program tersebut"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "Simpan baru"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Simpan {{trackedEntityTypeName}} baru dan tautan"
+
+msgid "Link"
+msgstr "Tautan"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Simpan sebagai {{trackedEntityName}} baru"
@@ -986,6 +992,12 @@ msgstr "Tindakan pendaftaran"
 
 msgid "We are processing your request."
 msgstr "Kami sedang memproses permintaan Anda."
+
+msgid "Add new"
+msgstr "Tambahkan baru"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr ""
 
 msgid "Reactivate"
 msgstr "Mengaktifkan kembali"

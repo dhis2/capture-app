@@ -52,6 +52,7 @@ export const EnrollmentPageDefaultPlain = ({
     teiRelationships,
     stages,
     onDelete,
+    onAddNew,
     onViewAll,
     onCreateNew,
     widgetEffects,
@@ -109,6 +110,7 @@ export const EnrollmentPageDefaultPlain = ({
                     enrollmentId={enrollmentId}
                     programId={program.id}
                     onDelete={onDelete}
+                    onAddNew={onAddNew}
                 />}
             </div>
         </div>

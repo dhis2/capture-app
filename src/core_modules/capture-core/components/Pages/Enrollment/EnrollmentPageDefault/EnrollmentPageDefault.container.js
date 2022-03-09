@@ -78,6 +78,10 @@ export const EnrollmentPageDefault = () => {
         dispatch(updateTeiDisplayName(teiDisplayName));
     }, [dispatch]);
 
+    const onAddNew = () => {
+        history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
+    };
+
     return (
         <EnrollmentPageDefaultComponent
             teiId={teiId}
@@ -89,6 +93,7 @@ export const EnrollmentPageDefault = () => {
             enrollmentId={enrollmentId}
             teiRelationships={teiRelationships}
             enrollmentRelationships={enrollmentRelationships}
+            onAddNew={onAddNew}
             onDelete={onDelete}
             onViewAll={onViewAll}
             onCreateNew={onCreateNew}

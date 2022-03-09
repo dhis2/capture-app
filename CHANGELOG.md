@@ -1,3 +1,76 @@
+## [99.10.1](https://github.com/dhis2/capture-app/compare/v99.10.0...v99.10.1) (2022-03-09)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5a2d4bf](https://github.com/dhis2/capture-app/commit/5a2d4bf250bd446d0f1deb3f9df2880524604520))
+
+# [99.10.0](https://github.com/dhis2/capture-app/compare/v99.9.14...v99.10.0) (2022-03-08)
+
+
+### Features
+
+* [DHIS2-12514] Add new option in enrollment widget ([#2531](https://github.com/dhis2/capture-app/issues/2531)) ([8c0e792](https://github.com/dhis2/capture-app/commit/8c0e792ba6d47e8315326e90d0b8839ddf0c3df8))
+
+## [99.9.14](https://github.com/dhis2/capture-app/compare/v99.9.13...v99.9.14) (2022-03-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([859e3d1](https://github.com/dhis2/capture-app/commit/859e3d114e228069f1d4d0b0592b4a801fa8695a))
+
+## [99.9.13](https://github.com/dhis2/capture-app/compare/v99.9.12...v99.9.13) (2022-03-07)
+
+
+### Bug Fixes
+
+* displayColumnOrder name ([#2586](https://github.com/dhis2/capture-app/issues/2586)) ([0e98781](https://github.com/dhis2/capture-app/commit/0e98781e994c671002b834bac98b6729e29286cc))
+
+## [99.9.12](https://github.com/dhis2/capture-app/compare/v99.9.11...v99.9.12) (2022-03-07)
+
+
+### Bug Fixes
+
+* fiter options ([35949c5](https://github.com/dhis2/capture-app/commit/35949c50339bd6c2312202da4c14d40859ef38ab))
+
+## [99.9.11](https://github.com/dhis2/capture-app/compare/v99.9.10...v99.9.11) (2022-03-06)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7597bef](https://github.com/dhis2/capture-app/commit/7597befad08f65144ed6590be93ea78115259b5e))
+
+## [99.9.10](https://github.com/dhis2/capture-app/compare/v99.9.9...v99.9.10) (2022-03-04)
+
+
+### Bug Fixes
+
+* [DHIS2-12727] [DHIS2-12726] Error when trying to create new events with relationship ([ea83f75](https://github.com/dhis2/capture-app/commit/ea83f756f6e4e9b0cd29a7fcaaa98be8f8529fae))
+* [DHIS2-12727] [DHIS2-12726] Error when trying to create new events with relationship ([873c3c0](https://github.com/dhis2/capture-app/commit/873c3c0ba547877d12413605a3312874b6113ddb))
+
+# [1.74.0](https://github.com/dhis2/capture-app/compare/v1.73.0...v1.74.0) (2022-03-02)
+
+
+### Features
+
+* [DHIS2-12137] support translation of program rule actions ([#2561](https://github.com/dhis2/capture-app/issues/2561)) ([3d02c2f](https://github.com/dhis2/capture-app/commit/3d02c2f53fd32818938b41469fa76da675221d4b))
+
+# [1.73.0](https://github.com/dhis2/capture-app/compare/v1.72.2...v1.73.0) (2022-03-02)
+
+
+### Bug Fixes
+
+* [DHIS2-12119] fix cypress test ([#2564](https://github.com/dhis2/capture-app/issues/2564)) ([e83db19](https://github.com/dhis2/capture-app/commit/e83db1982cc5fbbbfcca5651a6c4d5d6289c2f5f))
+* [DHIS2-12119] redirect to enrollment with teiId ([fbb0efa](https://github.com/dhis2/capture-app/commit/fbb0efacd78fc5e3f3d4e2d5bed131906d8fc40f))
+* common dataMap error ([eab6189](https://github.com/dhis2/capture-app/commit/eab61893a9ca2227c7a4135188f1229b2066d5f1))
+* return value from removeGS1Identifier func ([288878b](https://github.com/dhis2/capture-app/commit/288878bd666058c90a002174ca24860b90009c9b))
+
+
+### Features
+
+* [DHIS2-12296] support programRuleVariable type ([#2560](https://github.com/dhis2/capture-app/issues/2560)) ([4d77833](https://github.com/dhis2/capture-app/commit/4d77833105d7a2481e4d912d9e0372f197332819))
+* [DHIS2-12365] add d2:extractDataMatrixValue ([0aef2f8](https://github.com/dhis2/capture-app/commit/0aef2f8f40c40a19135fc19ae96985703d1b5a2b))
+
 ## [1.72.2](https://github.com/dhis2/capture-app/compare/v1.72.1...v1.72.2) (2022-03-01)
 
 

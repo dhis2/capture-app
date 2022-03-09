@@ -35,8 +35,7 @@ Feature: User interacts with Search page
     And you expand the attributes search area
     When you fill in the first name with values that will return no results
     And you click search
-    Then there should be a modal popping up
-    And you can close the modal
+    Then you should see no results found
 
   Scenario: Searching using attributes in Tracker Program throws error
     Given you are on the default search page
