@@ -57,7 +57,7 @@
     "redux-logger": "^3.0.6",
     "redux-observable": "^2.0.0",
     "reselect": "^4.1.5",
-    "rxjs": "^7.5.4",
+    "rxjs": "^7.5.5",
     "styled-jsx": "^4",
     "typeface-roboto": "^0.0.75",
     "uuid": "^3.3.2"
