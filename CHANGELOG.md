@@ -1,3 +1,11 @@
+## [99.10.2](https://github.com/dhis2/capture-app/compare/v99.10.1...v99.10.2) (2022-03-09)
+
+
+### Bug Fixes
+
+* [DHIS2-12667] report date label ([#2599](https://github.com/dhis2/capture-app/issues/2599)) ([c5168b2](https://github.com/dhis2/capture-app/commit/c5168b22c7f8831fb06a4dcb8d718731f1175256))
+* [DHIS2-12778] tooltip display ([#2600](https://github.com/dhis2/capture-app/issues/2600)) ([535ade9](https://github.com/dhis2/capture-app/commit/535ade9907d158be00784550f030c38fe3371186))
+
 ## [99.10.1](https://github.com/dhis2/capture-app/compare/v99.10.0...v99.10.1) (2022-03-09)
 
 
