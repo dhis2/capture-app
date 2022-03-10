@@ -96,7 +96,7 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('{{teiDisplayName}} is enrolled in multiple programs. Choose a program.', {
+                {i18n.t('Choose a program to add new or see existing enrollments for {{teiDisplayName}}', {
                     teiDisplayName, interpolation: { escapeValue: false },
                 })}
             </IncompleteSelectionsMessage>
