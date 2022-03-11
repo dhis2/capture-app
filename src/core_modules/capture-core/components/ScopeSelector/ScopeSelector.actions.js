@@ -18,7 +18,3 @@ export const resetProgramIdBatchAction = (actions: Array<Object>) =>
         ...actions,
         resetAllCategoryOptionsFromScopeSelector(),
     ]);
-export const resetOrgUnitIdBatchAction = (customActionsOnOrgUnitIdReset: Array<Object>) =>
-    batchActions([
-        ...customActionsOnOrgUnitIdReset,
-    ]);

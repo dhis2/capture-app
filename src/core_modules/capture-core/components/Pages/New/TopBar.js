@@ -13,12 +13,6 @@ import {
     resetAllCategoryOptionsFromScopeSelector,
 } from '../../ScopeSelector';
 import { TopBarActions } from '../../TopBarActions';
-import { cleanUpDataEntry } from './NewPage.actions';
-import {
-    NEW_TEI_DATA_ENTRY_ID,
-    NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID,
-    NEW_SINGLE_EVENT_DATA_ENTRY_ID,
-} from './NewPage.constants';
 
 type TopBarProps = {
     programId?: string,
@@ -66,16 +60,6 @@ export const NewPageTopBar = ({ programId, orgUnitId, isUserInteractionInProgres
             onResetCategoryOption={dispatchOnResetCategoryOption}
             onResetOrgUnitId={() => resetOrgUnitId()}
             onResetProgramId={() => resetProgramId()}
-            customActionsOnProgramIdReset={[
-                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
-            ]}
-            customActionsOnOrgUnitIdReset={[
-                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
-            ]}
             isUserInteractionInProgress={isUserInteractionInProgress}
         >
             <Grid item xs={12} sm={6} md={6} lg={2}>
