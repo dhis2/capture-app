@@ -2,10 +2,7 @@
 import React, { type ComponentType, useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
-import {
-    resetProgramIdBatchAction,
-    resetOrgUnitIdBatchAction,
-} from './ScopeSelector.actions';
+import { resetProgramIdBatchAction } from './ScopeSelector.actions';
 import type { OwnProps } from './ScopeSelector.types';
 import { useOrganizationUnit } from './hooks';
 
@@ -21,8 +18,6 @@ const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnit
 
 export const ScopeSelector: ComponentType<OwnProps> =
   ({
-      customActionsOnProgramIdReset = [],
-      customActionsOnOrgUnitIdReset = [],
       isUserInteractionInProgress = false,
       selectedProgramId,
       selectedOrgUnitId,
@@ -60,22 +55,16 @@ export const ScopeSelector: ComponentType<OwnProps> =
 
       const dispatchOnResetOrgUnitId = useCallback(
           () => {
-              dispatch(resetOrgUnitIdBatchAction(customActionsOnOrgUnitIdReset));
               onResetOrgUnitId();
           },
-          [customActionsOnOrgUnitIdReset, dispatch, onResetOrgUnitId]);
+          [onResetOrgUnitId]);
 
       const dispatchOnResetProgramId = useCallback(
           (baseAction: ReduxAction<any, any>) => {
-              const actions = [
-                  baseAction,
-                  ...customActionsOnProgramIdReset,
-              ];
-
-              dispatch(resetProgramIdBatchAction(actions));
+              dispatch(resetProgramIdBatchAction([baseAction]));
               onResetProgramId();
           },
-          [customActionsOnProgramIdReset, dispatch, onResetProgramId]);
+          [dispatch, onResetProgramId]);
 
       const lockedSelectorLoads: string =
         useSelector(({ activePage }) => activePage.lockedSelectorLoads);
