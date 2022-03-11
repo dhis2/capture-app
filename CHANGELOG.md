@@ -1,3 +1,10 @@
+## [99.10.4](https://github.com/dhis2/capture-app/compare/v99.10.3...v99.10.4) (2022-03-11)
+
+
+### Bug Fixes
+
+* use api version 38 ([32b3e99](https://github.com/dhis2/capture-app/commit/32b3e99e53b535e48dc20deec739dbfcd66fc82a))
+
 ## [99.10.3](https://github.com/dhis2/capture-app/compare/v99.10.2...v99.10.3) (2022-03-11)
 
 
