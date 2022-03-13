@@ -1,3 +1,10 @@
+## [99.10.5](https://github.com/dhis2/capture-app/compare/v99.10.4...v99.10.5) (2022-03-13)
+
+
+### Bug Fixes
+
+* [TECH-1030] DisplayName not showing correctly in comments widget ([2a2dad1](https://github.com/dhis2/capture-app/commit/2a2dad14dc7d914f53dd3923a40eb2032e6cbd96))
+
 ## [99.10.4](https://github.com/dhis2/capture-app/compare/v99.10.3...v99.10.4) (2022-03-11)
 
 
