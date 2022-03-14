@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
+"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2022\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -301,6 +301,9 @@ msgstr "إظهار الـ {{trackedEntityTypeName}} المسجلة"
 
 msgid "Registered person"
 msgstr "الشخص المسجل"
+
+msgid "Link"
+msgstr "ربط"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -628,9 +631,7 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid ""
-"Choose a program to add new or see existing enrollments for "
-"{{teiDisplayName}}"
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
 msgid ""
@@ -753,9 +754,6 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
-msgid "View enrollment"
-msgstr ""
-
 msgid "Create for"
 msgstr ""
 
@@ -763,17 +761,11 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr ""
-
 msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
-
-msgid "Link"
-msgstr "ربط"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
@@ -956,12 +948,6 @@ msgid "Enrollment actions"
 msgstr ""
 
 msgid "We are processing your request."
-msgstr ""
-
-msgid "Add new"
-msgstr "إضافة جديد"
-
-msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Reactivate"

@@ -93,15 +93,13 @@ const getCacheOptionSets = (optionSets: Array<ApiOptionSet>, optionGroupsByOptio
         version: optionSet.version,
         valueType: optionSet.valueType,
         translations: optionSet.translations,
-        options: optionSet.options && [...optionSet.options.values()]
-            .filter(option => option)
-            .map(option => ({
-                id: option.id,
-                displayName: option.displayName,
-                code: option.code,
-                style: option.style,
-                translations: option.translations,
-            })),
+        options: optionSet.options && [...optionSet.options.values()].map(option => ({
+            id: option.id,
+            displayName: option.displayName,
+            code: option.code,
+            style: option.style,
+            translations: option.translations,
+        })),
         optionGroups: optionGroupsByOptionSet[optionSet.id] && optionGroupsByOptionSet[optionSet.id].map(optionGroup => ({
             id: optionGroup.id,
             displayName: optionGroup.displayName,
@@ -134,6 +132,7 @@ export async function loadOptionSets(
     const optionSets = getOptionSets(optionSetsBatches);
 
     const optionGroupsByOptionSet = getGroupsBatchesByOptionSet(optionGroupsBatches);
+
     const optionSetsToStore = getCacheOptionSets(optionSets, optionGroupsByOptionSet);
 
     const { storageController, storeNames } = getContext();

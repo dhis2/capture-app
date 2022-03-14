@@ -58,7 +58,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
                     occurredAt,
                     attributeValueFilters,
                     order,
-                    displayColumnOrder,
+                    displayOrderColumns,
                     assignedUserMode,
                     assignedUsers,
                 },
@@ -67,7 +67,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
                 name,
                 program,
                 entityQueryCriteria: {
-                    displayColumnOrder,
+                    displayOrderColumns,
                     order,
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
@@ -158,7 +158,7 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore, 
                 storeId,
                 criteria,
             } = action.payload;
-            const { programStatus, enrolledAt, occurredAt, attributeValueFilters, order, displayColumnOrder, assignedUserMode, assignedUsers } =
+            const { programStatus, enrolledAt, occurredAt, attributeValueFilters, order, displayOrderColumns, assignedUserMode, assignedUsers } =
                 criteria;
             const trackedEntityInstanceFilters = {
                 name,
@@ -169,7 +169,7 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore, 
                 userGroupAccesses,
                 userAccesses,
                 entityQueryCriteria: {
-                    displayColumnOrder,
+                    displayOrderColumns,
                     order,
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),

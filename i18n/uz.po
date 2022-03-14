@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
+"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -309,6 +309,9 @@ msgstr "Рўйхатдан ўтган {{trackedEntityTypeName}} ни кўрса�
 
 msgid "Registered person"
 msgstr "Рўйхатдан ўтган шахс"
+
+msgid "Link"
+msgstr "Ҳавола"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -640,10 +643,9 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid ""
-"Choose a program to add new or see existing enrollments for "
-"{{teiDisplayName}}"
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
+"{{teiDisplayName}} бир неча дастурларда қайд этилган. Дастурни танланг."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -769,9 +771,6 @@ msgstr "Янги сифатида сақлаш"
 msgid "View dashboard"
 msgstr "Бошқарув панелини кўриш"
 
-msgid "View enrollment"
-msgstr ""
-
 msgid "Create for"
 msgstr "Учун яратиш"
 
@@ -781,17 +780,11 @@ msgstr ""
 "Бундан ташқари, бош панелдан дастурни танлашингиз ва ушбу дастур ичида "
 "яратишингиз мумкин"
 
-msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr ""
-
 msgid "Save new"
 msgstr "Янгисини сақлаш"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Янги {{trackedEntityTypeName}} ва ҳаволани сақлаш"
-
-msgid "Link"
-msgstr "Ҳавола"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Янги {{trackedEntityName}} сифатида сақлаш"
@@ -990,12 +983,6 @@ msgid "Enrollment actions"
 msgstr ""
 
 msgid "We are processing your request."
-msgstr ""
-
-msgid "Add new"
-msgstr "Янгисини қўшиш"
-
-msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Reactivate"

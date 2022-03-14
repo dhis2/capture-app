@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
+"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -308,6 +308,9 @@ msgstr "Vis registrert {{trackedEntityTypeName}}"
 
 msgid "Registered person"
 msgstr "Registrert person"
+
+msgid "Link"
+msgstr "Link"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -638,10 +641,8 @@ msgstr ""
 msgid "Program stage not found"
 msgstr "Programfase ikke funnet"
 
-msgid ""
-"Choose a program to add new or see existing enrollments for "
-"{{teiDisplayName}}"
-msgstr ""
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr "{{teiDisplayName}} er registrert i flere programmer. Velg et program."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -767,9 +768,6 @@ msgstr "Lagre som ny"
 msgid "View dashboard"
 msgstr "Vis dashbord"
 
-msgid "View enrollment"
-msgstr ""
-
 msgid "Create for"
 msgstr "Opprett for"
 
@@ -778,17 +776,11 @@ msgid ""
 msgstr ""
 "Du kan også velge et program fra topplinjen og opprette i det programmet"
 
-msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr ""
-
 msgid "Save new"
 msgstr "Lagre ny"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Opprett ny {{trackedEntityTypeName}} og link"
-
-msgid "Link"
-msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Lagre som ny {{trackedEntityName}}"
@@ -981,12 +973,6 @@ msgstr "Registreringshandlinger"
 
 msgid "We are processing your request."
 msgstr "Vi behandler forespørselen din."
-
-msgid "Add new"
-msgstr "Legg til ny"
-
-msgid "Only one enrollment per {{tetName}} is allowed in this program"
-msgstr ""
 
 msgid "Reactivate"
 msgstr "Reaktiver"

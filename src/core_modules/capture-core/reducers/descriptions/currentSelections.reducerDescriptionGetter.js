@@ -187,14 +187,12 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         orgUnitId: undefined,
         complete: false,
     }),
-    [lockedSelectorActionTypes.FROM_URL_UPDATE]: ({ categories, categoriesMeta }, action) => {
-        const { nextProps: selections, prevProps: { programId: prevProgramId } } = action.payload;
-
-        const categorySelections = selections.programId === prevProgramId ? { categories, categoriesMeta } : {};
-
+    [lockedSelectorActionTypes.FROM_URL_UPDATE]: (state, action) => {
+        const { nextProps: selections } = action.payload;
         return {
             ...selections,
-            ...categorySelections,
+            categories: undefined,
+            categoriesMeta: undefined,
             complete: false,
         };
     },

@@ -205,7 +205,7 @@ export const TeiWorkingListsSetup = ({
             const criteria = { ...mainFilters,
                 attributeValueFilters,
                 order: `${sortById}:${sortByDirection}`,
-                displayColumnOrder: visibleColumnIds };
+                displayOrderColumns: visibleColumnIds };
             const data = {
                 program: { id: program.id },
                 clientId: uuid(),
@@ -227,7 +227,7 @@ export const TeiWorkingListsSetup = ({
             const criteria = { ...mainFilters,
                 attributeValueFilters,
                 order: `${sortById}:${sortByDirection}`,
-                displayColumnOrder: visibleColumnIds,
+                displayOrderColumns: visibleColumnIds,
             };
             const data = {
                 program: { id: program.id },

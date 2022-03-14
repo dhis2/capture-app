@@ -1,7 +1,7 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "99.10.7",
+  "version": "1.74.0",
   "cacheVersion": "1",
   "serverVersion": "38",
   "private": true,
@@ -57,7 +57,7 @@
     "redux-logger": "^3.0.6",
     "redux-observable": "^2.0.0",
     "reselect": "^4.1.5",
-    "rxjs": "^7.5.5",
+    "rxjs": "^7.5.4",
     "styled-jsx": "^4",
     "typeface-roboto": "^0.0.75",
     "uuid": "^3.3.2"
@@ -70,7 +70,7 @@
     "test": "d2-app-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "test2": "react-scripts test",
-    "jsdoc": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
+    "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
     "linter:check": "eslint -c .eslintrc . --quiet",
     "flow:check": "./node_modules/.bin/flow check ./src",
     "flow:addTypes": "flow-typed install",

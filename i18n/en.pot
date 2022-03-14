@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
-"PO-Revision-Date: 2022-03-10T08:16:14.613Z\n"
+"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
+"PO-Revision-Date: 2022-02-23T09:14:01.289Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -625,12 +625,8 @@ msgstr "No available program stages"
 msgid "Program stage not found"
 msgstr "Program stage not found"
 
-msgid ""
-"Choose a program to add new or see existing enrollments for "
-"{{teiDisplayName}}"
-msgstr ""
-"Choose a program to add new or see existing enrollments for "
-"{{teiDisplayName}}"
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
@@ -964,12 +960,6 @@ msgstr "Enrollment actions"
 
 msgid "We are processing your request."
 msgstr "We are processing your request."
-
-msgid "Add new"
-msgstr "Add new"
-
-msgid "Only one enrollment per {{tetName}} is allowed in this program"
-msgstr "Only one enrollment per {{tetName}} is allowed in this program"
 
 msgid "Reactivate"
 msgstr "Reactivate"

@@ -39,9 +39,6 @@ export const EnrollmentAddEventPageDefault = ({
         },
         [dispatch, history, programId, orgUnitId, teiId, enrollmentId],
     );
-    const handleAddNew = useCallback(() => {
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
-    }, [history, programId, orgUnitId, teiId]);
 
     const handleDelete = useCallback(() => {
         dispatch(deleteEnrollment({ enrollmentId }));
@@ -124,7 +121,6 @@ export const EnrollmentAddEventPageDefault = ({
                 onSave={handleSave}
                 onCancel={handleCancel}
                 onDelete={handleDelete}
-                onAddNew={handleAddNew}
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}
                 widgetReducerName={widgetReducerName}

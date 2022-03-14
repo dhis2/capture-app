@@ -1,13 +1,13 @@
 # 
 # Translators:
-# trendspotter <jirka.p@volny.cz>, 2022
+# Jiří Podhorecký <jirka.p@volny.cz>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
+"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
+"Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -305,6 +305,9 @@ msgstr "Zobrazit registrovaného {{trackedEntityTypeName}}"
 
 msgid "Registered person"
 msgstr "Registrovaná osoba"
+
+msgid "Link"
+msgstr "Odkaz"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
@@ -632,10 +635,8 @@ msgstr "Žádné dostupné fáze programu"
 msgid "Program stage not found"
 msgstr "Fáze programu nenalezena"
 
-msgid ""
-"Choose a program to add new or see existing enrollments for "
-"{{teiDisplayName}}"
-msgstr ""
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr "{{teiDisplayName}} je zapsán do několika programů. Vyberte program."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -644,7 +645,7 @@ msgstr ""
 "vyberte všechny kategorie."
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr "Chcete-li zobrazit ovládací panel, vyberte zápis."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} není v tomto programu zapsán."
@@ -761,9 +762,6 @@ msgstr "Uložit jako nové"
 msgid "View dashboard"
 msgstr "Zobrazit ovládací panel"
 
-msgid "View enrollment"
-msgstr ""
-
 msgid "Create for"
 msgstr "Vytvořit pro"
 
@@ -771,17 +769,11 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr "Můžete také vybrat program z horní lišty a vytvořit v něm program"
 
-msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr ""
-
 msgid "Save new"
 msgstr "Uložit nový"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
-
-msgid "Link"
-msgstr "Odkaz"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Uložit jako nový {{trackedEntityName}}"
@@ -978,12 +970,6 @@ msgstr "Akce zápisu"
 msgid "We are processing your request."
 msgstr "Zpracováváme váš požadavek."
 
-msgid "Add new"
-msgstr "Přidat nový"
-
-msgid "Only one enrollment per {{tetName}} is allowed in this program"
-msgstr ""
-
 msgid "Reactivate"
 msgstr "Znovu aktivovat"
 
@@ -1142,7 +1128,7 @@ msgstr ""
 "ovládacím panelu"
 
 msgid " Loading..."
-msgstr " Načítání..."
+msgstr ""
 
 msgid "Save changes"
 msgstr "Uložit změny"
@@ -1151,22 +1137,22 @@ msgid "Profile"
 msgstr "Profil"
 
 msgid "There is a problem with this form"
-msgstr "S tímto formulářem je problém"
+msgstr ""
 
 msgid "There are warnings in this form"
 msgstr "V tomto formuláři jsou varování"
 
 msgid "There was a problem saving changes"
-msgstr "Při ukládání změn došlo k problému"
+msgstr ""
 
 msgid "Try again or contact your system administrator for support"
-msgstr "Zkuste to znovu nebo požádejte o podporu správce systému"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
 
 msgid "Fix errors in the form to continue."
-msgstr "Chcete-li pokračovat, opravte chyby ve formuláři."
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
@@ -1196,7 +1182,7 @@ msgid "This stage can only have one event"
 msgstr "Tato fáze může mít pouze jednu událost"
 
 msgid "Events could not be retrieved. Please try again later."
-msgstr "Události se nepodařilo načíst. Prosím zkuste to znovu později."
+msgstr ""
 
 msgid "Report date"
 msgstr "Datum zprávy"

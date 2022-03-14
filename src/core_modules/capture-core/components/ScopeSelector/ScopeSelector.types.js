@@ -3,6 +3,8 @@ import type { Node } from 'react';
 
 export type OwnProps = $ReadOnly<{|
   isUserInteractionInProgress?: boolean,
+  customActionsOnOrgUnitIdReset?: Array<any>,
+  customActionsOnProgramIdReset?: Array<any>,
   pageToPush?: string,
   selectedOrgUnitId?: string,
   selectedProgramId?: string,

@@ -22,7 +22,7 @@
     "opts": {
         "template": "node_modules/docdash",
         "encoding": "utf8",
-        "destination": "./jsdoc/",
+        "destination": "./docs/",
         "recurse": true
     },
     "plugins": [

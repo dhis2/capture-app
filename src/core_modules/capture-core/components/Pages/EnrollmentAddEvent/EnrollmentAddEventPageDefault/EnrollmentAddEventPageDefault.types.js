@@ -12,7 +12,6 @@ export type Props = {|
     dataEntryHasChanges: boolean,
     onCancel: () => void,
     onDelete: () => void,
-    onAddNew: () => void,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
     rulesExecutionDependencies: Object,

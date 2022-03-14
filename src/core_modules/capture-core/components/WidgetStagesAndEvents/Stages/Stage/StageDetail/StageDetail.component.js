@@ -220,26 +220,14 @@ const StageDetailPlain = (props: Props) => {
                 onClick={handleCreateNew}
             >
                 <Tooltip
-                    content={i18n.t('This stage can only have one event')}
-                    closeDelay={50}
+                    title={shouldDisableCreateNew ? i18n.t('This stage can only have one event') : ''}
                 >
-                    {({ onMouseOver, onMouseOut, ref }) => (
-                        <div ref={(divRef) => {
-                            if (divRef && shouldDisableCreateNew) {
-                                divRef.onmouseover = onMouseOver;
-                                divRef.onmouseout = onMouseOut;
-                                ref.current = divRef;
-                            }
-                        }}
-                        >
-                            <div className={classes.icon}><IconAdd24 /></div>
-                            <div className={classes.label}>
-                                {i18n.t('New {{ eventName }} event', {
-                                    eventName, interpolation: { escapeValue: false },
-                                })}
-                            </div>
+                    <div>
+                        <div className={classes.icon}><IconAdd24 /></div>
+                        <div className={classes.label}>
+                            {i18n.t('New {{ eventName }} event', { eventName, interpolation: { escapeValue: false } })}
                         </div>
-                    )}
+                    </div>
                 </Tooltip>
             </Button>);
         };

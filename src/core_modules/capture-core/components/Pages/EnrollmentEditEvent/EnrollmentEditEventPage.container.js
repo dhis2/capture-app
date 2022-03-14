@@ -32,10 +32,6 @@ export const EnrollmentEditEventPage = () => {
         history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
     };
-    const onAddNew = () => {
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
-    };
-
     const onGoBack = () => history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
@@ -68,7 +64,6 @@ export const EnrollmentEditEventPage = () => {
             trackedEntityName={trackedEntityName}
             programId={programId}
             onDelete={onDelete}
-            onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
         />

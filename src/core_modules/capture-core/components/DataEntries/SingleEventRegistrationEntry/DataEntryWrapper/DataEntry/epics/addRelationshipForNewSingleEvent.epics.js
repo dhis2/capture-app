@@ -94,7 +94,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
 const saveNewEventRelationships = (relationshipData, selections, triggerAction) => {
     const relationship = relationshipData.find(rd => rd.to.data);
     if (relationship) {
-        const teiPayload = { trackedEntities: [{ ...relationship.to.data }] };
+        const teiPayload = relationship.to.data;
         return startSaveTeiForNewEventRelationship(teiPayload, selections, triggerAction, relationshipData, relationship.clientId);
     }
 
@@ -162,7 +162,7 @@ export const teiForNewEventRelationshipSavedEpic = (action$: InputObservable) =>
             newEventDataEntryActionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED,
         ),
         map((action) => {
-            const teiId = action.payload.bundleReport.typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
+            const teiId = action.payload.response.importSummaries[0].reference;
             const { relationshipData, relationshipClientId, selections, triggerAction } = action.meta;
             const relationship = relationshipData.find(rd => rd.clientId === relationshipClientId);
             relationship.to.id = teiId;

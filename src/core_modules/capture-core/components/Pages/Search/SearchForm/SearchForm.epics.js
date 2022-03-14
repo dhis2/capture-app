@@ -96,10 +96,7 @@ const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
                 );
             }
 
-            return showSuccessResultsViewOnSearchPage(
-                searchResults,
-                1,
-            );
+            return showEmptyResultsViewOnSearchPage();
         }),
         startWith(showLoadingViewOnSearchPage()),
         catchError(handleErrors),
@@ -268,7 +265,8 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
                     if (searchResults.length > 0) {
                         return showSuccessResultsViewOnSearchPage(searchResults, pagingData.currentPage);
                     }
-                    return showEmptyResultsViewOnSearchPage();
+
+                    return of(showEmptyResultsViewOnSearchPage());
                 }),
                 startWith(showLoadingViewOnSearchPage()),
                 catchError(handleErrors),
