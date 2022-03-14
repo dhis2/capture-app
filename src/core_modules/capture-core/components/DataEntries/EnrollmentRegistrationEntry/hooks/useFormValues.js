@@ -81,6 +81,8 @@ const useClientAttributesWithSubvalues = (program: InputProgramData, attributes:
                 ];
             }, Promise.resolve([]));
             setListAttributes(computedAttributes);
+        } else {
+            setListAttributes([]);
         }
     }, [program, attributes, dataEngine]);
 
@@ -115,18 +117,24 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
     const formValuesReadyRef = useRef<any>(false);
     const [formValues, setFormValues] = useState<any>({});
     const [clientValues, setClientValues] = useState<any>({});
+    const areAttributesWithSubvaluesReady =
+        (teiId && clientAttributesWithSubvalues.length > 0) || (!teiId && clientAttributesWithSubvalues.length === 0);
+
+    useEffect(() => {
+        formValuesReadyRef.current = false;
+    }, [teiId]);
 
     useEffect(() => {
         if (
             orgUnit?.code &&
             Object.entries(formFoundation).length > 0 &&
             formValuesReadyRef.current === false &&
-            ((teiId && clientAttributesWithSubvalues.length > 0) || !teiId)
+            areAttributesWithSubvaluesReady
         ) {
             const staticPatternValues = { orgUnitCode: orgUnit.code };
             buildFormValues(formFoundation, clientAttributesWithSubvalues, staticPatternValues, setFormValues, setClientValues, formValuesReadyRef);
         }
-    }, [formFoundation, clientAttributesWithSubvalues, formValues, formValuesReadyRef, orgUnit, teiId]);
+    }, [formFoundation, clientAttributesWithSubvalues, formValuesReadyRef, orgUnit, areAttributesWithSubvaluesReady]);
 
     return { formValues, clientValues, formValuesReadyRef };
 };

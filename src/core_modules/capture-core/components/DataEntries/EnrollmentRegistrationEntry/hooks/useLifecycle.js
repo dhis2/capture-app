@@ -31,6 +31,10 @@ export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
     });
 
     useEffect(() => {
+        dataEntryReadyRef.current = false;
+    }, [teiId]);
+
+    useEffect(() => {
         if (dataEntryReadyRef.current === false && formValuesReadyRef.current === true && scopeType === scopeTypes.TRACKER_PROGRAM) {
             dataEntryReadyRef.current = true;
             dispatch(
