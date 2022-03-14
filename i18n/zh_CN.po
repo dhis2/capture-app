@@ -2,14 +2,14 @@
 # Translators:
 # Aung Kyi Min <AungKyi.Min@savethechildren.org>, 2020
 # 晓东 林 <13981924470@126.com>, 2021
-# easylin <lin_xd@126.com>, 2021
+# easylin <lin_xd@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-01-04T12:43:12.873Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -645,10 +645,10 @@ msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
 msgid "Event details"
-msgstr ""
+msgstr "事件详情"
 
 msgid "Event completed"
-msgstr ""
+msgstr "事件完成"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
