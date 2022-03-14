@@ -15,12 +15,6 @@ import {
     SingleLockedSelect,
 } from '../../ScopeSelector';
 import { TopBarActions } from '../../TopBarActions';
-import { cleanUpDataEntry } from './NewPage.actions';
-import {
-    NEW_TEI_DATA_ENTRY_ID,
-    NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID,
-    NEW_SINGLE_EVENT_DATA_ENTRY_ID,
-} from './NewPage.constants';
 
 type TopBarProps = {
     programId?: string,
@@ -77,18 +71,8 @@ export const NewPageTopBar = ({
             onSetCategoryOption={dispatchOnSetCategoryOption}
             onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
             onResetCategoryOption={dispatchOnResetCategoryOption}
-            onResetOrgUnitId={() => resetOrgUnitId()}
             onResetProgramId={() => resetProgramIdAndTeiId()}
-            customActionsOnProgramIdReset={[
-                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
-            ]}
-            customActionsOnOrgUnitIdReset={[
-                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
-            ]}
+            onResetOrgUnitId={() => resetOrgUnitId()}
             isUserInteractionInProgress={isUserInteractionInProgress}
         >
             {teiId && (

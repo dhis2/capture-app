@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2021
-# phil_dhis2, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
+"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -292,9 +292,6 @@ msgid "Show registered {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Registered person"
-msgstr ""
-
-msgid "Link"
 msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
@@ -622,7 +619,9 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
 
 msgid ""
@@ -745,6 +744,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -752,10 +754,16 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
@@ -939,6 +947,12 @@ msgid "Enrollment actions"
 msgstr ""
 
 msgid "We are processing your request."
+msgstr ""
+
+msgid "Add new"
+msgstr "ເພີ່ມໃໝ່"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Reactivate"

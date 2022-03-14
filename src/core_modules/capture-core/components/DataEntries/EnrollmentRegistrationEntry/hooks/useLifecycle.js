@@ -38,6 +38,10 @@ export const useLifecycle = (
     }, [teiId]);
 
     useEffect(() => {
+        dataEntryReadyRef.current = false;
+    }, [teiId]);
+
+    useEffect(() => {
         if (
             dataEntryReadyRef.current === false &&
             formValuesReadyRef.current === true &&

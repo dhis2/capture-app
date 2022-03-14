@@ -50,6 +50,7 @@ const EnrollmentAddEventPagePain = ({
     widgetEffects,
     hideWidgets,
     onDelete,
+    onAddNew,
     pageFailure,
     ready,
     classes,
@@ -124,6 +125,7 @@ const EnrollmentAddEventPagePain = ({
                             enrollmentId={enrollmentId}
                             programId={programId}
                             onDelete={onDelete}
+                            onAddNew={onAddNew}
                         />
                     </div>
                 </div>

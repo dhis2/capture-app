@@ -3,15 +3,15 @@
 # David Júnior <davidjr.mondlane@gmail.com>, 2022
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # Ge Joao <gsimango@saudigitus.org>, 2022
-# phil_dhis2, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
+"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -313,9 +313,6 @@ msgstr "Mostrar {{trackedEntityTypeName}} registrado"
 
 msgid "Registered person"
 msgstr "Pessoa registrada"
-
-msgid "Link"
-msgstr "Ligação"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Sair desta página descartará as alterações feitas neste evento."
@@ -644,9 +641,10 @@ msgstr ""
 msgid "Program stage not found"
 msgstr "Estágio do programa não encontrado"
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
-"{{teiDisplayName}} está inscrito em vários programas. Escolha um programa."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -773,6 +771,9 @@ msgstr "Salvar como novo"
 msgid "View dashboard"
 msgstr "Ver painel de controle"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Criar para"
 
@@ -782,11 +783,17 @@ msgstr ""
 "Você também pode escolher um programa na barra superior e criar nesse "
 "programa"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "Salvar novo"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Salve o novo {{trackedEntityTypeName}} e vincule-o"
+
+msgid "Link"
+msgstr "Ligação"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Salvar como novo {{trackedEntityName}}"
@@ -987,6 +994,12 @@ msgstr "Ações de inscrição"
 
 msgid "We are processing your request."
 msgstr "Estamos processando sua requisição."
+
+msgid "Add new"
+msgstr "Novo"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr ""
 
 msgid "Reactivate"
 msgstr "Reativar"

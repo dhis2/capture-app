@@ -1,3 +1,96 @@
+## [99.10.7](https://github.com/dhis2/capture-app/compare/v99.10.6...v99.10.7) (2022-03-14)
+
+
+### Bug Fixes
+
+* [DHIS2-12837] Edit single event epic fix ([0727177](https://github.com/dhis2/capture-app/commit/0727177bbc9a428087e763b6f74a0ed40c82345e))
+
+## [99.10.6](https://github.com/dhis2/capture-app/compare/v99.10.5...v99.10.6) (2022-03-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([afaf672](https://github.com/dhis2/capture-app/commit/afaf6722eba89e931c2e77360e95807d1e576a20))
+
+## [99.10.5](https://github.com/dhis2/capture-app/compare/v99.10.4...v99.10.5) (2022-03-13)
+
+
+### Bug Fixes
+
+* [TECH-1030] DisplayName not showing correctly in comments widget ([2a2dad1](https://github.com/dhis2/capture-app/commit/2a2dad14dc7d914f53dd3923a40eb2032e6cbd96))
+
+## [99.10.4](https://github.com/dhis2/capture-app/compare/v99.10.3...v99.10.4) (2022-03-11)
+
+
+### Bug Fixes
+
+* use api version 38 ([32b3e99](https://github.com/dhis2/capture-app/commit/32b3e99e53b535e48dc20deec739dbfcd66fc82a))
+
+## [99.10.3](https://github.com/dhis2/capture-app/compare/v99.10.2...v99.10.3) (2022-03-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ade3666](https://github.com/dhis2/capture-app/commit/ade366610f66fb48f25ae1b33f23d0cb0eb9c5ba))
+
+## [99.10.2](https://github.com/dhis2/capture-app/compare/v99.10.1...v99.10.2) (2022-03-09)
+
+
+### Bug Fixes
+
+* [DHIS2-12667] report date label ([#2599](https://github.com/dhis2/capture-app/issues/2599)) ([c5168b2](https://github.com/dhis2/capture-app/commit/c5168b22c7f8831fb06a4dcb8d718731f1175256))
+* [DHIS2-12778] tooltip display ([#2600](https://github.com/dhis2/capture-app/issues/2600)) ([535ade9](https://github.com/dhis2/capture-app/commit/535ade9907d158be00784550f030c38fe3371186))
+
+## [99.10.1](https://github.com/dhis2/capture-app/compare/v99.10.0...v99.10.1) (2022-03-09)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5a2d4bf](https://github.com/dhis2/capture-app/commit/5a2d4bf250bd446d0f1deb3f9df2880524604520))
+
+# [99.10.0](https://github.com/dhis2/capture-app/compare/v99.9.14...v99.10.0) (2022-03-08)
+
+
+### Features
+
+* [DHIS2-12514] Add new option in enrollment widget ([#2531](https://github.com/dhis2/capture-app/issues/2531)) ([8c0e792](https://github.com/dhis2/capture-app/commit/8c0e792ba6d47e8315326e90d0b8839ddf0c3df8))
+
+## [99.9.14](https://github.com/dhis2/capture-app/compare/v99.9.13...v99.9.14) (2022-03-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([859e3d1](https://github.com/dhis2/capture-app/commit/859e3d114e228069f1d4d0b0592b4a801fa8695a))
+
+## [99.9.13](https://github.com/dhis2/capture-app/compare/v99.9.12...v99.9.13) (2022-03-07)
+
+
+### Bug Fixes
+
+* displayColumnOrder name ([#2586](https://github.com/dhis2/capture-app/issues/2586)) ([0e98781](https://github.com/dhis2/capture-app/commit/0e98781e994c671002b834bac98b6729e29286cc))
+
+## [99.9.12](https://github.com/dhis2/capture-app/compare/v99.9.11...v99.9.12) (2022-03-07)
+
+
+### Bug Fixes
+
+* fiter options ([35949c5](https://github.com/dhis2/capture-app/commit/35949c50339bd6c2312202da4c14d40859ef38ab))
+
+## [99.9.11](https://github.com/dhis2/capture-app/compare/v99.9.10...v99.9.11) (2022-03-06)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7597bef](https://github.com/dhis2/capture-app/commit/7597befad08f65144ed6590be93ea78115259b5e))
+
+## [99.9.10](https://github.com/dhis2/capture-app/compare/v99.9.9...v99.9.10) (2022-03-04)
+
+
+### Bug Fixes
+
+* [DHIS2-12727] [DHIS2-12726] Error when trying to create new events with relationship ([ea83f75](https://github.com/dhis2/capture-app/commit/ea83f756f6e4e9b0cd29a7fcaaa98be8f8529fae))
+* [DHIS2-12727] [DHIS2-12726] Error when trying to create new events with relationship ([873c3c0](https://github.com/dhis2/capture-app/commit/873c3c0ba547877d12413605a3312874b6113ddb))
+
 # [1.74.0](https://github.com/dhis2/capture-app/compare/v1.73.0...v1.74.0) (2022-03-02)
 
 
