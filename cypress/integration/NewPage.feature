@@ -100,7 +100,7 @@ Feature: User creates a new entries from the registration page
       Given you are in the Person registration page
       When you fill in a unique first name
       And you click the save new submit button
-      Then you are navigated to the enrollment page without enrollment
+      Then you navigated to the enrollment dashboard page without enrollment
 
   Scenario: New person > Submitting the form from the duplicates modal navigates you to the user dashboard
     Given you are in the Person registration page
@@ -108,7 +108,7 @@ Feature: User creates a new entries from the registration page
     And you click the save new submit button
     And you see the possible duplicates modal
     And you submit the form again from the duplicates modal
-    Then you are navigated to the enrollment page without enrollment
+    Then you navigated to the enrollment dashboard page without enrollment
 
   Scenario: New person > Submitting the form shows a list with duplicates
     Given you are in the Person registration page
