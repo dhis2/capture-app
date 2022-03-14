@@ -6,7 +6,7 @@ import { getDisplayName } from '../trackedEntityInstances/getDisplayName';
 
 const getClientConstraintByType = {
     TRACKED_ENTITY_INSTANCE: (constraint, relationshipConstraint) => {
-        const tei = constraint.trackedEntityInstance;
+        const tei = constraint.trackedEntity;
         const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(tei.trackedEntityType);
         const values = tei.attributes.reduce((accValues, attr) => {
             accValues[attr.attribute] = attr.value;
