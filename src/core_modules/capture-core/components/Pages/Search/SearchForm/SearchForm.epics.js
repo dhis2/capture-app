@@ -166,7 +166,6 @@ export const searchViaAttributesOnScopeProgramEpic: Epic = (action$, store) =>
                 page,
                 pageSize: 5,
                 ouMode: 'ACCESSIBLE',
-                fields: '*',
             };
 
             return searchViaAttributesStream(queryArgs, attributes, triggeredFrom);
