@@ -16,6 +16,7 @@ import {
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
+import { scopeSelectorActionTypes } from '../../components/ScopeSelector';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
 
@@ -186,12 +187,14 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         orgUnitId: undefined,
         complete: false,
     }),
-    [lockedSelectorActionTypes.FROM_URL_UPDATE]: (state, action) => {
-        const { nextProps: selections } = action.payload;
+    [lockedSelectorActionTypes.FROM_URL_UPDATE]: ({ categories, categoriesMeta }, action) => {
+        const { nextProps: selections, prevProps: { programId: prevProgramId } } = action.payload;
+
+        const categorySelections = selections.programId === prevProgramId ? { categories, categoriesMeta } : {};
+
         return {
             ...selections,
-            categories: undefined,
-            categoriesMeta: undefined,
+            ...categorySelections,
             complete: false,
         };
     },
@@ -215,6 +218,19 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return resetCategoryOption(state, categoryId);
     },
     [lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET]: state => ({
+        ...state,
+        categories: undefined,
+        categoriesMeta: undefined,
+    }),
+    [scopeSelectorActionTypes.CATEGORY_OPTION_SET]: (state, action) => {
+        const { categoryId, categoryOption } = action.payload;
+        return setCategoryOption(state, categoryId, categoryOption);
+    },
+    [scopeSelectorActionTypes.CATEGORY_OPTION_RESET]: (state, action) => {
+        const { categoryId } = action.payload;
+        return resetCategoryOption(state, categoryId);
+    },
+    [scopeSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET]: state => ({
         ...state,
         categories: undefined,
         categoriesMeta: undefined,
