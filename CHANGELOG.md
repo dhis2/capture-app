@@ -1,3 +1,10 @@
+# [99.11.0](https://github.com/dhis2/capture-app/compare/v99.10.8...v99.11.0) (2022-03-14)
+
+
+### Features
+
+* [DHIS2-12627] TEI context in ScopeSelector in new page ([#2598](https://github.com/dhis2/capture-app/issues/2598)) ([cf525db](https://github.com/dhis2/capture-app/commit/cf525db469479bd40713cf9256e949aea792e02a))
+
 ## [99.10.8](https://github.com/dhis2/capture-app/compare/v99.10.7...v99.10.8) (2022-03-14)
 
 

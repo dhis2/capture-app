@@ -36,6 +36,10 @@ const NewPagePlain = ({
     orgUnitSelectionIncomplete,
     isUserInteractionInProgress,
     programId,
+    teiId,
+    trackedEntityName,
+    teiDisplayName,
+    trackedEntityInstanceAttributes,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
@@ -66,6 +70,9 @@ const NewPagePlain = ({
             orgUnitId={orgUnitId}
             programId={programId}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            teiId={teiId}
+            trackedEntityName={trackedEntityName}
+            teiDisplayName={teiDisplayName}
         />
         <div data-test="registration-page-content" className={classes.container} >
             {
@@ -82,6 +89,7 @@ const NewPagePlain = ({
                                 dataEntryId={NEW_TEI_DATA_ENTRY_ID}
                                 selectedScopeId={selectedScopeId}
                                 setScopeId={setScopeId}
+                                trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
                             />
                         }
 

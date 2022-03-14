@@ -8,9 +8,14 @@ import { useLocationQuery } from '../../../../utils/routing';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../common/useRegistrationFormInfoForSelectedScope';
-import { useFormValues, useTrackedEntityInstances } from './index';
+import { useFormValues } from './index';
+import type { InputAttribute } from './useFormValues';
 
-export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
+export const useLifecycle = (
+    selectedScopeId: string,
+    dataEntryId: string,
+    trackedEntityInstanceAttributes?: Array<InputAttribute>,
+) => {
     const { teiId, programId } = useLocationQuery();
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
@@ -21,7 +26,6 @@ export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
     const orgUnit = useOrganisationUnit(orgUnitId)?.orgUnit;
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-    const { trackedEntityInstanceAttributes } = useTrackedEntityInstances(teiId, programId);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
@@ -29,7 +33,6 @@ export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
         formFoundation,
         teiId,
     });
-
     useEffect(() => {
         dataEntryReadyRef.current = false;
     }, [teiId]);
