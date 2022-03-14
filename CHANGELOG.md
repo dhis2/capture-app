@@ -1,3 +1,12 @@
+## [99.10.8](https://github.com/dhis2/capture-app/compare/v99.10.7...v99.10.8) (2022-03-14)
+
+
+### Bug Fixes
+
+* [DHIS2-12733] EnrollmentRegistrationEntry lifecycle ([#2585](https://github.com/dhis2/capture-app/issues/2585)) ([a425f57](https://github.com/dhis2/capture-app/commit/a425f572ce3d1c97651ab309c9edf68b419d6f9c))
+* [DHIS2-12740] Send null for erased values ([c3007c1](https://github.com/dhis2/capture-app/commit/c3007c17122d0f3ae956e01580f699bdc28cee2e))
+* remove fields query arg ([8fe021c](https://github.com/dhis2/capture-app/commit/8fe021c2b338681f202d2b07ed8b1023db22e044))
+
 ## [99.10.7](https://github.com/dhis2/capture-app/compare/v99.10.6...v99.10.7) (2022-03-14)
 
 

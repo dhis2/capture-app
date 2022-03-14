@@ -15,7 +15,7 @@ export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
     const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]);
-    const program = getProgramThrowIfNotFound(programId);
+    const program = programId && getProgramThrowIfNotFound(programId);
     const orgUnitId = useCurrentOrgUnitInfo()?.id;
     // https://jira.dhis2.org/browse/DHIS2-12387 some cases the orgUnit code is missing in the Redux store. Get it from the API for now.
     const orgUnit = useOrganisationUnit(orgUnitId)?.orgUnit;
@@ -35,7 +35,11 @@ export const useLifecycle = (selectedScopeId: string, dataEntryId: string) => {
     }, [teiId]);
 
     useEffect(() => {
-        if (dataEntryReadyRef.current === false && formValuesReadyRef.current === true && scopeType === scopeTypes.TRACKER_PROGRAM) {
+        if (
+            dataEntryReadyRef.current === false &&
+            formValuesReadyRef.current === true &&
+            scopeType === scopeTypes.TRACKER_PROGRAM
+        ) {
             dataEntryReadyRef.current = true;
             dispatch(
                 startNewEnrollmentDataEntryInitialisation({
