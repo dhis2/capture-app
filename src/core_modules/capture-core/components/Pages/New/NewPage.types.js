@@ -3,6 +3,16 @@ import { typeof newPageStatuses } from './NewPage.constants';
 
 type ProgramCategories = Array<{|name: string, id: string|}>
 
+type InputAttribute = {
+  attribute: string,
+  code: string,
+  created: string,
+  displayName: string,
+  lastUpdated: string,
+  value: string,
+  valueType: string,
+};
+
 export type ContainerProps = $ReadOnly<{|
   showMessageToSelectOrgUnitOnNewPage: ()=>void,
   showMessageToSelectProgramCategoryOnNewPage: ()=>void,
@@ -18,6 +28,10 @@ export type ContainerProps = $ReadOnly<{|
   ready: boolean,
   isUserInteractionInProgress: boolean,
   programId?: string,
+  teiId?: string,
+  trackedEntityName?: string,
+  teiDisplayName?: string,
+  trackedEntityInstanceAttributes?: Array<InputAttribute>
 |}
 >
 
