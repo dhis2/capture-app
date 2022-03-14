@@ -965,6 +965,12 @@ msgstr "Enrollment actions"
 msgid "We are processing your request."
 msgstr "We are processing your request."
 
+msgid "Add new"
+msgstr "Add new"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr "Only one enrollment per {{tetName}} is allowed in this program"
+
 msgid "Reactivate"
 msgstr "Reactivate"
 
