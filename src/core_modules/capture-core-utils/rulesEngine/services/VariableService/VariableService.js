@@ -503,9 +503,12 @@ export class VariableService {
             },
         );
 
-        variables = { ...variables, ...this.getEventContextVariables(sourceData.executingEvent, sourceData.eventsContainer) };
-        variables = { ...variables, ...this.getEnrollmentContextVariables(sourceData.selectedEnrollment) };
-        variables = { ...variables, ...this.getOrganisationContextVariables(sourceData.selectedOrgUnit) };
+        variables = {
+            ...variables,
+            ...this.getEventContextVariables(sourceData.executingEvent, sourceData.eventsContainer),
+            ...this.getEnrollmentContextVariables(sourceData.selectedEnrollment),
+            ...this.getOrganisationContextVariables(sourceData.selectedOrgUnit),
+        };
 
         return variables;
     }
@@ -533,6 +536,13 @@ export class VariableService {
                 typeKeys.TEXT, {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                     variableEventDate: executingEvent.occurredAt,
+                },
+            );
+
+            variables.program_stage_id = this.buildVariable(
+                executingEvent.programStageId,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                 },
             );
         }
