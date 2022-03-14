@@ -47,7 +47,9 @@ export const WidgetEnrollmentPlain = ({
     refetch,
     error,
     loading,
+    canAddNew,
     onDelete,
+    onAddNew,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
 
@@ -199,9 +201,13 @@ export const WidgetEnrollmentPlain = ({
                             </div>
                         )}
                         <Actions
+                            tetName={program.trackedEntityType.displayName}
+                            onlyEnrollOnce={program.onlyEnrollOnce}
                             enrollment={enrollment}
                             refetch={refetch}
                             onDelete={onDelete}
+                            onAddNew={onAddNew}
+                            canAddNew={canAddNew}
                         />
                     </div>
                 )}
