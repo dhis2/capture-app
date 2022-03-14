@@ -195,7 +195,7 @@ When('you are navigated to the Child Programme registration page with program se
 });
 
 When('you have Child Programme selected', () => {
-    cy.get('[data-test="locked-selector"]')
+    cy.get('[data-test="scope-selector"]')
         .contains('Child Programme');
 });
 
@@ -449,5 +449,12 @@ And('you see the form prefield with existing TEI attributes values', () => {
         cy.get('[data-test="capture-ui-input"]').eq(5).should('have.value', 'Jones');
         cy.contains('Gender').should('exist');
         cy.contains('Female').should('exist');
+    });
+});
+
+And('the scope selector has the TEI context', () => {
+    cy.get('[data-test="scope-selector"]').within(() => {
+        cy.contains('Selected person').should('exist');
+        cy.contains('Anna Jones').should('exist');
     });
 });

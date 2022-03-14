@@ -24,7 +24,7 @@ type InputProgramData = {
     }>,
 };
 
-type InputAttribute = {
+export type InputAttribute = {
     attribute: string,
     code: string,
     created: string,
