@@ -1,5 +1,10 @@
 // @flow
-export { scopeSelectorActionTypes } from './ScopeSelector.actions';
+export {
+    scopeSelectorActionTypes,
+    setCategoryOptionFromScopeSelector,
+    resetCategoryOptionFromScopeSelector,
+    resetAllCategoryOptionsFromScopeSelector,
+} from './ScopeSelector.actions';
 export {
     useSetProgramId,
     useSetOrgUnitId,

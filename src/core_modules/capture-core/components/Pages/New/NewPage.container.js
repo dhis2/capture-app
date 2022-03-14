@@ -11,8 +11,6 @@ import {
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
@@ -42,7 +40,7 @@ const useUserWriteAccess = (scopeId) => {
 export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { orgUnitId: queryOrgUnitId } = useLocationQuery();
+    const { orgUnitId, programId } = useLocationQuery();
 
     const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
@@ -69,13 +67,13 @@ export const NewPage: ComponentType<{||}> = () => {
     // the selection is incomplete we want the user to see a specific message
     const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
-    const orgUnitSelectionIncomplete: boolean = useSelector(({ currentSelections: { orgUnitId, complete } }) => !(queryOrgUnitId || orgUnitId) && !complete);
+    const orgUnitSelectionIncomplete: boolean = useSelector(
+        ({ currentSelections }) => !currentSelections.orgUnitId && !currentSelections.complete,
+    );
 
     const newPageStatus: $Keys<newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);
 
-    const { id: orgUnitId } = useCurrentOrgUnitInfo();
-    const { id: programId } = useCurrentProgramInfo();
     const handleMainPageNavigation = () => {
         history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
@@ -106,5 +104,6 @@ export const NewPage: ComponentType<{||}> = () => {
             error={error}
             ready={ready}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            programId={programId}
         />);
 };
