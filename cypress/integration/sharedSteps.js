@@ -136,3 +136,12 @@ Then(/^the current url is (.*)$/, (url) => {
 Then(/^the user ?(.*) see the following text: (.*)$/, (not, message) =>
     cy.contains(message).should(not ? 'not.exist' : 'exist'),
 );
+
+And('you navigated to the enrollment dashboard page', () => {
+    cy.url().should('include', 'enrollment?enrollmentId');
+});
+
+Then('you should see no results found', () => {
+    cy.contains('No results found')
+        .should('exist');
+});
