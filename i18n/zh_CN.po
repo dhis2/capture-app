@@ -1,14 +1,14 @@
 # 
 # Translators:
-# easylin <lin_xd@126.com>, 2021
 # 晓东 林 <13981924470@126.com>, 2022
+# easylin <lin_xd@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-02T12:32:54.352Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -209,7 +209,7 @@ msgid "No write access"
 msgstr "无写权限"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "新的{{titleText}}"
 
 msgid "Switch to form view"
 msgstr "切换到表单视图"
@@ -250,7 +250,7 @@ msgid "New event"
 msgstr "新事件"
 
 msgid "You don't have access to create an event in the current selections"
-msgstr ""
+msgstr "您无权在当前选择中创建活动"
 
 msgid "Save"
 msgstr "保存"
@@ -512,10 +512,10 @@ msgid "New"
 msgstr "新建"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "{{programName}}中的新{{trackedEntityName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "在{{programName}}中搜索{{trackedEntityName}}"
 
 msgid "Clear selections"
 msgstr "清除选择"
@@ -593,21 +593,21 @@ msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
+msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
-msgstr ""
+msgstr "打开此报名时出现错误。请输入有效网址。"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
+msgstr "ID为“ {{enrollmentId}}”的报名不存在"
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
-msgstr ""
+msgstr "{{programName}}具有类别。选择所有类别以查看仪表板。"
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
@@ -615,27 +615,28 @@ msgid ""
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "该项目未报名{{teiDisplayName}} 。"
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "在此项目中报名{{teiDisplayName}}。"
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
+"{{teiDisplayName}}是一个{{tetName}}，无法报名到{{programName}}中。选择另一个允许{{tetName}}报名的项目。"
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr ""
+msgstr "在此项目中报名新的{{selectedTetName}}。"
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr ""
+msgstr "{{programName}}是事件项目，不需要报名。"
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "在此项目中创建一个新事件。"
 
 msgid "View working list in this program."
-msgstr ""
+msgstr "查看此项目中的工作清单。"
 
 msgid "Delete event"
 msgstr "删除事件"
@@ -674,13 +675,13 @@ msgid "Registering unit"
 msgstr "注册机构"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "登记日期"
 
 msgid "Inactive"
 msgstr "闲置"
 
 msgid "Working list could not be updated"
-msgstr ""
+msgstr "工作清单无法更新"
 
 msgid "Update view"
 msgstr "更新视图"
@@ -722,20 +723,20 @@ msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
 
 msgid "Save as new"
-msgstr ""
+msgstr "另存为新"
 
 msgid "View dashboard"
 msgstr "查看仪表盘"
 
 msgid "Create for"
-msgstr ""
+msgstr "为创建"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
-msgstr ""
+msgstr "您也可以从顶部栏中选择一个项目并在该项目中创建"
 
 msgid "Save new"
-msgstr ""
+msgstr "保存新"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
@@ -744,7 +745,7 @@ msgid "Link"
 msgstr "链接"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "另存为新的{{trackedEntityName}}"
 
 msgid "Organisation Unit"
 msgstr "组织机构"
@@ -781,7 +782,7 @@ msgid "Search {{name}}"
 msgstr "搜索{{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "按{{name}}搜索"
 
 msgid "Search by attributes"
 msgstr "按属性搜索"
@@ -790,7 +791,7 @@ msgid "Back"
 msgstr "后退"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "搜索{{titleText}}"
 
 msgid "Search for"
 msgstr "搜索"
@@ -847,10 +848,10 @@ msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
 msgid "Event details"
-msgstr ""
+msgstr "事件详情"
 
 msgid "Event completed"
-msgstr ""
+msgstr "事件完成"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -873,7 +874,7 @@ msgid "Possible duplicates found"
 msgstr "发现可能的重复"
 
 msgid "An error occurred loading possible duplicates"
-msgstr ""
+msgstr "加载可能的重复项时发生错误"
 
 msgid "You dont have access to delete this relationship"
 msgstr "你v不能访问删除的关系"
@@ -912,7 +913,7 @@ msgid "An error has occured. See log for details"
 msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "项目{{escape}} {{programName}}中的{{trackedEntityName}}"
 
 msgid "Program not found"
 msgstr "没有发现项目"
@@ -927,7 +928,7 @@ msgid "Error saving event"
 msgstr "保存时间错误"
 
 msgid "Could not save event"
-msgstr ""
+msgstr "无法保存事件"
 
 msgid "Could not delete event"
 msgstr "不能删除事件"
@@ -942,13 +943,13 @@ msgid "Could not delete working list"
 msgstr "不能删除工作列表"
 
 msgid "Organisation unit search failed."
-msgstr ""
+msgstr "组织机构搜索失败。"
 
 msgid "Error saving tracked entity instance"
-msgstr ""
+msgstr "保存跟踪的实体实例时出错"
 
 msgid "Error saving enrollment"
-msgstr ""
+msgstr "保存报名时出错"
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
