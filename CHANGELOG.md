@@ -1,3 +1,10 @@
+## [99.10.7](https://github.com/dhis2/capture-app/compare/v99.10.6...v99.10.7) (2022-03-14)
+
+
+### Bug Fixes
+
+* [DHIS2-12837] Edit single event epic fix ([0727177](https://github.com/dhis2/capture-app/commit/0727177bbc9a428087e763b6f74a0ed40c82345e))
+
 ## [99.10.6](https://github.com/dhis2/capture-app/compare/v99.10.5...v99.10.6) (2022-03-14)
 
 
