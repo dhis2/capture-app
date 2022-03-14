@@ -1,13 +1,11 @@
 // @flow
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { batchActions } from 'redux-batched-actions';
 import i18n from '@dhis2/d2-i18n';
 import { ActionButtons } from './TopBarActions.component';
 import { openNewRegistrationPageFromScopeSelector, openSearchPageFromScopeSelector } from './TopBarActions.actions';
-import {
-    resetAllCategoryOptionsFromScopeSelector,
-    resetProgramIdBatchAction,
-} from '../ScopeSelector/ScopeSelector.actions';
+import { resetAllCategoryOptionsFromScopeSelector } from '../ScopeSelector/ScopeSelector.actions';
 import { resetProgramIdBase } from '../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { useReset, useSetOrgUnitId } from '../ScopeSelector/hooks';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
@@ -57,7 +55,7 @@ export const TopBarActions = ({
             setOpenStartAgainWarning(true);
         } else {
             const actions = [resetProgramIdBase(), openNewRegistrationPageFromScopeSelector()];
-            dispatch(resetProgramIdBatchAction(actions));
+            dispatch(batchActions(actions));
             setOrgUnitId(selectedOrgUnitId, 'new', false);
         }
     };
@@ -75,7 +73,7 @@ export const TopBarActions = ({
             setOpenStartAgainWarning(true);
         } else {
             const actions = [resetProgramIdBase(), openSearchPageFromScopeSelector(), ...customActionsOnProgramIdReset];
-            dispatch(resetProgramIdBatchAction(actions));
+            dispatch(batchActions(actions));
             setOrgUnitId(selectedOrgUnitId, 'search', false);
         }
     };
