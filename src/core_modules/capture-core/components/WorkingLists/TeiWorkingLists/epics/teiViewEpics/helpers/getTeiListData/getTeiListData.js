@@ -52,7 +52,7 @@ const createApiQueryArgs = ({
     page,
     pageSize,
     programId: program,
-    orgUnitId: ou,
+    orgUnitId: orgUnit,
     filters,
     sortById,
     sortByDirection,
@@ -65,8 +65,8 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
     order: getApiOrderByQueryArgument(sortById, sortByDirection, columnsMetaForDataFetching),
     page,
     pageSize,
-    ou,
-    ouMode: ou ? 'SELECTED' : 'ACCESSIBLE',
+    orgUnit,
+    ouMode: orgUnit ? 'SELECTED' : 'ACCESSIBLE',
     program,
     fields: ':all,programOwners[ownerOrgUnit,program]',
 });
@@ -80,11 +80,11 @@ export const getTeiListData = async (
     }: InputMeta,
 ) => {
     const { resource, queryArgs } = {
-        resource: 'trackedEntityInstances',
+        resource: 'tracker/trackedEntities',
         queryArgs: createApiQueryArgs(rawQueryArgs, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching),
     };
 
-    const { trackedEntityInstances: apiTeis = [] } = await querySingleResource({
+    const { instances: apiTeis = [] } = await querySingleResource({
         resource,
         params: queryArgs,
     });

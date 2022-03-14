@@ -55,16 +55,16 @@ const getEventDateQueryArgs = (filter: Array<string> | string) => {
         eventDateQueryArgs = filter
             .reduce((accEventDateQueryArgs, filterPart: string) => {
                 if (filterPart.startsWith('ge')) {
-                    accEventDateQueryArgs.startDate = filterPart.replace('ge:', '');
+                    accEventDateQueryArgs.occurredAfter = filterPart.replace('ge:', '');
                 } else {
-                    accEventDateQueryArgs.endDate = filterPart.replace('le:', '');
+                    accEventDateQueryArgs.occurredBefore = filterPart.replace('le:', '');
                 }
                 return accEventDateQueryArgs;
             }, {});
     } else if (filter.startsWith('ge')) {
-        eventDateQueryArgs.startDate = filter.replace('ge:', '');
+        eventDateQueryArgs.occurredAfter = filter.replace('ge:', '');
     } else {
-        eventDateQueryArgs.endDate = filter.replace('le:', '');
+        eventDateQueryArgs.occurredBefore = filter.replace('le:', '');
     }
     return eventDateQueryArgs;
 };
@@ -86,7 +86,7 @@ const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainC
                 .reduce((accMainQueryArgs, key) => {
                     const filter = getFilter(filters[key]);
                     let queryArgsForCurrentMain = {};
-                    if (key === 'eventDate') {
+                    if (key === 'occurredAt') {
                         queryArgsForCurrentMain = getEventDateQueryArgs(filter);
                     } else if (key === 'status') {
                         queryArgsForCurrentMain = getStatusQueryArgs(filter);
@@ -181,7 +181,6 @@ export const getEventListData = async (
 
     const { eventContainers, pagingData, request } =
         await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId));
-
     const columnKeys = [...columnsMetaForDataFetching.keys()];
     const columnFilteredEventContainers: Array<{ id: string, record: Object }> = eventContainers
         .map(({ id, event, values }) => ({ id, record: { ...event, ...values } }))

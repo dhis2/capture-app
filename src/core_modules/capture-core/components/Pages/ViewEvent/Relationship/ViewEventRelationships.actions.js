@@ -41,9 +41,9 @@ export const saveEventRelationshipNewTei = (clientData: Object, selections: Obje
     actionCreator(actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE)({ selections }, {
         offline: {
             effect: {
-                url: 'trackedEntityInstances',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
-                data: clientData.to.data,
+                data: { trackedEntities: [clientData.to.data] },
                 clientId,
             },
             commit: { type: actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS, meta: { clientData, selections, clientId } },
@@ -55,7 +55,7 @@ export const startSaveEventRelationship = (serverData: Object, selections: Objec
     actionCreator(actionTypes.START_SAVE_EVENT_RELATIONSHIP)({ selections }, {
         offline: {
             effect: {
-                url: 'relationships',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
                 clientId,

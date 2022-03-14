@@ -16,9 +16,9 @@ const prepareAttributesForRulesEngine =
             return accAttributeValues;
         }, {});
 
-const prepareEnrollmentDataForRulesEngine = ({ enrollmentDate, incidentDate, enrollmentId }) => ({
-    enrollmentDate: convertServerToClient(enrollmentDate, dataElementTypes.DATE),
-    incidentDate: convertServerToClient(incidentDate, dataElementTypes.DATE),
+const prepareEnrollmentDataForRulesEngine = ({ enrolledAt, occurredAt, enrollmentId }) => ({
+    enrolledAt: convertServerToClient(enrolledAt, dataElementTypes.DATE),
+    occurredAt: convertServerToClient(occurredAt, dataElementTypes.DATE),
     enrollmentId,
 });
 

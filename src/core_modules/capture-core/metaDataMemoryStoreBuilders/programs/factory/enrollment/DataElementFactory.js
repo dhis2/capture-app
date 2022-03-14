@@ -83,7 +83,7 @@ export class DataElementFactory {
                     const orgUnitId = contextProps.orgUnitId;
                     requestPromise = getApi()
                         .get(
-                            'trackedEntityInstances',
+                            'tracker/trackedEntities',
                             {
                                 program: contextProps.programId,
                                 ou: orgUnitId,
@@ -93,7 +93,7 @@ export class DataElementFactory {
                 } else {
                     requestPromise = getApi()
                         .get(
-                            'trackedEntityInstances',
+                            'tracker/trackedEntities',
                             {
                                 program: contextProps.programId,
                                 ouMode: 'ACCESSIBLE',
@@ -103,15 +103,16 @@ export class DataElementFactory {
                 }
                 return requestPromise
                     .then((result) => {
-                        const trackedEntityInstance =
-                                (result.trackedEntityInstances && result.trackedEntityInstances[0]) || {};
+                        const otherTrackedEntityInstances = result?.instances?.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId) || [];
+                        const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
+
                         const data = {
                             id: trackedEntityInstance.trackedEntityInstance,
                             tetId: trackedEntityInstance.trackedEntityType,
                         };
 
                         return {
-                            valid: result.trackedEntityInstances.length === 0,
+                            valid: otherTrackedEntityInstances.length === 0,
                             data,
                         };
                     });

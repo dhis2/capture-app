@@ -98,6 +98,7 @@ export type CachedProgramStage = {
     displayName: string,
     description: ?string,
     executionDateLabel?: ?string,
+    dueDateLabel?: ?string,
     programStageSections: ?Array<CachedProgramStageSection>,
     programStageDataElements: ?Array<CachedProgramStageDataElement>,
     formType: string,

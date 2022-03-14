@@ -58,7 +58,7 @@ export const saveEvent = (serverData: Object, onSaveSuccessActionType?: string, 
     actionCreator(newEventWidgetActionTypes.EVENT_SAVE)({}, {
         offline: {
             effect: {
-                url: 'events',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
             },

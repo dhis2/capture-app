@@ -94,8 +94,8 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
             const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
-            if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedDate) {
-                mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+            if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedAt) {
+                mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
             }
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
@@ -113,14 +113,16 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
 
             const serverData = {
-                ...mainDataServerValues,
-                dataValues: Object
-                    .keys(formServerValues)
-                    .map(key => ({
-                        dataElement: key,
-                        value: formServerValues[key],
-                    }))
-                    .filter(({ value }) => value != null),
+                events: [{
+                    ...mainDataServerValues,
+                    dataValues: Object
+                        .keys(formServerValues)
+                        .map(key => ({
+                            dataElement: key,
+                            value: formServerValues[key],
+                        }))
+                        .filter(({ value }) => value != null),
+                }],
             };
 
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
@@ -132,7 +134,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             if (program instanceof TrackerProgram) {
                 return batchActions([
                     updateEventContainer(eventContainer, orgUnit),
-                    updateEnrollmentEvents(eventId, serverData),
+                    updateEnrollmentEvents(eventId, serverData.events[0]),
                     startSaveEditEventDataEntry(eventId, serverData, state.currentSelections, enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }
@@ -145,13 +147,8 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED),
-        map((action) => {
-            const meta = action.meta;
-            if (meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT) {
-                return commitEnrollmentEvent(meta.eventId);
-            }
-            return null;
-        }));
+        filter(({ meta }) => meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT),
+        map(({ meta }) => commitEnrollmentEvent(meta.eventId)));
 
 export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

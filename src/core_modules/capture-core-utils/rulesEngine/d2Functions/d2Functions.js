@@ -1,5 +1,6 @@
 import log from 'loglevel';
 import { getZScoreWFA, getZScoreWFH, getZScoreHFA } from './zScoreFunctions';
+import { extractDataMatrixValue } from './gs1DataMatrixFuntions';
 
 export const d2Functions = (dateUtils, variableService, variablesHash) => ({
     'd2:concatenate': {
@@ -320,6 +321,11 @@ export const d2Functions = (dateUtils, variableService, variablesHash) => ({
         name: 'd2:zScoreHFA',
         parameters: 3,
         dhisFunction: params => getZScoreHFA(params[0], params[1], params[2]),
+    },
+    'd2:extractDataMatrixValue': {
+        name: 'd2:extractDataMatrixValue',
+        parameters: 2,
+        dhisFunction: params => extractDataMatrixValue(params[0], params[1]),
     },
     'd2:length': {
         name: 'd2:length',

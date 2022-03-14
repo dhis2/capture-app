@@ -60,7 +60,6 @@ const NewEventDataEntryWrapperPlain = ({
         return isCustom;
     };
     const isCustomForm = checkIfCustomForm();
-
     return (
         <Paper className={classes.paper}>
             <div className={classes.title} >

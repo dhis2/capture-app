@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
+import uuid from 'uuid/v4';
 import i18n from '@dhis2/d2-i18n';
 import {
     dataElementTypes,
@@ -10,7 +11,10 @@ import { WorkingListsBase } from '../../WorkingListsBase';
 import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
+import { convertToTEIFilterMainFilters, convertToTEIFilterAttributes } from '../helpers/TEIFilters/clientConfigToApiTEIFilterQueryConverter';
+import { MAIN_FILTERS } from '../constants';
 
+const DEFAULT_TEMPLATES_LENGTH = 1;
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
     (currentTemplateId && templates.find(template => template.id === currentTemplateId)) || templates[0],
 [templates, currentTemplateId]);
@@ -67,7 +71,7 @@ const useStaticTemplates = () => useMemo(() => ([{
 }]), []);
 
 const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel } }: TrackerProgram) => useMemo(() => [{
-    id: 'programStatus',
+    id: MAIN_FILTERS.PROGRAM_STATUS,
     type: dataElementTypes.TEXT,
     header: i18n.t('Enrollment status'),
     options: [
@@ -79,7 +83,7 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
         programStatus: rawFilter.split(':')[1],
     }),
 }, {
-    id: 'enrollmentDate',
+    id: MAIN_FILTERS.ENROLLED_AT,
     type: dataElementTypes.DATE,
     header: enrollmentDateLabel,
     transformRecordsFilter: (filter: Array<string> | string) => {
@@ -88,21 +92,21 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
             queryArgs = filter
                 .reduce((acc, filterPart: string) => {
                     if (filterPart.startsWith('ge')) {
-                        acc.programStartDate = filterPart.replace('ge:', '');
+                        acc.enrollmentEnrolledAfter = filterPart.replace('ge:', '');
                     } else {
-                        acc.programEndDate = filterPart.replace('le:', '');
+                        acc.enrollmentEnrolledBefore = filterPart.replace('le:', '');
                     }
                     return acc;
                 }, {});
         } else if (filter.startsWith('ge')) {
-            queryArgs.programStartDate = filter.replace('ge:', '');
+            queryArgs.enrollmentEnrolledAfter = filter.replace('ge:', '');
         } else {
-            queryArgs.programEndDate = filter.replace('le:', '');
+            queryArgs.enrollmentEnrolledBefore = filter.replace('le:', '');
         }
         return queryArgs;
     },
 }, {
-    id: 'incidentDate',
+    id: MAIN_FILTERS.OCCURED_AT,
     type: dataElementTypes.DATE,
     header: incidentDateLabel,
     transformRecordsFilter: (filter: Array<string> | string) => {
@@ -111,21 +115,21 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
             queryArgs = filter
                 .reduce((acc, filterPart: string) => {
                     if (filterPart.startsWith('ge')) {
-                        acc.programIncidentStartDate = filterPart.replace('ge:', '');
+                        acc.enrollmentOccurredAfter = filterPart.replace('ge:', '');
                     } else {
-                        acc.programIncidentEndDate = filterPart.replace('le:', '');
+                        acc.enrollmentOccurredBefore = filterPart.replace('le:', '');
                     }
                     return acc;
                 }, {});
         } else if (filter.startsWith('ge')) {
-            queryArgs.programIncidentStartDate = filter.replace('ge:', '');
+            queryArgs.enrollmentOccurredBefore = filter.replace('ge:', '');
         } else {
-            queryArgs.programIncidentEndDate = filter.replace('le:', '');
+            queryArgs.enrollmentOccurredBefore = filter.replace('le:', '');
         }
         return queryArgs;
     },
 }, {
-    id: 'assignee',
+    id: MAIN_FILTERS.ASSIGNEE,
     type: dataElementTypes.ASSIGNEE,
     header: i18n.t('Assigned to'),
     transformRecordsFilter: (rawFilter: Object) => rawFilter,
@@ -172,12 +176,18 @@ export const TeiWorkingListsSetup = ({
     sortById,
     sortByDirection,
     orgUnitId,
+    apiTemplates,
+    onAddTemplate,
+    onUpdateTemplate,
+    onDeleteTemplate,
     ...passOnProps
 }: Props) => {
     const defaultColumns = useDefaultColumnConfig(program, orgUnitId);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
-    const templates = useStaticTemplates();
+    const staticTemplates = useStaticTemplates();
+    const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
+
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
         defaultColumns,
@@ -187,12 +197,62 @@ export const TeiWorkingListsSetup = ({
         sortByDirection,
     });
 
+    const injectArgumentsForAddTemplate = useCallback(
+        (name) => {
+            const mainFilters = convertToTEIFilterMainFilters({ filters, mainFilters: filtersOnly });
+            const attributeValueFilters = convertToTEIFilterAttributes({ filters, attributeValueFilters: columns });
+            const visibleColumnIds = columns && columns.filter(({ visible }) => visible).map(({ id }) => id);
+            const criteria = { ...mainFilters,
+                attributeValueFilters,
+                order: `${sortById}:${sortByDirection}`,
+                displayColumnOrder: visibleColumnIds };
+            const data = {
+                program: { id: program.id },
+                clientId: uuid(),
+                sortById,
+                sortByDirection,
+                filters,
+                visibleColumnIds,
+            };
+            onAddTemplate(name, criteria, data);
+        },
+        [onAddTemplate, filters, filtersOnly, columns, sortById, sortByDirection, program.id],
+    );
+
+    const injectArgumentsForUpdateTemplate = useCallback(
+        (template) => {
+            const mainFilters = convertToTEIFilterMainFilters({ filters, mainFilters: filtersOnly });
+            const attributeValueFilters = convertToTEIFilterAttributes({ filters, attributeValueFilters: columns });
+            const visibleColumnIds = columns && columns.filter(({ visible }) => visible).map(({ id }) => id);
+            const criteria = { ...mainFilters,
+                attributeValueFilters,
+                order: `${sortById}:${sortByDirection}`,
+                displayColumnOrder: visibleColumnIds,
+            };
+            const data = {
+                program: { id: program.id },
+                clientId: uuid(),
+                sortById,
+                sortByDirection,
+                filters,
+                visibleColumnIds,
+            };
+            onUpdateTemplate(template, criteria, data);
+        },
+        [onUpdateTemplate, filters, filtersOnly, columns, sortById, sortByDirection, program.id],
+    );
+
+    const injectArgumentsForDeleteTemplate = useCallback(template => onDeleteTemplate(template, program.id), [onDeleteTemplate, program.id]);
+
     return (
         <WorkingListsBase
             {...passOnProps}
             currentTemplate={useCurrentTemplate(templates, currentTemplateId)}
             templates={templates}
             columns={columns}
+            onAddTemplate={injectArgumentsForAddTemplate}
+            onUpdateTemplate={injectArgumentsForUpdateTemplate}
+            onDeleteTemplate={injectArgumentsForDeleteTemplate}
             filtersOnly={filtersOnly}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectDataFetchingMetaToLoadList(defaultColumns, filtersOnly, onLoadView)}

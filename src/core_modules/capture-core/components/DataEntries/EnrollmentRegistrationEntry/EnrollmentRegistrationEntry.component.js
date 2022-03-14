@@ -110,7 +110,7 @@ const EnrollmentRegistrationEntryPlain =
 
 export const EnrollmentRegistrationEntryComponent: ComponentType<Props> =
   compose(
-      withErrorMessagePostProcessor(),
+      withErrorMessagePostProcessor((({ enrollmentMetadata }) => enrollmentMetadata.trackedEntityType.name)),
       withLoadingIndicator(() => ({ height: '350px' })),
       withDuplicateCheckOnSave(),
       withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm, onIsCompleting: () => true }),

@@ -4,6 +4,7 @@ export type OwnProps = $ReadOnly<{|
   setScopeId: Function,
   selectedScopeId: string,
   dataEntryId: string,
+  teiId?: ?string,
 |}>;
 
 type ContainerProps = {|

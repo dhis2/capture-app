@@ -44,11 +44,11 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore)
                 },
                 lastUpdated: moment().toISOString(),
                 storedBy: userName,
-                storedDate: moment().toISOString(),
+                storedAt: moment().toISOString(),
             };
             const formNote = {
                 ...clientNote,
-                storedDate: convertListValue(clientNote.storedDate, dataElementTypes.DATETIME),
+                storedAt: convertListValue(clientNote.storedAt, dataElementTypes.DATETIME),
             };
             const saveContext = {
                 dataEntryId: payload.dataEntryId,

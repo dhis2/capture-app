@@ -19,7 +19,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         useMemo(
             () => ({
                 trackedEntityInstance: {
-                    resource: 'trackedEntityInstances',
+                    resource: 'tracker/trackedEntities',
                     id: ({ variables: { teiId: updatedTeiId } }) => updatedTeiId,
                     params: ({ variables: { programId: updatedProgramId } }) => ({
                         program: updatedProgramId,

@@ -1,6 +1,7 @@
 // @flow
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
+import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -11,8 +12,8 @@ import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
 import type { Props } from './widgetProfile.types';
-import { DataEntry } from './DataEntry';
 import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues } from './hooks';
+import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, getTeiDisplayName } from './DataEntry';
 
 const styles = {
     header: {
@@ -24,20 +25,23 @@ const styles = {
     },
 };
 
-const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = '', classes }: Props) => {
+const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = '', onUpdateTeiAttributeValues, classes }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    const [toggleEditModal, setToggleEditModal] = useState(false);
+    const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
+    const { storedAttributeValues, hasError } = useSelector(({ trackedEntityInstance }) => ({
+        storedAttributeValues: trackedEntityInstance?.attributeValues,
+        hasError: trackedEntityInstance?.hasError }));
     const {
         loading: trackedEntityInstancesLoading,
-        trackedEntityInstances,
         error: trackedEntityInstancesError,
-    } = useTrackedEntityInstances(teiId, programId);
+        trackedEntityInstanceAttributes,
+    } = useTrackedEntityInstances(teiId, programId, storedAttributeValues);
 
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
-
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstances);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
+    const teiDisplayName = getTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
@@ -53,6 +57,17 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                 attribute, key, value,
             };
         }), [clientAttributesWithSubvalues]);
+
+    useEffect(() => {
+        hasError && setTeiModalState(TEI_MODAL_STATE.OPEN_ERROR);
+    }, [hasError]);
+
+    useEffect(() => {
+        if (storedAttributeValues?.length > 0) {
+            setTeiModalState(TEI_MODAL_STATE.CLOSE);
+            onUpdateTeiAttributeValues && onUpdateTeiAttributeValues(storedAttributeValues, teiDisplayName);
+        }
+    }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
 
     const renderProfile = () => {
         if (loading) {
@@ -77,7 +92,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                     <div className={classes.header}>
                         <div> {i18n.t('Person Profile')} </div>
                         {showEdit && (
-                            <Button onClick={() => setToggleEditModal(true)} small>
+                            <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} small>
                                 {i18n.t('Edit')}
                             </Button>
                         )}
@@ -89,12 +104,17 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
             >
                 {renderProfile()}
             </Widget>
-            {!loading && !error && showEdit && toggleEditModal && (
+            {!loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE && (
                 <DataEntry
-                    onCancel={() => setToggleEditModal(false)}
+                    onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
+                    onDisable={() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE)}
                     programAPI={program}
                     orgUnitId={orgUnitId}
                     clientAttributesWithSubvalues={clientAttributesWithSubvalues}
+                    trackedEntityInstanceId={teiId}
+                    onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
+                    onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}
+                    modalState={modalState}
                 />
             )}
         </div>

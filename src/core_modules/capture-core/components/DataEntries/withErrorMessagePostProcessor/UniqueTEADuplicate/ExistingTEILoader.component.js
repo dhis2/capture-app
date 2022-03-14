@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { makeCancelablePromise } from 'capture-core-utils';
+import type { ErrorData } from 'capture-ui/FormBuilder';
 import { getApi } from '../../../../d2/d2Instance';
 import { ExistingTEIContents } from './ExistingTEIContents.container';
 import { withLoadingIndicator } from '../../../../HOC/withLoadingIndicator';
-import type { ErrorData } from './uniqueTEADuplicate.types';
 
 const LoadingInddicatorWrappedContents = withLoadingIndicator()(ExistingTEIContents);
 

@@ -22,11 +22,11 @@ export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable) =>
             // $FlowFixMe[prop-missing] automated comment
             const userName = getCurrentUser().username;
 
-            const storedDate = moment().toISOString();
+            const storedAt = moment().toISOString();
             const note = {
                 value: payload.note,
                 storedBy: userName,
-                storedDate: convertListValue(storedDate, dataElementTypes.DATETIME),
+                storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
                 clientId: uuid(),
             };
 

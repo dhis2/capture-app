@@ -16,6 +16,7 @@ const NewEnrollmentRelationshipPlain =
       duplicatesReviewPageSize,
       renderDuplicatesDialogActions,
       renderDuplicatesCardActions,
+      ExistingUniqueValueDialogActions,
   }: Props) => {
       const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
       const { trackedEntityType } = enrollmentMetadata || {};
@@ -35,6 +36,7 @@ const NewEnrollmentRelationshipPlain =
               duplicatesReviewPageSize={duplicatesReviewPageSize}
               renderDuplicatesDialogActions={renderDuplicatesDialogActions}
               renderDuplicatesCardActions={renderDuplicatesCardActions}
+              ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
           />
       );
   };

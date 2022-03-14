@@ -17,10 +17,10 @@ import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../../utils
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
-    moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
+    moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
 
 const teiQuery = id => ({
-    resource: 'trackedEntityInstances',
+    resource: 'tracker/trackedEntities',
     id,
     params: {
         fields: ['attributes', 'enrollments', 'trackedEntityType'],
@@ -74,13 +74,13 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
                     enrollmentId,
                 }));
             }
-            return from(querySingleResource({ resource: 'enrollments', id: enrollmentId }))
+            return from(querySingleResource({ resource: 'tracker/enrollments', id: enrollmentId }))
                 .pipe(
-                    map(({ trackedEntityInstance, program, orgUnit }) =>
+                    map(({ trackedEntity, program, orgUnit }) =>
                         openEnrollmentPage({
                             programId: program,
                             orgUnitId: orgUnit,
-                            teiId: trackedEntityInstance,
+                            teiId: trackedEntity,
                             enrollmentId,
                         })),
                     catchError(() => {

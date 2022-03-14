@@ -55,6 +55,7 @@ export type ProgramRuleEffect = {
     optionGroupId: ?string,
     optionId: ?string,
     content: string,
+    displayContent: string,
     data: ?string,
     style?: ?Object,
 };
@@ -62,6 +63,7 @@ export type ProgramRuleEffect = {
 export type ProgramRuleAction = {
     id: string,
     content: string,
+    displayContent: string,
     data: ?string,
     location: ?string,
     programRuleActionType: string,

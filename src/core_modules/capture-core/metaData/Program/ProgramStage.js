@@ -107,9 +107,9 @@ export class ProgramStage {
         return this._reportDateToUse;
     }
 
-    set reportDateToUse(reportDate: string = 'enrollmentDate') {
+    set reportDateToUse(reportDate: string = 'enrolledAt') {
         if (reportDate === 'false') {
-            this._reportDateToUse = 'enrollmentDate';
+            this._reportDateToUse = 'enrolledAt';
         } else {
             this._reportDateToUse = reportDate;
         }

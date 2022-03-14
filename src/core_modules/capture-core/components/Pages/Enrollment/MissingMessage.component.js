@@ -65,9 +65,9 @@ const useNavigations = () => {
     const history = useHistory();
     const { tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
-    const { programId, orgUnitId } = useLocationQuery();
+    const { programId, orgUnitId, teiId } = useLocationQuery();
     const navigateToProgramRegistrationPage = () =>
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     const navigateToEventWorkingList = () =>
         history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToTetRegistrationPage = () =>
@@ -96,7 +96,7 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('{{teiDisplayName}} is enrolled in multiple programs. Choose a program.', {
+                {i18n.t('Choose a program to add new or see existing enrollments for {{teiDisplayName}}', {
                     teiDisplayName, interpolation: { escapeValue: false },
                 })}
             </IncompleteSelectionsMessage>
@@ -115,7 +115,7 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
         {
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('There are multiple enrollments for this program. Choose an enrollment to view the dashboard.')}
+                {i18n.t('Choose an enrollment to view the dashboard.')}
             </IncompleteSelectionsMessage>
 
         }

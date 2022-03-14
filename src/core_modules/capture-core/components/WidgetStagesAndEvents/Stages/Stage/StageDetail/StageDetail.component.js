@@ -72,13 +72,8 @@ const StageDetailPlain = (props: Props) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate);
-    const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events);
+    const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElements, events);
 
-    React.useEffect(() => {
-        if (!dataSource?.length) {
-            computeData();
-        }
-    }, [dataSource, computeData]);
 
     const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
@@ -125,7 +120,7 @@ const StageDetailPlain = (props: Props) => {
     }
 
     function renderRows() {
-        if (!dataSource) {
+        if (!dataSource || loading) {
             return null;
         }
         return dataSource
@@ -225,14 +220,26 @@ const StageDetailPlain = (props: Props) => {
                 onClick={handleCreateNew}
             >
                 <Tooltip
-                    title={shouldDisableCreateNew ? i18n.t('This stage can only have one event') : ''}
+                    content={i18n.t('This stage can only have one event')}
+                    closeDelay={50}
                 >
-                    <div>
-                        <div className={classes.icon}><IconAdd24 /></div>
-                        <div className={classes.label}>
-                            {i18n.t('New {{ eventName }} event', { eventName, interpolation: { escapeValue: false } })}
+                    {({ onMouseOver, onMouseOut, ref }) => (
+                        <div ref={(divRef) => {
+                            if (divRef && shouldDisableCreateNew) {
+                                divRef.onmouseover = onMouseOver;
+                                divRef.onmouseout = onMouseOut;
+                                ref.current = divRef;
+                            }
+                        }}
+                        >
+                            <div className={classes.icon}><IconAdd24 /></div>
+                            <div className={classes.label}>
+                                {i18n.t('New {{ eventName }} event', {
+                                    eventName, interpolation: { escapeValue: false },
+                                })}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </Tooltip>
             </Button>);
         };
@@ -249,6 +256,13 @@ const StageDetailPlain = (props: Props) => {
         );
     }
 
+    if (error) {
+        return (
+            <div>
+                {i18n.t('Events could not be retrieved. Please try again later.')}
+            </div>
+        );
+    }
     return (
         <div className={classes.container}>
             <DataTable

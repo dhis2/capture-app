@@ -23,7 +23,7 @@ export const saveNewTrackedEntityInstance = candidateForRegistration =>
         {
             offline: {
                 effect: {
-                    url: 'trackedEntityInstances',
+                    url: 'tracker?async=false',
                     method: effectMethods.POST,
                     data: candidateForRegistration,
                 },
@@ -39,15 +39,15 @@ export const saveNewTrackedEntityInstance = candidateForRegistration =>
     );
 
 // with enrollment
-export const startSavingNewTrackedEntityInstanceWithEnrollment = formFoundation =>
-    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START)({ formFoundation });
+export const startSavingNewTrackedEntityInstanceWithEnrollment = (formFoundation, teiId) =>
+    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START)({ formFoundation, teiId });
 
 export const saveNewTrackedEntityInstanceWithEnrollment = candidateForRegistration =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE)({ ...candidateForRegistration },
         {
             offline: {
                 effect: {
-                    url: 'trackedEntityInstances',
+                    url: 'tracker?async=false',
                     method: effectMethods.POST,
                     data: candidateForRegistration,
                 },

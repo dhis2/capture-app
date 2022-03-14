@@ -5,7 +5,7 @@ describe('Event Event rules engine', () => {
     // these variables are shared between each test
     const constants = [{ id: 'Gfd3ppDfq8E', displayName: 'Commodity ordering overhead', value: 5 }, { id: 'bCqvfPR02Im', displayName: 'Pi', value: 3.14 }];
     const dataElementsInProgram = { sWoqcoByYmD: { id: 'sWoqcoByYmD', valueType: 'BOOLEAN' }, Ok9OQpitjQr: { id: 'Ok9OQpitjQr', valueType: 'BOOLEAN' }, vANAXwtLwcT: { id: 'vANAXwtLwcT', valueType: 'NUMBER' } };
-    const programRules = [{ id: 'GC4gpdoSD4r', condition: '#{hemoglobin} < 9', description: 'Show warning if hemoglobin is dangerously low', displayName: 'Hemoglobin warning', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'suS9GnraCx1', content: 'Hemoglobin value lower than normal', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWWARNING' }] }, { id: 'dahuKlP7jR2', condition: '#{hemoglobin} > 99', description: 'Show error for hemoglobin value higher than 99', displayName: 'Show error for high hemoglobin value', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'UUwZWS8uirn', content: 'The hemoglobin value cannot be above 99', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWERROR' }] }, { id: 'xOe5qCzRS0Y', condition: '!#{womanSmoking} ', description: 'Hide smoking cessation councelling dataelement unless patient is smoking', displayName: 'Hide smoking cessation councelling', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'hwgyO59SSxu', dataElementId: 'Ok9OQpitjQr', programRuleActionType: 'HIDEFIELD' }] }];
+    const programRules = [{ id: 'GC4gpdoSD4r', condition: '#{hemoglobin} < 9', description: 'Show warning if hemoglobin is dangerously low', displayName: 'Hemoglobin warning', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'suS9GnraCx1', content: 'Hemoglobin value lower than normal', displayContent: 'Hemoglobin value lower than normal', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWWARNING' }] }, { id: 'dahuKlP7jR2', condition: '#{hemoglobin} > 99', description: 'Show error for hemoglobin value higher than 99', displayName: 'Show error for high hemoglobin value', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'UUwZWS8uirn', content: 'The hemoglobin value cannot be above 99', displayContent: 'The hemoglobin value cannot be above 99', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWERROR' }] }, { id: 'xOe5qCzRS0Y', condition: '!#{womanSmoking} ', description: 'Hide smoking cessation councelling dataelement unless patient is smoking', displayName: 'Hide smoking cessation councelling', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'hwgyO59SSxu', dataElementId: 'Ok9OQpitjQr', programRuleActionType: 'HIDEFIELD' }] }];
     const programRuleVariables = [{ id: 'Z92dJO9gIje', dataElementId: 'sWoqcoByYmD', displayName: 'womanSmoking', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'omrL0gtPpDL', dataElementId: 'vANAXwtLwcT', displayName: 'hemoglobin', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }];
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
     const optionSets = {};
@@ -406,7 +406,7 @@ describe('Event rules engine effects with functions and effects', () => {
         ],
         [
             {
-                oZg33kd9taw: 'Male', qrur9Dvnyt5: 0, eventDate: '2020-04-30T22:00:00.000Z',
+                oZg33kd9taw: 'Male', qrur9Dvnyt5: 0, occurredAt: '2020-04-30T22:00:00.000Z',
             },
             [
                 { type: 'DISPLAYTEXT', displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = 10" } },
@@ -438,7 +438,7 @@ describe('Event rules engine effects with functions and effects', () => {
         ],
         [
             {
-                oZg33kd9taw: 'Male', qrur9Dvnyt5: 1000000000, eventDate: '2020-04-30T22:00:00.000Z',
+                oZg33kd9taw: 'Male', qrur9Dvnyt5: 1000000000, occurredAt: '2020-04-30T22:00:00.000Z',
             },
             [
                 { type: 'DISPLAYTEXT', displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = 10" } },

@@ -6,6 +6,7 @@ export type Props = {|
     enrollmentId: string,
     programId: string,
     onDelete: () => void,
+    onAddNew: () => void,
 |};
 
 export type PlainProps = {|
@@ -15,6 +16,8 @@ export type PlainProps = {|
     refetch: QueryRefetchFunction,
     error?: FetchError,
     loading: boolean,
+    canAddNew: boolean,
     onDelete: () => void,
+    onAddNew: () => void,
     ...CssClasses,
 |};

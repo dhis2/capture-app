@@ -38,7 +38,7 @@ export const storeProgramRulesVariables = async (programIds: Array<string>) => {
     const query = {
         resource: 'programRuleVariables',
         params: {
-            fields: 'id,displayName,programRuleVariableSourceType,' +
+            fields: 'id,displayName,programRuleVariableSourceType,valueType,' +
                 'program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet',
             filter: `program.id:in:[${programIds.join(',')}]`,
         },

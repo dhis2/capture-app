@@ -1,6 +1,7 @@
 // @flow
 import { typeof dataElementTypes } from '../../../../metaData';
 import type { Categories } from '../../WorkingListsBase';
+import type { ApiTEIQueryCriteria } from './apiTemplate.types';
 
 type TeiRecord = {| [id: string]: any |};
 
@@ -16,7 +17,7 @@ export type TeiWorkingListsTemplate = {
         write: boolean,
         manage: boolean,
     },
-    criteria?: {| [string]: any |},
+    criteria?: ApiTEIQueryCriteria,
     notPreserved?: boolean,
     deleted?: boolean,
     updating?: boolean,

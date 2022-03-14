@@ -1,5 +1,7 @@
 // @flow
 import React from 'react';
+import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
+import { useSelector } from 'react-redux';
 import { ViewEvent } from './ViewEventComponent/ViewEvent.container';
 import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRelationshipWrapper.container';
 import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
@@ -10,18 +12,21 @@ type Props = {
   showAddRelationship: boolean,
 };
 
-export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => (
-    <div>
+export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => {
+    const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
+
+    return (<div>
         <LockedSelector
             isUserInteractionInProgress={isUserInteractionInProgress}
             customActionsOnProgramIdReset={[customProgramIdReset()]}
             customActionsOnOrgUnitIdReset={[customOrgUnitIdIdReset()]}
         />
-
-        {
-            showAddRelationship ?
-                <ViewEventNewRelationshipWrapper /> :
-                <ViewEvent />
-        }
+        <OrgUnitFetcher orgUnitId={orgUnitId}>
+            {
+                showAddRelationship ?
+                    <ViewEventNewRelationshipWrapper /> :
+                    <ViewEvent />
+            }
+        </OrgUnitFetcher>
     </div>);
-
+};

@@ -12,7 +12,7 @@ import { mainPropertyNames } from '../../../../../../../events/mainPropertyNames
 export const getDefaultMainConfig = (stage: ProgramStage) => {
     const baseFields = [
         {
-            id: mainPropertyNames.EVENT_DATE,
+            id: mainPropertyNames.OCCURRED_AT,
             visible: true,
             isMainProperty: true,
             type: elementTypeKeys.DATE,

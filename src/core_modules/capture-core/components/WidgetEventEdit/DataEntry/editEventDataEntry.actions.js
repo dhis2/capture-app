@@ -107,7 +107,7 @@ export const openEventForEditInDataEntry = ({
     const itemId = editEventIds.itemId;
     const dataEntryPropsToInclude = [
         {
-            id: 'eventDate',
+            id: 'occurredAt',
             type: 'DATE',
             validatorContainers: getEventDateValidatorContainers(),
         },
@@ -181,12 +181,12 @@ export const startRunRulesOnUpdateForEditSingleEvent = (actionData: { payload: O
 export const requestSaveReturnToMainPage = (itemId: string, dataEntryId: string, formFoundation: Object) =>
     actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ itemId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] });
 
-export const startSaveEditEventAfterReturnedToMainPage = (eventId: string, serverData: Object, selections: Object) =>
+export const startSaveEditEventAfterReturnedToMainPage = (serverData: Object, selections: Object) =>
     actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)({ selections }, {
         offline: {
             effect: {
-                url: `events/${eventId}`,
-                method: effectMethods.UPDATE,
+                url: 'tracker?async=false&importStrategy=UPDATE',
+                method: effectMethods.POST,
                 data: serverData,
             },
             commit: { type: actionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE, meta: { selections } },

@@ -72,5 +72,5 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
             const orgUnit = state
                 .organisationUnits[orgUnitId];
 
-            return of(initializeRegisterTei(null, orgUnit));
+            return of(initializeRegisterTei(suggestedProgramId, orgUnit));
         }));

@@ -131,7 +131,8 @@ export class ProgramStageFactory {
                 _form.description = cachedProgramStage.description;
                 _form.featureType = ProgramStageFactory._getFeatureType(cachedProgramStage);
                 _form.access = cachedProgramStage.access;
-                _form.addLabel({ id: 'eventDate', label: cachedProgramStage.executionDateLabel || 'Incident date' });
+                _form.addLabel({ id: 'occurredAt', label: cachedProgramStage.executionDateLabel || 'Report date' });
+                _form.addLabel({ id: 'scheduledAt', label: cachedProgramStage.dueDateLabel || 'Scheduled date' });
                 _form.validationStrategy =
                     cachedProgramStage.validationStrategy &&
                     camelCaseUppercaseString(cachedProgramStage.validationStrategy);

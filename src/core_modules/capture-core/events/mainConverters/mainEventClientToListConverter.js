@@ -10,9 +10,9 @@ export function convertMainEventClientToList(event: Object) {
         let convertedValue;
 
         switch (key) {
-        case 'eventDate':
+        case 'occurredAt':
         case 'dueDate':
-        case 'completedDate':
+        case 'completedAt':
             convertedValue = convertClientToList(value, dataElementTypes.DATE);
             break;
         case 'assignee':

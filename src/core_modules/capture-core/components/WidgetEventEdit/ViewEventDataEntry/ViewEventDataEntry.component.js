@@ -22,6 +22,7 @@ import {
     withFilterProps,
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
+import { EventLabelsByStatus } from './viewEventDataEntry.const';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -111,17 +112,16 @@ const viewModeComponent = withDefaultFieldContainer()(
 
 const buildReportDateSettingsFn = () => {
     const dataElement = new DataElement((o) => {
-        o.id = 'eventDate';
         o.type = dataElementTypes.DATE;
     });
 
     const reportDateSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: props.formFoundation.getLabel(dataElement.id),
+            label: props.formFoundation.getLabel(EventLabelsByStatus[props.eventStatus]),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getPropName: () => dataElement.id,
+        getPropName: (props: Object) => EventLabelsByStatus[props.eventStatus],
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,

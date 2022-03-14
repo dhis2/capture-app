@@ -94,18 +94,18 @@ const deriveEnrollmentType =
   };
 
 const deriveEnrollmentOrgUnitAndDate =
-  (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrollmentDate?: string} => {
+  (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrolledAt?: string} => {
       if (!currentProgramId) {
           return {};
       }
-      const { orgUnitName, enrollmentDate } =
+      const { orgUnitName, enrolledAt } =
         enrollments
             .filter(({ program }) => program === currentProgramId)
             .filter(({ status }) => status === enrollmentType)
             .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0]
         || {};
 
-      return { orgUnitName, enrollmentDate };
+      return { orgUnitName, enrolledAt };
   };
 
 
@@ -128,7 +128,7 @@ const CardListItemIndex = ({
     };
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
-    const { orgUnitName, enrollmentDate } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
+    const { orgUnitName, enrolledAt } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
 
     return (
         <div data-test="card-list-item" className={classes.itemContainer}>
@@ -160,9 +160,9 @@ const CardListItemIndex = ({
                                 }
 
                                 {
-                                    enrollmentDate &&
+                                    enrolledAt &&
                                     // $FlowFixMe[prop-missing] automated comment
-                                    <ListEntry name={i18n.t('Date of enrollment')} value={enrollmentDate} type={dataElementTypes.DATE} />
+                                    <ListEntry name={i18n.t('Date of enrollment')} value={enrolledAt} type={dataElementTypes.DATE} />
                                 }
 
                             </Grid>

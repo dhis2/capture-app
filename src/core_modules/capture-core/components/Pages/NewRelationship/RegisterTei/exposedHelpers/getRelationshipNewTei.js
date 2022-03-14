@@ -88,9 +88,9 @@ export function getRelationshipNewTei(dataEntryId: string, itemId: string, state
     const { programId, orgUnit } = state.newRelationshipRegisterTei;
     const tetId = state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 
-    const { attributes, form: formFoundation, tetName } = getMetadata(programId, tetId);
+    const { attributes: metaDataAttributes, form: formFoundation, tetName } = getMetadata(programId, tetId);
     const clientValuesForFormData = getClientValuesForFormData(formValues, formFoundation);
-    const displayName = getDisplayName(clientValuesForFormData, attributes, tetName);
+    const displayName = getDisplayName(clientValuesForFormData, metaDataAttributes, tetName);
 
     const serverValuesForFormValues = formFoundation.convertValues(clientValuesForFormData, convertClientToServer);
     const serverValuesForMainValues = getServerValuesForMainValues(
@@ -99,11 +99,19 @@ export function getRelationshipNewTei(dataEntryId: string, itemId: string, state
         formFoundation,
     );
 
+    // $FlowFixMe
+    const attributes = Object.keys(serverValuesForFormValues)
+        .map(key => ({
+            attribute: key,
+            value: serverValuesForFormValues[key],
+        }));
+
     const enrollment = programId ? {
         program: programId,
         status: 'ACTIVE',
         orgUnit: orgUnit.id,
-        incidentDate: getFormattedStringFromMomentUsingEuropeanGlyphs(moment()),
+        occurredAt: getFormattedStringFromMomentUsingEuropeanGlyphs(moment()),
+        attributes,
         ...serverValuesForMainValues,
     } : null;
 
@@ -116,12 +124,7 @@ export function getRelationshipNewTei(dataEntryId: string, itemId: string, state
 
     const teiPayload = {
         // $FlowFixMe
-        attributes: Object
-            .keys(serverValuesForFormValues)
-            .map(key => ({
-                attribute: key,
-                value: serverValuesForFormValues[key],
-            })),
+        attributes: !enrollment ? attributes : undefined,
         orgUnit: orgUnit.id,
         trackedEntityType: tetId,
         geometry,

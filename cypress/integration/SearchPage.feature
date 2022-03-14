@@ -35,8 +35,7 @@ Feature: User interacts with Search page
     And you expand the attributes search area
     When you fill in the first name with values that will return no results
     And you click search
-    Then there should be a modal popping up
-    And you can close the modal
+    Then you should see no results found
 
   Scenario: Searching using attributes in Tracker Program throws error
     Given you are on the default search page
@@ -101,6 +100,16 @@ Feature: User interacts with Search page
     And you select the search domain Malaria Case diagnosis
     And you expand the attributes search area
     And you fill in the last name with values that will return results
+    And you click search
+    And you can see the first page of the results
+    When you click the view dashboard button
+    Then you navigated to the enrollment dashboard page
+  
+  Scenario: Searching using attributes in TEType navigates user to dashboard view 
+    Given you are on the default search page
+    And you select the search domain Person
+    And you expand the attributes search area
+    And you fill in the the form with first name value: Cla
     And you click search
     And you can see the first page of the results
     When you click the view dashboard button

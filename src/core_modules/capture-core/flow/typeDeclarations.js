@@ -52,9 +52,9 @@ declare type CaptureClientEvent = {
     enrollmentId?: string,
     enrollmentStatus?: string,
     status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
-    eventDate: string,
-    dueDate: string,
-    completedDate: string,
+    occurredAt: string,
+    scheduledAt: string,
+    completedAt: string,
     attributeCategoryOptions?: ?string,
 };
 

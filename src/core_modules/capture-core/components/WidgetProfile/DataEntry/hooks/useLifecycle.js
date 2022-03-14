@@ -5,7 +5,7 @@ import { useOrganisationUnit } from 'capture-core/dataQueries/useOrganisationUni
 import type { OrgUnit, TrackedEntityAttributes, OptionSets, ProgramRulesContainer, DataElements } from 'capture-core-utils/rulesEngine';
 import { cleanUpDataEntry } from '../../../DataEntry';
 import { RenderFoundation } from '../../../../metaData';
-import { getOpenDataEntryActions } from '../dataEntry.actions';
+import { getOpenDataEntryActions, cleanTeiModal } from '../dataEntry.actions';
 import {
     useFormFoundation,
     useRulesContainer,
@@ -58,6 +58,7 @@ export const useLifecycle = ({
         }
         return () => {
             dispatch(cleanUpDataEntry(dataEntryId));
+            dispatch(cleanTeiModal());
         };
     }, [dispatch, formValues, dataEntryId, itemId]);
 

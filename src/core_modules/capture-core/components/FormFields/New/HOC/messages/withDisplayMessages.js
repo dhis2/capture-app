@@ -96,7 +96,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                     data-test="error-message"
                     className={classNames(baseClass, messageClass)}
                 >
-                    {typeof text === 'string' ? text : text.map(message => (
+                    {!Array.isArray(text) ? text : text.map(message => (
                         <span>
                             {message}<br />
                         </span>

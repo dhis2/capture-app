@@ -52,11 +52,11 @@ export const scheduleEvent = (
     actionCreator(scheduleEventWidgetActionTypes.EVENT_SCHEDULE)({}, {
         offline: {
             effect: {
-                url: 'events',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
             },
-            commit: { type: onSaveSuccessActionType, meta: { serverData, uid } },
-            rollback: { type: onSaveErrorActionType, meta: { serverData, uid } },
+            commit: onSaveSuccessActionType && { type: onSaveSuccessActionType, meta: { serverData, uid } },
+            rollback: onSaveErrorActionType && { type: onSaveErrorActionType, meta: { serverData, uid } },
         },
     });

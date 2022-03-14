@@ -81,6 +81,7 @@ import { enrollmentPageDesc } from '../../core_modules/capture-core/reducers/des
 import { enrollmentDomainDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentDomain.reducerDescription';
 import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
 import { possibleDuplicatesDesc } from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
+import { trackedEntityInstanceDesc } from '../../core_modules/capture-core/reducers/descriptions/trackedEntityInstance.reducerDescription';
 
 export const reducerDescriptions = [
     activePageDesc,
@@ -132,6 +133,7 @@ export const reducerDescriptions = [
     ruleEffectsOptionsVisibilityDesc,
     searchPageDesc,
     teiSearchDesc,
+    trackedEntityInstanceDesc,
     dataStoreDesc,
     viewEventPageDesc,
     workingListsDesc,

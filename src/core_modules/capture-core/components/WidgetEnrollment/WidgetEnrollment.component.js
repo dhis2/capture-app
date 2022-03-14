@@ -47,7 +47,9 @@ export const WidgetEnrollmentPlain = ({
     refetch,
     error,
     loading,
+    canAddNew,
     onDelete,
+    onAddNew,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
 
@@ -82,7 +84,7 @@ export const WidgetEnrollmentPlain = ({
                 {!error && !loading && (
                     <div className={classes.enrollment}>
                         <div data-test="widget-enrollment-status">
-                            {enrollment.followup && (
+                            {enrollment.followUp && (
                                 <Tag className={classes.followup} negative>
                                     {i18n.t('Follow-up')}
                                 </Tag>
@@ -104,7 +106,7 @@ export const WidgetEnrollmentPlain = ({
                                 i18n.t('Enrollment date')}{' '}
                             {convertValueClientToView(
                                 convertValueServerToClient(
-                                    enrollment.enrollmentDate,
+                                    enrollment.enrolledAt,
                                     dataElementTypes.DATE,
                                 ),
                                 dataElementTypes.DATE,
@@ -123,7 +125,7 @@ export const WidgetEnrollmentPlain = ({
                                     i18n.t('Incident date')}{' '}
                                 {convertValueClientToView(
                                     convertValueServerToClient(
-                                        enrollment.incidentDate,
+                                        enrollment.occurredAt,
                                         dataElementTypes.DATE,
                                     ),
                                     dataElementTypes.DATE,
@@ -177,7 +179,7 @@ export const WidgetEnrollmentPlain = ({
                                 <IconClock16 color={colors.grey700} />
                             </span>
                             {i18n.t('Last updated {{date}}', {
-                                date: moment(enrollment.lastUpdated).fromNow(),
+                                date: moment(enrollment.updatedAt).fromNow(),
                             })}
                         </div>
 
@@ -199,9 +201,13 @@ export const WidgetEnrollmentPlain = ({
                             </div>
                         )}
                         <Actions
+                            tetName={program.trackedEntityType.displayName}
+                            onlyEnrollOnce={program.onlyEnrollOnce}
                             enrollment={enrollment}
                             refetch={refetch}
                             onDelete={onDelete}
+                            onAddNew={onAddNew}
+                            canAddNew={canAddNew}
                         />
                     </div>
                 )}

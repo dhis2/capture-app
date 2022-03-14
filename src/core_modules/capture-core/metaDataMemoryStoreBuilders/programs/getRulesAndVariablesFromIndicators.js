@@ -53,6 +53,7 @@ function getDirectAddressedVariable(variableWithCurls, programId) {
             id: variableName,
             displayName: variableName,
             programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            valueType: 'TEXT',
             dataElementId: variableNameParts[1],
             programId,
         };
@@ -62,6 +63,7 @@ function getDirectAddressedVariable(variableWithCurls, programId) {
             id: variableName,
             displayName: variableName,
             programRuleVariableSourceType: 'TEI_ATTRIBUTE',
+            valueType: 'TEXT',
             trackedEntityAttributeId: variableNameParts[0],
             programId,
         };

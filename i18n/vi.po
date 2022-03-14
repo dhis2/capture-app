@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2021
-# phil_dhis2, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
+# Viktor Varland <viktor@dhis2.org>, 2022
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-12-21T16:14:01.098Z\n"
+"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -170,9 +170,6 @@ msgstr "Mối quan hệ"
 msgid "Assignee"
 msgstr "Người nhận"
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
-
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr ""
 
@@ -310,9 +307,6 @@ msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
 
 msgid "Registered person"
 msgstr "Người đã đăng ký"
-
-msgid "Link"
-msgstr "Liên kết"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -471,6 +465,12 @@ msgstr "Xóa"
 msgid "No results"
 msgstr "Không có kết quả"
 
+msgid "Description"
+msgstr "Miêu tả"
+
+msgid "URL"
+msgstr "Đường dẫn URL"
+
 msgid "Icon for {{field}}"
 msgstr ""
 
@@ -616,19 +616,34 @@ msgstr ""
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
+msgid "Quick actions"
+msgstr ""
+
+msgid "New Event"
+msgstr ""
+
+msgid "Schedule an event"
+msgstr ""
+
+msgid "Make referral"
+msgstr "Tạo tham chiếu"
+
+msgid "No available program stages"
+msgstr ""
+
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -654,6 +669,18 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Page is missing required values from URL"
+msgstr ""
+
+msgid "Program is not valid"
+msgstr ""
+
+msgid "Org unit is not valid with current program"
+msgstr ""
+
+msgid "There was an error opening the Page"
+msgstr ""
+
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
@@ -667,6 +694,9 @@ msgid "There are no feedbacks for this event"
 msgstr ""
 
 msgid "There are no indicators for this event"
+msgstr ""
+
+msgid "Program stage is invalid"
 msgstr ""
 
 msgid "Report"
@@ -729,6 +759,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr "Xem bảng điều khiển"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -736,11 +769,17 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Lưu {{trackedEntityTypeName}} mới và liên kết"
+
+msgid "Link"
+msgstr "Liên kết"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
@@ -939,6 +978,12 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
+msgid "Add new"
+msgstr "Thêm mới"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr ""
+
 msgid "Reactivate"
 msgstr ""
 
@@ -1001,6 +1046,9 @@ msgstr ""
 msgid "This enrollment doesn't have any comments"
 msgstr ""
 
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1035,17 +1083,24 @@ msgid "Schedule date info"
 msgstr ""
 
 msgid ""
-"This date is the the auto-suggested date based on the intervals defined, \n"
+"This date is the suggested scheduled date based on the intervals defined, \n"
 "                    it can be adjusted if needed."
 msgstr ""
 
-msgid "This date is {{difference}} days {{position}} the auto-suggested date."
+msgid "This date is {{count}} days {{position}} the suggested date."
+msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+
+msgid "after"
 msgstr ""
 
-msgid ""
-"There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
-"this day."
+msgid "before"
 msgstr ""
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1063,11 +1118,47 @@ msgstr ""
 msgid "Write a comment about this scheduled event"
 msgstr ""
 
+msgid ""
+"Change information about this {{trackedEntityName}} here. To change "
+"information about this enrollment, use the Edit button in the in the "
+"Enrollment box on this dashboard"
+msgstr ""
+
+msgid " Loading..."
+msgstr ""
+
+msgid "Save changes"
+msgstr "Lưu các thay đổi"
+
+msgid "Profile"
+msgstr "Hồ sơ"
+
+msgid "There is a problem with this form"
+msgstr ""
+
+msgid "There are warnings in this form"
+msgstr ""
+
+msgid "There was a problem saving changes"
+msgstr ""
+
+msgid "Try again or contact your system administrator for support"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr "thực thể được theo dõi"
+
+msgid "Fix errors in the form to continue."
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
 msgstr ""
+
+msgid "Edit"
+msgstr "Chỉnh sửa"
 
 msgid "New {{ eventName }} event"
 msgstr ""
@@ -1085,6 +1176,9 @@ msgid "Go to full {{ eventName }}"
 msgstr ""
 
 msgid "This stage can only have one event"
+msgstr ""
+
+msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Report date"
@@ -1108,6 +1202,9 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Working list could not be loaded"
+msgstr "Không thể tải danh sách làm việc"
+
 msgid "Delete event"
 msgstr "Xóa sự kiện"
 
@@ -1126,9 +1223,6 @@ msgstr "Tải xuống với các bộ lọc hiện tại"
 msgid "Download data..."
 msgstr "Tải xuống dữ liệu ..."
 
-msgid "Working list could not be loaded"
-msgstr "Không thể tải danh sách làm việc"
-
 msgid "an error occurred loading working lists"
 msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
 
@@ -1146,6 +1240,9 @@ msgstr "Không kích hoạt"
 
 msgid "Working list could not be updated"
 msgstr "Không thể cập nhật danh sách làm việc"
+
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr ""
 
 msgid "Update view"
 msgstr "Cập nhật chế độ xem"
@@ -1207,9 +1304,6 @@ msgstr "Chương trình không tìm thấy"
 msgid "Program is not a tracker program"
 msgstr "Chương trình không phải là một chương trình theo dõi"
 
-msgid "Profile"
-msgstr "Hồ sơ"
-
 msgid "Error saving event"
 msgstr "Có lỗi khi đang lưu sự kiện"
 
@@ -1239,9 +1333,6 @@ msgstr ""
 
 msgid "Error saving the enrollment event"
 msgstr ""
-
-msgid "tracked entity instance"
-msgstr "thực thể được theo dõi"
 
 msgid "Set coordinate"
 msgstr "Đặt tọa độ"

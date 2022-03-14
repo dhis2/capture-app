@@ -12,3 +12,4 @@ export {
     getTrackedEntityTypeId,
     getProgramTrackedEntityAttributes,
 } from './convertors';
+export { getTeiDisplayName } from './getTeiDisplayName';

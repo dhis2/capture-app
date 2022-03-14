@@ -23,7 +23,7 @@ const mainConfig: Array<MainColumnConfig> = [{
     visible: false,
     type: dataElementTypes.DATE,
     header: i18n.t('Registration Date'),
-    apiName: 'created',
+    apiName: 'createdAt',
     filterHidden: true,
 }, {
     id: 'inactive',

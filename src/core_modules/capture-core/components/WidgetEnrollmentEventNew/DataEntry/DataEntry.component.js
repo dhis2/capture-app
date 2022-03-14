@@ -137,12 +137,12 @@ const buildReportDateSettingsFn = () => {
         getComponent: () => reportDateComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
-            label: props.formFoundation.getLabel('eventDate'),
+            label: props.formFoundation.getLabel('occurredAt'),
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
         }),
-        getPropName: () => 'eventDate',
+        getPropName: () => 'occurredAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,

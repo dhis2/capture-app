@@ -168,6 +168,14 @@ When('you fill in the the form with values', () => {
         .type('Smith');
 });
 
+And(/^you fill in the the form with first name value: (.*)$/, (firstName) => {
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type(firstName)
+        .blur();
+});
+
 When('you clear the values', () => {
     cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')

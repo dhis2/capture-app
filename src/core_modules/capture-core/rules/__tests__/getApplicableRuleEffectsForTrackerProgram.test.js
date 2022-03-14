@@ -64,9 +64,9 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
     const orgUnit = { id: 'DiszpKrYNg8', code: 'Ngelehun CHC' };
 
     const enrollmentData = {
-        enrollmentDate: '2021-05-31T00:00:00.000',
+        enrolledAt: '2021-05-31T00:00:00.000',
         enrollmentId: 'vVtmDlsu3me',
-        incidentDate: '2021-05-31T00:00:00.000',
+        occurredAt: '2021-05-31T00:00:00.000',
     };
 
     const programStage = new ProgramStage((stage) => {

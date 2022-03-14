@@ -18,3 +18,4 @@ export type {
     CustomColumnOrder,
     InitialViewConfig,
 } from './types';
+export { TEMPLATE_SHARING_TYPE } from './constants';

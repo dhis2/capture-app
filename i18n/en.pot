@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-09T13:29:42.807Z\n"
-"PO-Revision-Date: 2022-02-09T13:29:42.807Z\n"
+"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
+"PO-Revision-Date: 2022-03-10T08:16:14.613Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -300,9 +300,6 @@ msgstr "Show registered {{trackedEntityTypeName}}"
 
 msgid "Registered person"
 msgstr "Registered person"
-
-msgid "Link"
-msgstr "Link"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Leaving this page will discard the changes you made to this event."
@@ -628,18 +625,18 @@ msgstr "No available program stages"
 msgid "Program stage not found"
 msgstr "Program stage not found"
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
-msgstr "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
+msgstr ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
-msgstr ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
+msgstr "Choose an enrollment to view the dashboard."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is not enrolled in this program."
@@ -756,17 +753,26 @@ msgstr "Save as new"
 msgid "View dashboard"
 msgstr "View dashboard"
 
+msgid "View enrollment"
+msgstr "View enrollment"
+
 msgid "Create for"
 msgstr "Create for"
 
 msgid "You can also choose a program from the top bar and create in that program"
 msgstr "You can also choose a program from the top bar and create in that program"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr "New Enrollment in program{{escape}} {{programName}}"
+
 msgid "Save new"
 msgstr "Save new"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Save new {{trackedEntityTypeName}} and link"
+
+msgid "Link"
+msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Save as new {{trackedEntityName}}"
@@ -959,6 +965,12 @@ msgstr "Enrollment actions"
 msgid "We are processing your request."
 msgstr "We are processing your request."
 
+msgid "Add new"
+msgstr "Add new"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr "Only one enrollment per {{tetName}} is allowed in this program"
+
 msgid "Reactivate"
 msgstr "Reactivate"
 
@@ -1106,17 +1118,32 @@ msgstr ""
 "information about this enrollment, use the Edit button in the in the "
 "Enrollment box on this dashboard"
 
+msgid " Loading..."
+msgstr " Loading..."
+
 msgid "Save changes"
 msgstr "Save changes"
 
 msgid "Profile"
 msgstr "Profile"
 
-msgid "There are errors in this form"
-msgstr "There are errors in this form"
+msgid "There is a problem with this form"
+msgstr "There is a problem with this form"
 
 msgid "There are warnings in this form"
 msgstr "There are warnings in this form"
+
+msgid "There was a problem saving changes"
+msgstr "There was a problem saving changes"
+
+msgid "Try again or contact your system administrator for support"
+msgstr "Try again or contact your system administrator for support"
+
+msgid "tracked entity instance"
+msgstr "tracked entity instance"
+
+msgid "Fix errors in the form to continue."
+msgstr "Fix errors in the form to continue."
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
@@ -1144,6 +1171,9 @@ msgstr "Go to full {{ eventName }}"
 
 msgid "This stage can only have one event"
 msgstr "This stage can only have one event"
+
+msgid "Events could not be retrieved. Please try again later."
+msgstr "Events could not be retrieved. Please try again later."
 
 msgid "Report date"
 msgstr "Report date"
@@ -1204,6 +1234,9 @@ msgstr "Inactive"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
+
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr "an error occurred loading Tracked entity instance lists"
 
 msgid "Update view"
 msgstr "Update view"
@@ -1294,9 +1327,6 @@ msgstr "Error saving enrollment"
 
 msgid "Error saving the enrollment event"
 msgstr "Error saving the enrollment event"
-
-msgid "tracked entity instance"
-msgstr "tracked entity instance"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"

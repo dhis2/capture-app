@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react';
-import { ErrorMessageCreator } from './ErrorMessageCreator.container';
+import type { ErrorData } from 'capture-ui/FormBuilder';
+import { UniqueTEADuplicateErrorMessageCreator } from './ErrorMessageCreator.component';
 import { ExistingTEIDialog } from './ExistingTEIDialog.component';
-import type { ErrorData } from './uniqueTEADuplicate.types';
 
 type Props = {
-    id: string,
-    errorData: ErrorData,
-    onLink?: (teiId?: ?string, values: Object) => void,
+    ExistingUniqueValueDialogActions: any,
+    errorData?: ErrorData,
+    trackedEntityTypeName: string,
+    attributeName: string,
 };
 
 type State = {
@@ -22,43 +23,35 @@ export class UniqueTEADuplicate extends React.Component<Props, State> {
         };
     }
 
-    handleShowExisting = () => {
+    openDialog = () => {
         this.setState({
             existingTeiDialogOpen: true,
         });
     }
 
-    handleCancelLink = () => {
+    closeDialog = () => {
         this.setState({
             existingTeiDialogOpen: false,
         });
-    }
-
-    handleLink = (values: Object) => {
-        this.setState({
-            existingTeiDialogOpen: false,
-        });
-        const teiId = this.props.errorData.id;
-        this.props.onLink && this.props.onLink(teiId, values);
     }
 
     render() {
-        const { id, onLink, ...passOnProps } = this.props;
+        const { attributeName, trackedEntityTypeName, ...passOnProps } = this.props;
         const { existingTeiDialogOpen } = this.state;
 
         return (
             <React.Fragment>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <ErrorMessageCreator
-                    onShowExisting={this.handleShowExisting}
-                    id={id}
+                <UniqueTEADuplicateErrorMessageCreator
+                    onShowExisting={this.openDialog}
+                    trackedEntityTypeName={trackedEntityTypeName}
+                    attributeName={attributeName}
                     {...passOnProps}
                 />
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <ExistingTEIDialog
                     open={existingTeiDialogOpen}
-                    onCancel={this.handleCancelLink}
-                    onLink={this.handleLink}
+                    onCancel={this.closeDialog}
                     {...passOnProps}
                 />
             </React.Fragment>

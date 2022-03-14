@@ -1,6 +1,7 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, type ComponentType, useEffect } from 'react';
+import { useLocationQuery } from '../../../../utils/routing';
 import { RegistrationDataEntryComponent } from './RegistrationDataEntry.component';
 import type { OwnProps } from './RegistrationDataEntry.types';
 import {
@@ -13,14 +14,15 @@ import { NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID, NEW_SINGLE_EVENT_DATA_ENTRY_ID, N
 export const RegistrationDataEntry: ComponentType<OwnProps>
   = ({ selectedScopeId, dataEntryId, setScopeId }) => {
       const dispatch = useDispatch();
+      const { teiId } = useLocationQuery();
 
       const dispatchOnSaveWithoutEnrollment = useCallback(
           (formFoundation) => { dispatch(startSavingNewTrackedEntityInstance(formFoundation)); },
           [dispatch]);
 
       const dispatchOnSaveWithEnrollment = useCallback(
-          (formFoundation) => { dispatch(startSavingNewTrackedEntityInstanceWithEnrollment(formFoundation)); },
-          [dispatch]);
+          (formFoundation) => { dispatch(startSavingNewTrackedEntityInstanceWithEnrollment(formFoundation, teiId)); },
+          [dispatch, teiId]);
 
       const dataEntryIsReady = useSelector(({ dataEntries }) => (!!dataEntries[dataEntryId]));
 
@@ -38,5 +40,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
               dataEntryIsReady={dataEntryIsReady}
               onSaveWithoutEnrollment={dispatchOnSaveWithoutEnrollment}
               onSaveWithEnrollment={dispatchOnSaveWithEnrollment}
+              teiId={teiId}
           />);
   };

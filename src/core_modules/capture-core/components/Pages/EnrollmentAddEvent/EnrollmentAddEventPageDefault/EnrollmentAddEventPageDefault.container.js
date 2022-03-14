@@ -39,6 +39,9 @@ export const EnrollmentAddEventPageDefault = ({
         },
         [dispatch, history, programId, orgUnitId, teiId, enrollmentId],
     );
+    const handleAddNew = useCallback(() => {
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+    }, [history, programId, orgUnitId, teiId]);
 
     const handleDelete = useCallback(() => {
         dispatch(deleteEnrollment({ enrollmentId }));
@@ -52,13 +55,15 @@ export const EnrollmentAddEventPageDefault = ({
     const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
+    // $FlowFixMe
+    const trackedEntityName = program?.trackedEntityType?.name;
 
     const rulesExecutionDependencies = useMemo(() => ({
         events: enrollment?.events,
         attributeValues,
         enrollmentData: {
-            enrollmentDate: enrollment?.enrollmentDate,
-            incidentDate: enrollment?.incidentDate,
+            enrolledAt: enrollment?.enrolledAt,
+            occurredAt: enrollment?.occurredAt,
             enrollmentId: enrollment?.enrollment,
         },
     }), [enrollment, attributeValues]);
@@ -72,7 +77,6 @@ export const EnrollmentAddEventPageDefault = ({
         handleResetStageId,
         handleResetEventId,
         teiDisplayName,
-        trackedEntityName,
         enrollmentsAsOptions,
         teiSelectorFailure,
         userInteractionInProgress,
@@ -98,7 +102,7 @@ export const EnrollmentAddEventPageDefault = ({
                 teiDisplayName={teiDisplayName}
                 trackedEntityName={trackedEntityName}
                 stageName={selectedProgramStage?.stageForm.name}
-                eventDateLabel={selectedProgramStage?.stageForm.getLabel('eventDate')}
+                eventDateLabel={selectedProgramStage?.stageForm.getLabel('occurredAt')}
                 enrollmentsAsOptions={enrollmentsAsOptions}
                 onSetOrgUnitId={handleSetOrgUnitId}
                 onResetOrgUnitId={handleResetOrgUnitId}
@@ -120,6 +124,7 @@ export const EnrollmentAddEventPageDefault = ({
                 onSave={handleSave}
                 onCancel={handleCancel}
                 onDelete={handleDelete}
+                onAddNew={handleAddNew}
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}
                 widgetReducerName={widgetReducerName}

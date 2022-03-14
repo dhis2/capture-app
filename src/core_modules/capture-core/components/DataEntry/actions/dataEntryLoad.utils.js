@@ -83,7 +83,7 @@ export function getDataEntryNotes(
     const notes = clientValuesForDataEntry.notes || [];
     return notes.map((note, index) => ({
         ...note,
-        storedDate: convertListValue(note.storedDate, dataElementTypes.DATETIME),
+        storedAt: convertListValue(note.storedAt, dataElementTypes.DATETIME),
         key: index,
     }));
 }

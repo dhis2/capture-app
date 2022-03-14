@@ -7,9 +7,9 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
         useMemo(
             () => ({
                 trackedEntityInstances: {
-                    resource: `trackedEntityInstances/${teiId}`,
+                    resource: `tracker/trackedEntities/${teiId}`,
                     params: {
-                        fields: ['programOwners[ownerOrgUnit]'],
+                        fields: ['programOwners[ownerOrgUnit],enrollments'],
                         program: [programId],
                     },
                 },
@@ -22,6 +22,7 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
         error,
         ownerOrgUnit:
             !loading &&
-            data?.trackedEntityInstances?.programOwners[0]?.ownerOrgUnit,
+            data?.trackedEntityInstances?.programOwners[0]?.orgUnit,
+        enrollments: !loading && data?.trackedEntityInstances ? data?.trackedEntityInstances?.enrollments : [],
     };
 };

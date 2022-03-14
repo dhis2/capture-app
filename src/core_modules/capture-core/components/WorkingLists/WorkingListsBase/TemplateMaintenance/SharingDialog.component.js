@@ -12,7 +12,7 @@ const styles = {
     },
 };
 
-const SharingDialogPlain = ({ onClose, open, templateId, classes }: Props) => {
+const SharingDialogPlain = ({ onClose, open, templateId, classes, templateSharingType }: Props) => {
     const handleClose = useCallback(({
         externalAccess,
         publicAccess,
@@ -32,7 +32,7 @@ const SharingDialogPlain = ({ onClose, open, templateId, classes }: Props) => {
             open={open}
             id={templateId}
             onRequestClose={handleClose}
-            type={'eventFilter'}
+            type={templateSharingType}
             d2={getD2()}
             className={classes.dialog}
         />

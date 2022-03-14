@@ -19,20 +19,19 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
             const clientId = uuid();
 
             const serverData = {
-                ...state.enrollmentDomain.enrollment,
                 notes: [{ value: note }],
             };
 
             const clientNote = {
                 value: note,
-                lastUpdatedBy: {
+                createdBy: {
                     firstName,
                     surname,
                     uid: clientId,
                 },
-                lastUpdated: moment().toISOString(),
+                updatedAt: moment().toISOString(),
                 storedBy: userName,
-                storedDate: moment().toISOString(),
+                storedAt: moment().toISOString(),
             };
 
             const saveContext = {

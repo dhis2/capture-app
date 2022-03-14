@@ -1,8 +1,18 @@
 // @flow
 import uuid from 'uuid/v4';
 import { batchActions } from 'redux-batched-actions';
-import type { OrgUnit, TrackedEntityAttributes, OptionSets, ProgramRulesContainer, EventsData, DataElements, Enrollment } from 'capture-core-utils/rulesEngine';
+import type {
+    OrgUnit,
+    TrackedEntityAttributes,
+    OptionSets,
+    ProgramRulesContainer,
+    EventsData,
+    DataElements,
+    Enrollment,
+} from 'capture-core-utils/rulesEngine';
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
+import { actionCreator } from '../../../actions/actions.utils';
+import { effectMethods } from '../../../trackerOffline';
 import type { RenderFoundation } from '../../../metaData';
 import type { FieldData } from '../../../rules';
 import { getCurrentClientValues } from '../../../rules';
@@ -12,9 +22,23 @@ import { startRunRulesPostUpdateField } from '../../DataEntry';
 import { getRulesActionsForTEI } from './ProgramRules';
 import { addFormData } from '../../D2Form/actions/form.actions';
 
-const dataEntryActionTypes = {
+export const TEI_MODAL_STATE = {
+    OPEN: 'Open',
+    OPEN_ERROR: 'OpenWithErrors',
+    OPEN_DISABLE: 'OpenAndDisabled',
+    CLOSE: 'Close',
+};
+
+export const dataEntryActionTypes = {
     UPDATE_FIELD_PROFILE_ACTION_BATCH: 'UpdateFieldProfileActionBatch',
     OPEN_DATA_ENTRY_PROFILE_ACTION_BATCH: 'OpenDataEntryProfileActionBatch',
+    TEI_UPDATE: 'TeiUpdate',
+    TEI_UPDATE_REQUEST: 'TeiSaveRequest',
+    TEI_UPDATE_SUCCESS: 'TeiUpdateSucess',
+    TEI_UPDATE_ERROR: 'TeiUpdateError',
+    SET_TEI_MODAL_ERROR: 'SetTeiModalError',
+    SET_TEI_ATTRIBUTE_VALUES: 'SetTeiAttributeValues',
+    CLEAN_TEI_MODAL: 'CleanTeiModal',
 };
 const dataEntryPropsToInclude: Array<Object> = [
     {
@@ -73,6 +97,69 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
         dataEntryActionTypes.UPDATE_FIELD_PROFILE_ACTION_BATCH,
     );
 };
+
+export const setTeiModalError = (hasError: boolean) => actionCreator(dataEntryActionTypes.SET_TEI_MODAL_ERROR)({ hasError });
+export const setTeiAttributeValues = (attributeValues: Array<{ [key: string]: string }>) => actionCreator(dataEntryActionTypes.SET_TEI_ATTRIBUTE_VALUES)({ attributeValues });
+export const cleanTeiModal = () => actionCreator(dataEntryActionTypes.CLEAN_TEI_MODAL)();
+
+export const updateTeiRequest = ({
+    itemId,
+    dataEntryId,
+    orgUnitId,
+    trackedEntityTypeId,
+    trackedEntityInstanceId,
+    onSaveExternal,
+    onSaveSuccessActionType,
+    onSaveErrorActionType,
+    formFoundation,
+}: {
+    itemId: string,
+    dataEntryId: string,
+    orgUnitId: string,
+    trackedEntityTypeId: string,
+    trackedEntityInstanceId: string,
+    onSaveExternal?: (eventServerValues: any, uid: string) => void,
+    onSaveSuccessActionType?: string,
+    onSaveErrorActionType?: string,
+    formFoundation: RenderFoundation,
+}) =>
+    actionCreator(dataEntryActionTypes.TEI_UPDATE_REQUEST)({
+        itemId,
+        dataEntryId,
+        orgUnitId,
+        trackedEntityTypeId,
+        trackedEntityInstanceId,
+        formFoundation,
+        onSaveExternal,
+        onSaveSuccessActionType,
+        onSaveErrorActionType,
+    });
+
+export const updateTei = ({
+    serverData,
+    onSaveSuccessActionType,
+    onSaveErrorActionType,
+    uid,
+}: {
+    serverData: Object,
+    onSaveSuccessActionType?: string,
+    onSaveErrorActionType?: string,
+    uid: string,
+}) =>
+    actionCreator(dataEntryActionTypes.TEI_UPDATE)(
+        {},
+        {
+            offline: {
+                effect: {
+                    url: 'tracker?async=false',
+                    method: effectMethods.POST,
+                    data: serverData,
+                },
+                commit: { type: onSaveSuccessActionType, meta: { serverData, uid } },
+                rollback: { type: onSaveErrorActionType, meta: { serverData, uid } },
+            },
+        },
+    );
 
 export const getOpenDataEntryActions = ({
     dataEntryId,

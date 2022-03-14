@@ -6,7 +6,7 @@ beforeEach(() => {
 
 Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.server();
-    cy.route('GET', '**/events**').as('getDefaultEvents');
+    cy.route('GET', '**/tracker/events**').as('getDefaultEvents');
 
     cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
@@ -26,7 +26,7 @@ Then('events should be retrieved from the api using the default query args', () 
         .its('url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.events').as('events');
+    cy.get('@result').its('response.body.instances').as('events');
 });
 
 Then('the list should display the events retrieved from the api', () => {
@@ -55,7 +55,7 @@ When('you select the working list called events assigned to anyone', () => {
         .contains('Events assigned to anyone')
         .should('exist');
 
-    cy.route('GET', '**/events**').as('getEventsAssignedToAnyone');
+    cy.route('GET', '**/tracker/events**').as('getEventsAssignedToAnyone');
 
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .contains('Events assigned to anyone')
@@ -77,18 +77,18 @@ Then('events assigned to anyone should be retrieved from the api', () => {
         .its('url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.events').as('events');
+    cy.get('@result').its('response.body.instances').as('events');
 });
 
 When('you apply the assignee filter', () => {
-    cy.route('GET', '**/events**').as('getEventsAssignedToAnyone');
+    cy.route('GET', '**/tracker/events**').as('getEventsAssignedToAnyone');
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
 });
 
 When('you apply the status filter', () => {
-    cy.route('GET', '**/events**').as('getActiveEventsAssignedToAnyone');
+    cy.route('GET', '**/tracker/events**').as('getActiveEventsAssignedToAnyone');
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
@@ -113,7 +113,7 @@ Then('active events that are assigned to anyone should be retrieved from the api
         .its('url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.events').as('events');
+    cy.get('@result').its('response.body.instances').as('events');
 });
 
 When('you set the age filter to 10-20', () => {
@@ -131,7 +131,7 @@ When('you set the age filter to 10-20', () => {
 });
 
 When('you apply the current filter on the event working list', () => {
-    cy.route('GET', '**/events**').as('getEvents');
+    cy.route('GET', '**/tracker/events**').as('getEvents');
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
@@ -162,14 +162,14 @@ Then('events where age is between 10 and 20 should be retrieved from the api', (
         .its('url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.events').as('events');
+    cy.get('@result').its('response.body.instances').as('events');
 });
 
 When('you click the next page button on the event working list', () => {
     cy.get('[data-test="search-pagination-next-page"]')
         .should('exist');
 
-    cy.route('GET', '**/events**').as('getEvents');
+    cy.route('GET', '**/tracker/events**').as('getEvents');
 
     cy.get('[data-test="search-pagination-next-page"]')
         .click();
@@ -182,18 +182,18 @@ Then('new events should be retrieved from the api', () => {
         .its('status')
         .should('equal', 200);
 
-    cy.get('@result').its('response.body.events').as('events');
+    cy.get('@result').its('response.body.instances').as('events');
 });
 
 When('you click the previous page button on the event working list', () => {
-    cy.route('GET', '**/events**').as('getEvents');
+    cy.route('GET', '**/tracker/events**').as('getEvents');
 
     cy.get('[data-test="search-pagination-previous-page"]')
         .click();
 });
 
 When('you click the first page button on the event working list', () => {
-    cy.route('GET', '**/events**').as('getEvents');
+    cy.route('GET', '**/tracker/events**').as('getEvents');
 
     cy.get('[data-test="search-pagination-first-page"]')
         .click();
@@ -203,7 +203,7 @@ When('you change rows per page to 50', () => {
     cy.get('div[data-test="rows-per-page-selector"]')
         .should('exist');
 
-    cy.route('GET', '**/events**').as('getEvents');
+    cy.route('GET', '**/tracker/events**').as('getEvents');
 
     cy.get('div[data-test="rows-per-page-selector"]')
         .click()
@@ -226,7 +226,7 @@ Then('an event batch capped at 50 records should be retrieved from the api', () 
         .its('url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.events').as('events');
+    cy.get('@result').its('response.body.instances').as('events');
 });
 
 When('you click the report date column header', () => {
@@ -234,7 +234,7 @@ When('you click the report date column header', () => {
         .contains('Report date')
         .should('exist');
 
-    cy.route('GET', '**/events**').as('getEvents');
+    cy.route('GET', '**/tracker/events**').as('getEvents');
 
     cy.get('[data-test="online-list-table"]')
         .contains('Report date')
@@ -256,5 +256,5 @@ Then('events should be retrieved from the api ordered ascendingly by report date
         .its('url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.events').as('events');
+    cy.get('@result').its('response.body.instances').as('events');
 });

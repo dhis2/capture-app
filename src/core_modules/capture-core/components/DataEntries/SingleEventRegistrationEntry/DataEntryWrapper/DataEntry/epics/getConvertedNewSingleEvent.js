@@ -26,22 +26,24 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
     if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+        mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
     }
 
     return {
-        ...mainDataServerValues,
-        program: state.currentSelections.programId,
-        programStage: formFoundation.id,
-        orgUnit: state.currentSelections.orgUnitId,
-        ...getApiCategoriesArgument(state.currentSelections.categories),
-        dataValues: Object
-            .keys(formServerValues)
-            .map(key => ({
-                dataElement: key,
-                value: formServerValues[key],
-            }))
-            .filter(({ value }) => value != null),
+        events: [{
+            ...mainDataServerValues,
+            program: state.currentSelections.programId,
+            programStage: formFoundation.id,
+            orgUnit: state.currentSelections.orgUnitId,
+            ...getApiCategoriesArgument(state.currentSelections.categories),
+            dataValues: Object
+                .keys(formServerValues)
+                .map(key => ({
+                    dataElement: key,
+                    value: formServerValues[key],
+                }))
+                .filter(({ value }) => value != null),
+        }],
     };
 };
 
@@ -60,7 +62,7 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
         mainDataServerValues.status = completed ? 'ACTIVE' : 'COMPLETED';
     }
     if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+        mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
     }
 
     return {
