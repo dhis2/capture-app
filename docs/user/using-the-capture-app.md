@@ -35,7 +35,7 @@ In the Capture app you register events that occurred at a particular time and pl
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. If desired you can add a comment by clicking the **Write comment** button at the bottom of the form.
+7. If desired you can add a comment by clicking the **Write comment** button at the bottom of the form. Note that Event comments are attributed to a user and cannot be deleted. 
 
 8. If desired you can add a relationship by clicking the **Add relationship** button at the bottom of the form.
    See the section about **Adding a relationship** for more information.
@@ -335,7 +335,7 @@ You now have two options:
   You have the option to select a **program**. If a **program** is selected the attributes are derived from the selected **program**.
   If no **program** is selected, only the attributes that belong to the **Tracked Entity Instance** will be visible.
 
-    ![search for Tracked Entity Instance](resources/images/search_tei_1.png)
+    ![search for Tracked Entity Instance](resources/images/search_tei.png)
 
     - If the **Tracked Entity Instance** or **program** is configured with a unique attribute, this attribute can be
       used for finding a specific **Tracked Entity Instance** or **program**. This attribute should be presented alone.
@@ -931,7 +931,7 @@ You can delete the enrollment by clicking the delete button and confirming the a
 
 The enrollment comment widget displays comments and allows addition of comments, associated with the current enrollment. 
 
-By clicking in the text field, you will be able to enter new text and see action buttons **Save comment** and **Cancel**.
+By clicking in the text field, you will be able to enter new text and see action buttons **Save comment** and **Cancel**. Note that Enrollment comments are attributed to a user and cannot be deleted. 
 
 #### Tracked entity instance profile widget
 

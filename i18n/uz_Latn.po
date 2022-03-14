@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
+"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -641,7 +641,9 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
 
 msgid ""
@@ -983,6 +985,12 @@ msgid "Enrollment actions"
 msgstr ""
 
 msgid "We are processing your request."
+msgstr ""
+
+msgid "Add new"
+msgstr "Янгисини қўшиш"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Reactivate"

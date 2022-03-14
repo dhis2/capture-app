@@ -24,7 +24,7 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
 
             const clientNote = {
                 value: note,
-                lastUpdatedBy: {
+                createdBy: {
                     firstName,
                     surname,
                     uid: clientId,

@@ -6,3 +6,7 @@ export const newPageStatuses = {
     WITHOUT_ORG_UNIT_SELECTED: 'WITHOUT_ORG_UNIT_SELECTED',
     WITHOUT_PROGRAM_CATEGORY_SELECTED: 'WITHOUT_PROGRAM_CATEGORY_SELECTED',
 };
+
+export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
+export const NEW_SINGLE_EVENT_DATA_ENTRY_ID = 'singleEvent';
+export const NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID = 'relationship';
