@@ -115,13 +115,12 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const serverData = {
                 events: [{
                     ...mainDataServerValues,
-                    dataValues: Object
-                        .keys(formServerValues)
-                        .map(key => ({
-                            dataElement: key,
-                            value: formServerValues[key],
-                        }))
-                        .filter(({ value }) => value != null),
+                    dataValues: formFoundation
+                        .getElements()
+                        .map(({ id }) => ({
+                            dataElement: id,
+                            value: formServerValues[id] || null,
+                        })),
                 }],
             };
 

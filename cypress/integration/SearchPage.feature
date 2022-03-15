@@ -104,8 +104,8 @@ Feature: User interacts with Search page
     And you can see the first page of the results
     When you click the view dashboard button
     Then you navigated to the enrollment dashboard page
-  
-  Scenario: Searching using attributes in TEType navigates user to dashboard view 
+
+  Scenario: Searching using attributes in TEType navigates user to dashboard view
     Given you are on the default search page
     And you select the search domain Person
     And you expand the attributes search area
@@ -113,7 +113,7 @@ Feature: User interacts with Search page
     And you click search
     And you can see the first page of the results
     When you click the view dashboard button
-    Then you navigated to the enrollment dashboard page
+    Then you navigated to the enrollment dashboard page without enrollment
 
   Scenario: Searching using attributes in Tracker Program domain has disabled pagination
     Given you are on the default search page

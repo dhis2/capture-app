@@ -86,6 +86,7 @@ const RegistrationDataEntryPlain = ({
     onSaveWithEnrollment,
     dataEntryIsReady,
     teiId,
+    trackedEntityInstanceAttributes,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType, programName } = useScopeInfo(selectedScopeId);
@@ -177,6 +178,7 @@ const RegistrationDataEntryPlain = ({
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
                                     ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
+                                    trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
                                 />
                             </Grid>
                             {
