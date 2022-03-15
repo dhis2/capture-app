@@ -14,6 +14,7 @@ export const DataEntryComponent = ({
     onSave,
     saveAttempted,
     onUpdateFormField,
+    onUpdateFormFieldAsync,
     trackedEntityName,
     formFoundation,
     modalState,
@@ -33,6 +34,7 @@ export const DataEntryComponent = ({
                 formFoundation={formFoundation}
                 saveAttempted={saveAttempted}
                 onUpdateFormField={onUpdateFormField}
+                onUpdateFormFieldAsync={onUpdateFormFieldAsync}
                 onGetValidationContext={onGetValidationContext}
             />
             <NoticeBoxes
