@@ -1,3 +1,10 @@
+## [99.11.4](https://github.com/dhis2/capture-app/compare/v99.11.3...v99.11.4) (2022-03-15)
+
+
+### Bug Fixes
+
+* [DHIS2-12821] image and file dateElements GET/POST ([#2648](https://github.com/dhis2/capture-app/issues/2648)) ([d6f5e81](https://github.com/dhis2/capture-app/commit/d6f5e81026319dedd9b98eea4b20601b741ed688))
+
 ## [99.11.3](https://github.com/dhis2/capture-app/compare/v99.11.2...v99.11.3) (2022-03-15)
 
 
