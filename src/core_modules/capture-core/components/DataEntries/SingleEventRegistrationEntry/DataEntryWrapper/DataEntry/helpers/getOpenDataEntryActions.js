@@ -10,7 +10,7 @@ type DataEntryPropsToInclude = Array<Object>;
 
 const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
-        id: 'eventDate',
+        id: 'occurredAt',
         type: 'DATE',
         validatorContainers: getEventDateValidatorContainers(),
     },
