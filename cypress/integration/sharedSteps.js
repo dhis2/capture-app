@@ -141,7 +141,15 @@ And('you navigated to the enrollment dashboard page', () => {
     cy.url().should('include', 'enrollment?enrollmentId');
 });
 
+And('you navigated to the enrollment dashboard page without enrollment', () => {
+    cy.url().should('include', 'enrollment?orgUnit');
+});
+
 Then('you should see no results found', () => {
     cy.contains('No results found')
         .should('exist');
+});
+
+And('you are navigated to the enrollment page without enrollment', () => {
+    cy.url().should('include', 'enrollment?orgUnitId');
 });
