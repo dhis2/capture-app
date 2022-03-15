@@ -34,12 +34,24 @@ export const DataEntry = ({
     const { formFoundation } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
-    const onUpdateFormField = useCallback((...args: Array<any>) => dispatch(getUpdateFieldActions(context, ...args)), [dispatch, context]);
-    const getValidationContext = useCallback(() => ({
-        programId: programAPI.id,
-        orgUnitId,
-        trackedEntityInstanceId,
-    }), [programAPI, orgUnitId, trackedEntityInstanceId]);
+    const onUpdateFormField = useCallback(
+        (...args: Array<any>) => dispatch(getUpdateFieldActions(context, ...args)),
+        [dispatch, context],
+    );
+    const onUpdateFormFieldAsync = useCallback(
+        (innerAction: ReduxAction<any, any>) => {
+            dispatch(innerAction);
+        },
+        [dispatch],
+    );
+    const getValidationContext = useCallback(
+        () => ({
+            programId: programAPI.id,
+            orgUnitId,
+            trackedEntityInstanceId,
+        }),
+        [programAPI, orgUnitId, trackedEntityInstanceId],
+    );
 
     const onSave = useCallback(() => {
         setSaveAttempted(true);
@@ -86,6 +98,7 @@ export const DataEntry = ({
                 trackedEntityName={trackedEntityName}
                 formFoundation={formFoundation}
                 onUpdateFormField={onUpdateFormField}
+                onUpdateFormFieldAsync={onUpdateFormFieldAsync}
                 modalState={modalState}
                 onGetValidationContext={getValidationContext}
                 errorsMessages={errorsMessages}
