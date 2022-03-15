@@ -115,13 +115,12 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const serverData = {
                 events: [{
                     ...mainDataServerValues,
-                    dataValues: Object
-                        .keys(formServerValues)
-                        .map(key => ({
-                            dataElement: key,
-                            value: formServerValues[key],
-                        }))
-                        .filter(({ value }) => value != null),
+                    dataValues: formFoundation
+                        .getElements()
+                        .map(({ id }) => ({
+                            dataElement: id,
+                            value: formServerValues[id] || null,
+                        })),
                 }],
             };
 
@@ -147,13 +146,8 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED),
-        map((action) => {
-            const meta = action.meta;
-            if (meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT) {
-                return commitEnrollmentEvent(meta.eventId);
-            }
-            return null;
-        }));
+        filter(({ meta }) => meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT),
+        map(({ meta }) => commitEnrollmentEvent(meta.eventId)));
 
 export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

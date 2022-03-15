@@ -1,3 +1,61 @@
+## [99.11.1](https://github.com/dhis2/capture-app/compare/v99.11.0...v99.11.1) (2022-03-15)
+
+
+### Bug Fixes
+
+* [DHIS2-12847] App crash when saving TEI without enrollment ([cdf8722](https://github.com/dhis2/capture-app/commit/cdf8722b63040c3b74ae581bfbc76bab5f5e2c9a))
+
+# [99.11.0](https://github.com/dhis2/capture-app/compare/v99.10.8...v99.11.0) (2022-03-14)
+
+
+### Features
+
+* [DHIS2-12627] TEI context in ScopeSelector in new page ([#2598](https://github.com/dhis2/capture-app/issues/2598)) ([cf525db](https://github.com/dhis2/capture-app/commit/cf525db469479bd40713cf9256e949aea792e02a))
+
+## [99.10.8](https://github.com/dhis2/capture-app/compare/v99.10.7...v99.10.8) (2022-03-14)
+
+
+### Bug Fixes
+
+* [DHIS2-12733] EnrollmentRegistrationEntry lifecycle ([#2585](https://github.com/dhis2/capture-app/issues/2585)) ([a425f57](https://github.com/dhis2/capture-app/commit/a425f572ce3d1c97651ab309c9edf68b419d6f9c))
+* [DHIS2-12740] Send null for erased values ([c3007c1](https://github.com/dhis2/capture-app/commit/c3007c17122d0f3ae956e01580f699bdc28cee2e))
+* remove fields query arg ([8fe021c](https://github.com/dhis2/capture-app/commit/8fe021c2b338681f202d2b07ed8b1023db22e044))
+
+## [99.10.7](https://github.com/dhis2/capture-app/compare/v99.10.6...v99.10.7) (2022-03-14)
+
+
+### Bug Fixes
+
+* [DHIS2-12837] Edit single event epic fix ([0727177](https://github.com/dhis2/capture-app/commit/0727177bbc9a428087e763b6f74a0ed40c82345e))
+
+## [99.10.6](https://github.com/dhis2/capture-app/compare/v99.10.5...v99.10.6) (2022-03-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([afaf672](https://github.com/dhis2/capture-app/commit/afaf6722eba89e931c2e77360e95807d1e576a20))
+
+## [99.10.5](https://github.com/dhis2/capture-app/compare/v99.10.4...v99.10.5) (2022-03-13)
+
+
+### Bug Fixes
+
+* [TECH-1030] DisplayName not showing correctly in comments widget ([2a2dad1](https://github.com/dhis2/capture-app/commit/2a2dad14dc7d914f53dd3923a40eb2032e6cbd96))
+
+## [99.10.4](https://github.com/dhis2/capture-app/compare/v99.10.3...v99.10.4) (2022-03-11)
+
+
+### Bug Fixes
+
+* use api version 38 ([32b3e99](https://github.com/dhis2/capture-app/commit/32b3e99e53b535e48dc20deec739dbfcd66fc82a))
+
+## [99.10.3](https://github.com/dhis2/capture-app/compare/v99.10.2...v99.10.3) (2022-03-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ade3666](https://github.com/dhis2/capture-app/commit/ade366610f66fb48f25ae1b33f23d0cb0eb9c5ba))
+
 ## [99.10.2](https://github.com/dhis2/capture-app/compare/v99.10.1...v99.10.2) (2022-03-09)
 
 
