@@ -1,3 +1,10 @@
+## [99.11.1](https://github.com/dhis2/capture-app/compare/v99.11.0...v99.11.1) (2022-03-15)
+
+
+### Bug Fixes
+
+* [DHIS2-12847] App crash when saving TEI without enrollment ([cdf8722](https://github.com/dhis2/capture-app/commit/cdf8722b63040c3b74ae581bfbc76bab5f5e2c9a))
+
 # [99.11.0](https://github.com/dhis2/capture-app/compare/v99.10.8...v99.11.0) (2022-03-14)
 
 
