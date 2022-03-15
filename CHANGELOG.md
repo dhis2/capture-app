@@ -1,3 +1,10 @@
+## [99.11.2](https://github.com/dhis2/capture-app/compare/v99.11.1...v99.11.2) (2022-03-15)
+
+
+### Bug Fixes
+
+* [DHIS2-12727][DHIS2-12726] Crash when saving event with relationship ([63e3424](https://github.com/dhis2/capture-app/commit/63e3424007d1df5f22b7ef1a8e1d41eb2585644d))
+
 ## [99.11.1](https://github.com/dhis2/capture-app/compare/v99.11.0...v99.11.1) (2022-03-15)
 
 
