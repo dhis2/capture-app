@@ -45,6 +45,8 @@ const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
         return {
             type: dateFilter.type,
             period: dateFilter.period,
+            startBuffer: dateFilter.startBuffer,
+            endBuffer: dateFilter.endBuffer,
         };
     }
 
