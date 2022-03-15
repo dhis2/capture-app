@@ -1,3 +1,10 @@
+## [99.11.3](https://github.com/dhis2/capture-app/compare/v99.11.2...v99.11.3) (2022-03-15)
+
+
+### Bug Fixes
+
+* [DHIS2-12855] assignedUser not displaying in event workinglist ([#2589](https://github.com/dhis2/capture-app/issues/2589)) ([330a795](https://github.com/dhis2/capture-app/commit/330a7956cf289b034ea8d160fa27b885502a3298))
+
 ## [99.11.2](https://github.com/dhis2/capture-app/compare/v99.11.1...v99.11.2) (2022-03-15)
 
 
