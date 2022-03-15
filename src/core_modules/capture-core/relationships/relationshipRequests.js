@@ -8,8 +8,8 @@ import { convertServerRelationshipToClient } from './convertServerToClient';
 
 async function getRelationships(queryParams: Object, relationshipTypes: Array<RelationshipType>) {
     const api = getApi();
-    const apiRes = await api.get('relationships', { ...queryParams });
-    return apiRes && isArray(apiRes) ? apiRes.map(rel => convertServerRelationshipToClient(rel, relationshipTypes)) : null;
+    const apiRes = await api.get('tracker/relationships', { ...queryParams });
+    return apiRes?.instances && isArray(apiRes.instances) ? apiRes.instances?.map(rel => convertServerRelationshipToClient(rel, relationshipTypes)) : null;
 }
 
 export function getRelationshipsForEvent(eventId: string, programId: string, programStageId: string) {
