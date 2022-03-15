@@ -919,6 +919,11 @@ When you click on the enrollment actions button, a menu with all the available a
 
 ![](resources/images/enrollment-dash-enrollment-widget-2.png)
 
+There can only be one active enrollment at a time. If there are no active enrollments, there will be a button **Add new** to enroll the tracked entity instance in the program again.
+If the program only allows one enrollment per tracked entity instance, the **Add new** button will be disabled with a tooltip saying `Only one enrollment per {TET} is allowed in this program`.
+
+![](resources/images/enrollment-dash-enrollment-widget-add-new.png)
+
 #### Delete the enrollment
 
 You can delete the enrollment by clicking the delete button and confirming the action in the modal. 
