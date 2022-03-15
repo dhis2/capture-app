@@ -54,25 +54,8 @@ type Props = {
     },
 };
 
-type State = {
-    value: Value,
-};
-
-class RangeFilterPlain extends Component<Props, State> {
-    static calculateDefaultState(value: ?RangeFilterData): Value {
-        return {
-            start: value && (value.start || value.start === 0) ? value.start.toString() : undefined,
-            end: value && (value.end || value.end === 0) ? value.end.toString() : undefined,
-        };
-    }
+class RangeFilterPlain extends Component<Props> {
     endD2TextFieldInstance: D2TextField;
-
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            value: RangeFilter.calculateDefaultState(this.props.value),
-        };
-    }
 
     getUpdatedValue(valuePart: { [key: string]: ?string }) {
         // $FlowFixMe[cannot-spread-indexer] automated comment
@@ -89,12 +72,10 @@ class RangeFilterPlain extends Component<Props, State> {
     };
 
     handleEnterKeyInEnd = (value: { [key: string]: ?string }) => {
-        this.setState({ value });
         this.props.handleEnterKeyInTo && this.props.handleEnterKeyInTo(value);
     };
 
     handleFieldBlur = (value: { [key: string]: ?string }) => {
-        this.setState({ value });
         this.props.handleFieldBlur && this.props.handleFieldBlur(this.getUpdatedValue(value));
     };
 

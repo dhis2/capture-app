@@ -222,11 +222,11 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             ...valuePart,
         };
 
-        if (valuePart.from || valuePart.to) {
+        if (valuePart?.from || valuePart?.to) {
             valueObject.main = mainOptionKeys.ABSOLUTE_RANGE;
             delete valueObject.start;
             delete valueObject.end;
-        } else if (valuePart.start || valuePart.end) {
+        } else if (valuePart?.start || valuePart?.end) {
             valueObject.main = optionKeys.RELATIVE_RANGE;
             delete valueObject.from;
             delete valueObject.to;

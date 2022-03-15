@@ -91,6 +91,16 @@ When('you set the enrollment status filter to completed', () => {
         .click();
 });
 
+When('you set the enrollment date to a relative range', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Date of enrollment')
+        .click();
+    cy.get('[data-test="date-range-filter-start"]')
+        .type('5');
+    cy.get('[data-test="date-range-filter-end"]')
+        .type('3');
+});
+
 When('you apply the current filter', () => {
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();

@@ -39,6 +39,7 @@ class EndRangeFilterPlain extends Component<Props> {
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Days in the future')}
                     fullWidth
+                    data-test="date-range-filter-end"
                     {...passOnProps}
                 />
                 <div className={errorClass}>{error}</div>
