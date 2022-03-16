@@ -545,6 +545,13 @@ export class VariableService {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                 },
             );
+
+            variables.program_stage_name = this.buildVariable(
+                executingEvent.programStageName,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
         }
 
         if (eventsContainer) {
