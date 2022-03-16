@@ -9,6 +9,7 @@ const getImageOrFileResourceSubvalue = async (key: string, querySingleResource: 
     return {
         id,
         name,
+        value: id,
     };
 };
 
