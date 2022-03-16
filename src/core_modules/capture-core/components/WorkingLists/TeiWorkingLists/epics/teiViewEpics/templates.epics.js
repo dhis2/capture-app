@@ -64,6 +64,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
                 },
             } = action.payload;
             const trackedEntityInstanceFilters = {
+                publicAccess: '--------',
                 name,
                 program,
                 entityQueryCriteria: {
