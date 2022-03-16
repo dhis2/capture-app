@@ -6,10 +6,8 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { useRulesEngineOrgUnit } from '../../../hooks/useRulesEngineOrgUnit';
 import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
@@ -42,14 +40,14 @@ const EnrollmentRegistrationEntryPlain =
       classes,
       onSave,
       onPostProcessErrorMessage,
+      orgUnitId,
+      orgUnit,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
 
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-      const orgUnitId = useCurrentOrgUnitInfo().id;
-      const orgUnit = useRulesEngineOrgUnit(orgUnitId);
 
       const navigateToWorkingListsPage = () => {
           const url =
