@@ -1,3 +1,16 @@
+# [100.0.0](https://github.com/dhis2/capture-app/compare/v99.11.4...v100.0.0) (2022-03-16)
+
+
+### chore
+
+* **release:** migrate to new app version scheme ([#2566](https://github.com/dhis2/capture-app/issues/2566)) ([8c14f06](https://github.com/dhis2/capture-app/commit/8c14f061066f803264ce9d582c3051907795d9c6)), closes [dhis2/notes#293](https://github.com/dhis2/notes/issues/293)
+
+
+### BREAKING CHANGES
+
+* **release:** App version becomes decoupled from DHIS2 versions, see
+the d2.config.js or App Hub for DHIS2 version compatibility.
+
 ## [99.11.4](https://github.com/dhis2/capture-app/compare/v99.11.3...v99.11.4) (2022-03-15)
 
 
