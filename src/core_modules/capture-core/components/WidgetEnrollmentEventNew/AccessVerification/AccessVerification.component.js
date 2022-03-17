@@ -1,13 +1,10 @@
 // @flow
 import React from 'react';
-import { useRulesEngineOrgUnit } from '../../../hooks/useRulesEngineOrgUnit';
-import { Validated } from '../Validated';
+import { OrgUnitFetcher } from '../OrgUnitFetcher/OrgUnitFetcher.component';
 import { NoAccess } from './NoAccess.component';
 import type { Props } from './accessVerification.types';
 
-export const AccessVerificationComponent = ({ eventAccess, onCancel, orgUnitId, ...passOnProps }: Props) => {
-    const orgUnit = useRulesEngineOrgUnit(orgUnitId);
-
+export const AccessVerificationComponent = ({ eventAccess, onCancel, ...passOnProps }: Props) => {
     if (!eventAccess.write) {
         return (
             <NoAccess
@@ -16,11 +13,10 @@ export const AccessVerificationComponent = ({ eventAccess, onCancel, orgUnitId, 
         );
     }
 
-    return orgUnit ? (
-        <Validated
-            orgUnit={orgUnit}
+    return (
+        <OrgUnitFetcher
             onCancel={onCancel}
             {...passOnProps}
         />
-    ) : null;
+    );
 };

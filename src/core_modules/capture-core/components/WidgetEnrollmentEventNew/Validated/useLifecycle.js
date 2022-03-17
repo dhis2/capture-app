@@ -23,7 +23,7 @@ export const useLifecycle = ({
     program: TrackerProgram,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
-    orgUnit?: OrgUnit,
+    orgUnit: OrgUnit,
     dataEntryId: string,
     itemId: string,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
@@ -43,7 +43,6 @@ export const useLifecycle = ({
 
     const eventsRef = useRef();
     const attributesRef = useRef();
-    const orgUnitRef = useRef();
     const enrollmentDataRef = useRef();
 
     // TODO: Getting the entire state object is bad and this needs to be refactored.
@@ -56,7 +55,7 @@ export const useLifecycle = ({
             // The purpose of the following lines of code is to make sure the redux store is ready before calling getRulesActions.
             delayRulesExecutionRef.current = false;
             setRulesExecutionTrigger(-rulesExecutionTrigger);
-        } else if (orgUnit) {
+        } else {
             dispatch(batchActions([
                 getRulesActions({
                     state,
@@ -74,7 +73,6 @@ export const useLifecycle = ({
             eventsRef.current = eventsRulesDependency;
             attributesRef.current = attributesValuesRulesDependency;
             enrollmentDataRef.current = enrollmentDataRulesDependency;
-            orgUnitRef.current = orgUnit;
         }
     // Ignoring state (due to various reasons, bottom line being that field updates are handled in epic)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -93,9 +91,7 @@ export const useLifecycle = ({
     const rulesReady =
         eventsRef.current === eventsRulesDependency &&
         attributesRef.current === attributesValuesRulesDependency &&
-        enrollmentDataRef.current === enrollmentDataRulesDependency &&
-        orgUnit &&
-        orgUnitRef.current === orgUnit;
+        enrollmentDataRef.current === enrollmentDataRulesDependency;
 
     return dataEntryReadyRef.current && rulesReady;
 };

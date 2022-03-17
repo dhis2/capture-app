@@ -1,26 +1,15 @@
 // @flow
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
-import type { ProgramStage, RenderFoundation, TrackerProgram } from '../../../metaData';
+import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import { typeof addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import type {
-    ExternalSaveHandler,
-    RulesExecutionDependencies,
+    CommonValidatedProps,
     RulesExecutionDependenciesClientFormatted,
 } from '../common.types';
 
 export type ContainerProps = {|
-    program: TrackerProgram,
-    stage: ProgramStage,
-    formFoundation: RenderFoundation,
-    teiId: string,
-    enrollmentId: string,
+    ...CommonValidatedProps,
     orgUnit: OrgUnit,
-    rulesExecutionDependencies: RulesExecutionDependencies,
-    onSaveExternal?: ExternalSaveHandler,
-    onSaveSuccessActionType?: string,
-    onSaveErrorActionType?: string,
-    widgetReducerName: string,
-    onCancel?: () => void,
 |};
 
 export type Props = {|
