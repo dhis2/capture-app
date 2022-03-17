@@ -1,7 +1,7 @@
 // @flow
 export const convertValue = (order: ?string) => {
     const sortOrderParts = order && order.split(':');
-    if (!sortOrderParts || sortOrderParts.length !== 2) {
+    if (!sortOrderParts || sortOrderParts.length < 2) {
         return {
             sortById: 'createdAt',
             sortByDirection: 'desc',

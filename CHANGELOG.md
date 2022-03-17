@@ -1,3 +1,10 @@
+## [100.0.1](https://github.com/dhis2/capture-app/compare/v100.0.0...v100.0.1) (2022-03-17)
+
+
+### Bug Fixes
+
+* [DHIS2-12883] use first form multiple order arguments ([#2655](https://github.com/dhis2/capture-app/issues/2655)) ([e3413ea](https://github.com/dhis2/capture-app/commit/e3413ea49aa83f2dd22ad095af9fe5234b11c7b7))
+
 # [100.0.0](https://github.com/dhis2/capture-app/compare/v99.11.4...v100.0.0) (2022-03-16)
 
 
