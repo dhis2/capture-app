@@ -38,8 +38,8 @@ const getMainApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}, filtersOnl
         }, {});
 
 const getApiOrderById = (sortById: string, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => {
-    const { id, apiName } = columnsMetaForDataFetching.get(sortById) || {};
-    return apiName || id;
+    const { id } = columnsMetaForDataFetching.get(sortById) || {};
+    return id;
 };
 
 const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => {

@@ -8,7 +8,9 @@ const buildCustomColumnsConfiguration = (
     customApiOrder: Array<string>,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
 ): CustomColumnOrder => {
-    const columnsMetaForDataFetchingByApiName = new Map([...columnsMetaForDataFetching.entries()].map(([, config]) => [config.apiName, config]));
+    const columnsMetaForDataFetchingById = new Map(
+        [...columnsMetaForDataFetching.entries()].map(([, config]) => [config.id, config]),
+    );
 
     const visibleColumnsAsMap = new Map(
         customApiOrder
@@ -17,7 +19,7 @@ const buildCustomColumnsConfiguration = (
                     return id;
                 }
 
-                const element = columnsMetaForDataFetchingByApiName.get(id);
+                const element = columnsMetaForDataFetchingById.get(id);
                 if (!element) {
                     log.error(errorCreator('id specified in column order not valid')({ id }));
                     return null;

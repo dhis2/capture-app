@@ -3,7 +3,7 @@ export const convertValue = (order: ?string) => {
     const sortOrderParts = order && order.split(':');
     if (!sortOrderParts || sortOrderParts.length !== 2) {
         return {
-            sortById: 'regDate',
+            sortById: 'createdAt',
             sortByDirection: 'desc',
         };
     }
