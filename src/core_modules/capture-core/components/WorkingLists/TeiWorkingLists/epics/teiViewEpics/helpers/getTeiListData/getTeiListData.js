@@ -37,17 +37,10 @@ const getMainApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}, filtersOnl
             };
         }, {});
 
-const getApiOrderById = (sortById: string, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => {
-    const { id } = columnsMetaForDataFetching.get(sortById) || {};
-    return id;
-};
-
 const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => {
-    const apiId = getApiOrderById(sortById, columnsMetaForDataFetching);
-    return `${apiId}:${sortByDirection}`;
+    const { id } = columnsMetaForDataFetching.get(sortById) || {};
+    return id ? `${id}:${sortByDirection}` : '';
 };
-
-
 const createApiQueryArgs = ({
     page,
     pageSize,
