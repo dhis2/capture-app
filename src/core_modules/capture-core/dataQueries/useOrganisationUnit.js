@@ -34,13 +34,14 @@ export const useOrganisationUnit = (orgUnitId: string, fields?: string) => {
     }, [error]);
 
     useEffect(() => {
+        const organisationUnit = data?.organisationUnits;
         setOrgUnit(
             (loading || !called || error) ?
                 undefined : {
                     id: orgUnitId,
-                    name: data?.organisationUnits?.displayName,
-                    code: data?.organisationUnits?.code,
-                    ...data,
+                    name: organisationUnit?.displayName,
+                    code: organisationUnit?.code,
+                    ...organisationUnit,
                 },
         );
     }, [orgUnitId, data, loading, called, error]);
