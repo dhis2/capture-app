@@ -48,7 +48,12 @@ export const WidgetEventEditPlain = ({
 }: Props) => {
     const dispatch = useDispatch();
     const currentPageMode = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent) ? pageMode.EDIT : pageMode.VIEW;
-    const orgUnit = useRulesEngineOrgUnit(useLocationQuery().orgUnitId);
+    const orgUnitId = useLocationQuery().orgUnitId;
+    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+
+    if (error) {
+        return error.errorComponent;
+    }
 
     return orgUnit ? (
         <div data-test="widget-enrollment-event">

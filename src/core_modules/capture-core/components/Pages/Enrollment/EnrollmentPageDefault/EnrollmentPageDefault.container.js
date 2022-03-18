@@ -23,7 +23,7 @@ export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const orgUnit = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
     const program = useTrackerProgram(programId);
     const {
@@ -78,6 +78,10 @@ export const EnrollmentPageDefault = () => {
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
+
+    if (error) {
+        return error.errorComponent;
+    }
 
     return (
         <EnrollmentPageDefaultComponent

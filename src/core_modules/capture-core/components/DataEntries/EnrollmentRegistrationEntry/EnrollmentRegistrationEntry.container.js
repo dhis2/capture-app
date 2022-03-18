@@ -14,8 +14,12 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     ...passOnProps
 }) => {
     const orgUnitId = useCurrentOrgUnitInfo().id;
-    const orgUnit = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
     const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
+
+    if (error) {
+        return error.errorComponent;
+    }
 
     return (
         <EnrollmentRegistrationEntryComponent

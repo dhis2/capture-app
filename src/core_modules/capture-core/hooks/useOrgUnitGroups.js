@@ -9,9 +9,13 @@ type Request = {
     fetching: boolean,
 };
 
-export function useOrgUnitGroups(orgUnitId: ?string): ?Array<OrgUnitGroup> {
+export function useOrgUnitGroups(orgUnitId: ?string): {
+    orgUnitGroups?: Array<OrgUnitGroup>,
+    error: any,
+} {
     const lastRequest = useRef<Request>({ orgUnitId: undefined, requestId: 0, fetching: false });
     const [orgUnitGroups, setOrgUnitGroups] = useState();
+    const [error, setError] = useState();
 
     let currentRequestId;
 
@@ -22,19 +26,22 @@ export function useOrgUnitGroups(orgUnitId: ?string): ?Array<OrgUnitGroup> {
             requestId: currentRequestId,
             fetching: true,
         };
+        setError(undefined);
     }
 
     useEffect(() => {
         if (!orgUnitId || currentRequestId !== lastRequest.current.requestId) {
             return;
         }
-        getAssociatedOrgUnitGroups(orgUnitId).then((response) => {
-            if (currentRequestId === lastRequest.current.requestId) {
-                lastRequest.current.fetching = false;
-                setOrgUnitGroups(response);
-            }
-        });
+        getAssociatedOrgUnitGroups(orgUnitId)
+            .then((response) => {
+                if (currentRequestId === lastRequest.current.requestId) {
+                    lastRequest.current.fetching = false;
+                    setOrgUnitGroups(response);
+                }
+            })
+            .catch(setError);
     }, [orgUnitId, currentRequestId]);
 
-    return lastRequest.current.fetching ? undefined : orgUnitGroups;
+    return lastRequest.current.fetching ? { error } : { orgUnitGroups, error };
 }

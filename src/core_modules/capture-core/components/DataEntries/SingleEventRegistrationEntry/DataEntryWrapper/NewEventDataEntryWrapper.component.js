@@ -45,10 +45,15 @@ const NewEventDataEntryWrapperPlain = ({
     onFormLayoutDirectionChange,
 }: PlainProps) => {
     const { id: programId } = useCurrentProgramInfo();
-    const orgUnit = useRulesEngineOrgUnit(useLocationQuery().orgUnitId);
+    const orgUnitId = useLocationQuery().orgUnitId;
+    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
     const rulesReady = useRulesEngine({ programId, orgUnit, formFoundation });
-
     const titleText = useScopeTitleText(programId);
+
+    if (error) {
+        return error.errorComponent;
+    }
+
     const checkIfCustomForm = () => {
         let isCustom = false;
         if (!formFoundation?.sections) { return isCustom; }

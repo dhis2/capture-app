@@ -62,7 +62,12 @@ const EventDetailsSectionPlain = (props: Props) => {
         eventAccess,
         ...passOnProps } = props;
     const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
-    const orgUnit = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+
+    if (error) {
+        return error.errorComponent;
+    }
+
     const renderDataEntryContainer = () => {
         const formFoundation = programStage.stageForm;
         return (

@@ -59,7 +59,7 @@ export const LockedSelector: ComponentType<OwnProps> =
           programId: urlProgramId || currentSelections.programId,
       }));
 
-      const orgUnit = useRulesEngineOrgUnit(orgUnitId);
+      const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
       const lockedSelectorLoads: string =
         useSelector(({ activePage }) => activePage.lockedSelectorLoads);
@@ -155,6 +155,10 @@ export const LockedSelector: ComponentType<OwnProps> =
       const ready = deriveReadiness(lockedSelectorLoads, orgUnitId, orgUnit, organisationUnits);
 
       useComponentLifecycle(orgUnit);
+
+      if (error) {
+          return error.errorComponent;
+      }
 
       return (
           <LockedSelectorComponent
