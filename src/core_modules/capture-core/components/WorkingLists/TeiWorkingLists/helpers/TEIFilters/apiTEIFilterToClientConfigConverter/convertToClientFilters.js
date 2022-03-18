@@ -22,7 +22,7 @@ import type {
 } from '../../../types';
 import { DATE_TYPES, ASSIGNEE_MODES } from '../../../constants';
 
-const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
+const getTextFilter = (filter: ApiDataFilterText): ?TextFilterData => {
     const value = filter.like;
     return value ? { value } : undefined;
 };
