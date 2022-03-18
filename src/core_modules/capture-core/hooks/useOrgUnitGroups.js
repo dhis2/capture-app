@@ -26,13 +26,14 @@ export function useOrgUnitGroups(orgUnitId: ?string): {
             requestId: currentRequestId,
             fetching: true,
         };
-        setError(undefined);
     }
 
     useEffect(() => {
         if (!orgUnitId || currentRequestId !== lastRequest.current.requestId) {
             return;
         }
+
+        setError(undefined);
         getAssociatedOrgUnitGroups(orgUnitId)
             .then((response) => {
                 if (currentRequestId === lastRequest.current.requestId) {
