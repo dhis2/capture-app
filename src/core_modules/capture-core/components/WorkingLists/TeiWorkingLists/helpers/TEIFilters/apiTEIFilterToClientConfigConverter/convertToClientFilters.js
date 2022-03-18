@@ -24,7 +24,7 @@ import { DATE_TYPES, ASSIGNEE_MODES } from '../../../constants';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
     const value = filter.like;
-    return { value };
+    return value ? { value } : undefined;
 };
 
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
