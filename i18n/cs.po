@@ -636,6 +636,8 @@ msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
 msgstr ""
+"Vyberte program, do kterého chcete přidat nový, nebo si prohlédněte "
+"stávající zápisy pro {{teiDisplayName}}"
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -762,7 +764,7 @@ msgid "View dashboard"
 msgstr "Zobrazit ovládací panel"
 
 msgid "View enrollment"
-msgstr ""
+msgstr "Zobrazit zápis"
 
 msgid "Create for"
 msgstr "Vytvořit pro"
@@ -772,7 +774,7 @@ msgid ""
 msgstr "Můžete také vybrat program z horní lišty a vytvořit v něm program"
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "Nový zápis do programu{{escape}} {{programName}}"
 
 msgid "Save new"
 msgstr "Uložit nový"
@@ -982,7 +984,7 @@ msgid "Add new"
 msgstr "Přidat nový"
 
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
-msgstr ""
+msgstr "V tomto programu je povolen pouze jeden zápis na {{tetName}}"
 
 msgid "Reactivate"
 msgstr "Znovu aktivovat"
