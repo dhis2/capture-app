@@ -715,7 +715,7 @@ msgid "View dashboard"
 msgstr "Zobrazit ovládací panel"
 
 msgid "View enrollment"
-msgstr ""
+msgstr "Zobrazit zápis"
 
 msgid "Create for"
 msgstr "Vytvořit pro"
