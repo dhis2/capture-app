@@ -45,6 +45,7 @@ export const WidgetEnrollmentPlain = ({
     program = {},
     ownerOrgUnit = {},
     refetch,
+    refetchTEI,
     error,
     loading,
     canAddNew,
@@ -205,6 +206,7 @@ export const WidgetEnrollmentPlain = ({
                             onlyEnrollOnce={program.onlyEnrollOnce}
                             enrollment={enrollment}
                             refetch={refetch}
+                            refetchTEI={refetchTEI}
                             onDelete={onDelete}
                             onAddNew={onAddNew}
                             canAddNew={canAddNew}

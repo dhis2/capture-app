@@ -14,6 +14,7 @@ export type PlainProps = {|
     program: Object,
     ownerOrgUnit: Object,
     refetch: QueryRefetchFunction,
+    refetchTEI: QueryRefetchFunction,
     error?: FetchError,
     loading: boolean,
     canAddNew: boolean,
