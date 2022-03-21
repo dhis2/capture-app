@@ -556,6 +556,12 @@ export class VariableService {
                 },
             );
 
+            variables.event_status = this.buildVariable(
+                executingEvent.status,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
 
             variables.program_stage_id = this.buildVariable(
                 executingEvent.programStageId,
