@@ -531,6 +531,13 @@ export class VariableService {
                 },
             );
 
+            variables.completed_date = this.buildVariable(
+                executingEvent.completedAt,
+                typeKeys.DATE, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
+
             variables.event_id = this.buildVariable(
                 executingEvent.eventId,
                 typeKeys.TEXT, {
