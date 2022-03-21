@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { OptionSetHelper } from '../../helpers/OptionSetHelper';
-import { typeKeys } from '../../constants';
+import { typeKeys, typeof environmentTypes } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
 import { getStructureEvents } from './helpers';
 import type {
@@ -73,6 +73,7 @@ export class VariableService {
     }
 
     static dateUtils: IDateUtils;
+    environment: $Values<environmentTypes>;
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
@@ -80,7 +81,9 @@ export class VariableService {
     constructor(
         onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
         dateUtils: IDateUtils,
+        environment: $Values<environmentTypes>,
     ) {
+        this.environment = environment;
         this.onProcessValue = onProcessValue;
         VariableService.dateUtils = dateUtils;
 
@@ -496,6 +499,13 @@ export class VariableService {
     getContextVariables(sourceData: SourceData): RuleVariables {
         let variables = {};
 
+        variables.environment = this.buildVariable(
+            this.environment,
+            typeKeys.TEXT, {
+                variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+            },
+        );
+
         variables.current_date = this.buildVariable(
             VariableService.dateUtils.getToday(),
             typeKeys.DATE, {
@@ -545,6 +555,7 @@ export class VariableService {
                     variableEventDate: executingEvent.occurredAt,
                 },
             );
+
 
             variables.program_stage_id = this.buildVariable(
                 executingEvent.programStageId,
