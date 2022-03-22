@@ -1,3 +1,10 @@
+# [100.1.0](https://github.com/dhis2/capture-app/compare/v100.0.3...v100.1.0) (2022-03-22)
+
+
+### Features
+
+* [DHIS2-9062] support organisation unit groups in program rules ([81d2e4c](https://github.com/dhis2/capture-app/commit/81d2e4c456e1eae0fee12406f515173a797f7e3b))
+
 ## [100.0.3](https://github.com/dhis2/capture-app/compare/v100.0.2...v100.0.3) (2022-03-22)
 
 
