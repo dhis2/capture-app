@@ -49,22 +49,17 @@ const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumn
     return filterArgument;
 };
 
-const getEventDateQueryArgs = (filter: Array<string> | string) => {
-    let eventDateQueryArgs = {};
-    if (Array.isArray(filter)) {
-        eventDateQueryArgs = filter
-            .reduce((accEventDateQueryArgs, filterPart: string) => {
-                if (filterPart.startsWith('ge')) {
-                    accEventDateQueryArgs.occurredAfter = filterPart.replace('ge:', '');
-                } else {
-                    accEventDateQueryArgs.occurredBefore = filterPart.replace('le:', '');
-                }
-                return accEventDateQueryArgs;
-            }, {});
-    } else if (filter.startsWith('ge')) {
-        eventDateQueryArgs.occurredAfter = filter.replace('ge:', '');
-    } else {
-        eventDateQueryArgs.occurredBefore = filter.replace('le:', '');
+const getEventDateQueryArgs = (filter: string) => {
+    const eventDateQueryArgs = {};
+    const filterParts = filter.split(':');
+    const indexGe = filterParts.indexOf('ge');
+    const indexLe = filterParts.indexOf('le');
+
+    if (indexGe !== -1 && filterParts[indexGe + 1]) {
+        eventDateQueryArgs.occurredAfter = filterParts[indexGe + 1];
+    }
+    if (indexLe !== -1 && filterParts[indexLe + 1]) {
+        eventDateQueryArgs.occurredBefore = filterParts[indexLe + 1];
     }
     return eventDateQueryArgs;
 };
