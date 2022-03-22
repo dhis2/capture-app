@@ -1,5 +1,6 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import type { TrackerProgram } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
@@ -48,7 +49,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     clientValues,
 }: {
     program: TrackerProgram,
-    orgUnit: Object,
+    orgUnit: OrgUnit,
     dataEntryId: string,
     extraActions?: Array<ReduxAction<any, any>>,
     extraDataEntryProps?: Array<Object>,

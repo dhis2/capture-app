@@ -1,6 +1,6 @@
 // @flow
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { actionCreator } from '../../../../actions/actions.utils';
-
 
 export const actionTypes = {
     START_SHOW_EDIT_EVENT_DATA_ENTRY: 'StartShowEditEventDataEntryForViewSingleEvent',
@@ -12,8 +12,8 @@ export const viewEventIds = {
     itemId: 'viewEvent',
 };
 
-export const startShowEditEventDataEntry = () =>
-    actionCreator(actionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY)();
+export const startShowEditEventDataEntry = (orgUnit: OrgUnit) =>
+    actionCreator(actionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY)({ orgUnit });
 
 export const showEditEventDataEntry = () =>
     actionCreator(actionTypes.SHOW_EDIT_EVENT_DATA_ENTRY)();

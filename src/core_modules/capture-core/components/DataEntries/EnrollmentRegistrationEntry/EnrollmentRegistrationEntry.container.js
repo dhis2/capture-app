@@ -4,6 +4,8 @@ import type { ComponentType } from 'react';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
+import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
+import { useRulesEngineOrgUnit } from '../../../hooks/useRulesEngineOrgUnit';
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
@@ -11,7 +13,13 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     trackedEntityInstanceAttributes,
     ...passOnProps
 }) => {
-    const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes);
+    const orgUnitId = useCurrentOrgUnitInfo().id;
+    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
+
+    if (error) {
+        return error.errorComponent;
+    }
 
     return (
         <EnrollmentRegistrationEntryComponent
@@ -21,6 +29,8 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             ready={ready}
             teiId={teiId}
             skipDuplicateCheck={skipDuplicateCheck}
+            orgUnitId={orgUnitId}
+            orgUnit={orgUnit}
         />
     );
 };

@@ -6,7 +6,6 @@ export const newEventWidgetDataEntryBatchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForAddEventActionsBatch',
     FIELD_UPDATE_BATCH: 'NewEvent.UpdateFieldBatch',
     OPEN_ADD_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenAddEventInDataEntryActionsBatch',
-    RESET_DATA_ENTRY_ACTIONS_BATCH: 'ResetDataEntryForNewEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForAddEventActionsBatch',
 };
 

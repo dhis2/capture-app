@@ -240,7 +240,7 @@ export class RulesEngine {
             constants,
         });
 
-        const dhisFunctions = d2Functions(this.dateUtils, this.variableService, variablesHash);
+        const dhisFunctions = d2Functions(this.dateUtils, this.variableService, variablesHash, selectedOrgUnit);
 
         if (!programRules) {
             return [];

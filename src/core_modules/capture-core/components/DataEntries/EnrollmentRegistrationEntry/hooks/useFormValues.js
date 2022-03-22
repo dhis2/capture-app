@@ -37,7 +37,7 @@ export type InputAttribute = {
 type InputForm = {
     program: InputProgramData,
     trackedEntityInstanceAttributes: Array<InputAttribute>,
-    orgUnit: OrgUnit,
+    orgUnit: ?OrgUnit,
     formFoundation: RenderFoundation,
     teiId: ?string,
 };

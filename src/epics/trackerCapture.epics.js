@@ -42,7 +42,6 @@ import {
 
 import {
     getEventFromUrlEpic,
-    getOrgUnitOnUrlUpdateEpic,
 } from 'capture-core/components/Pages/ViewEvent/epics/editEvent.epics';
 import {
     runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
@@ -265,7 +264,6 @@ export const epics = combineEpics(
     cancelNewEventLocationChangeEpic,
     cancelNewEventEpic,
     getEventFromUrlEpic,
-    getOrgUnitOnUrlUpdateEpic,
     runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
     runRulesOnUpdateFieldForEditSingleEventEpic,
     saveEditEventLocationChangeEpic,
