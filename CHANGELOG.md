@@ -1,3 +1,11 @@
+## [100.0.3](https://github.com/dhis2/capture-app/compare/v100.0.2...v100.0.3) (2022-03-22)
+
+
+### Bug Fixes
+
+* [DHIS2-11796] adapt the date shape to the API requirements ([#2662](https://github.com/dhis2/capture-app/issues/2662)) ([ecd676f](https://github.com/dhis2/capture-app/commit/ecd676fd7b23fcd478f29f5ad5630c4eed967d30))
+* [DHIS2-12873] missing propriety for files/images dataElements ([#2651](https://github.com/dhis2/capture-app/issues/2651)) ([329ccc0](https://github.com/dhis2/capture-app/commit/329ccc0178c60b800da33c25e7f1014e13f11ea1))
+
 ## [100.0.2](https://github.com/dhis2/capture-app/compare/v100.0.1...v100.0.2) (2022-03-19)
 
 
