@@ -11,7 +11,6 @@ export type Props = {|
     events: ?Array<Event>,
     stages?: Array<Stage>,
     teiRelationships: Array<OutputRelationship>,
-    enrollmentRelationships: Array<OutputRelationship>,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
     orgUnitId: string,

@@ -24,7 +24,7 @@ export const getDisplayFieldsFromAPI = {
         { id: 'orgUnitName', label: 'Organisation unit' },
         { id: 'program',
             label: 'Program',
-            convertValue: props => props.programName,
+            convertValue: props => props?.programName,
         },
         { id: 'eventDate',
             label: 'Event date',

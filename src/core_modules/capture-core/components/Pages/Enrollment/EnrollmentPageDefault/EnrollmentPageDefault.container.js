@@ -35,7 +35,7 @@ export const EnrollmentPageDefault = () => {
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata?.programStages);
-    const { teiRelationships, enrollmentRelationships } = useRelationships(teiId, relationships);
+    const { relationships: teiRelationships } = useRelationships(teiId, relationships);
 
     if (programMetaDataError || enrollmentsError) {
         log.error(errorCreator('Enrollment page could not be loaded')(
@@ -92,7 +92,6 @@ export const EnrollmentPageDefault = () => {
             events={enrollment?.events}
             enrollmentId={enrollmentId}
             teiRelationships={teiRelationships}
-            enrollmentRelationships={enrollmentRelationships}
             onAddNew={onAddNew}
             onDelete={onDelete}
             onViewAll={onViewAll}

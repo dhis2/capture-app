@@ -52,7 +52,7 @@ export const EnrollmentEditEventPage = () => {
             ? (pageStatus = pageStatuses.DEFAULT)
             : (pageStatus = pageStatuses.MISSING_DATA);
     } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
-    const { teiRelationships } = useRelationships(teiId, relationships);
+    const { relationships: teiRelationships } = useRelationships(teiId, relationships);
 
     return (
         <EnrollmentEditEventPageComponent
