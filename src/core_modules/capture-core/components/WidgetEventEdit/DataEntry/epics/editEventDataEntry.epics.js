@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
@@ -23,7 +24,7 @@ import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/getEnrollmentEvents';
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../../helpers';
 
-const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
+const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, orgUnit: OrgUnit, fieldData?: ?FieldData) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const eventId = state.dataEntries[dataEntryId].eventId;
@@ -31,8 +32,6 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
     const { programId } = state.currentSelections; // TODO: Refactor as part of TECH-599. We should remove currentSelections as part of that task. This component is also being used in edit enrollment event so removing this will also make chagnes necessary for that page.
     const program = getProgramThrowIfNotFound(programId);
 
-    const orgUnitId = state.currentSelections.orgUnitId;
-    const orgUnit = state.organisationUnits[orgUnitId]; // TODO: Refactor. Might fail in some situations. Part of TECH-893.
     const stage = program instanceof EventProgram
         ? program.stage
         : getStageFromEvent(event)?.stage;
@@ -83,8 +82,8 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (action$: In
         ofType(editEventDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch => actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
-            const { dataEntryId, itemId, uid } = action.payload;
-            return runRulesForEditSingleEvent(store, dataEntryId, itemId, uid);
+            const { dataEntryId, itemId, uid, orgUnit } = action.payload;
+            return runRulesForEditSingleEvent(store, dataEntryId, itemId, uid, orgUnit);
         }));
 
 export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -93,12 +92,12 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObserv
         ofType(editEventDataEntryBatchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch => actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
-            const { elementId, value, uiState, dataEntryId, itemId, uid } = action.payload;
+            const { elementId, value, uiState, dataEntryId, itemId, uid, orgUnit } = action.payload;
             const fieldData: FieldData = {
                 elementId,
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForEditSingleEvent(store, dataEntryId, itemId, uid, fieldData);
+            return runRulesForEditSingleEvent(store, dataEntryId, itemId, uid, orgUnit, fieldData);
         }));
 

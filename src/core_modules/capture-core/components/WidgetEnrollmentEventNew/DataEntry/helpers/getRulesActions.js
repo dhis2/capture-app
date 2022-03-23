@@ -1,4 +1,5 @@
 // @flow
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getCurrentClientValues,
@@ -7,7 +8,7 @@ import {
     updateRulesEffects,
 } from '../../../../rules';
 import type { RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
-import type { OrgUnit, EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
+import type { EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
 
 export const getRulesActions = ({
     state, // temporary

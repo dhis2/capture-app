@@ -42,11 +42,10 @@ import {
 export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
-        map(() => {
+        map((action) => {
             const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
-            const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
                 return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
@@ -54,6 +53,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
 
             const program = metadataContainer.program;
             const foundation = metadataContainer.stage.stageForm;
+            const orgUnit = action.payload.orgUnit;
             const { enrollment, attributeValues } = state.enrollmentDomain;
 
             return batchActions([
@@ -110,18 +110,17 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                 },
             };
 
-            const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
+            const orgUnit = payload.orgUnit;
 
             const serverData = {
                 events: [{
                     ...mainDataServerValues,
-                    dataValues: Object
-                        .keys(formServerValues)
-                        .map(key => ({
-                            dataElement: key,
-                            value: formServerValues[key],
-                        }))
-                        .filter(({ value }) => value != null),
+                    dataValues: formFoundation
+                        .getElements()
+                        .map(({ id }) => ({
+                            dataElement: id,
+                            value: formServerValues[id] || null,
+                        })),
                 }],
             };
 
@@ -147,13 +146,8 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED),
-        map((action) => {
-            const meta = action.meta;
-            if (meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT) {
-                return commitEnrollmentEvent(meta.eventId);
-            }
-            return null;
-        }));
+        filter(({ meta }) => meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT),
+        map(({ meta }) => commitEnrollmentEvent(meta.eventId)));
 
 export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

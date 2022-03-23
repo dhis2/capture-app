@@ -3,6 +3,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
+import { type OrgUnit } from 'capture-core-utils/rulesEngine';
 import {
     DataEntry,
     placements,
@@ -284,7 +285,7 @@ const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 
 type PreEnrollmentDataEntryProps = {
     programId: string,
-    orgUnit: Object,
+    orgUnit: OrgUnit,
     onUpdateField: Function,
     onUpdateDataEntryField: Function,
     onStartAsyncUpdateField: Function,

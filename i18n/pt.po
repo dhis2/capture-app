@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-02T09:35:41.822Z\n"
+"POT-Creation-Date: 2022-03-14T12:24:43.099Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -641,9 +641,10 @@ msgstr ""
 msgid "Program stage not found"
 msgstr "Estágio do programa não encontrado"
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
-"{{teiDisplayName}} está inscrito em vários programas. Escolha um programa."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -1068,11 +1069,6 @@ msgstr "Esta inscrição não possui comentários"
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Salvando em {{stageName}} para {{programName}} em {{orgUnitName}}"
-
-msgid "organisation unit could not be retrieved. Please try again later."
-msgstr ""
-"unidade organizacional não pôde ser recuperada. Por favor, tente novamente "
-"mais tarde."
 
 msgid "program or stage is invalid"
 msgstr "programa ou estágio é inválido"

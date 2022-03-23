@@ -71,7 +71,6 @@ export const loadSearchGroupDuplicatesForReviewEpic: Epic = (action$, store) =>
                     pageSize,
                     page,
                     filter: filters,
-                    fields: '*',
                     ...contextParam,
                 };
                 const attributes = getAttributesFromScopeId(selectedScopeId);

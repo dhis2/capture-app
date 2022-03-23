@@ -4,6 +4,8 @@ import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
+import { getRulesEngineOrgUnit } from 'capture-core/rules/getRulesEngineOrgUnit';
+import { getAssociatedOrgUnitGroups } from 'capture-core/MetaDataStoreUtils/getAssociatedOrgUnitGroups';
 import { getApi } from '../../../../d2';
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
 import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
@@ -30,30 +32,29 @@ import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorking
 import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
 
-export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
+export const getEventOpeningFromEventListEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        switchMap(({ payload: { eventId } }) => {
-            const state = store.value;
-            return getEvent(eventId)
-                .then((eventContainer) => {
-                    if (!eventContainer) {
-                        return openViewEventPageFailed(
-                            i18n.t('Event could not be loaded. Are you sure it exists?'));
-                    }
-                    const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
-                    return startOpenEventForView(eventContainer, orgUnit);
-                })
-                .catch((error) => {
-                    const { message, details } = getErrorMessageAndDetails(error);
-                    log.error(
-                        errorCreator(
-                            message ||
-                            i18n.t('Event could not be loaded'))(details));
+        switchMap(({ payload: { eventId } }) => getEvent(eventId)
+            .then(eventContainer => (eventContainer ? Promise.all([eventContainer, getRulesEngineOrgUnit(eventContainer.event.orgUnitId)]) : []))
+            .then(([eventContainer, orgUnit]) => {
+                if (!eventContainer) {
                     return openViewEventPageFailed(
                         i18n.t('Event could not be loaded. Are you sure it exists?'));
-                });
-        }));
+                }
+                return startOpenEventForView(eventContainer, orgUnit);
+            })
+            .catch((error) => {
+                const { message, details } = getErrorMessageAndDetails(error);
+                log.error(
+                    errorCreator(
+                        message ||
+                        i18n.t('Event could not be loaded'))(details));
+                return openViewEventPageFailed(
+                    i18n.t('Event could not be loaded. Are you sure it exists?'));
+            }),
+        ),
+    );
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -87,9 +88,16 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
         ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED),
         switchMap((action) => {
             const eventContainer = action.payload.eventContainer;
-            return getApi()
-                .get(`organisationUnits/${eventContainer.event.orgUnitId}`)
-                .then(orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer))
+            // change from organisationUnitGroups -> groups
+            return Promise.all(
+                [
+                    getApi().get(`organisationUnits/${eventContainer.event.orgUnitId}`),
+                    getAssociatedOrgUnitGroups(eventContainer.event.orgUnitId),
+                ])
+                .then(([orgUnit, groups]) => {
+                    orgUnit.groups = groups;
+                    return orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer);
+                })
                 .catch((error) => {
                     const { message, details } = getErrorMessageAndDetails(error);
                     log.error(errorCreator(

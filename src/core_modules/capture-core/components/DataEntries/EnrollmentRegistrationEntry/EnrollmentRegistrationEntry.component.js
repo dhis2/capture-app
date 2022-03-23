@@ -8,7 +8,6 @@ import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
@@ -41,28 +40,29 @@ const EnrollmentRegistrationEntryPlain =
       classes,
       onSave,
       onPostProcessErrorMessage,
+      orgUnitId,
+      orgUnit,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
 
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-      const orgUnit = useCurrentOrgUnitInfo();
 
       const navigateToWorkingListsPage = () => {
           const url =
             scopeType === scopeTypes.TRACKER_PROGRAM
                 ?
-                buildUrlQueryString({ programId: selectedScopeId, orgUnitId: orgUnit.id })
+                buildUrlQueryString({ programId: selectedScopeId, orgUnitId })
                 :
-                buildUrlQueryString({ orgUnitId: orgUnit.id });
+                buildUrlQueryString({ orgUnitId });
           return push(`/?${url}`);
       };
 
       return (
           <>
               {
-                  scopeType === scopeTypes.TRACKER_PROGRAM && formId &&
+                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
                   <>
                       <EnrollmentDataEntry
                           orgUnit={orgUnit}

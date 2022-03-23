@@ -35,7 +35,7 @@ In the Capture app you register events that occurred at a particular time and pl
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. If desired you can add a comment by clicking the **Write comment** button at the bottom of the form.
+7. If desired you can add a comment by clicking the **Write comment** button at the bottom of the form. Note that Event comments are attributed to a user and cannot be deleted. 
 
 8. If desired you can add a relationship by clicking the **Add relationship** button at the bottom of the form.
    See the section about **Adding a relationship** for more information.
@@ -919,6 +919,11 @@ When you click on the enrollment actions button, a menu with all the available a
 
 ![](resources/images/enrollment-dash-enrollment-widget-2.png)
 
+There can only be one active enrollment at a time. If there are no active enrollments, there will be a button **Add new** to enroll the tracked entity instance in the program again.
+If the program only allows one enrollment per tracked entity instance, the **Add new** button will be disabled with a tooltip saying `Only one enrollment per {TET} is allowed in this program`.
+
+![](resources/images/enrollment-dash-enrollment-widget-add-new.png)
+
 #### Delete the enrollment
 
 You can delete the enrollment by clicking the delete button and confirming the action in the modal. 
@@ -931,7 +936,7 @@ You can delete the enrollment by clicking the delete button and confirming the a
 
 The enrollment comment widget displays comments and allows addition of comments, associated with the current enrollment. 
 
-By clicking in the text field, you will be able to enter new text and see action buttons **Save comment** and **Cancel**.
+By clicking in the text field, you will be able to enter new text and see action buttons **Save comment** and **Cancel**. Note that Enrollment comments are attributed to a user and cannot be deleted. 
 
 #### Tracked entity instance profile widget
 
