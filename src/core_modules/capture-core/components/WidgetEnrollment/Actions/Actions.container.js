@@ -19,12 +19,12 @@ const enrollmentDelete = {
     }),
 };
 
-export const Actions = ({ enrollment = {}, refetch, refetchTEI, onDelete, ...passOnProps }: Props) => {
+export const Actions = ({ enrollment = {}, refetchEnrollment, refetchTEI, onDelete, ...passOnProps }: Props) => {
     const [updateMutation, { loading: updateLoading }] = useDataMutation(
         enrollmentUpdate,
         {
             onComplete: () => {
-                refetch();
+                refetchEnrollment();
                 refetchTEI();
             },
         },

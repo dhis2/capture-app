@@ -12,7 +12,7 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
     const {
         error: errorEnrollment,
         enrollment,
-        refetch,
+        refetch: refetchEnrollment,
     } = useEnrollment(enrollmentId);
     const { error: errorProgram, program } = useProgram(programId);
     const { error: errorOwnerOrgUnit, ownerOrgUnit, enrollments, refetch: refetchTEI } = useTrackedEntityInstances(teiId, programId);
@@ -24,7 +24,7 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
             enrollment={enrollment}
             canAddNew={canAddNew}
             program={program}
-            refetch={refetch}
+            refetchEnrollment={refetchEnrollment}
             refetchTEI={refetchTEI}
             ownerOrgUnit={{ id: ownerOrgUnit, displayName }}
             loading={!(enrollment && program && displayName)}

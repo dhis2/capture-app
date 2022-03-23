@@ -13,7 +13,7 @@ export type PlainProps = {|
     enrollment: Object,
     program: Object,
     ownerOrgUnit: Object,
-    refetch: QueryRefetchFunction,
+    refetchEnrollment: QueryRefetchFunction,
     refetchTEI: QueryRefetchFunction,
     error?: FetchError,
     loading: boolean,
