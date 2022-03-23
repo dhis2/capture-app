@@ -6,6 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import TemplateSelectorChip from './TemplateSelectorChip.component';
 import CaptureScrollHeight from './CaptureScrollHeight.component';
 import LinkButton from '../../../Buttons/LinkButton.component';
+import { localeCompareStrings } from '../../../../utils/localeCompareStrings';
 import type { WorkingListTemplates } from './workingLists.types';
 
 const getBorder = (theme: Theme) => {
@@ -80,7 +81,7 @@ const TemplateSelector = (props: Props) => {
             } else if (orderB) {
                 sortResult = -1;
             } else {
-                sortResult = nameA.localeCompare(nameB);
+                sortResult = localeCompareStrings(nameA, nameB);
             }
             return sortResult;
         }), [templates]);
