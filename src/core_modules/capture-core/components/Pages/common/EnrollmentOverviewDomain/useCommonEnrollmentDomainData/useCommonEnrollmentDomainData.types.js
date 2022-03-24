@@ -57,8 +57,8 @@ export type TEIAttribute = {|
 |}
 
 export type TEIRelationshipData = {|
-    trackedEntityInstance: {
-        trackedEntityInstance: string,
+    trackedEntity: {
+        trackedEntity: string,
         attributes: Array<TEIAttribute>
     }
 |}
