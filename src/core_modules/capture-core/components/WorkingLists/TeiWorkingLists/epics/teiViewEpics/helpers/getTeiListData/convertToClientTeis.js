@@ -14,10 +14,10 @@ export const convertToClientTeis = (apiTeis: ApiTeis, columnsMetaForDataFetching
         .map((tei) => {
             const attributeValuesById = getValuesById(tei.attributes);
             const record = columnsMetaForDataFetching
-                .map(({ id, mainProperty, type, apiName }) => {
+                .map(({ id, mainProperty, type }) => {
                     let value;
                     if (mainProperty) {
-                        value = tei[apiName || id];
+                        value = tei[id];
                     } else {
                         value = attributeValuesById[id];
                     }
