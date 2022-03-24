@@ -86,22 +86,16 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
     id: MAIN_FILTERS.ENROLLED_AT,
     type: dataElementTypes.DATE,
     header: enrollmentDateLabel,
-    transformRecordsFilter: (filter: Array<string> | string) => {
-        let queryArgs = {};
-        if (Array.isArray(filter)) {
-            queryArgs = filter
-                .reduce((acc, filterPart: string) => {
-                    if (filterPart.startsWith('ge')) {
-                        acc.enrollmentEnrolledAfter = filterPart.replace('ge:', '');
-                    } else {
-                        acc.enrollmentEnrolledBefore = filterPart.replace('le:', '');
-                    }
-                    return acc;
-                }, {});
-        } else if (filter.startsWith('ge')) {
-            queryArgs.enrollmentEnrolledAfter = filter.replace('ge:', '');
-        } else {
-            queryArgs.enrollmentEnrolledBefore = filter.replace('le:', '');
+    transformRecordsFilter: (filter: string) => {
+        const queryArgs = {};
+        const filterParts = filter.split(':');
+        const indexGe = filterParts.indexOf('ge');
+        const indexLe = filterParts.indexOf('le');
+        if (indexGe !== -1 && filterParts[indexGe + 1]) {
+            queryArgs.enrollmentEnrolledAfter = filterParts[indexGe + 1];
+        }
+        if (indexLe !== -1 && filterParts[indexLe + 1]) {
+            queryArgs.enrollmentEnrolledBefore = filterParts[indexLe + 1];
         }
         return queryArgs;
     },
@@ -109,22 +103,16 @@ const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel }
     id: MAIN_FILTERS.OCCURED_AT,
     type: dataElementTypes.DATE,
     header: incidentDateLabel,
-    transformRecordsFilter: (filter: Array<string> | string) => {
-        let queryArgs = {};
-        if (Array.isArray(filter)) {
-            queryArgs = filter
-                .reduce((acc, filterPart: string) => {
-                    if (filterPart.startsWith('ge')) {
-                        acc.enrollmentOccurredAfter = filterPart.replace('ge:', '');
-                    } else {
-                        acc.enrollmentOccurredBefore = filterPart.replace('le:', '');
-                    }
-                    return acc;
-                }, {});
-        } else if (filter.startsWith('ge')) {
-            queryArgs.enrollmentOccurredBefore = filter.replace('ge:', '');
-        } else {
-            queryArgs.enrollmentOccurredBefore = filter.replace('le:', '');
+    transformRecordsFilter: (filter: string) => {
+        const queryArgs = {};
+        const filterParts = filter.split(':');
+        const indexGe = filterParts.indexOf('ge');
+        const indexLe = filterParts.indexOf('le');
+        if (indexGe !== -1 && filterParts[indexGe + 1]) {
+            queryArgs.enrollmentOccurredAfter = filterParts[indexGe + 1];
+        }
+        if (indexLe !== -1 && filterParts[indexLe + 1]) {
+            queryArgs.enrollmentOccurredBefore = filterParts[indexLe + 1];
         }
         return queryArgs;
     },

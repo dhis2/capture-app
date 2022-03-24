@@ -8,7 +8,7 @@ const DEFAULT_SORT = {
 
 export const convertValue = (order: ?string, columnsMetaForDataFetching?: TeiColumnsMetaForDataFetching) => {
     const sortOrderParts = order && order.split(':');
-    if (!sortOrderParts || sortOrderParts.length !== 2) {
+    if (!sortOrderParts || sortOrderParts.length < 2) {
         return DEFAULT_SORT;
     }
     const sortById = sortOrderParts[0];
