@@ -45,24 +45,7 @@ const getAttributeConstraintsForTEI = (
 ) => {
     const { bidirectional, fromToName, toFromName, toConstraint, fromConstraint } = relationshipType;
 
-    if (to?.trackedEntityInstance && to?.trackedEntityInstance?.trackedEntityInstance !== teiId) {
-        return {
-            id: to.trackedEntityInstance.trackedEntityInstance,
-            constraint: toConstraint,
-            attributes: to.trackedEntityInstance.attributes,
-            relationshipName: fromToName,
-            options: null,
-        };
-    } else if (bidirectional && from?.trackedEntityInstance &&
-        from?.trackedEntityInstance?.trackedEntityInstance !== teiId) {
-        return {
-            id: from.trackedEntityInstance.trackedEntityInstance,
-            constraint: fromConstraint,
-            attributes: from.trackedEntityInstance.attributes,
-            relationshipName: toFromName,
-            options: null,
-        };
-    } else if (bidirectional && from?.event) {
+    if (bidirectional && from?.event) {
         // $FlowFixMe
         const { stage, program } = getProgramAndStageFromEvent({
             evenId: from.event.event,
@@ -80,8 +63,26 @@ const getAttributeConstraintsForTEI = (
                 programStageName: stage?.stageForm?.name,
             },
         };
+    } else if (to?.trackedEntity && to?.trackedEntity?.trackedEntityInstance !== teiId) {
+        return {
+            id: to.trackedEntity.trackedEntity,
+            constraint: toConstraint,
+            attributes: to.trackedEntity.attributes,
+            relationshipName: fromToName,
+            options: null,
+        };
+    } else if (bidirectional && from?.trackedEntity &&
+        from?.trackedEntity?.trackedEntity !== teiId) {
+        return {
+            id: from.trackedEntity.trackedEntity,
+            constraint: fromConstraint,
+            attributes: from.trackedEntity.attributes,
+            relationshipName: toFromName,
+            options: null,
+        };
     }
     log.error(errorCreator('Relationship type is not handled')({ relationshipType }));
+    return {};
 };
 
 const getRelationshipAttributes = (

@@ -41,9 +41,10 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         useMemo(
             () => ({
                 teiRelationships: {
-                    resource: 'relationships',
+                    resource: 'tracker/relationships',
                     params: ({ variables: { teiId: updatedTeiId } }) => ({
                         tei: updatedTeiId,
+                        fields: ['relationshipType,to,from'],
                     }),
                 },
             }),
@@ -57,7 +58,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         enrollment: data?.trackedEntityInstance?.enrollments
             ?.find(enrollment => enrollment.enrollment === enrollmentId),
         attributeValues: data?.trackedEntityInstance?.attributes,
-        relationships: relationshipsData?.teiRelationships,
+        relationships: relationshipsData?.teiRelationships?.instances,
     };
 
     useEffect(() => {
