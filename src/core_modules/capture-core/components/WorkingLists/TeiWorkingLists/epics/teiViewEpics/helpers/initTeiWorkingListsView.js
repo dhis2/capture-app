@@ -21,7 +21,10 @@ export const initTeiWorkingListsViewAsync = async ({
     querySingleResource,
     absoluteApiPath,
 }: Input) => {
-    const { sortById, sortByDirection } = convertSortOrder(selectedTemplate?.criteria?.order);
+    const { sortById, sortByDirection } = convertSortOrder(
+        selectedTemplate?.criteria?.order,
+        columnsMetaForDataFetching,
+    );
     const customColumnOrder = getCustomColumnsConfiguration(selectedTemplate?.criteria?.displayColumnOrder, columnsMetaForDataFetching);
     const pageSize = 15;
     const page = 1;
