@@ -113,7 +113,7 @@ Feature: User interacts with Search page
     And you click search
     And you can see the first page of the results
     When you click the view dashboard button
-    Then you are navigated to the Tracker Capture
+    Then you are navigated to the Tracker Capture without program
 
   Scenario: Searching using attributes in Tracker Program domain has disabled pagination
     Given you are on the default search page
