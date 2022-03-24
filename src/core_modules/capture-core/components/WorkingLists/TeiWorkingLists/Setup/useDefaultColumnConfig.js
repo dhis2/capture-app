@@ -13,17 +13,15 @@ import type {
 } from '../types';
 
 const mainConfig: Array<MainColumnConfig> = [{
-    id: 'regUnit',
+    id: 'orgUnit',
     visible: false,
     type: dataElementTypes.ORGANISATION_UNIT,
     header: i18n.t('Registering unit'),
-    apiName: 'orgUnit',
 }, {
-    id: 'regDate',
+    id: 'createdAt',
     visible: false,
     type: dataElementTypes.DATE,
     header: i18n.t('Registration Date'),
-    apiName: 'createdAt',
     filterHidden: true,
 }, {
     id: 'inactive',
