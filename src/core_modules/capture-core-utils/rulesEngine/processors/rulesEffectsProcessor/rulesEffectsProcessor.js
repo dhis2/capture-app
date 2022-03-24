@@ -105,7 +105,7 @@ export function getRulesEffectsProcessor(
             }
             // $FlowExpectedError
             const outputConverter = outputConverters[converterName];
-            if (!converterName) {
+            if (!outputConverter) {
                 log.warn(errorCreator('outputConverter for valueType is missing')({ valueType }));
                 return valueType;
             }
