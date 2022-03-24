@@ -97,7 +97,8 @@ function getSelector(key: string, storeId: string, isInit: boolean) {
     if (!listSelectors[key]) {
         listSelectors[key] = createSelector(
             sourceValue => sourceValue,
-            sourceValue => relativeConvertersForPeriods[sourceValue.period](),
+            sourceValue =>
+                relativeConvertersForPeriods[sourceValue.period] && relativeConvertersForPeriods[sourceValue.period](),
         );
     }
 
