@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-14T12:24:43.099Z\n"
-"PO-Revision-Date: 2022-03-14T12:24:43.099Z\n"
+"POT-Creation-Date: 2022-03-24T09:11:16.227Z\n"
+"PO-Revision-Date: 2022-03-24T09:11:16.227Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1034,6 +1034,9 @@ msgstr "Write a comment about this enrollment"
 
 msgid "This enrollment doesn't have any comments"
 msgstr "This enrollment doesn't have any comments"
+
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr "organisation unit could not be retrieved. Please try again later."
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"

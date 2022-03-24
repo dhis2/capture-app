@@ -1,4 +1,6 @@
 // @flow
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils/errorCreator';
 import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes } from '../../constants';
 
 import type {
@@ -97,8 +99,17 @@ export function getRulesEffectsProcessor(
         let outputValue;
         if (normalizedValue || normalizedValue === 0 || normalizedValue === false) {
             const converterName: string = mapTypeToInterfaceFnName[valueType];
+            if (!converterName) {
+                log.warn(errorCreator('converter for valueType is missing')({ valueType }));
+                return valueType;
+            }
             // $FlowExpectedError
-            outputValue = outputConverters[converterName](normalizedValue);
+            const outputConverter = outputConverters[converterName];
+            if (!converterName) {
+                log.warn(errorCreator('outputConverter for valueType is missing')({ valueType }));
+                return valueType;
+            }
+            outputValue = outputConverter(normalizedValue);
         } else {
             outputValue = normalizedValue;
         }
