@@ -342,6 +342,11 @@ And('you click the save new submit button', () => {
         .click();
 });
 
+Then('you are navigated to the Tracker Capture', () => {
+    cy.url().should('include', 'dashboard?tei=');
+    cy.url().should('include', 'ou=DiszpKrYNg8&tracked_entity_type=nEenWmSyUEp');
+});
+
 Then('you see the possible duplicates modal', () => {
     cy.get('[data-test="duplicates-modal"]')
         .contains('Possible duplicates found')
@@ -410,6 +415,11 @@ And('you fill in child programme first name with value that has duplicates', () 
         .eq(4)
         .type('Sarah')
         .blur();
+});
+
+Then('you are navigated to the WHO RMNCH program in Tracker Capture app', () => {
+    cy.url().should('include', 'dashboard?tei=');
+    cy.url().should('include', 'ou=DiszpKrYNg8&program=WSGAb5XwJ3Y');
 });
 
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {
