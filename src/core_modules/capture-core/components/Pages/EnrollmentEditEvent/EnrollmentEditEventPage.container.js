@@ -9,7 +9,7 @@ import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
-import { useHideWidgetByRuleLocations, useRelationships } from '../Enrollment/EnrollmentPageDefault/hooks';
+import { useHideWidgetByRuleLocations, useTeiRelationships } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
@@ -52,7 +52,7 @@ export const EnrollmentEditEventPage = () => {
             ? (pageStatus = pageStatuses.DEFAULT)
             : (pageStatus = pageStatuses.MISSING_DATA);
     } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
-    const { relationships: teiRelationships } = useRelationships(teiId, relationships);
+    const { relationships: teiRelationships } = useTeiRelationships(teiId, relationships);
 
     return (
         <EnrollmentEditEventPageComponent

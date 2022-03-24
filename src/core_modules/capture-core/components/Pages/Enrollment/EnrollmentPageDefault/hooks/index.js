@@ -5,5 +5,5 @@ export { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';
 export { useProgramStages } from './useProgramStages';
 export { useOrganisationUnit } from './useOrganisationUnit';
 export { useRuleEffects } from './useRuleEffects';
-export { useRelationships } from './useRelationships';
+export { useTeiRelationships } from './useTeiRelationships';
 export type { UseRuleEffectsInput } from './useRuleEffects.types';

@@ -12,7 +12,6 @@ import type {
     InputRelationship, RelationshipData,
 } from '../../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { getDisplayFieldsFromAPI, getBaseConfigHeaders } from './constants';
-import { TrueOnlyField } from '../../../../FormFields/New';
 
 const convertAttributes = (attributes, displayFields, options) => displayFields.map((item) => {
     if (item.convertValue) {
@@ -111,7 +110,7 @@ const getRelationshipAttributes = (
 };
 
 
-export const useRelationships = (teiId: string, relationships?: Array<InputRelationship>) => {
+export const useTeiRelationships = (teiId: string, relationships?: Array<InputRelationship>) => {
     const [relationshipsByType, setRelationshipByType] = useState([]);
 
     const computeData = useCallback(async () => {
