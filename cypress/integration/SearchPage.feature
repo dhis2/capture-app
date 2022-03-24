@@ -27,7 +27,7 @@ Feature: User interacts with Search page
     And you select the search domain Malaria Case diagnosis
     When you fill in the unique identifier field with values that will return a tracked entity instance
     And you click find
-    Then you navigated to the enrollment dashboard page
+    Then you are navigated to the Tracker Capture
 
   Scenario: Searching using attributes in Tracker Program returns no results
     Given you are on the default search page
@@ -103,7 +103,7 @@ Feature: User interacts with Search page
     And you click search
     And you can see the first page of the results
     When you click the view dashboard button
-    Then you navigated to the enrollment dashboard page
+    Then you are navigated to the Tracker Capture
 
   Scenario: Searching using attributes in TEType navigates user to dashboard view
     Given you are on the default search page
@@ -113,7 +113,7 @@ Feature: User interacts with Search page
     And you click search
     And you can see the first page of the results
     When you click the view dashboard button
-    Then you navigated to the enrollment dashboard page without enrollment
+    Then you are navigated to the Tracker Capture
 
   Scenario: Searching using attributes in Tracker Program domain has disabled pagination
     Given you are on the default search page

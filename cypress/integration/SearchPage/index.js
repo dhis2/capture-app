@@ -81,6 +81,11 @@ When('you fill in the unique identifier field with values that will return a tra
         .blur();
 });
 
+Then('you are navigated to the Tracker Capture', () => {
+    cy.url().should('include', 'dashboard?tei=');
+    cy.url().should('include', 'ou=DiszpKrYNg8&program=qDkgAbB5Jlk');
+});
+
 When('you fill in the first name with values that will return no results', () => {
     cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')

@@ -136,7 +136,7 @@ Feature: User creates a new entries from the registration page
     Given you are in the WHO RMNCH program registration page
     When you fill the WHO RMNCH program registration form with its required unique values
     And you click the save new submit button
-    Then you navigated to the enrollment dashboard page
+    Then you are navigated to the WHO RMNCH program in Tracker Capture app
 
   Scenario: New person in Tracker Program > Submitting the form from the duplicates modal navigates you to the user dashboard
     Given you are in the WHO RMNCH program registration page
@@ -144,7 +144,7 @@ Feature: User creates a new entries from the registration page
     And you click the save new submit button
     And you see the possible duplicates modal
     When you submit the form again from the duplicates modal
-    Then you navigated to the enrollment dashboard page
+    Then you are navigated to the WHO RMNCH program in Tracker Capture app
 
   Scenario: New person in Tracker Program > Submitting the form shows a list with duplicates
     Given you are in Child programme registration page
