@@ -63,7 +63,7 @@ const getAttributeConstraintsForTEI = (
                 programStageName: stage?.stageForm?.name,
             },
         };
-    } else if (to?.trackedEntity && to?.trackedEntity?.trackedEntityInstance !== teiId) {
+    } else if (to?.trackedEntity && to?.trackedEntity?.trackedEntity !== teiId) {
         return {
             id: to.trackedEntity.trackedEntity,
             constraint: toConstraint,
