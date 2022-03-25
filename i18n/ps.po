@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-14T12:24:43.099Z\n"
+"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Pashto (https://www.transifex.com/hisp-uio/teams/100509/ps/)\n"
@@ -1014,6 +1014,9 @@ msgid "Write a comment about this enrollment"
 msgstr ""
 
 msgid "This enrollment doesn't have any comments"
+msgstr ""
+
+msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
