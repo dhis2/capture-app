@@ -1,3 +1,10 @@
+## [100.1.4](https://github.com/dhis2/capture-app/compare/v100.1.3...v100.1.4) (2022-03-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12929] use interface language for localeCompare ([2b00c9f](https://github.com/dhis2/capture-app/commit/2b00c9f41f0cb61007613a923f9fff9124cdcb06))
+
 ## [100.1.3](https://github.com/dhis2/capture-app/compare/v100.1.2...v100.1.3) (2022-03-25)
 
 
