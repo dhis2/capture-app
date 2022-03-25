@@ -69,6 +69,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
 
     const queryArgs = {
         filter: filters,
+        fields: 'attributes,enrollments,trackedEntity,orgUnit',
         ...getOuQueryArgs(selectedOrgUnit, selectedOrgUnitScope),
         // $FlowFixMe[exponential-spread] automated comment
         ...getContextQueryArgs(selectedProgramId, selectedTrackedEntityTypeId),
