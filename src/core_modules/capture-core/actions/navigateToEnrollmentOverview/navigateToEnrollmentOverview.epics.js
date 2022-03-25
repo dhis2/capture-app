@@ -39,10 +39,9 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
     action$.pipe(
         ofType(NavigateToEnrollmentOverviewActionTypes.NAVIGATE_TO_ENROLLMENT_OVERVIEW),
         switchMap((action) => {
-            const { teiId, programId } = action.payload;
+            const { teiId, programId, orgUnitId } = action.payload;
             const enrollmentId = programId && (action.payload?.enrollmentId || 'AUTO');
             const { dataStore, userDataStore } = store.value.useOldDashboard;
-            const orgUnitId = action.payload.orgUnitId || store.value.workingListsListRecords?.teiList[teiId]?.programOwners[programId]?.ownerOrgUnit;
 
             if (dataStore || userDataStore) {
                 if (userDataStore?.[programId]) {
