@@ -34,7 +34,7 @@ export const getTemplates = (
                 manage: false,
             },
             criteria: {
-                order: 'regDate:desc',
+                order: 'createdAt:desc',
             },
         };
         return {

@@ -128,7 +128,7 @@ const useInjectDataFetchingMetaToLoadList = (defaultColumns, filtersOnly, onLoad
         const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
-                .map(({ id, type, mainProperty, apiName, visible }) => [id, { id, type, mainProperty, apiName, visible }]),
+                .map(({ id, type, mainProperty, visible }) => [id, { id, type, mainProperty, visible }]),
         );
         const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
             filtersOnly
@@ -142,7 +142,7 @@ const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, onUp
         const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
-                .map(({ id, type, apiName, mainProperty }) => [id, { id, type, apiName, mainProperty }]),
+                .map(({ id, type, mainProperty }) => [id, { id, type, mainProperty }]),
         );
         const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
             filtersOnly
