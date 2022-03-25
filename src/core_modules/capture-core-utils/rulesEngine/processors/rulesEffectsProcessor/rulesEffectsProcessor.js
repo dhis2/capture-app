@@ -99,15 +99,11 @@ export function getRulesEffectsProcessor(
         let outputValue;
         if (normalizedValue || normalizedValue === 0 || normalizedValue === false) {
             const converterName: string = mapTypeToInterfaceFnName[valueType];
-            if (!converterName) {
-                log.warn(errorCreator('converter for valueType is missing')({ valueType }));
-                return valueType;
-            }
             // $FlowExpectedError
             const outputConverter = outputConverters[converterName];
-            if (!outputConverter) {
-                log.warn(errorCreator('outputConverter for valueType is missing')({ valueType }));
-                return valueType;
+            if (!converterName || !outputConverter) {
+                log.warn(errorCreator('converter for valueType is missing')({ valueType }));
+                return '';
             }
             outputValue = outputConverter(normalizedValue);
         } else {
