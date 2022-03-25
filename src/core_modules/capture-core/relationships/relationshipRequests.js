@@ -16,5 +16,5 @@ export function getRelationshipsForEvent(eventId: string, programId: string, pro
     const program = getProgramThrowIfNotFound(programId);
     const stage = program instanceof EventProgram ? program.stage : program.getStage(programStageId);
     const relationshipTypes = stage?.relationshipTypes || [];
-    return getRelationships({ event: eventId }, relationshipTypes);
+    return getRelationships({ event: eventId, fields: ['from,to,relationshipType'] }, relationshipTypes);
 }
