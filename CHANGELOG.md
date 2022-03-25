@@ -1,3 +1,32 @@
+## [100.1.2](https://github.com/dhis2/capture-app/compare/v100.1.1...v100.1.2) (2022-03-24)
+
+
+### Bug Fixes
+
+* [DHIS2-12870] use api fields name for TEIFilters ([#2654](https://github.com/dhis2/capture-app/issues/2654)) ([35df866](https://github.com/dhis2/capture-app/commit/35df8661dd19817d6f72b5f49ae9a1abe5535961))
+
+## [100.1.1](https://github.com/dhis2/capture-app/compare/v100.1.0...v100.1.1) (2022-03-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([99504e6](https://github.com/dhis2/capture-app/commit/99504e6d18bdf05320102be4b68f35196bba7fd7))
+
+# [100.1.0](https://github.com/dhis2/capture-app/compare/v100.0.3...v100.1.0) (2022-03-22)
+
+
+### Features
+
+* [DHIS2-9062] support organisation unit groups in program rules ([81d2e4c](https://github.com/dhis2/capture-app/commit/81d2e4c456e1eae0fee12406f515173a797f7e3b))
+
+## [100.0.3](https://github.com/dhis2/capture-app/compare/v100.0.2...v100.0.3) (2022-03-22)
+
+
+### Bug Fixes
+
+* [DHIS2-11796] adapt the date shape to the API requirements ([#2662](https://github.com/dhis2/capture-app/issues/2662)) ([ecd676f](https://github.com/dhis2/capture-app/commit/ecd676fd7b23fcd478f29f5ad5630c4eed967d30))
+* [DHIS2-12873] missing propriety for files/images dataElements ([#2651](https://github.com/dhis2/capture-app/issues/2651)) ([329ccc0](https://github.com/dhis2/capture-app/commit/329ccc0178c60b800da33c25e7f1014e13f11ea1))
+
 ## [100.0.2](https://github.com/dhis2/capture-app/compare/v100.0.1...v100.0.2) (2022-03-19)
 
 

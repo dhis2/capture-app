@@ -37,17 +37,6 @@ const getMainApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}, filtersOnl
             };
         }, {});
 
-const getApiOrderById = (sortById: string, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => {
-    const { id, apiName } = columnsMetaForDataFetching.get(sortById) || {};
-    return apiName || id;
-};
-
-const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => {
-    const apiId = getApiOrderById(sortById, columnsMetaForDataFetching);
-    return `${apiId}:${sortByDirection}`;
-};
-
-
 const createApiQueryArgs = ({
     page,
     pageSize,
@@ -62,7 +51,7 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
 ): { [string]: any } => ({
     ...getApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
     ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-    order: getApiOrderByQueryArgument(sortById, sortByDirection, columnsMetaForDataFetching),
+    order: `${sortById}:${sortByDirection}`,
     page,
     pageSize,
     orgUnit,

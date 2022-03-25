@@ -1,20 +1,16 @@
 // @flow
-import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { errorCreator } from 'capture-core-utils';
+import { type OrgUnit } from 'capture-core-utils/rulesEngine';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
+    openNewEventInDataEntry,
     cancelOpenNewEventInDataEntry,
     batchActionTypes,
 } from '../actions/dataEntry.actions';
-import {
-    openNewEventInDataEntry,
-    resetDataEntry,
-} from '../actions/dataEntryLoad.actionBatchs';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
@@ -22,7 +18,8 @@ import {
     updateRulesEffects,
     type FieldData,
 } from '../../../../../../rules';
-import { getProgramAndStageForProgram, getEventProgramThrowIfNotFound } from '../../../../../../metaData/helpers';
+import { getOpenDataEntryActions } from '../';
+import { getEventProgramThrowIfNotFound } from '../../../../../../metaData/helpers';
 import {
     getDefaultMainConfig as getDefaultMainColumnConfig,
     getMetaDataConfig as getColumnMetaDataConfig,
@@ -40,41 +37,12 @@ import { actionTypes as crossPageActionTypes } from '../../../../../Pages/action
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
 import { scopeSelectorActionTypes } from '../../../../../ScopeSelector';
 import { programCollection } from '../../../../../../metaDataMemoryStores';
-import { deriveURLParamsFromLocation } from '../../../../../../utils/routing';
 
-const errorMessages = {
-    PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
-};
-
-
-export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const resetDataEntryForNewEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
-        map(() => {
-            const state = store.value;
-            const programId = state.currentSelections.programId;
-            const { stageId: programStageId } = deriveURLParamsFromLocation();
-
-            const orgUnitId = state.currentSelections.orgUnitId;
-            const orgUnit = state.organisationUnits[orgUnitId];
-            const metadataContainer = getProgramAndStageForProgram(programId, programStageId);
-            if (metadataContainer.error) {
-                log.error(
-                    errorCreator(
-                        errorMessages.PROGRAM_OR_STAGE_NOT_FOUND)(
-                        { method: 'resetDataEntryForNewEventEpic' }),
-                );
-            }
-
-            const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
-            return batchActions(
-
-                // $FlowFixMe[incompatible-call] automated comment
-                [...resetDataEntry(metadataContainer.program, foundation, orgUnit)],
-                batchActionTypes.RESET_DATA_ENTRY_ACTIONS_BATCH,
-            );
-        }));
-
+        map(() => (batchActions(getOpenDataEntryActions()))),
+    );
 
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -106,29 +74,9 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         map(() => {
             const state = store.value;
             const selectionsComplete = state.currentSelections.complete;
-            if (!selectionsComplete) {
-                return cancelOpenNewEventInDataEntry();
-            }
-            const programId = state.currentSelections.programId;
-            const { stageId: programStageId } = deriveURLParamsFromLocation();
-
-            const orgUnitId = state.currentSelections.orgUnitId;
-            const orgUnit = state.organisationUnits[orgUnitId];
-            const metadataContainer = getProgramAndStageForProgram(programId, programStageId);
-            if (metadataContainer.error) {
-                log.error(
-                    errorCreator(
-                        errorMessages.PROGRAM_OR_STAGE_NOT_FOUND)(
-                        { method: 'openNewEventInDataEntryEpic' }),
-                );
-            }
-            const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
-            return batchActions(
-
-                // $FlowFixMe[incompatible-call] automated comment
-                [...openNewEventInDataEntry(metadataContainer.program, foundation, orgUnit)],
-                batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
-            );
+            return selectionsComplete
+                ? openNewEventInDataEntry()
+                : cancelOpenNewEventInDataEntry();
         }));
 
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -182,16 +130,14 @@ const runRulesForNewSingleEvent = (
     dataEntryId: string,
     itemId: string,
     uid: string,
+    orgUnit: OrgUnit,
     history: Object,
     fieldData?: ?FieldData,
 ) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
+
     const programId = state.currentSelections.programId;
-
-    const orgUnitId = state.currentSelections.orgUnitId;
-    const orgUnit = state.organisationUnits[orgUnitId];
-
     const program = getEventProgramThrowIfNotFound(programId);
 
     const foundation = program.stage.stageForm;
@@ -220,8 +166,8 @@ export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputO
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
-            const { dataEntryId, itemId, uid } = action.payload;
-            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid);
+            const { dataEntryId, itemId, uid, orgUnit } = action.payload;
+            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, orgUnit);
         }));
 
 export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -230,11 +176,11 @@ export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
-            const { dataEntryId, itemId, uid, elementId, value, uiState } = action.payload;
+            const { dataEntryId, itemId, uid, orgUnit, elementId, value, uiState } = action.payload;
             const fieldData: FieldData = {
                 elementId,
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, fieldData);
+            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, orgUnit, fieldData);
         }));

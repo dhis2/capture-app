@@ -2,6 +2,7 @@
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import i18n from '@dhis2/d2-i18n';
 import { getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
@@ -17,7 +18,7 @@ import {
     type FieldData,
 } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../../common.types';
+import type { RulesExecutionDependenciesClientFormatted } from '../../common.types';
 import { deriveURLParamsFromLocation } from '../../../../utils/routing';
 
 const runRulesForNewEvent = (

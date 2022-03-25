@@ -1,10 +1,5 @@
 // @flow
-
-export type OrgUnit = {
-    id: string,
-    name: string,
-    code: string,
-};
+import type { ProgramStage, RenderFoundation, TrackerProgram } from '../../metaData';
 
 export type ExternalSaveHandler = (eventServerValues: Object, uid: string) => void;
 
@@ -52,4 +47,18 @@ export type RulesExecutionDependenciesClientFormatted = {|
     events: Array<EnrollmentEvent>,
     attributeValues: AttributeValuesClientFormatted,
     enrollmentData: EnrollmentData,
+|};
+
+export type CommonValidatedProps = {|
+    program: TrackerProgram,
+    stage: ProgramStage,
+    formFoundation: RenderFoundation,
+    teiId: string,
+    enrollmentId: string,
+    rulesExecutionDependencies: RulesExecutionDependencies,
+    onSaveExternal?: ExternalSaveHandler,
+    onSaveSuccessActionType?: string,
+    onSaveErrorActionType?: string,
+    widgetReducerName: string,
+    onCancel?: () => void,
 |};

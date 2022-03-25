@@ -7,7 +7,7 @@ import type {
 } from '../../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
 export type UseRuleEffectsInput = {|
-    orgUnit?: OrgUnit,
+    orgUnit?: ?OrgUnit,
     program: TrackerProgram,
     apiEnrollment?: EnrollmentData,
     apiAttributeValues?: Array<AttributeValue>,

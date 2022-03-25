@@ -1,5 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import { type OrgUnit } from 'capture-core-utils/rulesEngine';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
 import { viewEventIds } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
@@ -43,7 +44,7 @@ export const loadViewEventDataEntry =
         attributeValues,
     }: {
         eventContainer: ClientEventContainer,
-        orgUnit: Object,
+        orgUnit: OrgUnit,
         foundation: RenderFoundation,
         program: Program,
         enrollment?: EnrollmentData,

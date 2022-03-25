@@ -1,10 +1,11 @@
 // @flow
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
 import type { TrackerProgram, ProgramStage, RenderFoundation } from '../../../metaData';
-import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../common.types';
+import type { RulesExecutionDependenciesClientFormatted } from '../common.types';
 
 export const useLifecycle = ({
     program,
@@ -22,24 +23,26 @@ export const useLifecycle = ({
     program: TrackerProgram,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
-    orgUnit?: OrgUnit,
+    orgUnit: OrgUnit,
     dataEntryId: string,
     itemId: string,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
 }) => {
     const dispatch = useDispatch();
+    const [rulesExecutionTrigger, setRulesExecutionTrigger] = useState(1);
 
     const dataEntryReadyRef = useRef(false);
+    const delayRulesExecutionRef = useRef(false);
     useEffect(() => {
         dispatch(batchActions([
             ...getOpenDataEntryActions(dataEntryId, itemId),
         ]));
         dataEntryReadyRef.current = true;
+        delayRulesExecutionRef.current = true;
     }, [dispatch, dataEntryId, itemId, program, formFoundation]);
 
     const eventsRef = useRef();
     const attributesRef = useRef();
-    const orgUnitRef = useRef();
     const enrollmentDataRef = useRef();
 
     // TODO: Getting the entire state object is bad and this needs to be refactored.
@@ -47,7 +50,12 @@ export const useLifecycle = ({
     // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
-        if (orgUnit) {
+        if (delayRulesExecutionRef.current) {
+            // getRulesActions depends on settings in the redux store that are being managed through getOpenDataEntryActions.
+            // The purpose of the following lines of code is to make sure the redux store is ready before calling getRulesActions.
+            delayRulesExecutionRef.current = false;
+            setRulesExecutionTrigger(-rulesExecutionTrigger);
+        } else {
             dispatch(batchActions([
                 getRulesActions({
                     state,
@@ -64,7 +72,6 @@ export const useLifecycle = ({
             ]));
             eventsRef.current = eventsRulesDependency;
             attributesRef.current = attributesValuesRulesDependency;
-            orgUnitRef.current = orgUnit;
             enrollmentDataRef.current = enrollmentDataRulesDependency;
         }
     // Ignoring state (due to various reasons, bottom line being that field updates are handled in epic)
@@ -78,14 +85,13 @@ export const useLifecycle = ({
         stage,
         dataEntryId,
         itemId,
+        rulesExecutionTrigger,
     ]);
 
     const rulesReady =
         eventsRef.current === eventsRulesDependency &&
         attributesRef.current === attributesValuesRulesDependency &&
-        enrollmentDataRef.current === enrollmentDataRulesDependency &&
-        orgUnit &&
-        orgUnitRef.current === orgUnit;
+        enrollmentDataRef.current === enrollmentDataRulesDependency;
 
     return dataEntryReadyRef.current && rulesReady;
 };
