@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-02T09:35:41.822Z\n"
+"POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
