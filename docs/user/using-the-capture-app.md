@@ -938,7 +938,7 @@ The enrollment comment widget displays comments and allows addition of comments,
 
 By clicking in the text field, you will be able to enter new text and see action buttons **Save comment** and **Cancel**. Note that Enrollment comments are attributed to a user and cannot be deleted. 
 
-#### Tracked entity instance profile widget
+### Tracked entity instance profile widget
 
 On the enrollment dashboard, you can view the tracked entity instance profile widget. Inside the profile widget you can view the key attributes values. 
 
