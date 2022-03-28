@@ -42,7 +42,6 @@ export type MetadataColumnConfig = {
 export type MainColumnConfig = {
     ...ColumnConfigBase,
     mainProperty: true,
-    apiName?: string,
 };
 
 export type TeiWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfig;
@@ -53,7 +52,6 @@ export type TeiColumnMetaForDataFetching = {
     id: string,
     type: $Values<dataElementTypes>,
     mainProperty?: boolean,
-    apiName?: string,
     visible: boolean,
 };
 
