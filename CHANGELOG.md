@@ -1,3 +1,17 @@
+## [100.1.6](https://github.com/dhis2/capture-app/compare/v100.1.5...v100.1.6) (2022-03-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([54fbea0](https://github.com/dhis2/capture-app/commit/54fbea0984ffcaeb12bb7c06c34ce0df80aedcbd))
+
+## [100.1.5](https://github.com/dhis2/capture-app/compare/v100.1.4...v100.1.5) (2022-03-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12951] default old Tracker Capture dashboard ([#2681](https://github.com/dhis2/capture-app/issues/2681)) ([ecce525](https://github.com/dhis2/capture-app/commit/ecce52570e1186f5d4e3d11940581f3d246e687c))
+
 ## [100.1.4](https://github.com/dhis2/capture-app/compare/v100.1.3...v100.1.4) (2022-03-25)
 
 

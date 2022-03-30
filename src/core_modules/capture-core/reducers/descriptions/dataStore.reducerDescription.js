@@ -15,7 +15,7 @@ export const dataStoreDesc = createReducerDescription({
 
         return newState;
     },
-}, 'useOldDashboard', {
+}, 'useNewDashboard', {
     dataStore: undefined,
     userDataStore: undefined,
 });
