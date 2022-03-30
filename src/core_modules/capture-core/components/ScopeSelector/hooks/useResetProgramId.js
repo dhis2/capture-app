@@ -8,8 +8,8 @@ export const useResetProgramId = () => {
     const { pathname } = useLocation();
 
     const resetProgramId = (pageToPush: string = pathname) => {
-        const { programId, ...restOfQueries } = getUrlQueries();
-        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+        const { programId, enrollmentId, ...restOfQueries } = getUrlQueries();
+        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, enrollmentId: 'AUTO' })}`);
     };
 
     const resetProgramIdAndEnrollmentContext = (pageToPush: string = pathname) => {
