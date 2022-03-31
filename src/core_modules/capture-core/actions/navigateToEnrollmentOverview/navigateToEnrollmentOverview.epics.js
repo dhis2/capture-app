@@ -28,10 +28,7 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
     action$.pipe(
         ofType(NavigateToEnrollmentOverviewActionTypes.NAVIGATE_TO_ENROLLMENT_OVERVIEW),
         switchMap((action) => {
-            const { teiId, programId } = action.payload;
-            const orgUnitId =
-                action.payload.orgUnitId ||
-                store.value.workingListsListRecords?.teiList[teiId]?.programOwners[programId]?.ownerOrgUnit;
+            const { teiId, orgUnitId } = action.payload;
             redirectToTracker({ dependencies, teiId, orgUnitId });
             return EMPTY;
         }),
