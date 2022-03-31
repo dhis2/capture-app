@@ -27,10 +27,15 @@ const getTextFilter = (filter: ApiDataFilterText): ?TextFilterData => {
     return value ? { value } : undefined;
 };
 
-const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
-    ge: filter.ge ? Number(filter.ge) : undefined,
-    le: filter.le ? Number(filter.le) : undefined,
-});
+const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => {
+    if (filter.ge && filter.le) {
+        return {
+            ge: Number(filter.ge),
+            le: Number(filter.le),
+        };
+    }
+    return undefined;
+};
 
 const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => ({
     values: filter.in.map(value => value === 'true'),
@@ -48,11 +53,15 @@ const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
         };
     }
 
-    return {
-        type: dateFilter.type,
-        ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString() : undefined,
-        le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
-    };
+    if (dateFilter.startDate && dateFilter.endDate) {
+        return {
+            type: dateFilter.type,
+            ge: moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString(),
+            le: moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString(),
+
+        };
+    }
+    return undefined;
 };
 
 const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => getDateFilterContent(dateFilter);
