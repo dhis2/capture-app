@@ -1,3 +1,10 @@
+## [100.1.7](https://github.com/dhis2/capture-app/compare/v100.1.6...v100.1.7) (2022-03-31)
+
+
+### Bug Fixes
+
+* [DHIS2-12966] issues related to invalid property onwerOrgUnit ([0e4b8d4](https://github.com/dhis2/capture-app/commit/0e4b8d4303cc838d63986faae5a3f6fdc4d0ce72))
+
 ## [100.1.6](https://github.com/dhis2/capture-app/compare/v100.1.5...v100.1.6) (2022-03-26)
 
 
