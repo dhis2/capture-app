@@ -30,11 +30,15 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
         dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE));
     }, [dispatch, programId, storeId]);
 
-    const onSelectListRow = useCallback(({ id }) => dispatch(navigateToEnrollmentOverview({
-        teiId: id,
-        programId,
-        orgUnitId,
-    })), [dispatch, orgUnitId, programId]);
+    const onSelectListRow = useCallback(({ id }) => {
+        const record = records[id];
+
+        return dispatch(navigateToEnrollmentOverview({
+            teiId: id,
+            programId,
+            orgUnitId: orgUnitId || record.programOwner,
+        }));
+    }, [dispatch, orgUnitId, programId, records]);
 
     return (
         <TeiWorkingListsSetup
