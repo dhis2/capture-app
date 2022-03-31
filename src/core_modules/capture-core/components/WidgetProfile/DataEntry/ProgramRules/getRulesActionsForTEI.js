@@ -29,7 +29,7 @@ const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>
             ...acc,
             [dataElement.id]: {
                 id: dataElement.id,
-                valueType: dataElement.type,
+                valueType: dataElement.valueType,
                 optionSetId: dataElement.optionSet && dataElement.optionSet.id,
             },
         }),
