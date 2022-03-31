@@ -27,7 +27,7 @@ const getTextFilter = (filter: ApiDataFilterText): ?TextFilterData => {
     return value ? { value } : undefined;
 };
 
-const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => {
+const getNumericFilter = (filter: ApiDataFilterNumeric): ?NumericFilterData => {
     if (filter.ge && filter.le) {
         return {
             ge: Number(filter.ge),
