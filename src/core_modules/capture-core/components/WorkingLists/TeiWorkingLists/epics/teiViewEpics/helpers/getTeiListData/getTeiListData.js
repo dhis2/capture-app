@@ -57,7 +57,7 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
     orgUnit,
     ouMode: orgUnit ? 'SELECTED' : 'ACCESSIBLE',
     program,
-    fields: ':all,programOwners[ownerOrgUnit,program]',
+    fields: ':all,programOwners[orgUnit,program]',
 });
 
 export const getTeiListData = async (
@@ -78,7 +78,7 @@ export const getTeiListData = async (
         params: queryArgs,
     });
     const columnsMetaForDataFetchingArray = [...columnsMetaForDataFetching.values()];
-    const clientTeis = convertToClientTeis(apiTeis, columnsMetaForDataFetchingArray);
+    const clientTeis = convertToClientTeis(apiTeis, columnsMetaForDataFetchingArray, rawQueryArgs.programId);
     const clientTeisWithSubvalues = await getTeisWithSubvalues(querySingleResource, absoluteApiPath)(clientTeis, columnsMetaForDataFetchingArray);
 
     return {
