@@ -28,7 +28,7 @@ const getTextFilter = (filter: ApiDataFilterText): ?TextFilterData => {
 };
 
 const getNumericFilter = (filter: ApiDataFilterNumeric): ?NumericFilterData => {
-    if (filter.ge && filter.le) {
+    if (filter.ge || filter.le) {
         return {
             ge: Number(filter.ge),
             le: Number(filter.le),
@@ -37,9 +37,12 @@ const getNumericFilter = (filter: ApiDataFilterNumeric): ?NumericFilterData => {
     return undefined;
 };
 
-const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => ({
-    values: filter.in.map(value => value === 'true'),
-});
+const getBooleanFilter = (filter: ApiDataFilterBoolean): ?BooleanFilterData => {
+    if (filter.in) {
+        return { values: filter.in.map(value => value === 'true') };
+    }
+    return undefined;
+};
 
 const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterData => ({
     value: true,
@@ -53,7 +56,7 @@ const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
         };
     }
 
-    if (dateFilter.startDate && dateFilter.endDate) {
+    if (dateFilter.startDate || dateFilter.endDate) {
         return {
             type: dateFilter.type,
             ge: moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString(),
