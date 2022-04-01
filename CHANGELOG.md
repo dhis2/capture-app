@@ -1,3 +1,10 @@
+## [100.1.10](https://github.com/dhis2/capture-app/compare/v100.1.9...v100.1.10) (2022-04-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13008] fix relationship missing data ([#2698](https://github.com/dhis2/capture-app/issues/2698)) ([152bd59](https://github.com/dhis2/capture-app/commit/152bd59f727f9c1ff5ab4f7f9982da4185a96f11))
+
 ## [100.1.9](https://github.com/dhis2/capture-app/compare/v100.1.8...v100.1.9) (2022-04-01)
 
 
