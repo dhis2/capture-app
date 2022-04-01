@@ -1,3 +1,10 @@
+## [100.1.9](https://github.com/dhis2/capture-app/compare/v100.1.8...v100.1.9) (2022-04-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12364] use correct fixed length aicode ([#2695](https://github.com/dhis2/capture-app/issues/2695)) ([fe1147e](https://github.com/dhis2/capture-app/commit/fe1147ef40fd5374b3d6b5091b22139aa4dfbe8f))
+
 ## [100.1.8](https://github.com/dhis2/capture-app/compare/v100.1.7...v100.1.8) (2022-03-31)
 
 
