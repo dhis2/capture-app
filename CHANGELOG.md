@@ -1,3 +1,10 @@
+## [100.1.8](https://github.com/dhis2/capture-app/compare/v100.1.7...v100.1.8) (2022-03-31)
+
+
+### Bug Fixes
+
+* [DHIS2-12928] handle missing program rules outputConverters ([43ffb17](https://github.com/dhis2/capture-app/commit/43ffb178134ee2c790c901ed1872ffacb1941d34))
+
 ## [100.1.7](https://github.com/dhis2/capture-app/compare/v100.1.6...v100.1.7) (2022-03-31)
 
 
