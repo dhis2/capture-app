@@ -70,7 +70,7 @@ declare module '@dhis2/app-runtime' {
     declare type UpdateMutation = {|
         ...ResourceQuery,
         type: 'update' | 'replace' | 'delete',
-        id: string | (data: Object) => string,
+        id?: string | (data: Object) => string,
         partial?: boolean,
         data: MutationData,
     |};

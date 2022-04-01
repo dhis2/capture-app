@@ -112,3 +112,11 @@ And you see the custom TEI working lists
 And you can load the view with the name Events assigned to me
 When you change the sharing settings
 Then you see the new sharing settings
+
+Scenario: The admin user can optin to use the new Enrollment Dashboard
+Given you open the main page with Ngelehun and child programme context
+And you see the opt in component
+When you opt in to use the new enrollment Dashboard
+Then you see the opt out component
+When you opt out to use the new enrollment Dashboard
+Then you see the opt in component
