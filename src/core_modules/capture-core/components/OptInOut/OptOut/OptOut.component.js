@@ -33,13 +33,7 @@ export const OptOutPlain = ({ classes, programName, handleOptOut, loading }: Pla
                             'all users to the Tracker capture app for this program.',
                     )}
                 </p>
-                <Button
-                    name="Primary button"
-                    onClick={handleOptOut}
-                    loading={loading}
-                    disabled={loading}
-                    data-test="opt-out-button"
-                >
+                <Button onClick={handleOptOut} loading={loading} disabled={loading} data-test="opt-out-button">
                     {button}
                 </Button>
             </NoticeBox>
