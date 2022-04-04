@@ -9,7 +9,7 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
                 trackedEntityInstances: {
                     resource: `tracker/trackedEntities/${teiId}`,
                     params: {
-                        fields: ['programOwners[ownerOrgUnit],enrollments'],
+                        fields: ['programOwners[orgUnit],enrollments'],
                         program: [programId],
                     },
                 },

@@ -1,3 +1,31 @@
+## [100.1.10](https://github.com/dhis2/capture-app/compare/v100.1.9...v100.1.10) (2022-04-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13008] fix relationship missing data ([#2698](https://github.com/dhis2/capture-app/issues/2698)) ([152bd59](https://github.com/dhis2/capture-app/commit/152bd59f727f9c1ff5ab4f7f9982da4185a96f11))
+
+## [100.1.9](https://github.com/dhis2/capture-app/compare/v100.1.8...v100.1.9) (2022-04-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12364] use correct fixed length aicode ([#2695](https://github.com/dhis2/capture-app/issues/2695)) ([fe1147e](https://github.com/dhis2/capture-app/commit/fe1147ef40fd5374b3d6b5091b22139aa4dfbe8f))
+
+## [100.1.8](https://github.com/dhis2/capture-app/compare/v100.1.7...v100.1.8) (2022-03-31)
+
+
+### Bug Fixes
+
+* [DHIS2-12928] handle missing program rules outputConverters ([43ffb17](https://github.com/dhis2/capture-app/commit/43ffb178134ee2c790c901ed1872ffacb1941d34))
+
+## [100.1.7](https://github.com/dhis2/capture-app/compare/v100.1.6...v100.1.7) (2022-03-31)
+
+
+### Bug Fixes
+
+* [DHIS2-12966] issues related to invalid property onwerOrgUnit ([0e4b8d4](https://github.com/dhis2/capture-app/commit/0e4b8d4303cc838d63986faae5a3f6fdc4d0ce72))
+
 ## [100.1.6](https://github.com/dhis2/capture-app/compare/v100.1.5...v100.1.6) (2022-03-26)
 
 
