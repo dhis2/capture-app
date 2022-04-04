@@ -23,6 +23,6 @@ export const typeKeys = {
     ORGANISATION_UNIT: 'ORGANISATION_UNIT',
     AGE: 'AGE',
     URL: 'URL',
-    FILE: 'FILE',
+    FILE_RESOURCE: 'FILE_RESOURCE',
     IMAGE: 'IMAGE',
 };

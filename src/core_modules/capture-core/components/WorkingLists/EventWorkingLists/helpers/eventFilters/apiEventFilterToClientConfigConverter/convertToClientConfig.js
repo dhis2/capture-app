@@ -130,7 +130,7 @@ const isOptionSetFilter = (type: $Keys<typeof filterTypesObject>, filter: any) =
 
 const getSortOrder = (order: ?string) => {
     const sortOrderParts = order && order.split(':');
-    if (!sortOrderParts || sortOrderParts.length !== 2) {
+    if (!sortOrderParts || sortOrderParts.length < 2) {
         return {
             sortById: 'occurredAt',
             sortByDirection: 'desc',

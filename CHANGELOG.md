@@ -1,3 +1,136 @@
+## [100.1.10](https://github.com/dhis2/capture-app/compare/v100.1.9...v100.1.10) (2022-04-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13008] fix relationship missing data ([#2698](https://github.com/dhis2/capture-app/issues/2698)) ([152bd59](https://github.com/dhis2/capture-app/commit/152bd59f727f9c1ff5ab4f7f9982da4185a96f11))
+
+## [100.1.9](https://github.com/dhis2/capture-app/compare/v100.1.8...v100.1.9) (2022-04-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12364] use correct fixed length aicode ([#2695](https://github.com/dhis2/capture-app/issues/2695)) ([fe1147e](https://github.com/dhis2/capture-app/commit/fe1147ef40fd5374b3d6b5091b22139aa4dfbe8f))
+
+## [100.1.8](https://github.com/dhis2/capture-app/compare/v100.1.7...v100.1.8) (2022-03-31)
+
+
+### Bug Fixes
+
+* [DHIS2-12928] handle missing program rules outputConverters ([43ffb17](https://github.com/dhis2/capture-app/commit/43ffb178134ee2c790c901ed1872ffacb1941d34))
+
+## [100.1.7](https://github.com/dhis2/capture-app/compare/v100.1.6...v100.1.7) (2022-03-31)
+
+
+### Bug Fixes
+
+* [DHIS2-12966] issues related to invalid property onwerOrgUnit ([0e4b8d4](https://github.com/dhis2/capture-app/commit/0e4b8d4303cc838d63986faae5a3f6fdc4d0ce72))
+
+## [100.1.6](https://github.com/dhis2/capture-app/compare/v100.1.5...v100.1.6) (2022-03-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([54fbea0](https://github.com/dhis2/capture-app/commit/54fbea0984ffcaeb12bb7c06c34ce0df80aedcbd))
+
+## [100.1.5](https://github.com/dhis2/capture-app/compare/v100.1.4...v100.1.5) (2022-03-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12951] default old Tracker Capture dashboard ([#2681](https://github.com/dhis2/capture-app/issues/2681)) ([ecce525](https://github.com/dhis2/capture-app/commit/ecce52570e1186f5d4e3d11940581f3d246e687c))
+
+## [100.1.4](https://github.com/dhis2/capture-app/compare/v100.1.3...v100.1.4) (2022-03-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12929] use interface language for localeCompare ([2b00c9f](https://github.com/dhis2/capture-app/commit/2b00c9f41f0cb61007613a923f9fff9124cdcb06))
+
+## [100.1.3](https://github.com/dhis2/capture-app/compare/v100.1.2...v100.1.3) (2022-03-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12930] add correct fields-filtering on TEI-search ([7374d81](https://github.com/dhis2/capture-app/commit/7374d81b04495e3251be03f56a08e84be416ee3b))
+
+## [100.1.2](https://github.com/dhis2/capture-app/compare/v100.1.1...v100.1.2) (2022-03-24)
+
+
+### Bug Fixes
+
+* [DHIS2-12870] use api fields name for TEIFilters ([#2654](https://github.com/dhis2/capture-app/issues/2654)) ([35df866](https://github.com/dhis2/capture-app/commit/35df8661dd19817d6f72b5f49ae9a1abe5535961))
+
+## [100.1.1](https://github.com/dhis2/capture-app/compare/v100.1.0...v100.1.1) (2022-03-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([99504e6](https://github.com/dhis2/capture-app/commit/99504e6d18bdf05320102be4b68f35196bba7fd7))
+
+# [100.1.0](https://github.com/dhis2/capture-app/compare/v100.0.3...v100.1.0) (2022-03-22)
+
+
+### Features
+
+* [DHIS2-9062] support organisation unit groups in program rules ([81d2e4c](https://github.com/dhis2/capture-app/commit/81d2e4c456e1eae0fee12406f515173a797f7e3b))
+
+## [100.0.3](https://github.com/dhis2/capture-app/compare/v100.0.2...v100.0.3) (2022-03-22)
+
+
+### Bug Fixes
+
+* [DHIS2-11796] adapt the date shape to the API requirements ([#2662](https://github.com/dhis2/capture-app/issues/2662)) ([ecd676f](https://github.com/dhis2/capture-app/commit/ecd676fd7b23fcd478f29f5ad5630c4eed967d30))
+* [DHIS2-12873] missing propriety for files/images dataElements ([#2651](https://github.com/dhis2/capture-app/issues/2651)) ([329ccc0](https://github.com/dhis2/capture-app/commit/329ccc0178c60b800da33c25e7f1014e13f11ea1))
+
+## [100.0.2](https://github.com/dhis2/capture-app/compare/v100.0.1...v100.0.2) (2022-03-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([3777979](https://github.com/dhis2/capture-app/commit/377797983fb617bc6a2737be9f7009ce2696bdd9))
+
+## [100.0.1](https://github.com/dhis2/capture-app/compare/v100.0.0...v100.0.1) (2022-03-17)
+
+
+### Bug Fixes
+
+* [DHIS2-12883] use first form multiple order arguments ([#2655](https://github.com/dhis2/capture-app/issues/2655)) ([e3413ea](https://github.com/dhis2/capture-app/commit/e3413ea49aa83f2dd22ad095af9fe5234b11c7b7))
+
+# [100.0.0](https://github.com/dhis2/capture-app/compare/v99.11.4...v100.0.0) (2022-03-16)
+
+
+### chore
+
+* **release:** migrate to new app version scheme ([#2566](https://github.com/dhis2/capture-app/issues/2566)) ([8c14f06](https://github.com/dhis2/capture-app/commit/8c14f061066f803264ce9d582c3051907795d9c6)), closes [dhis2/notes#293](https://github.com/dhis2/notes/issues/293)
+
+
+### BREAKING CHANGES
+
+* **release:** App version becomes decoupled from DHIS2 versions, see
+the d2.config.js or App Hub for DHIS2 version compatibility.
+
+## [99.11.4](https://github.com/dhis2/capture-app/compare/v99.11.3...v99.11.4) (2022-03-15)
+
+
+### Bug Fixes
+
+* [DHIS2-12821] image and file dateElements GET/POST ([#2648](https://github.com/dhis2/capture-app/issues/2648)) ([d6f5e81](https://github.com/dhis2/capture-app/commit/d6f5e81026319dedd9b98eea4b20601b741ed688))
+
+## [99.11.3](https://github.com/dhis2/capture-app/compare/v99.11.2...v99.11.3) (2022-03-15)
+
+
+### Bug Fixes
+
+* [DHIS2-12855] assignedUser not displaying in event workinglist ([#2589](https://github.com/dhis2/capture-app/issues/2589)) ([330a795](https://github.com/dhis2/capture-app/commit/330a7956cf289b034ea8d160fa27b885502a3298))
+
+## [99.11.2](https://github.com/dhis2/capture-app/compare/v99.11.1...v99.11.2) (2022-03-15)
+
+
+### Bug Fixes
+
+* [DHIS2-12727][DHIS2-12726] Crash when saving event with relationship ([63e3424](https://github.com/dhis2/capture-app/commit/63e3424007d1df5f22b7ef1a8e1d41eb2585644d))
+
 ## [99.11.1](https://github.com/dhis2/capture-app/compare/v99.11.0...v99.11.1) (2022-03-15)
 
 

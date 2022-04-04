@@ -1,5 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { EventDetailsSection } from './EventDetailsSection.component';
 import {
     startShowEditEventDataEntry,
@@ -10,8 +11,8 @@ const mapStateToProps = (state: ReduxState) => ({
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
-    onOpenEditEvent: () => {
-        dispatch(startShowEditEventDataEntry());
+    onOpenEditEvent: (orgUnit: OrgUnit) => {
+        dispatch(startShowEditEventDataEntry(orgUnit));
     },
 });
 

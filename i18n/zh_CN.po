@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
+"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -1019,11 +1019,11 @@ msgstr "写一篇关于这个报名的评论"
 msgid "This enrollment doesn't have any comments"
 msgstr "本次报名没有任何评论"
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr "为 {{orgUnitName}} 中的 {{programName}} 保存到 {{stageName}}"
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "无法检索组织机构。请稍后再试。"
+
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "为 {{orgUnitName}} 中的 {{programName}} 保存到 {{stageName}}"
 
 msgid "program or stage is invalid"
 msgstr "项目或阶段无效"

@@ -97,7 +97,8 @@ function getSelector(key: string, storeId: string, isInit: boolean) {
     if (!listSelectors[key]) {
         listSelectors[key] = createSelector(
             sourceValue => sourceValue,
-            sourceValue => relativeConvertersForPeriods[sourceValue.period](),
+            sourceValue =>
+                relativeConvertersForPeriods[sourceValue.period] && relativeConvertersForPeriods[sourceValue.period](),
         );
     }
 
@@ -130,10 +131,17 @@ function convertRelativeDate(
     storeId: string,
     isInit: boolean,
 ) {
-    if (sourceValue.startBuffer || sourceValue.endBuffer) {
-        return convertCustomRelativeDate(sourceValue);
+    let requestData = '';
+    if (
+        sourceValue.startBuffer ||
+        sourceValue.startBuffer === 0 ||
+        sourceValue.endBuffer ||
+        sourceValue.endBuffer === 0
+    ) {
+        requestData = convertCustomRelativeDate(sourceValue);
     }
-    return getSelector(key, storeId, isInit)(sourceValue);
+    requestData = getSelector(key, storeId, isInit)(sourceValue);
+    return requestData.join(':');
 }
 
 function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
@@ -147,7 +155,7 @@ function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
         const toFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(sourceValue.le));
         requestData.push(`le:${toFilterRequest}`);
     }
-    return requestData;
+    return requestData.join(':');
 }
 
 export function convertDate(

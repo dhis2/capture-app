@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
-import { Validated } from '../Validated';
+import { OrgUnitFetcher } from '../OrgUnitFetcher/OrgUnitFetcher.component';
 import { NoAccess } from './NoAccess.component';
 import type { Props } from './accessVerification.types';
 
-export const AccessVerificationComponent = ({ eventAccess, onCancel, widgetReducerName, ...passOnProps }: Props) => {
+export const AccessVerificationComponent = ({ eventAccess, onCancel, ...passOnProps }: Props) => {
     if (!eventAccess.write) {
         return (
             <NoAccess
@@ -14,10 +14,9 @@ export const AccessVerificationComponent = ({ eventAccess, onCancel, widgetReduc
     }
 
     return (
-        // $FlowFixMe
-        <Validated
-            {...passOnProps}
+        <OrgUnitFetcher
             onCancel={onCancel}
+            {...passOnProps}
         />
     );
 };

@@ -162,6 +162,7 @@ export const searchViaAttributesOnScopeProgramEpic: Epic = (action$, store) =>
 
             const queryArgs = {
                 filter: getFiltersForAttributesSearchQuery(formsValues[formId], attributes),
+                fields: 'attributes,enrollments,trackedEntity,orgUnit',
                 program: programId,
                 page,
                 pageSize: 5,

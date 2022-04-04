@@ -70,7 +70,7 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
     const fieldData: FieldData = {
         elementId,
         value,
-        valid: uiState.valid,
+        valid: uiState?.valid,
     };
     const formId = `${dataEntryId}-${itemId}`;
     const currentTEIValues = getCurrentClientValues(state, formFoundation, formId, fieldData);

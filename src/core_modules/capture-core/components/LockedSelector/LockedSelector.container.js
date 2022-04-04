@@ -2,6 +2,7 @@
 import React, { type ComponentType, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { LockedSelectorComponent } from './LockedSelector.component';
 import {
     setOrgUnitFromLockedSelector,
@@ -11,7 +12,7 @@ import {
     resetAllCategoryOptionsFromLockedSelector,
     openNewRegistrationPageFromLockedSelector,
     openSearchPageFromLockedSelector,
-    fetchOrgUnit,
+    setCurrentOrgUnitBasedOnUrl,
     resetProgramIdBatchAction,
     startAgainBatchAction,
     resetOrgUnitIdBatchAction,
@@ -20,27 +21,27 @@ import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.action
 import type { OwnProps } from './LockedSelector.types';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { useLocationQuery } from '../../utils/routing';
+import { useRulesEngineOrgUnit } from '../../hooks/useRulesEngineOrgUnit';
 
-const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, organisationUnits) => {
+const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, orgUnit, organisationUnits) => {
     // because we want the orgUnit to be fetched and stored
     // before allowing the user to view the locked selector
     if (selectedOrgUnitId) {
-        const orgUnit = organisationUnits[selectedOrgUnitId];
-        return Boolean(orgUnit && orgUnit.id && !lockedSelectorLoads);
+        const selectedOrgUnit = organisationUnits[selectedOrgUnitId];
+        return Boolean(orgUnit && selectedOrgUnit && selectedOrgUnit.id && !lockedSelectorLoads);
     }
     return !lockedSelectorLoads;
 };
 
-const useComponentLifecycle = () => {
+const useComponentLifecycle = (orgUnit: ?OrgUnit) => {
     const dispatch = useDispatch();
-    const { orgUnitId: selectedOrgUnitId } = useLocationQuery();
     const { pathname } = useLocation();
     const pageFetchesOrgUnit = !pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
 
     useEffect(() => {
-        pageFetchesOrgUnit && selectedOrgUnitId && dispatch(fetchOrgUnit(selectedOrgUnitId));
+        pageFetchesOrgUnit && orgUnit && dispatch(setCurrentOrgUnitBasedOnUrl({ id: orgUnit.id, name: orgUnit.name }));
     },
-    [dispatch, selectedOrgUnitId, pageFetchesOrgUnit]);
+    [dispatch, orgUnit, pageFetchesOrgUnit]);
 };
 
 export const LockedSelector: ComponentType<OwnProps> =
@@ -52,9 +53,20 @@ export const LockedSelector: ComponentType<OwnProps> =
   }) => {
       const dispatch = useDispatch();
 
+      const { orgUnitId: urlOrgUnit, programId: urlProgramId } = useLocationQuery();
+      const { orgUnitId, programId } = useSelector(({ currentSelections }) => ({
+          orgUnitId: urlOrgUnit || currentSelections.orgUnitId,
+          programId: urlProgramId || currentSelections.programId,
+      }));
+
+      const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+
+      const lockedSelectorLoads: string =
+        useSelector(({ activePage }) => activePage.lockedSelectorLoads);
+
       const dispatchOnSetOrgUnit = useCallback(
-          (id: string, orgUnit: Object) => {
-              dispatch(setOrgUnitFromLockedSelector(id, orgUnit, pageToPush));
+          (id: string, newOrgUnit: Object) => {
+              dispatch(setOrgUnitFromLockedSelector(id, newOrgUnit, pageToPush));
           },
           [pageToPush, dispatch]);
 
@@ -137,22 +149,16 @@ export const LockedSelector: ComponentType<OwnProps> =
           },
           [pageToPush, customActionsOnProgramIdReset, dispatch]);
 
-      const { orgUnitId: urlOrgUnit, programId: urlProgramId } = useLocationQuery();
-      const { orgUnitId, programId } = useSelector(({ currentSelections }) => ({
-          orgUnitId: urlOrgUnit || currentSelections.orgUnitId,
-          programId: urlProgramId || currentSelections.programId,
-      }));
-
-      const lockedSelectorLoads: string =
-        useSelector(({ activePage }) => activePage.lockedSelectorLoads);
-
-
       const organisationUnits: Object =
         useSelector(({ organisationUnits: orgUnits }) => orgUnits);
 
-      const ready = deriveReadiness(lockedSelectorLoads, orgUnitId, organisationUnits);
+      const ready = deriveReadiness(lockedSelectorLoads, orgUnitId, orgUnit, organisationUnits);
 
-      useComponentLifecycle();
+      useComponentLifecycle(orgUnit);
+
+      if (error) {
+          return error.errorComponent;
+      }
 
       return (
           <LockedSelectorComponent

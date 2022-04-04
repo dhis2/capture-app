@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2022
+# Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-10T08:16:14.613Z\n"
+"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -621,19 +621,19 @@ msgid "No feedback for this enrollment yet"
 msgstr "Ingen tilbakemeldinger for denne registreringen enda"
 
 msgid "Quick actions"
-msgstr ""
+msgstr "Snarveier"
 
 msgid "New Event"
-msgstr ""
+msgstr "Ny hendelse"
 
 msgid "Schedule an event"
-msgstr ""
+msgstr "Planlegg en hendelse"
 
 msgid "Make referral"
 msgstr "Opprett henvisning"
 
 msgid "No available program stages"
-msgstr ""
+msgstr "Ingen tilgjengelige programfaser"
 
 msgid "Program stage not found"
 msgstr "Programfase ikke funnet"
@@ -642,6 +642,8 @@ msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
 msgstr ""
+"Velg et program for å legge til nye eller se eksisterende registreringer for"
+" {{teiDisplayName}}"
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -649,7 +651,7 @@ msgstr ""
 "{{programName}} har kategorier. Velg alle kategorier for å se dashbordet."
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr ""
+msgstr "Velg en registrering for å se dashbordet."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
@@ -678,16 +680,16 @@ msgid "View working list in this program."
 msgstr "Se arbeidsliste i dette programmet."
 
 msgid "Page is missing required values from URL"
-msgstr ""
+msgstr "Siden mangler nødvendige verdier fra URL"
 
 msgid "Program is not valid"
-msgstr ""
+msgstr "Programmet er ikke gyldig"
 
 msgid "Org unit is not valid with current program"
-msgstr ""
+msgstr "Organisasjonsenheten er ikke gyldig med gjeldende program"
 
 msgid "There was an error opening the Page"
-msgstr ""
+msgstr "Det oppsto en feil ved åpning av siden"
 
 msgid "Enrollment{{escape}} New Event"
 msgstr "Registrering{{escape}} Ny hendelse"
@@ -705,7 +707,7 @@ msgid "There are no indicators for this event"
 msgstr "Det er ingen indikatorer for denne hendelsen"
 
 msgid "Program stage is invalid"
-msgstr ""
+msgstr "Programfase er ugyldig"
 
 msgid "Report"
 msgstr "Rapport"
@@ -768,7 +770,7 @@ msgid "View dashboard"
 msgstr "Vis dashbord"
 
 msgid "View enrollment"
-msgstr ""
+msgstr "Se registrering"
 
 msgid "Create for"
 msgstr "Opprett for"
@@ -779,7 +781,7 @@ msgstr ""
 "Du kan også velge et program fra topplinjen og opprette i det programmet"
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "Ny registrering i programmet{{escape}} {{programName}}"
 
 msgid "Save new"
 msgstr "Lagre ny"
@@ -986,7 +988,7 @@ msgid "Add new"
 msgstr "Legg til ny"
 
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
-msgstr ""
+msgstr "Bare én registrering per {{tetName}} er tillatt i dette programmet"
 
 msgid "Reactivate"
 msgstr "Reaktiver"
@@ -1052,11 +1054,11 @@ msgstr "Skriv en kommentar om denne registreringen"
 msgid "This enrollment doesn't have any comments"
 msgstr "Denne registreringen har ingen kommentarer"
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr "Lagrer i {{stageName}} for {{programName}} i {{orgUnitName}}"
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisasjonsenheten kunne ikke hentes. Prøv igjen senere."
+
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "Lagrer i {{stageName}} for {{programName}} i {{orgUnitName}}"
 
 msgid "program or stage is invalid"
 msgstr "program eller fase er ugyldig"
@@ -1092,11 +1094,15 @@ msgid ""
 "This date is the suggested scheduled date based on the intervals defined, \n"
 "                    it can be adjusted if needed."
 msgstr ""
+"Denne datoen er den foreslåtte datoen basert på intervallene som er definert, \n"
+"                   den kan justeres om nødvendig."
 
 msgid "This date is {{count}} days {{position}} the suggested date."
 msgid_plural "This date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
+"Denne datoen er {{difference}} dager {{position}} den foreslåtte datoen."
 msgstr[1] ""
+"Denne datoen er {{difference}} dager {{position}} den foreslåtte datoen."
 
 msgid "after"
 msgstr "etter"
@@ -1107,8 +1113,9 @@ msgstr "før"
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
+msgstr[0] "Det er {{count}} planlagt hendelse i {{orgUnitName}} denne dagen."
 msgstr[1] ""
+"Det er {{count}} planlagte hendelser i {{orgUnitName}} denne dagen."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1132,9 +1139,12 @@ msgid ""
 "information about this enrollment, use the Edit button in the in the "
 "Enrollment box on this dashboard"
 msgstr ""
+"Endre informasjon om denne {{trackedEntityName}} her. For å endre "
+"informasjon om denne registreringen, bruk Rediger-knappen i "
+"registreringsboksen på dette dashbordet"
 
 msgid " Loading..."
-msgstr ""
+msgstr "Laster..."
 
 msgid "Save changes"
 msgstr "Lagre endringer"
@@ -1143,22 +1153,22 @@ msgid "Profile"
 msgstr "Profil"
 
 msgid "There is a problem with this form"
-msgstr ""
+msgstr "Det er et problem med dette skjemaet"
 
 msgid "There are warnings in this form"
-msgstr ""
+msgstr "Det er advarsler i dette skjemaet"
 
 msgid "There was a problem saving changes"
-msgstr ""
+msgstr "Det oppsto et problem under lagring av endringer"
 
 msgid "Try again or contact your system administrator for support"
-msgstr ""
+msgstr "Prøv igjen eller kontakt systemadministratoren din for hjelp"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
 
 msgid "Fix errors in the form to continue."
-msgstr ""
+msgstr "Rett opp feil i skjemaet for å fortsette."
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profil -widgeten kunne ikke lastes inn. Prøv igjen senere"
@@ -1188,7 +1198,7 @@ msgid "This stage can only have one event"
 msgstr "Denne fasen kan bare ha en hendelse"
 
 msgid "Events could not be retrieved. Please try again later."
-msgstr ""
+msgstr "Hendelser kunne ikke hentes. Prøv igjen senere."
 
 msgid "Report date"
 msgstr "Rapporteringsdato"
@@ -1251,7 +1261,7 @@ msgid "Working list could not be updated"
 msgstr "Arbeidslisten kunne ikke oppdateres"
 
 msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
+msgstr "det oppstod en feil ved lasting av lister over sporede enheter"
 
 msgid "Update view"
 msgstr "Oppdater visning"
