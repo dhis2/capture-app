@@ -69,6 +69,89 @@ type State = {
     submitAttempted: boolean,
 };
 
+const getAbsoluteRangeErrors = (fromValue, toValue, type, submitAttempted) => {
+    let errors = {
+        minValueError: null,
+        maxValueError: null,
+        dateLogicError: null,
+    };
+
+    if (!fromValue && !toValue) {
+        errors = {
+            ...errors,
+            dateLogicError: submitAttempted ? i18n.t(DateFilter.errorMessages.ABSOLUTE_RANGE_WITHOUT_VALUES) : null,
+        };
+    } else {
+        const { isValid: isMinValueValid, error: minValueError } = DateFilter.validateField(fromValue, type);
+        const { isValid: isMaxValueValid, error: maxValueError } = DateFilter.validateField(toValue, type);
+        const hasDateLogicError = () =>
+            isMinValueValid && isMaxValueValid && fromValue && toValue && DateFilter.isFromAfterTo(fromValue, toValue);
+
+        errors = {
+            ...errors,
+            minValueError,
+            maxValueError,
+            dateLogicError: hasDateLogicError() ? i18n.t(DateFilter.errorMessages.FROM_GREATER_THAN_TO) : null,
+        };
+    }
+
+    return errors;
+};
+
+const getRelativeRangeErrors = (startValue, endValue, submitAttempted) => {
+    let errors = {
+        startValueError: null,
+        endValueError: null,
+        bufferLogicError: null,
+    };
+    if (!startValue && !endValue) {
+        errors = {
+            ...errors,
+            bufferLogicError: submitAttempted ? i18n.t(DateFilter.errorMessages.RELATIVE_RANGE_WITHOUT_VALUES) : null,
+        };
+    }
+    const { error: startValueError } = DateFilter.validateField(startValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE);
+    const { error: endValueError } = DateFilter.validateField(endValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE);
+    errors = {
+        ...errors,
+        startValueError,
+        endValueError,
+    };
+    return errors;
+};
+
+const isAbsoluteRangeFilterValid = (fromValue, toValue) => {
+    if (!fromValue && !toValue) {
+        return false;
+    }
+
+    const parseResultFrom = fromValue ? parseDate(fromValue) : { isValid: true, moment: null };
+    const parseResultTo = toValue ? parseDate(toValue) : { isValid: true, moment: null };
+
+    if (!(parseResultFrom.isValid && parseResultTo.isValid)) {
+        return false;
+    }
+    const isValidMomentDate = () =>
+        parseResultFrom.momentDate &&
+        parseResultTo.momentDate &&
+        parseResultFrom.momentDate.isAfter(parseResultTo.momentDate);
+
+    return !isValidMomentDate();
+};
+
+const isRelativeRangeFilterValid = (startValue, endValue) => {
+    if (!startValue && !endValue) {
+        return false;
+    }
+    if (
+        !DateFilter.validateField(startValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE).isValid ||
+        !DateFilter.validateField(endValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE).isValid
+    ) {
+        return false;
+    }
+    return true;
+};
+
 // $FlowFixMe[incompatible-variance] automated comment
 class DateFilterPlain extends Component<Props, State> implements UpdatableFilterContent<Value> {
     static validateField(value: ?string, type: $Keys<typeof dataElementTypes>) {
@@ -90,7 +173,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         };
     }
 
-    // eslint-disable-next-line complexity
     static isFilterValid(
         mainValue?: ?string,
         fromValue?: ?string,
@@ -99,35 +181,11 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         endValue?: ?string,
     ) {
         if (mainValue === mainOptionKeys.ABSOLUTE_RANGE) {
-            if (!fromValue && !toValue) {
-                return false;
-            }
-
-            const parseResultFrom = fromValue ? parseDate(fromValue) : { isValid: true, moment: null };
-            const parseResultTo = toValue ? parseDate(toValue) : { isValid: true, moment: null };
-
-            if (!(parseResultFrom.isValid && parseResultTo.isValid)) {
-                return false;
-            }
-
-            return !(
-                parseResultFrom.momentDate &&
-                parseResultTo.momentDate &&
-                parseResultFrom.momentDate.isAfter(parseResultTo.momentDate)
-            );
+            return isAbsoluteRangeFilterValid(fromValue, toValue);
         }
 
         if (mainValue === optionKeys.RELATIVE_RANGE) {
-            if (!startValue && !endValue) {
-                return false;
-            }
-            if (
-                !DateFilter.validateField(startValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE).isValid ||
-                !DateFilter.validateField(endValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE).isValid
-            ) {
-                return false;
-            }
-            return true;
+            return isRelativeRangeFilterValid(startValue, endValue);
         }
         return true;
     }
@@ -221,17 +279,21 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             ...this.props.value,
             ...valuePart,
         };
+        const isRelativeRangeValue = () => valueObject?.start || valuePart?.start || valuePart?.end;
+        const isAbsoluteRangevalue = () => valueObject?.from || valuePart?.from || valuePart?.to;
 
-        if (valuePart?.from || valuePart?.to) {
+        if (isAbsoluteRangevalue()) {
             valueObject.main = mainOptionKeys.ABSOLUTE_RANGE;
             delete valueObject.start;
             delete valueObject.end;
-        } else if (valuePart?.start || valuePart?.end) {
+        } else if (isRelativeRangeValue()) {
             valueObject.main = optionKeys.RELATIVE_RANGE;
             delete valueObject.from;
             delete valueObject.to;
-        } else if (valueObject.main === mainOptionKeys.ABSOLUTE_RANGE
-            || valueObject.main === optionKeys.RELATIVE_RANGE) {
+        } else if (
+            valueObject.main === mainOptionKeys.ABSOLUTE_RANGE ||
+            valueObject.main === optionKeys.RELATIVE_RANGE
+        ) {
             // $FlowFixMe[incompatible-type] automated comment
             valueObject.main = null;
         }
@@ -272,7 +334,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         this.toD2DateTextFieldInstance = instance;
     };
 
-    // eslint-disable-next-line complexity
     getErrors() {
         const values = this.props.value;
         const submitAttempted = this.state.submitAttempted;
@@ -282,7 +343,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         const startValue = values && values.start;
         const endValue = values && values.end;
         const type = this.props.type;
-        let errors = {
+        const errors = {
             minValueError: null,
             maxValueError: null,
             startValueError: null,
@@ -291,49 +352,13 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             bufferLogicError: null,
         };
 
-        if (mainValue === mainOptionKeys.ABSOLUTE_RANGE && !fromValue && !toValue) {
-            errors = {
-                ...errors,
-                dateLogicError: submitAttempted ? i18n.t(DateFilter.errorMessages.ABSOLUTE_RANGE_WITHOUT_VALUES) : null,
-            };
+        if (mainValue === mainOptionKeys.ABSOLUTE_RANGE) {
+            return { ...errors, ...getAbsoluteRangeErrors(fromValue, toValue, type, submitAttempted) };
         }
 
-        if (mainValue === optionKeys.RELATIVE_RANGE && !startValue && !endValue) {
-            errors = {
-                ...errors,
-                bufferLogicError: submitAttempted
-                    ? i18n.t(DateFilter.errorMessages.RELATIVE_RANGE_WITHOUT_VALUES)
-                    : null,
-            };
+        if (mainValue === optionKeys.RELATIVE_RANGE) {
+            return { ...errors, ...getRelativeRangeErrors(startValue, endValue, submitAttempted) };
         }
-
-        const { isValid: isMinValueValid, error: minValueError } = DateFilter.validateField(fromValue, type);
-        const { isValid: isMaxValueValid, error: maxValueError } = DateFilter.validateField(toValue, type);
-        const { error: startValueError } = DateFilter.validateField(
-            startValue,
-            dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
-        );
-        const { error: endValueError } = DateFilter.validateField(endValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE);
-
-        let dateLogicError = null;
-        if (
-            isMinValueValid &&
-            isMaxValueValid &&
-            fromValue &&
-            toValue &&
-            DateFilter.isFromAfterTo(fromValue, toValue)
-        ) {
-            dateLogicError = i18n.t(DateFilter.errorMessages.FROM_GREATER_THAN_TO);
-        }
-
-        errors = {
-            ...errors,
-            minValueError,
-            maxValueError,
-            startValueError,
-            endValueError,
-            dateLogicError,
-        };
         return errors;
     }
 

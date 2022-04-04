@@ -131,7 +131,7 @@ function convertRelativeDate(
     storeId: string,
     isInit: boolean,
 ) {
-    let requestData = '';
+    let requestData = [];
     if (
         sourceValue.startBuffer ||
         sourceValue.startBuffer === 0 ||
@@ -139,9 +139,10 @@ function convertRelativeDate(
         sourceValue.endBuffer === 0
     ) {
         requestData = convertCustomRelativeDate(sourceValue);
+        return requestData?.join(':');
     }
     requestData = getSelector(key, storeId, isInit)(sourceValue);
-    return requestData.join(':');
+    return requestData?.join(':');
 }
 
 function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
@@ -155,7 +156,7 @@ function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
         const toFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(sourceValue.le));
         requestData.push(`le:${toFilterRequest}`);
     }
-    return requestData.join(':');
+    return requestData?.join(':');
 }
 
 export function convertDate(

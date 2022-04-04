@@ -47,12 +47,14 @@ export class DateFilterManager extends React.Component<Props, State> {
         }
 
         if (filter.type === dateFilterTypes.RELATIVE) {
-            if (filter.startBuffer || filter.endBuffer) {
+            if (filter.period) {
+                return {
+                    main: filter.period,
+                };
+            }
+            if (filter.startBuffer || filter.startBuffer === 0 || filter.endBuffer || filter.endBuffer === 0) {
                 return DateFilterManager.calculateRelativeRangeValueState(filter);
             }
-            return {
-                main: filter.period,
-            };
         }
 
         return DateFilterManager.calculateAbsoluteRangeValueState(filter);
