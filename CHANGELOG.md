@@ -1,3 +1,10 @@
+## [100.1.11](https://github.com/dhis2/capture-app/compare/v100.1.10...v100.1.11) (2022-04-04)
+
+
+### Bug Fixes
+
+* [DHIS2-13017] missing createdby info from comments ([17c5c13](https://github.com/dhis2/capture-app/commit/17c5c13687bdecd3c3883f463845081c4c25d33b))
+
 ## [100.1.10](https://github.com/dhis2/capture-app/compare/v100.1.9...v100.1.10) (2022-04-01)
 
 

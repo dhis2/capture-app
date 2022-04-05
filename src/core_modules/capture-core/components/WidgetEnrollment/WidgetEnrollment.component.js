@@ -44,7 +44,8 @@ export const WidgetEnrollmentPlain = ({
     enrollment = {},
     program = {},
     ownerOrgUnit = {},
-    refetch,
+    refetchEnrollment,
+    refetchTEI,
     error,
     loading,
     canAddNew,
@@ -204,7 +205,8 @@ export const WidgetEnrollmentPlain = ({
                             tetName={program.trackedEntityType.displayName}
                             onlyEnrollOnce={program.onlyEnrollOnce}
                             enrollment={enrollment}
-                            refetch={refetch}
+                            refetchEnrollment={refetchEnrollment}
+                            refetchTEI={refetchTEI}
                             onDelete={onDelete}
                             onAddNew={onAddNew}
                             canAddNew={canAddNew}
