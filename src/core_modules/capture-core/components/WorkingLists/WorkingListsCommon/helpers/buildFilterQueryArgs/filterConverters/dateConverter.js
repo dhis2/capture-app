@@ -8,6 +8,7 @@ import type {
     RelativeDateFilterData,
     AbsoluteDateFilterData,
 } from '../../../../../ListView';
+import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
 
 const periods = {
     TODAY: 'TODAY',
@@ -132,17 +133,15 @@ function convertRelativeDate(
     isInit: boolean,
 ) {
     let requestData = [];
-    if (
-        sourceValue.startBuffer ||
-        sourceValue.startBuffer === 0 ||
-        sourceValue.endBuffer ||
-        sourceValue.endBuffer === 0
-    ) {
+    if (areRelativeRangeValuesSupported(sourceValue.startBuffer, sourceValue.endBuffer)) {
         requestData = convertCustomRelativeDate(sourceValue);
         return requestData?.join(':');
     }
-    requestData = getSelector(key, storeId, isInit)(sourceValue);
-    return requestData?.join(':');
+    if (sourceValue.period) {
+        requestData = getSelector(key, storeId, isInit)(sourceValue);
+        return requestData?.join(':');
+    }
+    return '';
 }
 
 function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {

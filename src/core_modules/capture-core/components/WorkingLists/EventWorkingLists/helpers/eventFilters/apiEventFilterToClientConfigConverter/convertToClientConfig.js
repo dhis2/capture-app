@@ -26,6 +26,7 @@ import type {
     ColumnsMetaForDataFetching,
     ClientConfig,
 } from '../../../types';
+import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
     const value = filter.like;
@@ -47,21 +48,31 @@ const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterD
     value: true,
 });
 
-const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData => {
+const getDateFilter = ({ dateFilter }: ApiDataFilterDate): ?DateFilterData => {
     if (dateFilter.type === apiDateFilterTypes.RELATIVE) {
+        if (dateFilter.period) {
+            return {
+                type: dateFilter.type,
+                period: dateFilter.period,
+            };
+        }
+        if (areRelativeRangeValuesSupported(dateFilter.startBuffer, dateFilter.endBuffer)) {
+            return {
+                type: dateFilter.type,
+                startBuffer: dateFilter.startBuffer,
+                endBuffer: dateFilter.endBuffer,
+            };
+        }
+        return undefined;
+    }
+    if (dateFilter.type === apiDateFilterTypes.ABSOLUTE) {
         return {
             type: dateFilter.type,
-            period: dateFilter.period,
-            startBuffer: dateFilter.startBuffer,
-            endBuffer: dateFilter.endBuffer,
+            ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString() : undefined,
+            le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
         };
     }
-
-    return {
-        type: dateFilter.type,
-        ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString() : undefined,
-        le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
-    };
+    return undefined;
 };
 
 const getUser = (userId: string) => getApi()
@@ -165,11 +176,12 @@ const getDataElementFilters = (
                 id: serverFilter.dataItem,
             };
         }
+        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
+        const dataValue = (getFilterByType[element.type](serverFilter, element));
 
-        return {
+        return dataValue && {
             id: serverFilter.dataItem,
-            // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
-            ...(getFilterByType[element.type] ? getFilterByType[element.type](serverFilter, element) : null),
+            ...dataValue,
         };
     }).filter(clientFilter => clientFilter);
 };
@@ -190,7 +202,8 @@ const getMainDataFilters = async (
         filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status').type), id: 'status' });
     }
     if (occurredAt) {
-        filters.push({ ...getDateFilter({ dateFilter: occurredAt }), id: 'occurredAt' });
+        const convertedDate = getDateFilter({ dateFilter: occurredAt });
+        convertedDate && filters.push({ ...convertedDate, id: 'occurredAt' });
     }
     if (assignedUserMode) {
         filters.push({ ...(await getAssigneeFilter(assignedUserMode, assignedUsers)), id: 'assignee' });

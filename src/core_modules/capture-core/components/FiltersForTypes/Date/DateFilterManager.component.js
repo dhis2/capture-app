@@ -1,12 +1,14 @@
 // @flow
 import * as React from 'react';
 import moment from 'moment';
+import log from 'loglevel';
 import { convertMomentToDateFormatString } from '../../../utils/converters/date';
 import { DateFilter } from './DateFilter.component';
 import { mainOptionKeys, optionKeys } from './options';
 import { dateFilterTypes } from './constants';
 import type { DateFilterData } from './types';
 import type { Value } from './DateFilter.component';
+import { areRelativeRangeValuesSupported } from '../../../utils/validators/areRelativeRangeValuesSupported';
 
 type Props = {
     filter: ?DateFilterData,
@@ -34,10 +36,10 @@ export class DateFilterManager extends React.Component<Props, State> {
         return {
             main: optionKeys.RELATIVE_RANGE,
             start:
-                filter && (filter.startBuffer || filter.startBuffer === 0)
+                (filter.startBuffer || filter.startBuffer === 0)
                     ? Math.abs(filter.startBuffer).toString()
                     : undefined,
-            end: filter && (filter.endBuffer || filter.endBuffer === 0) ? filter.endBuffer.toString() : undefined,
+            end: (filter.endBuffer || filter.endBuffer === 0) ? filter.endBuffer.toString() : undefined,
         };
     }
 
@@ -52,9 +54,15 @@ export class DateFilterManager extends React.Component<Props, State> {
                     main: filter.period,
                 };
             }
-            if (filter.startBuffer || filter.startBuffer === 0 || filter.endBuffer || filter.endBuffer === 0) {
+            if (areRelativeRangeValuesSupported(filter.startBuffer, filter.endBuffer)) {
                 return DateFilterManager.calculateRelativeRangeValueState(filter);
             }
+            log.warn(
+                'The startBuffer and endBuffer values are not supported by the UI',
+                filter.startBuffer,
+                filter.endBuffer,
+            );
+            return undefined;
         }
 
         return DateFilterManager.calculateAbsoluteRangeValueState(filter);

@@ -20,6 +20,7 @@ import type {
     ApiTEIQueryCriteria,
     TeiColumnsMetaForDataFetching,
 } from '../../../types';
+import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
 import { DATE_TYPES, ASSIGNEE_MODES } from '../../../constants';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
@@ -42,19 +43,29 @@ const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterD
 
 const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
     if (dateFilter.type === DATE_TYPES.RELATIVE) {
+        if (dateFilter.period) {
+            return {
+                type: dateFilter.type,
+                period: dateFilter.period,
+            };
+        }
+        if (areRelativeRangeValuesSupported(dateFilter.startBuffer, dateFilter.endBuffer)) {
+            return {
+                type: dateFilter.type,
+                startBuffer: dateFilter.startBuffer,
+                endBuffer: dateFilter.endBuffer,
+            };
+        }
+        return undefined;
+    }
+    if (dateFilter.type === DATE_TYPES.ABSOLUTE) {
         return {
             type: dateFilter.type,
-            period: dateFilter.period,
-            startBuffer: dateFilter.startBuffer,
-            endBuffer: dateFilter.endBuffer,
+            ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString() : undefined,
+            le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
         };
     }
-
-    return {
-        type: dateFilter.type,
-        ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString() : undefined,
-        le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
-    };
+    return undefined;
 };
 
 const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => getDateFilterContent(dateFilter);

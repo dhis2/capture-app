@@ -4,6 +4,7 @@ import { pipe } from 'capture-core-utils';
 import moment from 'moment';
 import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import type { DateFilterData, AbsoluteDateFilterData } from '../../../../../FiltersForTypes';
+import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
 
 const periods = {
     TODAY: 'TODAY',
@@ -66,7 +67,7 @@ export function convertDate(filter: DateFilterData): string {
     if (filter.period) {
         return translatedPeriods[filter.period];
     }
-    if ((filter.startBuffer || filter.startBuffer === 0) || (filter.endBuffer || filter.endBuffer === 0)) {
+    if (areRelativeRangeValuesSupported(filter.startBuffer, filter.endBuffer)) {
         return translatedPeriods[periods.RELATIVE_RANGE];
     }
     return '';
