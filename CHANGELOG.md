@@ -1,3 +1,12 @@
+## [100.1.12](https://github.com/dhis2/capture-app/compare/v100.1.11...v100.1.12) (2022-04-05)
+
+
+### Bug Fixes
+
+* [DHIS2-12878] fix filter undefined value ([#2656](https://github.com/dhis2/capture-app/issues/2656)) ([13dde0d](https://github.com/dhis2/capture-app/commit/13dde0d41a31dc965c55ebe33db4bb12562e60a1))
+* [DHIS2-12880] refetch tei after updating ([#2661](https://github.com/dhis2/capture-app/issues/2661)) ([6e667c2](https://github.com/dhis2/capture-app/commit/6e667c200788bfc18b32f0547d38cf2f170253bd))
+* [DHIS2-12993] navigate to available tei when switching program ([#2693](https://github.com/dhis2/capture-app/issues/2693)) ([13ce9f1](https://github.com/dhis2/capture-app/commit/13ce9f128d82b792175d21620cb7c012bca6b77a))
+
 ## [100.1.11](https://github.com/dhis2/capture-app/compare/v100.1.10...v100.1.11) (2022-04-04)
 
 
