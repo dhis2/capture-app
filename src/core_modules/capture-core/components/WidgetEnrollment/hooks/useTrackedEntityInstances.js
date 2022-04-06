@@ -3,13 +3,13 @@ import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useTrackedEntityInstances = (teiId: string, programId: string) => {
-    const { error, loading, data } = useDataQuery(
+    const { error, loading, data, refetch } = useDataQuery(
         useMemo(
             () => ({
                 trackedEntityInstances: {
                     resource: `tracker/trackedEntities/${teiId}`,
                     params: {
-                        fields: ['programOwners[ownerOrgUnit],enrollments'],
+                        fields: ['programOwners[orgUnit],enrollments'],
                         program: [programId],
                     },
                 },
@@ -20,6 +20,7 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
 
     return {
         error,
+        refetch,
         ownerOrgUnit:
             !loading &&
             data?.trackedEntityInstances?.programOwners[0]?.orgUnit,

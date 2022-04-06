@@ -1,3 +1,75 @@
+## [100.1.12](https://github.com/dhis2/capture-app/compare/v100.1.11...v100.1.12) (2022-04-05)
+
+
+### Bug Fixes
+
+* [DHIS2-12878] fix filter undefined value ([#2656](https://github.com/dhis2/capture-app/issues/2656)) ([13dde0d](https://github.com/dhis2/capture-app/commit/13dde0d41a31dc965c55ebe33db4bb12562e60a1))
+* [DHIS2-12880] refetch tei after updating ([#2661](https://github.com/dhis2/capture-app/issues/2661)) ([6e667c2](https://github.com/dhis2/capture-app/commit/6e667c200788bfc18b32f0547d38cf2f170253bd))
+* [DHIS2-12993] navigate to available tei when switching program ([#2693](https://github.com/dhis2/capture-app/issues/2693)) ([13ce9f1](https://github.com/dhis2/capture-app/commit/13ce9f128d82b792175d21620cb7c012bca6b77a))
+
+## [100.1.11](https://github.com/dhis2/capture-app/compare/v100.1.10...v100.1.11) (2022-04-04)
+
+
+### Bug Fixes
+
+* [DHIS2-13017] missing createdby info from comments ([17c5c13](https://github.com/dhis2/capture-app/commit/17c5c13687bdecd3c3883f463845081c4c25d33b))
+
+## [100.1.10](https://github.com/dhis2/capture-app/compare/v100.1.9...v100.1.10) (2022-04-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13008] fix relationship missing data ([#2698](https://github.com/dhis2/capture-app/issues/2698)) ([152bd59](https://github.com/dhis2/capture-app/commit/152bd59f727f9c1ff5ab4f7f9982da4185a96f11))
+
+## [100.1.9](https://github.com/dhis2/capture-app/compare/v100.1.8...v100.1.9) (2022-04-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12364] use correct fixed length aicode ([#2695](https://github.com/dhis2/capture-app/issues/2695)) ([fe1147e](https://github.com/dhis2/capture-app/commit/fe1147ef40fd5374b3d6b5091b22139aa4dfbe8f))
+
+## [100.1.8](https://github.com/dhis2/capture-app/compare/v100.1.7...v100.1.8) (2022-03-31)
+
+
+### Bug Fixes
+
+* [DHIS2-12928] handle missing program rules outputConverters ([43ffb17](https://github.com/dhis2/capture-app/commit/43ffb178134ee2c790c901ed1872ffacb1941d34))
+
+## [100.1.7](https://github.com/dhis2/capture-app/compare/v100.1.6...v100.1.7) (2022-03-31)
+
+
+### Bug Fixes
+
+* [DHIS2-12966] issues related to invalid property onwerOrgUnit ([0e4b8d4](https://github.com/dhis2/capture-app/commit/0e4b8d4303cc838d63986faae5a3f6fdc4d0ce72))
+
+## [100.1.6](https://github.com/dhis2/capture-app/compare/v100.1.5...v100.1.6) (2022-03-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([54fbea0](https://github.com/dhis2/capture-app/commit/54fbea0984ffcaeb12bb7c06c34ce0df80aedcbd))
+
+## [100.1.5](https://github.com/dhis2/capture-app/compare/v100.1.4...v100.1.5) (2022-03-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12951] default old Tracker Capture dashboard ([#2681](https://github.com/dhis2/capture-app/issues/2681)) ([ecce525](https://github.com/dhis2/capture-app/commit/ecce52570e1186f5d4e3d11940581f3d246e687c))
+
+## [100.1.4](https://github.com/dhis2/capture-app/compare/v100.1.3...v100.1.4) (2022-03-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12929] use interface language for localeCompare ([2b00c9f](https://github.com/dhis2/capture-app/commit/2b00c9f41f0cb61007613a923f9fff9124cdcb06))
+
+## [100.1.3](https://github.com/dhis2/capture-app/compare/v100.1.2...v100.1.3) (2022-03-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12930] add correct fields-filtering on TEI-search ([7374d81](https://github.com/dhis2/capture-app/commit/7374d81b04495e3251be03f56a08e84be416ee3b))
+
 ## [100.1.2](https://github.com/dhis2/capture-app/compare/v100.1.1...v100.1.2) (2022-03-24)
 
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { getInstance } from 'd2';
+import { localeCompareStrings } from '../../../utils/localeCompareStrings';
 import { Tree } from './Tree';
 
 export class OrgUnitTree extends React.Component {
@@ -103,7 +104,7 @@ export class OrgUnitTree extends React.Component {
                           label: v.displayName,
                       });
                   }
-                  items.sort((a, b) => a.label.localeCompare(b.label));
+                  items.sort(({ label: labelA }, { label: labelB }) => localeCompareStrings(labelA, labelB));
 
                   const { list } = this.state;
                   this.setChildren(path, items, list);

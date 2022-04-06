@@ -4,18 +4,18 @@ import { mergeMap, catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { fetchDataStore } from './DataStore.actions';
 import { getApi } from '../../d2';
-import { type UseOldDashboard } from './DataStore.types';
+import { type UseNewDashboard } from './DataStore.types';
 import { appStartActionTypes } from '../../../../components/AppStart';
 
 function getDataStoreFromApi() {
     const api = getApi();
     return api
-        .get('dataStore/capture/useOldDashboard');
+        .get('dataStore/capture/useNewDashboard');
 }
 
 const getUserDataStoreFromApi = () => {
     const api = getApi();
-    return api.get('userDataStore/capture/useOldDashboard');
+    return api.get('userDataStore/capture/useNewDashboard');
 };
 
 export const fetchDataStoreEpic = (action$: InputObservable) =>
@@ -24,7 +24,7 @@ export const fetchDataStoreEpic = (action$: InputObservable) =>
             appStartActionTypes.APP_LOAD_SUCESS,
         ),
         mergeMap(async () => {
-            const apiDataStore: UseOldDashboard = await getDataStoreFromApi();
+            const apiDataStore: UseNewDashboard = await getDataStoreFromApi();
             // $FlowFixMe
             return fetchDataStore({ dataStore: apiDataStore });
         }),
@@ -37,7 +37,7 @@ export const fetchUserDataStoreEpic = (action$: InputObservable) =>
             appStartActionTypes.APP_LOAD_SUCESS,
         ),
         mergeMap(async () => {
-            const apiUserDataStore: UseOldDashboard = await getUserDataStoreFromApi();
+            const apiUserDataStore: UseNewDashboard = await getUserDataStoreFromApi();
             // $FlowFixMe
             return fetchDataStore({ userDataStore: apiUserDataStore });
         }),

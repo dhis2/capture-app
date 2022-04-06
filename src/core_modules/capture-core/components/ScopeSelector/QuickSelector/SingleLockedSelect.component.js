@@ -86,28 +86,25 @@ const SingleLockedSelectPlain =
       classes,
       isUserInteractionInProgress,
   }: Props) => {
-      const [selected, toggleSelected] = useState((Boolean(selectedValue)));
       const [openStartAgainWarning, setOpenStartAgainWarning] = useState(false);
+
 
       const handleClose = () => {
           setOpenStartAgainWarning(false);
       };
       const handleConfirm = () => {
           handleClose();
-          toggleSelected(false);
           onClear && onClear();
       };
 
       const handleOnClear = () => {
           if (!isUserInteractionInProgress) {
-              toggleSelected(false);
               onClear && onClear();
               return;
           }
           setOpenStartAgainWarning(true);
       };
       const handleOnSelect = useCallback(({ value }) => {
-          toggleSelected(true);
           onSelect && onSelect(value);
       },
       [onSelect]);
@@ -115,7 +112,7 @@ const SingleLockedSelectPlain =
       const { label } = options.find((({ value }) => value === selectedValue)) || {};
       return (<span data-test="single-locked-select">
           {
-              selected && label ?
+              label ?
                   <Paper square elevation={0} className={classes.selectedPaper}>
                       <h4 className={classes.title}>
                           {i18n.t('Selected')} {title.toLowerCase()}
