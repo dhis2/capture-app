@@ -4,7 +4,7 @@ import moment from 'moment';
 import log from 'loglevel';
 import { convertMomentToDateFormatString } from '../../../utils/converters/date';
 import { DateFilter } from './DateFilter.component';
-import { mainOptionKeys, optionKeys } from './options';
+import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
 import type { DateFilterData } from './types';
 import type { Value } from './DateFilter.component';
@@ -34,7 +34,7 @@ export class DateFilterManager extends React.Component<Props, State> {
     }
     static calculateRelativeRangeValueState(filter: DateFilterData) {
         return {
-            main: optionKeys.RELATIVE_RANGE,
+            main: mainOptionKeys.RELATIVE_RANGE,
             start:
                 (filter.startBuffer || filter.startBuffer === 0)
                     ? Math.abs(filter.startBuffer).toString()

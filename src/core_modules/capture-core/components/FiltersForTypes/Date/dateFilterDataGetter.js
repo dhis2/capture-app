@@ -1,6 +1,6 @@
 // @flow
 import { parseNumber } from 'capture-core-utils/parsers';
-import { mainOptionKeys, optionKeys } from './options';
+import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
 import { parseDate } from '../../../utils/converters/date';
 import { type AbsoluteDateFilterData, type RelativeDateFilterData } from './types';
@@ -55,7 +55,7 @@ function convertSelections(value: Value) {
     if (value.main === mainOptionKeys.ABSOLUTE_RANGE) {
         return convertAbsoluteDate(value.from, value.to);
     }
-    if (value.main === optionKeys.RELATIVE_RANGE) {
+    if (value.main === mainOptionKeys.RELATIVE_RANGE) {
         return convertRelativeRange(value);
     }
     return { type: dateFilterTypes.RELATIVE, period: value.main };

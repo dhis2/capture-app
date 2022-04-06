@@ -15,7 +15,7 @@ import { parseDate } from '../../../utils/converters/date';
 import { dataElementTypes } from '../../../metaData';
 import type { UpdatableFilterContent } from '../types';
 import './calendarFilterStyles.css';
-import { mainOptionKeys, mainOptionTranslatedTexts, optionKeys, optionTranslatedTexts } from './options';
+import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
 import { RangeFilter } from './RangeFilter.component';
 
@@ -184,7 +184,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             return isAbsoluteRangeFilterValid(fromValue, toValue);
         }
 
-        if (mainValue === optionKeys.RELATIVE_RANGE) {
+        if (mainValue === mainOptionKeys.RELATIVE_RANGE) {
             return isRelativeRangeFilterValid(startValue, endValue);
         }
         return true;
@@ -253,8 +253,8 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     ]);
     static optionSet = new OptionSet('mainOptions', [
         new Option((_this) => {
-            _this.text = optionTranslatedTexts[optionKeys.RELATIVE_RANGE];
-            _this.value = optionKeys.RELATIVE_RANGE;
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.RELATIVE_RANGE];
+            _this.value = mainOptionKeys.RELATIVE_RANGE;
         }),
     ]);
     onGetUpdateData(updatedValues?: Value) {
@@ -287,12 +287,12 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             delete valueObject.start;
             delete valueObject.end;
         } else if (isRelativeRangeValue()) {
-            valueObject.main = optionKeys.RELATIVE_RANGE;
+            valueObject.main = mainOptionKeys.RELATIVE_RANGE;
             delete valueObject.from;
             delete valueObject.to;
         } else if (
             valueObject.main === mainOptionKeys.ABSOLUTE_RANGE ||
-            valueObject.main === optionKeys.RELATIVE_RANGE
+            valueObject.main === mainOptionKeys.RELATIVE_RANGE
         ) {
             // $FlowFixMe[incompatible-type] automated comment
             valueObject.main = null;
@@ -356,7 +356,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             return { ...errors, ...getAbsoluteRangeErrors(fromValue, toValue, type, submitAttempted) };
         }
 
-        if (mainValue === optionKeys.RELATIVE_RANGE) {
+        if (mainValue === mainOptionKeys.RELATIVE_RANGE) {
             return { ...errors, ...getRelativeRangeErrors(startValue, endValue, submitAttempted) };
         }
         return errors;
