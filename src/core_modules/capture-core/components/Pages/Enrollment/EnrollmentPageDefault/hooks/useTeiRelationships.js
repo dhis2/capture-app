@@ -82,7 +82,7 @@ const getAttributeConstraintsForTEI = (
         };
     }
     log.error(errorCreator('Relationship type is not handled')({ relationshipType }));
-    return {};
+    return undefined;
 };
 
 const getRelationshipAttributes = (
@@ -93,7 +93,7 @@ const getRelationshipAttributes = (
     relationship: Object,
 ) => {
     const data = getAttributeConstraintsForTEI(relationshipType, teiId, from, to);
-    if (!data) { return {}; }
+    if (!data) { return undefined; }
     const { id, relationshipName, constraint, attributes: constraintAttributes, options: constraintOptions } = data;
     let options = constraintOptions;
     if (!options) {
@@ -125,9 +125,11 @@ export const useTeiRelationships = (teiId: string, relationships?: Array<InputRe
                 userStores.RELATIONSHIP_TYPES, typeId,
             ).then(result => result.response);
 
-            const { relationshipName, displayFields, id, attributes } = getRelationshipAttributes(
+            const metadata = getRelationshipAttributes(
                 relationshipType, teiId, from, to, relationship,
             );
+            if (!metadata) { break; }
+            const { relationshipName, displayFields, id, attributes } = metadata;
             const typeExist = groupped.find(item => item.id === typeId);
 
             if (typeExist) {
