@@ -304,7 +304,7 @@ const getSaveHandler = (
                     .every((reduxSectionKey) => {
                         const reduxSection = state.formsSectionsFieldsUI[reduxSectionKey];
                         // $FlowFixMe
-                        return !reduxSection || Object.values(reduxSection).every(({ valid }) => valid !== undefined);
+                        return !reduxSection || Object.values(reduxSection).every(({ valid }) => valid);
                     }),
             };
         };
