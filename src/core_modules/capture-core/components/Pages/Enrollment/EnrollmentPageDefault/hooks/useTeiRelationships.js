@@ -43,44 +43,68 @@ const getAttributeConstraintsForTEI = (
     from: RelationshipData,
     to: RelationshipData,
 ) => {
-    const { bidirectional, fromToName, toFromName, toConstraint, fromConstraint } = relationshipType;
-
-    if (bidirectional && from?.event) {
-        // $FlowFixMe
-        const { stage, program } = getProgramAndStageFromEvent({
-            evenId: from.event.event,
-            programId: from.event.program,
-            programStageId: from.event.programStage,
-        });
-        return {
-            id: from.event.event,
-            constraint: fromConstraint,
-            attributes: from.event,
-            relationshipName: toFromName,
-            options: {
-                ...from.event,
-                programName: program?.name,
-                programStageName: stage?.stageForm?.name,
-            },
-        };
-    } else if (to?.trackedEntity && to?.trackedEntity?.trackedEntity !== teiId) {
-        return {
-            id: to.trackedEntity.trackedEntity,
-            constraint: toConstraint,
-            attributes: to.trackedEntity.attributes,
-            relationshipName: fromToName,
-            options: null,
-        };
-    } else if (bidirectional && from?.trackedEntity &&
-        from?.trackedEntity?.trackedEntity !== teiId) {
-        return {
-            id: from.trackedEntity.trackedEntity,
-            constraint: fromConstraint,
-            attributes: from.trackedEntity.attributes,
-            relationshipName: toFromName,
-            options: null,
-        };
+    const { fromToName, toFromName, toConstraint, fromConstraint } = relationshipType;
+    // $FlowFixMe
+    if (to.trackedEntity?.trackedEntity === teiId) {
+        if (from.event) {
+            // $FlowFixMe
+            const { stage, program } = getProgramAndStageFromEvent({
+                evenId: from.event.event,
+                programId: from.event.program,
+                programStageId: from.event.programStage,
+            });
+            return {
+                id: from.event.event,
+                constraint: fromConstraint,
+                attributes: from.event,
+                relationshipName: toFromName,
+                options: {
+                    ...from.event,
+                    programName: program?.name,
+                    programStageName: stage?.stageForm?.name,
+                },
+            };
+        } else if (from.trackedEntity) {
+            return {
+                id: from.trackedEntity.trackedEntity,
+                constraint: fromConstraint,
+                attributes: from.trackedEntity.attributes,
+                relationshipName: toFromName,
+                options: null,
+            };
+        }
     }
+    // $FlowFixMe
+    if (from.trackedEntity?.trackedEntity === teiId) {
+        if (to.event) {
+            // $FlowFixMe
+            const { stage, program } = getProgramAndStageFromEvent({
+                evenId: to.event.event,
+                programId: to.event.program,
+                programStageId: to.event.programStage,
+            });
+            return {
+                id: to.event.event,
+                constraint: toConstraint,
+                attributes: to.event,
+                relationshipName: fromToName,
+                options: {
+                    ...to.event,
+                    programName: program?.name,
+                    programStageName: stage?.stageForm?.name,
+                },
+            };
+        } else if (to.trackedEntity) {
+            return {
+                id: to.trackedEntity.trackedEntity,
+                constraint: toConstraint,
+                attributes: to.trackedEntity.attributes,
+                relationshipName: fromToName,
+                options: null,
+            };
+        }
+    }
+
     log.error(errorCreator('Relationship type is not handled')({ relationshipType }));
     return undefined;
 };
@@ -128,7 +152,7 @@ export const useTeiRelationships = (teiId: string, relationships?: Array<InputRe
             const metadata = getRelationshipAttributes(
                 relationshipType, teiId, from, to, relationship,
             );
-            if (!metadata) { break; }
+            if (!metadata) { return; }
             const { relationshipName, displayFields, id, attributes } = metadata;
             const typeExist = groupped.find(item => item.id === typeId);
 
