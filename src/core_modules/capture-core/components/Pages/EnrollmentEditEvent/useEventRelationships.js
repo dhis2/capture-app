@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo, useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 // $FlowFixMe
 import { useSelector, useDispatch } from 'react-redux';
 import { useDataQuery } from '@dhis2/app-runtime';
