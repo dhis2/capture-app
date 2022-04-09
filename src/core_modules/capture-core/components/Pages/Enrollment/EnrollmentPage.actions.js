@@ -18,6 +18,8 @@ export const enrollmentPageActionTypes = {
 
     DELETE_ENROLLMENT: 'EnrollmentPage.DeleteEnrollment',
     UPDATE_TEI_DISPLAY_NAME: 'EnrollmentPage.UpdateTeiDisplayName',
+
+    SET_EVENT_RELATIONSHIPS_DATA: 'EnrollmentPage.SetEventRelationshipsData',
 };
 
 export const fetchEnrollmentPageInformation = () =>
@@ -60,3 +62,6 @@ export const updateTeiDisplayName = (teiDisplayName: string) =>
     actionCreator(enrollmentPageActionTypes.UPDATE_TEI_DISPLAY_NAME)({
         teiDisplayName,
     });
+
+export const setEventRelationshipsData = (eventId: string, relationships: Array<Object>) =>
+    actionCreator(enrollmentPageActionTypes.SET_EVENT_RELATIONSHIPS_DATA)({ eventId, relationships });

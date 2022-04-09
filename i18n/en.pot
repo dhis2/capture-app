@@ -5,9 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
-"PO-Revision-Date: 2022-03-24T23:27:26.984Z\n"
-
+"POT-Creation-Date: 2022-04-09T10:12:43.270Z\n"
+"PO-Revision-Date: 2022-04-09T10:12:43.270Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -738,6 +737,9 @@ msgstr "Enrollment{{escape}} Edit Event"
 
 msgid "The enrollment event data could not be found"
 msgstr "The enrollment event data could not be found"
+
+msgid "Event's Relationships"
+msgstr "Event's Relationships"
 
 msgid "There are no feedback for this event"
 msgstr "There are no feedback for this event"

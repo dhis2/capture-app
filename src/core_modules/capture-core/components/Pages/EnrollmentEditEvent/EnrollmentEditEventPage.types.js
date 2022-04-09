@@ -15,6 +15,7 @@ export type PlainProps = {|
     trackedEntityName: string,
     teiDisplayName: string,
     teiRelationships: Array<OutputRelationship>,
+    eventRelationships: Array<OutputRelationship>,
     eventDate?: string,
     enrollmentsAsOptions: Array<Object>,
     onDelete: () => void,

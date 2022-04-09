@@ -15,6 +15,7 @@ import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
+import { useEventsRelationships } from './useEventRelationships';
 
 export const EnrollmentEditEventPage = () => {
     const history = useHistory();
@@ -52,7 +53,9 @@ export const EnrollmentEditEventPage = () => {
             ? (pageStatus = pageStatuses.DEFAULT)
             : (pageStatus = pageStatuses.MISSING_DATA);
     } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
+    const { relationships: inputEventRelationships } = useEventsRelationships(eventId);
     const { relationships: teiRelationships } = useTeiRelationships(teiId, relationships);
+    const { relationships: eventRelationships } = useTeiRelationships(eventId, inputEventRelationships);
 
     return (
         <EnrollmentEditEventPageComponent
@@ -63,6 +66,7 @@ export const EnrollmentEditEventPage = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             teiRelationships={teiRelationships}
+            eventRelationships={eventRelationships}
             teiId={teiId}
             enrollmentId={enrollmentId}
             enrollmentsAsOptions={enrollmentsAsOptions}

@@ -39,13 +39,13 @@ const getDisplayFields = (type) => {
 
 const getAttributeConstraintsForTEI = (
     relationshipType: Object,
-    teiId: string,
+    targetId: string,
     from: RelationshipData,
     to: RelationshipData,
 ) => {
     const { fromToName, toFromName, toConstraint, fromConstraint } = relationshipType;
     // $FlowFixMe
-    if (to.trackedEntity?.trackedEntity === teiId) {
+    if (to.trackedEntity?.trackedEntity === targetId || to.event?.event === targetId) {
         if (from.event) {
             // $FlowFixMe
             const { stage, program } = getProgramAndStageFromEvent({
@@ -75,7 +75,7 @@ const getAttributeConstraintsForTEI = (
         }
     }
     // $FlowFixMe
-    if (from.trackedEntity?.trackedEntity === teiId) {
+    if (from.trackedEntity?.trackedEntity === targetId || from.event?.event === targetId) {
         if (to.event) {
             // $FlowFixMe
             const { stage, program } = getProgramAndStageFromEvent({
@@ -111,12 +111,12 @@ const getAttributeConstraintsForTEI = (
 
 const getRelationshipAttributes = (
     relationshipType: Object,
-    teiId: string,
+    targetId: string,
     from: RelationshipData,
     to: RelationshipData,
     relationship: Object,
 ) => {
-    const data = getAttributeConstraintsForTEI(relationshipType, teiId, from, to);
+    const data = getAttributeConstraintsForTEI(relationshipType, targetId, from, to);
     if (!data) { return undefined; }
     const { id, relationshipName, constraint, attributes: constraintAttributes, options: constraintOptions } = data;
     let options = constraintOptions;
@@ -135,7 +135,7 @@ const getRelationshipAttributes = (
 };
 
 
-export const useTeiRelationships = (teiId: string, relationships?: Array<InputRelationship>) => {
+export const useTeiRelationships = (targetId: string, relationships?: Array<InputRelationship>) => {
     const [relationshipsByType, setRelationshipByType] = useState([]);
 
     const computeData = useCallback(async () => {
@@ -150,7 +150,7 @@ export const useTeiRelationships = (teiId: string, relationships?: Array<InputRe
             ).then(result => result.response);
 
             const metadata = getRelationshipAttributes(
-                relationshipType, teiId, from, to, relationship,
+                relationshipType, targetId, from, to, relationship,
             );
             if (!metadata) { return; }
             const { relationshipName, displayFields, id, attributes } = metadata;
@@ -169,7 +169,7 @@ export const useTeiRelationships = (teiId: string, relationships?: Array<InputRe
         }
 
         setRelationshipByType(groupped);
-    }, [relationships, teiId]);
+    }, [relationships, targetId]);
 
     useEffect(() => {
         computeData();

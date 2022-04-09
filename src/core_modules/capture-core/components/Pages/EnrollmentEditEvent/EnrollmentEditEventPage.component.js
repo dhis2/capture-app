@@ -65,6 +65,7 @@ const EnrollmentEditEventPagePain = ({
     enrollmentId,
     programId,
     teiRelationships,
+    eventRelationships,
     enrollmentsAsOptions,
     trackedEntityName,
     teiDisplayName,
@@ -190,6 +191,11 @@ const EnrollmentEditEventPagePain = ({
                         <WidgetRelationship
                             title={i18n.t("TEI's Relationships")}
                             relationships={teiRelationships}
+                            onAddRelationship={() => {}}
+                        />
+                        <WidgetRelationship
+                            title={i18n.t("Event's Relationships")}
+                            relationships={eventRelationships}
                             onAddRelationship={() => {}}
                         />
                         {!hideWidgets.feedback && (
