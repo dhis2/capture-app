@@ -5,9 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
-"PO-Revision-Date: 2022-03-24T23:27:26.984Z\n"
-
+"POT-Creation-Date: 2022-04-11T07:37:32.349Z\n"
+"PO-Revision-Date: 2022-04-11T07:37:32.349Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1063,6 +1062,19 @@ msgstr "This event doesn't have any comments"
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
 
+msgid "Delete event"
+msgstr "Delete event"
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event? "
+msgstr ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event? "
+
+msgid "Yes, delete event"
+msgstr "Yes, delete event"
+
 msgid "Event completed"
 msgstr "Event completed"
 
@@ -1199,9 +1211,6 @@ msgstr "Stages and Events"
 
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"
-
-msgid "Delete event"
-msgstr "Delete event"
 
 msgid "Download as JSON"
 msgstr "Download as JSON"

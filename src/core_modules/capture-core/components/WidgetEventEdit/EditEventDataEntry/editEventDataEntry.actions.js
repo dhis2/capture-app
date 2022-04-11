@@ -16,6 +16,7 @@ export const actionTypes = {
     EDIT_EVENT_DATA_ENTRY_SAVED: 'EditEventDataEntrySavedForViewSingleEvent',
     SAVE_EDIT_EVENT_DATA_ENTRY_FAILED: 'SaveEditEventDataEntryFailedForViewSingleEvent',
     PREREQUISITES_ERROR_LOADING_EDIT_EVENT_DATA_ENTRY: 'PrerequisitesErrorLoadingEditEventDataEntryForViewSingleEvent',
+    REQUEST_DELETE_EVENT_DATA_ENTRY: 'RequestDeleteEventDataEntry',
 };
 
 export const cancelEditEventDataEntry = () =>
@@ -40,3 +41,6 @@ export const startSaveEditEventDataEntry = (eventId: string, serverData: Object,
 
 export const prerequisitesErrorLoadingEditEventDataEntry = (message: string) =>
     actionCreator(actionTypes.PREREQUISITES_ERROR_LOADING_EDIT_EVENT_DATA_ENTRY)(message);
+
+export const requestDeleteEventDataEntry = (eventId: string) =>
+    actionCreator(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY)(eventId);

@@ -1,0 +1,81 @@
+// @flow
+import * as React from 'react';
+import { connect } from 'react-redux';
+import i18n from '@dhis2/d2-i18n';
+import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
+import { type RenderFoundation } from '../../../metaData';
+
+type Props = {
+    onDelete: () => void,
+    formHorizontal?: ?boolean,
+    formFoundation: RenderFoundation,
+};
+
+const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
+    class DeleteButtonHOC extends React.Component<Props> {
+        innerInstance: any;
+        constructor(props) {
+            super(props);
+            this.state = {
+                isOpen: false,
+            };
+        }
+
+        getWrappedInstance() {
+            return this.innerInstance;
+        }
+
+        renderDeleteButton = () => (
+            <div>
+                <Button
+                    onClick={() => { this.setState({ isOpen: true }); }}
+                    disabled={!this.props.formFoundation.access.data.write}
+                    destructive
+                >
+                    {i18n.t('Delete')}
+                </Button>
+
+                <Modal
+                    hide={!this.state.isOpen}
+                >
+                    <ModalTitle>
+                        {i18n.t('Delete event')}
+                    </ModalTitle>
+                    <ModalContent>
+                        {i18n.t('Deleting an event is permanent and cannot be undone. Are you sure you want to delete this event? ')}
+                    </ModalContent>
+                    <ModalActions>
+                        <ButtonStrip end>
+                            <Button onClick={() => { this.setState({ isOpen: false }); }} secondary>
+                                {i18n.t('No, cancel')}
+                            </Button>
+                            <Button
+                                onClick={() => { this.props.onDelete(); this.setState({ isOpen: false }); }}
+                                destructive
+                            >
+                                {i18n.t('Yes, delete event')}
+                            </Button>
+                        </ButtonStrip>
+                    </ModalActions>
+                </Modal>
+            </div>
+
+        )
+
+        render() {
+            const { onDelete, ...passOnProps } = this.props;
+            const hasWriteAccess = this.props.formFoundation.access.data.write;
+            return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
+                <InnerComponent
+                    ref={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    // $FlowFixMe[extra-arg] automated comment
+                    deleteButton={this.renderDeleteButton(hasWriteAccess)}
+                    {...passOnProps}
+                />
+            );
+        }
+    };
+
+
+export const withDeleteButton = () => (InnerComponent: React.ComponentType<any>) => getDeleteButton(InnerComponent);

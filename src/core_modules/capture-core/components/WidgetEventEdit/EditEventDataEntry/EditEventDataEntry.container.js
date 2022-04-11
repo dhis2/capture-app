@@ -80,6 +80,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
             setCurrentDataEntry(viewEventIds.dataEntryId, viewEventIds.itemId),
         ]));
     },
+    onDelete: () => {
+        console.log('deleteee');
+    },
 });
 
 // $FlowFixMe[missing-annot] automated comment
