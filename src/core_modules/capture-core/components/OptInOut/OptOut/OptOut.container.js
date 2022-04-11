@@ -4,34 +4,33 @@ import { useDataMutation } from '@dhis2/app-runtime';
 import { useSelector, useDispatch } from 'react-redux';
 import { OptOut as OptOutComponent } from './OptOut.component';
 import type { Props } from './optOut.types';
-import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { useTrackerProgram } from '../../../hooks/useTrackerProgram';
 import { saveDataStore } from '../../DataStore';
 
 const dataStoreUpdate = {
     resource: 'dataStore/capture/useNewDashboard',
     type: 'update',
-    data: ({ programId, optIn }) => ({
-        [programId]: optIn,
-    }),
+    data: ({ data }) => data,
 };
 
 export const OptOut = ({ programId }: Props) => {
     const dispatch = useDispatch();
+    const program = useTrackerProgram(programId);
+    const newDashboard = useSelector(({ useNewDashboard }) => useNewDashboard);
+    const { dataStore } = newDashboard;
+
     const [updateMutation, { loading: loadingUpdate }] = useDataMutation(dataStoreUpdate, {
         onComplete: () => {
-            dispatch(saveDataStore({ dataStore: { [programId]: false } }));
+            dispatch(saveDataStore({ dataStore: { ...dataStore, [programId]: false } }));
         },
     });
     const handleOptOut = useCallback(() => {
-        updateMutation({ programId, optIn: false });
-    }, [programId, updateMutation]);
-
-    const { programName, access } = useScopeInfo(programId);
-    const newDashboard = useSelector(({ useNewDashboard }) => useNewDashboard);
-    const { dataStore } = newDashboard;
-    const showOptOut = access?.write && dataStore?.[programId];
+        const data = { ...dataStore, [programId]: false };
+        updateMutation({ data });
+    }, [programId, updateMutation, dataStore]);
+    const showOptOut = program?.access?.write && dataStore?.[programId];
 
     return showOptOut ? (
-        <OptOutComponent programName={programName} handleOptOut={handleOptOut} loading={loadingUpdate} />
+        <OptOutComponent programName={program?.name} handleOptOut={handleOptOut} loading={loadingUpdate} />
     ) : null;
 };

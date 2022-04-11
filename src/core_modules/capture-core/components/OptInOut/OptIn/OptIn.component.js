@@ -39,18 +39,18 @@ export const OptInPlain = ({ classes, programName, handleOptIn, loading }: Plain
             <NoticeBox title={title} className={classes.container}>
                 <p>
                     {i18n.t(
-                        'Data shown in this dashboard may take a few hours to update. ' +
-                            'Scheduled dashboard updates can be managed in the scheduler app.',
+                        'Click the button below to opt-in to the new enrollment dashboard ' +
+                            'functionality in the Capture app (beta) for this Tracker program for all users.',
                     )}
                 </p>
-                <Button name="Primary button" onClick={() => setToggle(true)} loading={loading} disabled={loading}>
+                <Button onClick={() => setToggle(true)}>
                     {button}
                 </Button>
             </NoticeBox>
             <br />
             {toggle && (
                 <Modal onClose={() => setToggle(false)} dataTest="opt-in-modal">
-                    <ModalTitle>{i18n.t('Delete enrollment')}</ModalTitle>
+                    <ModalTitle>{title}</ModalTitle>
                     <ModalContent>
                         <p>{modalContent} </p>
                         <p>{modalContentFeedback} </p>
@@ -63,10 +63,9 @@ export const OptInPlain = ({ classes, programName, handleOptIn, loading }: Plain
                             <Button
                                 data-test="opt-in-button"
                                 primary
-                                onClick={() => {
-                                    setToggle(false);
-                                    handleOptIn();
-                                }}
+                                loading={loading}
+                                disabled={loading}
+                                onClick={() => handleOptIn()}
                             >
                                 {i18n.t('Yes, opt in')}
                             </Button>

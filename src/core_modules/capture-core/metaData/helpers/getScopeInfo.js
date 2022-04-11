@@ -15,46 +15,16 @@ export const deriveInfoFromScope = (scope: ?Scope) => {
         const trackedEntityName = '';
         const programName = scope.name;
 
-        return {
-            trackedEntityName,
-            programName,
-            scopeType: scopeTypes.EVENT_PROGRAM,
-            tetId: null,
-            access: scope.access,
-        };
+        return { trackedEntityName, programName, scopeType: scopeTypes.EVENT_PROGRAM, tetId: null };
     } else if (scope instanceof TrackerProgram) {
         const trackedEntityName = scope.trackedEntityType ? scope.trackedEntityType.name.toLowerCase() : '';
         const programName = scope.name;
-        return {
-            trackedEntityName,
-            programName,
-            scopeType: scopeTypes.TRACKER_PROGRAM,
-            tetId: scope.trackedEntityType.id,
-            access: scope.access,
-        };
+        return { trackedEntityName, programName, scopeType: scopeTypes.TRACKER_PROGRAM, tetId: scope.trackedEntityType.id };
     } else if (scope instanceof TrackedEntityType) {
         const trackedEntityName = scope.name.toLowerCase();
         const programName = '';
 
-        return {
-            trackedEntityName,
-            programName,
-            scopeType: scopeTypes.TRACKED_ENTITY_TYPE,
-            tetId: scope.id,
-            access: scope.access,
-        };
+        return { trackedEntityName, programName, scopeType: scopeTypes.TRACKED_ENTITY_TYPE, tetId: scope.id };
     }
-    return {
-        programName: '',
-        scopeType: '',
-        trackedEntityName: '',
-        tetId: '',
-        access: {
-            read: false,
-            update: false,
-            delete: false,
-            write: false,
-            manage: false,
-        },
-    };
+    return { programName: '', scopeType: '', trackedEntityName: '', tetId: '' };
 };

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-28T10:30:59.834Z\n"
-"PO-Revision-Date: 2022-03-28T10:30:59.834Z\n"
+"POT-Creation-Date: 2022-04-11T12:35:39.017Z\n"
+"PO-Revision-Date: 2022-04-11T12:35:39.017Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -595,9 +595,6 @@ msgstr "Use new Enrollment dashboard for {{programName}}"
 msgid "Opt in for {{programName}}"
 msgstr "Opt in for {{programName}}"
 
-msgid "Delete enrollment"
-msgstr "Delete enrollment"
-
 msgid "No, cancel"
 msgstr "No, cancel"
 
@@ -1000,6 +997,9 @@ msgstr "Mark as cancelled"
 
 msgid "Mark incomplete"
 msgstr "Mark incomplete"
+
+msgid "Delete enrollment"
+msgstr "Delete enrollment"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "

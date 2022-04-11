@@ -4,50 +4,52 @@ import { useDataMutation } from '@dhis2/app-runtime';
 import { useSelector, useDispatch } from 'react-redux';
 import { OptIn as OptInComponent } from './OptIn.component';
 import type { Props } from './optIn.types';
-import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { useTrackerProgram } from '../../../hooks/useTrackerProgram';
 import { saveDataStore } from '../../DataStore';
 
 const dataStoreUpdate = {
     resource: 'dataStore/capture/useNewDashboard',
     type: 'update',
-    data: ({ programId, optIn }) => ({
-        [programId]: optIn,
-    }),
+    data: ({ data }) => data,
 };
 
 const dataStoreCreate = {
     resource: 'dataStore/capture/useNewDashboard',
     type: 'create',
-    data: ({ programId, optIn }) => ({
-        [programId]: optIn,
-    }),
+    data: ({ data }) => data,
 };
 
 export const OptIn = ({ programId }: Props) => {
     const dispatch = useDispatch();
-    const { programName, access } = useScopeInfo(programId);
+    const program = useTrackerProgram(programId);
     const newDashboard = useSelector(({ useNewDashboard }) => useNewDashboard);
     const { dataStore } = newDashboard;
-    const showOptIn = access?.write && !dataStore?.[programId];
+    const showOptIn = program?.access?.write && !dataStore?.[programId];
 
     const [updateMutation, { loading: loadingUpdate }] = useDataMutation(dataStoreUpdate, {
         onComplete: () => {
-            dispatch(saveDataStore({ dataStore: { [programId]: true } }));
+            dispatch(saveDataStore({ dataStore: { ...dataStore, [programId]: true } }));
         },
     });
     const [createMutation, { loading: loadingCreate }] = useDataMutation(dataStoreCreate, {
         onComplete: () => {
-            dispatch(saveDataStore({ dataStore: { [programId]: true } }));
+            dispatch(saveDataStore({ dataStore: { ...dataStore, [programId]: true } }));
         },
     });
 
     const handleOptIn = useCallback(() => {
-        dataStore ? updateMutation({ programId, optIn: true }) : createMutation({ programId, optIn: true });
+        if (dataStore) {
+            const data = { ...dataStore, [programId]: true };
+            updateMutation({ data });
+        } else {
+            const data = { [programId]: true };
+            createMutation({ data });
+        }
     }, [programId, updateMutation, createMutation, dataStore]);
 
     return showOptIn ? (
         <OptInComponent
-            programName={programName}
+            programName={program?.name}
             handleOptIn={handleOptIn}
             loading={dataStore ? loadingUpdate : loadingCreate}
         />
