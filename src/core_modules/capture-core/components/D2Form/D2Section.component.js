@@ -24,6 +24,7 @@ type Props = {
     sectionId: string,
     formBuilderId: string,
     formId: string,
+    onFieldsValidated: ?(any, formBuilderId: string) => void,
 };
 
 class D2SectionPlain extends React.PureComponent<Props> {
@@ -59,6 +60,10 @@ class D2SectionPlain extends React.PureComponent<Props> {
         const { sectionMetaData, isHidden, classes, sectionId, ...passOnProps } = this.props;
 
         if (isHidden) {
+            this.props.onFieldsValidated && this.props.onFieldsValidated(
+                {},
+                this.props.formBuilderId,
+            );
             return null;
         }
 
