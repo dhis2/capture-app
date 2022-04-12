@@ -33,7 +33,7 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
     onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
