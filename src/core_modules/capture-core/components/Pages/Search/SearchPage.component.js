@@ -182,7 +182,7 @@ const Index = ({
     };
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-            <LockedSelector pageToPush="search" />
+            <LockedSelector pageToPush={navigateToMainPage ? 'search' : ''} />
             <div data-test="search-page-content" className={classes.container} >
                 {navigateToMainPage && <Button
                     dataTest="back-button"

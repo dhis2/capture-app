@@ -16,6 +16,14 @@ import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 
+const showMainPage = (selectedProgram) => {
+    const noProgramSelected = !selectedProgram;
+    const isEventProgram = !selectedProgram?.trackedEntityType?.id;
+    const displayFrontPageList = selectedProgram?.trackedEntityType?.id && selectedProgram?.displayFrontPageList;
+
+    return noProgramSelected || isEventProgram || displayFrontPageList;
+};
+
 export const MainPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -43,8 +51,8 @@ export const MainPage = () => {
         shallowEqual,
     );
     const selectedProgram = programId && programCollection.get(programId);
-    const trackedEntityTypeId = selectedProgram?.trackedEntityType.id;
-    const showMainPage = !selectedProgram || selectedProgram?.displayFrontPageList;
+    const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
+
     const availableSearchOptions = useSearchOptions();
     const dispatchShowInitialSearchPage = useCallback(
         () => { dispatch(showInitialViewOnSearchPage()); }, [dispatch]);
@@ -89,7 +97,7 @@ export const MainPage = () => {
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
             <>
-                {showMainPage ? (
+                {showMainPage(selectedProgram) ? (
                     <MainPageComponent
                         MainPageStatus={MainPageStatus}
                         programId={programId}
