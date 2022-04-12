@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { compose } from 'redux';
 import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { CircularLoader,
+import {
+    CircularLoader,
     Modal,
     ModalTitle,
     ModalContent,
@@ -40,7 +41,8 @@ const getStyles = (theme: Theme) => ({
         marginBottom: theme.typography.pxToRem(16),
     },
     container: {
-        padding: '10px 24px 24px 24px' },
+        padding: '10px 24px 24px 24px',
+    },
     paper: {
         padding: theme.typography.pxToRem(10),
     },
@@ -73,6 +75,62 @@ const useFallbackTriggered = (): boolean => {
     return fallback;
 };
 
+const SearchStatusComponents =
+(searchStatus, classes, availableSearchOptions, fallbackTriggered, showInitialSearchPage) => (
+    <>
+        {searchStatus === searchPageStatus.SHOW_RESULTS && (
+            <SearchResults availableSearchOptions={availableSearchOptions} fallbackTriggered={fallbackTriggered} />
+        )}
+
+        {searchStatus === searchPageStatus.NO_RESULTS && (
+            <Modal position="middle">
+                <ModalTitle>{i18n.t('No results found')}</ModalTitle>
+                <ModalContent>
+                    {i18n.t('You can change your search terms and search again to find what you are looking for.')}
+                </ModalContent>
+                <ModalActions>
+                    <ButtonStrip end>
+                        <Button
+                            disabled={searchStatus === searchPageStatus.LOADING}
+                            onClick={showInitialSearchPage}
+                            type="button"
+                        >
+                            {i18n.t('Back to search')}
+                        </Button>
+                    </ButtonStrip>
+                </ModalActions>
+            </Modal>
+        )}
+        {searchStatus === searchPageStatus.LOADING && (
+            <div className={classes.loadingMask}>
+                <CircularLoader />
+            </div>
+        )}
+
+        {searchStatus === searchPageStatus.ERROR && (
+            <div data-test="general-purpose-error-mesage" className={classes.informativeMessage}>
+                <NoticeBox title={i18n.t('An error has occurred')} error>
+                    {i18n.t(
+                        'There is a problem with this search, please change the search terms or try again later. ' +
+                            'For more details open the Console tab of the Developer tools',
+                    )}
+                </NoticeBox>
+            </div>
+        )}
+
+        {searchStatus === searchPageStatus.TOO_MANY_RESULTS && (
+            <div data-test="general-purpose-too-many-results-mesage" className={classes.informativeMessage}>
+                <NoticeBox title={i18n.t('Too many results')} warning>
+                    {i18n.t(
+                        'This search returned too many results to show. Try changing search terms or searching ' +
+                            'by more attributes to narrow down the results.',
+                    )}
+                </NoticeBox>
+            </div>
+        )}
+    </>
+);
+
 const Index = ({
     showInitialSearchPage,
     navigateToMainPage,
@@ -94,11 +152,7 @@ const Index = ({
 
         const type = preselectedProgramId ? searchScopes.PROGRAM : null;
         setSearchScopeType(type);
-    },
-    [
-        trackedEntityTypeId,
-        preselectedProgramId,
-    ]);
+    }, [trackedEntityTypeId, preselectedProgramId]);
 
     useEffect(() => {
         // This statement is here because when we trigger the fallback search,
@@ -115,17 +169,10 @@ const Index = ({
             }
             return undefined;
         };
-    },
-    [
-        fallbackTriggered,
-        cleanSearchRelatedInfo,
-        preselectedProgramId,
-        showInitialSearchPage,
-    ]);
+    }, [fallbackTriggered, cleanSearchRelatedInfo, preselectedProgramId, showInitialSearchPage]);
 
     const searchGroupsForSelectedScope =
-      (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : []);
-
+        selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : [];
 
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
@@ -137,14 +184,14 @@ const Index = ({
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
             <LockedSelector pageToPush="search" />
             <div data-test="search-page-content" className={classes.container} >
-                <Button
+                {navigateToMainPage && <Button
                     dataTest="back-button"
                     className={classes.backButton}
                     onClick={navigateToMainPage}
                 >
                     <IconChevronLeft24 />
                     {i18n.t('Back')}
-                </Button>
+                </Button> }
 
                 <Paper className={classes.paper}>
                     <div className={classes.maxWidth}>
@@ -166,72 +213,13 @@ const Index = ({
                             searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                         />
 
-                        {
-                            searchStatus === searchPageStatus.SHOW_RESULTS &&
-                            <SearchResults
-                                availableSearchOptions={availableSearchOptions}
-                                fallbackTriggered={fallbackTriggered}
-                            />
-                        }
-
-                        {
-                            searchStatus === searchPageStatus.NO_RESULTS &&
-                            <Modal position="middle">
-                                <ModalTitle>{i18n.t('No results found')}</ModalTitle>
-                                <ModalContent>
-                                    {i18n.t('You can change your search terms and search again to find what you are looking for.')}
-                                </ModalContent>
-                                <ModalActions>
-                                    <ButtonStrip end>
-                                        <Button
-                                            disabled={searchStatus === searchPageStatus.LOADING}
-                                            onClick={showInitialSearchPage}
-                                            type="button"
-                                        >
-                                            {i18n.t('Back to search')}
-                                        </Button>
-                                    </ButtonStrip>
-                                </ModalActions>
-                            </Modal>
-                        }
-
-                        {
-                            searchStatus === searchPageStatus.LOADING &&
-                            <div className={classes.loadingMask}>
-                                <CircularLoader />
-                            </div>
-                        }
-
-                        {
-                            searchStatus === searchPageStatus.ERROR &&
-                            <div
-                                data-test="general-purpose-error-mesage"
-                                className={classes.informativeMessage}
-                            >
-                                <NoticeBox
-                                    title={i18n.t('An error has occurred')}
-                                    error
-                                >
-                                    {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
-                                </NoticeBox>
-                            </div>
-                        }
-
-                        {
-                            searchStatus === searchPageStatus.TOO_MANY_RESULTS &&
-                            <div
-                                data-test="general-purpose-too-many-results-mesage"
-                                className={classes.informativeMessage}
-                            >
-                                <NoticeBox
-                                    title={i18n.t('Too many results')}
-                                    warning
-                                >
-                                    {i18n.t('This search returned too many results to show. Try changing search terms or searching by more attributes to narrow down the results.')}
-                                </NoticeBox>
-                            </div>
-
-                        }
+                        <SearchStatusComponents
+                            searchStatus={searchStatus}
+                            classes={classes}
+                            availableSearchOptions={availableSearchOptions}
+                            fallbackTriggered={fallbackTriggered}
+                            showInitialSearchPage={showInitialSearchPage}
+                        />
                     </div>
                 </Paper>
 
@@ -246,9 +234,8 @@ const Index = ({
     </>);
 };
 
-export const SearchPageComponent: ComponentType<ContainerProps> =
-  compose(
-      withLoadingIndicator(),
-      withErrorMessageHandler(),
-      withStyles(getStyles),
-  )(Index);
+export const SearchPageComponent: ComponentType<ContainerProps> = compose(
+    withLoadingIndicator(),
+    withErrorMessageHandler(),
+    withStyles(getStyles),
+)(Index);
