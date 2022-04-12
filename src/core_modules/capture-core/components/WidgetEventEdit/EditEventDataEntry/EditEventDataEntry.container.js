@@ -19,6 +19,7 @@ import {
 import {
     requestSaveEditEventDataEntry,
     cancelEditEventDataEntry,
+    requestDeleteEventDataEntry,
 } from './editEventDataEntry.actions';
 
 import {
@@ -32,7 +33,7 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
     onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
@@ -81,7 +82,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
         ]));
     },
     onDelete: () => {
-        console.log('deleteee');
+        dispatch(requestDeleteEventDataEntry());
     },
 });
 

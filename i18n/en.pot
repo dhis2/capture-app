@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-04-11T07:37:32.349Z\n"
-"PO-Revision-Date: 2022-04-11T07:37:32.349Z\n"
+"POT-Creation-Date: 2022-04-12T07:58:57.105Z\n"
+"PO-Revision-Date: 2022-04-12T07:58:57.105Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1065,13 +1065,6 @@ msgstr "stage not found in rules execution"
 msgid "Delete event"
 msgstr "Delete event"
 
-msgid ""
-"Deleting an event is permanent and cannot be undone. Are you sure you want "
-"to delete this event? "
-msgstr ""
-"Deleting an event is permanent and cannot be undone. Are you sure you want "
-"to delete this event? "
-
 msgid "Yes, delete event"
 msgstr "Yes, delete event"
 
@@ -1337,6 +1330,9 @@ msgstr "Error saving enrollment"
 
 msgid "Error saving the enrollment event"
 msgstr "Error saving the enrollment event"
+
+msgid "Error deleting the enrollment event"
+msgstr "Error deleting the enrollment event"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"

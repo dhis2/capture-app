@@ -3,6 +3,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
 import { actionTypes as enrollmentNoteActionTypes }
     from '../../components/WidgetEnrollmentComment/WidgetEnrollmentComment.actions';
+import { actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 
 const initialReducerValue = {};
 const {
@@ -97,6 +98,16 @@ export const enrollmentDomainDesc = createReducerDescription(
                 notes: [...state.enrollment.notes, note],
             },
         }),
+        [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_SUCCEEDED]: (state, { meta: { eventId } }) => {
+            const newEnrollmentEvent = state.enrollment.events?.filter(item => item.event !== eventId);
+            return {
+                ...state,
+                enrollment: {
+                    ...state.enrollment,
+                    events: newEnrollmentEvent,
+                },
+            };
+        },
     },
     'enrollmentDomain',
     initialReducerValue,

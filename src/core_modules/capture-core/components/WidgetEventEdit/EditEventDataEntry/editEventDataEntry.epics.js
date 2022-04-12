@@ -1,6 +1,7 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, switchMap } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
 import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
@@ -17,22 +18,22 @@ import {
     enrollmentSiteActionTypes,
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { TrackerProgram } from '../../../metaData/Program';
-
 import {
     actionTypes,
     batchActionTypes,
     startSaveEditEventDataEntry,
     prerequisitesErrorLoadingEditEventDataEntry,
+    startDeleteEventDataEntry,
 } from './editEventDataEntry.actions';
 import {
     actionTypes as widgetEventEditActionTypes,
 } from '../WidgetEventEdit.actions';
-
-
+import { deriveURLParamsFromLocation } from '../../../utils/routing/deriveURLParamsFromLocation';
 import {
     actionTypes as eventDetailsActionTypes,
     showEditEventDataEntry,
 } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
+import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString';
 
 import {
     updateEventContainer,
@@ -172,3 +173,37 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             }
             return batchActions(actions);
         }));
+
+export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY),
+        map(() => {
+            const { eventId, programId, orgUnitId, teiId, enrollmentId } = deriveURLParamsFromLocation();
+            const { currentSelections } = store.value;
+            const params = {
+                programId,
+                teiId,
+                orgUnitId,
+                enrollmentId,
+            };
+            return startDeleteEventDataEntry(eventId, params, currentSelections);
+        }));
+
+
+export const deleteEventSucceededEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) =>
+    action$.pipe(
+        ofType(actionTypes.DELETE_EVENT_DATA_ENTRY_SUCCEEDED),
+        switchMap((action) => {
+            const { params } = action.meta;
+            const { teiId, programId, orgUnitId, enrollmentId } = params;
+            dependencies.history.push(
+                `/enrollment?${buildUrlQueryString({
+                    teiId,
+                    programId,
+                    orgUnitId,
+                    enrollmentId,
+                })}`,
+            );
+            return EMPTY;
+        }),
+    );

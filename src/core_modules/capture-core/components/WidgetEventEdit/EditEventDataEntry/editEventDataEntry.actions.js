@@ -17,6 +17,9 @@ export const actionTypes = {
     SAVE_EDIT_EVENT_DATA_ENTRY_FAILED: 'SaveEditEventDataEntryFailedForViewSingleEvent',
     PREREQUISITES_ERROR_LOADING_EDIT_EVENT_DATA_ENTRY: 'PrerequisitesErrorLoadingEditEventDataEntryForViewSingleEvent',
     REQUEST_DELETE_EVENT_DATA_ENTRY: 'RequestDeleteEventDataEntry',
+    START_DELETE_EVENT_DATA_ENTRY: 'StartDeleteEventDataEntry',
+    DELETE_EVENT_DATA_ENTRY_FAILED: 'DeleteEventDataEntryFailed',
+    DELETE_EVENT_DATA_ENTRY_SUCCEEDED: 'DeleteEventDataEntrySucceeded',
 };
 
 export const cancelEditEventDataEntry = () =>
@@ -42,5 +45,24 @@ export const startSaveEditEventDataEntry = (eventId: string, serverData: Object,
 export const prerequisitesErrorLoadingEditEventDataEntry = (message: string) =>
     actionCreator(actionTypes.PREREQUISITES_ERROR_LOADING_EDIT_EVENT_DATA_ENTRY)(message);
 
-export const requestDeleteEventDataEntry = (eventId: string) =>
-    actionCreator(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY)(eventId);
+export const requestDeleteEventDataEntry = () =>
+    actionCreator(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY)();
+
+export const startDeleteEventDataEntry = (eventId: string, params: Object, selections: Object) =>
+    actionCreator(actionTypes.START_DELETE_EVENT_DATA_ENTRY)({ eventId }, {
+        offline: {
+            effect: {
+                url: `events/${eventId}`,
+                method: effectMethods.DELETE,
+            },
+            commit: {
+                type: actionTypes.DELETE_EVENT_DATA_ENTRY_SUCCEEDED,
+                meta: { eventId, params, selections },
+            },
+            rollback: {
+                type: actionTypes.DELETE_EVENT_DATA_ENTRY_FAILED,
+                meta: { eventId, params, selections },
+            },
+        },
+    });
+

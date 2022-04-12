@@ -96,6 +96,7 @@ type Props = {
     completeButton?: ?React.Element<any>,
     mainButton?: ?React.Element<any>,
     cancelButton?: ?React.Element<any>,
+    deleteButton?: ?React.Element<any>,
     notes?: ?React.Element<any>,
     fields?: ?Array<FieldContainer>,
     dataEntryOutputs?: ?Array<any>,

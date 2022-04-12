@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import { type RenderFoundation } from '../../../metaData';
@@ -11,10 +10,14 @@ type Props = {
     formFoundation: RenderFoundation,
 };
 
+type State = {
+    isOpen: boolean,
+}
+
 const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
-    class DeleteButtonHOC extends React.Component<Props> {
+    class DeleteButtonHOC extends React.Component<Props, State> {
         innerInstance: any;
-        constructor(props) {
+        constructor(props: Props) {
             super(props);
             this.state = {
                 isOpen: false,
@@ -42,7 +45,8 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                         {i18n.t('Delete event')}
                     </ModalTitle>
                     <ModalContent>
-                        {i18n.t('Deleting an event is permanent and cannot be undone. Are you sure you want to delete this event? ')}
+                        {i18n.t('Deleting an event is permanent and cannot be undone.' + ' ' +
+                        'Are you sure you want to delete this event? ')}
                     </ModalContent>
                     <ModalActions>
                         <ButtonStrip end>
@@ -50,7 +54,10 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                                 {i18n.t('No, cancel')}
                             </Button>
                             <Button
-                                onClick={() => { this.props.onDelete(); this.setState({ isOpen: false }); }}
+                                onClick={() => {
+                                    this.props.onDelete();
+                                    this.setState({ isOpen: false });
+                                }}
                                 destructive
                             >
                                 {i18n.t('Yes, delete event')}

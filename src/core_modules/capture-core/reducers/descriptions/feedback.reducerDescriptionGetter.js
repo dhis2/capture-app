@@ -26,6 +26,7 @@ import { workingListsCommonActionTypes } from '../../components/WorkingLists/Wor
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
+import { actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?Node) {
     const newState = [...state];
@@ -129,5 +130,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, i18n.t('Error saving enrollment')),
     [enrollmentSiteActionTypes.SAVE_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error saving the enrollment event')),
+    [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: state =>
+        addErrorFeedback(state, i18n.t('Error deleting the enrollment event')),
 }, 'feedbacks', []);
 
