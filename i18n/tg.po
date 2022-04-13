@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Tajik (https://www.transifex.com/hisp-uio/teams/100509/tg/)\n"
@@ -1304,6 +1304,9 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"
