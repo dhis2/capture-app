@@ -1343,6 +1343,9 @@ msgstr "Error saving enrollment"
 msgid "Error saving the enrollment event"
 msgstr "Error saving the enrollment event"
 
+msgid "Error editing the event, the changes made were not saved"
+msgstr "Error editing the event, the changes made were not saved"
+
 msgid "Set coordinate"
 msgstr "Set coordinate"
 
