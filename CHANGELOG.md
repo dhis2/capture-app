@@ -1,3 +1,10 @@
+## [100.1.13](https://github.com/dhis2/capture-app/compare/v100.1.12...v100.1.13) (2022-04-13)
+
+
+### Bug Fixes
+
+* [DHIS2-12939] show user error message when event update fails ([b015314](https://github.com/dhis2/capture-app/commit/b01531475ff5861113637864b26da7018923a836))
+
 ## [100.1.12](https://github.com/dhis2/capture-app/compare/v100.1.11...v100.1.12) (2022-04-05)
 
 
