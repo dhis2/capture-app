@@ -64,7 +64,9 @@ class RangeFilterPlain extends Component<Props> {
             ...valuePart,
         };
 
-        return Object.keys(valueObject).filter(key => valueObject[key]).length > 0 ? valueObject : null;
+        return Object.keys(valueObject).filter(key => valueObject[key]).length > 0
+            ? valueObject
+            : { start: undefined, end: undefined };
     }
 
     handleEnterKeyInStart = () => {
