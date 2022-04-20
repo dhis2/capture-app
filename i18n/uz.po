@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2022-03-23T13:46:21.198Z\n"
+"PO-Revision-Date: 2022-04-20 09:48+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid "Choose a date..."
 msgstr "Санани танланг ..."
 
 msgid "Today"
-msgstr "бугун"
+msgstr "Бугун"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -256,7 +256,7 @@ msgid "No, stay here"
 msgstr "Йўқ, саҳифада қолиш"
 
 msgid "New event"
-msgstr "Янги ҳодиса"
+msgstr "Янги тадбир"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr "Ҳозирги танловларда ҳодиса/тадбир яратиш ҳуқуқига эга эмассиз"
@@ -310,9 +310,6 @@ msgstr "Рўйхатдан ўтган {{trackedEntityTypeName}} ни кўрса�
 msgid "Registered person"
 msgstr "Рўйхатдан ўтган шахс"
 
-msgid "Link"
-msgstr "Ҳавола"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Агарда ушбу саҳифани тарк этсангиз, ҳодиса/тадбир бўйича киритган барча "
@@ -325,10 +322,10 @@ msgid "Errors"
 msgstr "Хатоликлар"
 
 msgid "Feedback"
-msgstr "Қайта алоқа"
+msgstr "Фикр-мулоҳаза"
 
 msgid "Indicators"
-msgstr "Индикаторлар"
+msgstr "Кўрсатгичлар"
 
 msgid "Warnings"
 msgstr "Огоҳлантиришлар"
@@ -391,7 +388,7 @@ msgid "to"
 msgstr "га"
 
 msgid "From"
-msgstr "Дан"
+msgstr "Кимдан"
 
 msgid "To"
 msgstr "Кимга"
@@ -463,7 +460,7 @@ msgid "Select image"
 msgstr "Расмни танланг"
 
 msgid "Search"
-msgstr "Излаш"
+msgstr "Қидириш"
 
 msgid "Clear"
 msgstr "Тозалаш"
@@ -565,7 +562,7 @@ msgid "Select"
 msgstr "Танланг"
 
 msgid "Program"
-msgstr "Программа"
+msgstr "Дастур"
 
 msgid "No programs available."
 msgstr "Ҳеч қандай дастур мавжуд эмас."
@@ -643,9 +640,10 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
-"{{teiDisplayName}} бир неча дастурларда қайд этилган. Дастурни танланг."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -771,6 +769,9 @@ msgstr "Янги сифатида сақлаш"
 msgid "View dashboard"
 msgstr "Бошқарув панелини кўриш"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Учун яратиш"
 
@@ -780,11 +781,17 @@ msgstr ""
 "Бундан ташқари, бош панелдан дастурни танлашингиз ва ушбу дастур ичида "
 "яратишингиз мумкин"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "Янгисини сақлаш"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Янги {{trackedEntityTypeName}} ва ҳаволани сақлаш"
+
+msgid "Link"
+msgstr "Ҳавола"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Янги {{trackedEntityName}} сифатида сақлаш"
@@ -823,7 +830,7 @@ msgstr ""
 "тўлдиринг"
 
 msgid "Search {{name}}"
-msgstr "{{name}} орқали қидириш"
+msgstr "{{name}} дан қидириш"
 
 msgid "Search by {{name}}"
 msgstr "{{name}} орқали қидириш"
@@ -959,7 +966,7 @@ msgid "You dont have access to create any relationships"
 msgstr "Ушбу ўзаро алоқаларни яратиш ҳуқуқига эга эмассиз"
 
 msgid "Add relationship"
-msgstr "Ўзаро алоқа киритиш"
+msgstr "Ўзаро алоқа қўшиш"
 
 msgid "Results found"
 msgstr "Натижалар топилди"
@@ -983,6 +990,12 @@ msgid "Enrollment actions"
 msgstr ""
 
 msgid "We are processing your request."
+msgstr ""
+
+msgid "Add new"
+msgstr "Янгисини қўшиш"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Reactivate"
@@ -1148,7 +1161,7 @@ msgid "Try again or contact your system administrator for support"
 msgstr ""
 
 msgid "tracked entity instance"
-msgstr "кузатилаётган объект намунаси"
+msgstr "кузатувдаги объект намунаси"
 
 msgid "Fix errors in the form to continue."
 msgstr ""
@@ -1209,7 +1222,7 @@ msgid "Working list could not be loaded"
 msgstr "Ишчи рўйхатни юклаб бўлмади"
 
 msgid "Delete event"
-msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
+msgstr "Ҳодиса/Тадбирни ўчириб ташлаш"
 
 msgid "Download as JSON"
 msgstr "JSON сифатида юклаш"

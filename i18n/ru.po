@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Ulanbek Abakirov <ulans@mail.ru>, 2020
-# Wanda <wanda@frontlineaids.org>, 2021
+# Wanda <wanda@frontlineaids.org>, 2022
+# Ulanbek Abakirov <ulans@mail.ru>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2022-03-23T13:46:21.198Z\n"
+"PO-Revision-Date: 2022-04-20 09:48+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -314,9 +314,6 @@ msgstr "Показать зарегистрированную {{trackedEntityTyp
 msgid "Registered person"
 msgstr "Зарегистрированное лицо"
 
-msgid "Link"
-msgstr "Ссылка"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Произведенные изменения в данных не будут сохранены, если вы покинете данную"
@@ -410,13 +407,13 @@ msgid "This Year"
 msgstr "Текущий год"
 
 msgid "Last week"
-msgstr "Последняя неделя"
+msgstr "Прошлая неделя"
 
 msgid "Last month"
 msgstr "Последний месяц"
 
 msgid "Last 3 months"
-msgstr "Последние 3 месяца"
+msgstr "Прошлые 3 месяца"
 
 msgid "Custom range"
 msgstr "Пользовательский интервал"
@@ -500,7 +497,7 @@ msgid "Columns to show in table"
 msgstr "Столбы, для показа в таблице"
 
 msgid "Column"
-msgstr "Столбец"
+msgstr "Столбчатая"
 
 msgid "Update"
 msgstr "Обновить"
@@ -570,7 +567,7 @@ msgid "Select"
 msgstr "Выбрать"
 
 msgid "Program"
-msgstr "Программа"
+msgstr "Program"
 
 msgid "No programs available."
 msgstr "Нет доступных программ"
@@ -594,7 +591,7 @@ msgid "Online"
 msgstr "Онлайн"
 
 msgid "Offline"
-msgstr "Оффлайн"
+msgstr "Офлайн"
 
 msgid "Syncing"
 msgstr "Синхронизирую..."
@@ -645,7 +642,9 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
 
 msgid ""
@@ -768,6 +767,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr "Смотреть Панель"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -775,11 +777,17 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
+
+msgid "Link"
+msgstr "Ссылка"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
@@ -969,6 +977,12 @@ msgid "Enrollment actions"
 msgstr ""
 
 msgid "We are processing your request."
+msgstr ""
+
+msgid "Add new"
+msgstr "Добавить новое"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Reactivate"
@@ -1328,7 +1342,7 @@ msgid "Error saving the enrollment event"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "Выставить координату"
+msgstr "Задать координату"
 
 msgid "Page {{currentPage}}"
 msgstr "Страница {{currentPage}}"

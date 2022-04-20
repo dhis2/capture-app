@@ -1,21 +1,21 @@
 # 
 # Translators:
-# Yao Selom Saka <ysaka@hispwca.org>, 2021
-# Bram Piot <bram.piot@gmail.com>, 2021
-# Yayra Gomado <ygomado@hispwca.org>, 2021
-# tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2021
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
+# tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2022
 # Karoline Tufte Lien <karoline@dhis2.org>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2022
-# Edem Kossi <ekossi@hispwca.org>, 2022
+# Yayra Gomado <ygomado@hispwca.org>, 2022
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # phil_dhis2, 2022
+# Bram Piot <bram.piot@gmail.com>, 2022
+# Yao Selom Saka <ysaka@hispwca.org>, 2022
+# Edem Kossi <ekossi@hispwca.org>, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"POT-Creation-Date: 2022-03-23T13:46:21.198Z\n"
+"PO-Revision-Date: 2022-04-20 09:48+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -325,13 +325,10 @@ msgstr "Afficher le {{Nom de type d'entité suivie}} enregistré"
 msgid "Registered person"
 msgstr "Personne inscrite"
 
-msgid "Link"
-msgstr "Lien"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "En quittant cette page, les modifications apportées à cet événement seront "
-"annulées."
+"supprimées."
 
 msgid "validation failed"
 msgstr "validation échouée"
@@ -340,7 +337,7 @@ msgid "Errors"
 msgstr "Erreurs"
 
 msgid "Feedback"
-msgstr "Réaction"
+msgstr "Feedback"
 
 msgid "Indicators"
 msgstr "Indicateurs"
@@ -415,7 +412,7 @@ msgid "This week"
 msgstr "Cette semaine"
 
 msgid "This month"
-msgstr "Ce mois-ci"
+msgstr "Ce mois"
 
 msgid "This Year"
 msgstr "Cette année"
@@ -424,7 +421,7 @@ msgid "Last week"
 msgstr "Semaine passée"
 
 msgid "Last month"
-msgstr "Le mois dernier"
+msgstr "Mois dernier"
 
 msgid "Last 3 months"
 msgstr "3 derniers mois"
@@ -659,10 +656,10 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
-"{{teiDisplayName}} est inscrit dans plusieurs programmes. Choisir un "
-"programme"
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -790,6 +787,9 @@ msgstr "Enregistrer comme nouveau"
 msgid "View dashboard"
 msgstr "Voir le tableau de bord"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Créer pour"
 
@@ -799,11 +799,17 @@ msgstr ""
 "Vous pouvez également choisir un programme dans la barre supérieure et créer"
 " dans ce programme"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "Enregistrer nouveau"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Enregistrer le nouveau {{trackedEntityTypeName}} et le lien"
+
+msgid "Link"
+msgstr "Lien"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Enregistrer comme un nouveau {{trackedEntityName}}"
@@ -929,7 +935,7 @@ msgid "You dont have access to edit this event"
 msgstr "Vous n'êtes pas autorisé à modifier cet événement"
 
 msgid "Edit event"
-msgstr "Modifier un événement"
+msgstr "Modifier l'événement"
 
 msgid "Event details"
 msgstr "Détails de l'évènement"
@@ -977,7 +983,7 @@ msgid "You dont have access to create any relationships"
 msgstr "Vous n'êtes pas autorisé à créer des relations"
 
 msgid "Add relationship"
-msgstr "Ajouetr relation"
+msgstr "Ajouetr une relation"
 
 msgid "Results found"
 msgstr "Résultats trouvés"
@@ -1005,6 +1011,12 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
+msgid "Add new"
+msgstr "Nouveau"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr ""
+
 msgid "Reactivate"
 msgstr ""
 
@@ -1015,7 +1027,7 @@ msgid "Mark incomplete"
 msgstr ""
 
 msgid "Delete enrollment"
-msgstr "Supprimer enrôlement"
+msgstr "Supprimer l'enrôlement"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
@@ -1235,7 +1247,7 @@ msgid "Download as JSON"
 msgstr "Télécharger en JSON"
 
 msgid "Download as XML"
-msgstr "Download as XML"
+msgstr "Télécharger en XML"
 
 msgid "Download as CSV"
 msgstr "Télécharger en CSV"
@@ -1277,13 +1289,13 @@ msgid "Save current view as..."
 msgstr "Enregistrer la vue actuelle sous..."
 
 msgid "Delete view"
-msgstr "Supprimer une vue"
+msgstr "Supprimer la vue"
 
 msgid "Share view..."
-msgstr "Partager une vue..."
+msgstr "Partager la vue..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Souhaitez-vous vraiment supprimer la vue '{{nom du modèle}' ?"
+msgstr "Souhaitez-vous vraiment supprimer la vue '{{nom du modèle}}' ?"
 
 msgid "Confirm"
 msgstr "Confirmer"

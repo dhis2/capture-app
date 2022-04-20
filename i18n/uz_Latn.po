@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2022-03-23T13:46:21.198Z\n"
+"PO-Revision-Date: 2022-04-20 09:48+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid "Choose a date..."
 msgstr "Sanani tanlang ..."
 
 msgid "Today"
-msgstr "Bugun"
+msgstr "бугун"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -45,7 +45,7 @@ msgstr ""
 " yopilishini unutmang."
 
 msgid "Organisation unit"
-msgstr "Tashkiliy birlik"
+msgstr "Ташкилий бирлик"
 
 msgid "Date of enrollment"
 msgstr "Roʼyxatga kiritilgan sana"
@@ -141,7 +141,7 @@ msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Cancel"
-msgstr "Bekor qilish"
+msgstr "Бекор қилиш"
 
 msgid "Metadata error. see log for details"
 msgstr "MetaMaʼlumotda xatolik. Tafsilotlar uchun jurnalga qarang."
@@ -194,7 +194,7 @@ msgid "Active"
 msgstr "Faol"
 
 msgid "Completed"
-msgstr "Toʼldirildi"
+msgstr "bajarildi"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -213,7 +213,7 @@ msgid "Save without completing"
 msgstr ""
 
 msgid "Complete"
-msgstr "Toʼldirish"
+msgstr "Bajarildi"
 
 msgid "No write access"
 msgstr "Yozuv kiritish uchun ruxsat yoʼq"
@@ -259,7 +259,7 @@ msgid "No, stay here"
 msgstr "Yoʼq, sahifada qolish"
 
 msgid "New event"
-msgstr "Yangi hodisa"
+msgstr "Yangi tadbir"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
@@ -313,9 +313,6 @@ msgstr "Roʼyxatdan oʼtgan {{trackedEntityTypeName}} ni koʼrsatish"
 msgid "Registered person"
 msgstr "Roʼyxatdan oʼtgan shaxs"
 
-msgid "Link"
-msgstr "Havola"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Аgarda ushbu sahifani tark etsangiz, hodisa/tadbir boʼyicha kiritgan barcha "
@@ -328,10 +325,10 @@ msgid "Errors"
 msgstr "Xatoliklar"
 
 msgid "Feedback"
-msgstr "Qayta aloqa"
+msgstr "Fikr-mulohaza"
 
 msgid "Indicators"
-msgstr "Indikatorlar"
+msgstr "Koʼrsatgichlar"
 
 msgid "Warnings"
 msgstr "Ogohlantirishlar"
@@ -385,7 +382,7 @@ msgid "Anyone"
 msgstr "Kimdir"
 
 msgid "None"
-msgstr "Yoʼq"
+msgstr "Йўқ"
 
 msgid "Select user"
 msgstr "Foydalanuvchini tanlang"
@@ -400,37 +397,37 @@ msgid "To"
 msgstr "Kimga"
 
 msgid "This week"
-msgstr "Ushbu hafta"
+msgstr "Ушбу ҳафта"
 
 msgid "This month"
-msgstr "Ushbu oy"
+msgstr "Ушбу ой"
 
 msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr "Oxirgi hafta"
+msgstr "Охирги ҳафта"
 
 msgid "Last month"
-msgstr "Oxirgi oy"
+msgstr "Охирги ой"
 
 msgid "Last 3 months"
-msgstr "Oxirgi 3 oy"
+msgstr "Охирги 3 ой"
 
 msgid "Custom range"
 msgstr "Maxsus diapazon"
 
 msgid "Max"
-msgstr "Maksimum"
+msgstr "Максимум"
 
 msgid "Min"
-msgstr "Minimum"
+msgstr "Минимум"
 
 msgid "Contains text"
 msgstr "Matnni oʼz ichiga oladi"
 
 msgid "Yes"
-msgstr "Ha"
+msgstr "Ҳа"
 
 msgid "mm/dd/yyyy"
 msgstr "kun/oy/yil"
@@ -457,7 +454,7 @@ msgid "Select file"
 msgstr "Faylni tanlash"
 
 msgid "No"
-msgstr "Yoʼq"
+msgstr "Йўқ"
 
 msgid "Uploading image"
 msgstr "Rasm yuklanmoqda"
@@ -469,7 +466,7 @@ msgid "Search"
 msgstr "Izlash"
 
 msgid "Clear"
-msgstr "Tozalash"
+msgstr "Аниқ"
 
 msgid "No results"
 msgstr "Natija yoʼq"
@@ -566,10 +563,10 @@ msgid "Registering Organisation Unit"
 msgstr "Tanlangan boʼlim roʼyxatdan oʼtkazilmoqda"
 
 msgid "Select"
-msgstr "Tanlang"
+msgstr "Танланг"
 
 msgid "Program"
-msgstr "Programma"
+msgstr "Dastur"
 
 msgid "No programs available."
 msgstr "Hech qanday dastur mavjud emas."
@@ -644,7 +641,9 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
 
 msgid ""
@@ -767,6 +766,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr "Boshqaruv panelini koʼrish"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -774,11 +776,17 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
+
+msgid "Link"
+msgstr "Havola"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
@@ -977,6 +985,12 @@ msgid "Enrollment actions"
 msgstr ""
 
 msgid "We are processing your request."
+msgstr ""
+
+msgid "Add new"
+msgstr "Янгисини қўшиш"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Reactivate"
@@ -1201,7 +1215,7 @@ msgid "Working list could not be loaded"
 msgstr "Ishchi roʼyxatni yuklab boʼlmadi"
 
 msgid "Delete event"
-msgstr "Hodisa/tadbirni oʼchirib tashlash"
+msgstr "Hodisa/Tadbirni oʼchirib tashlash"
 
 msgid "Download as JSON"
 msgstr "JSON sifatida yuklash"
@@ -1222,7 +1236,7 @@ msgid "an error occurred loading working lists"
 msgstr "ishchi roʼyxatni yuklashda xatolik yuz berdi"
 
 msgid "Enrollment status"
-msgstr "Roʼyxatga olish holati"
+msgstr "roʼyxatga olish holati"
 
 msgid "Assigned to"
 msgstr ""
