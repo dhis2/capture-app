@@ -1,3 +1,10 @@
+## [100.1.15](https://github.com/dhis2/capture-app/compare/v100.1.14...v100.1.15) (2022-04-20)
+
+
+### Bug Fixes
+
+* [DHIS2-13029] attempt to fix cypress test ([#2712](https://github.com/dhis2/capture-app/issues/2712)) ([c899783](https://github.com/dhis2/capture-app/commit/c899783ac6ba1a2587105a8507af071c16021cd3))
+
 ## [100.1.14](https://github.com/dhis2/capture-app/compare/v100.1.13...v100.1.14) (2022-04-19)
 
 
