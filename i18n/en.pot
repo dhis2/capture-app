@@ -5,9 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
-"PO-Revision-Date: 2022-03-24T23:27:26.984Z\n"
-
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"PO-Revision-Date: 2022-04-06T12:58:52.162Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1337,6 +1336,9 @@ msgstr "Error saving enrollment"
 
 msgid "Error saving the enrollment event"
 msgstr "Error saving the enrollment event"
+
+msgid "Error editing the event, the changes made were not saved"
+msgstr "Error editing the event, the changes made were not saved"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
