@@ -23,3 +23,8 @@ Cypress.Commands.add('loginThroughForm', (username = 'dhis2Username', password =
     cy.get('[data-test="locked-selector"]', { timeout: 60000 })
         .should('exist');
 });
+
+Cypress.Commands.add('forceVisit', (url) => {
+    cy.visit(url);
+    cy.window().then((win) => { win.location.href = url; });
+});
