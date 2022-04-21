@@ -1,0 +1,13 @@
+name: 'dhis2: verify (pr title)'
+
+on:
+  pull_request:
+    types: ['opened', 'edited', 'reopened', 'synchronize']
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn install @commitlint/config-conventional
+      - uses: JulienKode/pull-request-name-linter-action@v0.5.0
