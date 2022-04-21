@@ -376,8 +376,14 @@ msgstr "Select user"
 msgid "to"
 msgstr "to"
 
+msgid "Days in the future"
+msgstr "Days in the future"
+
 msgid "From"
 msgstr "From"
+
+msgid "Days in the past"
+msgstr "Days in the past"
 
 msgid "To"
 msgstr "To"
@@ -400,8 +406,11 @@ msgstr "Last month"
 msgid "Last 3 months"
 msgstr "Last 3 months"
 
-msgid "Custom range"
-msgstr "Custom range"
+msgid "Absolute range"
+msgstr "Absolute range"
+
+msgid "Relative range"
+msgstr "Relative range"
 
 msgid "Max"
 msgstr "Max"
