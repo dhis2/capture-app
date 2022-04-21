@@ -50,7 +50,6 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
             const {
                 name,
                 program,
-                program2,
                 storeId,
                 clientId,
                 criteria: {
