@@ -598,6 +598,24 @@ msgstr "You dont have access to write comments"
 msgid "Write comment"
 msgstr "Write comment"
 
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr "Use new Enrollment dashboard for {{programName}}"
+
+msgid "Opt in for {{programName}}"
+msgstr "Opt in for {{programName}}"
+
+msgid "No, cancel"
+msgstr "No, cancel"
+
+msgid "Yes, opt in"
+msgstr "Yes, opt in"
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr "Stop using new Enrollment dashboard for {{programName}}"
+
+msgid "Opt out for {{programName}}"
+msgstr "Opt out for {{programName}}"
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
 
@@ -998,9 +1016,6 @@ msgid ""
 msgstr ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
-
-msgid "No, cancel"
-msgstr "No, cancel"
 
 msgid "Yes, delete enrollment."
 msgstr "Yes, delete enrollment."
