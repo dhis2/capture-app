@@ -1,6 +1,6 @@
 # 
 # Translators:
-# Wanda <wanda@frontlineaids.org>, 2021
+# Wanda <wanda@frontlineaids.org>, 2022
 # Nadiia <semchuk@aph.org.ua>, 2022
 # phil_dhis2, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2022-03-23T13:46:21.198Z\n"
+"PO-Revision-Date: 2022-04-20 09:48+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -182,7 +182,7 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr "Активне"
+msgstr "Активно"
 
 msgid "Completed"
 msgstr "Завершено"
@@ -203,7 +203,7 @@ msgid "Save without completing"
 msgstr ""
 
 msgid "Complete"
-msgstr "Завершене"
+msgstr "Завершено"
 
 msgid "No write access"
 msgstr ""
@@ -295,9 +295,6 @@ msgstr ""
 msgid "Registered person"
 msgstr ""
 
-msgid "Link"
-msgstr ""
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
@@ -311,7 +308,7 @@ msgid "Feedback"
 msgstr "Відгук"
 
 msgid "Indicators"
-msgstr "Показники"
+msgstr "Індикатори"
 
 msgid "Warnings"
 msgstr ""
@@ -518,7 +515,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "New"
-msgstr "Нове"
+msgstr "Новий"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -548,7 +545,7 @@ msgid "Select"
 msgstr "Обрати"
 
 msgid "Program"
-msgstr "Program"
+msgstr "Програма"
 
 msgid "No programs available."
 msgstr ""
@@ -557,7 +554,7 @@ msgid "Show all"
 msgstr "Показати все"
 
 msgid "Selected program"
-msgstr "Обрані програми"
+msgstr "Обрана програма"
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -623,7 +620,9 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
 
 msgid ""
@@ -746,6 +745,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -753,10 +755,16 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
@@ -940,6 +948,12 @@ msgid "Enrollment actions"
 msgstr ""
 
 msgid "We are processing your request."
+msgstr ""
+
+msgid "Add new"
+msgstr "Додати нове"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Reactivate"
@@ -1149,7 +1163,7 @@ msgid "Report date"
 msgstr "Дата звіту"
 
 msgid "Registering unit"
-msgstr "Підрозділ, що реєструє"
+msgstr "Організаційний підрозділ, що здійснює реєстрацію"
 
 msgid "Due date"
 msgstr "Запланована дата"
@@ -1200,7 +1214,7 @@ msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
-msgstr "Неактивне"
+msgstr "Неактивно"
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -1299,7 +1313,7 @@ msgid "Error saving the enrollment event"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "Встановити координату"
+msgstr "Встановити координати"
 
 msgid "Page {{currentPage}}"
 msgstr ""

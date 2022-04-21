@@ -1,20 +1,21 @@
 # 
 # Translators:
-# Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
-# ericbp <ericbarredap@gmail.com>, 2021
-# Alison Andrade <aandrade@ippfwhr.org>, 2021
-# Marta Vila <marta@dhis2.org>, 2021
-# Jaime Bosque <jaime.bosque@dhis2.org>, 2021
-# Prabhjot Singh, 2021
+# Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2022
+# Pablo Pajuelo Cabezas <ppajuelo@quadram.mobi>, 2022
+# Marta Vila <marta@dhis2.org>, 2022
+# Jaime Bosque <jaime.bosque@dhis2.org>, 2022
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
+# ericbp <ericbarredap@gmail.com>, 2022
 # phil_dhis2, 2022
+# Prabhjot Singh, 2022
+# Alison Andrade <aandrade@ippfwhr.org>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-23T09:14:01.289Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2022-03-23T13:46:21.198Z\n"
+"PO-Revision-Date: 2022-04-20 09:48+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
@@ -107,10 +108,10 @@ msgid "Please provide a valid percentage"
 msgstr "Proporcione un porcentaje válido"
 
 msgid "Please provide a valid url"
-msgstr "Proporcione una URL válida"
+msgstr "Proporcione un enlace válido."
 
 msgid "Please provide a valid email address"
-msgstr "Por favor ingrese una dirección de correo electrónico válida"
+msgstr "Por favor proporcione un correo electrónico válido"
 
 msgid "Please provide a valid age"
 msgstr "Proporcione una edad válida"
@@ -219,7 +220,7 @@ msgid "Save without completing"
 msgstr ""
 
 msgid "Complete"
-msgstr "Completo"
+msgstr "Completar"
 
 msgid "No write access"
 msgstr "Sin acceso de escritura"
@@ -318,9 +319,6 @@ msgstr "Mostrar {{trackedEntityTypeName}} registrado"
 
 msgid "Registered person"
 msgstr "Persona registrada"
-
-msgid "Link"
-msgstr "Enlace"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -436,7 +434,7 @@ msgid "Contains text"
 msgstr "Contiene texto"
 
 msgid "Yes"
-msgstr "Si"
+msgstr "Sí"
 
 msgid "mm/dd/yyyy"
 msgstr "mm / dd / aaaa"
@@ -457,7 +455,7 @@ msgid "selected"
 msgstr "seleccionado"
 
 msgid "Delete"
-msgstr "Borrar"
+msgstr "Eliminar"
 
 msgid "Select file"
 msgstr "Seleccionar archivos"
@@ -652,9 +650,10 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
-"{{teiDisplayName}} está inscrito en varios programas. Elija un programa."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -781,6 +780,9 @@ msgstr "Guardar como nuevo"
 msgid "View dashboard"
 msgstr "Ver tablero"
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr "Crear para"
 
@@ -790,11 +792,17 @@ msgstr ""
 "También puede elegir un programa de la barra superior y crear en ese "
 "programa"
 
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Save new"
 msgstr "Guardar nuevo"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Guardar el nuevo {{trackedEntityTypeName}} y el enlace"
+
+msgid "Link"
+msgstr "Enlace"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Guardar como nuevo {{trackedEntityName}}"
@@ -993,6 +1001,12 @@ msgstr "Acciones de inscripción"
 
 msgid "We are processing your request."
 msgstr "Estamos tramitando su solicitud."
+
+msgid "Add new"
+msgstr "Agregar nuevo"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr ""
 
 msgid "Reactivate"
 msgstr "Reactiva"
