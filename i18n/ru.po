@@ -391,8 +391,14 @@ msgstr "Выберите пользователя"
 msgid "to"
 msgstr "По"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "От"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "До"
@@ -415,8 +421,11 @@ msgstr "Последний месяц"
 msgid "Last 3 months"
 msgstr "Последние 3 месяца"
 
-msgid "Custom range"
-msgstr "Пользовательский интервал"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Максимум"
@@ -604,6 +613,24 @@ msgstr "У вас не достаточно прав для написания �
 
 msgid "Write comment"
 msgstr "Написать комментарий"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr ""
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
@@ -1000,9 +1027,6 @@ msgstr "Удалить регистрацию"
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
-msgstr ""
-
-msgid "No, cancel"
 msgstr ""
 
 msgid "Yes, delete enrollment."
