@@ -1,3 +1,15 @@
+# [100.2.0](https://github.com/dhis2/capture-app/compare/v100.1.15...v100.2.0) (2022-04-21)
+
+
+### Bug Fixes
+
+* [DHIS2-12675] custom relative range for date ([#2646](https://github.com/dhis2/capture-app/issues/2646)) ([68e01a4](https://github.com/dhis2/capture-app/commit/68e01a403cd0ce1d12ca30644f01c9089724969f))
+
+
+### Features
+
+* [DHIS2-12885] Opt in and out of using the Enrollment dashboard ([#2703](https://github.com/dhis2/capture-app/issues/2703)) ([ccdffdf](https://github.com/dhis2/capture-app/commit/ccdffdf0c03d0dff17df8dc99239e1a7614a2970))
+
 ## [100.1.15](https://github.com/dhis2/capture-app/compare/v100.1.14...v100.1.15) (2022-04-20)
 
 
