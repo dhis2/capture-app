@@ -2,13 +2,14 @@
 # Translators:
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
+# Rica Zamora Duchateau, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-01-04T12:43:12.873Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
+"Last-Translator: Rica Zamora Duchateau, 2022\n"
 "Language-Team: Dutch (https://www.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -104,7 +105,7 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 msgid "Unsaved changes"
 msgstr ""
@@ -176,7 +177,7 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Sluit"
 
 msgid "Please select the user"
 msgstr ""
@@ -191,7 +192,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
 msgid "Select user"
 msgstr ""
@@ -239,7 +240,7 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -266,7 +267,7 @@ msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr ""
+msgstr "Nee"
 
 msgid "Uploading image"
 msgstr ""
@@ -329,7 +330,7 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "Sla op"
 
 msgid "Show all events"
 msgstr ""
@@ -487,7 +488,7 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Relationships"
-msgstr ""
+msgstr "Relaties"
 
 msgid "Assignee"
 msgstr ""
@@ -496,7 +497,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "in"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -605,7 +606,7 @@ msgid "Show all"
 msgstr ""
 
 msgid "Program"
-msgstr ""
+msgstr "Programma"
 
 msgid "Organisation Unit"
 msgstr ""
@@ -727,7 +728,7 @@ msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Organisatieëenheid"
 
 msgid "Selected program"
 msgstr ""
