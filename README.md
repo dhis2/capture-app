@@ -87,3 +87,5 @@ We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0-beta
 ## License
 
 This project is licensed under the BSD 2-Clause License - see the [LICENSE.md](LICENSE.md) file for details
+
+----
