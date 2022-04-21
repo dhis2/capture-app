@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react';
 // $FlowFixMe
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router-dom';
-import { spacers, IconAdd24, IconCalendar24, IconArrowRightMulti24 } from '@dhis2/ui';
+import { spacers, IconAdd24, IconCalendar24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
@@ -69,13 +69,14 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                     disable={noStageAvailable}
                 />
 
-                <QuickActionButton
+                {/* DHIS2-13016: Should hide Make referral until the feature is developped
+                    <QuickActionButton
                     icon={<IconArrowRightMulti24 />}
                     label={i18n.t('Make referral')}
                     onClickAction={() => onNavigationFromQuickActions(tabMode.REFER)}
                     dataTest={'quick-action-button-refer'}
                     disable={noStageAvailable}
-                />
+                /> */}
             </div>
         </Widget>
     );
