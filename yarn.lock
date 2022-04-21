@@ -2975,20 +2975,25 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.4.tgz#d8c7b8db9226d2d7664553a0741ad7d0397ee503"
   integrity sha512-q/ytXxO5NKvyT37pmisQAItCFqA7FD/vNb8dgaJy3/630Fsc+Mz9/9f2SziBoIZ30TJooXyTwZmhi1zjXmObYg==
 
-"@react-dnd/asap@4.0.0", "@react-dnd/asap@^4.0.0":
+"@react-dnd/asap@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@react-dnd/asap/-/asap-4.0.0.tgz#b300eeed83e9801f51bd66b0337c9a6f04548651"
   integrity sha512-0XhqJSc6pPoNnf8DhdsPHtUhRzZALVzYMTzRwV4VI6DJNJ/5xxfL9OQUwb8IH5/2x7lSf7nAZrnzUD+16VyOVQ==
 
-"@react-dnd/invariant@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@react-dnd/invariant/-/invariant-3.0.0.tgz#ea55db612b8be3284e87b67f1a1567595cd4c386"
-  integrity sha512-keberJRIqPX15IK3SWS/iO1t/kGETiL1oczKrDitAaMnQ+kpHf81l3MrRmFjvfqcnApE+izEvwM6GsyoIcpsVA==
+"@react-dnd/asap@^5.0.1":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@react-dnd/asap/-/asap-5.0.2.tgz#1f81f124c1cd6f39511c11a881cfb0f715343488"
+  integrity sha512-WLyfoHvxhs0V9U+GTsGilGgf2QsPl6ZZ44fnv0/b8T3nQyvzxidxsg/ZltbWssbsRDlYW8UKSQMTGotuTotZ6A==
 
 "@react-dnd/invariant@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@react-dnd/invariant/-/invariant-2.0.0.tgz#09d2e81cd39e0e767d7da62df9325860f24e517e"
   integrity sha512-xL4RCQBCBDJ+GRwKTFhGUW8GXa4yoDfJrPbLblc3U09ciS+9ZJXJ3Qrcs/x2IODOdIE5kQxvMmE2UKyqUictUw==
+
+"@react-dnd/invariant@^4.0.1":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@react-dnd/invariant/-/invariant-4.0.2.tgz#b92edffca10a26466643349fac7cdfb8799769df"
+  integrity sha512-xKCTqAK/FFauOM9Ta2pswIyT3D8AQlfrYdOi/toTPEhqCuAs1v5tcJ3Y08Izh1cJ5Jchwy9SeAXmMg6zrKs2iw==
 
 "@react-dnd/shallowequal@^2.0.0":
   version "2.0.0"
@@ -7177,14 +7182,14 @@ dnd-core@14.0.1:
     "@react-dnd/invariant" "^2.0.0"
     redux "^4.1.1"
 
-dnd-core@15.1.1:
-  version "15.1.1"
-  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-15.1.1.tgz#b4dce2d892be2a7c9ca32ffdd545350be8d52f4f"
-  integrity sha512-Mtj/Sltcx7stVXzeDg4g7roTe/AmzRuIf/FYOxX6F8gULbY54w066BlErBOzQfn9RIJ3gAYLGX7wvVvoBSq7ig==
+dnd-core@^16.0.1:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-16.0.1.tgz#a1c213ed08961f6bd1959a28bb76f1a868360d19"
+  integrity sha512-HK294sl7tbw6F6IeuK16YSBUoorvHpY8RHO+9yFfaJyCDVb6n7PRcezrOEOa2SBCqiYpemh5Jx20ZcjKdFAVng==
   dependencies:
-    "@react-dnd/asap" "4.0.0"
-    "@react-dnd/invariant" "3.0.0"
-    redux "^4.1.1"
+    "@react-dnd/asap" "^5.0.1"
+    "@react-dnd/invariant" "^4.0.1"
+    redux "^4.2.0"
 
 dns-equal@^1.0.0:
   version "1.0.0"
@@ -14597,12 +14602,12 @@ react-display-name@^0.2.4:
   resolved "https://registry.yarnpkg.com/react-display-name/-/react-display-name-0.2.5.tgz#304c7cbfb59ee40389d436e1a822c17fe27936c6"
   integrity sha512-I+vcaK9t4+kypiSgaiVWAipqHRXYmZIuAiS8vzFvXHHXVigg/sMKwlRgLy6LH2i3rmP+0Vzfl5lFsFRwF1r3pg==
 
-react-dnd-html5-backend@^15.1.2:
-  version "15.1.2"
-  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-15.1.2.tgz#85e2c5ad57e87190495756f68f44fd89299062fb"
-  integrity sha512-mem9QbutUF+aA2YC1y47G3ECjnYV/sCYKSnu5Jd7cbg3fLMPAwbnTf/JayYdnCH5l3eg9akD9dQt+cD0UdF8QQ==
+react-dnd-html5-backend@^16.0.1:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-16.0.1.tgz#87faef15845d512a23b3c08d29ecfd34871688b6"
+  integrity sha512-Wu3dw5aDJmOGw8WjH1I1/yTH+vlXEL4vmjk5p+MHxP8HuHJS1lAGeIdG/hze1AvNeXWo/JgULV87LyQOr+r5jw==
   dependencies:
-    dnd-core "15.1.1"
+    dnd-core "^16.0.1"
 
 react-dnd@^14.0.5:
   version "14.0.5"
@@ -15128,6 +15133,13 @@ redux@^4.0.0, redux@^4.1.1, redux@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.1.2.tgz#140f35426d99bb4729af760afcf79eaaac407104"
   integrity sha512-SH8PglcebESbd/shgf6mii6EIoRM0zrQyjcuQ+ojmfxjTtE0z9Y8pa62iA/OJ58qjP6j27uyW4kUF4jl/jd6sw==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+
+redux@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.2.0.tgz#46f10d6e29b6666df758780437651eeb2b969f13"
+  integrity sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA==
   dependencies:
     "@babel/runtime" "^7.9.2"
 
