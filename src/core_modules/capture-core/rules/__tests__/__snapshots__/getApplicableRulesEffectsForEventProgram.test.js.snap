@@ -13,7 +13,7 @@ Object {
     "orgUnitName": "Ngelehun CHC",
     "programId": "IpHINAT79UW",
     "programStageId": "A03MvHHogjR",
-    "programStageName": "stage1",
+    "programStageName": undefined,
     "status": "ACTIVE",
     "trackedEntityInstanceId": "vCGpQAWG17I",
   },
