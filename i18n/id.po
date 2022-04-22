@@ -392,8 +392,14 @@ msgstr "Pilih pengguna"
 msgid "to"
 msgstr "untuk"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "Dari"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "Untuk"
@@ -416,8 +422,11 @@ msgstr "Bulan lalu"
 msgid "Last 3 months"
 msgstr "3 bulan terakhir"
 
-msgid "Custom range"
-msgstr "Rentang khusus"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Maksimal"
@@ -604,6 +613,24 @@ msgstr "Anda tidak memiliki akses untuk menulis komentar"
 
 msgid "Write comment"
 msgstr "Tulis komentar"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "tidak, batalkan"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance entitas terlacak dengan id \"{{teiId}}\" tidak ada"
@@ -1018,9 +1045,6 @@ msgid ""
 msgstr ""
 "Anda yakin ingin menghapus pendaftaran ini? Ini akan menghapus pendaftaran "
 "saat ini secara permanen."
-
-msgid "No, cancel"
-msgstr "tidak, batalkan"
 
 msgid "Yes, delete enrollment."
 msgstr "Ya, hapus pendaftaran."
