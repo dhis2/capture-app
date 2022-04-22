@@ -1,3 +1,10 @@
+## [100.2.2](https://github.com/dhis2/capture-app/compare/v100.2.1...v100.2.2) (2022-04-22)
+
+
+### Bug Fixes
+
+* [TECH-1077] remove unnecessary onChange handler in SingleSelectBox ([6a5eab0](https://github.com/dhis2/capture-app/commit/6a5eab0b2cb04e067d49ba9294899d177b92f50c))
+
 ## [100.2.1](https://github.com/dhis2/capture-app/compare/v100.2.0...v100.2.1) (2022-04-22)
 
 
