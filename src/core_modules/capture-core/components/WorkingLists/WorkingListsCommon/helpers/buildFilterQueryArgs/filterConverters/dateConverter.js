@@ -8,6 +8,7 @@ import type {
     RelativeDateFilterData,
     AbsoluteDateFilterData,
 } from '../../../../../ListView';
+import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
 
 const periods = {
     TODAY: 'TODAY',
@@ -17,7 +18,8 @@ const periods = {
     LAST_WEEK: 'LAST_WEEK',
     LAST_MONTH: 'LAST_MONTH',
     LAST_3_MONTHS: 'LAST_3_MONTHS',
-    CUSTOM_RANGE: 'CUSTOM_RANGE',
+    RELATIVE_RANGE: 'RELATIVE_RANGE',
+    ABSOLUTE_RANGE: 'ABSOLUTE_RANGE',
 };
 
 const selectors = {};
@@ -93,7 +95,6 @@ function getSelector(key: string, storeId: string, isInit: boolean) {
     }
 
     const listSelectors = selectors[storeId];
-
     if (!listSelectors[key]) {
         listSelectors[key] = createSelector(
             sourceValue => sourceValue,
@@ -107,14 +108,40 @@ function getSelector(key: string, storeId: string, isInit: boolean) {
     return selector;
 }
 
+function convertCustomRelativeDate(sourceValue: RelativeDateFilterData) {
+    const { startBuffer, endBuffer } = sourceValue;
+    const requestData = [];
+
+    if (startBuffer || startBuffer === 0) {
+        const startDate = moment().add(startBuffer, 'days');
+        const startBufferFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(startDate);
+        requestData.push(`ge:${startBufferFilterRequest}`);
+    }
+
+    if (endBuffer || endBuffer === 0) {
+        const endDate = moment().add(endBuffer, 'days');
+        const endBufferFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(endDate);
+        requestData.push(`le:${endBufferFilterRequest}`);
+    }
+    return requestData;
+}
+
 function convertRelativeDate(
     sourceValue: RelativeDateFilterData,
     key: string,
     storeId: string,
     isInit: boolean,
 ) {
-    const requestData = getSelector(key, storeId, isInit)(sourceValue);
-    return requestData.join(':');
+    let requestData = [];
+    if (areRelativeRangeValuesSupported(sourceValue.startBuffer, sourceValue.endBuffer)) {
+        requestData = convertCustomRelativeDate(sourceValue);
+        return requestData?.join(':');
+    }
+    if (sourceValue.period) {
+        requestData = getSelector(key, storeId, isInit)(sourceValue);
+        return requestData?.join(':');
+    }
+    return '';
 }
 
 function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
@@ -128,7 +155,7 @@ function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
         const toFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(sourceValue.le));
         requestData.push(`le:${toFilterRequest}`);
     }
-    return requestData.join(':');
+    return requestData?.join(':');
 }
 
 export function convertDate(

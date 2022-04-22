@@ -1,3 +1,50 @@
+## [100.2.2](https://github.com/dhis2/capture-app/compare/v100.2.1...v100.2.2) (2022-04-22)
+
+
+### Bug Fixes
+
+* [TECH-1077] remove unnecessary onChange handler in SingleSelectBox ([6a5eab0](https://github.com/dhis2/capture-app/commit/6a5eab0b2cb04e067d49ba9294899d177b92f50c))
+
+## [100.2.1](https://github.com/dhis2/capture-app/compare/v100.2.0...v100.2.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ba0564a](https://github.com/dhis2/capture-app/commit/ba0564acc7ec2f76cf9f79a3b8dff0bef6f34860))
+
+# [100.2.0](https://github.com/dhis2/capture-app/compare/v100.1.15...v100.2.0) (2022-04-21)
+
+
+### Bug Fixes
+
+* [DHIS2-12675] custom relative range for date ([#2646](https://github.com/dhis2/capture-app/issues/2646)) ([68e01a4](https://github.com/dhis2/capture-app/commit/68e01a403cd0ce1d12ca30644f01c9089724969f))
+
+
+### Features
+
+* [DHIS2-12885] Opt in and out of using the Enrollment dashboard ([#2703](https://github.com/dhis2/capture-app/issues/2703)) ([ccdffdf](https://github.com/dhis2/capture-app/commit/ccdffdf0c03d0dff17df8dc99239e1a7614a2970))
+
+## [100.1.15](https://github.com/dhis2/capture-app/compare/v100.1.14...v100.1.15) (2022-04-20)
+
+
+### Bug Fixes
+
+* [DHIS2-13029] attempt to fix cypress test ([#2712](https://github.com/dhis2/capture-app/issues/2712)) ([c899783](https://github.com/dhis2/capture-app/commit/c899783ac6ba1a2587105a8507af071c16021cd3))
+
+## [100.1.14](https://github.com/dhis2/capture-app/compare/v100.1.13...v100.1.14) (2022-04-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e35a289](https://github.com/dhis2/capture-app/commit/e35a289261572828fe2a2815ece6c4505e8fbad4))
+
+## [100.1.13](https://github.com/dhis2/capture-app/compare/v100.1.12...v100.1.13) (2022-04-13)
+
+
+### Bug Fixes
+
+* [DHIS2-12939] show user error message when event update fails ([b015314](https://github.com/dhis2/capture-app/commit/b01531475ff5861113637864b26da7018923a836))
+
 ## [100.1.12](https://github.com/dhis2/capture-app/compare/v100.1.11...v100.1.12) (2022-04-05)
 
 

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -372,8 +372,14 @@ msgstr "选择用户"
 msgid "to"
 msgstr "到"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "从"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "至"
@@ -396,8 +402,11 @@ msgstr "上月"
 msgid "Last 3 months"
 msgstr "最近3个月"
 
-msgid "Custom range"
-msgstr "自订范围"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "最大"
@@ -584,6 +593,24 @@ msgstr "你没有权限写备注"
 
 msgid "Write comment"
 msgstr "写备注"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "不，取消"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
@@ -976,9 +1003,6 @@ msgid ""
 "remove the current enrollment."
 msgstr "您确定要删除此报名吗？这将永久删除当前报名。"
 
-msgid "No, cancel"
-msgstr "不，取消"
-
 msgid "Yes, delete enrollment."
 msgstr "是的，删除报名。"
 
@@ -1310,6 +1334,9 @@ msgstr "保存报名时出错"
 
 msgid "Error saving the enrollment event"
 msgstr "保存报名事件时出错"
+
+msgid "Error editing the event, the changes made were not saved"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "设置坐标"
