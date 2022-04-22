@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-04-12T12:16:09.591Z\n"
-"PO-Revision-Date: 2022-04-12T12:16:09.591Z\n"
+"POT-Creation-Date: 2022-04-19T07:14:22.883Z\n"
+"PO-Revision-Date: 2022-04-19T07:14:22.883Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -935,6 +935,12 @@ msgstr "Search {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Fill in at least {{minAttributesRequired}} attributes to search"
+
+msgid "Saved lists in this program"
+msgstr "Saved lists in this program"
+
+msgid "Create custom working list"
+msgstr "Create custom working list"
 
 msgid "To work with the selected program,"
 msgstr "To work with the selected program,"

@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TeiWorkingListsSetup } from '../Setup';
 import { useWorkingListsCommonStateManagement, fetchTemplates, TEMPLATE_SHARING_TYPE } from '../../WorkingListsCommon';
@@ -13,7 +13,7 @@ const useApiTemplate = () => {
     return workingListsTemplatesTEI && workingListsTemplatesTEI.templates;
 };
 
-export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: Props) => {
+export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId, selectedTemplateId }: Props) => {
     const program = useTrackerProgram(programId);
     const apiTemplates = useApiTemplate();
 
@@ -25,10 +25,15 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
     const dispatch = useDispatch();
+    const { onSelectTemplate } = commonStateManagementProps;
 
     const onLoadTemplates = useCallback(() => {
-        dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE));
-    }, [dispatch, programId, storeId]);
+        dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE, selectedTemplateId));
+    }, [dispatch, programId, storeId, selectedTemplateId]);
+
+    useEffect(() => {
+        selectedTemplateId && onSelectTemplate && onSelectTemplate(selectedTemplateId);
+    }, [selectedTemplateId, onSelectTemplate]);
 
     const onSelectListRow = useCallback(({ id }) => {
         const record = records[id];

@@ -12,16 +12,23 @@ import {
 } from '../Search';
 import { MainPageComponent } from './MainPage.component';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
-import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery, deriveURLParamsFromLocation } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 
-const showMainPage = (selectedProgram) => {
+const showMainPage = (selectedProgram, orgUnitId, selectedTemplateId) => {
     const noProgramSelected = !selectedProgram;
+    const noOrgUnitSelected = !orgUnitId;
     const isEventProgram = !selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = selectedProgram?.trackedEntityType?.id && selectedProgram?.displayFrontPageList;
 
-    return noProgramSelected || isEventProgram || displayFrontPageList;
+    return (
+        noProgramSelected ||
+        noOrgUnitSelected ||
+        isEventProgram ||
+        displayFrontPageList ||
+        (!displayFrontPageList && selectedTemplateId)
+    );
 };
 
 export const MainPage = () => {
@@ -50,6 +57,7 @@ export const MainPage = () => {
         }),
         shallowEqual,
     );
+    const { selectedTemplateId } = deriveURLParamsFromLocation();
     const selectedProgram = programId && programCollection.get(programId);
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
 
@@ -97,11 +105,12 @@ export const MainPage = () => {
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
             <>
-                {showMainPage(selectedProgram) ? (
+                {showMainPage(selectedProgram, orgUnitId, selectedTemplateId) ? (
                     <MainPageComponent
                         MainPageStatus={MainPageStatus}
                         programId={programId}
                         orgUnitId={orgUnitId}
+                        selectedTemplateId={selectedTemplateId}
                         setShowAccessible={setShowAccessible}
                         error={error}
                         ready={ready}
