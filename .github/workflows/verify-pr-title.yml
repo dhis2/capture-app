@@ -1,13 +1,15 @@
-name: 'dhis2: verify (pr title)'
+name: 'dhis2: check pr title'
 
 on:
   pull_request:
     types: ['opened', 'edited', 'reopened', 'synchronize']
 
 jobs:
-  verify:
+  commitlint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: yarn add @commitlint/config-conventional
       - uses: JulienKode/pull-request-name-linter-action@v0.5.0
+        with:
+          configuration-path: commitlint.config.js
