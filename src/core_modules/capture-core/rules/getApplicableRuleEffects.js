@@ -53,7 +53,7 @@ export const getApplicableRuleEffectsForEventProgram = ({
     }
 
     if (currentEvent) {
-        currentEvent.programStageName = program.stages.get('EventProgramStage')?.untranslatedName;
+        currentEvent.programStageName = program.stage.untranslatedName;
     }
 
     return buildEffectsHierarchy(
