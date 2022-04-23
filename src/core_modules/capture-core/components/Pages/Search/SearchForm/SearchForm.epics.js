@@ -20,7 +20,6 @@ import {
     dataElementTypes,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
-    scopeTypes,
 } from '../../../../metaData';
 import { PAGINATION } from '../SearchPage.constants';
 import { buildUrlQueryString } from '../../../../utils/routing';
@@ -211,9 +210,6 @@ const deriveFormValues = (searchForm, values) => {
         return acc;
     }, {}));
 };
-
-const deriveCurrentFallbackSearchTerms = (searchTermsFromOriginalSearch, fallbackFormValues) =>
-    searchTermsFromOriginalSearch.filter(({ id }) => Object.keys(fallbackFormValues).includes(id));
 
 export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

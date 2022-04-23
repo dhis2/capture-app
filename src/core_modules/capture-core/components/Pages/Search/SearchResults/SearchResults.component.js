@@ -141,7 +141,6 @@ export const SearchResultsIndex = ({
     fallbackTriggered,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
-    const currentSelectionProgramId = useSelector(({ currentSelections }) => currentSelections.programId);
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:
