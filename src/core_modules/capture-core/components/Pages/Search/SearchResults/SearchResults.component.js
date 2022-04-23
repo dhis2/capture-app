@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, colors } from '@dhis2/ui';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CardList } from '../../../CardList';
 import { withNavigation } from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
@@ -129,6 +129,8 @@ export const SearchResultsIndex = ({
     startFallbackSearch,
     classes,
     searchResults,
+    otherResults,
+    otherCurrentPage,
     dataElements,
     currentPage,
     currentSearchScopeType,
@@ -139,7 +141,7 @@ export const SearchResultsIndex = ({
     fallbackTriggered,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
-
+    const currentSelectionProgramId = useSelector(({ currentSelections }) => currentSelections.programId);
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:
@@ -161,6 +163,15 @@ export const SearchResultsIndex = ({
         default:
             break;
         }
+    };
+
+    const handleOtherPageChange = (newOtherPage) => {
+        startFallbackSearch({
+            programId: currentSearchScopeId,
+            formId: currentFormId,
+            resultsPageSize,
+            page: newOtherPage,
+        });
     };
 
     const handleFallbackSearch = () => {
@@ -201,6 +212,32 @@ export const SearchResultsIndex = ({
                 currentPage={currentPage}
             />
         </div>
+        {otherResults !== undefined && <>
+            <SearchResultsHeader currentSearchScopeName={i18n.t('all programs')} />
+            <CardList
+                noItemsText={i18n.t('No results found')}
+                currentSearchScopeName={currentSearchScopeName}
+                items={otherResults}
+                dataElements={dataElements}
+                renderCustomCardActions={({ item, enrollmentType, programName }) => (
+                    <CardListButtons
+                        programName={programName}
+                        currentSearchScopeId={currentSearchScopeId}
+                        currentSearchScopeType={currentSearchScopeType}
+                        id={item.id}
+                        orgUnitId={item.tei.orgUnit}
+                        enrollmentType={enrollmentType}
+                    />
+                )}
+            />
+            <div className={classes.pagination}>
+                <SearchPagination
+                    nextPageButtonDisabled={otherResults.length < resultsPageSize}
+                    onChangePage={newPage => handleOtherPageChange(newPage)}
+                    currentPage={otherCurrentPage}
+                />
+            </div>
+        </>}
         {
             currentSearchScopeType === searchScopes.PROGRAM && !fallbackTriggered &&
             <div className={classes.fallback}>

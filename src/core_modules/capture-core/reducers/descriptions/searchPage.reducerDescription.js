@@ -16,6 +16,7 @@ const initialReducerValue = {
     currentPage: 0,
     currentSearchInfo: {},
     keptFallbackSearchFormValues: {},
+    otherCurrentPage: 0,
 };
 export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW]: state => ({
@@ -27,6 +28,12 @@ export const searchPageDesc = createReducerDescription({
         searchStatus: searchPageStatus.SHOW_RESULTS,
         searchResults,
         currentPage,
+    }),
+    [searchPageActionTypes.ADD_SEARCH_RESULTS_SUCCESS_VIEW]: (state, { payload: { otherResults, otherCurrentPage } }) => ({
+        ...state,
+        searchStatus: searchPageStatus.SHOW_RESULTS,
+        otherResults,
+        otherCurrentPage,
     }),
     [searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW]: state => ({
         ...state,
@@ -49,9 +56,9 @@ export const searchPageDesc = createReducerDescription({
         currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
     }),
 
-    [searchPageActionTypes.FALLBACK_SEARCH]: (state, { payload: { fallbackFormValues } }) => ({
+    [searchPageActionTypes.FALLBACK_SEARCH]: (state, { payload: { fallbackFormValues, trackedEntityTypeId } }) => ({
         ...state,
-        keptFallbackSearchFormValues: fallbackFormValues,
+        keptFallbackSearchFormValues: { ...fallbackFormValues, trackedEntityTypeId },
     }),
 
     [searchPageActionTypes.ALL_SEARCH_RELATED_DATA_CLEAN]: () => (initialReducerValue),

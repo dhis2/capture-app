@@ -8,6 +8,7 @@ export const searchPageActionTypes = {
     SEARCH_RESULTS_LOADING_VIEW: 'SearchResultsLoadingView',
     SEARCH_RESULTS_EMPTY_VIEW: 'SearchResultsEmptyView',
     SEARCH_RESULTS_SUCCESS_VIEW: 'SearchResultsSuccessView',
+    ADD_SEARCH_RESULTS_SUCCESS_VIEW: 'AddSearchResultsSuccessView',
     SEARCH_RESULTS_ERROR_VIEW: 'SearchResultsErrorView',
     SEARCH_RESULTS_TOO_MANY_VIEW: 'SearchResultsTooManyView',
     SEARCH_RESULTS_INITIAL_VIEW: 'SearchResultsInitialView',
@@ -62,6 +63,9 @@ export const showEmptyResultsViewOnSearchPage = () =>
 
 export const showSuccessResultsViewOnSearchPage = (searchResults, currentPage) =>
     actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW)({ searchResults, currentPage });
+
+export const addSuccessResultsViewOnSearchPage = (otherResults, otherCurrentPage) =>
+    actionCreator(searchPageActionTypes.ADD_SEARCH_RESULTS_SUCCESS_VIEW)({ otherResults, otherCurrentPage });
 
 
 export const startFallbackSearch = ({ programId, formId, page = 1, pageSize, availableSearchOptions }) =>
