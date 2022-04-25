@@ -4,6 +4,21 @@ beforeEach(() => {
     cy.loginThroughForm();
 });
 
+Given('you are in the search page with Ngelehun and MNCH / PNC context', () => {
+    cy.visit('/#/search?orgUnitId=DiszpKrYNg8&programId=uy2gU8kT1jF');
+});
+
+Given('you are in the search page with Ngelehun and malaria focus investigation program context', () => {
+    cy.visit('/#/search?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+});
+
+And('you can load the view with the name Events assigned to me', () => {
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .within(() => {
+            cy.contains('Events assigned to me').click();
+        });
+});
+
 Then('the TEI working list is displayed', () => {
     cy.get('[data-test="tei-working-lists"]').within(() => {
         cy.contains('Rows per page').should('exist');
