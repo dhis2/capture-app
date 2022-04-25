@@ -373,13 +373,13 @@ msgid "to"
 msgstr "到"
 
 msgid "Days in the future"
-msgstr ""
+msgstr "未来的天数"
 
 msgid "From"
 msgstr "从"
 
 msgid "Days in the past"
-msgstr ""
+msgstr "过去的天数"
 
 msgid "To"
 msgstr "至"
@@ -403,10 +403,10 @@ msgid "Last 3 months"
 msgstr "最近3个月"
 
 msgid "Absolute range"
-msgstr ""
+msgstr "绝对范围"
 
 msgid "Relative range"
-msgstr ""
+msgstr "相对范围"
 
 msgid "Max"
 msgstr "最大"
@@ -595,22 +595,22 @@ msgid "Write comment"
 msgstr "写备注"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr ""
+msgstr "为 {{programName}} 使用新的注册仪表板"
 
 msgid "Opt in for {{programName}}"
-msgstr ""
+msgstr "选择加入 {{programName}}"
 
 msgid "No, cancel"
 msgstr "不，取消"
 
 msgid "Yes, opt in"
-msgstr ""
+msgstr "是的，选择加入"
 
 msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr ""
+msgstr "停止为 {{programName}} 使用新的注册信息中心"
 
 msgid "Opt out for {{programName}}"
-msgstr ""
+msgstr "选择退出 {{programName}}"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
@@ -1336,7 +1336,7 @@ msgid "Error saving the enrollment event"
 msgstr "保存报名事件时出错"
 
 msgid "Error editing the event, the changes made were not saved"
-msgstr ""
+msgstr "编辑事件时出错，所做的更改未保存"
 
 msgid "Set coordinate"
 msgstr "设置坐标"
