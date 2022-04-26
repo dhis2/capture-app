@@ -34,22 +34,18 @@ const postProcessAssignEffects = ({
 const postProcessHideSectionEffects = (
     hideSectionEffects: Array<HideOutputEffect>,
     foundation: RenderFoundation,
-) => (hideSectionEffects.reduce((acc: Array<HideOutputEffect>, { id: sectionId }) => {
+) => (hideSectionEffects.flatMap(({ id: sectionId }) => {
     const section = foundation.getSection(sectionId);
     if (!section) {
-        return acc;
+        return [];
     }
 
-    const hideFieldEffects = [...section.elements.values()]
+    return [...section.elements.values()]
         .map(({ id }) => ({
             id,
             type: effectActions.HIDE_FIELD,
         }));
-
-    acc.push(...hideFieldEffects);
-
-    return acc;
-}, []));
+}));
 
 const filterHideEffects = (
     hideEffects: Array<HideOutputEffect>,
