@@ -21,13 +21,14 @@ const showMainPage = (selectedProgram, orgUnitId, selectedTemplateId) => {
     const noOrgUnitSelected = !orgUnitId;
     const isEventProgram = !selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = selectedProgram?.trackedEntityType?.id && selectedProgram?.displayFrontPageList;
+    const hasSelectedTemplateId = !displayFrontPageList && selectedTemplateId;
 
     return (
         noProgramSelected ||
         noOrgUnitSelected ||
         isEventProgram ||
         displayFrontPageList ||
-        (!displayFrontPageList && selectedTemplateId)
+        hasSelectedTemplateId
     );
 };
 
