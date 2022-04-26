@@ -73,6 +73,7 @@ export const getRulesActionsForTEI = ({
         selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData),
         selectedEntity: teiValues,
         selectedOrgUnit: orgUnit,
+        selectedUserRoles: [],
         optionSets,
     });
     return getRulesActions(effects, foundation, formId);

@@ -125,6 +125,7 @@ const getApplicableRuleEffects = ({
         selectedEnrollment: enrollmentData,
         selectedEntity: attributeValues,
         selectedOrgUnit: orgUnit,
+        selectedUserRoles: [],
         optionSets,
     });
 
