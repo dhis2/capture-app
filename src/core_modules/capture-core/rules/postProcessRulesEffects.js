@@ -24,10 +24,10 @@ const postProcessAssignEffects = ({
     hideFieldEffects: Array<HideOutputEffect>,
 }) => (
     // assignValueEffects has precedence over "blank a hidden field"-assignments.
-    // This requirement is met by destructuring assignValueEffects first.
+    // This requirement is met by destructuring assignValueEffects *last*.
     deduplicateEffectArray([
-        ...assignValueEffects,
         ...getAssignEffectsBasedOnHideField(hideFieldEffects),
+        ...assignValueEffects,
     ])
 );
 
