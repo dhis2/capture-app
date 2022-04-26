@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect, useMemo, useCallback } from 'react';
 // $FlowFixMe
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import {
@@ -11,10 +11,16 @@ import {
     showInitialViewOnSearchPage,
 } from '../Search';
 import { MainPageComponent } from './MainPage.component';
+import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { buildUrlQueryString, useLocationQuery, deriveURLParamsFromLocation } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
+
+const mapStateToProps = (state: ReduxState) => ({
+    error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
+    ready: !state.activePage.lockedSelectorLoads,  // TODO: Should probably remove this
+});
 
 const showMainPage = (selectedProgram, orgUnitId, selectedTemplateId) => {
     const noProgramSelected = !selectedProgram;
@@ -32,7 +38,7 @@ const showMainPage = (selectedProgram, orgUnitId, selectedTemplateId) => {
     );
 };
 
-export const MainPage = () => {
+const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { all } = useLocationQuery();
@@ -53,7 +59,7 @@ export const MainPage = () => {
             orgUnitId: currentSelections.orgUnitId,
             categories: currentSelections.categories,
             searchStatus: searchPage.searchStatus,
-            ready: !activePage.isLoading,
+            ready: !activePage.isLoading && !activePage.lockedSelectorLoads,
             error: activePage.selectionsError && activePage.selectionsError.error,
         }),
         shallowEqual,
@@ -133,3 +139,5 @@ export const MainPage = () => {
     );
 };
 
+// $FlowFixMe[missing-annot] automated comment
+export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(MainPageContainer)));
