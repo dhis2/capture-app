@@ -20,6 +20,7 @@ import {
     dataElementTypes,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
+    scopeTypes,
 } from '../../../../metaData';
 import { PAGINATION } from '../SearchPage.constants';
 import { buildUrlQueryString } from '../../../../utils/routing';
@@ -214,16 +215,16 @@ const deriveFormValues = (searchForm, values) => {
 export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH_START),
-        flatMap(({ payload: { programId, page, pageSize, availableSearchOptions } }) => {
+        flatMap(({ payload: { formId, programId, pageSize, page, availableSearchOptions } }) => {
             const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
             if (trackerProgram.trackedEntityType) {
                 const { id: trackedEntityTypeId } = trackerProgram.trackedEntityType;
                 const { formsValues } = store.value;
 
-                const { searchForm, formId } = deriveSearchFormInfo(availableSearchOptions[trackedEntityTypeId].searchGroups);
+                const { searchForm } = deriveSearchFormInfo(availableSearchOptions[trackedEntityTypeId].searchGroups);
                 const fallbackFormValues = deriveFormValues(searchForm, formsValues[formId]);
 
-                return fallbackSearch({ trackedEntityTypeId, fallbackFormValues, page, pageSize });
+                return of(fallbackSearch({ trackedEntityTypeId, fallbackFormValues, page, pageSize }));
             }
 
             return empty();
