@@ -382,8 +382,14 @@ msgstr "حدد المستخدم"
 msgid "to"
 msgstr "إلى"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "من"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "الى"
@@ -406,8 +412,11 @@ msgstr "الشهر الماضي"
 msgid "Last 3 months"
 msgstr "آخر 3 أشهر"
 
-msgid "Custom range"
-msgstr "نطاق مخصص"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "الأعلى"
@@ -594,6 +603,24 @@ msgstr "ليس لديك حق الوصول إلى كتابة التعليقات"
 
 msgid "Write comment"
 msgstr "اكتب تعليقاً"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "لا، الغاء"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
@@ -990,9 +1017,6 @@ msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
 msgstr ""
-
-msgid "No, cancel"
-msgstr "لا، الغاء"
 
 msgid "Yes, delete enrollment."
 msgstr ""

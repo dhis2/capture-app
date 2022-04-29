@@ -1,7 +1,7 @@
 // @flow
 
 export const actionTypes = {
-    FETCH_DATA_STORE: 'useNewDashboard.FetchDataStore',
+    SAVE_DATA_STORE: 'useNewDashboard.SaveDataStore',
 };
 
 export type UseNewDashboard = {|

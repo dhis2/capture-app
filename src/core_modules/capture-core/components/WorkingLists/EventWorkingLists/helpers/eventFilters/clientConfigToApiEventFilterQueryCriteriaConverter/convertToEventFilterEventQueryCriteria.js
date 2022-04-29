@@ -71,6 +71,8 @@ const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
     const apiDateFilterContents = dateFilter.type === dateFilterTypes.RELATIVE ? {
         type: dateFilter.type,
         period: dateFilter.period,
+        startBuffer: dateFilter.startBuffer,
+        endBuffer: dateFilter.endBuffer,
     } : {
         type: dateFilter.type,
         startDate: dateFilter.ge ? convertDate(dateFilter.ge) : undefined,

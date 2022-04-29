@@ -35,6 +35,8 @@ const getDateFilter = (dateFilter) => {
             ? {
                 type: dateFilter.type,
                 period: dateFilter.period,
+                startBuffer: dateFilter.startBuffer,
+                endBuffer: dateFilter.endBuffer,
             }
             : {
                 type: dateFilter.type,
