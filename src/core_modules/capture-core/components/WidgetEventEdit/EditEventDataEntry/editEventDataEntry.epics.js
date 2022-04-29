@@ -1,7 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter, switchMap } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
@@ -187,12 +186,7 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
                 enrollmentId,
             };
             dependencies.history.push(
-                `/enrollment?${buildUrlQueryString({
-                    teiId,
-                    programId,
-                    orgUnitId,
-                    enrollmentId,
-                })}`,
+                `/enrollment?${buildUrlQueryString(params)}`,
             );
             return startDeleteEventDataEntry(eventId, params, currentSelections);
         }));
