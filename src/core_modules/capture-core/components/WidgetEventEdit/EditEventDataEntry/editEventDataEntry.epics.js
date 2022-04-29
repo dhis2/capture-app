@@ -174,7 +174,7 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             return batchActions(actions);
         }));
 
-export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY),
         map(() => {
@@ -186,16 +186,6 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
                 orgUnitId,
                 enrollmentId,
             };
-            return startDeleteEventDataEntry(eventId, params, currentSelections);
-        }));
-
-
-export const deleteEventSucceededEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) =>
-    action$.pipe(
-        ofType(actionTypes.DELETE_EVENT_DATA_ENTRY_SUCCEEDED),
-        switchMap((action) => {
-            const { params } = action.meta;
-            const { teiId, programId, orgUnitId, enrollmentId } = params;
             dependencies.history.push(
                 `/enrollment?${buildUrlQueryString({
                     teiId,
@@ -204,6 +194,6 @@ export const deleteEventSucceededEpic = (action$: InputObservable, store: ReduxS
                     enrollmentId,
                 })}`,
             );
-            return EMPTY;
-        }),
-    );
+            return startDeleteEventDataEntry(eventId, params, currentSelections);
+        }));
+
