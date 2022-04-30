@@ -20,7 +20,6 @@ import {
     dataElementTypes,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
-    scopeTypes,
 } from '../../../../metaData';
 import { PAGINATION } from '../SearchPage.constants';
 import { buildUrlQueryString } from '../../../../utils/routing';

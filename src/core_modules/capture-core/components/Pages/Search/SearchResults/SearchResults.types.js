@@ -4,7 +4,7 @@ import { typeof searchScopes } from '../SearchPage.constants';
 import { typeof dataElementTypes } from '../../../../metaData';
 import type { AvailableSearchOptions } from '../SearchPage.types';
 import type { ListItem } from '../../../CardList/CardList.types';
-import { number } from 'prop-types';
+
 
 export type CardDataElementsInformation = Array<{| id: string, name: string, type: $Values<dataElementTypes> |}>
 
