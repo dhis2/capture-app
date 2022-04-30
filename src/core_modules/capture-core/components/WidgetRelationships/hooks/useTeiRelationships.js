@@ -4,14 +4,14 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import {
     getCachedSingleResourceFromKeyAsync,
-} from '../../../../../MetaDataStoreUtils/MetaDataStoreUtils';
+} from '../../../MetaDataStoreUtils/MetaDataStoreUtils';
 import { getProgramAndStageFromEvent, getTrackedEntityTypeThrowIfNotFound }
-    from '../../../../../metaData';
-import { userStores } from '../../../../../storageControllers/stores';
+    from '../../../metaData';
+import { userStores } from '../../../storageControllers/stores';
 import type {
     InputRelationship, RelationshipData,
-} from '../../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
-import { getDisplayFieldsFromAPI, getBaseConfigHeaders } from './constants';
+} from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import { getDisplayFieldsFromAPI, getBaseConfigHeaders } from '../../Pages/Enrollment/EnrollmentPageDefault/hooks/constants';
 
 const convertAttributes = (attributes, displayFields, options) => displayFields.map((item) => {
     if (item.convertValue) {

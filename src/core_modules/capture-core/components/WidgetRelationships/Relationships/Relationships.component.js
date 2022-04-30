@@ -7,8 +7,7 @@ import { RelationshipTable } from './RelationshipTable';
 
 type Props = {
     relationships: Object,
-    headersByType: Object,
-    onAddRelationship: void,
+    onAddRelationship: () => void,
     ...CssClasses,
 }
 

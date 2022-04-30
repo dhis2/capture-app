@@ -13,7 +13,7 @@ import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 import { EnrollmentQuickActions } from './EnrollmentQuickActions';
-import { WidgetRelationship } from '../../../WidgetRelationship';
+import { WidgetTeisRelationships } from '../../../WidgetRelationships';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -49,7 +49,7 @@ export const EnrollmentPageDefaultPlain = ({
     orgUnitId,
     events,
     enrollmentId,
-    teiRelationships,
+    relationships,
     stages,
     onDelete,
     onAddNew,
@@ -81,9 +81,9 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetEnrollmentComment />
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
-                <WidgetRelationship
-                    title={i18n.t("TEI's Relationships")}
-                    relationships={teiRelationships}
+                <WidgetTeisRelationships
+                    relationships={relationships}
+                    teiId={teiId}
                     onAddRelationship={() => {}}
                 />
                 {!hideWidgets.indicator && (

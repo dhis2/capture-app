@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
-"PO-Revision-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-04-30T08:21:41.788Z\n"
+"PO-Revision-Date: 2022-04-30T08:21:41.788Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -601,9 +601,6 @@ msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgid "Enrollment Dashboard"
 msgstr "Enrollment Dashboard"
 
-msgid "TEI's Relationships"
-msgstr "TEI's Relationships"
-
 msgid "No indicator output for this enrollment yet"
 msgstr "No indicator output for this enrollment yet"
 
@@ -1165,6 +1162,9 @@ msgstr "Person Profile"
 
 msgid "Edit"
 msgstr "Edit"
+
+msgid "TEI's Relationships"
+msgstr "TEI's Relationships"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
