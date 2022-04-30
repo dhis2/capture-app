@@ -243,6 +243,7 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
                 page,
                 pageSize,
                 ouMode: 'ACCESSIBLE',
+                fields: 'trackedEntity,trackedEntityType,orgUnit,attributes,enrollments,',
             };
 
 

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-04-23T06:58:54.198Z\n"
-"PO-Revision-Date: 2022-04-23T06:58:54.198Z\n"
+"POT-Creation-Date: 2022-04-30T07:26:08.854Z\n"
+"PO-Revision-Date: 2022-04-30T07:26:08.854Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -872,6 +872,12 @@ msgstr "Re-enroll"
 
 msgid "all programs"
 msgstr "all programs"
+
+msgid "If none of search results match, you can create new "
+msgstr "If none of search results match, you can create new "
+
+msgid "Create new"
+msgstr "Create new"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
