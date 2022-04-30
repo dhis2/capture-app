@@ -198,11 +198,7 @@ Feature: User interacts with Search page
     And you click search
     And you can see the first page of the results
     When you click the fallback search button
-    Then you navigated to a search page with tracked entity id on the url
-    And you have no program selection
-    And you can see the domain selector with the tetype person selected
-    And you can see the first page of the results
-    And there is not enrollment tag
+    Then you stay in the same page with all program results
 
 # TODO - Commenting out this test and creating a new tech-ticket (TECH-866)
 # Fallback-search relies on history-state, which is not suppported with the hash router - needs rewriting
@@ -233,12 +229,7 @@ Feature: User interacts with Search page
     And you click search
     And you can see the first page of the results
     And you click the fallback search button
-    And you navigated to a search page with tracked entity id on the url
-    And you have no program selection
-    And you can see the first page of the results
-    When you select Child Programme
-    And you are in the search page with the Child Programme being preselected from the url
-    And and you can see the unique identifier input
+    Then you stay in the same page with all program results
 
   Scenario: Fallback search navigates back to main page
     Given you are in the search page with the Child Programme and org unit being preselected from the url
@@ -247,4 +238,4 @@ Feature: User interacts with Search page
     And you click search
     And you click the fallback search button
     When you click the back button
-    Then you should be taken to the main page with org unit preselected
+    Then you should be taken to the main page with org unit and program preselected
