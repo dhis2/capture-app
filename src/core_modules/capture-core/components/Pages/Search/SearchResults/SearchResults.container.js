@@ -37,7 +37,6 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             formId: currentFormId,
             currentSearchTerms,
         },
-        keptFallbackSearchFormValues,
     } = state.searchPage;
 
     const scopeEntity = getCurrentScope(currentSearchScopeId, currentSearchScopeType);
@@ -60,7 +59,6 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         currentFormId,
         currentSearchTerms,
         dataElements,
-        keptFallbackSearchFormValues,
     };
 };
 
