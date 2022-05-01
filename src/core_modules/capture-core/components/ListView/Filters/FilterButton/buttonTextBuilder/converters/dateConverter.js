@@ -4,6 +4,7 @@ import { pipe } from 'capture-core-utils';
 import moment from 'moment';
 import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import type { DateFilterData, AbsoluteDateFilterData } from '../../../../../FiltersForTypes';
+import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
 
 const periods = {
     TODAY: 'TODAY',
@@ -13,7 +14,8 @@ const periods = {
     LAST_WEEK: 'LAST_WEEK',
     LAST_MONTH: 'LAST_MONTH',
     LAST_3_MONTHS: 'LAST_3_MONTHS',
-    CUSTOM_RANGE: 'CUSTOM_RANGE',
+    RELATIVE_RANGE: 'RELATIVE_RANGE',
+    ABSOLUTE_RANGE: 'ABSOLUTE_RANGE',
 };
 
 const translatedPeriods = {
@@ -24,6 +26,7 @@ const translatedPeriods = {
     [periods.LAST_WEEK]: i18n.t('Last week'),
     [periods.LAST_MONTH]: i18n.t('Last month'),
     [periods.LAST_3_MONTHS]: i18n.t('Last 3 months'),
+    [periods.RELATIVE_RANGE]: i18n.t('Relative range'),
 };
 
 const convertToViewValue = (filterValue: string) => pipe(
@@ -61,6 +64,11 @@ export function convertDate(filter: DateFilterData): string {
     if (filter.type === 'ABSOLUTE') {
         return translateAbsoluteDate(filter);
     }
-
-    return translatedPeriods[filter.period];
+    if (filter.period) {
+        return translatedPeriods[filter.period];
+    }
+    if (areRelativeRangeValuesSupported(filter.startBuffer, filter.endBuffer)) {
+        return translatedPeriods[periods.RELATIVE_RANGE];
+    }
+    return '';
 }

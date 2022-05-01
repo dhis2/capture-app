@@ -96,6 +96,8 @@ Scenario: The user creates, updates and deletes a TEI custom working list
 Given you open the main page with Ngelehun and child programme context
 And you set the enrollment status filter to completed
 And you apply the current filter
+And you set the enrollment date to a relative range
+And you apply the current filter
 When you save the list with the name My custom list
 Then the new custom TEI working list is created
 And the enrollment status filter button should show that the completed filter is in effect
@@ -112,3 +114,11 @@ And you see the custom TEI working lists
 And you can load the view with the name Events assigned to me
 When you change the sharing settings
 Then you see the new sharing settings
+
+Scenario: The admin user can optin to use the new Enrollment Dashboard
+Given you open the main page with Ngelehun and child programme context
+And you see the opt in component
+When you opt in to use the new enrollment Dashboard
+Then you see the opt out component
+When you opt out to use the new enrollment Dashboard
+Then you see the opt in component

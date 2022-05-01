@@ -781,6 +781,20 @@ For performance reasons the Capture app caches metadata in the client browser. W
 
 ## Enrollment dashboard
 
+### Enabling the enrollment dashboard
+
+#### Opt in
+
+Enable the enrollment dashboard for a Tracker program for all the users. The dialog is visible for users with program write access. 
+
+![](resources/images/enrollment-dash-opt-in.png)
+
+#### Opt out
+
+Disable the enrollment dashboard for a Tracker program for all the users.
+
+![](resources/images/enrollment-dash-opt-out.png)
+
 ### Reaching the enrollment dashboard via url
 
 You reach the enrollment dashboard either by typing in the address bar of your browser or using the user interface of the capture app.
