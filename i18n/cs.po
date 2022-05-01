@@ -382,13 +382,13 @@ msgid "to"
 msgstr "do"
 
 msgid "Days in the future"
-msgstr ""
+msgstr "Dny v budoucnosti"
 
 msgid "From"
 msgstr "Od"
 
 msgid "Days in the past"
-msgstr ""
+msgstr "Dny v minulosti"
 
 msgid "To"
 msgstr "Do"
@@ -412,10 +412,10 @@ msgid "Last 3 months"
 msgstr "Poslední 3 měsíce"
 
 msgid "Absolute range"
-msgstr ""
+msgstr "Absolutní rozsah"
 
 msgid "Relative range"
-msgstr ""
+msgstr "Relativní rozsah"
 
 msgid "Max"
 msgstr "Max"
@@ -604,22 +604,22 @@ msgid "Write comment"
 msgstr "Napsat komentář"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr ""
+msgstr "Použít nový ovládací panel zápisu pro {{programName}}"
 
 msgid "Opt in for {{programName}}"
-msgstr ""
+msgstr "Přihlásit se do {{programName}}"
 
 msgid "No, cancel"
 msgstr "Ne, zrušit"
 
 msgid "Yes, opt in"
-msgstr ""
+msgstr "Ano, přihlásit se"
 
 msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr ""
+msgstr "Přestat používat nový ovládací panel zápisu pro {{programName}}"
 
 msgid "Opt out for {{programName}}"
-msgstr ""
+msgstr "Odhlásit se z {{programName}}"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance trasované entity s ID \"{{teiId}}\" neexistuje"
@@ -1378,7 +1378,7 @@ msgid "Error saving the enrollment event"
 msgstr "Chyba při ukládání události zápisu"
 
 msgid "Error editing the event, the changes made were not saved"
-msgstr ""
+msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
