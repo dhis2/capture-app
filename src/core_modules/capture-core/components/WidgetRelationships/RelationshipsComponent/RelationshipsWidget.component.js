@@ -5,7 +5,7 @@ import { Widget } from '../../Widget';
 import type { Props } from '../widgetRelationships.types';
 import { Relationships } from './Relationships.component';
 
-export const WidgetRelationships = ({ relationships, title, ...passOnProps }: Props) => {
+export const RelationshipsWidget = ({ relationships, title, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
     const count = relationships.reduce((acc, curr) => { acc += curr.relationshipAttributes.length; return acc; }, 0);
     return (

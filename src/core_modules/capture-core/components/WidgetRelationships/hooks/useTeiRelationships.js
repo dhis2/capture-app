@@ -139,36 +139,38 @@ export const useTeiRelationships = (teiId: string, relationships?: Array<InputRe
     const [relationshipsByType, setRelationshipByType] = useState([]);
 
     const computeData = useCallback(async () => {
-        const groupped = [];
-
         if (!relationships) { return; }
-        // $FlowFixMe
-        for await (const relationship of relationships) {
-            const { relationshipType: typeId, from, to } = relationship;
-            const relationshipType = await getCachedSingleResourceFromKeyAsync(
-                userStores.RELATIONSHIP_TYPES, typeId,
-            ).then(result => result.response);
+        const relationshipTypePromises = relationships
+            .map(rel => getCachedSingleResourceFromKeyAsync(userStores.RELATIONSHIP_TYPES, rel.relationshipType));
 
+        const relationshipTypes = await Promise
+            .all(relationshipTypePromises)
+            .then(results => results.map(res => res.response));
+
+        const relationshipGrouppedByType = relationships.reduce((acc, rel) => {
+            const { relationshipType: typeId, from, to } = rel;
+            const relationshipType = relationshipTypes.find(item => item.id === typeId);
             const metadata = getRelationshipAttributes(
-                relationshipType, teiId, from, to, relationship,
+                relationshipType, teiId, from, to, rel,
             );
-            if (!metadata) { return; }
+            if (!metadata) { return acc; }
             const { relationshipName, displayFields, id, attributes } = metadata;
-            const typeExist = groupped.find(item => item.id === typeId);
-
+            const typeExist = acc.find(item => item.id === typeId);
             if (typeExist) {
                 typeExist.relationshipAttributes.push({ id, attributes });
             } else {
-                groupped.push({
+                acc.push({
                     id: typeId,
                     relationshipName,
                     relationshipAttributes: [{ id, attributes }],
                     headers: displayFields,
                 });
             }
-        }
 
-        setRelationshipByType(groupped);
+            return acc;
+        }, []);
+
+        setRelationshipByType(relationshipGrouppedByType);
     }, [relationships, teiId]);
 
     useEffect(() => {

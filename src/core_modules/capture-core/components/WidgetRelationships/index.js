@@ -1,1 +1,1 @@
-export { WidgetTeisRelationship } from './WidgetTeisRelationships/';
+export { WidgetTeisRelationships } from './WidgetTeisRelationships/';
