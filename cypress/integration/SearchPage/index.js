@@ -378,6 +378,5 @@ Then('you should be taken to the main page with org unit and program preselected
 });
 
 Then('you stay in the same page with all program results', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/search?programId=IpHINAT79UW`);
     cy.get('[data-test="search-results-top"]').contains('Results found in all programs');
 });
