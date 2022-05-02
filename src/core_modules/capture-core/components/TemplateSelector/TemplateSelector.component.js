@@ -34,19 +34,21 @@ const TemplateSelectorPlain = (props: Props) => {
 
     const customTemplates = useMemo(
         () =>
-            templates.sort(({ sortOrder: orderA, displayName: nameA }, { sortOrder: orderB, displayName: nameB }) => {
-                let sortResult;
-                if (orderA && orderB) {
-                    sortResult = orderA - orderB;
-                } else if (orderA) {
-                    sortResult = 1;
-                } else if (orderB) {
-                    sortResult = -1;
-                } else {
-                    sortResult = localeCompareStrings(nameA, nameB);
-                }
-                return sortResult;
-            }),
+            [...templates].sort(
+                ({ sortOrder: orderA, displayName: nameA }, { sortOrder: orderB, displayName: nameB }) => {
+                    let sortResult;
+                    if (orderA && orderB) {
+                        sortResult = orderA - orderB;
+                    } else if (orderA) {
+                        sortResult = 1;
+                    } else if (orderB) {
+                        sortResult = -1;
+                    } else {
+                        sortResult = localeCompareStrings(nameA, nameB);
+                    }
+                    return sortResult;
+                },
+            ),
         [templates],
     );
 

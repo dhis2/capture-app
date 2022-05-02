@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useCallback } from 'react';
 import { Chip } from '@dhis2/ui';
 import type { WorkingListTemplate } from './workingListsBase.types';
 
@@ -12,7 +12,7 @@ export const TemplateSelectorChip = (props: Props) => {
     const { template, onSelectTemplate } = props;
     const { displayName } = template;
 
-    const selectTemplateHandler = React.useCallback(() => {
+    const selectTemplateHandler = useCallback(() => {
         onSelectTemplate(template);
     }, [onSelectTemplate, template]);
 
