@@ -28,7 +28,7 @@ import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLock
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { TopBarActions } from '../../TopBarActions';
 import { WidgetEventComment } from '../../WidgetEventComment';
-import { WidgetRelationship } from '../../WidgetRelationship';
+import { WidgetTeisRelationships } from '../../WidgetRelationships';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 
 const styles = ({ typography }) => ({
@@ -64,8 +64,7 @@ const EnrollmentEditEventPagePain = ({
     teiId,
     enrollmentId,
     programId,
-    teiRelationships,
-    eventRelationships,
+    relationships,
     enrollmentsAsOptions,
     trackedEntityName,
     teiDisplayName,
@@ -188,9 +187,9 @@ const EnrollmentEditEventPagePain = ({
                         <WidgetEventComment itemId={mode} dataEntryId="singleEvent" />
                         <WidgetError error={widgetEffects.errors} />
                         <WidgetWarning warning={widgetEffects.warnings} />
-                        <WidgetRelationship
-                            title={i18n.t("TEI's Relationships")}
-                            relationships={teiRelationships}
+                        <WidgetTeisRelationships
+                            teiId={teiId}
+                            relationships={relationships}
                             onAddRelationship={() => {}}
                         />
                         <WidgetRelationship

@@ -21,6 +21,8 @@ export type ApiDataFilterDateContents = {|
     startDate?: ?string,
     endDate?: ?string,
     period?: ?string,
+    startBuffer: ?number,
+    endBuffer: ?number,
 |};
 
 export type ApiDataFilterDate = { dateFilter: ApiDataFilterDateContents };

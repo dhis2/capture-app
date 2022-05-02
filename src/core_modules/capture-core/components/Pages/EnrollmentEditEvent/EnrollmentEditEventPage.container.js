@@ -9,13 +9,12 @@ import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
-import { useHideWidgetByRuleLocations, useTeiRelationships } from '../Enrollment/EnrollmentPageDefault/hooks';
+import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
-import { useEventsRelationships } from './useEventRelationships';
 
 export const EnrollmentEditEventPage = () => {
     const history = useHistory();
@@ -53,9 +52,6 @@ export const EnrollmentEditEventPage = () => {
             ? (pageStatus = pageStatuses.DEFAULT)
             : (pageStatus = pageStatuses.MISSING_DATA);
     } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
-    const { relationships: inputEventRelationships } = useEventsRelationships(eventId);
-    const { relationships: teiRelationships } = useTeiRelationships(teiId, relationships);
-    const { relationships: eventRelationships } = useTeiRelationships(eventId, inputEventRelationships);
 
     return (
         <EnrollmentEditEventPageComponent
@@ -65,8 +61,7 @@ export const EnrollmentEditEventPage = () => {
             onGoBack={onGoBack}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
-            teiRelationships={teiRelationships}
-            eventRelationships={eventRelationships}
+            relationships={relationships}
             teiId={teiId}
             enrollmentId={enrollmentId}
             enrollmentsAsOptions={enrollmentsAsOptions}

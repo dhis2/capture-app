@@ -109,11 +109,13 @@ Then('you can see the view event page', () => {
 });
 
 Given('you land on a main page with an invalid program id', () => {
-    cy.visit('/#/?orgUnitId=invalid');
+    cy.forceVisit('/#/?programId=invalid');
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?programId=invalid`);
 });
 
 Given('you land on a main page with an invalid org unit id', () => {
-    cy.visit('/#/?programId=invalid');
+    cy.forceVisit('/#/?orgUnitId=invalid');
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=invalid`);
 });
 
 Then('you should see error message', () => {
@@ -137,11 +139,13 @@ When('you click the cancel button', () => {
 });
 
 Given('you land on a new event page with an invalid program id', () => {
-    cy.visit('/#/new?orgUnitId=invalid');
+    cy.forceVisit('/#/new?programId=invalid');
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/new?programId=invalid`);
 });
 
 Given('you land on a new event page with an invalid org unit id', () => {
-    cy.visit('/#/new?programId=invalid');
+    cy.forceVisit('/#/new?orgUnitId=invalid');
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/new?orgUnitId=invalid`);
 });
 
 Given('you land on a new event page with preselected org unit', () => {

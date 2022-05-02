@@ -15,7 +15,7 @@ type Props = {
      ...CssClasses,
 }
 
-export const RelationshipTable = (props: Props) => {
+export const RelationshipsTable = (props: Props) => {
     const { headers, relationshipAttributes } = props;
     function renderHeader() {
         const headerCells = headers

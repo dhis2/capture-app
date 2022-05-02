@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -384,8 +384,14 @@ msgstr "Chọn người dùng"
 msgid "to"
 msgstr "thành"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "Từ"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "Đến"
@@ -408,8 +414,11 @@ msgstr "Tháng trước"
 msgid "Last 3 months"
 msgstr "3 tháng trước"
 
-msgid "Custom range"
-msgstr "Tùy chỉnh khoản"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Lớn nhất"
@@ -596,6 +605,24 @@ msgstr "Bạn không có quyền viết bình luận"
 
 msgid "Write comment"
 msgstr "Viết bình luận"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "Không"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
@@ -1001,9 +1028,6 @@ msgid ""
 "remove the current enrollment."
 msgstr ""
 
-msgid "No, cancel"
-msgstr "Không"
-
 msgid "Yes, delete enrollment."
 msgstr ""
 
@@ -1332,6 +1356,9 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"

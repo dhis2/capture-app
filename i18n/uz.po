@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -387,8 +387,14 @@ msgstr "Фойдаланувчини танланг"
 msgid "to"
 msgstr "га"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "Дан"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "Кимга"
@@ -411,8 +417,11 @@ msgstr "Охирги ой"
 msgid "Last 3 months"
 msgstr "Охирги 3 ой"
 
-msgid "Custom range"
-msgstr "Махсус диапазон"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Максимум"
@@ -599,6 +608,24 @@ msgstr "Фикр ёзиш ҳуқуқига эга эмассиз"
 
 msgid "Write comment"
 msgstr "Фикр ёзинг"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "Йўқ, бекор қилинг"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
@@ -1015,9 +1042,6 @@ msgid ""
 "remove the current enrollment."
 msgstr ""
 
-msgid "No, cancel"
-msgstr "Йўқ, бекор қилинг"
-
 msgid "Yes, delete enrollment."
 msgstr ""
 
@@ -1348,6 +1372,9 @@ msgid "Error saving enrollment"
 msgstr "Қайдни сақлашда хатолик юзага келди"
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"

@@ -3,12 +3,11 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum, spacers, colors, Button } from '@dhis2/ui';
-import { RelationshipTable } from './RelationshipTable';
+import { RelationshipsTable } from './RelationshipsTable.component';
 
 type Props = {
     relationships: Object,
-    headersByType: Object,
-    onAddRelationship: void,
+    onAddRelationship: () => void,
     ...CssClasses,
 }
 
@@ -37,7 +36,7 @@ const RelationshipsPlain = ({ relationships, classes, onAddRelationship }: Props
                 const { relationshipName, id, ...passOnProps } = relationship;
                 return (<div key={id} className={classes.wrapper}>
                     <div className={classes.title} >{relationshipName}</div>
-                    <RelationshipTable {...passOnProps} />
+                    <RelationshipsTable {...passOnProps} />
                 </div>);
             }) : null
         }

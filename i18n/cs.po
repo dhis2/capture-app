@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -381,8 +381,14 @@ msgstr "Vybrat uživatele"
 msgid "to"
 msgstr "do"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "Od"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "Do"
@@ -405,8 +411,11 @@ msgstr "Minulý měsíc"
 msgid "Last 3 months"
 msgstr "Poslední 3 měsíce"
 
-msgid "Custom range"
-msgstr "Vlastní rozsah"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
@@ -593,6 +602,24 @@ msgstr "Nemáte přístup k psaní komentářů"
 
 msgid "Write comment"
 msgstr "Napsat komentář"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "Ne, zrušit"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance trasované entity s ID \"{{teiId}}\" neexistuje"
@@ -1005,9 +1032,6 @@ msgstr ""
 "Opravdu chcete tento zápis smazat? Tím trvale odstraníte aktuální "
 "registraci."
 
-msgid "No, cancel"
-msgstr "Ne, zrušit"
-
 msgid "Yes, delete enrollment."
 msgstr "Ano, smazat zápis."
 
@@ -1352,6 +1376,9 @@ msgstr "Při ukládání zápisu došlo k chybě"
 
 msgid "Error saving the enrollment event"
 msgstr "Chyba při ukládání události zápisu"
+
+msgid "Error editing the event, the changes made were not saved"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
