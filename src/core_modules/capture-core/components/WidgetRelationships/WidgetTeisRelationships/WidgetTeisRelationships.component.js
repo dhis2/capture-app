@@ -1,12 +1,20 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useTeiRelationships } from '../hooks/useTeiRelationships';
+import { useRelationships } from '../hooks/useRelationships';
 import { RelationshipsWidget } from '../RelationshipsComponent';
-import type { WidgetTeisProps } from '../widgetRelationships.types';
+import type { InputRelationship } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
-export const WidgetTeisRelationships = ({ relationships, teiId, onAddRelationship }: WidgetTeisProps) => {
-    const { relationships: teiRelationships } = useTeiRelationships(teiId, relationships);
+
+type Props = {|
+    relationships: Array<InputRelationship>,
+    onAddRelationship: () => void,
+    teiId: string,
+    ...CssClasses,
+|};
+
+export const WidgetTeisRelationships = ({ relationships, teiId, onAddRelationship }: Props) => {
+    const { relationships: teiRelationships } = useRelationships(teiId, relationships);
 
     return (
         <RelationshipsWidget

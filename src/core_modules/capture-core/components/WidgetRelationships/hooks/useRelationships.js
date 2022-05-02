@@ -135,7 +135,7 @@ const getRelationshipAttributes = (
 };
 
 
-export const useTeiRelationships = (targetId: string, relationships?: Array<InputRelationship>) => {
+export const useRelationships = (targetId: string, relationships?: Array<InputRelationship>) => {
     const [relationshipsByType, setRelationshipByType] = useState([]);
 
     const computeData = useCallback(async () => {

@@ -2,8 +2,15 @@
 import React, { useState, useCallback } from 'react';
 import { Chip } from '@dhis2/ui';
 import { Widget } from '../../Widget';
-import type { Props } from '../widgetRelationships.types';
 import { Relationships } from './Relationships.component';
+import type { OutputRelationship } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+
+type Props = {|
+    relationships: Array<OutputRelationship>,
+    title: string,
+    onAddRelationship: () => void,
+    ...CssClasses,
+|}
 
 export const RelationshipsWidget = ({ relationships, title, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);

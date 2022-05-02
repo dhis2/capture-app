@@ -1,5 +1,1 @@
-import { WidgetTeisRelationships } from './WidgetTeisRelationships.component';
-
-export {
-    WidgetTeisRelationships,
-};
+export { WidgetTeisRelationships } from './WidgetTeisRelationships.component';
