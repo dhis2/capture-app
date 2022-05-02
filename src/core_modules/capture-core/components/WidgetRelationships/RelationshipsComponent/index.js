@@ -1,5 +1,2 @@
-import { RelationshipsWidget } from './RelationshipsWidget.component';
+export { RelationshipsWidget } from './RelationshipsWidget.component';
 
-export {
-    RelationshipsWidget,
-};

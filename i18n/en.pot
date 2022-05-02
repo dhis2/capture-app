@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-04-30T08:21:41.788Z\n"
-"PO-Revision-Date: 2022-04-30T08:21:41.788Z\n"
+"POT-Creation-Date: 2022-05-02T08:15:29.467Z\n"
+"PO-Revision-Date: 2022-05-02T08:15:29.467Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1186,6 +1186,9 @@ msgstr "Person Profile"
 
 msgid "Edit"
 msgstr "Edit"
+
+msgid "Event's Relationships"
+msgstr "Event's Relationships"
 
 msgid "TEI's Relationships"
 msgstr "TEI's Relationships"

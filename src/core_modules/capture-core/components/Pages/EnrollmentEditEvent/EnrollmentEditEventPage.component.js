@@ -28,7 +28,7 @@ import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLock
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { TopBarActions } from '../../TopBarActions';
 import { WidgetEventComment } from '../../WidgetEventComment';
-import { WidgetTeisRelationships } from '../../WidgetRelationships';
+import { WidgetTeisRelationships, WidgetEventsRelationships } from '../../WidgetRelationships';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 
 const styles = ({ typography }) => ({
@@ -62,6 +62,7 @@ const EnrollmentEditEventPagePain = ({
     mode,
     programStage,
     teiId,
+    eventId,
     enrollmentId,
     programId,
     relationships,
@@ -190,6 +191,10 @@ const EnrollmentEditEventPagePain = ({
                         <WidgetTeisRelationships
                             teiId={teiId}
                             relationships={relationships}
+                            onAddRelationship={() => {}}
+                        />
+                        <WidgetEventsRelationships
+                            eventId={eventId}
                             onAddRelationship={() => {}}
                         />
                         {!hideWidgets.feedback && (

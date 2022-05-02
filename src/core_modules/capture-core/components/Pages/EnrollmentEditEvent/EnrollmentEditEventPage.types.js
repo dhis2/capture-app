@@ -8,6 +8,7 @@ export type PlainProps = {|
     widgetEffects: WidgetEffects,
     hideWidgets: HideWidgets,
     teiId: string,
+    eventId: string,
     enrollmentId: string,
     programId: string,
     mode: string,

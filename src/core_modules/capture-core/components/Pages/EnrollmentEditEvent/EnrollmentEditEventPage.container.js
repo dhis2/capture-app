@@ -63,6 +63,7 @@ export const EnrollmentEditEventPage = () => {
             hideWidgets={hideWidgets}
             relationships={relationships}
             teiId={teiId}
+            eventId={eventId}
             enrollmentId={enrollmentId}
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}
