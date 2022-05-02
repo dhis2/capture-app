@@ -17,6 +17,7 @@ declare type D2 = {
     },
     currentUser: {
         authorities: Set<string>,
+        userRoles: Array<string>,
         id: string,
     },
 };

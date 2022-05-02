@@ -1,7 +1,6 @@
 // @flow
-import type {
-    OutputEffects,
-} from 'capture-core-utils/rulesEngine';
+import { getD2 } from 'capture-core/d2/d2Instance';
+import type { OutputEffects } from 'capture-core-utils/rulesEngine';
 import { rulesEngine } from './rulesEngine';
 import type { DataElement, ProgramStage } from '../metaData';
 import { constantsStore } from '../metaDataMemoryStores/constants/constants.store';
@@ -125,7 +124,7 @@ const getApplicableRuleEffects = ({
         selectedEnrollment: enrollmentData,
         selectedEntity: attributeValues,
         selectedOrgUnit: orgUnit,
-        selectedUserRoles: [],
+        selectedUserRoles: getD2().currentUser.userRoles,
         optionSets,
     });
 

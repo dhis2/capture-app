@@ -10,6 +10,7 @@ import type {
     EventsData,
     DataElements,
 } from 'capture-core-utils/rulesEngine';
+import { getD2 } from 'capture-core/d2/d2Instance';
 import { rulesEngine } from '../../../../rules/rulesEngine';
 import type { RenderFoundation } from '../../../../metaData';
 import { updateRulesEffects, postProcessRulesEffects, buildEffectsHierarchy } from '../../../../rules';
@@ -73,7 +74,7 @@ export const getRulesActionsForTEI = ({
         selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData),
         selectedEntity: teiValues,
         selectedOrgUnit: orgUnit,
-        selectedUserRoles: [],
+        selectedUserRoles: getD2().currentUser.userRoles,
         optionSets,
     });
     return getRulesActions(effects, foundation, formId);
