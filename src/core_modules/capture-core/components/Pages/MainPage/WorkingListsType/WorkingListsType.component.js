@@ -12,11 +12,14 @@ export const WorkingListsType = ({ programId, orgUnitId }: Props) => {
         return <EventWorkingListsInit programId={programId} orgUnitId={orgUnitId} />;
     }
 
-    return (
-        <>
-            <OptIn programId={programId} />
-            <TeiWorkingLists programId={programId} orgUnitId={orgUnitId} />
-            <OptOut programId={programId} />
-        </>
-    );
+    if (programType === programTypes.TRACKER_PROGRAM) {
+        return (
+            <>
+                <OptIn programId={programId} />
+                <TeiWorkingLists programId={programId} orgUnitId={orgUnitId} />
+                <OptOut programId={programId} />
+            </>
+        );
+    }
+    return null;
 };

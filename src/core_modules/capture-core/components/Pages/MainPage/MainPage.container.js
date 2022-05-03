@@ -19,20 +19,16 @@ const mapStateToProps = (state: ReduxState) => ({
 const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { all } = useLocationQuery();
+    const { all, programId, orgUnitId } = useLocationQuery();
     const showAllAccessible = all !== undefined;
 
     const {
         currentSelectionsComplete,
-        programId,
-        orgUnitId,
         categories,
         selectedCategories,
     } = useSelector(
         ({ currentSelections }) => ({
             currentSelectionsComplete: currentSelections.complete,
-            programId: currentSelections.programId,
-            orgUnitId: currentSelections.orgUnitId,
             categories: currentSelections.categories,
             selectedCategories: currentSelections.categoriesMeta,
         }),
@@ -47,7 +43,9 @@ const MainPageContainer = () => {
         .push(`/?${buildUrlQueryString({ programId })}&all`);
 
     const MainPageStatus = useMemo(() => {
-        const selectedProgram = programId && programCollection.get(programId);
+        if (!programId) return MainPageStatuses.DEFAULT;
+
+        const selectedProgram = programCollection.get(programId);
         if (selectedProgram?.categoryCombination) {
             if (!categories) return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             const programCategories = Array.from(selectedProgram.categoryCombination.categories.values());
@@ -63,9 +61,9 @@ const MainPageContainer = () => {
             return MainPageStatuses.SHOW_WORKING_LIST;
         }
 
-        if (currentSelectionsComplete || (programId && showAllAccessible)) {
+        if (currentSelectionsComplete || showAllAccessible) {
             return MainPageStatuses.SHOW_WORKING_LIST;
-        } else if (programId && !orgUnitId) {
+        } else if (!orgUnitId) {
             return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
         }
         return MainPageStatuses.DEFAULT;

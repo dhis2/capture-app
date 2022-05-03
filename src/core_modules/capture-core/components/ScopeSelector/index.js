@@ -2,6 +2,7 @@
 export {
     scopeSelectorActionTypes,
     setCategoryOptionFromScopeSelector,
+    setOrgUnitFromScopeSelector,
     resetCategoryOptionFromScopeSelector,
     resetAllCategoryOptionsFromScopeSelector,
 } from './ScopeSelector.actions';

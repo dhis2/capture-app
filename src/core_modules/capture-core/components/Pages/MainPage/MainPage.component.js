@@ -15,6 +15,7 @@ import {
     useResetProgramId,
     useResetOrgUnitId,
     setCategoryOptionFromScopeSelector,
+    setOrgUnitFromScopeSelector,
     resetCategoryOptionFromScopeSelector,
     resetAllCategoryOptionsFromScopeSelector,
 } from '../../ScopeSelector';
@@ -56,6 +57,14 @@ const MainPagePlain = ({
         dispatch(resetAllCategoryOptionsFromScopeSelector());
     }, [dispatch]);
 
+    const dispatchOnSetOrgUnit = useCallback(
+        (id: string) => {
+            setOrgUnitId(id);
+            dispatch(setOrgUnitFromScopeSelector(id));
+        },
+        [dispatch, setOrgUnitId],
+    );
+
     return (
         <>
             <ScopeSelector
@@ -63,7 +72,7 @@ const MainPagePlain = ({
                 selectedOrgUnitId={orgUnitId}
                 selectedCategories={selectedCategories}
                 onSetProgramId={id => setProgramId(id)}
-                onSetOrgUnit={id => setOrgUnitId(id)}
+                onSetOrgUnit={id => dispatchOnSetOrgUnit(id)}
                 onResetProgramId={() => resetProgramId()}
                 onResetOrgUnitId={() => resetOrgUnitId()}
                 onSetCategoryOption={dispatchOnSetCategoryOption}
