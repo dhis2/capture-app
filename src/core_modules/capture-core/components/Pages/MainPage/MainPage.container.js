@@ -27,12 +27,14 @@ const MainPageContainer = () => {
         programId,
         orgUnitId,
         categories,
+        selectedCategories,
     } = useSelector(
         ({ currentSelections }) => ({
             currentSelectionsComplete: currentSelections.complete,
             programId: currentSelections.programId,
             orgUnitId: currentSelections.orgUnitId,
             categories: currentSelections.categories,
+            selectedCategories: currentSelections.categoriesMeta,
         }),
         shallowEqual,
     );
@@ -77,6 +79,7 @@ const MainPageContainer = () => {
                 programId={programId}
                 orgUnitId={orgUnitId}
                 setShowAccessible={setShowAccessible}
+                selectedCategories={selectedCategories}
             />
         </OrgUnitFetcher>
     );

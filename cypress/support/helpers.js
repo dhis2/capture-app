@@ -20,7 +20,7 @@ Cypress.Commands.add('loginThroughForm', (username = 'dhis2Username', password =
         cy.get('form').submit();
     });
 
-    cy.get('[data-test="locked-selector"]', { timeout: 60000 })
+    cy.get('[data-test="scope-selector"]', { timeout: 60000 })
         .should('exist');
 });
 
