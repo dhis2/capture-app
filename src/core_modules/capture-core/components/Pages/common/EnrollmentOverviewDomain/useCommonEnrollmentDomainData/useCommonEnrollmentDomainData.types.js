@@ -71,7 +71,7 @@ export type EnrollmentRelationshipData = {|
     enrollment: EnrollmentData
 |}
 
-export type RelationshipData = TEIRelationshipData | EventRelationshipData | EnrollmentRelationshipData
+export type RelationshipData = TEIRelationshipData | EventRelationshipData
 
 export type InputRelationship = {|
     relationshipType: string,
@@ -85,7 +85,7 @@ export type InputRelationship = {|
 export type OutputRelationship = {
     id: string,
     relationshipName: string,
-    relationshipAttributes: Array<{ id: string, attributes: Array<RelationshipData>}>
+    linkedEntityData: Array<{ id: string, attributes: Array<RelationshipData>}>
 }
 
 export type Output = {|

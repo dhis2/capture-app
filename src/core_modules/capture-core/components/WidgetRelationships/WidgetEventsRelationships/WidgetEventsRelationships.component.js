@@ -2,7 +2,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useEventsRelationships } from '../hooks/useEventsRelationships';
-import { useRelationships } from '../hooks/useRelationships';
+import { useLinkedEntityGroups } from '../hooks/useRelationships';
 import { RelationshipsWidget } from '../RelationshipsComponent';
 
 type Props = {|
@@ -12,7 +12,7 @@ type Props = {|
 
 export const WidgetEventsRelationships = ({ eventId, onAddRelationship }: Props) => {
     const { relationships } = useEventsRelationships(eventId);
-    const { relationships: eventsRelationships } = useRelationships(eventId, relationships);
+    const { relationships: eventsRelationships } = useLinkedEntityGroups(eventId, relationships);
 
     return (
         <RelationshipsWidget

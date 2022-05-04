@@ -5,7 +5,7 @@ import { errorCreator } from 'capture-core-utils';
 import {
     getCachedSingleResourceFromKeyAsync,
 } from '../../../MetaDataStoreUtils/MetaDataStoreUtils';
-import { getProgramAndStageFromEvent, getTrackedEntityTypeThrowIfNotFound }
+import { getProgramAndStageFromEvent }
     from '../../../metaData';
 import { userStores } from '../../../storageControllers/stores';
 import type {
@@ -36,106 +36,85 @@ const getDisplayFields = (type) => {
     return displayFields;
 };
 
-
-const getAttributeConstraintsForTEI = (
+const determineLinkedEntity = (
     relationshipType: Object,
     targetId: string,
     from: RelationshipData,
     to: RelationshipData,
 ) => {
     const { fromToName, toFromName, toConstraint, fromConstraint } = relationshipType;
-    // $FlowFixMe
-    if (to.trackedEntity?.trackedEntity === targetId || to.event?.event === targetId) {
-        if (from.event) {
-            // $FlowFixMe
-            const { stage, program } = getProgramAndStageFromEvent({
-                evenId: from.event.event,
-                programId: from.event.program,
-                programStageId: from.event.programStage,
-            });
-            return {
-                id: from.event.event,
-                constraint: fromConstraint,
-                attributes: from.event,
-                relationshipName: toFromName,
-                options: {
-                    ...from.event,
-                    programName: program?.name,
-                    programStageName: stage?.stageForm?.name,
-                },
-            };
-        } else if (from.trackedEntity) {
-            return {
-                id: from.trackedEntity.trackedEntity,
-                constraint: fromConstraint,
-                attributes: from.trackedEntity.attributes,
-                relationshipName: toFromName,
-                options: null,
-            };
-        }
+
+    if ((to.trackedEntity && to.trackedEntity.trackedEntity === targetId) || (to.event && to.event.event === targetId)) {
+        return { side: from, constraint: fromConstraint, relationshipName: toFromName };
     }
-    // $FlowFixMe
-    if (from.trackedEntity?.trackedEntity === targetId || from.event?.event === targetId) {
-        if (to.event) {
-            // $FlowFixMe
-            const { stage, program } = getProgramAndStageFromEvent({
-                evenId: to.event.event,
-                programId: to.event.program,
-                programStageId: to.event.programStage,
-            });
-            return {
-                id: to.event.event,
-                constraint: toConstraint,
-                attributes: to.event,
-                relationshipName: fromToName,
-                options: {
-                    ...to.event,
-                    programName: program?.name,
-                    programStageName: stage?.stageForm?.name,
-                },
-            };
-        } else if (to.trackedEntity) {
-            return {
-                id: to.trackedEntity.trackedEntity,
-                constraint: toConstraint,
-                attributes: to.trackedEntity.attributes,
-                relationshipName: fromToName,
-                options: null,
-            };
-        }
+
+    if ((from.trackedEntity && from.trackedEntity.trackedEntity === targetId) || (from.event && from.event.event === targetId)) {
+        return { side: to, constraint: toConstraint, relationshipName: fromToName };
     }
 
     log.error(errorCreator('Relationship type is not handled')({ relationshipType }));
     return undefined;
 };
 
-const getRelationshipAttributes = (
+
+const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData) => {
+    if (linkedEntity.event) {
+        const { event: eventId, program: programId, programStage, orgUnitName, status } = linkedEntity.event;
+        /*
+         * Needs refactoring when moving to Widget Library.
+         * We will need to either add the program name and program stage name to the relationshipTypes
+         * or do some kind of callback to get the appropriate information.
+         */
+        // $FlowFixMe
+        const { stage, program } = getProgramAndStageFromEvent({
+            eventId,
+            programId,
+            programStageId: programStage,
+        });
+
+        return {
+            id: eventId,
+            attributes: linkedEntity.event,
+            options: {
+                orgUnitName,
+                status,
+                programName: program?.name,
+                programStageName: stage?.stageForm?.name,
+            },
+        };
+    } else if (linkedEntity.trackedEntity) {
+        return {
+            id: linkedEntity.trackedEntity.trackedEntity,
+            attributes: linkedEntity.trackedEntity.attributes,
+            options: { },
+        };
+    }
+    log.error(errorCreator('Relationship type is not handled')({ linkedEntity }));
+    return undefined;
+};
+
+const getLinkedEntityInfo = (
     relationshipType: Object,
     targetId: string,
     from: RelationshipData,
     to: RelationshipData,
-    relationship: Object,
 ) => {
-    const data = getAttributeConstraintsForTEI(relationshipType, targetId, from, to);
-    if (!data) { return undefined; }
-    const { id, relationshipName, constraint, attributes: constraintAttributes, options: constraintOptions } = data;
-    let options = constraintOptions;
-    if (!options) {
-        const tet = getTrackedEntityTypeThrowIfNotFound(constraint.trackedEntityType.id);
-        options = { ...relationship, trackedEntityTypeName: tet.name };
-    }
-    const displayFields = getDisplayFields(constraint.relationshipEntity);
-    const attributes = convertAttributes(constraintAttributes, displayFields, options);
+    const linkedEntityData = determineLinkedEntity(relationshipType, targetId, from, to);
+    if (!linkedEntityData) { return undefined; }
+    const metadata = getAttributeConstraintsForTEI(linkedEntityData.side);
+    if (!metadata) { return undefined; }
+    const { id, attributes, options } = metadata;
+    const displayFields = getDisplayFields(linkedEntityData.constraint.relationshipEntity);
     return {
         id,
-        relationshipName,
-        attributes,
+        relationshipName: linkedEntityData?.relationshipName,
+        attributes: convertAttributes(attributes, displayFields, options),
         displayFields,
     };
 };
 
 
-export const useRelationships = (targetId: string, relationships?: Array<InputRelationship>) => {
+export const useLinkedEntityGroups = (targetId: string, relationships?: Array<InputRelationship>) => {
     const [relationshipsByType, setRelationshipByType] = useState([]);
 
     const computeData = useCallback(async () => {
@@ -147,22 +126,20 @@ export const useRelationships = (targetId: string, relationships?: Array<InputRe
             .all(relationshipTypePromises)
             .then(results => results.map(res => res.response));
 
-        const relationshipGrouppedByType = relationships.reduce((acc, rel) => {
+        const linkedEntityGroups = relationships.reduce((acc, rel) => {
             const { relationshipType: typeId, from, to } = rel;
             const relationshipType = relationshipTypes.find(item => item.id === typeId);
-            const metadata = getRelationshipAttributes(
-                relationshipType, targetId, from, to, rel,
-            );
+            const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to);
             if (!metadata) { return acc; }
             const { relationshipName, displayFields, id, attributes } = metadata;
             const typeExist = acc.find(item => item.id === typeId);
             if (typeExist) {
-                typeExist.relationshipAttributes.push({ id, attributes });
+                typeExist.linkedEntityData.push({ id, attributes });
             } else {
                 acc.push({
                     id: typeId,
                     relationshipName,
-                    relationshipAttributes: [{ id, attributes }],
+                    linkedEntityData: [{ id, attributes }],
                     headers: displayFields,
                 });
             }
@@ -170,7 +147,7 @@ export const useRelationships = (targetId: string, relationships?: Array<InputRe
             return acc;
         }, []);
 
-        setRelationshipByType(relationshipGrouppedByType);
+        setRelationshipByType(linkedEntityGroups);
     }, [relationships, targetId]);
 
     useEffect(() => {

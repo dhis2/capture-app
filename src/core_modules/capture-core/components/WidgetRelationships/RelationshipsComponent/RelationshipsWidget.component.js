@@ -14,7 +14,7 @@ type Props = {|
 
 export const RelationshipsWidget = ({ relationships, title, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    const count = relationships.reduce((acc, curr) => { acc += curr.relationshipAttributes.length; return acc; }, 0);
+    const count = relationships.reduce((acc, curr) => { acc += curr.linkedEntityData.length; return acc; }, 0);
     return (
         <div
             data-test="relationship-widget"
