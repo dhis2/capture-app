@@ -2,7 +2,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useEventsRelationships } from '../hooks/useEventsRelationships';
-import { useLinkedEntityGroups } from '../hooks/useRelationships';
+import { useLinkedEntityGroups } from '../hooks/useLinkedEntityGroups';
 import { RelationshipsWidget } from '../RelationshipsComponent';
 
 type Props = {|
