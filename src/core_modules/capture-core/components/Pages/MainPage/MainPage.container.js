@@ -23,12 +23,10 @@ const MainPageContainer = () => {
     const showAllAccessible = all !== undefined;
 
     const {
-        currentSelectionsComplete,
         categories,
         selectedCategories,
     } = useSelector(
         ({ currentSelections }) => ({
-            currentSelectionsComplete: currentSelections.complete,
             categories: currentSelections.categories,
             selectedCategories: currentSelections.categoriesMeta,
         }),
@@ -44,6 +42,7 @@ const MainPageContainer = () => {
 
     const MainPageStatus = useMemo(() => {
         if (!programId) return MainPageStatuses.DEFAULT;
+        const withoutOrgUnit = () => !orgUnitId && !showAllAccessible;
 
         const selectedProgram = programCollection.get(programId);
         if (selectedProgram?.categoryCombination) {
@@ -54,21 +53,19 @@ const MainPageContainer = () => {
                 return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             }
 
-            if (!orgUnitId && !showAllAccessible) {
+            if (withoutOrgUnit()) {
                 return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
             }
 
             return MainPageStatuses.SHOW_WORKING_LIST;
         }
 
-        if (currentSelectionsComplete || showAllAccessible) {
-            return MainPageStatuses.SHOW_WORKING_LIST;
-        } else if (!orgUnitId) {
+        if (withoutOrgUnit()) {
             return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
         }
-        return MainPageStatuses.DEFAULT;
+        return MainPageStatuses.SHOW_WORKING_LIST;
     },
-    [categories, currentSelectionsComplete, orgUnitId, programId, showAllAccessible]);
+    [categories, orgUnitId, programId, showAllAccessible]);
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
