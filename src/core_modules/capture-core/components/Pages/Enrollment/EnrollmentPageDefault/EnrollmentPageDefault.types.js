@@ -2,7 +2,7 @@
 import type { Program } from 'capture-core/metaData';
 import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
-import type { Event, InputRelationship } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import type { Event, InputRelationship, RelationshipType } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
 export type Props = {|
     program: Program,
@@ -11,6 +11,7 @@ export type Props = {|
     events: ?Array<Event>,
     stages?: Array<Stage>,
     relationships?: Array<InputRelationship>,
+    relationshipTypes?: Array<RelationshipType>,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
     orgUnitId: string,

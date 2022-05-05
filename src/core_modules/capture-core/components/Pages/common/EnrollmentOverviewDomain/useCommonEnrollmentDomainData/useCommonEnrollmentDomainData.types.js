@@ -58,6 +58,7 @@ export type TEIAttribute = {|
 
 export type TEIRelationshipData = {|
     trackedEntity: {
+        trackedEntityType: string,
         trackedEntity: string,
         attributes: Array<TEIAttribute>
     }
@@ -85,7 +86,30 @@ export type InputRelationship = {|
 export type OutputRelationship = {
     id: string,
     relationshipName: string,
-    linkedEntityData: Array<{ id: string, attributes: Array<RelationshipData>}>
+    linkedEntityData: Array<{ id: string, values: Array<RelationshipData>}>
+}
+
+export type RelationshipConstraintDataView = string | {id: string, displayName: string, valueType: string}
+
+export type RelationshipConstraint = {
+    relationshipEntity: string,
+    trackedEntityType?: ?{ id: string },
+    program?: ?{ id: string },
+    programStage?: ?{ id: string },
+    trackerDataView: {
+        attributes: Array<RelationshipConstraintDataView>,
+        dataElements: Array<RelationshipConstraintDataView>,
+    }
+}
+
+export type RelationshipType = {
+    id: string,
+    bidirectional: boolean,
+    displayName: string,
+    fromConstraint: RelationshipConstraint,
+    fromToName: string,
+    toConstraint: RelationshipConstraint,
+    toFromName: string,
 }
 
 export type Output = {|

@@ -18,6 +18,7 @@ import {
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
+import { useRelationshipTypesMetadata } from '../../common/EnrollmentOverviewDomain/useRelationshipTypesMetadata';
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
@@ -80,6 +81,8 @@ export const EnrollmentPageDefault = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
 
+    const relationshipTypes = useRelationshipTypesMetadata(relationships);
+
     if (error) {
         return error.errorComponent;
     }
@@ -94,6 +97,7 @@ export const EnrollmentPageDefault = () => {
             events={enrollment?.events}
             enrollmentId={enrollmentId}
             relationships={relationships}
+            relationshipTypes={relationshipTypes}
             onAddNew={onAddNew}
             onDelete={onDelete}
             onViewAll={onViewAll}

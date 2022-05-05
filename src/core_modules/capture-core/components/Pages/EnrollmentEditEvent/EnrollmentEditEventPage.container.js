@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
+import { useEventsRelationships } from './useEventsRelationships';
 import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
@@ -15,6 +16,7 @@ import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
+import { useRelationshipTypesMetadata } from '../common/EnrollmentOverviewDomain/useRelationshipTypesMetadata';
 
 export const EnrollmentEditEventPage = () => {
     const history = useHistory();
@@ -52,6 +54,9 @@ export const EnrollmentEditEventPage = () => {
             ? (pageStatus = pageStatuses.DEFAULT)
             : (pageStatus = pageStatuses.MISSING_DATA);
     } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
+    const { relationships: eventRelationships } = useEventsRelationships(eventId);
+    const relationshipTypes = useRelationshipTypesMetadata(relationships);
+    const eventRelationshipTypes = useRelationshipTypesMetadata(eventRelationships);
 
     return (
         <EnrollmentEditEventPageComponent
@@ -62,6 +67,8 @@ export const EnrollmentEditEventPage = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             relationships={relationships}
+            eventRelationships={eventRelationships}
+            relationshipTypes={[...relationshipTypes, ...eventRelationshipTypes]}
             teiId={teiId}
             eventId={eventId}
             enrollmentId={enrollmentId}

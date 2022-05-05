@@ -2,54 +2,70 @@
 import { useCallback, useEffect, useState } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import {
-    getCachedSingleResourceFromKeyAsync,
-} from '../../../MetaDataStoreUtils/MetaDataStoreUtils';
-import { getProgramAndStageFromEvent }
+import { getProgramAndStageFromEvent, getTrackedEntityTypeThrowIfNotFound }
     from '../../../metaData';
-import { userStores } from '../../../storageControllers/stores';
 import type {
-    InputRelationship, RelationshipData,
+    InputRelationship,
+    RelationshipType,
+    RelationshipData,
+    TEIAttribute,
+    DataValue,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
-import { getDisplayFieldsFromAPI, getBaseConfigHeaders } from '../../Pages/Enrollment/EnrollmentPageDefault/hooks/constants';
+import { getBaseConfigHeaders, relationshipEntities } from '../../Pages/Enrollment/EnrollmentPageDefault/hooks/constants';
+import { convertServerToClient, convertClientToServer } from '../../../converters';
 
-const convertAttributes = (attributes, displayFields, options) => displayFields.map((item) => {
-    if (item.convertValue) {
+const convertAttributes = (
+    attributes: Array<TEIAttribute> | Array<DataValue>,
+    displayFields: Array<Object>,
+    options: Object,
+): Array<{id: string, value: any}> => displayFields.map((field) => {
+    if (field.convertValue) {
         return {
-            id: item.id,
-            value: item.convertValue(options),
+            id: field.id,
+            value: field.convertValue(options),
         };
     }
-    const attributeItem = Array.isArray(attributes)
-        ? attributes.find(({ attribute }) => attribute === item.id)?.value : attributes[item.id];
+
+    const attributeItem = attributes.find((att) => {
+        if (att.attribute) { return att.attribute === field.id; }
+        if (att.dataElement) { return att.dataElement === field.id; }
+        return undefined;
+    })?.value;
+
     return {
-        id: item.id,
-        value: attributeItem,
+        id: field.id,
+        value: convertClientToServer(convertServerToClient(attributeItem, field.valueType), field.valueType),
     };
 });
 
-const getDisplayFields = (type) => {
-    let displayFields = getDisplayFieldsFromAPI[type];
-    if (!displayFields?.length) {
-        displayFields = getBaseConfigHeaders[type];
+const getDisplayFields = (linkedEntity) => {
+    let displayFields;
+    if (linkedEntity.relationshipEntity === relationshipEntities.TRACKED_ENTITY_INSTANCE) {
+        displayFields = linkedEntity.trackerDataView.attributes;
+    } else if (linkedEntity.relationshipEntity === relationshipEntities.PROGRAM_STAGE_INSTANCE) {
+        displayFields = linkedEntity.trackerDataView.dataElements;
     }
+    if (!displayFields?.length) {
+        displayFields = getBaseConfigHeaders[linkedEntity.relationshipEntity];
+    }
+
     return displayFields;
 };
 
 const determineLinkedEntity = (
-    relationshipType: Object,
+    relationshipType: RelationshipType,
     targetId: string,
     from: RelationshipData,
     to: RelationshipData,
 ) => {
-    const { fromToName, toFromName, toConstraint, fromConstraint } = relationshipType;
+    const { id, fromToName, toFromName, toConstraint, fromConstraint } = relationshipType;
 
     if ((to.trackedEntity && to.trackedEntity.trackedEntity === targetId) || (to.event && to.event.event === targetId)) {
-        return { side: from, constraint: fromConstraint, relationshipName: toFromName };
+        return { side: from, constraint: fromConstraint, relationshipName: toFromName, groupId: `${id}-from` };
     }
 
     if ((from.trackedEntity && from.trackedEntity.trackedEntity === targetId) || (from.event && from.event.event === targetId)) {
-        return { side: to, constraint: toConstraint, relationshipName: fromToName };
+        return { side: to, constraint: toConstraint, relationshipName: fromToName, groupId: `${id}-to` };
     }
 
     log.error(errorCreator('Relationship type is not handled')({ relationshipType }));
@@ -74,7 +90,7 @@ const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData) => {
 
         return {
             id: eventId,
-            attributes: linkedEntity.event,
+            values: linkedEntity.event.dataValues,
             options: {
                 orgUnitName,
                 status,
@@ -83,10 +99,12 @@ const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData) => {
             },
         };
     } else if (linkedEntity.trackedEntity) {
+        const { trackedEntityType, trackedEntity, attributes } = linkedEntity.trackedEntity;
+        const tet = getTrackedEntityTypeThrowIfNotFound(trackedEntityType);
         return {
-            id: linkedEntity.trackedEntity.trackedEntity,
-            attributes: linkedEntity.trackedEntity.attributes,
-            options: { },
+            id: trackedEntity,
+            values: attributes,
+            options: { trackedEntityTypeName: tet.name },
         };
     }
     log.error(errorCreator('Relationship type is not handled')({ linkedEntity }));
@@ -103,52 +121,51 @@ const getLinkedEntityInfo = (
     if (!linkedEntityData) { return undefined; }
     const metadata = getAttributeConstraintsForTEI(linkedEntityData.side);
     if (!metadata) { return undefined; }
-    const { id, attributes, options } = metadata;
-    const displayFields = getDisplayFields(linkedEntityData.constraint.relationshipEntity);
+    const { id, values, options } = metadata;
+    const displayFields = getDisplayFields(linkedEntityData.constraint);
     return {
         id,
-        relationshipName: linkedEntityData?.relationshipName,
-        attributes: convertAttributes(attributes, displayFields, options),
         displayFields,
+        groupId: linkedEntityData.groupId,
+        relationshipName: linkedEntityData?.relationshipName,
+        values: convertAttributes(values, displayFields, options),
     };
 };
 
 
-export const useLinkedEntityGroups = (targetId: string, relationships?: Array<InputRelationship>) => {
+export const useLinkedEntityGroups = (
+    targetId: string,
+    relationshipTypes: Array<Object>,
+    relationships?: Array<InputRelationship>,
+) => {
     const [relationshipsByType, setRelationshipByType] = useState([]);
 
     const computeData = useCallback(async () => {
-        if (!relationships) { return; }
-        const relationshipTypePromises = relationships
-            .map(rel => getCachedSingleResourceFromKeyAsync(userStores.RELATIONSHIP_TYPES, rel.relationshipType));
+        if (relationships?.length && relationshipTypes?.length) {
+            const linkedEntityGroups = relationships.reduce((acc, rel) => {
+                const { relationshipType: typeId, from, to } = rel;
+                const relationshipType = relationshipTypes.find(item => item.id === typeId);
+                const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to);
+                if (!metadata) { return acc; }
+                const { relationshipName, displayFields, id, values, groupId } = metadata;
+                const typeExist = acc.find(item => item.id === groupId);
+                if (typeExist) {
+                    typeExist.linkedEntityData.push({ id, values });
+                } else {
+                    acc.push({
+                        id: groupId,
+                        relationshipName,
+                        linkedEntityData: [{ id, values }],
+                        headers: displayFields,
+                    });
+                }
 
-        const relationshipTypes = await Promise
-            .all(relationshipTypePromises)
-            .then(results => results.map(res => res.response));
+                return acc;
+            }, []);
 
-        const linkedEntityGroups = relationships.reduce((acc, rel) => {
-            const { relationshipType: typeId, from, to } = rel;
-            const relationshipType = relationshipTypes.find(item => item.id === typeId);
-            const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to);
-            if (!metadata) { return acc; }
-            const { relationshipName, displayFields, id, attributes } = metadata;
-            const typeExist = acc.find(item => item.id === typeId);
-            if (typeExist) {
-                typeExist.linkedEntityData.push({ id, attributes });
-            } else {
-                acc.push({
-                    id: typeId,
-                    relationshipName,
-                    linkedEntityData: [{ id, attributes }],
-                    headers: displayFields,
-                });
-            }
-
-            return acc;
-        }, []);
-
-        setRelationshipByType(linkedEntityGroups);
-    }, [relationships, targetId]);
+            setRelationshipByType(linkedEntityGroups);
+        }
+    }, [relationships, relationshipTypes, targetId]);
 
     useEffect(() => {
         computeData();

@@ -50,6 +50,7 @@ export const EnrollmentPageDefaultPlain = ({
     events,
     enrollmentId,
     relationships,
+    relationshipTypes,
     stages,
     onDelete,
     onAddNew,
@@ -83,6 +84,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetWarning warning={widgetEffects?.warnings} />
                 <WidgetTeisRelationships
                     relationships={relationships}
+                    relationshipTypes={relationshipTypes}
                     teiId={teiId}
                     onAddRelationship={() => {}}
                 />

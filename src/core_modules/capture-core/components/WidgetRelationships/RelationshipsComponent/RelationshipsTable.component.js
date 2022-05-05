@@ -24,7 +24,7 @@ export const RelationshipsTable = (props: Props) => {
                     key={column.id}
                     name={column.id}
                 >
-                    {column.label}
+                    {column.displayName}
                 </DataTableColumnHeader>
             ));
         return (
@@ -37,12 +37,12 @@ export const RelationshipsTable = (props: Props) => {
         if (!linkedEntityData) {
             return null;
         }
-        return linkedEntityData.map(({ id: teiId, attributes }) => (
-            <DataTableRow key={teiId}>
+        return linkedEntityData.map(({ id: targetId, values }) => (
+            <DataTableRow key={targetId}>
                 {headers.map(({ id }) => {
-                    const attribute = attributes.find(att => att.id === id);
+                    const entity = values.find(item => item.id === id);
                     return (<DataTableCell key={id}>
-                        {attribute?.value}
+                        {entity?.value}
                     </DataTableCell>
                     );
                 })}
