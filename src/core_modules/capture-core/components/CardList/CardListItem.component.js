@@ -126,7 +126,6 @@ const CardListItemIndex = ({
             </div>
         );
     };
-    console.log({ item });
     const enrollments = item.tei?.enrollments ?? [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitName, enrolledAt } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
