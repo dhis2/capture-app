@@ -71,8 +71,8 @@ type OptionContainer = {
 
 class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
     static getFilteredOptions(options: Array<VirtualizedOptionConfig>, filterValue: any): Array<VirtualizedOptionConfig> {
-        const filterValueLC = filterValue.toLowerCase();
-        return (options && options.filter(o => o.label.toLowerCase().indexOf(filterValueLC) > -1)) || [];
+        const filterValueLC = filterValue.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
+        return (options && options.filter(o => o.label.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().indexOf(filterValueLC) > -1)) || [];
     }
 
     handleChange: (selectedItem: VirtualizedOptionConfig) => void;
