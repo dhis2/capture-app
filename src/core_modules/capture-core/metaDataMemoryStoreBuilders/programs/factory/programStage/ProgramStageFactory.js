@@ -115,6 +115,7 @@ export class ProgramStageFactory {
         const stage = new ProgramStage((_stage) => {
             _stage.id = cachedProgramStage.id;
             _stage.name = cachedProgramStage.displayName;
+            _stage.untranslatedName = cachedProgramStage.name;
             _stage.relationshipTypes = this.relationshipTypesFactory.build(
                 programId,
                 cachedProgramStage.id,

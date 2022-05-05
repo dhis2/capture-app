@@ -52,6 +52,10 @@ export const getApplicableRuleEffectsForEventProgram = ({
         return [];
     }
 
+    if (currentEvent) {
+        currentEvent.programStageName = program.stage.untranslatedName;
+    }
+
     return buildEffectsHierarchy(
         getApplicableRuleEffects({
             orgUnit,
@@ -81,6 +85,10 @@ flattenedResult: boolean = false,
     );
     if (!programRules.length) {
         return [];
+    }
+
+    if (currentEvent) {
+        currentEvent.programStageName = program.stages.get(currentEvent.programStageId)?.untranslatedName;
     }
 
     const effects = getApplicableRuleEffects({
