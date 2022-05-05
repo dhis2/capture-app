@@ -1,3 +1,10 @@
+## [100.3.1](https://github.com/dhis2/capture-app/compare/v100.3.0...v100.3.1) (2022-05-05)
+
+
+### Bug Fixes
+
+* initial CD test ([cea359b](https://github.com/dhis2/capture-app/commit/cea359b64dba0388bfa46872c7343479e9ee76a6))
+
 # [100.3.0](https://github.com/dhis2/capture-app/compare/v100.2.4...v100.3.0) (2022-05-05)
 
 
