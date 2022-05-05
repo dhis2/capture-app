@@ -12,6 +12,7 @@ export const DataEntry = ({
     onCancel,
     onDisable,
     clientAttributesWithSubvalues,
+    userRoles,
     modalState,
     trackedEntityInstanceId,
     onSaveSuccessActionType,
@@ -27,6 +28,7 @@ export const DataEntry = ({
         programAPI,
         orgUnitId,
         clientAttributesWithSubvalues,
+        userRoles,
         dataEntryId,
         itemId,
     });
