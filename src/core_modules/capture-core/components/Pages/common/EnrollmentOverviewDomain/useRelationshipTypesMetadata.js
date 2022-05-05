@@ -35,7 +35,6 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
         };
 
         const mergeConstraintDataValues = (constraint, dataValues) => {
-            if (!dataValues) { return constraint; }
             if (constraint.relationshipEntity === 'TRACKED_ENTITY_INSTANCE') {
                 if (!constraint.trackerDataView.attributes.every(att => att.valueType)) {
                     return {
@@ -60,6 +59,7 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
                     };
                 }
             }
+            return constraint;
         };
 
         const [fromDataValues, toDataValues] = await Promise
