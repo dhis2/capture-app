@@ -7,7 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { NewPageTopBar } from './TopBar';
+import { TopBar } from './TopBar';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { NEW_TEI_DATA_ENTRY_ID, newPageStatuses } from './NewPage.constants';
@@ -66,7 +66,7 @@ const NewPagePlain = ({
     const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
 
     return (<>
-        <NewPageTopBar
+        <TopBar
             orgUnitId={orgUnitId}
             programId={programId}
             isUserInteractionInProgress={isUserInteractionInProgress}

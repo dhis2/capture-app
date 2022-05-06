@@ -25,7 +25,7 @@ type TopBarProps = {
     isUserInteractionInProgress: boolean,
 };
 
-export const NewPageTopBar = ({
+export const TopBar = ({
     programId,
     orgUnitId,
     teiId,
