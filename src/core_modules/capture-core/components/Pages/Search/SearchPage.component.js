@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { compose } from 'redux';
 import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
@@ -15,9 +15,21 @@ import { CircularLoader,
 } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
-import { LockedSelector } from '../../LockedSelector';
+import {
+    ScopeSelector,
+    useSetProgramId,
+    useSetOrgUnitId,
+    useResetProgramId,
+    useResetOrgUnitId,
+    setCategoryOptionFromScopeSelector,
+    resetCategoryOptionFromScopeSelector,
+    resetAllCategoryOptionsFromScopeSelector,
+} from '../../ScopeSelector';
+import { TopBarActions } from '../../TopBarActions';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
@@ -82,11 +94,34 @@ const Index = ({
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
+    programId,
+    orgUnitId,
+    selectedCategories,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
     const titleText = useScopeTitleText(selectedSearchScopeId);
     const fallbackTriggered = useFallbackTriggered();
+    const dispatch = useDispatch();
+    const { setProgramId } = useSetProgramId();
+    const { setOrgUnitId } = useSetOrgUnitId();
+    const { resetProgramId } = useResetProgramId();
+    const { resetOrgUnitId } = useResetOrgUnitId();
+    const dispatchOnSetCategoryOption = useCallback(
+        (categoryOption: Object, categoryId: string) => {
+            dispatch(setCategoryOptionFromScopeSelector(categoryId, categoryOption));
+        },
+        [dispatch],
+    );
+    const dispatchOnResetCategoryOption = useCallback(
+        (categoryId: string) => {
+            dispatch(resetCategoryOptionFromScopeSelector(categoryId));
+        },
+        [dispatch],
+    );
+    const dispatchOnResetAllCategoryOptions = useCallback(() => {
+        dispatch(resetAllCategoryOptionsFromScopeSelector());
+    }, [dispatch]);
 
     useEffect(() => {
         const scopeId = preselectedProgramId || trackedEntityTypeId;
@@ -135,7 +170,23 @@ const Index = ({
     };
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-            <LockedSelector pageToPush="search" />
+
+            <ScopeSelector
+                selectedProgramId={programId}
+                selectedOrgUnitId={orgUnitId}
+                selectedCategories={selectedCategories}
+                onSetProgramId={id => setProgramId(id)}
+                onSetOrgUnit={id => setOrgUnitId(id)}
+                onResetProgramId={() => resetProgramId()}
+                onResetOrgUnitId={() => resetOrgUnitId()}
+                onSetCategoryOption={dispatchOnSetCategoryOption}
+                onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
+                onResetCategoryOption={dispatchOnResetCategoryOption}
+            >
+                <Grid item xs={12} sm={6} md={6} lg={2}>
+                    <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />
+                </Grid>
+            </ScopeSelector>
             <div data-test="search-page-content" className={classes.container} >
                 <Button
                     dataTest="back-button"
