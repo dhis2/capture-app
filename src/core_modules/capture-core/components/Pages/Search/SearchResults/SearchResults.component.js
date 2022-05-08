@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useContext } from 'react';
+import React, { type ComponentType, useContext, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
@@ -19,6 +19,7 @@ import {
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
 import { getUrlQueries } from '../../../../utils/url';
+import { Widget } from '../../../Widget';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -145,6 +146,8 @@ export const SearchResultsIndex = ({
 
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
+    const [isTopResultsOpen, setTopResultsOpen] = useState(true);
+    const [isOtherResultsOpen, setOtherResultsOpen] = useState(true);
     const history = useHistory();
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
@@ -196,33 +199,50 @@ export const SearchResultsIndex = ({
     const { trackedEntityName } = useScopeInfo(currentSearchScopeId);
 
     return (<>
-        <SearchResultsHeader currentSearchTerms={currentSearchTerms} currentSearchScopeName={currentSearchScopeName} />
-        <CardList
-            noItemsText={i18n.t('No results found')}
-            currentSearchScopeName={currentSearchScopeName}
-            currentProgramId={currentProgramId}
-            items={searchResults}
-            dataElements={dataElements}
-            renderCustomCardActions={({ item, enrollmentType, programName }) => (
-                <CardListButtons
-                    programName={programName}
-                    currentSearchScopeId={currentSearchScopeId}
-                    currentSearchScopeType={currentSearchScopeType}
-                    id={item.id}
-                    orgUnitId={item.tei.orgUnit}
-                    enrollmentType={enrollmentType}
-                />
-            )}
-        />
-        <div className={classes.pagination}>
-            <SearchPagination
-                nextPageButtonDisabled={searchResults.length < resultsPageSize}
-                onChangePage={newPage => handlePageChange(newPage)}
-                currentPage={currentPage}
+        <Widget
+            header={<SearchResultsHeader
+                currentSearchTerms={currentSearchTerms}
+                currentSearchScopeName={currentSearchScopeName}
             />
-        </div>
-        {otherResults !== undefined && <>
-            <SearchResultsHeader currentSearchScopeName={i18n.t('all programs')} />
+            }
+            borderless
+            open={isTopResultsOpen}
+            onClose={() => setTopResultsOpen(false)}
+            onOpen={() => setTopResultsOpen(true)}
+        >
+            <CardList
+                noItemsText={i18n.t('No results found')}
+                currentSearchScopeName={currentSearchScopeName}
+                currentProgramId={currentProgramId}
+                items={searchResults}
+                dataElements={dataElements}
+                renderCustomCardActions={({ item, enrollmentType, programName }) => (
+                    <CardListButtons
+                        programName={programName}
+                        currentSearchScopeId={currentSearchScopeId}
+                        currentSearchScopeType={currentSearchScopeType}
+                        id={item.id}
+                        orgUnitId={item.tei.orgUnit}
+                        enrollmentType={enrollmentType}
+                    />
+                )}
+            />
+            <div className={classes.pagination}>
+                <SearchPagination
+                    nextPageButtonDisabled={searchResults.length < resultsPageSize}
+                    onChangePage={newPage => handlePageChange(newPage)}
+                    currentPage={currentPage}
+                />
+            </div>
+        </Widget>
+
+        {otherResults !== undefined && <Widget
+            header={<SearchResultsHeader currentSearchScopeName={i18n.t('all programs')} />}
+            borderless
+            open={isOtherResultsOpen}
+            onClose={() => setOtherResultsOpen(false)}
+            onOpen={() => setOtherResultsOpen(true)}
+        >
             <CardList
                 noItemsText={i18n.t('No results found')}
                 currentSearchScopeName={currentSearchScopeName}
@@ -253,7 +273,7 @@ export const SearchResultsIndex = ({
                     {i18n.t('Create new')}
                 </Button>
             </div>
-        </>}
+        </Widget>}
         {
             currentSearchScopeType === searchScopes.PROGRAM && !fallbackTriggered && otherResults === undefined &&
             <div className={classes.bottom}>

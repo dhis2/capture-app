@@ -54,6 +54,8 @@ export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
         ...state,
         currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
+        otherResults: undefined,
+        otherCurrentPage: 0,
     }),
 
     [searchPageActionTypes.FALLBACK_SEARCH]: (state, { payload: { fallbackFormValues, trackedEntityTypeId } }) => ({
