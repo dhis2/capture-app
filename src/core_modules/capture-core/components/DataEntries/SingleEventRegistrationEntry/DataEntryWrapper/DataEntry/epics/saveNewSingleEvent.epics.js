@@ -32,6 +32,6 @@ export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: 
         map(() => {
             const { programId, orgUnitId } = deriveURLParamsFromLocation();
 
-            history.push(`/${buildUrlQueryString({ programId, orgUnitId })}`);
+            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();
         }));
