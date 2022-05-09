@@ -31,7 +31,6 @@ export type ContainerProps = $ReadOnly<{|
   ready: boolean,
   programId: string,
   orgUnitId: string,
-  selectedCategories: any,
 |}
 >
 

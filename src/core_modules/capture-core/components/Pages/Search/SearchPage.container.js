@@ -89,9 +89,6 @@ export const SearchPage: ComponentType<{||}> = () => {
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
     const ready: boolean =
       useSelector(({ activePage }) => !activePage.isLoading);
-    const { selectedCategories } = useSelector(({ currentSelections }) => ({
-        selectedCategories: currentSelections.categoriesMeta,
-    }));
 
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
@@ -116,6 +113,5 @@ export const SearchPage: ComponentType<{||}> = () => {
             ready={ready}
             orgUnitId={orgUnitId}
             programId={programId}
-            selectedCategories={selectedCategories}
         />);
 };

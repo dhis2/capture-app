@@ -84,7 +84,6 @@ const Index = ({
     trackedEntityTypeId,
     programId,
     orgUnitId,
-    selectedCategories,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
@@ -139,7 +138,7 @@ const Index = ({
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
 
-            <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
+            <TopBar programId={programId} orgUnitId={orgUnitId} />
             <div data-test="search-page-content" className={classes.container} >
                 <Button
                     dataTest="back-button"
