@@ -12,5 +12,10 @@ export const useResetOrgUnitId = () => {
         history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
     };
 
-    return { resetOrgUnitId };
+    const resetOrgUnitIdAndViewEventId = (pageToPush: string = pathname) => {
+        const { orgUnitId, viewEventId, ...restOfQueries } = getUrlQueries();
+        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+    };
+
+    return { resetOrgUnitId, resetOrgUnitIdAndViewEventId };
 };

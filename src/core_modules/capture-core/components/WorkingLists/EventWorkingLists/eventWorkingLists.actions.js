@@ -15,8 +15,8 @@ export const deleteEventSuccess =
 export const deleteEventError =
     () => actionCreator(actionTypes.EVENT_DELETE_ERROR)();
 
-export const openViewEventPage =
-    (eventId: string) => actionCreator(actionTypes.VIEW_EVENT_PAGE_OPEN)({ eventId });
+export const openViewEventPage = (eventId: string, programId: string, orgUnitId?: string) =>
+    actionCreator(actionTypes.VIEW_EVENT_PAGE_OPEN)({ eventId, programId, orgUnitId });
 
 export const requestDeleteEvent = (eventId: string, storeId: string) =>
     actionCreator(actionTypes.EVENT_REQUEST_DELETE)({ eventId, storeId });

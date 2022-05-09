@@ -124,7 +124,7 @@ Then('you should see error message', () => {
 });
 
 Given('you land on a view event page from the url', () => {
-    cy.visit('/#/viewEvent?viewEventId=a969f7a3bf1');
+    cy.visit('/#/viewEvent?viewEventId=a969f7a3bf1&programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
 Given('you are in the new event page with no selections made', () => {
@@ -181,14 +181,14 @@ Then('main page page url is valid', () => {
 });
 
 When('you remove the program selection', () => {
-    cy.get('[data-test="program-selector-container"]').within(() => {
+    cy.get('[data-test="scope-selector"]').within(() => {
         cy.get('[data-test="reset-selection-button"]').eq(0).click();
     });
 });
 
 When('you remove the org unit selection', () => {
-    cy.get('[data-test="org-unit-selector-container"]').within(() => {
-        cy.get('[data-test="reset-selection-button"]').eq(0).click();
+    cy.get('[data-test="scope-selector"]').within(() => {
+        cy.get('[data-test="reset-selection-button"]').eq(1).click();
     });
 });
 
