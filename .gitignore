@@ -4,6 +4,8 @@
 # testing
 /coverage
 cypress.env.json
+/cypress/screenshots
+/cypress/videos
 
 # build folders
 /build
