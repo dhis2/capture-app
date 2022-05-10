@@ -12,14 +12,14 @@ type Props = {|
     onAddRelationship: () => void
 |}
 
-export const WidgetEventsRelationships = ({ eventId, relationships, relationshipsTypes, onAddRelationship }: Props) => {
+export const WidgetEventsRelationships = ({ eventId, relationships, relationshipsTypes, ...passOnProps }: Props) => {
     const { relationships: eventsRelationships } = useLinkedEntityGroups(eventId, relationshipsTypes, relationships);
 
     return (
         <RelationshipsWidget
             title={i18n.t("Event's Relationships")}
             relationships={eventsRelationships}
-            onAddRelationship={onAddRelationship}
+            {...passOnProps}
         />
     );
 };

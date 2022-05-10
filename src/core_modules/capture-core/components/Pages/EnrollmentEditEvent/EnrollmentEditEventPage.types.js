@@ -23,6 +23,7 @@ export type PlainProps = {|
     onDelete: () => void,
     onAddNew: () => void,
     onGoBack: () => void,
+    onLinkedRecordClick: (parameters: Object) => void,
     pageStatus: string,
     ...CssClasses,
 |};

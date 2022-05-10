@@ -60,6 +60,7 @@ export const EnrollmentPageDefaultPlain = ({
     hideWidgets,
     classes,
     onEventClick,
+    onLinkedRecordClick,
     onUpdateTeiAttributeValues,
 }: PlainProps) => (
     <>
@@ -87,6 +88,7 @@ export const EnrollmentPageDefaultPlain = ({
                     relationshipTypes={relationshipTypes}
                     teiId={teiId}
                     onAddRelationship={() => {}}
+                    onLinkedRecordClick={onLinkedRecordClick}
                 />
                 {!hideWidgets.indicator && (
                     <WidgetIndicator

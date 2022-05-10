@@ -21,6 +21,7 @@ export type Props = {|
     onCreateNew: (stageId: string) => void,
     onEventClick: (eventId: string, stageId: string) => void,
     onUpdateTeiAttributeValues: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
+    onLinkedRecordClick: (parameters: Object) => void
 |};
 
 export type PlainProps = {|

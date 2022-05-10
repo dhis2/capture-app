@@ -8,6 +8,7 @@ import { RelationshipsTable } from './RelationshipsTable.component';
 type Props = {
     relationships: Object,
     onAddRelationship: () => void,
+    onLinkedRecordClick: (parameters: Object) =>void,
     ...CssClasses,
 }
 
@@ -26,7 +27,7 @@ const styles = {
         overflow: 'scroll',
     },
 };
-const RelationshipsPlain = ({ relationships, classes, onAddRelationship }: Props) => (
+const RelationshipsPlain = ({ relationships, classes, onAddRelationship, onLinkedRecordClick }: Props) => (
     <div
         data-test="relationships"
         className={classes.container}
@@ -36,7 +37,7 @@ const RelationshipsPlain = ({ relationships, classes, onAddRelationship }: Props
                 const { relationshipName, id, ...passOnProps } = relationship;
                 return (<div key={id} className={classes.wrapper}>
                     <div className={classes.title} >{relationshipName}</div>
-                    <RelationshipsTable {...passOnProps} />
+                    <RelationshipsTable {...passOnProps} onLinkedRecordClick={onLinkedRecordClick} />
                 </div>);
             }) : null
         }

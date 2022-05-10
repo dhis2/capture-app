@@ -16,7 +16,7 @@ import {
     useRuleEffects,
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
-import { deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
+import { clickLinkedRecord, deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 import { useRelationshipTypesMetadata } from '../../common/EnrollmentOverviewDomain/useRelationshipTypesMetadata';
 
@@ -70,8 +70,15 @@ export const EnrollmentPageDefault = () => {
     };
 
     const onEventClick = (eventId: string, stageId: string) => {
-        history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId, eventId, stageId })}`);
+        history.push(`/enrollmentEventEdit?${buildUrlQueryString({
+            orgUnitId, programId, teiId, enrollmentId, eventId, stageId,
+        })}`);
     };
+
+    const onLinkedRecordClick = (parameters) => {
+        dispatch(clickLinkedRecord(parameters));
+    };
+
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
         dispatch(updateEnrollmentAttributeValues(updatedAttributeValues));
         dispatch(updateTeiDisplayName(teiDisplayName));
@@ -105,6 +112,7 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
+            onLinkedRecordClick={onLinkedRecordClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
         />
     );

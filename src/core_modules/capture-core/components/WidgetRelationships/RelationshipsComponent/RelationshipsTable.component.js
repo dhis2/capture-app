@@ -12,11 +12,12 @@ import {
 type Props = {
     headers: Array<Object>,
     linkedEntityData: Array<Object>,
+    onLinkedRecordClick: (parameters: Object) => void,
      ...CssClasses,
 }
 
 export const RelationshipsTable = (props: Props) => {
-    const { headers, linkedEntityData } = props;
+    const { headers, linkedEntityData, onLinkedRecordClick } = props;
     function renderHeader() {
         const headerCells = headers
             .map(column => (
@@ -37,11 +38,11 @@ export const RelationshipsTable = (props: Props) => {
         if (!linkedEntityData) {
             return null;
         }
-        return linkedEntityData.map(({ id: targetId, values }) => (
+        return linkedEntityData.map(({ id: targetId, values, parameters }) => (
             <DataTableRow key={targetId}>
                 {headers.map(({ id }) => {
                     const entity = values.find(item => item.id === id);
-                    return (<DataTableCell key={id}>
+                    return (<DataTableCell key={id} onClick={() => onLinkedRecordClick(parameters)}>
                         {entity?.value}
                     </DataTableCell>
                     );

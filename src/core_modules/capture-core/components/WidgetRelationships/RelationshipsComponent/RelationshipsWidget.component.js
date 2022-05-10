@@ -9,6 +9,7 @@ type Props = {|
     relationships: Array<OutputRelationship>,
     title: string,
     onAddRelationship: () => void,
+    onLinkedRecordClick: (parameters: Object) => void,
     ...CssClasses,
 |}
 

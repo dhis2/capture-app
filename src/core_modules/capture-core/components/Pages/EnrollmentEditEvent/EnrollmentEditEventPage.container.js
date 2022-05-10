@@ -12,7 +12,7 @@ import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.comp
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
+import { clickLinkedRecord, deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
@@ -36,6 +36,10 @@ export const EnrollmentEditEventPage = () => {
     };
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+    };
+
+    const onLinkedRecordClick = (parameters) => {
+        dispatch(clickLinkedRecord(parameters));
     };
 
     const onGoBack = () => history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
@@ -80,6 +84,7 @@ export const EnrollmentEditEventPage = () => {
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            onLinkedRecordClick={onLinkedRecordClick}
         />
     );
 };

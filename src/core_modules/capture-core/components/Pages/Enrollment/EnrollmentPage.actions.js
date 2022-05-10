@@ -20,6 +20,7 @@ export const enrollmentPageActionTypes = {
     UPDATE_TEI_DISPLAY_NAME: 'EnrollmentPage.UpdateTeiDisplayName',
 
     SET_EVENT_RELATIONSHIPS_DATA: 'EnrollmentPage.SetEventRelationshipsData',
+    LINKED_RECORD_CLICK: 'EnrollmentPage.LinkedRecordClick',
 };
 
 export const fetchEnrollmentPageInformation = () =>
@@ -65,3 +66,6 @@ export const updateTeiDisplayName = (teiDisplayName: string) =>
 
 export const setEventRelationshipsData = (eventId: string, relationships: Array<Object>) =>
     actionCreator(enrollmentPageActionTypes.SET_EVENT_RELATIONSHIPS_DATA)({ eventId, relationships });
+
+export const clickLinkedRecord = (parameters: Object) =>
+    actionCreator(enrollmentPageActionTypes.LINKED_RECORD_CLICK)({ ...parameters });

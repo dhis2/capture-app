@@ -73,7 +73,21 @@ const determineLinkedEntity = (
 };
 
 
-const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData) => {
+const getLinkedRecordURLParameters = (linkedEntity: RelationshipData, relationshipType: Object) => {
+    if (linkedEntity.event) {
+        const {
+            event: eventId,
+            program: programId,
+        } = linkedEntity.event;
+        return { eventId, programId };
+    } else if (linkedEntity.trackedEntity) {
+        const programId = relationshipType.program?.id;
+        const { trackedEntity: teiId, orgUnit: orgUnitId } = linkedEntity.trackedEntity;
+        return { programId, orgUnitId, teiId };
+    }
+};
+
+const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData, relationshipType: Object) => {
     if (linkedEntity.event) {
         const { event: eventId, program: programId, programStage, orgUnitName, status } = linkedEntity.event;
         /*
@@ -91,6 +105,7 @@ const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData) => {
         return {
             id: eventId,
             values: linkedEntity.event.dataValues,
+            parameters: getLinkedRecordURLParameters(linkedEntity, relationshipType),
             options: {
                 orgUnitName,
                 status,
@@ -104,6 +119,7 @@ const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData) => {
         return {
             id: trackedEntity,
             values: attributes,
+            parameters: getLinkedRecordURLParameters(linkedEntity, relationshipType),
             options: { trackedEntityTypeName: tet.name },
         };
     }
@@ -119,13 +135,14 @@ const getLinkedEntityInfo = (
 ) => {
     const linkedEntityData = determineLinkedEntity(relationshipType, targetId, from, to);
     if (!linkedEntityData) { return undefined; }
-    const metadata = getAttributeConstraintsForTEI(linkedEntityData.side);
+    const metadata = getAttributeConstraintsForTEI(linkedEntityData.side, linkedEntityData.constraint);
     if (!metadata) { return undefined; }
-    const { id, values, options } = metadata;
+    const { id, values, options, parameters } = metadata;
     const displayFields = getDisplayFields(linkedEntityData.constraint);
     return {
         id,
         displayFields,
+        parameters,
         groupId: linkedEntityData.groupId,
         relationshipName: linkedEntityData?.relationshipName,
         values: convertAttributes(values, displayFields, options),
@@ -147,15 +164,15 @@ export const useLinkedEntityGroups = (
                 const relationshipType = relationshipTypes.find(item => item.id === typeId);
                 const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to);
                 if (!metadata) { return acc; }
-                const { relationshipName, displayFields, id, values, groupId } = metadata;
+                const { relationshipName, displayFields, id, values, parameters, groupId } = metadata;
                 const typeExist = acc.find(item => item.id === groupId);
                 if (typeExist) {
-                    typeExist.linkedEntityData.push({ id, values });
+                    typeExist.linkedEntityData.push({ id, values, parameters });
                 } else {
                     acc.push({
                         id: groupId,
                         relationshipName,
-                        linkedEntityData: [{ id, values }],
+                        linkedEntityData: [{ id, values, parameters }],
                         headers: displayFields,
                     });
                 }

@@ -13,14 +13,14 @@ type Props = {|
     ...CssClasses,
 |};
 
-export const WidgetTeisRelationships = ({ relationships, relationshipTypes, teiId, onAddRelationship }: Props) => {
+export const WidgetTeisRelationships = ({ relationships, relationshipTypes, teiId, ...passOnProps }: Props) => {
     const { relationships: teiRelationships } = useLinkedEntityGroups(teiId, relationshipTypes, relationships);
 
     return (
         <RelationshipsWidget
             title={i18n.t("TEI's Relationships")}
             relationships={teiRelationships}
-            onAddRelationship={onAddRelationship}
+            {...passOnProps}
         />
     );
 };
