@@ -152,7 +152,7 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
     // $FlowFixMe[prop-missing] automated comment
     const newAction: ProgramRuleAction = {
         id: programIndicator.id,
-        content: programIndicator.shortName || programIndicator.displayName,
+        content: programIndicator.displayName || programIndicator.shortName,
         data: programIndicator.expression,
         programRuleActionType: 'DISPLAYKEYVALUEPAIR',
         location: 'indicators',
