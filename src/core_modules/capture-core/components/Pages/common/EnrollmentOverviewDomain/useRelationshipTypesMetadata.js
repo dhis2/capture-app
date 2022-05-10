@@ -4,6 +4,7 @@ import {
     getCachedSingleResourceFromKeyAsync,
 } from '../../../../MetaDataStoreUtils/MetaDataStoreUtils';
 import { userStores } from '../../../../storageControllers/stores';
+import { getUserStorageController } from '../../../../storageControllers';
 import { getApi } from '../../../../d2/d2Instance';
 import type { InputRelationship } from './useCommonEnrollmentDomainData';
 
@@ -81,7 +82,9 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
                 .all(relationshipTypePromises)
                 .then(results => Promise.all(results.map(res => fetchDataView(res.response))))
                 .then((res) => {
+                    const storageController = getUserStorageController();
                     setRelationshipTypesMetadata(res);
+                    storageController.setAll(userStores.RELATIONSHIP_TYPES, res);
                 });
         }
     }, [relationships]);
