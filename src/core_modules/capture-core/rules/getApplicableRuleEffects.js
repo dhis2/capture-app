@@ -88,6 +88,9 @@ flattenedResult: boolean = false,
     }
 
     if (currentEvent) {
+        if (!currentEvent.programStageId && stage) {
+            currentEvent.programStageId = stage.id;
+        }
         currentEvent.programStageName = program.stages.get(currentEvent.programStageId)?.untranslatedName;
     }
 

@@ -52,8 +52,9 @@ function getDirectAddressedVariable(variableWithCurls, programId) {
         newVariableObject = {
             id: variableName,
             displayName: variableName,
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE',
             valueType: 'TEXT',
+            programStageId: variableNameParts[0],
             dataElementId: variableNameParts[1],
             programId,
         };
