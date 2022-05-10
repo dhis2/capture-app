@@ -1,3 +1,25 @@
+## [100.3.1](https://github.com/dhis2/capture-app/compare/v100.3.0...v100.3.1) (2022-05-05)
+
+
+### Bug Fixes
+
+* initial CD test ([cea359b](https://github.com/dhis2/capture-app/commit/cea359b64dba0388bfa46872c7343479e9ee76a6))
+
+# [100.3.0](https://github.com/dhis2/capture-app/compare/v100.2.4...v100.3.0) (2022-05-05)
+
+
+### Features
+
+* [DHIS2-12246] add missing built-in variables in the rules engine ([#2663](https://github.com/dhis2/capture-app/issues/2663)) ([4cb18bc](https://github.com/dhis2/capture-app/commit/4cb18bc347615e8b305aa63c282282c1fa09efba))
+* ignore diacritics in option group search ([#2678](https://github.com/dhis2/capture-app/issues/2678)) ([c33a660](https://github.com/dhis2/capture-app/commit/c33a66001742d91e0d8391ecfe7581294a934a72))
+
+## [100.2.4](https://github.com/dhis2/capture-app/compare/v100.2.3...v100.2.4) (2022-05-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([42350cd](https://github.com/dhis2/capture-app/commit/42350cdd56cfdbee6e90a07ca85507e2fa67df28))
+
 ## [100.2.3](https://github.com/dhis2/capture-app/compare/v100.2.2...v100.2.3) (2022-04-25)
 
 
