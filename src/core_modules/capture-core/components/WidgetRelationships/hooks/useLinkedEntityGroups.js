@@ -85,6 +85,7 @@ const getLinkedRecordURLParameters = (linkedEntity: RelationshipData, relationsh
         const { trackedEntity: teiId, orgUnit: orgUnitId } = linkedEntity.trackedEntity;
         return { programId, orgUnitId, teiId };
     }
+    return {};
 };
 
 const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData, relationshipType: Object) => {
