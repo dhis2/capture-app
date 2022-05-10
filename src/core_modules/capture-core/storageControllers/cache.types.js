@@ -191,6 +191,7 @@ export type CachedProgram = {
     dataEntryForm: ?CachedDataEntryForm,
     featureType: ?string,
     selectEnrollmentDatesInFuture: boolean,
+    displayFrontPageList: boolean,
     selectIncidentDatesInFuture: boolean,
     displayIncidentDate: boolean,
 };

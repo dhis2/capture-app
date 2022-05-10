@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -392,8 +392,14 @@ msgstr "Pilih pengguna"
 msgid "to"
 msgstr "untuk"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "Dari"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "Untuk"
@@ -416,8 +422,11 @@ msgstr "Bulan lalu"
 msgid "Last 3 months"
 msgstr "3 bulan terakhir"
 
-msgid "Custom range"
-msgstr "Rentang khusus"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Maksimal"
@@ -604,6 +613,24 @@ msgstr "Anda tidak memiliki akses untuk menulis komentar"
 
 msgid "Write comment"
 msgstr "Tulis komentar"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "tidak, batalkan"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance entitas terlacak dengan id \"{{teiId}}\" tidak ada"
@@ -1019,9 +1046,6 @@ msgstr ""
 "Anda yakin ingin menghapus pendaftaran ini? Ini akan menghapus pendaftaran "
 "saat ini secara permanen."
 
-msgid "No, cancel"
-msgstr "tidak, batalkan"
-
 msgid "Yes, delete enrollment."
 msgstr "Ya, hapus pendaftaran."
 
@@ -1350,6 +1374,9 @@ msgid "Error saving enrollment"
 msgstr "Terjadi kesalahan saat menyimpan pendaftaran"
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"

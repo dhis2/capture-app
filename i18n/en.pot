@@ -5,9 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
-"PO-Revision-Date: 2022-03-24T23:27:26.984Z\n"
-
+"POT-Creation-Date: 2022-04-19T07:14:22.883Z\n"
+"PO-Revision-Date: 2022-04-19T07:14:22.883Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -377,8 +376,14 @@ msgstr "Select user"
 msgid "to"
 msgstr "to"
 
+msgid "Days in the future"
+msgstr "Days in the future"
+
 msgid "From"
 msgstr "From"
+
+msgid "Days in the past"
+msgstr "Days in the past"
 
 msgid "To"
 msgstr "To"
@@ -401,8 +406,11 @@ msgstr "Last month"
 msgid "Last 3 months"
 msgstr "Last 3 months"
 
-msgid "Custom range"
-msgstr "Custom range"
+msgid "Absolute range"
+msgstr "Absolute range"
+
+msgid "Relative range"
+msgstr "Relative range"
 
 msgid "Max"
 msgstr "Max"
@@ -589,6 +597,24 @@ msgstr "You dont have access to write comments"
 
 msgid "Write comment"
 msgstr "Write comment"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr "Use new Enrollment dashboard for {{programName}}"
+
+msgid "Opt in for {{programName}}"
+msgstr "Opt in for {{programName}}"
+
+msgid "No, cancel"
+msgstr "No, cancel"
+
+msgid "Yes, opt in"
+msgstr "Yes, opt in"
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr "Stop using new Enrollment dashboard for {{programName}}"
+
+msgid "Opt out for {{programName}}"
+msgstr "Opt out for {{programName}}"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
@@ -817,18 +843,6 @@ msgstr "Search by {{name}}"
 msgid "Search by attributes"
 msgstr "Search by attributes"
 
-msgid "Back"
-msgstr "Back"
-
-msgid "Search for {{titleText}}"
-msgstr "Search for {{titleText}}"
-
-msgid "Search for"
-msgstr "Search for"
-
-msgid "You can also choose a program from the top bar and search in that program"
-msgstr "You can also choose a program from the top bar and search in that program"
-
 msgid "No results found"
 msgstr "No results found"
 
@@ -845,22 +859,20 @@ msgstr "Back to search"
 msgid "An error has occurred"
 msgstr "An error has occurred"
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-
 msgid "Too many results"
 msgstr "Too many results"
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
+msgid "Back"
+msgstr "Back"
+
+msgid "Search for {{titleText}}"
+msgstr "Search for {{titleText}}"
+
+msgid "Search for"
+msgstr "Search for"
+
+msgid "You can also choose a program from the top bar and search in that program"
+msgstr "You can also choose a program from the top bar and search in that program"
 
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
@@ -951,6 +963,12 @@ msgstr "Search {{uniqueAttrName}}"
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Fill in at least {{minAttributesRequired}} attributes to search"
 
+msgid "Saved lists in this program"
+msgstr "Saved lists in this program"
+
+msgid "Create custom working list"
+msgstr "Create custom working list"
+
 msgid "To work with the selected program,"
 msgstr "To work with the selected program,"
 
@@ -990,9 +1008,6 @@ msgid ""
 msgstr ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
-
-msgid "No, cancel"
-msgstr "No, cancel"
 
 msgid "Yes, delete enrollment."
 msgstr "Yes, delete enrollment."
@@ -1328,6 +1343,9 @@ msgstr "Error saving enrollment"
 
 msgid "Error saving the enrollment event"
 msgstr "Error saving the enrollment event"
+
+msgid "Error editing the event, the changes made were not saved"
+msgstr "Error editing the event, the changes made were not saved"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"

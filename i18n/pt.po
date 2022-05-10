@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -389,8 +389,14 @@ msgstr "Selecione o usuário"
 msgid "to"
 msgstr "para"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "A partir de"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "Até"
@@ -413,8 +419,11 @@ msgstr "Último mês"
 msgid "Last 3 months"
 msgstr "Últimos três meses"
 
-msgid "Custom range"
-msgstr "Intervalo personalizado"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Máx"
@@ -602,6 +611,24 @@ msgstr "Você não tem acesso para escrever comentários"
 
 msgid "Write comment"
 msgstr "Escreva um comentário"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "Não cancele"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "A instância de entidade rastreada com id \"{{teiId}}\" não existe"
@@ -1020,9 +1047,6 @@ msgstr ""
 "Tem certeza de que deseja excluir esta inscrição? Isso removerá "
 "permanentemente a inscrição atual."
 
-msgid "No, cancel"
-msgstr "Não cancele"
-
 msgid "Yes, delete enrollment."
 msgstr "Sim, exclua a inscrição."
 
@@ -1359,6 +1383,9 @@ msgstr "Erro ao salvar inscrição"
 
 msgid "Error saving the enrollment event"
 msgstr "Erro ao salvar o evento de inscrição"
+
+msgid "Error editing the event, the changes made were not saved"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Definir coordenada"

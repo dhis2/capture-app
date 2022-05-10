@@ -40,9 +40,18 @@ export const workingListsCommonActionTypes = {
     TEMPLATE_SHARING_SETTINGS_SET: 'WorkingListsTemplateSharingSettingsSet',
 };
 
-export const fetchTemplates =
-    (programId: string, storeId: string, workingListsType: string) =>
-        actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH)({ programId, storeId, workingListsType });
+export const fetchTemplates = (
+    programId: string,
+    storeId: string,
+    workingListsType: string,
+    selectedTemplateId?: string,
+) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH)({
+        programId,
+        storeId,
+        selectedTemplateId,
+        workingListsType,
+    });
 
 export const fetchTemplatesSuccess = (templates: Array<any>, defaultTemplateId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH_SUCCESS)({ templates, defaultTemplateId, storeId });

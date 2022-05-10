@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -382,8 +382,14 @@ msgstr "حدد المستخدم"
 msgid "to"
 msgstr "إلى"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "من"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "الى"
@@ -406,8 +412,11 @@ msgstr "الشهر الماضي"
 msgid "Last 3 months"
 msgstr "آخر 3 أشهر"
 
-msgid "Custom range"
-msgstr "نطاق مخصص"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "الأعلى"
@@ -594,6 +603,24 @@ msgstr "ليس لديك حق الوصول إلى كتابة التعليقات"
 
 msgid "Write comment"
 msgstr "اكتب تعليقاً"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "لا، الغاء"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
@@ -991,9 +1018,6 @@ msgid ""
 "remove the current enrollment."
 msgstr ""
 
-msgid "No, cancel"
-msgstr "لا، الغاء"
-
 msgid "Yes, delete enrollment."
 msgstr ""
 
@@ -1332,6 +1356,9 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -386,8 +386,14 @@ msgstr "Velg bruker"
 msgid "to"
 msgstr "til"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "Fra"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "Til"
@@ -410,8 +416,11 @@ msgstr "Forrige måned"
 msgid "Last 3 months"
 msgstr "Siste 3 måneder"
 
-msgid "Custom range"
-msgstr "Tilpasset utvalg"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
@@ -598,6 +607,24 @@ msgstr "Du har ikke tilgang til å skrive kommentarer"
 
 msgid "Write comment"
 msgstr "Skriv kommentar"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "Nei, avbryt"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Sporet enhetsforekomst med id \"{{teiId}}\"  eksisterer ikke"
@@ -1009,9 +1036,6 @@ msgstr ""
 "Er du sikker på at du vil slette denne registreringen? Dette vil fjerne den "
 "nåværende registreringen permanent."
 
-msgid "No, cancel"
-msgstr "Nei, avbryt"
-
 msgid "Yes, delete enrollment."
 msgstr "Ja, slett registrering"
 
@@ -1352,6 +1376,9 @@ msgstr "Feil ved lagring av registrering"
 
 msgid "Error saving the enrollment event"
 msgstr "Feil under lagring av hendelsen"
+
+msgid "Error editing the event, the changes made were not saved"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"

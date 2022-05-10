@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -390,8 +390,14 @@ msgstr "Foydalanuvchini tanlang"
 msgid "to"
 msgstr "ga"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "Dan"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "Kimga"
@@ -414,8 +420,11 @@ msgstr "Oxirgi oy"
 msgid "Last 3 months"
 msgstr "Oxirgi 3 oy"
 
-msgid "Custom range"
-msgstr "Maxsus diapazon"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Maksimum"
@@ -603,6 +612,24 @@ msgstr "Fikr yozish huquqiga ega emassiz"
 
 msgid "Write comment"
 msgstr "Fikr yozing"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "Yoʼq, bekor qiling"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
@@ -1010,9 +1037,6 @@ msgid ""
 "remove the current enrollment."
 msgstr ""
 
-msgid "No, cancel"
-msgstr "Yoʼq, bekor qiling"
-
 msgid "Yes, delete enrollment."
 msgstr ""
 
@@ -1342,6 +1366,9 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"
