@@ -14,23 +14,22 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
     const fetchDataView = async (relType) => {
         const { fromConstraint, toConstraint } = relType;
 
+        const getPromise = (key, attributes) => {
+            if (attributes.length && !attributes.some(att => att.valueType)) {
+                return getApi().get(key, {
+                    filter: `id:in:[${attributes.join(',')}]`,
+                    fields: ['id,valueType,displayName'],
+                });
+            }
+            return undefined;
+        };
+
         const fetchValues = async (constraint) => {
             let requestPromise;
             if (constraint.relationshipEntity === 'TRACKED_ENTITY_INSTANCE') {
-                if (!constraint.trackerDataView.attributes.every(att => att.valueType)) {
-                    requestPromise = getApi().get('trackedEntityAttributes', {
-                        filter: `id:in:[${constraint.trackerDataView.attributes.join(',')}]`,
-                        fields: ['id,valueType,displayName'],
-
-                    });
-                }
+                requestPromise = getPromise('trackedEntityAttributes', constraint.trackerDataView.attributes);
             } else if (constraint.relationshipEntity === 'PROGRAM_STAGE_INSTANCE') {
-                if (!constraint.trackerDataView.dataElements.every(att => att.valueType)) {
-                    requestPromise = getApi().get('dataElements', {
-                        filter: `id:in:[${constraint.trackerDataView.dataElements.join(',')}]`,
-                        fields: ['id,valueType,displayName'],
-                    });
-                }
+                requestPromise = getPromise('dataElements', constraint.trackerDataView.dataElements);
             }
             return requestPromise;
         };
@@ -38,7 +37,8 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
         const mergeConstraintDataValues = (constraint, dataValues) => {
             if (!dataValues) { return constraint; }
             if (constraint.relationshipEntity === 'TRACKED_ENTITY_INSTANCE') {
-                if (!constraint.trackerDataView.attributes.every(att => att.valueType)) {
+                if (constraint.trackerDataView.attributes.length
+                    && !constraint.trackerDataView.attributes.some(att => att.valueType)) {
                     return {
                         ...constraint,
                         trackerDataView: {
@@ -49,7 +49,8 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
                         } };
                 }
             } else if (constraint.relationshipEntity === 'PROGRAM_STAGE_INSTANCE') {
-                if (!constraint.trackerDataView.dataElements.every(att => att.valueType)) {
+                if (constraint.trackerDataView.dataElements.length
+                    && !constraint.trackerDataView.dataElements.some(att => att.valueType)) {
                     return {
                         ...constraint,
                         trackerDataView: {
