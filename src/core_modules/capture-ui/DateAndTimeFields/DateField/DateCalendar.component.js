@@ -11,6 +11,7 @@ type Props = {
     value?: ?string,
     minMoment?: Object,
     maxMoment?: Object,
+    latestSelectable?: Date,
     currentWidth: number,
     height?: ?number,
     classes: Object,
@@ -53,16 +54,19 @@ export class DateCalendar extends Component<Props> {
     }
 
     getMinMaxProps() {
-        const { minMoment = moment('1900-01-01'), maxMoment = moment('2099-12-31') } = this.props;
+        const {
+            minMoment = moment('1900-01-01'),
+            maxMoment = moment('2099-12-31'),
+            latestSelectable = maxMoment.toDate(),
+        } = this.props;
 
         const minDate = minMoment.toDate();
-        const maxDate = maxMoment.toDate();
 
         return {
             min: minDate,
             minDate,
-            max: maxDate,
-            maxDate,
+            max: maxMoment.toDate(),
+            maxDate: latestSelectable,
         };
     }
 
@@ -74,6 +78,7 @@ export class DateCalendar extends Component<Props> {
             height,
             minMoment,
             maxMoment,
+            latestSelectable,
             onDateSelected,
             displayOptions,
             ...passOnProps

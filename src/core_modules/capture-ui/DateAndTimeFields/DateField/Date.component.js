@@ -12,6 +12,7 @@ type Props = {
     calendarWidth?: ?number,
     calendarHeight?: ?number,
     inputWidth?: ?number,
+    latestSelectable?: Date,
     onBlur: (value: string) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
@@ -147,6 +148,7 @@ export class DateField extends React.Component<Props, State> {
             calendarWidth,
             calendarHeight,
             inputWidth,
+            latestSelectable,
             onBlur,
             onFocus,
             onDateSelectedFromCalendar,
@@ -196,6 +198,7 @@ export class DateField extends React.Component<Props, State> {
                             value={this.props.value}
                             currentWidth={calculatedCalendarWidth}
                             height={calculatedCalendarHeight}
+                            latestSelectable={latestSelectable}
                             {...splittedPassOnProps.calendar}
                         />
                     </DatePopup>
