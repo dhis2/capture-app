@@ -5,6 +5,7 @@ export const possibleDuplicatesDesc = createReducerDescription({
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW]: state => ({
         ...state,
         isLoading: true,
+        teis: [],
     }),
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_RETRIEVAL_SUCCESS]: (state, action) => ({
         ...state,
@@ -19,10 +20,16 @@ export const possibleDuplicatesDesc = createReducerDescription({
         isLoading: false,
         isUpdating: false,
         loadError: true,
+        teis: [],
     }),
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_CHANGE_PAGE]: (state, action) => ({
         ...state,
         isUpdating: true,
         currentPage: action.payload.page,
     }),
+    [searchGroupDuplicateActionTypes.DUPLICATES_RESET]: state => ({ ...state,
+        isLoading: false,
+        isUpdating: false,
+        loadError: true,
+        teis: [] }),
 }, 'possibleDuplicates');
