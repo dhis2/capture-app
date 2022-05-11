@@ -4,7 +4,7 @@ import type { SaveForDuplicateCheck } from './types';
 
 export type Input = {|
     onSave: SaveForDuplicateCheck,
-    hasDuplicate?: boolean,
+    hasDuplicate: ?boolean,
     onResetPossibleDuplicates: () => void,
     onReviewDuplicates: (duplicatesReviewPageSize: number) => void,
     searchGroup: ?InputSearchGroup,
