@@ -24,7 +24,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "Kolom"
 
 msgid "This value is validating"
 msgstr ""
@@ -90,7 +90,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Oppervlakte"
 
 msgid "Coordinate"
 msgstr ""
@@ -213,7 +213,7 @@ msgid "before or equal to"
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "Vandaag"
 
 msgid "This week"
 msgstr ""
@@ -270,7 +270,7 @@ msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "geselecteerd"
 
 msgid "Delete"
 msgstr "Verwijderen"
@@ -393,10 +393,10 @@ msgid "Rows per page"
 msgstr ""
 
 msgid "Active"
-msgstr ""
+msgstr "Actief"
 
 msgid "Completed"
-msgstr ""
+msgstr "Voltooid"
 
 msgid "Could not get organisation unit"
 msgstr ""
@@ -528,7 +528,7 @@ msgid "Registered person"
 msgstr ""
 
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 msgid "Metadata error. see log for details"
 msgstr ""
@@ -546,7 +546,7 @@ msgid "An error occured loading possible duplicates"
 msgstr ""
 
 msgid "Hide"
-msgstr ""
+msgstr "Verbergen"
 
 msgid "Save as new {{tetName}}"
 msgstr ""
@@ -561,7 +561,7 @@ msgid "Program"
 msgstr "Programma"
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "Organisatieëenheid"
 
 msgid "Registration"
 msgstr ""
