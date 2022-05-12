@@ -40,9 +40,10 @@ const MainPageContainer = () => {
     const setShowAccessible = () => history
         .push(`/?${buildUrlQueryString({ programId })}&all`);
 
+    const withoutOrgUnit = useMemo(() => !orgUnitId && !showAllAccessible, [orgUnitId, showAllAccessible]);
+
     const MainPageStatus = useMemo(() => {
         if (!programId) return MainPageStatuses.DEFAULT;
-        const withoutOrgUnit = () => !orgUnitId && !showAllAccessible;
 
         const selectedProgram = programCollection.get(programId);
         if (selectedProgram?.categoryCombination) {
@@ -53,19 +54,19 @@ const MainPageContainer = () => {
                 return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             }
 
-            if (withoutOrgUnit()) {
+            if (withoutOrgUnit) {
                 return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
             }
 
             return MainPageStatuses.SHOW_WORKING_LIST;
         }
 
-        if (withoutOrgUnit()) {
+        if (withoutOrgUnit) {
             return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
         }
         return MainPageStatuses.SHOW_WORKING_LIST;
     },
-    [categories, orgUnitId, programId, showAllAccessible]);
+    [categories, programId, withoutOrgUnit]);
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
