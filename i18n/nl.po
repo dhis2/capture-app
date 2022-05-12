@@ -24,7 +24,7 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "Vandaag"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -120,7 +120,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Oppervlakte"
 
 msgid "Coordinate"
 msgstr ""
@@ -181,10 +181,10 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr ""
+msgstr "Actief"
 
 msgid "Completed"
-msgstr ""
+msgstr "Voltooid"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -433,7 +433,7 @@ msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "geselecteerd"
 
 msgid "Delete"
 msgstr "Verwijderen"
@@ -463,7 +463,7 @@ msgid "Description"
 msgstr "Beschrijving"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "Icon for {{field}}"
 msgstr ""
@@ -484,7 +484,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "Kolom"
 
 msgid "Update"
 msgstr "Bijwerken"
@@ -791,13 +791,13 @@ msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "Organisatieëenheid"
 
 msgid "Registration"
 msgstr ""
@@ -1030,7 +1030,7 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
-msgstr ""
+msgstr "Geannuleerd"
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1287,10 +1287,10 @@ msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Overdue"
-msgstr ""
+msgstr "Verlopen"
 
 msgid "Skipped"
-msgstr ""
+msgstr "Overgeslaten"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
