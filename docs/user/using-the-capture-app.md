@@ -674,6 +674,9 @@ The Capture app supports the workinglists in tracker programs, but when you open
 Execute a full search as described above. If the search you have made has results they will be displayed. However, the actual **Tracked Entity Instance** you are searching for may be within a different program. In that case, you may want to extend the search to other programs. This is known as a fallback search.
 
 To execute a fallback search, simply press the button on the bottom saying "Search in all programs".
+You will see the **Results in all programs** be appended below the search in the current program. These two modules are collapsible to save spaces. 
+
+If the fallback can not be done, you will be presented with a modal to go **Back to search** so that you can change the search terms.
 
 > **Note**
 >
