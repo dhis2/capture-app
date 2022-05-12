@@ -8,11 +8,12 @@ import {
     DataTableCell,
     DataTableColumnHeader,
 } from '@dhis2/ui';
+import type { Url } from '../../../utils/url';
 
 type Props = {
     headers: Array<Object>,
     linkedEntityData: Array<Object>,
-    onLinkedRecordClick: (parameters: Object) => void,
+    onLinkedRecordClick: (parameters: Url) => void,
      ...CssClasses,
 }
 
