@@ -250,7 +250,7 @@ export const SearchResultsIndex = ({
                 dataElements={dataElements}
                 renderCustomCardActions={({ item, enrollmentType, programName }) => (<CardListButtons
                     programName={programName}
-                    currentSearchScopeId={item.tei.enrollments[0].program}
+                    currentSearchScopeId={undefined}
                     currentSearchScopeType={currentSearchScopeType}
                     id={item.id}
                     orgUnitId={item.tei.orgUnit}

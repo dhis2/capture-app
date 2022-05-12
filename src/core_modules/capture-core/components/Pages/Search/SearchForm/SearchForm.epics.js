@@ -248,7 +248,12 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
 
 
             return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-                map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => addSuccessResultsViewOnSearchPage(searchResults, pagingData.currentPage)),
+                map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
+                    if (searchResults.length) {
+                        return addSuccessResultsViewOnSearchPage(searchResults, pagingData.currentPage);
+                    }
+                    return showEmptyResultsViewOnSearchPage();
+                }),
                 startWith(showLoadingViewOnSearchPage()),
                 catchError(handleErrors),
             );
