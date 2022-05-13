@@ -21,7 +21,7 @@ export const storeProgramIndicators = async (programIds: Array<string>) => {
         resource: 'programIndicators',
         params: {
             fields: fieldsParam,
-            filter: [`displayInForm:eq:true`, `program.id:in:[${programIds.join(',')}]`],
+            filter: ['displayInForm:eq:true', `program.id:in:[${programIds.join(',')}]`],
         },
     };
 
