@@ -24,7 +24,7 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "Vandaag"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -120,7 +120,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Oppervlakte"
 
 msgid "Coordinate"
 msgstr ""
@@ -184,10 +184,10 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr ""
+msgstr "Actief"
 
 msgid "Completed"
-msgstr ""
+msgstr "Voltooid"
 
 msgid "Assigned to"
 msgstr ""
@@ -424,7 +424,7 @@ msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "geselecteerd"
 
 msgid "Delete"
 msgstr "Verwijderen"
@@ -454,7 +454,7 @@ msgid "Description"
 msgstr "Beschrijving"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "start typing to search"
 msgstr ""
@@ -472,7 +472,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "Kolom"
 
 msgid "Apply"
 msgstr ""
@@ -667,7 +667,7 @@ msgid "Enrollment status"
 msgstr ""
 
 msgid "Cancelled"
-msgstr ""
+msgstr "Geannuleerd"
 
 msgid "Registering unit"
 msgstr ""
@@ -740,13 +740,13 @@ msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "Organisatieëenheid"
 
 msgid "Registration"
 msgstr ""
@@ -956,10 +956,10 @@ msgid "Set coordinate"
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "Breedtegraad"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Lengtegraad"
 
 msgid "Page {{currentPage}}"
 msgstr ""
