@@ -157,6 +157,7 @@ const buildReportDateSettingsFn = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+            latestSelectable: new Date(),
         }),
         getPropName: () => 'occurredAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
