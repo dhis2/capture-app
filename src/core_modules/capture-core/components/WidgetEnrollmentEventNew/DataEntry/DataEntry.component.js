@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import moment from 'moment';
 import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
 import { withDataEntryField } from '../../DataEntry/dataEntryField/withDataEntryField';
 import { withDataEntryNotesHandler } from '../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
@@ -141,6 +142,7 @@ const buildReportDateSettingsFn = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+            calendarMaxMoment: moment(),
         }),
         getPropName: () => 'occurredAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),

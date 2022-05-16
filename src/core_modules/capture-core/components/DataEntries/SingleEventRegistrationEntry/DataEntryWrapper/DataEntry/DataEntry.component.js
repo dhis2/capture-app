@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import moment from 'moment';
 import { type OrgUnit } from 'capture-core-utils/rulesEngine';
 import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
 import { withCancelButton } from '../../../../DataEntry/withCancelButton';
@@ -157,6 +158,7 @@ const buildReportDateSettingsFn = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+            calendarMaxMoment: moment(),
         }),
         getPropName: () => 'occurredAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
