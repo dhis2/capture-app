@@ -6,6 +6,8 @@ import { lockedSelectorActionTypes } from '../../LockedSelector';
 import { topBarActionsActionTypes } from '../../TopBarActions';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../utils/routing';
 import { resetLocationChange } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { startNewEnrollmentDataEntryInitialisation }
+    from '../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.actions';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
@@ -35,10 +37,23 @@ export const navigateToNewUserPageEpic = (action$: InputObservable, store: Redux
     action$.pipe(
         ofType(searchPageActionTypes.NAVIGATE_TO_NEW_USER_PAGE),
         switchMap(() => {
-            const { currentSelections: { programId, orgUnitId } } = store.value;
+            const { currentSelections: { programId, orgUnitId }, searchPage: { currentSearchInfo } } = store.value;
             history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
+
+            const values = currentSearchInfo.currentSearchTerms?.reduce((acc, item) => {
+                acc[item.id] = item.value;
+                return acc;
+            }, {});
+
+
             return new Promise((resolve) => {
-                setTimeout(() => resolve(resetLocationChange()), 0);
+                setTimeout(() => resolve(startNewEnrollmentDataEntryInitialisation({
+                    selectedOrgUnit: { id: orgUnitId },
+                    selectedScopeId: programId,
+                    dataEntryId: 'newPageDataEntryId',
+                    formValues: values,
+                    clientValues: values,
+                })), 0);
             });
         }),
     );
