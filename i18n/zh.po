@@ -372,8 +372,14 @@ msgstr "选择用户"
 msgid "to"
 msgstr "到"
 
+msgid "Days in the future"
+msgstr "未来的天数"
+
 msgid "From"
 msgstr "从"
+
+msgid "Days in the past"
+msgstr "过去的天数"
 
 msgid "To"
 msgstr "至"
@@ -396,8 +402,11 @@ msgstr "上月"
 msgid "Last 3 months"
 msgstr "最近3个月"
 
-msgid "Custom range"
-msgstr "自订范围"
+msgid "Absolute range"
+msgstr "绝对范围"
+
+msgid "Relative range"
+msgstr "相对范围"
 
 msgid "Max"
 msgstr "最大"
@@ -584,6 +593,24 @@ msgstr "你没有权限写备注"
 
 msgid "Write comment"
 msgstr "写备注"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr "为 {{programName}} 使用新的注册仪表板"
+
+msgid "Opt in for {{programName}}"
+msgstr "选择加入 {{programName}}"
+
+msgid "No, cancel"
+msgstr "不，取消"
+
+msgid "Yes, opt in"
+msgstr "是的，选择加入"
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr "停止为 {{programName}} 使用新的注册信息中心"
+
+msgid "Opt out for {{programName}}"
+msgstr "选择退出 {{programName}}"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
@@ -976,9 +1003,6 @@ msgid ""
 "remove the current enrollment."
 msgstr "您确定要删除此报名吗？这将永久删除当前报名。"
 
-msgid "No, cancel"
-msgstr "不，取消"
-
 msgid "Yes, delete enrollment."
 msgstr "是的，删除报名。"
 
@@ -1312,7 +1336,7 @@ msgid "Error saving the enrollment event"
 msgstr "保存报名事件时出错"
 
 msgid "Error editing the event, the changes made were not saved"
-msgstr ""
+msgstr "编辑事件时出错，所做的更改未保存"
 
 msgid "Set coordinate"
 msgstr "设置坐标"

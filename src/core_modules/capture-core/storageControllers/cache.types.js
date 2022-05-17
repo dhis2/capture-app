@@ -95,6 +95,7 @@ export type CachedDataEntryForm = {
 export type CachedProgramStage = {
     id: string,
     access: Object,
+    name: string,
     displayName: string,
     description: ?string,
     executionDateLabel?: ?string,

@@ -396,8 +396,14 @@ msgstr "Seleccionar usuario"
 msgid "to"
 msgstr "a"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "De"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "Para"
@@ -420,8 +426,11 @@ msgstr "Mes anterior"
 msgid "Last 3 months"
 msgstr "Últimos 3 meses"
 
-msgid "Custom range"
-msgstr "Rango personalizado"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Máx"
@@ -610,6 +619,24 @@ msgstr "No tienes acceso para escribir comentarios"
 
 msgid "Write comment"
 msgstr "Escribir comentario"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "No, cancela"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "La instancia de entidad rastreada con el ID \"{{teiId}}\" no existe"
@@ -1025,9 +1052,6 @@ msgid ""
 msgstr ""
 "¿Está seguro de que desea eliminar esta inscripción? Esto eliminará "
 "permanentemente la inscripción actual."
-
-msgid "No, cancel"
-msgstr "No, cancela"
 
 msgid "Yes, delete enrollment."
 msgstr "Sí, elimine la inscripción."

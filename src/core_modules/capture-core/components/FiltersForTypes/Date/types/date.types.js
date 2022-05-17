@@ -8,7 +8,9 @@ export type AbsoluteDateFilterData = {|
 
 export type RelativeDateFilterData = {|
     type: 'RELATIVE',
-    period: string,
+    period?: string,
+    startBuffer?: number,
+    endBuffer?: number,
 |};
 
 export type DateFilterData = AbsoluteDateFilterData | RelativeDateFilterData;

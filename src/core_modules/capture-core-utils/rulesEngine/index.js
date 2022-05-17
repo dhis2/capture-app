@@ -1,6 +1,6 @@
 // @flow
 export { RulesEngine } from './RulesEngine';
-export { effectActions, rulesEngineEffectTargetDataTypes } from './constants';
+export { effectActions, rulesEngineEffectTargetDataTypes, environmentTypes } from './constants';
 export type * from './rulesEngine.types';
 export type {
     Enrollment,

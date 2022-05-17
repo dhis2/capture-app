@@ -26,7 +26,9 @@ type ApiDataFilterDateAbsoluteContents = {|
 
 type ApiDataFilterDateRelativeContents = {|
     type: 'RELATIVE',
-    period: string,
+    period?: string,
+    startBuffer?: number,
+    endBuffer?: number,
 |};
 
 export type ApiDataFilterDate = { dateFilter: ApiDataFilterDateAbsoluteContents | ApiDataFilterDateRelativeContents };
