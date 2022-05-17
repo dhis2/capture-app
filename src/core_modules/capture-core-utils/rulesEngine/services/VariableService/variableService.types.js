@@ -18,6 +18,7 @@ type EventMain = {
     +eventId?: string,
     +programId?: string,
     +programStageId?: string,
+    +programStageName?: string,
     +orgUnitId?: string,
     +orgUnitName?: string,
     +trackedEntityInstanceId?: string,
