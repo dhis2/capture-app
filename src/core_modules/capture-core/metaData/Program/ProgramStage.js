@@ -12,6 +12,7 @@ import type { RelationshipType } from '../RelationshipType';
 export class ProgramStage {
     _id: string;
     _name: string;
+    _untranslatedName: string;
     _stageForm: RenderFoundation;
     _relationshipTypes: Array<RelationshipType>;
     _enableUserAssignment: boolean;
@@ -50,6 +51,14 @@ export class ProgramStage {
 
     set name(name: string) {
         this._name = name;
+    }
+
+    get untranslatedName(): string {
+        return this._untranslatedName;
+    }
+
+    set untranslatedName(untranslatedName: string) {
+        this._untranslatedName = untranslatedName;
     }
 
     set icon(icon: Icon | void) {

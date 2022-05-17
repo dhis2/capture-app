@@ -160,10 +160,10 @@ jobs:
             !**/node_modules
           retention-days: 1
 
-  publish:
+  release:
     runs-on: ubuntu-latest
     needs: build
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    if: "!github.event.push.repository.fork && !contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - uses: actions/checkout@v2
         with:
@@ -177,23 +177,20 @@ jobs:
         with:
           name: app-build
 
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - uses: dhis2/action-semantic-release@master
+        with:
+          publish-apphub: true
+          publish-github: true
+          github-token: ${{ env.GH_TOKEN }}
+          apphub-token: ${{ secrets.DHIS2_BOT_APPHUB_TOKEN }}
+
       - uses: dhis2/deploy-build@master
         with:
           build-dir: build/app
           github-token: ${{ env.GH_TOKEN }}
-
-  release:
-    runs-on: ubuntu-latest
-    needs: publish
-    if: "github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          token: ${{env.GH_TOKEN}}
-
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-
-      - name: Publish release to GitHub
-        run: npx @dhis2/cli-utils release
