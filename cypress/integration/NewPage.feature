@@ -161,6 +161,7 @@ Feature: User creates a new entries from the registration page
     And you click the save new submit button
     Then you see validation errors on the WHO RMNCH program registration page
 
+# TODO
 ### New enrollment of existing TEI
 
   Scenario: New enrollment of existing TEI > The TEI form is prefield with the attributes values

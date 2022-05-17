@@ -6,9 +6,9 @@ import type { apiProgramsResponse } from './types';
 const convert = (() => {
     const sort = (arr: Array<any>, sortBy: string = 'sortOrder') => {
         arr.sort((a, b) => {
-            if (a[sortBy] == null) {
+            if (a[sortBy] === null) {
                 return 1;
-            } else if ((b[sortBy] == null)) {
+            } else if ((b[sortBy] === null)) {
                 return -1;
             }
 
