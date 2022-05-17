@@ -82,6 +82,7 @@ const Index = ({
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
+    navigateToRegisterUser,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
@@ -183,10 +184,13 @@ const Index = ({
                                 </ModalContent>
                                 <ModalActions>
                                     <ButtonStrip end>
+                                        <Button type="button" onClick={navigateToRegisterUser}>
+                                            {i18n.t('Register an user')}
+                                        </Button>
                                         <Button
                                             disabled={searchStatus === searchPageStatus.LOADING}
                                             onClick={showInitialSearchPage}
-                                            type="button"
+                                            primary
                                         >
                                             {i18n.t('Back to search')}
                                         </Button>
