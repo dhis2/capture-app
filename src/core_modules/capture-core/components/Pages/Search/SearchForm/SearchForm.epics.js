@@ -190,40 +190,21 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic: Epic = (action$, s
         }),
     );
 
-const deriveSearchFormInfo = searchGroups => (searchGroups.filter(searchGroup => !searchGroup.unique)[0] || {});
-
-// falling back from a search into a Program to a search into TEType means that
-// sometimes there wil be less attributes to search with. For instance a program
-// can have attributes last name, first name and gender but a TETYpe will have
-// only first name. Here we derive the form values that are revelant.
-const deriveFormValues = (searchForm, values) => {
-    if (!searchForm) {
-        return {};
-    }
-    const elements = searchForm.getElements();
-
-    return ([...elements.values()].reduce((acc, { id: fieldId }) => {
-        if (Object.keys(values).includes(fieldId)) {
-            const fieldValue = values[fieldId];
-            return { ...acc, [fieldId]: fieldValue };
-        }
-        return acc;
-    }, {}));
-};
-
 export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH_START),
-        flatMap(({ payload: { formId, programId, pageSize, page, availableSearchOptions } }) => {
+        flatMap(({ payload: { programId, pageSize, page } }) => {
             const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
             if (trackerProgram.trackedEntityType) {
                 const { id: trackedEntityTypeId } = trackerProgram.trackedEntityType;
-                const { formsValues } = store.value;
+                const { searchPage } = store.value;
 
-                const { searchForm } = deriveSearchFormInfo(availableSearchOptions[trackedEntityTypeId].searchGroups);
-                const fallbackFormValues = deriveFormValues(searchForm, formsValues[formId]);
+                const fallbackFormValues = searchPage.currentSearchInfo.currentSearchTerms.reduce((acc, term) => {
+                    acc[term.id] = term.value;
+                    return acc;
+                }, {});
 
-                return of(fallbackSearch({ trackedEntityTypeId, fallbackFormValues, page, pageSize }));
+                return of(fallbackSearch({ trackedEntityTypeId, programId, fallbackFormValues, page, pageSize }));
             }
 
             return empty();
@@ -233,10 +214,11 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
 export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH),
-        flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }) => {
-            const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
+        flatMap(({ payload: { fallbackFormValues, programId, trackedEntityTypeId, pageSize, page } }) => {
+            const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
 
             const filter = getFiltersForAttributesSearchQuery(fallbackFormValues, attributes);
+
             const queryArgs = {
                 filter,
                 trackedEntityType: trackedEntityTypeId,
@@ -254,7 +236,6 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
                     }
                     return showEmptyResultsViewOnSearchPage();
                 }),
-                startWith(showLoadingViewOnSearchPage()),
                 catchError(handleErrors),
             );
         }),
