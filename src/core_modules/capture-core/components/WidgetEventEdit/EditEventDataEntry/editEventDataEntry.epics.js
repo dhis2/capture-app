@@ -27,7 +27,6 @@ import {
 import {
     actionTypes as widgetEventEditActionTypes,
 } from '../WidgetEventEdit.actions';
-import { deriveURLParamsFromLocation } from '../../../utils/routing/deriveURLParamsFromLocation';
 import {
     actionTypes as eventDetailsActionTypes,
     showEditEventDataEntry,
