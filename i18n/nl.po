@@ -216,22 +216,22 @@ msgid "Today"
 msgstr "Vandaag"
 
 msgid "This week"
-msgstr ""
+msgstr "Deze week"
 
 msgid "This month"
-msgstr ""
+msgstr "Deze maand"
 
 msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr ""
+msgstr "Laatste week"
 
 msgid "Last month"
-msgstr ""
+msgstr "Laatste maand"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "Laatste 3 maanden"
 
 msgid "Custom range"
 msgstr ""
