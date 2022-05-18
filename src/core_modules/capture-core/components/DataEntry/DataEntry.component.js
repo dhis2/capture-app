@@ -230,6 +230,7 @@ class DataEntryPlain extends React.Component<Props> {
             completeButton,
             mainButton,
             cancelButton,
+            deleteButton,
             notes,
             completionAttempted,
             saveAttempted,

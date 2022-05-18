@@ -176,8 +176,8 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
 export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY),
-        map(() => {
-            const { eventId, programId, orgUnitId, teiId, enrollmentId } = deriveURLParamsFromLocation();
+        map((action) => {
+            const { eventId, programId, orgUnitId, teiId, enrollmentId } = action.payload;
             const { currentSelections } = store.value;
             const params = {
                 programId,

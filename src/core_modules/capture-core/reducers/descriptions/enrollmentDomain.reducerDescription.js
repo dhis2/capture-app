@@ -98,6 +98,15 @@ export const enrollmentDomainDesc = createReducerDescription(
                 notes: [...state.enrollment.notes, note],
             },
         }),
+        [editEventActionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY]: (state, { payload: { eventId } }) => {
+            const events = state.enrollment.events?.map((event) => {
+                if (event.event === eventId) {
+                    return { ...event, pendingApiResponse: true };
+                }
+                return event;
+            });
+            return { ...state, enrollment: { ...state.enrollment, events } };
+        },
         [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_SUCCEEDED]: (state, { meta: { eventId } }) => {
             const newEnrollmentEvent = state.enrollment.events?.filter(item => item.event !== eventId);
             return {
@@ -107,6 +116,16 @@ export const enrollmentDomainDesc = createReducerDescription(
                     events: newEnrollmentEvent,
                 },
             };
+        },
+        [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: (state, { meta: { eventId } }) => {
+            const events = state.enrollment.events?.map((event) => {
+                if (event.event === eventId) {
+                    const { pendingApiResponse, ...dataToCommit } = event;
+                    return { ...dataToCommit, event: eventId };
+                }
+                return event;
+            });
+            return { ...state, enrollment: { ...state.enrollment, events } };
         },
     },
     'enrollmentDomain',

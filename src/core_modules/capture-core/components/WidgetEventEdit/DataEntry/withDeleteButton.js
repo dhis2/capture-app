@@ -75,7 +75,7 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
             return (
                 // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
-                    ref={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
                     // $FlowFixMe[extra-arg] automated comment
                     deleteButton={this.renderDeleteButton(hasWriteAccess)}
                     {...passOnProps}

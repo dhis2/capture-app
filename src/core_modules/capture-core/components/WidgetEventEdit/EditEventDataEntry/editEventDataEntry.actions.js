@@ -45,8 +45,8 @@ export const startSaveEditEventDataEntry = (eventId: string, serverData: Object,
 export const prerequisitesErrorLoadingEditEventDataEntry = (message: string) =>
     actionCreator(actionTypes.PREREQUISITES_ERROR_LOADING_EDIT_EVENT_DATA_ENTRY)(message);
 
-export const requestDeleteEventDataEntry = () =>
-    actionCreator(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY)();
+export const requestDeleteEventDataEntry = ({ eventId, programId, orgUnitId, teiId, enrollmentId }: Object) =>
+    actionCreator(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY)({ eventId, programId, orgUnitId, teiId, enrollmentId });
 
 export const startDeleteEventDataEntry = (eventId: string, params: Object, selections: Object) =>
     actionCreator(actionTypes.START_DELETE_EVENT_DATA_ENTRY)({ eventId }, {
