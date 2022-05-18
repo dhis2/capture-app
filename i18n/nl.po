@@ -183,13 +183,13 @@ msgid "Close"
 msgstr "Sluit"
 
 msgid "Last week"
-msgstr ""
+msgstr "Laatste week"
 
 msgid "Last month"
-msgstr ""
+msgstr "Laatste maand"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "Laatste 3 maanden"
 
 msgid "Custom range"
 msgstr ""
