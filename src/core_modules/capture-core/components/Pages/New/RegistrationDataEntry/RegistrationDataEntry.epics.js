@@ -72,7 +72,7 @@ const deriveEvents = ({
     const sanitisedIncidentDate = occurredAt || enrolledAt;
 
     return [...stages.values()]
-        .filter(({ id }) => redirectToEnrollmentEventNew && id !== redirectToStageId)
+        .filter(({ id }) => (redirectToEnrollmentEventNew && id !== redirectToStageId) || !redirectToEnrollmentEventNew)
         .filter(({ autoGenerateEvent }) => autoGenerateEvent)
         .map(({
             id: programStage,
