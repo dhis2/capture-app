@@ -468,3 +468,31 @@ And('the scope selector has the TEI context', () => {
         cy.contains('Anna Jones').should('exist');
     });
 });
+
+Given('you are in the Malaria case diagnosis, treatment and investigation program registration page', () => {
+    cy.visit('/#/new?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context', () => {
+    cy.visit('/#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
+});
+
+And('you fill the Malaria case diagnosis registration form with values', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(3)
+        .type(`Ana-${Math.round((new Date()).getTime() / 1000)}`)
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(4)
+        .type(`Maria-${Math.round((new Date()).getTime() / 1000)}`)
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(5)
+        .type('2022-05-04')
+        .blur();
+});
+
+Then('you see the enrollment event New page', () => {
+    cy.url().should('include', '/#/enrollmentEventNew?');
+    cy.url().should('include', 'stageId=hYyB7FUS5eR');
+});
