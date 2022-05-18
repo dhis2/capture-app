@@ -14,14 +14,16 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('loginThroughForm', (username = 'dhis2Username', password = 'dhis2Password') => {
-    cy.visit('/').then(() => {
-        cy.get('#j_username').type(Cypress.env(username));
-        cy.get('#j_password').type(Cypress.env(password));
-        cy.get('form').submit();
-    });
+    cy.session([username, password], () => {
+        cy.visit('/').then(() => {
+            cy.get('#j_username').type(Cypress.env(username));
+            cy.get('#j_password').type(Cypress.env(password));
+            cy.get('form').submit();
+        });
 
-    cy.get('[data-test="locked-selector"]', { timeout: 60000 })
-        .should('exist');
+        cy.get('[data-test="locked-selector"]', { timeout: 60000 })
+            .should('exist');
+    });
 });
 
 Cypress.Commands.add('forceVisit', (url) => {
