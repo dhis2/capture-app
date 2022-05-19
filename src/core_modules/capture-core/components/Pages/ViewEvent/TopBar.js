@@ -6,8 +6,7 @@ import {
     ScopeSelector,
     useSetProgramId,
     useSetOrgUnitId,
-    useResetProgramId,
-    useResetOrgUnitId,
+    useResetViewEventId,
     setCategoryOptionFromScopeSelector,
     resetCategoryOptionFromScopeSelector,
     resetAllCategoryOptionsFromScopeSelector,
@@ -26,8 +25,7 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories, isUserInterac
     const dispatch = useDispatch();
     const { setProgramId } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
-    const { resetProgramIdAndViewEventId } = useResetProgramId();
-    const { resetOrgUnitIdAndViewEventId } = useResetOrgUnitId();
+    const { resetViewEventId } = useResetViewEventId();
     const dispatchOnSetCategoryOption = useCallback(
         (categoryOption: Object, categoryId: string) => {
             dispatch(setCategoryOptionFromScopeSelector(categoryId, categoryOption));
@@ -53,8 +51,8 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories, isUserInterac
             selectedCategories={selectedCategories}
             onSetProgramId={id => setProgramId(id)}
             onSetOrgUnit={id => setOrgUnitId(id)}
-            onResetProgramId={() => resetProgramIdAndViewEventId('/')}
-            onResetOrgUnitId={() => resetOrgUnitIdAndViewEventId('/')}
+            onResetProgramId={() => resetViewEventId('/', { orgUnitId })}
+            onResetOrgUnitId={() => resetViewEventId('/', { programId })}
             onSetCategoryOption={dispatchOnSetCategoryOption}
             onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
             onResetCategoryOption={dispatchOnResetCategoryOption}

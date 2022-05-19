@@ -110,9 +110,8 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
 export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        map(({ payload: { eventId, programId, orgUnitId } }) => {
-            const orgUnitParameter = orgUnitId ? `&orgUnitId=${orgUnitId}` : '';
-            history.push(`/viewEvent?viewEventId=${eventId}&programId=${programId}${orgUnitParameter}`);
+        map(({ payload: { eventId } }) => {
+            history.push(`/viewEvent?viewEventId=${eventId}`);
             return resetLocationChange();
         }));
 

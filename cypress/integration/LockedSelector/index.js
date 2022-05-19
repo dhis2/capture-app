@@ -124,7 +124,7 @@ Then('you should see error message', () => {
 });
 
 Given('you land on a view event page from the url', () => {
-    cy.visit('/#/viewEvent?viewEventId=a969f7a3bf1&programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/viewEvent?viewEventId=a969f7a3bf1');
 });
 
 Given('you are in the new event page with no selections made', () => {

@@ -27,8 +27,8 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
 
     const onSelectListRow = useCallback(({ id }) => {
         window.scrollTo(0, 0);
-        dispatch(openViewEventPage(id, program?.id, orgUnitId));
-    }, [dispatch, program, orgUnitId]);
+        dispatch(openViewEventPage(id));
+    }, [dispatch]);
 
     const onDeleteEvent = useCallback((eventId: string) => {
         dispatch(requestDeleteEvent(eventId, storeId));

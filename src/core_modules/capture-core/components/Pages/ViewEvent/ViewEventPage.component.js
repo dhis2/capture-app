@@ -2,7 +2,6 @@
 import React from 'react';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import { useSelector } from 'react-redux';
-import { useLocationQuery } from '../../../utils/routing';
 import { ViewEvent } from './ViewEventComponent/ViewEvent.container';
 import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRelationshipWrapper.container';
 import { TopBar } from './TopBar';
@@ -13,9 +12,10 @@ type Props = {
 };
 
 export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => {
-    const { programId, orgUnitId } = useLocationQuery();
-    const { selectedCategories } = useSelector(({ currentSelections }) => ({
+    const { selectedCategories, programId, orgUnitId } = useSelector(({ currentSelections }) => ({
         selectedCategories: currentSelections.categoriesMeta,
+        programId: currentSelections.programId,
+        orgUnitId: currentSelections.orgUnitId,
     }));
 
     return (<div>
