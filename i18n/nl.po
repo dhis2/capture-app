@@ -379,22 +379,22 @@ msgid "To"
 msgstr ""
 
 msgid "This week"
-msgstr ""
+msgstr "Deze week"
 
 msgid "This month"
-msgstr ""
+msgstr "Deze maand"
 
 msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr ""
+msgstr "Laatste week"
 
 msgid "Last month"
-msgstr ""
+msgstr "Laatste maand"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "Laatste 3 maanden"
 
 msgid "Custom range"
 msgstr ""
@@ -775,7 +775,7 @@ msgid ""
 msgstr ""
 
 msgid "No results found"
-msgstr ""
+msgstr "Geen resultaten gevonden"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -919,7 +919,7 @@ msgid ""
 msgstr ""
 
 msgid "No, cancel"
-msgstr ""
+msgstr "Nee, annuleer"
 
 msgid "Yes, delete enrollment."
 msgstr ""
