@@ -44,7 +44,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
                     resource: 'tracker/relationships',
                     params: ({ variables: { teiId: updatedTeiId } }) => ({
                         tei: updatedTeiId,
-                        fields: ['relationshipType,to,from'],
+                        fields: ['relationshipType,to,from,createdAt'],
                     }),
                 },
             }),

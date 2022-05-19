@@ -77,6 +77,7 @@ export type RelationshipData = TEIRelationshipData | EventRelationshipData
 export type InputRelationship = {|
     relationshipType: string,
     relationshipName: string,
+    createdAt: string,
     relationship: string,
     bidirectional: boolean,
     from: RelationshipData,

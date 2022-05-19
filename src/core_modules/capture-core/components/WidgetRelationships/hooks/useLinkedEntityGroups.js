@@ -73,7 +73,7 @@ const determineLinkedEntity = (
 };
 
 
-const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData) => {
+const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData, createdAt: string) => {
     if (linkedEntity.event) {
         const { event: eventId, program: programId, programStage, orgUnitName, status } = linkedEntity.event;
         /*
@@ -96,6 +96,7 @@ const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData) => {
                 status,
                 programName: program?.name,
                 programStageName: stage?.stageForm?.name,
+                created: createdAt,
             },
         };
     } else if (linkedEntity.trackedEntity) {
@@ -104,7 +105,7 @@ const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData) => {
         return {
             id: trackedEntity,
             values: attributes,
-            options: { trackedEntityTypeName: tet.name },
+            options: { trackedEntityTypeName: tet.name, created: createdAt },
         };
     }
     log.error(errorCreator('Relationship type is not handled')({ linkedEntity }));
@@ -116,10 +117,11 @@ const getLinkedEntityInfo = (
     targetId: string,
     from: RelationshipData,
     to: RelationshipData,
+    createdAt: string,
 ) => {
     const linkedEntityData = determineLinkedEntity(relationshipType, targetId, from, to);
     if (!linkedEntityData) { return undefined; }
-    const metadata = getAttributeConstraintsForTEI(linkedEntityData.side);
+    const metadata = getAttributeConstraintsForTEI(linkedEntityData.side, createdAt);
     if (!metadata) { return undefined; }
     const { id, values, options } = metadata;
     const displayFields = getDisplayFields(linkedEntityData.constraint);
@@ -143,9 +145,9 @@ export const useLinkedEntityGroups = (
     const computeData = useCallback(async () => {
         if (relationships?.length && relationshipTypes?.length) {
             const linkedEntityGroups = relationships.reduce((acc, rel) => {
-                const { relationshipType: typeId, from, to } = rel;
+                const { relationshipType: typeId, from, to, createdAt } = rel;
                 const relationshipType = relationshipTypes.find(item => item.id === typeId);
-                const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to);
+                const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to, createdAt);
                 if (!metadata) { return acc; }
                 const { relationshipName, displayFields, id, values, groupId } = metadata;
                 const typeExist = acc.find(item => item.id === groupId);
