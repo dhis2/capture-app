@@ -1001,6 +1001,15 @@ Colored legend circles are only shown for indicator values that have them set up
 On the enrollment dashboard, the warning widget displays warnings related to the current dashboard. The widget shows warnings that are not associated with any specific data item.
 If there aren't any warnings to show for the current dashboard then the widget is hidden.
 
+### Relationships widget of tracked entity instance
+The Relationships widget on enrollment dashboard is used for viewing the record’s linked relationships to other records of the tracked entity instance.
+The number next to the title signifies the total number of relationships
+
+![](resources/images/tei_relationships_widget.png)
+
+For tracked entity instance relationships, the key attributes shown in the widget are the attributes that have been selected to be displayed in the widget (from the list of attributes that have been configured for that Tracked entity type and Program) in the relationship type page in Maintenance.
+
+If no attributes are selected, it will just show a row per record with tracked entity type name and relationship creation date.
 
 ## Enrollment event view and edit page
 
@@ -1103,6 +1112,11 @@ Below the schedule date entry, user can choose to add a comment to the scheduled
 After clicking **Schedule** button, user will be navigated back to enrollment overview page.
 
 ![](resources/images/enrollment-add-event-schedule-page.png)
+
+### Relationships widget of event
+For event relationships, event date and the key data elements shown in the widget are the data elements that have been  selected to be displayed in the Relationships widget (from the list of data elements configured for that program) in the relationship type page in Maintenance.
+
+If no data elements are selected, it will just show a row per record with program stage name and relationship creation date.
 
 
 ## Program stage event list 
