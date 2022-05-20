@@ -1,3 +1,10 @@
+## [100.3.4](https://github.com/dhis2/capture-app/compare/v100.3.3...v100.3.4) (2022-05-20)
+
+
+### Bug Fixes
+
+* [DHIS2-12188] do not download program indicators unless displayInForm=true ([#2769](https://github.com/dhis2/capture-app/issues/2769)) ([3d25428](https://github.com/dhis2/capture-app/commit/3d2542820fc0a6cb3d35153fb28ef24b53508bbf))
+
 ## [100.3.3](https://github.com/dhis2/capture-app/compare/v100.3.2...v100.3.3) (2022-05-19)
 
 
