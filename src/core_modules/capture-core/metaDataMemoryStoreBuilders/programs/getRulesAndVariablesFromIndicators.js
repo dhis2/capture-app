@@ -6,7 +6,6 @@ import type { ProgramRule, ProgramRuleAction, ProgramRuleVariable } from '../../
 export type CachedProgramIndicator = {
     id: string,
     code: string,
-    displayInForm: boolean,
     displayName: string,
     description?: ?string,
     expression: string,
@@ -140,10 +139,6 @@ function replacePositiveValueCountIfPresent(rule, action, variableObjectsCurrent
 }
 
 function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator, programId: string) {
-    if (!programIndicator.displayInForm) {
-        return null;
-    }
-
     // $FlowFixMe[prop-missing] automated comment
     const newAction: ProgramRuleAction = {
         id: programIndicator.id,
