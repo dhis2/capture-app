@@ -1,3 +1,10 @@
+## [100.3.5](https://github.com/dhis2/capture-app/compare/v100.3.4...v100.3.5) (2022-05-20)
+
+
+### Bug Fixes
+
+* [TECH-617] hide sections with no visible fields ([#2734](https://github.com/dhis2/capture-app/issues/2734)) ([fbb9ee3](https://github.com/dhis2/capture-app/commit/fbb9ee372622c28cf477208ea195b434521466ab))
+
 ## [100.3.4](https://github.com/dhis2/capture-app/compare/v100.3.3...v100.3.4) (2022-05-20)
 
 
