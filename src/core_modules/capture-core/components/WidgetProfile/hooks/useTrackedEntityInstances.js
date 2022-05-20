@@ -1,7 +1,6 @@
 // @flow
 import { useMemo, useState, useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
-import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData';
 
 type InputAttribute = {
     attribute: string,
@@ -15,7 +14,6 @@ type InputAttribute = {
 
 export const useTrackedEntityInstances = (teiId: string, programId: string, storedAttributeValues: Array<{ [key: string]: string }>) => {
     const [trackedEntityInstanceAttributes, setTrackedEntityInstanceAttributes] = useState<Array<InputAttribute>>([]);
-    const [trackedEntityTypeName, setTrackedEntityTypeName] = useState('');
 
     const { error, loading, data } = useDataQuery(
         useMemo(
@@ -30,6 +28,22 @@ export const useTrackedEntityInstances = (teiId: string, programId: string, stor
             }),
             [teiId, programId],
         ),
+    );
+
+    const { loading: tetLoading, data: tetData, refetch: refetchTET } = useDataQuery(
+        useMemo(
+            () => ({
+                trackedEntityType: {
+                    resource: 'trackedEntityTypes',
+                    id: ({ variables: { tetId } }) => tetId,
+                    params: {
+                        fields: 'displayName',
+                    },
+                },
+            }),
+            [],
+        ),
+        { lazy: true },
     );
 
     useEffect(() => {
@@ -51,14 +65,14 @@ export const useTrackedEntityInstances = (teiId: string, programId: string, stor
 
     useEffect(() => {
         if (data?.trackedEntityInstance?.trackedEntityType) {
-            const TEType = getTrackedEntityTypeThrowIfNotFound(data?.trackedEntityInstance?.trackedEntityType);
-            setTrackedEntityTypeName(TEType.name);
+            refetchTET({ variables: { tetId: data?.trackedEntityInstance?.trackedEntityType } });
         }
-    }, [data?.trackedEntityInstance?.trackedEntityType]);
+    }, [data?.trackedEntityInstance?.trackedEntityType, refetchTET]);
+
 
     return { error,
         loading,
         trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes,
-        trackedEntityTypeName: !loading && trackedEntityTypeName,
+        trackedEntityTypeName: !tetLoading && tetData?.trackedEntityType?.displayName,
     };
 };
