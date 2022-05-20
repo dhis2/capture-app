@@ -1,6 +1,7 @@
 // @flow
 import { useMemo, useState, useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData';
 
 type InputAttribute = {
     attribute: string,
@@ -14,6 +15,7 @@ type InputAttribute = {
 
 export const useTrackedEntityInstances = (teiId: string, programId: string, storedAttributeValues: Array<{ [key: string]: string }>) => {
     const [trackedEntityInstanceAttributes, setTrackedEntityInstanceAttributes] = useState<Array<InputAttribute>>([]);
+    const [trackedEntityTypeName, setTrackedEntityTypeName] = useState('');
 
     const { error, loading, data } = useDataQuery(
         useMemo(
@@ -47,5 +49,16 @@ export const useTrackedEntityInstances = (teiId: string, programId: string, stor
         }
     }, [storedAttributeValues]);
 
-    return { error, loading, trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes };
+    useEffect(() => {
+        if (data?.trackedEntityInstance?.trackedEntityType) {
+            const TEType = getTrackedEntityTypeThrowIfNotFound(data?.trackedEntityInstance?.trackedEntityType);
+            setTrackedEntityTypeName(TEType.name);
+        }
+    }, [data?.trackedEntityInstance?.trackedEntityType]);
+
+    return { error,
+        loading,
+        trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes,
+        trackedEntityTypeName: !loading && trackedEntityTypeName,
+    };
 };
