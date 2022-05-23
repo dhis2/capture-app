@@ -8,12 +8,12 @@ import type { InputRelationship, RelationshipType } from '../../Pages/common/Enr
 type Props = {|
     eventId: string,
     relationships: Array<InputRelationship>,
-    relationshipsTypes: Array<RelationshipType>,
+    relationshipTypes: Array<RelationshipType>,
     onAddRelationship: () => void
 |}
 
-export const WidgetEventsRelationships = ({ eventId, relationships, relationshipsTypes, onAddRelationship }: Props) => {
-    const { relationships: eventsRelationships } = useLinkedEntityGroups(eventId, relationshipsTypes, relationships);
+export const WidgetEventsRelationships = ({ eventId, relationships, relationshipTypes, onAddRelationship }: Props) => {
+    const { relationships: eventsRelationships } = useLinkedEntityGroups(eventId, relationshipTypes, relationships);
 
     return (
         <RelationshipsWidget

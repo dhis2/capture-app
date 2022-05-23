@@ -55,7 +55,7 @@ export const EnrollmentEditEventPage = () => {
             : (pageStatus = pageStatuses.MISSING_DATA);
     } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
     const { relationships: eventRelationships } = useEventsRelationships(eventId);
-    const relationshipTypes = useRelationshipTypesMetadata(relationships);
+    const teiRelationshipTypes = useRelationshipTypesMetadata(relationships);
     const eventRelationshipTypes = useRelationshipTypesMetadata(eventRelationships);
 
     return (
@@ -68,7 +68,8 @@ export const EnrollmentEditEventPage = () => {
             hideWidgets={hideWidgets}
             relationships={relationships}
             eventRelationships={eventRelationships}
-            relationshipTypes={[...relationshipTypes, ...eventRelationshipTypes]}
+            teiRelationshipTypes={teiRelationshipTypes}
+            eventRelationshipTypes={eventRelationshipTypes}
             teiId={teiId}
             eventId={eventId}
             enrollmentId={enrollmentId}

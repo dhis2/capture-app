@@ -67,7 +67,8 @@ const EnrollmentEditEventPagePain = ({
     programId,
     relationships,
     eventRelationships,
-    relationshipTypes,
+    teiRelationshipTypes,
+    eventRelationshipTypes,
     enrollmentsAsOptions,
     trackedEntityName,
     teiDisplayName,
@@ -193,13 +194,13 @@ const EnrollmentEditEventPagePain = ({
                         <WidgetTeisRelationships
                             teiId={teiId}
                             relationships={relationships}
-                            relationshipTypes={relationshipTypes}
+                            relationshipTypes={teiRelationshipTypes}
                             onAddRelationship={() => {}}
                         />
                         <WidgetEventsRelationships
                             eventId={eventId}
                             relationships={eventRelationships}
-                            relationshipTypes={relationshipTypes}
+                            relationshipTypes={eventRelationshipTypes}
                             onAddRelationship={() => {}}
                         />
                         {!hideWidgets.feedback && (
