@@ -1,3 +1,24 @@
+## [100.3.5](https://github.com/dhis2/capture-app/compare/v100.3.4...v100.3.5) (2022-05-20)
+
+
+### Bug Fixes
+
+* [TECH-617] hide sections with no visible fields ([#2734](https://github.com/dhis2/capture-app/issues/2734)) ([fbb9ee3](https://github.com/dhis2/capture-app/commit/fbb9ee372622c28cf477208ea195b434521466ab))
+
+## [100.3.4](https://github.com/dhis2/capture-app/compare/v100.3.3...v100.3.4) (2022-05-20)
+
+
+### Bug Fixes
+
+* [DHIS2-12188] do not download program indicators unless displayInForm=true ([#2769](https://github.com/dhis2/capture-app/issues/2769)) ([3d25428](https://github.com/dhis2/capture-app/commit/3d2542820fc0a6cb3d35153fb28ef24b53508bbf))
+
+## [100.3.3](https://github.com/dhis2/capture-app/compare/v100.3.2...v100.3.3) (2022-05-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([84d1167](https://github.com/dhis2/capture-app/commit/84d116790cd12b87362f39bb44d1e8afc6889eaa))
+
 ## [100.3.2](https://github.com/dhis2/capture-app/compare/v100.3.1...v100.3.2) (2022-05-10)
 
 
