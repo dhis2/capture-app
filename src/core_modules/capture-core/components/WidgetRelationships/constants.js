@@ -1,17 +1,13 @@
 
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
+import { dataElementTypes } from '../../metaData';
+import { convertServerToClient, convertClientToList } from '../../converters';
 
 export const relationshipEntities = Object.freeze({
     TRACKED_ENTITY_INSTANCE: 'TRACKED_ENTITY_INSTANCE',
     PROGRAM_STAGE_INSTANCE: 'PROGRAM_STAGE_INSTANCE',
     PROGRAM_INSTANCE: 'PROGRAM_INSTANCE',
-});
-
-export const relationshipWidgetTypes = Object.freeze({
-    TET_RELATIONSHIP: 'TET_RELATIONSHIP',
-    ENROLLMENT_RELATIONSHIP: 'ENROLLMENT_RELATIONSHIP',
-    EVENT_RELATIONSHIP: 'EVENT_RELATIONSHIP',
 });
 
 export const getBaseConfigHeaders = {
@@ -22,7 +18,7 @@ export const getBaseConfigHeaders = {
     }, {
         id: 'createdDate',
         displayName: i18n.t('Created date'),
-        convertValue: props => moment(props.created).format('YYYY-MM-DD'),
+        convertValue: props => convertClientToList(convertServerToClient(props.created, dataElementTypes.DATE)),
     }],
     [relationshipEntities.PROGRAM_STAGE_INSTANCE]: [{
         id: 'programStageName',
@@ -32,11 +28,11 @@ export const getBaseConfigHeaders = {
     {
         id: 'createdDate',
         displayName: i18n.t('Created date'),
-        convertValue: props => moment(props.created).format('YYYY-MM-DD'),
+        convertValue: props => convertClientToList(convertServerToClient(props.created, dataElementTypes.DATE)),
     }],
     [relationshipEntities.PROGRAM_INSTANCE]: [{
         id: 'createdDate',
         displayName: i18n.t('Created date'),
-        convertValue: props => moment(props.created).format('YYYY-MM-DD'),
+        convertValue: props => convertClientToList(convertServerToClient(props.created, dataElementTypes.DATE)),
     }],
 };

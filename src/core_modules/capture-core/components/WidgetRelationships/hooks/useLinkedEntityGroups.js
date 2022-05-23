@@ -9,10 +9,10 @@ import type {
     RelationshipType,
     RelationshipData,
     TEIAttribute,
-    DataValue,
-} from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
-import { getBaseConfigHeaders, relationshipEntities } from '../../Pages/Enrollment/EnrollmentPageDefault/hooks/constants';
-import { convertServerToClient, convertClientToServer } from '../../../converters';
+} from '../../WidgetRelationships/types';
+import type { DataValue } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import { getBaseConfigHeaders, relationshipEntities } from '../constants';
+import { convertServerToClient, convertClientToList } from '../../../converters';
 
 const convertAttributes = (
     attributes: Array<TEIAttribute> | Array<DataValue>,
@@ -34,7 +34,7 @@ const convertAttributes = (
 
     return {
         id: field.id,
-        value: convertClientToServer(convertServerToClient(attributeItem, field.valueType), field.valueType),
+        value: convertClientToList(convertServerToClient(attributeItem, field.valueType), field.valueType),
     };
 });
 
@@ -137,7 +137,7 @@ const getLinkedEntityInfo = (
 
 export const useLinkedEntityGroups = (
     targetId: string,
-    relationshipTypes: Array<Object>,
+    relationshipTypes: Array<RelationshipType>,
     relationships?: Array<InputRelationship>,
 ) => {
     const [relationshipsByType, setRelationshipByType] = useState([]);

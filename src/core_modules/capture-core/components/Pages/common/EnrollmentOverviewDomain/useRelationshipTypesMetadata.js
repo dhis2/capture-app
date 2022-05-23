@@ -6,7 +6,7 @@ import {
 import { userStores } from '../../../../storageControllers/stores';
 import { getUserStorageController } from '../../../../storageControllers';
 import { getApi } from '../../../../d2/d2Instance';
-import type { InputRelationship } from './useCommonEnrollmentDomainData';
+import type { InputRelationship } from '../../../WidgetRelationships/types';
 
 export const useRelationshipTypesMetadata = (relationships?: Array<InputRelationship>) => {
     const [relationshipTypesMetadata, setRelationshipTypesMetadata] = useState([]);
@@ -15,7 +15,7 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
         const { fromConstraint, toConstraint } = relType;
 
         const getPromise = (key, attributes) => {
-            if (attributes.length && !attributes.some(att => att.valueType)) {
+            if (attributes.length && !attributes.every(att => att.valueType)) {
                 return getApi().get(key, {
                     filter: `id:in:[${attributes.join(',')}]`,
                     fields: ['id,valueType,displayName'],
@@ -38,7 +38,7 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
             if (!dataValues) { return constraint; }
             if (constraint.relationshipEntity === 'TRACKED_ENTITY_INSTANCE') {
                 if (constraint.trackerDataView.attributes.length
-                    && !constraint.trackerDataView.attributes.some(att => att.valueType)) {
+                    && !constraint.trackerDataView.attributes.every(att => att.valueType)) {
                     return {
                         ...constraint,
                         trackerDataView: {
@@ -50,7 +50,7 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
                 }
             } else if (constraint.relationshipEntity === 'PROGRAM_STAGE_INSTANCE') {
                 if (constraint.trackerDataView.dataElements.length
-                    && !constraint.trackerDataView.dataElements.some(att => att.valueType)) {
+                    && !constraint.trackerDataView.dataElements.every(att => att.valueType)) {
                     return {
                         ...constraint,
                         trackerDataView: {

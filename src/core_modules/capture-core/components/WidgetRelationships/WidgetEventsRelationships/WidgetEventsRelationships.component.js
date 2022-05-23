@@ -3,7 +3,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useLinkedEntityGroups } from '../hooks/useLinkedEntityGroups';
 import { RelationshipsWidget } from '../RelationshipsComponent';
-import type { InputRelationship, RelationshipType } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import type { InputRelationship, RelationshipType } from '../types';
 
 type Props = {|
     eventId: string,

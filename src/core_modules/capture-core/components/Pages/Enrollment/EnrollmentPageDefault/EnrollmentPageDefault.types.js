@@ -2,7 +2,8 @@
 import type { Program } from 'capture-core/metaData';
 import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
-import type { Event, InputRelationship, RelationshipType } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import type { InputRelationship, RelationshipType } from '../../../WidgetRelationships/types';
 
 export type Props = {|
     program: Program,
