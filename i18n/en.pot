@@ -1095,6 +1095,12 @@ msgstr "This event doesn't have any comments"
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
 
+msgid "Delete event"
+msgstr "Delete event"
+
+msgid "Yes, delete event"
+msgstr "Yes, delete event"
+
 msgid "Event completed"
 msgstr "Event completed"
 
@@ -1238,9 +1244,6 @@ msgstr "Stages and Events"
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"
 
-msgid "Delete event"
-msgstr "Delete event"
-
 msgid "Download as JSON"
 msgstr "Download as JSON"
 
@@ -1366,6 +1369,9 @@ msgstr "Error saving enrollment"
 
 msgid "Error saving the enrollment event"
 msgstr "Error saving the enrollment event"
+
+msgid "Error deleting the enrollment event"
+msgstr "Error deleting the enrollment event"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "Error editing the event, the changes made were not saved"

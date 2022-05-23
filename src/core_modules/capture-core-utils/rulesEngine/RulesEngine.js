@@ -15,7 +15,7 @@ import type {
     IDateUtils,
 } from './rulesEngine.types';
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
-import { effectActions } from './constants';
+import { effectActions, typeof environmentTypes } from './constants';
 import { trimQuotes } from './commonUtils/trimQuotes';
 import { normalizeRuleVariable } from './commonUtils/normalizeRuleVariable';
 
@@ -195,11 +195,12 @@ export class RulesEngine {
         inputConverter: IConvertInputRulesValue,
         outputConverter: IConvertOutputRulesEffectsValue,
         dateUtils: IDateUtils,
+        environment: $Values<environmentTypes>,
     ) {
         this.inputConverter = inputConverter;
         this.outputConverter = outputConverter;
         const valueProcessor = new ValueProcessor(inputConverter);
-        this.variableService = new VariableService(valueProcessor.processValue, dateUtils);
+        this.variableService = new VariableService(valueProcessor.processValue, dateUtils, environment);
         this.dateUtils = dateUtils;
     }
 

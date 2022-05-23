@@ -1,3 +1,53 @@
+## [100.3.5](https://github.com/dhis2/capture-app/compare/v100.3.4...v100.3.5) (2022-05-20)
+
+
+### Bug Fixes
+
+* [TECH-617] hide sections with no visible fields ([#2734](https://github.com/dhis2/capture-app/issues/2734)) ([fbb9ee3](https://github.com/dhis2/capture-app/commit/fbb9ee372622c28cf477208ea195b434521466ab))
+
+## [100.3.4](https://github.com/dhis2/capture-app/compare/v100.3.3...v100.3.4) (2022-05-20)
+
+
+### Bug Fixes
+
+* [DHIS2-12188] do not download program indicators unless displayInForm=true ([#2769](https://github.com/dhis2/capture-app/issues/2769)) ([3d25428](https://github.com/dhis2/capture-app/commit/3d2542820fc0a6cb3d35153fb28ef24b53508bbf))
+
+## [100.3.3](https://github.com/dhis2/capture-app/compare/v100.3.2...v100.3.3) (2022-05-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([84d1167](https://github.com/dhis2/capture-app/commit/84d116790cd12b87362f39bb44d1e8afc6889eaa))
+
+## [100.3.2](https://github.com/dhis2/capture-app/compare/v100.3.1...v100.3.2) (2022-05-10)
+
+
+### Bug Fixes
+
+* [DHIS2-13241] URL out of sync after adding event ([66317d4](https://github.com/dhis2/capture-app/commit/66317d4e5615d516bc25c32f4c14e29f1ad316a1))
+
+## [100.3.1](https://github.com/dhis2/capture-app/compare/v100.3.0...v100.3.1) (2022-05-05)
+
+
+### Bug Fixes
+
+* initial CD test ([cea359b](https://github.com/dhis2/capture-app/commit/cea359b64dba0388bfa46872c7343479e9ee76a6))
+
+# [100.3.0](https://github.com/dhis2/capture-app/compare/v100.2.4...v100.3.0) (2022-05-05)
+
+
+### Features
+
+* [DHIS2-12246] add missing built-in variables in the rules engine ([#2663](https://github.com/dhis2/capture-app/issues/2663)) ([4cb18bc](https://github.com/dhis2/capture-app/commit/4cb18bc347615e8b305aa63c282282c1fa09efba))
+* ignore diacritics in option group search ([#2678](https://github.com/dhis2/capture-app/issues/2678)) ([c33a660](https://github.com/dhis2/capture-app/commit/c33a66001742d91e0d8391ecfe7581294a934a72))
+
+## [100.2.4](https://github.com/dhis2/capture-app/compare/v100.2.3...v100.2.4) (2022-05-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([42350cd](https://github.com/dhis2/capture-app/commit/42350cdd56cfdbee6e90a07ca85507e2fa67df28))
+
 ## [100.2.3](https://github.com/dhis2/capture-app/compare/v100.2.2...v100.2.3) (2022-04-25)
 
 
