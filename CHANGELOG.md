@@ -1,3 +1,10 @@
+## [100.4.1](https://github.com/dhis2/capture-app/compare/v100.4.0...v100.4.1) (2022-05-23)
+
+
+### Bug Fixes
+
+* [DSHI2-10332] confirm metadata loading for program at the end of the sequence ([4b6f1bf](https://github.com/dhis2/capture-app/commit/4b6f1bf0bcca760c8e799e74b05d334c1a4c675e))
+
 # [100.4.0](https://github.com/dhis2/capture-app/compare/v100.3.5...v100.4.0) (2022-05-23)
 
 
