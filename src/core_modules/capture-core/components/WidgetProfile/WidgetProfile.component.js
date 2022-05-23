@@ -54,7 +54,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                 value = convertClientToView(clientValue, valueType);
             }
             return {
-                attribute, key, value,
+                attribute, key, value, reactKey: attribute,
             };
         }), [clientAttributesWithSubvalues]);
 
