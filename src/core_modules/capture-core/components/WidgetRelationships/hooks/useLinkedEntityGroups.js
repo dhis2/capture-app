@@ -9,7 +9,7 @@ import type {
     RelationshipType,
     RelationshipData,
     TEIAttribute,
-} from '../../WidgetRelationships/types';
+} from '../common.types';
 import type { DataValue } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { getBaseConfigHeaders, relationshipEntities } from '../constants';
 import { convertServerToClient, convertClientToList } from '../../../converters';

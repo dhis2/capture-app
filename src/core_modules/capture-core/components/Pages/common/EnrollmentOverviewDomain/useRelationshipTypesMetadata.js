@@ -6,7 +6,7 @@ import {
 import { userStores } from '../../../../storageControllers/stores';
 import { getUserStorageController } from '../../../../storageControllers';
 import { getApi } from '../../../../d2/d2Instance';
-import type { InputRelationship } from '../../../WidgetRelationships/types';
+import type { InputRelationship } from '../../../WidgetRelationships/common.types';
 
 export const useRelationshipTypesMetadata = (relationships?: Array<InputRelationship>) => {
     const [relationshipTypesMetadata, setRelationshipTypesMetadata] = useState([]);

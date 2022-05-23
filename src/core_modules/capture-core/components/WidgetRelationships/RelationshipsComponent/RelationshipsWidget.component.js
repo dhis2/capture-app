@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { Chip } from '@dhis2/ui';
 import { Widget } from '../../Widget';
 import { Relationships } from './Relationships.component';
-import type { OutputRelationship } from '../types';
+import type { OutputRelationship } from '../common.types';
 
 type Props = {|
     relationships: Array<OutputRelationship>,

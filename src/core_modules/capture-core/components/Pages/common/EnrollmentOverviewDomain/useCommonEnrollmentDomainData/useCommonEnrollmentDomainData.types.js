@@ -1,5 +1,5 @@
 // @flow
-import type { InputRelationship } from '../../../../WidgetRelationships/types';
+import type { InputRelationship } from '../../../../WidgetRelationships/common.types';
 
 export type DataValue = {
     dataElement: string,
