@@ -7,6 +7,7 @@ import {
     storeOrganisationUnitsByProgram,
 } from './quickStoreOperations';
 import { loadRulesCentricMetadata } from './loadRulesCentricMetadata';
+import type { StalePrograms } from '../storeLoaders.types';
 
 const getCachedProgramsOutline = () => {
     const { storageController, storeNames } = getContext();
@@ -43,10 +44,10 @@ const removeUnavailablePrograms = async (apiPrograms, cachedPrograms) => {
 };
 
 /**
- * Retrieve the program ids for the programs that have an updated program version
+ * Retrieve the program ids (and version) for the programs that have an updated program version
  * If the program has an updated version we would like to update the program in the cache
  */
-const getStaleProgramIds = (apiPrograms, cachedPrograms) => {
+const getStalePrograms = (apiPrograms, cachedPrograms): StalePrograms => {
     const cachedProgramsAsObject = cachedPrograms
         .reduce((acc, cachedProgram) => {
             acc[cachedProgram.id] = cachedProgram;
@@ -58,7 +59,7 @@ const getStaleProgramIds = (apiPrograms, cachedPrograms) => {
             const cachedProgram = cachedProgramsAsObject[program.id];
             return !cachedProgram || cachedProgram.version !== program.version;
         })
-        .map(program => program.id);
+        .map(({ id, version }) => ({ id, version }));
 };
 
 /**
@@ -158,7 +159,8 @@ export const loadPrograms = async () => {
     const apiProgramsOutline = await queryProgramsOutline();
     const cachedProgramsOutline = await getCachedProgramsOutline();
     await removeUnavailablePrograms(apiProgramsOutline, cachedProgramsOutline);
-    const staleProgramIds = getStaleProgramIds(apiProgramsOutline, cachedProgramsOutline);
+    const stalePrograms = getStalePrograms(apiProgramsOutline, cachedProgramsOutline);
+    const staleProgramIds = stalePrograms.map(({ id }) => id);
 
     const programBatches = chunk(staleProgramIds, 50);
     const programsDataForSideEffects: Array<Object> = (await Promise.all(
@@ -166,5 +168,8 @@ export const loadPrograms = async () => {
             .map(loadProgramBatch),
     )).flat(1);
 
-    return getSideEffects(apiProgramsOutline, programsDataForSideEffects);
+    return {
+        ...getSideEffects(apiProgramsOutline, programsDataForSideEffects),
+        stalePrograms,
+    };
 };
