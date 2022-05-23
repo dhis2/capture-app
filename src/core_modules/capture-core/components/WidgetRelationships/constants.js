@@ -1,5 +1,3 @@
-
-import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes } from '../../metaData';
 import { convertServerToClient, convertClientToList } from '../../converters';
