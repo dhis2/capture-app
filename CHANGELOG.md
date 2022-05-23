@@ -1,3 +1,10 @@
+# [100.4.0](https://github.com/dhis2/capture-app/compare/v100.3.5...v100.4.0) (2022-05-23)
+
+
+### Features
+
+* [DHIS2-12974] Implement delete button for enrollment event ([#2727](https://github.com/dhis2/capture-app/issues/2727)) ([efbf771](https://github.com/dhis2/capture-app/commit/efbf771aff11b1a7b6e6c9e32f39365a3ea09572))
+
 ## [100.3.5](https://github.com/dhis2/capture-app/compare/v100.3.4...v100.3.5) (2022-05-20)
 
 
