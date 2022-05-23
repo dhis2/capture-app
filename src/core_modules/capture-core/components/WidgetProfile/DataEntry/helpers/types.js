@@ -2,5 +2,5 @@
 
 export type Geometry = {
     type: string,
-    coordinates: Array<Array<Array<Number>>> | { latitude: number, longitude: number },
+    coordinates: Array<Array<Array<number>>> | { latitude: number, longitude: number },
 };
