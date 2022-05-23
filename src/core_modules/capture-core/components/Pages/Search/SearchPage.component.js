@@ -185,7 +185,7 @@ const Index = ({
                                 <ModalActions>
                                     <ButtonStrip end>
                                         <Button type="button" onClick={navigateToRegisterUser}>
-                                            {i18n.t('Register an user')}
+                                            {i18n.t('Register a user')}
                                         </Button>
                                         <Button
                                             disabled={searchStatus === searchPageStatus.LOADING}

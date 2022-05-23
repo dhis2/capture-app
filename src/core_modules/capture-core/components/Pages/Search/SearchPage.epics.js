@@ -1,13 +1,12 @@
 // @flow
 import { ofType } from 'redux-observable';
+import { EMPTY } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { searchPageActionTypes } from './SearchPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
 import { topBarActionsActionTypes } from '../../TopBarActions';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../utils/routing';
 import { resetLocationChange } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
-import { startNewEnrollmentDataEntryInitialisation }
-    from '../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.actions';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
@@ -40,20 +39,6 @@ export const navigateToNewUserPageEpic = (action$: InputObservable, store: Redux
             const { currentSelections: { programId, orgUnitId }, searchPage: { currentSearchInfo } } = store.value;
             history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
 
-            const values = currentSearchInfo.currentSearchTerms?.reduce((acc, item) => {
-                acc[item.id] = item.value;
-                return acc;
-            }, {});
-
-
-            return new Promise((resolve) => {
-                setTimeout(() => resolve(startNewEnrollmentDataEntryInitialisation({
-                    selectedOrgUnit: { id: orgUnitId },
-                    selectedScopeId: programId,
-                    dataEntryId: 'newPageDataEntryId',
-                    formValues: values,
-                    clientValues: values,
-                })), 0);
-            });
+            return EMPTY;
         }),
     );
