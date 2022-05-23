@@ -17,6 +17,7 @@ export const DataEntry = ({
     onSaveSuccessActionType,
     onSaveErrorActionType,
     onSaveExternal,
+    geometry,
 }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
@@ -29,6 +30,7 @@ export const DataEntry = ({
         clientAttributesWithSubvalues,
         dataEntryId,
         itemId,
+        geometry,
     });
     const { trackedEntityName, ...context } = dataEntryContext;
     const { formFoundation } = context;

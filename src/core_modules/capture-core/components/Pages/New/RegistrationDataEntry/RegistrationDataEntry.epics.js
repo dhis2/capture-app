@@ -17,9 +17,9 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
-const geometryType = (key) => {
-    const types = ['Point', 'None', 'Polygon'];
-    return types.find(type => key.toLowerCase().includes(type.toLowerCase()));
+const geometryType = (formValuesKey) => {
+    const geometryKeys = ['FEATURETYPE_POINT', 'FEATURETYPE_POLYGON'];
+    return geometryKeys.find(geometryKey => geometryKey === formValuesKey);
 };
 
 const standardGeoJson = (geometry) => {
@@ -104,7 +104,7 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
                 {
                     trackedEntities: [{
                         attributes: deriveAttributesFromFormValues(formServerValues),
-                        geometry: deriveGeometryFromFormValues(formServerValues),
+                        geometry: deriveGeometryFromFormValues(values),
                         enrollments: [],
                         orgUnit: orgUnitId,
                         trackedEntityType: trackedEntityTypeId,
@@ -143,7 +143,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
             return saveNewTrackedEntityInstanceWithEnrollment(
                 {
                     trackedEntities: [{
-                        geometry: deriveGeometryFromFormValues(formServerValues),
+                        geometry: deriveGeometryFromFormValues(values),
                         enrollments: [
                             {
                                 geometry: standardGeoJson(geometry),

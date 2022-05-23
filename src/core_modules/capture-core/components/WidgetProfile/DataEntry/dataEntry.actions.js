@@ -21,6 +21,7 @@ import { rulesExecutedPostUpdateField } from '../../DataEntry/actions/dataEntry.
 import { startRunRulesPostUpdateField } from '../../DataEntry';
 import { getRulesActionsForTEI } from './ProgramRules';
 import { addFormData } from '../../D2Form/actions/form.actions';
+import type { Geometry } from './helpers/types';
 
 export const TEI_MODAL_STATE = {
     OPEN: 'Open',
@@ -37,7 +38,7 @@ export const dataEntryActionTypes = {
     TEI_UPDATE_SUCCESS: 'TeiUpdateSucess',
     TEI_UPDATE_ERROR: 'TeiUpdateError',
     SET_TEI_MODAL_ERROR: 'SetTeiModalError',
-    SET_TEI_ATTRIBUTE_VALUES: 'SetTeiAttributeValues',
+    SET_TEI_VALUES: 'SetTeiValues',
     CLEAN_TEI_MODAL: 'CleanTeiModal',
 };
 const dataEntryPropsToInclude: Array<Object> = [
@@ -65,7 +66,17 @@ type Context = {
 
 export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction<any, any>) => {
     const uid = uuid();
-    const { orgUnit, trackedEntityAttributes, optionSets, rulesContainer, formFoundation, state, otherEvents, dataElements, enrollment } = context;
+    const {
+        orgUnit,
+        trackedEntityAttributes,
+        optionSets,
+        rulesContainer,
+        formFoundation,
+        state,
+        otherEvents,
+        dataElements,
+        enrollment,
+    } = context;
     const { dataEntryId, itemId, elementId, value, uiState } = innerAction.payload || {};
     const fieldData: FieldData = {
         elementId,
@@ -98,8 +109,14 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
     );
 };
 
-export const setTeiModalError = (hasError: boolean) => actionCreator(dataEntryActionTypes.SET_TEI_MODAL_ERROR)({ hasError });
-export const setTeiAttributeValues = (attributeValues: Array<{ [key: string]: string }>) => actionCreator(dataEntryActionTypes.SET_TEI_ATTRIBUTE_VALUES)({ attributeValues });
+export const setTeiModalError = (hasError: boolean) =>
+    actionCreator(dataEntryActionTypes.SET_TEI_MODAL_ERROR)({ hasError });
+
+export const setTeiValues = (
+    attributeValues: Array<{ [key: string]: string }>,
+    geometry: ?Geometry,
+) => actionCreator(dataEntryActionTypes.SET_TEI_VALUES)({ attributeValues, geometry });
+
 export const cleanTeiModal = () => actionCreator(dataEntryActionTypes.CLEAN_TEI_MODAL)();
 
 export const updateTeiRequest = ({
@@ -171,6 +188,9 @@ export const getOpenDataEntryActions = ({
     formValues: { [key: string]: any },
 }) =>
     batchActions(
-        [...loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude), addFormData(`${dataEntryId}-${itemId}`, formValues)],
+        [
+            ...loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude),
+            addFormData(`${dataEntryId}-${itemId}`, formValues),
+        ],
         dataEntryActionTypes.OPEN_DATA_ENTRY_PROFILE_ACTION_BATCH,
     );

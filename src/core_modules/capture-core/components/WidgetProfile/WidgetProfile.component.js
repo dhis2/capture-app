@@ -25,18 +25,28 @@ const styles = {
     },
 };
 
-const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = '', onUpdateTeiAttributeValues, classes }: Props) => {
+const WidgetProfilePlain = ({
+    teiId,
+    programId,
+    showEdit = false,
+    orgUnitId = '',
+    onUpdateTeiAttributeValues,
+    classes,
+}: Props) => {
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
-    const { storedAttributeValues, hasError } = useSelector(({ trackedEntityInstance }) => ({
+    const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
-        hasError: trackedEntityInstance?.hasError }));
+        storedGeometry: trackedEntityInstance?.geometry,
+        hasError: trackedEntityInstance?.hasError,
+    }));
     const {
         loading: trackedEntityInstancesLoading,
         error: trackedEntityInstancesError,
         trackedEntityInstanceAttributes,
-    } = useTrackedEntityInstances(teiId, programId, storedAttributeValues);
+        geometry,
+    } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
 
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
@@ -79,10 +89,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
             return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
         }
 
-        return (<FlatList
-            dataTest="profile-widget-flatlist"
-            list={displayInListAttributes}
-        />);
+        return <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />;
     };
 
     return (
@@ -115,6 +122,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                     onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
                     onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}
                     modalState={modalState}
+                    geometry={geometry}
                 />
             )}
         </div>
