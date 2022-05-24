@@ -1,3 +1,10 @@
+# [100.5.0](https://github.com/dhis2/capture-app/compare/v100.4.2...v100.5.0) (2022-05-24)
+
+
+### Features
+
+* [DHIS2-11977] add d2:hasUserRole ([#2761](https://github.com/dhis2/capture-app/issues/2761)) ([e58b25e](https://github.com/dhis2/capture-app/commit/e58b25e56b855b96d1a9a99a5c5ac50d4a4be302))
+
 ## [100.4.2](https://github.com/dhis2/capture-app/compare/v100.4.1...v100.4.2) (2022-05-24)
 
 
