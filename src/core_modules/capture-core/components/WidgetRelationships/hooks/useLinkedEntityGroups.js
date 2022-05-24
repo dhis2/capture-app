@@ -113,7 +113,7 @@ const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData, createdAt
 };
 
 const getLinkedEntityInfo = (
-    relationshipType: Object,
+    relationshipType: RelationshipType,
     targetId: string,
     from: RelationshipData,
     to: RelationshipData,
@@ -147,6 +147,7 @@ export const useLinkedEntityGroups = (
             const linkedEntityGroups = relationships.reduce((acc, rel) => {
                 const { relationshipType: typeId, from, to, createdAt } = rel;
                 const relationshipType = relationshipTypes.find(item => item.id === typeId);
+                if (!relationshipType) { return acc; }
                 const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to, createdAt);
                 if (!metadata) { return acc; }
                 const { relationshipName, displayFields, id, values, groupId } = metadata;
