@@ -232,6 +232,27 @@ const Index = ({
                             </div>
 
                         }
+
+                        {
+                            searchStatus === searchPageStatus.NOT_ENOUGH_ATTRIBUTES &&
+                            <Modal position="middle">
+                                <ModalTitle>{i18n.t('Not enough attributes')}</ModalTitle>
+                                <ModalContent>
+                                    {i18n.t('You can change your search terms and search again to find what you are looking for.')}
+                                </ModalContent>
+                                <ModalActions>
+                                    <ButtonStrip end>
+                                        <Button
+                                            disabled={searchStatus === searchPageStatus.LOADING}
+                                            onClick={showInitialSearchPage}
+                                            type="button"
+                                        >
+                                            {i18n.t('Back to search')}
+                                        </Button>
+                                    </ButtonStrip>
+                                </ModalActions>
+                            </Modal>
+                        }
                     </div>
                 </Paper>
 

@@ -9,6 +9,7 @@ export const searchPageStatus = {
     SHOW_RESULTS: 'SHOW_RESULTS',
     ERROR: 'ERROR',
     TOO_MANY_RESULTS: 'TOO_MANY_RESULTS',
+    NOT_ENOUGH_ATTRIBUTES: 'NOT_ENOUGH_ATTRIBUTES',
 };
 const initialReducerValue = {
     searchStatus: searchPageStatus.INITIAL,
@@ -51,13 +52,16 @@ export const searchPageDesc = createReducerDescription({
         ...state,
         searchStatus: searchPageStatus.TOO_MANY_RESULTS,
     }),
+    [searchPageActionTypes.FALLBACK_NOT_ENOUGH_ATTRIBUTES]: state => ({
+        ...state,
+        searchStatus: searchPageStatus.NOT_ENOUGH_ATTRIBUTES,
+    }),
     [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
         ...state,
         currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
         otherResults: undefined,
         otherCurrentPage: 0,
     }),
-
     [searchPageActionTypes.FALLBACK_SEARCH]: (state, { payload: { fallbackFormValues, trackedEntityTypeId } }) => ({
         ...state,
         keptFallbackSearchFormValues: { ...fallbackFormValues, trackedEntityTypeId },

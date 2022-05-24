@@ -11,6 +11,7 @@ import {
     showSuccessResultsViewOnSearchPage,
     addSuccessResultsViewOnSearchPage,
     showTooManyResultsViewOnSearchPage,
+    showFallbackNotEnoughAttributesOnSearchPage,
 } from '../SearchPage.actions';
 import {
     getTrackedEntityInstances,
@@ -196,15 +197,29 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
         flatMap(({ payload: { programId, pageSize, page } }) => {
             const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
             if (trackerProgram.trackedEntityType) {
-                const { id: trackedEntityTypeId } = trackerProgram.trackedEntityType;
-                const { searchPage } = store.value;
+                const { id: trackedEntityTypeId, searchGroups } = trackerProgram.trackedEntityType;
+                const availableSearchGroup = searchGroups.find(group => !group.unique);
 
-                const fallbackFormValues = searchPage.currentSearchInfo.currentSearchTerms.reduce((acc, term) => {
-                    acc[term.id] = term.value;
-                    return acc;
-                }, {});
+                if (availableSearchGroup) {
+                    const { minAttributesRequiredToSearch, searchForm } = availableSearchGroup;
+                    const { searchPage } = store.value;
+                    const searchTerms = searchPage.currentSearchInfo.currentSearchTerms;
+                    const searchableFields = searchForm.getElements();
 
-                return of(fallbackSearch({ trackedEntityTypeId, programId, fallbackFormValues, page, pageSize }));
+                    const { searchableValuesCount, fallbackFormValues } = searchTerms.reduce((acc, term) => {
+                        if (searchableFields.find(({ id }) => id === term.id)) {
+                            acc.searchableValuesCount += 1;
+                        }
+                        acc.fallbackFormValues[term.id] = term.value;
+                        return acc;
+                    }, { searchableValuesCount: 0, fallbackFormValues: {} });
+
+                    if (searchableValuesCount >= minAttributesRequiredToSearch) {
+                        return of(fallbackSearch({ trackedEntityTypeId, fallbackFormValues, page, pageSize }));
+                    }
+                }
+
+                return of(showFallbackNotEnoughAttributesOnSearchPage());
             }
 
             return empty();
@@ -214,10 +229,9 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
 export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH),
-        flatMap(({ payload: { fallbackFormValues, programId, trackedEntityTypeId, pageSize, page } }) => {
-            const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
-
-            const filter = getFiltersForAttributesSearchQuery(fallbackFormValues, attributes);
+        flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }) => {
+            const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
+            const filter = getFiltersForAttributesSearchQuery(fallbackFormValues, attributes).filter(query => query);
 
             const queryArgs = {
                 filter,

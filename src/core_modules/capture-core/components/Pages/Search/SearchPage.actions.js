@@ -17,6 +17,7 @@ export const searchPageActionTypes = {
     INITIAL_PROGRAM_ID_STORE: 'StoreInitialProgramId',
     FALLBACK_SEARCH_START: 'StartFallbackSearch',
     FALLBACK_SEARCH: 'FallbackSearchTakesPlace',
+    FALLBACK_NOT_ENOUGH_ATTRIBUTES: 'FallbackNotEnoughAttributes',
     FALLBACK_SEARCH_COMPLETED: 'FallbackWillPushToSearchPageWithoutProgramSelected',
     ALL_SEARCH_RELATED_DATA_CLEAN: 'CleanSearchRelatedData',
     FALLBACK_SEARCH_RELATED_DATA_CLEAN: 'CleanFallbackSearchRelatedData',
@@ -71,12 +72,14 @@ export const addSuccessResultsViewOnSearchPage = (otherResults, otherCurrentPage
 export const startFallbackSearch = ({ programId, formId, page = 1, pageSize, availableSearchOptions }) =>
     actionCreator(searchPageActionTypes.FALLBACK_SEARCH_START)({ programId, formId, page, pageSize, availableSearchOptions });
 
-export const fallbackSearch = ({ fallbackFormValues, programId, trackedEntityTypeId, pageSize, page = 1 }) =>
-    actionCreator(searchPageActionTypes.FALLBACK_SEARCH)({ fallbackFormValues, programId, trackedEntityTypeId, pageSize, page });
+export const fallbackSearch = ({ fallbackFormValues, trackedEntityTypeId, pageSize, page = 1 }) =>
+    actionCreator(searchPageActionTypes.FALLBACK_SEARCH)({ fallbackFormValues, trackedEntityTypeId, pageSize, page });
 
 export const fallbackPushPage = ({ orgUnitId, trackedEntityTypeId, values }) =>
     actionCreator(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED)({ orgUnitId, trackedEntityTypeId, values });
 
+export const showFallbackNotEnoughAttributesOnSearchPage = () =>
+    actionCreator(searchPageActionTypes.FALLBACK_NOT_ENOUGH_ATTRIBUTES)();
 
 export const cleanSearchRelatedData = () =>
     actionCreator(searchPageActionTypes.ALL_SEARCH_RELATED_DATA_CLEAN)();
