@@ -133,6 +133,7 @@ export type RulesEngineInput = {|
     trackedEntityAttributes?: ?TrackedEntityAttributes,
     selectedEnrollment?: ?Enrollment,
     selectedOrgUnit: OrgUnit,
+    selectedUserRoles: Array<string>,
     optionSets: OptionSets,
 |}
 
@@ -234,7 +235,7 @@ export type D2Functions = {
     'd2:split': D2FunctionParameters,
     'd2:length': D2FunctionParameters,
     'd2:inOrgUnitGroup': D2FunctionParameters,
-    // d2:hasUserRole(<user_role>)
+    'd2:hasUserRole': D2FunctionParameters,
     'd2:zScoreWFA': D2FunctionParameters,
     'd2:zScoreHFA': D2FunctionParameters,
     'd2:zScoreWFH': D2FunctionParameters,

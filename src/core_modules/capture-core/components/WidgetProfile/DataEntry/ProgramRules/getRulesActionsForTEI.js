@@ -52,6 +52,7 @@ export const getRulesActionsForTEI = ({
     rulesContainer,
     otherEvents,
     dataElements,
+    userRoles,
 }: {
     foundation: RenderFoundation,
     formId: string,
@@ -63,6 +64,7 @@ export const getRulesActionsForTEI = ({
     rulesContainer: ProgramRulesContainer,
     otherEvents?: ?EventsData,
     dataElements: ?DataElements,
+    userRoles: Array<string>,
 }) => {
     const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
         programRulesContainer: rulesContainer,
@@ -73,6 +75,7 @@ export const getRulesActionsForTEI = ({
         selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData),
         selectedEntity: teiValues,
         selectedOrgUnit: orgUnit,
+        selectedUserRoles: userRoles,
         optionSets,
     });
     return getRulesActions(effects, foundation, formId);
