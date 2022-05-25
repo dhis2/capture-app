@@ -6,7 +6,7 @@ import type { Props } from './mainPage.types';
 import { MainPageStatuses } from './MainPage.constants';
 import { WithoutOrgUnitSelectedMessage } from './WithoutOrgUnitSelectedMessage/WithoutOrgUnitSelectedMessage';
 import { WithoutCategorySelectedMessage } from './WithoutCategorySelectedMessage/WithoutCategorySelectedMessage';
-import { TopBar } from './TopBar';
+import { TopBar } from './TopBar.container';
 
 const getStyles = () => ({
     listContainer: {
