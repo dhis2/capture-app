@@ -7,7 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { TopBar } from './TopBar';
+import { TopBar } from './TopBar.container';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { NEW_TEI_DATA_ENTRY_ID, newPageStatuses } from './NewPage.constants';

@@ -17,7 +17,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 import { useLocation } from 'react-router-dom';
 
-import { TopBar } from './TopBar';
+import { TopBar } from './TopBar.container';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
