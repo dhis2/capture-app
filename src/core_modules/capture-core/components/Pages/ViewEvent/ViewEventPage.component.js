@@ -4,7 +4,7 @@ import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import { useSelector } from 'react-redux';
 import { ViewEvent } from './ViewEventComponent/ViewEvent.container';
 import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRelationshipWrapper.container';
-import { TopBar } from './TopBar';
+import { TopBar } from './TopBar.container';
 
 type Props = {
   isUserInteractionInProgress: boolean,

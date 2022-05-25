@@ -4,8 +4,6 @@ import { useDispatch } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import {
     ScopeSelector,
-    useSetProgramId,
-    useSetOrgUnitId,
     useResetViewEventId,
     setCategoryOptionFromScopeSelector,
     resetCategoryOptionFromScopeSelector,
@@ -23,8 +21,6 @@ type TopBarProps = {
 
 export const TopBar = ({ programId, orgUnitId, selectedCategories, isUserInteractionInProgress }: TopBarProps) => {
     const dispatch = useDispatch();
-    const { setProgramId } = useSetProgramId();
-    const { setOrgUnitId } = useSetOrgUnitId();
     const { resetViewEventId } = useResetViewEventId();
     const dispatchOnSetCategoryOption = useCallback(
         (categoryOption: Object, categoryId: string) => {
@@ -49,8 +45,6 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories, isUserInterac
             selectedProgramId={programId}
             selectedOrgUnitId={orgUnitId}
             selectedCategories={selectedCategories}
-            onSetProgramId={id => setProgramId(id)}
-            onSetOrgUnit={id => setOrgUnitId(id)}
             onResetProgramId={() => resetViewEventId('/', { orgUnitId })}
             onResetOrgUnitId={() => resetViewEventId('/', { programId })}
             onSetCategoryOption={dispatchOnSetCategoryOption}
