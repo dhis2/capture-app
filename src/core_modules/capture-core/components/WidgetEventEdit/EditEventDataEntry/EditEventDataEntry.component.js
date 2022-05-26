@@ -34,6 +34,7 @@ import {
 
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
+import { withDeleteButton } from '../DataEntry/withDeleteButton';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
@@ -254,7 +255,8 @@ const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(Geometry
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
-const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
+const DeletableDataEntry = withDeleteButton()(CompletableDataEntry);
+const DataEntryWrapper = withBrowserBackWarning()(DeletableDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,
@@ -263,6 +265,7 @@ type Props = {
     onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: (orgUnit: OrgUnit) => void,
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onDelete: () => void,
     onCancel: () => void,
     classes: {
         dataEntryContainer: string,

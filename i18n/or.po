@@ -1,36 +1,33 @@
 # 
 # Translators:
-# Yury Rogachev <yury@dhis2.org>, 2022
+# SubhamJena <subhamjena8465@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
-"Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
+"Last-Translator: SubhamJena <subhamjena8465@gmail.com>, 2022\n"
+"Language-Team: Odia (https://www.transifex.com/hisp-uio/teams/100509/or/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uz@Latn\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: or\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Choose one or more dates..."
-msgstr "Bir yoki bir necha sanalarni tanlang..."
+msgstr ""
 
 msgid "Choose a date..."
-msgstr "Sanani tanlang ..."
+msgstr ""
 
 msgid "Today"
-msgstr "Bugun"
+msgstr "ଆଜି"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
-"Buning mumkin boʼlgan sabablari quyidagilar; brauzer yoki rejim (masalan, "
-"maxfiylik rejimi) qoʼllab quvvatlanmasligi. Tafsilotlar uchun jurnalga "
-"qarang."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -38,137 +35,132 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
-"Siz ayni shu domenda Nazorat Ilovasining boshqa versiyasini ochdingiz. "
-"Hozirda Nazorat Ilovasi faqat bitta versiyani bir vaqtda (bir xil "
-"ddomendagi) ishlashini qoʼllab quvvatlaydi. Ushbu versiyani qayta "
-"ishlatmoqchi boʼlsangiz, Iltimos, sahifani yangilang, ammo boshqa versiyalar"
-" yopilishini unutmang."
 
 msgid "Organisation unit"
-msgstr "Tashkiliy birlik"
+msgstr ""
 
 msgid "Date of enrollment"
-msgstr "Roʼyxatga kiritilgan sana"
+msgstr ""
 
 msgid "Last updated"
-msgstr "Oxirgi yangilangan"
+msgstr ""
 
 msgid "Enrolled"
-msgstr "Roʼyxatga kiritilgan"
+msgstr ""
 
 msgid "Previously enrolled"
-msgstr "Ilgari roʼyxatga kiritilgan"
+msgstr ""
 
 msgid "This value is validating"
-msgstr "Ushbu qiymat tasdiqlanmoqda"
+msgstr ""
 
 msgid "Async field update failed"
-msgstr "Аsinxron maydon yangilanishi amalga oshmadi"
+msgstr ""
 
 msgid "A value is required"
-msgstr "Qiymat talab qilinadi"
+msgstr ""
 
 msgid "Please provide a valid number"
-msgstr "Iltimos, toʼgʼri raqamni koʼrsating"
+msgstr ""
 
 msgid "Please provide a valid integer"
-msgstr "Iltimos, toʼgʼri butun sonni koʼrsating"
+msgstr ""
 
 msgid "Please provide a positive integer"
-msgstr "Iltimos, butun musbat sonni koʼrsating"
+msgstr ""
 
 msgid "Please provide zero or a positive integer"
-msgstr "Iltimos, Nol yoki butun musbat sonni koʼrsating"
+msgstr ""
 
 msgid "Please provide a negative integer"
-msgstr "Iltimos, butun manfiy sonni koʼrsating"
+msgstr ""
 
 msgid "Please provide a valid date"
-msgstr "Iltimos, toʼgʼri sanani koʼrsating"
+msgstr ""
 
 msgid "A date in the future is not allowed"
-msgstr "Kelajakdagi sana qabul qilinmaydi"
+msgstr ""
 
 msgid "Please provide a valid date and time"
-msgstr "Iltimos, tegishli sana va vaqtni koʼrsating"
+msgstr ""
 
 msgid "Please provide a valid time"
-msgstr "Iltimos, toʼgʼri vaqtni koʼrsating"
+msgstr ""
 
 msgid "Please provide a valid percentage"
-msgstr "Iltimos, tegishli foizni taqdim eting"
+msgstr ""
 
 msgid "Please provide a valid url"
-msgstr "Iltimos, haqiqiy URL manzilni koʼrsating"
+msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr "Iltimos, amaldagi ye-pochta manzilini koʼrsating"
+msgstr ""
 
 msgid "Please provide a valid age"
-msgstr "Iltimos, toʼgʼri yoshni koʼrsating"
+msgstr ""
 
 msgid "Please provide a valid phone number"
-msgstr "Iltimos, toʼgʼri telefon raqamini koʼrsating"
+msgstr ""
 
 msgid "Please provide a valid organisation unit"
-msgstr "Iltimos, toʼgʼri tashkiliy boʼlimni koʼrsating"
+msgstr ""
 
 msgid "Please provide valid coordinates"
-msgstr "Iltimos, toʼgʼri koordinatalarni koʼrsating"
+msgstr ""
 
 msgid "This value already exists"
-msgstr "Bu qiymat allaqachon mavjud"
+msgstr ""
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr "Sana \"gacha\" katta boʼlishi mumkin emas sana \"dan\""
+msgstr ""
 
 msgid "Checking..."
-msgstr "Tekshirilmoqda..."
+msgstr ""
 
 msgid "Area"
-msgstr "Maydon"
+msgstr ""
 
 msgid "Coordinate"
-msgstr "Muvofiqlashtirish"
+msgstr ""
 
 msgid "Enrollment"
-msgstr "Roʼyxatga olish"
+msgstr ""
 
 msgid "A future date is not allowed"
-msgstr "Kelajakdagi sana tanloviga ruxsat berilmaydi"
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Cancel"
-msgstr "Bekor qilish"
+msgstr ""
 
 msgid "Metadata error. see log for details"
-msgstr "MetaMaʼlumotda xatolik. Tafsilotlar uchun jurnalga qarang."
+msgstr ""
 
 msgid "Assigned user"
-msgstr "Tavsiya etilgan foydalanuvchi"
+msgstr ""
 
 msgid "Search for user"
-msgstr "Foydalanuvchini izlash"
+msgstr ""
 
 msgid "Complete event"
 msgstr ""
 
 msgid "Basic info"
-msgstr "Аsosiy maʼlumot"
+msgstr ""
 
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 msgid "Comments"
-msgstr "Izohlar"
+msgstr ""
 
 msgid "Relationships"
-msgstr "Oʼzaro aloqalar"
+msgstr ""
 
 msgid "Assignee"
-msgstr "Vakolat berilgan shaxs"
+msgstr ""
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr ""
@@ -177,95 +169,88 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Bu hodisa/tadbir dasturi emas yoki metamaʼlumotlar buzilgan. Tafsilotlar "
-"uchun jurnalga qarang."
 
 msgid "This event"
-msgstr "Ushbu hodisa/tadbir"
+msgstr ""
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"{{relationshipTypeName}} turining {{entityName}} bilan aloqasi allaqachon "
-"mavjud"
 
 msgid "Active"
-msgstr "Faol"
+msgstr ""
 
 msgid "Completed"
-msgstr "Toʼldirildi"
+msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
-"Iltimos, hodisa/tadbirni saqlashdan oldin sharh yozing yoki bekor qiling"
 
 msgid "Save and add another"
-msgstr "Saqlash va boshqasini qoʼshish"
+msgstr ""
 
 msgid "Save and exit"
-msgstr "Saqlash va chiqish"
+msgstr ""
 
 msgid "Finish"
-msgstr "Tugatish"
+msgstr ""
 
 msgid "Save without completing"
 msgstr ""
 
 msgid "Complete"
-msgstr "Toʼldirish"
+msgstr ""
 
 msgid "No write access"
-msgstr "Yozuv kiritish uchun ruxsat yoʼq"
+msgstr ""
 
 msgid "New {{titleText}}"
 msgstr ""
 
 msgid "Switch to form view"
-msgstr "Shakl koʼrinishiga oʼtish"
+msgstr ""
 
 msgid "Switch to row view"
-msgstr "Jadval koʼrinishiga oʼtish"
+msgstr ""
 
 msgid "events added"
-msgstr "hodisa/tadbirlar qoʼshildi"
+msgstr ""
 
 msgid "No events added"
-msgstr "Hech qanday hodisa/tadbir qoʼshilmagan"
+msgstr ""
 
 msgid "New event relationship"
-msgstr "Yangi hodisa/tadbir munosabatlari"
+msgstr ""
 
 msgid "Adding relationship to event."
-msgstr "Hodisa/tadbirga aloqa-munosabatlar qoʼshish"
+msgstr ""
 
 msgid "Go back to event without saving relationship"
-msgstr "Аloqa-munosabatlarni saqlamasdan hodisa/tadbirga qaytish"
+msgstr ""
 
 msgid "Unsaved changes"
-msgstr "Saqlanmagan oʼzgartirishlar"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
-"Ushbu sahifani tark etsangiz, yangi munosabatlar uchun qilgan tanlovingiz "
-"bekor qilinadi."
 
 msgid "Yes, discard"
-msgstr "Ha, rad etilsin"
+msgstr ""
 
 msgid "No, stay here"
-msgstr "Yoʼq, sahifada qolish"
+msgstr ""
 
 msgid "New event"
-msgstr "Yangi hodisa"
+msgstr ""
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr "Saqlash"
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
@@ -277,148 +262,140 @@ msgid "enrollment"
 msgstr ""
 
 msgid "in"
-msgstr "ichida"
+msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "An error has occurred. See log for details"
-msgstr "Xatolik yuz berdi. Tafsilotlar uchun jurnalga qarang"
+msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
-"Ikki nusxasi mavjud (lekin xatolar boʼlgan, batafsil maʼlumot uchun jurnalga"
-" qarang"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
-"Ushbu {{attributeName}} element allaqachon roʼyxatdan oʼtgan, ammo siz unga "
-"kirish huquqiga ega emassiz"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr "Siz allaqachon {{attributeName}} da roʼyxatdan oʼtgansiz"
+msgstr ""
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
-"{{trackedEntityTypeName}} ushbu {{attributeName}} bilan allaqachon "
-"roʼyxatdan oʼtgan"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Roʼyxatdan oʼtgan {{trackedEntityTypeName}} ni koʼrsatish"
+msgstr ""
 
 msgid "Registered person"
-msgstr "Roʼyxatdan oʼtgan shaxs"
+msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
-"Аgarda ushbu sahifani tark etsangiz, hodisa/tadbir boʼyicha kiritgan barcha "
-"oʼzgartirishlar saqlanmaydi."
 
 msgid "validation failed"
-msgstr "Tasdiqlash amalga oshmadi"
+msgstr ""
 
 msgid "Errors"
-msgstr "Xatoliklar"
+msgstr ""
 
 msgid "Feedback"
-msgstr "Qayta aloqa"
+msgstr ""
 
 msgid "Indicators"
-msgstr "Indikatorlar"
+msgstr ""
 
 msgid "Warnings"
-msgstr "Ogohlantirishlar"
+msgstr ""
 
 msgid "Warnings found"
-msgstr "Ogohlantirishlar topildi"
+msgstr ""
 
 msgid "Abort"
-msgstr "Аbort"
+msgstr ""
 
 msgid "Back to form"
-msgstr "Shaklga qaytish"
+msgstr ""
 
 msgid "Save anyway"
-msgstr "Nima boʼlganda ham saqlash"
+msgstr ""
 
 msgid "Validation errors and warnings"
-msgstr "Tasdiqlash xatoliklari va ogohlantirishlari"
+msgstr ""
 
 msgid "Validation errors"
-msgstr "Tasdiqlashda xatoliklar"
+msgstr ""
 
 msgid "Validation warnings"
-msgstr "Tasdiqlash toʼgʼrisida ogohlantirishlar"
+msgstr ""
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr "Baʼzi operatsiyalar hali ham bajarilmoqda. Iltimos, kuting ..."
+msgstr ""
 
 msgid "Operations running"
-msgstr "Аmaliyotlar bajarilmoqda"
+msgstr ""
 
 msgid "Sort"
-msgstr "Saralash"
+msgstr ""
 
 msgid "No events to display"
-msgstr "Koʼrsatiladigan hech qanday hodisa/tadbir yoʼq"
+msgstr ""
 
 msgid "Data for offline list not present"
-msgstr "Offlayn roʼyxat uchun maʼlumotlar mavjud emas"
+msgstr ""
 
 msgid "Close"
-msgstr "Yopmoq"
+msgstr ""
 
 msgid "Please select the user"
-msgstr "Iltimos, foydalanuvchini tanlang"
+msgstr ""
 
 msgid "Me"
-msgstr "Men"
+msgstr ""
 
 msgid "Anyone"
-msgstr "Kimdir"
+msgstr ""
 
 msgid "None"
-msgstr "Yoʼq"
+msgstr ""
 
 msgid "Select user"
-msgstr "Foydalanuvchini tanlang"
+msgstr ""
 
 msgid "to"
-msgstr "ga"
+msgstr ""
 
 msgid "Days in the future"
 msgstr ""
 
 msgid "From"
-msgstr "Dan"
+msgstr ""
 
 msgid "Days in the past"
 msgstr ""
 
 msgid "To"
-msgstr "Kimga"
-
-msgid "This week"
-msgstr "Ushbu hafta"
-
-msgid "This month"
-msgstr "Ushbu oy"
-
-msgid "This Year"
 msgstr ""
 
+msgid "This week"
+msgstr "ଚଳିତ ସପ୍ତାହ"
+
+msgid "This month"
+msgstr ""
+
+msgid "This Year"
+msgstr "ଚଳିତ ବର୍ଷ"
+
 msgid "Last week"
-msgstr "Oxirgi hafta"
+msgstr "ଗତ ସପ୍ତାହ"
 
 msgid "Last month"
-msgstr "Oxirgi oy"
+msgstr ""
 
 msgid "Last 3 months"
-msgstr "Oxirgi 3 oy"
+msgstr ""
 
 msgid "Absolute range"
 msgstr ""
@@ -427,125 +404,124 @@ msgid "Relative range"
 msgstr ""
 
 msgid "Max"
-msgstr "Maksimum"
+msgstr ""
 
 msgid "Min"
-msgstr "Minimum"
+msgstr ""
 
 msgid "Contains text"
-msgstr "Matnni oʼz ichiga oladi"
+msgstr ""
 
 msgid "Yes"
-msgstr "Ha"
+msgstr "ହଁ"
 
 msgid "mm/dd/yyyy"
-msgstr "kun/oy/yil"
+msgstr ""
 
 msgid "Years"
-msgstr "Yillar"
+msgstr ""
 
 msgid "Months"
-msgstr "Oylar"
+msgstr ""
 
 msgid "Days"
-msgstr "Kunlar"
+msgstr ""
 
 msgid "Uploading file"
-msgstr "Fayl yuklanmoqda"
+msgstr ""
 
 msgid "selected"
-msgstr "tanlangan"
+msgstr ""
 
 msgid "Delete"
-msgstr "Oʼchirib tashlash"
+msgstr ""
 
 msgid "Select file"
-msgstr "Faylni tanlash"
+msgstr ""
 
 msgid "No"
-msgstr "Yoʼq"
+msgstr "ନାହିଁ"
 
 msgid "Uploading image"
-msgstr "Rasm yuklanmoqda"
+msgstr ""
 
 msgid "Select image"
-msgstr "Rasmni tanlang"
+msgstr ""
 
 msgid "Search"
-msgstr "Izlash"
+msgstr ""
 
 msgid "Clear"
-msgstr "Tozalash"
+msgstr ""
 
 msgid "No results"
-msgstr "Natija yoʼq"
+msgstr ""
 
 msgid "Description"
-msgstr "Tavsif"
+msgstr ""
 
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 msgid "Icon for {{field}}"
 msgstr ""
 
 msgid "start typing to search"
-msgstr "qidirish uchun yozishni boshlang"
+msgstr ""
 
 msgid "suggestions could not be retrieved"
-msgstr "takliflar qabul qilinmadi"
+msgstr ""
 
 msgid "No items to display"
-msgstr "Koʼrsatiladigan axborot yoʼq"
+msgstr ""
 
 msgid "Select columns"
-msgstr "Ustunlarni tanlang"
+msgstr ""
 
 msgid "Columns to show in table"
-msgstr "Jadvalda koʼrsatiladigan ustunlar"
+msgstr ""
 
 msgid "Column"
-msgstr "Ustun"
+msgstr ""
 
 msgid "Update"
-msgstr "Янгилаш"
+msgstr ""
 
 msgid "Reset filter"
 msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} dan {{toDate}} ga"
+msgstr ""
 
 msgid "after or equal to {{date}}"
-msgstr "{{date}} dan keyin yoki unga teng"
+msgstr ""
 
 msgid "before or equal to {{date}}"
-msgstr "{{date}} dan oldin yoki unga teng"
+msgstr ""
 
 msgid "greater than or equal to"
-msgstr "dan katta yoki teng"
+msgstr ""
 
 msgid "less than or equal to"
-msgstr "dan kam yoki teng"
+msgstr ""
 
 msgid "More filters"
-msgstr "Koʼproq Filtr"
+msgstr ""
 
 msgid "Rows per page"
-msgstr "Sahifada qatorlar"
+msgstr ""
 
 msgid "Could not get organisation unit"
-msgstr "Tashkiliy boʼlimni olib boʼlmadi"
+msgstr ""
 
 msgid "Program doesn't exist"
-msgstr "Dastur mavjud emas"
+msgstr ""
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
-"Tanlangan dastur tanlangan roʼyxatdan olinadigan boʼlim uchun yaroqsiz"
 
 msgid "New"
-msgstr "Yangi"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -554,64 +530,64 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
 msgid "Clear selections"
-msgstr "Tanlovlarni tozalash"
+msgstr ""
 
 msgid "Selected registering unit"
-msgstr "Boʼlimni tanlangan roʼyxatga olish"
+msgstr ""
 
 msgid "Start Again"
-msgstr "Qayta boshlang"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr "Ishonchingiz komilmi? Barcha saqlanmagan maʼlumotlar yoʼqoladi."
+msgstr ""
 
 msgid "Accept"
-msgstr "Qabul qiling"
+msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr "Tanlangan boʼlim roʼyxatdan oʼtkazilmoqda"
+msgstr ""
 
 msgid "Select"
-msgstr "Tanlang"
+msgstr ""
 
 msgid "Program"
-msgstr "Programma"
+msgstr ""
 
 msgid "No programs available."
-msgstr "Hech qanday dastur mavjud emas."
+msgstr ""
 
 msgid "Show all"
-msgstr "Barchaga koʼrsatish"
+msgstr ""
 
 msgid "Selected program"
-msgstr "Tanlangan dastur"
+msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr "Baʼzi dasturlar Filtrlanmoqda."
+msgstr ""
 
 msgid "Select program"
-msgstr "Dasturni tanlash"
+msgstr ""
 
 msgid "Selected"
-msgstr "Tanlangan"
+msgstr ""
 
 msgid "Online"
-msgstr "Onlayn"
+msgstr ""
 
 msgid "Offline"
-msgstr "Offlayn"
+msgstr ""
 
 msgid "Syncing"
-msgstr "Sinxronlashmoqda"
+msgstr ""
 
 msgid "Add comment"
-msgstr "Izoh qoʼshish"
+msgstr ""
 
 msgid "You dont have access to write comments"
-msgstr "Fikr yozish huquqiga ega emassiz"
+msgstr ""
 
 msgid "Write comment"
-msgstr "Fikr yozing"
+msgstr ""
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
@@ -620,7 +596,7 @@ msgid "Opt in for {{programName}}"
 msgstr ""
 
 msgid "No, cancel"
-msgstr "Yoʼq, bekor qiling"
+msgstr ""
 
 msgid "Yes, opt in"
 msgstr ""
@@ -660,7 +636,7 @@ msgid "Schedule an event"
 msgstr ""
 
 msgid "Make referral"
-msgstr "Yoʼnalish yarating"
+msgstr ""
 
 msgid "No available program stages"
 msgstr ""
@@ -722,7 +698,7 @@ msgid "There was an error loading the page"
 msgstr ""
 
 msgid "Choose a registering unit to start reporting"
-msgstr "Xisobot boshlash uchun roʼyxatdan oʼtishni tanlang"
+msgstr ""
 
 msgid "There are no feedbacks for this event"
 msgstr ""
@@ -734,10 +710,10 @@ msgid "Program stage is invalid"
 msgstr ""
 
 msgid "Report"
-msgstr "Hisobot"
+msgstr ""
 
 msgid "Schedule"
-msgstr "Reja"
+msgstr ""
 
 msgid "Refer"
 msgstr ""
@@ -770,7 +746,7 @@ msgid "There are no feedback for this event"
 msgstr ""
 
 msgid "Registered events"
-msgstr "Roʼyxatdan oʼtgan hodisa/tadbirlar"
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -791,7 +767,7 @@ msgid "Save as new"
 msgstr ""
 
 msgid "View dashboard"
-msgstr "Boshqaruv panelini koʼrish"
+msgstr ""
 
 msgid "View enrollment"
 msgstr ""
@@ -813,111 +789,99 @@ msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Link"
-msgstr "Havola"
+msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr "Tashkiliy birlik"
+msgstr ""
 
 msgid "Registration"
-msgstr "Roʼyxatdan oʼtish"
+msgstr ""
 
 msgid "Search results"
-msgstr "Qidiruv natijalari"
+msgstr ""
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr "Hech qanday {{trackedEntityTypeName}} topilmadi"
+msgstr ""
 
 msgid "New search"
-msgstr "Yangi qidiruv"
+msgstr ""
 
 msgid "Edit search"
-msgstr "Qidiruvni tahrirlash"
+msgstr ""
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr "Mavjud {{trackedEntityType}} ga havola"
+msgstr ""
 
 msgid "Create new {{trackedEntityType}}"
-msgstr "Yangi {{trackedEntityType}} yaratish"
+msgstr ""
 
 msgid "Register"
-msgstr "Roʼyxatga olish"
+msgstr ""
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
-"Qidirish uchun kamida {{minAttributesRequiredToSearch}} atributlarini "
-"toʼldiring"
 
 msgid "Search {{name}}"
-msgstr "{{name}} orqali qidirish"
+msgstr ""
 
 msgid "Search by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
-msgstr "Аtribut orqali qidirish"
+msgstr ""
 
 msgid "Back"
-msgstr "Orqaga"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search for"
-msgstr "Qidirish"
+msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
-"Bundan tashqari, yuqori satrda dasturni tanlashingiz va ushbu dastur ichida "
-"qidirishingiz mumkin"
 
 msgid "No results found"
-msgstr "Hech qanday natija topilmadi"
+msgstr ""
 
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 msgstr ""
-"Qidiruv soʼzlarini oʼzgartirib, qidirilayotgan axborotni qayta qidiruvga "
-"topshirishingiz mumkin."
 
 msgid "Back to search"
-msgstr "Qidiruvga qaytish"
+msgstr ""
 
 msgid "An error has occurred"
-msgstr "Xatolik yuz berdi"
+msgstr ""
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
-"Ushbu qidiruvda muammo aniqlandi, Iltimos, qidiruv shartlarini oʼzgartiring "
-"yoki keyinroq qayta urinib koʼring. Qoʼshimcha maʼlumot olish uchun "
-"Sozlovchi vositalarining Konsol yorligʼini oching."
 
 msgid "Too many results"
-msgstr "Natija juda koʼp"
+msgstr ""
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
 msgstr ""
-"Ushbu qidiruv juda koʼp natijalarni koʼrsatdi. Natijalar miqdorini "
-"kamaytirish uchun qidiruv soʼzlarini oʼzgartirishga yoki boshqa xususiyatlar"
-" boʼyicha qidirishga harakat qiling."
 
 msgid "Choose a type to start searching"
-msgstr "Qidiruv turini tanlang va qidirishni boshlang"
+msgstr ""
 
 msgid "View active enrollment"
-msgstr "Faol roʼyxatdan oʼtayotganlarni koʼrish"
+msgstr ""
 
 msgid "Re-enroll"
-msgstr "Qayta roʼyxatdan oʼtish"
+msgstr ""
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -925,7 +889,7 @@ msgid ""
 msgstr ""
 
 msgid "Search in all programs"
-msgstr "Barcha dasturlarda qidirish"
+msgstr ""
 
 msgid "events"
 msgstr ""
@@ -934,10 +898,10 @@ msgid "event"
 msgstr ""
 
 msgid "You dont have access to edit this event"
-msgstr "Ushbu hodisa/tadbirni tahrirlash huquqiga ega emassiz"
+msgstr ""
 
 msgid "Edit event"
-msgstr "Hodisa/tadbirni tahrirlang"
+msgstr ""
 
 msgid "Event details"
 msgstr ""
@@ -946,67 +910,63 @@ msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
-"Ushbu sahifani tark etsangiz, yangi aloqa-munosabatlar uchun qilingan barcha"
-" tanlovlar bekor qilinadi"
 
 msgid "No one is assigned to this event"
-msgstr "Ushbu hodisa/tadbirga hech kim biriktirilmagan"
+msgstr ""
 
 msgid "Assign"
-msgstr "Tayinlangan"
+msgstr ""
 
 msgid "Event assigned to {{name}}"
-msgstr "Hodisa/tadbir {{name}} ga biriktirildi"
+msgstr ""
 
 msgid "Feedbacks"
-msgstr "Qayta aloqalar"
+msgstr ""
 
 msgid "Show all events"
-msgstr "Barcha hodisa/tadbirlarni koʼrsatish"
+msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr ""
-"Hodisa/tadbirni yuklab boʼlmadi. Uning mavjudligiga ishonchingiz komilmi?"
 
 msgid "Event could not be loaded"
-msgstr "Hodisa/tadbirni yuklab boʼlmadi"
+msgstr ""
 
 msgid "Organisation unit could not be loaded"
-msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
+msgstr ""
 
 msgid "Possible duplicates found"
-msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
+msgstr ""
 
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
 msgid "You dont have access to delete this relationship"
-msgstr "Ushbu oʼzaro aloqalarni oʼchirib tashlash huquqiga ega emassiz"
+msgstr ""
 
 msgid "You dont have access to create any relationships"
-msgstr "Ushbu oʼzaro aloqalarni yaratish huquqiga ega emassiz"
+msgstr ""
 
 msgid "Add relationship"
-msgstr "Oʼzaro aloqa kiritish"
+msgstr ""
 
 msgid "Results found"
-msgstr "Natijalar topildi"
+msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
-msgstr "{{uniqueAttrName}} orqali qidirish"
+msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
-"Qidirish uchun kamida {{minAttributesRequired}} atributlarini toʼldiring"
 
 msgid "To work with the selected program,"
-msgstr "Tanlangan dastur bilan ishlash uchun,"
+msgstr ""
 
 msgid "open the Tracker Capture app"
-msgstr "Kuzatuv-Nazorat dasturini oching"
+msgstr ""
 
 msgid "Save comment"
-msgstr "Fikr/izohni saqlang"
+msgstr ""
 
 msgid "Enrollment actions"
 msgstr ""
@@ -1015,7 +975,7 @@ msgid "We are processing your request."
 msgstr ""
 
 msgid "Add new"
-msgstr "Янгисини қўшиш"
+msgstr ""
 
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
@@ -1030,7 +990,7 @@ msgid "Mark incomplete"
 msgstr ""
 
 msgid "Delete enrollment"
-msgstr "Roʼyxatdan oʼtkazish oʼchirilsin"
+msgstr ""
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
@@ -1044,19 +1004,19 @@ msgid "Remove mark for follow-up"
 msgstr ""
 
 msgid "Mark for follow-up"
-msgstr "Kuzatuv uchun belgilang"
+msgstr ""
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Follow-up"
-msgstr "Kuzatish"
+msgstr ""
 
 msgid "Enrollment date"
-msgstr "Qayd qilingan sana"
+msgstr ""
 
 msgid "Incident date"
-msgstr "Hodisa sanasi"
+msgstr ""
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
@@ -1068,7 +1028,7 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
-msgstr "Bekor qilindi"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1089,10 +1049,10 @@ msgid "program or stage is invalid"
 msgstr ""
 
 msgid "Error"
-msgstr "Xatolik"
+msgstr ""
 
 msgid "Warning"
-msgstr "Ogohlantirish"
+msgstr ""
 
 msgid "Comments about this event"
 msgstr ""
@@ -1107,7 +1067,7 @@ msgid "stage not found in rules execution"
 msgstr ""
 
 msgid "Delete event"
-msgstr "Hodisa/tadbirni oʼchirib tashlash"
+msgstr ""
 
 msgid "Yes, delete event"
 msgstr ""
@@ -1129,6 +1089,7 @@ msgstr ""
 msgid "This date is {{count}} days {{position}} the suggested date."
 msgid_plural "This date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "after"
 msgstr ""
@@ -1140,6 +1101,7 @@ msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgstr[0] ""
+msgstr[1] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1167,10 +1129,10 @@ msgid " Loading..."
 msgstr ""
 
 msgid "Save changes"
-msgstr "Oʼzgartirishni saqlash"
+msgstr ""
 
 msgid "Profile"
-msgstr "Profil"
+msgstr ""
 
 msgid "There is a problem with this form"
 msgstr ""
@@ -1185,7 +1147,7 @@ msgid "Try again or contact your system administrator for support"
 msgstr ""
 
 msgid "tracked entity instance"
-msgstr "kuzatilayotgan obʼekt namunasi"
+msgstr ""
 
 msgid "Fix errors in the form to continue."
 msgstr ""
@@ -1197,7 +1159,7 @@ msgid "Person Profile"
 msgstr ""
 
 msgid "Edit"
-msgstr "Tahrirlash"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr ""
@@ -1221,13 +1183,13 @@ msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Report date"
-msgstr "Hisobot sanasi"
+msgstr ""
 
 msgid "Registering unit"
-msgstr "Roʼyxatga olish muassasasi"
+msgstr ""
 
 msgid "Due date"
-msgstr "Muddati"
+msgstr ""
 
 msgid "{{ totalEvents }} events"
 msgstr ""
@@ -1242,37 +1204,37 @@ msgid "Stages and Events"
 msgstr ""
 
 msgid "Working list could not be loaded"
-msgstr "Ishchi roʼyxatni yuklab boʼlmadi"
+msgstr ""
 
 msgid "Download as JSON"
-msgstr "JSON sifatida yuklash"
+msgstr ""
 
 msgid "Download as XML"
-msgstr "XML sifatida yuklash"
+msgstr ""
 
 msgid "Download as CSV"
-msgstr "CSV sifatida yuklang"
+msgstr ""
 
 msgid "Download with current filters"
-msgstr "Joriy Filtrlar asosida yuklash"
+msgstr ""
 
 msgid "Download data..."
-msgstr "Maʼlumotlarni yuklab olish ..."
+msgstr ""
 
 msgid "an error occurred loading working lists"
-msgstr "ishchi roʼyxatni yuklashda xatolik yuz berdi"
+msgstr ""
 
 msgid "Enrollment status"
-msgstr "Roʼyxatga olish holati"
+msgstr ""
 
 msgid "Assigned to"
 msgstr ""
 
 msgid "Registration Date"
-msgstr "Roʼyxatga olingan sana"
+msgstr ""
 
 msgid "Inactive"
-msgstr "Faol emas"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -1281,83 +1243,82 @@ msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
 
 msgid "Update view"
-msgstr "Yangilangan koʼrinish"
+msgstr ""
 
 msgid "Save current view..."
-msgstr "Joriy koʼrinishni saqlash ..."
+msgstr ""
 
 msgid "Save current view as..."
-msgstr "Ushbu joriy koʼrinish sifatida saqlash"
+msgstr ""
 
 msgid "Delete view"
-msgstr "Koʼzdan kechirishni oʼchirib tashlash"
+msgstr ""
 
 msgid "Share view..."
-msgstr "Koʼrinish bilan boʼlishish ..."
+msgstr ""
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
-"Haqiqatdan ham '{{templateName}}' koʼrinishini oʼchirib tashlamoqchimisiz?"
 
 msgid "Confirm"
-msgstr "Tasdiqlang"
+msgstr ""
 
 msgid "Save As view"
-msgstr "Ushbu koʼrinish sifatida saqlash"
+msgstr ""
 
 msgid "View name"
-msgstr "Ismini koʼrish"
+msgstr ""
 
 msgid "Show Less"
 msgstr ""
 
 msgid "Show All"
-msgstr "Barchasini koʼrsatish"
+msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr "Xatolik yuz berdi. Tafsilotlarni jurnaldan koʼring."
+msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Scheduled"
-msgstr "Reja boʼyicha"
+msgstr ""
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Overdue"
-msgstr "Muddat oʼtgan"
+msgstr ""
 
 msgid "Skipped"
-msgstr "Oʼtkazib yuborildi"
+msgstr ""
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"
-msgstr "Dastur topilmadi"
+msgstr ""
 
 msgid "Program is not a tracker program"
-msgstr "Dastur kuzatuv dasturi emas"
+msgstr ""
 
 msgid "Error saving event"
-msgstr "Hodisa/tadbirni saqlashda xato"
+msgstr ""
 
 msgid "Could not save event"
 msgstr ""
 
 msgid "Could not delete event"
-msgstr "Hodisa/tadbirni oʼchirib tashlab boʼlmadi"
+msgstr ""
 
 msgid "Could not save working list"
-msgstr "Ishchi roʼyxat saqlanmadi"
+msgstr ""
 
 msgid "Could not add working list"
-msgstr "Ishchi roʼyxatni qoʼshib boʼlmadi"
+msgstr ""
 
 msgid "Could not delete working list"
-msgstr "Ishchi roʼyxatni oʼchirib tashlab boʼlmadi"
+msgstr ""
 
 msgid "Organisation unit search failed."
 msgstr ""
@@ -1378,40 +1339,40 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "Koordinatani oʼrnating"
+msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr "{{currentPage}} sahifasi"
+msgstr ""
 
 msgid "Date"
-msgstr "Sana"
+msgstr ""
 
 msgid "Time"
-msgstr "Vaqt"
+msgstr ""
 
 msgid "From date"
-msgstr "Sanadan boshlab"
+msgstr ""
 
 msgid "From time"
-msgstr "Vaqtdan boshlab"
+msgstr ""
 
 msgid "To date"
-msgstr "Shu kungacha"
+msgstr ""
 
 msgid "To time"
-msgstr "Shu vaqtgacha"
+msgstr ""
 
 msgid "error encountered during field validation"
-msgstr "maydonni tekshirish vaqtida xatolik yuz berdi"
+msgstr ""
 
 msgid "error"
-msgstr "xato"
+msgstr ""
 
 msgid "Delete polygon"
-msgstr "Poligon (koʼpburchak) ni oʼchirib tashlash"
+msgstr ""
 
 msgid "Set area"
-msgstr "Hududni belgilang"
+msgstr ""
 
 msgid "Compatibility mode"
-msgstr "Muvofiqlik rejimi"
+msgstr ""
