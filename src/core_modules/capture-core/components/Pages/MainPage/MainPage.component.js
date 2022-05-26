@@ -3,7 +3,6 @@ import React, { type ComponentType } from 'react';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import { WorkingListsType } from './WorkingListsType';
-import { LockedSelector } from '../../LockedSelector';
 import type { Props, PlainProps } from './mainPage.types';
 import { MainPageStatuses } from './MainPage.constants';
 import { WithoutOrgUnitSelectedMessage } from './WithoutOrgUnitSelectedMessage/WithoutOrgUnitSelectedMessage';
@@ -18,7 +17,6 @@ const getStyles = () => ({
 
 const MainPagePlain = ({ MainPageStatus, setShowAccessible, programId, classes, ...passOnProps }: PlainProps) => (
     <>
-        <LockedSelector />
         {
             MainPageStatus === MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
                 <WithoutOrgUnitSelectedMessage

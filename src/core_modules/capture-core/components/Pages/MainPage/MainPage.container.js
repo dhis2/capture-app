@@ -12,6 +12,7 @@ import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { buildUrlQueryString, useLocationQuery, deriveURLParamsFromLocation } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
+import { LockedSelector } from '../../LockedSelector';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
@@ -107,6 +108,7 @@ const MainPageContainer = () => {
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
+            <LockedSelector />
             <>
                 {showMainPage(selectedProgram, orgUnitId, selectedTemplateId) ? (
                     <MainPageComponent

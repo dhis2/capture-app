@@ -9,6 +9,8 @@ import {
     useTrackedEntityTypesWithCorrelatedPrograms,
     useCurrentTrackedEntityTypeId,
 } from '../../../hooks';
+import { LockedSelector } from '../../LockedSelector';
+import { ResultsPageSizeContext } from '../shared-contexts';
 
 const usePreselectedProgram = (): ?string => {
     const currentSelectionsId =
@@ -66,15 +68,19 @@ export const SearchPage: ComponentType<{||}> = () => {
     }, [currentProgramId, preselectedProgramId, dispatchNavigateToMainPage]);
 
     return (
-        <SearchPageComponent
-            navigateToMainPage={dispatchNavigateToMainPage}
-            showInitialSearchPage={dispatchShowInitialSearchPage}
-            cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
-            availableSearchOptions={availableSearchOptions}
-            preselectedProgramId={preselectedProgramId}
-            trackedEntityTypeId={trackedEntityTypeId}
-            searchStatus={searchStatus}
-            error={error}
-            ready={ready}
-        />);
+        <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
+            <LockedSelector pageToPush="search" />
+            <SearchPageComponent
+                navigateToMainPage={dispatchNavigateToMainPage}
+                showInitialSearchPage={dispatchShowInitialSearchPage}
+                cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
+                availableSearchOptions={availableSearchOptions}
+                preselectedProgramId={preselectedProgramId}
+                trackedEntityTypeId={trackedEntityTypeId}
+                searchStatus={searchStatus}
+                error={error}
+                ready={ready}
+            />
+        </ResultsPageSizeContext.Provider>
+    );
 };

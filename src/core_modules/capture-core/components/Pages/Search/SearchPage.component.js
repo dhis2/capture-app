@@ -18,7 +18,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 import { useLocation } from 'react-router-dom';
 
-import { LockedSelector } from '../../LockedSelector';
+
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
@@ -27,7 +27,6 @@ import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { searchScopes } from './SearchPage.constants';
-import { ResultsPageSizeContext } from '../shared-contexts';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
 import { cleanFallbackRelatedData } from './SearchPage.actions';
 import { TemplateSelector } from './TemplateSelector';
@@ -165,10 +164,8 @@ const Index = ({
             {searchStatus === searchPageStatus.ERROR && (
                 <div data-test="general-purpose-error-mesage" className={classes.informativeMessage}>
                     <NoticeBox title={i18n.t('An error has occurred')} error>
-                        {i18n.t(
-                            'There is a problem with this search, please change the search terms or try again later. ' +
-                                'For more details open the Console tab of the Developer tools',
-                        )}
+                        There is a problem with this search, please change the search terms or try again later. For
+                        more details open the Console tab of the Developer tools
                     </NoticeBox>
                 </div>
             )}
@@ -188,51 +185,46 @@ const Index = ({
 
     return (
         <>
-            <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-                <LockedSelector pageToPush={navigateToMainPage ? 'search' : ''} />
-                <div data-test="search-page-content" className={classes.container}>
-                    {navigateToMainPage && (
-                        <Button dataTest="back-button" className={classes.backButton} onClick={navigateToMainPage}>
-                            <IconChevronLeft24 />
-                            {i18n.t('Back')}
-                        </Button>
-                    )}
-
-                    <Paper className={classes.paper}>
-                        <div className={classes.title}>
-                            {i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } })}
-                        </div>
-                        <div className={classes.flex}>
-                            <div className={classes.half}>
-                                {selectedSearchScopeType !== searchScopes.PROGRAM && (
-                                    <TrackedEntityTypeSelector
-                                        onSelect={handleSearchScopeSelection}
-                                        headerText={i18n.t('Search for')}
-                                        footerText={i18n.t(
-                                            'You can also choose a program from the top bar and search in that program',
-                                        )}
-                                    />
-                                )}
-
-                                <SearchForm
-                                    fallbackTriggered={fallbackTriggered}
-                                    selectedSearchScopeId={selectedSearchScopeId}
-                                    searchGroupsForSelectedScope={searchGroupsForSelectedScope}
-                                />
-                                {searchStatusComponents()}
-                            </div>
-                            <div className={classes.half}>
-                                <TemplateSelector />
-                            </div>
-                        </div>
-                    </Paper>
-                </div>
-                {searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId && (
-                    <IncompleteSelectionsMessage>
-                        {i18n.t('Choose a type to start searching')}
-                    </IncompleteSelectionsMessage>
+            <div data-test="search-page-content" className={classes.container}>
+                {navigateToMainPage && (
+                    <Button dataTest="back-button" className={classes.backButton} onClick={navigateToMainPage}>
+                        <IconChevronLeft24 />
+                        {i18n.t('Back')}
+                    </Button>
                 )}
-            </ResultsPageSizeContext.Provider>
+
+                <Paper className={classes.paper}>
+                    <div className={classes.title}>
+                        {i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } })}
+                    </div>
+                    <div className={classes.flex}>
+                        <div className={classes.half}>
+                            {selectedSearchScopeType !== searchScopes.PROGRAM && (
+                                <TrackedEntityTypeSelector
+                                    onSelect={handleSearchScopeSelection}
+                                    headerText={i18n.t('Search for')}
+                                    footerText={i18n.t(
+                                        'You can also choose a program from the top bar and search in that program',
+                                    )}
+                                />
+                            )}
+
+                            <SearchForm
+                                fallbackTriggered={fallbackTriggered}
+                                selectedSearchScopeId={selectedSearchScopeId}
+                                searchGroupsForSelectedScope={searchGroupsForSelectedScope}
+                            />
+                            {searchStatusComponents()}
+                        </div>
+                        <div className={classes.half}>
+                            <TemplateSelector />
+                        </div>
+                    </div>
+                </Paper>
+            </div>
+            {searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId && (
+                <IncompleteSelectionsMessage>{i18n.t('Choose a type to start searching')}</IncompleteSelectionsMessage>
+            )}
         </>
     );
 };
