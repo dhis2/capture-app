@@ -1,3 +1,17 @@
+## [100.3.3](https://github.com/dhis2/capture-app/compare/v100.3.2...v100.3.3) (2022-05-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([84d1167](https://github.com/dhis2/capture-app/commit/84d116790cd12b87362f39bb44d1e8afc6889eaa))
+
+## [100.3.2](https://github.com/dhis2/capture-app/compare/v100.3.1...v100.3.2) (2022-05-10)
+
+
+### Bug Fixes
+
+* [DHIS2-13241] URL out of sync after adding event ([66317d4](https://github.com/dhis2/capture-app/commit/66317d4e5615d516bc25c32f4c14e29f1ad316a1))
+
 ## [100.3.1](https://github.com/dhis2/capture-app/compare/v100.3.0...v100.3.1) (2022-05-05)
 
 
