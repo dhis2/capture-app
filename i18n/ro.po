@@ -1,33 +1,35 @@
 # 
 # Translators:
-# SubhamJena <subhamjena8465@gmail.com>, 2022
+# Valeriu Plesca <vplesca@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-11-29T10:05:06.420Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
-"Last-Translator: SubhamJena <subhamjena8465@gmail.com>, 2022\n"
-"Language-Team: Odia (https://www.transifex.com/hisp-uio/teams/100509/or/)\n"
+"Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
+"Language-Team: Romanian (https://www.transifex.com/hisp-uio/teams/100509/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: or\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Selectați una sau mai multe date..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Selectați data..."
 
 msgid "Today"
-msgstr "ଆଜି"
+msgstr "Astăzi"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"Un posibil motiv este că browserul sau modul (de exemplu, modul de "
+"confidențialitate) nu este suportat. Consultați jurnalul pentru detalii."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -35,90 +37,95 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Ați deschis o altă versiune a aplicației Capture în același domeniu. În "
+"prezent, aplicația Capture acceptă rularea simultană a unei singure versiuni"
+" (în același domeniu). Vă rugăm să reîmprospătați această pagină dacă doriți"
+" să utilizați din nou această versiune, dar rețineți că aceasta va închide "
+"alte versiuni."
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Coloane pentru afișare în tabel"
 
 msgid "Column"
-msgstr ""
+msgstr "Coloană"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Această valoare se validează"
 
 msgid "Async field update failed"
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "Este necesară o valoare"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Vă rugăm furnizați un număr valid"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Vă rugăm să furnizați un număr întreg valid"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "introduceți un număr întreg pozitiv"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "introduceți zero sau un număr întreg pozitiv"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "introduceți un număr întreg negativ"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "introduceți o dată validă"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Nu este permisă o dată în viitor"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "introduceți o dată și o oră valide"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "introduceți o oră valabilă"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "Introduceți un procentaj valid"
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Introduceți o adresă URL validă"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Introduceți o adresă de e-mail validă"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "Introduceți o vârstă valabilă"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "Introduceți un număr de telefon valid"
 
 msgid "Please provide a valid organisation unit"
 msgstr ""
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "Introduceți coordonate valide"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "Această valoare deja există"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "„De la” nu poate fi mai mare decât „Pînă la”"
 
 msgid "Checking..."
-msgstr ""
+msgstr "Verificare..."
 
 msgid "Area"
 msgstr ""
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Coordonate"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Înrolare"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "Nu este permisă o dată viitoare"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -127,10 +134,12 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Modificări nesalvate"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"Părăsirea acestei pagini presupune pierderea modificărilor pe care le-ați "
+"făcut la acest eveniment."
 
 msgid "Yes, discard"
 msgstr ""
@@ -139,19 +148,19 @@ msgid "No, stay here"
 msgstr ""
 
 msgid "validation failed"
-msgstr ""
+msgstr "validarea a eșuat"
 
 msgid "Errors"
-msgstr ""
+msgstr "Erori"
 
 msgid "Feedback"
-msgstr "ମତାମତ"
+msgstr "Feedback"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicatori"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Avertizări"
 
 msgid "search group result could not be retrieved"
 msgstr ""
@@ -160,7 +169,7 @@ msgid "Complete"
 msgstr ""
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Avertismente găsite"
 
 msgid "Abort"
 msgstr ""
@@ -169,52 +178,52 @@ msgid "Back to form"
 msgstr ""
 
 msgid "Save anyway"
-msgstr ""
+msgstr "Salvare oricum"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "Erori de validare și avertizări"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "Erori de validare"
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "Avertizări de validare"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "Unele operațiuni sunt încă în desfășurare. Așteptați.."
 
 msgid "Operations running"
-msgstr ""
+msgstr "Operațiuni în derulare"
 
 msgid "Sort"
-msgstr ""
+msgstr "Sortare"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Nu există evenimente pentru afișare"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Datele pentru lista offline nu sunt prezente"
 
 msgid "Close"
-msgstr ""
+msgstr "Închidere"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "Selectați utilizatorul"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Căutare utilizator"
 
 msgid "Me"
 msgstr ""
 
 msgid "Anyone"
-msgstr ""
+msgstr "Oricine"
 
 msgid "None"
 msgstr ""
 
 msgid "Select user"
-msgstr ""
+msgstr "Selectați utilizatorul"
 
 msgid "to"
 msgstr ""
@@ -226,94 +235,94 @@ msgid "To"
 msgstr ""
 
 msgid "This week"
-msgstr "ଚଳିତ ସପ୍ତାହ"
+msgstr "Săptămâna aceasta"
 
 msgid "This month"
-msgstr "ଚଳିତ ମାସ"
+msgstr "Luna aceasta"
 
 msgid "This Year"
-msgstr "ଚଳିତ ବର୍ଷ"
+msgstr "Anul acesta"
 
 msgid "Last week"
-msgstr "ଗତ ସପ୍ତାହ"
+msgstr "Săptămâna trecută"
 
 msgid "Last month"
-msgstr "ଗତ ମାସ"
+msgstr "Luna trecută"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "Ultimele 3 luni"
 
 msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr ""
+msgstr "Max"
 
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Conține text"
 
 msgid "Yes"
-msgstr "ହଁ"
+msgstr "Da"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "Ani"
 
 msgid "Months"
-msgstr ""
+msgstr "Luni"
 
 msgid "Days"
-msgstr ""
+msgstr "Zile"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Încărcare fișier"
 
 msgid "selected"
-msgstr ""
+msgstr "selectat"
 
 msgid "Delete"
-msgstr ""
+msgstr "Lichidare"
 
 msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "ନାହିଁ"
+msgstr "Nu"
 
 msgid "Uploading image"
 msgstr ""
 
 msgid "Select image"
-msgstr ""
+msgstr "Selectați imaginea"
 
 msgid "Search"
-msgstr ""
+msgstr "Căutare"
 
 msgid "Clear"
 msgstr ""
 
 msgid "No results"
-msgstr ""
+msgstr "Nu există rezultate"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "începeți să tastați pentru a căuta"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "sugestiile nu au putut fi preluate"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Nu există elemente pentru afișare"
 
 msgid "Could not get organisation unit"
 msgstr ""
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Programul nu există"
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
@@ -322,7 +331,7 @@ msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Nou"
 
 msgid "Start again"
 msgstr ""
@@ -334,13 +343,13 @@ msgid "Selected registering unit"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "Începe din nou"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "Sunteți sigur? Toate datele nesalvate se vor pierde."
 
 msgid "Accept"
-msgstr ""
+msgstr "Accept"
 
 msgid "Registering Organisation Unit"
 msgstr ""
@@ -367,55 +376,57 @@ msgid "No programs available."
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Syncing"
 msgstr ""
 
 msgid "Add comment"
-msgstr ""
+msgstr "Adăugare comentariu"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "Nu aveți acces să scrieți comentarii"
 
 msgid "Write comment"
-msgstr ""
+msgstr "Scrieți comentariu"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Eveniment complet"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Informații de bază"
 
 msgid "Status"
-msgstr ""
+msgstr "Stare"
 
 msgid "Comments"
-msgstr ""
+msgstr "Comentarii"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
+"Vă rugăm să adăugați sau să anulați comentariul înainte de a salva "
+"evenimentul"
 
 msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "salva"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Afișarea tuturor evenimentelor"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Editare eveniment"
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr ""
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Evenimentul nu a putut fi încărcat"
 
 msgid "Organisation unit could not be loaded"
 msgstr ""
@@ -424,31 +435,31 @@ msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Lichidare eveniment"
 
 msgid "Update"
-msgstr ""
+msgstr "Actualizare"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
 msgid "after or equal to {{date}}"
-msgstr ""
+msgstr "după sau egal cu {{data}}"
 
 msgid "before or equal to {{date}}"
-msgstr ""
+msgstr "înainte sau egal cu {{date}}"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "mai mare sau egal cu"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "mai mic sau egal cu"
 
 msgid "More filters"
-msgstr ""
+msgstr "Mai multe filtre"
 
 msgid "Select columns"
-msgstr ""
+msgstr "Selectați coloanele"
 
 msgid "Download as JSON"
 msgstr ""
@@ -466,7 +477,7 @@ msgid "Download data..."
 msgstr ""
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Rânduri pe pagină"
 
 msgid "Update view"
 msgstr ""
@@ -508,22 +519,22 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
-msgstr ""
+msgstr "Evenimente înregistrate"
 
 msgid "Active"
-msgstr ""
+msgstr "Activ"
 
 msgid "Completed"
-msgstr ""
+msgstr "Complet"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Salvare și adăugarea altuia"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Salvare și ieșire"
 
 msgid "Finish"
 msgstr ""
@@ -549,7 +560,7 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Relationships"
-msgstr ""
+msgstr "Relații"
 
 msgid "Assignee"
 msgstr ""
@@ -558,32 +569,35 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "în"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Acesta nu este un program de tip eveniment sau metadatele sunt corupte. "
+"Consultați jurnalul pentru detalii."
 
 msgid "This event"
-msgstr ""
+msgstr "Acest eveniment"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
+"Relație de tipul {{relationshipTypeName}} către {{entityName}} deja există"
 
 msgid "Assigned to"
 msgstr ""
 
 msgid "New event"
-msgstr ""
+msgstr "Eveniment nou"
 
 msgid "New event relationship"
 msgstr ""
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "Adăugarea relației la eveniment."
 
 msgid "Go back to event without saving relationship"
 msgstr ""
@@ -594,7 +608,7 @@ msgid ""
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "evenimentele au fost adăugate"
 
 msgid "No events added"
 msgstr ""
@@ -629,12 +643,14 @@ msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
+"Un {{trackedEntityTypeName}} cu acest {{attributeName}} este deja "
+"înregistrat"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Afișați {{trackedEntityTypeName}} înregistrat"
 
 msgid "Registered person"
-msgstr ""
+msgstr "Persoana inregistrata"
 
 msgid "Link"
 msgstr ""
@@ -649,7 +665,7 @@ msgid "Create {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "S-au găsit posibile duplicate"
 
 msgid "An error occured loading possible duplicates"
 msgstr ""
@@ -664,13 +680,13 @@ msgid "Organisation Unit"
 msgstr ""
 
 msgid "Registration"
-msgstr ""
+msgstr "Înregistrare"
 
 msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"
-msgstr ""
+msgstr "Rezultatele cautarii"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
@@ -682,7 +698,7 @@ msgid "New search"
 msgstr ""
 
 msgid "Edit search"
-msgstr ""
+msgstr "Editare căutarea"
 
 msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
@@ -694,13 +710,13 @@ msgid "Register"
 msgstr ""
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "Nu aveți acces pentru a edita acest eveniment"
 
 msgid "Event details"
-msgstr ""
+msgstr "Detaliile evenimentului"
 
 msgid "Event completed"
-msgstr ""
+msgstr "Eveniment finalizat"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -711,22 +727,22 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr ""
+msgstr "Atribuire"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "Eveniment atribuit lui {{name}}"
 
 msgid "Feedbacks"
 msgstr ""
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "Nu aveți acces pentru a șterge această relație"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "Nu aveți acces pentru a crea relații"
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Adăugare relație"
 
 msgid "Open"
 msgstr ""
@@ -744,10 +760,10 @@ msgid "Selected program"
 msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Căutare {{uniqueAttrName}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Căutare după atribute"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
@@ -765,7 +781,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 msgid "Error saving event"
 msgstr ""
