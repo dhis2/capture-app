@@ -30,7 +30,7 @@ import { searchScopes } from './SearchPage.constants';
 import { ResultsPageSizeContext } from '../shared-contexts';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
 import { cleanFallbackRelatedData } from './SearchPage.actions';
-import { TemplateSelector } from '../../TemplateSelector';
+import { TemplateSelector } from './TemplateSelector';
 
 const getStyles = (theme: Theme) => ({
     half: {

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import { TemplateSelector as TemplateSelectorComponent } from './TemplateSelector.component';
-import { buildUrlQueryString, useLocationQuery } from '../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useTEIFilters } from './useTemplates';
 
 export const TemplateSelector = () => {

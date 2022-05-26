@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Button, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { localeCompareStrings } from '../../utils/localeCompareStrings';
+import { localeCompareStrings } from '../../../../utils/localeCompareStrings';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';
 import type { WorkingListTemplates, WorkingListTemplate } from './workingListsBase.types';
 
