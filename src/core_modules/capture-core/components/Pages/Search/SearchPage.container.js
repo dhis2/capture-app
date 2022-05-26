@@ -4,9 +4,11 @@ import React, { useCallback, useMemo, useEffect } from 'react';
 import type { ComponentType } from 'react';
 import { SearchPageComponent } from './SearchPage.component';
 import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
-import { useSearchOptions } from './useSearchOptions';
-import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
-import { useCurrentTrackedEntityTypeId } from '../../../hooks/useCurrentTrackedEntityTypeId';
+import {
+    useSearchOptions,
+    useTrackedEntityTypesWithCorrelatedPrograms,
+    useCurrentTrackedEntityTypeId,
+} from '../../../hooks';
 
 const usePreselectedProgram = (): ?string => {
     const currentSelectionsId =

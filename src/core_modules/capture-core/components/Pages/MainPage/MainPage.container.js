@@ -4,12 +4,8 @@ import React, { useEffect, useMemo, useCallback } from 'react';
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import {
-    SearchPageComponent,
-    useSearchOptions,
-    cleanSearchRelatedData,
-    showInitialViewOnSearchPage,
-} from '../Search';
+import { SearchPageComponent, cleanSearchRelatedData, showInitialViewOnSearchPage } from '../Search';
+import { useSearchOptions } from '../../../hooks';
 import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
