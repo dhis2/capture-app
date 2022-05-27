@@ -378,5 +378,9 @@ Then('you should be taken to the main page with org unit and program preselected
 });
 
 Then('you stay in the same page with all program results', () => {
-    cy.get('[data-test="search-results-top"]').contains('Results found in all programs');
+    cy.get('[data-test="search-results-top"]')
+        .then(($elements) => {
+            cy.log({ $elements });
+            cy.wrap($elements[1]).contains('Results found in all programs');
+        });
 });

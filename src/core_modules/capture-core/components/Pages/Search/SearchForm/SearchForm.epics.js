@@ -11,6 +11,7 @@ import {
     showSuccessResultsViewOnSearchPage,
     addSuccessResultsViewOnSearchPage,
     showTooManyResultsViewOnSearchPage,
+    showFallbackNotEnoughAttributesOnSearchPage,
 } from '../SearchPage.actions';
 import {
     getTrackedEntityInstances,
@@ -190,40 +191,35 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic: Epic = (action$, s
         }),
     );
 
-const deriveSearchFormInfo = searchGroups => (searchGroups.filter(searchGroup => !searchGroup.unique)[0] || {});
-
-// falling back from a search into a Program to a search into TEType means that
-// sometimes there wil be less attributes to search with. For instance a program
-// can have attributes last name, first name and gender but a TETYpe will have
-// only first name. Here we derive the form values that are revelant.
-const deriveFormValues = (searchForm, values) => {
-    if (!searchForm) {
-        return {};
-    }
-    const elements = searchForm.getElements();
-
-    return ([...elements.values()].reduce((acc, { id: fieldId }) => {
-        if (Object.keys(values).includes(fieldId)) {
-            const fieldValue = values[fieldId];
-            return { ...acc, [fieldId]: fieldValue };
-        }
-        return acc;
-    }, {}));
-};
-
 export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH_START),
-        flatMap(({ payload: { formId, programId, pageSize, page, availableSearchOptions } }) => {
+        flatMap(({ payload: { programId, pageSize, page } }) => {
             const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
             if (trackerProgram.trackedEntityType) {
-                const { id: trackedEntityTypeId } = trackerProgram.trackedEntityType;
-                const { formsValues } = store.value;
+                const { id: trackedEntityTypeId, searchGroups } = trackerProgram.trackedEntityType;
+                const availableSearchGroup = searchGroups.find(group => !group.unique);
 
-                const { searchForm } = deriveSearchFormInfo(availableSearchOptions[trackedEntityTypeId].searchGroups);
-                const fallbackFormValues = deriveFormValues(searchForm, formsValues[formId]);
+                if (availableSearchGroup) {
+                    const { minAttributesRequiredToSearch, searchForm } = availableSearchGroup;
+                    const { searchPage } = store.value;
+                    const searchTerms = searchPage.currentSearchInfo.currentSearchTerms;
+                    const searchableFields = searchForm.getElements();
 
-                return of(fallbackSearch({ trackedEntityTypeId, fallbackFormValues, page, pageSize }));
+                    const { searchableValuesCount, fallbackFormValues } = searchTerms.reduce((acc, term) => {
+                        if (searchableFields.find(({ id }) => id === term.id)) {
+                            acc.searchableValuesCount += 1;
+                        }
+                        acc.fallbackFormValues[term.id] = term.value;
+                        return acc;
+                    }, { searchableValuesCount: 0, fallbackFormValues: {} });
+
+                    if (searchableValuesCount >= minAttributesRequiredToSearch) {
+                        return of(fallbackSearch({ trackedEntityTypeId, fallbackFormValues, page, pageSize }));
+                    }
+                }
+
+                return of(showFallbackNotEnoughAttributesOnSearchPage());
             }
 
             return empty();
@@ -235,8 +231,8 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
         ofType(searchPageActionTypes.FALLBACK_SEARCH),
         flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }) => {
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
+            const filter = getFiltersForAttributesSearchQuery(fallbackFormValues, attributes).filter(query => query);
 
-            const filter = getFiltersForAttributesSearchQuery(fallbackFormValues, attributes);
             const queryArgs = {
                 filter,
                 trackedEntityType: trackedEntityTypeId,
@@ -254,7 +250,6 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
                     }
                     return showEmptyResultsViewOnSearchPage();
                 }),
-                startWith(showLoadingViewOnSearchPage()),
                 catchError(handleErrors),
             );
         }),
