@@ -243,10 +243,14 @@ const Index = ({
                             <Modal position="middle">
                                 <ModalTitle>{i18n.t('Not enough attributes filled in to search')}</ModalTitle>
                                 <ModalContent>
-                                    {i18n.t(
-                                        'Fill in at least {{minAttributesRequiredToSearchFallback}}  attributes to search',
-                                        { minAttributesRequiredToSearchFallback },
-                                    )}
+                                    {i18n.t('Fill in at least {{count}} attribute to search', {
+                                        count: minAttributesRequiredToSearchFallback,
+                                        defaultValue: 'Fill in at least {{count}} attribute to search',
+                                        defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+                                        interpolation: {
+                                            escape: false,
+                                        },
+                                    })}
                                 </ModalContent>
                                 <ModalActions>
                                     <ButtonStrip end>
