@@ -26,6 +26,7 @@ export type ContainerProps = $ReadOnly<{|
   trackedEntityTypeId: string,
   availableSearchOptions: AvailableSearchOptions,
   preselectedProgramId: SelectedSearchScopeId,
+  minAttributesRequiredToSearchFallback: number,
   searchStatus: string,
   error: boolean,
   ready: boolean,
