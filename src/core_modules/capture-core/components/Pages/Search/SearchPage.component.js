@@ -83,6 +83,7 @@ const Index = ({
     searchStatus,
     trackedEntityTypeId,
     navigateToRegisterUser,
+    minAttributesRequiredToSearchFallback,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
@@ -240,9 +241,12 @@ const Index = ({
                         {
                             searchStatus === searchPageStatus.NOT_ENOUGH_ATTRIBUTES &&
                             <Modal position="middle">
-                                <ModalTitle>{i18n.t('Not enough attributes')}</ModalTitle>
+                                <ModalTitle>{i18n.t('Not enough attributes filled in to search')}</ModalTitle>
                                 <ModalContent>
-                                    {i18n.t('You can change your search terms and search again to find what you are looking for.')}
+                                    {i18n.t(
+                                        'Fill in at least {{minAttributesRequiredToSearchFallback}}  attributes to search',
+                                        { minAttributesRequiredToSearchFallback },
+                                    )}
                                 </ModalContent>
                                 <ModalActions>
                                     <ButtonStrip end>

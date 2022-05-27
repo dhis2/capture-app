@@ -96,6 +96,9 @@ export const SearchPage: ComponentType<{||}> = () => {
 
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
+    const minAttributesRequiredToSearchFallback =
+        useSelector(({ searchPage }) => searchPage.minAttributesRequiredToSearchFallback);
+
     useEffect(() => {
         if (currentProgramId && (currentProgramId !== preselectedProgramId)) {
             // There is no search for Event type of programs.
@@ -114,6 +117,7 @@ export const SearchPage: ComponentType<{||}> = () => {
             preselectedProgramId={preselectedProgramId}
             trackedEntityTypeId={trackedEntityTypeId}
             searchStatus={searchStatus}
+            minAttributesRequiredToSearchFallback={minAttributesRequiredToSearchFallback}
             error={error}
             ready={ready}
         />);
