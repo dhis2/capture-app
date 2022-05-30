@@ -61,8 +61,8 @@ const MainPageContainer = () => {
     );
     const { selectedTemplateId } = deriveURLParamsFromLocation();
     const selectedProgram = programId && programCollection.get(programId);
-    const displayFrontPageList = selectedProgram?.trackedEntityType?.id && selectedProgram?.displayFrontPageList;
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
+    const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
 
     const availableSearchOptions = useSearchOptions();
     const dispatchShowInitialSearchPage = useCallback(
@@ -75,12 +75,7 @@ const MainPageContainer = () => {
     }, [showAllAccessible, dispatch]);
 
     useEffect(() => {
-        if (
-            programId &&
-            selectedProgram?.trackedEntityType &&
-            displayFrontPageList &&
-            selectedTemplateId === undefined
-        ) {
+        if (programId && trackedEntityTypeId && displayFrontPageList && selectedTemplateId === undefined) {
             orgUnitId &&
                 history.push(
                     `/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: `${programId}-default` })}`,
@@ -89,7 +84,15 @@ const MainPageContainer = () => {
             showAllAccessible &&
                 history.push(`/?${buildUrlQueryString({ programId, selectedTemplateId: `${programId}-default` })}&all`);
         }
-    }, [selectedTemplateId, orgUnitId, programId, showAllAccessible, selectedProgram, displayFrontPageList, history]);
+    }, [
+        selectedTemplateId,
+        orgUnitId,
+        programId,
+        showAllAccessible,
+        trackedEntityTypeId,
+        displayFrontPageList,
+        history,
+    ]);
 
     const setShowAccessible = () => history
         .push(`/?${buildUrlQueryString({ programId })}&all`);
