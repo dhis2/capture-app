@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -1101,6 +1101,12 @@ msgstr "Tato událost nemá žádné komentáře"
 msgid "stage not found in rules execution"
 msgstr "fáze nebyla nalezena v provádění pravidel"
 
+msgid "Delete event"
+msgstr "Smazat událost"
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Událost dokončena"
 
@@ -1248,9 +1254,6 @@ msgstr "Fáze a události"
 msgid "Working list could not be loaded"
 msgstr "Pracovní seznam nelze načíst"
 
-msgid "Delete event"
-msgstr "Smazat událost"
-
 msgid "Download as JSON"
 msgstr "Stáhnout jako JSON"
 
@@ -1376,6 +1379,9 @@ msgstr "Při ukládání zápisu došlo k chybě"
 
 msgid "Error saving the enrollment event"
 msgstr "Chyba při ukládání události zápisu"
+
+msgid "Error deleting the enrollment event"
+msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"
