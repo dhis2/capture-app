@@ -181,14 +181,14 @@ Then('main page page url is valid', () => {
 });
 
 When('you remove the program selection', () => {
-    cy.get('[data-test="program-selector-container"]').within(() => {
+    cy.get('[data-test="scope-selector"]').within(() => {
         cy.get('[data-test="reset-selection-button"]').eq(0).click();
     });
 });
 
 When('you remove the org unit selection', () => {
-    cy.get('[data-test="org-unit-selector-container"]').within(() => {
-        cy.get('[data-test="reset-selection-button"]').eq(0).click();
+    cy.get('[data-test="scope-selector"]').within(() => {
+        cy.get('[data-test="reset-selection-button"]').eq(1).click();
     });
 });
 
