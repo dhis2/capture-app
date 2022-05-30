@@ -58,7 +58,12 @@ Given('you select both org unit and program Malaria case registration', () => {
         .type('Malaria case re');
     cy.contains('Malaria case registration')
         .click();
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=VBqh0ynB2wv`);
+    cy.url().should(
+        'eq',
+        `${
+            Cypress.config().baseUrl
+        }/#/?orgUnitId=DiszpKrYNg8&programId=VBqh0ynB2wv&selectedTemplateId=VBqh0ynB2wv-default`,
+    );
 });
 
 Given('you select both org unit and program Child Programme', () => {
@@ -288,7 +293,7 @@ And('you reset the tei selection', () => {
 });
 
 And('you navigated to the main page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UWselectedTemplateId=IpHINAT79UWselectedTemplateId-default`);
 });
 
 And('you see message explaining you need to select a program', () => {
