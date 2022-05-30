@@ -293,7 +293,7 @@ And('you reset the tei selection', () => {
 });
 
 And('you navigated to the main page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UWselectedTemplateId=IpHINAT79UWselectedTemplateId-default`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default`);
 });
 
 And('you see message explaining you need to select a program', () => {
