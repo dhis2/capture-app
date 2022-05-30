@@ -19,19 +19,17 @@ const mapStateToProps = (state: ReduxState) => ({
     ready: !state.activePage.lockedSelectorLoads,  // TODO: Should probably remove this
 });
 
-const showMainPage = (selectedProgram, orgUnitId, selectedTemplateId) => {
+const showMainPage = (selectedProgram, orgUnitId, displayFrontPageList, selectedTemplateId) => {
     const noProgramSelected = !selectedProgram;
     const noOrgUnitSelected = !orgUnitId;
     const isEventProgram = !selectedProgram?.trackedEntityType?.id;
-    const displayFrontPageList = selectedProgram?.trackedEntityType?.id && selectedProgram?.displayFrontPageList;
-    const hasSelectedTemplateId = !displayFrontPageList && selectedTemplateId;
 
     return (
         noProgramSelected ||
         noOrgUnitSelected ||
         isEventProgram ||
         displayFrontPageList ||
-        hasSelectedTemplateId
+        selectedTemplateId
     );
 };
 
@@ -63,6 +61,7 @@ const MainPageContainer = () => {
     );
     const { selectedTemplateId } = deriveURLParamsFromLocation();
     const selectedProgram = programId && programCollection.get(programId);
+    const displayFrontPageList = selectedProgram?.trackedEntityType?.id && selectedProgram?.displayFrontPageList;
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
 
     const availableSearchOptions = useSearchOptions();
@@ -74,6 +73,23 @@ const MainPageContainer = () => {
     useEffect(() => {
         dispatch(updateShowAccessibleStatus(showAllAccessible));
     }, [showAllAccessible, dispatch]);
+
+    useEffect(() => {
+        if (
+            programId &&
+            selectedProgram?.trackedEntityType &&
+            displayFrontPageList &&
+            selectedTemplateId === undefined
+        ) {
+            orgUnitId &&
+                history.push(
+                    `/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: `${programId}-default` })}`,
+                );
+
+            showAllAccessible &&
+                history.push(`/?${buildUrlQueryString({ programId, selectedTemplateId: `${programId}-default` })}&all`);
+        }
+    }, [selectedTemplateId, orgUnitId, programId, showAllAccessible, selectedProgram, displayFrontPageList, history]);
 
     const setShowAccessible = () => history
         .push(`/?${buildUrlQueryString({ programId })}&all`);
@@ -110,7 +126,7 @@ const MainPageContainer = () => {
         <OrgUnitFetcher orgUnitId={orgUnitId}>
             <LockedSelector />
             <>
-                {showMainPage(selectedProgram, orgUnitId, selectedTemplateId) ? (
+                {showMainPage(selectedProgram, orgUnitId, displayFrontPageList, selectedTemplateId) ? (
                     <MainPageComponent
                         MainPageStatus={MainPageStatus}
                         programId={programId}

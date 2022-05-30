@@ -88,14 +88,16 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
             })
                 .then((result) => {
                     const isActiveTemplate = store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
-                    const { programId, orgUnitId, selectedTemplateId } = deriveURLParamsFromLocation();
+                    const { programId, orgUnitId, selectedTemplateId, all } = deriveURLParamsFromLocation();
                     selectedTemplateId &&
                     history.push(
                         `/?${buildUrlQueryString({
                             programId,
                             orgUnitId,
                             selectedTemplateId: result.response.uid,
-                        })}`,
+                        })}${
+                            all !== undefined ? '&all' : ''
+                        }`,
                     );
                     return addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate });
                 })
@@ -132,14 +134,16 @@ export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore, 
                 type: 'delete',
             })
                 .then(() => {
-                    const { programId, orgUnitId, selectedTemplateId } = deriveURLParamsFromLocation();
+                    const { programId, orgUnitId, selectedTemplateId, all } = deriveURLParamsFromLocation();
                     selectedTemplateId &&
                     history.push(
                         `/?${buildUrlQueryString({
                             programId,
                             orgUnitId,
                             selectedTemplateId: `${programId}-default`,
-                        })}`,
+                        })}${
+                            all !== undefined ? '&all' : ''
+                        }`,
                     );
                     return deleteTemplateSuccess(template, storeId);
                 })

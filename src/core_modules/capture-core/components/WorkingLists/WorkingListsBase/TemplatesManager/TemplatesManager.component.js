@@ -16,12 +16,16 @@ import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing
 const TemplatesManagerPlain = (props: Props) => {
     const { templates, ...passOnProps } = props;
     const history = useHistory();
-    const { orgUnitId, programId, selectedTemplateId } = useLocationQuery();
+    const { orgUnitId, programId, selectedTemplateId, all } = useLocationQuery();
     const onChangeUrl = useCallback(
         id =>
             selectedTemplateId &&
-            history.push(`/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: id })}`),
-        [history, orgUnitId, programId, selectedTemplateId],
+            history.push(
+                `/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: id })}${
+                    all !== undefined ? '&all' : ''
+                }`,
+            ),
+        [history, orgUnitId, programId, selectedTemplateId, all],
     );
 
     const {
