@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -1070,6 +1070,12 @@ msgstr "此事件没有任何评论"
 msgid "stage not found in rules execution"
 msgstr "在规则执行中找不到阶段"
 
+msgid "Delete event"
+msgstr "删除事件"
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr "事件完成"
 
@@ -1204,9 +1210,6 @@ msgstr "阶段与活动"
 msgid "Working list could not be loaded"
 msgstr "工作列表不能载入"
 
-msgid "Delete event"
-msgstr "删除事件"
-
 msgid "Download as JSON"
 msgstr "下载为JSON"
 
@@ -1332,6 +1335,9 @@ msgstr "保存报名时出错"
 
 msgid "Error saving the enrollment event"
 msgstr "保存报名事件时出错"
+
+msgid "Error deleting the enrollment event"
+msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr ""

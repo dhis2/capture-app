@@ -11,47 +11,41 @@ const getAssignEffectsBasedOnHideField = (hideEffects: Array<HideOutputEffect>) 
             type: effectActions.ASSIGN_VALUE,
         }));
 
-const getAssignEffectsBasedOnHideSection = (
-    hideSectionEffects: Array<HideOutputEffect>,
-    foundation: RenderFoundation,
-) => hideSectionEffects
-    .flatMap(({ id: sectionId }) => {
-        const section = foundation.getSection(sectionId);
-        if (!section) {
-            return [];
-        }
-
-        return [...section.elements.values()]
-            .map(({ id }) => ({
-                id,
-                value: null,
-                type: effectActions.ASSIGN_VALUE,
-            }));
-    });
+const deduplicateEffectArray = (effectArray: Array<OutputEffect>) => {
+    const dedupedEffectsAsMap = new Map(effectArray.map(effect => [effect.id, effect]));
+    return [...dedupedEffectsAsMap.values()];
+};
 
 const postProcessAssignEffects = ({
     assignValueEffects,
     hideFieldEffects,
-    hideSectionEffects,
-    foundation,
 }: {
     assignValueEffects: Array<AssignOutputEffect>,
     hideFieldEffects: Array<HideOutputEffect>,
+}) => (
+    // assignValueEffects has precedence over "blank a hidden field"-assignments.
+    // This requirement is met by destructuring assignValueEffects *last*.
+    deduplicateEffectArray([
+        ...getAssignEffectsBasedOnHideField(hideFieldEffects),
+        ...assignValueEffects,
+    ])
+);
+
+const postProcessHideSectionEffects = (
     hideSectionEffects: Array<HideOutputEffect>,
     foundation: RenderFoundation,
-}) => {
-    const fromHideFieldArray = getAssignEffectsBasedOnHideField(hideFieldEffects);
-    const fromHideSectionArray = getAssignEffectsBasedOnHideSection(hideSectionEffects, foundation);
+) => (hideSectionEffects.flatMap(({ id: sectionId }) => {
+    const section = foundation.getSection(sectionId);
+    if (!section) {
+        return [];
+    }
 
-    const dedupedEffectsAsMap = new Map([
-        ...assignValueEffects,
-        ...fromHideFieldArray,
-        ...fromHideSectionArray,
-    ].map(effect => [effect.id, effect]));
-
-
-    return [...dedupedEffectsAsMap.values()];
-};
+    return [...section.elements.values()]
+        .map(({ id }) => ({
+            id,
+            type: effectActions.HIDE_FIELD,
+        }));
+}));
 
 const filterHideEffects = (
     hideEffects: Array<HideOutputEffect>,
@@ -63,24 +57,11 @@ const filterHideEffects = (
         return acc;
     }, {});
 
-    return hideEffects
+    const nonCompulsoryHideEffects = hideEffects
         .filter(({ id }) => !(compulsoryElements[id] || makeCompulsoryEffects[id]));
+
+    return deduplicateEffectArray(nonCompulsoryHideEffects);
 };
-
-const filterHideSectionEffects = (
-    hideSectionEffects: Array<HideOutputEffect>,
-    makeCompulsoryEffects: { [id: string]: Array<OutputEffect> },
-    foundation: RenderFoundation,
-) => hideSectionEffects
-    .filter(({ id: sectionId }) => {
-        const section = foundation.getSection(sectionId);
-        if (!section) {
-            return false;
-        }
-
-        return ![...section.elements.values()]
-            .some(({ compulsory, id }) => compulsory || makeCompulsoryEffects[id]);
-    });
 
 export function postProcessRulesEffects(
     rulesEffects: OutputEffects = [],
@@ -120,14 +101,13 @@ export function postProcessRulesEffects(
             return acc;
         }, {});
 
-    const filteredHideFieldEffects = filterHideEffects(
-        hideFieldEffects,
-        compulsoryEffectsObject,
+    const hideSectionFieldEffects = postProcessHideSectionEffects(
+        hideSectionEffects,
         foundation,
     );
 
-    const filteredHideSectionEffects = filterHideSectionEffects(
-        hideSectionEffects,
+    const filteredHideFieldEffects = filterHideEffects(
+        [...hideFieldEffects, ...hideSectionFieldEffects],
         compulsoryEffectsObject,
         foundation,
     );
@@ -136,14 +116,11 @@ export function postProcessRulesEffects(
         // $FlowFixMe
         assignValueEffects,
         hideFieldEffects: filteredHideFieldEffects,
-        hideSectionEffects: filteredHideSectionEffects,
-        foundation,
     });
 
     return [
         ...rest,
         ...filteredHideFieldEffects,
-        ...filteredHideSectionEffects,
         ...filteredAssignValueEffects,
     ];
 }

@@ -46,7 +46,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
 
     const handleSetOrgUnit = (orgUnitId, orgUnitObject) => {
         setSelectedOrgUnit(orgUnitObject);
-        onSetOrgUnit(orgUnitId);
+        onSetOrgUnit && onSetOrgUnit(orgUnitId);
     };
 
     const lockedSelectorLoads: string = useSelector(({ activePage }) => activePage.lockedSelectorLoads);

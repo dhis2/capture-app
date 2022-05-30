@@ -10,6 +10,7 @@ import { loadTrackedEntityTypes } from '../trackedEntityTypes';
 import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
 import { loadCategories } from '../categories';
 import { loadOptionSets } from '../optionSets';
+import { confirmLoadingSequence } from './confirmLoadingSequence';
 
 const loadCoreMetaData = () =>
     Promise.all(
@@ -23,9 +24,9 @@ const loadCoreMetaData = () =>
 
 /**
  * Retrieves metadata from the api and stores it in IndexedDB.
- * This way we don't have to redownload all the metadata every time, but only the parts that have changed.
+ * We don't download all the metadata every time, only the parts that have changed.
  * Most metadata is redownloaded based on a program version change.
- * The option sets have their own version and are redonloaded based on that.
+ * The option sets have their own version and are redownloaded based on that.
  */
 export const loadMetaDataInternal = async () => {
     const {
@@ -34,6 +35,7 @@ export const loadMetaDataInternal = async () => {
         categories,
         trackedEntityTypeIds,
         changesDetected,
+        stalePrograms,
     } = await loadPrograms();
 
     changesDetected && await loadCoreMetaData();
@@ -49,8 +51,12 @@ export const loadMetaDataInternal = async () => {
     ]);
 
     await loadCategories(categories);
+
     await loadOptionSets([
         ...optionSetsOutlineFromPrograms,
         ...optionSetsOutlineFromTrackedEntityTypes,
     ]);
+
+    // set program version to cache to confirm loading of programs and their dependencies
+    await confirmLoadingSequence(stalePrograms);
 };

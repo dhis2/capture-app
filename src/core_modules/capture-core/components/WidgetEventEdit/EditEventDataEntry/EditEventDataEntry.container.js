@@ -19,11 +19,15 @@ import {
 import {
     requestSaveEditEventDataEntry,
     cancelEditEventDataEntry,
+    requestDeleteEventDataEntry,
 } from './editEventDataEntry.actions';
 
 import {
     viewEventIds,
 } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
+
+import { deriveURLParamsFromLocation } from '../../../utils/routing/deriveURLParamsFromLocation';
+
 
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
@@ -79,6 +83,10 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
             cancelEditEventDataEntry(),
             setCurrentDataEntry(viewEventIds.dataEntryId, viewEventIds.itemId),
         ]));
+    },
+    onDelete: () => {
+        const { eventId, programId, orgUnitId, teiId, enrollmentId } = deriveURLParamsFromLocation();
+        dispatch(requestDeleteEventDataEntry({ eventId, programId, orgUnitId, teiId, enrollmentId }));
     },
 });
 
