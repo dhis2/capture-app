@@ -9,5 +9,6 @@ export { useResetEnrollmentId } from './useResetEnrollmentId';
 export { useResetStageId } from './useResetStageId';
 export { useResetEventId } from './useResetEventId';
 export { useReset } from './useReset';
+export { useResetViewEventId } from './useResetViewEventId';
 
 export { useOrganizationUnit } from './useOrganizationUnit';

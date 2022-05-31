@@ -13,11 +13,8 @@ import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import {
-    actionTypes as editEventDataEntryActionTypes,
-} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
-import {
     actionTypes as editEventDataEntryAction,
-} from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
+    actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import {
     actionTypes as viewEventNewRelationshipActionTypes,
@@ -62,17 +59,6 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     [workingListsCommonActionTypes.LIST_VIEW_INIT_ERROR]: (state, action) =>
         addErrorFeedback(state, action.payload.errorMessage),
     [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE]: (state, action) => {
-        const error = action.payload;
-        const errorMessage = isString(error) ? error : error.message;
-        const errorObject = isObject(error) ? error : null;
-        log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
-        const newState = [
-            ...state,
-            getErrorFeedback(i18n.t('Could not save event')),
-        ];
-        return newState;
-    },
-    [editEventDataEntryActionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE]: (state, action) => {
         const error = action.payload;
         const errorMessage = isString(error) ? error : error.message;
         const errorObject = isObject(error) ? error : null;
@@ -132,6 +118,8 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, i18n.t('Error saving enrollment')),
     [enrollmentSiteActionTypes.SAVE_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error saving the enrollment event')),
+    [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: state =>
+        addErrorFeedback(state, i18n.t('Error deleting the enrollment event')),
     [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error editing the event, the changes made were not saved')),
 }, 'feedbacks', []);

@@ -21,3 +21,12 @@ export type PlainProps = {|
     pageStatus: string,
     ...CssClasses,
 |};
+
+export type Props = {|
+    programId: string,
+    stageId: string,
+    teiId: string,
+    enrollmentId: string,
+    orgUnitId: string,
+    eventId: string,
+|};

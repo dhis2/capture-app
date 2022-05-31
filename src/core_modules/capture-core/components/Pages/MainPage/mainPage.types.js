@@ -9,5 +9,6 @@ export type Props = $ReadOnly<{|
     ...PassOnProps,
     setShowAccessible: () => void,
     MainPageStatus: boolean,
+    selectedCategories: any,
     ...CssClasses,
 |}>;

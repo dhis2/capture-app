@@ -132,8 +132,6 @@ const StageDetailPlain = (props: Props) => {
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElements))
             .map((row: Object) => {
-                const dataTableProgramStage = events[0].programStage;
-
                 const cells = headerColumns.map(({ id }) => (
                     <Tooltip
                         key={`${id}-${row.id}`}
@@ -143,7 +141,7 @@ const StageDetailPlain = (props: Props) => {
                         {({ onMouseOver, onMouseOut, ref }) => (
                             <DataTableCell
                                 key={id}
-                                onClick={() => !row.pendingApiResponse && onEventClick(row.id, dataTableProgramStage)}
+                                onClick={() => !row.pendingApiResponse && onEventClick(row.id)}
                                 ref={(tableCell) => {
                                     if (tableCell && row.pendingApiResponse) {
                                         tableCell.onmouseover = onMouseOver;

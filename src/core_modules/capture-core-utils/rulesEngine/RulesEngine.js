@@ -226,6 +226,7 @@ export class RulesEngine {
         selectedEntity,
         selectedEnrollment,
         selectedOrgUnit,
+        selectedUserRoles,
         optionSets,
     }: RulesEngineInput): OutputEffects {
         const variablesHash = this.variableService.getVariables({
@@ -241,7 +242,7 @@ export class RulesEngine {
             constants,
         });
 
-        const dhisFunctions = d2Functions(this.dateUtils, this.variableService, variablesHash, selectedOrgUnit);
+        const dhisFunctions = d2Functions(this.dateUtils, this.variableService, variablesHash, selectedOrgUnit, selectedUserRoles);
 
         if (!programRules) {
             return [];

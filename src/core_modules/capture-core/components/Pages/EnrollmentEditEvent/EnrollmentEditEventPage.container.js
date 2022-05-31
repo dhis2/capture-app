@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // $FlowFixMe
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -15,11 +15,59 @@ import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
+import { useEvent } from './hooks';
+import type { Props } from './EnrollmentEditEventPage.types';
+import { LoadingMaskForPage } from '../../LoadingMasks';
+
+const getEventDate = (event) => {
+    const eventDataConvertValue = convertValue(event?.occurredAt || event?.scheduledAt, dataElementTypes.DATETIME);
+    const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
+    return eventDate;
+};
+
+const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, event }) => {
+    let pageStatus = pageStatuses.MISSING_DATA;
+    if (orgUnitId) {
+        enrollmentSite && teiDisplayName && trackedEntityName && programStage && event
+            ? (pageStatus = pageStatuses.DEFAULT)
+            : (pageStatus = pageStatuses.MISSING_DATA);
+    } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
+    return pageStatus;
+};
 
 export const EnrollmentEditEventPage = () => {
+    const { orgUnitId, eventId } = useLocationQuery();
+    const { event } = useEvent(eventId);
+    const [context, setContext] = useState({});
+    const { programId, stageId, teiId, enrollmentId } = context;
+
+    useEffect(() => {
+        event && setContext(prevContext => ({
+            ...prevContext,
+            programId: event.program,
+            stageId: event.programStage,
+            teiId: event.trackedEntity,
+            enrollmentId: event.enrollment,
+        }));
+    }, [event]);
+
+    return eventId && programId && stageId && enrollmentId && teiId ? (
+        <EnrollmentEditEventPageWithContext
+            programId={programId}
+            stageId={stageId}
+            teiId={teiId}
+            enrollmentId={enrollmentId}
+            orgUnitId={orgUnitId}
+            eventId={eventId}
+
+        />
+    ) : <LoadingMaskForPage />;
+};
+
+const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollmentId, orgUnitId, eventId }: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { programId, stageId, teiId, enrollmentId, orgUnitId, eventId } = useLocationQuery();
+
     const { program } = useProgramInfo(programId);
     const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);
@@ -36,22 +84,23 @@ export const EnrollmentEditEventPage = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
 
-    const onGoBack = () => history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
+    const onGoBack = () =>
+        history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name;
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
-    const eventDataConvertValue = convertValue((event?.occurredAt || event?.scheduledAt), dataElementTypes.DATETIME);
-    const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
-
-    let pageStatus = pageStatuses.MISSING_DATA;
-    if (orgUnitId) {
-        enrollmentSite && teiDisplayName && trackedEntityName && programStage && event
-            ? (pageStatus = pageStatuses.DEFAULT)
-            : (pageStatus = pageStatuses.MISSING_DATA);
-    } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
+    const eventDate = getEventDate(event);
+    const pageStatus = getPageStatus({
+        orgUnitId,
+        enrollmentSite,
+        teiDisplayName,
+        trackedEntityName,
+        programStage,
+        event,
+    });
 
     return (
         <EnrollmentEditEventPageComponent

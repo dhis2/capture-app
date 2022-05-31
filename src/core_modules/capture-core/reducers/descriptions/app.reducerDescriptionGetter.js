@@ -9,9 +9,6 @@ import { actionTypes as editEventActionTypes }
     from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 import { actionTypes as viewEventActionTypes }
     from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import {
-    actionTypes as editEventDataEntryActionTypes,
-} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as setCurrentSelectionsActionTypes,
@@ -20,7 +17,6 @@ import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 import { topBarActionsActionTypes } from '../../components/TopBarActions';
-import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
@@ -44,18 +40,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.page = null;
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.page = null;
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;
@@ -151,14 +135,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [lockedSelectorActionTypes.PROGRAM_ID_RESET]: state => ({
         ...state,
         locationSwitchInProgress: true,
-    }),
-    [viewEventPageActionTypes.ORG_UNIT_ID_CUSTOM_RESET]: state => ({
-        ...state,
-        page: null,
-    }),
-    [viewEventPageActionTypes.PROGRAM_ID_CUSTOM_RESET]: state => ({
-        ...state,
-        page: null,
     }),
     [searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE]: state => ({
         ...state,

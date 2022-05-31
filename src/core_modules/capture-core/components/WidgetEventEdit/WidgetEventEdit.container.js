@@ -12,7 +12,6 @@ import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { pageMode } from '../Pages/EnrollmentEditEvent/EnrollmentEditEventPage.constants';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { useRulesEngineOrgUnit } from '../../hooks/useRulesEngineOrgUnit';
-import { useLocationQuery } from '../../utils/routing';
 
 const styles = {
     header: {
@@ -45,10 +44,13 @@ export const WidgetEventEditPlain = ({
     programStage,
     programStage: { name, icon },
     onGoBack,
+    programId,
+    orgUnitId,
 }: Props) => {
     const dispatch = useDispatch();
-    const currentPageMode = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent) ? pageMode.EDIT : pageMode.VIEW;
-    const orgUnitId = useLocationQuery().orgUnitId;
+    const currentPageMode = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent)
+        ? pageMode.EDIT
+        : pageMode.VIEW;
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
     if (error) {
@@ -94,13 +96,12 @@ export const WidgetEventEditPlain = ({
             >
                 <div className={classes.form}>
                     {currentPageMode === pageMode.VIEW ? (
-                        <ViewEventDataEntry
-                            formFoundation={programStage.stageForm}
-                        />
+                        <ViewEventDataEntry formFoundation={programStage.stageForm} />
                     ) : (
                         <EditEventDataEntry
                             formFoundation={programStage.stageForm}
                             orgUnit={orgUnit}
+                            programId={programId}
                         />
                     )}
                 </div>
@@ -108,5 +109,4 @@ export const WidgetEventEditPlain = ({
         </div>
     ) : null;
 };
-export const WidgetEventEdit: ComponentType<$Diff<Props, CssClasses>> =
-    withStyles(styles)(WidgetEventEditPlain);
+export const WidgetEventEdit: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetEventEditPlain);

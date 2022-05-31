@@ -52,6 +52,7 @@ import {
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
     saveEditedEventSucceededEpic,
+    requestDeleteEventDataEntryEpic,
 } from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
 
 import {
@@ -66,15 +67,6 @@ import {
     backToMainPageLocationChangeEpic,
     openAddRelationshipForViewEventEpic,
 } from 'capture-core/components/Pages/ViewEvent/epics/viewEvent.epics';
-
-import {
-    saveEditEventEpic,
-    saveEditEventLocationChangeEpic,
-} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/saveEditSingleEvent.epics';
-import {
-    cancelEditEventEpic,
-    cancelEditEventLocationChangeEpic,
-} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/cancelEditSingleEvent.epics';
 import {
     addNoteForEventEpic,
     removeNoteForEventEpic,
@@ -266,10 +258,6 @@ export const epics = combineEpics(
     getEventFromUrlEpic,
     runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
     runRulesOnUpdateFieldForEditSingleEventEpic,
-    saveEditEventLocationChangeEpic,
-    saveEditEventEpic,
-    cancelEditEventLocationChangeEpic,
-    cancelEditEventEpic,
     addNoteForEventEpic,
     addNoteForNewSingleEventEpic,
     removeNoteForEventEpic,
@@ -372,4 +360,5 @@ export const epics = combineEpics(
     updateTeiEpic,
     updateTeiSucceededEpic,
     updateTeiFailedEpic,
+    requestDeleteEventDataEntryEpic,
 );

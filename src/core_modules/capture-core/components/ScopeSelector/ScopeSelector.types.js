@@ -9,7 +9,7 @@ export type OwnProps = $ReadOnly<{|
   selectedCategories?: { [categoryId: string]: { writeAccess: boolean } },
   onSetProgramId?: (id: string) => void,
   onResetProgramId: () => void,
-  onSetOrgUnit: (id: string, orgUnit: Object) => void,
+  onSetOrgUnit?: (id: string, orgUnit: Object) => void,
   onResetOrgUnitId: () => void,
   onSetCategoryOption?: (categoryOption: Object, categoryId: string) => void,
   onResetAllCategoryOptions?: () => void,

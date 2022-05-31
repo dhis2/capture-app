@@ -34,6 +34,7 @@ import {
 
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
+import { withDeleteButton } from '../DataEntry/withDeleteButton';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
@@ -254,15 +255,18 @@ const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(Geometry
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
-const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
+const DeletableDataEntry = withDeleteButton()(CompletableDataEntry);
+const DataEntryWrapper = withBrowserBackWarning()(DeletableDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,
     orgUnit: OrgUnit,
-    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
-    onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: (orgUnit: OrgUnit) => void,
+    programId: string,
+    onUpdateDataEntryField: (orgUnit: OrgUnit, program: string) => (innerAction: ReduxAction<any, any>) => void,
+    onUpdateField: (orgUnit: OrgUnit, program: string) => (innerAction: ReduxAction<any, any>) => void,
+    onStartAsyncUpdateField: (orgUnit: OrgUnit, program: string) => void,
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onDelete: () => void,
     onCancel: () => void,
     classes: {
         dataEntryContainer: string,
@@ -304,6 +308,7 @@ class EditEventDataEntryPlain extends Component<Props> {
     render() {
         const {
             orgUnit,
+            programId,
             onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
@@ -315,9 +320,9 @@ class EditEventDataEntryPlain extends Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={'singleEvent'}
-                onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
-                onUpdateFormField={onUpdateField(orgUnit)}
-                onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
+                onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
+                onUpdateFormField={onUpdateField(orgUnit, programId)}
+                onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
                 onSave={onSave(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
