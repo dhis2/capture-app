@@ -1065,7 +1065,7 @@ msgid "Download as XML"
 msgstr ""
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "Descărcare ca CSV"
 
 msgid "Download with current filters"
 msgstr ""
