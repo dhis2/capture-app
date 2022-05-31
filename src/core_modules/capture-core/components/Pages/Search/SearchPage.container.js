@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useMemo, useEffect } from 'react';
 import type { ComponentType } from 'react';
+import { useLocationQuery } from '../../../utils/routing';
 import { SearchPageComponent } from './SearchPage.component';
 import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
 import {
@@ -9,12 +10,10 @@ import {
     useTrackedEntityTypesWithCorrelatedPrograms,
     useCurrentTrackedEntityTypeId,
 } from '../../../hooks';
-import { LockedSelector } from '../../LockedSelector';
+import { TopBar } from './TopBar.container';
 import { ResultsPageSizeContext } from '../shared-contexts';
 
-const usePreselectedProgram = (): ?string => {
-    const currentSelectionsId =
-      useSelector(({ currentSelections }) => currentSelections.programId);
+const usePreselectedProgram = (currentSelectionsId): ?string => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
 
     return useMemo(() => {
@@ -34,6 +33,7 @@ const usePreselectedProgram = (): ?string => {
 
 export const SearchPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
+    const { programId, orgUnitId } = useLocationQuery();
 
     const dispatchShowInitialSearchPage = useCallback(
         () => { dispatch(showInitialViewOnSearchPage()); },
@@ -46,7 +46,7 @@ export const SearchPage: ComponentType<{||}> = () => {
         [dispatch]);
 
     const availableSearchOptions = useSearchOptions();
-    const preselectedProgramId = usePreselectedProgram();
+    const preselectedProgramId = usePreselectedProgram(programId);
 
     const searchStatus: string =
       useSelector(({ searchPage }) => searchPage.searchStatus);
@@ -54,22 +54,20 @@ export const SearchPage: ComponentType<{||}> = () => {
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
     const ready: boolean =
       useSelector(({ activePage }) => !activePage.isLoading);
-    const currentProgramId: string =
-      useSelector(({ currentSelections }) => currentSelections.programId);
 
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
     useEffect(() => {
-        if (currentProgramId && (currentProgramId !== preselectedProgramId)) {
+        if (programId && (programId !== preselectedProgramId)) {
             // There is no search for Event type of programs.
             // In this case we navigate the users back to the main page
             dispatchNavigateToMainPage();
         }
-    }, [currentProgramId, preselectedProgramId, dispatchNavigateToMainPage]);
+    }, [programId, preselectedProgramId, dispatchNavigateToMainPage]);
 
     return (
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-            <LockedSelector pageToPush="search" />
+            <TopBar programId={programId} orgUnitId={orgUnitId} />
             <SearchPageComponent
                 navigateToMainPage={dispatchNavigateToMainPage}
                 showInitialSearchPage={dispatchShowInitialSearchPage}

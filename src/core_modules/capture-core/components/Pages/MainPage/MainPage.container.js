@@ -12,47 +12,31 @@ import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { buildUrlQueryString, useLocationQuery, deriveURLParamsFromLocation } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
-import { LockedSelector } from '../../LockedSelector';
+import { TopBar } from './TopBar.container';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
     ready: !state.activePage.lockedSelectorLoads,  // TODO: Should probably remove this
 });
 
-const showMainPage = (selectedProgram, orgUnitId, displayFrontPageList, selectedTemplateId) => {
-    const noProgramSelected = !selectedProgram;
+const showMainPage = ({ programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId }) => {
+    const noProgramSelected = !programId;
     const noOrgUnitSelected = !orgUnitId;
-    const isEventProgram = !selectedProgram?.trackedEntityType?.id;
+    const isEventProgram = !trackedEntityTypeId;
 
-    return (
-        noProgramSelected ||
-        noOrgUnitSelected ||
-        isEventProgram ||
-        displayFrontPageList ||
-        selectedTemplateId
-    );
+    return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
 };
 
 const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { all } = useLocationQuery();
+    const { all, programId, orgUnitId } = useLocationQuery();
     const showAllAccessible = all !== undefined;
 
-    const {
-        currentSelectionsComplete,
-        programId,
-        orgUnitId,
-        categories,
-        searchStatus,
-        error,
-        ready,
-    } = useSelector(
+    const { categories, selectedCategories, searchStatus, error, ready } = useSelector(
         ({ currentSelections, searchPage, activePage }) => ({
-            currentSelectionsComplete: currentSelections.complete,
-            programId: currentSelections.programId,
-            orgUnitId: currentSelections.orgUnitId,
             categories: currentSelections.categories,
+            selectedCategories: currentSelections.categoriesMeta,
             searchStatus: searchPage.searchStatus,
             ready: !activePage.isLoading && !activePage.lockedSelectorLoads,
             error: activePage.selectionsError && activePage.selectionsError.error,
@@ -60,15 +44,18 @@ const MainPageContainer = () => {
         shallowEqual,
     );
     const { selectedTemplateId } = deriveURLParamsFromLocation();
-    const selectedProgram = programId && programCollection.get(programId);
+    const selectedProgram = programCollection.get(programId);
+    // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
 
     const availableSearchOptions = useSearchOptions();
-    const dispatchShowInitialSearchPage = useCallback(
-        () => { dispatch(showInitialViewOnSearchPage()); }, [dispatch]);
-    const dispatchCleanSearchRelatedData = useCallback(
-        () => { dispatch(cleanSearchRelatedData()); }, [dispatch]);
+    const dispatchShowInitialSearchPage = useCallback(() => {
+        dispatch(showInitialViewOnSearchPage());
+    }, [dispatch]);
+    const dispatchCleanSearchRelatedData = useCallback(() => {
+        dispatch(cleanSearchRelatedData());
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(updateShowAccessibleStatus(showAllAccessible));
@@ -94,42 +81,39 @@ const MainPageContainer = () => {
         history,
     ]);
 
-    const setShowAccessible = () => history
-        .push(`/?${buildUrlQueryString({ programId })}&all`);
+    const setShowAccessible = () => history.push(`/?${buildUrlQueryString({ programId })}&all`);
+
+    const withoutOrgUnit = useMemo(() => !orgUnitId && !showAllAccessible, [orgUnitId, showAllAccessible]);
 
     const MainPageStatus = useMemo(() => {
+        if (!programId) return MainPageStatuses.DEFAULT;
+
         if (selectedProgram?.categoryCombination) {
-            const buildCategoryCombinationStatus = () => {
-                if (!categories) return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
-                const programCategories = Array.from(selectedProgram.categoryCombination.categories.values());
+            if (!categories) return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
+            const programCategories = Array.from(selectedProgram.categoryCombination.categories.values());
 
-                if (programCategories.some(category => !categories || !categories[category.id])) {
-                    return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
-                }
+            if (programCategories.some(category => !categories || !categories[category.id])) {
+                return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
+            }
 
-                if (!orgUnitId && !showAllAccessible) {
-                    return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
-                }
+            if (withoutOrgUnit) {
+                return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
+            }
 
-                return MainPageStatuses.SHOW_WORKING_LIST;
-            };
-            return buildCategoryCombinationStatus();
+            return MainPageStatuses.SHOW_WORKING_LIST;
         }
 
-        if (currentSelectionsComplete || (programId && showAllAccessible)) {
-            return MainPageStatuses.SHOW_WORKING_LIST;
-        } else if (programId && !orgUnitId) {
+        if (withoutOrgUnit) {
             return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
         }
-        return MainPageStatuses.DEFAULT;
-    },
-    [categories, currentSelectionsComplete, orgUnitId, programId, selectedProgram, showAllAccessible]);
+        return MainPageStatuses.SHOW_WORKING_LIST;
+    }, [categories, programId, withoutOrgUnit, selectedProgram]);
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
-            <LockedSelector />
+            <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
             <>
-                {showMainPage(selectedProgram, orgUnitId, displayFrontPageList, selectedTemplateId) ? (
+                {showMainPage({ programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId }) ? (
                     <MainPageComponent
                         MainPageStatus={MainPageStatus}
                         programId={programId}
