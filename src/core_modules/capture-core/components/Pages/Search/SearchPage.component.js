@@ -17,7 +17,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 import { useLocation } from 'react-router-dom';
 
-import { LockedSelector } from '../../LockedSelector';
+import { TopBar } from './TopBar.container';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
@@ -83,7 +83,10 @@ const Index = ({
     searchStatus,
     trackedEntityTypeId,
     navigateToRegisterUser,
-    minAttributesRequiredToSearchFallback,
+    searchableFieldsCount,
+    searchableFieldsDisplayname,
+    programId,
+    orgUnitId,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
@@ -128,7 +131,6 @@ const Index = ({
     const searchGroupsForSelectedScope =
       (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : []);
 
-
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
         cleanSearchRelatedInfo();
@@ -137,7 +139,8 @@ const Index = ({
     };
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-            <LockedSelector pageToPush="search" />
+
+            <TopBar programId={programId} orgUnitId={orgUnitId} />
             <div data-test="search-page-content" className={classes.container} >
                 <Button
                     dataTest="back-button"
@@ -241,12 +244,13 @@ const Index = ({
                         {
                             searchStatus === searchPageStatus.NOT_ENOUGH_ATTRIBUTES &&
                             <Modal position="middle">
-                                <ModalTitle>{i18n.t('Not enough attributes filled in to search')}</ModalTitle>
+                                <ModalTitle>{i18n.t('Cannot search in all programs')}</ModalTitle>
                                 <ModalContent>
-                                    {i18n.t('Fill in at least {{count}} attribute to search', {
-                                        count: minAttributesRequiredToSearchFallback,
-                                        defaultValue: 'Fill in at least {{count}} attribute to search',
-                                        defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+                                    {i18n.t('Fill in at least {{count}} attribute to search: {{searchableAttributes}}', {
+                                        searchableAttributes: searchableFieldsDisplayname,
+                                        count: searchableFieldsCount,
+                                        defaultValue: 'Fill in at least {{count}} attribute to search: {{searchableAttributes}}',
+                                        defaultValue_plural: 'Fill in at least {{count}} attributes to search: {{searchableAttributes}}',
                                         interpolation: {
                                             escape: false,
                                         },

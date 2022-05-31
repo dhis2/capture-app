@@ -220,7 +220,7 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
                     if (searchableValuesCount >= minAttributesRequiredToSearchFallback) {
                         return of(fallbackSearch({ trackedEntityTypeId, fallbackFormValues, page, pageSize }));
                     }
-                    return of(showFallbackNotEnoughAttributesOnSearchPage({ minAttributesRequiredToSearchFallback }));
+                    return of(showFallbackNotEnoughAttributesOnSearchPage({ searchableFields }));
                 }
                 return of(showErrorViewOnSearchPage());
             }

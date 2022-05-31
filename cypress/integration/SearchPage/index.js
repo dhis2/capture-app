@@ -6,6 +6,7 @@ beforeEach(() => {
 
 Given('you are on the default search page', () => {
     cy.visit('/#/search');
+    cy.get('[data-test="scope-selector"]').should('exist');
 });
 
 Then('there should be no search domain preselected', () => {
@@ -234,7 +235,7 @@ When('you click the view dashboard button', () => {
 });
 
 When('you remove the Child Programme selection', () => {
-    cy.get('[data-test="program-selector-container"]').within(() => {
+    cy.get('[data-test="scope-selector"]').within(() => {
         cy.get('[data-test="reset-selection-button"]').eq(0).click();
     });
 });

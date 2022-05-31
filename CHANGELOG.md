@@ -1,3 +1,31 @@
+## [100.5.3](https://github.com/dhis2/capture-app/compare/v100.5.2...v100.5.3) (2022-05-31)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8c83a0d](https://github.com/dhis2/capture-app/commit/8c83a0d3ffc484141d5cc9489d02e5af93d168d5))
+
+## [100.5.2](https://github.com/dhis2/capture-app/compare/v100.5.1...v100.5.2) (2022-05-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c90df06](https://github.com/dhis2/capture-app/commit/c90df0648f1abc518ff19b5ffafb88dce91ce5cb))
+
+## [100.5.1](https://github.com/dhis2/capture-app/compare/v100.5.0...v100.5.1) (2022-05-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([427f364](https://github.com/dhis2/capture-app/commit/427f3644025b2a99ad9b9d2ac474f06815963efa))
+
+# [100.5.0](https://github.com/dhis2/capture-app/compare/v100.4.2...v100.5.0) (2022-05-24)
+
+
+### Features
+
+* [DHIS2-11977] add d2:hasUserRole ([#2761](https://github.com/dhis2/capture-app/issues/2761)) ([e58b25e](https://github.com/dhis2/capture-app/commit/e58b25e56b855b96d1a9a99a5c5ac50d4a4be302))
+
 ## [100.4.2](https://github.com/dhis2/capture-app/compare/v100.4.1...v100.4.2) (2022-05-24)
 
 
