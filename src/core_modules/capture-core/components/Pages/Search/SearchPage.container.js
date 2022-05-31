@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useMemo, useEffect } from 'react';
 import type { ComponentType } from 'react';
+import { useLocationQuery } from '../../../utils/routing';
 import { SearchPageComponent } from './SearchPage.component';
 import type { AvailableSearchOptions } from './SearchPage.types';
 import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
@@ -47,9 +48,7 @@ const useSearchOptions = (): AvailableSearchOptions => {
     );
 };
 
-const usePreselectedProgram = (): ?string => {
-    const currentSelectionsId =
-      useSelector(({ currentSelections }) => currentSelections.programId);
+const usePreselectedProgram = (currentSelectionsId): ?string => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
 
     return useMemo(() => {
@@ -69,6 +68,7 @@ const usePreselectedProgram = (): ?string => {
 
 export const SearchPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
+    const { programId, orgUnitId } = useLocationQuery();
 
     const dispatchShowInitialSearchPage = useCallback(
         () => { dispatch(showInitialViewOnSearchPage()); },
@@ -81,7 +81,7 @@ export const SearchPage: ComponentType<{||}> = () => {
         [dispatch]);
 
     const availableSearchOptions = useSearchOptions();
-    const preselectedProgramId = usePreselectedProgram();
+    const preselectedProgramId = usePreselectedProgram(programId);
 
     const searchStatus: string =
       useSelector(({ searchPage }) => searchPage.searchStatus);
@@ -89,8 +89,6 @@ export const SearchPage: ComponentType<{||}> = () => {
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
     const ready: boolean =
       useSelector(({ activePage }) => !activePage.isLoading);
-    const currentProgramId: string =
-      useSelector(({ currentSelections }) => currentSelections.programId);
 
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
@@ -98,12 +96,12 @@ export const SearchPage: ComponentType<{||}> = () => {
         useSelector(({ searchPage }) => searchPage.searchableFields);
 
     useEffect(() => {
-        if (currentProgramId && (currentProgramId !== preselectedProgramId)) {
+        if (programId && (programId !== preselectedProgramId)) {
             // There is no search for Event type of programs.
             // In this case we navigate the users back to the main page
             dispatchNavigateToMainPage();
         }
-    }, [currentProgramId, preselectedProgramId, dispatchNavigateToMainPage]);
+    }, [programId, preselectedProgramId, dispatchNavigateToMainPage]);
 
     return (
         <SearchPageComponent
@@ -118,5 +116,7 @@ export const SearchPage: ComponentType<{||}> = () => {
             searchableFieldsDisplayname={searchableFields?.map(field => field.formName)?.join(', ')}
             error={error}
             ready={ready}
+            orgUnitId={orgUnitId}
+            programId={programId}
         />);
 };

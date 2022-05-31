@@ -17,7 +17,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 import { useLocation } from 'react-router-dom';
 
-import { LockedSelector } from '../../LockedSelector';
+import { TopBar } from './TopBar.container';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
@@ -84,6 +84,8 @@ const Index = ({
     trackedEntityTypeId,
     searchableFieldsCount,
     searchableFieldsDisplayname,
+    programId,
+    orgUnitId,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
@@ -136,7 +138,8 @@ const Index = ({
     };
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-            <LockedSelector pageToPush="search" />
+
+            <TopBar programId={programId} orgUnitId={orgUnitId} />
             <div data-test="search-page-content" className={classes.container} >
                 <Button
                     dataTest="back-button"

@@ -2,7 +2,7 @@ import log from 'loglevel';
 import { getZScoreWFA, getZScoreWFH, getZScoreHFA } from './zScoreFunctions';
 import { extractDataMatrixValue } from './gs1DataMatrixFuntions';
 
-export const d2Functions = (dateUtils, variableService, variablesHash, selectedOrgUnit) => ({
+export const d2Functions = (dateUtils, variableService, variablesHash, selectedOrgUnit, selectedUserRoles) => ({
     'd2:ceil': {
         name: 'd2:ceil',
         parameters: 1,
@@ -239,6 +239,14 @@ export const d2Functions = (dateUtils, variableService, variablesHash, selectedO
             const group = params[0];
             const orgUnitGroups = (selectedOrgUnit && selectedOrgUnit.groups) || [];
             return orgUnitGroups.find(o => o.id === group || o.code === group) ? 'true' : 'false';
+        },
+    },
+    'd2:hasUserRole': {
+        name: 'd2:hasUserRole',
+        parameters: 1,
+        dhisFunction: (params) => {
+            const role = params[0];
+            return selectedUserRoles.includes(role);
         },
     },
     'd2:zScoreWFA': {
