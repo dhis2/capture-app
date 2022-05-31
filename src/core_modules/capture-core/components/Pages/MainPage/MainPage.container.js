@@ -9,7 +9,7 @@ import { useSearchOptions } from '../../../hooks';
 import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
-import { buildUrlQueryString, useLocationQuery, deriveURLParamsFromLocation } from '../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
@@ -30,7 +30,7 @@ const showMainPage = ({ programId, orgUnitId, trackedEntityTypeId, displayFrontP
 const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { all, programId, orgUnitId } = useLocationQuery();
+    const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
     const showAllAccessible = all !== undefined;
 
     const { categories, selectedCategories, searchStatus, error, ready } = useSelector(
@@ -43,13 +43,12 @@ const MainPageContainer = () => {
         }),
         shallowEqual,
     );
-    const { selectedTemplateId } = deriveURLParamsFromLocation();
     const selectedProgram = programCollection.get(programId);
     // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
-
     const availableSearchOptions = useSearchOptions();
+
     const dispatchShowInitialSearchPage = useCallback(() => {
         dispatch(showInitialViewOnSearchPage());
     }, [dispatch]);

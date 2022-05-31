@@ -21,8 +21,7 @@ export const useTEIFilters = (programId: string) => {
     );
 
     useEffect(() => {
-        data?.filters?.trackedEntityInstanceFilters &&
-            setTEIFilters(filters => [...filters, ...data.filters.trackedEntityInstanceFilters]);
+        data?.filters?.trackedEntityInstanceFilters && setTEIFilters(data.filters.trackedEntityInstanceFilters);
     }, [data]);
 
     useEffect(() => {
