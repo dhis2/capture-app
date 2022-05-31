@@ -94,8 +94,8 @@ export const SearchPage: ComponentType<{||}> = () => {
 
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
-    const minAttributesRequiredToSearchFallback =
-        useSelector(({ searchPage }) => searchPage.minAttributesRequiredToSearchFallback);
+    const searchableFields =
+        useSelector(({ searchPage }) => searchPage.searchableFields);
 
     useEffect(() => {
         if (currentProgramId && (currentProgramId !== preselectedProgramId)) {
@@ -114,7 +114,8 @@ export const SearchPage: ComponentType<{||}> = () => {
             preselectedProgramId={preselectedProgramId}
             trackedEntityTypeId={trackedEntityTypeId}
             searchStatus={searchStatus}
-            minAttributesRequiredToSearchFallback={minAttributesRequiredToSearchFallback}
+            searchableFieldsCount={searchableFields?.length}
+            searchableFieldsDisplayname={searchableFields?.map(field => field.formName)?.join(', ')}
             error={error}
             ready={ready}
         />);

@@ -82,7 +82,8 @@ const Index = ({
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
-    minAttributesRequiredToSearchFallback,
+    searchableFieldsCount,
+    searchableFieldsDisplayname,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
@@ -126,7 +127,6 @@ const Index = ({
 
     const searchGroupsForSelectedScope =
       (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : []);
-
 
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
@@ -237,12 +237,17 @@ const Index = ({
                         {
                             searchStatus === searchPageStatus.NOT_ENOUGH_ATTRIBUTES &&
                             <Modal position="middle">
-                                <ModalTitle>{i18n.t('Not enough attributes filled in to search')}</ModalTitle>
+                                <ModalTitle>{i18n.t('Cannot search in all programs')}</ModalTitle>
                                 <ModalContent>
-                                    {i18n.t(
-                                        'Fill in at least {{minAttributesRequiredToSearchFallback}}  attributes to search',
-                                        { minAttributesRequiredToSearchFallback },
-                                    )}
+                                    {i18n.t('Fill in at least {{count}} attribute to search: {{searchableAttributes}}', {
+                                        searchableAttributes: searchableFieldsDisplayname,
+                                        count: searchableFieldsCount,
+                                        defaultValue: 'Fill in at least {{count}} attribute to search: {{searchableAttributes}}',
+                                        defaultValue_plural: 'Fill in at least {{count}} attributes to search: {{searchableAttributes}}',
+                                        interpolation: {
+                                            escape: false,
+                                        },
+                                    })}
                                 </ModalContent>
                                 <ModalActions>
                                     <ButtonStrip end>

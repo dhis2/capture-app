@@ -55,7 +55,7 @@ export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.FALLBACK_NOT_ENOUGH_ATTRIBUTES]: (state, { payload }) => ({
         ...state,
         searchStatus: searchPageStatus.NOT_ENOUGH_ATTRIBUTES,
-        minAttributesRequiredToSearchFallback: payload.minAttributesRequiredToSearchFallback,
+        searchableFields: payload.searchableFields,
     }),
     [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
         ...state,
