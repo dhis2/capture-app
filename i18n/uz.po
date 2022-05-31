@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -1112,6 +1112,12 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Delete event"
+msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Ҳодиса/тадбир якунланди"
 
@@ -1245,9 +1251,6 @@ msgstr "Босқичлар ва Ҳодиса/тадбирлар"
 msgid "Working list could not be loaded"
 msgstr "Ишчи рўйхатни юклаб бўлмади"
 
-msgid "Delete event"
-msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
-
 msgid "Download as JSON"
 msgstr "JSON сифатида юклаш"
 
@@ -1372,6 +1375,9 @@ msgid "Error saving enrollment"
 msgstr "Қайдни сақлашда хатолик юзага келди"
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error deleting the enrollment event"
 msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"

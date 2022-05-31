@@ -164,6 +164,8 @@ export async function initializeAsync(
     setConfig(apiPath);
     const d2 = await initAsync({ schemas: ['organisationUnit'] });
     const userSettings = await getUserSettingsAsync();
+    const sym = Object.getOwnPropertySymbols(d2.currentUser).find(s => String(s) === 'Symbol(userRoles)');
+    d2.currentUser.userRoles = d2.currentUser[sym];
     setD2(d2);
     setHeaderBarStrings(d2);
     // initialize storage controllers

@@ -12,7 +12,7 @@ import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
 import type { Props } from './widgetProfile.types';
-import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues } from './hooks';
+import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues, useUserRoles } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, getTeiDisplayName } from './DataEntry';
 
 const styles = {
@@ -37,9 +37,14 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
         error: trackedEntityInstancesError,
         trackedEntityInstanceAttributes,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues);
+    const {
+        loading: userRolesLoading,
+        error: userRolesError,
+        userRoles,
+    } = useUserRoles();
 
-    const loading = programsLoading || trackedEntityInstancesLoading;
-    const error = programsError || trackedEntityInstancesError;
+    const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
+    const error = programsError || trackedEntityInstancesError || userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const teiDisplayName = getTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
 
@@ -54,7 +59,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                 value = convertClientToView(clientValue, valueType);
             }
             return {
-                attribute, key, value,
+                attribute, key, value, reactKey: attribute,
             };
         }), [clientAttributesWithSubvalues]);
 
@@ -111,6 +116,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                     programAPI={program}
                     orgUnitId={orgUnitId}
                     clientAttributesWithSubvalues={clientAttributesWithSubvalues}
+                    userRoles={userRoles}
                     trackedEntityInstanceId={teiId}
                     onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
                     onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}

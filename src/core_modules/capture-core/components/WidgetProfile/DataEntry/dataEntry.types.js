@@ -27,4 +27,5 @@ export type Props = {|
     onSaveErrorActionType?: string,
     modalState: string,
     onSaveExternal?: (eventServerValues: any, uid: string) => void,
+    userRoles: Array<string>,
 |};
