@@ -42,13 +42,12 @@ export const EnrollmentEditEventPage = () => {
     const { programId, stageId, teiId, enrollmentId } = context;
 
     useEffect(() => {
-        event && setContext(prevContext => ({
-            ...prevContext,
+        event && setContext({
             programId: event.program,
             stageId: event.programStage,
             teiId: event.trackedEntity,
             enrollmentId: event.enrollment,
-        }));
+        });
     }, [event]);
 
     return eventId && programId && stageId && enrollmentId && teiId ? (

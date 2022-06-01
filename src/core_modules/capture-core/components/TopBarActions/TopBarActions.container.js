@@ -46,7 +46,7 @@ export const TopBarActions = ({
         if (isUserInteractionInProgress) {
             setOpenStartAgainWarning(true);
         } else {
-            dispatch(openNewRegistrationPageFromScopeSelector());
+            dispatch(openNewRegistrationPageFromScopeSelector(selectedProgramId));
         }
     };
 
@@ -64,7 +64,7 @@ export const TopBarActions = ({
         if (isUserInteractionInProgress) {
             setOpenStartAgainWarning(true);
         } else {
-            dispatch(openSearchPageFromScopeSelector());
+            dispatch(openSearchPageFromScopeSelector(selectedProgramId));
         }
     };
 

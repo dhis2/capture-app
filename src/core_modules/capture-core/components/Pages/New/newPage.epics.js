@@ -9,8 +9,8 @@ import { resetLocationChange } from '../../LockedSelector/QuickSelector/actions/
 export const openNewRegistrationPageFromLockedSelectorEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN, topBarActionsActionTypes.NEW_REGISTRATION_PAGE_OPEN),
-        switchMap(() => {
-            const { orgUnitId, programId } = deriveURLParamsFromLocation();
+        switchMap((action) => {
+            const { orgUnitId, programId = action.payload.programId } = deriveURLParamsFromLocation();
             history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
