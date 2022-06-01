@@ -1,3 +1,10 @@
+## [100.5.4](https://github.com/dhis2/capture-app/compare/v100.5.3...v100.5.4) (2022-06-01)
+
+
+### Bug Fixes
+
+* hidden sections must be marked as initialised ([#2819](https://github.com/dhis2/capture-app/issues/2819)) ([c11d0df](https://github.com/dhis2/capture-app/commit/c11d0df693e1fd1ddeded1b66be62755266a888e))
+
 ## [100.5.3](https://github.com/dhis2/capture-app/compare/v100.5.2...v100.5.3) (2022-05-31)
 
 
