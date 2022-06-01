@@ -16,13 +16,13 @@ export const useResetProgramId = () => {
     const resetProgramIdAndEnrollmentContext = (pageToPush: string = pathname, pageContext: PageContext) => {
         const {
             programId,
-            enrollmentId = 'AUTO',
+            enrollmentId,
             stageId,
             eventId,
             teiId = pageContext?.teiId,
             ...restOfQueries
         } = getUrlQueries();
-        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, teiId, enrollmentId })}`);
+        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, teiId, enrollmentId: 'AUTO' })}`);
     };
 
     const resetProgramIdAndTeiId = (pageToPush: string = pathname) => {
