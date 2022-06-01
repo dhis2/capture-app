@@ -26,13 +26,12 @@ const getEventDate = (event) => {
 };
 
 const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, event }) => {
-    let pageStatus = pageStatuses.MISSING_DATA;
     if (orgUnitId) {
-        enrollmentSite && teiDisplayName && trackedEntityName && programStage && event
-            ? (pageStatus = pageStatuses.DEFAULT)
-            : (pageStatus = pageStatuses.MISSING_DATA);
-    } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
-    return pageStatus;
+        return enrollmentSite && teiDisplayName && trackedEntityName && programStage && event
+            ? pageStatuses.DEFAULT
+            : pageStatuses.MISSING_DATA;
+    }
+    return pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
 };
 
 export const EnrollmentEditEventPage = () => {
