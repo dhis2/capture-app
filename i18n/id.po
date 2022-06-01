@@ -7,13 +7,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2022
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2022
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022
+# Raja Fathurrahim, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T14:43:54.028Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022\n"
+"Last-Translator: Raja Fathurrahim, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,10 +60,10 @@ msgid "Last updated"
 msgstr "Terakhir diperbarui"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "Terdaftar"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "Pendaftaran sebelumnya"
 
 msgid "This value is validating"
 msgstr ""
@@ -80,13 +81,13 @@ msgid "Please provide a valid integer"
 msgstr ""
 
 msgid "Please provide a positive integer"
-msgstr "Harap berikan bilangan bulat positif"
+msgstr "Harap berikan sebuah bilangan bulat positif"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Harap berikan nol atau sebuah bilangan bulat positif"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Harap berikan sebuah bilangan bulat negatif"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -170,7 +171,7 @@ msgid "Status"
 msgstr "Status"
 
 msgid "Comments"
-msgstr ""
+msgstr "Komentar"
 
 msgid "Relationships"
 msgstr "Hubungan"
@@ -179,10 +180,10 @@ msgid "Assignee"
 msgstr "Penerima "
 
 msgid "Saving to"
-msgstr ""
+msgstr "Menyimpan ke"
 
 msgid "for"
-msgstr ""
+msgstr "Untuk"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -210,13 +211,13 @@ msgid "Please add or cancel comment before saving the event"
 msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan even"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Simpan dan tambahkan yang lain"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Simpan dan keluar"
 
 msgid "Finish"
-msgstr ""
+msgstr "Selesai"
 
 msgid "Save without completing"
 msgstr ""
@@ -278,10 +279,10 @@ msgid "Saving a {{trackedEntityName}}"
 msgstr ""
 
 msgid "without"
-msgstr ""
+msgstr "Tanpa"
 
 msgid "enrollment"
-msgstr ""
+msgstr "pendaftaran"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Mendaftar dalam program dengan memilih program dari bar atas."
@@ -309,7 +310,7 @@ msgid "Show registered {{trackedEntityTypeName}}"
 msgstr "Tampilkan {{trackedEntityTypeName}} yang telah terdaftar"
 
 msgid "Registered person"
-msgstr ""
+msgstr "Orang yang terdaftar"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -329,10 +330,10 @@ msgid "Indicators"
 msgstr "Indikator"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Peringatan"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Peringatan ditemukan"
 
 msgid "Abort"
 msgstr "Batalkan"
@@ -341,7 +342,7 @@ msgid "Back to form"
 msgstr "Kembali ke borang"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "Simpan bagaimanapun"
 
 msgid "Validation errors and warnings"
 msgstr ""
@@ -371,19 +372,19 @@ msgid "Close"
 msgstr "Tutup"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "Harap memilih pengguna"
 
 msgid "Me"
-msgstr ""
+msgstr "Saya"
 
 msgid "Anyone"
-msgstr ""
+msgstr "Siapa saja"
 
 msgid "None"
 msgstr "Tidak ada"
 
 msgid "Select user"
-msgstr ""
+msgstr "Pilih pengguna"
 
 msgid "to"
 msgstr "ke"
@@ -401,7 +402,7 @@ msgid "This month"
 msgstr "Bulan ini"
 
 msgid "This Year"
-msgstr ""
+msgstr "Tahun ini"
 
 msgid "Last week"
 msgstr "Minggu lalu"
@@ -422,7 +423,7 @@ msgid "Min"
 msgstr "Minimal"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Mengandung teks"
 
 msgid "Yes"
 msgstr "Iya"
@@ -440,7 +441,7 @@ msgid "Days"
 msgstr "Hari"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Mengunggah file"
 
 msgid "selected"
 msgstr "Terpilih"
@@ -449,16 +450,16 @@ msgid "Delete"
 msgstr "Hapus"
 
 msgid "Select file"
-msgstr ""
+msgstr "Pilih file"
 
 msgid "No"
 msgstr "Tidak"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Mengunggah gambar"
 
 msgid "Select image"
-msgstr ""
+msgstr "Pilih gambar"
 
 msgid "Search"
 msgstr "Pencarian"
@@ -488,7 +489,7 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Select columns"
-msgstr ""
+msgstr "Pilih kolom"
 
 msgid "Columns to show in table"
 msgstr ""
@@ -542,13 +543,13 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
 msgid "Clear selections"
-msgstr ""
+msgstr "Hapus semua pilihan"
 
 msgid "Selected registering unit"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "Mulai lagi"
 
 msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
@@ -872,7 +873,7 @@ msgid "Event assigned to {{name}}"
 msgstr "Even ditugaskan ke {{name}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "Umpan balik"
 
 msgid "Show all events"
 msgstr "Tampilkan semua even"
@@ -902,7 +903,7 @@ msgid "Add relationship"
 msgstr "Tambahkan hubungan"
 
 msgid "Results found"
-msgstr ""
+msgstr "Hasil ditemukan"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -1132,7 +1133,7 @@ msgid "Show Less"
 msgstr ""
 
 msgid "Show All"
-msgstr ""
+msgstr "Tampilkan semua"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -1156,7 +1157,7 @@ msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"
-msgstr ""
+msgstr "Program tidak ditemukan"
 
 msgid "Program is not a tracker program"
 msgstr "Program bukanlah program pelacak"
@@ -1207,7 +1208,7 @@ msgid "Date"
 msgstr "Tanggal"
 
 msgid "Time"
-msgstr ""
+msgstr "Waktu"
 
 msgid "From date"
 msgstr "Dari tanggal"
