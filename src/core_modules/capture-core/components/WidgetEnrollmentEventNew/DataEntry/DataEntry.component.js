@@ -8,7 +8,7 @@ import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.conta
 import { withDataEntryField } from '../../DataEntry/dataEntryField/withDataEntryField';
 import { withDataEntryNotesHandler } from '../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
 import { Notes } from '../../Notes/Notes.component';
-import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import { getNoFutureEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
 import { type RenderFoundation, type ProgramStage } from '../../../metaData';
 import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
 import {
@@ -145,7 +145,7 @@ const buildReportDateSettingsFn = () => {
             calendarMaxMoment: moment(),
         }),
         getPropName: () => 'occurredAt',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
