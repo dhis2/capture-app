@@ -954,10 +954,10 @@ msgid "Set coordinate"
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "ଅକ୍ଷାଂଶ"
 
 msgid "Longitude"
-msgstr ""
+msgstr "ଦ୍ରାଘିମା"
 
 msgid "Page {{currentPage}}"
 msgstr ""
