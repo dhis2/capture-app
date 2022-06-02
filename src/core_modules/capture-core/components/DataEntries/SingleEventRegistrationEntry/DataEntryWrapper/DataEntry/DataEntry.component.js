@@ -10,7 +10,7 @@ import withDataEntryNotesHandler from '../../../../DataEntry/dataEntryNotes/with
 import Notes from '../../../../Notes/Notes.component';
 import withDataEntryRelationshipsHandler from '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
 import Relationships from '../../../../Relationships/Relationships.component';
-import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
+import getNoFutureEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import { type RenderFoundation } from '../../../../../metaData';
 import withMainButton from './withMainButton';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
@@ -161,7 +161,7 @@ const buildReportDateSettingsFn = () => {
             calendarMaxMoment: moment(),
         }),
         getPropName: () => 'eventDate',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
