@@ -780,10 +780,10 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "ଅକ୍ଷାଂଶ"
 
 msgid "Longitude"
-msgstr ""
+msgstr "ଦ୍ରାଘିମା"
 
 msgid "Set coordinate"
 msgstr ""
