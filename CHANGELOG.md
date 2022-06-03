@@ -1,3 +1,10 @@
+## [100.5.5](https://github.com/dhis2/capture-app/compare/v100.5.4...v100.5.5) (2022-06-03)
+
+
+### Bug Fixes
+
+* [DHIS2-13062] Fix profile tet name ([#2811](https://github.com/dhis2/capture-app/issues/2811)) ([42163e9](https://github.com/dhis2/capture-app/commit/42163e9bcad5269cf3f169dd04e3f28697272b2a))
+
 ## [100.5.4](https://github.com/dhis2/capture-app/compare/v100.5.3...v100.5.4) (2022-06-01)
 
 
