@@ -1203,8 +1203,8 @@ msgstr "Rett opp feil i skjemaet for å fortsette."
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profil -widgeten kunne ikke lastes inn. Prøv igjen senere"
 
-msgid "Person Profile"
-msgstr "Personprofil"
+msgid "{{TETName}} profile"
+msgstr ""
 
 msgid "Edit"
 msgstr "Rediger"

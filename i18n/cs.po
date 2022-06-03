@@ -1203,8 +1203,8 @@ msgstr "Chcete-li pokračovat, opravte chyby ve formuláři."
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
 
-msgid "Person Profile"
-msgstr "Osobní profil"
+msgid "{{TETName}} profile"
+msgstr ""
 
 msgid "Edit"
 msgstr "Upravit"
