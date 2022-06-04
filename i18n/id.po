@@ -1202,8 +1202,8 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profil tidak dapat dimuat. Silakan coba lagi nanti"
 
-msgid "Person Profile"
-msgstr "Profil Orang"
+msgid "{{TETName}} profile"
+msgstr ""
 
 msgid "Edit"
 msgstr "Sunting"
