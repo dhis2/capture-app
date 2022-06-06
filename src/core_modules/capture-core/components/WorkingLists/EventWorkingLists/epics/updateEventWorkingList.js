@@ -7,7 +7,7 @@ import {
     updateListError,
     buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
-import type { ColumnsMetaForDataFetching } from '../types';
+import type { ColumnsMetaForDataFetching, CommonQueryData } from '../types';
 
 
 const errorMessages = {
@@ -19,18 +19,21 @@ export const updateEventWorkingListAsync = (
         columnsMetaForDataFetching,
         categoryCombinationId,
         storeId,
+        commonQueryData,
     }: {
+    commonQueryData: CommonQueryData,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     categoryCombinationId?: ?string,
     storeId: string,
 }): Promise<ReduxAction<any, any>> => {
     const rawQueryArgs = {
         ...queryArgsSource,
-        fields: 'dataValues,occurredAt,event,status,orgUnit,program,programType,updatedAt,createdAt,assignedUser',
+        fields: 'dataValues,occurredAt,event,status,orgUnit,program,programStage,updatedAt,createdAt,assignedUser',
         filters: buildFilterQueryArgs(queryArgsSource.filters, {
             columns: columnsMetaForDataFetching,
             storeId,
         }),
+        ...commonQueryData,
     };
 
     return getEventListData(rawQueryArgs, columnsMetaForDataFetching, categoryCombinationId)

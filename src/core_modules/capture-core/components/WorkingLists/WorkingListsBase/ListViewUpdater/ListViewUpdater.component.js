@@ -42,6 +42,7 @@ export const ListViewUpdater = (props: Props) => {
         sortByDirection,
         onUpdateList,
         programId,
+        programStageId,
         orgUnitId,
         categories,
         viewLoadedOnFirstRun,
@@ -79,6 +80,7 @@ export const ListViewUpdater = (props: Props) => {
             currentPage,
             rowsPerPage,
             programId,
+            programStageId,
             orgUnitId,
             categories,
         });
@@ -92,6 +94,7 @@ export const ListViewUpdater = (props: Props) => {
             currentPage,
             rowsPerPage,
             programId,
+            programStageId,
             orgUnitId,
             categories,
             customUpdateTrigger,

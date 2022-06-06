@@ -307,10 +307,10 @@ export const workingListsTemplatesDesc = createReducerDescription({
 
 export const workingListsDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
-        const { storeId } = action.payload;
+        const { storeId, context: { currentRequest } } = action.payload;
         return {
             ...state,
-            [storeId]: undefined,
+            [storeId]: { currentRequest },
         };
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
@@ -320,6 +320,15 @@ export const workingListsDesc = createReducerDescription({
             order: recordContainers
                 .map(({ id }) => id),
             currentRequest: request,
+        };
+        return newState;
+    },
+    [workingListsCommonActionTypes.LIST_UPDATE]: (state, action) => {
+        const newState = { ...state };
+        const { storeId, currentRequest } = action.payload;
+        newState[storeId] = {
+            ...newState[storeId],
+            currentRequest,
         };
         return newState;
     },
