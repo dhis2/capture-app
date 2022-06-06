@@ -28,7 +28,7 @@ export const updateEventWorkingListAsync = (
 }): Promise<ReduxAction<any, any>> => {
     const rawQueryArgs = {
         ...queryArgsSource,
-        fields: 'dataValues,occurredAt,event,status,orgUnit,program,programStage,updatedAt,createdAt,assignedUser',
+        fields: 'dataValues,occurredAt,event,status,orgUnit,program,programType,updatedAt,createdAt,assignedUser',
         filters: buildFilterQueryArgs(queryArgsSource.filters, {
             columns: columnsMetaForDataFetching,
             storeId,
