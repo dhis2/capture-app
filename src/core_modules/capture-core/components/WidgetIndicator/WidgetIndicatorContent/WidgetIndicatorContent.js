@@ -86,7 +86,7 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Con
             className={cx(classes.indicatorRow, { isLastItem })}
         >
             <div>{indicator.key}</div>
-            {(String(indicator.value) || indicator.color) && ( // convert to string to make sure 0 gets displayed
+            {(indicator.value || indicator.color) && (
                 <div className={classes.indicatorValue}>
                     {indicator.color ? renderLegend(indicator.color) : null}
                     {indicator.value}

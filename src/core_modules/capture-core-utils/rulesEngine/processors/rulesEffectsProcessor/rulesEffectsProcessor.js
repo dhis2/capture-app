@@ -211,7 +211,7 @@ export function getRulesEffectsProcessor(
             displayKeyValuePair: {
                 id: effect.id,
                 key: effect.content,
-                value: effect.data,
+                value: String(effect.data),
                 ...effect.style,
             },
         };
