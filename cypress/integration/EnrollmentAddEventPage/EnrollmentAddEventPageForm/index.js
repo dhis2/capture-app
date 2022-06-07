@@ -32,7 +32,7 @@ When(/^you type (.*) in the input number (.*)$/, (value, eq) => {
 });
 
 When(/^you click the checkbox number (.*)$/, (eq) => {
-    cy.get('input[type="radio"]')
+    cy.get('input[type="checkbox"]')
         .eq(eq)
         .click();
 });
