@@ -153,4 +153,8 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         page: 'search',
         locationSwitchInProgress: true,
     }),
-}, 'app');
+    EnforceNewPage: state => ({ ...state, newPageEnforced: true }),
+    EnableMainPage: state => ({ ...state, newPageEnforced: false }),
+    StartCancelSaveReturnToMainPageForNewSingleEvent: state => ({ ...state, newPageEnforced: false }),
+    RequestSaveReturnToMainPageForNewSingleEvent: state => ({ ...state, newPageEnforced: false }),
+}, 'app', { newPageEnforced: true });

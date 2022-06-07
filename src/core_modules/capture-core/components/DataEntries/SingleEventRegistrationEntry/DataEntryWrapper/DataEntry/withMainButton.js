@@ -63,9 +63,10 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 // $FlowFixMe[missing-annot] automated comment
                 saveTypes.map(saveType => this.getButtonDefinition(saveType)) :
                 [
-                    this.getButtonDefinition(buttonTypes.SAVEANDEXIT),
                     this.getButtonDefinition(buttonTypes.SAVEANDADDANOTHER),
+                    this.getButtonDefinition(buttonTypes.SAVEANDEXIT),
                 ];
+
             return dataEntryHasChanges || !hasRecentlyAddedEvents ?
                 buttons :
                 [this.getButtonDefinition(buttonTypes.FINISH), ...buttons];
@@ -93,6 +94,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         render() {
             const { saveTypes, dataEntryHasChanges, hasRecentlyAddedEvents, onSave, finalInProgress, ...passOnProps } = this.props;
             const hasWriteAccess = this.props.formFoundation.access.data.write;
+
             const buttons = this.props.formHorizontal ?
                 this.getFormHorizontalButtons(dataEntryHasChanges, hasRecentlyAddedEvents) :
                 this.getFormVerticalButtons(dataEntryHasChanges, hasRecentlyAddedEvents, saveTypes);

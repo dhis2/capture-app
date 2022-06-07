@@ -1,1 +1,1 @@
-export { MainPage } from './MainPage.container';
+export { MainPage } from './MainPage';

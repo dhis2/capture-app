@@ -1,6 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import { compose } from 'redux';
+import { useDispatch } from 'react-redux';
 import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
@@ -47,6 +48,7 @@ const TeiRegistrationEntryPlain =
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
+      const dispatch = useDispatch();
 
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
@@ -59,6 +61,7 @@ const TeiRegistrationEntryPlain =
                 urlArguments({ programId: selectedScopeId, orgUnitId: orgUnit.id })
                 :
                 urlArguments({ orgUnitId: orgUnit.id });
+          dispatch({ type: 'EnableMainPage' });
           return push(`/?${url}`);
       };
 

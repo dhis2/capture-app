@@ -338,7 +338,7 @@ export const workingListsDesc = createReducerDescription({
         const newState = { ...state };
         const { listId, itemId } = action.payload;
         newState[listId] = {
-            order: [itemId, ...(state[listId] ? state[listId].order : [])],
+            order: [itemId, ...(state[listId] ? state[listId].order.slice(0, 19) : [])],
         };
         return newState;
     },

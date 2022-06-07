@@ -5,6 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
@@ -46,6 +47,7 @@ const EnrollmentRegistrationEntryPlain =
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
+      const dispatch = useDispatch();
 
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
@@ -58,6 +60,7 @@ const EnrollmentRegistrationEntryPlain =
                 urlArguments({ programId: selectedScopeId, orgUnitId: orgUnit.id })
                 :
                 urlArguments({ orgUnitId: orgUnit.id });
+          dispatch({ type: 'EnableMainPage' });
           return push(`/?${url}`);
       };
 

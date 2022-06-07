@@ -1,8 +1,7 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import React, { useCallback } from 'react';
-import type { ComponentType } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { NewPageComponent } from './NewPage.component';
 import {
     showMessageToSelectOrgUnitOnNewPage,
@@ -39,7 +38,12 @@ const useUserWriteAccess = (scopeId) => {
         return false;
     }
 };
-export const NewPage: ComponentType<{||}> = () => {
+
+type Props = {|
+    enforceNewPage: () => void,
+    enableMainPage: () => void,
+|};
+export const NewPage = ({ enforceNewPage, enableMainPage }: Props) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -77,6 +81,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const { id: orgUnitId } = useCurrentOrgUnitInfo();
     const { id: programId } = useCurrentProgramInfo();
     const handleMainPageNavigation = () => {
+        enableMainPage();
         history.push(`/?${urlArguments({ orgUnitId, programId })}`);
     };
 
@@ -90,6 +95,10 @@ export const NewPage: ComponentType<{||}> = () => {
           || dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
           || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
     );
+
+    useEffect(() => {
+        enforceNewPage();
+    }, [enforceNewPage]);
 
     return (
         <NewPageComponent
