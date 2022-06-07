@@ -1,6 +1,6 @@
 const config = {
     type: 'app',
-    coreApp: true,
+    coreApp: false,
     entryPoints: {
         app: './src/index',
     },

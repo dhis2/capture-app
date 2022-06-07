@@ -1,7 +1,7 @@
 {
-  "name": "capture-app",
+  "name": "Capture Bangladesh",
   "homepage": ".",
-  "version": "36.0.0",
+  "version": "36.1.0",
   "cacheVersion": "2",
   "private": false,
   "dependencies": {
