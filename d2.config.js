@@ -1,4 +1,5 @@
 const config = {
+    name: 'Capture Bangladesh',
     type: 'app',
     coreApp: false,
     entryPoints: {
