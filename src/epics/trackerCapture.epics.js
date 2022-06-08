@@ -154,8 +154,6 @@ import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightC
 
 import { loadCoreEpic } from 'capture-core/init';
 
-import { checkForDuplicateEpic } from 'capture-core/components/DataEntryUtils';
-
 import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../components/AppStart';
 
 import {
@@ -342,7 +340,6 @@ export const epics = combineEpics(
     setEnrollmentSelectionEpic,
     resetEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
-    checkForDuplicateEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
     saveNewEventInStageLocationChangeEpic,

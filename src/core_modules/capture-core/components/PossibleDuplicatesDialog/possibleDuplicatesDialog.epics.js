@@ -1,7 +1,7 @@
 // @flow
 import { pipe as pipeD2 } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import {
     actionTypes,
@@ -15,6 +15,7 @@ import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
 import { getAttributesFromScopeId } from '../../metaData/helpers';
+import { searchGroupDuplicateActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 
 function getGroupElementsFromScopeId(scopeId: ?string) {
     if (!scopeId) {
@@ -80,6 +81,7 @@ export const loadSearchGroupDuplicatesForReviewEpic: Epic = (action$, store) =>
                 return stream$.pipe(
                     map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>
                         duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage)),
+                    takeUntil(action$.pipe(ofType(searchGroupDuplicateActionTypes.DUPLICATES_RESET))),
                     catchError(() => of(duplicatesForReviewRetrievalFailed())),
 
                 );
