@@ -18,7 +18,7 @@ import type {
     CompulsoryEffect,
     OutputEffects,
 } from '../../rulesEngine.types';
-import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable';
+import { normalizeRuleVariable, numberToString } from '../../commonUtils';
 
 const sanitiseFalsy = (value) => {
     if (value) {
@@ -211,7 +211,7 @@ export function getRulesEffectsProcessor(
             displayKeyValuePair: {
                 id: effect.id,
                 key: effect.content,
-                value: String(effect.data),
+                value: typeof effect.data == 'number' ? numberToString(effect.data) : String(effect.data),
                 ...effect.style,
             },
         };
