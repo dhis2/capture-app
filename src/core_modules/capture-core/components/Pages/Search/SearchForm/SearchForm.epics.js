@@ -222,7 +222,8 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
                     }
                     return of(showFallbackNotEnoughAttributesOnSearchPage({ searchableFields }));
                 }
-                return of(showErrorViewOnSearchPage());
+
+                return of(showEmptyResultsViewOnSearchPage());
             }
 
             return empty();
