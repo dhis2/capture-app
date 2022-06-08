@@ -1,7 +1,6 @@
 // @flow
 import React, { useContext, useCallback, type ComponentType } from 'react';
 import log from 'loglevel';
-import { useHistory } from 'react-router-dom';
 import { errorCreator } from 'capture-core-utils';
 import { ListViewConfig } from '../ListViewConfig';
 import { TemplateSelector } from '../TemplateSelector.component';
@@ -11,23 +10,9 @@ import type {
     WorkingListTemplate,
 } from '../workingListsBase.types';
 import type { Props } from './templatesManager.types';
-import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 
 const TemplatesManagerPlain = (props: Props) => {
-    const { templates, ...passOnProps } = props;
-    const history = useHistory();
-    const { orgUnitId, programId, selectedTemplateId, all } = useLocationQuery();
-    const onChangeUrl = useCallback(
-        id =>
-            selectedTemplateId &&
-            history.push(
-                `/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: id })}${
-                    all !== undefined ? '&all' : ''
-                }`,
-            ),
-        [history, orgUnitId, programId, selectedTemplateId, all],
-    );
-
+    const { templates, onChangeTemplate, ...passOnProps } = props;
     const {
         currentTemplate,
         onSelectTemplate,
@@ -45,16 +30,16 @@ const TemplatesManagerPlain = (props: Props) => {
             const defaultTemplate = templates.find(t => t.isDefault);
             // $FlowFixMe
             onSelectTemplate(defaultTemplate.id);
-            onChangeUrl(defaultTemplate?.id);
+            defaultTemplate && onChangeTemplate && onChangeTemplate(defaultTemplate.id);
             return;
         }
         onSelectTemplate(template.id);
-        onChangeUrl(template.id);
+        onChangeTemplate && onChangeTemplate(template.id);
     }, [
         onSelectTemplate,
         currentTemplate.id,
         templates,
-        onChangeUrl,
+        onChangeTemplate,
     ]);
 
     return (
