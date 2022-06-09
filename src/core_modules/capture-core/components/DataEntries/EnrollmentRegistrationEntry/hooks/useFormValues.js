@@ -101,21 +101,19 @@ const buildFormValues = async (
     setFormValues: (values: any) => void,
     setClientValues: (values: any) => void,
     formValuesReadyRef: { current: boolean },
-    searchTerms?: ?Array<{[key: string]: string}>,
+    searchTerms?: ?Array<{[key: string]: any}>,
 ) => {
     const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
     const formValues = clientAttributesWithSubvalues?.reduce(
         (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
         {},
     );
-    const searchValues = searchTerms?.reduce((acc, item) => {
-        acc[item.id] = item.value;
-        return acc;
-    }, {});
+    const searchClientValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: item.value }), {});
+    const searchFormValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }), {});
 
     const uniqueValues = await getUniqueValuesForAttributesWithoutValue(foundation, clientAttributesWithSubvalues, staticPatternValues);
-    setFormValues && setFormValues({ ...formValues, ...uniqueValues, ...searchValues });
-    setClientValues && setClientValues({ ...clientValues, ...uniqueValues, ...searchValues });
+    setFormValues && setFormValues({ ...formValues, ...uniqueValues, ...searchFormValues });
+    setClientValues && setClientValues({ ...clientValues, ...uniqueValues, ...searchClientValues });
     formValuesReadyRef.current = true;
 };
 
