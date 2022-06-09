@@ -1,26 +1,25 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { checkForDuplicate, resetCheckForDuplicate } from '../../../../DataEntryUtils';
-import { useDuplicates } from '../../../../PossibleDuplicatesDialog/useDuplicates';
-import type { InputSearchGroup } from '../../../../../metaData';
+import { useDuplicates, duplicatesReset } from '../../../../PossibleDuplicatesDialog';
 
 export const useDuplicateCheckerOnSaveReduxProvider = (dataEntryId: string, selectedScopeId: string) => {
     const dispatch = useDispatch();
-    const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
+    const dispatchDuplicatesReset = useCallback(() => dispatch(duplicatesReset()), [dispatch]);
 
-    const dispatchCheckForDuplicate = useCallback((searchGroup: InputSearchGroup, scopeContext: Object) =>
-        dispatch(checkForDuplicate(dataEntryId, searchGroup, { orgUnitId, ...scopeContext })),
-    [dispatch, dataEntryId, orgUnitId]);
-    const dispatchResetCheckForDuplicate = useCallback(() => dispatch(resetCheckForDuplicate(dataEntryId)), [dispatch, dataEntryId]);
-    const duplicateInfo = useSelector(({ dataEntriesSearchGroupResults }) => dataEntriesSearchGroupResults[dataEntryId]);
+    const hasDuplicate = useSelector(({ possibleDuplicates: { isLoading, isUpdating, teis, currentPage } }) => {
+        if (isLoading || isUpdating) return null;
 
+        const hasDuplicatesTeis = teis?.length > 0;
+        const hasNextPage = currentPage > 1;
+
+        return hasDuplicatesTeis || hasNextPage;
+    });
     const { onReviewDuplicates } = useDuplicates(dataEntryId, selectedScopeId);
 
     return {
-        onCheckForDuplicate: dispatchCheckForDuplicate,
-        onResetCheckForDuplicate: dispatchResetCheckForDuplicate,
-        duplicateInfo,
+        onResetPossibleDuplicates: dispatchDuplicatesReset,
+        hasDuplicate,
         onReviewDuplicates,
     };
 };

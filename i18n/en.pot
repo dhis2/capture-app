@@ -1178,8 +1178,8 @@ msgstr "Fix errors in the form to continue."
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
-msgid "Person Profile"
-msgstr "Person Profile"
+msgid "{{TETName}} profile"
+msgstr "{{TETName}} profile"
 
 msgid "Edit"
 msgstr "Edit"

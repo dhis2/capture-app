@@ -1161,8 +1161,8 @@ msgstr "修正表单中的错误以继续。"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
-msgid "Person Profile"
-msgstr "人物简介"
+msgid "{{TETName}} profile"
+msgstr ""
 
 msgid "Edit"
 msgstr "编辑"

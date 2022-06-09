@@ -1200,8 +1200,8 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 "Профила виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
 
-msgid "Person Profile"
-msgstr "Шахс профили"
+msgid "{{TETName}} profile"
+msgstr ""
 
 msgid "Edit"
 msgstr "Таҳрирлаш"

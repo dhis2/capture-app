@@ -1,3 +1,32 @@
+## [100.5.7](https://github.com/dhis2/capture-app/compare/v100.5.6...v100.5.7) (2022-06-09)
+
+
+### Bug Fixes
+
+* [DHIS2-12138] remove duplicate count call ([#2783](https://github.com/dhis2/capture-app/issues/2783)) ([6300c9b](https://github.com/dhis2/capture-app/commit/6300c9b256138a4f9b7ab0f367ba0417c007240a))
+* **translations:** sync translations from transifex (master) ([741b33d](https://github.com/dhis2/capture-app/commit/741b33d5210d0682345a8f25453e4e6bee09aac5))
+
+## [100.5.6](https://github.com/dhis2/capture-app/compare/v100.5.5...v100.5.6) (2022-06-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4aef2d8](https://github.com/dhis2/capture-app/commit/4aef2d83cb23a78478f9ac8ad0e73a95936b6bcb))
+
+## [100.5.5](https://github.com/dhis2/capture-app/compare/v100.5.4...v100.5.5) (2022-06-03)
+
+
+### Bug Fixes
+
+* [DHIS2-13062] Fix profile tet name ([#2811](https://github.com/dhis2/capture-app/issues/2811)) ([42163e9](https://github.com/dhis2/capture-app/commit/42163e9bcad5269cf3f169dd04e3f28697272b2a))
+
+## [100.5.4](https://github.com/dhis2/capture-app/compare/v100.5.3...v100.5.4) (2022-06-01)
+
+
+### Bug Fixes
+
+* hidden sections must be marked as initialised ([#2819](https://github.com/dhis2/capture-app/issues/2819)) ([c11d0df](https://github.com/dhis2/capture-app/commit/c11d0df693e1fd1ddeded1b66be62755266a888e))
+
 ## [100.5.3](https://github.com/dhis2/capture-app/compare/v100.5.2...v100.5.3) (2022-05-31)
 
 
