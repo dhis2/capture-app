@@ -131,7 +131,7 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "Anulare"
 
 msgid "Unsaved changes"
 msgstr "Modificări nesalvate"
@@ -175,7 +175,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Back to form"
-msgstr ""
+msgstr "Înapoi la formă"
 
 msgid "Save anyway"
 msgstr "Salvare oricum"
@@ -229,10 +229,10 @@ msgid "to"
 msgstr ""
 
 msgid "From"
-msgstr ""
+msgstr "Din"
 
 msgid "To"
-msgstr ""
+msgstr "Pînă la"
 
 msgid "This week"
 msgstr "Săptămâna aceasta"
@@ -268,7 +268,7 @@ msgid "Yes"
 msgstr "Da"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
 msgstr "Ani"
@@ -289,13 +289,13 @@ msgid "Delete"
 msgstr "Lichidare"
 
 msgid "Select file"
-msgstr ""
+msgstr "Selectare fișier"
 
 msgid "No"
 msgstr "Nu"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Încărcare imagine"
 
 msgid "Select image"
 msgstr "Selectați imaginea"
@@ -319,7 +319,7 @@ msgid "No items to display"
 msgstr "Nu există elemente pentru afișare"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Nu s-a putut obține unitatea organizațională"
 
 msgid "Program doesn't exist"
 msgstr "Programul nu există"
@@ -352,28 +352,28 @@ msgid "Accept"
 msgstr "Accept"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Unitatea organizațională de înregistrare"
 
 msgid "Select"
-msgstr ""
+msgstr "Selectare"
 
 msgid "Selected Program"
 msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Unele programe sunt filtrate."
 
 msgid "Show all"
 msgstr ""
 
 msgid "Program"
-msgstr ""
+msgstr "Program"
 
 msgid "Select program"
-msgstr ""
+msgstr "Selectare program"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Nu există programe disponibile."
 
 msgid "Online"
 msgstr "Online"
@@ -382,7 +382,7 @@ msgid "Offline"
 msgstr "Offline"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Sincronizare"
 
 msgid "Add comment"
 msgstr "Adăugare comentariu"
@@ -411,7 +411,7 @@ msgstr ""
 "evenimentul"
 
 msgid "No write access"
-msgstr ""
+msgstr "Fără acces la scriere"
 
 msgid "Save"
 msgstr "salva"
@@ -423,13 +423,13 @@ msgid "Edit event"
 msgstr "Editare eveniment"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Evenimentul nu a putut fi încărcat. Sunteți sigur ca exista?"
 
 msgid "Event could not be loaded"
 msgstr "Evenimentul nu a putut fi încărcat"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Unitatea organizațională nu a putut fi încărcată"
 
 msgid "View event info"
 msgstr ""
@@ -462,43 +462,43 @@ msgid "Select columns"
 msgstr "Selectați coloanele"
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Descărcare ca JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "Descărcare ca XML"
 
 msgid "Download as CSV"
 msgstr "Descărcare ca CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "Descărcare cu filtrele actuale"
 
 msgid "Download data..."
-msgstr ""
+msgstr "Descărcare date..."
 
 msgid "Rows per page"
 msgstr "Rânduri pe pagină"
 
 msgid "Update view"
-msgstr ""
+msgstr "Actualizare vizualizarea"
 
 msgid "Save current view..."
-msgstr ""
+msgstr "Salvarea vizualizării curente..."
 
 msgid "Save current view as..."
-msgstr ""
+msgstr "Salvarea vizualizării curente ca..."
 
 msgid "Delete view"
-msgstr ""
+msgstr "Ștergere vizualizare"
 
 msgid "Share view..."
-msgstr ""
+msgstr "Partajare vizualizarea..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmare"
 
 msgid "Save As view"
 msgstr ""
@@ -537,7 +537,7 @@ msgid "Save and exit"
 msgstr "Salvare și ieșire"
 
 msgid "Finish"
-msgstr ""
+msgstr "Finalizare"
 
 msgid "Switch to form view"
 msgstr ""
@@ -557,7 +557,7 @@ msgid ""
 msgstr ""
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Utilizatorul alocat"
 
 msgid "Relationships"
 msgstr "Relații"
@@ -611,7 +611,7 @@ msgid "events added"
 msgstr "evenimentele au fost adăugate"
 
 msgid "No events added"
-msgstr ""
+msgstr "Nu au fost adăugate evenimente"
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
@@ -677,7 +677,7 @@ msgid "Save as new {{tetName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "Unitate Organizațională"
 
 msgid "Registration"
 msgstr "Înregistrare"
@@ -689,13 +689,13 @@ msgid "Search results"
 msgstr "Rezultatele cautarii"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "Nu a fost găsit niciun {{trackedEntityTypeName}}."
 
 msgid "{{teiCount}} results found for"
 msgstr ""
 
 msgid "New search"
-msgstr ""
+msgstr "Căutare nouă"
 
 msgid "Edit search"
 msgstr "Editare căutarea"
@@ -704,7 +704,7 @@ msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Crearea unui nou {{trackedEntityType}}"
 
 msgid "Register"
 msgstr ""
@@ -733,7 +733,7 @@ msgid "Event assigned to {{name}}"
 msgstr "Eveniment atribuit lui {{name}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "Feedback-uri"
 
 msgid "You dont have access to delete this relationship"
 msgstr "Nu aveți acces pentru a șterge această relație"
@@ -751,13 +751,13 @@ msgid "All accessible"
 msgstr ""
 
 msgid "Selected"
-msgstr ""
+msgstr "Selectat"
 
 msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Selected program"
-msgstr ""
+msgstr "Programul selectat"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Căutare {{uniqueAttrName}}"
@@ -767,6 +767,7 @@ msgstr "Căutare după atribute"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
+"Completați cel puțin {{minAttributesRequired}} atribute pentru a căuta"
 
 msgid "To work with the selected program,"
 msgstr ""
@@ -784,13 +785,13 @@ msgid "Profile"
 msgstr "Profil"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Eroare la salvarea evenimentului"
 
 msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "Evenimentul nu a putut fi lichidat"
 
 msgid "Could not save working list"
 msgstr ""
@@ -808,7 +809,7 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Setarea coordonatelor"
 
 msgid "Latitude"
 msgstr ""
@@ -817,34 +818,34 @@ msgid "Longitude"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 msgid "Time"
 msgstr ""
 
 msgid "From date"
-msgstr ""
+msgstr "Din data"
 
 msgid "From time"
-msgstr ""
+msgstr "De la ora"
 
 msgid "To date"
-msgstr ""
+msgstr "Până la data"
 
 msgid "To time"
-msgstr ""
+msgstr "Pînă la ora"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "eroare întâlnită în timpul validării câmpului"
 
 msgid "error"
-msgstr ""
+msgstr "eroare"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Lichidare poligon"
 
 msgid "Set area"
 msgstr ""
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "Mod de compatibilitate"
