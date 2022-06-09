@@ -78,8 +78,8 @@ export const fallbackSearch = ({ fallbackFormValues, trackedEntityTypeId, pageSi
 export const fallbackPushPage = ({ orgUnitId, trackedEntityTypeId, values }) =>
     actionCreator(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED)({ orgUnitId, trackedEntityTypeId, values });
 
-export const showFallbackNotEnoughAttributesOnSearchPage = ({ searchableFields }) =>
-    actionCreator(searchPageActionTypes.FALLBACK_NOT_ENOUGH_ATTRIBUTES)({ searchableFields });
+export const showFallbackNotEnoughAttributesOnSearchPage = ({ searchableFields, minAttributesRequiredToSearch }) =>
+    actionCreator(searchPageActionTypes.FALLBACK_NOT_ENOUGH_ATTRIBUTES)({ searchableFields, minAttributesRequiredToSearch });
 
 export const cleanSearchRelatedData = () =>
     actionCreator(searchPageActionTypes.ALL_SEARCH_RELATED_DATA_CLEAN)();

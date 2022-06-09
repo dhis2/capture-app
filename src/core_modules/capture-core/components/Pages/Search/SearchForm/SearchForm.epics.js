@@ -202,7 +202,7 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
 
                 if (availableSearchGroup) {
                     const {
-                        minAttributesRequiredToSearch: minAttributesRequiredToSearchFallback,
+                        minAttributesRequiredToSearch,
                         searchForm,
                     } = availableSearchGroup;
                     const { searchPage } = store.value;
@@ -217,10 +217,19 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
                         return acc;
                     }, { searchableValuesCount: 0, fallbackFormValues: {} });
 
-                    if (searchableValuesCount >= minAttributesRequiredToSearchFallback) {
+                    if (!minAttributesRequiredToSearch && !searchableValuesCount) {
+                        return of(showFallbackNotEnoughAttributesOnSearchPage({
+                            searchableFields, minAttributesRequiredToSearch,
+                        }));
+                    }
+
+                    if (searchableValuesCount >= minAttributesRequiredToSearch) {
                         return of(fallbackSearch({ trackedEntityTypeId, fallbackFormValues, page, pageSize }));
                     }
-                    return of(showFallbackNotEnoughAttributesOnSearchPage({ searchableFields }));
+
+                    return of(showFallbackNotEnoughAttributesOnSearchPage({
+                        searchableFields, minAttributesRequiredToSearch,
+                    }));
                 }
                 return of(showErrorViewOnSearchPage());
             }

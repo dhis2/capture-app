@@ -92,8 +92,8 @@ export const SearchPage: ComponentType<{||}> = () => {
 
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
-    const searchableFields =
-        useSelector(({ searchPage }) => searchPage.searchableFields);
+    const { searchableFields, minAttributesRequiredToSearch } =
+        useSelector(({ searchPage }) => searchPage);
 
     useEffect(() => {
         if (programId && (programId !== preselectedProgramId)) {
@@ -112,7 +112,7 @@ export const SearchPage: ComponentType<{||}> = () => {
             preselectedProgramId={preselectedProgramId}
             trackedEntityTypeId={trackedEntityTypeId}
             searchStatus={searchStatus}
-            searchableFieldsCount={searchableFields?.length}
+            minAttributesRequiredToSearch={minAttributesRequiredToSearch}
             searchableFieldsDisplayname={searchableFields?.map(field => field.formName)?.join(', ')}
             error={error}
             ready={ready}
