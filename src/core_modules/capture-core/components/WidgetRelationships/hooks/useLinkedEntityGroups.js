@@ -58,14 +58,14 @@ const determineLinkedEntity = (
     from: RelationshipData,
     to: RelationshipData,
 ) => {
-    const { id, fromToName, toFromName, toConstraint, fromConstraint } = relationshipType;
+    const { id, toConstraint, fromConstraint } = relationshipType;
 
     if ((to.trackedEntity && to.trackedEntity.trackedEntity === targetId) || (to.event && to.event.event === targetId)) {
-        return { side: from, constraint: fromConstraint, relationshipName: toFromName, groupId: `${id}-from` };
+        return { side: from, constraint: fromConstraint, groupId: `${id}-from` };
     }
 
     if ((from.trackedEntity && from.trackedEntity.trackedEntity === targetId) || (from.event && from.event.event === targetId)) {
-        return { side: to, constraint: toConstraint, relationshipName: fromToName, groupId: `${id}-to` };
+        return { side: to, constraint: toConstraint, groupId: `${id}-to` };
     }
 
     log.error(errorCreator('Relationship type is not handled')({ relationshipType }));
@@ -149,7 +149,6 @@ const getLinkedEntityInfo = (
         displayFields,
         parameters,
         groupId: linkedEntityData.groupId,
-        relationshipName: linkedEntityData?.relationshipName,
         values: convertAttributes(values, displayFields, options),
     };
 };
