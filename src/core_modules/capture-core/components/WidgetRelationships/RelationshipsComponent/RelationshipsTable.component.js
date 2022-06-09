@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { withStyles } from '@material-ui/core';
 import {
     DataTableBody,
     DataTableHead,
@@ -17,8 +18,16 @@ type Props = {
      ...CssClasses,
 }
 
-export const RelationshipsTable = (props: Props) => {
-    const { headers, linkedEntityData, onLinkedRecordClick } = props;
+const styles = {
+    row: {
+        '&:hover': {
+            cursor: 'pointer',
+        },
+    },
+};
+
+const RelationshipsTablePlain = (props: Props) => {
+    const { headers, linkedEntityData, onLinkedRecordClick, classes } = props;
     function renderHeader() {
         const headerCells = headers
             .map(column => (
@@ -43,7 +52,11 @@ export const RelationshipsTable = (props: Props) => {
             <DataTableRow key={targetId}>
                 {headers.map(({ id }) => {
                     const entity = values.find(item => item.id === id);
-                    return (<DataTableCell key={id} onClick={() => onLinkedRecordClick(parameters)}>
+                    return (<DataTableCell
+                        className={classes.row}
+                        key={id}
+                        onClick={() => onLinkedRecordClick(parameters)}
+                    >
                         {entity?.value}
                     </DataTableCell>
                     );
@@ -63,3 +76,5 @@ export const RelationshipsTable = (props: Props) => {
         </DataTable>
     );
 };
+
+export const RelationshipsTable: ComponentType<Props> = withStyles(styles)(RelationshipsTablePlain);
