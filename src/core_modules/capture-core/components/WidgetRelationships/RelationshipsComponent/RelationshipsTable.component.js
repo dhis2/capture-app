@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import {
     DataTableBody,

@@ -13,7 +13,8 @@ export type TEIRelationshipData = {|
     trackedEntity: {
         trackedEntityType: string,
         trackedEntity: string,
-        attributes: Array<TEIAttribute>
+        attributes: Array<TEIAttribute>,
+        orgUnit: string
     }
 |}
 
