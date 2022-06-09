@@ -92,6 +92,7 @@ const EnrollmentEditEventPagePain = ({
                             onGoBack={onGoBack}
                             programId={programId}
                             orgUnitId={orgUnitId}
+                            enrollmentId={enrollmentId}
                         />
                     )}
                     {pageStatus === pageStatuses.MISSING_DATA && (

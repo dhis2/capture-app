@@ -46,6 +46,7 @@ export const WidgetEventEditPlain = ({
     onGoBack,
     programId,
     orgUnitId,
+    enrollmentId,
 }: Props) => {
     const dispatch = useDispatch();
     const currentPageMode = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent)
@@ -102,6 +103,7 @@ export const WidgetEventEditPlain = ({
                             formFoundation={programStage.stageForm}
                             orgUnit={orgUnit}
                             programId={programId}
+                            enrollmentId={enrollmentId}
                         />
                     )}
                 </div>

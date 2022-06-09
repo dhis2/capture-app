@@ -176,17 +176,9 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
     action$.pipe(
         ofType(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY),
         map((action) => {
-            const { eventId, programId, orgUnitId, teiId, enrollmentId } = action.payload;
-            const { currentSelections } = store.value;
-            const params = {
-                programId,
-                teiId,
-                orgUnitId,
-                enrollmentId,
-            };
-            dependencies.history.push(
-                `/enrollment?${buildUrlQueryString(params)}`,
-            );
-            return startDeleteEventDataEntry(eventId, params, currentSelections);
+            const { eventId, enrollmentId } = action.payload;
+            const params = { enrollmentId };
+            dependencies.history.push(`/enrollment?${buildUrlQueryString(params)}`);
+            return startDeleteEventDataEntry(eventId, params);
         }));
 

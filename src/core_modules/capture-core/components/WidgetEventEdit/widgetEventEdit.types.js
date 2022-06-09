@@ -7,5 +7,6 @@ export type Props = {|
     onGoBack: () => void,
     orgUnitId: string,
     programId: string,
+    enrollmentId: string,
     ...CssClasses,
 |};

@@ -36,7 +36,7 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
     onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
@@ -95,8 +95,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
         ]));
     },
     onDelete: () => {
-        const { eventId, programId, orgUnitId, teiId, enrollmentId } = deriveURLParamsFromLocation();
-        dispatch(requestDeleteEventDataEntry({ eventId, programId, orgUnitId, teiId, enrollmentId }));
+        const { enrollmentId } = props;
+        const { eventId } = deriveURLParamsFromLocation();
+        dispatch(requestDeleteEventDataEntry({ eventId, enrollmentId }));
     },
 });
 
