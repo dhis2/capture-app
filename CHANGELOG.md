@@ -1,3 +1,11 @@
+## [100.5.7](https://github.com/dhis2/capture-app/compare/v100.5.6...v100.5.7) (2022-06-09)
+
+
+### Bug Fixes
+
+* [DHIS2-12138] remove duplicate count call ([#2783](https://github.com/dhis2/capture-app/issues/2783)) ([6300c9b](https://github.com/dhis2/capture-app/commit/6300c9b256138a4f9b7ab0f367ba0417c007240a))
+* **translations:** sync translations from transifex (master) ([741b33d](https://github.com/dhis2/capture-app/commit/741b33d5210d0682345a8f25453e4e6bee09aac5))
+
 ## [100.5.6](https://github.com/dhis2/capture-app/compare/v100.5.5...v100.5.6) (2022-06-04)
 
 
