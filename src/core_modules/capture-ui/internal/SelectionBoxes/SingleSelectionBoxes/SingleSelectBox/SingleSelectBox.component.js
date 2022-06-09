@@ -75,13 +75,13 @@ export class SingleSelectBox extends React.Component<Props> {
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <input
                         ref={inputRef}
-                        type="checkbox"
+                        type="radio"
                         className={defaultClasses.input}
                         name={groupId}
                         id={id}
                         checked={isSelected}
                         value={optionData.value}
-                        onChange={this.handleSelect}
+                        onClick={this.handleSelect}
                         onKeyPress={this.handleKeyPress}
                         disabled={disabled}
                         {...passOnProps}
