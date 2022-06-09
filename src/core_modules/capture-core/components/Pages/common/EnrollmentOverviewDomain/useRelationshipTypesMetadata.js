@@ -1,24 +1,29 @@
 // @flow
-import { useEffect, useState } from 'react';
-import {
-    getCachedSingleResourceFromKeyAsync,
-} from '../../../../MetaDataStoreUtils/MetaDataStoreUtils';
+import { useCallback, useEffect, useState } from 'react';
+import { useDataEngine } from '@dhis2/app-runtime';
+import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { userStores } from '../../../../storageControllers/stores';
 import { getUserStorageController } from '../../../../storageControllers';
-import { getApi } from '../../../../d2/d2Instance';
-import type { InputRelationship } from './useCommonEnrollmentDomainData';
+import type { InputRelationship } from '../../../WidgetRelationships/common.types';
 
 export const useRelationshipTypesMetadata = (relationships?: Array<InputRelationship>) => {
     const [relationshipTypesMetadata, setRelationshipTypesMetadata] = useState([]);
+    const dataEngine = useDataEngine();
 
-    const fetchDataView = async (relType) => {
+    const fetchDataView = useCallback(async (relType) => {
+        if (!relationships?.find(({ relationshipType }) => relationshipType === relType.id)) { return relType; }
         const { fromConstraint, toConstraint } = relType;
 
-        const getPromise = (key, attributes) => {
-            if (attributes.length && !attributes.some(att => att.valueType)) {
-                return getApi().get(key, {
-                    filter: `id:in:[${attributes.join(',')}]`,
-                    fields: ['id,valueType,displayName'],
+        const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
+
+        const getPromise = (resource, attributes) => {
+            if (attributes.length && !attributes.every(att => att.valueType)) {
+                return querySingleResource({
+                    resource,
+                    params: {
+                        filter: `id:in:[${attributes.join(',')}]`,
+                        fields: ['id,valueType,displayName'],
+                    },
                 });
             }
             return undefined;
@@ -38,7 +43,7 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
             if (!dataValues) { return constraint; }
             if (constraint.relationshipEntity === 'TRACKED_ENTITY_INSTANCE') {
                 if (constraint.trackerDataView.attributes.length
-                    && !constraint.trackerDataView.attributes.some(att => att.valueType)) {
+                    && !constraint.trackerDataView.attributes.every(att => att.valueType)) {
                     return {
                         ...constraint,
                         trackerDataView: {
@@ -50,7 +55,7 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
                 }
             } else if (constraint.relationshipEntity === 'PROGRAM_STAGE_INSTANCE') {
                 if (constraint.trackerDataView.dataElements.length
-                    && !constraint.trackerDataView.dataElements.some(att => att.valueType)) {
+                    && !constraint.trackerDataView.dataElements.every(att => att.valueType)) {
                     return {
                         ...constraint,
                         trackerDataView: {
@@ -73,23 +78,20 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
             fromConstraint: mergeConstraintDataValues(fromConstraint, fromDataValues),
             toConstraint: mergeConstraintDataValues(toConstraint, toDataValues),
         };
-    };
+    }, [dataEngine, relationships]);
 
     useEffect(() => {
         if (relationships) {
-            const relationshipTypePromises = relationships
-                .map(rel => getCachedSingleResourceFromKeyAsync(userStores.RELATIONSHIP_TYPES, rel.relationshipType));
-            Promise
-                .all(relationshipTypePromises)
-                .then(results => Promise.all(results.map(res => fetchDataView(res.response))))
+            const storageController = getUserStorageController();
+            const allRelationshipTypePromises = storageController.getAll(userStores.RELATIONSHIP_TYPES);
+            allRelationshipTypePromises
+                .then(results => Promise.all(results.map(res => fetchDataView(res))))
                 .then((res) => {
-                    const storageController = getUserStorageController();
                     setRelationshipTypesMetadata(res);
                     storageController.setAll(userStores.RELATIONSHIP_TYPES, res);
                 });
         }
-    }, [relationships]);
-
+    }, [relationships, fetchDataView]);
 
     return relationshipTypesMetadata;
 };

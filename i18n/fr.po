@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choisir une ou plusieurs dates..."
@@ -1130,6 +1130,12 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Delete event"
+msgstr "Effacer l´événement"
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Événement terminé"
 
@@ -1148,6 +1154,7 @@ msgid "This date is {{count}} days {{position}} the suggested date."
 msgid_plural "This date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid "after"
 msgstr "après"
@@ -1160,6 +1167,7 @@ msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1263,9 +1271,6 @@ msgstr "Étapes et événements"
 
 msgid "Working list could not be loaded"
 msgstr "La liste des tâches n'a pas pu être chargée"
-
-msgid "Delete event"
-msgstr "Effacer l´événement"
 
 msgid "Download as JSON"
 msgstr "Télécharger en JSON"
@@ -1391,6 +1396,9 @@ msgid "Error saving enrollment"
 msgstr "Erreur lors de l'enregistrement de l'inscription"
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error deleting the enrollment event"
 msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"

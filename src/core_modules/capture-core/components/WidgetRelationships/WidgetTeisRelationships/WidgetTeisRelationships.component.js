@@ -3,15 +3,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useLinkedEntityGroups } from '../hooks/useLinkedEntityGroups';
 import { RelationshipsWidget } from '../RelationshipsComponent';
-import type { InputRelationship, RelationshipType } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
-
-type Props = {|
-    relationships: Array<InputRelationship>,
-    relationshipTypes: Array<RelationshipType>,
-    onAddRelationship: () => void,
-    teiId: string,
-    ...CssClasses,
-|};
+import type { Props } from './types';
 
 export const WidgetTeisRelationships = ({ relationships, relationshipTypes, teiId, ...passOnProps }: Props) => {
     const { relationships: teiRelationships } = useLinkedEntityGroups(teiId, relationshipTypes, relationships);

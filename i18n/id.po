@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -1115,6 +1115,12 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Delete event"
+msgstr "Hapus even"
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Even selesai"
 
@@ -1247,9 +1253,6 @@ msgstr "Tahapan dan Even"
 msgid "Working list could not be loaded"
 msgstr "Daftar kerja tidak dapat dimuat"
 
-msgid "Delete event"
-msgstr "Hapus even"
-
 msgid "Download as JSON"
 msgstr "Download dalam bentuk JSON"
 
@@ -1374,6 +1377,9 @@ msgid "Error saving enrollment"
 msgstr "Terjadi kesalahan saat menyimpan pendaftaran"
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error deleting the enrollment event"
 msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"

@@ -9,10 +9,10 @@ import type {
     RelationshipType,
     RelationshipData,
     TEIAttribute,
-    DataValue,
-} from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
-import { getBaseConfigHeaders, relationshipEntities } from '../../Pages/Enrollment/EnrollmentPageDefault/hooks/constants';
-import { convertServerToClient, convertClientToServer } from '../../../converters';
+} from '../common.types';
+import type { DataValue } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import { getBaseConfigHeaders, relationshipEntities } from '../constants';
+import { convertServerToClient, convertClientToList } from '../../../converters';
 
 const convertAttributes = (
     attributes: Array<TEIAttribute> | Array<DataValue>,
@@ -34,7 +34,7 @@ const convertAttributes = (
 
     return {
         id: field.id,
-        value: convertClientToServer(convertServerToClient(attributeItem, field.valueType), field.valueType),
+        value: convertClientToList(convertServerToClient(attributeItem, field.valueType), field.valueType),
     };
 });
 
@@ -130,7 +130,7 @@ const getAttributeConstraintsForTEI = (linkedEntity: RelationshipData, relations
 };
 
 const getLinkedEntityInfo = (
-    relationshipType: Object,
+    relationshipType: RelationshipType,
     targetId: string,
     from: RelationshipData,
     to: RelationshipData,
@@ -157,7 +157,7 @@ const getLinkedEntityInfo = (
 
 export const useLinkedEntityGroups = (
     targetId: string,
-    relationshipTypes: Array<Object>,
+    relationshipTypes: Array<RelationshipType>,
     relationships?: Array<InputRelationship>,
 ) => {
     const [relationshipsByType, setRelationshipByType] = useState([]);
@@ -167,6 +167,7 @@ export const useLinkedEntityGroups = (
             const linkedEntityGroups = relationships.reduce((acc, rel) => {
                 const { relationshipType: typeId, from, to, createdAt } = rel;
                 const relationshipType = relationshipTypes.find(item => item.id === typeId);
+                if (!relationshipType) { return acc; }
                 const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to, createdAt);
                 if (!metadata) { return acc; }
                 const { relationshipName, displayFields, id, values, parameters, groupId } = metadata;

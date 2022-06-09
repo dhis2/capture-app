@@ -1,3 +1,24 @@
+## [100.4.2](https://github.com/dhis2/capture-app/compare/v100.4.1...v100.4.2) (2022-05-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([93eed1d](https://github.com/dhis2/capture-app/commit/93eed1de9cc833be5ff9932de2ac929f7e8e4406))
+
+## [100.4.1](https://github.com/dhis2/capture-app/compare/v100.4.0...v100.4.1) (2022-05-23)
+
+
+### Bug Fixes
+
+* [DSHI2-10332] confirm metadata loading for program at the end of the sequence ([4b6f1bf](https://github.com/dhis2/capture-app/commit/4b6f1bf0bcca760c8e799e74b05d334c1a4c675e))
+
+# [100.4.0](https://github.com/dhis2/capture-app/compare/v100.3.5...v100.4.0) (2022-05-23)
+
+
+### Features
+
+* [DHIS2-12974] Implement delete button for enrollment event ([#2727](https://github.com/dhis2/capture-app/issues/2727)) ([efbf771](https://github.com/dhis2/capture-app/commit/efbf771aff11b1a7b6e6c9e32f39365a3ea09572))
+
 ## [100.3.5](https://github.com/dhis2/capture-app/compare/v100.3.4...v100.3.5) (2022-05-20)
 
 

@@ -1,7 +1,7 @@
 // @flow
 import type { ProgramStage } from '../../../metaData';
 import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
-import type { InputRelationship, RelationshipType } from '../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import type { InputRelationship, RelationshipType } from '../../WidgetRelationships/common.types';
 import type { Url } from '../../../utils/url';
 
 export type PlainProps = {|

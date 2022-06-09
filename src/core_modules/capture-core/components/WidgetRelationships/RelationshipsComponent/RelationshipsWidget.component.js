@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { Chip } from '@dhis2/ui';
 import { Widget } from '../../Widget';
 import { Relationships } from './Relationships.component';
-import type { OutputRelationship } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import type { OutputRelationship } from '../common.types';
 import type { Url } from '../../../utils/url';
 
 type Props = {|
