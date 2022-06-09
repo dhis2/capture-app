@@ -169,14 +169,14 @@ export const useLinkedEntityGroups = (
                 if (!relationshipType) { return acc; }
                 const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to, createdAt);
                 if (!metadata) { return acc; }
-                const { relationshipName, displayFields, id, values, parameters, groupId } = metadata;
+                const { displayFields, id, values, parameters, groupId } = metadata;
                 const typeExist = acc.find(item => item.id === groupId);
                 if (typeExist) {
                     typeExist.linkedEntityData.push({ id, values, parameters });
                 } else {
                     acc.push({
                         id: groupId,
-                        relationshipName,
+                        relationshipName: relationshipType.displayName,
                         linkedEntityData: [{ id, values, parameters }],
                         headers: displayFields,
                     });
