@@ -26,7 +26,7 @@ import {
     viewEventIds,
 } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 
-import { deriveURLParamsFromLocation } from '../../../utils/routing/deriveURLParamsFromLocation';
+import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
 
 const mapStateToProps = (state: ReduxState) => {
@@ -85,7 +85,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
         ]));
     },
     onDelete: () => {
-        const { eventId, programId, orgUnitId, teiId, enrollmentId } = deriveURLParamsFromLocation();
+        const { eventId, programId, orgUnitId, teiId, enrollmentId } = getLocationQuery();
         dispatch(requestDeleteEventDataEntry({ eventId, programId, orgUnitId, teiId, enrollmentId }));
     },
 });

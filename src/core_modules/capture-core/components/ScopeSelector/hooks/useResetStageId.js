@@ -1,14 +1,14 @@
 // @flow
 import { useHistory, useLocation } from 'react-router-dom';
-import { getUrlQueries } from '../../../utils/url';
-import { buildUrlQueryString } from '../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 
 export const useResetStageId = () => {
     const history = useHistory();
     const { pathname } = useLocation();
+    const { programId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
+
 
     const resetStageId = (pageToPush: string = pathname) => {
-        const { programId, orgUnitId, teiId, enrollmentId } = getUrlQueries();
         history.push(`${pageToPush}?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     };
 

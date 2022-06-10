@@ -12,7 +12,7 @@ import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertDataEntryToClientValues } from '../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../events/mainConverters';
-import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../utils/routing';
+import { getLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -64,7 +64,7 @@ export const saveEditEventLocationChangeEpic = (action$: InputObservable, _: Red
     action$.pipe(
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation();
+            const { programId, orgUnitId } = getLocationQuery();
             history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();
         }));

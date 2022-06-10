@@ -4,7 +4,7 @@ import { switchMap } from 'rxjs/operators';
 import { searchPageActionTypes } from './SearchPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
 import { topBarActionsActionTypes } from '../../TopBarActions';
-import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../utils/routing';
+import { getLocationQuery, buildUrlQueryString } from '../../../utils/routing';
 import { resetLocationChange } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
@@ -23,7 +23,7 @@ export const openSearchPageLocationChangeEpic = (action$: InputObservable, store
     action$.pipe(
         ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN, topBarActionsActionTypes.SEARCH_PAGE_OPEN),
         switchMap(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation();
+            const { programId, orgUnitId } = getLocationQuery();
             history.push(`/search?${buildUrlQueryString({ programId, orgUnitId })}`);
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
