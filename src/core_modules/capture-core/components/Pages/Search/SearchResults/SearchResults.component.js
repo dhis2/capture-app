@@ -17,8 +17,7 @@ import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { buildUrlQueryString } from '../../../../utils/routing';
-import { getUrlQueries } from '../../../../utils/url';
+import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { Widget } from '../../../Widget';
 
 const SearchPagination = withNavigation()(Pagination);
@@ -146,6 +145,7 @@ export const SearchResultsIndex = ({
 
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
+    const { programId, orgUnitId } = useLocationQuery();
     const [isTopResultsOpen, setTopResultsOpen] = useState(true);
     const [isOtherResultsOpen, setOtherResultsOpen] = useState(true);
     const history = useHistory();
@@ -190,7 +190,6 @@ export const SearchResultsIndex = ({
     };
 
     const handleCreateNew = () => {
-        const { programId, orgUnitId } = getUrlQueries();
         history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     };
 
@@ -250,7 +249,6 @@ export const SearchResultsIndex = ({
                 dataElements={dataElements}
                 renderCustomCardActions={({ item, enrollmentType, programName }) => (<CardListButtons
                     programName={programName}
-                    currentSearchScopeId={undefined}
                     currentSearchScopeType={currentSearchScopeType}
                     id={item.id}
                     orgUnitId={item.tei.orgUnit}

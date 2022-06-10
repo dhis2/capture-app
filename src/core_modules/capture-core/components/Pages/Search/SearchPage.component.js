@@ -83,7 +83,7 @@ const Index = ({
     searchStatus,
     trackedEntityTypeId,
     navigateToRegisterUser,
-    searchableFieldsCount,
+    minAttributesRequiredToSearch,
     searchableFieldsDisplayname,
     programId,
     orgUnitId,
@@ -246,11 +246,12 @@ const Index = ({
                             <Modal position="middle">
                                 <ModalTitle>{i18n.t('Cannot search in all programs')}</ModalTitle>
                                 <ModalContent>
-                                    {i18n.t('Fill in at least {{count}} attribute to search: {{searchableAttributes}}', {
+                                    {i18n.t('Fill in at least {{count}} attribute to search{{escape}} {{ searchableAttributes }}', {
                                         searchableAttributes: searchableFieldsDisplayname,
-                                        count: searchableFieldsCount,
-                                        defaultValue: 'Fill in at least {{count}} attribute to search: {{searchableAttributes}}',
-                                        defaultValue_plural: 'Fill in at least {{count}} attributes to search: {{searchableAttributes}}',
+                                        escape: ':',
+                                        count: minAttributesRequiredToSearch,
+                                        defaultValue: 'Fill in at least {{count}} attribute to search{{escape}} {{searchableAttributes}}',
+                                        defaultValue_plural: 'Fill in at least {{count}} attributes to search{{escape}} {{searchableAttributes}}',
                                         interpolation: {
                                             escape: false,
                                         },
