@@ -1,7 +1,8 @@
 const config = {
-    name: 'Capture Bangladesh',
+    name: 'capture',
+    title: 'Capture',
     type: 'app',
-    coreApp: false,
+    coreApp: true,
     entryPoints: {
         app: './src/index',
     },
