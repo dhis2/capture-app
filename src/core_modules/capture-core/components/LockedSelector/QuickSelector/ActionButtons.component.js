@@ -93,15 +93,7 @@ const ActionButtonsPlain = ({
 
             {
                 scopeType !== scopeTypes.TRACKER_PROGRAM ?
-                    <Button
-                        small
-                        secondary
-                        dataTest="find-button"
-                        className={classes.marginRight}
-                        onClick={onFindClickWithoutProgramId}
-                    >
-                        { i18n.t('Search') }
-                    </Button>
+                    null
                     :
                     <DropdownButton
                         small

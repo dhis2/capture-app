@@ -36,10 +36,12 @@ const buttonDefinitions = {
         text: i18n.t('Save and exit'),
         onClick: () => { props.onSave(newEventSaveTypes.SAVEANDEXIT); },
     }),
-    [buttonTypes.FINISH]: (props: Props) => ({
+    [buttonTypes.FINISH]: () => ({
         key: buttonTypes.FINISH,
         text: i18n.t('Finish'),
-        onClick: () => { props.onCancel(); },
+        onClick: () => {
+            window.location.href = '../';
+        },
     }),
 };
 

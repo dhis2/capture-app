@@ -336,9 +336,10 @@ export const workingListsDesc = createReducerDescription({
     },
     [recentlyAddedEventsActionTypes.LIST_ITEM_PREPEND]: (state, action) => {
         const newState = { ...state };
-        const { listId, itemId } = action.payload;
+        const { listId, itemId, programId } = action.payload;
         newState[listId] = {
             order: [itemId, ...(state[listId] ? state[listId].order.slice(0, 19) : [])],
+            programId,
         };
         return newState;
     },
@@ -351,6 +352,11 @@ export const workingListsDesc = createReducerDescription({
         return newState;
     },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
+        const { listId, selections: { programId } } = action.payload;
+        const storedProgramId = state[listId] && state[listId].programId;
+        if (storedProgramId === programId) {
+            return state;
+        }
         const newState = { ...state };
         newState[action.payload.listId] = { order: [] };
         return newState;

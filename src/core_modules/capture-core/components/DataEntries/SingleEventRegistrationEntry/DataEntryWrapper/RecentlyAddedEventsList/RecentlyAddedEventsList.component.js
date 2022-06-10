@@ -3,6 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import i18n from '@dhis2/d2-i18n';
+import { useHistory } from 'react-router';
 import OfflineEventsList from '../../../../EventsList/OfflineEventsList/OfflineEventsList.component';
 import { listId } from './RecentlyAddedEventsList.const';
 
@@ -25,6 +26,7 @@ const styles = (theme: Theme) => ({
 
 const NewEventsList = (props: Props) => {
     const { classes, ...passOnProps } = props;
+    const { push } = useHistory();
     const eventsAdded = props.events ? Object.keys(props.events).length : 0;
     if (eventsAdded === 0) {
         return null;
@@ -42,6 +44,9 @@ const NewEventsList = (props: Props) => {
                 noItemsText={i18n.t('No events added')}
                 emptyListText={i18n.t('No events added')}
                 {...passOnProps}
+                onRowClick={({ eventId }) => {
+                    push(`/viewEvent?viewEventId=${eventId}`);
+                }}
             />
         </Paper>
     );

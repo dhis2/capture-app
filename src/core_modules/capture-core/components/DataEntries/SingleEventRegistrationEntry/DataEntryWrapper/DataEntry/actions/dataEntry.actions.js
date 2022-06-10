@@ -32,6 +32,7 @@ export const actionTypes = {
     RESET_DATA_ENTRY: 'ResetDataEntryForNewEvent',
     ADD_NEW_EVENT_NOTE: 'AddNewEventNote',
     NEW_EVENT_OPEN_NEW_RELATIONSHIP: 'NewEventOpenNewRelationship',
+    ADD_NEW_EVENT_LIST_RECORD: 'NewEventListRecordAdd',
     SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS: 'SaveNewEventRelationshipsIfExists',
     START_SAVE_NEW_EVENT_RELATIONSHIPS: 'StartSaveNewEventRelationships',
     NEW_EVENT_RELATIONSHIPS_SAVED: 'NewEventRelationshipsSaved',
@@ -131,6 +132,7 @@ export const startSaveNewEventAddAnother =
     relationshipData: ?Object,
     selections: Object,
     clientId: string,
+    listData: Object,
 ) => {
     const actionType = actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER;
     return actionCreator(actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER)({ selections }, {
@@ -141,7 +143,7 @@ export const startSaveNewEventAddAnother =
                 data: serverData,
                 clientId,
             },
-            commit: { type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS, meta: { selections, relationshipData, triggerAction: actionType } },
+            commit: { type: actionTypes.ADD_NEW_EVENT_LIST_RECORD, meta: { selections, relationshipData, triggerAction: actionType, listData } },
             rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER, meta: { selections, clientId } },
         },
     });

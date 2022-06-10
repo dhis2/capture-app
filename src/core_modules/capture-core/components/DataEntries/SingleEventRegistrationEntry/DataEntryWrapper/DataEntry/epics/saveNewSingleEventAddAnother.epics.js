@@ -11,13 +11,7 @@ import {
 } from '../actions/dataEntry.actions';
 
 import {
-    newRecentlyAddedEvent,
 } from '../../RecentlyAddedEventsList/recentlyAddedEventsList.actions';
-
-import {
-    prependListItem,
-    removeListItem,
-} from '../../RecentlyAddedEventsList';
 
 import getDataEntryKey from '../../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
@@ -45,16 +39,6 @@ export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: Redu
             const clientEventValues = { ...formClientValues, created: moment().toISOString() };
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return batchActions([
-                startSaveNewEventAddAnother(serverData, relationshipData, state.currentSelections, clientEvent.eventId),
-                newRecentlyAddedEvent(clientEvent, clientEventValues),
-                prependListItem(listId, clientEvent.eventId),
+                startSaveNewEventAddAnother(serverData, relationshipData, state.currentSelections, clientEvent.eventId, { clientEvent, clientEventValues, listId }),
             ], newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH);
-        }));
-
-export const saveNewEventAddAnotherFailedEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER),
-        map((action) => {
-            const clientId = action.meta.clientId;
-            return removeListItem(listId, clientId);
         }));

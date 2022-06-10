@@ -30,6 +30,14 @@ import getDataEntryKey from '../../../../../DataEntry/common/getDataEntryKey';
 import convertClientRelationshipToServer from '../../../../../../relationships/convertClientToServer';
 import { getRelationshipNewTei } from '../../../../../Pages/NewRelationship/RegisterTei';
 
+import {
+    newRecentlyAddedEvent,
+} from '../../RecentlyAddedEventsList/recentlyAddedEventsList.actions';
+
+import {
+    prependListItem,
+} from '../../RecentlyAddedEventsList';
+
 const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';
 const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
@@ -103,13 +111,32 @@ const saveNewEventRelationships = (relationshipData, selections, triggerAction) 
     return startSaveNewEventRelationships(serverRelationshipData, selections, triggerAction);
 };
 
+export const addNewEventListRecordEpic = (action$: InputObservable) =>
+    action$.pipe(
+        ofType(newEventDataEntryActionTypes.ADD_NEW_EVENT_LIST_RECORD),
+        map((action) => {
+            const { selections, relationshipData, triggerAction, listData: { clientEvent, clientEventValues, listId } } = action.meta;
+            const eventId = action.payload.response.importSummaries[0].reference;
+
+            return batchActions([
+                {
+                    ...action,
+                    type: newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS,
+                    meta: { selections, relationshipData, triggerAction },
+                },
+                newRecentlyAddedEvent({ ...clientEvent, eventId }, clientEventValues, selections.programId),
+                prependListItem(listId, eventId, selections.programId),
+            ], newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS);
+        }));
+
 
 export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS),
+        map(action => action.payload[0]),
         map((action) => {
             const meta = action.meta;
-            if (meta.relationshipData) {
+            if (meta.relationshipData && meta.relationshipData.length) {
                 const eventId = action.payload.response.importSummaries[0].reference;
                 const relationshipData = action.meta.relationshipData.map((r) => {
                     const clientRelationship = {

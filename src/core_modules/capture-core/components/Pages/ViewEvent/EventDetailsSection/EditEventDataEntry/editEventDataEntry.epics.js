@@ -105,7 +105,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 
             return batchActions([
                 updateEventContainer(eventContainer, orgUnit),
-                startSaveEditEventDataEntry(eventId, serverData, state.currentSelections),
+                startSaveEditEventDataEntry(eventId, serverData, state.currentSelections, { clientEvent: mainDataClientValues, clientEventValues: formClientValues }),
             ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
         }));
 

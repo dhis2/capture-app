@@ -66,7 +66,7 @@ class ViewEvent extends Component<Props> {
             <div className={classes.container}>
                 <Button className={classes.showAllEvents} variant="raised" onClick={this.handleGoBackToAllEvents}>
                     <ChevronLeft />
-                    {i18n.t('Show all events')}
+                    {i18n.t('Back')}
                 </Button>
                 <div className={classes.contentContainer}>
                     <EventDetails

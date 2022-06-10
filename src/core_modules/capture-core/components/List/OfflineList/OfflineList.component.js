@@ -61,6 +61,12 @@ const styles = theme => ({
         color: theme.palette.text.secondary,
         fontWeight: theme.typography.fontWeightMedium,
     },
+    dataRow: {
+        cursor: 'pointer',
+        '&:hover': {
+            backgroundColor: '#F1FBFF',
+        },
+    },
 });
 
 type Column = {
@@ -150,7 +156,7 @@ class Index extends Component<Props> {
     }
 
     renderRows(visibleColumns: Array<Column>) {
-        const { dataSource, classes, noItemsText, rowIdKey } = this.props;
+        const { dataSource, classes, noItemsText, rowIdKey, onRowClick } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             const columnsCount = visibleColumns.length;
@@ -191,7 +197,8 @@ class Index extends Component<Props> {
                 return (
                     <Row
                         key={row[rowIdKey]}
-                        className={classes.row}
+                        className={classNames(classes.row, onRowClick ? classes.dataRow : '')}
+                        onClick={() => onRowClick && onRowClick(row)}
                     >
                         {cells}
                     </Row>

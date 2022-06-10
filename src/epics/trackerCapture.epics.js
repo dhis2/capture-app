@@ -11,13 +11,13 @@ import {
     saveNewEventEpic,
     saveNewEventLocationChangeEpic,
     saveNewEventAddAnotherEpic,
-    saveNewEventAddAnotherFailedEpic,
     addNoteForNewSingleEventEpic,
     openRelationshipForNewSingleEventEpic,
     addRelationshipForNewSingleEventEpic,
     saveNewEventRelationshipsIfExistsEpic,
     saveNewEventRelationshipFinishedEpic,
     teiForNewEventRelationshipSavedEpic,
+    addNewEventListRecordEpic,
 } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry';
 import {
     initEventListEpic,
@@ -241,7 +241,6 @@ export default combineEpics(
     goingOnlineEpic,
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
-    saveNewEventAddAnotherFailedEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
@@ -318,4 +317,5 @@ export default combineEpics(
     resetEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
     checkForDuplicateEpic,
+    addNewEventListRecordEpic,
 );

@@ -26,7 +26,6 @@ export {
 } from './DataEntryWrapper/DataEntry/epics/saveNewSingleEvent.epics';
 export {
     saveNewEventAddAnotherEpic,
-    saveNewEventAddAnotherFailedEpic,
 } from './DataEntryWrapper/DataEntry/epics/saveNewSingleEventAddAnother.epics';
 
 export {
@@ -39,4 +38,5 @@ export {
     saveNewEventRelationshipsIfExistsEpic,
     saveNewEventRelationshipFinishedEpic,
     teiForNewEventRelationshipSavedEpic,
+    addNewEventListRecordEpic,
 } from './DataEntryWrapper/DataEntry/epics/addRelationshipForNewSingleEvent.epics';

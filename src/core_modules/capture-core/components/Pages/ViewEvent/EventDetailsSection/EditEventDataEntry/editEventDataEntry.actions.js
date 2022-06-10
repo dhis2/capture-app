@@ -24,7 +24,7 @@ export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: strin
     actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)({ itemId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] });
 
 
-export const startSaveEditEventDataEntry = (eventId: string, serverData: Object, selections: Object) =>
+export const startSaveEditEventDataEntry = (eventId: string, serverData: Object, selections: Object, listData: Object) =>
     actionCreator(actionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY)({ selections }, {
         offline: {
             effect: {
@@ -32,7 +32,7 @@ export const startSaveEditEventDataEntry = (eventId: string, serverData: Object,
                 method: effectMethods.UPDATE,
                 data: serverData,
             },
-            commit: { type: actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED, meta: { selections, eventId } },
+            commit: { type: actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED, meta: { selections, eventId, listData } },
             rollback: { type: actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED, meta: { selections, eventId } },
         },
     });
