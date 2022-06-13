@@ -12,7 +12,7 @@ import type {
 import type { Props } from './templatesManager.types';
 
 const TemplatesManagerPlain = (props: Props) => {
-    const { templates, onChangeTemplate, ...passOnProps } = props;
+    const { templates, ...passOnProps } = props;
     const {
         currentTemplate,
         onSelectTemplate,
@@ -30,16 +30,13 @@ const TemplatesManagerPlain = (props: Props) => {
             const defaultTemplate = templates.find(t => t.isDefault);
             // $FlowFixMe
             onSelectTemplate(defaultTemplate.id);
-            defaultTemplate && onChangeTemplate && onChangeTemplate(defaultTemplate.id);
             return;
         }
         onSelectTemplate(template.id);
-        onChangeTemplate && onChangeTemplate(template.id);
     }, [
         onSelectTemplate,
         currentTemplate.id,
         templates,
-        onChangeTemplate,
     ]);
 
     return (

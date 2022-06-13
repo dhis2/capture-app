@@ -13,7 +13,13 @@ const useApiTemplate = () => {
     return workingListsTemplatesTEI && workingListsTemplatesTEI.templates;
 };
 
-export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId, selectedTemplateId }: Props) => {
+export const TeiWorkingListsReduxProvider = ({
+    storeId,
+    programId,
+    orgUnitId,
+    selectedTemplateId,
+    onChangeTemplate,
+}: Props) => {
     const program = useTrackerProgram(programId);
     const apiTemplates = useApiTemplate();
 
@@ -22,10 +28,12 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId, se
         lastTransactionOnListDataRefresh,
         listDataRefreshTimestamp,
         records,
+        onSelectTemplate,
+        onAddTemplate,
+        onDeleteTemplate,
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
     const dispatch = useDispatch();
-    const { onSelectTemplate } = commonStateManagementProps;
 
     const onLoadTemplates = useCallback(() => {
         dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE, selectedTemplateId));
@@ -45,6 +53,19 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId, se
         }));
     }, [dispatch, orgUnitId, programId, records]);
 
+    const handleOnSelectTemplate = useCallback((templateId) => {
+        onSelectTemplate(templateId);
+        templateId && onChangeTemplate && onChangeTemplate(templateId);
+    }, [onChangeTemplate, onSelectTemplate]);
+
+    const injectCallbacksForAddTemplate = useCallback((name: string, criteria: Object, data: Object) =>
+        onAddTemplate(name, criteria, data, { onChangeTemplate }),
+    [onAddTemplate, onChangeTemplate]);
+
+    const injectCallbacksForDeleteTemplate = useCallback((template: Object, programIdArg: string) =>
+        onDeleteTemplate(template, programIdArg, { onChangeTemplate }),
+    [onDeleteTemplate, onChangeTemplate]);
+
     return (
         <TeiWorkingListsSetup
             {...commonStateManagementProps}
@@ -55,6 +76,9 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId, se
             records={records}
             orgUnitId={orgUnitId}
             apiTemplates={apiTemplates}
+            onSelectTemplate={handleOnSelectTemplate}
+            onAddTemplate={injectCallbacksForAddTemplate}
+            onDeleteTemplate={injectCallbacksForDeleteTemplate}
         />
     );
 };

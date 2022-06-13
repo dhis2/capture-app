@@ -98,7 +98,6 @@ export type InterfaceProps = $ReadOnly<{|
     updating: boolean,
     updatingWithDialog: boolean,
     programStageId?: string,
-    onChangeTemplate?: (selectedTemplateId: string) => string
 |}>;
 
 export type ListViewPassOnProps = $ReadOnly<{|

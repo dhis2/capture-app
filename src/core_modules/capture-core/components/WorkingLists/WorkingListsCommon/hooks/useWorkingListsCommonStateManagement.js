@@ -42,7 +42,7 @@ import type {
     Sort,
     UpdateFilter,
 } from '../../WorkingListsBase';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '..';
+import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList, Callbacks } from '..';
 
 const useTemplates = (
     dispatch: ReduxDispatch,
@@ -67,7 +67,7 @@ const useTemplates = (
         onSelectTemplate: (...args) => dispatch(selectTemplate(...args, storeId)),
         onLoadTemplates: (...args) => dispatch(fetchTemplates(...args, storeId, workingListsType)),
         onCancelLoadTemplates: () => dispatch(fetchTemplatesCancel(storeId)),
-        onAddTemplate: (name: string, criteria: Object, data: Object) =>
+        onAddTemplate: (name: string, criteria: Object, data: Object, callBacks?: Callbacks) =>
             dispatch(addTemplate(
                 name,
                 criteria, {
@@ -75,6 +75,7 @@ const useTemplates = (
                     storeId,
                     workingListsType,
                 },
+                callBacks,
             )),
         onUpdateTemplate: (template: Object, criteria: Object, data: Object) =>
             dispatch(updateTemplate(
@@ -85,7 +86,8 @@ const useTemplates = (
                     workingListsType,
                 },
             )),
-        onDeleteTemplate: (...args) => dispatch(deleteTemplate(...args, { storeId, workingListsType })),
+        onDeleteTemplate: (template: Object, programId: string, callBacks?: Callbacks) =>
+            dispatch(deleteTemplate(template, programId, { storeId, workingListsType }, callBacks)),
         onSetTemplateSharingSettings: (sharingSettings: SharingSettings, templateId: string) => dispatch(setTemplateSharingSettings(sharingSettings, templateId, storeId)),
     }: {|
         onSelectTemplate: SelectTemplate,

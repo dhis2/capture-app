@@ -4,7 +4,6 @@ import type { TemplatesLoaderOutputProps } from '../TemplatesLoader';
 
 type ExtractedProps = {|
     templates?: WorkingListTemplates,
-    onChangeTemplate?: (selectedTemplateId: string) => string,
 |};
 
 type OptionalExtractedProps = {|

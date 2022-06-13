@@ -18,7 +18,7 @@ import {
 } from '../../../WorkingListsCommon';
 import { getTemplates } from './getTemplates';
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
-import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../../../../utils/routing';
+import { deriveURLParamsFromLocation } from '../../../../../utils/routing';
 
 export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
@@ -45,7 +45,7 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
         }),
     );
 
-export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { mutate, history }: ApiUtils) =>
+export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { mutate }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_ADD),
         filter(({ payload: { workingListsType } }) => workingListsType === TEI_WORKING_LISTS_TYPE),
@@ -65,6 +65,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
                     assignedUserMode,
                     assignedUsers,
                 },
+                callBacks: { onChangeTemplate },
             } = action.payload;
             const trackedEntityInstanceFilters = {
                 name,
@@ -88,17 +89,8 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
             })
                 .then((result) => {
                     const isActiveTemplate = store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
-                    const { programId, orgUnitId, selectedTemplateId, all } = deriveURLParamsFromLocation();
-                    selectedTemplateId &&
-                    history.push(
-                        `/?${buildUrlQueryString({
-                            programId,
-                            orgUnitId,
-                            selectedTemplateId: result.response.uid,
-                        })}${
-                            all !== undefined ? '&all' : ''
-                        }`,
-                    );
+                    onChangeTemplate && onChangeTemplate(result.response.uid);
+
                     return addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate });
                 })
                 .catch((error) => {
@@ -123,28 +115,20 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
         }),
     );
 
-export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore, { mutate, history }: ApiUtils) =>
+export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore, { mutate }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         filter(({ payload: { workingListsType } }) => workingListsType === TEI_WORKING_LISTS_TYPE),
-        concatMap(({ payload: { template, storeId } }) => {
+        concatMap(({ payload: { template, storeId, callBacks: { onChangeTemplate } } }) => {
             const requestPromise = mutate({
                 resource: 'trackedEntityInstanceFilters',
                 id: template.id,
                 type: 'delete',
             })
                 .then(() => {
-                    const { programId, orgUnitId, selectedTemplateId, all } = deriveURLParamsFromLocation();
-                    selectedTemplateId &&
-                    history.push(
-                        `/?${buildUrlQueryString({
-                            programId,
-                            orgUnitId,
-                            selectedTemplateId: `${programId}-default`,
-                        })}${
-                            all !== undefined ? '&all' : ''
-                        }`,
-                    );
+                    const { programId } = deriveURLParamsFromLocation();
+                    onChangeTemplate && onChangeTemplate(`${programId}-default`);
+
                     return deleteTemplateSuccess(template, storeId);
                 })
                 .catch((error) => {

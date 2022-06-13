@@ -2,7 +2,6 @@
 import React, { useCallback, useMemo } from 'react';
 import uuid from 'uuid/v4';
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router-dom';
 import {
     dataElementTypes,
     type TrackerProgram,
@@ -14,7 +13,6 @@ import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../Work
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
 import { convertToTEIFilterMainFilters, convertToTEIFilterAttributes } from '../helpers/TEIFilters/clientConfigToApiTEIFilterQueryConverter';
 import { MAIN_FILTERS } from '../constants';
-import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 
 const DEFAULT_TEMPLATES_LENGTH = 1;
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
@@ -177,8 +175,6 @@ export const TeiWorkingListsSetup = ({
     const filtersOnly = useFiltersOnly(program);
     const staticTemplates = useStaticTemplates();
     const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
-    const history = useHistory();
-    const { programId, selectedTemplateId, all } = useLocationQuery();
 
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
@@ -188,17 +184,6 @@ export const TeiWorkingListsSetup = ({
         sortById,
         sortByDirection,
     });
-
-    const onChangeTemplate = useCallback(
-        id =>
-            selectedTemplateId &&
-            history.push(
-                `/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: id })}${
-                    all !== undefined ? '&all' : ''
-                }`,
-            ),
-        [history, orgUnitId, programId, selectedTemplateId, all],
-    );
 
     const injectArgumentsForAddTemplate = useCallback(
         (name) => {
@@ -267,7 +252,6 @@ export const TeiWorkingListsSetup = ({
             filters={filters}
             sortById={sortById}
             sortByDirection={sortByDirection}
-            onChangeTemplate={onChangeTemplate}
         />
     );
 };

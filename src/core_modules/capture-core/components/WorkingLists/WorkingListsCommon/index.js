@@ -17,5 +17,6 @@ export type {
     RecordsOrder,
     CustomColumnOrder,
     InitialViewConfig,
+    Callbacks,
 } from './types';
 export { TEMPLATE_SHARING_TYPE } from './constants';

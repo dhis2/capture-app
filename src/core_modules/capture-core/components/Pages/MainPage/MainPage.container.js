@@ -55,6 +55,16 @@ const MainPageContainer = () => {
     const dispatchCleanSearchRelatedData = useCallback(() => {
         dispatch(cleanSearchRelatedData());
     }, [dispatch]);
+    const onChangeTemplate = useCallback(
+        id =>
+            selectedTemplateId &&
+            history.push(
+                `/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: id })}${
+                    all !== undefined ? '&all' : ''
+                }`,
+            ),
+        [history, orgUnitId, programId, selectedTemplateId, all],
+    );
 
     useEffect(() => {
         dispatch(updateShowAccessibleStatus(showAllAccessible));
@@ -119,6 +129,7 @@ const MainPageContainer = () => {
                         orgUnitId={orgUnitId}
                         selectedTemplateId={selectedTemplateId}
                         setShowAccessible={setShowAccessible}
+                        onChangeTemplate={onChangeTemplate}
                         error={error}
                         ready={ready}
                     />
