@@ -4,7 +4,7 @@ type PassOnProps = $ReadOnly<{|
     programId: string,
     orgUnitId: string,
     selectedTemplateId?: string,
-    onChangeTemplate?: (selectedTemplateId: string) => string,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
 |}>;
 
 export type PlainProps = $ReadOnly<{|

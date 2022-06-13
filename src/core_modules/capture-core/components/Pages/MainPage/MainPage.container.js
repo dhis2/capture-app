@@ -27,6 +27,16 @@ const showMainPage = ({ programId, orgUnitId, trackedEntityTypeId, displayFrontP
     return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
 };
 
+const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, showAllAccessible, history }) => {
+    orgUnitId &&
+        history.push(
+            `/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId })}`,
+        );
+
+    showAllAccessible &&
+        history.push(`/?${buildUrlQueryString({ programId, selectedTemplateId })}&all`);
+};
+
 const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -56,14 +66,8 @@ const MainPageContainer = () => {
         dispatch(cleanSearchRelatedData());
     }, [dispatch]);
     const onChangeTemplate = useCallback(
-        id =>
-            selectedTemplateId &&
-            history.push(
-                `/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: id })}${
-                    all !== undefined ? '&all' : ''
-                }`,
-            ),
-        [history, orgUnitId, programId, selectedTemplateId, all],
+        id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, history }),
+        [history, orgUnitId, programId, showAllAccessible],
     );
 
     useEffect(() => {
@@ -72,13 +76,7 @@ const MainPageContainer = () => {
 
     useEffect(() => {
         if (programId && trackedEntityTypeId && displayFrontPageList && selectedTemplateId === undefined) {
-            orgUnitId &&
-                history.push(
-                    `/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: `${programId}-default` })}`,
-                );
-
-            showAllAccessible &&
-                history.push(`/?${buildUrlQueryString({ programId, selectedTemplateId: `${programId}-default` })}&all`);
+            handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId, showAllAccessible, history });
         }
     }, [
         selectedTemplateId,

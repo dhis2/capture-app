@@ -1,7 +1,7 @@
 // @flow
 import type { FiltersData } from '../../WorkingListsBase';
 
-export type Callbacks = { callBacks?: { onChangeTemplate?: (selectedTemplateId: string) => string };}
+export type Callbacks = { callBacks?: { onChangeTemplate?: (selectedTemplateId?: string) => void };}
 
 export type RecordsOrder = Array<string>;
 
