@@ -20,7 +20,6 @@ import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 import { topBarActionsActionTypes } from '../../components/TopBarActions';
-import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
@@ -151,14 +150,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [lockedSelectorActionTypes.PROGRAM_ID_RESET]: state => ({
         ...state,
         locationSwitchInProgress: true,
-    }),
-    [viewEventPageActionTypes.ORG_UNIT_ID_CUSTOM_RESET]: state => ({
-        ...state,
-        page: null,
-    }),
-    [viewEventPageActionTypes.PROGRAM_ID_CUSTOM_RESET]: state => ({
-        ...state,
-        page: null,
     }),
     [searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE]: state => ({
         ...state,

@@ -29,6 +29,7 @@ export const useLifecycle = ({
     programAPI,
     orgUnitId,
     clientAttributesWithSubvalues,
+    userRoles,
     dataEntryId,
     itemId,
     geometry,
@@ -36,6 +37,7 @@ export const useLifecycle = ({
     programAPI: any,
     orgUnitId: string,
     clientAttributesWithSubvalues: Array<any>,
+    userRoles: Array<string>,
     dataEntryId: string,
     itemId: string,
     geometry: ?Geometry,
@@ -96,6 +98,7 @@ export const useLifecycle = ({
                     otherEvents,
                     dataElements,
                     enrollmentData: enrollment,
+                    userRoles,
                 }),
             );
         }
@@ -114,6 +117,7 @@ export const useLifecycle = ({
         dataElements,
         enrollment,
         clientGeometryValues,
+        userRoles,
     ]);
 
     return {
@@ -127,5 +131,6 @@ export const useLifecycle = ({
         otherEvents,
         dataElements,
         enrollment,
+        userRoles,
     };
 };

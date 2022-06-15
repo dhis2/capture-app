@@ -29,6 +29,8 @@ export type ContainerProps = $ReadOnly<{|
   searchStatus: string,
   error: boolean,
   ready: boolean,
+  programId: string,
+  orgUnitId: string,
 |}
 >
 

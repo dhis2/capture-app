@@ -1,0 +1,1405 @@
+# 
+# Translators:
+# Valeriu Plesca <vplesca@gmail.com>, 2022
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
+"Language-Team: Romanian (https://www.transifex.com/hisp-uio/teams/100509/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+msgid "Choose one or more dates..."
+msgstr "Selectați una sau mai multe date..."
+
+msgid "Choose a date..."
+msgstr "Selectați data..."
+
+msgid "Today"
+msgstr "Astăzi"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
+"Un posibil motiv este că browserul sau modul (de exemplu, modul de "
+"confidențialitate) nu este suportat. Consultați jurnalul pentru detalii."
+
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr ""
+"Ați deschis o altă versiune a aplicației Capture în același domeniu. În "
+"prezent, aplicația Capture acceptă rularea simultană a unei singure versiuni"
+" (în același domeniu). Vă rugăm să reîmprospătați această pagină dacă doriți"
+" să utilizați din nou această versiune, dar rețineți că aceasta va închide "
+"alte versiuni."
+
+msgid "Organisation unit"
+msgstr "Unitate organizațională"
+
+msgid "Date of enrollment"
+msgstr "Data înrolării"
+
+msgid "Last updated"
+msgstr "Ultima actualizare"
+
+msgid "Enrolled"
+msgstr "Înrolat"
+
+msgid "Previously enrolled"
+msgstr "Înrolat anterior"
+
+msgid "This value is validating"
+msgstr "Această valoare se validează"
+
+msgid "Async field update failed"
+msgstr ""
+
+msgid "A value is required"
+msgstr "Este necesară o valoare"
+
+msgid "Please provide a valid number"
+msgstr "Introduceți un număr valid"
+
+msgid "Please provide a valid integer"
+msgstr "Introduceți un număr întreg valid"
+
+msgid "Please provide a positive integer"
+msgstr "Introduceți un număr întreg pozitiv"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Introduceți zero sau un număr întreg pozitiv"
+
+msgid "Please provide a negative integer"
+msgstr "Introduceți un număr întreg negativ"
+
+msgid "Please provide a valid date"
+msgstr "Introduceți o dată validă"
+
+msgid "A date in the future is not allowed"
+msgstr "Nu este permisă o dată în viitor"
+
+msgid "Please provide a valid date and time"
+msgstr "Introduceți o dată și o oră valide"
+
+msgid "Please provide a valid time"
+msgstr "Introduceți o oră valabilă"
+
+msgid "Please provide a valid percentage"
+msgstr "Introduceți un procentaj valid"
+
+msgid "Please provide a valid url"
+msgstr "Introduceți o adresă URL validă"
+
+msgid "Please provide a valid email address"
+msgstr "Introduceți o adresă de e-mail validă"
+
+msgid "Please provide a valid age"
+msgstr "Introduceți o vârstă valabilă"
+
+msgid "Please provide a valid phone number"
+msgstr "Introduceți un număr de telefon valid"
+
+msgid "Please provide a valid organisation unit"
+msgstr ""
+
+msgid "Please provide valid coordinates"
+msgstr "Introduceți coordonate valide"
+
+msgid "This value already exists"
+msgstr "Această valoare deja există"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "„De la” nu poate fi mai mare decât „Pînă la”"
+
+msgid "Checking..."
+msgstr "Verificare..."
+
+msgid "Area"
+msgstr ""
+
+msgid "Coordinate"
+msgstr "Coordonate"
+
+msgid "Enrollment"
+msgstr "Înrolare"
+
+msgid "A future date is not allowed"
+msgstr "Nu este permisă o dată viitoare"
+
+msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
+msgstr ""
+"Salvare la {{trackedEntityName}} în {{programName}} în {{orgUnitName}}."
+
+msgid "Cancel"
+msgstr "Anulare"
+
+msgid "Metadata error. see log for details"
+msgstr ""
+
+msgid "Assigned user"
+msgstr "Utilizatorul atribuit"
+
+msgid "Search for user"
+msgstr "Căutare utilizator"
+
+msgid "Complete event"
+msgstr "Eveniment complet"
+
+msgid "Basic info"
+msgstr "Informații de bază"
+
+msgid "Status"
+msgstr "Stare"
+
+msgid "Comments"
+msgstr "Comentarii"
+
+msgid "Relationships"
+msgstr "Relații"
+
+msgid "Assignee"
+msgstr ""
+
+msgid "Saving to {{programName}} in {{orgUnitName}}"
+msgstr ""
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"Acesta nu este un program de tip eveniment sau metadatele sunt corupte. "
+"Consultați jurnalul pentru detalii."
+
+msgid "This event"
+msgstr "Acest eveniment"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+"Relație de tipul {{relationshipTypeName}} către {{entityName}} deja există"
+
+msgid "Active"
+msgstr "Activ"
+
+msgid "Completed"
+msgstr "Complet"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr ""
+"Vă rugăm să adăugați sau să anulați comentariul înainte de a salva "
+"evenimentul"
+
+msgid "Save and add another"
+msgstr "Salvare și adăugarea altuia"
+
+msgid "Save and exit"
+msgstr "Salvare și ieșire"
+
+msgid "Finish"
+msgstr "Finalizare"
+
+msgid "Save without completing"
+msgstr "Salvare fără a completa"
+
+msgid "Complete"
+msgstr ""
+
+msgid "No write access"
+msgstr "Fără acces la scriere"
+
+msgid "New {{titleText}}"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "events added"
+msgstr "evenimentele au fost adăugate"
+
+msgid "No events added"
+msgstr "Nu au fost adăugate evenimente"
+
+msgid "New event relationship"
+msgstr ""
+
+msgid "Adding relationship to event."
+msgstr "Adăugarea relației la eveniment."
+
+msgid "Go back to event without saving relationship"
+msgstr ""
+
+msgid "Unsaved changes"
+msgstr "Modificări nesalvate"
+
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "Yes, discard"
+msgstr ""
+
+msgid "No, stay here"
+msgstr ""
+
+msgid "New event"
+msgstr "Eveniment nou"
+
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
+
+msgid "Save"
+msgstr "salva"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr "Salvarea la {{trackedEntityName}}"
+
+msgid "without"
+msgstr "fără"
+
+msgid "enrollment"
+msgstr "înrolare"
+
+msgid "in"
+msgstr "în"
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
+msgid "An error has occurred. See log for details"
+msgstr "S-a produs o eroare. Consultați jurnalul pentru detalii"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+
+msgid "You have already registered this {{attributeName}}"
+msgstr ""
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+"Un {{trackedEntityTypeName}} cu acest {{attributeName}} este deja "
+"înregistrat"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Afișați {{trackedEntityTypeName}} înregistrat"
+
+msgid "Registered person"
+msgstr "Persoană înregistrată"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Părăsirea acestei pagini presupune pierderea modificărilor pe care le-ați "
+"făcut la acest eveniment."
+
+msgid "validation failed"
+msgstr "validarea a eșuat"
+
+msgid "Errors"
+msgstr "Erori"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Indicators"
+msgstr "Indicatori"
+
+msgid "Warnings"
+msgstr "Avertizări"
+
+msgid "Warnings found"
+msgstr "Avertizări găsite"
+
+msgid "Abort"
+msgstr ""
+
+msgid "Back to form"
+msgstr "Înapoi la formă"
+
+msgid "Save anyway"
+msgstr "Salvare oricum"
+
+msgid "Validation errors and warnings"
+msgstr "Erori de validare și avertizări"
+
+msgid "Validation errors"
+msgstr "Erori de validare"
+
+msgid "Validation warnings"
+msgstr "Avertizări de validare"
+
+msgid "Some operations are still runnning. Please wait.."
+msgstr "Unele operațiuni sunt încă în desfășurare. Așteptați.."
+
+msgid "Operations running"
+msgstr "Operațiuni în derulare"
+
+msgid "Sort"
+msgstr "Sortare"
+
+msgid "No events to display"
+msgstr "Nu există evenimente pentru afișare"
+
+msgid "Data for offline list not present"
+msgstr "Datele pentru lista offline nu sunt prezente"
+
+msgid "Close"
+msgstr "Închidere"
+
+msgid "Please select the user"
+msgstr "Selectați utilizatorul"
+
+msgid "Me"
+msgstr ""
+
+msgid "Anyone"
+msgstr "Oricine"
+
+msgid "None"
+msgstr ""
+
+msgid "Select user"
+msgstr "Selectați utilizatorul"
+
+msgid "to"
+msgstr ""
+
+msgid "Days in the future"
+msgstr "Zile în viitor"
+
+msgid "From"
+msgstr "Din"
+
+msgid "Days in the past"
+msgstr "Zile în trecut"
+
+msgid "To"
+msgstr "Pînă la"
+
+msgid "This week"
+msgstr "Săptămâna aceasta"
+
+msgid "This month"
+msgstr "Luna aceasta"
+
+msgid "This Year"
+msgstr "Anul acesta"
+
+msgid "Last week"
+msgstr "Săptămâna trecută"
+
+msgid "Last month"
+msgstr "Luna trecută"
+
+msgid "Last 3 months"
+msgstr "Ultimele 3 luni"
+
+msgid "Absolute range"
+msgstr "Interval absolut"
+
+msgid "Relative range"
+msgstr "Interval relativ"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Contains text"
+msgstr "Conține text"
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "mm/dd/yyyy"
+msgstr "mm/dd/yyyy"
+
+msgid "Years"
+msgstr "Ani"
+
+msgid "Months"
+msgstr "Luni"
+
+msgid "Days"
+msgstr "Zile"
+
+msgid "Uploading file"
+msgstr "Încărcare fișier"
+
+msgid "selected"
+msgstr "selectat"
+
+msgid "Delete"
+msgstr "Lichidare"
+
+msgid "Select file"
+msgstr "Selectare fișier"
+
+msgid "No"
+msgstr "Nu"
+
+msgid "Uploading image"
+msgstr "Încărcare imagine"
+
+msgid "Select image"
+msgstr "Selectați imaginea"
+
+msgid "Search"
+msgstr "Căutare"
+
+msgid "Clear"
+msgstr ""
+
+msgid "No results"
+msgstr "Nu există rezultate"
+
+msgid "Description"
+msgstr "Descriere"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Icon for {{field}}"
+msgstr "Pictograma pentru {{field}}"
+
+msgid "start typing to search"
+msgstr "începeți să tastați pentru a căuta"
+
+msgid "suggestions could not be retrieved"
+msgstr "sugestiile nu au putut fi preluate"
+
+msgid "No items to display"
+msgstr "Nu există elemente pentru afișare"
+
+msgid "Select columns"
+msgstr "Selectați coloanele"
+
+msgid "Columns to show in table"
+msgstr "Coloane pentru afișare în tabel"
+
+msgid "Column"
+msgstr "Coloană"
+
+msgid "Update"
+msgstr "Actualizare"
+
+msgid "Reset filter"
+msgstr "Resetare filtru"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr ""
+
+msgid "after or equal to {{date}}"
+msgstr "după sau egal cu {{data}}"
+
+msgid "before or equal to {{date}}"
+msgstr "înainte sau egal cu {{date}}"
+
+msgid "greater than or equal to"
+msgstr "mai mare sau egal cu"
+
+msgid "less than or equal to"
+msgstr "mai mic sau egal cu"
+
+msgid "More filters"
+msgstr "Mai multe filtre"
+
+msgid "Rows per page"
+msgstr "Rânduri pe pagină"
+
+msgid "Could not get organisation unit"
+msgstr "Nu s-a putut obține unitatea organizațională"
+
+msgid "Program doesn't exist"
+msgstr "Programul nu există"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "New"
+msgstr "Nou"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "{{trackedEntityName}} nou în {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Căutare un {{trackedEntityName}} în {{programName}}"
+
+msgid "Clear selections"
+msgstr ""
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr "Începe din nou"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Sunteți sigur? Toate datele nesalvate se vor pierde."
+
+msgid "Accept"
+msgstr "Accept"
+
+msgid "Registering Organisation Unit"
+msgstr "Unitatea organizațională de înregistrare"
+
+msgid "Select"
+msgstr "Selectare"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "No programs available."
+msgstr "Nu există programe disponibile."
+
+msgid "Show all"
+msgstr ""
+
+msgid "Selected program"
+msgstr "Programul selectat"
+
+msgid "Some programs are being filtered."
+msgstr "Unele programe sunt filtrate."
+
+msgid "Select program"
+msgstr "Selectare program"
+
+msgid "Selected"
+msgstr "Selectat"
+
+msgid "Online"
+msgstr "Online"
+
+msgid "Offline"
+msgstr "Offline"
+
+msgid "Syncing"
+msgstr "Sincronizare"
+
+msgid "Add comment"
+msgstr "Adăugare comentariu"
+
+msgid "You dont have access to write comments"
+msgstr "Nu aveți acces să scrieți comentarii"
+
+msgid "Write comment"
+msgstr "Scrieți comentariu"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr "Nu, anulare"
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr "Renunțare la {{programName}}"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "Enrollment Dashboard"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "Quick actions"
+msgstr "Acțiuni rapide"
+
+msgid "New Event"
+msgstr "Eveniment nou"
+
+msgid "Schedule an event"
+msgstr "Programare un eveniment"
+
+msgid "Make referral"
+msgstr ""
+
+msgid "No available program stages"
+msgstr "Nu există etape de program disponibile"
+
+msgid "Program stage not found"
+msgstr "Etapa programului nu a fost găsită"
+
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
+msgstr ""
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid "Choose an enrollment to view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr "{{teiDisplayName}} nu este înrolat în acest program."
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr "Înrolare pe {{teiDisplayName}} în acest program."
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr "Înrolare un nou {{selectedTetName}} în acest program."
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr "Crearea unui eveniment nou în acest program."
+
+msgid "View working list in this program."
+msgstr ""
+
+msgid "Page is missing required values from URL"
+msgstr "În pagină lipsesc valorile obligatorii din URL"
+
+msgid "Program is not valid"
+msgstr "Programul nu este valid"
+
+msgid "Org unit is not valid with current program"
+msgstr "Unitatea organizațională nu este validă cu programul curent"
+
+msgid "There was an error opening the Page"
+msgstr "A apărut o eroare la deschiderea paginii"
+
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
+
+msgid "There was an error loading the page"
+msgstr "A apărut o eroare la încărcarea paginii"
+
+msgid "Choose a registering unit to start reporting"
+msgstr "Alegeți o unitate de înregistrare pentru a începe raportarea"
+
+msgid "There are no feedbacks for this event"
+msgstr "Nu există feedback pentru acest eveniment"
+
+msgid "There are no indicators for this event"
+msgstr "Nu există indicatori pentru acest eveniment"
+
+msgid "Program stage is invalid"
+msgstr "Etapa programului este nevalidă"
+
+msgid "Report"
+msgstr "Raport"
+
+msgid "Schedule"
+msgstr ""
+
+msgid "Refer"
+msgstr ""
+
+msgid "You can’t add any more events in this program"
+msgstr "Nu mai puteți adăuga evenimente în acest program"
+
+msgid "Cancel without saving"
+msgstr "Anulare fără salvare"
+
+msgid "Choose a stage for a new event"
+msgstr "Alegeți o etapă pentru un nou eveniment"
+
+msgid "Program Stages could not be loaded"
+msgstr "Etapele programului nu au putut fi încărcate"
+
+msgid "stage"
+msgstr "etapă"
+
+msgid "Enrollment{{escape}} View Event"
+msgstr ""
+
+msgid "Enrollment{{escape}} Edit Event"
+msgstr ""
+
+msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "There are no feedback for this event"
+msgstr "Nu există feedback pentru acest eveniment"
+
+msgid "Registered events"
+msgstr "Evenimente înregistrate"
+
+msgid "Please select {{category}}."
+msgstr "Selectați {{category}}."
+
+msgid "Or see all records accessible to you in {{program}} "
+msgstr "Sau vedeți toate înregistrările accesibile dvs. în {{program}}"
+
+msgid "Or see all events accessible to you in {{program}}"
+msgstr "Sau vedeți toate evenimentele accesibile dvs. în {{program}}"
+
+msgid "Please select an organisation unit."
+msgstr "Selectați o unitate organizațională."
+
+msgid "Choose the {{missingCategories}} to start reporting"
+msgstr ""
+
+msgid "Save as new"
+msgstr "Salvare ca nou"
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "View enrollment"
+msgstr "Vizualizare înrolare"
+
+msgid "Create for"
+msgstr "Creare pentru"
+
+msgid ""
+"You can also choose a program from the top bar and create in that program"
+msgstr ""
+"De asemenea, puteți alege un program din bara de sus și puteți crea în acel "
+"program"
+
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save new"
+msgstr ""
+
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Link"
+msgstr ""
+
+msgid "Save as new {{trackedEntityName}}"
+msgstr "Salvați ca {{trackedEntityName}} nou"
+
+msgid "Organisation Unit"
+msgstr "Unitate Organizațională"
+
+msgid "Registration"
+msgstr "Înregistrare"
+
+msgid "Search results"
+msgstr "Rezultatele cautarii"
+
+msgid "No {{trackedEntityTypeName}} found."
+msgstr "Nu a fost găsit niciun {{trackedEntityTypeName}}."
+
+msgid "New search"
+msgstr "Căutare nouă"
+
+msgid "Edit search"
+msgstr "Editare căutarea"
+
+msgid "Link to an existing {{trackedEntityType}}"
+msgstr ""
+
+msgid "Create new {{trackedEntityType}}"
+msgstr "Crearea unui nou {{trackedEntityType}}"
+
+msgid "Register"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+
+msgid "Search {{name}}"
+msgstr "Căutare {{name}}"
+
+msgid "Search by {{name}}"
+msgstr "Căutare după {{name}}"
+
+msgid "Search by attributes"
+msgstr "Căutare după atribute"
+
+msgid "Back"
+msgstr "Înapoi"
+
+msgid "Search for {{titleText}}"
+msgstr "Căutare {{titleText}}"
+
+msgid "Search for"
+msgstr "Căutare"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"De asemenea, puteți alege un program din bara de sus și puteți căuta în "
+"programul respectiv"
+
+msgid "No results found"
+msgstr "Nu au fost găsite rezultate"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Puteți modifica termenii de căutare și căuta din nou pentru a găsi ceea ce "
+"căutați."
+
+msgid "Back to search"
+msgstr "Înapoi la căutare"
+
+msgid "An error has occurred"
+msgstr "A avut loc o eroare"
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+
+msgid "Too many results"
+msgstr "Prea multe rezultate"
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "View active enrollment"
+msgstr "Vizualizare înrolare activă"
+
+msgid "Re-enroll"
+msgstr "Re-înrolare"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr "Căutare în toate programele"
+
+msgid "events"
+msgstr "evenimente"
+
+msgid "event"
+msgstr "eveniment"
+
+msgid "You dont have access to edit this event"
+msgstr "Nu aveți acces pentru a edita acest eveniment"
+
+msgid "Edit event"
+msgstr "Editare eveniment"
+
+msgid "Event details"
+msgstr "Detaliile evenimentului"
+
+msgid ""
+"Leaving this page will discard any selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "No one is assigned to this event"
+msgstr ""
+
+msgid "Assign"
+msgstr "Atribuire"
+
+msgid "Event assigned to {{name}}"
+msgstr "Eveniment atribuit lui {{name}}"
+
+msgid "Feedbacks"
+msgstr "Feedback-uri"
+
+msgid "Show all events"
+msgstr "Afișarea tuturor evenimentelor"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Evenimentul nu a putut fi încărcat. Sunteți sigur ca exista?"
+
+msgid "Event could not be loaded"
+msgstr "Evenimentul nu a putut fi încărcat"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Unitatea organizațională nu a putut fi încărcată"
+
+msgid "Possible duplicates found"
+msgstr "S-au găsit posibile duplicate"
+
+msgid "An error occurred loading possible duplicates"
+msgstr "A apărut o eroare la încărcarea posibilelor duplicate"
+
+msgid "You dont have access to delete this relationship"
+msgstr "Nu aveți acces pentru a șterge această relație"
+
+msgid "You dont have access to create any relationships"
+msgstr "Nu aveți acces pentru a crea relații"
+
+msgid "Add relationship"
+msgstr "Adăugare relație"
+
+msgid "Results found"
+msgstr "Rezultate găsite"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Căutare {{uniqueAttrName}}"
+
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+"Completați cel puțin {{minAttributesRequired}} atribute pentru a căuta"
+
+msgid "To work with the selected program,"
+msgstr ""
+
+msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Save comment"
+msgstr "Salvare comentariu"
+
+msgid "Enrollment actions"
+msgstr "Acțiuni de înrolare"
+
+msgid "We are processing your request."
+msgstr "Procesăm cererea dvs."
+
+msgid "Add new"
+msgstr "Adăugare nou"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr "În acest program este permisă o singură înrolare per {{tetName}}"
+
+msgid "Reactivate"
+msgstr "Reactivare"
+
+msgid "Mark as cancelled"
+msgstr "Marcare ca anulat"
+
+msgid "Mark incomplete"
+msgstr "Marcare ca incomplet"
+
+msgid "Delete enrollment"
+msgstr "Lichidare înrolare"
+
+msgid ""
+"Are you sure you want to delete this enrollment? This will permanently "
+"remove the current enrollment."
+msgstr ""
+
+msgid "Yes, delete enrollment."
+msgstr "Da, șterg înrolarea."
+
+msgid "Remove mark for follow-up"
+msgstr ""
+
+msgid "Mark for follow-up"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr ""
+
+msgid "Enrollment date"
+msgstr "Data înrolării"
+
+msgid "Incident date"
+msgstr "Data incidentului"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr "Deținut de {{ownerOrgUnit}}"
+
+msgid "Last updated {{date}}"
+msgstr "Ultima actualizare {{date}}"
+
+msgid "Cancelled"
+msgstr "Anulat"
+
+msgid "Comments about this enrollment"
+msgstr "Comentarii despre această înrolare"
+
+msgid "Write a comment about this enrollment"
+msgstr "Scrierea unui comentariu despre această înrolare"
+
+msgid "This enrollment doesn't have any comments"
+msgstr "Această înrolare nu are niciun comentariu"
+
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
+msgid "program or stage is invalid"
+msgstr "programul sau etapa este nevalidă"
+
+msgid "Error"
+msgstr "Eroare"
+
+msgid "Warning"
+msgstr "Avertizare"
+
+msgid "Comments about this event"
+msgstr "Comentarii despre acest eveniment"
+
+msgid "Write a comment about this event"
+msgstr "Scrierea unui comentariu despre acest eveniment"
+
+msgid "This event doesn't have any comments"
+msgstr "Acest eveniment nu are comentarii"
+
+msgid "stage not found in rules execution"
+msgstr ""
+
+msgid "Delete event"
+msgstr "Lichidare eveniment"
+
+msgid "Yes, delete event"
+msgstr "Da, lichidez evenimentul"
+
+msgid "Event completed"
+msgstr "Eveniment finalizat"
+
+msgid "Back to all stages and events"
+msgstr "Înapoi la toate etapele și evenimentele"
+
+msgid "Schedule date info"
+msgstr ""
+
+msgid ""
+"This date is the suggested scheduled date based on the intervals defined, \n"
+"                    it can be adjusted if needed."
+msgstr ""
+
+msgid "This date is {{count}} days {{position}} the suggested date."
+msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "after"
+msgstr "după"
+
+msgid "before"
+msgstr "pînă la"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid ""
+"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
+msgid "Schedule info"
+msgstr ""
+
+msgid "Schedule date / Due date"
+msgstr ""
+
+msgid "Event comments"
+msgstr "Comentarii la eveniment"
+
+msgid "Write a comment about this scheduled event"
+msgstr ""
+
+msgid ""
+"Change information about this {{trackedEntityName}} here. To change "
+"information about this enrollment, use the Edit button in the in the "
+"Enrollment box on this dashboard"
+msgstr ""
+
+msgid " Loading..."
+msgstr "Încărcare..."
+
+msgid "Save changes"
+msgstr "Salvarea modificărilor"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "There is a problem with this form"
+msgstr "Există o problemă cu acest formular"
+
+msgid "There are warnings in this form"
+msgstr "Există avertismente în această formă"
+
+msgid "There was a problem saving changes"
+msgstr "A apărut o problemă la salvarea modificărilor"
+
+msgid "Try again or contact your system administrator for support"
+msgstr ""
+"Încercați din nou sau contactați administratorul de sistem pentru asistență"
+
+msgid "tracked entity instance"
+msgstr ""
+
+msgid "Fix errors in the form to continue."
+msgstr "Corectați erorile din formular pentru a continua."
+
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "{{TETName}} profile"
+msgstr ""
+
+msgid "Edit"
+msgstr "Editare"
+
+msgid "New {{ eventName }} event"
+msgstr "Eveniment nou {{ eventName }}"
+
+msgid "This event is not yet preserved and cannot be edited"
+msgstr ""
+
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset list"
+msgstr "Resetare listă"
+
+msgid "Go to full {{ eventName }}"
+msgstr "Accesare {{ eventName }} complet"
+
+msgid "This stage can only have one event"
+msgstr "Această etapă poate avea un singur eveniment"
+
+msgid "Events could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "Report date"
+msgstr "Data raportului"
+
+msgid "Registering unit"
+msgstr "Unitate de înregistrare"
+
+msgid "Due date"
+msgstr ""
+
+msgid "{{ totalEvents }} events"
+msgstr "{{ totalEvents }} evenimente"
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr "Etape și Evenimente"
+
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr "Descărcare ca JSON"
+
+msgid "Download as XML"
+msgstr "Descărcare ca XML"
+
+msgid "Download as CSV"
+msgstr "Descărcare ca CSV"
+
+msgid "Download with current filters"
+msgstr "Descărcare cu filtrele actuale"
+
+msgid "Download data..."
+msgstr "Descărcare date..."
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Enrollment status"
+msgstr "Starea înrolării"
+
+msgid "Assigned to"
+msgstr ""
+
+msgid "Registration Date"
+msgstr "Data Înregistrării"
+
+msgid "Inactive"
+msgstr "Inactiv"
+
+msgid "Working list could not be updated"
+msgstr ""
+
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr ""
+
+msgid "Update view"
+msgstr "Actualizare vizualizarea"
+
+msgid "Save current view..."
+msgstr "Salvarea vizualizării curente..."
+
+msgid "Save current view as..."
+msgstr "Salvarea vizualizării curente ca..."
+
+msgid "Delete view"
+msgstr "Ștergere vizualizare"
+
+msgid "Share view..."
+msgstr "Partajare vizualizarea..."
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr ""
+
+msgid "Confirm"
+msgstr "Confirmare"
+
+msgid "Save As view"
+msgstr ""
+
+msgid "View name"
+msgstr ""
+
+msgid "Show Less"
+msgstr ""
+
+msgid "Show All"
+msgstr ""
+
+msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr ""
+
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Overdue"
+msgstr ""
+
+msgid "Skipped"
+msgstr ""
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Program not found"
+msgstr ""
+
+msgid "Program is not a tracker program"
+msgstr ""
+
+msgid "Error saving event"
+msgstr "Eroare la salvarea evenimentului"
+
+msgid "Could not save event"
+msgstr "Evenimentul nu a putut fi salvat"
+
+msgid "Could not delete event"
+msgstr "Evenimentul nu a putut fi lichidat"
+
+msgid "Could not save working list"
+msgstr ""
+
+msgid "Could not add working list"
+msgstr ""
+
+msgid "Could not delete working list"
+msgstr ""
+
+msgid "Organisation unit search failed."
+msgstr "Căutarea unității organizaționale a eșuat."
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr "Eroare la salvarea înrolării"
+
+msgid "Error saving the enrollment event"
+msgstr "Eroare la salvarea evenimentului de înrolare"
+
+msgid "Error deleting the enrollment event"
+msgstr "Eroare la lichidarea evenimentului de înrolare"
+
+msgid "Error editing the event, the changes made were not saved"
+msgstr ""
+
+msgid "Set coordinate"
+msgstr "Setarea coordonatelor"
+
+msgid "Page {{currentPage}}"
+msgstr "Pagina {{currentPage}}"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Time"
+msgstr ""
+
+msgid "From date"
+msgstr "Din data"
+
+msgid "From time"
+msgstr "De la ora"
+
+msgid "To date"
+msgstr "Până la data"
+
+msgid "To time"
+msgstr "Pînă la ora"
+
+msgid "error encountered during field validation"
+msgstr "eroare întâlnită în timpul validării câmpului"
+
+msgid "error"
+msgstr "eroare"
+
+msgid "Delete polygon"
+msgstr "Lichidare poligon"
+
+msgid "Set area"
+msgstr ""
+
+msgid "Compatibility mode"
+msgstr "Mod de compatibilitate"

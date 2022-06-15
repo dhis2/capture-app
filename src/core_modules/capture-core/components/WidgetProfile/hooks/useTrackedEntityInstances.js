@@ -37,6 +37,22 @@ export const useTrackedEntityInstances = (
         ),
     );
 
+    const { loading: tetLoading, data: tetData, refetch: refetchTET } = useDataQuery(
+        useMemo(
+            () => ({
+                trackedEntityType: {
+                    resource: 'trackedEntityTypes',
+                    id: ({ variables: { tetId } }) => tetId,
+                    params: {
+                        fields: 'displayName',
+                    },
+                },
+            }),
+            [],
+        ),
+        { lazy: true },
+    );
+
     useEffect(() => {
         if (data?.trackedEntityInstance?.attributes?.length > 0) {
             setTrackedEntityInstanceAttributes(
@@ -61,10 +77,22 @@ export const useTrackedEntityInstances = (
     }, [storedAttributeValues]);
 
     useEffect(() => {
+        if (data?.trackedEntityInstance?.trackedEntityType) {
+            refetchTET({ variables: { tetId: data?.trackedEntityInstance?.trackedEntityType } });
+        }
+    }, [data?.trackedEntityInstance?.trackedEntityType, refetchTET]);
+
+    useEffect(() => {
         if (storedGeometry) {
             setGeometry(storedGeometry);
         }
     }, [storedGeometry]);
 
-    return { error, loading, trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes, geometry };
+
+    return { error,
+        loading,
+        trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes,
+        trackedEntityTypeName: !tetLoading && tetData?.trackedEntityType?.displayName,
+        geometry,
+    };
 };

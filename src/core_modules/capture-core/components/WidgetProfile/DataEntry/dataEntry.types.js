@@ -30,4 +30,5 @@ export type Props = {|
     modalState: string,
     onSaveExternal?: (eventServerValues: any, uid: string) => void,
     geometry: ?Geometry,
+    userRoles: Array<string>,
 |};

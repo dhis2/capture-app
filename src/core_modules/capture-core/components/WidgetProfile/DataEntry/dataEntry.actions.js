@@ -61,6 +61,7 @@ type Context = {
     otherEvents?: ?EventsData,
     dataElements: ?DataElements,
     enrollment?: ?Enrollment,
+    userRoles: Array<string>,
     state: ReduxState,
 };
 
@@ -76,6 +77,7 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
         otherEvents,
         dataElements,
         enrollment,
+        userRoles,
     } = context;
     const { dataEntryId, itemId, elementId, value, uiState } = innerAction.payload || {};
     const fieldData: FieldData = {
@@ -96,6 +98,7 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
         rulesContainer,
         otherEvents,
         dataElements,
+        userRoles,
     });
 
     return batchActions(

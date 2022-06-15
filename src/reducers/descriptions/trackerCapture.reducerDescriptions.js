@@ -70,8 +70,6 @@ import {
     generatedUniqueValuesCacheDesc,
 } from 'capture-core/reducers/descriptions/generatedUniqueValuesCache.reducerDescription';
 
-import { dataEntriesSearchGroupResultsReducerDesc } from 'capture-core/components/DataEntryUtils';
-
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
 import { feedbackDesc } from './feedback.reducerDescription';
@@ -99,7 +97,6 @@ export const reducerDescriptions = [
     dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
-    dataEntriesSearchGroupResultsReducerDesc,
     dataEntriesInProgressListDesc,
     feedbackDesc,
     formsValuesDesc,
