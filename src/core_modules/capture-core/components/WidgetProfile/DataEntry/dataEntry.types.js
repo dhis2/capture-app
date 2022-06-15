@@ -31,4 +31,5 @@ export type Props = {|
     onSaveExternal?: (eventServerValues: any, uid: string) => void,
     geometry: ?Geometry,
     userRoles: Array<string>,
+    trackedEntityName: string,
 |};

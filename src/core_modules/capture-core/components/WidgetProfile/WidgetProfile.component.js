@@ -24,6 +24,9 @@ const styles = {
     },
 };
 
+const showEditModal = (loading, error, showEdit, modalState) =>
+    !loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE;
+
 const WidgetProfilePlain = ({
     teiId,
     programId,
@@ -119,7 +122,7 @@ const WidgetProfilePlain = ({
             >
                 {renderProfile()}
             </Widget>
-            {!loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE && (
+            {showEditModal(loading, error, showEdit, modalState) && (
                 <DataEntry
                     onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
                     onDisable={() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE)}
@@ -132,6 +135,7 @@ const WidgetProfilePlain = ({
                     onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}
                     modalState={modalState}
                     geometry={geometry}
+                    trackedEntityName={trackedEntityTypeName}
                 />
             )}
         </div>

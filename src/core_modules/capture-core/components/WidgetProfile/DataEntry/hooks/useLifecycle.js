@@ -1,5 +1,5 @@
 // @flow
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useOrganisationUnit } from 'capture-core/dataQueries/useOrganisationUnit';
 import type {
@@ -60,7 +60,6 @@ export const useLifecycle = ({
     });
     const programTrackedEntityAttributes: TrackedEntityAttributes = useProgramTrackedEntityAttributes(programAPI);
     const optionSets: OptionSets = useOptionSets(programTrackedEntityAttributes, dataElements);
-    const trackedEntityName: string = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
 
     useEffect(() => {
         if (Object.entries(formValues).length > 0) {
@@ -127,7 +126,6 @@ export const useLifecycle = ({
         rulesContainer,
         formFoundation,
         state,
-        trackedEntityName,
         otherEvents,
         dataElements,
         enrollment,
