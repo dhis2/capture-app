@@ -1,3 +1,10 @@
+## [100.5.8](https://github.com/dhis2/capture-app/compare/v100.5.7...v100.5.8) (2022-06-15)
+
+
+### Bug Fixes
+
+* [DHIS2-13396] use display form name on widget profile ([#2853](https://github.com/dhis2/capture-app/issues/2853)) ([d338edd](https://github.com/dhis2/capture-app/commit/d338edd2ff6b9eb1c5315c005c59ec4394075541))
+
 ## [100.5.7](https://github.com/dhis2/capture-app/compare/v100.5.6...v100.5.7) (2022-06-09)
 
 
