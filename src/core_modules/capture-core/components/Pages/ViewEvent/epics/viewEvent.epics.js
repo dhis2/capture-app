@@ -32,10 +32,14 @@ import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorking
 import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
 
-export const getEventOpeningFromEventListEpic = (action$: InputObservable) =>
+export const getEventOpeningFromEventListEpic = (
+    action$: InputObservable,
+    _: ReduxStore,
+    { absoluteApiPath }: ApiUtils,
+) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        switchMap(({ payload: { eventId } }) => getEvent(eventId)
+        switchMap(({ payload: { eventId } }) => getEvent(eventId, absoluteApiPath)
             .then(eventContainer => (eventContainer ? Promise.all([eventContainer, getRulesEngineOrgUnit(eventContainer.event.orgUnitId)]) : []))
             .then(([eventContainer, orgUnit]) => {
                 if (!eventContainer) {
@@ -56,13 +60,13 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable) =>
         ),
     );
 
-export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
+export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventActionTypes.VIEW_EVENT_FROM_URL),
         switchMap((action) => {
             const eventId = action.payload.eventId;
             const prevProgramId = store.value.currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
-            return getEvent(eventId)
+            return getEvent(eventId, absoluteApiPath)
                 .then((eventContainer) => {
                     if (!eventContainer) {
                         return eventFromUrlCouldNotBeRetrieved(

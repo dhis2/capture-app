@@ -15,7 +15,7 @@ import { updateEventWorkingListAsync } from './updateEventWorkingList';
 import { getApi } from '../../../../d2';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 
-export const initEventListEpic = (action$: InputObservable) =>
+export const initEventListEpic = (action$: InputObservable, _: ReduxStore, { absoluteApiPath }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.LIST_VIEW_INIT),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
@@ -37,7 +37,7 @@ export const initEventListEpic = (action$: InputObservable) =>
                         categoryCombinationId,
                         storeId,
                         lastTransaction,
-                    });
+                    }, absoluteApiPath);
             return from(initialPromise).pipe(
 
                 takeUntil(
@@ -49,14 +49,18 @@ export const initEventListEpic = (action$: InputObservable) =>
             );
         }));
 
-export const updateEventListEpic = (action$: InputObservable) =>
+export const updateEventListEpic = (action$: InputObservable, _: ReduxStore, { absoluteApiPath }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.LIST_UPDATE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
             const { queryArgs, columnsMetaForDataFetching, categoryCombinationId, storeId } = action.payload;
             !queryArgs?.orgUnitId && (queryArgs.ouMode = 'ACCESSIBLE');
-            const updatePromise = updateEventWorkingListAsync(queryArgs, { columnsMetaForDataFetching, categoryCombinationId, storeId });
+            const updatePromise = updateEventWorkingListAsync(
+                queryArgs,
+                { columnsMetaForDataFetching, categoryCombinationId, storeId },
+                absoluteApiPath,
+            );
             return from(updatePromise).pipe(
                 takeUntil(
                     action$.pipe(

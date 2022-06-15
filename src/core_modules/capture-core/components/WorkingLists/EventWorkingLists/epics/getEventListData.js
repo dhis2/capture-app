@@ -171,11 +171,12 @@ export const getEventListData = async (
     queryArgs: InputQueryArgs,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     categoryCombinationId?: ?string,
+    absoluteApiPath: string,
 ) => {
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
 
     const { eventContainers, pagingData, request } =
-        await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId));
+        await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId), absoluteApiPath);
     const columnKeys = [...columnsMetaForDataFetching.keys()];
     const columnFilteredEventContainers: Array<{ id: string, record: Object }> = eventContainers
         .map(({ id, event, values }) => ({ id, record: { ...event, ...values } }))
