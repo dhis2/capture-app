@@ -17,7 +17,6 @@ import {
     addNote,
     removeNote,
 } from '../DataEntry/actions/dataEntry.actions';
-import { getCurrentUser } from '../../d2/d2Instance';
 
 export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -26,8 +25,8 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore)
             const state = store.value;
             const payload = action.payload;
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
-            // $FlowFixMe[prop-missing] automated comment
-            const { firstName, surname, userName } = getCurrentUser();
+
+            const { firstName, surname, userName } = state.app.currentUser;
             const clientId = uuid();
 
             const serverData = {

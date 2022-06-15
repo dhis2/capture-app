@@ -12,15 +12,14 @@ import {
 import {
     addNote,
 } from '../../../DataEntry/actions/dataEntry.actions';
-import { getCurrentUser } from '../../../../d2/d2Instance';
 
-export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable) =>
+export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryActionTypes.EVENT_NOTE_ADD),
         map((action) => {
             const payload = action.payload;
-            // $FlowFixMe[prop-missing] automated comment
-            const userName = getCurrentUser().username;
+            const state = store.value;
+            const userName = state.app.currentUser.username;
 
             const storedAt = moment().toISOString();
             const note = {

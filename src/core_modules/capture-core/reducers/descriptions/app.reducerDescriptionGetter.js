@@ -22,6 +22,7 @@ import {
 import { topBarActionsActionTypes } from '../../components/TopBarActions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
+import { actionTypes as initActionTypes } from '../../init/init.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -163,5 +164,9 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [topBarActionsActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
         page: 'search',
+    }),
+    [initActionTypes.SET_CURRENT_USER]: (state, action) => ({
+        ...state,
+        currentUser: action.payload.currentUser,
     }),
 }, 'app');

@@ -2,7 +2,6 @@
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { getCurrentUser } from 'capture-core/d2/d2Instance';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import { convertValue as convertListValue } from '../../../../converters/clientToList';
@@ -55,8 +54,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
             const payload = action.payload;
 
             const eventId = state.viewEventPage.eventId;
-            // $FlowFixMe[prop-missing] automated comment
-            const userName = getCurrentUser().username;
+            const userName = state.app.username;
 
             const serverData = {
                 event: eventId,

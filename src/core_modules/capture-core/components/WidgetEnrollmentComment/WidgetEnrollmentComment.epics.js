@@ -6,7 +6,6 @@ import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote }
     from './WidgetEnrollmentComment.actions';
-import { getCurrentUser } from '../../d2/d2Instance';
 
 export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -14,8 +13,8 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
         map((action) => {
             const state = store.value;
             const { enrollmentId, note } = action.payload;
-            // $FlowFixMe[prop-missing] automated comment
-            const { firstName, surname, userName } = getCurrentUser();
+
+            const { firstName, surname, userName } = state.app.currentUser;
             const clientId = uuid();
 
             const serverData = {
