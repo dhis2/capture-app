@@ -44,10 +44,7 @@ export const fetchCurrentUserEpic = (action$: InputObservable, store: ReduxStore
     { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(appStartActionTypes.APP_LOAD_SUCESS),
-        switchMap(action => from(querySingleResource({ resource: 'me' }))
-            .pipe(
-                flatMap(response =>
-                    of(setCurrentUser(response))),
-            ),
+        switchMap(() => from(querySingleResource({ resource: 'me' }))
+            .pipe(flatMap(response => of(setCurrentUser(response)))),
         ));
 
