@@ -38,7 +38,6 @@ import {
 import {
     fetchDataStoreEpic,
     fetchUserDataStoreEpic,
-    fetchCurrentUserEpic,
 } from 'capture-core/components/DataStore/DataStore.epics';
 
 import {
@@ -237,7 +236,6 @@ export const epics = combineEpics(
     triggerLoadCoreEpic,
     loadCoreEpic,
     fetchDataStoreEpic,
-    fetchCurrentUserEpic,
     fetchUserDataStoreEpic,
     loadAppEpic,
     loadCoreFailedEpic,

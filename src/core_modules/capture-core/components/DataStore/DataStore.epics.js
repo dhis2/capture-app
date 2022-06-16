@@ -1,12 +1,11 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { mergeMap, flatMap, catchError, switchMap } from 'rxjs/operators';
-import { from, of, EMPTY } from 'rxjs';
+import { mergeMap, catchError } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 import { saveDataStore } from './DataStore.actions';
 import { getApi } from '../../d2';
 import { type UseNewDashboard } from './DataStore.types';
 import { appStartActionTypes } from '../../../../components/AppStart';
-import { setCurrentUser } from '../../init/init.actions';
 
 function getDataStoreFromApi() {
     const api = getApi();
@@ -39,12 +38,4 @@ export const fetchUserDataStoreEpic = (action$: InputObservable) =>
         }),
         catchError(() => EMPTY),
     );
-
-export const fetchCurrentUserEpic = (action$: InputObservable, store: ReduxStore,
-    { querySingleResource }: ApiUtils) =>
-    action$.pipe(
-        ofType(appStartActionTypes.APP_LOAD_SUCESS),
-        switchMap(() => from(querySingleResource({ resource: 'me' }))
-            .pipe(flatMap(response => of(setCurrentUser(response)))),
-        ));
 
