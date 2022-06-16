@@ -18,7 +18,6 @@ import {
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
-import { useRelationshipTypes } from '../../../WidgetTrackedEntityRelationship/hooks';
 
 
 export const EnrollmentPageDefault = () => {
@@ -26,7 +25,6 @@ export const EnrollmentPageDefault = () => {
     const dispatch = useDispatch();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit } = useOrganisationUnit(orgUnitId);
-    const { relationshipTypes } = useRelationshipTypes();
 
     const program = useTrackerProgram(programId);
     const {
@@ -89,7 +87,6 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
-            relationshipTypes={relationshipTypes}
         />
     );
 };

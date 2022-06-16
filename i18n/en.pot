@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-18T22:32:30.675Z\n"
-"PO-Revision-Date: 2022-02-18T22:32:30.675Z\n"
+"POT-Creation-Date: 2022-11-29T09:14:06.464Z\n"
+"PO-Revision-Date: 2022-11-29T09:14:06.464Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -625,6 +625,9 @@ msgstr "Make referral"
 msgid "No available program stages"
 msgstr "No available program stages"
 
+msgid "Could not retrieve metadata. Please try again later."
+msgstr "Could not retrieve metadata. Please try again later."
+
 msgid "Program stage not found"
 msgstr "Program stage not found"
 
@@ -1169,6 +1172,9 @@ msgstr "Stages and Events"
 msgid "New TEI Relationship"
 msgstr "New TEI Relationship"
 
+msgid "Go back without saving relationship"
+msgstr "Go back without saving relationship"
+
 msgid "Link to an existing person"
 msgstr "Link to an existing person"
 
@@ -1177,9 +1183,6 @@ msgstr "Create new"
 
 msgid "An error occurred"
 msgstr "An error occurred"
-
-msgid "Go back without saving relationship"
-msgstr "Go back without saving relationship"
 
 msgid "New Relationship"
 msgstr "New Relationship"

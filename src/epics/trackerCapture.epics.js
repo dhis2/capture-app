@@ -223,9 +223,6 @@ import {
 import {
     scheduleNewEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEventSchedule';
-import {
-    openRelationshipTeiSearchForWidgetEpic,
-} from '../core_modules/capture-core/components/WidgetTrackedEntityRelationship/NewTrackedEntityRelationship/NewTrackedEntityRelationship.epics';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -276,7 +273,6 @@ export const epics = combineEpics(
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
-    openRelationshipTeiSearchForWidgetEpic,
     TeiRelationshipNewOrEditSearchEpic,
     teiSearchEpic,
     teiSearchChangePageEpic,
