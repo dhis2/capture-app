@@ -26,10 +26,9 @@ class OrgUnitTreePlain extends React.Component<Props> {
     getExpandedItems() {
         const { roots } = this.props;
         if (roots && roots.length === 1) {
-            return roots
-                .map(r => r.path);
+            return [`/${roots[0].id}`];
         }
-        return undefined;
+        return [];
     }
 
     render() {
@@ -44,7 +43,7 @@ class OrgUnitTreePlain extends React.Component<Props> {
                 <OrganisationUnitTree
                     key={treeKey}
                     roots={roots.map(item => item.id)}
-                    // initiallyExpanded={this.getExpandedItems()}
+                    initiallyExpanded={this.getExpandedItems()}
                     singleSelection
                     onChange={onSelectClick}
                 />
