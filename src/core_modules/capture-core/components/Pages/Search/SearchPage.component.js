@@ -137,7 +137,35 @@ const Index = ({
         setSearchScopeType(searchType);
     };
 
-    const searchableFieldsDisplayname = searchableFields?.map(field => field.formName)?.join(', ');
+
+    const renderNotEnoughAttributesMessage = () => {
+        const searchableFieldsDisplayname = searchableFields?.map(field => field.formName)?.join(', ');
+
+        if (minAttributesRequiredToSearch > 1) {
+            return i18n.t('Fill in these fields to search{{escape}} {{ searchableAttributes }}', {
+                escape: ':',
+                searchableAttributes: searchableFieldsDisplayname,
+                interpolation: {
+                    escape: false,
+                },
+            });
+        } else if (searchableFields.length > 1) {
+            return i18n.t('Fill in at least 1 of these fields to search{{escape}} {{searchableAttributes}}', {
+                escape: ':',
+                searchableAttributes: searchableFieldsDisplayname,
+                interpolation: {
+                    escape: false,
+                },
+            });
+        }
+        return i18n.t('Fill in this field to search{{escape}} {{searchableAttributes}}', {
+            escape: ':',
+            searchableAttributes: searchableFieldsDisplayname,
+            interpolation: {
+                escape: false,
+            },
+        });
+    };
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
 
@@ -244,22 +272,7 @@ const Index = ({
                             <Modal position="middle">
                                 <ModalTitle>{i18n.t('Cannot search in all programs')}</ModalTitle>
                                 <ModalContent>
-                                    {minAttributesRequiredToSearch > 1 ? i18n.t('Fill in these fields to search{{escape}} {{ searchableAttributes }}', {
-                                        escape: ':',
-                                        searchableAttributes: searchableFieldsDisplayname,
-                                        interpolation: {
-                                            escape: false,
-                                        },
-                                    }) : i18n.t('Fill in this field to search{{escape}} {{searchableAttributes}}', {
-                                        escape: ':',
-                                        searchableAttributes: searchableFieldsDisplayname,
-                                        count: searchableFields.length,
-                                        defaultValue: 'Fill in this field to search{{escape}} {{searchableAttributes}}',
-                                        defaultValue_plural: 'Fill in at least 1 of these fields to search{{escape}} {{searchableAttributes}}',
-                                        interpolation: {
-                                            escape: false,
-                                        },
-                                    })}
+                                    {renderNotEnoughAttributesMessage()}
                                 </ModalContent>
                                 <ModalActions>
                                     <ButtonStrip end>
