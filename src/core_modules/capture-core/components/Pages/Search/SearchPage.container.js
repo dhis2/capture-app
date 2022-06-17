@@ -113,7 +113,7 @@ export const SearchPage: ComponentType<{||}> = () => {
             trackedEntityTypeId={trackedEntityTypeId}
             searchStatus={searchStatus}
             minAttributesRequiredToSearch={minAttributesRequiredToSearch}
-            searchableFieldsDisplayname={searchableFields?.map(field => field.formName)?.join(', ')}
+            searchableFields={searchableFields}
             error={error}
             ready={ready}
             orgUnitId={orgUnitId}

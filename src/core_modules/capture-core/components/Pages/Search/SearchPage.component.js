@@ -83,7 +83,7 @@ const Index = ({
     searchStatus,
     trackedEntityTypeId,
     minAttributesRequiredToSearch,
-    searchableFieldsDisplayname,
+    searchableFields,
     programId,
     orgUnitId,
 }: Props) => {
@@ -136,6 +136,8 @@ const Index = ({
         setSearchScopeId(searchScopeId);
         setSearchScopeType(searchType);
     };
+
+    const searchableFieldsDisplayname = searchableFields?.map(field => field.formName)?.join(', ');
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
 
@@ -242,10 +244,18 @@ const Index = ({
                             <Modal position="middle">
                                 <ModalTitle>{i18n.t('Cannot search in all programs')}</ModalTitle>
                                 <ModalContent>
-                                    {i18n.t('Fill in at least {{count}} of these attributes to search{{escape}} {{ searchableAttributes }}', {
-                                        searchableAttributes: searchableFieldsDisplayname,
+                                    {minAttributesRequiredToSearch > 1 ? i18n.t('Fill in these fields to search{{escape}} {{ searchableAttributes }}', {
                                         escape: ':',
-                                        count: minAttributesRequiredToSearch,
+                                        searchableAttributes: searchableFieldsDisplayname,
+                                        interpolation: {
+                                            escape: false,
+                                        },
+                                    }) : i18n.t('Fill in this field to search{{escape}} {{searchableAttributes}}', {
+                                        escape: ':',
+                                        searchableAttributes: searchableFieldsDisplayname,
+                                        count: searchableFields?.length,
+                                        defaultValue: 'Fill in this field to search{{escape}} {{searchableAttributes}}',
+                                        defaultValue_plural: 'Fill in at least 1 of these fields to search{{escape}} {{searchableAttributes}}',
                                         interpolation: {
                                             escape: false,
                                         },
