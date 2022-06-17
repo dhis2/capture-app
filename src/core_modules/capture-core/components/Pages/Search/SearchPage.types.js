@@ -27,7 +27,7 @@ export type ContainerProps = $ReadOnly<{|
   availableSearchOptions: AvailableSearchOptions,
   preselectedProgramId: SelectedSearchScopeId,
   minAttributesRequiredToSearch: number,
-  searchableFields?: Array<Object>,
+  searchableFields: Array<Object>,
   searchStatus: string,
   error: boolean,
   ready: boolean,

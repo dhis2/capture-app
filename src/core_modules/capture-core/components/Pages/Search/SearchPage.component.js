@@ -253,7 +253,7 @@ const Index = ({
                                     }) : i18n.t('Fill in this field to search{{escape}} {{searchableAttributes}}', {
                                         escape: ':',
                                         searchableAttributes: searchableFieldsDisplayname,
-                                        count: searchableFields?.length,
+                                        count: searchableFields.length,
                                         defaultValue: 'Fill in this field to search{{escape}} {{searchableAttributes}}',
                                         defaultValue_plural: 'Fill in at least 1 of these fields to search{{escape}} {{searchableAttributes}}',
                                         interpolation: {
