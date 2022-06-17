@@ -119,11 +119,6 @@
     "redux-devtools-extension": "^2.13.9",
     "wait-on": "^6.0.1"
   },
-  "peerDependencies": {
-    "capture-core": "1",
-    "capture-core-utils": "1",
-    "capture-ui": "1"
-  },
   "resolutions": {
     "@babel/preset-react": "7.16.7"
   },
