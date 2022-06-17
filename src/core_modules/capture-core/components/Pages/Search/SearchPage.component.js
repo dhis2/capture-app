@@ -141,7 +141,7 @@ const Index = ({
     const renderNotEnoughAttributesMessage = () => {
         const searchableFieldsDisplayname = searchableFields?.map(field => field.formName)?.join(', ');
 
-        if (minAttributesRequiredToSearch === searchableFields.length && searchableFields > 1) {
+        if (minAttributesRequiredToSearch === searchableFields.length && searchableFields.length > 1) {
             return i18n.t('Fill in these fields to search{{escape}} {{ searchableAttributes }}', {
                 escape: ':',
                 searchableAttributes: searchableFieldsDisplayname,
