@@ -2,13 +2,12 @@
 import { connect } from 'react-redux';
 import { OrgUnitField as BasicOrgUnitField } from '../../FormFields/New';
 import { searchOrgUnits, clearOrgUnitsSearch } from './actions/orgUnitList.actions';
-import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 const mapStateToProps = (state: ReduxState) => {
-    const regUnitRootsState = getOrgUnitRoots('regUnit') || getOrgUnitRoots('captureRoots');
+    const orgUnits = state.registeringUnitList.roots ?? state.app.currentUser.organisationUnits;
 
     return {
-        roots: regUnitRootsState,
+        roots: orgUnits,
         searchText: state.registeringUnitList.searchText,
         ready: !state.registeringUnitList.isLoading,
         treeKey: state.registeringUnitList.key,

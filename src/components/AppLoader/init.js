@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2';
+import { init as initAsync, config } from 'd2';
 import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
@@ -163,7 +163,9 @@ export async function initializeAsync(
     // initialize d2
     setConfig(apiPath);
     const d2 = await initAsync({ schemas: ['organisationUnit'] });
-    const userSettings = await getUserSettingsAsync();
+    const userSettings = await onQueryApi({
+        resource: 'userSettings',
+    });
     const sym = Object.getOwnPropertySymbols(d2.currentUser).find(s => String(s) === 'Symbol(userRoles)');
     d2.currentUser.userRoles = d2.currentUser[sym];
     setD2(d2);
