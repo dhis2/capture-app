@@ -242,12 +242,10 @@ const Index = ({
                             <Modal position="middle">
                                 <ModalTitle>{i18n.t('Cannot search in all programs')}</ModalTitle>
                                 <ModalContent>
-                                    {i18n.t('Fill in at least {{count}} attribute to search{{escape}} {{ searchableAttributes }}', {
+                                    {i18n.t('Fill in at least {{count}} of these attributes to search{{escape}} {{ searchableAttributes }}', {
                                         searchableAttributes: searchableFieldsDisplayname,
                                         escape: ':',
                                         count: minAttributesRequiredToSearch,
-                                        defaultValue: 'Fill in at least {{count}} attribute to search{{escape}} {{searchableAttributes}}',
-                                        defaultValue_plural: 'Fill in at least {{count}} attributes to search{{escape}} {{searchableAttributes}}',
                                         interpolation: {
                                             escape: false,
                                         },
