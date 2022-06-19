@@ -1,3 +1,10 @@
+## [100.5.9](https://github.com/dhis2/capture-app/compare/v100.5.8...v100.5.9) (2022-06-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([66c4171](https://github.com/dhis2/capture-app/commit/66c4171bc4a30b1598e7a1f76b46e5dcaae6cd3a))
+
 ## [100.5.8](https://github.com/dhis2/capture-app/compare/v100.5.7...v100.5.8) (2022-06-15)
 
 
