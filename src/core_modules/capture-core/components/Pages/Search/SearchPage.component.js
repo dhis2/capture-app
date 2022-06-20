@@ -151,8 +151,9 @@ const Index = ({
             });
         }
         if (searchableFields.length > 1) {
-            return i18n.t('Fill in at least 1 of these fields to search{{escape}} {{searchableAttributes}}', {
+            return i18n.t('Fill in at least {{minAttributesRequiredToSearch}} of these fields to search{{escape}} {{searchableAttributes}}', {
                 escape: ':',
+                minAttributesRequiredToSearch,
                 searchableAttributes: searchableFieldsDisplayname,
                 interpolation: {
                     escape: false,
