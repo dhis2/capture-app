@@ -3,7 +3,6 @@
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getApi } from '../../../../d2/d2Instance';
 import {
     RenderFoundation,
     Section,
@@ -159,22 +158,6 @@ export class TeiRegistrationFactory {
                 o.id = searchGroup.id;
                 o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
                 o.searchFoundation = this._buildInputSearchGroupFoundation(cachedType, searchGroup);
-                o.onSearch = (values: Object = {}, contextProps: Object = {}) => {
-                    const { orgUnitId, trackedEntityTypeId } = contextProps;
-                    return getApi()
-                        .get(
-                            'trackedEntityInstances/count.json',
-                            {
-                                ou: orgUnitId,
-                                trackedEntityType: trackedEntityTypeId,
-                                ouMode: 'ACCESSIBLE',
-                                filter: Object
-                                    .keys(values)
-                                    .filter(key => (values[key] || values[key] === 0 || values[key] === false))
-                                    .map(key => `${key}:LIKE:${values[key]}`),
-                            },
-                        );
-                };
             }));
         return inputSearchGroups;
     }

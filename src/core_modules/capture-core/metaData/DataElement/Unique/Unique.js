@@ -3,8 +3,9 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
 import { scopes } from './scopes.const';
+import type { QuerySingleResource } from '../../../utils/api/api.types';
 
-type Validator = (value: any, contextProps: any) => Promise<any> | any;
+type Validator = (value: any, contextProps: any, querySingleResource: QuerySingleResource) => Promise<any> | any;
 
 export class Unique {
     _generatable: boolean;

@@ -31,7 +31,11 @@ import { getRelationshipNewTei } from '../../NewRelationship/RegisterTei';
 
 const relationshipKey = 'viewEvent';
 
-export const loadRelationshipsForViewEventEpic = (action$: InputObservable) =>
+export const loadRelationshipsForViewEventEpic = (
+    action$: InputObservable,
+    _: ReduxStore,
+    { querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(
             viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -41,7 +45,7 @@ export const loadRelationshipsForViewEventEpic = (action$: InputObservable) =>
         switchMap((action) => {
             // Load event relationships
             const event = action.payload.eventContainer.event;
-            return getRelationshipsForEvent(event.eventId, event.programId, event.programStageId)
+            return getRelationshipsForEvent(event.eventId, event.programId, event.programStageId, querySingleResource)
                 .then(relationships => batchActions([
                     eventRelationshipsLoaded(),
                     setRelationships(relationshipKey, relationships || []),

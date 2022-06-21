@@ -3,14 +3,13 @@
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-import { config } from 'd2';
 import { actionTypes as NavigateToEnrollmentOverviewActionTypes } from './navigateToEnrollmentOverview.actions';
 import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../utils/routing';
 import { scopeHierarchyTypes } from './navigateToEnrollmentOverview.constants';
 
 // TODO This will be removed when the link between capture and tracker capture is not relevant
 const redirectToTracker = ({ teiId, orgUnitId, dependencies }) => {
-    const { baseUrl } = config;
+    const baseUrl = dependencies.absoluteApiPath;
     const { search, pathname } = dependencies.history.location;
     const { programId: queryProgramId, trackedEntityTypeId: queryTrackedEntityTypeId } = deriveURLParamsFromLocation();
 

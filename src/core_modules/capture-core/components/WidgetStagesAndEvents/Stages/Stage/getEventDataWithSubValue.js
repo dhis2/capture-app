@@ -1,12 +1,11 @@
 // @flow
-import { getApi } from 'capture-core/d2';
 import { dataElementTypes } from '../../../../metaData';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
-
-const getImageOrFileResourceSubvalue = async (keys: Array<string>) => {
+const getImageOrFileResourceSubvalue = async (keys: Array<string>, querySingleResource: QuerySingleResource) => {
     const promises = keys
         .map(async (key) => {
-            const { id, displayName: name } = await getApi().get(`fileResources/${key}`);
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${key}` });
             return {
                 id,
                 name,
@@ -21,11 +20,14 @@ const getImageOrFileResourceSubvalue = async (keys: Array<string>) => {
 };
 
 
-const getOrganisationUnitSubvalue = async (keys: Array<string>) => {
+const getOrganisationUnitSubvalue = async (keys: Array<string>, querySingleResource: QuerySingleResource) => {
     const ids = Object.values(keys)
         .join(',');
 
-    const { organisationUnits = [] } = await getApi().get(`organisationUnits?filter=id:in:[${ids}]`);
+    const { organisationUnits = [] } = await querySingleResource({
+        resource: 'organisationUnits',
+        params: { filter: `id:in:[${ids}]` },
+    });
 
     return organisationUnits
         .reduce((acc, { id, displayName: name }) => {
@@ -41,7 +43,7 @@ const subValueGetterByElementType = {
 };
 
 
-export async function getSubValues(type: any, values?: ?Object) {
+export async function getSubValues(type: any, values?: ?Object, querySingleResource: QuerySingleResource) {
     if (!values) {
         return null;
     }
@@ -52,7 +54,7 @@ export async function getSubValues(type: any, values?: ?Object) {
             // $FlowFixMe dataElementTypes flow error
             const subValueGetter = subValueGetterByElementType[type];
             if (subValueGetter) {
-                const subValue = await subValueGetter(values);
+                const subValue = await subValueGetter(values, querySingleResource);
                 accValues[metaElementId] = subValue[values[metaElementId]];
             } else {
                 accValues[metaElementId] = values[metaElementId];

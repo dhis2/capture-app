@@ -2,6 +2,8 @@
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
+import { useDataEngine } from '@dhis2/app-runtime';
+import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../../metaData';
 import type { StageDataElement } from '../../../../types/common.types';
@@ -68,10 +70,12 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
     const [value, setValue] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const dataEngine = useDataEngine();
     const computeData = useCallback(async () => {
         try {
             setLoading(true);
-            const dataElementsByType = await groupRecordsByType(events, dataElements);
+            const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
+            const dataElementsByType = await groupRecordsByType(events, dataElements, querySingleResource);
             const eventsData = [];
             for (const event of events) {
                 const eventId = event.event;
@@ -94,7 +98,7 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
         } finally {
             setLoading(false);
         }
-    }, [events, dataElements]);
+    }, [events, dataElements, dataEngine]);
 
     useEffect(() => {
         computeData();

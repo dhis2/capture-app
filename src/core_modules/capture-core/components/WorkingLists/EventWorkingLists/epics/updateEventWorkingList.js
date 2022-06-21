@@ -8,22 +8,26 @@ import {
     buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
 import type { ColumnsMetaForDataFetching } from '../types';
-
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const errorMessages = {
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
 };
 
 export const updateEventWorkingListAsync = (
-    queryArgsSource: Object, {
+    queryArgsSource: Object,
+    {
         columnsMetaForDataFetching,
         categoryCombinationId,
         storeId,
     }: {
-    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-    categoryCombinationId?: ?string,
-    storeId: string,
-}): Promise<ReduxAction<any, any>> => {
+        columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+        categoryCombinationId?: ?string,
+        storeId: string,
+    },
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
+): Promise<ReduxAction<any, any>> => {
     const rawQueryArgs = {
         ...queryArgsSource,
         fields: 'dataValues,occurredAt,event,status,orgUnit,program,programType,updatedAt,createdAt,assignedUser',
@@ -33,7 +37,13 @@ export const updateEventWorkingListAsync = (
         }),
     };
 
-    return getEventListData(rawQueryArgs, columnsMetaForDataFetching, categoryCombinationId)
+    return getEventListData({
+        queryArgs: rawQueryArgs,
+        columnsMetaForDataFetching,
+        categoryCombinationId,
+        absoluteApiPath,
+        querySingleResource,
+    })
         .then(({ eventContainers, pagingData, request }) =>
             updateListSuccess(storeId, {
                 recordContainers: eventContainers,

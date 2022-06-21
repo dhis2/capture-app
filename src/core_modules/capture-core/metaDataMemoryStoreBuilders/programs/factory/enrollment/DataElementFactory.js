@@ -18,9 +18,8 @@ import {
 } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
-import { getApi } from '../../../../d2/d2Instance';
 import type { ConstructorInput } from './dataElementFactory.types';
-
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 export class DataElementFactory {
     static translationPropertyNames = {
@@ -56,7 +55,7 @@ export class DataElementFactory {
                 dataElementUniqueScope.ORGANISATION_UNIT :
                 dataElementUniqueScope.ENTIRE_SYSTEM;
 
-            o.onValidate = (value: any, contextProps: Object = {}) => {
+            o.onValidate = (value: any, contextProps: Object = {}, querySingleResource: QuerySingleResource) => {
                 const serverValue = pipe(
                     convertFormToClient,
                     convertClientToServer,
@@ -81,25 +80,23 @@ export class DataElementFactory {
                 let requestPromise;
                 if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                     const orgUnitId = contextProps.orgUnitId;
-                    requestPromise = getApi()
-                        .get(
-                            'tracker/trackedEntities',
-                            {
-                                program: contextProps.programId,
-                                ou: orgUnitId,
-                                filter: `${dataElement.id}:EQ:${serverValue}`,
-                            },
-                        );
+                    requestPromise = querySingleResource({
+                        resource: 'tracker/trackedEntities',
+                        params: {
+                            program: contextProps.programId,
+                            orgUnit: orgUnitId,
+                            filter: `${dataElement.id}:EQ:${serverValue}`,
+                        },
+                    });
                 } else {
-                    requestPromise = getApi()
-                        .get(
-                            'tracker/trackedEntities',
-                            {
-                                program: contextProps.programId,
-                                ouMode: 'ACCESSIBLE',
-                                filter: `${dataElement.id}:EQ:${serverValue}`,
-                            },
-                        );
+                    requestPromise = querySingleResource({
+                        resource: 'tracker/trackedEntities',
+                        params: {
+                            program: contextProps.programId,
+                            ouMode: 'ACCESSIBLE',
+                            filter: `${dataElement.id}:EQ:${serverValue}`,
+                        },
+                    });
                 }
                 return requestPromise
                     .then((result) => {
@@ -107,7 +104,7 @@ export class DataElementFactory {
                         const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
 
                         const data = {
-                            id: trackedEntityInstance.trackedEntityInstance,
+                            id: trackedEntityInstance.trackedEntity,
                             tetId: trackedEntityInstance.trackedEntityType,
                         };
 

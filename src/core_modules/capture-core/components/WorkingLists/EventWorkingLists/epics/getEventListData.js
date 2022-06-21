@@ -1,6 +1,7 @@
 // @flow
 import { getEvents } from '../../../../events/eventRequests';
 import type { ColumnsMetaForDataFetching } from '../types';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 type InputQueryArgs = {
     [key: string]: any,
@@ -167,15 +168,26 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryComb
     return apiQueryArgsWithServerPropName;
 };
 
-export const getEventListData = async (
+export const getEventListData = async ({
+    queryArgs,
+    columnsMetaForDataFetching,
+    categoryCombinationId,
+    absoluteApiPath,
+    querySingleResource,
+}: {
     queryArgs: InputQueryArgs,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     categoryCombinationId?: ?string,
-) => {
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
+}) => {
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
 
-    const { eventContainers, pagingData, request } =
-        await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId));
+    const { eventContainers, pagingData, request } = await getEvents(
+        createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId),
+        absoluteApiPath,
+        querySingleResource,
+    );
     const columnKeys = [...columnsMetaForDataFetching.keys()];
     const columnFilteredEventContainers: Array<{ id: string, record: Object }> = eventContainers
         .map(({ id, event, values }) => ({ id, record: { ...event, ...values } }))

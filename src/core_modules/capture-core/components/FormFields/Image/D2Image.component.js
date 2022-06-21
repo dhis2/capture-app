@@ -6,9 +6,8 @@ import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
 import { Button } from '../../Buttons/Button.component';
 import { LinkButton } from '../../Buttons/LinkButton.component';
-import { getApi } from '../../../d2/d2Instance';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
-
+import { withApiUtils } from '../../../HOC';
 
 type Props = {
     value: ?{ value: string, name: string, url?: ?string },
@@ -26,6 +25,7 @@ type Props = {
     onCommitAsync: (callback: Function) => void,
     onBlur: (value: ?Object) => void,
     asyncUIState: { loading?: ?boolean },
+    mutate: (data: any) => Promise<any>
 }
 
 const styles = theme => ({
@@ -82,18 +82,19 @@ class D2ImagePlain extends Component<Props> {
         e.target.value = null;
 
         if (image) {
-            this.props.onCommitAsync(() => {
-                const formData = new FormData();
-                formData.append('file', image);
-                return getApi().post('fileResources', formData).then((response: any) => {
+            this.props.onCommitAsync(() =>
+                this.props.mutate({
+                    resource: 'fileResources',
+                    type: 'create',
+                    data: { file: image },
+                }).then((response: any) => {
                     const fileResource = response && response.response && response.response.fileResource;
                     if (fileResource) {
                         inMemoryFileStore.set(fileResource.id, image);
                         return { name: fileResource.name, value: fileResource.id };
                     }
                     return null;
-                });
-            });
+                }));
         }
     }
     handleButtonClick = () => {
@@ -201,4 +202,4 @@ class D2ImagePlain extends Component<Props> {
     }
 }
 
-export const D2Image = withStyles(styles)(D2ImagePlain);
+export const D2Image = withStyles(styles)(withApiUtils(D2ImagePlain));

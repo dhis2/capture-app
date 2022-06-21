@@ -7,6 +7,7 @@ import { getUniqueValuesForAttributesWithoutValue } from '../../common/TEIAndEnr
 import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToForm, convertServerToClient } from '../../../../converters';
 import { subValueGetterByElementType } from './getSubValueForTei';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 type InputProgramData = {
     attributes: Array<{
@@ -93,26 +94,41 @@ const useClientAttributesWithSubvalues = (program: InputProgramData, attributes:
     return listAttributes;
 };
 
-const buildFormValues = async (
+const buildFormValues = async ({
+    foundation,
+    clientAttributesWithSubvalues,
+    staticPatternValues,
+    setFormValues,
+    setClientValues,
+    formValuesReadyRef,
+    querySingleResource,
+}: {
     foundation: ?RenderFoundation,
     clientAttributesWithSubvalues: Array<any>,
     staticPatternValues: StaticPatternValues,
     setFormValues: (values: any) => void,
     setClientValues: (values: any) => void,
     formValuesReadyRef: { current: boolean },
-) => {
+    querySingleResource: QuerySingleResource,
+}) => {
     const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
     const formValues = clientAttributesWithSubvalues?.reduce(
         (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
         {},
     );
-    const uniqueValues = await getUniqueValuesForAttributesWithoutValue(foundation, clientAttributesWithSubvalues, staticPatternValues);
+    const uniqueValues = await getUniqueValuesForAttributesWithoutValue(
+        foundation,
+        clientAttributesWithSubvalues,
+        staticPatternValues,
+        querySingleResource,
+    );
     setFormValues && setFormValues({ ...formValues, ...uniqueValues });
     setClientValues && setClientValues({ ...clientValues, ...uniqueValues });
     formValuesReadyRef.current = true;
 };
 
 export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId }: InputForm) => {
+    const dataEngine = useDataEngine();
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const formValuesReadyRef = useRef<any>(false);
     const [formValues, setFormValues] = useState<any>({});
@@ -132,9 +148,26 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
             areAttributesWithSubvaluesReady
         ) {
             const staticPatternValues = { orgUnitCode: orgUnit.code };
-            buildFormValues(formFoundation, clientAttributesWithSubvalues, staticPatternValues, setFormValues, setClientValues, formValuesReadyRef);
+            const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
+            buildFormValues({
+                foundation: formFoundation,
+                clientAttributesWithSubvalues,
+                staticPatternValues,
+                setFormValues,
+                setClientValues,
+                formValuesReadyRef,
+                querySingleResource,
+            });
         }
-    }, [formFoundation, clientAttributesWithSubvalues, formValuesReadyRef, orgUnit, areAttributesWithSubvaluesReady]);
+    }, [
+        formFoundation,
+        clientAttributesWithSubvalues,
+        formValuesReadyRef,
+        orgUnit,
+        areAttributesWithSubvaluesReady,
+        dataEngine,
+    ]);
+
 
     return { formValues, clientValues, formValuesReadyRef };
 };
