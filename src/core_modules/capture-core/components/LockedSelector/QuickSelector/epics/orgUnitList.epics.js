@@ -3,7 +3,6 @@ import log from 'loglevel';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
-import { getD2 } from 'capture-core/d2/d2Instance';
 import { errorCreator } from 'capture-core-utils';
 import {
     actionTypes as orgUnitListActions,
@@ -17,15 +16,14 @@ import { LOADING_INDICATOR_TIMEOUT } from '../../../../constants';
 const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
 
 // get organisation units based on search criteria
-export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
+export const searchRegisteringUnitListEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(orgUnitListActions.SEARCH_ORG_UNITS),
         switchMap((action) => {
             const searchText = action.payload.searchText;
-            return getD2()
-                .models
-                .organisationUnits
-                .list({
+            return querySingleResource({
+                resource: 'organisationUnits',
+                params: {
                     fields: [
                         'id,displayName,path,publicAccess,access,lastUpdated',
                         'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
@@ -34,11 +32,11 @@ export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
                     withinUserHierarchy: true,
                     query: searchText,
                     pageSize: 15,
-                })
-                .then(orgUnitCollection => ({ regUnitArray: orgUnitCollection.toArray(), searchText }))
+                },
+            })
+                .then(({ organisationUnits }) => ({ regUnitArray: organisationUnits, searchText }))
                 .catch(error => ({ error }));
-        }),
-        map((resultContainer) => {
+        }), map((resultContainer) => {
             if (resultContainer.error) {
                 log.error(errorCreator(RETRIEVE_ERROR)(
                     { error: resultContainer.error, method: 'searchRegisteringUnitListEpic' }),

@@ -1,6 +1,5 @@
 // @flow
 import log from 'loglevel';
-import { getD2 } from 'capture-core/d2/d2Instance';
 import { from } from 'rxjs';
 import { map, concatMap, takeUntil, filter } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
@@ -36,23 +35,23 @@ const cancelActionFilter = (action: Object, formId: string, elementId: string) =
     return isAddFormData(action, formId) || isRequestFilterFormFieldOrgUnits(action, formId, elementId);
 };
 
-export const filterFormFieldOrgUnitsEpic = (action$: InputObservable) =>
+export const filterFormFieldOrgUnitsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_FILTER_FORM_FIELD_ORG_UNITS),
         concatMap((action) => {
             const { formId, elementId, searchText } = action.payload;
-            return from(getD2()
-                .models
-                .organisationUnits
-                .list({
+            return from(querySingleResource({
+                resource: 'organisationUnits',
+                params: {
                     fields: [
                         'id,displayName,path,publicAccess,access,lastUpdated',
                         'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
                     ].join(','),
-                    paging: false,
-                    query: searchText,
+                    paging: true,
                     withinUserSearchHierarchy: true,
-                })
+                    query: searchText,
+                },
+            })
                 .then(orgUnitCollection => ({ orgUnitArray: orgUnitCollection.toArray(), searchText, formId, elementId }))
                 .catch(error => ({ error, formId, elementId }))).pipe(
                 takeUntil(action$.pipe(filter(a => cancelActionFilter(a, formId, elementId)))),

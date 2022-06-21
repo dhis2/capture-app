@@ -81,6 +81,7 @@ export const registeringUnitListDesc = createReducerDescription({
         setStoreRoots('regUnit', null);
         return {
             ...state,
+            roots: null,
             searchText: null,
             searchRoots: null,
             key: 'clear',

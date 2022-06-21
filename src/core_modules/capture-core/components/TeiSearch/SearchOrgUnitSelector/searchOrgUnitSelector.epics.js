@@ -2,7 +2,6 @@
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import { from } from 'rxjs';
-import { getD2 } from 'capture-core/d2/d2Instance';
 import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { map, concatMap, takeUntil, filter } from 'rxjs/operators';
@@ -38,17 +37,16 @@ const cancelActionFilter = (action: Object, searchId: string) => {
 };
 
 // get organisation units based on search criteria
-export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
+export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS),
         concatMap((action) => {
             const searchText = action.payload.searchText;
             const searchId = action.payload.searchId;
 
-            return from(getD2()
-                .models
-                .organisationUnits
-                .list({
+            return from(querySingleResource({
+                resource: 'organisationUnits',
+                params: {
                     fields: [
                         'id,displayName,path,publicAccess,access,lastUpdated',
                         'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
@@ -57,12 +55,11 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
                     withinUserSearchHierarchy: true,
                     query: searchText,
                     pageSize: 15,
-                })
-                .then(orgUnitCollection => ({ regUnitArray: orgUnitCollection.toArray(), searchText, searchId }))
-                .catch(error => ({ error, searchId })),
-            ).pipe(takeUntil(action$.pipe(filter(a => cancelActionFilter(a, searchId)))));
-        }),
-        map((resultContainer) => {
+                },
+            }).then(({ organisationUnits }) => ({ regUnitArray: organisationUnits, searchText, searchId }))
+                .catch(error => ({ error, searchId })))
+                .pipe(takeUntil(action$.pipe(filter(a => cancelActionFilter(a, searchId)))));
+        }), map((resultContainer) => {
             if (resultContainer.error) {
                 log.error(errorCreator(RETRIEVE_ERROR)(
                     { error: resultContainer.error, method: 'searchRegisteringUnitListEpic' }),
@@ -80,3 +77,4 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
                 }));
             return filteredOrgUnitsRetrieved(resultContainer.searchId, regUnits, resultContainer.searchText);
         }));
+
