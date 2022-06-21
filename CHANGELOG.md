@@ -1,3 +1,10 @@
+## [100.5.11](https://github.com/dhis2/capture-app/compare/v100.5.10...v100.5.11) (2022-06-21)
+
+
+### Bug Fixes
+
+* [DHIS2-13183] navigation to register new single event page ([#2842](https://github.com/dhis2/capture-app/issues/2842)) ([cd0fef1](https://github.com/dhis2/capture-app/commit/cd0fef143cdb1b0868fa7f7e9c0b6637283c777b))
+
 ## [100.5.10](https://github.com/dhis2/capture-app/compare/v100.5.9...v100.5.10) (2022-06-20)
 
 
