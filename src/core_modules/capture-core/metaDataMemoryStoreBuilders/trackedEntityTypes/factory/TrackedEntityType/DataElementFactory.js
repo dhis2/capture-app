@@ -163,14 +163,14 @@ export class DataElementFactory {
                     return requestPromise
                         .then((result) => {
                             const trackedEntityInstance =
-                                (result.trackedEntityInstances && result.trackedEntityInstances[0]) || {};
+                                (result.instances && result.instances[0]) || {};
                             const data = {
-                                id: trackedEntityInstance.trackedEntityInstance,
+                                id: trackedEntityInstance.trackedEntity,
                                 tetId: trackedEntityInstance.trackedEntityType,
                             };
 
                             return {
-                                valid: result.trackedEntityInstances.length === 0,
+                                valid: result.instances.length === 0,
                                 data,
                             };
                         });
