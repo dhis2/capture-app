@@ -5,9 +5,9 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
 import { Button } from '../../Buttons/Button.component';
-import { getApi } from '../../../d2/d2Instance';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { LinkButton } from '../../Buttons/LinkButton.component';
+import { withApiUtils } from '../../../HOC';
 
 type Props = {
     value: ?{ value: string, name: string, url?: ?string },
@@ -26,6 +26,7 @@ type Props = {
     onBlur: (value: ?Object) => void,
     asyncUIState: { loading?: ?boolean },
     orientation: $Values<typeof orientations>,
+    mutate: (data: any) => Promise<any>
 }
 
 const styles = theme => ({
@@ -83,18 +84,19 @@ class D2FilePlain extends Component<Props> {
         e.target.value = null;
 
         if (file) {
-            this.props.onCommitAsync(() => {
-                const formData = new FormData();
-                formData.append('file', file);
-                return getApi().post('fileResources', formData).then((response: any) => {
+            this.props.onCommitAsync(() =>
+                this.props.mutate({
+                    resource: 'fileResources',
+                    type: 'create',
+                    data: { file },
+                }).then((response: any) => {
                     const fileResource = response && response.response && response.response.fileResource;
                     if (fileResource) {
                         inMemoryFileStore.set(fileResource.id, file);
                         return { name: fileResource.name, value: fileResource.id };
                     }
                     return null;
-                });
-            });
+                }));
         }
     }
     handleButtonClick = () => {
@@ -187,4 +189,4 @@ class D2FilePlain extends Component<Props> {
     }
 }
 
-export const D2File = withStyles(styles)(D2FilePlain);
+export const D2File = withStyles(styles)(withApiUtils(D2FilePlain));

@@ -38,7 +38,7 @@ function getGroupElementsFromScopeId(scopeId: ?string) {
 export const loadSearchGroupDuplicatesForReviewEpic = (
     action$: InputObservable,
     store: ReduxStore,
-    { absoluteApiPath }: ApiUtils,
+    { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE),
@@ -80,7 +80,9 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                 };
                 const attributes = getAttributesFromScopeId(selectedScopeId);
 
-                const stream$: Stream = from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath));
+                const stream$: Stream = from(
+                    getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource),
+                );
                 return stream$.pipe(
                     map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>
                         duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage)),

@@ -2,8 +2,16 @@
 import { getDefaultFormField } from './defaultFormFieldGetter';
 import { getCustomFormField } from './customFormFieldGetter';
 import { type DataElement } from '../../../metaData';
+import type { QuerySingleResource } from '../../../utils/api/api.types';
 
+export function buildField(
+    metaData: DataElement,
+    options: Object,
+    useCustomFormFields: boolean,
+    querySingleResource: QuerySingleResource,
 // $FlowFixMe[cannot-resolve-name] automated comment
-export function buildField(metaData: DataElement, options: Object, useCustomFormFields: boolean): ?Field {
-    return (useCustomFormFields ? getCustomFormField(metaData, options) : getDefaultFormField(metaData, options));
+): ?Field {
+    return useCustomFormFields
+        ? getCustomFormField(metaData, options, querySingleResource)
+        : getDefaultFormField(metaData, options, querySingleResource);
 }

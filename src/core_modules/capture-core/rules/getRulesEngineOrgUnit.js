@@ -1,10 +1,15 @@
 // @flow
 import { getAssociatedOrgUnitGroups } from 'capture-core/MetaDataStoreUtils/getAssociatedOrgUnitGroups';
-import { getApi } from '../d2';
+import type { QuerySingleResource } from '../utils/api/api.types';
 
-export async function getRulesEngineOrgUnit(orgUnitId: string) {
+export async function getRulesEngineOrgUnit(orgUnitId: string, querySingleResource: QuerySingleResource) {
     return Promise.all([
-        getApi().get(`organisationUnits/${orgUnitId}?fields=displayName,code`),
+        querySingleResource({
+            resource: `organisationUnits/${orgUnitId}`,
+            params: {
+                fields: 'displayName,code',
+            },
+        }),
         getAssociatedOrgUnitGroups(orgUnitId),
     ]).then(([orgUnit, groups]) => ({
         id: orgUnitId,
