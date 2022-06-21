@@ -12,9 +12,6 @@ declare type D2 = {
         },
     },
     i18n: Object,
-    Api: {
-        getApi: () => Object
-    },
     currentUser: {
         authorities: Set<string>,
         userRoles: Array<string>,

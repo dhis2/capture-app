@@ -16,16 +16,20 @@ import {
     optionSetInputTypes as inputTypes,
 } from '../../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
-import { getApi } from '../../../../d2/d2Instance';
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import { buildIcon } from '../../../../metaDataMemoryStoreBuilders/common/helpers';
 import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const OPTION_SET_NOT_FOUND = 'Optionset not found';
 const TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND =
     'TrackedEntityAttributeId missing from programTrackedEntityAttribute or trackedEntityAttribute not found';
 
-const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute: TrackedEntityAttribute) =>
+const buildDataElementUnique = (
+    dataElement: DataElement,
+    trackedEntityAttribute: TrackedEntityAttribute,
+    querySingleResource: QuerySingleResource,
+) =>
     new DataElementUnique((dataEntry) => {
         dataEntry.scope = trackedEntityAttribute.orgunitScope
             ? dataElementUniqueScope.ORGANISATION_UNIT
@@ -55,16 +59,22 @@ const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute
             let requestPromise;
             if (dataEntry.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                 const orgUnitId = contextProps.orgUnitId;
-                requestPromise = getApi().get('tracker/trackedEntities', {
-                    program: contextProps.programId,
-                    ou: orgUnitId,
-                    filter: `${dataElement.id}:EQ:${serverValue}`,
+                requestPromise = querySingleResource({
+                    resource: 'tracker/trackedEntities',
+                    params: {
+                        program: contextProps.programId,
+                        orgUnit: orgUnitId,
+                        filter: `${dataElement.id}:EQ:${serverValue}`,
+                    },
                 });
             } else {
-                requestPromise = getApi().get('tracker/trackedEntities', {
-                    program: contextProps.programId,
-                    ouMode: 'ACCESSIBLE',
-                    filter: `${dataElement.id}:EQ:${serverValue}`,
+                requestPromise = querySingleResource({
+                    resource: 'tracker/trackedEntities',
+                    params: {
+                        program: contextProps.programId,
+                        ouMode: 'ACCESSIBLE',
+                        filter: `${dataElement.id}:EQ:${serverValue}`,
+                    },
                 });
             }
             return requestPromise.then((result) => {
@@ -72,7 +82,7 @@ const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute
                 const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
 
                 const data = {
-                    id: trackedEntityInstance.trackedEntityInstance,
+                    id: trackedEntityInstance.trackedEntity,
                     tetId: trackedEntityInstance.trackedEntityType,
                 };
 
@@ -88,12 +98,19 @@ const buildDataElementUnique = (dataElement: DataElement, trackedEntityAttribute
         }
     });
 
-const setBaseProperties = async (
+const setBaseProperties = async ({
+    dataElement,
+    optionSets,
+    programTrackedEntityAttribute,
+    trackedEntityAttribute,
+    querySingleResource,
+}: {
     dataElement: DataElement,
     optionSets: Array<OptionSetType>,
     programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
     trackedEntityAttribute: TrackedEntityAttribute,
-) => {
+    querySingleResource: QuerySingleResource,
+}) => {
     dataElement.id = trackedEntityAttribute.id;
     dataElement.compulsory = programTrackedEntityAttribute.mandatory;
     dataElement.name = trackedEntityAttribute.displayName;
@@ -107,7 +124,7 @@ const setBaseProperties = async (
     dataElement.searchable = programTrackedEntityAttribute.searchable;
 
     if (trackedEntityAttribute.unique) {
-        dataElement.unique = buildDataElementUnique(dataElement, trackedEntityAttribute);
+        dataElement.unique = buildDataElementUnique(dataElement, trackedEntityAttribute, querySingleResource);
     }
 
     if (trackedEntityAttribute.optionSet && trackedEntityAttribute.optionSet.id) {
@@ -124,10 +141,17 @@ const buildBaseDataElement = async (
     optionSets: Array<OptionSetType>,
     programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
     trackedEntityAttribute: TrackedEntityAttribute,
+    querySingleResource: QuerySingleResource,
 ) => {
     const dataElement = new DataElement();
     dataElement.type = trackedEntityAttribute.valueType;
-    await setBaseProperties(dataElement, optionSets, programTrackedEntityAttribute, trackedEntityAttribute);
+    await setBaseProperties({
+        dataElement,
+        optionSets,
+        programTrackedEntityAttribute,
+        trackedEntityAttribute,
+        querySingleResource,
+    });
     return dataElement;
 };
 
@@ -135,11 +159,18 @@ const buildDateDataElement = async (
     optionSets: Array<OptionSetType>,
     programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
     trackedEntityAttribute: TrackedEntityAttribute,
+    querySingleResource: QuerySingleResource,
 ) => {
     const dateDataElement = new DateDataElement();
     dateDataElement.type = dataElementTypes.DATE;
     dateDataElement.allowFutureDate = programTrackedEntityAttribute.allowFutureDate;
-    await setBaseProperties(dateDataElement, optionSets, programTrackedEntityAttribute, trackedEntityAttribute);
+    await setBaseProperties({
+        dataElement: dateDataElement,
+        optionSets,
+        programTrackedEntityAttribute,
+        trackedEntityAttribute,
+        querySingleResource,
+    });
     return dateDataElement;
 };
 
@@ -203,6 +234,7 @@ export const buildDataElement = (
     programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
     optionSets: Array<OptionSetType>,
+    querySingleResource: QuerySingleResource,
 ) => {
     const trackedEntityAttribute =
         programTrackedEntityAttribute.trackedEntityAttributeId &&
@@ -221,6 +253,6 @@ export const buildDataElement = (
     }
 
     return trackedEntityAttribute.valueType === dataElementTypes.DATE
-        ? buildDateDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute)
-        : buildBaseDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute);
+        ? buildDateDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute, querySingleResource)
+        : buildBaseDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute, querySingleResource);
 };

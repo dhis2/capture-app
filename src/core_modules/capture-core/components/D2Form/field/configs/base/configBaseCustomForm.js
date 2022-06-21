@@ -3,6 +3,7 @@ import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
 import { getBaseConfigForField } from './configBase';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import type { FieldConfigForType } from './configBase';
+import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 const getBaseProps = ({ compulsory, disabled, unique }: MetaDataElement) => ({
     metaCompulsory: compulsory,
@@ -16,7 +17,7 @@ export const createProps = (props?: ?Object, metaData: MetaDataElement) => ({
 
 // $FlowFixMe[prop-missing] automated comment
 // $FlowFixMe[incompatible-return] automated comment
-export const createFieldConfig = (fieldSpecifications: FieldConfigForType, metaData: MetaDataElement): FieldConfig => ({
-    ...getBaseConfigForField(metaData),
+export const createFieldConfig = (fieldSpecifications: FieldConfigForType, metaData: MetaDataElement, querySingleResource: QuerySingleResource): FieldConfig => ({
+    ...getBaseConfigForField(metaData, querySingleResource),
     ...fieldSpecifications,
 });

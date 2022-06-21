@@ -2,10 +2,11 @@
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateRangeFieldForForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 
-export const getDateRangeFieldConfig = (metaData: MetaDataElement, options: Object) => {
+export const getDateRangeFieldConfig = (metaData: MetaDataElement, options: Object, querySingleResource: QuerySingleResource) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
@@ -18,5 +19,5 @@ export const getDateRangeFieldConfig = (metaData: MetaDataElement, options: Obje
     return createFieldConfig({
         component: DateRangeFieldForForm,
         props,
-    }, metaData);
+    }, metaData, querySingleResource);
 };

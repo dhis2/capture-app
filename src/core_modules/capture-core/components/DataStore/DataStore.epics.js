@@ -3,36 +3,35 @@ import { ofType } from 'redux-observable';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { saveDataStore } from './DataStore.actions';
-import { getApi } from '../../d2';
 import { type UseNewDashboard } from './DataStore.types';
 import { appStartActionTypes } from '../../../../components/AppStart';
 
-function getDataStoreFromApi() {
-    const api = getApi();
-    return api.get('dataStore/capture/useNewDashboard');
-}
+const getDataStoreFromApi = async querySingleResource =>
+    querySingleResource({
+        resource: 'dataStore/capture/useNewDashboard',
+    });
 
-const getUserDataStoreFromApi = () => {
-    const api = getApi();
-    return api.get('userDataStore/capture/useNewDashboard');
-};
+const getUserDataStoreFromApi = async querySingleResource =>
+    querySingleResource({
+        resource: 'userDataStore/capture/useNewDashboard',
+    });
 
-export const fetchDataStoreEpic = (action$: InputObservable) =>
+export const fetchDataStoreEpic = (action$: InputObservable, _: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(appStartActionTypes.APP_LOAD_SUCESS),
         mergeMap(async () => {
-            const apiDataStore: UseNewDashboard = await getDataStoreFromApi();
+            const apiDataStore: UseNewDashboard = await getDataStoreFromApi(querySingleResource);
             // $FlowFixMe
             return saveDataStore({ dataStore: apiDataStore });
         }),
         catchError(() => EMPTY),
     );
 
-export const fetchUserDataStoreEpic = (action$: InputObservable) =>
+export const fetchUserDataStoreEpic = (action$: InputObservable, _: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(appStartActionTypes.APP_LOAD_SUCESS),
         mergeMap(async () => {
-            const apiUserDataStore: UseNewDashboard = await getUserDataStoreFromApi();
+            const apiUserDataStore: UseNewDashboard = await getUserDataStoreFromApi(querySingleResource);
             // $FlowFixMe
             return saveDataStore({ userDataStore: apiUserDataStore });
         }),

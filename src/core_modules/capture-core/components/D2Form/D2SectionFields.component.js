@@ -12,6 +12,8 @@ import { validationStrategies } from '../../metaData/RenderFoundation/renderFoun
 import type { DataElement, CustomForm } from '../../metaData';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 import { validatorTypes } from './field/validators/constants';
+import { withApiUtils } from '../../HOC';
+import type { QuerySingleResource } from '../../utils/api/api.types';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 type FormsValues = {
@@ -53,11 +55,12 @@ type Props = {
     validationStrategy: $Values<typeof validationStrategies>,
     loadNr: number,
     viewMode?: ?boolean,
+    querySingleResource: QuerySingleResource,
 };
 
-export class D2SectionFieldsComponent extends Component<Props> {
+class D2SectionFieldsComponentPlain extends Component<Props> {
     static buildFormFields(props: Props): Array<FieldConfig> {
-        const { fieldsMetaData, customForm, fieldOptions } = props;
+        const { fieldsMetaData, customForm, fieldOptions, querySingleResource } = props;
 
         return Array.from(fieldsMetaData.entries())
             .map(entry => entry[1])
@@ -71,6 +74,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
                     ...fieldOptions,
                 },
                 !!customForm,
+                querySingleResource,
             ))
             .filter(field => field);
     }
@@ -91,13 +95,13 @@ export class D2SectionFieldsComponent extends Component<Props> {
     constructor(props: Props) {
         super(props);
         this.handleUpdateField = this.handleUpdateField.bind(this);
-        this.formFields = D2SectionFieldsComponent.buildFormFields(this.props);
+        this.formFields = D2SectionFieldsComponentPlain.buildFormFields(this.props);
         this.rulesCompulsoryErrors = {};
     }
 
     UNSAFE_componentWillReceiveProps(newProps: Props) {
         if (newProps.fieldsMetaData !== this.props.fieldsMetaData) {
-            this.formFields = D2SectionFieldsComponent.buildFormFields(newProps);
+            this.formFields = D2SectionFieldsComponentPlain.buildFormFields(newProps);
         }
     }
 
@@ -140,13 +144,13 @@ export class D2SectionFieldsComponent extends Component<Props> {
     validateBasedOnStrategy(options?: ?{ isCompleting: boolean }, formBuilderInstance: FormBuilder) {
         const validationStrategy = this.props.validationStrategy;
         if (validationStrategy === validationStrategies.NONE) {
-            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
+            return D2SectionFieldsComponentPlain.validateBaseOnly(formBuilderInstance);
         } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
             const isCompleting = options && options.isCompleting;
             if (isCompleting) {
                 return this.validateFull(formBuilderInstance);
             }
-            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
+            return D2SectionFieldsComponentPlain.validateBaseOnly(formBuilderInstance);
         }
         return this.validateFull(formBuilderInstance);
     }
@@ -265,3 +269,5 @@ export class D2SectionFieldsComponent extends Component<Props> {
         );
     }
 }
+
+export const D2SectionFieldsComponent = withApiUtils(D2SectionFieldsComponentPlain);
