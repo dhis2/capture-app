@@ -2,7 +2,6 @@
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import { errorCreator } from 'capture-core-utils';
-import { getD2 } from '../d2/d2Instance';
 import { type RenderFoundation, dataElementTypes } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
 
@@ -62,17 +61,20 @@ const subValueGetterByElementType = {
         value,
         eventId,
         metaElementId,
+        querySingleResource,
     }: {
                 value: any,
                 eventId: string,
                 metaElementId: string,
+                querySingleResource: QuerySingleResource,
             }) => {
         const ouIds = value.split('/');
         const id = ouIds[ouIds.length - 1];
-        return getD2()
-            .models
-            .organisationUnits
-            .get(id)
+        return querySingleResource({ resource: 'organisationUnits',
+            id,
+            params: {
+                fields: 'id,code,displayName,path',
+            } })
             .then(res => ({
                 id: res.id,
                 code: res.code,
