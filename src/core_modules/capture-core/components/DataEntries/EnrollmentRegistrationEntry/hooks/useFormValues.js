@@ -176,6 +176,5 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
         dataEngine,
     ]);
 
-
     return { formValues, clientValues, formValuesReadyRef };
 };
