@@ -1,3 +1,10 @@
+## [100.5.12](https://github.com/dhis2/capture-app/compare/v100.5.11...v100.5.12) (2022-06-22)
+
+
+### Bug Fixes
+
+* [DHIS2-12120] conversion of program indicators to program rules ([#2781](https://github.com/dhis2/capture-app/issues/2781)) ([61b2f6d](https://github.com/dhis2/capture-app/commit/61b2f6d3e78c262ab65e78da25e42c5b5397f464))
+
 ## [100.5.11](https://github.com/dhis2/capture-app/compare/v100.5.10...v100.5.11) (2022-06-21)
 
 
