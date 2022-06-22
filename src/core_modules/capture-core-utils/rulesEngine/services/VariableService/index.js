@@ -1,5 +1,5 @@
 // @flow
-export { VariableService } from './VariableService';
+export { VariableService, variableSourceTypes } from './VariableService';
 export type {
     ProgramRuleVariable,
     EventData,

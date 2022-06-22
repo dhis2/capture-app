@@ -2,6 +2,7 @@
 import isString from 'd2-utilizr/lib/isString';
 
 import type { ProgramRule, ProgramRuleAction, ProgramRuleVariable } from 'capture-core-utils/rulesEngine';
+import { variableSourceTypes } from 'capture-core-utils/rulesEngine';
 
 export type CachedProgramIndicator = {
     id: string,
@@ -51,8 +52,9 @@ function getDirectAddressedVariable(variableWithCurls, programId) {
         newVariableObject = {
             id: variableName,
             displayName: variableName,
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE,
             valueType: 'TEXT',
+            programStageId: variableNameParts[0],
             dataElementId: variableNameParts[1],
             programId,
         };
@@ -61,7 +63,7 @@ function getDirectAddressedVariable(variableWithCurls, programId) {
         newVariableObject = {
             id: variableName,
             displayName: variableName,
-            programRuleVariableSourceType: 'TEI_ATTRIBUTE',
+            programRuleVariableSourceType: variableSourceTypes.TEI_ATTRIBUTE,
             valueType: 'TEXT',
             trackedEntityAttributeId: variableNameParts[0],
             programId,
@@ -145,7 +147,7 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
     // $FlowFixMe[prop-missing] automated comment
     const newAction: ProgramRuleAction = {
         id: programIndicator.id,
-        content: programIndicator.shortName || programIndicator.displayName,
+        content: programIndicator.displayName || programIndicator.shortName,
         data: programIndicator.expression,
         programRuleActionType: 'DISPLAYKEYVALUEPAIR',
         location: 'indicators',
