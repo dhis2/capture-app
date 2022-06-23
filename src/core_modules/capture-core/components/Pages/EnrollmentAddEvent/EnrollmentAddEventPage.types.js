@@ -13,6 +13,7 @@ export type Props = {|
     onSaveErrorActionType: string,
     onCancel: () => void,
     onDelete: () => void,
+    onEnrollmentError: (message: string) => void,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
     widgetReducerName: string,

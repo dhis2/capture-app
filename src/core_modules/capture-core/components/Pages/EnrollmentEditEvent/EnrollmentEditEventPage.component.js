@@ -70,6 +70,7 @@ const EnrollmentEditEventPagePain = ({
     onDelete,
     classes,
     onGoBack,
+    onEnrollmentError,
     orgUnitId,
     eventDate,
     pageStatus,
@@ -201,6 +202,7 @@ const EnrollmentEditEventPagePain = ({
                             enrollmentId={enrollmentId}
                             programId={programId}
                             onDelete={onDelete}
+                            onError={onEnrollmentError}
                         />
                     </div>
                 </div>

@@ -129,5 +129,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, i18n.t('Error saving enrollment')),
     [enrollmentSiteActionTypes.SAVE_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error saving the enrollment event')),
+    [enrollmentSiteActionTypes.ERROR_ENROLLMENT]: (state, action) =>
+        addErrorFeedback(state, i18n.t(action.payload.message)),
 }, 'feedbacks', []);
 
