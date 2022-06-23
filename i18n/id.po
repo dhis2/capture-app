@@ -264,7 +264,7 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Tidak, tetap disini"
 
 msgid "New event"
 msgstr "Event baru"
@@ -588,7 +588,7 @@ msgid "Online"
 msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Syncing"
 msgstr ""
