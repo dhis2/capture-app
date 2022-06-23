@@ -17,9 +17,9 @@ const enrollmentDelete = {
 };
 const processErrorReports = (error) => {
     // $FlowFixMe[prop-missing]
-    const errorReports = error?.details?.validationReport?.errorReports;
-    return errorReports?.length > 0
-        ? errorReports.reduce((acc, errorReport) => `${acc} ${errorReport.message}`, '')
+    const conflicts = error?.details?.response?.conflicts;
+    return conflicts?.length > 0
+        ? conflicts.reduce((acc, errorReport) => `${acc} ${errorReport.value}`, '')
         : error.message;
 };
 
