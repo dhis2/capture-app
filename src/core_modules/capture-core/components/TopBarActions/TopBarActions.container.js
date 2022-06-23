@@ -118,7 +118,7 @@ export const TopBarActions = ({
             <ConfirmDialog
                 onConfirm={handleAccept}
                 open={openConfirmDialog}
-                onCancel={setContext(defaultContext)}
+                onCancel={() => setContext(defaultContext)}
                 {...defaultDialogProps}
             />
         </>
