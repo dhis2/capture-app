@@ -75,6 +75,7 @@ const EnrollmentEditEventPagePain = ({
     orgUnitId,
     eventDate,
     pageStatus,
+    onEnrollmentError,
 }: PlainProps) => {
     const { setOrgUnitId } = useSetOrgUnitId();
 
@@ -204,6 +205,7 @@ const EnrollmentEditEventPagePain = ({
                             programId={programId}
                             onDelete={onDelete}
                             onAddNew={onAddNew}
+                            onError={onEnrollmentError}
                         />
                     </div>
                 </div>

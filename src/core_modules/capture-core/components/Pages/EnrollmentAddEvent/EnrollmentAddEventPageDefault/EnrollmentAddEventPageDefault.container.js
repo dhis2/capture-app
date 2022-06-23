@@ -14,7 +14,7 @@ import { useWidgetDataFromStore } from '../hooks';
 import {
     useHideWidgetByRuleLocations,
 } from '../../Enrollment/EnrollmentPageDefault/hooks';
-import { updateEnrollmentEventsWithoutId } from '../../common/EnrollmentOverviewDomain';
+import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 
@@ -47,6 +47,7 @@ export const EnrollmentAddEventPageDefault = ({
         dispatch(deleteEnrollment({ enrollmentId }));
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     }, [dispatch, enrollmentId, history, programId, orgUnitId, teiId]);
+    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
@@ -132,6 +133,7 @@ export const EnrollmentAddEventPageDefault = ({
                 pageFailure={commonDataError}
                 ready={Boolean(enrollment)}
                 dataEntryHasChanges={dataEntryHasChanges}
+                onEnrollmentError={onEnrollmentError}
             />
         </>
     );

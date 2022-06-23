@@ -3,7 +3,7 @@ import React from 'react';
 // $FlowFixMe
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
+import { useCommonEnrollmentDomainData, showEnrollmentError } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
@@ -32,6 +32,7 @@ export const EnrollmentEditEventPage = () => {
         history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
     };
+    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
@@ -71,6 +72,7 @@ export const EnrollmentEditEventPage = () => {
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            onEnrollmentError={onEnrollmentError}
         />
     );
 };
