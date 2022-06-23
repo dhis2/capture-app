@@ -11,6 +11,14 @@ import { useReset, useSetOrgUnitId } from '../ScopeSelector/hooks';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import type { Props } from './TopBarActions.types';
 
+const defaultContext = {
+    openStartAgainWarning: false,
+    openNewRegistrationPage: false,
+    openNewRegistrationPageWithoutProgramId: false,
+    openSearchPage: false,
+    openSearchPageWithoutProgramId: false,
+};
+
 const defaultDialogProps = {
     header: i18n.t('Unsaved changes'),
     text: i18n.t('Leaving this page will discard the changes you made to this event.'),
@@ -24,13 +32,7 @@ export const TopBarActions = ({
     isUserInteractionInProgress = false,
     customActionsOnProgramIdReset = [],
 }: Props) => {
-    const [context, setContext] = useState({
-        openStartAgainWarning: false,
-        openNewRegistrationPage: false,
-        openNewRegistrationPageWithoutProgramId: false,
-        openSearchPage: false,
-        openSearchPageWithoutProgramId: false,
-    });
+    const [context, setContext] = useState(defaultContext);
     const {
         openStartAgainWarning,
         openNewRegistrationPage,
@@ -48,16 +50,6 @@ export const TopBarActions = ({
     const dispatch = useDispatch();
     const { reset } = useReset();
     const { setOrgUnitId } = useSetOrgUnitId();
-
-    const handleClose = () => {
-        setContext({
-            openStartAgainWarning: false,
-            openNewRegistrationPage: false,
-            openNewRegistrationPageWithoutProgramId: false,
-            openSearchPage: false,
-            openSearchPageWithoutProgramId: false,
-        });
-    };
 
     const startAgain = () => {
         dispatch(resetAllCategoryOptionsFromScopeSelector());
@@ -108,8 +100,7 @@ export const TopBarActions = ({
         openNewRegistrationPageWithoutProgramId && newRegistrationPageWithoutProgramId();
         openSearchPage && searchPage();
         openSearchPageWithoutProgramId && searchPageWithoutProgramId();
-
-        handleClose();
+        setContext(defaultContext);
     };
 
     return (
@@ -127,7 +118,7 @@ export const TopBarActions = ({
             <ConfirmDialog
                 onConfirm={handleAccept}
                 open={openConfirmDialog}
-                onCancel={handleClose}
+                onCancel={setContext(defaultContext)}
                 {...defaultDialogProps}
             />
         </>
