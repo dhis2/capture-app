@@ -1,3 +1,10 @@
+# [100.6.0](https://github.com/dhis2/capture-app/compare/v100.5.13...v100.6.0) (2022-06-27)
+
+
+### Features
+
+* [DHIS2-12678] Stay in the same page when clicking search fallback ([#2757](https://github.com/dhis2/capture-app/issues/2757)) ([984678b](https://github.com/dhis2/capture-app/commit/984678b4eedabe89afde05b8a2b4bb9256c216d7))
+
 ## [100.5.13](https://github.com/dhis2/capture-app/compare/v100.5.12...v100.5.13) (2022-06-23)
 
 
