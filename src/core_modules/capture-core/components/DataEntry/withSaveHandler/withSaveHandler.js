@@ -31,7 +31,7 @@ type Props = {
     hasGeneralErrors: ?boolean,
     inProgressList: Array<string>,
     calculatedFoundation: RenderFoundation,
-    fieldsValidated: boolean,
+    sectionsInitialised: boolean,
 };
 
 type IsCompletingFn = (props: Props) => boolean;
@@ -74,7 +74,7 @@ const getSaveHandler = (
                 this.setState({ waitForPromisesDialogOpen: false, saveType: undefined });
                 this.validateAndSave(this.state.saveType);
             } else if (this.state.waitForFieldValidations &&
-                this.props.fieldsValidated) {
+                this.props.sectionsInitialised) {
                 // eslint-disable-next-line react/no-did-update-set-state
                 this.setState({ waitForFieldValidations: false, saveType: undefined });
                 this.validateAndSave(this.state.saveType);
@@ -166,10 +166,10 @@ const getSaveHandler = (
         }
 
         handleSaveAttempt = (saveType?: ?string) => {
-            const { inProgressList, fieldsValidated } = this.props;
+            const { inProgressList, sectionsInitialised } = this.props;
             if (inProgressList.length) {
                 this.setState({ waitForPromisesDialogOpen: true, saveType });
-            } else if (!fieldsValidated) {
+            } else if (!sectionsInitialised) {
                 this.setState({ waitForFieldValidations: true, saveType });
             } else {
                 this.validateAndSave(saveType);
@@ -233,7 +233,7 @@ const getSaveHandler = (
                 hasGeneralErrors,
                 inProgressList,
                 calculatedFoundation,
-                fieldsValidated,
+                sectionsInitialised,
                 ...passOnProps
             } = this.props;
 
@@ -300,7 +300,7 @@ const getSaveHandler = (
                 hasGeneralErrors: (generalErrors && generalErrors.length > 0),
                 inProgressList: state.dataEntriesInProgressList[key] || [],
                 calculatedFoundation: foundation,
-                fieldsValidated: reduxSectionKeys
+                sectionsInitialised: reduxSectionKeys
                     .every((reduxSectionKey) => {
                         const reduxSection = state.formsSectionsFieldsUI[reduxSectionKey];
                         // $FlowFixMe

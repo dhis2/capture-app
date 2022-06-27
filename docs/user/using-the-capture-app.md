@@ -1063,6 +1063,10 @@ When the form is in the edit mode the title of the page will appear as: `Enrollm
 
 ![](resources/images/enrollment-event-view-edit-edit.png)
 
+In this form you can also delete the event by clicking `Delete` button, a modal will appear to confirm if you want to delete this event. You will then be navigated back to Enrollment dashboard page.
+
+![](resources/images/enrollment-edit-event-delete.png)
+
 #### Widgets in View/Edit event page
 
 The widgets seen in the right-hand column will display and function the same way as mentioned in the [enrollment dashboard](#enrollment-dashboard).

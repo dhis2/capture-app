@@ -1217,8 +1217,8 @@ msgstr ""
 "No se pudo cargar el widget de perfil. Por favor, inténtelo de nuevo más "
 "tarde"
 
-msgid "Person Profile"
-msgstr "Perfil de la persona"
+msgid "{{TETName}} profile"
+msgstr ""
 
 msgid "Edit"
 msgstr "Editar"

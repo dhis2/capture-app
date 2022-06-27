@@ -49,7 +49,7 @@ const variableSourceTypesTrackedEntitySpecific = {
     TEI_ATTRIBUTE: 'TEI_ATTRIBUTE',
 };
 
-const variableSourceTypes = {
+export const variableSourceTypes = {
     ...variableSourceTypesDataElementSpecific,
     ...variableSourceTypesTrackedEntitySpecific,
     CALCULATED_VALUE: 'CALCULATED_VALUE',

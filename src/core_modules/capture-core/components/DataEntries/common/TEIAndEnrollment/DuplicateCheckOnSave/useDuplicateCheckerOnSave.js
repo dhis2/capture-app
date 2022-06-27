@@ -1,66 +1,38 @@
 // @flow
 import { useCallback, useState, useRef, useEffect } from 'react';
-import { scopeTypes } from '../../../../../metaData';
 import type { Input } from './useDuplicateCheckerOnSave.types';
-
-const useCheckForDuplicate = ({
-    onCheckForDuplicate,
-    searchGroup,
-    scopeType,
-    selectedScopeId,
-}) => {
-    if (!searchGroup) {
-        return undefined;
-    }
-
-    const scopePropertyName: string = scopeType === scopeTypes.TRACKED_ENTITY_TYPE ? 'trackedEntityTypeId' : 'programId';
-    return () => onCheckForDuplicate(
-        searchGroup, {
-            [scopePropertyName]: selectedScopeId,
-        });
-};
 
 export const useDuplicateCheckerOnSave = ({
     onSave,
-    duplicateInfo,
-    onCheckForDuplicate,
-    onResetCheckForDuplicate,
+    hasDuplicate,
+    onResetPossibleDuplicates,
     onReviewDuplicates,
     searchGroup,
-    scopeType,
-    selectedScopeId,
     duplicatesReviewPageSize,
 }: Input) => {
     const [duplicatesVisible, showDuplicates] = useState(false);
     const saveRef = useRef();
 
-    const checkForDuplicate = useCheckForDuplicate({
-        onCheckForDuplicate,
-        searchGroup,
-        scopeType,
-        selectedScopeId,
-    });
-    useEffect(() => {
-        if (duplicateInfo) {
-            if (duplicateInfo.hasDuplicate) {
-                onReviewDuplicates(duplicatesReviewPageSize);
-                showDuplicates(true);
-            } else {
-                saveRef.current && saveRef.current();
-            }
-        }
+    useEffect(() => onResetPossibleDuplicates, [onResetPossibleDuplicates]);
 
-        return onResetCheckForDuplicate;
-    }, [duplicateInfo, onResetCheckForDuplicate, onReviewDuplicates, duplicatesReviewPageSize]);
+    useEffect(() => {
+        if (hasDuplicate) {
+            showDuplicates(true);
+        }
+        if (hasDuplicate === false) {
+            showDuplicates(false);
+            saveRef.current && saveRef.current();
+        }
+    }, [hasDuplicate]);
 
     const handleSaveAttempt = useCallback(() => {
-        if (checkForDuplicate) {
+        if (searchGroup) {
             saveRef.current = onSave;
-            checkForDuplicate();
+            onReviewDuplicates(duplicatesReviewPageSize);
         } else {
             onSave();
         }
-    }, [checkForDuplicate, onSave]);
+    }, [searchGroup, onSave, duplicatesReviewPageSize, onReviewDuplicates]);
 
     const closeDuplicates = () => {
         showDuplicates(false);

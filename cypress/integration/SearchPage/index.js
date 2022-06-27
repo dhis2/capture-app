@@ -6,6 +6,7 @@ beforeEach(() => {
 
 Given('you are on the default search page', () => {
     cy.visit('/#/search');
+    cy.get('[data-test="scope-selector"]').should('exist');
 });
 
 Then('there should be no search domain preselected', () => {
@@ -234,7 +235,7 @@ When('you click the view dashboard button', () => {
 });
 
 When('you remove the Child Programme selection', () => {
-    cy.get('[data-test="program-selector-container"]').within(() => {
+    cy.get('[data-test="scope-selector"]').within(() => {
         cy.get('[data-test="reset-selection-button"]').eq(0).click();
     });
 });
@@ -372,7 +373,15 @@ When('you click the back button', () => {
         .click();
 });
 
-Then('you should be taken to the main page with org unit preselected', () => {
+Then('you should be taken to the main page with org unit and program preselected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW`);
+});
+
+Then('you stay in the same page with all program results', () => {
+    cy.get('[data-test="search-results-top"]')
+        .then(($elements) => {
+            cy.log({ $elements });
+            cy.wrap($elements[1]).contains('Results found in all programs');
+        });
 });

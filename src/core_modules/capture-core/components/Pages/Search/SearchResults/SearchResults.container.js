@@ -28,6 +28,8 @@ const getDataElements = scopeEntity => (scopeEntity ? [...scopeEntity.attributes
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
         searchResults,
+        otherResults,
+        otherCurrentPage,
         currentPage,
         currentSearchInfo: {
             searchScopeType: currentSearchScopeType,
@@ -49,6 +51,8 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     return {
         currentPage,
         searchResults,
+        otherResults,
+        otherCurrentPage,
         currentSearchScopeType,
         currentSearchScopeId,
         currentSearchScopeName,
@@ -78,12 +82,13 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { availableSearchOptions })
             triggeredFrom: PAGINATION,
         }));
     },
-    startFallbackSearch: ({ programId, formId, resultsPageSize }) => {
+    startFallbackSearch: ({ programId, formId, resultsPageSize, page }) => {
         dispatch(startFallbackSearch({
             programId,
             formId,
             availableSearchOptions,
             pageSize: resultsPageSize,
+            page,
         }));
     },
 });

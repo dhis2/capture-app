@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-05-23T16:15:34.379Z\n"
-"PO-Revision-Date: 2022-05-23T16:15:34.379Z\n"
+"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"PO-Revision-Date: 2022-06-20T08:58:04.154Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -843,6 +843,19 @@ msgstr "Search by {{name}}"
 msgid "Search by attributes"
 msgstr "Search by attributes"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "Fill in this field to search{{escape}} {{searchableAttributes}}"
+
 msgid "Back"
 msgstr "Back"
 
@@ -888,6 +901,9 @@ msgstr ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
 
+msgid "Cannot search in all programs"
+msgstr "Cannot search in all programs"
+
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
 
@@ -896,6 +912,15 @@ msgstr "View active enrollment"
 
 msgid "Re-enroll"
 msgstr "Re-enroll"
+
+msgid "all programs"
+msgstr "all programs"
+
+msgid "If none of search results match, you can create new "
+msgstr "If none of search results match, you can create new "
+
+msgid "Create new"
+msgstr "Create new"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1178,8 +1203,8 @@ msgstr "Fix errors in the form to continue."
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
-msgid "Person Profile"
-msgstr "Person Profile"
+msgid "{{TETName}} profile"
+msgstr "{{TETName}} profile"
 
 msgid "Edit"
 msgstr "Edit"
