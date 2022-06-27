@@ -1076,7 +1076,7 @@ msgid "Delete event"
 msgstr "删除事件"
 
 msgid "Yes, delete event"
-msgstr ""
+msgstr "是的，删除事件"
 
 msgid "Event completed"
 msgstr "事件完成"
@@ -1162,7 +1162,7 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
 msgid "{{TETName}} profile"
-msgstr ""
+msgstr "{{TETName}} 基本资料"
 
 msgid "Edit"
 msgstr "编辑"
@@ -1339,7 +1339,7 @@ msgid "Error saving the enrollment event"
 msgstr "保存报名事件时出错"
 
 msgid "Error deleting the enrollment event"
-msgstr ""
+msgstr "删除注册事件时出错"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "编辑事件时出错，所做的更改未保存"

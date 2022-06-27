@@ -139,7 +139,8 @@ class D2FilePlain extends Component<Props> {
                                         <CircularLoader />
                                     </div>
                                     <div className={classes.innerContainer}>{i18n.t('Uploading file')}</div>
-                                </div>);
+                                </div>
+                            );
                         } else if (value) {
                             return (
                                 <div className={containerClass}>

@@ -9,6 +9,7 @@ export const searchPageStatus = {
     SHOW_RESULTS: 'SHOW_RESULTS',
     ERROR: 'ERROR',
     TOO_MANY_RESULTS: 'TOO_MANY_RESULTS',
+    NOT_ENOUGH_ATTRIBUTES: 'NOT_ENOUGH_ATTRIBUTES',
 };
 const initialReducerValue = {
     searchStatus: searchPageStatus.INITIAL,
@@ -16,6 +17,7 @@ const initialReducerValue = {
     currentPage: 0,
     currentSearchInfo: {},
     keptFallbackSearchFormValues: {},
+    otherCurrentPage: 0,
 };
 export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW]: state => ({
@@ -27,6 +29,12 @@ export const searchPageDesc = createReducerDescription({
         searchStatus: searchPageStatus.SHOW_RESULTS,
         searchResults,
         currentPage,
+    }),
+    [searchPageActionTypes.ADD_SEARCH_RESULTS_SUCCESS_VIEW]: (state, { payload: { otherResults, otherCurrentPage } }) => ({
+        ...state,
+        searchStatus: searchPageStatus.SHOW_RESULTS,
+        otherResults,
+        otherCurrentPage,
     }),
     [searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW]: state => ({
         ...state,
@@ -44,14 +52,21 @@ export const searchPageDesc = createReducerDescription({
         ...state,
         searchStatus: searchPageStatus.TOO_MANY_RESULTS,
     }),
+    [searchPageActionTypes.FALLBACK_NOT_ENOUGH_ATTRIBUTES]: (state, { payload }) => ({
+        ...state,
+        searchStatus: searchPageStatus.NOT_ENOUGH_ATTRIBUTES,
+        searchableFields: payload.searchableFields,
+        minAttributesRequiredToSearch: payload.minAttributesRequiredToSearch,
+    }),
     [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
         ...state,
         currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
+        otherResults: undefined,
+        otherCurrentPage: 0,
     }),
-
-    [searchPageActionTypes.FALLBACK_SEARCH]: (state, { payload: { fallbackFormValues } }) => ({
+    [searchPageActionTypes.FALLBACK_SEARCH]: (state, { payload: { fallbackFormValues, trackedEntityTypeId } }) => ({
         ...state,
-        keptFallbackSearchFormValues: fallbackFormValues,
+        keptFallbackSearchFormValues: { ...fallbackFormValues, trackedEntityTypeId },
     }),
 
     [searchPageActionTypes.ALL_SEARCH_RELATED_DATA_CLEAN]: () => (initialReducerValue),
