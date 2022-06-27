@@ -102,7 +102,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
             .keys(newState)
             .filter(sectionKey => sectionKey.startsWith(formId))
             .forEach((formSectionKey) => {
-                newState[formSectionKey] = {};
+                delete newState[formSectionKey];
             });
 
         return newState;

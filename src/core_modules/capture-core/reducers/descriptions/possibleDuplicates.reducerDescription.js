@@ -1,10 +1,19 @@
 import { createReducerDescription } from '../../trackerRedux';
 import { searchGroupDuplicateActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 
+const initialReducerValue = {
+    isLoading: false,
+    isUpdating: false,
+    loadError: true,
+    teis: [],
+    currentPage: 0,
+};
+
 export const possibleDuplicatesDesc = createReducerDescription({
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW]: state => ({
         ...state,
         isLoading: true,
+        teis: [],
     }),
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_RETRIEVAL_SUCCESS]: (state, action) => ({
         ...state,
@@ -19,10 +28,12 @@ export const possibleDuplicatesDesc = createReducerDescription({
         isLoading: false,
         isUpdating: false,
         loadError: true,
+        teis: [],
     }),
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_CHANGE_PAGE]: (state, action) => ({
         ...state,
         isUpdating: true,
         currentPage: action.payload.page,
     }),
-}, 'possibleDuplicates');
+    [searchGroupDuplicateActionTypes.DUPLICATES_RESET]: state => ({ ...state, ...initialReducerValue }),
+}, 'possibleDuplicates', initialReducerValue);

@@ -50,7 +50,7 @@ const EnrollmentPagePlain = ({
     const { setOrgUnitId } = useSetOrgUnitId();
     const { setEnrollmentId } = useSetEnrollmentId();
 
-    const { resetProgramId } = useResetProgramId();
+    const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
     const { resetEnrollmentId } = useResetEnrollmentId();
     const { resetTeiId } = useResetTeiId();
@@ -62,7 +62,7 @@ const EnrollmentPagePlain = ({
                 selectedOrgUnitId={orgUnitId}
                 onSetProgramId={id => setProgramId(id)}
                 onSetOrgUnit={id => setOrgUnitId(id)}
-                onResetProgramId={() => resetProgramId()}
+                onResetProgramId={() => resetProgramIdAndEnrollmentContext()}
                 onResetOrgUnitId={() => resetOrgUnitId()}
             >
                 <Grid item xs={12} sm={6} md={4} lg={2}>

@@ -231,8 +231,7 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
                         searchableFields, minAttributesRequiredToSearch,
                     }));
                 }
-
-                return of(showEmptyResultsViewOnSearchPage());
+                return of(showErrorViewOnSearchPage());
             }
 
             return empty();

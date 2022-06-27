@@ -1105,7 +1105,7 @@ msgid "Delete event"
 msgstr "Smazat událost"
 
 msgid "Yes, delete event"
-msgstr ""
+msgstr "Ano, smazat událost"
 
 msgid "Event completed"
 msgstr "Událost dokončena"
@@ -1203,8 +1203,8 @@ msgstr "Chcete-li pokračovat, opravte chyby ve formuláři."
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
 
-msgid "Person Profile"
-msgstr "Osobní profil"
+msgid "{{TETName}} profile"
+msgstr "profil {{TETName}}"
 
 msgid "Edit"
 msgstr "Upravit"
@@ -1381,7 +1381,7 @@ msgid "Error saving the enrollment event"
 msgstr "Chyba při ukládání události zápisu"
 
 msgid "Error deleting the enrollment event"
-msgstr ""
+msgstr "Při mazání události zápisu došlo k chybě"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"

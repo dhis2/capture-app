@@ -1,3 +1,74 @@
+## [100.5.13](https://github.com/dhis2/capture-app/compare/v100.5.12...v100.5.13) (2022-06-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([2d062a7](https://github.com/dhis2/capture-app/commit/2d062a74edd10a5feef65e1b5f8a3dfb0373869d))
+
+## [100.5.12](https://github.com/dhis2/capture-app/compare/v100.5.11...v100.5.12) (2022-06-22)
+
+
+### Bug Fixes
+
+* [DHIS2-12120] conversion of program indicators to program rules ([#2781](https://github.com/dhis2/capture-app/issues/2781)) ([61b2f6d](https://github.com/dhis2/capture-app/commit/61b2f6d3e78c262ab65e78da25e42c5b5397f464))
+
+## [100.5.11](https://github.com/dhis2/capture-app/compare/v100.5.10...v100.5.11) (2022-06-21)
+
+
+### Bug Fixes
+
+* [DHIS2-13183] navigation to register new single event page ([#2842](https://github.com/dhis2/capture-app/issues/2842)) ([cd0fef1](https://github.com/dhis2/capture-app/commit/cd0fef143cdb1b0868fa7f7e9c0b6637283c777b))
+
+## [100.5.10](https://github.com/dhis2/capture-app/compare/v100.5.9...v100.5.10) (2022-06-20)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([fa93d76](https://github.com/dhis2/capture-app/commit/fa93d768a830f983130d1e9287b84c09c0435148))
+
+## [100.5.9](https://github.com/dhis2/capture-app/compare/v100.5.8...v100.5.9) (2022-06-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([66c4171](https://github.com/dhis2/capture-app/commit/66c4171bc4a30b1598e7a1f76b46e5dcaae6cd3a))
+
+## [100.5.8](https://github.com/dhis2/capture-app/compare/v100.5.7...v100.5.8) (2022-06-15)
+
+
+### Bug Fixes
+
+* [DHIS2-13396] use display form name on widget profile ([#2853](https://github.com/dhis2/capture-app/issues/2853)) ([d338edd](https://github.com/dhis2/capture-app/commit/d338edd2ff6b9eb1c5315c005c59ec4394075541))
+
+## [100.5.7](https://github.com/dhis2/capture-app/compare/v100.5.6...v100.5.7) (2022-06-09)
+
+
+### Bug Fixes
+
+* [DHIS2-12138] remove duplicate count call ([#2783](https://github.com/dhis2/capture-app/issues/2783)) ([6300c9b](https://github.com/dhis2/capture-app/commit/6300c9b256138a4f9b7ab0f367ba0417c007240a))
+* **translations:** sync translations from transifex (master) ([741b33d](https://github.com/dhis2/capture-app/commit/741b33d5210d0682345a8f25453e4e6bee09aac5))
+
+## [100.5.6](https://github.com/dhis2/capture-app/compare/v100.5.5...v100.5.6) (2022-06-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4aef2d8](https://github.com/dhis2/capture-app/commit/4aef2d83cb23a78478f9ac8ad0e73a95936b6bcb))
+
+## [100.5.5](https://github.com/dhis2/capture-app/compare/v100.5.4...v100.5.5) (2022-06-03)
+
+
+### Bug Fixes
+
+* [DHIS2-13062] Fix profile tet name ([#2811](https://github.com/dhis2/capture-app/issues/2811)) ([42163e9](https://github.com/dhis2/capture-app/commit/42163e9bcad5269cf3f169dd04e3f28697272b2a))
+
+## [100.5.4](https://github.com/dhis2/capture-app/compare/v100.5.3...v100.5.4) (2022-06-01)
+
+
+### Bug Fixes
+
+* hidden sections must be marked as initialised ([#2819](https://github.com/dhis2/capture-app/issues/2819)) ([c11d0df](https://github.com/dhis2/capture-app/commit/c11d0df693e1fd1ddeded1b66be62755266a888e))
+
 ## [100.5.3](https://github.com/dhis2/capture-app/compare/v100.5.2...v100.5.3) (2022-05-31)
 
 
