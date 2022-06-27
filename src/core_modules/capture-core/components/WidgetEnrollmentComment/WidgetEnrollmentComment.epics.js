@@ -7,14 +7,19 @@ import moment from 'moment';
 import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote }
     from './WidgetEnrollmentComment.actions';
 
-export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxStore) =>
+export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_ENROLLMENT),
-        map((action) => {
+        map(async (action) => {
             const state = store.value;
             const { enrollmentId, note } = action.payload;
-
-            const { firstName, surname, userName } = state.app.currentUser;
+            const user = await querySingleResource({
+                resource: 'me',
+                params: {
+                    fields: 'firstName, surname, userName',
+                },
+            });
+            const { firstName, surname, userName } = user;
             const clientId = uuid();
 
             const serverData = {

@@ -13,18 +13,23 @@ import {
     addNote,
 } from '../../../DataEntry/actions/dataEntry.actions';
 
-export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryActionTypes.EVENT_NOTE_ADD),
-        map((action) => {
+        map(async (action) => {
             const payload = action.payload;
-            const state = store.value;
-            const userName = state.app.currentUser.username;
+
+            const user = await querySingleResource({
+                resource: 'me',
+                params: {
+                    fields: 'username',
+                },
+            });
 
             const storedAt = moment().toISOString();
             const note = {
                 value: payload.note,
-                storedBy: userName,
+                storedBy: user.userName,
                 storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
                 clientId: uuid(),
             };

@@ -46,15 +46,21 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
             ], viewEventNotesBatchActionTypes.LOAD_EVENT_NOTES_BATCH);
         }));
 
-export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE),
-        map((action) => {
+        map(async (action) => {
             const state = store.value;
             const payload = action.payload;
 
             const eventId = state.viewEventPage.eventId;
-            const userName = state.app.username;
+            const user = await querySingleResource({
+                resource: 'me',
+                params: {
+                    fields: 'username',
+                },
+            });
+            const userName = user.username;
 
             const serverData = {
                 event: eventId,

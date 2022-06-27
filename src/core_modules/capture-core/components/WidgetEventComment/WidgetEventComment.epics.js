@@ -18,15 +18,20 @@ import {
     removeNote,
 } from '../DataEntry/actions/dataEntry.actions';
 
-export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT),
-        map((action) => {
+        map(async (action) => {
             const state = store.value;
             const payload = action.payload;
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
-
-            const { firstName, surname, userName } = state.app.currentUser;
+            const user = await querySingleResource({
+                resource: 'me',
+                params: {
+                    fields: 'firstName, surname, userName',
+                },
+            });
+            const { firstName, surname, userName } = user;
             const clientId = uuid();
 
             const serverData = {
