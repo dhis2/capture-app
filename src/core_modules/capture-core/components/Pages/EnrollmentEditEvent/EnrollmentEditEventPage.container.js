@@ -26,7 +26,7 @@ export const EnrollmentEditEventPage = () => {
     const currentPageMode = showEditEvent ? pageMode.EDIT : pageMode.VIEW;
     const dataEntryKey = `singleEvent-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
-    const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
+    const hideWidgets = useHideWidgetByRuleLocations(program.programRules.concat(programStage?.programRules));
 
     const onDelete = () => {
         history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);

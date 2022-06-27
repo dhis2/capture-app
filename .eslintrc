@@ -80,18 +80,7 @@
         ],
         "react/jsx-no-bind": 0,
         "react/require-default-props": 0,
-        "import/no-extraneous-dependencies": [
-            "error",
-            {
-                "devDependencies": [
-                    "**/*.test.js",
-                    "/cypress/**",
-                    "**/startAppForCypress.js"
-                ],
-                "optionalDependencies": false,
-                "peerDependencies": true
-            }
-        ],
+        "import/no-extraneous-dependencies": "off",
         "react/sort-comp": [
             2,
             {
