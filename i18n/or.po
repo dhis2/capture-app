@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
+"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: SubhamJena <subhamjena8465@gmail.com>, 2022\n"
 "Language-Team: Odia (https://www.transifex.com/hisp-uio/teams/100509/or/)\n"
@@ -834,6 +834,17 @@ msgstr ""
 msgid "Search by attributes"
 msgstr ""
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr ""
 
@@ -874,6 +885,9 @@ msgid ""
 "searching by more attributes to narrow down the results."
 msgstr ""
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr ""
 
@@ -881,6 +895,15 @@ msgid "View active enrollment"
 msgstr ""
 
 msgid "Re-enroll"
+msgstr ""
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
 msgstr ""
 
 msgid ""
