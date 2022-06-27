@@ -1,7 +1,7 @@
 // @flow
 import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import moment from 'moment';
 import { convertValue as convertListValue } from '../../../../converters/clientToList';
 import { dataElementTypes } from '../../../../metaData';
@@ -16,23 +16,23 @@ import {
 export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryActionTypes.EVENT_NOTE_ADD),
-        map(async (action) => {
+        switchMap((action) => {
             const payload = action.payload;
 
-            const user = await querySingleResource({
+            return querySingleResource({
                 resource: 'me',
                 params: {
                     fields: 'username',
                 },
+            }).then((user) => {
+                const storedAt = moment().toISOString();
+                const note = {
+                    value: payload.note,
+                    storedBy: user.userName,
+                    storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
+                    clientId: uuid(),
+                };
+
+                return addNote(payload.dataEntryId, payload.itemId, note);
             });
-
-            const storedAt = moment().toISOString();
-            const note = {
-                value: payload.note,
-                storedBy: user.userName,
-                storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
-                clientId: uuid(),
-            };
-
-            return addNote(payload.dataEntryId, payload.itemId, note);
         }));
