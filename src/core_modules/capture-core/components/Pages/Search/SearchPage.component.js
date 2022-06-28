@@ -87,6 +87,8 @@ const Index = ({
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
+    minAttributesRequiredToSearch,
+    searchableFields,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
@@ -127,6 +129,37 @@ const Index = ({
         cleanSearchRelatedInfo();
         setSearchScopeId(searchScopeId);
         setSearchScopeType(searchType);
+    };
+
+    const renderNotEnoughAttributesMessage = () => {
+        const searchableFieldsDisplayname = searchableFields?.map(field => field.formName)?.join(', ');
+
+        if (minAttributesRequiredToSearch === searchableFields.length && searchableFields.length > 1) {
+            return i18n.t('Fill in these fields to search{{escape}} {{ searchableAttributes }}', {
+                escape: ':',
+                searchableAttributes: searchableFieldsDisplayname,
+                interpolation: {
+                    escape: false,
+                },
+            });
+        }
+        if (searchableFields.length > 1) {
+            return i18n.t('Fill in at least {{minAttributesRequiredToSearch}} of these fields to search{{escape}} {{searchableAttributes}}', {
+                escape: ':',
+                minAttributesRequiredToSearch,
+                searchableAttributes: searchableFieldsDisplayname,
+                interpolation: {
+                    escape: false,
+                },
+            });
+        }
+        return i18n.t('Fill in this field to search{{escape}} {{searchableAttributes}}', {
+            escape: ':',
+            searchableAttributes: searchableFieldsDisplayname,
+            interpolation: {
+                escape: false,
+            },
+        });
     };
 
     const searchStatusComponents = () => (
@@ -178,6 +211,24 @@ const Index = ({
                         )}
                     </NoticeBox>
                 </div>
+            )}
+
+            {searchStatus === searchPageStatus.NOT_ENOUGH_ATTRIBUTES && (
+                <Modal position="middle">
+                    <ModalTitle>{i18n.t('Cannot search in all programs')}</ModalTitle>
+                    <ModalContent>{renderNotEnoughAttributesMessage()}</ModalContent>
+                    <ModalActions>
+                        <ButtonStrip end>
+                            <Button
+                                disabled={searchStatus === searchPageStatus.LOADING}
+                                onClick={showInitialSearchPage}
+                                type="button"
+                            >
+                                {i18n.t('Back to search')}
+                            </Button>
+                        </ButtonStrip>
+                    </ModalActions>
+                </Modal>
             )}
         </>
     );

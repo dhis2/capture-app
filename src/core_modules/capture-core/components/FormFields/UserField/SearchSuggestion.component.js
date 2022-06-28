@@ -114,10 +114,12 @@ export const SearchSuggestion = (props: Props) => {
             >
                 <div>
                     {parts.map((part, index) => (part.highlight ? (
+                        // eslint-disable-next-line react/no-array-index-key
                         <span key={String(index)} style={{ fontWeight: 500 }}>
                             {part.text}
                         </span>
                     ) : (
+                        // eslint-disable-next-line react/no-array-index-key
                         <strong key={String(index)} style={{ fontWeight: 300 }}>
                             {part.text}
                         </strong>
