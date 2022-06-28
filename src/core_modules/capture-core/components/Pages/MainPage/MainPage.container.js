@@ -43,16 +43,27 @@ const MainPageContainer = () => {
     const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
     const showAllAccessible = all !== undefined;
 
-    const { categories, selectedCategories, searchStatus, error, ready } = useSelector(
+    const {
+        categories,
+        selectedCategories,
+        searchStatus,
+        searchableFields,
+        minAttributesRequiredToSearch,
+        error,
+        ready,
+    } = useSelector(
         ({ currentSelections, searchPage, activePage }) => ({
             categories: currentSelections.categories,
             selectedCategories: currentSelections.categoriesMeta,
             searchStatus: searchPage.searchStatus,
             ready: !activePage.isLoading && !activePage.lockedSelectorLoads,
             error: activePage.selectionsError && activePage.selectionsError.error,
+            searchableFields: searchPage.searchableFields,
+            minAttributesRequiredToSearch: searchPage.minAttributesRequiredToSearch,
         }),
         shallowEqual,
     );
+
     const selectedProgram = programCollection.get(programId);
     // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
@@ -139,6 +150,8 @@ const MainPageContainer = () => {
                         preselectedProgramId={programId}
                         trackedEntityTypeId={trackedEntityTypeId}
                         searchStatus={searchStatus}
+                        minAttributesRequiredToSearch={minAttributesRequiredToSearch}
+                        searchableFields={searchableFields}
                         error={error}
                         ready={ready}
                     />
