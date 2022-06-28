@@ -57,11 +57,11 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
             return querySingleResource({
                 resource: 'me',
                 params: {
-                    fields: 'username',
+                    fields: 'userName,firstName,surname',
                 },
             }).then((user) => {
-                const userName = user.username;
-
+                const { userName, firstName, surname } = user;
+                const clientId = uuid();
                 const serverData = {
                     event: eventId,
                     notes: [{ value: payload.note }],
@@ -69,6 +69,11 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
 
                 const clientNote = {
                     value: payload.note,
+                    createdBy: {
+                        firstName,
+                        surname,
+                        uid: clientId,
+                    },
                     storedBy: userName,
                     storedDate: convertListValue(moment().toISOString(), dataElementTypes.DATETIME),
                     clientId: uuid(),

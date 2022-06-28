@@ -2,6 +2,7 @@
 import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
+
 import moment from 'moment';
 import { convertValue as convertListValue } from '../../../../../../converters/clientToList';
 import { dataElementTypes } from '../../../../../../metaData';
@@ -22,13 +23,20 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: Re
             return querySingleResource({
                 resource: 'me',
                 params: {
-                    fields: 'name',
+                    fields: 'firstName,surname,userName',
                 },
             }).then((user) => {
+                const { userName, firstName, surname } = user;
+                const clientId = uuid();
                 const storedAt = moment().toISOString();
                 const note = {
                     value: payload.note,
-                    storedBy: user.name,
+                    createdBy: {
+                        firstName,
+                        surname,
+                        uid: clientId,
+                    },
+                    storedBy: userName,
                     storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
                     clientId: uuid(),
                 };

@@ -22,13 +22,20 @@ export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store
             return querySingleResource({
                 resource: 'me',
                 params: {
-                    fields: 'username',
+                    fields: 'firstName,surname,username',
                 },
             }).then((user) => {
                 const storedAt = moment().toISOString();
+                const { userName, firstName, surname } = user;
+                const clientId = uuid();
                 const note = {
                     value: payload.note,
-                    storedBy: user.userName,
+                    createdBy: {
+                        firstName,
+                        surname,
+                        uid: clientId,
+                    },
+                    storedBy: userName,
                     storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
                     clientId: uuid(),
                 };
