@@ -73,14 +73,16 @@ const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnit
                   ?
                   {
                       status: 'ACTIVE',
-                      eventDate: dateToUseInActiveStatus,
-                      dueDate: dateToUseInActiveStatus,
+                      eventDate: convertFn(dateToUseInActiveStatus, dataElementTypes.DATE),
+                      dueDate: convertFn(dateToUseInActiveStatus, dataElementTypes.DATE),
                   }
                   :
                   {
                       status: 'SCHEDULE',
                       // for schedule type of events we want to add the standard interval days to the date
-                      dueDate: moment(dateToUseInScheduleStatus).add(minDaysFromStart, 'days').format('YYYY-MM-DD'),
+                      dueDate: moment(convertFn(dateToUseInScheduleStatus, dataElementTypes.DATE))
+                          .add(minDaysFromStart, 'days')
+                          .format('YYYY-MM-DD'),
                   };
 
             return {
