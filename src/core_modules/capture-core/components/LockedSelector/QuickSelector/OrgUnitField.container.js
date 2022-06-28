@@ -4,7 +4,7 @@ import { OrgUnitField as BasicOrgUnitField } from '../../FormFields/New';
 import { searchOrgUnits, clearOrgUnitsSearch } from './actions/orgUnitList.actions';
 
 const mapStateToProps = (state: ReduxState) => {
-    const orgUnits = state.registeringUnitList.roots ?? state.app.currentUser.organisationUnits;
+    const orgUnits = state.registeringUnitList.roots ?? state.app.roots;
 
     return {
         roots: orgUnits,

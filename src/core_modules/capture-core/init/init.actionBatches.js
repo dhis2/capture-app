@@ -7,8 +7,8 @@ export const batchActionTypes = {
 };
 
 export const loadCoreSuccessBatch = (
-    currentUserAction: ReduxAction<any, any>,
+    orgUnitRootsAction: ReduxAction<any, any>,
 ) => batchActions([
-    currentUserAction,
+    orgUnitRootsAction,
     loadCoreSuccess(),
 ], batchActionTypes.CORE_LOAD_SUCCESS_BATCH);
