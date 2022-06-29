@@ -9,7 +9,7 @@ type InputProgramData = {
     programTrackedEntityAttributes: Array<{
         trackedEntityAttribute: {
             id: string,
-            displayName?: ?string,
+            displayFormName?: ?string,
             optionSet?: ?{
                 id: string,
                 options?: ?Array<{
@@ -46,7 +46,7 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
             const computedAttributes = await programTrackedEntityAttributes.reduce(async (promisedAcc, currentTEA) => {
                 const {
                     displayInList,
-                    trackedEntityAttribute: { id, displayName, optionSet, valueType, unique },
+                    trackedEntityAttribute: { id, optionSet, valueType, unique, displayFormName },
                 } = currentTEA;
                 const foundAttribute = trackedEntityInstanceAttributes?.find(item => item.attribute === id);
                 let value;
@@ -65,7 +65,7 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
                     ...acc,
                     {
                         attribute: id,
-                        key: displayName,
+                        key: displayFormName,
                         optionSet,
                         displayInList,
                         value,

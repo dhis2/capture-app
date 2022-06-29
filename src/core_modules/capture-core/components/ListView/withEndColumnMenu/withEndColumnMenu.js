@@ -36,7 +36,8 @@ export const withEndColumnMenu = () =>
                         customEndCellHeaderStyle={settings.headerCellStyle}
                         customEndCellBodyStyle={settings.bodyCellStyle}
                         {...this.props}
-                    />);
+                    />
+                );
             }
         }
 ;
