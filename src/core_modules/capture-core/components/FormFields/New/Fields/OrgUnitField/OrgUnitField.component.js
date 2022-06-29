@@ -48,7 +48,7 @@ type Props = {
     },
 };
 
-const OrgUnitFieldPlain = (props) => {
+const OrgUnitFieldPlain = (props: Props) => {
     const {
         onSelectClick,
         classes,
