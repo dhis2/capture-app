@@ -1,36 +1,36 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# phil_dhis2, 2019
-# Oscar Mesones Lapouble <oscar.lapouble@gmail.com>, 2021
+# Valeriu Plesca <vplesca@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T12:27:04.744Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Oscar Mesones Lapouble <oscar.lapouble@gmail.com>, 2021\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
+"Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
+"Language-Team: Romanian (https://www.transifex.com/hisp-uio/teams/100509/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Coloane pentru afișare în tabel"
 
 msgid "Column"
-msgstr "Coluna"
+msgstr "Coloană"
 
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Anulare"
 
 msgid "Discard event?"
 msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"Părăsirea acestei pagini presupune pierderea modificărilor pe care le-ați "
+"făcut la acest eveniment."
 
 msgid "Discard"
 msgstr ""
@@ -39,28 +39,28 @@ msgid "Back to event"
 msgstr ""
 
 msgid "Add comment"
-msgstr ""
+msgstr "Adăugare comentariu"
 
 msgid "Write comment"
-msgstr ""
+msgstr "Scrieți comentariu"
 
 msgid "Errors"
-msgstr "Erros"
+msgstr "Erori"
 
 msgid "Feedback"
-msgstr "Retroinformacão"
+msgstr "Feedback"
 
 msgid "Indicators"
-msgstr "Indicadores"
+msgstr "Indicatori"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Avertizări"
 
 msgid "Complete"
-msgstr "Completo"
+msgstr ""
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Avertismente găsite"
 
 msgid "Abort"
 msgstr ""
@@ -69,37 +69,37 @@ msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr ""
+msgstr "Fără acces la scriere"
 
 msgid "Save"
-msgstr "Salvar"
+msgstr "salva"
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr "Ordenar"
+msgstr "Sortare"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Nu există evenimente pentru afișare"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Datele pentru lista offline nu sunt prezente"
 
 msgid "Last week"
-msgstr "Última semana"
+msgstr "Săptămâna trecută"
 
 msgid "Last month"
-msgstr "Mês passado"
+msgstr "Luna trecută"
 
 msgid "Last 3 months"
-msgstr "Últimos 3 meses"
+msgstr "Ultimele 3 luni"
 
 msgid "Custom range"
 msgstr ""
 
 msgid "to"
-msgstr "para"
+msgstr ""
 
 msgid "after or equal to"
 msgstr ""
@@ -108,94 +108,94 @@ msgid "before or equal to"
 msgstr ""
 
 msgid "From"
-msgstr ""
+msgstr "Din"
 
 msgid "To"
-msgstr ""
+msgstr "Pînă la"
 
 msgid "Max"
-msgstr "Máx"
+msgstr "Max"
 
 msgid "Min"
 msgstr "Min"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "mai mare sau egal cu"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "mai mic sau egal cu"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Conține text"
 
 msgid "Yes"
-msgstr "Sim"
+msgstr "Da"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
-msgstr "Anos"
+msgstr "Ani"
 
 msgid "Months"
-msgstr "Meses"
+msgstr "Luni"
 
 msgid "Days"
-msgstr ""
+msgstr "Zile"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Încărcare fișier"
 
 msgid "selected"
-msgstr ""
+msgstr "selectat"
 
 msgid "Delete"
-msgstr "Apagar"
+msgstr "Lichidare"
 
 msgid "Select file"
-msgstr ""
+msgstr "Selectare fișier"
 
 msgid "No"
-msgstr "nenhum"
+msgstr "Nu"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Încărcare imagine"
 
 msgid "Select image"
-msgstr ""
+msgstr "Selectați imaginea"
 
 msgid "Search"
-msgstr "Pesquisar"
+msgstr "Căutare"
 
 msgid "Clear"
-msgstr "Limpar"
+msgstr ""
 
 msgid "No results"
-msgstr ""
+msgstr "Nu există rezultate"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Nu există elemente pentru afișare"
 
 msgid "Online"
-msgstr "Ligado"
+msgstr "Online"
 
 msgid "Offline"
-msgstr "Desligado"
+msgstr "Offline"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Sincronizare"
 
 msgid "Area"
 msgstr ""
 
 msgid "Basic info"
-msgstr ""
+msgstr "Informații de bază"
 
 msgid "Status"
-msgstr "Estado"
+msgstr "Stare"
 
 msgid "Comments"
-msgstr ""
+msgstr "Comentarii"
 
 msgid "Field"
 msgstr ""
@@ -204,46 +204,48 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "introduceți o dată validă"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
+"Vă rugăm să adăugați sau să anulați comentariul înainte de a salva "
+"evenimentul"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Afișarea tuturor evenimentelor"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Editare eveniment"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Evenimentul nu a putut fi încărcat. Sunteți sigur ca exista?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Evenimentul nu a putut fi încărcat"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Unitatea organizațională nu a putut fi încărcată"
 
 msgid "Delete event"
-msgstr ""
+msgstr "Lichidare eveniment"
 
 msgid "Update"
-msgstr "Actualizar"
+msgstr "Actualizare"
 
 msgid "Close"
-msgstr "Fechar"
+msgstr "Închidere"
 
 msgid "More filters"
-msgstr ""
+msgstr "Mai multe filtre"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Rânduri pe pagină"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Nu s-a putut obține unitatea organizațională"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Programul nu există"
 
 msgid "Selected program is invalid for registering unit"
 msgstr ""
@@ -252,30 +254,32 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "în"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Acesta nu este un program de tip eveniment sau metadatele sunt corupte. "
+"Consultați jurnalul pentru detalii."
 
 msgid "A value is required"
-msgstr ""
+msgstr "Este necesară o valoare"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Salvare și adăugarea altuia"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Salvare și ieșire"
 
 msgid "Finish"
-msgstr ""
+msgstr "Finalizare"
 
 msgid "events added"
-msgstr ""
+msgstr "evenimentele au fost adăugate"
 
 msgid "No events added"
-msgstr ""
+msgstr "Nu au fost adăugate evenimente"
 
 msgid "Switch to form view"
 msgstr ""
@@ -284,7 +288,7 @@ msgid "Switch to row view"
 msgstr ""
 
 msgid "New event"
-msgstr ""
+msgstr "Eveniment nou"
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
@@ -302,55 +306,55 @@ msgid "Start again"
 msgstr ""
 
 msgid "New"
-msgstr "Novo"
+msgstr "Nou"
 
 msgid "Find"
-msgstr "Encontrar"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "Începe din nou"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Unitatea organizațională de înregistrare"
 
 msgid "Select"
-msgstr "Seleccione"
+msgstr "Selectare"
 
 msgid "Selected Program"
 msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Unele programe sunt filtrate."
 
 msgid "Show all"
 msgstr ""
 
 msgid "Program"
-msgstr "Programa"
+msgstr "Program"
 
 msgid "Select program"
-msgstr "Seleccione Programa"
+msgstr "Selectare program"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Nu există programe disponibile."
 
 msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Eroare la salvarea evenimentului"
 
 msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Setarea coordonatelor"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Lichidare poligon"
 
 msgid "Set area"
 msgstr ""
@@ -361,12 +365,17 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Ați deschis o altă versiune a aplicației Capture în același domeniu. În "
+"prezent, aplicația Capture acceptă rularea simultană a unei singure versiuni"
+" (în același domeniu). Vă rugăm să reîmprospătați această pagină dacă doriți"
+" să utilizați din nou această versiune, dar rețineți că aceasta va închide "
+"alte versiuni."
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Selectați una sau mai multe date..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Selectați data..."
 
 msgid "Today"
-msgstr "Hoje"
+msgstr "Astăzi"

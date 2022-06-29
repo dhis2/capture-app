@@ -1,30 +1,28 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# phil_dhis2, 2019
-# Oscar Mesones Lapouble <oscar.lapouble@gmail.com>, 2021
+# SubhamJena <subhamjena8465@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T12:27:04.744Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Oscar Mesones Lapouble <oscar.lapouble@gmail.com>, 2021\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
+"Last-Translator: SubhamJena <subhamjena8465@gmail.com>, 2022\n"
+"Language-Team: Odia (https://www.transifex.com/hisp-uio/teams/100509/or/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Language: or\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr "Coluna"
+msgstr ""
 
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 msgid "Discard event?"
 msgstr ""
@@ -45,19 +43,19 @@ msgid "Write comment"
 msgstr ""
 
 msgid "Errors"
-msgstr "Erros"
+msgstr ""
 
 msgid "Feedback"
-msgstr "Retroinformacão"
+msgstr "ମତାମତ"
 
 msgid "Indicators"
-msgstr "Indicadores"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Complete"
-msgstr "Completo"
+msgstr ""
 
 msgid "Warnings found"
 msgstr ""
@@ -72,13 +70,13 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr "Salvar"
+msgstr ""
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr "Ordenar"
+msgstr ""
 
 msgid "No events to display"
 msgstr ""
@@ -87,19 +85,19 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
-msgstr "Última semana"
+msgstr "ଗତ ସପ୍ତାହ"
 
 msgid "Last month"
-msgstr "Mês passado"
+msgstr "ଗତ ମାସ"
 
 msgid "Last 3 months"
-msgstr "Últimos 3 meses"
+msgstr ""
 
 msgid "Custom range"
 msgstr ""
 
 msgid "to"
-msgstr "para"
+msgstr ""
 
 msgid "after or equal to"
 msgstr ""
@@ -114,10 +112,10 @@ msgid "To"
 msgstr ""
 
 msgid "Max"
-msgstr "Máx"
+msgstr ""
 
 msgid "Min"
-msgstr "Min"
+msgstr ""
 
 msgid "greater than or equal to"
 msgstr ""
@@ -129,16 +127,16 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "Sim"
+msgstr "ହଁ"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "Anos"
+msgstr ""
 
 msgid "Months"
-msgstr "Meses"
+msgstr ""
 
 msgid "Days"
 msgstr ""
@@ -150,13 +148,13 @@ msgid "selected"
 msgstr ""
 
 msgid "Delete"
-msgstr "Apagar"
+msgstr ""
 
 msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "nenhum"
+msgstr "ନାହିଁ"
 
 msgid "Uploading image"
 msgstr ""
@@ -165,10 +163,10 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr "Pesquisar"
+msgstr ""
 
 msgid "Clear"
-msgstr "Limpar"
+msgstr ""
 
 msgid "No results"
 msgstr ""
@@ -177,10 +175,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr "Ligado"
+msgstr ""
 
 msgid "Offline"
-msgstr "Desligado"
+msgstr ""
 
 msgid "Syncing"
 msgstr ""
@@ -192,7 +190,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr "Estado"
+msgstr ""
 
 msgid "Comments"
 msgstr ""
@@ -228,10 +226,10 @@ msgid "Delete event"
 msgstr ""
 
 msgid "Update"
-msgstr "Actualizar"
+msgstr ""
 
 msgid "Close"
-msgstr "Fechar"
+msgstr ""
 
 msgid "More filters"
 msgstr ""
@@ -302,10 +300,10 @@ msgid "Start again"
 msgstr ""
 
 msgid "New"
-msgstr "Novo"
+msgstr ""
 
 msgid "Find"
-msgstr "Encontrar"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""
@@ -317,7 +315,7 @@ msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Select"
-msgstr "Seleccione"
+msgstr ""
 
 msgid "Selected Program"
 msgstr ""
@@ -329,10 +327,10 @@ msgid "Show all"
 msgstr ""
 
 msgid "Program"
-msgstr "Programa"
+msgstr ""
 
 msgid "Select program"
-msgstr "Seleccione Programa"
+msgstr ""
 
 msgid "No programs available."
 msgstr ""
@@ -369,4 +367,4 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr "Hoje"
+msgstr "ଆଜି"
