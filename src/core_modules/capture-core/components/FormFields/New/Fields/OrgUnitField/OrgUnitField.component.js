@@ -35,7 +35,6 @@ const getStyles = () => ({
 
 type Props = {
     onSelectClick: (selectedOrgUnit: Object) => void,
-    ready?: ?boolean,
     selected?: ?string,
     maxTreeHeight?: ?number,
     disabled?: ?boolean,
