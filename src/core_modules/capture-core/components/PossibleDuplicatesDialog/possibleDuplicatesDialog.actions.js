@@ -7,6 +7,7 @@ export const actionTypes = {
     DUPLICATES_REVIEW_RETRIEVAL_SUCCESS: 'PossibleDuplicatesReviewRetrievalSuccess',
     DUPLICATES_REVIEW_RETRIEVAL_FAILED: 'PossibleDuplicatesReviewRetrievalFailed',
     DUPLICATES_REVIEW_CHANGE_PAGE: 'PossibleDuplicatesChangePage',
+    DUPLICATES_RESET: 'PossibleDuplicatesReset',
 };
 
 
@@ -48,3 +49,5 @@ export const changePage = ({
         scopeType,
         dataEntryId,
     });
+
+export const duplicatesReset = () => actionCreator(actionTypes.DUPLICATES_RESET)();

@@ -77,15 +77,15 @@ describe('Event rules engine', () => {
     describe.each([
         [
             { oZg33kd9taw: 'Female', SWfdB5lX0fk: null },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: NaN }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
         [
             { oZg33kd9taw: 'Male', SWfdB5lX0fk: null },
-            [{ id: 'SWfdB5lX0fk', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' }, { displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: NaN }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ id: 'SWfdB5lX0fk', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' }, { displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
         [
             { oZg33kd9taw: null, SWfdB5lX0fk: null },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: NaN }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
     ])('where field is hidden regarding the gender of the event', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
@@ -104,35 +104,35 @@ describe('Event rules engine', () => {
     describe.each([
         [
             { qrur9Dvnyt5: null, GieVkTxp4HH: null, vV9UWAZohSf: null },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: NaN }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
         [
             { qrur9Dvnyt5: null, GieVkTxp4HH: null, vV9UWAZohSf: 85 },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: Infinity }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
         [
             { qrur9Dvnyt5: null, GieVkTxp4HH: 180, vV9UWAZohSf: null },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 0 }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '0' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
         [
             { qrur9Dvnyt5: null, GieVkTxp4HH: 180, vV9UWAZohSf: 85 },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 26.234567901234566 }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '26.234567901234566' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
         [
             { qrur9Dvnyt5: 40, GieVkTxp4HH: null, vV9UWAZohSf: null },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: NaN }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
         [
             { qrur9Dvnyt5: 40, GieVkTxp4HH: null, vV9UWAZohSf: 85 },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: Infinity }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
         [
             { qrur9Dvnyt5: 40, GieVkTxp4HH: 180, vV9UWAZohSf: null },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 0 }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '0' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
         [
             { qrur9Dvnyt5: 40, GieVkTxp4HH: 180, vV9UWAZohSf: 85 },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 26.234567901234566 }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
+            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '26.234567901234566' }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
     ])('where BMI is calculated', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {

@@ -23,7 +23,7 @@ export const EnrollmentEditEventPage = () => {
     const { programId, stageId, teiId, enrollmentId, orgUnitId, eventId } = useLocationQuery();
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);
-    const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
+    const hideWidgets = useHideWidgetByRuleLocations(program.programRules.concat(programStage?.programRules));
 
     const onDelete = () => {
         history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
