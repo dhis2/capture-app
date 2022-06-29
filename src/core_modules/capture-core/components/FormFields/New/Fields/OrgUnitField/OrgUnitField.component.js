@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { useDataQuery } from '@dhis2/app-runtime';
 import { withStyles } from '@material-ui/core/styles';
 import { DebounceField } from 'capture-ui';
 import { OrgUnitTree } from './OrgUnitTree.component';
@@ -33,11 +34,7 @@ const getStyles = () => ({
 });
 
 type Props = {
-    roots: Array<Object>,
-    treeKey: string,
     onSelectClick: (selectedOrgUnit: Object) => void,
-    onSearch: (searchText: string) => void,
-    searchText: ?string,
     ready?: ?boolean,
     selected?: ?string,
     maxTreeHeight?: ?number,
@@ -51,61 +48,104 @@ type Props = {
     },
 };
 
-class OrgUnitFieldPlain extends React.Component<Props> {
-    classes: Object;
-    static defaultProps = {
-        roots: [],
-    }
-    constructor(props: Props) {
-        super(props);
-        this.classes = {
-            input: this.props.classes.searchField,
-        };
-    }
+const OrgUnitFieldPlain = (props) => {
+    const {
+        onSelectClick,
+        classes,
+        selected,
+        maxTreeHeight,
+        disabled,
+    } = props;
+    const [searchText, setSearchText] = React.useState(undefined);
 
-    handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
-        this.props.onSearch(event.currentTarget.value);
-    }
-    render() {
-        const {
-            roots,
-            onSelectClick,
-            searchText,
-            ready,
-            treeKey,
-            classes,
-            selected,
-            maxTreeHeight,
-            disabled,
-        } = this.props;
-        const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' } : null;
-        return (
-            <div
-                className={classes.container}
-            >
-                <div className={classes.debounceFieldContainer}>
-                    <DebounceField
-                        onDebounced={this.handleFilterChange}
-                        value={searchText}
-                        placeholder={i18n.t('Search')}
-                        classes={this.classes}
-                        disabled={disabled}
-                    />
-                </div>
-                {!disabled &&
-                    <div className={classes.orgUnitTreeContainer} style={styles}>
-                        <OrgUnitTree
-                            roots={roots}
-                            onSelectClick={onSelectClick}
-                            ready={ready}
-                            treeKey={treeKey}
-                            selected={selected}
-                        />
-                    </div>
-                }
+    const { loading, data } = useDataQuery(
+        React.useMemo(
+            () => ({
+                orgUnits: {
+                    resource: 'me',
+                    params: {
+                        fields: ['organisationUnits[id,path]'],
+                    },
+
+                },
+            }),
+            [],
+        ),
+    );
+
+
+    const { loading: searchLoading, data: searchData, refetch: refetchOrg } = useDataQuery(
+        React.useMemo(
+            () => ({
+                orgUnits: {
+                    resource: 'organisationUnits',
+                    params: ({ variables: { searchText: currentSearchText } }) => ({
+                        fields: [
+                            'id,displayName,path,publicAccess,access,lastUpdated',
+                            'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
+                        ].join(','),
+                        paging: true,
+                        query: currentSearchText,
+                        withinUserSearchHierarchy: true,
+                        pageSize: 15,
+                    }),
+
+                },
+            }),
+            [],
+        ),
+        { lazy: true },
+    );
+
+    const ready = searchText?.length ? !searchLoading : !loading;
+
+    React.useEffect(() => {
+        if (searchText?.length) {
+            refetchOrg({ variables: { searchText } });
+        }
+    }, [refetchOrg, searchText]);
+
+    const getRoots = React.useMemo(() => {
+        if (searchText?.length && !searchLoading && searchData?.orgUnits) {
+            return searchData?.orgUnits?.organisationUnits;
+        }
+        if (!loading) {
+            return data?.orgUnits?.organisationUnits;
+        }
+        return undefined;
+    }, [searchText, data, searchData, loading, searchLoading]);
+
+    const handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
+        setSearchText(event.currentTarget.value);
+    };
+
+    const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' } : null;
+    return (
+        <div
+            className={classes.container}
+        >
+            <div className={classes.debounceFieldContainer}>
+                <DebounceField
+                    onDebounced={handleFilterChange}
+                    value={searchText}
+                    placeholder={i18n.t('Search')}
+                    classes={classes}
+                    disabled={disabled}
+                />
             </div>
-        );
-    }
-}
+            {!disabled &&
+            <div className={classes.orgUnitTreeContainer} style={styles}>
+                <OrgUnitTree
+                    roots={getRoots}
+                    onSelectClick={onSelectClick}
+                    ready={ready}
+                    treeKey={searchText ?? 'initial'}
+                    selected={selected}
+                />
+            </div>
+            }
+        </div>
+    );
+};
 
 export const OrgUnitField = withStyles(getStyles)(OrgUnitFieldPlain);

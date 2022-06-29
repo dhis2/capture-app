@@ -1,7 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
 import { OrgUnitField as BasicOrgUnitField } from '../../FormFields/New';
-import { searchOrgUnits, clearOrgUnitsSearch } from './actions/orgUnitList.actions';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 const mapStateToProps = (state: ReduxState) => {
@@ -15,12 +14,7 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onSearch: (searchText: string) => {
-        const action = searchText ? searchOrgUnits(searchText) : clearOrgUnitsSearch();
-        dispatch(action);
-    },
-});
+const mapDispatchToProps = () => ({});
 
 // $FlowFixMe[missing-annot] automated comment
 export const OrgUnitField = connect(mapStateToProps, mapDispatchToProps)(BasicOrgUnitField);
