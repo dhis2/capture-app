@@ -732,9 +732,21 @@ The results page shows up to five results at a time. You should try to use speci
 
 2. Select an organisation unit.
 
-3. Select a tracker program.
+3. Select a tracker program with "Display front page list" set to true.
 
 4. The program can have categories associated with it (implementing partner would be an example of such a category). If this is the case, fill them in.
+
+### Custom TEI working list for programs with "Display front page list" set to false.
+
+1. Open the **Capture** app.
+
+2. Select an organisation unit.
+
+3. Select a tracker program with "Display front page list" set to false.
+
+4. If the program has any custom working list you are able to click and load it.
+
+![](resources/images/tei_list.png)
 
 ### Filter the list
 
