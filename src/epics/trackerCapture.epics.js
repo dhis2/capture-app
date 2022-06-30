@@ -148,8 +148,7 @@ import {
 } from 'capture-core/components/DataEntries';
 import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
-import { loadCoreEpic } from 'capture-core/init';
-import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../components/AppStart';
+import { triggerLoadCoreEpic, loadAppEpic } from '../components/AppStart';
 
 import {
     validateSelectionsBasedOnUrlUpdateEpic,
@@ -230,11 +229,9 @@ export const epics = combineEpics(
     resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
     triggerLoadCoreEpic,
-    loadCoreEpic,
     fetchDataStoreEpic,
     fetchUserDataStoreEpic,
     loadAppEpic,
-    loadCoreFailedEpic,
     initEventListEpic,
     initTeiViewEpic,
     updateTeiListEpic,
