@@ -24,7 +24,7 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
     const error = errorEnrollment || errorProgram || errorOwnerOrgUnit || errorOrgUnit;
 
     if (error) {
-        log.error(errorCreator('Enrollment widget could not be loaded'));
+        log.error(errorCreator('Enrollment widget could not be loaded')({ error }));
     }
 
     return (
