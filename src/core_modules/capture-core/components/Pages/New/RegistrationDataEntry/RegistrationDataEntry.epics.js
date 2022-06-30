@@ -55,7 +55,7 @@ const deriveGeometryFromFormValues = (formValues = {}) =>
 const deriveEvents = ({ stages, enrolledAt, occurredAt, programId, orgUnitId }) => {
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate (enrolledAt)
-    const sanitisedIncidentDate = occurredAt || enrolledAt;
+    const sanitizedOccurredAt = occurredAt || enrolledAt;
     return [...stages.values()]
         .filter(({ autoGenerateEvent }) => autoGenerateEvent)
         .map(({
@@ -66,8 +66,8 @@ const deriveEvents = ({ stages, enrolledAt, occurredAt, programId, orgUnitId }) 
             minDaysFromStart,
         }) => {
             const dateToUseInActiveStatus =
-            reportDateToUseInActiveStatus === 'enrolledAt' ? enrolledAt : sanitisedIncidentDate;
-            const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrolledAt : sanitisedIncidentDate;
+            reportDateToUseInActiveStatus === 'enrolledAt' ? enrolledAt : sanitizedOccurredAt;
+            const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrolledAt : sanitizedOccurredAt;
 
             const eventInfo =
               openAfterEnrollment
