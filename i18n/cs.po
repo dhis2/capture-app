@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
+"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -856,6 +856,20 @@ msgstr "Hledat podle {{name}}"
 msgid "Search by attributes"
 msgstr "Hledání podle atributů"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+"Vyplňte tato pole pro vyhledávání{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Chcete-li hledat, vyplňte alespoň {{minAttributesRequiredToSearch}} z těchto"
+" polí{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "Vyplňte toto pole pro vyhledávání{{escape}} {{searchableAttributes}}"
+
 msgid "Back"
 msgstr "Zpět"
 
@@ -903,6 +917,9 @@ msgstr ""
 "Chcete-li zúžit výsledky, zkuste změnit hledané výrazy nebo hledat podle "
 "více atributů."
 
+msgid "Cannot search in all programs"
+msgstr "Nelze vyhledávat ve všech programech"
+
 msgid "Choose a type to start searching"
 msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
 
@@ -911,6 +928,15 @@ msgstr "Zobrazit aktivní zápisy"
 
 msgid "Re-enroll"
 msgstr "Znovu zapsat"
+
+msgid "all programs"
+msgstr "všechny programy"
+
+msgid "If none of search results match, you can create new "
+msgstr "Pokud žádný z výsledků vyhledávání neodpovídá, můžete vytvořit nový"
+
+msgid "Create new"
+msgstr "Vytvořit nový"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
