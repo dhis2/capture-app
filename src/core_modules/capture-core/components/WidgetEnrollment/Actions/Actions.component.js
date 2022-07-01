@@ -34,6 +34,15 @@ export const ActionsPlain = ({
     classes,
 }: PlainProps) => {
     const [open, setOpen] = useState(false);
+    const handleOnUpdate = (arg) => {
+        setOpen(prev => !prev);
+        onUpdate(arg);
+    };
+    const handleOnDelete = (arg) => {
+        setOpen(prev => !prev);
+        onDelete(arg);
+    };
+
     return (
         <>
             <DropdownButton
@@ -51,39 +60,24 @@ export const ActionsPlain = ({
                                 onlyEnrollOnce={onlyEnrollOnce}
                                 tetName={tetName}
                                 canAddNew={canAddNew}
-                                onAddNew={(arg) => {
-                                    setOpen(prev => !prev);
-                                    onAddNew(arg);
-                                }}
+                                onAddNew={onAddNew}
                             />
                             <Complete
                                 enrollment={enrollment}
-                                onUpdate={(arg) => {
-                                    setOpen(prev => !prev);
-                                    onUpdate(arg);
-                                }}
+                                onUpdate={handleOnUpdate}
                             />
                             <Followup
                                 enrollment={enrollment}
-                                onUpdate={(arg) => {
-                                    setOpen(prev => !prev);
-                                    onUpdate(arg);
-                                }}
+                                onUpdate={handleOnUpdate}
                             />
                             <MenuDivider />
                             <Cancel
                                 enrollment={enrollment}
-                                onUpdate={(arg) => {
-                                    setOpen(prev => !prev);
-                                    onUpdate(arg);
-                                }}
+                                onUpdate={handleOnUpdate}
                             />
                             <Delete
                                 enrollment={enrollment}
-                                onDelete={(arg) => {
-                                    setOpen(prev => !prev);
-                                    onDelete(arg);
-                                }}
+                                onDelete={handleOnDelete}
                             />
                         </FlyoutMenu>
                     )
