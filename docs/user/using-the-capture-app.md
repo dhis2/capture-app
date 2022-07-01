@@ -202,7 +202,7 @@ To configure the auto generation of an event you need to take the following step
 
 ### Enrollment with open data entry form
 
-A program can be configured to have zero or more program stages that automatically open upon a new enrollment. The user will be taken to the new enrollment event page with the option to add an event in the first program stage that has "Open data entry form after enrollment" option set to true.
+A program can be configured to have zero or more program stages that automatically open upon a new enrollment. The user will be taken to the new enrollment event page in the first program stage that has "Open data entry form after enrollment" option set to true. 
 
 To configure it, you must follow the steps described in the [Enrollment with auto generated events](#enrollment-with-auto-generated-events) section and then check the option "Open data entry form after enrollment".
  
