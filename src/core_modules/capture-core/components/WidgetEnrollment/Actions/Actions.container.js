@@ -50,6 +50,9 @@ export const Actions = ({
         enrollmentDelete,
         {
             onComplete: onDelete,
+            onError: (e) => {
+                onError && onError(processErrorReports(e));
+            },
         },
     );
 
