@@ -39,6 +39,9 @@ export const Actions = ({ enrollment = {}, refetch, onDelete, onError }: Props) 
         enrollmentDelete,
         {
             onComplete: onDelete,
+            onError: (e) => {
+                onError && onError(processErrorReports(e));
+            },
         },
     );
     return (
