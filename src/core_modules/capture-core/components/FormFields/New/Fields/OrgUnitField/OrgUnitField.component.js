@@ -56,6 +56,7 @@ const OrgUnitFieldPlain = (props: Props) => {
         disabled,
     } = props;
     const [searchText, setSearchText] = React.useState(undefined);
+    const [key, setKey] = React.useState(undefined);
 
     const { loading, data } = useDataQuery(
         React.useMemo(
@@ -101,18 +102,28 @@ const OrgUnitFieldPlain = (props: Props) => {
     React.useEffect(() => {
         if (searchText?.length) {
             refetchOrg({ variables: { searchText } });
+            setKey(`${searchText}-${new Date().getTime()}`);
         }
     }, [refetchOrg, searchText]);
 
-    const getRoots = React.useMemo(() => {
-        if (searchText?.length && !searchLoading && searchData?.orgUnits) {
-            return searchData?.orgUnits?.organisationUnits;
+    const renderOrgUnitTree = () => {
+        if (searchText?.length) {
+            return (<OrgUnitTree
+                roots={searchData?.orgUnits?.organisationUnits}
+                onSelectClick={onSelectClick}
+                ready={ready}
+                treeKey={key}
+                selected={selected}
+            />);
         }
-        if (!loading) {
-            return data?.orgUnits?.organisationUnits;
-        }
-        return undefined;
-    }, [searchText, data, searchData, loading, searchLoading]);
+        return (<OrgUnitTree
+            roots={data?.orgUnits?.organisationUnits}
+            onSelectClick={onSelectClick}
+            ready={ready}
+            treeKey={'initial'}
+            selected={selected}
+        />);
+    };
 
     const handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
         setSearchText(event.currentTarget.value);
@@ -134,13 +145,7 @@ const OrgUnitFieldPlain = (props: Props) => {
             </div>
             {!disabled &&
             <div className={classes.orgUnitTreeContainer} style={styles}>
-                <OrgUnitTree
-                    roots={getRoots}
-                    onSelectClick={onSelectClick}
-                    ready={ready}
-                    treeKey={searchText ?? 'initial'}
-                    selected={selected}
-                />
+                {renderOrgUnitTree()}
             </div>
             }
         </div>
