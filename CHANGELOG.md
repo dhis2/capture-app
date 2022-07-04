@@ -1,3 +1,10 @@
+## [100.6.3](https://github.com/dhis2/capture-app/compare/v100.6.2...v100.6.3) (2022-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-12303] enrollment dropdownbutton open state ([#2882](https://github.com/dhis2/capture-app/issues/2882)) ([9d8d792](https://github.com/dhis2/capture-app/commit/9d8d792125e815f5aceda27d0f515c62d84a907f))
+
 ## [100.6.2](https://github.com/dhis2/capture-app/compare/v100.6.1...v100.6.2) (2022-06-30)
 
 
