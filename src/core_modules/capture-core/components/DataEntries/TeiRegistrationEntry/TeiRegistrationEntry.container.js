@@ -13,21 +13,21 @@ import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component'
 const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
     const dispatch = useDispatch();
     const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
+    const orgUnit = useCurrentOrgUnitInfo();
     const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const registrationFormReady = !!formId;
     useEffect(() => {
-        if (registrationFormReady && scopeType === scopeTypes.TRACKED_ENTITY_TYPE) {
+        if (registrationFormReady && scopeType === scopeTypes.TRACKED_ENTITY_TYPE && orgUnit.code) {
             dispatch(
                 startNewTeiDataEntryInitialisation(
-                    { selectedOrgUnitId, selectedScopeId, dataEntryId, formFoundation },
+                    { orgUnit, selectedScopeId, dataEntryId, formFoundation },
                 ));
         }
     }, [
         scopeType,
         dataEntryId,
         selectedScopeId,
-        selectedOrgUnitId,
+        orgUnit,
         registrationFormReady,
         formFoundation,
         dispatch,

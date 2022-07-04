@@ -14,8 +14,8 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (action$: InputObserva
     action$.pipe(
         ofType(teiRegistrationEntryActionTypes.TEI_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
-        switchMap(({ selectedOrgUnitId, selectedScopeId: TETypeId, dataEntryId, formFoundation }) => {
-            if (selectedOrgUnitId) {
+        switchMap(({ orgUnit, selectedScopeId: TETypeId, dataEntryId, formFoundation }) => {
+            if (orgUnit?.id) {
                 try {
                     getTrackedEntityTypeThrowIfNotFound(TETypeId);
                 } catch (error) {
@@ -25,7 +25,7 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (action$: InputObserva
 
                 const openTeiPromise = openDataEntryForNewTeiBatchAsync(
                     formFoundation,
-                    { id: selectedOrgUnitId },
+                    orgUnit,
                     dataEntryId,
                 );
 
