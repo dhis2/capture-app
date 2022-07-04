@@ -13,14 +13,15 @@ import { scopeTypes } from '../../../metaData';
 const useInitialiseEnrollmentRegistration = (selectedScopeId, dataEntryId) => {
     const dispatch = useDispatch();
     const { scopeType } = useScopeInfo(selectedScopeId);
-    const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
+    const orgUnit = useCurrentOrgUnitInfo();
     const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const registrationFormReady = !!formId;
     useEffect(() => {
-        if (registrationFormReady && scopeType === scopeTypes.TRACKER_PROGRAM) {
+        if (registrationFormReady && scopeType === scopeTypes.TRACKER_PROGRAM && orgUnit.code) {
+            debugger;
             dispatch(
                 startNewEnrollmentDataEntryInitialisation(
-                    { selectedOrgUnitId, selectedScopeId, dataEntryId, formFoundation },
+                    { orgUnit, selectedScopeId, dataEntryId, formFoundation },
                 ),
             );
         }
@@ -28,7 +29,7 @@ const useInitialiseEnrollmentRegistration = (selectedScopeId, dataEntryId) => {
         scopeType,
         dataEntryId,
         selectedScopeId,
-        selectedOrgUnitId,
+        orgUnit,
         registrationFormReady,
         formFoundation,
         dispatch,
