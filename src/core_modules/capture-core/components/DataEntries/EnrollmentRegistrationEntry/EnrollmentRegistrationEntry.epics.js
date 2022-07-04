@@ -16,7 +16,7 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: Input
         ofType(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
         switchMap(({ orgUnit, selectedScopeId: programId, dataEntryId, formFoundation }) => {
-            if (orgUnit?.id) {
+            if (orgUnit.id) {
                 let trackerProgram: ?TrackerProgram;
                 try {
                     trackerProgram = getTrackerProgramThrowIfNotFound(programId);

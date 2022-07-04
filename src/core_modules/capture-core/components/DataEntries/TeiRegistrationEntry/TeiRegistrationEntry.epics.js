@@ -15,7 +15,7 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (action$: InputObserva
         ofType(teiRegistrationEntryActionTypes.TEI_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
         switchMap(({ orgUnit, selectedScopeId: TETypeId, dataEntryId, formFoundation }) => {
-            if (orgUnit?.id) {
+            if (orgUnit.id) {
                 try {
                     getTrackedEntityTypeThrowIfNotFound(TETypeId);
                 } catch (error) {
