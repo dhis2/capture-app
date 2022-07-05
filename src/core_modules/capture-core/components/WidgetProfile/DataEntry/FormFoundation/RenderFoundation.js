@@ -15,8 +15,7 @@ import { getProgramTrackedEntityAttributes, getTrackedEntityTypeId } from '../he
 const getFeatureType = (featureType: ?string) =>
     (featureType ? capitalizeFirstLetter(featureType.toLowerCase()) : 'None');
 
-const buildProgramSection = programSection =>
-    programSection.trackedEntityAttributes.reduce((acc, { id }) => acc.concat(id), []);
+const buildProgramSection = programSection => programSection.trackedEntityAttributes.map(({ id }) => id);
 
 const buildTetFeatureTypeField = (trackedEntityType: TrackedEntityType) => {
     if (!trackedEntityType) {

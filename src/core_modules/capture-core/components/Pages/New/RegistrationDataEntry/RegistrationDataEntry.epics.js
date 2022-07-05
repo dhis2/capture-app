@@ -14,13 +14,11 @@ import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
+import { FEATURETYPE } from '../../../../constants';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
-const geometryType = (formValuesKey) => {
-    const geometryKeys = ['FEATURETYPE_POINT', 'FEATURETYPE_POLYGON'];
-    return geometryKeys.find(geometryKey => geometryKey === formValuesKey);
-};
+const geometryType = formValuesKey => Object.values(FEATURETYPE).find(geometryKey => geometryKey === formValuesKey);
 
 const standardGeoJson = (geometry) => {
     if (!geometry) {
