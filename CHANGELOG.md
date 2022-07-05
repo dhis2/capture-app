@@ -1,3 +1,46 @@
+## [100.6.5](https://github.com/dhis2/capture-app/compare/v100.6.4...v100.6.5) (2022-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-13189] fix user name in widget comment ([#2892](https://github.com/dhis2/capture-app/issues/2892)) ([a07548f](https://github.com/dhis2/capture-app/commit/a07548ff89dc5c583309096b0f5d9e104dc846a8))
+
+## [100.6.4](https://github.com/dhis2/capture-app/compare/v100.6.3...v100.6.4) (2022-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-13200] topbaractions redirection and state ([#2878](https://github.com/dhis2/capture-app/issues/2878)) ([bb2684f](https://github.com/dhis2/capture-app/commit/bb2684f919ffd4c9aaef648d860ea56ff82c17cb))
+* [DHIS2-13347] uncheck "yes/only" checkboxes ([#2851](https://github.com/dhis2/capture-app/issues/2851)) ([a3b8e9b](https://github.com/dhis2/capture-app/commit/a3b8e9bfcfdc0cb6515c0a23c4a8feef0a8ef1f6))
+
+## [100.6.3](https://github.com/dhis2/capture-app/compare/v100.6.2...v100.6.3) (2022-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-12303] enrollment dropdownbutton open state ([#2882](https://github.com/dhis2/capture-app/issues/2882)) ([9d8d792](https://github.com/dhis2/capture-app/commit/9d8d792125e815f5aceda27d0f515c62d84a907f))
+
+## [100.6.2](https://github.com/dhis2/capture-app/compare/v100.6.1...v100.6.2) (2022-06-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c585d45](https://github.com/dhis2/capture-app/commit/c585d450ffa1430b401fc75e484565193cfb4489))
+
+## [100.6.1](https://github.com/dhis2/capture-app/compare/v100.6.0...v100.6.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([921f002](https://github.com/dhis2/capture-app/commit/921f0022565109297e7e01f0b69d669792b3c4bd))
+
+# [100.6.0](https://github.com/dhis2/capture-app/compare/v100.5.13...v100.6.0) (2022-06-27)
+
+
+### Features
+
+* [DHIS2-12678] Stay in the same page when clicking search fallback ([#2757](https://github.com/dhis2/capture-app/issues/2757)) ([984678b](https://github.com/dhis2/capture-app/commit/984678b4eedabe89afde05b8a2b4bb9256c216d7))
+
 ## [100.5.13](https://github.com/dhis2/capture-app/compare/v100.5.12...v100.5.13) (2022-06-23)
 
 
