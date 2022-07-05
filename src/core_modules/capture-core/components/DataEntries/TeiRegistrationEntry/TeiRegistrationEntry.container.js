@@ -17,7 +17,7 @@ const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
     const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const registrationFormReady = !!formId;
     useEffect(() => {
-        if (registrationFormReady && scopeType === scopeTypes.TRACKED_ENTITY_TYPE && orgUnit.code) {
+        if (registrationFormReady && scopeType === scopeTypes.TRACKED_ENTITY_TYPE) {
             dispatch(
                 startNewTeiDataEntryInitialisation(
                     { orgUnit, selectedScopeId, dataEntryId, formFoundation },

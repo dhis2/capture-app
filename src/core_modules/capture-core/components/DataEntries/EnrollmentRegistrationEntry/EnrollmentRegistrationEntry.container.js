@@ -17,7 +17,7 @@ const useInitialiseEnrollmentRegistration = (selectedScopeId, dataEntryId) => {
     const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const registrationFormReady = !!formId;
     useEffect(() => {
-        if (registrationFormReady && scopeType === scopeTypes.TRACKER_PROGRAM && orgUnit.code) {
+        if (registrationFormReady && scopeType === scopeTypes.TRACKER_PROGRAM) {
             dispatch(
                 startNewEnrollmentDataEntryInitialisation({
                     orgUnit,
