@@ -343,7 +343,7 @@ When('you change the sharing settings', () =>
                 cy.contains('Share view')
                     .click();
 
-                cy.get('[placeholder="Enter names"]')
+                cy.get('[placeholder="Search"]')
                     .type('Boateng');
 
                 cy.contains('Kevin Boateng')
@@ -351,7 +351,7 @@ When('you change the sharing settings', () =>
                     .click();
 
                 cy.contains('Close')
-                    .click();
+                    .click({ force: true });
             }),
         ),
 );
@@ -377,12 +377,13 @@ Then('your newly defined sharing settings should still be present', () => {
 
     cy.contains('Kevin Boateng')
         .should('exist')
+        .should('exist')
         .parent()
         .parent()
-        .find('button')
-        .eq(1)
+        .parent()
+        .find('.select')
         .click();
-
+    cy.contains('Remove access').click();
     cy.contains('Close')
         .click();
 

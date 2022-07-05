@@ -409,9 +409,9 @@ When('you change the sharing settings', () => {
             .then(() => {
                 cy.get('[data-test="list-view-menu-button"]').click();
                 cy.contains('Share view').click();
-                cy.get('[placeholder="Enter names"]').type('Boateng');
+                cy.get('[placeholder="Search"]').type('Boateng');
                 cy.contains('Kevin Boateng').parent().click();
-                cy.contains('Close').click();
+                cy.contains('Close').click({ force: true });
             }),
     );
 });
