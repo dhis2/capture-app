@@ -1,3 +1,11 @@
+## [100.6.4](https://github.com/dhis2/capture-app/compare/v100.6.3...v100.6.4) (2022-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-13200] topbaractions redirection and state ([#2878](https://github.com/dhis2/capture-app/issues/2878)) ([bb2684f](https://github.com/dhis2/capture-app/commit/bb2684f919ffd4c9aaef648d860ea56ff82c17cb))
+* [DHIS2-13347] uncheck "yes/only" checkboxes ([#2851](https://github.com/dhis2/capture-app/issues/2851)) ([a3b8e9b](https://github.com/dhis2/capture-app/commit/a3b8e9bfcfdc0cb6515c0a23c4a8feef0a8ef1f6))
+
 ## [100.6.3](https://github.com/dhis2/capture-app/compare/v100.6.2...v100.6.3) (2022-07-04)
 
 
