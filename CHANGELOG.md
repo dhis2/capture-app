@@ -1,3 +1,10 @@
+## [100.6.5](https://github.com/dhis2/capture-app/compare/v100.6.4...v100.6.5) (2022-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-13189] fix user name in widget comment ([#2892](https://github.com/dhis2/capture-app/issues/2892)) ([a07548f](https://github.com/dhis2/capture-app/commit/a07548ff89dc5c583309096b0f5d9e104dc846a8))
+
 ## [100.6.4](https://github.com/dhis2/capture-app/compare/v100.6.3...v100.6.4) (2022-07-05)
 
 
