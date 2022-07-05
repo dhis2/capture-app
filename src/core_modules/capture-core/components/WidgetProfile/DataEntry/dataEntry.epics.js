@@ -6,12 +6,11 @@ import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { convertFormToClient, convertClientToServer } from '../../../converters';
 import { dataEntryActionTypes, updateTei, setTeiModalError, setTeiValues } from './dataEntry.actions';
+import { FEATURETYPE } from './helpers';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
-const geometryType = (formValuesKey) => {
-    const geometryKeys = ['FEATURETYPE_POINT', 'FEATURETYPE_POLYGON'];
-    return geometryKeys.find(geometryKey => geometryKey === formValuesKey);
-};
+
+const geometryType = formValuesKey => Object.values(FEATURETYPE).find(geometryKey => geometryKey === formValuesKey);
 
 const standardGeoJson = (geometry) => {
     if (!geometry) {
@@ -87,11 +86,11 @@ export const updateTeiSucceededEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(dataEntryActionTypes.TEI_UPDATE_SUCCESS),
         map((action) => {
-            const trackedEntity = action.meta?.serverData?.trackedEntities[0];
-            const attributeValues = trackedEntity ? trackedEntity.attributes : [];
-            const geometry = trackedEntity?.geometry;
+            const trackedEntity = action.meta?.serverData?.trackedEntities[0] || {};
+            const { attributes = [], geometry } = trackedEntity;
 
-            return batchActions([setTeiValues(attributeValues, geometry)]);
+
+            return batchActions([setTeiValues(attributes, geometry)]);
         }),
     );
 
