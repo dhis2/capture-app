@@ -1,3 +1,10 @@
+# [100.8.0](https://github.com/dhis2/capture-app/compare/v100.7.0...v100.8.0) (2022-07-06)
+
+
+### Features
+
+* [DHIS2-13285] Preserve view settings when changing org unit ([b3cd308](https://github.com/dhis2/capture-app/commit/b3cd3082960f1aff441317b1ab72e219a80a8a95))
+
 # [100.7.0](https://github.com/dhis2/capture-app/compare/v100.6.7...v100.7.0) (2022-07-06)
 
 
