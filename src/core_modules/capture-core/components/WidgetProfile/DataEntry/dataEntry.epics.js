@@ -6,11 +6,12 @@ import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { convertFormToClient, convertClientToServer } from '../../../converters';
 import { dataEntryActionTypes, updateTei, setTeiModalError, setTeiValues } from './dataEntry.actions';
-import { FEATURETYPE } from './helpers';
+import { GEOMETRY } from './helpers';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
-const geometryType = formValuesKey => Object.values(FEATURETYPE).find(geometryKey => geometryKey === formValuesKey);
+const geometryType = formValuesKey =>
+    Object.values(GEOMETRY).find((value: any) => value.FEATURETYPE === formValuesKey);
 
 const standardGeoJson = (geometry) => {
     if (!geometry) {

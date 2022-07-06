@@ -13,4 +13,4 @@ export {
     getProgramTrackedEntityAttributes,
 } from './convertors';
 export { getTeiDisplayName } from './getTeiDisplayName';
-export { GEOMETRY, FEATURETYPE, getFeatureType, getDataElement, getLabel } from './geometry';
+export { GEOMETRY, getFeatureType, getDataElement, getLabel } from './geometry';
