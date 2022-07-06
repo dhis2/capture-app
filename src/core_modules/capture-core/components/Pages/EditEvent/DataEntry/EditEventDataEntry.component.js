@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
-import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
+import { getNoFutureEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import { type RenderFoundation } from '../../../../metaData';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
@@ -129,7 +129,7 @@ const buildReportDateSettingsFn = () => {
             required: true,
         }),
         getPropName: () => 'eventDate',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
