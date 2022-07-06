@@ -1057,12 +1057,14 @@ This is the form where you can modify the event details before saving. In the he
 #### View mode
 
 When the form is in the view mode the title of the page will appear as: `Enrollment: View Event`. You can see in the page all the information related to the event. Click the `Edit event` button to switch to the edit mode. 
+This mode is bypassed for events that are scheduled.
 
 ![](resources/images/enrollment-event-view-edit-view.png)
 
 #### Edit mode
 
-When the form is in the edit mode the title of the page will appear as: `Enrollment: Edit Event`. You can modify the event and click the `Save` button. Click the `Cancel` button to switch to the view mode without saving the changes. 
+When the form is in the edit mode the title of the page will appear as: `Enrollment: Edit Event`. You can modify the event and click the `Save` button. Click the `Cancel` button to switch to the view mode without saving the changes.
+Scheduled events are are the exception and they are opened in edit mode directly, without the user having to click `Edit event`. Click the `Cancel` button to go back to the enrollment dashboard page without saving the changes.
 
 ![](resources/images/enrollment-event-view-edit-edit.png)
 
