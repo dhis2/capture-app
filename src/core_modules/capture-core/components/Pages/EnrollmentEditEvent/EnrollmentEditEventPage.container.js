@@ -83,7 +83,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     };
 
     const onGoBack = () =>
-        history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
+        history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
@@ -91,6 +91,11 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
+    const { currentPageMode, cancel } = useEnrollmentEditEventPageMode(event?.status);
+    cancel && onCancel();
+    const dataEntryKey = `singleEvent-${currentPageMode}`;
+    const outputEffects = useWidgetDataFromStore(dataEntryKey);
+
     const pageStatus = getPageStatus({
         orgUnitId,
         enrollmentSite,
@@ -99,10 +104,6 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         programStage,
         event,
     });
-    const { currentPageMode, cancel } = useEnrollmentEditEventPageMode(event?.status);
-    cancel && onCancel();
-    const dataEntryKey = `singleEvent-${currentPageMode}`;
-    const outputEffects = useWidgetDataFromStore(dataEntryKey);
 
     return (
         <EnrollmentEditEventPageComponent
