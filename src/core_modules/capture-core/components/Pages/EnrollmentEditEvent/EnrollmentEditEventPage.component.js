@@ -62,6 +62,7 @@ const EnrollmentEditEventPagePain = ({
     onGoBack,
     orgUnitId,
     eventDate,
+    eventStatus,
     pageStatus,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
@@ -93,6 +94,7 @@ const EnrollmentEditEventPagePain = ({
                             programId={programId}
                             orgUnitId={orgUnitId}
                             enrollmentId={enrollmentId}
+                            eventStatus={eventStatus}
                         />
                     )}
                     {pageStatus === pageStatuses.MISSING_DATA && (

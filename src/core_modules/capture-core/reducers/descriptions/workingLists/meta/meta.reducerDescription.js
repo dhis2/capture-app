@@ -46,6 +46,14 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return newState;
     },
+    [workingListsCommonActionTypes.LIST_UPDATE]: (state, { payload: { storeId, resetMode } }) => (
+        resetMode ? {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                currentPage: 1,
+            },
+        } : state),
     [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { storeId, pagingData } = action.payload;

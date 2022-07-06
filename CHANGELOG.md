@@ -1,3 +1,38 @@
+# [100.8.0](https://github.com/dhis2/capture-app/compare/v100.7.0...v100.8.0) (2022-07-06)
+
+
+### Features
+
+* [DHIS2-13285] Preserve view settings when changing org unit ([b3cd308](https://github.com/dhis2/capture-app/commit/b3cd3082960f1aff441317b1ab72e219a80a8a95))
+
+# [100.7.0](https://github.com/dhis2/capture-app/compare/v100.6.7...v100.7.0) (2022-07-06)
+
+
+### Features
+
+* [DHIS2-13308] edit mode for scheduled events ([#2862](https://github.com/dhis2/capture-app/issues/2862)) ([d154b30](https://github.com/dhis2/capture-app/commit/d154b30a7e37f7d9f2ec4b90f181e2b293fb54ba)), closes [#2865](https://github.com/dhis2/capture-app/issues/2865)
+
+## [100.6.7](https://github.com/dhis2/capture-app/compare/v100.6.6...v100.6.7) (2022-07-06)
+
+
+### Bug Fixes
+
+* [DHIS2-8613] limit report date of new events to today or earlier ([#2794](https://github.com/dhis2/capture-app/issues/2794)) ([a77efeb](https://github.com/dhis2/capture-app/commit/a77efeb137fa57159ed3f770477bf58eb15acf69))
+
+## [100.6.6](https://github.com/dhis2/capture-app/compare/v100.6.5...v100.6.6) (2022-07-06)
+
+
+### Bug Fixes
+
+* [DHIS2-13291] convert dates for auto generated events ([#2885](https://github.com/dhis2/capture-app/issues/2885)) ([c9f0e62](https://github.com/dhis2/capture-app/commit/c9f0e62086d8071004df5350f719cddeaa8caab7))
+
+## [100.6.5](https://github.com/dhis2/capture-app/compare/v100.6.4...v100.6.5) (2022-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-13189] fix user name in widget comment ([#2892](https://github.com/dhis2/capture-app/issues/2892)) ([a07548f](https://github.com/dhis2/capture-app/commit/a07548ff89dc5c583309096b0f5d9e104dc846a8))
+
 ## [100.6.4](https://github.com/dhis2/capture-app/compare/v100.6.3...v100.6.4) (2022-07-05)
 
 

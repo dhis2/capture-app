@@ -1,17 +1,16 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
+import { useEnrollmentEditEventPageMode, useRulesEngineOrgUnit } from 'capture-core/hooks';
 import type { Props } from './widgetEventEdit.types';
 import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
-import { pageMode } from '../Pages/EnrollmentEditEvent/EnrollmentEditEventPage.constants';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
-import { useRulesEngineOrgUnit } from '../../hooks/useRulesEngineOrgUnit';
 
 const styles = {
     header: {
@@ -41,6 +40,7 @@ const styles = {
 
 export const WidgetEventEditPlain = ({
     classes,
+    eventStatus,
     programStage,
     programStage: { name, icon },
     onGoBack,
@@ -49,9 +49,7 @@ export const WidgetEventEditPlain = ({
     enrollmentId,
 }: Props) => {
     const dispatch = useDispatch();
-    const currentPageMode = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent)
-        ? pageMode.EDIT
-        : pageMode.VIEW;
+    const { currentPageMode, pageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
     if (error) {
@@ -66,15 +64,17 @@ export const WidgetEventEditPlain = ({
                     {i18n.t('Back to all stages and events')}
                 </Button>
 
-                <Button
-                    small
-                    secondary
-                    className={classes.button}
-                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit))}
-                >
-                    <IconEdit24 />
-                    {i18n.t('Edit event')}
-                </Button>
+                {currentPageMode === pageMode.VIEW && (
+                    <Button
+                        small
+                        secondary
+                        className={classes.button}
+                        onClick={() => dispatch(startShowEditEventDataEntry(orgUnit))}
+                    >
+                        <IconEdit24 />
+                        {i18n.t('Edit event')}
+                    </Button>
+                )}
             </div>
             <Widget
                 header={

@@ -66,3 +66,9 @@ And the user set the apgar score to 11
 And the user clicks on the save button
 Then the user see the following text: Enrollment: View Event
 And the user see the following text: 11
+
+Scenario: User goes directly to Edit mode for scheduled events
+Given the user lands on the enrollment event page by having typed #enrollmentEventEdit?enrollmentId=wBU0RAsYjKE&eventId=RIrfCcEP8Uu&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&stageId=ZzYYXq4fJie&teiId=EaOyKGOIGRp
+Then the user see the following text: Enrollment: Edit Event
+When the user clicks on the cancel button
+Then the user see the following text: Enrollment Dashboard
