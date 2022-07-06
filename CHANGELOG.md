@@ -1,3 +1,10 @@
+## [100.6.6](https://github.com/dhis2/capture-app/compare/v100.6.5...v100.6.6) (2022-07-06)
+
+
+### Bug Fixes
+
+* [DHIS2-13291] convert dates for auto generated events ([#2885](https://github.com/dhis2/capture-app/issues/2885)) ([c9f0e62](https://github.com/dhis2/capture-app/commit/c9f0e62086d8071004df5350f719cddeaa8caab7))
+
 ## [100.6.5](https://github.com/dhis2/capture-app/compare/v100.6.4...v100.6.5) (2022-07-05)
 
 
