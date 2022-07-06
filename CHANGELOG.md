@@ -1,3 +1,39 @@
+## [100.6.7](https://github.com/dhis2/capture-app/compare/v100.6.6...v100.6.7) (2022-07-06)
+
+
+### Bug Fixes
+
+* [DHIS2-8613] limit report date of new events to today or earlier ([#2794](https://github.com/dhis2/capture-app/issues/2794)) ([a77efeb](https://github.com/dhis2/capture-app/commit/a77efeb137fa57159ed3f770477bf58eb15acf69))
+
+## [100.6.6](https://github.com/dhis2/capture-app/compare/v100.6.5...v100.6.6) (2022-07-06)
+
+
+### Bug Fixes
+
+* [DHIS2-13291] convert dates for auto generated events ([#2885](https://github.com/dhis2/capture-app/issues/2885)) ([c9f0e62](https://github.com/dhis2/capture-app/commit/c9f0e62086d8071004df5350f719cddeaa8caab7))
+
+## [100.6.5](https://github.com/dhis2/capture-app/compare/v100.6.4...v100.6.5) (2022-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-13189] fix user name in widget comment ([#2892](https://github.com/dhis2/capture-app/issues/2892)) ([a07548f](https://github.com/dhis2/capture-app/commit/a07548ff89dc5c583309096b0f5d9e104dc846a8))
+
+## [100.6.4](https://github.com/dhis2/capture-app/compare/v100.6.3...v100.6.4) (2022-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-13200] topbaractions redirection and state ([#2878](https://github.com/dhis2/capture-app/issues/2878)) ([bb2684f](https://github.com/dhis2/capture-app/commit/bb2684f919ffd4c9aaef648d860ea56ff82c17cb))
+* [DHIS2-13347] uncheck "yes/only" checkboxes ([#2851](https://github.com/dhis2/capture-app/issues/2851)) ([a3b8e9b](https://github.com/dhis2/capture-app/commit/a3b8e9bfcfdc0cb6515c0a23c4a8feef0a8ef1f6))
+
+## [100.6.3](https://github.com/dhis2/capture-app/compare/v100.6.2...v100.6.3) (2022-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-12303] enrollment dropdownbutton open state ([#2882](https://github.com/dhis2/capture-app/issues/2882)) ([9d8d792](https://github.com/dhis2/capture-app/commit/9d8d792125e815f5aceda27d0f515c62d84a907f))
+
 ## [100.6.2](https://github.com/dhis2/capture-app/compare/v100.6.1...v100.6.2) (2022-06-30)
 
 

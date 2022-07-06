@@ -20,5 +20,6 @@ export type PlainProps = {|
     onGoBack: () => void,
     onEnrollmentError: (message: string) => void,
     pageStatus: string,
+    eventStatus?: string,
     ...CssClasses,
 |};
