@@ -1,3 +1,10 @@
+## [100.6.7](https://github.com/dhis2/capture-app/compare/v100.6.6...v100.6.7) (2022-07-06)
+
+
+### Bug Fixes
+
+* [DHIS2-8613] limit report date of new events to today or earlier ([#2794](https://github.com/dhis2/capture-app/issues/2794)) ([a77efeb](https://github.com/dhis2/capture-app/commit/a77efeb137fa57159ed3f770477bf58eb15acf69))
+
 ## [100.6.6](https://github.com/dhis2/capture-app/compare/v100.6.5...v100.6.6) (2022-07-06)
 
 
