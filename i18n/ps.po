@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Pashto (https://www.transifex.com/hisp-uio/teams/100509/ps/)\n"
@@ -835,6 +835,17 @@ msgstr ""
 msgid "Search by attributes"
 msgstr ""
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "شا ته کېدل"
 
@@ -875,6 +886,9 @@ msgid ""
 "searching by more attributes to narrow down the results."
 msgstr ""
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr ""
 
@@ -882,6 +896,15 @@ msgid "View active enrollment"
 msgstr ""
 
 msgid "Re-enroll"
+msgstr ""
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
 msgstr ""
 
 msgid ""
@@ -1067,6 +1090,12 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Delete event"
+msgstr ""
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1150,7 +1179,7 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Person Profile"
+msgid "{{TETName}} profile"
 msgstr ""
 
 msgid "Edit"
@@ -1199,9 +1228,6 @@ msgid "Stages and Events"
 msgstr ""
 
 msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "Delete event"
 msgstr ""
 
 msgid "Download as JSON"
@@ -1328,6 +1354,9 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error deleting the enrollment event"
 msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"

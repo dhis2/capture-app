@@ -17,7 +17,7 @@ import {
 } from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
 import {
     actionTypes as editEventDataEntryAction,
-} from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
+    actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import {
     actionTypes as viewEventNewRelationshipActionTypes,
@@ -132,6 +132,8 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, i18n.t('Error saving enrollment')),
     [enrollmentSiteActionTypes.SAVE_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error saving the enrollment event')),
+    [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: state =>
+        addErrorFeedback(state, i18n.t('Error deleting the enrollment event')),
     [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error editing the event, the changes made were not saved')),
 }, 'feedbacks', []);

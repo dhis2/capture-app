@@ -28,7 +28,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
             return (
                 // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
-                    ref={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
                     cancelButton={
                         <CancelButton
                             id={this.props.id}

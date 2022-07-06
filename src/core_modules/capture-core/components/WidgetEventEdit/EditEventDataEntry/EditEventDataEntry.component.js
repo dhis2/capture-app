@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import moment from 'moment';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
-import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getNoFutureEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
 import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
@@ -34,6 +35,7 @@ import {
 
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
+import { withDeleteButton } from '../DataEntry/withDeleteButton';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
@@ -119,9 +121,10 @@ const buildReportDateSettingsFn = () => {
             calendarWidth: 350,
             label: props.formFoundation.getLabel('occurredAt'),
             required: true,
+            calendarMaxMoment: moment(),
         }),
         getPropName: () => 'occurredAt',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -254,7 +257,8 @@ const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(Geometry
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
-const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
+const DeletableDataEntry = withDeleteButton()(CompletableDataEntry);
+const DataEntryWrapper = withBrowserBackWarning()(DeletableDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,
@@ -263,6 +267,7 @@ type Props = {
     onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: (orgUnit: OrgUnit) => void,
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onDelete: () => void,
     onCancel: () => void,
     classes: {
         dataEntryContainer: string,

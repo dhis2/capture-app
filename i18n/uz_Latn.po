@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -860,6 +860,17 @@ msgstr ""
 msgid "Search by attributes"
 msgstr "Аtribut orqali qidirish"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "Orqaga"
 
@@ -910,6 +921,9 @@ msgstr ""
 "kamaytirish uchun qidiruv soʼzlarini oʼzgartirishga yoki boshqa xususiyatlar"
 " boʼyicha qidirishga harakat qiling."
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr "Qidiruv turini tanlang va qidirishni boshlang"
 
@@ -918,6 +932,15 @@ msgstr "Faol roʼyxatdan oʼtayotganlarni koʼrish"
 
 msgid "Re-enroll"
 msgstr "Qayta roʼyxatdan oʼtish"
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Yangisini yaratish"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1106,6 +1129,12 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Delete event"
+msgstr "Hodisa/tadbirni oʼchirib tashlash"
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1187,7 +1216,7 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Person Profile"
+msgid "{{TETName}} profile"
 msgstr ""
 
 msgid "Edit"
@@ -1237,9 +1266,6 @@ msgstr ""
 
 msgid "Working list could not be loaded"
 msgstr "Ishchi roʼyxatni yuklab boʼlmadi"
-
-msgid "Delete event"
-msgstr "Hodisa/tadbirni oʼchirib tashlash"
 
 msgid "Download as JSON"
 msgstr "JSON sifatida yuklash"
@@ -1366,6 +1392,9 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error deleting the enrollment event"
 msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"

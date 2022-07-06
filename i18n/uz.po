@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -865,6 +865,17 @@ msgstr "{{name}} орқали қидириш"
 msgid "Search by attributes"
 msgstr "Атрибут орқали қидириш"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "Орқага"
 
@@ -915,6 +926,9 @@ msgstr ""
 "учун қидирув сўзларини ўзгартиришга ёки бошқа хусусиятлар бўйича қидиришга "
 "ҳаракат қилинг."
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr "Қидирув турини танланг ва қидиришни бошланг"
 
@@ -923,6 +937,15 @@ msgstr "Фаол рўйхатдан ўтаётганларни кўриш"
 
 msgid "Re-enroll"
 msgstr "Қайта рўйхатдан ўтиш"
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Янгисини яратиш"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1112,6 +1135,12 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Delete event"
+msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Ҳодиса/тадбир якунланди"
 
@@ -1194,8 +1223,8 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 "Профила виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
 
-msgid "Person Profile"
-msgstr "Шахс профили"
+msgid "{{TETName}} profile"
+msgstr ""
 
 msgid "Edit"
 msgstr "Таҳрирлаш"
@@ -1244,9 +1273,6 @@ msgstr "Босқичлар ва Ҳодиса/тадбирлар"
 
 msgid "Working list could not be loaded"
 msgstr "Ишчи рўйхатни юклаб бўлмади"
-
-msgid "Delete event"
-msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
 
 msgid "Download as JSON"
 msgstr "JSON сифатида юклаш"
@@ -1372,6 +1398,9 @@ msgid "Error saving enrollment"
 msgstr "Қайдни сақлашда хатолик юзага келди"
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error deleting the enrollment event"
 msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"

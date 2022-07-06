@@ -6,22 +6,22 @@
 # Marta Vila <marta@dhis2.org>, 2021
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2021
 # Prabhjot Singh, 2021
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Choose one or more dates..."
 msgstr "Elija una o más fechas..."
@@ -874,6 +874,17 @@ msgstr "Buscar por {{name}}"
 msgid "Search by attributes"
 msgstr "Buscar por atributos"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "Atrás"
 
@@ -924,6 +935,9 @@ msgstr ""
 " términos de búsqueda o buscar por más atributos para limitar los "
 "resultados."
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr "Elija un tipo para comenzar a buscar"
 
@@ -932,6 +946,15 @@ msgstr "Ver inscripción activa"
 
 msgid "Re-enroll"
 msgstr "Volver a inscribirse"
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Crear nuevo"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1124,6 +1147,12 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Delete event"
+msgstr "Eliminar evento"
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Evento completado"
 
@@ -1142,6 +1171,7 @@ msgid "This date is {{count}} days {{position}} the suggested date."
 msgid_plural "This date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid "after"
 msgstr ""
@@ -1154,6 +1184,7 @@ msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1209,8 +1240,8 @@ msgstr ""
 "No se pudo cargar el widget de perfil. Por favor, inténtelo de nuevo más "
 "tarde"
 
-msgid "Person Profile"
-msgstr "Perfil de la persona"
+msgid "{{TETName}} profile"
+msgstr ""
 
 msgid "Edit"
 msgstr "Editar"
@@ -1259,9 +1290,6 @@ msgstr "Etapas y eventos"
 
 msgid "Working list could not be loaded"
 msgstr "No se pudo cargar la lista de trabajo"
-
-msgid "Delete event"
-msgstr "Eliminar evento"
 
 msgid "Download as JSON"
 msgstr "Descargar como JSON"
@@ -1387,6 +1415,9 @@ msgid "Error saving enrollment"
 msgstr "Error al guardar la inscripción"
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error deleting the enrollment event"
 msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"

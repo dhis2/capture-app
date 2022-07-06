@@ -82,6 +82,7 @@ export class SingleSelectBox extends React.Component<Props> {
                         checked={isSelected}
                         value={optionData.value}
                         onClick={this.handleSelect}
+                        onChange={() => {}}
                         onKeyPress={this.handleKeyPress}
                         disabled={disabled}
                         {...passOnProps}

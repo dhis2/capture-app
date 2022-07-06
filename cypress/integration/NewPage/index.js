@@ -144,6 +144,41 @@ And('you see the registration form for the Malaria case registration', () => {
         .should('exist');
 });
 
+And('you select the Antenatal care visit program', () => {
+    cy.get('.Select')
+        .type('Antenatal care vis');
+    cy.contains('Antenatal care visit')
+        .click();
+});
+
+Then('you see a list of events', () => {
+    cy.get('[data-test="event-working-lists"]').within(() => {
+        cy.get('[data-test="table-row"]');
+    });
+});
+
+When('you select one of the events', () => {
+    cy.get('[data-test="event-working-lists"]').within(() => {
+        cy.get('[data-test="table-row"]').then((rows) => {
+            rows[0].click();
+        });
+    });
+});
+
+Then('you are navigated to the Antenatal care visit registration page', () => {
+    cy.contains('New Antenatal care visit')
+        .should('exist');
+});
+
+Then('program and organisation unit is still selected in top bar', () => {
+    cy.get('[data-test="scope-selector"]').within(() => {
+        cy.contains('Ngelehun CHC')
+            .should('exist');
+        cy.contains('Antenatal care visit')
+            .should('exist');
+    });
+});
+
 And('you select the Malaria case registration program', () => {
     cy.get('.Select')
         .type('Malaria case registr');

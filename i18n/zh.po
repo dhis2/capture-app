@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -840,6 +840,17 @@ msgstr "按{{name}}搜索"
 msgid "Search by attributes"
 msgstr "按属性搜索"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "后退"
 
@@ -880,6 +891,9 @@ msgid ""
 "searching by more attributes to narrow down the results."
 msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或按更多属性搜索以缩小搜索范围。"
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
 
@@ -888,6 +902,15 @@ msgstr "查看有效的报名"
 
 msgid "Re-enroll"
 msgstr "重新报名"
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr "新建"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1072,6 +1095,12 @@ msgstr "此事件没有任何评论"
 msgid "stage not found in rules execution"
 msgstr "在规则执行中找不到阶段"
 
+msgid "Delete event"
+msgstr "删除事件"
+
+msgid "Yes, delete event"
+msgstr "是的，删除事件"
+
 msgid "Event completed"
 msgstr "事件完成"
 
@@ -1155,8 +1184,8 @@ msgstr "修正表单中的错误以继续。"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
-msgid "Person Profile"
-msgstr "人物简介"
+msgid "{{TETName}} profile"
+msgstr "{{TETName}} 基本资料"
 
 msgid "Edit"
 msgstr "编辑"
@@ -1205,9 +1234,6 @@ msgstr "阶段与活动"
 
 msgid "Working list could not be loaded"
 msgstr "工作列表不能载入"
-
-msgid "Delete event"
-msgstr "删除事件"
 
 msgid "Download as JSON"
 msgstr "下载为JSON"
@@ -1334,6 +1360,9 @@ msgstr "保存报名时出错"
 
 msgid "Error saving the enrollment event"
 msgstr "保存报名事件时出错"
+
+msgid "Error deleting the enrollment event"
+msgstr "删除注册事件时出错"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "编辑事件时出错，所做的更改未保存"

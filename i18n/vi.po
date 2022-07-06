@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Mai Nguyen <thanhmai.jica@gmail.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
+# Mai Nguyen <thanhmai.jica@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-06T12:58:52.162Z\n"
+"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2022\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -852,6 +852,17 @@ msgstr ""
 msgid "Search by attributes"
 msgstr "Tìm kiếm theo thuộc tính"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "Trở lại"
 
@@ -901,6 +912,9 @@ msgstr ""
 "Tìm kiếm này trả về quá nhiều kết quả để hiển thị. Thử thay đổi các cụm từ "
 "tìm kiếm hoặc tìm kiếm theo nhiều thuộc tính hơn để thu hẹp kết quả."
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr "Chọn một loại để bắt đầu tìm kiếm"
 
@@ -909,6 +923,15 @@ msgstr "Xem đăng ký đang hoạt động"
 
 msgid "Re-enroll"
 msgstr "Đăng ký lại"
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Tạo mới"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1097,6 +1120,12 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Delete event"
+msgstr "Xóa sự kiện"
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1178,7 +1207,7 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Person Profile"
+msgid "{{TETName}} profile"
 msgstr ""
 
 msgid "Edit"
@@ -1228,9 +1257,6 @@ msgstr ""
 
 msgid "Working list could not be loaded"
 msgstr "Không thể tải danh sách làm việc"
-
-msgid "Delete event"
-msgstr "Xóa sự kiện"
 
 msgid "Download as JSON"
 msgstr "Tải về dạng JSON"
@@ -1356,6 +1382,9 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error deleting the enrollment event"
 msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"

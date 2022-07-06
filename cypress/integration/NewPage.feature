@@ -73,6 +73,17 @@ Feature: User creates a new entries from the registration page
     When you select the first category
     Then you see the registration form for the specific category
 
+  Scenario: Navigating to registration page from view single event page
+    Given you are in the main page with no selections made
+    And you select org unit
+    And you select the Antenatal care visit program
+    Then you see a list of events
+    When you select one of the events
+    Then you see a dropdown button
+    When you click the the first option option
+    Then you are navigated to the Antenatal care visit registration page
+    Then program and organisation unit is still selected in top bar
+
 
 ### New event in Antenatal care visit
   Scenario: New event in Antenatal care visit > Submitting the form with empty visit date throws validation error
