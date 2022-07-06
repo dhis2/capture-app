@@ -1,3 +1,10 @@
+# [100.7.0](https://github.com/dhis2/capture-app/compare/v100.6.7...v100.7.0) (2022-07-06)
+
+
+### Features
+
+* [DHIS2-13308] edit mode for scheduled events ([#2862](https://github.com/dhis2/capture-app/issues/2862)) ([d154b30](https://github.com/dhis2/capture-app/commit/d154b30a7e37f7d9f2ec4b90f181e2b293fb54ba)), closes [#2865](https://github.com/dhis2/capture-app/issues/2865)
+
 ## [100.6.7](https://github.com/dhis2/capture-app/compare/v100.6.6...v100.6.7) (2022-07-06)
 
 
