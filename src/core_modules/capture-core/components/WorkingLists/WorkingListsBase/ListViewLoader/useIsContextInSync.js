@@ -5,7 +5,6 @@ import type { Categories } from '../workingListsBase.types';
 
 export const useIsContextInSync = (
     programId: string,
-    orgUnitId: string,
     categories?: Categories,
     viewContext: ?Object,
 ) => useMemo(() => {
@@ -15,14 +14,12 @@ export const useIsContextInSync = (
 
     const currentSelections = {
         programId,
-        orgUnitId,
         categories,
     };
 
     return isSelectionsEqual(currentSelections, viewContext);
 }, [
     programId,
-    orgUnitId,
     categories,
     viewContext,
 ]);
