@@ -165,8 +165,8 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: 'search',
     }),
-    [initActionTypes.SET_CURRENT_USER]: (state, action) => ({
+    [initActionTypes.SET_CURRENT_ORG_UNIT_ROOT]: (state, action) => ({
         ...state,
-        currentUser: action.payload.currentUser,
+        roots: action.payload.roots,
     }),
 }, 'app');

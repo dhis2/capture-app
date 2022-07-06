@@ -8,6 +8,7 @@ export const searchPageActionTypes = {
     SEARCH_RESULTS_LOADING_VIEW: 'SearchResultsLoadingView',
     SEARCH_RESULTS_EMPTY_VIEW: 'SearchResultsEmptyView',
     SEARCH_RESULTS_SUCCESS_VIEW: 'SearchResultsSuccessView',
+    ADD_SEARCH_RESULTS_SUCCESS_VIEW: 'AddSearchResultsSuccessView',
     SEARCH_RESULTS_ERROR_VIEW: 'SearchResultsErrorView',
     SEARCH_RESULTS_TOO_MANY_VIEW: 'SearchResultsTooManyView',
     SEARCH_RESULTS_INITIAL_VIEW: 'SearchResultsInitialView',
@@ -16,6 +17,7 @@ export const searchPageActionTypes = {
     INITIAL_PROGRAM_ID_STORE: 'StoreInitialProgramId',
     FALLBACK_SEARCH_START: 'StartFallbackSearch',
     FALLBACK_SEARCH: 'FallbackSearchTakesPlace',
+    FALLBACK_NOT_ENOUGH_ATTRIBUTES: 'FallbackNotEnoughAttributes',
     FALLBACK_SEARCH_COMPLETED: 'FallbackWillPushToSearchPageWithoutProgramSelected',
     ALL_SEARCH_RELATED_DATA_CLEAN: 'CleanSearchRelatedData',
     FALLBACK_SEARCH_RELATED_DATA_CLEAN: 'CleanFallbackSearchRelatedData',
@@ -63,6 +65,9 @@ export const showEmptyResultsViewOnSearchPage = () =>
 export const showSuccessResultsViewOnSearchPage = (searchResults, currentPage) =>
     actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW)({ searchResults, currentPage });
 
+export const addSuccessResultsViewOnSearchPage = (otherResults, otherCurrentPage) =>
+    actionCreator(searchPageActionTypes.ADD_SEARCH_RESULTS_SUCCESS_VIEW)({ otherResults, otherCurrentPage });
+
 
 export const startFallbackSearch = ({ programId, formId, page = 1, pageSize, availableSearchOptions }) =>
     actionCreator(searchPageActionTypes.FALLBACK_SEARCH_START)({ programId, formId, page, pageSize, availableSearchOptions });
@@ -73,6 +78,8 @@ export const fallbackSearch = ({ fallbackFormValues, trackedEntityTypeId, pageSi
 export const fallbackPushPage = ({ orgUnitId, trackedEntityTypeId, values }) =>
     actionCreator(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED)({ orgUnitId, trackedEntityTypeId, values });
 
+export const showFallbackNotEnoughAttributesOnSearchPage = ({ searchableFields, minAttributesRequiredToSearch }) =>
+    actionCreator(searchPageActionTypes.FALLBACK_NOT_ENOUGH_ATTRIBUTES)({ searchableFields, minAttributesRequiredToSearch });
 
 export const cleanSearchRelatedData = () =>
     actionCreator(searchPageActionTypes.ALL_SEARCH_RELATED_DATA_CLEAN)();

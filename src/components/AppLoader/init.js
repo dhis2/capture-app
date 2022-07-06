@@ -166,13 +166,19 @@ export async function initializeAsync(
     const userSettings = await onQueryApi({
         resource: 'userSettings',
     });
+    const currentUser = await onQueryApi({
+        resource: 'me',
+        params: {
+            fields: 'id',
+        },
+    });
     const sym = Object.getOwnPropertySymbols(d2.currentUser).find(s => String(s) === 'Symbol(userRoles)');
     d2.currentUser.userRoles = d2.currentUser[sym];
     setD2(d2);
     setHeaderBarStrings(d2);
     // initialize storage controllers
     try {
-        await initControllersAsync(onCacheExpired);
+        await initControllersAsync(onCacheExpired, currentUser);
     } catch (error) {
         throw new DisplayException(i18n.t(
             'A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.',

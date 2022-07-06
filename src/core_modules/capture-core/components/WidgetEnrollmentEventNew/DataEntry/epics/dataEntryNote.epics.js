@@ -1,7 +1,7 @@
 // @flow
 import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import moment from 'moment';
 import { convertValue as convertListValue } from '../../../../converters/clientToList';
 import { dataElementTypes } from '../../../../metaData';
@@ -13,21 +13,33 @@ import {
     addNote,
 } from '../../../DataEntry/actions/dataEntry.actions';
 
-export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryActionTypes.EVENT_NOTE_ADD),
-        map((action) => {
+        switchMap((action) => {
             const payload = action.payload;
-            const state = store.value;
-            const userName = state.app.currentUser.username;
 
-            const storedAt = moment().toISOString();
-            const note = {
-                value: payload.note,
-                storedBy: userName,
-                storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
-                clientId: uuid(),
-            };
+            return querySingleResource({
+                resource: 'me',
+                params: {
+                    fields: 'firstName,surname,username',
+                },
+            }).then((user) => {
+                const storedAt = moment().toISOString();
+                const { userName, firstName, surname } = user;
+                const clientId = uuid();
+                const note = {
+                    value: payload.note,
+                    createdBy: {
+                        firstName,
+                        surname,
+                        uid: clientId,
+                    },
+                    storedBy: userName,
+                    storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
+                    clientId: uuid(),
+                };
 
-            return addNote(payload.dataEntryId, payload.itemId, note);
+                return addNote(payload.dataEntryId, payload.itemId, note);
+            });
         }));

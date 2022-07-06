@@ -15,7 +15,6 @@ import {
     filteredOrgUnitsRetrieved,
 } from './searchOrgUnitSelector.actions';
 
-import { set as setStoreRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
 
@@ -67,8 +66,6 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable, store: Red
                 return filterOrgUnitsFailed(resultContainer.searchId, RETRIEVE_ERROR);
             }
 
-            const regUnitArray = resultContainer.regUnitArray;
-            setStoreRoots(resultContainer.searchId, regUnitArray);
             const regUnits = resultContainer.regUnitArray
                 .map(unit => ({
                     id: unit.id,
