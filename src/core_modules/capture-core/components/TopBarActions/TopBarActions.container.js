@@ -11,6 +11,14 @@ import { useReset, useSetOrgUnitId } from '../ScopeSelector/hooks';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import type { Props } from './TopBarActions.types';
 
+const defaultContext = {
+    openStartAgainWarning: false,
+    openNewRegistrationPage: false,
+    openNewRegistrationPageWithoutProgramId: false,
+    openSearchPage: false,
+    openSearchPageWithoutProgramId: false,
+};
+
 const defaultDialogProps = {
     header: i18n.t('Unsaved changes'),
     text: i18n.t('Leaving this page will discard the changes you made to this event.'),
@@ -24,63 +32,75 @@ export const TopBarActions = ({
     isUserInteractionInProgress = false,
     customActionsOnProgramIdReset = [],
 }: Props) => {
-    const [openStartAgainWarning, setOpenStartAgainWarning] = useState(false);
+    const [context, setContext] = useState(defaultContext);
+    const {
+        openStartAgainWarning,
+        openNewRegistrationPage,
+        openNewRegistrationPageWithoutProgramId,
+        openSearchPage,
+        openSearchPageWithoutProgramId,
+    } = context;
+    const openConfirmDialog =
+        openStartAgainWarning ||
+        openNewRegistrationPage ||
+        openNewRegistrationPageWithoutProgramId ||
+        openSearchPage ||
+        openSearchPageWithoutProgramId;
+
     const dispatch = useDispatch();
     const { reset } = useReset();
     const { setOrgUnitId } = useSetOrgUnitId();
 
-    const handleClose = () => {
-        setOpenStartAgainWarning(false);
+    const startAgain = () => {
+        dispatch(resetAllCategoryOptionsFromScopeSelector());
+        reset();
+    };
+    const newRegistrationPage = () => dispatch(openNewRegistrationPageFromScopeSelector(selectedProgramId));
+    const newRegistrationPageWithoutProgramId = () => {
+        const actions = [resetProgramIdBase(), openNewRegistrationPageFromScopeSelector()];
+        dispatch(batchActions(actions));
+        setOrgUnitId(selectedOrgUnitId, 'new', false);
+    };
+    const searchPage = () => dispatch(openSearchPageFromScopeSelector(selectedProgramId));
+    const searchPageWithoutProgramId = () => {
+        const actions = [resetProgramIdBase(), openSearchPageFromScopeSelector(), ...customActionsOnProgramIdReset];
+        dispatch(batchActions(actions));
+        setOrgUnitId(selectedOrgUnitId, 'search', false);
     };
 
     const handleOpenStartAgainWarning = () => {
-        if (isUserInteractionInProgress) {
-            setOpenStartAgainWarning(true);
-        } else {
-            dispatch(resetAllCategoryOptionsFromScopeSelector());
-            reset();
-        }
+        isUserInteractionInProgress ? setContext(prev => ({ ...prev, openStartAgainWarning: true })) : startAgain();
     };
 
-    const openNewRegistrationPage = () => {
-        if (isUserInteractionInProgress) {
-            setOpenStartAgainWarning(true);
-        } else {
-            dispatch(openNewRegistrationPageFromScopeSelector(selectedProgramId));
-        }
+    const handleOpenNewRegistrationPage = () => {
+        isUserInteractionInProgress
+            ? setContext(prev => ({ ...prev, openNewRegistrationPage: true }))
+            : newRegistrationPage();
     };
 
     const handleOpenNewRegistrationPageWithoutProgramId = () => {
-        if (isUserInteractionInProgress) {
-            setOpenStartAgainWarning(true);
-        } else {
-            const actions = [resetProgramIdBase(), openNewRegistrationPageFromScopeSelector()];
-            dispatch(batchActions(actions));
-            setOrgUnitId(selectedOrgUnitId, 'new', false);
-        }
+        isUserInteractionInProgress
+            ? setContext(prev => ({ ...prev, openNewRegistrationPageWithoutProgramId: true }))
+            : newRegistrationPageWithoutProgramId();
     };
 
     const handleOpenSearchPage = () => {
-        if (isUserInteractionInProgress) {
-            setOpenStartAgainWarning(true);
-        } else {
-            dispatch(openSearchPageFromScopeSelector(selectedProgramId));
-        }
+        isUserInteractionInProgress ? setContext(prev => ({ ...prev, openSearchPage: true })) : searchPage();
     };
 
     const handleOpenSearchPageWithoutProgramId = () => {
-        if (isUserInteractionInProgress) {
-            setOpenStartAgainWarning(true);
-        } else {
-            const actions = [resetProgramIdBase(), openSearchPageFromScopeSelector(), ...customActionsOnProgramIdReset];
-            dispatch(batchActions(actions));
-            setOrgUnitId(selectedOrgUnitId, 'search', false);
-        }
+        isUserInteractionInProgress
+            ? setContext(prev => ({ ...prev, openSearchPageWithoutProgramId: true }))
+            : searchPageWithoutProgramId();
     };
 
-    const handleAcceptStartAgain = () => {
-        dispatch(openNewRegistrationPageFromScopeSelector());
-        handleClose();
+    const handleAccept = () => {
+        openStartAgainWarning && startAgain();
+        openNewRegistrationPage && newRegistrationPage();
+        openNewRegistrationPageWithoutProgramId && newRegistrationPageWithoutProgramId();
+        openSearchPage && searchPage();
+        openSearchPageWithoutProgramId && searchPageWithoutProgramId();
+        setContext(defaultContext);
     };
 
     return (
@@ -90,14 +110,15 @@ export const TopBarActions = ({
                 onStartAgainClick={handleOpenStartAgainWarning}
                 onFindClick={handleOpenSearchPage}
                 onFindClickWithoutProgramId={handleOpenSearchPageWithoutProgramId}
-                onNewClick={openNewRegistrationPage}
+                onNewClick={handleOpenNewRegistrationPage}
                 onNewClickWithoutProgramId={handleOpenNewRegistrationPageWithoutProgramId}
                 showResetButton={!!(selectedProgramId || selectedOrgUnitId)}
+                openConfirmDialog={openConfirmDialog}
             />
             <ConfirmDialog
-                onConfirm={handleAcceptStartAgain}
-                open={openStartAgainWarning}
-                onCancel={handleClose}
+                onConfirm={handleAccept}
+                open={openConfirmDialog}
+                onCancel={() => setContext(defaultContext)}
                 {...defaultDialogProps}
             />
         </>

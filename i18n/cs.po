@@ -858,14 +858,17 @@ msgstr "Hledání podle atributů"
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
 msgstr ""
+"Vyplňte tato pole pro vyhledávání{{escape}} {{ searchableAttributes }}"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
 "search{{escape}} {{searchableAttributes}}"
 msgstr ""
+"Chcete-li hledat, vyplňte alespoň {{minAttributesRequiredToSearch}} z těchto"
+" polí{{escape}} {{searchableAttributes}}"
 
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
+msgstr "Vyplňte toto pole pro vyhledávání{{escape}} {{searchableAttributes}}"
 
 msgid "Back"
 msgstr "Zpět"
@@ -915,7 +918,7 @@ msgstr ""
 "více atributů."
 
 msgid "Cannot search in all programs"
-msgstr ""
+msgstr "Nelze vyhledávat ve všech programech"
 
 msgid "Choose a type to start searching"
 msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
@@ -927,10 +930,10 @@ msgid "Re-enroll"
 msgstr "Znovu zapsat"
 
 msgid "all programs"
-msgstr ""
+msgstr "všechny programy"
 
 msgid "If none of search results match, you can create new "
-msgstr ""
+msgstr "Pokud žádný z výsledků vyhledávání neodpovídá, můžete vytvořit nový"
 
 msgid "Create new"
 msgstr "Vytvořit nový"
