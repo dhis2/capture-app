@@ -5,7 +5,5 @@
  * @param {string} value
  * @returns
  */
-export const isValidPercentage = (value: string) => {
-    const replacedValue = value.replace('%', '');
-    return !!(!isNaN(replacedValue) && Number(replacedValue) !== Infinity);
-};
+export const isValidPercentage = (value: string) =>
+    /^(100|\d\d|\d)([,.]0*)?( *)?%?$/.test(value);
