@@ -34,6 +34,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: (value: RangeValue) => convertRange(stringifyNumber, value),
     [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(stringifyNumber, value),
+    [dataElementTypes.PERCENTAGE]: stringifyNumber,
     [dataElementTypes.DATE]: convertDate,
     [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
     [dataElementTypes.TRUE_ONLY]: () => 'true',
