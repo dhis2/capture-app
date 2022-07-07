@@ -71,11 +71,9 @@ export const WorkingListsContextBuilder = (props: Props) => {
 
     const loadedViewContext = useMemo(() => ({
         programId: loadedContextDefined.programIdView,
-        orgUnitId: loadedContextDefined.orgUnitId,
         categories: loadedContextDefined.categories,
     }), [
         loadedContextDefined.programIdView,
-        loadedContextDefined.orgUnitId,
         loadedContextDefined.categories,
     ]);
 
@@ -122,6 +120,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
                         customUpdateTrigger={customUpdateTrigger}
                         forceUpdateOnMount={forceUpdateOnMount}
                         dirtyList={dirtyListStateFirstRunRef.current}
+                        loadedOrgUnitId={loadedContextDefined.orgUnitId}
                     >
                         <WorkingListsListViewBuilderContextProvider
                             updating={updating}

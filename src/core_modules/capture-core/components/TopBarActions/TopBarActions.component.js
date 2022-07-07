@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
@@ -36,8 +36,15 @@ const ActionButtonsPlain = ({
     selectedProgramId,
     classes,
     showResetButton,
+    openConfirmDialog,
 }: PlainProps & CssClasses) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
+    const [openNew, setOpenNew] = useState(false);
+    const [openSearch, setOpenSearch] = useState(false);
+    useEffect(() => {
+        setOpenNew(false);
+        setOpenSearch(false);
+    }, [openConfirmDialog]);
 
     return (
         <div className={classes.container}>
@@ -57,6 +64,8 @@ const ActionButtonsPlain = ({
                     secondary
                     dataTest="new-button"
                     className={classes.marginRight}
+                    open={openNew}
+                    onClick={() => setOpenNew(prev => !prev)}
                     component={
                         <FlyoutMenu dense maxWidth="250px">
                             <MenuItem
@@ -66,12 +75,12 @@ const ActionButtonsPlain = ({
                                     programName,
                                     interpolation: { escapeValue: false },
                                 })}
-                                onClick={onNewClick}
+                                onClick={() => { setOpenNew(prev => !prev); onNewClick(); }}
                             />
                             <MenuItem
                                 dataTest="new-menuitem-two"
                                 label={`${i18n.t('New')}...`}
-                                onClick={onNewClickWithoutProgramId}
+                                onClick={() => { setOpenNew(prev => !prev); onNewClickWithoutProgramId(); }}
                             />
                         </FlyoutMenu>
                     }
@@ -96,6 +105,8 @@ const ActionButtonsPlain = ({
                     secondary
                     dataTest="find-button"
                     className={classes.marginRight}
+                    open={openSearch}
+                    onClick={() => setOpenSearch(prev => !prev)}
                     component={
                         <FlyoutMenu dense maxWidth="250px">
                             <MenuItem
@@ -105,12 +116,12 @@ const ActionButtonsPlain = ({
                                     programName,
                                     interpolation: { escapeValue: false },
                                 })}
-                                onClick={onFindClick}
+                                onClick={() => { setOpenSearch(prev => !prev); onFindClick(); }}
                             />
                             <MenuItem
                                 dataTest="find-menuitem-two"
                                 label={`${i18n.t('Search')}...`}
-                                onClick={onFindClickWithoutProgramId}
+                                onClick={() => { setOpenSearch(prev => !prev); onFindClickWithoutProgramId(); }}
                             />
                         </FlyoutMenu>
                     }

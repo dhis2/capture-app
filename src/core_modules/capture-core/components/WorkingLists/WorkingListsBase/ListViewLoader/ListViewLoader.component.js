@@ -7,14 +7,13 @@ import { useIsContextInSync } from './useIsContextInSync';
 import type { Props } from './listViewLoader.types';
 
 const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
-    withLoadingIndicator(() => ({ margin: 10 }))(ListViewUpdater));
+    withLoadingIndicator(() => ({ margin: 10, height: 60 }))(ListViewUpdater));
 
 const hasTemplateChange = (currentTemplate, prevTemplate, viewPreloaded) =>
     (prevTemplate && currentTemplate.id !== prevTemplate.id && !viewPreloaded);
 
 const useCalculateTriggerLoad = ({
     programId,
-    orgUnitId,
     categories,
     loadedViewContext,
     currentTemplate,
@@ -23,7 +22,7 @@ const useCalculateTriggerLoad = ({
     firstRun,
     prevTemplate,
 }) => {
-    const contextInSync = useIsContextInSync(programId, orgUnitId, categories, loadedViewContext);
+    const contextInSync = useIsContextInSync(programId, categories, loadedViewContext);
     let triggerLoad = false;
     if (!contextInSync || hasTemplateChange(currentTemplate, prevTemplate, viewPreloaded) || (dirtyView && firstRun)) {
         triggerLoad = true;
@@ -51,7 +50,6 @@ const useLoadView = ({
     const triggerLoad = useCalculateTriggerLoad({
         programId,
         programStageId,
-        orgUnitId,
         categories,
         loadedViewContext,
         currentTemplate,
@@ -61,7 +59,6 @@ const useLoadView = ({
         prevTemplate: prevTemplateRef.current,
     });
     triggerLoadRef.current = triggerLoad;
-
     const cancelLoadViewIfApplicable = useCallback(() => {
         triggerLoadRef.current && onCancelLoadView && onCancelLoadView();
     }, [onCancelLoadView]);
@@ -69,20 +66,19 @@ const useLoadView = ({
     useEffect(() => {
         prevTemplateRef.current = currentTemplate;
         firstRunRef.current = false;
-
         if (triggerLoad) {
             onLoadView(currentTemplate,
                 { programId, programStageId, orgUnitId, categories },
             );
         }
         return () => cancelLoadViewIfApplicable();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         triggerLoad,
         onLoadView,
         currentTemplate,
         programId,
         programStageId,
-        orgUnitId,
         categories,
         cancelLoadViewIfApplicable,
     ]);
