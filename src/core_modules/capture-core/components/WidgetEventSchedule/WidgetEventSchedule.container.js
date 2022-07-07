@@ -12,6 +12,7 @@ import {
     useDetermineSuggestedScheduleDate,
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
+    useCommentDetails,
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 
@@ -34,6 +35,7 @@ export const WidgetEventSchedule = ({
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, ...passOnProps,
     });
+    const { currentUser, noteId } = useCommentDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [comments, setComments] = useState([]);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
@@ -80,7 +82,17 @@ export const WidgetEventSchedule = ({
 
 
     const onAddComment = (comment) => {
-        setComments([...comments, { value: comment }]);
+        const newComment = {
+            storedBy: currentUser.userName,
+            storedAt: moment().toISOString(),
+            value: comment,
+            createdBy: {
+                firstName: currentUser.firstName,
+                surname: currentUser.surname,
+            },
+            note: noteId,
+        };
+        setComments([...comments, newComment]);
     };
 
 

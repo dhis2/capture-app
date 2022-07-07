@@ -5,17 +5,17 @@
 # Yayra Gomado <ygomado@hispwca.org>, 2021
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
-# Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
 # Edem Kossi <ekossi@hispwca.org>, 2022
 # phil_dhis2, 2022
+# Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
+"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -883,6 +883,17 @@ msgstr "Rechercher par {{name}}"
 msgid "Search by attributes"
 msgstr "Chercher par attributs"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "Précédent"
 
@@ -933,6 +944,9 @@ msgstr ""
 "recherche ou de rechercher par plus d'attributs pour réduire le nombre de "
 "résultats."
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr "Choisir un type pour commencer la recherche"
 
@@ -941,6 +955,15 @@ msgstr "Voir les inscriptions actives"
 
 msgid "Re-enroll"
 msgstr "Réinscrire"
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Créer nouveau"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1221,7 +1244,7 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Person Profile"
+msgid "{{TETName}} profile"
 msgstr ""
 
 msgid "Edit"
