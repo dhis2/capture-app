@@ -200,9 +200,18 @@ To configure the auto generation of an event you need to take the following step
 6. Mark the stage as Auto-generated
 ![](resources/images/auto-generated-05.png)
 
+Now, for every new enrollment in this program one event will be auto generated. One program can also have multiple stages marked as auto generated.
+For all the auto generated events 
+
+ a) the organisation unit will be the same as the user is reporting for, during the enrollment and 
+ 
+ b) all the events will be part of the current enrollment. 
+
+Based on configuration, the status of the auto generated event can either be ACTIVE or SCHEDULE.
+
 ### Enrollment with open data entry form
 
-A program can be configured to have zero or more program stages that automatically open upon a new enrollment. The user will be taken to the new enrollment event page in the first program stage that has "Open data entry form after enrollment" option set to true. 
+A program can be configured to automatically take the user to register a new event immediately after enrolling a tracked entity instance. To enable this behavior, the program must have at least one program stage with the "Open data entry form after registration" option checked. If more than one program stage has this option enabled, the first stage will be used.
 
 To configure it, you must follow the steps described in the [Enrollment with auto generated events](#enrollment-with-auto-generated-events) section and then check the option "Open data entry form after enrollment".
  
