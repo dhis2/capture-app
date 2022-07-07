@@ -74,6 +74,8 @@ const valueConvertersForType = {
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.PERCENTAGE]: (value: string) => parseNumber(value.replace('%', '')),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: convertDate,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
