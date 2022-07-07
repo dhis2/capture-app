@@ -72,16 +72,8 @@ class RulesValueConverter implements IConvertInputRulesValue {
         return value || 0;
     }
 
-    convertPercentage(value: string): number {
-        if (!value) {
-            return 0;
-        }
-        const numberValue = parseNumber(value);
-        if (isNaN(numberValue)) {
-            return 0;
-        }
-
-        return numberValue / 100;
+    convertPercentage(value: number | ''): number {
+        return value || 0;
     }
 
     convertUrl(value: any): string {

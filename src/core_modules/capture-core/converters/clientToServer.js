@@ -42,7 +42,6 @@ const valueConvertersForType = {
     [dataElementTypes.FILE_RESOURCE]: (rawValue: Object) => rawValue.value,
     [dataElementTypes.IMAGE]: (rawValue: Object) => rawValue.value,
     [dataElementTypes.COORDINATE]: (rawValue: Object) => `[${rawValue.longitude},${rawValue.latitude}]`,
-    [dataElementTypes.PERCENTAGE]: (rawValue: Object) => rawValue.replace('%', ''),
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.id,
     [dataElementTypes.AGE]: (rawValue: Object) => convertDate(rawValue),
 };
