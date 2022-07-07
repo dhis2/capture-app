@@ -308,53 +308,28 @@ When('you select the working list called Events today', () => {
         .click();
 });
 
-When('you change the sharing settings', () =>
+When('you change the sharing settings', () => {
     // Making post requests using the old d2 library doesn't work for cypress tests atm
     // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
-        .then(sharingUrl =>
-            cy.request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'CLBKvCKspBk',
-                    name: 'Events today',
-                    displayName: 'Events today',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [{
-                        id: 'OYLGMiazHtW',
-                        name: 'Kevin Boateng',
-                        displayName: 'Kevin Boateng',
-                        access: 'rw------',
-                    }],
-                    externalAccess: false,
-                },
-            }).then(() => {
-                cy.get('[data-test="list-view-menu-button"]')
-                    .click();
 
-                cy.contains('Share view')
-                    .click();
 
-                cy.get('[placeholder="Search"]')
-                    .type('Boateng');
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
 
-                cy.contains('Kevin Boateng')
-                    .parent()
-                    .click();
+    cy.contains('Share view')
+        .click();
+    cy.get('[placeholder="Search"]')
+        .type('Boateng');
 
-                cy.contains('Close')
-                    .click({ force: true });
-            }),
-        ),
-);
+    cy.contains('Kevin Boateng').click();
+    cy.contains('Select a level').click();
+    cy.contains('View and edit').click({ force: true });
+
+
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
+});
+
 
 When('you update the working list', () => {
     cy.get('[data-test="online-list-table"]')
