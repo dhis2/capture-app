@@ -1,6 +1,5 @@
 // @flow
 /* eslint-disable class-methods-use-this */
-import { parseNumber } from 'capture-core-utils/parsers';
 import { moment } from 'capture-core-utils/moment';
 import type { IConvertInputRulesValue } from '../rulesEngine.types';
 
