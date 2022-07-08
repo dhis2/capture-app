@@ -390,35 +390,21 @@ When('you change the sharing settings', () => {
 });
 
 When('you see the new sharing settings', () => {
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=trackedEntityInstanceFilter&id=PpGINOT00UX').then(sharingUrl =>
-        cy
-            .request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'PpGINOT00UX',
-                    name: 'Events assigned to me',
-                    displayName: 'Events assigned to me',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [],
-                    externalAccess: false,
-                },
-            })
-            .then(() => {
-                cy.get('[data-test="list-view-menu-button"]').click();
-                cy.contains('Share view').click();
-                cy.contains('Kevin Boateng').should('not.exist');
-            }),
-    );
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Share view').click();
+    cy.contains('Kevin Boateng')
+        .should('exist')
+        .should('exist')
+        .parent()
+        .parent()
+        .parent()
+        .find('.select')
+        .click();
+    cy.contains('Remove access').click();
+
+    cy.contains('Kevin Boateng').should('not.exist');
+    cy.contains('Close')
+        .click();
 });
 
 When('you opt in to use the new enrollment Dashboard', () => {

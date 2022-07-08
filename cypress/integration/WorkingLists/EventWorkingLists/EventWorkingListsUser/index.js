@@ -309,10 +309,6 @@ When('you select the working list called Events today', () => {
 });
 
 When('you change the sharing settings', () => {
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-
-
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
@@ -371,31 +367,6 @@ Then('your newly defined sharing settings should still be present', () => {
 
     cy.contains('Update view')
         .click();
-
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
-        .then((sharingUrl) => {
-            cy.request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'CLBKvCKspBk',
-                    name: 'Events today',
-                    displayName: 'Events today',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [],
-                    externalAccess: false,
-                },
-            });
-        });
 });
 Given('you open the main page with Ngelehun and Inpatient morbidity and mortality context', () => {
     cy.visit('#/?programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8');
