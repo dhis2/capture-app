@@ -9,6 +9,8 @@ import { actionTypes as editEventActionTypes }
     from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 import { actionTypes as viewEventActionTypes }
     from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { newPageActionTypes }
+    from '../../components/Pages/New/NewPage.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
@@ -137,6 +139,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     }),
     [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
         ...state,
+        page: 'new',
+    }),
+    [newPageActionTypes.NEW_PAGE_OPEN]: state => ({
+        ...state,
+        locationSwitchInProgress: false,
         page: 'new',
     }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
