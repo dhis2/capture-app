@@ -10,7 +10,7 @@ export const useOrganizationUnit = () => {
                     resource: 'organisationUnits',
                     id: ({ variables: { selectedOrgUnitId: id } }) => id,
                     params: {
-                        fields: ['displayName'],
+                        fields: ['displayName,path'],
                     },
                 },
             }),

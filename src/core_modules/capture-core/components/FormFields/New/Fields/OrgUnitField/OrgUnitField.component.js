@@ -54,6 +54,7 @@ const OrgUnitFieldPlain = (props: Props) => {
         selected,
         maxTreeHeight,
         disabled,
+        previousSelectedOrgUnit,
     } = props;
     const [searchText, setSearchText] = React.useState(undefined);
     const [key, setKey] = React.useState(undefined);
@@ -122,6 +123,7 @@ const OrgUnitFieldPlain = (props: Props) => {
             ready={ready}
             treeKey={'initial'}
             selected={selected}
+            previousSelectedOrgUnit={previousSelectedOrgUnit}
         />);
     };
 

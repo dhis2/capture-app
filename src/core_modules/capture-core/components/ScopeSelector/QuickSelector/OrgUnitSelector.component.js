@@ -174,6 +174,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
                         <OrgUnitField
                             data-test="org-unit-field"
                             onSelectClick={this.handleClick}
+                            previousSelectedOrgUnit={this.props.previousSelectedOrgUnit}
                         />
                     </div>
                 </Paper>

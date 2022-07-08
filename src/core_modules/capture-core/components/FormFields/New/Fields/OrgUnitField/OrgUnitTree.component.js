@@ -33,8 +33,8 @@ class OrgUnitTreePlain extends React.Component<Props> {
     }
 
     render() {
-        const { roots, classes, treeKey, onSelectClick } = this.props;
-
+        const { roots, classes, treeKey, onSelectClick, previousSelectedOrgUnit } = this.props;
+        console.log(previousSelectedOrgUnit);
         if (!roots) {
             return null;
         }
@@ -46,6 +46,7 @@ class OrgUnitTreePlain extends React.Component<Props> {
                     roots={roots.map(item => item.id)}
                     initiallyExpanded={this.getExpandedItems()}
                     singleSelection
+                    highlighted={[previousSelectedOrgUnit?.id]}
                     onChange={onSelectClick}
                 />
             </div>

@@ -64,6 +64,7 @@ class QuickSelectorPlain extends Component<Props> {
                     </Grid>
                     <Grid item xs={12} sm={width * 3} md={width * 2} lg={width} className={this.props.classes.orgUnitSelector}>
                         <OrgUnitSelector
+                            previousSelectedOrgUnit={this.props.previousSelectedOrgUnit}
                             selectedOrgUnitId={this.props.selectedOrgUnitId}
                             handleClickOrgUnit={this.props.onSetOrgUnit}
                             selectedOrgUnit={this.props.selectedOrgUnit}
