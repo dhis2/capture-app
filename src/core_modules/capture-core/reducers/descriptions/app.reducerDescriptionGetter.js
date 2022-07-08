@@ -139,10 +139,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: 'new',
     }),
-    [topBarActionsActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
-        ...state,
-        page: 'new',
-    }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
         locationSwitchInProgress: true,
