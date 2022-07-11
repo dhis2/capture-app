@@ -17,7 +17,7 @@ export const useRulesEngine = ({
     formFoundation: RenderFoundation,
 }) => {
     const dispatch = useDispatch();
-    const program = useMemo(() => getEventProgramThrowIfNotFound(programId), [programId]);
+    const program = useMemo(() => programId && getEventProgramThrowIfNotFound(programId), [programId]);
     const orgUnitRef = useRef();
 
     // TODO: Getting the entire state object is bad and this needs to be refactored.
@@ -25,7 +25,7 @@ export const useRulesEngine = ({
     // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
-        if (orgUnit) {
+        if (orgUnit && program) {
             dispatch(batchActions([
                 getRulesActions({
                     state,

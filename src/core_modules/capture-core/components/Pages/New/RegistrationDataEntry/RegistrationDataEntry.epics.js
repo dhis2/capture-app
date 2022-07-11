@@ -55,7 +55,7 @@ const deriveGeometryFromFormValues = (formValues = {}) =>
 const deriveEvents = ({ stages, enrolledAt, occurredAt, programId, orgUnitId }) => {
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate (enrolledAt)
-    const sanitisedIncidentDate = occurredAt || enrolledAt;
+    const sanitizedOccurredAt = occurredAt || enrolledAt;
     return [...stages.values()]
         .filter(({ autoGenerateEvent }) => autoGenerateEvent)
         .map(({
@@ -65,22 +65,25 @@ const deriveEvents = ({ stages, enrolledAt, occurredAt, programId, orgUnitId }) 
             openAfterEnrollment,
             minDaysFromStart,
         }) => {
-            const dateToUseInActiveStatus = reportDateToUseInActiveStatus === 'enrollmentDate' ? enrolledAt : sanitisedIncidentDate;
-            const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrolledAt : sanitisedIncidentDate;
+            const dateToUseInActiveStatus =
+            reportDateToUseInActiveStatus === 'enrolledAt' ? enrolledAt : sanitizedOccurredAt;
+            const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrolledAt : sanitizedOccurredAt;
 
             const eventInfo =
               openAfterEnrollment
                   ?
                   {
                       status: 'ACTIVE',
-                      occurredAt: dateToUseInActiveStatus,
-                      scheduledAt: dateToUseInActiveStatus,
+                      occurredAt: convertFn(dateToUseInActiveStatus, dataElementTypes.DATE),
+                      scheduledAt: convertFn(dateToUseInActiveStatus, dataElementTypes.DATE),
                   }
                   :
                   {
                       status: 'SCHEDULE',
                       // for schedule type of events we want to add the standard interval days to the date
-                      scheduledAt: moment(dateToUseInScheduleStatus).add(minDaysFromStart, 'days').format('YYYY-MM-DD'),
+                      scheduledAt: moment(convertFn(dateToUseInScheduleStatus, dataElementTypes.DATE))
+                          .add(minDaysFromStart, 'days')
+                          .format('YYYY-MM-DD'),
                   };
 
             return {

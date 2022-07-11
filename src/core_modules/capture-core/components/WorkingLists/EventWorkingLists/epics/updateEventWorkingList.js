@@ -7,7 +7,7 @@ import {
     updateListError,
     buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
-import type { ColumnsMetaForDataFetching } from '../types';
+import type { ColumnsMetaForDataFetching, CommonQueryData } from '../types';
 
 
 const errorMessages = {
@@ -20,7 +20,9 @@ export const updateEventWorkingListAsync = (
         columnsMetaForDataFetching,
         categoryCombinationId,
         storeId,
+        commonQueryData,
     }: {
+        commonQueryData: CommonQueryData,
         columnsMetaForDataFetching: ColumnsMetaForDataFetching,
         categoryCombinationId?: ?string,
         storeId: string,
@@ -34,6 +36,7 @@ export const updateEventWorkingListAsync = (
             columns: columnsMetaForDataFetching,
             storeId,
         }),
+        ...commonQueryData,
     };
 
     return getEventListData(rawQueryArgs, columnsMetaForDataFetching, categoryCombinationId, absoluteApiPath)
