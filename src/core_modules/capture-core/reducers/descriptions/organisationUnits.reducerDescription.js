@@ -26,10 +26,6 @@ export const organisationUnitDesc = createReducerDescription({
         ...state,
         [action.payload.id]: action.payload,
     }),
-    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, action) => ({
-        ...state,
-        [action.payload.orgUnit.id]: action.payload.orgUnit,
-    }),
     [orgUnitFetcherActionTypes.FETCH_ORG_UNIT_SUCCESS]: (state, action) => ({
         ...state, [action.payload.id]: action.payload,
     }),
@@ -103,5 +99,4 @@ export const registeringUnitListDesc = createReducerDescription({
         isLoading: true,
     }),
     [lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET]: removeSearchDataOnResetRegUnit,
-    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: removeSearchDataOnResetRegUnit,
 }, 'registeringUnitList');

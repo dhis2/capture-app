@@ -122,43 +122,18 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         };
         return newState;
     },
-
-    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
-        ...state,
-        locationSwitchInProgress: true,
-    }),
-    [lockedSelectorActionTypes.PROGRAM_ID_SET]: state => ({
-        ...state,
-        locationSwitchInProgress: true,
-    }),
     [lockedSelectorActionTypes.FROM_URL_UPDATE]: (state, action) => ({
         ...state,
         page: action.payload.nextPage,
-    }),
-    [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
-        ...state,
-        page: 'new',
     }),
     [topBarActionsActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
         ...state,
         page: 'new',
     }),
-    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
-        ...state,
-        locationSwitchInProgress: true,
-    }),
-    [lockedSelectorActionTypes.PROGRAM_ID_RESET]: state => ({
-        ...state,
-        locationSwitchInProgress: true,
-    }),
     [searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE]: state => ({
         ...state,
         page: null,
         locationSwitchInProgress: true,
-    }),
-    [lockedSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
-        ...state,
-        page: 'search',
     }),
     [topBarActionsActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
