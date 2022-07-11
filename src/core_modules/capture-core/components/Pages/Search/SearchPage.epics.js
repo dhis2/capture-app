@@ -4,7 +4,7 @@ import { switchMap } from 'rxjs/operators';
 import { searchPageActionTypes } from './SearchPage.actions';
 import { topBarActionsActionTypes } from '../../TopBarActions';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../utils/routing';
-import { resetLocationChange } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(

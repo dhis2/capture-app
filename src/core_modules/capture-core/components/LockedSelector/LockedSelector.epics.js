@@ -15,9 +15,7 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
-import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../utils/routing';
-import { resetLocationChange } from './QuickSelector/actions/QuickSelector.actions';
-
+import { deriveURLParamsFromLocation } from '../../utils/routing';
 
 const orgUnitsQuery = id => ({ resource: 'organisationUnits', id });
 
@@ -93,38 +91,4 @@ export const fetchOrgUnitEpic = (
                         setCurrentOrgUnitBasedOnUrl({ id, name, code })),
                 )),
         catchError(() => of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
-    );
-
-export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
-    action$.pipe(
-        ofType(lockedSelectorActionTypes.TEI_SELECTION_RESET),
-        switchMap(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation();
-
-            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
-            return new Promise((resolve) => {
-                setTimeout(() => resolve(resetLocationChange()), 0);
-            });
-        }),
-    );
-
-export const setEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
-    action$.pipe(
-        ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET),
-        map(({ payload: { enrollmentId } }) => {
-            const { programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
-
-            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
-            return resetLocationChange();
-        }),
-    );
-
-export const resetEnrollmentSelectionEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
-    action$.pipe(
-        ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
-        map(() => {
-            const { orgUnitId, programId, teiId } = deriveURLParamsFromLocation();
-            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
-            return resetLocationChange();
-        }),
     );

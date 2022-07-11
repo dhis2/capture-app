@@ -89,7 +89,7 @@ import {
 import {
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
-} from 'capture-core/components/LockedSelector/QuickSelector';
+} from 'capture-core/components/ScopeSelector/QuickSelector';
 import {
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
 } from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
@@ -157,9 +157,6 @@ import {
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     fetchOrgUnitEpic,
-    resetTeiSelectionEpic,
-    setEnrollmentSelectionEpic,
-    resetEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 
 import {
@@ -335,9 +332,6 @@ export const epics = combineEpics(
     fetchEnrollmentPageInformationFromUrlEpic,
     startFetchingTeiFromEnrollmentIdEpic,
     startFetchingTeiFromTeiIdEpic,
-    resetTeiSelectionEpic,
-    setEnrollmentSelectionEpic,
-    resetEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,

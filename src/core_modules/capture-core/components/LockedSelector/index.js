@@ -7,8 +7,5 @@ export {
     validateSelectionsBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
-    setEnrollmentSelectionEpic,
     fetchOrgUnitEpic,
-    resetTeiSelectionEpic,
-    resetEnrollmentSelectionEpic,
 } from './LockedSelector.epics';

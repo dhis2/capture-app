@@ -9,7 +9,7 @@ import {
 
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../utils/routing';
-import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

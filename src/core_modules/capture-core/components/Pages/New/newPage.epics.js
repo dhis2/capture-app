@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import { topBarActionsActionTypes } from '../../TopBarActions/TopBarActions.actions';
 import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../../utils/routing';
-import { resetLocationChange } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const openNewRegistrationPageFromLockedSelectorEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(

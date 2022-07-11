@@ -2,10 +2,6 @@
 import { actionCreator } from '../../actions/actions.utils';
 
 export const lockedSelectorActionTypes = {
-    TEI_SELECTION_RESET: 'LockedSelector.TeiSelectionReset',
-    ENROLLMENT_SELECTION_SET: 'LockedSelector.EnrollmentSelectionSet',
-    ENROLLMENT_SELECTION_RESET: 'LockedSelector.EnrollmentSelectionReset',
-
     LOADING_START: 'LockedSelector.Loading',
     FROM_URL_UPDATE: 'LockedSelector.FromUrlUpdate',
     FROM_URL_UPDATE_COMPLETE: 'LockedSelector.FromUrlUpdateComplete',
@@ -33,13 +29,3 @@ export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActio
 
 // component Lifecycle
 export const fetchOrgUnit = (orgUnitId: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT)({ orgUnitId });
-
-// enrollment related
-export const resetTeiSelection = () =>
-    actionCreator(lockedSelectorActionTypes.TEI_SELECTION_RESET)();
-
-export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
-    actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET)({ enrollmentId });
-
-export const resetEnrollmentSelection = () =>
-    actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET)();

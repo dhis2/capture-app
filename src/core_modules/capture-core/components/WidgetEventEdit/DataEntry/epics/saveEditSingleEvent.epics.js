@@ -13,7 +13,7 @@ import { convertDataEntryToClientValues } from '../../../DataEntry/common/conver
 import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../events/mainConverters';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../utils/routing';
-import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

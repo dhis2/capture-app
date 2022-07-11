@@ -1,9 +1,9 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { actionTypes as setOrgUnitActionTypes } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { actionTypes as setOrgUnitActionTypes } from '../../components/ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { lockedSelectorActionTypes } from '../../components/LockedSelector/LockedSelector.actions';
-import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
+import { orgUnitListActionTypes } from '../../components/ScopeSelector/QuickSelector';
 import { set as setStoreRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { actionTypes as initActionTypes } from '../../init/init.actions';
 import { actionTypes as orgUnitFetcherActionTypes } from '../../components/OrgUnitFetcher/OrgUnitFetcher.actions';
