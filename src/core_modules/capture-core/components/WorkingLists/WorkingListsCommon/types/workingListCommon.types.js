@@ -1,5 +1,5 @@
 // @flow
-import type { FiltersData } from '../../WorkingListsBase';
+import type { FiltersData, Categories } from '../../WorkingListsBase';
 
 export type Callbacks = { callBacks?: { onChangeTemplate?: (selectedTemplateId?: string) => void };}
 
@@ -18,6 +18,21 @@ export type DeleteTemplate = (
 ) => void;
 
 export type UpdateList = (queryArgs: Object, columnsMetaForDataFetching: Object, lastTransaction: number) => void;
+
+export type LoadView = (
+    template: Object,
+    context: {
+        programId: string,
+        orgUnitId: string,
+        categories?: Categories,
+        programStageId?: string,
+        currentRequest?: string,
+    },
+    meta: {
+        columnsMetaForDataFetching: any,
+        filtersOnlyMetaForDataFetching: any,
+    },
+) => void;
 
 export type InitialViewConfig = {|
     filters?: FiltersData,

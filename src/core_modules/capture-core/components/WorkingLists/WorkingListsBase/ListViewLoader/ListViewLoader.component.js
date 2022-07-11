@@ -145,6 +145,7 @@ export const ListViewLoader = memo<Props>((props: Props) => {
             filters={filters}
             columns={columns}
             programId={programId}
+            programStageId={programStageId}
             orgUnitId={orgUnitId}
             categories={categories}
             ready={!triggerLoad && !loading}

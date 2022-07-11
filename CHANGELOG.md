@@ -1,3 +1,24 @@
+## [100.8.3](https://github.com/dhis2/capture-app/compare/v100.8.2...v100.8.3) (2022-07-11)
+
+
+### Bug Fixes
+
+* [DHIS2-13305] compute and inject the download link ([#2850](https://github.com/dhis2/capture-app/issues/2850)) ([5c3b548](https://github.com/dhis2/capture-app/commit/5c3b5486c9d45ed17aa40b8584cf912c3b6feda3))
+
+## [100.8.2](https://github.com/dhis2/capture-app/compare/v100.8.1...v100.8.2) (2022-07-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([fea4954](https://github.com/dhis2/capture-app/commit/fea49547a4e6b55d358cd52bcfaf8a4774a2ca99))
+
+## [100.8.1](https://github.com/dhis2/capture-app/compare/v100.8.0...v100.8.1) (2022-07-10)
+
+
+### Bug Fixes
+
+* [DHIS2-13188] fix new page crash ([#2894](https://github.com/dhis2/capture-app/issues/2894)) ([fdec2f1](https://github.com/dhis2/capture-app/commit/fdec2f1f39a9771ee06c502e6e473a17077ca215))
+
 # [100.8.0](https://github.com/dhis2/capture-app/compare/v100.7.0...v100.8.0) (2022-07-06)
 
 
