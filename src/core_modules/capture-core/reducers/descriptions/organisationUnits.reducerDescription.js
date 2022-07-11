@@ -46,16 +46,6 @@ export const organisationUnitRootsDesc = createReducerDescription({
     }),
 }, 'organisationUnitRoots');
 
-const removeSearchDataOnResetRegUnit = (state) => {
-    setStoreRoots('regUnit', null);
-    return {
-        ...state,
-        searchRoots: null,
-        searchText: null,
-        key: 'reset_reg_units',
-    };
-};
-
 export const registeringUnitListDesc = createReducerDescription({
     [orgUnitListActionTypes.INIT_REG_UNIT_LIST_ROOTS]: (state, action) => ({
         searchRoots: null,
@@ -98,5 +88,4 @@ export const registeringUnitListDesc = createReducerDescription({
         ...state,
         isLoading: true,
     }),
-    [lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET]: removeSearchDataOnResetRegUnit,
 }, 'registeringUnitList');

@@ -9,7 +9,6 @@ import {
     validSelectionsFromUrl,
     setCurrentOrgUnitBasedOnUrl,
     errorRetrievingOrgUnitBasedOnUrl,
-    setEmptyOrgUnitBasedOnUrl,
     startLoading,
     completeUrlUpdate,
 } from './LockedSelector.actions';
@@ -43,18 +42,11 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (
         },
         ));
 
-export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(lockedSelectorActionTypes.FROM_URL_UPDATE),
-        filter(action => !action.payload.nextProps.orgUnitId),
-        map(() => setEmptyOrgUnitBasedOnUrl()));
-
 export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.FROM_URL_UPDATE_COMPLETE,
             lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS,
-            lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET,
         ),
         filter(() => {
             const pathname = getLocationPathname();
@@ -77,18 +69,3 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable)
             return validSelectionsFromUrl();
         }));
 
-export const fetchOrgUnitEpic = (
-    action$: InputObservable,
-    _: ReduxStore,
-    { querySingleResource }: ApiUtils,
-) =>
-    action$.pipe(
-        ofType(lockedSelectorActionTypes.FETCH_ORG_UNIT),
-        switchMap(({ payload: { orgUnitId } }) =>
-            from(querySingleResource(orgUnitsQuery(orgUnitId)))
-                .pipe(
-                    map(({ id, displayName: name, code }) =>
-                        setCurrentOrgUnitBasedOnUrl({ id, name, code })),
-                )),
-        catchError(() => of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
-    );

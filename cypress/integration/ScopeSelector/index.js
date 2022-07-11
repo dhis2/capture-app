@@ -246,7 +246,7 @@ const selectedTei = ['Selected person', 'Carlos Cruz'];
 const selectedEnrollment = ['Selected enrollment', '2023-07-01 12:05'];
 const emptyEnrollmentSelection = ['Enrollment', 'Select...'];
 
-const lockedSelectorCases = {
+const scopeSelectorCases = {
     all: [...selectedChildProgram, ...selectedOrgUnit, ...selectedTei, ...selectedEnrollment],
     teiAndOrgUnit: [...emptyProgramSelection, ...selectedOrgUnit, ...selectedTei, ...emptyEnrollmentSelection],
     teiAndChildProgram: [...selectedChildProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
@@ -255,14 +255,8 @@ const lockedSelectorCases = {
     error: [],
 };
 
-const scopeSelectorCases = lockedSelectorCases;
-
 Given(/^you land on the enrollment page by having typed the (.*)$/, (url) => {
     cy.visit(url);
-});
-
-Then(/^you can see on the locked selector the following (.*)$/, (state) => {
-    lockedSelectorCases[state].map(selection => cy.get('[data-test="locked-selector"]').contains(selection));
 });
 
 Then(/^you can see on the scope selector the following (.*)$/, (state) => {

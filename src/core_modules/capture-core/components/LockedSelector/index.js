@@ -5,7 +5,5 @@ export {
 } from './LockedSelector.actions';
 export {
     validateSelectionsBasedOnUrlUpdateEpic,
-    setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
-    fetchOrgUnitEpic,
 } from './LockedSelector.epics';
