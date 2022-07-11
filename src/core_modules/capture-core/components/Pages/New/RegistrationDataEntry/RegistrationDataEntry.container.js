@@ -35,9 +35,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
     const dataEntryIsReady = useSelector(({ dataEntries }) => (!!dataEntries[dataEntryId]));
 
     useEffect(() => {
-        dispatch(cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID));
-        dispatch(cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID));
-        dispatch(cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID));
         dispatch(openNewPage());
         return () => {
             dispatch(cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID));
