@@ -841,15 +841,17 @@ msgid "Search by attributes"
 msgstr "按属性搜索"
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
+msgstr "填写这些字段进行搜索{{escape}} {{ searchableAttributes }}"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
 "search{{escape}} {{searchableAttributes}}"
 msgstr ""
+"至少填写 {{minAttributesRequiredToSearch}} 这些字段以进行搜索{{escape}} "
+"{{searchableAttributes}}"
 
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
+msgstr "填写此字段进行搜索{{escape}} {{searchableAttributes}}"
 
 msgid "Back"
 msgstr "后退"
@@ -892,7 +894,7 @@ msgid ""
 msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或按更多属性搜索以缩小搜索范围。"
 
 msgid "Cannot search in all programs"
-msgstr ""
+msgstr "无法在所有项目中搜索"
 
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
@@ -904,10 +906,10 @@ msgid "Re-enroll"
 msgstr "重新报名"
 
 msgid "all programs"
-msgstr ""
+msgstr "所有项目"
 
 msgid "If none of search results match, you can create new "
-msgstr ""
+msgstr "如果没有搜索结果匹配，您可以创建新的"
 
 msgid "Create new"
 msgstr "新建"
