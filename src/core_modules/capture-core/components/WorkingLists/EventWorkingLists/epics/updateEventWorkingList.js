@@ -7,8 +7,8 @@ import {
     updateListError,
     buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
-import type { ColumnsMetaForDataFetching } from '../types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import type { ColumnsMetaForDataFetching, CommonQueryData } from '../types';
 
 const errorMessages = {
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
@@ -20,7 +20,9 @@ export const updateEventWorkingListAsync = (
         columnsMetaForDataFetching,
         categoryCombinationId,
         storeId,
+        commonQueryData,
     }: {
+        commonQueryData: CommonQueryData,
         columnsMetaForDataFetching: ColumnsMetaForDataFetching,
         categoryCombinationId?: ?string,
         storeId: string,
@@ -35,6 +37,7 @@ export const updateEventWorkingListAsync = (
             columns: columnsMetaForDataFetching,
             storeId,
         }),
+        ...commonQueryData,
     };
 
     return getEventListData({
