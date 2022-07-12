@@ -160,8 +160,9 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: 'search',
     }),
-    [topBarActionsActionTypes.SEARCH_PAGE_OPEN]: state => ({
+    [searchPageActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
+        locationSwitchInProgress: false,
         page: 'search',
     }),
 }, 'app');

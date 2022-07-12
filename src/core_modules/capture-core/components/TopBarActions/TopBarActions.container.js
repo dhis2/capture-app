@@ -2,14 +2,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import { useHistory } from 'react-router-dom';
 import i18n from '@dhis2/d2-i18n';
 import { ActionButtons } from './TopBarActions.component';
-import { openNewRegistrationPageFromScopeSelector, openSearchPageFromScopeSelector } from './TopBarActions.actions';
+import { openNewRegistrationPageFromScopeSelector } from './TopBarActions.actions';
 import { resetAllCategoryOptionsFromScopeSelector } from '../ScopeSelector/ScopeSelector.actions';
 import { resetProgramIdBase } from '../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { useReset, useSetOrgUnitId } from '../ScopeSelector/hooks';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import type { Props } from './TopBarActions.types';
+import { buildUrlQueryString } from '../../utils/routing';
 
 const defaultContext = {
     openStartAgainWarning: false,
@@ -30,7 +32,6 @@ export const TopBarActions = ({
     selectedProgramId,
     selectedOrgUnitId,
     isUserInteractionInProgress = false,
-    customActionsOnProgramIdReset = [],
 }: Props) => {
     const [context, setContext] = useState(defaultContext);
     const {
@@ -48,6 +49,7 @@ export const TopBarActions = ({
         openSearchPageWithoutProgramId;
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const { reset } = useReset();
     const { setOrgUnitId } = useSetOrgUnitId();
 
@@ -61,12 +63,10 @@ export const TopBarActions = ({
         dispatch(batchActions(actions));
         setOrgUnitId(selectedOrgUnitId, 'new', false);
     };
-    const searchPage = () => dispatch(openSearchPageFromScopeSelector());
-    const searchPageWithoutProgramId = () => {
-        const actions = [resetProgramIdBase(), openSearchPageFromScopeSelector(), ...customActionsOnProgramIdReset];
-        dispatch(batchActions(actions));
-        setOrgUnitId(selectedOrgUnitId, 'search', false);
-    };
+    const searchPage = () =>
+        history.push(`search?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId, programId: selectedProgramId })}`);
+    const searchPageWithoutProgramId = () =>
+        history.push(`search?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId })}`);
 
     const handleOpenStartAgainWarning = () => {
         isUserInteractionInProgress ? setContext(prev => ({ ...prev, openStartAgainWarning: true })) : startAgain();

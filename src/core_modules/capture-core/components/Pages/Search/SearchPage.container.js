@@ -5,7 +5,12 @@ import type { ComponentType } from 'react';
 import { useLocationQuery } from '../../../utils/routing';
 import { SearchPageComponent } from './SearchPage.component';
 import type { AvailableSearchOptions } from './SearchPage.types';
-import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
+import {
+    cleanSearchRelatedData,
+    navigateToMainPage,
+    showInitialViewOnSearchPage,
+    openSearchPage,
+} from './SearchPage.actions';
 import { searchScopes } from './SearchPage.constants';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
 import { useCurrentTrackedEntityTypeId } from '../../../hooks/useCurrentTrackedEntityTypeId';
@@ -102,6 +107,10 @@ export const SearchPage: ComponentType<{||}> = () => {
             dispatchNavigateToMainPage();
         }
     }, [programId, preselectedProgramId, dispatchNavigateToMainPage]);
+
+    useEffect(() => {
+        dispatch(openSearchPage());
+    }, [dispatch]);
 
     return (
         <SearchPageComponent
