@@ -155,6 +155,7 @@ import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../compone
 import {
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
+    setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 
 import {
@@ -308,6 +309,7 @@ export const epics = combineEpics(
     saveAssigneeEpic,
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
+    setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     searchViaUniqueIdOnScopeProgramEpic,
     searchViaUniqueIdOnScopeTrackedEntityTypeEpic,
     searchViaAttributesOnScopeProgramEpic,

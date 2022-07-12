@@ -9,6 +9,7 @@ import {
     validSelectionsFromUrl,
     setCurrentOrgUnitBasedOnUrl,
     errorRetrievingOrgUnitBasedOnUrl,
+    setEmptyOrgUnitBasedOnUrl,
     startLoading,
     completeUrlUpdate,
 } from './LockedSelector.actions';
@@ -42,11 +43,18 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (
         },
         ));
 
+export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.FROM_URL_UPDATE),
+        filter(action => !action.payload.nextProps.orgUnitId),
+        map(() => setEmptyOrgUnitBasedOnUrl()));
+
 export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.FROM_URL_UPDATE_COMPLETE,
             lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS,
+            lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET,
         ),
         filter(() => {
             const pathname = getLocationPathname();

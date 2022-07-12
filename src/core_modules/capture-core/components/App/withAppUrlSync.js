@@ -126,7 +126,7 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         onUpdateFromUrl: (page: string, updateData: UpdateDataContainer) => {
             if (pageFetchesOrgUnitUsingTheOldWay(page) && page != null) {
-                updaterForPages[page] && dispatch(updaterForPages[page](updateData));
+                dispatch(updaterForPages[page](updateData));
             }
         },
     });
