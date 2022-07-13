@@ -15,5 +15,6 @@ export type PlainProps = {
     onFindClick: () => void,
     onFindClickWithoutProgramId: () => void,
     showResetButton: boolean,
+    openConfirmDialog: boolean,
 };
 

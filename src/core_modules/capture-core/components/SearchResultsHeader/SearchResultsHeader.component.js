@@ -24,7 +24,7 @@ const SearchResultsHeaderPlain =
   ({ currentSearchTerms, currentSearchScopeName, classes }: SearchResultsHeaderType) =>
       (<div data-test="search-results-top" className={classes.topSection} >
           {i18n.t('Results found')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}
-          <div>
+          {currentSearchTerms && <div>
               {
                   currentSearchTerms.map(({ name, value, id, type }, index, rest) => (
                       <span key={id}>
@@ -33,7 +33,7 @@ const SearchResultsHeaderPlain =
                       </span>
                   ))
               }
-          </div>
+          </div>}
       </div>
       );
 

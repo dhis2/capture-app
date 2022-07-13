@@ -373,7 +373,15 @@ When('you click the back button', () => {
         .click();
 });
 
-Then('you should be taken to the main page with org unit preselected', () => {
+Then('you should be taken to the main page with org unit and program preselected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW`);
+});
+
+Then('you stay in the same page with all program results', () => {
+    cy.get('[data-test="search-results-top"]')
+        .then(($elements) => {
+            cy.log({ $elements });
+            cy.wrap($elements[1]).contains('Results found in all programs');
+        });
 });
