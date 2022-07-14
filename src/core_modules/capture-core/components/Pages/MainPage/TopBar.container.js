@@ -8,11 +8,13 @@ import {
     useSetOrgUnitId,
     useResetProgramId,
     useResetOrgUnitId,
-    setCategoryOptionFromScopeSelector,
     setOrgUnitFromScopeSelector,
-    resetCategoryOptionFromScopeSelector,
-    resetAllCategoryOptionsFromScopeSelector,
 } from '../../ScopeSelector';
+import {
+    setCategoryOption,
+    resetCategoryOption,
+    resetAllCategoryOptions,
+} from './MainPage.actions';
 import { TopBarActions } from '../../TopBarActions';
 
 type TopBarProps = {
@@ -29,18 +31,18 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories }: TopBarProps
     const { resetOrgUnitId } = useResetOrgUnitId();
     const dispatchOnSetCategoryOption = useCallback(
         (categoryOption: Object, categoryId: string) => {
-            dispatch(setCategoryOptionFromScopeSelector(categoryId, categoryOption));
+            dispatch(setCategoryOption(categoryId, categoryOption));
         },
         [dispatch],
     );
     const dispatchOnResetCategoryOption = useCallback(
         (categoryId: string) => {
-            dispatch(resetCategoryOptionFromScopeSelector(categoryId));
+            dispatch(resetCategoryOption(categoryId));
         },
         [dispatch],
     );
     const dispatchOnResetAllCategoryOptions = useCallback(() => {
-        dispatch(resetAllCategoryOptionsFromScopeSelector());
+        dispatch(resetAllCategoryOptions());
     }, [dispatch]);
 
     const dispatchOnSetOrgUnit = useCallback(

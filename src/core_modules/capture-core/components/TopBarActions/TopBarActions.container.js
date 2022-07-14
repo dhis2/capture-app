@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import { useHistory } from 'react-router-dom';
 import i18n from '@dhis2/d2-i18n';
 import { ActionButtons } from './TopBarActions.component';
 import { openNewRegistrationPageFromScopeSelector, openSearchPageFromScopeSelector } from './TopBarActions.actions';
-import { resetAllCategoryOptionsFromScopeSelector } from '../ScopeSelector/ScopeSelector.actions';
 import { resetProgramIdBase } from '../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
-import { useReset, useSetOrgUnitId } from '../ScopeSelector/hooks';
+import { useSetOrgUnitId } from '../ScopeSelector/hooks';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import type { Props } from './TopBarActions.types';
 
@@ -48,13 +48,10 @@ export const TopBarActions = ({
         openSearchPageWithoutProgramId;
 
     const dispatch = useDispatch();
-    const { reset } = useReset();
+    const history = useHistory();
     const { setOrgUnitId } = useSetOrgUnitId();
 
-    const startAgain = () => {
-        dispatch(resetAllCategoryOptionsFromScopeSelector());
-        reset();
-    };
+    const startAgain = () => history.push('/');
     const newRegistrationPage = () => dispatch(openNewRegistrationPageFromScopeSelector());
     const newRegistrationPageWithoutProgramId = () => {
         const actions = [resetProgramIdBase(), openNewRegistrationPageFromScopeSelector()];
