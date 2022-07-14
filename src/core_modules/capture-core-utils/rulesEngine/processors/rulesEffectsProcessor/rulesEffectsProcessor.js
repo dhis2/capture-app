@@ -57,7 +57,7 @@ export function getRulesEffectsProcessor(
         type: $Values<typeof effectActions>): any {
         const result = createEffectsForConfiguredDataTypes(effect, (): any => ({
             type,
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
         }));
         return result.length !== 0 ? result : {
             type,
@@ -74,7 +74,7 @@ export function getRulesEffectsProcessor(
         }
         result.warning = {
             id: effect.id,
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
         };
         return result;
     }
@@ -88,7 +88,7 @@ export function getRulesEffectsProcessor(
         }
         result.error = {
             id: effect.id,
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
         };
         return result;
     }
@@ -190,7 +190,7 @@ export function getRulesEffectsProcessor(
             id: effect.location,
             displayText: {
                 id: effect.id,
-                message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+                message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
                 ...effect.style,
             },
         };
@@ -202,8 +202,8 @@ export function getRulesEffectsProcessor(
             id: effect.location,
             displayKeyValuePair: {
                 id: effect.id,
-                key: effect.content,
-                value: effect.data,
+                key: effect.displayContent,
+                value: String(effect.data),
                 ...effect.style,
             },
         };
