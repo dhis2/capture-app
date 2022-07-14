@@ -101,7 +101,7 @@ export default function getRulesEffectsProcessor(
                 id: 'general',
                 error: {
                     id: effect.id,
-                    message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+                    message: `${effect.content || ''} ${sanitiseFalsy(effect.data)}`,
                 },
             };
         }
@@ -109,7 +109,7 @@ export default function getRulesEffectsProcessor(
         return {
             type: effectActions.SHOW_ERROR,
             id: effect[processIdName],
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.content || ''} ${sanitiseFalsy(effect.data)}`,
         };
     }
 
@@ -119,14 +119,14 @@ export default function getRulesEffectsProcessor(
             return {
                 type: effectActions.SHOW_WARNING,
                 id: 'general',
-                warning: { id: effect.id, message: `${effect.content} ${sanitiseFalsy(effect.data)}` },
+                warning: { id: effect.id, message: `${effect.content || ''} ${sanitiseFalsy(effect.data)}` },
             };
         }
 
         return {
             type: effectActions.SHOW_WARNING,
             id: effect[processIdName],
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.content || ''} ${sanitiseFalsy(effect.data)}`,
         };
     }
 
@@ -138,7 +138,7 @@ export default function getRulesEffectsProcessor(
                 id: 'general',
                 error: {
                     id: effect.id,
-                    message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+                    message: `${effect.content || ''} ${sanitiseFalsy(effect.data)}`,
                 },
             };
         }
@@ -146,7 +146,7 @@ export default function getRulesEffectsProcessor(
         return {
             type: effectActions.SHOW_ERROR_ONCOMPLETE,
             id: effect[processIdName],
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.content || ''} ${sanitiseFalsy(effect.data)}`,
         };
     }
 
@@ -158,7 +158,7 @@ export default function getRulesEffectsProcessor(
                 id: 'general',
                 warning: {
                     id: effect.id,
-                    message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+                    message: `${effect.content || ''} ${sanitiseFalsy(effect.data)}`,
                 },
             };
         }
@@ -166,7 +166,7 @@ export default function getRulesEffectsProcessor(
         return {
             type: effectActions.SHOW_WARNING_ONCOMPLETE,
             id: effect[processIdName],
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.content || ''} ${sanitiseFalsy(effect.data)}`,
         };
     }
 
@@ -201,7 +201,7 @@ export default function getRulesEffectsProcessor(
             id: effect.location,
             displayText: {
                 id: effect.id,
-                message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+                message: `${effect.content || ''} ${sanitiseFalsy(effect.data)}`,
             },
         };
     }
