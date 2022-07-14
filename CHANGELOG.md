@@ -1,3 +1,10 @@
+## [100.9.1](https://github.com/dhis2/capture-app/compare/v100.9.0...v100.9.1) (2022-07-14)
+
+
+### Bug Fixes
+
+* [DHIS2-13190][DHIS2-13196] tei geometry and attributes ([#2808](https://github.com/dhis2/capture-app/issues/2808)) ([43c5e83](https://github.com/dhis2/capture-app/commit/43c5e8313ee041d61daf9ee98107d93077696731))
+
 # [100.9.0](https://github.com/dhis2/capture-app/compare/v100.8.4...v100.9.0) (2022-07-13)
 
 
