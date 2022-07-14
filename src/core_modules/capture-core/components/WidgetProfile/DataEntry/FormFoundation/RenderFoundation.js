@@ -3,19 +3,22 @@
 import i18n from '@dhis2/d2-i18n';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type {
-    CachedProgramTrackedEntityAttribute,
-    CachedTrackedEntityAttribute,
-    CachedTrackedEntityType,
-    CachedOptionSet,
-} from '../../../../storageControllers/cache.types';
+    ProgramTrackedEntityAttribute,
+    TrackedEntityAttribute,
+    TrackedEntityType,
+    OptionSet,
+} from './types';
 import { RenderFoundation, Section } from '../../../../metaData';
 import { buildDataElement, buildTetFeatureType } from './DataElement';
 import { getProgramTrackedEntityAttributes, getTrackedEntityTypeId } from '../helpers';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
-const getFeatureType = (featureType: ?string) => (featureType ? capitalizeFirstLetter(featureType.toLowerCase()) : 'None');
+const getFeatureType = (featureType: ?string) =>
+    (featureType ? capitalizeFirstLetter(featureType.toLowerCase()) : 'None');
 
-const buildTetFeatureTypeField = (trackedEntityType: CachedTrackedEntityType) => {
+const buildProgramSection = programSection => programSection.trackedEntityAttributes.map(({ id }) => id);
+
+const buildTetFeatureTypeField = (trackedEntityType: TrackedEntityType) => {
     if (!trackedEntityType) {
         return null;
     }
@@ -29,7 +32,10 @@ const buildTetFeatureTypeField = (trackedEntityType: CachedTrackedEntityType) =>
     return buildTetFeatureType(featureType);
 };
 
-const buildTetFeatureTypeSection = async (programTrackedEntityTypeId: string, trackedEntityType: CachedTrackedEntityType) => {
+const buildTetFeatureTypeSection = async (
+    programTrackedEntityTypeId: string,
+    trackedEntityType: TrackedEntityType,
+) => {
     const featureTypeField = buildTetFeatureTypeField(trackedEntityType);
 
     if (!featureTypeField) {
@@ -52,10 +58,10 @@ const buildMainSection = async ({
     programTrackedEntityAttributes,
     querySingleResource,
 }: {
-    trackedEntityType: CachedTrackedEntityType,
-    trackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-    optionSets: Array<CachedOptionSet>,
-    programTrackedEntityAttributes?: ?Array<CachedProgramTrackedEntityAttribute>,
+    trackedEntityType: TrackedEntityType,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
+    programTrackedEntityAttributes?: ?Array<ProgramTrackedEntityAttribute>,
     querySingleResource: QuerySingleResource,
 }) => {
     const section = new Section((o) => {
@@ -87,9 +93,9 @@ const buildElementsForSection = async ({
     section,
     querySingleResource,
 }: {
-    programTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
-    trackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-    optionSets: Array<CachedOptionSet>,
+    programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute>,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
     section: Section,
     querySingleResource: QuerySingleResource,
 }) => {
@@ -114,9 +120,9 @@ const buildSection = async ({
     sectionCustomId,
     querySingleResource,
 }: {
-    programTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute>,
-    trackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-    optionSets: Array<CachedOptionSet>,
+    programTrackedEntityAttributes?: Array<ProgramTrackedEntityAttribute>,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
     sectionCustomLabel: string,
     sectionCustomId: string,
     querySingleResource: QuerySingleResource,
@@ -148,7 +154,7 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
         (acc, currentValue) => [...acc, currentValue.trackedEntityAttribute],
         [],
     );
-    const optionSets: Array<CachedOptionSet> = trackedEntityAttributes.reduce(
+    const optionSets: Array<OptionSet> = trackedEntityAttributes.reduce(
         (acc, currentValue) => (currentValue.optionSet ? [...acc, currentValue.optionSet] : acc),
         [],
     );
@@ -165,8 +171,10 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
         }
         if (programTrackedEntityAttributes) {
             for (const programSection of programSections) {
-                const programTrackedEntityAttributesFiltered = programTrackedEntityAttributes.filter(trackedEntityAttribute =>
-                    programSection.trackedEntityAttributes.includes(trackedEntityAttribute.trackedEntityAttributeId),
+                const builtProgramSection = buildProgramSection(programSection);
+                const programTrackedEntityAttributesFiltered = programTrackedEntityAttributes.filter(
+                    trackedEntityAttribute =>
+                        builtProgramSection.includes(trackedEntityAttribute.trackedEntityAttributeId),
                 );
                 // eslint-disable-next-line no-await-in-loop
                 section = await buildSection({

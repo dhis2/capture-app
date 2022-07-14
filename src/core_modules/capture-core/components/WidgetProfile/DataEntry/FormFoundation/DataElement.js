@@ -20,6 +20,7 @@ import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import { buildIcon } from '../../../../metaDataMemoryStoreBuilders/common/helpers';
 import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { getFeatureType, getDataElement, getLabel } from '../helpers';
 
 const OPTION_SET_NOT_FOUND = 'Optionset not found';
 const TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND =
@@ -219,13 +220,13 @@ const buildOptionSet = async (
 
 export const buildTetFeatureType = (featureType: 'POINT' | 'POLYGON') => {
     const dataElement = new DataElement((dataEntry) => {
-        dataEntry.id = `FEATURETYPE_${featureType}`;
-        dataEntry.name = featureType === 'POINT' ? i18n.t('Coordinate') : i18n.t('Area');
+        dataEntry.id = getFeatureType(featureType);
+        dataEntry.name = i18n.t(getLabel(featureType));
         dataEntry.formName = dataEntry.name;
         dataEntry.compulsory = false;
         dataEntry.displayInForms = true;
         dataEntry.disabled = false;
-        dataEntry.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
+        dataEntry.type = getDataElement(featureType);
     });
     return dataElement;
 };
