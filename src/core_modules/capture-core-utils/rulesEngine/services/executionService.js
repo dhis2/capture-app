@@ -1,5 +1,6 @@
 // @flow
 import isDefined from 'd2-utilizr/lib/isDefined';
+import { getInjectionValue } from './expressionService/common';
 import type { D2Functions } from '../rulesEngine.types';
 
 /**
@@ -38,7 +39,7 @@ export const executeExpression = (dhisFunctions: D2Functions, expression: string
     const onExpressionReplaceFunctionCallStringWithEvaluatedString =
       ({ evaluatedExpression, isUpdated }, { name, dhisFunction, parameters }) => {
           // Select the function call, with any number of parameters inside single quotations, or number parameters without quotations
-          const regularExFunctionCall = new RegExp(`${name}\\( *(([\\d/\\*\\+\\-%. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
+          const regularExFunctionCall = new RegExp(`${name}\\( *(([\\d/\\*\\+\\-%. ]+)|('[^']*')|("[^"]*"))*( *, *(([\\d/\\*\\+\\-%. ]+)|('[^']*')|("[^"]*")))* *\\)`, 'g');
           const callsToThisFunction = evaluatedExpression.match(regularExFunctionCall);
 
           if (Array.isArray(callsToThisFunction)) {
@@ -49,17 +50,19 @@ export const executeExpression = (dhisFunctions: D2Functions, expression: string
                   // Remove white spaces before and after parameters:
                       .trim()
                   // Then split into single parameters:
-                      .match(/(('[^']+')|([^,]+))/g)
+                      .match(/[^,]+/g)
                   // In case the function call is nested, the parameter itself contains an expression, run the expression.
                       .map(param => executeExpression(dhisFunctions, param, logError));
-
                   if (isFunctionSignatureBroken(parameters, evaluatedParameters)) {
                       logError && logError('Error: Signature params have not the same dimensions');
                       // Function call is not possible to evaluate, remove the call:
                       evaluatedExpression = evaluatedExpression.replace(callToThisFunction, 'false');
                   } else {
                       const dhisFunctionEvaluation = dhisFunction(evaluatedParameters);
-                      evaluatedExpression = evaluatedExpression.replace(callToThisFunction, dhisFunctionEvaluation);
+                      evaluatedExpression = evaluatedExpression.replace(
+                          callToThisFunction,
+                          getInjectionValue(dhisFunctionEvaluation),
+                      );
                   }
 
                   isUpdated = true;

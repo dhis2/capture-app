@@ -182,10 +182,6 @@ export class VariableService {
         return variablesWithContextAndConstantVariables;
     }
 
-    processValue(value: any, type: $Values<typeof typeKeys>) {
-        return this.onProcessValue(value, type);
-    }
-
     buildVariable(
         value: any,
         type: string,
@@ -211,7 +207,7 @@ export class VariableService {
             useCodeForOptionSet: !useNameForOptionSet,
             variableType: type || typeKeys.TEXT,
             hasValue: !!value || value === 0 || value === false,
-            variableEventDate,
+            variableEventDate: this.onProcessValue(variableEventDate, typeKeys.DATE),
             variablePrefix,
             allValues: processedAllValues,
         };

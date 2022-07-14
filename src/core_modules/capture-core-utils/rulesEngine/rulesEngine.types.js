@@ -54,9 +54,9 @@ export type ProgramRuleEffect = {
     programStageSectionId: ?string,
     optionGroupId: ?string,
     optionId: ?string,
-    content: string,
-    displayContent: string,
-    data: ?string,
+    content: ?string,
+    displayContent: ?string,
+    data: any,
     style?: ?Object,
 };
 
@@ -146,7 +146,7 @@ export interface IDateUtils {
     monthsBetween(firstRulesDate: string, secondRulesDate: string): number;
     yearsBetween(firstRulesDate: string, secondRulesDate: string): number;
     +compareDates: CompareDates;
-    addDays(rulesDate: string, daysToAdd: string): string;
+    addDays(rulesDate: string, daysToAdd: number): string;
 }
 
 export interface IConvertInputRulesValue {
