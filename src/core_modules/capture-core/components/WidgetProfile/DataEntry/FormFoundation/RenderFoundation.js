@@ -3,18 +3,21 @@
 import i18n from '@dhis2/d2-i18n';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type {
-    CachedProgramTrackedEntityAttribute,
-    CachedTrackedEntityAttribute,
-    CachedTrackedEntityType,
-    CachedOptionSet,
-} from '../../../../storageControllers/cache.types';
+    ProgramTrackedEntityAttribute,
+    TrackedEntityAttribute,
+    TrackedEntityType,
+    OptionSet,
+} from './types';
 import { RenderFoundation, Section } from '../../../../metaData';
 import { buildDataElement, buildTetFeatureType } from './DataElement';
 import { getProgramTrackedEntityAttributes, getTrackedEntityTypeId } from '../helpers';
 
-const getFeatureType = (featureType: ?string) => (featureType ? capitalizeFirstLetter(featureType.toLowerCase()) : 'None');
+const getFeatureType = (featureType: ?string) =>
+    (featureType ? capitalizeFirstLetter(featureType.toLowerCase()) : 'None');
 
-const buildTetFeatureTypeField = (trackedEntityType: CachedTrackedEntityType) => {
+const buildProgramSection = programSection => programSection.trackedEntityAttributes.map(({ id }) => id);
+
+const buildTetFeatureTypeField = (trackedEntityType: TrackedEntityType) => {
     if (!trackedEntityType) {
         return null;
     }
@@ -28,7 +31,10 @@ const buildTetFeatureTypeField = (trackedEntityType: CachedTrackedEntityType) =>
     return buildTetFeatureType(featureType);
 };
 
-const buildTetFeatureTypeSection = async (programTrackedEntityTypeId: string, trackedEntityType: CachedTrackedEntityType) => {
+const buildTetFeatureTypeSection = async (
+    programTrackedEntityTypeId: string,
+    trackedEntityType: TrackedEntityType,
+) => {
     const featureTypeField = buildTetFeatureTypeField(trackedEntityType);
 
     if (!featureTypeField) {
@@ -45,10 +51,10 @@ const buildTetFeatureTypeSection = async (programTrackedEntityTypeId: string, tr
 };
 
 const buildMainSection = async (
-    trackedEntityType: CachedTrackedEntityType,
-    trackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-    optionSets: Array<CachedOptionSet>,
-    programTrackedEntityAttributes?: ?Array<CachedProgramTrackedEntityAttribute>,
+    trackedEntityType: TrackedEntityType,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
+    programTrackedEntityAttributes?: ?Array<ProgramTrackedEntityAttribute>,
 ) => {
     const section = new Section((o) => {
         o.id = Section.MAIN_SECTION_ID;
@@ -67,9 +73,9 @@ const buildMainSection = async (
 };
 
 const buildElementsForSection = async (
-    programTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
-    trackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-    optionSets: Array<CachedOptionSet>,
+    programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute>,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
     section: Section,
 ) => {
     for (const trackedEntityAttribute of programTrackedEntityAttributes) {
@@ -81,9 +87,9 @@ const buildElementsForSection = async (
 };
 
 const buildSection = async (
-    programTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute>,
-    trackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-    optionSets: Array<CachedOptionSet>,
+    programTrackedEntityAttributes?: Array<ProgramTrackedEntityAttribute>,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
     sectionCustomLabel: string,
     sectionCustomId: string,
 ) => {
@@ -108,7 +114,7 @@ export const buildFormFoundation = async (program: any) => {
         (acc, currentValue) => [...acc, currentValue.trackedEntityAttribute],
         [],
     );
-    const optionSets: Array<CachedOptionSet> = trackedEntityAttributes.reduce(
+    const optionSets: Array<OptionSet> = trackedEntityAttributes.reduce(
         (acc, currentValue) => (currentValue.optionSet ? [...acc, currentValue.optionSet] : acc),
         [],
     );
@@ -125,8 +131,10 @@ export const buildFormFoundation = async (program: any) => {
         }
         if (programTrackedEntityAttributes) {
             for (const programSection of programSections) {
-                const programTrackedEntityAttributesFiltered = programTrackedEntityAttributes.filter(trackedEntityAttribute =>
-                    programSection.trackedEntityAttributes.includes(trackedEntityAttribute.trackedEntityAttributeId),
+                const builtProgramSection = buildProgramSection(programSection);
+                const programTrackedEntityAttributesFiltered = programTrackedEntityAttributes.filter(
+                    trackedEntityAttribute =>
+                        builtProgramSection.includes(trackedEntityAttribute.trackedEntityAttributeId),
                 );
                 // eslint-disable-next-line no-await-in-loop
                 section = await buildSection(
@@ -140,7 +148,12 @@ export const buildFormFoundation = async (program: any) => {
             }
         }
     } else {
-        section = await buildMainSection(trackedEntityType, trackedEntityAttributes, optionSets, programTrackedEntityAttributes);
+        section = await buildMainSection(
+            trackedEntityType,
+            trackedEntityAttributes,
+            optionSets,
+            programTrackedEntityAttributes,
+        );
         section && renderFoundation.addSection(section);
     }
     return renderFoundation;

@@ -14,14 +14,12 @@ import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
+import { FEATURETYPE } from '../../../../constants';
 import { buildUrlQueryString } from '../../../../utils/routing';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
-const geometryType = (key) => {
-    const types = ['Point', 'None', 'Polygon'];
-    return types.find(type => key.toLowerCase().includes(type.toLowerCase()));
-};
+const geometryType = formValuesKey => Object.values(FEATURETYPE).find(geometryKey => geometryKey === formValuesKey);
 
 const standardGeoJson = (geometry) => {
     if (!geometry) {
@@ -122,7 +120,7 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
                 {
                     trackedEntities: [{
                         attributes: deriveAttributesFromFormValues(formServerValues),
-                        geometry: deriveGeometryFromFormValues(formServerValues),
+                        geometry: deriveGeometryFromFormValues(values),
                         enrollments: [],
                         orgUnit: orgUnitId,
                         trackedEntityType: trackedEntityTypeId,
@@ -179,7 +177,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 candidateForRegistration: {
                     trackedEntities: [
                         {
-                            geometry: deriveGeometryFromFormValues(formServerValues),
+                            geometry: deriveGeometryFromFormValues(values),
                             enrollments: [
                                 {
                                     geometry: standardGeoJson(geometry),

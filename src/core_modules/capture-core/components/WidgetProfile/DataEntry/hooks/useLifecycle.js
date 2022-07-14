@@ -1,8 +1,14 @@
 // @flow
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useOrganisationUnit } from 'capture-core/dataQueries/useOrganisationUnit';
-import type { OrgUnit, TrackedEntityAttributes, OptionSets, ProgramRulesContainer, DataElements } from 'capture-core-utils/rulesEngine';
+import type {
+    OrgUnit,
+    TrackedEntityAttributes,
+    OptionSets,
+    ProgramRulesContainer,
+    DataElements,
+} from 'capture-core-utils/rulesEngine';
 import { cleanUpDataEntry } from '../../../DataEntry';
 import { RenderFoundation } from '../../../../metaData';
 import { getOpenDataEntryActions, cleanTeiModal } from '../dataEntry.actions';
@@ -14,7 +20,9 @@ import {
     useDataElements,
     useOptionSets,
     useProgramTrackedEntityAttributes,
+    useGeometryValues,
 } from './index';
+import type { Geometry } from '../helpers/types';
 import { getRulesActionsForTEI } from '../ProgramRules';
 
 export const useLifecycle = ({
@@ -24,6 +32,7 @@ export const useLifecycle = ({
     userRoles,
     dataEntryId,
     itemId,
+    geometry,
 }: {
     programAPI: any,
     orgUnitId: string,
@@ -31,6 +40,7 @@ export const useLifecycle = ({
     userRoles: Array<string>,
     dataEntryId: string,
     itemId: string,
+    geometry: ?Geometry,
 }) => {
     const dispatch = useDispatch();
     // TODO: Getting the entire state object is bad and this needs to be refactored.
@@ -44,9 +54,12 @@ export const useLifecycle = ({
     const rulesContainer: ProgramRulesContainer = useRulesContainer(programAPI);
     const formFoundation: RenderFoundation = useFormFoundation(programAPI);
     const { formValues, clientValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues, orgUnit });
+    const { formGeometryValues, clientGeometryValues } = useGeometryValues({
+        geometry,
+        featureType: programAPI.trackedEntityType.featureType,
+    });
     const programTrackedEntityAttributes: TrackedEntityAttributes = useProgramTrackedEntityAttributes(programAPI);
     const optionSets: OptionSets = useOptionSets(programTrackedEntityAttributes, dataElements);
-    const trackedEntityName: string = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
 
     useEffect(() => {
         if (Object.entries(formValues).length > 0) {
@@ -54,7 +67,7 @@ export const useLifecycle = ({
                 getOpenDataEntryActions({
                     dataEntryId,
                     itemId,
-                    formValues,
+                    formValues: { ...formValues, ...formGeometryValues },
                 }),
             );
         }
@@ -62,7 +75,7 @@ export const useLifecycle = ({
             dispatch(cleanUpDataEntry(dataEntryId));
             dispatch(cleanTeiModal());
         };
-    }, [dispatch, formValues, dataEntryId, itemId]);
+    }, [dispatch, formValues, formGeometryValues, dataEntryId, itemId]);
 
     useEffect(() => {
         if (
@@ -78,7 +91,7 @@ export const useLifecycle = ({
                     formId: `${dataEntryId}-${itemId}`,
                     orgUnit,
                     trackedEntityAttributes: programTrackedEntityAttributes,
-                    teiValues: clientValues,
+                    teiValues: { ...clientValues, ...clientGeometryValues },
                     optionSets,
                     rulesContainer,
                     otherEvents,
@@ -102,6 +115,7 @@ export const useLifecycle = ({
         otherEvents,
         dataElements,
         enrollment,
+        clientGeometryValues,
         userRoles,
     ]);
 
@@ -112,7 +126,6 @@ export const useLifecycle = ({
         rulesContainer,
         formFoundation,
         state,
-        trackedEntityName,
         otherEvents,
         dataElements,
         enrollment,
