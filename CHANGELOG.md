@@ -1,3 +1,18 @@
+# [100.9.0](https://github.com/dhis2/capture-app/compare/v100.8.4...v100.9.0) (2022-07-13)
+
+
+### Features
+
+* [DHIS2-12611] open enrollment event ([#2799](https://github.com/dhis2/capture-app/issues/2799)) ([e54f45b](https://github.com/dhis2/capture-app/commit/e54f45b87df698c2cd4189087222b1d50cc0930b)), closes [#2864](https://github.com/dhis2/capture-app/issues/2864)
+
+## [100.8.4](https://github.com/dhis2/capture-app/compare/v100.8.3...v100.8.4) (2022-07-13)
+
+
+### Bug Fixes
+
+* [DHIS2-13089]  trim string instead of replacing all whitespaces ([#2891](https://github.com/dhis2/capture-app/issues/2891)) ([ed23ea3](https://github.com/dhis2/capture-app/commit/ed23ea38326cdea6c3a0bac3c5618562cdeeecea))
+* [DHIS2-13316] remove currentselection and get orgunit from page store ([#2883](https://github.com/dhis2/capture-app/issues/2883)) ([f0440ae](https://github.com/dhis2/capture-app/commit/f0440aebc6877dcff26902a4ecf42902d0c61a27))
+
 ## [100.8.3](https://github.com/dhis2/capture-app/compare/v100.8.2...v100.8.3) (2022-07-11)
 
 
