@@ -8,15 +8,21 @@ export const trackedEntityInstanceDesc = createReducerDescription(
             const { hasError } = action.payload;
             return { ...state, hasError };
         },
-        [dataEntryActionTypes.SET_TEI_ATTRIBUTE_VALUES]: (state, action) => {
-            const { attributeValues } = action.payload;
-            return { ...state, attributeValues };
+        [dataEntryActionTypes.SET_TEI_VALUES]: (state, action) => {
+            const { attributeValues, geometry } = action.payload;
+            return { ...state, attributeValues, geometry };
         },
-        [dataEntryActionTypes.CLEAN_TEI_MODAL]: state => ({ ...state, attributeValues: [], hasError: false }),
+        [dataEntryActionTypes.CLEAN_TEI_MODAL]: state => ({
+            ...state,
+            attributeValues: [],
+            geometry: undefined,
+            hasError: false,
+        }),
     },
     'trackedEntityInstance',
     {
         hasError: false,
         attributeValues: [],
+        geometry: undefined,
     },
 );

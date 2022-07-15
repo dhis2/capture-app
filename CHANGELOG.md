@@ -1,3 +1,117 @@
+## [100.9.1](https://github.com/dhis2/capture-app/compare/v100.9.0...v100.9.1) (2022-07-14)
+
+
+### Bug Fixes
+
+* [DHIS2-13190][DHIS2-13196] tei geometry and attributes ([#2808](https://github.com/dhis2/capture-app/issues/2808)) ([43c5e83](https://github.com/dhis2/capture-app/commit/43c5e8313ee041d61daf9ee98107d93077696731))
+
+# [100.9.0](https://github.com/dhis2/capture-app/compare/v100.8.4...v100.9.0) (2022-07-13)
+
+
+### Features
+
+* [DHIS2-12611] open enrollment event ([#2799](https://github.com/dhis2/capture-app/issues/2799)) ([e54f45b](https://github.com/dhis2/capture-app/commit/e54f45b87df698c2cd4189087222b1d50cc0930b)), closes [#2864](https://github.com/dhis2/capture-app/issues/2864)
+
+## [100.8.4](https://github.com/dhis2/capture-app/compare/v100.8.3...v100.8.4) (2022-07-13)
+
+
+### Bug Fixes
+
+* [DHIS2-13089]  trim string instead of replacing all whitespaces ([#2891](https://github.com/dhis2/capture-app/issues/2891)) ([ed23ea3](https://github.com/dhis2/capture-app/commit/ed23ea38326cdea6c3a0bac3c5618562cdeeecea))
+* [DHIS2-13316] remove currentselection and get orgunit from page store ([#2883](https://github.com/dhis2/capture-app/issues/2883)) ([f0440ae](https://github.com/dhis2/capture-app/commit/f0440aebc6877dcff26902a4ecf42902d0c61a27))
+
+## [100.8.3](https://github.com/dhis2/capture-app/compare/v100.8.2...v100.8.3) (2022-07-11)
+
+
+### Bug Fixes
+
+* [DHIS2-13305] compute and inject the download link ([#2850](https://github.com/dhis2/capture-app/issues/2850)) ([5c3b548](https://github.com/dhis2/capture-app/commit/5c3b5486c9d45ed17aa40b8584cf912c3b6feda3))
+
+## [100.8.2](https://github.com/dhis2/capture-app/compare/v100.8.1...v100.8.2) (2022-07-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([fea4954](https://github.com/dhis2/capture-app/commit/fea49547a4e6b55d358cd52bcfaf8a4774a2ca99))
+
+## [100.8.1](https://github.com/dhis2/capture-app/compare/v100.8.0...v100.8.1) (2022-07-10)
+
+
+### Bug Fixes
+
+* [DHIS2-13188] fix new page crash ([#2894](https://github.com/dhis2/capture-app/issues/2894)) ([fdec2f1](https://github.com/dhis2/capture-app/commit/fdec2f1f39a9771ee06c502e6e473a17077ca215))
+
+# [100.8.0](https://github.com/dhis2/capture-app/compare/v100.7.0...v100.8.0) (2022-07-06)
+
+
+### Features
+
+* [DHIS2-13285] Preserve view settings when changing org unit ([b3cd308](https://github.com/dhis2/capture-app/commit/b3cd3082960f1aff441317b1ab72e219a80a8a95))
+
+# [100.7.0](https://github.com/dhis2/capture-app/compare/v100.6.7...v100.7.0) (2022-07-06)
+
+
+### Features
+
+* [DHIS2-13308] edit mode for scheduled events ([#2862](https://github.com/dhis2/capture-app/issues/2862)) ([d154b30](https://github.com/dhis2/capture-app/commit/d154b30a7e37f7d9f2ec4b90f181e2b293fb54ba)), closes [#2865](https://github.com/dhis2/capture-app/issues/2865)
+
+## [100.6.7](https://github.com/dhis2/capture-app/compare/v100.6.6...v100.6.7) (2022-07-06)
+
+
+### Bug Fixes
+
+* [DHIS2-8613] limit report date of new events to today or earlier ([#2794](https://github.com/dhis2/capture-app/issues/2794)) ([a77efeb](https://github.com/dhis2/capture-app/commit/a77efeb137fa57159ed3f770477bf58eb15acf69))
+
+## [100.6.6](https://github.com/dhis2/capture-app/compare/v100.6.5...v100.6.6) (2022-07-06)
+
+
+### Bug Fixes
+
+* [DHIS2-13291] convert dates for auto generated events ([#2885](https://github.com/dhis2/capture-app/issues/2885)) ([c9f0e62](https://github.com/dhis2/capture-app/commit/c9f0e62086d8071004df5350f719cddeaa8caab7))
+
+## [100.6.5](https://github.com/dhis2/capture-app/compare/v100.6.4...v100.6.5) (2022-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-13189] fix user name in widget comment ([#2892](https://github.com/dhis2/capture-app/issues/2892)) ([a07548f](https://github.com/dhis2/capture-app/commit/a07548ff89dc5c583309096b0f5d9e104dc846a8))
+
+## [100.6.4](https://github.com/dhis2/capture-app/compare/v100.6.3...v100.6.4) (2022-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-13200] topbaractions redirection and state ([#2878](https://github.com/dhis2/capture-app/issues/2878)) ([bb2684f](https://github.com/dhis2/capture-app/commit/bb2684f919ffd4c9aaef648d860ea56ff82c17cb))
+* [DHIS2-13347] uncheck "yes/only" checkboxes ([#2851](https://github.com/dhis2/capture-app/issues/2851)) ([a3b8e9b](https://github.com/dhis2/capture-app/commit/a3b8e9bfcfdc0cb6515c0a23c4a8feef0a8ef1f6))
+
+## [100.6.3](https://github.com/dhis2/capture-app/compare/v100.6.2...v100.6.3) (2022-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-12303] enrollment dropdownbutton open state ([#2882](https://github.com/dhis2/capture-app/issues/2882)) ([9d8d792](https://github.com/dhis2/capture-app/commit/9d8d792125e815f5aceda27d0f515c62d84a907f))
+
+## [100.6.2](https://github.com/dhis2/capture-app/compare/v100.6.1...v100.6.2) (2022-06-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c585d45](https://github.com/dhis2/capture-app/commit/c585d450ffa1430b401fc75e484565193cfb4489))
+
+## [100.6.1](https://github.com/dhis2/capture-app/compare/v100.6.0...v100.6.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([921f002](https://github.com/dhis2/capture-app/commit/921f0022565109297e7e01f0b69d669792b3c4bd))
+
+# [100.6.0](https://github.com/dhis2/capture-app/compare/v100.5.13...v100.6.0) (2022-06-27)
+
+
+### Features
+
+* [DHIS2-12678] Stay in the same page when clicking search fallback ([#2757](https://github.com/dhis2/capture-app/issues/2757)) ([984678b](https://github.com/dhis2/capture-app/commit/984678b4eedabe89afde05b8a2b4bb9256c216d7))
+
 ## [100.5.13](https://github.com/dhis2/capture-app/compare/v100.5.12...v100.5.13) (2022-06-23)
 
 
