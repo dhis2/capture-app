@@ -1,3 +1,10 @@
+Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
+    cy.server();
+    cy.route('GET', '**/tracker/trackedEntities**').as('getDefaultTeis');
+
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+});
+
 Then('for an event program the page navigation should show that you are on the first page', () => {
     cy.get('[data-test="event-working-lists"]')
         .contains('Page 1')
