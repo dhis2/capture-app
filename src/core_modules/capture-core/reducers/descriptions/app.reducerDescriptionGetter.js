@@ -131,8 +131,8 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.FROM_URL_UPDATE]: (state, action) => ({
-        ...state,
+    [lockedSelectorActionTypes.FROM_URL_UPDATE]: (state, action) => ({ ...state,
+        previousOrgUnit: action.payload.prevProps.orgUnitId,
         page: action.payload.nextPage,
     }),
     [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({

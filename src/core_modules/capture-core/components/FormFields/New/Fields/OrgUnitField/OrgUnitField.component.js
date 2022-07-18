@@ -45,6 +45,7 @@ type Props = {
         debounceFieldContainer: string,
         orgUnitTreeContainer: string,
     },
+    previousSelectedOrgUnit?: Object
 };
 
 const OrgUnitFieldPlain = (props: Props) => {

@@ -75,6 +75,7 @@ type Props = {
     selectedOrgUnitId: string,
     showWarning: boolean,
     selectedOrgUnit: Object,
+    previousSelectedOrgUnit?: Object,
     classes: Object,
 };
 

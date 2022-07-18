@@ -88,7 +88,6 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
 
         this.state = {
             open: false,
-            previous: undefined,
         };
 
         this.handleShowWarning = this.handleShowWarning.bind(this);
@@ -132,7 +131,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
                                 <IconButton
                                     data-test="reset-selection-button"
                                     className={this.props.classes.selectedButton}
-                                    onClick={() => { this.props.onReset(); this.setState({ previous: selectedOrgUnit }); }}
+                                    onClick={() => { this.props.onReset(); }}
                                 >
                                     <IconCross24 />
                                 </IconButton>
@@ -176,7 +175,6 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
                         <OrgUnitField
                             data-test="org-unit-field"
                             onSelectClick={this.handleClick}
-                            previousSelectedOrgUnit={this.state.previous}
                         />
                     </div>
                 </Paper>
