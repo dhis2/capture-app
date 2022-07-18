@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-07-15T06:40:21.486Z\n"
-"PO-Revision-Date: 2022-07-15T06:40:21.486Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
+"PO-Revision-Date: 2022-07-18T12:33:35.059Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1232,9 +1232,6 @@ msgstr "Events could not be retrieved. Please try again later."
 
 msgid "Registering unit"
 msgstr "Registering unit"
-
-msgid "Due date"
-msgstr "Due date"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"
