@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useEffect, useState, useRef } from 'react';
+import React, { type ComponentType, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
 import type { OwnProps } from './ScopeSelector.types';
