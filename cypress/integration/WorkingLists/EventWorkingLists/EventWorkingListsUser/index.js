@@ -529,7 +529,7 @@ When('you delete the name toDeleteWorkingList', () => {
 });
 
 Then('the custom events working list is deleted', () => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+    cy.get('[data-test="event-working-lists"]')
         .within(() => {
             cy.contains('toDeleteWorkingList').should('not.exist');
         });
