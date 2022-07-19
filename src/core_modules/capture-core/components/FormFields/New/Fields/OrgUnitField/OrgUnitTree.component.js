@@ -62,22 +62,23 @@ const OrgUnitTreePlain = (props: Props) => {
                         ...expanded.slice(0, pathIndex),
                         ...expanded.slice(pathIndex + 1),
                     ];
-
             setExpanded(updatedExpanded);
         }
     };
 
     React.useEffect(() => {
-        if (previousSelectedOrgUnit?.path && expanded?.[0] === roots[0].path) {
-            setExpanded(previousSelectedOrgUnit?.path);
+        if (previousSelectedOrgUnit?.path) {
+            const paths = previousSelectedOrgUnit.path.split('/').filter(p => p);
+            const expandedPaths = paths.map((_, index) => `/${paths.slice(0, index + 1).join('/')}`);
+            setExpanded(expandedPaths);
         }
-    }, [previousSelectedOrgUnit, expanded, roots]);
+    }, [previousSelectedOrgUnit]);
 
 
     if (!roots) {
         return null;
     }
-    console.log({ expanded });
+
     return (
         <div className={classes.orgunitTree}>
             <OrganisationUnitTree
