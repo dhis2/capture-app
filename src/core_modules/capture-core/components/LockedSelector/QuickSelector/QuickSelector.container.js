@@ -32,7 +32,6 @@ const mapStateToProps = (state: Object) => {
         enrollmentPage: { enrollments, teiDisplayName, tetId },
     } = state;
 
-    console.log({ state });
     const selectedOrgUnitId = urlOrgUnitId || stateOrgUnit;
     const selectedProgramId = urlProgramId || stateProgramId;
 
