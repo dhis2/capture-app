@@ -1011,6 +1011,8 @@ For tracked entity instance relationships, the key attributes shown in the widge
 
 If no attributes are selected, it will just show a row per record with tracked entity type name and relationship creation date.
 
+When clicking a tracked entity instance you should be taken to the Enrollment Dashboard. If the relationship type includes a program, you should be taken to the latest enrollment for that program. If no program is specified, you should still be sent to the enrollment dashboard, but without the program.
+
 ## Enrollment event view and edit page
 
 ### Navigation 
@@ -1118,7 +1120,7 @@ For event relationships, event date and the key data elements shown in the widge
 
 If no data elements are selected, it will just show a row per record with program stage name and relationship creation date.
 
-
+When clicking an event: If the event has an associated tracked entity instance, you will be navigated to the view enrollment event page. If no associated tracked entity instance, you will be navigated to the view single event page.
 ## Program stage event list 
 
 You can reach the program stage event list by clicking **Go to full {stage event name}** button in the overview page.
