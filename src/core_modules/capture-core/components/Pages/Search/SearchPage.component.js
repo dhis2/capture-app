@@ -17,7 +17,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 import { useLocation } from 'react-router-dom';
 
-import { LockedSelector } from '../../LockedSelector';
+import { TopBar } from './TopBar.container';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
@@ -82,6 +82,10 @@ const Index = ({
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
+    minAttributesRequiredToSearch,
+    searchableFields,
+    programId,
+    orgUnitId,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
@@ -126,16 +130,48 @@ const Index = ({
     const searchGroupsForSelectedScope =
       (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : []);
 
-
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
         cleanSearchRelatedInfo();
         setSearchScopeId(searchScopeId);
         setSearchScopeType(searchType);
     };
+
+
+    const renderNotEnoughAttributesMessage = () => {
+        const searchableFieldsDisplayname = searchableFields?.map(field => field.formName)?.join(', ');
+
+        if (minAttributesRequiredToSearch === searchableFields.length && searchableFields.length > 1) {
+            return i18n.t('Fill in these fields to search{{escape}} {{ searchableAttributes }}', {
+                escape: ':',
+                searchableAttributes: searchableFieldsDisplayname,
+                interpolation: {
+                    escape: false,
+                },
+            });
+        }
+        if (searchableFields.length > 1) {
+            return i18n.t('Fill in at least {{minAttributesRequiredToSearch}} of these fields to search{{escape}} {{searchableAttributes}}', {
+                escape: ':',
+                minAttributesRequiredToSearch,
+                searchableAttributes: searchableFieldsDisplayname,
+                interpolation: {
+                    escape: false,
+                },
+            });
+        }
+        return i18n.t('Fill in this field to search{{escape}} {{searchableAttributes}}', {
+            escape: ':',
+            searchableAttributes: searchableFieldsDisplayname,
+            interpolation: {
+                escape: false,
+            },
+        });
+    };
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-            <LockedSelector pageToPush="search" />
+
+            <TopBar programId={programId} orgUnitId={orgUnitId} />
             <div data-test="search-page-content" className={classes.container} >
                 <Button
                     dataTest="back-button"
@@ -231,6 +267,27 @@ const Index = ({
                                 </NoticeBox>
                             </div>
 
+                        }
+
+                        {
+                            searchStatus === searchPageStatus.NOT_ENOUGH_ATTRIBUTES &&
+                            <Modal position="middle">
+                                <ModalTitle>{i18n.t('Cannot search in all programs')}</ModalTitle>
+                                <ModalContent>
+                                    {renderNotEnoughAttributesMessage()}
+                                </ModalContent>
+                                <ModalActions>
+                                    <ButtonStrip end>
+                                        <Button
+                                            disabled={searchStatus === searchPageStatus.LOADING}
+                                            onClick={showInitialSearchPage}
+                                            type="button"
+                                        >
+                                            {i18n.t('Back to search')}
+                                        </Button>
+                                    </ButtonStrip>
+                                </ModalActions>
+                            </Modal>
                         }
                     </div>
                 </Paper>

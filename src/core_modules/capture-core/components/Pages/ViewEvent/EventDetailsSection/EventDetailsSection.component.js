@@ -61,7 +61,7 @@ const EventDetailsSectionPlain = (props: Props) => {
         programStage,
         eventAccess,
         ...passOnProps } = props;
-    const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
+    const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
     if (error) {

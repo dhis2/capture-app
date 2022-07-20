@@ -181,14 +181,14 @@ Then('main page page url is valid', () => {
 });
 
 When('you remove the program selection', () => {
-    cy.get('[data-test="program-selector-container"]').within(() => {
+    cy.get('[data-test="scope-selector"]').within(() => {
         cy.get('[data-test="reset-selection-button"]').eq(0).click();
     });
 });
 
 When('you remove the org unit selection', () => {
-    cy.get('[data-test="org-unit-selector-container"]').within(() => {
-        cy.get('[data-test="reset-selection-button"]').eq(0).click();
+    cy.get('[data-test="scope-selector"]').within(() => {
+        cy.get('[data-test="reset-selection-button"]').eq(1).click();
     });
 });
 
@@ -389,10 +389,10 @@ When('you select org unit that is incompatible with the already selected program
         .click();
 });
 
-Then('you can see message on the locked selector', () => {
-    cy.get('[data-test="locked-selector"]')
+Then('you can see message on the scope selector', () => {
+    cy.get('[data-test="scope-selector"]')
         .contains('No programs available.');
-    cy.get('[data-test="locked-selector"]')
+    cy.get('[data-test="scope-selector"]')
         .contains('Show all');
 });
 

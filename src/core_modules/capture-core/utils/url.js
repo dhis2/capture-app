@@ -11,6 +11,7 @@ export type Url = {
     stageId?: string,
     eventId?: string,
     tab?: string,
+    viewEventId?: string,
 }
 
 export const deriveUrlQueries = (state: Object) => {

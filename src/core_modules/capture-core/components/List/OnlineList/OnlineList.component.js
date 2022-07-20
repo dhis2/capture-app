@@ -62,6 +62,9 @@ const getStyles = (theme: Theme) => ({
     loadingCell: {
         textAlign: 'center',
     },
+    loader: {
+        display: 'inline-block',
+    },
 });
 
 export type Column = {
@@ -96,6 +99,7 @@ type Props = {
         loadingRow: string,
         row: string,
         dataRow: string,
+        loader: string,
     }
 }
 
@@ -216,7 +220,7 @@ class Index extends React.Component<Props> {
                         colSpan={columnsCount}
                         className={classNames(classes.cell, classes.bodyCell, classes.loadingCell)}
                     >
-                        <CircularLoader />
+                        <CircularLoader className={classes.loader} />
                     </Cell>
                 </Row>
             ) : this.renderRows(visibleColumns, columnsCount);

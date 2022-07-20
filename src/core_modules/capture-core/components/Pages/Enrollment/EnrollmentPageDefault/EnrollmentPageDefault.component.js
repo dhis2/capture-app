@@ -72,6 +72,7 @@ export const EnrollmentPageDefaultPlain = ({
                     events={events}
                 />
                 <WidgetStagesAndEvents
+                    programId={program.id}
                     stages={stages}
                     events={events}
                     onViewAll={onViewAll}

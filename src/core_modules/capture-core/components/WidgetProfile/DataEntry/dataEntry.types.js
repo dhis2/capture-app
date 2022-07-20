@@ -1,5 +1,7 @@
 // @flow
 
+import type { Geometry } from './helpers/types';
+
 export type PlainProps = {|
     dataEntryId: string,
     itemId: string,
@@ -27,4 +29,7 @@ export type Props = {|
     onSaveErrorActionType?: string,
     modalState: string,
     onSaveExternal?: (eventServerValues: any, uid: string) => void,
+    geometry: ?Geometry,
+    userRoles: Array<string>,
+    trackedEntityName: string,
 |};

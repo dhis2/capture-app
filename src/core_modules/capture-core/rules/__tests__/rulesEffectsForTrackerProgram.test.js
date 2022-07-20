@@ -40,7 +40,7 @@ test('TEI rules engine effects with functions and effects', () => {
         { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'xIUDr1lRV6N', message: "d2:addDays( '2018-04-20', 100 ) =  2018-07-29" } },
         { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'RXmprywJ0Rb', message: 'd2:floor( 11.5 ) =  11' } },
         { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'cZQngI2IC1a', message: "d2:length( 'dhis2 rocks' ) =  11" } },
-        { type: 'DISPLAYKEYVALUEPAIR', id: 'feedback', displayKeyValuePair: { id: 'qSe8GmlwpgZ', key: "d2:weeksBetween('2020-01-28', V{enrollment_date} ) = ", value: 15 } },
+        { type: 'DISPLAYKEYVALUEPAIR', id: 'feedback', displayKeyValuePair: { id: 'qSe8GmlwpgZ', key: "d2:weeksBetween('2020-01-28', V{enrollment_date} ) = ", value: '15' } },
         { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Tx4gHcLselM', message: 'd2:oizp( 10000000 ) =  1' } },
         { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'f3MrrcCf1z2', message: 'd2:modulus( 12 , 100 ) =  12' } },
     ]);

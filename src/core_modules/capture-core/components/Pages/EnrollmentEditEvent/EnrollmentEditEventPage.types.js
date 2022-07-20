@@ -27,5 +27,6 @@ export type PlainProps = {|
     onGoBack: () => void,
     onLinkedRecordClick: (parameters: Url) => void,
     pageStatus: string,
+    eventStatus?: string,
     ...CssClasses,
 |};

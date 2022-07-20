@@ -12,6 +12,7 @@ export const WorkingListsListViewUpdaterContextProvider = ({
     customUpdateTrigger,
     forceUpdateOnMount,
     dirtyList,
+    loadedOrgUnitId,
     children,
 }: Props) => {
     const listViewUpdaterContextData = useMemo(() => ({
@@ -21,6 +22,7 @@ export const WorkingListsListViewUpdaterContextProvider = ({
         customUpdateTrigger,
         forceUpdateOnMount,
         dirtyList,
+        loadedOrgUnitId,
     }), [
         rowsPerPage,
         currentPage,
@@ -28,6 +30,7 @@ export const WorkingListsListViewUpdaterContextProvider = ({
         customUpdateTrigger,
         forceUpdateOnMount,
         dirtyList,
+        loadedOrgUnitId,
     ]);
 
     return (

@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
 // $FlowFixMe
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { useEventsRelationships } from './useEventsRelationships';
-import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
+import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
@@ -23,12 +24,8 @@ export const EnrollmentEditEventPage = () => {
     const dispatch = useDispatch();
     const { programId, stageId, teiId, enrollmentId, orgUnitId, eventId } = useLocationQuery();
     const { program } = useProgramInfo(programId);
-    const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);
-    const currentPageMode = showEditEvent ? pageMode.EDIT : pageMode.VIEW;
-    const dataEntryKey = `singleEvent-${currentPageMode}`;
-    const outputEffects = useWidgetDataFromStore(dataEntryKey);
-    const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
+    const hideWidgets = useHideWidgetByRuleLocations(program.programRules.concat(programStage?.programRules));
 
     const onDelete = () => {
         history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
@@ -36,6 +33,9 @@ export const EnrollmentEditEventPage = () => {
     };
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+    };
+    const onCancel = () => {
+        history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
     const onLinkedRecordClick = (parameters) => {
@@ -51,6 +51,10 @@ export const EnrollmentEditEventPage = () => {
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDataConvertValue = convertValue((event?.occurredAt || event?.scheduledAt), dataElementTypes.DATETIME);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
+    const { currentPageMode, cancel } = useEnrollmentEditEventPageMode(event?.status);
+    cancel && onCancel();
+    const dataEntryKey = `singleEvent-${currentPageMode}`;
+    const outputEffects = useWidgetDataFromStore(dataEntryKey);
 
     let pageStatus = pageStatuses.MISSING_DATA;
     if (orgUnitId) {
@@ -86,6 +90,7 @@ export const EnrollmentEditEventPage = () => {
             orgUnitId={orgUnitId}
             eventDate={eventDate}
             onLinkedRecordClick={onLinkedRecordClick}
+            eventStatus={event?.status}
         />
     );
 };

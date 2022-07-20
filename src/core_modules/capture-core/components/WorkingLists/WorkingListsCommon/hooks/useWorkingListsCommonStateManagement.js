@@ -33,7 +33,6 @@ import type {
     ChangeRowsPerPage,
     ClearFilter,
     LoadTemplates,
-    LoadView,
     SelectRestMenuItem,
     SelectTemplate,
     SetColumnOrder,
@@ -42,7 +41,7 @@ import type {
     Sort,
     UpdateFilter,
 } from '../../WorkingListsBase';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '..';
+import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList, LoadView } from '..';
 
 const useTemplates = (
     dispatch: ReduxDispatch,
@@ -183,15 +182,18 @@ const useView = (
                     workingListsType,
                 },
             )),
-        onUpdateList: (queryArgs: Object, meta: Object) =>
+        onUpdateList: (data: Object, meta: Object) => {
+            const { resetMode, ...queryArgs } = data;
             dispatch(updateList(
                 queryArgs, {
                     ...meta,
                     categoryCombinationId,
                     storeId,
                     workingListsType,
+                    resetMode,
                 },
-            )),
+            ));
+        },
         onCancelLoadView: () => dispatch(initListViewCancel(storeId)),
         onCancelUpdateList: () => dispatch(updateListCancel(storeId)),
         onSortList: (...args) => dispatch(sortList(...args, storeId)),
