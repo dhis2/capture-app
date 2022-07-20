@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import moment from 'moment';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
-import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getNoFutureEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
 import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
@@ -120,9 +121,10 @@ const buildReportDateSettingsFn = () => {
             calendarWidth: 350,
             label: props.formFoundation.getLabel('occurredAt'),
             required: true,
+            calendarMaxMoment: moment(),
         }),
         getPropName: () => 'occurredAt',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,

@@ -25,5 +25,6 @@ export type PlainProps = {|
     onAddNew: () => void,
     onGoBack: () => void,
     pageStatus: string,
+    eventStatus?: string,
     ...CssClasses,
 |};

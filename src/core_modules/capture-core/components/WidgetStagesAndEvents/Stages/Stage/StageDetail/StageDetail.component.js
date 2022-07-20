@@ -19,6 +19,7 @@ import { colors,
 import { sortDataFromEvent } from './hooks/sortFuntions';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
+import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import type { Props } from './stageDetail.types';
 
 
@@ -60,6 +61,7 @@ const StageDetailPlain = (props: Props) => {
         events,
         eventName,
         stageId,
+        programId,
         dataElements,
         hideDueDate = false,
         repeatable = false,
@@ -71,7 +73,8 @@ const StageDetailPlain = (props: Props) => {
         columnName: 'status',
         sortDirection: SORT_DIRECTION.DESC,
     };
-    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate);
+    const { stage } = getProgramAndStageForProgram(programId, stageId);
+    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, stage?.stageForm);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElements, events);
 
 

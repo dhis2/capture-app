@@ -10,6 +10,7 @@ export * from './actions';
 export { includeFiltersWithValueAfterColumnSortingEpic } from './epics';
 export { buildFilterQueryArgs } from './helpers';
 export type {
+    LoadView,
     AddTemplate,
     DeleteTemplate,
     UpdateTemplate,

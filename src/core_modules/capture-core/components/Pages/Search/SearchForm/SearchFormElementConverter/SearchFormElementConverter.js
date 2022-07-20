@@ -11,7 +11,7 @@ const derivedFilterKeyword = (dataElement) => {
 };
 
 const convertString = (formValues: string, dataElement: DataElement) => {
-    const sanitizedString = formValues.replace(/\s/g, '');
+    const sanitizedString = formValues.trim();
     const convertedString = (dataElement.convertValue(sanitizedString, pipeD2(convertFormToClient, convertClientToServer)));
     return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${convertedString}`;
 };

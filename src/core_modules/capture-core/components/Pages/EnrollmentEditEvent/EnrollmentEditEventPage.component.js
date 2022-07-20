@@ -80,6 +80,7 @@ const EnrollmentEditEventPagePain = ({
     onGoBack,
     orgUnitId,
     eventDate,
+    eventStatus,
     pageStatus,
 }: PlainProps) => {
     const { setOrgUnitId } = useSetOrgUnitId();
@@ -176,7 +177,7 @@ const EnrollmentEditEventPagePain = ({
                 <div className={classes.columns}>
                     <div className={classes.leftColumn}>
                         {pageStatus === pageStatuses.DEFAULT && programStage && (
-                            <WidgetEventEdit programStage={programStage} onGoBack={onGoBack} />
+                            <WidgetEventEdit programStage={programStage} onGoBack={onGoBack} eventStatus={eventStatus} />
                         )}
                         {pageStatus === pageStatuses.MISSING_DATA && (
                             <span>{i18n.t('The enrollment event data could not be found')}</span>
