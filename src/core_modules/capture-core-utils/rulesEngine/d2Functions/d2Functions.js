@@ -3,81 +3,68 @@ import { getZScoreWFA, getZScoreWFH, getZScoreHFA } from './zScoreFunctions';
 import { extractDataMatrixValue } from './gs1DataMatrixFuntions';
 
 export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selectedUserRoles }) => ({
-    'd2:ceil': {
-        name: 'd2:ceil',
+    ceil: {
         parameters: 1,
-        dhisFunction: params => Math.ceil(params[0]),
+        execute: params => Math.ceil(params[0]),
     },
-    'd2:floor': {
-        name: 'd2:floor',
+    floor: {
         parameters: 1,
-        dhisFunction: params => Math.floor(params[0]),
+        execute: params => Math.floor(params[0]),
     },
-    'd2:round': {
-        name: 'd2:round',
+    round: {
         parameters: 1,
-        dhisFunction: params => Math.round(params[0]),
+        execute: params => Math.round(params[0]),
     },
-    'd2:modulus': {
-        name: 'd2:modulus',
+    modulus: {
         parameters: 2,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const dividend = Number(params[0]);
             const divisor = Number(params[1]);
             const rest = dividend % divisor;
             return rest;
         },
     },
-    'd2:zing': {
-        name: 'd2:zing',
+    zing: {
         parameters: 1,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const number = params[0];
             return number < 0 ? 0 : number;
         },
     },
-    'd2:oizp': {
-        name: 'd2:oizp',
+    oizp: {
         parameters: 1,
-        dhisFunction: params => (params[0] < 0 ? 0 : 1),
+        execute: params => (params[0] < 0 ? 0 : 1),
     },
-    'd2:concatenate': {
-        name: 'd2:concatenate',
-        dhisFunction: params => params.join(''),
+    concatenate: {
+        execute: params => params.join(''),
     },
-    'd2:daysBetween': {
-        name: 'd2:daysBetween',
+    daysBetween: {
         parameters: 2,
-        dhisFunction: params => dateUtils.daysBetween(params[0], params[1]),
+        execute: params => dateUtils.daysBetween(params[0], params[1]),
     },
-    'd2:weeksBetween': {
-        name: 'd2:weeksBetween',
+    weeksBetween: {
         parameters: 2,
-        dhisFunction: params => dateUtils.weeksBetween(params[0], params[1]),
+        execute: params => dateUtils.weeksBetween(params[0], params[1]),
     },
-    'd2:monthsBetween': {
-        name: 'd2:monthsBetween',
+    monthsBetween: {
         parameters: 2,
-        dhisFunction: params => dateUtils.monthsBetween(params[0], params[1]),
+        execute: params => dateUtils.monthsBetween(params[0], params[1]),
     },
-    'd2:yearsBetween': {
-        name: 'd2:yearsBetween',
+    yearsBetween: {
         parameters: 2,
-        dhisFunction: params => dateUtils.yearsBetween(params[0], params[1]),
+        execute: params => dateUtils.yearsBetween(params[0], params[1]),
     },
-    'd2:addDays': {
-        name: 'd2:addDays',
+    addDays: {
         parameters: 2,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const date = params[0];
             const daysToAdd = params[1];
             return dateUtils.addDays(date, daysToAdd);
         },
     },
-    'd2:count': {
-        name: 'd2:count',
+    count: {
         parameters: 1,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const variableName = params[0];
             const variable = variablesHash[variableName];
             if (!variable) {
@@ -88,10 +75,9 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
             return variable.hasValue ? variable.allValues?.length ?? 1 : 0;
         },
     },
-    'd2:countIfValue': {
-        name: 'd2:countIfValue',
+    countIfValue: {
         parameters: 2,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const variableName = params[0];
             const variable = variablesHash[variableName];
             if (!variable) {
@@ -108,18 +94,16 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
                 .reduce((acc, value) => (value === valueToCompare ? acc + 1 : acc), 0);
         },
     },
-    'd2:countIfZeroPos': {
-        name: 'd2:countIfZeroPos',
+    countIfZeroPos: {
         parameters: 1,
-        dhisFunction: () => {
+        execute: () => {
             log.warn('countIfZeroPos not implemented yet');
             return 0;
         },
     },
-    'd2:hasValue': {
-        name: 'd2:hasValue',
+    hasValue: {
         parameters: 1,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const variableName = params[0];
             const variable = variablesHash[variableName];
             if (!variable) {
@@ -130,10 +114,9 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
             return variable.hasValue;
         },
     },
-    'd2:validatePattern': {
-        name: 'd2:validatePattern',
+    validatePattern: {
         parameters: 2,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const inputToValidate = params[0].toString();
             const pattern = params[1];
             const regEx = new RegExp(pattern, 'g');
@@ -146,28 +129,25 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
             return matchFound;
         },
     },
-    'd2:left': {
-        name: 'd2:left',
+    left: {
         parameters: 2,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const string = String(params[0]);
             const numChars = string.length < params[1] ? string.length : params[1];
             return string.substring(0, numChars);
         },
     },
-    'd2:right': {
-        name: 'd2:right',
+    right: {
         parameters: 2,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const string = String(params[0]);
             const numChars = string.length < params[1] ? string.length : params[1];
             return string.substring(string.length - numChars, string.length);
         },
     },
-    'd2:substring': {
-        name: 'd2:substring',
+    substring: {
         parameters: 3,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const string = String(params[0]);
             const startChar = string.length < params[1] - 1 ? -1 : params[1];
             const endChar = string.length < params[2] ? -1 : params[2];
@@ -177,10 +157,9 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
             return string.substring(startChar, endChar);
         },
     },
-    'd2:split': {
-        name: 'd2:split',
+    split: {
         parameters: 3,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const string = String(params[0]);
             const splitArray = string.split(params[1]);
             let returnPart = '';
@@ -190,52 +169,44 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
             return returnPart;
         },
     },
-    'd2:length': {
-        name: 'd2:length',
+    length: {
         parameters: 1,
-        dhisFunction: params => String(params[0]).length,
+        execute: params => String(params[0]).length,
     },
-    'd2:inOrgUnitGroup': {
-        name: 'd2:inOrgUnitGroup',
+    inOrgUnitGroup: {
         parameters: 1,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const group = params[0];
             const orgUnitGroups = (selectedOrgUnit && selectedOrgUnit.groups) || [];
             return Boolean(orgUnitGroups.find(o => o.id === group || o.code === group));
         },
     },
-    'd2:hasUserRole': {
-        name: 'd2:hasUserRole',
+    hasUserRole: {
         parameters: 1,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const role = params[0];
             return selectedUserRoles.includes(role);
         },
     },
-    'd2:zScoreWFA': {
-        name: 'd2:zScoreWFA',
+    zScoreWFA: {
         parameters: 3,
-        dhisFunction: params => getZScoreWFA(params[0], params[1], params[2]),
+        execute: params => getZScoreWFA(params[0], params[1], params[2]),
     },
-    'd2:zScoreHFA': {
-        name: 'd2:zScoreHFA',
+    zScoreHFA: {
         parameters: 3,
-        dhisFunction: params => getZScoreHFA(params[0], params[1], params[2]),
+        execute: params => getZScoreHFA(params[0], params[1], params[2]),
     },
-    'd2:zScoreWFH': {
-        name: 'd2:zScoreWFH',
+    zScoreWFH: {
         parameters: 3,
-        dhisFunction: params => getZScoreWFH(params[0], params[1], params[2]),
+        execute: params => getZScoreWFH(params[0], params[1], params[2]),
     },
-    'd2:extractDataMatrixValue': {
-        name: 'd2:extractDataMatrixValue',
+    extractDataMatrixValue: {
         parameters: 2,
-        dhisFunction: params => extractDataMatrixValue(params[0], params[1]),
+        execute: params => extractDataMatrixValue(params[0], params[1]),
     },
-    'd2:lastEventDate': {
-        name: 'd2:lastEventDate',
+    lastEventDate: {
         parameters: 1,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const variableName = params[0];
             const variable = variablesHash[variableName];
 
@@ -252,10 +223,9 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
             return variable.variableEventDate;
         },
     },
-    'd2:addControlDigits': {
-        name: 'd2:addControlDigits',
+    addControlDigits: {
         parameters: 1,
-        dhisFunction: (params) => {
+        execute: (params) => {
             const baseNumber = params[0];
             const baseDigits = baseNumber.split('');
             const error = false;
@@ -304,10 +274,9 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
             return baseNumber;
         },
     },
-    'd2:checkControlDigits': {
-        name: 'd2:checkControlDigits',
+    checkControlDigits: {
         parameters: 1,
-        dhisFunction: (params) => {
+        execute: (params) => {
             log.warn('checkControlDigits not implemented yet');
             return params[0];
         },

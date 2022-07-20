@@ -1,7 +1,6 @@
 // @flow
-import isDefined from 'd2-utilizr/lib/isDefined';
-import { getInjectionValue } from './expressionService/common';
 import type { D2Functions } from '../rulesEngine.types';
+import type { LogError, ExpressionSet, DhisFunctionsInfo } from './executionService.types';
 
 /**
  * Creates a function with closed scope where the given string can be executed as javascript
@@ -34,71 +33,140 @@ const isFunctionSignatureBroken = (dhisFunctionParameters: ?number, parameters: 
     return false;
 };
 
-export const executeExpression = (dhisFunctions: D2Functions, expression: string, logError: any) => {
-    const dhisFunctionWhenNameIncludedOnExpression = ({ name }) => expression.includes(name);
-    const onExpressionReplaceFunctionCallStringWithEvaluatedString =
-      ({ evaluatedExpression, isUpdated }, { name, dhisFunction, parameters }) => {
-          // Select the function call, with any number of parameters inside single quotations, or number parameters without quotations
-          const regularExFunctionCall = new RegExp(`${name}\\( *(([\\d/\\*\\+\\-%. ]+)|('[^']*')|("[^"]*"))*( *, *(([\\d/\\*\\+\\-%. ]+)|('[^']*')|("[^"]*")))* *\\)`, 'g');
-          const callsToThisFunction = evaluatedExpression.match(regularExFunctionCall);
+const extractArgumentIndexes = (
+    expression: string,
+    expressionModuloStrings: string,
+    startIndexFunction: number,
+) => {
+    let index = expressionModuloStrings.indexOf('(', startIndexFunction) + 1;
+    let argStart = index;
+    let parenthesesCount = 1;
+    const argIndexes = [];
 
-          if (Array.isArray(callsToThisFunction)) {
-              callsToThisFunction.forEach((callToThisFunction) => {
-                  const evaluatedParameters = callToThisFunction
-                  // Remove the function name and parenthesis:
-                      .replace(/(^[^(]+\()|\)$/g, '')
-                  // Remove white spaces before and after parameters:
-                      .trim()
-                  // Then split into single parameters:
-                      .match(/[^,]+/g)
-                  // In case the function call is nested, the parameter itself contains an expression, run the expression.
-                      .map(param => executeExpression(dhisFunctions, param, logError));
-                  if (isFunctionSignatureBroken(parameters, evaluatedParameters)) {
-                      logError && logError('Error: Signature params have not the same dimensions');
-                      // Function call is not possible to evaluate, remove the call:
-                      evaluatedExpression = evaluatedExpression.replace(callToThisFunction, 'false');
-                  } else {
-                      const dhisFunctionEvaluation = dhisFunction(evaluatedParameters);
-                      evaluatedExpression = evaluatedExpression.replace(
-                          callToThisFunction,
-                          getInjectionValue(dhisFunctionEvaluation),
-                      );
-                  }
+    for (; index < expression.length; index += 1) {
+        if (expressionModuloStrings[index] === '(') {
+            parenthesesCount += 1;
+        } else if (expressionModuloStrings[index] === ')') {
+            parenthesesCount -= 1;
+            if (parenthesesCount === 0) {
+                argIndexes.push([argStart, index]);
+                break;
+            }
+        } else if (parenthesesCount === 1 && expressionModuloStrings[index] === ',') {
+            argIndexes.push([argStart, index]);
+            argStart = index + 1;
+        }
+    }
 
-                  isUpdated = true;
-              });
-          }
-          return { evaluatedExpression, isUpdated };
-      };
+    return {
+        argIndexes,
+        closingIndex: index,
+    };
+};
 
+const extractArguments = (
+    expression: string,
+    expressionModuloStrings: string,
+    startIndexFunction: number,
+) => {
+    const { argIndexes, closingIndex } =
+        extractArgumentIndexes(expression, expressionModuloStrings, startIndexFunction);
+
+    return {
+        args: argIndexes
+            .map(([start, end]) => ({
+                argument: expression.substring(start, end),
+                argumentModuloStrings: expressionModuloStrings.substring(start, end),
+            })),
+        closingIndex,
+    };
+};
+
+const getFunctionNameFromCall = (functionCall: string, prefix: string) =>
+    functionCall.substring(prefix.length, functionCall.length - 1);
+
+export const executeExpression = (
+    dhisFunctions: D2Functions,
+    expression: string,
+    logError: LogError,
+) => {
     let answer = false;
     try {
-        if (isDefined(expression) && expression.includes('d2:')) {
-            let continueLooping = true;
-            // Safety harness on 10 loops, in case of unanticipated syntax causing unintencontinued looping
-            for (let i = 0; i < 10 && continueLooping; i++) {
-                const { evaluatedExpression, isUpdated } =
-                  // https://github.com/facebook/flow/issues/2221
-                  (Object.values(dhisFunctions): any)
-                      .filter(dhisFunctionWhenNameIncludedOnExpression)
-                      .reduce(
-                          onExpressionReplaceFunctionCallStringWithEvaluatedString,
-                          { evaluatedExpression: expression, isUpdated: false },
-                      );
-
-                expression = evaluatedExpression;
-                // We only want to continue looping until we made a successful replacement,
-                // and there is still occurrences of "d2:" in the code. In cases where d2: occur outside
-                // the expected d2: function calls, one unneccesary iteration will be done and the
-                // successfulExecution will be false coming back here, ending the loop. The last iteration
-                // should be zero to marginal performancewise.
-                continueLooping = isUpdated && expression.indexOf('d2:') !== -1;
-            }
-        }
-
-        answer = evaluate(expression);
+        const expressionModuloStrings = expression.replace(/'(?:\\.|[^'\\])*'/g, match => ' '.repeat(match.length));
+        const applicableDhisFunctions = Object.entries(dhisFunctions).map(([key, value]) => ({ ...value, name: key }));
+        answer = internalExecuteExpression(
+            { dhisFunctionsObject: dhisFunctions, applicableDhisFunctions },
+            { expression, expressionModuloStrings },
+            logError,
+        );
     } catch (e) {
         logError && logError(e);
     }
     return answer;
+};
+
+const internalExecuteExpression = (
+    { dhisFunctionsObject, applicableDhisFunctions }: DhisFunctionsInfo,
+    { expression, expressionModuloStrings }: ExpressionSet,
+    logError: LogError,
+) => {
+    const functionNamePrefix = 'd2:';
+    // Find all d2-functions appearing in the given expression
+    const includedDhisFunctions = applicableDhisFunctions
+        .filter(({ name }) => expressionModuloStrings.includes(`${functionNamePrefix + name}(`));
+
+    if (!includedDhisFunctions.length) {
+        return evaluate(expression);
+    }
+
+    const includedFunctionNames = includedDhisFunctions
+        .map(({ name }) => name)
+        .join('|');
+    const regularExFunctionCall = new RegExp(`\\b${functionNamePrefix}(?:${includedFunctionNames})\\(`, 'g');
+    const functionCalls = [...expression.matchAll(regularExFunctionCall)];
+
+    // Run each d2-function. d2-functions appearing in the argument list of another d2-function
+    // is invoked in the recursive calls and skipped in the original loop (see next comment)
+    const {
+        accExpression: accExpressionWithFunctionResults,
+        currentExpressionIndex: expressionIndexAfterFunctionExecution,
+    } = functionCalls.reduce(({ accExpression, currentExpressionIndex }, functionCall) => {
+        if (functionCall.index < currentExpressionIndex) {
+            // This means the d2-function appears in the argument list of another
+            // d2-function, and has therefore already been executed at this point
+            return {
+                accExpression,
+                currentExpressionIndex,
+            };
+        }
+
+        accExpression += expression.substring(currentExpressionIndex, functionCall.index);
+        const { args, closingIndex } = extractArguments(expression, expressionModuloStrings, functionCall.index);
+        const evaluatedArguments = args.map(({ argument, argumentModuloStrings }) =>
+            internalExecuteExpression(
+                { dhisFunctionsObject, applicableDhisFunctions: includedDhisFunctions },
+                { expression: argument, expressionModuloStrings: argumentModuloStrings },
+                logError,
+            ));
+        const functionName = getFunctionNameFromCall(functionCall[0], functionNamePrefix);
+        const dhisFunction = dhisFunctionsObject[functionName];
+        if (isFunctionSignatureBroken(dhisFunction.parameters, evaluatedArguments)) {
+            logError && logError(`${functionName} was not passed valid arguments`);
+            // Function call is not possible to evaluate, remove the call
+            accExpression += 'false';
+        } else {
+            const dhisFunctionResult = dhisFunction.execute(evaluatedArguments);
+            accExpression += dhisFunctionResult;
+        }
+
+        return {
+            accExpression,
+            currentExpressionIndex: closingIndex + 1,
+        };
+    }, { accExpression: '', currentExpressionIndex: 0 });
+
+    const expressionToEvaluate = accExpressionWithFunctionResults +
+        expression.substring(expressionIndexAfterFunctionExecution, expression.length);
+
+    return evaluate(expressionToEvaluate);
 };
