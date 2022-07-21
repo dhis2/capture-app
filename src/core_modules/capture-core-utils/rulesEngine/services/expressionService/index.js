@@ -1,2 +1,2 @@
 // @flow
-export { injectVariableValues } from './injectVariableValues';
+export { executeExpression } from './executeExpression';

@@ -2,8 +2,7 @@
 import log from 'loglevel';
 import { VariableService } from './services/VariableService/VariableService';
 import { ValueProcessor } from './processors/ValueProcessor';
-import { executeExpression } from './services/executionService';
-import { injectVariableValues } from './services/expressionService';
+import { executeExpression } from './services/expressionService';
 import { d2Functions } from './d2Functions';
 import type {
     OutputEffects,
@@ -139,15 +138,19 @@ export class RulesEngine {
                 let isProgramRuleExpressionEffective = false;
                 const { condition: expression } = rule;
                 if (expression) {
-                    const injectedExpression = injectVariableValues(expression, variablesHash);
                     // checks if the rule is effective meaning that the rule results to a truthy expression
-                    isProgramRuleExpressionEffective = executeExpression(
+                    isProgramRuleExpressionEffective = executeExpression({
+                        expression,
                         dhisFunctions,
-                        injectedExpression,
-                        e => log.warn(`Expression with id rule:${rule.id} could not be run. Original condition was: ${expression} - Evaluation ended up as:${injectedExpression} - error message:${e}`),
-                    );
+                        variablesHash,
+                        onError: (error, injectedExpression) => log.warn(
+                            `Expression with id rule:${rule.id} could not be run. ` +
+                            `Original condition was: ${expression} - ` +
+                            `Evaluation ended up as:${injectedExpression} - error message:${error}`),
+                    });
                 } else {
-                    log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
+                    log.warn(`Rule id:'${rule.id}' and name:'${rule.displayName}' ` +
+                        'had no condition specified. Please check rule configuration.');
                 }
 
                 let programRuleEffects = [];
@@ -170,12 +173,15 @@ export class RulesEngine {
                         }) => {
                         let actionExpressionResult;
                         if (actionExpression) {
-                            const injectedExpression = injectVariableValues(actionExpression, variablesHash);
-                            actionExpressionResult = executeExpression(
+                            actionExpressionResult = executeExpression({
+                                expression: actionExpression,
                                 dhisFunctions,
-                                injectedExpression,
-                                e => log.warn(`Expression with id rule: action:${id} could not be run. Original condition was: ${actionExpression} - Evaluation ended up as:${injectedExpression} - error message:${e}`),
-                            );
+                                variablesHash,
+                                onError: (error, injectedExpression) => log.warn(
+                                    `Expression with id rule: action:${id} could not be run. ` +
+                                    `Original condition was: ${actionExpression} - ` +
+                                    `Evaluation ended up as:${injectedExpression} - error message:${error}`),
+                            });
                         }
 
                         if (action === effectActions.ASSIGN_VALUE && content) { // the program rule variable id is found in the content key
