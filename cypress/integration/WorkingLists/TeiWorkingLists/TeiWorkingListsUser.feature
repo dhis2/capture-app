@@ -117,8 +117,8 @@ Then you see the new sharing settings
 
 Scenario: The admin user can optin to use the new Enrollment Dashboard
 Given you open the main page with Ngelehun and child programme context
-And you see the opt in component
-When you opt in to use the new enrollment Dashboard
-Then you see the opt out component
-When you opt out to use the new enrollment Dashboard
-Then you see the opt in component
+And you see the opt in component for Child Programme
+When you opt in to use the new enrollment Dashboard for Child Programme
+Then you see the opt out component for Child Programme
+When you opt out to use the new enrollment Dashboard for Child Programme
+Then you see the opt in component for Child Programme
