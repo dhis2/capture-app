@@ -24,14 +24,14 @@ const preprocessD2FunctionArguments = (expression: string) => {
     ];
 
     const d2FunctionMatcherExpression = new RegExp(
-        `(${nonInjectingFunctions.join('|')})\\( *([A#CV]\\{[\\w -_]+})( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`,
+        `(${nonInjectingFunctions.join('|')})\\( *([A#CV]{[\\w -_]+})( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'|"[^"]*"))* *\\)`,
         'g',
     );
 
     const d2FunctionMatches = expression.match(d2FunctionMatcherExpression) || [];
 
     return d2FunctionMatches.reduce((accExpression, match) => {
-        const processedMatch = match
+        const processedMatch = match // lgtm [js/incomplete-sanitization]
             .replace('#{', "'")
             .replace('A{', "'")
             .replace('C{', "'")
@@ -58,7 +58,7 @@ export const injectVariableValues = (rawExpression: string, variablesHash: RuleV
     // Inject the value for each matched variable
     return variableMatches.reduce((accExpression, variableMatch) => {
         // Remove pre/suf-fix to get the variable name for the variableHash
-        const variableName = variableMatch
+        const variableName = variableMatch // lgtm [js/incomplete-sanitization]
             .replace('#{', '')
             .replace('A{', '')
             .replace('C{', '')

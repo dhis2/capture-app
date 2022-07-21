@@ -3,8 +3,7 @@ import log from 'loglevel';
 // TODO: add some kind of errorcreator to d2 before moving
 import { errorCreator } from 'capture-core-utils/errorCreator';
 import { mapTypeToInterfaceFnName, typeKeys } from '../constants';
-
-import { IConvertInputRulesValue } from '../rulesEngine.types';
+import type { IConvertInputRulesValue } from '../rulesEngine.types';
 
 export class ValueProcessor {
     static errorMessages = {
