@@ -41,6 +41,7 @@ type InputForm = {
     orgUnit: ?OrgUnit,
     formFoundation: RenderFoundation,
     teiId: ?string,
+    searchTerms: ?Array<{[key: string]: string}>
 };
 
 type StaticPatternValues = {
@@ -101,6 +102,7 @@ const buildFormValues = async ({
     setFormValues,
     setClientValues,
     formValuesReadyRef,
+    searchTerms,
     querySingleResource,
 }: {
     foundation: ?RenderFoundation,
@@ -109,6 +111,7 @@ const buildFormValues = async ({
     setFormValues: (values: any) => void,
     setClientValues: (values: any) => void,
     formValuesReadyRef: { current: boolean },
+    searchTerms?: ?Array<{[key: string]: any}>,
     querySingleResource: QuerySingleResource,
 }) => {
     const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
@@ -116,18 +119,21 @@ const buildFormValues = async ({
         (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
         {},
     );
+    const searchClientValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: item.value }), {});
+    const searchFormValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }), {});
+
     const uniqueValues = await getUniqueValuesForAttributesWithoutValue(
         foundation,
         clientAttributesWithSubvalues,
         staticPatternValues,
         querySingleResource,
     );
-    setFormValues && setFormValues({ ...formValues, ...uniqueValues });
-    setClientValues && setClientValues({ ...clientValues, ...uniqueValues });
+    setFormValues && setFormValues({ ...formValues, ...uniqueValues, ...searchFormValues });
+    setClientValues && setClientValues({ ...clientValues, ...uniqueValues, ...searchClientValues });
     formValuesReadyRef.current = true;
 };
 
-export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId }: InputForm) => {
+export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms }: InputForm) => {
     const dataEngine = useDataEngine();
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const formValuesReadyRef = useRef<any>(false);
@@ -156,6 +162,7 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
                 setFormValues,
                 setClientValues,
                 formValuesReadyRef,
+                searchTerms,
                 querySingleResource,
             });
         }
@@ -165,6 +172,7 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
         formValuesReadyRef,
         orgUnit,
         areAttributesWithSubvaluesReady,
+        searchTerms,
         dataEngine,
     ]);
 
