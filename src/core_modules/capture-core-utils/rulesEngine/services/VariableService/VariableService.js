@@ -12,7 +12,6 @@ import type {
     EventsDataContainer,
     OptionSets,
     Enrollment,
-    OrgUnit,
     TEIValues,
     Constants,
 } from './variableService.types';
@@ -25,6 +24,7 @@ import type {
     RuleVariable,
     RuleVariables,
     IDateUtils,
+    OrgUnit,
 } from '../../rulesEngine.types';
 
 type SourceData = {
