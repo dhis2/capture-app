@@ -23,6 +23,7 @@ export type ContainerProps = $ReadOnly<{|
   cleanSearchRelatedInfo: ()=>void,
   navigateToMainPage: ()=>void,
   showInitialSearchPage: ()=>void,
+  navigateToRegisterUser: ()=>void,
   trackedEntityTypeId: string,
   availableSearchOptions: AvailableSearchOptions,
   preselectedProgramId: SelectedSearchScopeId,

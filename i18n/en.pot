@@ -878,6 +878,9 @@ msgstr ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 
+msgid "Register a user"
+msgstr "Register a user"
+
 msgid "Back to search"
 msgstr "Back to search"
 
