@@ -1,5 +1,6 @@
 // @flow
-import type { D2Functions, D2FunctionConfig, RuleVariables } from '../../rulesEngine.types';
+import type { RuleVariables } from '../../rulesEngine.types';
+import type { D2Functions, D2FunctionConfig } from '../../d2Functions';
 
 export type ExpressionSet = $ReadOnly<{|
     expression: string,

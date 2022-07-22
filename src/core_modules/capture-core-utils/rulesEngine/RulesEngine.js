@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { VariableService } from './services/VariableService/VariableService';
 import { ValueProcessor } from './processors/ValueProcessor';
 import { executeExpression } from './services/expressionService';
-import { d2Functions } from './d2Functions';
+import { getD2Functions } from './d2Functions';
 import type {
     OutputEffects,
     RuleVariables,
@@ -102,7 +102,7 @@ export class RulesEngine {
             constants,
         });
 
-        const dhisFunctions = d2Functions({
+        const dhisFunctions = getD2Functions({
             dateUtils: this.dateUtils,
             variablesHash,
             selectedOrgUnit,

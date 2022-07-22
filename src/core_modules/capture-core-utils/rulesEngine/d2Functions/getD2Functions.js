@@ -3,10 +3,15 @@
 import log from 'loglevel';
 import { getZScoreWFA, getZScoreWFH, getZScoreHFA } from './zScoreFunctions';
 import { extractDataMatrixValue } from './gs1DataMatrixFuntions';
-import type { D2FunctionsInput } from './d2Functions.types';
+import type { D2FunctionsInput, D2Functions } from './getD2Functions.types';
 
 
-export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selectedUserRoles }: D2FunctionsInput) => ({
+export const getD2Functions = ({
+    dateUtils,
+    variablesHash,
+    selectedOrgUnit,
+    selectedUserRoles,
+}: D2FunctionsInput): D2Functions => ({
     ceil: {
         parameters: 1,
         execute: (params: any) => Math.ceil(params[0]),
