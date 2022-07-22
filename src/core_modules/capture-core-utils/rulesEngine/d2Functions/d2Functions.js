@@ -1,23 +1,27 @@
+// @flow
+
 import log from 'loglevel';
 import { getZScoreWFA, getZScoreWFH, getZScoreHFA } from './zScoreFunctions';
 import { extractDataMatrixValue } from './gs1DataMatrixFuntions';
+import type { D2FunctionsInput } from './d2Functions.types';
 
-export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selectedUserRoles }) => ({
+
+export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selectedUserRoles }: D2FunctionsInput) => ({
     ceil: {
         parameters: 1,
-        execute: params => Math.ceil(params[0]),
+        execute: (params: any) => Math.ceil(params[0]),
     },
     floor: {
         parameters: 1,
-        execute: params => Math.floor(params[0]),
+        execute: (params: any) => Math.floor(params[0]),
     },
     round: {
         parameters: 1,
-        execute: params => Math.round(params[0]),
+        execute: (params: any) => Math.round(params[0]),
     },
     modulus: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const dividend = Number(params[0]);
             const divisor = Number(params[1]);
             const rest = dividend % divisor;
@@ -26,37 +30,37 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     zing: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const number = params[0];
             return number < 0 ? 0 : number;
         },
     },
     oizp: {
         parameters: 1,
-        execute: params => (params[0] < 0 ? 0 : 1),
+        execute: (params: any) => (params[0] < 0 ? 0 : 1),
     },
     concatenate: {
-        execute: params => params.join(''),
+        execute: (params: any) => params.join(''),
     },
     daysBetween: {
         parameters: 2,
-        execute: params => dateUtils.daysBetween(params[0], params[1]),
+        execute: (params: any) => dateUtils.daysBetween(params[0], params[1]),
     },
     weeksBetween: {
         parameters: 2,
-        execute: params => dateUtils.weeksBetween(params[0], params[1]),
+        execute: (params: any) => dateUtils.weeksBetween(params[0], params[1]),
     },
     monthsBetween: {
         parameters: 2,
-        execute: params => dateUtils.monthsBetween(params[0], params[1]),
+        execute: (params: any) => dateUtils.monthsBetween(params[0], params[1]),
     },
     yearsBetween: {
         parameters: 2,
-        execute: params => dateUtils.yearsBetween(params[0], params[1]),
+        execute: (params: any) => dateUtils.yearsBetween(params[0], params[1]),
     },
     addDays: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const date = params[0];
             const daysToAdd = params[1];
             return dateUtils.addDays(date, daysToAdd);
@@ -64,7 +68,7 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     count: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const variableName = params[0];
             const variable = variablesHash[variableName];
             if (!variable) {
@@ -77,7 +81,7 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     countIfValue: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const variableName = params[0];
             const variable = variablesHash[variableName];
             if (!variable) {
@@ -103,7 +107,7 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     hasValue: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const variableName = params[0];
             const variable = variablesHash[variableName];
             if (!variable) {
@@ -116,7 +120,7 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     validatePattern: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const inputToValidate = params[0].toString();
             const pattern = params[1];
             const regEx = new RegExp(pattern, 'g');
@@ -131,7 +135,7 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     left: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const string = String(params[0]);
             const numChars = string.length < params[1] ? string.length : params[1];
             return string.substring(0, numChars);
@@ -139,7 +143,7 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     right: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const string = String(params[0]);
             const numChars = string.length < params[1] ? string.length : params[1];
             return string.substring(string.length - numChars, string.length);
@@ -147,7 +151,7 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     substring: {
         parameters: 3,
-        execute: (params) => {
+        execute: (params: any) => {
             const string = String(params[0]);
             const startChar = string.length < params[1] - 1 ? -1 : params[1];
             const endChar = string.length < params[2] ? -1 : params[2];
@@ -159,7 +163,7 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     split: {
         parameters: 3,
-        execute: (params) => {
+        execute: (params: any) => {
             const string = String(params[0]);
             const splitArray = string.split(params[1]);
             let returnPart = '';
@@ -171,11 +175,11 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     length: {
         parameters: 1,
-        execute: params => String(params[0]).length,
+        execute: (params: any) => String(params[0]).length,
     },
     inOrgUnitGroup: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const group = params[0];
             const orgUnitGroups = (selectedOrgUnit && selectedOrgUnit.groups) || [];
             return Boolean(orgUnitGroups.find(o => o.id === group || o.code === group));
@@ -183,30 +187,30 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     hasUserRole: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const role = params[0];
             return selectedUserRoles.includes(role);
         },
     },
     zScoreWFA: {
         parameters: 3,
-        execute: params => getZScoreWFA(params[0], params[1], params[2]),
+        execute: (params: any) => getZScoreWFA(params[0], params[1], params[2]),
     },
     zScoreHFA: {
         parameters: 3,
-        execute: params => getZScoreHFA(params[0], params[1], params[2]),
+        execute: (params: any) => getZScoreHFA(params[0], params[1], params[2]),
     },
     zScoreWFH: {
         parameters: 3,
-        execute: params => getZScoreWFH(params[0], params[1], params[2]),
+        execute: (params: any) => getZScoreWFH(params[0], params[1], params[2]),
     },
     extractDataMatrixValue: {
         parameters: 2,
-        execute: params => extractDataMatrixValue(params[0], params[1]),
+        execute: (params: any) => extractDataMatrixValue(params[0], params[1]),
     },
     lastEventDate: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const variableName = params[0];
             const variable = variablesHash[variableName];
 
@@ -225,7 +229,7 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     addControlDigits: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const baseNumber = params[0];
             const baseDigits = baseNumber.split('');
             const error = false;
@@ -276,7 +280,7 @@ export const d2Functions = ({ dateUtils, variablesHash, selectedOrgUnit, selecte
     },
     checkControlDigits: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             log.warn('checkControlDigits not implemented yet');
             return params[0];
         },

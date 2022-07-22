@@ -5,7 +5,6 @@ import type {
     EventsData,
     TEIValues,
     Enrollment,
-    OrgUnit,
     OptionSets,
     CompareDates,
     Constants,
@@ -123,6 +122,19 @@ export type TrackedEntityAttribute = {
 export type TrackedEntityAttributes = {
     [id: string]: TrackedEntityAttribute
 };
+
+export type OrgUnitGroup = $ReadOnly<{|
+    id: string,
+    name: string,
+    code: string,
+|}>;
+
+export type OrgUnit = $ReadOnly<{|
+    id: string,
+    name: string,
+    code: string,
+    groups: Array<OrgUnitGroup>,
+|}>;
 
 export type RulesEngineInput = {|
     programRulesContainer: ProgramRulesContainer,
