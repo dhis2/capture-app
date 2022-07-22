@@ -208,7 +208,7 @@ export type D2FunctionConfig = {
     parameters?: number,
     execute: Function,
 }
-export type D2Functions = {
+export type D2Functions = {|
     ceil: D2FunctionConfig,
     floor: D2FunctionConfig,
     round: D2FunctionConfig,
@@ -237,7 +237,7 @@ export type D2Functions = {
     lastEventDate: D2FunctionConfig,
     addControlDigits: D2FunctionConfig,
     checkControlDigits: D2FunctionConfig,
-}
+|};
 
 export type Flag = {
     debug: boolean
