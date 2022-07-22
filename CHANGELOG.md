@@ -1,3 +1,10 @@
+## [100.9.2](https://github.com/dhis2/capture-app/compare/v100.9.1...v100.9.2) (2022-07-22)
+
+
+### Bug Fixes
+
+* [DHIS2-13230] reimplement code for evaluating program rule expressions ([4c1badb](https://github.com/dhis2/capture-app/commit/4c1badba37c485be85274b9c7b2e8eae5f1204e2))
+
 ## [100.9.1](https://github.com/dhis2/capture-app/compare/v100.9.0...v100.9.1) (2022-07-14)
 
 
