@@ -1,3 +1,10 @@
+# [100.10.0](https://github.com/dhis2/capture-app/compare/v100.9.3...v100.10.0) (2022-07-22)
+
+
+### Features
+
+* [DHIS2-13279] navigate to register new user ([#2795](https://github.com/dhis2/capture-app/issues/2795)) ([01feddc](https://github.com/dhis2/capture-app/commit/01feddcf132fa1877354987d662e2ec8c124fb43))
+
 ## [100.9.3](https://github.com/dhis2/capture-app/compare/v100.9.2...v100.9.3) (2022-07-22)
 
 
