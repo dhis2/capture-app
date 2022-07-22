@@ -1,3 +1,10 @@
+## [100.9.3](https://github.com/dhis2/capture-app/compare/v100.9.2...v100.9.3) (2022-07-22)
+
+
+### Bug Fixes
+
+* [DHIS2-13202] fix occurred at label in stages ([#2911](https://github.com/dhis2/capture-app/issues/2911)) ([8e99194](https://github.com/dhis2/capture-app/commit/8e991943a4484a4b70d3c28dd749efb87ecb680d))
+
 ## [100.9.2](https://github.com/dhis2/capture-app/compare/v100.9.1...v100.9.2) (2022-07-22)
 
 
