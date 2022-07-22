@@ -24,6 +24,7 @@ export type Stage = {
 
 export type StageCommonProps = {|
     ready?: boolean,
+    programId: string,
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,
     onEventClick: (eventId: string, stageId: string) => void

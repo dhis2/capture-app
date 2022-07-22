@@ -25,19 +25,17 @@ const basedFieldTypes = [
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.UNKNOWN, resolveValue: convertCommentForView },
 ];
-const baseColumnHeaders = [
+const getBaseColumnHeaders = props => [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
-    { header: i18n.t('Report date'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
+    { header: props.formFoundation.getLabel('occurredAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Registering unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
-    {
-        header: i18n.t('Due date'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true,
-    },
+    { header: props.formFoundation.getLabel('scheduledAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: '', sortDirection: null, isPredefined: true },
 ];
 
 const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[index] }));
 // $FlowFixMe
-const baseColumns = baseFields.map((key, index) => ({ ...key, ...baseColumnHeaders[index] }));
+const getBaseColumns = props => baseFields.map((key, index) => ({ ...key, ...getBaseColumnHeaders(props)[index] }));
 
 const getAllFieldsWithValue = (
     eventId: string,
@@ -107,7 +105,8 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
     return { value, error, loading };
 };
 
-const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean) => {
+
+const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, formFoundation: Object) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, type } = currDataElement;
@@ -117,9 +116,9 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
             return acc;
         }, []);
         return [
-            ...baseColumns.filter(col => (hideDueDate ? col.id !== 'scheduledAt' : true)),
+            ...getBaseColumns({ formFoundation }).filter(col => (hideDueDate ? col.id !== 'scheduledAt' : true)),
             ...dataElementHeaders];
-    }, [dataElements, hideDueDate]);
+    }, [dataElements, hideDueDate, formFoundation]);
 
     return headerColumns;
 };
