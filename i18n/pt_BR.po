@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
@@ -868,6 +868,9 @@ msgid ""
 "looking for."
 msgstr ""
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr ""
 
@@ -1209,14 +1212,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Data do relatório"
-
 msgid "Registering unit"
 msgstr ""
-
-msgid "Due date"
-msgstr "Data de vencimento"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
