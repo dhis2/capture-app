@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -895,6 +895,9 @@ msgid ""
 "looking for."
 msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr "Tilbake til søk"
 
@@ -1253,14 +1256,8 @@ msgstr "Denne fasen kan bare ha en hendelse"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Hendelser kunne ikke hentes. Prøv igjen senere."
 
-msgid "Report date"
-msgstr "Rapporteringsdato"
-
 msgid "Registering unit"
 msgstr "Registreringsenhet"
-
-msgid "Due date"
-msgstr "Forfallsdato"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} hendelser"
