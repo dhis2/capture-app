@@ -4,7 +4,12 @@ import React, { useEffect, useMemo, useCallback } from 'react';
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import { SearchPageComponent, cleanSearchRelatedData, showInitialViewOnSearchPage } from '../Search';
+import {
+    SearchPageComponent,
+    cleanSearchRelatedData,
+    navigateToNewUserPage,
+    showInitialViewOnSearchPage,
+} from '../Search';
 import { useSearchOptions } from '../../../hooks';
 import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
@@ -76,6 +81,7 @@ const MainPageContainer = () => {
     const dispatchCleanSearchRelatedData = useCallback(() => {
         dispatch(cleanSearchRelatedData());
     }, [dispatch]);
+    const dispatchNavigateToNewUserPage = useCallback(() => { dispatch(navigateToNewUserPage()); }, [dispatch]);
     const onChangeTemplate = useCallback(
         id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, history }),
         [history, orgUnitId, programId, showAllAccessible],
@@ -146,6 +152,7 @@ const MainPageContainer = () => {
                     <SearchPageComponent
                         showInitialSearchPage={dispatchShowInitialSearchPage}
                         cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
+                        navigateToRegisterUser={dispatchNavigateToNewUserPage}
                         availableSearchOptions={availableSearchOptions}
                         preselectedProgramId={programId}
                         trackedEntityTypeId={trackedEntityTypeId}
