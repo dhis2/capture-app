@@ -8,6 +8,7 @@ import type { AvailableSearchOptions } from './SearchPage.types';
 import {
     cleanSearchRelatedData,
     navigateToMainPage,
+    navigateToNewUserPage,
     showInitialViewOnSearchPage,
     openSearchPage,
 } from './SearchPage.actions';
@@ -84,6 +85,8 @@ export const SearchPage: ComponentType<{||}> = () => {
     const dispatchCleanSearchRelatedData = useCallback(
         () => { dispatch(cleanSearchRelatedData()); },
         [dispatch]);
+    const dispatchNavigateToNewUserPage = useCallback(() => { dispatch(navigateToNewUserPage()); }, [dispatch]);
+
 
     const availableSearchOptions = useSearchOptions();
     const preselectedProgramId = usePreselectedProgram(programId);
@@ -117,6 +120,7 @@ export const SearchPage: ComponentType<{||}> = () => {
             navigateToMainPage={dispatchNavigateToMainPage}
             showInitialSearchPage={dispatchShowInitialSearchPage}
             cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
+            navigateToRegisterUser={dispatchNavigateToNewUserPage}
             availableSearchOptions={availableSearchOptions}
             preselectedProgramId={preselectedProgramId}
             trackedEntityTypeId={trackedEntityTypeId}

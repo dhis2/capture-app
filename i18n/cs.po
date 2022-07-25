@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -892,6 +892,9 @@ msgid ""
 msgstr ""
 "Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr "Zpět na vyhledávání"
 
@@ -1256,14 +1259,8 @@ msgstr "Tato fáze může mít pouze jednu událost"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Události se nepodařilo načíst. Prosím zkuste to znovu později."
 
-msgid "Report date"
-msgstr "Datum zprávy"
-
 msgid "Registering unit"
 msgstr "Registrační jednotka"
-
-msgid "Due date"
-msgstr "Datum vypršení"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} událostí"
