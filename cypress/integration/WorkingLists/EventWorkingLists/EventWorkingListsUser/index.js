@@ -436,7 +436,7 @@ When('you set the date of admission filter', () => {
         });
 });
 
-When('you save the view as dateFilterWorkingList', () => {
+When(/^you save the view as (.*)$/, (name) => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
@@ -444,7 +444,7 @@ When('you save the view as dateFilterWorkingList', () => {
         .click();
 
     cy.get('[data-test="view-name-content"]')
-        .type('dateFilterWorkingList');
+        .type(name);
 
     cy.server();
     cy.route('POST', '**/eventFilters**').as('newEventFilter');
@@ -492,5 +492,25 @@ Then('the admission filter should be in effect', () => {
                 .then((eventFiltersUrl) => {
                     cy.request('DELETE', eventFiltersUrl);
                 });
+        });
+});
+
+When('you delete the name toDeleteWorkingList', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.contains('Delete view')
+        .click();
+    cy.server();
+    cy.route('DELETE', '**/eventFilters/**').as('deleteEventFilters');
+    cy.get('button')
+        .contains('Confirm')
+        .click();
+    cy.wait('@deleteEventFilters', { timeout: 30000 });
+});
+
+Then('the custom events working list is deleted', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.contains('toDeleteWorkingList').should('not.exist');
         });
 });
