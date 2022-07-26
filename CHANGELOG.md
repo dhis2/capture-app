@@ -1,3 +1,10 @@
+# [100.11.0](https://github.com/dhis2/capture-app/compare/v100.10.2...v100.11.0) (2022-07-26)
+
+
+### Features
+
+* [DHIS2-13253] enrollmentEventEdit simplify URL parameters ([#2845](https://github.com/dhis2/capture-app/issues/2845)) ([0f23429](https://github.com/dhis2/capture-app/commit/0f23429c9a2a9e171e6e3ae1003d1008abb793bd))
+
 ## [100.10.2](https://github.com/dhis2/capture-app/compare/v100.10.1...v100.10.2) (2022-07-25)
 
 
