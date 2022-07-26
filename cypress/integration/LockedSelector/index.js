@@ -306,7 +306,7 @@ And('you reset the org unit selection', () => {
 });
 
 And('you see the enrollment event Edit page but there is no org unit id in the url', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventEdit?enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&programId=IpHINAT79UW&stageId=A03MvHHogjR&teiId=fhFQhO0xILJ`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventEdit?eventId=lQQyjR73hHk`);
     cy.contains('Enrollment: View Event');
 });
 
