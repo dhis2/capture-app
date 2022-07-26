@@ -22,6 +22,14 @@ type OptionGroup = {
     options: Array<string>,
 };
 
+type TrackedEntityTypeAttribute = {
+    trackedEntityAttributeId: ?string,
+    displayInList: boolean,
+    mandatory: boolean,
+    searchable: boolean,
+    renderOptionsAsRadio: ?boolean,
+};
+
 export type OptionSet = {
     id: string,
     displayName: string,
@@ -54,3 +62,11 @@ export type ProgramTrackedEntityAttribute = {
     renderOptionsAsRadio: ?boolean,
     allowFutureDate?: ?boolean,
 };
+
+export type TrackedEntityType = {
+    id: string,
+    displayName: string,
+    trackedEntityTypeAttributes: ?Array<TrackedEntityTypeAttribute>,
+    minAttributesRequiredToSearch: number,
+    featureType: ?string,
+}

@@ -82,6 +82,7 @@ const Index = ({
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
+    navigateToRegisterUser,
     minAttributesRequiredToSearch,
     searchableFields,
     programId,
@@ -219,10 +220,13 @@ const Index = ({
                                 </ModalContent>
                                 <ModalActions>
                                     <ButtonStrip end>
+                                        <Button type="button" onClick={navigateToRegisterUser}>
+                                            {i18n.t('Register a user')}
+                                        </Button>
                                         <Button
                                             disabled={searchStatus === searchPageStatus.LOADING}
                                             onClick={showInitialSearchPage}
-                                            type="button"
+                                            primary
                                         >
                                             {i18n.t('Back to search')}
                                         </Button>

@@ -2,10 +2,14 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { withLoadingIndicator } from '../../../../HOC';
 import { ListViewUpdaterContext } from '../workingListsBase.context';
 import { ListViewBuilder } from '../ListViewBuilder';
 import { areFiltersEqual } from '../utils';
 import type { Props } from './listViewUpdater.types';
+
+const ListViewBuilderWithLoadingIndicator = withLoadingIndicator(() => ({ margin: 10, height: 60 }))(ListViewBuilder);
+
 
 const useUpdateListMemoize = (value) => {
     const [filters, ...rest] = value;
@@ -42,6 +46,7 @@ export const ListViewUpdater = (props: Props) => {
         sortByDirection,
         onUpdateList,
         programId,
+        programStageId,
         orgUnitId,
         categories,
         viewLoadedOnFirstRun,
@@ -60,9 +65,13 @@ export const ListViewUpdater = (props: Props) => {
         customUpdateTrigger,
         forceUpdateOnMount,
         dirtyList,
+        loadedOrgUnitId,
     } = context;
 
-    const forceFirstRunUpdateRef = useRef((forceUpdateOnMount || dirtyList) && !viewLoadedOnFirstRun);
+    const forceFirstRunUpdateRef = useRef(
+        (forceUpdateOnMount || dirtyList || loadedOrgUnitId !== orgUnitId) &&
+        !viewLoadedOnFirstRun,
+    );
 
     if (!currentPage || !rowsPerPage) {
         log.error(
@@ -71,16 +80,24 @@ export const ListViewUpdater = (props: Props) => {
         throw Error('currentPage and rowsPerPage needs to be set during list view loading. See console for details');
     }
 
+    const prevOrgUnitIdRef = useRef(loadedOrgUnitId);
+    const { computedPage, resetMode } = prevOrgUnitIdRef.current === orgUnitId ?
+        { computedPage: currentPage, resetMode: false } :
+        { computedPage: 1, resetMode: true };
+    prevOrgUnitIdRef.current = orgUnitId;
+
     useUpdateEffect(() => {
         onUpdateList({
             filters,
             sortById,
             sortByDirection,
-            currentPage,
+            currentPage: computedPage,
             rowsPerPage,
             programId,
+            programStageId,
             orgUnitId,
             categories,
+            resetMode,
         });
         return () => onCancelUpdateList && onCancelUpdateList();
     }, {
@@ -89,9 +106,10 @@ export const ListViewUpdater = (props: Props) => {
         restDependencies: [
             sortById,
             sortByDirection,
-            currentPage,
+            computedPage,
             rowsPerPage,
             programId,
+            programStageId,
             orgUnitId,
             categories,
             customUpdateTrigger,
@@ -101,15 +119,15 @@ export const ListViewUpdater = (props: Props) => {
     });
 
     useEffect(() => () => onCancelUpdateList && onCancelUpdateList(), [onCancelUpdateList]);
-
     return (
-        <ListViewBuilder
+        <ListViewBuilderWithLoadingIndicator
             {...passOnProps}
             filters={filters}
             sortById={sortById}
             sortByDirection={sortByDirection}
-            currentPage={currentPage}
+            currentPage={computedPage}
             rowsPerPage={rowsPerPage}
+            ready={!resetMode}
         />
     );
 };

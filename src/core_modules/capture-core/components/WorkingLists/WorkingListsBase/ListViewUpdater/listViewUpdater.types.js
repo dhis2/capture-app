@@ -9,6 +9,7 @@ type ExtractedProps = {|
     sortByDirection: string,
     onUpdateList: UpdateList,
     programId: string,
+    programStageId: string,
     orgUnitId: string,
     categories?: Categories,
     viewLoadedOnFirstRun: boolean,

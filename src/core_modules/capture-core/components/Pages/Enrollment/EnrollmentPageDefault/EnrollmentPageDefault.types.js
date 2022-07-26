@@ -17,7 +17,7 @@ export type Props = {|
     onAddNew: () =>void,
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,
-    onEventClick: (eventId: string, stageId: string) => void,
+    onEventClick: (eventId: string) => void,
     onUpdateTeiAttributeValues: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
     onEnrollmentError: (message: string) => void,
 |};

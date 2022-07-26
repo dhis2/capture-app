@@ -14,6 +14,11 @@ export const workingListsListRecordsDesc = createReducerDescription({
                 return acc;
             }, {}),
     }),
+    [workingListsCommonActionTypes.LIST_UPDATE]: (state, { payload: { storeId, resetMode } }) => (
+        resetMode ? {
+            ...state,
+            [storeId]: {},
+        } : state),
     [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, { payload: { storeId, recordContainers } }) => ({
         ...state,
         [storeId]: recordContainers
@@ -307,10 +312,10 @@ export const workingListsTemplatesDesc = createReducerDescription({
 
 export const workingListsDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
-        const { storeId } = action.payload;
+        const { storeId, context: { currentRequest } } = action.payload;
         return {
             ...state,
-            [storeId]: undefined,
+            [storeId]: { currentRequest },
         };
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
@@ -323,6 +328,18 @@ export const workingListsDesc = createReducerDescription({
         };
         return newState;
     },
+    [workingListsCommonActionTypes.LIST_UPDATE]: (state, { payload: { storeId, resetMode, currentRequest } }) => (
+        resetMode ? {
+            ...state,
+            [storeId]: {
+                order: [],
+                currentRequest: {},
+            },
+        } : {
+            ...state,
+            [storeId]: { ...state[storeId], currentRequest },
+        }
+    ),
     [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { storeId, recordContainers, request } = action.payload;
@@ -506,14 +523,17 @@ export const workingListsContextDesc = createReducerDescription({
             },
         };
     },
-    [workingListsCommonActionTypes.LIST_UPDATE]: (state, action) => {
-        const { storeId, lastTransaction } = action.payload;
+    [workingListsCommonActionTypes.LIST_UPDATE]: (state, { payload }) => {
+        const { storeId, lastTransaction } = payload;
+        const { orgUnitId } = payload.queryArgs;
+
         return {
             ...state,
             [storeId]: {
                 ...state[storeId],
                 listDataRefreshTimestamp: moment().toISOString(),
                 lastTransactionOnListDataRefresh: lastTransaction,
+                orgUnitId,
             },
         };
     },
