@@ -1,3 +1,10 @@
+## [100.11.1](https://github.com/dhis2/capture-app/compare/v100.11.0...v100.11.1) (2022-07-26)
+
+
+### Bug Fixes
+
+* [DHIS2-12772] change saving text for re-enrollment ([#2923](https://github.com/dhis2/capture-app/issues/2923)) ([7604551](https://github.com/dhis2/capture-app/commit/7604551cec06c1f723b6aacd3fdbdc8606afb2c5))
+
 # [100.11.0](https://github.com/dhis2/capture-app/compare/v100.10.2...v100.11.0) (2022-07-26)
 
 
