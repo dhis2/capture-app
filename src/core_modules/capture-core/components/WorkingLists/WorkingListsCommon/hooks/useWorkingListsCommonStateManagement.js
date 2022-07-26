@@ -33,7 +33,6 @@ import type {
     ChangeRowsPerPage,
     ClearFilter,
     LoadTemplates,
-    LoadView,
     SelectRestMenuItem,
     SelectTemplate,
     SetColumnOrder,
@@ -42,7 +41,7 @@ import type {
     Sort,
     UpdateFilter,
 } from '../../WorkingListsBase';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '..';
+import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList, LoadView } from '..';
 
 const useTemplates = (
     dispatch: ReduxDispatch,
