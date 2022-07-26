@@ -23,8 +23,8 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
 export const openSearchPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN, topBarActionsActionTypes.SEARCH_PAGE_OPEN),
-        switchMap(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation();
+        switchMap((action) => {
+            const { orgUnitId, programId = action.payload.programId } = deriveURLParamsFromLocation();
             history.push(`/search?${buildUrlQueryString({ programId, orgUnitId })}`);
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
