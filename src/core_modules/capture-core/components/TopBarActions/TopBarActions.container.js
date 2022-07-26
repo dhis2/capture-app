@@ -57,7 +57,7 @@ export const TopBarActions = ({
         dispatch(resetAllCategoryOptionsFromScopeSelector());
         reset();
     };
-    const newRegistrationPage = () => dispatch(openNewRegistrationPageFromScopeSelector());
+    const newRegistrationPage = () => dispatch(openNewRegistrationPageFromScopeSelector(selectedProgramId));
     const newRegistrationPageWithoutProgramId = () => {
         const actions = [resetProgramIdBase(), openNewRegistrationPageFromScopeSelector()];
         dispatch(batchActions(actions));
