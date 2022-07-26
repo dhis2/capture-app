@@ -1,3 +1,31 @@
+# [100.11.0](https://github.com/dhis2/capture-app/compare/v100.10.2...v100.11.0) (2022-07-26)
+
+
+### Features
+
+* [DHIS2-13253] enrollmentEventEdit simplify URL parameters ([#2845](https://github.com/dhis2/capture-app/issues/2845)) ([0f23429](https://github.com/dhis2/capture-app/commit/0f23429c9a2a9e171e6e3ae1003d1008abb793bd))
+
+## [100.10.2](https://github.com/dhis2/capture-app/compare/v100.10.1...v100.10.2) (2022-07-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12670] delete a "just created" working list ([#2916](https://github.com/dhis2/capture-app/issues/2916)) ([2cd2030](https://github.com/dhis2/capture-app/commit/2cd20303997855bf740c5b265c30353d4e617809))
+
+## [100.10.1](https://github.com/dhis2/capture-app/compare/v100.10.0...v100.10.1) (2022-07-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([06521ac](https://github.com/dhis2/capture-app/commit/06521ac1cc17ff3b1afb49a20792718de8ae1a89))
+
+# [100.10.0](https://github.com/dhis2/capture-app/compare/v100.9.3...v100.10.0) (2022-07-22)
+
+
+### Features
+
+* [DHIS2-13279] navigate to register new user ([#2795](https://github.com/dhis2/capture-app/issues/2795)) ([01feddc](https://github.com/dhis2/capture-app/commit/01feddcf132fa1877354987d662e2ec8c124fb43))
+
 ## [100.9.3](https://github.com/dhis2/capture-app/compare/v100.9.2...v100.9.3) (2022-07-22)
 
 

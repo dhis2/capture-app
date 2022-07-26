@@ -69,10 +69,8 @@ export const EnrollmentPageDefault = () => {
         );
     };
 
-    const onEventClick = (eventId: string, stageId: string) => {
-        history.push(`/enrollmentEventEdit?${buildUrlQueryString({
-            orgUnitId, programId, teiId, enrollmentId, eventId, stageId,
-        })}`);
+    const onEventClick = (eventId: string) => {
+        history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
     };
 
     const onLinkedRecordClick = (parameters) => {

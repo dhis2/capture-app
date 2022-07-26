@@ -133,12 +133,12 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                 return batchActions([
                     updateEventContainer(eventContainer, orgUnit),
                     updateEnrollmentEvents(eventId, serverData.events[0]),
-                    startSaveEditEventDataEntry(eventId, serverData, state.currentSelections, enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT),
+                    startSaveEditEventDataEntry(eventId, serverData, enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }
             return batchActions([
                 updateEventContainer(eventContainer, orgUnit),
-                startSaveEditEventDataEntry(eventId, serverData, state.currentSelections),
+                startSaveEditEventDataEntry(eventId, serverData),
             ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
         }));
 
@@ -176,17 +176,9 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
     action$.pipe(
         ofType(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY),
         map((action) => {
-            const { eventId, programId, orgUnitId, teiId, enrollmentId } = action.payload;
-            const { currentSelections } = store.value;
-            const params = {
-                programId,
-                teiId,
-                orgUnitId,
-                enrollmentId,
-            };
-            dependencies.history.push(
-                `/enrollment?${buildUrlQueryString(params)}`,
-            );
-            return startDeleteEventDataEntry(eventId, params, currentSelections);
+            const { eventId, enrollmentId } = action.payload;
+            const params = { enrollmentId };
+            dependencies.history.push(`/enrollment?${buildUrlQueryString(params)}`);
+            return startDeleteEventDataEntry(eventId, params);
         }));
 
