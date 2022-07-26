@@ -11,9 +11,6 @@ import { actionTypes as viewEventActionTypes }
     from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { newPageActionTypes }
     from '../../components/Pages/New/NewPage.actions';
-import {
-    actionTypes as editEventDataEntryActionTypes,
-} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as setCurrentSelectionsActionTypes,
@@ -45,18 +42,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.page = null;
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.page = null;
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;

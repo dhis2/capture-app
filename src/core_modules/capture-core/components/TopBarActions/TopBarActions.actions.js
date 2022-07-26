@@ -5,4 +5,5 @@ export const topBarActionsActionTypes = {
     SEARCH_PAGE_OPEN: 'ScopeSelector.SearchPageOpen',
 };
 
-export const openSearchPageFromScopeSelector = () => actionCreator(topBarActionsActionTypes.SEARCH_PAGE_OPEN)();
+export const openSearchPageFromScopeSelector = (programId?: string) =>
+    actionCreator(topBarActionsActionTypes.SEARCH_PAGE_OPEN)({ programId });

@@ -11,7 +11,6 @@ import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
-import { useLocationQuery } from '../../utils/routing';
 
 const styles = {
     header: {
@@ -45,10 +44,12 @@ export const WidgetEventEditPlain = ({
     programStage,
     programStage: { name, icon },
     onGoBack,
+    programId,
+    orgUnitId,
+    enrollmentId,
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode, pageMode } = useEnrollmentEditEventPageMode(eventStatus);
-    const orgUnitId = useLocationQuery().orgUnitId;
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
     if (error) {
@@ -96,13 +97,13 @@ export const WidgetEventEditPlain = ({
             >
                 <div className={classes.form}>
                     {currentPageMode === pageMode.VIEW ? (
-                        <ViewEventDataEntry
-                            formFoundation={programStage.stageForm}
-                        />
+                        <ViewEventDataEntry formFoundation={programStage.stageForm} />
                     ) : (
                         <EditEventDataEntry
                             formFoundation={programStage.stageForm}
                             orgUnit={orgUnit}
+                            programId={programId}
+                            enrollmentId={enrollmentId}
                         />
                     )}
                 </div>
@@ -110,5 +111,4 @@ export const WidgetEventEditPlain = ({
         </div>
     ) : null;
 };
-export const WidgetEventEdit: ComponentType<$Diff<Props, CssClasses>> =
-    withStyles(styles)(WidgetEventEditPlain);
+export const WidgetEventEdit: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetEventEditPlain);

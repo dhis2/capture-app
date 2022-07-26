@@ -4,6 +4,7 @@ beforeEach(() => {
 
 Given(/^you land on the enrollment event page by having typed (.*)$/, (url) => {
     cy.visit(url);
+    cy.get('[data-test="scope-selector"]').contains('Selected person');
 });
 
 Given('you open the enrollment page which has multiples events and stages', () => {

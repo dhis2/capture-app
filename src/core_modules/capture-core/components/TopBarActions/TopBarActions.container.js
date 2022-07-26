@@ -63,7 +63,7 @@ export const TopBarActions = ({
     const newRegistrationPageWithoutProgramId = () => {
         history.push(`new?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId })}`);
     };
-    const searchPage = () => dispatch(openSearchPageFromScopeSelector());
+    const searchPage = () => dispatch(openSearchPageFromScopeSelector(selectedProgramId));
     const searchPageWithoutProgramId = () => {
         const actions = [resetProgramIdBase(), openSearchPageFromScopeSelector(), ...customActionsOnProgramIdReset];
         dispatch(batchActions(actions));
