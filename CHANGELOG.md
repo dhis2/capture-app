@@ -1,3 +1,10 @@
+## [100.11.3](https://github.com/dhis2/capture-app/compare/v100.11.2...v100.11.3) (2022-07-27)
+
+
+### Bug Fixes
+
+* [DHIS2-12304] show enrolllment errors in bottom snackbar ([#2879](https://github.com/dhis2/capture-app/issues/2879)) ([ac2d450](https://github.com/dhis2/capture-app/commit/ac2d450c1c1202b07aaec0963a3de3ebd0992357))
+
 ## [100.11.2](https://github.com/dhis2/capture-app/compare/v100.11.1...v100.11.2) (2022-07-27)
 
 
