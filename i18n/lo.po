@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -129,6 +129,9 @@ msgid "Enrollment"
 msgstr "ການລົງທະບຽນ"
 
 msgid "A future date is not allowed"
+msgstr ""
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
@@ -868,6 +871,9 @@ msgid ""
 "looking for."
 msgstr ""
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr ""
 
@@ -1205,14 +1211,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "ວັນທີີລາຍງານ"
-
 msgid "Registering unit"
 msgstr "ສະຖານທີ່ລົງທະບຽນ"
-
-msgid "Due date"
-msgstr "ວັນທີຕ້ອງແລ້ວ"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

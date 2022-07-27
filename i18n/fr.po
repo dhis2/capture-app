@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -144,6 +144,9 @@ msgstr "Enrôlement"
 
 msgid "A future date is not allowed"
 msgstr "Une date future n'est pas permise"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -919,6 +922,9 @@ msgstr ""
 "Vous pouvez modifier vos termes de recherche et effectuer une nouvelle "
 "recherche pour trouver les éléments que vous recherchez."
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr " Retour à l'écran de recherche"
 
@@ -1271,14 +1277,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Date du rapport"
-
 msgid "Registering unit"
 msgstr "Unité qui enregistre"
-
-msgid "Due date"
-msgstr "Date d'échéance"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

@@ -18,21 +18,23 @@ export const DataEntry = ({
     onSaveSuccessActionType,
     onSaveErrorActionType,
     onSaveExternal,
+    geometry,
+    trackedEntityName,
 }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
     const dispatch = useDispatch();
     const [saveAttempted, setSaveAttempted] = useState(false);
 
-    const dataEntryContext = useLifecycle({
+    const context = useLifecycle({
         programAPI,
         orgUnitId,
         clientAttributesWithSubvalues,
         userRoles,
         dataEntryId,
         itemId,
+        geometry,
     });
-    const { trackedEntityName, ...context } = dataEntryContext;
     const { formFoundation } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 

@@ -1,5 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
+import { EMPTY } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { searchPageActionTypes } from './SearchPage.actions';
 import { topBarActionsActionTypes } from '../../TopBarActions';
@@ -21,10 +22,22 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
 export const openSearchPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(topBarActionsActionTypes.SEARCH_PAGE_OPEN),
-        switchMap(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation();
+        switchMap((action) => {
+            const { orgUnitId, programId = action.payload.programId } = deriveURLParamsFromLocation();
             history.push(`/search?${buildUrlQueryString({ programId, orgUnitId })}`);
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
             });
         }));
+
+
+export const navigateToNewUserPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+    action$.pipe(
+        ofType(searchPageActionTypes.NAVIGATE_TO_NEW_USER_PAGE),
+        switchMap(() => {
+            const { currentSelections: { programId, orgUnitId } } = store.value;
+            history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
+
+            return EMPTY;
+        }),
+    );

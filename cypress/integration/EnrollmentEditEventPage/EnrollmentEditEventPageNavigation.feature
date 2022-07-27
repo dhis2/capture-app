@@ -1,7 +1,7 @@
 Feature: User interacts with Enrollment event page
 
   Scenario: The user can land on the enrollment event page.
-    Given you land on the enrollment event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=tIJu6iqQxNV&enrollmentId=CCBLMntFuzb&stageId=ZzYYXq4fJie&eventId=O7IACPx40nQ
+    Given you land on the enrollment event page by having typed #/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=O7IACPx40nQ
     Then you see the following Enrollment: View Event
     And you see the following Baby Postnatal
 

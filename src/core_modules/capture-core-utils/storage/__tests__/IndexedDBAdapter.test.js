@@ -14,15 +14,6 @@ beforeEach(() => {
 afterEach(() => {
 });
 
-it('tests disabled', () => {});
-
-/*
-
-Tests are disabled because fake-indexeddb is having issues with jest 27 (that is being used by @dhis2/cli-app-scripts)
-https://github.com/dumbmatter/fakeIndexedDB/issues/64
-https://github.com/dumbmatter/fakeIndexedDB/issues/67
-
-
 it('open IndexedDB without error', async () => {
     const idbAdapter = new IndexedDBAdapter(options);
     await idbAdapter.open();
@@ -132,4 +123,3 @@ it('set to fail because db not open', async () => {
         expect(error).toBeDefined();
     }
 });
-*/

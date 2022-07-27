@@ -147,7 +147,7 @@ When(/^you sort list asc by (.*)$/, (columnName) => {
         });
 });
 
-Then('the sorted list by Report date asc should be displayed', () => {
+Then(/^the sorted list by (.*) asc should be displayed$/, () => {
     const rows = [
         '2021-07-13|Bumbeh MCHP',
         '2021-07-12|Bumbeh MCHP',

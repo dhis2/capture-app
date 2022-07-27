@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2022\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -134,6 +134,9 @@ msgstr "التسجيل"
 
 msgid "A future date is not allowed"
 msgstr "غير مسموح تاريخ بالمستقبل"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -877,6 +880,9 @@ msgid ""
 "looking for."
 msgstr ""
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr ""
 
@@ -1224,14 +1230,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr ""
-
 msgid "Registering unit"
 msgstr ""
-
-msgid "Due date"
-msgstr "تاريخ الاستحقاق"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

@@ -1,3 +1,81 @@
+## [100.11.2](https://github.com/dhis2/capture-app/compare/v100.11.1...v100.11.2) (2022-07-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a3aea8e](https://github.com/dhis2/capture-app/commit/a3aea8e4d46a1986c69c468d6cc14231a14d72a9))
+
+## [100.11.1](https://github.com/dhis2/capture-app/compare/v100.11.0...v100.11.1) (2022-07-26)
+
+
+### Bug Fixes
+
+* [DHIS2-12772] change saving text for re-enrollment ([#2923](https://github.com/dhis2/capture-app/issues/2923)) ([7604551](https://github.com/dhis2/capture-app/commit/7604551cec06c1f723b6aacd3fdbdc8606afb2c5))
+
+# [100.11.0](https://github.com/dhis2/capture-app/compare/v100.10.2...v100.11.0) (2022-07-26)
+
+
+### Features
+
+* [DHIS2-13253] enrollmentEventEdit simplify URL parameters ([#2845](https://github.com/dhis2/capture-app/issues/2845)) ([0f23429](https://github.com/dhis2/capture-app/commit/0f23429c9a2a9e171e6e3ae1003d1008abb793bd))
+
+## [100.10.2](https://github.com/dhis2/capture-app/compare/v100.10.1...v100.10.2) (2022-07-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12670] delete a "just created" working list ([#2916](https://github.com/dhis2/capture-app/issues/2916)) ([2cd2030](https://github.com/dhis2/capture-app/commit/2cd20303997855bf740c5b265c30353d4e617809))
+
+## [100.10.1](https://github.com/dhis2/capture-app/compare/v100.10.0...v100.10.1) (2022-07-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([06521ac](https://github.com/dhis2/capture-app/commit/06521ac1cc17ff3b1afb49a20792718de8ae1a89))
+
+# [100.10.0](https://github.com/dhis2/capture-app/compare/v100.9.3...v100.10.0) (2022-07-22)
+
+
+### Features
+
+* [DHIS2-13279] navigate to register new user ([#2795](https://github.com/dhis2/capture-app/issues/2795)) ([01feddc](https://github.com/dhis2/capture-app/commit/01feddcf132fa1877354987d662e2ec8c124fb43))
+
+## [100.9.3](https://github.com/dhis2/capture-app/compare/v100.9.2...v100.9.3) (2022-07-22)
+
+
+### Bug Fixes
+
+* [DHIS2-13202] fix occurred at label in stages ([#2911](https://github.com/dhis2/capture-app/issues/2911)) ([8e99194](https://github.com/dhis2/capture-app/commit/8e991943a4484a4b70d3c28dd749efb87ecb680d))
+
+## [100.9.2](https://github.com/dhis2/capture-app/compare/v100.9.1...v100.9.2) (2022-07-22)
+
+
+### Bug Fixes
+
+* [DHIS2-13230] reimplement code for evaluating program rule expressions ([4c1badb](https://github.com/dhis2/capture-app/commit/4c1badba37c485be85274b9c7b2e8eae5f1204e2))
+
+## [100.9.1](https://github.com/dhis2/capture-app/compare/v100.9.0...v100.9.1) (2022-07-14)
+
+
+### Bug Fixes
+
+* [DHIS2-13190][DHIS2-13196] tei geometry and attributes ([#2808](https://github.com/dhis2/capture-app/issues/2808)) ([43c5e83](https://github.com/dhis2/capture-app/commit/43c5e8313ee041d61daf9ee98107d93077696731))
+
+# [100.9.0](https://github.com/dhis2/capture-app/compare/v100.8.4...v100.9.0) (2022-07-13)
+
+
+### Features
+
+* [DHIS2-12611] open enrollment event ([#2799](https://github.com/dhis2/capture-app/issues/2799)) ([e54f45b](https://github.com/dhis2/capture-app/commit/e54f45b87df698c2cd4189087222b1d50cc0930b)), closes [#2864](https://github.com/dhis2/capture-app/issues/2864)
+
+## [100.8.4](https://github.com/dhis2/capture-app/compare/v100.8.3...v100.8.4) (2022-07-13)
+
+
+### Bug Fixes
+
+* [DHIS2-13089]  trim string instead of replacing all whitespaces ([#2891](https://github.com/dhis2/capture-app/issues/2891)) ([ed23ea3](https://github.com/dhis2/capture-app/commit/ed23ea38326cdea6c3a0bac3c5618562cdeeecea))
+* [DHIS2-13316] remove currentselection and get orgunit from page store ([#2883](https://github.com/dhis2/capture-app/issues/2883)) ([f0440ae](https://github.com/dhis2/capture-app/commit/f0440aebc6877dcff26902a4ecf42902d0c61a27))
+
 ## [100.8.3](https://github.com/dhis2/capture-app/compare/v100.8.2...v100.8.3) (2022-07-11)
 
 
