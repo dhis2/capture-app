@@ -9,7 +9,8 @@ const getStyles = () => ({
     container: {
         border: '1px solid #C4C4C4',
         borderRadius: '3px',
-        height: '100%',
+        maxHeight: '70vh',
+        overflowY: 'auto',
         width: '100%',
         boxShadow: '0px 0px 2px 0px #C4C4C4 inset',
         zIndex: 0,
