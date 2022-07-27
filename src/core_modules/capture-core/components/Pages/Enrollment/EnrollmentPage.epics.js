@@ -138,7 +138,6 @@ export const clickLinkedRecordEpic = (action$: InputObservable, store: ReduxStor
                 } else {
                     url = `/enrollmentEventEdit?${buildUrlQueryString({
                         orgUnitId,
-                        programId,
                         eventId: payload.eventId,
                     })}`;
                 }
