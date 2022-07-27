@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
+import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';
 import type { ContainerProps } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
@@ -12,8 +12,10 @@ import {
     useDetermineSuggestedScheduleDate,
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
+    useCommentDetails,
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
+import { NoAccess } from './AccessVerification';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -24,6 +26,7 @@ export const WidgetEventSchedule = ({
     onSave,
     onSaveSuccessActionType,
     onSaveErrorActionType,
+    onCancel,
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
@@ -34,6 +37,7 @@ export const WidgetEventSchedule = ({
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, ...passOnProps,
     });
+    const { currentUser, noteId } = useCommentDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [comments, setComments] = useState([]);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
@@ -80,7 +84,17 @@ export const WidgetEventSchedule = ({
 
 
     const onAddComment = (comment) => {
-        setComments([...comments, { value: comment }]);
+        const newComment = {
+            storedBy: currentUser.userName,
+            storedAt: moment().toISOString(),
+            value: comment,
+            createdBy: {
+                firstName: currentUser.firstName,
+                surname: currentUser.surname,
+            },
+            note: noteId,
+        };
+        setComments([...comments, newComment]);
     };
 
 
@@ -92,6 +106,15 @@ export const WidgetEventSchedule = ({
         );
     }
 
+    const eventAccess = getProgramEventAccess(programId, stageId);
+    if (!eventAccess?.write) {
+        return (
+            <NoAccess
+                onCancel={onCancel}
+            />
+        );
+    }
+
     return (
         <WidgetEventScheduleComponent
             stageId={stageId}
@@ -100,6 +123,7 @@ export const WidgetEventSchedule = ({
             programName={program.name}
             scheduleDate={scheduleDate}
             suggestedScheduleDate={suggestedScheduleDate}
+            onCancel={onCancel}
             setScheduleDate={setScheduleDate}
             onSchedule={onHandleSchedule}
             onAddComment={onAddComment}

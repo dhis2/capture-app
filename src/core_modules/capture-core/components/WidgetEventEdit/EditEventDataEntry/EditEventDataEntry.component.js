@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import moment from 'moment';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
-import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getNoFutureEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
 import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
@@ -120,9 +121,10 @@ const buildReportDateSettingsFn = () => {
             calendarWidth: 350,
             label: props.formFoundation.getLabel('occurredAt'),
             required: true,
+            calendarMaxMoment: moment(),
         }),
         getPropName: () => 'occurredAt',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -261,9 +263,10 @@ const DataEntryWrapper = withBrowserBackWarning()(DeletableDataEntry);
 type Props = {
     formFoundation: ?RenderFoundation,
     orgUnit: OrgUnit,
-    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
-    onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: (orgUnit: OrgUnit) => void,
+    programId: string,
+    onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
+    onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
+    onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void,
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onDelete: () => void,
     onCancel: () => void,
@@ -307,6 +310,7 @@ class EditEventDataEntryPlain extends Component<Props> {
     render() {
         const {
             orgUnit,
+            programId,
             onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
@@ -318,9 +322,9 @@ class EditEventDataEntryPlain extends Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={'singleEvent'}
-                onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
-                onUpdateFormField={onUpdateField(orgUnit)}
-                onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
+                onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
+                onUpdateFormField={onUpdateField(orgUnit, programId)}
+                onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
                 onSave={onSave(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}

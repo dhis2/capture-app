@@ -6,16 +6,16 @@
 # Marta Vila <marta@dhis2.org>, 2021
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2021
 # Prabhjot Singh, 2021
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -144,6 +144,9 @@ msgstr "Inscripción"
 
 msgid "A future date is not allowed"
 msgstr "No se permite una fecha futura"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -874,6 +877,17 @@ msgstr "Buscar por {{name}}"
 msgid "Search by attributes"
 msgstr "Buscar por atributos"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "Atrás"
 
@@ -898,6 +912,9 @@ msgid ""
 msgstr ""
 "Puede cambiar los términos de búsqueda y volver a buscar para encontrar lo "
 "que busca."
+
+msgid "Register a user"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Volver a buscar"
@@ -924,6 +941,9 @@ msgstr ""
 " términos de búsqueda o buscar por más atributos para limitar los "
 "resultados."
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr "Elija un tipo para comenzar a buscar"
 
@@ -932,6 +952,15 @@ msgstr "Ver inscripción activa"
 
 msgid "Re-enroll"
 msgstr "Volver a inscribirse"
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Crear nuevo"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1244,14 +1273,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Fecha de reporte"
-
 msgid "Registering unit"
 msgstr "Unidad de registro"
-
-msgid "Due date"
-msgstr "Fecha de vencimiento"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

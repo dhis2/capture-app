@@ -37,8 +37,8 @@ Feature: User interacts with Stages and Events Widget
     Scenario: User can sort the list of events
         Given you open the enrollment page which has multiples events and stages
         Then the default list should be displayed
-        When you sort list asc by Report date
-        Then the sorted list by Report date asc should be displayed
+        When you sort list asc by Date of visit
+        Then the sorted list by Date of visit asc should be displayed
 
     # Scenario: User can go to Program Stage list by clicking Go to full
     #     Given you open the enrollment page which has multiples events and stages

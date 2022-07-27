@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
 "Language-Team: Romanian (https://www.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -135,6 +135,9 @@ msgstr "Înrolare"
 
 msgid "A future date is not allowed"
 msgstr "Nu este permisă o dată viitoare"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -853,6 +856,17 @@ msgstr "Căutare după {{name}}"
 msgid "Search by attributes"
 msgstr "Căutare după atribute"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "Înapoi"
 
@@ -878,6 +892,9 @@ msgstr ""
 "Puteți modifica termenii de căutare și căuta din nou pentru a găsi ceea ce "
 "căutați."
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr "Înapoi la căutare"
 
@@ -897,6 +914,9 @@ msgid ""
 "searching by more attributes to narrow down the results."
 msgstr ""
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr ""
 
@@ -905,6 +925,15 @@ msgstr "Vizualizare înrolare activă"
 
 msgid "Re-enroll"
 msgstr "Re-înrolare"
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr ""
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1209,14 +1238,8 @@ msgstr "Această etapă poate avea un singur eveniment"
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Data raportului"
-
 msgid "Registering unit"
 msgstr "Unitate de înregistrare"
-
-msgid "Due date"
-msgstr ""
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} evenimente"
