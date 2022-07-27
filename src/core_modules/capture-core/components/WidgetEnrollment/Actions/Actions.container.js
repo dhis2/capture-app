@@ -15,13 +15,23 @@ const enrollmentDelete = {
     type: 'delete',
     id: ({ enrollment }) => enrollment,
 };
+const processErrorReports = (error) => {
+    // $FlowFixMe[prop-missing]
+    const conflicts = error?.details?.response?.conflicts;
+    return conflicts?.length > 0
+        ? conflicts.reduce((acc, errorReport) => `${acc} ${errorReport.value}`, '')
+        : error.message;
+};
 
-export const Actions = ({ enrollment = {}, refetch, onDelete }: Props) => {
+export const Actions = ({ enrollment = {}, refetch, onDelete, onError }: Props) => {
     const [updateMutation, { loading: updateLoading }] = useDataMutation(
         enrollmentUpdate,
         {
             onComplete: () => {
                 refetch();
+            },
+            onError: (e) => {
+                onError && onError(processErrorReports(e));
             },
         },
     );
@@ -29,6 +39,9 @@ export const Actions = ({ enrollment = {}, refetch, onDelete }: Props) => {
         enrollmentDelete,
         {
             onComplete: onDelete,
+            onError: (e) => {
+                onError && onError(processErrorReports(e));
+            },
         },
     );
     return (

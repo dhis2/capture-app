@@ -11,6 +11,7 @@ export const enrollmentSiteActionTypes = {
     COMMIT_ENROLLMENT_EVENT: 'Enrollment.CommitEnrollmentEvent',
     COMMIT_ENROLLMENT_EVENT_WITHOUT_ID: 'Enrollment.CommitEnrollmentEventWithoutId',
     SAVE_FAILED: 'Enrollment.SaveFailed',
+    ERROR_ENROLLMENT: 'Enrollment.ErrorEnrollment',
 };
 
 export const setCommonEnrollmentSiteData = (enrollment: ApiEnrollment, attributeValues: ApiAttributeValues) =>
@@ -49,3 +50,8 @@ export const commitEnrollmentEventWithoutId = (uid: string, eventId: string) =>
         uid,
     });
 export const saveFailed = () => actionCreator(enrollmentSiteActionTypes.SAVE_FAILED)();
+
+export const showEnrollmentError = ({ message }: { message: string }) =>
+    actionCreator(enrollmentSiteActionTypes.ERROR_ENROLLMENT)({
+        message,
+    });
