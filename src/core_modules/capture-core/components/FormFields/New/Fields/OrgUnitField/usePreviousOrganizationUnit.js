@@ -2,7 +2,7 @@
 import { useEffect, useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
-export const usePreviousOrganizationUnit = (previousOrgUnitId: string) => {
+export const usePreviousOrganizationUnit = (previousOrgUnitId?: string) => {
     const { data, refetch } = useDataQuery(
         useMemo(
             () => ({

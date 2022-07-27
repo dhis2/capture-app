@@ -18,4 +18,4 @@ export const resetCategoryOptionFromScopeSelector = (categoryId: string) =>
     actionCreator(scopeSelectorActionTypes.CATEGORY_OPTION_RESET)({ categoryId });
 export const resetAllCategoryOptionsFromScopeSelector = () =>
     actionCreator(scopeSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET)();
-export const resetOrgUnitIdFromScopeSelector = (previousOrgUnitId: string) => actionCreator(scopeSelectorActionTypes.RESET_ORG_UNIT_ID)({ previousOrgUnitId });
+export const resetOrgUnitIdFromScopeSelector = (previousOrgUnitId?: string) => actionCreator(scopeSelectorActionTypes.RESET_ORG_UNIT_ID)({ previousOrgUnitId });
