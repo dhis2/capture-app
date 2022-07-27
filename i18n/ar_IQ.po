@@ -135,6 +135,9 @@ msgstr "التسجيل"
 msgid "A future date is not allowed"
 msgstr "غير مسموح تاريخ بالمستقبل"
 
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 

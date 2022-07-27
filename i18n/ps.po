@@ -130,6 +130,9 @@ msgstr "شاملول یا نوم لیکنه"
 msgid "A future date is not allowed"
 msgstr ""
 
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
