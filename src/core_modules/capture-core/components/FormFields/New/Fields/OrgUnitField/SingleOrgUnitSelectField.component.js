@@ -26,6 +26,10 @@ type OrgUnitValue = {
     path: string,
 }
 
+type State = {
+    previousOrgUnitId: Object
+}
+
 type Props = {
     value?: ?OrgUnitValue,
     onBlur: (value: any) => void,
@@ -38,7 +42,7 @@ type Props = {
     }
 }
 
-class SingleOrgUnitSelectFieldPlain extends React.Component<Props> {
+class SingleOrgUnitSelectFieldPlain extends React.Component<Props, State> {
     renderSelectedOrgUnit = (selectedOrgUnit: OrgUnitValue) => {
         const { classes, disabled } = this.props;
         const buttonClass = classNames(classes.clearSelectedOrgUnitButton, {
@@ -66,7 +70,9 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props> {
     }
 
     onDeselectOrgUnit = () => {
+        const { value: previousOrgUnitId } = this.props;
         this.props.onBlur(null);
+        this.setState({ previousOrgUnitId });
     }
 
     renderOrgUnitField = () => {
@@ -75,6 +81,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <OrgUnitField
                 onSelectClick={this.onSelectOrgUnit}
+                previousOrgUnitId={this.state.previousOrgUnitId}
                 {...passOnProps}
             />
         );

@@ -22,6 +22,7 @@ import {
 import { topBarActionsActionTypes } from '../../components/TopBarActions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
+import { scopeSelectorActionTypes } from '../../components/ScopeSelector';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -132,7 +133,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.FROM_URL_UPDATE]: (state, action) => ({ ...state,
-        previousOrgUnit: action.payload.prevProps.orgUnitId,
         page: action.payload.nextPage,
     }),
     [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
@@ -163,5 +163,9 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [topBarActionsActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
         page: 'search',
+    }),
+    [scopeSelectorActionTypes.RESET_ORG_UNIT_ID]: (state, action) => ({
+        ...state,
+        previousOrgUnitId: action.payload.previousOrgUnitId,
     }),
 }, 'app');

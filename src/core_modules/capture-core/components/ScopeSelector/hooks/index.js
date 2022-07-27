@@ -12,4 +12,3 @@ export { useReset } from './useReset';
 export { useResetViewEventId } from './useResetViewEventId';
 
 export { useOrganizationUnit } from './useOrganizationUnit';
-export { usePreviousOrganizationUnit } from './usePreviousOrganizationUnit';

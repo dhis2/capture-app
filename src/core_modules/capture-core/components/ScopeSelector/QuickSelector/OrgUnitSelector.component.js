@@ -75,7 +75,7 @@ type Props = {
     selectedOrgUnitId: string,
     showWarning: boolean,
     selectedOrgUnit: Object,
-    previousSelectedOrgUnit?: Object,
+    previousOrgUnitId?: string,
     classes: Object,
 };
 
@@ -175,7 +175,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
                         <OrgUnitField
                             data-test="org-unit-field"
                             onSelectClick={this.handleClick}
-                            previousSelectedOrgUnit={this.props.previousSelectedOrgUnit}
+                            previousOrgUnitId={this.props.previousOrgUnitId}
                         />
                     </div>
                 </Paper>

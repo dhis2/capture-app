@@ -3,6 +3,7 @@ import * as React from 'react';
 import { OrganisationUnitTree } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { usePreviousOrganizationUnit } from './usePreviousOrganizationUnit';
 
 const getStyles = () => ({
     orgunitTree: {
@@ -20,17 +21,18 @@ type Props = {
     },
     onSelectClick: Function,
     treeKey: string,
-    previousSelectedOrgUnit?: Object
+    previousOrgUnitId?: Object
 };
 
 const OrgUnitTreePlain = (props: Props) => {
-    const { roots, classes, treeKey, previousSelectedOrgUnit, onSelectClick } = props;
-
+    const { roots, classes, treeKey, previousOrgUnitId, onSelectClick } = props;
+    const previousSelectedOrgUnit = usePreviousOrganizationUnit(previousOrgUnitId);
     const getExpandedItems = () => {
         if (roots && roots.length === 1) {
             return roots
                 .map(r => r.path);
         }
+
         return undefined;
     };
 
@@ -44,6 +46,12 @@ const OrgUnitTreePlain = (props: Props) => {
     const initiallyExpanded = getExpandedItems();
 
     const [expanded, setExpanded] = React.useState(initiallyExpanded);
+
+    React.useEffect(() => {
+        if (previousSelectedOrgUnit?.expandedPaths) {
+            setExpanded(previousSelectedOrgUnit.expandedPaths);
+        }
+    }, [previousSelectedOrgUnit?.expandedPaths]);
 
     const handleExpand = ({ path }) => {
         if (expanded && !expanded.includes(path)) {
@@ -65,14 +73,6 @@ const OrgUnitTreePlain = (props: Props) => {
             setExpanded(updatedExpanded);
         }
     };
-
-    React.useEffect(() => {
-        if (previousSelectedOrgUnit?.path) {
-            const paths = previousSelectedOrgUnit.path.split('/').filter(p => p);
-            const expandedPaths = paths.map((_, index) => `/${paths.slice(0, index + 1).join('/')}`);
-            setExpanded(expandedPaths);
-        }
-    }, [previousSelectedOrgUnit]);
 
 
     if (!roots) {
