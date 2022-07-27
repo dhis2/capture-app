@@ -1035,17 +1035,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr ""
-
 msgid "Enrollment date"
 msgstr "Enrollment date"
 
 msgid "Incident date"
 msgstr "Incident date"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr ""
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

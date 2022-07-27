@@ -1085,17 +1085,17 @@ msgstr "Hapus tanda untuk ditindaklanjuti"
 msgid "Mark for follow-up"
 msgstr "Tandai untuk follow up"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "Widget pendaftaran tidak dapat dimuat. Silakan coba lagi nanti"
-
-msgid "Follow-up"
-msgstr "Mengikuti"
-
 msgid "Enrollment date"
 msgstr "Tanggal pendaftaran"
 
 msgid "Incident date"
 msgstr "Tanggal insiden"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr "Widget pendaftaran tidak dapat dimuat. Silakan coba lagi nanti"
+
+msgid "Follow-up"
+msgstr "Mengikuti"
 
 msgid "Started at {{orgUnitName}}"
 msgstr "Dimulai di {{orgUnitName}}"
