@@ -134,6 +134,9 @@ msgstr "报名"
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
 
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存 {{trackedEntityName}}。"
 

@@ -139,6 +139,9 @@ msgstr "Inscrição"
 msgid "A future date is not allowed"
 msgstr "Uma data futura não é permitida"
 
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 "Salvando um {{trackedEntityName}} em {{programName}} em {{orgUnitName}}."

@@ -144,6 +144,9 @@ msgstr "Pendaftaran"
 msgid "A future date is not allowed"
 msgstr "Tanggal yang akan datang tidak diperbolehkan"
 
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
