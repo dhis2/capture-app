@@ -122,5 +122,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, i18n.t('Error deleting the enrollment event')),
     [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error editing the event, the changes made were not saved')),
+    [enrollmentSiteActionTypes.ERROR_ENROLLMENT]: (state, action) =>
+        addErrorFeedback(state, i18n.t(action.payload.message)),
 }, 'feedbacks', []);
 
