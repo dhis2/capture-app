@@ -6,10 +6,13 @@ export const scopeSelectorActionTypes = {
     CATEGORY_OPTION_RESET: 'ScopeSelector.CategoryOptionReset',
     ALL_CATEGORY_OPTIONS_RESET: 'ScopeSelector.AllCategoryOptionsReset',
     ORG_UNIT_ID_SET: 'ScopeSelector.OrgUnitSet',
+    RESET_ORG_UNIT_ID_SET: 'ScopeSelector.ResetOrgUnit',
 };
 
 export const setOrgUnitFromScopeSelector = (orgUnitId: string) =>
     actionCreator(scopeSelectorActionTypes.ORG_UNIT_ID_SET)({ orgUnitId });
+export const resetOrgUnitFromScopeSelector = (previousOrgUnitId: string) =>
+    actionCreator(scopeSelectorActionTypes.RESET_ORG_UNIT_ID_SET)({ previousOrgUnitId });
 
 export const setCategoryOptionFromScopeSelector = (categoryId: string, categoryOption: Object) =>
     actionCreator(scopeSelectorActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });

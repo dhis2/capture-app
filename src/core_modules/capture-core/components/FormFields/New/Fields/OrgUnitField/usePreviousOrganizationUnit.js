@@ -1,11 +1,8 @@
 // @flow
 import { useEffect, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { useDataQuery } from '@dhis2/app-runtime';
 
-export const usePreviousOrganizationUnit = () => {
-    const previousOrgUnitId = useSelector(({ app }) => app.previousOrgUnit);
-
+export const usePreviousOrganizationUnit = (previousOrgUnitId?: string) => {
     const { data, refetch } = useDataQuery(
         useMemo(
             () => ({

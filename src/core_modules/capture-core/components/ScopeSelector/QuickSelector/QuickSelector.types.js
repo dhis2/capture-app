@@ -6,7 +6,7 @@ export type Props = {
     selectedProgramId: string,
     selectedCategories: Object,
     selectedOrgUnit: Object,
-    previousSelectedOrgUnit?: Object,
+    previousOrgUnitId?: string,
     classes: Object,
     onSetOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
     onSetProgramId: (programId: string) => void,

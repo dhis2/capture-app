@@ -5,6 +5,7 @@ import { useDataQuery } from '@dhis2/app-runtime';
 import { withStyles } from '@material-ui/core/styles';
 import { DebounceField } from 'capture-ui';
 import { OrgUnitTree } from './OrgUnitTree.component';
+import { usePreviousOrganizationUnit } from './usePreviousOrganizationUnit';
 
 const getStyles = () => ({
     container: {
@@ -45,7 +46,7 @@ type Props = {
         debounceFieldContainer: string,
         orgUnitTreeContainer: string,
     },
-    previousSelectedOrgUnit?: Object
+    previousOrgUnitId?: string,
 };
 
 const OrgUnitFieldPlain = (props: Props) => {
@@ -55,10 +56,11 @@ const OrgUnitFieldPlain = (props: Props) => {
         selected,
         maxTreeHeight,
         disabled,
-        previousSelectedOrgUnit,
+        previousOrgUnitId,
     } = props;
     const [searchText, setSearchText] = React.useState(undefined);
     const [key, setKey] = React.useState(undefined);
+    const previousSelectedOrgUnit = usePreviousOrganizationUnit(previousOrgUnitId);
 
     const { loading, data } = useDataQuery(
         React.useMemo(
