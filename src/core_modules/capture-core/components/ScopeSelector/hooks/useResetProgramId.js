@@ -18,10 +18,10 @@ export const useResetProgramId = () => {
             enrollmentId,
             stageId,
             eventId,
-            teiId = pageContext?.teiId,
+            teiId,
             ...restOfQueries
         } = getLocationQuery();
-        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, teiId, enrollmentId: 'AUTO' })}`);
+        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, teiId: teiId ?? pageContext?.teiId, enrollmentId: 'AUTO' })}`);
     };
 
     const resetProgramIdAndTeiId = (pageToPush: string = pathname) => {
