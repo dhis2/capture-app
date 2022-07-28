@@ -1036,16 +1036,16 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr ""
-
 msgid "Enrollment date"
 msgstr "নিবন্ধনের তারিখ"
 
 msgid "Incident date"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
 msgstr ""
 
 msgid "Started at {{orgUnitName}}"

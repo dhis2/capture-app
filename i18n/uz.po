@@ -1080,18 +1080,18 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Кузатув учун белгиланг"
 
+msgid "Enrollment date"
+msgstr "Қайд этилган сана"
+
+msgid "Incident date"
+msgstr "Ҳодиса санаси"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 "Қайд этиш виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
 
 msgid "Follow-up"
 msgstr "Кузатиш"
-
-msgid "Enrollment date"
-msgstr "Қайд этилган сана"
-
-msgid "Incident date"
-msgstr "Ҳодиса санаси"
 
 msgid "Started at {{orgUnitName}}"
 msgstr " {{orgUnitName}} да бошланган"
