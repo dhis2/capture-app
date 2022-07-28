@@ -1099,17 +1099,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Marquer pour suivi"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Suivi"
-
 msgid "Enrollment date"
 msgstr "Date d'enrôlement"
 
 msgid "Incident date"
 msgstr "Date de l´incident"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Suivi"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

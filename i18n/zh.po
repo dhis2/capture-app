@@ -1043,17 +1043,17 @@ msgstr "删除标记以进行后续操作"
 msgid "Mark for follow-up"
 msgstr "后续标记"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "无法加载报名的小部件。请稍后再试"
-
-msgid "Follow-up"
-msgstr "后续"
-
 msgid "Enrollment date"
 msgstr "报名日期"
 
 msgid "Incident date"
 msgstr "事件日期"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr "无法加载报名的小部件。请稍后再试"
+
+msgid "Follow-up"
+msgstr "后续"
 
 msgid "Started at {{orgUnitName}}"
 msgstr "始于{{orgUnitName}}"
