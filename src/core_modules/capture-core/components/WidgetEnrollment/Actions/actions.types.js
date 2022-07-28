@@ -7,6 +7,7 @@ export type Props = {|
     refetchTEI: QueryRefetchFunction,
     onDelete: () => void,
     onAddNew: () => void,
+    onError?: (message: string) => void,
     canAddNew: boolean,
     onlyEnrollOnce: boolean,
     tetName: string,

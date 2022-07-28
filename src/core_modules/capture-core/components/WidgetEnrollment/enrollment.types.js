@@ -7,6 +7,7 @@ export type Props = {|
     programId: string,
     onDelete: () => void,
     onAddNew: () => void,
+    onError?: (message: string) => void,
 |};
 
 export type PlainProps = {|
@@ -20,5 +21,6 @@ export type PlainProps = {|
     canAddNew: boolean,
     onDelete: () => void,
     onAddNew: () => void,
+    onError?: (message: string) => void,
     ...CssClasses,
 |};

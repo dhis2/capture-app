@@ -1035,17 +1035,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "نشانی برای پیگیری"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "تعقیب کردن"
-
 msgid "Enrollment date"
 msgstr "تاریخ شمولیت"
 
 msgid "Incident date"
 msgstr "تاریخ رویداد/ واقعه"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "تعقیب کردن"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
