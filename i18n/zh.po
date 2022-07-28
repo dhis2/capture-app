@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-23T14:43:54.028Z\n"
+"POT-Creation-Date: 2022-06-23T13:21:06.685Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -934,17 +934,17 @@ msgstr "删除标记以进行后续操作"
 msgid "Mark for follow-up"
 msgstr "后续标记"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "无法加载注册的小部件。请稍后再试"
-
-msgid "Follow-up"
-msgstr "后续"
-
 msgid "Enrollment date"
 msgstr "登记日期"
 
 msgid "Incident date"
 msgstr "事件日期"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr "无法加载注册的小部件。请稍后再试"
+
+msgid "Follow-up"
+msgstr "后续"
 
 msgid "Started at {{orgUnitName}}"
 msgstr "始于{{orgUnitName}}"
