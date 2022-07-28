@@ -4,13 +4,14 @@
 # Wanda <wanda@frontlineaids.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
+# Valeriu Plesca <vplesca@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,6 +139,9 @@ msgstr "Регистрация"
 
 msgid "A future date is not allowed"
 msgstr "Ввод даты будущего периода запрещена"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -860,6 +864,17 @@ msgstr ""
 msgid "Search by attributes"
 msgstr "Поиск по атрибутам"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "Назад"
 
@@ -880,6 +895,9 @@ msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 msgstr "Вы можете изменить параметры поиска и заново перезапустить поиск "
+
+msgid "Register a user"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Назад к Поиску"
@@ -903,6 +921,9 @@ msgid ""
 "searching by more attributes to narrow down the results."
 msgstr ""
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr ""
 
@@ -911,6 +932,15 @@ msgstr "Смотреть действующие регистрации"
 
 msgid "Re-enroll"
 msgstr "Перерегистрация"
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Создать новый"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1038,17 +1068,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Отметить для последующего наблюдения"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Дальнейшие действия"
-
 msgid "Enrollment date"
 msgstr "Дата зачисления"
 
 msgid "Incident date"
 msgstr "Дата происшествия"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Дальнейшие действия"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
@@ -1218,14 +1248,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Дата отчета"
-
 msgid "Registering unit"
 msgstr "Регистрирующая единица"
-
-msgid "Due date"
-msgstr "Дата выполнения"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

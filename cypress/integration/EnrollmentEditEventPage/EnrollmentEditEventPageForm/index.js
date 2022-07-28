@@ -2,9 +2,10 @@ import '../../sharedSteps';
 
 beforeEach(() => cy.loginThroughForm());
 
-Given(/^the user lands on the enrollment event page by having typed (.*)$/, url =>
-    cy.visit(url),
-);
+Given(/^you land on the enrollment event page by having typed (.*)$/, (url) => {
+    cy.visit(url);
+    cy.get('[data-test="scope-selector"]').contains('Selected person');
+});
 
 When(/^the user clicks on the edit button/, () =>
     cy
@@ -18,7 +19,7 @@ When(/^the user clicks on the save button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(3)
+        .eq(2)
         .click(),
 );
 
@@ -26,7 +27,7 @@ When(/^the user clicks on the cancel button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(3)
+        .eq(2)
         .click(),
 );
 

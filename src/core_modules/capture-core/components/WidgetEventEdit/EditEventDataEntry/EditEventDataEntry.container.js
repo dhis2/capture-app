@@ -36,38 +36,48 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
-    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
+const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
+    onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid, orgUnit }),
+            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid, orgUnit, programId }),
         ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
     },
-    onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
+    onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
 
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid, orgUnit }),
+            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid, orgUnit, programId }),
         ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
     },
-    onStartAsyncUpdateField: (orgUnit: OrgUnit) => (
+    onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => (
         innerAction: ReduxAction<any, any>,
         dataEntryId: string,
         itemId: string,
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) => {
             const uid = uuid();
-            return batchActions([
-                successInnerAction,
-                startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-                startRunRulesOnUpdateForEditSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid, orgUnit }),
-            ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH);
+            return batchActions(
+                [
+                    successInnerAction,
+                    startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+                    startRunRulesOnUpdateForEditSingleEvent({
+                        ...successInnerAction.payload,
+                        dataEntryId,
+                        itemId,
+                        uid,
+                        orgUnit,
+                        programId,
+                    }),
+                ],
+                batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH,
+            );
         };
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
@@ -85,8 +95,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
         ]));
     },
     onDelete: () => {
-        const { eventId, programId, orgUnitId, teiId, enrollmentId } = getLocationQuery();
-        dispatch(requestDeleteEventDataEntry({ eventId, programId, orgUnitId, teiId, enrollmentId }));
+        const { enrollmentId } = props;
+        const { eventId } = getLocationQuery();
+        dispatch(requestDeleteEventDataEntry({ eventId, enrollmentId }));
     },
 });
 

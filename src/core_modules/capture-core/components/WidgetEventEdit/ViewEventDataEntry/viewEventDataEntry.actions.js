@@ -122,7 +122,7 @@ export const loadViewEventDataEntry =
             ...dataEntryActions,
             updateRulesEffects(effects, formId),
             actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)({
-                loadedValues: { dataEntryValues, formValues, eventContainer },
+                loadedValues: { dataEntryValues, formValues, eventContainer, orgUnit },
                 // $FlowFixMe[prop-missing] automated comment
                 assignee: getAssignee(eventContainer.event.assignee),
             }),

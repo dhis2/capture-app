@@ -1,14 +1,14 @@
 # 
 # Translators:
-# 晓东 林 <13981924470@126.com>, 2022
 # easylin <lin_xd@126.com>, 2022
+# 晓东 林 <13981924470@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -131,6 +131,9 @@ msgstr "报名"
 
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存 {{trackedEntityName}}。"
@@ -838,6 +841,17 @@ msgstr "按{{name}}搜索"
 msgid "Search by attributes"
 msgstr "按属性搜索"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "后退"
 
@@ -859,6 +873,9 @@ msgid ""
 "looking for."
 msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr "返回搜寻"
 
@@ -878,6 +895,9 @@ msgid ""
 "searching by more attributes to narrow down the results."
 msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或按更多属性搜索以缩小搜索范围。"
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
 
@@ -886,6 +906,15 @@ msgstr "查看有效的报名"
 
 msgid "Re-enroll"
 msgstr "重新报名"
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr "新建"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1010,17 +1039,17 @@ msgstr "删除标记以进行后续操作"
 msgid "Mark for follow-up"
 msgstr "后续标记"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "无法加载报名的小部件。请稍后再试"
-
-msgid "Follow-up"
-msgstr "后续"
-
 msgid "Enrollment date"
 msgstr "报名日期"
 
 msgid "Incident date"
 msgstr "事件日期"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr "无法加载报名的小部件。请稍后再试"
+
+msgid "Follow-up"
+msgstr "后续"
 
 msgid "Started at {{orgUnitName}}"
 msgstr "始于{{orgUnitName}}"
@@ -1186,14 +1215,8 @@ msgstr "这个阶段只能有一个事件"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "无法检索事件。请稍后再试。"
 
-msgid "Report date"
-msgstr "报告日期"
-
 msgid "Registering unit"
 msgstr "注册机构"
-
-msgid "Due date"
-msgstr "到期日期"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} 个事件"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-04-19T06:43:07.990Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Persian (Afghanistan) (https://www.transifex.com/hisp-uio/teams/100509/fa_AF/)\n"
@@ -127,6 +127,9 @@ msgid "Enrollment"
 msgstr "ثبت نام"
 
 msgid "A future date is not allowed"
+msgstr ""
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
@@ -834,6 +837,17 @@ msgstr ""
 msgid "Search by attributes"
 msgstr ""
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "عقب"
 
@@ -855,6 +869,9 @@ msgid ""
 "looking for."
 msgstr ""
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr ""
 
@@ -874,6 +891,9 @@ msgid ""
 "searching by more attributes to narrow down the results."
 msgstr ""
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr ""
 
@@ -881,6 +901,15 @@ msgid "View active enrollment"
 msgstr ""
 
 msgid "Re-enroll"
+msgstr ""
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
 msgstr ""
 
 msgid ""
@@ -1006,17 +1035,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "نشانی برای پیگیری"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "تعقیب کردن"
-
 msgid "Enrollment date"
 msgstr "تاریخ شمولیت"
 
 msgid "Incident date"
 msgstr "تاریخ رویداد/ واقعه"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "تعقیب کردن"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
@@ -1182,14 +1211,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "تاریخ گزارش"
-
 msgid "Registering unit"
 msgstr "بخش ثبت نام"
-
-msgid "Due date"
-msgstr "موعد مقرر"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

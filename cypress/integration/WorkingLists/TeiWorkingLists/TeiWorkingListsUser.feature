@@ -117,8 +117,19 @@ Then you see the new sharing settings
 
 Scenario: The admin user can optin to use the new Enrollment Dashboard
 Given you open the main page with Ngelehun and child programme context
-And you see the opt in component
-When you opt in to use the new enrollment Dashboard
-Then you see the opt out component
-When you opt out to use the new enrollment Dashboard
-Then you see the opt in component
+And you see the opt in component for Child Programme
+When you opt in to use the new enrollment Dashboard for Child Programme
+Then you see the opt out component for Child Programme
+When you opt out to use the new enrollment Dashboard for Child Programme
+Then you see the opt in component for Child Programme
+
+Scenario: The user can delete a working list right imediatly after creating it.
+Given you open the main page with Ngelehun and child programme context
+And you set the enrollment status filter to completed
+And you apply the current filter
+And you set the enrollment date to a relative range
+And you apply the current filter
+When you save the list with the name My custom list
+Then the new custom TEI working list is created
+When you delete the name My custom list
+Then the custom TEI is deleted
