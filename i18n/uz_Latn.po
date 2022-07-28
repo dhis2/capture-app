@@ -1075,17 +1075,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Kuzatuv uchun belgilang"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Kuzatish"
-
 msgid "Enrollment date"
 msgstr "Qayd qilingan sana"
 
 msgid "Incident date"
 msgstr "Hodisa sanasi"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Kuzatish"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

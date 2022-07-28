@@ -1038,17 +1038,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Позначте для подальших дій"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Подальші дії"
-
 msgid "Enrollment date"
 msgstr "Дата реєстрації"
 
 msgid "Incident date"
 msgstr "Дата інциденту"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Подальші дії"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
