@@ -61,6 +61,7 @@ export const EnrollmentPageDefaultPlain = ({
     classes,
     onEventClick,
     onUpdateTeiAttributeValues,
+    onEnrollmentError,
 }: PlainProps) => (
     <>
         <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
@@ -114,6 +115,7 @@ export const EnrollmentPageDefaultPlain = ({
                     programId={program.id}
                     onDelete={onDelete}
                     onAddNew={onAddNew}
+                    onError={onEnrollmentError}
                 />}
             </div>
         </div>

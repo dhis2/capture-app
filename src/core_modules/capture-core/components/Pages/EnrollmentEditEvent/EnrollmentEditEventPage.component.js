@@ -70,6 +70,7 @@ const EnrollmentEditEventPagePain = ({
     eventDate,
     eventStatus,
     pageStatus,
+    onEnrollmentError,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -147,6 +148,7 @@ const EnrollmentEditEventPagePain = ({
                         programId={programId}
                         onDelete={onDelete}
                         onAddNew={onAddNew}
+                        onError={onEnrollmentError}
                     />
                 </div>
             </div>
