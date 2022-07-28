@@ -11,7 +11,7 @@ const getStyles = () => ({
         borderRadius: '3px',
         maxHeight: '70vh',
         overflowY: 'auto',
-        width: '100%',
+        width: '400px',
         boxShadow: '0px 0px 2px 0px #C4C4C4 inset',
         zIndex: 0,
         backgroundColor: 'white',

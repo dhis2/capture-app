@@ -23,7 +23,6 @@ const styles = ({ palette }) => ({
         margin: '0 0 0 -1px',
         borderRight: `1px solid ${colors.grey500}`,
         borderLeft: `1px solid ${colors.grey500}`,
-        width: '400px',
         maxWidth: '60vw',
     },
 });
