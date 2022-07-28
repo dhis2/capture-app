@@ -43,6 +43,12 @@ type Props = {
 }
 
 class SingleOrgUnitSelectFieldPlain extends React.Component<Props, State> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            previousOrgUnitId: null,
+        };
+    }
     renderSelectedOrgUnit = (selectedOrgUnit: OrgUnitValue) => {
         const { classes, disabled } = this.props;
         const buttonClass = classNames(classes.clearSelectedOrgUnitButton, {
@@ -70,7 +76,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, State> {
     }
 
     onDeselectOrgUnit = () => {
-        const { value: previousOrgUnitId } = this.props;
+        const { value: { id: previousOrgUnitId } } = this.props;
         this.props.onBlur(null);
         this.setState({ previousOrgUnitId });
     }
