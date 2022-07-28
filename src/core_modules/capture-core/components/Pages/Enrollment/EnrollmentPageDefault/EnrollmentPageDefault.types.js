@@ -23,7 +23,7 @@ export type Props = {|
     onCreateNew: (stageId: string) => void,
     onEventClick: (eventId: string) => void,
     onUpdateTeiAttributeValues: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
-    onLinkedRecordClick: (parameters: Url) => void
+    onLinkedRecordClick: (parameters: Url) => void,
     onEnrollmentError: (message: string) => void,
 |};
 
