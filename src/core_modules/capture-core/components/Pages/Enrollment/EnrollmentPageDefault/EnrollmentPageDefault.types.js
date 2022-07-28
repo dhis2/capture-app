@@ -24,6 +24,7 @@ export type Props = {|
     onEventClick: (eventId: string) => void,
     onUpdateTeiAttributeValues: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
     onLinkedRecordClick: (parameters: Url) => void
+    onEnrollmentError: (message: string) => void,
 |};
 
 export type PlainProps = {|

@@ -5,7 +5,11 @@ import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useCommonEnrollmentDomainData, updateEnrollmentAttributeValues } from '../../common/EnrollmentOverviewDomain';
+import {
+    useCommonEnrollmentDomainData,
+    updateEnrollmentAttributeValues,
+    showEnrollmentError,
+} from '../../common/EnrollmentOverviewDomain';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
@@ -88,6 +92,7 @@ export const EnrollmentPageDefault = () => {
 
     const relationshipTypes = useRelationshipTypesMetadata(relationships);
 
+    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     if (error) {
         return error.errorComponent;
     }
@@ -112,6 +117,7 @@ export const EnrollmentPageDefault = () => {
             onEventClick={onEventClick}
             onLinkedRecordClick={onLinkedRecordClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
+            onEnrollmentError={onEnrollmentError}
         />
     );
 };

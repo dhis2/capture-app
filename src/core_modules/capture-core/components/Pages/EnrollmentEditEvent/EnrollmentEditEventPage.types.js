@@ -26,6 +26,7 @@ export type PlainProps = {|
     onAddNew: () => void,
     onGoBack: () => void,
     onLinkedRecordClick: (parameters: Url) => void,
+    onEnrollmentError: (message: string) => void,
     pageStatus: string,
     eventStatus?: string,
     ...CssClasses,
