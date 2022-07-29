@@ -16,7 +16,7 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { deriveUrlQueries, getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
-import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../utils/routing';
+import { getLocationQuery, buildUrlQueryString } from '../../utils/routing';
 import { resetLocationChange } from './QuickSelector/actions/QuickSelector.actions';
 
 const derivePayloadFromAction = (batchPayload, actionType) => {
@@ -139,7 +139,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable)
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation();
+            const { programId, orgUnitId } = getLocationQuery();
 
             if (programId) {
                 const program = programCollection.get(programId);
@@ -175,7 +175,7 @@ export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStor
     action$.pipe(
         ofType(lockedSelectorActionTypes.TEI_SELECTION_RESET),
         switchMap(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation();
+            const { programId, orgUnitId } = getLocationQuery();
 
             history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return new Promise((resolve) => {
@@ -188,7 +188,7 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
     action$.pipe(
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET),
         map(({ payload: { enrollmentId } }) => {
-            const { programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
+            const { programId, orgUnitId, teiId } = getLocationQuery();
 
             history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
             return resetLocationChange();
@@ -199,7 +199,7 @@ export const resetEnrollmentSelectionEpic = (action$: InputObservable, _: ReduxS
     action$.pipe(
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
         map(() => {
-            const { orgUnitId, programId, teiId } = deriveURLParamsFromLocation();
+            const { orgUnitId, programId, teiId } = getLocationQuery();
             history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
             return resetLocationChange();
         }),
