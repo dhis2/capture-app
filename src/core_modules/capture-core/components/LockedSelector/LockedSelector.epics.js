@@ -15,7 +15,7 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
-import { deriveURLParamsFromLocation } from '../../utils/routing';
+import { getLocationQuery } from '../../utils/routing';
 
 const orgUnitsQuery = id => ({ resource: 'organisationUnits', id });
 
@@ -61,7 +61,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable)
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation();
+            const { programId, orgUnitId } = getLocationQuery();
 
             if (programId) {
                 const program = programCollection.get(programId);
