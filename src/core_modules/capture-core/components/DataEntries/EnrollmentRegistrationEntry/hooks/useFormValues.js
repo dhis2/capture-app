@@ -40,6 +40,7 @@ type InputForm = {
     orgUnit: ?OrgUnit,
     formFoundation: RenderFoundation,
     teiId: ?string,
+    searchTerms: ?Array<{[key: string]: string}>
 };
 
 type StaticPatternValues = {
@@ -100,19 +101,23 @@ const buildFormValues = async (
     setFormValues: (values: any) => void,
     setClientValues: (values: any) => void,
     formValuesReadyRef: { current: boolean },
+    searchTerms?: ?Array<{[key: string]: any}>,
 ) => {
     const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
     const formValues = clientAttributesWithSubvalues?.reduce(
         (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
         {},
     );
+    const searchClientValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: item.value }), {});
+    const searchFormValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }), {});
+
     const uniqueValues = await getUniqueValuesForAttributesWithoutValue(foundation, clientAttributesWithSubvalues, staticPatternValues);
-    setFormValues && setFormValues({ ...formValues, ...uniqueValues });
-    setClientValues && setClientValues({ ...clientValues, ...uniqueValues });
+    setFormValues && setFormValues({ ...formValues, ...uniqueValues, ...searchFormValues });
+    setClientValues && setClientValues({ ...clientValues, ...uniqueValues, ...searchClientValues });
     formValuesReadyRef.current = true;
 };
 
-export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId }: InputForm) => {
+export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms }: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const formValuesReadyRef = useRef<any>(false);
     const [formValues, setFormValues] = useState<any>({});
@@ -132,9 +137,9 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
             areAttributesWithSubvaluesReady
         ) {
             const staticPatternValues = { orgUnitCode: orgUnit.code };
-            buildFormValues(formFoundation, clientAttributesWithSubvalues, staticPatternValues, setFormValues, setClientValues, formValuesReadyRef);
+            buildFormValues(formFoundation, clientAttributesWithSubvalues, staticPatternValues, setFormValues, setClientValues, formValuesReadyRef, searchTerms);
         }
-    }, [formFoundation, clientAttributesWithSubvalues, formValuesReadyRef, orgUnit, areAttributesWithSubvaluesReady]);
+    }, [formFoundation, clientAttributesWithSubvalues, formValuesReadyRef, orgUnit, areAttributesWithSubvaluesReady, searchTerms]);
 
     return { formValues, clientValues, formValuesReadyRef };
 };

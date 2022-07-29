@@ -206,8 +206,16 @@ For all the auto generated events
  a) the organisation unit will be the same as the user is reporting for, during the enrollment and 
  
  b) all the events will be part of the current enrollment. 
- 
+
 Based on configuration, the status of the auto generated event can either be ACTIVE or SCHEDULE.
+
+### Enrollment with open data entry form
+
+A program can be configured to automatically take the user to register a new event immediately after enrolling a tracked entity instance. To enable this behavior, the program must have at least one program stage with the "Open data entry form after registration" option checked. If more than one program stage has this option enabled, the first stage will be used.
+
+To configure it, you must follow the steps described in the [Enrollment with auto generated events](#enrollment-with-auto-generated-events) section and then check the option "Open data entry form after enrollment".
+ 
+![](resources/images/open-data-entry-form-after-enrollment.png)
 
 #### Active type of event
 

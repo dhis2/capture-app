@@ -26,10 +26,11 @@ class OrgUnitTreePlain extends React.Component<Props> {
     getExpandedItems() {
         const { roots } = this.props;
         if (roots && roots.length === 1) {
-            return roots
-                .map(r => r.path);
+            return [`/${roots[0].id}`];
+        } else if (roots.length > 1) {
+            return roots.map(root => root.path);
         }
-        return undefined;
+        return [];
     }
 
     render() {

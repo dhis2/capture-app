@@ -263,9 +263,10 @@ const DataEntryWrapper = withBrowserBackWarning()(DeletableDataEntry);
 type Props = {
     formFoundation: ?RenderFoundation,
     orgUnit: OrgUnit,
-    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
-    onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: (orgUnit: OrgUnit) => void,
+    programId: string,
+    onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
+    onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
+    onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void,
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onDelete: () => void,
     onCancel: () => void,
@@ -309,6 +310,7 @@ class EditEventDataEntryPlain extends Component<Props> {
     render() {
         const {
             orgUnit,
+            programId,
             onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
@@ -320,9 +322,9 @@ class EditEventDataEntryPlain extends Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={'singleEvent'}
-                onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
-                onUpdateFormField={onUpdateField(orgUnit)}
-                onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
+                onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
+                onUpdateFormField={onUpdateField(orgUnit, programId)}
+                onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
                 onSave={onSave(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}

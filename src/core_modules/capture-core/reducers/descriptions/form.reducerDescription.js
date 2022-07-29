@@ -11,10 +11,6 @@ import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/
 import { rulesEffectsActionTypes } from '../../rules';
 import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
-import { getOrgUnitRootsKey } from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
-import {
-    set as setStoreRoots,
-} from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 
 const removeFormData = (state, { payload: { formId } }) => {
@@ -286,7 +282,7 @@ export const formsFieldsMiscDesc = createReducerDescription({
     },
     [orgUnitFormFieldActionTypes.RESET_FORM_FIELD_ORG_UNITS_FILTER]: (state, action) => {
         const { formId, elementId } = action.payload;
-        setStoreRoots(getOrgUnitRootsKey(formId, elementId), null);
+
         return {
             ...state,
             [formId]: {

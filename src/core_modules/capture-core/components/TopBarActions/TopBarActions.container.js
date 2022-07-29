@@ -55,13 +55,13 @@ export const TopBarActions = ({
         dispatch(resetAllCategoryOptionsFromScopeSelector());
         reset();
     };
-    const newRegistrationPage = () => dispatch(openNewRegistrationPageFromScopeSelector());
+    const newRegistrationPage = () => dispatch(openNewRegistrationPageFromScopeSelector(selectedProgramId));
     const newRegistrationPageWithoutProgramId = () => {
         const actions = [resetProgramIdBase(), openNewRegistrationPageFromScopeSelector()];
         dispatch(batchActions(actions));
         setOrgUnitId(selectedOrgUnitId, 'new', false);
     };
-    const searchPage = () => dispatch(openSearchPageFromScopeSelector());
+    const searchPage = () => dispatch(openSearchPageFromScopeSelector(selectedProgramId));
     const searchPageWithoutProgramId = () => {
         const actions = [resetProgramIdBase(), openSearchPageFromScopeSelector(), ...customActionsOnProgramIdReset];
         dispatch(batchActions(actions));
