@@ -137,6 +137,9 @@ msgstr "Đăng ký"
 msgid "A future date is not allowed"
 msgstr "Ngày tương lai không được phép"
 
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
@@ -1063,17 +1066,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Đánh dấu để theo-dõi"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Theo dõi sau"
-
 msgid "Enrollment date"
 msgstr "Ngày ghi vào"
 
 msgid "Incident date"
 msgstr "Ngày đến"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Theo dõi sau"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

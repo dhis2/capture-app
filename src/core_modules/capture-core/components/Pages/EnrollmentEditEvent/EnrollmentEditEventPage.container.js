@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
-import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
+import { useCommonEnrollmentDomainData, showEnrollmentError } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
@@ -75,6 +75,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
     };
+    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
@@ -123,6 +124,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            onEnrollmentError={onEnrollmentError}
             eventStatus={event?.status}
         />
     );

@@ -5,14 +5,14 @@ import { switchMap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { config } from 'd2';
 import { actionTypes as NavigateToEnrollmentOverviewActionTypes } from './navigateToEnrollmentOverview.actions';
-import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../utils/routing';
+import { buildUrlQueryString, getLocationQuery } from '../../utils/routing';
 import { scopeHierarchyTypes } from './navigateToEnrollmentOverview.constants';
 
 // TODO This will be removed when the link between capture and tracker capture is not relevant
 const redirectToTracker = ({ teiId, orgUnitId, dependencies }) => {
     const { baseUrl } = config;
     const { search, pathname } = dependencies.history.location;
-    const { programId: queryProgramId, trackedEntityTypeId: queryTrackedEntityTypeId } = deriveURLParamsFromLocation();
+    const { programId: queryProgramId, trackedEntityTypeId: queryTrackedEntityTypeId } = getLocationQuery();
 
     const instanceBaseUrl = baseUrl.split('/api')[0];
     const scopeHierarchy = queryProgramId ? scopeHierarchyTypes.PROGRAM : scopeHierarchyTypes.TRACKED_ENTITY_TYPE;

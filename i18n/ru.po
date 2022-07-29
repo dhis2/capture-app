@@ -140,6 +140,9 @@ msgstr "Регистрация"
 msgid "A future date is not allowed"
 msgstr "Ввод даты будущего периода запрещена"
 
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
@@ -1065,17 +1068,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Отметить для последующего наблюдения"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Дальнейшие действия"
-
 msgid "Enrollment date"
 msgstr "Дата зачисления"
 
 msgid "Incident date"
 msgstr "Дата происшествия"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Дальнейшие действия"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
