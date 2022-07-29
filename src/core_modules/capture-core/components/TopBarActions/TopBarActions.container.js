@@ -64,14 +64,18 @@ export const TopBarActions = ({
         setOrgUnitId(selectedOrgUnitId, 'new', false);
     };
 
-    const searchPage = () =>
-        selectedOrgUnitId &&
-        selectedProgramId &&
-        history.push(`search?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId, programId: selectedProgramId })}`);
+    const searchPage = () => {
+        const queryArgs = {};
+        if (selectedOrgUnitId) queryArgs.orgUnitId = selectedOrgUnitId;
+        if (selectedProgramId) queryArgs.programId = selectedProgramId;
 
-    const searchPageWithoutProgramId = () =>
-        selectedOrgUnitId &&
-        history.push(`search?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId })}`);
+        history.push(`search?${buildUrlQueryString(queryArgs)}`);
+    };
+
+    const searchPageWithoutProgramId = () => {
+        const queryArgs = selectedOrgUnitId ? { orgUnitId: selectedOrgUnitId } : {};
+        history.push(`search?${buildUrlQueryString(queryArgs)}`);
+    };
 
     const handleOpenStartAgainWarning = () => {
         isUserInteractionInProgress ? setContext(prev => ({ ...prev, openStartAgainWarning: true })) : startAgain();
