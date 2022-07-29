@@ -63,9 +63,14 @@ export const TopBarActions = ({
         dispatch(batchActions(actions));
         setOrgUnitId(selectedOrgUnitId, 'new', false);
     };
+
     const searchPage = () =>
+        selectedOrgUnitId &&
+        selectedProgramId &&
         history.push(`search?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId, programId: selectedProgramId })}`);
+
     const searchPageWithoutProgramId = () =>
+        selectedOrgUnitId &&
         history.push(`search?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId })}`);
 
     const handleOpenStartAgainWarning = () => {

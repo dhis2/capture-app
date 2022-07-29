@@ -78,10 +78,6 @@ import {
     networkMonitorStatusEpic,
 } from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
 import {
-    searchRegisteringUnitListEpic,
-    showRegisteringUnitListIndicatorEpic,
-} from 'capture-core/components/LockedSelector/QuickSelector';
-import {
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
 } from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
 import {
@@ -143,8 +139,7 @@ import {
 } from 'capture-core/components/DataEntries';
 import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
-import { loadCoreEpic } from 'capture-core/init';
-import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../components/AppStart';
+import { triggerLoadCoreEpic, loadAppEpic } from '../components/AppStart';
 
 import {
     validateSelectionsBasedOnUrlUpdateEpic,
@@ -225,11 +220,9 @@ export const epics = combineEpics(
     resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
     triggerLoadCoreEpic,
-    loadCoreEpic,
     fetchDataStoreEpic,
     fetchUserDataStoreEpic,
     loadAppEpic,
-    loadCoreFailedEpic,
     initEventListEpic,
     initTeiViewEpic,
     updateTeiListEpic,
@@ -264,8 +257,6 @@ export const epics = combineEpics(
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
-    searchRegisteringUnitListEpic,
-    showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
     TeiRelationshipNewOrEditSearchEpic,
