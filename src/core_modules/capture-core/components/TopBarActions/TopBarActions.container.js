@@ -58,14 +58,18 @@ export const TopBarActions = ({
         dispatch(resetAllCategoryOptionsFromScopeSelector());
         reset();
     };
-    const newRegistrationPage = () =>
-        selectedOrgUnitId &&
-        selectedProgramId &&
-        history.push(`new?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId, programId: selectedProgramId })}`);
+    const newRegistrationPage = () => {
+        const queryArgs = {};
+        if (selectedOrgUnitId) queryArgs.orgUnitId = selectedOrgUnitId;
+        if (selectedProgramId) queryArgs.programId = selectedProgramId;
 
-    const newRegistrationPageWithoutProgramId = () =>
-        selectedOrgUnitId &&
-        history.push(`new?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId })}`);
+        history.push(`new?${buildUrlQueryString(queryArgs)}`);
+    };
+
+    const newRegistrationPageWithoutProgramId = () => {
+        const queryArgs = selectedOrgUnitId ? { orgUnitId: selectedOrgUnitId } : {};
+        history.push(`new?${buildUrlQueryString(queryArgs)}`);
+    };
 
     const searchPage = () => dispatch(openSearchPageFromScopeSelector(selectedProgramId));
     const searchPageWithoutProgramId = () => {
