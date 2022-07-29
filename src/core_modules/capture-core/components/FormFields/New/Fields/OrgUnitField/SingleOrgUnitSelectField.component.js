@@ -76,8 +76,8 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, State> {
     }
 
     onDeselectOrgUnit = () => {
-        this.props.onBlur(null);
         this.props.value && this.setState({ previousOrgUnitId: this.props.value.id });
+        this.props.onBlur(null);
     }
 
     renderOrgUnitField = () => {
