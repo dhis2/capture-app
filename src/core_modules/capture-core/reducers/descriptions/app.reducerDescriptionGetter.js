@@ -20,6 +20,7 @@ import { topBarActionsActionTypes } from '../../components/TopBarActions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 import { scopeSelectorActionTypes } from '../../components/ScopeSelector';
+import { actionTypes as initActionTypes } from '../../init/init.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -152,5 +153,9 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [scopeSelectorActionTypes.RESET_ORG_UNIT_ID]: (state, action) => ({
         ...state,
         previousOrgUnitId: action.payload.previousOrgUnitId,
+    }),
+    [initActionTypes.SET_CURRENT_ORG_UNIT_ROOT]: (state, action) => ({
+        ...state,
+        roots: action.payload.roots,
     }),
 }, 'app');
