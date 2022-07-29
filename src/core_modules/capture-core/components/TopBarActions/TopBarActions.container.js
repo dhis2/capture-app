@@ -59,10 +59,14 @@ export const TopBarActions = ({
         reset();
     };
     const newRegistrationPage = () =>
+        selectedOrgUnitId &&
+        selectedProgramId &&
         history.push(`new?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId, programId: selectedProgramId })}`);
-    const newRegistrationPageWithoutProgramId = () => {
+
+    const newRegistrationPageWithoutProgramId = () =>
+        selectedOrgUnitId &&
         history.push(`new?${buildUrlQueryString({ orgUnitId: selectedOrgUnitId })}`);
-    };
+
     const searchPage = () => dispatch(openSearchPageFromScopeSelector(selectedProgramId));
     const searchPageWithoutProgramId = () => {
         const actions = [resetProgramIdBase(), openSearchPageFromScopeSelector(), ...customActionsOnProgramIdReset];
