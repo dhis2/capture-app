@@ -30,7 +30,7 @@ const OrgUnitTreePlain = (props: Props) => {
     const getExpandedItems = () => {
         if (roots && roots.length === 1) {
             return [`/${roots[0].id}`];
-        } else if (roots.length > 1) {
+        } else if (roots?.length > 1) {
             return roots.map(root => root.path);
         }
 
