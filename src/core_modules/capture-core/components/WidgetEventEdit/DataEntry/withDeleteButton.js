@@ -8,6 +8,7 @@ type Props = {
     onDelete: () => void,
     formHorizontal?: ?boolean,
     formFoundation: RenderFoundation,
+    hasDeleteButton?: ?boolean,
 };
 
 type State = {
@@ -70,9 +71,10 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
         )
 
         render() {
-            const { onDelete, ...passOnProps } = this.props;
+            const { onDelete, hasDeleteButton, ...passOnProps } = this.props;
             const hasWriteAccess = this.props.formFoundation.access.data.write;
-            return (
+
+            return hasDeleteButton ? (
                 // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
@@ -80,7 +82,11 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                     deleteButton={this.renderDeleteButton(hasWriteAccess)}
                     {...passOnProps}
                 />
-            );
+            ) :// $FlowFixMe[cannot-spread-inexact] automated comment
+                <InnerComponent
+                    innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    {...passOnProps}
+                />;
         }
     };
 
