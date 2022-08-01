@@ -1,3 +1,10 @@
+## [100.11.5](https://github.com/dhis2/capture-app/compare/v100.11.4...v100.11.5) (2022-08-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13063] use form names in tei working list ([#2939](https://github.com/dhis2/capture-app/issues/2939)) ([1894b28](https://github.com/dhis2/capture-app/commit/1894b284655035aca99c4ea3db6660a427d36c51))
+
 ## [100.11.4](https://github.com/dhis2/capture-app/compare/v100.11.3...v100.11.4) (2022-07-28)
 
 
