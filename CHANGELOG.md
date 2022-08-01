@@ -1,3 +1,10 @@
+## [100.11.6](https://github.com/dhis2/capture-app/compare/v100.11.5...v100.11.6) (2022-08-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13486] encapsulate strings in double quotes ([a3436ca](https://github.com/dhis2/capture-app/commit/a3436cad38fdc026074e813ebc3219bcbafd9fcc))
+
 ## [100.11.5](https://github.com/dhis2/capture-app/compare/v100.11.4...v100.11.5) (2022-08-01)
 
 
