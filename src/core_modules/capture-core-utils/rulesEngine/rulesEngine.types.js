@@ -54,14 +54,16 @@ export type ProgramRuleEffect = {
     programStageSectionId: ?string,
     optionGroupId: ?string,
     optionId: ?string,
-    content: string,
-    data: ?string,
+    content: ?string,
+    displayContent: ?string,
+    data: any,
     style?: ?Object,
 };
 
 export type ProgramRuleAction = {
     id: string,
     content: string,
+    displayContent: string,
     data: ?string,
     location: ?string,
     programRuleActionType: string,
@@ -143,7 +145,7 @@ export interface IDateUtils {
     monthsBetween(firstRulesDate: string, secondRulesDate: string): number;
     yearsBetween(firstRulesDate: string, secondRulesDate: string): number;
     +compareDates: CompareDates;
-    addDays(rulesDate: string, daysToAdd: string): string;
+    addDays(rulesDate: string, daysToAdd: number): string;
 }
 
 export interface IConvertInputRulesValue {
@@ -206,7 +208,7 @@ export type D2FunctionConfig = {
     parameters?: number,
     execute: Function,
 }
-export type D2Functions = $ReadOnly<{|
+export type D2Functions = {|
     ceil: D2FunctionConfig,
     floor: D2FunctionConfig,
     round: D2FunctionConfig,
@@ -230,12 +232,12 @@ export type D2Functions = $ReadOnly<{|
     split: D2FunctionConfig,
     length: D2FunctionConfig,
     zScoreWFA: D2FunctionConfig,
+    zScoreHFA: D2FunctionConfig,
+    zScoreWFH: D2FunctionConfig,
     lastEventDate: D2FunctionConfig,
     addControlDigits: D2FunctionConfig,
     checkControlDigits: D2FunctionConfig,
-    zScoreHFA: D2FunctionConfig,
-    zScoreWFH: D2FunctionConfig,
-|}>;
+|};
 
 export type Flag = {
     debug: boolean

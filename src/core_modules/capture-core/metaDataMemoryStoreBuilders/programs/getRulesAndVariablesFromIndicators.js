@@ -6,6 +6,7 @@ import type { ProgramRule, ProgramRuleAction, ProgramRuleVariable } from 'captur
 export type CachedProgramIndicator = {
     id: string,
     code: string,
+    name: string,
     displayName: string,
     description?: ?string,
     expression: string,
@@ -143,7 +144,8 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
     // $FlowFixMe[prop-missing] automated comment
     const newAction: ProgramRuleAction = {
         id: programIndicator.id,
-        content: programIndicator.shortName || programIndicator.displayName,
+        content: programIndicator.name,
+        displayContent: programIndicator.displayName,
         data: programIndicator.expression,
         programRuleActionType: 'DISPLAYKEYVALUEPAIR',
         location: 'indicators',
@@ -155,6 +157,7 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
         id: programIndicator.id,
         condition: programIndicator.filter ? programIndicator.filter : 'true',
         description: programIndicator.description,
+        name: programIndicator.name,
         displayName: programIndicator.displayName,
         programId: programIndicator.programId,
         programRuleActions: [newAction],
