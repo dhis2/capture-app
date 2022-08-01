@@ -26,9 +26,21 @@ const styles = ({ typography }) => ({
     },
 });
 
-const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string) => (<span>
-    {i18n.t('Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}.', { trackedEntityName, programName, orgUnitName, interpolation: { escapeValue: false } })}
-</span>);
+const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string, teiId?: ?string) => (
+    teiId ? <span>
+        {i18n.t('Saving a new enrollment in {{programName}} in {{orgUnitName}}.', {
+            programName,
+            orgUnitName,
+            interpolation: { escapeValue: false },
+        })}
+    </span> : <span>
+        {i18n.t('Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}.', {
+            trackedEntityName,
+            programName,
+            orgUnitName,
+            interpolation: { escapeValue: false },
+        })}
+    </span>);
 
 
 const EnrollmentRegistrationEntryPlain =
@@ -42,6 +54,7 @@ const EnrollmentRegistrationEntryPlain =
       onPostProcessErrorMessage,
       orgUnitId,
       orgUnit,
+      teiId,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
@@ -100,7 +113,7 @@ const EnrollmentRegistrationEntryPlain =
                       </div>
 
                       <InfoIconText>
-                          {translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name)}
+                          {translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name, teiId)}
                       </InfoIconText>
                   </>
               }

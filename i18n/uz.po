@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -134,6 +134,9 @@ msgstr "Рўйхатга олиш"
 
 msgid "A future date is not allowed"
 msgstr "Келажакдаги сана танловига рухсат берилмайди"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -901,6 +904,9 @@ msgstr ""
 "Қидирув сўзларини ўзгартириб, қидирилаётган ахборотни қайта қидирувга "
 "топширишингиз мумкин."
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr "Қидирувга қайтиш"
 
@@ -1074,18 +1080,18 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Кузатув учун белгиланг"
 
+msgid "Enrollment date"
+msgstr "Қайд этилган сана"
+
+msgid "Incident date"
+msgstr "Ҳодиса санаси"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 "Қайд этиш виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
 
 msgid "Follow-up"
 msgstr "Кузатиш"
-
-msgid "Enrollment date"
-msgstr "Қайд этилган сана"
-
-msgid "Incident date"
-msgstr "Ҳодиса санаси"
 
 msgid "Started at {{orgUnitName}}"
 msgstr " {{orgUnitName}} да бошланган"
@@ -1250,14 +1256,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Ҳисобот санаси"
-
 msgid "Registering unit"
 msgstr "Рўйхатга олиш муассасаси"
-
-msgid "Due date"
-msgstr "Муддати"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

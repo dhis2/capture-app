@@ -19,7 +19,7 @@ import {
 } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type { RulesExecutionDependenciesClientFormatted } from '../../common.types';
-import { deriveURLParamsFromLocation } from '../../../../utils/routing';
+import { getLocationQuery } from '../../../../utils/routing';
 
 const runRulesForNewEvent = (
     store: ReduxStore,
@@ -33,7 +33,7 @@ const runRulesForNewEvent = (
 ) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
-    const { programId, stageId } = deriveURLParamsFromLocation();
+    const { programId, stageId } = getLocationQuery();
 
     const program = getTrackerProgramThrowIfNotFound(programId);
     const stage = program.getStage(stageId);

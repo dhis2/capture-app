@@ -28,6 +28,7 @@ export type ListViewLoaderOutputProps = {|
     filters: FiltersData,
     columns: ColumnConfigs,
     programId: string,
+    programStageId: string,
     orgUnitId: string,
     categories?: Categories,
     onUpdateList: UpdateList,
