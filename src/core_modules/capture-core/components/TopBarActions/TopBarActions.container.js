@@ -60,8 +60,12 @@ export const TopBarActions = ({
     };
     const newRegistrationPage = () => {
         const queryArgs = {};
-        if (selectedOrgUnitId) queryArgs.orgUnitId = selectedOrgUnitId;
-        if (selectedProgramId) queryArgs.programId = selectedProgramId;
+        if (selectedOrgUnitId) {
+            queryArgs.orgUnitId = selectedOrgUnitId;
+        }
+        if (selectedProgramId) {
+            queryArgs.programId = selectedProgramId;
+        }
 
         history.push(`new?${buildUrlQueryString(queryArgs)}`);
     };
