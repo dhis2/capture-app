@@ -42,13 +42,14 @@ export type ProgramRuleEffect = {
     programStageSectionId: ?string,
     optionGroupId: ?string,
     optionId: ?string,
-    content: string,
-    data: ?string,
+    content: ?string,
+    data: any,
 };
 
 export type ProgramRuleAction = {
     id: string,
     content: string,
+    displayContent: string,
     data: ?string,
     location: ?string,
     programRuleActionType: string,
@@ -185,22 +186,13 @@ export type OrgUnit = {
     name: string,
 };
 
-export type DateUtils = {
-    getToday: () => string,
-    daysBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    weeksBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    monthsBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    yearsBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    addDays: (rulesDate: string, daysToAdd: string) => string,
-};
-
-export type Translator = (value: string) => string;
-
 export type Moment = Object;
 export interface IMomentConverter {
     rulesDateToMoment(rulesEngineValue: string): Moment;
     momentToRulesDate(momentValue: Moment): string;
 }
+
+export type Translator = (value: string) => string;
 
 export interface IConvertInputRulesValue {
     convertText(value: any): string;
