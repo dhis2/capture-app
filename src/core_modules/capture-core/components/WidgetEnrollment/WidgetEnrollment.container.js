@@ -1,5 +1,7 @@
 // @flow
 import React from 'react';
+import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
 import { WidgetEnrollment as WidgetEnrollmentComponent } from './WidgetEnrollment.component';
 import { useOrganizationUnit } from './hooks/useOrganizationUnit';
 import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
@@ -8,16 +10,22 @@ import { useProgram } from './hooks/useProgram';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
 
-export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onAddNew }: Props) => {
-    const {
-        error: errorEnrollment,
-        enrollment,
-        refetch: refetchEnrollment,
-    } = useEnrollment(enrollmentId);
+export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onAddNew, onError }: Props) => {
+    const { error: errorEnrollment, enrollment, refetch: refetchEnrollment } = useEnrollment(enrollmentId);
     const { error: errorProgram, program } = useProgram(programId);
-    const { error: errorOwnerOrgUnit, ownerOrgUnit, enrollments, refetch: refetchTEI } = useTrackedEntityInstances(teiId, programId);
+    const {
+        error: errorOwnerOrgUnit,
+        ownerOrgUnit,
+        enrollments,
+        refetch: refetchTEI,
+    } = useTrackedEntityInstances(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
     const canAddNew = enrollments.every(item => item.status !== plainStatus.ACTIVE);
+    const error = errorEnrollment || errorProgram || errorOwnerOrgUnit || errorOrgUnit;
+
+    if (error) {
+        log.error(errorCreator('Enrollment widget could not be loaded')({ error }));
+    }
 
     return (
         <WidgetEnrollmentComponent
@@ -30,12 +38,8 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
             loading={!(enrollment && program && displayName)}
             onDelete={onDelete}
             onAddNew={onAddNew}
-            error={
-                errorEnrollment ||
-                errorProgram ||
-                errorOwnerOrgUnit ||
-                errorOrgUnit
-            }
+            error={error}
+            onError={onError}
         />
     );
 };

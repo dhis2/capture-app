@@ -139,6 +139,9 @@ msgstr "Inscrição"
 msgid "A future date is not allowed"
 msgstr "Uma data futura não é permitida"
 
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 "Salvando um {{trackedEntityName}} em {{programName}} em {{orgUnitName}}."
@@ -1082,6 +1085,12 @@ msgstr "Remova a marca para acompanhamento"
 msgid "Mark for follow-up"
 msgstr "Marcar para acompanhamento"
 
+msgid "Enrollment date"
+msgstr "Data de inscrição"
+
+msgid "Incident date"
+msgstr "Data do incidente"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 "O widget de inscrição não pôde ser carregado. Por favor, tente novamente "
@@ -1089,12 +1098,6 @@ msgstr ""
 
 msgid "Follow-up"
 msgstr "Acompanhamento"
-
-msgid "Enrollment date"
-msgstr "Data de inscrição"
-
-msgid "Incident date"
-msgstr "Data do incidente"
 
 msgid "Started at {{orgUnitName}}"
 msgstr "Iniciado em {{orgUnitName}}"

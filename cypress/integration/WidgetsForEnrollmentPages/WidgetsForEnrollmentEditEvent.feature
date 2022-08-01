@@ -2,31 +2,31 @@ Feature: The user interacts with the widgets on the enrollment edit event
 
   # Scenarios linked to the enrollment edit event
   Scenario: The profile widget can be closed on the enrollment edit event
-    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     And you see the widget with data-test profile-widget
     When you click the widget toggle open close button with data-test profile-widget
     Then the widget profile should be closed
 
   Scenario: The profile widget can be closed and reopened on the enrollment edit event
-    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     And you see the widget with data-test profile-widget
     When you click the widget toggle open close button with data-test profile-widget
     And you click the widget toggle open close button with data-test profile-widget
     Then the profile details should be displayed
 
   Scenario: User can close the Enrollment Widget
-    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     When you click the enrollment widget toggle open close button
     Then the enrollment widget should be closed
 
   Scenario: User can close and reopen the Enrollment Widget
-    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     When you click the enrollment widget toggle open close button
     And you click the enrollment widget toggle open close button
     Then the enrollment widget should be opened
 
   Scenario: User can see the enrollment details
-    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be opened
     And the user sees the enrollment status is Active
     And the user sees the enrollment date
@@ -83,20 +83,20 @@ Feature: The user interacts with the widgets on the enrollment edit event
   #   Then the user can see the enrollment is not marked for follow up
 
   Scenario: User can open the delete modal
-    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be opened
     When the user opens the enrollment actions menu
     And the user clicks on the delete action
     Then the user sees the delete enrollment modal
 
   Scenario: User can add note on edit event page view mode
-    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be loaded
     When you fill in the comment: new test comment
     Then list should contain the new comment: new test comment
 
   Scenario: User can see note on edit event page edit mode
-    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be loaded
     When you click edit mode
     Then list should contain the new comment: new test comment

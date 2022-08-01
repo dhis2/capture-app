@@ -131,6 +131,9 @@ msgstr ""
 msgid "A future date is not allowed"
 msgstr ""
 
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
@@ -715,7 +718,7 @@ msgid "Report"
 msgstr ""
 
 msgid "Schedule"
-msgstr ""
+msgstr "Schema"
 
 msgid "Refer"
 msgstr ""
@@ -1034,16 +1037,16 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr ""
-
 msgid "Enrollment date"
 msgstr ""
 
 msgid "Incident date"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
 msgstr ""
 
 msgid "Started at {{orgUnitName}}"

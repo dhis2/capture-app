@@ -5,7 +5,11 @@ import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useCommonEnrollmentDomainData, updateEnrollmentAttributeValues } from '../../common/EnrollmentOverviewDomain';
+import {
+    useCommonEnrollmentDomainData,
+    updateEnrollmentAttributeValues,
+    showEnrollmentError,
+} from '../../common/EnrollmentOverviewDomain';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
@@ -67,8 +71,8 @@ export const EnrollmentPageDefault = () => {
         );
     };
 
-    const onEventClick = (eventId: string, stageId: string) => {
-        history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId, eventId, stageId })}`);
+    const onEventClick = (eventId: string) => {
+        history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
     };
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
         dispatch(updateEnrollmentAttributeValues(updatedAttributeValues));
@@ -79,6 +83,7 @@ export const EnrollmentPageDefault = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
 
+    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     if (error) {
         return error.errorComponent;
     }
@@ -100,6 +105,7 @@ export const EnrollmentPageDefault = () => {
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
+            onEnrollmentError={onEnrollmentError}
         />
     );
 };
