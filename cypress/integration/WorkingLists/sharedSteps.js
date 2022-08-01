@@ -1,3 +1,10 @@
+Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
+    cy.server();
+    cy.route('GET', '**/tracker/trackedEntities**').as('getDefaultTeis');
+
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+});
+
 Then('for an event program the page navigation should show that you are on the first page', () => {
     cy.get('[data-test="event-working-lists"]')
         .contains('Page 1')
@@ -107,11 +114,6 @@ When('you set the assginee filter to none', () => {
 
 When('you set the first name filter to John', () => {
     cy.get('[data-test="tei-working-lists"]')
-        .contains('More filters')
-        .click();
-
-    cy.get('[data-test="tei-working-lists"]')
-        .find('li')
         .contains('First name')
         .click();
 
