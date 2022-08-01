@@ -66,6 +66,7 @@ const styles = (theme: Theme) => ({
         flexGrow: 1,
         display: 'flex',
         justifyContent: 'flex-end',
+        paddingLeft: 6,
     },
 });
 
