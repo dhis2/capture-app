@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -144,6 +144,9 @@ msgstr "Inscripción"
 
 msgid "A future date is not allowed"
 msgstr "No se permite una fecha futura"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -910,6 +913,9 @@ msgstr ""
 "Puede cambiar los términos de búsqueda y volver a buscar para encontrar lo "
 "que busca."
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr "Volver a buscar"
 
@@ -1085,6 +1091,12 @@ msgstr "Elimina la marca para el seguimiento"
 msgid "Mark for follow-up"
 msgstr "Marcar para seguimiento"
 
+msgid "Enrollment date"
+msgstr "Fecha de inscripción"
+
+msgid "Incident date"
+msgstr "Fecha del incidente"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 "No se pudo cargar el widget de inscripción. Por favor, inténtelo de nuevo "
@@ -1092,12 +1104,6 @@ msgstr ""
 
 msgid "Follow-up"
 msgstr "Seguimiento"
-
-msgid "Enrollment date"
-msgstr "Fecha de inscripción"
-
-msgid "Incident date"
-msgstr "Fecha del incidente"
 
 msgid "Started at {{orgUnitName}}"
 msgstr "Comenzó en {{orgUnitName}}"
@@ -1267,14 +1273,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Fecha de reporte"
-
 msgid "Registering unit"
 msgstr "Unidad de registro"
-
-msgid "Due date"
-msgstr "Fecha de vencimiento"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

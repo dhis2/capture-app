@@ -49,7 +49,6 @@ import {
 import {
     organisationUnitDesc,
     organisationUnitRootsDesc,
-    registeringUnitListDesc,
 } from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
 import { networkStatusDesc } from 'capture-core/reducers/descriptions/networkStatus.reducerDescription';
 import {
@@ -114,7 +113,6 @@ export const reducerDescriptions = [
     organisationUnitDesc,
     organisationUnitRootsDesc,
     possibleDuplicatesDesc,
-    registeringUnitListDesc,
     recentlyAddedEventsDesc,
     recentlyAddedEventsValuesDesc,
     relationshipsDesc,

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -131,6 +131,9 @@ msgstr "报名"
 
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存 {{trackedEntityName}}。"
@@ -870,6 +873,9 @@ msgid ""
 "looking for."
 msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr "返回搜寻"
 
@@ -1033,17 +1039,17 @@ msgstr "删除标记以进行后续操作"
 msgid "Mark for follow-up"
 msgstr "后续标记"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "无法加载报名的小部件。请稍后再试"
-
-msgid "Follow-up"
-msgstr "后续"
-
 msgid "Enrollment date"
 msgstr "报名日期"
 
 msgid "Incident date"
 msgstr "事件日期"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr "无法加载报名的小部件。请稍后再试"
+
+msgid "Follow-up"
+msgstr "后续"
 
 msgid "Started at {{orgUnitName}}"
 msgstr "始于{{orgUnitName}}"
@@ -1209,14 +1215,8 @@ msgstr "这个阶段只能有一个事件"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "无法检索事件。请稍后再试。"
 
-msgid "Report date"
-msgstr "报告日期"
-
 msgid "Registering unit"
 msgstr "注册机构"
-
-msgid "Due date"
-msgstr "到期日期"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} 个事件"
