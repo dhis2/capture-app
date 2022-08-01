@@ -24,7 +24,7 @@ And the list should display the teis retrieved from the api
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show only teis with active enrollments and unassinged events using the filter
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and Malaria focus investigation context
 When you set the enrollment status filter to active
 And you apply the enrollment status filter
 And you set the assginee filter to none
