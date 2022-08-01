@@ -1,3 +1,11 @@
+## [100.11.7](https://github.com/dhis2/capture-app/compare/v100.11.6...v100.11.7) (2022-08-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12777] hide programs without trackedentitytype access ([#2934](https://github.com/dhis2/capture-app/issues/2934)) ([046391b](https://github.com/dhis2/capture-app/commit/046391b4889b3b19794cc512e9fdc69f4cfd254c))
+* [DHIS2-13060] tei working list default filters ([#2912](https://github.com/dhis2/capture-app/issues/2912)) ([ca64f18](https://github.com/dhis2/capture-app/commit/ca64f18b9ae9705debe9457151e0b56861cea27e))
+
 ## [100.11.6](https://github.com/dhis2/capture-app/compare/v100.11.5...v100.11.6) (2022-08-01)
 
 
