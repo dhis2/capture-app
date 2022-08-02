@@ -1,3 +1,10 @@
+## [100.11.8](https://github.com/dhis2/capture-app/compare/v100.11.7...v100.11.8) (2022-08-02)
+
+
+### Bug Fixes
+
+* [DHIS2-13228] hide edit button in case no tea ([#2930](https://github.com/dhis2/capture-app/issues/2930)) ([fb072e0](https://github.com/dhis2/capture-app/commit/fb072e025a0603dc705c41ea07e4fbdb28f98e21))
+
 ## [100.11.7](https://github.com/dhis2/capture-app/compare/v100.11.6...v100.11.7) (2022-08-01)
 
 

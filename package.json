@@ -1,7 +1,7 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "100.11.7",
+  "version": "100.11.8",
   "cacheVersion": "3",
   "serverVersion": "38",
   "private": true,
