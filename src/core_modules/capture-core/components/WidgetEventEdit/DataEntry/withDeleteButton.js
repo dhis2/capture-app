@@ -73,20 +73,15 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
         render() {
             const { onDelete, hasDeleteButton, ...passOnProps } = this.props;
             const hasWriteAccess = this.props.formFoundation.access.data.write;
-
-            return hasDeleteButton ? (
+            return (
                 // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
                     // $FlowFixMe[extra-arg] automated comment
-                    deleteButton={this.renderDeleteButton(hasWriteAccess)}
+                    deleteButton={hasDeleteButton ? this.renderDeleteButton(hasWriteAccess) : null}
                     {...passOnProps}
                 />
-            ) :// $FlowFixMe[cannot-spread-inexact] automated comment
-                <InnerComponent
-                    innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
-                    {...passOnProps}
-                />;
+            );
         }
     };
 
