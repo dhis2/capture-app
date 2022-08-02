@@ -1,11 +1,10 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import { init as initAsync, config } from 'd2';
+import { config } from 'd2';
 import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
-import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 
@@ -144,13 +143,9 @@ async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function) {
     await buildMetaDataAsync(dbLocale);
 }
 
-async function initializeSystemSettingsAsync(uiLocale: string) {
-    const systemSettingsCacheData = await cacheSystemSettings(uiLocale);
+async function initializeSystemSettingsAsync(uiLocale: string, systemSettings: Object) {
+    const systemSettingsCacheData = await cacheSystemSettings(uiLocale, systemSettings);
     await buildSystemSettingsAsync(systemSettingsCacheData);
-}
-
-function setHeaderBarStrings(d2) {
-    d2.i18n.addStrings(['app_search_placeholder=search']);
 }
 
 export async function initializeAsync(
@@ -162,7 +157,6 @@ export async function initializeAsync(
 
     // initialize d2
     setConfig(apiPath);
-    const d2 = await initAsync({ schemas: ['organisationUnit'] });
     const userSettings = await onQueryApi({
         resource: 'userSettings',
     });
@@ -172,10 +166,9 @@ export async function initializeAsync(
             fields: 'id',
         },
     });
-    const sym = Object.getOwnPropertySymbols(d2.currentUser).find(s => String(s) === 'Symbol(userRoles)');
-    d2.currentUser.userRoles = d2.currentUser[sym];
-    setD2(d2);
-    setHeaderBarStrings(d2);
+    const systemSettings = await onQueryApi({
+        resource: 'systemSettings',
+    });
     // initialize storage controllers
     try {
         await initControllersAsync(onCacheExpired, currentUser);
@@ -191,7 +184,7 @@ export async function initializeAsync(
     await setLocaleDataAsync(uiLocale);
 
     // initialize system settings
-    await initializeSystemSettingsAsync(uiLocale);
+    await initializeSystemSettingsAsync(uiLocale, systemSettings);
 
     // initialize metadata
     await initializeMetaDataAsync(dbLocale, onQueryApi);
