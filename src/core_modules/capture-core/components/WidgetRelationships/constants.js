@@ -16,7 +16,9 @@ export const getBaseConfigHeaders = {
     }, {
         id: 'createdDate',
         displayName: i18n.t('Created date'),
-        convertValue: props => convertClientToList(convertServerToClient(props.created, dataElementTypes.DATE)),
+        convertValue: props => convertClientToList(
+            convertServerToClient(props.created, dataElementTypes.DATE), dataElementTypes.DATE,
+        ),
     }],
     [relationshipEntities.PROGRAM_STAGE_INSTANCE]: [{
         id: 'programStageName',
@@ -26,11 +28,15 @@ export const getBaseConfigHeaders = {
     {
         id: 'createdDate',
         displayName: i18n.t('Created date'),
-        convertValue: props => convertClientToList(convertServerToClient(props.created, dataElementTypes.DATE)),
+        convertValue: props => convertClientToList(
+            convertServerToClient(props.created, dataElementTypes.DATE), dataElementTypes.DATE,
+        ),
     }],
     [relationshipEntities.PROGRAM_INSTANCE]: [{
         id: 'createdDate',
         displayName: i18n.t('Created date'),
-        convertValue: props => convertClientToList(convertServerToClient(props.created, dataElementTypes.DATE)),
+        convertValue: props => convertClientToList(
+            convertServerToClient(props.created, dataElementTypes.DATE), dataElementTypes.DATE,
+        ),
     }],
 };
