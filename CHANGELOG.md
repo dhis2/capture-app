@@ -1,3 +1,10 @@
+## [100.11.9](https://github.com/dhis2/capture-app/compare/v100.11.8...v100.11.9) (2022-08-03)
+
+
+### Bug Fixes
+
+* [DHIS2-13534] edit single event and hide delete button ([#2943](https://github.com/dhis2/capture-app/issues/2943)) ([6044f88](https://github.com/dhis2/capture-app/commit/6044f88bd641e07c9b55443a0f1caf2d2b9861ff))
+
 ## [100.11.8](https://github.com/dhis2/capture-app/compare/v100.11.7...v100.11.8) (2022-08-02)
 
 
