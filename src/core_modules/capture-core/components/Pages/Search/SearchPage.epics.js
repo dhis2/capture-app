@@ -3,8 +3,7 @@ import { ofType } from 'redux-observable';
 import { EMPTY } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { searchPageActionTypes } from './SearchPage.actions';
-import { topBarActionsActionTypes } from '../../TopBarActions';
-import { getLocationQuery, buildUrlQueryString } from '../../../utils/routing';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { resetLocationChange } from '../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
@@ -18,18 +17,6 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
             });
         }),
     );
-
-export const openSearchPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
-    action$.pipe(
-        ofType(topBarActionsActionTypes.SEARCH_PAGE_OPEN),
-        switchMap((action) => {
-            const { programId = action.payload.programId, orgUnitId } = getLocationQuery();
-            history.push(`/search?${buildUrlQueryString({ programId, orgUnitId })}`);
-            return new Promise((resolve) => {
-                setTimeout(() => resolve(resetLocationChange()), 0);
-            });
-        }));
-
 
 export const navigateToNewUserPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(

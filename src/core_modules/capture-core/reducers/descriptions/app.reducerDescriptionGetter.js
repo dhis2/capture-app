@@ -18,7 +18,6 @@ import {
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
-import { topBarActionsActionTypes } from '../../components/TopBarActions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 import { actionTypes as initActionTypes } from '../../init/init.actions';
@@ -124,8 +123,9 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         page: null,
         locationSwitchInProgress: true,
     }),
-    [topBarActionsActionTypes.SEARCH_PAGE_OPEN]: state => ({
+    [searchPageActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
+        locationSwitchInProgress: false,
         page: 'search',
     }),
     [initActionTypes.SET_CURRENT_ORG_UNIT_ROOT]: (state, action) => ({
