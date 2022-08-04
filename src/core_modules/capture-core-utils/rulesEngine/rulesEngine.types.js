@@ -145,7 +145,7 @@ export type RulesEngineInput = {|
     trackedEntityAttributes?: ?TrackedEntityAttributes,
     selectedEnrollment?: ?Enrollment,
     selectedOrgUnit: OrgUnit,
-    selectedUserRoles: Array<string>,
+    selectedUserRoles?: ?Array<string>,
     optionSets: OptionSets,
 |}
 

@@ -10,7 +10,6 @@ export const AppPagesLoader = compose(
     // $FlowFixMe
     withRouter,
     withStateBoundLoadingIndicator((state: ReduxState) => state.app.initDone, null, true),
-    withD2InContext(),
     withAppUrlSync(),
     withUrlSync((props: Object) => props.syncSpecification),
     withStateBoundLoadingIndicator((state: ReduxState, props: Object) => !props.urlOutOfSync, null, true),
