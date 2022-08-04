@@ -10,7 +10,7 @@ import {
 
 import { isSelectionsEqual } from '../../../../../App/isSelectionsEqual';
 import { getLocationQuery, buildUrlQueryString } from '../../../../../../utils/routing';
-import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../../../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

@@ -1,6 +1,7 @@
 // @flow
-import type { D2Functions } from '../rulesEngine.types';
-import type { LogError, ExpressionSet, DhisFunctionsInfo } from './executionService.types';
+import { injectVariableValues } from './injectVariableValues';
+import { getInjectionValue } from './common';
+import type { ExecuteExpressionInput, ErrorHandler, ExpressionSet, DhisFunctionsInfo } from './executeExpression.types';
 
 /**
  * Creates a function with closed scope where the given string can be executed as javascript
@@ -85,30 +86,10 @@ const extractArguments = (
 const getFunctionNameFromCall = (functionCall: string, prefix: string) =>
     functionCall.substring(prefix.length, functionCall.length - 1);
 
-export const executeExpression = (
-    dhisFunctions: D2Functions,
-    expression: string,
-    logError: LogError,
-) => {
-    let answer = false;
-    try {
-        const expressionModuloStrings = expression.replace(/'(?:\\.|[^'\\])*'/g, match => ' '.repeat(match.length));
-        const applicableDhisFunctions = Object.entries(dhisFunctions).map(([key, value]) => ({ ...value, name: key }));
-        answer = internalExecuteExpression(
-            { dhisFunctionsObject: dhisFunctions, applicableDhisFunctions },
-            { expression, expressionModuloStrings },
-            logError,
-        );
-    } catch (e) {
-        logError && logError(e);
-    }
-    return answer;
-};
-
 const internalExecuteExpression = (
     { dhisFunctionsObject, applicableDhisFunctions }: DhisFunctionsInfo,
     { expression, expressionModuloStrings }: ExpressionSet,
-    logError: LogError,
+    onError: ErrorHandler,
 ) => {
     const functionNamePrefix = 'd2:';
     // Find all d2-functions appearing in the given expression
@@ -146,17 +127,17 @@ const internalExecuteExpression = (
             internalExecuteExpression(
                 { dhisFunctionsObject, applicableDhisFunctions: includedDhisFunctions },
                 { expression: argument, expressionModuloStrings: argumentModuloStrings },
-                logError,
+                onError,
             ));
         const functionName = getFunctionNameFromCall(functionCall[0], functionNamePrefix);
         const dhisFunction = dhisFunctionsObject[functionName];
         if (isFunctionSignatureBroken(dhisFunction.parameters, evaluatedArguments)) {
-            logError && logError(`${functionName} was not passed valid arguments`);
+            onError(`${functionName} was not passed valid arguments`, expression);
             // Function call is not possible to evaluate, remove the call
             accExpression += 'false';
         } else {
             const dhisFunctionResult = dhisFunction.execute(evaluatedArguments);
-            accExpression += dhisFunctionResult;
+            accExpression += getInjectionValue(dhisFunctionResult);
         }
 
         return {
@@ -169,4 +150,28 @@ const internalExecuteExpression = (
         expression.substring(expressionIndexAfterFunctionExecution, expression.length);
 
     return evaluate(expressionToEvaluate);
+};
+
+export const executeExpression = ({
+    expression,
+    dhisFunctions,
+    variablesHash,
+    onError,
+}: ExecuteExpressionInput) => {
+    const expressionWithInjectedVariableValues = injectVariableValues(expression, variablesHash);
+
+    let answer = false;
+    try {
+        const expressionModuloStrings = expressionWithInjectedVariableValues
+            .replace(/'[^']*'|"[^"]*"/g, match => ' '.repeat(match.length));
+        const applicableDhisFunctions = Object.entries(dhisFunctions).map(([key, value]) => ({ ...value, name: key }));
+        answer = internalExecuteExpression(
+            { dhisFunctionsObject: dhisFunctions, applicableDhisFunctions },
+            { expression: expressionWithInjectedVariableValues, expressionModuloStrings },
+            onError,
+        );
+    } catch (error) {
+        onError(error.message, expressionWithInjectedVariableValues);
+    }
+    return answer;
 };

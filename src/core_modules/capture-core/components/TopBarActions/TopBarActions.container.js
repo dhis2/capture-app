@@ -1,14 +1,11 @@
 // @flow
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { batchActions } from 'redux-batched-actions';
 import { useHistory } from 'react-router-dom';
 import i18n from '@dhis2/d2-i18n';
 import { ActionButtons } from './TopBarActions.component';
-import { openNewRegistrationPageFromScopeSelector } from './TopBarActions.actions';
 import { resetAllCategoryOptionsFromScopeSelector } from '../ScopeSelector/ScopeSelector.actions';
-import { resetProgramIdBase } from '../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
-import { useReset, useSetOrgUnitId } from '../ScopeSelector/hooks';
+import { useReset } from '../ScopeSelector/hooks';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import type { Props } from './TopBarActions.types';
 import { buildUrlQueryString } from '../../utils/routing';
@@ -51,17 +48,26 @@ export const TopBarActions = ({
     const dispatch = useDispatch();
     const history = useHistory();
     const { reset } = useReset();
-    const { setOrgUnitId } = useSetOrgUnitId();
 
     const startAgain = () => {
         dispatch(resetAllCategoryOptionsFromScopeSelector());
         reset();
     };
-    const newRegistrationPage = () => dispatch(openNewRegistrationPageFromScopeSelector(selectedProgramId));
+    const newRegistrationPage = () => {
+        const queryArgs = {};
+        if (selectedOrgUnitId) {
+            queryArgs.orgUnitId = selectedOrgUnitId;
+        }
+        if (selectedProgramId) {
+            queryArgs.programId = selectedProgramId;
+        }
+
+        history.push(`new?${buildUrlQueryString(queryArgs)}`);
+    };
+
     const newRegistrationPageWithoutProgramId = () => {
-        const actions = [resetProgramIdBase(), openNewRegistrationPageFromScopeSelector()];
-        dispatch(batchActions(actions));
-        setOrgUnitId(selectedOrgUnitId, 'new', false);
+        const queryArgs = selectedOrgUnitId ? { orgUnitId: selectedOrgUnitId } : {};
+        history.push(`new?${buildUrlQueryString(queryArgs)}`);
     };
 
     const searchPage = () => {
