@@ -1,7 +1,7 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { actionTypes as setOrgUnitActionTypes } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { actionTypes as setOrgUnitActionTypes } from '../../components/ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { lockedSelectorActionTypes } from '../../components/LockedSelector/LockedSelector.actions';
 import { actionTypes as initActionTypes } from '../../init/init.actions';
 import { actionTypes as orgUnitFetcherActionTypes } from '../../components/OrgUnitFetcher/OrgUnitFetcher.actions';
@@ -23,10 +23,6 @@ export const organisationUnitDesc = createReducerDescription({
     [lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS]: (state, action) => ({
         ...state,
         [action.payload.id]: action.payload,
-    }),
-    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, action) => ({
-        ...state,
-        [action.payload.orgUnit.id]: action.payload.orgUnit,
     }),
     [orgUnitFetcherActionTypes.FETCH_ORG_UNIT_SUCCESS]: (state, action) => ({
         ...state, [action.payload.id]: action.payload,

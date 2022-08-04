@@ -14,7 +14,7 @@ import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey
 import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 import { getLocationQuery, buildUrlQueryString } from '../../../../../../utils/routing';
-import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../../../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
