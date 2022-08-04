@@ -24,14 +24,6 @@ afterEach(async () => {
     await storageController.close();
 });
 
-it('tests disabled', () => {});
-
-/*
-
-Tests are disabled because fake-indexeddb is having issues with jest 27 (that is being used by @dhis2/cli-app-scripts)
-https://github.com/dumbmatter/fakeIndexedDB/issues/64
-https://github.com/dumbmatter/fakeIndexedDB/issues/67
-
 it('open and close storageContainer', async () => {
     await storageController.open();
     await storageController.close();
@@ -117,4 +109,3 @@ it('set to fail because db not open', async () => {
         expect(error).toBeDefined();
     }
 });
-*/

@@ -10,7 +10,5 @@ export type {
     TEIValues,
     OptionSet,
     OptionSets,
-    OrgUnit,
-    OrgUnitGroup,
     ProgramRuleVariable,
 } from './services/VariableService';

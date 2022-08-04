@@ -31,7 +31,7 @@ And('you see the registration form for the Malaria case diagnosis', () => {
         .contains('New Enrollment in program: Malaria case diagnosis, treatment and investigation')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Saving a malaria entity in Malaria case diagnosis, treatment and investigation in Taninahun (Malen) CHP.')
+        .contains('Saving a new enrollment in Malaria case diagnosis, treatment and investigation in Taninahun (Malen) CHP.')
         .should('exist');
 });
 
@@ -40,7 +40,7 @@ And('you see the registration form for the MNCH PNC program', () => {
         .contains('New Enrollment in program: MNCH / PNC (Adult Woman)')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Saving a person in MNCH / PNC (Adult Woman) in Taninahun (Malen) CHP.')
+        .contains('Saving a new enrollment in MNCH / PNC (Adult Woman) in Taninahun (Malen) CHP.')
         .should('exist');
 });
 

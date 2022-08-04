@@ -3,7 +3,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import {
     actionTypes as quickSelectorActionTypes,
-} from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+} from '../../components/ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import {
     actionTypes as editEventActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
@@ -196,15 +196,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             showaccessible: newStatus,
         };
     },
-    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, { payload: { orgUnitId } }) => ({
-        ...state,
-        orgUnitId,
-    }),
-    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
-        ...state,
-        orgUnitId: undefined,
-        complete: false,
-    }),
     [lockedSelectorActionTypes.FROM_URL_UPDATE]: ({ categories, categoriesMeta }, action) => {
         const { nextProps: selections, prevProps: { programId: prevProgramId } } = action.payload;
 
@@ -216,30 +207,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             complete: false,
         };
     },
-    [lockedSelectorActionTypes.PROGRAM_ID_SET]: (state, { payload: { programId } }) => ({
-        ...state,
-        programId,
-        trackedEntityTypeId: undefined,
-        complete: false,
-    }),
-    [lockedSelectorActionTypes.PROGRAM_ID_STORE]:
-      (state, { payload: { programId } }) => ({
-          ...state,
-          programId,
-      }),
-    [lockedSelectorActionTypes.CATEGORY_OPTION_SET]: (state, action) => {
-        const { categoryId, categoryOption } = action.payload;
-        return setCategoryOption(state, categoryId, categoryOption);
-    },
-    [lockedSelectorActionTypes.CATEGORY_OPTION_RESET]: (state, action) => {
-        const { categoryId } = action.payload;
-        return resetCategoryOption(state, categoryId);
-    },
-    [lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET]: state => ({
-        ...state,
-        categories: undefined,
-        categoriesMeta: undefined,
-    }),
+
     [mainPageActionTypes.CATEGORY_OPTION_SET]: categoryOptionSet,
     [mainPageActionTypes.CATEGORY_OPTION_RESET]: categoryOptionReset,
     [mainPageActionTypes.ALL_CATEGORY_OPTIONS_RESET]: allCategoryOptionsReset,
@@ -251,6 +219,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [viewEventPageActionTypes.CATEGORY_OPTION_SET]: categoryOptionSet,
     [viewEventPageActionTypes.CATEGORY_OPTION_RESET]: categoryOptionReset,
     [viewEventPageActionTypes.ALL_CATEGORY_OPTIONS_RESET]: allCategoryOptionsReset,
+
     [searchPageActionTypes.FALLBACK_SEARCH_COMPLETED]:
       (state, { payload: { trackedEntityTypeId } }) => ({
           ...state,
