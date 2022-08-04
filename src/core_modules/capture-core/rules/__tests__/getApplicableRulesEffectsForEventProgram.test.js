@@ -1,4 +1,4 @@
-import { setD2 } from 'capture-core/d2/d2Instance';
+
 import {
     EventProgram,
     ProgramStage,
@@ -125,7 +125,6 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
             id: 'xE7jOejl9FI',
         },
     };
-    setD2(currentUser);
 
     test('RulesEngine called with computed arguments from getApplicableRuleEffectsForEventProgram', () => {
         getApplicableRuleEffectsForEventProgram({
