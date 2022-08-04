@@ -179,7 +179,6 @@ import {
     startSavingNewTrackedEntityInstanceEpic,
     startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
-import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
 
 import {
     fetchEnrollmentPageInformationFromUrlEpic,
@@ -305,7 +304,6 @@ export const epics = combineEpics(
     startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     completeSavingNewTrackedEntityInstanceEpic,
     completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
-    openNewRegistrationPageFromLockedSelectorEpic,
     fetchEnrollmentPageInformationFromUrlEpic,
     startFetchingTeiFromEnrollmentIdEpic,
     startFetchingTeiFromTeiIdEpic,

@@ -9,6 +9,8 @@ import { actionTypes as editEventActionTypes }
     from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 import { actionTypes as viewEventActionTypes }
     from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { newPageActionTypes }
+    from '../../components/Pages/New/NewPage.actions';
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as setCurrentSelectionsActionTypes,
@@ -112,8 +114,9 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: action.payload.nextPage,
     }),
-    [topBarActionsActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
+    [newPageActionTypes.NEW_PAGE_OPEN]: state => ({
         ...state,
+        locationSwitchInProgress: false,
         page: 'new',
     }),
     [searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE]: state => ({
