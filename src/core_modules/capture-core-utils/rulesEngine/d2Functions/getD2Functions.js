@@ -1,23 +1,32 @@
+// @flow
+
 import log from 'loglevel';
 import { getZScoreWFA, getZScoreWFH, getZScoreHFA } from './zScoreFunctions';
 import { extractDataMatrixValue } from './gs1DataMatrixFuntions';
+import type { D2FunctionsInput, D2Functions } from './getD2Functions.types';
 
-export const d2Functions = (dateUtils, variableService, variablesHash, selectedOrgUnit, selectedUserRoles) => ({
+
+export const getD2Functions = ({
+    dateUtils,
+    variablesHash,
+    selectedOrgUnit,
+    selectedUserRoles,
+}: D2FunctionsInput): D2Functions => ({
     ceil: {
         parameters: 1,
-        execute: params => Math.ceil(params[0]),
+        execute: (params: any) => Math.ceil(params[0]),
     },
     floor: {
         parameters: 1,
-        execute: params => Math.floor(params[0]),
+        execute: (params: any) => Math.floor(params[0]),
     },
     round: {
         parameters: 1,
-        execute: params => Math.round(params[0]),
+        execute: (params: any) => Math.round(params[0]),
     },
     modulus: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const dividend = Number(params[0]);
             const divisor = Number(params[1]);
             const rest = dividend % divisor;
@@ -26,54 +35,37 @@ export const d2Functions = (dateUtils, variableService, variablesHash, selectedO
     },
     zing: {
         parameters: 1,
-        execute: (params) => {
-            let number = params[0];
-            if (number < 0) {
-                number = 0;
-            }
-            return number;
+        execute: (params: any) => {
+            const number = params[0];
+            return number < 0 ? 0 : number;
         },
     },
     oizp: {
         parameters: 1,
-        execute: (params) => {
-            const number = params[0];
-            let output = 1;
-            if (number < 0) {
-                output = 0;
-            }
-            return output;
-        },
+        execute: (params: any) => (params[0] < 0 ? 0 : 1),
     },
     concatenate: {
-        execute: (params) => {
-            let returnString = "'";
-            for (let i = 0; i < params.length; i++) {
-                returnString += params[i];
-            }
-            returnString += "'";
-            return returnString;
-        },
+        execute: (params: any) => params.join(''),
     },
     daysBetween: {
         parameters: 2,
-        execute: params => dateUtils.daysBetween(params[0], params[1]).toString(),
+        execute: (params: any) => dateUtils.daysBetween(params[0], params[1]),
     },
     weeksBetween: {
         parameters: 2,
-        execute: params => dateUtils.weeksBetween(params[0], params[1]).toString(),
+        execute: (params: any) => dateUtils.weeksBetween(params[0], params[1]),
     },
     monthsBetween: {
         parameters: 2,
-        execute: params => dateUtils.monthsBetween(params[0], params[1]).toString(),
+        execute: (params: any) => dateUtils.monthsBetween(params[0], params[1]),
     },
     yearsBetween: {
         parameters: 2,
-        execute: params => dateUtils.yearsBetween(params[0], params[1]).toString(),
+        execute: (params: any) => dateUtils.yearsBetween(params[0], params[1]),
     },
     addDays: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const date = params[0];
             const daysToAdd = params[1];
             return dateUtils.addDays(date, daysToAdd);
@@ -81,76 +73,59 @@ export const d2Functions = (dateUtils, variableService, variablesHash, selectedO
     },
     count: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const variableName = params[0];
-            const variableObject = variablesHash[variableName];
-            let count = 0;
-            if (variableObject) {
-                if (variableObject.hasValue) {
-                    if (variableObject.allValues) {
-                        count = variableObject.allValues.length;
-                    } else {
-                        // If there is a value found for the variable, the count is 1 even if there is no list of alternate values
-                        // This happens for variables of "DATAELEMENT_CURRENT_STAGE" and "TEI_ATTRIBUTE"
-                        count = 1;
-                    }
-                }
-            } else {
+            const variable = variablesHash[variableName];
+            if (!variable) {
                 log.warn(`could not find variable to count: ${variableName}`);
+                return 0;
             }
-            return count;
+
+            return variable.hasValue ? variable.allValues?.length ?? 1 : 0;
         },
     },
     countIfValue: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const variableName = params[0];
-            const variableObject = variablesHash[variableName];
-            const valueToCompare = variableService.processValue(params[1], variableObject.variableType);
-
-            let count = 0;
-            if (variableObject) {
-                if (variableObject.hasValue) {
-                    if (variableObject.allValues) {
-                        for (let i = 0; i < variableObject.allValues.length; i++) {
-                            if (valueToCompare === variableObject.allValues[i]) {
-                                count += 1;
-                            }
-                        }
-                    } else if (valueToCompare === variableObject.variableValue) {
-                        // The variable has a value, but no list of alternates. This means we compare the standard variablevalue
-                        count = 1;
-                    }
-                }
-            } else {
-                log.warn(`could not find variable to countifvalue: ${variableName}`);
+            const variable = variablesHash[variableName];
+            if (!variable) {
+                log.warn(`could not find variable to countIfValue: ${variableName}`);
+                return 0;
             }
-            return count;
+
+            if (!variable.hasValue) {
+                return 0;
+            }
+
+            const valueToCompare = params[1];
+            return (variable.allValues || [variable.variableValue])
+                .reduce((acc, value) => (value === valueToCompare ? acc + 1 : acc), 0);
         },
     },
     countIfZeroPos: {
         parameters: 1,
-        execute: () => {},
+        execute: () => {
+            log.warn('countIfZeroPos not implemented yet');
+            return 0;
+        },
     },
     hasValue: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const variableName = params[0];
-            const variableObject = variablesHash[variableName];
-            if (!variableObject) {
+            const variable = variablesHash[variableName];
+            if (!variable) {
                 log.warn(`could not find variable to check if has value: ${variableName}`);
+                return false;
             }
 
-            let valueFound = false;
-            if (variableObject && variableObject.hasValue) {
-                valueFound = true;
-            }
-            return valueFound;
+            return variable.hasValue;
         },
     },
     validatePattern: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const inputToValidate = params[0].toString();
             const pattern = params[1];
             const regEx = new RegExp(pattern, 'g');
@@ -165,103 +140,101 @@ export const d2Functions = (dateUtils, variableService, variablesHash, selectedO
     },
     left: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const string = String(params[0]);
             const numChars = string.length < params[1] ? string.length : params[1];
-            const returnString = string.substring(0, numChars);
-            return variableService.processValue(returnString, 'TEXT');
+            return string.substring(0, numChars);
         },
     },
     right: {
         parameters: 2,
-        execute: (params) => {
+        execute: (params: any) => {
             const string = String(params[0]);
             const numChars = string.length < params[1] ? string.length : params[1];
-            const returnString = string.substring(string.length - numChars, string.length);
-            return variableService.processValue(returnString, 'TEXT');
+            return string.substring(string.length - numChars, string.length);
         },
     },
     substring: {
         parameters: 3,
-        execute: (params) => {
+        execute: (params: any) => {
             const string = String(params[0]);
             const startChar = string.length < params[1] - 1 ? -1 : params[1];
             const endChar = string.length < params[2] ? -1 : params[2];
             if (startChar < 0 || endChar < 0) {
-                return "''";
+                return '';
             }
-            const returnString = string.substring(startChar, endChar);
-            return variableService.processValue(returnString, 'TEXT');
+            return string.substring(startChar, endChar);
         },
     },
     split: {
         parameters: 3,
-        execute: (params) => {
+        execute: (params: any) => {
             const string = String(params[0]);
             const splitArray = string.split(params[1]);
             let returnPart = '';
-            if (splitArray.length >= params[2]) {
+            if (splitArray.length > params[2]) {
                 returnPart = splitArray[params[2]];
             }
-            return variableService.processValue(returnPart, 'TEXT');
+            return returnPart;
         },
     },
     length: {
         parameters: 1,
-        execute: params => String(params[0]).length,
+        execute: (params: any) => String(params[0]).length,
     },
     inOrgUnitGroup: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const group = params[0];
             const orgUnitGroups = (selectedOrgUnit && selectedOrgUnit.groups) || [];
-            return orgUnitGroups.find(o => o.id === group || o.code === group) ? 'true' : 'false';
+            return Boolean(orgUnitGroups.find(o => o.id === group || o.code === group));
         },
     },
     hasUserRole: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const role = params[0];
             return selectedUserRoles.includes(role);
         },
     },
     zScoreWFA: {
         parameters: 3,
-        execute: params => getZScoreWFA(params[0], params[1], params[2]),
+        execute: (params: any) => getZScoreWFA(params[0], params[1], params[2]),
     },
     zScoreHFA: {
         parameters: 3,
-        execute: params => getZScoreHFA(params[0], params[1], params[2]),
+        execute: (params: any) => getZScoreHFA(params[0], params[1], params[2]),
     },
     zScoreWFH: {
         parameters: 3,
-        execute: params => getZScoreWFH(params[0], params[1], params[2]),
+        execute: (params: any) => getZScoreWFH(params[0], params[1], params[2]),
     },
     extractDataMatrixValue: {
         parameters: 2,
-        execute: params => extractDataMatrixValue(params[0], params[1]),
+        execute: (params: any) => extractDataMatrixValue(params[0], params[1]),
     },
     lastEventDate: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const variableName = params[0];
-            const variableObject = variablesHash[variableName];
-            let valueFound = "''";
-            if (variableObject) {
-                if (variableObject.variableEventDate) {
-                    valueFound = variableService.processValue(variableObject.variableEventDate, 'DATE');
-                } else {
-                    log.warn(`no last event date found for variable: ${variableName}`);
-                }
-            } else {
+            const variable = variablesHash[variableName];
+
+            if (!variable) {
                 log.warn(`could not find variable to check last event date: ${variableName}`);
+                return '';
             }
-            return valueFound;
+
+            if (!variable.variableEventDate) {
+                log.warn(`no last event date found for variable: ${variableName}`);
+                return '';
+            }
+
+            return variable.variableEventDate;
         },
     },
     addControlDigits: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             const baseNumber = params[0];
             const baseDigits = baseNumber.split('');
             const error = false;
@@ -312,7 +285,7 @@ export const d2Functions = (dateUtils, variableService, variablesHash, selectedO
     },
     checkControlDigits: {
         parameters: 1,
-        execute: (params) => {
+        execute: (params: any) => {
             log.warn('checkControlDigits not implemented yet');
             return params[0];
         },
