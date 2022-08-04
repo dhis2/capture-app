@@ -3,10 +3,9 @@ import { ofType } from 'redux-observable';
 import { EMPTY } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { searchPageActionTypes } from './SearchPage.actions';
-import { lockedSelectorActionTypes } from '../../LockedSelector';
 import { topBarActionsActionTypes } from '../../TopBarActions';
 import { getLocationQuery, buildUrlQueryString } from '../../../utils/routing';
-import { resetLocationChange } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
@@ -22,7 +21,7 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
 
 export const openSearchPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN, topBarActionsActionTypes.SEARCH_PAGE_OPEN),
+        ofType(topBarActionsActionTypes.SEARCH_PAGE_OPEN),
         switchMap((action) => {
             const { programId = action.payload.programId, orgUnitId } = getLocationQuery();
             history.push(`/search?${buildUrlQueryString({ programId, orgUnitId })}`);

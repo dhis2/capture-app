@@ -81,9 +81,6 @@ import {
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
 } from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
 import {
-    resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
-} from 'capture-core/components/Pages/epics/resetCategoriesAfterSettingOrgUnitIfApplicable.epic';
-import {
     calculateSelectionsCompletenessEpic,
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
@@ -145,15 +142,6 @@ import {
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
-    startAgainEpic,
-    setOrgUnitIdEpic,
-    setProgramIdEpic,
-    resetOrgUnitId,
-    resetProgramIdEpic,
-    fetchOrgUnitEpic,
-    resetTeiSelectionEpic,
-    setEnrollmentSelectionEpic,
-    resetEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 
 import {
@@ -217,7 +205,6 @@ import {
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
-    resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
     triggerLoadCoreEpic,
     fetchDataStoreEpic,
@@ -298,15 +285,9 @@ export const epics = combineEpics(
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,
     saveAssigneeEpic,
-    setOrgUnitIdEpic,
-    setProgramIdEpic,
-    resetOrgUnitId,
-    resetProgramIdEpic,
-    fetchOrgUnitEpic,
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
-    startAgainEpic,
     searchViaUniqueIdOnScopeProgramEpic,
     searchViaUniqueIdOnScopeTrackedEntityTypeEpic,
     searchViaAttributesOnScopeProgramEpic,
@@ -326,9 +307,6 @@ export const epics = combineEpics(
     fetchEnrollmentPageInformationFromUrlEpic,
     startFetchingTeiFromEnrollmentIdEpic,
     startFetchingTeiFromTeiIdEpic,
-    resetTeiSelectionEpic,
-    setEnrollmentSelectionEpic,
-    resetEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,

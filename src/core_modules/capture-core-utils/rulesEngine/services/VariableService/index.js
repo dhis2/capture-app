@@ -6,8 +6,6 @@ export type {
     EventsData,
     TEIValues,
     Enrollment,
-    OrgUnit,
-    OrgUnitGroup,
     OptionSet,
     OptionSets,
     CompareDates,

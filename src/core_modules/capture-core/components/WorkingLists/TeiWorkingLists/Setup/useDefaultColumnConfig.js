@@ -37,11 +37,11 @@ const mainConfig: Array<MainColumnConfig> = [{
 
 const getMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: ?string): Array<MetadataColumnConfig> =>
     attributes
-        .map(({ id, displayInReports, type, name, optionSet, searchable, unique }) => ({
+        .map(({ id, displayInReports, type, name, formName, optionSet, searchable, unique }) => ({
             id,
             visible: displayInReports,
             type,
-            header: name,
+            header: formName || name,
             options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
             multiValueFilter: !!optionSet,
             filterHidden: !(orgUnitId || (searchable || unique)),
