@@ -59,7 +59,7 @@ export function getRulesEffectsProcessor(
         type: $Values<typeof effectActions>): any {
         const result = createEffectsForConfiguredDataTypes(effect, (): any => ({
             type,
-            message: `${effect.displayContent} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
         }));
         return result.length !== 0 ? result : {
             type,
@@ -76,7 +76,7 @@ export function getRulesEffectsProcessor(
         }
         result.warning = {
             id: effect.id,
-            message: `${effect.displayContent} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
         };
         return result;
     }
@@ -90,7 +90,7 @@ export function getRulesEffectsProcessor(
         }
         result.error = {
             id: effect.id,
-            message: `${effect.displayContent} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
         };
         return result;
     }
@@ -192,7 +192,7 @@ export function getRulesEffectsProcessor(
     }
 
     function processDisplayText(effect: ProgramRuleEffect): any {
-        const message = effect.displayContent ? effect.displayContent : effect.content;
+        const message = effect.displayContent || '';
         return {
             type: effectActions.DISPLAY_TEXT,
             id: effect.location,
@@ -210,7 +210,7 @@ export function getRulesEffectsProcessor(
             id: effect.location,
             displayKeyValuePair: {
                 id: effect.id,
-                key: effect.content,
+                key: effect.displayContent,
                 value: typeof effect.data == 'number' ? numberToString(effect.data) : String(effect.data),
                 ...effect.style,
             },

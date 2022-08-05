@@ -56,6 +56,10 @@ const WidgetProfilePlain = ({
         userRoles,
     } = useUserRoles();
 
+    const isEditable = useMemo(() =>
+        trackedEntityInstanceAttributes.length > 0 && showEdit,
+    [trackedEntityInstanceAttributes, showEdit]);
+
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
     const error = programsError || trackedEntityInstancesError || userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
@@ -109,7 +113,7 @@ const WidgetProfilePlain = ({
                             TETName: trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         })}</div>
-                        {showEdit && (
+                        {isEditable && (
                             <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} small>
                                 {i18n.t('Edit')}
                             </Button>
@@ -122,7 +126,7 @@ const WidgetProfilePlain = ({
             >
                 {renderProfile()}
             </Widget>
-            {showEditModal(loading, error, showEdit, modalState) && (
+            {showEditModal(loading, error, isEditable, modalState) && (
                 <DataEntry
                     onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
                     onDisable={() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE)}
