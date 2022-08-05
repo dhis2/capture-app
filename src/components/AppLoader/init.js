@@ -13,6 +13,7 @@ import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoa
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
+import { rulesEngine } from 'capture-core/rules/rulesEngine';
 
 function setLogLevel() {
     const levels = {
@@ -169,11 +170,11 @@ export async function initializeAsync(
     const currentUser = await onQueryApi({
         resource: 'me',
         params: {
-            fields: 'id',
+            fields: 'id,userRoles',
         },
     });
-    const sym = Object.getOwnPropertySymbols(d2.currentUser).find(s => String(s) === 'Symbol(userRoles)');
-    d2.currentUser.userRoles = d2.currentUser[sym];
+    rulesEngine.setUserRoles(currentUser.userRoles.map(({ id }) => id));
+
     setD2(d2);
     setHeaderBarStrings(d2);
     // initialize storage controllers
