@@ -96,7 +96,13 @@ const MainPageContainer = () => {
 
     useEffect(() => {
         if (programId && trackedEntityTypeId && displayFrontPageList && selectedTemplateId === undefined) {
-            handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId, showAllAccessible, history });
+            handleChangeTemplateUrl({
+                programId,
+                orgUnitId,
+                selectedTemplateId: `${programId}-default`,
+                showAllAccessible,
+                history,
+            });
         }
     }, [
         selectedTemplateId,
