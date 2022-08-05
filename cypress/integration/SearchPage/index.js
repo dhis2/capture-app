@@ -375,7 +375,7 @@ When('you click the back button', () => {
 
 Then('you should be taken to the main page with org unit and program preselected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW`);
+        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default`);
 });
 
 Then('you stay in the same page with all program results', () => {
