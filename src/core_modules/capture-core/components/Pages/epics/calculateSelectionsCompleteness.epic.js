@@ -38,8 +38,6 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
 export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.PROGRAM_ID_SET,
-            lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             scopeSelectorActionTypes.CATEGORY_OPTION_SET,
             lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,

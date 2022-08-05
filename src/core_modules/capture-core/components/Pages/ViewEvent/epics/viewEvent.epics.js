@@ -28,7 +28,7 @@ import {
 } from '../../NewRelationship/newRelationship.actions';
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
-import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
 
 export const getEventOpeningFromEventListEpic = (
