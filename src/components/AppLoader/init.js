@@ -164,11 +164,11 @@ export async function initializeAsync(
     const currentUser = await onQueryApi({
         resource: 'me',
         params: {
-            fields: 'id',
+            fields: 'id,userRoles',
         },
     });
 
-    rulesEngine.setSelectedUserRoles(userSettings.userRoles);
+    rulesEngine.setSelectedUserRoles(userSettings.userRoles.map(({ id }) => id));
     const systemSettings = await onQueryApi({
         resource: 'systemSettings',
     });
