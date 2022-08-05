@@ -18,6 +18,11 @@
 
 .Select-menu-outer {
     z-index: 200;
+    max-height: 400px;
+}
+
+.Select-menu {
+    max-height: 359px;
 }
 
 .Select-input {

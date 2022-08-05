@@ -44,12 +44,10 @@ class QuickSelectorPlain extends Component<Props> {
     }
 
     render() {
-        const { programSelectorWidth } = this.calculateColumnWidths();
-
         return (
             <Paper className={this.props.classes.paper}>
                 <Grid container spacing={0}>
-                    <Grid item xs={12} sm={programSelectorWidth * 3} md={programSelectorWidth * 2} lg={programSelectorWidth} className={this.props.classes.programSelector}>
+                    <Grid item>
                         <ProgramSelector
                             selectedProgram={this.props.selectedProgramId}
                             selectedOrgUnitId={this.props.selectedOrgUnitId}

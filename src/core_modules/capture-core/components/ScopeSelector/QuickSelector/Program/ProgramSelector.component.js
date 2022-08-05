@@ -60,6 +60,7 @@ const styles = (theme: Theme) => ({
     paper: {
         padding: 8,
         backgroundColor: theme.palette.grey.lighter,
+        maxWidth: '60vw',
     },
     title: {
         margin: 0,
@@ -102,12 +103,14 @@ const styles = (theme: Theme) => ({
     selectedPaper: {
         backgroundColor: theme.palette.grey.lighter,
         padding: 8,
+        maxWidth: '60vw',
     },
     selectedButton: {
         float: 'right',
         width: 20,
         height: 20,
         padding: 0,
+        marginLeft: 6,
     },
     selectedButtonIcon: {
         width: 20,
@@ -346,12 +349,13 @@ class ProgramSelectorPlain extends Component<Props> {
                         }
                         return (
                             <div>
-                                <div id="program-selector">
+                                <div id="program-selector" style={{ width: 400 }}>
                                     <OptionsSelectVirtualized
                                         options={programOptions}
                                         onSelect={handleClickProgram}
                                         placeholder={i18n.t('Select program')}
                                         value={''}
+                                        maxHeight={400}
                                     />
                                 </div>
                             </div>

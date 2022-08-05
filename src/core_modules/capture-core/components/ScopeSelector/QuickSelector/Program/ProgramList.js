@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 const getStyles = () => ({
     list: {
         padding: 0,
+        width: '400px',
     },
     item: {
         wordBreak: 'break-word',
