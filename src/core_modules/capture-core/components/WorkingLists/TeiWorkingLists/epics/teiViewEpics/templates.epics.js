@@ -18,7 +18,7 @@ import {
 } from '../../../WorkingListsCommon';
 import { getTemplates } from './getTemplates';
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
-import { deriveURLParamsFromLocation } from '../../../../../utils/routing';
+import { getLocationQuery } from '../../../../../utils/routing';
 
 export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
@@ -126,7 +126,7 @@ export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore, 
                 type: 'delete',
             })
                 .then(() => {
-                    const { programId } = deriveURLParamsFromLocation();
+                    const { programId } = getLocationQuery();
                     onChangeTemplate && onChangeTemplate(`${programId}-default`);
 
                     return deleteTemplateSuccess(template, storeId);

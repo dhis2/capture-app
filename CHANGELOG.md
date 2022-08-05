@@ -1,3 +1,81 @@
+## [100.11.9](https://github.com/dhis2/capture-app/compare/v100.11.8...v100.11.9) (2022-08-03)
+
+
+### Bug Fixes
+
+* [DHIS2-13534] edit single event and hide delete button ([#2943](https://github.com/dhis2/capture-app/issues/2943)) ([6044f88](https://github.com/dhis2/capture-app/commit/6044f88bd641e07c9b55443a0f1caf2d2b9861ff))
+
+## [100.11.8](https://github.com/dhis2/capture-app/compare/v100.11.7...v100.11.8) (2022-08-02)
+
+
+### Bug Fixes
+
+* [DHIS2-13228] hide edit button in case no tea ([#2930](https://github.com/dhis2/capture-app/issues/2930)) ([fb072e0](https://github.com/dhis2/capture-app/commit/fb072e025a0603dc705c41ea07e4fbdb28f98e21))
+
+## [100.11.7](https://github.com/dhis2/capture-app/compare/v100.11.6...v100.11.7) (2022-08-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12777] hide programs without trackedentitytype access ([#2934](https://github.com/dhis2/capture-app/issues/2934)) ([046391b](https://github.com/dhis2/capture-app/commit/046391b4889b3b19794cc512e9fdc69f4cfd254c))
+* [DHIS2-13060] tei working list default filters ([#2912](https://github.com/dhis2/capture-app/issues/2912)) ([ca64f18](https://github.com/dhis2/capture-app/commit/ca64f18b9ae9705debe9457151e0b56861cea27e))
+
+## [100.11.6](https://github.com/dhis2/capture-app/compare/v100.11.5...v100.11.6) (2022-08-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13486] encapsulate strings in double quotes ([a3436ca](https://github.com/dhis2/capture-app/commit/a3436cad38fdc026074e813ebc3219bcbafd9fcc))
+
+## [100.11.5](https://github.com/dhis2/capture-app/compare/v100.11.4...v100.11.5) (2022-08-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13063] use form names in tei working list ([#2939](https://github.com/dhis2/capture-app/issues/2939)) ([1894b28](https://github.com/dhis2/capture-app/commit/1894b284655035aca99c4ea3db6660a427d36c51))
+
+## [100.11.4](https://github.com/dhis2/capture-app/compare/v100.11.3...v100.11.4) (2022-07-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8b293c8](https://github.com/dhis2/capture-app/commit/8b293c838dbeb0b4bee9f9385a776923fbe08450))
+
+## [100.11.3](https://github.com/dhis2/capture-app/compare/v100.11.2...v100.11.3) (2022-07-27)
+
+
+### Bug Fixes
+
+* [DHIS2-12304] show enrolllment errors in bottom snackbar ([#2879](https://github.com/dhis2/capture-app/issues/2879)) ([ac2d450](https://github.com/dhis2/capture-app/commit/ac2d450c1c1202b07aaec0963a3de3ebd0992357))
+
+## [100.11.2](https://github.com/dhis2/capture-app/compare/v100.11.1...v100.11.2) (2022-07-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a3aea8e](https://github.com/dhis2/capture-app/commit/a3aea8e4d46a1986c69c468d6cc14231a14d72a9))
+
+## [100.11.1](https://github.com/dhis2/capture-app/compare/v100.11.0...v100.11.1) (2022-07-26)
+
+
+### Bug Fixes
+
+* [DHIS2-12772] change saving text for re-enrollment ([#2923](https://github.com/dhis2/capture-app/issues/2923)) ([7604551](https://github.com/dhis2/capture-app/commit/7604551cec06c1f723b6aacd3fdbdc8606afb2c5))
+
+# [100.11.0](https://github.com/dhis2/capture-app/compare/v100.10.2...v100.11.0) (2022-07-26)
+
+
+### Features
+
+* [DHIS2-13253] enrollmentEventEdit simplify URL parameters ([#2845](https://github.com/dhis2/capture-app/issues/2845)) ([0f23429](https://github.com/dhis2/capture-app/commit/0f23429c9a2a9e171e6e3ae1003d1008abb793bd))
+
+## [100.10.2](https://github.com/dhis2/capture-app/compare/v100.10.1...v100.10.2) (2022-07-25)
+
+
+### Bug Fixes
+
+* [DHIS2-12670] delete a "just created" working list ([#2916](https://github.com/dhis2/capture-app/issues/2916)) ([2cd2030](https://github.com/dhis2/capture-app/commit/2cd20303997855bf740c5b265c30353d4e617809))
+
 ## [100.10.1](https://github.com/dhis2/capture-app/compare/v100.10.0...v100.10.1) (2022-07-23)
 
 

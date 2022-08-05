@@ -4,7 +4,6 @@ export type Props = {
     selectedProgramId?: string,
     selectedOrgUnitId?: string,
     isUserInteractionInProgress?: boolean,
-    customActionsOnProgramIdReset?: Array<any>,
 };
 
 export type PlainProps = {

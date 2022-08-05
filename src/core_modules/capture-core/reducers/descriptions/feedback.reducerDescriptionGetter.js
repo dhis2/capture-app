@@ -13,12 +13,8 @@ import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import {
-    actionTypes as editEventDataEntryActionTypes,
-} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
-import {
     actionTypes as editEventDataEntryAction,
     actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
-import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import {
     actionTypes as viewEventNewRelationshipActionTypes,
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
@@ -72,17 +68,6 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         ];
         return newState;
     },
-    [editEventDataEntryActionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE]: (state, action) => {
-        const error = action.payload;
-        const errorMessage = isString(error) ? error : error.message;
-        const errorObject = isObject(error) ? error : null;
-        log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
-        const newState = [
-            ...state,
-            getErrorFeedback(i18n.t('Could not save event')),
-        ];
-        return newState;
-    },
     [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (state, action) => [
         ...state,
         getErrorFeedback(action.payload.errorMessage),
@@ -116,10 +101,6 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         ];
         return newState;
     },
-    [orgUnitListActionTypes.INIT_REG_UNIT_LIST_ROOTS_FAILED]: (state, action) =>
-        addErrorFeedback(state, i18n.t(action.payload.message)),
-    [orgUnitListActionTypes.SET_SEARCH_ROOTS_FAILED]: (state, action) =>
-        addErrorFeedback(state, i18n.t(action.payload.message)),
     [dataEntryActionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
     [viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
@@ -136,5 +117,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, i18n.t('Error deleting the enrollment event')),
     [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error editing the event, the changes made were not saved')),
+    [enrollmentSiteActionTypes.ERROR_ENROLLMENT]: (state, action) =>
+        addErrorFeedback(state, i18n.t(action.payload.message)),
 }, 'feedbacks', []);
 

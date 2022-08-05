@@ -184,7 +184,14 @@ function getBuiltPrograms(
             // We allow only tracker programs that their tracker id exists in the collection.
             // This is because a user might have access to read and write to a program BUT
             // they might not have access to read and write to the tracked entity type the program belongs to.
-            return (cachedProgram.trackedEntityTypeId && trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId));
+            if (!cachedProgram.trackedEntityTypeId) {
+                return false;
+            }
+
+            const { read, write } =
+                trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId)?.access?.data || {};
+
+            return (read && write);
         })
         .map(cachedProgram => programFactory.build(cachedProgram));
 

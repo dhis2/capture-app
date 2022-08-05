@@ -135,6 +135,9 @@ msgstr "Рўйхатга олиш"
 msgid "A future date is not allowed"
 msgstr "Келажакдаги сана танловига рухсат берилмайди"
 
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
@@ -1077,18 +1080,18 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Кузатув учун белгиланг"
 
+msgid "Enrollment date"
+msgstr "Қайд этилган сана"
+
+msgid "Incident date"
+msgstr "Ҳодиса санаси"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 "Қайд этиш виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
 
 msgid "Follow-up"
 msgstr "Кузатиш"
-
-msgid "Enrollment date"
-msgstr "Қайд этилган сана"
-
-msgid "Incident date"
-msgstr "Ҳодиса санаси"
 
 msgid "Started at {{orgUnitName}}"
 msgstr " {{orgUnitName}} да бошланган"

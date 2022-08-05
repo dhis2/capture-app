@@ -203,7 +203,7 @@ class NotesPlain extends React.Component<Props, State> {
                         <ListItem className={classes.noteItem} key={n.clientId} data-test="comment">
                             <div className={classes.noteItemHeader}>
                                 <div className={classes.noteItemUser} data-test="comment-user">
-                                    {n.storedBy}
+                                    {n.createdBy ? `${n.createdBy.firstName} ${n.createdBy.surname}` : `${n.storedBy}` }
                                 </div>
                                 <div className={classes.noteItemDate} data-test="comment-date">
                                     {n.storedDate}

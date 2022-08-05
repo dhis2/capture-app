@@ -21,6 +21,7 @@ export const searchPageActionTypes = {
     FALLBACK_SEARCH_COMPLETED: 'FallbackWillPushToSearchPageWithoutProgramSelected',
     ALL_SEARCH_RELATED_DATA_CLEAN: 'CleanSearchRelatedData',
     FALLBACK_SEARCH_RELATED_DATA_CLEAN: 'CleanFallbackSearchRelatedData',
+    SEARCH_PAGE_OPEN: 'SearchPage.SearchPageOpen',
     NAVIGATE_TO_NEW_USER_PAGE: 'NavigateToNewUserPage',
 };
 
@@ -87,6 +88,8 @@ export const cleanSearchRelatedData = () =>
 
 export const cleanFallbackRelatedData = () =>
     actionCreator(searchPageActionTypes.FALLBACK_SEARCH_RELATED_DATA_CLEAN)();
+
+export const openSearchPage = () => actionCreator(searchPageActionTypes.SEARCH_PAGE_OPEN)();
 
 export const navigateToNewUserPage = () =>
     actionCreator(searchPageActionTypes.NAVIGATE_TO_NEW_USER_PAGE)();

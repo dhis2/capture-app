@@ -19,11 +19,23 @@ export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store
         switchMap((action) => {
             const payload = action.payload;
 
-            return querySingleResource({ resource: 'me', fields: 'name' }).then((user) => {
+            return querySingleResource({
+                resource: 'me',
+                params: {
+                    fields: 'firstName,surname,username',
+                },
+            }).then((user) => {
                 const storedAt = moment().toISOString();
+                const { userName, firstName, surname } = user;
+                const clientId = uuid();
                 const note = {
                     value: payload.note,
-                    storedBy: user.name,
+                    createdBy: {
+                        firstName,
+                        surname,
+                        uid: clientId,
+                    },
+                    storedBy: userName,
                     storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
                     clientId: uuid(),
                 };

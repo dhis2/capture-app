@@ -33,13 +33,16 @@ const showMainPage = ({ programId, orgUnitId, trackedEntityTypeId, displayFrontP
 };
 
 const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, showAllAccessible, history }) => {
-    orgUnitId &&
-        history.push(
-            `/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId })}`,
-        );
-
-    showAllAccessible &&
-        history.push(`/?${buildUrlQueryString({ programId, selectedTemplateId })}&all`);
+    if (orgUnitId) {
+        selectedTemplateId
+            ? history.push(`/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId })}`)
+            : history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }
+    if (showAllAccessible) {
+        selectedTemplateId
+            ? history.push(`/?${buildUrlQueryString({ programId, selectedTemplateId })}&all`)
+            : history.push(`/?${buildUrlQueryString({ programId })}&all`);
+    }
 };
 
 const MainPageContainer = () => {

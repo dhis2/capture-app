@@ -1,4 +1,4 @@
-Feature: User uses the LockedSelector to navigate
+Feature: User uses the ScopeSelector to navigate
 
   # Main page
   Scenario: Main page > Notifying that you need to select org unit and program to get started
@@ -174,37 +174,37 @@ Feature: User uses the LockedSelector to navigate
 
   #Enrollment event edit page
   Scenario: Enrollment event edit page > resetting the tei
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=pybd813kIWx&enrollmentId=FS085BEkJo2&eventId=kNn9HkRjk1c&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=kNn9HkRjk1c
     When you reset the tei selection
     Then you navigated to the main page
 
   Scenario: Enrollment event edit page > resetting the program
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the program selection
     Then you see message explaining you need to select a program
 
   Scenario: Enrollment event edit page > resetting the org unit
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR&eventId=lQQyjR73hHk
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the org unit selection
     Then you see the enrollment event Edit page but there is no org unit id in the url
 
   Scenario: Enrollment event edit page > resetting the enrollment
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the enrollment selection
     Then you see message explaining you need to select an enrollment
 
   Scenario: Enrollment event edit page > resetting the event
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the stage selection
     Then you see the enrollment page
 
   Scenario: Enrollment event edit page > resetting the stage
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the event selection
     Then you see the enrollment page
 
     Scenario: Enrollment event edit page > Fallback for tei missing name
-    Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollmentEventEdit?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8&teiId=dNpxRu1mWG5&enrollmentId=V8uPJuhvlL7&eventId=rBjxtO8npTb&stageId=CWaAcQYKVpq
+    Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=rBjxtO8npTb
     Then you see the tei id on the scope selector
 
   # Enrollment event new page

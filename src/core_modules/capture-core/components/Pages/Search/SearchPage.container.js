@@ -4,7 +4,13 @@ import React, { useCallback, useMemo, useEffect } from 'react';
 import type { ComponentType } from 'react';
 import { useLocationQuery } from '../../../utils/routing';
 import { SearchPageComponent } from './SearchPage.component';
-import { cleanSearchRelatedData, navigateToMainPage, navigateToNewUserPage, showInitialViewOnSearchPage } from './SearchPage.actions';
+import {
+    cleanSearchRelatedData,
+    navigateToMainPage,
+    navigateToNewUserPage,
+    showInitialViewOnSearchPage,
+    openSearchPage,
+} from './SearchPage.actions';
 import {
     useSearchOptions,
     useTrackedEntityTypesWithCorrelatedPrograms,
@@ -69,6 +75,10 @@ export const SearchPage: ComponentType<{||}> = () => {
             dispatchNavigateToMainPage();
         }
     }, [programId, preselectedProgramId, dispatchNavigateToMainPage]);
+
+    useEffect(() => {
+        dispatch(openSearchPage());
+    }, [dispatch]);
 
     return (
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>

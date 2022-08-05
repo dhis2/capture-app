@@ -1,7 +1,6 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import moment from 'moment';
-import { trimQuotes } from 'capture-core-utils/rulesEngine/commonUtils/trimQuotes';
 import type { IDateUtils } from 'capture-core-utils/rulesEngine/rulesEngine.types';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 
@@ -14,10 +13,8 @@ function momentToRulesDate(momentObject: moment$Moment): string {
     return getFormattedStringFromMomentUsingEuropeanGlyphs(momentObject);
 }
 function between(unit: string, firstRulesDate: string, secondRulesDate: string): number {
-    const firsRulesDateTrimmed = trimQuotes(firstRulesDate);
-    const secondRulesDateTrimmed = trimQuotes(secondRulesDate);
-    const firstDate = rulesDateToMoment(firsRulesDateTrimmed);
-    const secondDate = rulesDateToMoment(secondRulesDateTrimmed);
+    const firstDate = rulesDateToMoment(firstRulesDate);
+    const secondDate = rulesDateToMoment(secondRulesDate);
     return secondDate.diff(firstDate, unit);
 }
 
@@ -38,13 +35,10 @@ class DateUtils implements IDateUtils {
     yearsBetween(firstRulesDate: string, secondRulesDate: string): number {
         return between('years', firstRulesDate, secondRulesDate);
     }
-    addDays(rulesDate: string, daysToAdd: string): string {
-        const rulesDateTrimmed = trimQuotes(rulesDate);
-        const daysToAddTrimmed = trimQuotes(daysToAdd);
-        const dateMoment = rulesDateToMoment(rulesDateTrimmed);
-        const newDateMoment = dateMoment.add(daysToAddTrimmed, 'days');
-        const newRulesDate = momentToRulesDate(newDateMoment);
-        return `'${newRulesDate}'`;
+    addDays(rulesDate: string, daysToAdd: number): string {
+        const dateMoment = rulesDateToMoment(rulesDate);
+        const newDateMoment = dateMoment.add(daysToAdd, 'days');
+        return momentToRulesDate(newDateMoment);
     }
     compareDates(firstRulesDate: string, secondRulesDate: string): number {
         const diff = dateUtils.daysBetween(secondRulesDate, firstRulesDate);
