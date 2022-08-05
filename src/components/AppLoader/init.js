@@ -167,8 +167,7 @@ export async function initializeAsync(
             fields: 'id,userRoles',
         },
     });
-
-    rulesEngine.setSelectedUserRoles(userSettings.userRoles.map(({ id }) => id));
+    rulesEngine.setSelectedUserRoles(currentUser.userRoles.map(({ id }) => id));
     const systemSettings = await onQueryApi({
         resource: 'systemSettings',
     });
