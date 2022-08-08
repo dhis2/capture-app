@@ -377,8 +377,14 @@ And('you see message explaining this is an Event program', () => {
 });
 
 When('you select org unit that is incompatible with the already selected program', () => {
+    cy.intercept({
+        method: 'GET',
+        url: '**/organisationUnits/KKkLOTpMXGV?fields=displayName,path,id',
+    }).as('searchOrganizationUnit');
+
     cy.get('[data-test="capture-ui-input"]')
         .type('Bombal');
+    cy.wait('@searchOrganizationUnit');
     cy.contains('Bombali')
         .click();
 });

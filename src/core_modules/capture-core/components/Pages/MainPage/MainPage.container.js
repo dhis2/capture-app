@@ -45,6 +45,69 @@ const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, sho
     }
 };
 
+const useMainPageStatus = ({ programId, selectedProgram, categories, orgUnitId, showAllAccessible }) => {
+    const withoutOrgUnit = useMemo(() => !orgUnitId && !showAllAccessible, [orgUnitId, showAllAccessible]);
+
+    return useMemo(() => {
+        if (!programId) return MainPageStatuses.DEFAULT;
+
+        if (selectedProgram?.categoryCombination) {
+            if (!categories) return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
+            const programCategories = Array.from(selectedProgram.categoryCombination.categories.values());
+            if (programCategories.some(category => !categories || !categories[category.id])) {
+                return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
+            }
+            if (withoutOrgUnit) {
+                return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
+            }
+            return MainPageStatuses.SHOW_WORKING_LIST;
+        }
+
+        if (withoutOrgUnit) {
+            return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
+        }
+
+        return MainPageStatuses.SHOW_WORKING_LIST;
+    }, [categories, programId, withoutOrgUnit, selectedProgram]);
+};
+
+const useSelectorMainPage = () =>
+    useSelector(
+        ({ currentSelections, searchPage, activePage }) => ({
+            categories: currentSelections.categories,
+            selectedCategories: currentSelections.categoriesMeta,
+            searchStatus: searchPage.searchStatus,
+            ready: !activePage.isLoading && !activePage.lockedSelectorLoads,
+            error: activePage.selectionsError && activePage.selectionsError.error,
+            searchableFields: searchPage.searchableFields,
+            minAttributesRequiredToSearch: searchPage.minAttributesRequiredToSearch,
+        }),
+        shallowEqual,
+    );
+
+const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, history, dispatch }) => {
+    const dispatchShowInitialSearchPage = useCallback(() => dispatch(showInitialViewOnSearchPage()), [dispatch]);
+    const dispatchCleanSearchRelatedData = useCallback(() => dispatch(cleanSearchRelatedData()), [dispatch]);
+    const dispatchNavigateToNewUserPage = useCallback(() => dispatch(navigateToNewUserPage()), [dispatch]);
+    const onChangeTemplate = useCallback(
+        id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, history }),
+        [history, orgUnitId, programId, showAllAccessible],
+    );
+
+    const onSetShowAccessible = useCallback(
+        () => history.push(`/?${buildUrlQueryString({ programId })}&all`),
+        [history, programId],
+    );
+
+    return {
+        dispatchShowInitialSearchPage,
+        dispatchCleanSearchRelatedData,
+        dispatchNavigateToNewUserPage,
+        onChangeTemplate,
+        onSetShowAccessible,
+    };
+};
+
 const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -59,36 +122,22 @@ const MainPageContainer = () => {
         minAttributesRequiredToSearch,
         error,
         ready,
-    } = useSelector(
-        ({ currentSelections, searchPage, activePage }) => ({
-            categories: currentSelections.categories,
-            selectedCategories: currentSelections.categoriesMeta,
-            searchStatus: searchPage.searchStatus,
-            ready: !activePage.isLoading && !activePage.lockedSelectorLoads,
-            error: activePage.selectionsError && activePage.selectionsError.error,
-            searchableFields: searchPage.searchableFields,
-            minAttributesRequiredToSearch: searchPage.minAttributesRequiredToSearch,
-        }),
-        shallowEqual,
-    );
+    } = useSelectorMainPage();
 
     const selectedProgram = programCollection.get(programId);
     // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
     const availableSearchOptions = useSearchOptions();
+    const MainPageStatus = useMainPageStatus({ programId, selectedProgram, categories, orgUnitId, showAllAccessible });
 
-    const dispatchShowInitialSearchPage = useCallback(() => {
-        dispatch(showInitialViewOnSearchPage());
-    }, [dispatch]);
-    const dispatchCleanSearchRelatedData = useCallback(() => {
-        dispatch(cleanSearchRelatedData());
-    }, [dispatch]);
-    const dispatchNavigateToNewUserPage = useCallback(() => { dispatch(navigateToNewUserPage()); }, [dispatch]);
-    const onChangeTemplate = useCallback(
-        id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, history }),
-        [history, orgUnitId, programId, showAllAccessible],
-    );
+    const {
+        dispatchShowInitialSearchPage,
+        dispatchCleanSearchRelatedData,
+        dispatchNavigateToNewUserPage,
+        onChangeTemplate,
+        onSetShowAccessible,
+    } = useCallbackMainPage({ orgUnitId, programId, showAllAccessible, history, dispatch });
 
     useEffect(() => {
         dispatch(updateShowAccessibleStatus(showAllAccessible));
@@ -114,33 +163,6 @@ const MainPageContainer = () => {
         history,
     ]);
 
-    const setShowAccessible = () => history.push(`/?${buildUrlQueryString({ programId })}&all`);
-
-    const withoutOrgUnit = useMemo(() => !orgUnitId && !showAllAccessible, [orgUnitId, showAllAccessible]);
-
-    const MainPageStatus = useMemo(() => {
-        if (!programId) return MainPageStatuses.DEFAULT;
-
-        if (selectedProgram?.categoryCombination) {
-            if (!categories) return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
-            const programCategories = Array.from(selectedProgram.categoryCombination.categories.values());
-
-            if (programCategories.some(category => !categories || !categories[category.id])) {
-                return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
-            }
-
-            if (withoutOrgUnit) {
-                return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
-            }
-
-            return MainPageStatuses.SHOW_WORKING_LIST;
-        }
-
-        if (withoutOrgUnit) {
-            return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
-        }
-        return MainPageStatuses.SHOW_WORKING_LIST;
-    }, [categories, programId, withoutOrgUnit, selectedProgram]);
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
@@ -152,7 +174,7 @@ const MainPageContainer = () => {
                         programId={programId}
                         orgUnitId={orgUnitId}
                         selectedTemplateId={selectedTemplateId}
-                        setShowAccessible={setShowAccessible}
+                        setShowAccessible={onSetShowAccessible}
                         onChangeTemplate={onChangeTemplate}
                         error={error}
                         ready={ready}
