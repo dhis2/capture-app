@@ -9,26 +9,22 @@ export const useEvent = (eventId: string) => {
         enrollment: undefined,
         trackedEntity: undefined,
     });
-    const { data, error, loading } = useDataQuery(
+    const { data, error, loading, refetch } = useDataQuery(
         useMemo(
             () => ({
                 event: {
                     resource: 'tracker/events',
-                    id: eventId,
+                    id: ({ variables: { id } }) => id,
                     params: {
                         fields: ['program', 'programStage', 'enrollment', 'trackedEntity'],
                     },
                 },
             }),
-            [eventId],
+            [],
         ),
     );
 
-    const {
-        data: dataFallback,
-        refetch,
-        called,
-    } = useDataQuery(
+    const { data: dataFallback, refetch: refetchFallback } = useDataQuery(
         useMemo(
             () => ({
                 enrollment: {
@@ -45,21 +41,25 @@ export const useEvent = (eventId: string) => {
     );
 
     useEffect(() => {
-        if (data?.event) {
-            setEvent(data.event);
+        eventId && refetch({ variables: { id: eventId } });
+    }, [eventId, refetch]);
 
-            // fallback for the case when the endpoint tracker/events does not return the trackedEntity field.
-            if (data.event.enrollment && data.event.trackedEntity === undefined && !called) {
-                refetch({ variables: { enrollment: data.event.enrollment } });
-            }
+    useEffect(() => {
+        data?.event && setEvent(data.event);
+    }, [data?.event]);
+
+    useEffect(() => {
+        // fallback for the case when the endpoint tracker/events does not return the trackedEntity field.
+        if (event.enrollment && event.trackedEntity === undefined) {
+            refetchFallback({ variables: { enrollment: event.enrollment } });
         }
-    }, [data?.event, refetch, called]);
+    }, [event.enrollment, event.trackedEntity, refetchFallback]);
 
     useEffect(() => {
         if (dataFallback?.enrollment?.trackedEntity) {
             setEvent(e => ({ ...e, trackedEntity: dataFallback?.enrollment?.trackedEntity }));
         }
-    }, [dataFallback?.enrollment]);
+    }, [dataFallback?.enrollment?.trackedEntity]);
 
     return {
         error,
