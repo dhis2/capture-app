@@ -44,22 +44,29 @@ const styles = {
     },
 };
 
-const getLastUpdatedAt = (serverTimeZoneId, lastUpdated) => (
-    lastUpdated && moment(lastUpdated).isValid()
-        ? i18n.t('Last updated {{date}}', {
-            date: serverTimeZoneId
-                ? moment.parseZone(lastUpdated).utcOffset(serverTimeZoneId).fromNow()
-                : moment(lastUpdated).fromNow(),
-        })
-        : '');
+const getLastUpdatedAt = (serverTimeZoneId, events) => {
+    const lastEventUpdated = events.reduce((acc, event) => (
+        new Date(acc.updatedAt).getTime() > new Date(event.updatedAt).getTime() ? acc : event
+    ));
+
+    if (lastEventUpdated) {
+        const { updatedAt } = lastEventUpdated;
+        return lastEventUpdated?.updatedAt && moment(updatedAt).isValid()
+            ? i18n.t('Last updated {{date}}', {
+                date: serverTimeZoneId
+                    ? moment.parseZone(updatedAt).utcOffset(serverTimeZoneId).fromNow()
+                    : moment(updatedAt).fromNow(),
+            })
+            : null;
+    }
+    return null;
+};
 
 export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => {
     const { systemSettings } = useSystemSettingsFromIndexedDB('serverTimeZoneId');
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
-    // $FlowFixMe[incompatible-call] https://github.com/moment/moment/issues/3419
-    const lastUpdated = moment.max(events.map(e => e.updatedAt));
 
     return (<div className={classes.container}>
         {
@@ -103,8 +110,8 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
             </div>
             {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
         </div> : null }
-        {events.length > 0 && <div className={cx(classes.smallText, classes.indicator)}>
-            {getLastUpdatedAt(systemSettings?.serverTimeZoneId, lastUpdated)}
+        {totalEvents > 0 && <div className={cx(classes.smallText, classes.indicator)}>
+            {getLastUpdatedAt(systemSettings?.serverTimeZoneId, events)}
         </div>}
     </div>);
 };
