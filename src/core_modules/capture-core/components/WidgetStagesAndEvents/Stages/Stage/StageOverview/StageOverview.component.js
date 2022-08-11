@@ -9,6 +9,7 @@ import { statusTypes } from 'capture-core/events/statusTypes';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
+import { useSystemSettingsFromIndexedDB } from '../../../../../utils/cachedDataHooks/useSystemSettingsFromIndexedDB';
 
 const styles = {
     container: {
@@ -42,11 +43,23 @@ const styles = {
         fontSize: 12,
     },
 };
+
+const getLastUpdatedAt = (serverTimeZoneId, lastUpdated) => (
+    lastUpdated && moment(lastUpdated).isValid()
+        ? i18n.t('Last updated {{date}}', {
+            date: serverTimeZoneId
+                ? moment.parseZone(lastUpdated).utcOffset(serverTimeZoneId).fromNow()
+                : moment(lastUpdated).fromNow(),
+        })
+        : '');
+
 export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => {
+    const { systemSettings } = useSystemSettingsFromIndexedDB('serverTimeZoneId');
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
-    const lastUpdated = Math.max.apply(null, events.map(e => new Date(e.updatedAt).getTime()));
+    // $FlowFixMe[incompatible-call] https://github.com/moment/moment/issues/3419
+    const lastUpdated = moment.max(events.map(e => e.updatedAt));
 
     return (<div className={classes.container}>
         {
@@ -91,9 +104,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
             {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
         </div> : null }
         {events.length > 0 && <div className={cx(classes.smallText, classes.indicator)}>
-            {i18n.t('Last updated {{date}}',
-                { date: moment(lastUpdated).isValid() ? moment(lastUpdated).fromNow() : '' },
-            )}
+            {getLastUpdatedAt(systemSettings?.serverTimeZoneId, lastUpdated)}
         </div>}
     </div>);
 };
