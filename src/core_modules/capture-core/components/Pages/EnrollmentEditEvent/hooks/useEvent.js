@@ -2,13 +2,15 @@
 import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
+const defaultState = {
+    program: undefined,
+    programStage: undefined,
+    enrollment: undefined,
+    trackedEntity: undefined,
+};
+
 export const useEvent = (eventId: string) => {
-    const [event, setEvent] = useState({
-        program: undefined,
-        programStage: undefined,
-        enrollment: undefined,
-        trackedEntity: undefined,
-    });
+    const [event, setEvent] = useState(defaultState);
     const { data, error, loading, refetch } = useDataQuery(
         useMemo(
             () => ({
@@ -41,7 +43,10 @@ export const useEvent = (eventId: string) => {
     );
 
     useEffect(() => {
-        eventId && refetch({ variables: { id: eventId } });
+        if (eventId) {
+            setEvent(defaultState);
+            refetch({ variables: { id: eventId } });
+        }
     }, [eventId, refetch]);
 
     useEffect(() => {
