@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 const defaultState = {
-    program: undefined,
-    programStage: undefined,
-    enrollment: undefined,
-    trackedEntity: undefined,
+    program: '',
+    programStage: '',
+    enrollment: '',
+    trackedEntity: '',
 };
 
 const eventQuery = {
@@ -60,7 +60,7 @@ export const useEvent = (eventId: string) => {
 
     return {
         error,
-        loading: loading || !event.program || !event.programStage || !event.enrollment || !event.trackedEntity,
+        loading: loading || !event.trackedEntity,
         event,
     };
 };

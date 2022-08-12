@@ -40,7 +40,7 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId);
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
 
-    return !loading && eventId && programId && stageId && enrollmentId && teiId ? (
+    return !loading && eventId ? (
         <EnrollmentEditEventPageWithContext
             programId={programId}
             stageId={stageId}
