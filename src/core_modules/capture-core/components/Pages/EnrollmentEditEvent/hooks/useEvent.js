@@ -14,7 +14,7 @@ const eventQuery = {
         resource: 'tracker/events',
         id: ({ variables: { id } }) => id,
         params: {
-            fields: ['program', 'programStage', 'enrollment', 'trackedEntity'],
+            fields: ['program', 'programStage', 'enrollment', 'trackedEntity', 'event'],
         },
     },
 };
@@ -31,7 +31,7 @@ const enrollmentQuery = {
 
 export const useEvent = (eventId: string) => {
     const [event, setEvent] = useState(defaultState);
-    const { data, error, loading, refetch } = useDataQuery(eventQuery);
+    const { data, error, refetch } = useDataQuery(eventQuery);
     const { data: dataFallback, refetch: refetchFallback } = useDataQuery(enrollmentQuery);
 
     useEffect(() => {
@@ -60,7 +60,7 @@ export const useEvent = (eventId: string) => {
 
     return {
         error,
-        loading: loading || !event.trackedEntity,
+        loading: !eventId || eventId !== event.event || !event.trackedEntity,
         event,
     };
 };
