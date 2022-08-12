@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // $FlowFixMe
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -37,20 +37,10 @@ const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntit
 
 export const EnrollmentEditEventPage = () => {
     const { orgUnitId, eventId } = useLocationQuery();
-    const { event } = useEvent(eventId);
-    const [context, setContext] = useState({});
-    const { programId, stageId, teiId, enrollmentId } = context;
+    const { loading, event } = useEvent(eventId);
+    const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
 
-    useEffect(() => {
-        event && setContext({
-            programId: event.program,
-            stageId: event.programStage,
-            teiId: event.trackedEntity,
-            enrollmentId: event.enrollment,
-        });
-    }, [event]);
-
-    return eventId && programId && stageId && enrollmentId && teiId ? (
+    return !loading && eventId && programId && stageId && enrollmentId && teiId ? (
         <EnrollmentEditEventPageWithContext
             programId={programId}
             stageId={stageId}

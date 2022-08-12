@@ -1,5 +1,5 @@
 // @flow
-import { useMemo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 const defaultState = {
@@ -9,38 +9,30 @@ const defaultState = {
     trackedEntity: undefined,
 };
 
+const eventQuery = {
+    event: {
+        resource: 'tracker/events',
+        id: ({ variables: { id } }) => id,
+        params: {
+            fields: ['program', 'programStage', 'enrollment', 'trackedEntity'],
+        },
+    },
+};
+
+const enrollmentQuery = {
+    enrollment: {
+        resource: 'tracker/enrollments',
+        id: ({ variables: { enrollment } }) => enrollment,
+        params: {
+            fields: ['trackedEntity'],
+        },
+    },
+};
+
 export const useEvent = (eventId: string) => {
     const [event, setEvent] = useState(defaultState);
-    const { data, error, loading, refetch } = useDataQuery(
-        useMemo(
-            () => ({
-                event: {
-                    resource: 'tracker/events',
-                    id: ({ variables: { id } }) => id,
-                    params: {
-                        fields: ['program', 'programStage', 'enrollment', 'trackedEntity'],
-                    },
-                },
-            }),
-            [],
-        ),
-    );
-
-    const { data: dataFallback, refetch: refetchFallback } = useDataQuery(
-        useMemo(
-            () => ({
-                enrollment: {
-                    resource: 'tracker/enrollments',
-                    id: ({ variables: { enrollment } }) => enrollment,
-                    params: {
-                        fields: ['trackedEntity'],
-                    },
-                },
-            }),
-            [],
-        ),
-        { lazy: true },
-    );
+    const { data, error, loading, refetch } = useDataQuery(eventQuery);
+    const { data: dataFallback, refetch: refetchFallback } = useDataQuery(enrollmentQuery);
 
     useEffect(() => {
         if (eventId) {
@@ -68,7 +60,7 @@ export const useEvent = (eventId: string) => {
 
     return {
         error,
-        loading,
-        event: !loading && data ? event : undefined,
+        loading: loading || !event.program || !event.programStage || !event.enrollment || !event.trackedEntity,
+        event,
     };
 };
