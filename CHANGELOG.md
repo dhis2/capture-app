@@ -1,3 +1,10 @@
+## [100.11.11](https://github.com/dhis2/capture-app/compare/v100.11.10...v100.11.11) (2022-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-13500] make org unit code optional ([#2946](https://github.com/dhis2/capture-app/issues/2946)) ([d59dad3](https://github.com/dhis2/capture-app/commit/d59dad3ad6fdfba94c90ffaafd5b887aa6f3349a))
+
 ## [100.11.10](https://github.com/dhis2/capture-app/compare/v100.11.9...v100.11.10) (2022-08-15)
 
 
