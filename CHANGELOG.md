@@ -1,3 +1,10 @@
+## [100.11.10](https://github.com/dhis2/capture-app/compare/v100.11.9...v100.11.10) (2022-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-13181] change delete endpoint to new tracker ([#2944](https://github.com/dhis2/capture-app/issues/2944)) ([6845489](https://github.com/dhis2/capture-app/commit/68454893cdde28324f77de864ece867072d3a93d))
+
 ## [100.11.9](https://github.com/dhis2/capture-app/compare/v100.11.8...v100.11.9) (2022-08-03)
 
 
