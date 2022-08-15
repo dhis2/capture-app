@@ -112,8 +112,11 @@ export const requestDeleteEventEpic = (
         concatMap((action) => {
             const { eventId, storeId } = action.payload;
             const deletePromise = mutate({
-                resource: `events/${eventId}`,
-                type: 'delete',
+                resource: 'tracker?async=false&importStrategy=DELETE',
+                type: 'create',
+                data: () => ({
+                    events: [{ event: eventId }],
+                }),
             })
                 .then(() => deleteEventSuccess(eventId, storeId))
                 .catch((error) => {

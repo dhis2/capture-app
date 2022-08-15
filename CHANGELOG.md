@@ -1,3 +1,39 @@
+## [100.11.11](https://github.com/dhis2/capture-app/compare/v100.11.10...v100.11.11) (2022-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-13500] make org unit code optional ([#2946](https://github.com/dhis2/capture-app/issues/2946)) ([d59dad3](https://github.com/dhis2/capture-app/commit/d59dad3ad6fdfba94c90ffaafd5b887aa6f3349a))
+
+## [100.11.10](https://github.com/dhis2/capture-app/compare/v100.11.9...v100.11.10) (2022-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-13181] change delete endpoint to new tracker ([#2944](https://github.com/dhis2/capture-app/issues/2944)) ([6845489](https://github.com/dhis2/capture-app/commit/68454893cdde28324f77de864ece867072d3a93d))
+
+## [100.11.9](https://github.com/dhis2/capture-app/compare/v100.11.8...v100.11.9) (2022-08-03)
+
+
+### Bug Fixes
+
+* [DHIS2-13534] edit single event and hide delete button ([#2943](https://github.com/dhis2/capture-app/issues/2943)) ([6044f88](https://github.com/dhis2/capture-app/commit/6044f88bd641e07c9b55443a0f1caf2d2b9861ff))
+
+## [100.11.8](https://github.com/dhis2/capture-app/compare/v100.11.7...v100.11.8) (2022-08-02)
+
+
+### Bug Fixes
+
+* [DHIS2-13228] hide edit button in case no tea ([#2930](https://github.com/dhis2/capture-app/issues/2930)) ([fb072e0](https://github.com/dhis2/capture-app/commit/fb072e025a0603dc705c41ea07e4fbdb28f98e21))
+
+## [100.11.7](https://github.com/dhis2/capture-app/compare/v100.11.6...v100.11.7) (2022-08-01)
+
+
+### Bug Fixes
+
+* [DHIS2-12777] hide programs without trackedentitytype access ([#2934](https://github.com/dhis2/capture-app/issues/2934)) ([046391b](https://github.com/dhis2/capture-app/commit/046391b4889b3b19794cc512e9fdc69f4cfd254c))
+* [DHIS2-13060] tei working list default filters ([#2912](https://github.com/dhis2/capture-app/issues/2912)) ([ca64f18](https://github.com/dhis2/capture-app/commit/ca64f18b9ae9705debe9457151e0b56861cea27e))
+
 ## [100.11.6](https://github.com/dhis2/capture-app/compare/v100.11.5...v100.11.6) (2022-08-01)
 
 
