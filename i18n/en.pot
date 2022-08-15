@@ -532,57 +532,6 @@ msgstr "Program doesn't exist"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Selected program is invalid for selected registering unit"
 
-msgid "New"
-msgstr "New"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "New {{trackedEntityName}} in {{programName}}"
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Search for a {{trackedEntityName}} in {{programName}}"
-
-msgid "Clear selections"
-msgstr "Clear selections"
-
-msgid "Selected registering unit"
-msgstr "Selected registering unit"
-
-msgid "Start Again"
-msgstr "Start Again"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Are you sure? All unsaved data will be lost."
-
-msgid "Accept"
-msgstr "Accept"
-
-msgid "Registering Organisation Unit"
-msgstr "Registering Organisation Unit"
-
-msgid "Select"
-msgstr "Select"
-
-msgid "Program"
-msgstr "Program"
-
-msgid "No programs available."
-msgstr "No programs available."
-
-msgid "Show all"
-msgstr "Show all"
-
-msgid "Selected program"
-msgstr "Selected program"
-
-msgid "Some programs are being filtered."
-msgstr "Some programs are being filtered."
-
-msgid "Select program"
-msgstr "Select program"
-
-msgid "Selected"
-msgstr "Selected"
-
 msgid "Online"
 msgstr "Online"
 
@@ -774,6 +723,9 @@ msgstr "Or see all events accessible to you in {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Please select an organisation unit."
 
+msgid "New"
+msgstr "New"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choose the {{missingCategories}} to start reporting"
 
@@ -806,6 +758,15 @@ msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Save as new {{trackedEntityName}}"
+
+msgid "Some programs are being filtered."
+msgstr "Some programs are being filtered."
+
+msgid "Show all"
+msgstr "Show all"
+
+msgid "Program"
+msgstr "Program"
 
 msgid "Organisation Unit"
 msgstr "Organisation Unit"
@@ -999,6 +960,36 @@ msgstr "You dont have access to create any relationships"
 msgid "Add relationship"
 msgstr "Add relationship"
 
+msgid "Selected registering unit"
+msgstr "Selected registering unit"
+
+msgid "Start Again"
+msgstr "Start Again"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Are you sure? All unsaved data will be lost."
+
+msgid "Accept"
+msgstr "Accept"
+
+msgid "Registering Organisation Unit"
+msgstr "Registering Organisation Unit"
+
+msgid "Select"
+msgstr "Select"
+
+msgid "No programs available."
+msgstr "No programs available."
+
+msgid "Selected program"
+msgstr "Selected program"
+
+msgid "Select program"
+msgstr "Select program"
+
+msgid "Selected"
+msgstr "Selected"
+
 msgid "Results found"
 msgstr "Results found"
 
@@ -1007,6 +998,15 @@ msgstr "Search {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Fill in at least {{minAttributesRequired}} attributes to search"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "New {{trackedEntityName}} in {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Search for a {{trackedEntityName}} in {{programName}}"
+
+msgid "Clear selections"
+msgstr "Clear selections"
 
 msgid "To work with the selected program,"
 msgstr "To work with the selected program,"

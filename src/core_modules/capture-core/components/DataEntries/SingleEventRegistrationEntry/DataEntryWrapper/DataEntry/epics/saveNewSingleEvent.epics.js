@@ -9,7 +9,7 @@ import {
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 import { getLocationQuery, buildUrlQueryString } from '../../../../../../utils/routing';
-import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../../../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
