@@ -11,6 +11,7 @@ import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
+import { getProgramEventAccess } from '../../metaData';
 
 const styles = {
     header: {
@@ -52,6 +53,8 @@ export const WidgetEventEditPlain = ({
     const { currentPageMode, pageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
+    const eventAccess = getProgramEventAccess(programId, programStage.id);
+
     if (error) {
         return error.errorComponent;
     }
@@ -68,6 +71,7 @@ export const WidgetEventEditPlain = ({
                     <Button
                         small
                         secondary
+                        disabled={!eventAccess.write}
                         className={classes.button}
                         onClick={() => dispatch(startShowEditEventDataEntry(orgUnit))}
                     >
