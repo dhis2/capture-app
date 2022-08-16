@@ -136,7 +136,7 @@ msgid "A future date is not allowed"
 msgstr "Budoucí datum není povoleno"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
-msgstr ""
+msgstr "Ukládání nového zápisu do {{programName}} v {{orgUnitName}}."
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr "Ukládání {{trackedEntityName}} v {{programName}} v {{orgUnitName}}."
@@ -537,57 +537,6 @@ msgstr "Program neexistuje"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Vybraný program je pro vybranou registrační jednotku neplatný"
 
-msgid "New"
-msgstr "Nový"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "Nový {{trackedEntityName}} v {{programName}}"
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
-
-msgid "Clear selections"
-msgstr "Vymazat výběry"
-
-msgid "Selected registering unit"
-msgstr "Vybraná registrační jednotka"
-
-msgid "Start Again"
-msgstr "Začít znovu"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Jste si jist? Všechna neuložená data budou ztracena."
-
-msgid "Accept"
-msgstr "Přijmout"
-
-msgid "Registering Organisation Unit"
-msgstr "Registrování organizační jednotky"
-
-msgid "Select"
-msgstr "Vybrat"
-
-msgid "Program"
-msgstr "Program"
-
-msgid "No programs available."
-msgstr "Nejsou k dispozici žádné programy."
-
-msgid "Show all"
-msgstr "Ukázat vše"
-
-msgid "Selected program"
-msgstr "Vybraný program"
-
-msgid "Some programs are being filtered."
-msgstr "Některé programy jsou filtrovány."
-
-msgid "Select program"
-msgstr "Vybrat program"
-
-msgid "Selected"
-msgstr "Vybráno"
-
 msgid "Online"
 msgstr "Online"
 
@@ -784,6 +733,9 @@ msgstr "Nebo zobrazit všechny události, které máte k dispozici v {{program}}
 msgid "Please select an organisation unit."
 msgstr "Vyberte organizační jednotku."
 
+msgid "New"
+msgstr "Nový"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}}"
 
@@ -817,6 +769,15 @@ msgstr "Odkaz"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Uložit jako nový {{trackedEntityName}}"
+
+msgid "Some programs are being filtered."
+msgstr "Některé programy jsou filtrovány."
+
+msgid "Show all"
+msgstr "Ukázat vše"
+
+msgid "Program"
+msgstr "Program"
 
 msgid "Organisation Unit"
 msgstr "Organizační jednotka"
@@ -896,7 +857,7 @@ msgstr ""
 "Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
 
 msgid "Register a user"
-msgstr ""
+msgstr "Registrovat uživatele"
 
 msgid "Back to search"
 msgstr "Zpět na vyhledávání"
@@ -1015,6 +976,36 @@ msgstr "Nemáte přístup k vytváření jakýchkoli vztahů"
 msgid "Add relationship"
 msgstr "Přidat vztah"
 
+msgid "Selected registering unit"
+msgstr "Vybraná registrační jednotka"
+
+msgid "Start Again"
+msgstr "Začít znovu"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Jste si jist? Všechna neuložená data budou ztracena."
+
+msgid "Accept"
+msgstr "Přijmout"
+
+msgid "Registering Organisation Unit"
+msgstr "Registrování organizační jednotky"
+
+msgid "Select"
+msgstr "Vybrat"
+
+msgid "No programs available."
+msgstr "Nejsou k dispozici žádné programy."
+
+msgid "Selected program"
+msgstr "Vybraný program"
+
+msgid "Select program"
+msgstr "Vybrat program"
+
+msgid "Selected"
+msgstr "Vybráno"
+
 msgid "Results found"
 msgstr "Nalezeny výsledky"
 
@@ -1023,6 +1014,15 @@ msgstr "Hledat {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Chcete-li hledat, vyplňte alespoň {{minAttributesRequired}} atributy"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "Nový {{trackedEntityName}} v {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
+
+msgid "Clear selections"
+msgstr "Vymazat výběry"
 
 msgid "To work with the selected program,"
 msgstr "Chcete-li pracovat s vybraným programem,"

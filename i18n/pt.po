@@ -546,57 +546,6 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 "O programa selecionado é inválido para a unidade de registro selecionada"
 
-msgid "New"
-msgstr "Novo"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "Novo {{trackedEntityName}} em {{programName}}"
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Procure por um {{trackedEntityName}} em {{programName}}"
-
-msgid "Clear selections"
-msgstr "Limpar seleções"
-
-msgid "Selected registering unit"
-msgstr "Unidade de registro selecionada"
-
-msgid "Start Again"
-msgstr "Comece de novo"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Tem certeza? Todos os dados não salvos serão perdidos."
-
-msgid "Accept"
-msgstr "Aceitar"
-
-msgid "Registering Organisation Unit"
-msgstr "Registro de Unidade Organizacional"
-
-msgid "Select"
-msgstr "Selecione"
-
-msgid "Program"
-msgstr "Programa"
-
-msgid "No programs available."
-msgstr "Nenhum programa disponível."
-
-msgid "Show all"
-msgstr "Mostrar tudo"
-
-msgid "Selected program"
-msgstr "Programa selecionado"
-
-msgid "Some programs are being filtered."
-msgstr "Alguns programas estão sendo filtrados."
-
-msgid "Select program"
-msgstr "Selecionar o programa"
-
-msgid "Selected"
-msgstr "Selecionado"
-
 msgid "Online"
 msgstr "Ligado"
 
@@ -792,6 +741,9 @@ msgstr "Ou veja todos os eventos acessíveis a você no {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Selecione uma unidade organizacional."
 
+msgid "New"
+msgstr "Novo"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Escolha as {{missingCategories}} para começar a relatar"
 
@@ -827,6 +779,15 @@ msgstr "Ligação"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Salvar como novo {{trackedEntityName}}"
+
+msgid "Some programs are being filtered."
+msgstr "Alguns programas estão sendo filtrados."
+
+msgid "Show all"
+msgstr "Mostrar tudo"
+
+msgid "Program"
+msgstr "Programa"
 
 msgid "Organisation Unit"
 msgstr "Unidade organizacional"
@@ -1026,6 +987,36 @@ msgstr "Você não tem acesso para criar nenhum relacionamento"
 msgid "Add relationship"
 msgstr "Adicionar relacionamento"
 
+msgid "Selected registering unit"
+msgstr "Unidade de registro selecionada"
+
+msgid "Start Again"
+msgstr "Comece de novo"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Tem certeza? Todos os dados não salvos serão perdidos."
+
+msgid "Accept"
+msgstr "Aceitar"
+
+msgid "Registering Organisation Unit"
+msgstr "Registro de Unidade Organizacional"
+
+msgid "Select"
+msgstr "Selecione"
+
+msgid "No programs available."
+msgstr "Nenhum programa disponível."
+
+msgid "Selected program"
+msgstr "Programa selecionado"
+
+msgid "Select program"
+msgstr "Selecionar o programa"
+
+msgid "Selected"
+msgstr "Selecionado"
+
 msgid "Results found"
 msgstr "Resultados encontrados"
 
@@ -1035,6 +1026,15 @@ msgstr "Pesquise {{uniqueAttrName}}"
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 "Preencha pelo menos {{minAttributesRequired}} atributos para pesquisar"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "Novo {{trackedEntityName}} em {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Procure por um {{trackedEntityName}} em {{programName}}"
+
+msgid "Clear selections"
+msgstr "Limpar seleções"
 
 msgid "To work with the selected program,"
 msgstr "Para trabalhar com o programa selecionado,"

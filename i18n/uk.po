@@ -526,57 +526,6 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
-msgid "New"
-msgstr "Нове"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr ""
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "Обрати"
-
-msgid "Program"
-msgstr "Program"
-
-msgid "No programs available."
-msgstr ""
-
-msgid "Show all"
-msgstr "Показати все"
-
-msgid "Selected program"
-msgstr "Обрані програми"
-
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Select program"
-msgstr "Обрати програму"
-
-msgid "Selected"
-msgstr "Обране"
-
 msgid "Online"
 msgstr "Онлайн"
 
@@ -766,6 +715,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Нове"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -799,6 +751,15 @@ msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "Показати все"
+
+msgid "Program"
+msgstr "Program"
 
 msgid "Organisation Unit"
 msgstr "Організаційний підрозділ"
@@ -982,6 +943,36 @@ msgstr ""
 msgid "Add relationship"
 msgstr "Додати зв'язок"
 
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "Обрати"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Selected program"
+msgstr "Обрані програми"
+
+msgid "Select program"
+msgstr "Обрати програму"
+
+msgid "Selected"
+msgstr "Обране"
+
 msgid "Results found"
 msgstr ""
 
@@ -989,6 +980,15 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
 msgstr ""
 
 msgid "To work with the selected program,"

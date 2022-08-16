@@ -534,57 +534,6 @@ msgstr "البرنامج غير موجود"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
 
-msgid "New"
-msgstr "جديد"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr "وحدة التسجيل المختارة"
-
-msgid "Start Again"
-msgstr "البدء من جديد"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "هل أنت متأكد؟ سيتم فقدان جميع البيانات التي لم يتم حفظها."
-
-msgid "Accept"
-msgstr "قبول"
-
-msgid "Registering Organisation Unit"
-msgstr "تسجيل الوحدة التنظيمية"
-
-msgid "Select"
-msgstr "تحديد"
-
-msgid "Program"
-msgstr "البرنامج"
-
-msgid "No programs available."
-msgstr "لا توجد برامج متاحة"
-
-msgid "Show all"
-msgstr "إظهار الكل"
-
-msgid "Selected program"
-msgstr "البرنامج المحدد"
-
-msgid "Some programs are being filtered."
-msgstr "بعض البرامج يتم تصفيتها"
-
-msgid "Select program"
-msgstr "تحديد البرنامج"
-
-msgid "Selected"
-msgstr "محدد"
-
 msgid "Online"
 msgstr "متصل"
 
@@ -774,6 +723,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "جديد"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -807,6 +759,15 @@ msgstr "ربط"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr "بعض البرامج يتم تصفيتها"
+
+msgid "Show all"
+msgstr "إظهار الكل"
+
+msgid "Program"
+msgstr "البرنامج"
 
 msgid "Organisation Unit"
 msgstr "الوحدة التنظيمية"
@@ -990,6 +951,36 @@ msgstr "ليس لديك حق الوصول لإنشاء علاقات"
 msgid "Add relationship"
 msgstr "اضف علاقة"
 
+msgid "Selected registering unit"
+msgstr "وحدة التسجيل المختارة"
+
+msgid "Start Again"
+msgstr "البدء من جديد"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "هل أنت متأكد؟ سيتم فقدان جميع البيانات التي لم يتم حفظها."
+
+msgid "Accept"
+msgstr "قبول"
+
+msgid "Registering Organisation Unit"
+msgstr "تسجيل الوحدة التنظيمية"
+
+msgid "Select"
+msgstr "تحديد"
+
+msgid "No programs available."
+msgstr "لا توجد برامج متاحة"
+
+msgid "Selected program"
+msgstr "البرنامج المحدد"
+
+msgid "Select program"
+msgstr "تحديد البرنامج"
+
+msgid "Selected"
+msgstr "محدد"
+
 msgid "Results found"
 msgstr ""
 
@@ -998,6 +989,15 @@ msgstr "بحث {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "املأ {{minAttributesRequired}} سمات على الأقل للبحث"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "للعمل مع البرنامج المحدد"
