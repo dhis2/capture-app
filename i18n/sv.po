@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
 "PO-Revision-Date: 2022-08-16 18:45+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Swedish (https://www.transifex.com/hisp-uio/teams/100509/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,19 +29,19 @@ msgid "Errors"
 msgstr ""
 
 msgid "Feedback"
-msgstr ""
+msgstr "Återkoppling"
 
 msgid "Indicators"
-msgstr ""
+msgstr "indikatorer"
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 msgid "Complete"
-msgstr ""
+msgstr "Färdigt"
 
 msgid "Warnings found"
 msgstr ""
@@ -62,7 +62,7 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "Spara"
 
 msgid "Uploading data"
 msgstr ""
@@ -77,10 +77,10 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
-msgstr ""
+msgstr "Förra veckan"
 
 msgid "Last month"
-msgstr ""
+msgstr "Förra månaden"
 
 msgid "Last 3 months"
 msgstr "Senaste 3 månaderna"
@@ -107,7 +107,7 @@ msgid "Max"
 msgstr "max"
 
 msgid "Min"
-msgstr ""
+msgstr "min"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -119,19 +119,19 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "År"
 
 msgid "Months"
 msgstr "Månader"
 
 msgid "Days"
-msgstr ""
+msgstr "Dagar"
 
 msgid "Uploading file"
 msgstr ""
@@ -140,7 +140,7 @@ msgid "selected"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "Radera"
 
 msgid "Select file"
 msgstr ""
@@ -164,10 +164,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Uppkopplad"
 
 msgid "Offline"
-msgstr ""
+msgstr "Off-line"
 
 msgid "Syncing"
 msgstr ""
@@ -209,7 +209,7 @@ msgid "Update"
 msgstr "Uppdatera"
 
 msgid "Close"
-msgstr ""
+msgstr "Stänga"
 
 msgid "More filters"
 msgstr ""
@@ -277,10 +277,10 @@ msgid "Reset"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Ny"
 
 msgid "Find"
-msgstr ""
+msgstr "Hitta"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -295,10 +295,10 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "Markera"
 
 msgid "Program"
-msgstr ""
+msgstr "Program"
 
 msgid "No programs available."
 msgstr ""
@@ -310,7 +310,7 @@ msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
-msgstr ""
+msgstr "Välj program"
 
 msgid "An error has occured. See log for details"
 msgstr ""

@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
 # phil_dhis2, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
 "PO-Revision-Date: 2022-08-16 18:45+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,25 +24,25 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "ຖັນ"
 
 msgid "Errors"
-msgstr ""
+msgstr "ຜິດພາດ"
 
 msgid "Feedback"
-msgstr ""
+msgstr "ຜົນຕອບຮັບ"
 
 msgid "Indicators"
-msgstr ""
+msgstr "ຕົວຊີ້ວັດ"
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 msgid "Complete"
-msgstr ""
+msgstr "ສຳເລັດແລ້ວ"
 
 msgid "Warnings found"
 msgstr ""
@@ -51,7 +51,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Save comment"
-msgstr ""
+msgstr "ບັນທຶກ"
 
 msgid "Write comment"
 msgstr ""
@@ -63,13 +63,13 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "ບັນທຶກ"
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "Sort"
 
 msgid "No events to display"
 msgstr ""
@@ -78,13 +78,13 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
-msgstr ""
+msgstr "ອາທິດທີ່ຜ່ານມາ"
 
 msgid "Last month"
-msgstr ""
+msgstr "ເດືອນຜ່ານມາ"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "3 ເດືອນຍ້ອນຫຼັງ"
 
 msgid "Custom range"
 msgstr ""
@@ -102,13 +102,13 @@ msgid "From"
 msgstr "ຈາກ"
 
 msgid "To"
-msgstr ""
+msgstr "ຖຶງ"
 
 msgid "Max"
 msgstr "ຄ່າສູງສຸດ"
 
 msgid "Min"
-msgstr ""
+msgstr "ຄ່ານ້ອຍສຸດ"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -120,28 +120,28 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
+msgstr "ແມ່ນ"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "ປີ"
 
 msgid "Months"
 msgstr "ເດືອນ"
 
 msgid "Days"
-msgstr ""
+msgstr "ມື້"
 
 msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "ເລືອກແລ້ວ"
 
 msgid "Delete"
-msgstr ""
+msgstr "ລົບ"
 
 msgid "Select file"
 msgstr ""
@@ -156,7 +156,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "ລຶບ"
 
 msgid "No results"
 msgstr ""
@@ -165,10 +165,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "ມີການເຊື່ອມຕໍ່"
 
 msgid "Offline"
-msgstr ""
+msgstr "ບໍ່ມີການເຊື່ອມຕໍ່"
 
 msgid "Syncing"
 msgstr ""
@@ -210,7 +210,7 @@ msgid "Update"
 msgstr "ປັບປຸງ"
 
 msgid "Close"
-msgstr ""
+msgstr "ປິດ"
 
 msgid "More filters"
 msgstr ""
@@ -252,7 +252,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "in"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -278,10 +278,10 @@ msgid "Reset"
 msgstr "Reset"
 
 msgid "New"
-msgstr ""
+msgstr "ສ້າງໃຫມ່"
 
 msgid "Find"
-msgstr ""
+msgstr "ຊອກ"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -296,22 +296,22 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "ເລືອກ"
 
 msgid "Program"
-msgstr ""
+msgstr "Program"
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "ສະແດງທັງໝົດ"
 
 msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
-msgstr ""
+msgstr "ຂະແໜງທີ່ຖືກເລືອກ"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -329,4 +329,4 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "ມື້ນີ້"

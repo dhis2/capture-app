@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2022
-# phil_dhis2, 2022
 # Ulanbek Abakirov <ulans@mail.ru>, 2022
+# phil_dhis2, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
 "PO-Revision-Date: 2022-08-16 18:45+0000\n"
-"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2022\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,40 +18,40 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Пожалуйста введите правильную дату"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Столбы, для показа в таблице"
 
 msgid "Column"
-msgstr ""
+msgstr "Столбчатая"
 
 msgid "Errors"
-msgstr ""
+msgstr "Ошибки"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Обратная связь"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Индикаторы"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Предупреждения"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 msgid "Complete"
-msgstr ""
+msgstr "Завершенный"
 
 msgid "Warnings found"
 msgstr "Имеются предупреждения"
 
 msgid "Abort"
-msgstr ""
+msgstr "Отменить"
 
 msgid "Save comment"
-msgstr ""
+msgstr "Сохранить комментарий"
 
 msgid "Write comment"
 msgstr "Написать комментарий"
@@ -60,28 +60,28 @@ msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr ""
+msgstr "Отсутствует право на запись "
 
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "Сортировать"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Нет событий для отображения"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Данные отсутствуют для офлайн списка "
 
 msgid "Last week"
-msgstr ""
+msgstr "Прошлая неделя"
 
 msgid "Last month"
-msgstr ""
+msgstr "Последний месяц"
 
 msgid "Last 3 months"
 msgstr "Прошлые 3 месяца"
@@ -102,88 +102,88 @@ msgid "From"
 msgstr "От"
 
 msgid "To"
-msgstr ""
+msgstr "До"
 
 msgid "Max"
 msgstr "Максимум"
 
 msgid "Min"
-msgstr ""
+msgstr "Минимум"
 
 msgid "greater than or equal to"
 msgstr "больше или равно"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "меньше или равно"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Содержит текст"
 
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 msgid "mm/dd/yyyy"
 msgstr "мм/дд/гггг"
 
 msgid "Years"
-msgstr ""
+msgstr "Годы"
 
 msgid "Months"
 msgstr "Месяцы"
 
 msgid "Days"
-msgstr ""
+msgstr "Дни"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Передача файла"
 
 msgid "selected"
-msgstr ""
+msgstr "выбранный"
 
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 msgid "Select file"
-msgstr ""
+msgstr "Выберите файл"
 
 msgid "No"
 msgstr "Нет"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Передача изображения"
 
 msgid "Select image"
-msgstr ""
+msgstr "Выберите изображение"
 
 msgid "Clear"
-msgstr ""
+msgstr "Очистить"
 
 msgid "No results"
 msgstr "Результатов нет"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Нет элементов для отображения"
 
 msgid "Online"
-msgstr ""
+msgstr "Онлайн"
 
 msgid "Offline"
-msgstr ""
+msgstr "Офлайн"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Синхронизирую..."
 
 msgid "Field"
-msgstr ""
+msgstr "Поле"
 
 msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "Начать заново"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "Вы уверены? Все несохраненные данные будут утеряны."
 
 msgid "Reset Organisation Unit"
 msgstr ""
@@ -198,46 +198,46 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Событие не может быть загружена. Вы уверены что событие существует?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Событие не может быть загружено"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Не могу загрузить Организационную единицу"
 
 msgid "Update"
 msgstr "Обновить"
 
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
 msgid "More filters"
-msgstr ""
+msgstr "Еще фильтры"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Строк в странице"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Не возможно получить Орг.единицу"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Программа не существует"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "Выбранная программа не действительна для выбранной Орг.единицы"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "Для начала, выберите регистрирующую организацию и программу"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "Выберите программу для отчетов"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "Выберите регистрирующую организацию для отчетов"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "Выберите Категорию опций для отчетов"
 
 msgid "New event"
 msgstr "Новое событие"
@@ -246,87 +246,89 @@ msgid "Switch to form view"
 msgstr "Переключиь вид на Формы"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Переключиться на строчный просмотр "
 
 msgid "Saving to"
-msgstr ""
+msgstr "Сохраняю в"
 
 msgid "in"
-msgstr ""
+msgstr "в"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Это не программа Событие или метаданные испорчены. Смотрите детали в лог-"
+"файле"
 
 msgid "Save and add another"
 msgstr "Сохранить и добавить другую"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Сохранить и выйти"
 
 msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "Добавлены события"
 
 msgid "No events added"
-msgstr ""
+msgstr "Нет событий для добавления"
 
 msgid "Reset"
 msgstr "Перезагрузить"
 
 msgid "New"
-msgstr ""
+msgstr "Новый"
 
 msgid "Find"
-msgstr ""
+msgstr "Найти"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "Выберите организацию-регистратор"
 
 msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Регистрация Организационной единицы"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "Выбранная программа"
 
 msgid "Select"
-msgstr ""
+msgstr "Выбрать"
 
 msgid "Program"
-msgstr ""
+msgstr "Program"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Нет доступных программ"
 
 msgid "Show all"
-msgstr ""
+msgstr "Показать все"
 
 msgid "Some programs are being filtered."
 msgstr "Фильтруются некоторые программы "
 
 msgid "Select program"
-msgstr ""
+msgstr "Выбрать программу"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Произошла ошибка. Смотрите подробности в лог-файле"
 
 msgid "Error saving event"
 msgstr "Ошибка сохранения события"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "Не удалось сохранить событие. Смотрите детали в лог-файле"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Выберите 1 или более дат..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Выберите дату..."
 
 msgid "Today"
-msgstr ""
+msgstr "Сегодня"

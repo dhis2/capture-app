@@ -1,16 +1,16 @@
 # 
 # Translators:
-# phil_dhis2, 2019
-# Viktor Varland <viktor@dhis2.org>, 2019
-# easylin <lin_xd@126.com>, 2020
-# 晓东 林 <13981924470@126.com>, 2020
+# phil_dhis2, 2022
+# 晓东 林 <13981924470@126.com>, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
+# easylin <lin_xd@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2020\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,7 +76,7 @@ msgid "No events to display"
 msgstr "无事件可显示"
 
 msgid "Data for offline list not present"
-msgstr "离线列表数据不在"
+msgstr "离线列表的数据不存在"
 
 msgid "Last week"
 msgstr "上周"
@@ -88,7 +88,7 @@ msgid "Last 3 months"
 msgstr "最近3个月"
 
 msgid "Custom range"
-msgstr "定制范围"
+msgstr "自订范围"
 
 msgid "to"
 msgstr "到"
@@ -103,7 +103,7 @@ msgid "From"
 msgstr "从"
 
 msgid "To"
-msgstr "至"
+msgstr "到"
 
 msgid "Max"
 msgstr "最大"
@@ -133,7 +133,7 @@ msgid "Months"
 msgstr "月"
 
 msgid "Days"
-msgstr "天"
+msgstr "日"
 
 msgid "Uploading file"
 msgstr "上传文件"
@@ -199,7 +199,7 @@ msgid "Create New Event"
 msgstr "创建新事件"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "事件不能载入"
+msgstr "事件不能载入,你确信它存在?"
 
 msgid "Event could not be loaded"
 msgstr "事件不能载入"
@@ -253,7 +253,7 @@ msgid "Saving to"
 msgstr "保存到"
 
 msgid "in"
-msgstr " 在"
+msgstr "在"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -282,7 +282,7 @@ msgid "New"
 msgstr "新建"
 
 msgid "Find"
-msgstr "查询"
+msgstr "发现"
 
 msgid "Selected registering unit"
 msgstr "选择注册的机构"
@@ -306,7 +306,7 @@ msgid "No programs available."
 msgstr "无可用项目"
 
 msgid "Show all"
-msgstr "显示全部"
+msgstr "全部显示"
 
 msgid "Some programs are being filtered."
 msgstr "有些项目已经被过滤了"
@@ -315,7 +315,7 @@ msgid "Select program"
 msgstr "选择项目"
 
 msgid "An error has occured. See log for details"
-msgstr "发生一个错误,看日志"
+msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "Error saving event"
 msgstr "保存时间错误"

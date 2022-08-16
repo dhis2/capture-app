@@ -22,13 +22,13 @@ msgid "Columns to show in table"
 msgstr "Jadvalda koʼrsatiladigan ustunlar"
 
 msgid "Column"
-msgstr ""
+msgstr "Ustun"
 
 msgid "Errors"
-msgstr ""
+msgstr "Xatoliklar"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Fikr-mulohaza"
 
 msgid "Indicators"
 msgstr "Koʼrsatgichlar"
@@ -37,19 +37,19 @@ msgid "Warnings"
 msgstr "Ogohlantirishlar"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Бекор қилиш"
 
 msgid "Complete"
-msgstr ""
+msgstr "Bajarildi"
 
 msgid "Warnings found"
 msgstr "Ogohlantirishlar topildi"
 
 msgid "Abort"
-msgstr ""
+msgstr "Аbort"
 
 msgid "Save comment"
-msgstr ""
+msgstr "Fikr/izohni saqlang"
 
 msgid "Write comment"
 msgstr "Fikr yozing"
@@ -61,25 +61,25 @@ msgid "No write access"
 msgstr "Yozuv kiritish uchun ruxsat yoʼq"
 
 msgid "Save"
-msgstr ""
+msgstr "Saqlash"
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "Saralash"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Koʼrsatiladigan hech qanday hodisa/tadbir yoʼq"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Offlayn roʼyxat uchun maʼlumotlar mavjud emas"
 
 msgid "Last week"
-msgstr ""
+msgstr "Охирги ҳафта"
 
 msgid "Last month"
-msgstr ""
+msgstr "Охирги ой"
 
 msgid "Last 3 months"
 msgstr "Охирги 3 ой"
@@ -106,40 +106,40 @@ msgid "Max"
 msgstr "Максимум"
 
 msgid "Min"
-msgstr ""
+msgstr "Минимум"
 
 msgid "greater than or equal to"
 msgstr "dan katta yoki teng"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "dan kam yoki teng"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Matnni oʼz ichiga oladi"
 
 msgid "Yes"
-msgstr ""
+msgstr "Ҳа"
 
 msgid "mm/dd/yyyy"
 msgstr "kun/oy/yil"
 
 msgid "Years"
-msgstr ""
+msgstr "Yillar"
 
 msgid "Months"
 msgstr "Oylar"
 
 msgid "Days"
-msgstr ""
+msgstr "Kunlar"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Fayl yuklanmoqda"
 
 msgid "selected"
-msgstr ""
+msgstr "tanlangan"
 
 msgid "Delete"
-msgstr ""
+msgstr "Oʼchirib tashlash"
 
 msgid "Select file"
 msgstr "Faylni tanlash"
@@ -148,10 +148,10 @@ msgid "No"
 msgstr "Йўқ"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Rasm yuklanmoqda"
 
 msgid "Select image"
-msgstr ""
+msgstr "Rasmni tanlang"
 
 msgid "Clear"
 msgstr "Аниқ"
@@ -160,16 +160,16 @@ msgid "No results"
 msgstr "Natija yoʼq"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Koʼrsatiladigan axborot yoʼq"
 
 msgid "Online"
-msgstr ""
+msgstr "Onlayn"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offlayn"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Sinxronlashmoqda"
 
 msgid "Field"
 msgstr ""
@@ -178,10 +178,10 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "Qayta boshlang"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "Ishonchingiz komilmi? Barcha saqlanmagan maʼlumotlar yoʼqoladi."
 
 msgid "Reset Organisation Unit"
 msgstr ""
@@ -197,30 +197,31 @@ msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr ""
+"Hodisa/tadbirni yuklab boʼlmadi. Uning mavjudligiga ishonchingiz komilmi?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Hodisa/tadbirni yuklab boʼlmadi"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
 
 msgid "Update"
 msgstr "Янгилаш"
 
 msgid "Close"
-msgstr ""
+msgstr "Yopmoq"
 
 msgid "More filters"
-msgstr ""
+msgstr "Koʼproq Filtr"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Sahifada qatorlar"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Tashkiliy boʼlimni olib boʼlmadi"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Dastur mavjud emas"
 
 msgid "Selected program is invalid for registering unit"
 msgstr ""
@@ -244,13 +245,13 @@ msgid "Switch to form view"
 msgstr "Shakl koʼrinishiga oʼtish"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Jadval koʼrinishiga oʼtish"
 
 msgid "Saving to"
-msgstr ""
+msgstr "...da saqlash"
 
 msgid "in"
-msgstr ""
+msgstr "ichida"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -269,7 +270,7 @@ msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "hodisa/tadbirlar qoʼshildi"
 
 msgid "No events added"
 msgstr "Hech qanday hodisa/tadbir qoʼshilmagan"
@@ -278,22 +279,22 @@ msgid "Reset"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Yangi"
 
 msgid "Find"
-msgstr ""
+msgstr "Toping"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "Boʼlimni tanlangan roʼyxatga olish"
 
 msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Tanlangan boʼlim roʼyxatdan oʼtkazilmoqda"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "Tanlangan dastur"
 
 msgid "Select"
 msgstr "Танланг"
@@ -311,22 +312,22 @@ msgid "Some programs are being filtered."
 msgstr "Baʼzi dasturlar Filtrlanmoqda."
 
 msgid "Select program"
-msgstr ""
+msgstr "Dasturni tanlash"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Xatolik yuz berdi. Tafsilotlarni jurnaldan koʼring."
 
 msgid "Error saving event"
 msgstr "Hodisa/tadbirni saqlashda xato"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "Hodisa/tadbir saqlanmadi. Tafsilotlar uchun jurnalga qarang"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Bir yoki bir necha sanalarni tanlang..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Sanani tanlang ..."
 
 msgid "Today"
-msgstr ""
+msgstr "бугун"

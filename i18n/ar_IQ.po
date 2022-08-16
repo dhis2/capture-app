@@ -16,37 +16,37 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "نرجوا ادخال صيغة صحيحة للتاريخ"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "الأعمدة التي سيتم عرضها في الجدول"
 
 msgid "Column"
-msgstr ""
+msgstr "العمود"
 
 msgid "Errors"
-msgstr ""
+msgstr "اخطاء"
 
 msgid "Feedback"
-msgstr ""
+msgstr "التغذية الراجعة"
 
 msgid "Indicators"
-msgstr ""
+msgstr "المؤشرات"
 
 msgid "Warnings"
-msgstr ""
+msgstr "تحذيرات"
 
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 msgid "Complete"
-msgstr ""
+msgstr "مكتمل"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "تم العثور على إشعارات تحذيرية"
 
 msgid "Abort"
-msgstr ""
+msgstr "إحباط"
 
 msgid "Save comment"
 msgstr ""
@@ -58,118 +58,118 @@ msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr ""
+msgstr "لا توجد صلاحية الوصول للكتابة"
 
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "فرز"
 
 msgid "No events to display"
-msgstr ""
+msgstr "لايوجد احداث للعرض"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "البيانات لقائمة الغير متصلة غير موجودة"
 
 msgid "Last week"
-msgstr ""
+msgstr "الأسبوع الماضي"
 
 msgid "Last month"
-msgstr ""
+msgstr "الشهر الماضي"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "آخر 3 أشهر"
 
 msgid "Custom range"
 msgstr "نطاق مخصص"
 
 msgid "to"
-msgstr ""
+msgstr "إلى"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "من بعد أو مساوٍ لـ"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "من قبل أو مساوٍ لـ"
 
 msgid "From"
 msgstr "من"
 
 msgid "To"
-msgstr ""
+msgstr "الى"
 
 msgid "Max"
-msgstr ""
+msgstr "الأعلى"
 
 msgid "Min"
-msgstr ""
+msgstr "الأدنى"
 
 msgid "greater than or equal to"
 msgstr "أكبر من أو يساوي"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "أقل من أو يساوي"
 
 msgid "Contains text"
-msgstr ""
+msgstr "يحتوي على نص"
 
 msgid "Yes"
-msgstr ""
+msgstr "نعم"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "شهر / يوم / سنة"
 
 msgid "Years"
-msgstr ""
+msgstr "السنوات"
 
 msgid "Months"
 msgstr "الأشهر"
 
 msgid "Days"
-msgstr ""
+msgstr "‏‏الأيام"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "تحميل ملف"
 
 msgid "selected"
-msgstr ""
+msgstr "محدد"
 
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 msgid "Select file"
-msgstr ""
+msgstr "اختيار ملف"
 
 msgid "No"
 msgstr "لا"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "تحميل الصورة"
 
 msgid "Select image"
-msgstr ""
+msgstr "حدد الصورة"
 
 msgid "Clear"
-msgstr ""
+msgstr "مسح"
 
 msgid "No results"
-msgstr ""
+msgstr "لا توجد نتائج"
 
 msgid "No items to display"
-msgstr ""
+msgstr "لا توجد عناصر للعرض"
 
 msgid "Online"
-msgstr ""
+msgstr "متصل"
 
 msgid "Offline"
-msgstr ""
+msgstr "غير متصل"
 
 msgid "Syncing"
-msgstr ""
+msgstr "تزامن"
 
 msgid "Field"
 msgstr ""
@@ -178,10 +178,10 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "البدء من جديد"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "هل أنت متأكد؟ سيتم فقدان جميع البيانات التي لم يتم حفظها."
 
 msgid "Reset Organisation Unit"
 msgstr ""
@@ -196,46 +196,46 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "لا يمكن تحميل الحدث. هل أنت متأكد أنه موجود؟"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "تعذر تحميل الحدث"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "تعذر تحميل الوحدة التنظيمية"
 
 msgid "Update"
-msgstr ""
+msgstr "تحديث"
 
 msgid "Close"
-msgstr ""
+msgstr "إغلاق"
 
 msgid "More filters"
-msgstr ""
+msgstr "عوامل تصفية أكثر"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "عدد الصفوف لكل صفحة"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "تعذر جلب الوحدة التنظيمية"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "البرنامج غير موجود"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "البرنامج المحدد غير صالح لوحدة التسجيل"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "حدد وحدة التسجيل والبرنامج أعلاه للبدء"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "حدد برنامجاً لبدء إعداد التقارير"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "حدد وحدة التسجيل لبدء الإبلاغ"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "حدد فئة لبدء إعداد التقارير"
 
 msgid "New event"
 msgstr "حدث جديد"
@@ -244,87 +244,89 @@ msgid "Switch to form view"
 msgstr "التحويل الى العرض كنموذج"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "التحويل إلى العرض كصفوف"
 
 msgid "Saving to"
-msgstr ""
+msgstr "حفظ إلى"
 
 msgid "in"
-msgstr ""
+msgstr "في"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"هذا ليس برنامج تسجيل حدث أو أن بيانات التعريف تالفة. انظر السجل للحصول على "
+"التفاصيل."
 
 msgid "Save and add another"
-msgstr ""
+msgstr "حفظ واضافة جديد"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "حفظ وخروج"
 
 msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "تمت إضافة الأحداث"
 
 msgid "No events added"
-msgstr ""
+msgstr "لم تتم إضافة أحداث"
 
 msgid "Reset"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "جديد"
 
 msgid "Find"
-msgstr ""
+msgstr "بحث"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "وحدة التسجيل المختارة"
 
 msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "تسجيل الوحدة التنظيمية"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "البرنامج المحدد"
 
 msgid "Select"
-msgstr ""
+msgstr "تحديد"
 
 msgid "Program"
-msgstr ""
+msgstr "البرنامج"
 
 msgid "No programs available."
-msgstr ""
+msgstr "لا توجد برامج متاحة"
 
 msgid "Show all"
-msgstr ""
+msgstr "إظهار الكل"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "بعض البرامج يتم تصفيتها"
 
 msgid "Select program"
-msgstr ""
+msgstr "تحديد البرنامج"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "خطأ عند حفظ الحدث"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "تعذر حفظ الحدث. انظر إلى السجل للحصول على التفاصيل"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "اختر تاريخًا أو أكثر ..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "اختر تاريخاً"
 
 msgid "Today"
-msgstr ""
+msgstr "اليوم"

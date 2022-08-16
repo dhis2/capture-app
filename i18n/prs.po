@@ -22,25 +22,25 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "ستون"
 
 msgid "Errors"
-msgstr ""
+msgstr "خطاها"
 
 msgid "Feedback"
-msgstr ""
+msgstr "نظرات/فیدبک"
 
 msgid "Indicators"
-msgstr ""
+msgstr "شاخص ها"
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "انصراف"
 
 msgid "Complete"
-msgstr ""
+msgstr "تکمیل"
 
 msgid "Warnings found"
 msgstr ""
@@ -49,7 +49,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Save comment"
-msgstr ""
+msgstr "ذخیره نظریه"
 
 msgid "Write comment"
 msgstr ""
@@ -61,13 +61,13 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "ذخیره"
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "تنظیم"
 
 msgid "No events to display"
 msgstr ""
@@ -76,13 +76,13 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
-msgstr ""
+msgstr "هفته گذشته"
 
 msgid "Last month"
-msgstr ""
+msgstr "ماه گذشته"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "3 ماهه گذشته"
 
 msgid "Custom range"
 msgstr ""
@@ -100,13 +100,13 @@ msgid "From"
 msgstr "از جانب"
 
 msgid "To"
-msgstr ""
+msgstr "به"
 
 msgid "Max"
 msgstr "بزرگتر"
 
 msgid "Min"
-msgstr ""
+msgstr "کوچکتر"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -118,28 +118,28 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
+msgstr "بلی"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "سالانه"
 
 msgid "Months"
 msgstr "ماه ها"
 
 msgid "Days"
-msgstr ""
+msgstr "روزها"
 
 msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "منتخبین"
 
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 msgid "Select file"
 msgstr ""
@@ -154,7 +154,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "پاک کردن"
 
 msgid "No results"
 msgstr ""
@@ -163,10 +163,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "آنلاین"
 
 msgid "Offline"
-msgstr ""
+msgstr "آفلاین"
 
 msgid "Syncing"
 msgstr ""
@@ -205,10 +205,10 @@ msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Update"
-msgstr ""
+msgstr "تجدید"
 
 msgid "Close"
-msgstr ""
+msgstr "بستن"
 
 msgid "More filters"
 msgstr ""
@@ -250,7 +250,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "در"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -276,10 +276,10 @@ msgid "Reset"
 msgstr "مرتب سازی مجدد"
 
 msgid "New"
-msgstr ""
+msgstr "جدید"
 
 msgid "Find"
-msgstr ""
+msgstr "یافتن"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -294,22 +294,22 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "انتخاب"
 
 msgid "Program"
-msgstr ""
+msgstr "برنامه"
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "نشان دادن همه"
 
 msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
-msgstr ""
+msgstr "پروګرام غوره کړئ"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -327,4 +327,4 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "امروز"

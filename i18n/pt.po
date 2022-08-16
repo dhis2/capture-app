@@ -1,15 +1,17 @@
 # 
 # Translators:
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
+# Ge Joao <gsimango@saudigitus.org>, 2022
 # phil_dhis2, 2022
-# David Júnior <davidjr.mondlane@gmail.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
+# David Júnior <davidjr.mondlane@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
 "PO-Revision-Date: 2022-08-16 18:45+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
+"Last-Translator: David Júnior <davidjr.mondlane@gmail.com>, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,31 +20,31 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Forneça uma data válida"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Colunas para mostrar na tabela"
 
 msgid "Column"
-msgstr ""
+msgstr "Coluna"
 
 msgid "Errors"
-msgstr ""
+msgstr "Erros"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Comentários"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicadores"
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 msgid "Complete"
-msgstr ""
+msgstr "Completo"
 
 msgid "Warnings found"
 msgstr ""
@@ -51,7 +53,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Save comment"
-msgstr ""
+msgstr "Salvar comentário"
 
 msgid "Write comment"
 msgstr ""
@@ -63,13 +65,13 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "Salvar"
 
 msgid "Uploading data"
-msgstr ""
+msgstr "A carregar os dados"
 
 msgid "Sort"
-msgstr ""
+msgstr "Ordenar"
 
 msgid "No events to display"
 msgstr ""
@@ -78,10 +80,10 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
-msgstr ""
+msgstr "Última semana"
 
 msgid "Last month"
-msgstr ""
+msgstr "Último mês"
 
 msgid "Last 3 months"
 msgstr "Últimos três meses"
@@ -102,13 +104,13 @@ msgid "From"
 msgstr "A partir de"
 
 msgid "To"
-msgstr ""
+msgstr "Até"
 
 msgid "Max"
 msgstr "Máx"
 
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -120,43 +122,43 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
+msgstr "sim"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "Anos"
 
 msgid "Months"
 msgstr "Meses"
 
 msgid "Days"
-msgstr ""
+msgstr "Dias"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "A carregar arquivo"
 
 msgid "selected"
-msgstr ""
+msgstr "selecionado"
 
 msgid "Delete"
-msgstr ""
+msgstr "Suprimir"
 
 msgid "Select file"
-msgstr ""
+msgstr "Selecione o arquivo"
 
 msgid "No"
 msgstr "Não"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "A carregar imagem"
 
 msgid "Select image"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "Limpar"
 
 msgid "No results"
 msgstr ""
@@ -165,16 +167,16 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Ligado"
 
 msgid "Offline"
-msgstr ""
+msgstr "Desligado"
 
 msgid "Syncing"
-msgstr ""
+msgstr "A sincronizar"
 
 msgid "Field"
-msgstr ""
+msgstr "Campo"
 
 msgid "could not be updated"
 msgstr ""
@@ -198,7 +200,7 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "O evento não pôde ser carregado. Tem certeza que isso existe?"
 
 msgid "Event could not be loaded"
 msgstr ""
@@ -210,7 +212,7 @@ msgid "Update"
 msgstr "Atualizar"
 
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 msgid "More filters"
 msgstr ""
@@ -249,10 +251,10 @@ msgid "Switch to row view"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
+msgstr "A salvar em"
 
 msgid "in"
-msgstr ""
+msgstr "no"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -278,10 +280,10 @@ msgid "Reset"
 msgstr "Repor"
 
 msgid "New"
-msgstr ""
+msgstr "Novo"
 
 msgid "Find"
-msgstr ""
+msgstr "Encontrar"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -290,28 +292,28 @@ msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "A registar a Unidade Organizacional"
 
 msgid "Selected Program"
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "Selecione"
 
 msgid "Program"
-msgstr ""
+msgstr "Programa"
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "Mostrar tudo"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Alguns programas estão a ser filtrados."
 
 msgid "Select program"
-msgstr ""
+msgstr "Selecionar o programa"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -329,4 +331,4 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "Hoje"

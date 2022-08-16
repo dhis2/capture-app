@@ -16,40 +16,40 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Uveďte prosím platné datum"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Sloupce k zobrazení v tabulce"
 
 msgid "Column"
-msgstr ""
+msgstr "Sloupec"
 
 msgid "Errors"
-msgstr ""
+msgstr "Chyb"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Zpětná vazba"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikátory"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Varování"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 msgid "Complete"
-msgstr ""
+msgstr "Dokončit"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Nalezena varování"
 
 msgid "Abort"
-msgstr ""
+msgstr "Přerušit"
 
 msgid "Save comment"
-msgstr ""
+msgstr "Uložit komentář"
 
 msgid "Write comment"
 msgstr "Napsat komentář"
@@ -58,184 +58,184 @@ msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr "Vaše data se nahrávají. Počkejte, dokud tato zpráva nezmizí"
 
 msgid "No write access"
-msgstr ""
+msgstr "Žádný přístup pro zápis"
 
 msgid "Save"
-msgstr ""
+msgstr "Uložit"
 
 msgid "Uploading data"
-msgstr ""
+msgstr "Nahrávání dat"
 
 msgid "Sort"
-msgstr ""
+msgstr "Třídit"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Žádné události k zobrazení"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Data pro offline seznam nejsou k dispozici"
 
 msgid "Last week"
-msgstr ""
+msgstr "Minulý týden"
 
 msgid "Last month"
-msgstr ""
+msgstr "Minulý měsíc"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "Poslední 3 měsíce"
 
 msgid "Custom range"
 msgstr "Vlastní rozsah"
 
 msgid "to"
-msgstr ""
+msgstr "do"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "po, nebo rovno"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "před nebo odpovídá"
 
 msgid "From"
 msgstr "Od"
 
 msgid "To"
-msgstr ""
+msgstr "Do"
 
 msgid "Max"
-msgstr ""
+msgstr "Max"
 
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 msgid "greater than or equal to"
 msgstr "větší nebo rovno"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "menší nebo rovno"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Obsahuje text"
 
 msgid "Yes"
-msgstr ""
+msgstr "Ano"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/rrrr"
 
 msgid "Years"
-msgstr ""
+msgstr "Let"
 
 msgid "Months"
 msgstr "Měsíce"
 
 msgid "Days"
-msgstr ""
+msgstr "Dnů"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Nahrávání souboru"
 
 msgid "selected"
-msgstr ""
+msgstr "vybráno"
 
 msgid "Delete"
-msgstr ""
+msgstr "Smazat"
 
 msgid "Select file"
-msgstr ""
+msgstr "Vybrat soubor"
 
 msgid "No"
 msgstr "Ne"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Nahrávání obrázku"
 
 msgid "Select image"
-msgstr ""
+msgstr "Vybrat obrázek"
 
 msgid "Clear"
-msgstr ""
+msgstr "Vyčistit"
 
 msgid "No results"
-msgstr ""
+msgstr "Žádné výsledky"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Žádné položky k zobrazení"
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Probíhá synchronizace"
 
 msgid "Field"
-msgstr ""
+msgstr "Pole"
 
 msgid "could not be updated"
-msgstr ""
+msgstr "nelze aktualizovat"
 
 msgid "Start Again"
-msgstr ""
+msgstr "Začít znovu"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "Jste si jist? Všechna neuložená data budou ztracena."
 
 msgid "Reset Organisation Unit"
-msgstr ""
+msgstr "Resetovat organizační jednotku"
 
 msgid "Reset Program"
-msgstr ""
+msgstr "Resetovat program"
 
 msgid "Reset Category Option"
-msgstr ""
+msgstr "Resetovat možnost kategorie"
 
 msgid "Create New Event"
-msgstr ""
+msgstr "Vytvořit novou událost"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Událost se nepodařilo načíst. Jste si jisti, že existuje?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Událost se nepodařilo načíst"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Organizační jednotku se nepodařilo načíst"
 
 msgid "Update"
-msgstr ""
+msgstr "Aktualizovat"
 
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 msgid "More filters"
-msgstr ""
+msgstr "Více filtrů"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Řádků na stránku"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Nelze získat organizační jednotku"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Program neexistuje"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "Vybraný program je pro registraci jednotky neplatný"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "Začněte výběrem registrační jednotky a programu výše"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "Vybrat program, o kterém chcete začít podávat zprávy"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "Vyberte registrační jednotku pro zahájení hlášení"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "Chcete-li začít podávat zprávy, vyberte možnost kategorie"
 
 msgid "New event"
 msgstr "Nová událost"
@@ -244,87 +244,89 @@ msgid "Switch to form view"
 msgstr "Přepnout do formulářového zobrazení"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Přepnout do zobrazení řádků"
 
 msgid "Saving to"
-msgstr ""
+msgstr "Ukládání do"
 
 msgid "in"
-msgstr ""
+msgstr "v"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Nejedná se o program událostí, nebo jsou poškozena metadata. Podrobnosti "
+"najdete v protokolu."
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Uložit a přidat další"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Uložit a odejít"
 
 msgid "Are you sure? All unsaved data will be lost"
-msgstr ""
+msgstr "Jste si jist? Všechna neuložená data budou ztracena"
 
 msgid "events added"
-msgstr ""
+msgstr "přidány události"
 
 msgid "No events added"
-msgstr ""
+msgstr "Nebyly přidány žádné události"
 
 msgid "Reset"
 msgstr "Reset"
 
 msgid "New"
-msgstr ""
+msgstr "Nový"
 
 msgid "Find"
-msgstr ""
+msgstr "Hledat"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "Vybraná registrační jednotka"
 
 msgid "Registering Oraginastion Unit"
-msgstr ""
+msgstr "Registrace Organiyační jednotky"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Registrování organizační jednotky"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "Vybraný program"
 
 msgid "Select"
-msgstr ""
+msgstr "Vybrat"
 
 msgid "Program"
-msgstr ""
+msgstr "Program"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Nejsou k dispozici žádné programy."
 
 msgid "Show all"
-msgstr ""
+msgstr "Ukázat vše"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Některé programy jsou filtrovány."
 
 msgid "Select program"
-msgstr ""
+msgstr "Vybrat program"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Při ukládání události došlo k chybě"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "Událost se nepodařilo uložit. Podrobnosti najdete v protokolu"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Vyberte jedno nebo více dat ..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Vyberte datum ..."
 
 msgid "Today"
-msgstr ""
+msgstr "Dnes"

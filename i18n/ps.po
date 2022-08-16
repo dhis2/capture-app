@@ -23,25 +23,25 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "ستون"
 
 msgid "Errors"
-msgstr ""
+msgstr "تېروتنې"
 
 msgid "Feedback"
-msgstr ""
+msgstr "د فیډبک یا نظر ورکول"
 
 msgid "Indicators"
-msgstr ""
+msgstr "شاخصونه"
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "رد یې کړئ [ ژباړه ـ ردول ]"
 
 msgid "Complete"
-msgstr ""
+msgstr "بشپړ یې کړئ"
 
 msgid "Warnings found"
 msgstr ""
@@ -62,7 +62,7 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "ثبت یې کړئ [ ژباړه - ثبت کړئ ]"
 
 msgid "Uploading data"
 msgstr ""
@@ -77,10 +77,10 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
-msgstr ""
+msgstr "تېره اونۍ"
 
 msgid "Last month"
-msgstr ""
+msgstr "تېره میاشت"
 
 msgid "Last 3 months"
 msgstr "تېرې 3 میاشتې"
@@ -101,13 +101,13 @@ msgid "From"
 msgstr "څخه"
 
 msgid "To"
-msgstr ""
+msgstr "تر"
 
 msgid "Max"
 msgstr "حداعظم"
 
 msgid "Min"
-msgstr ""
+msgstr "حداقل"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -119,19 +119,19 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
+msgstr "هو"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "کلونه"
 
 msgid "Months"
 msgstr "میاشت"
 
 msgid "Days"
-msgstr ""
+msgstr "ورځې"
 
 msgid "Uploading file"
 msgstr ""
@@ -140,7 +140,7 @@ msgid "selected"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "خذف یې کړئ"
 
 msgid "Select file"
 msgstr ""
@@ -155,7 +155,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "پاک یې کړئ"
 
 msgid "No results"
 msgstr ""
@@ -164,10 +164,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "په لیکه کې دی"
 
 msgid "Offline"
-msgstr ""
+msgstr "په لیکه کې نشته"
 
 msgid "Syncing"
 msgstr ""
@@ -209,7 +209,7 @@ msgid "Update"
 msgstr "تجدید یا نوي یې کړئ"
 
 msgid "Close"
-msgstr ""
+msgstr "بند یې کړئ"
 
 msgid "More filters"
 msgstr ""
@@ -277,10 +277,10 @@ msgid "Reset"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "نوی"
 
 msgid "Find"
-msgstr ""
+msgstr "پیدا یې کړئ"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -295,22 +295,22 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "غوره یې کړئ"
 
 msgid "Program"
-msgstr ""
+msgstr "پروګرام"
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "ټول ښکاره کړئ"
 
 msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
-msgstr ""
+msgstr "د پروګرام ټاکل"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -328,4 +328,4 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "نن ورځ"

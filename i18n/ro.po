@@ -16,28 +16,28 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Introduceți o dată validă"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Coloane pentru afișare în tabel"
 
 msgid "Column"
-msgstr ""
+msgstr "Coloană"
 
 msgid "Errors"
-msgstr ""
+msgstr "Erori"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicatori"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Avertizări"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Anulare"
 
 msgid "Complete"
 msgstr ""
@@ -49,7 +49,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Save comment"
-msgstr ""
+msgstr "Salvare comentariu"
 
 msgid "Write comment"
 msgstr "Scrieți comentariu"
@@ -58,28 +58,28 @@ msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr ""
+msgstr "Fără acces la scriere"
 
 msgid "Save"
-msgstr ""
+msgstr "salva"
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "Sortare"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Nu există evenimente pentru afișare"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Datele pentru lista offline nu sunt prezente"
 
 msgid "Last week"
-msgstr ""
+msgstr "Săptămâna trecută"
 
 msgid "Last month"
-msgstr ""
+msgstr "Luna trecută"
 
 msgid "Last 3 months"
 msgstr "Ultimele 3 luni"
@@ -100,58 +100,58 @@ msgid "From"
 msgstr "Din"
 
 msgid "To"
-msgstr ""
+msgstr "Pînă la"
 
 msgid "Max"
 msgstr "Max"
 
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 msgid "greater than or equal to"
 msgstr "mai mare sau egal cu"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "mai mic sau egal cu"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Conține text"
 
 msgid "Yes"
-msgstr ""
+msgstr "Da"
 
 msgid "mm/dd/yyyy"
 msgstr "mm/dd/yyyy"
 
 msgid "Years"
-msgstr ""
+msgstr "Ani"
 
 msgid "Months"
 msgstr "Luni"
 
 msgid "Days"
-msgstr ""
+msgstr "Zile"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Încărcare fișier"
 
 msgid "selected"
-msgstr ""
+msgstr "selectat"
 
 msgid "Delete"
-msgstr ""
+msgstr "Lichidare"
 
 msgid "Select file"
-msgstr ""
+msgstr "Selectare fișier"
 
 msgid "No"
 msgstr "Nu"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Încărcare imagine"
 
 msgid "Select image"
-msgstr ""
+msgstr "Selectați imaginea"
 
 msgid "Clear"
 msgstr ""
@@ -160,16 +160,16 @@ msgid "No results"
 msgstr "Nu există rezultate"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Nu există elemente pentru afișare"
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Sincronizare"
 
 msgid "Field"
 msgstr ""
@@ -178,10 +178,10 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "Începe din nou"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "Sunteți sigur? Toate datele nesalvate se vor pierde."
 
 msgid "Reset Organisation Unit"
 msgstr ""
@@ -196,31 +196,31 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Evenimentul nu a putut fi încărcat. Sunteți sigur ca exista?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Evenimentul nu a putut fi încărcat"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Unitatea organizațională nu a putut fi încărcată"
 
 msgid "Update"
 msgstr "Actualizare"
 
 msgid "Close"
-msgstr ""
+msgstr "Închidere"
 
 msgid "More filters"
-msgstr ""
+msgstr "Mai multe filtre"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Rânduri pe pagină"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Nu s-a putut obține unitatea organizațională"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Programul nu există"
 
 msgid "Selected program is invalid for registering unit"
 msgstr ""
@@ -250,33 +250,35 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "în"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Acesta nu este un program de tip eveniment sau metadatele sunt corupte. "
+"Consultați jurnalul pentru detalii."
 
 msgid "Save and add another"
 msgstr "Salvare și adăugarea altuia"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Salvare și ieșire"
 
 msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "evenimentele au fost adăugate"
 
 msgid "No events added"
-msgstr ""
+msgstr "Nu au fost adăugate evenimente"
 
 msgid "Reset"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Nou"
 
 msgid "Find"
 msgstr ""
@@ -288,28 +290,28 @@ msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Unitatea organizațională de înregistrare"
 
 msgid "Selected Program"
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "Selectare"
 
 msgid "Program"
-msgstr ""
+msgstr "Program"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Nu există programe disponibile."
 
 msgid "Show all"
 msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Unele programe sunt filtrate."
 
 msgid "Select program"
-msgstr ""
+msgstr "Selectare program"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -321,10 +323,10 @@ msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Selectați una sau mai multe date..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Selectați data..."
 
 msgid "Today"
-msgstr ""
+msgstr "Astăzi"
