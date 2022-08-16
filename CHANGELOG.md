@@ -1,3 +1,10 @@
+## [100.11.12](https://github.com/dhis2/capture-app/compare/v100.11.11...v100.11.12) (2022-08-16)
+
+
+### Bug Fixes
+
+* [DHIS2-13551] fallback missing trackedEntity field in the events api ([#2945](https://github.com/dhis2/capture-app/issues/2945)) ([9f2f0d9](https://github.com/dhis2/capture-app/commit/9f2f0d94cc8254ffe30ca9776df8d7e85461d945))
+
 ## [100.11.11](https://github.com/dhis2/capture-app/compare/v100.11.10...v100.11.11) (2022-08-15)
 
 
