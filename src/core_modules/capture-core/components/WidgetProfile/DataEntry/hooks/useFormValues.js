@@ -58,8 +58,7 @@ export const useFormValues = ({
 
     useEffect(() => {
         if (
-            orgUnit &&
-            orgUnit.code &&
+            orgUnit?.id &&
             Object.entries(formFoundation).length > 0 &&
             Object.entries(formValues).length === 0 &&
             formValuesReadyRef.current === false
