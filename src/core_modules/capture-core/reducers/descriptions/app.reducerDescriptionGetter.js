@@ -20,6 +20,7 @@ import {
 } from '../../components/LockedSelector';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
+import { scopeSelectorActionTypes } from '../../components/ScopeSelector';
 import { actionTypes as initActionTypes } from '../../init/init.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
@@ -127,6 +128,10 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         locationSwitchInProgress: false,
         page: 'search',
+    }),
+    [scopeSelectorActionTypes.RESET_ORG_UNIT_ID]: (state, action) => ({
+        ...state,
+        previousOrgUnitId: action.payload.previousOrgUnitId,
     }),
     [initActionTypes.SET_CURRENT_ORG_UNIT_ROOT]: (state, action) => ({
         ...state,
