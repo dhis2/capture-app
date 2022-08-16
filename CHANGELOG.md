@@ -1,3 +1,10 @@
+# [100.12.0](https://github.com/dhis2/capture-app/compare/v100.11.12...v100.12.0) (2022-08-16)
+
+
+### Features
+
+* [DHIS2-13472] Deselecting reg. unit should expand tree to previous reg. unit ([#2915](https://github.com/dhis2/capture-app/issues/2915)) ([6eb669d](https://github.com/dhis2/capture-app/commit/6eb669d9b76c0a9fd8cf6a2457762fbdc1209af3))
+
 ## [100.11.12](https://github.com/dhis2/capture-app/compare/v100.11.11...v100.11.12) (2022-08-16)
 
 
