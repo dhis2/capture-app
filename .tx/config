@@ -1,10 +1,11 @@
 [main]
-host = https://www.transifex.com
-lang_map = fa_AF: prs, uz@Cyrl: uz, uz@Latn: uz_Latn
+host     = https://www.transifex.com
+lang_map = uz@Latn: uz_Latn, fa_AF: prs, uz@Cyrl: uz
 
-[app-capture-app.en-pot]
-file_filter = i18n/<lang>.po
+[o:hisp-uio:p:app-capture-app:r:en-pot]
+file_filter  = i18n/<lang>.po
+source_file  = i18n/en.pot
+source_lang  = en
+type         = PO
 minimum_perc = 0
-source_file = i18n/en.pot
-source_lang = en
-type = PO
+
