@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2022
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: phil_dhis2, 2019\n"
-"Language-Team: Pushto (https://www.transifex.com/hisp-uio/teams/100509/ps/)\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: phil_dhis2, 2022\n"
+"Language-Team: Pashto (https://www.transifex.com/hisp-uio/teams/100509/ps/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,25 +23,25 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr "ستون"
+msgstr ""
 
 msgid "Errors"
-msgstr "تېروتنې"
+msgstr ""
 
 msgid "Feedback"
-msgstr "د فیډبک یا نظر ورکول"
+msgstr ""
 
 msgid "Indicators"
-msgstr "شاخصونه"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Cancel"
-msgstr "رد یې کړئ [ ژباړه ـ ردول ]"
+msgstr ""
 
 msgid "Complete"
-msgstr "بشپړ یې کړئ"
+msgstr ""
 
 msgid "Warnings found"
 msgstr ""
@@ -62,7 +62,7 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr "ثبت یې کړئ [ ژباړه - ثبت کړئ ]"
+msgstr ""
 
 msgid "Uploading data"
 msgstr ""
@@ -77,10 +77,10 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
-msgstr "تېره اونۍ"
+msgstr ""
 
 msgid "Last month"
-msgstr "تېره میاشت"
+msgstr ""
 
 msgid "Last 3 months"
 msgstr "تېرې 3 میاشتې"
@@ -101,13 +101,13 @@ msgid "From"
 msgstr "څخه"
 
 msgid "To"
-msgstr "تر"
+msgstr ""
 
 msgid "Max"
 msgstr "حداعظم"
 
 msgid "Min"
-msgstr "حداقل"
+msgstr ""
 
 msgid "greater than or equal to"
 msgstr ""
@@ -119,19 +119,19 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "هو [ درست ]"
+msgstr ""
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "کلونه"
+msgstr ""
 
 msgid "Months"
 msgstr "میاشت"
 
 msgid "Days"
-msgstr "ورځې"
+msgstr ""
 
 msgid "Uploading file"
 msgstr ""
@@ -140,13 +140,13 @@ msgid "selected"
 msgstr ""
 
 msgid "Delete"
-msgstr "خذف یې کړئ"
+msgstr ""
 
 msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "نه [ نه ]"
+msgstr "نه"
 
 msgid "Uploading image"
 msgstr ""
@@ -155,7 +155,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Clear"
-msgstr "پاک یې کړئ"
+msgstr ""
 
 msgid "No results"
 msgstr ""
@@ -164,10 +164,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr "په لیکه کې دی"
+msgstr ""
 
 msgid "Offline"
-msgstr "په لیکه کې نشته"
+msgstr ""
 
 msgid "Syncing"
 msgstr ""
@@ -209,7 +209,7 @@ msgid "Update"
 msgstr "تجدید یا نوي یې کړئ"
 
 msgid "Close"
-msgstr "بند یې کړئ"
+msgstr ""
 
 msgid "More filters"
 msgstr ""
@@ -277,10 +277,10 @@ msgid "Reset"
 msgstr ""
 
 msgid "New"
-msgstr "نوی"
+msgstr ""
 
 msgid "Find"
-msgstr "پیدا یې کړئ"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""
@@ -295,22 +295,22 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select"
-msgstr "غوره یې کړئ"
+msgstr ""
 
 msgid "Program"
-msgstr "پروګرام"
+msgstr ""
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr "ټول ښکاره کړئ"
+msgstr ""
 
 msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
-msgstr "د پروګرام ټاکل"
+msgstr ""
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -328,4 +328,4 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr "نن ورځ"
+msgstr ""

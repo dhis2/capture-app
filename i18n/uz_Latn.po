@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Yury Rogachev <yury@dhis2.org>, 2021
+# Yury Rogachev <yury@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,31 +22,31 @@ msgid "Columns to show in table"
 msgstr "Jadvalda koʼrsatiladigan ustunlar"
 
 msgid "Column"
-msgstr "Ustun"
+msgstr ""
 
 msgid "Errors"
-msgstr "Xatoliklar"
+msgstr ""
 
 msgid "Feedback"
-msgstr "Qayta aloqa"
+msgstr ""
 
 msgid "Indicators"
-msgstr "Indikatorlar"
+msgstr "Koʼrsatgichlar"
 
 msgid "Warnings"
 msgstr "Ogohlantirishlar"
 
 msgid "Cancel"
-msgstr "Bekor qilish"
+msgstr ""
 
 msgid "Complete"
-msgstr "Toʼldirish"
+msgstr ""
 
 msgid "Warnings found"
 msgstr "Ogohlantirishlar topildi"
 
 msgid "Abort"
-msgstr "Аbort"
+msgstr ""
 
 msgid "Save comment"
 msgstr ""
@@ -61,28 +61,28 @@ msgid "No write access"
 msgstr "Yozuv kiritish uchun ruxsat yoʼq"
 
 msgid "Save"
-msgstr "Saqlash"
+msgstr ""
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr "Saralash"
+msgstr ""
 
 msgid "No events to display"
-msgstr "Koʼrsatiladigan hech qanday hodisa/tadbir yoʼq"
+msgstr ""
 
 msgid "Data for offline list not present"
-msgstr "Offlayn roʼyxat uchun maʼlumotlar mavjud emas"
+msgstr ""
 
 msgid "Last week"
-msgstr "Oxirgi hafta"
+msgstr ""
 
 msgid "Last month"
-msgstr "Oxirgi oy"
+msgstr ""
 
 msgid "Last 3 months"
-msgstr "Oxirgi 3 oy"
+msgstr "Охирги 3 ой"
 
 msgid "Custom range"
 msgstr "Maxsus diapazon"
@@ -103,73 +103,73 @@ msgid "To"
 msgstr "Kimga"
 
 msgid "Max"
-msgstr "Maksimum"
+msgstr "Максимум"
 
 msgid "Min"
-msgstr "Minimum"
+msgstr ""
 
 msgid "greater than or equal to"
 msgstr "dan katta yoki teng"
 
 msgid "less than or equal to"
-msgstr "dan kam yoki teng"
+msgstr ""
 
 msgid "Contains text"
-msgstr "Matnni oʼz ichiga oladi"
+msgstr ""
 
 msgid "Yes"
-msgstr "Ha"
+msgstr ""
 
 msgid "mm/dd/yyyy"
 msgstr "kun/oy/yil"
 
 msgid "Years"
-msgstr "Yillar"
+msgstr ""
 
 msgid "Months"
 msgstr "Oylar"
 
 msgid "Days"
-msgstr "Kunlar"
+msgstr ""
 
 msgid "Uploading file"
-msgstr "Fayl yuklanmoqda"
+msgstr ""
 
 msgid "selected"
-msgstr "tanlangan"
+msgstr ""
 
 msgid "Delete"
-msgstr "Oʼchirib tashlash"
+msgstr ""
 
 msgid "Select file"
 msgstr "Faylni tanlash"
 
 msgid "No"
-msgstr "Yoʼq"
+msgstr "Йўқ"
 
 msgid "Uploading image"
-msgstr "Rasm yuklanmoqda"
+msgstr ""
 
 msgid "Select image"
-msgstr "Rasmni tanlang"
+msgstr ""
 
 msgid "Clear"
-msgstr "Tozalash"
+msgstr "Аниқ"
 
 msgid "No results"
 msgstr "Natija yoʼq"
 
 msgid "No items to display"
-msgstr "Koʼrsatiladigan axborot yoʼq"
+msgstr ""
 
 msgid "Online"
-msgstr "Onlayn"
+msgstr ""
 
 msgid "Offline"
-msgstr "Offlayn"
+msgstr ""
 
 msgid "Syncing"
-msgstr "Sinxronlashmoqda"
+msgstr ""
 
 msgid "Field"
 msgstr ""
@@ -178,10 +178,10 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
-msgstr "Qayta boshlang"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr "Ishonchingiz komilmi? Barcha saqlanmagan maʼlumotlar yoʼqoladi."
+msgstr ""
 
 msgid "Reset Organisation Unit"
 msgstr ""
@@ -197,31 +197,30 @@ msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr ""
-"Hodisa/tadbirni yuklab boʼlmadi. Uning mavjudligiga ishonchingiz komilmi?"
 
 msgid "Event could not be loaded"
-msgstr "Hodisa/tadbirni yuklab boʼlmadi"
+msgstr ""
 
 msgid "Organisation unit could not be loaded"
-msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
+msgstr ""
 
 msgid "Update"
-msgstr "Yangilash"
+msgstr "Янгилаш"
 
 msgid "Close"
-msgstr "Yopmoq"
+msgstr ""
 
 msgid "More filters"
-msgstr "Koʼproq Filtr"
+msgstr ""
 
 msgid "Rows per page"
-msgstr "Sahifada qatorlar"
+msgstr ""
 
 msgid "Could not get organisation unit"
-msgstr "Tashkiliy boʼlimni olib boʼlmadi"
+msgstr ""
 
 msgid "Program doesn't exist"
-msgstr "Dastur mavjud emas"
+msgstr ""
 
 msgid "Selected program is invalid for registering unit"
 msgstr ""
@@ -239,19 +238,19 @@ msgid "Select a category option to start reporting"
 msgstr ""
 
 msgid "New event"
-msgstr "Yangi hodisa"
+msgstr "Yangi tadbir"
 
 msgid "Switch to form view"
 msgstr "Shakl koʼrinishiga oʼtish"
 
 msgid "Switch to row view"
-msgstr "Jadval koʼrinishiga oʼtish"
+msgstr ""
 
 msgid "Saving to"
-msgstr "...da saqlash"
+msgstr ""
 
 msgid "in"
-msgstr "ichida"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -270,7 +269,7 @@ msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr "hodisa/tadbirlar qoʼshildi"
+msgstr ""
 
 msgid "No events added"
 msgstr "Hech qanday hodisa/tadbir qoʼshilmagan"
@@ -279,28 +278,28 @@ msgid "Reset"
 msgstr ""
 
 msgid "New"
-msgstr "Yangi"
+msgstr ""
 
 msgid "Find"
-msgstr "Toping"
+msgstr ""
 
 msgid "Selected registering unit"
-msgstr "Boʼlimni tanlangan roʼyxatga olish"
+msgstr ""
 
 msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr "Tanlangan boʼlim roʼyxatdan oʼtkazilmoqda"
+msgstr ""
 
 msgid "Selected Program"
-msgstr "Tanlangan dastur"
+msgstr ""
 
 msgid "Select"
-msgstr "Tanlang"
+msgstr "Танланг"
 
 msgid "Program"
-msgstr "Programma"
+msgstr "Dastur"
 
 msgid "No programs available."
 msgstr "Hech qanday dastur mavjud emas."
@@ -312,22 +311,22 @@ msgid "Some programs are being filtered."
 msgstr "Baʼzi dasturlar Filtrlanmoqda."
 
 msgid "Select program"
-msgstr "Dasturni tanlash"
+msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr "Xatolik yuz berdi. Tafsilotlarni jurnaldan koʼring."
+msgstr ""
 
 msgid "Error saving event"
 msgstr "Hodisa/tadbirni saqlashda xato"
 
 msgid "Could not save event. See log for details"
-msgstr "Hodisa/tadbir saqlanmadi. Tafsilotlar uchun jurnalga qarang"
+msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr "Bir yoki bir necha sanalarni tanlang..."
+msgstr ""
 
 msgid "Choose a date..."
-msgstr "Sanani tanlang ..."
+msgstr ""
 
 msgid "Today"
-msgstr "Bugun"
+msgstr ""

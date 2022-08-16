@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# KRG HIS <antonia.bezenchek@informa.pro>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2022
+# KRG HIS <antonia.bezenchek@informa.pro>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2022\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,37 +17,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Please provide a valid date"
-msgstr "تکایە بەروارێکی درووست بنووسە"
+msgstr ""
 
 msgid "Columns to show in table"
-msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
+msgstr ""
 
 msgid "Column"
-msgstr "ستوون"
+msgstr ""
 
 msgid "Errors"
-msgstr "هەڵەکان"
+msgstr ""
 
 msgid "Feedback"
-msgstr "ڕاووبۆچون"
+msgstr ""
 
 msgid "Indicators"
-msgstr "نیشاندەر"
+msgstr ""
 
 msgid "Warnings"
-msgstr "ئاگادارکردنەوەکان"
+msgstr ""
 
 msgid "Cancel"
-msgstr "لابردن"
+msgstr ""
 
 msgid "Complete"
-msgstr "تەواوبکە"
+msgstr ""
 
 msgid "Warnings found"
-msgstr "ئاگادارکردنەوە دۆزرایەوە"
+msgstr ""
 
 msgid "Abort"
-msgstr "دەرچوون"
+msgstr ""
 
 msgid "Save comment"
 msgstr ""
@@ -59,37 +59,37 @@ msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr "مافی نوسینت نیە"
+msgstr ""
 
 msgid "Save"
-msgstr "خةزن كردن"
+msgstr ""
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr "پۆلینکردن"
+msgstr ""
 
 msgid "No events to display"
-msgstr "هیچ ئیڤێنتێک نیە بۆ پشاندان"
+msgstr ""
 
 msgid "Data for offline list not present"
-msgstr "زانیاریەکان بۆ لیستی ئۆفڵاین بەردەست نیە"
+msgstr ""
 
 msgid "Last week"
-msgstr "هەفتەی پێشووتر"
+msgstr ""
 
 msgid "Last month"
-msgstr "مانگی ڕابردوو"
+msgstr ""
 
 msgid "Last 3 months"
-msgstr "سێ مانگ پێشووتر"
+msgstr ""
 
 msgid "Custom range"
 msgstr "مەودایەکی ئارەزوومەندانە"
 
 msgid "to"
-msgstr "بۆ "
+msgstr ""
 
 msgid "after or equal to"
 msgstr ""
@@ -101,76 +101,76 @@ msgid "From"
 msgstr "لە"
 
 msgid "To"
-msgstr "لە"
+msgstr ""
 
 msgid "Max"
-msgstr "زیاترین"
+msgstr ""
 
 msgid "Min"
-msgstr "کەمترین"
+msgstr ""
 
 msgid "greater than or equal to"
 msgstr "گەورەتر لە یاخود یەکسان بە"
 
 msgid "less than or equal to"
-msgstr "بچووکتر لە یاخود یەکسان بە"
+msgstr ""
 
 msgid "Contains text"
-msgstr "نووسینی تێدایە"
+msgstr ""
 
 msgid "Yes"
-msgstr "ەڵێ"
+msgstr ""
 
 msgid "mm/dd/yyyy"
-msgstr "مانگ/رۆژ/ساڵ"
+msgstr ""
 
 msgid "Years"
-msgstr "ساڵەکان"
+msgstr ""
 
 msgid "Months"
 msgstr "مانگەکان"
 
 msgid "Days"
-msgstr "رۆژەکان"
+msgstr ""
 
 msgid "Uploading file"
-msgstr "سەرخستنی فایل"
+msgstr ""
 
 msgid "selected"
-msgstr "هەڵبژێردرا"
+msgstr ""
 
 msgid "Delete"
-msgstr "سرينةوة"
+msgstr ""
 
 msgid "Select file"
-msgstr "فایل هەڵبژێرە"
+msgstr ""
 
 msgid "No"
 msgstr "نەخێر"
 
 msgid "Uploading image"
-msgstr "سەرخستنی وێنە"
+msgstr ""
 
 msgid "Select image"
-msgstr "وێنە هەڵبژێرە"
+msgstr ""
 
 msgid "Clear"
-msgstr "باك"
+msgstr ""
 
 msgid "No results"
-msgstr "هیچ ئەنجامێک بەردەست نیە"
+msgstr ""
 
 msgid "No items to display"
-msgstr "هیچ شتێک بەردەست نیە بۆ پیشاندان"
+msgstr ""
 
 msgid "Online"
-msgstr "ئۆنڵاین"
+msgstr ""
 
 msgid "Offline"
-msgstr "ئۆفڵاین"
+msgstr ""
 
 msgid "Syncing"
-msgstr "هاوتاکردن"
+msgstr ""
 
 msgid "Field"
 msgstr ""
@@ -179,10 +179,10 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
-msgstr "دووبارە دەستبپێبکەوە"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
+msgstr ""
 
 msgid "Reset Organisation Unit"
 msgstr ""
@@ -197,46 +197,46 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "حالەتەکە نەتواندرا پیشان بدرێت، ئایا دڵنیای کە بوونی هەیە؟"
+msgstr ""
 
 msgid "Event could not be loaded"
-msgstr "حاڵەتەکە نەتواندرا بهێندرێت"
+msgstr ""
 
 msgid "Organisation unit could not be loaded"
-msgstr "ئۆرگانیزەیشن یونتەکە نەتواندرا بهێندرێت"
+msgstr ""
 
 msgid "Update"
-msgstr "نويَ كردنةوة"
+msgstr ""
 
 msgid "Close"
-msgstr "داخستن"
+msgstr ""
 
 msgid "More filters"
-msgstr "فلتەری زیاتر"
+msgstr ""
 
 msgid "Rows per page"
-msgstr "زانیارەکان بۆ هەر ڵاپەڕەیەک"
+msgstr ""
 
 msgid "Could not get organisation unit"
-msgstr "نەتواندرا ئۆرگانیزەیشن یونیتەکە بهێندرێت"
+msgstr ""
 
 msgid "Program doesn't exist"
-msgstr "پرۆگرامەکە بوونی نیە"
+msgstr ""
 
 msgid "Selected program is invalid for registering unit"
-msgstr "ئەم پرۆگرامە درووستنیە بۆ تۆمارکردنی یونت"
+msgstr ""
 
 msgid "Select a registering unit and program above to get started"
-msgstr "یەکەی تۆمارکردن و پرۆگرامێك هەڵبژێرە لە سەرەوە بۆ دەستپێکردن"
+msgstr ""
 
 msgid "Select a program to start reporting"
-msgstr " پرۆگرامێك هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
+msgstr ""
 
 msgid "Select a registering unit to start reporting"
-msgstr " یەکەی تۆمارکردن هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
+msgstr ""
 
 msgid "Select a category option to start reporting"
-msgstr " دەستەیەک هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
+msgstr ""
 
 msgid "New event"
 msgstr "رووداوي نوي"
@@ -245,89 +245,87 @@ msgid "Switch to form view"
 msgstr "گۆڕین بۆ پیشاندانی فۆرم"
 
 msgid "Switch to row view"
-msgstr "گۆڕین بۆ پیشاندانی ئاسۆیی"
+msgstr ""
 
 msgid "Saving to"
-msgstr "تۆمارکردن بۆ"
+msgstr ""
 
 msgid "in"
-msgstr "لە"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"ئەمە پرۆگرامی حالەت نیە یاخود زانیاریەکە تێکچووە. تکایە سەریری لۆگ فایل بکە "
-"بۆ زانیاری زیاتر"
 
 msgid "Save and add another"
-msgstr "تۆمار بکە و دانەیەکی دیکە زیاد بکە"
+msgstr ""
 
 msgid "Save and exit"
-msgstr "تۆمارکردن و دەرچوون"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr "حاڵەتەکان زیادکران"
+msgstr ""
 
 msgid "No events added"
-msgstr "هیچ حاڵەتێک زیادنەکرا"
+msgstr ""
 
 msgid "Reset"
 msgstr ""
 
 msgid "New"
-msgstr "نوێ"
+msgstr ""
 
 msgid "Find"
-msgstr "طةران"
+msgstr ""
 
 msgid "Selected registering unit"
-msgstr "یەکەی تۆمارکردن هەڵبژێرە"
+msgstr ""
 
 msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr "تۆمارکردنی یەکەی رێکخراو"
+msgstr ""
 
 msgid "Selected Program"
-msgstr "پرۆگرامە هەڵبژێردراوەکە"
+msgstr ""
 
 msgid "Select"
-msgstr "هەڵبژاردن"
+msgstr ""
 
 msgid "Program"
-msgstr "بةرنامة"
+msgstr ""
 
 msgid "No programs available."
-msgstr "هیچ پرۆگرامێک بەردەست نیە"
+msgstr ""
 
 msgid "Show all"
-msgstr "بيشانداني هةمووان"
+msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
+msgstr ""
 
 msgid "Select program"
-msgstr "بةرنامة هةلبزيرة"
+msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr "هەڵەیک ڕوویدا، تکایە سەیری لۆگ فایل بکە بۆ وردەکاری زیاتر"
+msgstr ""
 
 msgid "Error saving event"
-msgstr "هەڵەیەک ڕوویدا لە تۆمارکردنی حاڵەتەکە"
+msgstr ""
 
 msgid "Could not save event. See log for details"
-msgstr "نەتواندرا حاڵەتەکە تۆماربکرێت. سەیری فایل لۆگ بکە بۆ زانیاری زیاتر"
+msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr "بەروارێک یان زیاتر هەڵبژێرە"
+msgstr ""
 
 msgid "Choose a date..."
-msgstr "بەروارێک هەڵبژێرە"
+msgstr ""
 
 msgid "Today"
-msgstr "ئەمڕۆ"
+msgstr ""

@@ -1,13 +1,13 @@
 # 
 # Translators:
-# phil_dhis2, 2019
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: phil_dhis2, 2019\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Persian (Afghanistan) (https://www.transifex.com/hisp-uio/teams/100509/fa_AF/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,25 +22,25 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr "ستون"
+msgstr ""
 
 msgid "Errors"
-msgstr "خطاها"
+msgstr ""
 
 msgid "Feedback"
-msgstr "نظرات/فیدبک"
+msgstr ""
 
 msgid "Indicators"
-msgstr "شاخص ها"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Cancel"
-msgstr "انصراف"
+msgstr ""
 
 msgid "Complete"
-msgstr "تکمیل"
+msgstr ""
 
 msgid "Warnings found"
 msgstr ""
@@ -49,7 +49,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Save comment"
-msgstr "ذخیره نظریه"
+msgstr ""
 
 msgid "Write comment"
 msgstr ""
@@ -61,13 +61,13 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr "ذخیره"
+msgstr ""
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr "تنظیم"
+msgstr ""
 
 msgid "No events to display"
 msgstr ""
@@ -76,13 +76,13 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
-msgstr "هفته گذشته"
+msgstr ""
 
 msgid "Last month"
-msgstr "ماه گذشته"
+msgstr ""
 
 msgid "Last 3 months"
-msgstr "3 ماهه گذشته"
+msgstr ""
 
 msgid "Custom range"
 msgstr ""
@@ -100,13 +100,13 @@ msgid "From"
 msgstr "از جانب"
 
 msgid "To"
-msgstr "به"
+msgstr ""
 
 msgid "Max"
 msgstr "بزرگتر"
 
 msgid "Min"
-msgstr "کوچکتر"
+msgstr ""
 
 msgid "greater than or equal to"
 msgstr ""
@@ -118,28 +118,28 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "بلی"
+msgstr ""
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "سالانه"
+msgstr ""
 
 msgid "Months"
 msgstr "ماه ها"
 
 msgid "Days"
-msgstr "روزها"
+msgstr ""
 
 msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr "منتخبین"
+msgstr ""
 
 msgid "Delete"
-msgstr "حذف"
+msgstr ""
 
 msgid "Select file"
 msgstr ""
@@ -154,7 +154,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Clear"
-msgstr "پاک کردن"
+msgstr ""
 
 msgid "No results"
 msgstr ""
@@ -163,10 +163,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr "آنلاین"
+msgstr ""
 
 msgid "Offline"
-msgstr "آفلاین"
+msgstr ""
 
 msgid "Syncing"
 msgstr ""
@@ -205,10 +205,10 @@ msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Update"
-msgstr "تجدید"
+msgstr ""
 
 msgid "Close"
-msgstr "بستن"
+msgstr ""
 
 msgid "More filters"
 msgstr ""
@@ -250,7 +250,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr "در"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -276,10 +276,10 @@ msgid "Reset"
 msgstr "مرتب سازی مجدد"
 
 msgid "New"
-msgstr "جدید"
+msgstr ""
 
 msgid "Find"
-msgstr "یافتن"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""
@@ -294,22 +294,22 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select"
-msgstr "انتخاب"
+msgstr ""
 
 msgid "Program"
-msgstr "برنامه"
+msgstr ""
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr "نشان دادن همه"
+msgstr ""
 
 msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
-msgstr "پروګرام غوره کړئ"
+msgstr ""
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -327,4 +327,4 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr "امروز"
+msgstr ""

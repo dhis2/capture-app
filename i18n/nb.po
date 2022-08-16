@@ -1,15 +1,14 @@
 # 
 # Translators:
-# phil_dhis2, 2020
-# Caroline Hesthagen Holen <caroline@devotta.no>, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2020
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2022
+# Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,40 +17,40 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Please provide a valid date"
-msgstr "Oppgi en gyldig dato"
+msgstr ""
 
 msgid "Columns to show in table"
-msgstr "Kolonner som skal vises i tabellen"
+msgstr ""
 
 msgid "Column"
-msgstr "Kolonne"
+msgstr ""
 
 msgid "Errors"
-msgstr "Feil"
+msgstr ""
 
 msgid "Feedback"
-msgstr "Tilbakemelding"
+msgstr ""
 
 msgid "Indicators"
-msgstr "Indikatorer"
+msgstr ""
 
 msgid "Warnings"
-msgstr "Advarsler"
+msgstr ""
 
 msgid "Cancel"
-msgstr "Avbryt"
+msgstr ""
 
 msgid "Complete"
-msgstr "Fullfør"
+msgstr ""
 
 msgid "Warnings found"
 msgstr "Advarsler funnet"
 
 msgid "Abort"
-msgstr "Avbryt"
+msgstr ""
 
 msgid "Save comment"
-msgstr "Lagre kommentar"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Skriv kommentar"
@@ -60,28 +59,28 @@ msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr "Dataene dine lastes opp. Vent til denne meldingen forsvinner"
 
 msgid "No write access"
-msgstr "Ingen skrivetilgang"
+msgstr ""
 
 msgid "Save"
-msgstr "Lagre"
+msgstr ""
 
 msgid "Uploading data"
-msgstr "Laster opp data"
+msgstr ""
 
 msgid "Sort"
-msgstr "Sorter"
+msgstr ""
 
 msgid "No events to display"
-msgstr "Ingen hendelser å vise"
+msgstr ""
 
 msgid "Data for offline list not present"
-msgstr "Data for frakoblet liste er ikke til stede"
+msgstr ""
 
 msgid "Last week"
-msgstr "Forrige uke"
+msgstr ""
 
 msgid "Last month"
-msgstr "Forrige måned"
+msgstr ""
 
 msgid "Last 3 months"
 msgstr "Siste 3 måneder"
@@ -93,151 +92,151 @@ msgid "to"
 msgstr "til"
 
 msgid "after or equal to"
-msgstr "etter eller lik"
+msgstr ""
 
 msgid "before or equal to"
-msgstr "før eller lik"
+msgstr ""
 
 msgid "From"
 msgstr "Fra"
 
 msgid "To"
-msgstr "Til"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
 
 msgid "Min"
-msgstr "Min"
+msgstr ""
 
 msgid "greater than or equal to"
 msgstr "større enn eller lik"
 
 msgid "less than or equal to"
-msgstr "mindre enn eller lik"
+msgstr ""
 
 msgid "Contains text"
-msgstr "Inneholder tekst"
+msgstr ""
 
 msgid "Yes"
-msgstr "Ja"
+msgstr ""
 
 msgid "mm/dd/yyyy"
 msgstr "mm/dd/yyyy"
 
 msgid "Years"
-msgstr "År"
+msgstr ""
 
 msgid "Months"
 msgstr "Måneder"
 
 msgid "Days"
-msgstr "Dager"
+msgstr ""
 
 msgid "Uploading file"
-msgstr "Laster opp fil"
+msgstr ""
 
 msgid "selected"
-msgstr "valgt"
+msgstr ""
 
 msgid "Delete"
-msgstr "Slett"
+msgstr ""
 
 msgid "Select file"
-msgstr "Velg fil"
+msgstr ""
 
 msgid "No"
 msgstr "Nei"
 
 msgid "Uploading image"
-msgstr "Laster opp bilde"
+msgstr ""
 
 msgid "Select image"
-msgstr "Velg bilde"
+msgstr ""
 
 msgid "Clear"
-msgstr "Fjern"
+msgstr ""
 
 msgid "No results"
 msgstr "Ingen resultater"
 
 msgid "No items to display"
-msgstr "Ingen elementer å vise"
+msgstr ""
 
 msgid "Online"
-msgstr "Påkoblet"
+msgstr ""
 
 msgid "Offline"
-msgstr "Frakoblet"
+msgstr ""
 
 msgid "Syncing"
-msgstr "Synkroniserer"
+msgstr ""
 
 msgid "Field"
-msgstr "Felt"
+msgstr ""
 
 msgid "could not be updated"
-msgstr "kunne ikke oppdateres"
+msgstr ""
 
 msgid "Start Again"
-msgstr "Start på nytt"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr "Er du sikker? All data som ikke er lagret vil bli borte."
+msgstr ""
 
 msgid "Reset Organisation Unit"
-msgstr "Nullstill organisasjonsenhet"
+msgstr ""
 
 msgid "Reset Program"
-msgstr "Nullstill program"
+msgstr ""
 
 msgid "Reset Category Option"
-msgstr "Nullstill kategorialternativ"
+msgstr ""
 
 msgid "Create New Event"
-msgstr "Opprett ny hendelse"
+msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den finnes?"
+msgstr ""
 
 msgid "Event could not be loaded"
-msgstr "Hendelse kunne ikke lastes inn"
+msgstr ""
 
 msgid "Organisation unit could not be loaded"
-msgstr "Organisasjonsenhet kunne ikke lastes inn"
+msgstr ""
 
 msgid "Update"
 msgstr "Oppdater"
 
 msgid "Close"
-msgstr "Lukk"
+msgstr ""
 
 msgid "More filters"
-msgstr "Flere filtre"
+msgstr ""
 
 msgid "Rows per page"
-msgstr "Rader per side"
+msgstr ""
 
 msgid "Could not get organisation unit"
-msgstr "Kunne ikke få tak i organisasjonsenhet"
+msgstr ""
 
 msgid "Program doesn't exist"
-msgstr "Programmet finnes ikke"
+msgstr ""
 
 msgid "Selected program is invalid for registering unit"
-msgstr "Valgt program er ugyldig for registreringsenhet"
+msgstr ""
 
 msgid "Select a registering unit and program above to get started"
-msgstr "Velg en registreringsenhet og program over for å komme i gang"
+msgstr ""
 
 msgid "Select a program to start reporting"
-msgstr "Velg et program for å starte rapportering"
+msgstr ""
 
 msgid "Select a registering unit to start reporting"
-msgstr "Velg en registreringsenhet for å starte rapportering"
+msgstr ""
 
 msgid "Select a category option to start reporting"
-msgstr "Velg et kategorialternativ for å starte rapportering"
+msgstr ""
 
 msgid "New event"
 msgstr "Ny hendelse"
@@ -246,89 +245,87 @@ msgid "Switch to form view"
 msgstr "Bytt til skjemavisning"
 
 msgid "Switch to row view"
-msgstr "Bytt til radvisning"
+msgstr ""
 
 msgid "Saving to"
-msgstr "Lagrer til"
+msgstr ""
 
 msgid "in"
-msgstr "i"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Dette er ikke et hendelsesprogram, eller metadataene er korrupte. Se logg "
-"for detaljer."
 
 msgid "Save and add another"
 msgstr "Lagre og legg til en til"
 
 msgid "Save and exit"
-msgstr "Lagre og avslutt"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost"
-msgstr "Er du sikker? Alle ikke-lagrede data vil gå tapt"
+msgstr ""
 
 msgid "events added"
-msgstr "Hendelser lagt til"
+msgstr ""
 
 msgid "No events added"
-msgstr "Ingen hendelser lagt til"
+msgstr ""
 
 msgid "Reset"
 msgstr "Resett"
 
 msgid "New"
-msgstr "Ny"
+msgstr ""
 
 msgid "Find"
-msgstr "Finn"
+msgstr ""
 
 msgid "Selected registering unit"
-msgstr "Valgt registreringsenhet"
+msgstr ""
 
 msgid "Registering Oraginastion Unit"
-msgstr "Registrerende organisasjonsenhet"
+msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr "Registrering av organisasjonsenhet"
+msgstr ""
 
 msgid "Selected Program"
-msgstr "Valgt program"
+msgstr ""
 
 msgid "Select"
-msgstr "Velg"
+msgstr ""
 
 msgid "Program"
-msgstr "Program"
+msgstr ""
 
 msgid "No programs available."
-msgstr "Ingen programmer tilgjengelig."
+msgstr ""
 
 msgid "Show all"
-msgstr "Vis alle"
+msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr "Noen programmer blir filtrert."
+msgstr ""
 
 msgid "Select program"
-msgstr "Velg program"
+msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr "Det har oppstått en feil. Se logg for detaljer"
+msgstr ""
 
 msgid "Error saving event"
 msgstr "Feil ved lagring av hendelse"
 
 msgid "Could not save event. See log for details"
-msgstr "Kunne ikke lagre hendelse. Se loggen for detaljer"
+msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr "Velg en eller flere datoer"
+msgstr ""
 
 msgid "Choose a date..."
-msgstr "Velg en dato"
+msgstr ""
 
 msgid "Today"
-msgstr "I dag"
+msgstr ""

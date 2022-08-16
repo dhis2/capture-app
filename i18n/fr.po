@@ -1,59 +1,58 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# Bram Piot <bram.piot@gmail.com>, 2019
-# phil_dhis2, 2019
-# Karoline Tufte Lien <karoline@dhis2.org>, 2020
-# Yao Selom SAKA <saka.yao@yahoo.fr>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2022
+# phil_dhis2, 2022
+# Bram Piot <bram.piot@gmail.com>, 2022
+# Yao Selom Saka <ysaka@hispwca.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Yao Selom SAKA <saka.yao@yahoo.fr>, 2020\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: Yao Selom Saka <ysaka@hispwca.org>, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Please provide a valid date"
-msgstr "Veuillez spécifier une date valide"
+msgstr ""
 
 msgid "Columns to show in table"
-msgstr "Colonnes à afficher dans ce tableau"
+msgstr ""
 
 msgid "Column"
-msgstr "Colonne"
+msgstr ""
 
 msgid "Errors"
-msgstr "Erreurs"
+msgstr ""
 
 msgid "Feedback"
-msgstr "Réaction"
+msgstr ""
 
 msgid "Indicators"
-msgstr "Indicateurs"
+msgstr ""
 
 msgid "Warnings"
-msgstr "Avertissements"
+msgstr ""
 
 msgid "Cancel"
-msgstr "Annuler"
+msgstr ""
 
 msgid "Complete"
-msgstr "Terminer"
+msgstr ""
 
 msgid "Warnings found"
 msgstr "Avertissements trouvés"
 
 msgid "Abort"
-msgstr "Annuler"
+msgstr ""
 
 msgid "Save comment"
-msgstr "Enregistrer commentaires "
+msgstr ""
 
 msgid "Write comment"
 msgstr "Ecrire commentaire"
@@ -64,31 +63,31 @@ msgstr ""
 "ce message disparaisse"
 
 msgid "No write access"
-msgstr "Aucun accès en écriture"
+msgstr ""
 
 msgid "Save"
-msgstr "Enregistrer"
+msgstr ""
 
 msgid "Uploading data"
-msgstr "Téléchargement des données"
+msgstr ""
 
 msgid "Sort"
-msgstr "Trier"
+msgstr ""
 
 msgid "No events to display"
-msgstr "Aucun évènement à afficher"
+msgstr ""
 
 msgid "Data for offline list not present"
-msgstr "Données pour la liste hors ligne non disponibles"
+msgstr ""
 
 msgid "Last week"
-msgstr "Semaine passée"
+msgstr ""
 
 msgid "Last month"
-msgstr "Le mois dernier"
+msgstr ""
 
 msgid "Last 3 months"
-msgstr "3 derniers mois"
+msgstr ""
 
 msgid "Custom range"
 msgstr "Plage personnalisée"
@@ -97,153 +96,151 @@ msgid "to"
 msgstr "à"
 
 msgid "after or equal to"
-msgstr "après ou egal à"
+msgstr ""
 
 msgid "before or equal to"
-msgstr "avant ou egal à"
+msgstr ""
 
 msgid "From"
 msgstr "A partir de"
 
 msgid "To"
-msgstr "A"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
 
 msgid "Min"
-msgstr "Min"
+msgstr ""
 
 msgid "greater than or equal to"
 msgstr "supérieur ou egal à"
 
 msgid "less than or equal to"
-msgstr "inférieur ou egal à"
+msgstr ""
 
 msgid "Contains text"
-msgstr "Contient le texte"
+msgstr ""
 
 msgid "Yes"
-msgstr "Oui"
+msgstr ""
 
 msgid "mm/dd/yyyy"
-msgstr "mm/jj/aaaa"
+msgstr ""
 
 msgid "Years"
-msgstr "Années"
+msgstr ""
 
 msgid "Months"
 msgstr "Mois"
 
 msgid "Days"
-msgstr "Jours"
+msgstr ""
 
 msgid "Uploading file"
-msgstr "Téléchargement du fichier"
+msgstr ""
 
 msgid "selected"
-msgstr "Sélectionné"
+msgstr ""
 
 msgid "Delete"
-msgstr "Supprimer"
+msgstr ""
 
 msgid "Select file"
-msgstr "Sélectionner le fichier"
+msgstr ""
 
 msgid "No"
 msgstr "Non"
 
 msgid "Uploading image"
-msgstr "Téléchargement de l'image"
+msgstr ""
 
 msgid "Select image"
-msgstr "Sélectionner l'image"
+msgstr ""
 
 msgid "Clear"
-msgstr "Effacer"
+msgstr ""
 
 msgid "No results"
-msgstr "Aucun résultat"
+msgstr ""
 
 msgid "No items to display"
-msgstr "Aucun élément à afficher"
+msgstr ""
 
 msgid "Online"
-msgstr "En ligne"
+msgstr ""
 
 msgid "Offline"
-msgstr "Hors ligne"
+msgstr ""
 
 msgid "Syncing"
-msgstr "Synchronisation"
+msgstr ""
 
 msgid "Field"
-msgstr "Champ"
+msgstr ""
 
 msgid "could not be updated"
-msgstr "mise à jour impossible"
+msgstr ""
 
 msgid "Start Again"
-msgstr "Recommencer"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr "Êtes-vous sûr ? Toutes les données non sauvegardées seront perdues."
+msgstr ""
 
 msgid "Reset Organisation Unit"
-msgstr "Réinitialiser une unité d'organisation"
+msgstr ""
 
 msgid "Reset Program"
-msgstr "Réinitialiser un programme"
+msgstr ""
 
 msgid "Reset Category Option"
-msgstr "Réinitialiser l'option de catégorie"
+msgstr ""
 
 msgid "Create New Event"
-msgstr "Créer un nouvel événement"
+msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "L'événement n'a pas pu être chargé. Etes-vous sûr qu'il existe ?"
+msgstr ""
 
 msgid "Event could not be loaded"
-msgstr "L'événement n'a pas pu être chargé"
+msgstr ""
 
 msgid "Organisation unit could not be loaded"
-msgstr "L'unité d'organisation n'a pas pu être chargée"
+msgstr ""
 
 msgid "Update"
-msgstr "Mettre à jour"
+msgstr ""
 
 msgid "Close"
-msgstr "Fermer"
+msgstr ""
 
 msgid "More filters"
-msgstr "Filtres supplémentaires"
+msgstr ""
 
 msgid "Rows per page"
-msgstr "Lignes par page"
+msgstr ""
 
 msgid "Could not get organisation unit"
-msgstr "Impossible de trouver l'unité d'organisation"
+msgstr ""
 
 msgid "Program doesn't exist"
-msgstr "Le programme n'existe pas"
+msgstr ""
 
 msgid "Selected program is invalid for registering unit"
-msgstr "Le programme sélectionné est invalide pour l'unité d'enregistrement"
+msgstr ""
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
-"Sélectionnez une unité d'enregistrement et un programme dans la liste ci-"
-"dessus pour commencer"
 
 msgid "Select a program to start reporting"
-msgstr "Sélectionnez un programme pour commencer un rapport"
+msgstr ""
 
 msgid "Select a registering unit to start reporting"
-msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
+msgstr ""
 
 msgid "Select a category option to start reporting"
-msgstr "Sélectionnez une option de catégorie pour commencer un rapport"
+msgstr ""
 
 msgid "New event"
 msgstr "Nouvel événement"
@@ -252,90 +249,87 @@ msgid "Switch to form view"
 msgstr "Passer à la vue du formulaire"
 
 msgid "Switch to row view"
-msgstr "Passer à la vue des lignes"
+msgstr ""
 
 msgid "Saving to"
-msgstr "Enregistrement à"
+msgstr ""
 
 msgid "in"
-msgstr "dans"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Il ne s'agit pas d'un programme d'événement ou les métadonnées sont "
-"corrompues. Voir le journal pour plus de détails."
 
 msgid "Save and add another"
 msgstr "Sauvegarder et ajouter nouveau"
 
 msgid "Save and exit"
-msgstr "Sauvegarder et quitter"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost"
-msgstr "Êtes-vous sûr ? Toutes les données non sauvegardées seront perdues"
+msgstr ""
 
 msgid "events added"
-msgstr "événements ajoutés"
+msgstr ""
 
 msgid "No events added"
-msgstr "Aucun événement n'a été ajouté"
+msgstr ""
 
 msgid "Reset"
 msgstr "Réinitialiser"
 
 msgid "New"
-msgstr "Nouveau"
+msgstr ""
 
 msgid "Find"
-msgstr "Trouver"
+msgstr ""
 
 msgid "Selected registering unit"
-msgstr "Unité d'enregistrement sélectionnée"
+msgstr ""
 
 msgid "Registering Oraginastion Unit"
-msgstr "Unité d'organisation d'enregistrement"
+msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr "Unité d'organisation d'enregistrement"
+msgstr ""
 
 msgid "Selected Program"
-msgstr "Programme choisi"
+msgstr ""
 
 msgid "Select"
-msgstr "Sélectionner"
+msgstr ""
 
 msgid "Program"
-msgstr "Programme"
+msgstr ""
 
 msgid "No programs available."
-msgstr "Aucun programme disponible"
+msgstr ""
 
 msgid "Show all"
-msgstr "Tout afficher"
+msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr "Certains programmes sont en cours de filtrage."
+msgstr ""
 
 msgid "Select program"
-msgstr "Sélectionner le programme"
+msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr "Une erreur s'est produite. Voir le log pour plus de détails"
+msgstr ""
 
 msgid "Error saving event"
 msgstr "Erreur lors de la sauvegarde de l'événement"
 
 msgid "Could not save event. See log for details"
 msgstr ""
-"Impossible de sauvegarder l'événement. Voir le journal pour plus de détails"
 
 msgid "Choose one or more dates..."
-msgstr "Choisir une ou plusieurs dates..."
+msgstr ""
 
 msgid "Choose a date..."
-msgstr "Choisir une date..."
+msgstr ""
 
 msgid "Today"
-msgstr "Aujourd'hui"
+msgstr ""

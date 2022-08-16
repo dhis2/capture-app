@@ -1,13 +1,13 @@
 # 
 # Translators:
-# KRG HIS <antonia.bezenchek@informa.pro>, 2020
+# KRG HIS <antonia.bezenchek@informa.pro>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2022\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,37 +16,37 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "Please provide a valid date"
-msgstr "نرجوا ادخال صيغة صحيحة للتاريخ"
+msgstr ""
 
 msgid "Columns to show in table"
-msgstr "الأعمدة التي سيتم عرضها في الجدول"
+msgstr ""
 
 msgid "Column"
-msgstr "العمود"
+msgstr ""
 
 msgid "Errors"
-msgstr "اخطاء"
+msgstr ""
 
 msgid "Feedback"
-msgstr "التغذية الراجعة"
+msgstr ""
 
 msgid "Indicators"
-msgstr "المؤشرات"
+msgstr ""
 
 msgid "Warnings"
-msgstr "تحذيرات"
+msgstr ""
 
 msgid "Cancel"
-msgstr "إلغاء"
+msgstr ""
 
 msgid "Complete"
-msgstr "مكتمل"
+msgstr ""
 
 msgid "Warnings found"
-msgstr "تم العثور على إشعارات تحذيرية"
+msgstr ""
 
 msgid "Abort"
-msgstr "إحباط"
+msgstr ""
 
 msgid "Save comment"
 msgstr ""
@@ -58,118 +58,118 @@ msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr "لا توجد صلاحية الوصول للكتابة"
+msgstr ""
 
 msgid "Save"
-msgstr "حفظ"
+msgstr ""
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr "فرز"
+msgstr ""
 
 msgid "No events to display"
-msgstr "لايوجد احداث للعرض"
+msgstr ""
 
 msgid "Data for offline list not present"
-msgstr "البيانات لقائمة الغير متصلة غير موجودة"
+msgstr ""
 
 msgid "Last week"
-msgstr "الأسبوع الماضي"
+msgstr ""
 
 msgid "Last month"
-msgstr "الشهر الماضي"
+msgstr ""
 
 msgid "Last 3 months"
-msgstr "آخر 3 أشهر"
+msgstr ""
 
 msgid "Custom range"
 msgstr "نطاق مخصص"
 
 msgid "to"
-msgstr "إلى"
+msgstr ""
 
 msgid "after or equal to"
-msgstr "من بعد أو مساوٍ لـ"
+msgstr ""
 
 msgid "before or equal to"
-msgstr "من قبل أو مساوٍ لـ"
+msgstr ""
 
 msgid "From"
 msgstr "من"
 
 msgid "To"
-msgstr "الى"
+msgstr ""
 
 msgid "Max"
-msgstr "الأعلى"
+msgstr ""
 
 msgid "Min"
-msgstr "الأدنى"
+msgstr ""
 
 msgid "greater than or equal to"
 msgstr "أكبر من أو يساوي"
 
 msgid "less than or equal to"
-msgstr "أقل من أو يساوي"
+msgstr ""
 
 msgid "Contains text"
-msgstr "يحتوي على نص"
+msgstr ""
 
 msgid "Yes"
-msgstr "نعم"
+msgstr ""
 
 msgid "mm/dd/yyyy"
-msgstr "شهر / يوم / سنة"
+msgstr ""
 
 msgid "Years"
-msgstr "السنوات"
+msgstr ""
 
 msgid "Months"
 msgstr "الأشهر"
 
 msgid "Days"
-msgstr "‏‏الأيام"
+msgstr ""
 
 msgid "Uploading file"
-msgstr "تحميل ملف"
+msgstr ""
 
 msgid "selected"
-msgstr "محدد"
+msgstr ""
 
 msgid "Delete"
-msgstr "حذف"
+msgstr ""
 
 msgid "Select file"
-msgstr "اختيار ملف"
+msgstr ""
 
 msgid "No"
 msgstr "لا"
 
 msgid "Uploading image"
-msgstr "تحميل الصورة"
+msgstr ""
 
 msgid "Select image"
-msgstr "حدد الصورة"
+msgstr ""
 
 msgid "Clear"
-msgstr "مسح"
+msgstr ""
 
 msgid "No results"
-msgstr "لا توجد نتائج"
+msgstr ""
 
 msgid "No items to display"
-msgstr "لا توجد عناصر للعرض"
+msgstr ""
 
 msgid "Online"
-msgstr "متصل"
+msgstr ""
 
 msgid "Offline"
-msgstr "غير متصل"
+msgstr ""
 
 msgid "Syncing"
-msgstr "تزامن"
+msgstr ""
 
 msgid "Field"
 msgstr ""
@@ -178,10 +178,10 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
-msgstr "البدء من جديد"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr "هل أنت متأكد؟ سيتم فقدان جميع البيانات التي لم يتم حفظها."
+msgstr ""
 
 msgid "Reset Organisation Unit"
 msgstr ""
@@ -196,46 +196,46 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "لا يمكن تحميل الحدث. هل أنت متأكد أنه موجود؟"
+msgstr ""
 
 msgid "Event could not be loaded"
-msgstr "تعذر تحميل الحدث"
+msgstr ""
 
 msgid "Organisation unit could not be loaded"
-msgstr "تعذر تحميل الوحدة التنظيمية"
+msgstr ""
 
 msgid "Update"
-msgstr "تحديث"
+msgstr ""
 
 msgid "Close"
-msgstr "إغلاق"
+msgstr ""
 
 msgid "More filters"
-msgstr "عوامل تصفية أكثر"
+msgstr ""
 
 msgid "Rows per page"
-msgstr "عدد الصفوف لكل صفحة"
+msgstr ""
 
 msgid "Could not get organisation unit"
-msgstr "تعذر جلب الوحدة التنظيمية"
+msgstr ""
 
 msgid "Program doesn't exist"
-msgstr "البرنامج غير موجود"
+msgstr ""
 
 msgid "Selected program is invalid for registering unit"
-msgstr "البرنامج المحدد غير صالح لوحدة التسجيل"
+msgstr ""
 
 msgid "Select a registering unit and program above to get started"
-msgstr "حدد وحدة التسجيل والبرنامج أعلاه للبدء"
+msgstr ""
 
 msgid "Select a program to start reporting"
-msgstr "حدد برنامجاً لبدء إعداد التقارير"
+msgstr ""
 
 msgid "Select a registering unit to start reporting"
-msgstr "حدد وحدة التسجيل لبدء الإبلاغ"
+msgstr ""
 
 msgid "Select a category option to start reporting"
-msgstr "حدد فئة لبدء إعداد التقارير"
+msgstr ""
 
 msgid "New event"
 msgstr "حدث جديد"
@@ -244,89 +244,87 @@ msgid "Switch to form view"
 msgstr "التحويل الى العرض كنموذج"
 
 msgid "Switch to row view"
-msgstr "التحويل إلى العرض كصفوف"
+msgstr ""
 
 msgid "Saving to"
-msgstr "حفظ إلى"
+msgstr ""
 
 msgid "in"
-msgstr "في"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"هذا ليس برنامج تسجيل حدث أو أن بيانات التعريف تالفة. انظر السجل للحصول على "
-"التفاصيل."
 
 msgid "Save and add another"
-msgstr "حفظ واضافة جديد"
+msgstr ""
 
 msgid "Save and exit"
-msgstr "حفظ وخروج"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr "تمت إضافة الأحداث"
+msgstr ""
 
 msgid "No events added"
-msgstr "لم تتم إضافة أحداث"
+msgstr ""
 
 msgid "Reset"
 msgstr ""
 
 msgid "New"
-msgstr "جديد"
+msgstr ""
 
 msgid "Find"
-msgstr "بحث"
+msgstr ""
 
 msgid "Selected registering unit"
-msgstr "وحدة التسجيل المختارة"
+msgstr ""
 
 msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr "تسجيل الوحدة التنظيمية"
+msgstr ""
 
 msgid "Selected Program"
-msgstr "البرنامج المحدد"
+msgstr ""
 
 msgid "Select"
-msgstr "تحديد"
+msgstr ""
 
 msgid "Program"
-msgstr "البرنامج"
+msgstr ""
 
 msgid "No programs available."
-msgstr "لا توجد برامج متاحة"
+msgstr ""
 
 msgid "Show all"
-msgstr "إظهار الكل"
+msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr "بعض البرامج يتم تصفيتها"
+msgstr ""
 
 msgid "Select program"
-msgstr "تحديد البرنامج"
+msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
+msgstr ""
 
 msgid "Error saving event"
-msgstr "خطأ عند حفظ الحدث"
+msgstr ""
 
 msgid "Could not save event. See log for details"
-msgstr "تعذر حفظ الحدث. انظر إلى السجل للحصول على التفاصيل"
+msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr "اختر تاريخًا أو أكثر ..."
+msgstr ""
 
 msgid "Choose a date..."
-msgstr "اختر تاريخاً"
+msgstr ""
 
 msgid "Today"
-msgstr "اليوم"
+msgstr ""

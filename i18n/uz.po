@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Ibatov <ibatovk@who.int>, 2021
+# Ibatov <ibatovk@who.int>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,37 +19,37 @@ msgid "Please provide a valid date"
 msgstr "Илтимос, тўғри санани кўрсатинг"
 
 msgid "Columns to show in table"
-msgstr "Жадвалда кўрсатиладиган устунлар"
+msgstr ""
 
 msgid "Column"
-msgstr "Устун"
+msgstr ""
 
 msgid "Errors"
-msgstr "Хатоликлар"
+msgstr ""
 
 msgid "Feedback"
-msgstr "Қайта алоқа"
+msgstr ""
 
 msgid "Indicators"
-msgstr "Индикаторлар"
+msgstr ""
 
 msgid "Warnings"
-msgstr "Огоҳлантириш"
+msgstr ""
 
 msgid "Cancel"
-msgstr "Бекор қилиш"
+msgstr ""
 
 msgid "Complete"
-msgstr "Тўлдириш"
+msgstr ""
 
 msgid "Warnings found"
 msgstr "Огоҳлантиришлар топилди"
 
 msgid "Abort"
-msgstr "Аборт"
+msgstr ""
 
 msgid "Save comment"
-msgstr "Фикр/изоҳни сақланг"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Фикр ёзинг"
@@ -59,28 +59,28 @@ msgstr ""
 "Сизнинг маълумотларингиз юкланмоқда. Илтимос, ушбу хабарни йўқолишини кутинг"
 
 msgid "No write access"
-msgstr "Ёзув киритиш учун рухсат йўқ"
+msgstr ""
 
 msgid "Save"
-msgstr "Сақлаш"
+msgstr ""
 
 msgid "Uploading data"
-msgstr "Маълумотлар юкланмоқда"
+msgstr ""
 
 msgid "Sort"
-msgstr "Саралаш"
+msgstr ""
 
 msgid "No events to display"
-msgstr "Кўрсатиладиган ҳеч қандай ҳодиса/тадбир йўқ"
+msgstr ""
 
 msgid "Data for offline list not present"
-msgstr "Оффлайн рўйхат учун маълумотлар мавжуд эмас"
+msgstr ""
 
 msgid "Last week"
-msgstr "Охирги ҳафта"
+msgstr ""
 
 msgid "Last month"
-msgstr "Охирги ой"
+msgstr ""
 
 msgid "Last 3 months"
 msgstr "Охирги 3 ой"
@@ -92,67 +92,67 @@ msgid "to"
 msgstr "га"
 
 msgid "after or equal to"
-msgstr "... дан кейин ёки унга тенг"
+msgstr ""
 
 msgid "before or equal to"
-msgstr "... дан олдин ёки унга тенг"
+msgstr ""
 
 msgid "From"
-msgstr "Дан"
+msgstr "Кимдан"
 
 msgid "To"
-msgstr "Кимга"
+msgstr ""
 
 msgid "Max"
 msgstr "Максимум"
 
 msgid "Min"
-msgstr "Минимум"
+msgstr ""
 
 msgid "greater than or equal to"
 msgstr "дан катта ёки тенг"
 
 msgid "less than or equal to"
-msgstr "дан кам ёки тенг"
+msgstr ""
 
 msgid "Contains text"
-msgstr "Матнни ўз ичига олади"
+msgstr ""
 
 msgid "Yes"
-msgstr "Ҳа"
+msgstr ""
 
 msgid "mm/dd/yyyy"
 msgstr "кун/ой/йил"
 
 msgid "Years"
-msgstr "Йиллар"
+msgstr ""
 
 msgid "Months"
 msgstr "Ойлар"
 
 msgid "Days"
-msgstr "Кунлар"
+msgstr ""
 
 msgid "Uploading file"
-msgstr "Файл юкланмоқда"
+msgstr ""
 
 msgid "selected"
-msgstr "танланган"
+msgstr ""
 
 msgid "Delete"
-msgstr "Ўчириб ташлаш"
+msgstr ""
 
 msgid "Select file"
-msgstr "Файлни танлаш"
+msgstr ""
 
 msgid "No"
 msgstr "Йўқ"
 
 msgid "Uploading image"
-msgstr "Расм юкланмоқда"
+msgstr ""
 
 msgid "Select image"
-msgstr "Расмни танланг"
+msgstr ""
 
 msgid "Clear"
 msgstr "Тозалаш"
@@ -161,98 +161,97 @@ msgid "No results"
 msgstr "Натижа йўқ"
 
 msgid "No items to display"
-msgstr "Кўрсатиладиган ахборот йўқ"
+msgstr ""
 
 msgid "Online"
-msgstr "Онлайн"
+msgstr ""
 
 msgid "Offline"
-msgstr "Оффлайн"
+msgstr ""
 
 msgid "Syncing"
-msgstr "Синхронлашмоқда"
+msgstr ""
 
 msgid "Field"
-msgstr "Қатор"
+msgstr ""
 
 msgid "could not be updated"
-msgstr "юклаб бўлмади"
+msgstr ""
 
 msgid "Start Again"
-msgstr "Қайта бошланг"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr "Ишончингиз комилми? Барча сақланмаган маълумотлар йўқолади."
+msgstr ""
 
 msgid "Reset Organisation Unit"
-msgstr "Ташкилий бирликни қайта кўриб чиқиб янгилаш"
+msgstr ""
 
 msgid "Reset Program"
-msgstr "Дастурни қайта кўриб чиқиб янгилаш"
+msgstr ""
 
 msgid "Reset Category Option"
-msgstr "Категория вариантларини қайта кўриб чиқиб янгилаш"
+msgstr ""
 
 msgid "Create New Event"
-msgstr "Янги Тадбир Яратиш"
+msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Ҳодиса/тадбирни юклаб бўлмади. Унинг мавжудлигига ишончингиз комилми?"
+msgstr ""
 
 msgid "Event could not be loaded"
-msgstr "Ҳодиса/тадбирни юклаб бўлмади"
+msgstr ""
 
 msgid "Organisation unit could not be loaded"
-msgstr "Ташкилий бўлимни юклаб бўлмади"
+msgstr ""
 
 msgid "Update"
 msgstr "Янгилаш"
 
 msgid "Close"
-msgstr "Ёпиш"
+msgstr ""
 
 msgid "More filters"
-msgstr "Кўпроқ фильтр"
+msgstr ""
 
 msgid "Rows per page"
-msgstr "Саҳифада қаторлар"
+msgstr ""
 
 msgid "Could not get organisation unit"
-msgstr "Ташкилий бўлимни олиб бўлмади"
+msgstr ""
 
 msgid "Program doesn't exist"
-msgstr "Дастур мавжуд эмас"
+msgstr ""
 
 msgid "Selected program is invalid for registering unit"
-msgstr "танланган дастур рўйхатдан ўтказиш учун яроқсиз"
+msgstr ""
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
-"Ишни бошлашдан олдин юқоридаги рўйхатдан ўтиш бўлими ва дастурини танланг"
 
 msgid "Select a program to start reporting"
-msgstr "Ҳосибот беришни бошлаш учун дастурни танланг"
+msgstr ""
 
 msgid "Select a registering unit to start reporting"
-msgstr "Ҳосибот беришни бошлаш учун рўйхатдан ўтишни танланг"
+msgstr ""
 
 msgid "Select a category option to start reporting"
-msgstr "Ҳосибот беришни бошлаш учун категория вариантини танланг"
+msgstr ""
 
 msgid "New event"
-msgstr "Янги ҳодиса"
+msgstr "Янги тадбир"
 
 msgid "Switch to form view"
 msgstr "Шакл кўринишига ўтиш"
 
 msgid "Switch to row view"
-msgstr "Жадвал кўринишига ўтиш"
+msgstr ""
 
 msgid "Saving to"
-msgstr "...да сақлаш"
+msgstr ""
 
 msgid "in"
-msgstr "ичида"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -268,67 +267,67 @@ msgid "Save and exit"
 msgstr "Сақлаш ва чиқиш"
 
 msgid "Are you sure? All unsaved data will be lost"
-msgstr "Ишончингиз комилми? Барча сақланмаган маълумотлар йўқолади"
+msgstr ""
 
 msgid "events added"
-msgstr "ҳодиса/тадбирлар қўшилди"
+msgstr ""
 
 msgid "No events added"
-msgstr "Ҳеч қандай ҳодиса/тадбир қўшилмаган"
+msgstr ""
 
 msgid "Reset"
 msgstr "Қайта кўриб чиқиб янгилаш"
 
 msgid "New"
-msgstr "Янги"
+msgstr ""
 
 msgid "Find"
-msgstr "Топинг"
+msgstr ""
 
 msgid "Selected registering unit"
-msgstr "Бўлимни танланган рўйхатга олиш"
+msgstr ""
 
 msgid "Registering Oraginastion Unit"
-msgstr "Танланган Бўлим Рўйхатдан Ўтказилмоқда"
+msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr "Танланган бўлим рўйхатдан ўтказилмоқда"
+msgstr ""
 
 msgid "Selected Program"
-msgstr "Танланган дастур"
+msgstr ""
 
 msgid "Select"
-msgstr "Танланг"
+msgstr ""
 
 msgid "Program"
-msgstr "Программа"
+msgstr ""
 
 msgid "No programs available."
-msgstr "Ҳеч қандай дастур мавжуд эмас"
+msgstr ""
 
 msgid "Show all"
-msgstr "Барчага кўрсатиш"
+msgstr ""
 
 msgid "Some programs are being filtered."
 msgstr "Баъзи дастурлар фильтрланмоқда."
 
 msgid "Select program"
-msgstr "Дастурни танлаш"
+msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
+msgstr ""
 
 msgid "Error saving event"
 msgstr "Ҳодиса/тадбирни сақлашда хато"
 
 msgid "Could not save event. See log for details"
-msgstr "Ҳодиса/тадбир сақланмади. Тафсилотлар учун журналга қаранг"
+msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr "Бир ёки бир неча саналарни танланг..."
+msgstr ""
 
 msgid "Choose a date..."
-msgstr "Санани танланг ..."
+msgstr ""
 
 msgid "Today"
-msgstr "бугун"
+msgstr ""

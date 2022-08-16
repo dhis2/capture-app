@@ -1,21 +1,22 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# phil_dhis2, 2019
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
+# Prabhjot Singh, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
+# Alison Andrade <aandrade@ippfwhr.org>, 2022
+# phil_dhis2, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -24,25 +25,25 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr "Columna"
+msgstr ""
 
 msgid "Errors"
-msgstr "Errores"
+msgstr ""
 
 msgid "Feedback"
-msgstr "Retroalimentación"
+msgstr ""
 
 msgid "Indicators"
-msgstr "Indicadores"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 msgid "Complete"
-msgstr "Completo"
+msgstr ""
 
 msgid "Warnings found"
 msgstr ""
@@ -51,25 +52,27 @@ msgid "Abort"
 msgstr ""
 
 msgid "Save comment"
-msgstr "Guardar comentario"
+msgstr ""
 
 msgid "Write comment"
-msgstr ""
+msgstr "Escribir comentario"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
+"Sus datos se están subiendo. Por favor, espere hasta que este mensaje "
+"desaparezca"
 
 msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr "Guardar"
+msgstr ""
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr "Organizar"
+msgstr ""
 
 msgid "No events to display"
 msgstr ""
@@ -78,19 +81,19 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
-msgstr "Última semana"
-
-msgid "Last month"
-msgstr "Mes anterior"
-
-msgid "Last 3 months"
-msgstr "Últimos 3 meses"
-
-msgid "Custom range"
 msgstr ""
 
+msgid "Last month"
+msgstr ""
+
+msgid "Last 3 months"
+msgstr ""
+
+msgid "Custom range"
+msgstr "Rango personalizado"
+
 msgid "to"
-msgstr "a"
+msgstr ""
 
 msgid "after or equal to"
 msgstr ""
@@ -102,16 +105,16 @@ msgid "From"
 msgstr "De"
 
 msgid "To"
-msgstr "Para"
+msgstr ""
 
 msgid "Max"
-msgstr "Máx"
+msgstr ""
 
 msgid "Min"
-msgstr "Mín"
+msgstr ""
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "mayor qué o igual a"
 
 msgid "less than or equal to"
 msgstr ""
@@ -120,28 +123,28 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "Si"
+msgstr ""
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "Años"
+msgstr ""
 
 msgid "Months"
 msgstr "Meses"
 
 msgid "Days"
-msgstr "Días"
+msgstr ""
 
 msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr "seleccionado"
+msgstr ""
 
 msgid "Delete"
-msgstr "Borrar"
+msgstr ""
 
 msgid "Select file"
 msgstr ""
@@ -156,7 +159,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Clear"
-msgstr "Limpiar"
+msgstr ""
 
 msgid "No results"
 msgstr ""
@@ -165,10 +168,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr "Conectado"
+msgstr ""
 
 msgid "Offline"
-msgstr "Desconectado"
+msgstr ""
 
 msgid "Syncing"
 msgstr ""
@@ -207,10 +210,10 @@ msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Update"
-msgstr "Actualizar"
+msgstr ""
 
 msgid "Close"
-msgstr "Cerrar"
+msgstr ""
 
 msgid "More filters"
 msgstr ""
@@ -243,7 +246,7 @@ msgid "New event"
 msgstr "Evento nuevo"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Cambiar a la vista de formulario"
 
 msgid "Switch to row view"
 msgstr ""
@@ -278,10 +281,10 @@ msgid "Reset"
 msgstr "Reajustar"
 
 msgid "New"
-msgstr "Nuevo"
+msgstr ""
 
 msgid "Find"
-msgstr "Encontrar"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""
@@ -296,22 +299,22 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select"
-msgstr "Seleccionar"
+msgstr ""
 
 msgid "Program"
-msgstr "Programa"
+msgstr ""
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr "Mostrar todo"
+msgstr ""
 
 msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
-msgstr "Seleccionar programa"
+msgstr ""
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -329,4 +332,4 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr "Hoy"
+msgstr ""
