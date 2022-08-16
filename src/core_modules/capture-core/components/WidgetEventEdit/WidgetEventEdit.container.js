@@ -71,7 +71,7 @@ export const WidgetEventEditPlain = ({
                     <Button
                         small
                         secondary
-                        disabled={!eventAccess.write}
+                        disabled={!eventAccess?.write}
                         className={classes.button}
                         onClick={() => dispatch(startShowEditEventDataEntry(orgUnit))}
                     >
