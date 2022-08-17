@@ -547,57 +547,6 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 "Tanlangan dastur tanlangan roʼyxatdan olinadigan boʼlim uchun yaroqsiz"
 
-msgid "New"
-msgstr "Yangi"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr "Tanlovlarni tozalash"
-
-msgid "Selected registering unit"
-msgstr "Boʼlimni tanlangan roʼyxatga olish"
-
-msgid "Start Again"
-msgstr "Qayta boshlang"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Ishonchingiz komilmi? Barcha saqlanmagan maʼlumotlar yoʼqoladi."
-
-msgid "Accept"
-msgstr "Qabul qiling"
-
-msgid "Registering Organisation Unit"
-msgstr "Tanlangan boʼlim roʼyxatdan oʼtkazilmoqda"
-
-msgid "Select"
-msgstr "Tanlang"
-
-msgid "Program"
-msgstr "Programma"
-
-msgid "No programs available."
-msgstr "Hech qanday dastur mavjud emas."
-
-msgid "Show all"
-msgstr "Barchaga koʼrsatish"
-
-msgid "Selected program"
-msgstr "Tanlangan dastur"
-
-msgid "Some programs are being filtered."
-msgstr "Baʼzi dasturlar Filtrlanmoqda."
-
-msgid "Select program"
-msgstr "Dasturni tanlash"
-
-msgid "Selected"
-msgstr "Tanlangan"
-
 msgid "Online"
 msgstr "Onlayn"
 
@@ -787,6 +736,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Yangi"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -820,6 +772,15 @@ msgstr "Havola"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr "Baʼzi dasturlar Filtrlanmoqda."
+
+msgid "Show all"
+msgstr "Barchaga koʼrsatish"
+
+msgid "Program"
+msgstr "Programma"
 
 msgid "Organisation Unit"
 msgstr "Tashkiliy birlik"
@@ -1018,6 +979,36 @@ msgstr "Ushbu oʼzaro aloqalarni yaratish huquqiga ega emassiz"
 msgid "Add relationship"
 msgstr "Oʼzaro aloqa kiritish"
 
+msgid "Selected registering unit"
+msgstr "Boʼlimni tanlangan roʼyxatga olish"
+
+msgid "Start Again"
+msgstr "Qayta boshlang"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Ishonchingiz komilmi? Barcha saqlanmagan maʼlumotlar yoʼqoladi."
+
+msgid "Accept"
+msgstr "Qabul qiling"
+
+msgid "Registering Organisation Unit"
+msgstr "Tanlangan boʼlim roʼyxatdan oʼtkazilmoqda"
+
+msgid "Select"
+msgstr "Tanlang"
+
+msgid "No programs available."
+msgstr "Hech qanday dastur mavjud emas."
+
+msgid "Selected program"
+msgstr "Tanlangan dastur"
+
+msgid "Select program"
+msgstr "Dasturni tanlash"
+
+msgid "Selected"
+msgstr "Tanlangan"
+
 msgid "Results found"
 msgstr "Natijalar topildi"
 
@@ -1027,6 +1018,15 @@ msgstr "{{uniqueAttrName}} orqali qidirish"
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 "Qidirish uchun kamida {{minAttributesRequired}} atributlarini toʼldiring"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
+msgstr "Tanlovlarni tozalash"
 
 msgid "To work with the selected program,"
 msgstr "Tanlangan dastur bilan ishlash uchun,"

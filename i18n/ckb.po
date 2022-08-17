@@ -541,57 +541,6 @@ msgstr "پرۆگرامەکە بوونی نیە"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
 
-msgid "New"
-msgstr "نوێ"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr "یەکەی تۆمارکردن هەڵبژێرە"
-
-msgid "Start Again"
-msgstr "دووبارە دەستبپێبکەوە"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
-
-msgid "Accept"
-msgstr "پەسندکردن"
-
-msgid "Registering Organisation Unit"
-msgstr "تۆمارکردنی یەکەی رێکخراو"
-
-msgid "Select"
-msgstr "هەڵبژاردن"
-
-msgid "Program"
-msgstr "پرۆگرام"
-
-msgid "No programs available."
-msgstr "هیچ پرۆگرامێک بەردەست نیە"
-
-msgid "Show all"
-msgstr "پێشاندانی هەمووان"
-
-msgid "Selected program"
-msgstr "پرۆگرامە هەڵبژێردراوەکە"
-
-msgid "Some programs are being filtered."
-msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
-
-msgid "Select program"
-msgstr "پرۆگرام هەڵبژێرە"
-
-msgid "Selected"
-msgstr ""
-
 msgid "Online"
 msgstr "ئۆنڵاین"
 
@@ -781,6 +730,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "نوێ"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -814,6 +766,15 @@ msgstr "لینک"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
+
+msgid "Show all"
+msgstr "پێشاندانی هەمووان"
+
+msgid "Program"
+msgstr "پرۆگرام"
 
 msgid "Organisation Unit"
 msgstr "یەکەی ڕێخکڕاو"
@@ -999,6 +960,36 @@ msgstr "مافی دروستکردنی ئەم پەیوەندیەت نیە"
 msgid "Add relationship"
 msgstr "پەوەندی درووستبکە"
 
+msgid "Selected registering unit"
+msgstr "یەکەی تۆمارکردن هەڵبژێرە"
+
+msgid "Start Again"
+msgstr "دووبارە دەستبپێبکەوە"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
+
+msgid "Accept"
+msgstr "پەسندکردن"
+
+msgid "Registering Organisation Unit"
+msgstr "تۆمارکردنی یەکەی رێکخراو"
+
+msgid "Select"
+msgstr "هەڵبژاردن"
+
+msgid "No programs available."
+msgstr "هیچ پرۆگرامێک بەردەست نیە"
+
+msgid "Selected program"
+msgstr "پرۆگرامە هەڵبژێردراوەکە"
+
+msgid "Select program"
+msgstr "پرۆگرام هەڵبژێرە"
+
+msgid "Selected"
+msgstr ""
+
 msgid "Results found"
 msgstr ""
 
@@ -1007,6 +998,15 @@ msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "بەلانی کەم ئەتریبیوتی{{minAttributesRequired}} پڕبەکەرەوەبۆ گەڕان"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "بۆ کارکردن لەگەڵ پرۆگرامە هەڵبژێردراوەکان"

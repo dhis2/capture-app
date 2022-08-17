@@ -549,57 +549,6 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 "Выбранная программа не действительна для выбранной организации-регистратора"
 
-msgid "New"
-msgstr "Новый"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr "Выберите организацию-регистратор"
-
-msgid "Start Again"
-msgstr "Начать заново"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Вы уверены? Все несохраненные данные будут утеряны."
-
-msgid "Accept"
-msgstr "Принять"
-
-msgid "Registering Organisation Unit"
-msgstr "Регистрация Организационной единицы"
-
-msgid "Select"
-msgstr "Выбрать"
-
-msgid "Program"
-msgstr "Программа"
-
-msgid "No programs available."
-msgstr "Нет доступных программ"
-
-msgid "Show all"
-msgstr "Показать все"
-
-msgid "Selected program"
-msgstr "Выбранная программа"
-
-msgid "Some programs are being filtered."
-msgstr "Фильтруются некоторые программы "
-
-msgid "Select program"
-msgstr "Выбрать программу"
-
-msgid "Selected"
-msgstr "Выбранный"
-
 msgid "Online"
 msgstr "Онлайн"
 
@@ -789,6 +738,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Новый"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -822,6 +774,15 @@ msgstr "Ссылка"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr "Фильтруются некоторые программы "
+
+msgid "Show all"
+msgstr "Показать все"
+
+msgid "Program"
+msgstr "Программа"
 
 msgid "Organisation Unit"
 msgstr "Организация"
@@ -1011,6 +972,36 @@ msgstr "У вас нет прав для создания \"Родовых от�
 msgid "Add relationship"
 msgstr "Добавить зависимость"
 
+msgid "Selected registering unit"
+msgstr "Выберите организацию-регистратор"
+
+msgid "Start Again"
+msgstr "Начать заново"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Вы уверены? Все несохраненные данные будут утеряны."
+
+msgid "Accept"
+msgstr "Принять"
+
+msgid "Registering Organisation Unit"
+msgstr "Регистрация Организационной единицы"
+
+msgid "Select"
+msgstr "Выбрать"
+
+msgid "No programs available."
+msgstr "Нет доступных программ"
+
+msgid "Selected program"
+msgstr "Выбранная программа"
+
+msgid "Select program"
+msgstr "Выбрать программу"
+
+msgid "Selected"
+msgstr "Выбранный"
+
 msgid "Results found"
 msgstr "Найдены результаты"
 
@@ -1020,6 +1011,15 @@ msgstr "Поиск {{uniqueAttrName}}"
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 "Заполните хотя бы {{minAttributesRequiredToSearch}} атрибутов для поиска"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "Работать с выбранной программой"

@@ -540,57 +540,6 @@ msgstr "Chương trình không tồn tại"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Chương trình đã chọn không hợp lệ cho đơn vị đăng ký đã chọn"
 
-msgid "New"
-msgstr "Mới"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr "Xóa các lựa chọn"
-
-msgid "Selected registering unit"
-msgstr "Đơn vị đăng ký đã chọn"
-
-msgid "Start Again"
-msgstr "Khởi Đầu Lại"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Bạn có chắc không? Tất cả dữ liệu chưa được lưu sẽ bị mất."
-
-msgid "Accept"
-msgstr "Chấp nhận"
-
-msgid "Registering Organisation Unit"
-msgstr "Đơn Vị Đăng Ký"
-
-msgid "Select"
-msgstr "Chọn"
-
-msgid "Program"
-msgstr "Chương trình"
-
-msgid "No programs available."
-msgstr "Không có chương trình"
-
-msgid "Show all"
-msgstr "Hiển thị tất cả"
-
-msgid "Selected program"
-msgstr "Chương trình đã chọn"
-
-msgid "Some programs are being filtered."
-msgstr "Chương trình đang được lọc"
-
-msgid "Select program"
-msgstr "Chọn Chương Trình"
-
-msgid "Selected"
-msgstr "Đã chọn"
-
 msgid "Online"
 msgstr "Trực tuyến"
 
@@ -780,6 +729,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Mới"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chọn {{missingCategories}} để bắt đầu báo cáo"
 
@@ -813,6 +765,15 @@ msgstr "Liên kết"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr "Chương trình đang được lọc"
+
+msgid "Show all"
+msgstr "Hiển thị tất cả"
+
+msgid "Program"
+msgstr "Chương trình"
 
 msgid "Organisation Unit"
 msgstr "Đơn vị"
@@ -1010,6 +971,36 @@ msgstr "Bạn không có quyền truy cập để tạo bất kỳ mối quan h�
 msgid "Add relationship"
 msgstr "Thêm Quan Hệ"
 
+msgid "Selected registering unit"
+msgstr "Đơn vị đăng ký đã chọn"
+
+msgid "Start Again"
+msgstr "Khởi Đầu Lại"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Bạn có chắc không? Tất cả dữ liệu chưa được lưu sẽ bị mất."
+
+msgid "Accept"
+msgstr "Chấp nhận"
+
+msgid "Registering Organisation Unit"
+msgstr "Đơn Vị Đăng Ký"
+
+msgid "Select"
+msgstr "Chọn"
+
+msgid "No programs available."
+msgstr "Không có chương trình"
+
+msgid "Selected program"
+msgstr "Chương trình đã chọn"
+
+msgid "Select program"
+msgstr "Chọn Chương Trình"
+
+msgid "Selected"
+msgstr "Đã chọn"
+
 msgid "Results found"
 msgstr "Kết quả tìm thấy"
 
@@ -1018,6 +1009,15 @@ msgstr "Tìm kiếm {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Điền vào ít nhất {{minAttributesRequired}} thuộc tính để tìm kiếm"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
+msgstr "Xóa các lựa chọn"
 
 msgid "To work with the selected program,"
 msgstr "Để làm việc với chương trình đã chọn,"
