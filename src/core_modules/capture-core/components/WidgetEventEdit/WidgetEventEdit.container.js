@@ -74,7 +74,7 @@ export const WidgetEventEditPlain = ({
                         {({ onMouseOver, onMouseOut, ref }) => (
                             <div
                                 ref={(btnRef) => {
-                                    if (btnRef && !eventAccess.write) {
+                                    if (btnRef && !eventAccess?.write) {
                                         btnRef.onmouseover = onMouseOver;
                                         btnRef.onmouseout = onMouseOut;
                                         ref.current = btnRef;
