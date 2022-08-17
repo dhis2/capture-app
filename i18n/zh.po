@@ -135,7 +135,7 @@ msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
-msgstr ""
+msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存新注册。"
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存 {{trackedEntityName}}。"
@@ -839,7 +839,7 @@ msgid ""
 msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
 msgid "Register a user"
-msgstr ""
+msgstr "注册用户"
 
 msgid "Back to search"
 msgstr "返回搜寻"
