@@ -1,8 +1,8 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import cx from 'classnames';
-import { withStyles, Tooltip } from '@material-ui/core';
-import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16 } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { statusTypes } from 'capture-core/events/statusTypes';
@@ -66,15 +66,16 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
         <div className={classes.title}>
             {title}
         </div>
-        <Tooltip
-            title={description}
-            placement="top"
-        >
-            <div className={classes.indicatorIcon}>
-                <IconInfo16 />
-            </div>
-        </Tooltip>
-
+        { description &&
+            <Tooltip
+                content={description}
+                openDelay="100"
+            >
+                <div className={classes.indicatorIcon}>
+                    <IconInfo16 />
+                </div>
+            </Tooltip>
+        }
         <div className={classes.indicator}>
             {i18n.t('{{ totalEvents }} events', { totalEvents })}
         </div>
