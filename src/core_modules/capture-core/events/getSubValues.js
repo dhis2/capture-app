@@ -41,12 +41,12 @@ const subValueGetterByElementType = {
         absoluteApiPath,
         querySingleResource,
     }: {
-                value: any,
-                eventId: string,
-                metaElementId: string,
-                absoluteApiPath: string,
-                querySingleResource: QuerySingleResource,
-            }) =>
+        value: any,
+        eventId: string,
+        metaElementId: string,
+        absoluteApiPath: string,
+        querySingleResource: QuerySingleResource,
+    }) =>
         querySingleResource({ resource: `fileResources/${value}` })
             .then(res =>
                 ({
@@ -63,10 +63,10 @@ const subValueGetterByElementType = {
         eventId,
         metaElementId,
     }: {
-                value: any,
-                eventId: string,
-                metaElementId: string,
-            }) => {
+        value: any,
+        eventId: string,
+        metaElementId: string,
+    }) => {
         const ouIds = value.split('/');
         const id = ouIds[ouIds.length - 1];
         return getD2()
