@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
+"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -1114,6 +1114,9 @@ msgstr "事件完成"
 
 msgid "Back to all stages and events"
 msgstr "回到所有阶段和事件"
+
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr "预定日期信息"
