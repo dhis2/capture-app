@@ -1,3 +1,10 @@
+## [100.12.2](https://github.com/dhis2/capture-app/compare/v100.12.1...v100.12.2) (2022-08-18)
+
+
+### Bug Fixes
+
+* [DHIS2-13185] disable Edit event button when user doesn't have write access ([#2948](https://github.com/dhis2/capture-app/issues/2948)) ([500c80b](https://github.com/dhis2/capture-app/commit/500c80bbd4113d4e3284addc615c0a8a974a39a9))
+
 ## [100.12.1](https://github.com/dhis2/capture-app/compare/v100.12.0...v100.12.1) (2022-08-17)
 
 
