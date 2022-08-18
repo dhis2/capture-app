@@ -2,6 +2,7 @@
 
 type PassOnProps = $ReadOnly<{|
     programId: string,
+    orgUnitId: string,
 |}>;
 
 export type Props = $ReadOnly<{|

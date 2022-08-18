@@ -13,7 +13,7 @@ const mapArgumentNameFromClientToServer = {
     currentPage: 'page',
 };
 
-const getMainColumns = (columnsMetaForDataFetching: ColumnsMetaForDataFetching) =>
+export const getMainColumns = (columnsMetaForDataFetching: ColumnsMetaForDataFetching) =>
     [...columnsMetaForDataFetching.values()]
         .reduce((accMainColumns, column) => {
             if (column.isMainProperty) {
@@ -133,7 +133,7 @@ const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, m
 };
 
 // eslint-disable-next-line complexity
-const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryCombinationId?: ?string) => {
+export const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryCombinationId?: ?string) => {
     let apiQueryArgs = {
         ...queryArgs,
         order: getApiOrderByQueryArgument(queryArgs.sortById, queryArgs.sortByDirection, mainColumns),
