@@ -1,7 +1,6 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import { config } from 'd2';
 import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
@@ -28,20 +27,6 @@ function setLogLevel() {
     }
 
     log.setLevel(level);
-}
-
-function setConfig(apiPath: string) {
-    const { NODE_ENV } = process.env;
-    config.baseUrl = apiPath;
-
-    if (NODE_ENV !== environments.prod) {
-        config.headers = {
-            'X-Requested-With': 'XMLHttpRequest',
-        };
-    }
-
-    // Temporary setting some old d2 translations for the d2 ui sharing dialog
-    config.i18n.sources.add('i18n/i18n_module_en.properties');
 }
 
 function setMomentLocaleAsync(locale: string) {
@@ -152,12 +137,9 @@ async function initializeSystemSettingsAsync(uiLocale: string, systemSettings: O
 export async function initializeAsync(
     onCacheExpired: Function,
     onQueryApi: Function,
-    apiPath: string,
 ) {
     setLogLevel();
 
-    // initialize d2
-    setConfig(apiPath);
     const userSettings = await onQueryApi({
         resource: 'userSettings',
     });
