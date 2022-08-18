@@ -16,11 +16,12 @@ const subValueGetterByElementType = {
             metaElementId,
             absoluteApiPath,
             querySingleResource,
-        }: { value: any,
-        eventId: string,
-        metaElementId: string,
-        absoluteApiPath: string,
-        querySingleResource: QuerySingleResource,
+        }: {
+            value: any,
+            eventId: string,
+            metaElementId: string,
+            absoluteApiPath: string,
+            querySingleResource: QuerySingleResource,
         }) =>
         querySingleResource({ resource: `fileResources/${value}` })
             .then(res =>
@@ -40,12 +41,12 @@ const subValueGetterByElementType = {
         absoluteApiPath,
         querySingleResource,
     }: {
-                value: any,
-                eventId: string,
-                metaElementId: string,
-                absoluteApiPath: string,
-                querySingleResource: QuerySingleResource,
-            }) =>
+        value: any,
+        eventId: string,
+        metaElementId: string,
+        absoluteApiPath: string,
+        querySingleResource: QuerySingleResource,
+    }) =>
         querySingleResource({ resource: `fileResources/${value}` })
             .then(res =>
                 ({
@@ -63,11 +64,11 @@ const subValueGetterByElementType = {
         metaElementId,
         querySingleResource,
     }: {
-                value: any,
-                eventId: string,
-                metaElementId: string,
-                querySingleResource: QuerySingleResource
-            }) => {
+        value: any,
+        eventId: string,
+        metaElementId: string,
+        querySingleResource: QuerySingleResource
+    }) => {
         const ouIds = value.split('/');
         const id = ouIds[ouIds.length - 1];
         return querySingleResource({ resource: 'organisationUnits',
