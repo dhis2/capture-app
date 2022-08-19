@@ -44,7 +44,7 @@ export const filterFormFieldOrgUnitsEpic = (action$: InputObservable, store: Red
                         'id,displayName,path,publicAccess,access,lastUpdated',
                         'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
                     ].join(','),
-                    paging: true,
+                    paging: false,
                     withinUserSearchHierarchy: true,
                     query: searchText,
                 },
