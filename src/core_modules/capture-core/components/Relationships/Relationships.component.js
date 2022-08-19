@@ -133,7 +133,7 @@ class RelationshipsPlain extends React.Component<Props> {
                     </div>
                 </div>
                 <div className={classes.relationshipActions}>
-                    <Tooltip content={i18n.t('You dont have access to delete this relationship')}>
+                    <Tooltip content={i18n.t('You don\'t have access to delete this relationship')}>
                         {({ onMouseOver, onMouseOut, ref }) => (
                             <div ref={(divRef) => {
                                 if (divRef && !canDelete) {
@@ -191,31 +191,32 @@ class RelationshipsPlain extends React.Component<Props> {
                     {this.renderRelationships()}
                 </div>
                 <div>
-                    <Tooltip content={i18n.t('You dont have access to create any relationships')}>
-                        {({ onMouseOver, onMouseOut, ref }) => (
-                            <div
-                                className={classes.addButtonContainer}
-                                ref={(divRef) => {
-                                    if (divRef && !canCreate) {
-                                        divRef.onmouseover = onMouseOver;
-                                        divRef.onmouseout = onMouseOut;
-                                        ref.current = divRef;
-                                    }
-                                }}
-                            >
-                                <Button
-                                    onClick={onOpenAddRelationship}
-                                    disabled={!canCreate}
-                                    small={smallMainButton}
-                                    dataTest="add-relationship-button"
-                                >
-                                    {i18n.t('Add relationship')}
-                                </Button>
-                            </div>
-                        )}
-                    </Tooltip>
+                    <div
+                        className={classes.addButtonContainer}
+                    >
+                        <Button
+                            onClick={onOpenAddRelationship}
+                            disabled={!canCreate}
+                            small={smallMainButton}
+                            dataTest="add-relationship-button"
+                        >
+                            <Tooltip content={i18n.t('You don\'t have access to create any relationships')}>
+                                {({ onMouseOver, onMouseOut, ref }) => (
+                                    <div ref={(divRef) => {
+                                        if (divRef && !canCreate) {
+                                            divRef.onmouseover = onMouseOver;
+                                            divRef.onmouseout = onMouseOut;
+                                            ref.current = divRef;
+                                        }
+                                    }}
+                                    >
+                                        {i18n.t('Add relationship')}
+                                    </div>
+                                )}
+                            </Tooltip>
+                        </Button>
+                    </div>
                 </div>
-
             </div>
         );
     }

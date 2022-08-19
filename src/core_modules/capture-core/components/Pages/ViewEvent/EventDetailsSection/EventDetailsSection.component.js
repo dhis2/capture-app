@@ -94,30 +94,29 @@ const EventDetailsSectionPlain = (props: Props) => {
         return (
             <div className={classes.actionsContainer}>
                 {!showEditEvent &&
-                <Tooltip content={i18n.t('You dont have access to edit this event')}>
-                    {({ onMouseOver, onMouseOut, ref }) => (
-                        <div
-                            className={classes.editButtonContainer}
-                            ref={(divRef) => {
+                <div
+                    className={classes.editButtonContainer}
+                >
+                    <Button
+                        className={classes.button}
+                        variant="raised"
+                        onClick={() => onOpenEditEvent(orgUnit)}
+                        disabled={!canEdit}
+                    >
+                        <Tooltip content={i18n.t('You don\'t have access to edit this event')}>
+                            {({ onMouseOver, onMouseOut, ref }) => (<div ref={(divRef) => {
                                 if (divRef && !canEdit) {
                                     divRef.onmouseover = onMouseOver;
                                     divRef.onmouseout = onMouseOut;
                                     ref.current = divRef;
                                 }
                             }}
-                        >
-                            <Button
-                                className={classes.button}
-                                variant="raised"
-                                onClick={() => onOpenEditEvent(orgUnit)}
-                                disabled={!canEdit}
                             >
                                 {i18n.t('Edit event')}
-                            </Button>
-                        </div>
-                    )}
-                </Tooltip>
-                }
+                            </div>)}
+                        </Tooltip>
+                    </Button>
+                </div>}
             </div>
         );
     };

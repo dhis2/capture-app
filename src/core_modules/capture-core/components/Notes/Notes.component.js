@@ -180,29 +180,31 @@ class NotesPlain extends React.Component<Props, State> {
     renderButton = (canAddComment: boolean) => {
         const { smallMainButton, classes } = this.props;
         return (
-            <Tooltip content={i18n.t('You dont have access to write comments')}>
-                {({ onMouseOver, onMouseOut, ref }) => (
-                    <div
-                        className={classes.newNoteButtonContainer}
-                        data-test="new-comment-button"
-                        ref={(divRef) => {
-                            if (divRef && !canAddComment) {
-                                divRef.onmouseover = onMouseOver;
-                                divRef.onmouseout = onMouseOut;
-                                ref.current = divRef;
-                            }
-                        }}
-                    >
-                        <Button
-                            onClick={this.toggleIsOpen}
-                            disabled={!canAddComment}
-                            small={smallMainButton}
-                        >
-                            {i18n.t('Write comment')}
-                        </Button>
-                    </div>
-                )}
-            </Tooltip>
+            <div
+                className={classes.newNoteButtonContainer}
+                data-test="new-comment-button"
+            >
+                <Button
+                    onClick={this.toggleIsOpen}
+                    disabled={!canAddComment}
+                    small={smallMainButton}
+                >
+                    <Tooltip content={i18n.t('You don\'t have access to write comments')}>
+                        {({ onMouseOver, onMouseOut, ref }) => (
+                            <div ref={(divRef) => {
+                                if (divRef && !canAddComment) {
+                                    divRef.onmouseover = onMouseOver;
+                                    divRef.onmouseout = onMouseOut;
+                                    ref.current = divRef;
+                                }
+                            }}
+                            >
+                                {i18n.t('Write comment')}
+                            </div>
+                        )}
+                    </Tooltip>
+                </Button>
+            </div>
         );
     }
 
