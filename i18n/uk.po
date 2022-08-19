@@ -3,13 +3,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2019
 # phil_dhis2, 2019
 # Nadiia <semchuk@aph.org.ua>, 2021
+# Éva Tamási, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-06-16T15:06:59.453Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Nadiia <semchuk@aph.org.ua>, 2021\n"
+"Last-Translator: Éva Tamási, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,10 +64,10 @@ msgid "Please provide a valid percentage"
 msgstr ""
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Вкажіть дійсну URL-адресу"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Вкажіть дійсну адресу електронної пошти"
 
 msgid "Please provide a valid age"
 msgstr ""
@@ -93,7 +94,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "З областями"
 
 msgid "Coordinate"
 msgstr "Координата"
@@ -243,7 +244,7 @@ msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "обрано"
 
 msgid "Delete"
 msgstr "Видалити"
