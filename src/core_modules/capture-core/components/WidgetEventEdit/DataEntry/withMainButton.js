@@ -19,7 +19,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         getWrappedInstance() {
             return this.innerInstance;
         }
-        renderMainButton = hasWriteAccess => (
+        renderMainButton = (hasWriteAccess: boolean) => (
             <Tooltip content={i18n.t('No write access')}>
                 {({ onMouseOver, onMouseOut, ref }) => (
                     <Button
