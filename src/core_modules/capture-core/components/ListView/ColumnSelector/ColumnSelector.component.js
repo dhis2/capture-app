@@ -47,6 +47,7 @@ export class ColumnSelector extends React.PureComponent<Props, State> {
                 <Tooltip
                     openDelay={500}
                     content={i18n.t('Select columns')}
+                    dataTest="select-columns"
                 >
                     <IconButton
                         onClick={this.openDialog}

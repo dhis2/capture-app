@@ -26,7 +26,8 @@ Then(/^you should be navigated to the (.*) tab/, (tab) => {
 });
 
 Then('the buttons should be disabled', () => {
-    cy.get('[data-test=quick-action-button-container] > button')
+    cy.get('[data-test=quick-action-button-container]')
+        .find('button')
         .each(($button) => {
             cy.wrap($button)
                 .should('be.disabled');

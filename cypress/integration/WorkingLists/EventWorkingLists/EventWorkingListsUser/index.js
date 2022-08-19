@@ -164,7 +164,7 @@ Then('the list should display events where age is between 10 and 20', () => {
 });
 
 When('you open the column selector', () => {
-    cy.get('button[title="Select columns"]')
+    cy.get('[data-test="select-columns-reference"]')
         .click();
 });
 
