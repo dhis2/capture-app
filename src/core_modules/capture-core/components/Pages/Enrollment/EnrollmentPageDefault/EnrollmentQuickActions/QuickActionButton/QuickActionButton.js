@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
