@@ -4,15 +4,6 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './addNew.types';
 
-const AddNewItem = ({ onClick, ...passOnProps }: Object) => (<MenuItem
-    dense
-    dataTest="widget-enrollment-actions-add-new"
-    onClick={onClick}
-    icon={<IconAdd16 />}
-    label={i18n.t('Add new')}
-    {...passOnProps}
-/>);
-
 export const AddNew = ({ canAddNew, onlyEnrollOnce, tetName, onAddNew }: Props) => {
     if (!canAddNew) {
         return null;
@@ -30,9 +21,13 @@ export const AddNew = ({ canAddNew, onlyEnrollOnce, tetName, onAddNew }: Props) 
                 }
             }}
             >
-                <AddNewItem
-                    disabled={onlyEnrollOnce}
+                <MenuItem
+                    dense
+                    dataTest="widget-enrollment-actions-add-new"
                     onClick={onAddNew}
+                    icon={<IconAdd16 />}
+                    label={i18n.t('Add new')}
+                    disabled={onlyEnrollOnce}
                 />
             </div>
         )}
