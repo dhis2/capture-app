@@ -5,9 +5,9 @@ import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
 import {
     List,
     ListItem,
-    Tooltip,
     withStyles,
 } from '@material-ui/core';
+import { Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withFocusSaver } from 'capture-ui';
 import { Button } from '../Buttons';
@@ -180,16 +180,28 @@ class NotesPlain extends React.Component<Props, State> {
     renderButton = (canAddComment: boolean) => {
         const { smallMainButton, classes } = this.props;
         return (
-            <Tooltip title={canAddComment ? '' : i18n.t('You dont have access to write comments')}>
-                <div className={classes.newNoteButtonContainer} data-test="new-comment-button">
-                    <Button
-                        onClick={this.toggleIsOpen}
-                        disabled={!canAddComment}
-                        small={smallMainButton}
+            <Tooltip content={i18n.t('You dont have access to write comments')}>
+                {({ onMouseOver, onMouseOut, ref }) => (
+                    <div
+                        className={classes.newNoteButtonContainer}
+                        data-test="new-comment-button"
+                        ref={(divRef) => {
+                            if (divRef && !canAddComment) {
+                                divRef.onmouseover = onMouseOver;
+                                divRef.onmouseout = onMouseOut;
+                                ref.current = divRef;
+                            }
+                        }}
                     >
-                        {i18n.t('Write comment')}
-                    </Button>
-                </div>
+                        <Button
+                            onClick={this.toggleIsOpen}
+                            disabled={!canAddComment}
+                            small={smallMainButton}
+                        >
+                            {i18n.t('Write comment')}
+                        </Button>
+                    </div>
+                )}
             </Tooltip>
         );
     }

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import Tooltip from '@material-ui/core/Tooltip';
+import { Tooltip } from '@dhis2/ui';
 import { type RenderFoundation } from '../../../metaData';
 import { Button } from '../../Buttons';
 
@@ -19,15 +19,23 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         getWrappedInstance() {
             return this.innerInstance;
         }
-        renderMainButton = () => (
-            <Tooltip title={!this.props.formFoundation.access.data.write ? i18n.t('No write access') : ''}>
-                <Button
-                    onClick={() => { this.props.onSave(); }}
-                    disabled={!this.props.formFoundation.access.data.write}
-                    primary
-                >
-                    {i18n.t('Save')}
-                </Button>
+        renderMainButton = hasWriteAccess => (
+            <Tooltip content={i18n.t('No write access')}>
+                {({ onMouseOver, onMouseOut, ref }) => (
+                    <Button
+                        onClick={() => { this.props.onSave(); }}
+                        disabled={!hasWriteAccess}
+                        primary
+                        ref={(divRef) => {
+                            if (divRef && !hasWriteAccess) {
+                                divRef.onmouseover = onMouseOver;
+                                divRef.onmouseout = onMouseOut;
+                                ref.current = divRef;
+                            }
+                        }}
+                    >
+                        {i18n.t('Save')}
+                    </Button>)}
             </Tooltip>
         )
 

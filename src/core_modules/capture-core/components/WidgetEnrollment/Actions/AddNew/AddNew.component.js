@@ -18,12 +18,23 @@ export const AddNew = ({ canAddNew, onlyEnrollOnce, tetName, onAddNew }: Props) 
         return null;
     }
 
-    return (onlyEnrollOnce ? <Tooltip
+    return (<Tooltip
         content={i18n.t('Only one enrollment per {{tetName}} is allowed in this program', { tetName })}
     >
-        <AddNewItem
-            disabled={onlyEnrollOnce}
-            onClick={onAddNew}
-        />
-    </Tooltip> : <AddNewItem onClick={onAddNew} />);
+        {({ onMouseOver, onMouseOut, ref }) => (
+            <div ref={(divRef) => {
+                if (divRef && onlyEnrollOnce) {
+                    divRef.onmouseover = onMouseOver;
+                    divRef.onmouseout = onMouseOut;
+                    ref.current = divRef;
+                }
+            }}
+            >
+                <AddNewItem
+                    disabled={onlyEnrollOnce}
+                    onClick={onAddNew}
+                />
+            </div>
+        )}
+    </Tooltip>);
 };
