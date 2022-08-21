@@ -248,7 +248,7 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Ні, залишитися тут"
 
 msgid "New event"
 msgstr "Нова подія"
@@ -552,7 +552,7 @@ msgid "Opt in for {{programName}}"
 msgstr ""
 
 msgid "No, cancel"
-msgstr ""
+msgstr "Ні, скасувати"
 
 msgid "Yes, opt in"
 msgstr ""
@@ -1169,7 +1169,7 @@ msgid " Loading..."
 msgstr ""
 
 msgid "Save changes"
-msgstr ""
+msgstr "Зберегти зміни"
 
 msgid "Profile"
 msgstr "Профіль"
