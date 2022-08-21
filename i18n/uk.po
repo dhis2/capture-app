@@ -140,7 +140,7 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Ні, залишитися тут"
 
 msgid "validation failed"
 msgstr ""
