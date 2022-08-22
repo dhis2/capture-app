@@ -245,7 +245,7 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Ні, залишитися тут"
 
 msgid "New event"
 msgstr "Нова подія"
