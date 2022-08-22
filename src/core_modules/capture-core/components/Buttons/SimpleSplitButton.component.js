@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { SplitButton, Menu, MenuItem } from '@dhis2/ui';
+import { SplitButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
 import uuid from 'uuid/v4';
 
 type Item = {
@@ -16,15 +16,14 @@ type Props = {
 const SimpleSplitButton = (props: Props) => {
     const { dropDownItems, ...passOnProps } = props;
     return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
+    // $FlowFixMe[cannot-spread-inexact] automated comment
         <SplitButton
             component={
-                <Menu>
-                    {
-                        dropDownItems.map(i => (
-                            <MenuItem key={uuid()} label={i.text} value={i.text} onClick={i.onClick} />
-                        ))}
-                </Menu>
+                <FlyoutMenu>
+                    {dropDownItems.map(i => (
+                        <MenuItem key={uuid()} label={i.text} value={i.text} onClick={i.onClick} />
+                    ))}
+                </FlyoutMenu>
             }
             {...passOnProps}
         />
