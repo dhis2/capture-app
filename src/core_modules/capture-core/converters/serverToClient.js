@@ -23,6 +23,8 @@ const optionSetConvertersForType = {
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: parseNumber,
     // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.PERCENTAGE]: parseNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD').toISOString(),
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATETIME]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD HH:mm').toISOString(),
@@ -55,6 +57,8 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: parseNumber,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: parseNumber,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.PERCENTAGE]: parseNumber,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD').toISOString(),
     // $FlowFixMe[prop-missing] automated comment

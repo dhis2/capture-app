@@ -47,6 +47,8 @@ const valueConvertersForType = {
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(stringifyNumber, value),
     // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.PERCENTAGE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: convertDate,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
@@ -60,8 +62,6 @@ const valueConvertersForType = {
     [elementTypes.IMAGE]: (rawValue: Object) => rawValue.value,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.COORDINATE]: (rawValue: Object) => `[${rawValue.longitude},${rawValue.latitude}]`,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.PERCENTAGE]: (rawValue: Object) => rawValue.replace('%', ''),
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.id,
 };

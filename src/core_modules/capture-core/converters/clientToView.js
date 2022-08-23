@@ -57,6 +57,8 @@ const valueConvertersForType = {
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: convertDateForView,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATETIME]: convertDateTimeForView,
