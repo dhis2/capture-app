@@ -54,9 +54,26 @@ export const updateEventListEpic = (action$: InputObservable) =>
         ofType(workingListsCommonActionTypes.LIST_UPDATE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
-            const { queryArgs, columnsMetaForDataFetching, categoryCombinationId, storeId } = action.payload;
+            const {
+                queryArgs,
+                columnsMetaForDataFetching,
+                categoryCombinationId,
+                storeId,
+                queryArgs: { programId, orgUnitId, programStageId, categories },
+            } = action.payload;
             !queryArgs?.orgUnitId && (queryArgs.ouMode = 'ACCESSIBLE');
-            const updatePromise = updateEventWorkingListAsync(queryArgs, { columnsMetaForDataFetching, categoryCombinationId, storeId });
+            const updatePromise = updateEventWorkingListAsync(queryArgs, {
+                commonQueryData: {
+                    programId,
+                    orgUnitId,
+                    categories,
+                    programStageId,
+                    ouMode: orgUnitId ? 'SELECTED' : 'ACCESSIBLE',
+                },
+                columnsMetaForDataFetching,
+                categoryCombinationId,
+                storeId,
+            });
             return from(updatePromise).pipe(
                 takeUntil(
                     action$.pipe(

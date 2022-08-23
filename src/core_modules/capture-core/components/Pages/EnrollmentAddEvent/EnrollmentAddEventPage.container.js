@@ -12,7 +12,11 @@ import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.compon
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { useWidgetDataFromStore } from './hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
-import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
+import {
+    useCommonEnrollmentDomainData,
+    updateEnrollmentEventsWithoutId,
+    showEnrollmentError,
+} from '../common/EnrollmentOverviewDomain';
 
 export const EnrollmentAddEventPage = () => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
@@ -30,6 +34,7 @@ export const EnrollmentAddEventPage = () => {
         },
         [dispatch, programId, orgUnitId, teiId, enrollmentId],
     );
+    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
 
     const handleDelete = useCallback(() => {
         dispatch(batchActions([
@@ -121,6 +126,7 @@ export const EnrollmentAddEventPage = () => {
                 rulesExecutionDependencies={rulesExecutionDependencies}
                 pageFailure={Boolean(commonDataError)}
                 ready={Boolean(enrollment)}
+                onEnrollmentError={onEnrollmentError}
             />
         </>
     );

@@ -17,6 +17,7 @@ export type PlainProps = {|
     enrollmentsAsOptions: Array<Object>,
     onDelete: () => void,
     onGoBack: () => void,
+    onEnrollmentError: (message: string) => void,
     pageStatus: string,
     ...CssClasses,
 |};

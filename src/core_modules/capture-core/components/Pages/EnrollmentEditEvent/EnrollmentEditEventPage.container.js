@@ -3,7 +3,7 @@ import React from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
+import { useCommonEnrollmentDomainData, showEnrollmentError } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
@@ -47,6 +47,7 @@ export const EnrollmentEditEventPage = () => {
         history.push(`/enrollment?${urlArguments({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
     };
+    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     const onGoBack = () => history.push(`/enrollment?${urlArguments({ orgUnitId, programId, teiId, enrollmentId })}`);
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
@@ -80,6 +81,7 @@ export const EnrollmentEditEventPage = () => {
             onDelete={onDelete}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            onEnrollmentError={onEnrollmentError}
         />
     );
 };
