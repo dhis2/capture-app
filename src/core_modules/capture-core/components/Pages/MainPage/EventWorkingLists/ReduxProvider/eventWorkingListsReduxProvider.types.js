@@ -41,6 +41,7 @@ import type {
 
 export type Props = $ReadOnly<{|
     storeId: string,
+    orgUnitId: string,
 |}>;
 
 export type EventWorkingListsReduxOutputProps = {|

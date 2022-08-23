@@ -10,15 +10,18 @@ import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
 import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './eventWorkingListsReduxProvider.types';
+import { computeDownloadRequest } from './downloadRequest';
+import { convertToClientConfig } from '../helpers/eventFilters';
 
-export const EventWorkingListsReduxProvider = ({ storeId }: Props) => {
+export const EventWorkingListsReduxProvider = ({ storeId, orgUnitId }: Props) => {
     const dispatch = useDispatch();
 
     const programId = useSelector(({ currentSelections }) => currentSelections.programId);
     const program = useMemo(() => getEventProgramThrowIfNotFound(programId),
         [programId]);
 
-    const { currentTemplateId, templates, ...commonStateManagementRestProps } = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
+    const { currentTemplateId, templates, onLoadView, onUpdateList, ...commonStateManagementRestProps }
+        = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
 
     const currentTemplate = currentTemplateId && templates &&
     templates.find(template => template.id === currentTemplateId);
@@ -38,6 +41,45 @@ export const EventWorkingListsReduxProvider = ({ storeId }: Props) => {
         dispatch(requestDeleteEvent(eventId, storeId));
     }, [dispatch, storeId]);
 
+    const injectDownloadRequestToLoadView = useCallback(
+        async (selectedTemplate: Object, context: Object, meta: Object) => {
+            const eventQueryCriteria = selectedTemplate?.nextCriteria || selectedTemplate?.criteria;
+            const clientConfig = await convertToClientConfig(eventQueryCriteria, meta?.columnsMetaForDataFetching);
+            const currentRequest = computeDownloadRequest({
+                clientConfig,
+                context: {
+                    programId: context.programId,
+                    categories: context.categories,
+                    orgUnitId,
+                    storeId,
+                    program,
+                },
+                meta: { columnsMetaForDataFetching: meta.columnsMetaForDataFetching },
+            });
+            return onLoadView(selectedTemplate, { ...context, currentRequest }, meta);
+        },
+        [onLoadView, orgUnitId, storeId, program],
+    );
+
+    const injectDownloadRequestToUpdateList = useCallback(
+        (queryArgs: Object, meta: Object) => {
+            const { lastTransaction, columnsMetaForDataFetching } = meta;
+            const currentRequest = computeDownloadRequest({
+                clientConfig: queryArgs,
+                context: {
+                    programId: queryArgs.programId,
+                    categories: queryArgs.categories,
+                    orgUnitId,
+                    storeId,
+                    program,
+                },
+                meta: { columnsMetaForDataFetching },
+            });
+            return onUpdateList(queryArgs, { ...meta, currentRequest }, lastTransaction);
+        },
+        [onUpdateList, orgUnitId, storeId, program],
+    );
+
     return (
         <EventWorkingListsColumnSetup
             {...commonStateManagementRestProps}
@@ -46,6 +88,8 @@ export const EventWorkingListsReduxProvider = ({ storeId }: Props) => {
             templates={templates}
             lastIdDeleted={lastEventIdDeleted}
             onSelectListRow={onSelectListRow}
+            onLoadView={injectDownloadRequestToLoadView}
+            onUpdateList={injectDownloadRequestToUpdateList}
             onDeleteEvent={onDeleteEvent}
             downloadRequest={downloadRequest}
         />

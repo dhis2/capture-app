@@ -1,5 +1,5 @@
 // @flow
-import type { FiltersData } from '../../WorkingLists';
+import type { FiltersData, Categories } from '../../WorkingLists';
 
 export type RecordsOrder = Array<string>;
 
@@ -12,6 +12,20 @@ export type UpdateTemplate = (template: Object, criteria: Object, data: Object) 
 export type DeleteTemplate = (template: Object, programId: string) => void;
 
 export type UpdateList = (queryArgs: Object, columnsMetaForDataFetching: Object, lastTransaction: number) => void;
+
+export type LoadView = (
+    template: Object,
+    context: {
+        programId: string,
+        orgUnitId: string,
+        categories?: Categories,
+        currentRequest?: string,
+    },
+    meta: {
+        columnsMetaForDataFetching: any,
+        filtersOnlyMetaForDataFetching: any,
+    },
+) => void;
 
 export type InitialViewConfig = {|
     filters?: FiltersData,
