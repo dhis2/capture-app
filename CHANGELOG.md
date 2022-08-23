@@ -1,3 +1,10 @@
+## [100.12.5](https://github.com/dhis2/capture-app/compare/v100.12.4...v100.12.5) (2022-08-23)
+
+
+### Bug Fixes
+
+* [DHIS2-13624] use flyout menu for split button ([#2972](https://github.com/dhis2/capture-app/issues/2972)) ([a107d0d](https://github.com/dhis2/capture-app/commit/a107d0d703a12ed627972e2a4f0d7f3b84cc97ef))
+
 ## [100.12.4](https://github.com/dhis2/capture-app/compare/v100.12.3...v100.12.4) (2022-08-22)
 
 
