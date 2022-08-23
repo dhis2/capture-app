@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Rica Zamora Duchateau, 2022\n"
 "Language-Team: Dutch (https://www.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -129,6 +129,9 @@ msgid "Enrollment"
 msgstr ""
 
 msgid "A future date is not allowed"
+msgstr ""
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
@@ -522,57 +525,6 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
-msgid "New"
-msgstr ""
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr ""
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "Selecteer"
-
-msgid "Program"
-msgstr "Programma"
-
-msgid "No programs available."
-msgstr ""
-
-msgid "Show all"
-msgstr ""
-
-msgid "Selected program"
-msgstr ""
-
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Select program"
-msgstr ""
-
-msgid "Selected"
-msgstr ""
-
 msgid "Online"
 msgstr ""
 
@@ -715,7 +667,7 @@ msgid "Report"
 msgstr ""
 
 msgid "Schedule"
-msgstr ""
+msgstr "Schema"
 
 msgid "Refer"
 msgstr ""
@@ -762,6 +714,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr ""
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -795,6 +750,15 @@ msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Program"
+msgstr "Programma"
 
 msgid "Organisation Unit"
 msgstr "Organisatieëenheid"
@@ -866,6 +830,9 @@ msgstr "Geen resultaten gevonden"
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
+msgstr ""
+
+msgid "Register a user"
 msgstr ""
 
 msgid "Back to search"
@@ -975,6 +942,36 @@ msgstr ""
 msgid "Add relationship"
 msgstr ""
 
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "Selecteer"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Selected program"
+msgstr ""
+
+msgid "Select program"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
 msgid "Results found"
 msgstr ""
 
@@ -982,6 +979,15 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
 msgstr ""
 
 msgid "To work with the selected program,"
@@ -1031,16 +1037,16 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr ""
-
 msgid "Enrollment date"
 msgstr ""
 
 msgid "Incident date"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
 msgstr ""
 
 msgid "Started at {{orgUnitName}}"
@@ -1101,6 +1107,9 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"
@@ -1207,13 +1216,7 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr ""
-
 msgid "Registering unit"
-msgstr ""
-
-msgid "Due date"
 msgstr ""
 
 msgid "{{ totalEvents }} events"

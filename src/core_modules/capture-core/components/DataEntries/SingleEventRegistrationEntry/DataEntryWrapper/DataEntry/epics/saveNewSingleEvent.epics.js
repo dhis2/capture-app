@@ -8,8 +8,8 @@ import {
 
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
-import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../../../utils/routing';
-import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { getLocationQuery, buildUrlQueryString } from '../../../../../../utils/routing';
+import { resetLocationChange } from '../../../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -30,7 +30,7 @@ export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: 
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation();
+            const { programId, orgUnitId } = getLocationQuery();
 
             history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();

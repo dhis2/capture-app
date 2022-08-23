@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -144,6 +144,9 @@ msgstr "Enrôlement"
 
 msgid "A future date is not allowed"
 msgstr "Une date future n'est pas permise"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -557,57 +560,6 @@ msgstr ""
 "Le programme sélectionné est invalide pour l'unité d'enregistrement "
 "sélectionnée"
 
-msgid "New"
-msgstr "Nouveau"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "Nouveau {{trackedEntityName}} dans {{programName}}"
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
-
-msgid "Clear selections"
-msgstr "Effacer les sélections"
-
-msgid "Selected registering unit"
-msgstr "Unité d'enregistrement sélectionnée"
-
-msgid "Start Again"
-msgstr "Recommencer"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Êtes-vous sûr ? Toutes les données non sauvegardées seront perdues."
-
-msgid "Accept"
-msgstr "Accepter"
-
-msgid "Registering Organisation Unit"
-msgstr "Unité d'organisation d'enregistrement"
-
-msgid "Select"
-msgstr "Sélectionner"
-
-msgid "Program"
-msgstr "Programme"
-
-msgid "No programs available."
-msgstr "Aucun programme disponible"
-
-msgid "Show all"
-msgstr "Tout afficher"
-
-msgid "Selected program"
-msgstr "Programme choisi"
-
-msgid "Some programs are being filtered."
-msgstr "Certains programmes sont en cours de filtrage."
-
-msgid "Select program"
-msgstr "Sélectionner le programme"
-
-msgid "Selected"
-msgstr "Sélectionné"
-
 msgid "Online"
 msgstr "En ligne"
 
@@ -805,6 +757,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Nouveau"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choisir le {{missingCategories}} pour commencer à rapporter"
 
@@ -840,6 +795,15 @@ msgstr "Lien"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Enregistrer comme un nouveau {{trackedEntityName}}"
+
+msgid "Some programs are being filtered."
+msgstr "Certains programmes sont en cours de filtrage."
+
+msgid "Show all"
+msgstr "Tout afficher"
+
+msgid "Program"
+msgstr "Programme"
 
 msgid "Organisation Unit"
 msgstr "Unité d'organisation"
@@ -918,6 +882,9 @@ msgid ""
 msgstr ""
 "Vous pouvez modifier vos termes de recherche et effectuer une nouvelle "
 "recherche pour trouver les éléments que vous recherchez."
+
+msgid "Register a user"
+msgstr ""
 
 msgid "Back to search"
 msgstr " Retour à l'écran de recherche"
@@ -1035,6 +1002,36 @@ msgstr "Vous n'êtes pas autorisé à créer des relations"
 msgid "Add relationship"
 msgstr "Ajouetr relation"
 
+msgid "Selected registering unit"
+msgstr "Unité d'enregistrement sélectionnée"
+
+msgid "Start Again"
+msgstr "Recommencer"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Êtes-vous sûr ? Toutes les données non sauvegardées seront perdues."
+
+msgid "Accept"
+msgstr "Accepter"
+
+msgid "Registering Organisation Unit"
+msgstr "Unité d'organisation d'enregistrement"
+
+msgid "Select"
+msgstr "Sélectionner"
+
+msgid "No programs available."
+msgstr "Aucun programme disponible"
+
+msgid "Selected program"
+msgstr "Programme choisi"
+
+msgid "Select program"
+msgstr "Sélectionner le programme"
+
+msgid "Selected"
+msgstr "Sélectionné"
+
 msgid "Results found"
 msgstr "Résultats trouvés"
 
@@ -1045,6 +1042,15 @@ msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 "Renseigner au moins les attributs {{Nombre minimal d'attributs requis}} pour"
 " la recherche"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "Nouveau {{trackedEntityName}} dans {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
+
+msgid "Clear selections"
+msgstr "Effacer les sélections"
 
 msgid "To work with the selected program,"
 msgstr "Pour utiliser le programme sélectionné,"
@@ -1093,17 +1099,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Marquer pour suivi"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Suivi"
-
 msgid "Enrollment date"
 msgstr "Date d'enrôlement"
 
 msgid "Incident date"
 msgstr "Date de l´incident"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Suivi"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
@@ -1163,6 +1169,9 @@ msgid "Event completed"
 msgstr "Événement terminé"
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"
@@ -1271,14 +1280,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Date du rapport"
-
 msgid "Registering unit"
 msgstr "Unité qui enregistre"
-
-msgid "Due date"
-msgstr "Date d'échéance"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

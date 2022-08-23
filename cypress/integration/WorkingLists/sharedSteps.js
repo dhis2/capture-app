@@ -107,11 +107,6 @@ When('you set the assginee filter to none', () => {
 
 When('you set the first name filter to John', () => {
     cy.get('[data-test="tei-working-lists"]')
-        .contains('More filters')
-        .click();
-
-    cy.get('[data-test="tei-working-lists"]')
-        .find('li')
         .contains('First name')
         .click();
 

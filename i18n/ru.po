@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -139,6 +139,9 @@ msgstr "Регистрация"
 
 msgid "A future date is not allowed"
 msgstr "Ввод даты будущего периода запрещена"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -546,57 +549,6 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 "Выбранная программа не действительна для выбранной организации-регистратора"
 
-msgid "New"
-msgstr "Новый"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr "Выберите организацию-регистратор"
-
-msgid "Start Again"
-msgstr "Начать заново"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Вы уверены? Все несохраненные данные будут утеряны."
-
-msgid "Accept"
-msgstr "Принять"
-
-msgid "Registering Organisation Unit"
-msgstr "Регистрация Организационной единицы"
-
-msgid "Select"
-msgstr "Выбрать"
-
-msgid "Program"
-msgstr "Программа"
-
-msgid "No programs available."
-msgstr "Нет доступных программ"
-
-msgid "Show all"
-msgstr "Показать все"
-
-msgid "Selected program"
-msgstr "Выбранная программа"
-
-msgid "Some programs are being filtered."
-msgstr "Фильтруются некоторые программы "
-
-msgid "Select program"
-msgstr "Выбрать программу"
-
-msgid "Selected"
-msgstr "Выбранный"
-
 msgid "Online"
 msgstr "Онлайн"
 
@@ -786,6 +738,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Новый"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -819,6 +774,15 @@ msgstr "Ссылка"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr "Фильтруются некоторые программы "
+
+msgid "Show all"
+msgstr "Показать все"
+
+msgid "Program"
+msgstr "Программа"
 
 msgid "Organisation Unit"
 msgstr "Организация"
@@ -892,6 +856,9 @@ msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 msgstr "Вы можете изменить параметры поиска и заново перезапустить поиск "
+
+msgid "Register a user"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Назад к Поиску"
@@ -1005,6 +972,36 @@ msgstr "У вас нет прав для создания \"Родовых от�
 msgid "Add relationship"
 msgstr "Добавить зависимость"
 
+msgid "Selected registering unit"
+msgstr "Выберите организацию-регистратор"
+
+msgid "Start Again"
+msgstr "Начать заново"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Вы уверены? Все несохраненные данные будут утеряны."
+
+msgid "Accept"
+msgstr "Принять"
+
+msgid "Registering Organisation Unit"
+msgstr "Регистрация Организационной единицы"
+
+msgid "Select"
+msgstr "Выбрать"
+
+msgid "No programs available."
+msgstr "Нет доступных программ"
+
+msgid "Selected program"
+msgstr "Выбранная программа"
+
+msgid "Select program"
+msgstr "Выбрать программу"
+
+msgid "Selected"
+msgstr "Выбранный"
+
 msgid "Results found"
 msgstr "Найдены результаты"
 
@@ -1014,6 +1011,15 @@ msgstr "Поиск {{uniqueAttrName}}"
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 "Заполните хотя бы {{minAttributesRequiredToSearch}} атрибутов для поиска"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "Работать с выбранной программой"
@@ -1062,17 +1068,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Отметить для последующего наблюдения"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Дальнейшие действия"
-
 msgid "Enrollment date"
 msgstr "Дата зачисления"
 
 msgid "Incident date"
 msgstr "Дата происшествия"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Дальнейшие действия"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
@@ -1132,6 +1138,9 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"
@@ -1242,14 +1251,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Дата отчета"
-
 msgid "Registering unit"
 msgstr "Регистрирующая единица"
-
-msgid "Due date"
-msgstr "Дата выполнения"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

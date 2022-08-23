@@ -5,6 +5,7 @@ export {
     setOrgUnitFromScopeSelector,
     resetCategoryOptionFromScopeSelector,
     resetAllCategoryOptionsFromScopeSelector,
+    resetOrgUnitIdFromScopeSelector,
 } from './ScopeSelector.actions';
 export {
     useSetProgramId,

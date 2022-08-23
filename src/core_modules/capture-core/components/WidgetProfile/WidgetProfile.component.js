@@ -24,24 +24,41 @@ const styles = {
     },
 };
 
-const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = '', onUpdateTeiAttributeValues, classes }: Props) => {
+const showEditModal = (loading, error, showEdit, modalState) =>
+    !loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE;
+
+const WidgetProfilePlain = ({
+    teiId,
+    programId,
+    showEdit = false,
+    orgUnitId = '',
+    onUpdateTeiAttributeValues,
+    classes,
+}: Props) => {
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
-    const { storedAttributeValues, hasError } = useSelector(({ trackedEntityInstance }) => ({
+    const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
-        hasError: trackedEntityInstance?.hasError }));
+        storedGeometry: trackedEntityInstance?.geometry,
+        hasError: trackedEntityInstance?.hasError,
+    }));
     const {
         loading: trackedEntityInstancesLoading,
         error: trackedEntityInstancesError,
         trackedEntityInstanceAttributes,
         trackedEntityTypeName,
-    } = useTrackedEntityInstances(teiId, programId, storedAttributeValues);
+        geometry,
+    } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
     const {
         loading: userRolesLoading,
         error: userRolesError,
         userRoles,
     } = useUserRoles();
+
+    const isEditable = useMemo(() =>
+        trackedEntityInstanceAttributes.length > 0 && showEdit,
+    [trackedEntityInstanceAttributes, showEdit]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
     const error = programsError || trackedEntityInstancesError || userRolesError;
@@ -84,10 +101,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
             return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
         }
 
-        return (<FlatList
-            dataTest="profile-widget-flatlist"
-            list={displayInListAttributes}
-        />);
+        return <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />;
     };
 
     return (
@@ -99,7 +113,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                             TETName: trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         })}</div>
-                        {showEdit && (
+                        {isEditable && (
                             <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} small>
                                 {i18n.t('Edit')}
                             </Button>
@@ -112,7 +126,7 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
             >
                 {renderProfile()}
             </Widget>
-            {!loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE && (
+            {showEditModal(loading, error, isEditable, modalState) && (
                 <DataEntry
                     onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
                     onDisable={() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE)}
@@ -124,6 +138,8 @@ const WidgetProfilePlain = ({ teiId, programId, showEdit = false, orgUnitId = ''
                     onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
                     onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}
                     modalState={modalState}
+                    geometry={geometry}
+                    trackedEntityName={trackedEntityTypeName}
                 />
             )}
         </div>

@@ -5,7 +5,13 @@ import type { ComponentType } from 'react';
 import { useLocationQuery } from '../../../utils/routing';
 import { SearchPageComponent } from './SearchPage.component';
 import type { AvailableSearchOptions } from './SearchPage.types';
-import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
+import {
+    cleanSearchRelatedData,
+    navigateToMainPage,
+    navigateToNewUserPage,
+    showInitialViewOnSearchPage,
+    openSearchPage,
+} from './SearchPage.actions';
 import { searchScopes } from './SearchPage.constants';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
 import { useCurrentTrackedEntityTypeId } from '../../../hooks/useCurrentTrackedEntityTypeId';
@@ -79,6 +85,8 @@ export const SearchPage: ComponentType<{||}> = () => {
     const dispatchCleanSearchRelatedData = useCallback(
         () => { dispatch(cleanSearchRelatedData()); },
         [dispatch]);
+    const dispatchNavigateToNewUserPage = useCallback(() => { dispatch(navigateToNewUserPage()); }, [dispatch]);
+
 
     const availableSearchOptions = useSearchOptions();
     const preselectedProgramId = usePreselectedProgram(programId);
@@ -103,11 +111,16 @@ export const SearchPage: ComponentType<{||}> = () => {
         }
     }, [programId, preselectedProgramId, dispatchNavigateToMainPage]);
 
+    useEffect(() => {
+        dispatch(openSearchPage());
+    }, [dispatch]);
+
     return (
         <SearchPageComponent
             navigateToMainPage={dispatchNavigateToMainPage}
             showInitialSearchPage={dispatchShowInitialSearchPage}
             cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
+            navigateToRegisterUser={dispatchNavigateToNewUserPage}
             availableSearchOptions={availableSearchOptions}
             preselectedProgramId={preselectedProgramId}
             trackedEntityTypeId={trackedEntityTypeId}

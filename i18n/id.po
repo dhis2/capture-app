@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Raja Fathurrahim, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -143,6 +143,9 @@ msgstr "Pendaftaran"
 
 msgid "A future date is not allowed"
 msgstr "Tanggal yang akan datang tidak diperbolehkan"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -546,57 +549,6 @@ msgstr "Program tidak ada"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Program yang dipilih tidak valid untuk unit pendaftaran yang dipilih"
 
-msgid "New"
-msgstr "Baru"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "{{trackedEntityName}} baru di {{programName}}"
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Telusuri {{trackedEntityName}} di {{programName}}"
-
-msgid "Clear selections"
-msgstr "Hapus pilihan"
-
-msgid "Selected registering unit"
-msgstr "Unit pendaftaran yang dipilih"
-
-msgid "Start Again"
-msgstr "Mulai lagi"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Apakah Anda yakin? Semua data yang belum disimpan akan hilang."
-
-msgid "Accept"
-msgstr "Terima"
-
-msgid "Registering Organisation Unit"
-msgstr "Mendaftarkan Unit Organisasi"
-
-msgid "Select"
-msgstr "Pilih"
-
-msgid "Program"
-msgstr "Program"
-
-msgid "No programs available."
-msgstr "Tidak ada program yang tersedia."
-
-msgid "Show all"
-msgstr "Tampilkan semua"
-
-msgid "Selected program"
-msgstr "Program yang dipilih"
-
-msgid "Some programs are being filtered."
-msgstr "Beberapa program sedang difilter."
-
-msgid "Select program"
-msgstr "Pilih program"
-
-msgid "Selected"
-msgstr "Terpilih"
-
 msgid "Online"
 msgstr "Online"
 
@@ -793,6 +745,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Baru"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Pilih {{missingCategories}} untuk mulai melaporkan"
 
@@ -827,6 +782,15 @@ msgstr "Tautan"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Simpan sebagai {{trackedEntityName}} baru"
+
+msgid "Some programs are being filtered."
+msgstr "Beberapa program sedang difilter."
+
+msgid "Show all"
+msgstr "Tampilkan semua"
+
+msgid "Program"
+msgstr "Program"
 
 msgid "Organisation Unit"
 msgstr "Unit Organisasi"
@@ -904,6 +868,9 @@ msgid ""
 msgstr ""
 "Anda dapat mengubah istilah pencarian dan mencari lagi untuk menemukan apa "
 "yang Anda cari."
+
+msgid "Register a user"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Kembali ke pencarian"
@@ -1021,6 +988,36 @@ msgstr "Anda tidak memiliki akses untuk membuat hubungan apa pun"
 msgid "Add relationship"
 msgstr "Tambahkan hubungan"
 
+msgid "Selected registering unit"
+msgstr "Unit pendaftaran yang dipilih"
+
+msgid "Start Again"
+msgstr "Mulai lagi"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Apakah Anda yakin? Semua data yang belum disimpan akan hilang."
+
+msgid "Accept"
+msgstr "Terima"
+
+msgid "Registering Organisation Unit"
+msgstr "Mendaftarkan Unit Organisasi"
+
+msgid "Select"
+msgstr "Pilih"
+
+msgid "No programs available."
+msgstr "Tidak ada program yang tersedia."
+
+msgid "Selected program"
+msgstr "Program yang dipilih"
+
+msgid "Select program"
+msgstr "Pilih program"
+
+msgid "Selected"
+msgstr "Terpilih"
+
 msgid "Results found"
 msgstr "Hasil ditemukan"
 
@@ -1029,6 +1026,15 @@ msgstr "Telusuri {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Isi setidaknya {{minAttributesRequired}} atribut untuk mencari"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "{{trackedEntityName}} baru di {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Telusuri {{trackedEntityName}} di {{programName}}"
+
+msgid "Clear selections"
+msgstr "Hapus pilihan"
 
 msgid "To work with the selected program,"
 msgstr "Untuk bekerja dengan program yang dipilih,"
@@ -1079,17 +1085,17 @@ msgstr "Hapus tanda untuk ditindaklanjuti"
 msgid "Mark for follow-up"
 msgstr "Tandai untuk follow up"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "Widget pendaftaran tidak dapat dimuat. Silakan coba lagi nanti"
-
-msgid "Follow-up"
-msgstr "Mengikuti"
-
 msgid "Enrollment date"
 msgstr "Tanggal pendaftaran"
 
 msgid "Incident date"
 msgstr "Tanggal insiden"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr "Widget pendaftaran tidak dapat dimuat. Silakan coba lagi nanti"
+
+msgid "Follow-up"
+msgstr "Mengikuti"
 
 msgid "Started at {{orgUnitName}}"
 msgstr "Dimulai di {{orgUnitName}}"
@@ -1149,6 +1155,9 @@ msgid "Event completed"
 msgstr "Even selesai"
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"
@@ -1253,14 +1262,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Tanggal pelaporan"
-
 msgid "Registering unit"
 msgstr "Unit pendaftaran"
-
-msgid "Due date"
-msgstr "Tanggal jatuh tempo"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

@@ -8,6 +8,7 @@ import {
 
 const mapStateToProps = (state: ReduxState) => ({
     showEditEvent: state.viewEventPage.eventDetailsSection && state.viewEventPage.eventDetailsSection.showEditEvent,
+    programId: state.currentSelections.programId,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({

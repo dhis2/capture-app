@@ -376,118 +376,33 @@ Then('the custom TEI is deleted', () => {
 });
 
 When('you change the sharing settings', () => {
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=trackedEntityInstanceFilter&id=PpGINOT00UX').then(sharingUrl =>
-        cy
-            .request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'PpGINOT00UX',
-                    name: 'Events assigned to me',
-                    displayName: 'Events assigned to me',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [
-                        {
-                            id: 'OYLGMiazHtW',
-                            name: 'Kevin Boateng',
-                            displayName: 'Kevin Boateng',
-                            access: 'rw------',
-                        },
-                    ],
-                    externalAccess: false,
-                },
-            })
-            .then(() => {
-                cy.get('[data-test="list-view-menu-button"]').click();
-                cy.contains('Share view').click();
-                cy.get('[placeholder="Enter names"]').type('Boateng');
-                cy.contains('Kevin Boateng').parent().click();
-                cy.contains('Close').click();
-            }),
-    );
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Share view').click();
+    cy.get('[placeholder="Search"]')
+        .type('Boateng');
+
+    cy.contains('Kevin Boateng').click();
+    cy.contains('Select a level').click();
+    cy.contains('View and edit').click({ force: true });
+
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
 });
 
 When('you see the new sharing settings', () => {
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=trackedEntityInstanceFilter&id=PpGINOT00UX').then(sharingUrl =>
-        cy
-            .request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'PpGINOT00UX',
-                    name: 'Events assigned to me',
-                    displayName: 'Events assigned to me',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [],
-                    externalAccess: false,
-                },
-            })
-            .then(() => {
-                cy.get('[data-test="list-view-menu-button"]').click();
-                cy.contains('Share view').click();
-                cy.contains('Kevin Boateng').should('not.exist');
-            }),
-    );
-});
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Share view').click();
+    cy.contains('Kevin Boateng')
+        .should('exist')
+        .should('exist')
+        .parent()
+        .parent()
+        .parent()
+        .find('.select')
+        .click();
+    cy.contains('Remove access').click();
 
-When('you opt in to use the new enrollment Dashboard', () => {
-    cy.server();
-    cy.buildApiUrl('**/dataStore/capture/useNewDashboard').then(() => { cy.request('POST'); });
-    cy.route('PUT', '**/dataStore/capture/useNewDashboard').as('optInEnrollmentDashboard');
-    cy.get('[data-test="opt-in"]').within(() => {
-        cy.get('[data-test="dhis2-uicore-button"]')
-            .contains('Opt in for Child Programme')
-            .click();
-    });
-    cy.get('[data-test="opt-in-modal"]').within(() => {
-        cy.get('[data-test="dhis2-uicore-button"]')
-            .contains('Yes, opt in')
-            .click();
-    });
-
-    cy.wait('@optInEnrollmentDashboard', { timeout: 30000 });
-});
-
-Then('you see the opt out component', () => {
-    cy.get('[data-test="opt-out"]').within(() => {
-        cy.get('[data-test="dhis2-uicore-button"]')
-            .contains('Opt out for Child Programme');
-    });
-});
-
-When('you opt out to use the new enrollment Dashboard', () => {
-    cy.server();
-    cy.route('PUT', '**/dataStore/capture/useNewDashboard').as('optOutEnrollmentDashboard');
-    cy.get('[data-test="opt-out"]').within(() => {
-        cy.get('[data-test="dhis2-uicore-button"]')
-            .contains('Opt out for Child Programme')
-            .click();
-    });
-
-    cy.wait('@optOutEnrollmentDashboard', { timeout: 30000 });
-});
-
-Then('you see the opt in component', () => {
-    cy.get('[data-test="opt-in"]').within(() => {
-        cy.get('[data-test="dhis2-uicore-button"]')
-            .contains('Opt in for Child Programme');
-    });
+    cy.contains('Kevin Boateng').should('not.exist');
+    cy.contains('Close')
+        .click();
 });

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-20T08:58:04.154Z\n"
+"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -133,6 +133,9 @@ msgstr "报名"
 
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存新注册。"
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存 {{trackedEntityName}}。"
@@ -525,57 +528,6 @@ msgstr "项目不存在"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "选择的项目对选择的机构无效"
 
-msgid "New"
-msgstr "新建"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "{{programName}}中的新{{trackedEntityName}}"
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "在{{programName}}中搜索{{trackedEntityName}}"
-
-msgid "Clear selections"
-msgstr "清除选择"
-
-msgid "Selected registering unit"
-msgstr "选择注册的机构"
-
-msgid "Start Again"
-msgstr "再开始"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "你确信？所以未保存的数据将丢失"
-
-msgid "Accept"
-msgstr "接受<br>"
-
-msgid "Registering Organisation Unit"
-msgstr "在注册的机构"
-
-msgid "Select"
-msgstr "选择"
-
-msgid "Program"
-msgstr "项目"
-
-msgid "No programs available."
-msgstr "无可用项目"
-
-msgid "Show all"
-msgstr "显示全部"
-
-msgid "Selected program"
-msgstr "选择的项目"
-
-msgid "Some programs are being filtered."
-msgstr "有些项目已经被过滤了"
-
-msgid "Select program"
-msgstr "选择项目"
-
-msgid "Selected"
-msgstr "选择的"
-
 msgid "Online"
 msgstr "在线"
 
@@ -766,6 +718,9 @@ msgstr "或者在{{program}}中查看您可以访问的所有事件"
 msgid "Please select an organisation unit."
 msgstr "请选择一个组织单位。"
 
+msgid "New"
+msgstr "新建"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
 
@@ -799,6 +754,15 @@ msgstr "链接"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "另存为新的{{trackedEntityName}}"
+
+msgid "Some programs are being filtered."
+msgstr "有些项目已经被过滤了"
+
+msgid "Show all"
+msgstr "显示全部"
+
+msgid "Program"
+msgstr "项目"
 
 msgid "Organisation Unit"
 msgstr "组织机构"
@@ -841,15 +805,17 @@ msgid "Search by attributes"
 msgstr "按属性搜索"
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
+msgstr "填写这些字段进行搜索{{escape}} {{ searchableAttributes }}"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
 "search{{escape}} {{searchableAttributes}}"
 msgstr ""
+"至少填写 {{minAttributesRequiredToSearch}} 这些字段以进行搜索{{escape}} "
+"{{searchableAttributes}}"
 
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
+msgstr "填写此字段进行搜索{{escape}} {{searchableAttributes}}"
 
 msgid "Back"
 msgstr "后退"
@@ -872,6 +838,9 @@ msgid ""
 "looking for."
 msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
+msgid "Register a user"
+msgstr "注册用户"
+
 msgid "Back to search"
 msgstr "返回搜寻"
 
@@ -892,7 +861,7 @@ msgid ""
 msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或按更多属性搜索以缩小搜索范围。"
 
 msgid "Cannot search in all programs"
-msgstr ""
+msgstr "无法在所有项目中搜索"
 
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
@@ -904,10 +873,10 @@ msgid "Re-enroll"
 msgstr "重新报名"
 
 msgid "all programs"
-msgstr ""
+msgstr "所有项目"
 
 msgid "If none of search results match, you can create new "
-msgstr ""
+msgstr "如果没有搜索结果匹配，您可以创建新的"
 
 msgid "Create new"
 msgstr "新建"
@@ -979,6 +948,36 @@ msgstr "你没有权限创建任何关系"
 msgid "Add relationship"
 msgstr "添加关系"
 
+msgid "Selected registering unit"
+msgstr "选择注册的机构"
+
+msgid "Start Again"
+msgstr "再开始"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "你确信？所以未保存的数据将丢失"
+
+msgid "Accept"
+msgstr "接受<br>"
+
+msgid "Registering Organisation Unit"
+msgstr "在注册的机构"
+
+msgid "Select"
+msgstr "选择"
+
+msgid "No programs available."
+msgstr "无可用项目"
+
+msgid "Selected program"
+msgstr "选择的项目"
+
+msgid "Select program"
+msgstr "选择项目"
+
+msgid "Selected"
+msgstr "选择的"
+
 msgid "Results found"
 msgstr "找到的结果"
 
@@ -987,6 +986,15 @@ msgstr "搜索 {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "{{programName}}中的新{{trackedEntityName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "在{{programName}}中搜索{{trackedEntityName}}"
+
+msgid "Clear selections"
+msgstr "清除选择"
 
 msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"
@@ -1035,17 +1043,17 @@ msgstr "删除标记以进行后续操作"
 msgid "Mark for follow-up"
 msgstr "后续标记"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "无法加载报名的小部件。请稍后再试"
-
-msgid "Follow-up"
-msgstr "后续"
-
 msgid "Enrollment date"
 msgstr "报名日期"
 
 msgid "Incident date"
 msgstr "事件日期"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr "无法加载报名的小部件。请稍后再试"
+
+msgid "Follow-up"
+msgstr "后续"
 
 msgid "Started at {{orgUnitName}}"
 msgstr "始于{{orgUnitName}}"
@@ -1106,6 +1114,9 @@ msgstr "事件完成"
 
 msgid "Back to all stages and events"
 msgstr "回到所有阶段和事件"
+
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr "预定日期信息"
@@ -1211,14 +1222,8 @@ msgstr "这个阶段只能有一个事件"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "无法检索事件。请稍后再试。"
 
-msgid "Report date"
-msgstr "报告日期"
-
 msgid "Registering unit"
 msgstr "注册机构"
-
-msgid "Due date"
-msgstr "到期日期"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} 个事件"

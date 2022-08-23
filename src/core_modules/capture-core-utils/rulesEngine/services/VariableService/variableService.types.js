@@ -1,6 +1,6 @@
 // @flow
 import { typeof eventStatuses } from './constants';
-import type { DataElements, TrackedEntityAttributes } from '../../rulesEngine.types';
+import type { DataElements, TrackedEntityAttributes, OrgUnit } from '../../rulesEngine.types';
 
 export type ProgramRuleVariable = {
     id: string,
@@ -50,19 +50,6 @@ export type Enrollment = {
     +enrolledAt?: string,
     +occurredAt?: string,
     +enrollmentId?: string,
-};
-
-export type OrgUnitGroup = {
-    id: string,
-    name: string,
-    code: string,
-};
-
-export type OrgUnit = {
-    id: string,
-    name: string,
-    code: string,
-    groups: Array<OrgUnitGroup>,
 };
 
 type Option = {
