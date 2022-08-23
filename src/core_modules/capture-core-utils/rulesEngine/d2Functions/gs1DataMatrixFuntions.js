@@ -222,7 +222,7 @@ const aiFixedLengthMap = {
     34: 10,
     35: 10,
     36: 10,
-    41: 10,
+    41: 16,
 };
 
 const removeGS1Identifier = value => value.substring(3);
@@ -267,7 +267,7 @@ const handleGroupData = (gs1Group) => {
     if (gs1Group) {
         const gs1GroupLength = gs1Group.length;
         const ai = getApplicationIdentifier(gs1Group);
-        let nextValueLength = aiFixedLengthMap[ai];
+        let nextValueLength = aiFixedLengthMap[ai.substring(0, 2)];
         if (nextValueLength == null) {
             nextValueLength = gs1GroupLength;
         }
