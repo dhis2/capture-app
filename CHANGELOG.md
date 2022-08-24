@@ -1,3 +1,24 @@
+## [100.12.7](https://github.com/dhis2/capture-app/compare/v100.12.6...v100.12.7) (2022-08-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13476] percentage value type ([5779b05](https://github.com/dhis2/capture-app/commit/5779b05c0290c6a8a841a714084383787aeb670a))
+
+## [100.12.6](https://github.com/dhis2/capture-app/compare/v100.12.5...v100.12.6) (2022-08-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13612] use conditional UI tooltip for stage descriptions ([49abb00](https://github.com/dhis2/capture-app/commit/49abb001e9709eaf35d063b0a882138994422248))
+
+## [100.12.5](https://github.com/dhis2/capture-app/compare/v100.12.4...v100.12.5) (2022-08-23)
+
+
+### Bug Fixes
+
+* [DHIS2-13624] use flyout menu for split button ([#2972](https://github.com/dhis2/capture-app/issues/2972)) ([a107d0d](https://github.com/dhis2/capture-app/commit/a107d0d703a12ed627972e2a4f0d7f3b84cc97ef))
+
 ## [100.12.4](https://github.com/dhis2/capture-app/compare/v100.12.3...v100.12.4) (2022-08-22)
 
 
