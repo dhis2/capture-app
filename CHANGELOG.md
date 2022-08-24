@@ -1,3 +1,10 @@
+## [100.12.6](https://github.com/dhis2/capture-app/compare/v100.12.5...v100.12.6) (2022-08-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13612] use conditional UI tooltip for stage descriptions ([49abb00](https://github.com/dhis2/capture-app/commit/49abb001e9709eaf35d063b0a882138994422248))
+
 ## [100.12.5](https://github.com/dhis2/capture-app/compare/v100.12.4...v100.12.5) (2022-08-23)
 
 
