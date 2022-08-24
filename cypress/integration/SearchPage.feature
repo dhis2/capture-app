@@ -85,7 +85,7 @@ Feature: User interacts with Search page
 
   Scenario: Searching using one valid attribute and one attribute that contains only space 
     Given you are in the search page with the Child Programme and org unit being preselected from the url
-     And you expand the attributes search area
+    And you expand the attributes search area
     When you fill in the first name with value and last name with empty space
     And you click search
     Then you can see the first page of the results
