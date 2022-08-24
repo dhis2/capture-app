@@ -80,8 +80,8 @@ msgstr ""
 msgid "Please provide a valid time"
 msgstr ""
 
-msgid "Please provide a valid percentage"
-msgstr ""
+msgid "Please provide an integer between 0 and 100"
+msgstr "Please provide an integer between 0 and 100"
 
 msgid "Please provide a valid url"
 msgstr ""

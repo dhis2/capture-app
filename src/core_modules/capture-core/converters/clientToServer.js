@@ -34,6 +34,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: (value: RangeValue) => convertRange(stringifyNumber, value),
     [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(stringifyNumber, value),
+    [dataElementTypes.PERCENTAGE]: stringifyNumber,
     [dataElementTypes.DATE]: convertDate,
     [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
     [dataElementTypes.TRUE_ONLY]: () => 'true',
@@ -41,7 +42,6 @@ const valueConvertersForType = {
     [dataElementTypes.FILE_RESOURCE]: (rawValue: Object) => rawValue.value,
     [dataElementTypes.IMAGE]: (rawValue: Object) => rawValue.value,
     [dataElementTypes.COORDINATE]: (rawValue: Object) => `[${rawValue.longitude},${rawValue.latitude}]`,
-    [dataElementTypes.PERCENTAGE]: (rawValue: Object) => rawValue.replace('%', ''),
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.id,
     [dataElementTypes.AGE]: (rawValue: Object) => convertDate(rawValue),
 };
