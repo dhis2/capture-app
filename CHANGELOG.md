@@ -1,3 +1,10 @@
+## [100.12.7](https://github.com/dhis2/capture-app/compare/v100.12.6...v100.12.7) (2022-08-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13476] percentage value type ([5779b05](https://github.com/dhis2/capture-app/commit/5779b05c0290c6a8a841a714084383787aeb670a))
+
 ## [100.12.6](https://github.com/dhis2/capture-app/compare/v100.12.5...v100.12.6) (2022-08-24)
 
 
