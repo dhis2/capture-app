@@ -1,3 +1,10 @@
+## [100.12.8](https://github.com/dhis2/capture-app/compare/v100.12.7...v100.12.8) (2022-08-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13548] fix search with one attribute contains only space ([#2976](https://github.com/dhis2/capture-app/issues/2976)) ([02bc127](https://github.com/dhis2/capture-app/commit/02bc1279c5bfa9b01d1ca1dfdf98dc0ba10fe142))
+
 ## [100.12.7](https://github.com/dhis2/capture-app/compare/v100.12.6...v100.12.7) (2022-08-24)
 
 
