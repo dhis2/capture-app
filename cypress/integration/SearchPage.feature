@@ -83,6 +83,13 @@ Feature: User interacts with Search page
     And you click search
     Then you can see the first page of the results
 
+  Scenario: Searching using one valid attribute and one attribute that contains only space 
+    Given you are in the search page with the Child Programme and org unit being preselected from the url
+     And you expand the attributes search area
+    When you fill in the first name with value and last name with empty space
+    And you click search
+    Then you can see the first page of the results
+
   Scenario: Searching using attributes in Tracker Program has a working pagination
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
