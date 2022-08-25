@@ -1,7 +1,5 @@
 import '../../sharedSteps';
 
-beforeEach(() => cy.loginThroughForm());
-
 Given(/^you land on the enrollment event page by having typed (.*)$/, (url) => {
     cy.visit(url);
     cy.get('[data-test="scope-selector"]').contains('Selected person');

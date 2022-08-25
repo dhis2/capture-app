@@ -1,9 +1,5 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 When('you add data to the form', () => {
     cy.get('[data-test="dataentry-field-occurredAt"]')
         .find('input')

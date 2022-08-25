@@ -16,7 +16,7 @@ module.exports = function getCypressEnvVariables(config) {
         CONFIG_NAME_BASE,
     ];
 
-    const allEnv = dotenvFiles
+    const cypressEnv = dotenvFiles
         .reduce((acc, file) => {
             const absolutePath = path.resolve(fileServerFolder, file);
             if (fs.existsSync(absolutePath)) {
@@ -27,14 +27,21 @@ module.exports = function getCypressEnvVariables(config) {
                 };
             }
             return acc;
-        }, inputCypressEnv);
+        }, {});
 
-    return Object
-        .keys(allEnv)
+    const applicableCypressEnv = Object
+        .keys(cypressEnv)
         .reduce((acc, key) => {
-            if (!key.startsWith('REACT_')) {
-                acc[key] = allEnv[key];
+            const prefix = 'CYPRESS_';
+            if (key.toUpperCase().startsWith(prefix)) {
+                const cypressKey = key.substring(prefix.length);
+                acc[cypressKey] = cypressEnv[key];
             }
             return acc;
         }, {});
+
+    return {
+        ...applicableCypressEnv,
+        ...inputCypressEnv,
+    };
 };

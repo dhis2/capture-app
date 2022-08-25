@@ -1,7 +1,3 @@
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you are on an enrollment page with stage available', () => {
     cy.visit('/#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=UgYg0YW7ZIh&teiId=zmgVvEZ91Kg&enrollmentId=xRnBV5aJDeF');
     cy.get('[data-test="enrollment-page-content"]')

@@ -1,9 +1,5 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 When('the user opens the main page', () => {
     cy.visit('/#/');
 });

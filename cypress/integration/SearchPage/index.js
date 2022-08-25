@@ -1,9 +1,5 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you are on the default search page', () => {
     cy.visit('/#/search');
     cy.get('[data-test="scope-selector"]').should('exist');

@@ -1,6 +1,6 @@
 Cypress.Commands.add('buildApiUrl', (...urlParts) =>
     [Cypress.env('dhis2BaseUrl'), 'api', ...urlParts]
-        .map(part => part.replace(/(^\/)|(\/$)/, ''))
+        .map(part => part.replace(/(^\/)|(\/$)/g, ''))
         .join('/'),
 );
 

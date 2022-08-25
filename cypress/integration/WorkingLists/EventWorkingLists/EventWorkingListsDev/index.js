@@ -1,9 +1,5 @@
 import '../../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.server();
     cy.route('GET', '**/tracker/events**').as('getDefaultEvents');

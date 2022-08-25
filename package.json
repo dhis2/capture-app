@@ -82,6 +82,7 @@
     "i18n:add": "d2-app-scripts i18n extract && git add ./i18n/"
   },
   "devDependencies": {
+    "@actions/core": "^1.9.1",
     "@babel/core": "^7.17.8",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-transform-flow-strip-types": "^7.16.7",
@@ -94,6 +95,7 @@
     "@dhis2/cypress-commands": "^8.0.6",
     "@dhis2/cypress-plugins": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@vercel/ncc": "^0.34.0",
     "concurrently": "^7.0.0",
     "cypress": "^7",
     "cypress-cucumber-preprocessor": "^4",
@@ -117,6 +119,7 @@
     "jsdoc": "^3.6.10",
     "jsdoc-babel": "^0.5.0",
     "jsdoc-export-default-interop": "^0.3.1",
+    "node-fetch": "2",
     "redux-devtools-extension": "^2.13.9",
     "wait-on": "^6.0.1"
   },
