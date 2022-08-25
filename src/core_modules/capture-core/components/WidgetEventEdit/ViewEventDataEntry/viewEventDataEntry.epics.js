@@ -7,6 +7,8 @@ import {
     filterByInnerAction,
     mapToInnerAction,
 } from 'capture-core-utils/epics';
+import { statusTypes } from 'capture-core/events/statusTypes';
+import { DATA_ENTRY_KEY, DATA_ENTRY_ID } from 'capture-core/constants';
 import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
 } from '../EditEventDataEntry/editEventDataEntry.actions';
@@ -20,6 +22,18 @@ import {
     actionTypes as viewEventPageActionTypes,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { getProgramAndStageFromEvent } from '../../../metaData';
+
+const getDataEntryKey = (eventStatus?: string): string => (
+    (eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE)
+        ? DATA_ENTRY_KEY.edit
+        : DATA_ENTRY_KEY.view
+);
+
+const getDataEntryId = (event): string => (
+    event?.trackedEntity
+        ? DATA_ENTRY_ID.enrollmentEvent
+        : DATA_ENTRY_ID.singleEvent
+);
 
 export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
     action$.pipe(
@@ -70,6 +84,8 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
                 program,
                 enrollment,
                 attributeValues,
+                dataEntryId: getDataEntryId(eventContainer.event),
+                dataEntryKey: getDataEntryKey(eventContainer.event?.status),
             }))
                 .pipe(
                     map(item => batchActions(item)),

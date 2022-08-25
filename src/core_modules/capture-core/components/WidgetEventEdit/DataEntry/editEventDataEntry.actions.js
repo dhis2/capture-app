@@ -39,11 +39,6 @@ export const actionTypes = {
     START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForEditSingleEvent',
 };
 
-export const editEventIds = {
-    dataEntryId: 'singleEvent',
-    itemId: 'editEvent',
-};
-
 function getLoadActions(
     dataEntryId: string,
     itemId: string,
@@ -84,6 +79,8 @@ export const openEventForEditInDataEntry = ({
     program,
     enrollment,
     attributeValues,
+    dataEntryId,
+    dataEntryKey,
 }: {
     loadedValues: {
         eventContainer: Object,
@@ -93,11 +90,11 @@ export const openEventForEditInDataEntry = ({
     orgUnit: OrgUnit,
     foundation: RenderFoundation,
     program: Program | EventProgram | TrackerProgram,
+    dataEntryId: string,
+    dataEntryKey: string,
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
 }) => {
-    const dataEntryId = editEventIds.dataEntryId;
-    const itemId = editEventIds.itemId;
     const dataEntryPropsToInclude = [
         {
             id: 'occurredAt',
@@ -117,11 +114,11 @@ export const openEventForEditInDataEntry = ({
             onConvertOut: convertStatusOut,
         },
     ];
-    const formId = getDataEntryKey(dataEntryId, itemId);
+    const formId = getDataEntryKey(dataEntryId, dataEntryKey);
     const dataEntryActions =
         getLoadActions(
             dataEntryId,
-            itemId,
+            dataEntryKey,
             dataEntryValues,
             formValues,
             dataEntryPropsToInclude,

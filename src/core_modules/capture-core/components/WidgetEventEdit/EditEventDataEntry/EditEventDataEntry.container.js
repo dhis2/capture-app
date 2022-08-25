@@ -2,6 +2,7 @@
 import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import { DATA_ENTRY_KEY } from 'capture-core/constants';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
@@ -21,10 +22,6 @@ import {
     cancelEditEventDataEntry,
     requestDeleteEventDataEntry,
 } from './editEventDataEntry.actions';
-
-import {
-    viewEventIds,
-} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
@@ -87,11 +84,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         window.scrollTo(0, 0);
         dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation, orgUnit));
     },
-    onCancel: () => {
+    onCancel: (dataEntryId: string) => {
         window.scrollTo(0, 0);
         dispatch(batchActions([
             cancelEditEventDataEntry(),
-            setCurrentDataEntry(viewEventIds.dataEntryId, viewEventIds.itemId),
+            setCurrentDataEntry(dataEntryId, DATA_ENTRY_KEY.view),
         ]));
     },
     onDelete: () => {

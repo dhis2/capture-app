@@ -1,12 +1,12 @@
 // @flow
 import { connect } from 'react-redux';
+import { DATA_ENTRY_ID, DATA_ENTRY_KEY } from 'capture-core/constants';
 import {
     startGoBackToMainPage,
 } from './viewEvent.actions';
 import { ViewEventComponent } from './ViewEvent.component';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import { editEventIds } from '../../../WidgetEventEdit/DataEntry/editEventDataEntry.actions';
-import { viewEventIds } from '../EventDetailsSection/eventDetails.actions';
+
 import { withErrorMessageHandler } from '../../../../HOC/withErrorMessageHandler';
 import { makeProgramStageSelector, makeEventAccessSelector } from './viewEvent.selectors';
 
@@ -22,7 +22,9 @@ const makeMapStateToProps = () => {
             programStage: programStageSelector(state),
             eventAccess: eventAccessSelector(state),
             error: state.viewEventPage.loadError,
-            currentDataEntryKey: eventDetailsSection.showEditEvent ? getDataEntryKey(editEventIds.dataEntryId, editEventIds.itemId) : getDataEntryKey(viewEventIds.dataEntryId, viewEventIds.itemId),
+            currentDataEntryKey: eventDetailsSection.showEditEvent
+                ? getDataEntryKey(DATA_ENTRY_ID.singleEvent, DATA_ENTRY_KEY.edit)
+                : getDataEntryKey(DATA_ENTRY_ID.singleEvent, DATA_ENTRY_KEY.view),
         };
     };
 };

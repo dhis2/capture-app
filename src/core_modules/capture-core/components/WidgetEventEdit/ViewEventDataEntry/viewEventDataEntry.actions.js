@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit } from 'capture-core-utils/rulesEngine';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
-import { viewEventIds } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntryAsync } from '../../DataEntry/templates/dataEntryLoadEdit.template';
@@ -23,6 +22,7 @@ import type {
     EnrollmentData,
     AttributeValue,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 
 
 export const actionTypes = {
@@ -42,20 +42,23 @@ export const loadViewEventDataEntry =
         program,
         enrollment,
         attributeValues,
+        dataEntryId,
+        dataEntryKey,
     }: {
         eventContainer: ClientEventContainer,
         orgUnit: OrgUnit,
         foundation: RenderFoundation,
         program: Program,
+        dataEntryId: string,
+        dataEntryKey: string,
         enrollment?: EnrollmentData,
         attributeValues?: Array<AttributeValue>,
     }) => {
-        const dataEntryId = viewEventIds.dataEntryId;
-        const itemId = viewEventIds.itemId;
         const dataEntryPropsToInclude = [
             {
                 id: 'occurredAt',
                 type: 'DATE',
+                validatorContainers: getEventDateValidatorContainers(),
             },
             {
                 id: 'scheduledAt',
@@ -75,11 +78,11 @@ export const loadViewEventDataEntry =
             },
         ];
 
-        const formId = getDataEntryKey(dataEntryId, itemId);
+        const formId = getDataEntryKey(dataEntryId, dataEntryKey);
         const { actions: dataEntryActions, dataEntryValues, formValues } = await
         loadEditDataEntryAsync(
             dataEntryId,
-            itemId,
+            dataEntryKey,
             eventContainer.event,
             eventContainer.values,
             dataEntryPropsToInclude,

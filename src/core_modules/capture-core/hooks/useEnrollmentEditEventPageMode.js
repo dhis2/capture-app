@@ -1,17 +1,13 @@
 // @flow
 import { useSelector } from 'react-redux';
+import { DATA_ENTRY_KEY } from 'capture-core/constants';
 import { statusTypes } from '../events/statusTypes';
-
-const pageMode = Object.freeze({
-    EDIT: 'editEvent',
-    VIEW: 'viewEvent',
-});
 
 export const useEnrollmentEditEventPageMode = (eventStatus?: string) => {
     const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
 
     if (eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE) {
-        return { currentPageMode: pageMode.EDIT, pageMode, cancel: showEditEvent === false };
+        return { currentPageMode: DATA_ENTRY_KEY.edit, cancel: showEditEvent === false };
     }
-    return { currentPageMode: showEditEvent ? pageMode.EDIT : pageMode.VIEW, pageMode, cancel: false };
+    return { currentPageMode: showEditEvent ? DATA_ENTRY_KEY.edit : DATA_ENTRY_KEY.view, cancel: false };
 };
