@@ -54,7 +54,7 @@ jobs:
   preview:
     runs-on: ubuntu-latest
     needs: cypress-38
-    if: "github.event.label.name == 'test' || github.event.label.name == 'e2eTests' && !github.event.push.repository.fork && github.actor != 'dependabot[bot]'"
+    if: "github.event.label.name == 'test' && !github.event.push.repository.fork && github.actor != 'dependabot[bot]'"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
