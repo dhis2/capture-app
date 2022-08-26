@@ -1,3 +1,10 @@
+## [100.12.11](https://github.com/dhis2/capture-app/compare/v100.12.10...v100.12.11) (2022-08-26)
+
+
+### Bug Fixes
+
+* [DHIS2-13542] fix error message not trigger without touched ([#2977](https://github.com/dhis2/capture-app/issues/2977)) ([371a4ec](https://github.com/dhis2/capture-app/commit/371a4ec12da4b71c24dc88fadb6ea71136bb8ee6))
+
 ## [100.12.10](https://github.com/dhis2/capture-app/compare/v100.12.9...v100.12.10) (2022-08-26)
 
 
