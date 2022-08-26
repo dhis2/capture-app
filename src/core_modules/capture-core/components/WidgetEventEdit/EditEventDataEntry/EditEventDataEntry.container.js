@@ -1,6 +1,7 @@
 // @flow
 import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
+import { statusTypes } from 'capture-core/events/statusTypes';
 import { batchActions } from 'redux-batched-actions';
 import { DATA_ENTRY_KEY } from 'capture-core/constants';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
@@ -84,12 +85,16 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         window.scrollTo(0, 0);
         dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation, orgUnit));
     },
-    onCancel: (dataEntryId: string) => {
+    onCancel: () => {
+        const { eventStatus, onCancelEditEvent } = props;
+        const isScheduled = eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE;
         window.scrollTo(0, 0);
+
         dispatch(batchActions([
             cancelEditEventDataEntry(),
-            setCurrentDataEntry(dataEntryId, DATA_ENTRY_KEY.view),
+            ...(isScheduled ? [] : [setCurrentDataEntry(props.dataEntryId, DATA_ENTRY_KEY.view)]),
         ]));
+        isScheduled && onCancelEditEvent && onCancelEditEvent();
     },
     onDelete: () => {
         const { enrollmentId } = props;

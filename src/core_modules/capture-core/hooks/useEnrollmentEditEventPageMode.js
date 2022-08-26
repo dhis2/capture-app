@@ -7,7 +7,7 @@ export const useEnrollmentEditEventPageMode = (eventStatus?: string) => {
     const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
 
     if (eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE) {
-        return { currentPageMode: DATA_ENTRY_KEY.edit, cancel: showEditEvent === false };
+        return { currentPageMode: DATA_ENTRY_KEY.edit };
     }
-    return { currentPageMode: showEditEvent ? DATA_ENTRY_KEY.edit : DATA_ENTRY_KEY.view, cancel: false };
+    return { currentPageMode: showEditEvent ? DATA_ENTRY_KEY.edit : DATA_ENTRY_KEY.view };
 };

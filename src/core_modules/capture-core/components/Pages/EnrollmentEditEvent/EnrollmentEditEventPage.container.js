@@ -70,7 +70,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
-    const onCancel = () => {
+    const onCancelEditEvent = () => {
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
@@ -83,8 +83,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
-    const { currentPageMode, cancel } = useEnrollmentEditEventPageMode(event?.status);
-    cancel && onCancel();
+    const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${DATA_ENTRY_ID.enrollmentEvent}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
 
@@ -117,6 +116,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             eventDate={eventDate}
             onEnrollmentError={onEnrollmentError}
             eventStatus={event?.status}
+            onCancelEditEvent={onCancelEditEvent}
         />
     );
 };

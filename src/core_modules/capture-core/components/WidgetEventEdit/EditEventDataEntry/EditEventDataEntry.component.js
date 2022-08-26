@@ -276,6 +276,9 @@ type Props = {
     },
     theme: Theme,
     dataEntryId: string,
+    onCancelEditEvent?: () => void,
+    eventStatus?: string,
+    enrollmentId?: string,
 };
 
 type DataEntrySection = {
@@ -318,6 +321,9 @@ class EditEventDataEntryPlain extends Component<Props> {
             onSave,
             classes,
             dataEntryId,
+            onCancelEditEvent,
+            enrollmentId,
+            eventStatus,
             ...passOnProps
         } = this.props;
         return (

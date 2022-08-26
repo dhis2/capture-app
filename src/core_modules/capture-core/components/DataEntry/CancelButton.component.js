@@ -6,8 +6,7 @@ import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 
 type Props = {
     dataEntryHasChanges: boolean,
-    id: string,
-    onCancel: (dataEntryId: string) => void,
+    onCancel: () => void,
 }
 
 type State = {
@@ -21,8 +20,7 @@ export class CancelButtonComponent extends React.Component<Props, State> {
     }
     handleCancel = () => {
         if (!this.props.dataEntryHasChanges) {
-            const dataEntryId = this.props.id;
-            this.props.onCancel(dataEntryId);
+            this.props.onCancel();
             return;
         }
         this.setState({ dialogOpen: true });
@@ -46,7 +44,7 @@ export class CancelButtonComponent extends React.Component<Props, State> {
                     text={i18n.t('Leaving this page will discard the changes you made to this event.')}
                     confirmText={i18n.t('Yes, discard')}
                     cancelText={i18n.t('No, stay here')}
-                    onConfirm={() => this.props.onCancel(this.props.id)}
+                    onConfirm={this.props.onCancel}
                     open={this.state.dialogOpen}
                     onCancel={this.handleCancelDiscard}
                 />

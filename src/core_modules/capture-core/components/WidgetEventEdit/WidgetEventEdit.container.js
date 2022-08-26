@@ -47,6 +47,7 @@ export const WidgetEventEditPlain = ({
     programStage,
     programStage: { name, icon },
     onGoBack,
+    onCancelEditEvent,
     programId,
     orgUnitId,
     enrollmentId,
@@ -134,6 +135,8 @@ export const WidgetEventEditPlain = ({
                             orgUnit={orgUnit}
                             programId={programId}
                             enrollmentId={enrollmentId}
+                            eventStatus={eventStatus}
+                            onCancelEditEvent={onCancelEditEvent}
                             hasDeleteButton
                         />
                     )}
