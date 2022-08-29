@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useCallback, type ComponentType } from 'react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import {
     IconClock16,
     IconDimensionOrgUnit16,
@@ -44,7 +44,7 @@ const getIncidentDateLabel = program => program.incidentDateLabel || i18n.t('Inc
 const getLastUpdatedAt = (serverTimeZoneId, enrollment) => (
     i18n.t('Last updated {{date}}', {
         date: serverTimeZoneId
-            ? moment.parseZone(enrollment.updatedAt).utcOffset(serverTimeZoneId).fromNow()
+            ? moment.tz(enrollment.updatedAt, serverTimeZoneId).fromNow()
             : moment(enrollment.updatedAt).fromNow(),
     }));
 
@@ -65,7 +65,6 @@ export const WidgetEnrollmentPlain = ({
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const geometryType = getGeometryType(enrollment?.geometry?.type);
-
 
     return (
         <div data-test="widget-enrollment">
