@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
-// import i18n from '@dhis2/d2-i18n';
+import i18n from '@dhis2/d2-i18n';
 import { spacersNum, spacers, colors, Button } from '@dhis2/ui';
 import { RelationshipsTable } from './RelationshipsTable.component';
 
@@ -43,9 +43,9 @@ const RelationshipsPlain = ({ relationships, classes, onAddRelationship }: Props
                 </div>);
             }) : null
         }
-        {/* <Button onClick={onAddRelationship}>
+        <Button onClick={onAddRelationship}>
             {i18n.t('Add relationship')}
-        </Button> */}
+        </Button>
     </div>);
 
 export const Relationships: ComponentType<Props> = withStyles(styles)(RelationshipsPlain);
