@@ -19,7 +19,7 @@ type Props = {
     headers: Array<Object>,
     linkedEntityData: Array<Object>,
     onLinkedRecordClick: (parameters: Url) => void,
-     ...CssClasses,
+    ...CssClasses,
 }
 const DEFAULT_NUMBER_OF_ROW = 5;
 
@@ -35,7 +35,7 @@ const styles = {
 };
 
 const RelationshipsTablePlain = (props: Props) => {
-    const { headers, linkedEntityData, classes } = props;
+    const { headers, linkedEntityData, classes, onLinkedRecordClick } = props;
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
     function renderHeader() {
