@@ -1,6 +1,7 @@
 // @flow
-import React, { useState, useCallback } from 'react';
-import { Chip } from '@dhis2/ui';
+import React, { type ComponentType, useState, useCallback } from 'react';
+import { Chip, IconLink24, spacers } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 import { Widget } from '../../Widget';
 import { Relationships } from './Relationships.component';
 import type { OutputRelationship } from '../common.types';
@@ -12,7 +13,17 @@ type Props = {|
     ...CssClasses,
 |}
 
-export const RelationshipsWidget = ({ relationships, title, ...passOnProps }: Props) => {
+const styles = {
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    icon: {
+        paddingRight: spacers.dp8,
+    },
+};
+
+const RelationshipsWidgetPlain = ({ relationships, title, classes, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
     const count = relationships.reduce((acc, curr) => { acc += curr.linkedEntityData.length; return acc; }, 0);
     return (
@@ -20,7 +31,8 @@ export const RelationshipsWidget = ({ relationships, title, ...passOnProps }: Pr
             data-test="relationship-widget"
         >
             <Widget
-                header={<div>
+                header={<div className={classes.header}>
+                    <span className={classes.icon}><IconLink24 /></span>
                     <span>{title}</span>
                     {relationships && <Chip dense>
                         {count}
@@ -37,3 +49,5 @@ export const RelationshipsWidget = ({ relationships, title, ...passOnProps }: Pr
         </div>
     );
 };
+
+export const RelationshipsWidget: ComponentType<Props> = withStyles(styles)(RelationshipsWidgetPlain);

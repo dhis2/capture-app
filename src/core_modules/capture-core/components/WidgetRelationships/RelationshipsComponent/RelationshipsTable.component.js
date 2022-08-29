@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState, type ComponentType } from 'react';
 import {
     DataTableBody,
     DataTableHead,
@@ -7,16 +7,29 @@ import {
     DataTableRow,
     DataTableCell,
     DataTableColumnHeader,
+    Button,
+    spacers,
 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
+import { withStyles } from '@material-ui/core';
 
 type Props = {
     headers: Array<Object>,
     linkedEntityData: Array<Object>,
      ...CssClasses,
 }
+const DEFAULT_NUMBER_OF_ROW = 5;
 
-export const RelationshipsTable = (props: Props) => {
-    const { headers, linkedEntityData } = props;
+const styles = {
+    button: {
+        marginTop: `${spacers.dp8}`,
+    },
+};
+
+const RelationshipsTablePlain = (props: Props) => {
+    const { headers, linkedEntityData, classes } = props;
+    const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
+
     function renderHeader() {
         const headerCells = headers
             .map(column => (
@@ -37,7 +50,7 @@ export const RelationshipsTable = (props: Props) => {
         if (!linkedEntityData) {
             return null;
         }
-        return linkedEntityData.map(({ id: targetId, values }) => (
+        return linkedEntityData.slice(0, displayedRowNumber).map(({ id: targetId, values }) => (
             <DataTableRow key={targetId}>
                 {headers.map(({ id }) => {
                     const entity = values.find(item => item.id === id);
@@ -49,15 +62,39 @@ export const RelationshipsTable = (props: Props) => {
             </DataTableRow>
         ));
     };
+    const renderShowMoreButton = () => {
+        const shouldShowMore = linkedEntityData.length > DEFAULT_NUMBER_OF_ROW
+            && displayedRowNumber < linkedEntityData.length;
+        return shouldShowMore ? <Button
+            small
+            secondary
+            dataTest="show-more-button"
+            className={classes.button}
+            onClick={() => {
+                const nextRowIndex = Math.min(linkedEntityData.length, displayedRowNumber + DEFAULT_NUMBER_OF_ROW);
+                setDisplayedRowNumber(nextRowIndex);
+            }}
+        >
+            {i18n.t('Show {{ rest }} more', {
+                rest: Math.min(linkedEntityData.length - displayedRowNumber, DEFAULT_NUMBER_OF_ROW),
+            })}
+        </Button> : null;
+    };
 
     return (
-        <DataTable>
-            <DataTableHead>
-                {renderHeader()}
-            </DataTableHead>
-            <DataTableBody>
-                {renderRelationshipRows()}
-            </DataTableBody>
-        </DataTable>
+        <div>
+            <DataTable>
+                <DataTableHead>
+                    {renderHeader()}
+                </DataTableHead>
+                <DataTableBody>
+                    {renderRelationshipRows()}
+                </DataTableBody>
+
+            </DataTable>
+            {renderShowMoreButton()}
+        </div>
     );
 };
+
+export const RelationshipsTable: ComponentType<Props> = withStyles(styles)(RelationshipsTablePlain);

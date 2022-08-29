@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
-"PO-Revision-Date: 2022-07-18T12:33:35.059Z\n"
+"POT-Creation-Date: 2022-08-29T08:45:32.053Z\n"
+"PO-Revision-Date: 2022-08-29T08:45:32.053Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1215,6 +1215,9 @@ msgstr "{{TETName}} profile"
 msgid "Edit"
 msgstr "Edit"
 
+msgid "Show {{ rest }} more"
+msgstr "Show {{ rest }} more"
+
 msgid "Event's Relationships"
 msgstr "Event's Relationships"
 
@@ -1235,9 +1238,6 @@ msgstr "New {{ eventName }} event"
 
 msgid "This event is not yet preserved and cannot be edited"
 msgstr "This event is not yet preserved and cannot be edited"
-
-msgid "Show {{ rest }} more"
-msgstr "Show {{ rest }} more"
 
 msgid "Reset list"
 msgstr "Reset list"
