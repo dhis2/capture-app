@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import { useDispatch } from 'react-redux';
-import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24 } from '@dhis2/ui';
+import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24, Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { useEnrollmentEditEventPageMode, useRulesEngineOrgUnit } from 'capture-core/hooks';
@@ -11,6 +11,7 @@ import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
+import { getProgramEventAccess } from '../../metaData';
 
 const styles = {
     header: {
@@ -52,6 +53,8 @@ export const WidgetEventEditPlain = ({
     const { currentPageMode, pageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
+    const eventAccess = getProgramEventAccess(programId, programStage.id);
+
     if (error) {
         return error.errorComponent;
     }
@@ -65,15 +68,32 @@ export const WidgetEventEditPlain = ({
                 </Button>
 
                 {currentPageMode === pageMode.VIEW && (
-                    <Button
-                        small
-                        secondary
-                        className={classes.button}
-                        onClick={() => dispatch(startShowEditEventDataEntry(orgUnit))}
+                    <Tooltip
+                        content={i18n.t('You don\'t have access to edit this event')}
                     >
-                        <IconEdit24 />
-                        {i18n.t('Edit event')}
-                    </Button>
+                        {({ onMouseOver, onMouseOut, ref }) => (
+                            <div
+                                ref={(btnRef) => {
+                                    if (btnRef && !eventAccess?.write) {
+                                        btnRef.onmouseover = onMouseOver;
+                                        btnRef.onmouseout = onMouseOut;
+                                        ref.current = btnRef;
+                                    }
+                                }}
+                            >
+                                <Button
+                                    small
+                                    secondary
+                                    disabled={!eventAccess?.write}
+                                    className={classes.button}
+                                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit))}
+                                >
+                                    <IconEdit24 />
+                                    {i18n.t('Edit event')}
+                                </Button>
+                            </div>
+                        )}
+                    </Tooltip>
                 )}
             </div>
             <Widget
@@ -104,6 +124,7 @@ export const WidgetEventEditPlain = ({
                             orgUnit={orgUnit}
                             programId={programId}
                             enrollmentId={enrollmentId}
+                            hasDeleteButton
                         />
                     )}
                 </div>

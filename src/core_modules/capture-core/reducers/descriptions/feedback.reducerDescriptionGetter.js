@@ -15,7 +15,6 @@ import {
 import {
     actionTypes as editEventDataEntryAction,
     actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
-import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import {
     actionTypes as viewEventNewRelationshipActionTypes,
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
@@ -102,10 +101,6 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         ];
         return newState;
     },
-    [orgUnitListActionTypes.INIT_REG_UNIT_LIST_ROOTS_FAILED]: (state, action) =>
-        addErrorFeedback(state, i18n.t(action.payload.message)),
-    [orgUnitListActionTypes.SET_SEARCH_ROOTS_FAILED]: (state, action) =>
-        addErrorFeedback(state, i18n.t(action.payload.message)),
     [dataEntryActionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
     [viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>

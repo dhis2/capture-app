@@ -1,7 +1,6 @@
 // @flow
 import { useHistory, useLocation } from 'react-router-dom';
-import { getUrlQueries } from '../../../utils/url';
-import { buildUrlQueryString } from '../../../utils/routing';
+import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
 import type { PageContext } from './types';
 
 export const useResetProgramId = () => {
@@ -9,7 +8,7 @@ export const useResetProgramId = () => {
     const { pathname } = useLocation();
 
     const resetProgramId = (pageToPush: string = pathname) => {
-        const { programId, ...restOfQueries } = getUrlQueries();
+        const { programId, ...restOfQueries } = getLocationQuery();
         history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
     };
 
@@ -19,14 +18,14 @@ export const useResetProgramId = () => {
             enrollmentId,
             stageId,
             eventId,
-            teiId = pageContext?.teiId,
+            teiId,
             ...restOfQueries
-        } = getUrlQueries();
-        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, teiId, enrollmentId: 'AUTO' })}`);
+        } = getLocationQuery();
+        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, teiId: teiId ?? pageContext?.teiId, enrollmentId: 'AUTO' })}`);
     };
 
     const resetProgramIdAndTeiId = (pageToPush: string = pathname) => {
-        const { programId, teiId, ...restOfQueries } = getUrlQueries();
+        const { programId, teiId, ...restOfQueries } = getLocationQuery();
         history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
     };
 
