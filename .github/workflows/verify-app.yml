@@ -132,7 +132,7 @@ jobs:
           CI: true
           CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          dhis2BaseUrl: https://test.e2e.dhis2.org/ca-test-2.39
+          CYPRESS_dhis2BaseUrl: https://test.e2e.dhis2.org/ca-test-2.39
 
   build:
     runs-on: ubuntu-latest

@@ -41,9 +41,9 @@ const env = Object
             if (!['DHIS2_BASE_URL', 'DHIS2_API_VERSION'].includes(reactKey)) {
                 acc[key] = allEnvVariables[key];
             }
-        } else if (key === 'dhis2BaseUrl') {
+        } else if (key.toUpperCase() === 'CYPRESS_DHIS2BASEURL') {
             acc.REACT_APP_DHIS2_BASE_URL = allEnvVariables[key];
-        } else if (key === 'dhis2ApiVersion') {
+        } else if (key.toUpperCase() === 'CYPRESS_DHIS2APIVERSION') {
             acc.REACT_APP_DHIS2_API_VERSION = allEnvVariables[key];
         }
         return acc;
