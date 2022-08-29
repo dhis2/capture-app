@@ -61,6 +61,12 @@ export const deriveFilterKeyword = (fieldId: string, attributes: Array<DataEleme
 
 const getFiltersForAttributesSearchQuery = (formValues, attributes) => Object.keys(formValues)
     .filter(fieldId => formValues[fieldId])
+    .filter((fieldId) => {
+        if (typeof formValues[fieldId] === 'string') {
+            return formValues[fieldId].trim().length > 0;
+        }
+        return true;
+    })
     .map((fieldId) => {
         const dataElement = attributes.find(attribute => attribute.id === fieldId);
         if (formValues[fieldId] && dataElement) {

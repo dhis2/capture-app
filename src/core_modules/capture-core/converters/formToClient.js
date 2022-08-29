@@ -62,6 +62,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     [dataElementTypes.INTEGER_NEGATIVE]: parseNumber,
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
+    [dataElementTypes.PERCENTAGE]: (value: string) => parseNumber(value.replace('%', '')),
     [dataElementTypes.DATE]: convertDate,
     [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
     [dataElementTypes.DATETIME]: convertDateTime,

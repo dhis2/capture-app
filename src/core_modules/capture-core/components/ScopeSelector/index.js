@@ -2,6 +2,7 @@
 export {
     scopeSelectorActionTypes,
     setOrgUnitFromScopeSelector,
+    resetOrgUnitIdFromScopeSelector,
 } from './ScopeSelector.actions';
 export {
     useSetProgramId,

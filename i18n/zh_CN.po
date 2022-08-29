@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
+"POT-Creation-Date: 2022-07-07T15:10:40.948Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -90,8 +90,8 @@ msgstr "日期和时间"
 msgid "Please provide a valid time"
 msgstr "有效的时间"
 
-msgid "Please provide a valid percentage"
-msgstr "有效的百分比"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "有效的URL"
@@ -526,57 +526,6 @@ msgstr "项目不存在"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "选择的项目对选择的机构无效"
 
-msgid "New"
-msgstr "新建"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "{{programName}}中的新{{trackedEntityName}}"
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "在{{programName}}中搜索{{trackedEntityName}}"
-
-msgid "Clear selections"
-msgstr "清除选择"
-
-msgid "Selected registering unit"
-msgstr "选择注册的机构"
-
-msgid "Start Again"
-msgstr "再开始"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "你确信？所以未保存的数据将丢失"
-
-msgid "Accept"
-msgstr "接受<br>"
-
-msgid "Registering Organisation Unit"
-msgstr "在注册的机构"
-
-msgid "Select"
-msgstr "选择"
-
-msgid "Program"
-msgstr "项目"
-
-msgid "No programs available."
-msgstr "无可用项目"
-
-msgid "Show all"
-msgstr "显示全部"
-
-msgid "Selected program"
-msgstr "选择的项目"
-
-msgid "Some programs are being filtered."
-msgstr "有些项目已经被过滤了"
-
-msgid "Select program"
-msgstr "选择项目"
-
-msgid "Selected"
-msgstr "选择的"
-
 msgid "Online"
 msgstr "在线"
 
@@ -767,6 +716,9 @@ msgstr "或者在{{program}}中查看您可以访问的所有事件"
 msgid "Please select an organisation unit."
 msgstr "请选择一个组织单位。"
 
+msgid "New"
+msgstr "新建"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
 
@@ -800,6 +752,15 @@ msgstr "链接"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "另存为新的{{trackedEntityName}}"
+
+msgid "Some programs are being filtered."
+msgstr "有些项目已经被过滤了"
+
+msgid "Show all"
+msgstr "显示全部"
+
+msgid "Program"
+msgstr "项目"
 
 msgid "Organisation Unit"
 msgstr "组织机构"
@@ -983,6 +944,36 @@ msgstr "你没有权限创建任何关系"
 msgid "Add relationship"
 msgstr "添加关系"
 
+msgid "Selected registering unit"
+msgstr "选择注册的机构"
+
+msgid "Start Again"
+msgstr "再开始"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "你确信？所以未保存的数据将丢失"
+
+msgid "Accept"
+msgstr "接受<br>"
+
+msgid "Registering Organisation Unit"
+msgstr "在注册的机构"
+
+msgid "Select"
+msgstr "选择"
+
+msgid "No programs available."
+msgstr "无可用项目"
+
+msgid "Selected program"
+msgstr "选择的项目"
+
+msgid "Select program"
+msgstr "选择项目"
+
+msgid "Selected"
+msgstr "选择的"
+
 msgid "Results found"
 msgstr "找到的结果"
 
@@ -991,6 +982,15 @@ msgstr "搜索 {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "{{programName}}中的新{{trackedEntityName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "在{{programName}}中搜索{{trackedEntityName}}"
+
+msgid "Clear selections"
+msgstr "清除选择"
 
 msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"
@@ -1110,6 +1110,9 @@ msgstr "事件完成"
 
 msgid "Back to all stages and events"
 msgstr "回到所有阶段和事件"
+
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr "预定日期信息"
