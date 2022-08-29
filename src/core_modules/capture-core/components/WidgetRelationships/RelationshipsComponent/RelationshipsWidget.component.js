@@ -44,7 +44,11 @@ const RelationshipsWidgetPlain = ({ relationships, title, classes, ...passOnProp
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                <Relationships relationships={relationships} {...passOnProps} />
+                <Relationships
+                    relationships={relationships}
+                    classes={classes}
+                    {...passOnProps}
+                />
             </Widget>
         </div>
     );
