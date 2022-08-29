@@ -5,7 +5,6 @@ import type {
     EventsData,
     TEIValues,
     Enrollment,
-    OrgUnit,
     OptionSets,
     CompareDates,
     Constants,
@@ -54,9 +53,9 @@ export type ProgramRuleEffect = {
     programStageSectionId: ?string,
     optionGroupId: ?string,
     optionId: ?string,
-    content: string,
-    displayContent: string,
-    data: ?string,
+    content: ?string,
+    displayContent: ?string,
+    data: any,
     style?: ?Object,
 };
 
@@ -124,6 +123,19 @@ export type TrackedEntityAttributes = {
     [id: string]: TrackedEntityAttribute
 };
 
+export type OrgUnitGroup = $ReadOnly<{|
+    id: string,
+    name: string,
+    code: string,
+|}>;
+
+export type OrgUnit = $ReadOnly<{|
+    id: string,
+    name: string,
+    code: string,
+    groups: Array<OrgUnitGroup>,
+|}>;
+
 export type RulesEngineInput = {|
     programRulesContainer: ProgramRulesContainer,
     currentEvent?: ?EventData,
@@ -146,7 +158,7 @@ export interface IDateUtils {
     monthsBetween(firstRulesDate: string, secondRulesDate: string): number;
     yearsBetween(firstRulesDate: string, secondRulesDate: string): number;
     +compareDates: CompareDates;
-    addDays(rulesDate: string, daysToAdd: string): string;
+    addDays(rulesDate: string, daysToAdd: number): string;
 }
 
 export interface IConvertInputRulesValue {
@@ -203,44 +215,6 @@ export interface IConvertOutputRulesEffectsValue {
     convertAge(value: string): any;
     convertFile(value: string): any;
     convertImage(value: string): any;
-}
-
-export type D2FunctionConfig = {
-    parameters?: number,
-    execute: Function,
-}
-export type D2Functions = {
-    'ceil': D2FunctionConfig,
-    'floor': D2FunctionConfig,
-    'round': D2FunctionConfig,
-    'modulus': D2FunctionConfig,
-    'zing': D2FunctionConfig,
-    'oizp': D2FunctionConfig,
-    'concatenate': D2FunctionConfig,
-    'daysBetween': D2FunctionConfig,
-    'weeksBetween': D2FunctionConfig,
-    'monthsBetween': D2FunctionConfig,
-    'yearsBetween': D2FunctionConfig,
-    'addDays': D2FunctionConfig,
-    'count': D2FunctionConfig,
-    'countIfValue': D2FunctionConfig,
-    'countIfZeroPos': D2FunctionConfig,
-    'hasValue': D2FunctionConfig,
-    'validatePattern': D2FunctionConfig,
-    'left': D2FunctionConfig,
-    'right': D2FunctionConfig,
-    'substring': D2FunctionConfig,
-    'split': D2FunctionConfig,
-    'length': D2FunctionConfig,
-    'inOrgUnitGroup': D2FunctionConfig,
-    'hasUserRole': D2FunctionConfig,
-    'zScoreWFA': D2FunctionConfig,
-    'zScoreHFA': D2FunctionConfig,
-    'zScoreWFH': D2FunctionConfig,
-    'extractDataMatrixValue': D2FunctionConfig,
-    'lastEventDate': D2FunctionConfig,
-    'addControlDigits': D2FunctionConfig,
-    'checkControlDigits': D2FunctionConfig,
 }
 
 export type Flag = {

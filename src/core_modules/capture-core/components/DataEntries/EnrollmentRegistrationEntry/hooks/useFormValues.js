@@ -131,7 +131,7 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
 
     useEffect(() => {
         if (
-            orgUnit?.code &&
+            orgUnit?.id &&
             Object.entries(formFoundation).length > 0 &&
             formValuesReadyRef.current === false &&
             areAttributesWithSubvaluesReady

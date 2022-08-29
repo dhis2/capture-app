@@ -21,9 +21,12 @@ const styles = {
         fontWeight: 500,
         fontSize: 16,
         color: colors.grey800,
-        paddingBottom: spacersNum.dp8,
+        paddingBottom: spacersNum.dp16,
     },
     wrapper: {
+        '&:not(:last-first)': {
+            paddingTop: spacersNum.dp24,
+        },
         paddingBottom: spacersNum.dp16,
         overflow: 'scroll',
     },

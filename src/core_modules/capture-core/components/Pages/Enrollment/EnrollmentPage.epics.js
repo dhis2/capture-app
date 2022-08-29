@@ -13,7 +13,7 @@ import {
     startFetchingTeiFromEnrollmentId,
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
-import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../../utils/routing';
+import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { getProgramFromProgramIdThrowIfNotFound, EventProgram }
     from '../../../metaData';
@@ -52,7 +52,7 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_FETCH),
         map(() => {
-            const { enrollmentId, teiId } = deriveURLParamsFromLocation();
+            const { enrollmentId, teiId } = getLocationQuery();
             if (enrollmentId) {
                 return startFetchingTeiFromEnrollmentId();
             } else if (teiId) {
@@ -67,7 +67,7 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH),
         flatMap(() => {
-            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
+            const { enrollmentId, programId, orgUnitId, teiId } = getLocationQuery();
             if (enrollmentId === 'AUTO') {
                 return of(openEnrollmentPage({
                     programId,
@@ -98,7 +98,7 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
         flatMap(() => {
-            const { teiId } = deriveURLParamsFromLocation();
+            const { teiId } = getLocationQuery();
 
             return fetchTeiStream(teiId, querySingleResource);
         }),
@@ -113,7 +113,7 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
                 orgUnitId: queryOrgUnitId,
                 programId: queryProgramId,
                 teiId: queryTeiId,
-            } = deriveURLParamsFromLocation();
+            } = getLocationQuery();
             const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
             if (!urlCompleted) {
