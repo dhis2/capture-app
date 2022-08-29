@@ -12,7 +12,6 @@ import {
     spacers,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
 import type { Url } from '../../../utils/url';
 
 
@@ -60,22 +59,22 @@ const RelationshipsTablePlain = (props: Props) => {
             return null;
         }
         return linkedEntityData
-        .slice(0, displayedRowNumber)
-        .map(({ id: targetId, values, parameters }) => (
-            <DataTableRow key={targetId}>
-                {headers.map(({ id }) => {
-                    const entity = values.find(item => item.id === id);
-                    return (<DataTableCell
-                        className={classes.row}
-                        key={id}
-                        onClick={() => onLinkedRecordClick(parameters)}
-                    >
-                        {entity?.value}
-                    </DataTableCell>
-                    );
-                })}
-            </DataTableRow>
-        ));
+            .slice(0, displayedRowNumber)
+            .map(({ id: targetId, values, parameters }) => (
+                <DataTableRow key={targetId}>
+                    {headers.map(({ id }) => {
+                        const entity = values.find(item => item.id === id);
+                        return (<DataTableCell
+                            className={classes.row}
+                            key={id}
+                            onClick={() => onLinkedRecordClick(parameters)}
+                        >
+                            {entity?.value}
+                        </DataTableCell>
+                        );
+                    })}
+                </DataTableRow>
+            ));
     };
     const renderShowMoreButton = () => {
         const shouldShowMore = linkedEntityData.length > DEFAULT_NUMBER_OF_ROW
