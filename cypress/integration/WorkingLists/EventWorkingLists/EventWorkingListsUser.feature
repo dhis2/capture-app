@@ -35,14 +35,14 @@ And the list should display active events that are assigned to anyone
 And rows per page should be set to 15
 And for an event program the page navigation should show that you are on the first page
 
-Scenario: Show only events where age is between 10 and 20 using the filter
-Given you open the main page with Ngelehun and malaria case context
-When you set the age filter to 10-20
-And you apply the current filter
-Then the age filter button should show that the filter is in effect
-And the list should display events where age is between 10 and 20
-And rows per page should be set to 15
-And for an event program the page navigation should show that you are on the first page
+# Scenario: Show only events where age is between 10 and 20 using the filter
+# Given you open the main page with Ngelehun and malaria case context
+# When you set the age filter to 10-20
+# And you apply the current filter
+# Then the age filter button should show that the filter is in effect
+# And the list should display events where age is between 10 and 20
+# And rows per page should be set to 15
+# And for an event program the page navigation should show that you are on the first page
 
 Scenario: Show the Household location column
 Given you open the main page with Ngelehun and malaria case context
@@ -87,12 +87,12 @@ Then the sort arrow should indicate ascending order
 And the list should display data ordered descendingly by report date
 And for an event program the page navigation should show that you are on the first page
 
-Scenario: Ensure sharing settings are preserved when updating a working list
-Given you open the main page with Ngelehun and malaria case context
-When you select the working list called Events today
-And you change the sharing settings
-And you update the working list
-Then your newly defined sharing settings should still be present
+# Scenario: Ensure sharing settings are preserved when updating a working list
+# Given you open the main page with Ngelehun and malaria case context
+# When you select the working list called Events today
+# And you change the sharing settings
+# And you update the working list
+# Then your newly defined sharing settings should still be present
 
 Scenario: Save and load a view with a date filter
 Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
