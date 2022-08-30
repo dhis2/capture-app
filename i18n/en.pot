@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
-"PO-Revision-Date: 2022-07-18T12:33:35.059Z\n"
+"POT-Creation-Date: 2022-07-07T15:10:40.948Z\n"
+"PO-Revision-Date: 2022-07-07T15:10:40.948Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -86,8 +86,8 @@ msgstr "Please provide a valid date and time"
 msgid "Please provide a valid time"
 msgstr "Please provide a valid time"
 
-msgid "Please provide a valid percentage"
-msgstr "Please provide a valid percentage"
+msgid "Please provide an integer between 0 and 100"
+msgstr "Please provide an integer between 0 and 100"
 
 msgid "Please provide a valid url"
 msgstr "Please provide a valid url"
@@ -1120,6 +1120,9 @@ msgstr "Event completed"
 
 msgid "Back to all stages and events"
 msgstr "Back to all stages and events"
+
+msgid "You don't have access to edit this event"
+msgstr "You don't have access to edit this event"
 
 msgid "Schedule date info"
 msgstr "Schedule date info"

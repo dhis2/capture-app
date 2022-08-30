@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
+"POT-Creation-Date: 2022-07-07T15:10:40.948Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -95,8 +95,8 @@ msgstr "Oppgi en gyldig dato og tid"
 msgid "Please provide a valid time"
 msgstr "Oppgi en gyldig tid"
 
-msgid "Please provide a valid percentage"
-msgstr "Oppgi en gyldig prosentandel"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "Oppgi en gyldig url"
@@ -542,57 +542,6 @@ msgstr "Programmet finnes ikke"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Valgt program er ugyldig for registreringsenhet"
 
-msgid "New"
-msgstr "Ny"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "Ny {{trackedEntityName}} i {{programName}}"
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
-
-msgid "Clear selections"
-msgstr "Tøm valg"
-
-msgid "Selected registering unit"
-msgstr "Valgt registreringsenhet"
-
-msgid "Start Again"
-msgstr "Start på nytt"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Er du sikker? All data som ikke er lagret vil bli borte."
-
-msgid "Accept"
-msgstr "Aksepter"
-
-msgid "Registering Organisation Unit"
-msgstr "Registrering av organisasjonsenhet"
-
-msgid "Select"
-msgstr "Velg"
-
-msgid "Program"
-msgstr "Program"
-
-msgid "No programs available."
-msgstr "Ingen programmer tilgjengelig."
-
-msgid "Show all"
-msgstr "Vis alle"
-
-msgid "Selected program"
-msgstr "Valgt program"
-
-msgid "Some programs are being filtered."
-msgstr "Noen programmer blir filtrert."
-
-msgid "Select program"
-msgstr "Velg program"
-
-msgid "Selected"
-msgstr "Valgt"
-
 msgid "Online"
 msgstr "Påkoblet"
 
@@ -790,6 +739,9 @@ msgstr "Eller se alle hendelser som er tilgjengelige for deg i {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Vennligst velg en organisasjonsenhet"
 
+msgid "New"
+msgstr "Ny"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Velg {{missingCategories}} for å starte rapportering"
 
@@ -824,6 +776,15 @@ msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Lagre som ny {{trackedEntityName}}"
+
+msgid "Some programs are being filtered."
+msgstr "Noen programmer blir filtrert."
+
+msgid "Show all"
+msgstr "Vis alle"
+
+msgid "Program"
+msgstr "Program"
 
 msgid "Organisation Unit"
 msgstr "Organisasjonsenhet"
@@ -1016,6 +977,36 @@ msgstr "Du har ikke tilgang til å opprette noen relasjoner"
 msgid "Add relationship"
 msgstr "Legg til relasjon"
 
+msgid "Selected registering unit"
+msgstr "Valgt registreringsenhet"
+
+msgid "Start Again"
+msgstr "Start på nytt"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Er du sikker? All data som ikke er lagret vil bli borte."
+
+msgid "Accept"
+msgstr "Aksepter"
+
+msgid "Registering Organisation Unit"
+msgstr "Registrering av organisasjonsenhet"
+
+msgid "Select"
+msgstr "Velg"
+
+msgid "No programs available."
+msgstr "Ingen programmer tilgjengelig."
+
+msgid "Selected program"
+msgstr "Valgt program"
+
+msgid "Select program"
+msgstr "Velg program"
+
+msgid "Selected"
+msgstr "Valgt"
+
 msgid "Results found"
 msgstr "Resultater funnet"
 
@@ -1024,6 +1015,15 @@ msgstr "Søk {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Fyll inn minst {{minAttributesRequired}} attributter for å søke"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "Ny {{trackedEntityName}} i {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
+
+msgid "Clear selections"
+msgstr "Tøm valg"
 
 msgid "To work with the selected program,"
 msgstr "For å jobbe med det valgte programmet,"
@@ -1145,6 +1145,9 @@ msgstr "Hendelse fullført"
 
 msgid "Back to all stages and events"
 msgstr "Tilbake til alle faser og hendelser"
+
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr "Informasjon for planlagt dato"

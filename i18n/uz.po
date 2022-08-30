@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
+"POT-Creation-Date: 2022-07-07T15:10:40.948Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -93,8 +93,8 @@ msgstr "Илтимос, тегишли сана ва вақтни кўрсати
 msgid "Please provide a valid time"
 msgstr "Илтимос, тўғри вақтни кўрсатинг"
 
-msgid "Please provide a valid percentage"
-msgstr "Илтимос, тегишли фоизни тақдим этинг"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "Илтимос, ҳақиқий URL манзилни кўрсатинг"
@@ -543,57 +543,6 @@ msgstr "Дастур мавжуд эмас"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Танланган дастур танланган рўйхатдан олинадиган бўлим учун яроқсиз"
 
-msgid "New"
-msgstr "Янги"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "Янги {{trackedEntityName}} да {{programName}}"
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Қидирув {{trackedEntityName}} да {{programName}}"
-
-msgid "Clear selections"
-msgstr "Танловларни тозалаш"
-
-msgid "Selected registering unit"
-msgstr "Бўлимни танланган рўйхатга олиш"
-
-msgid "Start Again"
-msgstr "Қайта бошланг"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Ишончингиз комилми? Барча сақланмаган маълумотлар йўқолади."
-
-msgid "Accept"
-msgstr "Қабул қилинг"
-
-msgid "Registering Organisation Unit"
-msgstr "Танланган бўлим рўйхатдан ўтказилмоқда"
-
-msgid "Select"
-msgstr "Танланг"
-
-msgid "Program"
-msgstr "Программа"
-
-msgid "No programs available."
-msgstr "Ҳеч қандай дастур мавжуд эмас."
-
-msgid "Show all"
-msgstr "Барчага кўрсатиш"
-
-msgid "Selected program"
-msgstr "Танланган дастур"
-
-msgid "Some programs are being filtered."
-msgstr "Баъзи дастурлар фильтрланмоқда."
-
-msgid "Select program"
-msgstr "Дастурни танлаш"
-
-msgid "Selected"
-msgstr "Танланган"
-
 msgid "Online"
 msgstr "Онлайн"
 
@@ -790,6 +739,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Янги"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Ҳисоботни бошлаш учун {{missingCategories}} ни танланг"
 
@@ -825,6 +777,15 @@ msgstr "Ҳавола"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Янги {{trackedEntityName}} сифатида сақлаш"
+
+msgid "Some programs are being filtered."
+msgstr "Баъзи дастурлар фильтрланмоқда."
+
+msgid "Show all"
+msgstr "Барчага кўрсатиш"
+
+msgid "Program"
+msgstr "Программа"
 
 msgid "Organisation Unit"
 msgstr "Ташкилий Бўлим"
@@ -1024,6 +985,36 @@ msgstr "Ушбу ўзаро алоқаларни яратиш ҳуқуқига �
 msgid "Add relationship"
 msgstr "Ўзаро алоқа киритиш"
 
+msgid "Selected registering unit"
+msgstr "Бўлимни танланган рўйхатга олиш"
+
+msgid "Start Again"
+msgstr "Қайта бошланг"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Ишончингиз комилми? Барча сақланмаган маълумотлар йўқолади."
+
+msgid "Accept"
+msgstr "Қабул қилинг"
+
+msgid "Registering Organisation Unit"
+msgstr "Танланган бўлим рўйхатдан ўтказилмоқда"
+
+msgid "Select"
+msgstr "Танланг"
+
+msgid "No programs available."
+msgstr "Ҳеч қандай дастур мавжуд эмас."
+
+msgid "Selected program"
+msgstr "Танланган дастур"
+
+msgid "Select program"
+msgstr "Дастурни танлаш"
+
+msgid "Selected"
+msgstr "Танланган"
+
 msgid "Results found"
 msgstr "Натижалар топилди"
 
@@ -1032,6 +1023,15 @@ msgstr "{{uniqueAttrName}} орқали қидириш"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Қидириш учун камида {{minAttributesRequired}} атрибутларини тўлдиринг"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "Янги {{trackedEntityName}} да {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Қидирув {{trackedEntityName}} да {{programName}}"
+
+msgid "Clear selections"
+msgstr "Танловларни тозалаш"
 
 msgid "To work with the selected program,"
 msgstr "Танланган дастур билан ишлаш учун,"
@@ -1151,6 +1151,9 @@ msgid "Event completed"
 msgstr "Ҳодиса/тадбир якунланди"
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"

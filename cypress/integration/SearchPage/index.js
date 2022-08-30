@@ -313,6 +313,20 @@ When('you fill in the first and last name with values that will return results',
         .blur();
 });
 
+When('you fill in the first name with value and last name with empty space', () => {
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Thomas')
+        .blur();
+
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('  ')
+        .blur();
+});
+
 When('you navigated to a search page with tracked entity id on the url', () => {
     cy.url().should('include', 'search?trackedEntityTypeId=nEenWmSyUEp');
 });
