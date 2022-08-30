@@ -184,6 +184,7 @@ import {
     startFetchingTeiFromEnrollmentIdEpic,
     startFetchingTeiFromTeiIdEpic,
     openEnrollmentPageEpic,
+    clickLinkedRecordEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 import {
     saveNewEventSucceededEpic,
@@ -322,6 +323,7 @@ export const epics = combineEpics(
     updateTeiEpic,
     updateTeiSucceededEpic,
     updateTeiFailedEpic,
+    clickLinkedRecordEpic,
     navigateToNewUserPageEpic,
     requestDeleteEventDataEntryEpic,
 );

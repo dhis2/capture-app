@@ -24,7 +24,7 @@ export const useEventsRelationships = (eventId: string) => {
                     resource: 'tracker/relationships',
                     params: ({ variables: { eventId: updatedEventId } }) => ({
                         event: updatedEventId,
-                        fields: ['relationshipType,to,from'],
+                        fields: ['relationshipType,to,from,createdAt'],
                     }),
                 },
             }),
