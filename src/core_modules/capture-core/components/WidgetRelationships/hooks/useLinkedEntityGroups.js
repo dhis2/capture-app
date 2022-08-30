@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import moment from 'moment';
 import { getProgramAndStageFromEvent, getTrackedEntityTypeThrowIfNotFound }
     from '../../../metaData';
 import type {
@@ -166,29 +167,31 @@ export const useLinkedEntityGroups = (
 
     const computeData = useCallback(async () => {
         if (relationships?.length && relationshipTypes?.length) {
-            const linkedEntityGroups = relationships.reduce((acc, rel) => {
-                const { relationshipType: typeId, from, to, createdAt } = rel;
-                const relationshipType = relationshipTypes.find(item => item.id === typeId);
+            const linkedEntityGroups = relationships
+                .sort((a, b) => moment.utc(b.createdAt).diff(moment.utc(a.createdAt)))
+                .reduce((acc, rel) => {
+                    const { relationshipType: typeId, from, to, createdAt } = rel;
+                    const relationshipType = relationshipTypes.find(item => item.id === typeId);
 
-                if (!relationshipType) { return acc; }
-                const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to, createdAt);
-                if (!metadata) { return acc; }
-                const { displayFields, id, values, parameters, groupId, name } = metadata;
+                    if (!relationshipType) { return acc; }
+                    const metadata = getLinkedEntityInfo(relationshipType, targetId, from, to, createdAt);
+                    if (!metadata) { return acc; }
+                    const { displayFields, id, values, parameters, groupId, name } = metadata;
 
-                const typeExist = acc.find(item => item.id === groupId);
-                if (typeExist) {
-                    typeExist.linkedEntityData.push({ id, values, parameters });
-                } else {
-                    acc.push({
-                        id: groupId,
-                        relationshipName: name || relationshipType.displayName,
-                        linkedEntityData: [{ id, values, parameters }],
-                        headers: displayFields,
-                    });
-                }
+                    const typeExist = acc.find(item => item.id === groupId);
+                    if (typeExist) {
+                        typeExist.linkedEntityData.push({ id, values, parameters });
+                    } else {
+                        acc.push({
+                            id: groupId,
+                            relationshipName: name || relationshipType.displayName,
+                            linkedEntityData: [{ id, values, parameters }],
+                            headers: displayFields,
+                        });
+                    }
 
-                return acc;
-            }, []);
+                    return acc;
+                }, []);
 
             setRelationshipByType(linkedEntityGroups);
         }
