@@ -78,8 +78,9 @@ const getLinkedRecordURLParameters = (linkedEntity: RelationshipData, relationsh
         const {
             event: eventId,
             program: programId,
+            orgUnit: orgUnitId,
         } = linkedEntity.event;
-        return { eventId, programId };
+        return { eventId, programId, orgUnitId };
     } else if (linkedEntity.trackedEntity) {
         const programId = relationshipType.program?.id;
         const { trackedEntity: teiId, orgUnit: orgUnitId } = linkedEntity.trackedEntity;
@@ -181,7 +182,7 @@ export const useLinkedEntityGroups = (
                     acc.push({
                         id: groupId,
                         relationshipName: name || relationshipType.displayName,
-                        linkedEntityData: [{ id, values }],
+                        linkedEntityData: [{ id, values, parameters }],
                         headers: displayFields,
                     });
                 }
