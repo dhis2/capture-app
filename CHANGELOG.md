@@ -1,3 +1,10 @@
+## [100.12.12](https://github.com/dhis2/capture-app/compare/v100.12.11...v100.12.12) (2022-08-30)
+
+
+### Bug Fixes
+
+* temporary disable failing test related to DHIS2-13676 ([#2983](https://github.com/dhis2/capture-app/issues/2983)) ([06c8b9a](https://github.com/dhis2/capture-app/commit/06c8b9a00c6a3c27ab6ddf338f22ad3594dd2d82))
+
 ## [100.12.11](https://github.com/dhis2/capture-app/compare/v100.12.10...v100.12.11) (2022-08-26)
 
 
