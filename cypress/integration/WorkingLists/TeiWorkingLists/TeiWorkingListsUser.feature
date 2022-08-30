@@ -108,12 +108,12 @@ Then the enrollment status filter button should show that the active filter is i
 And you delete the name My custom list
 Then the custom TEI is deleted
 
-Scenario: The TEI custom working can be shared
-Given you open the main page with Ngelehun and malaria focus investigation program context
-And you see the custom TEI working lists
-And you can load the view with the name Events assigned to me
-When you change the sharing settings
-Then you see the new sharing settings
+# Scenario: The TEI custom working can be shared
+# Given you open the main page with Ngelehun and malaria focus investigation program context
+# And you see the custom TEI working lists
+# And you can load the view with the name Events assigned to me
+# When you change the sharing settings
+# Then you see the new sharing settings
 
 Scenario: The admin user can optin to use the new Enrollment Dashboard
 Given you open the main page with Ngelehun and child programme context
