@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
+"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -364,7 +364,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr "ບໍ່ມີ"
+msgstr "ບໍ່ແມນ"
 
 msgid "Select user"
 msgstr ""
@@ -418,7 +418,7 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "ມີ"
+msgstr "ແມ່ນ"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -445,7 +445,7 @@ msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "ບໍ່ມີ"
+msgstr "ບໍ່ແມນ"
 
 msgid "Uploading image"
 msgstr ""
@@ -524,57 +524,6 @@ msgstr ""
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
-
-msgid "New"
-msgstr "ສ້າງໃຫມ່"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr "​ການ​ຮັບ​ຮອງ"
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "ເລືອກ"
-
-msgid "Program"
-msgstr "ສາຍງານ"
-
-msgid "No programs available."
-msgstr ""
-
-msgid "Show all"
-msgstr "ສະແດງທັງໝົດ"
-
-msgid "Selected program"
-msgstr "ເລືອກສາຍງານ"
-
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Select program"
-msgstr "ຂະແໜງທີ່ຖືກເລືອກ"
-
-msgid "Selected"
-msgstr "ເລືອກ"
 
 msgid "Online"
 msgstr "ມີການເຊື່ອມຕໍ່"
@@ -765,6 +714,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "ສ້າງໃຫມ່"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -798,6 +750,15 @@ msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "ສະແດງທັງໝົດ"
+
+msgid "Program"
+msgstr "ສາຍງານ"
 
 msgid "Organisation Unit"
 msgstr "ຫົວໜ່ວຍ ການຈັດຕັ້ງ"
@@ -981,6 +942,36 @@ msgstr ""
 msgid "Add relationship"
 msgstr "ເພີ່ມຄວາມສໍາພັນ"
 
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr "​ການ​ຮັບ​ຮອງ"
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "ເລືອກ"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Selected program"
+msgstr "ເລືອກສາຍງານ"
+
+msgid "Select program"
+msgstr "ຂະແໜງທີ່ຖືກເລືອກ"
+
+msgid "Selected"
+msgstr "ເລືອກ"
+
 msgid "Results found"
 msgstr ""
 
@@ -988,6 +979,15 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
 msgstr ""
 
 msgid "To work with the selected program,"
@@ -1107,6 +1107,9 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"

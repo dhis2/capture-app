@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-07-18T12:33:35.059Z\n"
+"POT-Creation-Date: 2022-07-07T15:10:40.948Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
 "Language-Team: Romanian (https://www.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -94,8 +94,8 @@ msgstr "Introduceți o dată și o oră valide"
 msgid "Please provide a valid time"
 msgstr "Introduceți o oră valabilă"
 
-msgid "Please provide a valid percentage"
-msgstr "Introduceți un procentaj valid"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "Introduceți o adresă URL validă"
@@ -540,57 +540,6 @@ msgstr "Programul nu există"
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
-msgid "New"
-msgstr "Nou"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "{{trackedEntityName}} nou în {{programName}}"
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Căutare un {{trackedEntityName}} în {{programName}}"
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr "Începe din nou"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Sunteți sigur? Toate datele nesalvate se vor pierde."
-
-msgid "Accept"
-msgstr "Accept"
-
-msgid "Registering Organisation Unit"
-msgstr "Unitatea organizațională de înregistrare"
-
-msgid "Select"
-msgstr "Selectare"
-
-msgid "Program"
-msgstr "Program"
-
-msgid "No programs available."
-msgstr "Nu există programe disponibile."
-
-msgid "Show all"
-msgstr ""
-
-msgid "Selected program"
-msgstr "Programul selectat"
-
-msgid "Some programs are being filtered."
-msgstr "Unele programe sunt filtrate."
-
-msgid "Select program"
-msgstr "Selectare program"
-
-msgid "Selected"
-msgstr "Selectat"
-
 msgid "Online"
 msgstr "Online"
 
@@ -780,6 +729,9 @@ msgstr "Sau vedeți toate evenimentele accesibile dvs. în {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Selectați o unitate organizațională."
 
+msgid "New"
+msgstr "Nou"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -815,6 +767,15 @@ msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Salvați ca {{trackedEntityName}} nou"
+
+msgid "Some programs are being filtered."
+msgstr "Unele programe sunt filtrate."
+
+msgid "Show all"
+msgstr ""
+
+msgid "Program"
+msgstr "Program"
 
 msgid "Organisation Unit"
 msgstr "Unitate Organizațională"
@@ -1002,6 +963,36 @@ msgstr "Nu aveți acces pentru a crea relații"
 msgid "Add relationship"
 msgstr "Adăugare relație"
 
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr "Începe din nou"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Sunteți sigur? Toate datele nesalvate se vor pierde."
+
+msgid "Accept"
+msgstr "Accept"
+
+msgid "Registering Organisation Unit"
+msgstr "Unitatea organizațională de înregistrare"
+
+msgid "Select"
+msgstr "Selectare"
+
+msgid "No programs available."
+msgstr "Nu există programe disponibile."
+
+msgid "Selected program"
+msgstr "Programul selectat"
+
+msgid "Select program"
+msgstr "Selectare program"
+
+msgid "Selected"
+msgstr "Selectat"
+
 msgid "Results found"
 msgstr "Rezultate găsite"
 
@@ -1011,6 +1002,15 @@ msgstr "Căutare {{uniqueAttrName}}"
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 "Completați cel puțin {{minAttributesRequired}} atribute pentru a căuta"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "{{trackedEntityName}} nou în {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Căutare un {{trackedEntityName}} în {{programName}}"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr ""
@@ -1130,6 +1130,9 @@ msgstr "Eveniment finalizat"
 
 msgid "Back to all stages and events"
 msgstr "Înapoi la toate etapele și evenimentele"
+
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr ""
