@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Yury Rogachev <yury@dhis2.org>, 2021
+# Yury Rogachev <yury@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,19 +28,19 @@ msgid "Errors"
 msgstr "Xatoliklar"
 
 msgid "Feedback"
-msgstr "Qayta aloqa"
+msgstr "Fikr-mulohaza"
 
 msgid "Indicators"
-msgstr "Indikatorlar"
+msgstr "Koʼrsatgichlar"
 
 msgid "Warnings"
 msgstr "Ogohlantirishlar"
 
 msgid "Cancel"
-msgstr "Bekor qilish"
+msgstr "Бекор қилиш"
 
 msgid "Complete"
-msgstr "Toʼldirish"
+msgstr "Bajarildi"
 
 msgid "Warnings found"
 msgstr "Ogohlantirishlar topildi"
@@ -49,7 +49,7 @@ msgid "Abort"
 msgstr "Аbort"
 
 msgid "Save comment"
-msgstr ""
+msgstr "Fikr/izohni saqlang"
 
 msgid "Write comment"
 msgstr "Fikr yozing"
@@ -76,13 +76,13 @@ msgid "Data for offline list not present"
 msgstr "Offlayn roʼyxat uchun maʼlumotlar mavjud emas"
 
 msgid "Last week"
-msgstr "Oxirgi hafta"
+msgstr "Охирги ҳафта"
 
 msgid "Last month"
-msgstr "Oxirgi oy"
+msgstr "Охирги ой"
 
 msgid "Last 3 months"
-msgstr "Oxirgi 3 oy"
+msgstr "Охирги 3 ой"
 
 msgid "Custom range"
 msgstr "Maxsus diapazon"
@@ -103,10 +103,10 @@ msgid "To"
 msgstr "Kimga"
 
 msgid "Max"
-msgstr "Maksimum"
+msgstr "Максимум"
 
 msgid "Min"
-msgstr "Minimum"
+msgstr "Минимум"
 
 msgid "greater than or equal to"
 msgstr "dan katta yoki teng"
@@ -118,7 +118,7 @@ msgid "Contains text"
 msgstr "Matnni oʼz ichiga oladi"
 
 msgid "Yes"
-msgstr "Ha"
+msgstr "Ҳа"
 
 msgid "mm/dd/yyyy"
 msgstr "kun/oy/yil"
@@ -145,7 +145,7 @@ msgid "Select file"
 msgstr "Faylni tanlash"
 
 msgid "No"
-msgstr "Yoʼq"
+msgstr "Йўқ"
 
 msgid "Uploading image"
 msgstr "Rasm yuklanmoqda"
@@ -154,7 +154,7 @@ msgid "Select image"
 msgstr "Rasmni tanlang"
 
 msgid "Clear"
-msgstr "Tozalash"
+msgstr "Аниқ"
 
 msgid "No results"
 msgstr "Natija yoʼq"
@@ -206,7 +206,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
 
 msgid "Update"
-msgstr "Yangilash"
+msgstr "Янгилаш"
 
 msgid "Close"
 msgstr "Yopmoq"
@@ -239,7 +239,7 @@ msgid "Select a category option to start reporting"
 msgstr ""
 
 msgid "New event"
-msgstr "Yangi hodisa"
+msgstr "Yangi tadbir"
 
 msgid "Switch to form view"
 msgstr "Shakl koʼrinishiga oʼtish"
@@ -297,10 +297,10 @@ msgid "Selected Program"
 msgstr "Tanlangan dastur"
 
 msgid "Select"
-msgstr "Tanlang"
+msgstr "Танланг"
 
 msgid "Program"
-msgstr "Programma"
+msgstr "Dastur"
 
 msgid "No programs available."
 msgstr "Hech qanday dastur mavjud emas."
@@ -330,4 +330,4 @@ msgid "Choose a date..."
 msgstr "Sanani tanlang ..."
 
 msgid "Today"
-msgstr "Bugun"
+msgstr "бугун"

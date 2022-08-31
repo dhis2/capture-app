@@ -1,14 +1,15 @@
 # 
 # Translators:
-# phil_dhis2, 2019
-# Viktor Varland <viktor@dhis2.org>, 2020
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
+# phil_dhis2, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +39,7 @@ msgid "Warnings"
 msgstr ""
 
 msgid "Cancel"
-msgstr "ຍົກເລີກ"
+msgstr "Cancel"
 
 msgid "Complete"
 msgstr "ສຳເລັດແລ້ວ"
@@ -104,10 +105,10 @@ msgid "To"
 msgstr "ຖຶງ"
 
 msgid "Max"
-msgstr "ຄ່າໃຫ່ຍສຸດ"
+msgstr "ຄ່າສູງສຸດ"
 
 msgid "Min"
-msgstr "ຄ່າຕໍ່າສຸດ"
+msgstr "ຄ່ານ້ອຍສຸດ"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -146,7 +147,7 @@ msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "ບໍ່"
+msgstr "ບໍ່ແມນ"
 
 msgid "Uploading image"
 msgstr ""
@@ -298,7 +299,7 @@ msgid "Select"
 msgstr "ເລືອກ"
 
 msgid "Program"
-msgstr "ສາຍງານ"
+msgstr "Program"
 
 msgid "No programs available."
 msgstr ""

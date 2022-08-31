@@ -1,15 +1,18 @@
 # 
 # Translators:
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2019
-# phil_dhis2, 2019
-# Viktor Varland <viktor@dhis2.org>, 2020
+# phil_dhis2, 2022
+# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2022
+# Raja Fathurrahim, 2022
+# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2022
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,22 +39,22 @@ msgid "Indicators"
 msgstr "Indikator"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Peringatan"
 
 msgid "Cancel"
-msgstr "batal"
+msgstr "Batal"
 
 msgid "Complete"
 msgstr "Lengkap"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Peringatan ditemukan"
 
 msgid "Abort"
-msgstr ""
+msgstr "Batalkan"
 
 msgid "Save comment"
-msgstr ""
+msgstr "Simpan komentar"
 
 msgid "Write comment"
 msgstr ""
@@ -72,7 +75,7 @@ msgid "Sort"
 msgstr "Urutkan"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Tidak ada even untuk ditampilkan"
 
 msgid "Data for offline list not present"
 msgstr ""
@@ -90,7 +93,7 @@ msgid "Custom range"
 msgstr ""
 
 msgid "to"
-msgstr ""
+msgstr "ke"
 
 msgid "after or equal to"
 msgstr ""
@@ -105,10 +108,10 @@ msgid "To"
 msgstr "Untuk"
 
 msgid "Max"
-msgstr "Maks"
+msgstr "Maksimal"
 
 msgid "Min"
-msgstr "Min"
+msgstr "Minimal"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -117,13 +120,13 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "Contains text"
-msgstr ""
+msgstr "Mengandung teks"
 
 msgid "Yes"
-msgstr "Ya"
+msgstr "Iya"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
 msgstr "Tahun"
@@ -135,25 +138,25 @@ msgid "Days"
 msgstr "Hari"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Mengunggah file"
 
 msgid "selected"
 msgstr "Terpilih"
 
 msgid "Delete"
-msgstr "hapus"
+msgstr "Hapus"
 
 msgid "Select file"
-msgstr ""
+msgstr "Pilih file"
 
 msgid "No"
 msgstr "Tidak"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Mengunggah gambar"
 
 msgid "Select image"
-msgstr ""
+msgstr "Pilih gambar"
 
 msgid "Clear"
 msgstr "Hapus"
@@ -165,10 +168,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Syncing"
 msgstr ""
@@ -180,7 +183,7 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "Mulai lagi"
 
 msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
@@ -198,16 +201,16 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Even tidak dapat dimuat"
 
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Update"
-msgstr "perbarui"
+msgstr "Perbarui"
 
 msgid "Close"
 msgstr "Tutup"
@@ -243,13 +246,13 @@ msgid "New event"
 msgstr "Event baru"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Beralih ke tampilan borang"
 
 msgid "Switch to row view"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
+msgstr "Menyimpan ke"
 
 msgid "in"
 msgstr "dalam"
@@ -258,21 +261,23 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Ini bukanlah even program atau metadata yang rusak. Lihat log untuk "
+"detailnya."
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Simpan dan tambahkan yang lain"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Simpan dan keluar"
 
 msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "Even ditambahkan"
 
 msgid "No events added"
-msgstr ""
+msgstr "Tidak ada even yang ditambahkan"
 
 msgid "Reset"
 msgstr "Reset"
@@ -317,16 +322,16 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Terjadi kesalahan saat menyimpan even"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "Tidak dapat menyimpan even. Lihat log untuk detailnya"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Pilih satu atau beberapa tanggal"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Pilih tanggal..."
 
 msgid "Today"
 msgstr "Hari ini"

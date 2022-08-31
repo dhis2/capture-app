@@ -1,14 +1,15 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# KRG HIS <antonia.bezenchek@informa.pro>, 2020
+# Asos <aso.rezaiy@gmail.com>, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
+# KRG HIS <antonia.bezenchek@informa.pro>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2022\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +27,7 @@ msgid "Column"
 msgstr "ستوون"
 
 msgid "Errors"
-msgstr "هەڵەکان"
+msgstr "هەڵە"
 
 msgid "Feedback"
 msgstr "ڕاووبۆچون"
@@ -62,7 +63,7 @@ msgid "No write access"
 msgstr "مافی نوسینت نیە"
 
 msgid "Save"
-msgstr "خةزن كردن"
+msgstr "تۆمارکردن"
 
 msgid "Uploading data"
 msgstr ""
@@ -77,13 +78,13 @@ msgid "Data for offline list not present"
 msgstr "زانیاریەکان بۆ لیستی ئۆفڵاین بەردەست نیە"
 
 msgid "Last week"
-msgstr "هەفتەی پێشووتر"
+msgstr "هەفتەی ڕابردوو"
 
 msgid "Last month"
 msgstr "مانگی ڕابردوو"
 
 msgid "Last 3 months"
-msgstr "سێ مانگ پێشووتر"
+msgstr "٣ مانگ پێشووتر"
 
 msgid "Custom range"
 msgstr "مەودایەکی ئارەزوومەندانە"
@@ -119,7 +120,7 @@ msgid "Contains text"
 msgstr "نووسینی تێدایە"
 
 msgid "Yes"
-msgstr "ەڵێ"
+msgstr "بەڵێ"
 
 msgid "mm/dd/yyyy"
 msgstr "مانگ/رۆژ/ساڵ"
@@ -140,7 +141,7 @@ msgid "selected"
 msgstr "هەڵبژێردرا"
 
 msgid "Delete"
-msgstr "سرينةوة"
+msgstr "سڕینەوە"
 
 msgid "Select file"
 msgstr "فایل هەڵبژێرە"
@@ -155,7 +156,7 @@ msgid "Select image"
 msgstr "وێنە هەڵبژێرە"
 
 msgid "Clear"
-msgstr "باك"
+msgstr "پاککردنەوە"
 
 msgid "No results"
 msgstr "هیچ ئەنجامێک بەردەست نیە"
@@ -197,7 +198,7 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "حالەتەکە نەتواندرا پیشان بدرێت، ئایا دڵنیای کە بوونی هەیە؟"
+msgstr "حاڵەتەکە نەتواندرا پیشان بدرێت، ئایا دڵنیای کە بوونی هەیە؟"
 
 msgid "Event could not be loaded"
 msgstr "حاڵەتەکە نەتواندرا بهێندرێت"
@@ -206,7 +207,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "ئۆرگانیزەیشن یونتەکە نەتواندرا بهێندرێت"
 
 msgid "Update"
-msgstr "نويَ كردنةوة"
+msgstr "نوێ کردنەوە"
 
 msgid "Close"
 msgstr "داخستن"
@@ -282,7 +283,7 @@ msgid "New"
 msgstr "نوێ"
 
 msgid "Find"
-msgstr "طةران"
+msgstr "بدۆزەوە"
 
 msgid "Selected registering unit"
 msgstr "یەکەی تۆمارکردن هەڵبژێرە"
@@ -300,19 +301,19 @@ msgid "Select"
 msgstr "هەڵبژاردن"
 
 msgid "Program"
-msgstr "بةرنامة"
+msgstr "پرۆگرام"
 
 msgid "No programs available."
 msgstr "هیچ پرۆگرامێک بەردەست نیە"
 
 msgid "Show all"
-msgstr "بيشانداني هةمووان"
+msgstr "پێشاندانی هەمووان"
 
 msgid "Some programs are being filtered."
 msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
 
 msgid "Select program"
-msgstr "بةرنامة هةلبزيرة"
+msgstr "پرۆگرام هەڵبژێرە"
 
 msgid "An error has occured. See log for details"
 msgstr "هەڵەیک ڕوویدا، تکایە سەیری لۆگ فایل بکە بۆ وردەکاری زیاتر"

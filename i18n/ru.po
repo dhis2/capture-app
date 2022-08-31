@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# phil_dhis2, 2019
-# Ulanbek Abakirov <ulans@mail.ru>, 2020
+# Ulanbek Abakirov <ulans@mail.ru>, 2022
+# phil_dhis2, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2020\n"
+"PO-Revision-Date: 2022-08-16 18:45+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgid "Columns to show in table"
 msgstr "Столбы, для показа в таблице"
 
 msgid "Column"
-msgstr "Столбец"
+msgstr "Столбчатая"
 
 msgid "Errors"
 msgstr "Ошибки"
@@ -78,13 +78,13 @@ msgid "Data for offline list not present"
 msgstr "Данные отсутствуют для офлайн списка "
 
 msgid "Last week"
-msgstr "Последняя неделя"
+msgstr "Прошлая неделя"
 
 msgid "Last month"
 msgstr "Последний месяц"
 
 msgid "Last 3 months"
-msgstr "Последние 3 месяца"
+msgstr "Прошлые 3 месяца"
 
 msgid "Custom range"
 msgstr "Пользовательский интервал"
@@ -168,7 +168,7 @@ msgid "Online"
 msgstr "Онлайн"
 
 msgid "Offline"
-msgstr "Оффлайн"
+msgstr "Офлайн"
 
 msgid "Syncing"
 msgstr "Синхронизирую..."
@@ -262,7 +262,7 @@ msgstr ""
 "файле"
 
 msgid "Save and add another"
-msgstr "Сохранить и создать другую"
+msgstr "Сохранить и добавить другую"
 
 msgid "Save and exit"
 msgstr "Сохранить и выйти"
@@ -301,7 +301,7 @@ msgid "Select"
 msgstr "Выбрать"
 
 msgid "Program"
-msgstr "Программа"
+msgstr "Program"
 
 msgid "No programs available."
 msgstr "Нет доступных программ"
