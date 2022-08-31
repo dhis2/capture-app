@@ -123,6 +123,7 @@ export const WidgetEventEditPlain = ({
                             formFoundation={programStage.stageForm}
                             orgUnit={orgUnit}
                             programId={programId}
+                            stageId={programStage.id}
                             enrollmentId={enrollmentId}
                             hasDeleteButton
                         />

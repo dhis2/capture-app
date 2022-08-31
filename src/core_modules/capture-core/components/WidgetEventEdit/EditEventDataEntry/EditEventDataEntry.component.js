@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
@@ -8,7 +9,7 @@ import { getNoFutureEventDateValidatorContainers } from '../DataEntry/fieldValid
 import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
 import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
-
+import { WidgetEventSchedule } from '../../WidgetEventSchedule';
 import {
     DataEntry,
     withSaveHandler,
@@ -36,6 +37,11 @@ import {
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
+
+const tabMode = Object.freeze({
+    REPORT: 'REPORT',
+    SCHEDULE: 'SCHEDULE',
+});
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
@@ -132,6 +138,46 @@ const buildReportDateSettingsFn = () => {
     };
 
     return reportDateSettings;
+};
+
+const buildScheduleDateSettingsFn = () => {
+    const scheduleDateComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            customTooltip: i18n.t('Go to “Schedule” tab to reschedule this event'),
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const scheduleDateSettings = {
+        getComponent: () => scheduleDateComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            width: '100%',
+            calendarWidth: 350,
+            label: props.formFoundation.getLabel('scheduledAt'),
+            disabled: true,
+            calendarMaxMoment: moment(),
+        }),
+        getPropName: () => 'scheduledAt',
+        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return scheduleDateSettings;
 };
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
@@ -253,7 +299,8 @@ const saveHandlerConfig = {
 
 const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
+const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
@@ -277,6 +324,10 @@ type Props = {
     theme: Theme,
 };
 
+type State = {
+    mode: string
+}
+
 type DataEntrySection = {
     placement: $Values<typeof placements>,
     name: string,
@@ -293,7 +344,7 @@ const dataEntrySectionDefinitions = {
     },
 };
 
-class EditEventDataEntryPlain extends Component<Props> {
+class EditEventDataEntryPlain extends Component<Props, State> {
     fieldOptions: { theme: Theme };
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
@@ -303,10 +354,16 @@ class EditEventDataEntryPlain extends Component<Props> {
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
+        this.state = { mode: tabMode.REPORT };
+        this.onHandleSwitchTab = this.onHandleSwitchTab.bind(this);
     }
+
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
+
+    onHandleSwitchTab = newMode => this.setState({ mode: newMode })
+
     render() {
         const {
             orgUnit,
@@ -318,18 +375,41 @@ class EditEventDataEntryPlain extends Component<Props> {
             classes,
             ...passOnProps
         } = this.props;
+
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <DataEntryWrapper
-                id={'singleEvent'}
-                onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
-                onUpdateFormField={onUpdateField(orgUnit, programId)}
-                onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
-                onSave={onSave(orgUnit)}
-                fieldOptions={this.fieldOptions}
-                dataEntrySections={this.dataEntrySections}
-                {...passOnProps}
-            />
+            <div>
+                <TabBar dataTest="edit-event-tab-bar">
+                    <Tab
+                        key="report-tab"
+                        selected={this.state.mode === tabMode.REPORT}
+                        onClick={() => this.onHandleSwitchTab(tabMode.REPORT)}
+                        dataTest="edit-event-report-tab"
+                    >{i18n.t('Report')}</Tab>
+                    <Tab
+                        key="schedule-tab"
+                        selected={this.state.mode === tabMode.SCHEDULE}
+                        onClick={() => this.onHandleSwitchTab(tabMode.SCHEDULE)}
+                        dataTest="edit-event-schedule-tab"
+                    >{i18n.t('Schedule')}</Tab>
+                </TabBar>
+                {this.state.mode === tabMode.REPORT && <DataEntryWrapper
+                    id={'singleEvent'}
+                    onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
+                    onUpdateFormField={onUpdateField(orgUnit, programId)}
+                    onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
+                    onSave={onSave(orgUnit)}
+                    fieldOptions={this.fieldOptions}
+                    dataEntrySections={this.dataEntrySections}
+                    {...passOnProps}
+                />}
+
+                {this.state.mode === tabMode.SCHEDULE && <WidgetEventSchedule
+                    programId={programId}
+                    onSave={onSave}
+                    orgUnitId={orgUnit.id}
+                    {...passOnProps}
+                />}
+            </div>
         );
     }
 }

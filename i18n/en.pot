@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-07-07T15:10:40.948Z\n"
-"PO-Revision-Date: 2022-07-07T15:10:40.948Z\n"
+"POT-Creation-Date: 2022-08-31T08:15:48.460Z\n"
+"PO-Revision-Date: 2022-08-31T08:15:48.460Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1122,6 +1122,9 @@ msgstr "Delete event"
 
 msgid "Yes, delete event"
 msgstr "Yes, delete event"
+
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr "Go to “Schedule” tab to reschedule this event"
 
 msgid "Event completed"
 msgstr "Event completed"
