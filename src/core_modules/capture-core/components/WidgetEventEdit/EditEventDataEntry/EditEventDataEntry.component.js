@@ -392,7 +392,8 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                         dataTest="edit-event-schedule-tab"
                     >{i18n.t('Schedule')}</Tab>
                 </TabBar>
-                {this.state.mode === tabMode.REPORT && <DataEntryWrapper
+                {this.state.mode === tabMode.REPORT && // $FlowFixMe[cannot-spread-inexact] automated comment
+                <DataEntryWrapper
                     id={'singleEvent'}
                     onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
                     onUpdateFormField={onUpdateField(orgUnit, programId)}
@@ -403,7 +404,8 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                     {...passOnProps}
                 />}
 
-                {this.state.mode === tabMode.SCHEDULE && <WidgetEventSchedule
+                {this.state.mode === tabMode.SCHEDULE && // $FlowFixMe[cannot-spread-inexact] automated comment
+                <WidgetEventSchedule
                     programId={programId}
                     onSave={onSave}
                     orgUnitId={orgUnit.id}

@@ -67,6 +67,7 @@ type Props = {
         labelVertical: string,
         required: string,
         iconContainer: string,
+        tooltipIcon: string,
     },
     dataElementDescription?: ?React.Element<any>
 };
