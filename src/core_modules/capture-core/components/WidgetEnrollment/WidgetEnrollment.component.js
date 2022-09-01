@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useCallback, type ComponentType } from 'react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import {
     IconClock16,
     IconDimensionOrgUnit16,
@@ -41,6 +41,12 @@ const getGeometryType = geometryType =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
 const getEnrollmentDateLabel = program => program.enrollmentDateLabel || i18n.t('Enrollment date');
 const getIncidentDateLabel = program => program.incidentDateLabel || i18n.t('Incident date');
+const getLastUpdatedAt = (serverTimeZoneId, enrollment) => (
+    i18n.t('Last updated {{date}}', {
+        date: serverTimeZoneId
+            ? moment.tz(enrollment.updatedAt, serverTimeZoneId).fromNow()
+            : moment(enrollment.updatedAt).fromNow(),
+    }));
 
 export const WidgetEnrollmentPlain = ({
     classes,
@@ -55,10 +61,10 @@ export const WidgetEnrollmentPlain = ({
     onDelete,
     onAddNew,
     onError,
+    serverTimeZoneId,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const geometryType = getGeometryType(enrollment?.geometry?.type);
-
 
     return (
         <div data-test="widget-enrollment">
@@ -132,9 +138,7 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-clock">
                                 <IconClock16 color={colors.grey700} />
                             </span>
-                            {i18n.t('Last updated {{date}}', {
-                                date: moment(enrollment.updatedAt).fromNow(),
-                            })}
+                            {getLastUpdatedAt(serverTimeZoneId, enrollment)}
                         </div>
 
                         {enrollment.geometry && (
