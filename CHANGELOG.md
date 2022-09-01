@@ -1,3 +1,10 @@
+## [100.12.14](https://github.com/dhis2/capture-app/compare/v100.12.13...v100.12.14) (2022-09-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13545] format updatedAt with the serverTimeZoneId ([#2947](https://github.com/dhis2/capture-app/issues/2947)) ([30f7396](https://github.com/dhis2/capture-app/commit/30f7396d1d396881b7732ac21d475bacf43642a0))
+
 ## [100.12.13](https://github.com/dhis2/capture-app/compare/v100.12.12...v100.12.13) (2022-08-31)
 
 
