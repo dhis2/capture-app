@@ -1,3 +1,10 @@
+# [100.13.0](https://github.com/dhis2/capture-app/compare/v100.12.14...v100.13.0) (2022-09-01)
+
+
+### Features
+
+* [DHIS2-12140] working list based on displayfrontpagelist ([#2778](https://github.com/dhis2/capture-app/issues/2778)) ([3720b43](https://github.com/dhis2/capture-app/commit/3720b431809bac61a8ff0cd1de2e024034ebb8f7))
+
 ## [100.12.14](https://github.com/dhis2/capture-app/compare/v100.12.13...v100.12.14) (2022-09-01)
 
 
