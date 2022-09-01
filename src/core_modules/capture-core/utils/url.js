@@ -12,6 +12,7 @@ export type Url = {
     eventId?: string,
     tab?: string,
     viewEventId?: string,
+    selectedTemplateId?: string,
 }
 
 export const deriveUrlQueries = (state: Object) => {

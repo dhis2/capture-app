@@ -150,6 +150,20 @@ Then('you should see no results found', () => {
         .should('exist');
 });
 
+When(/^the user selects the program (.*)$/, (program) => {
+    cy.get('.Select')
+        .type(program.slice(0, -1));
+    cy.contains(program)
+        .click();
+});
+
+When(/^the user selects the org unit (.*)$/, (orgUnit) => {
+    cy.get('[data-test="capture-ui-input"]')
+        .type(orgUnit.slice(0, -1));
+    cy.contains(orgUnit)
+        .click();
+});
+
 When(/^you opt in to use the new enrollment Dashboard for (.*)$/, (program) => {
     cy.server();
     cy.buildApiUrl('**/dataStore/capture/useNewDashboard').then(() => { cy.request('POST'); });

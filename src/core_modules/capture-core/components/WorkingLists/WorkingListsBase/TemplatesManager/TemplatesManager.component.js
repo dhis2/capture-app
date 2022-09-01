@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext, type ComponentType } from 'react';
+import React, { useContext, useCallback, type ComponentType } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { ListViewConfig } from '../ListViewConfig';
@@ -13,7 +13,6 @@ import type { Props } from './templatesManager.types';
 
 const TemplatesManagerPlain = (props: Props) => {
     const { templates, ...passOnProps } = props;
-
     const {
         currentTemplate,
         onSelectTemplate,
@@ -26,7 +25,7 @@ const TemplatesManagerPlain = (props: Props) => {
         throw Error('Templates and currentTemplate needs to be set during templates loading. See console for details');
     }
 
-    const handleSelectTemplate = React.useCallback((template: WorkingListTemplate) => {
+    const handleSelectTemplate = useCallback((template: WorkingListTemplate) => {
         if (template.id === currentTemplate.id) {
             const defaultTemplate = templates.find(t => t.isDefault);
             // $FlowFixMe
