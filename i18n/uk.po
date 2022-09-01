@@ -875,7 +875,7 @@ msgid "If none of search results match, you can create new "
 msgstr ""
 
 msgid "Create new"
-msgstr ""
+msgstr "Створити новий"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
