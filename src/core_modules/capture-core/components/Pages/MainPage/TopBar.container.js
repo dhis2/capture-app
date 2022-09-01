@@ -27,7 +27,7 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories }: TopBarProps
     const dispatch = useDispatch();
     const { setProgramId } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
-    const { resetProgramId } = useResetProgramId();
+    const { resetProgramIdAndSelectedTemplateId } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
     const dispatchOnSetCategoryOption = useCallback(
         (categoryOption: Object, categoryId: string) => {
@@ -60,7 +60,7 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories }: TopBarProps
             selectedCategories={selectedCategories}
             onSetProgramId={id => setProgramId(id)}
             onSetOrgUnit={id => dispatchOnSetOrgUnit(id)}
-            onResetProgramId={() => resetProgramId()}
+            onResetProgramId={() => resetProgramIdAndSelectedTemplateId()}
             onResetOrgUnitId={() => resetOrgUnitId()}
             onSetCategoryOption={dispatchOnSetCategoryOption}
             onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}

@@ -3,12 +3,20 @@
 type PassOnProps = $ReadOnly<{|
     programId: string,
     orgUnitId: string,
+    selectedTemplateId?: string,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
+|}>;
+
+export type PlainProps = $ReadOnly<{|
+    ...PassOnProps,
+    setShowAccessible: () => void,
+    MainPageStatus: boolean,
+    ...CssClasses,
 |}>;
 
 export type Props = $ReadOnly<{|
     ...PassOnProps,
-    setShowAccessible: () => void,
-    MainPageStatus: boolean,
-    selectedCategories: any,
-    ...CssClasses,
+    ...PlainProps,
+    error: boolean,
+    ready: boolean,
 |}>;
