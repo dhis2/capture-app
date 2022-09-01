@@ -40,9 +40,18 @@ export const workingListsCommonActionTypes = {
     TEMPLATE_SHARING_SETTINGS_SET: 'WorkingListsTemplateSharingSettingsSet',
 };
 
-export const fetchTemplates =
-    (programId: string, storeId: string, workingListsType: string) =>
-        actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH)({ programId, storeId, workingListsType });
+export const fetchTemplates = (
+    programId: string,
+    storeId: string,
+    workingListsType: string,
+    selectedTemplateId?: string,
+) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH)({
+        programId,
+        storeId,
+        selectedTemplateId,
+        workingListsType,
+    });
 
 export const fetchTemplatesSuccess = (templates: Array<any>, defaultTemplateId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH_SUCCESS)({ templates, defaultTemplateId, storeId });
@@ -65,8 +74,8 @@ export const updateTemplateSuccess = (templateId: string, criteria: Object, data
 export const updateTemplateError = (templateId: string, criteria: Object, data: Object) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR)({ templateId, criteria, ...data });
 
-export const addTemplate = (name: string, criteria: Object, data: Object) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD)({ name, criteria, ...data });
+export const addTemplate = (name: string, criteria: Object, data: Object, callBacks?: Object) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD)({ name, criteria, ...data, callBacks });
 
 export const addTemplateSuccess = (templateId: string, clientId: Object, data: Object) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD_SUCCESS)({ templateId, clientId, ...data });
@@ -77,8 +86,16 @@ export const addTemplateError = (clientId: Object, data: Object) =>
 export const deleteTemplate = (
     template: Object,
     programId: string,
-    { storeId, workingListsType }: { storeId: string, workingListsType: string}) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATE_DELETE)({ template, programId, storeId, workingListsType });
+    { storeId, workingListsType }: { storeId: string, workingListsType: string },
+    callBacks?: Object,
+) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_DELETE)({
+        template,
+        programId,
+        storeId,
+        workingListsType,
+        callBacks,
+    });
 
 export const deleteTemplateSuccess = (template: Object, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_DELETE_SUCCESS)({ template, storeId });
