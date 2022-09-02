@@ -18,14 +18,17 @@ import {
 } from '../../../WorkingListsCommon';
 import { getTemplates } from './getTemplates';
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
+import { getLocationQuery } from '../../../../../utils/routing';
 
 export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         filter(({ payload: { workingListsType } }) => workingListsType === TEI_WORKING_LISTS_TYPE),
-        concatMap(({ payload: { storeId, programId } }) => {
+        concatMap(({ payload: { storeId, programId, selectedTemplateId } }) => {
             const promise = getTemplates(programId, querySingleResource)
-                .then(({ templates, defaultTemplateId }) => fetchTemplatesSuccess(templates, defaultTemplateId, storeId))
+                .then(({ templates, defaultTemplateId }) =>
+                    fetchTemplatesSuccess(templates, selectedTemplateId || defaultTemplateId, storeId),
+                )
                 .catch((error) => {
                     log.error(errorCreator(error)({ epic: 'retrieveTemplatesEpic' }));
                     return fetchTemplatesError(i18n.t('an error occurred loading Tracked entity instance lists'), storeId);
@@ -62,6 +65,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
                     assignedUserMode,
                     assignedUsers,
                 },
+                callBacks: { onChangeTemplate },
             } = action.payload;
             const trackedEntityInstanceFilters = {
                 name,
@@ -85,6 +89,8 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore, { m
             })
                 .then((result) => {
                     const isActiveTemplate = store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
+                    onChangeTemplate && onChangeTemplate(result.response.uid);
+
                     return addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate });
                 })
                 .catch((error) => {
@@ -113,13 +119,18 @@ export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore, 
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         filter(({ payload: { workingListsType } }) => workingListsType === TEI_WORKING_LISTS_TYPE),
-        concatMap(({ payload: { template, storeId } }) => {
+        concatMap(({ payload: { template, storeId, callBacks: { onChangeTemplate } } }) => {
             const requestPromise = mutate({
                 resource: 'trackedEntityInstanceFilters',
                 id: template.id,
                 type: 'delete',
             })
-                .then(() => deleteTemplateSuccess(template, storeId))
+                .then(() => {
+                    const { programId } = getLocationQuery();
+                    onChangeTemplate && onChangeTemplate(`${programId}-default`);
+
+                    return deleteTemplateSuccess(template, storeId);
+                })
                 .catch((error) => {
                     log.error(
                         errorCreator('could not delete template')({

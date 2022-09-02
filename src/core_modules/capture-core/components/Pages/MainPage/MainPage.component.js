@@ -1,12 +1,13 @@
 // @flow
 import React, { type ComponentType } from 'react';
+import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import { WorkingListsType } from './WorkingListsType';
-import type { Props } from './mainPage.types';
+import type { Props, PlainProps } from './mainPage.types';
 import { MainPageStatuses } from './MainPage.constants';
 import { WithoutOrgUnitSelectedMessage } from './WithoutOrgUnitSelectedMessage/WithoutOrgUnitSelectedMessage';
 import { WithoutCategorySelectedMessage } from './WithoutCategorySelectedMessage/WithoutCategorySelectedMessage';
-import { TopBar } from './TopBar.container';
+import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
 const getStyles = () => ({
     listContainer: {
@@ -14,20 +15,8 @@ const getStyles = () => ({
     },
 });
 
-const MainPagePlain = ({
-    MainPageStatus,
-    setShowAccessible,
-    programId,
-    selectedCategories,
-    classes,
-    ...passOnProps
-}: Props) => (
+const MainPagePlain = ({ MainPageStatus, setShowAccessible, programId, classes, ...passOnProps }: PlainProps) => (
     <>
-        <TopBar
-            programId={programId}
-            orgUnitId={passOnProps?.orgUnitId}
-            selectedCategories={selectedCategories}
-        />
         {MainPageStatus === MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
             <WithoutOrgUnitSelectedMessage programId={programId} setShowAccessible={setShowAccessible} />
         )}
@@ -41,5 +30,8 @@ const MainPagePlain = ({
         )}
     </>
 );
-
-export const MainPageComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(MainPagePlain);
+export const MainPageComponent: ComponentType<$Diff<Props, CssClasses>> = compose(
+    withLoadingIndicator(),
+    withErrorMessageHandler(),
+    withStyles(getStyles),
+)(MainPagePlain);

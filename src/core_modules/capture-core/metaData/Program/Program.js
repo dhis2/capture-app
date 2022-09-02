@@ -24,6 +24,7 @@ export class Program {
     _programRules: Array<ProgramRule>;
     _programRuleVariables: Array<ProgramRuleVariable>;
     _icon: Icon | void;
+    _displayFrontPageList: boolean;
 
     constructor(initFn: ?(_this: Program) => void) {
         this.programRules = [];
@@ -103,6 +104,14 @@ export class Program {
     }
     get icon(): Icon | void {
         return this._icon;
+    }
+
+    set displayFrontPageList(displayFrontPageList: boolean) {
+        this._displayFrontPageList = displayFrontPageList;
+    }
+
+    get displayFrontPageList() {
+        return this._displayFrontPageList;
     }
 
     get stages(): Map<string, ProgramStage> {
