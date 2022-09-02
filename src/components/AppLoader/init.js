@@ -129,7 +129,10 @@ async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function) {
     await buildMetaDataAsync(dbLocale);
 }
 
-async function initializeSystemSettingsAsync(uiLocale: string, systemSettings: Object) {
+async function initializeSystemSettingsAsync(
+    uiLocale: string,
+    systemSettings: { dateFormat: string, serverTimeZoneId: string },
+) {
     const systemSettingsCacheData = await cacheSystemSettings(uiLocale, systemSettings);
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
@@ -150,9 +153,14 @@ export async function initializeAsync(
         },
     });
     rulesEngine.setSelectedUserRoles(currentUser.userRoles.map(({ id }) => id));
+
     const systemSettings = await onQueryApi({
-        resource: 'systemSettings',
+        resource: 'system/info',
+        params: {
+            fields: 'dateFormat,serverTimeZoneId',
+        },
     });
+
     // initialize storage controllers
     try {
         await initControllersAsync(onCacheExpired, currentUser);

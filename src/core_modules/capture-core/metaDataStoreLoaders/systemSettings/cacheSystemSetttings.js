@@ -8,15 +8,22 @@ function isLangRTL(code) {
     return langs.includes(code) || prefixed.filter(c => code.startsWith(c)).length > 0;
 }
 
-export async function cacheSystemSettings(uiLocale: string, systemSettings: Object) {
+export async function cacheSystemSettings(
+    uiLocale: string,
+    systemSettings: { dateFormat: string, serverTimeZoneId: string },
+) {
     const systemSettingsArray = [
         {
             id: 'dateFormat',
-            value: systemSettings.keyDateFormat.toUpperCase(),
+            value: systemSettings.dateFormat.toUpperCase(),
         },
         {
             id: 'dir',
             value: isLangRTL(uiLocale) ? 'rtl' : 'ltr',
+        },
+        {
+            id: 'serverTimeZoneId',
+            value: systemSettings.serverTimeZoneId,
         },
     ];
 
