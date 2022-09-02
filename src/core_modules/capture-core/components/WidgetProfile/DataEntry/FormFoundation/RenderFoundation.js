@@ -172,13 +172,17 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
         if (programTrackedEntityAttributes) {
             for (const programSection of programSections) {
                 const builtProgramSection = buildProgramSection(programSection);
-                const programTrackedEntityAttributesFiltered = programTrackedEntityAttributes.filter(
-                    trackedEntityAttribute =>
-                        builtProgramSection.includes(trackedEntityAttribute.trackedEntityAttributeId),
-                );
+                const trackedEntityAttributeDictionary = programTrackedEntityAttributes
+                    .reduce((acc, trackedEntityAttribute) => {
+                        if (trackedEntityAttribute.trackedEntityAttributeId) {
+                            acc[trackedEntityAttribute.trackedEntityAttributeId] = trackedEntityAttribute;
+                        }
+                        return acc;
+                    }, {});
+
                 // eslint-disable-next-line no-await-in-loop
                 section = await buildSection({
-                    programTrackedEntityAttributes: programTrackedEntityAttributesFiltered,
+                    programTrackedEntityAttributes: builtProgramSection.map(id => trackedEntityAttributeDictionary[id]),
                     trackedEntityAttributes,
                     optionSets,
                     sectionCustomLabel: programSection.displayFormName,
