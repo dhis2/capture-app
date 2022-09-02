@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
+"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -103,8 +103,8 @@ msgstr "Proporcione una fecha y hora válidas"
 msgid "Please provide a valid time"
 msgstr "Proporcione una hora válida"
 
-msgid "Please provide a valid percentage"
-msgstr "Proporcione un porcentaje válido"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "Proporcione una URL válida"
@@ -849,21 +849,6 @@ msgstr ""
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
-msgid "Back"
-msgstr "Atrás"
-
-msgid "Search for {{titleText}}"
-msgstr "Buscar para {{titleText}}"
-
-msgid "Search for"
-msgstr "Buscar por"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"También puede elegir un programa de la barra superior y buscar en ese "
-"programa"
-
 msgid "No results found"
 msgstr "No results found"
 
@@ -883,27 +868,26 @@ msgstr "Volver a buscar"
 msgid "An error has occurred"
 msgstr "Se ha producido un error"
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-"Hay un problema con esta búsqueda, cambie los términos de búsqueda o vuelva "
-"a intentarlo más tarde. Para obtener más detalles, abra la pestaña Consola "
-"de las herramientas para desarrolladores"
-
 msgid "Too many results"
 msgstr "Demasiados resultados"
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-"Esta búsqueda arrojó demasiados resultados para mostrar. Intente cambiar los"
-" términos de búsqueda o buscar por más atributos para limitar los "
-"resultados."
-
 msgid "Cannot search in all programs"
 msgstr ""
+
+msgid "Back"
+msgstr "Atrás"
+
+msgid "Search for {{titleText}}"
+msgstr "Buscar para {{titleText}}"
+
+msgid "Search for"
+msgstr "Buscar por"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"También puede elegir un programa de la barra superior y buscar en ese "
+"programa"
 
 msgid "Choose a type to start searching"
 msgstr "Elija un tipo para comenzar a buscar"
@@ -932,6 +916,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Buscar en todos los programas"
+
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
 
 msgid "events"
 msgstr "Eventos"
@@ -1097,6 +1087,9 @@ msgstr "Fecha de inscripción"
 msgid "Incident date"
 msgstr "Fecha del incidente"
 
+msgid "Last updated {{date}}"
+msgstr "Última actualización {{date}}"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 "No se pudo cargar el widget de inscripción. Por favor, inténtelo de nuevo "
@@ -1110,9 +1103,6 @@ msgstr "Comenzó en {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Propiedad de {{ownerOrgUnit}}"
-
-msgid "Last updated {{date}}"
-msgstr "Última actualización {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelar"

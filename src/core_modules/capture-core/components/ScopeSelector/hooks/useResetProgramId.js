@@ -29,5 +29,15 @@ export const useResetProgramId = () => {
         history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
     };
 
-    return { resetProgramId, resetProgramIdAndEnrollmentContext, resetProgramIdAndTeiId };
+    const resetProgramIdAndSelectedTemplateId = (pageToPush: string = pathname) => {
+        const { programId, selectedTemplateId, ...restOfQueries } = getLocationQuery();
+        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+    };
+
+    return {
+        resetProgramId,
+        resetProgramIdAndEnrollmentContext,
+        resetProgramIdAndTeiId,
+        resetProgramIdAndSelectedTemplateId,
+    };
 };

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
+"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -95,8 +95,8 @@ msgstr "Oppgi en gyldig dato og tid"
 msgid "Please provide a valid time"
 msgstr "Oppgi en gyldig tid"
 
-msgid "Please provide a valid percentage"
-msgstr "Oppgi en gyldig prosentandel"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "Oppgi en gyldig url"
@@ -838,19 +838,6 @@ msgstr ""
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
-msgid "Back"
-msgstr "Tilbake"
-
-msgid "Search for {{titleText}}"
-msgstr "Søk etter {{titleText}}"
-
-msgid "Search for"
-msgstr "Søk etter"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "Du kan også velge et program fra topplinjen og søke i det programmet"
-
 msgid "No results found"
 msgstr "Ingen resultater funnet"
 
@@ -868,25 +855,24 @@ msgstr "Tilbake til søk"
 msgid "An error has occurred"
 msgstr "Det har oppstått en feil"
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-"Det er et problem med dette søket. Endre søkeordene eller prøv igjen senere."
-" For mer informasjon, åpne konsollfanen i Utviklerverktøy"
-
 msgid "Too many results"
 msgstr "For mange resultat"
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-"Dette søket returnerte for mange resultater til å vises. Prøv å endre "
-"søkeord eller søke etter flere attributter for å begrense resultatene."
-
 msgid "Cannot search in all programs"
 msgstr ""
+
+msgid "Back"
+msgstr "Tilbake"
+
+msgid "Search for {{titleText}}"
+msgstr "Søk etter {{titleText}}"
+
+msgid "Search for"
+msgstr "Søk etter"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "Du kan også velge et program fra topplinjen og søke i det programmet"
 
 msgid "Choose a type to start searching"
 msgstr "Velg en type for å begynne å søke"
@@ -915,6 +901,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Søk i alle programmer"
+
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
 
 msgid "events"
 msgstr "hendelser"
@@ -1080,6 +1072,9 @@ msgstr "Registreringsdato"
 msgid "Incident date"
 msgstr "Forekomstdato"
 
+msgid "Last updated {{date}}"
+msgstr "Sist oppdatert {{date}}"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "Registreringsmodulen kunne ikke lastes inn. Prøv igjen senere"
 
@@ -1091,9 +1086,6 @@ msgstr "Begynt på {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Eid av {{ownerOrgUnit}}"
-
-msgid "Last updated {{date}}"
-msgstr "Sist oppdatert {{date}}"
 
 msgid "Cancelled"
 msgstr "Kansellert"

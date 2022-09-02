@@ -50,6 +50,12 @@ When(/^you click the (.*) button/, (buttonText) => {
     cy.wait('@postEvents');
 });
 
+When(/^you click the button to (.*) without post request/, (buttonText) => {
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains(buttonText)
+        .click();
+});
+
 When('the enrollment overview is finished loading', () => {
     cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
     cy.get('[data-test="dhis2-uicore-datatable"]')

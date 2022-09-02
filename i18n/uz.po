@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
+"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -93,8 +93,8 @@ msgstr "Илтимос, тегишли сана ва вақтни кўрсати
 msgid "Please provide a valid time"
 msgstr "Илтимос, тўғри вақтни кўрсатинг"
 
-msgid "Please provide a valid percentage"
-msgstr "Илтимос, тегишли фоизни тақдим этинг"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "Илтимос, ҳақиқий URL манзилни кўрсатинг"
@@ -840,21 +840,6 @@ msgstr ""
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
-msgid "Back"
-msgstr "Орқага"
-
-msgid "Search for {{titleText}}"
-msgstr " {{titleText}} орқали қидириш"
-
-msgid "Search for"
-msgstr "Қидириш"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Бундан ташқари, юқори сатрда дастурни танлашингиз ва ушбу дастур ичида "
-"қидиришингиз мумкин"
-
 msgid "No results found"
 msgstr "Ҳеч қандай натижа топилмади"
 
@@ -874,27 +859,26 @@ msgstr "Қидирувга қайтиш"
 msgid "An error has occurred"
 msgstr "Хатолик юз берди"
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-"Ушбу қидирувда муаммо аниқланди, Илтимос, қидирув шартларини ўзгартиринг ёки"
-" кейинроқ қайта уриниб кўринг. Қўшимча маълумот олиш учун Созловчи "
-"воситаларининг Консол ёрлиғини очинг."
-
 msgid "Too many results"
 msgstr "Натижа жуда кўп"
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-"Ушбу қидирув жуда кўп натижаларни кўрсатди. Натижалар миқдорини камайтириш "
-"учун қидирув сўзларини ўзгартиришга ёки бошқа хусусиятлар бўйича қидиришга "
-"ҳаракат қилинг."
-
 msgid "Cannot search in all programs"
 msgstr ""
+
+msgid "Back"
+msgstr "Орқага"
+
+msgid "Search for {{titleText}}"
+msgstr " {{titleText}} орқали қидириш"
+
+msgid "Search for"
+msgstr "Қидириш"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Бундан ташқари, юқори сатрда дастурни танлашингиз ва ушбу дастур ичида "
+"қидиришингиз мумкин"
 
 msgid "Choose a type to start searching"
 msgstr "Қидирув турини танланг ва қидиришни бошланг"
@@ -923,6 +907,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Барча дастурларда қидириш"
+
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
 
 msgid "events"
 msgstr "ҳодиса/тадбирлар"
@@ -1086,6 +1076,9 @@ msgstr "Қайд этилган сана"
 msgid "Incident date"
 msgstr "Ҳодиса санаси"
 
+msgid "Last updated {{date}}"
+msgstr " {{date}}да охирги марта янгиланган"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 "Қайд этиш виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
@@ -1098,9 +1091,6 @@ msgstr " {{orgUnitName}} да бошланган"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr " {{orgUnitName}} эгалиги асосида"
-
-msgid "Last updated {{date}}"
-msgstr " {{date}}да охирги марта янгиланган"
 
 msgid "Cancelled"
 msgstr "Бекор қилинди"
