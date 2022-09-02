@@ -1,5 +1,6 @@
 // @flow
 import React, { useState, type ComponentType } from 'react';
+import { withStyles } from '@material-ui/core';
 import {
     DataTableBody,
     DataTableHead,
@@ -11,23 +12,30 @@ import {
     spacers,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import type { Url } from '../../../utils/url';
+
 
 type Props = {
     headers: Array<Object>,
     linkedEntityData: Array<Object>,
-     ...CssClasses,
+    onLinkedRecordClick: (parameters: Url) => void,
+    ...CssClasses,
 }
 const DEFAULT_NUMBER_OF_ROW = 5;
 
 const styles = {
+    row: {
+        '&:hover': {
+            cursor: 'pointer',
+        },
+    },
     button: {
         marginTop: `${spacers.dp8}`,
     },
 };
 
 const RelationshipsTablePlain = (props: Props) => {
-    const { headers, linkedEntityData, classes } = props;
+    const { headers, linkedEntityData, classes, onLinkedRecordClick } = props;
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
     function renderHeader() {
@@ -50,17 +58,23 @@ const RelationshipsTablePlain = (props: Props) => {
         if (!linkedEntityData) {
             return null;
         }
-        return linkedEntityData.slice(0, displayedRowNumber).map(({ id: targetId, values }) => (
-            <DataTableRow key={targetId}>
-                {headers.map(({ id }) => {
-                    const entity = values.find(item => item.id === id);
-                    return (<DataTableCell key={id}>
-                        {entity?.value}
-                    </DataTableCell>
-                    );
-                })}
-            </DataTableRow>
-        ));
+        return linkedEntityData
+            .slice(0, displayedRowNumber)
+            .map(({ id: targetId, values, parameters }) => (
+                <DataTableRow key={targetId}>
+                    {headers.map(({ id }) => {
+                        const entity = values.find(item => item.id === id);
+                        return (<DataTableCell
+                            className={classes.row}
+                            key={id}
+                            onClick={() => onLinkedRecordClick(parameters)}
+                        >
+                            {entity?.value}
+                        </DataTableCell>
+                        );
+                    })}
+                </DataTableRow>
+            ));
     };
     const renderShowMoreButton = () => {
         const shouldShowMore = linkedEntityData.length > DEFAULT_NUMBER_OF_ROW

@@ -5,14 +5,14 @@ import { useLinkedEntityGroups } from '../hooks/useLinkedEntityGroups';
 import { RelationshipsWidget } from '../RelationshipsComponent';
 import type { Props } from './types';
 
-export const WidgetEventsRelationships = ({ eventId, relationships, relationshipTypes, onAddRelationship }: Props) => {
+export const WidgetEventsRelationships = ({ eventId, relationships, relationshipTypes, ...passOnProps }: Props) => {
     const { relationships: eventsRelationships } = useLinkedEntityGroups(eventId, relationshipTypes, relationships);
 
     return (
         <RelationshipsWidget
             title={i18n.t("Event's Relationships")}
             relationships={eventsRelationships}
-            onAddRelationship={onAddRelationship}
+            {...passOnProps}
         />
     );
 };

@@ -2,6 +2,7 @@
 import type { ProgramStage } from '../../../metaData';
 import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
 import type { InputRelationship, RelationshipType } from '../../WidgetRelationships/common.types';
+import type { Url } from '../../../utils/url';
 
 export type PlainProps = {|
     programStage: ?ProgramStage,
@@ -24,6 +25,7 @@ export type PlainProps = {|
     onDelete: () => void,
     onAddNew: () => void,
     onGoBack: () => void,
+    onLinkedRecordClick: (parameters: Url) => void,
     onEnrollmentError: (message: string) => void,
     pageStatus: string,
     eventStatus?: string,

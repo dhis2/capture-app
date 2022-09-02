@@ -5,11 +5,13 @@ import { withStyles } from '@material-ui/core';
 import { Widget } from '../../Widget';
 import { Relationships } from './Relationships.component';
 import type { OutputRelationship } from '../common.types';
+import type { Url } from '../../../utils/url';
 
 type Props = {|
     relationships: Array<OutputRelationship>,
     title: string,
     onAddRelationship: () => void,
+    onLinkedRecordClick: (parameters: Url) => void,
     ...CssClasses,
 |}
 

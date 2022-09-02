@@ -13,7 +13,7 @@ import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.comp
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
+import { clickLinkedRecord, deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
@@ -78,6 +78,9 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const { enrollment: enrollmentSite, relationships } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const onGoBack = () =>
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
+    const onLinkedRecordClick = (parameters) => {
+        dispatch(clickLinkedRecord(parameters));
+    };
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name;
@@ -125,6 +128,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            onLinkedRecordClick={onLinkedRecordClick}
             onEnrollmentError={onEnrollmentError}
             eventStatus={event?.status}
         />

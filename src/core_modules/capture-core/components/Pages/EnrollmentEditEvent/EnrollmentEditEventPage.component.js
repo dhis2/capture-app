@@ -66,6 +66,7 @@ const EnrollmentEditEventPagePain = ({
     onAddNew,
     classes,
     onGoBack,
+    onLinkedRecordClick,
     orgUnitId,
     eventDate,
     eventStatus,
@@ -122,12 +123,14 @@ const EnrollmentEditEventPagePain = ({
                         relationships={relationships}
                         relationshipTypes={teiRelationshipTypes}
                         onAddRelationship={() => {}}
+                        onLinkedRecordClick={onLinkedRecordClick}
                     />
                     <WidgetEventsRelationships
                         eventId={eventId}
                         relationships={eventRelationships}
                         relationshipTypes={eventRelationshipTypes}
                         onAddRelationship={() => {}}
+                        onLinkedRecordClick={onLinkedRecordClick}
                     />
                     {!hideWidgets.feedback && (
                         <WidgetFeedback

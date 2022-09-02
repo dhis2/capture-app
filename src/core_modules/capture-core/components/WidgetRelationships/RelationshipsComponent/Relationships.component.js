@@ -4,10 +4,12 @@ import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum, spacers, colors, Button } from '@dhis2/ui';
 import { RelationshipsTable } from './RelationshipsTable.component';
+import type { Url } from '../../../utils/url';
 
 type Props = {
     relationships: Object,
     onAddRelationship: () => void,
+    onLinkedRecordClick: (parameters: Url) =>void,
     ...CssClasses,
 }
 
@@ -29,7 +31,7 @@ const styles = {
         overflow: 'scroll',
     },
 };
-const RelationshipsPlain = ({ relationships, classes, onAddRelationship }: Props) => (
+const RelationshipsPlain = ({ relationships, classes, onAddRelationship, onLinkedRecordClick }: Props) => (
     <div
         data-test="relationships"
         className={classes.container}
@@ -39,7 +41,7 @@ const RelationshipsPlain = ({ relationships, classes, onAddRelationship }: Props
                 const { relationshipName, id, ...passOnProps } = relationship;
                 return (<div key={id} className={classes.wrapper}>
                     <div className={classes.title} >{relationshipName}</div>
-                    <RelationshipsTable {...passOnProps} />
+                    <RelationshipsTable {...passOnProps} onLinkedRecordClick={onLinkedRecordClick} />
                 </div>);
             }) : null
         }
