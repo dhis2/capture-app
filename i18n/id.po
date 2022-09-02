@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-07-07T15:10:40.948Z\n"
+"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Raja Fathurrahim, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -844,21 +844,6 @@ msgstr ""
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
-msgid "Back"
-msgstr "Kembali"
-
-msgid "Search for {{titleText}}"
-msgstr "Telusuri {{titleText}}"
-
-msgid "Search for"
-msgstr "Cari tentang"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Anda juga dapat memilih program dari bilah atas dan mencari di program "
-"tersebut"
-
 msgid "No results found"
 msgstr "Tidak ada hasil ditemukan"
 
@@ -878,26 +863,26 @@ msgstr "Kembali ke pencarian"
 msgid "An error has occurred"
 msgstr "Sebuah kesalahan telah terjadi"
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-"Ada masalah dengan penelusuran ini, harap ubah istilah penelusuran atau coba"
-" lagi nanti. Untuk detail lebih lanjut, buka tab Konsol alat Pengembang"
-
 msgid "Too many results"
 msgstr "Terlalu banyak hasil"
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-"Penelusuran ini menghasilkan terlalu banyak hasil untuk ditampilkan. Coba "
-"ubah istilah penelusuran atau telusuri dengan lebih banyak atribut untuk "
-"mempersempit hasil."
-
 msgid "Cannot search in all programs"
 msgstr ""
+
+msgid "Back"
+msgstr "Kembali"
+
+msgid "Search for {{titleText}}"
+msgstr "Telusuri {{titleText}}"
+
+msgid "Search for"
+msgstr "Cari tentang"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Anda juga dapat memilih program dari bilah atas dan mencari di program "
+"tersebut"
 
 msgid "Choose a type to start searching"
 msgstr "Pilih jenis untuk mulai mencari"
@@ -926,6 +911,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Cari di semua program"
+
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
 
 msgid "events"
 msgstr "Even"
@@ -1091,6 +1082,9 @@ msgstr "Tanggal pendaftaran"
 msgid "Incident date"
 msgstr "Tanggal insiden"
 
+msgid "Last updated {{date}}"
+msgstr "Terakhir diperbarui {{date}}"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "Widget pendaftaran tidak dapat dimuat. Silakan coba lagi nanti"
 
@@ -1102,9 +1096,6 @@ msgstr "Dimulai di {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Dimiliki oleh {{ownerOrgUnit}}"
-
-msgid "Last updated {{date}}"
-msgstr "Terakhir diperbarui {{date}}"
 
 msgid "Cancelled"
 msgstr "Dibatalkan"
