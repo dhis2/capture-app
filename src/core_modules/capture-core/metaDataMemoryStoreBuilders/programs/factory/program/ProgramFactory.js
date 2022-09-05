@@ -171,6 +171,7 @@ export class ProgramFactory {
         }
         program.organisationUnits = (await getUserStorageController().get(userStores.ORGANISATION_UNITS_BY_PROGRAM, program.id))?.organisationUnits;
         program.icon = buildIcon(cachedProgram.style);
+        program.displayFrontPageList = cachedProgram.displayFrontPageList;
 
         return program;
     }

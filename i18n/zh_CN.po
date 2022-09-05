@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
+"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -90,8 +90,8 @@ msgstr "日期和时间"
 msgid "Please provide a valid time"
 msgstr "有效的时间"
 
-msgid "Please provide a valid percentage"
-msgstr "有效的百分比"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "有效的URL"
@@ -813,19 +813,6 @@ msgstr ""
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
-msgid "Back"
-msgstr "后退"
-
-msgid "Search for {{titleText}}"
-msgstr "搜索{{titleText}}"
-
-msgid "Search for"
-msgstr "搜索"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
-
 msgid "No results found"
 msgstr "没有结果"
 
@@ -843,21 +830,24 @@ msgstr "返回搜寻"
 msgid "An error has occurred"
 msgstr "发生了错误"
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr "该搜索存在问题，请更改搜索词或稍后再试。有关更多详细信息，请打开开发人员工具的控制台选项卡。"
-
 msgid "Too many results"
 msgstr "结果太多"
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或按更多属性搜索以缩小搜索范围。"
-
 msgid "Cannot search in all programs"
 msgstr ""
+
+msgid "Back"
+msgstr "后退"
+
+msgid "Search for {{titleText}}"
+msgstr "搜索{{titleText}}"
+
+msgid "Search for"
+msgstr "搜索"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
 
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
@@ -884,6 +874,12 @@ msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
 
 msgid "Search in all programs"
 msgstr "搜索所有项目"
+
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
 
 msgid "events"
 msgstr "事件"
@@ -1045,6 +1041,9 @@ msgstr "报名日期"
 msgid "Incident date"
 msgstr "事件日期"
 
+msgid "Last updated {{date}}"
+msgstr "最近更新的{{date}}"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "无法加载报名的小部件。请稍后再试"
 
@@ -1056,9 +1055,6 @@ msgstr "始于{{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "由{{ownerOrgUnit}}拥有"
-
-msgid "Last updated {{date}}"
-msgstr "最近更新的{{date}}"
 
 msgid "Cancelled"
 msgstr "已取消"

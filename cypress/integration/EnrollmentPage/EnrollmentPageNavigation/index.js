@@ -100,7 +100,7 @@ When('you reset the tei selection', () => {
 });
 
 Then('you are navigated to the main page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
 });
 When('you reset the program selection', () => {
     cy.contains('[data-test="program-selector-container"]', 'Child Programme')

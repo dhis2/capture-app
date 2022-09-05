@@ -14,13 +14,6 @@ Then('the working list should be displayed', () => {
         .find('tr');
 });
 
-When(/^the user selects the program (.*)$/, (program) => {
-    cy.get('.Select')
-        .type(program.slice(0, -1));
-    cy.contains(program)
-        .click();
-});
-
 When('the IncompleteSelections-box should be displayed', () => {
     cy.get('[data-test="without-orgunit-selected-message"]')
         .within(() => {

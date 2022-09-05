@@ -215,7 +215,7 @@ When('when you click the back button', () => {
 
 Then('you should be taken to the main page with program and org unit preselected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk`);
+        .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk`);
 });
 
 And('the next page button is disabled', () => {
@@ -309,6 +309,20 @@ When('you fill in the first and last name with values that will return results',
         .blur();
 });
 
+When('you fill in the first name with value and last name with empty space', () => {
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Thomas')
+        .blur();
+
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('  ')
+        .blur();
+});
+
 When('you navigated to a search page with tracked entity id on the url', () => {
     cy.url().should('include', 'search?trackedEntityTypeId=nEenWmSyUEp');
 });
@@ -371,7 +385,7 @@ When('you click the back button', () => {
 
 Then('you should be taken to the main page with org unit and program preselected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW`);
+        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default`);
 });
 
 Then('you stay in the same page with all program results', () => {
