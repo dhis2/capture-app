@@ -3,15 +3,15 @@
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Wanda <wanda@frontlineaids.org>, 2021
 # phil_dhis2, 2021
-# Nadiia <semchuk@aph.org.ua>, 2021
 # Éva Tamási, 2022
+# Nadiia <semchuk@aph.org.ua>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-01-04T12:43:12.873Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Éva Tamási, 2022\n"
+"Last-Translator: Nadiia <semchuk@aph.org.ua>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -218,7 +218,7 @@ msgid "This month"
 msgstr "Поточний місяць"
 
 msgid "This Year"
-msgstr ""
+msgstr "Цей рік"
 
 msgid "Last week"
 msgstr "Минулий тиждень"
@@ -691,7 +691,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "Прийняти"
 
 msgid "Registering Organisation Unit"
 msgstr ""
