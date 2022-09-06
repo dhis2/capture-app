@@ -34,7 +34,9 @@ import type { TeiWorkingListsTemplates, TeiRecords } from '../types';
 export type Props = $ReadOnly<{|
     storeId: string,
     programId: string,
-    orgUnitId: string
+    orgUnitId: string,
+    selectedTemplateId?: string,
+    onChangeTemplate?: (selectedTemplateId?: string) => void
 |}>;
 
 export type TeiWorkingListsReduxOutputProps = {|

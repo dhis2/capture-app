@@ -345,7 +345,7 @@ And('you fill in the hemoglobin', () => {
 
 And('you are navigated to the working list', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=lxAQ7Zs9VYR`);
+        .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=lxAQ7Zs9VYR`);
 
     cy.get('[data-test="event-working-lists"]')
         .contains('2021-01-01')
