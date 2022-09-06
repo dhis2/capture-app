@@ -378,8 +378,8 @@ And('you see message explaining this is an Event program', () => {
 
 When('you select org unit that is incompatible with the already selected program', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .type('Bombal');
-    cy.contains('Bombali')
+        .type('Biriw');
+    cy.contains('Biriwa')
         .click();
 });
 
