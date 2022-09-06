@@ -126,6 +126,7 @@ export const WidgetEventEditPlain = ({
                             stageId={programStage.id}
                             enrollmentId={enrollmentId}
                             hasDeleteButton
+                            eventStatus={eventStatus}
                         />
                     )}
                 </div>
