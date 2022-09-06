@@ -139,6 +139,7 @@ type apiProgram = {
     incidentDateLabel?: ?string,
     featureType?: ?string,
     selectEnrollmentDatesInFuture: boolean,
+    displayFrontPageList: boolean,
     selectIncidentDatesInFuture: boolean,
     displayIncidentDate: boolean,
     dataEntryForm?: ?apiDataEntryForm,

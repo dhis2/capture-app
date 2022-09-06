@@ -1,3 +1,73 @@
+## [100.13.2](https://github.com/dhis2/capture-app/compare/v100.13.1...v100.13.2) (2022-09-06)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8e7f74e](https://github.com/dhis2/capture-app/commit/8e7f74e9b2cf426d1154fd7fd0af044dd72d59b0))
+
+## [100.13.1](https://github.com/dhis2/capture-app/compare/v100.13.0...v100.13.1) (2022-09-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9ed753b](https://github.com/dhis2/capture-app/commit/9ed753bf928ffe3cfd66011ac44f9d89116c46d3))
+
+# [100.13.0](https://github.com/dhis2/capture-app/compare/v100.12.14...v100.13.0) (2022-09-01)
+
+
+### Features
+
+* [DHIS2-12140] working list based on displayfrontpagelist ([#2778](https://github.com/dhis2/capture-app/issues/2778)) ([3720b43](https://github.com/dhis2/capture-app/commit/3720b431809bac61a8ff0cd1de2e024034ebb8f7))
+
+## [100.12.14](https://github.com/dhis2/capture-app/compare/v100.12.13...v100.12.14) (2022-09-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13545] format updatedAt with the serverTimeZoneId ([#2947](https://github.com/dhis2/capture-app/issues/2947)) ([30f7396](https://github.com/dhis2/capture-app/commit/30f7396d1d396881b7732ac21d475bacf43642a0))
+
+## [100.12.13](https://github.com/dhis2/capture-app/compare/v100.12.12...v100.12.13) (2022-08-31)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c47092e](https://github.com/dhis2/capture-app/commit/c47092eb86cf49a3a9743df5953537f2646d0e56))
+
+## [100.12.12](https://github.com/dhis2/capture-app/compare/v100.12.11...v100.12.12) (2022-08-30)
+
+
+### Bug Fixes
+
+* temporary disable failing test related to DHIS2-13676 ([#2983](https://github.com/dhis2/capture-app/issues/2983)) ([06c8b9a](https://github.com/dhis2/capture-app/commit/06c8b9a00c6a3c27ab6ddf338f22ad3594dd2d82))
+
+## [100.12.11](https://github.com/dhis2/capture-app/compare/v100.12.10...v100.12.11) (2022-08-26)
+
+
+### Bug Fixes
+
+* [DHIS2-13542] fix error message not trigger without touched ([#2977](https://github.com/dhis2/capture-app/issues/2977)) ([371a4ec](https://github.com/dhis2/capture-app/commit/371a4ec12da4b71c24dc88fadb6ea71136bb8ee6))
+
+## [100.12.10](https://github.com/dhis2/capture-app/compare/v100.12.9...v100.12.10) (2022-08-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([d94b9eb](https://github.com/dhis2/capture-app/commit/d94b9ebcf5c3f49c8a9bc64d5893cf49814afd47))
+
+## [100.12.9](https://github.com/dhis2/capture-app/compare/v100.12.8...v100.12.9) (2022-08-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6f49675](https://github.com/dhis2/capture-app/commit/6f49675bce1bba10598223f453f74145470dc912))
+
+## [100.12.8](https://github.com/dhis2/capture-app/compare/v100.12.7...v100.12.8) (2022-08-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13548] fix search with one attribute contains only space ([#2976](https://github.com/dhis2/capture-app/issues/2976)) ([02bc127](https://github.com/dhis2/capture-app/commit/02bc1279c5bfa9b01d1ca1dfdf98dc0ba10fe142))
+
 ## [100.12.7](https://github.com/dhis2/capture-app/compare/v100.12.6...v100.12.7) (2022-08-24)
 
 
