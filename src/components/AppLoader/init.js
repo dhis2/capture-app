@@ -144,8 +144,11 @@ async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function) {
     await buildMetaDataAsync(dbLocale);
 }
 
-async function initializeSystemSettingsAsync(uiLocale: string) {
-    const systemSettingsCacheData = await cacheSystemSettings(uiLocale);
+async function initializeSystemSettingsAsync(
+    uiLocale: string,
+    systemSettings: { dateFormat: string, serverTimeZoneId: string },
+) {
+    const systemSettingsCacheData = await cacheSystemSettings(uiLocale, systemSettings);
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
@@ -172,6 +175,12 @@ export async function initializeAsync(
             fields: 'id',
         },
     });
+    const systemSettings = await onQueryApi({
+        resource: 'system/info',
+        params: {
+            fields: 'dateFormat,serverTimeZoneId',
+        },
+    });
     const sym = Object.getOwnPropertySymbols(d2.currentUser).find(s => String(s) === 'Symbol(userRoles)');
     d2.currentUser.userRoles = d2.currentUser[sym];
     setD2(d2);
@@ -191,7 +200,7 @@ export async function initializeAsync(
     await setLocaleDataAsync(uiLocale);
 
     // initialize system settings
-    await initializeSystemSettingsAsync(uiLocale);
+    await initializeSystemSettingsAsync(uiLocale, systemSettings);
 
     // initialize metadata
     await initializeMetaDataAsync(dbLocale, onQueryApi);
