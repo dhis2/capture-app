@@ -21,7 +21,7 @@ const useApiUtils = () => {
     return useMemo(() => ({
         querySingleResource: makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
         mutate: dataEngine.mutate.bind(dataEngine),
-        absoluteApiPath: buildUrl(dataEngine.link.baseUrl, dataEngine.link.apiPath),
+        absoluteApiPath: buildUrl(dataEngine.link.config.baseUrl, dataEngine.link.versionedApiPath),
     }), [dataEngine]);
 };
 
