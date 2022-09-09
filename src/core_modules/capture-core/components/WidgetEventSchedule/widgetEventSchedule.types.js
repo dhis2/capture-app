@@ -7,6 +7,7 @@ export type ContainerProps = {|
    enrolledAt: string,
    occurredAt: string,
    orgUnitId: string,
+   dueDateLabel: string,
    teiId: string,
    enrollmentId: string,
    onSave: (eventServerValues: Object, uid: string) => void,
