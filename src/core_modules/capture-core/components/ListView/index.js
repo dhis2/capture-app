@@ -10,6 +10,7 @@ export type {
     DataSource,
     FiltersData,
     FiltersOnly,
+    AdditionalFilters,
     StickyFilters,
     ChangePage,
     ChangeRowsPerPage,

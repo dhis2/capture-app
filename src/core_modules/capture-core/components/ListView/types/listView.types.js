@@ -26,7 +26,18 @@ export type FilterOnly = {
     multiValueFilter?: boolean,
 };
 
+export type AdditionalFilter = {
+    id: string,
+    type: $Values<dataElementTypes>,
+    header: string,
+    options?: ?Options,
+    disabled?: boolean,
+    tooltipContent?: string,
+    mainButton?: boolean
+};
+
 export type FiltersOnly = Array<FilterOnly>;
+export type AdditionalFilters = Array<AdditionalFilter>;
 export type DataSourceItem = {| [id: string]: string |};
 
 export type DataSource = Array<DataSourceItem>;
@@ -77,6 +88,7 @@ export type Sort = (id: string, direction: string) => void;
 export type InterfaceProps = $ReadOnly<{|
     columns?: Columns,
     filtersOnly?: FiltersOnly,
+    additionalFilters?: AdditionalFilters,
     currentPage: number,
     customMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,

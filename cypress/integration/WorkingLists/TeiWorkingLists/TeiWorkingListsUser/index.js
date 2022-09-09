@@ -406,3 +406,26 @@ When('you see the new sharing settings', () => {
     cy.contains('Close')
         .click();
 });
+
+When('you open the program stage filters from the more filters dropdown menu', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+            cy.contains('Program stage')
+                .click();
+        });
+});
+
+Then('you see the program stages and the default events filters', () => {
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Birth');
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Baby Postnatal');
+    cy.get('[data-test="filter-button-container-programStage"]')
+        .should('exist');
+    cy.get('[data-test="filter-button-container-reportDate"]')
+        .should('exist');
+    cy.get('[data-test="filter-button-container-eventStatus"]')
+        .should('exist');
+});

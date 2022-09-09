@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
 import { Filters } from '../Filters';
-import type { Columns, FiltersOnly } from '../types';
+import type { Columns, FiltersOnly, AdditionalFilters } from '../types';
 
 type Props = {
     columns: Columns,
     filtersOnly?: FiltersOnly,
+    additionalFilters?: AdditionalFilters,
     onUpdateFilter: Function,
     onClearFilter: Function,
     onSelectRestMenuItem: Function,
@@ -13,7 +14,15 @@ type Props = {
 };
 
 export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
-    ({ columns, filtersOnly, onUpdateFilter, onClearFilter, onSelectRestMenuItem, stickyFilters, ...passOnProps }: Props) => (
+    ({ columns,
+        filtersOnly,
+        additionalFilters,
+        onUpdateFilter,
+        onClearFilter,
+        onSelectRestMenuItem,
+        stickyFilters,
+        ...passOnProps
+    }: Props) => (
         <InnerComponent
             {...passOnProps}
             columns={columns}
@@ -21,6 +30,7 @@ export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
                 <Filters
                     columns={columns}
                     filtersOnly={filtersOnly}
+                    additionalFilters={additionalFilters}
                     onUpdateFilter={onUpdateFilter}
                     onClearFilter={onClearFilter}
                     onSelectRestMenuItem={onSelectRestMenuItem}

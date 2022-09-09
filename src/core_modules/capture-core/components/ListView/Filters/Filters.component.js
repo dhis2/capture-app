@@ -1,12 +1,13 @@
 // @flow
 import React, { memo } from 'react';
 import log from 'loglevel';
+import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
 import { FilterRestMenu } from './FilterRestMenu/FilterRestMenu.component';
 import { filterTypesObject } from './filters.const';
-import type { Column, StickyFilters, FiltersOnly } from '../types';
+import type { Column, StickyFilters, FiltersOnly, AdditionalFilters } from '../types';
 
 const getStyles = (theme: Theme) => ({
     filterButtonContainer: {
@@ -14,16 +15,41 @@ const getStyles = (theme: Theme) => ({
         paddingBottom: theme.typography.pxToRem(theme.spacing.unit / 2),
         paddingTop: theme.typography.pxToRem(theme.spacing.unit / 2),
     },
+    additionalFiltersContainer: {
+        backgroundColor: colors.grey100,
+        borderRadius: spacersNum.dp4,
+        border: `1px solid ${colors.grey400}`,
+        marginTop: spacersNum.dp4,
+        marginLeft: spacersNum.dp16,
+        padding: spacersNum.dp4,
+    },
+    additionalFiltersBreak: {
+        flexBasis: '100%',
+        height: 0,
+    },
+    additionalFiltersButtons: {
+        display: 'flex',
+        flexBasis: '100%',
+    },
 });
 
 type Props = {
     columns: ?Array<Column>,
     filtersOnly?: FiltersOnly,
+    additionalFilters?: AdditionalFilters,
     stickyFilters: StickyFilters,
     onSelectRestMenuItem: Function,
     onUpdateFilter: Function,
     onClearFilter: Function,
     classes: Object,
+};
+
+const shouldRenderAdditionalFiltersButtons = (additionalFilters, userSelectedFilters) => {
+    if (additionalFilters && userSelectedFilters) {
+        const mainButtonAdditionalFilters = additionalFilters.find(filter => filter.mainButton);
+        return mainButtonAdditionalFilters && userSelectedFilters[mainButtonAdditionalFilters.id];
+    }
+    return false;
 };
 
 const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
@@ -127,6 +153,20 @@ const getUserSelectedElements = (
         });
 };
 
+const addAdditionalFiltersElements = (
+    elementConfigs: Map<string, Column>,
+    additionalFilters?: AdditionalFilters,
+) => {
+    const mainButtonAdditionalFilters = additionalFilters && additionalFilters.find(filter => filter.mainButton);
+    if (mainButtonAdditionalFilters) {
+        const remainingElements =
+        // $FlowFixMe[prop-missing]
+            new Map([...elementConfigs, [mainButtonAdditionalFilters.id, mainButtonAdditionalFilters]]);
+        return { remainingElements };
+    }
+    return { remainingElements: elementConfigs };
+};
+
 const getIndividualElementsArray = (
     validElementConfigs: Map<string, Column>,
     initValueElements: Map<string, Column>,
@@ -184,6 +224,50 @@ const renderIndividualFilterButtons = ({
     ),
     );
 
+const renderAdditionalFiltersButtons = ({
+    additionalFilters,
+    visibleSelectorId,
+    onSetVisibleSelector,
+    onUpdateFilter,
+    onClearFilter,
+    classes,
+}: {
+    additionalFilters: AdditionalFilters,
+    visibleSelectorId: ?string,
+    onSetVisibleSelector: Function,
+    onUpdateFilter: Function,
+    onClearFilter: Function,
+    classes: Object,
+}) =>
+    (<>
+        <div className={classes.additionalFiltersBreak} />
+        <div className={classes.additionalFiltersContainer} >
+            <div className={classes.additionalFiltersButtons} >
+                {additionalFilters.map(({ id, type, header, options, disabled, tooltipContent }) => (
+                    <div
+                        key={id}
+                        data-test={`filter-button-container-${id}`}
+                        className={classes.filterButtonContainer}
+                    >
+                        <FilterButton
+                            data-test={`filter-button-${id}`}
+                            itemId={id}
+                            type={type}
+                            title={header}
+                            options={options}
+                            disabled={disabled}
+                            tooltipContent={tooltipContent}
+                            onSetVisibleSelector={onSetVisibleSelector}
+                            selectorVisible={id === visibleSelectorId}
+                            onUpdateFilter={onUpdateFilter}
+                            onClearFilter={onClearFilter}
+                        />
+                    </div>
+                ))}
+            </div>
+        </div>
+    </>);
+
 const renderRestButton = (
     restElementsArray: Array<Column>,
     onSelectRestMenuItem: Function,
@@ -205,6 +289,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         onUpdateFilter,
         onClearFilter,
         filtersOnly,
+        additionalFilters,
         classes,
     } = props;
 
@@ -224,8 +309,11 @@ const FiltersPlain = memo<Props>((props: Props) => {
             initValueElements.size + filtersOnlyCount,
         );
 
+        const { remainingElements: remainingElementsWithAdditionalFilters } =
+        addAdditionalFiltersElements(remainingElementsAfterFillUp, additionalFilters);
+
         const { userSelectedElements, remainingElements } =
-        getUserSelectedElements(remainingElementsAfterFillUp, stickyFilters.userSelectedFilters);
+        getUserSelectedElements(remainingElementsWithAdditionalFilters, stickyFilters.userSelectedFilters);
 
         const individualElementsArray =
             getIndividualElementsArray(
@@ -245,6 +333,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         columns,
         stickyFilters,
         filtersOnlyCount,
+        additionalFilters,
     ]);
 
     const handleRestMenuItemSelected = React.useCallback((id: string) => {
@@ -266,6 +355,18 @@ const FiltersPlain = memo<Props>((props: Props) => {
             filtersOnly,
             classes,
         });
+
+        const additionalFiltersButtons =
+        shouldRenderAdditionalFiltersButtons(additionalFilters, stickyFilters.userSelectedFilters)
+        && renderAdditionalFiltersButtons({
+            // $FlowFixMe[incompatible-call]
+            additionalFilters,
+            visibleSelectorId,
+            onSetVisibleSelector: setVisibleSelector,
+            onUpdateFilter,
+            onClearFilter,
+            classes,
+        });
         const restButton = renderRestButton(
             restElementsArray,
             handleRestMenuItemSelected,
@@ -274,6 +375,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         return [
             [...individualFilterButtons],
             restButton,
+            additionalFiltersButtons,
         ];
     }, [
         elementsContainer,
@@ -284,6 +386,8 @@ const FiltersPlain = memo<Props>((props: Props) => {
         onUpdateFilter,
         onClearFilter,
         filtersOnly,
+        additionalFilters,
+        stickyFilters.userSelectedFilters,
     ]);
 
     return (

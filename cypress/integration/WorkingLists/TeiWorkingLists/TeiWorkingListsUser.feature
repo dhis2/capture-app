@@ -133,3 +133,9 @@ When you save the list with the name My custom list
 Then the new custom TEI working list is created
 When you delete the name My custom list
 Then the custom TEI is deleted
+
+@v>=39
+Scenario: The user can open the program stage filters
+Given you open the main page with Ngelehun and child programme context
+When you open the program stage filters from the more filters dropdown menu
+Then you see the program stages and the default events filters

@@ -2,6 +2,7 @@
 import React, { useCallback, useMemo } from 'react';
 import uuid from 'uuid/v4';
 import i18n from '@dhis2/d2-i18n';
+import { useFeature, FEATURES } from 'capture-core-utils';
 import {
     dataElementTypes,
     type TrackerProgram,
@@ -12,7 +13,7 @@ import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
 import { convertToTEIFilterMainFilters, convertToTEIFilterAttributes } from '../helpers/TEIFilters/clientConfigToApiTEIFilterQueryConverter';
-import { MAIN_FILTERS } from '../constants';
+import { MAIN_FILTERS, ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../constants';
 
 const DEFAULT_TEMPLATES_LENGTH = 1;
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
@@ -136,6 +137,47 @@ const useFiltersOnly = ({
         ];
     }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages]);
 
+
+const useProgramStageFilters = ({ stages }: TrackerProgram) => {
+    const supportsProgramStageWorkingLists = useFeature(FEATURES.programStageWorkingList);
+
+    return useMemo(() => {
+        if (supportsProgramStageWorkingLists) {
+            return [
+                {
+                    id: ADDITIONAL_FILTERS.programStage,
+                    type: 'TEXT',
+                    header: i18n.t(ADDITIONAL_FILTERS_LABELS.programStage),
+                    options: [...stages.entries()].map(stage => ({ text: stage[1].name, value: stage[1].id })),
+                    mainButton: true,
+                },
+                {
+                    id: ADDITIONAL_FILTERS.reportDate,
+                    type: 'TEXT',
+                    header: i18n.t(ADDITIONAL_FILTERS_LABELS.reportDate),
+                    disabled: true,
+                    tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
+                        label: ADDITIONAL_FILTERS_LABELS.reportDate,
+                        interpolation: { escapeValue: false },
+                    }),
+                },
+                {
+                    id: ADDITIONAL_FILTERS.eventStatus,
+                    type: 'TEXT',
+                    header: i18n.t(ADDITIONAL_FILTERS_LABELS.eventStatus),
+                    disabled: true,
+                    tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
+                        label: ADDITIONAL_FILTERS_LABELS.eventStatus,
+                        interpolation: { escapeValue: false },
+                    }),
+                },
+            ];
+        }
+        return [];
+    }, [stages, supportsProgramStageWorkingLists]);
+};
+
+
 const useInjectDataFetchingMetaToLoadList = (defaultColumns, filtersOnly, onLoadView) =>
     useCallback((selectedTemplate: Object, context: Object) => {
         const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
@@ -186,6 +228,7 @@ export const TeiWorkingListsSetup = ({
     const defaultColumns = useDefaultColumnConfig(program, orgUnitId);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
+    const programStageFilters = useProgramStageFilters(program);
     const staticTemplates = useStaticTemplates();
     const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
 
@@ -255,6 +298,7 @@ export const TeiWorkingListsSetup = ({
             onUpdateTemplate={injectArgumentsForUpdateTemplate}
             onDeleteTemplate={injectArgumentsForDeleteTemplate}
             filtersOnly={filtersOnly}
+            additionalFilters={programStageFilters}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectDataFetchingMetaToLoadList(defaultColumns, filtersOnly, onLoadView)}
             onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, onUpdateList)}
