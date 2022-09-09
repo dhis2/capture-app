@@ -33,7 +33,7 @@ When(/^the user set the apgar score to (.*)/, score =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="capture-ui-input"]')
-        .eq(2)
+        .eq(1)
         .clear()
         .type(score)
         .blur(),
