@@ -172,17 +172,17 @@ Feature: User creates a new entries from the registration page
     And you click the save new submit button
     Then you see validation errors on the WHO RMNCH program registration page
 
-  Scenario: Go to enrollment event when Open data entry form after enrollment is checked
-    Given you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context
-    And you opt in to use the new enrollment Dashboard for Malaria case diagnosis, treatment and investigation
-    And you see the opt out component for Malaria case diagnosis, treatment and investigation
-    When you are in the Malaria case diagnosis, treatment and investigation program registration page
-    And you fill the Malaria case diagnosis registration form with values
-    And you click the save new submit button
-    Then you see the enrollment event New page
-    When you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context
-    And you opt out to use the new enrollment Dashboard for Malaria case diagnosis, treatment and investigation
-    Then you see the opt in component for Malaria case diagnosis, treatment and investigation
+  # Scenario: Go to enrollment event when Open data entry form after enrollment is checked
+  #   Given you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context
+  #   And you opt in to use the new enrollment Dashboard for Malaria case diagnosis, treatment and investigation
+  #   And you see the opt out component for Malaria case diagnosis, treatment and investigation
+  #   When you are in the Malaria case diagnosis, treatment and investigation program registration page
+  #   And you fill the Malaria case diagnosis registration form with values
+  #   And you click the save new submit button
+  #   Then you see the enrollment event New page
+  #   When you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context
+  #   And you opt out to use the new enrollment Dashboard for Malaria case diagnosis, treatment and investigation
+  #   Then you see the opt in component for Malaria case diagnosis, treatment and investigation
 
 ## New enrollment of existing TEI
 
