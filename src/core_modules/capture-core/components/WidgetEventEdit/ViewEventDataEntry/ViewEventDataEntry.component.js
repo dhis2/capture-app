@@ -23,6 +23,7 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
+import { statusTypes } from '../../../events/statusTypes';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -142,6 +143,7 @@ const buildScheduleDateSettingsFn = () => {
             label: `${props.formFoundation.getLabel('scheduledAt')}`,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
+        getIsHidden: (props: Object) => ![statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus),
         getPropName: () => 'scheduledAt',
         getMeta: () => ({
             placement: placements.TOP,
