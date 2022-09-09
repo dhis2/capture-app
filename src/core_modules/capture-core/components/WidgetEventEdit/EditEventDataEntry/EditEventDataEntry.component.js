@@ -169,6 +169,7 @@ const buildScheduleDateSettingsFn = () => {
             disabled: true,
             calendarMaxMoment: moment(),
         }),
+        getIsHidden: (props: Object) => ![statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus),
         getPropName: () => 'scheduledAt',
         getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
         getMeta: () => ({
@@ -410,7 +411,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
         const {
             orgUnit,
             programId,
-            eventStatus,
             onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
