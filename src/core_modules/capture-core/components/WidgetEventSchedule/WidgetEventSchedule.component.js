@@ -40,6 +40,7 @@ const WidgetEventSchedulePlain = ({
     programId,
     programName,
     stageName,
+    dueDateLabel,
     orgUnit,
     onCancel,
     onSchedule,
@@ -57,7 +58,7 @@ const WidgetEventSchedulePlain = ({
         >
             <div className={classes.fieldWrapper}>
                 <div className={classes.fieldLabel}>
-                    {i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } })}
+                    {dueDateLabel ?? i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } })}
                 </div>
                 <div className={classes.fieldContent}>
                     <ScheduleDate
