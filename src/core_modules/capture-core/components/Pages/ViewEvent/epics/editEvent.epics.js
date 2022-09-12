@@ -12,14 +12,14 @@ import {
 } from '../ViewEventComponent/editEvent.actions';
 import { getEvent } from '../../../../events/eventRequests';
 
-export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
+export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath }: ApiUtils) =>
     action$.pipe(
         ofType(editEventActionTypes.EDIT_EVENT_FROM_URL),
         switchMap((action) => {
             const eventId = action.payload.eventId;
             const orgUnit = action.payload.orgUnit;
             const prevProgramId = store.value.currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
-            return getEvent(eventId)
+            return getEvent(eventId, absoluteApiPath)
                 .then((eventContainer) => {
                     if (!eventContainer) {
                         return eventFromUrlCouldNotBeRetrieved(

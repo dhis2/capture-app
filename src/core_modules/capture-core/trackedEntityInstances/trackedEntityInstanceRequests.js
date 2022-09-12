@@ -28,12 +28,16 @@ function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {
     }, {});
 }
 
-// $FlowFixMe[cannot-resolve-name] automated comment
-async function convertToClientTei(apiTei: ApiTrackedEntityInstance, attributes: Array<DataElments>) {
+async function convertToClientTei(
+    apiTei: ApiTrackedEntityInstance,
+    // $FlowFixMe[cannot-resolve-name] automated comment
+    attributes: Array<DataElments>,
+    absoluteApiPath: string,
+) {
     const attributeValuesById = getValuesById(apiTei.attributes);
     const convertedAttributeValues = convertDataElementsValues(attributeValuesById, attributes, convertValue);
 
-    await getSubValues(apiTei.trackedEntity, attributes, convertedAttributeValues);
+    await getSubValues(apiTei.trackedEntity, attributes, convertedAttributeValues, absoluteApiPath);
 
     return {
         id: apiTei.trackedEntity,
@@ -47,14 +51,18 @@ type TrackedEntityInstancesPromise = Promise<{|
     pagingData: any
 |}>
 
-export async function getTrackedEntityInstances(queryParams: Object, attributes: Array<DataElments>): TrackedEntityInstancesPromise {
+export async function getTrackedEntityInstances(
+    queryParams: Object,
+    attributes: Array<DataElments>,
+    absoluteApiPath: string,
+): TrackedEntityInstancesPromise {
     const api = getApi();
     const apiRes = await api
         .get('tracker/trackedEntities', queryParams);
 
     const trackedEntityInstanceContainers = apiRes && apiRes.instances ? await apiRes.instances.reduce(async (accTeiPromise, apiTei) => {
         const accTeis = await accTeiPromise;
-        const teiContainer = await convertToClientTei(apiTei, attributes);
+        const teiContainer = await convertToClientTei(apiTei, attributes, absoluteApiPath);
         if (teiContainer) {
             accTeis.push(teiContainer);
         }
