@@ -35,7 +35,7 @@ import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram, EventProgram } from '../../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
-import { scopeSelectorActionTypes } from '../../../../../ScopeSelector';
+import { newPageActionTypes } from '../../../../../Pages/New/NewPage.actions';
 import { programCollection } from '../../../../../../metaDataMemoryStores';
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable) =>
@@ -64,7 +64,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
                 return (!!triggeringActionType) && [
                     lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID,
-                    scopeSelectorActionTypes.CATEGORY_OPTION_SET,
+                    newPageActionTypes.CATEGORY_OPTION_SET,
                 ].includes(triggeringActionType);
             }
 
@@ -81,7 +81,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            scopeSelectorActionTypes.CATEGORY_OPTION_SET,
+            newPageActionTypes.CATEGORY_OPTION_SET,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE,
         ),
         filter(() => {
