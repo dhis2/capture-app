@@ -1,9 +1,5 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 And('you select search scope TB program', () => {
     cy.get('[data-test="virtualized-select"]')
         .click()
