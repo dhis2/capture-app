@@ -3,8 +3,8 @@ import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
 import moment from 'moment';
 import { convertServerToClient, convertClientToForm } from '../../../../converters';
-import { getApi } from '../../../../d2/d2Instance';
 import type { RenderFoundation } from '../../../../metaData';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 type StaticPatternValues = {
     orgUnitCode: string,
@@ -27,10 +27,11 @@ function getFormValue(value: any, type: string) {
 async function generateUniqueValueAsync(
     teaId: string,
     staticPatternValues: StaticPatternValues,
+    querySingleResource: QuerySingleResource,
 ) {
-    const api = getApi();
-    const requiredValues = await api
-        .get(`trackedEntityAttributes/${teaId}/requiredValues`)
+    const requiredValues = await querySingleResource({
+        resource: `trackedEntityAttributes/${teaId}/requiredValues`,
+    })
         .then(response => response && response.REQUIRED)
         .catch((error) => {
             log.error(
@@ -48,8 +49,10 @@ async function generateUniqueValueAsync(
         expiration: '3',
     };
 
-    const generatedValue = await api
-        .get(`trackedEntityAttributes/${teaId}/generate`, queryParameters)
+    const generatedValue = await querySingleResource({
+        resource: `trackedEntityAttributes/${teaId}/generate`,
+        params: queryParameters,
+    })
         .then(response => response && response.value)
         .catch((error) => {
             log.error(
@@ -78,6 +81,7 @@ export function getGeneratedUniqueValuesAsync(
     foundation: ?RenderFoundation,
     generatedUniqueValuesCache: Object,
     staticPatternValues: StaticPatternValues,
+    querySingleResource: QuerySingleResource,
 ) {
     if (!foundation) {
         return Promise.resolve([]);
@@ -95,7 +99,7 @@ export function getGeneratedUniqueValuesAsync(
                     item: cacheItem,
                 };
             }
-            return generateUniqueValueAsync(id, staticPatternValues)
+            return generateUniqueValueAsync(id, staticPatternValues, querySingleResource)
                 .then(value => ({
                     id,
                     item: {
@@ -113,6 +117,7 @@ export const getUniqueValuesForAttributesWithoutValue = async (
     foundation: ?RenderFoundation,
     attributes: Object,
     staticPatternValues: StaticPatternValues,
+    querySingleResource: QuerySingleResource,
 ) => {
     if (!foundation) {
         return {};
@@ -140,7 +145,11 @@ export const getUniqueValuesForAttributesWithoutValue = async (
                 uniqueValues = { ...uniqueValues, ...{ [id]: cacheItem.value } };
             } else {
                 // eslint-disable-next-line no-await-in-loop
-                const generateUniqueValue = await generateUniqueValueAsync(id, staticPatternValues).then(value => ({
+                const generateUniqueValue = await generateUniqueValueAsync(
+                    id,
+                    staticPatternValues,
+                    querySingleResource,
+                ).then(value => ({
                     [id]: value,
                 }));
                 uniqueValues = { ...uniqueValues, ...generateUniqueValue };

@@ -12,6 +12,7 @@ import { validationStrategies } from '../../metaData/RenderFoundation/renderFoun
 import type { DataElement, CustomForm } from '../../metaData';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 import { validatorTypes } from './field/validators/constants';
+import type { QuerySingleResource } from '../../utils/api/api.types';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 type FormsValues = {
@@ -53,11 +54,12 @@ type Props = {
     validationStrategy: $Values<typeof validationStrategies>,
     loadNr: number,
     viewMode?: ?boolean,
+    querySingleResource: QuerySingleResource,
 };
 
 export class D2SectionFieldsComponent extends Component<Props> {
     static buildFormFields(props: Props): Array<FieldConfig> {
-        const { fieldsMetaData, customForm, fieldOptions } = props;
+        const { fieldsMetaData, customForm, fieldOptions, querySingleResource } = props;
 
         return Array.from(fieldsMetaData.entries())
             .map(entry => entry[1])
@@ -71,6 +73,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
                     ...fieldOptions,
                 },
                 !!customForm,
+                querySingleResource,
             ))
             .filter(field => field);
     }

@@ -1,10 +1,6 @@
 import '../../sharedSteps';
 import '../../../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });

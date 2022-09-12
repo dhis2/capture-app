@@ -1,10 +1,6 @@
 import '../../sharedSteps';
 import '../../../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you open the main page with Ngelehun and child programme context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
@@ -383,8 +379,7 @@ When('you change the sharing settings', () => {
 
     cy.contains('Kevin Boateng').click();
     cy.contains('Select a level').click();
-    cy.contains('View and edit').click({ force: true });
-
+    cy.get('[data-test="dhis2-uicore-popper"]').contains('View and edit').click({ force: true });
     cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
     cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
 });

@@ -5,6 +5,7 @@ import { getOptionsForRadioButtons, getOptionsForSelect } from './optionSetHelpe
 import { orientations } from '../../../../FormFields/New';
 import { inputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
 import type { DataElement, OptionSet } from '../../../../../metaData';
+import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 const mapInputTypeToPropsGetterFn = {
     [inputTypes.DROPDOWN]: (metaData: DataElement) => ({
@@ -32,7 +33,7 @@ const mapInputTypeToComponent = {
     [inputTypes.VERTICAL_RADIOBUTTONS]: OptionSetBoxesFieldForCustomForm,
 };
 
-export const getOptionSetFieldConfigForCustomForm = (metaData: DataElement, options: Object) => {
+export const getOptionSetFieldConfigForCustomForm = (metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) => {
     // $FlowFixMe[incompatible-type] automated comment
     const optionSet: OptionSet = metaData.optionSet;
     const inputType = optionSet.inputType;
@@ -49,5 +50,5 @@ export const getOptionSetFieldConfigForCustomForm = (metaData: DataElement, opti
         component: mapInputTypeToComponent[inputType],
         props,
         commitEvent: inputType === inputTypes.DROPDOWN ? 'onBlur' : 'onSelect',
-    }, metaData);
+    }, metaData, querySingleResource);
 };
