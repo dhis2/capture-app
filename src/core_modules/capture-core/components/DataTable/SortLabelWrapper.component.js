@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
-import Tooltip from '@material-ui/core/Tooltip';
-import { IconArrowDown16, IconArrowUp16 } from '@dhis2/ui';
+import { IconArrowDown16, IconArrowUp16, Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
@@ -74,9 +73,9 @@ class SortLabelWrapperPlain extends React.Component<Props> {
 
         return (
             <Tooltip
-                title={i18n.t('Sort')}
+                content={i18n.t('Sort')}
                 placement={'bottom'}
-                enterDelay={500}
+                openDelay={500}
             >
                 <span>
                     {icon}
@@ -118,9 +117,9 @@ class SortLabelWrapperPlain extends React.Component<Props> {
                         }
                         return (
                             <Tooltip
-                                title={i18n.t('Sort')}
+                                content={i18n.t('Sort')}
                                 placement={'bottom'}
-                                enterDelay={500}
+                                openDelay={500}
                             >
                                 <span>
                                     {this.props.children}

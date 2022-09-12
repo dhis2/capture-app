@@ -14,7 +14,11 @@ import { initEventWorkingListAsync } from './initEventWorkingList';
 import { updateEventWorkingListAsync } from './updateEventWorkingList';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 
-export const initEventListEpic = (action$: InputObservable) =>
+export const initEventListEpic = (
+    action$: InputObservable,
+    _: ReduxStore,
+    { absoluteApiPath, querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.LIST_VIEW_INIT),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
@@ -36,7 +40,9 @@ export const initEventListEpic = (action$: InputObservable) =>
                         categoryCombinationId,
                         storeId,
                         lastTransaction,
-                    });
+                    },
+                    absoluteApiPath,
+                    querySingleResource);
             return from(initialPromise).pipe(
 
                 takeUntil(
@@ -48,7 +54,11 @@ export const initEventListEpic = (action$: InputObservable) =>
             );
         }));
 
-export const updateEventListEpic = (action$: InputObservable) =>
+export const updateEventListEpic = (
+    action$: InputObservable,
+    _: ReduxStore,
+    { absoluteApiPath, querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.LIST_UPDATE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
@@ -72,7 +82,10 @@ export const updateEventListEpic = (action$: InputObservable) =>
                 columnsMetaForDataFetching,
                 categoryCombinationId,
                 storeId,
-            });
+            },
+            absoluteApiPath,
+            querySingleResource);
+
             return from(updatePromise).pipe(
                 takeUntil(
                     action$.pipe(

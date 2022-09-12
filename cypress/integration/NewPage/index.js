@@ -1,10 +1,6 @@
 import moment from 'moment';
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 And('you are on the default registration page', () => {
     cy.visit('/#/new');
 });

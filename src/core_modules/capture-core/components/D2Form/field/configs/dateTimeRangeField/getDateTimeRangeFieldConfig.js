@@ -3,10 +3,11 @@ import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateTimeRangeFieldForForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 
-export const getDateTimeRangeFieldConfig = (metaData: MetaDataElement, options: Object) => {
+export const getDateTimeRangeFieldConfig = (metaData: MetaDataElement, options: Object, querySingleResource: QuerySingleResource) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
@@ -21,5 +22,5 @@ export const getDateTimeRangeFieldConfig = (metaData: MetaDataElement, options: 
     return createFieldConfig({
         component: DateTimeRangeFieldForForm,
         props,
-    }, metaData);
+    }, metaData, querySingleResource);
 };

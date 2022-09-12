@@ -3,8 +3,8 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
-import { IconButton, withStyles, Tooltip } from '@material-ui/core';
-import { IconArrowRight16, IconCross24 } from '@dhis2/ui';
+import { IconButton, withStyles } from '@material-ui/core';
+import { IconArrowRight16, IconCross24, Tooltip } from '@dhis2/ui';
 import { Button } from '../Buttons';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
@@ -133,15 +133,24 @@ class RelationshipsPlain extends React.Component<Props> {
                     </div>
                 </div>
                 <div className={classes.relationshipActions}>
-                    <Tooltip title={canDelete ? '' : i18n.t('You dont have access to delete this relationship')}>
-                        <div>
-                            <IconButton
-                                onClick={() => { onRemoveRelationship(relationship.clientId); }}
-                                disabled={!canDelete}
+                    <Tooltip content={i18n.t('You don\'t have access to delete this relationship')}>
+                        {({ onMouseOver, onMouseOut, ref }) => (
+                            <div ref={(divRef) => {
+                                if (divRef && !canDelete) {
+                                    divRef.onmouseover = onMouseOver;
+                                    divRef.onmouseout = onMouseOut;
+                                    ref.current = divRef;
+                                }
+                            }}
                             >
-                                <IconCross24 />
-                            </IconButton>
-                        </div>
+                                <IconButton
+                                    onClick={() => { onRemoveRelationship(relationship.clientId); }}
+                                    disabled={!canDelete}
+                                >
+                                    <IconCross24 />
+                                </IconButton>
+                            </div>
+                        )}
                     </Tooltip>
                 </div>
             </div>
@@ -182,20 +191,32 @@ class RelationshipsPlain extends React.Component<Props> {
                     {this.renderRelationships()}
                 </div>
                 <div>
-                    <Tooltip title={canCreate ? '' : i18n.t('You dont have access to create any relationships')}>
-                        <div className={classes.addButtonContainer}>
-                            <Button
-                                onClick={onOpenAddRelationship}
-                                disabled={!canCreate}
-                                small={smallMainButton}
-                                dataTest="add-relationship-button"
-                            >
-                                {i18n.t('Add relationship')}
-                            </Button>
-                        </div>
-                    </Tooltip>
+                    <div
+                        className={classes.addButtonContainer}
+                    >
+                        <Button
+                            onClick={onOpenAddRelationship}
+                            disabled={!canCreate}
+                            small={smallMainButton}
+                            dataTest="add-relationship-button"
+                        >
+                            <Tooltip content={i18n.t('You don\'t have access to create any relationships')}>
+                                {({ onMouseOver, onMouseOut, ref }) => (
+                                    <div ref={(divRef) => {
+                                        if (divRef && !canCreate) {
+                                            divRef.onmouseover = onMouseOver;
+                                            divRef.onmouseout = onMouseOut;
+                                            ref.current = divRef;
+                                        }
+                                    }}
+                                    >
+                                        {i18n.t('Add relationship')}
+                                    </div>
+                                )}
+                            </Tooltip>
+                        </Button>
+                    </div>
                 </div>
-
             </div>
         );
     }

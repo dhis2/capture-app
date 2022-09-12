@@ -3,9 +3,9 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import moment from 'moment';
 import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration';
-import { getApi } from '../../../../../../d2/d2Instance';
 import { getOptionSetFilter } from './optionSet';
 import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
+import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 
 import {
     filterTypesObject,
@@ -75,24 +75,25 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate): ?DateFilterData => {
     return undefined;
 };
 
-const getUser = (userId: string) => getApi()
-    .get(`userLookup/${userId}`)
-    .then(({ id, displayName: name, username }) => ({
-        id,
-        name,
-        username,
-    }))
-    .catch((error) => {
-        log.error(
-            errorCreator('An error occured retrieving assignee user')({ error, userId }),
-        );
-        return null;
-    });
+const getUser = (userId: string, querySingleResource: QuerySingleResource) =>
+    querySingleResource({
+        resource: `userLookup/${userId}`,
+    })
+        .then(({ id, displayName: name, username }) => ({
+            id,
+            name,
+            username,
+        }))
+        .catch((error) => {
+            log.error(errorCreator('An error occured retrieving assignee user')({ error, userId }));
+            return null;
+        });
 
 // eslint-disable-next-line complexity
 const getAssigneeFilter = async (
     assignedUserMode: $Values<typeof apiAssigneeFilterModes>,
     assignedUsers: ?Array<string>,
+    querySingleResource: QuerySingleResource,
 ): Promise<?AssigneeFilterData> => {
     if (assignedUserMode === apiAssigneeFilterModes.PROVIDED) {
         const assignedUserId = assignedUsers && assignedUsers.length > 0 && assignedUsers[0];
@@ -100,7 +101,7 @@ const getAssigneeFilter = async (
             return undefined;
         }
 
-        const user = await getUser(assignedUserId);
+        const user = await getUser(assignedUserId, querySingleResource);
         if (!user) {
             return undefined;
         }
@@ -190,6 +191,7 @@ const getDataElementFilters = (
 const getMainDataFilters = async (
     eventQueryCriteria: ?ApiEventQueryCriteria,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+    querySingleResource: QuerySingleResource,
 ) => {
     if (!eventQueryCriteria) {
         return [];
@@ -206,7 +208,10 @@ const getMainDataFilters = async (
         convertedDate && filters.push({ ...convertedDate, id: 'occurredAt' });
     }
     if (assignedUserMode) {
-        filters.push({ ...(await getAssigneeFilter(assignedUserMode, assignedUsers)), id: 'assignee' });
+        filters.push({
+            ...(await getAssigneeFilter(assignedUserMode, assignedUsers, querySingleResource)),
+            id: 'assignee',
+        });
     }
     return filters;
 };
@@ -219,11 +224,12 @@ const listConfigDefaults = {
 export async function convertToClientConfig(
     eventQueryCriteria: ?ApiEventQueryCriteria,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+    querySingleResource: QuerySingleResource,
 ): Promise<ClientConfig> {
     const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria && eventQueryCriteria.order);
     const filters = [
         ...getDataElementFilters(eventQueryCriteria && eventQueryCriteria.dataFilters, columnsMetaForDataFetching),
-        ...(await getMainDataFilters(eventQueryCriteria, columnsMetaForDataFetching)),
+        ...(await getMainDataFilters(eventQueryCriteria, columnsMetaForDataFetching, querySingleResource)),
     ].reduce((acc, filter) => {
         const { id, ...filterData } = filter;
         acc[id] = filterData;

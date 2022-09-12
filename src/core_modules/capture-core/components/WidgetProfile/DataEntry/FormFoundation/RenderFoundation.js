@@ -11,6 +11,7 @@ import type {
 import { RenderFoundation, Section } from '../../../../metaData';
 import { buildDataElement, buildTetFeatureType } from './DataElement';
 import { getProgramTrackedEntityAttributes, getTrackedEntityTypeId } from '../helpers';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const getFeatureType = (featureType: ?string) =>
     (featureType ? capitalizeFirstLetter(featureType.toLowerCase()) : 'None');
@@ -50,12 +51,19 @@ const buildTetFeatureTypeSection = async (
     return section;
 };
 
-const buildMainSection = async (
+const buildMainSection = async ({
+    trackedEntityType,
+    trackedEntityAttributes,
+    optionSets,
+    programTrackedEntityAttributes,
+    querySingleResource,
+}: {
     trackedEntityType: TrackedEntityType,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
     optionSets: Array<OptionSet>,
     programTrackedEntityAttributes?: ?Array<ProgramTrackedEntityAttribute>,
-) => {
+    querySingleResource: QuerySingleResource,
+}) => {
     const section = new Section((o) => {
         o.id = Section.MAIN_SECTION_ID;
         o.name = i18n.t('Profile');
@@ -68,31 +76,57 @@ const buildMainSection = async (
     const featureTypeField = buildTetFeatureTypeField(trackedEntityType);
     featureTypeField && section.addElement(featureTypeField);
 
-    await buildElementsForSection(programTrackedEntityAttributes, trackedEntityAttributes, optionSets, section);
+    await buildElementsForSection({
+        programTrackedEntityAttributes,
+        trackedEntityAttributes,
+        optionSets,
+        section,
+        querySingleResource,
+    });
     return section;
 };
 
-const buildElementsForSection = async (
+const buildElementsForSection = async ({
+    programTrackedEntityAttributes,
+    trackedEntityAttributes,
+    optionSets,
+    section,
+    querySingleResource,
+}: {
     programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute>,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
     optionSets: Array<OptionSet>,
     section: Section,
-) => {
+    querySingleResource: QuerySingleResource,
+}) => {
     for (const trackedEntityAttribute of programTrackedEntityAttributes) {
         // eslint-disable-next-line no-await-in-loop
-        const element = await buildDataElement(trackedEntityAttribute, trackedEntityAttributes, optionSets);
+        const element = await buildDataElement(
+            trackedEntityAttribute,
+            trackedEntityAttributes,
+            optionSets,
+            querySingleResource,
+        );
         element && section.addElement(element);
     }
     return section;
 };
 
-const buildSection = async (
+const buildSection = async ({
+    programTrackedEntityAttributes,
+    trackedEntityAttributes,
+    optionSets,
+    sectionCustomLabel,
+    sectionCustomId,
+    querySingleResource,
+}: {
     programTrackedEntityAttributes?: Array<ProgramTrackedEntityAttribute>,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
     optionSets: Array<OptionSet>,
     sectionCustomLabel: string,
     sectionCustomId: string,
-) => {
+    querySingleResource: QuerySingleResource,
+}) => {
     if (!programTrackedEntityAttributes?.length) {
         return null;
     }
@@ -102,11 +136,17 @@ const buildSection = async (
         o.name = sectionCustomLabel;
     });
 
-    await buildElementsForSection(programTrackedEntityAttributes, trackedEntityAttributes, optionSets, section);
+    await buildElementsForSection({
+        programTrackedEntityAttributes,
+        trackedEntityAttributes,
+        optionSets,
+        section,
+        querySingleResource,
+    });
     return section;
 };
 
-export const buildFormFoundation = async (program: any) => {
+export const buildFormFoundation = async (program: any, querySingleResource: QuerySingleResource) => {
     const { programSections, trackedEntityType } = program;
     const programTrackedEntityAttributes = getProgramTrackedEntityAttributes(program.programTrackedEntityAttributes);
     const trackedEntityTypeId: string = getTrackedEntityTypeId(program);
@@ -137,29 +177,35 @@ export const buildFormFoundation = async (program: any) => {
                         builtProgramSection.includes(trackedEntityAttribute.trackedEntityAttributeId),
                 );
                 // eslint-disable-next-line no-await-in-loop
-                section = await buildSection(
-                    programTrackedEntityAttributesFiltered,
+                section = await buildSection({
+                    programTrackedEntityAttributes: programTrackedEntityAttributesFiltered,
                     trackedEntityAttributes,
                     optionSets,
-                    programSection.displayFormName,
-                    programSection.id,
-                );
+                    sectionCustomLabel: programSection.displayFormName,
+                    sectionCustomId: programSection.id,
+                    querySingleResource,
+                });
                 section && renderFoundation.addSection(section);
             }
         }
     } else {
-        section = await buildMainSection(
+        section = await buildMainSection({
             trackedEntityType,
             trackedEntityAttributes,
             optionSets,
             programTrackedEntityAttributes,
-        );
+            querySingleResource,
+        });
         section && renderFoundation.addSection(section);
     }
     return renderFoundation;
 };
 
-export const build = async (program: any, setFormFoundation?: (formFoundation: RenderFoundation) => void) => {
-    const formFoundation = (await buildFormFoundation(program)) || {};
+export const build = async (
+    program: any,
+    setFormFoundation?: (formFoundation: RenderFoundation) => void,
+    querySingleResource: QuerySingleResource,
+) => {
+    const formFoundation = (await buildFormFoundation(program, querySingleResource)) || {};
     setFormFoundation && setFormFoundation(formFoundation);
 };

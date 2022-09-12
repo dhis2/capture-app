@@ -544,8 +544,8 @@ msgstr "Syncing"
 msgid "Add comment"
 msgstr "Add comment"
 
-msgid "You dont have access to write comments"
-msgstr "You dont have access to write comments"
+msgid "You don't have access to write comments"
+msgstr "You don't have access to write comments"
 
 msgid "Write comment"
 msgstr "Write comment"
@@ -897,8 +897,8 @@ msgstr "events"
 msgid "event"
 msgstr "event"
 
-msgid "You dont have access to edit this event"
-msgstr "You dont have access to edit this event"
+msgid "You don't have access to edit this event"
+msgstr "You don't have access to edit this event"
 
 msgid "Edit event"
 msgstr "Edit event"
@@ -943,11 +943,11 @@ msgstr "Possible duplicates found"
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
-msgid "You dont have access to delete this relationship"
-msgstr "You dont have access to delete this relationship"
+msgid "You don't have access to delete this relationship"
+msgstr "You don't have access to delete this relationship"
 
-msgid "You dont have access to create any relationships"
-msgstr "You dont have access to create any relationships"
+msgid "You don't have access to create any relationships"
+msgstr "You don't have access to create any relationships"
 
 msgid "Add relationship"
 msgstr "Add relationship"
@@ -1015,11 +1015,11 @@ msgstr "Enrollment actions"
 msgid "We are processing your request."
 msgstr "We are processing your request."
 
-msgid "Add new"
-msgstr "Add new"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr "Only one enrollment per {{tetName}} is allowed in this program"
+
+msgid "Add new"
+msgstr "Add new"
 
 msgid "Reactivate"
 msgstr "Reactivate"
@@ -1120,9 +1120,6 @@ msgstr "Event completed"
 
 msgid "Back to all stages and events"
 msgstr "Back to all stages and events"
-
-msgid "You don't have access to edit this event"
-msgstr "You don't have access to edit this event"
 
 msgid "Schedule date info"
 msgstr "Schedule date info"
