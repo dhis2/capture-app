@@ -1,0 +1,19 @@
+name: 'result of e2e tests'
+
+on:
+  workflow_call:
+    inputs:
+      result:
+        required: true
+        type: boolean
+
+jobs:
+  e2e-tests-success:
+    runs-on: ubuntu-latest
+    steps:
+      - name: set success
+        if: inputs.result == true
+        run: echo 'e2e tests successfully run'
+      - name: set failure
+        if: inputs.result == false
+        run: exit 1
