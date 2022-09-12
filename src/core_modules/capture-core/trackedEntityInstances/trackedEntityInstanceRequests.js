@@ -1,5 +1,5 @@
 // @flow
-import { convertDataElementsValues } from '../metaData';
+import { type DataElement, convertDataElementsValues } from '../metaData';
 import { convertValue } from '../converters/serverToClient';
 import { getSubValues } from './getSubValues';
 import type { QuerySingleResource } from '../utils/api/api.types';
@@ -30,7 +30,7 @@ function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {
 async function convertToClientTei(
     apiTei: ApiTrackedEntityInstance,
     // $FlowFixMe[cannot-resolve-name] automated comment
-    attributes: Array<DataElments>,
+    attributes: Array<DataElement>,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
 ) {
@@ -59,7 +59,7 @@ type TrackedEntityInstancesPromise = Promise<{|
 
 export async function getTrackedEntityInstances(
     queryParams: Object,
-    attributes: Array<DataElments>,
+    attributes: Array<DataElement>,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
 ): TrackedEntityInstancesPromise {
