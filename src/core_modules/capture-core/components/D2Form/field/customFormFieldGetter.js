@@ -2,6 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { type DataElement, dataElementTypes } from '../../../metaData';
+import type { QuerySingleResource } from '../../../utils/api/api.types';
 
 import {
     getAgeFieldConfigForCustomForm as getAgeFieldConfig,
@@ -28,8 +29,9 @@ const fieldForTypes = {
     [dataElementTypes.EMAIL]: getTextFieldConfig,
     [dataElementTypes.TEXT]: getTextFieldConfig,
     [dataElementTypes.PHONE_NUMBER]: getTextFieldConfig,
-    [dataElementTypes.LONG_TEXT]: (metaData: DataElement) => {
-        const fieldConfig = getTextFieldConfig(metaData, { multiLine: true });
+    [dataElementTypes.LONG_TEXT]:
+    (metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) => {
+        const fieldConfig = getTextFieldConfig(metaData, options, querySingleResource, { multiLine: true });
         return fieldConfig;
     },
     [dataElementTypes.NUMBER]: getTextFieldConfig,
@@ -54,7 +56,7 @@ const fieldForTypes = {
     [dataElementTypes.UNKNOWN]: () => null,
 };
 
-export function getCustomFormField(metaData: DataElement, options: Object) {
+export function getCustomFormField(metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) {
     if (options.viewMode) {
         return getViewModeFieldConfig(metaData, options);
     }
@@ -64,13 +66,13 @@ export function getCustomFormField(metaData: DataElement, options: Object) {
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));
         // $FlowFixMe dataElementTypes flow error
-        return fieldForTypes[dataElementTypes.UNKNOWN](metaData);
+        return fieldForTypes[dataElementTypes.UNKNOWN](metaData, options, querySingleResource);
     }
 
     if (metaData.optionSet) {
-        return getOptionSetFieldConfig(metaData, options);
+        return getOptionSetFieldConfig(metaData, options, querySingleResource);
     }
 
     // $FlowFixMe dataElementTypes flow error
-    return fieldForTypes[type](metaData);
+    return fieldForTypes[type](metaData, options, querySingleResource);
 }

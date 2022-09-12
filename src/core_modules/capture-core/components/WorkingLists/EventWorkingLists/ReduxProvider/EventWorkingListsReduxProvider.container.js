@@ -1,6 +1,8 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useDataEngine } from '@dhis2/app-runtime';
+import { makeQuerySingleResource } from 'capture-core/utils/api';
 import {
     openViewEventPage,
     requestDeleteEvent,
@@ -14,6 +16,7 @@ import { convertToClientConfig } from '../helpers/eventFilters';
 
 export const EventWorkingListsReduxProvider = ({ storeId, program, programStage, orgUnitId }: Props) => {
     const dispatch = useDispatch();
+    const dataEngine = useDataEngine();
 
     const { currentTemplateId, templates, onLoadView, onUpdateList, ...commonStateManagementRestProps }
         = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
@@ -39,7 +42,8 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
     const injectDownloadRequestToLoadView = useCallback(
         async (selectedTemplate: Object, context: Object, meta: Object) => {
             const eventQueryCriteria = selectedTemplate?.nextCriteria || selectedTemplate?.criteria;
-            const clientConfig = await convertToClientConfig(eventQueryCriteria, meta?.columnsMetaForDataFetching);
+            const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
+            const clientConfig = await convertToClientConfig(eventQueryCriteria, meta?.columnsMetaForDataFetching, querySingleResource);
             const currentRequest = computeDownloadRequest({
                 clientConfig,
                 context: {
@@ -54,7 +58,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
             });
             return onLoadView(selectedTemplate, { ...context, currentRequest }, meta);
         },
-        [onLoadView, orgUnitId, storeId, program],
+        [onLoadView, orgUnitId, storeId, program, dataEngine],
     );
 
     const injectDownloadRequestToUpdateList = useCallback(
