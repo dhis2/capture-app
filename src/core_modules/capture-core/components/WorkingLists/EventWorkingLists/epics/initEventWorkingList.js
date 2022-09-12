@@ -24,6 +24,7 @@ export const initEventWorkingListAsync = async (
         storeId: string,
         lastTransaction: number,
     },
+    absoluteApiPath: string,
 ): Promise<ReduxAction<any, any>> => {
     const { commonQueryData, columnsMetaForDataFetching, categoryCombinationId, storeId, lastTransaction } = meta;
     const clientConfig: ClientConfig = await convertToClientConfig(config, columnsMetaForDataFetching);
@@ -38,7 +39,7 @@ export const initEventWorkingListAsync = async (
         ...commonQueryData,
     };
 
-    return getEventListData(rawQueryArgs, columnsMetaForDataFetching, categoryCombinationId)
+    return getEventListData(rawQueryArgs, columnsMetaForDataFetching, categoryCombinationId, absoluteApiPath)
         .then(({ eventContainers, pagingData, request }) =>
             initListViewSuccess(storeId, {
                 recordContainers: eventContainers,

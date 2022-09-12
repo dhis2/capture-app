@@ -1,6 +1,5 @@
 // @flow
 import log from 'loglevel';
-import { config } from 'd2';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import { errorCreator } from 'capture-core-utils';
 import { getD2, getApi } from '../d2/d2Instance';
@@ -10,34 +9,30 @@ const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 
 const subValueGetterByElementType = {
     // todo (report lgmt)
-    [dataElementTypes.FILE_RESOURCE]: (value: any, eventId: string, metaElementId: string) => {
-        const baseUrl = config.baseUrl;
-        return getApi().get(`fileResources/${value}`)
+    [dataElementTypes.FILE_RESOURCE]: (value: any, eventId: string, metaElementId: string, absoluteApiPath: string) =>
+        getApi().get(`fileResources/${value}`)
             .then(res =>
                 ({
                     name: res.name,
                     value: res.id,
-                    url: `${baseUrl}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                    url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
                 }))
             .catch((error) => {
                 log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
                 return null;
-            });
-    },
-    [dataElementTypes.IMAGE]: (value: any, eventId: string, metaElementId: string) => {
-        const baseUrl = config.baseUrl;
-        return getApi().get(`fileResources/${value}`)
+            }),
+    [dataElementTypes.IMAGE]: (value: any, eventId: string, metaElementId: string, absoluteApiPath: string) =>
+        getApi().get(`fileResources/${value}`)
             .then(res =>
                 ({
                     name: res.name,
                     value: res.id,
-                    url: `${baseUrl}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                    url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
                 }))
             .catch((error) => {
                 log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
                 return null;
-            });
-    },
+            }),
     [dataElementTypes.ORGANISATION_UNIT]: (value: any, eventId: string, metaElementId: string) => {
         const ouIds = value.split('/');
         const id = ouIds[ouIds.length - 1];
@@ -58,8 +53,12 @@ const subValueGetterByElementType = {
     },
 };
 
-
-export async function getSubValues(eventId: string, programStage: RenderFoundation, values?: ?Object) {
+export async function getSubValues(
+    eventId: string,
+    programStage: RenderFoundation,
+    values?: ?Object,
+    absoluteApiPath: string,
+) {
     if (!values) {
         return null;
     }
@@ -75,7 +74,8 @@ export async function getSubValues(eventId: string, programStage: RenderFoundati
             // $FlowFixMe dataElementTypes flow error
             const subValueGetter = subValueGetterByElementType[metaElement.type];
             if (subValueGetter) {
-                const subValue = await subValueGetter(value, eventId, metaElementId);
+                // $FlowFixMe[extra-arg]
+                const subValue = await subValueGetter(value, eventId, metaElementId, absoluteApiPath);
                 accValues[metaElementId] = subValue;
             }
         }

@@ -22,12 +22,12 @@ Feature: User interacts with Search page
     Then there should be a modal popping up
     And you can close the modal
 
-  Scenario: Searching using unique identifier returns results
-    Given you are on the default search page
-    And you select the search domain Malaria Case diagnosis
-    When you fill in the unique identifier field with values that will return a tracked entity instance
-    And you click find
-    Then you are navigated to the Tracker Capture
+  # Scenario: Searching using unique identifier returns results
+  #   Given you are on the default search page
+  #   And you select the search domain Malaria Case diagnosis
+  #   When you fill in the unique identifier field with values that will return a tracked entity instance
+  #   And you click find
+  #   Then you are navigated to the Tracker Capture
 
   Scenario: Searching using attributes in Tracker Program returns no results
     Given you are on the default search page
@@ -102,15 +102,15 @@ Feature: User interacts with Search page
     When you click the previous page button
     Then you can see the first page of the results
 
-  Scenario: Searching using attributes in Tracker Program navigates user to the dashboard view
-    Given you are on the default search page
-    And you select the search domain Malaria Case diagnosis
-    And you expand the attributes search area
-    And you fill in the last name with values that will return results
-    And you click search
-    And you can see the first page of the results
-    When you click the view dashboard button
-    Then you are navigated to the Tracker Capture
+  # Scenario: Searching using attributes in Tracker Program navigates user to the dashboard view
+  #   Given you are on the default search page
+  #   And you select the search domain Malaria Case diagnosis
+  #   And you expand the attributes search area
+  #   And you fill in the last name with values that will return results
+  #   And you click search
+  #   And you can see the first page of the results
+  #   When you click the view dashboard button
+  #   Then you are navigated to the Tracker Capture
 
   Scenario: Searching using attributes in TEType navigates user to dashboard view
     Given you are on the default search page

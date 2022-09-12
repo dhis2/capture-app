@@ -1,9 +1,5 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Then('the program stages should be displayed', () => {
     cy.get('[data-test="stages-and-events-widget"]')
         .within(() => {
