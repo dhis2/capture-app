@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-07-07T15:10:40.948Z\n"
+"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -842,21 +842,6 @@ msgstr ""
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
-msgid "Back"
-msgstr "Voltar"
-
-msgid "Search for {{titleText}}"
-msgstr "Pesquise por {{titleText}}"
-
-msgid "Search for"
-msgstr "Procurar"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Você também pode escolher um programa na barra superior e pesquisar nesse "
-"programa"
-
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
@@ -876,27 +861,26 @@ msgstr "Voltar para pesquisar"
 msgid "An error has occurred"
 msgstr "ocorreu um erro"
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-"Há um problema com esta pesquisa, altere os termos de pesquisa ou tente "
-"novamente mais tarde. Para obter mais detalhes, abra a guia Console das "
-"ferramentas do desenvolvedor"
-
 msgid "Too many results"
 msgstr "Muitos resultados"
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-"Esta pesquisa retornou muitos resultados para mostrar. Tente alterar os "
-"termos de pesquisa ou pesquisar por mais atributos para restringir os "
-"resultados."
-
 msgid "Cannot search in all programs"
 msgstr ""
+
+msgid "Back"
+msgstr "Voltar"
+
+msgid "Search for {{titleText}}"
+msgstr "Pesquise por {{titleText}}"
+
+msgid "Search for"
+msgstr "Procurar"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Você também pode escolher um programa na barra superior e pesquisar nesse "
+"programa"
 
 msgid "Choose a type to start searching"
 msgstr "Escolha um tipo para começar a pesquisar"
@@ -925,6 +909,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Pesquisa em todos os programas"
+
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
 
 msgid "events"
 msgstr "eventos"
@@ -1091,6 +1081,9 @@ msgstr "Data de inscrição"
 msgid "Incident date"
 msgstr "Data do incidente"
 
+msgid "Last updated {{date}}"
+msgstr "Última atualização em {{date}}"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 "O widget de inscrição não pôde ser carregado. Por favor, tente novamente "
@@ -1104,9 +1097,6 @@ msgstr "Iniciado em {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Propriedade de {{ownerOrgUnit}}"
-
-msgid "Last updated {{date}}"
-msgstr "Última atualização em {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelado"

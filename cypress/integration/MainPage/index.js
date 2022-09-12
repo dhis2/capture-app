@@ -1,9 +1,5 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you are in the search page with Ngelehun and MNCH / PNC context', () => {
     cy.visit('/#/search?orgUnitId=DiszpKrYNg8&programId=uy2gU8kT1jF');
 });
