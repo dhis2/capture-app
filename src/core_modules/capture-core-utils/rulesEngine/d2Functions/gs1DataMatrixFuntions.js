@@ -305,7 +305,7 @@ export const extractDataMatrixValue = (key, dataMatrix) => {
         if (gs1Elements.get('GS1_d2_IDENTIFIER') === gs1Identifier
             || gs1Elements.get('GS1_Q3_IDENTIFIER') === gs1Identifier) {
             const dataMatrixValue = extractGS1DataMatrixValue(key, dataMatrix);
-            return `'${dataMatrixValue}'`;
+            return dataMatrixValue;
         }
         return 'Unsupported GS1 identifier: {gs1Identifier}';
     }
