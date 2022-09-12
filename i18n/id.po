@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Raja Fathurrahim, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -561,8 +561,8 @@ msgstr "Menyinkronkan"
 msgid "Add comment"
 msgstr "Tambahkan komentar"
 
-msgid "You dont have access to write comments"
-msgstr "Anda tidak memiliki akses untuk menulis komentar"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Tulis komentar"
@@ -924,8 +924,8 @@ msgstr "Even"
 msgid "event"
 msgstr "acara/peristiwa"
 
-msgid "You dont have access to edit this event"
-msgstr "Anda tidak memiliki akses untuk mengedit even ini"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "Sunting even"
@@ -970,11 +970,11 @@ msgstr "Kemungkinan duplikat ditemukan"
 msgid "An error occurred loading possible duplicates"
 msgstr "Terjadi kesalahan saat memuat kemungkinan duplikat"
 
-msgid "You dont have access to delete this relationship"
-msgstr "Anda tidak memiliki akses untuk menghapus hubungan ini"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "Anda tidak memiliki akses untuk membuat hubungan apa pun"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Tambahkan hubungan"
@@ -1042,11 +1042,11 @@ msgstr "Tindakan pendaftaran"
 msgid "We are processing your request."
 msgstr "Kami sedang memproses permintaan Anda."
 
-msgid "Add new"
-msgstr "Tambahkan baru"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "Tambahkan baru"
 
 msgid "Reactivate"
 msgstr "Mengaktifkan kembali"
@@ -1146,9 +1146,6 @@ msgid "Event completed"
 msgstr "Even selesai"
 
 msgid "Back to all stages and events"
-msgstr ""
-
-msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"

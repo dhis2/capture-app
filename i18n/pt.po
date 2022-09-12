@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -558,8 +558,8 @@ msgstr "Sincronizando"
 msgid "Add comment"
 msgstr "Adicionar comentário"
 
-msgid "You dont have access to write comments"
-msgstr "Você não tem acesso para escrever comentários"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Escreva um comentário"
@@ -922,8 +922,8 @@ msgstr "eventos"
 msgid "event"
 msgstr "evento"
 
-msgid "You dont have access to edit this event"
-msgstr "Você não tem acesso para editar este evento"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "Editar evento"
@@ -968,11 +968,11 @@ msgstr "Possíveis duplicatas encontradas"
 msgid "An error occurred loading possible duplicates"
 msgstr "Ocorreu um erro ao carregar possíveis duplicatas"
 
-msgid "You dont have access to delete this relationship"
-msgstr "Você não tem acesso para excluir este relacionamento"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "Você não tem acesso para criar nenhum relacionamento"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Adicionar relacionamento"
@@ -1041,11 +1041,11 @@ msgstr "Ações de inscrição"
 msgid "We are processing your request."
 msgstr "Estamos processando sua requisição."
 
-msgid "Add new"
-msgstr "Novo"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "Novo"
 
 msgid "Reactivate"
 msgstr "Reativar"
@@ -1148,9 +1148,6 @@ msgstr "Evento concluído"
 
 msgid "Back to all stages and events"
 msgstr "Voltar para todos os palcos e eventos"
-
-msgid "You don't have access to edit this event"
-msgstr ""
 
 msgid "Schedule date info"
 msgstr "Informação da data da programação"

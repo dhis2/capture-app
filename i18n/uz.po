@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -555,8 +555,8 @@ msgstr "Синхронлашмоқда"
 msgid "Add comment"
 msgstr "Изоҳ қўшиш"
 
-msgid "You dont have access to write comments"
-msgstr "Фикр ёзиш ҳуқуқига эга эмассиз"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Фикр ёзинг"
@@ -920,8 +920,8 @@ msgstr "ҳодиса/тадбирлар"
 msgid "event"
 msgstr "ҳодиса/тадбир"
 
-msgid "You dont have access to edit this event"
-msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "Ҳодиса/тадбирни таҳрирланг"
@@ -966,11 +966,11 @@ msgstr "Бўлиши мумкин бўлган нусхалар топилди"
 msgid "An error occurred loading possible duplicates"
 msgstr "Эҳтимолий нусхаларни юклашда хатолик юз берди"
 
-msgid "You dont have access to delete this relationship"
-msgstr "Ушбу ўзаро алоқаларни ўчириб ташлаш ҳуқуқига эга эмассиз"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "Ушбу ўзаро алоқаларни яратиш ҳуқуқига эга эмассиз"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Ўзаро алоқа киритиш"
@@ -1038,11 +1038,11 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Add new"
-msgstr "Янгисини қўшиш"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "Янгисини қўшиш"
 
 msgid "Reactivate"
 msgstr ""
@@ -1141,9 +1141,6 @@ msgid "Event completed"
 msgstr "Ҳодиса/тадбир якунланди"
 
 msgid "Back to all stages and events"
-msgstr ""
-
-msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"
