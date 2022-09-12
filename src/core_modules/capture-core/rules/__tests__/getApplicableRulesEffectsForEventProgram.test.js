@@ -1,4 +1,4 @@
-import { setD2 } from 'capture-core/d2/d2Instance';
+
 import {
     EventProgram,
     ProgramStage,
@@ -110,22 +110,6 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
             }],
         }];
     });
-
-    const currentUser = {
-        system: {
-            settings: {
-                all: () => {},
-            },
-            systemInfo: {
-                dateFormat: 'yyyy-mm-dd',
-            },
-        },
-        currentUser: {
-            userRoles: ['UYXOT4A7JMI', 'Ufph3mGRmMo', 'Euq3XfEIEbx', 'cUlTcejWree', 'aNk5AyC7ydy', 'TMK9CMZ2V98', 'Ql6Gew7eaX6', 'Pqoy4DLOdMK', 'DRdaVRtwmG5', 'jRWSNIHdKww', 'txB7vu1w2Pr', 'xJZBzAHI88H', 'XS0dNzuZmfH'],
-            id: 'xE7jOejl9FI',
-        },
-    };
-    setD2(currentUser);
 
     test('RulesEngine called with computed arguments from getApplicableRuleEffectsForEventProgram', () => {
         getApplicableRuleEffectsForEventProgram({

@@ -4,26 +4,32 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './addNew.types';
 
-const AddNewItem = ({ onClick, ...passOnProps }: Object) => (<MenuItem
-    dense
-    dataTest="widget-enrollment-actions-add-new"
-    onClick={onClick}
-    icon={<IconAdd16 />}
-    label={i18n.t('Add new')}
-    {...passOnProps}
-/>);
-
 export const AddNew = ({ canAddNew, onlyEnrollOnce, tetName, onAddNew }: Props) => {
     if (!canAddNew) {
         return null;
     }
 
-    return (onlyEnrollOnce ? <Tooltip
+    return (<Tooltip
         content={i18n.t('Only one enrollment per {{tetName}} is allowed in this program', { tetName })}
     >
-        <AddNewItem
-            disabled={onlyEnrollOnce}
-            onClick={onAddNew}
-        />
-    </Tooltip> : <AddNewItem onClick={onAddNew} />);
+        {({ onMouseOver, onMouseOut, ref }) => (
+            <div ref={(divRef) => {
+                if (divRef && onlyEnrollOnce) {
+                    divRef.onmouseover = onMouseOver;
+                    divRef.onmouseout = onMouseOut;
+                    ref.current = divRef;
+                }
+            }}
+            >
+                <MenuItem
+                    dense
+                    dataTest="widget-enrollment-actions-add-new"
+                    onClick={onAddNew}
+                    icon={<IconAdd16 />}
+                    label={i18n.t('Add new')}
+                    disabled={onlyEnrollOnce}
+                />
+            </div>
+        )}
+    </Tooltip>);
 };

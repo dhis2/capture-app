@@ -4,10 +4,6 @@ import '../WidgetEnrollment';
 import '../WidgetProfile';
 import '../WidgetEnrollmentComment';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 When('the user sets the birthday date to the current date', () => {
     cy.get('[data-test="modal-edit-profile"]').find('[data-test="capture-ui-input"]').eq(8).clear()
         .blur()

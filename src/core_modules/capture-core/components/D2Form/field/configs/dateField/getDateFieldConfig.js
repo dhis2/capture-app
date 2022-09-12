@@ -3,10 +3,11 @@ import moment from 'moment';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateFieldForForm } from '../../Components';
 import type { DateDataElement } from '../../../../../metaData';
+import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 
-export const getDateFieldConfig = (metaData: DateDataElement, options: Object) => {
+export const getDateFieldConfig = (metaData: DateDataElement, options: Object, querySingleResource: QuerySingleResource) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
@@ -20,5 +21,5 @@ export const getDateFieldConfig = (metaData: DateDataElement, options: Object) =
     return createFieldConfig({
         component: DateFieldForForm,
         props,
-    }, metaData);
+    }, metaData, querySingleResource);
 };
