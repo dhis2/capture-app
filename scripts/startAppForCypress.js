@@ -28,13 +28,23 @@ const envFromCypressFiles = dotenvFiles
         return acc;
     }, {});
 
+const allEnvVariables = {
+    ...envFromCypressFiles,
+    ...(process.env || {}),
+};
+
 const env = Object
-    .keys(envFromCypressFiles)
+    .keys(allEnvVariables)
     .reduce((acc, key) => {
-        if (key.startsWith('REACT')) {
-            acc[key] = envFromCypressFiles[key];
-        } else if (key === 'dhis2BaseUrl') {
-            acc.REACT_APP_DHIS2_BASE_URL = envFromCypressFiles[key];
+        if (key.toUpperCase().startsWith('REACT_APP')) {
+            const reactKey = key.substring(10);
+            if (!['DHIS2_BASE_URL', 'DHIS2_API_VERSION'].includes(reactKey)) {
+                acc[key] = allEnvVariables[key];
+            }
+        } else if (key.toUpperCase() === 'CYPRESS_DHIS2BASEURL') {
+            acc.REACT_APP_DHIS2_BASE_URL = allEnvVariables[key];
+        } else if (key.toUpperCase() === 'CYPRESS_DHIS2APIVERSION') {
+            acc.REACT_APP_DHIS2_API_VERSION = allEnvVariables[key];
         }
         return acc;
     }, { BROWSER: 'none' });

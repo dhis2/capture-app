@@ -1,8 +1,3 @@
-
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 const showAllEventsInProgramStage = () => {
     cy.get('[data-test="dhis2-uicore-tablefoot"]')
         .then(($footer) => {
