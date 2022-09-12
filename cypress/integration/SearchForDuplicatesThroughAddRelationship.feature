@@ -37,3 +37,4 @@ Feature: Search for duplicates in the process of creating a new TEInstance
     And you click create
     Then you can see the first page of the results
     And all pagination is disabled
+
