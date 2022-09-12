@@ -1,9 +1,5 @@
 import '../../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you are on an enrollment page', () => {
     cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
     cy.get('[data-test="enrollment-page-content"]')
@@ -104,7 +100,7 @@ When('you reset the tei selection', () => {
 });
 
 Then('you are navigated to the main page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
 });
 When('you reset the program selection', () => {
     cy.contains('[data-test="program-selector-container"]', 'Child Programme')

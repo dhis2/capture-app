@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
+"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2022\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -95,8 +95,8 @@ msgstr "Vui lòng cung cấp ngày và giờ hợp lệ"
 msgid "Please provide a valid time"
 msgstr "Vui lòng cung cấp thời gian hợp lệ"
 
-msgid "Please provide a valid percentage"
-msgstr "Vui lòng cung cấp một tỷ lệ phần trăm hợp lệ"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "Vui lòng cung cấp một url hợp lệ"
@@ -827,21 +827,6 @@ msgstr ""
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
-msgid "Back"
-msgstr "Trở lại"
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr "Tìm"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Bạn cũng có thể chọn một chương trình từ thanh trên cùng và tìm kiếm trong "
-"chương trình đó"
-
 msgid "No results found"
 msgstr "Không tìm thấy kết quả nào"
 
@@ -861,26 +846,26 @@ msgstr "Quay lại tìm kiếm"
 msgid "An error has occurred"
 msgstr "một lỗi đã xảy ra"
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-"Có sự cố với tìm kiếm này, vui lòng thay đổi cụm từ tìm kiếm hoặc thử lại "
-"sau. Để biết thêm chi tiết, hãy mở tab Bảng điều khiển của Công cụ dành cho "
-"nhà phát triển"
-
 msgid "Too many results"
 msgstr "Quá nhiều kết quả"
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-"Tìm kiếm này trả về quá nhiều kết quả để hiển thị. Thử thay đổi các cụm từ "
-"tìm kiếm hoặc tìm kiếm theo nhiều thuộc tính hơn để thu hẹp kết quả."
-
 msgid "Cannot search in all programs"
 msgstr ""
+
+msgid "Back"
+msgstr "Trở lại"
+
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr "Tìm"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Bạn cũng có thể chọn một chương trình từ thanh trên cùng và tìm kiếm trong "
+"chương trình đó"
 
 msgid "Choose a type to start searching"
 msgstr "Chọn một loại để bắt đầu tìm kiếm"
@@ -909,6 +894,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Tìm kiếm trong tất cả các chương trình"
+
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
 
 msgid "events"
 msgstr "sự kiện"
@@ -1072,6 +1063,9 @@ msgstr "Ngày ghi vào"
 msgid "Incident date"
 msgstr "Ngày đến"
 
+msgid "Last updated {{date}}"
+msgstr ""
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -1082,9 +1076,6 @@ msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
-msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"

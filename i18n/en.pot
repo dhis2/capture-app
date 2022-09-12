@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
-"PO-Revision-Date: 2022-08-17T08:14:13.865Z\n"
+"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"PO-Revision-Date: 2022-08-10T12:26:48.946Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -86,8 +86,8 @@ msgstr "Please provide a valid date and time"
 msgid "Please provide a valid time"
 msgstr "Please provide a valid time"
 
-msgid "Please provide a valid percentage"
-msgstr "Please provide a valid percentage"
+msgid "Please provide an integer between 0 and 100"
+msgstr "Please provide an integer between 0 and 100"
 
 msgid "Please provide a valid url"
 msgstr "Please provide a valid url"
@@ -820,18 +820,6 @@ msgstr ""
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr "Fill in this field to search{{escape}} {{searchableAttributes}}"
 
-msgid "Back"
-msgstr "Back"
-
-msgid "Search for {{titleText}}"
-msgstr "Search for {{titleText}}"
-
-msgid "Search for"
-msgstr "Search for"
-
-msgid "You can also choose a program from the top bar and search in that program"
-msgstr "You can also choose a program from the top bar and search in that program"
-
 msgid "No results found"
 msgstr "No results found"
 
@@ -851,25 +839,23 @@ msgstr "Back to search"
 msgid "An error has occurred"
 msgstr "An error has occurred"
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-
 msgid "Too many results"
 msgstr "Too many results"
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-
 msgid "Cannot search in all programs"
 msgstr "Cannot search in all programs"
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Search for {{titleText}}"
+msgstr "Search for {{titleText}}"
+
+msgid "Search for"
+msgstr "Search for"
+
+msgid "You can also choose a program from the top bar and search in that program"
+msgstr "You can also choose a program from the top bar and search in that program"
 
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
@@ -898,6 +884,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Search in all programs"
+
+msgid "Saved lists in this program"
+msgstr "Saved lists in this program"
+
+msgid "Create custom working list"
+msgstr "Create custom working list"
 
 msgid "events"
 msgstr "events"
@@ -1063,6 +1055,9 @@ msgstr "Enrollment date"
 msgid "Incident date"
 msgstr "Incident date"
 
+msgid "Last updated {{date}}"
+msgstr "Last updated {{date}}"
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "Enrollment widget could not be loaded. Please try again later"
 
@@ -1074,9 +1069,6 @@ msgstr "Started at {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Owned by {{ownerOrgUnit}}"
-
-msgid "Last updated {{date}}"
-msgstr "Last updated {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"

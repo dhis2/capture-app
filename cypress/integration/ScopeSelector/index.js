@@ -1,9 +1,5 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);
     cy.get('[data-test="scope-selector"]').contains('Selected person');
@@ -58,7 +54,7 @@ Given('you select both org unit and program Malaria case registration', () => {
         .type('Malaria case re');
     cy.contains('Malaria case registration')
         .click();
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=VBqh0ynB2wv`);
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=VBqh0ynB2wv`);
 });
 
 Given('you select both org unit and program Child Programme', () => {
@@ -72,7 +68,7 @@ Given('you select both org unit and program Child Programme', () => {
         .type('Child Program');
     cy.contains('Child Programme')
         .click();
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW`);
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW`);
 });
 
 When('you click the "Start again" button', () => {
@@ -177,7 +173,7 @@ Given('you land on a main event page with preselected program', () => {
 });
 
 Then('main page page url is valid', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=VBqh0ynB2wv`);
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=VBqh0ynB2wv`);
 });
 
 When('you remove the program selection', () => {
@@ -282,7 +278,7 @@ And('you reset the tei selection', () => {
 });
 
 And('you navigated to the main page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
 });
 
 And('you see message explaining you need to select a program', () => {
@@ -378,8 +374,8 @@ And('you see message explaining this is an Event program', () => {
 
 When('you select org unit that is incompatible with the already selected program', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .type('Bombal');
-    cy.contains('Bombali')
+        .type('Biriw');
+    cy.contains('Biriwa')
         .click();
 });
 

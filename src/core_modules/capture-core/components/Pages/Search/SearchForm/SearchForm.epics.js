@@ -35,8 +35,18 @@ const getFiltersForUniqueIdSearchQuery = (formValues) => {
     return [`${fieldId}:eq:${formValues[fieldId]}`];
 };
 
-const searchViaUniqueIdStream = (queryArgs, attributes, programId) =>
-    from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+const searchViaUniqueIdStream = ({
+    queryArgs,
+    attributes,
+    programId,
+    absoluteApiPath,
+}: {
+    queryArgs: any,
+    attributes: any,
+    programId?: string,
+    absoluteApiPath: string,
+}) =>
+    from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath)).pipe(
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length > 0) {
@@ -61,6 +71,12 @@ export const deriveFilterKeyword = (fieldId: string, attributes: Array<DataEleme
 
 const getFiltersForAttributesSearchQuery = (formValues, attributes) => Object.keys(formValues)
     .filter(fieldId => formValues[fieldId])
+    .filter((fieldId) => {
+        if (typeof formValues[fieldId] === 'string') {
+            return formValues[fieldId].trim().length > 0;
+        }
+        return true;
+    })
     .map((fieldId) => {
         const dataElement = attributes.find(attribute => attribute.id === fieldId);
         if (formValues[fieldId] && dataElement) {
@@ -78,8 +94,8 @@ const handleErrors = ({ httpStatusCode, message }) => {
     return of(showErrorViewOnSearchPage());
 };
 
-const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
-    from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom, absoluteApiPath) =>
+    from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath)).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
                 return showSuccessResultsViewOnSearchPage(
@@ -104,7 +120,11 @@ const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
         catchError(handleErrors),
     );
 
-export const searchViaUniqueIdOnScopeProgramEpic: Epic = (action$, store) =>
+export const searchViaUniqueIdOnScopeProgramEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { absoluteApiPath }: ApiUtils,
+) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId } }) => {
@@ -120,16 +140,21 @@ export const searchViaUniqueIdOnScopeProgramEpic: Epic = (action$, store) =>
 
             const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
 
-            return searchViaUniqueIdStream(
+            return searchViaUniqueIdStream({
                 queryArgs,
                 attributes,
                 programId,
-            );
+                absoluteApiPath,
+            });
         }),
     );
 
 
-export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic: Epic = (action$, store) =>
+export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { absoluteApiPath }: ApiUtils,
+) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
@@ -145,14 +170,19 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic: Epic = (action$, sto
 
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
 
-            return searchViaUniqueIdStream(
+            return searchViaUniqueIdStream({
                 queryArgs,
                 attributes,
-            );
+                absoluteApiPath,
+            });
         }),
     );
 
-export const searchViaAttributesOnScopeProgramEpic: Epic = (action$, store) =>
+export const searchViaAttributesOnScopeProgramEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { absoluteApiPath }: ApiUtils,
+) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId, page, triggeredFrom } }) => {
@@ -168,11 +198,15 @@ export const searchViaAttributesOnScopeProgramEpic: Epic = (action$, store) =>
                 ouMode: 'ACCESSIBLE',
             };
 
-            return searchViaAttributesStream(queryArgs, attributes, triggeredFrom);
+            return searchViaAttributesStream(queryArgs, attributes, triggeredFrom, absoluteApiPath);
         }),
     );
 
-export const searchViaAttributesOnScopeTrackedEntityTypeEpic: Epic = (action$, store) =>
+export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { absoluteApiPath }: ApiUtils,
+) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId, page, triggeredFrom } }) => {
@@ -187,7 +221,7 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic: Epic = (action$, s
                 ouMode: 'ACCESSIBLE',
             };
 
-            return searchViaAttributesStream(queryArgs, attributes, triggeredFrom);
+            return searchViaAttributesStream(queryArgs, attributes, triggeredFrom, absoluteApiPath);
         }),
     );
 
@@ -238,7 +272,7 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
         }),
     );
 
-export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
+export const fallbackSearchEpic = (action$: InputObservable, _: ReduxStore, { absoluteApiPath }: ApiUtils) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH),
         flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }) => {
@@ -255,7 +289,7 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
             };
 
 
-            return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+            return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath)).pipe(
                 map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
                     if (searchResults.length) {
                         return addSuccessResultsViewOnSearchPage(searchResults, pagingData.currentPage);

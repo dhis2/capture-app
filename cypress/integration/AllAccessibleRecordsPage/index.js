@@ -1,9 +1,5 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 When('the user opens the main page', () => {
     cy.visit('/#/');
 });
@@ -16,13 +12,6 @@ Then('the working list should not be displayed', () => {
 Then('the working list should be displayed', () => {
     cy.get('[data-test="main-page-working-list"]')
         .find('tr');
-});
-
-When(/^the user selects the program (.*)$/, (program) => {
-    cy.get('.Select')
-        .type(program.slice(0, -1));
-    cy.contains(program)
-        .click();
 });
 
 When('the IncompleteSelections-box should be displayed', () => {

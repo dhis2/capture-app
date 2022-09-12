@@ -1,7 +1,3 @@
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you are visiting Stage Event List Page by url', () => {
     cy.visit('/#/enrollment/stageEvents?enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW');
 });
