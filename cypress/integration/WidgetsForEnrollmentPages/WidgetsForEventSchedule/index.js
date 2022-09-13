@@ -1,10 +1,6 @@
 import '../sharedSteps';
 import '../WidgetTab';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Then('you choose a schedule date', () => {
     cy.get('[data-test="schedule-section"]').within(() => {
         cy.get("[data-test='capture-ui-input']").eq(0).should('have.value', '2022-08-01');

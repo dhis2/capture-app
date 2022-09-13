@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { withStyles, Tooltip } from '@material-ui/core/';
-import { IconFileDocument24 } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/';
+import { IconFileDocument24, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons/Button.component';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
@@ -94,20 +94,29 @@ const EventDetailsSectionPlain = (props: Props) => {
         return (
             <div className={classes.actionsContainer}>
                 {!showEditEvent &&
-                <Tooltip title={canEdit ? '' : i18n.t('You dont have access to edit this event')}>
-                    <div className={classes.editButtonContainer}>
-                        <Button
-                            className={classes.button}
-                            variant="raised"
-                            onClick={() => onOpenEditEvent(orgUnit)}
-                            disabled={!canEdit}
-                        >
-                            {i18n.t('Edit event')}
-                        </Button>
-                    </div>
-                </Tooltip>
-
-                }
+                <div
+                    className={classes.editButtonContainer}
+                >
+                    <Button
+                        className={classes.button}
+                        variant="raised"
+                        onClick={() => onOpenEditEvent(orgUnit)}
+                        disabled={!canEdit}
+                    >
+                        <Tooltip content={i18n.t('You don\'t have access to edit this event')}>
+                            {({ onMouseOver, onMouseOut, ref }) => (<div ref={(divRef) => {
+                                if (divRef && !canEdit) {
+                                    divRef.onmouseover = onMouseOver;
+                                    divRef.onmouseout = onMouseOut;
+                                    ref.current = divRef;
+                                }
+                            }}
+                            >
+                                {i18n.t('Edit event')}
+                            </div>)}
+                        </Tooltip>
+                    </Button>
+                </div>}
             </div>
         );
     };

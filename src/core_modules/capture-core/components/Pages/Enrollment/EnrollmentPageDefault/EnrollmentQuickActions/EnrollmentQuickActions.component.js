@@ -42,6 +42,8 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
         history.push(`/enrollmentEventNew?${buildUrlQueryString({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
     };
 
+    const ready = events !== undefined && stages !== undefined;
+
     return (
         <Widget
             header={i18n.t('Quick actions')}
@@ -49,7 +51,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
         >
-            <div
+            {ready && <div
                 className={classes.contentContainer}
                 data-test={'quick-action-button-container'}
             >
@@ -77,7 +79,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                     dataTest={'quick-action-button-refer'}
                     disable={noStageAvailable}
                 /> */}
-            </div>
+            </div>}
         </Widget>
     );
 };

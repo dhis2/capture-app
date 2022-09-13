@@ -1,7 +1,5 @@
 import '../../sharedSteps';
 
-beforeEach(() => cy.loginThroughForm());
-
 Given(/^you land on the enrollment event page by having typed (.*)$/, (url) => {
     cy.visit(url);
     cy.get('[data-test="scope-selector"]').contains('Selected person');
@@ -35,7 +33,7 @@ When(/^the user set the apgar score to (.*)/, score =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="capture-ui-input"]')
-        .eq(2)
+        .eq(1)
         .clear()
         .type(score)
         .blur(),

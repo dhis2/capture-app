@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import createSvgIcon from '@material-ui/icons/utils/createSvgIcon';
-import Tooltip from '@material-ui/core/Tooltip';
+import { Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { Button } from '../../../Buttons';
@@ -107,9 +107,9 @@ class ActiveFilterButtonPlain extends React.Component<Props, State> {
                     {ActiveFilterButton.getViewValueForFilter(buttonText)}
                     {arrowIconElement}
                     <Tooltip
-                        title={i18n.t('Clear')}
+                        content={i18n.t('Clear')}
                         placement={'bottom'}
-                        enterDelay={300}
+                        openDelay={300}
                     >
                         <ClearIcon
                             onMouseEnter={this.clearIsHovered}

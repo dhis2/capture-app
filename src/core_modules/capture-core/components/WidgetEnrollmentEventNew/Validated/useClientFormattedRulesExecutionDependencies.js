@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import { dataElementTypes, type TrackerProgram } from '../../../metaData';
 import { convertServerToClient } from '../../../converters';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 import type {
     RulesExecutionDependencies,
     AttributeValuesClientFormatted,

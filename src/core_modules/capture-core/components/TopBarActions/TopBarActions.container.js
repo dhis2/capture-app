@@ -1,11 +1,8 @@
 // @flow
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import i18n from '@dhis2/d2-i18n';
 import { ActionButtons } from './TopBarActions.component';
-import { resetAllCategoryOptionsFromScopeSelector } from '../ScopeSelector/ScopeSelector.actions';
-import { useReset } from '../ScopeSelector/hooks';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import type { Props } from './TopBarActions.types';
 import { buildUrlQueryString } from '../../utils/routing';
@@ -44,15 +41,10 @@ export const TopBarActions = ({
         openNewRegistrationPageWithoutProgramId ||
         openSearchPage ||
         openSearchPageWithoutProgramId;
-
-    const dispatch = useDispatch();
     const history = useHistory();
-    const { reset } = useReset();
 
-    const startAgain = () => {
-        dispatch(resetAllCategoryOptionsFromScopeSelector());
-        reset();
-    };
+    const startAgain = () => history.push('/');
+
     const newRegistrationPage = () => {
         const queryArgs = {};
         if (selectedOrgUnitId) {
