@@ -25,7 +25,7 @@ import { EventProgram, TrackerProgram } from '../../../metaData/Program';
 import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../helpers';
 import type { EnrollmentData, AttributeValue } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',

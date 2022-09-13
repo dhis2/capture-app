@@ -16,8 +16,8 @@ import {
 } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
-import { getApi } from '../../../../d2/d2Instance';
 import type { ConstructorInput } from './dataElementFactory.types';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 export class DataElementFactory {
     static translationPropertyNames = {
@@ -118,7 +118,7 @@ export class DataElementFactory {
                     dataElementUniqueScope.ORGANISATION_UNIT :
                     dataElementUniqueScope.ENTIRE_SYSTEM;
 
-                o.onValidate = (value: any, contextProps: Object = {}) => {
+                o.onValidate = (value: any, contextProps: Object = {}, querySingleResource: QuerySingleResource) => {
                     const serverValue = pipe(
                         convertFormToClient,
                         convertClientToServer,
@@ -142,37 +142,35 @@ export class DataElementFactory {
                     let requestPromise;
                     if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                         const orgUnitId = contextProps.orgUnitId;
-                        requestPromise = getApi()
-                            .get(
-                                'trackedEntityInstances',
-                                {
-                                    trackedEntityType: contextProps.trackedEntityTypeId,
-                                    ou: orgUnitId,
-                                    filter: `${dataElement.id}:EQ:${serverValue}`,
-                                },
-                            );
+                        requestPromise = querySingleResource({
+                            resource: 'tracker/trackedEntities',
+                            params: {
+                                trackedEntityType: contextProps.trackedEntityTypeId,
+                                orgUnit: orgUnitId,
+                                filter: `${dataElement.id}:EQ:${serverValue}`,
+                            },
+                        });
                     } else {
-                        requestPromise = getApi()
-                            .get(
-                                'trackedEntityInstances',
-                                {
-                                    trackedEntityType: contextProps.trackedEntityTypeId,
-                                    ouMode: 'ACCESSIBLE',
-                                    filter: `${dataElement.id}:EQ:${serverValue}`,
-                                },
-                            );
+                        requestPromise = querySingleResource({
+                            resource: 'tracker/trackedEntities',
+                            params: {
+                                trackedEntityType: contextProps.trackedEntityTypeId,
+                                ouMode: 'ACCESSIBLE',
+                                filter: `${dataElement.id}:EQ:${serverValue}`,
+                            },
+                        });
                     }
                     return requestPromise
                         .then((result) => {
                             const trackedEntityInstance =
-                                (result.trackedEntityInstances && result.trackedEntityInstances[0]) || {};
+                                (result.instances && result.instances[0]) || {};
                             const data = {
-                                id: trackedEntityInstance.trackedEntityInstance,
+                                id: trackedEntityInstance.trackedEntity,
                                 tetId: trackedEntityInstance.trackedEntityType,
                             };
 
                             return {
-                                valid: result.trackedEntityInstances.length === 0,
+                                valid: result.instances.length === 0,
                                 data,
                             };
                         });

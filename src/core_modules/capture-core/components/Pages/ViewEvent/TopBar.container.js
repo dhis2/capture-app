@@ -5,10 +5,12 @@ import Grid from '@material-ui/core/Grid';
 import {
     ScopeSelector,
     useResetViewEventId,
-    setCategoryOptionFromScopeSelector,
-    resetCategoryOptionFromScopeSelector,
-    resetAllCategoryOptionsFromScopeSelector,
 } from '../../ScopeSelector';
+import {
+    setCategoryOption,
+    resetCategoryOption,
+    resetAllCategoryOptions,
+} from './ViewEventPage.actions';
 
 import { TopBarActions } from '../../TopBarActions';
 
@@ -24,20 +26,20 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories, isUserInterac
     const { resetViewEventId } = useResetViewEventId();
     const dispatchOnSetCategoryOption = useCallback(
         (categoryOption: Object, categoryId: string) => {
-            dispatch(setCategoryOptionFromScopeSelector(categoryId, categoryOption));
+            dispatch(setCategoryOption(categoryId, categoryOption));
         },
         [dispatch],
     );
 
     const dispatchOnResetCategoryOption = useCallback(
         (categoryId: string) => {
-            dispatch(resetCategoryOptionFromScopeSelector(categoryId));
+            dispatch(resetCategoryOption(categoryId));
         },
         [dispatch],
     );
 
     const dispatchOnResetAllCategoryOptions = useCallback(() => {
-        dispatch(resetAllCategoryOptionsFromScopeSelector());
+        dispatch(resetAllCategoryOptions());
     }, [dispatch]);
 
     return (

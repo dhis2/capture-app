@@ -1,9 +1,8 @@
 // @flow
-
-import { getApi } from '../d2/d2Instance';
-import { convertDataElementsValues } from '../metaData';
+import { type DataElement, convertDataElementsValues } from '../metaData';
 import { convertValue } from '../converters/serverToClient';
 import { getSubValues } from './getSubValues';
+import type { QuerySingleResource } from '../utils/api/api.types';
 
 type ApiTeiAttribute = {
     attribute: any,
@@ -31,13 +30,20 @@ function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {
 async function convertToClientTei(
     apiTei: ApiTrackedEntityInstance,
     // $FlowFixMe[cannot-resolve-name] automated comment
-    attributes: Array<DataElments>,
+    attributes: Array<DataElement>,
     absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
 ) {
     const attributeValuesById = getValuesById(apiTei.attributes);
     const convertedAttributeValues = convertDataElementsValues(attributeValuesById, attributes, convertValue);
 
-    await getSubValues(apiTei.trackedEntity, attributes, convertedAttributeValues, absoluteApiPath);
+    await getSubValues({
+        teiId: apiTei.trackedEntity,
+        attributes,
+        values: convertedAttributeValues,
+        absoluteApiPath,
+        querySingleResource,
+    });
 
     return {
         id: apiTei.trackedEntity,
@@ -53,16 +59,18 @@ type TrackedEntityInstancesPromise = Promise<{|
 
 export async function getTrackedEntityInstances(
     queryParams: Object,
-    attributes: Array<DataElments>,
+    attributes: Array<DataElement>,
     absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
 ): TrackedEntityInstancesPromise {
-    const api = getApi();
-    const apiRes = await api
-        .get('tracker/trackedEntities', queryParams);
+    const apiRes = await querySingleResource({
+        resource: 'tracker/trackedEntities',
+        params: queryParams,
+    });
 
     const trackedEntityInstanceContainers = apiRes && apiRes.instances ? await apiRes.instances.reduce(async (accTeiPromise, apiTei) => {
         const accTeis = await accTeiPromise;
-        const teiContainer = await convertToClientTei(apiTei, attributes, absoluteApiPath);
+        const teiContainer = await convertToClientTei(apiTei, attributes, absoluteApiPath, querySingleResource);
         if (teiContainer) {
             accTeis.push(teiContainer);
         }

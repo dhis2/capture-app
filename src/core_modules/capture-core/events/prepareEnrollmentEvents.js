@@ -2,7 +2,6 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import type { EventsData, EventData } from 'capture-core-utils/rulesEngine';
-import { getApi } from '../d2/d2Instance';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
@@ -74,51 +73,6 @@ function convertMainProperties(apiEvent: ApiEnrollmentEvent): (CaptureClientEven
             }
             return accEvent;
         }, {});
-}
-
-function convertToClientEvent(event: ApiEnrollmentEvent) {
-    const programMetaData = programCollection.get(event.program);
-    if (!programMetaData) {
-        log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ fn: 'convertToClientEvent', event }));
-        return null;
-    }
-
-    const stageMetaData = programMetaData.getStage(event.programStage);
-    if (!stageMetaData) {
-        log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ fn: 'convertToClientEvent', event }));
-        return null;
-    }
-
-    const dataValuesById = getValuesById(event.dataValues);
-    // $FlowFixMe[prop-missing] automated comment
-    const convertedDataValues = stageMetaData.convertValues(dataValuesById, convertValue);
-
-    const convertedMainProperties = convertMainProperties(event);
-
-    return {
-        id: convertedMainProperties.eventId,
-        event: convertedMainProperties,
-        values: convertedDataValues,
-    };
-}
-
-export async function getEnrollmentEvents() {
-    const api = getApi();
-    const apiRes = await api
-        .get('events?program=eBAyeGv0exc&orgUnit=DiszpKrYNg8&paging=false');
-        // .get('events?event=qEHQdXkUAGk');
-
-    if (!apiRes || !apiRes.events || apiRes.events.length === 0) {
-        return null;
-    }
-
-    return apiRes.events.reduce((accEvents, apiEvent) => {
-        const eventContainer = convertToClientEvent(apiEvent);
-        if (eventContainer) {
-            accEvents.push(eventContainer);
-        }
-        return accEvents;
-    }, []);
 }
 
 export const prepareEnrollmentEventsForRulesEngine =

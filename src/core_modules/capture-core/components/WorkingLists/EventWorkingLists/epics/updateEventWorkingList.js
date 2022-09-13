@@ -8,7 +8,7 @@ import {
     buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
 import type { ColumnsMetaForDataFetching, CommonQueryData } from '../types';
-
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const errorMessages = {
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
@@ -28,6 +28,7 @@ export const updateEventWorkingListAsync = (
         storeId: string,
     },
     absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
 ): Promise<ReduxAction<any, any>> => {
     const rawQueryArgs = {
         ...queryArgsSource,
@@ -39,7 +40,13 @@ export const updateEventWorkingListAsync = (
         ...commonQueryData,
     };
 
-    return getEventListData(rawQueryArgs, columnsMetaForDataFetching, categoryCombinationId, absoluteApiPath)
+    return getEventListData({
+        queryArgs: rawQueryArgs,
+        columnsMetaForDataFetching,
+        categoryCombinationId,
+        absoluteApiPath,
+        querySingleResource,
+    })
         .then(({ eventContainers, pagingData, request }) =>
             updateListSuccess(storeId, {
                 recordContainers: eventContainers,

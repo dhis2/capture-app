@@ -1,10 +1,7 @@
 // @flow
 export {
     scopeSelectorActionTypes,
-    setCategoryOptionFromScopeSelector,
     setOrgUnitFromScopeSelector,
-    resetCategoryOptionFromScopeSelector,
-    resetAllCategoryOptionsFromScopeSelector,
     resetOrgUnitIdFromScopeSelector,
 } from './ScopeSelector.actions';
 export {

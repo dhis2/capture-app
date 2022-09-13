@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { IconButton, Tooltip } from '@material-ui/core';
-import { IconSettings24 } from '@dhis2/ui';
+import { IconButton } from '@material-ui/core';
+import { IconSettings24, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { ColumnSelectorDialog } from './ColumnSelectorDialog.component';
 import type { Columns } from '../types';
@@ -45,10 +45,9 @@ export class ColumnSelector extends React.PureComponent<Props, State> {
         return (
             <React.Fragment>
                 <Tooltip
-                    disableFocusListener
-                    disableTouchListener
-                    enterDelay={500}
-                    title={i18n.t('Select columns')}
+                    openDelay={500}
+                    content={i18n.t('Select columns')}
+                    dataTest="select-columns"
                 >
                     <IconButton
                         onClick={this.openDialog}

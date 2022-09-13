@@ -3,6 +3,7 @@ import * as React from 'react';
 import { withInternalFilterHandler } from './withInternalFilterHandler';
 import { get as getOrgUnitRoots } from '../orgUnitRoots.store';
 import { orgUnitFieldScopes } from './scopes.const';
+import { withApiUtils } from '../../../../../../HOC';
 
 type Props = {
     scope: $Values<typeof orgUnitFieldScopes>,
@@ -11,7 +12,7 @@ type Props = {
 // Wraps withInternalFilterHandler. Passes on defaultRoots from the organisation unit store based on the input scope.
 export const withOrgUnitFieldImplicitRootsFilterHandler = () =>
     (InnerComponent: React.ComponentType<any>) => {
-        const InternalFilterHandlerHOC = withInternalFilterHandler()(InnerComponent);
+        const InternalFilterHandlerHOC = withApiUtils(withInternalFilterHandler()(InnerComponent));
 
         class OrgUnitImplicitInternalFilterHandlerHOC extends React.Component<Props> {
             defaultRoots: Array<any>;
