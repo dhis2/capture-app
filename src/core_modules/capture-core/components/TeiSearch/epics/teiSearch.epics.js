@@ -31,6 +31,7 @@ import {
     getTrackedEntityTypeThrowIfNotFound as getTrackedEntityType,
 } from '../../../metaData';
 import { getSearchFormId } from '../getSearchFormId';
+import type { QuerySingleResource } from '../../../utils/api/api.types';
 
 const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
     (orgUnitScope !== 'ACCESSIBLE' ?
@@ -51,6 +52,7 @@ const searchTei = ({
     pageNumber,
     resultsPageSize,
     absoluteApiPath,
+    querySingleResource,
 }: {
     state: ReduxState,
     searchId: string,
@@ -59,6 +61,7 @@ const searchTei = ({
     pageNumber?: ?number,
     resultsPageSize: number,
     absoluteApiPath: string,
+    querySingleResource: QuerySingleResource
 }) => {
     const currentTeiSearch = state.teiSearch[searchId];
     const formValues = state.formsValues[formId];
@@ -97,7 +100,7 @@ const searchTei = ({
         getTrackerProgram(selectedProgramId).attributes :
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
-    return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath)).pipe(
+    return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
         map(({ trackedEntityInstanceContainers, pagingData }) =>
             searchTeiResultRetrieved(
                 { trackedEntityInstanceContainers, currentPage: pagingData.currentPage },
@@ -109,7 +112,7 @@ const searchTei = ({
     );
 };
 
-export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath }: ApiUtils) =>
+export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath, querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE),
         switchMap((action) => {
@@ -124,6 +127,7 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
                 pageNumber,
                 resultsPageSize,
                 absoluteApiPath,
+                querySingleResource,
             });
 
             return from(searchTeiStream).pipe(
@@ -139,7 +143,7 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
             );
         }));
 
-export const teiSearchEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath }: ApiUtils) =>
+export const teiSearchEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath, querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SEARCH_TEI),
         switchMap((action) => {
@@ -153,6 +157,7 @@ export const teiSearchEpic = (action$: InputObservable, store: ReduxStore, { abs
                 pageNumber: 1,
                 resultsPageSize,
                 absoluteApiPath,
+                querySingleResource,
             });
             return from(searchTeiStream).pipe(
                 takeUntil(action$.pipe(

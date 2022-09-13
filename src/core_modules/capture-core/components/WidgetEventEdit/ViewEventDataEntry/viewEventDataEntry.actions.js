@@ -16,7 +16,7 @@ import { convertClientToForm } from '../../../converters';
 import type { ClientEventContainer } from '../../../events/eventRequests';
 import { TrackerProgram, EventProgram } from '../../../metaData/Program';
 import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../helpers';
 import type {
     EnrollmentData,

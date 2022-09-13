@@ -186,7 +186,7 @@ Then('the list should display teis with John as the first name', () => {
 
 
 When('you open the column selector', () => {
-    cy.get('button[title="Select columns"]')
+    cy.get('[data-test="select-columns-reference"]')
         .click();
 });
 

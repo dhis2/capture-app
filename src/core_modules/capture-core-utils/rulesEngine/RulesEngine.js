@@ -50,6 +50,7 @@ export class RulesEngine {
     outputConverter: IConvertOutputRulesEffectsValue;
     variableService: VariableService;
     dateUtils: IDateUtils;
+    userRoles: Array<string>;
 
     constructor(
         inputConverter: IConvertInputRulesValue,
@@ -106,7 +107,7 @@ export class RulesEngine {
             dateUtils: this.dateUtils,
             variablesHash,
             selectedOrgUnit,
-            selectedUserRoles,
+            selectedUserRoles: selectedUserRoles ?? this.userRoles,
         });
 
         if (!programRules) {
@@ -211,5 +212,9 @@ export class RulesEngine {
 
         const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
         return processRulesEffects(effects, dataElements, trackedEntityAttributes);
+    }
+
+    setSelectedUserRoles(userRoles: Array<string>) {
+        this.userRoles = userRoles;
     }
 }
