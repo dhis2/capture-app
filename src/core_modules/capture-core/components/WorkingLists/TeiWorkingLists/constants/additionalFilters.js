@@ -8,5 +8,5 @@ export const ADDITIONAL_FILTERS = {
 export const ADDITIONAL_FILTERS_LABELS = {
     programStage: 'Program stage',
     reportDate: 'Report date',
-    eventStatus: 'Event Status',
+    eventStatus: 'Event status',
 };
