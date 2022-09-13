@@ -7081,13 +7081,6 @@ d2@31.1.1:
     jsdoc "^3.5.5"
     whatwg-fetch "^2.0.3"
 
-d2@^31:
-  version "31.10.2"
-  resolved "https://registry.yarnpkg.com/d2/-/d2-31.10.2.tgz#93023171a703ad37dedf273b07e9643155e42466"
-  integrity sha512-kW/2DKv567foH9JNEBtebfOW6gdmHzNd5dsvA7m8aVK0IZAXYd++lKKqmTUPzpjSRHuM7oUAnTw29/a5JIdfWQ==
-  dependencies:
-    isomorphic-fetch "^2.2.1"
-
 d2@~31.7:
   version "31.7.0"
   resolved "https://registry.yarnpkg.com/d2/-/d2-31.7.0.tgz#3a843240fecaafdf213da78b55aed9b8611ee22e"
