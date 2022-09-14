@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { DATA_ENTRY_ID, DATA_ENTRY_KEY } from 'capture-core/constants';
+import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import {
     startGoBackToMainPage,
 } from './viewEvent.actions';
@@ -23,8 +23,8 @@ const makeMapStateToProps = () => {
             eventAccess: eventAccessSelector(state),
             error: state.viewEventPage.loadError,
             currentDataEntryKey: eventDetailsSection.showEditEvent
-                ? getDataEntryKey(DATA_ENTRY_ID.singleEvent, DATA_ENTRY_KEY.edit)
-                : getDataEntryKey(DATA_ENTRY_ID.singleEvent, DATA_ENTRY_KEY.view),
+                ? getDataEntryKey(dataEntryIds.SINGLE_EVENT, dataEntryKeys.EDIT)
+                : getDataEntryKey(dataEntryIds.SINGLE_EVENT, dataEntryKeys.VIEW),
         };
     };
 };

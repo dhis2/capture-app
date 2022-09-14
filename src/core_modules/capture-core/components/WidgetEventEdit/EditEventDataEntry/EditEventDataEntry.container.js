@@ -3,7 +3,7 @@ import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import { statusTypes } from 'capture-core/events/statusTypes';
 import { batchActions } from 'redux-batched-actions';
-import { DATA_ENTRY_KEY } from 'capture-core/constants';
+import { dataEntryKeys } from 'capture-core/constants';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
@@ -92,7 +92,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
 
         dispatch(batchActions([
             cancelEditEventDataEntry(),
-            ...(isScheduled ? [] : [setCurrentDataEntry(props.dataEntryId, DATA_ENTRY_KEY.view)]),
+            ...(isScheduled ? [] : [setCurrentDataEntry(props.dataEntryId, dataEntryKeys.VIEW)]),
         ]));
         isScheduled && onCancelEditEvent && onCancelEditEvent();
     },

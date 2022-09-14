@@ -3,7 +3,7 @@ import React from 'react';
 import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
-import { DATA_ENTRY_ID, DATA_ENTRY_KEY } from 'capture-core/constants';
+import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
@@ -84,7 +84,7 @@ const EnrollmentEditEventPagePain = ({
         />
         <div className={classes.page}>
             <div className={classes.title}>
-                {mode === DATA_ENTRY_KEY.view
+                {mode === dataEntryKeys.VIEW
                     ? i18n.t('Enrollment{{escape}} View Event', { escape: ':' })
                     : i18n.t('Enrollment{{escape}} Edit Event', { escape: ':' })}
             </div>
@@ -111,7 +111,7 @@ const EnrollmentEditEventPagePain = ({
                     )}
                 </div>
                 <div className={classes.rightColumn}>
-                    <WidgetEventComment dataEntryKey={mode} dataEntryId={DATA_ENTRY_ID.enrollmentEvent} />
+                    <WidgetEventComment dataEntryKey={mode} dataEntryId={dataEntryIds.ENROLLMENT_EVENT} />
                     <WidgetError error={widgetEffects.errors} />
                     <WidgetWarning warning={widgetEffects.warnings} />
                     {!hideWidgets.feedback && (

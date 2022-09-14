@@ -3,7 +3,7 @@ import React from 'react';
 // $FlowFixMe
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { DATA_ENTRY_ID } from 'capture-core/constants';
+import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { useCommonEnrollmentDomainData, showEnrollmentError } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
@@ -84,7 +84,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
-    const dataEntryKey = `${DATA_ENTRY_ID.enrollmentEvent}-${currentPageMode}`;
+    const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
 
     const pageStatus = getPageStatus({

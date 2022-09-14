@@ -8,7 +8,7 @@ import {
     mapToInnerAction,
 } from 'capture-core-utils/epics';
 import { statusTypes } from 'capture-core/events/statusTypes';
-import { DATA_ENTRY_KEY, DATA_ENTRY_ID } from 'capture-core/constants';
+import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
 } from '../EditEventDataEntry/editEventDataEntry.actions';
@@ -25,14 +25,14 @@ import { getProgramAndStageFromEvent } from '../../../metaData';
 
 const getDataEntryKey = (eventStatus?: string): string => (
     (eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE)
-        ? DATA_ENTRY_KEY.edit
-        : DATA_ENTRY_KEY.view
+        ? dataEntryKeys.EDIT
+        : dataEntryKeys.VIEW
 );
 
 const getDataEntryId = (event): string => (
     event?.trackedEntity
-        ? DATA_ENTRY_ID.enrollmentEvent
-        : DATA_ENTRY_ID.singleEvent
+        ? dataEntryIds.ENROLLMENT_EVENT
+        : dataEntryIds.SINGLE_EVENT
 );
 
 export const loadViewEventDataEntryEpic: Epic = (action$, store) =>

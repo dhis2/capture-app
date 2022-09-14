@@ -1,6 +1,6 @@
 // @flow
 import React, { type ComponentType, useEffect } from 'react';
-import { DATA_ENTRY_ID, DATA_ENTRY_KEY } from 'capture-core/constants';
+import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useDispatch } from 'react-redux';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24, Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -57,7 +57,7 @@ export const WidgetEventEditPlain = ({
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
     useEffect(() => () => {
-        dispatch(cleanUpDataEntry(DATA_ENTRY_ID.enrollmentEvent));
+        dispatch(cleanUpDataEntry(dataEntryIds.ENROLLMENT_EVENT));
     }, [dispatch]);
 
     const eventAccess = getProgramEventAccess(programId, programStage.id);
@@ -74,7 +74,7 @@ export const WidgetEventEditPlain = ({
                     {i18n.t('Back to all stages and events')}
                 </Button>
 
-                {currentPageMode === DATA_ENTRY_KEY.view && (
+                {currentPageMode === dataEntryKeys.VIEW && (
                     <Tooltip
                         content={i18n.t('You don\'t have access to edit this event')}
                     >
@@ -123,14 +123,14 @@ export const WidgetEventEditPlain = ({
                 noncollapsible
             >
                 <div className={classes.form}>
-                    {currentPageMode === DATA_ENTRY_KEY.view ? (
+                    {currentPageMode === dataEntryKeys.VIEW ? (
                         <ViewEventDataEntry
                             formFoundation={programStage.stageForm}
-                            dataEntryId={DATA_ENTRY_ID.enrollmentEvent}
+                            dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                         />
                     ) : (
                         <EditEventDataEntry
-                            dataEntryId={DATA_ENTRY_ID.enrollmentEvent}
+                            dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             formFoundation={programStage.stageForm}
                             orgUnit={orgUnit}
                             programId={programId}

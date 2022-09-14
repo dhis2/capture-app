@@ -1,11 +1,11 @@
 // @flow
 
-export const DATA_ENTRY_ID = {
-    singleEvent: 'singleEvent',
-    enrollmentEvent: 'enrollmentEvent',
-};
+export const dataEntryIds = Object.freeze({
+    SINGLE_EVENT: 'singleEvent',
+    ENROLLMENT_EVENT: 'enrollmentEvent',
+});
 
-export const DATA_ENTRY_KEY = {
-    edit: 'editEvent',
-    view: 'viewEvent',
-};
+export const dataEntryKeys = Object.freeze({
+    EDIT: 'editEvent',
+    VIEW: 'viewEvent',
+});

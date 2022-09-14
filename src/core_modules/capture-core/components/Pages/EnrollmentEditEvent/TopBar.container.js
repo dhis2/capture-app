@@ -2,7 +2,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Grid from '@material-ui/core/Grid';
-import { DATA_ENTRY_KEY } from 'capture-core/constants';
+import { dataEntryKeys } from 'capture-core/constants';
 import type { ProgramStage } from '../../../metaData';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import {
@@ -53,7 +53,7 @@ export const TopBar = ({
     const { resetTeiId } = useResetTeiId();
     const { resetStageId } = useResetStageId();
     const { resetEventId } = useResetEventId();
-    const isUserInteractionInProgress = mode === DATA_ENTRY_KEY.edit;
+    const isUserInteractionInProgress = mode === dataEntryKeys.EDIT;
 
     return (
         <ScopeSelector
@@ -125,7 +125,7 @@ export const TopBar = ({
                 <TopBarActions
                     selectedProgramId={programId}
                     selectedOrgUnitId={orgUnitId}
-                    isUserInteractionInProgress={mode === DATA_ENTRY_KEY.edit}
+                    isUserInteractionInProgress={mode === dataEntryKeys.EDIT}
                 />
             </Grid>
         </ScopeSelector>

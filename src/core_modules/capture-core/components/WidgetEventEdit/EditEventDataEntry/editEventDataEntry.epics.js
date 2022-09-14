@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { DATA_ENTRY_KEY, DATA_ENTRY_ID } from 'capture-core/constants';
+import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
@@ -40,8 +40,8 @@ import {
 
 const getDataEntryId = (event): string => (
     event?.trackedEntity
-        ? DATA_ENTRY_ID.enrollmentEvent
-        : DATA_ENTRY_ID.singleEvent
+        ? dataEntryIds.ENROLLMENT_EVENT
+        : dataEntryIds.SINGLE_EVENT
 );
 
 export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -71,7 +71,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
                     enrollment,
                     attributeValues,
                     dataEntryId: getDataEntryId(eventContainer.event),
-                    dataEntryKey: DATA_ENTRY_KEY.edit,
+                    dataEntryKey: dataEntryKeys.EDIT,
                 }),
             ]);
         }));
