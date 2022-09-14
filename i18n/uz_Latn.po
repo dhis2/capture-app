@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -559,8 +559,8 @@ msgstr "Sinxronlashmoqda"
 msgid "Add comment"
 msgstr "Izoh qoʼshish"
 
-msgid "You dont have access to write comments"
-msgstr "Fikr yozish huquqiga ega emassiz"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Fikr yozing"
@@ -913,8 +913,8 @@ msgstr ""
 msgid "event"
 msgstr ""
 
-msgid "You dont have access to edit this event"
-msgstr "Ushbu hodisa/tadbirni tahrirlash huquqiga ega emassiz"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "Hodisa/tadbirni tahrirlang"
@@ -960,11 +960,11 @@ msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You dont have access to delete this relationship"
-msgstr "Ushbu oʼzaro aloqalarni oʼchirib tashlash huquqiga ega emassiz"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "Ushbu oʼzaro aloqalarni yaratish huquqiga ega emassiz"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Oʼzaro aloqa kiritish"
@@ -1033,11 +1033,11 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Add new"
-msgstr "Янгисини қўшиш"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "Янгисини қўшиш"
 
 msgid "Reactivate"
 msgstr ""
@@ -1135,9 +1135,6 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
-msgstr ""
-
-msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"

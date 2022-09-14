@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -566,8 +566,8 @@ msgstr "Sincronizando"
 msgid "Add comment"
 msgstr "Agregar comentario"
 
-msgid "You dont have access to write comments"
-msgstr "No tienes acceso para escribir comentarios"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Escribir comentario"
@@ -929,8 +929,8 @@ msgstr "Eventos"
 msgid "event"
 msgstr ""
 
-msgid "You dont have access to edit this event"
-msgstr "No tienes acceso para editar este evento"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "Editar evento"
@@ -975,11 +975,11 @@ msgstr "Posibles duplicados encontrados"
 msgid "An error occurred loading possible duplicates"
 msgstr "Se produjo un error al cargar posibles duplicados"
 
-msgid "You dont have access to delete this relationship"
-msgstr "No tiene acceso para eliminar esta relación"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "No tienes acceso para crear relaciones"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Añadir relación"
@@ -1047,11 +1047,11 @@ msgstr "Acciones de inscripción"
 msgid "We are processing your request."
 msgstr "Estamos tramitando su solicitud."
 
-msgid "Add new"
-msgstr "Agregar nuevo"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "Agregar nuevo"
 
 msgid "Reactivate"
 msgstr "Reactiva"
@@ -1153,9 +1153,6 @@ msgid "Event completed"
 msgstr "Evento completado"
 
 msgid "Back to all stages and events"
-msgstr ""
-
-msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"
