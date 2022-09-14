@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2022\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -552,8 +552,8 @@ msgstr "Đang đồng bộ"
 msgid "Add comment"
 msgstr "Thêm bình luận"
 
-msgid "You dont have access to write comments"
-msgstr "Bạn không có quyền viết bình luận"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Viết bình luận"
@@ -907,8 +907,8 @@ msgstr "sự kiện"
 msgid "event"
 msgstr ""
 
-msgid "You dont have access to edit this event"
-msgstr "Bạn không có quyền truy cập để chỉnh sửa sự kiện này"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "Sửa sự kiện"
@@ -953,11 +953,11 @@ msgstr "Có thể tìm thấy các bản sao"
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You dont have access to delete this relationship"
-msgstr "Bạn không có quyền truy cập để xóa mối quan hệ này"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "Bạn không có quyền truy cập để tạo bất kỳ mối quan hệ nào"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Thêm Quan Hệ"
@@ -1025,11 +1025,11 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Add new"
-msgstr "Thêm mới"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "Thêm mới"
 
 msgid "Reactivate"
 msgstr ""
@@ -1127,9 +1127,6 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
-msgstr ""
-
-msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"
