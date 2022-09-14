@@ -541,7 +541,7 @@ msgid "Add comment"
 msgstr "添加备注"
 
 msgid "You don't have access to write comments"
-msgstr ""
+msgstr "您无权撰写评论"
 
 msgid "Write comment"
 msgstr "写备注"
@@ -880,10 +880,10 @@ msgid "Search in all programs"
 msgstr "搜索所有项目"
 
 msgid "Saved lists in this program"
-msgstr ""
+msgstr "此项目中保存的列表"
 
 msgid "Create custom working list"
-msgstr ""
+msgstr "创建自定义工作列表"
 
 msgid "events"
 msgstr "事件"
@@ -936,10 +936,10 @@ msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
 
 msgid "You don't have access to delete this relationship"
-msgstr ""
+msgstr "您无权删除此关系"
 
 msgid "You don't have access to create any relationships"
-msgstr ""
+msgstr "您无权创建任何关系"
 
 msgid "Add relationship"
 msgstr "添加关系"
