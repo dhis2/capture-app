@@ -94,7 +94,7 @@ const deriveEnrollmentType =
   };
 
 const deriveEnrollmentOrgUnitAndDate =
-  (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrolledAt?: string, programFromEvent?: string} => {
+  (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrolledAt?: string, programFromEnrollment?: string} => {
       if (!enrollments?.length) { return {}; }
       if (!currentProgramId && enrollments.length) {
           const { orgUnitName, enrolledAt, program: programFromEnrollment } = enrollments[0];
