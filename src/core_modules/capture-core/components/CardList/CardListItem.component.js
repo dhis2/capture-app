@@ -97,11 +97,11 @@ const deriveEnrollmentOrgUnitAndDate =
   (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrolledAt?: string, programFromEvent?: string} => {
       if (!enrollments?.length) { return {}; }
       if (!currentProgramId && enrollments.length) {
-          const { orgUnitName, enrolledAt, program: programFromEvent } = enrollments[0];
+          const { orgUnitName, enrolledAt, program: programFromEnrollment } = enrollments[0];
           return {
               orgUnitName,
               enrolledAt,
-              programFromEvent,
+              programFromEnrollment,
           };
       }
       const { orgUnitName, enrolledAt } =
@@ -134,7 +134,7 @@ const CardListItemIndex = ({
     };
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
-    const { orgUnitName, enrolledAt, programFromEvent } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
+    const { orgUnitName, enrolledAt, programFromEnrollment } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
 
     return (
         <div data-test="card-list-item" className={classes.itemContainer}>
@@ -230,7 +230,7 @@ const CardListItemIndex = ({
                             // can be different that the scopeId from the url
                             // this can happen for example when you are registering through the relationships
                             programName: currentSearchScopeName,
-                            programId: currentProgramId ?? programFromEvent,
+                            programId: currentProgramId ?? programFromEnrollment,
                             enrollmentType,
                         })
                     }
