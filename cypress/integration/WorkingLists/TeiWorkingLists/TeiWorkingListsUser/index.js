@@ -9,8 +9,18 @@ Given('you open the main page with Ngelehun and child programme context', () => 
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and Malaria case diagnosis context', () => {
+    cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and malaria focus investigation program context', () => {
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+});
+
+
 Then('the default working list should be displayed', () => {
     const names = [
+        'John',
         'Filona',
         'Gertrude',
         'Frank',
@@ -25,7 +35,6 @@ Then('the default working list should be displayed', () => {
         'Julia',
         'Elizabeth',
         'Donald',
-        'Wayne',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -125,50 +134,31 @@ Then('the assignee filter button should show that unassigned filter is in effect
 });
 
 Then('the list should display teis with an active enrollment and unassinged events', () => {
-    const names = [
-        'Maria',
-        'Joe',
-        'Anthony',
-        'Alan',
-        'Heather',
-        'Andrea',
-        'Donald',
-        'Frances',
-        'Julia',
-        'Elizabeth',
-        'Donald',
-        'Wayne',
-        'Johnny',
-        'Donna',
-        'Sharon',
+    const ids = [
+        'ZDA984904',
+        'FSL05494',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
-        .should('have.length', 16)
+        .should('have.length', 3)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
-                    .contains(names[index - 1])
+                    .contains(ids[index - 1])
                     .should('exist');
             }
         });
 });
 
 Then('the list should display teis with John as the first name', () => {
-    const names = [
-        'Johnny',
-        'John',
-        'John',
-    ];
-
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
         .should('have.length', 4)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
-                    .contains(names[index - 1])
+                    .contains('John')
                     .should('exist');
             }
         });
@@ -199,6 +189,7 @@ Then('the registering unit should display in the list', () => {
 
 Then('the list should display data for the second page', () => {
     const names = [
+        'Wayne',
         'Johnny',
         'Donna',
         'Sharon',
@@ -213,7 +204,6 @@ Then('the list should display data for the second page', () => {
         'Noah',
         'Emily',
         'Lily',
-        'Olvia',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -230,6 +220,7 @@ Then('the list should display data for the second page', () => {
 
 Then('the list should display 10 rows of data', () => {
     const names = [
+        'John',
         'Filona',
         'Gertrud',
         'Frank',
@@ -239,7 +230,6 @@ Then('the list should display 10 rows of data', () => {
         'Alan',
         'Heather',
         'Andrea',
-        'Donald',
     ];
 
     cy.get('[data-test="tei-working-lists"]')

@@ -264,6 +264,16 @@ When('you click the report date column header', () => {
 });
 
 Then('the list should display data ordered descendingly by report date', () => {
+    // For concurrency reasons: Adding a filter to ensure that we don't see data we have added in our tests
+    cy.contains('button', 'Report date')
+        .click();
+
+    cy.get('input[placeholder="From"]')
+        .type('2021-01-01');
+
+    cy.contains('Apply')
+        .click();
+
     const rows = {
         '2021-01-01': ['14 Female'],
         '2021-01-03': ['63 Male'],
@@ -308,119 +318,6 @@ When('you select the working list called Events today', () => {
         .click();
 });
 
-When('you change the sharing settings', () => {
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
-        .then((sharingUrl) => {
-            cy.request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'CLBKvCKspBk',
-                    name: 'Events today',
-                    displayName: 'Events today',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [{
-                        id: 'OYLGMiazHtW',
-                        name: 'Kevin Boateng',
-                        displayName: 'Kevin Boateng',
-                        access: 'rw------',
-                    }],
-                    externalAccess: false,
-                },
-            }).then(() => {
-                cy.get('[data-test="list-view-menu-button"]')
-                    .click();
-
-                cy.contains('Share view')
-                    .click();
-
-                cy.get('[placeholder="Enter names"]')
-                    .type('Boateng');
-
-                cy.contains('Kevin Boateng')
-                    .parent()
-                    .click();
-
-                cy.contains('Close')
-                    .click();
-            });
-        });
-});
-
-When('you update the working list', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('Report date')
-        .click();
-
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Update view')
-        .click();
-});
-
-Then('your newly defined sharing settings should still be present', () => {
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Share view')
-        .click();
-
-    cy.contains('Kevin Boateng')
-        .should('exist')
-        .parent()
-        .parent()
-        .find('button')
-        .eq(1)
-        .click();
-
-    cy.contains('Close')
-        .click();
-
-    cy.get('[data-test="online-list-table"]')
-        .contains('Status')
-        .click();
-
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Update view')
-        .click();
-
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
-        .then((sharingUrl) => {
-            cy.request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'CLBKvCKspBk',
-                    name: 'Events today',
-                    displayName: 'Events today',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [],
-                    externalAccess: false,
-                },
-            });
-        });
-});
 Given('you open the main page with Ngelehun and Inpatient morbidity and mortality context', () => {
     cy.visit('#/?programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8');
 });
