@@ -6,7 +6,7 @@ import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
-import { getProgramAndStageFromEvent } from '../../../metaData';
+import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
@@ -39,7 +39,7 @@ import {
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 
 const getDataEntryId = (event): string => (
-    event?.trackedEntity
+    getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
         ? dataEntryIds.ENROLLMENT_EVENT
         : dataEntryIds.SINGLE_EVENT
 );

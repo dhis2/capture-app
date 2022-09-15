@@ -21,7 +21,7 @@ import {
 import {
     actionTypes as viewEventPageActionTypes,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { getProgramAndStageFromEvent } from '../../../metaData';
+import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 
 const getDataEntryKey = (eventStatus?: string): string => (
     (eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE)
@@ -30,7 +30,7 @@ const getDataEntryKey = (eventStatus?: string): string => (
 );
 
 const getDataEntryId = (event): string => (
-    event?.trackedEntity
+    getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
         ? dataEntryIds.ENROLLMENT_EVENT
         : dataEntryIds.SINGLE_EVENT
 );
