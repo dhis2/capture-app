@@ -253,23 +253,31 @@ When('you click the report date column header', () => {
 });
 
 Then('the list should display data ordered descendingly by report date', () => {
-    const rows = [
-        '14 Female',
-        '63 Male',
-        '4 Female',
-        '37 Male',
-        '68 Female',
-        '27 Male',
-        '45 Female',
-        '9 Male',
-        '59 Male',
-        '50 Female',
-        '62 Female',
-        '66 Male',
-        '42 Female',
-        '51 Female',
-        '1 Female',
-    ];
+    // For concurrency reasons: Adding a filter to ensure that we don't see data we have added in our tests
+    cy.contains('button', 'Report date')
+        .click();
+
+    cy.get('input[placeholder="From"]')
+        .type('2021-01-01');
+
+    cy.contains('Apply')
+        .click();
+
+    const rows = {
+        '2021-01-01': ['14 Female'],
+        '2021-01-03': ['63 Male'],
+        '2021-01-04': ['4 Female'],
+        '2021-01-05': ['37 Male'],
+        '2021-01-08': ['68 Female'],
+        '2021-01-09': ['27 Male'],
+        '2021-01-14': ['45 Female'],
+        '2021-01-18': ['9 Male'],
+        '2021-01-20': ['59 Male', '50 Female', '62 Female'],
+        '2021-01-24': ['66 Male'],
+        '2021-01-27': ['42 Female'],
+        '2021-01-29': ['51 Female'],
+        '2021-02-01': ['1 Female'],
+    };
 
     cy.get('[data-test="event-working-lists"]')
         .find('tr')
@@ -293,119 +301,6 @@ When('you select the working list called Events today', () => {
         .click();
 });
 
-When('you change the sharing settings', () =>
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
-        .then(sharingUrl =>
-            cy.request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'CLBKvCKspBk',
-                    name: 'Events today',
-                    displayName: 'Events today',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [{
-                        id: 'OYLGMiazHtW',
-                        name: 'Kevin Boateng',
-                        displayName: 'Kevin Boateng',
-                        access: 'rw------',
-                    }],
-                    externalAccess: false,
-                },
-            }).then(() => {
-                cy.get('[data-test="list-view-menu-button"]')
-                    .click();
-
-                cy.contains('Share view')
-                    .click();
-
-                cy.get('[placeholder="Enter names"]')
-                    .type('Boateng');
-
-                cy.contains('Kevin Boateng')
-                    .parent()
-                    .click();
-
-                cy.contains('Close')
-                    .click();
-            }),
-        ),
-);
-
-When('you update the working list', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('Report date')
-        .click();
-
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Update view')
-        .click();
-});
-
-Then('your newly defined sharing settings should still be present', () => {
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Share view')
-        .click();
-
-    cy.contains('Kevin Boateng')
-        .should('exist')
-        .parent()
-        .parent()
-        .find('button')
-        .eq(1)
-        .click();
-
-    cy.contains('Close')
-        .click();
-
-    cy.get('[data-test="online-list-table"]')
-        .contains('Status')
-        .click();
-
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Update view')
-        .click();
-
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
-        .then((sharingUrl) => {
-            cy.request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'CLBKvCKspBk',
-                    name: 'Events today',
-                    displayName: 'Events today',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [],
-                    externalAccess: false,
-                },
-            });
-        });
-});
 Given('you open the main page with Ngelehun and Inpatient morbidity and mortality context', () => {
     cy.visit('#/?programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8');
 });

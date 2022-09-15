@@ -278,8 +278,13 @@ And('you submit the form', () => {
         .click();
 });
 
-And('you see validation error on visit date', () => {
-    cy.get('[data-test="registration-page-content"]')
+And('you see validation errors', () => {
+    cy.contains('A value is required')
+        .should('exist');
+});
+
+Then('you see validation error on visit date', () => {
+    cy.get('[data-test="dataentry-field-eventDate"]')
         .contains('A value is required')
         .should('exist');
 });

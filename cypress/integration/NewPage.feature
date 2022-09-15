@@ -125,7 +125,7 @@ Feature: User creates a new entries from the registration page
   Scenario: New person in Tracker Program > Submitting the form with empty visit date throws validation error
     Given you are in the WHO RMNCH program registration page
     And you click the save new submit button
-    Then you see validation error on visit date
+    Then you see validation errors
 
   Scenario: New person in Tracker Program > Filling the age with age 0 throws validation warning
     Given you are in the WHO RMNCH program registration page
