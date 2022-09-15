@@ -24,11 +24,3 @@ Feature: the user interacts with the "view all records regardless of OrgUnit"-pa
   Scenario: the working list will hydrate when updated by the URL
     When the user navigates to /#/?programId=VBqh0ynB2wv&all
     Then the working list should be displayed
-
-#  Scenario: The user can edit an event without selecting OrgUnit
-#    Given the user selects the program Malaria case registration
-#    And the user clicks the show accessible button
-#    And the working list should be displayed
-#    When the user clicks a row
-#    And edits and save the form
-#    Then the working list will be updated

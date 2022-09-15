@@ -31,32 +31,3 @@ When('the user clicks the show accessible button', () => {
 When(/^the user navigates to (.*)$/, (url) => {
     cy.visit(url);
 });
-
-When('the user clicks a row', () => {
-    cy.get('[data-test="main-page-working-list"]')
-        .find('tr')
-        .eq(1)
-        .click();
-});
-
-When('edits and save the form', () => {
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Edit Event')
-        .click();
-    cy.get('[data-test="capture-ui-input"]')
-        .contains('34')
-        .type('35')
-        .blur();
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Save')
-        .click();
-});
-
-Then('the working list will be updated', () => {
-    cy.get('[data-test="main-page-working-list"]')
-        .find('tr')
-        .eq(1)
-        .within((row) => {
-            row.contains('35');
-        });
-});

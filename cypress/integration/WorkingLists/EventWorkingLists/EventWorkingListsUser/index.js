@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4';
 import '../../sharedSteps';
 import '../../../sharedSteps';
 
@@ -304,6 +305,31 @@ When('you select the working list called Events today', () => {
         .click();
 });
 
+When('you create a copy of the working list', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+
+    cy.contains('Save current view as')
+        .click();
+
+    const id = uuid();
+    cy.get('[data-test="view-name-content"]')
+        .type(id);
+
+    cy.intercept('POST', '**/eventFilters**').as('newEventFilter');
+
+    cy.get('button')
+        .contains('Save')
+        .click();
+
+    cy.wait('@newEventFilter', { timeout: 30000 });
+
+    cy.reload();
+
+    cy.contains(id.substring(0, 26))
+        .click();
+});
+
 When('you change the sharing settings', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -315,8 +341,8 @@ When('you change the sharing settings', () => {
 
     cy.contains('Kevin Boateng').click();
     cy.contains('Select a level').click();
-    cy.contains('View and edit').click({ force: true });
-
+    cy.get('[data-test="dhis2-uicore-select-menu-menuwrapper"]')
+        .contains('View and edit').click({ force: true });
 
     cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
     cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
@@ -343,25 +369,18 @@ Then('your newly defined sharing settings should still be present', () => {
         .click();
 
     cy.contains('Kevin Boateng')
-        .should('exist')
-        .should('exist')
-        .parent()
-        .parent()
-        .parent()
-        .find('.select')
-        .click();
-    cy.contains('Remove access').click();
-    cy.contains('Close')
-        .click();
+        .should('exist');
 
-    cy.get('[data-test="online-list-table"]')
-        .contains('Status')
+    cy.contains('Close')
         .click();
 
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
-    cy.contains('Update view')
+    cy.contains('Delete view')
+        .click();
+
+    cy.contains('Confirm')
         .click();
 });
 Given('you open the main page with Ngelehun and Inpatient morbidity and mortality context', () => {
