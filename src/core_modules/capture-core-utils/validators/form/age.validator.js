@@ -5,7 +5,7 @@ import { isValidDate } from './date.validator';
  *
  * @export
  * @param {string} value
- * @returns
+ * @returns {boolean}
  */
 
 type AgeValues = {

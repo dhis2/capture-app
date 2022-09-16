@@ -3,7 +3,7 @@
  *
  * @export
  * @param {string} value
- * @returns
+ * @returns {boolean}
  */
 export const isValidNegativeInteger = (value: string) => {
     if (isNaN(value)) {
