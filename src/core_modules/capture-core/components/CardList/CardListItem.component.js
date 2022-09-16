@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
 import type { ComponentType } from 'react';
-import { getProgramFromProgramIdThrowIfNotFound } from 'capture-core/metaData';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
 import { colors, Tag, IconCheckmark16 } from '@dhis2/ui';
 import type {
@@ -12,7 +11,7 @@ import type {
 } from '../Pages/Search/SearchResults/SearchResults.types';
 import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
-import { dataElementTypes } from '../../metaData';
+import { dataElementTypes, getProgramFromProgramIdThrowIfNotFound } from '../../metaData';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 
