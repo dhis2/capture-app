@@ -7,6 +7,8 @@ import {
     filterByInnerAction,
     mapToInnerAction,
 } from 'capture-core-utils/epics';
+import { statusTypes } from 'capture-core/events/statusTypes';
+import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
 } from '../EditEventDataEntry/editEventDataEntry.actions';
@@ -19,7 +21,19 @@ import {
 import {
     actionTypes as viewEventPageActionTypes,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { getProgramAndStageFromEvent } from '../../../metaData';
+import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
+
+const getDataEntryKey = (eventStatus?: string): string => (
+    (eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE)
+        ? dataEntryKeys.EDIT
+        : dataEntryKeys.VIEW
+);
+
+const getDataEntryId = (event): string => (
+    getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
+        ? dataEntryIds.ENROLLMENT_EVENT
+        : dataEntryIds.SINGLE_EVENT
+);
 
 export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
     action$.pipe(
@@ -70,6 +84,8 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
                 program,
                 enrollment,
                 attributeValues,
+                dataEntryId: getDataEntryId(eventContainer.event),
+                dataEntryKey: getDataEntryKey(eventContainer.event?.status),
             }))
                 .pipe(
                     map(item => batchActions(item)),

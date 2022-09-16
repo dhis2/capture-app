@@ -6,12 +6,12 @@ import type { Props } from './WidgetEventComment.types';
 import { requestAddNoteForEvent } from './WidgetEventComment.actions';
 import { WidgetComment } from '../WidgetComment';
 
-export const WidgetEventComment = ({ itemId, dataEntryId }: Props) => {
+export const WidgetEventComment = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
-    const comments = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[`${dataEntryId}-${itemId}`] ?? []);
+    const comments = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
 
     const onAddComment = (newCommentValue) => {
-        dispatch(requestAddNoteForEvent(itemId, dataEntryId, newCommentValue));
+        dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newCommentValue));
     };
 
     return (
