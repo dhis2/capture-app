@@ -1,3 +1,10 @@
+## [100.13.5](https://github.com/dhis2/capture-app/compare/v100.13.4...v100.13.5) (2022-09-16)
+
+
+### Bug Fixes
+
+* [DHIS2-13544] form validation for scheduled event ([#2981](https://github.com/dhis2/capture-app/issues/2981)) ([ed18554](https://github.com/dhis2/capture-app/commit/ed18554013f6d94d467dc2afd5aad1563be39fc9))
+
 ## [100.13.4](https://github.com/dhis2/capture-app/compare/v100.13.3...v100.13.4) (2022-09-15)
 
 
