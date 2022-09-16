@@ -13,6 +13,7 @@ import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
 import { dataElementTypes } from '../../metaData';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
+import { getProgramFromProgramIdThrowIfNotFound } from 'capture-core/metaData';
 
 type OwnProps = $ReadOnly<{|
     item: ListItem,
@@ -94,14 +95,17 @@ const deriveEnrollmentType =
   };
 
 const deriveEnrollmentOrgUnitAndDate =
-  (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrolledAt?: string, programFromEnrollment?: string} => {
+  (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrolledAt?: string, programFromEnrollment?: string, programNameFromEnrollment?: string} => {
       if (!enrollments?.length) { return {}; }
       if (!currentProgramId && enrollments.length) {
           const { orgUnitName, enrolledAt, program: programFromEnrollment } = enrollments[0];
+          const program = getProgramFromProgramIdThrowIfNotFound(programFromEnrollment);
+
           return {
               orgUnitName,
               enrolledAt,
               programFromEnrollment,
+              programNameFromEnrollment: program.name,
           };
       }
       const { orgUnitName, enrolledAt } =
@@ -134,7 +138,7 @@ const CardListItemIndex = ({
     };
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
-    const { orgUnitName, enrolledAt, programFromEnrollment } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
+    const { orgUnitName, enrolledAt, programFromEnrollment, programNameFromEnrollment } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
 
     return (
         <div data-test="card-list-item" className={classes.itemContainer}>
@@ -169,6 +173,11 @@ const CardListItemIndex = ({
                                     enrolledAt &&
                                     // $FlowFixMe[prop-missing] automated comment
                                     <ListEntry name={i18n.t('Date of enrollment')} value={enrolledAt} type={dataElementTypes.DATE} />
+                                }
+
+                                {
+                                    programNameFromEnrollment &&
+                                    <ListEntry name={i18n.t('Program name')} value={programNameFromEnrollment} />
                                 }
 
                             </Grid>
