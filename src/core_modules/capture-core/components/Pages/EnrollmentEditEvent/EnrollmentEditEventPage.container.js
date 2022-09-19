@@ -26,6 +26,12 @@ const getEventDate = (event) => {
     return eventDate;
 };
 
+const getEventScheduleDate = (event) => {
+    if (!event?.scheduledAt) { return undefined; }
+    const eventDataConvertValue = convertValue(event?.scheduledAt, dataElementTypes.DATETIME);
+    return eventDataConvertValue?.toString();
+};
+
 const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, event }) => {
     if (orgUnitId) {
         return enrollmentSite && teiDisplayName && trackedEntityName && programStage && event
@@ -82,6 +88,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
+    const scheduleDate = getEventScheduleDate(event);
     const { currentPageMode, cancel } = useEnrollmentEditEventPageMode(event?.status);
     cancel && onCancel();
     const dataEntryKey = `singleEvent-${currentPageMode}`;
@@ -116,6 +123,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             eventDate={eventDate}
             onEnrollmentError={onEnrollmentError}
             eventStatus={event?.status}
+            scheduleDate={scheduleDate}
         />
     );
 };

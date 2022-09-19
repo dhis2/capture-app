@@ -62,6 +62,7 @@ const EnrollmentEditEventPagePain = ({
     onGoBack,
     orgUnitId,
     eventDate,
+    scheduleDate,
     eventStatus,
     pageStatus,
     onEnrollmentError,
@@ -96,6 +97,7 @@ const EnrollmentEditEventPagePain = ({
                             orgUnitId={orgUnitId}
                             enrollmentId={enrollmentId}
                             eventStatus={eventStatus}
+                            initialScheduleDate={scheduleDate}
                         />
                     )}
                     {pageStatus === pageStatuses.MISSING_DATA && (

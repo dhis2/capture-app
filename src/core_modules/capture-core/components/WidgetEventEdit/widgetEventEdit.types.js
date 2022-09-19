@@ -9,5 +9,6 @@ export type Props = {|
     orgUnitId: string,
     programId: string,
     enrollmentId: string,
+    initialScheduleDate?: string,
     ...CssClasses,
 |};

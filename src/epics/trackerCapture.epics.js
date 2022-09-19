@@ -188,6 +188,8 @@ import {
 import {
     saveNewEventSucceededEpic,
     saveNewEventFailedEpic,
+    updateEventSucceededEpic,
+    updateEventFailedEpic,
 } from '../core_modules/capture-core/components/Pages/EnrollmentAddEvent/EnrollmentAddEventPage.epics';
 import {
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
@@ -314,6 +316,8 @@ export const epics = combineEpics(
     saveNewEnrollmentEventEpic,
     saveNewEventSucceededEpic,
     saveNewEventFailedEpic,
+    updateEventSucceededEpic,
+    updateEventFailedEpic,
     addNoteForNewEnrollmentEventEpic,
     addNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,

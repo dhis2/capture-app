@@ -48,6 +48,7 @@ type Props = {
     },
     enrolledAt: string,
     occurredAt: string,
+    initialScheduleDate: string,
     eventData: Array<Object>
 }
 export const useDetermineSuggestedScheduleDate = ({
@@ -56,7 +57,9 @@ export const useDetermineSuggestedScheduleDate = ({
     enrolledAt,
     occurredAt,
     eventData,
+    initialScheduleDate,
 }: Props) => {
+    if (initialScheduleDate) { return initialScheduleDate; }
     if (!programStageScheduleConfig) { return undefined; }
 
     const {

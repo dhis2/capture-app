@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';
+import { useLocationQuery } from '../../utils/routing';
 import type { ContainerProps } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
 import {
@@ -27,6 +28,7 @@ export const WidgetEventSchedule = ({
     onSaveSuccessActionType,
     onSaveErrorActionType,
     onCancel,
+    initialScheduleDate,
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
@@ -35,13 +37,13 @@ export const WidgetEventSchedule = ({
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
-        programStageScheduleConfig, programConfig, ...passOnProps,
+        programStageScheduleConfig, programConfig, initialScheduleDate, ...passOnProps,
     });
     const { currentUser, noteId } = useCommentDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [comments, setComments] = useState([]);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
-
+    const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events
         .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
 
@@ -58,6 +60,7 @@ export const WidgetEventSchedule = ({
             stageId,
             teiId,
             enrollmentId,
+            eventId,
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
@@ -71,6 +74,7 @@ export const WidgetEventSchedule = ({
         stageId,
         teiId,
         enrollmentId,
+        eventId,
         onSave,
         onSaveSuccessActionType,
         onSaveErrorActionType,

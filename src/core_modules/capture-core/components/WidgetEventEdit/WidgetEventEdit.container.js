@@ -1,6 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24, Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
@@ -12,6 +13,10 @@ import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../metaData';
+import { buildUrlQueryString } from '../../utils/routing';
+import {
+    updateEnrollmentEvents,
+} from '../Pages/common/EnrollmentOverviewDomain';
 
 const styles = {
     header: {
@@ -42,6 +47,7 @@ const styles = {
 export const WidgetEventEditPlain = ({
     classes,
     eventStatus,
+    initialScheduleDate,
     programStage,
     programStage: { name, icon },
     onGoBack,
@@ -50,6 +56,7 @@ export const WidgetEventEditPlain = ({
     enrollmentId,
 }: Props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { currentPageMode, pageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
@@ -58,6 +65,10 @@ export const WidgetEventEditPlain = ({
     if (error) {
         return error.errorComponent;
     }
+    const onHandleScheduleSave = (eventId: string, eventData: Object) => {
+        dispatch(updateEnrollmentEvents(eventId, eventData));
+        history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
+    };
 
     return orgUnit ? (
         <div data-test="widget-enrollment-event">
@@ -127,6 +138,8 @@ export const WidgetEventEditPlain = ({
                             enrollmentId={enrollmentId}
                             hasDeleteButton
                             eventStatus={eventStatus}
+                            onHandleScheduleSave={onHandleScheduleSave}
+                            initialScheduleDate={initialScheduleDate}
                         />
                     )}
                 </div>

@@ -9,6 +9,7 @@ export type ContainerProps = {|
    orgUnitId: string,
    teiId: string,
    enrollmentId: string,
+   initialScheduleDate?: string,
    onSave: (eventServerValues: Object, uid: string) => void,
    onSaveSuccessActionType: string,
    onSaveErrorActionType: string,

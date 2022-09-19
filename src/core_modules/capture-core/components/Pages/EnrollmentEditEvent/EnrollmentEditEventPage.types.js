@@ -14,6 +14,7 @@ export type PlainProps = {|
     trackedEntityName: string,
     teiDisplayName: string,
     eventDate?: string,
+    scheduleDate?: string,
     enrollmentsAsOptions: Array<Object>,
     onDelete: () => void,
     onAddNew: () => void,

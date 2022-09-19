@@ -37,6 +37,7 @@ import { statusTypes } from '../../../events/statusTypes';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
+import { actionTypes } from './editEventDataEntry.actions';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -313,10 +314,12 @@ type Props = {
     orgUnit: OrgUnit,
     programId: string,
     eventStatus: string,
+    initialScheduleDate?: string,
     onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void,
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onHandleScheduleSave: (eventId: string, eventData: Object) => void,
     onDelete: () => void,
     onCancel: () => void,
     classes: {
@@ -374,11 +377,11 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
+            onHandleScheduleSave,
             onSave,
             classes,
             ...passOnProps
         } = this.props;
-
         return (
             <div>
                 <TabBar dataTest="edit-event-tab-bar">
@@ -399,8 +402,10 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 {this.state.mode === tabMode.SCHEDULE && // $FlowFixMe[cannot-spread-inexact] automated comment
                 <WidgetEventSchedule
                     programId={programId}
-                    onSave={onSave}
+                    onSave={onHandleScheduleSave}
                     orgUnitId={orgUnit.id}
+                    onSaveSuccessActionType={actionTypes.EVENT_SCHEDULE_SUCCESS}
+                    onSaveErrorActionType={actionTypes.EVENT_SCHEDULE_ERROR}
                     {...passOnProps}
                 />}
             </div>
