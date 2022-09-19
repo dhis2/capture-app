@@ -7,7 +7,6 @@ Given('you open the main page with Ngelehun and malaria case context', () => {
 });
 
 Then('the default working list should be displayed', () => {
-
     const rows = {
         '2022-12-30': ['14 Male'],
         '2022-12-29': ['67 Male'],
