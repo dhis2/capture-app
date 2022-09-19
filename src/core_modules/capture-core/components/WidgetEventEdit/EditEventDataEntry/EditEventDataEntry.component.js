@@ -313,7 +313,6 @@ type Props = {
     formFoundation: ?RenderFoundation,
     orgUnit: OrgUnit,
     programId: string,
-    eventStatus: string,
     initialScheduleDate?: string,
     onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
@@ -387,7 +386,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             dataEntryId,
             onCancelEditEvent,
             enrollmentId,
-            eventStatus,
             ...passOnProps
         } = this.props;
         return (
@@ -422,6 +420,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
 
     renderDataEntry() {
         const {
+            dataEntryId,
             orgUnit,
             programId,
             onUpdateDataEntryField,
