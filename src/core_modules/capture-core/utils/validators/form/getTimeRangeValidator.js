@@ -5,7 +5,7 @@ import moment from 'moment';
  *
  * @export
  * @param {string} value
- * @returns
+ * @returns {boolean}
  */
 
 function isValidTimeWithEmptyCheck(value: ?string) {

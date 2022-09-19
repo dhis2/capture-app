@@ -116,7 +116,7 @@
     "fake-indexeddb": "^4.0.0",
     "flow-bin": "^0.132.0",
     "husky": "^7.0.4",
-    "jsdoc": "^3.6.10",
+    "jsdoc": "^3.6.11",
     "jsdoc-babel": "^0.5.0",
     "jsdoc-export-default-interop": "^0.3.1",
     "node-fetch": "2",
