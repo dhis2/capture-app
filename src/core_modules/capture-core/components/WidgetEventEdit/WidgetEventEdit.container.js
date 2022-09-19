@@ -2,6 +2,7 @@
 import React, { type ComponentType, useEffect } from 'react';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24, Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
@@ -67,6 +68,10 @@ export const WidgetEventEditPlain = ({
     if (error) {
         return error.errorComponent;
     }
+    const onHandleScheduleSave = (eventId: string, eventData: Object) => {
+        dispatch(updateEnrollmentEvents(eventId, eventData));
+        history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
+    };
 
 
     return orgUnit ? (

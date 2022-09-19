@@ -188,6 +188,8 @@ import {
 import {
     saveNewEventSucceededEpic,
     saveNewEventFailedEpic,
+    updateEventSucceededEpic,
+    updateEventFailedEpic,
 } from '../core_modules/capture-core/components/Pages/EnrollmentAddEvent/EnrollmentAddEventPage.epics';
 import {
     updateEventSucceededEpic,
