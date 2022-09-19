@@ -6,6 +6,7 @@ export type Props = {|
     programStage: ProgramStage,
     eventStatus?: string,
     onGoBack: () => void,
+    onCancelEditEvent: () => void,
     orgUnitId: string,
     programId: string,
     enrollmentId: string,

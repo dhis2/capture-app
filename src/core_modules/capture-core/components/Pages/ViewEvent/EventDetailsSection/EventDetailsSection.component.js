@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { dataEntryIds } from 'capture-core/constants';
 import { withStyles } from '@material-ui/core/';
 import { IconFileDocument24, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -75,12 +76,14 @@ const EventDetailsSectionPlain = (props: Props) => {
                 {showEditEvent ?
                     // $FlowFixMe[cannot-spread-inexact] automated comment
                     <EditEventDataEntry
+                        dataEntryId={dataEntryIds.SINGLE_EVENT}
                         formFoundation={formFoundation}
                         orgUnit={orgUnit}
                         {...passOnProps}
                     /> :
                     // $FlowFixMe[cannot-spread-inexact] automated comment
                     <ViewEventDataEntry
+                        dataEntryId={dataEntryIds.SINGLE_EVENT}
                         formFoundation={formFoundation}
                         {...passOnProps}
                     />

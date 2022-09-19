@@ -1,3 +1,24 @@
+## [100.13.5](https://github.com/dhis2/capture-app/compare/v100.13.4...v100.13.5) (2022-09-16)
+
+
+### Bug Fixes
+
+* [DHIS2-13544] form validation for scheduled event ([#2981](https://github.com/dhis2/capture-app/issues/2981)) ([ed18554](https://github.com/dhis2/capture-app/commit/ed18554013f6d94d467dc2afd5aad1563be39fc9))
+
+## [100.13.4](https://github.com/dhis2/capture-app/compare/v100.13.3...v100.13.4) (2022-09-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([983ddad](https://github.com/dhis2/capture-app/commit/983ddadb7c9d986b17480698fe47a33bbb1d6b5e))
+
+## [100.13.3](https://github.com/dhis2/capture-app/compare/v100.13.2...v100.13.3) (2022-09-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5583499](https://github.com/dhis2/capture-app/commit/5583499994223b5c6eb322cba636a221b6187b99))
+
 ## [100.13.2](https://github.com/dhis2/capture-app/compare/v100.13.1...v100.13.2) (2022-09-06)
 
 

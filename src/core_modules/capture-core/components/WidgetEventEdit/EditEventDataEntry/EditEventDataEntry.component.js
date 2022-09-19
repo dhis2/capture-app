@@ -327,6 +327,10 @@ type Props = {
         fieldLabelMediaBased?: ?string,
     },
     theme: Theme,
+    dataEntryId: string,
+    onCancelEditEvent?: () => void,
+    eventStatus?: string,
+    enrollmentId?: string,
 };
 
 type State = {
@@ -380,6 +384,10 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onHandleScheduleSave,
             onSave,
             classes,
+            dataEntryId,
+            onCancelEditEvent,
+            enrollmentId,
+            eventStatus,
             ...passOnProps
         } = this.props;
         return (
@@ -425,7 +433,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
         } = this.props;
         return ( // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
-                id={'singleEvent'}
+                id={dataEntryId}
                 onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
                 onUpdateFormField={onUpdateField(orgUnit, programId)}
                 onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}

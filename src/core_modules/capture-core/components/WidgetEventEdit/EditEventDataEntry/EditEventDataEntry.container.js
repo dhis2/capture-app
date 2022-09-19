@@ -1,7 +1,9 @@
 // @flow
 import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
+import { statusTypes } from 'capture-core/events/statusTypes';
 import { batchActions } from 'redux-batched-actions';
+import { dataEntryKeys } from 'capture-core/constants';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
@@ -21,10 +23,6 @@ import {
     cancelEditEventDataEntry,
     requestDeleteEventDataEntry,
 } from './editEventDataEntry.actions';
-
-import {
-    viewEventIds,
-} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
@@ -88,11 +86,15 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation, orgUnit));
     },
     onCancel: () => {
+        const { eventStatus, onCancelEditEvent } = props;
+        const isScheduled = eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE;
         window.scrollTo(0, 0);
+
         dispatch(batchActions([
             cancelEditEventDataEntry(),
-            setCurrentDataEntry(viewEventIds.dataEntryId, viewEventIds.itemId),
+            ...(isScheduled ? [] : [setCurrentDataEntry(props.dataEntryId, dataEntryKeys.VIEW)]),
         ]));
+        isScheduled && onCancelEditEvent && onCancelEditEvent();
     },
     onDelete: () => {
         const { enrollmentId } = props;

@@ -20,6 +20,7 @@ export type PlainProps = {|
     onAddNew: () => void,
     onGoBack: () => void,
     onEnrollmentError: (message: string) => void,
+    onCancelEditEvent: () => void,
     pageStatus: string,
     eventStatus?: string,
     ...CssClasses,

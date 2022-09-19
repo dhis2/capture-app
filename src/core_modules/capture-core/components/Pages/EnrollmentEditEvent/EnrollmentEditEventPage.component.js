@@ -3,9 +3,10 @@ import React from 'react';
 import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
+import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
-import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
+import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import { WidgetEventEdit } from '../../WidgetEventEdit/';
 import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
 import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
@@ -66,6 +67,7 @@ const EnrollmentEditEventPagePain = ({
     eventStatus,
     pageStatus,
     onEnrollmentError,
+    onCancelEditEvent,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -83,7 +85,7 @@ const EnrollmentEditEventPagePain = ({
         />
         <div className={classes.page}>
             <div className={classes.title}>
-                {mode === pageMode.VIEW
+                {mode === dataEntryKeys.VIEW
                     ? i18n.t('Enrollment{{escape}} View Event', { escape: ':' })
                     : i18n.t('Enrollment{{escape}} Edit Event', { escape: ':' })}
             </div>
@@ -98,6 +100,7 @@ const EnrollmentEditEventPagePain = ({
                             enrollmentId={enrollmentId}
                             eventStatus={eventStatus}
                             initialScheduleDate={scheduleDate}
+                            onCancelEditEvent={onCancelEditEvent}
                         />
                     )}
                     {pageStatus === pageStatuses.MISSING_DATA && (
@@ -110,7 +113,7 @@ const EnrollmentEditEventPagePain = ({
                     )}
                 </div>
                 <div className={classes.rightColumn}>
-                    <WidgetEventComment itemId={mode} dataEntryId="singleEvent" />
+                    <WidgetEventComment dataEntryKey={mode} dataEntryId={dataEntryIds.ENROLLMENT_EVENT} />
                     <WidgetError error={widgetEffects.errors} />
                     <WidgetWarning warning={widgetEffects.warnings} />
                     {!hideWidgets.feedback && (

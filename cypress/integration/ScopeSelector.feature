@@ -175,7 +175,7 @@ Feature: User uses the ScopeSelector to navigate
 
   #Enrollment event edit page
   Scenario: Enrollment event edit page > resetting the tei
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=kNn9HkRjk1c
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the tei selection
     Then you navigated to the main page
 
