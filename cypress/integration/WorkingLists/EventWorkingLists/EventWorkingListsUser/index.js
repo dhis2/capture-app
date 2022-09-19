@@ -7,6 +7,7 @@ Given('you open the main page with Ngelehun and malaria case context', () => {
 });
 
 Then('the default working list should be displayed', () => {
+
     const rows = {
         '2022-12-30': ['14 Male'],
         '2022-12-29': ['67 Male'],
@@ -261,6 +262,16 @@ When('you click the report date column header', () => {
 });
 
 Then('the list should display data ordered descendingly by report date', () => {
+    // For concurrency reasons: Adding a filter to ensure that we don't see data we have added in our tests (the tests will clean up, but concurrent running could cause problems anyway)
+    cy.contains('button', 'Report date')
+        .click();
+
+    cy.get('input[placeholder="From"]')
+        .type('2021-01-01');
+
+    cy.contains('Apply')
+        .click();
+
     const rows = {
         '2021-01-01': ['14 Female'],
         '2021-01-03': ['63 Male'],
