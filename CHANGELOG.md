@@ -1,3 +1,10 @@
+## [100.13.6](https://github.com/dhis2/capture-app/compare/v100.13.5...v100.13.6) (2022-09-19)
+
+
+### Bug Fixes
+
+* [DHIS2-13723] send program id from event ([#3001](https://github.com/dhis2/capture-app/issues/3001)) ([b637543](https://github.com/dhis2/capture-app/commit/b63754302268d7cf0296af989979959a736b382b))
+
 ## [100.13.5](https://github.com/dhis2/capture-app/compare/v100.13.4...v100.13.5) (2022-09-16)
 
 
