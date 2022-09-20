@@ -268,7 +268,9 @@ Then('the list should display data ordered descendingly by report date', () => {
     cy.get('input[placeholder="From"]')
         .type('2021-01-01');
 
-    cy.contains('Apply')
+    cy.get('input[placeholder="To"]').click();
+
+    cy.contains('Update')
         .click();
 
     const rows = {
