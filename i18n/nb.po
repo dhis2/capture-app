@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
+"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -49,6 +49,9 @@ msgstr "Organisasjonsenhet"
 
 msgid "Date of enrollment"
 msgstr "Dato for registrering"
+
+msgid "Program name"
+msgstr "Programnavn"
 
 msgid "Last updated"
 msgstr "Sist oppdatert"
