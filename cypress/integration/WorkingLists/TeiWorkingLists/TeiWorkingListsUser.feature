@@ -24,7 +24,7 @@ And rows per page should be set to 15
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show only teis with active enrollments and unassinged events using the filter
-Given you open the main page with Ngelehun and Malaria focus investigation context
+Given you open the main page with Ngelehun and malaria focus investigation program context
 When you set the enrollment status filter to active
 And you apply the current filter
 And you set the assginee filter to none
@@ -80,10 +80,9 @@ When you change rows per page to 10
 Then the list should display 10 rows of data
 And for a tracker program the page navigation should show that you are on the first page
 
-# TODO - Commenting out because of bug in BE (DHIS2-12505)
-#Scenario: Show teis ordered ascendingly by first name
-#Given you open the main page with Ngelehun and child programme context
-#When you click the first name column header
-#Then the sort arrow should indicate ascending order
-#And the list should display data ordered ascendingly by first name
-#And for a tracker program the page navigation should show that you are on the first page
+Scenario: Show teis ordered ascendingly by first name 
+Given you open the main page with Ngelehun and child programme context
+When you click the first name column header
+Then the sort arrow should indicate ascending order
+And the list should display data ordered ascendingly by first name
+And for a tracker program the page navigation should show that you are on the first page
