@@ -1,3 +1,13 @@
+Given('you open the capture app with english language', () => {
+    cy.loginThroughForm('DHIS2_USERNAME_ENGLISH', 'DHIS2_PASSWORD_ENGLISH');
+    cy.visit('/');
+});
+
+Then('you should see the app main selections', () => {
+    cy.get('[data-test="org-unit-selector-container"]');
+    cy.get('[data-test="program-selector-container"]');
+});
+
 Given('you open the App without auth cookie', () => {
     cy.visit('/');
 });
@@ -29,12 +39,6 @@ When('you fill in credentials', () => {
 When('you sign in', () => {
     cy.get('form')
         .submit();
-});
-
-Then('you should see the app main selections', () => {
-    cy.get('[data-test="org-unit-selector-container"]');
-
-    cy.get('[data-test="program-selector-container"]');
 });
 
 Then('you should see the header bar', () => {
