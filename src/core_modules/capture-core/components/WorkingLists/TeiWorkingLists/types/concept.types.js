@@ -72,7 +72,8 @@ export type LoadTeiView = (
         programId: string,
         orgUnitId: string,
         categories?: Categories,
-        programStageId?: string
+        programStageId?: string,
+        currentRequest?: string,
     |},
     meta: {|
         columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,

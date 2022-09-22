@@ -125,31 +125,18 @@ Then('the assignee filter button should show that unassigned filter is in effect
 });
 
 Then('the list should display teis with an active enrollment and unassinged events', () => {
-    const names = [
-        'John',
-        'Andrea',
-        'Donald',
-        'Johnny',
-        'Heather',
-        'Frances',
-        'Anthony',
-        'Alan',
-        'Maria',
-        'Donna',
-        'Joe',
-        'Wayne',
-        'Donald',
-        'Julia',
-        'Elizabeth',
+    const systemFocusIds = [
+        'ZDA984904',
+        'FSL054948',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
-        .should('have.length', 16)
+        .should('have.length', 3)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
-                    .contains(names[index - 1])
+                    .contains(systemFocusIds[index - 1])
                     .should('exist');
             }
         });

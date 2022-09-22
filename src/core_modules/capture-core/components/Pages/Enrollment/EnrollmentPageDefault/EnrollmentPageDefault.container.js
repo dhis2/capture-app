@@ -5,7 +5,7 @@ import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
+import { useCommonEnrollmentDomainData, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
@@ -79,6 +79,8 @@ export const EnrollmentPageDefault = () => {
         );
     };
 
+    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+
     const onEventClick = (eventId: string, stageId: string) => {
         history.push(`/enrollmentEventEdit?${urlArguments({ orgUnitId, programId, teiId, enrollmentId, eventId, stageId })}`);
     };
@@ -97,6 +99,7 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
+            onEnrollmentError={onEnrollmentError}
         />
     );
 };

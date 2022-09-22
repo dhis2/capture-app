@@ -6,6 +6,7 @@ export type Props = {|
     enrollmentId: string,
     programId: string,
     onDelete: () => void,
+    onError?: (message: string) => void,
 |};
 
 export type PlainProps = {|
@@ -16,5 +17,6 @@ export type PlainProps = {|
     error?: FetchError,
     loading: boolean,
     onDelete: () => void,
+    onError?: (message: string) => void,
     ...CssClasses,
 |};

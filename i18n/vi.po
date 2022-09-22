@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-23T14:43:54.028Z\n"
+"POT-Creation-Date: 2022-06-23T13:21:06.685Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -959,17 +959,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Đánh dấu để theo-dõi"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Theo dõi sau"
-
 msgid "Enrollment date"
 msgstr "Ngày ghi vào"
 
 msgid "Incident date"
 msgstr "Ngày đến"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Theo dõi sau"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

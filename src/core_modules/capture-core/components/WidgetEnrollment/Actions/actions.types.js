@@ -5,6 +5,7 @@ export type Props = {|
     enrollment: Object,
     refetch: QueryRefetchFunction,
     onDelete: () => void,
+    onError?: (message: string) => void,
 |};
 
 export type PlainProps = {|

@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-23T14:43:54.028Z\n"
+"POT-Creation-Date: 2022-06-23T13:21:06.685Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -992,17 +992,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Marquer pour suivi"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Suivi"
-
 msgid "Enrollment date"
 msgstr "Date d'enrôlement"
 
 msgid "Incident date"
 msgstr "Date de l´incident"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Suivi"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

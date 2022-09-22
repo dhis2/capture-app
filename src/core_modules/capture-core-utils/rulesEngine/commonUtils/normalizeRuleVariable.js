@@ -4,7 +4,7 @@ import isString from 'd2-utilizr/lib/isString';
 import { typeKeys } from '../constants';
 
 // Turns the internal representation of a program rule variable into its "canonical" format
-// (e.g. numbers represented as strings get converted to Numbers)
+// (e.g. numbers represented as strings get converted to numbers)
 export const normalizeRuleVariable = (data: any, valueType: string) => {
     const convertNumber = (numberRepresentation) => {
         if (isString(numberRepresentation)) {
@@ -27,7 +27,6 @@ export const normalizeRuleVariable = (data: any, valueType: string) => {
             return value;
         },
         [typeKeys.TRUE_ONLY]: () => true,
-        [typeKeys.UNIT_INTERVAL]: convertNumber,
         [typeKeys.PERCENTAGE]: convertString,
         [typeKeys.INTEGER]: convertNumber,
         [typeKeys.INTEGER_NEGATIVE]: convertNumber,

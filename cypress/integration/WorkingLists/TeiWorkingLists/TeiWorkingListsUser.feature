@@ -24,7 +24,7 @@ And rows per page should be set to 15
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show only teis with active enrollments and unassinged events using the filter
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and Malaria focus investigation context
 When you set the enrollment status filter to active
 And you apply the current filter
 And you set the assginee filter to none

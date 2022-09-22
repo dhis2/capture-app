@@ -3,12 +3,13 @@
 # Wanda <wanda@frontlineaids.org>, 2021
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2022
+# Éva Tamási, 2022
 # Nadiia <semchuk@aph.org.ua>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-23T14:43:54.028Z\n"
+"POT-Creation-Date: 2022-06-23T13:21:06.685Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: Nadiia <semchuk@aph.org.ua>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
@@ -94,10 +95,10 @@ msgid "Please provide a valid percentage"
 msgstr ""
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Вкажіть дійсну URL-адресу"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Вкажіть дійсну адресу електронної пошти"
 
 msgid "Please provide a valid age"
 msgstr ""
@@ -121,7 +122,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "З областями"
 
 msgid "Coordinate"
 msgstr "Координата"
@@ -250,7 +251,7 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Ні, залишитися тут"
 
 msgid "New event"
 msgstr "Нова подія"
@@ -386,7 +387,7 @@ msgid "This month"
 msgstr "Поточний місяць"
 
 msgid "This Year"
-msgstr ""
+msgstr "Цей рік"
 
 msgid "Last week"
 msgstr "Минулий тиждень"
@@ -428,7 +429,7 @@ msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "обрано"
 
 msgid "Delete"
 msgstr "Видалити"
@@ -539,7 +540,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "Прийняти"
 
 msgid "Registering Organisation Unit"
 msgstr ""
@@ -820,7 +821,7 @@ msgid "Search in all programs"
 msgstr ""
 
 msgid "events"
-msgstr ""
+msgstr "події"
 
 msgid "event"
 msgstr ""
@@ -920,7 +921,7 @@ msgid ""
 msgstr ""
 
 msgid "No, cancel"
-msgstr ""
+msgstr "Ні, скасувати"
 
 msgid "Yes, delete enrollment."
 msgstr ""
@@ -931,17 +932,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Позначте для подальших дій"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Подальші дії"
-
 msgid "Enrollment date"
 msgstr "Дата реєстрації"
 
 msgid "Incident date"
 msgstr "Дата інциденту"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Подальші дії"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
@@ -1097,7 +1098,7 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "Підтвердити"
 
 msgid "Save As view"
 msgstr ""
