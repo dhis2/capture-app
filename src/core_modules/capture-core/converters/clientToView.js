@@ -49,6 +49,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_POSITIVE]: stringifyNumber,
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
     [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
     [dataElementTypes.DATE]: convertDateForView,
     [dataElementTypes.DATETIME]: convertDateTimeForView,
     [dataElementTypes.TIME]: convertTimeForView,

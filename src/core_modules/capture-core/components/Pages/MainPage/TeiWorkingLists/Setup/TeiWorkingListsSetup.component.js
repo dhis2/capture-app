@@ -66,70 +66,82 @@ const useStaticTemplates = () => useMemo(() => ([{
     },
 }]), []);
 
-const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel } }: TrackerProgram) => useMemo(() => [{
-    id: 'programStatus',
-    type: dataElementTypes.TEXT,
-    header: i18n.t('Enrollment status'),
-    options: [
-        { text: i18n.t('Active'), value: 'ACTIVE' },
-        { text: i18n.t('Completed'), value: 'COMPLETED' },
-        { text: i18n.t('Cancelled'), value: 'CANCELLED' },
-    ],
-    transformRecordsFilter: (rawFilter: string) => ({
-        programStatus: rawFilter.split(':')[1],
-    }),
-}, {
-    id: 'enrollmentDate',
-    type: dataElementTypes.DATE,
-    header: enrollmentDateLabel,
-    transformRecordsFilter: (filter: Array<string> | string) => {
-        let queryArgs = {};
-        if (Array.isArray(filter)) {
-            queryArgs = filter
-                .reduce((acc, filterPart: string) => {
-                    if (filterPart.startsWith('ge')) {
-                        acc.programStartDate = filterPart.replace('ge:', '');
+const useFiltersOnly = ({
+    enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate },
+    stages,
+}: TrackerProgram) =>
+    useMemo(() => {
+        const enableUserAssignment = Array.from(stages.values()).find(stage => stage.enableUserAssignment);
+
+        return [
+            {
+                id: 'programStatus',
+                type: dataElementTypes.TEXT,
+                header: i18n.t('Enrollment status'),
+                options: [
+                    { text: i18n.t('Active'), value: 'ACTIVE' },
+                    { text: i18n.t('Completed'), value: 'COMPLETED' },
+                    { text: i18n.t('Cancelled'), value: 'CANCELLED' },
+                ],
+                transformRecordsFilter: (rawFilter: string) => ({
+                    programStatus: rawFilter.split(':')[1],
+                }),
+            }, {
+                id: 'enrollmentDate',
+                type: dataElementTypes.DATE,
+                header: enrollmentDateLabel,
+                transformRecordsFilter: (filter: Array<string> | string) => {
+                    let queryArgs = {};
+                    if (Array.isArray(filter)) {
+                        queryArgs = filter
+                            .reduce((acc, filterPart: string) => {
+                                if (filterPart.startsWith('ge')) {
+                                    acc.programStartDate = filterPart.replace('ge:', '');
+                                } else {
+                                    acc.programEndDate = filterPart.replace('le:', '');
+                                }
+                                return acc;
+                            }, {});
+                    } else if (filter.startsWith('ge')) {
+                        queryArgs.programStartDate = filter.replace('ge:', '');
                     } else {
-                        acc.programEndDate = filterPart.replace('le:', '');
+                        queryArgs.programEndDate = filter.replace('le:', '');
                     }
-                    return acc;
-                }, {});
-        } else if (filter.startsWith('ge')) {
-            queryArgs.programStartDate = filter.replace('ge:', '');
-        } else {
-            queryArgs.programEndDate = filter.replace('le:', '');
-        }
-        return queryArgs;
-    },
-}, {
-    id: 'incidentDate',
-    type: dataElementTypes.DATE,
-    header: incidentDateLabel,
-    transformRecordsFilter: (filter: Array<string> | string) => {
-        let queryArgs = {};
-        if (Array.isArray(filter)) {
-            queryArgs = filter
-                .reduce((acc, filterPart: string) => {
-                    if (filterPart.startsWith('ge')) {
-                        acc.programIncidentStartDate = filterPart.replace('ge:', '');
+                    return queryArgs;
+                },
+            },
+            ...(showIncidentDate ? [{
+                id: 'incidentDate',
+                type: dataElementTypes.DATE,
+                header: incidentDateLabel,
+                transformRecordsFilter: (filter: Array<string> | string) => {
+                    let queryArgs = {};
+                    if (Array.isArray(filter)) {
+                        queryArgs = filter
+                            .reduce((acc, filterPart: string) => {
+                                if (filterPart.startsWith('ge')) {
+                                    acc.programIncidentStartDate = filterPart.replace('ge:', '');
+                                } else {
+                                    acc.programIncidentEndDate = filterPart.replace('le:', '');
+                                }
+                                return acc;
+                            }, {});
+                    } else if (filter.startsWith('ge')) {
+                        queryArgs.programIncidentStartDate = filter.replace('ge:', '');
                     } else {
-                        acc.programIncidentEndDate = filterPart.replace('le:', '');
+                        queryArgs.programIncidentEndDate = filter.replace('le:', '');
                     }
-                    return acc;
-                }, {});
-        } else if (filter.startsWith('ge')) {
-            queryArgs.programIncidentStartDate = filter.replace('ge:', '');
-        } else {
-            queryArgs.programIncidentEndDate = filter.replace('le:', '');
-        }
-        return queryArgs;
-    },
-}, {
-    id: 'assignee',
-    type: dataElementTypes.ASSIGNEE,
-    header: i18n.t('Assigned to'),
-    transformRecordsFilter: (rawFilter: Object) => rawFilter,
-}], [enrollmentDateLabel, incidentDateLabel]);
+                    return queryArgs;
+                },
+            }] : []),
+            ...(enableUserAssignment ? [{
+                id: 'assignee',
+                type: dataElementTypes.ASSIGNEE,
+                header: i18n.t('Assigned to'),
+                transformRecordsFilter: (rawFilter: Object) => rawFilter,
+            }] : []),
+        ];
+    }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages]);
 
 const useInjectDataFetchingMetaToLoadList = (defaultColumns, filtersOnly, onLoadView) =>
     useCallback((selectedTemplate: Object, context: Object) => {

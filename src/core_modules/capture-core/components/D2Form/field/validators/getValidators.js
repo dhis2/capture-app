@@ -49,7 +49,7 @@ const errorMessages = {
     DATE_FUTURE_NOT_ALLOWED: i18n.t('A date in the future is not allowed'),
     DATETIME: i18n.t('Please provide a valid date and time'),
     TIME: i18n.t('Please provide a valid time'),
-    PERCENTAGE: i18n.t('Please provide a valid percentage'),
+    PERCENTAGE: i18n.t('Please provide an integer between 0 and 100'),
     URL: i18n.t('Please provide a valid url'),
     EMAIL: i18n.t('Please provide a valid email address'),
     AGE: i18n.t('Please provide a valid age'),

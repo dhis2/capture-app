@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import moment from 'moment';
 import DataEntry from '../../../../DataEntry/DataEntry.container';
 import withCancelButton from '../../../../DataEntry/withCancelButton';
 import withDataEntryField from '../../../../DataEntry/dataEntryField/withDataEntryField';
@@ -9,7 +10,7 @@ import withDataEntryNotesHandler from '../../../../DataEntry/dataEntryNotes/with
 import Notes from '../../../../Notes/Notes.component';
 import withDataEntryRelationshipsHandler from '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
 import Relationships from '../../../../Relationships/Relationships.component';
-import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
+import { getNoFutureEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
 import { type RenderFoundation } from '../../../../../metaData';
 import withMainButton from './withMainButton';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
@@ -157,9 +158,10 @@ const buildReportDateSettingsFn = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+            calendarMaxMoment: moment(),
         }),
         getPropName: () => 'eventDate',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,

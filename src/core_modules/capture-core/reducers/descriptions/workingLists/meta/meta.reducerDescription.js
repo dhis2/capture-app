@@ -152,6 +152,7 @@ export const workingListsMetaDesc = createReducerDescription({
                 ...state[storeId],
                 initial: state[storeId].nextInitial,
                 nextInitial: undefined,
+                viewPreloaded: false,
             },
         };
     },

@@ -1,14 +1,11 @@
 // @flow
 import moment from 'moment';
-import trimQuotes from './trimQuotes';
 import type { IMomentConverter } from '../rulesEngine.types';
 
 export default function getDateUtils(converterObject: IMomentConverter) {
     const between = (unit: string, firstRulesDate: string, secondRulesDate: string) => {
-        const firsRulesDateTrimmed = trimQuotes(firstRulesDate);
-        const secondRulesDateTrimmed = trimQuotes(secondRulesDate);
-        const firstDate = converterObject.rulesDateToMoment(firsRulesDateTrimmed);
-        const secondDate = converterObject.rulesDateToMoment(secondRulesDateTrimmed);
+        const firstDate = converterObject.rulesDateToMoment(firstRulesDate);
+        const secondDate = converterObject.rulesDateToMoment(secondRulesDate);
         return secondDate.diff(firstDate, unit);
     };
 
@@ -21,13 +18,10 @@ export default function getDateUtils(converterObject: IMomentConverter) {
         weeksBetween: (firstRulesDate: string, secondRulesDate: string) => between('weeks', firstRulesDate, secondRulesDate),
         monthsBetween: (firstRulesDate: string, secondRulesDate: string) => between('months', firstRulesDate, secondRulesDate),
         yearsBetween: (firstRulesDate: string, secondRulesDate: string) => between('years', firstRulesDate, secondRulesDate),
-        addDays: (rulesDate: string, daysToAdd: string) => {
-            const rulesDateTrimmed = trimQuotes(rulesDate);
-            const daysToAddTrimmed = trimQuotes(daysToAdd);
-            const dateMoment = converterObject.rulesDateToMoment(rulesDateTrimmed);
-            const newDateMoment = dateMoment.add(daysToAddTrimmed, 'days');
-            const newRulesDate = converterObject.momentToRulesDate(newDateMoment);
-            return `'${newRulesDate}'`;
+        addDays: (rulesDate: string, daysToAdd: number) => {
+            const dateMoment = converterObject.rulesDateToMoment(rulesDate);
+            const newDateMoment = dateMoment.add(daysToAdd, 'days');
+            return converterObject.momentToRulesDate(newDateMoment);
         },
     };
 }

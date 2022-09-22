@@ -42,13 +42,14 @@ export type ProgramRuleEffect = {
     programStageSectionId: ?string,
     optionGroupId: ?string,
     optionId: ?string,
-    content: string,
-    data: ?string,
+    content: ?string,
+    data: any,
 };
 
 export type ProgramRuleAction = {
     id: string,
     content: string,
+    displayContent: string,
     data: ?string,
     location: ?string,
     programRuleActionType: string,
@@ -185,22 +186,13 @@ export type OrgUnit = {
     name: string,
 };
 
-export type DateUtils = {
-    getToday: () => string,
-    daysBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    weeksBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    monthsBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    yearsBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    addDays: (rulesDate: string, daysToAdd: string) => string,
-};
-
-export type Translator = (value: string) => string;
-
 export type Moment = Object;
 export interface IMomentConverter {
     rulesDateToMoment(rulesEngineValue: string): Moment;
     momentToRulesDate(momentValue: Moment): string;
 }
+
+export type Translator = (value: string) => string;
 
 export interface IConvertInputRulesValue {
     convertText(value: any): string;
@@ -244,41 +236,40 @@ export interface IConvertOutputRulesEffectsValue {
     convertAge(value: string): any;
 }
 
-export type D2FunctionParameters = {
-    name: string,
+export type D2FunctionConfig = {
     parameters?: number,
-    dhisFunction: any
+    execute: Function,
 }
-export type D2Functions = {
-    'd2:concatenate': D2FunctionParameters,
-    'd2:daysBetween': D2FunctionParameters,
-    'd2:weeksBetween': D2FunctionParameters,
-    'd2:monthsBetween': D2FunctionParameters,
-    'd2:yearsBetween': D2FunctionParameters,
-    'd2:floor': D2FunctionParameters,
-    'd2:modulus': D2FunctionParameters,
-    'd2:addDays': D2FunctionParameters,
-    'd2:zing': D2FunctionParameters,
-    'd2:oizp': D2FunctionParameters,
-    'd2:count': D2FunctionParameters,
-    'd2:countIfZeroPos': D2FunctionParameters,
-    'd2:countIfValue': D2FunctionParameters,
-    'd2:ceil': D2FunctionParameters,
-    'd2:round': D2FunctionParameters,
-    'd2:hasValue': D2FunctionParameters,
-    'd2:lastEventDate': D2FunctionParameters,
-    'd2:validatePattern': D2FunctionParameters,
-    'd2:addControlDigits': D2FunctionParameters,
-    'd2:checkControlDigits': D2FunctionParameters,
-    'd2:round': D2FunctionParameters,
-    'd2:lastEventDate': D2FunctionParameters,
-    'd2:left': D2FunctionParameters,
-    'd2:right': D2FunctionParameters,
-    'd2:substring': D2FunctionParameters,
-    'd2:split': D2FunctionParameters,
-    'd2:zScoreWFA': D2FunctionParameters,
-    'd2:length': D2FunctionParameters,
-}
+export type D2Functions = $ReadOnly<{|
+    ceil: D2FunctionConfig,
+    floor: D2FunctionConfig,
+    round: D2FunctionConfig,
+    modulus: D2FunctionConfig,
+    zing: D2FunctionConfig,
+    oizp: D2FunctionConfig,
+    concatenate: D2FunctionConfig,
+    daysBetween: D2FunctionConfig,
+    weeksBetween: D2FunctionConfig,
+    monthsBetween: D2FunctionConfig,
+    yearsBetween: D2FunctionConfig,
+    addDays: D2FunctionConfig,
+    count: D2FunctionConfig,
+    countIfValue: D2FunctionConfig,
+    countIfZeroPos: D2FunctionConfig,
+    hasValue: D2FunctionConfig,
+    validatePattern: D2FunctionConfig,
+    left: D2FunctionConfig,
+    right: D2FunctionConfig,
+    substring: D2FunctionConfig,
+    split: D2FunctionConfig,
+    length: D2FunctionConfig,
+    zScoreWFA: D2FunctionConfig,
+    lastEventDate: D2FunctionConfig,
+    addControlDigits: D2FunctionConfig,
+    checkControlDigits: D2FunctionConfig,
+    zScoreHFA: D2FunctionConfig,
+    zScoreWFH: D2FunctionConfig,
+|}>;
 
 export type Flag = {
     debug: boolean
