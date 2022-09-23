@@ -1,3 +1,10 @@
+# [100.14.0](https://github.com/dhis2/capture-app/compare/v100.13.7...v100.14.0) (2022-09-23)
+
+
+### Features
+
+* [DHIS2-13739] navigate to new tracker based on opt-in func ([#3008](https://github.com/dhis2/capture-app/issues/3008)) ([a33c3f9](https://github.com/dhis2/capture-app/commit/a33c3f96b43374c99830bef229791572f797344d))
+
 ## [100.13.7](https://github.com/dhis2/capture-app/compare/v100.13.6...v100.13.7) (2022-09-21)
 
 
