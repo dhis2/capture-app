@@ -1,21 +1,21 @@
 # 
 # Translators:
-# Yao Selom Saka <ysaka@hispwca.org>, 2021
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2021
 # Bram Piot <bram.piot@gmail.com>, 2021
 # Yayra Gomado <ygomado@hispwca.org>, 2021
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2022
 # Edem Kossi <ekossi@hispwca.org>, 2022
 # phil_dhis2, 2022
 # Karoline Tufte Lien <karoline@dhis2.org>, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,6 +57,9 @@ msgstr "Unité d'organisation"
 
 msgid "Date of enrollment"
 msgstr "Date d'inscription"
+
+msgid "Program name"
+msgstr "Nom du programme"
 
 msgid "Last updated"
 msgstr "Dernière mise à jour"
@@ -572,8 +575,8 @@ msgstr "Synchronisation"
 msgid "Add comment"
 msgstr "Ajouter commentaire"
 
-msgid "You dont have access to write comments"
-msgstr "Vous n'avez pas accès aux commentaires"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Ecrire commentaire"
@@ -938,8 +941,8 @@ msgstr "événements"
 msgid "event"
 msgstr "événement"
 
-msgid "You dont have access to edit this event"
-msgstr "Vous n'êtes pas autorisé à modifier cet événement"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "Modifier un événement"
@@ -983,11 +986,11 @@ msgstr "Doublons éventuellement détectés"
 msgid "An error occurred loading possible duplicates"
 msgstr "Une erreur s'est produite lors du chargement des doublons possibles"
 
-msgid "You dont have access to delete this relationship"
-msgstr "Vous n'êtes pas autorisé à supprimer cette relation"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "Vous n'êtes pas autorisé à créer des relations"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Ajouetr relation"
@@ -1057,11 +1060,11 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Add new"
-msgstr "Nouveau"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "Nouveau"
 
 msgid "Reactivate"
 msgstr ""
@@ -1159,9 +1162,6 @@ msgid "Event completed"
 msgstr "Événement terminé"
 
 msgid "Back to all stages and events"
-msgstr ""
-
-msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"

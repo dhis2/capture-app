@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -47,6 +47,9 @@ msgstr "Organizační jednotka"
 
 msgid "Date of enrollment"
 msgstr "Datum zápisu"
+
+msgid "Program name"
+msgstr "Název programu"
 
 msgid "Last updated"
 msgstr "Naposledy aktualizováno"
@@ -549,8 +552,8 @@ msgstr "Probíhá synchronizace"
 msgid "Add comment"
 msgstr "Přidat komentář"
 
-msgid "You dont have access to write comments"
-msgstr "Nemáte přístup k psaní komentářů"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Napsat komentář"
@@ -911,8 +914,8 @@ msgstr "události"
 msgid "event"
 msgstr "událost"
 
-msgid "You dont have access to edit this event"
-msgstr "K úpravě této události nemáte přístup"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "Upravit událost"
@@ -957,11 +960,11 @@ msgstr "Byly nalezeny možné duplikáty"
 msgid "An error occurred loading possible duplicates"
 msgstr "Při načítání možných duplikátů došlo k chybě"
 
-msgid "You dont have access to delete this relationship"
-msgstr "K odstranění tohoto vztahu nemáte přístup"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "Nemáte přístup k vytváření jakýchkoli vztahů"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Přidat vztah"
@@ -1029,11 +1032,11 @@ msgstr "Akce zápisu"
 msgid "We are processing your request."
 msgstr "Zpracováváme váš požadavek."
 
-msgid "Add new"
-msgstr "Přidat nový"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr "V tomto programu je povolen pouze jeden zápis na {{tetName}}"
+
+msgid "Add new"
+msgstr "Přidat nový"
 
 msgid "Reactivate"
 msgstr "Znovu aktivovat"
@@ -1134,9 +1137,6 @@ msgstr "Událost dokončena"
 
 msgid "Back to all stages and events"
 msgstr "Zpět ke všem fázím a událostem"
-
-msgid "You don't have access to edit this event"
-msgstr ""
 
 msgid "Schedule date info"
 msgstr "Informace o termínu"

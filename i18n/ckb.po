@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-07-07T15:10:40.948Z\n"
+"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -553,8 +553,8 @@ msgstr "هاوتاکردن"
 msgid "Add comment"
 msgstr "کۆمێنت زیادبکە"
 
-msgid "You dont have access to write comments"
-msgstr "مافی ئەوەت نیە کە کۆمێنت بنووسیت"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "کۆمێنت بنووسە"
@@ -827,19 +827,6 @@ msgstr ""
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
-msgid "Back"
-msgstr "كةرانةوة"
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr ""
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-
 msgid "No results found"
 msgstr ""
 
@@ -857,20 +844,23 @@ msgstr ""
 msgid "An error has occurred"
 msgstr ""
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-
 msgid "Too many results"
 msgstr ""
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
+msgid "Cannot search in all programs"
 msgstr ""
 
-msgid "Cannot search in all programs"
+msgid "Back"
+msgstr "كةرانةوة"
+
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "Choose a type to start searching"
@@ -899,14 +889,20 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
+
 msgid "events"
 msgstr ""
 
 msgid "event"
 msgstr ""
 
-msgid "You dont have access to edit this event"
-msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "حاڵەتەکە دەستکاری بکە"
@@ -951,11 +947,11 @@ msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You dont have access to delete this relationship"
-msgstr "مافی سڕینەوە ئەم پەیوەندیەت نیە"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "مافی دروستکردنی ئەم پەیوەندیەت نیە"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "پەوەندی درووستبکە"
@@ -1023,10 +1019,10 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Add new"
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
-msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgid "Add new"
 msgstr ""
 
 msgid "Reactivate"
@@ -1061,6 +1057,9 @@ msgstr ""
 msgid "Incident date"
 msgstr ""
 
+msgid "Last updated {{date}}"
+msgstr ""
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -1071,9 +1070,6 @@ msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
-msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1125,9 +1121,6 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
-msgstr ""
-
-msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"
