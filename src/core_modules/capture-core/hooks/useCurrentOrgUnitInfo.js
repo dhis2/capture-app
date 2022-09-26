@@ -1,13 +1,13 @@
 // @flow
-import { useSelector } from 'react-redux';
+// $FlowFixMe
+import { useSelector, shallowEqual } from 'react-redux';
 
-export const useCurrentOrgUnitInfo = (): {| id: string, name: string |} =>
-    ({
-        id: useSelector(({ currentSelections: { orgUnitId } }) => orgUnitId),
-        name: useSelector((
-            {
-                organisationUnits,
-                currentSelections: { orgUnitId },
-            }) =>
-            organisationUnits[orgUnitId] && organisationUnits[orgUnitId].name),
-    });
+export const useCurrentOrgUnitInfo = (): {| id: string, name: string, code: string |} =>
+    useSelector(
+        ({ currentSelections: { orgUnitId }, organisationUnits }) => ({
+            id: orgUnitId,
+            name: organisationUnits[orgUnitId]?.name,
+            code: organisationUnits[orgUnitId]?.code,
+        }),
+        shallowEqual,
+    );
