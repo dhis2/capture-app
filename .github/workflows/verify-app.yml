@@ -101,7 +101,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: JoakimSM/action-instance-version
+      - uses: JoakimSM/action-instance-version@master
         id: instance-version
         with:
           instance-url: ${{ secrets.CYPRESS_DHIS2_BASE_URL_DEV }}
