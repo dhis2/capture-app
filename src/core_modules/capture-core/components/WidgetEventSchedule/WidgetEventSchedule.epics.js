@@ -9,7 +9,7 @@ import {
 } from './WidgetEventSchedule.actions';
 import { statusTypes } from '../../events/statusTypes';
 
-export const scheduleNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST),
         map((action) => {
@@ -46,7 +46,7 @@ export const scheduleNewEnrollmentEventEpic = (action$: InputObservable, store: 
             }] };
 
             if (existingEnrollment) {
-                onSaveExternal && onSaveExternal(eventId, serverData.events[0]);
+                onSaveExternal && onSaveExternal(serverData.events[0]);
                 return updateScheduledDateForEvent(serverData, eventId, onSaveSuccessActionType, onSaveErrorActionType);
             }
 

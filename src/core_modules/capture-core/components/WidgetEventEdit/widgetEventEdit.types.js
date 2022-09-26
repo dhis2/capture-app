@@ -7,6 +7,7 @@ export type Props = {|
     eventStatus?: string,
     onGoBack: () => void,
     onCancelEditEvent: () => void,
+    onHandleScheduleSave: (eventData: Object) =>void,
     orgUnitId: string,
     programId: string,
     enrollmentId: string,

@@ -198,7 +198,7 @@ import {
     addNoteForNewEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
 import {
-    scheduleNewEnrollmentEventEpic,
+    scheduleEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEventSchedule';
 import {
     orgUnitFetcherEpic,
@@ -321,7 +321,7 @@ export const epics = combineEpics(
     addNoteForNewEnrollmentEventEpic,
     addNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,
-    scheduleNewEnrollmentEventEpic,
+    scheduleEnrollmentEventEpic,
     orgUnitFetcherEpic,
     updateTeiEpic,
     updateTeiSucceededEpic,

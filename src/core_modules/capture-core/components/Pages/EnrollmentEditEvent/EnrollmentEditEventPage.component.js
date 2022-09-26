@@ -68,6 +68,7 @@ const EnrollmentEditEventPagePain = ({
     pageStatus,
     onEnrollmentError,
     onCancelEditEvent,
+    onHandleScheduleSave,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -101,6 +102,7 @@ const EnrollmentEditEventPagePain = ({
                             eventStatus={eventStatus}
                             initialScheduleDate={scheduleDate}
                             onCancelEditEvent={onCancelEditEvent}
+                            onHandleScheduleSave={onHandleScheduleSave}
                         />
                     )}
                     {pageStatus === pageStatuses.MISSING_DATA && (

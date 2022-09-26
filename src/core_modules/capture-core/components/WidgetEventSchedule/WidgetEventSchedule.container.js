@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess } from '../../metaData';
+import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess, dataElementTypes } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';
 import { useLocationQuery } from '../../utils/routing';
 import type { ContainerProps } from './widgetEventSchedule.types';
@@ -17,6 +17,7 @@ import {
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
+import { convertValue as convertToServer } from '../../converters/clientToServer';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -42,7 +43,7 @@ export const WidgetEventSchedule = ({
     const { currentUser, noteId } = useCommentDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [comments, setComments] = useState([]);
-    const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
+    const { events } = useEventsInOrgUnit(orgUnitId, convertToServer(scheduleDate, dataElementTypes.DATE));
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events
         .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
