@@ -1,5 +1,6 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useEffect } from 'react';
+import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useDispatch } from 'react-redux';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24, Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -12,6 +13,7 @@ import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../metaData';
+import { cleanUpDataEntry } from '../DataEntry';
 
 const styles = {
     header: {
@@ -45,13 +47,18 @@ export const WidgetEventEditPlain = ({
     programStage,
     programStage: { name, icon },
     onGoBack,
+    onCancelEditEvent,
     programId,
     orgUnitId,
     enrollmentId,
 }: Props) => {
     const dispatch = useDispatch();
-    const { currentPageMode, pageMode } = useEnrollmentEditEventPageMode(eventStatus);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+
+    useEffect(() => () => {
+        dispatch(cleanUpDataEntry(dataEntryIds.ENROLLMENT_EVENT));
+    }, [dispatch]);
 
     const eventAccess = getProgramEventAccess(programId, programStage.id);
 
@@ -67,7 +74,7 @@ export const WidgetEventEditPlain = ({
                     {i18n.t('Back to all stages and events')}
                 </Button>
 
-                {currentPageMode === pageMode.VIEW && (
+                {currentPageMode === dataEntryKeys.VIEW && (
                     <Tooltip
                         content={i18n.t('You don\'t have access to edit this event')}
                     >
@@ -116,14 +123,20 @@ export const WidgetEventEditPlain = ({
                 noncollapsible
             >
                 <div className={classes.form}>
-                    {currentPageMode === pageMode.VIEW ? (
-                        <ViewEventDataEntry formFoundation={programStage.stageForm} />
+                    {currentPageMode === dataEntryKeys.VIEW ? (
+                        <ViewEventDataEntry
+                            formFoundation={programStage.stageForm}
+                            dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
+                        />
                     ) : (
                         <EditEventDataEntry
+                            dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             formFoundation={programStage.stageForm}
                             orgUnit={orgUnit}
                             programId={programId}
                             enrollmentId={enrollmentId}
+                            eventStatus={eventStatus}
+                            onCancelEditEvent={onCancelEditEvent}
                             hasDeleteButton
                         />
                     )}

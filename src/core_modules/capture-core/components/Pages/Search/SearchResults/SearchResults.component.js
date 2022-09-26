@@ -142,7 +142,6 @@ export const SearchResultsIndex = ({
     currentFormId,
     currentSearchTerms,
     fallbackTriggered,
-
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { programId, orgUnitId } = useLocationQuery();
@@ -247,9 +246,10 @@ export const SearchResultsIndex = ({
                 currentSearchScopeName={currentSearchScopeName}
                 items={otherResults}
                 dataElements={dataElements}
-                renderCustomCardActions={({ item, enrollmentType, programName }) => (<CardListButtons
+                renderCustomCardActions={({ item, enrollmentType, programName, programId: currentScopeProgramId }) => (<CardListButtons
                     programName={programName}
                     currentSearchScopeType={currentSearchScopeType}
+                    currentSearchScopeId={currentScopeProgramId}
                     id={item.id}
                     orgUnitId={item.tei.orgUnit}
                     enrollmentType={enrollmentType}

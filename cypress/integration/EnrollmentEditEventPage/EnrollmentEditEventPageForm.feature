@@ -67,8 +67,9 @@ And the user clicks on the save button
 Then the user see the following text: Enrollment: View Event
 And the user see the following text: 11
 
-Scenario: User goes directly to Edit mode for scheduled events
-Given you land on the enrollment event page by having typed /#/enrollmentEventEdit?eventId=RIrfCcEP8Uu&orgUnitId=DiszpKrYNg8
-Then the user see the following text: Enrollment: Edit Event
-When the user clicks on the cancel button
-Then the user see the following text: Enrollment Dashboard
+ Scenario: User goes directly to Edit mode for scheduled events
+    Given you land on the enrollment event page by having typed /#/enrollmentEventEdit?eventId=RIrfCcEP8Uu&orgUnitId=DiszpKrYNg8
+    Then the user see the following text: Enrollment: Edit Event
+    And the user see the following text: Infant Feeding
+    When the user clicks on the cancel button
+    Then the user see the following text: Enrollment Dashboard

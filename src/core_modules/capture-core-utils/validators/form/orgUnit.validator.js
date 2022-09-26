@@ -4,7 +4,7 @@
  *
  * @export
  * @param {string} value
- * @returns
+ * @returns {boolean}
  */
 
 type OrgUnitValue = {

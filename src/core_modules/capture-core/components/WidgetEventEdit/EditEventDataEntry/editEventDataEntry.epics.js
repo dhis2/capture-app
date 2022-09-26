@@ -2,10 +2,11 @@
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
+import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
-import { getProgramAndStageFromEvent } from '../../../metaData';
+import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
@@ -37,6 +38,11 @@ import {
     updateEventContainer,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 
+const getDataEntryId = (event): string => (
+    getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
+        ? dataEntryIds.ENROLLMENT_EVENT
+        : dataEntryIds.SINGLE_EVENT
+);
 
 export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -64,6 +70,8 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
                     program,
                     enrollment,
                     attributeValues,
+                    dataEntryId: getDataEntryId(eventContainer.event),
+                    dataEntryKey: dataEntryKeys.EDIT,
                 }),
             ]);
         }));
