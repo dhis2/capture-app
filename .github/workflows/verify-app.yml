@@ -99,8 +99,6 @@ jobs:
     outputs:
       version: ${{ steps.instance-version.outputs.version }}
     steps:
-      - uses: actions/checkout@v2
-
       - uses: JoakimSM/action-instance-version@main
         id: instance-version
         with:
