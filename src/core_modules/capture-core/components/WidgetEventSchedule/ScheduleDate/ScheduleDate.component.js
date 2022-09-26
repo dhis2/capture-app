@@ -2,10 +2,11 @@
 import React, { type ComponentType } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import moment from 'moment';
 import { DateField } from 'capture-core/components/FormFields/New';
 import { InfoBox } from '../InfoBox';
 import type { Props } from './scheduleDate.types';
+import { convertDateObjectToDateFormatString, convertStringToDateFormat } from '../../../utils/converters/date';
+
 
 const styles = {
     container: {
@@ -27,13 +28,13 @@ const ScheduleDatePlain = ({
 }: Props) => (<>
     <div className={classes.container}>
         <DateField
-            value={moment(scheduleDate).format('YYYY-MM-DD')}
+            value={scheduleDate ? convertDateObjectToDateFormatString(new Date(scheduleDate)) : ''}
             width="100%"
             calendarWidth={350}
             onSetFocus={() => {}}
             onFocus={() => { }}
             onRemoveFocus={() => { }}
-            onBlur={(e) => { setScheduleDate(e); }}
+            onBlur={(e) => { setScheduleDate(convertStringToDateFormat(e)); }}
         />
     </div>
     <InfoBox

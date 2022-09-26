@@ -17,7 +17,6 @@ import {
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
-import { convertValue as convertToServer } from '../../converters/clientToServer';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -43,10 +42,9 @@ export const WidgetEventSchedule = ({
     const { currentUser, noteId } = useCommentDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [comments, setComments] = useState([]);
-    const { events } = useEventsInOrgUnit(orgUnitId, convertToServer(scheduleDate, dataElementTypes.DATE));
+    const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
     const { eventId } = useLocationQuery();
-    const eventCountInOrgUnit = events
-        .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
+    const eventCountInOrgUnit = events.filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
