@@ -1,3 +1,24 @@
+## [100.14.1](https://github.com/dhis2/capture-app/compare/v100.14.0...v100.14.1) (2022-09-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([18e3a93](https://github.com/dhis2/capture-app/commit/18e3a9388f12ed896fcc37d22e12de72e684daa6))
+
+# [100.14.0](https://github.com/dhis2/capture-app/compare/v100.13.7...v100.14.0) (2022-09-23)
+
+
+### Features
+
+* [DHIS2-13739] navigate to new tracker based on opt-in func ([#3008](https://github.com/dhis2/capture-app/issues/3008)) ([a33c3f9](https://github.com/dhis2/capture-app/commit/a33c3f96b43374c99830bef229791572f797344d))
+
+## [100.13.7](https://github.com/dhis2/capture-app/compare/v100.13.6...v100.13.7) (2022-09-21)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ac3e611](https://github.com/dhis2/capture-app/commit/ac3e611a3ba5b7fe5d32ece2aa15be44df4a65b5))
+
 ## [100.13.6](https://github.com/dhis2/capture-app/compare/v100.13.5...v100.13.6) (2022-09-19)
 
 
