@@ -205,14 +205,25 @@ export class EnrollmentFactory {
                 section && enrollmentForm.addSection(section);
             }
 
-            // $FlowFixMe
-            cachedProgramTrackedEntityAttributes && cachedProgramSections.asyncForEach(async (programSection) => {
-                const trackedEntityAttributes = cachedProgramTrackedEntityAttributes
-                    .filter(trackedEntityAttribute => programSection.trackedEntityAttributes
-                        .includes(trackedEntityAttribute.trackedEntityAttributeId));
-                section = await this._buildSection(trackedEntityAttributes, programSection.displayFormName, programSection.id);
-                section && enrollmentForm.addSection(section);
-            });
+            if (cachedProgramTrackedEntityAttributes) {
+                const trackedEntityAttributeDictionary = cachedProgramTrackedEntityAttributes
+                    .reduce((acc, trackedEntityAttribute) => {
+                        if (trackedEntityAttribute.trackedEntityAttributeId) {
+                            acc[trackedEntityAttribute.trackedEntityAttributeId] = trackedEntityAttribute;
+                        }
+                        return acc;
+                    }, {});
+
+                // $FlowFixMe
+                cachedProgramSections.asyncForEach(async (programSection) => {
+                    section = await this._buildSection(
+                        programSection.trackedEntityAttributes.map(id => trackedEntityAttributeDictionary[id]),
+                        programSection.displayFormName,
+                        programSection.id,
+                    );
+                    section && enrollmentForm.addSection(section);
+                });
+            }
         } else {
             section = await this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
             section && enrollmentForm.addSection(section);
