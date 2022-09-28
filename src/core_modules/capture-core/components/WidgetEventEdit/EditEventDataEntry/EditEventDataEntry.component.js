@@ -385,7 +385,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             classes,
             dataEntryId,
             onCancelEditEvent,
-            enrollmentId,
             ...passOnProps
         } = this.props;
         return (
