@@ -8,14 +8,9 @@ name: "e2e tests"
 #     CYPRESS_DHIS2_PASSWORD
 #
 # - Customize environment variables:
-#     DHIS2_URL_PREFIX: Set the prefix for your instances. All instances are required to have this prefix followed by "dev" for the dev instance and "[majorVersion].[minorVersion]" for released versions (e.g. 2.39)
+#     URL_PREFIX_INSTANCES: Set the URL prefix for your instances. All instances are required to have this prefix followed by "dev" for the dev instance and "[majorVersion].[minorVersion]" for released versions (e.g. 2.39)
 #     CYPRESS_CONTAINERS:  Set the number of parallel Cypress instances running for each backend version
-#     TRIGGER_LABELS: 
-# - Optional customizations:
-#
-#     trigger labels: Set the labels that will trigger the workflow
-#
-# Usage:
+#     TRIGGER_LABELS:  Set the labels that will trigger the workflow
 #   
 
 on:
@@ -23,13 +18,14 @@ on:
     types: [ labeled ]
 
 env:
-  DHIS2_URL_PREFIX: https://test.e2e.dhis2.org/ca-test-
+  URL_PREFIX_INSTANCES: https://test.e2e.dhis2.org/ca-test-
   CYPRESS_CONTAINERS: 8
   TRIGGER_LABELS: e2e-tests, testing
 
 jobs:
   get-json-labels:
     runs-on: ubuntu-latest
+    shell: bash
     outputs:
       json-labels: ${{ steps.compute-json.outputs.labels }}
     steps:
@@ -37,12 +33,11 @@ jobs:
               arrLabels=(${TRIGGER_LABELS//,/ })
               for item in ${arrLabels[@]}; do labels+=\"$item\",; done
               echo "::set-output name=labels::[ ${labels%,} ]"
-              echo ${labels}
         id: compute-json
 
   get-versions:
-    runs-on: ubuntu-latest
     needs: get-JSON-labels
+    runs-on: ubuntu-latest
     if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
     # if: github.event.label.name == 'e2e-tests' || github.event.label.name == 'testing'
     outputs:
@@ -53,7 +48,7 @@ jobs:
       - uses: JoakimSM/action-instance-version@main
         id: instance-version
         with:
-          instance-url: ${{env.DHIS2_URL_PREFIX}}dev
+          instance-url: ${{env.URL_PREFIX_INSTANCES}}dev
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
 
@@ -63,8 +58,9 @@ jobs:
           dev-version: ${{ steps.instance-version.outputs.version }}
 
   compute-matrix-containers:
-    runs-on: ubuntu-latest
     needs: get-JSON-labels
+    runs-on: ubuntu-latest
+    shell: bash
     if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
     outputs:
       containers: ${{ steps.compute.outputs.containers}}
@@ -75,14 +71,10 @@ jobs:
         id: compute
         
   cypress:
-    runs-on: ubuntu-latest
     needs: [get-versions, compute-matrix-containers]
+    runs-on: ubuntu-latest
     container: cypress/browsers:node14.7.0-chrome84
     strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving the Dashboard hanging ...
-      # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
       matrix:
         versions: ${{ fromJSON(needs.get-versions.outputs.versions) }}
@@ -113,13 +105,12 @@ jobs:
           browser: chrome
           start: 'yarn start:forCypress'
           wait-on: 'http://localhost:3000'
-          # wait for 200 secs for the server to respond
           wait-on-timeout: 200
         env:
           CI: true
           CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYPRESS_dhis2BaseUrl: ${{env.DHIS2_URL_PREFIX}}${{matrix.versions}}
+          CYPRESS_dhis2BaseUrl: ${{env.URL_PREFIX_INSTANCES}}${{matrix.versions}}
           CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
           CYPRESS_dhis2Username: ${{secrets.CYPRESS_DHIS2_USERNAME}}
           CYPRESS_dhis2Password: ${{secrets.CYPRESS_DHIS2_PASSWORD}}
