@@ -28,16 +28,18 @@ env:
   TRIGGER_LABELS: e2e-tests, testing
 
 jobs:
-  get-JSON-labels:
+  get-json-labels:
     runs-on: ubuntu-latest
     outputs:
-      JSON-labels: ${{ steps.compute-JSON.outputs.labels }}
+      json-labels: ${{ steps.compute-json.outputs.labels }}
     steps:
       - run: |
               arrLabels=(${TRIGGER_LABELS//,/ })
-              for item in ${arrLabels[@]}; do JSONlabels+=\"$item\",; done
-              echo "::set-output name=labels::[ ${JSONlabels%,} ]"
-              echo ${JSONlabels}
+              for item in ${arrLabels[@]}; do labels+=\"$item\",; done
+              echo "::set-output name=labels::[ ${labels%,} ]"
+              echo ${labels}
+        id: compute-json
+
   get-versions:
     runs-on: ubuntu-latest
     needs: get-JSON-labels
