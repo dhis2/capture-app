@@ -10,10 +10,9 @@ on:
 jobs:
   e2e-tests-success:
     runs-on: ubuntu-latest
+    shell: bash
     steps:
-      - name: set success
-        if: inputs.result == true
-        run: echo 'e2e tests successfully run'
-      - name: set failure
-        if: inputs.result == false
-        run: exit 1
+      - name: verify
+        run: if [ $result != true ]; then exit 1; fi;
+        env:
+          result: ${{ inputs.result }}
