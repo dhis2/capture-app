@@ -42,7 +42,6 @@ jobs:
     needs: get-JSON-labels
     runs-on: ubuntu-latest
     if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
-    # if: github.event.label.name == 'e2e-tests' || github.event.label.name == 'testing'
     outputs:
       versions: ${{ steps.released-versions.outputs.versions }}
     steps:
