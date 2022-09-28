@@ -5,7 +5,7 @@ on:
     types: [ labeled ]
 
 env:
-  DHIS2_BASE_URL_DEV: ${{ secrets.CYPRESS_DHIS2_BASE_URL_DEV }}
+  DHIS2_URL_PREFIX: https://test.e2e.dhis2.org/ca-test-
 
 jobs:
   get-versions:
@@ -19,7 +19,7 @@ jobs:
       - uses: JoakimSM/action-instance-version@main
         id: instance-version
         with:
-          instance-url: ${{ env.DHIS2_BASE_URL_DEV }}
+          instance-url: ${{env.DHIS2_URL_PREFIX}}dev
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
 
@@ -73,12 +73,10 @@ jobs:
           CI: true
           CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYPRESS_dhis2BaseUrl: https://test.e2e.dhis2.org/ca-test-${{matrix.versions}}
+          CYPRESS_dhis2BaseUrl: ${{env.DHIS2_URL_PREFIX}}${{matrix.versions}}
           CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
           CYPRESS_dhis2Username: ${{secrets.CYPRESS_DHIS2_USERNAME}}
           CYPRESS_dhis2Password: ${{secrets.CYPRESS_DHIS2_PASSWORD}}
-          CYPRESS_dhis2UsernameEnglish: ${{secrets.CYPRESS_DHIS2_USERNAME_ENGLISH}}
-          CYPRESS_dhis2PasswordEnglish: ${{secrets.CYPRESS_DHIS2_PASSWORD_ENGLISH}}
 
   call-e2e-tests-result:
     needs: cypress
