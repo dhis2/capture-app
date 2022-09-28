@@ -4,6 +4,9 @@ on:
   pull_request:
     types: [ labeled ]
 
+env:
+  DHIS2_BASE_URL_DEV: ${{ secrets.CYPRESS_DHIS2_BASE_URL_DEV }}
+
 jobs:
   get-versions:
     runs-on: ubuntu-latest
@@ -16,7 +19,7 @@ jobs:
       - uses: JoakimSM/action-instance-version@main
         id: instance-version
         with:
-          instance-url: ${{ secrets.CYPRESS_DHIS2_BASE_URL_DEV }}
+          instance-url: ${{ env.DHIS2_BASE_URL_DEV }}
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
 
