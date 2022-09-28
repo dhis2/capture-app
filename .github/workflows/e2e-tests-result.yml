@@ -7,10 +7,13 @@ on:
         required: true
         type: boolean
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   e2e-tests-success:
     runs-on: ubuntu-latest
-    shell: bash
     steps:
       - name: verify
         run: if [ $result != true ]; then exit 1; fi;

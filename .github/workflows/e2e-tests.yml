@@ -22,10 +22,13 @@ env:
   CYPRESS_CONTAINERS: 8
   TRIGGER_LABELS: e2e-tests, testing
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   get-json-labels:
     runs-on: ubuntu-latest
-    shell: bash
     outputs:
       json-labels: ${{ steps.compute-json.outputs.labels }}
     steps:
@@ -60,7 +63,6 @@ jobs:
   compute-matrix-containers:
     needs: get-JSON-labels
     runs-on: ubuntu-latest
-    shell: bash
     if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
     outputs:
       containers: ${{ steps.compute.outputs.containers}}
