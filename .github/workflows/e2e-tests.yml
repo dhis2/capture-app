@@ -68,7 +68,7 @@ jobs:
       fail-fast: false
       matrix:
         versions: ${{ fromJSON(needs.get-versions.outputs.versions) }}
-        containers: ${{ fromJSON(needs.compute-matrix-containers.containers) }}
+        containers: ${{ fromJSON(needs.compute-matrix-containers.outputs.containers) }}
     steps:
       - uses: actions/checkout@v2
 
