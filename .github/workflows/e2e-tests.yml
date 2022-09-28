@@ -9,19 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'e2e-tests' || github.event.label.name == 'testing'
     outputs:
-      versions: ${{ steps.set-versions.outputs.versions }}
+      versions: ${{ steps.released-versions.outputs.versions }}
     steps:
       - uses: actions/checkout@v2
 
-      - uses: ./.github/actions/instance-version/
+      - uses: JoakimSM/action-instance-version@main
         id: instance-version
         with:
           instance-url: ${{ secrets.CYPRESS_DHIS2_BASE_URL_DEV }}
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
 
-      - uses: ./.github/actions/applicable-released-versions/
-        id: set-versions
+      - uses: JoakimSM/applicable-released-versions@main
+        id: released-versions
         with:
           dev-version: ${{ steps.instance-version.outputs.version }}
         
