@@ -9,9 +9,10 @@ name: "e2e tests"
 #
 # - Customize environment variables:
 #     DHIS2_URL_PREFIX: Set the prefix for your instances. All instances are required to have this prefix followed by "dev" for the dev instance and "[majorVersion].[minorVersion]" for released versions (e.g. 2.39)
-#
+#     CYPRESS_CONTAINERS:  Set the number of parallel Cypress instances running for each backend version
+#     TRIGGER_LABELS: 
 # - Optional customizations:
-#     matrix containers:  Set the number of parallel Cypress instances running for each backend version
+#
 #     trigger labels: Set the labels that will trigger the workflow
 #
 # Usage:
@@ -23,13 +24,25 @@ on:
 
 env:
   DHIS2_URL_PREFIX: https://test.e2e.dhis2.org/ca-test-
-  CYPRESS_CONTAINERS: 9
-
+  CYPRESS_CONTAINERS: 8
+  TRIGGER_LABELS: e2e-tests, testing
 
 jobs:
+  get-JSON-labels:
+    runs-on: ubuntu-latest
+    outputs:
+      JSON-labels: ${{ steps.compute-JSON.outputs.labels }}
+    steps:
+      - run: |
+              arrLabels=(${TRIGGER_LABELS}//,/ })
+              for item in ${arrLabels[@]}; do JSONstring+=\"$item\",; done
+              echo "::set-output name=labels::[ ${JSONstring} ]"
+              echo ${JSONstring}
   get-versions:
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'e2e-tests' || github.event.label.name == 'testing'
+    needs: get-JSON-labels
+    if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
+    # if: github.event.label.name == 'e2e-tests' || github.event.label.name == 'testing'
     outputs:
       versions: ${{ steps.released-versions.outputs.versions }}
     steps:
