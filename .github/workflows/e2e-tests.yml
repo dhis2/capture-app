@@ -70,7 +70,7 @@ jobs:
           CI: true
           CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYPRESS_dhis2BaseUrl: https://test.e2e.dhis2.org/ca-test-2.${{matrix.versions}}
+          CYPRESS_dhis2BaseUrl: https://test.e2e.dhis2.org/ca-test-${{matrix.versions}}
           CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
           CYPRESS_dhis2Username: ${{secrets.CYPRESS_DHIS2_USERNAME}}
           CYPRESS_dhis2Password: ${{secrets.CYPRESS_DHIS2_PASSWORD}}
