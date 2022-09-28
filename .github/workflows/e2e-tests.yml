@@ -24,7 +24,6 @@ on:
 env:
   DHIS2_URL_PREFIX: https://test.e2e.dhis2.org/ca-test-
   MATRIX_CONTAINERS: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]'
-  TRIGGERING_LABELS: '['e2e-tests', 'testing']'
 
 
 jobs:
