@@ -5,6 +5,7 @@ import { openDataEntryForNewTei } from './open.actions';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { addFormData } from '../../../D2Form/actions/form.actions';
 
 const itemId = 'newTei';
 
@@ -18,6 +19,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     dataEntryId,
     extraActions = [],
     generatedUniqueValuesCache = {},
+    formValues,
     querySingleResource,
 }: {
     foundation: ?RenderFoundation,
@@ -25,6 +27,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     dataEntryId: string,
     extraActions?: Array<ReduxAction<any, any>>,
     generatedUniqueValuesCache?: Object,
+    formValues?: Object,
     querySingleResource: QuerySingleResource,
 }) => {
     const generatedItemContainers = await getGeneratedUniqueValuesAsync(
@@ -44,7 +47,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
                 return accValuesByKey;
             }, {}),
     );
-
+    const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     return batchActions([
         openDataEntryForNewTei(
             dataEntryId,
@@ -56,5 +59,6 @@ export const openDataEntryForNewTeiBatchAsync = async ({
         ),
         ...dataEntryActions,
         ...extraActions,
+        addFormDataActions,
     ], batchActionTypes.NEW_TEI_DATA_ENTRY_OPEN_BATCH);
 };
