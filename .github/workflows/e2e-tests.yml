@@ -53,7 +53,7 @@ jobs:
     outputs:
       containers: ${{ steps.compute.outputs.CCB}}
     steps:
-      - run: echo "::set-output name=CCB::$MATRIX_CONTAINERS"
+      - run: echo "::set-output name=CCB::"$MATRIX_CONTAINERS 
         id: compute
         
   cypress:
