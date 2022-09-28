@@ -23,7 +23,7 @@ on:
 
 env:
   DHIS2_URL_PREFIX: https://test.e2e.dhis2.org/ca-test-
-  MATRIX_CONTAINERS: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]'
+  CYPRESS_CONTAINERS: 9
 
 
 jobs:
@@ -51,9 +51,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'e2e-tests' || github.event.label.name == 'testing'
     outputs:
-      containers: ${{ steps.compute.outputs.CCB}}
+      containers: ${{ steps.compute.outputs.containers}}
     steps:
-      - run: echo "::set-output name=CCB::$MATRIX_CONTAINERS"
+      - run: |
+              for (( cnt = 1; cnt <= $CYPRESS_CONTAINERS; cnt++)); do containers+=$cnt,; done
+              echo "::set-output name=containers::[ ${containers%,} ]"
         id: compute
         
   cypress:
