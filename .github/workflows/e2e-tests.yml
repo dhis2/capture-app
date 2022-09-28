@@ -46,10 +46,19 @@ jobs:
         id: released-versions
         with:
           dev-version: ${{ steps.instance-version.outputs.version }}
+
+  compute-matrix-containers:
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'e2e-tests' || github.event.label.name == 'testing'
+    outputs:
+      containers: ${{ steps.compute.outputs.CCB}}
+    steps:
+      id: compute
+      run: echo "::set-output name=CCB::$MATRIX_CONTAINERS
         
   cypress:
     runs-on: ubuntu-latest
-    needs: get-versions
+    needs: [get-versions, compute-matrix-containers]
     container: cypress/browsers:node14.7.0-chrome84
     strategy:
       # when one test fails, DO NOT cancel the other
@@ -59,7 +68,7 @@ jobs:
       fail-fast: false
       matrix:
         versions: ${{ fromJSON(needs.get-versions.outputs.versions) }}
-        containers: ${{ fromJSON(env.MATRIX_CONTAINERS) }}
+        containers: ${{ fromJSON(needs.compute-matrix-containers.containers) }}
     steps:
       - uses: actions/checkout@v2
 
