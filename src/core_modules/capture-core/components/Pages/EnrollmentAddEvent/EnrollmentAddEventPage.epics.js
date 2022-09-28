@@ -5,10 +5,7 @@ import { map } from 'rxjs/operators';
 import {
     addEnrollmentEventPageDefaultActionTypes,
 } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
-import { actionTypes as editActionTypes } from '../../WidgetEventEdit';
 import {
-    commitEnrollmentEvent,
-    rollbackEnrollmentEvent,
     commitEnrollmentEventWithoutId,
     rollbackEnrollmentEventWithoutId,
     saveFailed,
@@ -36,22 +33,5 @@ export const saveNewEventFailedEpic = (action$: InputObservable) =>
         map((action) => {
             const meta = action.meta;
             return batchActions([saveFailed(), rollbackEnrollmentEventWithoutId(meta.uid)]);
-        }),
-    );
-
-export const updateEventSucceededEpic = (action$: InputObservable) =>
-    action$.pipe(ofType(editActionTypes.EVENT_SCHEDULE_SUCCESS), map((action) => {
-        const { eventId } = action.meta;
-        return commitEnrollmentEvent(eventId);
-    }));
-
-export const updateEventFailedEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(
-            editActionTypes.EVENT_SCHEDULE_ERROR,
-        ),
-        map((action) => {
-            const { eventId } = action.meta;
-            return batchActions([saveFailed(), rollbackEnrollmentEvent(eventId)]);
         }),
     );
