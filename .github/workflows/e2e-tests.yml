@@ -53,8 +53,8 @@ jobs:
     outputs:
       containers: ${{ steps.compute.outputs.CCB}}
     steps:
-      id: compute
-      run: echo "::set-output name=CCB::$MATRIX_CONTAINERS
+      - run: echo "::set-output name=CCB::$MATRIX_CONTAINERS
+        id: compute
         
   cypress:
     runs-on: ubuntu-latest
