@@ -246,3 +246,21 @@ Feature: User interacts with Search page
     And you click the fallback search button
     When you click the back button
     Then you should be taken to the main page with org unit and program preselected
+
+  Scenario: Create new TET with program after search should show register page with prefilled values
+    Given you are in the search page with the Child Programme and org unit being preselected from the url
+    And you expand the attributes search area 
+    When you fill in the first and last name with values that will return results
+    And you click search
+    Then you should be able to see the Create new section 
+    When you click Create new button 
+    Then you should be taken to the registration page with program with prefilled values 
+
+  Scenario: Create new TET without program after search should show register page with prefilled values
+    Given you are in the search page with domain Person and org unit being preselected
+    And you expand the attributes search area
+    And for Person you fill in values that will return less than 5 results
+    When you click search
+    Then you should be able to see the Create new section 
+    When you click Create new button 
+    Then you should be taken to the registration page without program with prefilled values 
