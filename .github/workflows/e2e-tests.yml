@@ -54,7 +54,7 @@ jobs:
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
 
-      - uses: JoakimSM/action-applicable-released-versions@main
+      - uses: JoakimSM/action-supported-legacy-versions@main
         id: released-versions
         with:
           dev-version: ${{ steps.instance-version.outputs.version }}
