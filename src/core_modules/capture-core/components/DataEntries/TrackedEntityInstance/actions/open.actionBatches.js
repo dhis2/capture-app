@@ -36,18 +36,22 @@ export const openDataEntryForNewTeiBatchAsync = async ({
         { orgUnitCode: orgUnit.code },
         querySingleResource,
     );
+
+    const generatedUniqueValues = generatedItemContainers
+        .reduce((accValuesByKey, container) => {
+            accValuesByKey[container.id] = container.item.value;
+            return accValuesByKey;
+        }, {});
+
+
     const dataEntryActions = loadNewDataEntry(
         dataEntryId,
         itemId,
         null,
         null,
-        generatedItemContainers
-            .reduce((accValuesByKey, container) => {
-                accValuesByKey[container.id] = container.item.value;
-                return accValuesByKey;
-            }, {}),
+        { ...generatedUniqueValues, ...formValues },
     );
-    const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
+
     return batchActions([
         openDataEntryForNewTei(
             dataEntryId,
@@ -59,6 +63,5 @@ export const openDataEntryForNewTeiBatchAsync = async ({
         ),
         ...dataEntryActions,
         ...extraActions,
-        addFormDataActions,
     ], batchActionTypes.NEW_TEI_DATA_ENTRY_OPEN_BATCH);
 };

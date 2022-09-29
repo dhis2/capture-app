@@ -1,6 +1,6 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import type { ComponentType } from 'react';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
@@ -9,23 +9,15 @@ import { scopeTypes } from '../../../metaData';
 import { startNewTeiDataEntryInitialisation } from './TeiRegistrationEntry.actions';
 import type { OwnProps } from './TeiRegistrationEntry.types';
 import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component';
-import { useFormValues } from '../../DataEntries/EnrollmentRegistrationEntry/hooks';
+import { useFormValuesFromSearchTerms } from './hooks/useFormValuesFromSearchTerms';
 
 const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
     const dispatch = useDispatch();
     const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const orgUnit = useCurrentOrgUnitInfo();
-    const selectedOrgUnitId = orgUnit.id;
+    const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
     const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-    const searchTerms = useSelector(({ searchPage }) => searchPage.currentSearchInfo.currentSearchTerms);
-    const { formValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues: {}, orgUnit, searchTerms });
-
-    const registrationFormReady = useMemo(() => {
-        if (searchTerms) {
-            return Object.keys(formValues).length > 0 && !!formId;
-        }
-        return !!formId;
-    }, [formId, searchTerms, formValues]);
+    const formValues = useFormValuesFromSearchTerms();
+    const registrationFormReady = !!formId;
 
     useEffect(() => {
         if (registrationFormReady && scopeType === scopeTypes.TRACKED_ENTITY_TYPE) {
