@@ -5,7 +5,6 @@ import { openDataEntryForNewTei } from './open.actions';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
-import { addFormData } from '../../../D2Form/actions/form.actions';
 
 const itemId = 'newTei';
 
