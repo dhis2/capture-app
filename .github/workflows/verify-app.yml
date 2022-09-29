@@ -99,7 +99,7 @@ jobs:
     outputs:
       version: ${{ steps.instance-version.outputs.version }}
     steps:
-      - uses: JoakimSM/action-instance-version@main
+      - uses: dhis2/action-instance-version@main
         id: instance-version
         with:
           instance-url: ${{ secrets.CYPRESS_DHIS2_BASE_URL_DEV }}
