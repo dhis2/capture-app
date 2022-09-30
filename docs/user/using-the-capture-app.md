@@ -692,6 +692,14 @@ If the fallback can not be done, you will be presented with a modal to go **Back
 
 ![](resources/images/search-by-attributes-fallback-overview-0.png)
 
+#### Create new **Tracked entity instance**
+
+When none of the results match, you can create a new user by clicking **Create new** button on the bottom of the search page. 
+
+Based on the search domain, you will be navigated to the registration of the selected **Tracked entity type**, with or without program enrollment preselected. 
+The search terms that you typed in before will be prefilled in the registration form.
+
+![](resources/images/search-page-create-new-tei.png)
 ### In Tracked entity type scope
 
 1. Open the **Capture** app.
