@@ -700,6 +700,8 @@ Based on the search domain, you will be navigated to the registration of the sel
 The search terms that you typed in before will be prefilled in the registration form.
 
 ![](resources/images/search-page-create-new-tei.png)
+
+
 ### In Tracked entity type scope
 
 1. Open the **Capture** app.
