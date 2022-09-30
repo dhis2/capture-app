@@ -1074,6 +1074,21 @@ To go to Enrollment Overview page you can:
 This is the form where you can modify the event details before saving. In the header you can see the stage name and icon.
 ![](resources/images/new-event-widget-form-header.png)
 
+
+### Scheduled date in edit event form
+If an event has the status Scheduled or Overdue, you will be able to see the **Report** and **Schedule** tab. 
+
+![](resources/images/enrollment-edit-event-schedule-date-1.png)
+
+
+In the **Report** tab, the scheduled date field will still be shown, but will be greyed out, and there will be an icon next to it with a tooltip will say “Go to **Schedule** tab to reschedule this event”.
+
+
+In the **Schedule** tab, the similar information about scheduling an event as in New event workspace will be shown. You will be able to edit the schedule date and save the change by clicking **Schedule** button.
+
+![](resources/images/enrollment-edit-event-schedule-date.png)
+
+
 #### View mode
 
 When the form is in the view mode the title of the page will appear as: `Enrollment: View Event`. You can see in the page all the information related to the event. Click the `Edit event` button to switch to the edit mode. 
