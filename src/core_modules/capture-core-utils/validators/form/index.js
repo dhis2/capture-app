@@ -2,7 +2,6 @@
 export { hasValue } from './compulsory.validator';
 export { isValidDate } from './date.validator';
 export { isValidDateTime } from './dateTime.validator';
-export { isValidNonFutureDate } from './nonFutureDate.validator';
 export { isValidEmail } from './email.validator';
 export { isValidInteger } from './integer.validator';
 export { isValidPositiveInteger } from './integerPositive.validator';
