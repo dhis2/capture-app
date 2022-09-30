@@ -43,21 +43,16 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
     outputs:
-      versions: ${{ steps.released-versions.outputs.versions }}
+      versions: ${{ steps.legacy-versions.outputs.versions }}
     steps:
       - uses: actions/checkout@v2
 
-      - uses: JoakimSM/action-instance-version@main
-        id: instance-version
+      - uses: JoakimSM/action-supported-legacy-versions@v2
+        id: legacy-versions
         with:
-          instance-url: ${{env.URL_PREFIX_INSTANCES}}dev
+          instance-url-latest: ${{env.URL_PREFIX_INSTANCES}}dev
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
-
-      - uses: JoakimSM/action-supported-legacy-versions@main
-        id: released-versions
-        with:
-          dev-version: ${{ steps.instance-version.outputs.version }}
 
   compute-matrix-containers:
     needs: get-JSON-labels
