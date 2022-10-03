@@ -419,8 +419,8 @@ Then('you see the program stages and the default events filters', () => {
         .contains('Baby Postnatal');
     cy.get('[data-test="filter-button-container-programStage"]')
         .should('exist');
-    cy.get('[data-test="filter-button-container-reportDate"]')
+    cy.get('[data-test="filter-button-container-occurredAt"]')
         .should('exist');
-    cy.get('[data-test="filter-button-container-eventStatus"]')
+    cy.get('[data-test="filter-button-container-status"]')
         .should('exist');
 });
