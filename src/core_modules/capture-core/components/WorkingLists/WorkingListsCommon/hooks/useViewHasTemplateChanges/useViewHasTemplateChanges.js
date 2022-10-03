@@ -41,10 +41,17 @@ export const useViewHasTemplateChanges = ({
     columns,
     sortById,
     sortByDirection,
+    programStage,
 }: Input) => {
     const calculatedInitialViewConfig = useMemo(() => {
         if (!initialViewConfig) {
             return initialViewConfig;
+        }
+
+        // DHIS2-13751 the API to interact with a programStage working list doeesn't exist yet
+        // Disable for now viewHasChanges and the working list buttons when the programStage filter is active.
+        if (programStage) {
+            return false;
         }
 
         const visibleColumnIds = initialViewConfig.customVisibleColumnIds || defaultColumns
@@ -56,7 +63,7 @@ export const useViewHasTemplateChanges = ({
             customVisibleColumnIds: undefined,
             visibleColumnIds,
         };
-    }, [initialViewConfig, defaultColumns]);
+    }, [initialViewConfig, defaultColumns, programStage]);
 
     const viewHasChanges = useMemo(() => {
         if (!calculatedInitialViewConfig) {

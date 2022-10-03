@@ -17,10 +17,17 @@ export const useColumns = <TColumnConfigs: Array<{ id: string, visible: boolean,
             return defaultColumns;
         }
 
-        return customColumnOrder
-            .map(({ id, visible }) => ({
-                ...defaultColumnsAsObject[id],
-                visible,
-            }));
+        return customColumnOrder.reduce(
+            (acc, { id, visible }) => [
+                ...acc,
+                defaultColumnsAsObject[id]
+                    ? {
+                        ...defaultColumnsAsObject[id],
+                        visible,
+                    }
+                    : {},
+            ],
+            [],
+        );
     }, [customColumnOrder, defaultColumns, defaultColumnsAsObject]);
 };

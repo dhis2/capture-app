@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import uuid from 'uuid/v4';
 import i18n from '@dhis2/d2-i18n';
 import { useFeature, FEATURES } from 'capture-core-utils';
@@ -138,7 +138,7 @@ const useFiltersOnly = ({
     }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages]);
 
 
-const useProgramStageFilters = ({ stages }: TrackerProgram) => {
+const useProgramStageFilters = ({ stages }: TrackerProgram, programStage?: string) => {
     const supportsProgramStageWorkingLists = useFeature(FEATURES.programStageWorkingList);
 
     return useMemo(() => {
@@ -153,9 +153,9 @@ const useProgramStageFilters = ({ stages }: TrackerProgram) => {
                 },
                 {
                     id: ADDITIONAL_FILTERS.reportDate,
-                    type: 'TEXT',
+                    type: 'DATE',
                     header: i18n.t(ADDITIONAL_FILTERS_LABELS.reportDate),
-                    disabled: true,
+                    disabled: !programStage,
                     tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                         label: ADDITIONAL_FILTERS_LABELS.reportDate,
                         interpolation: { escapeValue: false },
@@ -165,7 +165,7 @@ const useProgramStageFilters = ({ stages }: TrackerProgram) => {
                     id: ADDITIONAL_FILTERS.eventStatus,
                     type: 'TEXT',
                     header: i18n.t(ADDITIONAL_FILTERS_LABELS.eventStatus),
-                    disabled: true,
+                    disabled: !programStage,
                     tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                         label: ADDITIONAL_FILTERS_LABELS.eventStatus,
                         interpolation: { escapeValue: false },
@@ -174,8 +174,27 @@ const useProgramStageFilters = ({ stages }: TrackerProgram) => {
             ];
         }
         return [];
-    }, [stages, supportsProgramStageWorkingLists]);
+    }, [stages, programStage, supportsProgramStageWorkingLists]);
 };
+
+const useFiltersToKeep = (columns, filters, filtersOnly, programStageFiltersOnly) =>
+    useMemo(() => {
+        if (filters) {
+            const filtersListToKeep = [
+                ...columns,
+                ...filtersOnly,
+                // $FlowFixMe[prop-missing]
+                ...programStageFiltersOnly.filter(filterOnly => filterOnly.mainButton),
+            ].map(({ id }) => id);
+
+            const filtersObjectToKeep = Object.entries(filters).reduce(
+                (acc, [key, value]) => (filtersListToKeep.includes(key) ? { ...acc, [key]: value } : acc),
+                {},
+            );
+            return filtersObjectToKeep;
+        }
+        return {};
+    }, [columns, filtersOnly, programStageFiltersOnly, filters]);
 
 
 const useInjectDataFetchingMetaToLoadList = (defaultColumns, filtersOnly, onLoadView) =>
@@ -202,14 +221,21 @@ const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, onUp
         const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
             filtersOnly
                 .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]));
+        const programStageId = queryArgs.filters?.programStage?.values[0];
 
-        onUpdateList(queryArgs, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching }, 0);
+        onUpdateList(
+            { ...queryArgs, programStageId },
+            { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching },
+            0,
+        );
     }, [defaultColumns, filtersOnly, onUpdateList]);
 
 export const TeiWorkingListsSetup = ({
     program,
+    programStage,
     onUpdateList,
     onLoadView,
+    onClearFilters,
     customColumnOrder,
     records,
     recordsOrder,
@@ -225,12 +251,19 @@ export const TeiWorkingListsSetup = ({
     onDeleteTemplate,
     ...passOnProps
 }: Props) => {
-    const defaultColumns = useDefaultColumnConfig(program, orgUnitId);
+    const defaultColumns = useDefaultColumnConfig(program, orgUnitId, programStage);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
-    const programStageFilters = useProgramStageFilters(program);
+    const programStageFiltersOnly = useProgramStageFilters(program, programStage);
+    const filtersObjectToKeep = useFiltersToKeep(columns, filters, filtersOnly, programStageFiltersOnly);
+
     const staticTemplates = useStaticTemplates();
     const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
+
+    useEffect(() => {
+        onClearFilters && onClearFilters(filtersObjectToKeep);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [programStage]);
 
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
@@ -239,6 +272,7 @@ export const TeiWorkingListsSetup = ({
         columns,
         sortById,
         sortByDirection,
+        programStage,
     });
 
     const injectArgumentsForAddTemplate = useCallback(
@@ -298,7 +332,7 @@ export const TeiWorkingListsSetup = ({
             onUpdateTemplate={injectArgumentsForUpdateTemplate}
             onDeleteTemplate={injectArgumentsForDeleteTemplate}
             filtersOnly={filtersOnly}
-            additionalFilters={programStageFilters}
+            additionalFilters={programStageFiltersOnly}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectDataFetchingMetaToLoadList(defaultColumns, filtersOnly, onLoadView)}
             onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, onUpdateList)}
