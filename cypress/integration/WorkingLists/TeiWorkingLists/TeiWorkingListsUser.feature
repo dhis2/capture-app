@@ -136,7 +136,11 @@ When you delete the name My custom list
 Then the custom TEI is deleted
 
 @v>=39
-Scenario: The user can open the program stage filters
-Given you open the main page with Ngelehun and child programme context
+Scenario: The user can open and select a program stage filter
+Given you open the main page with Ngelehun and WHO RMNCH Tracker context
 When you open the program stage filters from the more filters dropdown menu
-Then you see the program stages and the default events filters
+When you select the First antenatal care visit program stage
+And you apply the current filter
+And you open the column selector
+And you select a data element columns and save from the column selector
+Then you see data elements specific filters and columns

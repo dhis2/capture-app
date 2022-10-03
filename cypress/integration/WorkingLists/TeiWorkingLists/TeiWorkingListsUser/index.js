@@ -5,6 +5,10 @@ Given('you open the main page with Ngelehun and child programme context', () => 
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
+});
+
 Given('you open the main page with Ngelehun and malaria focus investigation program context', () => {
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
@@ -422,5 +426,29 @@ Then('you see the program stages and the default events filters', () => {
     cy.get('[data-test="filter-button-container-occurredAt"]')
         .should('exist');
     cy.get('[data-test="filter-button-container-status"]')
+        .should('exist');
+});
+
+When('you select the First antenatal care visit program stage', () => {
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('First antenatal care visit')
+        .click();
+});
+
+When('you select a data element columns and save from the column selector', () => {
+    cy.get('div[role="dialog"]')
+        .contains('WHOMCH Chronic conditions')
+        .find('input')
+        .click();
+
+    cy.get('div[role="dialog"]')
+        .contains('Save')
+        .click();
+});
+
+Then('you see data elements specific filters and columns', () => {
+    cy.get('[data-test="filter-button-container-de0FEHSIoxh"]')
+        .should('exist');
+    cy.get('[data-test="tei-working-lists"]')
         .should('exist');
 });

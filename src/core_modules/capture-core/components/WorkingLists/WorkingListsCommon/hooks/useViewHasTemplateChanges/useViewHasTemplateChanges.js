@@ -48,7 +48,7 @@ export const useViewHasTemplateChanges = ({
             return initialViewConfig;
         }
 
-        // DHIS2-13751 the API to interact with a programStage working list doeesn't exist yet
+        // DHIS2-13751 the API to interact with a programStage working list template doesn't exist yet
         // Disable for now viewHasChanges and the working list buttons when the programStage filter is active.
         if (programStage) {
             return false;
