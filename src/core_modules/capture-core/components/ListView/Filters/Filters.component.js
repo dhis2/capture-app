@@ -20,6 +20,7 @@ type Props = {
     columns: ?Array<Column>,
     filtersOnly?: FiltersOnly,
     additionalFilters?: AdditionalFilters,
+    visibleSelectorId?: string,
     stickyFilters: StickyFilters,
     onSelectRestMenuItem: Function,
     onUpdateFilter: Function,
@@ -235,7 +236,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         classes,
     } = props;
 
-    const [visibleSelectorId, setVisibleSelector] = React.useState(undefined);
+    const [visibleSelectorId, setVisibleSelector] = React.useState(props.visibleSelectorId);
     const filtersOnlyCount = filtersOnly ? filtersOnly.length : 0;
 
     const elementsContainer = React.useMemo(() => {
