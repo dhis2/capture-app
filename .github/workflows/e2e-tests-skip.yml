@@ -1,4 +1,4 @@
-name: "skip e2e tests"
+name: 'dhis2: skip e2e tests'
 
 on:
   pull_request_target:
