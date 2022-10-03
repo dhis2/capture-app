@@ -52,9 +52,7 @@ yarn
 ```
 #### 3. Enable cross-site cookies in your browser (if server is running on a different domain)
 
-Read about cross-site cookies and DHIS2 applications [here](https://dhis2.nu/2020/08/cross-origin-cookies)
-
-TL;DR: Using Google Chrome or a Chromium-based browser open chrome://flags/#same-site-by-default-cookies and set `SameSite by default cookies` to `Disabled` (Browser restart required).
+Read about cross-site cookies and DHIS2 applications [here](https://dhis2.nu/docs/guides/debug-instance/#disable-samesite-by-default-cookies)
 
 #### 4. Run the application
 
@@ -74,6 +72,9 @@ The path to the server instance can also be set by supplying a `.env.development
 REACT_APP_DHIS2_BASE_URL="http://localhost:8080"
 ```
 
+## Local Cypress testing
+
+To run Cypress tests locally on your own machine, follow the instructions [here](https://github.com/dhis2/capture-app/wiki/Cypress#run-cypress-tests-locally).
 
 ## Built With
 

@@ -202,6 +202,7 @@ type Props = {
     classes: Object,
     theme: Theme,
     onOpenEditEvent: () => void,
+    dataEntryId: string,
 };
 
 type DataEntrySection = {
@@ -238,12 +239,13 @@ class ViewEventDataEntryPlain extends Component<Props> {
     render() {
         const {
             classes,
+            dataEntryId,
             ...passOnProps
         } = this.props;
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
-                id={'singleEvent'}
+                id={dataEntryId}
                 viewMode
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}

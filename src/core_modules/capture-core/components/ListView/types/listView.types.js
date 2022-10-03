@@ -24,15 +24,12 @@ export type FilterOnly = {
     header: string,
     options?: ?Options,
     multiValueFilter?: boolean,
+    tooltipContent?: string,
+    disabled?: boolean,
 };
 
 export type AdditionalFilter = {
-    id: string,
-    type: $Values<dataElementTypes>,
-    header: string,
-    options?: ?Options,
-    disabled?: boolean,
-    tooltipContent?: string,
+    ...FilterOnly,
     mainButton?: boolean
 };
 

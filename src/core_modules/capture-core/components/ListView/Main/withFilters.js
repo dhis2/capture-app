@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Filters } from '../Filters';
+import { FiltersRows } from '../Filters';
 import type { Columns, FiltersOnly, AdditionalFilters } from '../types';
 
 type Props = {
@@ -14,7 +14,8 @@ type Props = {
 };
 
 export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
-    ({ columns,
+    ({
+        columns,
         filtersOnly,
         additionalFilters,
         onUpdateFilter,
@@ -27,7 +28,7 @@ export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
             {...passOnProps}
             columns={columns}
             filters={
-                <Filters
+                <FiltersRows
                     columns={columns}
                     filtersOnly={filtersOnly}
                     additionalFilters={additionalFilters}
@@ -35,7 +36,6 @@ export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
                     onClearFilter={onClearFilter}
                     onSelectRestMenuItem={onSelectRestMenuItem}
                     stickyFilters={stickyFilters}
-                />
-            }
+                />}
         />
     );

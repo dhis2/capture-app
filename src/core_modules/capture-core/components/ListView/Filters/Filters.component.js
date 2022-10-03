@@ -1,7 +1,6 @@
 // @flow
 import React, { memo } from 'react';
 import log from 'loglevel';
-import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
@@ -15,22 +14,6 @@ const getStyles = (theme: Theme) => ({
         paddingBottom: theme.typography.pxToRem(theme.spacing.unit / 2),
         paddingTop: theme.typography.pxToRem(theme.spacing.unit / 2),
     },
-    additionalFiltersContainer: {
-        backgroundColor: colors.grey100,
-        borderRadius: spacersNum.dp4,
-        border: `1px solid ${colors.grey400}`,
-        marginTop: spacersNum.dp4,
-        marginLeft: spacersNum.dp16,
-        padding: spacersNum.dp4,
-    },
-    additionalFiltersBreak: {
-        flexBasis: '100%',
-        height: 0,
-    },
-    additionalFiltersButtons: {
-        display: 'flex',
-        flexBasis: '100%',
-    },
 });
 
 type Props = {
@@ -42,14 +25,6 @@ type Props = {
     onUpdateFilter: Function,
     onClearFilter: Function,
     classes: Object,
-};
-
-const shouldRenderAdditionalFiltersButtons = (additionalFilters, userSelectedFilters) => {
-    if (additionalFilters && userSelectedFilters) {
-        const mainButtonAdditionalFilters = additionalFilters.find(filter => filter.mainButton);
-        return mainButtonAdditionalFilters && userSelectedFilters[mainButtonAdditionalFilters.id];
-    }
-    return false;
 };
 
 const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
@@ -156,13 +131,21 @@ const getUserSelectedElements = (
 const addAdditionalFiltersElements = (
     elementConfigs: Map<string, Column>,
     additionalFilters?: AdditionalFilters,
+    filtersWithValueOnInit: Object = {},
+    userSelectedFilters: Object = {},
 ) => {
     const mainButtonAdditionalFilters = additionalFilters && additionalFilters.find(filter => filter.mainButton);
     if (mainButtonAdditionalFilters) {
-        const remainingElements =
-        // $FlowFixMe[prop-missing]
-            new Map([...elementConfigs, [mainButtonAdditionalFilters.id, mainButtonAdditionalFilters]]);
-        return { remainingElements };
+        const addToRemainingElements =
+        !filtersWithValueOnInit[mainButtonAdditionalFilters.id] && !userSelectedFilters[mainButtonAdditionalFilters.id];
+
+        if (addToRemainingElements) {
+            const remainingElements =
+            // $FlowFixMe[prop-missing]
+                new Map([...elementConfigs, [mainButtonAdditionalFilters.id, mainButtonAdditionalFilters]]);
+            return { remainingElements };
+        }
+        return { remainingElements: elementConfigs };
     }
     return { remainingElements: elementConfigs };
 };
@@ -202,7 +185,8 @@ const renderIndividualFilterButtons = ({
     onClearFilter: Function,
     classes: Object,
 }) => [...(filtersOnly || []), ...individualElementsArray]
-    .map(({ id, type, header, options, multiValueFilter }) => (
+    // $FlowFixMe[prop-missing]
+    .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent }) => (
         <div
             key={id}
             data-test={`filter-button-container-${id}`}
@@ -214,6 +198,8 @@ const renderIndividualFilterButtons = ({
                 type={type}
                 title={header}
                 options={options}
+                disabled={disabled}
+                tooltipContent={tooltipContent}
                 multiValueFilter={multiValueFilter}
                 onSetVisibleSelector={onSetVisibleSelector}
                 selectorVisible={id === visibleSelectorId}
@@ -223,50 +209,6 @@ const renderIndividualFilterButtons = ({
         </div>
     ),
     );
-
-const renderAdditionalFiltersButtons = ({
-    additionalFilters,
-    visibleSelectorId,
-    onSetVisibleSelector,
-    onUpdateFilter,
-    onClearFilter,
-    classes,
-}: {
-    additionalFilters: AdditionalFilters,
-    visibleSelectorId: ?string,
-    onSetVisibleSelector: Function,
-    onUpdateFilter: Function,
-    onClearFilter: Function,
-    classes: Object,
-}) =>
-    (<>
-        <div className={classes.additionalFiltersBreak} />
-        <div className={classes.additionalFiltersContainer} >
-            <div className={classes.additionalFiltersButtons} >
-                {additionalFilters.map(({ id, type, header, options, disabled, tooltipContent }) => (
-                    <div
-                        key={id}
-                        data-test={`filter-button-container-${id}`}
-                        className={classes.filterButtonContainer}
-                    >
-                        <FilterButton
-                            data-test={`filter-button-${id}`}
-                            itemId={id}
-                            type={type}
-                            title={header}
-                            options={options}
-                            disabled={disabled}
-                            tooltipContent={tooltipContent}
-                            onSetVisibleSelector={onSetVisibleSelector}
-                            selectorVisible={id === visibleSelectorId}
-                            onUpdateFilter={onUpdateFilter}
-                            onClearFilter={onClearFilter}
-                        />
-                    </div>
-                ))}
-            </div>
-        </div>
-    </>);
 
 const renderRestButton = (
     restElementsArray: Array<Column>,
@@ -299,9 +241,10 @@ const FiltersPlain = memo<Props>((props: Props) => {
     const elementsContainer = React.useMemo(() => {
         const notEmptyColumns = columns || [];
         const validElementConfigs = getValidElementConfigsVisiblePrioritized(notEmptyColumns);
+        const { filtersWithValueOnInit, userSelectedFilters } = stickyFilters;
 
         const { initValueElements, remainingElements: remainingElementsAfterInitSplit } =
-            splitBasedOnHasValueOnInit(validElementConfigs, stickyFilters.filtersWithValueOnInit);
+            splitBasedOnHasValueOnInit(validElementConfigs, filtersWithValueOnInit);
 
         const { fillUpElements, remainingElements: remainingElementsAfterFillUp } =
         fillUpIndividualElements(
@@ -310,10 +253,11 @@ const FiltersPlain = memo<Props>((props: Props) => {
         );
 
         const { remainingElements: remainingElementsWithAdditionalFilters } =
-        addAdditionalFiltersElements(remainingElementsAfterFillUp, additionalFilters);
+            addAdditionalFiltersElements(
+                remainingElementsAfterFillUp, additionalFilters, filtersWithValueOnInit, userSelectedFilters);
 
         const { userSelectedElements, remainingElements } =
-        getUserSelectedElements(remainingElementsWithAdditionalFilters, stickyFilters.userSelectedFilters);
+        getUserSelectedElements(remainingElementsWithAdditionalFilters, userSelectedFilters);
 
         const individualElementsArray =
             getIndividualElementsArray(
@@ -356,17 +300,6 @@ const FiltersPlain = memo<Props>((props: Props) => {
             classes,
         });
 
-        const additionalFiltersButtons =
-        shouldRenderAdditionalFiltersButtons(additionalFilters, stickyFilters.userSelectedFilters)
-        && renderAdditionalFiltersButtons({
-            // $FlowFixMe[incompatible-call]
-            additionalFilters,
-            visibleSelectorId,
-            onSetVisibleSelector: setVisibleSelector,
-            onUpdateFilter,
-            onClearFilter,
-            classes,
-        });
         const restButton = renderRestButton(
             restElementsArray,
             handleRestMenuItemSelected,
@@ -375,7 +308,6 @@ const FiltersPlain = memo<Props>((props: Props) => {
         return [
             [...individualFilterButtons],
             restButton,
-            additionalFiltersButtons,
         ];
     }, [
         elementsContainer,
@@ -386,8 +318,6 @@ const FiltersPlain = memo<Props>((props: Props) => {
         onUpdateFilter,
         onClearFilter,
         filtersOnly,
-        additionalFilters,
-        stickyFilters.userSelectedFilters,
     ]);
 
     return (

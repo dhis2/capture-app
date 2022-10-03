@@ -41,6 +41,9 @@ msgstr "Organisation unit"
 msgid "Date of enrollment"
 msgstr "Date of enrollment"
 
+msgid "Program name"
+msgstr "Program name"
+
 msgid "Last updated"
 msgstr "Last updated"
 

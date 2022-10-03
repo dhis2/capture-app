@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { actionTypes as NavigateToEnrollmentOverviewActionTypes } from './navigateToEnrollmentOverview.actions';
-import { buildUrlQueryString, getLocationQuery } from '../../utils/routing';
+import { buildUrlQueryString, getLocationQuery, shouldUseNewDashboard } from '../../utils/routing';
 import { scopeHierarchyTypes } from './navigateToEnrollmentOverview.constants';
 
 // TODO This will be removed when the link between capture and tracker capture is not relevant
@@ -33,9 +33,6 @@ const redirectToEnrollmentDashboard = ({ dependencies, teiId, programId, orgUnit
         })}`,
     );
 };
-
-const shouldUseNewDashboard = (userDataStore, dataStore, programId) =>
-    userDataStore?.[programId] || (userDataStore?.[programId] !== false && dataStore?.[programId]);
 
 export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) =>
     action$.pipe(

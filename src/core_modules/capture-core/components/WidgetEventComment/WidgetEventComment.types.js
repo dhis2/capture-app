@@ -1,7 +1,7 @@
 // @flow
 
 export type Props = {|
-    itemId: string,
+    dataEntryKey: string,
     dataEntryId: string,
     ...CssClasses
 |};

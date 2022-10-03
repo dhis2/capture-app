@@ -7,15 +7,15 @@
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2022
 # Raja Fathurrahim, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
+"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Raja Fathurrahim, 2022\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,6 +56,9 @@ msgstr "Unit organisasi"
 
 msgid "Date of enrollment"
 msgstr "Tanggal pendaftaran"
+
+msgid "Program name"
+msgstr "Nama program"
 
 msgid "Last updated"
 msgstr "Terakhir diperbarui"

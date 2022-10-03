@@ -13,7 +13,7 @@ const getClientConstraintByType = {
             return accValues;
         }, {});
         return {
-            id: tei.trackedEntityInstance,
+            id: tei.trackedEntity,
             name: getDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
             type: 'TRACKED_ENTITY_INSTANCE',
             linkProgramId: relationshipConstraint.programId,
