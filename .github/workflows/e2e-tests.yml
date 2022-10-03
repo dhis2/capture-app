@@ -47,7 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: dhis2/action-supported-legacy-versions@main
+      - uses: dhis2/action-supported-legacy-versions@v1
         id: legacy-versions
         with:
           instance-url-latest: ${{env.URL_PREFIX_INSTANCES}}dev
