@@ -11,7 +11,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "test: $ACTOR"
+      - run: echo 'test $ACTOR'
         env:
           ACTOR: ${{ github.actor }}
 
