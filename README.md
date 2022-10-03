@@ -42,7 +42,7 @@ Clone with HTTPS
 ```
 git clone https://github.com/dhis2/capture-app.git
 ```
-   
+
 #### 2. Install project dependencies
 
 To install the dependencies you will have to be at the source folder of the cloned repository. Then run:
