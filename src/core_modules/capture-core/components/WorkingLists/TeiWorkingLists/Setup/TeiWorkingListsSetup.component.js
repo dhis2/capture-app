@@ -152,22 +152,22 @@ const useProgramStageFilters = ({ stages }: TrackerProgram) => {
                     mainButton: true,
                 },
                 {
-                    id: ADDITIONAL_FILTERS.reportDate,
+                    id: ADDITIONAL_FILTERS.occurredAt,
                     type: 'TEXT',
-                    header: i18n.t(ADDITIONAL_FILTERS_LABELS.reportDate),
+                    header: i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
                     disabled: true,
                     tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
-                        label: ADDITIONAL_FILTERS_LABELS.reportDate,
+                        label: ADDITIONAL_FILTERS_LABELS.occurredAt,
                         interpolation: { escapeValue: false },
                     }),
                 },
                 {
-                    id: ADDITIONAL_FILTERS.eventStatus,
+                    id: ADDITIONAL_FILTERS.status,
                     type: 'TEXT',
-                    header: i18n.t(ADDITIONAL_FILTERS_LABELS.eventStatus),
+                    header: i18n.t(ADDITIONAL_FILTERS_LABELS.status),
                     disabled: true,
                     tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
-                        label: ADDITIONAL_FILTERS_LABELS.eventStatus,
+                        label: ADDITIONAL_FILTERS_LABELS.status,
                         interpolation: { escapeValue: false },
                     }),
                 },
