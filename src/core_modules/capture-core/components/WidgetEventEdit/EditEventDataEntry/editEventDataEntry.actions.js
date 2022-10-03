@@ -20,6 +20,8 @@ export const actionTypes = {
     START_DELETE_EVENT_DATA_ENTRY: 'StartDeleteEventDataEntry',
     DELETE_EVENT_DATA_ENTRY_FAILED: 'DeleteEventDataEntryFailed',
     DELETE_EVENT_DATA_ENTRY_SUCCEEDED: 'DeleteEventDataEntrySucceeded',
+    EVENT_SCHEDULE_SUCCESS: 'ScheduleEvent.UpdateScheduleEventSuccess',
+    EVENT_SCHEDULE_ERROR: 'ScheduleEvent.UpdateScheduleEventError',
 };
 
 export const cancelEditEventDataEntry = () =>
