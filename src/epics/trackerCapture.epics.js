@@ -190,13 +190,17 @@ import {
     saveNewEventFailedEpic,
 } from '../core_modules/capture-core/components/Pages/EnrollmentAddEvent/EnrollmentAddEventPage.epics';
 import {
+    updateEventSucceededEpic,
+    updateEventFailedEpic,
+} from '../core_modules/capture-core/components/Pages/EnrollmentEditEvent';
+import {
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
     addNoteForNewEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
 import {
-    scheduleNewEnrollmentEventEpic,
+    scheduleEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEventSchedule';
 import {
     orgUnitFetcherEpic,
@@ -314,10 +318,12 @@ export const epics = combineEpics(
     saveNewEnrollmentEventEpic,
     saveNewEventSucceededEpic,
     saveNewEventFailedEpic,
+    updateEventSucceededEpic,
+    updateEventFailedEpic,
     addNoteForNewEnrollmentEventEpic,
     addNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,
-    scheduleNewEnrollmentEventEpic,
+    scheduleEnrollmentEventEpic,
     orgUnitFetcherEpic,
     updateTeiEpic,
     updateTeiSucceededEpic,

@@ -15,7 +15,7 @@ import {
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { FEATURETYPE } from '../../../../constants';
-import { buildUrlQueryString } from '../../../../utils/routing';
+import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../utils/routing';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
@@ -38,9 +38,6 @@ const standardGeoJson = (geometry) => {
     }
     return undefined;
 };
-
-const shouldUseNewDashboard = (userDataStore, dataStore, programId) =>
-    userDataStore?.[programId] || (userDataStore?.[programId] !== false && dataStore?.[programId]);
 
 const getStageWithOpenAfterEnrollment = stages =>
     [...stages.values()].find(({ openAfterEnrollment }) => openAfterEnrollment);

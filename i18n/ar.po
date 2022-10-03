@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -51,6 +51,9 @@ msgstr "الوحدة التنظيمية"
 
 msgid "Date of enrollment"
 msgstr "تاريخ التسجيل"
+
+msgid "Program name"
+msgstr "اسم البرنامج"
 
 msgid "Last updated"
 msgstr "آخر تحديث"
@@ -550,8 +553,8 @@ msgstr "تزامن"
 msgid "Add comment"
 msgstr "اضافة تعليق"
 
-msgid "You dont have access to write comments"
-msgstr "ليس لديك حق الوصول إلى كتابة التعليقات"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "اكتب تعليقاً"
@@ -900,8 +903,8 @@ msgstr "الأحداث"
 msgid "event"
 msgstr "حدث"
 
-msgid "You dont have access to edit this event"
-msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "تعديل الحدث"
@@ -944,11 +947,11 @@ msgstr "إحتمال وجود تكرار"
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You dont have access to delete this relationship"
-msgstr "ليس لديك حق الوصول لحذف هذه العلاقة"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "ليس لديك حق الوصول لإنشاء علاقات"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "اضف علاقة"
@@ -1016,11 +1019,11 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Add new"
-msgstr "إضافة جديد"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "إضافة جديد"
 
 msgid "Reactivate"
 msgstr ""
@@ -1118,9 +1121,6 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
-msgstr ""
-
-msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"

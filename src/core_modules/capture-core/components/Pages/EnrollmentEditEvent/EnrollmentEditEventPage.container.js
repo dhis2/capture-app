@@ -3,8 +3,9 @@ import React from 'react';
 // $FlowFixMe
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
-import { useCommonEnrollmentDomainData, showEnrollmentError } from '../common/EnrollmentOverviewDomain';
+import { useCommonEnrollmentDomainData, showEnrollmentError, updateEnrollmentEvents } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
@@ -24,6 +25,12 @@ const getEventDate = (event) => {
     const eventDataConvertValue = convertValue(event?.occurredAt || event?.scheduledAt, dataElementTypes.DATETIME);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
     return eventDate;
+};
+
+const getEventScheduleDate = (event) => {
+    if (!event?.scheduledAt) { return undefined; }
+    const eventDataConvertValue = convertValue(event?.scheduledAt, dataElementTypes.DATETIME);
+    return eventDataConvertValue?.toString();
 };
 
 const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, event }) => {
@@ -69,12 +76,17 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
-    const onCancel = () => {
+    const onCancelEditEvent = () => {
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
     const onGoBack = () =>
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
+
+    const onHandleScheduleSave = (eventData: Object) => {
+        dispatch(updateEnrollmentEvents(eventId, eventData));
+        history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
+    };
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
@@ -82,9 +94,9 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
-    const { currentPageMode, cancel } = useEnrollmentEditEventPageMode(event?.status);
-    cancel && onCancel();
-    const dataEntryKey = `singleEvent-${currentPageMode}`;
+    const scheduleDate = getEventScheduleDate(event);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
+    const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
 
     const pageStatus = getPageStatus({
@@ -116,6 +128,9 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             eventDate={eventDate}
             onEnrollmentError={onEnrollmentError}
             eventStatus={event?.status}
+            scheduleDate={scheduleDate}
+            onCancelEditEvent={onCancelEditEvent}
+            onHandleScheduleSave={onHandleScheduleSave}
         />
     );
 };

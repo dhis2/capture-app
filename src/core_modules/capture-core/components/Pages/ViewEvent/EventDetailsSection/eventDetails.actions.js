@@ -7,10 +7,6 @@ export const actionTypes = {
     SHOW_EDIT_EVENT_DATA_ENTRY: 'ShowEditEventDataEntryForViewSingleEvent',
 };
 
-export const viewEventIds = {
-    dataEntryId: 'singleEvent',
-    itemId: 'viewEvent',
-};
 
 export const startShowEditEventDataEntry = (orgUnit: OrgUnit) =>
     actionCreator(actionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY)({ orgUnit });

@@ -37,6 +37,12 @@ import { statusTypes } from '../../../events/statusTypes';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
+import { actionTypes } from './editEventDataEntry.actions';
+
+const tabMode = Object.freeze({
+    REPORT: 'REPORT',
+    SCHEDULE: 'SCHEDULE',
+});
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -312,11 +318,12 @@ type Props = {
     formFoundation: ?RenderFoundation,
     orgUnit: OrgUnit,
     programId: string,
-    eventStatus: string,
+    initialScheduleDate?: string,
     onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void,
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onHandleScheduleSave: (eventData: Object) => void,
     onDelete: () => void,
     onCancel: () => void,
     classes: {
@@ -324,6 +331,10 @@ type Props = {
         fieldLabelMediaBased?: ?string,
     },
     theme: Theme,
+    dataEntryId: string,
+    onCancelEditEvent?: () => void,
+    eventStatus?: string,
+    enrollmentId?: string,
 };
 
 type State = {
@@ -374,8 +385,11 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
+            onHandleScheduleSave,
             onSave,
             classes,
+            dataEntryId,
+            onCancelEditEvent,
             ...passOnProps
         } = this.props;
 
@@ -399,8 +413,10 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 {this.state.mode === tabMode.SCHEDULE && // $FlowFixMe[cannot-spread-inexact] automated comment
                 <WidgetEventSchedule
                     programId={programId}
-                    onSave={onSave}
+                    onSave={onHandleScheduleSave}
                     orgUnitId={orgUnit.id}
+                    onSaveSuccessActionType={actionTypes.EVENT_SCHEDULE_SUCCESS}
+                    onSaveErrorActionType={actionTypes.EVENT_SCHEDULE_ERROR}
                     {...passOnProps}
                 />}
             </div>
@@ -409,6 +425,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
 
     renderDataEntry() {
         const {
+            dataEntryId,
             orgUnit,
             programId,
             onUpdateDataEntryField,
@@ -420,7 +437,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
         } = this.props;
         return ( // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
-                id={'singleEvent'}
+                id={dataEntryId}
                 onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
                 onUpdateFormField={onUpdateField(orgUnit, programId)}
                 onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}

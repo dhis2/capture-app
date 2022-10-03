@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2022
+# Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,6 +49,9 @@ msgstr "Organisasjonsenhet"
 
 msgid "Date of enrollment"
 msgstr "Dato for registrering"
+
+msgid "Program name"
+msgstr "Programnavn"
 
 msgid "Last updated"
 msgstr "Sist oppdatert"
@@ -96,7 +99,7 @@ msgid "Please provide a valid time"
 msgstr "Oppgi en gyldig tid"
 
 msgid "Please provide an integer between 0 and 100"
-msgstr ""
+msgstr "Oppgi et heltall mellom 0 og 100"
 
 msgid "Please provide a valid url"
 msgstr "Oppgi en gyldig url"
@@ -138,7 +141,7 @@ msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
-msgstr ""
+msgstr "Lagrer en ny registrering i {{programName}} i {{orgUnitName}}."
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr "Lagrer {{trackedEntityName}} i {{programName}} i {{orgUnitName}}."
@@ -390,13 +393,13 @@ msgid "to"
 msgstr "til"
 
 msgid "Days in the future"
-msgstr ""
+msgstr "Dager i fremtiden"
 
 msgid "From"
 msgstr "Fra"
 
 msgid "Days in the past"
-msgstr ""
+msgstr "Dager i fortiden"
 
 msgid "To"
 msgstr "Til"
@@ -420,10 +423,10 @@ msgid "Last 3 months"
 msgstr "Siste 3 måneder"
 
 msgid "Absolute range"
-msgstr ""
+msgstr "Absolutt rekkevidde"
 
 msgid "Relative range"
-msgstr ""
+msgstr "Relativ rekkevidde"
 
 msgid "Max"
 msgstr "Max"
@@ -554,29 +557,29 @@ msgstr "Synkroniserer"
 msgid "Add comment"
 msgstr "Legg til en kommentar"
 
-msgid "You dont have access to write comments"
+msgid "You don't have access to write comments"
 msgstr "Du har ikke tilgang til å skrive kommentarer"
 
 msgid "Write comment"
 msgstr "Skriv kommentar"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr ""
+msgstr "Bruk nytt registreringsdashbord for {{programName}}"
 
 msgid "Opt in for {{programName}}"
-msgstr ""
+msgstr "Meld på for {{programName}}"
 
 msgid "No, cancel"
 msgstr "Nei, avbryt"
 
 msgid "Yes, opt in"
-msgstr ""
+msgstr "Ja, meld på"
 
 msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr ""
+msgstr "Slutt å bruke nytt registreringsdashbord for {{programName}}"
 
 msgid "Opt out for {{programName}}"
-msgstr ""
+msgstr "Meld ut for {{programName}}"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Sporet enhetsforekomst med id \"{{teiId}}\"  eksisterer ikke"
@@ -828,15 +831,17 @@ msgid "Search by attributes"
 msgstr "Søk etter attributter"
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
+msgstr "Fyll ut disse feltene for å søke{{escape}} {{ searchableAttributes }}"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
 "search{{escape}} {{searchableAttributes}}"
 msgstr ""
+"Fyll ut minst {{minAttributesRequiredToSearch}} av disse feltene for å "
+"søke{{escape}} {{searchableAttributes}}"
 
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
+msgstr "Fyll ut dette feltet for å søke {{escape}} {{searchableAttributes}}"
 
 msgid "No results found"
 msgstr "Ingen resultater funnet"
@@ -847,7 +852,7 @@ msgid ""
 msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
 
 msgid "Register a user"
-msgstr ""
+msgstr "Registrer en bruker"
 
 msgid "Back to search"
 msgstr "Tilbake til søk"
@@ -859,7 +864,7 @@ msgid "Too many results"
 msgstr "For mange resultat"
 
 msgid "Cannot search in all programs"
-msgstr ""
+msgstr "Kan ikke søke i alle programmer"
 
 msgid "Back"
 msgstr "Tilbake"
@@ -884,10 +889,10 @@ msgid "Re-enroll"
 msgstr "Registrer på nytt"
 
 msgid "all programs"
-msgstr ""
+msgstr "alle programmer"
 
 msgid "If none of search results match, you can create new "
-msgstr ""
+msgstr "Hvis ingen av søkeresultatene samsvarer, kan du opprette ny"
 
 msgid "Create new"
 msgstr "Opprett ny"
@@ -903,10 +908,10 @@ msgid "Search in all programs"
 msgstr "Søk i alle programmer"
 
 msgid "Saved lists in this program"
-msgstr ""
+msgstr "Lagrede lister i dette programmet"
 
 msgid "Create custom working list"
-msgstr ""
+msgstr "Lag tilpasset arbeidsliste"
 
 msgid "events"
 msgstr "hendelser"
@@ -914,7 +919,7 @@ msgstr "hendelser"
 msgid "event"
 msgstr "hendelse"
 
-msgid "You dont have access to edit this event"
+msgid "You don't have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
 msgid "Edit event"
@@ -960,10 +965,10 @@ msgstr "Mulige duplikater funnet"
 msgid "An error occurred loading possible duplicates"
 msgstr "En feil oppsto ved lasting av mulige duplikater"
 
-msgid "You dont have access to delete this relationship"
+msgid "You don't have access to delete this relationship"
 msgstr "Du har ikke tilgang til å slette denne relasjonen"
 
-msgid "You dont have access to create any relationships"
+msgid "You don't have access to create any relationships"
 msgstr "Du har ikke tilgang til å opprette noen relasjoner"
 
 msgid "Add relationship"
@@ -1032,11 +1037,11 @@ msgstr "Registreringshandlinger"
 msgid "We are processing your request."
 msgstr "Vi behandler forespørselen din."
 
-msgid "Add new"
-msgstr "Legg til ny"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr "Bare én registrering per {{tetName}} er tillatt i dette programmet"
+
+msgid "Add new"
+msgstr "Legg til ny"
 
 msgid "Reactivate"
 msgstr "Reaktiver"
@@ -1130,16 +1135,13 @@ msgid "Delete event"
 msgstr "Slett hendelse"
 
 msgid "Yes, delete event"
-msgstr ""
+msgstr "Ja, slett hendelse"
 
 msgid "Event completed"
 msgstr "Hendelse fullført"
 
 msgid "Back to all stages and events"
 msgstr "Tilbake til alle faser og hendelser"
-
-msgid "You don't have access to edit this event"
-msgstr ""
 
 msgid "Schedule date info"
 msgstr "Informasjon for planlagt dato"
@@ -1228,7 +1230,7 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profil -widgeten kunne ikke lastes inn. Prøv igjen senere"
 
 msgid "{{TETName}} profile"
-msgstr ""
+msgstr "{{TETName}} profil"
 
 msgid "Edit"
 msgstr "Rediger"
@@ -1399,10 +1401,10 @@ msgid "Error saving the enrollment event"
 msgstr "Feil under lagring av hendelsen"
 
 msgid "Error deleting the enrollment event"
-msgstr ""
+msgstr "Feil ved sletting av hendelsen"
 
 msgid "Error editing the event, the changes made were not saved"
-msgstr ""
+msgstr "Feil under redigering av hendelsen, endringer ble ikke lagret"
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"
