@@ -11,12 +11,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'test $ACTOR'
+      - run: echo "test $ACTOR"
         env:
           ACTOR: ${{ github.actor }}
 
   call-e2e-tests-result:
-    if: github.actor == '@dhis2-bot' || github.actor == '@JoakimSM' || contains(github.event.head_commit.message, '[skip ci]')
+    if: github.actor == '@dhis2-bot' || github.actor == JoakimSM || contains(github.event.head_commit.message, '[skip ci]')
     uses: ./.github/workflows/e2e-tests-result.yml
     with:
       result: true
