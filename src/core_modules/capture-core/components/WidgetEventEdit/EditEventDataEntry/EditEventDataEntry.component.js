@@ -44,11 +44,6 @@ const tabMode = Object.freeze({
     SCHEDULE: 'SCHEDULE',
 });
 
-const tabMode = Object.freeze({
-    REPORT: 'REPORT',
-    SCHEDULE: 'SCHEDULE',
-});
-
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
     },
