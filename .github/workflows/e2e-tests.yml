@@ -8,111 +8,111 @@ name: 'dhis2: e2e tests'
 #     CYPRESS_DHIS2_PASSWORD
 #
 # - Customize environment variables:
-#     URL_PREFIX_INSTANCES: Set the URL prefix for your instances. All instances are required to have this prefix followed by "dev" for the dev instance and "[majorVersion].[minorVersion]" for released versions (e.g. 2.39)
+#     URL_PREFIX_INSTANCES: Set the URL prefix for your instances. All instances are required to have this prefix followed by "[majorVersion].[minorVersion]" for released versions (e.g. 2.39) and "dev" for a dev instance
 #     CYPRESS_CONTAINERS:  Set the number of parallel Cypress instances running for each backend version
 #     TRIGGER_LABELS:  Set the labels that will trigger the workflow
-#   
+#
 
 on:
-  pull_request:
-    types: [ labeled ]
+    pull_request:
+        types: [labeled]
 
 env:
-  URL_PREFIX_INSTANCES: https://test.e2e.dhis2.org/ca-test-
-  CYPRESS_CONTAINERS: 8
-  TRIGGER_LABELS: e2e-tests, testing
+    URL_PREFIX_INSTANCES: https://test.e2e.dhis2.org/ca-test-
+    CYPRESS_CONTAINERS: 8
+    TRIGGER_LABELS: e2e-tests, testing
 
 defaults:
-  run:
-    shell: bash
+    run:
+        shell: bash
 
 jobs:
-  get-json-labels:
-    runs-on: ubuntu-latest
-    outputs:
-      json-labels: ${{ steps.compute-json.outputs.labels }}
-    steps:
-      - run: |
-              arrLabels=(${TRIGGER_LABELS//,/ })
-              for item in ${arrLabels[@]}; do labels+=\"$item\",; done
-              echo "::set-output name=labels::[ ${labels%,} ]"
-        id: compute-json
+    get-json-labels:
+        runs-on: ubuntu-latest
+        outputs:
+            json-labels: ${{ steps.compute-json.outputs.labels }}
+        steps:
+            - run: |
+                  arrLabels=(${TRIGGER_LABELS//,/ })
+                  for item in ${arrLabels[@]}; do labels+=\"$item\",; done
+                  echo "::set-output name=labels::[ ${labels%,} ]"
+              id: compute-json
 
-  get-versions:
-    needs: get-JSON-labels
-    runs-on: ubuntu-latest
-    if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
-    outputs:
-      versions: ${{ steps.legacy-versions.outputs.versions }}
-    steps:
-      - uses: actions/checkout@v2
+    get-versions:
+        needs: get-JSON-labels
+        runs-on: ubuntu-latest
+        if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
+        outputs:
+            versions: ${{ steps.legacy-versions.outputs.versions }}
+        steps:
+            - uses: actions/checkout@v2
 
-      - uses: dhis2/action-supported-legacy-versions@v1
-        id: legacy-versions
+            - uses: dhis2/action-supported-legacy-versions@v1
+              id: legacy-versions
+              with:
+                  instance-url-latest: ${{env.URL_PREFIX_INSTANCES}}dev # can be removed if maxDHIS2Version has been specified
+                  username: ${{ secrets.CYPRESS_DHIS2_USERNAME }} # can be removed if maxDHIS2Version has been specified
+                  password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
+
+    compute-matrix-containers:
+        needs: get-JSON-labels
+        runs-on: ubuntu-latest
+        if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
+        outputs:
+            containers: ${{ steps.compute.outputs.containers}}
+        steps:
+            - run: |
+                  for (( cnt = 1; cnt <= $CYPRESS_CONTAINERS; cnt++)); do containers+=$cnt,; done
+                  echo "::set-output name=containers::[ ${containers%,} ]"
+              id: compute
+
+    cypress:
+        needs: [get-versions, compute-matrix-containers]
+        runs-on: ubuntu-latest
+        container: cypress/browsers:node14.7.0-chrome84
+        strategy:
+            fail-fast: false
+            matrix:
+                versions: ${{ fromJSON(needs.get-versions.outputs.versions) }}
+                containers: ${{ fromJSON(needs.compute-matrix-containers.outputs.containers) }}
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 14.x
+
+            - uses: actions/cache@v2
+              id: yarn-cache
+              with:
+                  path: '**/node_modules'
+                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+            - name: Install
+              if: steps.yarn-cache.outputs.cache-hit != 'true'
+              run: yarn install --frozen-lockfile
+
+            - name: Cypress run
+              uses: cypress-io/github-action@v2
+              with:
+                  record: true
+                  parallel: true
+                  group: e2e-chrome-parallel-${{matrix.versions}}
+                  browser: chrome
+                  start: 'yarn start:forCypress'
+                  wait-on: 'http://localhost:3000'
+                  wait-on-timeout: 200
+              env:
+                  CI: true
+                  CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  CYPRESS_dhis2BaseUrl: ${{env.URL_PREFIX_INSTANCES}}${{matrix.versions}}
+                  CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
+                  CYPRESS_dhis2Username: ${{secrets.CYPRESS_DHIS2_USERNAME}}
+                  CYPRESS_dhis2Password: ${{secrets.CYPRESS_DHIS2_PASSWORD}}
+
+    call-e2e-tests-result:
+        needs: cypress
+        uses: ./.github/workflows/e2e-tests-result.yml
         with:
-          instance-url-latest: ${{env.URL_PREFIX_INSTANCES}}dev
-          username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
-          password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
-
-  compute-matrix-containers:
-    needs: get-JSON-labels
-    runs-on: ubuntu-latest
-    if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
-    outputs:
-      containers: ${{ steps.compute.outputs.containers}}
-    steps:
-      - run: |
-              for (( cnt = 1; cnt <= $CYPRESS_CONTAINERS; cnt++)); do containers+=$cnt,; done
-              echo "::set-output name=containers::[ ${containers%,} ]"
-        id: compute
-        
-  cypress:
-    needs: [get-versions, compute-matrix-containers]
-    runs-on: ubuntu-latest
-    container: cypress/browsers:node14.7.0-chrome84
-    strategy:
-      fail-fast: false
-      matrix:
-        versions: ${{ fromJSON(needs.get-versions.outputs.versions) }}
-        containers: ${{ fromJSON(needs.compute-matrix-containers.outputs.containers) }}
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-
-      - uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          record: true
-          parallel: true
-          group: e2e-chrome-parallel-${{matrix.versions}}
-          browser: chrome
-          start: 'yarn start:forCypress'
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 200
-        env:
-          CI: true
-          CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYPRESS_dhis2BaseUrl: ${{env.URL_PREFIX_INSTANCES}}${{matrix.versions}}
-          CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
-          CYPRESS_dhis2Username: ${{secrets.CYPRESS_DHIS2_USERNAME}}
-          CYPRESS_dhis2Password: ${{secrets.CYPRESS_DHIS2_PASSWORD}}
-
-  call-e2e-tests-result:
-    needs: cypress
-    uses: ./.github/workflows/e2e-tests-result.yml
-    with:
-      result: true
+            result: true

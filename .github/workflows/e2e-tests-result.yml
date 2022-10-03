@@ -1,21 +1,21 @@
-name: 'result of e2e tests'
+name: 'dhis2: result of e2e tests'
 
 on:
-  workflow_call:
-    inputs:
-      result:
-        required: true
-        type: boolean
+    workflow_call:
+        inputs:
+            result:
+                required: true
+                type: boolean
 
 defaults:
-  run:
-    shell: bash
+    run:
+        shell: bash
 
 jobs:
-  e2e-tests-success:
-    runs-on: ubuntu-latest
-    steps:
-      - name: verify
-        run: if [ $result != true ]; then exit 1; fi;
-        env:
-          result: ${{ inputs.result }}
+    e2e-tests-success:
+        runs-on: ubuntu-latest
+        steps:
+            - name: verify
+              run: if [ $result != true ]; then exit 1; fi;
+              env:
+                  result: ${{ inputs.result }}
