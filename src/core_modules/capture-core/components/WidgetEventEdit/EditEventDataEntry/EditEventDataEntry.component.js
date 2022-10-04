@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { getNoFutureEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
 import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
@@ -120,7 +120,7 @@ const buildReportDateSettingsFn = () => {
             required: true,
         }),
         getPropName: () => 'eventDate',
-        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
+        getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
