@@ -1,3 +1,10 @@
+## [100.15.1](https://github.com/dhis2/capture-app/compare/v100.15.0...v100.15.1) (2022-10-04)
+
+
+### Bug Fixes
+
+* [DHIS2-8210] use display order given in TEA registration form ([#2987](https://github.com/dhis2/capture-app/issues/2987)) ([209548e](https://github.com/dhis2/capture-app/commit/209548e4a184199e6752c2c01eaf9dadfbcd9c91))
+
 # [100.15.0](https://github.com/dhis2/capture-app/compare/v100.14.1...v100.15.0) (2022-10-03)
 
 
