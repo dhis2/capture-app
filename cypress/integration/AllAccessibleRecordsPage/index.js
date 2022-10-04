@@ -60,6 +60,8 @@ When('navigates back to the main page', () => {
 });
 
 Then('the working list should be updated', () => {
+    cy.get('.app-shell-app').scrollTo('bottom');
+
     cy.get('button[title="Select columns"]')
         .click();
 
