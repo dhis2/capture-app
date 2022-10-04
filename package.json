@@ -100,7 +100,7 @@
     "cypress": "^7",
     "cypress-cucumber-preprocessor": "^4",
     "docdash": "^1.2.0",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "7.32.0",
