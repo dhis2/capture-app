@@ -166,11 +166,10 @@ const buildScheduleDateSettingsFn = () => {
             calendarWidth: 350,
             label: props.formFoundation.getLabel('scheduledAt'),
             disabled: true,
-            calendarMaxMoment: moment(),
         }),
         getIsHidden: (props: Object) => ![statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus),
         getPropName: () => 'scheduledAt',
-        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
+        getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
