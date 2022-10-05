@@ -6,117 +6,55 @@ import type { IConvertInputRulesValue } from 'capture-core-utils/rulesEngine/rul
 
 const dateMomentFormat = 'YYYY-MM-DD';
 
-class RulesValueConverter implements IConvertInputRulesValue {
-    convertText(value: any): string {
-        return value || '';
-    }
-
-    convertLongText(value: any): string {
-        return value || '';
-    }
-
-    convertLetter(value: any): string {
-        return value || '';
-    }
-
-    convertPhoneNumber(value: any): string {
-        return value || '';
-    }
-
-    convertEmail(value: any): string {
-        return value || '';
-    }
-
-    convertBoolean(value: any): boolean | string {
-        return (value || value === false) ? value : '';
-    }
-
-    convertTrueOnly(value: any): boolean | string {
-        return (value || value === false) ? value : '';
-    }
-
-    convertDate(value: any): string {
+export const inputConverter: IConvertInputRulesValue = {
+    convertText: (value: ?string): ?string => (value || null),
+    convertLongText: (value: ?string): ?string => (value || null),
+    convertLetter: (value: ?string): ?string => (value || null),
+    convertPhoneNumber: (value: ?string): ?string => (value || null),
+    convertEmail: (value: ?string): ?string => (value || null),
+    convertBoolean: (value: ?boolean): ?boolean => ((value || value === false) ? value : null),
+    convertTrueOnly: (value: ?boolean): ?boolean => ((value || value === false) ? value : null),
+    convertDate: (value: any): ?string => {
         if (!value) {
-            return '';
+            return null;
         }
         const momentObject = moment(value);
         momentObject.locale('en');
         return momentObject.format(dateMomentFormat);
-    }
-
-    convertDateTime(value: any): string {
-        return value || '';
-    }
-
-    convertTime(value: any): string {
-        return value || '';
-    }
-
-    convertNumber(value: number | ''): number {
-        return value || 0;
-    }
-
-    convertUnitInterval(value: number | ''): number {
-        return value || 0;
-    }
-
-    convertPercentage(value: number | ''): number {
-        return value || 0;
-    }
-
-    convertInteger(value: number | ''): number {
-        return value || 0;
-    }
-
-    convertIntegerPositive(value: number | ''): number {
-        return value || 0;
-    }
-
-    convertIntegerNegative(value: number | ''): number {
-        return value || 0;
-    }
-
-    convertIntegerZeroOrPositive(value: number | ''): number {
-        return value || 0;
-    }
-
-    convertTrackerAssociate(value: any): string {
+    },
+    convertDateTime: (value: ?string): ?string => (value || null),
+    convertTime: (value: ?string): ?string => (value || null),
+    convertNumber: (value: any): ?number => (typeof value === 'number' ? value : null),
+    convertUnitInterval: (value: any): ?number => (typeof value === 'number' ? value : null),
+    convertPercentage: (value: any): ?number => (typeof value === 'number' ? value : null),
+    convertInteger: (value: any): ?number => (typeof value === 'number' ? value : null),
+    convertIntegerPositive: (value: any): ?number => (typeof value === 'number' ? value : null),
+    convertIntegerNegative: (value: any): ?number => (typeof value === 'number' ? value : null),
+    convertIntegerZeroOrPositive: (value: any): ?number => (typeof value === 'number' ? value : null),
+    convertTrackerAssociate: (value: any): ?string => {
         log.warn('convertTrackerAssociate not implemented', value);
-        return '';
-    }
-
-    convertUserName(value: any): string {
+        return null;
+    },
+    convertUserName: (value: any): ?string => {
         log.warn('convertUserName not implemented', value);
-        return '';
-    }
-
-    convertCoordinate(value: any): string {
+        return null;
+    },
+    convertCoordinate: (value: any): ?string => {
         log.warn('convertCoordinate not implemented', value);
-        return '';
-    }
-
-    convertOrganisationUnit(value: any): string {
+        return null;
+    },
+    convertOrganisationUnit: (value: any): ?string => {
         log.warn('convertOrganisationUnit not implemented', value);
-        return '';
-    }
-
-    convertAge(value: any): string {
-        return this.convertDate(value);
-    }
-
-    convertUrl(value: any): string {
-        return value || '';
-    }
-
-    convertFile(value: any): string {
+        return null;
+    },
+    convertAge: (value: any): ?string => inputConverter.convertDate(value),
+    convertUrl: (value: ?string): ?string => (value || null),
+    convertFile(value: any): ?string {
         log.warn('convertFile not implemented', value);
-        return '';
-    }
-
-    convertImage(value: any): string {
+        return null;
+    },
+    convertImage(value: any): ?string {
         log.warn('convertImage not implemented', value);
-        return '';
-    }
-}
-
-export const inputConverter = new RulesValueConverter();
+        return null;
+    },
+};
