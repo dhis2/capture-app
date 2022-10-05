@@ -17,6 +17,11 @@ type AgeFormValue = {
     days?: ?string,
 }
 
+type RangeValue = {
+    from?: ?string,
+    to?: ?string
+}
+
 function convertDateForEdit(rawValue: string): string {
     const momentInstance = moment(rawValue);
     return convertMomentToDateFormatString(momentInstance);
@@ -57,6 +62,14 @@ function convertAgeForEdit(rawValue: string): AgeFormValue {
     };
 }
 
+function convertNumberRangeForDisplay(rawValue: RangeValue) {
+    return rawValue.to;
+}
+
+function convertDateRangeForDisplay(rawValue: RangeValue) {
+    return rawValue.to;
+}
+
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
     [dataElementTypes.INTEGER]: stringifyNumber,
@@ -70,6 +83,8 @@ const valueConvertersForType = {
     [dataElementTypes.TRUE_ONLY]: () => 'true',
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
     [dataElementTypes.AGE]: convertAgeForEdit,
+    [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
+    [dataElementTypes.DATE_RANGE]: convertDateRangeForDisplay,
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
