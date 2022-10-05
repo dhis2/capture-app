@@ -8,6 +8,10 @@ Given('you are in the search page with Ngelehun and malaria focus investigation 
     cy.visit('/#/search?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and child programme context', () => {
+    cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
 And('you can load the view with the name Events assigned to me', () => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
