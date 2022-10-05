@@ -387,6 +387,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onCancelEditEvent,
             ...passOnProps
         } = this.props;
+
         return (
             <div>
                 <TabBar dataTest="edit-event-tab-bar">
