@@ -1,3 +1,10 @@
+# [100.16.0](https://github.com/dhis2/capture-app/compare/v100.15.1...v100.16.0) (2022-10-05)
+
+
+### Features
+
+* [DHIS2-13439] show description due date label when available  ([#2996](https://github.com/dhis2/capture-app/issues/2996)) ([c4c322d](https://github.com/dhis2/capture-app/commit/c4c322d64a005d9be6ec0dbfa2aba4a37a9dbf65))
+
 ## [100.15.1](https://github.com/dhis2/capture-app/compare/v100.15.0...v100.15.1) (2022-10-04)
 
 
