@@ -27,54 +27,46 @@ defaults:
         shell: bash
 
 jobs:
-    get-json-labels:
+    prerequisites:
         runs-on: ubuntu-latest
-        outputs:
-            json-labels: ${{ steps.compute-json.outputs.labels }}
-        steps:
-            - run: |
+            outputs:
+                json-labels: ${{ steps.compute-json-labels.outputs.labels }}
+                matrix-containers: ${{ steps.compute-matrix-containers.outputs.containers}}
+                versions: ${{ steps.legacy-versions.outputs.versions }}
+            steps:
+              - id: compute-json-labels
+                run: |
                   arrLabels=(${TRIGGER_LABELS//,/ })
                   for item in ${arrLabels[@]}; do labels+=\"$item\",; done
                   echo "::set-output name=labels::[ ${labels%,} ]"
-              id: compute-json
-
-    get-versions:
-        needs: get-JSON-labels
-        runs-on: ubuntu-latest
-        if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
-        outputs:
-            versions: ${{ steps.legacy-versions.outputs.versions }}
-        steps:
-            - uses: actions/checkout@v2
-
-            - uses: dhis2/action-supported-legacy-versions@v1
-              id: legacy-versions
-              with:
-                  instance-url-latest: ${{env.URL_PREFIX_INSTANCES}}dev # can be removed if maxDHIS2Version has been specified
-                  username: ${{ secrets.CYPRESS_DHIS2_USERNAME }} # can be removed if maxDHIS2Version has been specified
-                  password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
-
-    compute-matrix-containers:
-        needs: get-JSON-labels
-        runs-on: ubuntu-latest
-        if: contains(fromJson(needs.get-JSON-labels.outputs.JSON-labels), github.event.label.name)
-        outputs:
-            containers: ${{ steps.compute.outputs.containers}}
-        steps:
-            - run: |
+              
+              - id: compute-matrix-containers
+                if: contains(fromJson(steps.compute-json-labels.outputs.labels), github.event.label.name)
+                run: |
                   for (( cnt = 1; cnt <= $CYPRESS_CONTAINERS; cnt++)); do containers+=$cnt,; done
                   echo "::set-output name=containers::[ ${containers%,} ]"
-              id: compute
+              
+              - if: contains(fromJson(steps.compute-json-labels.outputs.labels), github.event.label.name)
+                uses: actions/checkout@v2
+
+              - id: legacy-versions
+                if: contains(fromJson(steps.compute-json-labels.outputs.labels), github.event.label.name)
+                uses: dhis2/action-supported-legacy-versions@v1
+                with:
+                    instance-url-latest: ${{env.URL_PREFIX_INSTANCES}}dev # can be removed if maxDHIS2Version has been specified
+                    username: ${{ secrets.CYPRESS_DHIS2_USERNAME }} # can be removed if maxDHIS2Version has been specified
+                    password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
 
     cypress:
-        needs: [get-versions, compute-matrix-containers]
+        needs: prerequisites
+        if: contains(fromJson(needs.prerequisites.outputs.json-labels), github.event.label.name)
         runs-on: ubuntu-latest
         container: cypress/browsers:node14.7.0-chrome84
         strategy:
             fail-fast: false
             matrix:
-                versions: ${{ fromJSON(needs.get-versions.outputs.versions) }}
-                containers: ${{ fromJSON(needs.compute-matrix-containers.outputs.containers) }}
+                versions: ${{ fromJSON(needs.prerequisites.outputs.versions) }}
+                containers: ${{ fromJSON(needs.prerequisites.outputs.matrix-containers) }}
         steps:
             - uses: actions/checkout@v2
 
