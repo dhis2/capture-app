@@ -102,6 +102,11 @@ export const openEventForEditInDataEntry = ({
             validatorContainers: getEventDateValidatorContainers(),
         },
         {
+            id: 'scheduledAt',
+            type: 'DATE',
+            validatorContainers: getEventDateValidatorContainers(),
+        },
+        {
             clientId: 'geometry',
             dataEntryId: 'geometry',
             onConvertIn: getConvertGeometryIn(foundation),

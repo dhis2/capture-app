@@ -73,3 +73,12 @@ And the user see the following text: 11
     And the user see the following text: Infant Feeding
     When the user clicks on the cancel button
     Then the user see the following text: Enrollment Dashboard
+
+Scenario: User can update schedule date for a scheduled event 
+    Given you land on the enrollment event page by having typed /#/enrollmentEventEdit?eventId=RIrfCcEP8Uu&orgUnitId=DiszpKrYNg8
+    Then the user see the following text: Enrollment: Edit Event
+    And the user see the following text: Infant Feeding
+    When the user clicks switch tab to Schedule
+    And the user selects another schedule date
+    And the user clicks on the schedule button
+    Then the user see the following text: Enrollment Dashboard

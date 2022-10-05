@@ -23,6 +23,7 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
+import { statusTypes } from '../../../events/statusTypes';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -131,6 +132,28 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
+const buildScheduleDateSettingsFn = () => {
+    const dataElement = new DataElement((o) => {
+        o.type = dataElementTypes.DATE;
+    });
+
+    const scheduleDateSettings = {
+        getComponent: () => viewModeComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            label: `${props.formFoundation.getLabel('scheduledAt')}`,
+            valueConverter: value => dataElement.convertValue(value, valueConvertFn),
+        }),
+        getIsHidden: (props: Object) => ![statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus),
+        getPropName: () => 'scheduledAt',
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return scheduleDateSettings;
+};
+
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: Object) => {
         const featureType = props.formFoundation.featureType;
@@ -188,7 +211,8 @@ const buildCompleteFieldSettingsFn = () => {
 
 const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
+const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
