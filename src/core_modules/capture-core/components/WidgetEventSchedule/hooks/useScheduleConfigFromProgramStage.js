@@ -9,7 +9,7 @@ export const useScheduleConfigFromProgramStage = (stageId: string) => {
             id: stageId,
             params: {
                 fields:
-                ['id,nextScheduleDate,standardInterval,generatedByEnrollmentDate,minDaysFromStart'],
+                ['id,nextScheduleDate,standardInterval,generatedByEnrollmentDate,minDaysFromStart,dueDateLabel'],
             },
         },
     }), [stageId]));

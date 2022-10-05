@@ -1,13 +1,14 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
 import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
-
+import { WidgetEventSchedule } from '../../WidgetEventSchedule';
 import {
     DataEntry,
     withSaveHandler,
@@ -31,10 +32,16 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
 } from '../../FormFields/New';
-
+import { statusTypes } from '../../../events/statusTypes';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
+import { actionTypes } from './editEventDataEntry.actions';
+
+const tabMode = Object.freeze({
+    REPORT: 'REPORT',
+    SCHEDULE: 'SCHEDULE',
+});
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
@@ -130,6 +137,47 @@ const buildReportDateSettingsFn = () => {
     };
 
     return reportDateSettings;
+};
+
+const buildScheduleDateSettingsFn = () => {
+    const scheduleDateComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            customTooltip: i18n.t('Go to “Schedule” tab to reschedule this event'),
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const scheduleDateSettings = {
+        getComponent: () => scheduleDateComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            width: '100%',
+            calendarWidth: 350,
+            label: props.formFoundation.getLabel('scheduledAt'),
+            disabled: true,
+            calendarMaxMoment: moment(),
+        }),
+        getIsHidden: (props: Object) => ![statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus),
+        getPropName: () => 'scheduledAt',
+        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return scheduleDateSettings;
 };
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
@@ -251,7 +299,8 @@ const saveHandlerConfig = {
 
 const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
+const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
@@ -262,10 +311,12 @@ type Props = {
     formFoundation: ?RenderFoundation,
     orgUnit: OrgUnit,
     programId: string,
+    initialScheduleDate?: string,
     onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void,
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onHandleScheduleSave: (eventData: Object) => void,
     onDelete: () => void,
     onCancel: () => void,
     classes: {
@@ -278,6 +329,10 @@ type Props = {
     eventStatus?: string,
     enrollmentId?: string,
 };
+
+type State = {
+    mode: string
+}
 
 type DataEntrySection = {
     placement: $Values<typeof placements>,
@@ -295,7 +350,7 @@ const dataEntrySectionDefinitions = {
     },
 };
 
-class EditEventDataEntryPlain extends Component<Props> {
+class EditEventDataEntryPlain extends Component<Props, State> {
     fieldOptions: { theme: Theme };
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
@@ -305,12 +360,65 @@ class EditEventDataEntryPlain extends Component<Props> {
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
+        this.state = { mode: tabMode.REPORT };
+        this.onHandleSwitchTab = this.onHandleSwitchTab.bind(this);
     }
+
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
-    render() {
+
+    onHandleSwitchTab = newMode => this.setState({ mode: newMode })
+
+    renderScheduleView() {
         const {
+            orgUnit,
+            programId,
+            eventStatus,
+            onUpdateDataEntryField,
+            onUpdateField,
+            onStartAsyncUpdateField,
+            onHandleScheduleSave,
+            onSave,
+            classes,
+            dataEntryId,
+            onCancelEditEvent,
+            ...passOnProps
+        } = this.props;
+
+        return (
+            <div>
+                <TabBar dataTest="edit-event-tab-bar">
+                    <Tab
+                        key="report-tab"
+                        selected={this.state.mode === tabMode.REPORT}
+                        onClick={() => this.onHandleSwitchTab(tabMode.REPORT)}
+                        dataTest="edit-event-report-tab"
+                    >{i18n.t('Report')}</Tab>
+                    <Tab
+                        key="schedule-tab"
+                        selected={this.state.mode === tabMode.SCHEDULE}
+                        onClick={() => this.onHandleSwitchTab(tabMode.SCHEDULE)}
+                        dataTest="edit-event-schedule-tab"
+                    >{i18n.t('Schedule')}</Tab>
+                </TabBar>
+                {this.state.mode === tabMode.REPORT && this.renderDataEntry()}
+                {this.state.mode === tabMode.SCHEDULE && // $FlowFixMe[cannot-spread-inexact] automated comment
+                <WidgetEventSchedule
+                    programId={programId}
+                    onSave={onHandleScheduleSave}
+                    orgUnitId={orgUnit.id}
+                    onSaveSuccessActionType={actionTypes.EVENT_SCHEDULE_SUCCESS}
+                    onSaveErrorActionType={actionTypes.EVENT_SCHEDULE_ERROR}
+                    {...passOnProps}
+                />}
+            </div>
+        );
+    }
+
+    renderDataEntry() {
+        const {
+            dataEntryId,
             orgUnit,
             programId,
             onUpdateDataEntryField,
@@ -318,14 +426,9 @@ class EditEventDataEntryPlain extends Component<Props> {
             onStartAsyncUpdateField,
             onSave,
             classes,
-            dataEntryId,
-            onCancelEditEvent,
-            enrollmentId,
-            eventStatus,
             ...passOnProps
         } = this.props;
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
+        return ( // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={dataEntryId}
                 onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
@@ -337,6 +440,13 @@ class EditEventDataEntryPlain extends Component<Props> {
                 {...passOnProps}
             />
         );
+    }
+
+    render() {
+        const { eventStatus } = this.props;
+        const isScheduleOrOverdue = [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(eventStatus);
+
+        return isScheduleOrOverdue ? this.renderScheduleView() : this.renderDataEntry();
     }
 }
 

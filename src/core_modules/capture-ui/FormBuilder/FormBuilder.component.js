@@ -557,10 +557,11 @@ export class FormBuilder extends React.Component<Props> {
             <div
                 key={field.id}
                 className={defaultClasses.fieldOuterContainer}
-                data-test={`form-field-${field.id}`}
+                data-test={'form-field'}
             >
                 <div
                     {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
+                    data-test={`form-field-${field.id}`}
                 >
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <field.component
