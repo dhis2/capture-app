@@ -34,7 +34,7 @@ const NewEventWorkspacePlain = ({
     ...passOnProps
 }: Props) => {
     const { tab } = useLocationQuery();
-    const { events, enrollmentDate, incidentDate } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
+    const { events, enrolledAt, occurredAt } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(tab ?? tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
@@ -71,12 +71,12 @@ const NewEventWorkspacePlain = ({
                             onClick={() => onHandleSwitchTab(tabMode.SCHEDULE)}
                             dataTest="new-event-schedule-tab"
                         >{i18n.t('Schedule')}</Tab>
-                        <Tab
+                        {/* <Tab
                             key="refer-tab"
                             selected={mode === tabMode.REFER}
                             onClick={() => onHandleSwitchTab(tabMode.REFER)}
                             dataTest="new-event-refer-tab"
-                        >{i18n.t('Refer')}</Tab>
+                        >{i18n.t('Refer')}</Tab> */}
                     </TabBar>
                     {mode === tabMode.REPORT && <WidgetEnrollmentEventNew
                         programId={programId}
@@ -97,8 +97,8 @@ const NewEventWorkspacePlain = ({
                         teiId={teiId}
                         eventData={events}
                         enrollmentId={enrollmentId}
-                        enrollmentDate={enrollmentDate}
-                        incidentDate={incidentDate}
+                        enrolledAt={enrolledAt}
+                        occurredAt={occurredAt}
                         onSaveSuccessActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_SUCCESS}
                         onSaveErrorActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR}
                         onSave={onSave}

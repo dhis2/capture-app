@@ -7,7 +7,7 @@ export const useTeiAttributes = (teiId: string) => {
         useMemo(
             () => ({
                 trackedEntityInstance: {
-                    resource: 'trackedEntityInstances',
+                    resource: 'tracker/trackedEntities',
                     id: teiId,
                     params: { fields: ['attributes'] },
                 },

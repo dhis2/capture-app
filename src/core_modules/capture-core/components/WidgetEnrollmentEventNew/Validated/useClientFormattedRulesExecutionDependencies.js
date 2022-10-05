@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import { dataElementTypes, type TrackerProgram } from '../../../metaData';
 import { convertServerToClient } from '../../../converters';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 import type {
     RulesExecutionDependencies,
     AttributeValuesClientFormatted,
@@ -16,9 +16,9 @@ const prepareAttributesForRulesEngine =
             return accAttributeValues;
         }, {});
 
-const prepareEnrollmentDataForRulesEngine = ({ enrollmentDate, incidentDate, enrollmentId }) => ({
-    enrollmentDate: convertServerToClient(enrollmentDate, dataElementTypes.DATE),
-    incidentDate: convertServerToClient(incidentDate, dataElementTypes.DATE),
+const prepareEnrollmentDataForRulesEngine = ({ enrolledAt, occurredAt, enrollmentId }) => ({
+    enrolledAt: convertServerToClient(enrolledAt, dataElementTypes.DATE),
+    occurredAt: convertServerToClient(occurredAt, dataElementTypes.DATE),
     enrollmentId,
 });
 

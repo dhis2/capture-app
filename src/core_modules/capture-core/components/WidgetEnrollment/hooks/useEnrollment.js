@@ -7,7 +7,7 @@ export const useEnrollment = (enrollmentId: string) => {
         useMemo(
             () => ({
                 enrollment: {
-                    resource: `enrollments/${enrollmentId}`,
+                    resource: `tracker/enrollments/${enrollmentId}`,
                 },
             }),
             [enrollmentId],

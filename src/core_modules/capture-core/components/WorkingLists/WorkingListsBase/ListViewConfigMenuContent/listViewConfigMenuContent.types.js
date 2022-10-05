@@ -11,6 +11,7 @@ type ExtractedProps = {|
     onSetTemplateSharingSettings?: SetTemplateSharingSettings,
     currentViewHasTemplateChanges: boolean,
     customListViewMenuContents?: CustomMenuContents,
+    templateSharingType: string,
     classes: Object,
 |};
 
@@ -19,6 +20,7 @@ type OptionalExtractedProps = {|
     onUpdateTemplate: UpdateTemplate,
     onDeleteTemplate: DeleteTemplate,
     onSetTemplateSharingSettings: SetTemplateSharingSettings,
+    templateSharingType: string,
 |};
 
 type RestProps = $Rest<ListViewConfigOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;

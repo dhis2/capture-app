@@ -13,14 +13,14 @@ import {
     startFetchingTeiFromEnrollmentId,
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
-import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../../utils/routing';
+import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
-    moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
+    moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
 
 const teiQuery = id => ({
-    resource: 'trackedEntityInstances',
+    resource: 'tracker/trackedEntities',
     id,
     params: {
         fields: ['attributes', 'enrollments', 'trackedEntityType'],
@@ -50,7 +50,7 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_FETCH),
         map(() => {
-            const { enrollmentId, teiId } = deriveURLParamsFromLocation();
+            const { enrollmentId, teiId } = getLocationQuery();
             if (enrollmentId) {
                 return startFetchingTeiFromEnrollmentId();
             } else if (teiId) {
@@ -65,7 +65,7 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH),
         flatMap(() => {
-            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
+            const { enrollmentId, programId, orgUnitId, teiId } = getLocationQuery();
             if (enrollmentId === 'AUTO') {
                 return of(openEnrollmentPage({
                     programId,
@@ -74,13 +74,13 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
                     enrollmentId,
                 }));
             }
-            return from(querySingleResource({ resource: 'enrollments', id: enrollmentId }))
+            return from(querySingleResource({ resource: 'tracker/enrollments', id: enrollmentId }))
                 .pipe(
-                    map(({ trackedEntityInstance, program, orgUnit }) =>
+                    map(({ trackedEntity, program, orgUnit }) =>
                         openEnrollmentPage({
                             programId: program,
                             orgUnitId: orgUnit,
-                            teiId: trackedEntityInstance,
+                            teiId: trackedEntity,
                             enrollmentId,
                         })),
                     catchError(() => {
@@ -96,7 +96,7 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
         flatMap(() => {
-            const { teiId } = deriveURLParamsFromLocation();
+            const { teiId } = getLocationQuery();
 
             return fetchTeiStream(teiId, querySingleResource);
         }),
@@ -111,7 +111,7 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
                 orgUnitId: queryOrgUnitId,
                 programId: queryProgramId,
                 teiId: queryTeiId,
-            } = deriveURLParamsFromLocation();
+            } = getLocationQuery();
             const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
             if (!urlCompleted) {

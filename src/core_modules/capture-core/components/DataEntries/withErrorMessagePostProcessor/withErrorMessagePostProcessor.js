@@ -1,9 +1,11 @@
 // @flow
 import * as React from 'react';
+import type { PostProcessErrorMessage } from 'capture-ui/FormBuilder';
 import { UniqueTEADuplicate } from './UniqueTEADuplicate/UniqueTEADuplicate.component';
+import type { ExistingUniqueValueDialogActionsComponent } from './UniqueTEADuplicate/existingTeiContents.types';
 
 type Props = {
-    onLink?: (teiId?: ?string, values: Object) => void,
+    ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
 };
 
 type CacheItem = {
@@ -12,7 +14,9 @@ type CacheItem = {
     outputElement: React.Node,
 };
 
-export const withErrorMessagePostProcessor = () => (InnerComponent: React.ComponentType<any>) =>
+type GetTrackedEntityTypeName = (props: Object) => string;
+
+export const withErrorMessagePostProcessor = (getTrackedEntityTypeName: GetTrackedEntityTypeName) => (InnerComponent: React.ComponentType<any>) =>
     class ErrorMessagePostProcessorHOC extends React.Component<Props> {
         cache: CacheItem;
         constructor(props: Props) {
@@ -20,13 +24,13 @@ export const withErrorMessagePostProcessor = () => (InnerComponent: React.Compon
             this.cache = {};
         }
 
-        postProcessErrorMessage = (
-            errorMessage: string,
-            errorType: ?string,
-            errorData: any,
-            id: string,
-            fieldId: string,
-        ) => {
+        postProcessErrorMessage: PostProcessErrorMessage = ({
+            errorMessage,
+            errorType,
+            errorData,
+            id,
+            fieldLabel,
+        }) => {
             if (errorType !== 'unique') {
                 return errorMessage;
             }
@@ -39,8 +43,9 @@ export const withErrorMessagePostProcessor = () => (InnerComponent: React.Compon
             const outputElement = (
                 <UniqueTEADuplicate
                     errorData={errorData}
-                    id={fieldId}
-                    onLink={this.props.onLink}
+                    ExistingUniqueValueDialogActions={this.props.ExistingUniqueValueDialogActions}
+                    trackedEntityTypeName={getTrackedEntityTypeName(this.props)}
+                    attributeName={fieldLabel}
                 />
             );
 
@@ -54,7 +59,7 @@ export const withErrorMessagePostProcessor = () => (InnerComponent: React.Compon
         }
 
         render() {
-            const { onLink, ...passOnProps } = this.props;
+            const { ExistingUniqueValueDialogActions, ...passOnProps } = this.props;
 
             return (
                 // $FlowFixMe[cannot-spread-inexact] automated comment

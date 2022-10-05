@@ -2,10 +2,14 @@
 import { ofType } from 'redux-observable';
 import uuid from 'uuid/v4';
 import { map } from 'rxjs/operators';
-import { scheduleEventWidgetActionTypes, scheduleEvent } from './WidgetEventSchedule.actions';
+import {
+    scheduleEventWidgetActionTypes,
+    scheduleEvent,
+    updateScheduledDateForEvent,
+} from './WidgetEventSchedule.actions';
+import { statusTypes } from '../../events/statusTypes';
 
-
-export const scheduleNewEnrollmentEventEpic = (action$: InputObservable) =>
+export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST),
         map((action) => {
@@ -18,16 +22,21 @@ export const scheduleNewEnrollmentEventEpic = (action$: InputObservable) =>
                 stageId,
                 teiId,
                 enrollmentId,
+                eventId,
                 onSaveExternal,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
             } = action.payload;
 
+            const { events } = store.value;
+            const existingEnrollment = events[eventId]
+            && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(events[eventId].status);
 
             const serverData = { events: [{
-                dueDate: scheduleDate,
+                scheduledAt: scheduleDate,
                 dataValues: [],
-                trackedEntityInstance: teiId,
+                trackedEntity: teiId,
+                event: eventId,
                 orgUnit: orgUnitId,
                 enrollment: enrollmentId,
                 program: programId,
@@ -36,8 +45,13 @@ export const scheduleNewEnrollmentEventEpic = (action$: InputObservable) =>
                 notes: comments ?? [],
             }] };
 
-            onSaveExternal && onSaveExternal(serverData, uid, onSaveSuccessActionType, onSaveErrorActionType);
-            return scheduleEvent(serverData, uid);
+            if (existingEnrollment) {
+                onSaveExternal && onSaveExternal(serverData.events[0]);
+                return updateScheduledDateForEvent(serverData, eventId, onSaveSuccessActionType, onSaveErrorActionType);
+            }
+
+            onSaveExternal && onSaveExternal(serverData, uid);
+            return scheduleEvent(serverData, uid, onSaveSuccessActionType, onSaveErrorActionType);
         }),
     );
 

@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { TeiWorkingListsReduxProvider } from './ReduxProvider';
 import type { Props } from './teiWorkingLists.types';
+import { TEI_WORKING_LISTS_STORE_ID } from './constants';
 
 const getStyles = ({ typography }) => ({
     listContainer: {
@@ -15,7 +16,7 @@ const TeiWorkingListsPlain = ({ classes: { listContainer }, ...passOnProps }: Pr
     <div data-test="tei-working-lists">
         <Paper className={listContainer}>
             <TeiWorkingListsReduxProvider
-                storeId={'teiList'}
+                storeId={TEI_WORKING_LISTS_STORE_ID}
                 {...passOnProps}
             />
         </Paper>

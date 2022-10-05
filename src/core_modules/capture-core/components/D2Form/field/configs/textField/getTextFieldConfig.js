@@ -2,8 +2,9 @@
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { TextFieldForForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
-export const getTextFieldConfig = (metaData: MetaDataElement, options: Object, context: Object, extraProps?: ?Object) => {
+export const getTextFieldConfig = (metaData: MetaDataElement, options: Object, querySingleResource: QuerySingleResource, extraProps?: ?Object) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
@@ -13,5 +14,5 @@ export const getTextFieldConfig = (metaData: MetaDataElement, options: Object, c
     return createFieldConfig({
         component: TextFieldForForm,
         props,
-    }, metaData);
+    }, metaData, querySingleResource);
 };

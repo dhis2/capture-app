@@ -31,7 +31,11 @@ import { getRelationshipNewTei } from '../../NewRelationship/RegisterTei';
 
 const relationshipKey = 'viewEvent';
 
-export const loadRelationshipsForViewEventEpic = (action$: InputObservable) =>
+export const loadRelationshipsForViewEventEpic = (
+    action$: InputObservable,
+    _: ReduxStore,
+    { querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(
             viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -41,7 +45,7 @@ export const loadRelationshipsForViewEventEpic = (action$: InputObservable) =>
         switchMap((action) => {
             // Load event relationships
             const event = action.payload.eventContainer.event;
-            return getRelationshipsForEvent(event.eventId, event.programId, event.programStageId)
+            return getRelationshipsForEvent(event.eventId, event.programId, event.programStageId, querySingleResource)
                 .then(relationships => batchActions([
                     eventRelationshipsLoaded(),
                     setRelationships(relationshipKey, relationships || []),
@@ -128,7 +132,7 @@ export const saveRelationshipAfterSavingTeiForViewEventEpic = (action$: InputObs
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS),
         map((action) => {
-            const teiId = action.payload.response.importSummaries[0].reference;
+            const teiId = action.payload.bundleReport.typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const { clientData, selections, clientId } = action.meta;
             const to = clientData.to;
             to.data = null;
@@ -157,7 +161,7 @@ export const relationshipSavedForViewEventEpic = (action$: InputObservable, stor
             const state = store.value;
             const relationship = state.relationships[relationshipKey].find(r => r.clientId === action.meta.clientId);
 
-            const relationshipId = action.payload.response.importSummaries[0].reference;
+            const relationshipId = action.payload.bundleReport.typeReportMap.RELATIONSHIP.objectReports[0].uid;
             const updatedRelationship = {
                 ...relationship,
                 id: relationshipId,

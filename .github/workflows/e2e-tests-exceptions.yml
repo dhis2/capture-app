@@ -1,0 +1,12 @@
+name: 'e2e tests exceptions'
+
+on:
+  pull_request:
+    types: [ opened ]
+
+jobs:
+  call-e2e-tests-result:
+    if: github.actor == '@dhis2-bot' || github.actor == '@dependabot' || contains(github.event.head_commit.message, '[skip ci]')
+    uses: ./.github/workflows/e2e-tests-result.yml
+    with:
+      result: true

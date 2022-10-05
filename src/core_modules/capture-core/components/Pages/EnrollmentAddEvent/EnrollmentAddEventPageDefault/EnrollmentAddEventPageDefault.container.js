@@ -14,7 +14,7 @@ import { useWidgetDataFromStore } from '../hooks';
 import {
     useHideWidgetByRuleLocations,
 } from '../../Enrollment/EnrollmentPageDefault/hooks';
-import { updateEnrollmentEventsWithoutId } from '../../common/EnrollmentOverviewDomain';
+import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 
@@ -39,11 +39,15 @@ export const EnrollmentAddEventPageDefault = ({
         },
         [dispatch, history, programId, orgUnitId, teiId, enrollmentId],
     );
+    const handleAddNew = useCallback(() => {
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+    }, [history, programId, orgUnitId, teiId]);
 
     const handleDelete = useCallback(() => {
         dispatch(deleteEnrollment({ enrollmentId }));
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     }, [dispatch, enrollmentId, history, programId, orgUnitId, teiId]);
+    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
@@ -52,13 +56,15 @@ export const EnrollmentAddEventPageDefault = ({
     const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
+    // $FlowFixMe
+    const trackedEntityName = program?.trackedEntityType?.name;
 
     const rulesExecutionDependencies = useMemo(() => ({
         events: enrollment?.events,
         attributeValues,
         enrollmentData: {
-            enrollmentDate: enrollment?.enrollmentDate,
-            incidentDate: enrollment?.incidentDate,
+            enrolledAt: enrollment?.enrolledAt,
+            occurredAt: enrollment?.occurredAt,
             enrollmentId: enrollment?.enrollment,
         },
     }), [enrollment, attributeValues]);
@@ -72,7 +78,6 @@ export const EnrollmentAddEventPageDefault = ({
         handleResetStageId,
         handleResetEventId,
         teiDisplayName,
-        trackedEntityName,
         enrollmentsAsOptions,
         teiSelectorFailure,
         userInteractionInProgress,
@@ -98,7 +103,7 @@ export const EnrollmentAddEventPageDefault = ({
                 teiDisplayName={teiDisplayName}
                 trackedEntityName={trackedEntityName}
                 stageName={selectedProgramStage?.stageForm.name}
-                eventDateLabel={selectedProgramStage?.stageForm.getLabel('eventDate')}
+                eventDateLabel={selectedProgramStage?.stageForm.getLabel('occurredAt')}
                 enrollmentsAsOptions={enrollmentsAsOptions}
                 onSetOrgUnitId={handleSetOrgUnitId}
                 onResetOrgUnitId={handleResetOrgUnitId}
@@ -120,6 +125,7 @@ export const EnrollmentAddEventPageDefault = ({
                 onSave={handleSave}
                 onCancel={handleCancel}
                 onDelete={handleDelete}
+                onAddNew={handleAddNew}
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}
                 widgetReducerName={widgetReducerName}
@@ -127,6 +133,7 @@ export const EnrollmentAddEventPageDefault = ({
                 pageFailure={commonDataError}
                 ready={Boolean(enrollment)}
                 dataEntryHasChanges={dataEntryHasChanges}
+                onEnrollmentError={onEnrollmentError}
             />
         </>
     );

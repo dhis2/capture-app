@@ -1,20 +1,23 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getApi } from '../../../../d2/d2Instance';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
-function getCategoryOptionsAsync(optionIds: string) {
-    return getApi()
-        .get('categoryOptions', {
+const getCategoryOptionsAsync = async (optionIds: string, querySingleResource: QuerySingleResource) =>
+    querySingleResource({
+        resource: 'categoryOptions',
+        params: {
             fields: 'id,displayName,categories~pluck,access',
             filter: `id:in:[${optionIds}]`,
-        })
-        .then(response => response?.categoryOptions);
-}
+        },
+    }).then(response => response?.categoryOptions);
 
 
-export async function getCategoriesDataFromEventAsync(event: CaptureClientEvent): Promise<?Array<Object>> {
+export async function getCategoriesDataFromEventAsync(
+    event: CaptureClientEvent,
+    querySingleResource: QuerySingleResource,
+): Promise<?Array<Object>> {
     const optionIdsFromEvent = event.attributeCategoryOptions?.replace(/;/g, ',');
     if (!optionIdsFromEvent) {
         return null;
@@ -29,7 +32,7 @@ export async function getCategoriesDataFromEventAsync(event: CaptureClientEvent)
 
     const programCategories = [...categoryCombination.categories.values()];
 
-    let categoryOptions = await getCategoryOptionsAsync(optionIdsFromEvent);
+    let categoryOptions = await getCategoryOptionsAsync(optionIdsFromEvent, querySingleResource);
     if (!categoryOptions) {
         return null;
     }

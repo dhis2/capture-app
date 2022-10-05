@@ -6,5 +6,7 @@ export {
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
     updateEnrollmentEventsWithoutId,
+    updateEnrollmentAttributeValues,
+    showEnrollmentError,
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';

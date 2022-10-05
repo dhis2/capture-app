@@ -1,63 +1,70 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { Button } from '../../../Buttons';
 import { CardList } from '../../../CardList';
-import type { CardDataElementsInformation } from '../../../Pages/Search/SearchResults/SearchResults.types';
+import type { Props } from './existingTeiContents.types';
 
-type Props = {
-    attributeValues: {[id: string]: any},
-    dataElements: CardDataElementsInformation,
-    onLink: (values: Object) => void,
-    onCancel: Function,
-    programId?: string,
+
+const styles = ({
+    customDialogActions: {
+        marginLeft: 4,
+        marginRight: 4,
+    },
+});
+
+const ExistingTEIContentsComponentPlain = ({
+    attributeValues,
+    teiId,
+    dataElements,
+    onCancel,
+    programId,
+    ExistingUniqueValueDialogActions,
+    classes,
+}: Props) => {
+    const items = [
+        {
+            id: teiId,
+            values: attributeValues,
+        },
+    ];
+
+    return (
+        <React.Fragment>
+            <DialogContent>
+                <DialogTitle>
+                    {i18n.t('Registered person')}
+                </DialogTitle>
+                <CardList
+                    currentProgramId={programId}
+                    // $FlowFixMe
+                    items={items}
+                    dataElements={dataElements}
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button
+                    onClick={onCancel}
+                    secondary
+                >
+                    {i18n.t('Cancel')}
+                </Button>
+                {ExistingUniqueValueDialogActions && (
+                    <div className={classes.customDialogActions}>
+                        <ExistingUniqueValueDialogActions
+                            attributeValues={attributeValues}
+                            teiId={teiId}
+                        />
+                    </div>
+                )}
+            </DialogActions>
+        </React.Fragment>
+    );
 };
 
-export class ExistingTEIContentsComponent extends React.Component<Props> {
-    handleLink = () => {
-        this.props.onLink(this.props.attributeValues);
-    }
-    render() {
-        const { attributeValues, dataElements, onCancel, programId } = this.props;
-
-        const items = [
-            {
-                id: 'foundTEI',
-                values: attributeValues,
-            },
-        ];
-
-        return (
-            <React.Fragment>
-                <DialogContent>
-                    <DialogTitle>
-                        {i18n.t('Registered person')}
-                    </DialogTitle>
-                    <CardList
-                        currentProgramId={programId}
-                        // $FlowFixMe
-                        items={items}
-                        dataElements={dataElements}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button
-                        onClick={onCancel}
-                        secondary
-                    >
-                        {i18n.t('Cancel')}
-                    </Button>
-                    <Button
-                        onClick={this.handleLink}
-                        primary
-                    >
-                        {i18n.t('Link')}
-                    </Button>
-                </DialogActions>
-            </React.Fragment>
-        );
-    }
-}
+export const ExistingTEIContentsComponent: ComponentType<$Diff<Props, CssClasses>> =
+    withStyles(styles)(ExistingTEIContentsComponentPlain);

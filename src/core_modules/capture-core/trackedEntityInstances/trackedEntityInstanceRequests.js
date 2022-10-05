@@ -1,9 +1,8 @@
 // @flow
-
-import { getApi } from '../d2/d2Instance';
-import { convertDataElementsValues } from '../metaData';
+import { type DataElement, convertDataElementsValues } from '../metaData';
 import { convertValue } from '../converters/serverToClient';
 import { getSubValues } from './getSubValues';
+import type { QuerySingleResource } from '../utils/api/api.types';
 
 type ApiTeiAttribute = {
     attribute: any,
@@ -11,7 +10,7 @@ type ApiTeiAttribute = {
 };
 
 type ApiTrackedEntityInstance = {
-    trackedEntityInstance: string,
+    trackedEntity: string,
     trackedEntityType: string,
     orgUnit: string,
     attributes: Array<ApiTeiAttribute>
@@ -28,15 +27,26 @@ function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {
     }, {});
 }
 
-// $FlowFixMe[cannot-resolve-name] automated comment
-async function convertToClientTei(apiTei: ApiTrackedEntityInstance, attributes: Array<DataElments>) {
+async function convertToClientTei(
+    apiTei: ApiTrackedEntityInstance,
+    // $FlowFixMe[cannot-resolve-name] automated comment
+    attributes: Array<DataElement>,
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
+) {
     const attributeValuesById = getValuesById(apiTei.attributes);
     const convertedAttributeValues = convertDataElementsValues(attributeValuesById, attributes, convertValue);
 
-    await getSubValues(apiTei.trackedEntityInstance, attributes, convertedAttributeValues);
+    await getSubValues({
+        teiId: apiTei.trackedEntity,
+        attributes,
+        values: convertedAttributeValues,
+        absoluteApiPath,
+        querySingleResource,
+    });
 
     return {
-        id: apiTei.trackedEntityInstance,
+        id: apiTei.trackedEntity,
         tei: apiTei,
         values: convertedAttributeValues,
     };
@@ -47,14 +57,20 @@ type TrackedEntityInstancesPromise = Promise<{|
     pagingData: any
 |}>
 
-export async function getTrackedEntityInstances(queryParams: Object, attributes: Array<DataElments>): TrackedEntityInstancesPromise {
-    const api = getApi();
-    const apiRes = await api
-        .get('trackedEntityInstances', queryParams);
+export async function getTrackedEntityInstances(
+    queryParams: Object,
+    attributes: Array<DataElement>,
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
+): TrackedEntityInstancesPromise {
+    const apiRes = await querySingleResource({
+        resource: 'tracker/trackedEntities',
+        params: queryParams,
+    });
 
-    const trackedEntityInstanceContainers = apiRes && apiRes.trackedEntityInstances ? await apiRes.trackedEntityInstances.reduce(async (accTeiPromise, apiTei) => {
+    const trackedEntityInstanceContainers = apiRes && apiRes.instances ? await apiRes.instances.reduce(async (accTeiPromise, apiTei) => {
         const accTeis = await accTeiPromise;
-        const teiContainer = await convertToClientTei(apiTei, attributes);
+        const teiContainer = await convertToClientTei(apiTei, attributes, absoluteApiPath, querySingleResource);
         if (teiContainer) {
             accTeis.push(teiContainer);
         }

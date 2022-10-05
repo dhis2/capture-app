@@ -1,7 +1,8 @@
 // @flow
 import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+
 import moment from 'moment';
 import { convertValue as convertListValue } from '../../../../../../converters/clientToList';
 import { dataElementTypes } from '../../../../../../metaData';
@@ -12,23 +13,34 @@ import {
 import {
     addNote,
 } from '../../../../../DataEntry/actions/dataEntry.actions';
-import { getCurrentUser } from '../../../../../../d2/d2Instance';
 
-export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>
+export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.ADD_NEW_EVENT_NOTE),
-        map((action) => {
+        switchMap((action) => {
             const payload = action.payload;
-            // $FlowFixMe[prop-missing] automated comment
-            const userName = getCurrentUser().username;
 
-            const storedDate = moment().toISOString();
-            const note = {
-                value: payload.note,
-                storedBy: userName,
-                storedDate: convertListValue(storedDate, dataElementTypes.DATETIME),
-                clientId: uuid(),
-            };
+            return querySingleResource({
+                resource: 'me',
+                params: {
+                    fields: 'firstName,surname,userName',
+                },
+            }).then((user) => {
+                const { userName, firstName, surname } = user;
+                const clientId = uuid();
+                const storedAt = moment().toISOString();
+                const note = {
+                    value: payload.note,
+                    createdBy: {
+                        firstName,
+                        surname,
+                        uid: clientId,
+                    },
+                    storedBy: userName,
+                    storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
+                    clientId: uuid(),
+                };
 
-            return addNote(payload.dataEntryId, payload.itemId, note);
+                return addNote(payload.dataEntryId, payload.itemId, note);
+            });
         }));

@@ -2,9 +2,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import type { TrackedEntityType } from '../../../../metaData';
+import type { ErrorData } from 'capture-ui/FormBuilder';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
-import type { ErrorData } from './uniqueTEADuplicate.types';
 
 const getStyles = () => ({
     linkButton: {
@@ -23,13 +22,13 @@ const getStyles = () => ({
 
 type Props = {
     errorData: ErrorData,
-    trackedEntityType: ?TrackedEntityType,
-    attributeName: ?string,
+    trackedEntityTypeName: string,
+    attributeName: string,
     classes: Object,
     onShowExisting: () => void,
 };
 
-class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
+class UniqueTEADuplicateErrorMessageCreatorPlain extends React.Component<Props> {
     static renderPrerequisitesError() {
         return (
             <div>
@@ -57,21 +56,6 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
                 {i18n.t(
                     'You have already registered this {{attributeName}}',
                     { attributeName: attributeNameLC, interpolation: { escapeValue: false } },
-                )}
-            </div>
-        );
-    }
-
-    static renderTypeDifference(attributeName: string, trackedEntityTypeName: string) {
-        const trackedEntityTypeNameLC = trackedEntityTypeName.toLowerCase();
-        const attributeNameLC = attributeName.toLowerCase();
-        return (
-            <div>
-                {i18n.t(
-                    'A {{trackedEntityTypeName}} with this {{attributeName}} is already registered',
-                    { trackedEntityTypeName: trackedEntityTypeNameLC,
-                        attributeName: attributeNameLC,
-                        interpolation: { escapeValue: false } },
                 )}
             </div>
         );
@@ -108,9 +92,9 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
     }
 
     renderContents() {
-        const { trackedEntityType, attributeName, errorData, classes } = this.props;
+        const { trackedEntityTypeName, attributeName, errorData, classes } = this.props;
 
-        if (!trackedEntityType || !attributeName) {
+        if (!trackedEntityTypeName || !attributeName) {
             return UniqueTEADuplicateErrorMessageCreator.renderPrerequisitesError();
         }
 
@@ -122,15 +106,12 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
             return UniqueTEADuplicateErrorMessageCreator.renderAttributeValueExistsUnsaved(attributeName);
         }
 
-        if (errorData.tetId !== trackedEntityType.id) {
-            return UniqueTEADuplicateErrorMessageCreator.renderTypeDifference(attributeName, trackedEntityType.name);
-        }
-
-        return this.renderDefault(attributeName, trackedEntityType.name, classes.linkButton);
+        return this.renderDefault(attributeName, trackedEntityTypeName, classes.linkButton);
     }
 
     render() {
         const { classes } = this.props;
+
         return (
             <div
                 className={classes.container}
@@ -141,4 +122,4 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
     }
 }
 
-export const UniqueTEADuplicate = withStyles(getStyles)(UniqueTEADuplicateErrorMessageCreator);
+export const UniqueTEADuplicateErrorMessageCreator = withStyles(getStyles)(UniqueTEADuplicateErrorMessageCreatorPlain);

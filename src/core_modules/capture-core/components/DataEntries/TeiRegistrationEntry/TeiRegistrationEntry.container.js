@@ -12,7 +12,7 @@ import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component'
 
 const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
     const dispatch = useDispatch();
-    const { scopeType } = useScopeInfo(selectedScopeId);
+    const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
     const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
     const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const registrationFormReady = !!formId;
@@ -32,11 +32,15 @@ const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
         formFoundation,
         dispatch,
     ]);
+
+    return {
+        trackedEntityName,
+    };
 };
 
 
 export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, ...rest }) => {
-    useInitialiseTeiRegistration(selectedScopeId, id);
+    const { trackedEntityName } = useInitialiseTeiRegistration(selectedScopeId, id);
     const ready = useSelector(({ dataEntries }) => (!!dataEntries[id]));
 
     return (
@@ -44,6 +48,7 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId,
             selectedScopeId={selectedScopeId}
             id={id}
             ready={ready}
+            trackedEntityName={trackedEntityName}
             {...rest}
         />);
 };

@@ -1,5 +1,5 @@
 // @flow
 export {
-    scheduleNewEnrollmentEventEpic,
+    scheduleEnrollmentEventEpic,
 } from './WidgetEventSchedule.epics';
 export { WidgetEventSchedule } from './WidgetEventSchedule.container';

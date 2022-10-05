@@ -1,44 +1,36 @@
 // @flow
 import log from 'loglevel';
-import isString from 'd2-utilizr/lib/isString';
 // TODO: add some kind of errorcreator to d2 before moving
 import { errorCreator } from 'capture-core-utils/errorCreator';
-import { mapTypeToInterfaceFnName, typeof typeKeys } from '../constants';
-import { trimQuotes } from '../commonUtils/trimQuotes';
-
+import { mapTypeToInterfaceFnName, typeKeys } from '../constants';
 import type { IConvertInputRulesValue } from '../rulesEngine.types';
 
 export class ValueProcessor {
     static errorMessages = {
+        TYPE_NOT_SUPPORTED: 'value type not supported',
         CONVERTER_NOT_FOUND: 'converter for type is missing',
     };
 
-    static addQuotesToValueIfString(value: any) {
-        return isString(value) ? `'${value}'` : value;
-    }
-
     converterObject: IConvertInputRulesValue;
-    processValue: (value: any, type: $Values<typeKeys>) => any;
+    processValue: (value: any, type: $Values<typeof typeKeys>) => any;
 
     constructor(converterObject: IConvertInputRulesValue) {
         this.converterObject = converterObject;
         this.processValue = this.processValue.bind(this);
     }
 
-    processValue(value: any, type: $Values<typeKeys>): any {
-        if (isString(value)) {
-            value = trimQuotes(value);
+    processValue(value: any, type: $Values<typeof typeKeys>): any {
+        if (!typeKeys[type]) {
+            log.warn(ValueProcessor.errorMessages.TYPE_NOT_SUPPORTED);
+            return '';
         }
-
-        // $FlowFixMe[prop-missing] automated comment
         const convertFnName = mapTypeToInterfaceFnName[type];
         if (!convertFnName) {
             log.warn(errorCreator(ValueProcessor.errorMessages.CONVERTER_NOT_FOUND)({ type }));
             return value;
         }
-
-        // $FlowFixMe[incompatible-use] automated comment
-        const convertedValue = ValueProcessor.addQuotesToValueIfString(this.converterObject[convertFnName](value));
+        // $FlowFixMe
+        const convertedValue = this.converterObject[convertFnName] ? this.converterObject[convertFnName](value) : value;
         return convertedValue;
     }
 }

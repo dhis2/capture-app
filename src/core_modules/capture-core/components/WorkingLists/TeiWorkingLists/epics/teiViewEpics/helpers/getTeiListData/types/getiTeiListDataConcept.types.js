@@ -7,10 +7,10 @@ export type ApiTeiAttributes = Array<{
 }>;
 
 export type ApiTei = {
-    trackedEntityInstance: string,
+    trackedEntity: string,
     attributes?: ApiTeiAttributes,
-    programOwners?: Array<{
-        ownerOrgUnit: string,
+    programOwners: Array<{
+        orgUnit: string,
         program: string,
     }>,
 };
@@ -42,7 +42,10 @@ export type ApiQueryArgs = {|
 
 export type ClientTei = {|
     id: string,
-    record: { [string]: any },
+    record: {
+        [string]: any,
+        programOwner?: string,
+    },
 |};
 
 export type ClientTeis = Array<ClientTei>;

@@ -1,4 +1,5 @@
 // @flow
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { connect } from 'react-redux';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
@@ -11,14 +12,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         innerAction: ReduxAction<any, any>,
         data: any,
         programId: string,
-        orgUnit: Object,
+        orgUnit: OrgUnit,
     ) => {
         dispatch(updateDataEntryFieldBatch(innerAction, programId, orgUnit));
     },
     onUpdateField: (
         innerAction: ReduxAction<any, any>,
         programId: string,
-        orgUnit: Object,
+        orgUnit: OrgUnit,
     ) => {
         dispatch(updateFieldBatch(innerAction, programId, orgUnit));
     },
@@ -27,7 +28,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dataEntryId: string,
         itemId: string,
         programId: string,
-        orgUnit: Object,
+        orgUnit: OrgUnit,
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
             asyncUpdateSuccessBatch(successInnerAction, dataEntryId, itemId, programId, orgUnit);

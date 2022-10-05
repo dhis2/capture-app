@@ -20,13 +20,15 @@ export const saveAssigneeEpic = (action$: InputObservable, store: ReduxStore) =>
             const mainDataServerValues: Object = convertMainEventClientToServer(clientMainValues);
 
             const serverData = {
-                ...mainDataServerValues,
-                dataValues: Object
-                    .keys(formServerValues)
-                    .map(key => ({
-                        dataElement: key,
-                        value: formServerValues[key],
-                    })),
+                events: [{
+                    ...mainDataServerValues,
+                    dataValues: Object
+                        .keys(formServerValues)
+                        .map(key => ({
+                            dataElement: key,
+                            value: formServerValues[key],
+                        })),
+                }],
             };
 
             const currentSelectionSet = state.currentSelections;

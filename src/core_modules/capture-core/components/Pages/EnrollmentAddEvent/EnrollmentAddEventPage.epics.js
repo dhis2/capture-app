@@ -19,7 +19,7 @@ export const saveNewEventSucceededEpic = (action$: InputObservable) =>
         ),
         map((action) => {
             const meta = action.meta;
-            const eventId = action.payload.response.importSummaries[0].reference;
+            const eventId = action.payload.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
             return commitEnrollmentEventWithoutId(meta.uid, eventId);
         }),
     );

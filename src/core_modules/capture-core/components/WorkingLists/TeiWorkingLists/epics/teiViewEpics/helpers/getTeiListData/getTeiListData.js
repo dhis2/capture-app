@@ -37,22 +37,11 @@ const getMainApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}, filtersOnl
             };
         }, {});
 
-const getApiOrderById = (sortById: string, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => {
-    const { id, apiName } = columnsMetaForDataFetching.get(sortById) || {};
-    return apiName || id;
-};
-
-const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => {
-    const apiId = getApiOrderById(sortById, columnsMetaForDataFetching);
-    return `${apiId}:${sortByDirection}`;
-};
-
-
 const createApiQueryArgs = ({
     page,
     pageSize,
     programId: program,
-    orgUnitId: ou,
+    orgUnitId: orgUnit,
     filters,
     sortById,
     sortByDirection,
@@ -62,13 +51,13 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
 ): { [string]: any } => ({
     ...getApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
     ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-    order: getApiOrderByQueryArgument(sortById, sortByDirection, columnsMetaForDataFetching),
+    order: `${sortById}:${sortByDirection}`,
     page,
     pageSize,
-    ou,
-    ouMode: ou ? 'SELECTED' : 'ACCESSIBLE',
+    orgUnit,
+    ouMode: orgUnit ? 'SELECTED' : 'ACCESSIBLE',
     program,
-    fields: ':all,programOwners[ownerOrgUnit,program]',
+    fields: ':all,programOwners[orgUnit,program]',
 });
 
 export const getTeiListData = async (
@@ -80,16 +69,16 @@ export const getTeiListData = async (
     }: InputMeta,
 ) => {
     const { resource, queryArgs } = {
-        resource: 'trackedEntityInstances',
+        resource: 'tracker/trackedEntities',
         queryArgs: createApiQueryArgs(rawQueryArgs, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching),
     };
 
-    const { trackedEntityInstances: apiTeis = [] } = await querySingleResource({
+    const { instances: apiTeis = [] } = await querySingleResource({
         resource,
         params: queryArgs,
     });
     const columnsMetaForDataFetchingArray = [...columnsMetaForDataFetching.values()];
-    const clientTeis = convertToClientTeis(apiTeis, columnsMetaForDataFetchingArray);
+    const clientTeis = convertToClientTeis(apiTeis, columnsMetaForDataFetchingArray, rawQueryArgs.programId);
     const clientTeisWithSubvalues = await getTeisWithSubvalues(querySingleResource, absoluteApiPath)(clientTeis, columnsMetaForDataFetchingArray);
 
     return {

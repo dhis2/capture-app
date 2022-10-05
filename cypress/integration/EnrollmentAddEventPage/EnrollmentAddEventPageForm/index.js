@@ -1,8 +1,3 @@
-
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 const showAllEventsInProgramStage = () => {
     cy.get('[data-test="dhis2-uicore-tablefoot"]')
         .then(($footer) => {
@@ -40,7 +35,7 @@ When(/^you click the checkbox number (.*)$/, (eq) => {
 When(/^you click the (.*) button/, (buttonText) => {
     cy.intercept({
         method: 'POST',
-        url: '**/events',
+        url: '**/tracker?async=false',
     }).as('postEvents');
 
     cy.get('[data-test="dhis2-uicore-button"]')
@@ -48,6 +43,12 @@ When(/^you click the (.*) button/, (buttonText) => {
         .click();
 
     cy.wait('@postEvents');
+});
+
+When(/^you click the button to (.*) without post request/, (buttonText) => {
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains(buttonText)
+        .click();
 });
 
 When('the enrollment overview is finished loading', () => {

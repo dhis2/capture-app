@@ -1,10 +1,6 @@
 import moment from 'moment';
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 And('you are on the default registration page', () => {
     cy.visit('/#/new');
 });
@@ -144,6 +140,41 @@ And('you see the registration form for the Malaria case registration', () => {
         .should('exist');
 });
 
+And('you select the Antenatal care visit program', () => {
+    cy.get('.Select')
+        .type('Antenatal care vis');
+    cy.contains('Antenatal care visit')
+        .click();
+});
+
+Then('you see a list of events', () => {
+    cy.get('[data-test="event-working-lists"]').within(() => {
+        cy.get('[data-test="table-row"]');
+    });
+});
+
+When('you select one of the events', () => {
+    cy.get('[data-test="event-working-lists"]').within(() => {
+        cy.get('[data-test="table-row"]').then((rows) => {
+            rows[0].click();
+        });
+    });
+});
+
+Then('you are navigated to the Antenatal care visit registration page', () => {
+    cy.contains('New Antenatal care visit')
+        .should('exist');
+});
+
+Then('program and organisation unit is still selected in top bar', () => {
+    cy.get('[data-test="scope-selector"]').within(() => {
+        cy.contains('Ngelehun CHC')
+            .should('exist');
+        cy.contains('Antenatal care visit')
+            .should('exist');
+    });
+});
+
 And('you select the Malaria case registration program', () => {
     cy.get('.Select')
         .type('Malaria case registr');
@@ -195,7 +226,7 @@ When('you are navigated to the Child Programme registration page with program se
 });
 
 When('you have Child Programme selected', () => {
-    cy.get('[data-test="locked-selector"]')
+    cy.get('[data-test="scope-selector"]')
         .contains('Child Programme');
 });
 
@@ -278,8 +309,13 @@ And('you submit the form', () => {
         .click();
 });
 
-And('you see validation error on visit date', () => {
-    cy.get('[data-test="registration-page-content"]')
+And('you see validation errors', () => {
+    cy.contains('A value is required')
+        .should('exist');
+});
+
+Then('you see validation error on visit date', () => {
+    cy.get('[data-test="dataentry-field-occurredAt"]')
         .contains('A value is required')
         .should('exist');
 });
@@ -310,7 +346,7 @@ And('you fill in the hemoglobin', () => {
 
 And('you are navigated to the working list', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/orgUnitId=DiszpKrYNg8&programId=lxAQ7Zs9VYR`);
+        .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=lxAQ7Zs9VYR`);
 
     cy.get('[data-test="event-working-lists"]')
         .contains('2021-01-01')
@@ -342,6 +378,11 @@ And('you click the save new submit button', () => {
         .click();
 });
 
+Then('you are navigated to the Tracker Capture', () => {
+    cy.url().should('include', 'dashboard?tei=');
+    cy.url().should('include', 'ou=DiszpKrYNg8&tracked_entity_type=nEenWmSyUEp');
+});
+
 Then('you see the possible duplicates modal', () => {
     cy.get('[data-test="duplicates-modal"]')
         .contains('Possible duplicates found')
@@ -371,7 +412,7 @@ And('you fill the form with age 0', () => {
 
 And('you see validation warning on birth date', () => {
     cy.get('[data-test="registration-page-content"]')
-        .contains('The womans age is outside the normal range. With the birthdate entered, the age would be: 0')
+        .contains('The womans age is outside the normal range. With the birthdate entered, the age would be:')
         .should('exist');
 });
 
@@ -412,6 +453,11 @@ And('you fill in child programme first name with value that has duplicates', () 
         .blur();
 });
 
+Then('you are navigated to the WHO RMNCH program in Tracker Capture app', () => {
+    cy.url().should('include', 'dashboard?tei=');
+    cy.url().should('include', 'ou=DiszpKrYNg8&program=WSGAb5XwJ3Y');
+});
+
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(1)
@@ -432,4 +478,57 @@ And('you see validation errors on the WHO RMNCH program registration page', () =
     cy.get('[data-test="registration-page-content"]')
         .find('[data-test="error-message"]')
         .should('have.length', 4);
+});
+
+
+And('you are in Child programme reenrollment page', () => {
+    cy.visit('/#/new?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp');
+});
+
+
+And('you see the form prefield with existing TEI attributes values', () => {
+    cy.get('[data-test="registration-page-content"]').within(() => {
+        cy.contains('New Enrollment in program: Child Programme').should('exist');
+        cy.contains('First name').should('exist');
+        cy.get('[data-test="capture-ui-input"]').eq(4).should('have.value', 'Anna');
+        cy.contains('Last name').should('exist');
+        cy.get('[data-test="capture-ui-input"]').eq(5).should('have.value', 'Jones');
+        cy.contains('Gender').should('exist');
+        cy.contains('Female').should('exist');
+    });
+});
+
+And('the scope selector has the TEI context', () => {
+    cy.get('[data-test="scope-selector"]').within(() => {
+        cy.contains('Selected person').should('exist');
+        cy.contains('Anna Jones').should('exist');
+    });
+});
+
+Given('you are in the Malaria case diagnosis, treatment and investigation program registration page', () => {
+    cy.visit('/#/new?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context', () => {
+    cy.visit('/#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
+});
+
+And('you fill the Malaria case diagnosis registration form with values', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(3)
+        .type(`Ana-${Math.round((new Date()).getTime() / 1000)}`)
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(4)
+        .type(`Maria-${Math.round((new Date()).getTime() / 1000)}`)
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(5)
+        .type('2022-05-04')
+        .blur();
+});
+
+Then('you see the enrollment event New page', () => {
+    cy.url().should('include', '/#/enrollmentEventNew?');
+    cy.url().should('include', 'stageId=hYyB7FUS5eR');
 });

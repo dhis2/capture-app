@@ -11,7 +11,7 @@ export class Event {
     _enrollmentStatus: string;
     _status: string ;
     _orgUnitName: string;
-    _eventDate: string | Date;
+    _occurredAt: string | Date;
 
     constructor(initFn: ?(_this: Event) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -73,10 +73,10 @@ export class Event {
         return this._status;
     }
 
-    set eventDate(eventDate: string | Date) {
-        this._eventDate = eventDate;
+    set occurredAt(occurredAt: string | Date) {
+        this._occurredAt = occurredAt;
     }
-    get eventDate(): string | Date {
-        return this._eventDate;
+    get occurredAt(): string | Date {
+        return this._occurredAt;
     }
 }

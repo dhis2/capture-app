@@ -1,5 +1,5 @@
 import React from 'react';
-import { getInstance } from 'd2';
+import { localeCompareStrings } from '../../../utils/localeCompareStrings';
 import { Tree } from './Tree';
 
 export class OrgUnitTree extends React.Component {
@@ -34,87 +34,84 @@ export class OrgUnitTree extends React.Component {
   }
 
   fetchRoot = async () => {
-      try {
-          const d2 = await getInstance();
-          d2.models.organisationUnits
-              .list({
-                  level: 1,
-                  paging: false,
-                  fields: 'id,path,displayName,children::isNotEmpty',
-              })
-              .then((root) => {
-                  const { value: selectedPath } = this.props;
-                  const list = root.toArray();
-                  this.setState({
-                      list: list.map((item) => {
-                          const { path, displayName } = item;
-                          const open = selectedPath && selectedPath.startsWith(path) && selectedPath !== path;
-                          if (open) {
-                              this.fetchNode(path, true);
-                          }
+      this.props.querySingleResource({
+          resource: 'organisationUnits',
+          params: {
+              level: 1,
+              paging: false,
+              fields: 'id,path,displayName,children::isNotEmpty',
+          },
+      })
+          .then((root) => {
+              const { value: selectedPath } = this.props;
 
-                          return {
-                              open,
-                              value: path,
-                              label: displayName,
-                              children: [],
-                          };
-                      }),
-                  });
+              const list = root.organisationUnits;
+              this.setState({
+                  list: list.map((item) => {
+                      const { path, displayName } = item;
+                      const open = selectedPath && selectedPath.startsWith(path) && selectedPath !== path;
+                      if (open) {
+                          this.fetchNode(path, true);
+                      }
+
+                      return {
+                          open,
+                          value: path,
+                          label: displayName,
+                          children: [],
+                      };
+                  }),
               });
-      } catch (e) {
-          console.log('OrgUnitTree root fetch failed');
-      }
+          }).catch(() => {
+              console.log('OrgUnitTree root fetch failed');
+          });
   }
 
   fetchNode = async (path, opening = false) => {
-      try {
-          const id = path.substr(path.lastIndexOf('/') + 1);
+      const id = path.substr(path.lastIndexOf('/') + 1);
 
-          const d2 = await getInstance();
-          d2.models.organisationUnits
-              .list({
-                  paging: false,
-                  filter: `id:in:[${id}]`,
-                  fields: ':all,displayName,path,children[id,displayName,path,children]',
-              })
-              .then((r) => {
-                  const organisationUnits = r.toArray();
-                  const units = organisationUnits[0].children.valuesContainerMap;
+      this.props.querySingleResource({
+          resource: 'organisationUnits',
+          params: {
+              paging: false,
+              filter: `id:in:[${id}]`,
+              fields: ':all,displayName,path,children[id,displayName,path,children]',
 
-                  const items = [];
-                  // todo this would need to be taked care of (report lgtm)
-                  // eslint-disable-next-line no-restricted-syntax,no-unused-vars
-                  for (const [k, v] of units.entries()) {
-                      const { value: selectedPath } = this.props;
-                      const children = v.children.valuesContainerMap.size > 0 ? [] : null;
-                      let open = children !== null && selectedPath && selectedPath.startsWith(v.path);
+          },
+      }).then((r) => {
+          const organisationUnits = r.organisationUnits;
+          const units = organisationUnits[0].children;
 
-                      if (open && opening && selectedPath.substr(v.path.length).indexOf('/') > -1) {
-                          this.fetchNode(v.path, opening);
-                      } else {
-                          open = false;
-                      }
+          const items = [];
+          for (const child of units) {
+              const { value: selectedPath } = this.props;
+              const children = child.children.length > 0 ? [] : null;
+              let open = children !== null && selectedPath && selectedPath.startsWith(child.path);
 
-                      items.push({
-                          open,
-                          children,
-                          value: v.path,
-                          label: v.displayName,
-                      });
-                  }
-                  items.sort((a, b) => a.label.localeCompare(b.label));
+              if (open && opening && selectedPath.substr(child.path.length).indexOf('/') > -1) {
+                  this.fetchNode(child.path, opening);
+              } else {
+                  open = false;
+              }
 
-                  const { list } = this.state;
-                  this.setChildren(path, items, list);
-                  this.setState({
-                      list: [...list],
-                  });
+              items.push({
+                  open,
+                  children,
+                  value: child.path,
+                  label: child.displayName,
               });
-      } catch (e) {
+          }
+          items.sort(({ label: labelA }, { label: labelB }) => localeCompareStrings(labelA, labelB));
+
+          const { list } = this.state;
+          this.setChildren(path, items, list);
+          this.setState({
+              list: [...list],
+          });
+      }).catch((e) => {
           console.log('OrgUnitTree fetchNode failed');
           console.log(e);
-      }
+      });
   }
 
   setChildren(path, children, list) {

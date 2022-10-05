@@ -12,6 +12,7 @@ import type { RelationshipType } from '../RelationshipType';
 export class ProgramStage {
     _id: string;
     _name: string;
+    _untranslatedName: string;
     _stageForm: RenderFoundation;
     _relationshipTypes: Array<RelationshipType>;
     _enableUserAssignment: boolean;
@@ -50,6 +51,14 @@ export class ProgramStage {
 
     set name(name: string) {
         this._name = name;
+    }
+
+    get untranslatedName(): string {
+        return this._untranslatedName;
+    }
+
+    set untranslatedName(untranslatedName: string) {
+        this._untranslatedName = untranslatedName;
     }
 
     set icon(icon: Icon | void) {
@@ -107,9 +116,9 @@ export class ProgramStage {
         return this._reportDateToUse;
     }
 
-    set reportDateToUse(reportDate: string = 'enrollmentDate') {
+    set reportDateToUse(reportDate: string = 'enrolledAt') {
         if (reportDate === 'false') {
-            this._reportDateToUse = 'enrollmentDate';
+            this._reportDateToUse = 'enrolledAt';
         } else {
             this._reportDateToUse = reportDate;
         }

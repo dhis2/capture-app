@@ -24,9 +24,10 @@ export type Stage = {
 
 export type StageCommonProps = {|
     ready?: boolean,
+    programId: string,
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,
-    onEventClick: (eventId: string, stageId: string) => void
+    onEventClick: (eventId: string) => void
 |}
 
 export type DataValue = {
@@ -37,12 +38,12 @@ export type DataValue = {
 export type Event = {|
     dataValues: Array<DataValue>,
     deleted?: boolean,
-    dueDate: string,
+    scheduledAt: string,
     enrollment: string,
     enrollmentStatus: string,
     event: string,
-    eventDate: string,
-    lastUpdated: string,
+    occurredAt: string,
+    updatedAt: string,
     orgUnit: string,
     orgUnitName: string,
     program: string,

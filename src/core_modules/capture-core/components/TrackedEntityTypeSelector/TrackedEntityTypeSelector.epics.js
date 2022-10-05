@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { trackedEntityTypeSelectorActionTypes } from './TrackedEntityTypeSelector.actions';
 import { buildUrlQueryString } from '../../utils/routing';
-import { resetLocationChange } from '../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(

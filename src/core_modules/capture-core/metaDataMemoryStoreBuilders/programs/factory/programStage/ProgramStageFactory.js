@@ -115,6 +115,7 @@ export class ProgramStageFactory {
         const stage = new ProgramStage((_stage) => {
             _stage.id = cachedProgramStage.id;
             _stage.name = cachedProgramStage.displayName;
+            _stage.untranslatedName = cachedProgramStage.name;
             _stage.relationshipTypes = this.relationshipTypesFactory.build(
                 programId,
                 cachedProgramStage.id,
@@ -131,7 +132,8 @@ export class ProgramStageFactory {
                 _form.description = cachedProgramStage.description;
                 _form.featureType = ProgramStageFactory._getFeatureType(cachedProgramStage);
                 _form.access = cachedProgramStage.access;
-                _form.addLabel({ id: 'eventDate', label: cachedProgramStage.executionDateLabel || 'Incident date' });
+                _form.addLabel({ id: 'occurredAt', label: cachedProgramStage.executionDateLabel || 'Report date' });
+                _form.addLabel({ id: 'scheduledAt', label: cachedProgramStage.dueDateLabel || 'Scheduled date' });
                 _form.validationStrategy =
                     cachedProgramStage.validationStrategy &&
                     camelCaseUppercaseString(cachedProgramStage.validationStrategy);

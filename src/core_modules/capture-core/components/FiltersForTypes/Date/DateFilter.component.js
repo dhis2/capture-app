@@ -3,29 +3,28 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import { isValidZeroOrPositiveInteger } from 'capture-core-utils/validators/form';
 import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
 import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
 import { Option } from '../../../metaData/OptionSet/Option';
 
 import { FromDateFilter } from './From.component';
 import { ToDateFilter } from './To.component';
-import {
-    isValidDate,
-} from '../../../utils/validators/form';
+import { isValidDate } from '../../../utils/validators/form';
 import { parseDate } from '../../../utils/converters/date';
 import { dataElementTypes } from '../../../metaData';
 import type { UpdatableFilterContent } from '../types';
 import './calendarFilterStyles.css';
-import { mainOptionKeys, mainOptionTranslatedTexts } from './mainOptions';
+import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
+import { RangeFilter } from './RangeFilter.component';
 
 const getStyles = (theme: Theme) => ({
     fromToContainer: {
         display: 'flex',
         flexWrap: 'wrap',
     },
-    inputContainer: {
-    },
+    inputContainer: {},
     toLabelContainer: {
         width: 30,
         display: 'flex',
@@ -47,6 +46,8 @@ export type Value = ?{
     from?: ?string,
     to?: ?string,
     main?: ?string,
+    start?: ?string,
+    end?: ?string,
 };
 
 type Props = {
@@ -65,7 +66,90 @@ type Props = {
 };
 
 type State = {
-    submitAttempted: boolean;
+    submitAttempted: boolean,
+};
+
+const getAbsoluteRangeErrors = (fromValue, toValue, type, submitAttempted) => {
+    let errors = {
+        minValueError: null,
+        maxValueError: null,
+        dateLogicError: null,
+    };
+
+    if (!fromValue && !toValue) {
+        errors = {
+            ...errors,
+            dateLogicError: submitAttempted ? i18n.t(DateFilter.errorMessages.ABSOLUTE_RANGE_WITHOUT_VALUES) : null,
+        };
+    } else {
+        const { isValid: isMinValueValid, error: minValueError } = DateFilter.validateField(fromValue, type);
+        const { isValid: isMaxValueValid, error: maxValueError } = DateFilter.validateField(toValue, type);
+        const hasDateLogicError = () =>
+            isMinValueValid && isMaxValueValid && fromValue && toValue && DateFilter.isFromAfterTo(fromValue, toValue);
+
+        errors = {
+            ...errors,
+            minValueError,
+            maxValueError,
+            dateLogicError: hasDateLogicError() ? i18n.t(DateFilter.errorMessages.FROM_GREATER_THAN_TO) : null,
+        };
+    }
+
+    return errors;
+};
+
+const getRelativeRangeErrors = (startValue, endValue, submitAttempted) => {
+    let errors = {
+        startValueError: null,
+        endValueError: null,
+        bufferLogicError: null,
+    };
+    if (!startValue && !endValue) {
+        errors = {
+            ...errors,
+            bufferLogicError: submitAttempted ? i18n.t(DateFilter.errorMessages.RELATIVE_RANGE_WITHOUT_VALUES) : null,
+        };
+    }
+    const { error: startValueError } = DateFilter.validateField(startValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE);
+    const { error: endValueError } = DateFilter.validateField(endValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE);
+    errors = {
+        ...errors,
+        startValueError,
+        endValueError,
+    };
+    return errors;
+};
+
+const isAbsoluteRangeFilterValid = (fromValue, toValue) => {
+    if (!fromValue && !toValue) {
+        return false;
+    }
+
+    const parseResultFrom = fromValue ? parseDate(fromValue) : { isValid: true, moment: null };
+    const parseResultTo = toValue ? parseDate(toValue) : { isValid: true, moment: null };
+
+    if (!(parseResultFrom.isValid && parseResultTo.isValid)) {
+        return false;
+    }
+    const isValidMomentDate = () =>
+        parseResultFrom.momentDate &&
+        parseResultTo.momentDate &&
+        parseResultFrom.momentDate.isAfter(parseResultTo.momentDate);
+
+    return !isValidMomentDate();
+};
+
+const isRelativeRangeFilterValid = (startValue, endValue) => {
+    if (!startValue && !endValue) {
+        return false;
+    }
+    if (
+        !DateFilter.validateField(startValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE).isValid ||
+        !DateFilter.validateField(endValue, dataElementTypes.INTEGER_ZERO_OR_POSITIVE).isValid
+    ) {
+        return false;
+    }
+    return true;
 };
 
 // $FlowFixMe[incompatible-variance] automated comment
@@ -89,32 +173,21 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         };
     }
 
-    // eslint-disable-next-line complexity
     static isFilterValid(
         mainValue?: ?string,
         fromValue?: ?string,
         toValue?: ?string,
+        startValue?: ?string,
+        endValue?: ?string,
     ) {
-        if (mainValue !== mainOptionKeys.CUSTOM_RANGE) {
-            return true;
+        if (mainValue === mainOptionKeys.ABSOLUTE_RANGE) {
+            return isAbsoluteRangeFilterValid(fromValue, toValue);
         }
 
-        if (!fromValue && !toValue) {
-            return false;
+        if (mainValue === mainOptionKeys.RELATIVE_RANGE) {
+            return isRelativeRangeFilterValid(startValue, endValue);
         }
-
-        const parseResultFrom = fromValue ? parseDate(fromValue) : { isValid: true, moment: null };
-        const parseResultTo = toValue ? parseDate(toValue) : { isValid: true, moment: null };
-
-        if (!(parseResultFrom.isValid && parseResultTo.isValid)) {
-            return false;
-        }
-
-        return !(
-            parseResultFrom.momentDate &&
-            parseResultTo.momentDate &&
-            parseResultFrom.momentDate.isAfter(parseResultTo.momentDate)
-        );
+        return true;
     }
 
     static isFromAfterTo(valueFrom: string, valueTo: string) {
@@ -131,13 +204,17 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         this.state = { submitAttempted: false };
     }
     static errorMessages = {
-        CUSTOM_RANGE_WITHOUT_VALUES: 'Please specify a range',
-        FROM_GREATER_THAN_TO: 'The From date can\'t be after the To date',
+        ABSOLUTE_RANGE_WITHOUT_VALUES: 'Please specify a range',
+        RELATIVE_RANGE_WITHOUT_VALUES: 'Please specify the number of days',
+        FROM_GREATER_THAN_TO: "The From date can't be after the To date",
+        MIN_GREATER_THAN_MAX: 'Days in the past cannot be greater than days in the future',
         [dataElementTypes.DATE]: 'Please provide a valid date',
+        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
     };
 
     static validatorForTypes = {
         [dataElementTypes.DATE]: isValidDate,
+        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
     };
 
     static mainOptionSet = new OptionSet('mainOptions', [
@@ -170,8 +247,14 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             _this.value = mainOptionKeys.LAST_3_MONTHS;
         }),
         new Option((_this) => {
-            _this.text = mainOptionTranslatedTexts[mainOptionKeys.CUSTOM_RANGE];
-            _this.value = mainOptionKeys.CUSTOM_RANGE;
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.ABSOLUTE_RANGE];
+            _this.value = mainOptionKeys.ABSOLUTE_RANGE;
+        }),
+    ]);
+    static optionSet = new OptionSet('mainOptions', [
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.RELATIVE_RANGE];
+            _this.value = mainOptionKeys.RELATIVE_RANGE;
         }),
     ]);
     onGetUpdateData(updatedValues?: Value) {
@@ -187,102 +270,106 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     onIsValid() {
         this.setState({ submitAttempted: true });
         const values = this.props.value;
-        return !values || DateFilter.isFilterValid(values.main, values.from, values.to);
+        return !values || DateFilter.isFilterValid(values.main, values.from, values.to, values.start, values.end);
     }
 
-    getUpdatedValue(valuePart: {[key: string]: string}) {
+    getUpdatedValue(valuePart: { [key: string]: string }) {
         // $FlowFixMe[cannot-spread-indexer] automated comment
         const valueObject = {
             ...this.props.value,
             ...valuePart,
         };
+        const isRelativeRangeValue = () => valueObject?.start || valuePart?.start || valuePart?.end;
+        const isAbsoluteRangevalue = () => valueObject?.from || valuePart?.from || valuePart?.to;
 
-        if (valueObject.from || valueObject.to) {
-            valueObject.main = mainOptionKeys.CUSTOM_RANGE;
-        } else if (valueObject.main === mainOptionKeys.CUSTOM_RANGE) {
+        if (isAbsoluteRangevalue()) {
+            valueObject.main = mainOptionKeys.ABSOLUTE_RANGE;
+            delete valueObject.start;
+            delete valueObject.end;
+        } else if (isRelativeRangeValue()) {
+            valueObject.main = mainOptionKeys.RELATIVE_RANGE;
+            delete valueObject.from;
+            delete valueObject.to;
+        } else if (
+            valueObject.main === mainOptionKeys.ABSOLUTE_RANGE ||
+            valueObject.main === mainOptionKeys.RELATIVE_RANGE
+        ) {
             // $FlowFixMe[incompatible-type] automated comment
             valueObject.main = null;
         }
 
-        return Object
-            .keys(valueObject)
-            .filter(key => valueObject[key])
-            .length > 0 ? valueObject : null;
+        return Object.keys(valueObject).filter(key => valueObject[key]).length > 0 ? valueObject : null;
     }
 
     handleEnterKeyInFrom = () => {
         this.toD2DateTextFieldInstance.focus();
-    }
+    };
 
     handleDateSelectedFromCalendarInFrom = () => {
         this.toD2DateTextFieldInstance.focus();
-    }
+    };
 
-    handleEnterKeyInTo = (value: {[key: string]: string}) => {
+    handleEnterKeyInTo = (value: { [key: string]: string }) => {
         // validate with updated values
         const values = this.getUpdatedValue(value);
         this.setState({ submitAttempted: true });
 
-        if (values && !DateFilter.isFilterValid(values.main, values.from, values.to)) {
+        if (values && !DateFilter.isFilterValid(values.main, values.from, values.to, values.start, values.end)) {
             this.props.onCommitValue(values);
         } else {
             this.props.onUpdate(values || null);
         }
-    }
+    };
 
-    handleFieldBlur = (value: {[key: string]: string}) => {
+    handleFieldBlur = (value: { [key: string]: string }) => {
         this.props.onCommitValue(this.getUpdatedValue(value));
-    }
+    };
 
     handleMainSelect = (value: string) => {
         const valueObject = value ? { main: value } : null;
         this.props.onCommitValue(valueObject);
-    }
+    };
 
     setToD2DateTextFieldInstance = (instance: any) => {
         this.toD2DateTextFieldInstance = instance;
-    }
+    };
 
-    // eslint-disable-next-line complexity
     getErrors() {
         const values = this.props.value;
         const submitAttempted = this.state.submitAttempted;
         const mainValue = values && values.main;
         const fromValue = values && values.from;
         const toValue = values && values.to;
+        const startValue = values && values.start;
+        const endValue = values && values.end;
         const type = this.props.type;
-
-        if (mainValue === mainOptionKeys.CUSTOM_RANGE && !fromValue && !toValue) {
-            return {
-                minValueError: null,
-                maxValueError: null,
-                logicError: submitAttempted ? i18n.t(DateFilter.errorMessages.CUSTOM_RANGE_WITHOUT_VALUES) : null,
-            };
-        }
-
-        const { isValid: isMinValueValid, error: minValueError } = DateFilter.validateField(fromValue, type);
-        const { isValid: isMaxValueValid, error: maxValueError } = DateFilter.validateField(toValue, type);
-
-        let logicError = null;
-        if (isMinValueValid && isMaxValueValid && fromValue && toValue &&
-            DateFilter.isFromAfterTo(fromValue, toValue)) {
-            logicError = i18n.t(DateFilter.errorMessages.FROM_GREATER_THAN_TO);
-        }
-
-        return {
-            minValueError,
-            maxValueError,
-            logicError,
+        const errors = {
+            minValueError: null,
+            maxValueError: null,
+            startValueError: null,
+            endValueError: null,
+            dateLogicError: null,
+            bufferLogicError: null,
         };
+
+        if (mainValue === mainOptionKeys.ABSOLUTE_RANGE) {
+            return { ...errors, ...getAbsoluteRangeErrors(fromValue, toValue, type, submitAttempted) };
+        }
+
+        if (mainValue === mainOptionKeys.RELATIVE_RANGE) {
+            return { ...errors, ...getRelativeRangeErrors(startValue, endValue, submitAttempted) };
+        }
+        return errors;
     }
 
     render() {
         const { value, classes, onFocusUpdateButton } = this.props;
-        const { minValueError, maxValueError, logicError } = this.getErrors();
+        const { minValueError, maxValueError, startValueError, endValueError, dateLogicError, bufferLogicError } =
+            this.getErrors();
         return (
             <div id="dateFilter">
                 <div>
-                    { /* $FlowFixMe */ }
+                    {/* $FlowFixMe */}
                     <SelectBoxes
                         optionSet={DateFilter.mainOptionSet}
                         orientation={orientations.VERTICAL}
@@ -293,10 +380,8 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                     />
                 </div>
                 <div className={classes.fromToContainer}>
-                    <div
-                        className={classes.inputContainer}
-                    >
-                        { /* $FlowSuppress: Flow not working 100% with HOCs */ }
+                    <div className={classes.inputContainer}>
+                        {/* $FlowSuppress: Flow not working 100% with HOCs */}
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <FromDateFilter
                             value={value && value.from}
@@ -307,15 +392,9 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                             onDateSelectedFromCalendar={this.handleDateSelectedFromCalendarInFrom}
                         />
                     </div>
-                    <div
-                        className={classes.toLabelContainer}
-                    >
-                        { i18n.t('to') }
-                    </div>
-                    <div
-                        className={classes.inputContainer}
-                    >
-                        { /* $FlowSuppress: Flow not working 100% with HOCs */ }
+                    <div className={classes.toLabelContainer}>{i18n.t('to')}</div>
+                    <div className={classes.inputContainer}>
+                        {/* $FlowSuppress: Flow not working 100% with HOCs */}
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <ToDateFilter
                             value={value && value.to}
@@ -328,9 +407,28 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         />
                     </div>
                 </div>
-                <div className={classNames(classes.error, classes.logicErrorContainer)}>
-                    {logicError}
+                <div>
+                    {/* $FlowFixMe */}
+                    <SelectBoxes
+                        optionSet={DateFilter.optionSet}
+                        orientation={orientations.VERTICAL}
+                        value={value && value.main}
+                        onBlur={this.handleMainSelect}
+                        color="secondary"
+                        nullable
+                    />
                 </div>
+                <div>
+                    <RangeFilter
+                        value={{ start: value?.start, end: value?.end }}
+                        startValueError={startValueError}
+                        endValueError={endValueError}
+                        handleFieldBlur={this.handleFieldBlur}
+                        handleEnterKeyInTo={this.handleEnterKeyInTo}
+                    />
+                </div>
+                <div className={classNames(classes.error, classes.logicErrorContainer)}>{dateLogicError}</div>
+                <div className={classNames(classes.error, classes.logicErrorContainer)}>{bufferLogicError}</div>
             </div>
         );
     }

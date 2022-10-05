@@ -21,11 +21,21 @@ export const getTemplates = (programId: string, querySingleResource: QuerySingle
             templates: [
                 defaultTemplate,
                 ...(apiEventFilters
-                    .map(apiEventFilter => ({
-                        ...apiEventFilter,
-                        criteria: apiEventFilter.eventQueryCriteria,
-                        eventQueryCriteria: undefined,
-                    }))
+                    .map((apiEventFilter) => {
+                        const { displayColumnOrder, order, eventDate } = apiEventFilter.eventQueryCriteria;
+                        const convertedEventQueryCriteria = {
+                            ...apiEventFilter.eventQueryCriteria,
+                            displayColumnOrder: displayColumnOrder?.map(columnId => (columnId === 'eventDate' ? 'occurredAt' : columnId)),
+                            order: order?.includes('eventDate') ? order.replace('eventDate', 'occurredAt') : order,
+                            occurredAt: eventDate,
+                        };
+
+                        return ({
+                            ...apiEventFilter,
+                            criteria: convertedEventQueryCriteria,
+                            eventQueryCriteria: undefined,
+                        });
+                    })
                 ),
             ],
             defaultTemplateId: defaultTemplate.id,

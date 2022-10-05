@@ -7,33 +7,46 @@ import {
     updateListError,
     buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
-import type { ColumnsMetaForDataFetching } from '../types';
-
+import type { ColumnsMetaForDataFetching, CommonQueryData } from '../types';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const errorMessages = {
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
 };
 
 export const updateEventWorkingListAsync = (
-    queryArgsSource: Object, {
+    queryArgsSource: Object,
+    {
         columnsMetaForDataFetching,
         categoryCombinationId,
         storeId,
+        commonQueryData,
     }: {
-    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-    categoryCombinationId?: ?string,
-    storeId: string,
-}): Promise<ReduxAction<any, any>> => {
+        commonQueryData: CommonQueryData,
+        columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+        categoryCombinationId?: ?string,
+        storeId: string,
+    },
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
+): Promise<ReduxAction<any, any>> => {
     const rawQueryArgs = {
         ...queryArgsSource,
-        fields: 'dataValues,eventDate,event,status,orgUnit,program,programType,lastUpdated,created,assignedUser,assignedUserDisplayName,assignedUserUsername',
+        fields: 'dataValues,occurredAt,event,status,orgUnit,program,programType,updatedAt,createdAt,assignedUser',
         filters: buildFilterQueryArgs(queryArgsSource.filters, {
             columns: columnsMetaForDataFetching,
             storeId,
         }),
+        ...commonQueryData,
     };
 
-    return getEventListData(rawQueryArgs, columnsMetaForDataFetching, categoryCombinationId)
+    return getEventListData({
+        queryArgs: rawQueryArgs,
+        columnsMetaForDataFetching,
+        categoryCombinationId,
+        absoluteApiPath,
+        querySingleResource,
+    })
         .then(({ eventContainers, pagingData, request }) =>
             updateListSuccess(storeId, {
                 recordContainers: eventContainers,

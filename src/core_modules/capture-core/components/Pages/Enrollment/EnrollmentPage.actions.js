@@ -17,6 +17,7 @@ export const enrollmentPageActionTypes = {
     MISSING_MESSAGE_VIEW: 'EnrollmentPage.MissingMessageView',
 
     DELETE_ENROLLMENT: 'EnrollmentPage.DeleteEnrollment',
+    UPDATE_TEI_DISPLAY_NAME: 'EnrollmentPage.UpdateTeiDisplayName',
 };
 
 export const fetchEnrollmentPageInformation = () =>
@@ -53,4 +54,9 @@ export const cleanEnrollmentPage = () =>
 export const deleteEnrollment = ({ enrollmentId }: { enrollmentId: string }) =>
     actionCreator(enrollmentPageActionTypes.DELETE_ENROLLMENT)({
         enrollmentId,
+    });
+
+export const updateTeiDisplayName = (teiDisplayName: string) =>
+    actionCreator(enrollmentPageActionTypes.UPDATE_TEI_DISPLAY_NAME)({
+        teiDisplayName,
     });

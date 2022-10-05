@@ -1,11 +1,8 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you are on the default search page', () => {
     cy.visit('/#/search');
+    cy.get('[data-test="scope-selector"]').should('exist');
 });
 
 Then('there should be no search domain preselected', () => {
@@ -36,6 +33,13 @@ And('you select the search domain Malaria Case diagnosis', () => {
     cy.get('.Select')
         .type('Malaria case diagn');
     cy.contains('Malaria case diagnosis')
+        .click();
+});
+
+When('you select the search domain WHO RMNCH Tracker', () => {
+    cy.get('.Select')
+        .type('WHO RMNCH');
+    cy.contains('WHO RMNCH Tracker')
         .click();
 });
 
@@ -77,8 +81,22 @@ When('you fill in the unique identifier field with values that will return a tra
         .find('[data-test="capture-ui-input"]')
         .first()
         .clear()
-        .type('ZRP792320')
+        .type('3131112445555')
         .blur();
+});
+
+Then('you are navigated to the Tracker Capture', () => {
+    cy.url()
+        .should('include', 'dhis-web-tracker-capture/')
+        .should('include', 'dashboard?tei=')
+        .should('include', 'program=WSGAb5XwJ3Y');
+});
+
+Then('you are navigated to the Tracker Capture without program', () => {
+    cy.url()
+        .should('include', 'dhis-web-tracker-capture/')
+        .should('include', 'dashboard?tei=')
+        .should('include', 'tracked_entity_type=nEenWmSyUEp');
 });
 
 When('you fill in the first name with values that will return no results', () => {
@@ -168,6 +186,14 @@ When('you fill in the the form with values', () => {
         .type('Smith');
 });
 
+And(/^you fill in the the form with first name value: (.*)$/, (firstName) => {
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type(firstName)
+        .blur();
+});
+
 When('you clear the values', () => {
     cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
@@ -200,7 +226,7 @@ When('when you click the back button', () => {
 
 Then('you should be taken to the main page with program and org unit preselected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk`);
+        .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk`);
 });
 
 And('the next page button is disabled', () => {
@@ -216,7 +242,7 @@ When('you click the view dashboard button', () => {
 });
 
 When('you remove the Child Programme selection', () => {
-    cy.get('[data-test="program-selector-container"]').within(() => {
+    cy.get('[data-test="scope-selector"]').within(() => {
         cy.get('[data-test="reset-selection-button"]').eq(0).click();
     });
 });
@@ -276,7 +302,7 @@ When('you fill in the first name', () => {
 });
 
 When('you click the fallback search button', () => {
-    cy.get('[data-test="fallback-search-button"]')
+    cy.contains('Search in all programs')
         .click();
 });
 
@@ -291,6 +317,20 @@ When('you fill in the first and last name with values that will return results',
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Sarah')
+        .blur();
+});
+
+When('you fill in the first name with value and last name with empty space', () => {
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Thomas')
+        .blur();
+
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('  ')
         .blur();
 });
 
@@ -317,26 +357,11 @@ When('you select gender', () => {
         .type('{enter}', { force: true });
 });
 
-When('you see that in the search terms there is no gender displayed', () => {
-    cy.get('[data-test="search-results-top"]')
-        .should('not.have.value', 'Gender');
-    cy.get('[data-test="search-results-top"]')
-        .contains('First name');
-    cy.get('[data-test="search-results-top"]')
-        .contains('Last name');
-});
-
 When('you see the attributes search area being expanded', () => {
     cy.get('[data-test="form-attributes"]')
         .contains('First name');
     cy.get('[data-test="form-attributes"]')
         .contains('Last name');
-});
-
-When('that first and last name are prefilled', () => {
-    cy.get('[data-test="search-results-list"]')
-        .find('[data-test="dhis2-uicore-tag"]')
-        .should('not.exist');
 });
 
 When('and you can see the unique identifier input', () => {
@@ -354,7 +379,11 @@ When('you click the back button', () => {
         .click();
 });
 
-Then('you should be taken to the main page with org unit preselected', () => {
+Then('you should be taken to the main page with org unit and program preselected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default`);
+});
+
+Then('you stay in the same page with results from all programs being displayed', () => {
+    cy.contains('Results found in all programs').should('exist');
 });

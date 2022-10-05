@@ -4,6 +4,7 @@ import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
 import { convertPx, getBaseConfigForField } from './configBase';
 import type { DataElement } from '../../../../../metaData';
 import type { FieldConfigForType } from './configBase';
+import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 const baseComponentStyles = {
     labelContainerStyle: {
@@ -51,7 +52,7 @@ export const createProps = (props?: ?Object, options: Object, metaData: DataElem
 
 // $FlowFixMe[prop-missing] automated comment
 // $FlowFixMe[incompatible-return] automated comment
-export const createFieldConfig = (fieldSpecifications: FieldConfigForType, metaData: DataElement): FieldConfig => ({
-    ...getBaseConfigForField(metaData),
+export const createFieldConfig = (fieldSpecifications: FieldConfigForType, metaData: DataElement, querySingleResource: QuerySingleResource): FieldConfig => ({
+    ...getBaseConfigForField(metaData, querySingleResource),
     ...fieldSpecifications,
 });

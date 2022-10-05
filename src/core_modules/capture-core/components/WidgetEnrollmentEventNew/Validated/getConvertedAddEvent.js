@@ -34,7 +34,7 @@ export const getAddEventEnrollmentServerData = ({
         mainDataServerValues.status = completed ? 'COMPLETED' : 'ACTIVE';
     }
     if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+        mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
     }
 
     return {
@@ -46,7 +46,7 @@ export const getAddEventEnrollmentServerData = ({
                 orgUnit: orgUnitId,
                 trackedEntityInstance: teiId,
                 enrollment: enrollmentId,
-                dueDate: mainDataServerValues.eventDate,
+                scheduledAt: mainDataServerValues.occurredAt,
                 orgUnitName,
                 dataValues: Object
                     .keys(formServerValues)

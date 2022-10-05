@@ -11,7 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import { Button } from '../../Buttons';
-import { OrgUnitField } from './OrgUnitField.container';
+import { OrgUnitField } from '../../FormFields/New';
 
 const styles = (theme: Theme) => ({
     paper: {
@@ -75,6 +75,7 @@ type Props = {
     selectedOrgUnitId: string,
     showWarning: boolean,
     selectedOrgUnit: Object,
+    previousOrgUnitId?: string,
     classes: Object,
 };
 
@@ -174,6 +175,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
                         <OrgUnitField
                             data-test="org-unit-field"
                             onSelectClick={this.handleClick}
+                            previousOrgUnitId={this.props.previousOrgUnitId}
                         />
                     </div>
                 </Paper>

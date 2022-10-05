@@ -7,9 +7,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Button } from '@dhis2/ui';
 import { DataEntry } from './DataEntry/DataEntry.container';
 import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
-import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
+import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
+import { useLocationQuery } from '../../../../utils/routing';
+import { useRulesEngine } from './useRulesEngine';
+import type { PlainProps } from './NewEventDataEntryWrapper.types';
 
 const getStyles = ({ typography }) => ({
     flexContainer: {
@@ -34,23 +37,23 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-type Props = {
-    ...CssClasses,
-    formHorizontal: ?boolean,
-    onFormLayoutDirectionChange: (formHorizontal: boolean) => void,
-    formFoundation: ?RenderFoundation,
-    stage: ?ProgramStage,
-}
-
 const NewEventDataEntryWrapperPlain = ({
     classes,
     formFoundation,
     formHorizontal,
     stage,
     onFormLayoutDirectionChange,
-}: Props) => {
+}: PlainProps) => {
     const { id: programId } = useCurrentProgramInfo();
+    const orgUnitId = useLocationQuery().orgUnitId;
+    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const rulesReady = useRulesEngine({ programId, orgUnit, formFoundation });
     const titleText = useScopeTitleText(programId);
+
+    if (error) {
+        return error.errorComponent;
+    }
+
     const checkIfCustomForm = () => {
         let isCustom = false;
         if (!formFoundation?.sections) { return isCustom; }
@@ -61,7 +64,7 @@ const NewEventDataEntryWrapperPlain = ({
     };
     const isCustomForm = checkIfCustomForm();
 
-    return (
+    return rulesReady && (
         <Paper className={classes.paper}>
             <div className={classes.title} >
                 {i18n.t('New {{titleText}}', {
@@ -95,6 +98,7 @@ const NewEventDataEntryWrapperPlain = ({
             <div className={classes.marginLeft}>
                 <DataEntry
                     stage={stage}
+                    orgUnit={orgUnit}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}
                 />

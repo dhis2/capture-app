@@ -17,8 +17,8 @@ export const saveAssignee = (eventId: string, serverData: Object, selections: Ob
     actionCreator(actionTypes.VIEW_EVENT_ASSIGNEE_SAVE)({}, {
         offline: {
             effect: {
-                url: `events/${eventId}`,
-                method: effectMethods.UPDATE,
+                url: 'tracker?async=false&importStrategy=UPDATE',
+                method: effectMethods.POST,
                 data: serverData,
             },
             commit: { type: actionTypes.VIEW_EVENT_ASSIGNEE_SAVE_COMPLETED, meta: { eventId, selections } },

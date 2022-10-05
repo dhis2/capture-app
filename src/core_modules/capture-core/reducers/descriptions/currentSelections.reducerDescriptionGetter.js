@@ -3,7 +3,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import {
     actionTypes as quickSelectorActionTypes,
-} from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+} from '../../components/ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import {
     actionTypes as editEventActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
@@ -17,6 +17,9 @@ import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { mainPageActionTypes } from '../../components/Pages/MainPage/MainPage.actions';
+import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
+import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
 
 const setCategoryOption = (
@@ -72,6 +75,22 @@ const resetCategoryOption = (state: Object, categoryId: string) => {
         complete: false,
     };
 };
+
+const categoryOptionSet = (state, action) => {
+    const { categoryId, categoryOption } = action.payload;
+    return setCategoryOption(state, categoryId, categoryOption);
+};
+
+const categoryOptionReset = (state, action) => {
+    const { categoryId } = action.payload;
+    return resetCategoryOption(state, categoryId);
+};
+
+const allCategoryOptionsReset = state => ({
+    ...state,
+    categories: undefined,
+    categoriesMeta: undefined,
+});
 
 export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
@@ -177,48 +196,30 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             showaccessible: newStatus,
         };
     },
-    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, { payload: { orgUnitId } }) => ({
-        ...state,
-        orgUnitId,
-    }),
-    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
-        ...state,
-        orgUnitId: undefined,
-        complete: false,
-    }),
-    [lockedSelectorActionTypes.FROM_URL_UPDATE]: (state, action) => {
-        const { nextProps: selections } = action.payload;
+    [lockedSelectorActionTypes.FROM_URL_UPDATE]: ({ categories, categoriesMeta }, action) => {
+        const { nextProps: selections, prevProps: { programId: prevProgramId } } = action.payload;
+
+        const categorySelections = selections.programId === prevProgramId ? { categories, categoriesMeta } : {};
+
         return {
             ...selections,
-            categories: undefined,
-            categoriesMeta: undefined,
+            ...categorySelections,
             complete: false,
         };
     },
-    [lockedSelectorActionTypes.PROGRAM_ID_SET]: (state, { payload: { programId } }) => ({
-        ...state,
-        programId,
-        trackedEntityTypeId: undefined,
-        complete: false,
-    }),
-    [lockedSelectorActionTypes.PROGRAM_ID_STORE]:
-      (state, { payload: { programId } }) => ({
-          ...state,
-          programId,
-      }),
-    [lockedSelectorActionTypes.CATEGORY_OPTION_SET]: (state, action) => {
-        const { categoryId, categoryOption } = action.payload;
-        return setCategoryOption(state, categoryId, categoryOption);
-    },
-    [lockedSelectorActionTypes.CATEGORY_OPTION_RESET]: (state, action) => {
-        const { categoryId } = action.payload;
-        return resetCategoryOption(state, categoryId);
-    },
-    [lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET]: state => ({
-        ...state,
-        categories: undefined,
-        categoriesMeta: undefined,
-    }),
+
+    [mainPageActionTypes.CATEGORY_OPTION_SET]: categoryOptionSet,
+    [mainPageActionTypes.CATEGORY_OPTION_RESET]: categoryOptionReset,
+    [mainPageActionTypes.ALL_CATEGORY_OPTIONS_RESET]: allCategoryOptionsReset,
+
+    [newPageActionTypes.CATEGORY_OPTION_SET]: categoryOptionSet,
+    [newPageActionTypes.CATEGORY_OPTION_RESET]: categoryOptionReset,
+    [newPageActionTypes.ALL_CATEGORY_OPTIONS_RESET]: allCategoryOptionsReset,
+
+    [viewEventPageActionTypes.CATEGORY_OPTION_SET]: categoryOptionSet,
+    [viewEventPageActionTypes.CATEGORY_OPTION_RESET]: categoryOptionReset,
+    [viewEventPageActionTypes.ALL_CATEGORY_OPTIONS_RESET]: allCategoryOptionsReset,
+
     [searchPageActionTypes.FALLBACK_SEARCH_COMPLETED]:
       (state, { payload: { trackedEntityTypeId } }) => ({
           ...state,

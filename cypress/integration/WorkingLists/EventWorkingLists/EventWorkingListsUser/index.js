@@ -1,45 +1,46 @@
+import uuid from 'uuid/v4';
 import '../../sharedSteps';
 import '../../../sharedSteps';
-
-beforeEach(() => {
-    cy.loginThroughForm();
-});
 
 Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
-    const rows = [
-        '14 Male',
-        '67 Male',
-        '66 Male',
-        '55 Male',
-        '26 Female',
-        '35 Male',
-        '49 Male',
-        '60 Male',
-        '12 Male',
-        '61 Male',
-        '27 Female',
-        '20 Male',
-        '69 Male',
-        '11 Male',
-        '59 Male',
-    ];
+    const rows = {
+        '2022-12-30': ['14 Male'],
+        '2022-12-29': ['67 Male'],
+        '2022-12-27': ['66 Male'],
+        '2022-12-25': ['55 Male'],
+        '2022-12-24': ['26 Female'],
+        '2022-12-21': ['35 Male'],
+        '2022-12-19': ['49 Male', '60 Male', '12 Male'],
+        '2022-12-16': ['61 Male'],
+        '2022-12-13': ['27 Female'],
+        '2022-12-12': ['20 Male'],
+        '2022-12-06': ['69 Male'],
+        '2022-12-04': ['11 Male'],
+        '2022-12-03': ['59 Male'],
+    };
 
     cy.get('[data-test="event-working-lists"]')
         .find('tr')
         .should('have.length', 16)
         .each(($row, index) => {
             if (index) {
-                cy.wrap($row)
-                    .contains(rows[index - 1].split(' ')[0])
-                    .should('exist');
-
-                cy.wrap($row)
-                    .contains(rows[index - 1].split(' ')[1])
-                    .should('exist');
+                cy.wrap($row).find('td').first().invoke('text')
+                    .then((date) => {
+                        const firstArgs = rows[date].length > 1 ?
+                            new RegExp(`${rows[date].map(item => item.split(' ')[0]).join('|')}`, 'g')
+                            : rows[date][0].split(' ')[0];
+                        const secondArgs = rows[date].length > 1 ?
+                            new RegExp(`${rows[date].map(item => item.split(' ')[1]).join('|')}`, 'g')
+                            : rows[date][0].split(' ')[1];
+                        cy.contains(firstArgs)
+                            .should('exist');
+                        cy.contains(secondArgs)
+                            .should('exist');
+                    });
             }
         });
 });
@@ -160,7 +161,7 @@ Then('the list should display events where age is between 10 and 20', () => {
 });
 
 When('you open the column selector', () => {
-    cy.get('button[title="Select columns"]')
+    cy.get('[data-test="select-columns-reference"]')
         .click();
 });
 
@@ -182,66 +183,73 @@ Then('Household location should display in the list', () => {
 });
 
 Then('the list should display data for the second page', () => {
-    const rows = [
-        '19 Male',
-        '56 Female',
-        '61 Male',
-        '9 Male',
-        '15 Female',
-        '2 Male',
-        '55 Female',
-        '14 Male',
-        '8 Female',
-        '70 Male',
-        '22 Male',
-        '4 Male',
-        '2 Male',
-        '28 Female',
-        '44 Male',
-    ];
+    const rows = {
+        '2022-12-02': ['19 Male', '56 Female', '61 Male'],
+        '2022-11-30': ['9 Male'],
+        '2022-11-24': ['15 Female'],
+        '2022-11-23': ['2 Male', '55 Female'],
+        '2022-11-22': ['14 Male', '8 Female'],
+        '2022-11-21': ['70 Male'],
+        '2022-11-18': ['22 Male'],
+        '2022-11-16': ['4 Male'],
+        '2022-11-15': ['2 Male'],
+        '2022-11-09': ['28 Female'],
+        '2022-11-06': ['44 Male'],
+    };
+
 
     cy.get('[data-test="event-working-lists"]')
         .find('tr')
         .should('have.length', 16)
         .each(($row, index) => {
             if (index) {
-                cy.wrap($row)
-                    .contains(rows[index - 1].split(' ')[0])
-                    .should('exist');
-
-                cy.wrap($row)
-                    .contains(rows[index - 1].split(' ')[1])
-                    .should('exist');
+                cy.wrap($row).find('td').first().invoke('text')
+                    .then((date) => {
+                        const firstArgs = rows[date].length > 1 ?
+                            new RegExp(`${rows[date].map(item => item.split(' ')[0]).join('|')}`, 'g')
+                            : rows[date][0].split(' ')[0];
+                        const secondArgs = rows[date].length > 1 ?
+                            new RegExp(`${rows[date].map(item => item.split(' ')[1]).join('|')}`, 'g')
+                            : rows[date][0].split(' ')[1];
+                        cy.contains(firstArgs)
+                            .should('exist');
+                        cy.contains(secondArgs)
+                            .should('exist');
+                    });
             }
         });
 });
 
 Then('the list should display 10 rows of data', () => {
-    const rows = [
-        '14 Male',
-        '67 Male',
-        '66 Male',
-        '55 Male',
-        '26 Female',
-        '35 Male',
-        '49 Male',
-        '12 Male',
-        '60 Male',
-        '61 Male',
-    ];
+    const rows = {
+        '2022-12-30': ['14 Male'],
+        '2022-12-29': ['67 Male'],
+        '2022-12-27': ['66 Male'],
+        '2022-12-25': ['55 Male'],
+        '2022-12-24': ['26 Female'],
+        '2022-12-21': ['35 Male'],
+        '2022-12-19': ['49 Male', '60 Male', '12 Male'],
+        '2022-12-16': ['61 Male'],
+    };
 
     cy.get('[data-test="event-working-lists"]')
         .find('tr')
         .should('have.length', 11)
         .each(($row, index) => {
             if (index) {
-                cy.wrap($row)
-                    .contains(rows[index - 1].split(' ')[0])
-                    .should('exist');
-
-                cy.wrap($row)
-                    .contains(rows[index - 1].split(' ')[1])
-                    .should('exist');
+                cy.wrap($row).find('td').first().invoke('text')
+                    .then((date) => {
+                        const firstArgs = rows[date].length > 1 ?
+                            new RegExp(`${rows[date].map(item => item.split(' ')[0]).join('|')}`, 'g')
+                            : rows[date][0].split(' ')[0];
+                        const secondArgs = rows[date].length > 1 ?
+                            new RegExp(`${rows[date].map(item => item.split(' ')[1]).join('|')}`, 'g')
+                            : rows[date][0].split(' ')[1];
+                        cy.contains(firstArgs)
+                            .should('exist');
+                        cy.contains(secondArgs)
+                            .should('exist');
+                    });
             }
         });
 });
@@ -253,36 +261,52 @@ When('you click the report date column header', () => {
 });
 
 Then('the list should display data ordered descendingly by report date', () => {
-    const rows = [
-        '14 Female',
-        '63 Male',
-        '4 Female',
-        '37 Male',
-        '68 Female',
-        '27 Male',
-        '45 Female',
-        '9 Male',
-        '59 Male',
-        '50 Female',
-        '62 Female',
-        '66 Male',
-        '42 Female',
-        '51 Female',
-        '1 Female',
-    ];
+    // For concurrency reasons: Adding a filter to ensure that we don't see data we have added in our tests (the tests will clean up, but concurrent running could cause problems anyway)
+    cy.contains('button', 'Report date')
+        .click();
+
+    cy.get('input[placeholder="From"]')
+        .type('2021-01-01');
+
+    cy.get('input[placeholder="To"]').click();
+
+    cy.contains('Update')
+        .click();
+
+    const rows = {
+        '2021-01-01': ['14 Female'],
+        '2021-01-03': ['63 Male'],
+        '2021-01-04': ['4 Female'],
+        '2021-01-05': ['37 Male'],
+        '2021-01-08': ['68 Female'],
+        '2021-01-09': ['27 Male'],
+        '2021-01-14': ['45 Female'],
+        '2021-01-18': ['9 Male'],
+        '2021-01-20': ['59 Male', '50 Female', '62 Female'],
+        '2021-01-24': ['66 Male'],
+        '2021-01-27': ['42 Female'],
+        '2021-01-29': ['51 Female'],
+        '2021-02-01': ['1 Female'],
+    };
 
     cy.get('[data-test="event-working-lists"]')
         .find('tr')
         .should('have.length', 16)
         .each(($row, index) => {
             if (index) {
-                cy.wrap($row)
-                    .contains(rows[index - 1].split(' ')[0])
-                    .should('exist');
-
-                cy.wrap($row)
-                    .contains(rows[index - 1].split(' ')[1])
-                    .should('exist');
+                cy.wrap($row).find('td').first().invoke('text')
+                    .then((date) => {
+                        const firstArgs = rows[date].length > 1 ?
+                            new RegExp(`${rows[date].map(item => item.split(' ')[0]).join('|')}`, 'g')
+                            : rows[date][0].split(' ')[0];
+                        const secondArgs = rows[date].length > 1 ?
+                            new RegExp(`${rows[date].map(item => item.split(' ')[1]).join('|')}`, 'g')
+                            : rows[date][0].split(' ')[1];
+                        cy.contains(firstArgs)
+                            .should('exist');
+                        cy.contains(secondArgs)
+                            .should('exist');
+                    });
             }
         });
 });
@@ -293,53 +317,49 @@ When('you select the working list called Events today', () => {
         .click();
 });
 
-When('you change the sharing settings', () =>
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
-        .then(sharingUrl =>
-            cy.request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'CLBKvCKspBk',
-                    name: 'Events today',
-                    displayName: 'Events today',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [{
-                        id: 'OYLGMiazHtW',
-                        name: 'Kevin Boateng',
-                        displayName: 'Kevin Boateng',
-                        access: 'rw------',
-                    }],
-                    externalAccess: false,
-                },
-            }).then(() => {
-                cy.get('[data-test="list-view-menu-button"]')
-                    .click();
+When('you create a copy of the working list', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
 
-                cy.contains('Share view')
-                    .click();
+    cy.contains('Save current view as')
+        .click();
 
-                cy.get('[placeholder="Enter names"]')
-                    .type('Boateng');
+    const id = uuid();
+    cy.get('[data-test="view-name-content"]')
+        .type(id);
 
-                cy.contains('Kevin Boateng')
-                    .parent()
-                    .click();
+    cy.intercept('POST', '**/eventFilters**').as('newEventFilter');
 
-                cy.contains('Close')
-                    .click();
-            }),
-        ),
-);
+    cy.get('button')
+        .contains('Save')
+        .click();
+
+    cy.wait('@newEventFilter', { timeout: 30000 });
+
+    cy.reload();
+
+    cy.contains(id.substring(0, 26))
+        .click();
+});
+
+When('you change the sharing settings', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+
+    cy.contains('Share view')
+        .click();
+    cy.get('[placeholder="Search"]')
+        .type('Boateng');
+
+    cy.contains('Kevin Boateng').click();
+    cy.contains('Select a level').click();
+    cy.get('[data-test="dhis2-uicore-select-menu-menuwrapper"]')
+        .contains('View and edit').click({ force: true });
+
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
+});
+
 
 When('you update the working list', () => {
     cy.get('[data-test="online-list-table"]')
@@ -361,50 +381,19 @@ Then('your newly defined sharing settings should still be present', () => {
         .click();
 
     cy.contains('Kevin Boateng')
-        .should('exist')
-        .parent()
-        .parent()
-        .find('button')
-        .eq(1)
-        .click();
+        .should('exist');
 
     cy.contains('Close')
-        .click();
-
-    cy.get('[data-test="online-list-table"]')
-        .contains('Status')
         .click();
 
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
-    cy.contains('Update view')
+    cy.contains('Delete view')
         .click();
 
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
-        .then((sharingUrl) => {
-            cy.request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'CLBKvCKspBk',
-                    name: 'Events today',
-                    displayName: 'Events today',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [],
-                    externalAccess: false,
-                },
-            });
-        });
+    cy.contains('Confirm')
+        .click();
 });
 Given('you open the main page with Ngelehun and Inpatient morbidity and mortality context', () => {
     cy.visit('#/?programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8');
@@ -436,7 +425,7 @@ When('you set the date of admission filter', () => {
         });
 });
 
-When('you save the view as dateFilterWorkingList', () => {
+When(/^you save the view as (.*)$/, (name) => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
@@ -444,7 +433,7 @@ When('you save the view as dateFilterWorkingList', () => {
         .click();
 
     cy.get('[data-test="view-name-content"]')
-        .type('dateFilterWorkingList');
+        .type(name);
 
     cy.server();
     cy.route('POST', '**/eventFilters**').as('newEventFilter');
@@ -513,4 +502,24 @@ When('the user selects CARE International', () => {
 Then('the working list should be displayed', () => {
     cy.get('[data-test="main-page-working-list"]')
         .find('tr');
+});
+
+When('you delete the name toDeleteWorkingList', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.contains('Delete view')
+        .click();
+    cy.server();
+    cy.route('DELETE', '**/eventFilters/**').as('deleteEventFilters');
+    cy.get('button')
+        .contains('Confirm')
+        .click();
+    cy.wait('@deleteEventFilters', { timeout: 30000 });
+});
+
+Then('the custom events working list is deleted', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.contains('toDeleteWorkingList').should('not.exist');
+        });
 });

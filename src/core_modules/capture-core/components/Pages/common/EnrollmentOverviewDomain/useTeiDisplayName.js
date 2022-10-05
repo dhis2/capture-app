@@ -39,8 +39,8 @@ export const useTeiDisplayName = (teiId: string, programId: string) => {
     const { error, data } = useDataQuery(
         useMemo(
             () => ({
-                trackedEntityInstances: {
-                    resource: `trackedEntityInstances/${teiId}`,
+                trackedEntities: {
+                    resource: `tracker/trackedEntities/${teiId}`,
                     params: {
                         fields: ['attributes', 'trackedEntityType'],
                         program: [programId],
@@ -51,16 +51,16 @@ export const useTeiDisplayName = (teiId: string, programId: string) => {
         ),
     );
     useEffect(() => {
-        if (data?.trackedEntityInstances?.attributes && data?.trackedEntityInstances?.trackedEntityType) {
+        if (data?.trackedEntities?.attributes && data?.trackedEntities?.trackedEntityType) {
             setTeiDisplayName(
                 deriveTeiName(
-                    data.trackedEntityInstances.attributes,
-                    data.trackedEntityInstances.trackedEntityType,
+                    data.trackedEntities.attributes,
+                    data.trackedEntities.trackedEntityType,
                     teiId,
                 ),
             );
         }
-    }, [data?.trackedEntityInstances, teiId]);
+    }, [data?.trackedEntities, teiId]);
 
     return {
         error,

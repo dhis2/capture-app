@@ -1,2 +1,2 @@
 // @flow
-export { initTeiViewEpic, updateTeiListEpic } from './teiViewEpics';
+export { initTeiViewEpic, updateTeiListEpic, retrieveTemplatesEpic, updateTemplateEpic, addTemplateEpic, deleteTemplateEpic } from './teiViewEpics';

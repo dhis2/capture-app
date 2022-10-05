@@ -39,7 +39,7 @@ class ScopeSelectorClass extends Component<Props, State> {
 
     handleOpenCatComboWarning = (categoryId: string) => {
         if (this.dontShowWarning()) {
-            this.props.onResetCategoryOption(categoryId);
+            this.props.onResetCategoryOption && this.props.onResetCategoryOption(categoryId);
             return;
         }
         this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
@@ -66,12 +66,13 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     handleAcceptCatCombo = () => {
-        this.props.onResetCategoryOption(this.state.categoryIdToReset);
+        this.props.onResetCategoryOption && this.props.onResetCategoryOption(this.state.categoryIdToReset);
         this.handleClose();
     }
 
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
+
         return (
             <div data-test={'scope-selector'}>
                 <QuickSelector
@@ -82,9 +83,11 @@ class ScopeSelectorClass extends Component<Props, State> {
                     onResetOrgUnitId={this.handleOpenOrgUnitWarning}
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
+                    previousOrgUnitId={this.props.previousOrgUnitId}
                     selectedOrgUnitId={this.props.selectedOrgUnitId}
                     selectedProgramId={this.props.selectedProgramId}
                     selectedOrgUnit={this.props.selectedOrgUnit}
+                    selectedCategories={this.props.selectedCategories}
                 >
                     {this.props.children}
                 </QuickSelector>

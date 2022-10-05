@@ -12,6 +12,7 @@ type Props = {
     calendarWidth?: ?number,
     calendarHeight?: ?number,
     inputWidth?: ?number,
+    disabled?: ?boolean,
     onBlur: (value: string) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,

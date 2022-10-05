@@ -2,8 +2,9 @@
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { TextFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
-export const getTextFieldConfigForCustomForm = (metaData: MetaDataElement, extraProps?: ?Object) => {
+export const getTextFieldConfigForCustomForm = (metaData: MetaDataElement, options: Object, querySingleResource: QuerySingleResource, extraProps?: ?Object) => {
     const props = createProps({
         multiLine: extraProps && extraProps.multiLine,
     }, metaData);
@@ -11,5 +12,5 @@ export const getTextFieldConfigForCustomForm = (metaData: MetaDataElement, extra
     return createFieldConfig({
         component: TextFieldForCustomForm,
         props,
-    }, metaData);
+    }, metaData, querySingleResource);
 };

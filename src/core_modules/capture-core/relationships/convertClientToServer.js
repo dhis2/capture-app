@@ -2,14 +2,10 @@
 
 const getServerConstraintByType = {
     TRACKED_ENTITY_INSTANCE: entityId => ({
-        trackedEntityInstance: {
-            trackedEntityInstance: entityId,
-        },
+        trackedEntity: { trackedEntity: entityId },
     }),
     PROGRAM_STAGE_INSTANCE: entityId => ({
-        event: {
-            event: entityId,
-        },
+        event: { event: entityId },
     }),
 };
 

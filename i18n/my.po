@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-09T13:29:42.807Z\n"
+"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2022\n"
 "Language-Team: Burmese (https://www.transifex.com/hisp-uio/teams/100509/my/)\n"
@@ -130,6 +130,9 @@ msgid "Enrollment"
 msgstr ""
 
 msgid "A future date is not allowed"
+msgstr ""
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
@@ -295,9 +298,6 @@ msgstr ""
 msgid "Registered person"
 msgstr ""
 
-msgid "Link"
-msgstr ""
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
@@ -373,7 +373,13 @@ msgstr ""
 msgid "to"
 msgstr "သို့"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
+msgstr ""
+
+msgid "Days in the past"
 msgstr ""
 
 msgid "To"
@@ -397,7 +403,10 @@ msgstr "ယခင်လ"
 msgid "Last 3 months"
 msgstr "လွန်ခဲ့သော ၁၂လ"
 
-msgid "Custom range"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
 msgstr ""
 
 msgid "Max"
@@ -517,57 +526,6 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
-msgid "New"
-msgstr "အသစ်"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr ""
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "ရွေးချယ်ပါ။"
-
-msgid "Program"
-msgstr ""
-
-msgid "No programs available."
-msgstr ""
-
-msgid "Show all"
-msgstr ""
-
-msgid "Selected program"
-msgstr ""
-
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Select program"
-msgstr "Select Program"
-
-msgid "Selected"
-msgstr "‌ရွေးချယ်ထားပြီး"
-
 msgid "Online"
 msgstr "အင်တာနက်နှင့်ချိတ်ဆက်ထားသည်"
 
@@ -584,6 +542,24 @@ msgid "You dont have access to write comments"
 msgstr ""
 
 msgid "Write comment"
+msgstr ""
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr ""
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
 msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
@@ -623,16 +599,16 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -739,6 +715,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "အသစ်"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -748,11 +727,17 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
+msgstr ""
+
+msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Save new"
@@ -761,7 +746,19 @@ msgstr ""
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
+msgid "Link"
+msgstr ""
+
 msgid "Save as new {{trackedEntityName}}"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Program"
 msgstr ""
 
 msgid "Organisation Unit"
@@ -804,6 +801,17 @@ msgstr ""
 msgid "Search by attributes"
 msgstr ""
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
 msgid "Back"
 msgstr "‌နောက်သို့ပြန်သွားသည်"
 
@@ -825,6 +833,9 @@ msgid ""
 "looking for."
 msgstr ""
 
+msgid "Register a user"
+msgstr ""
+
 msgid "Back to search"
 msgstr ""
 
@@ -844,6 +855,9 @@ msgid ""
 "searching by more attributes to narrow down the results."
 msgstr ""
 
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Choose a type to start searching"
 msgstr ""
 
@@ -851,6 +865,15 @@ msgid "View active enrollment"
 msgstr ""
 
 msgid "Re-enroll"
+msgstr ""
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
 msgstr ""
 
 msgid ""
@@ -920,6 +943,36 @@ msgstr ""
 msgid "Add relationship"
 msgstr ""
 
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "ရွေးချယ်ပါ။"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Selected program"
+msgstr ""
+
+msgid "Select program"
+msgstr "Select Program"
+
+msgid "Selected"
+msgstr "‌ရွေးချယ်ထားပြီး"
+
 msgid "Results found"
 msgstr ""
 
@@ -927,6 +980,15 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
 msgstr ""
 
 msgid "To work with the selected program,"
@@ -942,6 +1004,12 @@ msgid "Enrollment actions"
 msgstr ""
 
 msgid "We are processing your request."
+msgstr ""
+
+msgid "Add new"
+msgstr "အသစ်ထည့်ခြင်း"
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Reactivate"
@@ -961,9 +1029,6 @@ msgid ""
 "remove the current enrollment."
 msgstr ""
 
-msgid "No, cancel"
-msgstr ""
-
 msgid "Yes, delete enrollment."
 msgstr ""
 
@@ -973,17 +1038,17 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "စောင့်ကြပ်ကြည့်ရှုခြင်း"
-
 msgid "Enrollment date"
 msgstr "Дата зачисления"
 
 msgid "Incident date"
 msgstr "Incident date"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "စောင့်ကြပ်ကြည့်ရှုခြင်း"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
@@ -1006,10 +1071,10 @@ msgstr ""
 msgid "This enrollment doesn't have any comments"
 msgstr ""
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "organisation unit could not be retrieved. Please try again later."
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 
 msgid "program or stage is invalid"
@@ -1033,10 +1098,19 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Delete event"
+msgstr ""
+
+msgid "Yes, delete event"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"
@@ -1084,22 +1158,37 @@ msgid ""
 "Enrollment box on this dashboard"
 msgstr ""
 
+msgid " Loading..."
+msgstr ""
+
 msgid "Save changes"
 msgstr ""
 
 msgid "Profile"
 msgstr "အတ္ထုပ္ပတ္တိအကျဉ်း"
 
-msgid "There are errors in this form"
+msgid "There is a problem with this form"
 msgstr ""
 
 msgid "There are warnings in this form"
 msgstr ""
 
+msgid "There was a problem saving changes"
+msgstr ""
+
+msgid "Try again or contact your system administrator for support"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr ""
+
+msgid "Fix errors in the form to continue."
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Person Profile"
+msgid "{{TETName}} profile"
 msgstr ""
 
 msgid "Edit"
@@ -1123,14 +1212,11 @@ msgstr ""
 msgid "This stage can only have one event"
 msgstr ""
 
-msgid "Report date"
+msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Registering unit"
 msgstr ""
-
-msgid "Due date"
-msgstr "Дата выполнения"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
@@ -1145,9 +1231,6 @@ msgid "Stages and Events"
 msgstr ""
 
 msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "Delete event"
 msgstr ""
 
 msgid "Download as JSON"
@@ -1181,6 +1264,9 @@ msgid "Inactive"
 msgstr ""
 
 msgid "Working list could not be updated"
+msgstr ""
+
+msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
 
 msgid "Update view"
@@ -1273,7 +1359,10 @@ msgstr ""
 msgid "Error saving the enrollment event"
 msgstr ""
 
-msgid "tracked entity instance"
+msgid "Error deleting the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"

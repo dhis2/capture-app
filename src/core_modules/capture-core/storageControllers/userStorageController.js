@@ -1,10 +1,8 @@
 // @flow
 import { StorageController, IndexedDBAdapter } from 'capture-core-utils/storage';
-import { getCurrentUser } from '../d2/d2Instance';
 import { userStores } from './stores/index';
 
-function getStorageName(mainStorageName: string) {
-    const user = getCurrentUser();
+function getStorageName(mainStorageName: string, user: { id: string }) {
     return mainStorageName + user.id;
 }
 
@@ -15,8 +13,9 @@ function getStores() {
 
 function createStorageController(
     mainStorageController: typeof StorageController,
+    currentUser: { id: string },
 ) {
-    const storageName = getStorageName(mainStorageController.name);
+    const storageName = getStorageName(mainStorageController.name, currentUser);
     const appCacheVersion = mainStorageController.version;
     const stores = getStores();
     const storageController =
@@ -44,11 +43,14 @@ const storeSpecificCreateActions = {
     [userStores.PROGRAM_INDICATORS]: (objectStore) => {
         objectStore.createIndex('programId', 'programId');
     },
+    [userStores.ORGANISATION_UNIT_GROUPS]: (objectStore) => {
+        objectStore.createIndex('organisationUnitId', 'organisationUnitIds', { multiEntry: true });
+    },
 };
 
-export async function initUserControllerAsync(mainStorageController: typeof StorageController) {
+export async function initUserControllerAsync(mainStorageController: typeof StorageController, currentUser: { id: string }) {
     const userStorageController =
-        createStorageController(mainStorageController);
+        createStorageController(mainStorageController, currentUser);
 
     let upgradeTempData;
     await userStorageController

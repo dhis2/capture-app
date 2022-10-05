@@ -50,12 +50,15 @@ export const EnrollmentPageDefaultPlain = ({
     enrollmentId,
     stages,
     onDelete,
+    onAddNew,
     onViewAll,
     onCreateNew,
     widgetEffects,
     hideWidgets,
     classes,
     onEventClick,
+    onUpdateTeiAttributeValues,
+    onEnrollmentError,
 }: PlainProps) => (
     <>
         <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
@@ -66,6 +69,7 @@ export const EnrollmentPageDefaultPlain = ({
                     events={events}
                 />
                 <WidgetStagesAndEvents
+                    programId={program.id}
                     stages={stages}
                     events={events}
                     onViewAll={onViewAll}
@@ -89,12 +93,20 @@ export const EnrollmentPageDefaultPlain = ({
                         emptyText={i18n.t('No feedback for this enrollment yet')}
                     />
                 )}
-                <WidgetProfile teiId={teiId} programId={program.id} showEdit orgUnitId={orgUnitId} />
+                <WidgetProfile
+                    teiId={teiId}
+                    programId={program.id}
+                    orgUnitId={orgUnitId}
+                    onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
+                    showEdit
+                />
                 {enrollmentId !== 'AUTO' && <WidgetEnrollment
                     teiId={teiId}
                     enrollmentId={enrollmentId}
                     programId={program.id}
                     onDelete={onDelete}
+                    onAddNew={onAddNew}
+                    onError={onEnrollmentError}
                 />}
             </div>
         </div>

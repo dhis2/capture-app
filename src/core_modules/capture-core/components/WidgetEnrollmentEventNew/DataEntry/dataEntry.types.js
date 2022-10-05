@@ -1,6 +1,7 @@
 // @flow
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import type { ProgramStage, RenderFoundation } from '../../../metaData';
-import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../common.types';
+import type { RulesExecutionDependenciesClientFormatted } from '../common.types';
 
 export type ContainerProps = {|
     stage: ProgramStage,

@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
+import uuid from 'uuid/v4';
 import i18n from '@dhis2/d2-i18n';
 import {
     dataElementTypes,
@@ -10,7 +11,10 @@ import { WorkingListsBase } from '../../WorkingListsBase';
 import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
+import { convertToTEIFilterMainFilters, convertToTEIFilterAttributes } from '../helpers/TEIFilters/clientConfigToApiTEIFilterQueryConverter';
+import { MAIN_FILTERS } from '../constants';
 
+const DEFAULT_TEMPLATES_LENGTH = 1;
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
     (currentTemplateId && templates.find(template => template.id === currentTemplateId)) || templates[0],
 [templates, currentTemplateId]);
@@ -66,77 +70,78 @@ const useStaticTemplates = () => useMemo(() => ([{
     },
 }]), []);
 
-const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel } }: TrackerProgram) => useMemo(() => [{
-    id: 'programStatus',
-    type: dataElementTypes.TEXT,
-    header: i18n.t('Enrollment status'),
-    options: [
-        { text: i18n.t('Active'), value: 'ACTIVE' },
-        { text: i18n.t('Completed'), value: 'COMPLETED' },
-        { text: i18n.t('Cancelled'), value: 'CANCELLED' },
-    ],
-    transformRecordsFilter: (rawFilter: string) => ({
-        programStatus: rawFilter.split(':')[1],
-    }),
-}, {
-    id: 'enrollmentDate',
-    type: dataElementTypes.DATE,
-    header: enrollmentDateLabel,
-    transformRecordsFilter: (filter: Array<string> | string) => {
-        let queryArgs = {};
-        if (Array.isArray(filter)) {
-            queryArgs = filter
-                .reduce((acc, filterPart: string) => {
-                    if (filterPart.startsWith('ge')) {
-                        acc.programStartDate = filterPart.replace('ge:', '');
-                    } else {
-                        acc.programEndDate = filterPart.replace('le:', '');
+const useFiltersOnly = ({
+    enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate },
+    stages,
+}: TrackerProgram) =>
+    useMemo(() => {
+        const enableUserAssignment = Array.from(stages.values()).find(stage => stage.enableUserAssignment);
+
+        return [
+            {
+                id: MAIN_FILTERS.PROGRAM_STATUS,
+                type: dataElementTypes.TEXT,
+                header: i18n.t('Enrollment status'),
+                options: [
+                    { text: i18n.t('Active'), value: 'ACTIVE' },
+                    { text: i18n.t('Completed'), value: 'COMPLETED' },
+                    { text: i18n.t('Cancelled'), value: 'CANCELLED' },
+                ],
+                transformRecordsFilter: (rawFilter: string) => ({
+                    programStatus: rawFilter.split(':')[1],
+                }),
+            },
+            {
+                id: MAIN_FILTERS.ENROLLED_AT,
+                type: dataElementTypes.DATE,
+                header: enrollmentDateLabel,
+                transformRecordsFilter: (filter: string) => {
+                    const queryArgs = {};
+                    const filterParts = filter.split(':');
+                    const indexGe = filterParts.indexOf('ge');
+                    const indexLe = filterParts.indexOf('le');
+                    if (indexGe !== -1 && filterParts[indexGe + 1]) {
+                        queryArgs.enrollmentEnrolledAfter = filterParts[indexGe + 1];
                     }
-                    return acc;
-                }, {});
-        } else if (filter.startsWith('ge')) {
-            queryArgs.programStartDate = filter.replace('ge:', '');
-        } else {
-            queryArgs.programEndDate = filter.replace('le:', '');
-        }
-        return queryArgs;
-    },
-}, {
-    id: 'incidentDate',
-    type: dataElementTypes.DATE,
-    header: incidentDateLabel,
-    transformRecordsFilter: (filter: Array<string> | string) => {
-        let queryArgs = {};
-        if (Array.isArray(filter)) {
-            queryArgs = filter
-                .reduce((acc, filterPart: string) => {
-                    if (filterPart.startsWith('ge')) {
-                        acc.programIncidentStartDate = filterPart.replace('ge:', '');
-                    } else {
-                        acc.programIncidentEndDate = filterPart.replace('le:', '');
+                    if (indexLe !== -1 && filterParts[indexLe + 1]) {
+                        queryArgs.enrollmentEnrolledBefore = filterParts[indexLe + 1];
                     }
-                    return acc;
-                }, {});
-        } else if (filter.startsWith('ge')) {
-            queryArgs.programIncidentStartDate = filter.replace('ge:', '');
-        } else {
-            queryArgs.programIncidentEndDate = filter.replace('le:', '');
-        }
-        return queryArgs;
-    },
-}, {
-    id: 'assignee',
-    type: dataElementTypes.ASSIGNEE,
-    header: i18n.t('Assigned to'),
-    transformRecordsFilter: (rawFilter: Object) => rawFilter,
-}], [enrollmentDateLabel, incidentDateLabel]);
+                    return queryArgs;
+                },
+            },
+            ...(showIncidentDate ? [{
+                id: MAIN_FILTERS.OCCURED_AT,
+                type: dataElementTypes.DATE,
+                header: incidentDateLabel,
+                transformRecordsFilter: (filter: string) => {
+                    const queryArgs = {};
+                    const filterParts = filter.split(':');
+                    const indexGe = filterParts.indexOf('ge');
+                    const indexLe = filterParts.indexOf('le');
+                    if (indexGe !== -1 && filterParts[indexGe + 1]) {
+                        queryArgs.enrollmentOccurredAfter = filterParts[indexGe + 1];
+                    }
+                    if (indexLe !== -1 && filterParts[indexLe + 1]) {
+                        queryArgs.enrollmentOccurredBefore = filterParts[indexLe + 1];
+                    }
+                    return queryArgs;
+                },
+            }] : []),
+            ...(enableUserAssignment ? [{
+                id: MAIN_FILTERS.ASSIGNEE,
+                type: dataElementTypes.ASSIGNEE,
+                header: i18n.t('Assigned to'),
+                transformRecordsFilter: (rawFilter: Object) => rawFilter,
+            }] : []),
+        ];
+    }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages]);
 
 const useInjectDataFetchingMetaToLoadList = (defaultColumns, filtersOnly, onLoadView) =>
     useCallback((selectedTemplate: Object, context: Object) => {
         const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
-                .map(({ id, type, mainProperty, apiName, visible }) => [id, { id, type, mainProperty, apiName, visible }]),
+                .map(({ id, type, mainProperty, visible }) => [id, { id, type, mainProperty, visible }]),
         );
         const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
             filtersOnly
@@ -150,7 +155,7 @@ const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, onUp
         const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
-                .map(({ id, type, apiName, mainProperty }) => [id, { id, type, apiName, mainProperty }]),
+                .map(({ id, type, mainProperty }) => [id, { id, type, mainProperty }]),
         );
         const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
             filtersOnly
@@ -172,12 +177,18 @@ export const TeiWorkingListsSetup = ({
     sortById,
     sortByDirection,
     orgUnitId,
+    apiTemplates,
+    onAddTemplate,
+    onUpdateTemplate,
+    onDeleteTemplate,
     ...passOnProps
 }: Props) => {
     const defaultColumns = useDefaultColumnConfig(program, orgUnitId);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
-    const templates = useStaticTemplates();
+    const staticTemplates = useStaticTemplates();
+    const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
+
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
         defaultColumns,
@@ -187,12 +198,62 @@ export const TeiWorkingListsSetup = ({
         sortByDirection,
     });
 
+    const injectArgumentsForAddTemplate = useCallback(
+        (name) => {
+            const mainFilters = convertToTEIFilterMainFilters({ filters, mainFilters: filtersOnly });
+            const attributeValueFilters = convertToTEIFilterAttributes({ filters, attributeValueFilters: columns });
+            const visibleColumnIds = columns && columns.filter(({ visible }) => visible).map(({ id }) => id);
+            const criteria = { ...mainFilters,
+                attributeValueFilters,
+                order: `${sortById}:${sortByDirection}`,
+                displayColumnOrder: visibleColumnIds };
+            const data = {
+                program: { id: program.id },
+                clientId: uuid(),
+                sortById,
+                sortByDirection,
+                filters,
+                visibleColumnIds,
+            };
+            onAddTemplate(name, criteria, data);
+        },
+        [onAddTemplate, filters, filtersOnly, columns, sortById, sortByDirection, program.id],
+    );
+
+    const injectArgumentsForUpdateTemplate = useCallback(
+        (template) => {
+            const mainFilters = convertToTEIFilterMainFilters({ filters, mainFilters: filtersOnly });
+            const attributeValueFilters = convertToTEIFilterAttributes({ filters, attributeValueFilters: columns });
+            const visibleColumnIds = columns && columns.filter(({ visible }) => visible).map(({ id }) => id);
+            const criteria = { ...mainFilters,
+                attributeValueFilters,
+                order: `${sortById}:${sortByDirection}`,
+                displayColumnOrder: visibleColumnIds,
+            };
+            const data = {
+                program: { id: program.id },
+                clientId: uuid(),
+                sortById,
+                sortByDirection,
+                filters,
+                visibleColumnIds,
+            };
+            onUpdateTemplate(template, criteria, data);
+        },
+        [onUpdateTemplate, filters, filtersOnly, columns, sortById, sortByDirection, program.id],
+    );
+
+    const injectArgumentsForDeleteTemplate = useCallback(template => onDeleteTemplate(template, program.id), [onDeleteTemplate, program.id]);
+
     return (
         <WorkingListsBase
             {...passOnProps}
             currentTemplate={useCurrentTemplate(templates, currentTemplateId)}
             templates={templates}
             columns={columns}
+            onAddTemplate={injectArgumentsForAddTemplate}
+            onUpdateTemplate={injectArgumentsForUpdateTemplate}
+            onDeleteTemplate={injectArgumentsForDeleteTemplate}
             filtersOnly={filtersOnly}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectDataFetchingMetaToLoadList(defaultColumns, filtersOnly, onLoadView)}

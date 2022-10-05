@@ -49,7 +49,6 @@ import {
 import {
     organisationUnitDesc,
     organisationUnitRootsDesc,
-    registeringUnitListDesc,
 } from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
 import { networkStatusDesc } from 'capture-core/reducers/descriptions/networkStatus.reducerDescription';
 import {
@@ -70,8 +69,6 @@ import {
     generatedUniqueValuesCacheDesc,
 } from 'capture-core/reducers/descriptions/generatedUniqueValuesCache.reducerDescription';
 
-import { dataEntriesSearchGroupResultsReducerDesc } from 'capture-core/components/DataEntryUtils';
-
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
 import { feedbackDesc } from './feedback.reducerDescription';
@@ -81,6 +78,7 @@ import { enrollmentPageDesc } from '../../core_modules/capture-core/reducers/des
 import { enrollmentDomainDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentDomain.reducerDescription';
 import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
 import { possibleDuplicatesDesc } from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
+import { trackedEntityInstanceDesc } from '../../core_modules/capture-core/reducers/descriptions/trackedEntityInstance.reducerDescription';
 
 export const reducerDescriptions = [
     activePageDesc,
@@ -98,7 +96,6 @@ export const reducerDescriptions = [
     dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
-    dataEntriesSearchGroupResultsReducerDesc,
     dataEntriesInProgressListDesc,
     feedbackDesc,
     formsValuesDesc,
@@ -116,7 +113,6 @@ export const reducerDescriptions = [
     organisationUnitDesc,
     organisationUnitRootsDesc,
     possibleDuplicatesDesc,
-    registeringUnitListDesc,
     recentlyAddedEventsDesc,
     recentlyAddedEventsValuesDesc,
     relationshipsDesc,
@@ -132,6 +128,7 @@ export const reducerDescriptions = [
     ruleEffectsOptionsVisibilityDesc,
     searchPageDesc,
     teiSearchDesc,
+    trackedEntityInstanceDesc,
     dataStoreDesc,
     viewEventPageDesc,
     workingListsDesc,

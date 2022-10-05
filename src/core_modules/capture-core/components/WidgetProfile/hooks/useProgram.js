@@ -9,7 +9,7 @@ const fields =
     'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
     'programIndicators[id,displayName,code,shortName,style,displayInForm,expression,displayDescription,description,filter,program[id]],' +
     'programSections[id, displayFormName, sortOrder, trackedEntityAttributes],' +
-    'programRuleVariables[id,displayName,programRuleVariableSourceType,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet],' +
+    'programRuleVariables[id,displayName,programRuleVariableSourceType,valueType,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet],' +
     'programStages[id,access,autoGenerateEvent,openAfterEnrollment,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,displayName,description,executionDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,' +
         'dataEntryForm[id,htmlCode],' +
         'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],' +

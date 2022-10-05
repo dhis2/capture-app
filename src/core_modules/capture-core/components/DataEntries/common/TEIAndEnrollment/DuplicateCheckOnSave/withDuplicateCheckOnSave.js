@@ -35,14 +35,14 @@ export const withDuplicateCheckOnSave = () => (WrappedComponent: ComponentType<a
     duplicatesReviewPageSize,
     renderDuplicatesCardActions,
     renderDuplicatesDialogActions,
+    skipDuplicateCheck,
     ...passOnProps
 }: Props) => {
-    const { metadata, scopeType, passOnMetadata } = getMetadataInfo(enrollmentMetadata, teiRegistrationMetadata);
+    const { metadata, passOnMetadata } = getMetadataInfo(enrollmentMetadata, teiRegistrationMetadata);
 
     const {
-        onCheckForDuplicate,
-        onResetCheckForDuplicate,
-        duplicateInfo,
+        hasDuplicate,
+        onResetPossibleDuplicates,
         onReviewDuplicates,
     } = useDuplicateCheckerOnSaveReduxProvider(id, selectedScopeId);
 
@@ -52,13 +52,10 @@ export const withDuplicateCheckOnSave = () => (WrappedComponent: ComponentType<a
         closeDuplicates,
     } = useDuplicateCheckerOnSave({
         onSave,
-        duplicateInfo,
-        onCheckForDuplicate,
-        onResetCheckForDuplicate,
+        hasDuplicate,
+        onResetPossibleDuplicates,
         onReviewDuplicates,
         searchGroup: metadata?.inputSearchGroups && metadata.inputSearchGroups[0],
-        scopeType,
-        selectedScopeId,
         duplicatesReviewPageSize,
     });
 
@@ -74,7 +71,7 @@ export const withDuplicateCheckOnSave = () => (WrappedComponent: ComponentType<a
             <WrappedComponent
                 {...passOnProps}
                 {...passOnMetadata}
-                onSave={handleSaveAttempt}
+                onSave={skipDuplicateCheck ? onSave : handleSaveAttempt}
                 id={id}
                 selectedScopeId={selectedScopeId}
             />

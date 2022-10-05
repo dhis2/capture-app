@@ -1,11 +1,8 @@
+import uuid from 'uuid/v4';
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 When('you add data to the form', () => {
-    cy.get('[data-test="dataentry-field-eventDate"]')
+    cy.get('[data-test="dataentry-field-occurredAt"]')
         .find('input')
         .type('2020-01-01')
         .blur();
@@ -19,17 +16,17 @@ When('you add data to the form', () => {
 
 When('you submit the form', () => {
     cy.server();
-    cy.route('POST', '**/events').as('postEvent');
+    cy.route('POST', '**/tracker?async=false').as('postData');
     cy.get('[data-test="dhis2-uicore-splitbutton-button"]')
         .click();
 });
 
 Then('the event should be sent to the server successfully', () => {
-    cy.wait('@postEvent', { timeout: 30000 })
+    cy.wait('@postData', { timeout: 30000 })
         .then((result) => {
             expect(result.status).to.equal(200);
             // clean up
-            const id = result.response.body.response.importSummaries[0].reference;
+            const id = result.response.body.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
             cy.buildApiUrl('events', id)
                 .then((eventUrl) => {
                     cy.request('DELETE', eventUrl);
@@ -41,19 +38,18 @@ Then('the event should be sent to the server successfully', () => {
 When('you fill in the registration details', () => {
     cy.get('[data-test="relationship-register-tei-program-selector"]')
         .find('input')
-        .type('Child{enter}', { force: true });
-    cy.get('[data-test="form-field-w75KJ2mc4zz"]')
+        .type('Provider', { force: true });
+    cy.contains('Provider Follow-up and Support Tool').click();
+    cy.contains('[data-test="form-field"]', 'Provider ID')
         .find('input')
-        .type('Sarah');
-    cy.get('[data-test="form-field-zDhUuAYrxNC"]')
+        .type(uuid());
+    cy.contains('[data-test="form-field"]', 'First name')
         .find('input')
-        .type('Gonz');
-    cy.get('[data-test="form-field-cejWyOfXge6"]')
+        .type('Elanor');
+    cy.contains('[data-test="form-field"]', 'Last name')
         .find('input')
-        .type('Female', { force: true })
-        .wait(500)
-        .type('{enter}', { force: true });
-    cy.get('[data-test="dataentry-field-incidentDate"]')
+        .type('Kaleno');
+    cy.get('[data-test="dataentry-field-occurredAt"]')
         .find('input')
         .type('2020-01-01')
         .blur();
@@ -67,41 +63,56 @@ When('you submit the registration form', () => {
 });
 
 When('you submit the event form with the associated relationship to the newly created person', () => {
-    cy.server();
-    cy.route('POST', '**/events').as('postEvent');
-    cy.route('POST', '**/trackedEntityInstances').as('postTrackedEntityInstance');
-    cy.route('POST', '**/relationships').as('postRelationship');
+    cy.intercept('POST', '**/tracker?async=false', (req) => {
+        if (req.body.events) {
+            req.alias = 'postEventData';
+        } else if (req.body.trackedEntities) {
+            req.alias = 'postTrackedEntityData';
+        } else {
+            req.alias = 'postRelationshipData';
+        }
+    });
+
     cy.get('[data-test="dhis2-uicore-splitbutton-button"]')
         .click();
 });
 
 Then('the data should be sent to the server successfully', () => {
-    cy.wait('@postTrackedEntityInstance', { timeout: 30000 }).should('have.property', 'status', 200);
-    cy.wait('@postEvent', { timeout: 20000 }).should('have.property', 'status', 200);
-    cy.wait('@postRelationship', { timeout: 20000 }).should('have.property', 'status', 200);
+    // verifying and cleaning up
+    cy.wait('@postEventData', { timeout: 20000 });
+    cy.wait('@postTrackedEntityData', { timeout: 20000 });
+    cy.wait('@postRelationshipData', { timeout: 20000 });
 
-    // clean up
-    cy.get('@postRelationship').then((result) => {
-        const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildApiUrl('relationships', id)
-            .then((relationshipUrl) => {
-                cy.request('DELETE', relationshipUrl);
-            });
-    });
-    cy.get('@postTrackedEntityInstance').then((result) => {
-        const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildApiUrl('trackedEntityInstances', id)
-            .then((trackedEntityInstanceUrl) => {
-                cy.request('DELETE', trackedEntityInstanceUrl);
-            });
-    });
-    cy.get('@postEvent').then((result) => {
-        const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildApiUrl('events', id)
-            .then((eventUrl) => {
-                cy.request('DELETE', eventUrl);
-            });
-    });
+    cy.get('@postRelationshipData')
+        .then(({ response }) => {
+            expect(response.statusCode).to.equal(200);
+            const relationshipId = response.body.bundleReport.typeReportMap.RELATIONSHIP.objectReports[0].uid;
+            cy.buildApiUrl('relationships', relationshipId)
+                .then((relationshipUrl) => {
+                    cy.request('DELETE', relationshipUrl);
+                });
+        })
+        .then(() => {
+            cy.get('@postTrackedEntityData')
+                .then(({ response }) => {
+                    expect(response.statusCode).to.equal(200);
+                    const trackedEntityId = response.body.bundleReport.typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
+                    cy.buildApiUrl('trackedEntityInstances', trackedEntityId)
+                        .then((trackedEntityUrl) => {
+                            cy.request('DELETE', trackedEntityUrl);
+                        });
+                });
+
+            cy.get('@postEventData')
+                .then(({ response }) => {
+                    expect(response.statusCode).to.equal(200);
+                    const eventId = response.body.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
+                    cy.buildApiUrl('events', eventId)
+                        .then((eventUrl) => {
+                            cy.request('DELETE', eventUrl);
+                        });
+                });
+        });
 });
 
 When('you search for an existing unique id and link to the person', () => {
@@ -119,44 +130,41 @@ When('you search for an existing unique id and link to the person', () => {
 
 
 When('you submit the event form with the associated relationship to the already existing person', () => {
-    cy.server();
-    cy.route('POST', '**/events').as('postEvent');
-    cy.route('POST', '**/relationships').as('postRelationship');
+    cy.intercept('POST', '**/tracker?async=false', (req) => {
+        if (req.body.events) {
+            req.alias = 'postEventData';
+        } else {
+            req.alias = 'postRelationshipData';
+        }
+    });
     cy.get('[data-test="dhis2-uicore-splitbutton-button"]')
         .click();
 });
 
 
 Then('the event and relationship should be sent to the server successfully', () => {
-    cy.wait('@postEvent', { timeout: 20000 }).should('have.property', 'status', 200);
-    cy.wait('@postRelationship', { timeout: 20000 }).should('have.property', 'status', 200);
+    // verifying and cleaning up
+    cy.wait('@postEventData', { timeout: 20000 });
+    cy.wait('@postRelationshipData', { timeout: 20000 });
 
-    // clean up
-    cy.get('@postRelationship').then((result) => {
-        const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildApiUrl('relationships', id)
-            .then((relationshipUrl) => {
-                cy.request('DELETE', relationshipUrl);
-            });
-    });
-    cy.get('@postEvent').then((result) => {
-        const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildApiUrl('events', id)
-            .then((eventUrl) => {
-                cy.request('DELETE', eventUrl);
-            });
-    });
-});
-
-When('you select search scope TB program', () => {
-    cy.get('[data-test="virtualized-select"]')
-        .click()
-        .contains('TB prog')
-        .click();
-});
-
-And('you expand the attributes search area', () => {
-    cy.get('[data-test="collapsible-button"]')
-        .eq(4)
-        .click();
+    cy.get('@postRelationshipData')
+        .then(({ response }) => {
+            expect(response.statusCode).to.equal(200);
+            const relationshipId = response.body.bundleReport.typeReportMap.RELATIONSHIP.objectReports[0].uid;
+            cy.buildApiUrl('relationships', relationshipId)
+                .then((relationshipUrl) => {
+                    cy.request('DELETE', relationshipUrl);
+                });
+        })
+        .then(() => {
+            cy.get('@postEventData')
+                .then(({ response }) => {
+                    expect(response.statusCode).to.equal(200);
+                    const eventId = response.body.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
+                    cy.buildApiUrl('events', eventId)
+                        .then((eventUrl) => {
+                            cy.request('DELETE', eventUrl);
+                        });
+                });
+        });
 });

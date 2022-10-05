@@ -21,21 +21,27 @@ import {
     getDateTimeRangeFieldConfig,
     getViewModeFieldConfig,
 } from './configs';
+import type { QuerySingleResource } from '../../../utils/api/api.types';
 
 const errorMessages = {
     NO_FORMFIELD_FOR_TYPE: 'Formfield component not specified for type',
 };
 
 type FieldForTypes = {
-    [type: $Keys<typeof dataElementTypes>]: (metaData: DataElement, options: Object, context: Object) => any,
+    [type: $Keys<typeof dataElementTypes>]: (
+        metaData: DataElement,
+        options: Object,
+        querySingleResource: QuerySingleResource,
+    ) => any,
 }
 
 const fieldForTypes: FieldForTypes = {
     [dataElementTypes.EMAIL]: getTextFieldConfig,
     [dataElementTypes.TEXT]: getTextFieldConfig,
     [dataElementTypes.PHONE_NUMBER]: getTextFieldConfig,
-    [dataElementTypes.LONG_TEXT]: (metaData: DataElement, options: Object, context: Object) => {
-        const fieldConfig = getTextFieldConfig(metaData, options, context, { multiLine: true });
+    [dataElementTypes.LONG_TEXT]:
+    (metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) => {
+        const fieldConfig = getTextFieldConfig(metaData, options, querySingleResource, { multiLine: true });
         return fieldConfig;
     },
     [dataElementTypes.NUMBER]: getTextFieldConfig,
@@ -50,7 +56,8 @@ const fieldForTypes: FieldForTypes = {
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: getTextRangeFieldConfig,
     [dataElementTypes.BOOLEAN]: getBooleanFieldConfig,
     [dataElementTypes.TRUE_ONLY]: getTrueOnlyFieldConfig,
-    [dataElementTypes.DATE]: (metaData: any, options: Object) => getDateFieldConfig(metaData, options),
+    [dataElementTypes.DATE]: (metaData: any, options: Object, querySingleResource: QuerySingleResource) =>
+        getDateFieldConfig(metaData, options, querySingleResource),
     [dataElementTypes.DATE_RANGE]: getDateRangeFieldConfig,
     [dataElementTypes.DATETIME]: getDateTimeFieldConfig,
     [dataElementTypes.DATETIME_RANGE]: getDateTimeRangeFieldConfig,
@@ -68,7 +75,7 @@ const fieldForTypes: FieldForTypes = {
     [dataElementTypes.UNKNOWN]: () => null,
 };
 
-export function getDefaultFormField(metaData: DataElement, options: Object, context: Object) {
+export function getDefaultFormField(metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) {
     if (options.viewMode) {
         return getViewModeFieldConfig(metaData, options);
     }
@@ -76,12 +83,12 @@ export function getDefaultFormField(metaData: DataElement, options: Object, cont
     const type = metaData.type;
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));
-        return fieldForTypes[dataElementTypes.UNKNOWN](metaData, options, context);
+        return fieldForTypes[dataElementTypes.UNKNOWN](metaData, options, querySingleResource);
     }
 
     if (metaData.optionSet) {
-        return getOptionSetFieldConfig(metaData, options);
+        return getOptionSetFieldConfig(metaData, options, querySingleResource);
     }
 
-    return fieldForTypes[type](metaData, options, context);
+    return fieldForTypes[type](metaData, options, querySingleResource);
 }

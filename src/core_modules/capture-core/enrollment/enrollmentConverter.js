@@ -6,18 +6,18 @@ import { convertValue as convertToClientValue } from '../converters/serverToClie
 type ConverterFn = (type: $Keys<typeof dataElementTypes>, value: any) => any;
 
 type InputCompareKeys = {
-    enrollmentDate?: ?string,
-    incidentDate?: ?string,
+    enrolledAt?: ?string,
+    occurredAt?: ?string,
 };
 
 type CompareKeys = {
-    enrollmentDate: string,
-    incidentDate: string,
+    enrolledAt: string,
+    occurredAt: string,
 };
 
 function getConvertedValue(valueToConvert: any, key: string, onConvertValue: ConverterFn, compareKeys: CompareKeys) {
     let convertedValue;
-    if (key === compareKeys.enrollmentDate || key === compareKeys.incidentDate) {
+    if (key === compareKeys.enrolledAt || key === compareKeys.occurredAt) {
         convertedValue = onConvertValue(valueToConvert, dataElementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
@@ -31,8 +31,8 @@ export function convertEnrollment(
     keyMap: Object = {},
     compareKeysMapFromDefault: InputCompareKeys = {}) {
     const calculatedCompareKeys: CompareKeys = {
-        enrollmentDate: compareKeysMapFromDefault.enrollmentDate || 'enrollmentDate',
-        incidentDate: compareKeysMapFromDefault.incidentDate || 'incidentDate',
+        enrolledAt: compareKeysMapFromDefault.enrolledAt || 'enrolledAt',
+        occurredAt: compareKeysMapFromDefault.occurredAt || 'occurredAt',
     };
 
     return Object

@@ -5,6 +5,7 @@ import { effectMethods } from '../../trackerOffline';
 export const scheduleEventWidgetActionTypes = {
     EVENT_SCHEDULE_REQUEST: 'ScheduleEvent.RequestScheduleEvent',
     EVENT_SCHEDULE: 'ScheduleEvent.ScheduleEvent',
+    EVENT_UPDATE_SCHEDULED_DATE: 'ScheduleEvent.UpdateScheduledDate',
 };
 
 export const requestScheduleEvent = ({
@@ -14,6 +15,7 @@ export const requestScheduleEvent = ({
     orgUnitId,
     stageId,
     teiId,
+    eventId,
     enrollmentId,
     onSaveExternal,
     onSaveSuccessActionType,
@@ -25,6 +27,7 @@ export const requestScheduleEvent = ({
     orgUnitId: string,
     stageId: string,
     teiId: string,
+    eventId: string,
     enrollmentId: string,
     onSaveExternal: (eventServerValues: Object, uid: string) => void,
     onSaveSuccessActionType?: string,
@@ -38,6 +41,7 @@ export const requestScheduleEvent = ({
         stageId,
         teiId,
         enrollmentId,
+        eventId,
         onSaveExternal,
         onSaveSuccessActionType,
         onSaveErrorActionType,
@@ -52,11 +56,28 @@ export const scheduleEvent = (
     actionCreator(scheduleEventWidgetActionTypes.EVENT_SCHEDULE)({}, {
         offline: {
             effect: {
-                url: 'events',
+                url: 'tracker?async=false',
                 method: effectMethods.POST,
                 data: serverData,
             },
-            commit: { type: onSaveSuccessActionType, meta: { serverData, uid } },
-            rollback: { type: onSaveErrorActionType, meta: { serverData, uid } },
+            commit: onSaveSuccessActionType && { type: onSaveSuccessActionType, meta: { serverData, uid } },
+            rollback: onSaveErrorActionType && { type: onSaveErrorActionType, meta: { serverData, uid } },
         },
     });
+
+export const updateScheduledDateForEvent = (
+    serverData: Object,
+    eventId: string,
+    onSaveSuccessActionType?: string,
+    onSaveErrorActionType?: string,
+) => actionCreator(scheduleEventWidgetActionTypes.EVENT_UPDATE_SCHEDULED_DATE)({}, {
+    offline: {
+        effect: {
+            url: 'tracker?async=false&importStrategy=UPDATE',
+            method: effectMethods.POST,
+            data: serverData,
+        },
+        commit: onSaveSuccessActionType && { type: onSaveSuccessActionType, meta: { eventId, serverData } },
+        rollback: onSaveErrorActionType && { type: onSaveErrorActionType, meta: { eventId, serverData } },
+    },
+});

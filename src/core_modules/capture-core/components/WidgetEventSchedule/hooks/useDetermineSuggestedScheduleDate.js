@@ -2,6 +2,8 @@
 import moment from 'moment';
 import { convertServerToClient, convertClientToForm } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
+import { convertStringToDateFormat } from '../../../utils/converters/date';
+
 
 const convertDate = (date): any => convertServerToClient(date, dataElementTypes.DATE);
 
@@ -46,17 +48,20 @@ type Props = {
     programConfig: {
         displayIncidentDate?: boolean
     },
-    enrollmentDate: string,
-    incidentDate: string,
+    enrolledAt: string,
+    occurredAt: string,
+    initialScheduleDate: string,
     eventData: Array<Object>
 }
 export const useDetermineSuggestedScheduleDate = ({
     programStageScheduleConfig,
     programConfig,
-    enrollmentDate,
-    incidentDate,
+    enrolledAt,
+    occurredAt,
     eventData,
+    initialScheduleDate,
 }: Props) => {
+    if (initialScheduleDate) { return convertStringToDateFormat(initialScheduleDate); }
     if (!programStageScheduleConfig) { return undefined; }
 
     const {
@@ -71,9 +76,9 @@ export const useDetermineSuggestedScheduleDate = ({
         () => {
             let suggestedScheduleDate;
             if (generatedByEnrollmentDate || !programConfig.displayIncidentDate) {
-                suggestedScheduleDate = moment(enrollmentDate).add(minDaysFromStart, 'days').format();
+                suggestedScheduleDate = moment(enrolledAt).add(minDaysFromStart, 'days').format();
             } else {
-                suggestedScheduleDate = moment(incidentDate).add(minDaysFromStart, 'days').format();
+                suggestedScheduleDate = moment(occurredAt).add(minDaysFromStart, 'days').format();
             }
             return suggestedScheduleDate;
         },
@@ -81,6 +86,6 @@ export const useDetermineSuggestedScheduleDate = ({
     const suggestedDate = scheduleDateComputeSteps.reduce((currentScheduleDate, computeScheduleDate) =>
         (!currentScheduleDate ? computeScheduleDate() : currentScheduleDate)
     , undefined);
-
-    return convertClientToForm(suggestedDate, dataElementTypes.DATE);
+    // $FlowFixMe dataElementTypes flow error
+    return convertStringToDateFormat(convertClientToForm(suggestedDate, dataElementTypes.DATE));
 };

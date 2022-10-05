@@ -3,7 +3,7 @@ import { actionTypes as dataStoreActionTypes } from '../../components/DataStore/
 
 
 export const dataStoreDesc = createReducerDescription({
-    [dataStoreActionTypes.FETCH_DATA_STORE]: (state, action) => {
+    [dataStoreActionTypes.SAVE_DATA_STORE]: (state, action) => {
         const newState = { ...state };
         action.payload.dataStore && (
             newState.dataStore = action.payload?.dataStore
@@ -15,7 +15,7 @@ export const dataStoreDesc = createReducerDescription({
 
         return newState;
     },
-}, 'useOldDashboard', {
+}, 'useNewDashboard', {
     dataStore: undefined,
     userDataStore: undefined,
 });

@@ -1,16 +1,10 @@
 // @flow
-import React, { type ComponentType, useEffect, useCallback, useState } from 'react';
+import React, { type ComponentType, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
-import {
-    setCategoryOptionFromScopeSelector,
-    resetCategoryOptionFromScopeSelector,
-    resetAllCategoryOptionsFromScopeSelector,
-    resetProgramIdBatchAction,
-    resetOrgUnitIdBatchAction,
-} from './ScopeSelector.actions';
 import type { OwnProps } from './ScopeSelector.types';
 import { useOrganizationUnit } from './hooks';
+import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
 
 
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName) => {
@@ -22,99 +16,71 @@ const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnit
     return !lockedSelectorLoads;
 };
 
-export const ScopeSelector: ComponentType<OwnProps> =
-  ({
-      customActionsOnProgramIdReset = [],
-      customActionsOnOrgUnitIdReset = [],
-      isUserInteractionInProgress = false,
-      selectedProgramId,
-      selectedOrgUnitId,
-      onSetProgramId,
-      onSetOrgUnit,
-      onResetProgramId,
-      onResetOrgUnitId,
-      children,
-  }) => {
-      const dispatch = useDispatch();
-      const { refetch: refetchOrganisationUnit, displayName } = useOrganizationUnit();
-      const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: displayName, id: selectedOrgUnitId });
+export const ScopeSelector: ComponentType<OwnProps> = ({
+    isUserInteractionInProgress = false,
+    selectedProgramId,
+    selectedOrgUnitId,
+    selectedCategories,
+    onSetProgramId,
+    onSetOrgUnit,
+    onSetCategoryOption,
+    onResetProgramId,
+    onResetOrgUnitId,
+    onResetCategoryOption,
+    onResetAllCategoryOptions,
+    children,
+}) => {
+    const dispatch = useDispatch();
+    const { refetch: refetchOrganisationUnit, displayName } = useOrganizationUnit();
+    const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: displayName, id: selectedOrgUnitId });
 
-      useEffect(() => {
-          const missName = !selectedOrgUnit.name;
-          const hasDifferentId = selectedOrgUnit.id !== selectedOrgUnitId;
+    useEffect(() => {
+        const missName = !selectedOrgUnit.name;
+        const hasDifferentId = selectedOrgUnit.id !== selectedOrgUnitId;
 
-          selectedOrgUnitId && (hasDifferentId || missName) && refetchOrganisationUnit({ variables: { selectedOrgUnitId } });
-      },
-      [selectedOrgUnitId]); // eslint-disable-line react-hooks/exhaustive-deps
+        selectedOrgUnitId &&
+            (hasDifferentId || missName) &&
+            refetchOrganisationUnit({ variables: { selectedOrgUnitId } });
+    }, [selectedOrgUnitId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-      useEffect(() => {
-          displayName && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, name: displayName }));
-      },
-      [displayName, setSelectedOrgUnit]);
+    useEffect(() => {
+        displayName && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, name: displayName }));
+    }, [displayName, setSelectedOrgUnit]);
 
-      const handleSetOrgUnit = (orgUnitId, orgUnitObject) => {
-          setSelectedOrgUnit(orgUnitObject);
-          onSetOrgUnit(orgUnitId);
-      };
+    const handleSetOrgUnit = (orgUnitId, orgUnitObject) => {
+        setSelectedOrgUnit(orgUnitObject);
+        onSetOrgUnit && onSetOrgUnit(orgUnitId);
+    };
 
-      const dispatchOnSetCategoryOption = useCallback(
-          (categoryId: string, categoryOption: Object) => {
-              dispatch(setCategoryOptionFromScopeSelector(categoryId, categoryOption));
-          },
-          [dispatch]);
+    const { lockedSelectorLoads, previousOrgUnitId } = useSelector(({ activePage, app }) => (
+        {
+            lockedSelectorLoads: activePage.lockedSelectorLoads,
+            previousOrgUnitId: app.previousOrgUnitId,
+        }
+    ));
+    const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnit.name);
 
-      const dispatchOnResetCategoryOption = useCallback(
-          (categoryId: string) => {
-              dispatch(resetCategoryOptionFromScopeSelector(categoryId));
-          },
-          [dispatch]);
-
-      const dispatchOnResetAllCategoryOptions = useCallback(
-          () => {
-              dispatch(resetAllCategoryOptionsFromScopeSelector());
-          },
-          [dispatch]);
-
-      const dispatchOnResetOrgUnitId = useCallback(
-          () => {
-              dispatch(resetOrgUnitIdBatchAction(customActionsOnOrgUnitIdReset));
-              onResetOrgUnitId();
-          },
-          [customActionsOnOrgUnitIdReset, dispatch, onResetOrgUnitId]);
-
-      const dispatchOnResetProgramId = useCallback(
-          (baseAction: ReduxAction<any, any>) => {
-              const actions = [
-                  baseAction,
-                  ...customActionsOnProgramIdReset,
-              ];
-
-              dispatch(resetProgramIdBatchAction(actions));
-              onResetProgramId();
-          },
-          [customActionsOnProgramIdReset, dispatch, onResetProgramId]);
-
-      const lockedSelectorLoads: string =
-        useSelector(({ activePage }) => activePage.lockedSelectorLoads);
-
-      const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnit.name);
-
-      return (
-          <ScopeSelectorComponent
-              onResetProgramId={dispatchOnResetProgramId}
-              onResetOrgUnitId={dispatchOnResetOrgUnitId}
-              onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
-              onResetCategoryOption={dispatchOnResetCategoryOption}
-              onSetCategoryOption={dispatchOnSetCategoryOption}
-              onSetProgramId={onSetProgramId}
-              onSetOrgUnit={handleSetOrgUnit}
-              selectedOrgUnit={selectedOrgUnit}
-              selectedOrgUnitId={selectedOrgUnitId}
-              selectedProgramId={selectedProgramId}
-              isUserInteractionInProgress={isUserInteractionInProgress}
-              ready={ready}
-          >
-              {children}
-          </ScopeSelectorComponent>
-      );
-  };
+    return (
+        <ScopeSelectorComponent
+            onResetProgramId={onResetProgramId}
+            onResetOrgUnitId={() => {
+                selectedOrgUnit && dispatch(resetOrgUnitIdFromScopeSelector(selectedOrgUnit?.id));
+                return onResetOrgUnitId();
+            }}
+            onResetAllCategoryOptions={onResetAllCategoryOptions}
+            onResetCategoryOption={onResetCategoryOption}
+            onSetCategoryOption={onSetCategoryOption}
+            onSetProgramId={onSetProgramId}
+            onSetOrgUnit={handleSetOrgUnit}
+            previousOrgUnitId={previousOrgUnitId}
+            selectedOrgUnit={selectedOrgUnit}
+            selectedOrgUnitId={selectedOrgUnitId}
+            selectedProgramId={selectedProgramId}
+            selectedCategories={selectedCategories}
+            isUserInteractionInProgress={isUserInteractionInProgress}
+            ready={ready}
+        >
+            {children}
+        </ScopeSelectorComponent>
+    );
+};

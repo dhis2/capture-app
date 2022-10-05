@@ -73,6 +73,17 @@ Feature: User creates a new entries from the registration page
     When you select the first category
     Then you see the registration form for the specific category
 
+  Scenario: Navigating to registration page from view single event page
+    Given you are in the main page with no selections made
+    And you select org unit
+    And you select the Antenatal care visit program
+    Then you see a list of events
+    When you select one of the events
+    Then you see a dropdown button
+    When you click the the first option option
+    Then you are navigated to the Antenatal care visit registration page
+    Then program and organisation unit is still selected in top bar
+
 
 ### New event in Antenatal care visit
   Scenario: New event in Antenatal care visit > Submitting the form with empty visit date throws validation error
@@ -100,7 +111,7 @@ Feature: User creates a new entries from the registration page
       Given you are in the Person registration page
       When you fill in a unique first name
       And you click the save new submit button
-      Then you navigated to the enrollment dashboard page
+      Then you are navigated to the Tracker Capture
 
   Scenario: New person > Submitting the form from the duplicates modal navigates you to the user dashboard
     Given you are in the Person registration page
@@ -108,7 +119,7 @@ Feature: User creates a new entries from the registration page
     And you click the save new submit button
     And you see the possible duplicates modal
     And you submit the form again from the duplicates modal
-    Then you navigated to the enrollment dashboard page
+    Then you are navigated to the Tracker Capture
 
   Scenario: New person > Submitting the form shows a list with duplicates
     Given you are in the Person registration page
@@ -125,7 +136,7 @@ Feature: User creates a new entries from the registration page
   Scenario: New person in Tracker Program > Submitting the form with empty visit date throws validation error
     Given you are in the WHO RMNCH program registration page
     And you click the save new submit button
-    Then you see validation error on visit date
+    Then you see validation errors
 
   Scenario: New person in Tracker Program > Filling the age with age 0 throws validation warning
     Given you are in the WHO RMNCH program registration page
@@ -136,7 +147,7 @@ Feature: User creates a new entries from the registration page
     Given you are in the WHO RMNCH program registration page
     When you fill the WHO RMNCH program registration form with its required unique values
     And you click the save new submit button
-    Then you navigated to the enrollment dashboard page
+    Then you are navigated to the WHO RMNCH program in Tracker Capture app
 
   Scenario: New person in Tracker Program > Submitting the form from the duplicates modal navigates you to the user dashboard
     Given you are in the WHO RMNCH program registration page
@@ -144,7 +155,7 @@ Feature: User creates a new entries from the registration page
     And you click the save new submit button
     And you see the possible duplicates modal
     When you submit the form again from the duplicates modal
-    Then you navigated to the enrollment dashboard page
+    Then you are navigated to the WHO RMNCH program in Tracker Capture app
 
   Scenario: New person in Tracker Program > Submitting the form shows a list with duplicates
     Given you are in Child programme registration page
@@ -160,3 +171,22 @@ Feature: User creates a new entries from the registration page
     Given you are in the WNCH PNC program registration page
     And you click the save new submit button
     Then you see validation errors on the WHO RMNCH program registration page
+
+  Scenario: Go to enrollment event when Open data entry form after enrollment is checked
+    Given you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context
+    And you opt in to use the new enrollment Dashboard for Malaria case diagnosis, treatment and investigation
+    And you see the opt out component for Malaria case diagnosis, treatment and investigation
+    When you are in the Malaria case diagnosis, treatment and investigation program registration page
+    And you fill the Malaria case diagnosis registration form with values
+    And you click the save new submit button
+    Then you see the enrollment event New page
+    When you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context
+    And you opt out to use the new enrollment Dashboard for Malaria case diagnosis, treatment and investigation
+    Then you see the opt in component for Malaria case diagnosis, treatment and investigation
+
+## New enrollment of existing TEI
+
+  Scenario: New enrollment of existing TEI > The TEI form is prefield with the attributes values
+    Given you are in Child programme reenrollment page
+    Then you see the form prefield with existing TEI attributes values
+    And the scope selector has the TEI context

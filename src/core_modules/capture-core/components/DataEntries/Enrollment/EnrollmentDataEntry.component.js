@@ -3,6 +3,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
+import { type OrgUnit } from 'capture-core-utils/rulesEngine';
 import {
     DataEntry,
     placements,
@@ -104,7 +105,7 @@ const getEnrollmentDateSettings = () => {
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
             calendarMaxMoment: !props.enrollmentMetadata.allowFutureEnrollmentDate ? moment() : undefined,
         }),
-        getPropName: () => 'enrollmentDate',
+        getPropName: () => 'enrolledAt',
         getValidatorContainers: (props: Object) =>
             getEnrollmentDateValidatorContainer(props.enrollmentMetadata.allowFutureEnrollmentDate),
         getMeta: () => ({
@@ -151,7 +152,7 @@ const getIncidentDateSettings = () => {
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
             calendarMaxMoment: !props.enrollmentMetadata.allowFutureIncidentDate ? moment() : undefined,
         }),
-        getPropName: () => 'incidentDate',
+        getPropName: () => 'occurredAt',
         getValidatorContainers: (props: Object) =>
             getIncidentDateValidatorContainer(props.enrollmentMetadata.allowFutureIncidentDate),
         getMeta: () => ({
@@ -284,11 +285,12 @@ const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 
 type PreEnrollmentDataEntryProps = {
     programId: string,
-    orgUnit: Object,
+    orgUnit: OrgUnit,
     onUpdateField: Function,
     onUpdateDataEntryField: Function,
     onStartAsyncUpdateField: Function,
     onGetUnsavedAttributeValues?: ?Function,
+    teiId?: ?string,
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
@@ -303,10 +305,11 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
 
 export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit, onGetUnsavedAttributeValues, programId } = this.props;
+        const { orgUnit, onGetUnsavedAttributeValues, programId, teiId } = this.props;
         return {
             programId,
             orgUnitId: orgUnit.id,
+            trackedEntityInstanceId: teiId,
             onGetUnsavedAttributeValues,
         };
     }

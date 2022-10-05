@@ -19,13 +19,13 @@ export function convertMainEventClientToServer(event: Object) {
         let convertedValue;
 
         switch (key) {
-        case 'eventDate':
-        case 'dueDate':
-        case 'completedDate':
+        case 'occurredAt':
+        case 'scheduledAt':
+        case 'completedAt':
             convertedValue = convertClientToServer(value, dataElementTypes.DATE);
             break;
         case 'assignee':
-            convertedValue = value && value.id;
+            convertedValue = value && ({ uid: value.id });
             break;
         default:
             convertedValue = value;

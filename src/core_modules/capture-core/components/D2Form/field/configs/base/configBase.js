@@ -3,6 +3,7 @@ import { type ComponentType } from 'react';
 import type { ValidatorContainer } from 'capture-ui/FormBuilder/FormBuilder.component';
 import { getValidators } from '../../validators';
 import type { DataElement } from '../../../../../metaData';
+import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 export type FieldConfigForType = {
     component: ComponentType<any>,
@@ -22,8 +23,8 @@ export const commitEvents = {
     ON_BLUR: 'onBlur',
 };
 
-export const getBaseConfigForField = (metaData: DataElement) => ({
+export const getBaseConfigForField = (metaData: DataElement, querySingleResource: QuerySingleResource) => ({
     id: metaData.id,
-    validators: getValidators(metaData),
+    validators: getValidators(metaData, querySingleResource),
     commitEvent: commitEvents.ON_BLUR,
 });

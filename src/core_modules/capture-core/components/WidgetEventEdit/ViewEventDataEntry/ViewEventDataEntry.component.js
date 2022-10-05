@@ -22,6 +22,8 @@ import {
     withFilterProps,
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
+import { EventLabelsByStatus } from './viewEventDataEntry.const';
+import { statusTypes } from '../../../events/statusTypes';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -111,17 +113,16 @@ const viewModeComponent = withDefaultFieldContainer()(
 
 const buildReportDateSettingsFn = () => {
     const dataElement = new DataElement((o) => {
-        o.id = 'eventDate';
         o.type = dataElementTypes.DATE;
     });
 
     const reportDateSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: props.formFoundation.getLabel(dataElement.id),
+            label: props.formFoundation.getLabel(EventLabelsByStatus[props.eventStatus]),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getPropName: () => dataElement.id,
+        getPropName: (props: Object) => EventLabelsByStatus[props.eventStatus],
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -129,6 +130,28 @@ const buildReportDateSettingsFn = () => {
     };
 
     return reportDateSettings;
+};
+
+const buildScheduleDateSettingsFn = () => {
+    const dataElement = new DataElement((o) => {
+        o.type = dataElementTypes.DATE;
+    });
+
+    const scheduleDateSettings = {
+        getComponent: () => viewModeComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            label: `${props.formFoundation.getLabel('scheduledAt')}`,
+            valueConverter: value => dataElement.convertValue(value, valueConvertFn),
+        }),
+        getIsHidden: (props: Object) => ![statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus),
+        getPropName: () => 'scheduledAt',
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return scheduleDateSettings;
 };
 
 const buildGeometrySettingsFn = () => ({
@@ -188,7 +211,8 @@ const buildCompleteFieldSettingsFn = () => {
 
 const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
+const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
@@ -202,6 +226,7 @@ type Props = {
     classes: Object,
     theme: Theme,
     onOpenEditEvent: () => void,
+    dataEntryId: string,
 };
 
 type DataEntrySection = {
@@ -238,12 +263,13 @@ class ViewEventDataEntryPlain extends Component<Props> {
     render() {
         const {
             classes,
+            dataEntryId,
             ...passOnProps
         } = this.props;
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
-                id={'singleEvent'}
+                id={dataEntryId}
                 viewMode
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}

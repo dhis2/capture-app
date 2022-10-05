@@ -5,7 +5,7 @@ import { convertDataEntryToClientValues } from '../../../../../DataEntry/common/
 import { convertValue as convertToServerValue } from '../../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../../events/mainConverters';
 import { type RenderFoundation } from '../../../../../../metaData';
-import { deriveURLParamsFromLocation } from '../../../../../../utils/routing';
+import { getLocationQuery } from '../../../../../../utils/routing';
 
 const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
     if (!categories) {
@@ -26,22 +26,24 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
     if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+        mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
     }
 
     return {
-        ...mainDataServerValues,
-        program: state.currentSelections.programId,
-        programStage: formFoundation.id,
-        orgUnit: state.currentSelections.orgUnitId,
-        ...getApiCategoriesArgument(state.currentSelections.categories),
-        dataValues: Object
-            .keys(formServerValues)
-            .map(key => ({
-                dataElement: key,
-                value: formServerValues[key],
-            }))
-            .filter(({ value }) => value != null),
+        events: [{
+            ...mainDataServerValues,
+            program: state.currentSelections.programId,
+            programStage: formFoundation.id,
+            orgUnit: state.currentSelections.orgUnitId,
+            ...getApiCategoriesArgument(state.currentSelections.categories),
+            dataValues: Object
+                .keys(formServerValues)
+                .map(key => ({
+                    dataElement: key,
+                    value: formServerValues[key],
+                }))
+                .filter(({ value }) => value != null),
+        }],
     };
 };
 
@@ -54,13 +56,13 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
 ) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
-    const { teiId, enrollmentId, programId, orgUnitId } = deriveURLParamsFromLocation();
+    const { teiId, enrollmentId, programId, orgUnitId } = getLocationQuery();
 
     if (!mainDataServerValues.status) {
         mainDataServerValues.status = completed ? 'ACTIVE' : 'COMPLETED';
     }
     if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+        mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
     }
 
     return {

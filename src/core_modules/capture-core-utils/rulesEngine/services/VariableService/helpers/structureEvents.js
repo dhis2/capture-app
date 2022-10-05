@@ -19,21 +19,21 @@ const createEventsContainer = (events: EventsData) => {
 export const getStructureEvents = (compareDates: CompareDates) => {
     const compareEvents = (first: EventData, second: EventData): number => {
         let result;
-        if (!first.eventDate && !second.eventDate) {
+        if (!first.occurredAt && !second.occurredAt) {
             result = 0;
-        } else if (!first.eventDate) {
+        } else if (!first.occurredAt) {
             result = 1;
-        } else if (!second.eventDate) {
+        } else if (!second.occurredAt) {
             result = -1;
         } else {
-            result = compareDates(first.eventDate, second.eventDate);
+            result = compareDates(first.occurredAt, second.occurredAt);
         }
         return result;
     };
 
     return (currentEvent: EventData = {}, otherEvents: EventsData = []) => {
         const otherEventsFiltered = otherEvents
-            .filter(event => event.eventDate &&
+            .filter(event => event.occurredAt &&
                     [eventStatuses.COMPLETED, eventStatuses.ACTIVE, eventStatuses.VISITED].includes(event.status) &&
                     event.eventId !== currentEvent.eventId,
             );

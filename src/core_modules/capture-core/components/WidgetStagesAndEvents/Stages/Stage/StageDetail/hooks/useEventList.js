@@ -1,7 +1,9 @@
 // @flow
-import React, { useMemo } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
+import { useDataEngine } from '@dhis2/app-runtime';
+import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../../metaData';
 import type { StageDataElement } from '../../../../types/common.types';
@@ -15,7 +17,7 @@ import {
 } from './helpers';
 import { SORT_DIRECTION } from './constants';
 
-const baseKeys = [{ id: 'status' }, { id: 'eventDate' }, { id: 'orgUnitName' }, { id: 'dueDate' }, { id: 'comments' }];
+const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'comments' }];
 const basedFieldTypes = [
     { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
@@ -23,19 +25,17 @@ const basedFieldTypes = [
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.UNKNOWN, resolveValue: convertCommentForView },
 ];
-const baseColumnHeaders = [
+const getBaseColumnHeaders = props => [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
-    { header: i18n.t('Report date'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
+    { header: props.formFoundation.getLabel('occurredAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Registering unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
-    {
-        header: i18n.t('Due date'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true,
-    },
+    { header: props.formFoundation.getLabel('scheduledAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: '', sortDirection: null, isPredefined: true },
 ];
 
 const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[index] }));
 // $FlowFixMe
-const baseColumns = baseFields.map((key, index) => ({ ...key, ...baseColumnHeaders[index] }));
+const getBaseColumns = props => baseFields.map((key, index) => ({ ...key, ...getBaseColumnHeaders(props)[index] }));
 
 const getAllFieldsWithValue = (
     eventId: string,
@@ -64,30 +64,49 @@ const getAllFieldsWithValue = (
         return acc;
     }, {});
 
-
 const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: Array<ApiEnrollmentEvent>) => {
-    const [dataSource, setDataSource] = React.useState([]);
+    const [value, setValue] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const dataEngine = useDataEngine();
+    const computeData = useCallback(async () => {
+        try {
+            setLoading(true);
+            const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
+            const dataElementsByType = await groupRecordsByType(events, dataElements, querySingleResource);
+            const eventsData = [];
+            for (const event of events) {
+                const eventId = event.event;
+                const predefinedFields = baseFields.reduce((acc, field) => {
+                    acc[field.id] = convertServerToClient(getValueByKeyFromEvent(event, field), field.type);
+                    return acc;
+                }, {});
 
-    const computeData = async () => {
-        const dataElementsByType = await groupRecordsByType(events, dataElements);
-        const eventsData = [];
-        for (const event of events) {
-            const eventId = event.event;
-            const predefinedFields = baseFields.reduce((acc, field) => {
-                acc[field.id] = convertServerToClient(getValueByKeyFromEvent(event, field), field.type);
-                return acc;
-            }, {});
-
-            const allFields = getAllFieldsWithValue(eventId, dataElements, dataElementsByType);
-            eventsData.push({ id: eventId, pendingApiResponse: event.pendingApiResponse, ...predefinedFields, ...allFields });
+                const allFields = getAllFieldsWithValue(eventId, dataElements, dataElementsByType);
+                eventsData.push({
+                    id: eventId,
+                    pendingApiResponse: event.pendingApiResponse,
+                    ...predefinedFields,
+                    ...allFields,
+                });
+            }
+            setValue(eventsData);
+        } catch (e) {
+            setError(e);
+        } finally {
+            setLoading(false);
         }
-        setDataSource(eventsData);
-    };
+    }, [events, dataElements, dataEngine]);
 
-    return { computeData, dataSource };
+    useEffect(() => {
+        computeData();
+    }, [computeData]);
+
+    return { value, error, loading };
 };
 
-const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean) => {
+
+const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, formFoundation: Object) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, type } = currDataElement;
@@ -97,9 +116,9 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
             return acc;
         }, []);
         return [
-            ...baseColumns.filter(col => (hideDueDate ? col.id !== 'dueDate' : true)),
+            ...getBaseColumns({ formFoundation }).filter(col => (hideDueDate ? col.id !== 'scheduledAt' : true)),
             ...dataElementHeaders];
-    }, [dataElements, hideDueDate]);
+    }, [dataElements, hideDueDate, formFoundation]);
 
     return headerColumns;
 };

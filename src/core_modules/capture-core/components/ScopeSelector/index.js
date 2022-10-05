@@ -1,5 +1,9 @@
 // @flow
-export { scopeSelectorActionTypes } from './ScopeSelector.actions';
+export {
+    scopeSelectorActionTypes,
+    setOrgUnitFromScopeSelector,
+    resetOrgUnitIdFromScopeSelector,
+} from './ScopeSelector.actions';
 export {
     useSetProgramId,
     useSetOrgUnitId,
@@ -11,6 +15,7 @@ export {
     useResetEventId,
     useResetStageId,
     useReset,
+    useResetViewEventId,
 } from './hooks';
 export { ScopeSelector } from './ScopeSelector.container';
 export { SingleLockedSelect } from './QuickSelector/SingleLockedSelect.component';

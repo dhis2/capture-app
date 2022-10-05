@@ -95,9 +95,11 @@ export type CachedDataEntryForm = {
 export type CachedProgramStage = {
     id: string,
     access: Object,
+    name: string,
     displayName: string,
     description: ?string,
     executionDateLabel?: ?string,
+    dueDateLabel?: ?string,
     programStageSections: ?Array<CachedProgramStageSection>,
     programStageDataElements: ?Array<CachedProgramStageDataElement>,
     formType: string,
@@ -190,6 +192,7 @@ export type CachedProgram = {
     dataEntryForm: ?CachedDataEntryForm,
     featureType: ?string,
     selectEnrollmentDatesInFuture: boolean,
+    displayFrontPageList: boolean,
     selectIncidentDatesInFuture: boolean,
     displayIncidentDate: boolean,
 };
