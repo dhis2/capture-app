@@ -3,10 +3,11 @@ import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Radio, colors, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { mainOptionTranslatedTexts } from '../constants';
+import { mainOptionTranslatedTexts, referralStatus } from '../constants';
 import { DataSection } from '../../DataSection';
 
 type Props = {|
+    type: string,
     ...CssClasses
 |}
 
@@ -33,14 +34,14 @@ const styles = () => ({
     },
 });
 
-export const ReferralActionsPlain = ({ classes }: Props) => {
+export const ReferralActionsPlain = ({ classes, type }: Props) => {
     const [selectedAction, setSelectedAction] = React.useState();
     return (<DataSection
         dataTest="referral-section"
         sectionName={i18n.t('Referral actions')}
     >
         <div className={classes.wrapper}>
-            {Object.keys(mainOptionTranslatedTexts).map(key => (
+            {type === referralStatus.REFERRABLE ? Object.keys(mainOptionTranslatedTexts).map(key => (
                 <Radio
                     key={key}
                     name={`referral-action-${key}`}
@@ -49,7 +50,11 @@ export const ReferralActionsPlain = ({ classes }: Props) => {
                     onChange={(e: Object) => setSelectedAction(e.value)}
                     value={key}
                 />
-            ))}
+            )) : null}
+            {type === referralStatus.AMBIGUOUS_REFERRALS ?
+                <div>{i18n.t('Ambigous referrals, contact system administrator')}</div>
+                : null
+            }
         </div>
     </DataSection>);
 };
