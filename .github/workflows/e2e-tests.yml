@@ -29,33 +29,33 @@ defaults:
 jobs:
     prerequisites:
         runs-on: ubuntu-latest
-            outputs:
-                json-labels: ${{ steps.compute-json-labels.outputs.labels }}
-                matrix-containers: ${{ steps.compute-matrix-containers.outputs.containers}}
-                versions: ${{ steps.legacy-versions.outputs.versions }}
-            steps:
-              - id: compute-json-labels
-                run: |
-                  arrLabels=(${TRIGGER_LABELS//,/ })
-                  for item in ${arrLabels[@]}; do labels+=\"$item\",; done
-                  echo "::set-output name=labels::[ ${labels%,} ]"
-              
-              - id: compute-matrix-containers
-                if: contains(fromJson(steps.compute-json-labels.outputs.labels), github.event.label.name)
-                run: |
-                  for (( cnt = 1; cnt <= $CYPRESS_CONTAINERS; cnt++)); do containers+=$cnt,; done
-                  echo "::set-output name=containers::[ ${containers%,} ]"
-              
-              - if: contains(fromJson(steps.compute-json-labels.outputs.labels), github.event.label.name)
-                uses: actions/checkout@v2
+        outputs:
+            json-labels: ${{ steps.compute-json-labels.outputs.labels }}
+            matrix-containers: ${{ steps.compute-matrix-containers.outputs.containers}}
+            versions: ${{ steps.legacy-versions.outputs.versions }}
+        steps:
+            - id: compute-json-labels
+              run: |
+                arrLabels=(${TRIGGER_LABELS//,/ })
+                for item in ${arrLabels[@]}; do labels+=\"$item\",; done
+                echo "::set-output name=labels::[ ${labels%,} ]"
+            
+            - id: compute-matrix-containers
+              if: contains(fromJson(steps.compute-json-labels.outputs.labels), github.event.label.name)
+              run: |
+                for (( cnt = 1; cnt <= $CYPRESS_CONTAINERS; cnt++)); do containers+=$cnt,; done
+                echo "::set-output name=containers::[ ${containers%,} ]"
+            
+            - if: contains(fromJson(steps.compute-json-labels.outputs.labels), github.event.label.name)
+              uses: actions/checkout@v2
 
-              - id: legacy-versions
-                if: contains(fromJson(steps.compute-json-labels.outputs.labels), github.event.label.name)
-                uses: dhis2/action-supported-legacy-versions@v1
-                with:
-                    instance-url-latest: ${{env.URL_PREFIX_INSTANCES}}dev # can be removed if maxDHIS2Version has been specified
-                    username: ${{ secrets.CYPRESS_DHIS2_USERNAME }} # can be removed if maxDHIS2Version has been specified
-                    password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
+            - id: legacy-versions
+              if: contains(fromJson(steps.compute-json-labels.outputs.labels), github.event.label.name)
+              uses: dhis2/action-supported-legacy-versions@v1
+              with:
+                  instance-url-latest: ${{env.URL_PREFIX_INSTANCES}}dev # can be removed if maxDHIS2Version has been specified
+                  username: ${{ secrets.CYPRESS_DHIS2_USERNAME }} # can be removed if maxDHIS2Version has been specified
+                  password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
 
     cypress:
         needs: prerequisites
