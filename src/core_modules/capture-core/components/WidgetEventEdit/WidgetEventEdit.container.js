@@ -44,10 +44,12 @@ const styles = {
 export const WidgetEventEditPlain = ({
     classes,
     eventStatus,
+    initialScheduleDate,
     programStage,
     programStage: { name, icon },
     onGoBack,
     onCancelEditEvent,
+    onHandleScheduleSave,
     programId,
     orgUnitId,
     enrollmentId,
@@ -65,6 +67,7 @@ export const WidgetEventEditPlain = ({
     if (error) {
         return error.errorComponent;
     }
+
 
     return orgUnit ? (
         <div data-test="widget-enrollment-event">
@@ -134,10 +137,13 @@ export const WidgetEventEditPlain = ({
                             formFoundation={programStage.stageForm}
                             orgUnit={orgUnit}
                             programId={programId}
+                            stageId={programStage.id}
                             enrollmentId={enrollmentId}
                             eventStatus={eventStatus}
                             onCancelEditEvent={onCancelEditEvent}
                             hasDeleteButton
+                            onHandleScheduleSave={onHandleScheduleSave}
+                            initialScheduleDate={initialScheduleDate}
                         />
                     )}
                 </div>
