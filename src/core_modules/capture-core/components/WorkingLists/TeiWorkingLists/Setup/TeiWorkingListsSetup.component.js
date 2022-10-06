@@ -153,7 +153,7 @@ const useProgramStageFilters = ({ stages }: TrackerProgram, programStage?: strin
                 },
                 {
                     id: ADDITIONAL_FILTERS.occurredAt,
-                    type: 'TEXT',
+                    type: 'DATE',
                     header: i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
                     disabled: !programStage,
                     tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
@@ -255,15 +255,15 @@ export const TeiWorkingListsSetup = ({
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
     const programStageFiltersOnly = useProgramStageFilters(program, programStage);
-    const filtersObjectToKeep = useFiltersToKeep(columns, filters, filtersOnly, programStageFiltersOnly);
+    const filtersObjectToKeep =
+        JSON.stringify(useFiltersToKeep(columns, filters, filtersOnly, programStageFiltersOnly));
 
     const staticTemplates = useStaticTemplates();
     const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
 
     useEffect(() => {
-        onClearFilters && onClearFilters(filtersObjectToKeep);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [programStage]);
+        onClearFilters && onClearFilters(JSON.parse(filtersObjectToKeep));
+    }, [onClearFilters, filtersObjectToKeep]);
 
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
