@@ -40,6 +40,13 @@ And('you select the search domain Malaria Case diagnosis', () => {
         .click();
 });
 
+When('you select the search domain WHO RMNCH Tracker', () => {
+    cy.get('.Select')
+        .type('WHO RMNCH');
+    cy.contains('WHO RMNCH Tracker')
+        .click();
+});
+
 When('you fill in the unique identifier field with values that will not return a tracked entity instance', () => {
     cy.get('[data-test="form-unique"]')
         .find('[data-test="capture-ui-input"]')
@@ -78,18 +85,22 @@ When('you fill in the unique identifier field with values that will return a tra
         .find('[data-test="capture-ui-input"]')
         .first()
         .clear()
-        .type('ZRP792320')
+        .type('3131112445555')
         .blur();
 });
 
 Then('you are navigated to the Tracker Capture', () => {
-    cy.url().should('include', 'dashboard?tei=');
-    cy.url().should('include', 'ou=DiszpKrYNg8&program=qDkgAbB5Jlk');
+    cy.url()
+        .should('include', 'dhis-web-tracker-capture/')
+        .should('include', 'dashboard?tei=')
+        .should('include', 'program=WSGAb5XwJ3Y');
 });
 
 Then('you are navigated to the Tracker Capture without program', () => {
-    cy.url().should('include', 'dashboard?tei=');
-    cy.url().should('include', 'ou=DiszpKrYNg8&tracked_entity_type=nEenWmSyUEp');
+    cy.url()
+        .should('include', 'dhis-web-tracker-capture/')
+        .should('include', 'dashboard?tei=')
+        .should('include', 'tracked_entity_type=nEenWmSyUEp');
 });
 
 When('you fill in the first name with values that will return no results', () => {
@@ -295,7 +306,7 @@ When('you fill in the first name', () => {
 });
 
 When('you click the fallback search button', () => {
-    cy.get('[data-test="fallback-search-button"]')
+    cy.contains('Search in all programs')
         .click();
 });
 
@@ -350,26 +361,11 @@ When('you select gender', () => {
         .type('{enter}', { force: true });
 });
 
-When('you see that in the search terms there is no gender displayed', () => {
-    cy.get('[data-test="search-results-top"]')
-        .should('not.have.value', 'Gender');
-    cy.get('[data-test="search-results-top"]')
-        .contains('First name');
-    cy.get('[data-test="search-results-top"]')
-        .contains('Last name');
-});
-
 When('you see the attributes search area being expanded', () => {
     cy.get('[data-test="form-attributes"]')
         .contains('First name');
     cy.get('[data-test="form-attributes"]')
         .contains('Last name');
-});
-
-When('that first and last name are prefilled', () => {
-    cy.get('[data-test="search-results-list"]')
-        .find('[data-test="dhis2-uicore-tag"]')
-        .should('not.exist');
 });
 
 When('and you can see the unique identifier input', () => {
@@ -392,12 +388,8 @@ Then('you should be taken to the main page with org unit and program preselected
         .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default`);
 });
 
-Then('you stay in the same page with all program results', () => {
-    cy.get('[data-test="search-results-top"]')
-        .then(($elements) => {
-            cy.log({ $elements });
-            cy.wrap($elements[1]).contains('Results found in all programs');
-        });
+Then('you stay in the same page with results from all programs being displayed', () => {
+    cy.contains('Results found in all programs').should('exist');
 });
 
 Then('you should be able to see the Create new section', () => {

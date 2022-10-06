@@ -1118,6 +1118,9 @@ msgstr "Delete event"
 msgid "Yes, delete event"
 msgstr "Yes, delete event"
 
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr "Go to “Schedule” tab to reschedule this event"
+
 msgid "Event completed"
 msgstr "Event completed"
 

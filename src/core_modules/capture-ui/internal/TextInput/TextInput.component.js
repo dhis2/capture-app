@@ -12,6 +12,7 @@ type Props = {
     classes: Classes,
     inputRef?: ?(ref: any) => void,
     style?: ?Object,
+    disabled?: ?boolean,
 };
 
 export const TextInput = (props: Props) => {
