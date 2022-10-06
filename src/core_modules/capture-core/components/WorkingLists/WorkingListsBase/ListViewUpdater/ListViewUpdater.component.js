@@ -113,6 +113,7 @@ export const ListViewUpdater = (props: Props) => {
             orgUnitId,
             categories,
             customUpdateTrigger,
+            onUpdateList,
             onCancelUpdateList,
         ],
     });

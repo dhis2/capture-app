@@ -32,8 +32,9 @@ const createApiEventQueryArgs = (
     fields: '*',
 });
 
-const createApiTEIsQueryArgs = ({ programId: program }, trackedEntityIds): { [string]: any } => ({
+const createApiTEIsQueryArgs = ({ pageSize, programId: program }, trackedEntityIds): { [string]: any } => ({
     program,
+    pageSize,
     trackedEntity: trackedEntityIds,
     fields:
     'trackedEntity,createdAt,orgUnit,attributes[attribute,value],enrollments[enrollment,status,orgUnit,enrolledAt]',
