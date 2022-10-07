@@ -398,7 +398,7 @@ msgid "Status"
 msgstr "Статус"
 
 msgid "Comments"
-msgstr ""
+msgstr "Коментарі"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -428,7 +428,7 @@ msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Видалити подію"
 
 msgid "Update"
 msgstr "Оновити"
