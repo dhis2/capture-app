@@ -101,9 +101,9 @@ jobs:
                   parallel: true
                   group: e2e-chrome-parallel-${{ matrix.versions }}
                   browser: chrome
-                  start: 'yarn start:forCypress'
-                  wait-on: 'http://localhost:3000'
-                  wait-on-timeout: 200
+                  start: yarn start:forCypress
+                  wait-on: http://localhost:3000
+                  wait-on-timeout: 300
               env:
                   CI: true
                   CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
