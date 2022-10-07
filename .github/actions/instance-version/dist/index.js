@@ -9790,6 +9790,9 @@ const main = async () => {
             .join('/');
         
         const response = await fetch(url, params);
+        if (!response.ok) {
+            throw new Error(`HTTP Error Response: ${response.status} ${response.statusText}`);
+        }
         const detailedVersion = (await response.json()).version;
         const minorVersion = Number(/[.](\d+)/.exec(detailedVersion)[1]);
         core.info('output-version: ' + minorVersion);
