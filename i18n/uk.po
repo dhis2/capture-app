@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-10T12:26:48.946Z\n"
+"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Nadiia <semchuk@aph.org.ua>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
@@ -44,6 +44,9 @@ msgid "Organisation unit"
 msgstr "Організаційний підрозділ"
 
 msgid "Date of enrollment"
+msgstr ""
+
+msgid "Program name"
 msgstr ""
 
 msgid "Last updated"
@@ -161,7 +164,7 @@ msgid "Status"
 msgstr "Статус"
 
 msgid "Comments"
-msgstr ""
+msgstr "Коментарі"
 
 msgid "Relationships"
 msgstr "Зв'язки"
@@ -539,7 +542,7 @@ msgstr ""
 msgid "Add comment"
 msgstr ""
 
-msgid "You dont have access to write comments"
+msgid "You don't have access to write comments"
 msgstr ""
 
 msgid "Write comment"
@@ -887,7 +890,7 @@ msgstr "події"
 msgid "event"
 msgstr ""
 
-msgid "You dont have access to edit this event"
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Edit event"
@@ -931,10 +934,10 @@ msgstr ""
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You dont have access to delete this relationship"
+msgid "You don't have access to delete this relationship"
 msgstr ""
 
-msgid "You dont have access to create any relationships"
+msgid "You don't have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
@@ -1003,11 +1006,11 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Add new"
-msgstr "Додати нове"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "Додати нове"
 
 msgid "Reactivate"
 msgstr ""
@@ -1096,18 +1099,18 @@ msgid "stage not found in rules execution"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Видалити подію"
 
 msgid "Yes, delete event"
+msgstr ""
+
+msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
 msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
-msgstr ""
-
-msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Schedule date info"
