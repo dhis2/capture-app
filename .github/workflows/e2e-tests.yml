@@ -26,7 +26,7 @@ on:
         types: [labeled]
 
 env:
-    URL_PREFIX_INSTANCES:  https://test.e2e.dhis2.org/ca-test-
+    URL_PREFIX_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PREFIX }}
     CYPRESS_CONTAINERS: 8
     TRIGGER_LABELS: e2e-tests, testing
 
@@ -39,7 +39,7 @@ jobs:
         runs-on: ubuntu-latest
         outputs:
             json-labels: ${{ steps.json-labels.outputs.labels }}
-            matrix-containers: ${{ steps.matrix-containers.outputs.containers}}
+            matrix-containers: ${{ steps.matrix-containers.outputs.containers }}
             versions: ${{ steps.legacy-versions.outputs.versions }}
         steps:
             - name: compute-json-labels
@@ -63,7 +63,7 @@ jobs:
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
               uses: dhis2/action-supported-legacy-versions@v1
               with:
-                  instance-url-latest: ${{env.URL_PREFIX_INSTANCES}}dev # can be removed if maxDHIS2Version has been specified
+                  instance-url-latest: ${{ env.URL_PREFIX_INSTANCES }}dev # can be removed if maxDHIS2Version has been specified
                   username: ${{ secrets.CYPRESS_DHIS2_USERNAME }} # can be removed if maxDHIS2Version has been specified
                   password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
 
@@ -99,7 +99,7 @@ jobs:
               with:
                   record: true
                   parallel: true
-                  group: e2e-chrome-parallel-${{matrix.versions}}
+                  group: e2e-chrome-parallel-${{ matrix.versions }}
                   browser: chrome
                   start: 'yarn start:forCypress'
                   wait-on: 'http://localhost:3000'
@@ -108,10 +108,10 @@ jobs:
                   CI: true
                   CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  CYPRESS_dhis2BaseUrl: ${{env.URL_PREFIX_INSTANCES}}${{matrix.versions}}
+                  CYPRESS_dhis2BaseUrl: ${{ env.URL_PREFIX_INSTANCES }}${{ matrix.versions }}
                   CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
-                  CYPRESS_dhis2Username: ${{secrets.CYPRESS_DHIS2_USERNAME}}
-                  CYPRESS_dhis2Password: ${{secrets.CYPRESS_DHIS2_PASSWORD}}
+                  CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
+                  CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
 
     call-e2e-tests-result:
         needs: cypress
