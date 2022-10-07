@@ -317,7 +317,7 @@ msgid "Complete event"
 msgstr ""
 
 msgid "Comments"
-msgstr ""
+msgstr "Коментарі"
 
 msgid "Basic info"
 msgstr ""
@@ -353,7 +353,7 @@ msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Видалити подію"
 
 msgid "Update"
 msgstr "Оновити"
