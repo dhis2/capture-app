@@ -99,8 +99,7 @@ jobs:
     outputs:
       version: ${{ steps.instance-version.outputs.version }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/instance-version
+      - uses: dhis2/action-instance-version@main
         id: instance-version
         with:
           instance-url: https://test.e2e.dhis2.org/ca-test-devv
