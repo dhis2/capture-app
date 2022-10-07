@@ -99,10 +99,10 @@ jobs:
     outputs:
       version: ${{ steps.instance-version.outputs.version }}
     steps:
-      - uses: dhis2/action-instance-version@v1
+      - uses: ./.github/actions/action-instance-version
         id: instance-version
         with:
-          instance-url: ${{ secrets.CYPRESS_DHIS2_BASE_URL_DEV }}
+          instance-url: https://test.e2e.dhis2.org/ca-test-devv
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
   
