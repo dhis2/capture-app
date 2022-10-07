@@ -99,8 +99,6 @@ jobs:
     outputs:
       version: ${{ steps.instance-version.outputs.version }}
     steps:
-      - uses: actions/checkout@v2
-
       - uses: dhis2/action-instance-version@v1
         id: instance-version
         with:
