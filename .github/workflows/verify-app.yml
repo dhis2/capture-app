@@ -102,7 +102,7 @@ jobs:
       - uses: dhis2/action-instance-version@main
         id: instance-version
         with:
-          instance-url: https://test.e2e.dhis2.org/ca-test-devv
+          instance-url: https://test.e2e.dhis2.org/ca-test-dev
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
   
