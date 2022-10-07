@@ -18,7 +18,7 @@ on:
         types: [labeled]
 
 env:
-    URL_PREFIX_INSTANCES: https://test.e2e.dhis2.org/ca-test-
+    URL_PREFIX_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PREFIX }}
     CYPRESS_CONTAINERS: 8
     TRIGGER_LABELS: e2e-tests, testing
 
