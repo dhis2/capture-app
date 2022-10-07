@@ -70,6 +70,11 @@ function convertDateRangeForDisplay(rawValue: RangeValue) {
     return rawValue.to;
 }
 
+
+function convertRangeForDisplay(parser: any, clientValue: any) {
+    return parser(clientValue.from);
+}
+
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
     [dataElementTypes.INTEGER]: stringifyNumber,
@@ -85,6 +90,12 @@ const valueConvertersForType = {
     [dataElementTypes.AGE]: convertAgeForEdit,
     [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
     [dataElementTypes.DATE_RANGE]: convertDateRangeForDisplay,
+    [dataElementTypes.INTEGER_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.INTEGER_POSITIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.INTEGER_NEGATIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(convertTimeForEdit, value),
+    [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertDateTimeForEdit, value),
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
