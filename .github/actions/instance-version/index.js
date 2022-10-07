@@ -23,8 +23,6 @@ const main = async () => {
         core.setOutput('version', minorVersion);
 
     } catch (error) {
-        core.info('error:' + JSON.stringify(error));
-        core.setFailed(error);
         core.setFailed(error.message);
     }
 };
