@@ -161,7 +161,7 @@ msgid "Status"
 msgstr "Статус"
 
 msgid "Comments"
-msgstr ""
+msgstr "Коментарі"
 
 msgid "Relationships"
 msgstr "Зв'язки"
@@ -639,7 +639,7 @@ msgid "View working list in this program."
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Видалити подію"
 
 msgid "Download as JSON"
 msgstr ""
