@@ -1,3 +1,15 @@
+## [100.16.1](https://github.com/dhis2/capture-app/compare/v100.16.0...v100.16.1) (2022-10-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([064e3f8](https://github.com/dhis2/capture-app/commit/064e3f8d6262c48718a2d1fe1cb77e712357c193))
+
+
+### Reverts
+
+* [DHIS2-8613] limit report date of new events to today or earlier ([#3023](https://github.com/dhis2/capture-app/issues/3023)) ([305e59c](https://github.com/dhis2/capture-app/commit/305e59c36d239e531701ab04e296612289edfca1))
+
 # [100.16.0](https://github.com/dhis2/capture-app/compare/v100.15.1...v100.16.0) (2022-10-05)
 
 
