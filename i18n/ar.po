@@ -868,7 +868,7 @@ msgid "Event details"
 msgstr "تفاصيل الحدث"
 
 msgid "Event completed"
-msgstr ""
+msgstr "الحدث مكتمل"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
