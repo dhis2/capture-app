@@ -161,7 +161,7 @@ msgid "Status"
 msgstr "Статус"
 
 msgid "Comments"
-msgstr ""
+msgstr "Коментарі"
 
 msgid "Relationships"
 msgstr "Зв'язки"
@@ -1044,7 +1044,7 @@ msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Видалити подію"
 
 msgid "Download as JSON"
 msgstr ""
