@@ -1121,7 +1121,7 @@ msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
 msgid "Event completed"
-msgstr ""
+msgstr "الحدث مكتمل"
 
 msgid "Back to all stages and events"
 msgstr ""
