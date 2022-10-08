@@ -1010,7 +1010,7 @@ msgid "stage not found in rules execution"
 msgstr ""
 
 msgid "Event completed"
-msgstr ""
+msgstr "الحدث مكتمل"
 
 msgid "Back to all stages and events"
 msgstr ""
