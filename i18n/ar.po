@@ -4,14 +4,14 @@
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
-# Hamza Assada <7amza.it@gmail.com>, 2021
+# Hamza Assada <7amza.it@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-01-04T12:43:12.873Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2021\n"
+"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -657,7 +657,7 @@ msgid "Event details"
 msgstr "تفاصيل الحدث"
 
 msgid "Event completed"
-msgstr ""
+msgstr "الحدث مكتمل"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
