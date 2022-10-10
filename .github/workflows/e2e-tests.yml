@@ -26,6 +26,7 @@ on:
         types: [labeled]
 
 env:
+    URL_INSTANCES_PATTERN: https://test.e2e.dhis2.org/ca-test-{version}
     URL_PREFIX_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PREFIX }}
     CYPRESS_CONTAINERS: 8
     TRIGGER_LABELS: e2e-tests, testing
@@ -59,11 +60,18 @@ jobs:
             - if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
               uses: actions/checkout@v2
 
+            - name: compute-instance-url
+              id: instance-url
+              if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
+              run: |
+                  echo ::set-output name=url::"${{ URL_INSTANCES_PATTERN }}/"{version}"/dev"
+                  echo "${{ URL_INSTANCES_PATTERN }}/"{version}"/dev"
+
             - id: legacy-versions
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
               uses: dhis2/action-supported-legacy-versions@v1
               with:
-                  instance-url-latest: ${{ env.URL_PREFIX_INSTANCES }}dev # can be removed if maxDHIS2Version has been specified
+                  instance-url-latest: ${{ steps.instance-url.url }} # can be removed if maxDHIS2Version has been specified
                   username: ${{ secrets.CYPRESS_DHIS2_USERNAME }} # can be removed if maxDHIS2Version has been specified
                   password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
 
