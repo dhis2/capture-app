@@ -222,7 +222,7 @@ const aiFixedLengthMap = {
     34: 10,
     35: 10,
     36: 10,
-    41: 10,
+    41: 16,
 };
 
 const removeGS1Identifier = value => value.substring(3);
@@ -267,7 +267,7 @@ const handleGroupData = (gs1Group) => {
     if (gs1Group) {
         const gs1GroupLength = gs1Group.length;
         const ai = getApplicationIdentifier(gs1Group);
-        let nextValueLength = aiFixedLengthMap[ai];
+        let nextValueLength = aiFixedLengthMap[ai.substring(0, 2)];
         if (nextValueLength == null) {
             nextValueLength = gs1GroupLength;
         }
@@ -305,7 +305,7 @@ export const extractDataMatrixValue = (key, dataMatrix) => {
         if (gs1Elements.get('GS1_d2_IDENTIFIER') === gs1Identifier
             || gs1Elements.get('GS1_Q3_IDENTIFIER') === gs1Identifier) {
             const dataMatrixValue = extractGS1DataMatrixValue(key, dataMatrix);
-            return `'${dataMatrixValue}'`;
+            return dataMatrixValue;
         }
         return 'Unsupported GS1 identifier: {gs1Identifier}';
     }
