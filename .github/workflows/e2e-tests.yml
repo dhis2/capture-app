@@ -103,8 +103,8 @@ jobs:
             - name: compute-instance-url
               id: instance-url
               run: echo "::set-output name=url::${URL_INSTANCES_PATTERN/"{version}"/$version}"
-                env:
-                  version: ${{ matrix.versions }}
+              env:
+                version: ${{ matrix.versions }}
 
             - name: Cypress run
               uses: cypress-io/github-action@v2
