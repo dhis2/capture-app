@@ -8,11 +8,11 @@ name: 'dhis2: e2e tests'
 #     CYPRESS_DHIS2_PASSWORD
 #
 # - Customize environment variables:
-#     URL_PREFIX_INSTANCES: Set the URL prefix for your instances.
-#                           All instances are required to have this prefix followed by "[majorVersion].[minorVersion]" for released versions (e.g. 2.39) and "dev" for a dev instance.
-#                           Example: https://test.e2e.dhis2.org/test-
-#     CYPRESS_CONTAINERS:  Set the number of parallel Cypress job runs running for each backend version.
-#     TRIGGER_LABELS:  Set the labels that will trigger the workflow.
+#     URL_PATTERN_INSTANCES: Set the URL pattern for your instances.
+#                            {version} will be replaced by "dev" or "[majorVersion].[minorVersion]"
+#                            Example: https://test.e2e.dhis2.org/test-{version} will be looking for https://test.e2e.dhis2.org/test-dev, https://test.e2e.dhis2.org/test-2.39 and so on.
+#     CYPRESS_CONTAINERS: Set the number of parallel Cypress job runs running for each backend version.
+#     TRIGGER_LABELS: Set the labels that will trigger the workflow.
 #
 # - Set status check as required:
 #     We recommend setting "call-e2e-tests-result / e2e-tests-success"  as a required step in your workflow.
@@ -26,8 +26,7 @@ on:
         types: [labeled]
 
 env:
-    URL_INSTANCES_PATTERN: https://test.e2e.dhis2.org/ca-test-{version}
-    # URL_PREFIX_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PREFIX }}
+    URL_PATTERN_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PATTERN }}
     CYPRESS_CONTAINERS: 8
     TRIGGER_LABELS: e2e-tests, testing
 
@@ -63,7 +62,7 @@ jobs:
             - name: compute-instance-url
               id: instance-url
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
-              run: echo "::set-output name=url::${URL_INSTANCES_PATTERN/"{version}"/dev}"
+              run: echo "::set-output name=url::${URL_PATTERN_INSTANCES/"{version}"/dev}"
 
             - id: legacy-versions
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
@@ -102,7 +101,7 @@ jobs:
 
             - name: compute-instance-url
               id: instance-url
-              run: echo "::set-output name=url::${URL_INSTANCES_PATTERN/"{version}"/$version}"
+              run: echo "::set-output name=url::${URL_PATTERN_INSTANCES/"{version}"/$version}"
               env:
                 version: ${{ matrix.versions }}
 
