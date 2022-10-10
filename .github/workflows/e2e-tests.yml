@@ -103,7 +103,7 @@ jobs:
               id: instance-url
               run: echo "::set-output name=url::${URL_PATTERN_INSTANCES/"{version}"/$version}"
               env:
-                version: ${{ matrix.versions }}
+                  version: ${{ matrix.versions }}
 
             - name: Cypress run
               uses: cypress-io/github-action@v2
