@@ -26,7 +26,7 @@ on:
         types: [labeled]
 
 env:
-    URL_INSTANCES_PATTERN: 'https://test.e2e.dhis2.org/ca-test-{version}'
+    URL_INSTANCES_PATTERN: https://test.e2e.dhis2.org/ca-test-{version}
     URL_PREFIX_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PREFIX }}
     CYPRESS_CONTAINERS: 8
     TRIGGER_LABELS: e2e-tests, testing
@@ -64,7 +64,7 @@ jobs:
               id: instance-url
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
               run: |
-                  echo "::set-output name=url::${URL_INSTANCES_PATTERN/"{version}"/dev}"
+                  echo "::set-output name=url::test"
                   echo "${URL_INSTANCES_PATTERN/"{version}"/dev}"
 
             - id: legacy-versions
