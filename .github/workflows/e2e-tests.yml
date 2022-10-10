@@ -27,7 +27,7 @@ on:
 
 env:
     URL_INSTANCES_PATTERN: https://test.e2e.dhis2.org/ca-test-{version}
-    URL_PREFIX_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PREFIX }}
+    # URL_PREFIX_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PREFIX }}
     CYPRESS_CONTAINERS: 8
     TRIGGER_LABELS: e2e-tests, testing
 
@@ -63,9 +63,7 @@ jobs:
             - name: compute-instance-url
               id: instance-url
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
-              run: |
-                  echo "::set-output name=url::${URL_INSTANCES_PATTERN/"{version}"/dev}"
-                  echo "${URL_INSTANCES_PATTERN/"{version}"/dev}"
+              run: echo "::set-output name=url::${URL_INSTANCES_PATTERN/"{version}"/dev}"
 
             - id: legacy-versions
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
@@ -102,6 +100,12 @@ jobs:
               if: steps.yarn-cache.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
 
+            - name: compute-instance-url
+              id: instance-url
+              run: echo "::set-output name=url::${URL_INSTANCES_PATTERN/"{version}"/$version}"
+                env:
+                  version: ${{ matrix.versions }}
+
             - name: Cypress run
               uses: cypress-io/github-action@v2
               with:
@@ -116,7 +120,7 @@ jobs:
                   CI: true
                   CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  CYPRESS_dhis2BaseUrl: ${{ env.URL_PREFIX_INSTANCES }}${{ matrix.versions }}
+                  CYPRESS_dhis2BaseUrl: ${{ steps.instance-url.outputs.url }}
                   CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
                   CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
                   CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
