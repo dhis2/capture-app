@@ -19,6 +19,7 @@ export class ProgramStage {
     _autoGenerateEvent: boolean;
     _openAfterEnrollment: boolean;
     _generatedByEnrollmentDate: boolean;
+    _hideDueDate: boolean;
     _reportDateToUse: string;
     _minDaysFromStart: number;
     _icon: Icon | void;
