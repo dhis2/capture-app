@@ -64,9 +64,9 @@ jobs:
               id: instance-url
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
               run: |
-                  echo ::set-output name=url::$URL_INSTANCES_PATTERN/"{version}"/dev
+                  echo "::set-output name=url::${URL_INSTANCES_PATTERN/"{version}"/dev}"
                   echo "$URL_INSTANCES_PATTERN"
-                  echo $URL_INSTANCES_PATTERN
+                  echo "${URL_INSTANCES_PATTERN/"{version}"/dev}"
 
             - id: legacy-versions
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
