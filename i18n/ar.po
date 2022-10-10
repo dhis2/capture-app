@@ -927,7 +927,7 @@ msgid "Mark as cancelled"
 msgstr ""
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "تعيين كـ غير مكتمل"
 
 msgid "Delete enrollment"
 msgstr "الغِ التسجيل"
