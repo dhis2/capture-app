@@ -54,6 +54,23 @@ type Props = {
     eventData: Array<Object>,
     hideDueDate?: boolean
 }
+
+const calculateSuggestedDateFromStart = ({
+    generatedByEnrollmentDate,
+    displayIncidentDate,
+    enrolledAt,
+    occurredAt,
+    minDaysFromStart,
+}: Object) => {
+    let suggestedScheduleDate;
+    if (generatedByEnrollmentDate || !displayIncidentDate) {
+        suggestedScheduleDate = moment(enrolledAt).add(minDaysFromStart, 'days').format();
+    } else {
+        suggestedScheduleDate = moment(occurredAt).add(minDaysFromStart, 'days').format();
+    }
+    return suggestedScheduleDate;
+};
+
 export const useDetermineSuggestedScheduleDate = ({
     programStageScheduleConfig,
     programConfig,
@@ -72,26 +89,37 @@ export const useDetermineSuggestedScheduleDate = ({
         generatedByEnrollmentDate,
         minDaysFromStart,
     } = programStageScheduleConfig;
+    const {
+        displayIncidentDate,
+    } = programConfig;
+
     const scheduleDateComputeSteps = [
-        () => hideDueDate && moment(enrolledAt).add(minDaysFromStart, 'days').format(),
+        () => {
+            if (hideDueDate) {
+                return calculateSuggestedDateFromStart({
+                    generatedByEnrollmentDate,
+                    displayIncidentDate,
+                    enrolledAt,
+                    occurredAt,
+                    minDaysFromStart,
+                });
+            }
+            return undefined;
+        },
         () => nextScheduleDate?.id && getSuggestedDateByNextScheduleDate(nextScheduleDate.id, eventData),
         () => standardInterval && getSuggestedDateByStandardInterval(standardInterval, eventData),
-        () => {
-            let suggestedScheduleDate;
-            if (generatedByEnrollmentDate || !programConfig.displayIncidentDate) {
-                suggestedScheduleDate = moment(enrolledAt).add(minDaysFromStart, 'days').format();
-            } else {
-                suggestedScheduleDate = moment(occurredAt).add(minDaysFromStart, 'days').format();
-            }
-            return suggestedScheduleDate;
-        },
+        () => calculateSuggestedDateFromStart({
+            generatedByEnrollmentDate,
+            displayIncidentDate,
+            enrolledAt,
+            occurredAt,
+            minDaysFromStart,
+        }),
     ];
     const suggestedDate = scheduleDateComputeSteps.reduce((currentScheduleDate, computeScheduleDate) =>
         (!currentScheduleDate ? computeScheduleDate() : currentScheduleDate)
     , undefined);
 
-
-    console.log({ hideDueDate, enrolledAt, occurredAt, minDaysFromStart, suggestedDate });
     // $FlowFixMe dataElementTypes flow error
     return convertStringToDateFormat(convertClientToForm(suggestedDate, dataElementTypes.DATE));
 };
