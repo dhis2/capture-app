@@ -51,7 +51,8 @@ type Props = {
     enrolledAt: string,
     occurredAt: string,
     initialScheduleDate: string,
-    eventData: Array<Object>
+    eventData: Array<Object>,
+    hideDueDate?: boolean
 }
 export const useDetermineSuggestedScheduleDate = ({
     programStageScheduleConfig,
@@ -60,8 +61,9 @@ export const useDetermineSuggestedScheduleDate = ({
     occurredAt,
     eventData,
     initialScheduleDate,
+    hideDueDate,
 }: Props) => {
-    if (initialScheduleDate) { return convertStringToDateFormat(initialScheduleDate); }
+    if (initialScheduleDate && !hideDueDate) { return convertStringToDateFormat(initialScheduleDate); }
     if (!programStageScheduleConfig) { return undefined; }
 
     const {
@@ -71,6 +73,7 @@ export const useDetermineSuggestedScheduleDate = ({
         minDaysFromStart,
     } = programStageScheduleConfig;
     const scheduleDateComputeSteps = [
+        () => hideDueDate && moment(enrolledAt).add(minDaysFromStart, 'days').format(),
         () => nextScheduleDate?.id && getSuggestedDateByNextScheduleDate(nextScheduleDate.id, eventData),
         () => standardInterval && getSuggestedDateByStandardInterval(standardInterval, eventData),
         () => {
@@ -86,6 +89,9 @@ export const useDetermineSuggestedScheduleDate = ({
     const suggestedDate = scheduleDateComputeSteps.reduce((currentScheduleDate, computeScheduleDate) =>
         (!currentScheduleDate ? computeScheduleDate() : currentScheduleDate)
     , undefined);
+
+
+    console.log({ hideDueDate, enrolledAt, occurredAt, minDaysFromStart, suggestedDate });
     // $FlowFixMe dataElementTypes flow error
     return convertStringToDateFormat(convertClientToForm(suggestedDate, dataElementTypes.DATE));
 };
