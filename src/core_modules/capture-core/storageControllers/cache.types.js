@@ -110,6 +110,7 @@ export type CachedProgramStage = {
     autoGenerateEvent?: ?boolean,
     openAfterEnrollment?: ?boolean,
     generatedByEnrollmentDate?: ?boolean,
+    hideDueDate?: ?boolean,
     reportDateToUse: string,
     minDaysFromStart: number,
     style?: ?CachedStyle,

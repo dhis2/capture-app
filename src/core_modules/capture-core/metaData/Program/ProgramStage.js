@@ -96,6 +96,14 @@ export class ProgramStage {
         this._autoGenerateEvent = autoGenerate;
     }
 
+    get hideDueDate(): boolean {
+        return this._hideDueDate;
+    }
+
+    set hideDueDate(hideDueDate: boolean) {
+        this._hideDueDate = hideDueDate;
+    }
+
     get generatedByEnrollmentDate(): boolean {
         return this._generatedByEnrollmentDate;
     }

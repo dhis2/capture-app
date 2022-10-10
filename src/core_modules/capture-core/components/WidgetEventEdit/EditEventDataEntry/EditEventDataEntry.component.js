@@ -167,7 +167,10 @@ const buildScheduleDateSettingsFn = () => {
             label: props.formFoundation.getLabel('scheduledAt'),
             disabled: true,
         }),
-        getIsHidden: (props: Object) => ![statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus),
+        getIsHidden: (props: Object) => {
+            const isScheduleableStatus = [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus);
+            return props.hideDueDate || !isScheduleableStatus;
+        },
         getPropName: () => 'scheduledAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
@@ -427,6 +430,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             classes,
             ...passOnProps
         } = this.props;
+
         return ( // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={dataEntryId}

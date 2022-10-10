@@ -143,7 +143,10 @@ const buildScheduleDateSettingsFn = () => {
             label: `${props.formFoundation.getLabel('scheduledAt')}`,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getIsHidden: (props: Object) => ![statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus),
+        getIsHidden: (props: Object) => {
+            const isScheduleableStatus = [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus);
+            return props.hideDueDate || !isScheduleableStatus;
+        },
         getPropName: () => 'scheduledAt',
         getMeta: () => ({
             placement: placements.TOP,
@@ -266,6 +269,7 @@ class ViewEventDataEntryPlain extends Component<Props> {
             dataEntryId,
             ...passOnProps
         } = this.props;
+        console.log(this.props);
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
