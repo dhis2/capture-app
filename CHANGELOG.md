@@ -1,3 +1,11 @@
+## [100.16.4](https://github.com/dhis2/capture-app/compare/v100.16.3...v100.16.4) (2022-10-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0f907ee](https://github.com/dhis2/capture-app/commit/0f907eeda52f2b0c406c51620f09ba067d4d2f67))
+* [DHIS2-13635] cover the case `ai.length > 2` ([#2973](https://github.com/dhis2/capture-app/issues/2973)) ([6d9fd13](https://github.com/dhis2/capture-app/commit/6d9fd13c496e2cfa9c779b1655993b613fc59ba1))
+
 ## [100.16.3](https://github.com/dhis2/capture-app/compare/v100.16.2...v100.16.3) (2022-10-10)
 
 
