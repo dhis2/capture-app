@@ -1,3 +1,36 @@
+## [100.16.3](https://github.com/dhis2/capture-app/compare/v100.16.2...v100.16.3) (2022-10-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([99691b4](https://github.com/dhis2/capture-app/commit/99691b42bb901381baed81eada0a2de9a3d5623e))
+
+## [100.16.2](https://github.com/dhis2/capture-app/compare/v100.16.1...v100.16.2) (2022-10-09)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([130330f](https://github.com/dhis2/capture-app/commit/130330f0c5368d953769e709de4d3cb9c440002e))
+
+## [100.16.1](https://github.com/dhis2/capture-app/compare/v100.16.0...v100.16.1) (2022-10-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([064e3f8](https://github.com/dhis2/capture-app/commit/064e3f8d6262c48718a2d1fe1cb77e712357c193))
+
+
+### Reverts
+
+* [DHIS2-8613] limit report date of new events to today or earlier ([#3023](https://github.com/dhis2/capture-app/issues/3023)) ([305e59c](https://github.com/dhis2/capture-app/commit/305e59c36d239e531701ab04e296612289edfca1))
+
+# [100.16.0](https://github.com/dhis2/capture-app/compare/v100.15.1...v100.16.0) (2022-10-05)
+
+
+### Features
+
+* [DHIS2-13439] show description due date label when available  ([#2996](https://github.com/dhis2/capture-app/issues/2996)) ([c4c322d](https://github.com/dhis2/capture-app/commit/c4c322d64a005d9be6ec0dbfa2aba4a37a9dbf65))
+
 ## [100.15.1](https://github.com/dhis2/capture-app/compare/v100.15.0...v100.15.1) (2022-10-04)
 
 

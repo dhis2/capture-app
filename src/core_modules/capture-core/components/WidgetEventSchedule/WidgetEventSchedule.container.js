@@ -125,6 +125,7 @@ export const WidgetEventSchedule = ({
             programId={programId}
             programName={program.name}
             scheduleDate={scheduleDate}
+            dueDateLabel={programStageScheduleConfig.dueDateLabel}
             suggestedScheduleDate={suggestedScheduleDate}
             onCancel={onCancel}
             setScheduleDate={setScheduleDate}
