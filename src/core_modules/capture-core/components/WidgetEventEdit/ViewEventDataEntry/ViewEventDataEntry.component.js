@@ -269,7 +269,7 @@ class ViewEventDataEntryPlain extends Component<Props> {
             dataEntryId,
             ...passOnProps
         } = this.props;
-        console.log(this.props);
+
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
