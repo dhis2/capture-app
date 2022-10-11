@@ -8,9 +8,9 @@ name: 'dhis2: e2e tests'
 #     CYPRESS_DHIS2_PASSWORD
 #
 # - Customize environment variables:
-#     URL_PATTERN_INSTANCES: Set the URL pattern for your instances.
-#                            {version} will be replaced by "dev" or "[majorVersion].[minorVersion]"
-#                            Example: https://test.e2e.dhis2.org/test-{version} will be looking for https://test.e2e.dhis2.org/test-dev, https://test.e2e.dhis2.org/test-2.39 and so on.
+#     BASE_URL_INSTANCES: Set the base url for the instances, e.g. https://test.e2e.dhis2.org
+#     NAME_PATTERN_LEGACY_INSTANCES: Set the name pattern for your instances. {version} will be replaced by "dev" or "[majorVersion].[minorVersion]"
+#     NAME_PATTERN_DEV_INSTANCE: Set the name pattern for your dev instance. {version} will be replaced by "dev" or "[majorVersion].[minorVersion]"
 #     CYPRESS_CONTAINERS: Set the number of parallel Cypress job runs running for each backend version.
 #     TRIGGER_LABELS: Set the labels that will trigger the workflow.
 #
@@ -26,7 +26,9 @@ on:
         types: [labeled]
 
 env:
-    URL_PATTERN_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PATTERN }}
+    BASE_URL_INSTANCES: https://test.e2e.dhis2.org
+    NAME_PATTERN_LEGACY_INSTANCES: ca-test-{version}
+    NAME_PATTERN_DEV_INSTANCE: ca-test-dev
     CYPRESS_CONTAINERS: 8
     TRIGGER_LABELS: e2e-tests, testing
 
@@ -62,7 +64,7 @@ jobs:
             - name: compute-instance-url
               id: instance-url
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
-              run: echo "::set-output name=url::${URL_PATTERN_INSTANCES/"{version}"/dev}"
+              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_DEV_INSTANCE/"{version}"/dev}"
 
             - id: legacy-versions
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
@@ -101,7 +103,7 @@ jobs:
 
             - name: compute-instance-url
               id: instance-url
-              run: echo "::set-output name=url::${URL_PATTERN_INSTANCES/"{version}"/$version}"
+              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${version/"{version}"/$version}"
               env:
                   version: ${{ matrix.versions }}
 
