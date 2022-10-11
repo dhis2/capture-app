@@ -1,12 +1,8 @@
 export const filterInstanceVersion = (skip) => {
-    cy.log(Cypress.env('dhis2InstanceVersion'));
-    cy.log(JSON.stringify(window.testState.currentScenario.tags));
     const { tags } = window.testState.currentScenario;
     if (!tags || !tags.length) {
         return;
     }
-
-    cy.log(JSON.stringify(tags));
 
     const versionTags = tags
         .map(({ name }) => /^@v([><=]*)(\d+)$/.exec(name))
@@ -28,7 +24,6 @@ export const filterInstanceVersion = (skip) => {
 
     const shouldRun = versionTags
         .some((versionTag) => {
-            cy.log(JSON.stringify(versionTag));
             const version = Number(versionTag[2]);
             const operator = versionTag[1] || '=';
             return operation[operator]?.(currentInstanceVersion, version) ?? false;
