@@ -1,4 +1,6 @@
 export const filterInstanceVersion = (skip) => {
+    cy.log(Cypress.env('dhis2InstanceVersion'));
+    cy.log(JSON.stringify(window.testState.currentScenario.tags));
     const { tags } = window.testState.currentScenario;
     if (!tags || !tags.length) {
         return;
@@ -14,7 +16,7 @@ export const filterInstanceVersion = (skip) => {
         return;
     }
 
-    const currentInstanceVersion = Number(Cypress.env('dhis2InstanceVersion'));
+    const currentInstanceVersion = Number(/[.](\d+)/.exec(Cypress.env('dhis2InstanceVersion'))[1]);
 
     const operation = {
         '>=': (instanceVersion, testVersion) => instanceVersion >= testVersion,

@@ -8,11 +8,11 @@ name: 'dhis2: e2e tests'
 #     CYPRESS_DHIS2_PASSWORD
 #
 # - Customize environment variables:
-#     URL_PREFIX_INSTANCES: Set the URL prefix for your instances.
-#                           All instances are required to have this prefix followed by "[majorVersion].[minorVersion]" for released versions (e.g. 2.39) and "dev" for a dev instance.
-#                           Example: https://test.e2e.dhis2.org/test-
-#     CYPRESS_CONTAINERS:  Set the number of parallel Cypress job runs running for each backend version.
-#     TRIGGER_LABELS:  Set the labels that will trigger the workflow.
+#     BASE_URL_INSTANCES: Set the base url for the instances, e.g. https://test.e2e.dhis2.org
+#     NAME_PATTERN_LEGACY_INSTANCES: Set the name pattern for your instances. {version} will be replaced by "[majorVersion].[minorVersion]"
+#     NAME_PATTERN_DEV_INSTANCE: Set the name pattern for your dev instance. {version} will be replaced by "dev"
+#     CYPRESS_CONTAINERS: Set the number of parallel Cypress job runs running for each backend version.
+#     TRIGGER_LABELS: Set the labels that will trigger the workflow.
 #
 # - Set status check as required:
 #     We recommend setting "call-e2e-tests-result / e2e-tests-success"  as a required step in your workflow.
@@ -26,8 +26,9 @@ on:
         types: [labeled]
 
 env:
-    URL_INSTANCES_PATTERN: https://test.e2e.dhis2.org/ca-test-{version}
-    URL_PREFIX_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PREFIX }}
+    BASE_URL_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}
+    NAME_PATTERN_LEGACY_INSTANCES: ca-test-{version}
+    NAME_PATTERN_DEV_INSTANCE: ca-test-dev
     CYPRESS_CONTAINERS: 8
     TRIGGER_LABELS: e2e-tests, testing
 
@@ -63,15 +64,13 @@ jobs:
             - name: compute-instance-url
               id: instance-url
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
-              run: |
-                  echo ::set-output name=url::"${{ URL_INSTANCES_PATTERN }}/"{version}"/dev"
-                  echo "${{ URL_INSTANCES_PATTERN }}/"{version}"/dev"
+              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_DEV_INSTANCE/"{version}"/dev}"
 
             - id: legacy-versions
               if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
               uses: dhis2/action-supported-legacy-versions@v1
               with:
-                  instance-url-latest: ${{ steps.instance-url.url }} # can be removed if maxDHIS2Version has been specified
+                  instance-url-latest: ${{ steps.instance-url.outputs.url }} # can be removed if maxDHIS2Version has been specified
                   username: ${{ secrets.CYPRESS_DHIS2_USERNAME }} # can be removed if maxDHIS2Version has been specified
                   password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
 
@@ -102,6 +101,12 @@ jobs:
               if: steps.yarn-cache.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
 
+            - name: compute-instance-url
+              id: instance-url
+              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/$version}"
+              env:
+                  version: ${{ matrix.versions }}
+
             - name: Cypress run
               uses: cypress-io/github-action@v2
               with:
@@ -116,7 +121,7 @@ jobs:
                   CI: true
                   CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  CYPRESS_dhis2BaseUrl: ${{ env.URL_PREFIX_INSTANCES }}${{ matrix.versions }}
+                  CYPRESS_dhis2BaseUrl: ${{ steps.instance-url.outputs.url }}
                   CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
                   CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
                   CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}

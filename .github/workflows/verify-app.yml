@@ -102,7 +102,7 @@ jobs:
       - uses: dhis2/action-instance-version@v1
         id: instance-version
         with:
-          instance-url: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PREFIX }}dev
+          instance-url: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}/ca-test-dev
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
   
@@ -145,7 +145,7 @@ jobs:
           CI: true
           CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYPRESS_dhis2BaseUrl: ${{ secrets.CYPRESS_DHIS2_INSTANCES_URL_PREFIX }}dev
+          CYPRESS_dhis2BaseUrl: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}/ca-test-dev
           CYPRESS_dhis2InstanceVersion: ${{ needs.instance-version.outputs.version }}
           CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
