@@ -36,8 +36,7 @@ const preprocessD2FunctionArguments = (expression: string) => {
             .replace('A{', "'")
             .replace('C{', "'")
             .replace('V{', "'")
-            .replace('}', "'")
-            .replace(/ /g, '');
+            .replace('}', "'");
 
         return accExpression.replace(match, processedMatch);
     }, expression);
