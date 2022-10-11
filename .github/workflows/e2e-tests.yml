@@ -9,8 +9,8 @@ name: 'dhis2: e2e tests'
 #
 # - Customize environment variables:
 #     BASE_URL_INSTANCES: Set the base url for the instances, e.g. https://test.e2e.dhis2.org
-#     NAME_PATTERN_LEGACY_INSTANCES: Set the name pattern for your instances. {version} will be replaced by "dev" or "[majorVersion].[minorVersion]"
-#     NAME_PATTERN_DEV_INSTANCE: Set the name pattern for your dev instance. {version} will be replaced by "dev" or "[majorVersion].[minorVersion]"
+#     NAME_PATTERN_LEGACY_INSTANCES: Set the name pattern for your instances. {version} will be replaced by "[majorVersion].[minorVersion]"
+#     NAME_PATTERN_DEV_INSTANCE: Set the name pattern for your dev instance. {version} will be replaced by "dev"
 #     CYPRESS_CONTAINERS: Set the number of parallel Cypress job runs running for each backend version.
 #     TRIGGER_LABELS: Set the labels that will trigger the workflow.
 #
@@ -103,7 +103,7 @@ jobs:
 
             - name: compute-instance-url
               id: instance-url
-              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${version/"{version}"/$version}"
+              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/$version}"
               env:
                   version: ${{ matrix.versions }}
 
