@@ -27,7 +27,7 @@ on:
 
 env:
     BASE_URL_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}
-    NAME_PATTERN_LEGACY_INSTANCES: ca-test-{version}
+    NAME_PATTERN_LEGACY_INSTANCES: 'ca-test-{version}'
     NAME_PATTERN_DEV_INSTANCE: ca-test-dev
     CYPRESS_CONTAINERS: 8
     TRIGGER_LABELS: e2e-tests, testing
