@@ -254,13 +254,7 @@ const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, prog
         const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching =
             new Map(transformFiltersOnly.concat(transformProgramStageFiltersOnly));
 
-        const programStageId = queryArgs.filters?.programStage?.values[0];
-
-        onUpdateList(
-            { ...queryArgs, programStageId },
-            { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching },
-            0,
-        );
+        onUpdateList(queryArgs, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching }, 0);
     }, [defaultColumns, filtersOnly, programStageFiltersOnly, onUpdateList]);
 
 export const TeiWorkingListsSetup = ({
