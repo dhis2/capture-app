@@ -33,7 +33,7 @@ When(/^the user set the apgar score to (.*)/, score =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="capture-ui-input"]')
-        .eq(1)
+        .eq(2)
         .clear()
         .type(score)
         .blur(),
@@ -86,4 +86,9 @@ Then('the user see the schedule date and info box', () => {
         cy.contains('Schedule date / Due date');
         cy.contains('Scheduled automatically for 2021-10-16');
     });
+});
+
+Then(/^the user see the schedule date field with tooltip: (.*)$/, (tooltipContent) => {
+    cy.get('[data-test="dhis2-uicore-tooltip-reference"]').eq(0).trigger('mouseover');
+    cy.get('[data-test="dhis2-uicore-tooltip-content"]').contains(tooltipContent).should('exist');
 });

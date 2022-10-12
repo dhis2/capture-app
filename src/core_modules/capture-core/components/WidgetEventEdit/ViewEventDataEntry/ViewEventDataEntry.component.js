@@ -23,7 +23,6 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
-import { statusTypes } from '../../../events/statusTypes';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
