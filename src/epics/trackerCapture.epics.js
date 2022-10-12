@@ -194,10 +194,6 @@ import {
     updateEventFailedEpic,
 } from '../core_modules/capture-core/components/Pages/EnrollmentEditEvent';
 import {
-    updateEventSucceededEpic,
-    updateEventFailedEpic,
-} from '../core_modules/capture-core/components/Pages/EnrollmentEditEvent';
-import {
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,

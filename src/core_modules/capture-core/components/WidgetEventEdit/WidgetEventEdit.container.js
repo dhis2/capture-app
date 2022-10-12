@@ -69,7 +69,6 @@ export const WidgetEventEditPlain = ({
     }
 
 
-
     return orgUnit ? (
         <div data-test="widget-enrollment-event">
             <div className={classes.menu}>
