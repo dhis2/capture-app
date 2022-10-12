@@ -1,7 +1,7 @@
 // @flow
 export const ADDITIONAL_FILTERS = {
     programStage: 'programStage',
-    occurredAt: 'occurredAt',
+    occurredAt: 'eventOccurredAt',
     status: 'status',
 };
 
