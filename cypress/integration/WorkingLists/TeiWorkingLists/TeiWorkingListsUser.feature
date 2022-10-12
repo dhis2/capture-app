@@ -137,3 +137,16 @@ And you apply the current filter
 And you open the column selector
 And you select a data element columns and save from the column selector
 Then you see data elements specific filters and columns
+
+@v>=39
+Scenario: While in a program stage working list, the user can filter by both TEA and data elements 
+Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
+When you set the enrollment status filter to active
+And you apply the current filter
+And you set the event status filter to completed
+And you apply the current filter
+And you set the first name filter to Urzula
+And you apply the current filter
+And you set the WHOMCH Smoking filter to No
+And you apply the current filter
+Then the list should display 1 row of data
