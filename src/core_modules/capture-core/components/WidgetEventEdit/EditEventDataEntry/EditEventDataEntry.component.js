@@ -32,7 +32,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
 } from '../../FormFields/New';
-import { statusTypes } from '../../../events/statusTypes';
+import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
@@ -140,7 +140,7 @@ const buildReportDateSettingsFn = () => {
 };
 
 const buildScheduleDateSettingsFn = () => {
-    const scheduleDateComponent =
+    const scheduleDateComponent = innerProps =>
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
@@ -149,7 +149,15 @@ const buildScheduleDateSettingsFn = () => {
                             onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: Object) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                            customTooltip: i18n.t('Go to “Schedule” tab to reschedule this event'),
+                            customTooltip: () => {
+                                const isScheduleableStatus =
+                                [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(innerProps.eventStatus);
+
+                                return isScheduleableStatus ?
+                                    i18n.t('Go to “Schedule” tab to reschedule this event') :
+                                    i18n.t('Scheduled date cannot be changed for {{ eventStatus }} events',
+                                        { eventStatus: translatedStatusTypes()[innerProps.eventStatus] });
+                            },
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
@@ -160,17 +168,14 @@ const buildScheduleDateSettingsFn = () => {
             ),
         );
     const scheduleDateSettings = {
-        getComponent: () => scheduleDateComponent,
+        getComponent: (props: Object) => scheduleDateComponent(props),
         getComponentProps: (props: Object) => createComponentProps(props, {
             width: '100%',
             calendarWidth: 350,
             label: props.formFoundation.getLabel('scheduledAt'),
             disabled: true,
         }),
-        getIsHidden: (props: Object) => {
-            const isScheduleableStatus = [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus);
-            return props.hideDueDate || !isScheduleableStatus;
-        },
+        getIsHidden: (props: Object) => props.hideDueDate,
         getPropName: () => 'scheduledAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
