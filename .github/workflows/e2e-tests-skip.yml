@@ -6,7 +6,7 @@ on:
 
 jobs:
     call-e2e-tests-result:
-        if: github.event.label.name == 'skip-e2e-tests'
+        if: ${{ github.event.label.name == 'skip-e2e-tests' }}
         uses: ./.github/workflows/e2e-tests-result.yml
         with:
             result: true
