@@ -30,7 +30,7 @@ env:
     NAME_PATTERN_LEGACY_INSTANCES: 'ca-test-{version}'
     NAME_PATTERN_DEV_INSTANCE: ca-test-dev
     CYPRESS_CONTAINERS: 8
-    TRIGGER_LABELS: ['e2e-tests', 'testing']
+    TRIGGER_LABELS: e2e-tests, testing
 
 defaults:
     run:
