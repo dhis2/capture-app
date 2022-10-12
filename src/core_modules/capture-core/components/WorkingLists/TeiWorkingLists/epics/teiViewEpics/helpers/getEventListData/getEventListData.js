@@ -1,6 +1,12 @@
 // @flow
 import { convertToClientEvents } from './convertToClientEvents';
-import { getSubvalues, getApiFilterQueryArgs, getMainApiFilterQueryArgs } from '../getListDataCommon';
+import {
+    getSubvalues,
+    getApiFilterQueryArgs,
+    getMainApiFilterQueryArgs,
+    getApiFilterAttributesQueryArgs,
+    splitFilters,
+} from '../getListDataCommon';
 import type { RawQueryArgs } from './types';
 import type { InputMeta } from './getEventListData.types';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
@@ -19,18 +25,22 @@ const createApiEventQueryArgs = (
     }: RawQueryArgs,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
     filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
-): { [string]: any } => ({
-    ...getApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-    ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-    order: `${sortById}:${sortByDirection}`,
-    page,
-    pageSize,
-    orgUnit,
-    ouMode: orgUnit ? 'SELECTED' : 'ACCESSIBLE',
-    program,
-    programStage,
-    fields: '*',
-});
+): { [string]: any } => {
+    const rawSplitFilters = splitFilters(filters, columnsMetaForDataFetching);
+    return {
+        ...getApiFilterQueryArgs(rawSplitFilters.filters, filtersOnlyMetaForDataFetching),
+        ...getApiFilterAttributesQueryArgs(rawSplitFilters.filterAttributes, filtersOnlyMetaForDataFetching),
+        ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
+        order: `${sortById}:${sortByDirection}`,
+        page,
+        pageSize,
+        orgUnit,
+        ouMode: orgUnit ? 'SELECTED' : 'ACCESSIBLE',
+        program,
+        programStage,
+        fields: '*',
+    };
+};
 
 const createApiTEIsQueryArgs = ({ pageSize, programId: program }, trackedEntityIds): { [string]: any } => ({
     program,

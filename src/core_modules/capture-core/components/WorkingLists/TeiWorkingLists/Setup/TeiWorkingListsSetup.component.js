@@ -3,6 +3,7 @@ import React, { useCallback, useMemo, useEffect } from 'react';
 import uuid from 'uuid/v4';
 import i18n from '@dhis2/d2-i18n';
 import { useFeature, FEATURES } from 'capture-core-utils';
+import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
 import {
     dataElementTypes,
     type TrackerProgram,
@@ -143,6 +144,7 @@ const useProgramStageFilters = ({ stages }: TrackerProgram, programStage?: strin
 
     return useMemo(() => {
         if (supportsProgramStageWorkingLists) {
+            const translatedStatus = translatedStatusTypes();
             return [
                 {
                     id: ADDITIONAL_FILTERS.programStage,
@@ -160,15 +162,38 @@ const useProgramStageFilters = ({ stages }: TrackerProgram, programStage?: strin
                         label: ADDITIONAL_FILTERS_LABELS.occurredAt,
                         interpolation: { escapeValue: false },
                     }),
+                    transformRecordsFilter: (filter: string) => {
+                        const queryArgs = {};
+                        const filterParts = filter.split(':');
+                        const indexGe = filterParts.indexOf('ge');
+                        const indexLe = filterParts.indexOf('le');
+                        if (indexGe !== -1 && filterParts[indexGe + 1]) {
+                            queryArgs.occurredAfter = filterParts[indexGe + 1];
+                        }
+                        if (indexLe !== -1 && filterParts[indexLe + 1]) {
+                            queryArgs.occurredBefore = filterParts[indexLe + 1];
+                        }
+                        return queryArgs;
+                    },
                 },
                 {
                     id: ADDITIONAL_FILTERS.status,
                     type: 'TEXT',
                     header: i18n.t(ADDITIONAL_FILTERS_LABELS.status),
+                    options: [
+                        { text: translatedStatus.ACTIVE, value: statusTypes.ACTIVE },
+                        { text: translatedStatus.SCHEDULE, value: statusTypes.SCHEDULE },
+                        { text: translatedStatus.COMPLETED, value: statusTypes.COMPLETED },
+                        { text: translatedStatus.OVERDUE, value: statusTypes.OVERDUE },
+                        { text: translatedStatus.SKIPPED, value: statusTypes.SKIPPED },
+                    ],
                     disabled: !programStage,
                     tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                         label: ADDITIONAL_FILTERS_LABELS.status,
                         interpolation: { escapeValue: false },
+                    }),
+                    transformRecordsFilter: (rawFilter: string) => ({
+                        status: rawFilter.split(':')[1],
                     }),
                 },
             ];
@@ -211,16 +236,24 @@ const useInjectDataFetchingMetaToLoadList = (defaultColumns, filtersOnly, onLoad
         onLoadView(selectedTemplate, context, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching });
     }, [defaultColumns, filtersOnly, onLoadView]);
 
-const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, onUpdateList) =>
+const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, programStageFiltersOnly, onUpdateList) =>
     useCallback((queryArgs: Object) => {
         const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
-                .map(({ id, type, mainProperty }) => [id, { id, type, mainProperty }]),
+                .map(({ id, type, mainProperty, additionalColumn }) => [id, { id, type, mainProperty, additionalColumn }]),
         );
-        const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
-            filtersOnly
-                .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]));
+        const transformFiltersOnly = filtersOnly
+            .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]);
+
+        const transformProgramStageFiltersOnly = programStageFiltersOnly
+            .filter(({ mainButton }) => !mainButton)
+            // $FlowFixMe[prop-missing]
+            .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]);
+
+        const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching =
+            new Map(transformFiltersOnly.concat(transformProgramStageFiltersOnly));
+
         const programStageId = queryArgs.filters?.programStage?.values[0];
 
         onUpdateList(
@@ -228,7 +261,7 @@ const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, onUp
             { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching },
             0,
         );
-    }, [defaultColumns, filtersOnly, onUpdateList]);
+    }, [defaultColumns, filtersOnly, programStageFiltersOnly, onUpdateList]);
 
 export const TeiWorkingListsSetup = ({
     program,
@@ -335,7 +368,7 @@ export const TeiWorkingListsSetup = ({
             additionalFilters={programStageFiltersOnly}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectDataFetchingMetaToLoadList(defaultColumns, filtersOnly, onLoadView)}
-            onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, onUpdateList)}
+            onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, programStageFiltersOnly, onUpdateList)}
             programId={program.id}
             rowIdKey="id"
             orgUnitId={orgUnitId}
