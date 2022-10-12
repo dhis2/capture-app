@@ -30,7 +30,7 @@ env:
     NAME_PATTERN_LEGACY_INSTANCES: 'ca-test-{version}'
     NAME_PATTERN_DEV_INSTANCE: ca-test-dev
     CYPRESS_CONTAINERS: 8
-    TRIGGER_LABELS: e2e-tests, testing
+    TRIGGER_LABELS: ['e2e-tests', 'testing']
 
 defaults:
     run:
@@ -38,6 +38,7 @@ defaults:
 
 jobs:
     prerequisites:
+        if: contains(fromJson(['e2e-tests', 'testing']), github.event.label.name)
         runs-on: ubuntu-latest
         outputs:
             json-labels: ${{ steps.json-labels.outputs.labels }}
@@ -76,7 +77,6 @@ jobs:
 
     cypress:
         needs: prerequisites
-        if: contains(fromJson(needs.prerequisites.outputs.json-labels), github.event.label.name)
         runs-on: ubuntu-latest
         container: cypress/browsers:node14.7.0-chrome84
         strategy:
