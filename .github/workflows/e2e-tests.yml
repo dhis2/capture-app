@@ -38,7 +38,7 @@ defaults:
 
 jobs:
     prerequisites:
-        if: contains(fromJson(['e2e-tests', 'testing']), github.event.label.name)
+        if: contains(fromJson('["e2e-tests", "testing"]'), github.event.label.name)
         runs-on: ubuntu-latest
         outputs:
             json-labels: ${{ steps.json-labels.outputs.labels }}
