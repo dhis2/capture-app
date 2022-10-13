@@ -108,6 +108,7 @@ export type CachedProgramStage = {
     validationStrategy: string,
     enableUserAssignment?: ?boolean,
     autoGenerateEvent?: ?boolean,
+    allowGenerateNextVisit?: ?boolean,
     openAfterEnrollment?: ?boolean,
     generatedByEnrollmentDate?: ?boolean,
     reportDateToUse: string,

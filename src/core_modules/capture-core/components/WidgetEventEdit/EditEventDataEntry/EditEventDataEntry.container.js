@@ -17,14 +17,15 @@ import { type RenderFoundation } from '../../../metaData';
 import {
     setCurrentDataEntry, startRunRulesPostUpdateField,
 } from '../../DataEntry/actions/dataEntry.actions';
-
 import {
     requestSaveEditEventDataEntry,
     cancelEditEventDataEntry,
     requestDeleteEventDataEntry,
+    navigateToEnrollmentCreateNew,
 } from './editEventDataEntry.actions';
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
+import { navigateToEnrollmentOverview } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
 
 const mapStateToProps = (state: ReduxState) => {
@@ -100,6 +101,13 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         const { enrollmentId } = props;
         const { eventId } = getLocationQuery();
         dispatch(requestDeleteEventDataEntry({ eventId, enrollmentId }));
+    },
+    onCancelCreateNew: () => {
+        const { enrollmentId } = props;
+        dispatch(navigateToEnrollmentOverview({ enrollmentId }));
+    },
+    onConfirmCreateNew: () => {
+        dispatch(navigateToEnrollmentCreateNew());
     },
 });
 

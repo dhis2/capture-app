@@ -1,9 +1,10 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, switchMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
+import { EMPTY } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
@@ -37,6 +38,7 @@ import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString'
 import {
     updateEventContainer,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+
 
 const getDataEntryId = (event): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
@@ -188,5 +190,17 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
             const params = { enrollmentId };
             dependencies.history.push(`/enrollment?${buildUrlQueryString(params)}`);
             return startDeleteEventDataEntry(eventId, params);
+        }));
+
+
+export const navigateToEnrollmentCreateNewEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) =>
+    action$.pipe(
+        ofType(actionTypes.NAVIGATE_TO_CREATE_NEW_EVENT),
+        switchMap(() => {
+            const state = store.value;
+            const { enrollmentId, orgUnitId, programId, teiId } = state.currentSelections;
+            const params = { enrollmentId, orgUnitId, programId, teiId };
+            dependencies.history.push(`/enrollmentEventNew?${buildUrlQueryString(params)}`);
+            return EMPTY;
         }));
 

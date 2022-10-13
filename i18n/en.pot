@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
-"PO-Revision-Date: 2022-09-16T07:55:37.554Z\n"
+"POT-Creation-Date: 2022-10-13T18:36:47.190Z\n"
+"PO-Revision-Date: 2022-10-13T18:36:47.190Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1111,6 +1111,15 @@ msgstr "This event doesn't have any comments"
 
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
+
+msgid "Generate new event"
+msgstr "Generate new event"
+
+msgid "Do you want to create another event?"
+msgstr "Do you want to create another event?"
+
+msgid "Yes, create new event"
+msgstr "Yes, create new event"
 
 msgid "Delete event"
 msgstr "Delete event"

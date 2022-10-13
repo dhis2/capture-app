@@ -144,6 +144,7 @@ export const WidgetEventEditPlain = ({
                             hasDeleteButton
                             onHandleScheduleSave={onHandleScheduleSave}
                             initialScheduleDate={initialScheduleDate}
+                            allowGenerateNextVisit={programStage.allowGenerateNextVisit}
                         />
                     )}
                 </div>
