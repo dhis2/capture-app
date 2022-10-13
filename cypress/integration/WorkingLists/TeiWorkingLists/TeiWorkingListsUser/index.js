@@ -157,14 +157,14 @@ When('you set the event status filter to completed', () => {
         .click();
 });
 
-When('you set the first name filter to Urzula', () => {
+When(/^you set the first name filter to (.*)$/, (name) => {
     cy.get('[data-test="tei-working-lists"]')
         .contains('First name')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
         .find('input')
-        .type('Urzula')
+        .type(name)
         .blur();
 });
 
@@ -367,22 +367,13 @@ Then('the list should display data ordered ascendingly by first name', () => {
 
 Then('the list should display data ordered ascendingly by last name', () => {
     const names = [
-        'Didriksson',
-        'Didriksson',
-        'Fjordsen',
-        'Franksen',
-        'Gonzales',
-        'Gunnarson',
         'Hertz',
-        'Jørgensen',
-        'Jørgensen',
-        'Ryder',
         'Siren',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
-        .should('have.length', 12)
+        .should('have.length', 3)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
@@ -394,22 +385,13 @@ Then('the list should display data ordered ascendingly by last name', () => {
 
 Then('the list should display data ordered ascendingly by WHOMCH Smoking', () => {
     const names = [
-        'Didriksson',
-        'Gonzales',
-        'Gunnarson',
-        'Didriksson',
-        'Ryder',
-        'Jørgensen',
         'Siren',
         'Hertz',
-        'Jørgensen',
-        'Fjordsen',
-        'Franksen',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
-        .should('have.length', 12)
+        .should('have.length', 3)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)

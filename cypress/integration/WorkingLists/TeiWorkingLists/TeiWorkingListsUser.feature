@@ -154,6 +154,8 @@ Then the list should display 1 row of data
 @v>=39
 Scenario: While in a program stage working list, the user can sort by both TEA and data elements 
 Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
+And you set the first name filter to u
+And you apply the current filter
 When you click the last name column header
 Then the sort arrow should indicate ascending order
 And the list should display data ordered ascendingly by last name
