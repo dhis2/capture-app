@@ -110,6 +110,6 @@ jobs:
         if: ${{ success() || failure() }}
         runs-on: ubuntu-latest
         steps:
-            - run: echo "$result"
+            - run: if [ $result != true ]; then exit 1; fi;
               env:
                 result: ${{ needs.e2e-tests-failure.result }}
