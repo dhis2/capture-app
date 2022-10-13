@@ -321,6 +321,18 @@ When('you click the first name column header', () => {
         .click();
 });
 
+When('you click the last name column header', () => {
+    cy.get('[data-test="online-list-table"]')
+        .contains('Last name')
+        .click();
+});
+
+When('you click the WHOMCH Smoking column header', () => {
+    cy.get('[data-test="online-list-table"]')
+        .contains('WHOMCH Smoking')
+        .click();
+});
+
 Then('the list should display data ordered ascendingly by first name', () => {
     const names = [
         'Alan',
@@ -353,6 +365,59 @@ Then('the list should display data ordered ascendingly by first name', () => {
         });
 });
 
+Then('the list should display data ordered ascendingly by last name', () => {
+    const names = [
+        'Didriksson',
+        'Didriksson',
+        'Fjordsen',
+        'Franksen',
+        'Gonzales',
+        'Gunnarson',
+        'Hertz',
+        'Jørgensen',
+        'Jørgensen',
+        'Ryder',
+        'Siren',
+    ];
+
+    cy.get('[data-test="tei-working-lists"]')
+        .find('tr')
+        .should('have.length', 12)
+        .each(($teiRow, index) => {
+            if (index) {
+                cy.wrap($teiRow)
+                    .contains(names[index - 1])
+                    .should('exist');
+            }
+        });
+});
+
+Then('the list should display data ordered ascendingly by WHOMCH Smoking', () => {
+    const names = [
+        'Didriksson',
+        'Gonzales',
+        'Gunnarson',
+        'Didriksson',
+        'Ryder',
+        'Jørgensen',
+        'Siren',
+        'Hertz',
+        'Jørgensen',
+        'Fjordsen',
+        'Franksen',
+    ];
+
+    cy.get('[data-test="tei-working-lists"]')
+        .find('tr')
+        .should('have.length', 12)
+        .each(($teiRow, index) => {
+            if (index) {
+                cy.wrap($teiRow)
+                    .contains(names[index - 1])
+                    .should('exist');
+            }
+        });
+});
 
 Then('you see the custom TEI working lists', () => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')

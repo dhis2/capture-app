@@ -150,3 +150,13 @@ And you apply the current filter
 And you set the WHOMCH Smoking filter to No
 And you apply the current filter
 Then the list should display 1 row of data
+
+@v>=39
+Scenario: While in a program stage working list, the user can sort by both TEA and data elements 
+Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
+When you click the last name column header
+Then the sort arrow should indicate ascending order
+And the list should display data ordered ascendingly by last name
+When you click the WHOMCH Smoking column header
+Then the sort arrow should indicate descending order
+And the list should display data ordered ascendingly by WHOMCH Smoking
