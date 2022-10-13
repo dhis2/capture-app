@@ -112,4 +112,4 @@ jobs:
         steps:
             - run: echo "$result"
               env:
-                result: ${{ needs.e2e-tests-failure.conclusion }}
+                result: ${{ needs.e2e-tests-failure.result }}
