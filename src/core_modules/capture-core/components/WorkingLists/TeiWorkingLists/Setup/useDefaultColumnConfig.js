@@ -35,6 +35,25 @@ const mainConfig: Array<MainColumnConfig> = [{
         mainProperty: true,
     }));
 
+const programStageMainConfig: Array<MainColumnConfig> = [{
+    id: 'status',
+    visible: false,
+    type: dataElementTypes.TEXT,
+    header: i18n.t('Event status'),
+    filterHidden: true,
+},
+{
+    id: 'occurredAt',
+    visible: false,
+    type: dataElementTypes.DATE,
+    header: i18n.t('Report date'),
+    filterHidden: true,
+}]
+    .map(field => ({
+        ...field,
+        mainProperty: true,
+    }));
+
 const getEventsMetaDataConfig =
     (stages, programStageId: string): Array<MetadataColumnConfig> => {
         const stageForm = stages.get(programStageId)?.stageForm;
@@ -77,9 +96,16 @@ export const useDefaultColumnConfig = (
     useMemo(() => {
         const { attributes, stages } = program;
 
-        return [
+        const defaultColumns = [
             ...mainConfig,
             ...getTEIMetaDataConfig(attributes, orgUnitId),
-            ...(programStageId ? getEventsMetaDataConfig(stages, programStageId) : []),
         ];
+
+        if (programStageId) {
+            return defaultColumns.concat([
+                ...programStageMainConfig,
+                ...getEventsMetaDataConfig(stages, programStageId),
+            ]);
+        }
+        return defaultColumns;
     }, [orgUnitId, program, programStageId]);
