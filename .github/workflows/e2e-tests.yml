@@ -22,15 +22,12 @@ name: 'dhis2: e2e tests'
 #       3) They were skipped due to a special case (see e2e-tests-exception.yml)
 
 on:
-    pull_request:
-        types: [labeled]
+    pull_request
 
 env:
     BASE_URL_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}
     NAME_PATTERN_LEGACY_INSTANCES: ca-test-{version}
     NAME_PATTERN_DEV_INSTANCE: ca-test-dev
-    CYPRESS_CONTAINERS: 8
-    TRIGGER_LABELS: e2e-tests, testing
 
 defaults:
     run:
@@ -38,36 +35,18 @@ defaults:
 
 jobs:
     prerequisites:
+        if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest
         outputs:
-            json-labels: ${{ steps.json-labels.outputs.labels }}
-            matrix-containers: ${{ steps.matrix-containers.outputs.containers }}
             versions: ${{ steps.legacy-versions.outputs.versions }}
         steps:
-            - name: compute-json-labels
-              id: json-labels
-              run: |
-                  arrLabels=(${TRIGGER_LABELS//,/ })
-                  for item in ${arrLabels[@]}; do labels+=\"$item\",; done
-                  echo "::set-output name=labels::[ ${labels%,} ]"
-
-            - name: compute-matrix-containers
-              id: matrix-containers
-              if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
-              run: |
-                  for (( cnt = 1; cnt <= $CYPRESS_CONTAINERS; cnt++)); do containers+=$cnt,; done
-                  echo "::set-output name=containers::[ ${containers%,} ]"
-
-            - if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
-              uses: actions/checkout@v2
+            - uses: actions/checkout@v2
 
             - name: compute-instance-url
               id: instance-url
-              if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
               run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_DEV_INSTANCE/"{version}"/dev}"
 
             - id: legacy-versions
-              if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
               uses: dhis2/action-supported-legacy-versions@v1
               with:
                   instance-url-latest: ${{ steps.instance-url.outputs.url }} # can be removed if maxDHIS2Version has been specified
@@ -76,30 +55,19 @@ jobs:
 
     cypress:
         needs: prerequisites
-        if: contains(fromJson(needs.prerequisites.outputs.json-labels), github.event.label.name)
         runs-on: ubuntu-latest
         container: cypress/browsers:node14.7.0-chrome84
         strategy:
             fail-fast: false
             matrix:
                 versions: ${{ fromJSON(needs.prerequisites.outputs.versions) }}
-                containers: ${{ fromJSON(needs.prerequisites.outputs.matrix-containers) }}
+                containers: [1, 2, 3, 4, 5, 6, 7, 8]
         steps:
             - uses: actions/checkout@v2
 
             - uses: actions/setup-node@v1
               with:
                   node-version: 14.x
-
-            - uses: actions/cache@v2
-              id: yarn-cache
-              with:
-                  path: '**/node_modules'
-                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
-            - name: Install
-              if: steps.yarn-cache.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
 
             - name: compute-instance-url
               id: instance-url
