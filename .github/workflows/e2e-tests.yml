@@ -51,7 +51,7 @@ jobs:
                   username: ${{ secrets.CYPRESS_DHIS2_USERNAME }} # can be removed if maxDHIS2Version has been specified
                   password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
 
-    #cypress:
+    #cypress: 
     #    needs: prerequisites
     #    runs-on: ubuntu-latest
     #    container: cypress/browsers:node14.7.0-chrome84
