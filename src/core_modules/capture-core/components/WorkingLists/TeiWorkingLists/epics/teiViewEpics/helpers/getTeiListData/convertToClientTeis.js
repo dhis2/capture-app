@@ -29,11 +29,12 @@ export const convertToClientTeis = (
                     return {
                         id,
                         value: convertServerToClient(value, type),
+                        urlPath: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
                     };
                 })
                 .filter(({ value }) => value != null)
-                .reduce((acc, { id, value }) => {
-                    acc[id] = value;
+                .reduce((acc, { id, value, urlPath }) => {
+                    acc[id] = { convertedValue: value, urlPath };
                     return acc;
                 }, {});
 

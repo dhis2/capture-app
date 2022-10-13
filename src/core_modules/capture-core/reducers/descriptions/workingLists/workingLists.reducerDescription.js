@@ -487,6 +487,13 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
                 })),
         };
     },
+    [workingListsCommonActionTypes.LIST_COLUMN_ORDER_RESET]: (state, action) => {
+        const { storeId } = action.payload;
+        return {
+            ...state,
+            [storeId]: undefined,
+        };
+    },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
         newState[action.payload.listId] = [...action.payload.columnOrder];

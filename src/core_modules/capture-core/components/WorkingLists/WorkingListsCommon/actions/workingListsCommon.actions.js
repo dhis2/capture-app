@@ -31,8 +31,10 @@ export const workingListsCommonActionTypes = {
     CONTEXT_UNLOADING: 'WorkingListsContextUnloading',
     LIST_SORT: 'WorkingListsListSort',
     LIST_COLUMN_ORDER_SET: 'WorkingListsListColumnOrderSet',
+    LIST_COLUMN_ORDER_RESET: 'WorkingListsListColumnOrderReset',
     FILTER_SET: 'WorkingListsFilterSet',
     FILTER_CLEAR: 'WorkingListsFilterClear',
+    FILTERS_CLEAR: 'WorkingListsFiltersClear',
     REST_MENU_ITEM_SELECT: 'WorkingListsRestMenuItemSelect',
     STICKY_FILTERS_AFTER_COLUMN_SORTING_SET: 'WorkingListsStickyFiltersAfterColumnSortingSet',
     PAGE_CHANGE: 'WorkingListsPageChange',
@@ -136,11 +138,17 @@ export const sortList = (id: string, direction: string, storeId: string) =>
 export const setListColumnOrder = (columns: Array<Object>, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET)({ columns, storeId }, { skipLogging: ['columns'] });
 
+export const resetListColumnOrder = (storeId: string) =>
+    actionCreator(workingListsCommonActionTypes.LIST_COLUMN_ORDER_RESET)({ storeId }, { skipLogging: ['columns'] });
+
 export const setFilter = (filter: Object, itemId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.FILTER_SET)({ filter, itemId, storeId });
 
 export const clearFilter = (itemId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.FILTER_CLEAR)({ itemId, storeId });
+
+export const clearFilters = (filtersList: Array<string>, storeId: string) =>
+    actionCreator(workingListsCommonActionTypes.FILTERS_CLEAR)({ filtersList, storeId });
 
 export const selectRestMenuItem = (id: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.REST_MENU_ITEM_SELECT)({ id, storeId });

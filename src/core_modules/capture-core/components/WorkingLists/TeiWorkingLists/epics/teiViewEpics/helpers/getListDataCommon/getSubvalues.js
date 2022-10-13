@@ -3,11 +3,16 @@ import log from 'loglevel';
 import { createSelector } from 'reselect';
 import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../../../metaData';
-import type { TeiColumnsMetaForDataFetchingArray, ClientTeis } from './types';
-import type { SubvalueKeysByType, SubvaluesByType, GetTeisWithSubvaluesPlainInner } from './getTeisWithSubvalues.types';
+import type {
+    SubvalueKeysByType,
+    SubvaluesByType,
+    GetTeisWithSubvaluesPlainInner,
+    ClientData,
+} from './getSubvalues.types';
+import type { TeiColumnMetaForDataFetching } from '../../../../types';
 import type { QuerySingleResource } from '../../../../../../../utils/api';
 
-const getTeisWithSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApiPath: string) => {
+const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApiPath: string) => {
     const getImageOrFileResourceSubvalue = async (keys: Array<string>) => {
         const promises = keys
             .map(async (key) => {
@@ -51,12 +56,12 @@ const getTeisWithSubvaluesPlain = (querySingleResource: QuerySingleResource, abs
         [dataElementTypes.IMAGE]: ({
             subvalueKey: value,
             subvalue: name,
-            columnId,
-            teiId,
+            urlPath,
         }) => ({
             name,
             value,
-            url: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${columnId}/image`,
+            url: `${absoluteApiPath}${urlPath}`
+            ,
         }),
         [dataElementTypes.FILE_RESOURCE]: ({
             subvalueKey: value,
@@ -67,11 +72,11 @@ const getTeisWithSubvaluesPlain = (querySingleResource: QuerySingleResource, abs
         }),
     };
 
-    const getSubvalueKeysByType = (clientTeis: ClientTeis, columnsWithSubvalues: TeiColumnsMetaForDataFetchingArray): SubvalueKeysByType =>
+    const getSubvalueKeysByType = (clientData: ClientData, columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>): SubvalueKeysByType =>
         columnsWithSubvalues
             .map(({ id, type }) => {
-                const subvalueKeys = clientTeis
-                    .map(({ record }) => record[id])
+                const subvalueKeys = clientData
+                    .map(({ record }) => record[id]?.convertedValue)
                     .filter(value => value != null);
 
                 return {
@@ -105,13 +110,13 @@ const getTeisWithSubvaluesPlain = (querySingleResource: QuerySingleResource, abs
         return Promise.all(subvaluePromises);
     };
 
-    const addSubvaluesToTeis = (clientTeis: ClientTeis, subvaluesByType: SubvaluesByType, columnsWithSubvalues: TeiColumnsMetaForDataFetchingArray): ClientTeis =>
+    const addSubvalues = (clientData: ClientData, subvaluesByType: SubvaluesByType, columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>): ClientData =>
         columnsWithSubvalues
-            .reduce((teis, { id: columnId, type: columnType }) => {
+            .reduce((columns, { id: columnId, type: columnType }) => {
                 const { subvalues = {} } = (subvaluesByType.find(({ type }) => type === columnType) || {});
-                return teis
+                return columns
                     .map(({ id, record }) => {
-                        const subvalueKey = record[columnId];
+                        const subvalueKey = record[columnId]?.convertedValue;
                         if (subvalueKey == null) {
                             return {
                                 id,
@@ -130,7 +135,8 @@ const getTeisWithSubvaluesPlain = (querySingleResource: QuerySingleResource, abs
                                     subvalueKey,
                                     subvalue,
                                     columnId,
-                                    teiId: id,
+                                    id,
+                                    urlPath: record[columnId].urlPath,
                                 }) :
                                 subvalue;
                         }
@@ -143,19 +149,32 @@ const getTeisWithSubvaluesPlain = (querySingleResource: QuerySingleResource, abs
                             },
                         };
                     });
-            }, clientTeis);
+            }, clientData);
 
-    return async (clientTeis: ClientTeis, columnsMetaForDataFetching: TeiColumnsMetaForDataFetchingArray) => {
+    const cleanClientData = clientData =>
+        clientData.map(({ id, record }) => ({
+            id,
+            record: Object.keys(record).reduce(
+                (acc, key) => {
+                    acc[key] = record[key]?.convertedValue !== undefined ? record[key].convertedValue : record[key];
+                    return acc;
+                },
+                {},
+            ),
+        }));
+
+    return async (clientData: ClientData, columnsMetaForDataFetching: Array<TeiColumnMetaForDataFetching>) => {
         const columnsWithSubvalues = columnsMetaForDataFetching
             .filter(({ type }) => subvalueGetterByType[type]);
-        const subvalueKeysByType = getSubvalueKeysByType(clientTeis, columnsWithSubvalues);
+        const subvalueKeysByType = getSubvalueKeysByType(clientData, columnsWithSubvalues);
         const subvaluesByType = await getSubvaluesByType(subvalueKeysByType);
-        return addSubvaluesToTeis(clientTeis, subvaluesByType, columnsWithSubvalues);
+        const clientDataWithSubValues = addSubvalues(clientData, subvaluesByType, columnsWithSubvalues);
+        return cleanClientData(clientDataWithSubValues);
     };
 };
 
-export const getTeisWithSubvalues =
+export const getSubvalues =
     createSelector<QuerySingleResource, string, GetTeisWithSubvaluesPlainInner, QuerySingleResource, string>(
         query => query,
         (query, path) => path,
-        (query, path) => getTeisWithSubvaluesPlain(query, path));
+        (query, path) => getSubvaluesPlain(query, path));

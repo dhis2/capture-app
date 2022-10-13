@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
-import { IconChevronDown16, IconChevronUp16 } from '@dhis2/ui';
+import { IconChevronDown16, IconChevronUp16, Tooltip } from '@dhis2/ui';
 import { Button } from '../../../Buttons';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
@@ -48,6 +48,8 @@ type Props = {
     selectorVisible: boolean,
     filterValue?: FilterData,
     buttonText?: string,
+    disabled?: boolean,
+    tooltipContent?: string,
 };
 
 type State = {
@@ -152,23 +154,35 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderWithoutAppliedFilter() {
-        const { selectorVisible, classes, title } = this.props;
+        const { selectorVisible, classes, title, disabled, tooltipContent } = this.props;
 
         return (
-            <Button
-                onClick={this.openFilterSelector}
-            >
-                {title}
-                {selectorVisible ? (
-                    <span className={classes.icon}>
-                        <IconChevronUp16 />
-                    </span>
-                ) : (
-                    <span className={classes.icon}>
-                        <IconChevronDown16 />
-                    </span>
+            <Tooltip content={tooltipContent} closeDelay={50}>
+                {({ onMouseOver, onMouseOut, ref }) => (
+                    <div
+                        ref={(divRef) => {
+                            if (divRef && disabled) {
+                                divRef.onmouseover = onMouseOver;
+                                divRef.onmouseout = onMouseOut;
+                                ref.current = divRef;
+                            }
+                        }}
+                    >
+                        <Button onClick={this.openFilterSelector} disabled={disabled}>
+                            {title}
+                            {selectorVisible ? (
+                                <span className={classes.icon}>
+                                    <IconChevronUp16 />
+                                </span>
+                            ) : (
+                                <span className={classes.icon}>
+                                    <IconChevronDown16 />
+                                </span>
+                            )}
+                        </Button>
+                    </div>
                 )}
-            </Button>
+            </Tooltip>
         );
     }
 

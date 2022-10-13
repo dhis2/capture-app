@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
-"PO-Revision-Date: 2022-09-16T07:55:37.554Z\n"
+"POT-Creation-Date: 2022-10-10T14:10:08.131Z\n"
+"PO-Revision-Date: 2022-10-10T14:10:08.131Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1276,11 +1276,20 @@ msgstr "Enrollment status"
 msgid "Assigned to"
 msgstr "Assigned to"
 
+msgid "Choose a program stage to filter by {{label}}"
+msgstr "Choose a program stage to filter by {{label}}"
+
 msgid "Registration Date"
 msgstr "Registration Date"
 
 msgid "Inactive"
 msgstr "Inactive"
+
+msgid "Event status"
+msgstr "Event status"
+
+msgid "Report date"
+msgstr "Report date"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"

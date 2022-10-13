@@ -35,7 +35,37 @@ const mainConfig: Array<MainColumnConfig> = [{
         mainProperty: true,
     }));
 
-const getMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: ?string): Array<MetadataColumnConfig> =>
+const programStageMainConfig: Array<MainColumnConfig> = [{
+    id: 'status',
+    visible: false,
+    type: dataElementTypes.TEXT,
+    header: i18n.t('Event status'),
+    filterHidden: true,
+},
+{
+    id: 'occurredAt',
+    visible: false,
+    type: dataElementTypes.DATE,
+    header: i18n.t('Report date'),
+    filterHidden: true,
+}]
+    .map(field => ({
+        ...field,
+        mainProperty: true,
+    }));
+
+const getEventsMetaDataConfig =
+    (stages, programStageId: string): Array<MetadataColumnConfig> => {
+        const stageForm = stages.get(programStageId)?.stageForm;
+        const sections = stageForm?.sections ? [...stageForm.sections?.values()] : [];
+
+        return sections.reduce((acc, section) => {
+            const dataElements = [...section.elements.values()];
+            return [...acc, ...getDataValuesMetaDataConfig(dataElements)];
+        }, []);
+    };
+
+const getTEIMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: ?string): Array<MetadataColumnConfig> =>
     attributes
         .map(({ id, displayInReports, type, name, formName, optionSet, searchable, unique }) => ({
             id,
@@ -47,11 +77,35 @@ const getMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: ?string): 
             filterHidden: !(orgUnitId || (searchable || unique)),
         }));
 
-export const useDefaultColumnConfig = (program: TrackerProgram, orgUnitId: ?string): TeiWorkingListsColumnConfigs =>
+const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> =>
+    dataElements.map(({ id, displayInReports, type, name, formName, optionSet }) => ({
+        id,
+        visible: displayInReports,
+        type,
+        header: formName || name,
+        options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
+        multiValueFilter: !!optionSet,
+        additionalColumn: true,
+    }));
+
+export const useDefaultColumnConfig = (
+    program: TrackerProgram,
+    orgUnitId: ?string,
+    programStageId: ?string,
+): TeiWorkingListsColumnConfigs =>
     useMemo(() => {
-        const { attributes } = program;
-        return [
+        const { attributes, stages } = program;
+
+        const defaultColumns = [
             ...mainConfig,
-            ...getMetaDataConfig(attributes, orgUnitId),
+            ...getTEIMetaDataConfig(attributes, orgUnitId),
         ];
-    }, [orgUnitId, program]);
+
+        if (programStageId) {
+            return defaultColumns.concat([
+                ...programStageMainConfig,
+                ...getEventsMetaDataConfig(stages, programStageId),
+            ]);
+        }
+        return defaultColumns;
+    }, [orgUnitId, program, programStageId]);

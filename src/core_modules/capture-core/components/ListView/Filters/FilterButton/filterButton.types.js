@@ -9,6 +9,8 @@ export type Props = {|
     title: string,
     options?: ?Options,
     multiValueFilter?: boolean,
+    disabled?: boolean,
+    tooltipContent?: string,
     onSetVisibleSelector: Function,
     selectorVisible: boolean,
     onUpdateFilter: Function,
