@@ -35,7 +35,7 @@ Step by step instructions for setting up a development environment.
 
 Clone with SSH
 ```
-git clone git@github.com:dhis2/capture-app.git
+git clone git@github.com:dhis2/capture-app.git 
 ```
 
 Clone with HTTPS 
