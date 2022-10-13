@@ -102,4 +102,4 @@ jobs:
         needs: prerequisites
         runs-on: ubuntu-latest
         steps:
-            run: echo "success"
+            - run: echo "success"
