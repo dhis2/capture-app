@@ -44,7 +44,9 @@ jobs:
             - name: compute-instance-url
               id: instance-url
               run: |
-                  echo "url=${BASE_URL_INSTANCES%/}/${NAME_PATTERN_DEV_INSTANCE/"{version}"/dev}" >> $GITHUB_OUTPUT
+                  url=${BASE_URL_INSTANCES%/}/${NAME_PATTERN_DEV_INSTANCE/"{version}"/dev}
+                  echo "url=$url" >> $GITHUB_OUTPUT
+                  echo "url: $url"
 
             - id: legacy-versions
               uses: dhis2/action-supported-legacy-versions@v1
