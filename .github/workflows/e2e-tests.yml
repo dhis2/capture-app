@@ -98,8 +98,15 @@ jobs:
     #     runs-on: ubuntu-latest
     #     steps:
 
-    e2e-tests-success:
+    e2e-tests-failure:
         needs: prerequisites
+        runs-on: ubuntu-latest
+        steps:
+            - name: verify
+              run: exit 1;
+
+    e2e-tests-success:
+        needs: e2e-tests-failure
         runs-on: ubuntu-latest
         steps:
             - run: echo "success"
