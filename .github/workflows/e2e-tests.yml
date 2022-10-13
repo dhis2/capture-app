@@ -74,7 +74,9 @@ jobs:
             - name: compute-instance-url
               id: instance-url
               run: |
-                  echo "url=${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/$version}" >> $GITHUB_OUTPUT
+                  url=${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/$version}
+                  echo "url=$url" >> $GITHUB_OUTPUT
+                  echo "url: $url"
               env:
                   version: ${{ matrix.versions }}
 
