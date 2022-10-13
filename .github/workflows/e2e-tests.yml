@@ -107,6 +107,9 @@ jobs:
 
     e2e-tests-success:
         needs: e2e-tests-failure
+        if: ${{ success() || failure() }}
         runs-on: ubuntu-latest
         steps:
-            - run: echo "success"
+            - run: echo "$result"
+              env:
+                result: ${{ needs.e2e-tests-failure.conclusion }}
