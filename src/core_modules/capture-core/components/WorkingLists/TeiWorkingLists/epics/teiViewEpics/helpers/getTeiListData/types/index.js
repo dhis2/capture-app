@@ -1,2 +1,2 @@
 // @flow
-export * from './getiTeiListDataConcept.types';
+export * from './getTeiListDataConcept.types';

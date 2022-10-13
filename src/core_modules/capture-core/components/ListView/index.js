@@ -15,9 +15,11 @@ export type {
     ChangePage,
     ChangeRowsPerPage,
     ClearFilter,
+    ClearFilters,
     UpdateFilter,
     SelectRestMenuItem,
     SetColumnOrder,
+    ResetColumnOrder,
     SelectRow,
     Sort,
 } from './types';

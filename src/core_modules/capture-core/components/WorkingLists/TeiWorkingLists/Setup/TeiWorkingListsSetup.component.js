@@ -1,8 +1,9 @@
 // @flow
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import uuid from 'uuid/v4';
 import i18n from '@dhis2/d2-i18n';
 import { useFeature, FEATURES } from 'capture-core-utils';
+import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
 import {
     dataElementTypes,
     type TrackerProgram,
@@ -138,11 +139,12 @@ const useFiltersOnly = ({
     }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages]);
 
 
-const useProgramStageFilters = ({ stages }: TrackerProgram) => {
+const useProgramStageFilters = ({ stages }: TrackerProgram, programStage?: string) => {
     const supportsProgramStageWorkingLists = useFeature(FEATURES.programStageWorkingList);
 
     return useMemo(() => {
         if (supportsProgramStageWorkingLists) {
+            const translatedStatus = translatedStatusTypes();
             return [
                 {
                     id: ADDITIONAL_FILTERS.programStage,
@@ -153,29 +155,71 @@ const useProgramStageFilters = ({ stages }: TrackerProgram) => {
                 },
                 {
                     id: ADDITIONAL_FILTERS.occurredAt,
-                    type: 'TEXT',
+                    type: 'DATE',
                     header: i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
-                    disabled: true,
+                    disabled: !programStage,
                     tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                         label: ADDITIONAL_FILTERS_LABELS.occurredAt,
                         interpolation: { escapeValue: false },
                     }),
+                    transformRecordsFilter: (filter: string) => {
+                        const queryArgs = {};
+                        const filterParts = filter.split(':');
+                        const indexGe = filterParts.indexOf('ge');
+                        const indexLe = filterParts.indexOf('le');
+                        if (indexGe !== -1 && filterParts[indexGe + 1]) {
+                            queryArgs.occurredAfter = filterParts[indexGe + 1];
+                        }
+                        if (indexLe !== -1 && filterParts[indexLe + 1]) {
+                            queryArgs.occurredBefore = filterParts[indexLe + 1];
+                        }
+                        return queryArgs;
+                    },
                 },
                 {
                     id: ADDITIONAL_FILTERS.status,
                     type: 'TEXT',
                     header: i18n.t(ADDITIONAL_FILTERS_LABELS.status),
-                    disabled: true,
+                    options: [
+                        { text: translatedStatus.ACTIVE, value: statusTypes.ACTIVE },
+                        { text: translatedStatus.SCHEDULE, value: statusTypes.SCHEDULE },
+                        { text: translatedStatus.COMPLETED, value: statusTypes.COMPLETED },
+                        { text: translatedStatus.OVERDUE, value: statusTypes.OVERDUE },
+                        { text: translatedStatus.SKIPPED, value: statusTypes.SKIPPED },
+                    ],
+                    disabled: !programStage,
                     tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                         label: ADDITIONAL_FILTERS_LABELS.status,
                         interpolation: { escapeValue: false },
+                    }),
+                    transformRecordsFilter: (rawFilter: string) => ({
+                        status: rawFilter.split(':')[1],
                     }),
                 },
             ];
         }
         return [];
-    }, [stages, supportsProgramStageWorkingLists]);
+    }, [stages, programStage, supportsProgramStageWorkingLists]);
 };
+
+const useFiltersToKeep = (columns, filters, filtersOnly, programStageFiltersOnly) =>
+    useMemo(() => {
+        if (filters) {
+            const filtersListToKeep = [
+                ...columns,
+                ...filtersOnly,
+                // $FlowFixMe[prop-missing]
+                ...programStageFiltersOnly.filter(filterOnly => filterOnly.mainButton),
+            ].map(({ id }) => id);
+
+            const filtersObjectToKeep = Object.entries(filters).reduce(
+                (acc, [key, value]) => (filtersListToKeep.includes(key) ? { ...acc, [key]: value } : acc),
+                {},
+            );
+            return filtersObjectToKeep;
+        }
+        return {};
+    }, [columns, filtersOnly, programStageFiltersOnly, filters]);
 
 
 const useInjectDataFetchingMetaToLoadList = (defaultColumns, filtersOnly, onLoadView) =>
@@ -192,24 +236,33 @@ const useInjectDataFetchingMetaToLoadList = (defaultColumns, filtersOnly, onLoad
         onLoadView(selectedTemplate, context, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching });
     }, [defaultColumns, filtersOnly, onLoadView]);
 
-const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, onUpdateList) =>
+const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, programStageFiltersOnly, onUpdateList) =>
     useCallback((queryArgs: Object) => {
         const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
-                .map(({ id, type, mainProperty }) => [id, { id, type, mainProperty }]),
+                .map(({ id, type, mainProperty, additionalColumn }) => [id, { id, type, mainProperty, additionalColumn }]),
         );
-        const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
-            filtersOnly
-                .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]));
+        const transformFiltersOnly = filtersOnly
+            .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]);
+
+        const transformProgramStageFiltersOnly = programStageFiltersOnly
+            .filter(({ mainButton }) => !mainButton)
+            // $FlowFixMe[prop-missing]
+            .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]);
+
+        const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching =
+            new Map(transformFiltersOnly.concat(transformProgramStageFiltersOnly));
 
         onUpdateList(queryArgs, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching }, 0);
-    }, [defaultColumns, filtersOnly, onUpdateList]);
+    }, [defaultColumns, filtersOnly, programStageFiltersOnly, onUpdateList]);
 
 export const TeiWorkingListsSetup = ({
     program,
+    programStage,
     onUpdateList,
     onLoadView,
+    onClearFilters,
     customColumnOrder,
     records,
     recordsOrder,
@@ -225,12 +278,19 @@ export const TeiWorkingListsSetup = ({
     onDeleteTemplate,
     ...passOnProps
 }: Props) => {
-    const defaultColumns = useDefaultColumnConfig(program, orgUnitId);
+    const defaultColumns = useDefaultColumnConfig(program, orgUnitId, programStage);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
-    const programStageFilters = useProgramStageFilters(program);
+    const programStageFiltersOnly = useProgramStageFilters(program, programStage);
+    const filtersObjectToKeep =
+        JSON.stringify(useFiltersToKeep(columns, filters, filtersOnly, programStageFiltersOnly));
+
     const staticTemplates = useStaticTemplates();
     const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
+
+    useEffect(() => {
+        onClearFilters && onClearFilters(JSON.parse(filtersObjectToKeep));
+    }, [onClearFilters, filtersObjectToKeep]);
 
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
@@ -239,6 +299,7 @@ export const TeiWorkingListsSetup = ({
         columns,
         sortById,
         sortByDirection,
+        programStage,
     });
 
     const injectArgumentsForAddTemplate = useCallback(
@@ -298,10 +359,10 @@ export const TeiWorkingListsSetup = ({
             onUpdateTemplate={injectArgumentsForUpdateTemplate}
             onDeleteTemplate={injectArgumentsForDeleteTemplate}
             filtersOnly={filtersOnly}
-            additionalFilters={programStageFilters}
+            additionalFilters={programStageFiltersOnly}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectDataFetchingMetaToLoadList(defaultColumns, filtersOnly, onLoadView)}
-            onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, onUpdateList)}
+            onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, programStageFiltersOnly, onUpdateList)}
             programId={program.id}
             rowIdKey="id"
             orgUnitId={orgUnitId}

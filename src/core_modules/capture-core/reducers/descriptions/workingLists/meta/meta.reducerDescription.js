@@ -262,6 +262,19 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
+    [workingListsCommonActionTypes.FILTERS_CLEAR]: (state, action) => {
+        const { filtersList: filtersListToKeep, storeId } = action.payload;
+        if (state[storeId]) {
+            return {
+                ...state,
+                [storeId]: {
+                    ...state[storeId],
+                    filters: filtersListToKeep,
+                },
+            };
+        }
+        return state;
+    },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
         newState[action.payload.listId] = action.payload.meta;
