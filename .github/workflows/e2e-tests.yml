@@ -20,7 +20,8 @@ name: 'dhis2: e2e tests'
 #       3) They were skipped due to a special case (see e2e-tests-exception.yml)
 
 on:
-    pull_request
+    pull_request:
+        types: [opened, synchronize, reopened, ready_for_review]
 
 env:
     BASE_URL_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}
@@ -32,7 +33,7 @@ defaults:
         shell: bash
 
 jobs:
-    prerequisites:
+    compute-versions:
         if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest
         outputs:
@@ -42,7 +43,8 @@ jobs:
 
             - name: compute-instance-url
               id: instance-url
-              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_DEV_INSTANCE/"{version}"/dev}"
+              run: |
+                  echo "url=${BASE_URL_INSTANCES%/}/${NAME_PATTERN_DEV_INSTANCE/"{version}"/dev}" >> $GITHUB_OUTPUT
 
             - id: legacy-versions
               uses: dhis2/action-supported-legacy-versions@v1
@@ -52,13 +54,13 @@ jobs:
                   password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
 
     cypress: 
-        needs: prerequisites
+        needs: compute-versions
         runs-on: ubuntu-latest
         container: cypress/browsers:node14.7.0-chrome84
         strategy:
             fail-fast: false
             matrix:
-                versions: ${{ fromJSON(needs.prerequisites.outputs.versions) }}
+                versions: ${{ fromJSON(needs.compute-versions.outputs.versions) }}
                 containers: [1, 2, 3, 4, 5, 6, 7, 8]
         steps:
             - uses: actions/checkout@v2
@@ -69,7 +71,8 @@ jobs:
 
             - name: compute-instance-url
               id: instance-url
-              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/$version}"
+              run: |
+                  echo "url=${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/$version}" >> $GITHUB_OUTPUT
               env:
                   version: ${{ matrix.versions }}
 
