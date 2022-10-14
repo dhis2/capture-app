@@ -64,19 +64,6 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
                         </Button>
                     </a>
                 </div>
-                <div
-                    className={classes.downloadLinkContainer}
-                >
-                    <a
-                        download="events.xml"
-                        href={`${url}.xml?${searchParamsString}`}
-                        className={classes.downloadLink}
-                    >
-                        <Button>
-                            {i18n.t('Download as XML')}
-                        </Button>
-                    </a>
-                </div>
                 <div>
                     <a
                         download="events.csv"
