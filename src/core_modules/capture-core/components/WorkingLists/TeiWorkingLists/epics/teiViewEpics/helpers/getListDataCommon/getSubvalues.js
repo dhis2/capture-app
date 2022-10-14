@@ -99,11 +99,18 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
             .map(async (type) => {
                 const subvalueKeys = subvalueKeysByType[type];
                 const distinctSubvalueKeys = [...new Set(subvalueKeys).values()];
-                const subvalues = await subvalueGetterByType[type](distinctSubvalueKeys);
-
+                try {
+                    const subvalues = await subvalueGetterByType[type](distinctSubvalueKeys);
+                    return {
+                        type,
+                        subvalues,
+                    };
+                } catch (error) {
+                    log.error(errorCreator('subvalue not found'));
+                }
                 return {
                     type,
-                    subvalues,
+                    subvalues: {},
                 };
             });
 

@@ -26,14 +26,14 @@ const buildRecord = ({
     event,
     elementsById,
     eventId,
-    teiId,
+    trackedEntity,
     isDataElement,
 }: {
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetchingArray,
     event: ApiEvent,
     elementsById: Object,
     eventId: string,
-    teiId: string,
+    trackedEntity: string,
     isDataElement?: boolean,
 }) =>
     columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
@@ -43,7 +43,7 @@ const buildRecord = ({
             value: convertServerToClient(value, type),
             urlPath: isDataElement
                 ? `/events/files?dataElementUid=${id}&eventUid=${eventId}`
-                : `/trackedEntityInstances/${teiId}/${id}/image`,
+                : `/trackedEntityInstances/${trackedEntity}/${id}/image`,
         };
     });
 
@@ -53,9 +53,9 @@ export const convertToClientEvents = (
 ): ClientEvents =>
     apiEvents.map((event) => {
         const dataValuesById = getDataValuesById(event.dataValues);
-        const attributeValuesById = getAttributeById(event.parent.attributes);
+        const attributeValuesById = getAttributeById(event.parent?.attributes);
         const eventId = event.event;
-        const teiId = event.parent.trackedEntity;
+        const trackedEntity = event.trackedEntity;
 
         const record = [
             ...buildRecord({
@@ -63,10 +63,16 @@ export const convertToClientEvents = (
                 event,
                 elementsById: dataValuesById,
                 eventId,
-                teiId,
+                trackedEntity,
                 isDataElement: true,
             }),
-            ...buildRecord({ columnsMetaForDataFetching, event, elementsById: attributeValuesById, eventId, teiId }),
+            ...buildRecord({
+                columnsMetaForDataFetching,
+                event,
+                elementsById: attributeValuesById,
+                eventId,
+                trackedEntity,
+            }),
         ]
             .filter(({ value }) => value != null)
             .reduce((acc, { id, value, urlPath }) => {
