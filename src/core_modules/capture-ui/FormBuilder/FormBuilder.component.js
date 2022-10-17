@@ -216,7 +216,7 @@ export class FormBuilder extends React.Component<Props> {
                     } else {
                         validationData = {
                             valid: false,
-                            errorMessage: i18n.t('error encountered during field validation'),
+                            errorMessage: [i18n.t('error encountered during field validation')],
                             errorType: i18n.t('error'),
                         };
                         log.error({ reason, field });
