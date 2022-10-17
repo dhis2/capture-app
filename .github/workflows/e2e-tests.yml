@@ -70,10 +70,6 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            - uses: actions/setup-node@v1 
-              with:
-                  node-version: 14.x
-
             - name: compute-instance-url
               id: instance-url
               run: |
@@ -93,7 +89,6 @@ jobs:
                   start: yarn start:forCypress
                   wait-on: http://localhost:3000
                   wait-on-timeout: 300
-                  headed: false
               env:
                   CI: true
                   CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
