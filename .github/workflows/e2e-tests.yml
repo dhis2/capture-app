@@ -58,7 +58,7 @@ jobs:
                   username: ${{ secrets.CYPRESS_DHIS2_USERNAME }} # can be removed if maxDHIS2Version has been specified
                   password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
 
-    cypress: 
+    cypress:
         needs: compute-versions
         runs-on: ubuntu-latest
         container: cypress/browsers:node14.7.0-chrome84
@@ -69,6 +69,10 @@ jobs:
                 containers: [1, 2, 3, 4, 5, 6, 7, 8]
         steps:
             - uses: actions/checkout@v3
+
+            - uses: actions/setup-node@v1 
+              with:
+                  node-version: 16.x
 
             - name: compute-instance-url
               id: instance-url
@@ -105,4 +109,4 @@ jobs:
         steps:
             - run: if [ $result != 'success' ]; then exit 1; fi;
               env:
-                result: ${{ needs.cypress.result }}
+                  result: ${{ needs.cypress.result }}
