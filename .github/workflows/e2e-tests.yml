@@ -12,13 +12,11 @@ name: 'dhis2: e2e tests'
 #     NAME_PATTERN_LEGACY_INSTANCES: Set the name pattern for your instances. {version} will be replaced by "[majorVersion].[minorVersion]"
 #     NAME_PATTERN_DEV_INSTANCE: Set the name pattern for your dev instance. {version} will be replaced by "dev"
 #
+# - Other optional customizations:
+#     containers: Set the matrix containers array for the cypress job. The number of parallel Cypress instances running for each backend version will equal the array length.
+#
 # - Set status check as required:
-#     We recommend setting "call-e2e-tests-result / e2e-tests-success"  as a required step in your workflow.
-#     This will ensure that one of the following must be true before the PR can be merged:
-#       1) The tests have successfully run
-#       2) The dev took a conscious decision not to run the tests (see e2e-tests-skip.yml)
-#       3) They were skipped due to a special case (see e2e-tests-exception.yml)
-
+#     We recommend setting "e2e-tests-success"  as a required step in your workflow. 
 on:
     pull_request:
         types: [opened, synchronize, reopened, ready_for_review]
@@ -85,7 +83,7 @@ jobs:
                   version: ${{ matrix.versions }}
 
             - name: Cypress run
-              uses: cypress-io/github-action@v2
+              uses: cypress-io/github-action@v4
               with:
                   record: true
                   parallel: true
