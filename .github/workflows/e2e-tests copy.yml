@@ -21,7 +21,7 @@ name: 'dhis2: e2e tests'
 
 on:
     pull_request:
-        types: [opened, synchronize, reopened, ready_for_review, labeled]
+        types: [opened, synchronize, reopened, ready_for_review]
 
 env:
     BASE_URL_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}
@@ -37,12 +37,6 @@ defaults:
         shell: bash
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:
-          - run: echo "$GITHUB_CONTEXT"
-            env:
-              GITHUB_CONTEXT: ${{ toJSON(github) }}
     compute-versions:
         if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest
