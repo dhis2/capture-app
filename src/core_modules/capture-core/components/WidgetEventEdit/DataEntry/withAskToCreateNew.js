@@ -7,7 +7,7 @@ import { type RenderFoundation } from '../../../metaData';
 type Props = {
     onCancelCreateNew: () => void,
     onConfirmCreateNew: () => void,
-    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSave: (eventId: string, dataEntryId: string, formFoundation?: RenderFoundation) => void,
     allowGenerateNextVisit?: ?boolean,
     isCompleted?: ?boolean
 };
@@ -32,11 +32,11 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
             return this.innerInstance;
         }
 
-        handleOnSave = (...arg: Array<any>) => {
+        handleOnSave(eventId: string, dataEntryId: string, formFoundation?: RenderFoundation) {
             if (this.props.allowGenerateNextVisit && this.props.isCompleted) {
                 this.setState({ isOpen: true });
             } else {
-                this.props.onSave(...arg);
+                this.props.onSave(eventId, dataEntryId, formFoundation);
             }
         }
 

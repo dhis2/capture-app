@@ -317,7 +317,7 @@ type Props = {
     onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void,
-    onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: ?RenderFoundation) => void,
+    onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onHandleScheduleSave: (eventData: Object) => void,
     onDelete: () => void,
     onCancel: () => void,
@@ -380,6 +380,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
 
     onSaveWithAskToCreateNew = () => {
         const { orgUnit, itemId, dataEntryId, formFoundation } = this.props;
+        // $FlowFixMe[incompatible-call] automated comment
         this.props.onSave(orgUnit)(itemId, dataEntryId, formFoundation);
     }
 
