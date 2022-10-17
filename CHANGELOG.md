@@ -1,3 +1,44 @@
+# [100.17.0](https://github.com/dhis2/capture-app/compare/v100.16.4...v100.17.0) (2022-10-14)
+
+
+### Features
+
+* [DHIS2-13681] optional decimal places argument for d2:round ([#3020](https://github.com/dhis2/capture-app/issues/3020)) ([c5702b4](https://github.com/dhis2/capture-app/commit/c5702b490e55bce03cbff9cfa11cdc6cf6efd906))
+
+## [100.16.4](https://github.com/dhis2/capture-app/compare/v100.16.3...v100.16.4) (2022-10-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0f907ee](https://github.com/dhis2/capture-app/commit/0f907eeda52f2b0c406c51620f09ba067d4d2f67))
+* [DHIS2-13635] cover the case `ai.length > 2` ([#2973](https://github.com/dhis2/capture-app/issues/2973)) ([6d9fd13](https://github.com/dhis2/capture-app/commit/6d9fd13c496e2cfa9c779b1655993b613fc59ba1))
+
+## [100.16.3](https://github.com/dhis2/capture-app/compare/v100.16.2...v100.16.3) (2022-10-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([99691b4](https://github.com/dhis2/capture-app/commit/99691b42bb901381baed81eada0a2de9a3d5623e))
+
+## [100.16.2](https://github.com/dhis2/capture-app/compare/v100.16.1...v100.16.2) (2022-10-09)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([130330f](https://github.com/dhis2/capture-app/commit/130330f0c5368d953769e709de4d3cb9c440002e))
+
+## [100.16.1](https://github.com/dhis2/capture-app/compare/v100.16.0...v100.16.1) (2022-10-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([064e3f8](https://github.com/dhis2/capture-app/commit/064e3f8d6262c48718a2d1fe1cb77e712357c193))
+
+
+### Reverts
+
+* [DHIS2-8613] limit report date of new events to today or earlier ([#3023](https://github.com/dhis2/capture-app/issues/3023)) ([305e59c](https://github.com/dhis2/capture-app/commit/305e59c36d239e531701ab04e296612289edfca1))
+
 # [100.16.0](https://github.com/dhis2/capture-app/compare/v100.15.1...v100.16.0) (2022-10-05)
 
 
