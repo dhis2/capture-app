@@ -4,6 +4,7 @@ import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import { typeKeys, typeof environmentTypes } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
 import { getStructureEvents } from './helpers';
+import { getDefaultValues } from './defaultValues';
 import type {
     VariableServiceInput,
     ProgramRuleVariable,
@@ -74,6 +75,7 @@ export class VariableService {
 
     static dateUtils: IDateUtils;
     environment: $Values<environmentTypes>;
+    defaultValues: any;
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
@@ -86,6 +88,7 @@ export class VariableService {
         this.environment = environment;
         this.onProcessValue = onProcessValue;
         VariableService.dateUtils = dateUtils;
+        this.defaultValues = getDefaultValues(dateUtils);
 
         this.mapSourceTypeToGetterFn = {
             [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: this.getVariableForCurrentEvent,
@@ -198,15 +201,16 @@ export class VariableService {
         },
     ): RuleVariable {
         const processedAllValues = allValues ?
-            allValues
-                .map(alternateValue => this.onProcessValue(alternateValue, type)) :
+            allValues.map(alternateValue => this.onProcessValue(alternateValue, type) ?? this.defaultValues[type]) :
             null;
 
+        const convertedValue = this.onProcessValue(value, type);
+
         return {
-            variableValue: this.onProcessValue(value, type),
+            variableValue: convertedValue ?? this.defaultValues[type],
             useCodeForOptionSet: !useNameForOptionSet,
             variableType: type || typeKeys.TEXT,
-            hasValue: !!value || value === 0 || value === false,
+            hasValue: convertedValue !== null,
             variableEventDate: this.onProcessValue(variableEventDate, typeKeys.DATE),
             variablePrefix,
             allValues: processedAllValues,
