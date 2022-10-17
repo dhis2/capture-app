@@ -97,7 +97,7 @@ msgid "Please provide a valid time"
 msgstr "Uveďte platný čas"
 
 msgid "Please provide an integer between 0 and 100"
-msgstr ""
+msgstr "Zadejte prosím celé číslo v rozmezí 0 až 100"
 
 msgid "Please provide a valid url"
 msgstr "Uveďte platnou adresu URL"
@@ -553,7 +553,7 @@ msgid "Add comment"
 msgstr "Přidat komentář"
 
 msgid "You don't have access to write comments"
-msgstr ""
+msgstr "Nemáte přístup k psaní komentářů"
 
 msgid "Write comment"
 msgstr "Napsat komentář"
@@ -903,10 +903,10 @@ msgid "Search in all programs"
 msgstr "Hledat ve všech programech"
 
 msgid "Saved lists in this program"
-msgstr ""
+msgstr "Uložené seznamy v tomto programu"
 
 msgid "Create custom working list"
-msgstr ""
+msgstr "Vytvořit vlastní pracovní seznam"
 
 msgid "events"
 msgstr "události"
@@ -915,7 +915,7 @@ msgid "event"
 msgstr "událost"
 
 msgid "You don't have access to edit this event"
-msgstr ""
+msgstr "Nemáte přístup k úpravám této události"
 
 msgid "Edit event"
 msgstr "Upravit událost"
@@ -961,10 +961,10 @@ msgid "An error occurred loading possible duplicates"
 msgstr "Při načítání možných duplikátů došlo k chybě"
 
 msgid "You don't have access to delete this relationship"
-msgstr ""
+msgstr "K odstranění tohoto vztahu nemáte přístup."
 
 msgid "You don't have access to create any relationships"
-msgstr ""
+msgstr "Nemáte přístup k vytváření žádných vztahů."
 
 msgid "Add relationship"
 msgstr "Přidat vztah"
@@ -1131,6 +1131,9 @@ msgstr "Smazat událost"
 
 msgid "Yes, delete event"
 msgstr "Ano, smazat událost"
+
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr "Chcete-li tuto událost přeplánovat, přejděte na kartu \"Plán\"."
 
 msgid "Event completed"
 msgstr "Událost dokončena"

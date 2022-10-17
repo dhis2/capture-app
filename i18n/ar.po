@@ -198,7 +198,7 @@ msgstr ""
 "العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
 
 msgid "Active"
-msgstr "فعال"
+msgstr "النشطة"
 
 msgid "Completed"
 msgstr "مكتمل"
@@ -1032,7 +1032,7 @@ msgid "Mark as cancelled"
 msgstr ""
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "تعيين كـ غير مكتمل"
 
 msgid "Delete enrollment"
 msgstr "الغِ التسجيل"
@@ -1073,7 +1073,7 @@ msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
 msgid "Cancelled"
-msgstr "تم الإلغاء"
+msgstr "الملغية"
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1117,8 +1117,11 @@ msgstr "حذف الحدث"
 msgid "Yes, delete event"
 msgstr ""
 
-msgid "Event completed"
+msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
+
+msgid "Event completed"
+msgstr "الحدث مكتمل"
 
 msgid "Back to all stages and events"
 msgstr ""
@@ -1281,7 +1284,7 @@ msgid "Registration Date"
 msgstr "تاريخ التسجيل"
 
 msgid "Inactive"
-msgstr "غير نشط"
+msgstr "الغير نشطة"
 
 msgid "Working list could not be updated"
 msgstr ""

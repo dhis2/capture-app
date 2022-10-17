@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import moment from 'moment';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
-import { getNoFutureEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
 import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
@@ -128,10 +127,9 @@ const buildReportDateSettingsFn = () => {
             calendarWidth: 350,
             label: props.formFoundation.getLabel('occurredAt'),
             required: true,
-            calendarMaxMoment: moment(),
         }),
         getPropName: () => 'occurredAt',
-        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
+        getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -168,11 +166,10 @@ const buildScheduleDateSettingsFn = () => {
             calendarWidth: 350,
             label: props.formFoundation.getLabel('scheduledAt'),
             disabled: true,
-            calendarMaxMoment: moment(),
         }),
         getIsHidden: (props: Object) => ![statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus),
         getPropName: () => 'scheduledAt',
-        getValidatorContainers: () => getNoFutureEventDateValidatorContainers(),
+        getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
