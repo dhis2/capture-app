@@ -151,44 +151,16 @@ export type RulesEngineInput = {|
 
 export type Translator = (value: string) => string;
 
-export interface IDateUtils {
-    getToday(): string;
-    daysBetween(firstRulesDate: string, secondRulesDate: string): number;
-    weeksBetween(firstRulesDate: string, secondRulesDate: string): number;
-    monthsBetween(firstRulesDate: string, secondRulesDate: string): number;
-    yearsBetween(firstRulesDate: string, secondRulesDate: string): number;
-    +compareDates: CompareDates;
-    addDays(rulesDate: string, daysToAdd: number): string;
-}
+export type IDateUtils = {|
+    getToday(): string,
+    daysBetween(firstRulesDate: string, secondRulesDate: string): number,
+    weeksBetween(firstRulesDate: string, secondRulesDate: string): number,
+    monthsBetween(firstRulesDate: string, secondRulesDate: string): number,
+    yearsBetween(firstRulesDate: string, secondRulesDate: string): number,
+    +compareDates: CompareDates,
+    addDays(rulesDate: string, daysToAdd: number): string,
+|};
 
-
-export interface IConvertOutputRulesEffectsValue {
-    convertText(value: string): any;
-    convertLongText(value: string): any;
-    convertLetter(value: string): any;
-    convertPhoneNumber(value: string): any;
-    convertEmail(value: string): any;
-    convertBoolean(value: boolean): any;   // Yes/No
-    convertTrueOnly(value: boolean): any;  // Yes Only
-    convertDate(value: string): any;
-    convertDateTime(value: string): any;
-    convertTime(value: string): any;
-    convertNumber(value: number): any;
-    convertUnitInterval(value: number): any;
-    convertPercentage(value: number): any;
-    convertInteger(value: number): any;
-    convertIntegerPositive(value: number): any;
-    convertIntegerNegative(value: number): any;
-    convertIntegerZeroOrPositive(value: number): any;
-    convertTrackerAssociate(value: string): any;
-    convertUserName(value: string): any;
-    convertCoordinate(value: string): any;
-    convertOrganisationUnit(value: string): any;
-    convertUrl(value: string): any;
-    convertAge(value: string): any;
-    convertFile(value: string): any;
-    convertImage(value: string): any;
-}
 export type IConvertInputRulesValue = {|
     convertText(value: any): ?string,
     convertLongText(value: any): ?string,
@@ -211,10 +183,38 @@ export type IConvertInputRulesValue = {|
     convertUserName(value: any): ?string,
     convertCoordinate(value: any): ?string,
     convertOrganisationUnit(value: any): ?string,
-    convertAge(value: any): ?number,
+    convertAge(value: any): ?string,
     convertUrl(value: any): ?string,
     convertFile(value: any): ?string,
     convertImage(value: any): ?string,
+|};
+
+export type IConvertOutputRulesEffectsValue = {|
+    convertText(value: string): any,
+    convertLongText(value: string): any,
+    convertLetter(value: string): any,
+    convertPhoneNumber(value: string): any,
+    convertEmail(value: string): any,
+    convertBoolean(value: boolean): any,   // Yes/No
+    convertTrueOnly(value: boolean): any,  // Yes Only
+    convertDate(value: string): any,
+    convertDateTime(value: string): any,
+    convertTime(value: string): any,
+    convertNumber(value: number): any,
+    convertUnitInterval(value: number): any,
+    convertPercentage(value: number): any,
+    convertInteger(value: number): any,
+    convertIntegerPositive(value: number): any,
+    convertIntegerNegative(value: number): any,
+    convertIntegerZeroOrPositive(value: number): any,
+    convertTrackerAssociate(value: string): any,
+    convertUserName(value: string): any,
+    convertCoordinate(value: string): any,
+    convertOrganisationUnit(value: string): any,
+    convertUrl(value: string): any,
+    convertAge(value: string): any,
+    convertFile(value: string): any,
+    convertImage(value: string): any,
 |};
 
 export type Flag = {

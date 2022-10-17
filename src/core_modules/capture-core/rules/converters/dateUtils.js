@@ -18,29 +18,25 @@ function between(unit: string, firstRulesDate: string, secondRulesDate: string):
     return secondDate.diff(firstDate, unit);
 }
 
-class DateUtils implements IDateUtils {
-    getToday(): string {
+export const dateUtils: IDateUtils = {
+    getToday: (): string => {
         const todayMoment = moment();
         return momentToRulesDate(todayMoment);
-    }
-    daysBetween(firstRulesDate: string, secondRulesDate: string): number {
-        return between('days', firstRulesDate, secondRulesDate);
-    }
-    weeksBetween(firstRulesDate: string, secondRulesDate: string): number {
-        return between('weeks', firstRulesDate, secondRulesDate);
-    }
-    monthsBetween(firstRulesDate: string, secondRulesDate: string): number {
-        return between('months', firstRulesDate, secondRulesDate);
-    }
-    yearsBetween(firstRulesDate: string, secondRulesDate: string): number {
-        return between('years', firstRulesDate, secondRulesDate);
-    }
-    addDays(rulesDate: string, daysToAdd: number): string {
+    },
+    daysBetween: (firstRulesDate: string, secondRulesDate: string): number =>
+        between('days', firstRulesDate, secondRulesDate),
+    weeksBetween: (firstRulesDate: string, secondRulesDate: string): number =>
+        between('weeks', firstRulesDate, secondRulesDate),
+    monthsBetween: (firstRulesDate: string, secondRulesDate: string): number =>
+        between('months', firstRulesDate, secondRulesDate),
+    yearsBetween: (firstRulesDate: string, secondRulesDate: string): number =>
+        between('years', firstRulesDate, secondRulesDate),
+    addDays: (rulesDate: string, daysToAdd: number): string => {
         const dateMoment = rulesDateToMoment(rulesDate);
         const newDateMoment = dateMoment.add(daysToAdd, 'days');
         return momentToRulesDate(newDateMoment);
-    }
-    compareDates(firstRulesDate: string, secondRulesDate: string): number {
+    },
+    compareDates: (firstRulesDate: string, secondRulesDate: string): number => {
         const diff = dateUtils.daysBetween(secondRulesDate, firstRulesDate);
         if (diff < 0) {
             return -1;
@@ -49,7 +45,5 @@ class DateUtils implements IDateUtils {
             return 1;
         }
         return 0;
-    }
-}
-
-export const dateUtils = new DateUtils();
+    },
+};
