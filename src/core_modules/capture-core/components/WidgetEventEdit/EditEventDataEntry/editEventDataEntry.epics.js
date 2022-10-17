@@ -1,10 +1,10 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter, switchMap } from 'rxjs/operators';
+import { map, filter, flatMap, switchMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
-import { EMPTY } from 'rxjs';
+import { EMPTY, from, of } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
@@ -38,7 +38,7 @@ import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString'
 import {
     updateEventContainer,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-
+import { navigateToEnrollmentOverview } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
 const getDataEntryId = (event): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
@@ -192,15 +192,20 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
             return startDeleteEventDataEntry(eventId, params);
         }));
 
-
-export const navigateToEnrollmentCreateNewEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) =>
+export const startCreateNewAfterCompletingEpic = (
+    action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
     action$.pipe(
-        ofType(actionTypes.NAVIGATE_TO_CREATE_NEW_EVENT),
-        switchMap(() => {
-            const state = store.value;
-            const { enrollmentId, orgUnitId, programId, teiId } = state.currentSelections;
-            const params = { enrollmentId, orgUnitId, programId, teiId };
-            dependencies.history.push(`/enrollmentEventNew?${buildUrlQueryString(params)}`);
-            return EMPTY;
+        ofType(actionTypes.START_CREATE_NEW_AFTER_COMPLETING),
+        flatMap((action) => {
+            const { isCreateNew, enrollmentId } = action.payload;
+            return from(querySingleResource({ resource: 'tracker/enrollments', id: enrollmentId })).pipe(
+                switchMap(({ trackedEntity, program, orgUnit: orgUnitId }) => {
+                    const params = { enrollmentId, orgUnitId, programId: program, teiId: trackedEntity };
+                    if (isCreateNew) {
+                        history.push(`/enrollmentEventNew?${buildUrlQueryString(params)}`);
+                        return EMPTY;
+                    }
+                    return of(navigateToEnrollmentOverview(params));
+                }));
         }));
 

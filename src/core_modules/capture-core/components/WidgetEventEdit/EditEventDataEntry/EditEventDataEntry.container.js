@@ -21,17 +21,23 @@ import {
     requestSaveEditEventDataEntry,
     cancelEditEventDataEntry,
     requestDeleteEventDataEntry,
-    navigateToEnrollmentCreateNew,
+    startCreateNewAfterCreating,
 } from './editEventDataEntry.actions';
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
-import { navigateToEnrollmentOverview } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
 
-const mapStateToProps = (state: ReduxState) => {
+const mapStateToProps = (state: ReduxState, props) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
+    const itemId = state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
+
+    const dataEntryKey = `${props.dataEntryId}-${itemId}`;
+    const isCompleted = !!state.dataEntriesFieldsValue[dataEntryKey]?.complete;
+
     return {
         ready: !state.activePage.isDataEntryLoading && !eventDetailsSection.loading,
+        itemId,
+        isCompleted,
     };
 };
 
@@ -84,6 +90,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
     },
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
+
         dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation, orgUnit));
     },
     onCancel: () => {
@@ -103,11 +110,10 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         dispatch(requestDeleteEventDataEntry({ eventId, enrollmentId }));
     },
     onCancelCreateNew: () => {
-        const { enrollmentId } = props;
-        dispatch(navigateToEnrollmentOverview({ enrollmentId }));
+        dispatch(startCreateNewAfterCreating({ enrollmentId: props.enrollmentId }));
     },
     onConfirmCreateNew: () => {
-        dispatch(navigateToEnrollmentCreateNew());
+        dispatch(startCreateNewAfterCreating({ enrollmentId: props.enrollmentId, isCreateNew: true }));
     },
 });
 

@@ -7,8 +7,9 @@ import { type RenderFoundation } from '../../../metaData';
 type Props = {
     onCancelCreateNew: () => void,
     onConfirmCreateNew: () => void,
-    onSave: () => void,
+    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     allowGenerateNextVisit?: ?boolean,
+    isCompleted?: ?boolean
 };
 
 type State = {
@@ -17,23 +18,25 @@ type State = {
 
 const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
     class AskToCreateNewHOC extends React.Component<Props, State> {
+        handleOnSave: () => void;
         innerInstance: any;
         constructor(props: Props) {
             super(props);
             this.state = {
                 isOpen: false,
             };
+            this.handleOnSave = this.handleOnSave.bind(this);
         }
 
         getWrappedInstance() {
             return this.innerInstance;
         }
 
-        handleOnSave() {
-            if (this.props.allowGenerateNextVisit) {
+        handleOnSave = (...arg: Array<any>) => {
+            if (this.props.allowGenerateNextVisit && this.props.isCompleted) {
                 this.setState({ isOpen: true });
             } else {
-                this.props.onSave();
+                this.props.onSave(...arg);
             }
         }
 
@@ -74,6 +77,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
 
         render() {
             const { onSave, ...passOnProps } = this.props;
+
             return (
                 <>
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}

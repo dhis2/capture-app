@@ -22,7 +22,7 @@ export const actionTypes = {
     DELETE_EVENT_DATA_ENTRY_SUCCEEDED: 'DeleteEventDataEntrySucceeded',
     EVENT_SCHEDULE_SUCCESS: 'ScheduleEvent.UpdateScheduleEventSuccess',
     EVENT_SCHEDULE_ERROR: 'ScheduleEvent.UpdateScheduleEventError',
-    NAVIGATE_TO_CREATE_NEW_EVENT: 'WidgetEventEdit.NavigateToCreateNewEvent',
+    START_CREATE_NEW_AFTER_COMPLETING: 'WidgetEventEdit.StartCreateNewAfterCompleting',
 };
 
 export const cancelEditEventDataEntry = () =>
@@ -70,5 +70,5 @@ export const startDeleteEventDataEntry = (eventId: string, params: Object) =>
     });
 
 
-export const navigateToEnrollmentCreateNew = () =>
-    actionCreator(actionTypes.NAVIGATE_TO_CREATE_NEW_EVENT)();
+export const startCreateNewAfterCreating = ({ enrollmentId, isCreateNew }: Object) =>
+    actionCreator(actionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew });

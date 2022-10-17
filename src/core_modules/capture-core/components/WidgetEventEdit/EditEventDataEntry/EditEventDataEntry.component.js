@@ -312,14 +312,17 @@ type Props = {
     formFoundation: ?RenderFoundation,
     orgUnit: OrgUnit,
     programId: string,
+    itemId: string,
     initialScheduleDate?: string,
     onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void,
-    onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: ?RenderFoundation) => void,
     onHandleScheduleSave: (eventData: Object) => void,
     onDelete: () => void,
     onCancel: () => void,
+    onConfirmCreateNew: () => void,
+    onCancelCreateNew: () => void,
     classes: {
         dataEntryContainer: string,
         fieldLabelMediaBased?: ?string,
@@ -329,6 +332,9 @@ type Props = {
     onCancelEditEvent?: () => void,
     eventStatus?: string,
     enrollmentId?: string,
+    isCompleted?: boolean,
+
+
 };
 
 type State = {
@@ -363,6 +369,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
         this.dataEntrySections = dataEntrySectionDefinitions;
         this.state = { mode: tabMode.REPORT };
         this.onHandleSwitchTab = this.onHandleSwitchTab.bind(this);
+        this.onSaveWithAskToCreateNew = this.onSaveWithAskToCreateNew.bind(this);
     }
 
     componentWillUnmount() {
@@ -370,6 +377,11 @@ class EditEventDataEntryPlain extends Component<Props, State> {
     }
 
     onHandleSwitchTab = newMode => this.setState({ mode: newMode })
+
+    onSaveWithAskToCreateNew = () => {
+        const { orgUnit, itemId, dataEntryId, formFoundation } = this.props;
+        this.props.onSave(orgUnit)(itemId, dataEntryId, formFoundation);
+    }
 
     renderScheduleView() {
         const {
@@ -426,6 +438,8 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onUpdateField,
             onStartAsyncUpdateField,
             onSave,
+            onConfirmCreateNew,
+            onCancelCreateNew,
             classes,
             ...passOnProps
         } = this.props;
@@ -438,6 +452,14 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 onSave={onSave(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
+                onConfirmCreateNew={() => {
+                    this.onSaveWithAskToCreateNew();
+                    onConfirmCreateNew();
+                }}
+                onCancelCreateNew={() => {
+                    this.onSaveWithAskToCreateNew();
+                    onCancelCreateNew();
+                }}
                 {...passOnProps}
             />
         );
