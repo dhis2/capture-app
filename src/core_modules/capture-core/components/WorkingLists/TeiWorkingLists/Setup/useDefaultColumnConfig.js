@@ -49,8 +49,7 @@ const getProgramStageMainConfig =
             id: ADDITIONAL_FILTERS.occurredAt,
             visible: false,
             type: dataElementTypes.DATE,
-            // eslint-disable-next-line no-underscore-dangle
-            header: stages.get(programStageId)?.stageForm._labels.occurredAt
+            header: stages.get(programStageId)?.stageForm.getLabel('occurredAt')
                 || i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
             filterHidden: true,
         }]

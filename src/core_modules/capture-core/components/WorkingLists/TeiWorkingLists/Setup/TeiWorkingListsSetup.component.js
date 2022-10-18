@@ -143,8 +143,7 @@ const useProgramStageFilters = ({ stages }: TrackerProgram, programStageId?: str
     const supportsProgramStageWorkingLists = useFeature(FEATURES.programStageWorkingList);
     const programStage = programStageId && stages.get(programStageId);
     const occurredAtLabel = programStage
-        // eslint-disable-next-line no-underscore-dangle
-        ? programStage.stageForm._labels.occurredAt
+        ? programStage.stageForm.getLabel('occurredAt')
         : i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt);
 
     return useMemo(() => {
