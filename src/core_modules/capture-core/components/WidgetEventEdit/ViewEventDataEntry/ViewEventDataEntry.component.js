@@ -143,7 +143,7 @@ const buildScheduleDateSettingsFn = () => {
             label: `${props.formFoundation.getLabel('scheduledAt')}`,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getIsHidden: (props: Object) => props.id === dataEntryIds.ENROLLMENT_EVENT && props.hideDueDate,
+        getIsHidden: (props: Object) => props.id !== dataEntryIds.ENROLLMENT_EVENT || props.hideDueDate,
         getPropName: () => 'scheduledAt',
         getMeta: () => ({
             placement: placements.TOP,

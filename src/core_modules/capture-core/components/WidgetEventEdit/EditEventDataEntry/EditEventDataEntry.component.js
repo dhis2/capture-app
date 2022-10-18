@@ -176,7 +176,7 @@ const buildScheduleDateSettingsFn = () => {
             label: props.formFoundation.getLabel('scheduledAt'),
             disabled: true,
         }),
-        getIsHidden: (props: Object) => props.id === dataEntryIds.ENROLLMENT_EVENT && props.hideDueDate,
+        getIsHidden: (props: Object) => props.id !== dataEntryIds.ENROLLMENT_EVENT || props.hideDueDate,
         getPropName: () => 'scheduledAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
