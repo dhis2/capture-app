@@ -1,3 +1,10 @@
+## [100.13.8](https://github.com/dhis2/capture-app/compare/v100.13.7...v100.13.8) (2022-10-18)
+
+
+### Bug Fixes
+
+* [DHIS2-13906] variable names with spaces in rules engine
+
 ## [100.13.7](https://github.com/dhis2/capture-app/compare/v100.13.6...v100.13.7) (2022-09-21)
 
 
