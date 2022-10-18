@@ -90,7 +90,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
     },
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
-
         dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation, orgUnit));
     },
     onCancel: () => {
@@ -109,11 +108,15 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         const { eventId } = getLocationQuery();
         dispatch(requestDeleteEventDataEntry({ eventId, enrollmentId }));
     },
-    onCancelCreateNew: () => {
-        dispatch(startCreateNewAfterCreating({ enrollmentId: props.enrollmentId }));
+    onCancelCreateNew: (itemId: string) => {
+        const { dataEntryId, formFoundation, orgUnit, enrollmentId } = props;
+        dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation, orgUnit));
+        dispatch(startCreateNewAfterCreating({ enrollmentId }));
     },
-    onConfirmCreateNew: () => {
-        dispatch(startCreateNewAfterCreating({ enrollmentId: props.enrollmentId, isCreateNew: true }));
+    onConfirmCreateNew: (itemId: string) => {
+        const { dataEntryId, formFoundation, orgUnit, enrollmentId } = props;
+        dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation, orgUnit));
+        dispatch(startCreateNewAfterCreating({ enrollmentId, isCreateNew: true }));
     },
 });
 

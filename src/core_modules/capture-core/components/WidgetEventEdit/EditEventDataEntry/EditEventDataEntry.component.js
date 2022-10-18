@@ -321,8 +321,8 @@ type Props = {
     onHandleScheduleSave: (eventData: Object) => void,
     onDelete: () => void,
     onCancel: () => void,
-    onConfirmCreateNew: () => void,
-    onCancelCreateNew: () => void,
+    onConfirmCreateNew: (itemId: string) => void,
+    onCancelCreateNew: (itemId: string) => void,
     classes: {
         dataEntryContainer: string,
         fieldLabelMediaBased?: ?string,
@@ -333,8 +333,6 @@ type Props = {
     eventStatus?: string,
     enrollmentId?: string,
     isCompleted?: boolean,
-
-
 };
 
 type State = {
@@ -369,7 +367,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
         this.dataEntrySections = dataEntrySectionDefinitions;
         this.state = { mode: tabMode.REPORT };
         this.onHandleSwitchTab = this.onHandleSwitchTab.bind(this);
-        this.onSaveWithAskToCreateNew = this.onSaveWithAskToCreateNew.bind(this);
     }
 
     componentWillUnmount() {
@@ -377,12 +374,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
     }
 
     onHandleSwitchTab = newMode => this.setState({ mode: newMode })
-
-    onSaveWithAskToCreateNew = () => {
-        const { orgUnit, itemId, dataEntryId, formFoundation } = this.props;
-        // $FlowFixMe[incompatible-call] automated comment
-        this.props.onSave(orgUnit)(itemId, dataEntryId, formFoundation);
-    }
 
     renderScheduleView() {
         const {
@@ -439,8 +430,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onUpdateField,
             onStartAsyncUpdateField,
             onSave,
-            onConfirmCreateNew,
-            onCancelCreateNew,
             classes,
             ...passOnProps
         } = this.props;
@@ -453,14 +442,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 onSave={onSave(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
-                onConfirmCreateNew={() => {
-                    this.onSaveWithAskToCreateNew();
-                    onConfirmCreateNew();
-                }}
-                onCancelCreateNew={() => {
-                    this.onSaveWithAskToCreateNew();
-                    onCancelCreateNew();
-                }}
                 {...passOnProps}
             />
         );

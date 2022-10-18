@@ -5,11 +5,12 @@ import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } fr
 import { type RenderFoundation } from '../../../metaData';
 
 type Props = {
-    onCancelCreateNew: () => void,
-    onConfirmCreateNew: () => void,
+    onCancelCreateNew: (itemId: string) => void,
+    onConfirmCreateNew: (itemId: string) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation?: RenderFoundation) => void,
     allowGenerateNextVisit?: ?boolean,
-    isCompleted?: ?boolean
+    isCompleted?: ?boolean,
+    itemId: string
 };
 
 type State = {
@@ -54,7 +55,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
                     <ButtonStrip end>
                         <Button
                             onClick={() => {
-                                this.props.onCancelCreateNew();
+                                this.props.onCancelCreateNew(this.props.itemId);
                                 this.setState({ isOpen: false });
                             }}
                             secondary
@@ -63,7 +64,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
                         </Button>
                         <Button
                             onClick={() => {
-                                this.props.onConfirmCreateNew();
+                                this.props.onConfirmCreateNew(this.props.itemId);
                                 this.setState({ isOpen: false });
                             }}
                             primary
