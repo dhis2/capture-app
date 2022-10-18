@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
@@ -175,7 +176,7 @@ const buildScheduleDateSettingsFn = () => {
             label: props.formFoundation.getLabel('scheduledAt'),
             disabled: true,
         }),
-        getIsHidden: (props: Object) => props.hideDueDate,
+        getIsHidden: (props: Object) => props.id === dataEntryIds.ENROLLMENT_EVENT && props.hideDueDate,
         getPropName: () => 'scheduledAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { pipe } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core/';
+import { dataEntryIds } from 'capture-core/constants';
 import i18n from '@dhis2/d2-i18n';
 import {
     placements,
@@ -142,7 +143,7 @@ const buildScheduleDateSettingsFn = () => {
             label: `${props.formFoundation.getLabel('scheduledAt')}`,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getIsHidden: (props: Object) => props.hideDueDate,
+        getIsHidden: (props: Object) => props.id === dataEntryIds.ENROLLMENT_EVENT && props.hideDueDate,
         getPropName: () => 'scheduledAt',
         getMeta: () => ({
             placement: placements.TOP,
