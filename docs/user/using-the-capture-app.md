@@ -1081,12 +1081,14 @@ If an event has the status Scheduled or Overdue, you will be able to see the **R
 ![](resources/images/enrollment-edit-event-schedule-date-1.png)
 
 
-In the **Report** tab, the scheduled date field will still be shown, but will be greyed out, and there will be an icon next to it with a tooltip will say “Go to **Schedule** tab to reschedule this event”.
-
+In the **Report** tab, the scheduled date field will still be shown, but will be greyed out, and there will be an icon next to it with a tooltip saying “Go to **Schedule** tab to reschedule this event”.
 
 In the **Schedule** tab, the similar information about scheduling an event as in New event workspace will be shown. You will be able to edit the schedule date and save the change by clicking **Schedule** button.
 
 ![](resources/images/enrollment-edit-event-schedule-date.png)
+
+If an active event has a scheduled date before becoming active or a completed event has scheduled date, this date should still be shown in the workspace. 
+It’ll be locked with an icon next to it and a tooltip saying “Scheduled date cannot be changed for active/completed events”. 
 
 #### Scheduled date with Hide due date enabled
 If the flag “Hide due date” in the Maintenance configuration is enabled, scheduled date will not be shown in the form. 
