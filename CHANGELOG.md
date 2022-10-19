@@ -1,3 +1,17 @@
+## [100.17.1](https://github.com/dhis2/capture-app/compare/v100.17.0...v100.17.1) (2022-10-17)
+
+
+### Bug Fixes
+
+* [DHIS2-13906] variable names with spaces in rules engine ([92a1c7c](https://github.com/dhis2/capture-app/commit/92a1c7cdf76c0c2e5e6d95585a87d33f6a4a01ba))
+
+# [100.17.0](https://github.com/dhis2/capture-app/compare/v100.16.4...v100.17.0) (2022-10-14)
+
+
+### Features
+
+* [DHIS2-13681] optional decimal places argument for d2:round ([#3020](https://github.com/dhis2/capture-app/issues/3020)) ([c5702b4](https://github.com/dhis2/capture-app/commit/c5702b490e55bce03cbff9cfa11cdc6cf6efd906))
+
 ## [100.16.4](https://github.com/dhis2/capture-app/compare/v100.16.3...v100.16.4) (2022-10-11)
 
 
