@@ -204,7 +204,7 @@ msgid "Save and exit"
 msgstr ""
 
 msgid "Finish"
-msgstr ""
+msgstr "Закінчити"
 
 msgid "Save without completing"
 msgstr ""
@@ -796,7 +796,7 @@ msgid ""
 msgstr ""
 
 msgid "Too many results"
-msgstr ""
+msgstr "Забагато результатів"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
