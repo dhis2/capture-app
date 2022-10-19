@@ -20,7 +20,7 @@ name: 'dhis2: e2e tests'
 
 on:
     pull_request:
-        types: [opened, reopened]
+        types: [opened, synchronize, reopened]
     
     workflow_dispatch:
 
