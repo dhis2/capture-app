@@ -39,10 +39,8 @@ export const inputConverter: IConvertInputRulesValue = {
         log.warn('convertUserName not implemented', value);
         return null;
     },
-    convertCoordinate: (value: any): ?string => {
-        log.warn('convertCoordinate not implemented', value);
-        return null;
-    },
+    convertCoordinate: (value: any): ?string => (
+        (value && value.latitude && value.longitude) ? `[${value.latitude},${value.longitude}]` : null),
     convertOrganisationUnit: (value: any): ?string => {
         log.warn('convertOrganisationUnit not implemented', value);
         return null;

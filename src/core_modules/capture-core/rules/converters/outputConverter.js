@@ -44,8 +44,12 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
         return '';
     },
     convertCoordinate: (value: string): any => {
-        log.warn('convertCoordinate not implemented', value);
-        return '';
+        const trimmedValue = value.trim();
+        const coordinates = trimmedValue.substring(1, trimmedValue.length - 1).split(',');
+        return {
+            latitude: Number(coordinates[0]),
+            longitude: Number(coordinates[1]),
+        };
     },
     convertOrganisationUnit: (value: string): any => {
         log.warn('convertOrganisationUnit not implemented', value);
