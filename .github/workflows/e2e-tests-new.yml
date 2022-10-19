@@ -19,6 +19,9 @@ name: 'dhis2: e2e tests'
 #     We recommend setting "e2e-tests-success"  as a required step in your workflow.
 
 on:
+    pull_request:
+        types: [opened, reopened, synchronize]
+
     workflow_dispatch:
 
 env:
