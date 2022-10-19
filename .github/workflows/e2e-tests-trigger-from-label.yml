@@ -11,5 +11,5 @@ jobs:
         steps:
             - name: dispatch
               run: gh workflow run e2e-tests-new.yml
-               env:
-                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
