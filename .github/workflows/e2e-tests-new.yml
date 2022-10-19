@@ -45,7 +45,7 @@ jobs:
             env:
               GITHUB_CONTEXT: ${{ toJSON(github) }}
     compute-versions:
-        if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'e2e-tests')
+        if: (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'e2e-tests')) || github.event_name != 'pull_request'
         runs-on: ubuntu-latest
         outputs:
             versions: ${{ steps.legacy-versions.outputs.versions }}
