@@ -55,6 +55,8 @@ jobs:
                   echo "url: $url"
 
             - uses: actions/checkout@v3
+              with:
+                ref: ${{ github.head_ref || github.ref }}
 
             - id: legacy-versions
               uses: dhis2/action-supported-legacy-versions@v1
@@ -74,6 +76,8 @@ jobs:
                 containers: [1, 2, 3, 4, 5, 6, 7, 8]
         steps:
             - uses: actions/checkout@v3
+              with:
+                ref: ${{ github.head_ref || github.ref }}
 
             - uses: actions/setup-node@v1 
               with:
