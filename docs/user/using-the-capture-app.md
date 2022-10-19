@@ -1134,6 +1134,13 @@ After clicking **Schedule** button, user will be navigated back to enrollment ov
 ![](resources/images/enrollment-add-event-schedule-page.png)
 
 
+### Referrals widget
+The referrals widget should appear directly above the buttons for completing the new event if the conditions below are met:
+
+- When there is exacly one relationship type of type "Referral" shared with the user, and the program stage being added is explicitly added as one of the sides in the given relationship, the **Referral action** widget should be shown.
+
+- If more than one relationship is defined to fit the criteria above, an error should be shown instead: "Ambigous referrals, contact system administrator".
+
 ## Program stage event list 
 
 You can reach the program stage event list by clicking **Go to full {stage event name}** button in the overview page.
