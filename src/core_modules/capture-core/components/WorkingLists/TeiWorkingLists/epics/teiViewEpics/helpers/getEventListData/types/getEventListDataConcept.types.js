@@ -11,7 +11,7 @@ export type ApiDataElement = Array<{
     value: any,
 }>;
 
-type ApiTei = {
+export type ApiTei = {
     trackedEntity: string,
     attributes?: ApiTeiAttributes,
     enrollments: Array<{ enrollment: string }>,

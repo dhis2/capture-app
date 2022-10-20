@@ -4,10 +4,12 @@ import type {
     ApiEvents,
     ApiEvent,
     ApiTeiAttributes,
+    ApiTei,
     ApiDataElement,
     TeiColumnsMetaForDataFetchingArray,
     ClientEvents,
 } from './types';
+import { getFilterClientName } from '../../../../helpers';
 
 const getAttributeById = (attributeValues?: ApiTeiAttributes = []) =>
     attributeValues.reduce((acc, { attribute, value }) => {
@@ -15,35 +17,47 @@ const getAttributeById = (attributeValues?: ApiTeiAttributes = []) =>
         return acc;
     }, {});
 
+const buildTEIRecord = ({
+    columnsMetaForDataFetching,
+    apiTEI,
+    attributeValuesById,
+    trackedEntity,
+}: {
+    columnsMetaForDataFetching: TeiColumnsMetaForDataFetchingArray,
+    apiTEI: ApiTei,
+    attributeValuesById: Object,
+    trackedEntity: string,
+}) =>
+    columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
+        const value = mainProperty ? apiTEI[id] : attributeValuesById[id];
+        return {
+            id,
+            value: convertServerToClient(value, type),
+            urlPath: `/trackedEntityInstances/${trackedEntity}/${id}/image`,
+        };
+    });
+
 const getDataValuesById = (dataValues?: ApiDataElement = []) =>
     dataValues.reduce((acc, { dataElement, value }) => {
         acc[dataElement] = value;
         return acc;
     }, {});
 
-const buildRecord = ({
+const buildEventRecord = ({
     columnsMetaForDataFetching,
-    event,
-    elementsById,
-    eventId,
-    trackedEntity,
-    isDataElement,
+    apiEvent,
+    dataValuesById,
 }: {
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetchingArray,
-    event: ApiEvent,
-    elementsById: Object,
-    eventId: string,
-    trackedEntity: string,
-    isDataElement?: boolean,
+    apiEvent: ApiEvent,
+    dataValuesById: Object,
 }) =>
     columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
-        const value = mainProperty ? event[id] : elementsById[id];
+        const value = mainProperty ? apiEvent[id] : dataValuesById[id];
         return {
-            id,
+            id: getFilterClientName(id),
             value: convertServerToClient(value, type),
-            urlPath: isDataElement
-                ? `/events/files?dataElementUid=${id}&eventUid=${eventId}`
-                : `/trackedEntityInstances/${trackedEntity}/${id}/image`,
+            urlPath: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
         };
     });
 
@@ -51,28 +65,27 @@ export const convertToClientEvents = (
     apiEvents: ApiEvents,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetchingArray,
 ): ClientEvents =>
-    apiEvents.map((event) => {
-        const dataValuesById = getDataValuesById(event.dataValues);
-        const attributeValuesById = getAttributeById(event.parent?.attributes);
-        const eventId = event.event;
-        const trackedEntity = event.trackedEntity;
+    apiEvents.map((apiEvent) => {
+        const dataValuesById = getDataValuesById(apiEvent.dataValues);
+        const attributeValuesById = getAttributeById(apiEvent.parent?.attributes);
+        const apiTEI = apiEvent.parent;
+        const eventRecord = buildEventRecord({
+            columnsMetaForDataFetching,
+            apiEvent,
+            dataValuesById,
+        });
+        const TEIRecord = apiTEI
+            ? buildTEIRecord({
+                columnsMetaForDataFetching,
+                apiTEI,
+                attributeValuesById,
+                trackedEntity: apiEvent.trackedEntity,
+            })
+            : [];
 
         const record = [
-            ...buildRecord({
-                columnsMetaForDataFetching,
-                event,
-                elementsById: dataValuesById,
-                eventId,
-                trackedEntity,
-                isDataElement: true,
-            }),
-            ...buildRecord({
-                columnsMetaForDataFetching,
-                event,
-                elementsById: attributeValuesById,
-                eventId,
-                trackedEntity,
-            }),
+            ...eventRecord,
+            ...TEIRecord,
         ]
             .filter(({ value }) => value != null)
             .reduce((acc, { id, value, urlPath }) => {
@@ -81,7 +94,7 @@ export const convertToClientEvents = (
             }, {});
 
         return {
-            id: eventId,
+            id: apiEvent.event,
             record,
         };
     });

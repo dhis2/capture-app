@@ -11,6 +11,7 @@ import type { RawQueryArgs } from './types';
 import type { InputMeta } from './getEventListData.types';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
 import { addTEIsData } from './addTEIsData';
+import { getColumnsQueryArgs, getOrderQueryArgs } from './getColumnsQueryArgs';
 
 const createApiEventQueryArgs = (
     {
@@ -31,7 +32,7 @@ const createApiEventQueryArgs = (
         ...getApiFilterQueryArgs(rawSplitFilters.filters, filtersOnlyMetaForDataFetching),
         ...getApiFilterAttributesQueryArgs(rawSplitFilters.filterAttributes, filtersOnlyMetaForDataFetching),
         ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-        order: `${sortById}:${sortByDirection}`,
+        order: getOrderQueryArgs(sortById, sortByDirection),
         page,
         pageSize,
         orgUnit,
@@ -80,7 +81,7 @@ export const getEventListData = async (
         params: queryArgsTEIs,
     });
 
-    const columnsMetaForDataFetchingArray = [...columnsMetaForDataFetching.values()];
+    const columnsMetaForDataFetchingArray = getColumnsQueryArgs(columnsMetaForDataFetching);
     const clientEvents = convertToClientEvents(addTEIsData(apiEvents, apiTeis), columnsMetaForDataFetchingArray);
     const clientWithSubvalues = await getSubvalues(querySingleResource, absoluteApiPath)(
         clientEvents,

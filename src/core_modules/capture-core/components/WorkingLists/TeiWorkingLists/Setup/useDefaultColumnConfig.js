@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../constants';
+import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../helpers';
 import {
     dataElementTypes,
     type TrackerProgram,
@@ -44,6 +44,7 @@ const getProgramStageMainConfig =
             type: dataElementTypes.TEXT,
             header: i18n.t(ADDITIONAL_FILTERS_LABELS.status),
             filterHidden: true,
+            additionalColumn: true,
         },
         {
             id: ADDITIONAL_FILTERS.occurredAt,
@@ -52,6 +53,7 @@ const getProgramStageMainConfig =
             header: stages.get(programStageId)?.stageForm.getLabel('occurredAt')
                 || i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
             filterHidden: true,
+            additionalColumn: true,
         }]
             .map(field => ({
                 ...field,

@@ -14,7 +14,8 @@ import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
 import { convertToTEIFilterMainFilters, convertToTEIFilterAttributes } from '../helpers/TEIFilters/clientConfigToApiTEIFilterQueryConverter';
-import { MAIN_FILTERS, ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../constants';
+import { MAIN_FILTERS } from '../constants';
+import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../helpers';
 
 const DEFAULT_TEMPLATES_LENGTH = 1;
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
