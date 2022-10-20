@@ -530,7 +530,7 @@ msgid "Save and exit"
 msgstr ""
 
 msgid "Finish"
-msgstr ""
+msgstr "Закінчити"
 
 msgid "Switch to form view"
 msgstr ""
