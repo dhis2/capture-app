@@ -56,8 +56,6 @@ export const variableSourceTypes = {
     CALCULATED_VALUE: 'CALCULATED_VALUE',
 };
 
-const EMPTY_STRING = '';
-
 export class VariableService {
     static getDataElementValueForVariable(value: any, dataElementId: string, useNameForOptionSet: ?boolean, dataElements: ?DataElements, optionSets: OptionSets) {
         const hasValue = !!value || value === 0 || value === false;
@@ -136,7 +134,7 @@ export class VariableService {
             if (!getterFn) {
                 log.error(`Unknown programRuleVariableSourceType:${programVariable.programRuleVariableSourceType}`);
                 variable = this.buildVariable(
-                    EMPTY_STRING,
+                    null,
                     typeKeys.TEXT, {
                         variablePrefix: variablePrefixes.DATAELEMENT,
                         useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -223,7 +221,7 @@ export class VariableService {
         if (!dataElement) {
             log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid dataelement id (id: ${dataElementId || ''})`);
             return this.buildVariable(
-                EMPTY_STRING,
+                null,
                 typeKeys.TEXT, {
                     variablePrefix: variablePrefixes.DATAELEMENT,
                     useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -239,7 +237,7 @@ export class VariableService {
         if (!attribute) {
             log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid trackedEntityAttribute id (id: ${attributeId || ''})`);
             return this.buildVariable(
-                EMPTY_STRING,
+                null,
                 typeKeys.TEXT, {
                     variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
                     useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -254,7 +252,7 @@ export class VariableService {
         // $FlowFixMe[incompatible-type] automated comment
         const dataElement: DataElement = dataElements[dataElementId];
         return this.buildVariable(
-            EMPTY_STRING,
+            null,
             dataElement.valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
                 useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -264,7 +262,7 @@ export class VariableService {
 
     getVariableForCalculatedValue(programVariable: ProgramRuleVariable): ?RuleVariable {
         return this.buildVariable(
-            EMPTY_STRING,
+            null,
             programVariable.valueType, {
                 variablePrefix: variablePrefixes.CALCULATED_VALUE,
                 useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -286,7 +284,7 @@ export class VariableService {
         const hasValue = !!attributeValue || attributeValue === 0 || attributeValue === false;
         if (!hasValue) {
             return this.buildVariable(
-                EMPTY_STRING,
+                null,
                 valueType, {
                     variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
                     useNameForOptionSet: programVariable.useNameForOptionSet,
