@@ -204,7 +204,7 @@ msgid "Save and exit"
 msgstr ""
 
 msgid "Finish"
-msgstr ""
+msgstr "Закінчити"
 
 msgid "Save without completing"
 msgstr ""
@@ -834,7 +834,7 @@ msgid "An error has occurred"
 msgstr ""
 
 msgid "Too many results"
-msgstr ""
+msgstr "Забагато результатів"
 
 msgid "Cannot search in all programs"
 msgstr ""
