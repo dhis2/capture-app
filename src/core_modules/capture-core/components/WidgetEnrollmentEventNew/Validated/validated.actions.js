@@ -10,6 +10,7 @@ export const newEventWidgetActionTypes = {
     EVENT_SAVE_SUCCESS: 'NewEvent.SaveEventSuccess',  // TEMPORARY - pass in success action name to the widget
     EVENT_SAVE_ERROR: 'NewEvent.SaveEventError', // TEMPORARY - pass in error action name to the widget
     EVENT_NOTE_ADD: 'NewEvent.AddEventNote',
+    START_CREATE_NEW_AFTER_COMPLETING: 'NewEvent.StartCreateNewAfterCompleting',
 };
 
 export const requestSaveEvent = ({
@@ -66,3 +67,5 @@ export const saveEvent = (serverData: Object, onSaveSuccessActionType?: string, 
             rollback: onSaveErrorActionType && { type: onSaveErrorActionType, meta: { serverData, uid } },
         },
     });
+export const startCreateNewAfterCreating = ({ enrollmentId, isCreateNew }: Object) =>
+    actionCreator(newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew });

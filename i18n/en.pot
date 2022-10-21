@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-10-13T18:36:47.190Z\n"
-"PO-Revision-Date: 2022-10-13T18:36:47.190Z\n"
+"POT-Creation-Date: 2022-10-21T08:25:59.975Z\n"
+"PO-Revision-Date: 2022-10-21T08:25:59.975Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -325,6 +325,18 @@ msgstr "Indicators"
 msgid "Warnings"
 msgstr "Warnings"
 
+msgid "Generate new event"
+msgstr "Generate new event"
+
+msgid "Do you want to create another event?"
+msgstr "Do you want to create another event?"
+
+msgid "No, cancel"
+msgstr "No, cancel"
+
+msgid "Yes, create new event"
+msgstr "Yes, create new event"
+
 msgid "Warnings found"
 msgstr "Warnings found"
 
@@ -558,9 +570,6 @@ msgstr "Use new Enrollment dashboard for {{programName}}"
 
 msgid "Opt in for {{programName}}"
 msgstr "Opt in for {{programName}}"
-
-msgid "No, cancel"
-msgstr "No, cancel"
 
 msgid "Yes, opt in"
 msgstr "Yes, opt in"
@@ -1111,15 +1120,6 @@ msgstr "This event doesn't have any comments"
 
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
-
-msgid "Generate new event"
-msgstr "Generate new event"
-
-msgid "Do you want to create another event?"
-msgstr "Do you want to create another event?"
-
-msgid "Yes, create new event"
-msgstr "Yes, create new event"
 
 msgid "Delete event"
 msgstr "Delete event"

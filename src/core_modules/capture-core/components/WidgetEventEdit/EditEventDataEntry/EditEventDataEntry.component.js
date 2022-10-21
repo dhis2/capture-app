@@ -36,7 +36,7 @@ import { statusTypes } from '../../../events/statusTypes';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
-import { withAskToCreateNew } from '../DataEntry/withAskToCreateNew';
+import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
 import { actionTypes } from './editEventDataEntry.actions';
 
 const tabMode = Object.freeze({

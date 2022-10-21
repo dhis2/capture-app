@@ -2,12 +2,13 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
-import { type RenderFoundation } from '../../../metaData';
+import { type RenderFoundation } from '../../metaData';
+import { addEventSaveTypes } from '../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 type Props = {
     onCancelCreateNew: (itemId: string) => void,
     onConfirmCreateNew: (itemId: string) => void,
-    onSave: (eventId: string, dataEntryId: string, formFoundation?: RenderFoundation) => void,
+    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
     allowGenerateNextVisit?: ?boolean,
     isCompleted?: ?boolean,
     itemId: string
@@ -33,11 +34,12 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
             return this.innerInstance;
         }
 
-        handleOnSave(eventId: string, dataEntryId: string, formFoundation?: RenderFoundation) {
-            if (this.props.allowGenerateNextVisit && this.props.isCompleted) {
+        handleOnSave(eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: string) {
+            if (this.props.allowGenerateNextVisit &&
+                (this.props.isCompleted || saveType === addEventSaveTypes.COMPLETE)) {
                 this.setState({ isOpen: true });
             } else {
-                this.props.onSave(eventId, dataEntryId, formFoundation);
+                this.props.onSave(eventId, dataEntryId, formFoundation, saveType);
             }
         }
 

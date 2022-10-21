@@ -39,6 +39,7 @@ import {
     updateEventContainer,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { navigateToEnrollmentOverview } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
 
 const getDataEntryId = (event): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
@@ -195,7 +196,10 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
 export const startCreateNewAfterCompletingEpic = (
     action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
     action$.pipe(
-        ofType(actionTypes.START_CREATE_NEW_AFTER_COMPLETING),
+        ofType(
+            actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
+            newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING,
+        ),
         flatMap((action) => {
             const { isCreateNew, enrollmentId } = action.payload;
             return from(querySingleResource({ resource: 'tracker/enrollments', id: enrollmentId })).pipe(
