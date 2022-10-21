@@ -187,7 +187,7 @@ export class VariableService {
             useCodeForOptionSet: !useNameForOptionSet,
             variableType: type || typeKeys.TEXT,
             hasValue: value !== null,
-            variableEventDate: this.onProcessValue(variableEventDate, typeKeys.DATE),
+            variableEventDate,
             variablePrefix,
             allValues,
         };
@@ -314,7 +314,7 @@ export class VariableService {
             value,
             valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
-                variableEventDate: executingEvent.occurredAt,
+                variableEventDate:  this.onProcessValue(executingEvent.occurredAt, typeKeys.DATE),
                 useNameForOptionSet: programVariable.useNameForOptionSet,
             },
         );
@@ -409,7 +409,7 @@ export class VariableService {
             value,
             valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
-                variableEventDate: eventWithValue.occurredAt,
+                variableEventDate: this.onProcessValue(eventWithValue.occurredAt, typeKeys.DATE),
                 useNameForOptionSet: programVariable.useNameForOptionSet,
                 allValues,
             },
@@ -472,7 +472,7 @@ export class VariableService {
                 executingEvent.eventId,
                 typeKeys.TEXT, {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                    variableEventDate: executingEvent.occurredAt,
+                    variableEventDate: this.onProcessValue(executingEvent.occurredAt, typeKeys.DATE),
                 },
             );
 
