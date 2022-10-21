@@ -4,7 +4,7 @@ import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import { typeKeys, typeof environmentTypes } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
 import { getStructureEvents } from './helpers';
-import { getDefaultValues } from './defaultValues';
+import { defaultValues } from './defaultValues';
 import type {
     VariableServiceInput,
     ProgramRuleVariable,
@@ -59,7 +59,6 @@ export const variableSourceTypes = {
 export class VariableService {
     static dateUtils: IDateUtils;
     environment: $Values<environmentTypes>;
-    defaultValues: any;
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
@@ -72,7 +71,6 @@ export class VariableService {
         this.environment = environment;
         this.onProcessValue = onProcessValue;
         VariableService.dateUtils = dateUtils;
-        this.defaultValues = getDefaultValues(dateUtils);
 
         this.mapSourceTypeToGetterFn = {
             [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: this.getVariableForCurrentEvent,
@@ -185,7 +183,7 @@ export class VariableService {
         },
     ): RuleVariable {
         return {
-            variableValue: value ?? this.defaultValues[type],
+            variableValue: value ?? defaultValues[type],
             useCodeForOptionSet: !useNameForOptionSet,
             variableType: type || typeKeys.TEXT,
             hasValue: value !== null,
