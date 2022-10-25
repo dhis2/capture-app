@@ -6,6 +6,4 @@ on:
 
 jobs:
     reusable_verify_commit_workflow_job:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: dhis2/gh-workflows/.github/workflows/dhis2-verify-commits@main
+        uses: dhis2/gh-workflows/.github/workflows/dhis2-verify-commits@main
