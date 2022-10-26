@@ -6,4 +6,4 @@ on:
 
 jobs:
     reusable_verify_commit_workflow_job:
-        uses: dhis2/workflow-app-verify-commits/.github/workflows/app-verify-commits.yml@v1
+        uses: dhis2/workflow-app-verify-commits/.github/workflows/dhis2-verify-commits.yml@v1
