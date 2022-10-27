@@ -269,8 +269,11 @@ export class FormBuilder extends React.Component<Props> {
                 FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
         }
 
+
         Object.entries(newProps.values).forEach(([fieldId, value]) => {
-            if (this.props.values[fieldId] !== value && !this.props.fieldsUI[fieldId].valid) {
+            if (this.props.values[fieldId] !== undefined
+                && this.props.values[fieldId] !== value
+                && !this.props.fieldsUI[fieldId].valid) {
                 this.commitFieldUpdate(fieldId, value);
             }
         });
