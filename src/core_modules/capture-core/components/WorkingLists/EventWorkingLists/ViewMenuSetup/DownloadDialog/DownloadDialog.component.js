@@ -40,6 +40,7 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
     renderButtons() {
         const { request = {}, absoluteApiPath, classes } = this.props;
         const url = `${absoluteApiPath}/${request.url}`;
+        const deprecatedUrl = `${absoluteApiPath}/events/query`;
         const { pageSize, page, ...paramsFromRequest } = request.queryParams || {};
         const paramsObject = {
             ...paramsFromRequest,
@@ -61,6 +62,19 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
                     >
                         <Button>
                             {i18n.t('Download as JSON')}
+                        </Button>
+                    </a>
+                </div>
+                <div
+                    className={classes.downloadLinkContainer}
+                >
+                    <a
+                        download="events.xml"
+                        href={`${deprecatedUrl}.xml?${searchParamsString}`}
+                        className={classes.downloadLink}
+                    >
+                        <Button>
+                            {i18n.t('Download as XML')}
                         </Button>
                     </a>
                 </div>
