@@ -25,6 +25,7 @@ type Props = {
     onSelectRestMenuItem: Function,
     onUpdateFilter: Function,
     onClearFilter: Function,
+    onRemoveFilter: Function,
     classes: Object,
 };
 
@@ -176,6 +177,7 @@ const renderIndividualFilterButtons = ({
     onSetVisibleSelector,
     onUpdateFilter,
     onClearFilter,
+    onRemoveFilter,
     classes,
 }: {
     individualElementsArray: Array<Column>,
@@ -184,10 +186,11 @@ const renderIndividualFilterButtons = ({
     onSetVisibleSelector: Function,
     onUpdateFilter: Function,
     onClearFilter: Function,
+    onRemoveFilter: Function,
     classes: Object,
 }) => [...(filtersOnly || []), ...individualElementsArray]
     // $FlowFixMe[prop-missing]
-    .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent }) => (
+    .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent, mainButton }) => (
         <div
             key={id}
             data-test={`filter-button-container-${id}`}
@@ -206,6 +209,8 @@ const renderIndividualFilterButtons = ({
                 selectorVisible={id === visibleSelectorId}
                 onUpdateFilter={onUpdateFilter}
                 onClearFilter={onClearFilter}
+                isRemovable={mainButton}
+                onRemoveFilter={onRemoveFilter}
             />
         </div>
     ),
@@ -231,6 +236,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         onSelectRestMenuItem,
         onUpdateFilter,
         onClearFilter,
+        onRemoveFilter,
         filtersOnly,
         additionalFilters,
         classes,
@@ -297,6 +303,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
             onSetVisibleSelector: setVisibleSelector,
             onUpdateFilter,
             onClearFilter,
+            onRemoveFilter,
             filtersOnly,
             classes,
         });
@@ -318,6 +325,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         handleRestMenuItemSelected,
         onUpdateFilter,
         onClearFilter,
+        onRemoveFilter,
         filtersOnly,
     ]);
 

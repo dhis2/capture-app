@@ -79,6 +79,7 @@ export type ChangeRowsPerPage = (rowsPerPage: number) => void;
 export type UpdateFilter = (data: ?Object, id: string) => void;
 export type ClearFilter = (id: string) => void;
 export type ClearFilters = (filterIds: Object) => void;
+export type RemoveFilter = (id: string, includeFilters: Object) => void;
 export type SelectRestMenuItem = (id: string) => void;
 export type SetColumnOrder = (columns: Columns) => void;
 export type ResetColumnOrder = () => void;
@@ -96,6 +97,7 @@ export type InterfaceProps = $ReadOnly<{|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectRow: SelectRow,
     onSetColumnOrder: SetColumnOrder,

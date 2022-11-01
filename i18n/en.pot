@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-10-10T14:10:08.131Z\n"
-"PO-Revision-Date: 2022-10-10T14:10:08.131Z\n"
+"POT-Creation-Date: 2022-10-14T10:55:22.767Z\n"
+"PO-Revision-Date: 2022-10-14T10:55:22.767Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -504,6 +504,9 @@ msgstr "Update"
 
 msgid "Reset filter"
 msgstr "Reset filter"
+
+msgid "Remove filter"
+msgstr "Remove filter"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"

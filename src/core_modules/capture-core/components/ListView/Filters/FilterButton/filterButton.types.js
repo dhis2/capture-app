@@ -15,6 +15,8 @@ export type Props = {|
     selectorVisible: boolean,
     onUpdateFilter: Function,
     onClearFilter: Function,
+    onRemoveFilter?: Function,
+    isRemovable?: boolean,
 |};
 
 export type FilterButtonOutputProps = {|

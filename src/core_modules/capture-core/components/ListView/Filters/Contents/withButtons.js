@@ -9,7 +9,7 @@ const getStyles = (theme: Theme) => ({
     buttonsContainer: {
         paddingTop: theme.typography.pxToRem(8),
     },
-    firstButtonContainer: {
+    buttonContainer: {
         paddingRight: theme.typography.pxToRem(8),
         display: 'inline-block',
     },
@@ -18,6 +18,8 @@ const getStyles = (theme: Theme) => ({
 type Props = {
     onUpdate: (data: ?Object, commitValue?: any) => void,
     onClose: () => void,
+    onRemove: () => void,
+    isRemovable?: boolean,
     disabledReset: boolean,
     disabledUpdate: boolean,
     classes: {
@@ -31,6 +33,7 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
         filterTypeInstance: UpdatableFilterContent<any>;
         updateButtonInstance: HTMLButtonElement;
         closeButtonInstance: HTMLButtonElement;
+        removeButtonInstance: HTMLButtonElement;
 
         update = (commitValue?: any) => {
             const updateData = this.filterTypeInstance.onGetUpdateData(commitValue);
@@ -55,6 +58,10 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
             this.closeButtonInstance && this.closeButtonInstance.focus();
         }
 
+        focusRemoveButton = () => {
+            this.removeButtonInstance && this.removeButtonInstance.focus();
+        }
+
         setFilterTypeInstance = (filterTypeInstance: UpdatableFilterContent<any>) => {
             this.filterTypeInstance = filterTypeInstance;
         }
@@ -67,8 +74,20 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
             this.closeButtonInstance = buttonInstance;
         }
 
+        setRemoveButtonInstance = (buttonInstance: HTMLButtonElement) => {
+            this.removeButtonInstance = buttonInstance;
+        }
+
         render() {
-            const { onUpdate, onClose, classes, disabledUpdate, disabledReset, ...passOnProps } = this.props;
+            const { onUpdate,
+                onClose,
+                onRemove,
+                classes,
+                disabledUpdate,
+                disabledReset,
+                isRemovable,
+                ...passOnProps
+            } = this.props;
 
             return (
                 <React.Fragment>
@@ -78,13 +97,14 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
                         onUpdate={this.update}
                         onFocusUpdateButton={this.focusUpdateButton}
                         onFocusCloseButton={this.focusCloseButton}
+                        onFocusRemoveButton={this.focusRemoveButton}
                         {...passOnProps}
                     />
                     <div
                         className={classes.buttonsContainer}
                     >
                         <div
-                            className={classes.firstButtonContainer}
+                            className={classes.buttonContainer}
                         >
                             <Button
                                 dataTest="list-view-filter-apply-button"
@@ -96,15 +116,33 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
                                 {i18n.t('Update')}
                             </Button>
                         </div>
-                        <Button
-                            dataTest="list-view-filter-cancel-button"
-                            muiButtonRef={this.setCloseButtonInstance}
-                            secondary
-                            onClick={onClose}
-                            disabled={disabledReset}
+                        <div
+                            className={classes.buttonContainer}
                         >
-                            {i18n.t('Reset filter')}
-                        </Button>
+                            <Button
+                                dataTest="list-view-filter-cancel-button"
+                                muiButtonRef={this.setCloseButtonInstance}
+                                secondary
+                                onClick={onClose}
+                                disabled={disabledReset}
+                            >
+                                {i18n.t('Reset filter')}
+                            </Button>
+                        </div>
+                        {isRemovable &&
+                        (<div
+                            className={classes.buttonContainer}
+                        >
+                            <Button
+                                dataTest="list-view-filter-remove-button"
+                                muiButtonRef={this.setRemoveButtonInstance}
+                                destructive
+                                onClick={onRemove}
+                            >
+                                {i18n.t('Remove filter')}
+                            </Button>
+                        </div>)
+                        }
                     </div>
                 </React.Fragment>
             );

@@ -6,7 +6,7 @@ import { IconChevronDown16, IconChevronUp16, Tooltip } from '@dhis2/ui';
 import { Button } from '../../../Buttons';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
-import type { UpdateFilter, ClearFilter } from '../../types';
+import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';
 import type { FilterData, Options } from '../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
@@ -44,6 +44,8 @@ type Props = {
     },
     onUpdateFilter: UpdateFilter,
     onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
+    isRemovable?: boolean,
     onSetVisibleSelector: Function,
     selectorVisible: boolean,
     filterValue?: FilterData,
@@ -92,6 +94,12 @@ class FilterButtonMainPlain extends Component<Props, State> {
         this.handleFilterUpdate(null);
     }
 
+    onRemove = () => {
+        const { itemId, onRemoveFilter } = this.props;
+        this.closeFilterSelector();
+        onRemoveFilter && onRemoveFilter(itemId);
+    }
+
     handleFilterUpdate = (data: ?FilterData) => {
         const { itemId, onUpdateFilter, onClearFilter } = this.props;
         if (data == null) {
@@ -108,7 +116,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderSelectorContents() {
-        const { itemId: id, type, options, multiValueFilter, filterValue } = this.props;
+        const { itemId: id, type, options, multiValueFilter, filterValue, isRemovable } = this.props;
 
         return (
             <FilterSelectorContents
@@ -119,6 +127,8 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.onClose}
                 filterValue={filterValue}
+                onRemove={this.onRemove}
+                isRemovable={isRemovable}
             />
         );
     }

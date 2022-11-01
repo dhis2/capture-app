@@ -592,3 +592,17 @@ Then('the list should display 1 row of data', () => {
         .contains('Urzula')
         .should('exist');
 });
+
+Then(/^you ?(.*) see program stage working list events/, (not) => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('WHOMCH Smoking')
+        .should(not ? 'not.exist' : 'exist');
+});
+
+When('you remove the program stage filter', () => {
+    cy.get('[data-test="filter-button-container-programStage"]')
+        .click();
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Remove filter')
+        .click();
+});

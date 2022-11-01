@@ -33,6 +33,7 @@ export const workingListsCommonActionTypes = {
     LIST_COLUMN_ORDER_SET: 'WorkingListsListColumnOrderSet',
     LIST_COLUMN_ORDER_RESET: 'WorkingListsListColumnOrderReset',
     FILTER_SET: 'WorkingListsFilterSet',
+    FILTER_REMOVE: 'WorkingListsFilterRemove',
     FILTER_CLEAR: 'WorkingListsFilterClear',
     FILTERS_CLEAR: 'WorkingListsFiltersClear',
     REST_MENU_ITEM_SELECT: 'WorkingListsRestMenuItemSelect',
@@ -143,6 +144,9 @@ export const resetListColumnOrder = (storeId: string) =>
 
 export const setFilter = (filter: Object, itemId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.FILTER_SET)({ filter, itemId, storeId });
+
+export const removeFilter = (itemId: string, includeFilters: Object, storeId: string) =>
+    actionCreator(workingListsCommonActionTypes.FILTER_REMOVE)({ itemId, includeFilters, storeId });
 
 export const clearFilter = (itemId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.FILTER_CLEAR)({ itemId, storeId });

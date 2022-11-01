@@ -9,6 +9,7 @@ type Props = {
     additionalFilters?: AdditionalFilters,
     onUpdateFilter: Function,
     onClearFilter: Function,
+    onRemoveFilter: Function,
     onSelectRestMenuItem: Function,
     stickyFilters: Object,
 };
@@ -20,6 +21,7 @@ export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
         additionalFilters,
         onUpdateFilter,
         onClearFilter,
+        onRemoveFilter,
         onSelectRestMenuItem,
         stickyFilters,
         ...passOnProps
@@ -34,6 +36,7 @@ export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
                     additionalFilters={additionalFilters}
                     onUpdateFilter={onUpdateFilter}
                     onClearFilter={onClearFilter}
+                    onRemoveFilter={onRemoveFilter}
                     onSelectRestMenuItem={onSelectRestMenuItem}
                     stickyFilters={stickyFilters}
                 />}
