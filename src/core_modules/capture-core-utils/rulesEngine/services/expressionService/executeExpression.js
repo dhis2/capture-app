@@ -1,6 +1,7 @@
 // @flow
 import { injectVariableValues } from './injectVariableValues';
 import { getInjectionValue } from './common';
+import type { D2Parameters } from '../../d2Functions/getD2Functions.types';
 import type { ExecuteExpressionInput, ErrorHandler, ExpressionSet, DhisFunctionsInfo } from './executeExpression.types';
 
 /**
@@ -23,13 +24,15 @@ function evaluate(code) {
  * @param parameters
  * @returns {boolean}
  */
-const isFunctionSignatureBroken = (dhisFunctionParameters: ?number, parameters: Array<any>) => {
+const isFunctionSignatureBroken = (dhisFunctionParameters: ?D2Parameters, parameters: Array<any>) => {
     if (dhisFunctionParameters) {
         // But we are only checking parameters where the dhisFunction actually has
         // a defined set of parameters(concatenate, for example, does not have a fixed number);
         const numParameters = parameters.length || 0;
 
-        return numParameters !== dhisFunctionParameters;
+        return typeof dhisFunctionParameters === 'number'
+            ? numParameters !== dhisFunctionParameters
+            : numParameters < dhisFunctionParameters.min || dhisFunctionParameters.max < numParameters;
     }
     return false;
 };

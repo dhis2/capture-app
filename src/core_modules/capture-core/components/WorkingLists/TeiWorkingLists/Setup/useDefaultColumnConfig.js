@@ -1,6 +1,7 @@
 // @flow
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../helpers';
 import {
     dataElementTypes,
     type TrackerProgram,
@@ -35,24 +36,30 @@ const mainConfig: Array<MainColumnConfig> = [{
         mainProperty: true,
     }));
 
-const programStageMainConfig: Array<MainColumnConfig> = [{
-    id: 'status',
-    visible: false,
-    type: dataElementTypes.TEXT,
-    header: i18n.t('Event status'),
-    filterHidden: true,
-},
-{
-    id: 'occurredAt',
-    visible: false,
-    type: dataElementTypes.DATE,
-    header: i18n.t('Report date'),
-    filterHidden: true,
-}]
-    .map(field => ({
-        ...field,
-        mainProperty: true,
-    }));
+const getProgramStageMainConfig =
+    (stages, programStageId: string): Array<MetadataColumnConfig> => (
+        [{
+            id: ADDITIONAL_FILTERS.status,
+            visible: false,
+            type: dataElementTypes.TEXT,
+            header: i18n.t(ADDITIONAL_FILTERS_LABELS.status),
+            filterHidden: true,
+            additionalColumn: true,
+        },
+        {
+            id: ADDITIONAL_FILTERS.occurredAt,
+            visible: false,
+            type: dataElementTypes.DATE,
+            header: stages.get(programStageId)?.stageForm.getLabel('occurredAt')
+                || i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
+            filterHidden: true,
+            additionalColumn: true,
+        }]
+            .map(field => ({
+                ...field,
+                mainProperty: true,
+            }))
+    );
 
 const getEventsMetaDataConfig =
     (stages, programStageId: string): Array<MetadataColumnConfig> => {
@@ -103,7 +110,7 @@ export const useDefaultColumnConfig = (
 
         if (programStageId) {
             return defaultColumns.concat([
-                ...programStageMainConfig,
+                ...getProgramStageMainConfig(stages, programStageId),
                 ...getEventsMetaDataConfig(stages, programStageId),
             ]);
         }

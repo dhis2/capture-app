@@ -55,7 +55,7 @@ export const ColumnSelectorDialog = ({ columns, open, onClose, onSave }: Props) 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleSave} color="primary" autoFocus>
-                        Save
+                        {i18n.t('Save')}
                     </Button>
                 </DialogActions>
             </Dialog>

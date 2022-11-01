@@ -1137,6 +1137,9 @@ msgstr "Slett hendelse"
 msgid "Yes, delete event"
 msgstr "Ja, slett hendelse"
 
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr "Gå til \"Planlegg\"-fanen for å endre planlagt dato for denne hendelsen"
+
 msgid "Event completed"
 msgstr "Hendelse fullført"
 

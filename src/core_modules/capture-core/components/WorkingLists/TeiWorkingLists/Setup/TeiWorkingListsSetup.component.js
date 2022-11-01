@@ -14,7 +14,8 @@ import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
 import { convertToTEIFilterMainFilters, convertToTEIFilterAttributes } from '../helpers/TEIFilters/clientConfigToApiTEIFilterQueryConverter';
-import { MAIN_FILTERS, ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../constants';
+import { MAIN_FILTERS } from '../constants';
+import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../helpers';
 
 const DEFAULT_TEMPLATES_LENGTH = 1;
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
@@ -139,8 +140,12 @@ const useFiltersOnly = ({
     }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages]);
 
 
-const useProgramStageFilters = ({ stages }: TrackerProgram, programStage?: string) => {
+const useProgramStageFilters = ({ stages }: TrackerProgram, programStageId?: string) => {
     const supportsProgramStageWorkingLists = useFeature(FEATURES.programStageWorkingList);
+    const programStage = programStageId && stages.get(programStageId);
+    const occurredAtLabel = programStage
+        ? programStage.stageForm.getLabel('occurredAt')
+        : i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt);
 
     return useMemo(() => {
         if (supportsProgramStageWorkingLists) {
@@ -156,10 +161,10 @@ const useProgramStageFilters = ({ stages }: TrackerProgram, programStage?: strin
                 {
                     id: ADDITIONAL_FILTERS.occurredAt,
                     type: 'DATE',
-                    header: i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
-                    disabled: !programStage,
+                    header: occurredAtLabel,
+                    disabled: !programStageId,
                     tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
-                        label: ADDITIONAL_FILTERS_LABELS.occurredAt,
+                        label: occurredAtLabel,
                         interpolation: { escapeValue: false },
                     }),
                     transformRecordsFilter: (filter: string) => {
@@ -187,7 +192,7 @@ const useProgramStageFilters = ({ stages }: TrackerProgram, programStage?: strin
                         { text: translatedStatus.OVERDUE, value: statusTypes.OVERDUE },
                         { text: translatedStatus.SKIPPED, value: statusTypes.SKIPPED },
                     ],
-                    disabled: !programStage,
+                    disabled: !programStageId,
                     tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                         label: ADDITIONAL_FILTERS_LABELS.status,
                         interpolation: { escapeValue: false },
@@ -199,7 +204,7 @@ const useProgramStageFilters = ({ stages }: TrackerProgram, programStage?: strin
             ];
         }
         return [];
-    }, [stages, programStage, supportsProgramStageWorkingLists]);
+    }, [stages, programStageId, supportsProgramStageWorkingLists, occurredAtLabel]);
 };
 
 const useFiltersToKeep = (columns, filters, filtersOnly, programStageFiltersOnly) =>

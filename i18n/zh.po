@@ -2,15 +2,15 @@
 # Translators:
 # phil_dhis2, 2022
 # 晓东 林 <13981924470@126.com>, 2022
-# easylin <lin_xd@126.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
+# easylin <lin_xd@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,22 +99,22 @@ msgid "Please provide an integer between 0 and 100"
 msgstr "请提供 0 到 100 之间的整数"
 
 msgid "Please provide a valid url"
-msgstr "有效的URL"
+msgstr "请提供有效的URL"
 
 msgid "Please provide a valid email address"
-msgstr "有效的邮箱"
+msgstr "请提供有效的邮箱"
 
 msgid "Please provide a valid age"
-msgstr "有效的年龄"
+msgstr "请提供有效年龄"
 
 msgid "Please provide a valid phone number"
-msgstr "有效的电话号码"
+msgstr "请提供有效的电话号码"
 
 msgid "Please provide a valid organisation unit"
-msgstr "有效的机构"
+msgstr "请提供有效的机构"
 
 msgid "Please provide valid coordinates"
-msgstr "有效的坐标"
+msgstr "请提供有效坐标"
 
 msgid "This value already exists"
 msgstr "值已经存在"
@@ -1107,6 +1107,9 @@ msgstr "删除事件"
 
 msgid "Yes, delete event"
 msgstr "是的，删除事件"
+
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr "转到`调度`选项卡以重新安排调度此事件"
 
 msgid "Event completed"
 msgstr "事件完成"
