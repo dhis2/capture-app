@@ -24,7 +24,7 @@ type Props = {
     disabledUpdate: boolean,
     classes: {
         buttonsContainer: string,
-        firstButtonContainer: string,
+        buttonContainer: string,
     },
 };
 
