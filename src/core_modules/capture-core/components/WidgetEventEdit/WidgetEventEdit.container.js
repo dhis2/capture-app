@@ -53,6 +53,7 @@ export const WidgetEventEditPlain = ({
     programId,
     orgUnitId,
     enrollmentId,
+    teiId,
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
@@ -138,6 +139,7 @@ export const WidgetEventEditPlain = ({
                             orgUnit={orgUnit}
                             programId={programId}
                             stageId={programStage.id}
+                            teiId={teiId}
                             enrollmentId={enrollmentId}
                             eventStatus={eventStatus}
                             onCancelEditEvent={onCancelEditEvent}

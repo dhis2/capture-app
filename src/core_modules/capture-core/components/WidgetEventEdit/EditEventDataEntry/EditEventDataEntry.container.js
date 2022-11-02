@@ -109,14 +109,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         dispatch(requestDeleteEventDataEntry({ eventId, enrollmentId }));
     },
     onCancelCreateNew: (itemId: string) => {
-        const { dataEntryId, formFoundation, orgUnit, enrollmentId } = props;
+        const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId } = props;
         dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation, orgUnit));
-        dispatch(startCreateNewAfterCreating({ enrollmentId }));
+        dispatch(startCreateNewAfterCreating({ enrollmentId, orgUnit: orgUnit.id, programId, teiId }));
     },
     onConfirmCreateNew: (itemId: string) => {
-        const { dataEntryId, formFoundation, orgUnit, enrollmentId } = props;
+        const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId } = props;
         dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation, orgUnit));
-        dispatch(startCreateNewAfterCreating({ enrollmentId, isCreateNew: true }));
+        dispatch(startCreateNewAfterCreating({ enrollmentId, isCreateNew: true, orgUnit: orgUnit.id, programId, teiId }));
     },
 });
 

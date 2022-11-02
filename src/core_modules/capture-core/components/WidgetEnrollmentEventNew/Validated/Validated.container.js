@@ -92,7 +92,9 @@ export const Validated = ({
             onSaveSuccessActionType,
             onSaveErrorActionType,
         }));
-        dispatch(startCreateNewAfterCreating({ enrollmentId, isCreateNew }));
+        dispatch(startCreateNewAfterCreating({
+            enrollmentId, isCreateNew, orgUnitId: orgUnit.id, programId: program.id, teiId,
+        }));
     }, [dispatch,
         program.id,
         orgUnit,

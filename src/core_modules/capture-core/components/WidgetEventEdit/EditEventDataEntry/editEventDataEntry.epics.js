@@ -194,22 +194,19 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
         }));
 
 export const startCreateNewAfterCompletingEpic = (
-    action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
+    action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(
             actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
             newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING,
         ),
         flatMap((action) => {
-            const { isCreateNew, enrollmentId } = action.payload;
-            return from(querySingleResource({ resource: 'tracker/enrollments', id: enrollmentId })).pipe(
-                switchMap(({ trackedEntity, program, orgUnit: orgUnitId }) => {
-                    const params = { enrollmentId, orgUnitId, programId: program, teiId: trackedEntity };
-                    if (isCreateNew) {
-                        history.push(`/enrollmentEventNew?${buildUrlQueryString(params)}`);
-                        return EMPTY;
-                    }
-                    return of(navigateToEnrollmentOverview(params));
-                }));
+            const { isCreateNew, enrollmentId, orgUnitId, programId, teiId } = action.payload;
+            const params = { enrollmentId, orgUnitId, programId, teiId };
+            if (isCreateNew) {
+                history.push(`/enrollmentEventNew?${buildUrlQueryString(params)}`);
+                return EMPTY;
+            }
+            return of(navigateToEnrollmentOverview(params));
         }));
 
