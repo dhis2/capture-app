@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24, Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import { useEnrollmentEditEventPageMode, useRulesEngineOrgUnit } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useRulesEngineOrgUnit, useAvailableProgramStages } from 'capture-core/hooks';
 import type { Props } from './widgetEventEdit.types';
 import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
@@ -14,7 +14,6 @@ import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../metaData';
 import { cleanUpDataEntry } from '../DataEntry';
-import { useAvailableProgramStages } from '../../hooks';
 
 const styles = {
     header: {
