@@ -99,6 +99,7 @@ const EnrollmentEditEventPagePain = ({
                             programId={programId}
                             orgUnitId={orgUnitId}
                             enrollmentId={enrollmentId}
+                            teiId={teiId}
                             eventStatus={eventStatus}
                             initialScheduleDate={scheduleDate}
                             onCancelEditEvent={onCancelEditEvent}

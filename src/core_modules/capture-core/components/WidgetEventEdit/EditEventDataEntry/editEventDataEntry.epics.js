@@ -1,10 +1,10 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter, flatMap, switchMap } from 'rxjs/operators';
+import { map, filter, flatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
-import { EMPTY, from, of } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
@@ -194,22 +194,19 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
         }));
 
 export const startCreateNewAfterCompletingEpic = (
-    action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
+    action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(
             actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
             newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING,
         ),
         flatMap((action) => {
-            const { isCreateNew, enrollmentId } = action.payload;
-            return from(querySingleResource({ resource: 'tracker/enrollments', id: enrollmentId })).pipe(
-                switchMap(({ trackedEntity, program, orgUnit: orgUnitId }) => {
-                    const params = { enrollmentId, orgUnitId, programId: program, teiId: trackedEntity };
-                    if (isCreateNew) {
-                        history.push(`/enrollmentEventNew?${buildUrlQueryString(params)}`);
-                        return EMPTY;
-                    }
-                    return of(navigateToEnrollmentOverview(params));
-                }));
+            const { isCreateNew, enrollmentId, orgUnitId, programId, teiId } = action.payload;
+            const params = { enrollmentId, orgUnitId, programId, teiId };
+            if (isCreateNew) {
+                history.push(`/enrollmentEventNew?${buildUrlQueryString(params)}`);
+                return EMPTY;
+            }
+            return of(navigateToEnrollmentOverview(params));
         }));
 

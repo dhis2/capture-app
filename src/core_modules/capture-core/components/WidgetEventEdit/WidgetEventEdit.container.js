@@ -53,6 +53,7 @@ export const WidgetEventEditPlain = ({
     programId,
     orgUnitId,
     enrollmentId,
+    teiId,
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
@@ -145,6 +146,7 @@ export const WidgetEventEditPlain = ({
                             onHandleScheduleSave={onHandleScheduleSave}
                             initialScheduleDate={initialScheduleDate}
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
+                            teiId={teiId}
                         />
                     )}
                 </div>
