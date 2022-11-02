@@ -14,6 +14,7 @@ import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../metaData';
 import { cleanUpDataEntry } from '../DataEntry';
+import { useAvailableProgramStages } from '../../hooks';
 
 const styles = {
     header: {
@@ -64,11 +65,11 @@ export const WidgetEventEditPlain = ({
     }, [dispatch]);
 
     const eventAccess = getProgramEventAccess(programId, programStage.id);
+    const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
 
     if (error) {
         return error.errorComponent;
     }
-
 
     return orgUnit ? (
         <div data-test="widget-enrollment-event">
@@ -147,6 +148,7 @@ export const WidgetEventEditPlain = ({
                             onHandleScheduleSave={onHandleScheduleSave}
                             initialScheduleDate={initialScheduleDate}
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
+                            availableProgramStages={availableProgramStages}
                         />
                     )}
                 </div>

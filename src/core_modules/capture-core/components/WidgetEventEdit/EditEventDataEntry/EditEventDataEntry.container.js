@@ -21,7 +21,7 @@ import {
     requestSaveEditEventDataEntry,
     cancelEditEventDataEntry,
     requestDeleteEventDataEntry,
-    startCreateNewAfterCreating,
+    startCreateNewAfterCompleting,
 } from './editEventDataEntry.actions';
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
@@ -109,14 +109,18 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         dispatch(requestDeleteEventDataEntry({ eventId, enrollmentId }));
     },
     onCancelCreateNew: (itemId: string) => {
-        const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId } = props;
+        const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId, availableProgramStages } = props;
         dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation, orgUnit));
-        dispatch(startCreateNewAfterCreating({ enrollmentId, orgUnit: orgUnit.id, programId, teiId }));
+        dispatch(startCreateNewAfterCompleting({
+            enrollmentId, isCreateNew: false, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
+        }));
     },
     onConfirmCreateNew: (itemId: string) => {
-        const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId } = props;
+        const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId, availableProgramStages } = props;
         dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation, orgUnit));
-        dispatch(startCreateNewAfterCreating({ enrollmentId, isCreateNew: true, orgUnit: orgUnit.id, programId, teiId }));
+        dispatch(startCreateNewAfterCompleting({
+            enrollmentId, isCreateNew: true, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
+        }));
     },
 });
 

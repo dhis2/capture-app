@@ -1,10 +1,10 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter, flatMap, switchMap } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
-import { EMPTY, from, of } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
@@ -200,11 +200,14 @@ export const startCreateNewAfterCompletingEpic = (
             actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
             newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING,
         ),
-        flatMap((action) => {
-            const { isCreateNew, enrollmentId, orgUnitId, programId, teiId } = action.payload;
+        map((action) => {
+            const { isCreateNew, enrollmentId, orgUnitId, programId, teiId, availableProgramStages } = action.payload;
             const params = { enrollmentId, orgUnitId, programId, teiId };
+
             if (isCreateNew) {
-                history.push(`/enrollmentEventNew?${buildUrlQueryString(params)}`);
+                const finalParams = availableProgramStages.length === 1 ?
+                    { ...params, stageId: availableProgramStages[0].id } : params;
+                history.push(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
                 return EMPTY;
             }
             return of(navigateToEnrollmentOverview(params));

@@ -67,5 +67,5 @@ export const saveEvent = (serverData: Object, onSaveSuccessActionType?: string, 
             rollback: onSaveErrorActionType && { type: onSaveErrorActionType, meta: { serverData, uid } },
         },
     });
-export const startCreateNewAfterCreating = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId }: Object) =>
-    actionCreator(newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew, orgUnitId, programId, teiId });
+export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStage }: Object) =>
+    actionCreator(newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStage });
