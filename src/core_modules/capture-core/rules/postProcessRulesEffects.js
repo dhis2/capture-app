@@ -1,6 +1,6 @@
 // @flow
-import { effectActions } from 'capture-core-utils/rulesEngine';
-import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from 'capture-core-utils/rulesEngine';
+import { effectActions } from 'rules-engine';
+import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from 'rules-engine';
 import type { RenderFoundation } from '.././metaData';
 
 const getAssignEffectsBasedOnHideField = (hideEffects: Array<HideOutputEffect>) =>

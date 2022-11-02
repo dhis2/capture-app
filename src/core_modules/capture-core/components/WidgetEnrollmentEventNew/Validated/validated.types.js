@@ -1,5 +1,5 @@
 // @flow
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from 'rules-engine';
 import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import { typeof addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import type {

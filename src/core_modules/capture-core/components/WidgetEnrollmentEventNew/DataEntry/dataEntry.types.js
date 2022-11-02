@@ -1,5 +1,5 @@
 // @flow
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from 'rules-engine';
 import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import type { RulesExecutionDependenciesClientFormatted } from '../common.types';
 

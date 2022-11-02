@@ -1,7 +1,7 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from 'rules-engine';
 import { startNewEnrollmentDataEntryInitialisation } from '../EnrollmentRegistrationEntry.actions';
 import { scopeTypes, getProgramThrowIfNotFound } from '../../../../metaData';
 import { useLocationQuery } from '../../../../utils/routing';

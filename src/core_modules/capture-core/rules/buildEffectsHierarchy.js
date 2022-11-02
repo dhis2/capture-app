@@ -1,5 +1,5 @@
 // @flow
-import type { OutputEffect } from 'capture-core-utils/rulesEngine';
+import type { OutputEffect } from 'rules-engine';
 
 export const buildEffectsHierarchy = (effects: Array<OutputEffect>) =>
     effects.reduce((accEffectsObject, effect) => {

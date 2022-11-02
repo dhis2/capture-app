@@ -1,5 +1,5 @@
 // @flow
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from 'rules-engine';
 import type { TrackerProgram } from 'capture-core/metaData';
 import type {
     EnrollmentData,
