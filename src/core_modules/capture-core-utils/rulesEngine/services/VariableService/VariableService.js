@@ -415,7 +415,7 @@ export class VariableService {
                 sourceData.dataElements,
                 sourceData.optionSets,
             );
-            return value !== false;
+            return value !== null;
         });
 
         if (!eventWithValue) {
