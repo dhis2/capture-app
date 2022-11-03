@@ -23,17 +23,16 @@ export const useAvailableProgramStages = (programStage: ProgramStage, teiId: str
     const availableProgramStages = useMemo(() => programStage.allowGenerateNextVisit
     && !programLoading && program?.programStages
         ?.reduce((accStage, currentStage) => {
-            if (currentStage.id !== programStage.id) {
-                const eventCount = enrollment?.events
-                    ?.filter(event => event.programStage === currentStage.id)
-                    ?.length;
-                const isAvailableStage = currentStage.repeatable || eventCount === 0;
-                accStage.push({ id: currentStage.id, isAvailableStage, eventCount, currentStage });
-            }
+            const eventCount = enrollment?.events
+                ?.filter(event => event.programStage === currentStage.id)
+                ?.length;
+            const isAvailableStage = currentStage.repeatable || eventCount === 0;
+            accStage.push({ id: currentStage.id, isAvailableStage, eventCount, currentStage });
+
             return accStage;
-        }, []), [enrollment?.events,
+        }, []), [
+        enrollment?.events,
         program?.programStages, programLoading,
-        programStage.id,
         programStage.allowGenerateNextVisit,
     ]);
 
