@@ -63,6 +63,7 @@ export class VariableService {
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
+    defaultValues: any;
     structureEvents: (currentEvent?: EventData, events?: EventsData) => EventsDataContainer;
     constructor(
         onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
@@ -81,6 +82,8 @@ export class VariableService {
             [variableSourceTypes.TEI_ATTRIBUTE]: this.getVariableForSelectedEntityAttributes,
             [variableSourceTypes.CALCULATED_VALUE]: this.getVariableForCalculatedValue,
         };
+
+        this.defaultValues = defaultValues;
 
         this.structureEvents = getStructureEvents(dateUtils.compareDates);
     }
@@ -184,7 +187,7 @@ export class VariableService {
         },
     ): RuleVariable {
         return {
-            variableValue: value ?? defaultValues[type],
+            variableValue: value ?? this.defaultValues[type],
             useCodeForOptionSet: !useNameForOptionSet,
             variableType: type || typeKeys.TEXT,
             hasValue: value !== null,
@@ -203,7 +206,7 @@ export class VariableService {
             log.warn(`Variable ${variableHashKey} was not defined.`);
         } else {
             const { variableType } = variableHash;
-            const variableValue = data === null ? defaultValues[variableType] : normalizeRuleVariable(data, variableType);
+            const variableValue = data === null ? this.defaultValues[variableType] : normalizeRuleVariable(data, variableType);
 
             variablesHash[variableHashKey] = {
                 ...variableHash,
