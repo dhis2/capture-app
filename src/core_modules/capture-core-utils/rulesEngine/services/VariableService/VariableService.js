@@ -171,6 +171,28 @@ export class VariableService {
         return variablesWithContextAndConstantVariables;
     }
 
+    updateVariable(variableToAssign: string, data: any, variablesHash: RuleVariables) {
+        const variableHashKey = variableToAssign.replace('#{', '').replace('A{', '').replace('}', '');
+        const variableHash = variablesHash[variableHashKey];
+
+        if (!variableHash) {
+            // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
+            log.warn(`Variable ${variableHashKey} was not defined.`);
+        } else {
+            const { variableType } = variableHash;
+            const variableValue = data === null ? this.defaultValues[variableType] : normalizeRuleVariable(data, variableType);
+
+            variablesHash[variableHashKey] = {
+                ...variableHash,
+                variableValue,
+                hasValue: data !== null,
+                variableEventDate: '',
+                variablePrefix: variableHash.variablePrefix || '#',
+                allValues: [variableValue],
+            };
+        }
+    }
+
     buildVariable(
         value: any,
         type: string,
@@ -195,28 +217,6 @@ export class VariableService {
             variablePrefix,
             allValues,
         };
-    }
-
-    updateVariable(variableToAssign: string, data: any, variablesHash: RuleVariables) {
-        const variableHashKey = variableToAssign.replace('#{', '').replace('A{', '').replace('}', '');
-        const variableHash = variablesHash[variableHashKey];
-
-        if (!variableHash) {
-            // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-            log.warn(`Variable ${variableHashKey} was not defined.`);
-        } else {
-            const { variableType } = variableHash;
-            const variableValue = data === null ? this.defaultValues[variableType] : normalizeRuleVariable(data, variableType);
-
-            variablesHash[variableHashKey] = {
-                ...variableHash,
-                variableValue,
-                hasValue: data !== null,
-                variableEventDate: '',
-                variablePrefix: variableHash.variablePrefix || '#',
-                allValues: [variableValue],
-            };
-        }
     }
 
     preCheckDataElementSpecificSourceType(programVariable: ProgramRuleVariable, dataElements: ?DataElements) {
