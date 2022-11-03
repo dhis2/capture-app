@@ -1093,7 +1093,7 @@ It’ll be locked with an icon next to it and a tooltip saying “Scheduled date
 #### Scheduled date with Hide due date enabled
 If the flag “Hide due date” in the Maintenance configuration is enabled, scheduled date will not be shown in the form. 
 
-However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from start" in configuration, and this can not be changed. 
+However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from start" that has been configured in Maintenance, and this can not be changed. 
 In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
 
 
