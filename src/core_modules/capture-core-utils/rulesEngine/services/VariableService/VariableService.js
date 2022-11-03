@@ -172,7 +172,7 @@ export class VariableService {
     }
 
     updateVariable(variableToAssign: string, data: any, variablesHash: RuleVariables) {
-        const variableHashKey = variableToAssign.replace('#{', '').replace('A{', '').replace('}', ''); // lgtm [js/incomplete-sanitization]
+        const variableHashKey = variableToAssign.replace('#{', '').replace('A{', '').replace(/}/g, '');
         const variableHash = variablesHash[variableHashKey];
 
         if (!variableHash) {
