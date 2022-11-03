@@ -3,30 +3,33 @@ import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 import { typeKeys } from '../constants';
 
+const convertNumber = (numberRepresentation) => {
+    if (isString(numberRepresentation)) {
+        if (isNaN(numberRepresentation)) {
+            log.warn(`rule execution service could not convert ${numberRepresentation} to number`);
+            return null;
+        }
+        return Number(numberRepresentation);
+    }
+    return numberRepresentation;
+};
+
+const convertBoolean = (value) => {
+    if (isString(value)) {
+        return value === 'true';
+    }
+    return value;
+};
+
+const convertString = (stringRepresentation: number | string): string => stringRepresentation.toString();
+
 // Turns the internal representation of a program rule variable into its "canonical" format
 // (e.g. numbers represented as strings get converted to numbers)
+// Used to preprocess a computed value before assigning it to a calculated program rule variable
 export const normalizeRuleVariable = (data: any, valueType: string) => {
-    const convertNumber = (numberRepresentation) => {
-        if (isString(numberRepresentation)) {
-            if (isNaN(numberRepresentation)) {
-                log.warn(`rule execution service could not convert ${numberRepresentation} to number`);
-                return null;
-            }
-            return Number(numberRepresentation);
-        }
-        return numberRepresentation;
-    };
-
-    const convertString = (stringRepresentation: number | string): string => stringRepresentation.toString();
-
     const ruleEffectDataConvertersByType = {
-        [typeKeys.BOOLEAN]: (value) => {
-            if (isString(value)) {
-                return value === 'true';
-            }
-            return value;
-        },
-        [typeKeys.TRUE_ONLY]: () => true,
+        [typeKeys.BOOLEAN]: convertBoolean,
+        [typeKeys.TRUE_ONLY]: convertBoolean,
         [typeKeys.PERCENTAGE]: convertString,
         [typeKeys.INTEGER]: convertNumber,
         [typeKeys.INTEGER_NEGATIVE]: convertNumber,

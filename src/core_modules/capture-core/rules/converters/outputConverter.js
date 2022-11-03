@@ -15,7 +15,7 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
     convertPhoneNumber: (value: string): string => value,
     convertEmail: (value: string): string => value,
     convertBoolean: (value: boolean): string => (value ? 'true' : 'false'),
-    convertTrueOnly: (): string => 'true',
+    convertTrueOnly: (value: boolean): string => (value ? 'true' : 'false'),
     convertDate: (value: string): string => {
         const momentDate = moment(value, dateMomentFormat);
         return convertMomentToDateFormatString(momentDate);
