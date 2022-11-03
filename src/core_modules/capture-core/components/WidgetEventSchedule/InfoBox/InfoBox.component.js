@@ -19,7 +19,7 @@ const InfoBoxPlain = ({ scheduleDate, suggestedScheduleDate, eventCountInOrgUnit
 
     return (
         <NoticeBox className={classes.infoBox} title={i18n.t('Schedule date info')}>
-            <div>{scheduleDate === suggestedScheduleDate ?
+            {scheduleDate === suggestedScheduleDate ?
                 i18n.t('The scheduled date matches the suggested date, but can be changed if needed.')
                 :
                 i18n.t(
@@ -31,18 +31,16 @@ const InfoBoxPlain = ({ scheduleDate, suggestedScheduleDate, eventCountInOrgUnit
                         defaultValue_plural: 'The scheduled date is {{count}} days {{position}} the suggested date.',
                     })
             }
-            </div>
-            <div>
-                {i18n.t('There are {{count}} scheduled event in {{orgUnitName}} on this day.', {
-                    count: eventCountInOrgUnit,
-                    orgUnitName,
-                    defaultValue: 'There are {{count}} scheduled event in {{orgUnitName}} on this day.',
-                    defaultValue_plural: 'There are {{count}} scheduled events in {{orgUnitName}} on this day.',
-                    interpolation: {
-                        escape: false,
-                    },
-                })}
-            </div>
+            {' '}
+            {i18n.t('There are {{count}} scheduled event in {{orgUnitName}} on this day.', {
+                count: eventCountInOrgUnit,
+                orgUnitName,
+                defaultValue: 'There are {{count}} scheduled event in {{orgUnitName}} on this day.',
+                defaultValue_plural: 'There are {{count}} scheduled events in {{orgUnitName}} on this day.',
+                interpolation: {
+                    escape: false,
+                },
+            })}
         </NoticeBox>
     );
 };
