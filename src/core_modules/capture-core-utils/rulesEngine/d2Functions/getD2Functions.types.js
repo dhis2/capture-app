@@ -12,8 +12,15 @@ export type D2FunctionsInput = $ReadOnly<{|
     selectedUserRoles: Array<string>,
 |}>;
 
+type D2ParameterRange = {|
+    min: number,
+    max: number,
+|}
+
+export type D2Parameters = number | D2ParameterRange;
+
 export type D2FunctionConfig = {
-    parameters?: number,
+    parameters?: D2Parameters,
     execute: Function,
 }
 export type D2Functions = $ReadOnly<{|
