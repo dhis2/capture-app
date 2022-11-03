@@ -1,12 +1,12 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "100.17.2",
+  "version": "100.17.3",
   "cacheVersion": "4",
   "serverVersion": "38",
   "private": true,
   "dependencies": {
-    "@dhis2/app-runtime": "^3.4.4",
+    "@dhis2/app-runtime": "^3.5.0",
     "@dhis2/d2-i18n": "^1.1.0",
     "@dhis2/d2-icons": "^1.0.1",
     "@dhis2/d2-ui-app": "^2.0.0",
@@ -111,7 +111,7 @@
     "eslint-plugin-flowtype": "^5.10.0",
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "4.6.0",
     "fake-indexeddb": "^4.0.0",
     "flow-bin": "^0.132.0",
