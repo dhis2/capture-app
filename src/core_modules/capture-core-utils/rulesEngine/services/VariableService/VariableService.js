@@ -4,6 +4,7 @@ import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import { typeKeys, typeof environmentTypes } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
 import { getStructureEvents } from './helpers';
+import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable';
 import { defaultValues } from './defaultValues';
 import type {
     VariableServiceInput,
@@ -193,6 +194,28 @@ export class VariableService {
         };
     }
 
+    updateVariable(variableToAssign: string, data: any, variablesHash: RuleVariables) {
+        const variableHashKey = variableToAssign.replace('#{', '').replace('A{', '').replace('}', '');
+        const variableHash = variablesHash[variableHashKey];
+
+        if (!variableHash) {
+            // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
+            log.warn(`Variable ${variableHashKey} was not defined.`);
+        } else {
+            const { variableType } = variableHash;
+            const variableValue = data === null ? defaultValues[variableType] : normalizeRuleVariable(data, variableType);
+
+            variablesHash[variableHashKey] = {
+                ...variableHash,
+                variableValue,
+                hasValue: data !== null,
+                variableEventDate: '',
+                variablePrefix: variableHash.variablePrefix || '#',
+                allValues: [variableValue],
+            };
+        }
+    }
+
     preCheckDataElementSpecificSourceType(programVariable: ProgramRuleVariable, dataElements: ?DataElements) {
         const dataElementId = programVariable.dataElementId;
         const dataElement = dataElementId && dataElements && dataElements[dataElementId];
@@ -314,7 +337,7 @@ export class VariableService {
             value,
             valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
-                variableEventDate:  this.onProcessValue(executingEvent.occurredAt, typeKeys.DATE),
+                variableEventDate: this.onProcessValue(executingEvent.occurredAt, typeKeys.DATE),
                 useNameForOptionSet: programVariable.useNameForOptionSet,
             },
         );
