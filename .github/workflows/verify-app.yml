@@ -110,7 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: instance-version
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    container: cypress/browsers:node14.7.0-chrome84
+    container: cypress/browsers:node16.17.0-chrome106
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
