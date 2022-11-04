@@ -1,0 +1,7 @@
+// @flow
+
+import log from 'loglevel';
+import { getZScoreWFA, getZScoreWFH, getZScoreHFA } from './zScoreFunctions';
+import { extractDataMatrixValue } from './gs1DataMatrixFuntions';
+import type { D2FunctionsInput, D2Functions } from './getD2Functions.types';
+declare export var getD2Functions: (arg0: D2FunctionsInput) => D2Functions;

@@ -1,0 +1,12 @@
+// @flow
+
+const passOnTypes = ['number', 'boolean'];
+
+/*
+As a safety measure we will only allow values of type string, number and boolean
+to be injected into the expression.
+Strings will be sanitized and encapsulated in double quotes.
+The value returned from this function will always be a string though
+because the return value will be part of a string that we will run eval / new Function on.
+*/
+declare export var getInjectionValue: (rawValue: any) => string;

@@ -1,0 +1,2 @@
+// @flow
+declare export var errorCreator: (message: string) => any;
