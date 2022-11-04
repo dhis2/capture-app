@@ -71,10 +71,6 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            - uses: actions/setup-node@v1 
-              with:
-                  node-version: 16.x
-
             - name: compute-instance-url
               id: instance-url
               run: |
@@ -91,7 +87,7 @@ jobs:
                   parallel: true
                   group: e2e-chrome-parallel-${{ matrix.versions }}
                   browser: chrome
-                  start: yarn d2-app-scripts start
+                  start: yarn start:forCypress
                   wait-on: http://localhost:3000
                   wait-on-timeout: 300
               env:

@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
@@ -40,7 +40,7 @@ jobs:
     needs: install
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
@@ -59,7 +59,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: install
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
@@ -78,7 +78,7 @@ jobs:
     needs: install
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
@@ -120,19 +120,10 @@ jobs:
       matrix:
         containers: [1, 2, 3, 4, 5, 6, 7, 8]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-
-      - uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - uses: actions/checkout@v3
 
       - name: Cypress run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           record: true
           parallel: true
@@ -155,7 +146,7 @@ jobs:
     needs: [cypress-dev]
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
@@ -182,7 +173,7 @@ jobs:
     needs: build
     if: "!github.event.push.repository.fork && !contains(github.event.head_commit.message, '[skip ci]') && github.actor != 'dependabot[bot]'"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           token: ${{ env.GH_TOKEN }}
 
