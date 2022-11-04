@@ -789,6 +789,16 @@ You will find the predefined list views above the filters for the list. Click to
 
 ![](resources/images/tei_list_predefined_views.png)
 
+## Tracker program stage working list
+
+Visualize data elements from one single stage in the same working list. To do this, you choose “Program stage” under “More filters" and then a program stage option. 
+
+![](resources/images/program_stage_button.png)
+
+![](resources/images/program_stage_working_list.png)
+
+The list can be [filtered](#filter-the-list), [sorted](#sort-the-list) and [modified](#modify-the-list-layout) in the same way as the TEI working list.
+
 ## Implementer / administrator info { #implementer_info } 
 
 ### Metadata caching { #metadata_caching } 
