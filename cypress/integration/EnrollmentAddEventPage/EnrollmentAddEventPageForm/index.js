@@ -1,3 +1,5 @@
+import '../sharedSteps';
+
 const showAllEventsInProgramStage = () => {
     cy.get('[data-test="dhis2-uicore-tablefoot"]')
         .then(($footer) => {
@@ -24,6 +26,16 @@ When(/^you type (.*) in the input number (.*)$/, (value, eq) => {
         .eq(eq)
         .type(value)
         .blur();
+});
+
+When(/^you select (.*) in the select number (.*)$/, (value, eq) => {
+    cy
+        .get('[data-test="new-enrollment-event-form"]')
+        .get('[data-test="virtualized-select"]')
+        .eq(eq)
+        .click()
+        .contains(value)
+        .click();
 });
 
 When(/^you click the checkbox number (.*)$/, (eq) => {
@@ -96,4 +108,24 @@ When(/^you focus and blur a required field/, () => {
 Then(/^the input should throw an error with error-message (.*)$/, (error) => {
     cy.get('[data-test="error-message"]')
         .contains(error);
+});
+
+
+Then('there should be a modal popping up', () => {
+    cy.contains('[data-test="dhis2-uicore-modal"]', 'Generate new event')
+        .should('exist');
+});
+
+When(/^you choose option (.*) the modal$/, (buttonText) => {
+    cy.get('[data-test="dhis2-uicore-modal"]')
+        .find('[data-test="dhis2-uicore-button"]')
+        .contains(buttonText)
+        .click();
+    cy.get('[data-test="dhis2-uicore-modal"]')
+        .contains('Generate new event')
+        .should('not.exist');
+});
+
+Then(/^you will be navigate to page (.*)$/, (url) => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/${url}`);
 });

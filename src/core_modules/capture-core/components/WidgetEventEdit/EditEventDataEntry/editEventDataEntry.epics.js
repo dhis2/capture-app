@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, flatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
@@ -200,7 +200,7 @@ export const startCreateNewAfterCompletingEpic = (
             actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
             newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING,
         ),
-        map((action) => {
+        flatMap((action) => {
             const { isCreateNew, enrollmentId, orgUnitId, programId, teiId, availableProgramStages } = action.payload;
             const params = { enrollmentId, orgUnitId, programId, teiId };
 

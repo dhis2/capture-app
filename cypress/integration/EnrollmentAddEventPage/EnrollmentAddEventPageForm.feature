@@ -44,3 +44,28 @@ Feature: User interacts with the Enrollment New Event Workspace
     And you click the create new button number 2
     And you type x in the input number 1
     Then the input should throw an error with error-message Please provide a positive integer
+
+  Scenario: User should be asked to create new event after completing a stage and choose to cancel
+    Given you land on the enrollment new event page by having typed #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&stageId=CWaAcQYKVpq&teiId=S3JjTA4QMNe
+    Then you see the following Enrollment: New Event
+    And you see the widget header Foci investigation & classification
+    And you type 2022-01-01 in the input number 0
+    And you type x in the input number 20
+    And you select Active in the select number 13
+    And you click the Complete button without post request
+    Then there should be a modal popping up
+    When you choose option No, cancel in the modal
+    Then you will be navigate to page #/enrollment?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&teiId=S3JjTA4QMNe
+
+  Scenario: User should be asked to create new event after completing a stage and choose to continue
+    Given you land on the enrollment new event page by having typed #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&stageId=CWaAcQYKVpq&teiId=S3JjTA4QMNe
+    Then you see the following Enrollment: New Event
+    And you see the widget header Foci investigation & classification
+    And you type 2022-01-01 in the input number 0
+    And you type x in the input number 20
+    And you select Active in the select number 13
+    And you click the Complete button without post request
+    Then there should be a modal popping up
+    When you choose option Yes, create new event in the modal
+    Then you will be navigate to page #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&teiId=S3JjTA4QMNe
+
