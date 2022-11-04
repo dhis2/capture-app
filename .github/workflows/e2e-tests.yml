@@ -17,7 +17,7 @@ name: 'dhis2: e2e tests'
 #     containers: Set the matrix containers array for the cypress job. The number of parallel Cypress instances running for each backend version will equal the array length.
 #
 # - Set status check as required:
-#     We recommend setting "e2e-tests-success"  as a required step in your workflow.
+#     We recommend setting "e2e-tests-success"  as a required step in your workflow. 
 
 on:
     pull_request:
