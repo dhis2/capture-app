@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import i18n from '@dhis2/d2-i18n';
 import { makeCancelablePromise } from 'capture-core-utils';
 import { Input } from './Input.component';
