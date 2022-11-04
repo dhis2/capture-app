@@ -62,7 +62,7 @@ jobs:
     cypress:
         needs: compute-versions
         runs-on: ubuntu-latest
-        container: cypress/browsers:node14.7.0-chrome84
+        container: cypress/browsers:node16.17.0-chrome106
         strategy:
             fail-fast: false
             matrix:
