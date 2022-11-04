@@ -17,6 +17,7 @@ export type {
     ClearFilter,
     ClearFilters,
     UpdateFilter,
+    RemoveFilter,
     SelectRestMenuItem,
     SetColumnOrder,
     ResetColumnOrder,

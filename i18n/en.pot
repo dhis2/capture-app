@@ -505,6 +505,9 @@ msgstr "Update"
 msgid "Reset filter"
 msgstr "Reset filter"
 
+msgid "Remove filter"
+msgstr "Remove filter"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"
 

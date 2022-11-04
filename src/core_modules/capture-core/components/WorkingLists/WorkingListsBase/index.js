@@ -22,6 +22,7 @@ export type {
     DataSource,
     ClearFilter,
     ClearFilters,
+    RemoveFilter,
     FiltersData,
     SelectRestMenuItem,
     SelectRow,

@@ -35,6 +35,7 @@ type Props = {
     additionalFilters?: AdditionalFilters,
     onUpdateFilter: Function,
     onClearFilter: Function,
+    onRemoveFilter: Function,
     onSelectRestMenuItem: Function,
     stickyFilters: Object,
     classes: Object,
@@ -63,6 +64,7 @@ export const FiltersRowsPlain = ({
     additionalFilters,
     onUpdateFilter,
     onClearFilter,
+    onRemoveFilter,
     onSelectRestMenuItem,
     stickyFilters,
     classes,
@@ -95,6 +97,7 @@ export const FiltersRowsPlain = ({
                             onSelectRestMenuItem={onSelectRestMenuItem}
                             stickyFilters={stickyFilters}
                             visibleSelectorId={visibleSelectorId}
+                            onRemoveFilter={itemId => onRemoveFilter(itemId, stickyFilters.filtersWithValueOnInit)}
                         />
                     </div>
                 </>

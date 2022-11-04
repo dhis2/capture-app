@@ -162,3 +162,13 @@ And the list should display data ordered ascendingly by last name
 When you click the WHOMCH Smoking column header
 Then the sort arrow should indicate descending order
 And the list should display data ordered ascendingly by WHOMCH Smoking
+
+@v>=39
+Scenario: The user can remove the program stage filter
+Given you open the main page with Ngelehun and WHO RMNCH Tracker context
+When you open the program stage filters from the more filters dropdown menu
+And you select the First antenatal care visit program stage
+And you apply the current filter
+Then you see program stage working list events
+When you remove the program stage filter
+Then you don't see program stage working list events

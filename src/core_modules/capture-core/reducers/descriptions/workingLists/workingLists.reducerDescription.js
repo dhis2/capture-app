@@ -600,4 +600,19 @@ export const workingListsStickyFiltersDesc = createReducerDescription({
             },
         };
     },
+    [workingListsCommonActionTypes.FILTER_REMOVE]: (state, action) => {
+        const { itemId, includeFilters, storeId } = action.payload;
+        const { [itemId]: filtersWithValueOnInitToRemove, ...filtersWithValueOnInit }
+            = includeFilters || {};
+        const { [itemId]: userSelectedFilterToRemove, ...userSelectedFilters }
+            = state[storeId].userSelectedFilters || {};
+
+        return {
+            ...state,
+            [storeId]: {
+                filtersWithValueOnInit,
+                userSelectedFilters,
+            },
+        };
+    },
 }, 'workingListsStickyFilters');
