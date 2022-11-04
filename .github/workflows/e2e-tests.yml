@@ -27,6 +27,7 @@ env:
     BASE_URL_INSTANCES: https://test.e2e.dhis2.org
     NAME_PATTERN_LEGACY_INSTANCES: '{version}dev'
     NAME_PATTERN_DEV_INSTANCE: dev
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 concurrency:
     group: ${{ github.workflow}}-${{ github.ref }}
