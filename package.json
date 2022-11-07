@@ -60,7 +60,7 @@
     "rxjs": "^7.5.5",
     "styled-jsx": "^4",
     "typeface-roboto": "^0.0.75",
-    "uuid": "^3.3.2"
+    "uuid": "^9.0.0"
   },
   "scripts": {
     "start": "yarn verifyCacheVersion && d2-app-scripts start",
