@@ -1,4 +1,5 @@
 import '../sharedSteps';
+import '../../sharedSteps';
 
 const showAllEventsInProgramStage = () => {
     cy.get('[data-test="dhis2-uicore-tablefoot"]')
@@ -10,6 +11,10 @@ const showAllEventsInProgramStage = () => {
             }
         });
 };
+
+Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
+    cy.visit('/#/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI');
+});
 
 Given(/^you land on the enrollment new event page by having typed (.*)$/, (url) => {
     cy.visit(url);
@@ -116,14 +121,11 @@ Then('there should be a modal popping up', () => {
         .should('exist');
 });
 
-When(/^you choose option (.*) the modal$/, (buttonText) => {
+When(/^you choose option (.*) in the modal$/, (buttonText) => {
     cy.get('[data-test="dhis2-uicore-modal"]')
         .find('[data-test="dhis2-uicore-button"]')
         .contains(buttonText)
         .click();
-    cy.get('[data-test="dhis2-uicore-modal"]')
-        .contains('Generate new event')
-        .should('not.exist');
 });
 
 Then(/^you will be navigate to page (.*)$/, (url) => {
