@@ -86,6 +86,7 @@ export type UpdateList = (data: {
     orgUnitId: string,
     categories?: Categories,
     lastIdDeleted?: string,
+    resetMode: boolean,
 }) => void;
 
 export type ManagerContextData = {|
@@ -124,6 +125,7 @@ export type ListViewUpdaterContextData = {|
     customUpdateTrigger?: any,
     forceUpdateOnMount?: boolean,
     dirtyList: boolean,
+    loadedOrgUnitId?: string,
 |};
 
 export type ListViewBuilderContextData = {|

@@ -4,7 +4,7 @@ import { parseNumber } from 'capture-core-utils/parsers';
  *
  * @export
  * @param {string} value
- * @returns
+ * @returns {boolean}
  */
 
 

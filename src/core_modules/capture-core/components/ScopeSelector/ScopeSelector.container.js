@@ -1,9 +1,11 @@
 // @flow
 import React, { type ComponentType, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
 import type { OwnProps } from './ScopeSelector.types';
 import { useOrganizationUnit } from './hooks';
+import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
+
 
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName) => {
     // because we want the orgUnit to be fetched and stored
@@ -28,6 +30,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     onResetAllCategoryOptions,
     children,
 }) => {
+    const dispatch = useDispatch();
     const { refetch: refetchOrganisationUnit, displayName } = useOrganizationUnit();
     const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: displayName, id: selectedOrgUnitId });
 
@@ -46,21 +49,30 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
 
     const handleSetOrgUnit = (orgUnitId, orgUnitObject) => {
         setSelectedOrgUnit(orgUnitObject);
-        onSetOrgUnit(orgUnitId);
+        onSetOrgUnit && onSetOrgUnit(orgUnitId);
     };
 
-    const lockedSelectorLoads: string = useSelector(({ activePage }) => activePage.lockedSelectorLoads);
+    const { lockedSelectorLoads, previousOrgUnitId } = useSelector(({ activePage, app }) => (
+        {
+            lockedSelectorLoads: activePage.lockedSelectorLoads,
+            previousOrgUnitId: app.previousOrgUnitId,
+        }
+    ));
     const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnit.name);
 
     return (
         <ScopeSelectorComponent
             onResetProgramId={onResetProgramId}
-            onResetOrgUnitId={onResetOrgUnitId}
+            onResetOrgUnitId={() => {
+                selectedOrgUnit && dispatch(resetOrgUnitIdFromScopeSelector(selectedOrgUnit?.id));
+                return onResetOrgUnitId();
+            }}
             onResetAllCategoryOptions={onResetAllCategoryOptions}
             onResetCategoryOption={onResetCategoryOption}
             onSetCategoryOption={onSetCategoryOption}
             onSetProgramId={onSetProgramId}
             onSetOrgUnit={handleSetOrgUnit}
+            previousOrgUnitId={previousOrgUnitId}
             selectedOrgUnit={selectedOrgUnit}
             selectedOrgUnitId={selectedOrgUnitId}
             selectedProgramId={selectedProgramId}

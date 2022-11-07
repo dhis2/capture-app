@@ -20,21 +20,30 @@ import type {
     ApiTEIQueryCriteria,
     TeiColumnsMetaForDataFetching,
 } from '../../../types';
+import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
 import { DATE_TYPES, ASSIGNEE_MODES } from '../../../constants';
 
-const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
+const getTextFilter = (filter: ApiDataFilterText): ?TextFilterData => {
     const value = filter.like;
-    return { value };
+    return value ? { value } : undefined;
 };
 
-const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
-    ge: filter.ge ? Number(filter.ge) : undefined,
-    le: filter.le ? Number(filter.le) : undefined,
-});
+const getNumericFilter = (filter: ApiDataFilterNumeric): ?NumericFilterData => {
+    if (filter.ge || filter.le) {
+        return {
+            ge: Number(filter.ge),
+            le: Number(filter.le),
+        };
+    }
+    return undefined;
+};
 
-const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => ({
-    values: filter.in.map(value => value === 'true'),
-});
+const getBooleanFilter = (filter: ApiDataFilterBoolean): ?BooleanFilterData => {
+    if (filter.in) {
+        return { values: filter.in.map(value => value === 'true') };
+    }
+    return undefined;
+};
 
 const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterData => ({
     value: true,
@@ -42,17 +51,30 @@ const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterD
 
 const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
     if (dateFilter.type === DATE_TYPES.RELATIVE) {
+        if (dateFilter.period) {
+            return {
+                type: dateFilter.type,
+                period: dateFilter.period,
+            };
+        }
+        if (areRelativeRangeValuesSupported(dateFilter.startBuffer, dateFilter.endBuffer)) {
+            return {
+                type: dateFilter.type,
+                startBuffer: dateFilter.startBuffer,
+                endBuffer: dateFilter.endBuffer,
+            };
+        }
+        return undefined;
+    }
+    if (dateFilter.type === DATE_TYPES.ABSOLUTE && (dateFilter.startDate || dateFilter.endDate)) {
         return {
             type: dateFilter.type,
-            period: dateFilter.period,
+            ge: moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString(),
+            le: moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString(),
+
         };
     }
-
-    return {
-        type: dateFilter.type,
-        ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString() : undefined,
-        le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
-    };
+    return undefined;
 };
 
 const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => getDateFilterContent(dateFilter);

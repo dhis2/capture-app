@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Tajik (https://www.transifex.com/hisp-uio/teams/100509/tg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,6 +42,9 @@ msgstr "Воҳиди сохторӣ"
 
 msgid "Date of enrollment"
 msgstr "Санаи номнавис"
+
+msgid "Program name"
+msgstr "Номи барнома"
 
 msgid "Last updated"
 msgstr "Навсозии охирин"
@@ -88,7 +91,7 @@ msgstr ""
 msgid "Please provide a valid time"
 msgstr ""
 
-msgid "Please provide a valid percentage"
+msgid "Please provide an integer between 0 and 100"
 msgstr ""
 
 msgid "Please provide a valid url"
@@ -128,6 +131,9 @@ msgid "Enrollment"
 msgstr ""
 
 msgid "A future date is not allowed"
+msgstr ""
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
@@ -368,7 +374,13 @@ msgstr ""
 msgid "to"
 msgstr "Ба"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
+msgstr ""
+
+msgid "Days in the past"
 msgstr ""
 
 msgid "To"
@@ -392,7 +404,10 @@ msgstr "Моҳи гузашта"
 msgid "Last 3 months"
 msgstr "3 моҳи охир"
 
-msgid "Custom range"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
 msgstr ""
 
 msgid "Max"
@@ -512,57 +527,6 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
-msgid "New"
-msgstr "Нав"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr ""
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "Интихоб кунед"
-
-msgid "Program"
-msgstr "Барнома"
-
-msgid "No programs available."
-msgstr ""
-
-msgid "Show all"
-msgstr ""
-
-msgid "Selected program"
-msgstr ""
-
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Select program"
-msgstr "Интихоби барнома"
-
-msgid "Selected"
-msgstr "Интихобшуда"
-
 msgid "Online"
 msgstr "Онлайн"
 
@@ -575,10 +539,28 @@ msgstr ""
 msgid "Add comment"
 msgstr ""
 
-msgid "You dont have access to write comments"
+msgid "You don't have access to write comments"
 msgstr ""
 
 msgid "Write comment"
+msgstr ""
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr ""
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
 msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
@@ -734,6 +716,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Нав"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -767,6 +752,15 @@ msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Program"
+msgstr "Барнома"
 
 msgid "Organisation Unit"
 msgstr "Воҳиди сохторӣ"
@@ -808,6 +802,40 @@ msgstr ""
 msgid "Search by attributes"
 msgstr ""
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Register a user"
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid "Too many results"
+msgstr ""
+
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Back"
 msgstr "Ба қафо"
 
@@ -821,33 +849,6 @@ msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
-msgid "No results found"
-msgstr ""
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-
-msgid "Back to search"
-msgstr ""
-
-msgid "An error has occurred"
-msgstr ""
-
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-
-msgid "Too many results"
-msgstr ""
-
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-
 msgid "Choose a type to start searching"
 msgstr ""
 
@@ -855,6 +856,15 @@ msgid "View active enrollment"
 msgstr ""
 
 msgid "Re-enroll"
+msgstr ""
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
 msgstr ""
 
 msgid ""
@@ -865,13 +875,19 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
+
 msgid "events"
 msgstr ""
 
 msgid "event"
 msgstr ""
 
-msgid "You dont have access to edit this event"
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Edit event"
@@ -915,14 +931,44 @@ msgstr ""
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You dont have access to delete this relationship"
+msgid "You don't have access to delete this relationship"
 msgstr ""
 
-msgid "You dont have access to create any relationships"
+msgid "You don't have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
 msgstr ""
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "Интихоб кунед"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Selected program"
+msgstr ""
+
+msgid "Select program"
+msgstr "Интихоби барнома"
+
+msgid "Selected"
+msgstr "Интихобшуда"
 
 msgid "Results found"
 msgstr ""
@@ -931,6 +977,15 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
 msgstr ""
 
 msgid "To work with the selected program,"
@@ -948,11 +1003,11 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Add new"
-msgstr "Иловаи нав"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "Иловаи нав"
 
 msgid "Reactivate"
 msgstr ""
@@ -971,9 +1026,6 @@ msgid ""
 "remove the current enrollment."
 msgstr ""
 
-msgid "No, cancel"
-msgstr ""
-
 msgid "Yes, delete enrollment."
 msgstr ""
 
@@ -983,25 +1035,25 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Пайгирӣ кардан"
-
 msgid "Enrollment date"
 msgstr "Санаи номнавис"
 
 msgid "Incident date"
 msgstr ""
 
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Пайгирӣ кардан"
+
 msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
-msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1041,6 +1093,12 @@ msgid "This event doesn't have any comments"
 msgstr ""
 
 msgid "stage not found in rules execution"
+msgstr ""
+
+msgid "Delete event"
+msgstr ""
+
+msgid "Yes, delete event"
 msgstr ""
 
 msgid "Event completed"
@@ -1126,7 +1184,7 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Person Profile"
+msgid "{{TETName}} profile"
 msgstr ""
 
 msgid "Edit"
@@ -1153,14 +1211,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Санаи ҳисобот"
-
 msgid "Registering unit"
 msgstr ""
-
-msgid "Due date"
-msgstr "Санаи пешбинишуда"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
@@ -1175,9 +1227,6 @@ msgid "Stages and Events"
 msgstr ""
 
 msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "Delete event"
 msgstr ""
 
 msgid "Download as JSON"
@@ -1304,6 +1353,12 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error deleting the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"

@@ -3,9 +3,11 @@ import type { QueryRefetchFunction } from '@dhis2/app-runtime';
 
 export type Props = {|
     enrollment: Object,
-    refetch: QueryRefetchFunction,
+    refetchEnrollment: QueryRefetchFunction,
+    refetchTEI: QueryRefetchFunction,
     onDelete: () => void,
     onAddNew: () => void,
+    onError?: (message: string) => void,
     canAddNew: boolean,
     onlyEnrollOnce: boolean,
     tetName: string,

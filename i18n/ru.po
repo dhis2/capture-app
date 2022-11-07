@@ -2,15 +2,16 @@
 # Translators:
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
 # Wanda <wanda@frontlineaids.org>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
+# Valeriu Plesca <vplesca@gmail.com>, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-03-24T23:27:26.984Z\n"
+"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,6 +52,9 @@ msgstr "Организационная единица"
 
 msgid "Date of enrollment"
 msgstr "Дата включения"
+
+msgid "Program name"
+msgstr "Название программы"
 
 msgid "Last updated"
 msgstr "Последнее обновление"
@@ -97,8 +101,8 @@ msgstr "Введите правильную дату и время"
 msgid "Please provide a valid time"
 msgstr "Введите правильное время"
 
-msgid "Please provide a valid percentage"
-msgstr "Введите правильный %"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "Введите правильную url"
@@ -138,6 +142,9 @@ msgstr "Регистрация"
 
 msgid "A future date is not allowed"
 msgstr "Ввод даты будущего периода запрещена"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -391,8 +398,14 @@ msgstr "Выберите пользователя"
 msgid "to"
 msgstr "По"
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "От"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "До"
@@ -415,8 +428,11 @@ msgstr "Последний месяц"
 msgid "Last 3 months"
 msgstr "Последние 3 месяца"
 
-msgid "Custom range"
-msgstr "Пользовательский интервал"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "Максимум"
@@ -536,57 +552,6 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 "Выбранная программа не действительна для выбранной организации-регистратора"
 
-msgid "New"
-msgstr "Новый"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr "Выберите организацию-регистратор"
-
-msgid "Start Again"
-msgstr "Начать заново"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Вы уверены? Все несохраненные данные будут утеряны."
-
-msgid "Accept"
-msgstr "Принять"
-
-msgid "Registering Organisation Unit"
-msgstr "Регистрация Организационной единицы"
-
-msgid "Select"
-msgstr "Выбрать"
-
-msgid "Program"
-msgstr "Программа"
-
-msgid "No programs available."
-msgstr "Нет доступных программ"
-
-msgid "Show all"
-msgstr "Показать все"
-
-msgid "Selected program"
-msgstr "Выбранная программа"
-
-msgid "Some programs are being filtered."
-msgstr "Фильтруются некоторые программы "
-
-msgid "Select program"
-msgstr "Выбрать программу"
-
-msgid "Selected"
-msgstr "Выбранный"
-
 msgid "Online"
 msgstr "Онлайн"
 
@@ -599,11 +564,29 @@ msgstr "Синхронизирую..."
 msgid "Add comment"
 msgstr "Добавить комментарий"
 
-msgid "You dont have access to write comments"
-msgstr "У вас не достаточно прав для написания комментариев"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "Написать комментарий"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr ""
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
@@ -758,6 +741,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Новый"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -791,6 +777,15 @@ msgstr "Ссылка"
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr "Фильтруются некоторые программы "
+
+msgid "Show all"
+msgstr "Показать все"
+
+msgid "Program"
+msgstr "Программа"
 
 msgid "Organisation Unit"
 msgstr "Организация"
@@ -833,6 +828,40 @@ msgstr ""
 msgid "Search by attributes"
 msgstr "Поиск по атрибутам"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "No results found"
+msgstr "Результаты не найдены"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "Вы можете изменить параметры поиска и заново перезапустить поиск "
+
+msgid "Register a user"
+msgstr ""
+
+msgid "Back to search"
+msgstr "Назад к Поиску"
+
+msgid "An error has occurred"
+msgstr "Произошла ошибка"
+
+msgid "Too many results"
+msgstr ""
+
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Back"
 msgstr "Назад"
 
@@ -846,36 +875,6 @@ msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
-msgid "No results found"
-msgstr "Результаты не найдены"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr "Вы можете изменить параметры поиска и заново перезапустить поиск "
-
-msgid "Back to search"
-msgstr "Назад к Поиску"
-
-msgid "An error has occurred"
-msgstr "Произошла ошибка"
-
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-"Возникла ошибка с поиском. Пожалуйста измените параметры поиска или "
-"попробуйте заново попозже. Подробности найдете в Консоли инструментов "
-"Разработчика"
-
-msgid "Too many results"
-msgstr ""
-
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-
 msgid "Choose a type to start searching"
 msgstr ""
 
@@ -885,6 +884,15 @@ msgstr "Смотреть действующие регистрации"
 msgid "Re-enroll"
 msgstr "Перерегистрация"
 
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Создать новый"
+
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -893,14 +901,20 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
+
 msgid "events"
 msgstr ""
 
 msgid "event"
 msgstr ""
 
-msgid "You dont have access to edit this event"
-msgstr "У вас нет прав на исправление данного события"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "Редактировать событие"
@@ -945,14 +959,44 @@ msgstr "Найдены возможные дубликаты"
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You dont have access to delete this relationship"
-msgstr "У вас нет прав на удаление данного Родового отношения"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "У вас нет прав для создания \"Родовых отношений\""
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Добавить зависимость"
+
+msgid "Selected registering unit"
+msgstr "Выберите организацию-регистратор"
+
+msgid "Start Again"
+msgstr "Начать заново"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Вы уверены? Все несохраненные данные будут утеряны."
+
+msgid "Accept"
+msgstr "Принять"
+
+msgid "Registering Organisation Unit"
+msgstr "Регистрация Организационной единицы"
+
+msgid "Select"
+msgstr "Выбрать"
+
+msgid "No programs available."
+msgstr "Нет доступных программ"
+
+msgid "Selected program"
+msgstr "Выбранная программа"
+
+msgid "Select program"
+msgstr "Выбрать программу"
+
+msgid "Selected"
+msgstr "Выбранный"
 
 msgid "Results found"
 msgstr "Найдены результаты"
@@ -963,6 +1007,15 @@ msgstr "Поиск {{uniqueAttrName}}"
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 "Заполните хотя бы {{minAttributesRequiredToSearch}} атрибутов для поиска"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "Работать с выбранной программой"
@@ -979,11 +1032,11 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Add new"
-msgstr "Добавить новое"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+
+msgid "Add new"
+msgstr "Добавить новое"
 
 msgid "Reactivate"
 msgstr ""
@@ -1002,9 +1055,6 @@ msgid ""
 "remove the current enrollment."
 msgstr ""
 
-msgid "No, cancel"
-msgstr ""
-
 msgid "Yes, delete enrollment."
 msgstr ""
 
@@ -1014,25 +1064,25 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Отметить для последующего наблюдения"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr "Дальнейшие действия"
-
 msgid "Enrollment date"
 msgstr "Дата зачисления"
 
 msgid "Incident date"
 msgstr "Дата происшествия"
 
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Дальнейшие действия"
+
 msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
-msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1072,6 +1122,12 @@ msgid "This event doesn't have any comments"
 msgstr ""
 
 msgid "stage not found in rules execution"
+msgstr ""
+
+msgid "Delete event"
+msgstr "Удалить событие"
+
+msgid "Yes, delete event"
 msgstr ""
 
 msgid "Event completed"
@@ -1161,7 +1217,7 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Person Profile"
+msgid "{{TETName}} profile"
 msgstr ""
 
 msgid "Edit"
@@ -1188,14 +1244,8 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Report date"
-msgstr "Дата отчета"
-
 msgid "Registering unit"
 msgstr "Регистрирующая единица"
-
-msgid "Due date"
-msgstr "Дата выполнения"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
@@ -1211,9 +1261,6 @@ msgstr ""
 
 msgid "Working list could not be loaded"
 msgstr "Не могу загрузить Рабочий список "
-
-msgid "Delete event"
-msgstr "Удалить событие"
 
 msgid "Download as JSON"
 msgstr "Скачать как JSON"
@@ -1339,6 +1386,12 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "Error saving the enrollment event"
+msgstr ""
+
+msgid "Error deleting the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"

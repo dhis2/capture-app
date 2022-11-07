@@ -83,6 +83,7 @@ class ScopeSelectorClass extends Component<Props, State> {
                     onResetOrgUnitId={this.handleOpenOrgUnitWarning}
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
+                    previousOrgUnitId={this.props.previousOrgUnitId}
                     selectedOrgUnitId={this.props.selectedOrgUnitId}
                     selectedProgramId={this.props.selectedProgramId}
                     selectedOrgUnit={this.props.selectedOrgUnit}

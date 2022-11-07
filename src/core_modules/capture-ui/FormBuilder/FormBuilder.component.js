@@ -2,7 +2,7 @@
 /* eslint-disable complexity */
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import * as React from 'react';
 import { makeCancelablePromise } from 'capture-core-utils';
 import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
@@ -557,10 +557,11 @@ export class FormBuilder extends React.Component<Props> {
             <div
                 key={field.id}
                 className={defaultClasses.fieldOuterContainer}
-                data-test={`form-field-${field.id}`}
+                data-test={'form-field'}
             >
                 <div
                     {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
+                    data-test={`form-field-${field.id}`}
                 >
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <field.component

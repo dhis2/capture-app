@@ -24,7 +24,7 @@ And the list should display the teis retrieved from the api
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show only teis with active enrollments and unassinged events using the filter
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and Malaria focus investigation context
 When you set the enrollment status filter to active
 And you apply the enrollment status filter
 And you set the assginee filter to none
@@ -80,10 +80,11 @@ Then a tei batch capped at 50 records should be retrieved from the api
 And the list should display the teis retrieved from the api
 And for a tracker program the page navigation should show that you are on the first page
 
-Scenario: Show teis ordered descendingly by first name 
-Given you open the main page with Ngelehun and child programme context
-When you click the first name column header
-Then the sort arrow should indicate ascending order
-And teis should be retrieved from the api ordered ascendingly by first name
-And the list should display the teis retrieved from the api
-And for a tracker program the page navigation should show that you are on the first page
+# DHIS2-13799: Order in TEI working list endpoint is not working 
+# Scenario: Show teis ordered descendingly by first name 
+# Given you open the main page with Ngelehun and child programme context
+# When you click the first name column header
+# Then the sort arrow should indicate ascending order
+# And teis should be retrieved from the api ordered ascendingly by first name
+# And the list should display the teis retrieved from the api
+# And for a tracker program the page navigation should show that you are on the first page

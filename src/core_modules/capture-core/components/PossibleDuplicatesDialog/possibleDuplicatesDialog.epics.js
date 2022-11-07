@@ -1,7 +1,7 @@
 // @flow
 import { pipe as pipeD2 } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import {
     actionTypes,
@@ -15,6 +15,7 @@ import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
 import { getAttributesFromScopeId } from '../../metaData/helpers';
+import { searchGroupDuplicateActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 
 function getGroupElementsFromScopeId(scopeId: ?string) {
     if (!scopeId) {
@@ -34,7 +35,11 @@ function getGroupElementsFromScopeId(scopeId: ?string) {
 }
 
 
-export const loadSearchGroupDuplicatesForReviewEpic: Epic = (action$, store) =>
+export const loadSearchGroupDuplicatesForReviewEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { absoluteApiPath, querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE),
         switchMap(({
@@ -75,10 +80,13 @@ export const loadSearchGroupDuplicatesForReviewEpic: Epic = (action$, store) =>
                 };
                 const attributes = getAttributesFromScopeId(selectedScopeId);
 
-                const stream$: Stream = from(getTrackedEntityInstances(queryArgs, attributes));
+                const stream$: Stream = from(
+                    getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource),
+                );
                 return stream$.pipe(
                     map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>
                         duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage)),
+                    takeUntil(action$.pipe(ofType(searchGroupDuplicateActionTypes.DUPLICATES_RESET))),
                     catchError(() => of(duplicatesForReviewRetrievalFailed())),
 
                 );

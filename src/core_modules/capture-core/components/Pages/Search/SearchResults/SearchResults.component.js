@@ -1,9 +1,10 @@
 // @flow
-import React, { type ComponentType, useContext } from 'react';
+import React, { type ComponentType, useContext, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, colors } from '@dhis2/ui';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { CardList } from '../../../CardList';
 import { withNavigation } from '../../../Pagination/withDefaultNavigation';
@@ -16,6 +17,8 @@ import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
+import { Widget } from '../../../Widget';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -26,10 +29,10 @@ export const getStyles = (theme: Theme) => ({
         marginLeft: theme.typography.pxToRem(8),
         width: theme.typography.pxToRem(600),
     },
-    fallback: {
+    bottom: {
         marginLeft: theme.typography.pxToRem(8),
     },
-    fallbackText: {
+    bottomText: {
         color: colors.grey800,
         marginTop: theme.typography.pxToRem(12),
         marginBottom: theme.typography.pxToRem(12),
@@ -129,6 +132,8 @@ export const SearchResultsIndex = ({
     startFallbackSearch,
     classes,
     searchResults,
+    otherResults,
+    otherCurrentPage,
     dataElements,
     currentPage,
     currentSearchScopeType,
@@ -139,7 +144,10 @@ export const SearchResultsIndex = ({
     fallbackTriggered,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
-
+    const { programId, orgUnitId } = useLocationQuery();
+    const [isTopResultsOpen, setTopResultsOpen] = useState(true);
+    const [isOtherResultsOpen, setOtherResultsOpen] = useState(true);
+    const history = useHistory();
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:
@@ -163,6 +171,15 @@ export const SearchResultsIndex = ({
         }
     };
 
+    const handleOtherPageChange = (newOtherPage) => {
+        startFallbackSearch({
+            programId: currentSearchScopeId,
+            formId: currentFormId,
+            resultsPageSize,
+            page: newOtherPage,
+        });
+    };
+
     const handleFallbackSearch = () => {
         startFallbackSearch({
             programId: currentSearchScopeId,
@@ -171,40 +188,94 @@ export const SearchResultsIndex = ({
         });
     };
 
+    const handleCreateNew = () => {
+        history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+    };
+
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : '';
 
     const { trackedEntityName } = useScopeInfo(currentSearchScopeId);
 
     return (<>
-        <SearchResultsHeader currentSearchTerms={currentSearchTerms} currentSearchScopeName={currentSearchScopeName} />
-        <CardList
-            noItemsText={i18n.t('No results found')}
-            currentSearchScopeName={currentSearchScopeName}
-            currentProgramId={currentProgramId}
-            items={searchResults}
-            dataElements={dataElements}
-            renderCustomCardActions={({ item, enrollmentType, programName }) => (
-                <CardListButtons
+        <Widget
+            header={<SearchResultsHeader
+                currentSearchTerms={currentSearchTerms}
+                currentSearchScopeName={currentSearchScopeName}
+            />
+            }
+            borderless
+            open={isTopResultsOpen}
+            onClose={() => setTopResultsOpen(false)}
+            onOpen={() => setTopResultsOpen(true)}
+        >
+            <CardList
+                noItemsText={i18n.t('No results found')}
+                currentSearchScopeName={currentSearchScopeName}
+                currentProgramId={currentProgramId}
+                items={searchResults}
+                dataElements={dataElements}
+                renderCustomCardActions={({ item, enrollmentType, programName }) => (
+                    <CardListButtons
+                        programName={programName}
+                        currentSearchScopeId={currentSearchScopeId}
+                        currentSearchScopeType={currentSearchScopeType}
+                        id={item.id}
+                        orgUnitId={item.tei.orgUnit}
+                        enrollmentType={enrollmentType}
+                    />
+                )}
+            />
+            <div className={classes.pagination}>
+                <SearchPagination
+                    nextPageButtonDisabled={searchResults.length < resultsPageSize}
+                    onChangePage={newPage => handlePageChange(newPage)}
+                    currentPage={currentPage}
+                />
+            </div>
+        </Widget>
+
+        {otherResults !== undefined && <Widget
+            header={<SearchResultsHeader currentSearchScopeName={i18n.t('all programs')} />}
+            borderless
+            open={isOtherResultsOpen}
+            onClose={() => setOtherResultsOpen(false)}
+            onOpen={() => setOtherResultsOpen(true)}
+        >
+            <CardList
+                noItemsText={i18n.t('No results found')}
+                currentSearchScopeName={currentSearchScopeName}
+                items={otherResults}
+                dataElements={dataElements}
+                renderCustomCardActions={({ item, enrollmentType, programName, programId: currentScopeProgramId }) => (<CardListButtons
                     programName={programName}
-                    currentSearchScopeId={currentSearchScopeId}
                     currentSearchScopeType={currentSearchScopeType}
+                    currentSearchScopeId={currentScopeProgramId}
                     id={item.id}
                     orgUnitId={item.tei.orgUnit}
                     enrollmentType={enrollmentType}
-                />
-            )}
-        />
-        <div className={classes.pagination}>
-            <SearchPagination
-                nextPageButtonDisabled={searchResults.length < resultsPageSize}
-                onChangePage={newPage => handlePageChange(newPage)}
-                currentPage={currentPage}
+                />)}
             />
-        </div>
+            <div className={classes.pagination}>
+                <SearchPagination
+                    nextPageButtonDisabled={otherResults.length < resultsPageSize}
+                    onChangePage={newPage => handleOtherPageChange(newPage)}
+                    currentPage={otherCurrentPage}
+                />
+            </div>
+            <div className={classes.bottom}>
+                <div className={classes.bottomText}>
+                    {i18n.t('If none of search results match, you can create new ')}&quot;{trackedEntityName}&quot;.
+                </div>
+
+                <Button onClick={handleCreateNew} dataTest="create-new-button">
+                    {i18n.t('Create new')}
+                </Button>
+            </div>
+        </Widget>}
         {
-            currentSearchScopeType === searchScopes.PROGRAM && !fallbackTriggered &&
-            <div className={classes.fallback}>
-                <div className={classes.fallbackText}>
+            currentSearchScopeType === searchScopes.PROGRAM && !fallbackTriggered && otherResults === undefined &&
+            <div className={classes.bottom}>
+                <div className={classes.bottomText}>
                     {i18n.t('Not finding the results you were looking for? Try to search all programs that use type ')}&quot;{trackedEntityName}&quot;.
                 </div>
 
@@ -213,6 +284,7 @@ export const SearchResultsIndex = ({
                 </Button>
             </div>
         }
+
     </>);
 };
 

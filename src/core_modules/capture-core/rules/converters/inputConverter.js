@@ -1,7 +1,6 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import log from 'loglevel';
-import { parseNumber } from 'capture-core-utils/parsers';
 import moment from 'moment';
 import type { IConvertInputRulesValue } from 'capture-core-utils/rulesEngine/rulesEngine.types';
 
@@ -61,16 +60,8 @@ class RulesValueConverter implements IConvertInputRulesValue {
         return value || 0;
     }
 
-    convertPercentage(value: string): number {
-        if (!value) {
-            return 0;
-        }
-        const numberValue = parseNumber(value);
-        if (isNaN(numberValue)) {
-            return 0;
-        }
-
-        return numberValue / 100;
+    convertPercentage(value: number | ''): number {
+        return value || 0;
     }
 
     convertInteger(value: number | ''): number {

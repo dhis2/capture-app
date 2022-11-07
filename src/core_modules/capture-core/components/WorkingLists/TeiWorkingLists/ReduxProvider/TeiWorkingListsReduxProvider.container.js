@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TeiWorkingListsSetup } from '../Setup';
 import { useWorkingListsCommonStateManagement, fetchTemplates, TEMPLATE_SHARING_TYPE } from '../../WorkingListsCommon';
@@ -13,7 +13,13 @@ const useApiTemplate = () => {
     return workingListsTemplatesTEI && workingListsTemplatesTEI.templates;
 };
 
-export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: Props) => {
+export const TeiWorkingListsReduxProvider = ({
+    storeId,
+    programId,
+    orgUnitId,
+    selectedTemplateId,
+    onChangeTemplate,
+}: Props) => {
     const program = useTrackerProgram(programId);
     const apiTemplates = useApiTemplate();
 
@@ -22,19 +28,43 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
         lastTransactionOnListDataRefresh,
         listDataRefreshTimestamp,
         records,
+        onSelectTemplate,
+        onAddTemplate,
+        onDeleteTemplate,
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
     const dispatch = useDispatch();
 
     const onLoadTemplates = useCallback(() => {
-        dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE));
-    }, [dispatch, programId, storeId]);
+        dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE, selectedTemplateId));
+    }, [dispatch, programId, storeId, selectedTemplateId]);
 
-    const onSelectListRow = useCallback(({ id }) => dispatch(navigateToEnrollmentOverview({
-        teiId: id,
-        programId,
-        orgUnitId,
-    })), [dispatch, orgUnitId, programId]);
+    useEffect(() => {
+        selectedTemplateId && onSelectTemplate && onSelectTemplate(selectedTemplateId);
+    }, [selectedTemplateId, onSelectTemplate]);
+
+    const onSelectListRow = useCallback(({ id }) => {
+        const record = records[id];
+
+        return dispatch(navigateToEnrollmentOverview({
+            teiId: id,
+            programId,
+            orgUnitId: orgUnitId || record.programOwner,
+        }));
+    }, [dispatch, orgUnitId, programId, records]);
+
+    const handleOnSelectTemplate = useCallback((templateId) => {
+        onSelectTemplate(templateId);
+        templateId && onChangeTemplate && onChangeTemplate(templateId);
+    }, [onChangeTemplate, onSelectTemplate]);
+
+    const injectCallbacksForAddTemplate = useCallback((name: string, criteria: Object, data: Object) =>
+        onAddTemplate(name, criteria, data, { onChangeTemplate }),
+    [onAddTemplate, onChangeTemplate]);
+
+    const injectCallbacksForDeleteTemplate = useCallback((template: Object, programIdArg: string) =>
+        onDeleteTemplate(template, programIdArg, { onChangeTemplate }),
+    [onDeleteTemplate, onChangeTemplate]);
 
     return (
         <TeiWorkingListsSetup
@@ -46,6 +76,9 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
             records={records}
             orgUnitId={orgUnitId}
             apiTemplates={apiTemplates}
+            onSelectTemplate={handleOnSelectTemplate}
+            onAddTemplate={injectCallbacksForAddTemplate}
+            onDeleteTemplate={injectCallbacksForDeleteTemplate}
         />
     );
 };

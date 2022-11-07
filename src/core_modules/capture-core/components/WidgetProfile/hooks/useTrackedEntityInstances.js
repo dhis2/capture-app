@@ -1,6 +1,7 @@
 // @flow
 import { useMemo, useState, useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import type { Geometry } from '../DataEntry/helpers/types';
 
 type InputAttribute = {
     attribute: string,
@@ -12,8 +13,14 @@ type InputAttribute = {
     valueType: string,
 };
 
-export const useTrackedEntityInstances = (teiId: string, programId: string, storedAttributeValues: Array<{ [key: string]: string }>) => {
+export const useTrackedEntityInstances = (
+    teiId: string,
+    programId: string,
+    storedAttributeValues: Array<{ [key: string]: string }>,
+    storedGeometry: ?Geometry,
+) => {
     const [trackedEntityInstanceAttributes, setTrackedEntityInstanceAttributes] = useState<Array<InputAttribute>>([]);
+    const [geometry, setGeometry] = useState();
 
     const { error, loading, data } = useDataQuery(
         useMemo(
@@ -30,6 +37,22 @@ export const useTrackedEntityInstances = (teiId: string, programId: string, stor
         ),
     );
 
+    const { loading: tetLoading, data: tetData, refetch: refetchTET } = useDataQuery(
+        useMemo(
+            () => ({
+                trackedEntityType: {
+                    resource: 'trackedEntityTypes',
+                    id: ({ variables: { tetId } }) => tetId,
+                    params: {
+                        fields: 'displayName',
+                    },
+                },
+            }),
+            [],
+        ),
+        { lazy: true },
+    );
+
     useEffect(() => {
         if (data?.trackedEntityInstance?.attributes?.length > 0) {
             setTrackedEntityInstanceAttributes(
@@ -42,10 +65,34 @@ export const useTrackedEntityInstances = (teiId: string, programId: string, stor
     }, [data?.trackedEntityInstance?.attributes]);
 
     useEffect(() => {
+        if (data?.trackedEntityInstance?.geometry) {
+            setGeometry(data?.trackedEntityInstance?.geometry);
+        }
+    }, [data?.trackedEntityInstance?.geometry]);
+
+    useEffect(() => {
         if (storedAttributeValues?.length > 0) {
             setTrackedEntityInstanceAttributes(storedAttributeValues);
         }
     }, [storedAttributeValues]);
 
-    return { error, loading, trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes };
+    useEffect(() => {
+        if (data?.trackedEntityInstance?.trackedEntityType) {
+            refetchTET({ variables: { tetId: data?.trackedEntityInstance?.trackedEntityType } });
+        }
+    }, [data?.trackedEntityInstance?.trackedEntityType, refetchTET]);
+
+    useEffect(() => {
+        if (storedGeometry) {
+            setGeometry(storedGeometry);
+        }
+    }, [storedGeometry]);
+
+
+    return { error,
+        loading,
+        trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes,
+        trackedEntityTypeName: !tetLoading && tetData?.trackedEntityType?.displayName,
+        geometry,
+    };
 };

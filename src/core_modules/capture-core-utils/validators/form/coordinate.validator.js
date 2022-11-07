@@ -18,8 +18,8 @@ function isNumValid(num) {
 /**
  *
  * @export
- * @param { latitude: number, longitude: number } value
- * @returns
+ * @param { Object } value
+ * @returns { boolean }
  */
 export const isValidCoordinate = (value: Location) => {
     if (!value) {

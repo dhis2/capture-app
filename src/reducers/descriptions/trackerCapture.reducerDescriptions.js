@@ -49,7 +49,6 @@ import {
 import {
     organisationUnitDesc,
     organisationUnitRootsDesc,
-    registeringUnitListDesc,
 } from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
 import { networkStatusDesc } from 'capture-core/reducers/descriptions/networkStatus.reducerDescription';
 import {
@@ -69,8 +68,6 @@ import { relationshipsDesc } from 'capture-core/reducers/descriptions/relationsh
 import {
     generatedUniqueValuesCacheDesc,
 } from 'capture-core/reducers/descriptions/generatedUniqueValuesCache.reducerDescription';
-
-import { dataEntriesSearchGroupResultsReducerDesc } from 'capture-core/components/DataEntryUtils';
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
@@ -99,7 +96,6 @@ export const reducerDescriptions = [
     dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
-    dataEntriesSearchGroupResultsReducerDesc,
     dataEntriesInProgressListDesc,
     feedbackDesc,
     formsValuesDesc,
@@ -117,7 +113,6 @@ export const reducerDescriptions = [
     organisationUnitDesc,
     organisationUnitRootsDesc,
     possibleDuplicatesDesc,
-    registeringUnitListDesc,
     recentlyAddedEventsDesc,
     recentlyAddedEventsValuesDesc,
     relationshipsDesc,

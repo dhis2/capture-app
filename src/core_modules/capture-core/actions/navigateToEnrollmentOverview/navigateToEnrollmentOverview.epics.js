@@ -3,16 +3,15 @@
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-import { config } from 'd2';
 import { actionTypes as NavigateToEnrollmentOverviewActionTypes } from './navigateToEnrollmentOverview.actions';
-import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../utils/routing';
+import { buildUrlQueryString, getLocationQuery, shouldUseNewDashboard } from '../../utils/routing';
 import { scopeHierarchyTypes } from './navigateToEnrollmentOverview.constants';
 
 // TODO This will be removed when the link between capture and tracker capture is not relevant
 const redirectToTracker = ({ teiId, orgUnitId, dependencies }) => {
-    const { baseUrl } = config;
+    const baseUrl = dependencies.absoluteApiPath;
     const { search, pathname } = dependencies.history.location;
-    const { programId: queryProgramId, trackedEntityTypeId: queryTrackedEntityTypeId } = deriveURLParamsFromLocation();
+    const { programId: queryProgramId, trackedEntityTypeId: queryTrackedEntityTypeId } = getLocationQuery();
 
     const instanceBaseUrl = baseUrl.split('/api')[0];
     const scopeHierarchy = queryProgramId ? scopeHierarchyTypes.PROGRAM : scopeHierarchyTypes.TRACKED_ENTITY_TYPE;
@@ -35,19 +34,13 @@ const redirectToEnrollmentDashboard = ({ dependencies, teiId, programId, orgUnit
     );
 };
 
-const shouldUseNewDashboard = (userDataStore, dataStore, programId) =>
-    userDataStore?.[programId] || (userDataStore?.[programId] !== false && dataStore?.[programId]);
-
 export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) =>
     action$.pipe(
         ofType(NavigateToEnrollmentOverviewActionTypes.NAVIGATE_TO_ENROLLMENT_OVERVIEW),
         switchMap((action) => {
-            const { teiId, programId } = action.payload;
+            const { teiId, programId, orgUnitId } = action.payload;
             const enrollmentId = programId && (action.payload?.enrollmentId || 'AUTO');
             const { dataStore, userDataStore } = store.value.useNewDashboard;
-            const orgUnitId =
-                action.payload.orgUnitId ||
-                store.value.workingListsListRecords?.teiList[teiId]?.programOwners[programId]?.ownerOrgUnit;
 
             if (dataStore || userDataStore) {
                 const shouldRedirectToEnrollmentDashboard = shouldUseNewDashboard(userDataStore, dataStore, programId);

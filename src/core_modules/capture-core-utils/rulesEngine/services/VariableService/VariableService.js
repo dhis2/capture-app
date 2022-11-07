@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { OptionSetHelper } from '../../helpers/OptionSetHelper';
-import { typeKeys } from '../../constants';
+import { typeKeys, typeof environmentTypes } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
 import { getStructureEvents } from './helpers';
 import type {
@@ -12,7 +12,6 @@ import type {
     EventsDataContainer,
     OptionSets,
     Enrollment,
-    OrgUnit,
     TEIValues,
     Constants,
 } from './variableService.types';
@@ -25,6 +24,7 @@ import type {
     RuleVariable,
     RuleVariables,
     IDateUtils,
+    OrgUnit,
 } from '../../rulesEngine.types';
 
 type SourceData = {
@@ -49,7 +49,7 @@ const variableSourceTypesTrackedEntitySpecific = {
     TEI_ATTRIBUTE: 'TEI_ATTRIBUTE',
 };
 
-const variableSourceTypes = {
+export const variableSourceTypes = {
     ...variableSourceTypesDataElementSpecific,
     ...variableSourceTypesTrackedEntitySpecific,
     CALCULATED_VALUE: 'CALCULATED_VALUE',
@@ -73,6 +73,7 @@ export class VariableService {
     }
 
     static dateUtils: IDateUtils;
+    environment: $Values<environmentTypes>;
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
@@ -80,7 +81,9 @@ export class VariableService {
     constructor(
         onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
         dateUtils: IDateUtils,
+        environment: $Values<environmentTypes>,
     ) {
+        this.environment = environment;
         this.onProcessValue = onProcessValue;
         VariableService.dateUtils = dateUtils;
 
@@ -179,10 +182,6 @@ export class VariableService {
         return variablesWithContextAndConstantVariables;
     }
 
-    processValue(value: any, type: $Values<typeof typeKeys>) {
-        return this.onProcessValue(value, type);
-    }
-
     buildVariable(
         value: any,
         type: string,
@@ -208,7 +207,7 @@ export class VariableService {
             useCodeForOptionSet: !useNameForOptionSet,
             variableType: type || typeKeys.TEXT,
             hasValue: !!value || value === 0 || value === false,
-            variableEventDate,
+            variableEventDate: this.onProcessValue(variableEventDate, typeKeys.DATE),
             variablePrefix,
             allValues: processedAllValues,
         };
@@ -496,6 +495,13 @@ export class VariableService {
     getContextVariables(sourceData: SourceData): RuleVariables {
         let variables = {};
 
+        variables.environment = this.buildVariable(
+            this.environment,
+            typeKeys.TEXT, {
+                variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+            },
+        );
+
         variables.current_date = this.buildVariable(
             VariableService.dateUtils.getToday(),
             typeKeys.DATE, {
@@ -503,9 +509,12 @@ export class VariableService {
             },
         );
 
-        variables = { ...variables, ...this.getEventContextVariables(sourceData.executingEvent, sourceData.eventsContainer) };
-        variables = { ...variables, ...this.getEnrollmentContextVariables(sourceData.selectedEnrollment) };
-        variables = { ...variables, ...this.getOrganisationContextVariables(sourceData.selectedOrgUnit) };
+        variables = {
+            ...variables,
+            ...this.getEventContextVariables(sourceData.executingEvent, sourceData.eventsContainer),
+            ...this.getEnrollmentContextVariables(sourceData.selectedEnrollment),
+            ...this.getOrganisationContextVariables(sourceData.selectedOrgUnit),
+        };
 
         return variables;
     }
@@ -528,11 +537,39 @@ export class VariableService {
                 },
             );
 
+            variables.completed_date = this.buildVariable(
+                executingEvent.completedAt,
+                typeKeys.DATE, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
+
             variables.event_id = this.buildVariable(
                 executingEvent.eventId,
                 typeKeys.TEXT, {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                     variableEventDate: executingEvent.occurredAt,
+                },
+            );
+
+            variables.event_status = this.buildVariable(
+                executingEvent.status,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
+
+            variables.program_stage_id = this.buildVariable(
+                executingEvent.programStageId,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
+
+            variables.program_stage_name = this.buildVariable(
+                executingEvent.programStageName,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                 },
             );
         }

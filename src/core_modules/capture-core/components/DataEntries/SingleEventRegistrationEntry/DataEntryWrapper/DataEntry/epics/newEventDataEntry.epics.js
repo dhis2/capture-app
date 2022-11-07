@@ -35,7 +35,7 @@ import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram, EventProgram } from '../../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
-import { scopeSelectorActionTypes } from '../../../../../ScopeSelector';
+import { newPageActionTypes } from '../../../../../Pages/New/NewPage.actions';
 import { programCollection } from '../../../../../../metaDataMemoryStores';
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable) =>
@@ -47,7 +47,6 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable) =>
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE,
         ),
         filter(() => {
@@ -65,7 +64,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
                 return (!!triggeringActionType) && [
                     lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID,
-                    scopeSelectorActionTypes.CATEGORY_OPTION_SET,
+                    newPageActionTypes.CATEGORY_OPTION_SET,
                 ].includes(triggeringActionType);
             }
 
@@ -82,10 +81,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN,
-            lockedSelectorActionTypes.CATEGORY_OPTION_SET,
-            scopeSelectorActionTypes.CATEGORY_OPTION_SET,
-            lockedSelectorActionTypes.PROGRAM_ID_SET,
+            newPageActionTypes.CATEGORY_OPTION_SET,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE,
         ),
         filter(() => {
@@ -97,7 +93,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             const type = action.type;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
                 const triggeringActionType = action.payload && action.payload.triggeringActionType;
-                if (![lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID, lockedSelectorActionTypes.ORG_UNIT_ID_SET]
+                if (![lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID]
                     .includes(triggeringActionType)) {
                     return false;
                 }

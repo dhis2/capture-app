@@ -2,10 +2,11 @@
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
+import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
-import { getProgramAndStageFromEvent } from '../../../metaData';
+import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
@@ -17,27 +18,31 @@ import {
     enrollmentSiteActionTypes,
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { TrackerProgram } from '../../../metaData/Program';
-
 import {
     actionTypes,
     batchActionTypes,
     startSaveEditEventDataEntry,
     prerequisitesErrorLoadingEditEventDataEntry,
+    startDeleteEventDataEntry,
 } from './editEventDataEntry.actions';
 import {
     actionTypes as widgetEventEditActionTypes,
 } from '../WidgetEventEdit.actions';
-
-
 import {
     actionTypes as eventDetailsActionTypes,
     showEditEventDataEntry,
 } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
+import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString';
 
 import {
     updateEventContainer,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 
+const getDataEntryId = (event): string => (
+    getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
+        ? dataEntryIds.ENROLLMENT_EVENT
+        : dataEntryIds.SINGLE_EVENT
+);
 
 export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -65,6 +70,8 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
                     program,
                     enrollment,
                     attributeValues,
+                    dataEntryId: getDataEntryId(eventContainer.event),
+                    dataEntryKey: dataEntryKeys.EDIT,
                 }),
             ]);
         }));
@@ -134,12 +141,12 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                 return batchActions([
                     updateEventContainer(eventContainer, orgUnit),
                     updateEnrollmentEvents(eventId, serverData.events[0]),
-                    startSaveEditEventDataEntry(eventId, serverData, state.currentSelections, enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT),
+                    startSaveEditEventDataEntry(eventId, serverData, enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }
             return batchActions([
                 updateEventContainer(eventContainer, orgUnit),
-                startSaveEditEventDataEntry(eventId, serverData, state.currentSelections),
+                startSaveEditEventDataEntry(eventId, serverData),
             ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
         }));
 
@@ -172,3 +179,14 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             }
             return batchActions(actions);
         }));
+
+export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) =>
+    action$.pipe(
+        ofType(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY),
+        map((action) => {
+            const { eventId, enrollmentId } = action.payload;
+            const params = { enrollmentId };
+            dependencies.history.push(`/enrollment?${buildUrlQueryString(params)}`);
+            return startDeleteEventDataEntry(eventId, params);
+        }));
+

@@ -2,9 +2,15 @@
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const viewEventPageActionTypes = {
-    ORG_UNIT_ID_CUSTOM_RESET: 'CustomOrgUnitIdReset',
-    PROGRAM_ID_CUSTOM_RESET: 'CustomProgramIdReset',
+    CATEGORY_OPTION_SET: 'ViewEventPage.CategoryOptionSet',
+    CATEGORY_OPTION_RESET: 'ViewEventPage.CategoryOptionReset',
+    ALL_CATEGORY_OPTIONS_RESET: 'ViewEventPage.AllCategoryOptionsReset',
 };
 
-export const customProgramIdReset = () => actionCreator(viewEventPageActionTypes.PROGRAM_ID_CUSTOM_RESET)();
-export const customOrgUnitIdIdReset = () => actionCreator(viewEventPageActionTypes.ORG_UNIT_ID_CUSTOM_RESET)();
+export const setCategoryOption = (categoryId: string, categoryOption: Object) =>
+    actionCreator(viewEventPageActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
+
+export const resetCategoryOption = (categoryId: string) =>
+    actionCreator(viewEventPageActionTypes.CATEGORY_OPTION_RESET)({ categoryId });
+
+export const resetAllCategoryOptions = () => actionCreator(viewEventPageActionTypes.ALL_CATEGORY_OPTIONS_RESET)();

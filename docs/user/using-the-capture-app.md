@@ -206,8 +206,16 @@ For all the auto generated events
  a) the organisation unit will be the same as the user is reporting for, during the enrollment and 
  
  b) all the events will be part of the current enrollment. 
- 
+
 Based on configuration, the status of the auto generated event can either be ACTIVE or SCHEDULE.
+
+### Enrollment with open data entry form
+
+A program can be configured to automatically take the user to register a new event immediately after enrolling a tracked entity instance. To enable this behavior, the program must have at least one program stage with the "Open data entry form after registration" option checked. If more than one program stage has this option enabled, the first stage will be used.
+
+To configure it, you must follow the steps described in the [Enrollment with auto generated events](#enrollment-with-auto-generated-events) section and then check the option "Open data entry form after enrollment".
+ 
+![](resources/images/open-data-entry-form-after-enrollment.png)
 
 #### Active type of event
 
@@ -674,6 +682,9 @@ The Capture app supports the workinglists in tracker programs, but when you open
 Execute a full search as described above. If the search you have made has results they will be displayed. However, the actual **Tracked Entity Instance** you are searching for may be within a different program. In that case, you may want to extend the search to other programs. This is known as a fallback search.
 
 To execute a fallback search, simply press the button on the bottom saying "Search in all programs".
+You will see the **Results in all programs** be appended below the search in the current program. These two modules are collapsible to save space. 
+
+If the fallback can not be done, you will be presented with a modal to go **Back to search** so that you can change the search terms.
 
 > **Note**
 >
@@ -732,9 +743,21 @@ The results page shows up to five results at a time. You should try to use speci
 
 2. Select an organisation unit.
 
-3. Select a tracker program.
+3. Select a tracker program with "Display front page list" set to true.
 
 4. The program can have categories associated with it (implementing partner would be an example of such a category). If this is the case, fill them in.
+
+### Custom TEI working list for programs with "Display front page list" set to false.
+
+1. Open the **Capture** app.
+
+2. Select an organisation unit.
+
+3. Select a tracker program with "Display front page list" set to false.
+
+4. If the program has any custom working list you are able to click and load it.
+
+![](resources/images/tei_list.png)
 
 ### Filter the list
 
@@ -780,6 +803,20 @@ For performance reasons the Capture app caches metadata in the client browser. W
 
 
 ## Enrollment dashboard
+
+### Enabling the enrollment dashboard
+
+#### Opt in
+
+Enable the enrollment dashboard for a Tracker program for all the users. The dialog is visible for users with program write access. 
+
+![](resources/images/enrollment-dash-opt-in.png)
+
+#### Opt out
+
+Disable the enrollment dashboard for a Tracker program for all the users.
+
+![](resources/images/enrollment-dash-opt-out.png)
 
 ### Reaching the enrollment dashboard via url
 
@@ -1040,14 +1077,20 @@ This is the form where you can modify the event details before saving. In the he
 #### View mode
 
 When the form is in the view mode the title of the page will appear as: `Enrollment: View Event`. You can see in the page all the information related to the event. Click the `Edit event` button to switch to the edit mode. 
+This mode is bypassed for events that are scheduled.
 
 ![](resources/images/enrollment-event-view-edit-view.png)
 
 #### Edit mode
 
-When the form is in the edit mode the title of the page will appear as: `Enrollment: Edit Event`. You can modify the event and click the `Save` button. Click the `Cancel` button to switch to the view mode without saving the changes. 
+When the form is in the edit mode the title of the page will appear as: `Enrollment: Edit Event`. You can modify the event and click the `Save` button. Click the `Cancel` button to switch to the view mode without saving the changes.
+Scheduled events are are the exception and they are opened in edit mode directly, without the user having to click `Edit event`. Click the `Cancel` button to go back to the enrollment dashboard page without saving the changes.
 
 ![](resources/images/enrollment-event-view-edit-edit.png)
+
+In this form you can also delete the event by clicking `Delete` button, a modal will appear to confirm if you want to delete this event. You will then be navigated back to Enrollment dashboard page.
+
+![](resources/images/enrollment-edit-event-delete.png)
 
 #### Widgets in View/Edit event page
 

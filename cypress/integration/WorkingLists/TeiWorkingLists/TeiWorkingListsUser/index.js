@@ -1,9 +1,6 @@
+import { v4 as uuid } from 'uuid';
 import '../../sharedSteps';
 import '../../../sharedSteps';
-
-beforeEach(() => {
-    cy.loginThroughForm();
-});
 
 Given('you open the main page with Ngelehun and child programme context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
@@ -13,8 +10,14 @@ Given('you open the main page with Ngelehun and malaria focus investigation prog
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and Malaria case diagnosis context', () => {
+    cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
+});
+
+
 Then('the default working list should be displayed', () => {
     const names = [
+        'John',
         'Filona',
         'Gertrude',
         'Frank',
@@ -29,7 +32,6 @@ Then('the default working list should be displayed', () => {
         'Julia',
         'Elizabeth',
         'Donald',
-        'Wayne',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -91,6 +93,16 @@ When('you set the enrollment status filter to completed', () => {
         .click();
 });
 
+When('you set the enrollment date to a relative range', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Enrollment date')
+        .click();
+    cy.get('[data-test="date-range-filter-start"]')
+        .type('1000');
+    cy.get('[data-test="date-range-filter-end"]')
+        .type('1000');
+});
+
 When('you apply the current filter', () => {
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
@@ -129,50 +141,31 @@ Then('the assignee filter button should show that unassigned filter is in effect
 });
 
 Then('the list should display teis with an active enrollment and unassinged events', () => {
-    const names = [
-        'Maria',
-        'Joe',
-        'Anthony',
-        'Alan',
-        'Heather',
-        'Andrea',
-        'Donald',
-        'Frances',
-        'Julia',
-        'Elizabeth',
-        'Donald',
-        'Wayne',
-        'Johnny',
-        'Donna',
-        'Sharon',
+    const ids = [
+        'ZDA984904',
+        'FSL05494',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
-        .should('have.length', 16)
+        .should('have.length', 3)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
-                    .contains(names[index - 1])
+                    .contains(ids[index - 1])
                     .should('exist');
             }
         });
 });
 
 Then('the list should display teis with John as the first name', () => {
-    const names = [
-        'Johnny',
-        'John',
-        'John',
-    ];
-
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
         .should('have.length', 4)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
-                    .contains(names[index - 1])
+                    .contains('John')
                     .should('exist');
             }
         });
@@ -180,7 +173,7 @@ Then('the list should display teis with John as the first name', () => {
 
 
 When('you open the column selector', () => {
-    cy.get('button[title="Select columns"]')
+    cy.get('[data-test="select-columns-reference"]')
         .click();
 });
 
@@ -203,6 +196,7 @@ Then('the registering unit should display in the list', () => {
 
 Then('the list should display data for the second page', () => {
     const names = [
+        'Wayne',
         'Johnny',
         'Donna',
         'Sharon',
@@ -217,7 +211,6 @@ Then('the list should display data for the second page', () => {
         'Noah',
         'Emily',
         'Lily',
-        'Olvia',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -234,6 +227,7 @@ Then('the list should display data for the second page', () => {
 
 Then('the list should display 10 rows of data', () => {
     const names = [
+        'John',
         'Filona',
         'Gertrud',
         'Frank',
@@ -243,7 +237,6 @@ Then('the list should display 10 rows of data', () => {
         'Alan',
         'Heather',
         'Andrea',
-        'Donald',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -366,74 +359,55 @@ Then('the custom TEI is deleted', () => {
 });
 
 When('you change the sharing settings', () => {
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=trackedEntityInstanceFilter&id=PpGINOT00UX').then(sharingUrl =>
-        cy
-            .request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'PpGINOT00UX',
-                    name: 'Events assigned to me',
-                    displayName: 'Events assigned to me',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [
-                        {
-                            id: 'OYLGMiazHtW',
-                            name: 'Kevin Boateng',
-                            displayName: 'Kevin Boateng',
-                            access: 'rw------',
-                        },
-                    ],
-                    externalAccess: false,
-                },
-            })
-            .then(() => {
-                cy.get('[data-test="list-view-menu-button"]').click();
-                cy.contains('Share view').click();
-                cy.get('[placeholder="Enter names"]').type('Boateng');
-                cy.contains('Kevin Boateng').parent().click();
-                cy.contains('Close').click();
-            }),
-    );
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Share view').click();
+    cy.get('[placeholder="Search"]')
+        .type('Boateng');
+
+    cy.contains('Kevin Boateng').click();
+    cy.contains('Select a level').click();
+    cy.get('[data-test="dhis2-uicore-popper"]').contains('View and edit').click({ force: true });
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
 });
 
-When('you see the new sharing settings', () => {
-    // Making post requests using the old d2 library doesn't work for cypress tests atm
-    // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=trackedEntityInstanceFilter&id=PpGINOT00UX').then(sharingUrl =>
-        cy
-            .request('POST', sharingUrl, {
-                meta: {
-                    allowPublicAccess: true,
-                    allowExternalAccess: false,
-                },
-                object: {
-                    id: 'PpGINOT00UX',
-                    name: 'Events assigned to me',
-                    displayName: 'Events assigned to me',
-                    publicAccess: '--------',
-                    user: {
-                        id: 'GOLswS44mh8',
-                        name: 'Tom Wakiki',
-                    },
-                    userGroupAccesses: [],
-                    userAccesses: [],
-                    externalAccess: false,
-                },
-            })
-            .then(() => {
-                cy.get('[data-test="list-view-menu-button"]').click();
-                cy.contains('Share view').click();
-                cy.contains('Kevin Boateng').should('not.exist');
-            }),
-    );
+Then('you see the new sharing settings', () => {
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Share view').click();
+    cy.contains('Kevin Boateng')
+        .should('exist');
+
+    cy.contains('Close')
+        .click();
+
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+
+    cy.contains('Delete view')
+        .click();
+
+    cy.contains('Confirm')
+        .click();
+});
+
+When('you create a copy of the working list', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+
+    cy.contains('Save current view as')
+        .click();
+
+    const id = uuid();
+    cy.get('[data-test="view-name-content"]')
+        .type(id);
+
+    cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackerFilter');
+
+    cy.get('button')
+        .contains('Save')
+        .click();
+
+    cy.wait('@newTrackerFilter', { timeout: 30000 });
+
+    cy.reload();
 });

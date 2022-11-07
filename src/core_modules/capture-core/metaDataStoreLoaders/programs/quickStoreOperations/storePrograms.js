@@ -7,8 +7,10 @@ const convert = (() => {
     const sort = (arr: Array<any>, sortBy: string = 'sortOrder') => {
         arr.sort((a, b) => {
             if (a[sortBy] == null) {
-                return 1;
-            } else if ((b[sortBy] == null)) {
+                return b[sortBy] == null ? 0 : 1;
+            }
+
+            if (b[sortBy] == null) {
                 return -1;
             }
 
@@ -84,7 +86,7 @@ const convert = (() => {
     };
 })();
 
-const fieldsParam = 'id,version,displayName,displayShortName,description,programType,style,' +
+const fieldsParam = 'id,displayName,displayShortName,description,programType,style,displayFrontPageList,' +
 'minAttributesRequiredToSearch,enrollmentDateLabel,incidentDateLabel,' +
 'featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,' +
 'dataEntryForm[id,htmlCode],' +
@@ -92,7 +94,7 @@ const fieldsParam = 'id,version,displayName,displayShortName,description,program
 'trackedEntityType[id],' +
 'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
 'userRoles[id,displayName],' +
-'programStages[id,access,autoGenerateEvent,openAfterEnrollment,repeatable,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,displayName,description,executionDateLabel,dueDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode]' +
+'programStages[id,access,autoGenerateEvent,openAfterEnrollment,repeatable,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,name,displayName,description,executionDateLabel,dueDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode]' +
 'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],' +
 'dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,url,optionSetValue,style,optionSet[id]]]],' +
 'programSections[id, displayFormName, sortOrder, trackedEntityAttributes],' +

@@ -14,10 +14,24 @@ export type PlainProps = {|
     trackedEntityName: string,
     teiDisplayName: string,
     eventDate?: string,
+    scheduleDate?: string,
     enrollmentsAsOptions: Array<Object>,
     onDelete: () => void,
     onAddNew: () => void,
     onGoBack: () => void,
+    onEnrollmentError: (message: string) => void,
+    onCancelEditEvent: () => void,
+    onHandleScheduleSave: (eventData: Object) => void,
     pageStatus: string,
+    eventStatus?: string,
     ...CssClasses,
+|};
+
+export type Props = {|
+    programId: string,
+    stageId: string,
+    teiId: string,
+    enrollmentId: string,
+    orgUnitId: string,
+    eventId: string,
 |};

@@ -201,28 +201,28 @@ gs1Elements.set('COMPANY_INTERNAL_8', '98');
 gs1Elements.set('COMPANY_INTERNAL_9', '99');
 
 const aiFixedLengthMap = {
-    SSCC: 20,
-    GTIN: 16,
-    CONTENT: 16,
+    [gs1Elements.get('SSCC')]: 20,
+    [gs1Elements.get('GTIN')]: 16,
+    [gs1Elements.get('CONTENT')]: 16,
     '03': 16,
     '04': 18,
-    PROD_DATE: 8,
-    DUE_DATE: 8,
-    PACK_DATE: 8,
+    [gs1Elements.get('PROD_DATE')]: 8,
+    [gs1Elements.get('DUE_DATE')]: 8,
+    [gs1Elements.get('PACK_DATE')]: 8,
     14: 8,
-    BEST_BEFORE_DATE: 8,
-    SELL_BY: 8,
-    EXP_DATE: 8,
+    [gs1Elements.get('BEST_BEFORE_DATE')]: 8,
+    [gs1Elements.get('SELL_BY')]: 8,
+    [gs1Elements.get('EXP_DATE')]: 8,
     18: 8,
     19: 8,
-    VARIANT: 4,
+    [gs1Elements.get('VARIANT')]: 4,
     31: 10,
     32: 10,
     33: 10,
     34: 10,
     35: 10,
     36: 10,
-    41: 10,
+    41: 16,
 };
 
 const removeGS1Identifier = value => value.substring(3);
@@ -267,7 +267,7 @@ const handleGroupData = (gs1Group) => {
     if (gs1Group) {
         const gs1GroupLength = gs1Group.length;
         const ai = getApplicationIdentifier(gs1Group);
-        let nextValueLength = aiFixedLengthMap[ai];
+        let nextValueLength = aiFixedLengthMap[ai.substring(0, 2)];
         if (nextValueLength == null) {
             nextValueLength = gs1GroupLength;
         }
@@ -305,7 +305,7 @@ export const extractDataMatrixValue = (key, dataMatrix) => {
         if (gs1Elements.get('GS1_d2_IDENTIFIER') === gs1Identifier
             || gs1Elements.get('GS1_Q3_IDENTIFIER') === gs1Identifier) {
             const dataMatrixValue = extractGS1DataMatrixValue(key, dataMatrix);
-            return `'${dataMatrixValue}'`;
+            return dataMatrixValue;
         }
         return 'Unsupported GS1 identifier: {gs1Identifier}';
     }

@@ -7,6 +7,7 @@ import { getUniqueValuesForAttributesWithoutValue } from '../../common/TEIAndEnr
 import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToForm, convertServerToClient } from '../../../../converters';
 import { subValueGetterByElementType } from './getSubValueForTei';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 type InputProgramData = {
     attributes: Array<{
@@ -40,6 +41,7 @@ type InputForm = {
     orgUnit: ?OrgUnit,
     formFoundation: RenderFoundation,
     teiId: ?string,
+    searchTerms: ?Array<{[key: string]: string}>
 };
 
 type StaticPatternValues = {
@@ -93,27 +95,47 @@ const useClientAttributesWithSubvalues = (program: InputProgramData, attributes:
     return listAttributes;
 };
 
-const buildFormValues = async (
+const buildFormValues = async ({
+    foundation,
+    clientAttributesWithSubvalues,
+    staticPatternValues,
+    setFormValues,
+    setClientValues,
+    formValuesReadyRef,
+    searchTerms,
+    querySingleResource,
+}: {
     foundation: ?RenderFoundation,
     clientAttributesWithSubvalues: Array<any>,
     staticPatternValues: StaticPatternValues,
     setFormValues: (values: any) => void,
     setClientValues: (values: any) => void,
     formValuesReadyRef: { current: boolean },
-) => {
+    searchTerms?: ?Array<{[key: string]: any}>,
+    querySingleResource: QuerySingleResource,
+}) => {
     const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
     const formValues = clientAttributesWithSubvalues?.reduce(
         (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
         {},
     );
-    const uniqueValues = await getUniqueValuesForAttributesWithoutValue(foundation, clientAttributesWithSubvalues, staticPatternValues);
-    setFormValues && setFormValues({ ...formValues, ...uniqueValues });
-    setClientValues && setClientValues({ ...clientValues, ...uniqueValues });
+    const searchClientValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: item.value }), {});
+    const searchFormValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }), {});
+
+    const uniqueValues = await getUniqueValuesForAttributesWithoutValue(
+        foundation,
+        clientAttributesWithSubvalues,
+        staticPatternValues,
+        querySingleResource,
+    );
+    setFormValues && setFormValues({ ...formValues, ...uniqueValues, ...searchFormValues });
+    setClientValues && setClientValues({ ...clientValues, ...uniqueValues, ...searchClientValues });
     formValuesReadyRef.current = true;
 };
 
-export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId }: InputForm) => {
+export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms }: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
+    const dataEngine = useDataEngine();
     const formValuesReadyRef = useRef<any>(false);
     const [formValues, setFormValues] = useState<any>({});
     const [clientValues, setClientValues] = useState<any>({});
@@ -126,15 +148,34 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
 
     useEffect(() => {
         if (
-            orgUnit?.code &&
+            orgUnit?.id &&
             Object.entries(formFoundation).length > 0 &&
             formValuesReadyRef.current === false &&
             areAttributesWithSubvaluesReady
         ) {
             const staticPatternValues = { orgUnitCode: orgUnit.code };
-            buildFormValues(formFoundation, clientAttributesWithSubvalues, staticPatternValues, setFormValues, setClientValues, formValuesReadyRef);
+            const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
+            buildFormValues({
+                foundation: formFoundation,
+                clientAttributesWithSubvalues,
+                staticPatternValues,
+                setFormValues,
+                setClientValues,
+                formValuesReadyRef,
+                searchTerms,
+                querySingleResource,
+            });
         }
-    }, [formFoundation, clientAttributesWithSubvalues, formValuesReadyRef, orgUnit, areAttributesWithSubvaluesReady]);
+    }, [
+        formFoundation,
+        clientAttributesWithSubvalues,
+        formValuesReadyRef,
+        orgUnit,
+        areAttributesWithSubvaluesReady,
+        searchTerms,
+        dataEngine,
+    ]);
+
 
     return { formValues, clientValues, formValuesReadyRef };
 };

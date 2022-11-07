@@ -1,9 +1,5 @@
 import '../../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you are on an enrollment page', () => {
     cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
     cy.get('[data-test="enrollment-page-content"]')
@@ -31,7 +27,7 @@ And('you see the registration form for the Malaria case diagnosis', () => {
         .contains('New Enrollment in program: Malaria case diagnosis, treatment and investigation')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Saving a malaria entity in Malaria case diagnosis, treatment and investigation in Taninahun (Malen) CHP.')
+        .contains('Saving a new enrollment in Malaria case diagnosis, treatment and investigation in Taninahun (Malen) CHP.')
         .should('exist');
 });
 
@@ -40,7 +36,7 @@ And('you see the registration form for the MNCH PNC program', () => {
         .contains('New Enrollment in program: MNCH / PNC (Adult Woman)')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Saving a person in MNCH / PNC (Adult Woman) in Taninahun (Malen) CHP.')
+        .contains('Saving a new enrollment in MNCH / PNC (Adult Woman) in Taninahun (Malen) CHP.')
         .should('exist');
 });
 
@@ -104,7 +100,7 @@ When('you reset the tei selection', () => {
 });
 
 Then('you are navigated to the main page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
 });
 When('you reset the program selection', () => {
     cy.contains('[data-test="program-selector-container"]', 'Child Programme')

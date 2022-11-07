@@ -1,10 +1,9 @@
 import '../../sharedSteps';
 
-beforeEach(() => cy.loginThroughForm());
-
-Given(/^the user lands on the enrollment event page by having typed (.*)$/, url =>
-    cy.visit(url),
-);
+Given(/^you land on the enrollment event page by having typed (.*)$/, (url) => {
+    cy.visit(url);
+    cy.get('[data-test="scope-selector"]').contains('Selected person');
+});
 
 When(/^the user clicks on the edit button/, () =>
     cy
@@ -18,7 +17,7 @@ When(/^the user clicks on the save button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(3)
+        .contains('Save')
         .click(),
 );
 
@@ -26,7 +25,7 @@ When(/^the user clicks on the cancel button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(3)
+        .contains('Cancel')
         .click(),
 );
 
@@ -59,3 +58,25 @@ When(/^the user sets Plurality assessed to (.*)/, text =>
         .contains(text)
         .click(),
 );
+
+When('the user clicks switch tab to Schedule', () => {
+    cy.get('[data-test="edit-event-tab-bar"]').get('button').contains('Schedule').click();
+});
+
+Then('the user selects another schedule date', () => {
+    cy.get('[data-test="schedule-section"]').within(() => {
+        cy.get("[data-test='capture-ui-input']").eq(0).should('have.value', '2007-01-07');
+        cy.get("[data-test='capture-ui-input']").eq(0)
+            .clear()
+            .type('2022-08-01')
+            .blur();
+    });
+});
+
+Then('the user clicks on the schedule button', () => {
+    cy
+        .get('[data-test="widget-enrollment-event"]')
+        .find('[data-test="dhis2-uicore-button"]')
+        .contains('Schedule')
+        .click();
+});

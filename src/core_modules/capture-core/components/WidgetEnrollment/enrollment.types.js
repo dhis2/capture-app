@@ -7,17 +7,21 @@ export type Props = {|
     programId: string,
     onDelete: () => void,
     onAddNew: () => void,
+    onError?: (message: string) => void,
 |};
 
 export type PlainProps = {|
     enrollment: Object,
     program: Object,
     ownerOrgUnit: Object,
-    refetch: QueryRefetchFunction,
+    refetchEnrollment: QueryRefetchFunction,
+    refetchTEI: QueryRefetchFunction,
     error?: FetchError,
     loading: boolean,
     canAddNew: boolean,
     onDelete: () => void,
     onAddNew: () => void,
+    onError?: (message: string) => void,
+    serverTimeZoneId?: string,
     ...CssClasses,
 |};

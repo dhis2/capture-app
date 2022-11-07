@@ -1,14 +1,17 @@
 import '../../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you open the main page with Ngelehun and child programme context', () => {
     cy.server();
     cy.route('GET', '**/tracker/trackedEntities**').as('getDefaultTeis');
 
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
+    cy.server();
+    cy.route('GET', '**/tracker/trackedEntities**').as('getDefaultTeis');
+
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
 Then('teis should be retrieved from the api using the default query args', () => {

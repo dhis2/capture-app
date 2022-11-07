@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button, spacers } from '@dhis2/ui';
-import { Tooltip, withStyles } from '@material-ui/core';
+import { Button, spacers, Tooltip } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 import type { QuickActionButtonTypes } from './QuickActionButton.types';
 
 const styles = {
@@ -14,20 +14,30 @@ const styles = {
 };
 
 const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disable, classes }: QuickActionButtonTypes) => (
-    <Button
-        onClick={onClickAction}
-        dataTest={dataTest}
-        disabled={disable}
+    <Tooltip
+        content={i18n.t('No available program stages')}
     >
-        <Tooltip
-            title={disable ? i18n.t('No available program stages') : ''}
-        >
-            <div className={classes.button}>
-                {icon}
-                {label}
-            </div>
-        </Tooltip>
-    </Button>
-);
+        { ({ onMouseOver, onMouseOut, ref }) => (
+            <div ref={(btnRef) => {
+                if (btnRef && disable) {
+                    btnRef.onmouseover = onMouseOver;
+                    btnRef.onmouseout = onMouseOut;
+                    ref.current = btnRef;
+                }
+            }}
+            >
+                <Button
+                    onClick={onClickAction}
+                    dataTest={dataTest}
+                    disabled={disable}
+                >
+
+                    <div className={classes.button}>
+                        {icon}
+                        {label}
+                    </div>
+                </Button>
+            </div>)}
+    </Tooltip>);
 
 export const QuickActionButton = withStyles(styles)(QuickActionButtonPlain);

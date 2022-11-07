@@ -1,6 +1,7 @@
 // @flow
 import { getEvents } from '../../../../events/eventRequests';
 import type { ColumnsMetaForDataFetching } from '../types';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 type InputQueryArgs = {
     [key: string]: any,
@@ -14,7 +15,7 @@ const mapArgumentNameFromClientToServer = {
     currentPage: 'page',
 };
 
-const getMainColumns = (columnsMetaForDataFetching: ColumnsMetaForDataFetching) =>
+export const getMainColumns = (columnsMetaForDataFetching: ColumnsMetaForDataFetching) =>
     [...columnsMetaForDataFetching.values()]
         .reduce((accMainColumns, column) => {
             if (column.isMainProperty) {
@@ -129,7 +130,7 @@ const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, m
 };
 
 // eslint-disable-next-line complexity
-const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryCombinationId?: ?string) => {
+export const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryCombinationId?: ?string) => {
     let apiQueryArgs = {
         ...queryArgs,
         order: getApiOrderByQueryArgument(queryArgs.sortById, queryArgs.sortByDirection, mainColumns),
@@ -167,15 +168,26 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryComb
     return apiQueryArgsWithServerPropName;
 };
 
-export const getEventListData = async (
+export const getEventListData = async ({
+    queryArgs,
+    columnsMetaForDataFetching,
+    categoryCombinationId,
+    absoluteApiPath,
+    querySingleResource,
+}: {
     queryArgs: InputQueryArgs,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     categoryCombinationId?: ?string,
-) => {
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
+}) => {
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
 
-    const { eventContainers, pagingData, request } =
-        await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId));
+    const { eventContainers, pagingData, request } = await getEvents(
+        createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId),
+        absoluteApiPath,
+        querySingleResource,
+    );
     const columnKeys = [...columnsMetaForDataFetching.keys()];
     const columnFilteredEventContainers: Array<{ id: string, record: Object }> = eventContainers
         .map(({ id, event, values }) => ({ id, record: { ...event, ...values } }))

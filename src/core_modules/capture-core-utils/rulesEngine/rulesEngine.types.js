@@ -5,7 +5,6 @@ import type {
     EventsData,
     TEIValues,
     Enrollment,
-    OrgUnit,
     OptionSets,
     CompareDates,
     Constants,
@@ -54,9 +53,9 @@ export type ProgramRuleEffect = {
     programStageSectionId: ?string,
     optionGroupId: ?string,
     optionId: ?string,
-    content: string,
-    displayContent: string,
-    data: ?string,
+    content: ?string,
+    displayContent: ?string,
+    data: any,
     style?: ?Object,
 };
 
@@ -124,6 +123,19 @@ export type TrackedEntityAttributes = {
     [id: string]: TrackedEntityAttribute
 };
 
+export type OrgUnitGroup = $ReadOnly<{|
+    id: string,
+    name: string,
+    code: string,
+|}>;
+
+export type OrgUnit = $ReadOnly<{|
+    id: string,
+    name: string,
+    code: string,
+    groups: Array<OrgUnitGroup>,
+|}>;
+
 export type RulesEngineInput = {|
     programRulesContainer: ProgramRulesContainer,
     currentEvent?: ?EventData,
@@ -133,6 +145,7 @@ export type RulesEngineInput = {|
     trackedEntityAttributes?: ?TrackedEntityAttributes,
     selectedEnrollment?: ?Enrollment,
     selectedOrgUnit: OrgUnit,
+    selectedUserRoles?: ?Array<string>,
     optionSets: OptionSets,
 |}
 
@@ -145,7 +158,7 @@ export interface IDateUtils {
     monthsBetween(firstRulesDate: string, secondRulesDate: string): number;
     yearsBetween(firstRulesDate: string, secondRulesDate: string): number;
     +compareDates: CompareDates;
-    addDays(rulesDate: string, daysToAdd: string): string;
+    addDays(rulesDate: string, daysToAdd: number): string;
 }
 
 export interface IConvertInputRulesValue {
@@ -202,48 +215,6 @@ export interface IConvertOutputRulesEffectsValue {
     convertAge(value: string): any;
     convertFile(value: string): any;
     convertImage(value: string): any;
-}
-
-export type D2FunctionParameters = {
-    name: string,
-    parameters?: number,
-    dhisFunction: any
-}
-export type D2Functions = {
-    'd2:ceil': D2FunctionParameters,
-    'd2:floor': D2FunctionParameters,
-    'd2:round': D2FunctionParameters,
-    'd2:modulus': D2FunctionParameters,
-    'd2:zing': D2FunctionParameters,
-    'd2:oizp': D2FunctionParameters,
-    'd2:concatenate': D2FunctionParameters,
-    'd2:daysBetween': D2FunctionParameters,
-    'd2:weeksBetween': D2FunctionParameters,
-    'd2:monthsBetween': D2FunctionParameters,
-    'd2:yearsBetween': D2FunctionParameters,
-    'd2:addDays': D2FunctionParameters,
-    'd2:count': D2FunctionParameters,
-    'd2:countIfValue': D2FunctionParameters,
-    'd2:countIfZeroPos': D2FunctionParameters,
-    'd2:hasValue': D2FunctionParameters,
-    // d2:zpvc(<object>, <object>, ...)
-    'd2:validatePattern': D2FunctionParameters,
-    'd2:left': D2FunctionParameters,
-    'd2:right': D2FunctionParameters,
-    'd2:substring': D2FunctionParameters,
-    'd2:split': D2FunctionParameters,
-    'd2:length': D2FunctionParameters,
-    'd2:inOrgUnitGroup': D2FunctionParameters,
-    // d2:hasUserRole(<user_role>)
-    'd2:zScoreWFA': D2FunctionParameters,
-    'd2:zScoreHFA': D2FunctionParameters,
-    'd2:zScoreWFH': D2FunctionParameters,
-    'd2:extractDataMatrixValue': D2FunctionParameters,
-
-    // Functions that are not available in program rule expressions
-    'd2:lastEventDate': D2FunctionParameters,
-    'd2:addControlDigits': D2FunctionParameters,
-    'd2:checkControlDigits': D2FunctionParameters,
 }
 
 export type Flag = {

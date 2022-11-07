@@ -2,54 +2,24 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useMemo, useEffect } from 'react';
 import type { ComponentType } from 'react';
+import { useLocationQuery } from '../../../utils/routing';
 import { SearchPageComponent } from './SearchPage.component';
-import type { AvailableSearchOptions } from './SearchPage.types';
-import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
-import { searchScopes } from './SearchPage.constants';
-import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
-import { useCurrentTrackedEntityTypeId } from '../../../hooks/useCurrentTrackedEntityTypeId';
+import {
+    cleanSearchRelatedData,
+    navigateToMainPage,
+    navigateToNewUserPage,
+    showInitialViewOnSearchPage,
+    openSearchPage,
+} from './SearchPage.actions';
+import {
+    useSearchOptions,
+    useTrackedEntityTypesWithCorrelatedPrograms,
+    useCurrentTrackedEntityTypeId,
+} from '../../../hooks';
+import { TopBar } from './TopBar.container';
+import { ResultsPageSizeContext } from '../shared-contexts';
 
-const buildSearchOption = (id, name, searchGroups, searchScope, type) => ({
-    searchOptionId: id,
-    searchOptionName: name,
-    TETypeName: type,
-    searchGroups: [...searchGroups.values()]
-        .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
-            unique,
-            searchForm,
-            // We adding the `formId` here for the reason that we will use it in the SearchPage component.
-            // Specifically the function `addFormData` will add an object for each input field to the store.
-            // Also the formId is passed in the `Form` component and needs to be identical with the one in
-            // the store in order for the `Form` to function. For these reasons we generate it once here.
-            formId: `searchPageForm-${id}-${index}`,
-            searchScope,
-            minAttributesRequiredToSearch,
-        })),
-});
-
-const useSearchOptions = (): AvailableSearchOptions => {
-    const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
-    return useMemo(() =>
-        Object.values(trackedEntityTypesWithCorrelatedPrograms)
-            // $FlowFixMe https://github.com/facebook/flow/issues/2221
-            .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
-                ...acc,
-                [trackedEntityTypeId]:
-                  buildSearchOption(trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, searchScopes.TRACKED_ENTITY_TYPE),
-
-                ...programs.reduce((accumulated, { programId, programName, searchGroups }) => ({
-                    ...accumulated,
-                    [programId]:
-                      buildSearchOption(programId, programName, searchGroups, searchScopes.PROGRAM, trackedEntityTypeName),
-                }), {}),
-            }), {}),
-    [trackedEntityTypesWithCorrelatedPrograms],
-    );
-};
-
-const usePreselectedProgram = (): ?string => {
-    const currentSelectionsId =
-      useSelector(({ currentSelections }) => currentSelections.programId);
+const usePreselectedProgram = (currentSelectionsId): ?string => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
 
     return useMemo(() => {
@@ -69,6 +39,7 @@ const usePreselectedProgram = (): ?string => {
 
 export const SearchPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
+    const { programId, orgUnitId } = useLocationQuery();
 
     const dispatchShowInitialSearchPage = useCallback(
         () => { dispatch(showInitialViewOnSearchPage()); },
@@ -79,9 +50,11 @@ export const SearchPage: ComponentType<{||}> = () => {
     const dispatchCleanSearchRelatedData = useCallback(
         () => { dispatch(cleanSearchRelatedData()); },
         [dispatch]);
+    const dispatchNavigateToNewUserPage = useCallback(() => { dispatch(navigateToNewUserPage()); }, [dispatch]);
+
 
     const availableSearchOptions = useSearchOptions();
-    const preselectedProgramId = usePreselectedProgram();
+    const preselectedProgramId = usePreselectedProgram(programId);
 
     const searchStatus: string =
       useSelector(({ searchPage }) => searchPage.searchStatus);
@@ -89,29 +62,41 @@ export const SearchPage: ComponentType<{||}> = () => {
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
     const ready: boolean =
       useSelector(({ activePage }) => !activePage.isLoading);
-    const currentProgramId: string =
-      useSelector(({ currentSelections }) => currentSelections.programId);
 
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
+    const { searchableFields, minAttributesRequiredToSearch } =
+        useSelector(({ searchPage }) => searchPage);
+
     useEffect(() => {
-        if (currentProgramId && (currentProgramId !== preselectedProgramId)) {
+        if (programId && (programId !== preselectedProgramId)) {
             // There is no search for Event type of programs.
             // In this case we navigate the users back to the main page
             dispatchNavigateToMainPage();
         }
-    }, [currentProgramId, preselectedProgramId, dispatchNavigateToMainPage]);
+    }, [programId, preselectedProgramId, dispatchNavigateToMainPage]);
+
+    useEffect(() => {
+        dispatch(openSearchPage());
+    }, [dispatch]);
 
     return (
-        <SearchPageComponent
-            navigateToMainPage={dispatchNavigateToMainPage}
-            showInitialSearchPage={dispatchShowInitialSearchPage}
-            cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
-            availableSearchOptions={availableSearchOptions}
-            preselectedProgramId={preselectedProgramId}
-            trackedEntityTypeId={trackedEntityTypeId}
-            searchStatus={searchStatus}
-            error={error}
-            ready={ready}
-        />);
+        <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
+            <TopBar programId={programId} orgUnitId={orgUnitId} />
+            <SearchPageComponent
+                navigateToMainPage={dispatchNavigateToMainPage}
+                showInitialSearchPage={dispatchShowInitialSearchPage}
+                cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
+                navigateToRegisterUser={dispatchNavigateToNewUserPage}
+                availableSearchOptions={availableSearchOptions}
+                preselectedProgramId={preselectedProgramId}
+                trackedEntityTypeId={trackedEntityTypeId}
+                searchStatus={searchStatus}
+                minAttributesRequiredToSearch={minAttributesRequiredToSearch}
+                searchableFields={searchableFields}
+                error={error}
+                ready={ready}
+            />
+        </ResultsPageSizeContext.Provider>
+    );
 };

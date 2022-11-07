@@ -6,8 +6,10 @@ import {
     calculateSelectionsCompleteness,
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
+import { mainPageActionTypes } from '../MainPage/MainPage.actions';
+import { newPageActionTypes } from '../New/NewPage.actions';
+import { viewEventPageActionTypes } from '../ViewEvent/ViewEventPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
-import { scopeSelectorActionTypes } from '../../ScopeSelector';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
 
 type CurrentSelectionsState = {
@@ -38,9 +40,9 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
 export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.PROGRAM_ID_SET,
-            lockedSelectorActionTypes.CATEGORY_OPTION_SET,
-            scopeSelectorActionTypes.CATEGORY_OPTION_SET,
+            mainPageActionTypes.CATEGORY_OPTION_SET,
+            newPageActionTypes.CATEGORY_OPTION_SET,
+            viewEventPageActionTypes.CATEGORY_OPTION_SET,
             lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,
