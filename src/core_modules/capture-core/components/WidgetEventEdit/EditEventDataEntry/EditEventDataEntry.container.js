@@ -1,5 +1,5 @@
 // @flow
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
 import { statusTypes } from 'capture-core/events/statusTypes';
 import { batchActions } from 'redux-batched-actions';
