@@ -1,5 +1,4 @@
 import '../sharedSteps';
-import '../../sharedSteps';
 
 const showAllEventsInProgramStage = () => {
     cy.get('[data-test="dhis2-uicore-tablefoot"]')
@@ -14,6 +13,16 @@ const showAllEventsInProgramStage = () => {
 
 Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
     cy.visit('/#/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI');
+});
+
+When(/^you opt in to use the new enrollment Dashboard for (.*)$/, (program) => {
+    cy.get('[data-test="main-page-working-list"]').then(($wrapper) => {
+        if ($wrapper.find('[data-test="opt-in"]').length > 0) {
+            cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`).click();
+            cy.contains('[data-test="dhis2-uicore-button"]', 'Yes, opt in').click();
+            cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`);
+        }
+    });
 });
 
 Given(/^you land on the enrollment new event page by having typed (.*)$/, (url) => {
