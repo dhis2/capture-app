@@ -43,8 +43,6 @@ const getProgramStageMainConfig =
             visible: false,
             type: dataElementTypes.TEXT,
             header: i18n.t(ADDITIONAL_FILTERS_LABELS.status),
-            filterHidden: true,
-            additionalColumn: true,
         },
         {
             id: ADDITIONAL_FILTERS.occurredAt,
@@ -52,12 +50,12 @@ const getProgramStageMainConfig =
             type: dataElementTypes.DATE,
             header: stages.get(programStageId)?.stageForm.getLabel('occurredAt')
                 || i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
-            filterHidden: true,
-            additionalColumn: true,
         }]
             .map(field => ({
                 ...field,
                 mainProperty: true,
+                filterHidden: true,
+                additionalColumn: true,
             }))
     );
 

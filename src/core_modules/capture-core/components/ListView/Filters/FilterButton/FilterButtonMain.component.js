@@ -180,15 +180,9 @@ class FilterButtonMainPlain extends Component<Props, State> {
                     >
                         <Button onClick={this.openFilterSelector} disabled={disabled}>
                             {title}
-                            {selectorVisible ? (
-                                <span className={classes.icon}>
-                                    <IconChevronUp16 />
-                                </span>
-                            ) : (
-                                <span className={classes.icon}>
-                                    <IconChevronDown16 />
-                                </span>
-                            )}
+                            <span className={classes.icon}>
+                                {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
+                            </span>
                         </Button>
                     </div>
                 )}
