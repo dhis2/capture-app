@@ -157,6 +157,7 @@ const useProgramStageFilters = ({ stages }: TrackerProgram, programStageId?: str
                     header: i18n.t(ADDITIONAL_FILTERS_LABELS.programStage),
                     options: [...stages.entries()].map(stage => ({ text: stage[1].name, value: stage[1].id })),
                     mainButton: true,
+                    transformRecordsFilter: () => null,
                 },
                 {
                     id: ADDITIONAL_FILTERS.occurredAt,
@@ -252,7 +253,6 @@ const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, prog
             .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]);
 
         const transformProgramStageFiltersOnly = programStageFiltersOnly
-            .filter(({ mainButton }) => !mainButton)
             // $FlowFixMe[prop-missing]
             .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]);
 

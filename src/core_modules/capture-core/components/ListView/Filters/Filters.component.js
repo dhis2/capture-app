@@ -63,7 +63,7 @@ const splitBasedOnHasValueOnInit =
                 const config = elementConfigs.get(key);
 
                 if (!config) {
-                    log.error(
+                    log.warn(
                         errorCreator('a filter with no config element was found')({
                             key,
                             value: filtersNotEmpty[key],
@@ -114,7 +114,7 @@ const getUserSelectedElements = (
         .reduce((acc, key) => {
             const config = elementConfigs.get(key);
             if (!config) {
-                log.error(
+                log.warn(
                     errorCreator('a userSelectedFilter was specified but no config element was found')({
                         key,
                     }),
