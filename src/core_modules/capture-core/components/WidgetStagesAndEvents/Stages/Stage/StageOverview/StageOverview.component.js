@@ -2,7 +2,7 @@
 import React, { type ComponentType } from 'react';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
-import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16, Tooltip } from '@dhis2/ui';
+import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16, IconClockHistory16, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment-timezone';
 import { statusTypes } from 'capture-core/events/statusTypes';
@@ -18,29 +18,33 @@ const styles = {
     },
     icon: {
         paddingRight: spacersNum.dp8,
-
+    },
+    descriptionIcon: {
+        marginLeft: spacersNum.dp4,
+        marginRight: spacersNum.dp8,
+        height: '16px',
     },
     indicatorIcon: {
-        paddingLeft: spacersNum.dp4,
-        paddingRight: spacersNum.dp12,
+        paddingRight: spacersNum.dp4,
+        height: '16px',
     },
     title: {
-        fontSize: 14,
-        lineHeight: 1.556,
+        fontSize: '14px',
+        lineHeight: '19px',
         fontWeight: 500,
         color: colors.grey900,
         display: 'flex',
     },
     indicator: {
         padding: spacersNum.dp8,
-        color: colors.grey600,
+        color: colors.grey800,
+        fontSize: '14px',
+        fontWeight: 400,
         display: 'flex',
+        alignItems: 'center',
     },
     warningIndicator: {
-        color: colors.red500,
-    },
-    smallText: {
-        fontSize: 12,
+        color: colors.red700,
     },
 };
 
@@ -75,9 +79,9 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
                     <NonBundledDhis2Icon
                         name={icon.name}
                         color={icon.color}
-                        width={30}
-                        height={30}
-                        cornerRadius={2}
+                        width={32}
+                        height={32}
+                        cornerRadius={5}
                     />
                 </div>
             )
@@ -91,7 +95,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
                 content={description}
                 openDelay="100"
             >
-                <div className={classes.indicatorIcon}>
+                <div className={classes.descriptionIcon}>
                     <IconInfo16 />
                 </div>
             </Tooltip>
@@ -111,7 +115,10 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
             </div>
             {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
         </div> : null }
-        {totalEvents > 0 && <div className={cx(classes.smallText, classes.indicator)}>
+        {totalEvents > 0 && <div className={cx(classes.indicator)}>
+            <div className={classes.indicatorIcon}>
+                <IconClockHistory16 />
+            </div>
             {getLastUpdatedAt(systemSettings?.serverTimeZoneId, events)}
         </div>}
     </div>);

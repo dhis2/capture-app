@@ -215,6 +215,7 @@ const StageDetailPlain = (props: Props) => {
             return (<Button
                 small
                 secondary
+                icon={<IconAdd24 />}
                 disabled={shouldDisableCreateNew}
                 className={classes.button}
                 dataTest="create-new-button"
@@ -233,12 +234,9 @@ const StageDetailPlain = (props: Props) => {
                             }
                         }}
                         >
-                            <div className={classes.icon}><IconAdd24 /></div>
-                            <div className={classes.label}>
-                                {i18n.t('New {{ eventName }} event', {
-                                    eventName, interpolation: { escapeValue: false },
-                                })}
-                            </div>
+                            {i18n.t('New {{ eventName }} event', {
+                                eventName, interpolation: { escapeValue: false },
+                            })}
                         </div>
                     )}
                 </Tooltip>
