@@ -21,8 +21,14 @@ export const getD2Functions = ({
         execute: (params: any) => Math.floor(params[0]),
     },
     round: {
-        parameters: 1,
-        execute: (params: any) => Math.round(params[0]),
+        parameters: { min: 1, max: 2 },
+        execute: (params: any) => {
+            if (params[1]) {
+                const decimalCorrection = 10 ** Math.round(params[1]);
+                return Math.round((params[0] + Number.EPSILON) * decimalCorrection) / decimalCorrection;
+            }
+            return Math.round(params[0]);
+        },
     },
     modulus: {
         parameters: 2,
