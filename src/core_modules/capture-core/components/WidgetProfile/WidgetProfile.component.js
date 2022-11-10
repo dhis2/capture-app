@@ -114,7 +114,7 @@ const WidgetProfilePlain = ({
                             interpolation: { escapeValue: false },
                         })}</div>
                         {isEditable && (
-                            <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} small>
+                            <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
                                 {i18n.t('Edit')}
                             </Button>
                         )}
