@@ -53,7 +53,8 @@ const styles = {
         },
     },
     toggleButton: {
-        margin: spacersNum.dp4,
+        margin: `0 0 0 ${spacersNum.dp4}px`,
+        lineHeight: '1',
         color: colors.grey600,
         '&.open': {
             animation: 'flipOpen 200ms normal forwards linear',
