@@ -56,7 +56,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                 data-test={'quick-action-button-container'}
             >
                 <QuickActionButton
-                    icon={<IconAdd24 color={colors.grey700}/>}
+                    icon={<IconAdd24 color={colors.grey700} />}
                     label={i18n.t('New Event')}
                     onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                     dataTest={'quick-action-button-report'}
@@ -64,7 +64,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                 />
 
                 <QuickActionButton
-                    icon={<IconCalendar24 color={colors.grey700}/>}
+                    icon={<IconCalendar24 color={colors.grey700} />}
                     label={i18n.t('Schedule an event')}
                     onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                     dataTest={'quick-action-button-schedule'}
