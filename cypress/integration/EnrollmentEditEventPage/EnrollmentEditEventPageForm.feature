@@ -90,3 +90,11 @@ Scenario: User can update schedule date if Hide due date is enabled
     And the user see the schedule date and info box
     And the user clicks on the schedule button on add-event-enrollment-page-content
     Then the user see the following text: Enrollment Dashboard
+
+Scenario: User can see disabled scheduled date for active event
+    Given you land on the enrollment event page with selected person by having typed /#/enrollmentEventEdit?eventId=FV4JCI73wO2&orgUnitId=DiszpKrYNg8
+    Then the user see the following text: Enrollment: View Event 
+    When the user clicks on the edit button
+    Then the user see the following text: Enrollment: Edit Event
+    Then the user see the schedule date field with tooltip: Scheduled date cannot be changed for Active events
+    
