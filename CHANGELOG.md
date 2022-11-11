@@ -1,3 +1,17 @@
+## [100.17.5](https://github.com/dhis2/capture-app/compare/v100.17.4...v100.17.5) (2022-11-08)
+
+
+### Bug Fixes
+
+* [DHIS2-13665] working lists downloadRequest url ([#3067](https://github.com/dhis2/capture-app/issues/3067)) ([08eb3db](https://github.com/dhis2/capture-app/commit/08eb3dbd9b3fc4ac52459ea3aa316ae1055dbf98))
+
+## [100.17.4](https://github.com/dhis2/capture-app/compare/v100.17.3...v100.17.4) (2022-11-08)
+
+
+### Bug Fixes
+
+* [DHIS2-13720] get image and file subvalues in widget stages ([#3035](https://github.com/dhis2/capture-app/issues/3035)) ([6a88a77](https://github.com/dhis2/capture-app/commit/6a88a77f3824e8b633cdb03347192942efcf4cb8))
+
 ## [100.17.3](https://github.com/dhis2/capture-app/compare/v100.17.2...v100.17.3) (2022-10-27)
 
 

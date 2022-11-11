@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { pipe } from 'capture-core-utils';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
