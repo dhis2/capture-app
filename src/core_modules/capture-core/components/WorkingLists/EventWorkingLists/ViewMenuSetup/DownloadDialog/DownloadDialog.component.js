@@ -39,7 +39,8 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
 
     renderButtons() {
         const { request = {}, absoluteApiPath, classes } = this.props;
-        const url = `${absoluteApiPath}/events/query`;
+        const url = `${absoluteApiPath}/${request.url}`;
+        const deprecatedUrl = `${absoluteApiPath}/events/query`;
         const { pageSize, page, ...paramsFromRequest } = request.queryParams || {};
         const paramsObject = {
             ...paramsFromRequest,
@@ -69,7 +70,7 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
                 >
                     <a
                         download="events.xml"
-                        href={`${url}.xml?${searchParamsString}`}
+                        href={`${deprecatedUrl}.xml?${searchParamsString}`}
                         className={classes.downloadLink}
                     >
                         <Button>
