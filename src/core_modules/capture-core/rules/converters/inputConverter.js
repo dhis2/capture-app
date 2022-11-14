@@ -13,7 +13,7 @@ export const inputConverter: IConvertInputRulesValue = {
     convertPhoneNumber: (value: ?string): ?string => (value || null),
     convertEmail: (value: ?string): ?string => (value || null),
     convertBoolean: (value: ?boolean): ?boolean => ((value || value === false) ? value : null),
-    convertTrueOnly: (value: ?boolean): ?boolean => ((value || value === false) ? value : null),
+    convertTrueOnly: (value: ?boolean): ?boolean => (value || null),
     convertDate: (value: any): ?string => {
         if (!value) {
             return null;
