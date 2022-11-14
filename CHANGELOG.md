@@ -1,3 +1,10 @@
+## [100.17.6](https://github.com/dhis2/capture-app/compare/v100.17.5...v100.17.6) (2022-11-14)
+
+
+### Bug Fixes
+
+* [DHIS2-13941] adjust notice box for schedule events ([#3084](https://github.com/dhis2/capture-app/issues/3084)) ([8f4237e](https://github.com/dhis2/capture-app/commit/8f4237ec90fa3ae1ecf9e2b5dd2ab3460a16b672))
+
 ## [100.17.5](https://github.com/dhis2/capture-app/compare/v100.17.4...v100.17.5) (2022-11-08)
 
 
