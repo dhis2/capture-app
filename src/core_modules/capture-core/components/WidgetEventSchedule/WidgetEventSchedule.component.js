@@ -24,14 +24,12 @@ const styles = () => ({
     },
     fieldLabel: {
         color: colors.grey900,
-        flexGrow: 0,
-        flexShrink: 0,
         paddingTop: spacersNum.dp16,
         paddingRight: spacersNum.dp16,
     },
     fieldContent: {
+        flexBasis: '200px',
         flexGrow: 1,
-        flexShrink: 0,
     },
 });
 
