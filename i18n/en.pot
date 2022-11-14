@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-10-31T08:31:05.259Z\n"
-"PO-Revision-Date: 2022-10-31T08:31:05.259Z\n"
+"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
+"PO-Revision-Date: 2022-11-14T12:39:36.890Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -525,6 +525,9 @@ msgstr "less than or equal to"
 
 msgid "More filters"
 msgstr "More filters"
+
+msgid "Stage filters"
+msgstr "Stage filters"
 
 msgid "Rows per page"
 msgstr "Rows per page"

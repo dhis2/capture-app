@@ -166,7 +166,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
     renderWithoutAppliedFilter() {
         const { selectorVisible, classes, title, disabled, tooltipContent } = this.props;
 
-        return (
+        return disabled ? (
             <Tooltip content={tooltipContent} closeDelay={50}>
                 {({ onMouseOver, onMouseOut, ref }) => (
                     <div
@@ -178,7 +178,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                             }
                         }}
                     >
-                        <Button onClick={this.openFilterSelector} disabled={disabled}>
+                        <Button disabled={disabled}>
                             {title}
                             <span className={classes.icon}>
                                 {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
@@ -187,6 +187,13 @@ class FilterButtonMainPlain extends Component<Props, State> {
                     </div>
                 )}
             </Tooltip>
+        ) : (
+            <Button onClick={this.openFilterSelector}>
+                {title}
+                <span className={classes.icon}>
+                    {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
+                </span>
+            </Button>
         );
     }
 

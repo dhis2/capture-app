@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { Filters } from './Filters.component';
@@ -9,6 +10,7 @@ const getStyles = () => ({
     filtersButtons: {
         display: 'flex',
         alignItems: 'baseline',
+        flexWrap: 'wrap',
     },
     break: {
         flexBasis: '100%',
@@ -23,6 +25,11 @@ const getStyles = () => ({
         padding: spacersNum.dp4,
         display: 'flex',
         alignItems: 'baseline',
+        flexWrap: 'wrap',
+    },
+    additionalFiltersTitle: {
+        color: colors.grey600,
+        fontSize: 12,
     },
 });
 
@@ -89,6 +96,8 @@ export const FiltersRowsPlain = ({
                 <>
                     <div className={classes.break} />
                     <div className={classes.additionalFiltersContainer}>
+                        <div className={classes.additionalFiltersTitle}>{i18n.t('Stage filters').toUpperCase()}</div>
+                        <div className={classes.break} />
                         <Filters
                             columns={columns.filter(item => item.additionalColumn)}
                             filtersOnly={additionalFilters}
