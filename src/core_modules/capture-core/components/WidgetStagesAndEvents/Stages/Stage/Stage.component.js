@@ -3,7 +3,7 @@ import React, { type ComponentType, useState, useCallback } from 'react';
 import cx from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { spacersNum, colors, IconAdd24, Button } from '@dhis2/ui';
+import { spacersNum, colors, IconAdd16, Button } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
@@ -57,7 +57,7 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, ...
                 /> : <Button
                     small
                     secondary
-                    icon={<IconAdd24 />}
+                    icon={<IconAdd16 />}
                     className={classes.button}
                     dataTest="create-new-button"
                     onClick={() => onCreateNew(id)}

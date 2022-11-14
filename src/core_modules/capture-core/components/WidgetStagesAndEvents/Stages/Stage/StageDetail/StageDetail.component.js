@@ -13,7 +13,7 @@ import { colors,
     DataTableCell,
     DataTableColumnHeader,
     Button,
-    IconAdd24,
+    IconAdd16,
     Tooltip,
 } from '@dhis2/ui';
 import { sortDataFromEvent } from './hooks/sortFuntions';
@@ -215,7 +215,7 @@ const StageDetailPlain = (props: Props) => {
             return (<Button
                 small
                 secondary
-                icon={<IconAdd24 />}
+                icon={<IconAdd16 />}
                 disabled={shouldDisableCreateNew}
                 className={classes.button}
                 dataTest="create-new-button"
