@@ -8,7 +8,6 @@ And the user see the following text: Report date
 And the user see the following text: 2022-02-27
 And the user see the following text: Apgar Score
 And the user see the following text: 11
-And the user see the following text: Apgar comment
 And the user see the following text: Weight (g)
 And the user see the following text: 3843
 And the user see the following text: ARV at birth
