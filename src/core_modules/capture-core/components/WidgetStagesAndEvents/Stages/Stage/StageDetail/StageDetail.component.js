@@ -247,7 +247,7 @@ const StageDetailPlain = (props: Props) => {
 
         return (
             <DataTableRow>
-                <DataTableCell colSpan={`${headerColumns.length}`}>
+                <DataTableCell staticStyle colSpan={`${headerColumns.length}`}>
                     {renderShowMoreButton()}
                     {renderViewAllButton()}
                     {renderCreateNewButton()}
