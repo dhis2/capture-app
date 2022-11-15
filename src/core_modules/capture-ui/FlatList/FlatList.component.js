@@ -7,19 +7,18 @@ import type { Props } from './flatList.types';
 
 
 const styles = {
-    flatListWrapper: {
-        padding: `0 ${spacersNum.dp16}px`,
-    },
     itemRow: {
-        borderBottom: `1px solid${colors.grey400}`,
+        borderBottom: `1px solid${colors.grey300}`,
         display: 'flex',
-        padding: `${spacersNum.dp16}px 0`,
+        fontSize: '14px',
+        lineHeight: '19px',
+        padding: `${spacersNum.dp12}px 0`,
         '&.isLastItem': {
             borderBottomWidth: 0,
         },
     },
     itemKey: {
-        width: 150,
+        width: 128,
         color: colors.grey600,
     },
 };
@@ -39,7 +38,6 @@ const FlatListPlain = ({ list, classes, dataTest }: Props) => {
     return (
         <div
             data-test={dataTest}
-            className={classes.flatListWrapper}
         >
             {list.map(item => renderItem(item))}
         </div>
