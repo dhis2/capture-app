@@ -4,4 +4,4 @@
 /build/**
 
 #libs
-/rules-engine/**
+/packages/**

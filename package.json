@@ -5,7 +5,7 @@
   "cacheVersion": "4",
   "serverVersion": "38",
   "private": true,
-  "workspaces": ["rules-engine"],
+  "workspaces": ["packages/rules-engine"],
   "dependencies": {
     "@dhis2/app-runtime": "^3.5.0",
     "@dhis2/d2-i18n": "^1.1.0",
