@@ -1,0 +1,1 @@
+export const numberToString = number => isNaN(number) || number === Infinity ? '' : String(number);

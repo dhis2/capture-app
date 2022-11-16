@@ -1,4 +1,4 @@
-// flow-typed signature: 1ec53571f93771512712dabb1f96e65d
+// flow-typed signature: a4bfadf8b22f002a0c37f1bf8e63d729
 // flow-typed version: <<STUB>>/rules-engine_v1.1.1/flow_v0.132.0
 
 /**
@@ -22,155 +22,391 @@ declare module 'rules-engine' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'rules-engine/lib/commonUtils' {
+declare module 'rules-engine/build/cjs/commonUtils' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/commonUtils/normalizeRuleVariable' {
+declare module 'rules-engine/build/cjs/commonUtils/normalizeRuleVariable' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/commonUtils/numberToString' {
+declare module 'rules-engine/build/cjs/commonUtils/numberToString' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/commonUtils/trimQuotes' {
+declare module 'rules-engine/build/cjs/commonUtils/trimQuotes' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/constants/effectActions.const' {
+declare module 'rules-engine/build/cjs/constants/effectActions.const' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/constants/environmentTypes.const' {
+declare module 'rules-engine/build/cjs/constants/environmentTypes.const' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/constants/idNames.const' {
+declare module 'rules-engine/build/cjs/constants/idNames.const' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/constants' {
+declare module 'rules-engine/build/cjs/constants' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/constants/targetDataTypes.const' {
+declare module 'rules-engine/build/cjs/constants/targetDataTypes.const' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/constants/typeKeys.const' {
+declare module 'rules-engine/build/cjs/constants/typeKeys.const' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/constants/typeToInterfaceFnName.const' {
+declare module 'rules-engine/build/cjs/constants/typeToInterfaceFnName.const' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/d2Functions/getD2Functions' {
+declare module 'rules-engine/build/cjs/d2Functions/getD2Functions' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/d2Functions/getD2Functions.types' {
+declare module 'rules-engine/build/cjs/d2Functions/getD2Functions.types' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/d2Functions/gs1DataMatrixFuntions' {
+declare module 'rules-engine/build/cjs/d2Functions/gs1DataMatrixFuntions' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/d2Functions' {
+declare module 'rules-engine/build/cjs/d2Functions' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/d2Functions/zScoreFunctions' {
+declare module 'rules-engine/build/cjs/d2Functions/zScoreFunctions' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/errorCreator/errorCreator' {
+declare module 'rules-engine/build/cjs/errorCreator/errorCreator' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/errorCreator' {
+declare module 'rules-engine/build/cjs/errorCreator' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/helpers/OptionSetHelper' {
+declare module 'rules-engine/build/cjs/helpers/OptionSetHelper' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib' {
+declare module 'rules-engine/build/cjs' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/processors/rulesEffectsProcessor/rulesEffectsProcessor' {
+declare module 'rules-engine/build/cjs/processors/rulesEffectsProcessor/rulesEffectsProcessor' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/processors/ValueProcessor' {
+declare module 'rules-engine/build/cjs/processors/ValueProcessor' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/RulesEngine' {
+declare module 'rules-engine/build/cjs/RulesEngine' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/rulesEngine.types' {
+declare module 'rules-engine/build/cjs/rulesEngine.types' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/expressionService/common/getInjectionValue' {
+declare module 'rules-engine/build/cjs/services/expressionService/common/getInjectionValue' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/expressionService/common' {
+declare module 'rules-engine/build/cjs/services/expressionService/common' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/expressionService/executeExpression' {
+declare module 'rules-engine/build/cjs/services/expressionService/executeExpression' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/expressionService/executeExpression.types' {
+declare module 'rules-engine/build/cjs/services/expressionService/executeExpression.types' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/expressionService' {
+declare module 'rules-engine/build/cjs/services/expressionService' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/expressionService/injectVariableValues' {
+declare module 'rules-engine/build/cjs/services/expressionService/injectVariableValues' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/VariableService/constants/eventStatuses' {
+declare module 'rules-engine/build/cjs/services/VariableService/constants/eventStatuses' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/VariableService/constants' {
+declare module 'rules-engine/build/cjs/services/VariableService/constants' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/VariableService/helpers' {
+declare module 'rules-engine/build/cjs/services/VariableService/helpers' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/VariableService/helpers/structureEvents' {
+declare module 'rules-engine/build/cjs/services/VariableService/helpers/structureEvents' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/VariableService' {
+declare module 'rules-engine/build/cjs/services/VariableService' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/VariableService/variablePrefixes.const' {
+declare module 'rules-engine/build/cjs/services/VariableService/variablePrefixes.const' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/VariableService/VariableService' {
+declare module 'rules-engine/build/cjs/services/VariableService/VariableService' {
   declare module.exports: any;
 }
 
-declare module 'rules-engine/lib/services/VariableService/variableService.types' {
+declare module 'rules-engine/build/cjs/services/VariableService/variableService.types' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/commonUtils' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/commonUtils/normalizeRuleVariable' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/commonUtils/numberToString' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/commonUtils/trimQuotes' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/constants/effectActions.const' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/constants/environmentTypes.const' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/constants/idNames.const' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/constants' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/constants/targetDataTypes.const' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/constants/typeKeys.const' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/constants/typeToInterfaceFnName.const' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/d2Functions/getD2Functions' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/d2Functions/getD2Functions.types' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/d2Functions/gs1DataMatrixFuntions' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/d2Functions' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/d2Functions/zScoreFunctions' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/errorCreator/errorCreator' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/errorCreator' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/helpers/OptionSetHelper' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/processors/rulesEffectsProcessor/rulesEffectsProcessor' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/processors/ValueProcessor' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/RulesEngine' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/rulesEngine.types' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/expressionService/common/getInjectionValue' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/expressionService/common' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/expressionService/executeExpression' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/expressionService/executeExpression.types' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/expressionService' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/expressionService/injectVariableValues' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/VariableService/constants/eventStatuses' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/VariableService/constants' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/VariableService/helpers' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/VariableService/helpers/structureEvents' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/VariableService' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/VariableService/variablePrefixes.const' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/VariableService/VariableService' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/build/es/services/VariableService/variableService.types' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/d2.config' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/@babel/cli_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/@babel/core_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/@babel/eslint-parser_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/@babel/plugin-proposal-class-properties_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/@babel/plugin-transform-flow-strip-types_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/@babel/preset-env_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/@babel/preset-flow_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/@typescript-eslint/eslint-plugin_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/cross-env_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/d2-utilizr_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/eslint_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/eslint-config-airbnb_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/eslint-config-prettier_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/eslint-friendly-formatter_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/eslint-plugin-flowtype_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/eslint-plugin-import_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/eslint-plugin-prettier_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/flow-bin_v0.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/gen-flow-files_vx.x.x' {
+  declare module.exports: any;
+}
+
+declare module 'rules-engine/flow-typed/npm/loglevel_v1.x.x' {
   declare module.exports: any;
 }
 
@@ -327,149 +563,356 @@ declare module 'rules-engine/src/services/VariableService/variableService.types'
 }
 
 // Filename aliases
-declare module 'rules-engine/lib/commonUtils/index' {
-  declare module.exports: $Exports<'rules-engine/lib/commonUtils'>;
+declare module 'rules-engine/build/cjs/commonUtils/index' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/commonUtils'>;
 }
-declare module 'rules-engine/lib/commonUtils/index.js' {
-  declare module.exports: $Exports<'rules-engine/lib/commonUtils'>;
+declare module 'rules-engine/build/cjs/commonUtils/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/commonUtils'>;
 }
-declare module 'rules-engine/lib/commonUtils/normalizeRuleVariable.js' {
-  declare module.exports: $Exports<'rules-engine/lib/commonUtils/normalizeRuleVariable'>;
+declare module 'rules-engine/build/cjs/commonUtils/normalizeRuleVariable.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/commonUtils/normalizeRuleVariable'>;
 }
-declare module 'rules-engine/lib/commonUtils/numberToString.js' {
-  declare module.exports: $Exports<'rules-engine/lib/commonUtils/numberToString'>;
+declare module 'rules-engine/build/cjs/commonUtils/numberToString.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/commonUtils/numberToString'>;
 }
-declare module 'rules-engine/lib/commonUtils/trimQuotes.js' {
-  declare module.exports: $Exports<'rules-engine/lib/commonUtils/trimQuotes'>;
+declare module 'rules-engine/build/cjs/commonUtils/trimQuotes.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/commonUtils/trimQuotes'>;
 }
-declare module 'rules-engine/lib/constants/effectActions.const.js' {
-  declare module.exports: $Exports<'rules-engine/lib/constants/effectActions.const'>;
+declare module 'rules-engine/build/cjs/constants/effectActions.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/constants/effectActions.const'>;
 }
-declare module 'rules-engine/lib/constants/environmentTypes.const.js' {
-  declare module.exports: $Exports<'rules-engine/lib/constants/environmentTypes.const'>;
+declare module 'rules-engine/build/cjs/constants/environmentTypes.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/constants/environmentTypes.const'>;
 }
-declare module 'rules-engine/lib/constants/idNames.const.js' {
-  declare module.exports: $Exports<'rules-engine/lib/constants/idNames.const'>;
+declare module 'rules-engine/build/cjs/constants/idNames.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/constants/idNames.const'>;
 }
-declare module 'rules-engine/lib/constants/index' {
-  declare module.exports: $Exports<'rules-engine/lib/constants'>;
+declare module 'rules-engine/build/cjs/constants/index' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/constants'>;
 }
-declare module 'rules-engine/lib/constants/index.js' {
-  declare module.exports: $Exports<'rules-engine/lib/constants'>;
+declare module 'rules-engine/build/cjs/constants/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/constants'>;
 }
-declare module 'rules-engine/lib/constants/targetDataTypes.const.js' {
-  declare module.exports: $Exports<'rules-engine/lib/constants/targetDataTypes.const'>;
+declare module 'rules-engine/build/cjs/constants/targetDataTypes.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/constants/targetDataTypes.const'>;
 }
-declare module 'rules-engine/lib/constants/typeKeys.const.js' {
-  declare module.exports: $Exports<'rules-engine/lib/constants/typeKeys.const'>;
+declare module 'rules-engine/build/cjs/constants/typeKeys.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/constants/typeKeys.const'>;
 }
-declare module 'rules-engine/lib/constants/typeToInterfaceFnName.const.js' {
-  declare module.exports: $Exports<'rules-engine/lib/constants/typeToInterfaceFnName.const'>;
+declare module 'rules-engine/build/cjs/constants/typeToInterfaceFnName.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/constants/typeToInterfaceFnName.const'>;
 }
-declare module 'rules-engine/lib/d2Functions/getD2Functions.js' {
-  declare module.exports: $Exports<'rules-engine/lib/d2Functions/getD2Functions'>;
+declare module 'rules-engine/build/cjs/d2Functions/getD2Functions.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/d2Functions/getD2Functions'>;
 }
-declare module 'rules-engine/lib/d2Functions/getD2Functions.types.js' {
-  declare module.exports: $Exports<'rules-engine/lib/d2Functions/getD2Functions.types'>;
+declare module 'rules-engine/build/cjs/d2Functions/getD2Functions.types.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/d2Functions/getD2Functions.types'>;
 }
-declare module 'rules-engine/lib/d2Functions/gs1DataMatrixFuntions.js' {
-  declare module.exports: $Exports<'rules-engine/lib/d2Functions/gs1DataMatrixFuntions'>;
+declare module 'rules-engine/build/cjs/d2Functions/gs1DataMatrixFuntions.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/d2Functions/gs1DataMatrixFuntions'>;
 }
-declare module 'rules-engine/lib/d2Functions/index' {
-  declare module.exports: $Exports<'rules-engine/lib/d2Functions'>;
+declare module 'rules-engine/build/cjs/d2Functions/index' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/d2Functions'>;
 }
-declare module 'rules-engine/lib/d2Functions/index.js' {
-  declare module.exports: $Exports<'rules-engine/lib/d2Functions'>;
+declare module 'rules-engine/build/cjs/d2Functions/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/d2Functions'>;
 }
-declare module 'rules-engine/lib/d2Functions/zScoreFunctions.js' {
-  declare module.exports: $Exports<'rules-engine/lib/d2Functions/zScoreFunctions'>;
+declare module 'rules-engine/build/cjs/d2Functions/zScoreFunctions.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/d2Functions/zScoreFunctions'>;
 }
-declare module 'rules-engine/lib/errorCreator/errorCreator.js' {
-  declare module.exports: $Exports<'rules-engine/lib/errorCreator/errorCreator'>;
+declare module 'rules-engine/build/cjs/errorCreator/errorCreator.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/errorCreator/errorCreator'>;
 }
-declare module 'rules-engine/lib/errorCreator/index' {
-  declare module.exports: $Exports<'rules-engine/lib/errorCreator'>;
+declare module 'rules-engine/build/cjs/errorCreator/index' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/errorCreator'>;
 }
-declare module 'rules-engine/lib/errorCreator/index.js' {
-  declare module.exports: $Exports<'rules-engine/lib/errorCreator'>;
+declare module 'rules-engine/build/cjs/errorCreator/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/errorCreator'>;
 }
-declare module 'rules-engine/lib/helpers/OptionSetHelper.js' {
-  declare module.exports: $Exports<'rules-engine/lib/helpers/OptionSetHelper'>;
+declare module 'rules-engine/build/cjs/helpers/OptionSetHelper.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/helpers/OptionSetHelper'>;
 }
-declare module 'rules-engine/lib/index' {
-  declare module.exports: $Exports<'rules-engine/lib'>;
+declare module 'rules-engine/build/cjs/index' {
+  declare module.exports: $Exports<'rules-engine/build/cjs'>;
 }
-declare module 'rules-engine/lib/index.js' {
-  declare module.exports: $Exports<'rules-engine/lib'>;
+declare module 'rules-engine/build/cjs/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs'>;
 }
-declare module 'rules-engine/lib/processors/rulesEffectsProcessor/rulesEffectsProcessor.js' {
-  declare module.exports: $Exports<'rules-engine/lib/processors/rulesEffectsProcessor/rulesEffectsProcessor'>;
+declare module 'rules-engine/build/cjs/processors/rulesEffectsProcessor/rulesEffectsProcessor.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/processors/rulesEffectsProcessor/rulesEffectsProcessor'>;
 }
-declare module 'rules-engine/lib/processors/ValueProcessor.js' {
-  declare module.exports: $Exports<'rules-engine/lib/processors/ValueProcessor'>;
+declare module 'rules-engine/build/cjs/processors/ValueProcessor.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/processors/ValueProcessor'>;
 }
-declare module 'rules-engine/lib/RulesEngine.js' {
-  declare module.exports: $Exports<'rules-engine/lib/RulesEngine'>;
+declare module 'rules-engine/build/cjs/RulesEngine.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/RulesEngine'>;
 }
-declare module 'rules-engine/lib/rulesEngine.types.js' {
-  declare module.exports: $Exports<'rules-engine/lib/rulesEngine.types'>;
+declare module 'rules-engine/build/cjs/rulesEngine.types.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/rulesEngine.types'>;
 }
-declare module 'rules-engine/lib/services/expressionService/common/getInjectionValue.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/expressionService/common/getInjectionValue'>;
+declare module 'rules-engine/build/cjs/services/expressionService/common/getInjectionValue.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/expressionService/common/getInjectionValue'>;
 }
-declare module 'rules-engine/lib/services/expressionService/common/index' {
-  declare module.exports: $Exports<'rules-engine/lib/services/expressionService/common'>;
+declare module 'rules-engine/build/cjs/services/expressionService/common/index' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/expressionService/common'>;
 }
-declare module 'rules-engine/lib/services/expressionService/common/index.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/expressionService/common'>;
+declare module 'rules-engine/build/cjs/services/expressionService/common/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/expressionService/common'>;
 }
-declare module 'rules-engine/lib/services/expressionService/executeExpression.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/expressionService/executeExpression'>;
+declare module 'rules-engine/build/cjs/services/expressionService/executeExpression.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/expressionService/executeExpression'>;
 }
-declare module 'rules-engine/lib/services/expressionService/executeExpression.types.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/expressionService/executeExpression.types'>;
+declare module 'rules-engine/build/cjs/services/expressionService/executeExpression.types.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/expressionService/executeExpression.types'>;
 }
-declare module 'rules-engine/lib/services/expressionService/index' {
-  declare module.exports: $Exports<'rules-engine/lib/services/expressionService'>;
+declare module 'rules-engine/build/cjs/services/expressionService/index' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/expressionService'>;
 }
-declare module 'rules-engine/lib/services/expressionService/index.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/expressionService'>;
+declare module 'rules-engine/build/cjs/services/expressionService/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/expressionService'>;
 }
-declare module 'rules-engine/lib/services/expressionService/injectVariableValues.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/expressionService/injectVariableValues'>;
+declare module 'rules-engine/build/cjs/services/expressionService/injectVariableValues.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/expressionService/injectVariableValues'>;
 }
-declare module 'rules-engine/lib/services/VariableService/constants/eventStatuses.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService/constants/eventStatuses'>;
+declare module 'rules-engine/build/cjs/services/VariableService/constants/eventStatuses.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService/constants/eventStatuses'>;
 }
-declare module 'rules-engine/lib/services/VariableService/constants/index' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService/constants'>;
+declare module 'rules-engine/build/cjs/services/VariableService/constants/index' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService/constants'>;
 }
-declare module 'rules-engine/lib/services/VariableService/constants/index.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService/constants'>;
+declare module 'rules-engine/build/cjs/services/VariableService/constants/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService/constants'>;
 }
-declare module 'rules-engine/lib/services/VariableService/helpers/index' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService/helpers'>;
+declare module 'rules-engine/build/cjs/services/VariableService/helpers/index' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService/helpers'>;
 }
-declare module 'rules-engine/lib/services/VariableService/helpers/index.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService/helpers'>;
+declare module 'rules-engine/build/cjs/services/VariableService/helpers/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService/helpers'>;
 }
-declare module 'rules-engine/lib/services/VariableService/helpers/structureEvents.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService/helpers/structureEvents'>;
+declare module 'rules-engine/build/cjs/services/VariableService/helpers/structureEvents.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService/helpers/structureEvents'>;
 }
-declare module 'rules-engine/lib/services/VariableService/index' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService'>;
+declare module 'rules-engine/build/cjs/services/VariableService/index' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService'>;
 }
-declare module 'rules-engine/lib/services/VariableService/index.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService'>;
+declare module 'rules-engine/build/cjs/services/VariableService/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService'>;
 }
-declare module 'rules-engine/lib/services/VariableService/variablePrefixes.const.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService/variablePrefixes.const'>;
+declare module 'rules-engine/build/cjs/services/VariableService/variablePrefixes.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService/variablePrefixes.const'>;
 }
-declare module 'rules-engine/lib/services/VariableService/VariableService.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService/VariableService'>;
+declare module 'rules-engine/build/cjs/services/VariableService/VariableService.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService/VariableService'>;
 }
-declare module 'rules-engine/lib/services/VariableService/variableService.types.js' {
-  declare module.exports: $Exports<'rules-engine/lib/services/VariableService/variableService.types'>;
+declare module 'rules-engine/build/cjs/services/VariableService/variableService.types.js' {
+  declare module.exports: $Exports<'rules-engine/build/cjs/services/VariableService/variableService.types'>;
+}
+declare module 'rules-engine/build/es/commonUtils/index' {
+  declare module.exports: $Exports<'rules-engine/build/es/commonUtils'>;
+}
+declare module 'rules-engine/build/es/commonUtils/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/commonUtils'>;
+}
+declare module 'rules-engine/build/es/commonUtils/normalizeRuleVariable.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/commonUtils/normalizeRuleVariable'>;
+}
+declare module 'rules-engine/build/es/commonUtils/numberToString.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/commonUtils/numberToString'>;
+}
+declare module 'rules-engine/build/es/commonUtils/trimQuotes.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/commonUtils/trimQuotes'>;
+}
+declare module 'rules-engine/build/es/constants/effectActions.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/constants/effectActions.const'>;
+}
+declare module 'rules-engine/build/es/constants/environmentTypes.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/constants/environmentTypes.const'>;
+}
+declare module 'rules-engine/build/es/constants/idNames.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/constants/idNames.const'>;
+}
+declare module 'rules-engine/build/es/constants/index' {
+  declare module.exports: $Exports<'rules-engine/build/es/constants'>;
+}
+declare module 'rules-engine/build/es/constants/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/constants'>;
+}
+declare module 'rules-engine/build/es/constants/targetDataTypes.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/constants/targetDataTypes.const'>;
+}
+declare module 'rules-engine/build/es/constants/typeKeys.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/constants/typeKeys.const'>;
+}
+declare module 'rules-engine/build/es/constants/typeToInterfaceFnName.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/constants/typeToInterfaceFnName.const'>;
+}
+declare module 'rules-engine/build/es/d2Functions/getD2Functions.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/d2Functions/getD2Functions'>;
+}
+declare module 'rules-engine/build/es/d2Functions/getD2Functions.types.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/d2Functions/getD2Functions.types'>;
+}
+declare module 'rules-engine/build/es/d2Functions/gs1DataMatrixFuntions.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/d2Functions/gs1DataMatrixFuntions'>;
+}
+declare module 'rules-engine/build/es/d2Functions/index' {
+  declare module.exports: $Exports<'rules-engine/build/es/d2Functions'>;
+}
+declare module 'rules-engine/build/es/d2Functions/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/d2Functions'>;
+}
+declare module 'rules-engine/build/es/d2Functions/zScoreFunctions.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/d2Functions/zScoreFunctions'>;
+}
+declare module 'rules-engine/build/es/errorCreator/errorCreator.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/errorCreator/errorCreator'>;
+}
+declare module 'rules-engine/build/es/errorCreator/index' {
+  declare module.exports: $Exports<'rules-engine/build/es/errorCreator'>;
+}
+declare module 'rules-engine/build/es/errorCreator/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/errorCreator'>;
+}
+declare module 'rules-engine/build/es/helpers/OptionSetHelper.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/helpers/OptionSetHelper'>;
+}
+declare module 'rules-engine/build/es/index' {
+  declare module.exports: $Exports<'rules-engine/build/es'>;
+}
+declare module 'rules-engine/build/es/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/es'>;
+}
+declare module 'rules-engine/build/es/processors/rulesEffectsProcessor/rulesEffectsProcessor.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/processors/rulesEffectsProcessor/rulesEffectsProcessor'>;
+}
+declare module 'rules-engine/build/es/processors/ValueProcessor.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/processors/ValueProcessor'>;
+}
+declare module 'rules-engine/build/es/RulesEngine.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/RulesEngine'>;
+}
+declare module 'rules-engine/build/es/rulesEngine.types.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/rulesEngine.types'>;
+}
+declare module 'rules-engine/build/es/services/expressionService/common/getInjectionValue.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/expressionService/common/getInjectionValue'>;
+}
+declare module 'rules-engine/build/es/services/expressionService/common/index' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/expressionService/common'>;
+}
+declare module 'rules-engine/build/es/services/expressionService/common/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/expressionService/common'>;
+}
+declare module 'rules-engine/build/es/services/expressionService/executeExpression.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/expressionService/executeExpression'>;
+}
+declare module 'rules-engine/build/es/services/expressionService/executeExpression.types.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/expressionService/executeExpression.types'>;
+}
+declare module 'rules-engine/build/es/services/expressionService/index' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/expressionService'>;
+}
+declare module 'rules-engine/build/es/services/expressionService/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/expressionService'>;
+}
+declare module 'rules-engine/build/es/services/expressionService/injectVariableValues.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/expressionService/injectVariableValues'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/constants/eventStatuses.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService/constants/eventStatuses'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/constants/index' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService/constants'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/constants/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService/constants'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/helpers/index' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService/helpers'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/helpers/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService/helpers'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/helpers/structureEvents.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService/helpers/structureEvents'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/index' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/index.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/variablePrefixes.const.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService/variablePrefixes.const'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/VariableService.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService/VariableService'>;
+}
+declare module 'rules-engine/build/es/services/VariableService/variableService.types.js' {
+  declare module.exports: $Exports<'rules-engine/build/es/services/VariableService/variableService.types'>;
+}
+declare module 'rules-engine/d2.config.js' {
+  declare module.exports: $Exports<'rules-engine/d2.config'>;
+}
+declare module 'rules-engine/flow-typed/npm/@babel/cli_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/@babel/cli_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/@babel/core_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/@babel/core_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/@babel/eslint-parser_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/@babel/eslint-parser_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/@babel/plugin-proposal-class-properties_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/@babel/plugin-proposal-class-properties_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/@babel/plugin-transform-flow-strip-types_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/@babel/plugin-transform-flow-strip-types_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/@babel/preset-env_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/@babel/preset-env_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/@babel/preset-flow_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/@babel/preset-flow_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/@typescript-eslint/eslint-plugin_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/@typescript-eslint/eslint-plugin_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/cross-env_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/cross-env_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/d2-utilizr_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/d2-utilizr_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/eslint_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/eslint_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/eslint-config-airbnb_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/eslint-config-airbnb_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/eslint-config-prettier_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/eslint-config-prettier_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/eslint-friendly-formatter_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/eslint-friendly-formatter_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/eslint-plugin-flowtype_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/eslint-plugin-flowtype_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/eslint-plugin-import_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/eslint-plugin-import_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/eslint-plugin-prettier_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/eslint-plugin-prettier_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/flow-bin_v0.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/flow-bin_v0.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/gen-flow-files_vx.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/gen-flow-files_vx.x.x'>;
+}
+declare module 'rules-engine/flow-typed/npm/loglevel_v1.x.x.js' {
+  declare module.exports: $Exports<'rules-engine/flow-typed/npm/loglevel_v1.x.x'>;
 }
 declare module 'rules-engine/src/commonUtils/index' {
   declare module.exports: $Exports<'rules-engine/src/commonUtils'>;

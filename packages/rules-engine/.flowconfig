@@ -1,5 +1,5 @@
 [ignore]
-.*/lib/.*
+.*/build/.*
 
 [declarations]
 .*/node_modules/.*

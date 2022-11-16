@@ -1,2 +1,0 @@
-
-export { errorCreator } from './errorCreator';
