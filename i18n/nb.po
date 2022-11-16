@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-10T09:42:51.323Z\n"
+"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -515,6 +515,9 @@ msgstr "Oppdater"
 msgid "Reset filter"
 msgstr "Nullstill filter"
 
+msgid "Remove filter"
+msgstr "Fjern filter"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} til {{toDate}}"
 
@@ -532,6 +535,9 @@ msgstr "mindre enn eller lik"
 
 msgid "More filters"
 msgstr "Flere filtre"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "Rader per side"
@@ -1296,6 +1302,9 @@ msgstr "Registreringsstatus"
 
 msgid "Assigned to"
 msgstr "Tildelt til"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
 
 msgid "Registration Date"
 msgstr "Innregistreringsdato"
