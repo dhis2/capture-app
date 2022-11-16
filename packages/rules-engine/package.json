@@ -8,7 +8,7 @@
     "flow:addTypes": "flow-typed install",
     "check": "yarn run linter:check && yarn run flow:check",
     "build:flow": "gen-flow-files src --out-dir build/cjs",
-    "build": "yarn run linter:check && d2-app-scripts build && yarn run build:flow"
+    "build": "yarn run check && d2-app-scripts build && yarn run build:flow"
   },
   "dependencies": {
     "cross-env": "5.0.5",
