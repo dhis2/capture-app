@@ -2,9 +2,9 @@
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import { useDataEngine } from '@dhis2/app-runtime';
+import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
-import { errorCreator } from 'capture-core-utils';
+import { errorCreator, buildUrl } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../../metaData';
 import type { StageDataElement } from '../../../../types/common.types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
@@ -69,11 +69,14 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const dataEngine = useDataEngine();
+    const { baseUrl, apiVersion } = useConfig();
     const computeData = useCallback(async () => {
         try {
             setLoading(true);
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
-            const dataElementsByType = await groupRecordsByType(events, dataElements, querySingleResource);
+            const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
+            const dataElementsByType =
+                await groupRecordsByType(events, dataElements, querySingleResource, absoluteApiPath);
             const eventsData = [];
             for (const event of events) {
                 const eventId = event.event;
@@ -96,7 +99,7 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
         } finally {
             setLoading(false);
         }
-    }, [events, dataElements, dataEngine]);
+    }, [events, dataElements, dataEngine, baseUrl, apiVersion]);
 
     useEffect(() => {
         computeData();

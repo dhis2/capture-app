@@ -13,19 +13,19 @@ import { sortIndicatorsFn } from './sortIndicatorsFn';
 
 const styles = {
     container: {
-        paddingLeft: spacers.dp16,
-        paddingRight: spacers.dp16,
-        paddingBottom: spacers.dp24,
+        padding: `0 ${spacers.dp16}`,
+        marginBottom: spacers.dp16,
         fontWeight: 400,
     },
     indicatorRow: {
         display: 'flex',
         justifyContent: 'space-between',
-        gap: '5px',
-        borderBottom: `1px solid ${colors.grey400}`,
-        padding: `${spacers.dp12} ${spacers.dp8}`,
+        gap: '4px',
+        borderBottom: `1px solid ${colors.grey300}`,
+        padding: `${spacers.dp12} 0`,
         color: colors.grey800,
-        lineHeight: '1.375',
+        fontSize: '14px',
+        lineHeight: '19px',
         '&.isLastItem': {
             borderBottom: 'none',
             paddingBottom: 0,
@@ -35,11 +35,13 @@ const styles = {
         color: colors.grey900,
         display: 'flex',
         alignItems: 'center',
-        gap: '6px',
+        gap: '4px',
     },
     noIndicatorText: {
         margin: 0,
         color: colors.grey600,
+        fontSize: '14px',
+        lineHeight: '19px',
     },
     legendBullet: {
         height: spacers.dp8,

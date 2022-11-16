@@ -3,7 +3,7 @@ import React, { type ComponentType, useState, useCallback } from 'react';
 import cx from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { spacersNum, colors, IconAdd24, Button } from '@dhis2/ui';
+import { spacersNum, colors, IconAdd16, Button } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
@@ -13,7 +13,7 @@ const styles = {
     overview: {
         marginLeft: spacersNum.dp16,
         marginRight: spacersNum.dp16,
-        borderTop: `1px solid ${colors.grey400}`,
+        borderTop: `1px solid ${colors.grey300}`,
     },
     button: {
         margin: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
@@ -21,9 +21,6 @@ const styles = {
     buttonRow: {
         display: 'flex',
         alignItems: 'center',
-    },
-    label: {
-        paddingLeft: spacersNum.dp8,
     },
 };
 
@@ -60,16 +57,12 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, ...
                 /> : <Button
                     small
                     secondary
+                    icon={<IconAdd16 />}
                     className={classes.button}
                     dataTest="create-new-button"
                     onClick={() => onCreateNew(id)}
                 >
-                    <div className={classes.buttonRow}>
-                        <div className={classes.icon}><IconAdd24 /></div>
-                        <div className={classes.label}>
-                            {i18n.t('New {{ eventName }} event', { eventName: name, interpolation: { escapeValue: false } })}
-                        </div>
-                    </div>
+                    {i18n.t('New {{ eventName }} event', { eventName: name, interpolation: { escapeValue: false } })}
                 </Button>}
             </Widget>
         </div>
