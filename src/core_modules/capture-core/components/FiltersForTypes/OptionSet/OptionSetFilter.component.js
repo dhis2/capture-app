@@ -10,7 +10,6 @@ const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {
         maxHeight: theme.typography.pxToRem(250),
         overflowY: 'auto',
-        marginRight: theme.typography.pxToRem(-24),
     },
     selectBoxesInnerContainer: {
         marginLeft: 12,

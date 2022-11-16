@@ -42,6 +42,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
         filters,
         onUpdateFilter,
         onClearFilter,
+        onRemoveFilter,
         onSelectRestMenuItem,
         onChangePage,
         onChangeRowsPerPage,
@@ -132,6 +133,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
                             customRowMenuContents={customRowMenuContents}
                             onUpdateFilter={onUpdateFilter}
                             onClearFilter={onClearFilter}
+                            onRemoveFilter={onRemoveFilter}
                             onSelectRestMenuItem={onSelectRestMenuItem}
                             onChangePage={onChangePage}
                             onChangeRowsPerPage={onChangeRowsPerPage}

@@ -21,23 +21,25 @@ type Props = {
 
 const styles = {
     item: {
-        '&:not(:last-child)': {
-            marginBottom: spacersNum.dp16,
-        },
-        marginTop: spacersNum.dp16,
-        padding: '12px',
-        background: '#F3F5F7',
+        padding: spacersNum.dp12,
+        marginRight: spacersNum.dp4,
+        background: colors.grey200,
+        borderRadius: '5px',
         display: 'flex',
-        flexDirection: 'column',
+        fontSize: '14px',
+        lineHeight: '19px',
+        color: colors.grey900,
+        '& + &': {
+            marginTop: spacersNum.dp8,
+        },
     },
     wrapper: {
-        marginLeft: spacersNum.dp16,
-        marginRight: spacersNum.dp16,
-        paddingBottom: spacersNum.dp24,
+        padding: `0 ${spacersNum.dp16}px`,
+        marginBottom: spacersNum.dp16,
     },
     commentsWrapper: {
-        maxHeight: 500,
-        overflowY: 'scroll',
+        maxHeight: 400,
+        overflowY: 'auto',
     },
     editor: {
         paddingTop: spacersNum.dp16,
@@ -46,31 +48,24 @@ const styles = {
         fontSize: 14,
         color: colors.grey600,
     },
-    headerText: {
-        color: colors.grey900,
-        fontWeight: 500,
-    },
     name: {
-        fontSize: '14px',
+        fontSize: '13px',
+        fontWeight: 500,
     },
     lastUpdated: {
         fontSize: '12px',
-        marginLeft: '12px',
+        marginLeft: '8px',
+        color: colors.grey700,
     },
     body: {
-        marginTop: '4px',
-    },
-    avatar: {
-        width: spacersNum.dp24,
-    },
-    rightColumn: {
-        paddingLeft: spacersNum.dp8,
+        '& p': {
+            margin: `${spacersNum.dp8}px 0 0 0`,
+        },
     },
     newCommentButtonContainer: {
-        paddingTop: spacersNum.dp8,
-    },
-    addCommentContainer: {
-        marginRight: spacersNum.dp8,
+        paddingTop: spacersNum.dp4,
+        display: 'flex',
+        gap: '4px',
     },
 };
 
@@ -102,7 +97,7 @@ const CommentSectionPlain = ({
 
     const CommentItem = ({ value, storedAt, createdBy }) => (
         <div data-test="comment-item" className={cx(classes.item)}>
-            <div className={classes.avatar} /> {/* TODO: add avatar */}
+            {/* TODO: add avatar */}
             <div className={classes.rightColumn}>
                 <div className={classes.header}>
                     {createdBy && <span className={cx(classes.headerText, classes.name)}>
@@ -148,7 +143,6 @@ const CommentSectionPlain = ({
                 <Button
                     dataTest="add-comment-btn"
                     onClick={onAddComment}
-                    className={classes.addCommentContainer}
                     primary
                 >
                     {i18n.t('Save comment')}

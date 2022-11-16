@@ -97,6 +97,7 @@ declare module '@dhis2/app-runtime' {
     declare export function useConfig(): {|
         baseUrl: string,
         apiVersion: string,
+        serverVersion: { major: string, minor: string, patch?: string },
     |};
 
     declare export type ApiNetworkError = {|

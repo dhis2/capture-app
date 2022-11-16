@@ -89,7 +89,7 @@ const RegistrationDataEntryPlain = ({
     trackedEntityInstanceAttributes,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
-    const { scopeType, programName } = useScopeInfo(selectedScopeId);
+    const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
 
@@ -172,7 +172,10 @@ const RegistrationDataEntryPlain = ({
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     enrollmentMetadata={registrationMetaData}
-                                    saveButtonText={i18n.t('Save new')}
+                                    saveButtonText={i18n.t('Save {{trackedEntityName}}', {
+                                        trackedEntityName,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     onSave={() => onSaveWithEnrollment(formFoundation)}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
@@ -222,7 +225,10 @@ const RegistrationDataEntryPlain = ({
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     teiRegistrationMetadata={registrationMetaData}
-                                    saveButtonText={i18n.t('Save new')}
+                                    saveButtonText={i18n.t('Save {{trackedEntityName}}', {
+                                        trackedEntityName,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     onSave={() => onSaveWithoutEnrollment(formFoundation)}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}

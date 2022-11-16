@@ -65,6 +65,7 @@ const groupRecordsByType = async (
     events: Array<ApiEnrollmentEvent>,
     dataElements: Array<StageDataElement>,
     querySingleResource: QuerySingleResource,
+    absoluteApiPath: string,
 ) => {
     // $FlowFixMe
     const dataElementsByType = events.reduce((acc, event) => {
@@ -83,7 +84,7 @@ const groupRecordsByType = async (
     }, []);
     // $FlowFixMe
     for await (const item of dataElementsByType) {
-        item.ids = await getSubValues(item.type, item.ids, querySingleResource);
+        item.ids = await getSubValues(item, querySingleResource, absoluteApiPath);
     }
     return dataElementsByType;
 };

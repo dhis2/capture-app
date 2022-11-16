@@ -1,41 +1,9 @@
 // @flow
 import { convertToClientTeis } from './convertToClientTeis';
-import { getTeisWithSubvalues } from './getTeisWithSubvalues';
-import type { RawQueryArgs, RawFilterQueryArgs } from './types';
+import { getSubvalues, getApiFilterQueryArgs, getMainApiFilterQueryArgs } from '../getListDataCommon';
+import type { RawQueryArgs } from './types';
 import type { InputMeta } from './getTeiListData.types';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
-
-const getApiFilterQueryArgs = (
-    filters?: RawFilterQueryArgs = {},
-    filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching): ?{| filter: Array<string> |} => {
-    const apiFilterQueryArgs =
-            Object
-                .keys(filters)
-                .filter(filterKey => !filtersOnlyMetaForDataFetching.get(filterKey))
-                .flatMap((filterKey) => {
-                    const filter = filters[filterKey];
-                    if (Array.isArray(filter)) {
-                        return filter
-                            .map(filterPart => `${filterKey}:${filterPart}`);
-                    }
-                    return `${filterKey}:${filter}`;
-                });
-
-    return (apiFilterQueryArgs.length > 0 ? { filter: apiFilterQueryArgs } : null);
-};
-
-const getMainApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}, filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching) =>
-    Object
-        .keys(filters)
-        .filter(filterKey => filtersOnlyMetaForDataFetching.get(filterKey))
-        .reduce((acc, filterKey) => {
-            const filter = filters[filterKey];
-            const { transformRecordsFilter } = filtersOnlyMetaForDataFetching.get(filterKey) || {};
-            return {
-                ...acc,
-                ...transformRecordsFilter(filter),
-            };
-        }, {});
 
 const createApiQueryArgs = ({
     page,
@@ -79,10 +47,10 @@ export const getTeiListData = async (
     });
     const columnsMetaForDataFetchingArray = [...columnsMetaForDataFetching.values()];
     const clientTeis = convertToClientTeis(apiTeis, columnsMetaForDataFetchingArray, rawQueryArgs.programId);
-    const clientTeisWithSubvalues = await getTeisWithSubvalues(querySingleResource, absoluteApiPath)(clientTeis, columnsMetaForDataFetchingArray);
+    const clientTeisWithSubvalues = await getSubvalues(querySingleResource, absoluteApiPath)(clientTeis, columnsMetaForDataFetchingArray);
 
     return {
-        teis: clientTeisWithSubvalues,
+        recordContainers: clientTeisWithSubvalues,
         request: {
             resource,
             queryArgs,
