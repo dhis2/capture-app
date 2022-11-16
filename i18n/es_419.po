@@ -1,43 +1,33 @@
 # 
 # Translators:
-# Farida Sibuea <farida_sibuea@yahoo.com>, 2021
-# phil_dhis2, 2021
-# Carwoto Sa'an <carwoto@gmail.com>, 2021
-# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
-# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022
-# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2022
-# Raja Fathurrahim, 2022
-# Viktor Varland <viktor@dhis2.org>, 2022
+# Jaime Bosque <jaime.bosque@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-11-10T09:42:51.323Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
-"Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
+"Last-Translator: Jaime Bosque <jaime.bosque@dhis2.org>, 2022\n"
+"Language-Team: Spanish (Latin America) (https://www.transifex.com/hisp-uio/teams/100509/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: es_419\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Choose one or more dates..."
-msgstr "Pilih satu atau beberapa tanggal..."
+msgstr ""
 
 msgid "Choose a date..."
-msgstr "Pilih tanggal..."
+msgstr ""
 
 msgid "Today"
-msgstr "Hari ini"
+msgstr "Hoy"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
-"Kemungkinan alasannya adalah browser atau mode (mis. mode privasi) tidak "
-"didukung. Lihat log untuk detailnya."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -45,107 +35,102 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
-"Anda membuka versi lain dari Aplikasi Capture di domain yang sama. Saat ini,"
-" Aplikasi Capture hanya mendukung menjalankan satu versi secara bersamaan "
-"(dalam domain yang sama). Harap segarkan halaman ini jika Anda ingin "
-"menggunakan versi ini lagi, tetapi perlu diketahui bahwa ini akan menutup "
-"versi lain."
 
 msgid "Organisation unit"
-msgstr "Unit organisasi"
+msgstr ""
 
 msgid "Date of enrollment"
-msgstr "Tanggal pendaftaran"
+msgstr ""
 
 msgid "Program name"
-msgstr "Nama program"
+msgstr ""
 
 msgid "Last updated"
-msgstr "Terakhir diperbarui"
+msgstr ""
 
 msgid "Enrolled"
-msgstr "Terdaftar"
+msgstr ""
 
 msgid "Previously enrolled"
-msgstr "Sebelumnya terdaftar"
+msgstr ""
 
 msgid "This value is validating"
-msgstr "Nilai ini memvalidasi"
+msgstr ""
 
 msgid "Async field update failed"
-msgstr "Pembaruan bidang asinkron gagal"
+msgstr ""
 
 msgid "A value is required"
-msgstr "Nilai diperlukan"
+msgstr ""
 
 msgid "Please provide a valid number"
-msgstr "Harap berikan nomor yang valid"
+msgstr ""
 
 msgid "Please provide a valid integer"
-msgstr "Harap berikan bilangan bulat yang valid"
+msgstr ""
 
 msgid "Please provide a positive integer"
-msgstr "Berikan bilangan bulat positif positive"
+msgstr ""
 
 msgid "Please provide zero or a positive integer"
-msgstr "Harap berikan nol atau bilangan bulat positif"
+msgstr ""
 
 msgid "Please provide a negative integer"
-msgstr "Harap berikan bilangan bulat negatif"
+msgstr ""
 
 msgid "Please provide a valid date"
-msgstr "Harap berikan tanggal yang valid"
+msgstr ""
 
 msgid "A date in the future is not allowed"
-msgstr "Tanggal di masa depan tidak diperbolehkan"
+msgstr ""
 
 msgid "Please provide a valid date and time"
-msgstr "Harap berikan tanggal dan waktu yang valid"
+msgstr ""
 
 msgid "Please provide a valid time"
-msgstr "Harap berikan waktu yang valid"
+msgstr ""
 
 msgid "Please provide an integer between 0 and 100"
 msgstr ""
 
 msgid "Please provide a valid url"
-msgstr "Harap berikan url yang valid"
+msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr "Harap berikan alamat email yang valid"
+msgstr ""
 
 msgid "Please provide a valid age"
-msgstr "Harap berikan usia yang valid"
+msgstr ""
 
 msgid "Please provide a valid phone number"
-msgstr "Harap berikan nomor telepon yang valid"
+msgstr ""
 
 msgid "Please provide a valid organisation unit"
-msgstr "Harap berikan unit organisasi yang valid"
+msgstr ""
 
 msgid "Please provide valid coordinates"
-msgstr "Harap berikan koordinat yang valid"
+msgstr ""
 
 msgid "This value already exists"
-msgstr "Nilai ini sudah ada"
+msgstr ""
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"Dari\" tidak boleh lebih besar dari \"Ke\""
+msgstr ""
 
 msgid "Checking..."
-msgstr "Memeriksa..."
+msgstr ""
 
 msgid "Area"
-msgstr "Daerah"
+msgstr ""
 
 msgid "Coordinate"
-msgstr "Koordinat"
+msgstr ""
 
 msgid "Enrollment"
-msgstr "Pendaftaran"
+msgstr ""
 
 msgid "A future date is not allowed"
-msgstr "Tanggal yang akan datang tidak diperbolehkan"
+msgstr ""
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -154,478 +139,465 @@ msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Cancel"
-msgstr "batal"
+msgstr "Cancelar"
 
 msgid "Metadata error. see log for details"
-msgstr "Kesalahan metadata. lihat log untuk detailnya"
+msgstr ""
 
 msgid "Assigned user"
-msgstr "Pengguna yang ditetapkan"
+msgstr ""
 
 msgid "Search for user"
-msgstr "Cari pengguna"
+msgstr ""
 
 msgid "Complete event"
-msgstr "Even lengkap"
+msgstr ""
 
 msgid "Basic info"
-msgstr "Info dasar"
+msgstr ""
 
 msgid "Status"
-msgstr "Status"
+msgstr "Estado"
 
 msgid "Comments"
-msgstr "Komentar"
+msgstr "Comentarios"
 
 msgid "Relationships"
-msgstr "Hubungan"
+msgstr "Relaciones"
 
 msgid "Assignee"
-msgstr "penerima tugas"
+msgstr ""
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr "Simpan ke {{Nama program}} pada {{Nama Organisasi unit}}"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Ini bukanlah event program atau metadata yang rusak. Lihat log untuk "
-"detailnya."
 
 msgid "This event"
-msgstr "Even ini"
+msgstr ""
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"Hubungan tipe {{relationshipTypeName}} dengan {{entityName}} sudah ada"
 
 msgid "Active"
-msgstr "Aktif"
+msgstr "Activo"
 
 msgid "Completed"
-msgstr "Selesai"
+msgstr "Completado"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan even"
+msgstr ""
 
 msgid "Save and add another"
-msgstr "Simpan dan tambahkan yang lain"
+msgstr ""
 
 msgid "Save and exit"
-msgstr "Simpan dan keluar"
+msgstr ""
 
 msgid "Finish"
-msgstr "Selesai"
+msgstr "Acabar"
 
 msgid "Save without completing"
-msgstr "Simpan tanpa menyelesaikan"
+msgstr ""
 
 msgid "Complete"
-msgstr "Lengkap"
+msgstr "Completar"
 
 msgid "No write access"
-msgstr "Tidak ada akses tulis"
+msgstr ""
 
 msgid "New {{titleText}}"
-msgstr "{{titleText}} baru"
+msgstr ""
 
 msgid "Switch to form view"
-msgstr "Beralih ke tampilan formulir"
+msgstr ""
 
 msgid "Switch to row view"
-msgstr "Beralih ke tampilan baris"
+msgstr ""
 
 msgid "events added"
-msgstr "Even ditambahkan"
+msgstr ""
 
 msgid "No events added"
-msgstr "Tidak ada even yang ditambahkan"
+msgstr ""
 
 msgid "New event relationship"
-msgstr "Hubungan even baru"
+msgstr ""
 
 msgid "Adding relationship to event."
-msgstr "Menambahkan hubungan ke even."
+msgstr ""
 
 msgid "Go back to event without saving relationship"
-msgstr "Kembali ke even tanpa menyimpan hubungan"
+msgstr ""
 
 msgid "Unsaved changes"
-msgstr "Perubahan yang belum disimpan"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
-"Meninggalkan halaman ini akan membuang pilihan yang Anda buat untuk hubungan"
-" baru"
 
 msgid "Yes, discard"
-msgstr "Ya, buang"
+msgstr ""
 
 msgid "No, stay here"
-msgstr "Tidak, tetap di sini"
+msgstr ""
 
 msgid "New event"
-msgstr "Event baru"
+msgstr "Evento nuevo"
 
 msgid "You don't have access to create an event in the current selections"
-msgstr "Anda tidak memiliki akses untuk membuat even di pilihan saat ini"
+msgstr ""
 
 msgid "Save"
-msgstr "Simpan"
+msgstr "Guardar"
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr "Menyimpan {{trackedEntityName}}"
+msgstr ""
 
 msgid "without"
-msgstr "tanpa"
+msgstr ""
 
 msgid "enrollment"
-msgstr "pendaftaran"
+msgstr ""
 
 msgid "in"
-msgstr "dalam"
+msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr "Mendaftar dalam program dengan memilih program dari bilah atas."
+msgstr ""
 
 msgid "An error has occurred. See log for details"
-msgstr "Sebuah kesalahan telah terjadi. Lihat log untuk detailnya"
+msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
-"Ada duplikat (tetapi ada beberapa kesalahan, lihat log untuk detailnya"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
-"Item dengan {{attributeName}} ini sudah terdaftar, tetapi Anda tidak "
-"memiliki akses ke item tersebut"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr "Anda telah mendaftarkan {{attributeName}} ini"
+msgstr ""
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
-"{{trackedEntityTypeName}} dengan {{attributeName}} ini sudah terdaftar"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Tampilkan {{trackedEntityTypeName}} terdaftar"
+msgstr ""
 
 msgid "Registered person"
-msgstr "Orang yang terdaftar"
+msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
-"Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada even "
-"ini."
 
 msgid "validation failed"
-msgstr "validasi gagal"
+msgstr ""
 
 msgid "Errors"
-msgstr "Kesalahan"
+msgstr "Errores"
 
 msgid "Feedback"
-msgstr "Umpan balik"
+msgstr "Retroalimentación"
 
 msgid "Indicators"
-msgstr "Indikator"
+msgstr "Indicadores"
 
 msgid "Warnings"
-msgstr "Peringatan"
+msgstr ""
 
 msgid "Warnings found"
-msgstr "Peringatan ditemukan"
+msgstr ""
 
 msgid "Abort"
-msgstr "batalkan"
+msgstr ""
 
 msgid "Back to form"
-msgstr "Kembali ke formulir"
+msgstr ""
 
 msgid "Save anyway"
-msgstr "Tetap simpan"
+msgstr ""
 
 msgid "Validation errors and warnings"
-msgstr "Kesalahan validasi dan peringatan"
+msgstr ""
 
 msgid "Validation errors"
-msgstr "Kesalahan validasi"
+msgstr ""
 
 msgid "Validation warnings"
-msgstr "Peringatan validasi"
+msgstr ""
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr "Beberapa operasi masih berjalan. Mohon tunggu.."
+msgstr ""
 
 msgid "Operations running"
-msgstr "Operasi berjalan"
+msgstr ""
 
 msgid "Sort"
-msgstr "Urutkan"
+msgstr ""
 
 msgid "No events to display"
-msgstr "Tidak ada even untuk ditampilkan"
+msgstr ""
 
 msgid "Data for offline list not present"
-msgstr "Data untuk daftar offline tidak ada"
+msgstr ""
 
 msgid "Close"
-msgstr "Tutup"
+msgstr "Cerrar"
 
 msgid "Please select the user"
-msgstr "Silakan pilih pengguna"
+msgstr ""
 
 msgid "Me"
-msgstr "Saya"
+msgstr ""
 
 msgid "Anyone"
-msgstr "Siapa saja"
+msgstr ""
 
 msgid "None"
-msgstr "Tidak ada"
+msgstr "Ninguno"
 
 msgid "Select user"
-msgstr "Pilih pengguna"
+msgstr ""
 
 msgid "to"
-msgstr "untuk"
+msgstr ""
 
 msgid "Days in the future"
-msgstr "Hari-hari dimasa depan"
+msgstr ""
 
 msgid "From"
-msgstr "Dari"
+msgstr ""
 
 msgid "Days in the past"
-msgstr "Hari-hari dimasa lalu"
+msgstr ""
 
 msgid "To"
-msgstr "Untuk"
+msgstr ""
 
 msgid "This week"
-msgstr "Minggu ini"
+msgstr "Esta semana"
 
 msgid "This month"
-msgstr "Bulan ini"
+msgstr "Este mes"
 
 msgid "This Year"
-msgstr "Tahun ini"
+msgstr "Este año"
 
 msgid "Last week"
-msgstr "Minggu lalu"
+msgstr "Última semana"
 
 msgid "Last month"
-msgstr "Bulan lalu"
+msgstr "Mes anterior"
 
 msgid "Last 3 months"
-msgstr "3 bulan terakhir"
+msgstr ""
 
 msgid "Absolute range"
-msgstr "Jangkauan mutlak"
+msgstr ""
 
 msgid "Relative range"
-msgstr "Jangkauan relatif"
+msgstr ""
 
 msgid "Max"
-msgstr "Maksimal"
+msgstr "Máx"
 
 msgid "Min"
-msgstr "minimal"
+msgstr ""
 
 msgid "Contains text"
-msgstr "Berisi teks"
+msgstr ""
 
 msgid "Yes"
-msgstr "Iya"
+msgstr "Sí"
 
 msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
+msgstr ""
 
 msgid "Years"
-msgstr "Tahun"
+msgstr "Años"
 
 msgid "Months"
-msgstr "Bulan"
+msgstr "Meses"
 
 msgid "Days"
-msgstr "Hari"
+msgstr "Días"
 
 msgid "Uploading file"
-msgstr "Mengunggah file"
+msgstr ""
 
 msgid "selected"
-msgstr "Terpilih"
+msgstr ""
 
 msgid "Delete"
-msgstr "hapus"
+msgstr "Borrar"
 
 msgid "Select file"
-msgstr "Pilih file"
+msgstr ""
 
 msgid "No"
-msgstr "Tidak"
+msgstr "No"
 
 msgid "Uploading image"
-msgstr "Mengunggah gambar"
+msgstr ""
 
 msgid "Select image"
-msgstr "Pilih gambar"
+msgstr ""
 
 msgid "Search"
-msgstr "Pencarian"
+msgstr "Buscar"
 
 msgid "Clear"
-msgstr "Hapus"
+msgstr "Limpiar"
 
 msgid "No results"
-msgstr "Tidak ada hasil"
+msgstr ""
 
 msgid "Description"
-msgstr "Deskripsi"
+msgstr ""
 
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 msgid "Icon for {{field}}"
-msgstr "Ikon untuk {{field}}"
+msgstr ""
 
 msgid "start typing to search"
-msgstr "mulai mengetik untuk mencari"
+msgstr ""
 
 msgid "suggestions could not be retrieved"
-msgstr "saran tidak dapat diambil"
+msgstr ""
 
 msgid "No items to display"
-msgstr "Tidak ada item untuk ditampilkan"
+msgstr ""
 
 msgid "Select columns"
-msgstr "Pilih kolom"
+msgstr ""
 
 msgid "Columns to show in table"
-msgstr "Kolom untuk ditampilkan di tabel"
+msgstr ""
 
 msgid "Column"
-msgstr "Kolom"
+msgstr ""
 
 msgid "Update"
-msgstr "Perbarui"
+msgstr "Actualizar"
 
 msgid "Reset filter"
-msgstr "Setel ulang filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} hingga {{toDate}}"
+msgstr ""
 
 msgid "after or equal to {{date}}"
-msgstr "setelah atau sama dengan {{date}}"
+msgstr ""
 
 msgid "before or equal to {{date}}"
-msgstr "sebelum atau sama dengan {{date}}"
+msgstr ""
 
 msgid "greater than or equal to"
-msgstr "lebih dari atau sama dengan"
+msgstr ""
 
 msgid "less than or equal to"
-msgstr "kurang dari atau sama dengan"
+msgstr ""
 
 msgid "More filters"
-msgstr "Lebih banyak filter"
+msgstr ""
 
 msgid "Rows per page"
-msgstr "Baris per halaman"
+msgstr ""
 
 msgid "Could not get organisation unit"
-msgstr "Tidak bisa mendapatkan unit organisasi"
+msgstr ""
 
 msgid "Program doesn't exist"
-msgstr "Program tidak ada"
+msgstr ""
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr "Program yang dipilih tidak valid untuk unit pendaftaran yang dipilih"
+msgstr ""
 
 msgid "Online"
-msgstr "Online"
+msgstr ""
 
 msgid "Offline"
-msgstr "Offline"
+msgstr ""
 
 msgid "Syncing"
-msgstr "Menyinkronkan"
+msgstr ""
 
 msgid "Add comment"
-msgstr "Tambahkan komentar"
+msgstr ""
 
 msgid "You don't have access to write comments"
 msgstr ""
 
 msgid "Write comment"
-msgstr "Tulis komentar"
+msgstr ""
 
 msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "Gunakan dasbor pendaftaran baru pada {{Nama program}}"
+msgstr ""
 
 msgid "Opt in for {{programName}}"
 msgstr ""
 
 msgid "No, cancel"
-msgstr "tidak, batalkan"
+msgstr ""
 
 msgid "Yes, opt in"
 msgstr ""
 
 msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr "Berhenti menggunakan dasbor pendafataran baru pada {{Nama program}}"
+msgstr ""
 
 msgid "Opt out for {{programName}}"
 msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "Instance entitas terlacak dengan id \"{{teiId}}\" tidak ada"
+msgstr ""
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
-"Terjadi kesalahan saat membuka pendaftaran ini. Harap masukkan url yang "
-"valid."
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Pendaftaran dengan id \"{{enrollmentId}}\" tidak ada"
+msgstr ""
 
 msgid "Enrollment Dashboard"
-msgstr "Dasbor pendaftaran"
+msgstr ""
 
 msgid "No indicator output for this enrollment yet"
-msgstr "Belum ada indikator keluaran untuk pendaftran ini"
+msgstr ""
 
 msgid "No feedback for this enrollment yet"
-msgstr "Belum ada umpan balik untuk pendaftaran ini"
+msgstr ""
 
 msgid "Quick actions"
-msgstr "Aksi cepat"
+msgstr ""
 
 msgid "New Event"
-msgstr "Acara baru"
+msgstr ""
 
 msgid "Schedule an event"
-msgstr "Jadwalkan sebuah acara"
+msgstr ""
 
 msgid "Make referral"
-msgstr "Membuat rujukan"
+msgstr ""
 
 msgid "No available program stages"
-msgstr "Tidak ada tahapan program yang tersedia"
+msgstr ""
 
 msgid "Program stage not found"
-msgstr "Tahapan program tidak ditemukan"
+msgstr ""
 
 msgid ""
 "Choose a program to add new or see existing enrollments for "
@@ -635,97 +607,92 @@ msgstr ""
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
-"{{programName}} memiliki kategori. Pilih semua kategori untuk melihat "
-"dasbor."
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr "Pilih sebuah pendaftaran untuk melihat dasbor"
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr "{{teiDisplayName}} tidak terdaftar dalam program ini."
+msgstr ""
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr "Daftarkan {{teiDisplayName}} dalam program ini."
+msgstr ""
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
-"{{teiDisplayName}} adalah {{tetName}} dan tidak dapat didaftarkan di "
-"{{programName}}. Pilih program lain yang memungkinkan pendaftaran "
-"{{tetName}}."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr "Daftarkan {{selectedTetName}} baru dalam program ini."
+msgstr ""
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr "{{programName}} adalah program even dan tidak memiliki pendaftaran."
+msgstr ""
 
 msgid "Create a new event in this program."
-msgstr "Buat even baru dalam program ini."
+msgstr ""
 
 msgid "View working list in this program."
-msgstr "Lihat daftar kerja dalam program ini."
+msgstr ""
 
 msgid "Page is missing required values from URL"
-msgstr "Halaman kehilangan nilai yang diutuhkan dari URL"
+msgstr ""
 
 msgid "Program is not valid"
-msgstr "Program tidak valid"
+msgstr ""
 
 msgid "Org unit is not valid with current program"
 msgstr ""
 
 msgid "There was an error opening the Page"
-msgstr "Telah terjadi sebuah kesalahan saat membuka Halaman"
+msgstr ""
 
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
 msgid "There was an error loading the page"
-msgstr "Telah terjadi sebuah kesalahan saat memuat halaman"
+msgstr ""
 
 msgid "Choose a registering unit to start reporting"
-msgstr "Pilih unit pendaftaran untuk memulai pelaporan"
+msgstr ""
 
 msgid "There are no feedbacks for this event"
-msgstr "Tidak ada umpan balik untuk acara ini"
+msgstr ""
 
 msgid "There are no indicators for this event"
-msgstr "Tidak ada indikator untuk acara ini"
+msgstr ""
 
 msgid "Program stage is invalid"
-msgstr "Tahapan program tidak valid"
+msgstr ""
 
 msgid "Report"
-msgstr "Laporan"
+msgstr ""
 
 msgid "Schedule"
-msgstr "Jadwal"
+msgstr "Programado"
 
 msgid "Refer"
-msgstr "Merujuk"
+msgstr ""
 
 msgid "You can’t add any more events in this program"
-msgstr "Kamu tidak bisa menambahkan lagi acara pada program ini"
+msgstr ""
 
 msgid "Cancel without saving"
-msgstr "Batalkan tanpa menyimpan"
+msgstr ""
 
 msgid "Choose a stage for a new event"
-msgstr "Pilih sebuah tahapan untuk sebuah acara baru"
+msgstr ""
 
 msgid "Program Stages could not be loaded"
-msgstr "Tahapan program tidak dapat dimuat"
+msgstr ""
 
 msgid "stage"
-msgstr "Tahapan"
+msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
-msgstr "Pendaftaran{{escape}} Lihat Even"
+msgstr ""
 
 msgid "Enrollment{{escape}} Edit Event"
-msgstr "Pendaftaran{{escape}} Edit Even"
+msgstr ""
 
 msgid "The enrollment event data could not be found"
 msgstr ""
@@ -734,7 +701,7 @@ msgid "There are no feedback for this event"
 msgstr ""
 
 msgid "Registered events"
-msgstr "Even terdaftar"
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -749,27 +716,26 @@ msgid "Please select an organisation unit."
 msgstr ""
 
 msgid "New"
-msgstr "Baru"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr "Pilih {{missingCategories}} untuk mulai melaporkan"
+msgstr ""
 
 msgid "Save as new"
-msgstr "Simpan sebagai baru"
+msgstr ""
 
 msgid "View dashboard"
-msgstr "Lihat dasbor"
+msgstr ""
 
 msgid "View enrollment"
-msgstr "Lihat pendaftaran"
+msgstr ""
 
 msgid "Create for"
-msgstr "Buat untuk"
+msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
-"Anda juga dapat memilih program dari bilah atas dan membuat program tersebut"
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
@@ -778,63 +744,62 @@ msgid "Save {{trackedEntityName}}"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr "Simpan {{trackedEntityTypeName}} baru dan tautan"
+msgstr ""
 
 msgid "Link"
-msgstr "Tautan"
+msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr "Simpan sebagai {{trackedEntityName}} baru"
+msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr "Beberapa program sedang difilter."
+msgstr ""
 
 msgid "Show all"
-msgstr "Tampilkan semua"
+msgstr ""
 
 msgid "Program"
-msgstr "Program"
+msgstr ""
 
 msgid "Organisation Unit"
-msgstr "Unit Organisasi"
+msgstr ""
 
 msgid "Registration"
-msgstr "Pendaftaran"
+msgstr ""
 
 msgid "Search results"
-msgstr "Hasil Pencarian"
+msgstr ""
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr "{{trackedEntityTypeName}} tidak ditemukan."
+msgstr ""
 
 msgid "New search"
-msgstr "Pencarian baru"
+msgstr ""
 
 msgid "Edit search"
-msgstr "Edit pencarian"
+msgstr ""
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr "Tautan ke {{trackedEntityType}} yang ada"
+msgstr ""
 
 msgid "Create new {{trackedEntityType}}"
-msgstr "Buat {{trackedEntityType}} baru"
+msgstr ""
 
 msgid "Register"
-msgstr "Daftar"
+msgstr ""
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
-"Isi setidaknya {{minAttributesRequiredToSearch}} atribut untuk mencari"
 
 msgid "Search {{name}}"
-msgstr "Telusuri {{nama}}"
+msgstr ""
 
 msgid "Search by {{name}}"
-msgstr "Cari berdasarkan {{nama}}"
+msgstr ""
 
 msgid "Search by attributes"
-msgstr "Cari berdasarkan atribut"
+msgstr ""
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
 msgstr ""
@@ -848,53 +813,49 @@ msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
 msgid "No results found"
-msgstr "Tidak ada hasil ditemukan"
+msgstr ""
 
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 msgstr ""
-"Anda dapat mengubah istilah pencarian dan mencari lagi untuk menemukan apa "
-"yang Anda cari."
 
 msgid "Register a user"
 msgstr ""
 
 msgid "Back to search"
-msgstr "Kembali ke pencarian"
+msgstr ""
 
 msgid "An error has occurred"
-msgstr "Sebuah kesalahan telah terjadi"
+msgstr ""
 
 msgid "Too many results"
-msgstr "Terlalu banyak hasil"
+msgstr "Demasiados resultados"
 
 msgid "Cannot search in all programs"
 msgstr ""
 
 msgid "Back"
-msgstr "Kembali"
+msgstr ""
 
 msgid "Search for {{titleText}}"
-msgstr "Telusuri {{titleText}}"
+msgstr ""
 
 msgid "Search for"
-msgstr "Cari tentang"
+msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
-"Anda juga dapat memilih program dari bilah atas dan mencari di program "
-"tersebut"
 
 msgid "Choose a type to start searching"
-msgstr "Pilih jenis untuk mulai mencari"
+msgstr ""
 
 msgid "View active enrollment"
-msgstr "Lihat pendaftaran aktif"
+msgstr ""
 
 msgid "Re-enroll"
-msgstr "Daftar ulang"
+msgstr ""
 
 msgid "all programs"
 msgstr ""
@@ -903,17 +864,15 @@ msgid "If none of search results match, you can create new "
 msgstr ""
 
 msgid "Create new"
-msgstr ""
+msgstr "Crear nuevo"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 msgstr ""
-"Tidak menemukan hasil yang Anda cari? Coba cari semua program yang "
-"menggunakan type"
 
 msgid "Search in all programs"
-msgstr "Cari di semua program"
+msgstr ""
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -922,56 +881,54 @@ msgid "Create custom working list"
 msgstr ""
 
 msgid "events"
-msgstr "Even"
+msgstr "Eventos"
 
 msgid "event"
-msgstr "acara/peristiwa"
+msgstr ""
 
 msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Edit event"
-msgstr "Sunting even"
+msgstr ""
 
 msgid "Event details"
-msgstr "Detail even"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
-"Meninggalkan halaman ini akan membuang semua pilihan yang Anda buat untuk "
-"hubungan baru"
 
 msgid "No one is assigned to this event"
-msgstr "Tidak ada yang ditugaskan untuk even ini"
+msgstr ""
 
 msgid "Assign"
-msgstr "Daftarkan"
+msgstr ""
 
 msgid "Event assigned to {{name}}"
-msgstr "Even ditugaskan ke {{name}}"
+msgstr ""
 
 msgid "Feedbacks"
-msgstr "Umpan balik"
+msgstr ""
 
 msgid "Show all events"
-msgstr "Tampilkan semua even"
+msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
+msgstr ""
 
 msgid "Event could not be loaded"
-msgstr "Even tidak dapat dimuat"
+msgstr ""
 
 msgid "Organisation unit could not be loaded"
-msgstr "Unit organisasi tidak dapat dimuat"
+msgstr ""
 
 msgid "Possible duplicates found"
-msgstr "Kemungkinan duplikat ditemukan"
+msgstr ""
 
 msgid "An error occurred loading possible duplicates"
-msgstr "Terjadi kesalahan saat memuat kemungkinan duplikat"
+msgstr ""
 
 msgid "You don't have access to delete this relationship"
 msgstr ""
@@ -980,137 +937,135 @@ msgid "You don't have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr "Tambahkan hubungan"
+msgstr ""
 
 msgid "Selected registering unit"
-msgstr "Unit pendaftaran yang dipilih"
+msgstr ""
 
 msgid "Start Again"
-msgstr "Mulai lagi"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr "Apakah Anda yakin? Semua data yang belum disimpan akan hilang."
+msgstr ""
 
 msgid "Accept"
-msgstr "Terima"
+msgstr "Aceptar"
 
 msgid "Registering Organisation Unit"
-msgstr "Mendaftarkan Unit Organisasi"
+msgstr ""
 
 msgid "Select"
-msgstr "Pilih"
+msgstr ""
 
 msgid "No programs available."
-msgstr "Tidak ada program yang tersedia."
+msgstr ""
 
 msgid "Selected program"
-msgstr "Program yang dipilih"
+msgstr ""
 
 msgid "Select program"
-msgstr "Pilih program"
+msgstr ""
 
 msgid "Selected"
-msgstr "Terpilih"
+msgstr ""
 
 msgid "Results found"
-msgstr "Hasil ditemukan"
+msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
-msgstr "Telusuri {{uniqueAttrName}}"
+msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Isi setidaknya {{minAttributesRequired}} atribut untuk mencari"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "{{trackedEntityName}} baru di {{programName}}"
+msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Telusuri {{trackedEntityName}} di {{programName}}"
+msgstr ""
 
 msgid "Clear selections"
-msgstr "Hapus pilihan"
+msgstr ""
 
 msgid "To work with the selected program,"
-msgstr "Untuk bekerja dengan program yang dipilih,"
+msgstr ""
 
 msgid "open the Tracker Capture app"
-msgstr "buka aplikasi Tracker Capture"
+msgstr ""
 
 msgid "Save comment"
-msgstr "Simpan komentar"
+msgstr ""
 
 msgid "Enrollment actions"
-msgstr "Tindakan pendaftaran"
+msgstr ""
 
 msgid "We are processing your request."
-msgstr "Kami sedang memproses permintaan Anda."
+msgstr ""
 
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Add new"
-msgstr "Tambahkan baru"
+msgstr "Agregar nuevo"
 
 msgid "Reactivate"
-msgstr "Mengaktifkan kembali"
+msgstr ""
 
 msgid "Mark as cancelled"
-msgstr "Tandai sebagai dibatalkan"
+msgstr ""
 
 msgid "Mark incomplete"
-msgstr "Tandai tidak lengkap"
+msgstr ""
 
 msgid "Delete enrollment"
-msgstr "Hapus pendaftaran"
+msgstr ""
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
 msgstr ""
-"Anda yakin ingin menghapus pendaftaran ini? Ini akan menghapus pendaftaran "
-"saat ini secara permanen."
 
 msgid "Yes, delete enrollment."
-msgstr "Ya, hapus pendaftaran."
+msgstr ""
 
 msgid "Remove mark for follow-up"
-msgstr "Hapus tanda untuk ditindaklanjuti"
+msgstr ""
 
 msgid "Mark for follow-up"
-msgstr "Tandai untuk follow up"
+msgstr ""
 
 msgid "Enrollment date"
-msgstr "Tanggal pendaftaran"
+msgstr "Fecha de inscripción"
 
 msgid "Incident date"
-msgstr "Tanggal insiden"
+msgstr "Fecha del incidente"
 
 msgid "Last updated {{date}}"
-msgstr "Terakhir diperbarui {{date}}"
+msgstr ""
 
 msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "Widget pendaftaran tidak dapat dimuat. Silakan coba lagi nanti"
+msgstr ""
 
 msgid "Follow-up"
-msgstr "Mengikuti"
+msgstr ""
 
 msgid "Started at {{orgUnitName}}"
-msgstr "Dimulai di {{orgUnitName}}"
+msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Dimiliki oleh {{ownerOrgUnit}}"
+msgstr ""
 
 msgid "Cancelled"
-msgstr "Dibatalkan"
+msgstr "Cancelar"
 
 msgid "Comments about this enrollment"
-msgstr "Komentar tentang pendaftaran ini"
+msgstr ""
 
 msgid "Write a comment about this enrollment"
-msgstr "Tulis sebuah komentar tentang pendaftaran ini"
+msgstr ""
 
 msgid "This enrollment doesn't have any comments"
-msgstr "Pendaftaran ini tidak memiliki komentar"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1125,7 +1080,7 @@ msgid "Error"
 msgstr "Error"
 
 msgid "Warning"
-msgstr "Peringatan"
+msgstr "Advertencia"
 
 msgid "Comments about this event"
 msgstr ""
@@ -1140,7 +1095,7 @@ msgid "stage not found in rules execution"
 msgstr ""
 
 msgid "Delete event"
-msgstr "Hapus even"
+msgstr "Eliminar evento"
 
 msgid "Yes, delete event"
 msgstr ""
@@ -1149,7 +1104,7 @@ msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
 msgid "Event completed"
-msgstr "Even selesai"
+msgstr ""
 
 msgid "Back to all stages and events"
 msgstr ""
@@ -1165,24 +1120,28 @@ msgid "The scheduled date is {{count}} days {{position}} the suggested date."
 msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "after"
-msgstr "Setelah"
+msgstr ""
 
 msgid "before"
-msgstr "Sebelum"
+msgstr ""
 
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 
 msgid "Schedule info"
-msgstr "Info jadwal"
+msgstr ""
 
 msgid "Schedule date / Due date"
 msgstr ""
@@ -1200,40 +1159,40 @@ msgid ""
 msgstr ""
 
 msgid " Loading..."
-msgstr "Memuat..."
+msgstr ""
 
 msgid "Save changes"
-msgstr "Simpan perubahan"
+msgstr ""
 
 msgid "Profile"
-msgstr "Profil"
+msgstr ""
 
 msgid "There is a problem with this form"
-msgstr "Ada sebuah masalah dengan formulir ini"
+msgstr ""
 
 msgid "There are warnings in this form"
 msgstr ""
 
 msgid "There was a problem saving changes"
-msgstr "Terjadi masalah saat menyimpan perubahan"
+msgstr ""
 
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
 msgid "tracked entity instance"
-msgstr "contoh entitas yang dilacak"
+msgstr ""
 
 msgid "Fix errors in the form to continue."
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
-msgstr "Widget profil tidak dapat dimuat. Silakan coba lagi nanti"
+msgstr ""
 
 msgid "{{TETName}} profile"
 msgstr ""
 
 msgid "Edit"
-msgstr "Sunting"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr ""
@@ -1245,7 +1204,7 @@ msgid "Show {{ rest }} more"
 msgstr ""
 
 msgid "Reset list"
-msgstr "Mengatur ulang daftar"
+msgstr ""
 
 msgid "Go to full {{ eventName }}"
 msgstr ""
@@ -1257,7 +1216,7 @@ msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Registering unit"
-msgstr "Unit pendaftaran"
+msgstr ""
 
 msgid "{{ totalEvents }} events"
 msgstr ""
@@ -1269,133 +1228,133 @@ msgid "{{ scheduledEvents }} scheduled"
 msgstr ""
 
 msgid "Stages and Events"
-msgstr "Tahapan dan Even"
+msgstr ""
 
 msgid "Working list could not be loaded"
-msgstr "Daftar kerja tidak dapat dimuat"
+msgstr ""
 
 msgid "Download as JSON"
-msgstr "Download dalam bentuk JSON"
+msgstr ""
 
 msgid "Download as XML"
-msgstr "Download dalam bentuk XML"
+msgstr ""
 
 msgid "Download as CSV"
-msgstr "Download dalam bentuk CSV"
+msgstr ""
 
 msgid "Download with current filters"
-msgstr "Unduh dengan filter saat ini"
+msgstr ""
 
 msgid "Download data..."
-msgstr "Unduh data..."
+msgstr ""
 
 msgid "an error occurred loading working lists"
-msgstr "terjadi kesalahan saat memuat daftar kerja"
+msgstr ""
 
 msgid "Enrollment status"
-msgstr "Status pendaftaran"
+msgstr "Estado de la inscripción."
 
 msgid "Assigned to"
-msgstr "Ditugaskan pada"
+msgstr ""
 
 msgid "Registration Date"
-msgstr "tanggal registrasi"
+msgstr ""
 
 msgid "Inactive"
-msgstr "Inaktif"
+msgstr ""
 
 msgid "Working list could not be updated"
-msgstr "Daftar kerja tidak dapat diperbarui"
+msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
 
 msgid "Update view"
-msgstr "Perbarui tampilan"
+msgstr ""
 
 msgid "Save current view..."
-msgstr "Simpan tampilan saat ini..."
+msgstr ""
 
 msgid "Save current view as..."
-msgstr "Simpan tampilan saat ini sebagai..."
+msgstr ""
 
 msgid "Delete view"
-msgstr "Hapus tampilan"
+msgstr ""
 
 msgid "Share view..."
-msgstr "Bagikan tampilan..."
+msgstr ""
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Yakin ingin menghapus tampilan '{{templateName}}'?"
+msgstr ""
 
 msgid "Confirm"
-msgstr "Konfirmasi"
+msgstr ""
 
 msgid "Save As view"
-msgstr "Simpan Sebagai tampilan"
+msgstr ""
 
 msgid "View name"
-msgstr "Tampilkan nama"
+msgstr ""
 
 msgid "Show Less"
-msgstr "Tampilkan Lebih Sedikit"
+msgstr ""
 
 msgid "Show All"
-msgstr "Tunjukkan semua"
+msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr "Terjadi kesalahan. Lihat log untuk detailnya"
+msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Scheduled"
-msgstr "Terjadwal"
+msgstr ""
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Overdue"
-msgstr "Lewat waktu"
+msgstr "Atrasado"
 
 msgid "Skipped"
-msgstr "Dilewati"
+msgstr "Omitido"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr "{{trackedEntityName}} dalam program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
-msgstr "Program tidak ditemukan"
+msgstr ""
 
 msgid "Program is not a tracker program"
-msgstr "Program bukan program pelacak"
+msgstr ""
 
 msgid "Error saving event"
-msgstr "Terjadi kesalahan saat menyimpan even"
+msgstr ""
 
 msgid "Could not save event"
-msgstr "Tidak dapat menyimpan even"
+msgstr ""
 
 msgid "Could not delete event"
-msgstr "Tidak dapat menghapus even"
+msgstr ""
 
 msgid "Could not save working list"
-msgstr "Tidak dapat menyimpan daftar kerja"
+msgstr ""
 
 msgid "Could not add working list"
-msgstr "Tidak dapat menambahkan daftar kerja"
+msgstr ""
 
 msgid "Could not delete working list"
-msgstr "Tidak dapat menghapus daftar kerja"
+msgstr ""
 
 msgid "Organisation unit search failed."
-msgstr "Pencarian unit organisasi gagal."
+msgstr ""
 
 msgid "Error saving tracked entity instance"
-msgstr "Terjadi kesalahan saat menyimpan instance entitas yang dilacak"
+msgstr ""
 
 msgid "Error saving enrollment"
-msgstr "Terjadi kesalahan saat menyimpan pendaftaran"
+msgstr ""
 
 msgid "Error saving the enrollment event"
 msgstr ""
@@ -1407,40 +1366,40 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "Tentukan koordinat"
+msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr "Halaman {{Halaman saat ini}}"
+msgstr ""
 
 msgid "Date"
-msgstr "Tanggal"
+msgstr "Fecha"
 
 msgid "Time"
-msgstr "Waktu"
+msgstr ""
 
 msgid "From date"
-msgstr "Dari tanggal"
+msgstr ""
 
 msgid "From time"
-msgstr "Dari waktu"
+msgstr ""
 
 msgid "To date"
-msgstr "Ke tanggal"
+msgstr ""
 
 msgid "To time"
-msgstr "Ke waktu"
+msgstr ""
 
 msgid "error encountered during field validation"
-msgstr "kesalahan yang ditemui selama validasi bidang"
+msgstr ""
 
 msgid "error"
-msgstr "kesalahan"
+msgstr ""
 
 msgid "Delete polygon"
-msgstr "Hapus poligon"
+msgstr ""
 
 msgid "Set area"
-msgstr "Setel luas"
+msgstr ""
 
 msgid "Compatibility mode"
-msgstr "Mode kompatibilitas"
+msgstr ""
