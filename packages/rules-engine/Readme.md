@@ -37,7 +37,7 @@ yarn
 
 #### 2. Build the library
 
-To build or update the library imported by the capture-app, run:
+To build or update the library, run:
 
 ```
 yarn build

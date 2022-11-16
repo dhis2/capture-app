@@ -1,8 +1,0 @@
-[ignore]
-.*/build/.*
-
-[declarations]
-.*/node_modules/.*
-
-[options]
-esproposal.optional_chaining=enable
