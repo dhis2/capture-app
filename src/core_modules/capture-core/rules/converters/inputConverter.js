@@ -6,12 +6,15 @@ import type { IConvertInputRulesValue } from 'capture-core-utils/rulesEngine/rul
 
 const dateMomentFormat = 'YYYY-MM-DD';
 
+const convertStringValue = (value: ?string): ?string => (value !== '' && value || null);
+const convertNumericValue = (value: any): ?number => (typeof value === 'number' ? value : null);
+
 export const inputConverter: IConvertInputRulesValue = {
-    convertText: (value: ?string): ?string => (value || null),
-    convertLongText: (value: ?string): ?string => (value || null),
-    convertLetter: (value: ?string): ?string => (value || null),
-    convertPhoneNumber: (value: ?string): ?string => (value || null),
-    convertEmail: (value: ?string): ?string => (value || null),
+    convertText: convertStringValue,
+    convertLongText: convertStringValue,
+    convertLetter: convertStringValue,
+    convertPhoneNumber: convertStringValue,
+    convertEmail: convertStringValue,
     convertBoolean: (value: ?boolean): ?boolean => ((value || value === false) ? value : null),
     convertTrueOnly: (value: ?boolean): ?boolean => (value || null),
     convertDate: (value: any): ?string => {
@@ -22,15 +25,15 @@ export const inputConverter: IConvertInputRulesValue = {
         momentObject.locale('en');
         return momentObject.format(dateMomentFormat);
     },
-    convertDateTime: (value: ?string): ?string => (value || null),
-    convertTime: (value: ?string): ?string => (value || null),
-    convertNumber: (value: any): ?number => (typeof value === 'number' ? value : null),
-    convertUnitInterval: (value: any): ?number => (typeof value === 'number' ? value : null),
-    convertPercentage: (value: any): ?number => (typeof value === 'number' ? value : null),
-    convertInteger: (value: any): ?number => (typeof value === 'number' ? value : null),
-    convertIntegerPositive: (value: any): ?number => (typeof value === 'number' ? value : null),
-    convertIntegerNegative: (value: any): ?number => (typeof value === 'number' ? value : null),
-    convertIntegerZeroOrPositive: (value: any): ?number => (typeof value === 'number' ? value : null),
+    convertDateTime: convertStringValue,
+    convertTime: convertStringValue,
+    convertNumber: convertNumericValue,
+    convertUnitInterval: convertNumericValue,
+    convertPercentage: convertNumericValue,
+    convertInteger: convertNumericValue,
+    convertIntegerPositive: convertNumericValue,
+    convertIntegerNegative: convertNumericValue,
+    convertIntegerZeroOrPositive: convertNumericValue,
     convertTrackerAssociate: (value: any): ?string => {
         log.warn('convertTrackerAssociate not implemented', value);
         return null;
@@ -46,7 +49,7 @@ export const inputConverter: IConvertInputRulesValue = {
         return null;
     },
     convertAge: (value: any): ?string => inputConverter.convertDate(value),
-    convertUrl: (value: ?string): ?string => (value || null),
+    convertUrl: convertStringValue,
     convertFile(value: any): ?string {
         log.warn('convertFile not implemented', value);
         return null;
