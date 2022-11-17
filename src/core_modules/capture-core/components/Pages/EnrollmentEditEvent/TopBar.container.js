@@ -17,6 +17,8 @@ import {
 } from '../../ScopeSelector';
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import { TopBarActions } from '../../TopBarActions';
+import { convertValue } from '../../../converters/clientToView';
+import { dataElementTypes } from '../../../metaData/DataElement';
 
 type Props = {|
     programStage: ?ProgramStage,
@@ -54,6 +56,7 @@ export const TopBar = ({
     const { resetStageId } = useResetStageId();
     const { resetEventId } = useResetEventId();
     const isUserInteractionInProgress = mode === dataEntryKeys.EDIT;
+    const convertedEventDate = eventDate ? convertValue(eventDate, dataElementTypes.DATE) : '';
 
     return (
         <ScopeSelector
@@ -111,7 +114,7 @@ export const TopBar = ({
                         onClear={() => resetEventId('enrollment', { enrollmentId })}
                         options={[
                             {
-                                label: eventDate || '',
+                                label: convertedEventDate,
                                 value: 'alwaysPreselected',
                             },
                         ]}
