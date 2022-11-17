@@ -1,8 +1,8 @@
 import '../../sharedSteps';
 
-Given(/^you land on the enrollment event page by having typed (.*)$/, (url) => {
+Given(/^you land on the enrollment event page with selected (.*) by having typed (.*)$/, (tet, url) => {
     cy.visit(url);
-    cy.get('[data-test="scope-selector"]').contains('Selected person');
+    cy.get('[data-test="scope-selector"]').contains(`Selected ${tet}`);
 });
 
 When(/^the user clicks on the edit button/, () =>
@@ -33,7 +33,7 @@ When(/^the user set the apgar score to (.*)/, score =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="capture-ui-input"]')
-        .eq(1)
+        .eq(2)
         .clear()
         .type(score)
         .blur(),
@@ -73,10 +73,22 @@ Then('the user selects another schedule date', () => {
     });
 });
 
-Then('the user clicks on the schedule button', () => {
+Then(/^the user clicks on the schedule button on (.*)$/, (widgetName) => {
     cy
-        .get('[data-test="widget-enrollment-event"]')
+        .get(`[data-test="${widgetName}"]`)
         .find('[data-test="dhis2-uicore-button"]')
         .contains('Schedule')
         .click();
+});
+
+Then('the user see the schedule date and info box', () => {
+    cy.get('[data-test="schedule-section"]').within(() => {
+        cy.contains('Schedule date / Due date');
+        cy.contains('Scheduled automatically for 2021-10-16');
+    });
+});
+
+Then(/^the user see the schedule date field with tooltip: (.*)$/, (tooltipContent) => {
+    cy.get('[data-test="dhis2-uicore-tooltip-reference"]').eq(0).trigger('mouseover');
+    cy.get('[data-test="dhis2-uicore-tooltip-content"]').contains(tooltipContent).should('exist');
 });

@@ -31,6 +31,8 @@ const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     return {
         ready: !state.activePage.isDataEntryLoading && !eventDetailsSection.loading,
+        enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
+        occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
     };
 };
 
