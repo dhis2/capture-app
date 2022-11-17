@@ -207,7 +207,11 @@ export const startCreateNewAfterCompletingEpic = (
             if (isCreateNew) {
                 const finalParams = availableProgramStages.length === 1 ?
                     { ...params, stageId: availableProgramStages[0].id } : params;
-                history.push(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
+
+                setTimeout(() => {
+                    history.push(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
+                }, 0);
+
                 return EMPTY;
             }
             return of(navigateToEnrollmentOverview(params));
