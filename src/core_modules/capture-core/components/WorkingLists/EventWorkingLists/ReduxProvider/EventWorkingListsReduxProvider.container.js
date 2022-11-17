@@ -18,7 +18,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
     const dispatch = useDispatch();
     const dataEngine = useDataEngine();
 
-    const { currentTemplateId, templates, onLoadView, onUpdateList, ...commonStateManagementRestProps }
+    const { currentTemplateId, templates, onLoadView, onUpdateList, onResetListColumnOrder, onClearFilters, ...commonStateManagementRestProps }
         = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
 
     const currentTemplate = currentTemplateId && templates &&

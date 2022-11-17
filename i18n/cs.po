@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
+"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -510,6 +510,9 @@ msgstr "Aktualizovat"
 msgid "Reset filter"
 msgstr "Reset filtru"
 
+msgid "Remove filter"
+msgstr "Odebrat filtr"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} do {{toDate}}"
 
@@ -527,6 +530,9 @@ msgstr "menší nebo rovno"
 
 msgid "More filters"
 msgstr "Více filtrů"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "Řádků na stránku"
@@ -761,8 +767,8 @@ msgstr "Můžete také vybrat program z horní lišty a vytvořit v něm program
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nový zápis do programu{{escape}} {{programName}}"
 
-msgid "Save new"
-msgstr "Uložit nový"
+msgid "Save {{trackedEntityName}}"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
@@ -1145,18 +1151,16 @@ msgid "Schedule date info"
 msgstr "Informace o termínu"
 
 msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+"The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
-"Toto datum je navrhované plánované datum na základě definovaných intervalů,\n"
-"                    v případě potřeby lze upravit."
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
-msgstr[0] "Toto datum je {{count}} den {{position}} navrhované datum."
-msgstr[1] "Toto datum je {{count}} dní {{position}} navrhované datum."
-msgstr[2] "Toto datum je {{count}} dní {{position}} navrhované datum."
-msgstr[3] "Toto datum je {{count}} dní {{position}} navrhované datum."
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "after"
 msgstr "po"
@@ -1299,6 +1303,9 @@ msgstr "Stav zápisu"
 
 msgid "Assigned to"
 msgstr "Přiřazen k"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
 
 msgid "Registration Date"
 msgstr "Datum registrace"

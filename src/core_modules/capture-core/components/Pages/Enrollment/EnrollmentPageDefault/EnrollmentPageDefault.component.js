@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { spacersNum, spacers } from '@dhis2/ui';
+import { spacersNum, spacers, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
@@ -14,7 +14,7 @@ import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 import { EnrollmentQuickActions } from './EnrollmentQuickActions';
 
-const getStyles = ({ typography }) => ({
+const getStyles = () => ({
     columns: {
         display: 'flex',
     },
@@ -36,8 +36,10 @@ const getStyles = ({ typography }) => ({
         gap: spacers.dp16,
     },
     title: {
-        ...typography.title,
-        paddingTop: spacersNum.dp16,
+        fontSize: '1.25rem',
+        color: colors.grey900,
+        fontWeight: 500,
+        paddingTop: spacersNum.dp8,
         paddingBottom: spacersNum.dp16,
     },
 });
