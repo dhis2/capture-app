@@ -1,16 +1,16 @@
 # 
 # Translators:
 # phil_dhis2, 2022
-# 晓东 林 <13981924470@126.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
 # easylin <lin_xd@126.com>, 2022
+# 晓东 林 <13981924470@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-10T09:42:51.323Z\n"
+"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -501,6 +501,9 @@ msgstr "更新"
 msgid "Reset filter"
 msgstr "重置过滤器"
 
+msgid "Remove filter"
+msgstr "移除过滤器"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} 到 {{toDate}}"
 
@@ -518,6 +521,9 @@ msgstr "小于等于"
 
 msgid "More filters"
 msgstr "更多过滤器"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "行每页"
@@ -1260,6 +1266,9 @@ msgstr "报名状态"
 
 msgid "Assigned to"
 msgstr "指派到"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
 
 msgid "Registration Date"
 msgstr "登记日期"

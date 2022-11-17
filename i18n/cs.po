@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-10T09:42:51.323Z\n"
+"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -510,6 +510,9 @@ msgstr "Aktualizovat"
 msgid "Reset filter"
 msgstr "Reset filtru"
 
+msgid "Remove filter"
+msgstr "Odebrat filtr"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} do {{toDate}}"
 
@@ -527,6 +530,9 @@ msgstr "menší nebo rovno"
 
 msgid "More filters"
 msgstr "Více filtrů"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "Řádků na stránku"
@@ -1297,6 +1303,9 @@ msgstr "Stav zápisu"
 
 msgid "Assigned to"
 msgstr "Přiřazen k"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
 
 msgid "Registration Date"
 msgstr "Datum registrace"
