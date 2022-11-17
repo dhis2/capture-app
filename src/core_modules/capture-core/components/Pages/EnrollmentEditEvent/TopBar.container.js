@@ -114,6 +114,7 @@ export const TopBar = ({
                         onClear={() => resetEventId('enrollment', { enrollmentId })}
                         options={[
                             {
+                                // $FlowFixMe dataElementTypes flow error
                                 label: convertedEventDate,
                                 value: 'alwaysPreselected',
                             },
