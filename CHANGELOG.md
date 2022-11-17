@@ -1,3 +1,10 @@
+# [100.19.0](https://github.com/dhis2/capture-app/compare/v100.18.3...v100.19.0) (2022-11-17)
+
+
+### Features
+
+* [DHIS2-13897] respect Hide due date flag ([#3054](https://github.com/dhis2/capture-app/issues/3054)) ([7ced9a2](https://github.com/dhis2/capture-app/commit/7ced9a29e2721bb2ef2e13fc83434c57d60ebe4f)), closes [#3058](https://github.com/dhis2/capture-app/issues/3058)
+
 ## [100.18.3](https://github.com/dhis2/capture-app/compare/v100.18.2...v100.18.3) (2022-11-17)
 
 
