@@ -111,6 +111,7 @@ export type CachedProgramStage = {
     allowGenerateNextVisit?: ?boolean,
     openAfterEnrollment?: ?boolean,
     generatedByEnrollmentDate?: ?boolean,
+    hideDueDate?: ?boolean,
     reportDateToUse: string,
     minDaysFromStart: number,
     style?: ?CachedStyle,

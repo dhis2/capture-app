@@ -38,6 +38,8 @@ const mapStateToProps = (state: ReduxState, props) => {
         ready: !state.activePage.isDataEntryLoading && !eventDetailsSection.loading,
         itemId,
         isCompleted,
+        enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
+        occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
     };
 };
 

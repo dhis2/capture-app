@@ -123,6 +123,7 @@ export class ProgramStageFactory {
             _stage.enableUserAssignment = !!cachedProgramStage.enableUserAssignment;
             _stage.autoGenerateEvent = !!cachedProgramStage.autoGenerateEvent;
             _stage.allowGenerateNextVisit = !!cachedProgramStage.allowGenerateNextVisit;
+            _stage.hideDueDate = !!cachedProgramStage.hideDueDate;
             _stage.openAfterEnrollment = !!cachedProgramStage.openAfterEnrollment;
             _stage.generatedByEnrollmentDate = !!cachedProgramStage.generatedByEnrollmentDate;
             _stage.reportDateToUse = cachedProgramStage.reportDateToUse;

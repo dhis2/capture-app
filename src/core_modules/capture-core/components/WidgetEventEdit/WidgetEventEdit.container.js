@@ -131,6 +131,7 @@ export const WidgetEventEditPlain = ({
                         <ViewEventDataEntry
                             formFoundation={programStage.stageForm}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
+                            hideDueDate={programStage.hideDueDate}
                         />
                     ) : (
                         <EditEventDataEntry
@@ -148,6 +149,7 @@ export const WidgetEventEditPlain = ({
                             initialScheduleDate={initialScheduleDate}
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
                             availableProgramStages={availableProgramStages}
+                            hideDueDate={programStage.hideDueDate}
                         />
                     )}
                 </div>

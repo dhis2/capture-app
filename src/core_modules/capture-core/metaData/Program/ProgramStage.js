@@ -20,6 +20,7 @@ export class ProgramStage {
     _openAfterEnrollment: boolean;
     _allowGenerateNextVisit: boolean;
     _generatedByEnrollmentDate: boolean;
+    _hideDueDate: boolean;
     _reportDateToUse: string;
     _minDaysFromStart: number;
     _icon: Icon | void;
@@ -103,6 +104,14 @@ export class ProgramStage {
 
     set allowGenerateNextVisit(generateNextVisit: boolean) {
         this._allowGenerateNextVisit = generateNextVisit;
+    }
+
+    get hideDueDate(): boolean {
+        return this._hideDueDate;
+    }
+
+    set hideDueDate(hideDueDate: boolean) {
+        this._hideDueDate = hideDueDate;
     }
 
     get generatedByEnrollmentDate(): boolean {
