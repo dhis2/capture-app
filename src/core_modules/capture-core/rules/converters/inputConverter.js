@@ -6,7 +6,7 @@ import type { IConvertInputRulesValue } from 'capture-core-utils/rulesEngine/rul
 
 const dateMomentFormat = 'YYYY-MM-DD';
 
-const convertStringValue = (value: ?string): ?string => (value !== '' && value || null);
+const convertStringValue = (value: ?string): ?string => (value || null);
 const convertNumericValue = (value: any): ?number => (typeof value === 'number' ? value : null);
 
 export const inputConverter: IConvertInputRulesValue = {
