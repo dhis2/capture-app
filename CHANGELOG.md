@@ -1,3 +1,11 @@
+## [100.18.3](https://github.com/dhis2/capture-app/compare/v100.18.2...v100.18.3) (2022-11-17)
+
+
+### Bug Fixes
+
+* [DHIS2-14001] complete enrollment action label ([#3110](https://github.com/dhis2/capture-app/issues/3110)) ([b3abdd9](https://github.com/dhis2/capture-app/commit/b3abdd9f2dc1144d56b02d7560b9305e4f9f0fcc))
+* [DHIS2-7913] apply hide fields program rule in form view mode ([#3099](https://github.com/dhis2/capture-app/issues/3099)) ([3467023](https://github.com/dhis2/capture-app/commit/34670239521d1e9525251e2f53967d3d207a45b8))
+
 ## [100.18.2](https://github.com/dhis2/capture-app/compare/v100.18.1...v100.18.2) (2022-11-17)
 
 
