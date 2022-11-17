@@ -17,8 +17,6 @@ import {
 } from '../../ScopeSelector';
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import { TopBarActions } from '../../TopBarActions';
-import { convertValue } from '../../../converters/clientToView';
-import { dataElementTypes } from '../../../metaData/DataElement';
 
 type Props = {|
     programStage: ?ProgramStage,
