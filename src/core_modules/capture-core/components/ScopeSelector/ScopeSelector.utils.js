@@ -1,10 +1,10 @@
-import { convertValue } from '../../converters/clientToView';
-import { dataElementTypes } from '../../metaData/DataElement';
+import { convertDateWithTimeForView } from '../../converters/clientToView';
+
 
 export const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments
         .filter(({ program }) => program === selectedProgramId)
         .map(({ enrolledAt, enrollment }) => ({
-            label: convertValue(enrolledAt, dataElementTypes.DATE),
+            label: convertDateWithTimeForView(enrolledAt),
             value: enrollment,
         }));

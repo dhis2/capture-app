@@ -56,7 +56,6 @@ export const TopBar = ({
     const { resetStageId } = useResetStageId();
     const { resetEventId } = useResetEventId();
     const isUserInteractionInProgress = mode === dataEntryKeys.EDIT;
-    const convertedEventDate = eventDate ? convertValue(eventDate, dataElementTypes.DATE) : '';
 
     return (
         <ScopeSelector
@@ -114,8 +113,7 @@ export const TopBar = ({
                         onClear={() => resetEventId('enrollment', { enrollmentId })}
                         options={[
                             {
-                                // $FlowFixMe dataElementTypes flow error
-                                label: convertedEventDate,
+                                label: eventDate || '',
                                 value: 'alwaysPreselected',
                             },
                         ]}

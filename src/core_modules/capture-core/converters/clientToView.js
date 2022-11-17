@@ -77,3 +77,10 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
     // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
+
+export function convertDateWithTimeForView(rawValue: string): string {
+    if (!moment(rawValue).hours() && !moment(rawValue).minutes()) {
+        return convertDateForView(rawValue);
+    }
+    return convertDateTimeForView(rawValue);
+}
