@@ -8,7 +8,7 @@ import type { Props } from './status.types';
 
 const styles = {
     status: {
-        margin: spacersNum.dp4,
+        margin: `0 0 ${spacersNum.dp4}px 0`,
     },
 };
 

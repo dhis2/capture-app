@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
+"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -516,6 +516,9 @@ msgstr "Янгилаш"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr "Фильтрни олиб ташлаш"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} дан {{toDate}} га"
 
@@ -533,6 +536,9 @@ msgstr "дан кам ёки тенг"
 
 msgid "More filters"
 msgstr "Кўпроқ фильтр"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "Саҳифада қаторлар"
@@ -769,8 +775,8 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
-msgid "Save new"
-msgstr "Янгисини сақлаш"
+msgid "Save {{trackedEntityName}}"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Янги {{trackedEntityTypeName}} ва ҳаволани сақлаш"
@@ -1140,6 +1146,9 @@ msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
 msgid "Yes, delete event"
 msgstr ""
 
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Ҳодиса/тадбир якунланди"
 
@@ -1150,12 +1159,12 @@ msgid "Schedule date info"
 msgstr ""
 
 msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+"The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 
 msgid "after"
@@ -1290,6 +1299,9 @@ msgstr "Рўйхатга олиш ҳолати"
 
 msgid "Assigned to"
 msgstr "Тайинланган"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
 
 msgid "Registration Date"
 msgstr "Рўйхатга олинган сана"

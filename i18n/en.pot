@@ -505,6 +505,9 @@ msgstr "Update"
 msgid "Reset filter"
 msgstr "Reset filter"
 
+msgid "Remove filter"
+msgstr "Remove filter"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"
 
@@ -522,6 +525,9 @@ msgstr "less than or equal to"
 
 msgid "More filters"
 msgstr "More filters"
+
+msgid "Stage filters"
+msgstr "Stage filters"
 
 msgid "Rows per page"
 msgstr "Rows per page"
@@ -1277,6 +1283,9 @@ msgstr "Enrollment status"
 
 msgid "Assigned to"
 msgstr "Assigned to"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr "Choose a program stage to filter by {{label}}"
 
 msgid "Registration Date"
 msgstr "Registration Date"
