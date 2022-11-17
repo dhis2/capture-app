@@ -5,6 +5,6 @@ export const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =
     enrollments
         .filter(({ program }) => program === selectedProgramId)
         .map(({ enrolledAt, enrollment }) => ({
-            label: convertValue(enrolledAt, dataElementTypes.DATETIME),
+            label: convertValue(enrolledAt, dataElementTypes.DATE),
             value: enrollment,
         }));
