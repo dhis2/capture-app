@@ -3,13 +3,14 @@
 # phil_dhis2, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
+# Saysamone Sibounma, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
+"Last-Translator: Saysamone Sibounma, 2022\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -394,7 +395,7 @@ msgid "This month"
 msgstr "ເດືອນນີ້"
 
 msgid "This Year"
-msgstr ""
+msgstr "ປີນີ້"
 
 msgid "Last week"
 msgstr "ອາທິດທີ່ຜ່ານມາ"
@@ -866,7 +867,7 @@ msgid "If none of search results match, you can create new "
 msgstr ""
 
 msgid "Create new"
-msgstr ""
+msgstr "ສ້າງໃໝ່"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1100,6 +1101,9 @@ msgid "Delete event"
 msgstr "ລືບກໍລະນີອອກ"
 
 msgid "Yes, delete event"
+msgstr ""
+
+msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
 msgid "Event completed"

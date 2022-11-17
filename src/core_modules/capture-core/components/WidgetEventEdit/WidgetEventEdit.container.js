@@ -130,6 +130,7 @@ export const WidgetEventEditPlain = ({
                         <ViewEventDataEntry
                             formFoundation={programStage.stageForm}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
+                            hideDueDate={programStage.hideDueDate}
                         />
                     ) : (
                         <EditEventDataEntry
@@ -144,6 +145,7 @@ export const WidgetEventEditPlain = ({
                             hasDeleteButton
                             onHandleScheduleSave={onHandleScheduleSave}
                             initialScheduleDate={initialScheduleDate}
+                            hideDueDate={programStage.hideDueDate}
                         />
                     )}
                 </div>

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
+"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -49,6 +49,9 @@ msgstr "Tashkiliy birlik"
 
 msgid "Date of enrollment"
 msgstr "Roʼyxatga kiritilgan sana"
+
+msgid "Program name"
+msgstr ""
 
 msgid "Last updated"
 msgstr "Oxirgi yangilangan"
@@ -516,6 +519,9 @@ msgstr "Янгилаш"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr "Filtrni olib tashlash"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} dan {{toDate}} ga"
 
@@ -533,6 +539,9 @@ msgstr "dan kam yoki teng"
 
 msgid "More filters"
 msgstr "Koʼproq Filtr"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "Sahifada qatorlar"
@@ -761,7 +770,7 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
-msgid "Save new"
+msgid "Save {{trackedEntityName}}"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -1131,6 +1140,9 @@ msgstr "Hodisa/tadbirni oʼchirib tashlash"
 msgid "Yes, delete event"
 msgstr ""
 
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1141,12 +1153,12 @@ msgid "Schedule date info"
 msgstr ""
 
 msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+"The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 
 msgid "after"
@@ -1279,6 +1291,9 @@ msgid "Enrollment status"
 msgstr "Roʼyxatga olish holati"
 
 msgid "Assigned to"
+msgstr ""
+
+msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
 msgid "Registration Date"

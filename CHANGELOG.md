@@ -1,3 +1,100 @@
+## [100.18.3](https://github.com/dhis2/capture-app/compare/v100.18.2...v100.18.3) (2022-11-17)
+
+
+### Bug Fixes
+
+* [DHIS2-14001] complete enrollment action label ([#3110](https://github.com/dhis2/capture-app/issues/3110)) ([b3abdd9](https://github.com/dhis2/capture-app/commit/b3abdd9f2dc1144d56b02d7560b9305e4f9f0fcc))
+* [DHIS2-7913] apply hide fields program rule in form view mode ([#3099](https://github.com/dhis2/capture-app/issues/3099)) ([3467023](https://github.com/dhis2/capture-app/commit/34670239521d1e9525251e2f53967d3d207a45b8))
+
+## [100.18.2](https://github.com/dhis2/capture-app/compare/v100.18.1...v100.18.2) (2022-11-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([69b5b06](https://github.com/dhis2/capture-app/commit/69b5b06499e92f1d8e4ed7e8cba2b8f0e0bc89a3))
+
+## [100.18.1](https://github.com/dhis2/capture-app/compare/v100.18.0...v100.18.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#3083](https://github.com/dhis2/capture-app/issues/3083)) ([98b6af1](https://github.com/dhis2/capture-app/commit/98b6af14ee68053c735660300ff3fdc6677b1a2d))
+
+# [100.18.0](https://github.com/dhis2/capture-app/compare/v100.17.6...v100.18.0) (2022-11-16)
+
+
+### Bug Fixes
+
+* [DHIS2-14081] use static style for accessory row in events table ([2b16ebf](https://github.com/dhis2/capture-app/commit/2b16ebf98eeea7c131a76d27b4334b469bdc908a))
+* adjust flatlist styling ([62242c7](https://github.com/dhis2/capture-app/commit/62242c7287beed7dd73226e2c8cde9cddf5d2aa8))
+* comments widget ui adjustment ([7e5b689](https://github.com/dhis2/capture-app/commit/7e5b6895ad8d74be5892cc2745d2bbde06d44400))
+* enrollment page title style ([7dd9e2e](https://github.com/dhis2/capture-app/commit/7dd9e2e69629656fbc2c1757b5e378c7dbba450e))
+* enrollment widget ui adjustments ([a39403c](https://github.com/dhis2/capture-app/commit/a39403c711ceede98070f5cae391e28635328e13))
+* feedback widget ui adjustments ([24edfd7](https://github.com/dhis2/capture-app/commit/24edfd76deb848af2b8798827ffa3a8f97e894ae))
+* indicators widget ui adjustment ([0d434a6](https://github.com/dhis2/capture-app/commit/0d434a67dad2c0b892559937c250ef75e55d93f8))
+* new event stage selection ui adjustments ([95872d5](https://github.com/dhis2/capture-app/commit/95872d544901f7aa2f03d77d5a71aae8646e11f9))
+* profile widget ui adjustments ([092bc09](https://github.com/dhis2/capture-app/commit/092bc09d4d18553c3e87dc53df99446b8927543f))
+* profile widget ui adjustments ([f0ce65c](https://github.com/dhis2/capture-app/commit/f0ce65c362b003245da6b1a496edc63e56cd0dd0))
+* quick actions widget ui adjustment ([bc90394](https://github.com/dhis2/capture-app/commit/bc90394366c4ceda974f86945187738bf3fed7d0))
+* stages and events ui adjustments ([36a39cd](https://github.com/dhis2/capture-app/commit/36a39cd3dfd39dcaaef1e76e2cf320d9c97bf2b6))
+* use icon16 in add stage buttons ([2b4e68f](https://github.com/dhis2/capture-app/commit/2b4e68f55bd081c44c474eafc476121ea7a2b910))
+* widget icon button hover state ([52a908f](https://github.com/dhis2/capture-app/commit/52a908f1151d531df0d81b6561a167fa81318b90))
+* widget icon button spacing ([3032451](https://github.com/dhis2/capture-app/commit/3032451e72c7ddcf28b94c71918be860dd21f794))
+
+
+### Features
+
+* [DHIS2-13661][DHIS2-13747][DHIS2-13748][DHIS2-13749][DHIS2-13750] program stages working list ([#3062](https://github.com/dhis2/capture-app/issues/3062)) ([2196870](https://github.com/dhis2/capture-app/commit/219687032ac636ae465ebc5f303dee77588f5677)), closes [#2995](https://github.com/dhis2/capture-app/issues/2995) [#3088](https://github.com/dhis2/capture-app/issues/3088)
+
+## [100.17.6](https://github.com/dhis2/capture-app/compare/v100.17.5...v100.17.6) (2022-11-14)
+
+
+### Bug Fixes
+
+* [DHIS2-13941] adjust notice box for schedule events ([#3084](https://github.com/dhis2/capture-app/issues/3084)) ([8f4237e](https://github.com/dhis2/capture-app/commit/8f4237ec90fa3ae1ecf9e2b5dd2ab3460a16b672))
+
+## [100.17.5](https://github.com/dhis2/capture-app/compare/v100.17.4...v100.17.5) (2022-11-08)
+
+
+### Bug Fixes
+
+* [DHIS2-13665] working lists downloadRequest url ([#3067](https://github.com/dhis2/capture-app/issues/3067)) ([08eb3db](https://github.com/dhis2/capture-app/commit/08eb3dbd9b3fc4ac52459ea3aa316ae1055dbf98))
+
+## [100.17.4](https://github.com/dhis2/capture-app/compare/v100.17.3...v100.17.4) (2022-11-08)
+
+
+### Bug Fixes
+
+* [DHIS2-13720] get image and file subvalues in widget stages ([#3035](https://github.com/dhis2/capture-app/issues/3035)) ([6a88a77](https://github.com/dhis2/capture-app/commit/6a88a77f3824e8b633cdb03347192942efcf4cb8))
+
+## [100.17.3](https://github.com/dhis2/capture-app/compare/v100.17.2...v100.17.3) (2022-10-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([89f20e8](https://github.com/dhis2/capture-app/commit/89f20e880f773454905cba03374b594605336adf))
+
+## [100.17.2](https://github.com/dhis2/capture-app/compare/v100.17.1...v100.17.2) (2022-10-20)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4c59466](https://github.com/dhis2/capture-app/commit/4c5946618bc47bedbf31abd47526209eb9f6824f))
+
+## [100.17.1](https://github.com/dhis2/capture-app/compare/v100.17.0...v100.17.1) (2022-10-17)
+
+
+### Bug Fixes
+
+* [DHIS2-13906] variable names with spaces in rules engine ([92a1c7c](https://github.com/dhis2/capture-app/commit/92a1c7cdf76c0c2e5e6d95585a87d33f6a4a01ba))
+
+# [100.17.0](https://github.com/dhis2/capture-app/compare/v100.16.4...v100.17.0) (2022-10-14)
+
+
+### Features
+
+* [DHIS2-13681] optional decimal places argument for d2:round ([#3020](https://github.com/dhis2/capture-app/issues/3020)) ([c5702b4](https://github.com/dhis2/capture-app/commit/c5702b490e55bce03cbff9cfa11cdc6cf6efd906))
+
 ## [100.16.4](https://github.com/dhis2/capture-app/compare/v100.16.3...v100.16.4) (2022-10-11)
 
 

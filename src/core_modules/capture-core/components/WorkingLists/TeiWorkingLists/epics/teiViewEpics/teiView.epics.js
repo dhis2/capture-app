@@ -58,6 +58,7 @@ export const updateTeiListEpic = (
                 page,
                 pageSize,
                 programId,
+                programStageId: filters?.programStage?.values[0],
                 orgUnitId,
                 filters,
                 sortById,

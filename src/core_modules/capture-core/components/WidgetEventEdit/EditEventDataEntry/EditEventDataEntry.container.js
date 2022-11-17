@@ -1,5 +1,5 @@
 // @flow
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
 import { statusTypes } from 'capture-core/events/statusTypes';
 import { batchActions } from 'redux-batched-actions';
@@ -31,6 +31,8 @@ const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     return {
         ready: !state.activePage.isDataEntryLoading && !eventDetailsSection.loading,
+        enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
+        occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
     };
 };
 

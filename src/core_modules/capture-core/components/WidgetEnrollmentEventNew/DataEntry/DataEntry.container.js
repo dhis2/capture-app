@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback } from 'react';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { useDispatch } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { DataEntryComponent } from './DataEntry.component';
