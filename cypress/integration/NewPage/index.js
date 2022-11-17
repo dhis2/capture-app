@@ -37,7 +37,7 @@ And('you see the registration form for the Person', () => {
         .should('exist');
 
     cy.get('[data-test="create-and-link-button"]')
-        .contains('Save new')
+        .contains('Save person')
         .should('exist');
 
     cy.get('[data-test="registration-page-content"]')
@@ -78,7 +78,7 @@ And('you see a registration form for the Child Programme', () => {
         .should('exist');
 
     cy.get('[data-test="create-and-link-button"]')
-        .contains('Save new')
+        .contains('Save person')
         .should('exist');
 
     cy.get('[data-test="registration-page-content"]')
@@ -373,8 +373,8 @@ And('you fill in a unique first name', () => {
         .blur();
 });
 
-And('you click the save new submit button', () => {
-    cy.contains('Save new')
+And(/^you click the save (.*) submit button$/, (TEType) => {
+    cy.contains(`Save ${TEType}`)
         .click();
 });
 

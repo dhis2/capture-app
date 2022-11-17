@@ -37,7 +37,7 @@ const selectorContentsForTypes = {
     [filterTypesObject.ASSIGNEE]: AssigneeFilter,
 };
 
-const useContents = ({ filterValue, classes, type, options, multiValueFilter, ...passOnProps }) => {
+const useContents = ({ filterValue, classes, type, options, multiValueFilter, isRemovable, ...passOnProps }) => {
     const [disabledUpdate, setUpdateDisabled] = useState(true);
     const [FilterContents, ofTypeOptionSet] = useMemo(() => {
         if (options && options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
@@ -58,6 +58,7 @@ const useContents = ({ filterValue, classes, type, options, multiValueFilter, ..
                 handleCommitValue={() => setUpdateDisabled(false)}
                 disabledUpdate={disabledUpdate}
                 disabledReset={filterValue === undefined}
+                isRemovable={isRemovable}
             />
         );
     }
@@ -80,9 +81,11 @@ const FilterSelectorContentsPlain = ({
     type,
     options,
     multiValueFilter,
+    isRemovable,
     ...passOnProps
 }: Props) => {
-    const contents = useContents({ classes, filterValue, type, options, multiValueFilter, ...passOnProps });
+    const contents =
+        useContents({ classes, filterValue, type, options, multiValueFilter, isRemovable, ...passOnProps });
     return (
         <div className={classes.container} data-test="list-view-filter-contents">
             {contents}

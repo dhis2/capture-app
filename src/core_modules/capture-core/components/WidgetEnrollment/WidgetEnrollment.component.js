@@ -22,18 +22,20 @@ import { dataElementTypes } from '../../metaData';
 import { Actions } from './Actions';
 
 const styles = {
-    icon: {
-        margin: `0 ${spacersNum.dp4}px`,
-    },
     enrollment: {
         padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
     },
     row: {
         display: 'flex',
-        margin: `${spacersNum.dp4}px 0`,
+        alignItems: 'center',
+        margin: `${spacersNum.dp8}px 0`,
+        fontSize: '14px',
+        color: colors.grey900,
+        gap: `${spacersNum.dp4}px`,
     },
-    followup: {
-        margin: spacersNum.dp4,
+    statuses: {
+        display: 'flex',
+        gap: `${spacersNum.dp4}px`,
     },
 };
 
@@ -82,7 +84,7 @@ export const WidgetEnrollmentPlain = ({
                 {loading && <LoadingMaskElementCenter />}
                 {!error && !loading && (
                     <div className={classes.enrollment}>
-                        <div data-test="widget-enrollment-status">
+                        <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag className={classes.followup} negative>
                                     {i18n.t('Follow-up')}
@@ -93,7 +95,7 @@ export const WidgetEnrollmentPlain = ({
 
                         <div className={classes.row} data-test="widget-enrollment-enrollment-date">
                             <span className={classes.icon} data-test="widget-enrollment-icon-calendar">
-                                <IconCalendar16 color={colors.grey700} />
+                                <IconCalendar16 color={colors.grey600} />
                             </span>
                             {getEnrollmentDateLabel(program)}{' '}
                             {convertValueClientToView(
@@ -105,7 +107,7 @@ export const WidgetEnrollmentPlain = ({
                         {program.displayIncidentDate && (
                             <div className={classes.row} data-test="widget-enrollment-incident-date">
                                 <span className={classes.icon}>
-                                    <IconCalendar16 color={colors.grey700} />
+                                    <IconCalendar16 color={colors.grey600} />
                                 </span>
                                 {getIncidentDateLabel(program)}{' '}
                                 {convertValueClientToView(
@@ -117,7 +119,7 @@ export const WidgetEnrollmentPlain = ({
 
                         <div className={classes.row} data-test="widget-enrollment-orgunit">
                             <span className={classes.icon} data-test="widget-enrollment-icon-orgunit">
-                                <IconDimensionOrgUnit16 color={colors.grey700} />
+                                <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
                             {i18n.t('Started at {{orgUnitName}}', {
                                 orgUnitName: enrollment.orgUnitName,
@@ -127,7 +129,7 @@ export const WidgetEnrollmentPlain = ({
 
                         <div className={classes.row} data-test="widget-enrollment-owner-orgunit">
                             <span className={classes.icon} data-test="widget-enrollment-icon-owner-orgunit">
-                                <IconDimensionOrgUnit16 color={colors.grey700} />
+                                <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
                             {i18n.t('Owned by {{ownerOrgUnit}}', {
                                 ownerOrgUnit: ownerOrgUnit.displayName,
@@ -136,7 +138,7 @@ export const WidgetEnrollmentPlain = ({
 
                         <div className={classes.row} data-test="widget-enrollment-last-update">
                             <span className={classes.icon} data-test="widget-enrollment-icon-clock">
-                                <IconClock16 color={colors.grey700} />
+                                <IconClock16 color={colors.grey600} />
                             </span>
                             {getLastUpdatedAt(serverTimeZoneId, enrollment)}
                         </div>
@@ -144,7 +146,7 @@ export const WidgetEnrollmentPlain = ({
                         {enrollment.geometry && (
                             <div className={classes.row}>
                                 <span className={classes.icon} data-test="widget-enrollment-icon-clock">
-                                    <IconLocation16 color={colors.grey700} />
+                                    <IconLocation16 color={colors.grey600} />
                                 </span>
                                 {convertValueClientToView(
                                     convertValueServerToClient(enrollment.geometry.coordinates, geometryType),
