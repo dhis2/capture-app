@@ -878,12 +878,6 @@ msgstr "Re-enroll"
 msgid "all programs"
 msgstr "all programs"
 
-msgid "If none of search results match, you can create new "
-msgstr "If none of search results match, you can create new "
-
-msgid "Create new"
-msgstr "Create new"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -893,6 +887,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Search in all programs"
+
+msgid "If none of search results match, you can create a new "
+msgstr "If none of search results match, you can create a new "
+
+msgid "Create new"
+msgstr "Create new"
 
 msgid "Saved lists in this program"
 msgstr "Saved lists in this program"

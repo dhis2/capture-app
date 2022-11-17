@@ -32,6 +32,7 @@ export type DispatchersFromRedux = {|
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string, page: string, resultsPageSize: number |}) => void,
   startFallbackSearch: ({| programId: string, formId: string, resultsPageSize: number, page?: ?number |}) => void,
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page: string, resultsPageSize: number |}) => void,
+  handleCreateNew: () => void
 |}
 
 export type Props = {|
