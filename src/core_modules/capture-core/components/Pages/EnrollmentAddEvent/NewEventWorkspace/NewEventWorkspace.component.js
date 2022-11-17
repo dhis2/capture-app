@@ -103,6 +103,7 @@ const NewEventWorkspacePlain = ({
                         onSaveErrorActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR}
                         onSave={onSave}
                         onCancel={onCancel}
+                        hideDueDate={stage?.hideDueDate}
                     />}
                 </div>
             </Widget>

@@ -1,5 +1,6 @@
 // @flow
 import {
+    withHideCompatibility,
     ViewModeField,
 } from '../../../../FormFields/New';
 import {
@@ -10,6 +11,8 @@ import customFormStyles from './ViewModeFieldCustomForm.module.css';
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
 export const ViewModeFieldForCustomForm =
-withCustomElementContainer(getContainerClass)(
-    ViewModeField,
+withHideCompatibility()(
+    withCustomElementContainer(getContainerClass)(
+        ViewModeField,
+    ),
 );

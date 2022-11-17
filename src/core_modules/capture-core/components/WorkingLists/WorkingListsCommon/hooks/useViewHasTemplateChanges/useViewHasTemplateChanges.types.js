@@ -31,4 +31,5 @@ export type Input = {|
     columns: Columns,
     sortById?: string,
     sortByDirection?: string,
+    programStage?: string,
 |};

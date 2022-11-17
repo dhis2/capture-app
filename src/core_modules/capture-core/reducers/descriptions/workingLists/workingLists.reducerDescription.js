@@ -487,6 +487,13 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
                 })),
         };
     },
+    [workingListsCommonActionTypes.LIST_COLUMN_ORDER_RESET]: (state, action) => {
+        const { storeId } = action.payload;
+        return {
+            ...state,
+            [storeId]: undefined,
+        };
+    },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
         newState[action.payload.listId] = [...action.payload.columnOrder];
@@ -590,6 +597,21 @@ export const workingListsStickyFiltersDesc = createReducerDescription({
             [storeId]: {
                 filtersWithValueOnInit,
                 userSelectedFilters: undefined,
+            },
+        };
+    },
+    [workingListsCommonActionTypes.FILTER_REMOVE]: (state, action) => {
+        const { itemId, includeFilters, storeId } = action.payload;
+        const { [itemId]: filtersWithValueOnInitToRemove, ...filtersWithValueOnInit }
+            = includeFilters || {};
+        const { [itemId]: userSelectedFilterToRemove, ...userSelectedFilters }
+            = state[storeId].userSelectedFilters || {};
+
+        return {
+            ...state,
+            [storeId]: {
+                filtersWithValueOnInit,
+                userSelectedFilters,
             },
         };
     },

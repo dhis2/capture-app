@@ -19,6 +19,7 @@ export class ProgramStage {
     _autoGenerateEvent: boolean;
     _openAfterEnrollment: boolean;
     _generatedByEnrollmentDate: boolean;
+    _hideDueDate: boolean;
     _reportDateToUse: string;
     _minDaysFromStart: number;
     _icon: Icon | void;
@@ -94,6 +95,14 @@ export class ProgramStage {
 
     set autoGenerateEvent(autoGenerate: boolean) {
         this._autoGenerateEvent = autoGenerate;
+    }
+
+    get hideDueDate(): boolean {
+        return this._hideDueDate;
+    }
+
+    set hideDueDate(hideDueDate: boolean) {
+        this._hideDueDate = hideDueDate;
     }
 
     get generatedByEnrollmentDate(): boolean {

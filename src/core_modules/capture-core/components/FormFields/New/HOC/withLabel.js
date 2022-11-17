@@ -75,7 +75,7 @@ type Props = {
 type HOCParams = {
     onGetUseVerticalOrientation?: ?(props: Object) => boolean,
     onGetCustomFieldLabeClass?: ?(props: Object) => string,
-    customTooltip?: ?string
+    customTooltip?: ?(props: Object) => string
 };
 
 export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<any>) => {
@@ -158,7 +158,7 @@ export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.Comp
                     requiredClass={classes.required}
                 />
                 {customTooltip ?
-                    <Tooltip content={customTooltip}>
+                    <Tooltip content={customTooltip()}>
                         <div className={classes.tooltipIcon}>
                             <IconInfo16 color={colors.grey600} />
                         </div>

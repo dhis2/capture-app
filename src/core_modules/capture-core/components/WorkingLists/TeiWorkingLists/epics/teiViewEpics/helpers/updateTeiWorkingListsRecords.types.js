@@ -7,6 +7,7 @@ export type Input = {|
     page: number,
     pageSize: number,
     programId: string,
+    programStageId?: string,
     orgUnitId: string,
     filters: FiltersData,
     sortById: string,

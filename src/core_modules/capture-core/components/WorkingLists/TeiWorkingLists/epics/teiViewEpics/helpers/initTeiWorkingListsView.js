@@ -35,9 +35,9 @@ export const initTeiWorkingListsViewAsync = async ({
         filtersOnlyMetaForDataFetching,
         querySingleResource,
         absoluteApiPath })
-        .then(({ teis, request }) =>
+        .then(({ recordContainers, request }) =>
             initListViewSuccess(storeId, {
-                recordContainers: teis,
+                recordContainers,
                 pagingData: {
                     rowsPerPage: pageSize,
                     currentPage: page,

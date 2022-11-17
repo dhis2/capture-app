@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
+"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -511,6 +511,9 @@ msgstr "تحديث"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr "إزالة عامل التصفية"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} إلى {{toDate}}"
 
@@ -528,6 +531,9 @@ msgstr "أقل من أو يساوي"
 
 msgid "More filters"
 msgstr "عوامل تصفية أكثر"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "عدد الصفوف لكل صفحة"
@@ -755,7 +761,7 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
-msgid "Save new"
+msgid "Save {{trackedEntityName}}"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -1130,12 +1136,12 @@ msgid "Schedule date info"
 msgstr ""
 
 msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+"The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -1279,6 +1285,9 @@ msgstr "حالة التسجيل"
 
 msgid "Assigned to"
 msgstr "مسندة إلى"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
 
 msgid "Registration Date"
 msgstr "تاريخ التسجيل"
