@@ -1,3 +1,10 @@
+# [100.20.0](https://github.com/dhis2/capture-app/compare/v100.19.0...v100.20.0) (2022-11-17)
+
+
+### Features
+
+* [DHIS2-9666] Create new TEI when none of the results match  ([#3019](https://github.com/dhis2/capture-app/issues/3019)) ([47ed9e7](https://github.com/dhis2/capture-app/commit/47ed9e75dc8299b62457aad23a3bf560bad3d45c))
+
 # [100.19.0](https://github.com/dhis2/capture-app/compare/v100.18.3...v100.19.0) (2022-11-17)
 
 
