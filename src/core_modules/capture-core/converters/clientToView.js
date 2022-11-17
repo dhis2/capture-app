@@ -78,7 +78,8 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
 
-export function convertDateWithTimeForView(rawValue: string): string {
+export function convertDateWithTimeForView(rawValue?: ?string): string {
+    if (!rawValue) { return ''; }
     if (!moment(rawValue).hours() && !moment(rawValue).minutes()) {
         return convertDateForView(rawValue);
     }
