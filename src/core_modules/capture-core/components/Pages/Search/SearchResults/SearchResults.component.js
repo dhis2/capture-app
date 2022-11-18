@@ -5,6 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, colors } from '@dhis2/ui';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { CardList } from '../../../CardList';
 import { withNavigation } from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
@@ -17,6 +18,7 @@ import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { Widget } from '../../../Widget';
+import { useLocationQuery } from '../../../../utils/routing';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -51,6 +53,7 @@ const CardListButtons = withStyles(buttonStyles)(
         orgUnitId,
         enrollmentType,
         programName,
+        hasEnrollmentButton,
         classes,
     }) => {
         const deriveNavigationButtonState =
@@ -66,7 +69,8 @@ const CardListButtons = withStyles(buttonStyles)(
               }
           };
         const dispatch = useDispatch();
-
+        const history = useHistory();
+        const { programId } = useLocationQuery();
         const navigationButtonsState = deriveNavigationButtonState(enrollmentType);
 
         const onHandleClick = () => {
@@ -89,6 +93,12 @@ const CardListButtons = withStyles(buttonStyles)(
             }
         };
 
+        const onEnrollInCurrentProgram = () => {
+            history.push(`/new?orgUnitId=${orgUnitId}&programId=${currentSearchScopeId}&teiId=${id}`);
+        };
+
+        const { programName: currentScopeProgramName } = useScopeInfo(programId);
+
         return (
             <>
                 <Button
@@ -98,6 +108,17 @@ const CardListButtons = withStyles(buttonStyles)(
                 >
                     {i18n.t('View dashboard')}
                 </Button>
+                {
+                    currentSearchScopeType === searchScopes.PROGRAM && hasEnrollmentButton &&
+                    <Button
+                        small
+                        className={classes.buttonMargin}
+                        dataTest="enroll-in-current-program"
+                        onClick={onEnrollInCurrentProgram}
+                    >
+                        {i18n.t('Enroll in {{ scopeName }}', { scopeName: currentScopeProgramName })}
+                    </Button>
+                }
                 {
                     navigationButtonsState === availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON &&
                     <Button
@@ -246,6 +267,7 @@ export const SearchResultsIndex = ({
                     id={item.id}
                     orgUnitId={item.tei.orgUnit}
                     enrollmentType={enrollmentType}
+                    hasEnrollmentButton={currentProgramId !== currentScopeProgramId}
                 />)}
             />
             <div className={classes.pagination}>
