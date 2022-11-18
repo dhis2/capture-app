@@ -1074,6 +1074,29 @@ To go to Enrollment Overview page you can:
 This is the form where you can modify the event details before saving. In the header you can see the stage name and icon.
 ![](resources/images/new-event-widget-form-header.png)
 
+
+### Scheduled date in edit event form
+If an event has the status Scheduled or Overdue, you will be able to see the **Report** and **Schedule** tab. 
+
+![](resources/images/enrollment-edit-event-schedule-date-1.png)
+
+
+In the **Report** tab, the scheduled date field will still be shown, but will be greyed out, and there will be an icon next to it with a tooltip saying “Go to **Schedule** tab to reschedule this event”.
+
+In the **Schedule** tab, the similar information about scheduling an event as in New event workspace will be shown. You will be able to edit the schedule date and save the change by clicking **Schedule** button.
+
+![](resources/images/enrollment-edit-event-schedule-date.png)
+
+If an active event has a scheduled date before becoming active or a completed event has scheduled date, this date should still be shown in the workspace. 
+It’ll be locked with an icon next to it and a tooltip saying “Scheduled date cannot be changed for active/completed events”. 
+
+#### Scheduled date with Hide due date enabled
+If the flag “Hide due date” in the Maintenance configuration is enabled, scheduled date will not be shown in the form. 
+
+However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from start" that has been configured in Maintenance, and this can not be changed. 
+In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
+
+
 #### View mode
 
 When the form is in the view mode the title of the page will appear as: `Enrollment: View Event`. You can see in the page all the information related to the event. Click the `Edit event` button to switch to the edit mode. 
