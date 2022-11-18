@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2022\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -897,12 +897,6 @@ msgstr "Registrer på nytt"
 msgid "all programs"
 msgstr "alle programmer"
 
-msgid "If none of search results match, you can create new "
-msgstr "Hvis ingen av søkeresultatene samsvarer, kan du opprette ny"
-
-msgid "Create new"
-msgstr "Opprett ny"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -912,6 +906,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Søk i alle programmer"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Opprett ny"
 
 msgid "Saved lists in this program"
 msgstr "Lagrede lister i dette programmet"
@@ -1146,6 +1146,9 @@ msgstr "Ja, slett hendelse"
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "Gå til \"Planlegg\"-fanen for å endre planlagt dato for denne hendelsen"
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Hendelse fullført"
 
@@ -1154,6 +1157,9 @@ msgstr "Tilbake til alle faser og hendelser"
 
 msgid "Schedule date info"
 msgstr "Informasjon for planlagt dato"
+
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
+msgstr ""
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
