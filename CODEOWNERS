@@ -2,5 +2,5 @@
 *        @dhis2/team-tracker
 
 # code owners for functionality
-/src/    @dhis2/team-tracker @dhis2/team-qa
-/docs/   @dhis2/team-tracker @dhis2/team-qa
+/src/    @dhis2/team-tracker
+/docs/   @dhis2/team-tracker @dhis2/team-tracker-docs @dhis2/team-qa
