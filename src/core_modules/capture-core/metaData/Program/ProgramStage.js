@@ -18,6 +18,7 @@ export class ProgramStage {
     _enableUserAssignment: boolean;
     _autoGenerateEvent: boolean;
     _openAfterEnrollment: boolean;
+    _allowGenerateNextVisit: boolean;
     _generatedByEnrollmentDate: boolean;
     _hideDueDate: boolean;
     _reportDateToUse: string;
@@ -95,6 +96,14 @@ export class ProgramStage {
 
     set autoGenerateEvent(autoGenerate: boolean) {
         this._autoGenerateEvent = autoGenerate;
+    }
+
+    get allowGenerateNextVisit(): boolean {
+        return this._allowGenerateNextVisit;
+    }
+
+    set allowGenerateNextVisit(generateNextVisit: boolean) {
+        this._allowGenerateNextVisit = generateNextVisit;
     }
 
     get hideDueDate(): boolean {

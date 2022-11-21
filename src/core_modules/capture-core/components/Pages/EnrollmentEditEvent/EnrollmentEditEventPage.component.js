@@ -98,6 +98,7 @@ const EnrollmentEditEventPagePain = ({
                             onGoBack={onGoBack}
                             programId={programId}
                             orgUnitId={orgUnitId}
+                            teiId={teiId}
                             enrollmentId={enrollmentId}
                             eventStatus={eventStatus}
                             initialScheduleDate={scheduleDate}

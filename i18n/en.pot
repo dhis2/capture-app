@@ -325,6 +325,18 @@ msgstr "Indicators"
 msgid "Warnings"
 msgstr "Warnings"
 
+msgid "Generate new event"
+msgstr "Generate new event"
+
+msgid "Do you want to create another event?"
+msgstr "Do you want to create another event?"
+
+msgid "No, cancel"
+msgstr "No, cancel"
+
+msgid "Yes, create new event"
+msgstr "Yes, create new event"
+
 msgid "Warnings found"
 msgstr "Warnings found"
 
@@ -564,9 +576,6 @@ msgstr "Use new Enrollment dashboard for {{programName}}"
 
 msgid "Opt in for {{programName}}"
 msgstr "Opt in for {{programName}}"
-
-msgid "No, cancel"
-msgstr "No, cancel"
 
 msgid "Yes, opt in"
 msgstr "Yes, opt in"

@@ -4,3 +4,4 @@ export { useTrackedEntityTypesWithCorrelatedPrograms } from './useTrackedEntityT
 export { useCurrentTrackedEntityTypeId } from './useCurrentTrackedEntityTypeId';
 export { useEnrollmentEditEventPageMode } from './useEnrollmentEditEventPageMode';
 export { useRulesEngineOrgUnit } from './useRulesEngineOrgUnit';
+export { useAvailableProgramStages } from './useAvailableProgramStages';

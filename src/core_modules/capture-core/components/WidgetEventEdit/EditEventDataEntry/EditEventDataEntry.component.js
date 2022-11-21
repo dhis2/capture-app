@@ -37,6 +37,7 @@ import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes'
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
+import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
 import { actionTypes } from './editEventDataEntry.actions';
 
 const tabMode = Object.freeze({
@@ -313,12 +314,14 @@ const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(Re
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
 const DeletableDataEntry = withDeleteButton()(CompletableDataEntry);
-const DataEntryWrapper = withBrowserBackWarning()(DeletableDataEntry);
+const AskToCreateNewDataEntry = withAskToCreateNew()(DeletableDataEntry);
+const DataEntryWrapper = withBrowserBackWarning()(AskToCreateNewDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,
     orgUnit: OrgUnit,
     programId: string,
+    itemId: string,
     initialScheduleDate?: string,
     onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
@@ -327,6 +330,8 @@ type Props = {
     onHandleScheduleSave: (eventData: Object) => void,
     onDelete: () => void,
     onCancel: () => void,
+    onConfirmCreateNew: (itemId: string) => void,
+    onCancelCreateNew: (itemId: string) => void,
     classes: {
         dataEntryContainer: string,
         fieldLabelMediaBased?: ?string,
@@ -336,6 +341,7 @@ type Props = {
     onCancelEditEvent?: () => void,
     eventStatus?: string,
     enrollmentId?: string,
+    isCompleted?: boolean,
 };
 
 type State = {
