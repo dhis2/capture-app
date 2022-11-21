@@ -1161,6 +1161,11 @@ To navigate back to the enrollment overview, click the **Cancel without saving**
 
 ![](resources/images/enrollment-event-new-stage-selection-list.png)
 
+### Ask user to create new event when stage is complete (allowGenerateNextVisit)
+If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after user clicks the **Complete** button or check the **Complete** event checkbox and click save. 
+User can choose the button **Yes, create new event** to navigate to the Enrollment: New Event page or **No, cancel** to navigate back to enrollment dashboard. 
+If there is only one possible stage available, the user should be saved a click and taken directly to the New event workspace for that stage.
+
 ### Schedule event widget form
 Instead of reporting an event the user can select to schedule an event later. This is done with a scheduled date. The dialog will open with a suggested scheduled date, and this date is determined by a set of rules from program stage configuration and program configuration.
 
