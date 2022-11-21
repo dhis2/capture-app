@@ -94,6 +94,16 @@ And('you can see the first page of the results', () => {
         .should('exist');
 });
 
+
+And('you can see the first page of the results from all programs', () => {
+    cy.get('[data-test="search-results-top"]').should('have.length', 2);
+
+    cy.get('[data-test="search-results-top"]')
+        .eq(1)
+        .contains('Results found in all programs')
+        .should('exist');
+});
+
 Then('all pagination is disabled', () => {
     cy.get('[data-test="pagination"]')
         .contains('Page 1')

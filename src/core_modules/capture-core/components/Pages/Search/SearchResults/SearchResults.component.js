@@ -70,7 +70,7 @@ const CardListButtons = withStyles(buttonStyles)(
           };
         const dispatch = useDispatch();
         const history = useHistory();
-        const { programId } = useLocationQuery();
+        const { programId: scopeProgramId, orgUnitId: scopeOrgUnitId } = useLocationQuery();
         const navigationButtonsState = deriveNavigationButtonState(enrollmentType);
 
         const onHandleClick = () => {
@@ -94,10 +94,10 @@ const CardListButtons = withStyles(buttonStyles)(
         };
 
         const onEnrollInCurrentProgram = () => {
-            history.push(`/new?orgUnitId=${orgUnitId}&programId=${currentSearchScopeId}&teiId=${id}`);
+            history.push(`/new?orgUnitId=${scopeOrgUnitId}&programId=${scopeProgramId}&teiId=${id}`);
         };
 
-        const { programName: currentScopeProgramName } = useScopeInfo(programId);
+        const { programName: currentScopeProgramName } = useScopeInfo(scopeProgramId);
 
         return (
             <>

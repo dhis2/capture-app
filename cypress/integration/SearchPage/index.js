@@ -378,6 +378,10 @@ Given('you are in the search page with the Child Programme and org unit being pr
     cy.visit('/#/search?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
+Given(/^you are in the search page with the program (.*) and org unit (.*) being preselected from the url$/, (programId, orgUnitId) => {
+    cy.visit(`/#/search?programId=${programId}&orgUnitId=${orgUnitId}`);
+});
+
 When('you click the back button', () => {
     cy.get('[data-test="back-button"]')
         .click();
@@ -415,4 +419,26 @@ Then('you should be taken to the registration page without program with prefille
     cy.get('[data-test="capture-ui-input"]').eq(1).should('have.value', 'Sara');
     cy.get('[data-test="registration-page-content"]').contains('Last name').should('exist');
     cy.get('[data-test="capture-ui-input"]').eq(2).should('have.value', 'Fis');
+});
+
+Then(/^you should be taken to the main page with org unit (.*) and program (.*) preselected$/,
+    (orgUnitId, programId) => {
+        cy.url()
+            .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=${orgUnitId}&programId=${programId}`);
+    });
+
+And(/^you click button to enroll the program (.*)$/, (programName) => {
+    cy.get('[data-test="search-results-list"]').eq(1).within(() => {
+        cy.get('[data-test="card-list-item"]')
+            .contains('Program name: Child Programme')
+            .should('exist');
+        cy.get('[data-test="enroll-in-current-program"]')
+            .contains(`Enroll in ${programName}`)
+            .click();
+    });
+});
+
+Then(/^you should be taken to create new page with org unit (.*), program (.*), tei (.*) preselected$/, (orgUnitId, programId, teiId) => {
+    cy.url()
+        .should('eq', `${Cypress.config().baseUrl}/#/new?orgUnitId=${orgUnitId}&programId=${programId}&teiId=${teiId}`);
 });
