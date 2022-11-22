@@ -1,3 +1,15 @@
+# [100.21.0](https://github.com/dhis2/capture-app/compare/v100.20.1...v100.21.0) (2022-11-22)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#3118](https://github.com/dhis2/capture-app/issues/3118)) ([a6918b3](https://github.com/dhis2/capture-app/commit/a6918b399bced32c3dcaca5f5ee223a071f7aa07))
+
+
+### Features
+
+* [DHIS2-13801] ask to create new after completing the event ([#3065](https://github.com/dhis2/capture-app/issues/3065)) ([45bf1e0](https://github.com/dhis2/capture-app/commit/45bf1e0fbf8f9deee3f387399d454bb9bad0875d))
+
 ## [100.20.1](https://github.com/dhis2/capture-app/compare/v100.20.0...v100.20.1) (2022-11-18)
 
 
