@@ -1,3 +1,10 @@
+## [100.21.1](https://github.com/dhis2/capture-app/compare/v100.21.0...v100.21.1) (2022-11-22)
+
+
+### Bug Fixes
+
+* [DHIS2-13968] report date and enrollment date without hours ([#3111](https://github.com/dhis2/capture-app/issues/3111)) ([3e719a5](https://github.com/dhis2/capture-app/commit/3e719a5dc591da9c1de4e02d7f9209e8dc1f25f9))
+
 # [100.21.0](https://github.com/dhis2/capture-app/compare/v100.20.1...v100.21.0) (2022-11-22)
 
 
