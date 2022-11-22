@@ -321,6 +321,18 @@ msgstr "指标"
 msgid "Warnings"
 msgstr "错误"
 
+msgid "Generate new event"
+msgstr "生成新事件"
+
+msgid "Do you want to create another event?"
+msgstr "你要创建另外的事件？"
+
+msgid "No, cancel"
+msgstr "不，取消"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "发现警告"
 
@@ -560,9 +572,6 @@ msgstr "为 {{programName}} 使用新的注册仪表板"
 
 msgid "Opt in for {{programName}}"
 msgstr "选择加入 {{programName}}"
-
-msgid "No, cancel"
-msgstr "不，取消"
 
 msgid "Yes, opt in"
 msgstr "是的，选择加入"

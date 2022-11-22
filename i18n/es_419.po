@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-10T09:42:51.323Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jaime Bosque <jaime.bosque@dhis2.org>, 2022\n"
 "Language-Team: Spanish (Latin America) (https://www.transifex.com/hisp-uio/teams/100509/es_419/)\n"
@@ -316,6 +316,18 @@ msgstr "Indicadores"
 msgid "Warnings"
 msgstr ""
 
+msgid "Generate new event"
+msgstr "Generar nuevo evento"
+
+msgid "Do you want to create another event?"
+msgstr "¿Quiere crear un nuevo evento?"
+
+msgid "No, cancel"
+msgstr ""
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr ""
 
@@ -496,6 +508,9 @@ msgstr "Actualizar"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
@@ -512,6 +527,9 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "More filters"
+msgstr ""
+
+msgid "Stage filters"
 msgstr ""
 
 msgid "Rows per page"
@@ -548,9 +566,6 @@ msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
 
 msgid "Opt in for {{programName}}"
-msgstr ""
-
-msgid "No, cancel"
 msgstr ""
 
 msgid "Yes, opt in"
@@ -860,12 +875,6 @@ msgstr ""
 msgid "all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Crear nuevo"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -873,6 +882,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr ""
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Crear nuevo"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1103,6 +1118,9 @@ msgstr ""
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1110,6 +1128,9 @@ msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Schedule date info"
+msgstr ""
+
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
 
 msgid ""
@@ -1255,6 +1276,9 @@ msgid "Enrollment status"
 msgstr "Estado de la inscripción."
 
 msgid "Assigned to"
+msgstr ""
+
+msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
 msgid "Registration Date"
