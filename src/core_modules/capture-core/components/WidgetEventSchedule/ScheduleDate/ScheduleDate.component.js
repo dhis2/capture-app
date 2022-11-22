@@ -25,8 +25,9 @@ const ScheduleDatePlain = ({
     suggestedScheduleDate,
     eventCountInOrgUnit,
     classes,
+    hideDueDate,
 }: Props) => (<>
-    <div className={classes.container}>
+    {!hideDueDate && <div className={classes.container}>
         <DateField
             value={scheduleDate ? convertDateObjectToDateFormatString(new Date(scheduleDate)) : ''}
             width="100%"
@@ -36,12 +37,13 @@ const ScheduleDatePlain = ({
             onRemoveFocus={() => { }}
             onBlur={(e) => { setScheduleDate(convertStringToDateFormat(e)); }}
         />
-    </div>
+    </div>}
     <InfoBox
         scheduleDate={scheduleDate}
         suggestedScheduleDate={suggestedScheduleDate}
         eventCountInOrgUnit={eventCountInOrgUnit}
         orgUnitName={orgUnit?.name}
+        hideDueDate={hideDueDate}
     />
 </>);
 

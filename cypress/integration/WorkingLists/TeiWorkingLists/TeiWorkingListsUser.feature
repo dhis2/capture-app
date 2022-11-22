@@ -128,3 +128,48 @@ When you save the list with the name My custom list
 Then the new custom TEI working list is created
 When you delete the name My custom list
 Then the custom TEI is deleted
+
+@v>=39
+Scenario: The user can open and select a program stage filter
+Given you open the main page with Ngelehun and WHO RMNCH Tracker context
+When you open the program stage filters from the more filters dropdown menu
+When you select the First antenatal care visit program stage
+And you apply the current filter
+And you open the column selector
+And you select a data element columns and save from the column selector
+Then you see data elements specific filters and columns
+
+@v>=39
+Scenario: While in a program stage working list, the user can filter by both TEA and data elements 
+Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
+When you set the enrollment status filter to active
+And you apply the current filter
+And you set the event status filter to completed
+And you apply the current filter
+And you set the first name filter to Urzula
+And you apply the current filter
+And you set the WHOMCH Smoking filter to No
+And you apply the current filter
+Then the list should display 1 row of data
+
+@v>=39
+Scenario: While in a program stage working list, the user can sort by both TEA and data elements 
+Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
+And you set the first name filter to u
+And you apply the current filter
+When you click the last name column header
+Then the sort arrow should indicate ascending order
+And the list should display data ordered ascendingly by last name
+When you click the WHOMCH Smoking column header
+Then the sort arrow should indicate descending order
+And the list should display data ordered ascendingly by WHOMCH Smoking
+
+@v>=39
+Scenario: The user can remove the program stage filter
+Given you open the main page with Ngelehun and WHO RMNCH Tracker context
+When you open the program stage filters from the more filters dropdown menu
+And you select the First antenatal care visit program stage
+And you apply the current filter
+Then you see program stage working list events
+When you remove the program stage filter
+Then you don't see program stage working list events

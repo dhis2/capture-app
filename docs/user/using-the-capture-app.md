@@ -692,6 +692,16 @@ If the fallback can not be done, you will be presented with a modal to go **Back
 
 ![](resources/images/search-by-attributes-fallback-overview-0.png)
 
+#### Create new **Tracked entity instance**
+
+When none of the results match, you can create a new user by clicking **Create new** button on the bottom of the search page. 
+
+Based on the search domain, you will be navigated to the registration of the selected **Tracked entity type**, with or without program enrollment preselected. 
+The search terms that you typed in before will be prefilled in the registration form.
+
+![](resources/images/search-page-create-new-tei.png)
+
+
 ### In Tracked entity type scope
 
 1. Open the **Capture** app.
@@ -788,6 +798,16 @@ Click the **gear** icon in the top right corner of the list. Tick the checkboxes
 You will find the predefined list views above the filters for the list. Click to load a view. 
 
 ![](resources/images/tei_list_predefined_views.png)
+
+## Tracker program stage working list
+
+You can show data elements from a single stage in a working list. Select the "Program stage" option from the "More filters" dropdown, then choose a program stage.
+
+![](resources/images/program_stage_button.png)
+
+![](resources/images/program_stage_working_list.png)
+
+The list can be [filtered](#filter-the-list), [sorted](#sort-the-list) and [modified](#modify-the-list-layout) in the same way as other working lists.
 
 ## Implementer / administrator info { #implementer_info } 
 
@@ -975,7 +995,7 @@ The enrollment comment widget displays comments and allows addition of comments,
 
 By clicking in the text field, you will be able to enter new text and see action buttons **Save comment** and **Cancel**. Note that Enrollment comments are attributed to a user and cannot be deleted. 
 
-#### Tracked entity instance profile widget
+### Tracked entity instance profile widget
 
 On the enrollment dashboard, you can view the tracked entity instance profile widget. Inside the profile widget you can view the key attributes values. 
 
@@ -1073,6 +1093,29 @@ To go to Enrollment Overview page you can:
 ### New event widget form
 This is the form where you can modify the event details before saving. In the header you can see the stage name and icon.
 ![](resources/images/new-event-widget-form-header.png)
+
+
+### Scheduled date in edit event form
+If an event has the status Scheduled or Overdue, you will be able to see the **Report** and **Schedule** tab. 
+
+![](resources/images/enrollment-edit-event-schedule-date-1.png)
+
+
+In the **Report** tab, the scheduled date field will still be shown, but will be greyed out, and there will be an icon next to it with a tooltip saying “Go to **Schedule** tab to reschedule this event”.
+
+In the **Schedule** tab, the similar information about scheduling an event as in New event workspace will be shown. You will be able to edit the schedule date and save the change by clicking **Schedule** button.
+
+![](resources/images/enrollment-edit-event-schedule-date.png)
+
+If an active event has a scheduled date before becoming active or a completed event has scheduled date, this date should still be shown in the workspace. 
+It’ll be locked with an icon next to it and a tooltip saying “Scheduled date cannot be changed for active/completed events”. 
+
+#### Scheduled date with Hide due date enabled
+If the flag “Hide due date” in the Maintenance configuration is enabled, scheduled date will not be shown in the form. 
+
+However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from start" that has been configured in Maintenance, and this can not be changed. 
+In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
+
 
 #### View mode
 

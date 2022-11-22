@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo } from 'react';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { convertToEventFilterEventQueryCriteria } from '../helpers/eventFilters';
 import { EventWorkingListsViewMenuSetup } from '../ViewMenuSetup';
 import type { Props } from './eventWorkingListsTemplateSetup.types';
