@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -331,6 +331,18 @@ msgstr "المؤشرات"
 msgid "Warnings"
 msgstr "تحذيرات"
 
+msgid "Generate new event"
+msgstr "توليد حدث جديد"
+
+msgid "Do you want to create another event?"
+msgstr "هل تريد إنشاء حدث جديد"
+
+msgid "No, cancel"
+msgstr "لا، الغاء"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "تم العثور على إشعارات تحذيرية"
 
@@ -570,9 +582,6 @@ msgstr ""
 
 msgid "Opt in for {{programName}}"
 msgstr ""
-
-msgid "No, cancel"
-msgstr "لا، الغاء"
 
 msgid "Yes, opt in"
 msgstr ""
@@ -881,12 +890,6 @@ msgstr "إعادة التسجيل"
 msgid "all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create new "
-msgstr ""
-
-msgid "Create new"
-msgstr "إنشاء جديد"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -896,6 +899,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "البحث في جميع البرامج"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "إنشاء جديد"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1126,6 +1135,9 @@ msgstr ""
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr "الحدث مكتمل"
 
@@ -1133,6 +1145,9 @@ msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Schedule date info"
+msgstr ""
+
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
 
 msgid ""

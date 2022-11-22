@@ -330,6 +330,18 @@ msgstr "Indikátory"
 msgid "Warnings"
 msgstr "Varování"
 
+msgid "Generate new event"
+msgstr "Generovat novou událost"
+
+msgid "Do you want to create another event?"
+msgstr "Chcete vytvořit další událost?"
+
+msgid "No, cancel"
+msgstr "Ne, zrušit"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "Nalezena varování"
 
@@ -569,9 +581,6 @@ msgstr "Použít nový ovládací panel zápisu pro {{programName}}"
 
 msgid "Opt in for {{programName}}"
 msgstr "Přihlásit se do {{programName}}"
-
-msgid "No, cancel"
-msgstr "Ne, zrušit"
 
 msgid "Yes, opt in"
 msgstr "Ano, přihlásit se"
