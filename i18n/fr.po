@@ -1,6 +1,5 @@
 # 
 # Translators:
-# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2021
 # Yayra Gomado <ygomado@hispwca.org>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # Edem Kossi <ekossi@hispwca.org>, 2022
@@ -9,13 +8,14 @@
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
 # Bram Piot <bram.piot@gmail.com>, 2022
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Bram Piot <bram.piot@gmail.com>, 2022\n"
+"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2022\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -361,7 +361,7 @@ msgid "No, cancel"
 msgstr "Non, annuler"
 
 msgid "Yes, create new event"
-msgstr ""
+msgstr "Oui, créer un nouvel évènement"
 
 msgid "Warnings found"
 msgstr "Avertissements trouvés"
