@@ -1,9 +1,10 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, flatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
+import { EMPTY, of } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
@@ -37,6 +38,8 @@ import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString'
 import {
     updateEventContainer,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { navigateToEnrollmentOverview } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
 
 const getDataEntryId = (event): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
@@ -188,5 +191,29 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
             const params = { enrollmentId };
             dependencies.history.push(`/enrollment?${buildUrlQueryString(params)}`);
             return startDeleteEventDataEntry(eventId, params);
+        }));
+
+export const startCreateNewAfterCompletingEpic = (
+    action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+    action$.pipe(
+        ofType(
+            actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
+            newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING,
+        ),
+        flatMap((action) => {
+            const { isCreateNew, enrollmentId, orgUnitId, programId, teiId, availableProgramStages } = action.payload;
+            const params = { enrollmentId, orgUnitId, programId, teiId };
+
+            if (isCreateNew) {
+                const finalParams = availableProgramStages.length === 1 ?
+                    { ...params, stageId: availableProgramStages[0].id } : params;
+
+                setTimeout(() => {
+                    history.push(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
+                }, 0);
+
+                return EMPTY;
+            }
+            return of(navigateToEnrollmentOverview(params));
         }));
 

@@ -15,14 +15,14 @@ import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefaul
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
-import { convertValue } from '../../../converters/clientToView';
+import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 
 const getEventDate = (event) => {
-    const eventDataConvertValue = convertValue(event?.occurredAt || event?.scheduledAt, dataElementTypes.DATETIME);
+    const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
     return eventDate;
 };

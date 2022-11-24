@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -330,6 +330,18 @@ msgstr "Indikátory"
 msgid "Warnings"
 msgstr "Varování"
 
+msgid "Generate new event"
+msgstr "Generovat novou událost"
+
+msgid "Do you want to create another event?"
+msgstr "Chcete vytvořit další událost?"
+
+msgid "No, cancel"
+msgstr "Ne, zrušit"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "Nalezena varování"
 
@@ -569,9 +581,6 @@ msgstr "Použít nový ovládací panel zápisu pro {{programName}}"
 
 msgid "Opt in for {{programName}}"
 msgstr "Přihlásit se do {{programName}}"
-
-msgid "No, cancel"
-msgstr "Ne, zrušit"
 
 msgid "Yes, opt in"
 msgstr "Ano, přihlásit se"
@@ -892,12 +901,6 @@ msgstr "Znovu zapsat"
 msgid "all programs"
 msgstr "všechny programy"
 
-msgid "If none of search results match, you can create new "
-msgstr "Pokud žádný z výsledků vyhledávání neodpovídá, můžete vytvořit nový"
-
-msgid "Create new"
-msgstr "Vytvořit nový"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -907,6 +910,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Hledat ve všech programech"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Vytvořit nový"
 
 msgid "Saved lists in this program"
 msgstr "Uložené seznamy v tomto programu"
@@ -1141,6 +1150,9 @@ msgstr "Ano, smazat událost"
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "Chcete-li tuto událost přeplánovat, přejděte na kartu \"Plán\"."
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Událost dokončena"
 
@@ -1149,6 +1161,9 @@ msgstr "Zpět ke všem fázím a událostem"
 
 msgid "Schedule date info"
 msgstr "Informace o termínu"
+
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
+msgstr ""
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."

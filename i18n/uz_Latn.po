@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -339,6 +339,18 @@ msgstr "Indikatorlar"
 msgid "Warnings"
 msgstr "Ogohlantirishlar"
 
+msgid "Generate new event"
+msgstr "Yangi hodisa/tadbir yaratish"
+
+msgid "Do you want to create another event?"
+msgstr "Haqiqatdan ham boshqa hodisa/tadbir yaratmoqchimisiz?"
+
+msgid "No, cancel"
+msgstr "Yoʼq, bekor qiling"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "Ogohlantirishlar topildi"
 
@@ -579,9 +591,6 @@ msgstr ""
 
 msgid "Opt in for {{programName}}"
 msgstr ""
-
-msgid "No, cancel"
-msgstr "Yoʼq, bekor qiling"
 
 msgid "Yes, opt in"
 msgstr ""
@@ -896,12 +905,6 @@ msgstr "Qayta roʼyxatdan oʼtish"
 msgid "all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Yangisini yaratish"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -909,6 +912,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Barcha dasturlarda qidirish"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Yangisini yaratish"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1143,6 +1152,9 @@ msgstr ""
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1150,6 +1162,9 @@ msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Schedule date info"
+msgstr ""
+
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
 
 msgid ""

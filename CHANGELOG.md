@@ -1,3 +1,58 @@
+## [100.21.2](https://github.com/dhis2/capture-app/compare/v100.21.1...v100.21.2) (2022-11-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([96caa5e](https://github.com/dhis2/capture-app/commit/96caa5e69ff457fab1ce52ad8a8fd83d5391b9f8))
+
+## [100.21.1](https://github.com/dhis2/capture-app/compare/v100.21.0...v100.21.1) (2022-11-22)
+
+
+### Bug Fixes
+
+* [DHIS2-13968] report date and enrollment date without hours ([#3111](https://github.com/dhis2/capture-app/issues/3111)) ([3e719a5](https://github.com/dhis2/capture-app/commit/3e719a5dc591da9c1de4e02d7f9209e8dc1f25f9))
+
+# [100.21.0](https://github.com/dhis2/capture-app/compare/v100.20.1...v100.21.0) (2022-11-22)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#3118](https://github.com/dhis2/capture-app/issues/3118)) ([a6918b3](https://github.com/dhis2/capture-app/commit/a6918b399bced32c3dcaca5f5ee223a071f7aa07))
+
+
+### Features
+
+* [DHIS2-13801] ask to create new after completing the event ([#3065](https://github.com/dhis2/capture-app/issues/3065)) ([45bf1e0](https://github.com/dhis2/capture-app/commit/45bf1e0fbf8f9deee3f387399d454bb9bad0875d))
+
+## [100.20.1](https://github.com/dhis2/capture-app/compare/v100.20.0...v100.20.1) (2022-11-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([20058c3](https://github.com/dhis2/capture-app/commit/20058c3e755497583e2c1f885adfa8783dce6c45))
+
+# [100.20.0](https://github.com/dhis2/capture-app/compare/v100.19.0...v100.20.0) (2022-11-17)
+
+
+### Features
+
+* [DHIS2-9666] Create new TEI when none of the results match  ([#3019](https://github.com/dhis2/capture-app/issues/3019)) ([47ed9e7](https://github.com/dhis2/capture-app/commit/47ed9e75dc8299b62457aad23a3bf560bad3d45c))
+
+# [100.19.0](https://github.com/dhis2/capture-app/compare/v100.18.3...v100.19.0) (2022-11-17)
+
+
+### Features
+
+* [DHIS2-13897] respect Hide due date flag ([#3054](https://github.com/dhis2/capture-app/issues/3054)) ([7ced9a2](https://github.com/dhis2/capture-app/commit/7ced9a29e2721bb2ef2e13fc83434c57d60ebe4f)), closes [#3058](https://github.com/dhis2/capture-app/issues/3058)
+
+## [100.18.3](https://github.com/dhis2/capture-app/compare/v100.18.2...v100.18.3) (2022-11-17)
+
+
+### Bug Fixes
+
+* [DHIS2-14001] complete enrollment action label ([#3110](https://github.com/dhis2/capture-app/issues/3110)) ([b3abdd9](https://github.com/dhis2/capture-app/commit/b3abdd9f2dc1144d56b02d7560b9305e4f9f0fcc))
+* [DHIS2-7913] apply hide fields program rule in form view mode ([#3099](https://github.com/dhis2/capture-app/issues/3099)) ([3467023](https://github.com/dhis2/capture-app/commit/34670239521d1e9525251e2f53967d3d207a45b8))
+
 ## [100.18.2](https://github.com/dhis2/capture-app/compare/v100.18.1...v100.18.2) (2022-11-17)
 
 

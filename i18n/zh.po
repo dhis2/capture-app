@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -321,6 +321,18 @@ msgstr "指标"
 msgid "Warnings"
 msgstr "错误"
 
+msgid "Generate new event"
+msgstr "生成新事件"
+
+msgid "Do you want to create another event?"
+msgstr "你要创建另外的事件？"
+
+msgid "No, cancel"
+msgstr "不，取消"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "发现警告"
 
@@ -560,9 +572,6 @@ msgstr "为 {{programName}} 使用新的注册仪表板"
 
 msgid "Opt in for {{programName}}"
 msgstr "选择加入 {{programName}}"
-
-msgid "No, cancel"
-msgstr "不，取消"
 
 msgid "Yes, opt in"
 msgstr "是的，选择加入"
@@ -874,12 +883,6 @@ msgstr "重新报名"
 msgid "all programs"
 msgstr "所有项目"
 
-msgid "If none of search results match, you can create new "
-msgstr "如果没有搜索结果匹配，您可以创建新的"
-
-msgid "Create new"
-msgstr "新建"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -887,6 +890,12 @@ msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
 
 msgid "Search in all programs"
 msgstr "搜索所有项目"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "新建"
 
 msgid "Saved lists in this program"
 msgstr "此项目中保存的列表"
@@ -1117,6 +1126,9 @@ msgstr "是的，删除事件"
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "转到`调度`选项卡以重新安排调度此事件"
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr "事件完成"
 
@@ -1125,6 +1137,9 @@ msgstr "回到所有阶段和事件"
 
 msgid "Schedule date info"
 msgstr "预定日期信息"
+
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
+msgstr ""
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."

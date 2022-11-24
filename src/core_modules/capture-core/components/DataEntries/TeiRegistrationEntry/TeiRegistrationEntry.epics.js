@@ -18,7 +18,7 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (
     action$.pipe(
         ofType(teiRegistrationEntryActionTypes.TEI_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
-        switchMap(({ selectedOrgUnitId, selectedScopeId: TETypeId, dataEntryId, formFoundation }) => {
+        switchMap(({ selectedOrgUnitId, selectedScopeId: TETypeId, dataEntryId, formFoundation, formValues }) => {
             if (selectedOrgUnitId) {
                 try {
                     getTrackedEntityTypeThrowIfNotFound(TETypeId);
@@ -32,6 +32,7 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (
                     orgUnit: { id: selectedOrgUnitId },
                     dataEntryId,
                     querySingleResource,
+                    formValues,
                 });
 
                 return from(openTeiPromise);

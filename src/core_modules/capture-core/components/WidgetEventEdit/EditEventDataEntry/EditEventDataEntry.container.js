@@ -17,20 +17,29 @@ import { type RenderFoundation } from '../../../metaData';
 import {
     setCurrentDataEntry, startRunRulesPostUpdateField,
 } from '../../DataEntry/actions/dataEntry.actions';
-
 import {
     requestSaveEditEventDataEntry,
     cancelEditEventDataEntry,
     requestDeleteEventDataEntry,
+    startCreateNewAfterCompleting,
 } from './editEventDataEntry.actions';
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
 
-const mapStateToProps = (state: ReduxState) => {
+const mapStateToProps = (state: ReduxState, props) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
+    const itemId = state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
+
+    const dataEntryKey = `${props.dataEntryId}-${itemId}`;
+    const isCompleted = !!state.dataEntriesFieldsValue[dataEntryKey]?.complete;
+
     return {
         ready: !state.activePage.isDataEntryLoading && !eventDetailsSection.loading,
+        itemId,
+        isCompleted,
+        enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
+        occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
     };
 };
 
@@ -100,6 +109,20 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         const { enrollmentId } = props;
         const { eventId } = getLocationQuery();
         dispatch(requestDeleteEventDataEntry({ eventId, enrollmentId }));
+    },
+    onCancelCreateNew: (itemId: string) => {
+        const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId, availableProgramStages } = props;
+        dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation, orgUnit));
+        dispatch(startCreateNewAfterCompleting({
+            enrollmentId, isCreateNew: false, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
+        }));
+    },
+    onConfirmCreateNew: (itemId: string) => {
+        const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId, availableProgramStages } = props;
+        dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation, orgUnit));
+        dispatch(startCreateNewAfterCompleting({
+            enrollmentId, isCreateNew: true, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
+        }));
     },
 });
 

@@ -1,16 +1,19 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { withSaveHandler } from '../../DataEntry';
+import { withAskToCreateNew, withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';
-import { requestSaveEvent } from './validated.actions';
+import { requestSaveEvent, startCreateNewAfterCompleting } from './validated.actions';
 import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { useAvailableProgramStages } from '../../../hooks';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
+const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
+
 export const Validated = ({
     program,
     stage,
@@ -40,6 +43,7 @@ export const Validated = ({
         // $FlowFixMe Investigate
         rulesExecutionDependenciesClientFormatted,
     });
+    const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, program.id);
 
     const dispatch = useDispatch();
     const handleSave = useCallback((
@@ -75,15 +79,50 @@ export const Validated = ({
         onSaveErrorActionType,
     ]);
 
+    const handleCreateNew = useCallback((isCreateNew?: boolean) => {
+        dispatch(requestSaveEvent({
+            eventId: itemId,
+            dataEntryId,
+            formFoundation,
+            completed: true,
+            programId: program.id,
+            orgUnitId: orgUnit.id,
+            orgUnitName: orgUnit.name || '',
+            teiId,
+            enrollmentId,
+            onSaveExternal,
+            onSaveSuccessActionType,
+            onSaveErrorActionType,
+        }));
+        dispatch(startCreateNewAfterCompleting({
+            enrollmentId, isCreateNew, orgUnitId: orgUnit.id, programId: program.id, teiId, availableProgramStages,
+        }));
+    }, [dispatch,
+        program.id,
+        orgUnit,
+        teiId,
+        enrollmentId,
+        onSaveExternal,
+        onSaveSuccessActionType,
+        onSaveErrorActionType,
+        formFoundation,
+        availableProgramStages,
+    ]);
+
+
     return (
-        <SaveHandlerHOC
+        <AskToCreateNewHandlerHOC
             {...passOnProps}
             stage={stage}
+            allowGenerateNextVisit={stage.allowGenerateNextVisit}
+            availableProgramStages={availableProgramStages}
             ready={ready}
             id={dataEntryId}
             itemId={itemId}
             formFoundation={formFoundation}
             onSave={handleSave}
+            onCancelCreateNew={() => handleCreateNew()}
+            onConfirmCreateNew={() => handleCreateNew(true)}
             programName={program.name}
             orgUnit={orgUnit}
             rulesExecutionDependenciesClientFormatted={rulesExecutionDependenciesClientFormatted}
