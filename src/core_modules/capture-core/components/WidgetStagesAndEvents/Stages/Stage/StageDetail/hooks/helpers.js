@@ -7,9 +7,7 @@ import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
 import { Comments } from '../Comments.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
-
-const isEventOverdue = (event: ApiEnrollmentEvent) => moment(event.scheduledAt).isBefore(moment().startOf('day'))
-    && event.status === statusTypes.SCHEDULE;
+import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');

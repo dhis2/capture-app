@@ -1,6 +1,5 @@
 // @flow
-import moment from 'moment';
-import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
+import { translatedStatusTypes } from 'capture-core/events/statusTypes';
 import { convertServerToClient } from '../../../../../../../converters';
 import type {
     ApiEvents,
@@ -12,16 +11,17 @@ import type {
     ClientEvents,
 } from './types';
 import { getFilterClientName, ADDITIONAL_FILTERS } from '../../../../helpers';
+import { isEventOverdue } from '../../../../../../../utils/isEventOverdue';
 
-const isEventOverdue = (status: string, scheduledAt: string) =>
-    moment(scheduledAt).isBefore(moment().startOf('day')) && status === statusTypes.SCHEDULE;
-
-const convertServerStatusToClient = (value: string, scheduledAt: string) => {
+const convertServerStatusToClient = (
+    status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
+    scheduledAt: string,
+) => {
     const translatedStatus = translatedStatusTypes();
-    if (isEventOverdue(value, scheduledAt)) {
+    if (isEventOverdue({ status, scheduledAt })) {
         return translatedStatus.OVERDUE;
     }
-    return translatedStatus[value];
+    return translatedStatus[status];
 };
 
 const getAttributeById = (attributeValues?: ApiTeiAttributes = []) =>
