@@ -49,9 +49,14 @@ const styles = {
 };
 
 const getLastUpdatedAt = (serverTimeZoneId, events) => {
-    const lastEventUpdated = events.reduce((acc, event) => (
-        new Date(acc.updatedAt).getTime() > new Date(event.updatedAt).getTime() ? acc : event
-    ));
+    const lastEventUpdated = events.reduce((acc, event) => {
+        if (serverTimeZoneId) {
+            return moment.tz(acc.updatedAt, serverTimeZoneId).isAfter(moment.tz(event.updatedAt, serverTimeZoneId))
+                ? acc
+                : event;
+        }
+        return new Date(acc.updatedAt).getTime() > new Date(event.updatedAt).getTime() ? acc : event;
+    });
 
     if (lastEventUpdated) {
         const { updatedAt } = lastEventUpdated;

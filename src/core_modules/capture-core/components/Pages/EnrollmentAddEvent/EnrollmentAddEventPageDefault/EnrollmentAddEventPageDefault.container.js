@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
+import moment from 'moment-timezone';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
@@ -16,6 +17,7 @@ import {
 } from '../../Enrollment/EnrollmentPageDefault/hooks';
 import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
+import { useSystemSettingsFromIndexedDB } from '../../../../utils/cachedDataHooks/useSystemSettingsFromIndexedDB';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 
 export const EnrollmentAddEventPageDefault = ({
@@ -27,6 +29,7 @@ export const EnrollmentAddEventPageDefault = ({
 
     const history = useHistory();
     const dispatch = useDispatch();
+    const { systemSettings } = useSystemSettingsFromIndexedDB('serverTimeZoneId');
 
     const handleCancel = useCallback(() => {
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
@@ -34,10 +37,19 @@ export const EnrollmentAddEventPageDefault = ({
 
     const handleSave = useCallback(
         (data, uid) => {
-            dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
+            const clientGeneratedUpdatedAt = systemSettings?.serverTimeZoneId
+                ? moment.tz(new Date(), systemSettings.serverTimeZoneId).toISOString()
+                : new Date().toISOString();
+
+            dispatch(
+                updateEnrollmentEventsWithoutId(uid, {
+                    ...data.events[0],
+                    updatedAt: clientGeneratedUpdatedAt,
+                }),
+            );
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [dispatch, history, programId, orgUnitId, teiId, enrollmentId],
+        [dispatch, history, programId, orgUnitId, teiId, enrollmentId, systemSettings?.serverTimeZoneId],
     );
     const handleAddNew = useCallback(() => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);

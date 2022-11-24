@@ -103,6 +103,8 @@ Then(/^the newest event in datatable nr (.*) should contain (.*)$/, (eq, status)
                     cy.contains('Ngelehun CHC');
                 });
         });
+    cy.contains('[data-test="stage-content"]', 'Last updated a few seconds ago')
+        .should('exist');
 });
 
 When(/^the user selects (.*)$/, (value) => {
@@ -139,4 +141,9 @@ When(/^you choose option (.*) in the modal$/, (buttonText) => {
 
 Then(/^you will be navigate to page (.*)$/, (url) => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/${url}`);
+});
+
+Then('the user clicks the first second antenatal care visit event', () => {
+    cy.contains('[data-test="stage-content"]', 'Last updated a few seconds ago')
+        .should('exist');
 });
