@@ -1,14 +1,14 @@
 # 
 # Translators:
-# 晓东 林 <13981924470@126.com>, 2022
 # easylin <lin_xd@126.com>, 2022
+# 晓东 林 <13981924470@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-10T09:42:51.323Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -319,6 +319,18 @@ msgstr "指标"
 msgid "Warnings"
 msgstr "错误"
 
+msgid "Generate new event"
+msgstr "生成新事件"
+
+msgid "Do you want to create another event?"
+msgstr "你要创建另外的事件？"
+
+msgid "No, cancel"
+msgstr "不，取消"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "发现警告"
 
@@ -499,6 +511,9 @@ msgstr "更新"
 msgid "Reset filter"
 msgstr "重置过滤器"
 
+msgid "Remove filter"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} 到 {{toDate}}"
 
@@ -516,6 +531,9 @@ msgstr "小于等于"
 
 msgid "More filters"
 msgstr "更多过滤器"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "行每页"
@@ -552,9 +570,6 @@ msgstr ""
 
 msgid "Opt in for {{programName}}"
 msgstr ""
-
-msgid "No, cancel"
-msgstr "不，取消"
 
 msgid "Yes, opt in"
 msgstr ""
@@ -864,12 +879,6 @@ msgstr "重新报名"
 msgid "all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create new "
-msgstr ""
-
-msgid "Create new"
-msgstr "新建"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -877,6 +886,12 @@ msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
 
 msgid "Search in all programs"
 msgstr "搜索所有项目"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "新建"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1107,6 +1122,9 @@ msgstr ""
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr "事件完成"
 
@@ -1115,6 +1133,9 @@ msgstr "回到所有阶段和事件"
 
 msgid "Schedule date info"
 msgstr "预定日期信息"
+
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
+msgstr ""
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
@@ -1256,6 +1277,9 @@ msgstr "报名状态"
 
 msgid "Assigned to"
 msgstr "指派到"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
 
 msgid "Registration Date"
 msgstr "登记日期"
