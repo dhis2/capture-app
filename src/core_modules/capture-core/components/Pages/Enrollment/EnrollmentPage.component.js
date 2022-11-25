@@ -21,7 +21,7 @@ import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { LoadingMaskForPage } from '../../LoadingMasks/LoadingMaskForPage.component';
 import { withErrorMessageHandler } from '../../../HOC';
-import { MissingMessage } from './MissingMessage.component';
+import { EnrollmentNotSelected } from './EnrollmentNotSelected/EnrollmentNotSelected.component';
 import { EnrollmentPageDefault } from './EnrollmentPageDefault';
 
 const getStyles = ({ typography }) => ({
@@ -100,7 +100,9 @@ const EnrollmentPagePlain = ({
             >
                 {enrollmentPageStatus ===
                     enrollmentPageStatuses.MISSING_SELECTIONS && (
-                    <MissingMessage />
+                    <EnrollmentNotSelected
+                        programId={programId}
+                    />
                 )}
 
                 {enrollmentPageStatus === enrollmentPageStatuses.DEFAULT && (
