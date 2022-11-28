@@ -1,0 +1,4 @@
+// @flow
+
+import isString from 'd2-utilizr/lib/isString';
+declare export function trimQuotes(input: any): any;

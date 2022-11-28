@@ -1,6 +1,6 @@
 // @flow
 import { useMemo } from 'react';
-import type { TrackedEntityAttributes, DataElements } from 'capture-core-utils/rulesEngine';
+import type { TrackedEntityAttributes, DataElements } from 'rules-engine';
 import { convertServerToClient } from '../../../../converters';
 
 const getOptionSets = array =>

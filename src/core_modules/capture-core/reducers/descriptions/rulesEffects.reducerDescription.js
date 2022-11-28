@@ -1,10 +1,10 @@
 // @flow
-import { effectActions } from 'capture-core-utils/rulesEngine';
+import { effectActions } from 'rules-engine';
 import type {
     OutputEffect,
     GeneralErrorEffect,
     GeneralWarningEffect,
-} from 'capture-core-utils/rulesEngine';
+} from 'rules-engine';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { rulesEffectsActionTypes } from '../../rules';
 

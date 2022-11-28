@@ -1,6 +1,6 @@
 // @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from 'rules-engine';
 
 export const actionTypes = {
     EDIT_EVENT_FROM_URL: 'EditEventFromUrl',

@@ -1,5 +1,5 @@
 // @flow
-import type { OutputEffects } from 'capture-core-utils/rulesEngine';
+import type { OutputEffects } from 'rules-engine';
 import { rulesEngine } from './rulesEngine';
 import type { DataElement, ProgramStage } from '../metaData';
 import { constantsStore } from '../metaDataMemoryStores/constants/constants.store';

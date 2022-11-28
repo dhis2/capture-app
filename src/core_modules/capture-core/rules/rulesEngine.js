@@ -1,5 +1,5 @@
 // @flow
-import { RulesEngine, environmentTypes } from 'capture-core-utils/rulesEngine';
+import { RulesEngine, environmentTypes } from 'rules-engine';
 import {
     inputConverter,
     outputConverter,

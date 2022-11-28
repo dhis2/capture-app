@@ -1,5 +1,5 @@
 // @flow
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from 'rules-engine';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';

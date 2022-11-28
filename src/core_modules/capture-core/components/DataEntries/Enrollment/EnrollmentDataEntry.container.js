@@ -1,5 +1,5 @@
 // @flow
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from 'rules-engine';
 import { connect } from 'react-redux';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';

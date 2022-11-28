@@ -1,5 +1,4 @@
 [ignore]
-.*/build/.*
 .*/contents/.*
 
 [declarations]

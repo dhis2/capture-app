@@ -2,3 +2,6 @@
 /flow-typed/**
 **/flow/**
 /build/**
+
+#libs
+/packages/**

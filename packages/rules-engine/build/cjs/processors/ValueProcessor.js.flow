@@ -1,0 +1,13 @@
+// @flow
+import log from 'loglevel';
+// TODO: add some kind of errorcreator to d2 before moving
+import { errorCreator } from '../errorCreator';
+import { mapTypeToInterfaceFnName, typeKeys } from '../constants';
+import type { IConvertInputRulesValue } from '../rulesEngine.types';
+declare export class ValueProcessor {
+  static errorMessages: any,
+  converterObject: IConvertInputRulesValue,
+  processValue: (value: any, type: $Values<typeof typeKeys>) => any,
+  constructor(converterObject: IConvertInputRulesValue): any,
+  processValue(value: any, type: $Values<typeof typeKeys>): any,
+}

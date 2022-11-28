@@ -1,0 +1,27 @@
+// @flow
+import { injectVariableValues } from './injectVariableValues';
+import { getInjectionValue } from './common';
+import type { D2Parameters } from '../../d2Functions/getD2Functions.types';
+import type { ExecuteExpressionInput, ErrorHandler, ExpressionSet, DhisFunctionsInfo } from './executeExpression.types';
+
+/**
+ * Creates a function with closed scope where the given string can be executed as javascript
+ * @param code
+ * @returns {*}
+ */
+declare function evaluate(code: any): any;
+/**
+ * Checks whether
+ *  a) no parameters is given when a function requires parameters,
+ *  b) the number of parameters given is not aligned with the function definition.
+ *
+ * @param dhisFunctionParameters
+ * @param parameters
+ * @returns {boolean}
+ */
+declare var isFunctionSignatureBroken: (dhisFunctionParameters: ?D2Parameters, parameters: Array<any>) => any;
+declare var extractArgumentIndexes: (expression: string, expressionModuloStrings: string, startIndexFunction: number) => any;
+declare var extractArguments: (expression: string, expressionModuloStrings: string, startIndexFunction: number) => any;
+declare var getFunctionNameFromCall: (functionCall: string, prefix: string) => any;
+declare var internalExecuteExpression: (arg0: DhisFunctionsInfo, arg1: ExpressionSet, onError: ErrorHandler) => any;
+declare export var executeExpression: (arg0: ExecuteExpressionInput) => any;

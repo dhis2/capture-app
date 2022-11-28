@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from 'rules-engine';
 import { getUniqueValuesForAttributesWithoutValue } from '../../common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToForm, convertServerToClient } from '../../../../converters';

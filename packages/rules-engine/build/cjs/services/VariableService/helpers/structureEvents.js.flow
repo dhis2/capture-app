@@ -1,0 +1,5 @@
+// @flow
+import { eventStatuses } from '../constants';
+import type { EventData, EventsData, CompareDates } from '../variableService.types';
+declare var createEventsContainer: (events: EventsData) => any;
+declare export var getStructureEvents: (compareDates: CompareDates) => any;

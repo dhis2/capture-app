@@ -17,7 +17,7 @@ const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [{
 }]);
 
 const mockOptionSet = new OptionSet('optionSet1', [new Option('option1', 'opt1')]);
-jest.mock('capture-core-utils/rulesEngine/RulesEngine', () => ({
+jest.mock('rules-engine/build/cjs/RulesEngine', () => ({
     RulesEngine: jest.fn().mockImplementation(() =>
         ({ getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) })),
 }));

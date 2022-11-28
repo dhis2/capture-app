@@ -1,4 +1,4 @@
-import { rulesEngineEffectTargetDataTypes } from 'capture-core-utils/rulesEngine';
+import { rulesEngineEffectTargetDataTypes } from 'rules-engine';
 import { rulesEngine } from '../rulesEngine';
 
 describe('Event Event rules engine', () => {

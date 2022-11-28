@@ -1,0 +1,7 @@
+// @flow
+import log from 'loglevel';
+import { getInjectionValue } from './common';
+import type { RuleVariables } from '../../rulesEngine.types';
+declare var logWarnMessage: (expr: any, variablePresent: any) => any;
+declare var preprocessD2FunctionArguments: (expression: string) => any;
+declare export var injectVariableValues: (rawExpression: string, variablesHash: RuleVariables) => any;

@@ -1,0 +1,11 @@
+// @flow
+import log from 'loglevel';
+import { errorCreator } from '../../errorCreator';
+import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes } from '../../constants';
+import type { ProgramRuleEffect, DataElement, DataElements, TrackedEntityAttribute, TrackedEntityAttributes, IConvertOutputRulesEffectsValue, AssignOutputEffect, HideOutputEffect, MessageEffect, GeneralErrorEffect, GeneralWarningEffect, CompulsoryEffect, OutputEffects } from '../../rulesEngine.types';
+import { normalizeRuleVariable, numberToString } from '../../commonUtils';
+declare var sanitiseFalsy: (value: any) => any;
+type BaseValueType = number | ?string | boolean;
+type WarningEffect = Array<MessageEffect> | GeneralWarningEffect;
+type ErrorEffect = Array<MessageEffect> | GeneralErrorEffect;
+declare export function getRulesEffectsProcessor(outputConverters: IConvertOutputRulesEffectsValue): any;

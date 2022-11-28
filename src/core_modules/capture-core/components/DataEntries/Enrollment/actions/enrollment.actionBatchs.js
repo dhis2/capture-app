@@ -5,7 +5,7 @@ import type {
     Enrollment,
     TEIValues,
     OrgUnit,
-} from 'capture-core-utils/rulesEngine';
+} from 'rules-engine';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import type { TrackerProgram, RenderFoundation } from '../../../../metaData';

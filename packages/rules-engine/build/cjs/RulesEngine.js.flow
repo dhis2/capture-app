@@ -1,0 +1,28 @@
+// @flow
+import log from 'loglevel';
+import { VariableService } from './services/VariableService/VariableService';
+import { ValueProcessor } from './processors/ValueProcessor';
+import { executeExpression } from './services/expressionService';
+import { getD2Functions } from './d2Functions';
+import type { OutputEffects, RuleVariables, RulesEngineInput, IConvertInputRulesValue, IConvertOutputRulesEffectsValue, IDateUtils } from './rulesEngine.types';
+import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
+import { effectActions, typeof environmentTypes } from './constants';
+import { normalizeRuleVariable } from './commonUtils/normalizeRuleVariable';
+
+/**
+ * We update the variables hash so that the next rule can use the updated values.
+ * @param variableToAssign
+ * @param data
+ * @param variablesHash
+ */
+declare function updateVariable(variableToAssign: string, data: any, variablesHash: RuleVariables): any;
+declare export class RulesEngine {
+  inputConverter: IConvertInputRulesValue,
+  outputConverter: IConvertOutputRulesEffectsValue,
+  variableService: VariableService,
+  dateUtils: IDateUtils,
+  userRoles: Array<string>,
+  constructor(inputConverter: IConvertInputRulesValue, outputConverter: IConvertOutputRulesEffectsValue, dateUtils: IDateUtils, environment: $Values<environmentTypes>): any,
+  getProgramRuleEffects(arg0: RulesEngineInput): OutputEffects,
+  setSelectedUserRoles(userRoles: Array<string>): any,
+}

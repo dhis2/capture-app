@@ -8,7 +8,7 @@ import type {
     OptionSets,
     ProgramRulesContainer,
     DataElements,
-} from 'capture-core-utils/rulesEngine';
+} from 'rules-engine';
 import { cleanUpDataEntry } from '../../../DataEntry';
 import { RenderFoundation } from '../../../../metaData';
 import { getOpenDataEntryActions, cleanTeiModal } from '../dataEntry.actions';
