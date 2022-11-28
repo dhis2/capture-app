@@ -239,6 +239,7 @@ const CardListItemIndex = ({
                             // can be different that the scopeId from the url
                             // this can happen for example when you are registering through the relationships
                             programName: currentSearchScopeName,
+                            programNameFromEnrollment,
                             programId: currentProgramId ?? programFromEnrollment,
                             enrollmentType,
                         })

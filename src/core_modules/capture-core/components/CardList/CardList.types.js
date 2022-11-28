@@ -33,4 +33,10 @@ export type ListItem = {|
   +tei: Tei,
 |}
 
-export type RenderCustomCardActions = ({item: ListItem, programName?: string, enrollmentType: $Keys<enrollmentTypes>, programId?: string}) => Node
+export type RenderCustomCardActions = ({
+  item: ListItem,
+  programName?: string,
+  enrollmentType: $Keys<enrollmentTypes>,
+  programId?: string,
+  programNameFromEnrollment?: string
+}) => Node

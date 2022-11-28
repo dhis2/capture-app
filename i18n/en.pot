@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
-"PO-Revision-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2022-11-28T09:13:33.032Z\n"
+"PO-Revision-Date: 2022-11-28T09:13:33.032Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -877,6 +877,9 @@ msgstr "You can also choose a program from the top bar and search in that progra
 
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
+
+msgid "View {{programName}} dashboard"
+msgstr "View {{programName}} dashboard"
 
 msgid "View active enrollment"
 msgstr "View active enrollment"

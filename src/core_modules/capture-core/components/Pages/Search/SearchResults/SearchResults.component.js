@@ -51,6 +51,7 @@ const CardListButtons = withStyles(buttonStyles)(
         orgUnitId,
         enrollmentType,
         programName,
+        programNameFromEnrollment,
         classes,
     }) => {
         const deriveNavigationButtonState =
@@ -66,7 +67,6 @@ const CardListButtons = withStyles(buttonStyles)(
               }
           };
         const dispatch = useDispatch();
-
         const navigationButtonsState = deriveNavigationButtonState(enrollmentType);
 
         const onHandleClick = () => {
@@ -96,7 +96,12 @@ const CardListButtons = withStyles(buttonStyles)(
                     dataTest="view-dashboard-button"
                     onClick={onHandleClick}
                 >
-                    {i18n.t('View dashboard')}
+                    {i18n.t('View {{programName}} dashboard',
+                        {
+                            programName: programNameFromEnrollment,
+                            interpolation: { escapeValue: false },
+                        })
+                    }
                 </Button>
                 {
                     navigationButtonsState === availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON &&
@@ -239,13 +244,14 @@ export const SearchResultsIndex = ({
                 currentSearchScopeName={currentSearchScopeName}
                 items={otherResults}
                 dataElements={dataElements}
-                renderCustomCardActions={({ item, enrollmentType, programName, programId: currentScopeProgramId }) => (<CardListButtons
+                renderCustomCardActions={({ item, enrollmentType, programName, programId: currentScopeProgramId, programNameFromEnrollment }) => (<CardListButtons
                     programName={programName}
                     currentSearchScopeType={currentSearchScopeType}
                     currentSearchScopeId={currentScopeProgramId}
                     id={item.id}
                     orgUnitId={item.tei.orgUnit}
                     enrollmentType={enrollmentType}
+                    programNameFromEnrollment={programNameFromEnrollment}
                 />)}
             />
             <div className={classes.pagination}>
