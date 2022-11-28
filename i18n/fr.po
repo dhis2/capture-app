@@ -107,7 +107,7 @@ msgid "Please provide a valid time"
 msgstr "Veuillez saisir une heure valide"
 
 msgid "Please provide an integer between 0 and 100"
-msgstr ""
+msgstr "Veuillez fournir un nombre entier compris entre 0 et 100"
 
 msgid "Please provide a valid url"
 msgstr "Veuillez saisir un lien URL valide"
@@ -150,9 +150,13 @@ msgstr "Une date future n'est pas permise"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
+"Sauvegarde d'une nouvelle inscription dans {{Nom du programme}} dans {{Nom "
+"de l'Unité d'org}}"
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
+"Sauvegarde d'une {{nom de l'entité suivie}} dans {{nom du programme}} dans "
+"{{Nom de l'Unité d'org}}"
 
 msgid "Cancel"
 msgstr "Annuler"
@@ -185,7 +189,7 @@ msgid "Assignee"
 msgstr "Attributaire"
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Sauvegarde dans {{Nom du programme}} dans {{Nom de l'Unité d'org}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -225,7 +229,7 @@ msgid "Finish"
 msgstr "Terminer"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "Sauvegarder sans terminer"
 
 msgid "Complete"
 msgstr "Terminer"
@@ -234,7 +238,7 @@ msgid "No write access"
 msgstr "Aucun accès en écriture"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "Nouveau {{texte du titre}}"
 
 msgid "Switch to form view"
 msgstr "Passer à la vue du formulaire"
@@ -421,13 +425,13 @@ msgid "to"
 msgstr "à"
 
 msgid "Days in the future"
-msgstr ""
+msgstr "Jours dans le futur"
 
 msgid "From"
 msgstr "A partir de"
 
 msgid "Days in the past"
-msgstr ""
+msgstr "Jours dans le passé"
 
 msgid "To"
 msgstr "A"
@@ -451,10 +455,10 @@ msgid "Last 3 months"
 msgstr "3 derniers mois"
 
 msgid "Absolute range"
-msgstr ""
+msgstr "Plage absolue"
 
 msgid "Relative range"
-msgstr ""
+msgstr " Plage relative"
 
 msgid "Max"
 msgstr "Max"
@@ -541,7 +545,7 @@ msgid "Update"
 msgstr "Mettre à jour"
 
 msgid "Reset filter"
-msgstr ""
+msgstr "Réinitialiser le filtre"
 
 msgid "Remove filter"
 msgstr "Supprimer le filtre"
@@ -565,7 +569,7 @@ msgid "More filters"
 msgstr "Filtres supplémentaires"
 
 msgid "Stage filters"
-msgstr ""
+msgstr "Filtres à étages"
 
 msgid "Rows per page"
 msgstr "Lignes par page"
