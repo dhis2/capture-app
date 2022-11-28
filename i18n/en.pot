@@ -1359,6 +1359,9 @@ msgstr "Overdue"
 msgid "Skipped"
 msgstr "Skipped"
 
+msgid "Visited"
+msgstr "Visited"
+
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"
 
