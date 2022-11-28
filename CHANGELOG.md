@@ -1,3 +1,10 @@
+## [100.21.4](https://github.com/dhis2/capture-app/compare/v100.21.3...v100.21.4) (2022-11-28)
+
+
+### Bug Fixes
+
+* [DHIS2-14156] program stage WL event status convertor ([#3115](https://github.com/dhis2/capture-app/issues/3115)) ([e7cf97d](https://github.com/dhis2/capture-app/commit/e7cf97ddbb761691e944b87ecb0d17b12daa5eaa))
+
 ## [100.21.3](https://github.com/dhis2/capture-app/compare/v100.21.2...v100.21.3) (2022-11-28)
 
 
