@@ -31,7 +31,7 @@
     "lodash": "^4.17.21",
     "loglevel": "^1.8.0",
     "moment": "^2.29.4",
-    "moment-timezone": "^0.5.37",
+    "moment-timezone": "^0.5.39",
     "prop-types": "^15.8.1",
     "query-string": "^7.1.1",
     "react": "^16.14.0",
