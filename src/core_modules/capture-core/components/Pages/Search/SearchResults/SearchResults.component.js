@@ -146,6 +146,7 @@ export const SearchResultsIndex = ({
     currentSearchTerms,
     fallbackTriggered,
     handleCreateNew,
+    orgUnitId,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const [isTopResultsOpen, setTopResultsOpen] = useState(true);
@@ -244,12 +245,12 @@ export const SearchResultsIndex = ({
                 currentSearchScopeName={currentSearchScopeName}
                 items={otherResults}
                 dataElements={dataElements}
-                renderCustomCardActions={({ item, enrollmentType, programName, programId: currentScopeProgramId, programNameFromEnrollment }) => (<CardListButtons
+                renderCustomCardActions={({ item, enrollmentType, programName, programNameFromEnrollment }) => (<CardListButtons
                     programName={programName}
                     currentSearchScopeType={currentSearchScopeType}
-                    currentSearchScopeId={currentScopeProgramId}
+                    currentSearchScopeId={currentSearchScopeId}
                     id={item.id}
-                    orgUnitId={item.tei.orgUnit}
+                    orgUnitId={orgUnitId}
                     enrollmentType={enrollmentType}
                     programNameFromEnrollment={programNameFromEnrollment}
                 />)}
