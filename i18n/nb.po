@@ -1384,6 +1384,9 @@ msgstr "Forfalt"
 msgid "Skipped"
 msgstr "Hoppet over"
 
+msgid "Visited"
+msgstr "Besøkte"
+
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} i program{{escape}} {{programName}}"
 

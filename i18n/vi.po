@@ -1367,6 +1367,9 @@ msgstr "Quá hạn"
 msgid "Skipped"
 msgstr "Đã bỏ qua"
 
+msgid "Visited"
+msgstr "Đã đến"
+
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 

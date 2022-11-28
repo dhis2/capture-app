@@ -1344,6 +1344,9 @@ msgstr "Atrasado"
 msgid "Skipped"
 msgstr "Omitido"
 
+msgid "Visited"
+msgstr "Visitado"
+
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
