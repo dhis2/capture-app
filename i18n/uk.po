@@ -1350,6 +1350,9 @@ msgstr "Прострочене"
 msgid "Skipped"
 msgstr "Пропущено"
 
+msgid "Visited"
+msgstr "Відвідано"
+
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 

@@ -1375,6 +1375,9 @@ msgstr "Muddat oʼtgan"
 msgid "Skipped"
 msgstr "Oʼtkazib yuborildi"
 
+msgid "Visited"
+msgstr "Tashrif buyurdi"
+
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 

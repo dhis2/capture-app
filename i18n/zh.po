@@ -1348,6 +1348,9 @@ msgstr "逾期"
 msgid "Skipped"
 msgstr "跳过"
 
+msgid "Visited"
+msgstr "已随访"
+
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}中的{{trackedEntityName}}"
 
