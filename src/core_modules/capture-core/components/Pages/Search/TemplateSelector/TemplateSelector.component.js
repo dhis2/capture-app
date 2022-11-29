@@ -1,11 +1,14 @@
 // @flow
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, spacersNum } from '@dhis2/ui';
+import { Button, spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { localeCompareStrings } from '../../../../utils/localeCompareStrings';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';
 import type { WorkingListTemplates, WorkingListTemplate } from './workingListsBase.types';
+import { Widget } from '../../../Widget';
+import { BookmarkAddIcon } from '../../../../../capture-ui/Icons';
+
 
 const getStyles = (theme: Theme) => ({
     configsContainer: {
@@ -20,6 +23,25 @@ const getStyles = (theme: Theme) => ({
     container: {
         margin: `${spacersNum.dp16}px`,
     },
+    innerContainer: {
+        margin: `${spacersNum.dp16}px`,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+    },
+    text: {
+        color: colors.grey700,
+        fontSize: '14px',
+        lineHeight: '19px',
+        '&:first-of-type': {
+            marginBottom: 0,
+        },
+    },
+    icon: {
+        width: `${spacersNum.dp32}px`,
+        height: `${spacersNum.dp32}px`,
+    },
 });
 
 type Props = {
@@ -31,7 +53,7 @@ type Props = {
 
 const TemplateSelectorPlain = (props: Props) => {
     const { templates, onSelectTemplate, onCreateTemplate, classes } = props;
-
+    const [open, setOpen] = useState(true);
     const customTemplates = useMemo(
         () =>
             [...templates].sort(
@@ -63,15 +85,29 @@ const TemplateSelectorPlain = (props: Props) => {
 
     return (
         <div className={classes.container}>
-            {i18n.t('Saved lists in this program')}
-            {customTemplates.length > 0 ? (
-                <div className={classes.configsContainer}>{configElements}</div>
-            ) : (
-                <p>{i18n.t('None')}</p>
-            )}
-            <Button onClick={onCreateTemplate} color="secondary">
-                {i18n.t('Create custom working list')}
-            </Button>
+            <Widget
+                header={i18n.t('Saved lists in this program')}
+                open={open}
+                onClose={() => setOpen(false)}
+                onOpen={() => setOpen(true)}
+            >
+                <div className={classes.innerContainer}>
+                    <BookmarkAddIcon className={classes.icon} />
+                    <p className={classes.text}>
+                        {i18n.t('Saved list offer quick access to your most used views in a program.')}
+                    </p>
+                    {customTemplates.length > 0 ? (
+                        <div className={classes.configsContainer}>{configElements}</div>
+                    ) : (
+                        <p className={classes.text}>
+                            {i18n.t('There are no saved list in this program yet, create one using the button below.')}
+                        </p>
+                    )}
+                    <Button small onClick={onCreateTemplate} color="secondary">
+                        {i18n.t('Create saved list')}
+                    </Button>
+                </div>
+            </Widget>
         </div>
     );
 };

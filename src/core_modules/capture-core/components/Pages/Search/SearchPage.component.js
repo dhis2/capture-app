@@ -34,6 +34,9 @@ const getStyles = (theme: Theme) => ({
     half: {
         flex: 1,
     },
+    quarter: {
+        flex: 0.4,
+    },
     title: {
         padding: '8px 0 0px 8px',
         fontWeight: 500,
@@ -270,7 +273,7 @@ const Index = ({
                             />
                             {searchStatusComponents()}
                         </div>
-                        <div className={classes.half}>
+                        <div className={classes.quarter}>
                             <TemplateSelector />
                         </div>
                     </div>
