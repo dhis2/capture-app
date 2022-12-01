@@ -839,7 +839,7 @@ msgid "Back"
 msgstr "Précédent"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Rechercher {{texte du titre}}"
 
 msgid "Search for"
 msgstr "Rechercher"
@@ -976,7 +976,7 @@ msgid "An error has occured. See log for details"
 msgstr "Une erreur s'est produite. Voir le log pour plus de détails"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{trackedEntityName}} dans le programme {{escape}} {{programName}}"
 
 msgid "Program not found"
 msgstr "Programme introuvable"
