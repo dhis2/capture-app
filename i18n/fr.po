@@ -633,21 +633,23 @@ msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "L'inscription avec id \"{{enrollmentId}}\" n'existe pas"
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "Tableau de bord des inscriptions"
 
 msgid "No indicator output for this enrollment yet"
-msgstr ""
+msgstr "Aucune sortie d'indicateur pour cet enrôlement pour le moment"
 
 msgid "No feedback for this enrollment yet"
-msgstr ""
+msgstr "Aucun commentaire pour cet enrôlement pour le moment"
 
 msgid "Program stage not found"
-msgstr ""
+msgstr "Stade du programme non trouvé"
 
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
 msgstr ""
+"Choisissez un programme pour ajouter de nouvelles inscriptions ou voir les "
+"inscriptions existantes pour {{Nom d'affichage de la tei}}."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -656,7 +658,7 @@ msgstr ""
 "afficher le tableau de bord."
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr ""
+msgstr "Choisir une inscription pour afficher le tableau de bord."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} n'est pas inscrit à ce programme"
@@ -686,52 +688,54 @@ msgid "View working list in this program."
 msgstr "Afficher la liste de travail dans ce programme."
 
 msgid "Enrollment{{escape}} New Event"
-msgstr ""
+msgstr "Inscription{{escape}} Nouvel événement"
 
 msgid "There was an error loading the page"
-msgstr ""
+msgstr "Une erreur s'est produite lors du chargement de la page"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
 
 msgid "There are no feedbacks for this event"
-msgstr ""
+msgstr "Il n'y a aucun commentaire pour cet événement"
 
 msgid "There are no indicators for this event"
-msgstr ""
+msgstr "Il n'y a aucun indicateur pour cet événement"
 
 msgid "program stage is invalid"
-msgstr ""
+msgstr "le stade de programme n'est pas valide"
 
 msgid "stage"
-msgstr ""
+msgstr "stade"
 
 msgid "Enrollment{{escape}} View Event"
-msgstr ""
+msgstr "Inscription{{escape}} Afficher l'événement"
 
 msgid "Enrollment{{escape}} Edit Event"
-msgstr ""
+msgstr "Inscription{{escape}} Modifier l'événement"
 
 msgid "The enrollment event data could not be found"
-msgstr ""
+msgstr "Les données de l'événement d'inscription n'ont pas pu être trouvées"
 
 msgid "There are no feedback for this event"
-msgstr ""
+msgstr "Il n'y a aucun commentaire pour cet événement"
 
 msgid "Registered events"
 msgstr "Événements enregistrés"
 
 msgid "Please select {{category}}."
-msgstr ""
+msgstr "Veuillez sélectionner {{catégorie}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
+"Ou voir tous les enregistrements auxquels vous avez accès dans {{programme}}"
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr ""
+"Ou voir tous les événements auxquels vous avez accès dans {{programme}}"
 
 msgid "Please select an organisation unit."
-msgstr ""
+msgstr "Veuillez sélectionner une unité d'organisation."
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choisir le {{missingCategories}} pour commencer à rapporter"
@@ -743,7 +747,7 @@ msgid "View dashboard"
 msgstr "Voir le tableau de bord"
 
 msgid "View enrollment"
-msgstr ""
+msgstr "Afficher l'inscription"
 
 msgid "Create for"
 msgstr "Créer pour"
@@ -812,7 +816,7 @@ msgid "Back"
 msgstr "Précédent"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Rechercher {{texte du titre}}"
 
 msgid "Search for"
 msgstr "Rechercher"
@@ -958,19 +962,19 @@ msgid "Save comment"
 msgstr "Enregistrer commentaires "
 
 msgid "Enrollment actions"
-msgstr ""
+msgstr "Actions d'enrôlement"
 
 msgid "We are processing your request."
-msgstr ""
+msgstr "Votre demande est en cours de traitement."
 
 msgid "Reactivate"
-msgstr ""
+msgstr "Réactiver"
 
 msgid "Mark as cancelled"
-msgstr ""
+msgstr "Marquer comme annulé"
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "Mark comme inachevé"
 
 msgid "Delete enrollment"
 msgstr "Supprimer enrôlement"
@@ -979,15 +983,17 @@ msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
 msgstr ""
+"Êtes-vous sûr de vouloir supprimer cette inscription ? Ceci supprimera "
+"définitivement l'inscription actuelle."
 
 msgid "No, cancel"
 msgstr "Non, annuler"
 
 msgid "Yes, delete enrollment."
-msgstr ""
+msgstr "Oui, supprimer l'inscription."
 
 msgid "Remove mark for follow-up"
-msgstr ""
+msgstr "Supprimer le marquage pour suivi"
 
 msgid "Mark for follow-up"
 msgstr "Marquer pour suivi"
@@ -1000,39 +1006,42 @@ msgstr "Date de l´incident"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
+"Le widget d'inscription n'a pas pu être chargé. Veuillez réessayer plus tard"
 
 msgid "Follow-up"
 msgstr "Suivi"
 
 msgid "Started at {{orgUnitName}}"
-msgstr ""
+msgstr "Commencé à {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
+msgstr "Propriété de {{ownerOrgUnit}}"
 
 msgid "Last updated {{date}}"
-msgstr ""
+msgstr "Dernière mise à jour {{date}}"
 
 msgid "Cancelled"
 msgstr "Annulé"
 
 msgid "Comments about this enrollment"
-msgstr ""
+msgstr "Commentaires sur cette inscription"
 
 msgid "Write a comment about this enrollment"
-msgstr ""
+msgstr "Écrire un commentaire sur cette inscription"
 
 msgid "This enrollment doesn't have any comments"
-msgstr ""
+msgstr "Cette inscription n'a pas de commentaires"
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Sauvegarde à {{stageName}} pour {{programName}} dans {{orgUnitName}}"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
+"L'unité d'organisation n'a pas pu être récupérée. Veuillez réessayer plus "
+"tard."
 
 msgid "program or stage is invalid"
-msgstr ""
+msgstr "programme ou stade invalide"
 
 msgid "Error"
 msgstr "Erreur"
@@ -1041,43 +1050,44 @@ msgid "Warning"
 msgstr "Attention"
 
 msgid "Comments about this event"
-msgstr ""
+msgstr "Commentaires sur cette événement"
 
 msgid "Write a comment about this event"
-msgstr ""
+msgstr "Écrire un commentaire sur cet événement"
 
 msgid "This event doesn't have any comments"
-msgstr ""
+msgstr "Cet événement n'a pas de commentaires"
 
 msgid "stage not found in rules execution"
-msgstr ""
+msgstr "stade non trouvé lors de l'exécution des règles"
 
 msgid "Event completed"
 msgstr "Événement terminé"
 
 msgid "Back to all stages and events"
-msgstr ""
+msgstr "Retour à tous les stades et événements"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
+"Le widget du profil n'a pas pu être chargé. Veuillez réessayer plus tard"
 
 msgid "Person Profile"
-msgstr ""
+msgstr "Profil d'une personne"
 
 msgid "New {{ eventName }} event"
-msgstr ""
+msgstr "Nouvel événement {{nomdel'événement}}"
 
 msgid "Show {{ rest }} more"
-msgstr ""
+msgstr "Afficher {{rest}} plus"
 
 msgid "Reset list"
-msgstr ""
+msgstr "Réinitialiser la liste"
 
 msgid "Go to full {{ eventName }}"
-msgstr ""
+msgstr "Aller à l'intégralité de {{nom de l'événement}}"
 
 msgid "This stage can only have one event"
-msgstr ""
+msgstr "Ce stade ne peut avoir qu'un seul événement"
 
 msgid "Report date"
 msgstr "Date du rapport"
@@ -1089,13 +1099,13 @@ msgid "Due date"
 msgstr "Date d'échéance"
 
 msgid "{{ totalEvents }} events"
-msgstr ""
+msgstr "{{total des événements}} événements"
 
 msgid "{{ overdueEvents }} overdue"
-msgstr ""
+msgstr "{{ overdueEvents }} en retard"
 
 msgid "{{ scheduledEvents }} scheduled"
-msgstr ""
+msgstr "{{ scheduledEvents }} programmé"
 
 msgid "Stages and Events"
 msgstr "Étapes et événements"
@@ -1176,13 +1186,13 @@ msgid "An error has occured. See log for details"
 msgstr "Une erreur s'est produite. Voir le journal pour plus de détails"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "Prorgrammés {{ escape }} dus {{ time }}"
 
 msgid "Scheduled"
 msgstr "Programmé"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "En retard {{ escape }} dû {{ time }}"
 
 msgid "Overdue"
 msgstr "En retard"
@@ -1191,7 +1201,7 @@ msgid "Skipped"
 msgstr "Sauté"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{trackedEntityName}} dans le programme {{escape}} {{programName}}"
 
 msgid "Program not found"
 msgstr "Programme introuvable"
@@ -1230,7 +1240,7 @@ msgid "Error saving enrollment"
 msgstr "Erreur lors de l'enregistrement de l'inscription"
 
 msgid "Error saving the enrollment event"
-msgstr ""
+msgstr "Erreur de sauvegarde de l'événement d'inscription"
 
 msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
