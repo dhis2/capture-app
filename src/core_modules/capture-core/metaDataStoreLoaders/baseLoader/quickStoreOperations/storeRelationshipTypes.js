@@ -6,7 +6,7 @@ export const storeRelationshipTypes = () => {
     const query = {
         resource: 'relationshipTypes',
         params: {
-            fields: 'id,displayName,fromConstraint[*],toConstraint[*],access[*]',
+            fields: 'id,displayName,fromConstraint[*],toConstraint[*],access[*],referral',
         },
     };
 

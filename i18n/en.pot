@@ -1230,6 +1230,24 @@ msgstr "{{TETName}} profile"
 msgid "Edit"
 msgstr "Edit"
 
+msgid "Referral actions"
+msgstr "Referral actions"
+
+msgid "Ambigous referrals, contact system administrator"
+msgstr "Ambigous referrals, contact system administrator"
+
+msgid "Refer to an organisation unit"
+msgstr "Refer to an organisation unit"
+
+msgid "Link to an existing response"
+msgstr "Link to an existing response"
+
+msgid "Enter data for response now"
+msgstr "Enter data for response now"
+
+msgid "Don't link to a response"
+msgstr "Don't link to a response"
+
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
 

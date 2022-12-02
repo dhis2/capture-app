@@ -6,6 +6,7 @@ import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
 import { SavingText } from '../SavingText';
+import { WidgetReferral } from '../../WidgetReferral/';
 import type { Props } from './validated.types';
 
 const styles = () => ({
@@ -42,6 +43,7 @@ const ValidatedPlain = ({
                     id={id}
                     orgUnit={orgUnit}
                 />
+                <WidgetReferral programStageId={stage?.id} />
                 <FinishButtons
                     onSave={onSave}
                     onCancel={onCancel}
