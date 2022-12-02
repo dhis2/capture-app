@@ -94,13 +94,13 @@ const TemplateSelectorPlain = (props: Props) => {
                 <div className={classes.innerContainer}>
                     <BookmarkAddIcon className={classes.icon} />
                     <p className={classes.text}>
-                        {i18n.t('Saved list offer quick access to your most used views in a program.')}
+                        {i18n.t('Saved lists offer quick access to your most used views in a program.')}
                     </p>
                     {customTemplates.length > 0 ? (
                         <div className={classes.configsContainer}>{configElements}</div>
                     ) : (
                         <p className={classes.text}>
-                            {i18n.t('There are no saved list in this program yet, create one using the button below.')}
+                            {i18n.t('There are no saved lists in this program yet, create one using the button below.')}
                         </p>
                     )}
                     <Button small onClick={onCreateTemplate} color="secondary">
