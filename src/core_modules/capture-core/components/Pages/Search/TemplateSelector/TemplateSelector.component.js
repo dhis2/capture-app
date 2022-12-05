@@ -1,6 +1,7 @@
 // @flow
 import React, { useMemo, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import cx from 'classnames';
 import { Button, spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { localeCompareStrings } from '../../../../utils/localeCompareStrings';
@@ -24,11 +25,13 @@ const getStyles = (theme: Theme) => ({
         margin: `${spacersNum.dp16}px`,
     },
     innerContainer: {
-        margin: `${spacersNum.dp16}px`,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
+        margin: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+        '&.empty': {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+        },
     },
     text: {
         color: colors.grey700,
@@ -91,17 +94,19 @@ const TemplateSelectorPlain = (props: Props) => {
                 onClose={() => setOpen(false)}
                 onOpen={() => setOpen(true)}
             >
-                <div className={classes.innerContainer}>
-                    <BookmarkAddIcon className={classes.icon} />
-                    <p className={classes.text}>
-                        {i18n.t('Saved lists offer quick access to your most used views in a program.')}
-                    </p>
+                <div className={cx(classes.innerContainer, { empty: !customTemplates.length })}>
                     {customTemplates.length > 0 ? (
                         <div className={classes.configsContainer}>{configElements}</div>
                     ) : (
-                        <p className={classes.text}>
-                            {i18n.t('There are no saved lists in this program yet, create one using the button below.')}
-                        </p>
+                        <>
+                            <BookmarkAddIcon className={classes.icon} />
+                            <p className={classes.text}>
+                                {i18n.t('Saved lists offer quick access to your most used views in a program.')}
+                            </p>
+                            <p className={classes.text}>
+                                {i18n.t('There are no saved lists in this program yet, create one using the button below.')}
+                            </p>
+                        </>
                     )}
                     <Button small onClick={onCreateTemplate} color="secondary">
                         {i18n.t('Create saved list')}
