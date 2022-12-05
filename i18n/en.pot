@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
-"PO-Revision-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2022-12-05T13:08:50.155Z\n"
+"PO-Revision-Date: 2022-12-05T13:08:50.155Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -824,6 +824,9 @@ msgstr "Search by {{name}}"
 
 msgid "Search by attributes"
 msgstr "Search by attributes"
+
+msgid "Search by condition"
+msgstr "Search by condition"
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
 msgstr "Fill in these fields to search{{escape}} {{ searchableAttributes }}"

@@ -29,12 +29,13 @@ const EnrollmentQuickActionsComponent = ({
         teiId,
         orgUnitId,
     } = useLocationQuery();
+
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
-        const mutatedStage = { ...stage,
-        };
+        const mutatedStage = { ...stage };
         mutatedStage.eventCount = events?.filter(event => event.programStage === stage.id)?.length;
         return mutatedStage;
     }), [events, stages]);
+
     const noStageAvailable = useMemo(() => stagesWithEventCount.every(programStage => !programStage.repeatable && programStage.eventCount > 0), [stagesWithEventCount]);
 
     const onNavigationFromQuickActions = (tab: string) => {

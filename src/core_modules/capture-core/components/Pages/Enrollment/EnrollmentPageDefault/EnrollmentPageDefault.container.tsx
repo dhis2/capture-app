@@ -119,7 +119,7 @@ export const EnrollmentPageDefault = () => {
         <EnrollmentPageDefaultComponent
             teiId={teiId}
             orgUnitId={orgUnitId}
-            program={program} // $FlowFixMe
+            program={program}
             stages={stages}
             events={enrollment?.events}
             enrollmentId={enrollmentId}

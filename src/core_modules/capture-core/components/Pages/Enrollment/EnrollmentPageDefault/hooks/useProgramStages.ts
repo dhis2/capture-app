@@ -22,14 +22,14 @@ export const useProgramStages = (program: Program, programStages?: Array<apiProg
                     hideDueDate,
                     repeatable,
                     description: stageForm.description,
-                    dataElements: programStageDataElements?.reduce((acc, currentStageData) => {
+                    dataElements: programStageDataElements?.reduce((acc: any, currentStageData: any) => {
                         const {
                             displayInReports,
                             dataElement,
                         } = currentStageData;
 
                         if (displayInReports) {
-                            const options = dataElement.optionSet ? dataElement.optionSet.options?.reduce((accOptions, option) => {
+                            const options = dataElement.optionSet ? dataElement.optionSet.options?.reduce((accOptions: any, option: any) => {
                                 accOptions[option.code] = option.name;
                                 return accOptions;
                             }, {}) : undefined;

@@ -1,16 +1,9 @@
 {
-    "plugins": [
-        "@babel/plugin-transform-flow-strip-types"
-    ],
     "overrides": [
         {
-            "test": ["./src/**/*.tsx", "./src/**/*.ts"],
-            "presets": [
-                "@babel/preset-typescript"
-            ],
+            "test": ["./src/**/*.jsx", "./src/**/*.js"],
             "plugins": [
-                "@babel/preset-env",
-                "@babel/preset-react"
+                "@babel/plugin-transform-flow-strip-types"
             ]
         }
     ]

@@ -27,7 +27,7 @@ const QuickActionButtonPlain = ({
             onMouseOver,
             onMouseOut,
             ref,
-        }) => (
+        }: any) => (
             <div ref={(btnRef) => {
                 if (btnRef && disable) {
                     btnRef.onmouseover = onMouseOver;
