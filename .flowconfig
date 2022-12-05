@@ -1,6 +1,8 @@
 [ignore]
 .*/build/.*
 .*/contents/.*
+.src/**/*.tsx
+.src/**/*.ts
 
 [declarations]
 <PROJECT_ROOT>/node_modules/.*
