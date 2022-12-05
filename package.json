@@ -72,7 +72,7 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "test2": "react-scripts test",
     "jsdoc": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
-    "linter:check": "eslint -c .eslintrc . --quiet",
+    "linter:check": "eslint -c .eslintrc.js . --quiet",
     "flow:check": "./node_modules/.bin/flow check ./src",
     "flow:addTypes": "flow-typed install",
     "tsc:check": "tsc -p .",

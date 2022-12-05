@@ -15,4 +15,6 @@ src/core_modules/capture-core/flow/
 module.name_mapper='^capture-core' ->'<PROJECT_ROOT>/src/core_modules/capture-core'
 module.name_mapper='^capture-ui' ->'<PROJECT_ROOT>/src/core_modules/capture-ui'
 module.name_mapper='^capture-core-utils' ->'<PROJECT_ROOT>/src/core_modules/capture-core-utils'
+module.file_ext=.tsx
+module.file_ext=.ts
 esproposal.optional_chaining=enable

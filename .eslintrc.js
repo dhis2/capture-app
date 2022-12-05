@@ -181,6 +181,7 @@ const config = {
                 ],
                 '@typescript-eslint/explicit-module-boundary-types': 'off',
                 '@typescript-eslint/space-before-blocks': 0,
+                'flowtype/no-types-missing-file-annotation': 0,
             },
         },
     ],

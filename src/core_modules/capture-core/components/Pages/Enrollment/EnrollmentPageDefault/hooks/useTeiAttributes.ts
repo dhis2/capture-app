@@ -1,14 +1,14 @@
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
-interface DataQueryReturn {
+/* interface DataQueryReturn {
     trackedEntityInstance: {
         attributes: Array<{
             attribute: string;
             value: string;
         }>;
     }
-}
+} */
 
 export const useTeiAttributes = (teiId: string) => {
     const {
