@@ -90,7 +90,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Typescript
-        run: yarn typescript:check
+        run: yarn tsc:check
 
   unit-tests:
     runs-on: ubuntu-latest

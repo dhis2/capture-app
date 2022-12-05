@@ -75,6 +75,7 @@
     "linter:check": "eslint -c .eslintrc . --quiet",
     "flow:check": "./node_modules/.bin/flow check ./src",
     "flow:addTypes": "flow-typed install",
+    "tsc:check": "tsc -p .",
     "lint": "npm run flow:check && npm run linter:check",
     "cy:open": "concurrently --kill-others \"yarn start:forCypress\" \"wait-on 'http-get://localhost:3000' && cypress open\"",
     "cy:run": "concurrently --kill-others \"yarn start:forCypress\" \"wait-on 'http-get://localhost:3000' && cypress run\"",
