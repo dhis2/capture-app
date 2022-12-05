@@ -136,7 +136,7 @@
     "settings": {
         "import/resolver": {
             "node": {
-                "extensions": [".js", ".mjs"]
+                "extensions": [".js", ".mjs", ".ts", ".tsx"]
             },
             "webpack": {
                 "config": "config/eslint/webpack.config.js"
