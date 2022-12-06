@@ -5,7 +5,6 @@ import {
     IconClock16,
     IconDimensionOrgUnit16,
     IconCalendar16,
-    IconLocation16,
     colors,
     Tag,
     spacersNum,
@@ -145,12 +144,9 @@ export const WidgetEnrollmentPlain = ({
 
                         {enrollment.geometry && (
                             <div className={classes.row}>
-                                <span className={classes.icon} data-test="widget-enrollment-icon-clock">
-                                    <IconLocation16 color={colors.grey600} />
-                                </span>
                                 {convertValueClientToView(
                                     convertValueServerToClient(enrollment.geometry.coordinates, geometryType),
-                                    geometryType,
+                                    dataElementTypes.MAP_COORDINATE,
                                 )}
                             </div>
                         )}

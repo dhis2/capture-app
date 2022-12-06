@@ -29,6 +29,7 @@ export const dataElementTypes = {
     IMAGE: 'IMAGE',
     AGE: 'AGE',
     COORDINATE: 'COORDINATE',
+    MAP_COORDINATE: 'MAP_COORDINATE',
     POLYGON: 'POLYGON',
     USERNAME: 'USERNAME',
     ASSIGNEE: 'ASSIGNEE',

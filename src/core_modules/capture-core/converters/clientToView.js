@@ -6,6 +6,7 @@ import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
+import { MapCoordinates } from '../components/MapCoordinates';
 
 
 function convertDateForView(rawValue: string): string {
@@ -58,6 +59,7 @@ const valueConvertersForType = {
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
+    [dataElementTypes.MAP_COORDINATE]: MapCoordinates,
     [dataElementTypes.AGE]: convertDateForView,
     [dataElementTypes.FILE_RESOURCE]: convertResourceForView,
     [dataElementTypes.IMAGE]: convertResourceForView,
