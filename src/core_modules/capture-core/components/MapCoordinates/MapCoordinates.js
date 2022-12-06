@@ -37,4 +37,4 @@ const MapCoordinatesPlain = withStyles(styles)(({ latitude, longitude, classes }
 },
 );
 
-export const MapCoordinates = props => <MapCoordinatesPlain {...props} />;
+export const MapCoordinates = (props: Props) => <MapCoordinatesPlain {...props} />;
