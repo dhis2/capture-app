@@ -13,7 +13,6 @@ import {
     Button,
     NoticeBox,
     IconChevronLeft24,
-    spacersNum,
     spacers,
 } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
