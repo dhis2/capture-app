@@ -2,7 +2,7 @@
   "name": "capture-app",
   "homepage": ".",
   "version": "100.21.7",
-  "cacheVersion": "4",
+  "cacheVersion": "5",
   "serverVersion": "38",
   "private": true,
   "dependencies": {
