@@ -21,9 +21,6 @@ const getStyles = (theme: Theme) => ({
     chipContainer: {
         padding: `${theme.typography.pxToRem(5)} ${theme.typography.pxToRem(8)}`,
     },
-    container: {
-        margin: `${spacersNum.dp16}px`,
-    },
     innerContainer: {
         margin: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px`,
         '&.empty': {
@@ -87,33 +84,31 @@ const TemplateSelectorPlain = (props: Props) => {
     });
 
     return (
-        <div className={classes.container}>
-            <Widget
-                header={i18n.t('Saved lists in this program')}
-                open={open}
-                onClose={() => setOpen(false)}
-                onOpen={() => setOpen(true)}
-            >
-                <div className={cx(classes.innerContainer, { empty: !customTemplates.length })}>
-                    {customTemplates.length > 0 ? (
-                        <div className={classes.configsContainer}>{configElements}</div>
-                    ) : (
-                        <>
-                            <BookmarkAddIcon className={classes.icon} />
-                            <p className={classes.text}>
-                                {i18n.t('Saved lists offer quick access to your most used views in a program.')}
-                            </p>
-                            <p className={classes.text}>
-                                {i18n.t('There are no saved lists in this program yet, create one using the button below.')}
-                            </p>
-                        </>
-                    )}
-                    <Button small onClick={onCreateTemplate} color="secondary">
-                        {i18n.t('Create saved list')}
-                    </Button>
-                </div>
-            </Widget>
-        </div>
+        <Widget
+            header={i18n.t('Saved lists in this program')}
+            open={open}
+            onClose={() => setOpen(false)}
+            onOpen={() => setOpen(true)}
+        >
+            <div className={cx(classes.innerContainer, { empty: !customTemplates.length })}>
+                {customTemplates.length > 0 ? (
+                    <div className={classes.configsContainer}>{configElements}</div>
+                ) : (
+                    <>
+                        <BookmarkAddIcon className={classes.icon} />
+                        <p className={classes.text}>
+                            {i18n.t('Saved lists offer quick access to your most used views in a program.')}
+                        </p>
+                        <p className={classes.text}>
+                            {i18n.t('There are no saved lists in this program yet, create one using the button below.')}
+                        </p>
+                    </>
+                )}
+                <Button small onClick={onCreateTemplate} color="secondary">
+                    {i18n.t('Create saved list')}
+                </Button>
+            </div>
+        </Widget>
     );
 };
 
