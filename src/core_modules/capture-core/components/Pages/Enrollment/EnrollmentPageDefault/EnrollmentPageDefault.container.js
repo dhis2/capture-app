@@ -75,7 +75,9 @@ export const EnrollmentPageDefault = () => {
         history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
     };
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
-        dispatch(updateEnrollmentAttributeValues(updatedAttributeValues));
+        dispatch(updateEnrollmentAttributeValues(updatedAttributeValues
+            .map(({ attribute, value }) => ({ id: attribute, value }))
+        ));
         dispatch(updateTeiDisplayName(teiDisplayName));
     }, [dispatch]);
 
