@@ -4,10 +4,9 @@ import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../metaData';
 
-type Coordinate = Array<number | string>;
 
 type Props = $ReadOnly<{|
-    coordinates: Coordinate | Array<Array<Coordinate>>,
+    coordinates: any,
     type: string,
     classes: Object
 |}>;
