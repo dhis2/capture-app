@@ -11,17 +11,20 @@ const sortNumber = (clientValueA: Object, clientValueB: Object, direction: strin
     const numB = Number(clientValueB);
     const { eventDateA, eventDateB } = options;
 
-    if (!numA) {
-        return 1;
-    } else if (!numB) {
-        return -1;
-    }
     if (direction === SORT_DIRECTION.DESC) {
+        // If number is invalid, it should be at the bottom of the list
+        if (Number.isNaN(numA)) return -1;
+        if (Number.isNaN(numB)) return 1;
+
         if (numA !== numB) {
             return numA - numB;
         }
         return moment(eventDateB).unix() - moment(eventDateA).unix();
     } else if (direction === SORT_DIRECTION.ASC) {
+        // If number is invalid, it should be at the top of the list
+        if (Number.isNaN(numA)) return 1;
+        if (Number.isNaN(numB)) return -1;
+
         if (numA !== numB) {
             return numB - numA;
         }
