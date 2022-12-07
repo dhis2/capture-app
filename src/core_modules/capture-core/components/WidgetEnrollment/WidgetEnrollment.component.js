@@ -16,7 +16,7 @@ import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
-import { convertValue as convertValueClientToView } from '../../converters/clientToView';
+import { convertValue as convertValueClientToView, convertGeometryForMapView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
 import { Actions } from './Actions';
 
@@ -144,10 +144,7 @@ export const WidgetEnrollmentPlain = ({
 
                         {enrollment.geometry && (
                             <div className={classes.row}>
-                                {convertValueClientToView(
-                                    convertValueServerToClient(enrollment.geometry.coordinates, geometryType),
-                                    dataElementTypes.MAP_COORDINATE,
-                                )}
+                                {convertGeometryForMapView(enrollment.geometry.coordinates, geometryType)}
                             </div>
                         )}
                         <Actions

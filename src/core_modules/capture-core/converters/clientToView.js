@@ -59,7 +59,6 @@ const valueConvertersForType = {
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
-    [dataElementTypes.MAP_COORDINATE]: MapCoordinates,
     [dataElementTypes.AGE]: convertDateForView,
     [dataElementTypes.FILE_RESOURCE]: convertResourceForView,
     [dataElementTypes.IMAGE]: convertResourceForView,
@@ -86,4 +85,8 @@ export function convertDateWithTimeForView(rawValue?: ?string): string {
         return convertDateForView(rawValue);
     }
     return convertDateTimeForView(rawValue);
+}
+
+export function convertGeometryForMapView(value: any, type: $Keys<typeof dataElementTypes>): any {
+    return <MapCoordinates coordinates={value} type={type} />;
 }

@@ -1,12 +1,15 @@
 // @flow
 import React from 'react';
-import { Map, TileLayer, Marker } from 'react-leaflet';
+import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
+import { dataElementTypes } from '../../metaData';
+
+type Coordinate = Array<number | string>;
 
 type Props = $ReadOnly<{|
-  latitude: number | string,
-  longitude: number | string,
-  classes: Object
+    coordinates: Coordinate | Array<Array<Coordinate>>,
+    type: string,
+    classes: Object
 |}>;
 
 const styles = () => ({
@@ -16,13 +19,14 @@ const styles = () => ({
     },
 });
 
-const MapCoordinatesPlain = withStyles(styles)(({ latitude, longitude, classes }: Props) => {
-    const position = [longitude, latitude];
+const MapCoordinatesPlain = ({ coordinates, type, classes }: Props) => {
+    const center = type === dataElementTypes.COORDINATE ? coordinates : coordinates[0][0];
+
     return (
         <Map
-            center={position}
+            center={center}
             className={classes.map}
-            zoom={3}
+            zoom={8}
             zoomControl={false}
             attributionControl={false}
             key="map"
@@ -31,10 +35,10 @@ const MapCoordinatesPlain = withStyles(styles)(({ latitude, longitude, classes }
                 url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                 attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             />
-            <Marker position={position} />
+            {type === dataElementTypes.COORDINATE && <Marker position={coordinates} />}
+            {type === dataElementTypes.POLYGON && <Polygon positions={coordinates[0]} />}
         </Map>
     );
-},
-);
+};
 
-export const MapCoordinates = (props: Props) => <MapCoordinatesPlain {...props} />;
+export const MapCoordinates = withStyles(styles)(MapCoordinatesPlain);
