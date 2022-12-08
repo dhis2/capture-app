@@ -76,7 +76,7 @@ export const EnrollmentPageDefault = () => {
     };
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
         dispatch(updateEnrollmentAttributeValues(updatedAttributeValues
-            .map(({ attribute, value }) => ({ id: attribute, value }))
+            .map(({ attribute, value }) => ({ id: attribute, value })),
         ));
         dispatch(updateTeiDisplayName(teiDisplayName));
     }, [dispatch]);
