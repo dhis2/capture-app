@@ -1,2 +1,2 @@
 // @flow
-export { useMetadataCustomQuery } from './useMetadataQuery';
+export { useMetadataCustomQuery, useIndexedDBQuery } from './useMetadataQuery';
