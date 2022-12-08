@@ -27,3 +27,9 @@ export const useMetadataCustomQuery = <TResultData>(
         enabled = true,
     }: CustomOptions = {}): Result<TResultData> =>
         useAsyncMetadata(queryKey, queryFn, { cacheTime, enabled });
+
+export const useIndexedDBQuery = <TResultData>(
+    queryKey: QueryKey,
+    queryFn: QueryFunction<TResultData>,
+): Result<TResultData> =>
+        useMetadataCustomQuery(queryKey, queryFn);
