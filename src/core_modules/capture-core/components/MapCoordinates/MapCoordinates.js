@@ -18,8 +18,18 @@ const styles = () => ({
     },
 });
 
+const convertToClientCoordinates = (coordinates, type) => {
+    switch (type) {
+    case dataElementTypes.COORDINATE:
+        return [coordinates[1], coordinates[0]];
+    default:
+        return coordinates.map(coord => [coord[1], coord[0]]);
+    }
+};
+
 const MapCoordinatesPlain = ({ coordinates, type, classes }: Props) => {
-    const center = type === dataElementTypes.COORDINATE ? coordinates : coordinates[0][0];
+    const clientValues = convertToClientCoordinates(coordinates, type);
+    const center = type === dataElementTypes.COORDINATE ? clientValues : clientValues[0][0];
 
     return (
         <Map
@@ -34,8 +44,8 @@ const MapCoordinatesPlain = ({ coordinates, type, classes }: Props) => {
                 url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                 attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             />
-            {type === dataElementTypes.COORDINATE && <Marker position={coordinates} />}
-            {type === dataElementTypes.POLYGON && <Polygon positions={coordinates[0]} />}
+            {type === dataElementTypes.COORDINATE && <Marker position={clientValues} />}
+            {type === dataElementTypes.POLYGON && <Polygon positions={clientValues[0]} />}
         </Map>
     );
 };
