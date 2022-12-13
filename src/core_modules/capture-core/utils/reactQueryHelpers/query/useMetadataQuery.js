@@ -1,24 +1,16 @@
 // @flow
 import { useQuery } from 'react-query';
-import type { QueryKey, QueryFunction } from 'react-query';
+import type { QueryFunction, QueryKey } from 'react-query';
 import type { CustomOptions, Result } from './useMetadataQuery.types';
 
 const useAsyncMetadata = <TResultData>(
     queryKey: QueryKey,
     queryFn: QueryFunction<TResultData>,
-    { cacheTime, enabled }): Result<TResultData> => {
-    const { data, isLoading, isError } = useQuery<TResultData>(queryKey, queryFn, {
+    { cacheTime, enabled }): Result<TResultData> => useQuery<TResultData>(queryKey, queryFn, {
         enabled,
         cacheTime,
         staleTime: Infinity,
     });
-
-    return {
-        data,
-        loading: isLoading,
-        failed: isError,
-    };
-};
 
 export const useMetadataCustomQuery = <TResultData>(
     queryKey: QueryKey,
