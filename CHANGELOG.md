@@ -1,3 +1,10 @@
+## [100.22.1](https://github.com/dhis2/capture-app/compare/v100.22.0...v100.22.1) (2022-12-13)
+
+
+### Bug Fixes
+
+* [DHIS2-14286] Replace LGTM with CodeQL ([53ee196](https://github.com/dhis2/capture-app/commit/53ee19604a8c589d045ffe081600bab4a20b4236))
+
 # [100.22.0](https://github.com/dhis2/capture-app/compare/v100.21.7...v100.22.0) (2022-12-13)
 
 
