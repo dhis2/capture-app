@@ -1,3 +1,10 @@
+# [100.22.0](https://github.com/dhis2/capture-app/compare/v100.21.7...v100.22.0) (2022-12-13)
+
+
+### Features
+
+* [DHIS2-14125] improve no saved list  ([#3132](https://github.com/dhis2/capture-app/issues/3132)) ([0918fee](https://github.com/dhis2/capture-app/commit/0918fee3f47b75a53efe631f63b2706181557a12))
+
 ## [100.21.7](https://github.com/dhis2/capture-app/compare/v100.21.6...v100.21.7) (2022-12-01)
 
 
