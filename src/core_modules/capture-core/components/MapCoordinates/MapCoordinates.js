@@ -1,8 +1,9 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../metaData';
+import { MapCoordinatesModal } from './MapCoordinatesModal';
 
 
 type Props = $ReadOnly<{|
@@ -12,9 +13,13 @@ type Props = $ReadOnly<{|
 |}>;
 
 const styles = () => ({
-    map: {
+    mapContainer: {
         width: 150,
         height: 120,
+    },
+    map: {
+        width: '100%',
+        height: '100%',
     },
 });
 
@@ -22,31 +27,49 @@ const convertToClientCoordinates = (coordinates, type) => {
     switch (type) {
     case dataElementTypes.COORDINATE:
         return [coordinates[1], coordinates[0]];
+    case dataElementTypes.POLYGON:
+        return coordinates[0].map(coord => [coord[1], coord[0]]);
     default:
-        return coordinates.map(coord => [coord[1], coord[0]]);
+        return coordinates;
     }
 };
 
+
 const MapCoordinatesPlain = ({ coordinates, type, classes }: Props) => {
+    const [isModalOpen, setModalOpen] = useState(false);
     const clientValues = convertToClientCoordinates(coordinates, type);
-    const center = type === dataElementTypes.COORDINATE ? clientValues : clientValues[0][0];
+    const center = type === dataElementTypes.COORDINATE ? clientValues : clientValues[0];
 
     return (
-        <Map
-            center={center}
-            className={classes.map}
-            zoom={8}
-            zoomControl={false}
-            attributionControl={false}
-            key="map"
-        >
-            <TileLayer
-                url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+        <>
+            <div className={classes.mapContainer}>
+                <Map
+                    center={center}
+                    className={classes.map}
+                    zoom={11}
+                    zoomControl={false}
+                    attributionControl={false}
+                    key="minimap"
+                    onClick={() => {
+                        setModalOpen(true);
+                    }}
+                >
+                    <TileLayer
+                        url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    />
+                    {type === dataElementTypes.COORDINATE && <Marker position={clientValues} />}
+                    {type === dataElementTypes.POLYGON && <Polygon positions={clientValues} />}
+                </Map>
+            </div>
+            <MapCoordinatesModal
+                type={type}
+                center={center}
+                isOpen={isModalOpen}
+                setOpen={setModalOpen}
+                onSetCoordinates={(pos) => { console.log({ pos }); }}
             />
-            {type === dataElementTypes.COORDINATE && <Marker position={clientValues} />}
-            {type === dataElementTypes.POLYGON && <Polygon positions={clientValues[0]} />}
-        </Map>
+        </>
     );
 };
 

@@ -8,6 +8,7 @@ import { Complete } from './Complete';
 import { Delete } from './Delete';
 import { Followup } from './Followup';
 import { AddNew } from './AddNew';
+import { AddLocation } from './AddLocation';
 import type { PlainProps } from './actions.types';
 import { LoadingMaskForButton } from '../../LoadingMasks';
 
@@ -72,6 +73,10 @@ export const ActionsPlain = ({
                                 enrollment={enrollment}
                                 onUpdate={handleOnUpdate}
                             />
+                            <AddLocation
+                                enrollment={enrollment}
+                                onAddLocation={() => { console.log('add'); }}
+                            />
                             <MenuDivider />
                             <Cancel
                                 enrollment={enrollment}
@@ -81,6 +86,7 @@ export const ActionsPlain = ({
                                 enrollment={enrollment}
                                 onDelete={handleOnDelete}
                             />
+
                         </FlyoutMenu>
                     )
                 }

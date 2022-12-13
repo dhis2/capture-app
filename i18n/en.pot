@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
-"PO-Revision-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2022-12-13T15:16:47.439Z\n"
+"PO-Revision-Date: 2022-12-13T15:16:47.439Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -553,6 +553,15 @@ msgstr "Program doesn't exist"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Selected program is invalid for selected registering unit"
 
+msgid "coordinates"
+msgstr "coordinates"
+
+msgid "area"
+msgstr "area"
+
+msgid "Set"
+msgstr "Set"
+
 msgid "Online"
 msgstr "Online"
 
@@ -1032,6 +1041,12 @@ msgstr "Enrollment actions"
 
 msgid "We are processing your request."
 msgstr "We are processing your request."
+
+msgid "Add coordinates"
+msgstr "Add coordinates"
+
+msgid "Add area"
+msgstr "Add area"
 
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr "Only one enrollment per {{tetName}} is allowed in this program"
