@@ -84,7 +84,6 @@ export const EnrollmentPageDefault = () => {
     };
 
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
-
     if (error) {
         return error.errorComponent;
     }

@@ -85,4 +85,3 @@ export function convertDateWithTimeForView(rawValue?: ?string): string {
     }
     return convertDateTimeForView(rawValue);
 }
-

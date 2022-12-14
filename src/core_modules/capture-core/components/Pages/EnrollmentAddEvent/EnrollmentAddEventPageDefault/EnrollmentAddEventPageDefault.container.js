@@ -14,10 +14,7 @@ import { useWidgetDataFromStore } from '../hooks';
 import {
     useHideWidgetByRuleLocations,
 } from '../../Enrollment/EnrollmentPageDefault/hooks';
-import {
-    updateEnrollmentEventsWithoutId,
-    showEnrollmentError,
-} from '../../common/EnrollmentOverviewDomain';
+import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 
