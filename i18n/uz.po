@@ -1381,6 +1381,9 @@ msgstr "Муддат ўтган"
 msgid "Skipped"
 msgstr "Ўтказиб юборилди"
 
+msgid "Visited"
+msgstr "Ташриф буюрди"
+
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{escape}} {{programName}} дастурида {{trackedEntityName}} "
 

@@ -1367,6 +1367,9 @@ msgstr "المتأخرة"
 msgid "Skipped"
 msgstr "التي تم تخطيها"
 
+msgid "Visited"
+msgstr "تم زيارته"
+
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
