@@ -1385,6 +1385,9 @@ msgstr "Po termínu"
 msgid "Skipped"
 msgstr "Přeskočeno"
 
+msgid "Visited"
+msgstr "Navštíveno"
+
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} v program{{escape}} {{programName}}"
 

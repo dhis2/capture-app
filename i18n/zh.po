@@ -2,15 +2,15 @@
 # Translators:
 # phil_dhis2, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
-# easylin <lin_xd@126.com>, 2022
 # 晓东 林 <13981924470@126.com>, 2022
+# easylin <lin_xd@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -331,7 +331,7 @@ msgid "No, cancel"
 msgstr "不，取消"
 
 msgid "Yes, create new event"
-msgstr ""
+msgstr "是的，创建新活动"
 
 msgid "Warnings found"
 msgstr "发现警告"
@@ -535,7 +535,7 @@ msgid "More filters"
 msgstr "更多过滤器"
 
 msgid "Stage filters"
-msgstr ""
+msgstr "阶段过滤器"
 
 msgid "Rows per page"
 msgstr "行每页"
@@ -762,7 +762,7 @@ msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}的新报名"
 
 msgid "Save {{trackedEntityName}}"
-msgstr ""
+msgstr "保存{{trackedEntityName}}"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
@@ -892,7 +892,7 @@ msgid "Search in all programs"
 msgstr "搜索所有项目"
 
 msgid "If none of search results match, you can create a new "
-msgstr ""
+msgstr "如果没有匹配的搜索结果，您可以创建一个新的"
 
 msgid "Create new"
 msgstr "新建"
@@ -1127,7 +1127,7 @@ msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "转到`调度`选项卡以重新安排调度此事件"
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
-msgstr ""
+msgstr "无法更改 {{ eventStatus }} 事件的预定日期"
 
 msgid "Event completed"
 msgstr "事件完成"
@@ -1139,11 +1139,11 @@ msgid "Schedule date info"
 msgstr "预定日期信息"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
-msgstr ""
+msgstr "自动安排在 {{suggestedScheduleDate}}"
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
-msgstr ""
+msgstr "预定日期与建议日期相符，但可以根据需要进行更改。"
 
 msgid "The scheduled date is {{count}} days {{position}} the suggested date."
 msgid_plural ""
@@ -1283,7 +1283,7 @@ msgid "Assigned to"
 msgstr "指派到"
 
 msgid "Choose a program stage to filter by {{label}}"
-msgstr ""
+msgstr "选择要按 {{label}} 筛选的程序阶段"
 
 msgid "Registration Date"
 msgstr "登记日期"
@@ -1347,6 +1347,9 @@ msgstr "逾期"
 
 msgid "Skipped"
 msgstr "跳过"
+
+msgid "Visited"
+msgstr "已随访"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}中的{{trackedEntityName}}"
