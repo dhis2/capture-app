@@ -151,9 +151,11 @@ export const SearchResultsIndex = ({
                 currentSearchScopeType={searchScopes.ALL_PROGRAMS}
                 items={otherResults}
                 dataElements={dataElements}
-                renderCustomCardActions={({ item, enrollmentType, currentSearchScopeType, programName, program }) => (<CardListButtons
+                renderCustomCardActions={({
+                    item, enrollmentType, currentSearchScopeType: searchScopeType, programName, program,
+                }) => (<CardListButtons
                     programName={programName}
-                    currentSearchScopeType={currentSearchScopeType}
+                    currentSearchScopeType={searchScopeType}
                     currentSearchScopeId={currentSearchScopeId}
                     id={item.id}
                     orgUnitId={orgUnitId}

@@ -12,7 +12,7 @@ import type {
 import { searchScopes } from '../Pages/Search/SearchPage.constants';
 import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
-import { dataElementTypes, getProgramFromProgramIdThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../metaData';
+import { dataElementTypes, getProgramFromProgramIdThrowIfNotFound } from '../../metaData';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 
