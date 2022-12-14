@@ -16,9 +16,10 @@ import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
-import { convertValue as convertValueClientToView, convertGeometryForMapView } from '../../converters/clientToView';
+import { convertValue as convertValueClientToView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
 import { Actions } from './Actions';
+import { MapCoordinates } from '../../components/MapCoordinates';
 
 const styles = {
     enrollment: {
@@ -62,6 +63,7 @@ export const WidgetEnrollmentPlain = ({
     onDelete,
     onAddNew,
     onError,
+    onSetCoordinates,
     serverTimeZoneId,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
@@ -144,7 +146,11 @@ export const WidgetEnrollmentPlain = ({
 
                         {enrollment.geometry && (
                             <div className={classes.row}>
-                                {convertGeometryForMapView(enrollment.geometry.coordinates, geometryType)}
+                                <MapCoordinates
+                                    coordinates={enrollment.geometry.coordinates}
+                                    type={geometryType}
+                                    onSetCoordinates={onSetCoordinates}
+                                />
                             </div>
                         )}
                         <Actions

@@ -20,6 +20,7 @@ export type Props = {|
     onEventClick: (eventId: string) => void,
     onUpdateTeiAttributeValues: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
     onEnrollmentError: (message: string) => void,
+    onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
 |};
 
 export type PlainProps = {|

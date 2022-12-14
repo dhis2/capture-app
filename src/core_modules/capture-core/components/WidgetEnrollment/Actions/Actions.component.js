@@ -75,7 +75,7 @@ export const ActionsPlain = ({
                             />
                             <AddLocation
                                 enrollment={enrollment}
-                                onAddLocation={() => { console.log('add'); }}
+                                onUpdate={handleOnUpdate}
                             />
                             <MenuDivider />
                             <Cancel

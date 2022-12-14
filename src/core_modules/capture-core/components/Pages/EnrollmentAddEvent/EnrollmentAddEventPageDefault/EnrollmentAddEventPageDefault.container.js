@@ -48,6 +48,9 @@ export const EnrollmentAddEventPageDefault = ({
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     }, [dispatch, enrollmentId, history, programId, orgUnitId, teiId]);
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onSetCoordinates = (coordinates) => {
+        console.log({ coordinates });
+    };
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
@@ -126,6 +129,7 @@ export const EnrollmentAddEventPageDefault = ({
                 onCancel={handleCancel}
                 onDelete={handleDelete}
                 onAddNew={handleAddNew}
+                onSetCoordinates={onSetCoordinates}
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}
                 widgetReducerName={widgetReducerName}

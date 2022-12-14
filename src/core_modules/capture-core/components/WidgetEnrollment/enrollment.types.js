@@ -8,6 +8,7 @@ export type Props = {|
     onDelete: () => void,
     onAddNew: () => void,
     onError?: (message: string) => void,
+    onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
 |};
 
 export type PlainProps = {|
@@ -22,6 +23,7 @@ export type PlainProps = {|
     onDelete: () => void,
     onAddNew: () => void,
     onError?: (message: string) => void,
+    onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
     serverTimeZoneId?: string,
     ...CssClasses,
 |};

@@ -11,7 +11,9 @@ import { useSystemSettings } from './hooks/useSystemSettings';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
 
-export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onAddNew, onError }: Props) => {
+export const WidgetEnrollment = ({
+    teiId, enrollmentId, programId, onDelete, onAddNew, onError, onSetCoordinates,
+}: Props) => {
     const { error: errorEnrollment, enrollment, refetch: refetchEnrollment } = useEnrollment(enrollmentId);
     const { error: errorProgram, program } = useProgram(programId);
     const {
@@ -40,6 +42,7 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
             loading={!(enrollment && program && displayName)}
             onDelete={onDelete}
             onAddNew={onAddNew}
+            onSetCoordinates={onSetCoordinates}
             error={error}
             onError={onError}
             serverTimeZoneId={systemSettings?.serverTimeZoneId}

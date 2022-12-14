@@ -84,6 +84,8 @@ export const EnrollmentPageDefault = () => {
     };
 
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+
+    const onSetCoordinates = (coord) => { console.log({ coord }); };
     if (error) {
         return error.errorComponent;
     }
@@ -106,6 +108,7 @@ export const EnrollmentPageDefault = () => {
             onEventClick={onEventClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
             onEnrollmentError={onEnrollmentError}
+            onSetCoordinates={onSetCoordinates}
         />
     );
 };

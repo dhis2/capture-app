@@ -6,6 +6,7 @@ import { Map, TileLayer, Marker, FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../metaData';
+import type { ModalProps } from './mapCoordinates.types';
 
 const styles = () => ({
     modalContent: {
@@ -21,24 +22,28 @@ const styles = () => ({
     },
 });
 
-type Props = {
-    center: ?[number, number],
-    isOpen: boolean,
-    type: string,
-    setOpen: (open: boolean) => void,
-    onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
-    classes: Object
-}
+const convertToServerCoordinates = (coordinates, type) => {
+    if (!coordinates) { return null; }
+    switch (type) {
+    case dataElementTypes.COORDINATE:
+        return [coordinates[1], coordinates[0]];
+    case dataElementTypes.POLYGON:
+        return coordinates[0].map(coord => [coord[1], coord[0]]);
+    default:
+        return coordinates;
+    }
+};
 
-const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, onSetCoordinates }: Props) => {
+const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, onSetCoordinates }: ModalProps) => {
     const [position, setPosition] = useState(null);
     const [coordinates, setCoordinates] = useState(null);
 
     const onHandleMapClicked = (mapCoordinates) => {
         if (type === dataElementTypes.COORDINATE) {
             const { lat, lng } = mapCoordinates.latlng;
-            const pos: [number, number] = [lat, lng];
-            setPosition(pos);
+            const newPosition: [number, number] = [lat, lng];
+            // $FlowFixMe
+            setPosition(newPosition);
         }
     };
 
@@ -114,7 +119,11 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, onSe
         </Button>
         <Button
             onClick={() => {
-                onSetCoordinates(position ?? coordinates);
+                if (position ?? coordinates) {
+                    const convertedCoordinates = convertToServerCoordinates(position ?? coordinates, type);
+                    // $FlowFixMe
+                    onSetCoordinates(convertedCoordinates);
+                }
             }}
             primary
         >

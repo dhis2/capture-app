@@ -6,7 +6,6 @@ import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
-import { MapCoordinates } from '../components/MapCoordinates';
 
 
 function convertDateForView(rawValue: string): string {
@@ -87,6 +86,3 @@ export function convertDateWithTimeForView(rawValue?: ?string): string {
     return convertDateTimeForView(rawValue);
 }
 
-export function convertGeometryForMapView(value: any, type: $Keys<typeof dataElementTypes>): any {
-    return <MapCoordinates coordinates={value} type={type} />;
-}

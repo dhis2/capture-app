@@ -69,6 +69,7 @@ const EnrollmentEditEventPagePain = ({
     onEnrollmentError,
     onCancelEditEvent,
     onHandleScheduleSave,
+    onSetCoordinates,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -139,6 +140,7 @@ const EnrollmentEditEventPagePain = ({
                         onDelete={onDelete}
                         onAddNew={onAddNew}
                         onError={onEnrollmentError}
+                        onSetCoordinates={onSetCoordinates}
                     />
                 </div>
             </div>

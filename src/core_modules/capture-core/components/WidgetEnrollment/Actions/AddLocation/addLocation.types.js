@@ -2,5 +2,5 @@
 
 export type Props = {|
     enrollment: Object,
-    onAddLocation: (arg: Object) => void,
+    onUpdate: (arg: Object) => void,
 |};

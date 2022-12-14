@@ -4,13 +4,7 @@ import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../metaData';
 import { MapCoordinatesModal } from './MapCoordinatesModal';
-
-
-type Props = $ReadOnly<{|
-    coordinates: any,
-    type: string,
-    classes: Object
-|}>;
+import type { MiniMapProps } from './mapCoordinates.types';
 
 const styles = () => ({
     mapContainer: {
@@ -35,7 +29,7 @@ const convertToClientCoordinates = (coordinates, type) => {
 };
 
 
-const MapCoordinatesPlain = ({ coordinates, type, classes }: Props) => {
+const MapCoordinatesPlain = ({ coordinates, type, classes, onSetCoordinates }: MiniMapProps) => {
     const [isModalOpen, setModalOpen] = useState(false);
     const clientValues = convertToClientCoordinates(coordinates, type);
     const center = type === dataElementTypes.COORDINATE ? clientValues : clientValues[0];
@@ -67,7 +61,7 @@ const MapCoordinatesPlain = ({ coordinates, type, classes }: Props) => {
                 center={center}
                 isOpen={isModalOpen}
                 setOpen={setModalOpen}
-                onSetCoordinates={(pos) => { console.log({ pos }); }}
+                onSetCoordinates={onSetCoordinates}
             />
         </>
     );

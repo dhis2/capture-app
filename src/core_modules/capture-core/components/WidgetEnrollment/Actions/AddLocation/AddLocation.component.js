@@ -8,7 +8,7 @@ import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/usePr
 import type { Props } from './addLocation.types';
 
 const DEFAULT_CENTER = [51.505, -0.09];
-export const AddLocation = ({ enrollment, onAddLocation }: Props) => {
+export const AddLocation = ({ enrollment, onUpdate }: Props) => {
     const [isOpen, setOpen] = useState(false);
     const { program, loading, error } = useProgramFromIndexedDB(enrollment.program);
     const geometryType = useMemo(() => {
@@ -22,7 +22,16 @@ export const AddLocation = ({ enrollment, onAddLocation }: Props) => {
     if (enrollment.geometry || !program?.featureType) {
         return null;
     }
-
+    const getServerFeatureType = () => {
+        switch (geometryType) {
+        case dataElementTypes.COORDINATE:
+            return 'Point';
+        case dataElementTypes.POLYGON:
+            return 'Polygon';
+        default:
+            return '';
+        }
+    };
     const getLabel = () => {
         switch (geometryType) {
         case dataElementTypes.COORDINATE:
@@ -45,7 +54,9 @@ export const AddLocation = ({ enrollment, onAddLocation }: Props) => {
             isOpen={isOpen}
             type={geometryType}
             setOpen={setOpen}
-            onSetCoordinates={onAddLocation}
+            onSetCoordinates={(coord) => {
+                onUpdate({ ...enrollment, geometry: { type: getServerFeatureType(), coordinates: coord } });
+            }}
         />
     </>);
 };

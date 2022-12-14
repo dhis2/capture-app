@@ -87,6 +87,11 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         dispatch(updateEnrollmentEvents(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
+
+    const onSetCoordinates = (coordinates) => {
+        console.log({ coordinates });
+    };
+
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
@@ -131,6 +136,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}
+            onSetCoordinates={onSetCoordinates}
         />
     );
 };
