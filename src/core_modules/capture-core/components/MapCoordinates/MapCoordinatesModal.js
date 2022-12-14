@@ -1,6 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import log from 'loglevel';
 import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import { Map, TileLayer, Marker, FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
@@ -103,7 +104,7 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, onSe
         case dataElementTypes.POLYGON:
             return i18n.t('area');
         default:
-            console.error(`${type} is not handled`);
+            log.error(`${type} is not handled`);
             return '';
         }
     };
@@ -123,6 +124,7 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, onSe
                     const convertedCoordinates = convertToServerCoordinates(position ?? coordinates, type);
                     // $FlowFixMe
                     onSetCoordinates(convertedCoordinates);
+                    setOpen(false);
                 }
             }}
             primary

@@ -22,7 +22,6 @@ export type PlainProps = {|
     onEnrollmentError: (message: string) => void,
     onCancelEditEvent: () => void,
     onHandleScheduleSave: (eventData: Object) => void,
-    onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
     pageStatus: string,
     eventStatus?: string,
     ...CssClasses,

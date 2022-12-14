@@ -55,7 +55,6 @@ export const EnrollmentPageDefaultPlain = ({
     onAddNew,
     onViewAll,
     onCreateNew,
-    onSetCoordinates,
     widgetEffects,
     hideWidgets,
     classes,
@@ -110,7 +109,6 @@ export const EnrollmentPageDefaultPlain = ({
                     onDelete={onDelete}
                     onAddNew={onAddNew}
                     onError={onEnrollmentError}
-                    onSetCoordinates={onSetCoordinates}
                 />}
             </div>
         </div>

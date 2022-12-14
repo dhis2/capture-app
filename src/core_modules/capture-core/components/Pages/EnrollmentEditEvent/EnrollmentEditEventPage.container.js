@@ -5,7 +5,11 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
-import { useCommonEnrollmentDomainData, showEnrollmentError, updateEnrollmentEvents } from '../common/EnrollmentOverviewDomain';
+import {
+    useCommonEnrollmentDomainData,
+    showEnrollmentError,
+    updateEnrollmentEvents,
+} from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
@@ -88,11 +92,8 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
-    const onSetCoordinates = (coordinates) => {
-        console.log({ coordinates });
-    };
-
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
+
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name;
@@ -136,7 +137,6 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}
-            onSetCoordinates={onSetCoordinates}
         />
     );
 };
