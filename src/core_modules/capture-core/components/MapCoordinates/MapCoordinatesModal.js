@@ -29,7 +29,7 @@ const convertToServerCoordinates = (coordinates, type) => {
     case dataElementTypes.COORDINATE:
         return [coordinates[1], coordinates[0]];
     case dataElementTypes.POLYGON:
-        return coordinates[0].map(coord => [coord[1], coord[0]]);
+        return [coordinates[0]];
     default:
         return coordinates;
     }
