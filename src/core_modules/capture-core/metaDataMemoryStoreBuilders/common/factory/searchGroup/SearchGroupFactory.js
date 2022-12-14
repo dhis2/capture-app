@@ -174,6 +174,7 @@ export class SearchGroupFactory {
     }
 
     build(searchAttributes: $ReadOnlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<Array<SearchGroup>> {
+        console.log('searchAttributes', searchAttributes);
         const attributesBySearchGroup = searchAttributes
             .map(attribute => ({
                 ...attribute,
