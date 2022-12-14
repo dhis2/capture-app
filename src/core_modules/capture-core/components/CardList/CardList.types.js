@@ -38,5 +38,6 @@ export type RenderCustomCardActions = ({
   programName?: string,
   enrollmentType: $Keys<enrollmentTypes>,
   programId?: string,
-  programNameFromEnrollment?: string
+  program?: Object,
+  currentSearchScopeType?: string
 }) => Node
