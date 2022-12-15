@@ -906,8 +906,18 @@ msgstr "Create new"
 msgid "Saved lists in this program"
 msgstr "Saved lists in this program"
 
-msgid "Create custom working list"
-msgstr "Create custom working list"
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr "Saved lists offer quick access to your most used views in a program."
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+
+msgid "Create saved list"
+msgstr "Create saved list"
 
 msgid "events"
 msgstr "events"
