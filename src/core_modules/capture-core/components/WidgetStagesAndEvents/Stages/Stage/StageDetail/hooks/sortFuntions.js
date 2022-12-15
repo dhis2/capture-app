@@ -12,18 +12,16 @@ const sortNumber = (clientValueA: Object, clientValueB: Object, direction: strin
     const { eventDateA, eventDateB } = options;
 
     if (direction === SORT_DIRECTION.DESC) {
-        // If number is invalid, it should be at the bottom of the list
-        if (Number.isNaN(numA)) return -1;
-        if (Number.isNaN(numB)) return 1;
+        if (Number.isNaN(numA)) return 1;
+        if (Number.isNaN(numB)) return -1;
 
         if (numA !== numB) {
             return numA - numB;
         }
         return moment(eventDateB).unix() - moment(eventDateA).unix();
     } else if (direction === SORT_DIRECTION.ASC) {
-        // If number is invalid, it should be at the top of the list
-        if (Number.isNaN(numA)) return 1;
-        if (Number.isNaN(numB)) return -1;
+        if (Number.isNaN(numA)) return -1;
+        if (Number.isNaN(numB)) return 1;
 
         if (numA !== numB) {
             return numB - numA;
@@ -36,20 +34,24 @@ const sortNumber = (clientValueA: Object, clientValueB: Object, direction: strin
 
 const sortText = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
     const { eventDateA, eventDateB } = options;
-    if (clientValueA === undefined) {
-        return 1;
-    } else if (clientValueB === undefined) {
-        return -1;
-    }
+
     if (direction === SORT_DIRECTION.DESC) {
+        if (!clientValueA) return 1;
+        if (!clientValueB) return -1;
+
         if (clientValueA !== clientValueB) {
-            return clientValueA - clientValueB;
+            return clientValueA.localeCompare(clientValueB);
         }
+
         return moment(eventDateB).unix() - moment(eventDateA).unix();
     } else if (direction === SORT_DIRECTION.ASC) {
+        if (!clientValueA) return -1;
+        if (!clientValueB) return 1;
+
         if (clientValueA !== clientValueB) {
-            return clientValueB - clientValueA;
+            return clientValueB.localeCompare(clientValueA);
         }
+
         return moment(eventDateB).unix() - moment(eventDateA).unix();
     }
 
