@@ -64,7 +64,7 @@ const CardListButtons = ({
 }: Props) => {
     const dispatch = useDispatch();
     const navigationButtonsState = deriveNavigationButtonState(enrollmentType);
-
+    const currentSearchScopeProgramName = program?.name;
     const onHandleClick = () => {
         switch (currentSearchScopeType) {
         case searchScopes.ALL_PROGRAMS:
@@ -95,11 +95,10 @@ const CardListButtons = ({
     const buttonLists = [{
         dataTest: 'view-dashboard-button',
         onClick: onHandleClick,
-        label: currentSearchScopeType === searchScopes.ALL_PROGRAMS ? i18n.t('View {{programName}} dashboard',
-            {
-                programName: program?.name,
-                interpolation: { escapeValue: false },
-            })
+        label: currentSearchScopeType === searchScopes.ALL_PROGRAMS ? i18n.t('View {{programName}} dashboard', {
+            programName: currentSearchScopeProgramName,
+            interpolation: { escapeValue: false },
+        })
             : i18n.t('View dashboard'),
     },
     {
