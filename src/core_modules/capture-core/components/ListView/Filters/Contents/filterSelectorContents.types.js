@@ -6,6 +6,8 @@ type PassOnProps = $ReadOnly<{|
     id: string,
     onClose: Function,
     onUpdate: Function,
+    onRemove: Function,
+    isRemovable?: boolean,
 |}>;
 export type Props = $ReadOnly<{|
     ...PassOnProps,

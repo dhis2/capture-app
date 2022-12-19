@@ -3,19 +3,19 @@
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
 # ericbp <ericbarredap@gmail.com>, 2021
 # Alison Andrade <aandrade@ippfwhr.org>, 2021
-# Marta Vila <marta@dhis2.org>, 2021
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2021
 # Prabhjot Singh, 2021
-# Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
+# Marta Vila <marta@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022\n"
+"Last-Translator: Marta Vila <marta@dhis2.org>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,6 +57,9 @@ msgstr "Unidad organizativa"
 
 msgid "Date of enrollment"
 msgstr "Fecha de inscripción"
+
+msgid "Program name"
+msgstr ""
 
 msgid "Last updated"
 msgstr "Última actualización"
@@ -342,6 +345,18 @@ msgstr "Indicadores"
 msgid "Warnings"
 msgstr "Advertencias"
 
+msgid "Generate new event"
+msgstr "Generar nuevo evento"
+
+msgid "Do you want to create another event?"
+msgstr "¿Quiere crear un nuevo evento?"
+
+msgid "No, cancel"
+msgstr "No, cancela"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "Advertencias encontradas"
 
@@ -522,6 +537,9 @@ msgstr "Actualizar"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} a {{toDate}}"
 
@@ -539,6 +557,9 @@ msgstr "menos que o igual a"
 
 msgid "More filters"
 msgstr "Más filtros"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "Filas por página"
@@ -577,9 +598,6 @@ msgstr ""
 
 msgid "Opt in for {{programName}}"
 msgstr ""
-
-msgid "No, cancel"
-msgstr "No, cancela"
 
 msgid "Yes, opt in"
 msgstr ""
@@ -776,8 +794,8 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
-msgid "Save new"
-msgstr "Guardar nuevo"
+msgid "Save {{trackedEntityName}}"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Guardar el nuevo {{trackedEntityTypeName}} y el enlace"
@@ -901,12 +919,6 @@ msgstr "Volver a inscribirse"
 msgid "all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Crear nuevo"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -916,6 +928,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Buscar en todos los programas"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Crear nuevo"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1149,6 +1167,12 @@ msgstr "Eliminar evento"
 msgid "Yes, delete event"
 msgstr ""
 
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr ""
+
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Evento completado"
 
@@ -1158,13 +1182,16 @@ msgstr ""
 msgid "Schedule date info"
 msgstr ""
 
-msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgid ""
+"The scheduled date matches the suggested date, but can be changed if needed."
+msgstr ""
+
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -1304,6 +1331,9 @@ msgstr "Estado de la inscripción."
 
 msgid "Assigned to"
 msgstr "Asignado a"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
 
 msgid "Registration Date"
 msgstr "Fecha de registro"

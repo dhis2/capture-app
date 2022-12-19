@@ -22,8 +22,8 @@ export const navigateToNewUserPageEpic = (action$: InputObservable, store: Redux
     action$.pipe(
         ofType(searchPageActionTypes.NAVIGATE_TO_NEW_USER_PAGE),
         switchMap(() => {
-            const { currentSelections: { programId, orgUnitId } } = store.value;
-            history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
+            const { currentSelections: { programId, orgUnitId, trackedEntityTypeId } } = store.value;
+            history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId })}`);
 
             return EMPTY;
         }),

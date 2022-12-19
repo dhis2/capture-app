@@ -12,8 +12,3 @@ Feature: Smoke tests
         And you sign in
         Then you should see the app main selections
         And you should see the header bar
-
-    @skip-login
-    Scenario: Login with user using english language
-       Given you open the capture app with english language
-       Then you should see the app main selections

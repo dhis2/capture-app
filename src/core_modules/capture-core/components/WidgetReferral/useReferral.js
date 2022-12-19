@@ -1,40 +1,25 @@
 // @flow
-import { useEffect, useMemo, useState } from 'react';
-import { useDataQuery } from '@dhis2/app-runtime';
+import { useEffect, useState, useCallback } from 'react';
 import { referralStatus } from './constants';
+import { getUserStorageController } from '../../storageControllers';
+import { userStores } from '../../storageControllers/stores';
 
 export const useReferral = (programStageId: string) => {
     const [currentReferralStatus, setReferralStatus] = useState();
     const [selectedRelationshipTypes, setSelectedRelationshipTypes] = useState([]);
 
-    const { data: programStageData } = useDataQuery(useMemo(() => ({
-        programStageReferral: {
-            resource: 'programStages',
-            id: programStageId,
-            params: {
-                fields:
-                ['referral'],
-            },
-        },
-    }), [programStageId]));
+    const getRelationshipTypeFromIndexedDB = useCallback(async () => {
+        const storageController = getUserStorageController();
+        const allRelationshipTypes = await storageController.getAll(userStores.RELATIONSHIP_TYPES);
+        const referrableRelationshipTypes = allRelationshipTypes
+            .filter(relationshipType => relationshipType.referral && relationshipType.access.data.write);
 
-    const { data: relationshipTypeData } = useDataQuery({
-        relationshipTypes: {
-            resource: 'relationshipTypes',
-            params: {
-                fields: 'id,access[*],referral,fromConstraint[*],toConstraint[*]',
-            },
-        },
-    });
+        setSelectedRelationshipTypes(referrableRelationshipTypes);
+    }, []);
 
     useEffect(() => {
-        if (relationshipTypeData?.relationshipTypes?.relationshipTypes) {
-            const referrableRelationshipTypes = relationshipTypeData.relationshipTypes.relationshipTypes
-                .filter(relationshipType => relationshipType.referral && relationshipType.access.data.write);
-
-            setSelectedRelationshipTypes(referrableRelationshipTypes);
-        }
-    }, [relationshipTypeData]);
+        getRelationshipTypeFromIndexedDB();
+    }, [getRelationshipTypeFromIndexedDB]);
 
     useEffect(() => {
         if (selectedRelationshipTypes.length === 1) {
@@ -42,7 +27,6 @@ export const useReferral = (programStageId: string) => {
 
             if ((fromConstraint?.programStage?.id === programStageId
                 || toConstraint?.programStage?.id === programStageId)
-                && programStageData?.programStageReferral?.referral
             ) {
                 setReferralStatus(referralStatus.REFERRABLE);
             }
@@ -54,7 +38,6 @@ export const useReferral = (programStageId: string) => {
         selectedRelationshipTypes,
         setReferralStatus,
         programStageId,
-        programStageData,
     ]);
 
 

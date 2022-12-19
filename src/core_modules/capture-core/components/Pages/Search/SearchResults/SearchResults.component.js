@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, colors } from '@dhis2/ui';
-import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { CardList } from '../../../CardList';
 import { withNavigation } from '../../../Pagination/withDefaultNavigation';
@@ -17,7 +16,6 @@ import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { Widget } from '../../../Widget';
 
 const SearchPagination = withNavigation()(Pagination);
@@ -142,12 +140,11 @@ export const SearchResultsIndex = ({
     currentFormId,
     currentSearchTerms,
     fallbackTriggered,
+    handleCreateNew,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
-    const { programId, orgUnitId } = useLocationQuery();
     const [isTopResultsOpen, setTopResultsOpen] = useState(true);
     const [isOtherResultsOpen, setOtherResultsOpen] = useState(true);
-    const history = useHistory();
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:
@@ -186,10 +183,6 @@ export const SearchResultsIndex = ({
             formId: currentFormId,
             resultsPageSize,
         });
-    };
-
-    const handleCreateNew = () => {
-        history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     };
 
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : '';
@@ -262,29 +255,29 @@ export const SearchResultsIndex = ({
                     currentPage={otherCurrentPage}
                 />
             </div>
-            <div className={classes.bottom}>
-                <div className={classes.bottomText}>
-                    {i18n.t('If none of search results match, you can create new ')}&quot;{trackedEntityName}&quot;.
-                </div>
-
-                <Button onClick={handleCreateNew} dataTest="create-new-button">
-                    {i18n.t('Create new')}
-                </Button>
-            </div>
         </Widget>}
         {
             currentSearchScopeType === searchScopes.PROGRAM && !fallbackTriggered && otherResults === undefined &&
-            <div className={classes.bottom}>
-                <div className={classes.bottomText}>
-                    {i18n.t('Not finding the results you were looking for? Try to search all programs that use type ')}&quot;{trackedEntityName}&quot;.
+
+                <div className={classes.bottom}>
+                    <div className={classes.bottomText}>
+                        {i18n.t('Not finding the results you were looking for? Try to search all programs that use type ')}&quot;{trackedEntityName}&quot;.
+                    </div>
+
+                    <Button onClick={handleFallbackSearch} dataTest="fallback-search-button">
+                        {i18n.t('Search in all programs')}
+                    </Button>
                 </div>
-
-                <Button onClick={handleFallbackSearch} dataTest="fallback-search-button">
-                    {i18n.t('Search in all programs')}
-                </Button>
-            </div>
         }
+        <div className={classes.bottom}>
+            <div className={classes.bottomText}>
+                {i18n.t('If none of search results match, you can create a new ')}&quot;{trackedEntityName}&quot;.
+            </div>
 
+            <Button onClick={handleCreateNew} dataTest="create-new-button">
+                {i18n.t('Create new')}
+            </Button>
+        </div>
     </>);
 };
 
