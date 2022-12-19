@@ -1,11 +1,14 @@
 // @flow
 import React from 'react';
 import type { ComponentType } from 'react';
+import { useSelector } from 'react-redux';
+
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRulesEngineOrgUnit } from '../../../hooks/useRulesEngineOrgUnit';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
@@ -20,6 +23,11 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     if (error) {
         return error.errorComponent;
     }
+    const isUserInteractionInProgress: boolean = useSelector(
+        state =>
+            dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
+          || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
+    );
 
     return (
         <EnrollmentRegistrationEntryComponent
@@ -31,6 +39,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             skipDuplicateCheck={skipDuplicateCheck}
             orgUnitId={orgUnitId}
             orgUnit={orgUnit}
+            isUserInteractionInProgress={isUserInteractionInProgress}
         />
     );
 };

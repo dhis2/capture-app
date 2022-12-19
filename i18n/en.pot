@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-12-02T14:34:42.609Z\n"
-"PO-Revision-Date: 2022-12-02T14:34:42.609Z\n"
+"POT-Creation-Date: 2022-12-19T16:33:21.524Z\n"
+"PO-Revision-Date: 2022-12-19T16:33:21.524Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -140,6 +140,22 @@ msgstr "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgid "Cancel"
 msgstr "Cancel"
 
+msgid "Unsaved changes"
+msgstr "Unsaved changes"
+
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+
+msgid "Yes, discard"
+msgstr "Yes, discard"
+
+msgid "No, stay here"
+msgstr "No, stay here"
+
 msgid "Metadata error. see log for details"
 msgstr "Metadata error. see log for details"
 
@@ -237,22 +253,6 @@ msgstr "Adding relationship to event."
 
 msgid "Go back to event without saving relationship"
 msgstr "Go back to event without saving relationship"
-
-msgid "Unsaved changes"
-msgstr "Unsaved changes"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-
-msgid "Yes, discard"
-msgstr "Yes, discard"
-
-msgid "No, stay here"
-msgstr "No, stay here"
 
 msgid "New event"
 msgstr "New event"
