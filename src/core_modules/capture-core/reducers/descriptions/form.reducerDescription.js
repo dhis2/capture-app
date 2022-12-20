@@ -209,6 +209,39 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+        const { formBuilderId, rulesEffects } = action.payload;
+        const assignEffects: { [id: string]: Array<AssignOutputEffect> } =
+            rulesEffects && rulesEffects[effectActions.ASSIGN_VALUE];
+
+        if (!assignEffects || !formBuilderId) {
+            return state;
+        }
+
+        return {
+            ...state,
+            [formBuilderId]: {
+                ...state[formBuilderId],
+                ...Object.keys(assignEffects).reduce((acc, id) => {
+                    assignEffects[id].forEach((effect) => {
+                        if (effect.type === effectActions.ASSIGN_VALUE && effect.value !== null) {
+                            acc[id] = {
+                                valid: true,
+                                errorData: undefined,
+                                errorMessage: undefined,
+                                errorType: undefined,
+                                modified: true,
+                                touched: true,
+                                validatingMessage: null,
+                            };
+                        }
+                    });
+
+                    return acc;
+                }, {}),
+            },
+        };
+    },
 }, 'formsSectionsFieldsUI');
 
 export const formsDesc = createReducerDescription({

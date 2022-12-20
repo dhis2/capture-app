@@ -29,6 +29,7 @@ export const runRulesOnUpdateFieldBatch = (
     attributeValues?: TEIValues,
     extraActions: Array<ReduxAction<any, any>> = [],
     uid: string,
+    formBuilderId?: string,
 ) => {
     const effects = getApplicableRuleEffectsForTrackerProgram({
         program,
@@ -38,7 +39,7 @@ export const runRulesOnUpdateFieldBatch = (
     });
 
     return batchActions([
-        updateRulesEffects(effects, formId),
+        updateRulesEffects(effects, formId, formBuilderId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
         ...extraActions,
     ], batchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT);
