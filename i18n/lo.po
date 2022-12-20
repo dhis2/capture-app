@@ -3,13 +3,14 @@
 # phil_dhis2, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
+# Saysamone Sibounma, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
+"Last-Translator: Saysamone Sibounma, 2022\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -318,6 +319,18 @@ msgstr "ຕົວຊີ້ວັດ"
 msgid "Warnings"
 msgstr ""
 
+msgid "Generate new event"
+msgstr "ປ້ອນກໍລະນີໃໝ່"
+
+msgid "Do you want to create another event?"
+msgstr "ທ່ານຕ້ອງການປ້ອນຂໍ້ມູນກໍລະນີອື່ນບໍ?"
+
+msgid "No, cancel"
+msgstr ""
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr ""
 
@@ -394,7 +407,7 @@ msgid "This month"
 msgstr "ເດືອນນີ້"
 
 msgid "This Year"
-msgstr ""
+msgstr "ປີນີ້"
 
 msgid "Last week"
 msgstr "ອາທິດທີ່ຜ່ານມາ"
@@ -498,6 +511,9 @@ msgstr "ປັບປຸງ"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
@@ -514,6 +530,9 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "More filters"
+msgstr ""
+
+msgid "Stage filters"
 msgstr ""
 
 msgid "Rows per page"
@@ -550,9 +569,6 @@ msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
 
 msgid "Opt in for {{programName}}"
-msgstr ""
-
-msgid "No, cancel"
 msgstr ""
 
 msgid "Yes, opt in"
@@ -742,7 +758,7 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
-msgid "Save new"
+msgid "Save {{trackedEntityName}}"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -832,7 +848,7 @@ msgid "An error has occurred"
 msgstr ""
 
 msgid "Too many results"
-msgstr ""
+msgstr "ຜົນໄດ້ຮັບຫຼາຍເກີນໄປ"
 
 msgid "Cannot search in all programs"
 msgstr ""
@@ -862,12 +878,6 @@ msgstr ""
 msgid "all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create new "
-msgstr ""
-
-msgid "Create new"
-msgstr ""
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -875,6 +885,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr ""
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "ສ້າງໃໝ່"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1102,6 +1118,12 @@ msgstr "ລືບກໍລະນີອອກ"
 msgid "Yes, delete event"
 msgstr ""
 
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr ""
+
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1111,13 +1133,16 @@ msgstr ""
 msgid "Schedule date info"
 msgstr ""
 
-msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgid ""
+"The scheduled date matches the suggested date, but can be changed if needed."
+msgstr ""
+
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 
 msgid "after"
@@ -1252,6 +1277,9 @@ msgstr "ສະຖານະການລົງທະບຽນ"
 msgid "Assigned to"
 msgstr "Assigned to"
 
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
 msgid "Registration Date"
 msgstr ""
 
@@ -1314,6 +1342,9 @@ msgstr "ກາຍເວລາທີ່ກໍານົດ"
 
 msgid "Skipped"
 msgstr "ຂ້າມໄປ"
+
+msgid "Visited"
+msgstr "ເຂົ້າຊົມ"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""

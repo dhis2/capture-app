@@ -13,6 +13,7 @@ import {
     Button,
     NoticeBox,
     IconChevronLeft24,
+    spacers,
 } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
@@ -34,6 +35,9 @@ const getStyles = (theme: Theme) => ({
     half: {
         flex: 1,
     },
+    quarter: {
+        flex: 0.4,
+    },
     title: {
         padding: '8px 0 0px 8px',
         fontWeight: 500,
@@ -42,12 +46,14 @@ const getStyles = (theme: Theme) => ({
     container: {
         padding: '10px 24px 24px 24px',
     },
-    flex: {
+    innerContainer: {
         display: 'flex',
         flexWrap: 'wrap',
+        gap: spacers.dp16,
     },
     paper: {
         padding: theme.typography.pxToRem(10),
+        flex: 1,
     },
     emptySelectionPaperContent: {
         display: 'flex',
@@ -246,36 +252,38 @@ const Index = ({
                         {i18n.t('Back')}
                     </Button>
                 )}
+                <div className={classes.innerContainer}>
+                    <Paper className={classes.paper}>
+                        <div className={classes.title}>
+                            {i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } })}
+                        </div>
+                        <div>
+                            <div className={classes.half}>
+                                {selectedSearchScopeType !== searchScopes.PROGRAM && (
+                                    <TrackedEntityTypeSelector
+                                        onSelect={handleSearchScopeSelection}
+                                        headerText={i18n.t('Search for')}
+                                        footerText={i18n.t(
+                                            'You can also choose a program from the top bar and search in that program',
+                                        )}
+                                    />
+                                )}
 
-                <Paper className={classes.paper}>
-                    <div className={classes.title}>
-                        {i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } })}
-                    </div>
-                    <div className={classes.flex}>
-                        <div className={classes.half}>
-                            {selectedSearchScopeType !== searchScopes.PROGRAM && (
-                                <TrackedEntityTypeSelector
-                                    onSelect={handleSearchScopeSelection}
-                                    headerText={i18n.t('Search for')}
-                                    footerText={i18n.t(
-                                        'You can also choose a program from the top bar and search in that program',
-                                    )}
+                                <SearchForm
+                                    fallbackTriggered={fallbackTriggered}
+                                    selectedSearchScopeId={selectedSearchScopeId}
+                                    searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                                 />
-                            )}
-
-                            <SearchForm
-                                fallbackTriggered={fallbackTriggered}
-                                selectedSearchScopeId={selectedSearchScopeId}
-                                searchGroupsForSelectedScope={searchGroupsForSelectedScope}
-                            />
-                            {searchStatusComponents()}
+                                {searchStatusComponents()}
+                            </div>
                         </div>
-                        <div className={classes.half}>
-                            <TemplateSelector />
-                        </div>
+                    </Paper>
+                    <div className={classes.quarter}>
+                        <TemplateSelector />
                     </div>
-                </Paper>
+                </div>
             </div>
+
             {searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId && (
                 <IncompleteSelectionsMessage>{i18n.t('Choose a type to start searching')}</IncompleteSelectionsMessage>
             )}

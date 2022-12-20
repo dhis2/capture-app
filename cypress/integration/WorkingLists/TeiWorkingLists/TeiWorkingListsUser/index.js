@@ -1,9 +1,38 @@
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import '../../sharedSteps';
 import '../../../sharedSteps';
 
 Given('you open the main page with Ngelehun and child programme context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="search-page-content"]')
+        .contains('Create saved list')
+        .click();
+});
+
+Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="search-page-content"]')
+        .contains('Create saved list')
+        .click();
+
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+            cy.contains('Program stage')
+                .click();
+        });
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('First antenatal care visit')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
 });
 
 Given('you open the main page with Ngelehun and malaria focus investigation program context', () => {
@@ -115,6 +144,41 @@ When('you set the enrollment status filter to active', () => {
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('Active')
+        .click();
+});
+
+When('you set the event status filter to completed', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Event status')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Completed')
+        .click();
+});
+
+When(/^you set the first name filter to (.*)$/, (name) => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('First name')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .find('input')
+        .type(name)
+        .blur();
+});
+
+When('you set the WHOMCH Smoking filter to No', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.get('[data-test="dhis2-uicore-button"]').eq(9)
+                .click();
+            cy.contains('WHOMCH Smoking')
+                .click();
+        });
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('No')
         .click();
 });
 
@@ -257,6 +321,18 @@ When('you click the first name column header', () => {
         .click();
 });
 
+When('you click the last name column header', () => {
+    cy.get('[data-test="online-list-table"]')
+        .contains('Last name')
+        .click();
+});
+
+When('you click the WHOMCH Smoking column header', () => {
+    cy.get('[data-test="online-list-table"]')
+        .contains('WHOMCH Smoking')
+        .click();
+});
+
 Then('the list should display data ordered ascendingly by first name', () => {
     const names = [
         'Alan',
@@ -289,6 +365,41 @@ Then('the list should display data ordered ascendingly by first name', () => {
         });
 });
 
+Then('the list should display data ordered ascendingly by last name', () => {
+    const names = [
+        'Hertz',
+        'Siren',
+    ];
+
+    cy.get('[data-test="tei-working-lists"]')
+        .find('tr')
+        .should('have.length', 3)
+        .each(($teiRow, index) => {
+            if (index) {
+                cy.wrap($teiRow)
+                    .contains(names[index - 1])
+                    .should('exist');
+            }
+        });
+});
+
+Then('the list should display data ordered ascendingly by WHOMCH Smoking', () => {
+    const names = [
+        'Siren',
+        'Hertz',
+    ];
+
+    cy.get('[data-test="tei-working-lists"]')
+        .find('tr')
+        .should('have.length', 3)
+        .each(($teiRow, index) => {
+            if (index) {
+                cy.wrap($teiRow)
+                    .contains(names[index - 1])
+                    .should('exist');
+            }
+        });
+});
 
 Then('you see the custom TEI working lists', () => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
@@ -410,4 +521,88 @@ When('you create a copy of the working list', () => {
     cy.wait('@newTrackerFilter', { timeout: 30000 });
 
     cy.reload();
+});
+
+When('you open the program stage filters from the more filters dropdown menu', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+            cy.contains('Program stage')
+                .click();
+        });
+});
+
+Then('you see the program stages and the default events filters', () => {
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Birth');
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Baby Postnatal');
+    cy.get('[data-test="filter-button-container-programStage"]')
+        .should('exist');
+    cy.get('[data-test="filter-button-container-occurredAt"]')
+        .should('exist');
+    cy.get('[data-test="filter-button-container-status"]')
+        .should('exist');
+});
+
+When('you select the First antenatal care visit program stage', () => {
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('First antenatal care visit')
+        .click();
+});
+
+When('you select a data element columns and save from the column selector', () => {
+    cy.get('div[role="dialog"]')
+        .contains('WHOMCH Chronic conditions')
+        .find('input')
+        .click();
+
+    cy.get('div[role="dialog"]')
+        .contains('Save')
+        .click();
+});
+
+Then('you see data elements specific filters and columns', () => {
+    cy.get('[data-test="filter-button-container-de0FEHSIoxh"]')
+        .should('exist');
+    cy.get('[data-test="tei-working-lists"]')
+        .should('exist');
+});
+
+Then('the list should display 1 row of data', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Enrollment status: Active')
+        .should('exist');
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Event status: Completed')
+        .should('exist');
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('First name: Urzula')
+        .should('exist');
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('WHOMCH Smoking: No')
+        .should('exist');
+
+    cy.get('[data-test="tei-working-lists"]')
+        .find('tr')
+        .should('have.length', 2);
+    cy.get('[data-test="tei-working-lists"]')
+        .find('table')
+        .contains('Urzula')
+        .should('exist');
+});
+
+Then(/^you ?(.*) see program stage working list events/, (not) => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('WHOMCH Smoking')
+        .should(not ? 'not.exist' : 'exist');
+});
+
+When('you remove the program stage filter', () => {
+    cy.get('[data-test="filter-button-container-programStage"]')
+        .click();
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Remove filter')
+        .click();
 });

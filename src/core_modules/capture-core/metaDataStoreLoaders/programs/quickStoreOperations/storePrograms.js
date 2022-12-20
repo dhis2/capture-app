@@ -94,7 +94,7 @@ const fieldsParam = 'id,displayName,displayShortName,description,programType,sty
 'trackedEntityType[id],' +
 'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
 'userRoles[id,displayName],' +
-'programStages[id,access,autoGenerateEvent,openAfterEnrollment,repeatable,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,name,displayName,description,executionDateLabel,dueDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode]' +
+'programStages[id,access,autoGenerateEvent,openAfterEnrollment,hideDueDate,allowGenerateNextVisit,repeatable,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,name,displayName,description,executionDateLabel,dueDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode]' +
 'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],' +
 'dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,url,optionSetValue,style,optionSet[id]]]],' +
 'programSections[id, displayFormName, sortOrder, trackedEntityAttributes],' +

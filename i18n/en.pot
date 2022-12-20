@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
-"PO-Revision-Date: 2022-09-16T07:55:37.554Z\n"
+"POT-Creation-Date: 2022-12-02T14:34:42.609Z\n"
+"PO-Revision-Date: 2022-12-02T14:34:42.609Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -325,6 +325,18 @@ msgstr "Indicators"
 msgid "Warnings"
 msgstr "Warnings"
 
+msgid "Generate new event"
+msgstr "Generate new event"
+
+msgid "Do you want to create another event?"
+msgstr "Do you want to create another event?"
+
+msgid "No, cancel"
+msgstr "No, cancel"
+
+msgid "Yes, create new event"
+msgstr "Yes, create new event"
+
 msgid "Warnings found"
 msgstr "Warnings found"
 
@@ -505,6 +517,9 @@ msgstr "Update"
 msgid "Reset filter"
 msgstr "Reset filter"
 
+msgid "Remove filter"
+msgstr "Remove filter"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"
 
@@ -522,6 +537,9 @@ msgstr "less than or equal to"
 
 msgid "More filters"
 msgstr "More filters"
+
+msgid "Stage filters"
+msgstr "Stage filters"
 
 msgid "Rows per page"
 msgstr "Rows per page"
@@ -558,9 +576,6 @@ msgstr "Use new Enrollment dashboard for {{programName}}"
 
 msgid "Opt in for {{programName}}"
 msgstr "Opt in for {{programName}}"
-
-msgid "No, cancel"
-msgstr "No, cancel"
 
 msgid "Yes, opt in"
 msgstr "Yes, opt in"
@@ -750,8 +765,8 @@ msgstr "You can also choose a program from the top bar and create in that progra
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "New Enrollment in program{{escape}} {{programName}}"
 
-msgid "Save new"
-msgstr "Save new"
+msgid "Save {{trackedEntityName}}"
+msgstr "Save {{trackedEntityName}}"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Save new {{trackedEntityTypeName}} and link"
@@ -872,12 +887,6 @@ msgstr "Re-enroll"
 msgid "all programs"
 msgstr "all programs"
 
-msgid "If none of search results match, you can create new "
-msgstr "If none of search results match, you can create new "
-
-msgid "Create new"
-msgstr "Create new"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -888,11 +897,27 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Search in all programs"
 
+msgid "If none of search results match, you can create a new "
+msgstr "If none of search results match, you can create a new "
+
+msgid "Create new"
+msgstr "Create new"
+
 msgid "Saved lists in this program"
 msgstr "Saved lists in this program"
 
-msgid "Create custom working list"
-msgstr "Create custom working list"
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr "Saved lists offer quick access to your most used views in a program."
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+
+msgid "Create saved list"
+msgstr "Create saved list"
 
 msgid "events"
 msgstr "events"
@@ -1121,6 +1146,9 @@ msgstr "Yes, delete event"
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "Go to “Schedule” tab to reschedule this event"
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr "Scheduled date cannot be changed for {{ eventStatus }} events"
+
 msgid "Event completed"
 msgstr "Event completed"
 
@@ -1130,17 +1158,16 @@ msgstr "Back to all stages and events"
 msgid "Schedule date info"
 msgstr "Schedule date info"
 
-msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
-msgstr ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
+msgstr "Scheduled automatically for {{suggestedScheduleDate}}"
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
-msgstr[0] "This date is {{count}} day {{position}} the suggested date."
-msgstr[1] "This date is {{count}} days {{position}} the suggested date."
+msgid "The scheduled date matches the suggested date, but can be changed if needed."
+msgstr "The scheduled date matches the suggested date, but can be changed if needed."
+
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural "The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] "The scheduled date is {{count}} day {{position}} the suggested date."
+msgstr[1] "The scheduled date is {{count}} days {{position}} the suggested date."
 
 msgid "after"
 msgstr "after"
@@ -1276,6 +1303,9 @@ msgstr "Enrollment status"
 msgid "Assigned to"
 msgstr "Assigned to"
 
+msgid "Choose a program stage to filter by {{label}}"
+msgstr "Choose a program stage to filter by {{label}}"
+
 msgid "Registration Date"
 msgstr "Registration Date"
 
@@ -1338,6 +1368,9 @@ msgstr "Overdue"
 
 msgid "Skipped"
 msgstr "Skipped"
+
+msgid "Visited"
+msgstr "Visited"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"

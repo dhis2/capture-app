@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
-import { IconChevronDown16, IconChevronUp16 } from '@dhis2/ui';
+import { IconChevronDown16, IconChevronUp16, Tooltip } from '@dhis2/ui';
 import { Button } from '../../../Buttons';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
-import type { UpdateFilter, ClearFilter } from '../../types';
+import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';
 import type { FilterData, Options } from '../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
@@ -44,10 +44,14 @@ type Props = {
     },
     onUpdateFilter: UpdateFilter,
     onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
+    isRemovable?: boolean,
     onSetVisibleSelector: Function,
     selectorVisible: boolean,
     filterValue?: FilterData,
     buttonText?: string,
+    disabled?: boolean,
+    tooltipContent?: string,
 };
 
 type State = {
@@ -90,6 +94,12 @@ class FilterButtonMainPlain extends Component<Props, State> {
         this.handleFilterUpdate(null);
     }
 
+    onRemove = () => {
+        const { itemId, onRemoveFilter } = this.props;
+        this.closeFilterSelector();
+        onRemoveFilter && onRemoveFilter(itemId);
+    }
+
     handleFilterUpdate = (data: ?FilterData) => {
         const { itemId, onUpdateFilter, onClearFilter } = this.props;
         if (data == null) {
@@ -106,7 +116,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderSelectorContents() {
-        const { itemId: id, type, options, multiValueFilter, filterValue } = this.props;
+        const { itemId: id, type, options, multiValueFilter, filterValue, isRemovable } = this.props;
 
         return (
             <FilterSelectorContents
@@ -117,6 +127,8 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.onClose}
                 filterValue={filterValue}
+                onRemove={this.onRemove}
+                isRemovable={isRemovable}
             />
         );
     }
@@ -152,22 +164,35 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderWithoutAppliedFilter() {
-        const { selectorVisible, classes, title } = this.props;
+        const { selectorVisible, classes, title, disabled, tooltipContent } = this.props;
 
-        return (
-            <Button
-                onClick={this.openFilterSelector}
-            >
-                {title}
-                {selectorVisible ? (
-                    <span className={classes.icon}>
-                        <IconChevronUp16 />
-                    </span>
-                ) : (
-                    <span className={classes.icon}>
-                        <IconChevronDown16 />
-                    </span>
+        return disabled ? (
+            <Tooltip content={tooltipContent} closeDelay={50}>
+                {({ onMouseOver, onMouseOut, ref }) => (
+                    <div
+                        ref={(divRef) => {
+                            if (divRef && disabled) {
+                                divRef.onmouseover = onMouseOver;
+                                divRef.onmouseout = onMouseOut;
+                                ref.current = divRef;
+                            }
+                        }}
+                    >
+                        <Button disabled={disabled}>
+                            {title}
+                            <span className={classes.icon}>
+                                {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
+                            </span>
+                        </Button>
+                    </div>
                 )}
+            </Tooltip>
+        ) : (
+            <Button onClick={this.openFilterSelector}>
+                {title}
+                <span className={classes.icon}>
+                    {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
+                </span>
             </Button>
         );
     }

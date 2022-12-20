@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
+import { Button, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
@@ -21,6 +21,10 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
+    },
+    container: {
+        padding: `0 ${spacers.dp16}`,
+        marginBottom: spacers.dp8,
     },
 };
 
@@ -101,7 +105,11 @@ const WidgetProfilePlain = ({
             return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
         }
 
-        return <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />;
+        return (
+            <div className={classes.container}>
+                <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />
+            </div>
+        );
     };
 
     return (
@@ -114,7 +122,7 @@ const WidgetProfilePlain = ({
                             interpolation: { escapeValue: false },
                         })}</div>
                         {isEditable && (
-                            <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} small>
+                            <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
                                 {i18n.t('Edit')}
                             </Button>
                         )}

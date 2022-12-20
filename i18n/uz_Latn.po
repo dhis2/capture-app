@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -49,6 +49,9 @@ msgstr "Tashkiliy birlik"
 
 msgid "Date of enrollment"
 msgstr "Roʼyxatga kiritilgan sana"
+
+msgid "Program name"
+msgstr ""
 
 msgid "Last updated"
 msgstr "Oxirgi yangilangan"
@@ -336,6 +339,18 @@ msgstr "Indikatorlar"
 msgid "Warnings"
 msgstr "Ogohlantirishlar"
 
+msgid "Generate new event"
+msgstr "Yangi hodisa/tadbir yaratish"
+
+msgid "Do you want to create another event?"
+msgstr "Haqiqatdan ham boshqa hodisa/tadbir yaratmoqchimisiz?"
+
+msgid "No, cancel"
+msgstr "Yoʼq, bekor qiling"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "Ogohlantirishlar topildi"
 
@@ -516,6 +531,9 @@ msgstr "Янгилаш"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr "Filtrni olib tashlash"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} dan {{toDate}} ga"
 
@@ -533,6 +551,9 @@ msgstr "dan kam yoki teng"
 
 msgid "More filters"
 msgstr "Koʼproq Filtr"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "Sahifada qatorlar"
@@ -570,9 +591,6 @@ msgstr ""
 
 msgid "Opt in for {{programName}}"
 msgstr ""
-
-msgid "No, cancel"
-msgstr "Yoʼq, bekor qiling"
 
 msgid "Yes, opt in"
 msgstr ""
@@ -761,7 +779,7 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
-msgid "Save new"
+msgid "Save {{trackedEntityName}}"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -887,12 +905,6 @@ msgstr "Qayta roʼyxatdan oʼtish"
 msgid "all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Yangisini yaratish"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -900,6 +912,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Barcha dasturlarda qidirish"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Yangisini yaratish"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1131,6 +1149,12 @@ msgstr "Hodisa/tadbirni oʼchirib tashlash"
 msgid "Yes, delete event"
 msgstr ""
 
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr ""
+
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1140,13 +1164,16 @@ msgstr ""
 msgid "Schedule date info"
 msgstr ""
 
-msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgid ""
+"The scheduled date matches the suggested date, but can be changed if needed."
+msgstr ""
+
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 
 msgid "after"
@@ -1281,6 +1308,9 @@ msgstr "Roʼyxatga olish holati"
 msgid "Assigned to"
 msgstr ""
 
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "Roʼyxatga olingan sana"
 
@@ -1344,6 +1374,9 @@ msgstr "Muddat oʼtgan"
 
 msgid "Skipped"
 msgstr "Oʼtkazib yuborildi"
+
+msgid "Visited"
+msgstr "Tashrif buyurdi"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""

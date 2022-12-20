@@ -2,7 +2,7 @@
 /* eslint-disable complexity */
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import * as React from 'react';
 import { makeCancelablePromise } from 'capture-core-utils';
 import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';

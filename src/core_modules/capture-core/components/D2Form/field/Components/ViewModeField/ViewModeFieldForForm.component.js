@@ -1,6 +1,7 @@
 // @flow
 import {
     withDefaultFieldContainer,
+    withHideCompatibility,
     withLabel,
     withFilterProps,
     ViewModeField,
@@ -14,14 +15,12 @@ const getFilteredProps = (props: Object) => {
 };
 
 export const ViewModeFieldForForm =
-withDefaultFieldContainer()(
-    withLabel({
-        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-        onGetCustomFieldLabeClass: (props: Object) =>
-            `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.viewModeLabel}`,
-    })(
-        withFilterProps(getFilteredProps)(
-            ViewModeField,
-        ),
+withHideCompatibility()(
+    withDefaultFieldContainer()(
+        withLabel({
+            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+            onGetCustomFieldLabeClass: (props: Object) =>
+                `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.viewModeLabel}`,
+        })(withFilterProps(getFilteredProps)(ViewModeField)),
     ),
 );

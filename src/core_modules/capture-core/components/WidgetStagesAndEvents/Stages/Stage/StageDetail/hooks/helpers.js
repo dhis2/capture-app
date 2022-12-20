@@ -7,9 +7,7 @@ import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
 import { Comments } from '../Comments.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
-
-const isEventOverdue = (event: ApiEnrollmentEvent) => moment(event.scheduledAt).isBefore(moment().startOf('day'))
-    && event.status === statusTypes.SCHEDULE;
+import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
@@ -65,6 +63,7 @@ const groupRecordsByType = async (
     events: Array<ApiEnrollmentEvent>,
     dataElements: Array<StageDataElement>,
     querySingleResource: QuerySingleResource,
+    absoluteApiPath: string,
 ) => {
     // $FlowFixMe
     const dataElementsByType = events.reduce((acc, event) => {
@@ -83,7 +82,7 @@ const groupRecordsByType = async (
     }, []);
     // $FlowFixMe
     for await (const item of dataElementsByType) {
-        item.ids = await getSubValues(item.type, item.ids, querySingleResource);
+        item.ids = await getSubValues(item, querySingleResource, absoluteApiPath);
     }
     return dataElementsByType;
 };

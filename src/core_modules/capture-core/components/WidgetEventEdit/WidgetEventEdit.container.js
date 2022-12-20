@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24, Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import { useEnrollmentEditEventPageMode, useRulesEngineOrgUnit } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useRulesEngineOrgUnit, useAvailableProgramStages } from 'capture-core/hooks';
 import type { Props } from './widgetEventEdit.types';
 import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
@@ -53,6 +53,7 @@ export const WidgetEventEditPlain = ({
     programId,
     orgUnitId,
     enrollmentId,
+    teiId,
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
@@ -63,11 +64,11 @@ export const WidgetEventEditPlain = ({
     }, [dispatch]);
 
     const eventAccess = getProgramEventAccess(programId, programStage.id);
+    const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
 
     if (error) {
         return error.errorComponent;
     }
-
 
     return orgUnit ? (
         <div data-test="widget-enrollment-event">
@@ -130,6 +131,7 @@ export const WidgetEventEditPlain = ({
                         <ViewEventDataEntry
                             formFoundation={programStage.stageForm}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
+                            hideDueDate={programStage.hideDueDate}
                         />
                     ) : (
                         <EditEventDataEntry
@@ -138,12 +140,16 @@ export const WidgetEventEditPlain = ({
                             orgUnit={orgUnit}
                             programId={programId}
                             stageId={programStage.id}
+                            teiId={teiId}
                             enrollmentId={enrollmentId}
                             eventStatus={eventStatus}
                             onCancelEditEvent={onCancelEditEvent}
                             hasDeleteButton
                             onHandleScheduleSave={onHandleScheduleSave}
                             initialScheduleDate={initialScheduleDate}
+                            allowGenerateNextVisit={programStage.allowGenerateNextVisit}
+                            availableProgramStages={availableProgramStages}
+                            hideDueDate={programStage.hideDueDate}
                         />
                     )}
                 </div>

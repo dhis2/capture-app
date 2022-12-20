@@ -30,6 +30,6 @@ export const Complete = ({ enrollment, onUpdate }: Props) =>
                 })
             }
             icon={<IconCheckmark16 />}
-            label={i18n.t('Completed')}
+            label={i18n.t('Complete')}
         />
     ));
