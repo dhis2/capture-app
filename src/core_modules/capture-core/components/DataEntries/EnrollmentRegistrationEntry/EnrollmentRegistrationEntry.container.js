@@ -19,15 +19,15 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     const orgUnitId = useCurrentOrgUnitInfo().id;
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
     const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
-
-    if (error) {
-        return error.errorComponent;
-    }
     const isUserInteractionInProgress: boolean = useSelector(
         state =>
             dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
           || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
     );
+
+    if (error) {
+        return error.errorComponent;
+    }
 
     return (
         <EnrollmentRegistrationEntryComponent
