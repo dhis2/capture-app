@@ -131,6 +131,15 @@ Feature: User creates a new entries from the registration page
     When you click the previous page button
     Then you can see the first page of the results
 
+  Scenario: New person > Cancel the editing form should show a warning
+    Given you are on the default registration page
+    And you select org unit
+    And you select Child Programme
+    When you fill in a unique first name
+    And you click the cancel button
+    Then you should see confirm dialog
+    Then you are navigated to the working list with programId IpHINAT79UW
+
 ### New person in Tracker Program
 
   Scenario: New person in Tracker Program > Submitting the form with empty visit date throws validation error

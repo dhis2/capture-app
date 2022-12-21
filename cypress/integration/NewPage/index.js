@@ -353,6 +353,10 @@ And('you are navigated to the working list', () => {
         .should('exist');
 });
 
+Then(/^you are navigated to the working list with programId (.*)$/, (programId) => {
+    cy.url()
+        .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=${programId}`);
+});
 
 // New person
 And('you are in the Person registration page', () => {

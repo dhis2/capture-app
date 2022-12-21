@@ -69,6 +69,25 @@ When('you click the next page button', () => {
         .click();
 });
 
+When('you click the cancel button', () => {
+    cy.get('[data-test="cancel-button"]')
+        .click();
+});
+
+
+Then('you should see confirm dialog', () => {
+    cy.get('[data-test="dhis2-uicore-layer"].translucent').within(() => {
+        cy.get('[role="dialog"]')
+            .find('[data-test="dhis2-uicore-modaltitle"]')
+            .contains('Unsaved changes')
+            .should('exist');
+        cy.get('[role="dialog"]')
+            .find('[data-test="dhis2-uicore-button"]')
+            .contains('Yes, discard')
+            .click();
+    });
+});
+
 Then('you can see the second page of the results', () => {
     cy.get('[data-test="search-results-list"]')
         .should('exist');
