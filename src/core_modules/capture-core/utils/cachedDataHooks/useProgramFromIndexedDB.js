@@ -10,11 +10,14 @@ export const useProgramFromIndexedDB = (programId: string) => {
     const { data, isLoading, isError } = useIndexedDBQuery(
         ['programs', programId],
         () => storageController.get(userStores.PROGRAMS, programId),
+        {
+            enabled: !!programId,
+        },
     );
 
     return {
         program: data,
-        loading: isLoading,
-        error: isError,
+        isLoading,
+        isError,
     };
 };
