@@ -25,7 +25,7 @@ const searchScopes = {
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
-const buildSearchOption = (id, name, searchGroups, searchScope, type) => ({
+export const buildSearchOption = (id, name, searchGroups, searchScope, type) => ({
     searchOptionId: id,
     searchOptionName: name,
     TETypeName: type,
@@ -42,11 +42,12 @@ const buildSearchOption = (id, name, searchGroups, searchScope, type) => ({
     })),
 });
 
-export const useSearchOptions = (): AvailableSearchOptions => {
+export const useSearchOptions = (searchGroups = new Map()): AvailableSearchOptions => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
+
     return useMemo(
-        () =>
-            Object.values(trackedEntityTypesWithCorrelatedPrograms).reduce(
+        () => Object.values(trackedEntityTypesWithCorrelatedPrograms)
+            .reduce(
                 // $FlowFixMe https://github.com/facebook/flow/issues/2221
                 (acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
                     ...acc,
@@ -58,7 +59,7 @@ export const useSearchOptions = (): AvailableSearchOptions => {
                     ),
 
                     ...programs.reduce(
-                        (accumulated, { programId, programName, searchGroups }) => ({
+                        (accumulated, { programId, programName }) => ({
                             ...accumulated,
                             [programId]: buildSearchOption(
                                 programId,
@@ -73,6 +74,6 @@ export const useSearchOptions = (): AvailableSearchOptions => {
                 }),
                 {},
             ),
-        [trackedEntityTypesWithCorrelatedPrograms],
+        [searchGroups, trackedEntityTypesWithCorrelatedPrograms],
     );
 };

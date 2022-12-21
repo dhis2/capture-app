@@ -9,9 +9,11 @@ import { EnrollmentPage } from 'capture-core/components/Pages/Enrollment';
 import { StageEventListPage } from 'capture-core/components/Pages/StageEvent';
 import { EnrollmentEditEventPage } from 'capture-core/components/Pages/EnrollmentEditEvent';
 import { EnrollmentAddEventPage } from 'capture-core/components/Pages/EnrollmentAddEvent';
+import { TestPage } from '../../core_modules/capture-core/components/Pages/TestPage/TestPage';
 
 export const AppPages = () => (
     <Switch>
+        <Route path={'/test'} component={TestPage} />
         <Route path="/viewEvent" component={ViewEventPage} />
         <Route path="/search" component={SearchPage} />
         <Route path="/new" component={NewPage} />

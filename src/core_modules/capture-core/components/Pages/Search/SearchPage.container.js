@@ -18,6 +18,7 @@ import {
 } from '../../../hooks';
 import { TopBar } from './TopBar.container';
 import { ResultsPageSizeContext } from '../shared-contexts';
+import { useSearchGroupForProgram } from '../../../utils/cachedDataHooks/useSearchGroupForProgram';
 
 const usePreselectedProgram = (currentSelectionsId): ?string => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
@@ -52,9 +53,11 @@ export const SearchPage: ComponentType<{||}> = () => {
         [dispatch]);
     const dispatchNavigateToNewUserPage = useCallback(() => { dispatch(navigateToNewUserPage()); }, [dispatch]);
 
+    const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
-    const availableSearchOptions = useSearchOptions();
     const preselectedProgramId = usePreselectedProgram(programId);
+    const { searchGroups } = useSearchGroupForProgram(preselectedProgramId ?? trackedEntityTypeId);
+    const availableSearchOptions = useSearchOptions(searchGroups);
 
     const searchStatus: string =
       useSelector(({ searchPage }) => searchPage.searchStatus);
@@ -63,7 +66,6 @@ export const SearchPage: ComponentType<{||}> = () => {
     const ready: boolean =
       useSelector(({ activePage }) => !activePage.isLoading);
 
-    const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
     const { searchableFields, minAttributesRequiredToSearch } =
         useSelector(({ searchPage }) => searchPage);
@@ -88,9 +90,9 @@ export const SearchPage: ComponentType<{||}> = () => {
                 showInitialSearchPage={dispatchShowInitialSearchPage}
                 cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
                 navigateToRegisterUser={dispatchNavigateToNewUserPage}
-                availableSearchOptions={availableSearchOptions}
                 preselectedProgramId={preselectedProgramId}
                 trackedEntityTypeId={trackedEntityTypeId}
+                availableSearchOptions={availableSearchOptions}
                 searchStatus={searchStatus}
                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                 searchableFields={searchableFields}

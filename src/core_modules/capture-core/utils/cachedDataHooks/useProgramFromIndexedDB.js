@@ -9,7 +9,10 @@ export const useProgramFromIndexedDB = (programId: string) => {
 
     const { data, isLoading, isError } = useIndexedDBQuery(
         ['programs', programId],
-        () => storageController.get(userStores.PROGRAMS, programId),
+        () => storageController.get(userStores.PROGRAMS, 'IpHINAT79UW'),
+        {
+            enabled: !!programId,
+        },
     );
 
     return {

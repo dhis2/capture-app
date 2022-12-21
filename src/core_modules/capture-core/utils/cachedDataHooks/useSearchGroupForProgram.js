@@ -7,11 +7,13 @@ import { userStores } from '../../storageControllers/stores';
 
 const buildSearchGroup = async (program) => {
     const storageController = getUserStorageController();
+
     const optionSets = await storageController.getAll(userStores.OPTION_SETS);
+    const trackedEntityAttributes = await storageController.getAll(userStores.TRACKED_ENTITY_ATTRIBUTES);
 
     const searchGroupFactory = new SearchGroupFactory({
-        cachedTrackedEntityAttributes: program?.programTrackedEntityAttributes,
-        cachedOptionSets: optionSets,
+        cachedTrackedEntityAttributes: new Map(trackedEntityAttributes.map(tea => [tea.id, tea])),
+        cachedOptionSets: new Map(optionSets.map(optionSet => [optionSet.id, optionSet])),
         locale: 'en',
     });
 
@@ -23,9 +25,9 @@ const buildSearchGroup = async (program) => {
     return SearchGroup;
 };
 
-export const useSearchGroupForProgram = (programId: string) => {
-    const { program: data } = useProgramFromIndexedDB('IpHINAT79UW');
 
+export const useSearchGroupForProgram = (programId: string) => {
+    const { program: data } = useProgramFromIndexedDB(programId);
 
     const { data: searchGroups, isLoading, error } = useQuery(
         ['searchGroup', programId],
@@ -35,10 +37,9 @@ export const useSearchGroupForProgram = (programId: string) => {
         },
     );
 
-    console.log('searchGroup', searchGroups);
-    console.log('error', error);
-
     return {
-        data,
+        searchGroups,
+        isLoading,
+        error,
     };
 };

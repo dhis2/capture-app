@@ -127,9 +127,10 @@ const Index = ({
         };
     }, [fallbackTriggered, cleanSearchRelatedInfo, preselectedProgramId, showInitialSearchPage]);
 
-    const searchGroupsForSelectedScope = selectedSearchScopeId
-        ? availableSearchOptions[selectedSearchScopeId].searchGroups
-        : [];
+    const searchGroupsForSelectedScope =
+        selectedSearchScopeId
+            ? availableSearchOptions[selectedSearchScopeId].searchGroups
+            : [];
 
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
@@ -217,7 +218,7 @@ const Index = ({
                     <NoticeBox title={i18n.t('Too many results')} warning>
                         {i18n.t(
                             'This search returned too many results to show. Try changing search terms or searching ' +
-                                'by more attributes to narrow down the results.',
+                            'by more attributes to narrow down the results.',
                         )}
                     </NoticeBox>
                 </div>
@@ -269,11 +270,13 @@ const Index = ({
                                     />
                                 )}
 
-                                <SearchForm
-                                    fallbackTriggered={fallbackTriggered}
-                                    selectedSearchScopeId={selectedSearchScopeId}
-                                    searchGroupsForSelectedScope={searchGroupsForSelectedScope}
-                                />
+                                {searchGroupsForSelectedScope && (
+                                    <SearchForm
+                                        fallbackTriggered={fallbackTriggered}
+                                        selectedSearchScopeId={selectedSearchScopeId}
+                                        searchGroupsForSelectedScope={searchGroupsForSelectedScope}
+                                    />
+                                )}
                                 {searchStatusComponents()}
                             </div>
                         </div>
