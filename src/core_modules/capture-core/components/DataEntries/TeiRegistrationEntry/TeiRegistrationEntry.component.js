@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useState } from 'react';
 import { compose } from 'redux';
 import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -10,6 +10,7 @@ import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
+import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
@@ -46,13 +47,22 @@ const TeiRegistrationEntryPlain =
       classes,
       onPostProcessErrorMessage,
       trackedEntityName,
+      isUserInteractionInProgress,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
-
+      const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
       const orgUnit = useCurrentOrgUnitInfo();
+
+      const handleOnCancel = () => {
+          if (!isUserInteractionInProgress) {
+              navigateToWorkingListsPage();
+          } else {
+              setShowWarning(true);
+          }
+      };
 
       const navigateToWorkingListsPage = () => {
           const url =
@@ -96,7 +106,7 @@ const TeiRegistrationEntryPlain =
                           <Button
                               dataTest="cancel-button"
                               secondary
-                              onClick={navigateToWorkingListsPage}
+                              onClick={handleOnCancel}
                               className={classes.marginLeft}
                           >
                               {i18n.t('Cancel')}
@@ -106,6 +116,15 @@ const TeiRegistrationEntryPlain =
                           {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
                       </InfoIconText>
 
+                      <ConfirmDialog
+                          header={i18n.t('Unsaved changes')}
+                          text={i18n.t('Leaving this page will discard the selections you made for a new relationship')}
+                          confirmText={i18n.t('Yes, discard')}
+                          cancelText={i18n.t('No, stay here')}
+                          onConfirm={navigateToWorkingListsPage}
+                          open={!!showWarning}
+                          onCancel={() => { setShowWarning(false); }}
+                      />
                   </>
               }
           </>

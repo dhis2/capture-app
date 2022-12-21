@@ -21,13 +21,13 @@ export type OwnProps = $ReadOnly<{|
   teiId?: ?string,
   skipDuplicateCheck?: ?boolean,
   trackedEntityInstanceAttributes?: Array<InputAttribute>,
-  isUserInteractionInProgress?: boolean
 |}>;
 
 type ContainerProps = {|
   ready: boolean,
   orgUnitId: string,
   orgUnit: ?OrgUnit,
+  isUserInteractionInProgress: boolean
 |};
 
 export type Props = $ReadOnly<{|

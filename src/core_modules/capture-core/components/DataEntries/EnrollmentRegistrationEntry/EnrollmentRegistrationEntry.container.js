@@ -2,7 +2,6 @@
 import React from 'react';
 import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
-
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
