@@ -38,6 +38,7 @@ const getSuggestedDateByStandardInterval = (standardInterval, eventData) => {
  */
 type Props = {
     programStageScheduleConfig: {
+        id: string,
         nextScheduleDate?: {
             id: string
         },
@@ -61,14 +62,19 @@ const calculateSuggestedDateFromStart = ({
     enrolledAt,
     occurredAt,
     minDaysFromStart,
+    stageEvents,
 }: Object) => {
-    let suggestedScheduleDate;
-    if (generatedByEnrollmentDate || !displayIncidentDate) {
-        suggestedScheduleDate = moment(enrolledAt).add(minDaysFromStart, 'days').format();
+    let baseDate;
+    if (stageEvents && stageEvents.length) {
+        const mostRecentScheduledEvent = stageEvents
+            .sort((a, b) => moment.utc(b.scheduledAt).diff(moment.utc(a.scheduledAt)))[0];
+        baseDate = mostRecentScheduledEvent.scheduledAt;
+    } else if (generatedByEnrollmentDate || !displayIncidentDate) {
+        baseDate = enrolledAt;
     } else {
-        suggestedScheduleDate = moment(occurredAt).add(minDaysFromStart, 'days').format();
+        baseDate = occurredAt;
     }
-    return suggestedScheduleDate;
+    return moment(baseDate).add(minDaysFromStart, 'days').format();
 };
 
 export const useDetermineSuggestedScheduleDate = ({
@@ -88,10 +94,12 @@ export const useDetermineSuggestedScheduleDate = ({
         standardInterval,
         generatedByEnrollmentDate,
         minDaysFromStart,
+        id: programStageId,
     } = programStageScheduleConfig;
     const {
         displayIncidentDate,
     } = programConfig;
+    const stageEvents = eventData.filter(event => event.programStage === programStageId);
 
     const scheduleDateComputeSteps = [
         () => {
@@ -102,6 +110,7 @@ export const useDetermineSuggestedScheduleDate = ({
                     enrolledAt,
                     occurredAt,
                     minDaysFromStart,
+                    stageEvents,
                 });
             }
             return undefined;
@@ -114,6 +123,7 @@ export const useDetermineSuggestedScheduleDate = ({
             enrolledAt,
             occurredAt,
             minDaysFromStart,
+            stageEvents,
         }),
     ];
     const suggestedDate = scheduleDateComputeSteps.reduce((currentScheduleDate, computeScheduleDate) =>
