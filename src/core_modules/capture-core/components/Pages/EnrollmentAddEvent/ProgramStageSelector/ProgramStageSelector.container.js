@@ -17,9 +17,9 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const {
-        loading: programLoading,
-        error: programError,
         program,
+        isLoading: programLoading,
+        isError: programError,
     } = useProgramFromIndexedDB(programId);
 
 
