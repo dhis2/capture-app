@@ -69,12 +69,6 @@ When('you click the next page button', () => {
         .click();
 });
 
-When('you click the cancel button', () => {
-    cy.get('[data-test="cancel-button"]')
-        .click();
-});
-
-
 Then('you should see confirm dialog', () => {
     cy.get('[data-test="dhis2-uicore-layer"].translucent').within(() => {
         cy.get('[role="dialog"]')

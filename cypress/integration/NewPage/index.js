@@ -358,6 +358,11 @@ Then(/^you are navigated to the working list with programId (.*)$/, (programId) 
         .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=${programId}`);
 });
 
+When('you click the cancel button', () => {
+    cy.get('[data-test="cancel-button"]')
+        .click();
+});
+
 // New person
 And('you are in the Person registration page', () => {
     cy.visit('/#/new?trackedEntityTypeId=nEenWmSyUEp&orgUnitId=DiszpKrYNg8');

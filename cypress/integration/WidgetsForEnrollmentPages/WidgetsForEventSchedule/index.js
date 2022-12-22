@@ -1,4 +1,5 @@
 import '../sharedSteps';
+import '../../sharedSteps';
 import '../WidgetTab';
 
 Then('you choose a schedule date', () => {
