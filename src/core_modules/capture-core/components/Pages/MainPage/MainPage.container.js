@@ -12,7 +12,7 @@ import {
 } from '../Search';
 import { useSearchOptions } from '../../../hooks';
 import { MainPageComponent } from './MainPage.component';
-import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
+import { withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
