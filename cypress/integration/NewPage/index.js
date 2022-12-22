@@ -353,6 +353,19 @@ And('you are navigated to the working list', () => {
         .should('exist');
 });
 
+Then('you should see confirm dialog', () => {
+    cy.get('[data-test="dhis2-uicore-layer"].translucent').within(() => {
+        cy.get('[role="dialog"]')
+            .find('[data-test="dhis2-uicore-modaltitle"]')
+            .contains('Unsaved changes')
+            .should('exist');
+        cy.get('[role="dialog"]')
+            .find('[data-test="dhis2-uicore-button"]')
+            .contains('Yes, discard')
+            .click();
+    });
+});
+
 Then(/^you are navigated to the working list with programId (.*)$/, (programId) => {
     cy.url()
         .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=${programId}`);
