@@ -200,4 +200,4 @@ const MainPageContainer = () => {
 };
 
 // $FlowFixMe[missing-annot] automated comment
-export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(MainPageContainer)));
+export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(MainPageContainer));
