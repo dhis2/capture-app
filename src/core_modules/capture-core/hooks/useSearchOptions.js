@@ -25,10 +25,11 @@ const searchScopes = {
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
-export const buildSearchOption = (id, name, searchGroups, searchScope, type) => ({
+export const buildSearchOption = (id: string, name: string, searchGroups: SearchGroups, searchScope: string, type?: string) => ({
     searchOptionId: id,
     searchOptionName: name,
     TETypeName: type,
+    // $FlowFixMe
     searchGroups: [...searchGroups.values()].map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
         unique,
         searchForm,
@@ -42,7 +43,7 @@ export const buildSearchOption = (id, name, searchGroups, searchScope, type) => 
     })),
 });
 
-export const useSearchOptions = (searchGroups = new Map()): AvailableSearchOptions => {
+export const useSearchOptions = (): AvailableSearchOptions => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
 
     return useMemo(
@@ -59,7 +60,7 @@ export const useSearchOptions = (searchGroups = new Map()): AvailableSearchOptio
                     ),
 
                     ...programs.reduce(
-                        (accumulated, { programId, programName }) => ({
+                        (accumulated, { programId, programName, searchGroups }) => ({
                             ...accumulated,
                             [programId]: buildSearchOption(
                                 programId,
@@ -74,6 +75,6 @@ export const useSearchOptions = (searchGroups = new Map()): AvailableSearchOptio
                 }),
                 {},
             ),
-        [searchGroups, trackedEntityTypesWithCorrelatedPrograms],
+        [trackedEntityTypesWithCorrelatedPrograms],
     );
 };

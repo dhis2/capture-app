@@ -149,7 +149,6 @@ class TeiSearchPlain extends React.Component<Props, State> {
     }
 
     render() {
-        debugger
         const searchGroups = this.props.searchGroups;
 
         if (this.props.showResults) {

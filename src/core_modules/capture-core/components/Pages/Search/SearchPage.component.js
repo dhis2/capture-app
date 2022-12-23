@@ -89,7 +89,7 @@ const Index = ({
     navigateToMainPage,
     cleanSearchRelatedInfo,
     classes,
-    availableSearchOptions,
+    availableSearchOption,
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
@@ -127,10 +127,7 @@ const Index = ({
         };
     }, [fallbackTriggered, cleanSearchRelatedInfo, preselectedProgramId, showInitialSearchPage]);
 
-    const searchGroupsForSelectedScope =
-        selectedSearchScopeId
-            ? availableSearchOptions[selectedSearchScopeId].searchGroups
-            : [];
+    const searchGroupsForSelectedScope = availableSearchOption?.searchGroups ?? [];
 
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
@@ -173,7 +170,10 @@ const Index = ({
     const searchStatusComponents = () => (
         <>
             {searchStatus === searchPageStatus.SHOW_RESULTS && (
-                <SearchResults availableSearchOptions={availableSearchOptions} fallbackTriggered={fallbackTriggered} />
+                <SearchResults
+                    availableSearchOptions={availableSearchOption}
+                    fallbackTriggered={fallbackTriggered}
+                />
             )}
 
             {searchStatus === searchPageStatus.NO_RESULTS && (

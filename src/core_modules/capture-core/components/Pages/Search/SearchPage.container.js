@@ -12,13 +12,12 @@ import {
     openSearchPage,
 } from './SearchPage.actions';
 import {
-    useSearchOptions,
     useTrackedEntityTypesWithCorrelatedPrograms,
     useCurrentTrackedEntityTypeId,
 } from '../../../hooks';
 import { TopBar } from './TopBar.container';
 import { ResultsPageSizeContext } from '../shared-contexts';
-import { useSearchGroupForProgram } from '../../../utils/cachedDataHooks/useSearchGroupForProgram';
+import { useSearchOptionForSearchPage } from '../../../utils/cachedDataHooks/useSearchOptionForSearchPage';
 
 const usePreselectedProgram = (currentSelectionsId): ?string => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
@@ -54,10 +53,11 @@ export const SearchPage: ComponentType<{||}> = () => {
     const dispatchNavigateToNewUserPage = useCallback(() => { dispatch(navigateToNewUserPage()); }, [dispatch]);
 
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
-
     const preselectedProgramId = usePreselectedProgram(programId);
-    const { searchGroups } = useSearchGroupForProgram(preselectedProgramId ?? trackedEntityTypeId);
-    const availableSearchOptions = useSearchOptions(searchGroups);
+    const { searchOption } = useSearchOptionForSearchPage({
+        trackedEntityTypeId,
+        programId: preselectedProgramId,
+    });
 
     const searchStatus: string =
       useSelector(({ searchPage }) => searchPage.searchStatus);
@@ -92,7 +92,7 @@ export const SearchPage: ComponentType<{||}> = () => {
                 navigateToRegisterUser={dispatchNavigateToNewUserPage}
                 preselectedProgramId={preselectedProgramId}
                 trackedEntityTypeId={trackedEntityTypeId}
-                availableSearchOptions={availableSearchOptions}
+                availableSearchOption={searchOption}
                 searchStatus={searchStatus}
                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                 searchableFields={searchableFields}

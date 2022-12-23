@@ -11,13 +11,12 @@ export type SearchGroups = Array<{|
 
 export type SelectedSearchScopeId = ?string
 
-export type AvailableSearchOptions = $ReadOnly<{
-    [elementId: string]: {|
+export type AvailableSearchOption = {|
       +searchOptionId: string,
       +searchOptionName: string,
       +TETypeName: ?string,
-      +searchGroups: SearchGroups |}
-  }>
+      +searchGroups: SearchGroups
+|}
 
 export type ContainerProps = $ReadOnly<{|
   cleanSearchRelatedInfo: ()=>void,
@@ -25,7 +24,7 @@ export type ContainerProps = $ReadOnly<{|
   showInitialSearchPage: ()=>void,
   navigateToRegisterUser: ()=>void,
   trackedEntityTypeId: string,
-  availableSearchOptions: AvailableSearchOptions,
+  availableSearchOption: ?AvailableSearchOption,
   preselectedProgramId: SelectedSearchScopeId,
   minAttributesRequiredToSearch: number,
   searchableFields: Array<Object>,
