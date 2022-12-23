@@ -6,7 +6,6 @@ import { executeExpression } from './services/expressionService';
 import { getD2Functions } from './d2Functions';
 import type {
     OutputEffects,
-    RuleVariables,
     RulesEngineInput,
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
@@ -14,36 +13,6 @@ import type {
 } from './rulesEngine.types';
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
 import { effectActions, typeof environmentTypes } from './constants';
-import { normalizeRuleVariable } from './commonUtils/normalizeRuleVariable';
-
-/**
- * We update the variables hash so that the next rule can use the updated values.
- * @param variableToAssign
- * @param data
- * @param variablesHash
- */
-function updateVariable(variableToAssign: string, data: any, variablesHash: RuleVariables) {
-    const variableHashKey = variableToAssign.replace('#{', '').replace('A{', '').replace('}', '');
-    const variableHash = variablesHash[variableHashKey];
-
-    if (!variableHash) {
-        // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-        log.warn(`Variable ${variableHashKey} was not defined.`);
-    } else {
-        const { variableType } = variableHash;
-        const variableValue = normalizeRuleVariable(data, variableType);
-
-        variablesHash[variableHashKey] = {
-            ...variableHash,
-            variableValue,
-            variableType,
-            hasValue: true,
-            variableEventDate: '',
-            variablePrefix: variableHash.variablePrefix || '#',
-            allValues: [variableValue],
-        };
-    }
-}
 
 export class RulesEngine {
     inputConverter: IConvertInputRulesValue;
@@ -186,7 +155,7 @@ export class RulesEngine {
                         }
 
                         if (action === effectActions.ASSIGN_VALUE && content) { // the program rule variable id is found in the content key
-                            updateVariable(content, actionExpressionResult, variablesHash);
+                            this.variableService.updateVariable(content, actionExpressionResult, variablesHash);
                         }
 
                         return {
