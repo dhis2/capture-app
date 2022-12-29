@@ -165,7 +165,7 @@ const MainPageContainer = () => {
 
 
     return (
-        <OrgUnitFetcher orgUnitId={orgUnitId}>
+        <OrgUnitFetcher orgUnitId={orgUnitId} error={error}>
             <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
             <>
                 {showMainPage({ programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId }) ? (

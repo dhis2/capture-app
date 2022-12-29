@@ -1,10 +1,11 @@
 // @flow
+import { withErrorMessageHandler } from 'capture-core/HOC';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { fetchOrgUnit } from './OrgUnitFetcher.actions';
 
-export const OrgUnitFetcher = ({ orgUnitId, children }: Object) => {
+export const OrgUnitFetcher = withErrorMessageHandler()(({ orgUnitId, children }: Object) => {
     const dispatch = useDispatch();
     const { orgUnit } = useSelector(
         ({
@@ -21,4 +22,4 @@ export const OrgUnitFetcher = ({ orgUnitId, children }: Object) => {
     }, [orgUnitId, orgUnit, dispatch]);
 
     return orgUnit || !orgUnitId ? children : <LoadingMaskElementCenter />;
-};
+});
