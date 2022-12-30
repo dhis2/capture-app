@@ -5,7 +5,7 @@ import { getMainStorageController } from '../../storageControllers';
 
 export const useSystemSettingsFromIndexedDB = (
     key: string,
-): {| [key: string]?: string, loading: boolean, error?: boolean |} => {
+): {| [key: string]: string, loading: boolean, error?: boolean |} => {
     const [cachedSystemSettings, setCachedSystemSettings] = useState({ });
     const [loading, setLoading] = useState(true);
     const error = useRef();
