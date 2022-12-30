@@ -29,7 +29,7 @@ export const EnrollmentAddEventPageDefault = ({
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const { systemSettings } = useSystemSettingsFromIndexedDB('serverTimeZoneId');
+    const { serverTimeZoneId } = useSystemSettingsFromIndexedDB('serverTimeZoneId');
 
     const handleCancel = useCallback(() => {
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
@@ -37,8 +37,8 @@ export const EnrollmentAddEventPageDefault = ({
 
     const handleSave = useCallback(
         (data, uid) => {
-            const clientGeneratedUpdatedAt = systemSettings?.serverTimeZoneId
-                ? moment.tz(new Date(), systemSettings.serverTimeZoneId).toISOString()
+            const clientGeneratedUpdatedAt = serverTimeZoneId
+                ? moment.tz(new Date(), serverTimeZoneId).toISOString()
                 : new Date().toISOString();
 
             dispatch(
@@ -49,7 +49,7 @@ export const EnrollmentAddEventPageDefault = ({
             );
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [dispatch, history, programId, orgUnitId, teiId, enrollmentId, systemSettings?.serverTimeZoneId],
+        [dispatch, history, programId, orgUnitId, teiId, enrollmentId, serverTimeZoneId],
     );
     const handleAddNew = useCallback(() => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);

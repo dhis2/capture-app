@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
-"PO-Revision-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2022-12-30T07:52:41.126Z\n"
+"PO-Revision-Date: 2022-12-30T07:52:41.126Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -400,12 +400,6 @@ msgstr "Days in the future"
 msgid "From"
 msgstr "From"
 
-msgid "Days in the past"
-msgstr "Days in the past"
-
-msgid "To"
-msgstr "To"
-
 msgid "This week"
 msgstr "This week"
 
@@ -429,6 +423,12 @@ msgstr "Absolute range"
 
 msgid "Relative range"
 msgstr "Relative range"
+
+msgid "Days in the past"
+msgstr "Days in the past"
+
+msgid "To"
+msgstr "To"
 
 msgid "Max"
 msgstr "Max"
@@ -768,6 +768,9 @@ msgstr "New Enrollment in program{{escape}} {{programName}}"
 msgid "Save {{trackedEntityName}}"
 msgstr "Save {{trackedEntityName}}"
 
+msgid "Register"
+msgstr "Register"
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Save new {{trackedEntityTypeName}} and link"
 
@@ -786,11 +789,11 @@ msgstr "Show all"
 msgid "Program"
 msgstr "Program"
 
-msgid "Organisation Unit"
-msgstr "Organisation Unit"
-
 msgid "Registration"
 msgstr "Registration"
+
+msgid "Organisation Unit"
+msgstr "Organisation Unit"
 
 msgid "Search results"
 msgstr "Search results"
@@ -809,9 +812,6 @@ msgstr "Link to an existing {{trackedEntityType}}"
 
 msgid "Create new {{trackedEntityType}}"
 msgstr "Create new {{trackedEntityType}}"
-
-msgid "Register"
-msgstr "Register"
 
 msgid "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -915,6 +915,15 @@ msgstr "events"
 msgid "event"
 msgstr "event"
 
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Event could not be loaded. Are you sure it exists?"
+
+msgid "Event could not be loaded"
+msgstr "Event could not be loaded"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Organisation unit could not be loaded"
+
 msgid "You don't have access to edit this event"
 msgstr "You don't have access to edit this event"
 
@@ -945,15 +954,6 @@ msgstr "Feedbacks"
 
 msgid "Show all events"
 msgstr "Show all events"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Event could not be loaded. Are you sure it exists?"
-
-msgid "Event could not be loaded"
-msgstr "Event could not be loaded"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Organisation unit could not be loaded"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
@@ -1067,6 +1067,9 @@ msgstr "Remove mark for follow-up"
 msgid "Mark for follow-up"
 msgstr "Mark for follow-up"
 
+msgid "Cancelled"
+msgstr "Cancelled"
+
 msgid "Enrollment date"
 msgstr "Enrollment date"
 
@@ -1087,9 +1090,6 @@ msgstr "Started at {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Owned by {{ownerOrgUnit}}"
-
-msgid "Cancelled"
-msgstr "Cancelled"
 
 msgid "Comments about this enrollment"
 msgstr "Comments about this enrollment"
@@ -1203,6 +1203,12 @@ msgstr "Save changes"
 msgid "Profile"
 msgstr "Profile"
 
+msgid "tracked entity instance"
+msgstr "tracked entity instance"
+
+msgid "Fix errors in the form to continue."
+msgstr "Fix errors in the form to continue."
+
 msgid "There is a problem with this form"
 msgstr "There is a problem with this form"
 
@@ -1215,12 +1221,6 @@ msgstr "There was a problem saving changes"
 msgid "Try again or contact your system administrator for support"
 msgstr "Try again or contact your system administrator for support"
 
-msgid "tracked entity instance"
-msgstr "tracked entity instance"
-
-msgid "Fix errors in the form to continue."
-msgstr "Fix errors in the form to continue."
-
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
@@ -1232,6 +1232,9 @@ msgstr "Edit"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
+
+msgid "Registering unit"
+msgstr "Registering unit"
 
 msgid "This event is not yet preserved and cannot be edited"
 msgstr "This event is not yet preserved and cannot be edited"
@@ -1251,9 +1254,6 @@ msgstr "This stage can only have one event"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
 
-msgid "Registering unit"
-msgstr "Registering unit"
-
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"
 
@@ -1268,6 +1268,9 @@ msgstr "Stages and Events"
 
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"
+
+msgid "an error occurred loading working lists"
+msgstr "an error occurred loading working lists"
 
 msgid "Download as JSON"
 msgstr "Download as JSON"
@@ -1284,8 +1287,11 @@ msgstr "Download with current filters"
 msgid "Download data..."
 msgstr "Download data..."
 
-msgid "an error occurred loading working lists"
-msgstr "an error occurred loading working lists"
+msgid "Working list could not be updated"
+msgstr "Working list could not be updated"
+
+msgid "an error occurred loading Tracked entity instance lists"
+msgstr "an error occurred loading Tracked entity instance lists"
 
 msgid "Enrollment status"
 msgstr "Enrollment status"
@@ -1301,12 +1307,6 @@ msgstr "Registration Date"
 
 msgid "Inactive"
 msgstr "Inactive"
-
-msgid "Working list could not be updated"
-msgstr "Working list could not be updated"
-
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "an error occurred loading Tracked entity instance lists"
 
 msgid "Update view"
 msgstr "Update view"

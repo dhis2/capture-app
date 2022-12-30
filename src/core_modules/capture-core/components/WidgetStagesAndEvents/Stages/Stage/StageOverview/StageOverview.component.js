@@ -72,7 +72,7 @@ const getLastUpdatedAt = (serverTimeZoneId, events) => {
 };
 
 export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => {
-    const { systemSettings } = useSystemSettingsFromIndexedDB('serverTimeZoneId');
+    const { serverTimeZoneId } = useSystemSettingsFromIndexedDB('serverTimeZoneId');
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
@@ -124,7 +124,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
             <div className={classes.indicatorIcon}>
                 <IconClockHistory16 />
             </div>
-            {getLastUpdatedAt(systemSettings?.serverTimeZoneId, events)}
+            {getLastUpdatedAt(serverTimeZoneId, events)}
         </div>}
     </div>);
 };
