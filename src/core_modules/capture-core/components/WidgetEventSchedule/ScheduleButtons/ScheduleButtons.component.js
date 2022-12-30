@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core';
 import { Button, spacersNum } from '@dhis2/ui';
 import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import type { Props } from './scheduleButtons.types';
+import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
 
 const styles = {
     container: {
@@ -37,10 +38,7 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes }: Pro
             </Button>
         </div>
         <ConfirmDialog
-            header={i18n.t('Unsaved changes')}
-            text={i18n.t('Leaving this page will discard the changes you made to this event.')}
-            confirmText={i18n.t('Yes, discard')}
-            cancelText={i18n.t('No, stay here')}
+            {...defaultDialogProps}
             onConfirm={onCancel}
             open={cancelDialogVisible}
             onCancel={() => { setCancelDialogVisible(false); }}

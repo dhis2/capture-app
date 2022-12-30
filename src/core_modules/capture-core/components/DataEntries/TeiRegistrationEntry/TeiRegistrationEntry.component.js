@@ -17,6 +17,7 @@ import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
+import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>
@@ -117,10 +118,7 @@ const TeiRegistrationEntryPlain =
                       </InfoIconText>
 
                       <ConfirmDialog
-                          header={i18n.t('Unsaved changes')}
-                          text={i18n.t('Leaving this page will discard the selections you made for a new relationship')}
-                          confirmText={i18n.t('Yes, discard')}
-                          cancelText={i18n.t('No, stay here')}
+                          {...defaultDialogProps}
                           onConfirm={navigateToWorkingListsPage}
                           open={!!showWarning}
                           onCancel={() => { setShowWarning(false); }}
