@@ -20,7 +20,8 @@ type State = {
 type DialogConfig = {
     header: string,
     text: string,
-    confirmText: string,
+    destructiveText?: string,
+    confirmText?: string,
     cancelText: string,
 }
 
