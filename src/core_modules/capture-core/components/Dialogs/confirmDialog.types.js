@@ -6,6 +6,8 @@ export type Props = {
     text: string,
     confirmText: string,
     cancelText: string,
+    destructiveText: string,
     onCancel: () => void,
     onConfirm: () => void,
+    onDestroy: () => void,
 };

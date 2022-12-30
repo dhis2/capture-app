@@ -119,7 +119,7 @@ const TeiRegistrationEntryPlain =
 
                       <ConfirmDialog
                           {...defaultDialogProps}
-                          onConfirm={navigateToWorkingListsPage}
+                          onDestroy={navigateToWorkingListsPage}
                           open={!!showWarning}
                           onCancel={() => { setShowWarning(false); }}
                       />

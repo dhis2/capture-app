@@ -92,19 +92,19 @@ class ScopeSelectorClass extends Component<Props, State> {
                     {this.props.children}
                 </QuickSelector>
                 <ConfirmDialog
-                    onConfirm={this.handleAcceptOrgUnit}
+                    onDestroy={this.handleAcceptOrgUnit}
                     open={this.state.openOrgUnitWarning}
                     onCancel={this.handleClose}
                     {...defaultDialogProps}
                 />
                 <ConfirmDialog
-                    onConfirm={this.handleAcceptProgram}
+                    onDestroy={this.handleAcceptProgram}
                     open={!!this.state.openProgramWarning}
                     onCancel={this.handleClose}
                     {...defaultDialogProps}
                 />
                 <ConfirmDialog
-                    onConfirm={this.handleAcceptCatCombo}
+                    onDestroy={this.handleAcceptCatCombo}
                     open={this.state.openCatComboWarning}
                     onCancel={this.handleClose}
                     {...defaultDialogProps}

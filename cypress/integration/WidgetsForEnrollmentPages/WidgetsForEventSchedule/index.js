@@ -18,10 +18,10 @@ When('you click cancel in Schedule tab', () => {
 Then('you should see confirm dialog', () => {
     cy.get('[role="dialog"]')
         .find('[data-test="dhis2-uicore-modaltitle"]')
-        .contains('Unsaved changes')
+        .contains('Discard unsaved changes?')
         .should('exist');
 
     cy.get('[role="dialog"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .contains('Yes, discard').click({ force: true }); // Add {force:true} to disable the error due to layer parent has css display: none
+        .contains('Yes, discard changes').click({ force: true }); // Add {force:true} to disable the error due to layer parent has css display: none
 });

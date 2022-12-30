@@ -42,7 +42,7 @@ export class CancelButtonComponent extends React.Component<Props, State> {
                 </Button>
                 <ConfirmDialog
                     {...defaultDialogProps}
-                    onConfirm={this.props.onCancel}
+                    onDestroy={this.props.onCancel}
                     open={this.state.dialogOpen}
                     onCancel={this.handleCancelDiscard}
                 />

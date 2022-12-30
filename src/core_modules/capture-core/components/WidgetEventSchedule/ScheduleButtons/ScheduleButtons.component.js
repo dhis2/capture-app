@@ -39,7 +39,7 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes }: Pro
         </div>
         <ConfirmDialog
             {...defaultDialogProps}
-            onConfirm={onCancel}
+            onDestroy={onCancel}
             open={cancelDialogVisible}
             onCancel={() => { setCancelDialogVisible(false); }}
         />

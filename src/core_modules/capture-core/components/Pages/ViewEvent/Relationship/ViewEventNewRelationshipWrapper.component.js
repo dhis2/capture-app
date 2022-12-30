@@ -106,11 +106,11 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
                     />
                 </Paper>
                 <ConfirmDialog
-                    header={i18n.t('Unsaved changes')}
+                    header={i18n.t('Discard unsaved changes?')}
                     text={i18n.t('Leaving this page will discard any selections you made for a new relationship')}
-                    confirmText={i18n.t('Yes, discard')}
+                    destructiveText={i18n.t('Yes, discard changes')}
                     cancelText={i18n.t('No, stay here')}
-                    onConfirm={this.props.onCancel}
+                    onDestroy={this.props.onCancel}
                     open={!!this.state.discardDialogOpen}
                     onCancel={this.handleCancelDiscard}
                 />

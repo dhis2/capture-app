@@ -110,7 +110,7 @@ const NewEventWorkspacePlain = ({
             </Widget>
             <ConfirmDialog
                 {...defaultDialogProps}
-                onConfirm={() => { setMode(tempMode.current); setWarningVisible(false); }}
+                onDestroy={() => { setMode(tempMode.current); setWarningVisible(false); }}
                 open={isWarningVisible}
                 onCancel={() => setWarningVisible(false)}
             />

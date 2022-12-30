@@ -80,7 +80,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig
                     />
                     <ConfirmDialog
                         {...dialogConfig}
-                        onConfirm={this.handleDialogConfirm}
+                        onDestroy={this.handleDialogConfirm}
                         open={this.state.dialogOpen}
                         onCancel={this.handleDialogCancel}
                     />

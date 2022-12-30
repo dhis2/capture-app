@@ -141,7 +141,7 @@ const SingleLockedSelectPlain =
                   </div>
           }
           <ConfirmDialog
-              onConfirm={handleConfirm}
+              onDestroy={handleConfirm}
               open={openStartAgainWarning}
               onCancel={handleClose}
               {...defaultDialogProps}
