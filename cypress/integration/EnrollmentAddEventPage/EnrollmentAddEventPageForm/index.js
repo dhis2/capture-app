@@ -86,6 +86,11 @@ When('the enrollment overview is finished loading', () => {
         });
 });
 
+When('the form is finished loading', () => {
+    cy.contains('[data-test="dhis2-uicore-button"]', 'Save without completing')
+        .should('exist');
+});
+
 
 Then('all events should be displayed', () => {
     showAllEventsInProgramStage();
