@@ -10,8 +10,8 @@ When(/^the user clicks on the edit button/, () =>
 );
 
 Then('the user sees the warning popup', () => {
-    cy.contains('Unsaved changes');
-    cy.contains('Leaving this page will discard the changes you made to this event.');
+    cy.contains('Discard unsaved changes?');
+    cy.contains('This event has unsaved changes. Leaving this page without saving will lose these changes. Are you sure you want to discard unsaved changes?');
 });
 
 When(/^the user set the WHOMCH Diastolic blood pressure to (.*)/, score =>
