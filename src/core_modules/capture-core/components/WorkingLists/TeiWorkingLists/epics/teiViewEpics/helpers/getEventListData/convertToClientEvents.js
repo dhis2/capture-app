@@ -1,4 +1,5 @@
 // @flow
+import { translatedStatusTypes } from 'capture-core/events/statusTypes';
 import { convertServerToClient } from '../../../../../../../converters';
 import type {
     ApiEvents,
@@ -9,7 +10,19 @@ import type {
     TeiColumnsMetaForDataFetchingArray,
     ClientEvents,
 } from './types';
-import { getFilterClientName } from '../../../../helpers';
+import { getFilterClientName, ADDITIONAL_FILTERS } from '../../../../helpers';
+import { isEventOverdue } from '../../../../../../../utils/isEventOverdue';
+
+const convertServerStatusToClient = (
+    status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
+    scheduledAt: string,
+) => {
+    const translatedStatus = translatedStatusTypes();
+    if (isEventOverdue({ status, scheduledAt })) {
+        return translatedStatus.OVERDUE;
+    }
+    return translatedStatus[status];
+};
 
 const getAttributeById = (attributeValues?: ApiTeiAttributes = []) =>
     attributeValues.reduce((acc, { attribute, value }) => {
@@ -53,10 +66,15 @@ const buildEventRecord = ({
     dataValuesById: Object,
 }) =>
     columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
+        const isStatus = mainProperty && id === ADDITIONAL_FILTERS.status;
         const value = mainProperty ? apiEvent[id] : dataValuesById[id];
+        const clientValue = isStatus
+            ? convertServerStatusToClient(value, apiEvent.scheduledAt)
+            : convertServerToClient(value, type);
+
         return {
             id: getFilterClientName(id),
-            value: convertServerToClient(value, type),
+            value: clientValue,
             urlPath: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
         };
     });

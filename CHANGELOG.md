@@ -1,3 +1,66 @@
+## [100.22.1](https://github.com/dhis2/capture-app/compare/v100.22.0...v100.22.1) (2022-12-13)
+
+
+### Bug Fixes
+
+* [DHIS2-14286] Replace LGTM with CodeQL ([53ee196](https://github.com/dhis2/capture-app/commit/53ee19604a8c589d045ffe081600bab4a20b4236))
+
+# [100.22.0](https://github.com/dhis2/capture-app/compare/v100.21.7...v100.22.0) (2022-12-13)
+
+
+### Features
+
+* [DHIS2-14125] improve no saved list  ([#3132](https://github.com/dhis2/capture-app/issues/3132)) ([0918fee](https://github.com/dhis2/capture-app/commit/0918fee3f47b75a53efe631f63b2706181557a12))
+
+## [100.21.7](https://github.com/dhis2/capture-app/compare/v100.21.6...v100.21.7) (2022-12-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([26ca51f](https://github.com/dhis2/capture-app/commit/26ca51f8325e9116ffa9aed13c6cdd3cc10e93bf))
+
+## [100.21.6](https://github.com/dhis2/capture-app/compare/v100.21.5...v100.21.6) (2022-11-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([79d22d0](https://github.com/dhis2/capture-app/commit/79d22d0611e2a2e93f2c6edfdecf49b014d7a582))
+
+## [100.21.5](https://github.com/dhis2/capture-app/compare/v100.21.4...v100.21.5) (2022-11-29)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([09687f4](https://github.com/dhis2/capture-app/commit/09687f4403fb237304292dd4db5291daf836f03c))
+
+## [100.21.4](https://github.com/dhis2/capture-app/compare/v100.21.3...v100.21.4) (2022-11-28)
+
+
+### Bug Fixes
+
+* [DHIS2-14156] program stage WL event status convertor ([#3115](https://github.com/dhis2/capture-app/issues/3115)) ([e7cf97d](https://github.com/dhis2/capture-app/commit/e7cf97ddbb761691e944b87ecb0d17b12daa5eaa))
+
+## [100.21.3](https://github.com/dhis2/capture-app/compare/v100.21.2...v100.21.3) (2022-11-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([26135f1](https://github.com/dhis2/capture-app/commit/26135f11257eeec0f3da96e0cb8a755248501871))
+
+## [100.21.2](https://github.com/dhis2/capture-app/compare/v100.21.1...v100.21.2) (2022-11-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([96caa5e](https://github.com/dhis2/capture-app/commit/96caa5e69ff457fab1ce52ad8a8fd83d5391b9f8))
+
+## [100.21.1](https://github.com/dhis2/capture-app/compare/v100.21.0...v100.21.1) (2022-11-22)
+
+
+### Bug Fixes
+
+* [DHIS2-13968] report date and enrollment date without hours ([#3111](https://github.com/dhis2/capture-app/issues/3111)) ([3e719a5](https://github.com/dhis2/capture-app/commit/3e719a5dc591da9c1de4e02d7f9209e8dc1f25f9))
+
 # [100.21.0](https://github.com/dhis2/capture-app/compare/v100.20.1...v100.21.0) (2022-11-22)
 
 
