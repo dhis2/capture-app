@@ -37,10 +37,7 @@ export const EnrollmentAddEventPageDefault = ({
 
     const handleSave = useCallback(
         (data, uid) => {
-            const clientGeneratedUpdatedAt = serverTimeZoneId
-                ? moment.tz(new Date(), serverTimeZoneId).toISOString()
-                : new Date().toISOString();
-
+            const clientGeneratedUpdatedAt = moment().tz(serverTimeZoneId).format('YYYY-MM-DDTHH:mm:ss');
             dispatch(
                 updateEnrollmentEventsWithoutId(uid, {
                     ...data.events[0],
@@ -143,7 +140,7 @@ export const EnrollmentAddEventPageDefault = ({
                 widgetReducerName={widgetReducerName}
                 rulesExecutionDependencies={rulesExecutionDependencies}
                 pageFailure={commonDataError}
-                ready={Boolean(enrollment)}
+                ready={Boolean(enrollment) && Boolean(serverTimeZoneId)}
                 dataEntryHasChanges={dataEntryHasChanges}
                 onEnrollmentError={onEnrollmentError}
             />
