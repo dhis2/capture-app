@@ -11,11 +11,13 @@ type RegistrationOptions = $ReadOnly<{|
     +registrationMetaData: RegistrationFormMetadata,
     +formId: string,
     +formFoundation: Object,
+    +firstStageForm?: Object
   |}
 |}>
 
 const useRegistrationOptions = (): RegistrationOptions => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
+
     return useMemo(() =>
         Object.values(trackedEntityTypesWithCorrelatedPrograms)
             // $FlowFixMe https://github.com/facebook/flow/issues/2221
@@ -27,13 +29,14 @@ const useRegistrationOptions = (): RegistrationOptions => {
                     name: trackedEntityTypeName,
                     formId: `registrationPageForm-${trackedEntityTypeId}`,
                 },
-                ...programs.reduce((accumulated, { programId, programName, enrollment }) => ({
+                ...programs.reduce((accumulated, { programId, programName, enrollment, firstStageForm }) => ({
                     ...accumulated,
                     [programId]: {
                         name: programName,
                         formFoundation: enrollment.enrollmentForm,
                         registrationMetaData: enrollment,
                         formId: `registrationPageForm-${programId}`,
+                        firstStageForm,
                     },
                 }), {}),
             }), {}),
@@ -46,8 +49,8 @@ export const useRegistrationFormInfoForSelectedScope = (selectedScopeId: string)
     const { scopeType } = useScopeInfo(selectedScopeId);
 
     if (scopeType === scopeTypes.TRACKED_ENTITY_TYPE || scopeType === scopeTypes.TRACKER_PROGRAM) {
-        const { formFoundation, formId, registrationMetaData } = options[selectedScopeId];
-        return { formFoundation, formId, registrationMetaData };
+        const { formFoundation, formId, registrationMetaData, firstStageForm } = options[selectedScopeId];
+        return { formFoundation, formId, registrationMetaData, firstStageForm };
     }
-    return { formFoundation: [], formId: null, registrationMetaData: null };
+    return { formFoundation: [], formId: null, registrationMetaData: null, firstStageForm: null };
 };

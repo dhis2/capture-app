@@ -142,6 +142,7 @@ type apiProgram = {
     displayFrontPageList: boolean,
     selectIncidentDatesInFuture: boolean,
     displayIncidentDate: boolean,
+    useFirstStageDuringRegistration: boolean,
     dataEntryForm?: ?apiDataEntryForm,
     access: apiAccess,
     trackedEntityType?: ?{ id: string },

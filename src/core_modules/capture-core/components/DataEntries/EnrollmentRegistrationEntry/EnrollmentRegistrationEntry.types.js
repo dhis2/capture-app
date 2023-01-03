@@ -21,6 +21,7 @@ export type OwnProps = $ReadOnly<{|
   teiId?: ?string,
   skipDuplicateCheck?: ?boolean,
   trackedEntityInstanceAttributes?: Array<InputAttribute>,
+  firstStageForm?: Object,
 |}>;
 
 type ContainerProps = {|

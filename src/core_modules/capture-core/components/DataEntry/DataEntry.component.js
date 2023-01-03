@@ -93,6 +93,7 @@ type Props = {
     itemId: string,
     ready: boolean,
     formFoundation: ?RenderFoundation,
+    stageForm?: ?RenderFoundation,
     completeButton?: ?React.Element<any>,
     mainButton?: ?React.Element<any>,
     cancelButton?: ?React.Element<any>,
@@ -244,18 +245,32 @@ class DataEntryPlain extends React.Component<Props> {
             onAddNote,
             onOpenAddRelationship,
             dataEntryFieldRef,
+            formFoundation,
+            stageForm,
             ...passOnProps
         } = this.props;
 
         const d2Form = (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <D2Form
-                id={getDataEntryKey(id, itemId)}
-                validationAttempted={completionAttempted || saveAttempted}
-                onUpdateField={this.handleUpdateField}
-                onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                {...passOnProps}
-            />
+            <>
+                {/* $FlowFixMe */}
+                <D2Form
+                    id={getDataEntryKey(id, itemId)}
+                    validationAttempted={completionAttempted || saveAttempted}
+                    onUpdateField={this.handleUpdateField}
+                    onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                    formFoundation={formFoundation}
+                    {...passOnProps}
+                />
+                {/* $FlowFixMe */}
+                {stageForm && <D2Form
+                    id={getDataEntryKey(id, itemId)}
+                    validationAttempted={completionAttempted || saveAttempted}
+                    onUpdateField={this.handleUpdateField}
+                    onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                    formFoundation={stageForm}
+                    {...passOnProps}
+                />}
+            </>
         );
         return this.props.formHorizontal ? d2Form : <div className={classes.d2FormContainer}>{d2Form}</div>;
     }

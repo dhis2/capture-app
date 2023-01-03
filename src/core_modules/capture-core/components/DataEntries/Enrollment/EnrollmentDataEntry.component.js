@@ -250,6 +250,7 @@ const getGeometrySettings = () => ({
 
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
+    firstStageForm?: Object,
     programId: string,
 };
 // final step before the generic dataEntry is inserted
@@ -266,13 +267,14 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     };
 
     render() {
-        const { enrollmentMetadata, programId, ...passOnProps } = this.props;
+        const { enrollmentMetadata, firstStageForm, programId, ...passOnProps } = this.props;
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntry
                 {...passOnProps}
                 dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
                 formFoundation={enrollmentMetadata.enrollmentForm}
+                stageForm={firstStageForm?.stageForm}
             />
         );
     }

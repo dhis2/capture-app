@@ -90,7 +90,7 @@ const RegistrationDataEntryPlain = ({
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { registrationMetaData, formFoundation, firstStageForm } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
 
     const handleRegistrationScopeSelection = (id) => {
@@ -129,7 +129,7 @@ const RegistrationDataEntryPlain = ({
             </Button>
         );
     }, []);
-
+    console.log({ scopeType, titleText, firstStageForm });
     return (
         <>
             {
@@ -172,6 +172,7 @@ const RegistrationDataEntryPlain = ({
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     enrollmentMetadata={registrationMetaData}
+                                    firstStageForm={firstStageForm}
                                     saveButtonText={i18n.t('Save {{trackedEntityName}}', {
                                         trackedEntityName,
                                         interpolation: { escapeValue: false },

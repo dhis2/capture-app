@@ -91,6 +91,7 @@ const fieldsParam = 'id,displayName,displayShortName,description,programType,sty
 'featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,' +
 'dataEntryForm[id,htmlCode],' +
 'access[*],' +
+'useFirstStageDuringRegistration,' +
 'trackedEntityType[id],' +
 'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
 'userRoles[id,displayName],' +

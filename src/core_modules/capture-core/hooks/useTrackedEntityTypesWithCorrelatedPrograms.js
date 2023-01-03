@@ -1,7 +1,8 @@
 // @flow
 import { useMemo } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { programCollection } from '../metaDataMemoryStores';
-import { type Access, TrackerProgram } from '../metaData';
+import { type Access, TrackerProgram, Section } from '../metaData';
 
 type TrackedEntityTypesWithCorrelatedPrograms = $Exact<$ReadOnly<{
     [elementId: string]: {|
@@ -32,9 +33,24 @@ export const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityType
                 },
                 searchGroups,
                 enrollment,
+                stages,
+                useFirstStageDuringRegistration,
             }: TrackerProgram) => {
                 const accumulatedProgramsOfTrackedEntityType =
                   acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
+                const programMetadata = { programId, programName, searchGroups, enrollment };
+                if (useFirstStageDuringRegistration) {
+                    const firstStage = [...stages][0][1];
+                    firstStage.stageForm.getSection(Section.MAIN_SECTION_ID).name = i18n.t('Data Entry ({{ stageName }})', {
+                        stageName: firstStage.name,
+                    });
+                    // $FlowFixMe
+                    programMetadata.firstStageForm = {
+                        stageId: firstStage.id,
+                        stageName: firstStage.name,
+                        stageForm: firstStage.stageForm,
+                    };
+                }
                 return {
                     ...acc,
                     [trackedEntityTypeId]: {
@@ -45,7 +61,7 @@ export const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityType
                         trackedEntityTypeTeiRegistration: { form, inputSearchGroups },
                         programs: [
                             ...accumulatedProgramsOfTrackedEntityType,
-                            { programId, programName, searchGroups, enrollment },
+                            { ...programMetadata },
                         ],
 
                     },
