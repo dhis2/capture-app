@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-12-30T09:47:25.116Z\n"
-"PO-Revision-Date: 2022-12-30T09:47:25.116Z\n"
+"POT-Creation-Date: 2023-01-04T10:46:00.019Z\n"
+"PO-Revision-Date: 2023-01-04T10:46:00.019Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -334,13 +334,6 @@ msgstr "No, cancel"
 msgid "Yes, create new event"
 msgstr "Yes, create new event"
 
-msgid ""
-"This event has unsaved changes. Leaving this page without saving will lose "
-"these changes. Are you sure you want to discard unsaved changes?"
-msgstr ""
-"This event has unsaved changes. Leaving this page without saving will lose "
-"these changes. Are you sure you want to discard unsaved changes?"
-
 msgid "Warnings found"
 msgstr "Warnings found"
 
@@ -370,6 +363,13 @@ msgstr "Operations running"
 
 msgid "Sort"
 msgstr "Sort"
+
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
 
 msgid "No events to display"
 msgstr "No events to display"

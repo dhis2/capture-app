@@ -3,9 +3,9 @@ import React, { type ComponentType, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Button, spacersNum } from '@dhis2/ui';
-import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
+import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import type { Props } from './scheduleButtons.types';
-import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 
 const styles = {
     container: {
@@ -37,7 +37,7 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes }: Pro
                 {i18n.t('Cancel')}
             </Button>
         </div>
-        <ConfirmDialog
+        <DiscardDialog
             {...defaultDialogProps}
             onDestroy={onCancel}
             open={cancelDialogVisible}

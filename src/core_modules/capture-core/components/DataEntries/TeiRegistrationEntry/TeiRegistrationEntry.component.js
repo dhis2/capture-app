@@ -10,14 +10,14 @@ import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
-import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
+import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
-import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>
@@ -117,7 +117,7 @@ const TeiRegistrationEntryPlain =
                           {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
                       </InfoIconText>
 
-                      <ConfirmDialog
+                      <DiscardDialog
                           {...defaultDialogProps}
                           onDestroy={navigateToWorkingListsPage}
                           open={!!showWarning}

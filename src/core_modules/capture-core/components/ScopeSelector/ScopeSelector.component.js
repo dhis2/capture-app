@@ -2,8 +2,8 @@
 import React, { Component, type ComponentType } from 'react';
 import { compose } from 'redux';
 import { QuickSelector } from './QuickSelector/QuickSelector.component';
-import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
-import { defaultDialogProps } from '../Dialogs/ConfirmDialog.constants';
+import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
+import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
 import type { Props, State } from './ScopeSelector.types';
 import { withLoadingIndicator } from '../../HOC';
 
@@ -91,19 +91,19 @@ class ScopeSelectorClass extends Component<Props, State> {
                 >
                     {this.props.children}
                 </QuickSelector>
-                <ConfirmDialog
+                <DiscardDialog
                     onDestroy={this.handleAcceptOrgUnit}
                     open={this.state.openOrgUnitWarning}
                     onCancel={this.handleClose}
                     {...defaultDialogProps}
                 />
-                <ConfirmDialog
+                <DiscardDialog
                     onDestroy={this.handleAcceptProgram}
                     open={!!this.state.openProgramWarning}
                     onCancel={this.handleClose}
                     {...defaultDialogProps}
                 />
-                <ConfirmDialog
+                <DiscardDialog
                     onDestroy={this.handleAcceptCatCombo}
                     open={this.state.openCatComboWarning}
                     onCancel={this.handleClose}

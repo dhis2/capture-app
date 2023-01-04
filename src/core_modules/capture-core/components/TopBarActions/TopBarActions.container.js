@@ -1,11 +1,11 @@
 // @flow
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import i18n from '@dhis2/d2-i18n';
 import { ActionButtons } from './TopBarActions.component';
-import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
+import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
 import type { Props } from './TopBarActions.types';
 import { buildUrlQueryString } from '../../utils/routing';
+import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
 
 const defaultContext = {
     openStartAgainWarning: false,
@@ -13,13 +13,6 @@ const defaultContext = {
     openNewRegistrationPageWithoutProgramId: false,
     openSearchPage: false,
     openSearchPageWithoutProgramId: false,
-};
-
-const defaultDialogProps = {
-    header: i18n.t('Discard unsaved changes?'),
-    text: i18n.t('This event has unsaved changes. Leaving this page without saving will lose these changes. Are you sure you want to discard unsaved changes?'),
-    destructiveText: i18n.t('Yes, discard changes'),
-    cancelText: i18n.t('No, stay here'),
 };
 
 export const TopBarActions = ({
@@ -126,7 +119,7 @@ export const TopBarActions = ({
                 showResetButton={!!(selectedProgramId || selectedOrgUnitId)}
                 openConfirmDialog={openConfirmDialog}
             />
-            <ConfirmDialog
+            <DiscardDialog
                 onDestroy={handleAccept}
                 open={openConfirmDialog}
                 onCancel={() => setContext(defaultContext)}

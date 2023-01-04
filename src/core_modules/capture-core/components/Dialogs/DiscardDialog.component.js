@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
-import type { Props } from './confirmDialog.types';
+import type { Props } from './discardDialog.types';
 
-export const ConfirmDialog = ({
+export const DiscardDialog = ({
     open, header, text, confirmText, onConfirm, cancelText, onCancel, destructiveText, onDestroy,
 }: Props) => (
     <Modal hide={!open} onClose={onCancel} small>

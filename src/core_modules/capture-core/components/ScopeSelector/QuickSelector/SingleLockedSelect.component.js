@@ -8,8 +8,8 @@ import i18n from '@dhis2/d2-i18n';
 import Select from 'react-virtualized-select';
 import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
-import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
-import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
+import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 
 const styles = (theme: Theme) => ({
     paper: {
@@ -140,7 +140,7 @@ const SingleLockedSelectPlain =
                       </Paper>
                   </div>
           }
-          <ConfirmDialog
+          <DiscardDialog
               onDestroy={handleConfirm}
               open={openStartAgainWarning}
               onCancel={handleClose}
