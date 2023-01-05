@@ -1,9 +1,5 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 And('you fill in the first name with values that have duplicates', () => {
     cy.get('[data-test="d2-form-component"]')
         .find('[data-test="capture-ui-input"]')

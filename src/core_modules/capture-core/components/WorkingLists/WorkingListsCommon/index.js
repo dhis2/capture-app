@@ -10,6 +10,7 @@ export * from './actions';
 export { includeFiltersWithValueAfterColumnSortingEpic } from './epics';
 export { buildFilterQueryArgs } from './helpers';
 export type {
+    LoadView,
     AddTemplate,
     DeleteTemplate,
     UpdateTemplate,
@@ -17,4 +18,6 @@ export type {
     RecordsOrder,
     CustomColumnOrder,
     InitialViewConfig,
+    Callbacks,
 } from './types';
+export { TEMPLATE_SHARING_TYPE } from './constants';

@@ -1,7 +1,5 @@
 // @flow
-import type {
-    OutputEffects,
-} from 'capture-core-utils/rulesEngine';
+import type { OutputEffects } from 'capture-core-utils/rulesEngine';
 import { rulesEngine } from './rulesEngine';
 import type { DataElement, ProgramStage } from '../metaData';
 import { constantsStore } from '../metaDataMemoryStores/constants/constants.store';
@@ -52,6 +50,10 @@ export const getApplicableRuleEffectsForEventProgram = ({
         return [];
     }
 
+    if (currentEvent) {
+        currentEvent.programStageName = program.stage.untranslatedName;
+    }
+
     return buildEffectsHierarchy(
         getApplicableRuleEffects({
             orgUnit,
@@ -81,6 +83,13 @@ flattenedResult: boolean = false,
     );
     if (!programRules.length) {
         return [];
+    }
+
+    if (currentEvent) {
+        if (!currentEvent.programStageId && stage) {
+            currentEvent.programStageId = stage.id;
+        }
+        currentEvent.programStageName = program.stages.get(currentEvent.programStageId)?.untranslatedName;
     }
 
     const effects = getApplicableRuleEffects({

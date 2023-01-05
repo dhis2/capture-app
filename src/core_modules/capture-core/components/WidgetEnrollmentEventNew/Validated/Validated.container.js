@@ -1,18 +1,19 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
-import { withSaveHandler } from '../../DataEntry';
+import { withAskToCreateNew, withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
-import { useOrganisationUnit } from '../../../dataQueries';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';
-import { requestSaveEvent } from './validated.actions';
+import { requestSaveEvent, startCreateNewAfterCompleting } from './validated.actions';
 import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { useAvailableProgramStages } from '../../../hooks';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
+const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
+
 export const Validated = ({
     program,
     stage,
@@ -20,7 +21,7 @@ export const Validated = ({
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
-    orgUnitId,
+    orgUnit,
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
@@ -29,7 +30,6 @@ export const Validated = ({
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
 
-    const { error, orgUnit } = useOrganisationUnit(orgUnitId, 'displayName, code');
     const rulesExecutionDependenciesClientFormatted =
         useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
 
@@ -43,6 +43,7 @@ export const Validated = ({
         // $FlowFixMe Investigate
         rulesExecutionDependenciesClientFormatted,
     });
+    const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, program.id);
 
     const dispatch = useDispatch();
     const handleSave = useCallback((
@@ -59,8 +60,8 @@ export const Validated = ({
             formFoundation: formFoundationArgument,
             completed,
             programId: program.id,
-            orgUnitId,
-            orgUnitName: orgUnit?.name || '',
+            orgUnitId: orgUnit.id,
+            orgUnitName: orgUnit.name || '',
             teiId,
             enrollmentId,
             onSaveExternal,
@@ -70,7 +71,6 @@ export const Validated = ({
     }, [
         dispatch,
         program.id,
-        orgUnitId,
         orgUnit,
         teiId,
         enrollmentId,
@@ -79,23 +79,50 @@ export const Validated = ({
         onSaveErrorActionType,
     ]);
 
-    if (error) {
-        return (
-            <div>
-                {i18n.t('organisation unit could not be retrieved. Please try again later.')}
-            </div>
-        );
-    }
+    const handleCreateNew = useCallback((isCreateNew?: boolean) => {
+        dispatch(requestSaveEvent({
+            eventId: itemId,
+            dataEntryId,
+            formFoundation,
+            completed: true,
+            programId: program.id,
+            orgUnitId: orgUnit.id,
+            orgUnitName: orgUnit.name || '',
+            teiId,
+            enrollmentId,
+            onSaveExternal,
+            onSaveSuccessActionType,
+            onSaveErrorActionType,
+        }));
+        dispatch(startCreateNewAfterCompleting({
+            enrollmentId, isCreateNew, orgUnitId: orgUnit.id, programId: program.id, teiId, availableProgramStages,
+        }));
+    }, [dispatch,
+        program.id,
+        orgUnit,
+        teiId,
+        enrollmentId,
+        onSaveExternal,
+        onSaveSuccessActionType,
+        onSaveErrorActionType,
+        formFoundation,
+        availableProgramStages,
+    ]);
+
 
     return (
-        <SaveHandlerHOC
+        <AskToCreateNewHandlerHOC
             {...passOnProps}
             stage={stage}
+            allowGenerateNextVisit={stage.allowGenerateNextVisit}
+            availableProgramStages={availableProgramStages}
             ready={ready}
             id={dataEntryId}
             itemId={itemId}
             formFoundation={formFoundation}
             onSave={handleSave}
+            onCancelCreateNew={() => handleCreateNew()}
+            onConfirmCreateNew={() => handleCreateNew(true)}
             programName={program.name}
             orgUnit={orgUnit}
             rulesExecutionDependenciesClientFormatted={rulesExecutionDependenciesClientFormatted}

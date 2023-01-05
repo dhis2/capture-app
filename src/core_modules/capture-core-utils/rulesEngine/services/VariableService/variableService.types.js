@@ -1,11 +1,12 @@
 // @flow
 import { typeof eventStatuses } from './constants';
-import type { DataElements, TrackedEntityAttributes } from '../../rulesEngine.types';
+import type { DataElements, TrackedEntityAttributes, OrgUnit } from '../../rulesEngine.types';
 
 export type ProgramRuleVariable = {
     id: string,
     displayName: string,
     programRuleVariableSourceType: string,
+    valueType: string,
     programId: string,
     dataElementId?: ?string,
     trackedEntityAttributeId?: ?string,
@@ -17,14 +18,15 @@ type EventMain = {
     +eventId?: string,
     +programId?: string,
     +programStageId?: string,
+    +programStageName?: string,
     +orgUnitId?: string,
     +orgUnitName?: string,
     +trackedEntityInstanceId?: string,
     +enrollmentId?: string,
     +enrollmentStatus?: string,
     +status?: $Values<eventStatuses>,
-    +eventDate?: string,
-    +dueDate?: string,
+    +occurredAt?: string,
+    +scheduledAt?: string,
 };
 
 export type EventValues = {
@@ -48,12 +50,6 @@ export type Enrollment = {
     +enrolledAt?: string,
     +occurredAt?: string,
     +enrollmentId?: string,
-};
-
-export type OrgUnit = {
-    id: string,
-    name: string,
-    code: string,
 };
 
 type Option = {

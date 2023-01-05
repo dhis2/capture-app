@@ -8,6 +8,8 @@ import type {
     ChangePage,
     ChangeRowsPerPage,
     ClearFilter,
+    ClearFilters,
+    RemoveFilter,
     CustomMenuContents,
     CustomRowMenuContents,
     FiltersData,
@@ -34,7 +36,9 @@ import type { TeiWorkingListsTemplates, TeiRecords } from '../types';
 export type Props = $ReadOnly<{|
     storeId: string,
     programId: string,
-    orgUnitId: string
+    orgUnitId: string,
+    selectedTemplateId?: string,
+    onChangeTemplate?: (selectedTemplateId?: string) => void
 |}>;
 
 export type TeiWorkingListsReduxOutputProps = {|
@@ -57,6 +61,8 @@ export type TeiWorkingListsReduxOutputProps = {|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
+    onClearFilters: ClearFilters,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
     onSelectListRow: SelectRow,
@@ -69,6 +75,7 @@ export type TeiWorkingListsReduxOutputProps = {|
     onUpdateList: UpdateList,
     orgUnitId: string,
     program: TrackerProgram,
+    programStage?: string,
     records?: TeiRecords,
     recordsOrder?: RecordsOrder,
     rowsPerPage?: number,

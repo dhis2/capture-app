@@ -70,7 +70,7 @@ declare module '@dhis2/app-runtime' {
     declare type UpdateMutation = {|
         ...ResourceQuery,
         type: 'update' | 'replace' | 'delete',
-        id: string | (data: Object) => string,
+        id?: string | (data: Object) => string,
         partial?: boolean,
         data: MutationData,
     |};
@@ -90,13 +90,14 @@ declare module '@dhis2/app-runtime' {
     declare class DataEngine {
         query: Query;
         mutate: Mutate;
-        link: {| baseUrl: string, apiPath: string, apiVersion: string |};
+        link: {| config: { baseUrl: string, apiVersion: string }, versionedApiPath: string, |};
     }
     declare export function useDataEngine(): DataEngine;
 
     declare export function useConfig(): {|
         baseUrl: string,
         apiVersion: string,
+        serverVersion: { major: string, minor: string, patch?: string },
     |};
 
     declare export type ApiNetworkError = {|

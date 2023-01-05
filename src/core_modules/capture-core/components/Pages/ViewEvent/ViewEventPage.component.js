@@ -1,27 +1,36 @@
 // @flow
 import React from 'react';
+import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
+import { useSelector } from 'react-redux';
 import { ViewEvent } from './ViewEventComponent/ViewEvent.container';
 import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRelationshipWrapper.container';
-import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
-import { customOrgUnitIdIdReset, customProgramIdReset } from './ViewEventPage.actions';
+import { TopBar } from './TopBar.container';
 
 type Props = {
   isUserInteractionInProgress: boolean,
   showAddRelationship: boolean,
 };
 
-export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => (
-    <div>
-        <LockedSelector
+export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => {
+    const { selectedCategories, programId, orgUnitId } = useSelector(({ currentSelections }) => ({
+        selectedCategories: currentSelections.categoriesMeta,
+        programId: currentSelections.programId,
+        orgUnitId: currentSelections.orgUnitId,
+    }));
+
+    return (<div>
+        <TopBar
+            programId={programId}
+            orgUnitId={orgUnitId}
+            selectedCategories={selectedCategories}
             isUserInteractionInProgress={isUserInteractionInProgress}
-            customActionsOnProgramIdReset={[customProgramIdReset()]}
-            customActionsOnOrgUnitIdReset={[customOrgUnitIdIdReset()]}
         />
-
-        {
-            showAddRelationship ?
-                <ViewEventNewRelationshipWrapper /> :
-                <ViewEvent />
-        }
+        <OrgUnitFetcher orgUnitId={orgUnitId}>
+            {
+                showAddRelationship ?
+                    <ViewEventNewRelationshipWrapper /> :
+                    <ViewEvent />
+            }
+        </OrgUnitFetcher>
     </div>);
-
+};

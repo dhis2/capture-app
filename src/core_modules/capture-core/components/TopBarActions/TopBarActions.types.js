@@ -4,7 +4,6 @@ export type Props = {
     selectedProgramId?: string,
     selectedOrgUnitId?: string,
     isUserInteractionInProgress?: boolean,
-    customActionsOnProgramIdReset?: Array<any>,
 };
 
 export type PlainProps = {
@@ -15,5 +14,6 @@ export type PlainProps = {
     onFindClick: () => void,
     onFindClickWithoutProgramId: () => void,
     showResetButton: boolean,
+    openConfirmDialog: boolean,
 };
 

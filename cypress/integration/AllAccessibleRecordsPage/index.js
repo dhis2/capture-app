@@ -1,10 +1,6 @@
 import '../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
-When('the user opens the main page', () => {
+Given('the user is on the the main page', () => {
     cy.visit('/#/');
 });
 
@@ -16,13 +12,6 @@ Then('the working list should not be displayed', () => {
 Then('the working list should be displayed', () => {
     cy.get('[data-test="main-page-working-list"]')
         .find('tr');
-});
-
-When(/^the user selects the program (.*)$/, (program) => {
-    cy.get('.Select')
-        .type(program.slice(0, -1));
-    cy.contains(program)
-        .click();
 });
 
 When('the IncompleteSelections-box should be displayed', () => {
@@ -51,23 +40,58 @@ When('the user clicks a row', () => {
 });
 
 When('edits and save the form', () => {
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Edit Event')
+    cy.contains('Edit event')
         .click();
-    cy.get('[data-test="capture-ui-input"]')
-        .contains('34')
-        .type('35')
+
+
+    cy.contains('[data-test="form-field"]', 'WHOMCH Hemoglobin value')
+        .find('input')
+        .clear()
+        .type('99')
         .blur();
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Save')
+
+    cy.contains('Save')
         .click();
 });
 
-Then('the working list will be updated', () => {
+When('navigates back to the main page', () => {
+    cy.contains('Show all events')
+        .click();
+});
+
+Then('the working list should be updated', () => {
+    cy.get('.app-shell-app').scrollTo('bottom');
+
+    cy.get('button[title="Select columns"]')
+        .click();
+
+    cy.contains('WHOMCH Hemoglobin value')
+        .click();
+
+    cy.contains('Save')
+        .click();
+
     cy.get('[data-test="main-page-working-list"]')
         .find('tr')
         .eq(1)
-        .within((row) => {
-            row.contains('35');
-        });
+        .contains('99');
+
+    // clean up
+    cy.get('[data-test="main-page-working-list"]')
+        .find('tr')
+        .eq(1)
+        .click();
+
+    cy.contains('Edit event')
+        .click();
+
+
+    cy.contains('[data-test="form-field"]', 'WHOMCH Hemoglobin value')
+        .find('input')
+        .clear()
+        .type('9')
+        .blur();
+
+    cy.contains('Save')
+        .click();
 });

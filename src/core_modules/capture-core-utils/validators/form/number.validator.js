@@ -3,6 +3,6 @@
  *
  * @export
  * @param {string} value
- * @returns
+ * @returns {boolean}
  */
 export const isValidNumber = (value: string) => !!(!isNaN(value) && Number(value) !== Infinity);

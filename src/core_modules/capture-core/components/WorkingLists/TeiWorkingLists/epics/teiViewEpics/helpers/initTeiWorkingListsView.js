@@ -9,20 +9,9 @@ import {
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
+import { convertToClientFilters, convertSortOrder, getCustomColumnsConfiguration } from '../../../helpers/TEIFilters';
 
-const getClientFilters = (criteria = {}) => {
-    // Build logic later when we actually have some non static templates
-    const { programStatus } = criteria;
-
-    return programStatus ? {
-        programStatus: {
-            usingOptionSet: true,
-            values: [programStatus],
-        },
-    } : {};
-};
-
-export const initTeiWorkingListsView = ({
+export const initTeiWorkingListsViewAsync = async ({
     programId,
     orgUnitId,
     storeId,
@@ -32,20 +21,23 @@ export const initTeiWorkingListsView = ({
     querySingleResource,
     absoluteApiPath,
 }: Input) => {
-    const sortById = 'regDate';
-    const sortByDirection = 'desc';
+    const { sortById, sortByDirection } = convertSortOrder(
+        selectedTemplate?.criteria?.order,
+        columnsMetaForDataFetching,
+    );
+    const customColumnOrder = getCustomColumnsConfiguration(selectedTemplate?.criteria?.displayColumnOrder, columnsMetaForDataFetching);
     const pageSize = 15;
     const page = 1;
-    const filters = getClientFilters(selectedTemplate.criteria);
+    const filters = await convertToClientFilters(selectedTemplate.criteria, columnsMetaForDataFetching, querySingleResource);
     const apiFilters = buildFilterQueryArgs(filters, { columns: columnsMetaForDataFetching, filtersOnly: filtersOnlyMetaForDataFetching, storeId, isInit: true });
     return getTeiListData({ programId, orgUnitId, pageSize, page, sortById, sortByDirection, filters: apiFilters }, {
         columnsMetaForDataFetching,
         filtersOnlyMetaForDataFetching,
         querySingleResource,
         absoluteApiPath })
-        .then(({ teis, request }) =>
+        .then(({ recordContainers, request }) =>
             initListViewSuccess(storeId, {
-                recordContainers: teis,
+                recordContainers,
                 pagingData: {
                     rowsPerPage: pageSize,
                     currentPage: page,
@@ -59,6 +51,7 @@ export const initTeiWorkingListsView = ({
                         programId,
                         orgUnitId,
                     },
+                    customColumnOrder,
                 },
             }),
         ).catch((error) => {

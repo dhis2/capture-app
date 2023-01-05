@@ -1,4 +1,6 @@
 // @flow
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils/errorCreator';
 import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes } from '../../constants';
 
 import type {
@@ -16,7 +18,7 @@ import type {
     CompulsoryEffect,
     OutputEffects,
 } from '../../rulesEngine.types';
-import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable';
+import { normalizeRuleVariable, numberToString } from '../../commonUtils';
 
 const sanitiseFalsy = (value) => {
     if (value) {
@@ -57,7 +59,7 @@ export function getRulesEffectsProcessor(
         type: $Values<typeof effectActions>): any {
         const result = createEffectsForConfiguredDataTypes(effect, (): any => ({
             type,
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
         }));
         return result.length !== 0 ? result : {
             type,
@@ -74,7 +76,7 @@ export function getRulesEffectsProcessor(
         }
         result.warning = {
             id: effect.id,
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
         };
         return result;
     }
@@ -88,7 +90,7 @@ export function getRulesEffectsProcessor(
         }
         result.error = {
             id: effect.id,
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
         };
         return result;
     }
@@ -98,7 +100,12 @@ export function getRulesEffectsProcessor(
         if (normalizedValue || normalizedValue === 0 || normalizedValue === false) {
             const converterName: string = mapTypeToInterfaceFnName[valueType];
             // $FlowExpectedError
-            outputValue = outputConverters[converterName](normalizedValue);
+            const outputConverter = outputConverters[converterName];
+            if (!converterName || !outputConverter) {
+                log.warn(errorCreator('converter for valueType is missing')({ valueType }));
+                return '';
+            }
+            outputValue = outputConverter(normalizedValue);
         } else {
             outputValue = normalizedValue;
         }
@@ -185,12 +192,13 @@ export function getRulesEffectsProcessor(
     }
 
     function processDisplayText(effect: ProgramRuleEffect): any {
+        const message = effect.displayContent || '';
         return {
             type: effectActions.DISPLAY_TEXT,
             id: effect.location,
             displayText: {
                 id: effect.id,
-                message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+                message: `${message} ${sanitiseFalsy(effect.data)}`,
                 ...effect.style,
             },
         };
@@ -202,8 +210,8 @@ export function getRulesEffectsProcessor(
             id: effect.location,
             displayKeyValuePair: {
                 id: effect.id,
-                key: effect.content,
-                value: effect.data,
+                key: effect.displayContent,
+                value: typeof effect.data == 'number' ? numberToString(effect.data) : String(effect.data),
                 ...effect.style,
             },
         };

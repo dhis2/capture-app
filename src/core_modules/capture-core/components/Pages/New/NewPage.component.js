@@ -1,29 +1,26 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { LockedSelector } from '../../LockedSelector';
+import { TopBar } from './TopBar.container';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import { newPageStatuses } from './NewPage.constants';
+import { NEW_TEI_DATA_ENTRY_ID, newPageStatuses } from './NewPage.constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { cleanUpDataEntry } from './NewPage.actions';
 
 const getStyles = () => ({
     container: {
         padding: '24px 24px 16px 24px',
     },
 });
-
-export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
-export const NEW_SINGLE_EVENT_DATA_ENTRY_ID = 'singleEvent';
-export const NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID = 'relationship';
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
@@ -38,10 +35,14 @@ const NewPagePlain = ({
     missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
     isUserInteractionInProgress,
+    programId,
+    teiId,
+    trackedEntityName,
+    teiDisplayName,
+    trackedEntityInstanceAttributes,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
-
     useEffect(() => {
         setScopeId(currentScopeId);
     }, [scopeType, currentScopeId]);
@@ -62,21 +63,16 @@ const NewPagePlain = ({
         showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
     ]);
+    const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
 
     return (<>
-        <LockedSelector
-            pageToPush="new"
+        <TopBar
+            orgUnitId={orgUnitId}
+            programId={programId}
             isUserInteractionInProgress={isUserInteractionInProgress}
-            customActionsOnProgramIdReset={[
-                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
-            ]}
-            customActionsOnOrgUnitIdReset={[
-                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
-                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
-            ]}
+            teiId={teiId}
+            trackedEntityName={trackedEntityName}
+            teiDisplayName={teiDisplayName}
         />
         <div data-test="registration-page-content" className={classes.container} >
             {
@@ -86,13 +82,14 @@ const NewPagePlain = ({
                         message={i18n.t("You don't have access to create an event in the current selections")}
                     />
                     :
-                    <>
+                    <OrgUnitFetcher orgUnitId={orgUnitId}>
                         {
                             newPageStatus === newPageStatuses.DEFAULT &&
                             <RegistrationDataEntry
                                 dataEntryId={NEW_TEI_DATA_ENTRY_ID}
                                 selectedScopeId={selectedScopeId}
                                 setScopeId={setScopeId}
+                                trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
                             />
                         }
 
@@ -131,7 +128,7 @@ const NewPagePlain = ({
                             })()
                         }
 
-                    </>
+                    </OrgUnitFetcher>
             }
         </div>
     </>);

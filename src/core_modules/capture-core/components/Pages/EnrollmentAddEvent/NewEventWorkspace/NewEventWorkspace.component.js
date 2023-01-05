@@ -71,12 +71,12 @@ const NewEventWorkspacePlain = ({
                             onClick={() => onHandleSwitchTab(tabMode.SCHEDULE)}
                             dataTest="new-event-schedule-tab"
                         >{i18n.t('Schedule')}</Tab>
-                        <Tab
+                        {/* <Tab
                             key="refer-tab"
                             selected={mode === tabMode.REFER}
                             onClick={() => onHandleSwitchTab(tabMode.REFER)}
                             dataTest="new-event-refer-tab"
-                        >{i18n.t('Refer')}</Tab>
+                        >{i18n.t('Refer')}</Tab> */}
                     </TabBar>
                     {mode === tabMode.REPORT && <WidgetEnrollmentEventNew
                         programId={programId}
@@ -103,6 +103,7 @@ const NewEventWorkspacePlain = ({
                         onSaveErrorActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR}
                         onSave={onSave}
                         onCancel={onCancel}
+                        hideDueDate={stage?.hideDueDate}
                     />}
                 </div>
             </Widget>

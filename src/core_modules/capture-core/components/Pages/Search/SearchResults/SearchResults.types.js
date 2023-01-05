@@ -5,6 +5,7 @@ import { typeof dataElementTypes } from '../../../../metaData';
 import type { AvailableSearchOptions } from '../SearchPage.types';
 import type { ListItem } from '../../../CardList/CardList.types';
 
+
 export type CardDataElementsInformation = Array<{| id: string, name: string, type: $Values<dataElementTypes> |}>
 
 export type CardProfileImageElementInformation = $ReadOnly<{| id: string, name: string, type: "IMAGE" |}>
@@ -17,7 +18,9 @@ export type PropsFromRedux ={|
   +currentFormId: string,
   +searchResults: Array<ListItem>,
   +currentSearchTerms: CurrentSearchTerms,
-  +dataElements: CardDataElementsInformation
+  +dataElements: CardDataElementsInformation,
+  +otherResults: Array<ListItem>,
+  +otherCurrentPage: number,
 |}
 
 export type OwnProps ={|
@@ -27,8 +30,9 @@ export type OwnProps ={|
 
 export type DispatchersFromRedux = {|
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string, page: string, resultsPageSize: number |}) => void,
-  startFallbackSearch: ({| programId: string, formId: string, resultsPageSize: number |}) => void,
+  startFallbackSearch: ({| programId: string, formId: string, resultsPageSize: number, page?: ?number |}) => void,
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page: string, resultsPageSize: number |}) => void,
+  handleCreateNew: () => void
 |}
 
 export type Props = {|

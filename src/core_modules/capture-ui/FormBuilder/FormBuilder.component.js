@@ -2,13 +2,14 @@
 /* eslint-disable complexity */
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import * as React from 'react';
 import { makeCancelablePromise } from 'capture-core-utils';
 import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
+import type { PostProcessErrorMessage, ErrorData } from './formbuilder.types';
 
 export type ValidatorContainer = {
     validator: (value: any, validationContext: ?Object) => boolean,
@@ -32,7 +33,7 @@ type FieldUI = {
     valid?: ?boolean,
     errorMessage?: ?string,
     errorType?: ?string,
-    errorData?: any,
+    errorData?: ErrorData,
     validatingMessage?: ?string,
 };
 
@@ -69,10 +70,10 @@ type Props = {
     children?: ?(RenderFieldFn, fields: Array<FieldConfig>) => React.Node,
     onRenderDivider?: ?RenderDividerFn,
     onGetContainerProps?: ?GetContainerPropsFn,
-    onGetValidationContext: ?() => ?Object,
+    onGetValidationContext?: ?() => ?Object,
     onIsValidating: ?IsValidatingFn,
     loadNr: number,
-    onPostProcessErrorMessage: (message: string, type: ?string, messageData: ?string, id: string, fieldId: string) => React.Node,
+    onPostProcessErrorMessage?: PostProcessErrorMessage,
 };
 
 type FieldCommitOptions = {
@@ -543,23 +544,24 @@ export class FormBuilder extends React.Component<Props> {
         }
 
         const errorMessage = onPostProcessErrorMessage && fieldUI.errorMessage ?
-            onPostProcessErrorMessage(
-                fieldUI.errorMessage,
-                fieldUI.errorType,
-                fieldUI.errorData,
-                `${id}-${field.id}`,
-                field.id,
-            ) :
-            fieldUI.errorMessage;
+            onPostProcessErrorMessage({
+                errorMessage: fieldUI.errorMessage,
+                errorType: fieldUI.errorType,
+                errorData: fieldUI.errorData,
+                id: `${id}-${field.id}`,
+                fieldId: field.id,
+                fieldLabel: props.label,
+            }) : fieldUI.errorMessage;
 
         return (
             <div
                 key={field.id}
                 className={defaultClasses.fieldOuterContainer}
-                data-test={`form-field-${field.id}`}
+                data-test={'form-field'}
             >
                 <div
                     {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
+                    data-test={`form-field-${field.id}`}
                 >
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <field.component

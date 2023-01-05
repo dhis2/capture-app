@@ -5,7 +5,7 @@ import { isValidPositiveInteger } from './integerPositive.validator';
  *
  * @export
  * @param {string} value
- * @returns
+ * @returns {boolean}
  */
 export const isValidZeroOrPositiveInteger = (value: string) => {
     if (value === '0') {

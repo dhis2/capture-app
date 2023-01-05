@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react';
 // $FlowFixMe
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router-dom';
-import { spacers, IconAdd24, IconCalendar24, IconArrowRightMulti24 } from '@dhis2/ui';
+import { colors, spacers, IconAdd24, IconCalendar24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
@@ -12,7 +12,7 @@ import { buildUrlQueryString, useLocationQuery } from '../../../../../utils/rout
 
 const styles = {
     contentContainer: {
-        padding: `0 ${spacers.dp16} ${spacers.dp24} ${spacers.dp16}`,
+        padding: `0 ${spacers.dp16} ${spacers.dp16} ${spacers.dp16}`,
         display: 'flex',
         gap: spacers.dp8,
     },
@@ -42,6 +42,8 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
         history.push(`/enrollmentEventNew?${buildUrlQueryString({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
     };
 
+    const ready = events !== undefined && stages !== undefined;
+
     return (
         <Widget
             header={i18n.t('Quick actions')}
@@ -49,12 +51,12 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
         >
-            <div
+            {ready && <div
                 className={classes.contentContainer}
                 data-test={'quick-action-button-container'}
             >
                 <QuickActionButton
-                    icon={<IconAdd24 />}
+                    icon={<IconAdd24 color={colors.grey700} />}
                     label={i18n.t('New Event')}
                     onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                     dataTest={'quick-action-button-report'}
@@ -62,21 +64,22 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                 />
 
                 <QuickActionButton
-                    icon={<IconCalendar24 />}
+                    icon={<IconCalendar24 color={colors.grey700} />}
                     label={i18n.t('Schedule an event')}
                     onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                     dataTest={'quick-action-button-schedule'}
                     disable={noStageAvailable}
                 />
 
-                <QuickActionButton
+                {/* DHIS2-13016: Should hide Make referral until the feature is developped
+                    <QuickActionButton
                     icon={<IconArrowRightMulti24 />}
                     label={i18n.t('Make referral')}
                     onClickAction={() => onNavigationFromQuickActions(tabMode.REFER)}
                     dataTest={'quick-action-button-refer'}
                     disable={noStageAvailable}
-                />
-            </div>
+                /> */}
+            </div>}
         </Widget>
     );
 };

@@ -1,16 +1,17 @@
 // @flow
 import React from 'react';
 import { makeCancelablePromise } from 'capture-core-utils';
-import { getApi } from '../../../../d2/d2Instance';
+import type { ErrorData } from 'capture-ui/FormBuilder';
 import { ExistingTEIContents } from './ExistingTEIContents.container';
-import { withLoadingIndicator } from '../../../../HOC/withLoadingIndicator';
-import type { ErrorData } from './uniqueTEADuplicate.types';
+import { withLoadingIndicator, withApiUtils } from '../../../../HOC';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const LoadingInddicatorWrappedContents = withLoadingIndicator()(ExistingTEIContents);
 
 type Props = {
     programId: ?string,
     errorData: ErrorData,
+    querySingleResource: QuerySingleResource,
 };
 
 type State = {
@@ -19,7 +20,7 @@ type State = {
     attributeValues: ?{[id: string]: any},
 };
 
-export class ExistingTEILoaderComponent extends React.Component<Props, State> {
+class ExistingTEILoaderComponentPlain extends React.Component<Props, State> {
     cancelablePromise: any;
     constructor(props: Props) {
         super(props);
@@ -36,88 +37,86 @@ export class ExistingTEILoaderComponent extends React.Component<Props, State> {
     }
 
     requestTeiWithoutProgram() {
-        const { errorData } = this.props;
+        const { errorData, querySingleResource } = this.props;
         const { id } = errorData;
-        const cancelablePromise = makeCancelablePromise(
-            getApi()
-                .get(
-                    // $FlowFixMe[incompatible-type] automated comment
-                    `trackedEntityInstances/${id}`,
-                    {
-                    },
-                ),
-        );
+        if (id) {
+            const cancelablePromise = makeCancelablePromise(
+                querySingleResource({
+                    resource: `tracker/trackedEntities/${id}`,
+                }),
+            );
 
-        cancelablePromise
-            .promise
-            .then((teiData) => {
-                const attributes = (teiData && teiData.attributes) || [];
-                this.setState({
-                    ready: true,
-                    tetAttributesOnly: true,
-                    attributeValues: attributes
-                        .reduce((acc, attributeData) => {
-                            acc[attributeData.attribute] = attributeData.value;
-                            return acc;
-                        }, {}),
+            cancelablePromise
+                .promise
+                .then((teiData) => {
+                    const attributes = (teiData && teiData.attributes) || [];
+                    this.setState({
+                        ready: true,
+                        tetAttributesOnly: true,
+                        attributeValues: attributes
+                            .reduce((acc, attributeData) => {
+                                acc[attributeData.attribute] = attributeData.value;
+                                return acc;
+                            }, {}),
+                    });
+                })
+                .catch((error) => {
+                    if (error && error.isCanceled) {
+                        return;
+                    }
+                    // logged, no additional actions for now
+                    this.setState({
+                        ready: true,
+                        tetAttributesOnly: true,
+                        attributeValues: {},
+                    });
                 });
-            })
-            .catch((error) => {
-                if (error && error.isCanceled) {
-                    return;
-                }
-                // logged, no additional actions for now
-                this.setState({
-                    ready: true,
-                    tetAttributesOnly: true,
-                    attributeValues: {},
-                });
-            });
 
-        this.cancelablePromise = cancelablePromise;
+            this.cancelablePromise = cancelablePromise;
+        }
     }
 
     requestTeiInProgramContext() {
-        const { errorData, programId } = this.props;
+        const { errorData, programId, querySingleResource } = this.props;
         const { id } = errorData;
-        const cancelablePromise = makeCancelablePromise(
-            getApi()
-                .get(
-                    // $FlowFixMe[incompatible-type] automated comment
-                    `trackedEntityInstances/${id}`,
-                    {
+        if (id) {
+            const cancelablePromise = makeCancelablePromise(
+                querySingleResource({
+                    resource: `tracker/trackedEntities/${id}`,
+                    params: {
                         program: programId,
                         fields: '*',
                     },
-                ),
-        );
+                }),
+            );
 
-        cancelablePromise
-            .promise
-            .then((teiData) => {
-                if (!teiData || !teiData.attributes) {
+            cancelablePromise
+                .promise
+                .then((teiData) => {
+                    if (!teiData || !teiData.attributes) {
+                        this.requestTeiWithoutProgram();
+                        return;
+                    }
+                    this.setState({
+                        ready: true,
+                        attributeValues: teiData
+                            .attributes
+                            .reduce((acc, attributeData) => {
+                                acc[attributeData.attribute] = attributeData.value;
+                                return acc;
+                            }, {}),
+                    });
+                })
+                .catch((error) => {
+                    if (error && error.isCanceled) {
+                        return;
+                    }
+                    // TODO: if this is because of ownership -> request tei without program
                     this.requestTeiWithoutProgram();
-                    return;
-                }
-                this.setState({
-                    ready: true,
-                    attributeValues: teiData
-                        .attributes
-                        .reduce((acc, attributeData) => {
-                            acc[attributeData.attribute] = attributeData.value;
-                            return acc;
-                        }, {}),
                 });
-            })
-            .catch((error) => {
-                if (error && error.isCanceled) {
-                    return;
-                }
-                // TODO: if this is because of ownership -> request tei without program
-                this.requestTeiWithoutProgram();
-            });
 
-        this.cancelablePromise = cancelablePromise;
+            this.cancelablePromise = cancelablePromise;
+        }
     }
     requestTei() {
         const programId = this.props.programId;
@@ -140,3 +139,5 @@ export class ExistingTEILoaderComponent extends React.Component<Props, State> {
         );
     }
 }
+
+export const ExistingTEILoaderComponent = withApiUtils(ExistingTEILoaderComponentPlain);

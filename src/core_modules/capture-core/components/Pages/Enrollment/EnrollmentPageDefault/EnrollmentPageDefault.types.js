@@ -15,10 +15,13 @@ export type Props = {|
     hideWidgets: HideWidgets,
     orgUnitId: string,
     onDelete: () => void,
+    onAddNew: () =>void,
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,
     onEventClick: (eventId: string, stageId: string) => void,
-    relationshipTypes?: Array<RelationshipType>
+    relationshipTypes?: Array<RelationshipType>,
+    onUpdateTeiAttributeValues: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
+    onEnrollmentError: (message: string) => void,
 |};
 
 export type PlainProps = {|

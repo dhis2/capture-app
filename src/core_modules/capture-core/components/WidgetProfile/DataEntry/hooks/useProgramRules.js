@@ -4,7 +4,7 @@ import { useDataQuery } from '@dhis2/app-runtime';
 
 const fields =
     'id,displayName,condition,description,program[id],programStage[id],priority,' +
-    'programRuleActions[id,content,location,data,programRuleActionType,programStageSection[id],dataElement[id],' +
+    'programRuleActions[id,content,displayContent,location,data,programRuleActionType,programStageSection[id],dataElement[id],' +
     'trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id]]';
 
 export const useProgramRules = (programId: string) => {

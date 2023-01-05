@@ -5,7 +5,6 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { Button } from '@dhis2/ui';
-import { getApi } from '../../../../../d2/d2Instance';
 import type { Props } from './downloadDialog.types';
 
 const getStyles = () => ({
@@ -37,14 +36,11 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
         return searchParams.toString();
     }
 
-    static getUrl() {
-        const baseUrl = getApi().baseUrl;
-        return `${baseUrl}/events/query`;
-    }
 
     renderButtons() {
-        const { request = {}, classes } = this.props;
-        const url = DownloadDialogPlain.getUrl();
+        const { request = {}, absoluteApiPath, classes } = this.props;
+        const url = `${absoluteApiPath}/${request.url}`;
+        const deprecatedUrl = `${absoluteApiPath}/events/query`;
         const { pageSize, page, ...paramsFromRequest } = request.queryParams || {};
         const paramsObject = {
             ...paramsFromRequest,
@@ -74,7 +70,7 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
                 >
                     <a
                         download="events.xml"
-                        href={`${url}.xml?${searchParamsString}`}
+                        href={`${deprecatedUrl}.xml?${searchParamsString}`}
                         className={classes.downloadLink}
                     >
                         <Button>

@@ -9,24 +9,21 @@ import {
     makeStageSelector,
 } from './newEventDataEntryWrapper.selectors';
 import { getDataEntryHasChanges } from '../getNewEventDataEntryHasChanges';
+import type { Props, ContainerProps, StateProps, MapStateToProps } from './NewEventDataEntryWrapper.types';
 
-
-const makeMapStateToProps = () => {
+const makeMapStateToProps = (): MapStateToProps => {
     const stageSelector = makeStageSelector();
 
-    const mapStateToProps = (state: ReduxState) => {
+    return (state: ReduxState): StateProps => {
         const stage = stageSelector(state);
         const formFoundation = stage && stage.stageForm ? stage.stageForm : null;
-        return {
+        return ({
             stage,
             formFoundation,
             dataEntryHasChanges: getDataEntryHasChanges(state),
             formHorizontal: (formFoundation && formFoundation.customForm ? false : !!state.newEventPage.formHorizontal),
-        };
+        });
     };
-
-    // $FlowFixMe[not-an-object] automated comment
-    return mapStateToProps;
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
@@ -35,5 +32,12 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export const NewEventDataEntryWrapper: ComponentType<{||}> =
-  connect(makeMapStateToProps, mapDispatchToProps)(NewEventDataEntryWrapperComponent);
+export const NewEventDataEntryWrapper: ComponentType<ContainerProps> =
+    connect<
+        Props,
+        ContainerProps,
+        StateProps,
+        *,
+        ReduxState,
+        *,
+    >(makeMapStateToProps, mapDispatchToProps)(NewEventDataEntryWrapperComponent);

@@ -17,6 +17,11 @@ type AgeFormValue = {
     days?: ?string,
 }
 
+type RangeValue = {
+    from?: ?string,
+    to?: ?string
+}
+
 function convertDateForEdit(rawValue: string): string {
     const momentInstance = moment(rawValue);
     return convertMomentToDateFormatString(momentInstance);
@@ -57,18 +62,40 @@ function convertAgeForEdit(rawValue: string): AgeFormValue {
     };
 }
 
+function convertNumberRangeForDisplay(rawValue: RangeValue) {
+    return rawValue.to;
+}
+
+function convertDateRangeForDisplay(rawValue: RangeValue) {
+    return rawValue.to;
+}
+
+
+function convertRangeForDisplay(parser: any, clientValue: any) {
+    return parser(clientValue.from);
+}
+
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
     [dataElementTypes.INTEGER]: stringifyNumber,
     [dataElementTypes.INTEGER_POSITIVE]: stringifyNumber,
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
     [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    [dataElementTypes.PERCENTAGE]: stringifyNumber,
     [dataElementTypes.DATE]: convertDateForEdit,
     [dataElementTypes.DATETIME]: convertDateTimeForEdit,
     [dataElementTypes.TIME]: convertTimeForEdit,
     [dataElementTypes.TRUE_ONLY]: () => 'true',
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
     [dataElementTypes.AGE]: convertAgeForEdit,
+    [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
+    [dataElementTypes.DATE_RANGE]: convertDateRangeForDisplay,
+    [dataElementTypes.INTEGER_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.INTEGER_POSITIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.INTEGER_NEGATIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(convertTimeForEdit, value),
+    [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertDateTimeForEdit, value),
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {

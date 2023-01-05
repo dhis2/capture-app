@@ -8,6 +8,7 @@ import type {
     ChangePage,
     ChangeRowsPerPage,
     ClearFilter,
+    RemoveFilter,
     CustomMenuContents,
     CustomRowMenuContents,
     FiltersData,
@@ -73,6 +74,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
     onDeleteEvent: Function,
     onDeleteTemplate: DeleteTemplate,
     onLoadView: LoadView,
@@ -100,4 +102,5 @@ export type EventWorkingListsReduxOutputProps = {|
     updating: boolean,
     updatingWithDialog: boolean,
     viewPreloaded?: boolean,
+    templateSharingType: string,
 |};

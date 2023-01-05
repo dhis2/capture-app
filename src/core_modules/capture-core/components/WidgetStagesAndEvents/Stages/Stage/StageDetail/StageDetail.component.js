@@ -13,12 +13,13 @@ import { colors,
     DataTableCell,
     DataTableColumnHeader,
     Button,
-    IconAdd24,
+    IconAdd16,
     Tooltip,
 } from '@dhis2/ui';
 import { sortDataFromEvent } from './hooks/sortFuntions';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
+import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import type { Props } from './stageDetail.types';
 
 
@@ -60,6 +61,7 @@ const StageDetailPlain = (props: Props) => {
         events,
         eventName,
         stageId,
+        programId,
         dataElements,
         hideDueDate = false,
         repeatable = false,
@@ -71,14 +73,10 @@ const StageDetailPlain = (props: Props) => {
         columnName: 'status',
         sortDirection: SORT_DIRECTION.DESC,
     };
-    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate);
-    const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events);
+    const { stage } = getProgramAndStageForProgram(programId, stageId);
+    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, stage?.stageForm);
+    const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElements, events);
 
-    React.useEffect(() => {
-        if (!dataSource?.length) {
-            computeData();
-        }
-    }, [dataSource, computeData]);
 
     const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
@@ -125,7 +123,7 @@ const StageDetailPlain = (props: Props) => {
     }
 
     function renderRows() {
-        if (!dataSource) {
+        if (!dataSource || loading) {
             return null;
         }
         return dataSource
@@ -137,8 +135,6 @@ const StageDetailPlain = (props: Props) => {
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElements))
             .map((row: Object) => {
-                const dataTableProgramStage = events[0].programStage;
-
                 const cells = headerColumns.map(({ id }) => (
                     <Tooltip
                         key={`${id}-${row.id}`}
@@ -148,7 +144,7 @@ const StageDetailPlain = (props: Props) => {
                         {({ onMouseOver, onMouseOut, ref }) => (
                             <DataTableCell
                                 key={id}
-                                onClick={() => !row.pendingApiResponse && onEventClick(row.id, dataTableProgramStage)}
+                                onClick={() => !row.pendingApiResponse && onEventClick(row.id)}
                                 ref={(tableCell) => {
                                     if (tableCell && row.pendingApiResponse) {
                                         tableCell.onmouseover = onMouseOver;
@@ -219,27 +215,37 @@ const StageDetailPlain = (props: Props) => {
             return (<Button
                 small
                 secondary
+                icon={<IconAdd16 />}
                 disabled={shouldDisableCreateNew}
                 className={classes.button}
                 dataTest="create-new-button"
                 onClick={handleCreateNew}
             >
                 <Tooltip
-                    title={shouldDisableCreateNew ? i18n.t('This stage can only have one event') : ''}
+                    content={i18n.t('This stage can only have one event')}
+                    closeDelay={50}
                 >
-                    <div>
-                        <div className={classes.icon}><IconAdd24 /></div>
-                        <div className={classes.label}>
-                            {i18n.t('New {{ eventName }} event', { eventName, interpolation: { escapeValue: false } })}
+                    {({ onMouseOver, onMouseOut, ref }) => (
+                        <div ref={(divRef) => {
+                            if (divRef && shouldDisableCreateNew) {
+                                divRef.onmouseover = onMouseOver;
+                                divRef.onmouseout = onMouseOut;
+                                ref.current = divRef;
+                            }
+                        }}
+                        >
+                            {i18n.t('New {{ eventName }} event', {
+                                eventName, interpolation: { escapeValue: false },
+                            })}
                         </div>
-                    </div>
+                    )}
                 </Tooltip>
             </Button>);
         };
 
         return (
             <DataTableRow>
-                <DataTableCell colSpan={`${headerColumns.length}`}>
+                <DataTableCell staticStyle colSpan={`${headerColumns.length}`}>
                     {renderShowMoreButton()}
                     {renderViewAllButton()}
                     {renderCreateNewButton()}
@@ -249,6 +255,13 @@ const StageDetailPlain = (props: Props) => {
         );
     }
 
+    if (error) {
+        return (
+            <div>
+                {i18n.t('Events could not be retrieved. Please try again later.')}
+            </div>
+        );
+    }
     return (
         <div className={classes.container}>
             <DataTable

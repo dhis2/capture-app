@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Tooltip from '@material-ui/core/Tooltip';
+import { Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import type { VirtualizedOptionConfig } from './OptionsSelectVirtualized.component';
 
@@ -64,10 +64,9 @@ class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
         );
         return (
             <Tooltip
-                title={option.label}
+                content={option.label}
                 placement={'bottom'}
-                classes={{ popper: classes.popper }}
-                enterDelay={800}
+                openDelay={800}
             >
                 <div
                     className={'virtualized-select-option'}

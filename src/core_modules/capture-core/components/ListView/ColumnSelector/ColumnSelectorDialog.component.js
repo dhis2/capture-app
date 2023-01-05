@@ -1,6 +1,6 @@
 // @flow
-import React, { Component } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { isEqual } from 'lodash';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -19,61 +19,46 @@ type Props = {
     columns: Array<Object>,
 };
 
-type State = {
-    columnList: Array<Object>,
-};
+export const ColumnSelectorDialog = ({ columns, open, onClose, onSave }: Props) => {
+    const [columnList, setColumnList] = useState(columns);
 
-export class ColumnSelectorDialog extends Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            columnList: [...this.props.columns],
-        };
-    }
+    useEffect(() => {
+        setColumnList(currentColumns => (isEqual(columns, currentColumns) ? currentColumns : columns));
+    }, [columns]);
 
-    handleSave = () => {
-        const { onSave } = this.props;
-        onSave(this.state.columnList);
+    const handleSave = () => {
+        onSave(columnList);
     };
 
-    handleToggle = (id: string) => () => {
-        const index = this.state.columnList.findIndex(column => column.id === id);
-        const toggleList = this.state.columnList;
+    const handleToggle = (id: string) => () => {
+        const index = columnList.findIndex(column => column.id === id);
+        const toggleList = [...columnList];
 
         toggleList[index] = { ...toggleList[index], visible: !toggleList[index].visible };
-
-        this.setState({ columnList: toggleList });
+        setColumnList(toggleList);
     };
 
-    handleUpdateListOrder = (sortedList: Array<Object>) => {
-        this.setState({ columnList: sortedList });
+    const handleUpdateListOrder = (sortedList: Array<Object>) => {
+        setColumnList(sortedList);
     };
 
-    render() {
-        const { open, onClose } = this.props;
-
-        return (
-            <span>
-                <Dialog
-                    open={!!open}
-                    onClose={onClose}
-                    fullWidth
-                >
-                    <DialogTitle>{i18n.t('Columns to show in table')}</DialogTitle>
-                    <DialogContent>
-                        <DragDropList
-                            listItems={this.state.columnList}
-                            handleUpdateListOrder={this.handleUpdateListOrder}
-                            handleToggle={this.handleToggle}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleSave} color="primary" autoFocus>
-                            Save
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </span>
-        );
-    }
-}
+    return (
+        <span>
+            <Dialog open={!!open} onClose={onClose} fullWidth>
+                <DialogTitle>{i18n.t('Columns to show in table')}</DialogTitle>
+                <DialogContent>
+                    <DragDropList
+                        listItems={columnList}
+                        handleUpdateListOrder={handleUpdateListOrder}
+                        handleToggle={handleToggle}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleSave} color="primary" autoFocus>
+                        {i18n.t('Save')}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </span>
+    );
+};

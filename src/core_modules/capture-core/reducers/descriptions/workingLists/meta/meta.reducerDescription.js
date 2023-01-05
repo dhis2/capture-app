@@ -46,6 +46,14 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return newState;
     },
+    [workingListsCommonActionTypes.LIST_UPDATE]: (state, { payload: { storeId, resetMode } }) => (
+        resetMode ? {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                currentPage: 1,
+            },
+        } : state),
     [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { storeId, pagingData } = action.payload;
@@ -152,6 +160,7 @@ export const workingListsMetaDesc = createReducerDescription({
                 ...state[storeId],
                 initial: state[storeId].nextInitial,
                 nextInitial: undefined,
+                viewPreloaded: false,
             },
         };
     },
@@ -236,6 +245,23 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
+    [workingListsCommonActionTypes.FILTER_REMOVE]: (state, action) => {
+        const { itemId, storeId } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                next: {
+                    ...state[storeId].next,
+                    filters: {
+                        ...(state[storeId].next && state[storeId].next.filters),
+                        [itemId]: null,
+                    },
+                    currentPage: 1,
+                },
+            },
+        };
+    },
     [workingListsCommonActionTypes.FILTER_CLEAR]: (state, action) => {
         const { itemId, storeId } = action.payload;
         return {
@@ -252,6 +278,19 @@ export const workingListsMetaDesc = createReducerDescription({
                 },
             },
         };
+    },
+    [workingListsCommonActionTypes.FILTERS_CLEAR]: (state, action) => {
+        const { filtersList: filtersListToKeep, storeId } = action.payload;
+        if (state[storeId]) {
+            return {
+                ...state,
+                [storeId]: {
+                    ...state[storeId],
+                    filters: filtersListToKeep,
+                },
+            };
+        }
+        return state;
     },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };

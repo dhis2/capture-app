@@ -2,6 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
+import { IconInfo16, Tooltip, colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { withLabel as UIWithLabel } from 'capture-ui';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
@@ -29,6 +30,12 @@ const getStylesLabel = (theme: Theme) => ({
         paddingLeft: 5,
         display: 'flex',
         alignItems: 'center',
+    },
+    tooltipIcon: {
+        display: 'flex',
+        alignItems: 'center',
+        paddingLeft: spacers.dp8,
+        cursor: 'pointer',
     },
 });
 
@@ -60,6 +67,7 @@ type Props = {
         labelVertical: string,
         required: string,
         iconContainer: string,
+        tooltipIcon: string,
     },
     dataElementDescription?: ?React.Element<any>
 };
@@ -67,11 +75,13 @@ type Props = {
 type HOCParams = {
     onGetUseVerticalOrientation?: ?(props: Object) => boolean,
     onGetCustomFieldLabeClass?: ?(props: Object) => string,
+    customTooltip?: ?(props: Object) => string
 };
 
 export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<any>) => {
     const onGetUseVerticalOrientation = hocParams && hocParams.onGetUseVerticalOrientation;
     const onGetCustomFieldLabeClass = hocParams && hocParams.onGetCustomFieldLabeClass;
+    const customTooltip = hocParams && hocParams.customTooltip;
 
     const LabelHOCWithStyles = UIWithLabel({
         onGetUseVerticalOrientation: (props: Object) => onGetUseVerticalOrientation && onGetUseVerticalOrientation(props),
@@ -147,7 +157,15 @@ export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.Comp
                     required={required}
                     requiredClass={classes.required}
                 />
-                {dataElementDescription}
+                {customTooltip ?
+                    <Tooltip content={customTooltip()}>
+                        <div className={classes.tooltipIcon}>
+                            <IconInfo16 color={colors.grey600} />
+                        </div>
+                    </Tooltip>
+                    :
+                    dataElementDescription
+                }
             </div>
         );
     };

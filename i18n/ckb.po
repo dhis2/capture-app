@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-15T09:59:36.798Z\n"
+"POT-Creation-Date: 2022-08-19T13:01:47.020Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -95,8 +95,8 @@ msgstr "تکایە بەروارو کاتێکی درووست بنووسە"
 msgid "Please provide a valid time"
 msgstr "تکایە کاتێکی درووست بنووسە"
 
-msgid "Please provide a valid percentage"
-msgstr "تکایە ڕێژەیەکی سەدی درووست بنووسە"
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
 
 msgid "Please provide a valid url"
 msgstr "تکایە یو URLێکی درووست بنووسە"
@@ -136,6 +136,9 @@ msgstr "تۆمارکردن"
 
 msgid "A future date is not allowed"
 msgstr "بەرواری داهاتوو ناکرێت تۆماربکرێت"
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -308,9 +311,6 @@ msgstr "پیشان بدە {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "کەسی تۆمارکراو"
 
-msgid "Link"
-msgstr "لینک"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "بەجێهێشنتی ئەم پەڕەیە هەموو چاڵآکیەکانت دەسرێتەوە کە کردووتە"
 
@@ -388,8 +388,14 @@ msgstr "بەکاربەرەکە هەڵبژێرە"
 msgid "to"
 msgstr "بۆ "
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
 msgstr "لە"
+
+msgid "Days in the past"
+msgstr ""
 
 msgid "To"
 msgstr "لە"
@@ -412,8 +418,11 @@ msgstr "مانگی ڕابردوو"
 msgid "Last 3 months"
 msgstr "٣ مانگ پێشووتر"
 
-msgid "Custom range"
-msgstr "مەودایەکی ئارەزوومەندانە"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
+msgstr ""
 
 msgid "Max"
 msgstr "زیاترین"
@@ -532,57 +541,6 @@ msgstr "پرۆگرامەکە بوونی نیە"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
 
-msgid "New"
-msgstr "نوێ"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr "یەکەی تۆمارکردن هەڵبژێرە"
-
-msgid "Start Again"
-msgstr "دووبارە دەستبپێبکەوە"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
-
-msgid "Accept"
-msgstr "پەسندکردن"
-
-msgid "Registering Organisation Unit"
-msgstr "تۆمارکردنی یەکەی رێکخراو"
-
-msgid "Select"
-msgstr "هەڵبژاردن"
-
-msgid "Program"
-msgstr "پرۆگرام"
-
-msgid "No programs available."
-msgstr "هیچ پرۆگرامێک بەردەست نیە"
-
-msgid "Show all"
-msgstr "پێشاندانی هەمووان"
-
-msgid "Selected program"
-msgstr "پرۆگرامە هەڵبژێردراوەکە"
-
-msgid "Some programs are being filtered."
-msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
-
-msgid "Select program"
-msgstr "پرۆگرام هەڵبژێرە"
-
-msgid "Selected"
-msgstr ""
-
 msgid "Online"
 msgstr "ئۆنڵاین"
 
@@ -595,11 +553,29 @@ msgstr "هاوتاکردن"
 msgid "Add comment"
 msgstr "کۆمێنت زیادبکە"
 
-msgid "You dont have access to write comments"
-msgstr "مافی ئەوەت نیە کە کۆمێنت بنووسیت"
+msgid "You don't have access to write comments"
+msgstr ""
 
 msgid "Write comment"
 msgstr "کۆمێنت بنووسە"
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "No, cancel"
+msgstr ""
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
@@ -638,16 +614,16 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -754,6 +730,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "نوێ"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -763,11 +742,17 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
+msgstr ""
+
+msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Save new"
@@ -776,8 +761,20 @@ msgstr ""
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
+msgid "Link"
+msgstr "لینک"
+
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
+
+msgid "Show all"
+msgstr "پێشاندانی هەمووان"
+
+msgid "Program"
+msgstr "پرۆگرام"
 
 msgid "Organisation Unit"
 msgstr "یەکەی ڕێخکڕاو"
@@ -819,6 +816,40 @@ msgstr ""
 msgid "Search by attributes"
 msgstr "بە پێ ئاتریبیوت بگەڕێ"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Register a user"
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid "Too many results"
+msgstr ""
+
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Back"
 msgstr "كةرانةوة"
 
@@ -832,33 +863,6 @@ msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
-msgid "No results found"
-msgstr ""
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-
-msgid "Back to search"
-msgstr ""
-
-msgid "An error has occurred"
-msgstr ""
-
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-
-msgid "Too many results"
-msgstr ""
-
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-
 msgid "Choose a type to start searching"
 msgstr ""
 
@@ -866,6 +870,15 @@ msgid "View active enrollment"
 msgstr ""
 
 msgid "Re-enroll"
+msgstr ""
+
+msgid "all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create new "
+msgstr ""
+
+msgid "Create new"
 msgstr ""
 
 msgid ""
@@ -876,14 +889,20 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
+
 msgid "events"
 msgstr ""
 
 msgid "event"
 msgstr ""
 
-msgid "You dont have access to edit this event"
-msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
+msgid "You don't have access to edit this event"
+msgstr ""
 
 msgid "Edit event"
 msgstr "حاڵەتەکە دەستکاری بکە"
@@ -928,14 +947,44 @@ msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You dont have access to delete this relationship"
-msgstr "مافی سڕینەوە ئەم پەیوەندیەت نیە"
+msgid "You don't have access to delete this relationship"
+msgstr ""
 
-msgid "You dont have access to create any relationships"
-msgstr "مافی دروستکردنی ئەم پەیوەندیەت نیە"
+msgid "You don't have access to create any relationships"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "پەوەندی درووستبکە"
+
+msgid "Selected registering unit"
+msgstr "یەکەی تۆمارکردن هەڵبژێرە"
+
+msgid "Start Again"
+msgstr "دووبارە دەستبپێبکەوە"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
+
+msgid "Accept"
+msgstr "پەسندکردن"
+
+msgid "Registering Organisation Unit"
+msgstr "تۆمارکردنی یەکەی رێکخراو"
+
+msgid "Select"
+msgstr "هەڵبژاردن"
+
+msgid "No programs available."
+msgstr "هیچ پرۆگرامێک بەردەست نیە"
+
+msgid "Selected program"
+msgstr "پرۆگرامە هەڵبژێردراوەکە"
+
+msgid "Select program"
+msgstr "پرۆگرام هەڵبژێرە"
+
+msgid "Selected"
+msgstr ""
 
 msgid "Results found"
 msgstr ""
@@ -945,6 +994,15 @@ msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "بەلانی کەم ئەتریبیوتی{{minAttributesRequired}} پڕبەکەرەوەبۆ گەڕان"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "بۆ کارکردن لەگەڵ پرۆگرامە هەڵبژێردراوەکان"
@@ -959,6 +1017,12 @@ msgid "Enrollment actions"
 msgstr ""
 
 msgid "We are processing your request."
+msgstr ""
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr ""
+
+msgid "Add new"
 msgstr ""
 
 msgid "Reactivate"
@@ -978,9 +1042,6 @@ msgid ""
 "remove the current enrollment."
 msgstr ""
 
-msgid "No, cancel"
-msgstr ""
-
 msgid "Yes, delete enrollment."
 msgstr ""
 
@@ -990,25 +1051,25 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr ""
-
 msgid "Enrollment date"
 msgstr ""
 
 msgid "Incident date"
 msgstr ""
 
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr ""
+
 msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
-msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1023,10 +1084,10 @@ msgstr ""
 msgid "This enrollment doesn't have any comments"
 msgstr ""
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "organisation unit could not be retrieved. Please try again later."
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 
 msgid "program or stage is invalid"
@@ -1048,6 +1109,12 @@ msgid "This event doesn't have any comments"
 msgstr ""
 
 msgid "stage not found in rules execution"
+msgstr ""
+
+msgid "Delete event"
+msgstr "حاڵەتەکە بسڕەوە"
+
+msgid "Yes, delete event"
 msgstr ""
 
 msgid "Event completed"
@@ -1103,22 +1170,37 @@ msgid ""
 "Enrollment box on this dashboard"
 msgstr ""
 
+msgid " Loading..."
+msgstr ""
+
 msgid "Save changes"
 msgstr ""
 
 msgid "Profile"
 msgstr "پرۆفایل"
 
-msgid "There are errors in this form"
+msgid "There is a problem with this form"
 msgstr ""
 
 msgid "There are warnings in this form"
 msgstr ""
 
+msgid "There was a problem saving changes"
+msgstr ""
+
+msgid "Try again or contact your system administrator for support"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr "نمونەی یەکەی بەدواداچوون"
+
+msgid "Fix errors in the form to continue."
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Person Profile"
+msgid "{{TETName}} profile"
 msgstr ""
 
 msgid "Edit"
@@ -1142,14 +1224,11 @@ msgstr ""
 msgid "This stage can only have one event"
 msgstr ""
 
-msgid "Report date"
+msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Registering unit"
 msgstr "تؤمار كردني يةكة"
-
-msgid "Due date"
-msgstr ""
 
 msgid "{{ totalEvents }} events"
 msgstr ""
@@ -1165,9 +1244,6 @@ msgstr ""
 
 msgid "Working list could not be loaded"
 msgstr "لیستی کارکردن نەتواندرا بهێندرێت"
-
-msgid "Delete event"
-msgstr "حاڵەتەکە بسڕەوە"
 
 msgid "Download as JSON"
 msgstr "دایبەزێنە وەکو JSON"
@@ -1200,6 +1276,9 @@ msgid "Inactive"
 msgstr ""
 
 msgid "Working list could not be updated"
+msgstr ""
+
+msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
 
 msgid "Update view"
@@ -1292,8 +1371,11 @@ msgstr ""
 msgid "Error saving the enrollment event"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "نمونەی یەکەی بەدواداچوون"
+msgid "Error deleting the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "هێڵی درێژی و پانی دیاریبکە"

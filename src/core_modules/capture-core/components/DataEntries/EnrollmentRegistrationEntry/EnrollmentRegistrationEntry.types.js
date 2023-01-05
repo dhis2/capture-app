@@ -1,8 +1,11 @@
 // @flow
 import type { Node } from 'react';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import type { RegistrationFormMetadata } from '../common/types';
 import type { RenderCustomCardActions } from '../../CardList';
 import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
+import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
+import type { InputAttribute } from './hooks/useFormValues';
 
 export type OwnProps = $ReadOnly<{|
   id: string,
@@ -14,10 +17,16 @@ export type OwnProps = $ReadOnly<{|
   duplicatesReviewPageSize: number,
   renderDuplicatesCardActions?: RenderCustomCardActions,
   renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
+  ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
+  teiId?: ?string,
+  skipDuplicateCheck?: ?boolean,
+  trackedEntityInstanceAttributes?: Array<InputAttribute>,
 |}>;
 
 type ContainerProps = {|
   ready: boolean,
+  orgUnitId: string,
+  orgUnit: ?OrgUnit,
 |};
 
 export type Props = $ReadOnly<{|

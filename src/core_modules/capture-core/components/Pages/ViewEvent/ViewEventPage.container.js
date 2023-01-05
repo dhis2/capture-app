@@ -1,5 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
+import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { ViewEventPageComponent } from './ViewEventPage.component';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../HOC';
@@ -9,7 +10,7 @@ const mapStateToProps = (state: ReduxState) => {
     const isUserInteractionInProgress =
       (state.currentSelections.complete && eventDetailsSection.showEditEvent)
           ?
-          dataEntryHasChanges(state, 'singleEvent-editEvent')
+          dataEntryHasChanges(state, `${dataEntryIds.SINGLE_EVENT}-${dataEntryKeys.EDIT}`)
           :
           false;
     return {

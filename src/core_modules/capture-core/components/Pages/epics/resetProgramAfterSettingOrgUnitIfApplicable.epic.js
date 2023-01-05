@@ -4,8 +4,8 @@ import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import {
     resetProgramIdBase,
-} from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
-import { lockedSelectorActionTypes } from '../../LockedSelector';
+} from '../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
+import { scopeSelectorActionTypes } from '../../ScopeSelector';
 
 const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
     if (!currentlySelectedProgramId) {
@@ -26,7 +26,9 @@ const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
 
 export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
+        ofType(
+            scopeSelectorActionTypes.ORG_UNIT_ID_SET,
+        ),
         filter(({ payload: { orgUnitId } }) => {
             const currentlySelectedProgramId = store.value.currentSelections.programId;
 

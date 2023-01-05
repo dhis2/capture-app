@@ -140,3 +140,47 @@ Then(/^the user ?(.*) see the following text: (.*)$/, (not, message) =>
 And('you navigated to the enrollment dashboard page', () => {
     cy.url().should('include', 'enrollment?enrollmentId');
 });
+
+And('you navigated to the enrollment dashboard page without enrollment', () => {
+    cy.url().should('include', 'enrollment?orgUnit');
+});
+
+Then('you should see no results found', () => {
+    cy.contains('No results found')
+        .should('exist');
+});
+
+When(/^the user selects the program (.*)$/, (program) => {
+    cy.get('.Select')
+        .type(program.slice(0, -1));
+    cy.contains(program)
+        .click();
+});
+
+When(/^the user selects the org unit (.*)$/, (orgUnit) => {
+    cy.get('[data-test="capture-ui-input"]')
+        .type(orgUnit.slice(0, -1));
+    cy.contains(orgUnit)
+        .click();
+});
+
+When(/^you opt in to use the new enrollment Dashboard for (.*)$/, (program) => {
+    cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`).click();
+    cy.contains('[data-test="dhis2-uicore-button"]', 'Yes, opt in').click();
+    cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`);
+});
+
+Then(/^you see the opt out component for (.*)$/, (program) => {
+    cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`);
+});
+
+When(/^you opt out to use the new enrollment Dashboard for (.*)$/, (program) => {
+    cy.server();
+    cy.route('PUT', '**/dataStore/capture/useNewDashboard').as('optOutEnrollmentDashboard');
+    cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`).click();
+    cy.wait('@optOutEnrollmentDashboard', { timeout: 30000 });
+});
+
+Then(/^you see the opt in component for (.*)$/, (program) => {
+    cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`);
+});

@@ -10,6 +10,7 @@ import {
     buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
 import type { ApiEventQueryCriteria, CommonQueryData, ClientConfig, ColumnsMetaForDataFetching } from '../types';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
@@ -24,9 +25,15 @@ export const initEventWorkingListAsync = async (
         storeId: string,
         lastTransaction: number,
     },
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
 ): Promise<ReduxAction<any, any>> => {
     const { commonQueryData, columnsMetaForDataFetching, categoryCombinationId, storeId, lastTransaction } = meta;
-    const clientConfig: ClientConfig = await convertToClientConfig(config, columnsMetaForDataFetching);
+    const clientConfig: ClientConfig = await convertToClientConfig(
+        config,
+        columnsMetaForDataFetching,
+        querySingleResource,
+    );
     const { currentPage, rowsPerPage, sortById, sortByDirection, filters } = clientConfig;
     const rawQueryArgs = {
         currentPage,
@@ -34,11 +41,17 @@ export const initEventWorkingListAsync = async (
         sortById,
         sortByDirection,
         filters: buildFilterQueryArgs(filters, { columns: columnsMetaForDataFetching, storeId, isInit: true }),
-        fields: 'dataValues,occurredAt,event,status,orgUnit,program,programType,updatedAt,createdAt,assignedUser,assignedUserDisplayName,assignedUserUsername',
+        fields: 'dataValues,occurredAt,event,status,orgUnit,program,programType,updatedAt,createdAt,assignedUser,',
         ...commonQueryData,
     };
 
-    return getEventListData(rawQueryArgs, columnsMetaForDataFetching, categoryCombinationId)
+    return getEventListData({
+        queryArgs: rawQueryArgs,
+        columnsMetaForDataFetching,
+        categoryCombinationId,
+        absoluteApiPath,
+        querySingleResource,
+    })
         .then(({ eventContainers, pagingData, request }) =>
             initListViewSuccess(storeId, {
                 recordContainers: eventContainers,

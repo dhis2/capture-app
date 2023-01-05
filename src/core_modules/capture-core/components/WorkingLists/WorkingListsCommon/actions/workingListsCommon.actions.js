@@ -31,8 +31,11 @@ export const workingListsCommonActionTypes = {
     CONTEXT_UNLOADING: 'WorkingListsContextUnloading',
     LIST_SORT: 'WorkingListsListSort',
     LIST_COLUMN_ORDER_SET: 'WorkingListsListColumnOrderSet',
+    LIST_COLUMN_ORDER_RESET: 'WorkingListsListColumnOrderReset',
     FILTER_SET: 'WorkingListsFilterSet',
+    FILTER_REMOVE: 'WorkingListsFilterRemove',
     FILTER_CLEAR: 'WorkingListsFilterClear',
+    FILTERS_CLEAR: 'WorkingListsFiltersClear',
     REST_MENU_ITEM_SELECT: 'WorkingListsRestMenuItemSelect',
     STICKY_FILTERS_AFTER_COLUMN_SORTING_SET: 'WorkingListsStickyFiltersAfterColumnSortingSet',
     PAGE_CHANGE: 'WorkingListsPageChange',
@@ -40,9 +43,18 @@ export const workingListsCommonActionTypes = {
     TEMPLATE_SHARING_SETTINGS_SET: 'WorkingListsTemplateSharingSettingsSet',
 };
 
-export const fetchTemplates =
-    (programId: string, storeId: string, workingListsType: string) =>
-        actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH)({ programId, storeId, workingListsType });
+export const fetchTemplates = (
+    programId: string,
+    storeId: string,
+    workingListsType: string,
+    selectedTemplateId?: string,
+) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH)({
+        programId,
+        storeId,
+        selectedTemplateId,
+        workingListsType,
+    });
 
 export const fetchTemplatesSuccess = (templates: Array<any>, defaultTemplateId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH_SUCCESS)({ templates, defaultTemplateId, storeId });
@@ -65,8 +77,8 @@ export const updateTemplateSuccess = (templateId: string, criteria: Object, data
 export const updateTemplateError = (templateId: string, criteria: Object, data: Object) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR)({ templateId, criteria, ...data });
 
-export const addTemplate = (name: string, criteria: Object, data: Object) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD)({ name, criteria, ...data });
+export const addTemplate = (name: string, criteria: Object, data: Object, callBacks?: Object) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD)({ name, criteria, ...data, callBacks });
 
 export const addTemplateSuccess = (templateId: string, clientId: Object, data: Object) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD_SUCCESS)({ templateId, clientId, ...data });
@@ -77,8 +89,16 @@ export const addTemplateError = (clientId: Object, data: Object) =>
 export const deleteTemplate = (
     template: Object,
     programId: string,
-    { storeId, workingListsType }: { storeId: string, workingListsType: string}) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATE_DELETE)({ template, programId, storeId, workingListsType });
+    { storeId, workingListsType }: { storeId: string, workingListsType: string },
+    callBacks?: Object,
+) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_DELETE)({
+        template,
+        programId,
+        storeId,
+        workingListsType,
+        callBacks,
+    });
 
 export const deleteTemplateSuccess = (template: Object, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_DELETE_SUCCESS)({ template, storeId });
@@ -119,11 +139,20 @@ export const sortList = (id: string, direction: string, storeId: string) =>
 export const setListColumnOrder = (columns: Array<Object>, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET)({ columns, storeId }, { skipLogging: ['columns'] });
 
+export const resetListColumnOrder = (storeId: string) =>
+    actionCreator(workingListsCommonActionTypes.LIST_COLUMN_ORDER_RESET)({ storeId }, { skipLogging: ['columns'] });
+
 export const setFilter = (filter: Object, itemId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.FILTER_SET)({ filter, itemId, storeId });
 
+export const removeFilter = (itemId: string, includeFilters: Object, storeId: string) =>
+    actionCreator(workingListsCommonActionTypes.FILTER_REMOVE)({ itemId, includeFilters, storeId });
+
 export const clearFilter = (itemId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.FILTER_CLEAR)({ itemId, storeId });
+
+export const clearFilters = (filtersList: Array<string>, storeId: string) =>
+    actionCreator(workingListsCommonActionTypes.FILTERS_CLEAR)({ filtersList, storeId });
 
 export const selectRestMenuItem = (id: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.REST_MENU_ITEM_SELECT)({ id, storeId });

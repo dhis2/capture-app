@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import i18n from '@dhis2/d2-i18n';
 import { makeCancelablePromise } from 'capture-core-utils';
-import { getApi } from '../../../d2/d2Instance';
 import { Input } from './Input.component';
 import { SearchSuggestions } from './SearchSuggestions.component';
 import { SearchContext } from './Search.context';
 import type { User } from './types';
+import { withApiUtils } from '../../../HOC';
+import type { QuerySingleResource } from '../../../utils/api/api.types';
 
 type Props = {
     onSet: (user: User) => void,
@@ -16,6 +17,7 @@ type Props = {
     exitBehaviour: 'selectBestChoice' | 'clear' | 'doNothing',
     inputPlaceholderText?: ?string,
     useUpwardList?: ?boolean,
+    querySingleResource: QuerySingleResource,
 };
 
 type State = {
@@ -32,7 +34,7 @@ const exitBehaviours = {
     DO_NOTHING: 'doNothing',
 };
 
-export class UserSearch extends React.Component<Props, State> {
+class UserSearchPlain extends React.Component<Props, State> {
     cancelablePromise: ?{cancel: () => void, promise: Promise<any>};
     suggestionElements: Map<string, HTMLElement>;
     inputDomElement: ?HTMLInputElement;
@@ -119,17 +121,20 @@ export class UserSearch extends React.Component<Props, State> {
         });
     }
 
-    search = (query: string) => getApi()
-        .get('userLookup', { query })
-        .then((response) => {
-            const apiUsers = (response && response.users) || [];
-            return apiUsers
-                .map(au => ({
-                    id: au.id,
-                    name: au.displayName,
-                    username: au.username,
-                }));
-        });
+    search = (query: string) =>
+        this.props.querySingleResource({
+            resource: 'userLookup',
+            params: { query },
+        })
+            .then((response) => {
+                const apiUsers = (response && response.users) || [];
+                return apiUsers
+                    .map(au => ({
+                        id: au.id,
+                        name: au.displayName,
+                        username: au.username,
+                    }));
+            });
 
     handleInputChange = (value: string) => {
         this.cancelablePromise && this.cancelablePromise.cancel();
@@ -302,3 +307,5 @@ export class UserSearch extends React.Component<Props, State> {
         );
     }
 }
+
+export const UserSearch = withApiUtils(UserSearchPlain);

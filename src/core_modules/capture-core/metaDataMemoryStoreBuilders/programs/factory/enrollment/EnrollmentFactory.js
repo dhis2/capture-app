@@ -15,7 +15,6 @@ import type {
 import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
 import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section } from '../../../../metaData';
 import { DataElementFactory } from './DataElementFactory';
-import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
 import type { ConstructorInput } from './enrollmentFactory.types';
 import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
@@ -205,14 +204,25 @@ export class EnrollmentFactory {
                 section && enrollmentForm.addSection(section);
             }
 
-            // $FlowFixMe
-            cachedProgramTrackedEntityAttributes && cachedProgramSections.asyncForEach(async (programSection) => {
-                const trackedEntityAttributes = cachedProgramTrackedEntityAttributes
-                    .filter(trackedEntityAttribute => programSection.trackedEntityAttributes
-                        .includes(trackedEntityAttribute.trackedEntityAttributeId));
-                section = await this._buildSection(trackedEntityAttributes, programSection.displayFormName, programSection.id);
-                section && enrollmentForm.addSection(section);
-            });
+            if (cachedProgramTrackedEntityAttributes) {
+                const trackedEntityAttributeDictionary = cachedProgramTrackedEntityAttributes
+                    .reduce((acc, trackedEntityAttribute) => {
+                        if (trackedEntityAttribute.trackedEntityAttributeId) {
+                            acc[trackedEntityAttribute.trackedEntityAttributeId] = trackedEntityAttribute;
+                        }
+                        return acc;
+                    }, {});
+
+                // $FlowFixMe
+                cachedProgramSections.asyncForEach(async (programSection) => {
+                    section = await this._buildSection(
+                        programSection.trackedEntityAttributes.map(id => trackedEntityAttributeDictionary[id]),
+                        programSection.displayFormName,
+                        programSection.id,
+                    );
+                    section && enrollmentForm.addSection(section);
+                });
+            }
         } else {
             section = await this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
             section && enrollmentForm.addSection(section);
@@ -289,25 +299,6 @@ export class EnrollmentFactory {
                 o.id = searchGroup.id;
                 o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
                 o.searchFoundation = this._buildInputSearchGroupFoundation(cachedProgram, searchGroup);
-                o.onSearch = (values: Object = {}, contextProps: Object = {}) => {
-                    const { orgUnitId, programId } = contextProps;
-                    return getApi()
-                        .get(
-                            'trackedEntityInstances/count.json',
-                            {
-                                ou: orgUnitId,
-                                program: programId,
-                                ouMode: 'ACCESSIBLE',
-                                filter: Object
-                                    .keys(values)
-                                    .filter(key => (values[key] || values[key] === 0 || values[key] === false))
-                                    .map(key => `${key}:LIKE:${values[key]}`),
-                                pageSize: 1,
-                                page: 1,
-                                totalPages: true,
-                            },
-                        );
-                };
             }));
         return inputSearchGroups;
     }

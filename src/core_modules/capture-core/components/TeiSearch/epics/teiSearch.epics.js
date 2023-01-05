@@ -31,6 +31,7 @@ import {
     getTrackedEntityTypeThrowIfNotFound as getTrackedEntityType,
 } from '../../../metaData';
 import { getSearchFormId } from '../getSearchFormId';
+import type { QuerySingleResource } from '../../../utils/api/api.types';
 
 const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
     (orgUnitScope !== 'ACCESSIBLE' ?
@@ -43,7 +44,25 @@ const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>
 const getPagingQueryArgs = (pageNumber: ?number = 1) => ({ page: pageNumber, pageSize: 5 });
 
 
-const searchTei = (state: ReduxState, searchId: string, formId: string, searchGroupId: any, pageNumber?: ?number, resultsPageSize: number) => {
+const searchTei = ({
+    state,
+    searchId,
+    formId,
+    searchGroupId,
+    pageNumber,
+    resultsPageSize,
+    absoluteApiPath,
+    querySingleResource,
+}: {
+    state: ReduxState,
+    searchId: string,
+    formId: string,
+    searchGroupId: any,
+    pageNumber?: ?number,
+    resultsPageSize: number,
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource
+}) => {
     const currentTeiSearch = state.teiSearch[searchId];
     const formValues = state.formsValues[formId];
 
@@ -69,7 +88,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
 
     const queryArgs = {
         filter: filters,
-        fields: '*',
+        fields: 'attributes,enrollments,trackedEntity,orgUnit',
         ...getOuQueryArgs(selectedOrgUnit, selectedOrgUnitScope),
         // $FlowFixMe[exponential-spread] automated comment
         ...getContextQueryArgs(selectedProgramId, selectedTrackedEntityTypeId),
@@ -81,7 +100,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
         getTrackerProgram(selectedProgramId).attributes :
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
-    return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+    return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
         map(({ trackedEntityInstanceContainers, pagingData }) =>
             searchTeiResultRetrieved(
                 { trackedEntityInstanceContainers, currentPage: pagingData.currentPage },
@@ -93,21 +112,24 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
     );
 };
 
-export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore) =>
+export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath, querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE),
         switchMap((action) => {
             const state = store.value;
             const { pageNumber, searchId, resultsPageSize } = action.payload;
             const currentTeiSearch = state.teiSearch[searchId];
-            const searchTeiStream = searchTei(
+            const searchTeiStream = searchTei({
                 state,
                 searchId,
-                currentTeiSearch.searchResults.formId,
-                currentTeiSearch.searchResults.searchGroupId,
+                formId: currentTeiSearch.searchResults.formId,
+                searchGroupId: currentTeiSearch.searchResults.searchGroupId,
                 pageNumber,
                 resultsPageSize,
-            );
+                absoluteApiPath,
+                querySingleResource,
+            });
+
             return from(searchTeiStream).pipe(
                 takeUntil(
                     action$.pipe(ofType(
@@ -121,13 +143,22 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
             );
         }));
 
-export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
+export const teiSearchEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath, querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SEARCH_TEI),
         switchMap((action) => {
             const state = store.value;
             const { formId, searchGroupId, searchId, resultsPageSize } = action.payload;
-            const searchTeiStream = searchTei(state, searchId, formId, searchGroupId, 1, resultsPageSize);
+            const searchTeiStream = searchTei({
+                state,
+                searchId,
+                formId,
+                searchGroupId,
+                pageNumber: 1,
+                resultsPageSize,
+                absoluteApiPath,
+                querySingleResource,
+            });
             return from(searchTeiStream).pipe(
                 takeUntil(action$.pipe(
                     ofType(

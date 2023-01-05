@@ -51,6 +51,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_POSITIVE]: stringifyNumber,
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
     [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
     [dataElementTypes.DATE]: convertDateForView,
     [dataElementTypes.DATETIME]: convertDateTimeForView,
     [dataElementTypes.TIME]: convertTimeForView,
@@ -75,4 +76,12 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
 
     // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
+}
+
+export function convertDateWithTimeForView(rawValue?: ?string): string {
+    if (!rawValue) { return ''; }
+    if (!moment(rawValue).hours() && !moment(rawValue).minutes()) {
+        return convertDateForView(rawValue);
+    }
+    return convertDateTimeForView(rawValue);
 }

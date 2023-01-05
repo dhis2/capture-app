@@ -24,14 +24,12 @@ const styles = () => ({
     },
     fieldLabel: {
         color: colors.grey900,
-        flexGrow: 0,
-        flexShrink: 0,
         paddingTop: spacersNum.dp16,
         paddingRight: spacersNum.dp16,
     },
     fieldContent: {
+        flexBasis: '200px',
         flexGrow: 1,
-        flexShrink: 0,
     },
 });
 
@@ -40,6 +38,7 @@ const WidgetEventSchedulePlain = ({
     programId,
     programName,
     stageName,
+    dueDateLabel,
     orgUnit,
     onCancel,
     onSchedule,
@@ -57,7 +56,7 @@ const WidgetEventSchedulePlain = ({
         >
             <div className={classes.fieldWrapper}>
                 <div className={classes.fieldLabel}>
-                    {i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } })}
+                    {dueDateLabel ?? i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } })}
                 </div>
                 <div className={classes.fieldContent}>
                     <ScheduleDate

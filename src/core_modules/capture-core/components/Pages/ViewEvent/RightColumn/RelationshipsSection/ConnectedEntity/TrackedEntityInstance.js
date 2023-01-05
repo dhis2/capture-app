@@ -1,8 +1,10 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useConfig } from '@dhis2/app-runtime';
+import { useSelector } from 'react-redux';
 import { buildUrl } from 'capture-core-utils';
 import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
+import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../../../utils/routing';
 
 type Props = {
     name: string,
@@ -13,7 +15,12 @@ type Props = {
 
 export const TrackedEntityInstance = ({ name, id, orgUnitId, linkProgramId }: Props) => {
     const { baseUrl } = useConfig();
+    const { dataStore, userDataStore } = useSelector(({ useNewDashboard }) => useNewDashboard);
+
     const getUrl = useCallback(() => {
+        if (linkProgramId && shouldUseNewDashboard(userDataStore, dataStore, linkProgramId)) {
+            return `/#/enrollment?${buildUrlQueryString({ teiId: id, programId: linkProgramId, orgUnitId })}`;
+        }
         const trackerBaseUrl = buildUrl(baseUrl, systemSettingsStore.get().trackerAppRelativePath, '/#/dashboard?');
         const baseParams = `tei=${id}&ou=${orgUnitId}`;
         const params = linkProgramId ? `${baseParams}&program=${linkProgramId}` : baseParams;
@@ -23,6 +30,8 @@ export const TrackedEntityInstance = ({ name, id, orgUnitId, linkProgramId }: Pr
         id,
         orgUnitId,
         linkProgramId,
+        dataStore,
+        userDataStore,
     ]);
 
     return (

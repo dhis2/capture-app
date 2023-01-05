@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
+# Viktor Varland <viktor@dhis2.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-02-15T09:59:36.798Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Swedish (https://www.transifex.com/hisp-uio/teams/100509/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,6 +41,9 @@ msgid "Organisation unit"
 msgstr "Organisationsenhet"
 
 msgid "Date of enrollment"
+msgstr ""
+
+msgid "Program name"
 msgstr ""
 
 msgid "Last updated"
@@ -88,7 +91,7 @@ msgstr ""
 msgid "Please provide a valid time"
 msgstr ""
 
-msgid "Please provide a valid percentage"
+msgid "Please provide an integer between 0 and 100"
 msgstr ""
 
 msgid "Please provide a valid url"
@@ -128,6 +131,9 @@ msgid "Enrollment"
 msgstr ""
 
 msgid "A future date is not allowed"
+msgstr ""
+
+msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
@@ -293,9 +299,6 @@ msgstr ""
 msgid "Registered person"
 msgstr ""
 
-msgid "Link"
-msgstr ""
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
@@ -312,6 +315,18 @@ msgid "Indicators"
 msgstr "indikatorer"
 
 msgid "Warnings"
+msgstr ""
+
+msgid "Generate new event"
+msgstr "Skapa ny händelse"
+
+msgid "Do you want to create another event?"
+msgstr "Vill du skapa en annan händelse?"
+
+msgid "No, cancel"
+msgstr ""
+
+msgid "Yes, create new event"
 msgstr ""
 
 msgid "Warnings found"
@@ -371,7 +386,13 @@ msgstr ""
 msgid "to"
 msgstr ""
 
+msgid "Days in the future"
+msgstr ""
+
 msgid "From"
+msgstr ""
+
+msgid "Days in the past"
 msgstr ""
 
 msgid "To"
@@ -395,7 +416,10 @@ msgstr "Förra månaden"
 msgid "Last 3 months"
 msgstr "Senaste 3 månaderna"
 
-msgid "Custom range"
+msgid "Absolute range"
+msgstr ""
+
+msgid "Relative range"
 msgstr ""
 
 msgid "Max"
@@ -485,6 +509,9 @@ msgstr "Uppdatera"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
@@ -503,6 +530,9 @@ msgstr ""
 msgid "More filters"
 msgstr ""
 
+msgid "Stage filters"
+msgstr ""
+
 msgid "Rows per page"
 msgstr ""
 
@@ -514,57 +544,6 @@ msgstr ""
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
-
-msgid "New"
-msgstr "Ny"
-
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
-
-msgid "Clear selections"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr "Acceptera"
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "Markera"
-
-msgid "Program"
-msgstr "Program"
-
-msgid "No programs available."
-msgstr ""
-
-msgid "Show all"
-msgstr ""
-
-msgid "Selected program"
-msgstr ""
-
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Select program"
-msgstr "Välj program"
-
-msgid "Selected"
-msgstr "Vald"
 
 msgid "Online"
 msgstr "Uppkopplad"
@@ -578,10 +557,25 @@ msgstr ""
 msgid "Add comment"
 msgstr ""
 
-msgid "You dont have access to write comments"
+msgid "You don't have access to write comments"
 msgstr ""
 
 msgid "Write comment"
+msgstr ""
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
 msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
@@ -621,16 +615,16 @@ msgstr ""
 msgid "Program stage not found"
 msgstr ""
 
-msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgid ""
+"Choose a program to add new or see existing enrollments for "
+"{{teiDisplayName}}"
 msgstr ""
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
-msgid ""
-"There are multiple enrollments for this program. Choose an enrollment to "
-"view the dashboard."
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -737,6 +731,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "New"
+msgstr "Ny"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
@@ -746,6 +743,9 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
+msgid "View enrollment"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -753,14 +753,29 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Save new"
+msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save {{trackedEntityName}}"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
+msgid "Link"
+msgstr ""
+
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Program"
+msgstr "Program"
 
 msgid "Organisation Unit"
 msgstr "Organisationsenhet"
@@ -802,6 +817,40 @@ msgstr ""
 msgid "Search by attributes"
 msgstr ""
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "No results found"
+msgstr "Inga resultat hittades"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Register a user"
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid "Too many results"
+msgstr ""
+
+msgid "Cannot search in all programs"
+msgstr ""
+
 msgid "Back"
 msgstr "Tillbaka"
 
@@ -815,33 +864,6 @@ msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
-msgid "No results found"
-msgstr "Inga resultat hittades"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-
-msgid "Back to search"
-msgstr ""
-
-msgid "An error has occurred"
-msgstr ""
-
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-
-msgid "Too many results"
-msgstr ""
-
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
-msgstr ""
-
 msgid "Choose a type to start searching"
 msgstr ""
 
@@ -849,6 +871,9 @@ msgid "View active enrollment"
 msgstr ""
 
 msgid "Re-enroll"
+msgstr ""
+
+msgid "all programs"
 msgstr ""
 
 msgid ""
@@ -859,13 +884,25 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Skapa ny"
+
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
+
 msgid "events"
 msgstr "händelser"
 
 msgid "event"
 msgstr ""
 
-msgid "You dont have access to edit this event"
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Edit event"
@@ -909,14 +946,44 @@ msgstr ""
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You dont have access to delete this relationship"
+msgid "You don't have access to delete this relationship"
 msgstr ""
 
-msgid "You dont have access to create any relationships"
+msgid "You don't have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
 msgstr ""
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr "Acceptera"
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "Markera"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Selected program"
+msgstr ""
+
+msgid "Select program"
+msgstr "Välj program"
+
+msgid "Selected"
+msgstr "Vald"
 
 msgid "Results found"
 msgstr ""
@@ -925,6 +992,15 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Clear selections"
 msgstr ""
 
 msgid "To work with the selected program,"
@@ -941,6 +1017,12 @@ msgstr ""
 
 msgid "We are processing your request."
 msgstr ""
+
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgstr ""
+
+msgid "Add new"
+msgstr "Lägg till ny"
 
 msgid "Reactivate"
 msgstr ""
@@ -959,9 +1041,6 @@ msgid ""
 "remove the current enrollment."
 msgstr ""
 
-msgid "No, cancel"
-msgstr ""
-
 msgid "Yes, delete enrollment."
 msgstr ""
 
@@ -971,25 +1050,25 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr ""
-
-msgid "Follow-up"
-msgstr ""
-
 msgid "Enrollment date"
 msgstr "inskrivning datum"
 
 msgid "Incident date"
 msgstr "infall datum"
 
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr ""
+
 msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
-msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1004,10 +1083,10 @@ msgstr ""
 msgid "This enrollment doesn't have any comments"
 msgstr ""
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "organisation unit could not be retrieved. Please try again later."
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 
 msgid "program or stage is invalid"
@@ -1031,6 +1110,18 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Delete event"
+msgstr "Ta bort händelse"
+
+msgid "Yes, delete event"
+msgstr ""
+
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr ""
+
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1040,13 +1131,16 @@ msgstr ""
 msgid "Schedule date info"
 msgstr ""
 
-msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgid ""
+"The scheduled date matches the suggested date, but can be changed if needed."
+msgstr ""
+
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1084,22 +1178,37 @@ msgid ""
 "Enrollment box on this dashboard"
 msgstr ""
 
+msgid " Loading..."
+msgstr ""
+
 msgid "Save changes"
 msgstr "Spara ändringar"
 
 msgid "Profile"
 msgstr "Profil"
 
-msgid "There are errors in this form"
+msgid "There is a problem with this form"
 msgstr ""
 
 msgid "There are warnings in this form"
 msgstr ""
 
+msgid "There was a problem saving changes"
+msgstr ""
+
+msgid "Try again or contact your system administrator for support"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr ""
+
+msgid "Fix errors in the form to continue."
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Person Profile"
+msgid "{{TETName}} profile"
 msgstr ""
 
 msgid "Edit"
@@ -1123,14 +1232,11 @@ msgstr ""
 msgid "This stage can only have one event"
 msgstr ""
 
-msgid "Report date"
-msgstr "Rapportdatum"
+msgid "Events could not be retrieved. Please try again later."
+msgstr ""
 
 msgid "Registering unit"
 msgstr ""
-
-msgid "Due date"
-msgstr "Förfallodatum"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
@@ -1146,9 +1252,6 @@ msgstr ""
 
 msgid "Working list could not be loaded"
 msgstr ""
-
-msgid "Delete event"
-msgstr "Ta bort händelse"
 
 msgid "Download as JSON"
 msgstr ""
@@ -1174,6 +1277,9 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
 msgid "Registration Date"
 msgstr ""
 
@@ -1181,6 +1287,9 @@ msgid "Inactive"
 msgstr ""
 
 msgid "Working list could not be updated"
+msgstr ""
+
+msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
 
 msgid "Update view"
@@ -1273,7 +1382,10 @@ msgstr ""
 msgid "Error saving the enrollment event"
 msgstr ""
 
-msgid "tracked entity instance"
+msgid "Error deleting the enrollment event"
+msgstr ""
+
+msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"

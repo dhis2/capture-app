@@ -2,44 +2,39 @@
 import { ofType } from 'redux-observable';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-import { fetchDataStore } from './DataStore.actions';
-import { getApi } from '../../d2';
-import { type UseOldDashboard } from './DataStore.types';
+import { saveDataStore } from './DataStore.actions';
+import { type UseNewDashboard } from './DataStore.types';
 import { appStartActionTypes } from '../../../../components/AppStart';
 
-function getDataStoreFromApi() {
-    const api = getApi();
-    return api
-        .get('dataStore/capture/useOldDashboard');
-}
+const getDataStoreFromApi = async querySingleResource =>
+    querySingleResource({
+        resource: 'dataStore/capture/useNewDashboard',
+    });
 
-const getUserDataStoreFromApi = () => {
-    const api = getApi();
-    return api.get('userDataStore/capture/useOldDashboard');
-};
+const getUserDataStoreFromApi = async querySingleResource =>
+    querySingleResource({
+        resource: 'userDataStore/capture/useNewDashboard',
+    });
 
-export const fetchDataStoreEpic = (action$: InputObservable) =>
+export const fetchDataStoreEpic = (action$: InputObservable, _: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
-        ofType(
-            appStartActionTypes.APP_LOAD_SUCESS,
-        ),
+        ofType(appStartActionTypes.APP_LOAD_SUCESS),
         mergeMap(async () => {
-            const apiDataStore: UseOldDashboard = await getDataStoreFromApi();
+            const apiDataStore: UseNewDashboard = await getDataStoreFromApi(querySingleResource);
             // $FlowFixMe
-            return fetchDataStore({ dataStore: apiDataStore });
+            return saveDataStore({ dataStore: apiDataStore });
         }),
         catchError(() => EMPTY),
     );
 
-export const fetchUserDataStoreEpic = (action$: InputObservable) =>
+export const fetchUserDataStoreEpic = (action$: InputObservable, _: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
-        ofType(
-            appStartActionTypes.APP_LOAD_SUCESS,
-        ),
+        ofType(appStartActionTypes.APP_LOAD_SUCESS),
         mergeMap(async () => {
-            const apiUserDataStore: UseOldDashboard = await getUserDataStoreFromApi();
+            const apiUserDataStore: UseNewDashboard = await getUserDataStoreFromApi(querySingleResource);
             // $FlowFixMe
-            return fetchDataStore({ userDataStore: apiUserDataStore });
+            return saveDataStore({ userDataStore: apiUserDataStore });
         }),
         catchError(() => EMPTY),
     );
+

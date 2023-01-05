@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { takeUntil, filter, concatMap } from 'rxjs/operators';
 import { workingListsCommonActionTypes } from '../../../WorkingListsCommon';
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
-import { initTeiWorkingListsView, updateTeiWorkingListsRecords } from './helpers';
+import { initTeiWorkingListsViewAsync, updateTeiWorkingListsRecords } from './helpers';
 
 export const initTeiViewEpic = (
     action$: InputObservable,
@@ -18,7 +18,7 @@ export const initTeiViewEpic = (
         concatMap((action) => {
             const { storeId, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching, selectedTemplate } = action.payload;
             const { programId, orgUnitId } = action.payload.context;
-            return from(initTeiWorkingListsView({
+            return from(initTeiWorkingListsViewAsync({
                 programId,
                 orgUnitId,
                 storeId,
@@ -58,6 +58,7 @@ export const updateTeiListEpic = (
                 page,
                 pageSize,
                 programId,
+                programStageId: filters?.programStage?.values[0],
                 orgUnitId,
                 filters,
                 sortById,

@@ -6,9 +6,8 @@ import { convertMomentToDateFormatString } from '../../../../../../utils/convert
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
 import { Comments } from '../Comments.component';
-
-const isEventOverdue = (event: ApiEnrollmentEvent) => moment(event.scheduledAt).isBefore(moment().startOf('day'))
-    && event.status === statusTypes.SCHEDULE;
+import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
+import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
@@ -60,7 +59,12 @@ const convertStatusForView = (event: ApiEnrollmentEvent) => {
 
 const convertCommentForView = (event: ApiEnrollmentEvent) => <Comments event={event} />;
 
-const groupRecordsByType = async (events: Array<ApiEnrollmentEvent>, dataElements: Array<StageDataElement>) => {
+const groupRecordsByType = async (
+    events: Array<ApiEnrollmentEvent>,
+    dataElements: Array<StageDataElement>,
+    querySingleResource: QuerySingleResource,
+    absoluteApiPath: string,
+) => {
     // $FlowFixMe
     const dataElementsByType = events.reduce((acc, event) => {
         event.dataValues.forEach((dataValue) => {
@@ -78,7 +82,7 @@ const groupRecordsByType = async (events: Array<ApiEnrollmentEvent>, dataElement
     }, []);
     // $FlowFixMe
     for await (const item of dataElementsByType) {
-        item.ids = await getSubValues(item.type, item.ids);
+        item.ids = await getSubValues(item, querySingleResource, absoluteApiPath);
     }
     return dataElementsByType;
 };

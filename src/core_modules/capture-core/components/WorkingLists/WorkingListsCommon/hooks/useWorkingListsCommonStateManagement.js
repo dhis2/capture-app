@@ -17,8 +17,11 @@ import {
     unloadingContext,
     sortList,
     setListColumnOrder,
+    resetListColumnOrder,
     setFilter,
+    removeFilter,
     clearFilter,
+    clearFilters,
     selectRestMenuItem,
     changePage,
     changeRowsPerPage,
@@ -32,17 +35,19 @@ import type {
     ChangePage,
     ChangeRowsPerPage,
     ClearFilter,
+    ClearFilters,
+    RemoveFilter,
     LoadTemplates,
-    LoadView,
     SelectRestMenuItem,
     SelectTemplate,
     SetColumnOrder,
+    ResetColumnOrder,
     SetTemplateSharingSettings,
     SharingSettings,
     Sort,
     UpdateFilter,
 } from '../../WorkingListsBase';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '..';
+import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList, LoadView, Callbacks } from '..';
 
 const useTemplates = (
     dispatch: ReduxDispatch,
@@ -67,7 +72,7 @@ const useTemplates = (
         onSelectTemplate: (...args) => dispatch(selectTemplate(...args, storeId)),
         onLoadTemplates: (...args) => dispatch(fetchTemplates(...args, storeId, workingListsType)),
         onCancelLoadTemplates: () => dispatch(fetchTemplatesCancel(storeId)),
-        onAddTemplate: (name: string, criteria: Object, data: Object) =>
+        onAddTemplate: (name: string, criteria: Object, data: Object, callBacks?: Callbacks) =>
             dispatch(addTemplate(
                 name,
                 criteria, {
@@ -75,6 +80,7 @@ const useTemplates = (
                     storeId,
                     workingListsType,
                 },
+                callBacks,
             )),
         onUpdateTemplate: (template: Object, criteria: Object, data: Object) =>
             dispatch(updateTemplate(
@@ -85,7 +91,8 @@ const useTemplates = (
                     workingListsType,
                 },
             )),
-        onDeleteTemplate: (...args) => dispatch(deleteTemplate(...args, { storeId, workingListsType })),
+        onDeleteTemplate: (template: Object, programId: string, callBacks?: Callbacks) =>
+            dispatch(deleteTemplate(template, programId, { storeId, workingListsType }, callBacks)),
         onSetTemplateSharingSettings: (sharingSettings: SharingSettings, templateId: string) => dispatch(setTemplateSharingSettings(sharingSettings, templateId, storeId)),
     }: {|
         onSelectTemplate: SelectTemplate,
@@ -152,6 +159,7 @@ const useView = (
             updatingWithDialog: !!updatingWithDialog,
             loadViewError,
             customColumnOrder: workingListsColumnsOrder[storeId],
+            programStage: workingListsMeta[storeId]?.filters?.programStage?.values[0],
             stickyFilters: workingListsStickyFilters[storeId],
             rowsPerPage: nextRowsPerPage || rowsPerPage,
             currentPage: nextCurrentPage || currentPage,
@@ -183,21 +191,27 @@ const useView = (
                     workingListsType,
                 },
             )),
-        onUpdateList: (queryArgs: Object, meta: Object) =>
+        onUpdateList: (data: Object, meta: Object) => {
+            const { resetMode, ...queryArgs } = data;
             dispatch(updateList(
                 queryArgs, {
                     ...meta,
                     categoryCombinationId,
                     storeId,
                     workingListsType,
+                    resetMode,
                 },
-            )),
+            ));
+        },
         onCancelLoadView: () => dispatch(initListViewCancel(storeId)),
         onCancelUpdateList: () => dispatch(updateListCancel(storeId)),
         onSortList: (...args) => dispatch(sortList(...args, storeId)),
         onSetListColumnOrder: (...args) => dispatch(setListColumnOrder(...args, storeId)),
+        onResetListColumnOrder: () => dispatch(resetListColumnOrder(storeId)),
         onUpdateFilter: (...args) => dispatch(setFilter(...args, storeId)),
+        onRemoveFilter: (...args) => dispatch(removeFilter(...args, storeId)),
         onClearFilter: (...args) => dispatch(clearFilter(...args, storeId)),
+        onClearFilters: (...args) => dispatch(clearFilters(...args, storeId)),
         onSelectRestMenuItem: (...args) => dispatch(selectRestMenuItem(...args, storeId)),
         onChangePage: (...args) => dispatch(changePage(...args, storeId)),
         onChangeRowsPerPage: (...args) => dispatch(changeRowsPerPage(...args, storeId)),
@@ -208,8 +222,11 @@ const useView = (
         onCancelUpdateList: CancelUpdateList,
         onSortList: Sort,
         onSetListColumnOrder: SetColumnOrder,
+        onResetListColumnOrder: ResetColumnOrder,
         onUpdateFilter: UpdateFilter,
         onClearFilter: ClearFilter,
+        onRemoveFilter: RemoveFilter,
+        onClearFilters: ClearFilters,
         onSelectRestMenuItem: SelectRestMenuItem,
         onChangePage: ChangePage,
         onChangeRowsPerPage: ChangeRowsPerPage,

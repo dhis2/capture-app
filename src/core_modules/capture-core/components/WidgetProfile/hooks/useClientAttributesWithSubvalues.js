@@ -9,7 +9,7 @@ type InputProgramData = {
     programTrackedEntityAttributes: Array<{
         trackedEntityAttribute: {
             id: string,
-            displayName?: ?string,
+            displayFormName?: ?string,
             optionSet?: ?{
                 id: string,
                 options?: ?Array<{
@@ -17,7 +17,7 @@ type InputProgramData = {
                     name: string,
                 }>,
             },
-            valueType?: string,
+            valueType: string,
             unique: boolean,
         },
         displayInList: boolean,
@@ -34,33 +34,28 @@ type InputAttribute = {
     valueType: string,
 };
 
-type InputTEIData = {
-    attributes: Array<InputAttribute>,
-};
-
-export const useClientAttributesWithSubvalues = (program: InputProgramData, trackedEntityInstances: InputTEIData) => {
+export const useClientAttributesWithSubvalues = (program: InputProgramData, trackedEntityInstanceAttributes: Array<InputAttribute>) => {
     const dataEngine = useDataEngine();
 
     const [listAttributes, setListAttributes] = useState([]);
 
     const getListAttributes = useCallback(async () => {
-        if (program && trackedEntityInstances) {
+        if (program && trackedEntityInstanceAttributes) {
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const { programTrackedEntityAttributes } = program;
-            const { attributes } = trackedEntityInstances;
             const computedAttributes = await programTrackedEntityAttributes.reduce(async (promisedAcc, currentTEA) => {
                 const {
                     displayInList,
-                    trackedEntityAttribute: { id, displayName, optionSet, valueType, unique },
+                    trackedEntityAttribute: { id, optionSet, valueType, unique, displayFormName },
                 } = currentTEA;
-                const foundAttribute = attributes.find(item => item.attribute === id);
+                const foundAttribute = trackedEntityInstanceAttributes?.find(item => item.attribute === id);
                 let value;
                 if (foundAttribute) {
-                    if (subValueGetterByElementType[foundAttribute.valueType]) {
-                        value = await subValueGetterByElementType[foundAttribute.valueType](foundAttribute.value, querySingleResource);
+                    if (subValueGetterByElementType[valueType]) {
+                        value = await subValueGetterByElementType[valueType](foundAttribute.value, querySingleResource);
                     } else {
                         // $FlowFixMe dataElementTypes flow error
-                        value = convertServerToClient(foundAttribute.value, foundAttribute.valueType);
+                        value = convertServerToClient(foundAttribute.value, valueType);
                     }
                 }
 
@@ -70,19 +65,19 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
                     ...acc,
                     {
                         attribute: id,
-                        key: displayName,
+                        key: displayFormName,
                         optionSet,
                         displayInList,
                         value,
                         unique,
-                        valueType: foundAttribute?.valueType || valueType,
+                        valueType,
                     },
                 ];
             }, Promise.resolve([]));
 
             setListAttributes(computedAttributes);
         }
-    }, [program, trackedEntityInstances, dataEngine]);
+    }, [program, trackedEntityInstanceAttributes, dataEngine]);
 
     useEffect(() => {
         getListAttributes();

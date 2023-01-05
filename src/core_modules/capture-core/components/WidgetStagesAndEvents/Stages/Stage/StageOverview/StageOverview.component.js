@@ -1,14 +1,15 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import cx from 'classnames';
-import { withStyles, Tooltip } from '@material-ui/core';
-import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16 } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16, IconClockHistory16, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { statusTypes } from 'capture-core/events/statusTypes';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
+import { useSystemSettingsFromIndexedDB } from '../../../../../utils/cachedDataHooks/useSystemSettingsFromIndexedDB';
 
 const styles = {
     container: {
@@ -17,36 +18,59 @@ const styles = {
     },
     icon: {
         paddingRight: spacersNum.dp8,
-
+    },
+    descriptionIcon: {
+        marginLeft: spacersNum.dp4,
+        marginRight: spacersNum.dp8,
+        height: '16px',
     },
     indicatorIcon: {
-        paddingLeft: spacersNum.dp4,
-        paddingRight: spacersNum.dp12,
+        paddingRight: spacersNum.dp4,
+        height: '16px',
     },
     title: {
-        fontSize: 14,
-        lineHeight: 1.556,
+        fontSize: '14px',
+        lineHeight: '19px',
         fontWeight: 500,
         color: colors.grey900,
         display: 'flex',
     },
     indicator: {
         padding: spacersNum.dp8,
-        color: colors.grey600,
+        color: colors.grey800,
+        fontSize: '14px',
+        fontWeight: 400,
         display: 'flex',
+        alignItems: 'center',
     },
     warningIndicator: {
-        color: colors.red500,
-    },
-    smallText: {
-        fontSize: 12,
+        color: colors.red700,
     },
 };
+
+const getLastUpdatedAt = (serverTimeZoneId, events) => {
+    const lastEventUpdated = events.reduce((acc, event) => (
+        new Date(acc.updatedAt).getTime() > new Date(event.updatedAt).getTime() ? acc : event
+    ));
+
+    if (lastEventUpdated) {
+        const { updatedAt } = lastEventUpdated;
+        return lastEventUpdated?.updatedAt && moment(updatedAt).isValid()
+            ? i18n.t('Last updated {{date}}', {
+                date: serverTimeZoneId
+                    ? moment.tz(updatedAt, serverTimeZoneId).fromNow()
+                    : moment(updatedAt).fromNow(),
+            })
+            : null;
+    }
+    return null;
+};
+
 export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => {
+    const { systemSettings } = useSystemSettingsFromIndexedDB('serverTimeZoneId');
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
-    const lastUpdated = Math.max.apply(null, events.map(e => new Date(e.updatedAt).getTime()));
 
     return (<div className={classes.container}>
         {
@@ -55,9 +79,9 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
                     <NonBundledDhis2Icon
                         name={icon.name}
                         color={icon.color}
-                        width={30}
-                        height={30}
-                        cornerRadius={2}
+                        width={32}
+                        height={32}
+                        cornerRadius={5}
                     />
                 </div>
             )
@@ -66,15 +90,16 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
         <div className={classes.title}>
             {title}
         </div>
-        <Tooltip
-            title={description}
-            placement="top"
-        >
-            <div className={classes.indicatorIcon}>
-                <IconInfo16 />
-            </div>
-        </Tooltip>
-
+        { description &&
+            <Tooltip
+                content={description}
+                openDelay="100"
+            >
+                <div className={classes.descriptionIcon}>
+                    <IconInfo16 />
+                </div>
+            </Tooltip>
+        }
         <div className={classes.indicator}>
             {i18n.t('{{ totalEvents }} events', { totalEvents })}
         </div>
@@ -90,10 +115,11 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
             </div>
             {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
         </div> : null }
-        {events.length > 0 && <div className={cx(classes.smallText, classes.indicator)}>
-            {i18n.t('Last updated {{date}}',
-                { date: moment(lastUpdated).isValid() ? moment(lastUpdated).fromNow() : '' },
-            )}
+        {totalEvents > 0 && <div className={cx(classes.indicator)}>
+            <div className={classes.indicatorIcon}>
+                <IconClockHistory16 />
+            </div>
+            {getLastUpdatedAt(systemSettings?.serverTimeZoneId, events)}
         </div>}
     </div>);
 };

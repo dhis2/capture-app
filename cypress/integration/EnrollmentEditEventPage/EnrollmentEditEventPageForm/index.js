@@ -1,10 +1,9 @@
 import '../../sharedSteps';
 
-beforeEach(() => cy.loginThroughForm());
-
-Given(/^the user lands on the enrollment event page by having typed (.*)$/, url =>
-    cy.visit(url),
-);
+Given(/^you land on the enrollment event page with selected (.*) by having typed (.*)$/, (tet, url) => {
+    cy.visit(url);
+    cy.get('[data-test="scope-selector"]').contains(`Selected ${tet}`);
+});
 
 When(/^the user clicks on the edit button/, () =>
     cy
@@ -18,7 +17,7 @@ When(/^the user clicks on the save button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(3)
+        .contains('Save')
         .click(),
 );
 
@@ -26,7 +25,7 @@ When(/^the user clicks on the cancel button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(3)
+        .contains('Cancel')
         .click(),
 );
 
@@ -34,7 +33,7 @@ When(/^the user set the apgar score to (.*)/, score =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="capture-ui-input"]')
-        .eq(1)
+        .eq(2)
         .clear()
         .type(score)
         .blur(),
@@ -59,3 +58,37 @@ When(/^the user sets Plurality assessed to (.*)/, text =>
         .contains(text)
         .click(),
 );
+
+When('the user clicks switch tab to Schedule', () => {
+    cy.get('[data-test="edit-event-tab-bar"]').get('button').contains('Schedule').click();
+});
+
+Then('the user selects another schedule date', () => {
+    cy.get('[data-test="schedule-section"]').within(() => {
+        cy.get("[data-test='capture-ui-input']").eq(0).should('have.value', '2007-01-07');
+        cy.get("[data-test='capture-ui-input']").eq(0)
+            .clear()
+            .type('2022-08-01')
+            .blur();
+    });
+});
+
+Then(/^the user clicks on the schedule button on (.*)$/, (widgetName) => {
+    cy
+        .get(`[data-test="${widgetName}"]`)
+        .find('[data-test="dhis2-uicore-button"]')
+        .contains('Schedule')
+        .click();
+});
+
+Then('the user see the schedule date and info box', () => {
+    cy.get('[data-test="schedule-section"]').within(() => {
+        cy.contains('Schedule date / Due date');
+        cy.contains('Scheduled automatically for 2021-10-16');
+    });
+});
+
+Then(/^the user see the schedule date field with tooltip: (.*)$/, (tooltipContent) => {
+    cy.get('[data-test="dhis2-uicore-tooltip-reference"]').eq(0).trigger('mouseover');
+    cy.get('[data-test="dhis2-uicore-tooltip-content"]').contains(tooltipContent).should('exist');
+});

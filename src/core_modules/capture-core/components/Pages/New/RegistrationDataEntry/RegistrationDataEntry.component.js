@@ -85,9 +85,11 @@ const RegistrationDataEntryPlain = ({
     onSaveWithoutEnrollment,
     onSaveWithEnrollment,
     dataEntryIsReady,
+    teiId,
+    trackedEntityInstanceAttributes,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
-    const { scopeType } = useScopeInfo(selectedScopeId);
+    const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
 
@@ -108,6 +110,25 @@ const RegistrationDataEntryPlain = ({
             orgUnitId={item.tei.orgUnit}
         />
     ), []);
+
+    const ExistingUniqueValueDialogActions = useCallback(({ teiId: existingTeiId }) => {
+        const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+        const { programId, orgUnitId } = useLocationQuery(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+
+        return (
+            <Button
+                dataTest="existing-unique-value-link-tei-button"
+                primary
+                onClick={() => dispatch(navigateToEnrollmentOverview({
+                    teiId: existingTeiId,
+                    orgUnitId,
+                    programId,
+                }))}
+            >
+                {programId ? i18n.t('View enrollment') : i18n.t('View dashboard')}
+            </Button>
+        );
+    }, []);
 
     return (
         <>
@@ -132,10 +153,16 @@ const RegistrationDataEntryPlain = ({
                 scopeType === scopeTypes.TRACKER_PROGRAM &&
                 <Paper className={classes.paper}>
                     <div className={classes.title} >
-                        {i18n.t('New {{titleText}}', {
-                            titleText,
-                            interpolation: { escapeValue: false },
-                        })}
+                        {
+                            teiId ? i18n.t('New Enrollment in program{{escape}} {{programName}}', {
+                                escape: ':',
+                                programName,
+                                interpolation: { escapeValue: false },
+                            }) : i18n.t('New {{titleText}}', {
+                                titleText,
+                                interpolation: { escapeValue: false },
+                            })
+                        }
                     </div>
 
                     <div className={classes.registrationContainer}>
@@ -145,11 +172,16 @@ const RegistrationDataEntryPlain = ({
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     enrollmentMetadata={registrationMetaData}
-                                    saveButtonText={i18n.t('Save new')}
+                                    saveButtonText={i18n.t('Save {{trackedEntityName}}', {
+                                        trackedEntityName,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     onSave={() => onSaveWithEnrollment(formFoundation)}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
+                                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
+                                    trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
                                 />
                             </Grid>
                             {
@@ -193,11 +225,15 @@ const RegistrationDataEntryPlain = ({
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     teiRegistrationMetadata={registrationMetaData}
-                                    saveButtonText={i18n.t('Save new')}
+                                    saveButtonText={i18n.t('Save {{trackedEntityName}}', {
+                                        trackedEntityName,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     onSave={() => onSaveWithoutEnrollment(formFoundation)}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
+                                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                                 />
                             </Grid>
                             {

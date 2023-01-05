@@ -1,11 +1,11 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getApi } from '../d2/d2Instance';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
 import { getSubValues } from './getSubValues';
+import type { QuerySingleResource } from '../utils/api/api.types';
 
 type ApiDataValue = {
     dataElement: string,
@@ -26,9 +26,12 @@ type ApiTEIEvent = {
     dueDate: string,
     completedDate: string,
     dataValues: Array<ApiDataValue>,
-    assignedUser?: ?string,
-    assignedUserUsername?: ?string,
-    assignedUserDisplayName?: ?string,
+    assignedUser?: ?{|
+        uid: string,
+        username: string,
+        firstName: string,
+        surname: string,
+    |},
 };
 
 export type ClientEventContainer = {
@@ -73,18 +76,24 @@ function getConvertedValue(valueToConvert: any, inputKey: string) {
 }
 
 function getAssignee(apiEvent: ApiTEIEvent) {
-    if (!(apiEvent.assignedUserUsername && apiEvent.assignedUser)) {
+    if (!(apiEvent.assignedUser)) {
+        return undefined;
+    }
+
+    const { uid, firstName, surname, username } = apiEvent.assignedUser;
+
+    if (!firstName || !surname) {
         return undefined;
     }
 
     return {
-        id: apiEvent.assignedUser,
-        username: apiEvent.assignedUserUsername,
-        name: apiEvent.assignedUserDisplayName,
+        id: uid,
+        username,
+        name: `${firstName} ${surname}`,
     };
 }
 function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
-    const skipProps = ['dataValues', 'assignedUserUsername', 'assignedUser', 'assignedUserDisplayName'];
+    const skipProps = ['dataValues', 'assignedUser'];
 
     return Object
         .keys(apiEvent)
@@ -108,7 +117,11 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
         }, {});
 }
 
-async function convertToClientEvent(event: ApiTEIEvent) {
+async function convertToClientEvent(
+    event: ApiTEIEvent,
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
+) {
     const programMetaData = programCollection.get(event.program);
     if (!programMetaData) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ fn: 'convertToClientEvent', event }));
@@ -124,7 +137,14 @@ async function convertToClientEvent(event: ApiTEIEvent) {
 
     const dataValuesById = getValuesById(event.dataValues);
     const convertedDataValues = stageForm.convertValues(dataValuesById, convertValue);
-    await getSubValues(event.event, stageForm, convertedDataValues);
+    await getSubValues({
+        eventId: event.event,
+        programStage: stageForm,
+        values: convertedDataValues,
+        absoluteApiPath,
+        querySingleResource,
+    });
+
 
     const convertedMainProperties = convertMainProperties(event);
 
@@ -135,27 +155,35 @@ async function convertToClientEvent(event: ApiTEIEvent) {
     };
 }
 
-export async function getEvent(eventId: string): Promise<?ClientEventContainer> {
-    const api = getApi();
-    const apiRes = await api
-        .get(`tracker/events/${eventId}`);
-
-    const eventContainer = await convertToClientEvent(apiRes);
+export async function getEvent(
+    eventId: string,
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
+): Promise<?ClientEventContainer> {
+    const apiRes = await querySingleResource({
+        resource: `tracker/events/${eventId}`,
+    });
+    const eventContainer = await convertToClientEvent(apiRes, absoluteApiPath, querySingleResource);
     return eventContainer;
 }
 
-export async function getEvents(queryParams: Object) {
-    const api = getApi();
+export async function getEvents(
+    queryParams: Object,
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
+) {
     const req = {
         url: 'tracker/events',
         queryParams,
     };
-    const apiRes = await api
-        .get(req.url, { ...req.queryParams });
+    const apiRes = await querySingleResource({
+        resource: 'tracker/events',
+        params: queryParams,
+    });
 
     const eventContainers = apiRes && apiRes.instances ? await apiRes.instances.reduce(async (accEventsPromise, apiEvent) => {
         const accEvents = await accEventsPromise;
-        const eventContainer = await convertToClientEvent(apiEvent);
+        const eventContainer = await convertToClientEvent(apiEvent, absoluteApiPath, querySingleResource);
         if (eventContainer) {
             accEvents.push(eventContainer);
         }

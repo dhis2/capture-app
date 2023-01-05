@@ -6,10 +6,12 @@ import type {
     DataSource,
     FiltersData,
     FiltersOnly,
+    AdditionalFilters,
     StickyFilters,
     ChangePage,
     ChangeRowsPerPage,
     ClearFilter,
+    RemoveFilter,
     UpdateFilter,
     SelectRestMenuItem,
     SetColumnOrder,
@@ -86,6 +88,7 @@ export type UpdateList = (data: {
     orgUnitId: string,
     categories?: Categories,
     lastIdDeleted?: string,
+    resetMode: boolean,
 }) => void;
 
 export type ManagerContextData = {|
@@ -124,6 +127,7 @@ export type ListViewUpdaterContextData = {|
     customUpdateTrigger?: any,
     forceUpdateOnMount?: boolean,
     dirtyList: boolean,
+    loadedOrgUnitId?: string,
 |};
 
 export type ListViewBuilderContextData = {|
@@ -136,6 +140,7 @@ export type ListViewBuilderContextData = {|
     customRowMenuContents?: CustomRowMenuContents,
     onUpdateFilter: UpdateFilter,
     onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
     onSelectRestMenuItem: SelectRestMenuItem,
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
@@ -170,6 +175,7 @@ export type InterfaceProps = $ReadOnly<{|
     dataSource?: DataSource,
     filters?: FiltersData,
     filtersOnly?: FiltersOnly,
+    additionalFilters?: AdditionalFilters,
     forceUpdateOnMount?: boolean,
     loadedContext?: LoadedContext,
     loading: boolean,
@@ -182,6 +188,7 @@ export type InterfaceProps = $ReadOnly<{|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
     onDeleteTemplate?: DeleteTemplate,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
@@ -207,7 +214,8 @@ export type InterfaceProps = $ReadOnly<{|
     updating: boolean,
     updatingWithDialog: boolean,
     viewPreloaded?: boolean,
-    programStageId?: string
+    programStageId?: string,
+    templateSharingType: string,
 |}>;
 
 export type WorkingListsOutputProps = InterfaceProps;

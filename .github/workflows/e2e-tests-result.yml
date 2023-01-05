@@ -1,0 +1,24 @@
+name: 'dhis2: result of e2e tests'
+
+# The job here (e2e-tests-success) will be set to true if all the tests pass.
+# Setting "call-e2e-tests-result / e2e-tests-success"  as a required step in your workflow is recommended.
+
+on:
+    workflow_call:
+        inputs:
+            result:
+                required: true
+                type: boolean
+
+defaults:
+    run:
+        shell: bash
+
+jobs:
+    e2e-tests-success:
+        runs-on: ubuntu-latest
+        steps:
+            - name: verify
+              run: if [ $result != true ]; then exit 1; fi;
+              env:
+                  result: ${{ inputs.result }}

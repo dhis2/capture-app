@@ -4,7 +4,8 @@ import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { getApi } from '../../../../d2';
+import { getRulesEngineOrgUnit } from 'capture-core/rules/getRulesEngineOrgUnit';
+import { getAssociatedOrgUnitGroups } from 'capture-core/MetaDataStoreUtils/getAssociatedOrgUnitGroups';
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
 import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
 
@@ -27,48 +28,60 @@ import {
 } from '../../NewRelationship/newRelationship.actions';
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
-import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { resetLocationChange } from '../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
 
-export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
+export const getEventOpeningFromEventListEpic = (
+    action$: InputObservable,
+    _: ReduxStore,
+    { absoluteApiPath, querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        switchMap(({ payload: { eventId } }) => {
-            const state = store.value;
-            return getEvent(eventId)
-                .then((eventContainer) => {
-                    if (!eventContainer) {
-                        return openViewEventPageFailed(
-                            i18n.t('Event could not be loaded. Are you sure it exists?'));
-                    }
-                    const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
-                    return startOpenEventForView(eventContainer, orgUnit);
-                })
-                .catch((error) => {
-                    const { message, details } = getErrorMessageAndDetails(error);
-                    log.error(
-                        errorCreator(
-                            message ||
-                            i18n.t('Event could not be loaded'))(details));
+        switchMap(({ payload: { eventId } }) => getEvent(eventId, absoluteApiPath, querySingleResource)
+            .then(eventContainer =>
+                (eventContainer
+                    ? Promise.all(
+                        [eventContainer, getRulesEngineOrgUnit(eventContainer.event.orgUnitId, querySingleResource)],
+                    )
+                    : []))
+            .then(([eventContainer, orgUnit]) => {
+                if (!eventContainer) {
                     return openViewEventPageFailed(
                         i18n.t('Event could not be loaded. Are you sure it exists?'));
-                });
-        }));
+                }
+                return startOpenEventForView(eventContainer, orgUnit);
+            })
+            .catch((error) => {
+                const { message, details } = getErrorMessageAndDetails(error);
+                log.error(
+                    errorCreator(
+                        message ||
+                        i18n.t('Event could not be loaded'))(details));
+                return openViewEventPageFailed(
+                    i18n.t('Event could not be loaded. Are you sure it exists?'));
+            }),
+        ),
+    );
 
-export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
+export const getEventFromUrlEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { absoluteApiPath, querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(viewEventActionTypes.VIEW_EVENT_FROM_URL),
         switchMap((action) => {
             const eventId = action.payload.eventId;
             const prevProgramId = store.value.currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
-            return getEvent(eventId)
+            return getEvent(eventId, absoluteApiPath, querySingleResource)
                 .then((eventContainer) => {
                     if (!eventContainer) {
                         return eventFromUrlCouldNotBeRetrieved(
                             i18n.t('Event could not be loaded. Are you sure it exists?'));
                     }
                     // need to retrieve category names from API (due to 50k category options requirement)
-                    return getCategoriesDataFromEventAsync(eventContainer.event)
+                    return getCategoriesDataFromEventAsync(eventContainer.event, querySingleResource)
                         .then(categoriesData => eventFromUrlRetrieved(eventContainer, prevProgramId, categoriesData));
                 })
                 .catch((error) => {
@@ -82,14 +95,21 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
                 });
         }));
 
-export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
+export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable, _: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED),
         switchMap((action) => {
             const eventContainer = action.payload.eventContainer;
-            return getApi()
-                .get(`organisationUnits/${eventContainer.event.orgUnitId}`)
-                .then(orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer))
+            // change from organisationUnitGroups -> groups
+            return Promise.all(
+                [
+                    querySingleResource({ resource: `organisationUnits/${eventContainer.event.orgUnitId}` }),
+                    getAssociatedOrgUnitGroups(eventContainer.event.orgUnitId),
+                ])
+                .then(([orgUnit, groups]) => {
+                    orgUnit.groups = groups;
+                    return orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer);
+                })
                 .catch((error) => {
                     const { message, details } = getErrorMessageAndDetails(error);
                     log.error(errorCreator(

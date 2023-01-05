@@ -3,8 +3,9 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
+import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';
+import { useLocationQuery } from '../../utils/routing';
 import type { ContainerProps } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
 import {
@@ -12,8 +13,10 @@ import {
     useDetermineSuggestedScheduleDate,
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
+    useCommentDetails,
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
+import { NoAccess } from './AccessVerification';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -24,6 +27,8 @@ export const WidgetEventSchedule = ({
     onSave,
     onSaveSuccessActionType,
     onSaveErrorActionType,
+    onCancel,
+    initialScheduleDate,
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
@@ -32,14 +37,14 @@ export const WidgetEventSchedule = ({
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
-        programStageScheduleConfig, programConfig, ...passOnProps,
+        programStageScheduleConfig, programConfig, initialScheduleDate, ...passOnProps,
     });
+    const { currentUser, noteId } = useCommentDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [comments, setComments] = useState([]);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
-
-    const eventCountInOrgUnit = events
-        .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
+    const { eventId } = useLocationQuery();
+    const eventCountInOrgUnit = events.filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
@@ -54,6 +59,7 @@ export const WidgetEventSchedule = ({
             stageId,
             teiId,
             enrollmentId,
+            eventId,
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
@@ -67,6 +73,7 @@ export const WidgetEventSchedule = ({
         stageId,
         teiId,
         enrollmentId,
+        eventId,
         onSave,
         onSaveSuccessActionType,
         onSaveErrorActionType,
@@ -80,7 +87,17 @@ export const WidgetEventSchedule = ({
 
 
     const onAddComment = (comment) => {
-        setComments([...comments, { value: comment }]);
+        const newComment = {
+            storedBy: currentUser.userName,
+            storedAt: moment().toISOString(),
+            value: comment,
+            createdBy: {
+                firstName: currentUser.firstName,
+                surname: currentUser.surname,
+            },
+            note: noteId,
+        };
+        setComments([...comments, newComment]);
     };
 
 
@@ -92,6 +109,15 @@ export const WidgetEventSchedule = ({
         );
     }
 
+    const eventAccess = getProgramEventAccess(programId, stageId);
+    if (!eventAccess?.write) {
+        return (
+            <NoAccess
+                onCancel={onCancel}
+            />
+        );
+    }
+
     return (
         <WidgetEventScheduleComponent
             stageId={stageId}
@@ -99,7 +125,9 @@ export const WidgetEventSchedule = ({
             programId={programId}
             programName={program.name}
             scheduleDate={scheduleDate}
+            dueDateLabel={programStageScheduleConfig.dueDateLabel}
             suggestedScheduleDate={suggestedScheduleDate}
+            onCancel={onCancel}
             setScheduleDate={setScheduleDate}
             onSchedule={onHandleSchedule}
             onAddComment={onAddComment}

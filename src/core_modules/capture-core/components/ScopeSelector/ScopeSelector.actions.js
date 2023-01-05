@@ -1,24 +1,12 @@
 // @flow
-import { batchActions } from 'redux-batched-actions';
 import { actionCreator } from '../../actions/actions.utils';
 
 export const scopeSelectorActionTypes = {
-    CATEGORY_OPTION_SET: 'ScopeSelector.CategoryOptionSet',
-    CATEGORY_OPTION_RESET: 'ScopeSelector.CategoryOptionReset',
-    ALL_CATEGORY_OPTIONS_RESET: 'ScopeSelector.AllCategoryOptionsReset',
+    ORG_UNIT_ID_SET: 'ScopeSelector.OrgUnitSet',
+    RESET_ORG_UNIT_ID: 'ScopeSelector.ResetOrgUnitId',
 };
 
-export const setCategoryOptionFromScopeSelector = (categoryId: string, categoryOption: Object) => actionCreator(scopeSelectorActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
-export const resetCategoryOptionFromScopeSelector = (categoryId: string) => actionCreator(scopeSelectorActionTypes.CATEGORY_OPTION_RESET)({ categoryId });
-export const resetAllCategoryOptionsFromScopeSelector = () => actionCreator(scopeSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET)();
+export const setOrgUnitFromScopeSelector = (orgUnitId: string) =>
+    actionCreator(scopeSelectorActionTypes.ORG_UNIT_ID_SET)({ orgUnitId });
 
-// batch related actions
-export const resetProgramIdBatchAction = (actions: Array<Object>) =>
-    batchActions([
-        ...actions,
-        resetAllCategoryOptionsFromScopeSelector(),
-    ]);
-export const resetOrgUnitIdBatchAction = (customActionsOnOrgUnitIdReset: Array<Object>) =>
-    batchActions([
-        ...customActionsOnOrgUnitIdReset,
-    ]);
+export const resetOrgUnitIdFromScopeSelector = (previousOrgUnitId?: string) => actionCreator(scopeSelectorActionTypes.RESET_ORG_UNIT_ID)({ previousOrgUnitId });

@@ -1,5 +1,4 @@
 // @flow
-import { getD2 } from '../../d2';
 import { getMainStorageController } from '../../storageControllers';
 import { mainStores } from '../../storageControllers/stores';
 
@@ -9,17 +8,22 @@ function isLangRTL(code) {
     return langs.includes(code) || prefixed.filter(c => code.startsWith(c)).length > 0;
 }
 
-export async function cacheSystemSettings(uiLocale: string) {
-    const d2 = getD2();
-    const d2SystemInfo = d2.system.systemInfo;
+export async function cacheSystemSettings(
+    uiLocale: string,
+    systemSettings: { dateFormat: string, serverTimeZoneId: string },
+) {
     const systemSettingsArray = [
         {
             id: 'dateFormat',
-            value: d2SystemInfo.dateFormat.toUpperCase(),
+            value: systemSettings.dateFormat.toUpperCase(),
         },
         {
             id: 'dir',
             value: isLangRTL(uiLocale) ? 'rtl' : 'ltr',
+        },
+        {
+            id: 'serverTimeZoneId',
+            value: systemSettings.serverTimeZoneId,
         },
     ];
 

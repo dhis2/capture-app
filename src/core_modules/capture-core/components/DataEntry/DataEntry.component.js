@@ -23,6 +23,13 @@ const styles = theme => ({
     },
     footerBar: {
         display: 'flex',
+        justifyContent: 'space-between',
+    },
+    footerLeft: {
+        display: 'flex',
+    },
+    footerRight: {
+        display: 'flex',
     },
     button: {
         marginTop: theme.typography.pxToRem(2),
@@ -89,6 +96,7 @@ type Props = {
     completeButton?: ?React.Element<any>,
     mainButton?: ?React.Element<any>,
     cancelButton?: ?React.Element<any>,
+    deleteButton?: ?React.Element<any>,
     notes?: ?React.Element<any>,
     fields?: ?Array<FieldContainer>,
     dataEntryOutputs?: ?Array<any>,
@@ -222,6 +230,7 @@ class DataEntryPlain extends React.Component<Props> {
             completeButton,
             mainButton,
             cancelButton,
+            deleteButton,
             notes,
             completionAttempted,
             saveAttempted,
@@ -259,6 +268,7 @@ class DataEntryPlain extends React.Component<Props> {
             completeButton,
             mainButton,
             cancelButton,
+            deleteButton,
             notes,
             dataEntryOutputs,
         } = this.props;
@@ -312,50 +322,67 @@ class DataEntryPlain extends React.Component<Props> {
                     }
                 </div>
                 <div className={classes.footerBar}>
-                    {
-                        (() => {
-                            if (completeButton) {
-                                return (
-                                    <div
-                                        className={classes.button}
-                                    >
-                                        { completeButton }
-                                    </div>
-                                );
-                            }
-                            return null;
-                        })()
-                    }
+                    <div className={classes.footerLeft}>
+                        {
+                            (() => {
+                                if (completeButton) {
+                                    return (
+                                        <div
+                                            className={classes.button}
+                                        >
+                                            { completeButton }
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            })()
+                        }
 
-                    {
-                        (() => {
-                            if (mainButton) {
-                                return (
-                                    <div
-                                        className={classes.button}
-                                    >
-                                        { mainButton }
-                                    </div>
-                                );
-                            }
-                            return null;
-                        })()
-                    }
-
-                    {
-                        (() => {
-                            if (cancelButton) {
-                                return (
-                                    <div
-                                        className={classes.button}
-                                    >
-                                        { cancelButton }
-                                    </div>
-                                );
-                            }
-                            return null;
-                        })()
-                    }
+                        {
+                            (() => {
+                                if (mainButton) {
+                                    return (
+                                        <div
+                                            className={classes.button}
+                                        >
+                                            { mainButton }
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            })()
+                        }
+                        {
+                            (() => {
+                                if (cancelButton) {
+                                    return (
+                                        <div
+                                            className={classes.button}
+                                        >
+                                            { cancelButton }
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            })()
+                        }
+                    </div>
+                    <div className={classes.footerRight}>
+                        {
+                            (() => {
+                                if (deleteButton) {
+                                    return (
+                                        <div
+                                            className={classes.button}
+                                        >
+                                            { deleteButton }
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            })()
+                        }
+                    </div>
                 </div>
             </div>
         );

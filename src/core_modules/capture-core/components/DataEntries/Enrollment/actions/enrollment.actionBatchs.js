@@ -1,9 +1,10 @@
 // @flow
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { batchActions } from 'redux-batched-actions';
 import type {
     Enrollment,
     TEIValues,
+    OrgUnit,
 } from 'capture-core-utils/rulesEngine';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
@@ -23,7 +24,7 @@ export const runRulesOnUpdateFieldBatch = (
     formId: string,
     dataEntryId: string,
     itemId: string,
-    orgUnit: Object,
+    orgUnit: OrgUnit,
     enrollmentData?: Enrollment,
     attributeValues?: TEIValues,
     extraActions: Array<ReduxAction<any, any>> = [],
@@ -46,7 +47,7 @@ export const runRulesOnUpdateFieldBatch = (
 export const updateDataEntryFieldBatch = (
     innerAction: ReduxAction<any, any>,
     programId: string,
-    orgUnit: Object,
+    orgUnit: OrgUnit,
 ) => {
     const { dataEntryId, itemId } = innerAction.payload;
     const uid = uuid();
@@ -61,7 +62,7 @@ export const updateDataEntryFieldBatch = (
 export const updateFieldBatch = (
     innerAction: ReduxAction<any, any>,
     programId: string,
-    orgUnit: Object,
+    orgUnit: OrgUnit,
 ) => {
     const { dataEntryId, itemId } = innerAction.payload;
     const uid = uuid();
@@ -78,7 +79,7 @@ export const asyncUpdateSuccessBatch = (
     dataEntryId: string,
     itemId: string,
     programId: string,
-    orgUnit: Object,
+    orgUnit: OrgUnit,
 ) => {
     const uid = uuid();
 

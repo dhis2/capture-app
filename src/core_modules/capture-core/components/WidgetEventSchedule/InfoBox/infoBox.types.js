@@ -5,5 +5,6 @@ export type Props = {|
     suggestedScheduleDate?: ?string,
     eventCountInOrgUnit: number,
     orgUnitName?: ?string,
+    hideDueDate?: boolean,
     ...CssClasses,
 |};

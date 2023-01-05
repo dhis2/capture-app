@@ -8,7 +8,6 @@ import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
@@ -27,9 +26,21 @@ const styles = ({ typography }) => ({
     },
 });
 
-const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string) => (<span>
-    {i18n.t('Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}.', { trackedEntityName, programName, orgUnitName, interpolation: { escapeValue: false } })}
-</span>);
+const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string, teiId?: ?string) => (
+    teiId ? <span>
+        {i18n.t('Saving a new enrollment in {{programName}} in {{orgUnitName}}.', {
+            programName,
+            orgUnitName,
+            interpolation: { escapeValue: false },
+        })}
+    </span> : <span>
+        {i18n.t('Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}.', {
+            trackedEntityName,
+            programName,
+            orgUnitName,
+            interpolation: { escapeValue: false },
+        })}
+    </span>);
 
 
 const EnrollmentRegistrationEntryPlain =
@@ -41,28 +52,30 @@ const EnrollmentRegistrationEntryPlain =
       classes,
       onSave,
       onPostProcessErrorMessage,
+      orgUnitId,
+      orgUnit,
+      teiId,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
 
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-      const orgUnit = useCurrentOrgUnitInfo();
 
       const navigateToWorkingListsPage = () => {
           const url =
             scopeType === scopeTypes.TRACKER_PROGRAM
                 ?
-                buildUrlQueryString({ programId: selectedScopeId, orgUnitId: orgUnit.id })
+                buildUrlQueryString({ programId: selectedScopeId, orgUnitId })
                 :
-                buildUrlQueryString({ orgUnitId: orgUnit.id });
+                buildUrlQueryString({ orgUnitId });
           return push(`/?${url}`);
       };
 
       return (
           <>
               {
-                  scopeType === scopeTypes.TRACKER_PROGRAM && formId &&
+                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
                   <>
                       <EnrollmentDataEntry
                           orgUnit={orgUnit}
@@ -100,7 +113,7 @@ const EnrollmentRegistrationEntryPlain =
                       </div>
 
                       <InfoIconText>
-                          {translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name)}
+                          {translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name, teiId)}
                       </InfoIconText>
                   </>
               }
@@ -110,7 +123,7 @@ const EnrollmentRegistrationEntryPlain =
 
 export const EnrollmentRegistrationEntryComponent: ComponentType<Props> =
   compose(
-      withErrorMessagePostProcessor(),
+      withErrorMessagePostProcessor((({ enrollmentMetadata }) => enrollmentMetadata.trackedEntityType.name)),
       withLoadingIndicator(() => ({ height: '350px' })),
       withDuplicateCheckOnSave(),
       withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm, onIsCompleting: () => true }),

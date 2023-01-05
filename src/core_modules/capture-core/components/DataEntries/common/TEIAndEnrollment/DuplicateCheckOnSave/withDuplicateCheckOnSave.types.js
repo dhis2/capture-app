@@ -13,4 +13,5 @@ export type Props = {
     duplicatesReviewPageSize: number,
     renderDuplicatesCardActions?: RenderCustomCardActions,
     renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
+    skipDuplicateCheck: ?boolean,
 };

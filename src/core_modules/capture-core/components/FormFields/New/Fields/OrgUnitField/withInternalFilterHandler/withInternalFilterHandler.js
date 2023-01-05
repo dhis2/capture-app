@@ -3,14 +3,15 @@ import * as React from 'react';
 import log from 'loglevel';
 import { makeCancelablePromise, errorCreator } from 'capture-core-utils';
 import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
-import { getD2 } from '../../../../../../d2/d2Instance';
 import { orgUnitFieldScopes } from './scopes.const';
+import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 
 type Props = {
     defaultRoots: Array<any>,
     scope: $Values<typeof orgUnitFieldScopes>,
     onSearchError?: ?(message: string) => void,
     onSelect: Function,
+    querySingleResource: QuerySingleResource
 };
 
 type State = {
@@ -45,7 +46,7 @@ export const withInternalFilterHandler = () =>
             static INITIAL_TREE_KEY = 'initial';
 
             filterOrgUnits(filterText: string) {
-                const { scope, onSearchError } = this.props;
+                const { scope, onSearchError, querySingleResource } = this.props;
                 const hierarchyProp =
                     scope === orgUnitFieldScopes.USER_CAPTURE ? { withinUserHierarchy: true } : { withinUserSearchHierarchy: true };
                 this.setState({
@@ -57,10 +58,9 @@ export const withInternalFilterHandler = () =>
                 }
 
                 const cancelablePromise = makeCancelablePromise(
-                    getD2()
-                        .models
-                        .organisationUnits
-                        .list({
+                    querySingleResource({
+                        resource: 'organisationUnits',
+                        params: {
                             fields: [
                                 'id,displayName,path,publicAccess,access,lastUpdated',
                                 'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
@@ -68,7 +68,8 @@ export const withInternalFilterHandler = () =>
                             paging: false,
                             query: filterText,
                             ...hierarchyProp,
-                        }),
+                        },
+                    }),
                 );
 
                 cancelablePromise

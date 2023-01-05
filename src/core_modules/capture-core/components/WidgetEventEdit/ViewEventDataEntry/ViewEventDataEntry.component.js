@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { pipe } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core/';
+import { dataEntryIds } from 'capture-core/constants';
 import i18n from '@dhis2/d2-i18n';
 import {
     placements,
@@ -131,6 +132,28 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
+const buildScheduleDateSettingsFn = () => {
+    const dataElement = new DataElement((o) => {
+        o.type = dataElementTypes.DATE;
+    });
+
+    const scheduleDateSettings = {
+        getComponent: () => viewModeComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            label: `${props.formFoundation.getLabel('scheduledAt')}`,
+            valueConverter: value => dataElement.convertValue(value, valueConvertFn),
+        }),
+        getIsHidden: (props: Object) => props.id !== dataEntryIds.ENROLLMENT_EVENT || props.hideDueDate,
+        getPropName: () => 'scheduledAt',
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return scheduleDateSettings;
+};
+
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: Object) => {
         const featureType = props.formFoundation.featureType;
@@ -188,7 +211,8 @@ const buildCompleteFieldSettingsFn = () => {
 
 const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
+const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
@@ -202,6 +226,7 @@ type Props = {
     classes: Object,
     theme: Theme,
     onOpenEditEvent: () => void,
+    dataEntryId: string,
 };
 
 type DataEntrySection = {
@@ -238,12 +263,14 @@ class ViewEventDataEntryPlain extends Component<Props> {
     render() {
         const {
             classes,
+            dataEntryId,
             ...passOnProps
         } = this.props;
+
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
-                id={'singleEvent'}
+                id={dataEntryId}
                 viewMode
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}

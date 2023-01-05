@@ -1,11 +1,9 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2';
 import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
-import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 
@@ -13,6 +11,7 @@ import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoa
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
+import { rulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
 
 function setLogLevel() {
     const levels = {
@@ -28,20 +27,6 @@ function setLogLevel() {
     }
 
     log.setLevel(level);
-}
-
-function setConfig(apiPath: string) {
-    const { NODE_ENV } = process.env;
-    config.baseUrl = apiPath;
-
-    if (NODE_ENV !== environments.prod) {
-        config.headers = {
-            'X-Requested-With': 'XMLHttpRequest',
-        };
-    }
-
-    // Temporary setting some old d2 translations for the d2 ui sharing dialog
-    config.i18n.sources.add('i18n/i18n_module_en.properties');
 }
 
 function setMomentLocaleAsync(locale: string) {
@@ -144,31 +129,41 @@ async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function) {
     await buildMetaDataAsync(dbLocale);
 }
 
-async function initializeSystemSettingsAsync(uiLocale: string) {
-    const systemSettingsCacheData = await cacheSystemSettings(uiLocale);
+async function initializeSystemSettingsAsync(
+    uiLocale: string,
+    systemSettings: { dateFormat: string, serverTimeZoneId: string },
+) {
+    const systemSettingsCacheData = await cacheSystemSettings(uiLocale, systemSettings);
     await buildSystemSettingsAsync(systemSettingsCacheData);
-}
-
-function setHeaderBarStrings(d2) {
-    d2.i18n.addStrings(['app_search_placeholder=search']);
 }
 
 export async function initializeAsync(
     onCacheExpired: Function,
     onQueryApi: Function,
-    apiPath: string,
 ) {
     setLogLevel();
 
-    // initialize d2
-    setConfig(apiPath);
-    const d2 = await initAsync({ schemas: ['organisationUnit'] });
-    const userSettings = await getUserSettingsAsync();
-    setD2(d2);
-    setHeaderBarStrings(d2);
+    const userSettings = await onQueryApi({
+        resource: 'userSettings',
+    });
+    const currentUser = await onQueryApi({
+        resource: 'me',
+        params: {
+            fields: 'id,userRoles',
+        },
+    });
+    rulesEngine.setSelectedUserRoles(currentUser.userRoles.map(({ id }) => id));
+
+    const systemSettings = await onQueryApi({
+        resource: 'system/info',
+        params: {
+            fields: 'dateFormat,serverTimeZoneId',
+        },
+    });
+
     // initialize storage controllers
     try {
-        await initControllersAsync(onCacheExpired);
+        await initControllersAsync(onCacheExpired, currentUser);
     } catch (error) {
         throw new DisplayException(i18n.t(
             'A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.',
@@ -181,7 +176,7 @@ export async function initializeAsync(
     await setLocaleDataAsync(uiLocale);
 
     // initialize system settings
-    await initializeSystemSettingsAsync(uiLocale);
+    await initializeSystemSettingsAsync(uiLocale, systemSettings);
 
     // initialize metadata
     await initializeMetaDataAsync(dbLocale, onQueryApi);

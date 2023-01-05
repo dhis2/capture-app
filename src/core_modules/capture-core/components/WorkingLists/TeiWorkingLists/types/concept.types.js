@@ -1,6 +1,7 @@
 // @flow
 import { typeof dataElementTypes } from '../../../../metaData';
 import type { Categories } from '../../WorkingListsBase';
+import type { ApiTEIQueryCriteria } from './apiTemplate.types';
 
 type TeiRecord = {| [id: string]: any |};
 
@@ -16,7 +17,7 @@ export type TeiWorkingListsTemplate = {
         write: boolean,
         manage: boolean,
     },
-    criteria?: {| [string]: any |},
+    criteria?: ApiTEIQueryCriteria,
     notPreserved?: boolean,
     deleted?: boolean,
     updating?: boolean,
@@ -41,7 +42,6 @@ export type MetadataColumnConfig = {
 export type MainColumnConfig = {
     ...ColumnConfigBase,
     mainProperty: true,
-    apiName?: string,
 };
 
 export type TeiWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfig;
@@ -52,7 +52,6 @@ export type TeiColumnMetaForDataFetching = {
     id: string,
     type: $Values<dataElementTypes>,
     mainProperty?: boolean,
-    apiName?: string,
     visible: boolean,
 };
 
@@ -72,7 +71,8 @@ export type LoadTeiView = (
         programId: string,
         orgUnitId: string,
         categories?: Categories,
-        programStageId?: string
+        programStageId?: string,
+        currentRequest?: string,
     |},
     meta: {|
         columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,

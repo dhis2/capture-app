@@ -28,6 +28,7 @@ import {
 } from '../../../../utils/validators/form';
 import { dataElementTypes, type DateDataElement, type DataElement } from '../../../../metaData';
 import { validatorTypes } from './constants';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 type Validator = (value: any) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any};
 
@@ -49,7 +50,7 @@ const errorMessages = {
     DATE_FUTURE_NOT_ALLOWED: i18n.t('A date in the future is not allowed'),
     DATETIME: i18n.t('Please provide a valid date and time'),
     TIME: i18n.t('Please provide a valid time'),
-    PERCENTAGE: i18n.t('Please provide a valid percentage'),
+    PERCENTAGE: i18n.t('Please provide an integer between 0 and 100'),
     URL: i18n.t('Please provide a valid url'),
     EMAIL: i18n.t('Please provide a valid email address'),
     AGE: i18n.t('Please provide a valid age'),
@@ -239,7 +240,10 @@ function buildCompulsoryValidator(metaData: DataElement): Array<?ValidatorContai
         [];
 }
 
-function buildUniqueValidator(metaData: DataElement): Array<?ValidatorContainer> {
+function buildUniqueValidator(
+    metaData: DataElement,
+    querySingleResource: QuerySingleResource,
+): Array<?ValidatorContainer> {
     return metaData.unique
         ?
         [
@@ -249,7 +253,7 @@ function buildUniqueValidator(metaData: DataElement): Array<?ValidatorContainer>
                         return true;
                     }
                     // $FlowFixMe
-                    return metaData.unique.onValidate(value, contextProps);
+                    return metaData.unique.onValidate(value, contextProps, querySingleResource);
                 },
                 message: errorMessages.UNIQUENESS,
                 validatingMessage: validationMessages.UNIQUENESS,
@@ -260,8 +264,10 @@ function buildUniqueValidator(metaData: DataElement): Array<?ValidatorContainer>
         [];
 }
 
-export const getValidators = (metaData: DataElement): Array<?ValidatorContainer> => [
+export const getValidators =
+(metaData: DataElement, querySingleResource: QuerySingleResource): Array<?ValidatorContainer> => [
     buildCompulsoryValidator,
     buildTypeValidators,
     buildUniqueValidator,
-].flatMap(validatorBuilder => validatorBuilder(metaData));
+// $FlowFixMe[extra-arg]
+].flatMap(validatorBuilder => validatorBuilder(metaData, querySingleResource));

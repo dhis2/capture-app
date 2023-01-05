@@ -1,9 +1,5 @@
 import '../../sharedSteps';
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you are on an enrollment page', () => {
     cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
     cy.get('[data-test="enrollment-page-content"]')
@@ -28,19 +24,19 @@ And('you see the registration form for the Inpatient morbidity program', () => {
 
 And('you see the registration form for the Malaria case diagnosis', () => {
     cy.get('[data-test="registration-page-content"]')
-        .contains('New malaria entity in program: Malaria case diagnosis, treatment and investigation')
+        .contains('New Enrollment in program: Malaria case diagnosis, treatment and investigation')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Saving a malaria entity in Malaria case diagnosis, treatment and investigation in Taninahun (Malen) CHP.')
+        .contains('Saving a new enrollment in Malaria case diagnosis, treatment and investigation in Taninahun (Malen) CHP.')
         .should('exist');
 });
 
 And('you see the registration form for the MNCH PNC program', () => {
     cy.get('[data-test="registration-page-content"]')
-        .contains('New person in program: MNCH / PNC (Adult Woman)')
+        .contains('New Enrollment in program: MNCH / PNC (Adult Woman)')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Saving a person in MNCH / PNC (Adult Woman) in Taninahun (Malen) CHP.')
+        .contains('Saving a new enrollment in MNCH / PNC (Adult Woman) in Taninahun (Malen) CHP.')
         .should('exist');
 });
 
@@ -104,7 +100,7 @@ When('you reset the tei selection', () => {
 });
 
 Then('you are navigated to the main page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
 });
 When('you reset the program selection', () => {
     cy.contains('[data-test="program-selector-container"]', 'Child Programme')
@@ -115,7 +111,7 @@ When('you reset the program selection', () => {
 Then('you see message explaining you need to select a program', () => {
     cy.url().should('not.include', 'programId');
     cy.get('[data-test="enrollment-page-content"]')
-        .contains('Carlos Cruz is enrolled in multiple programs. Choose a program.');
+        .contains('Choose a program to add new or see existing enrollments for Carlos Cruz');
 });
 
 When('you reset the org unit selection', () => {
@@ -139,5 +135,5 @@ When('you reset the enrollment selection', () => {
 Then('you see message explaining you need to select an enrollment', () => {
     cy.url().should('not.include', 'enrollmentId');
     cy.get('[data-test="enrollment-page-content"]')
-        .contains('There are multiple enrollments for this program. Choose an enrollment to view the dashboard.');
+        .contains('Choose an enrollment to view the dashboard.');
 });

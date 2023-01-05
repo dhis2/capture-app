@@ -1,8 +1,7 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
-import { getCurrentUser } from 'capture-core/d2/d2Instance';
+import { map, switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import { convertValue as convertListValue } from '../../../../converters/clientToList';
@@ -47,33 +46,44 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
             ], viewEventNotesBatchActionTypes.LOAD_EVENT_NOTES_BATCH);
         }));
 
-export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE),
-        map((action) => {
+        switchMap((action) => {
             const state = store.value;
             const payload = action.payload;
 
             const eventId = state.viewEventPage.eventId;
-            // $FlowFixMe[prop-missing] automated comment
-            const userName = getCurrentUser().username;
+            return querySingleResource({
+                resource: 'me',
+                params: {
+                    fields: 'userName,firstName,surname',
+                },
+            }).then((user) => {
+                const { userName, firstName, surname } = user;
+                const clientId = uuid();
+                const serverData = {
+                    event: eventId,
+                    notes: [{ value: payload.note }],
+                };
 
-            const serverData = {
-                event: eventId,
-                notes: [{ value: payload.note }],
-            };
-
-            const clientNote = {
-                value: payload.note,
-                storedBy: userName,
-                storedDate: convertListValue(moment().toISOString(), dataElementTypes.DATETIME),
-                clientId: uuid(),
-            };
-            return batchActions([
-                startSaveEventNote(eventId, serverData, state.currentSelections, clientNote.clientId),
-                // $FlowFixMe[incompatible-call] automated comment
-                addNote(noteKey, clientNote),
-            ], viewEventNotesBatchActionTypes.SAVE_EVENT_NOTE_BATCH);
+                const clientNote = {
+                    value: payload.note,
+                    createdBy: {
+                        firstName,
+                        surname,
+                        uid: clientId,
+                    },
+                    storedBy: userName,
+                    storedDate: convertListValue(moment().toISOString(), dataElementTypes.DATETIME),
+                    clientId: uuid(),
+                };
+                return batchActions([
+                    startSaveEventNote(eventId, serverData, state.currentSelections, clientNote.clientId),
+                    // $FlowFixMe[incompatible-call] automated comment
+                    addNote(noteKey, clientNote),
+                ], viewEventNotesBatchActionTypes.SAVE_EVENT_NOTE_BATCH);
+            });
         }));
 
 export const saveNoteForViewEventFailedEpic = (action$: InputObservable) =>

@@ -12,12 +12,15 @@ import type { RelationshipType } from '../RelationshipType';
 export class ProgramStage {
     _id: string;
     _name: string;
+    _untranslatedName: string;
     _stageForm: RenderFoundation;
     _relationshipTypes: Array<RelationshipType>;
     _enableUserAssignment: boolean;
     _autoGenerateEvent: boolean;
     _openAfterEnrollment: boolean;
+    _allowGenerateNextVisit: boolean;
     _generatedByEnrollmentDate: boolean;
+    _hideDueDate: boolean;
     _reportDateToUse: string;
     _minDaysFromStart: number;
     _icon: Icon | void;
@@ -50,6 +53,14 @@ export class ProgramStage {
 
     set name(name: string) {
         this._name = name;
+    }
+
+    get untranslatedName(): string {
+        return this._untranslatedName;
+    }
+
+    set untranslatedName(untranslatedName: string) {
+        this._untranslatedName = untranslatedName;
     }
 
     set icon(icon: Icon | void) {
@@ -85,6 +96,22 @@ export class ProgramStage {
 
     set autoGenerateEvent(autoGenerate: boolean) {
         this._autoGenerateEvent = autoGenerate;
+    }
+
+    get allowGenerateNextVisit(): boolean {
+        return this._allowGenerateNextVisit;
+    }
+
+    set allowGenerateNextVisit(generateNextVisit: boolean) {
+        this._allowGenerateNextVisit = generateNextVisit;
+    }
+
+    get hideDueDate(): boolean {
+        return this._hideDueDate;
+    }
+
+    set hideDueDate(hideDueDate: boolean) {
+        this._hideDueDate = hideDueDate;
     }
 
     get generatedByEnrollmentDate(): boolean {

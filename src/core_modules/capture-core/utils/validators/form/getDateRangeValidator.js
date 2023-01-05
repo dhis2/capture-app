@@ -5,7 +5,7 @@ import { parseDate } from '../../converters/date';
  *
  * @export
  * @param {string} value
- * @returns
+ * @returns {boolean}
  */
 
 function isValidDateWithEmptyCheck(value: ?string) {

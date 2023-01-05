@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType, useRef, useEffect, useState, useCallback } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { spacersNum, spacers } from '@dhis2/ui';
+import { spacersNum, spacers, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
@@ -15,7 +15,7 @@ import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 import { EnrollmentQuickActions } from './EnrollmentQuickActions';
 import { TrackedEntityRelationshipsWrapper } from './TrackedEntityRelationshipsWrapper';
 
-const getStyles = ({ typography }) => ({
+const getStyles = () => ({
     container: {
         position: 'relative',
     },
@@ -40,8 +40,10 @@ const getStyles = ({ typography }) => ({
         gap: spacers.dp16,
     },
     title: {
-        ...typography.title,
-        paddingTop: spacersNum.dp16,
+        fontSize: '1.25rem',
+        color: colors.grey900,
+        fontWeight: 500,
+        paddingTop: spacersNum.dp8,
         paddingBottom: spacersNum.dp16,
     },
 });
@@ -54,12 +56,15 @@ export const EnrollmentPageDefaultPlain = ({
     enrollmentId,
     stages,
     onDelete,
+    onAddNew,
     onViewAll,
     onCreateNew,
     widgetEffects,
     hideWidgets,
     classes,
     onEventClick,
+    onUpdateTeiAttributeValues,
+    onEnrollmentError,
 }: PlainProps) => {
     const [mainContentVisible, setMainContentVisibility] = useState(true);
     const [addRelationShipContainerElement, setAddRelationshipContainerElement] = useState(undefined);
@@ -68,6 +73,11 @@ export const EnrollmentPageDefaultPlain = ({
     useEffect(() => {
         setAddRelationshipContainerElement(renderRelationshipRef.current);
     }, []);
+
+    const a = (c, d, e) => {
+        debugger;
+        onEventClick(c,d,e);
+    };
 
     const toggleVisibility = useCallback(() => setMainContentVisibility(current => !current), []);
 
@@ -92,17 +102,19 @@ export const EnrollmentPageDefaultPlain = ({
                             events={events}
                             onViewAll={onViewAll}
                             onCreateNew={onCreateNew}
-                            onEventClick={onEventClick}
+                            onEventClick={a}
                         />
                     </div>
                     <div className={classes.rightColumn}>
-                        <TrackedEntityRelationshipsWrapper
-                            trackedEntityTypeId={program.trackedEntityType.id}
-                            programId={program.id}
-                            addRelationshipRenderElement={addRelationShipContainerElement}
-                            onOpenAddRelationship={toggleVisibility}
-                            onCloseAddRelationship={toggleVisibility}
-                        />
+                        {addRelationShipContainerElement &&
+                            <TrackedEntityRelationshipsWrapper
+                                trackedEntityTypeId={program.trackedEntityType.id}
+                                programId={program.id}
+                                addRelationshipRenderElement={addRelationShipContainerElement}
+                                onOpenAddRelationship={toggleVisibility}
+                                onCloseAddRelationship={toggleVisibility}
+                            />
+                        }
                         <WidgetEnrollmentComment />
                         <WidgetError error={widgetEffects?.errors} />
                         <WidgetWarning warning={widgetEffects?.warnings} />
@@ -118,12 +130,20 @@ export const EnrollmentPageDefaultPlain = ({
                                 emptyText={i18n.t('No feedback for this enrollment yet')}
                             />
                         )}
-                        <WidgetProfile teiId={teiId} programId={program.id} showEdit orgUnitId={orgUnitId} />
+                        <WidgetProfile
+                            teiId={teiId}
+                            programId={program.id}
+                            orgUnitId={orgUnitId}
+                            onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
+                            showEdit
+                        />
                         {enrollmentId !== 'AUTO' && <WidgetEnrollment
                             teiId={teiId}
                             enrollmentId={enrollmentId}
                             programId={program.id}
                             onDelete={onDelete}
+                            onAddNew={onAddNew}
+                            onError={onEnrollmentError}
                         />}
                     </div>
                 </div>
