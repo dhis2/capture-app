@@ -1,6 +1,6 @@
 // @flow
 import { useCallback, useMemo } from 'react';
-import { useMetadataApiQuery, useMetadataCustomQuery } from 'capture-core-utils/reactQueryHelpers';
+import { useMetadataApiQuery, useMetadataCustomQuery } from '../../../../../../utils/reactQueryHelpers';
 import type { GetSearchGroups, GetSearchGroupsAsync, SearchGroups } from './searchFormSection.types';
 
 export const useSearchGroups = (

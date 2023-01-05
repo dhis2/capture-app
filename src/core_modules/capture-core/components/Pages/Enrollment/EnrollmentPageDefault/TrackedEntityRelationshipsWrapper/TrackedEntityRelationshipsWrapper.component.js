@@ -12,15 +12,9 @@ export const TrackedEntityRelationshipsWrapper = ({
     onOpenAddRelationship,
     onCloseAddRelationship,
 }: Props) => {
-    const [a, setA] = useState();
-    debugger;
-    const { getPrograms, relationshipTypes, failed } = useTEIRelationshipsWidgetMetadata();
+    const { getPrograms, relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
 
-    const getSearchGroups = useCallback((programId: string) => {
-        
-    }, []);
-
-    if (failed) {
+    if (isError) {
         return (
             <div>
                 {i18n.t('Could not retrieve metadata. Please try again later.')}
@@ -33,7 +27,6 @@ export const TrackedEntityRelationshipsWrapper = ({
 
     return (
         <>
-        <button onClick={() => setA(a+1)} name="button">button</button>
         <WidgetTrackedEntityRelationship
             relationshipTypes={relationshipTypes}
             trackedEntityTypeId={trackedEntityTypeId}
