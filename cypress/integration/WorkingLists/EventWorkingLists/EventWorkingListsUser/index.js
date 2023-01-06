@@ -1,14 +1,14 @@
 import { v4 as uuid } from 'uuid';
 import '../../sharedSteps';
 import '../../../sharedSteps';
-import { getCurrentYear, mapDataAndYear } from '../../../../support/date';
+import { getCurrentYear, combineDataAndYear } from '../../../../support/date';
 
 Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
-    const rows = mapDataAndYear(getCurrentYear(), {
+    const rows = combineDataAndYear(getCurrentYear(), {
         '12-30': ['14 Male'],
         '12-29': ['67 Male'],
         '12-27': ['66 Male'],
@@ -184,7 +184,7 @@ Then('Household location should display in the list', () => {
 });
 
 Then('the list should display data for the second page', () => {
-    const rows = mapDataAndYear(getCurrentYear(), {
+    const rows = combineDataAndYear(getCurrentYear(), {
         '12-02': ['19 Male', '56 Female', '61 Male'],
         '11-30': ['9 Male'],
         '11-24': ['15 Female'],
@@ -222,7 +222,7 @@ Then('the list should display data for the second page', () => {
 });
 
 Then('the list should display 10 rows of data', () => {
-    const rows = mapDataAndYear(getCurrentYear(), {
+    const rows = combineDataAndYear(getCurrentYear(), {
         '12-30': ['14 Male'],
         '12-29': ['67 Male'],
         '12-27': ['66 Male'],
@@ -275,7 +275,7 @@ Then('the list should display data ordered descendingly by report date', () => {
     cy.contains('Update')
         .click();
 
-    const rows = mapDataAndYear(lastYear, {
+    const rows = combineDataAndYear(lastYear, {
         '01-01': ['14 Female'],
         '01-03': ['63 Male'],
         '01-04': ['4 Female'],

@@ -4,4 +4,5 @@ export const getCurrentYear = () => moment().year();
 
 export const getCurrentDate = () => moment().format('YYYY-DD-MM');
 
-export const mapDataAndYear = (year, data) => Object.keys(data).map(key => ({ [`${year}-${key}`]: data[key] }));
+export const combineDataAndYear = (year, data) => Object.keys(data)
+    .reduce((acc, key) => { acc[`${year}-${key}`] = data[key]; return acc; }, {});
