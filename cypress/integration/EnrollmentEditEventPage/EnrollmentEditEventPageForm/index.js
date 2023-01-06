@@ -66,7 +66,7 @@ When('the user clicks switch tab to Schedule', () => {
 
 Then('the user selects another schedule date', () => {
     cy.get('[data-test="schedule-section"]').within(() => {
-        cy.get("[data-test='capture-ui-input']").eq(0).should('have.value', `${getCurrentYear() - 5}-01-07`);
+        cy.get("[data-test='capture-ui-input']").eq(0).should('have.value', `${getCurrentYear() - 15}-01-07`);
         cy.get("[data-test='capture-ui-input']").eq(0)
             .clear()
             .type(`${getCurrentYear()}-08-01`)
