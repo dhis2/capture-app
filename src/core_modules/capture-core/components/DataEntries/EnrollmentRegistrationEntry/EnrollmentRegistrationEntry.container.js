@@ -9,6 +9,7 @@ import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRulesEngineOrgUnit } from '../../../hooks/useRulesEngineOrgUnit';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
+
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
     id,
@@ -23,6 +24,8 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
           || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
     );
+    const isSavingInProgress = useSelector(({ possibleDuplicates }) =>
+        possibleDuplicates.isLoading || possibleDuplicates.isUpdating);
 
     if (error) {
         return error.errorComponent;
@@ -39,6 +42,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             orgUnitId={orgUnitId}
             orgUnit={orgUnit}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            isSavingInProgress={isSavingInProgress}
         />
     );
 };

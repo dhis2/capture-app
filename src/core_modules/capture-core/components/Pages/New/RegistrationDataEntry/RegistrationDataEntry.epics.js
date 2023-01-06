@@ -213,7 +213,8 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             } = store.value;
             const teiId = typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const enrollmentId = typeReportMap.ENROLLMENT.objectReports[0].uid;
-
+            console.log({ action });
+            return EMPTY;
             if (meta?.redirectToEnrollmentEventNew) {
                 history.push(
                     `/enrollmentEventNew?${buildUrlQueryString({

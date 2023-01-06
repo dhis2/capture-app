@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useContext, useCallback } from 'react';
+import React, { type ComponentType, useContext, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
@@ -258,6 +258,7 @@ const RegistrationDataEntryPlain = ({
                     id="singleEvent"
                 />
             }
+
 
         </>
     );

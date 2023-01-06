@@ -3,7 +3,7 @@ import React, { Component, type ComponentType } from 'react';
 import { compose } from 'redux';
 import { QuickSelector } from './QuickSelector/QuickSelector.component';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
-import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
+import { defaultDialogProps, savingInProgressDialogProps } from '../Dialogs/DiscardDialog.constants';
 import type { Props, State } from './ScopeSelector.types';
 import { withLoadingIndicator } from '../../HOC';
 
@@ -19,30 +19,30 @@ class ScopeSelectorClass extends Component<Props, State> {
         };
     }
 
-    dontShowWarning = () => !this.props.isUserInteractionInProgress;
+    shouldShowWarning = () => this.props.isUserInteractionInProgress && !this.props.isSavingInProgress;
 
     handleOpenOrgUnitWarning = () => {
-        if (this.dontShowWarning()) {
-            this.props.onResetOrgUnitId();
+        if (this.shouldShowWarning()) {
+            this.setState({ openOrgUnitWarning: true });
             return;
         }
-        this.setState({ openOrgUnitWarning: true });
+        this.props.onResetOrgUnitId();
     }
 
     handleOpenProgramWarning = (baseAction: ReduxAction<any, any>) => {
-        if (this.dontShowWarning()) {
-            this.props.onResetProgramId(baseAction);
+        if (this.shouldShowWarning()) {
+            this.setState({ openProgramWarning: baseAction });
             return;
         }
-        this.setState({ openProgramWarning: baseAction });
+        this.props.onResetProgramId(baseAction);
     }
 
     handleOpenCatComboWarning = (categoryId: string) => {
-        if (this.dontShowWarning()) {
-            this.props.onResetCategoryOption && this.props.onResetCategoryOption(categoryId);
+        if (this.shouldShowWarning()) {
+            this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
             return;
         }
-        this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
+        this.props.onResetCategoryOption && this.props.onResetCategoryOption(categoryId);
     }
 
     handleClose = () => {
@@ -72,7 +72,7 @@ class ScopeSelectorClass extends Component<Props, State> {
 
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
-
+        console.log({ props: this.props, state: this.state });
         return (
             <div data-test={'scope-selector'}>
                 <QuickSelector

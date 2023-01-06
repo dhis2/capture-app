@@ -1,8 +1,8 @@
 // @flow
 import { pipe as pipeD2 } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
-import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
-import { of, from } from 'rxjs';
+import { catchError, map, switchMap, takeUntil, delay } from 'rxjs/operators';
+import { EMPTY, of, from } from 'rxjs';
 import {
     actionTypes,
     duplicatesForReviewRetrievalSuccess,
@@ -84,8 +84,11 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                     getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource),
                 );
                 return stream$.pipe(
-                    map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>
-                        duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage)),
+                    delay(5000),
+                    map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
+                        console.log({ searchResults, pagingData });
+                        return duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage);
+                    }),
                     takeUntil(action$.pipe(ofType(searchGroupDuplicateActionTypes.DUPLICATES_RESET))),
                     catchError(() => of(duplicatesForReviewRetrievalFailed())),
 

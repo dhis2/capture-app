@@ -119,6 +119,10 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         locationSwitchInProgress: false,
         page: 'new',
     }),
+    [newPageActionTypes.CHANGE_CONTEXT_WHILE_SAVING]: state => ({
+        ...state,
+        isSavingInProgress: true,
+    }),
     [searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE]: state => ({
         ...state,
         page: null,

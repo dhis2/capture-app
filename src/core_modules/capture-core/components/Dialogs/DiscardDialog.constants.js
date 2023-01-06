@@ -7,3 +7,9 @@ export const defaultDialogProps = {
     destructiveText: i18n.t('Yes, discard changes'),
     cancelText: i18n.t('No, stay here'),
 };
+
+export const savingInProgressDialogProps = {
+    header: i18n.t('Saving in progress'),
+    text: i18n.t('If you switch the context, you will not be redirected to the newly registered $TETypeName after registration completes.'),
+    cancelText: i18n.t('OK'),
+};

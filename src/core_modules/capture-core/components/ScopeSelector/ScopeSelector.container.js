@@ -5,6 +5,7 @@ import { ScopeSelectorComponent } from './ScopeSelector.component';
 import type { OwnProps } from './ScopeSelector.types';
 import { useOrganizationUnit } from './hooks';
 import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
+import { useHistory } from 'react-router';
 
 
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName) => {
@@ -59,7 +60,9 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
         }
     ));
     const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnit.name);
-
+    const isSavingInProgress = useSelector(({ possibleDuplicates }) =>
+        possibleDuplicates.isLoading || possibleDuplicates.isUpdating);
+    const history = useHistory();
     return (
         <ScopeSelectorComponent
             onResetProgramId={onResetProgramId}
@@ -78,6 +81,8 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
             selectedProgramId={selectedProgramId}
             selectedCategories={selectedCategories}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            isSavingInProgress={isSavingInProgress}
+            history={history}
             ready={ready}
         >
             {children}
