@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { getCurrentYear } from '../../support/date';
 import '../sharedSteps';
 
 And('you are on the default registration page', () => {
@@ -335,7 +336,7 @@ And('you see validation error on hemoglobin', () => {
 And('you fill in the visit date', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(0)
-        .type('2021-01-01');
+        .type(`${getCurrentYear()}-01-01`);
 });
 
 And('you fill in the hemoglobin', () => {
@@ -349,7 +350,7 @@ And('you are navigated to the working list', () => {
         .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=lxAQ7Zs9VYR`);
 
     cy.get('[data-test="event-working-lists"]')
-        .contains('2021-01-01')
+        .contains(`${getCurrentYear() - 1}-01-01`)
         .should('exist');
 });
 
@@ -524,7 +525,7 @@ And('you fill the Malaria case diagnosis registration form with values', () => {
         .blur();
     cy.get('[data-test="capture-ui-input"]')
         .eq(5)
-        .type('2022-05-04')
+        .type(`${getCurrentYear()}-05-04`)
         .blur();
 });
 
