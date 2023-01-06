@@ -350,7 +350,7 @@ And('you are navigated to the working list', () => {
         .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=lxAQ7Zs9VYR`);
 
     cy.get('[data-test="event-working-lists"]')
-        .contains(`${getCurrentYear() - 1}-01-01`)
+        .contains(`${getCurrentYear()}-01-01`)
         .should('exist');
 });
 
