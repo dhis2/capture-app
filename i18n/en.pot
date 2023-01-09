@@ -699,8 +699,8 @@ msgstr "Schedule"
 msgid "Refer"
 msgstr "Refer"
 
-msgid "You can’t add any more events in this program"
-msgstr "You can’t add any more events in this program"
+msgid "You can’t add any more {{ programStageName }} events"
+msgstr "You can’t add any more {{ programStageName }} events"
 
 msgid "Cancel without saving"
 msgstr "Cancel without saving"
