@@ -7,6 +7,8 @@ import { EventDetails } from '../EventDetailsSection/EventDetailsSection.contain
 import { Button } from '../../../Buttons/Button.component';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
+import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
+import { defaultDialogProps } from '../../..//Dialogs/ConfirmDialog.constants';
 
 
 const getStyles = (theme: Theme) => ({
@@ -54,10 +56,23 @@ type Props = {
     },
 };
 
-
-class ViewEventPlain extends Component<Props> {
+type State = {
+    warningOpen: boolean
+}
+class ViewEventPlain extends Component<Props, State> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            warningOpen: false,
+        };
+    }
     handleGoBackToAllEvents = () => {
-        this.props.onBackToAllEvents();
+        const { isUserInteractionInProgress, onBackToAllEvents } = this.props;
+        if (!isUserInteractionInProgress) {
+            onBackToAllEvents();
+        } else {
+            this.setState({ warningOpen: true });
+        }
     }
 
     render() {
@@ -79,7 +94,12 @@ class ViewEventPlain extends Component<Props> {
                         dataEntryKey={currentDataEntryKey}
                     />
                 </div>
-
+                <ConfirmDialog
+                    {...defaultDialogProps}
+                    onCancel={() => { this.setState({ warningOpen: false }); }}
+                    onConfirm={() => this.props.onBackToAllEvents()}
+                    open={this.state.warningOpen}
+                />
             </div>
 
         );
