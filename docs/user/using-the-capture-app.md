@@ -2,11 +2,7 @@
 
 ## About the Capture app { #about_capture_app } 
 
-> **Note**
->
-> The Capture app serves as a replacement for the Event Capture app. In the future, the Tracker Capture app and the Data Entry app will also be incorporated into the Capture app.
-
-In the Capture app you register events that occurred at a particular time and place. An event can happen at any given point in time. This stands in contrast to routine data, which is captured for predefined, regular intervals. Events are sometimes called cases or records. In DHIS2, events are linked to a program. The Capture app lets you select the organisation unit and program and specify a date when an event happened, before entering information for the event.
+In the Capture app you register events that occurred at a particular time and place. An event can happen at any given point in time. This stands in contrast to routine data, which is captured for predefined, regular intervals. Events are sometimes called cases or records. In DHIS2, events are linked to a program. The Capture app lets you select the organisation unit and program and specify a date when an event happened, before entering information for the event. Some events are linked to a tracked entity instance, for example a person, allowing longitudinal follow-up.
 
 ## Register an event { #capture_register_event } 
 
@@ -692,6 +688,16 @@ If the fallback can not be done, you will be presented with a modal to go **Back
 
 ![](resources/images/search-by-attributes-fallback-overview-0.png)
 
+#### Create new **Tracked entity instance**
+
+When none of the results match, you can create a new user by clicking **Create new** button on the bottom of the search page. 
+
+Based on the search domain, you will be navigated to the registration of the selected **Tracked entity type**, with or without program enrollment preselected. 
+The search terms that you typed in before will be prefilled in the registration form.
+
+![](resources/images/search-page-create-new-tei.png)
+
+
 ### In Tracked entity type scope
 
 1. Open the **Capture** app.
@@ -788,6 +794,16 @@ Click the **gear** icon in the top right corner of the list. Tick the checkboxes
 You will find the predefined list views above the filters for the list. Click to load a view. 
 
 ![](resources/images/tei_list_predefined_views.png)
+
+## Tracker program stage working list
+
+You can show data elements from a single stage in a working list. Select the "Program stage" option from the "More filters" dropdown, then choose a program stage.
+
+![](resources/images/program_stage_button.png)
+
+![](resources/images/program_stage_working_list.png)
+
+The list can be [filtered](#filter-the-list), [sorted](#sort-the-list) and [modified](#modify-the-list-layout) in the same way as other working lists.
 
 ## Implementer / administrator info { #implementer_info } 
 
@@ -1074,6 +1090,29 @@ To go to Enrollment Overview page you can:
 This is the form where you can modify the event details before saving. In the header you can see the stage name and icon.
 ![](resources/images/new-event-widget-form-header.png)
 
+
+### Scheduled date in edit event form
+If an event has the status Scheduled or Overdue, you will be able to see the **Report** and **Schedule** tab. 
+
+![](resources/images/enrollment-edit-event-schedule-date-1.png)
+
+
+In the **Report** tab, the scheduled date field will still be shown, but will be greyed out, and there will be an icon next to it with a tooltip saying “Go to **Schedule** tab to reschedule this event”.
+
+In the **Schedule** tab, the similar information about scheduling an event as in New event workspace will be shown. You will be able to edit the schedule date and save the change by clicking **Schedule** button.
+
+![](resources/images/enrollment-edit-event-schedule-date.png)
+
+If an active event has a scheduled date before becoming active or a completed event has scheduled date, this date should still be shown in the workspace. 
+It’ll be locked with an icon next to it and a tooltip saying “Scheduled date cannot be changed for active/completed events”. 
+
+#### Scheduled date with Hide due date enabled
+If the flag “Hide due date” in the Maintenance configuration is enabled, scheduled date will not be shown in the form. 
+
+However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from start" that has been configured in Maintenance, and this can not be changed. 
+In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
+
+
 #### View mode
 
 When the form is in the view mode the title of the page will appear as: `Enrollment: View Event`. You can see in the page all the information related to the event. Click the `Edit event` button to switch to the edit mode. 
@@ -1118,21 +1157,57 @@ To navigate back to the enrollment overview, click the **Cancel without saving**
 
 ![](resources/images/enrollment-event-new-stage-selection-list.png)
 
+### Ask user to create new event when stage is complete
+If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user clicks the **Complete** button or checks the **Complete** event checkbox and clicks save. The user can choose the button **Yes, create new event** to navigate to the New Event page or **No, cancel** to navigate back to the enrollment dashboard. If there is only one possible stage available, the user will be taken directly to the New event workspace for that stage.
+
 ### Schedule event widget form
-Instead of reporting an event the user can select to schedule an event later. This is done with a scheduled date. The dialog will open with a suggested scheduled date, and this date is determined by a set of rules from program stage configuration and program configuration.
+Instead of reporting an event the user can select to schedule an event for later. The form will open with a suggested scheduled date. This date is determined by a set of rules as explained below.
 
-- if program stage has **Next schedule date** then the suggested date is the most recent next schedule date
-- if program has **Standard interval days** then the suggested date is calculated by the most recent event date plus the standard interval days value
-- if no value is found after these 2 steps, then the suggested date will be defined by enrollment date and incident date. In case the option **Generate events based on enrollment date** is checked in the Maintenance app, the suggested date is calculated by the enrollment date plus the value of minimum days from the start. In case the option **Show incident date** is checked, the suggested date is calculated by the incident date plus the value of minimum days from the start.
+The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to cumpute the suggested date.
 
-User can also find more information about how many events that scheduled on the same selected date or the interval of selected date and the suggested date from the information box below.
+#### 1. **Default next scheduled date**
+If a program stage has a default next scheduled date configured, the suggested date is the most recent next scheduled date. Below is an example of how this can work.
+>
+1. A data element with value type date needs to be created and assigned to the particular program stage with access to future dates. The name of the data element could for example be: Next suggested follow up date. The program stage is configured to use the data element as default when scheduling a new event by assigning the data element to default next scheduled date.
+
+![](resources/images/schedule_event_01.png)
+
+2. A program rule based on the data entered in the program stage, will determine how many days until the next suggested follow up will be. For example: A program rule with the following condition: #{penta_dose} == '1' (The program rule will trigger when the TEI has received Penta Dose 1), Assign value to the data element: next suggested follow up date with expression: d2:addDays(V{event_date}, '30') **The number suggest how many days from event date the next scheduled event should be.** 
+
+3. Open the Capture app and create a TEI. As long as Penta Dose has value Dose 1, the suggested next scheduled event is 30 days forward from event date. When scheduling a new event, the system will pick up from the data element as long it has value.
+
+![](resources/images/schedule_event_02.png)
+
+![](resources/images/schedule_event_03.png)
+
+![](resources/images/schedule_event_04.png)
+
+User can also find more information about how many events that scheduled on the same selected date or the interval of selected date and the suggested date from the information box.
 
 Below the schedule date entry, user can choose to add a comment to the scheduled event.
 
 After clicking **Schedule** button, user will be navigated back to enrollment overview page.
 
-![](resources/images/enrollment-add-event-schedule-page.png)
+#### 2. **Standard interval days** 
 
+1. If the program stage has standard interval days configured, the suggested date is calculated by the most recent event date plus the standard interval days value. 
+
+![](resources/images/standard_interval_days_01.png)
+
+2. If the program stage do not have a default next scheduled date configured, the system will use the standard interval days to calculate the next scheduled event date. 
+
+![](resources/images/standard_interval_days_02.png)
+
+
+#### 3. **If no value is found on either, the suggested date will be defined by enrollment date and incident date.** 
+
+1. In case the option **Generate events based on enrollment date** is checked in the Maintenance app, the next suggested event date is calculated by the enrollment date plus the value of scheduled days from start. 
+
+![](resources/images/schedule_event_from_enrollmentdate_01.png)
+
+2. In case the option **Show incident date** is checked, the next suggested event date is calculated by the incident date plus the value of scheduled days from start.
+
+![](resources/images/schedule_event_from_incidentdate_01.png)
 
 ## Program stage event list 
 

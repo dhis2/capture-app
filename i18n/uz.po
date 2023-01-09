@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-10T09:42:51.323Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -336,6 +336,18 @@ msgstr "Индикаторлар"
 msgid "Warnings"
 msgstr "Огоҳлантиришлар"
 
+msgid "Generate new event"
+msgstr "Янги ҳодиса/тадбир яратиш"
+
+msgid "Do you want to create another event?"
+msgstr "Ҳақиқатдан ҳам бошқа ҳодиса/тадбир яратмоқчимисиз?"
+
+msgid "No, cancel"
+msgstr "Йўқ, бекор қилинг"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "Огоҳлантиришлар топилди"
 
@@ -516,6 +528,9 @@ msgstr "Янгилаш"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr "Фильтрни олиб ташлаш"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} дан {{toDate}} га"
 
@@ -533,6 +548,9 @@ msgstr "дан кам ёки тенг"
 
 msgid "More filters"
 msgstr "Кўпроқ фильтр"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "Саҳифада қаторлар"
@@ -569,9 +587,6 @@ msgstr ""
 
 msgid "Opt in for {{programName}}"
 msgstr ""
-
-msgid "No, cancel"
-msgstr "Йўқ, бекор қилинг"
 
 msgid "Yes, opt in"
 msgstr ""
@@ -895,12 +910,6 @@ msgstr "Қайта рўйхатдан ўтиш"
 msgid "all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Янгисини яратиш"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -910,6 +919,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "Барча дастурларда қидириш"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Янгисини яратиш"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1143,6 +1158,9 @@ msgstr ""
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Ҳодиса/тадбир якунланди"
 
@@ -1150,6 +1168,9 @@ msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Schedule date info"
+msgstr ""
+
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
 
 msgid ""
@@ -1294,6 +1315,9 @@ msgstr "Рўйхатга олиш ҳолати"
 msgid "Assigned to"
 msgstr "Тайинланган"
 
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "Рўйхатга олинган сана"
 
@@ -1356,6 +1380,9 @@ msgstr "Муддат ўтган"
 
 msgid "Skipped"
 msgstr "Ўтказиб юборилди"
+
+msgid "Visited"
+msgstr "Ташриф буюрди"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{escape}} {{programName}} дастурида {{trackedEntityName}} "

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { pipe } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core/';
+import { dataEntryIds } from 'capture-core/constants';
 import i18n from '@dhis2/d2-i18n';
 import {
     placements,
@@ -23,7 +24,6 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
-import { statusTypes } from '../../../events/statusTypes';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -143,7 +143,7 @@ const buildScheduleDateSettingsFn = () => {
             label: `${props.formFoundation.getLabel('scheduledAt')}`,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getIsHidden: (props: Object) => ![statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(props.eventStatus),
+        getIsHidden: (props: Object) => props.id !== dataEntryIds.ENROLLMENT_EVENT || props.hideDueDate,
         getPropName: () => 'scheduledAt',
         getMeta: () => ({
             placement: placements.TOP,
@@ -266,6 +266,7 @@ class ViewEventDataEntryPlain extends Component<Props> {
             dataEntryId,
             ...passOnProps
         } = this.props;
+
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper

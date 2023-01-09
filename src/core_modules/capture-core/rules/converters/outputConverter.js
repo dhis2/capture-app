@@ -7,101 +7,55 @@ import { convertMomentToDateFormatString } from '../../utils/converters/date';
 
 const dateMomentFormat = 'YYYY-MM-DD';
 
-class RulesValueConverter implements IConvertOutputRulesEffectsValue {
-    convertText(value: string): string {
-        return value;
-    }
+export const outputConverter: IConvertOutputRulesEffectsValue = {
+    convertText: (value: string): string => value,
 
-    convertLongText(value: string): string {
-        return value;
-    }
-
-    convertLetter(value: string): string {
-        return value;
-    }
-
-    convertPhoneNumber(value: string): string {
-        return value;
-    }
-
-    convertEmail(value: string): string {
-        return value;
-    }
-
-    convertBoolean(value: boolean): string {
-        return value ? 'true' : 'false';
-    }
-
-    convertTrueOnly(): string {
-        return 'true';
-    }
-
-    convertDate(value: string): string {
+    convertLongText: (value: string): string => value,
+    convertLetter: (value: string): string => value,
+    convertPhoneNumber: (value: string): string => value,
+    convertEmail: (value: string): string => value,
+    convertBoolean: (value: boolean): string => (value ? 'true' : 'false'),
+    convertTrueOnly: (value: boolean): string => (value ? 'true' : 'false'),
+    convertDate: (value: string): string => {
         const momentDate = moment(value, dateMomentFormat);
         return convertMomentToDateFormatString(momentDate);
-    }
-
-    convertDateTime(value: string): ?Object {
+    },
+    convertDateTime: (value: string): ?Object => {
         const momentDateTime = moment(value);
         return {
             date: convertMomentToDateFormatString(momentDateTime),
             time: momentDateTime.format('HH:mm'),
         };
-    }
-
-    convertTime(value: string): string {
-        return value;
-    }
-
-    convertNumber(value: number): string {
-        return value.toString();
-    }
-
-    convertUnitInterval(value: number): string {
-        return value.toString();
-    }
-
-    convertPercentage(value: number): string {
-        return value.toString();
-    }
-
-    convertInteger(value: number): string {
-        return value.toString();
-    }
-
-    convertIntegerPositive(value: number): string {
-        return value.toString();
-    }
-
-    convertIntegerNegative(value: number): string {
-        return value.toString();
-    }
-
-    convertIntegerZeroOrPositive(value: number): string {
-        return value.toString();
-    }
-
-    convertTrackerAssociate(value: string): any {
+    },
+    convertTime: (value: string): string => value,
+    convertNumber: (value: number): string => (value.toString()),
+    convertUnitInterval: (value: number): string => (value.toString()),
+    convertPercentage: (value: number): string => (value.toString()),
+    convertInteger: (value: number): string => (value.toString()),
+    convertIntegerPositive: (value: number): string => (value.toString()),
+    convertIntegerNegative: (value: number): string => (value.toString()),
+    convertIntegerZeroOrPositive: (value: number): string => (value.toString()),
+    convertTrackerAssociate: (value: string): any => {
         log.warn('convertTrackerAssociate not implemented', value);
         return '';
-    }
-
-    convertUserName(value: string): any {
+    },
+    convertUserName: (value: string): any => {
         log.warn('convertUserName not implemented', value);
         return '';
-    }
-
-    convertCoordinate(value: string): any {
-        log.warn('convertCoordinate not implemented', value);
-        return '';
-    }
-
-    convertOrganisationUnit(value: string): any {
+    },
+    convertCoordinate: (value: string): any => {
+        const trimmedValue = value.trim();
+        const coordinates = trimmedValue.substring(1, trimmedValue.length - 1).split(',');
+        return {
+            latitude: Number(coordinates[0]),
+            longitude: Number(coordinates[1]),
+        };
+    },
+    convertOrganisationUnit: (value: string): any => {
         log.warn('convertOrganisationUnit not implemented', value);
         return '';
-    }
-
-    convertAge(value: string): Object {
+    },
+    convertAge: (value: string): Object => {
         const now = moment();
         const age = moment(value, dateMomentFormat);
 
@@ -119,21 +73,14 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
             months: months.toString(),
             days: days.toString(),
         };
-    }
-
-    convertUrl(value: string): string {
-        return value;
-    }
-
-    convertFile(value: string): any {
+    },
+    convertUrl: (value: string): string => value,
+    convertFile: (value: string): any => {
         log.warn('convertFile not implemented', value);
         return '';
-    }
-
-    convertImage(value: string): any {
+    },
+    convertImage: (value: string): any => {
         log.warn('convertImage not implemented', value);
         return '';
-    }
-}
-
-export const outputConverter = new RulesValueConverter();
+    },
+};

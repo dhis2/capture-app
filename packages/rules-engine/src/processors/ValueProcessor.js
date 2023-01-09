@@ -31,6 +31,6 @@ export class ValueProcessor {
         }
         // $FlowFixMe
         const convertedValue = this.converterObject[convertFnName] ? this.converterObject[convertFnName](value) : value;
-        return convertedValue;
+        return convertedValue ?? null;
     }
 }

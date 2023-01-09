@@ -1,3 +1,5 @@
+import '../sharedSteps';
+
 const showAllEventsInProgramStage = () => {
     cy.get('[data-test="dhis2-uicore-tablefoot"]')
         .then(($footer) => {
@@ -8,6 +10,20 @@ const showAllEventsInProgramStage = () => {
             }
         });
 };
+
+Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
+    cy.visit('/#/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI');
+});
+
+When(/^you opt in to use the new enrollment Dashboard for (.*)$/, (program) => {
+    cy.get('[data-test="main-page-working-list"]').then(($wrapper) => {
+        if ($wrapper.find('[data-test="opt-in"]').length > 0) {
+            cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`).click();
+            cy.contains('[data-test="dhis2-uicore-button"]', 'Yes, opt in').click();
+            cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`);
+        }
+    });
+});
 
 Given(/^you land on the enrollment new event page by having typed (.*)$/, (url) => {
     cy.visit(url);
@@ -24,6 +40,16 @@ When(/^you type (.*) in the input number (.*)$/, (value, eq) => {
         .eq(eq)
         .type(value)
         .blur();
+});
+
+When(/^you select (.*) in the select number (.*)$/, (value, eq) => {
+    cy
+        .get('[data-test="new-enrollment-event-form"]')
+        .get('[data-test="virtualized-select"]')
+        .eq(eq)
+        .click()
+        .contains(value)
+        .click();
 });
 
 When(/^you click the checkbox number (.*)$/, (eq) => {
@@ -96,4 +122,21 @@ When(/^you focus and blur a required field/, () => {
 Then(/^the input should throw an error with error-message (.*)$/, (error) => {
     cy.get('[data-test="error-message"]')
         .contains(error);
+});
+
+
+Then('there should be a modal popping up', () => {
+    cy.contains('[data-test="dhis2-uicore-modal"]', 'Generate new event')
+        .should('exist');
+});
+
+When(/^you choose option (.*) in the modal$/, (buttonText) => {
+    cy.get('[data-test="dhis2-uicore-modal"]')
+        .find('[data-test="dhis2-uicore-button"]')
+        .contains(buttonText)
+        .click();
+});
+
+Then(/^you will be navigate to page (.*)$/, (url) => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/${url}`);
 });

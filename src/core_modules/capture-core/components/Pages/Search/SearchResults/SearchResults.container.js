@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SearchResultsComponent } from './SearchResults.component';
 import type { Props, PropsFromRedux, DispatchersFromRedux, OwnProps } from './SearchResults.types';
-import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram, startFallbackSearch } from '../SearchPage.actions';
+import { navigateToNewUserPage, searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram, startFallbackSearch } from '../SearchPage.actions';
 import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
 import { searchScopes, PAGINATION } from '../SearchPage.constants';
 
@@ -90,6 +90,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { availableSearchOptions })
             pageSize: resultsPageSize,
             page,
         }));
+    },
+    handleCreateNew: () => {
+        dispatch(navigateToNewUserPage());
     },
 });
 

@@ -17,7 +17,7 @@ Feature: User interacts with Main page
         And the user selects the program MNCH / PNC (Adult Woman)
         And the user selects the org unit Ngelehun CHC
         Then the search form is displayed
-        And the user clicks the element containing the text: Create custom working list
+        And the user clicks the element containing the text: Create saved list
         Then the current url is /#/?orgUnitId=DiszpKrYNg8&programId=uy2gU8kT1jF&selectedTemplateId=uy2gU8kT1jF-default
         And the TEI working list is displayed
 
@@ -30,7 +30,7 @@ Feature: User interacts with Main page
 
     Scenario: You are redirected to create a custom working list
         Given you are in the search page with Ngelehun and MNCH / PNC context
-        And the user clicks the element containing the text: Create custom working list
+        And the user clicks the element containing the text: Create saved list
         Then the current url is /#/?orgUnitId=DiszpKrYNg8&programId=uy2gU8kT1jF&selectedTemplateId=uy2gU8kT1jF-default
         And the TEI working list is displayed
 

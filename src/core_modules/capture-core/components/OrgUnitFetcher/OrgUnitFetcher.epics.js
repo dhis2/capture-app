@@ -5,7 +5,7 @@ import { from, of } from 'rxjs';
 import { actionTypes, setCurrentOrgUnit, errorRetrievingOrgUnit } from './OrgUnitFetcher.actions';
 
 
-const orgUnitsQuery = id => ({ resource: 'organisationUnits', id });
+const orgUnitsQuery = id => ({ resource: `organisationUnits/${id}` });
 
 export const orgUnitFetcherEpic = (action$: InputObservable, _: ReduxStore, { querySingleResource }: ApiUtils,
 ) => action$.pipe(

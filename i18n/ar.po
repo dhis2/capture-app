@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -331,6 +331,18 @@ msgstr "المؤشرات"
 msgid "Warnings"
 msgstr "تحذيرات"
 
+msgid "Generate new event"
+msgstr "توليد حدث جديد"
+
+msgid "Do you want to create another event?"
+msgstr "هل تريد إنشاء حدث جديد"
+
+msgid "No, cancel"
+msgstr "لا، الغاء"
+
+msgid "Yes, create new event"
+msgstr ""
+
 msgid "Warnings found"
 msgstr "تم العثور على إشعارات تحذيرية"
 
@@ -511,6 +523,9 @@ msgstr "تحديث"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr "إزالة عامل التصفية"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} إلى {{toDate}}"
 
@@ -528,6 +543,9 @@ msgstr "أقل من أو يساوي"
 
 msgid "More filters"
 msgstr "عوامل تصفية أكثر"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "عدد الصفوف لكل صفحة"
@@ -564,9 +582,6 @@ msgstr ""
 
 msgid "Opt in for {{programName}}"
 msgstr ""
-
-msgid "No, cancel"
-msgstr "لا، الغاء"
 
 msgid "Yes, opt in"
 msgstr ""
@@ -755,7 +770,7 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
-msgid "Save new"
+msgid "Save {{trackedEntityName}}"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -875,12 +890,6 @@ msgstr "إعادة التسجيل"
 msgid "all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create new "
-msgstr ""
-
-msgid "Create new"
-msgstr "إنشاء جديد"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -890,6 +899,12 @@ msgstr ""
 
 msgid "Search in all programs"
 msgstr "البحث في جميع البرامج"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "إنشاء جديد"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1120,6 +1135,9 @@ msgstr ""
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr "الحدث مكتمل"
 
@@ -1129,13 +1147,16 @@ msgstr ""
 msgid "Schedule date info"
 msgstr ""
 
-msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgid ""
+"The scheduled date matches the suggested date, but can be changed if needed."
+msgstr ""
+
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -1280,6 +1301,9 @@ msgstr "حالة التسجيل"
 msgid "Assigned to"
 msgstr "مسندة إلى"
 
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "تاريخ التسجيل"
 
@@ -1342,6 +1366,9 @@ msgstr "المتأخرة"
 
 msgid "Skipped"
 msgstr "التي تم تخطيها"
+
+msgid "Visited"
+msgstr "تم زيارته"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
