@@ -27,7 +27,7 @@ export class ValueProcessor {
 
 
     const convertedValue = this.converterObject[convertFnName] ? this.converterObject[convertFnName](value) : value;
-    return convertedValue;
+    return convertedValue !== null && convertedValue !== void 0 ? convertedValue : null;
   }
 
 }

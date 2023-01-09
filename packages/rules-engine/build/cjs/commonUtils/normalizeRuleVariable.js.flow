@@ -2,7 +2,9 @@
 import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 import { typeKeys } from '../constants';
-
-// Turns the internal representation of a program rule variable into its "canonical" format
+declare var convertNumber: (numberRepresentation: any) => any;
+declare var convertBoolean: (value: any) => any;
+declare var convertString: (stringRepresentation: number | string) => string; // Turns the internal representation of a program rule variable into its "canonical" format
 // (e.g. numbers represented as strings get converted to numbers)
+// Used to preprocess a computed value before assigning it to a calculated program rule variable
 declare export var normalizeRuleVariable: (data: any, valueType: string) => any;

@@ -13,34 +13,37 @@ var _constants = require("../constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Turns the internal representation of a program rule variable into its "canonical" format
-// (e.g. numbers represented as strings get converted to numbers)
-const normalizeRuleVariable = (data, valueType) => {
-  const convertNumber = numberRepresentation => {
-    if ((0, _isString.default)(numberRepresentation)) {
-      if (isNaN(numberRepresentation)) {
-        _loglevel.default.warn("rule execution service could not convert ".concat(numberRepresentation, " to number"));
+const convertNumber = numberRepresentation => {
+  if ((0, _isString.default)(numberRepresentation)) {
+    if (isNaN(numberRepresentation)) {
+      _loglevel.default.warn("rule execution service could not convert ".concat(numberRepresentation, " to number"));
 
-        return null;
-      }
-
-      return Number(numberRepresentation);
+      return null;
     }
 
-    return numberRepresentation;
-  };
+    return Number(numberRepresentation);
+  }
 
-  const convertString = stringRepresentation => stringRepresentation.toString();
+  return numberRepresentation;
+};
 
+const convertBoolean = value => {
+  if ((0, _isString.default)(value)) {
+    return value === 'true';
+  }
+
+  return value;
+};
+
+const convertString = stringRepresentation => stringRepresentation.toString(); // Turns the internal representation of a program rule variable into its "canonical" format
+// (e.g. numbers represented as strings get converted to numbers)
+// Used to preprocess a computed value before assigning it to a calculated program rule variable
+
+
+const normalizeRuleVariable = (data, valueType) => {
   const ruleEffectDataConvertersByType = {
-    [_constants.typeKeys.BOOLEAN]: value => {
-      if ((0, _isString.default)(value)) {
-        return value === 'true';
-      }
-
-      return value;
-    },
-    [_constants.typeKeys.TRUE_ONLY]: () => true,
+    [_constants.typeKeys.BOOLEAN]: convertBoolean,
+    [_constants.typeKeys.TRUE_ONLY]: convertBoolean,
     [_constants.typeKeys.PERCENTAGE]: convertString,
     [_constants.typeKeys.INTEGER]: convertNumber,
     [_constants.typeKeys.INTEGER_NEGATIVE]: convertNumber,

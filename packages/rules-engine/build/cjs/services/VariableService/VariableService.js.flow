@@ -4,6 +4,8 @@ import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import { typeKeys, typeof environmentTypes } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
 import { getStructureEvents } from './helpers';
+import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable';
+import { defaultValues } from './defaultValues';
 import type { VariableServiceInput, ProgramRuleVariable, EventData, EventsData, EventsDataContainer, OptionSets, Enrollment, TEIValues, Constants } from './variableService.types';
 import type { DataElement, DataElements, TrackedEntityAttribute, TrackedEntityAttributes, RuleVariable, RuleVariables, IDateUtils, OrgUnit } from '../../rulesEngine.types';
 type SourceData = {
@@ -30,19 +32,18 @@ export const variableSourceTypes = {
   ...variableSourceTypesTrackedEntitySpecific,
   CALCULATED_VALUE: 'CALCULATED_VALUE'
 };
-const EMPTY_STRING = '';
 declare export class VariableService {
-  static getDataElementValueForVariable(value: any, dataElementId: string, useNameForOptionSet: ?boolean, dataElements: ?DataElements, optionSets: OptionSets): any,
-  static getTrackedEntityValueForVariable(value: any, trackedEntityAttributeId: string, useNameForOptionSet: ?boolean, trackedEntityAttributes: ?TrackedEntityAttributes, optionSets: OptionSets): any,
   static dateUtils: IDateUtils,
   environment: $Values<environmentTypes>,
   onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
   mapSourceTypeToGetterFn: {
     [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable
   },
+  defaultValues: any,
   structureEvents: (currentEvent?: EventData, events?: EventsData) => EventsDataContainer,
   constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any, dateUtils: IDateUtils, environment: $Values<environmentTypes>): any,
   getVariables(arg0: VariableServiceInput): any,
+  updateVariable(variableToAssign: string, data: any, variablesHash: RuleVariables): any,
   buildVariable(value: any, type: string, arg2: {
     variablePrefix: string,
     allValues?: ?Array<any>,
@@ -52,12 +53,14 @@ declare export class VariableService {
   preCheckDataElementSpecificSourceType(programVariable: ProgramRuleVariable, dataElements: ?DataElements): any,
   preCheckTrackedEntitySpecificSourceType(programVariable: ProgramRuleVariable, trackedEntityAttributes: ?TrackedEntityAttributes): any,
   postGetVariableForDataElementSpecificSourceType(programVariable: ProgramRuleVariable, dataElements: DataElements): any,
+  getVariableValue(rawValue: any, valueType: string, dataElementId: string, useNameForOptionSet: ?boolean, dataElements: ?DataElements | ?TrackedEntityAttributes, optionSets: OptionSets): any,
   getVariableForCalculatedValue(programVariable: ProgramRuleVariable): ?RuleVariable,
   getVariableForSelectedEntityAttributes(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable,
   getVariableForCurrentEvent(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable,
   getVariableForNewestEventProgramStage(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable,
   getVariableForNewestEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable,
   getVariableForPreviousEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable,
+  getVariableContainingAllValues(programVariable: ProgramRuleVariable, sourceData: SourceData, events: EventsData): ?RuleVariable,
   getContextVariables(sourceData: SourceData): RuleVariables,
   getEventContextVariables(executingEvent: ?EventData, eventsContainer: ?EventsDataContainer): any,
   getEnrollmentContextVariables(selectedEnrollment: ?Enrollment): any,

@@ -19,38 +19,7 @@ var _rulesEffectsProcessor = require("./processors/rulesEffectsProcessor/rulesEf
 
 var _constants = require("./constants");
 
-var _normalizeRuleVariable = require("./commonUtils/normalizeRuleVariable");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * We update the variables hash so that the next rule can use the updated values.
- * @param variableToAssign
- * @param data
- * @param variablesHash
- */
-function updateVariable(variableToAssign, data, variablesHash) {
-  const variableHashKey = variableToAssign.replace('#{', '').replace('A{', '').replace('}', '');
-  const variableHash = variablesHash[variableHashKey];
-
-  if (!variableHash) {
-    // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-    _loglevel.default.warn("Variable ".concat(variableHashKey, " was not defined."));
-  } else {
-    const {
-      variableType
-    } = variableHash;
-    const variableValue = (0, _normalizeRuleVariable.normalizeRuleVariable)(data, variableType);
-    variablesHash[variableHashKey] = { ...variableHash,
-      variableValue,
-      variableType,
-      hasValue: true,
-      variableEventDate: '',
-      variablePrefix: variableHash.variablePrefix || '#',
-      allValues: [variableValue]
-    };
-  }
-}
 
 class RulesEngine {
   constructor(inputConverter, outputConverter, dateUtils, environment) {
@@ -183,7 +152,7 @@ class RulesEngine {
 
           if (action === _constants.effectActions.ASSIGN_VALUE && content) {
             // the program rule variable id is found in the content key
-            updateVariable(content, actionExpressionResult, variablesHash);
+            this.variableService.updateVariable(content, actionExpressionResult, variablesHash);
           }
 
           return {
