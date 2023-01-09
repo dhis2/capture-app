@@ -8,7 +8,7 @@ import { Button } from '../../../Buttons/Button.component';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
 import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
-import { defaultDialogProps } from '../../..//Dialogs/ConfirmDialog.constants';
+import { defaultDialogProps } from '../../../Dialogs/ConfirmDialog.constants';
 
 
 const getStyles = (theme: Theme) => ({
@@ -47,6 +47,7 @@ type Props = {
     currentDataEntryKey: string,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
+    isUserInteractionInProgress: boolean,
     classes: {
         container: string,
         contentContainer: string,
