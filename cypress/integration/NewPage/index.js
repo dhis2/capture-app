@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { getCurrentDate, getCurrentYear } from '../../support/date';
+import { getCurrentYear } from '../../support/date';
 import '../sharedSteps';
 
 And('you are on the default registration page', () => {
@@ -525,7 +525,7 @@ And('you fill the Malaria case diagnosis registration form with values', () => {
         .blur();
     cy.get('[data-test="capture-ui-input"]')
         .eq(5)
-        .type(getCurrentDate())
+        .type(moment().add(-1, 'day').format('YYYY-MM-DD'))
         .blur();
 });
 
