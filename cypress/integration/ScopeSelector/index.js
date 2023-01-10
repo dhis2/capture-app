@@ -1,3 +1,4 @@
+import { getCurrentYear } from '../../support/date';
 import '../sharedSteps';
 
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
@@ -239,7 +240,7 @@ const emptyProgramSelection = ['Program', 'Select program'];
 const selectedOrgUnit = ['Selected registering unit', 'Taninahun (Malen) CHP'];
 const emptyOrgUnitSelection = ['Registering Organisation Unit'];
 const selectedTei = ['Selected person', 'Carlos Cruz'];
-const selectedEnrollment = ['Selected enrollment', '2023-07-01 12:05'];
+const selectedEnrollment = ['Selected enrollment', `${getCurrentYear() + 1}-07-01 12:05`];
 const emptyEnrollmentSelection = ['Enrollment', 'Select...'];
 
 const scopeSelectorCases = {
