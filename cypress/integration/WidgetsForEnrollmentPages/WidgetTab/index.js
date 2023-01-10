@@ -1,3 +1,5 @@
+const { getCurrentYear } = require('../../../support/date');
+
 Then(/you should see tabs: (.*)/, (tabNames) => {
     const tabs = tabNames.split(',');
     cy.get('[data-test="add-event-enrollment-page-content"]').within(() => {
@@ -21,6 +23,6 @@ Then('you should see Schedule tab', () => {
 
 And(/you should see suggested date: (.*)/, (date) => {
     cy.get('[data-test="schedule-section"]').within(() => {
-        cy.get('[data-test="capture-ui-input"]').should('have.value', date);
+        cy.get('[data-test="capture-ui-input"]').should('have.value', `${getCurrentYear()}-${date}`);
     });
 });

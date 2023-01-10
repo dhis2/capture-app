@@ -1,3 +1,4 @@
+import { getCurrentYear } from '../../../support/date';
 import '../../sharedSteps';
 
 Given(/^you land on the enrollment event page with selected (.*) by having typed (.*)$/, (tet, url) => {
@@ -65,10 +66,10 @@ When('the user clicks switch tab to Schedule', () => {
 
 Then('the user selects another schedule date', () => {
     cy.get('[data-test="schedule-section"]').within(() => {
-        cy.get("[data-test='capture-ui-input']").eq(0).should('have.value', '2007-01-07');
+        cy.get("[data-test='capture-ui-input']").eq(0).should('have.value', `${getCurrentYear() - 15}-01-07`);
         cy.get("[data-test='capture-ui-input']").eq(0)
             .clear()
-            .type('2022-08-01')
+            .type(`${getCurrentYear()}-08-01`)
             .blur();
     });
 });
@@ -84,7 +85,7 @@ Then(/^the user clicks on the schedule button on (.*)$/, (widgetName) => {
 Then('the user see the schedule date and info box', () => {
     cy.get('[data-test="schedule-section"]').within(() => {
         cy.contains('Schedule date / Due date');
-        cy.contains('Scheduled automatically for 2021-10-16');
+        cy.contains(`Scheduled automatically for ${getCurrentYear() - 1}-10-16`);
     });
 });
 

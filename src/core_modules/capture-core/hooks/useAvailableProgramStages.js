@@ -9,8 +9,8 @@ import { useProgramFromIndexedDB } from '../utils/cachedDataHooks/useProgramFrom
 export const useAvailableProgramStages = (programStage: ProgramStage, teiId: string, enrollmentId: string, programId: string) => {
     const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const {
-        loading: programLoading,
-        error: programError,
+        isLoading: programLoading,
+        isError: programError,
         program,
     } = useProgramFromIndexedDB(programId);
 
