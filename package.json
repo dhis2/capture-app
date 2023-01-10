@@ -1,7 +1,7 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "100.22.1",
+  "version": "100.23.0",
   "cacheVersion": "4",
   "serverVersion": "38",
   "private": true,
@@ -45,6 +45,7 @@
     "react-leaflet-draw": "0.19.0",
     "react-leaflet-search-unpolyfilled": "^0.1.0",
     "react-popper": "^2.2.4",
+    "react-query": "3",
     "react-redux": "^7.2.8",
     "react-router-dom": "^5.3.0",
     "react-rte": "^0.16.5",
