@@ -10,13 +10,13 @@ import type { Props } from './addLocation.types';
 const DEFAULT_CENTER = [51.505, -0.09];
 export const AddLocation = ({ enrollment, onUpdate }: Props) => {
     const [isOpen, setOpen] = useState(false);
-    const { program, loading, error } = useProgramFromIndexedDB(enrollment.program);
+    const { program, isLoading, isError } = useProgramFromIndexedDB(enrollment.program);
     const geometryType = useMemo(() => {
         if (!program) { return undefined; }
         return program.featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
     }, [program]);
 
-    if (loading || error) {
+    if (isLoading || isError) {
         return null;
     }
     if (enrollment.geometry || !program?.featureType) {
