@@ -85,6 +85,12 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
     getFormId() {
         return this.props.id;
     }
+    // eslint-disable-next-line
+    onBlur() {
+        document.querySelectorAll('input').forEach((input) => {
+            input.blur();
+        });
+    }
 
     getFormBuilderId(sectionId: string) {
         return `${this.props.id}-${sectionId}`;

@@ -137,10 +137,8 @@ const SearchFormIndex = ({
 
     return useMemo(() => {
         const formReference = {};
-
-        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId) => {
-            const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
-
+        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId, formRef) => {
+            const isValid = formRef.validateFormScrollToFirstFailedField({});
             if (isValid) {
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
@@ -185,7 +183,30 @@ const SearchFormIndex = ({
                     )
                 }
             </div>);
-        return (<>
+
+        const handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+            if (event.key === 'Enter') {
+                const { unique, searchScope, minAttributesRequiredToSearch }
+                = searchGroupsForSelectedScope.find(({ formId }) => expandedFormId === formId);
+                const formRef = formReference[expandedFormId];
+
+                formRef.onBlur();
+
+                setTimeout(() => {
+                    if (unique) {
+                        handleSearchViaUniqueId(searchScope, selectedSearchScopeId, expandedFormId, formRef);
+                    } else {
+                        handleSearchViaAttributes(searchScope, selectedSearchScopeId, expandedFormId, minAttributesRequiredToSearch);
+                    }
+                }, 33);
+            }
+        };
+
+        return (<div
+            tabIndex={-1}
+            onKeyPress={handleKeyPress}
+            role={'none'}
+        >
             {
                 searchGroupsForSelectedScope
                     .filter(searchGroup => searchGroup.unique)
@@ -230,6 +251,7 @@ const SearchFormIndex = ({
                                                 searchScope,
                                                 selectedSearchScopeId,
                                                 formId,
+                                                formReference[formId],
                                             )}
                                         >
                                             {i18n.t('Search by {{name}}', {
@@ -250,7 +272,10 @@ const SearchFormIndex = ({
                         const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
-                            <div key={formId} data-test="form-attributes">
+                            <div
+                                key={formId}
+                                data-test="form-attributes"
+                            >
                                 <Section
                                     isCollapsed={isSearchSectionCollapsed}
                                     className={classes.searchDomainSelectorSection}
@@ -298,7 +323,7 @@ const SearchFormIndex = ({
                         );
                     })
             }
-        </>);
+        </div>);
     },
     [
         classes.searchButtonContainer,
