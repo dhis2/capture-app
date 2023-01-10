@@ -185,20 +185,23 @@ const SearchFormIndex = ({
             </div>);
 
         const handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
-            if (event.key === 'Enter') {
-                const { unique, searchScope, minAttributesRequiredToSearch }
+            if (event.key === 'Enter' && expandedFormId && selectedSearchScopeId) {
+                const selectedSearchGroup
                 = searchGroupsForSelectedScope.find(({ formId }) => expandedFormId === formId);
-                const formRef = formReference[expandedFormId];
+                if (selectedSearchGroup) {
+                    const { unique, searchScope, minAttributesRequiredToSearch } = selectedSearchGroup;
+                    const formRef = formReference[expandedFormId];
 
-                formRef.onBlur();
+                    formRef.onBlur();
 
-                setTimeout(() => {
-                    if (unique) {
-                        handleSearchViaUniqueId(searchScope, selectedSearchScopeId, expandedFormId, formRef);
-                    } else {
-                        handleSearchViaAttributes(searchScope, selectedSearchScopeId, expandedFormId, minAttributesRequiredToSearch);
-                    }
-                }, 33);
+                    setTimeout(() => {
+                        if (unique) {
+                            handleSearchViaUniqueId(searchScope, selectedSearchScopeId, expandedFormId, formRef);
+                        } else {
+                            handleSearchViaAttributes(searchScope, selectedSearchScopeId, expandedFormId, minAttributesRequiredToSearch);
+                        }
+                    }, 33);
+                }
             }
         };
 
