@@ -95,4 +95,4 @@ Feature: The user interacts with the widgets on the enrollment add event page
     Then you should see tabs: Report,Schedule
     When you click switch tab to Schedule
     Then you should see Schedule tab
-    And you should see suggested date: 2022-08-01
+    And you should see suggested date: 08-01

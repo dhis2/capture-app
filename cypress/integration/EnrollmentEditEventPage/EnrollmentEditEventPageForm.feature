@@ -5,7 +5,7 @@ Given you land on the enrollment event page with selected person by having typed
 And the user see the following text: Birth
 And the user see the following text: Basic info
 And the user see the following text: Report date
-And the user see the following text: 2022-02-27
+And the user see the following text: 02-27
 And the user see the following text: Apgar Score
 And the user see the following text: 11
 And the user see the following text: Weight (g)

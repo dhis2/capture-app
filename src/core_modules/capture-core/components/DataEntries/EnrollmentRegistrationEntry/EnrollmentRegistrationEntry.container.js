@@ -21,7 +21,9 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     const isUserInteractionInProgress: boolean = useSelector(
         state =>
             dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
-          || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
+          || dataEntryHasChanges(state, 'newPageDataEntryId-newTei')
+          || dataEntryHasChanges(state, 'relationship-newTei')
+          || dataEntryHasChanges(state, 'relationship-newEnrollment'),
     );
 
     if (error) {
