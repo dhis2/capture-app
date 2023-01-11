@@ -138,6 +138,7 @@ const SearchFormIndex = ({
     return useMemo(() => {
         const formReference = {};
         const containerButtonRef = {};
+
         const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId) => {
             const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
             if (isValid) {
@@ -265,10 +266,7 @@ const SearchFormIndex = ({
                         const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
-                            <div
-                                key={formId}
-                                data-test="form-attributes"
-                            >
+                            <div key={formId} data-test="form-attributes">
                                 <Section
                                     isCollapsed={isSearchSectionCollapsed}
                                     className={classes.searchDomainSelectorSection}
