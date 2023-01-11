@@ -137,8 +137,9 @@ const SearchFormIndex = ({
 
     return useMemo(() => {
         const formReference = {};
-        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId, formRef) => {
-            const isValid = formRef.validateFormScrollToFirstFailedField({});
+        const containerButtonRef = {};
+        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId) => {
+            const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
             if (isValid) {
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
@@ -186,22 +187,9 @@ const SearchFormIndex = ({
 
         const handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
             if (event.key === 'Enter' && expandedFormId && selectedSearchScopeId) {
-                const selectedSearchGroup
-                = searchGroupsForSelectedScope.find(({ formId }) => expandedFormId === formId);
-                if (selectedSearchGroup) {
-                    const { unique, searchScope, minAttributesRequiredToSearch } = selectedSearchGroup;
-                    const formRef = formReference[expandedFormId];
-
-                    formRef.onBlur();
-
-                    setTimeout(() => {
-                        if (unique) {
-                            handleSearchViaUniqueId(searchScope, selectedSearchScopeId, expandedFormId, formRef);
-                        } else {
-                            handleSearchViaAttributes(searchScope, selectedSearchScopeId, expandedFormId, minAttributesRequiredToSearch);
-                        }
-                    }, 33);
-                }
+                const buttonRef = containerButtonRef[expandedFormId].children[0];
+                buttonRef.focus();
+                setTimeout(() => { buttonRef.click(); });
             }
         };
 
@@ -245,7 +233,10 @@ const SearchFormIndex = ({
                                             />
                                         </div>
                                     </div>
-                                    <div className={classes.searchButtonContainer}>
+                                    <div
+                                        className={classes.searchButtonContainer}
+                                        ref={(ref) => { containerButtonRef[formId] = ref; }}
+                                    >
                                         <Button
                                             disabled={searchStatus === searchPageStatus.LOADING}
                                             onClick={() =>
@@ -254,7 +245,6 @@ const SearchFormIndex = ({
                                                 searchScope,
                                                 selectedSearchScopeId,
                                                 formId,
-                                                formReference[formId],
                                             )}
                                         >
                                             {i18n.t('Search by {{name}}', {
@@ -301,7 +291,10 @@ const SearchFormIndex = ({
                                             />
                                         </div>
                                     </div>
-                                    <div className={classes.searchButtonContainer}>
+                                    <div
+                                        className={classes.searchButtonContainer}
+                                        ref={(ref) => { containerButtonRef[formId] = ref; }}
+                                    >
                                         <Button
                                             disabled={searchStatus === searchPageStatus.LOADING}
                                             onClick={() =>
