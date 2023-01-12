@@ -26,4 +26,3 @@ Then('you should see confirm dialog', () => {
         .find('[data-test="dhis2-uicore-button"]')
         .contains('Yes, discard').click({ force: true }); // Add {force:true} to disable the error due to layer parent has css display: none
 });
-

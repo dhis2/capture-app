@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-12-28T09:36:45.436Z\n"
-"PO-Revision-Date: 2022-12-28T09:36:45.436Z\n"
+"POT-Creation-Date: 2022-12-30T09:38:56.765Z\n"
+"PO-Revision-Date: 2022-12-30T09:38:56.765Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -307,9 +307,6 @@ msgstr "Show registered {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Registered person"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "Leaving this page will discard the changes you made to this event."
-
 msgid "validation failed"
 msgstr "validation failed"
 
@@ -336,6 +333,9 @@ msgstr "No, cancel"
 
 msgid "Yes, create new event"
 msgstr "Yes, create new event"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr "Leaving this page will discard the changes you made to this event."
 
 msgid "Warnings found"
 msgstr "Warnings found"

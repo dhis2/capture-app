@@ -14,6 +14,7 @@ import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
 import { addEnrollmentEventPageDefaultActionTypes } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import type { Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
+import { defaultDialogProps } from '../../../Dialogs/ConfirmDialog.constants';
 
 const styles = () => ({
     innerWrapper: {
@@ -108,10 +109,7 @@ const NewEventWorkspacePlain = ({
                 </div>
             </Widget>
             <ConfirmDialog
-                header={i18n.t('Unsaved changes')}
-                text={i18n.t('Leaving this page will discard the changes you made to this event.')}
-                confirmText={i18n.t('Yes, discard')}
-                cancelText={i18n.t('No, stay here')}
+                {...defaultDialogProps}
                 onConfirm={() => { setMode(tempMode.current); setWarningVisible(false); }}
                 open={isWarningVisible}
                 onCancel={() => setWarningVisible(false)}
