@@ -24,11 +24,19 @@ type Props = {
     classes: Object,
 };
 
-class OrgUnitSelectorPlain extends Component<Props> {
+type State = {
+   open: boolean,
+};
+
+class OrgUnitSelectorPlain extends Component<Props, State> {
     handleClose: () => void;
     handleClick: (orgUnit: Object) => void;
     constructor(props: Props) {
         super(props);
+
+        this.state = {
+            open: false,
+        };
 
         this.handleClick = this.handleClick.bind(this);
     }
@@ -43,26 +51,27 @@ class OrgUnitSelectorPlain extends Component<Props> {
         const { selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, classes } = this.props;
 
         return (
-            <div data-test="org-unit-selector">
-                <SelectorBarItem
-                    displayOnly={Boolean(selectedOrgUnitId)}
-                    label={i18n.t('Organization unit')}
-                    noValueMessage={i18n.t('Select a Organization unit')}
-                    value={Boolean(selectedOrgUnitId) && selectedOrgUnit?.name}
-                    open={Boolean(!selectedOrgUnitId)}
-                    // TODO fix this in the ui library
-                    setOpen={() => {}}
-                    onClearSelectionClick={() => onReset()}
-                >
-                    <div className={classes.selectBarMenu}>
-                        <OrgUnitField
-                            data-test="org-unit-field"
-                            onSelectClick={selectedOu => this.handleClick(selectedOu)}
-                            previousOrgUnitId={previousOrgUnitId}
-                        />
-                    </div>
-                </SelectorBarItem>
-            </div>
+            <SelectorBarItem
+                displayOnly={Boolean(selectedOrgUnitId)}
+                label={i18n.t('Registering unit')}
+                noValueMessage={i18n.t('Choose a registering unit')}
+                value={Boolean(selectedOrgUnitId) && selectedOrgUnit?.name}
+                open={this.state.open}
+                setOpen={open => this.setState({ open })}
+                onClearSelectionClick={() => onReset()}
+                dataTest="org-unit-selector-container"
+            >
+                <div className={classes.selectBarMenu}>
+                    <OrgUnitField
+                        data-test="org-unit-field"
+                        onSelectClick={(selectedOu) => {
+                            this.setState({ open: false });
+                            this.handleClick(selectedOu);
+                        }}
+                        previousOrgUnitId={previousOrgUnitId}
+                    />
+                </div>
+            </SelectorBarItem>
         );
     }
 }

@@ -34,14 +34,18 @@ Given('you are in the search page with domain Person and org unit being preselec
 });
 
 And('you select the search domain Malaria Case diagnosis', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Malaria case diagn');
     cy.contains('Malaria case diagnosis')
         .click();
 });
 
 When('you select the search domain WHO RMNCH Tracker', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('WHO RMNCH');
     cy.contains('WHO RMNCH Tracker')
         .click();
@@ -246,9 +250,8 @@ When('you click the view dashboard button', () => {
 });
 
 When('you remove the Child Programme selection', () => {
-    cy.get('[data-test="scope-selector"]').within(() => {
-        cy.get('[data-test="reset-selection-button"]').eq(0).click();
-    });
+    cy.get('[data-test="program-selector-container-clear-icon"]')
+        .click();
 });
 
 Then('there should be visible a title with Malaria case diagnosis', () => {

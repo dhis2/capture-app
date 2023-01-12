@@ -225,12 +225,13 @@ class ProgramSelectorPlain extends Component<Props, State> {
         return (
             <>
                 <SelectorBarItem
-                    label={'Program'}
-                    noValueMessage="Select program"
+                    label={i18n.t('Program')}
+                    noValueMessage={i18n.t('Choose a program')}
                     value={selectedProgram?.name}
                     open={this.state.open}
                     setOpen={open => this.setState({ open })}
                     onClearSelectionClick={() => this.handleResetProgram()}
+                    dataTest="program-selector-container"
                 >
                     <div className={classes.selectBarMenu}>
                         <Menu>

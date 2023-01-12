@@ -8,6 +8,7 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
+import { capitalizeFirstLetter, lowerCaseFirstLetter } from 'capture-core-utils/string';
 import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
 import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
@@ -78,12 +79,13 @@ const SingleLockedSelectPlain =
           <span data-test="single-locked-select">
               <SelectorBarItem
                   displayOnly={displayOnly}
-                  label={title}
+                  label={capitalizeFirstLetter(title)}
                   value={label}
-                  noValueMessage={hasMenu ? i18n.t(`Select ${title}`) : ''}
+                  noValueMessage={hasMenu ? i18n.t(`Choose a ${lowerCaseFirstLetter(title)}`) : ''}
                   open={openSelectorBarItem}
                   setOpen={open => hasMenu && setOpenSelectorBarItem(open)}
                   onClearSelectionClick={() => handleOnClear()}
+                  dataTest={`${lowerCaseFirstLetter(title)}-selector-container`}
               >
                   {hasMenu && (
                       <div className={classes.selectBarMenu}>

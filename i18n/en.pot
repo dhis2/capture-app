@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-01-09T13:22:43.085Z\n"
-"PO-Revision-Date: 2023-01-09T13:22:43.085Z\n"
+"POT-Creation-Date: 2023-01-12T13:19:30.364Z\n"
+"PO-Revision-Date: 2023-01-12T13:19:30.364Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -983,11 +983,11 @@ msgstr "Add relationship"
 msgid "No match found"
 msgstr "No match found"
 
-msgid "Organization unit"
-msgstr "Organization unit"
+msgid "Registering unit"
+msgstr "Registering unit"
 
-msgid "Select a Organization unit"
-msgstr "Select a Organization unit"
+msgid "Choose a registering unit"
+msgstr "Choose a registering unit"
 
 msgid "Clear selection"
 msgstr "Clear selection"
@@ -1003,6 +1003,9 @@ msgstr "Some programs are being filtered by the registring unit selection"
 
 msgid "Show all programs"
 msgstr "Show all programs"
+
+msgid "Choose a program"
+msgstr "Choose a program"
 
 msgid "Results found"
 msgstr "Results found"
@@ -1254,9 +1257,6 @@ msgstr "This stage can only have one event"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
-
-msgid "Registering unit"
-msgstr "Registering unit"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"

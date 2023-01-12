@@ -175,9 +175,11 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             <SelectorBarItem
                 label={passOnProps.category.name}
                 value={selectedCategoryName}
+                noValueMessage={i18n.t(`Choose a ${passOnProps.category.name}`)}
                 open={this.state.open}
                 setOpen={open => this.setState({ open })}
                 onClearSelectionClick={onClearSelectionClick}
+                dataTest="category-selector-container"
             >
                 {options && (
                     <div className={classes.selectBarMenu}>

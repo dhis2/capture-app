@@ -142,7 +142,9 @@ And('you see the registration form for the Malaria case registration', () => {
 });
 
 And('you select the Antenatal care visit program', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Antenatal care vis');
     cy.contains('Antenatal care visit')
         .click();
@@ -177,7 +179,9 @@ Then('program and organisation unit is still selected in top bar', () => {
 });
 
 And('you select the Malaria case registration program', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Malaria case registr');
     cy.contains('Malaria case registration')
         .click();
@@ -190,7 +194,9 @@ Then('you see a description text for one section', () => {
 });
 
 When('you select the Inpatient morbidity and mortality program', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Inpatient mor');
     cy.contains('Inpatient morbidity and mortality')
         .click();
@@ -232,7 +238,9 @@ When('you have Child Programme selected', () => {
 });
 
 And('you select the Contraceptives Voucher Program', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Contraceptives Vouch');
     cy.contains('Contraceptives Voucher Program')
         .click();
@@ -250,7 +258,9 @@ And('there should be informative message explaining you need to complete your se
 });
 
 And('you select the first category', () => {
-    cy.get('.Select')
+    cy.get('[data-test="category-selector-container"]')
+        .click();
+    cy.get('[data-test="category-filterinput"]')
         .type('AIDSRelief Con');
     cy.contains('AIDSRelief Consortium')
         .click();
@@ -501,7 +511,7 @@ And('you see the form prefield with existing TEI attributes values', () => {
 
 And('the scope selector has the TEI context', () => {
     cy.get('[data-test="scope-selector"]').within(() => {
-        cy.contains('Selected person').should('exist');
+        cy.contains('Person').should('exist');
         cy.contains('Anna Jones').should('exist');
     });
 });
