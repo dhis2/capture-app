@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-12-02T14:34:42.609Z\n"
-"PO-Revision-Date: 2022-12-02T14:34:42.609Z\n"
+"POT-Creation-Date: 2023-01-09T13:22:43.085Z\n"
+"PO-Revision-Date: 2023-01-09T13:22:43.085Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -711,8 +711,8 @@ msgstr "Choose a stage for a new event"
 msgid "Program Stages could not be loaded"
 msgstr "Program Stages could not be loaded"
 
-msgid "stage"
-msgstr "stage"
+msgid "Stage"
+msgstr "Stage"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Enrollment{{escape}} View Event"
@@ -980,38 +980,35 @@ msgstr "You don't have access to create any relationships"
 msgid "Add relationship"
 msgstr "Add relationship"
 
-msgid "Selected registering unit"
-msgstr "Selected registering unit"
+msgid "No match found"
+msgstr "No match found"
 
-msgid "Start Again"
-msgstr "Start Again"
+msgid "Organization unit"
+msgstr "Organization unit"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Are you sure? All unsaved data will be lost."
+msgid "Select a Organization unit"
+msgstr "Select a Organization unit"
 
-msgid "Accept"
-msgstr "Accept"
-
-msgid "Registering Organisation Unit"
-msgstr "Registering Organisation Unit"
-
-msgid "Select"
-msgstr "Select"
+msgid "Clear selection"
+msgstr "Clear selection"
 
 msgid "No programs available."
 msgstr "No programs available."
 
-msgid "Selected program"
-msgstr "Selected program"
+msgid "Search for a program"
+msgstr "Search for a program"
 
-msgid "Select program"
-msgstr "Select program"
+msgid "Some programs are being filtered by the registring unit selection"
+msgstr "Some programs are being filtered by the registring unit selection"
 
-msgid "Selected"
-msgstr "Selected"
+msgid "Show all programs"
+msgstr "Show all programs"
 
 msgid "Results found"
 msgstr "Results found"
+
+msgid "Selected program"
+msgstr "Selected program"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Search {{uniqueAttrName}}"
@@ -1024,9 +1021,6 @@ msgstr "New {{trackedEntityName}} in {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
-
-msgid "Clear selections"
-msgstr "Clear selections"
 
 msgid "To work with the selected program,"
 msgstr "To work with the selected program,"

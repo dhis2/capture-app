@@ -9,9 +9,10 @@ import type { PlainProps } from './TopBarActions.types';
 
 const styles = ({ typography }) => ({
     container: {
-        marginLeft: typography.pxToRem(8),
-        marginBottom: typography.pxToRem(8),
-        marginTop: typography.pxToRem(8),
+        display: 'flex',
+        alignItems: 'center',
+        marginLeft: '8px',
+        marginRight: '-12px',
     },
     marginRight: {
         marginRight: typography.pxToRem(12),
@@ -28,14 +29,12 @@ const styles = ({ typography }) => ({
 });
 
 const ActionButtonsPlain = ({
-    onStartAgainClick,
     onNewClick,
     onNewClickWithoutProgramId,
     onFindClick,
     onFindClickWithoutProgramId,
     selectedProgramId,
     classes,
-    showResetButton,
     openConfirmDialog,
 }: PlainProps & CssClasses) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
@@ -129,12 +128,6 @@ const ActionButtonsPlain = ({
                     {i18n.t('Search')}
                 </DropdownButton>
             )}
-
-            {showResetButton ? (
-                <button className={classes.buttonAsLink} data-test="start-again-button" onClick={onStartAgainClick}>
-                    {i18n.t('Clear selections')}
-                </button>
-            ) : null}
         </div>
     );
 };

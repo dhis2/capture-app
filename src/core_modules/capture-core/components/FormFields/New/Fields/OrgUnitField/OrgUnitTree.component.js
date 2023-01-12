@@ -11,6 +11,8 @@ const getStyles = () => ({
         minHeight: 42,
         paddingTop: 10,
         backgroundColor: 'white',
+        display: 'flex',
+        maxWidth: '100vw',
     },
 });
 
