@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import { Menu, MenuItem } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
@@ -25,7 +24,7 @@ type Props = {
 const styles = (theme: Theme) => ({
     listItem: {
         display: 'flex',
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#f5f5f5 !important',
         paddingLeft: theme.typography.pxToRem(10),
         marginTop: theme.typography.pxToRem(8),
     },
@@ -41,7 +40,9 @@ const styles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(10),
         borderRadius: theme.typography.pxToRem(5),
     },
-
+    labelContainer: {
+        display: 'flex',
+    },
 });
 
 const getFeedbackOutput = () =>
@@ -50,25 +51,29 @@ const getFeedbackOutput = () =>
             (<div>
                 {feedbackItems.displayTexts &&
                     feedbackItems.displayTexts.map(item => (
-                        <ListItem
+                        <MenuItem
+                            dense
                             key={item.id}
                             className={classes.listItem}
                             button={false}
-                        >
-                            <p className={classes.keyValuePairKey}> {item.message} </p>
-                        </ListItem>
+                            label={<p className={classes.keyValuePairKey}> {item.message} </p>}
+                        />
                     ),
                     )}
                 {feedbackItems.displayKeyValuePairs &&
                     feedbackItems.displayKeyValuePairs.map(item => (
-                        <ListItem
+                        <MenuItem
                             key={item.id}
-                            className={classes.listItem}
                             button={false}
-                        >
-                            <p className={classes.keyValuePairKey}> {item.key} </p>
-                            <p className={classes.keyValue}> {item.value} </p>
-                        </ListItem>
+                            className={classes.listItem}
+                            dense
+                            label={
+                                <div className={classes.labelContainer}>
+                                    <p className={classes.keyValuePairKey}> {item.key} </p>
+                                    <p className={classes.keyValue}> {item.value} </p>
+                                </div>
+                            }
+                        />
                     ),
                     )}
             </div>)
@@ -81,9 +86,9 @@ const getFeedbackOutput = () =>
                     {hasItems &&
                         <Card className={classes.card}>
                             {i18n.t('Feedback')}
-                            <List dense>
+                            <Menu dense>
                                 {feedbackItems && this.renderFeedbackItems(feedbackItems, classes)}
-                            </List>
+                            </Menu>
                         </Card>
                     }
                 </div>
