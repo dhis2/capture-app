@@ -1,3 +1,10 @@
+## [100.23.1](https://github.com/dhis2/capture-app/compare/v100.23.0...v100.23.1) (2023-01-12)
+
+
+### Bug Fixes
+
+* [DHIS2-13965] stay in app when there is error on org unit ([#3155](https://github.com/dhis2/capture-app/issues/3155)) ([726efae](https://github.com/dhis2/capture-app/commit/726efae0510ead4a3a78f950ba930d3a877112e2))
+
 # [100.23.0](https://github.com/dhis2/capture-app/compare/v100.22.1...v100.23.0) (2023-01-10)
 
 
