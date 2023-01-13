@@ -1,3 +1,23 @@
+## [100.23.1](https://github.com/dhis2/capture-app/compare/v100.23.0...v100.23.1) (2023-01-12)
+
+
+### Bug Fixes
+
+* [DHIS2-13965] stay in app when there is error on org unit ([#3155](https://github.com/dhis2/capture-app/issues/3155)) ([726efae](https://github.com/dhis2/capture-app/commit/726efae0510ead4a3a78f950ba930d3a877112e2))
+
+# [100.23.0](https://github.com/dhis2/capture-app/compare/v100.22.1...v100.23.0) (2023-01-10)
+
+
+### Bug Fixes
+
+* [DHIS2-14411] change tooltip for program stage selector ([#3156](https://github.com/dhis2/capture-app/issues/3156)) ([654e0f6](https://github.com/dhis2/capture-app/commit/654e0f63c2261c784efb3e47d8f1388fb10fd34f))
+* [TECH-1495] cypress tests with dynamic dates  ([#3162](https://github.com/dhis2/capture-app/issues/3162)) ([b90b582](https://github.com/dhis2/capture-app/commit/b90b5828aa8cd4a0a7ff44b2113e3910df201329))
+
+
+### Features
+
+* [TECH-1486] Utility hook for fetching indexed db data ([#3150](https://github.com/dhis2/capture-app/issues/3150)) ([680e1e4](https://github.com/dhis2/capture-app/commit/680e1e434c6afaada0c6b2892f1513818463316a))
+
 ## [100.22.1](https://github.com/dhis2/capture-app/compare/v100.22.0...v100.22.1) (2022-12-13)
 
 
