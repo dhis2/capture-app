@@ -21,6 +21,7 @@ export type OwnProps = $ReadOnly<{|
 type ContainerProps = {|
     ready: boolean,
     trackedEntityName: string,
+    isUserInteractionInProgress: boolean
 |};
 
 export type Props = $ReadOnly<{|

@@ -307,9 +307,6 @@ msgstr "Show registered {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Registered person"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "Leaving this page will discard the changes you made to this event."
-
 msgid "validation failed"
 msgstr "validation failed"
 
@@ -336,6 +333,9 @@ msgstr "No, cancel"
 
 msgid "Yes, create new event"
 msgstr "Yes, create new event"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr "Leaving this page will discard the changes you made to this event."
 
 msgid "Warnings found"
 msgstr "Warnings found"
