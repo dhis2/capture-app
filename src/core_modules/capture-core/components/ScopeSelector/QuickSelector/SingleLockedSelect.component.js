@@ -78,6 +78,7 @@ const SingleLockedSelectPlain =
       return (
           <span data-test="single-locked-select">
               <SelectorBarItem
+                  disabled={Boolean(!label)}
                   displayOnly={displayOnly}
                   label={capitalizeFirstLetter(title)}
                   value={label}

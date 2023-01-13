@@ -59,6 +59,7 @@ export const EnrollmentAddEventTopBar = ({
             {stageName && (
                 <>
                     <SingleLockedSelect
+                        displayOnly
                         ready
                         onClear={() => onResetStageId()}
                         options={[

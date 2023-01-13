@@ -1,5 +1,6 @@
 // @flow
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Input, Help, MenuItem, spacers, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,11 +13,16 @@ const styles = () => ({
         padding: `${spacers.dp8} ${spacers.dp8} ${spacers.dp4} ${spacers.dp8}`,
         zIndex: '1',
     },
+    label: {
+        display: 'flex',
+        alignItems: 'center',
+    },
 });
 
 type Option = {
     value: string,
     label: string,
+    icon?: React.Node,
 };
 
 type Props = {
@@ -51,7 +57,17 @@ const FiltrableMenuItemsPlain = ({ dataTest, options, onChange, searchText, clas
             />
             {hasMatch ? (
                 filtered.map(option => (
-                    <MenuItem key={option.value} label={option.label} value={option.value} onClick={onChange} />
+                    <MenuItem
+                        key={option.value}
+                        label={
+                            <div className={classes.label}>
+                                {option.icon}
+                                {option.label}
+                            </div>
+                        }
+                        value={option.value}
+                        onClick={onChange}
+                    />
                 ))
             ) : (
                 <MenuItem label={<Help error>{i18n.t('No match found')}</Help>} />

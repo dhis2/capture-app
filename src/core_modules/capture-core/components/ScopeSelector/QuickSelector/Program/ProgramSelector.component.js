@@ -74,7 +74,7 @@ type State = {
 
 class ProgramSelectorPlain extends Component<Props, State> {
     handleClick: (program: Object) => void;
-    handleClickCategoryOption: (category: Object, categoryId: string) => void;
+    handleClickCategoryOption: (category: { label: string, value: string }, categoryId: string) => void;
     programsArray: Array<Program>;
     constructor(props) {
         super(props);
@@ -114,7 +114,7 @@ class ProgramSelectorPlain extends Component<Props, State> {
             .map(program => ({
                 label: program.name,
                 value: program.id,
-                iconLeft: this.getProgramIcon(program),
+                icon: this.getProgramIcon(program),
             }));
     }
 

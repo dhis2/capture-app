@@ -89,6 +89,7 @@ export const TopBar = ({
                 isUserInteractionInProgress={isUserInteractionInProgress}
             />
             <SingleLockedSelect
+                displayOnly
                 ready={pageStatus !== pageStatuses.MISSING_DATA}
                 onClear={() => resetStageId('enrollment', { enrollmentId })}
                 options={[
@@ -103,6 +104,7 @@ export const TopBar = ({
             />
             {programStage && (
                 <SingleLockedSelect
+                    displayOnly
                     ready={pageStatus !== pageStatuses.MISSING_DATA}
                     onClear={() => resetEventId('enrollment', { enrollmentId })}
                     options={[
