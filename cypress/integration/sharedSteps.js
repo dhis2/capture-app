@@ -165,9 +165,13 @@ When(/^the user selects the org unit (.*)$/, (orgUnit) => {
 });
 
 When(/^you opt in to use the new enrollment Dashboard for (.*)$/, (program) => {
-    cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`).click();
-    cy.contains('[data-test="dhis2-uicore-button"]', 'Yes, opt in').click();
-    cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`);
+    cy.get('[data-test="main-page-working-list"]').then(($wrapper) => {
+        if ($wrapper.find('[data-test="opt-in"]').length > 0) {
+            cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`).click();
+            cy.contains('[data-test="dhis2-uicore-button"]', 'Yes, opt in').click();
+            cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`);
+        }
+    });
 });
 
 Then(/^you see the opt out component for (.*)$/, (program) => {
