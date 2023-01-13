@@ -29,6 +29,7 @@ const EmptyPrograms = ({ handleResetOrgUnit }) => {
 
     return (
         <MenuItem
+            dataTest="program-selector-no-programs"
             label={
                 <div>
                     {i18n.t('No programs available.')}

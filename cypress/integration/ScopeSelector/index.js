@@ -8,7 +8,7 @@ Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
 
 Given(/^you land on a enrollment page domain in Malaria focus investigation by having typed (.*)$/, (url) => {
     cy.visit(url);
-    cy.get('[data-test="scope-selector"]').contains('Focus area');
+    cy.get('[data-test="focus area-selector-container"]').contains('Focus area');
 });
 
 When('you click the "New" button to add a new event', () => {
@@ -379,10 +379,14 @@ When('you select org unit that is incompatible with the already selected program
 });
 
 Then('you can see message on the scope selector', () => {
-    cy.get('[data-test="scope-selector"]')
+    cy.get('[data-test="error-message-handler"]')
+        .contains('Selected program is invalid for selected registering unit');
+    cy.get('[data-test="program-selector-container-clear-icon"]')
+        .click();
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-selector-no-programs"]')
         .contains('No programs available.');
-    cy.get('[data-test="scope-selector"]')
-        .contains('Show all');
 });
 
 Then('you see the tei id on the scope selector', () => {
