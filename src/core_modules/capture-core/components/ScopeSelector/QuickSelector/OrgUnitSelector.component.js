@@ -52,7 +52,6 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
 
         return (
             <SelectorBarItem
-                displayOnly={Boolean(selectedOrgUnitId)}
                 label={i18n.t('Registering unit')}
                 noValueMessage={i18n.t('Choose a registering unit')}
                 value={Boolean(selectedOrgUnitId) && selectedOrgUnit?.name}
