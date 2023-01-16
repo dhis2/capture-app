@@ -23,7 +23,7 @@ const styles = () => ({
         display: 'flex',
         justifyContent: 'center',
         padding: `${spacers.dp16} ${spacers.dp8}`,
-    }
+    },
 });
 
 type Option = {
