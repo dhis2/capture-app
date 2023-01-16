@@ -2,29 +2,17 @@
 import React, { type ComponentType, useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { Button, colors, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
+import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
 import { scopeTypes } from '../../metaData';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
 import type { PlainProps } from './TopBarActions.types';
 
-const styles = ({ typography }) => ({
+const styles = () => ({
     container: {
         display: 'flex',
         alignItems: 'center',
-        marginLeft: '8px',
-        marginRight: '-12px',
-    },
-    marginRight: {
-        marginRight: typography.pxToRem(12),
-    },
-    buttonAsLink: {
-        fontSize: typography.pxToRem(13),
-        background: 'none!important',
-        border: 'none',
-        padding: '0!important',
-        color: colors.grey700,
-        textDecoration: 'underline',
-        cursor: 'pointer',
+        marginLeft: `${spacers.dp8}`,
+        gap: `${spacers.dp4}`,
     },
 });
 

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Input, Help, MenuItem, spacers, colors } from '@dhis2/ui';
+import { Input, MenuItem, spacers, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
@@ -16,6 +16,13 @@ const styles = () => ({
     label: {
         display: 'flex',
         alignItems: 'center',
+    },
+    empty: {
+        fontSize: '14px',
+        color: `${colors.grey700}`,
+        display: 'flex',
+        justifyContent: 'center',
+        padding: `${spacers.dp16} ${spacers.dp8}`,
     },
 });
 
@@ -70,7 +77,7 @@ const FiltrableMenuItemsPlain = ({ dataTest, options, onChange, searchText, clas
                     />
                 ))
             ) : (
-                <MenuItem label={<Help error>{i18n.t('No match found')}</Help>} />
+                <div className={classes.empty}><span>{i18n.t('No results found for ')}{filter}</span></div>
             )}
         </>
     );

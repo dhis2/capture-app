@@ -7,9 +7,9 @@ import { OrgUnitField } from '../../FormFields/New';
 
 const styles = () => ({
     selectBarMenu: {
-        minWidth: '60vw',
+        minWidth: '640px',
         maxHeight: '90vh',
-        overflow: 'scroll',
+        overflow: 'auto',
         minHeight: spacers.dp96,
     },
 });
@@ -52,7 +52,6 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
 
         return (
             <SelectorBarItem
-                displayOnly={Boolean(selectedOrgUnitId)}
                 label={i18n.t('Registering unit')}
                 noValueMessage={i18n.t('Choose a registering unit')}
                 value={Boolean(selectedOrgUnitId) && selectedOrgUnit?.name}
