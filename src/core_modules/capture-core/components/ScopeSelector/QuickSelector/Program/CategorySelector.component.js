@@ -32,9 +32,8 @@ type State = {
 
 const styles = () => ({
     selectBarMenu: {
-        minWidth: '60vw',
         maxHeight: '90vh',
-        overflow: 'scroll',
+        overflow: 'auto',
     },
 });
 

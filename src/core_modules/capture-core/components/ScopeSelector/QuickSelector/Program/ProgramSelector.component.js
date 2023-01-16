@@ -58,9 +58,8 @@ const styles = () => ({
         padding: `${spacers.dp4} ${spacers.dp12}`,
     },
     selectBarMenu: {
-        minWidth: '60vw',
         maxHeight: '90vh',
-        overflow: 'scroll',
+        overflow: 'auto',
     },
 });
 
@@ -251,6 +250,7 @@ class ProgramSelectorPlain extends Component<Props, State> {
                                             <>
                                                 <MenuDivider />
                                                 <MenuItem
+                                                    dense
                                                     onClick={() => this.handleResetProgram()}
                                                     label={i18n.t('Clear selection')}
                                                 />
