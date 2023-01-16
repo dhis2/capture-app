@@ -2,7 +2,7 @@
 
 import React, { Component, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { SelectorBarItem, Menu, MenuItem, MenuDivider, Button } from '@dhis2/ui';
+import { SelectorBarItem, Menu, MenuItem, MenuDivider, Button, colors, spacers } from '@dhis2/ui';
 import { useHistory, useLocation } from 'react-router-dom';
 import i18n from '@dhis2/d2-i18n';
 import { programCollection } from '../../../../metaDataMemoryStores';
@@ -48,6 +48,14 @@ const styles = () => ({
         display: 'flex',
         alignItems: 'center',
         paddingRight: 5,
+    },
+    filterWarning: {
+        fontSize: '14px',
+        color: `${colors.grey700}`,
+        display: 'flex',
+        alignItems: 'center',
+        gap: `${spacers.dp8}`,
+        padding: `${spacers.dp4} ${spacers.dp12}`,
     },
     selectBarMenu: {
         minWidth: '60vw',
@@ -186,6 +194,7 @@ class ProgramSelectorPlain extends Component<Props, State> {
 
     renderProgramList(programOptions) {
         const { handleClickProgram } = this.props;
+        const { classes } = this.props;
         const areAllProgramsAvailable = this.areAllProgramsAvailable(programOptions);
         return (
             <>
@@ -201,17 +210,12 @@ class ProgramSelectorPlain extends Component<Props, State> {
                 {!areAllProgramsAvailable && (
                     <>
                         <MenuDivider />
-                        <MenuItem
-                            label={
-                                <div>
-                                    {i18n.t('Some programs are being filtered by the registring unit selection')}
-                                    &nbsp;
-                                    <Button onClick={() => this.handleResetOrgUnit()} secondary>
-                                        {i18n.t('Show all programs')}
-                                    </Button>
-                                </div>
-                            }
-                        />
+                        <div className={classes.filterWarning}>
+                            <span>{i18n.t('Some programs are being filtered by the chosen registering unit')}</span>
+                            <Button small secondary onClick={() => this.handleResetOrgUnit()}>
+                                {i18n.t('Show all programs')}
+                            </Button>
+                        </div>
                     </>
                 )}
             </>
