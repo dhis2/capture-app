@@ -197,6 +197,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
                                 <>
                                     <MenuDivider />
                                     <MenuItem
+                                        dense
                                         onClick={() => {
                                             this.setState({ open: false });
                                             onClearSelectionClick();

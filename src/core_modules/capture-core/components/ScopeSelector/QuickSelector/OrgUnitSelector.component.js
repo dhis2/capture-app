@@ -54,16 +54,18 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
             <SelectorBarItem
                 label={i18n.t('Registering unit')}
                 noValueMessage={i18n.t('Choose a registering unit')}
-                value={Boolean(selectedOrgUnitId) && selectedOrgUnit?.name}
+                value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
                 open={this.state.open}
-                setOpen={open => this.setState({ open })}
+                setOpen={open => Boolean(!selectedOrgUnitId) && this.setState({ open })}
                 onClearSelectionClick={() => onReset()}
                 dataTest="org-unit-selector-container"
             >
                 <div className={classes.selectBarMenu}>
                     <OrgUnitField
                         data-test="org-unit-field"
-                        onSelectClick={(selectedOu) => {
+                        onSelectClick={(selectedOu, event) => {
+                            event.stopPropagation();
+                            event.preventDefault();
                             this.setState({ open: false });
                             this.handleClick(selectedOu);
                         }}

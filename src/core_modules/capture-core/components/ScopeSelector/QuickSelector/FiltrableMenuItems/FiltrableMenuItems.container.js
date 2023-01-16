@@ -6,6 +6,11 @@ import { Input, MenuItem, spacers, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
+    icon: {
+        display: 'flex',
+        alignItems: 'center',
+        paddingRight: 5,
+    },
     input: {
         position: 'sticky',
         top: '0',
@@ -68,7 +73,7 @@ const FiltrableMenuItemsPlain = ({ dataTest, options, onChange, searchText, clas
                         key={option.value}
                         label={
                             <div className={classes.label}>
-                                {option.icon}
+                                <div className={classes.icon}> {option.icon} </div>
                                 {option.label}
                             </div>
                         }

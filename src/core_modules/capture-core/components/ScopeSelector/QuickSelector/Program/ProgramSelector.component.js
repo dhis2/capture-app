@@ -1,62 +1,18 @@
 // @flow
 
-import React, { Component, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { SelectorBarItem, Menu, MenuItem, MenuDivider, Button, colors, spacers } from '@dhis2/ui';
-import { useHistory, useLocation } from 'react-router-dom';
+import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { programCollection } from '../../../../metaDataMemoryStores';
 import { CategorySelector } from './CategorySelector.component';
 import type { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
-import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
-import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
-import { FiltrableMenuItems } from '../FiltrableMenuItems';
-
-const EmptyPrograms = ({ handleResetOrgUnit }) => {
-    const { push } = useHistory();
-    const { pathname } = useLocation();
-    const { enrollmentId, teiId, orgUnitId } = useLocationQuery();
-
-
-    useEffect(() => {
-        const navigateToEventRegistrationPage = () => {
-            push(`${pathname}?${buildUrlQueryString({ enrollmentId, teiId, orgUnitId })}`);
-        };
-
-        navigateToEventRegistrationPage();
-    }, [push, pathname, enrollmentId, teiId, orgUnitId]);
-
-    return (
-        <MenuItem
-            dataTest="program-selector-no-programs"
-            label={
-                <div>
-                    {i18n.t('No programs available.')}
-                    &nbsp;
-                    <Button secondary onClick={() => handleResetOrgUnit()}>
-                        {i18n.t('Show all')}
-                    </Button>
-                </div>
-            }
-        />
-    );
-};
+import { EmptyPrograms } from './EmptyPrograms';
+import { ProgramList } from './ProgramList';
+import { getOptions } from './getOptions';
 
 const styles = () => ({
-    iconContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingRight: 5,
-    },
-    filterWarning: {
-        fontSize: '14px',
-        color: `${colors.grey700}`,
-        display: 'flex',
-        alignItems: 'center',
-        gap: `${spacers.dp8}`,
-        padding: `${spacers.dp4} ${spacers.dp12}`,
-    },
     selectBarMenu: {
         maxHeight: '90vh',
         overflow: 'auto',
@@ -70,108 +26,34 @@ type Props = {
     onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
     onResetCategoryOption: (categoryId: string) => void,
     onResetOrgUnit: () => void,
-    selectedProgram?: string,
+    selectedProgramId?: string,
     selectedOrgUnitId?: string,
     selectedCategories: Object,
     classes: Object,
 };
 
-type State = {
-    open: boolean,
-};
+const ProgramSelectorPlain = ({
+    handleClickProgram,
+    handleSetCatergoryCombo,
+    onResetProgramId,
+    onResetCategoryOption,
+    onResetOrgUnit,
+    selectedProgramId,
+    selectedOrgUnitId,
+    selectedCategories,
+    classes,
+}: Props) => {
+    const [open, setOpen] = useState(false);
+    const [programsArray, setProgramsArray] = useState<Array<Program>>([]);
+    const selectedProgram = selectedProgramId ? programCollection.get(selectedProgramId) : null;
+    const programOptions = getOptions(selectedOrgUnitId, programsArray);
 
-class ProgramSelectorPlain extends Component<Props, State> {
-    handleClick: (program: Object) => void;
-    handleClickCategoryOption: (category: { label: string, value: string }, categoryId: string) => void;
-    programsArray: Array<Program>;
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: false,
-        };
-        this.handleClick = this.handleClick.bind(this);
-        this.handleClickCategoryOption = this.handleClickCategoryOption.bind(this);
-        this.buildProgramsArray();
-    }
+    useEffect(() => {
+        setProgramsArray(Array.from(programCollection.values()));
+    }, []);
 
-    buildProgramsArray() {
-        this.programsArray = Array.from(programCollection.values());
-    }
-
-    getProgramIcon({ icon: { color, name } = {}, name: programName }: Program) {
-        const { classes } = this.props;
-
-        return (
-            <div
-                className={classes.iconContainer}
-            >
-                <NonBundledDhis2Icon
-                    name={name || 'clinical_fe_outline'}
-                    color={color || '#e0e0e0'}
-                    alternativeText={programName}
-                    width={22}
-                    height={22}
-                    cornerRadius={2}
-                />
-            </div>
-        );
-    }
-
-    getOptionsFromPrograms(programs: Array<Program>) {
-        return programs
-            .map(program => ({
-                label: program.name,
-                value: program.id,
-                icon: this.getProgramIcon(program),
-            }));
-    }
-
-    handleClick(program) {
-        const { handleClickProgram } = this.props;
-        handleClickProgram && handleClickProgram(program.value);
-    }
-
-    handleClickCategoryOption(selectedCategoryOption, categoryId) {
-        const { handleSetCatergoryCombo } = this.props;
-        handleSetCatergoryCombo && handleSetCatergoryCombo(selectedCategoryOption, categoryId);
-    }
-
-    handleResetProgram() {
-        this.props.onResetProgramId(resetProgramIdBase());
-    }
-
-    handleResetCategoryOption(categoryId) {
-        this.props.onResetCategoryOption(categoryId);
-    }
-
-    handleResetOrgUnit() {
-        this.props.onResetOrgUnit();
-    }
-
-    getOptions() {
-        let programOptions = [];
-        if (this.props.selectedOrgUnitId) {
-            programOptions = this.getOptionsFromPrograms(this.programsArray
-                .filter(program =>
-                    program.organisationUnits[this.props.selectedOrgUnitId] &&
-                    program.access.data.read),
-            );
-        } else {
-            programOptions = this.getOptionsFromPrograms(this.programsArray
-                .filter(program => program.access.data.read),
-            );
-        }
-        return programOptions;
-    }
-
-    areAllProgramsAvailable(programOptions) {
-        return (programOptions.length === this.programsArray
-            .filter(program => program.access.data.read).length);
-    }
-
-    renderCategories(selectedProgram) {
+    const renderCategories = () => {
         if (selectedProgram?.categoryCombination) {
-            const { selectedCategories, selectedOrgUnitId } = this.props;
             return Array.from(selectedProgram.categoryCombination.categories.values()).map(category => (
                 <CategorySelector
                     category={category}
@@ -180,91 +62,61 @@ class ProgramSelectorPlain extends Component<Props, State> {
                             ? selectedCategories[category.id].name
                             : ''
                     }
-                    // $FlowFixMe[incompatible-call] automated comment
-                    onSelect={(option) => {
-                        this.handleClickCategoryOption(option, category.id);
-                    }}
-                    onClearSelectionClick={() => this.handleResetCategoryOption(category.id)}
+                    onSelect={option => handleSetCatergoryCombo && handleSetCatergoryCombo(option, category.id)}
+                    onClearSelectionClick={() => onResetCategoryOption(category.id)}
                     selectedOrgUnitId={selectedOrgUnitId}
                 />
             ));
         }
         return null;
-    }
+    };
 
-    renderProgramList(programOptions) {
-        const { handleClickProgram } = this.props;
-        const { classes } = this.props;
-        const areAllProgramsAvailable = this.areAllProgramsAvailable(programOptions);
-        return (
-            <>
-                <FiltrableMenuItems
-                    options={programOptions}
-                    onChange={(item) => {
-                        this.setState({ open: false });
-                        handleClickProgram && handleClickProgram(item.value);
-                    }}
-                    searchText={i18n.t('Search for a program')}
-                    dataTest="program"
-                />
-                {!areAllProgramsAvailable && (
-                    <>
-                        <MenuDivider />
-                        <div className={classes.filterWarning}>
-                            <span>{i18n.t('Some programs are being filtered by the chosen registering unit')}</span>
-                            <Button small secondary onClick={() => this.handleResetOrgUnit()}>
-                                {i18n.t('Show all programs')}
-                            </Button>
-                        </div>
-                    </>
-                )}
-            </>
-        );
-    }
-
-    render() {
-        const programOptions = this.getOptions();
-        const { classes } = this.props;
-        const selectedProgram = this.props.selectedProgram ? programCollection.get(this.props.selectedProgram) : null;
-
-        return (
-            <>
-                <SelectorBarItem
-                    label={i18n.t('Program')}
-                    noValueMessage={i18n.t('Choose a program')}
-                    value={selectedProgram?.name}
-                    open={this.state.open}
-                    setOpen={open => this.setState({ open })}
-                    onClearSelectionClick={() => this.handleResetProgram()}
-                    dataTest="program-selector-container"
-                >
-                    <div className={classes.selectBarMenu}>
-                        <Menu>
-                            {programOptions.length === 0
-                                ? (
-                                    <EmptyPrograms handleResetOrgUnit={() => this.handleResetOrgUnit()} />
-                                )
-                                : (
+    return (
+        <>
+            <SelectorBarItem
+                label={i18n.t('Program')}
+                noValueMessage={i18n.t('Choose a program')}
+                value={selectedProgram?.name}
+                open={open}
+                setOpen={openSelectorBarItem => setOpen(openSelectorBarItem)}
+                onClearSelectionClick={() => onResetProgramId(resetProgramIdBase())}
+                dataTest="program-selector-container"
+            >
+                <div className={classes.selectBarMenu}>
+                    <Menu>
+                        {programOptions.length === 0 ? (
+                            <EmptyPrograms onResetOrgUnit={() => onResetOrgUnit()} />
+                        ) : (
+                            <>
+                                <ProgramList
+                                    programOptions={programOptions}
+                                    programsArray={programsArray}
+                                    onChange={(item) => {
+                                        setOpen(false);
+                                        handleClickProgram && handleClickProgram(item.value);
+                                    }}
+                                    onResetOrgUnit={() => onResetOrgUnit()}
+                                />
+                                {Boolean(selectedProgram) && (
                                     <>
-                                        {this.renderProgramList(programOptions)}
-                                        {Boolean(selectedProgram) && (
-                                            <>
-                                                <MenuDivider />
-                                                <MenuItem
-                                                    dense
-                                                    onClick={() => this.handleResetProgram()}
-                                                    label={i18n.t('Clear selection')}
-                                                />
-                                            </>
-                                        )}
+                                        <MenuDivider />
+                                        <MenuItem
+                                            dense
+                                            onClick={() => {
+                                                setOpen(false);
+                                                onResetProgramId(resetProgramIdBase());
+                                            }}
+                                            label={i18n.t('Clear selection')}
+                                        />
                                     </>
                                 )}
-                        </Menu>
-                    </div>
-                </SelectorBarItem>
-                {this.renderCategories(selectedProgram)}
-            </>
-        );
-    }
-}
-export const ProgramSelector = withStyles(styles, { index: 1 })(ProgramSelectorPlain);
+                            </>
+                        )}
+                    </Menu>
+                </div>
+            </SelectorBarItem>
+            {renderCategories()}
+        </>
+    );
+};
+export const ProgramSelector = withStyles(styles)(ProgramSelectorPlain);

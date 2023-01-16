@@ -14,8 +14,8 @@ import {
     useResetStageId,
     useResetEventId,
     useReset,
+    SingleLockedSelect,
 } from '../../ScopeSelector';
-import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import { TopBarActions } from '../../TopBarActions';
 
 type Props = {|

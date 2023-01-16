@@ -13,7 +13,7 @@ import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
 import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
-import { FiltrableMenuItems } from './FiltrableMenuItems';
+import { FiltrableMenuItems } from '../QuickSelector/FiltrableMenuItems';
 
 type Props = {|
     isUserInteractionInProgress?: boolean,
@@ -77,7 +77,7 @@ const SingleLockedSelectPlain =
       return (
           <span data-test="single-locked-select">
               <SelectorBarItem
-                  disabled={Boolean(!label)}
+                  disabled={options.length === 0}
                   displayOnly={displayOnly}
                   label={capitalizeFirstLetter(title)}
                   value={label}
@@ -103,6 +103,7 @@ const SingleLockedSelectPlain =
                                   <>
                                       <MenuDivider />
                                       <MenuItem
+                                          dense
                                           onClick={() => {
                                               setOpenSelectorBarItem(false);
                                               handleOnClear();

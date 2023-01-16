@@ -11,9 +11,9 @@ import {
     useResetTeiId,
     useResetEnrollmentId,
     useReset,
+    SingleLockedSelect,
 } from '../../ScopeSelector';
 import { TopBarActions } from '../../TopBarActions';
-import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 
 type TopBarProps = {
     programId: string,

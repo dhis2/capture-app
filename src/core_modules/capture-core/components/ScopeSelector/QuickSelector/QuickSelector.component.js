@@ -27,7 +27,7 @@ export const QuickSelector = ({
         onClearSelectionClick={() => onStartAgain()}
     >
         <ProgramSelector
-            selectedProgram={selectedProgramId}
+            selectedProgramId={selectedProgramId}
             selectedOrgUnitId={selectedOrgUnitId}
             selectedCategories={selectedCategories}
             handleClickProgram={onSetProgramId}
