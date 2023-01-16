@@ -60,6 +60,7 @@ const styles = () => ({
     selectBarMenu: {
         maxHeight: '90vh',
         overflow: 'auto',
+        paddingBottom: `${spacers.dp4}`,
     },
 });
 

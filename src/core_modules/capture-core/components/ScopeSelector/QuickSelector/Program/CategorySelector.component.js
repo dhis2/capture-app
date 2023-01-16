@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { SelectorBarItem, Menu, MenuItem, MenuDivider } from '@dhis2/ui';
+import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
@@ -34,6 +34,7 @@ const styles = () => ({
     selectBarMenu: {
         maxHeight: '90vh',
         overflow: 'auto',
+        paddingBottom: `${spacers.dp4}`,
     },
 });
 
