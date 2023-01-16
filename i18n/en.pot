@@ -980,8 +980,8 @@ msgstr "You don't have access to create any relationships"
 msgid "Add relationship"
 msgstr "Add relationship"
 
-msgid "No match found"
-msgstr "No match found"
+msgid "No results found for "
+msgstr "No results found for "
 
 msgid "Registering unit"
 msgstr "Registering unit"
