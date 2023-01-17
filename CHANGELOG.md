@@ -1,3 +1,10 @@
+# [100.24.0](https://github.com/dhis2/capture-app/compare/v100.23.2...v100.24.0) (2023-01-17)
+
+
+### Features
+
+* [DHIS-14336] enter press should trigger search ([#3164](https://github.com/dhis2/capture-app/issues/3164)) ([6ed5d34](https://github.com/dhis2/capture-app/commit/6ed5d34f2604c56b3265a6bc0866efa5006fb870))
+
 ## [100.23.2](https://github.com/dhis2/capture-app/compare/v100.23.1...v100.23.2) (2023-01-13)
 
 
