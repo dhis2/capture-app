@@ -184,8 +184,7 @@ const CardListItemIndex = ({
             return null;
         }
     };
-    console.log(program);
-    console.log(enrollments);
+
     return (
         <div data-test="card-list-item" className={classes.itemContainer}>
             <div className={classes.itemDataContainer}>
