@@ -117,12 +117,12 @@ const deriveEnrollmentOrgUnitAndDate = (enrollments, enrollmentType, currentProg
 };
 
 const deriveProgramFromEnrollment = (enrollments, currentSearchScopeType) => {
-    if (currentSearchScopeType !== searchScopes.ALL_PROGRAMS) {
-        return undefined;
-    }
-    const program = getProgramFromProgramIdThrowIfNotFound(enrollments[0].program);
+    if (currentSearchScopeType === searchScopes.ALL_PROGRAMS || currentSearchScopeType === searchScopes.PROGRAM) {
+        const program = getProgramFromProgramIdThrowIfNotFound(enrollments[0].program);
 
-    return program;
+        return program;
+    }
+    return undefined;
 };
 
 const CardListItemIndex = ({
@@ -147,7 +147,7 @@ const CardListItemIndex = ({
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitName, enrolledAt } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
-    const program = deriveProgramFromEnrollment(enrollments, currentSearchScopeType);
+    const program = enrollments && deriveProgramFromEnrollment(enrollments, currentSearchScopeType);
 
     const renderTag = () => {
         switch (enrollmentType) {
@@ -184,6 +184,7 @@ const CardListItemIndex = ({
             return null;
         }
     };
+
     return (
         <div data-test="card-list-item" className={classes.itemContainer}>
             <div className={classes.itemDataContainer}>
@@ -209,7 +210,7 @@ const CardListItemIndex = ({
                                     value={orgUnitName}
                                 />
                                 <ListEntry
-                                    name={i18n.t('Date of enrollment')}
+                                    name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of enrollment')}
                                     value={enrolledAt}
                                     type={dataElementTypes.DATE}
                                 />
