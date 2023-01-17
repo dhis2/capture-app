@@ -12,7 +12,7 @@ import type {
 import { searchScopes } from '../Pages/Search/SearchPage.constants';
 import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
-import { dataElementTypes, getProgramFromProgramIdThrowIfNotFound } from '../../metaData';
+import { dataElementTypes, getTrackerProgramThrowIfNotFound } from '../../metaData';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 
@@ -118,7 +118,7 @@ const deriveEnrollmentOrgUnitAndDate = (enrollments, enrollmentType, currentProg
 
 const deriveProgramFromEnrollment = (enrollments, currentSearchScopeType) => {
     if (currentSearchScopeType === searchScopes.ALL_PROGRAMS || currentSearchScopeType === searchScopes.PROGRAM) {
-        const program = getProgramFromProgramIdThrowIfNotFound(enrollments[0].program);
+        const program = getTrackerProgramThrowIfNotFound(enrollments[0].program);
 
         return program;
     }
@@ -184,7 +184,8 @@ const CardListItemIndex = ({
             return null;
         }
     };
-
+    console.log(program);
+    console.log(enrollments);
     return (
         <div data-test="card-list-item" className={classes.itemContainer}>
             <div className={classes.itemDataContainer}>
