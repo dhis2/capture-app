@@ -65,14 +65,16 @@ export const TopBar = ({
                 title={trackedEntityName}
                 displayOnly
             />
-            <SingleLockedSelect
-                ready
-                onClear={() => resetEnrollmentId()}
-                onSelect={id => setEnrollmentId({ enrollmentId: id })}
-                options={enrollmentsAsOptions}
-                selectedValue={enrollmentId}
-                title={i18n.t('Enrollment')}
-            />
+            {enrollmentsAsOptions?.length > 0 && (
+                <SingleLockedSelect
+                    ready
+                    onClear={() => resetEnrollmentId()}
+                    onSelect={id => setEnrollmentId({ enrollmentId: id })}
+                    options={enrollmentsAsOptions}
+                    selectedValue={enrollmentId}
+                    title={i18n.t('Enrollment')}
+                />
+            )}
             <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />
         </ScopeSelector>
     );

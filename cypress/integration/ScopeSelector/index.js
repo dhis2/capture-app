@@ -386,7 +386,7 @@ Then('you can see message on the scope selector', () => {
     cy.get('[data-test="program-selector-container"]')
         .click();
     cy.get('[data-test="program-selector-no-programs"]')
-        .contains('No programs available.');
+        .contains('Show all');
 });
 
 Then('you see the tei id on the scope selector', () => {

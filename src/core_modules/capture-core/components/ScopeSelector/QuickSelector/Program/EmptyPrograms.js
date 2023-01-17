@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useEffect } from 'react';
-import { MenuItem, Button, spacers, colors } from '@dhis2/ui';
+import { Button, spacers, colors } from '@dhis2/ui';
 import { useHistory, useLocation } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -37,17 +37,12 @@ const EmptyProgramsPlain = ({ onResetOrgUnit, classes }: Props) => {
     }, [push, pathname, enrollmentId, teiId, orgUnitId]);
 
     return (
-        <MenuItem
-            dataTest="program-selector-no-programs"
-            label={
-                <div className={classes.filterWarning}>
-                    <span>{i18n.t('No programs available.')}</span>
-                    <Button small secondary onClick={() => onResetOrgUnit()}>
-                        {i18n.t('Show all')}
-                    </Button>
-                </div>
-            }
-        />
+        <div className={classes.filterWarning}>
+            <span>{i18n.t('No programs available.')}</span>
+            <Button small secondary onClick={() => onResetOrgUnit()} dataTest="program-selector-no-programs">
+                {i18n.t('Show all')}
+            </Button>
+        </div>
     );
 };
 

@@ -91,7 +91,7 @@ const OrgUnitTreePlain = (props: Props) => {
                 handleExpand={handleExpand}
                 handleCollapse={handleCollapse}
                 singleSelection
-                highlighted={getHighlightedItems()}
+                selected={getHighlightedItems()}
                 onChange={onSelectClick}
             />
         </div>
