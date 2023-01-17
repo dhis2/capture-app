@@ -1,27 +1,28 @@
 import { v4 as uuid } from 'uuid';
 import '../../sharedSteps';
 import '../../../sharedSteps';
+import { getCurrentYear, combineDataAndYear } from '../../../../support/date';
 
 Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
-    const rows = {
-        '2022-12-30': ['14 Male'],
-        '2022-12-29': ['67 Male'],
-        '2022-12-27': ['66 Male'],
-        '2022-12-25': ['55 Male'],
-        '2022-12-24': ['26 Female'],
-        '2022-12-21': ['35 Male'],
-        '2022-12-19': ['49 Male', '60 Male', '12 Male'],
-        '2022-12-16': ['61 Male'],
-        '2022-12-13': ['27 Female'],
-        '2022-12-12': ['20 Male'],
-        '2022-12-06': ['69 Male'],
-        '2022-12-04': ['11 Male'],
-        '2022-12-03': ['59 Male'],
-    };
+    const rows = combineDataAndYear(getCurrentYear(), {
+        '12-30': ['14 Male'],
+        '12-29': ['67 Male'],
+        '12-27': ['66 Male'],
+        '12-25': ['55 Male'],
+        '12-24': ['26 Female'],
+        '12-21': ['35 Male'],
+        '12-19': ['49 Male', '60 Male', '12 Male'],
+        '12-16': ['61 Male'],
+        '12-13': ['27 Female'],
+        '12-12': ['20 Male'],
+        '12-06': ['69 Male'],
+        '12-04': ['11 Male'],
+        '12-03': ['59 Male'],
+    });
 
     cy.get('[data-test="event-working-lists"]')
         .find('tr')
@@ -183,19 +184,19 @@ Then('Household location should display in the list', () => {
 });
 
 Then('the list should display data for the second page', () => {
-    const rows = {
-        '2022-12-02': ['19 Male', '56 Female', '61 Male'],
-        '2022-11-30': ['9 Male'],
-        '2022-11-24': ['15 Female'],
-        '2022-11-23': ['2 Male', '55 Female'],
-        '2022-11-22': ['14 Male', '8 Female'],
-        '2022-11-21': ['70 Male'],
-        '2022-11-18': ['22 Male'],
-        '2022-11-16': ['4 Male'],
-        '2022-11-15': ['2 Male'],
-        '2022-11-09': ['28 Female'],
-        '2022-11-06': ['44 Male'],
-    };
+    const rows = combineDataAndYear(getCurrentYear(), {
+        '12-02': ['19 Male', '56 Female', '61 Male'],
+        '11-30': ['9 Male'],
+        '11-24': ['15 Female'],
+        '11-23': ['2 Male', '55 Female'],
+        '11-22': ['14 Male', '8 Female'],
+        '11-21': ['70 Male'],
+        '11-18': ['22 Male'],
+        '11-16': ['4 Male'],
+        '11-15': ['2 Male'],
+        '11-09': ['28 Female'],
+        '11-06': ['44 Male'],
+    });
 
 
     cy.get('[data-test="event-working-lists"]')
@@ -221,16 +222,16 @@ Then('the list should display data for the second page', () => {
 });
 
 Then('the list should display 10 rows of data', () => {
-    const rows = {
-        '2022-12-30': ['14 Male'],
-        '2022-12-29': ['67 Male'],
-        '2022-12-27': ['66 Male'],
-        '2022-12-25': ['55 Male'],
-        '2022-12-24': ['26 Female'],
-        '2022-12-21': ['35 Male'],
-        '2022-12-19': ['49 Male', '60 Male', '12 Male'],
-        '2022-12-16': ['61 Male'],
-    };
+    const rows = combineDataAndYear(getCurrentYear(), {
+        '12-30': ['14 Male'],
+        '12-29': ['67 Male'],
+        '12-27': ['66 Male'],
+        '12-25': ['55 Male'],
+        '12-24': ['26 Female'],
+        '12-21': ['35 Male'],
+        '12-19': ['49 Male', '60 Male', '12 Male'],
+        '12-16': ['61 Male'],
+    });
 
     cy.get('[data-test="event-working-lists"]')
         .find('tr')
@@ -262,32 +263,33 @@ When('you click the report date column header', () => {
 
 Then('the list should display data ordered descendingly by report date', () => {
     // For concurrency reasons: Adding a filter to ensure that we don't see data we have added in our tests (the tests will clean up, but concurrent running could cause problems anyway)
+    const lastYear = getCurrentYear() - 1;
     cy.contains('button', 'Report date')
         .click();
 
     cy.get('input[placeholder="From"]')
-        .type('2021-01-01');
+        .type(`${lastYear}-01-01`);
 
     cy.get('input[placeholder="To"]').click();
 
     cy.contains('Update')
         .click();
 
-    const rows = {
-        '2021-01-01': ['14 Female'],
-        '2021-01-03': ['63 Male'],
-        '2021-01-04': ['4 Female'],
-        '2021-01-05': ['37 Male'],
-        '2021-01-08': ['68 Female'],
-        '2021-01-09': ['27 Male'],
-        '2021-01-14': ['45 Female'],
-        '2021-01-18': ['9 Male'],
-        '2021-01-20': ['59 Male', '50 Female', '62 Female'],
-        '2021-01-24': ['66 Male'],
-        '2021-01-27': ['42 Female'],
-        '2021-01-29': ['51 Female'],
-        '2021-02-01': ['1 Female'],
-    };
+    const rows = combineDataAndYear(lastYear, {
+        '01-01': ['14 Female'],
+        '01-03': ['63 Male'],
+        '01-04': ['4 Female'],
+        '01-05': ['37 Male'],
+        '01-08': ['68 Female'],
+        '01-09': ['27 Male'],
+        '01-14': ['45 Female'],
+        '01-18': ['9 Male'],
+        '01-20': ['59 Male', '50 Female', '62 Female'],
+        '01-24': ['66 Male'],
+        '01-27': ['42 Female'],
+        '01-29': ['51 Female'],
+        '02-01': ['1 Female'],
+    });
 
     cy.get('[data-test="event-working-lists"]')
         .find('tr')

@@ -4,6 +4,8 @@ import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import { typeKeys, typeof environmentTypes } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
 import { getStructureEvents } from './helpers';
+import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable';
+import { defaultValues } from './defaultValues';
 import type {
     VariableServiceInput,
     ProgramRuleVariable,
@@ -55,28 +57,13 @@ export const variableSourceTypes = {
     CALCULATED_VALUE: 'CALCULATED_VALUE',
 };
 
-const EMPTY_STRING = '';
-
 export class VariableService {
-    static getDataElementValueForVariable(value: any, dataElementId: string, useNameForOptionSet: ?boolean, dataElements: ?DataElements, optionSets: OptionSets) {
-        const hasValue = !!value || value === 0 || value === false;
-        return (hasValue && useNameForOptionSet && dataElements && dataElements[dataElementId] && dataElements[dataElementId].optionSetId) ?
-            OptionSetHelper.getName(optionSets[dataElements[dataElementId].optionSetId].options, value) :
-            value;
-    }
-
-    static getTrackedEntityValueForVariable(value: any, trackedEntityAttributeId: string, useNameForOptionSet: ?boolean, trackedEntityAttributes: ?TrackedEntityAttributes, optionSets: OptionSets) {
-        const hasValue = !!value || value === 0 || value === false;
-        return hasValue && useNameForOptionSet && trackedEntityAttributes && trackedEntityAttributes[trackedEntityAttributeId] && trackedEntityAttributes[trackedEntityAttributeId].optionSetId ?
-            OptionSetHelper.getName(optionSets[trackedEntityAttributes[trackedEntityAttributeId].optionSetId].options, value)
-            : value;
-    }
-
     static dateUtils: IDateUtils;
     environment: $Values<environmentTypes>;
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
+    defaultValues: any;
     structureEvents: (currentEvent?: EventData, events?: EventsData) => EventsDataContainer;
     constructor(
         onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
@@ -95,6 +82,8 @@ export class VariableService {
             [variableSourceTypes.TEI_ATTRIBUTE]: this.getVariableForSelectedEntityAttributes,
             [variableSourceTypes.CALCULATED_VALUE]: this.getVariableForCalculatedValue,
         };
+
+        this.defaultValues = defaultValues;
 
         this.structureEvents = getStructureEvents(dateUtils.compareDates);
     }
@@ -133,7 +122,7 @@ export class VariableService {
             if (!getterFn) {
                 log.error(`Unknown programRuleVariableSourceType:${programVariable.programRuleVariableSourceType}`);
                 variable = this.buildVariable(
-                    EMPTY_STRING,
+                    null,
                     typeKeys.TEXT, {
                         variablePrefix: variablePrefixes.DATAELEMENT,
                         useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -182,6 +171,28 @@ export class VariableService {
         return variablesWithContextAndConstantVariables;
     }
 
+    updateVariable(variableToAssign: string, data: any, variablesHash: RuleVariables) {
+        const variableHashKey = variableToAssign.replace('#{', '').replace('A{', '').replace(/}/g, '');
+        const variableHash = variablesHash[variableHashKey];
+
+        if (!variableHash) {
+            // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
+            log.warn(`Variable ${variableHashKey} was not defined.`);
+        } else {
+            const { variableType } = variableHash;
+            const variableValue = data === null ? this.defaultValues[variableType] : normalizeRuleVariable(data, variableType);
+
+            variablesHash[variableHashKey] = {
+                ...variableHash,
+                variableValue,
+                hasValue: data !== null,
+                variableEventDate: '',
+                variablePrefix: variableHash.variablePrefix || '#',
+                allValues: [variableValue],
+            };
+        }
+    }
+
     buildVariable(
         value: any,
         type: string,
@@ -197,19 +208,14 @@ export class VariableService {
             useNameForOptionSet?: ?boolean,
         },
     ): RuleVariable {
-        const processedAllValues = allValues ?
-            allValues
-                .map(alternateValue => this.onProcessValue(alternateValue, type)) :
-            null;
-
         return {
-            variableValue: this.onProcessValue(value, type),
+            variableValue: value ?? this.defaultValues[type],
             useCodeForOptionSet: !useNameForOptionSet,
             variableType: type || typeKeys.TEXT,
-            hasValue: !!value || value === 0 || value === false,
-            variableEventDate: this.onProcessValue(variableEventDate, typeKeys.DATE),
+            hasValue: value !== null,
+            variableEventDate,
             variablePrefix,
-            allValues: processedAllValues,
+            allValues,
         };
     }
 
@@ -219,7 +225,7 @@ export class VariableService {
         if (!dataElement) {
             log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid dataelement id (id: ${dataElementId || ''})`);
             return this.buildVariable(
-                EMPTY_STRING,
+                null,
                 typeKeys.TEXT, {
                     variablePrefix: variablePrefixes.DATAELEMENT,
                     useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -235,7 +241,7 @@ export class VariableService {
         if (!attribute) {
             log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid trackedEntityAttribute id (id: ${attributeId || ''})`);
             return this.buildVariable(
-                EMPTY_STRING,
+                null,
                 typeKeys.TEXT, {
                     variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
                     useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -250,7 +256,7 @@ export class VariableService {
         // $FlowFixMe[incompatible-type] automated comment
         const dataElement: DataElement = dataElements[dataElementId];
         return this.buildVariable(
-            EMPTY_STRING,
+            null,
             dataElement.valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
                 useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -258,9 +264,23 @@ export class VariableService {
         );
     }
 
+    getVariableValue(
+        rawValue: any,
+        valueType: string,
+        dataElementId: string,
+        useNameForOptionSet: ?boolean,
+        dataElements: ?DataElements | ?TrackedEntityAttributes,
+        optionSets: OptionSets,
+    ) {
+        const value = this.onProcessValue(rawValue, valueType);
+        return (value !== null && useNameForOptionSet && dataElements && dataElements[dataElementId] && dataElements[dataElementId].optionSetId) ?
+            OptionSetHelper.getName(optionSets[dataElements[dataElementId].optionSetId].options, value) :
+            value;
+    }
+
     getVariableForCalculatedValue(programVariable: ProgramRuleVariable): ?RuleVariable {
         return this.buildVariable(
-            EMPTY_STRING,
+            null,
             programVariable.valueType, {
                 variablePrefix: variablePrefixes.CALCULATED_VALUE,
                 useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -276,29 +296,18 @@ export class VariableService {
         // $FlowFixMe[incompatible-use] automated comment
         const attribute: TrackedEntityAttribute = sourceData.trackedEntityAttributes[trackedEntityAttributeId];
         const attributeValue = sourceData.selectedEntity ? sourceData.selectedEntity[trackedEntityAttributeId] : null;
-
         const valueType = (programVariable.useNameForOptionSet && attribute.optionSetId) ? 'TEXT' : attribute.valueType;
-
-        const hasValue = !!attributeValue || attributeValue === 0 || attributeValue === false;
-        if (!hasValue) {
-            return this.buildVariable(
-                EMPTY_STRING,
-                valueType, {
-                    variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
-                    useNameForOptionSet: programVariable.useNameForOptionSet,
-                },
-            );
-        }
-
-        const variableValue = VariableService.getTrackedEntityValueForVariable(
+        const value = this.getVariableValue(
             attributeValue,
+            valueType,
             trackedEntityAttributeId,
             programVariable.useNameForOptionSet,
             sourceData.trackedEntityAttributes,
             sourceData.optionSets,
         );
+
         return this.buildVariable(
-            variableValue,
+            value,
             valueType, {
                 variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
                 useNameForOptionSet: programVariable.useNameForOptionSet,
@@ -317,24 +326,21 @@ export class VariableService {
         }
 
         const dataElementValue = executingEvent && executingEvent[dataElementId];
-        if (!dataElementValue && dataElementValue !== 0 && dataElementValue !== false) {
-            return null;
-        }
-
-        const value = VariableService.getDataElementValueForVariable(dataElementValue,
+        const valueType = (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
+        const value = this.getVariableValue(
+            dataElementValue,
+            valueType,
             dataElementId,
             programVariable.useNameForOptionSet,
             sourceData.dataElements,
-            sourceData.optionSets);
-
-        const valueType =
-            (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
+            sourceData.optionSets,
+        );
 
         return this.buildVariable(
             value,
             valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
-                variableEventDate: executingEvent.occurredAt,
+                variableEventDate: this.onProcessValue(executingEvent.occurredAt, typeKeys.DATE),
                 useNameForOptionSet: programVariable.useNameForOptionSet,
             },
         );
@@ -352,44 +358,7 @@ export class VariableService {
             return null;
         }
 
-        // $FlowFixMe[incompatible-type] automated comment
-        const dataElementId: string = programVariable.dataElementId;
-        // $FlowFixMe[incompatible-use] automated comment
-        const dataElement: DataElement = sourceData.dataElements[dataElementId];
-
-        const allValues = stageEvents
-            .map(event =>
-                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
-            )
-            .filter(value => !!value || value === false || value === 0);
-
-        const clonedEvents = [...stageEvents];
-        const reversedEvents = clonedEvents.reverse();
-
-        const eventWithValue = reversedEvents.find((event) => {
-            const dataElementValue = event[dataElementId];
-            return !!dataElementValue || dataElementValue === 0 || dataElementValue === false;
-        });
-
-        if (!eventWithValue) {
-            return null;
-        }
-
-        const dataElementValue = eventWithValue[dataElementId];
-
-        const valueType =
-            (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
-
-        const value = VariableService.getDataElementValueForVariable(dataElementValue, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
-        return this.buildVariable(
-            value,
-            valueType, {
-                variablePrefix: variablePrefixes.DATAELEMENT,
-                variableEventDate: eventWithValue.occurredAt,
-                useNameForOptionSet: programVariable.useNameForOptionSet,
-                allValues,
-            },
-        );
+        return this.getVariableContainingAllValues(programVariable, sourceData, stageEvents);
     }
 
     getVariableForNewestEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
@@ -398,42 +367,7 @@ export class VariableService {
             return null;
         }
 
-        // $FlowFixMe[incompatible-type] automated comment
-        const dataElementId: string = programVariable.dataElementId;
-        // $FlowFixMe[incompatible-use] automated comment
-        const dataElement: DataElement = sourceData.dataElements[dataElementId];
-
-        const allValues = events
-            .map(event =>
-                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
-            )
-            .filter(value => !!value || value === false || value === 0);
-
-        const clonedEvents = [...events];
-        const reversedEvents = clonedEvents.reverse();
-
-        const eventWithValue = reversedEvents.find((event) => {
-            const dataElementValue = event[dataElementId];
-            return !!dataElementValue || dataElementValue === 0 || dataElementValue === false;
-        });
-
-        if (!eventWithValue) {
-            return null;
-        }
-
-        const dataElementValue = eventWithValue[dataElementId];
-        const valueType =
-            (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
-        const value = VariableService.getDataElementValueForVariable(dataElementValue, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
-        return this.buildVariable(
-            value,
-            valueType, {
-                variablePrefix: variablePrefixes.DATAELEMENT,
-                variableEventDate: eventWithValue.occurredAt,
-                useNameForOptionSet: programVariable.useNameForOptionSet,
-                allValues,
-            },
-        );
+        return this.getVariableContainingAllValues(programVariable, sourceData, events);
     }
 
     getVariableForPreviousEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
@@ -453,39 +387,55 @@ export class VariableService {
             return null;
         }
 
+        return this.getVariableContainingAllValues(programVariable, sourceData, events.slice(0, currentEventIndex));
+    }
+
+    getVariableContainingAllValues(programVariable: ProgramRuleVariable, sourceData: SourceData, events: EventsData): ?RuleVariable {
         // $FlowFixMe[incompatible-type] automated comment
         const dataElementId: string = programVariable.dataElementId;
         // $FlowFixMe[incompatible-use] automated comment
         const dataElement: DataElement = sourceData.dataElements[dataElementId];
 
-        const previousEvents = events.slice(0, currentEventIndex);
-        const allValues = previousEvents
+        const valueType = (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
+        const allValues = events
             .map(event =>
-                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
+                this.getVariableValue(event[dataElementId], valueType, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
             )
-            .filter(value => !!value || value === false || value === 0);
+            .filter(value => value !== null);
 
-        const clonedEvents = [...previousEvents];
+        const clonedEvents = [...events];
         const reversedEvents = clonedEvents.reverse();
 
         const eventWithValue = reversedEvents.find((event) => {
-            const dataElementValue = event[dataElementId];
-            return !!dataElementValue || dataElementValue === 0 || dataElementValue === false;
+            const value = this.getVariableValue(
+                event[dataElementId],
+                valueType,
+                dataElementId,
+                programVariable.useNameForOptionSet,
+                sourceData.dataElements,
+                sourceData.optionSets,
+            );
+            return value !== null;
         });
 
         if (!eventWithValue) {
             return null;
         }
 
-        const dataElementValue = eventWithValue[dataElementId];
-        const valueType =
-            (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
-        const value = VariableService.getDataElementValueForVariable(dataElementValue, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
+        const value = this.getVariableValue(
+            eventWithValue[dataElementId],
+            valueType,
+            dataElementId,
+            programVariable.useNameForOptionSet,
+            sourceData.dataElements,
+            sourceData.optionSets,
+        );
+
         return this.buildVariable(
             value,
             valueType, {
                 variablePrefix: variablePrefixes.DATAELEMENT,
-                variableEventDate: eventWithValue.occurredAt,
+                variableEventDate: this.onProcessValue(eventWithValue.occurredAt, typeKeys.DATE),
                 useNameForOptionSet: programVariable.useNameForOptionSet,
                 allValues,
             },
@@ -548,7 +498,7 @@ export class VariableService {
                 executingEvent.eventId,
                 typeKeys.TEXT, {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                    variableEventDate: executingEvent.occurredAt,
+                    variableEventDate: this.onProcessValue(executingEvent.occurredAt, typeKeys.DATE),
                 },
             );
 

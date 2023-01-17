@@ -12,7 +12,7 @@ import {
 } from '../Search';
 import { useSearchOptions } from '../../../hooks';
 import { MainPageComponent } from './MainPage.component';
-import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
+import { withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
@@ -165,7 +165,7 @@ const MainPageContainer = () => {
 
 
     return (
-        <OrgUnitFetcher orgUnitId={orgUnitId}>
+        <OrgUnitFetcher orgUnitId={orgUnitId} error={error}>
             <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
             <>
                 {showMainPage({ programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId }) ? (
@@ -200,4 +200,4 @@ const MainPageContainer = () => {
 };
 
 // $FlowFixMe[missing-annot] automated comment
-export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(MainPageContainer)));
+export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(MainPageContainer));
