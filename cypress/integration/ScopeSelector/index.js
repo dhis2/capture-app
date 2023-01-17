@@ -249,14 +249,13 @@ const selectedOrgUnit = ['Registering unit', 'Taninahun (Malen) CHP'];
 const emptyOrgUnitSelection = ['Choose a registering unit'];
 const selectedTei = ['Person', 'Carlos Cruz'];
 const selectedEnrollment = ['Enrollment', `${getCurrentYear() + 1}-07-01 12:05`];
-const emptyEnrollmentSelection = ['Enrollment'];
 
 const scopeSelectorCases = {
     all: [...selectedChildProgram, ...selectedOrgUnit, ...selectedTei, ...selectedEnrollment],
-    teiAndOrgUnit: [...emptyProgramSelection, ...selectedOrgUnit, ...selectedTei, ...emptyEnrollmentSelection],
-    teiAndChildProgram: [...selectedChildProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
-    teiAndMalariaProgram: [...selectedMalariaProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
-    teiAndEventProgram: [...selectedEventProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
+    teiAndOrgUnit: [...emptyProgramSelection, ...selectedOrgUnit, ...selectedTei],
+    teiAndChildProgram: [...selectedChildProgram, ...emptyOrgUnitSelection, ...selectedTei],
+    teiAndMalariaProgram: [...selectedMalariaProgram, ...emptyOrgUnitSelection, ...selectedTei],
+    teiAndEventProgram: [...selectedEventProgram, ...emptyOrgUnitSelection, ...selectedTei],
     error: [],
 };
 
