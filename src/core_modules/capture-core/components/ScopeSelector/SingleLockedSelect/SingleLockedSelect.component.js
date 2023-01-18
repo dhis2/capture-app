@@ -94,7 +94,7 @@ const SingleLockedSelectPlain = ({
                                     key={option.value}
                                     label={<div className={classes.label}>{option.label}</div>}
                                     value={option.value}
-                                    onChange={(item) => {
+                                    onClick={(item) => {
                                         setOpenSelectorBarItem(false);
                                         handleOnSelect(item);
                                     }}
