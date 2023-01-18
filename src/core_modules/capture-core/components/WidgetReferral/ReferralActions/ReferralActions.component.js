@@ -3,8 +3,9 @@ import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Radio, colors, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { mainOptionTranslatedTexts, referralStatus } from '../constants';
+import { actions as ReferalActionTypes, mainOptionTranslatedTexts, referralStatus } from '../constants';
 import { DataSection } from '../../DataSection';
+import { ReferToOrgUnit } from '../ReferToOrgUnit';
 
 type Props = {|
     type: string,
@@ -36,27 +37,33 @@ const styles = () => ({
 
 export const ReferralActionsPlain = ({ classes, type }: Props) => {
     const [selectedAction, setSelectedAction] = React.useState();
-    return (<DataSection
-        dataTest="referral-section"
-        sectionName={i18n.t('Referral actions')}
-    >
-        <div className={classes.wrapper}>
-            {type === referralStatus.REFERRABLE ? Object.keys(mainOptionTranslatedTexts).map(key => (
-                <Radio
-                    key={key}
-                    name={`referral-action-${key}`}
-                    checked={key === selectedAction}
-                    label={mainOptionTranslatedTexts[key]}
-                    onChange={(e: Object) => setSelectedAction(e.value)}
-                    value={key}
-                />
-            )) : null}
-            {type === referralStatus.AMBIGUOUS_REFERRALS ?
-                <div>{i18n.t('Ambigous referrals, contact system administrator')}</div>
-                : null
-            }
-        </div>
-    </DataSection>);
+
+    return (
+        <DataSection
+            dataTest="referral-section"
+            sectionName={i18n.t('Referral actions')}
+        >
+            <div className={classes.wrapper}>
+                {type === referralStatus.REFERRABLE ? Object.keys(mainOptionTranslatedTexts).map(key => (
+                    <Radio
+                        key={key}
+                        name={`referral-action-${key}`}
+                        checked={key === selectedAction}
+                        label={mainOptionTranslatedTexts[key]}
+                        onChange={(e: Object) => setSelectedAction(e.value)}
+                        value={key}
+                    />
+                )) : null}
+                {type === referralStatus.AMBIGUOUS_REFERRALS ?
+                    <div>{i18n.t('Ambigous referrals, contact system administrator')}</div>
+                    : null
+                }
+            </div>
+
+            {selectedAction === ReferalActionTypes.REFER_ORG && (
+                <ReferToOrgUnit />
+            )}
+        </DataSection>);
 };
 
 export const ReferralActions: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ReferralActionsPlain);
