@@ -7,8 +7,8 @@ import { EventDetails } from '../EventDetailsSection/EventDetailsSection.contain
 import { Button } from '../../../Buttons/Button.component';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
-import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
-import { defaultDialogProps } from '../../../Dialogs/ConfirmDialog.constants';
+import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
+import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
 
 const getStyles = (theme: Theme) => ({
@@ -95,7 +95,7 @@ class ViewEventPlain extends Component<Props, State> {
                         dataEntryKey={currentDataEntryKey}
                     />
                 </div>
-                <ConfirmDialog
+                <DiscardDialog
                     {...defaultDialogProps}
                     onCancel={() => { this.setState({ warningOpen: false }); }}
                     onConfirm={() => this.props.onBackToAllEvents()}
