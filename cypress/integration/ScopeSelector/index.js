@@ -30,6 +30,7 @@ Then('you should see informative text saying you should do finish your selection
 
 Given('you are in the main page with organisation unit preselected', () => {
     cy.visit('/#/?orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="org-unit-selector-container"]').contains('Ngelehun CHC');
     cy.get('[data-test="new-event-button"]')
         .should('exist');
 });
@@ -40,6 +41,7 @@ Then('you should be taken to the new page', () => {
 
 Given('you are in the main page with program preselected', () => {
     cy.visit('/#/?programId=VBqh0ynB2wv');
+    cy.get('[data-test="program-selector-container"]').contains('Malaria case registration');
     cy.get('[data-test="new-button"]')
         .should('exist');
 });
