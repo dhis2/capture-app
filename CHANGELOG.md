@@ -1,3 +1,10 @@
+## [100.24.1](https://github.com/dhis2/capture-app/compare/v100.24.0...v100.24.1) (2023-01-18)
+
+
+### Bug Fixes
+
+* [DHIS2-14340][DHIS2-13197] Sort blank cells in stages & event widget ([#3142](https://github.com/dhis2/capture-app/issues/3142)) ([063d73b](https://github.com/dhis2/capture-app/commit/063d73b0bb9502e67dda3549441262fdaf6d6f48))
+
 # [100.24.0](https://github.com/dhis2/capture-app/compare/v100.23.2...v100.24.0) (2023-01-17)
 
 
