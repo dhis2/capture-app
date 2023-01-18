@@ -9,7 +9,6 @@ import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRulesEngineOrgUnit } from '../../../hooks/useRulesEngineOrgUnit';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
-
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
     id,
@@ -20,9 +19,10 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
     const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
     const isUserInteractionInProgress: boolean = useSelector(
-        state =>
-            dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
-          || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
+        state => dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
+        || dataEntryHasChanges(state, 'newPageDataEntryId-newTei')
+          || dataEntryHasChanges(state, 'relationship-newTei')
+          || dataEntryHasChanges(state, 'relationship-newEnrollment'),
     );
     const isSavingInProgress = useSelector(({ possibleDuplicates }) =>
         possibleDuplicates.isLoading || possibleDuplicates.isUpdating);
