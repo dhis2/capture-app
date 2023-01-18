@@ -32,7 +32,7 @@ type State = {
 
 const styles = () => ({
     selectBarMenu: {
-        maxHeight: '90vh',
+        maxHeight: '80vh',
         overflow: 'auto',
         paddingBottom: `${spacers.dp4}`,
     },

@@ -26,7 +26,7 @@ type ReadyProp = {|
 
 const styles = () => ({
     selectBarMenu: {
-        maxHeight: '90vh',
+        maxHeight: '80vh',
         overflow: 'auto',
     },
     label: {

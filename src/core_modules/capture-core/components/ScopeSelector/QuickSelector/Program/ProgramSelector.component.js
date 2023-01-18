@@ -14,7 +14,7 @@ import { getOptions } from './getOptions';
 
 const styles = () => ({
     selectBarMenu: {
-        maxHeight: '90vh',
+        maxHeight: '80vh',
         overflow: 'auto',
         paddingBottom: `${spacers.dp4}`,
     },
@@ -47,17 +47,11 @@ const ProgramSelectorPlain = ({
     const [programsArray, setProgramsArray] = useState<Array<Program>>([]);
     const selectedProgram = selectedProgramId ? programCollection.get(selectedProgramId) : null;
     const programOptions = getOptions(selectedOrgUnitId, programsArray);
-    const selectedProgramNotInOptions =
-        programsArray.length > 0 && !programOptions.find(item => item.value === selectedProgramId);
-    const shouldResetProgram = selectedProgramId && selectedOrgUnitId && selectedProgramNotInOptions;
 
     useEffect(() => {
         setProgramsArray(Array.from(programCollection.values()));
     }, []);
 
-    useEffect(() => {
-        shouldResetProgram && onResetProgramId(resetProgramIdBase());
-    }, [shouldResetProgram, onResetProgramId]);
 
     const renderCategories = () => {
         if (selectedProgram?.categoryCombination) {

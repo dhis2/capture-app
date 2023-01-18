@@ -13,6 +13,7 @@ const styles = () => ({
         alignItems: 'center',
         marginLeft: `${spacers.dp8}`,
         gap: `${spacers.dp4}`,
+        height: '40px',
     },
 });
 

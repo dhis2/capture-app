@@ -8,7 +8,7 @@ import { OrgUnitField } from '../../FormFields/New';
 const styles = () => ({
     selectBarMenu: {
         minWidth: '640px',
-        maxHeight: '90vh',
+        maxHeight: '80vh',
         overflow: 'auto',
         minHeight: spacers.dp96,
     },
