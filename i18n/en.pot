@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-12-30T09:38:56.765Z\n"
-"PO-Revision-Date: 2022-12-30T09:38:56.765Z\n"
+"POT-Creation-Date: 2023-01-19T18:17:46.027Z\n"
+"PO-Revision-Date: 2023-01-19T18:17:46.027Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -553,15 +553,6 @@ msgstr "Program doesn't exist"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Selected program is invalid for selected registering unit"
 
-msgid "coordinates"
-msgstr "coordinates"
-
-msgid "area"
-msgstr "area"
-
-msgid "Set"
-msgstr "Set"
-
 msgid "Online"
 msgstr "Online"
 
@@ -1091,6 +1082,15 @@ msgstr "Remove mark for follow-up"
 
 msgid "Mark for follow-up"
 msgstr "Mark for follow-up"
+
+msgid "coordinates"
+msgstr "coordinates"
+
+msgid "area"
+msgstr "area"
+
+msgid "Set"
+msgstr "Set"
 
 msgid "Enrollment date"
 msgstr "Enrollment date"

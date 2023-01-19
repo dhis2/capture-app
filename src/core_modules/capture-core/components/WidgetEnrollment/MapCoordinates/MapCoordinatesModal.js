@@ -7,7 +7,7 @@ import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } fr
 import { Map, TileLayer, Marker, FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import { withStyles } from '@material-ui/core';
-import { dataElementTypes } from '../../metaData';
+import { dataElementTypes } from '../../../metaData';
 import type { ModalProps } from './mapCoordinates.types';
 
 const styles = () => ({

@@ -3,7 +3,7 @@ import { IconLocation16, MenuItem } from '@dhis2/ui';
 import React, { useState, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes } from '../../../../metaData';
-import { MapCoordinatesModal } from '../../../../components/MapCoordinates';
+import { MapCoordinatesModal } from '../../MapCoordinates';
 import { useProgram } from '../../hooks/useProgram';
 import type { Props } from './addLocation.types';
 

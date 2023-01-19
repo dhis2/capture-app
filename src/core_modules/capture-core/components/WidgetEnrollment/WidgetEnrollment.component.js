@@ -19,7 +19,7 @@ import { convertValue as convertValueServerToClient } from '../../converters/ser
 import { convertValue as convertValueClientToView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
 import { Actions } from './Actions';
-import { MapCoordinates } from '../../components/MapCoordinates';
+import { MapCoordinates } from './MapCoordinates';
 
 const styles = {
     enrollment: {

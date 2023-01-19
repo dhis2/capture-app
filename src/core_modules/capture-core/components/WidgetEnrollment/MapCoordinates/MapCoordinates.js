@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
-import { dataElementTypes } from '../../metaData';
+import { dataElementTypes } from '../../../metaData';
 import { MapCoordinatesModal } from './MapCoordinatesModal';
 import type { MiniMapProps } from './mapCoordinates.types';
 
