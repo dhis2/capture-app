@@ -324,6 +324,29 @@ When('you fill in the first and last name with values that will return results',
         .blur();
 });
 
+When('you press enter after filling in the first and last name with values that will return results', () => {
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('Go')
+        .blur();
+
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Sarah')
+        .wait(500)
+        .type('{enter}', { force: true });
+});
+
+When('you press enter after filling in the unique identifier field with values that will return a tracked entity instance', () => {
+    cy.get('[data-test="form-unique"]')
+        .find('[data-test="capture-ui-input"]')
+        .first()
+        .clear()
+        .type('3131112445555{enter}');
+});
+
 When('you fill in the first name with value and last name with empty space', () => {
     cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
