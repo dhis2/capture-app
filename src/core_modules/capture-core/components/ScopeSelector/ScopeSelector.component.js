@@ -94,7 +94,7 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     handleAcceptContextChange = () => {
-        this.state.contextChangeFallback();
+        this.state.contextChangeFallback && this.state.contextChangeFallback();
         this.setState({ contextChangeFallback: null });
         this.handleClose();
     }

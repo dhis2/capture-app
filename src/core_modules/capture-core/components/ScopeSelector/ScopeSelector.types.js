@@ -27,7 +27,10 @@ export type Props = {|
   ...CssClasses,
   ...PropsFromRedux,
   selectedOrgUnit: Object,
+  isSavingInProgress?: boolean,
   onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
+  onContextChangeWhileSaving: () => void,
+  onCancelContextChange: () => void,
 |}
 
 export type State = {|
@@ -35,4 +38,6 @@ export type State = {|
   openProgramWarning: ?Object;
   openCatComboWarning: boolean;
   categoryIdToReset: string;
+  openSavingInProgress: boolean;
+  contextChangeFallback?: ?(arg?: any) => void,
 |};

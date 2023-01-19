@@ -1,6 +1,5 @@
 // @flow
 import React, { type ComponentType, useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
 import type { OwnProps } from './ScopeSelector.types';
@@ -62,7 +61,6 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnit.name);
     const isSavingInProgress = useSelector(({ possibleDuplicates }) =>
         possibleDuplicates.isLoading || possibleDuplicates.isUpdating);
-    const history = useHistory();
 
     const handleCancelContextChange = () => {
         dispatch(cancelContextChange());
@@ -92,7 +90,6 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
             selectedCategories={selectedCategories}
             isUserInteractionInProgress={isUserInteractionInProgress}
             isSavingInProgress={isSavingInProgress}
-            history={history}
             ready={ready}
         >
             {children}

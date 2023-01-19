@@ -85,6 +85,13 @@ export const saveContextAfterCompletingSave = ({
     enrollmentId,
     stageId,
     redirectToEnrollmentEventNew,
+}: {
+    programId: string,
+    orgUnitId: string,
+    teiId: string,
+    enrollmentId: string,
+    stageId?: string,
+    redirectToEnrollmentEventNew: boolean
 }) => actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_CONTEXT)({
     programId,
     orgUnitId,
