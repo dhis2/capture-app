@@ -2,7 +2,7 @@
 import { pipe as pipeD2 } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { catchError, map, switchMap, takeUntil, delay } from 'rxjs/operators';
-import { EMPTY, of, from } from 'rxjs';
+import { of, from } from 'rxjs';
 import {
     actionTypes,
     duplicatesForReviewRetrievalSuccess,
