@@ -168,6 +168,18 @@ Feature: User interacts with Search page
         When you click the previous page button
         Then you can see the first page of the results
 
+    Scenario: Pressing enter should trigger search unique identifier returns results
+        Given you are on the default search page
+        When you select the search domain WHO RMNCH Tracker
+        And you press enter after filling in the unique identifier field with values that will return a tracked entity instance
+        Then you are navigated to the Tracker Capture 
+
+    Scenario: Pressing enter should trigger search attributes returns results
+        Given you are in the search page with the Child Programme being preselected from the url
+        And you expand the attributes search area
+        When you press enter after filling in the first and last name with values that will return results
+        And you can see the first page of the results
+
     Scenario: Searching using attributes in TEType domain has disabled pagination
         Given you are on the default search page
         When you select the search domain Person
