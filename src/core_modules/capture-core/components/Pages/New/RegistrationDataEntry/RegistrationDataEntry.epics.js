@@ -8,6 +8,7 @@ import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,
     saveNewTrackedEntityInstanceWithEnrollment,
+    saveContextAfterCompletingSave,
 } from './RegistrationDataEntry.actions';
 import { getTrackerProgramThrowIfNotFound, dataElementTypes } from '../../../../metaData';
 import {
@@ -169,7 +170,6 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
             const { formFoundation, teiId: trackedEntity } = action.payload;
             const formServerValues = formFoundation?.convertValues(values, convertFn);
 
-
             return saveNewTrackedEntityInstanceWithEnrollment({
                 candidateForRegistration: {
                     trackedEntities: [
@@ -210,12 +210,20 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             const { payload: { bundleReport: { typeReportMap } }, meta } = action;
             const {
                 currentSelections: { orgUnitId, programId },
+                app: { isChangingContextWhileSaving },
             } = store.value;
             const teiId = typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const enrollmentId = typeReportMap.ENROLLMENT.objectReports[0].uid;
-            console.log({ action });
-            return EMPTY;
-            if (meta?.redirectToEnrollmentEventNew) {
+
+            if (isChangingContextWhileSaving) {
+                return of(saveContextAfterCompletingSave({
+                    orgUnitId,
+                    programId,
+                    teiId,
+                    enrollmentId,
+                    redirectToEnrollmentEventNew: meta?.redirectToEnrollmentEventNew,
+                }));
+            } else if (meta?.redirectToEnrollmentEventNew) {
                 history.push(
                     `/enrollmentEventNew?${buildUrlQueryString({
                         programId,

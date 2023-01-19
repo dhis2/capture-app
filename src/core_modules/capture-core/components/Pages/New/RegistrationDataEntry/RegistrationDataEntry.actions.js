@@ -13,6 +13,8 @@ export const registrationFormActionTypes = {
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE: 'SaveNewTrackedEntityInstanceWithEnrollment',
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED: 'CompleteSavingNewTrackedEntityInstanceWithEnrollment',
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED: 'FailSavingNewTrackedEntityInstanceWithEnrollment',
+
+    NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_CONTEXT: 'SaveContextNewTrackedEntityInstance',
 };
 
 // without enrollment
@@ -75,3 +77,19 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
             },
         },
     );
+
+export const saveContextAfterCompletingSave = ({
+    programId,
+    orgUnitId,
+    teiId,
+    enrollmentId,
+    stageId,
+    redirectToEnrollmentEventNew,
+}) => actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_CONTEXT)({
+    programId,
+    orgUnitId,
+    teiId,
+    enrollmentId,
+    stageId,
+    redirectToEnrollmentEventNew,
+});

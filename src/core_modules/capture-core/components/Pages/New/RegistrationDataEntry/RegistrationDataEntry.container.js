@@ -8,7 +8,7 @@ import {
     startSavingNewTrackedEntityInstance,
     startSavingNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
-import { changeContextWhileSaving, cleanUpDataEntry, openNewPage } from '../NewPage.actions';
+import { cleanUpDataEntry, openNewPage } from '../NewPage.actions';
 import {
     NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID,
     NEW_SINGLE_EVENT_DATA_ENTRY_ID,
@@ -44,16 +44,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
             dispatch(cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID));
         };
     }, [dispatch]);
-
-    useEffect(() => {
-        console.log('didMount');
-        return () => {
-            if (isSavingInProgress) {
-                console.log('unMount');
-                dispatch(changeContextWhileSaving());
-            }
-        };
-    }, [dispatch, isSavingInProgress]);
 
     return (
         <RegistrationDataEntryComponent

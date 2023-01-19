@@ -15,22 +15,37 @@ class ScopeSelectorClass extends Component<Props, State> {
             openOrgUnitWarning: false,
             openProgramWarning: null,
             openCatComboWarning: false,
+            openSavingInProgress: false,
             categoryIdToReset: '',
+            contextChangeFallback: null,
         };
     }
 
-    shouldShowWarning = () => this.props.isUserInteractionInProgress && !this.props.isSavingInProgress;
+    shouldShowWarning = () => this.props.isUserInteractionInProgress;
+    isSavingInProgress = () => this.props.isSavingInProgress;
 
     handleOpenOrgUnitWarning = () => {
-        if (this.shouldShowWarning()) {
+        if (this.isSavingInProgress()) {
+            this.setState({ openSavingInProgress: true, contextChangeFallback: this.props.onResetOrgUnitId });
+            this.props.onContextChangeWhileSaving();
+            return;
+        } else if (this.shouldShowWarning()) {
             this.setState({ openOrgUnitWarning: true });
             return;
         }
+
         this.props.onResetOrgUnitId();
     }
 
     handleOpenProgramWarning = (baseAction: ReduxAction<any, any>) => {
-        if (this.shouldShowWarning()) {
+        if (this.isSavingInProgress()) {
+            this.setState({
+                openSavingInProgress: true,
+                contextChangeFallback: () => this.props.onResetProgramId(baseAction),
+            });
+            this.props.onContextChangeWhileSaving();
+            return;
+        } else if (this.shouldShowWarning()) {
             this.setState({ openProgramWarning: baseAction });
             return;
         }
@@ -38,7 +53,14 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     handleOpenCatComboWarning = (categoryId: string) => {
-        if (this.shouldShowWarning()) {
+        if (this.isSavingInProgress()) {
+            this.setState({
+                openSavingInProgress: true,
+                contextChangeFallback: () => this.props.onResetCategoryOption && this.props.onResetCategoryOption(categoryId),
+            });
+            this.props.onContextChangeWhileSaving();
+            return;
+        } else if (this.shouldShowWarning()) {
             this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
             return;
         }
@@ -50,6 +72,7 @@ class ScopeSelectorClass extends Component<Props, State> {
             openOrgUnitWarning: false,
             openProgramWarning: null,
             openCatComboWarning: false,
+            openSavingInProgress: false,
         });
     }
 
@@ -70,9 +93,20 @@ class ScopeSelectorClass extends Component<Props, State> {
         this.handleClose();
     }
 
+    handleAcceptContextChange = () => {
+        this.state.contextChangeFallback();
+        this.setState({ contextChangeFallback: null });
+        this.handleClose();
+    }
+
+    handleCancelContextChange = () => {
+        this.handleClose();
+        this.props.onCancelContextChange();
+    }
+
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
-        console.log({ props: this.props, state: this.state });
+
         return (
             <div data-test={'scope-selector'}>
                 <QuickSelector
@@ -108,6 +142,12 @@ class ScopeSelectorClass extends Component<Props, State> {
                     open={this.state.openCatComboWarning}
                     onCancel={this.handleClose}
                     {...defaultDialogProps}
+                />
+                <DiscardDialog
+                    onConfirm={this.handleAcceptContextChange}
+                    open={this.state.openSavingInProgress}
+                    onCancel={this.handleCancelContextChange}
+                    {...savingInProgressDialogProps}
                 />
             </div>
         );

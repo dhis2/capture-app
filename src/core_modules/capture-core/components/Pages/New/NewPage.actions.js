@@ -10,7 +10,6 @@ export const newPageActionTypes = {
     CATEGORY_OPTION_SET: 'NewPage.CategoryOptionSet',
     CATEGORY_OPTION_RESET: 'NewPage.CategoryOptionReset',
     ALL_CATEGORY_OPTIONS_RESET: 'NewPage.AllCategoryOptionsReset',
-    CHANGE_CONTEXT_WHILE_SAVING: 'NewPage.ChangeContextWhileSaving',
 };
 
 export const showMessageToSelectOrgUnitOnNewPage = () =>
@@ -34,4 +33,3 @@ export const resetAllCategoryOptions = () => actionCreator(newPageActionTypes.AL
 
 export const openNewPage = () => actionCreator(newPageActionTypes.NEW_PAGE_OPEN)();
 
-export const changeContextWhileSaving = () => actionCreator(newPageActionTypes.CHANGE_CONTEXT_WHILE_SAVING)();

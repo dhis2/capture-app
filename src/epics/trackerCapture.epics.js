@@ -206,6 +206,7 @@ import {
 import {
     orgUnitFetcherEpic,
 } from '../core_modules/capture-core/components/OrgUnitFetcher';
+import { cancelContextChangeEpic } from '../core_modules/capture-core/components/ScopeSelector/ScopeSelector.epics';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -332,4 +333,5 @@ export const epics = combineEpics(
     navigateToNewUserPageEpic,
     requestDeleteEventDataEntryEpic,
     startCreateNewAfterCompletingEpic,
+    cancelContextChangeEpic,
 );

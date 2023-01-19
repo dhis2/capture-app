@@ -85,10 +85,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                 );
                 return stream$.pipe(
                     delay(5000),
-                    map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
-                        console.log({ searchResults, pagingData });
-                        return duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage);
-                    }),
+                    map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage)),
                     takeUntil(action$.pipe(ofType(searchGroupDuplicateActionTypes.DUPLICATES_RESET))),
                     catchError(() => of(duplicatesForReviewRetrievalFailed())),
 

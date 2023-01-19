@@ -1,12 +1,12 @@
 // @flow
 import React, { type ComponentType, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
 import type { OwnProps } from './ScopeSelector.types';
 import { useOrganizationUnit } from './hooks';
-import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
-import { useHistory } from 'react-router';
-
+import { resetOrgUnitIdFromScopeSelector, cancelContextChange, changeContextWhileSaving }
+    from './ScopeSelector.actions';
 
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName) => {
     // because we want the orgUnit to be fetched and stored
@@ -63,6 +63,14 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     const isSavingInProgress = useSelector(({ possibleDuplicates }) =>
         possibleDuplicates.isLoading || possibleDuplicates.isUpdating);
     const history = useHistory();
+
+    const handleCancelContextChange = () => {
+        dispatch(cancelContextChange());
+    };
+    const handleContextChangeWhileSaving = () => {
+        dispatch(changeContextWhileSaving());
+    };
+
     return (
         <ScopeSelectorComponent
             onResetProgramId={onResetProgramId}
@@ -75,6 +83,8 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
             onSetCategoryOption={onSetCategoryOption}
             onSetProgramId={onSetProgramId}
             onSetOrgUnit={handleSetOrgUnit}
+            onCancelContextChange={handleCancelContextChange}
+            onContextChangeWhileSaving={handleContextChangeWhileSaving}
             previousOrgUnitId={previousOrgUnitId}
             selectedOrgUnit={selectedOrgUnit}
             selectedOrgUnitId={selectedOrgUnitId}

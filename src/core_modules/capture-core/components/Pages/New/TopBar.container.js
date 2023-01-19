@@ -62,7 +62,7 @@ export const TopBar = ({
     const dispatchOnResetAllCategoryOptions = useCallback(() => {
         dispatch(resetAllCategoryOptions());
     }, [dispatch]);
-    console.log({ isUserInteractionInProgress });
+
     return (
         <ScopeSelector
             selectedProgramId={programId}

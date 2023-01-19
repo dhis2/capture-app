@@ -22,6 +22,7 @@ import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 import { scopeSelectorActionTypes } from '../../components/ScopeSelector';
 import { actionTypes as initActionTypes } from '../../init/init.actions';
+import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -119,9 +120,17 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         locationSwitchInProgress: false,
         page: 'new',
     }),
-    [newPageActionTypes.CHANGE_CONTEXT_WHILE_SAVING]: state => ({
+    [scopeSelectorActionTypes.CHANGE_CONTEXT_WHILE_SAVING]: state => ({
         ...state,
-        isSavingInProgress: true,
+        isChangingContextWhileSaving: true,
+    }),
+    [scopeSelectorActionTypes.CANCEL_CONTEXT_CHANGE]: state => ({
+        ...state,
+        isChangingContextWhileSaving: false,
+    }),
+    [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_CONTEXT]: (state, action) => ({
+        ...state,
+        savedContext: { ...action.payload },
     }),
     [searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE]: state => ({
         ...state,
