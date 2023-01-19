@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
+import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import { Map, TileLayer, Marker, FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
@@ -18,18 +19,19 @@ const styles = () => ({
         width: '100%',
         height: '100%',
     },
-    title: {
-        textTransform: 'capitalize',
-    },
 });
 
-const convertToServerCoordinates = (coordinates, type) => {
+const convertToServerCoordinates =
+(coordinates?: Array<[number, number]> | null, type: string): ?[number, number] | ?Array<[number, number]> | ?[number, number] => {
     if (!coordinates) { return null; }
     switch (type) {
-    case dataElementTypes.COORDINATE:
-        return [coordinates[1], coordinates[0]];
+    case dataElementTypes.COORDINATE: {
+        const lng: number = coordinates[0][1];
+        const lat: number = coordinates[0][0];
+        return [lng, lat];
+    }
     case dataElementTypes.POLYGON:
-        return [coordinates[0]];
+        return Array<[number, number]>(coordinates[0]);
     default:
         return coordinates;
     }
@@ -43,7 +45,6 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, onSe
         if (type === dataElementTypes.COORDINATE) {
             const { lat, lng } = mapCoordinates.latlng;
             const newPosition: [number, number] = [lat, lng];
-            // $FlowFixMe
             setPosition(newPosition);
         }
     };
@@ -57,6 +58,7 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, onSe
         const polygonCoordinates = e.layers.getLayers()[0].toGeoJSON().geometry.coordinates;
         setCoordinates(polygonCoordinates);
     };
+
     const onMapPolygonDelete = () => {
         setCoordinates(null);
     };
@@ -121,8 +123,8 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, onSe
         <Button
             onClick={() => {
                 if (position ?? coordinates) {
-                    const convertedCoordinates = convertToServerCoordinates(position ?? coordinates, type);
-                    // $FlowFixMe
+                    const clientValue = position ? [position] : coordinates;
+                    const convertedCoordinates = convertToServerCoordinates(clientValue, type);
                     onSetCoordinates(convertedCoordinates);
                     setOpen(false);
                 }
@@ -139,7 +141,7 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, onSe
             large
         >
             <ModalTitle>
-                <div className={classes.title}>{getTitle()}</div>
+                {capitalizeFirstLetter(getTitle())}
             </ModalTitle>
             <ModalContent>
                 <div className={classes.modalContent}>{renderMap()}</div>

@@ -4,19 +4,19 @@ import React, { useState, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes } from '../../../../metaData';
 import { MapCoordinatesModal } from '../../../../components/MapCoordinates';
-import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
+import { useProgram } from '../../hooks/useProgram';
 import type { Props } from './addLocation.types';
 
 const DEFAULT_CENTER = [51.505, -0.09];
 export const AddLocation = ({ enrollment, onUpdate }: Props) => {
     const [isOpen, setOpen] = useState(false);
-    const { program, isLoading, isError } = useProgramFromIndexedDB(enrollment.program);
+    const { program, error } = useProgram(enrollment.program);
     const geometryType = useMemo(() => {
         if (!program) { return undefined; }
         return program.featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
     }, [program]);
 
-    if (isLoading || isError) {
+    if (error) {
         return null;
     }
     if (enrollment.geometry || !program?.featureType) {

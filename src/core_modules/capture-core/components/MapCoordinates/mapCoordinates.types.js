@@ -3,8 +3,8 @@
 export type MiniMapProps = {
     coordinates: any,
     type: string,
-    classes: Object,
     onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
+    ...CssClasses
 }
 
 export type ModalProps = {
@@ -13,5 +13,5 @@ export type ModalProps = {
     type: string,
     setOpen: (open: boolean) => void,
     onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
-    classes: Object
+    ...CssClasses
 }
