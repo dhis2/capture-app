@@ -23,8 +23,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
 }) => {
     const dispatch = useDispatch();
     const { teiId } = useLocationQuery();
-    const isSavingInProgress = useSelector(({ possibleDuplicates }) =>
-        possibleDuplicates.isLoading || possibleDuplicates.isUpdating);
 
     const dispatchOnSaveWithoutEnrollment = useCallback(
         (formFoundation) => { dispatch(startSavingNewTrackedEntityInstance(formFoundation)); },
