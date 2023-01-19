@@ -52,12 +52,11 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
 
         return (
             <SelectorBarItem
-                displayOnly={Boolean(selectedOrgUnitId)}
                 label={i18n.t('Registering unit')}
                 noValueMessage={i18n.t('Choose a registering unit')}
                 value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
                 open={this.state.open}
-                setOpen={open => Boolean(!selectedOrgUnitId) && this.setState({ open })}
+                setOpen={open => this.setState({ open })}
                 onClearSelectionClick={() => onReset()}
                 dataTest="org-unit-selector-container"
             >
@@ -70,7 +69,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
                             this.setState({ open: false });
                             this.handleClick(selectedOu);
                         }}
-                        previousOrgUnitId={previousOrgUnitId}
+                        previousOrgUnitId={selectedOrgUnitId || previousOrgUnitId}
                     />
                 </div>
             </SelectorBarItem>
