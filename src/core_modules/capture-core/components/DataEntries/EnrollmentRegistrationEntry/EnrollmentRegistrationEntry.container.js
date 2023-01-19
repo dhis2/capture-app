@@ -19,8 +19,9 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
     const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
     const isUserInteractionInProgress: boolean = useSelector(
-        state => dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
-        || dataEntryHasChanges(state, 'newPageDataEntryId-newTei')
+        state =>
+            dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
+          || dataEntryHasChanges(state, 'newPageDataEntryId-newTei')
           || dataEntryHasChanges(state, 'relationship-newTei')
           || dataEntryHasChanges(state, 'relationship-newEnrollment'),
     );
