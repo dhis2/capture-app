@@ -1,3 +1,17 @@
+## [100.24.1](https://github.com/dhis2/capture-app/compare/v100.24.0...v100.24.1) (2023-01-18)
+
+
+### Bug Fixes
+
+* [DHIS2-14340][DHIS2-13197] Sort blank cells in stages & event widget ([#3142](https://github.com/dhis2/capture-app/issues/3142)) ([063d73b](https://github.com/dhis2/capture-app/commit/063d73b0bb9502e67dda3549441262fdaf6d6f48))
+
+# [100.24.0](https://github.com/dhis2/capture-app/compare/v100.23.2...v100.24.0) (2023-01-17)
+
+
+### Features
+
+* [DHIS-14336] enter press should trigger search ([#3164](https://github.com/dhis2/capture-app/issues/3164)) ([6ed5d34](https://github.com/dhis2/capture-app/commit/6ed5d34f2604c56b3265a6bc0866efa5006fb870))
+
 ## [100.23.2](https://github.com/dhis2/capture-app/compare/v100.23.1...v100.23.2) (2023-01-13)
 
 
