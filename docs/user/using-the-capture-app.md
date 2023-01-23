@@ -983,6 +983,21 @@ You can delete the enrollment by clicking the delete button and confirming the a
 
 ![](resources/images/enrollment-dash-enrollment-widget-3.png)
 
+
+#### Enrollment location
+If the enrollment has a location attribute, it is displayed as a point or polygon on a minimap.
+
+![](resources/images/enrollment-widget-location-minimap.png)
+
+Clicking the minimap will open a modal contains the full version of the map where user can choose another point or draw polygon. Only when user clicks **Set coordinates** (or **Set area**), the new location will be saved. 
+
+![](resources/images/enrollment-widget-map-set-location.png)
+
+If the enrollment doesn't have a location yet but the program has the feature type, there will be a button **Add location** in the dropdown actions. 
+
+![](resources/images/enrollment-widget-add-location.png)
+
+
 #### Enrollment comment widget
 
 ![](resources/images/enrollment-widget-comment.png)
