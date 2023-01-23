@@ -173,3 +173,14 @@ And you apply the current filter
 Then you see program stage working list events
 When you remove the program stage filter
 Then you don't see program stage working list events
+
+@v>=39
+Scenario: The user can filter the events by scheduledAt date
+Given you open the main page with Ngelehun and WHO RMNCH Tracker context
+When you open the program stage filters from the more filters dropdown menu
+And you select the First antenatal care visit program stage
+And you apply the current filter
+Then you see scheduledAt filter
+And you open the column selector
+When you select a scheduledAt column and save from the column selector
+# TODO add more check steps after DHIS2-14497 is fixed 

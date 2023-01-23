@@ -606,3 +606,20 @@ When('you remove the program stage filter', () => {
         .contains('Remove filter')
         .click();
 });
+
+Then('you see scheduledAt filter', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Appointment date')
+        .should('exist');
+});
+
+When('you select a scheduledAt column and save from the column selector', () => {
+    cy.get('div[role="dialog"]')
+        .contains('Appointment date')
+        .find('input')
+        .click();
+
+    cy.get('div[role="dialog"]')
+        .contains('Save')
+        .click();
+});
