@@ -51,7 +51,10 @@ const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStag
                         }
                     >
                         <Tooltip
-                            content={i18n.t('You can’t add any more events in this program')}
+                            content={i18n.t('You can’t add any more {{ programStageName }} events', {
+                                programStageName: programStage.displayName,
+                                interpolation: { escapeValue: false },
+                            })}
                         >
                             {({ onMouseOver, onMouseOut, ref }) => (
                                 <div

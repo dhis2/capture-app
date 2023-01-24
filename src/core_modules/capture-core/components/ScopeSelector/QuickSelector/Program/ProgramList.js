@@ -1,9 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import { Menu, MenuItem } from '@dhis2/ui';
 
 const getStyles = () => ({
     list: {
@@ -43,29 +41,20 @@ type Props = {
 const ProgramListPlain = (props: Props) => {
     const { items, onSelect, classes } = props;
     return (
-        <List className={classes.list}>
+        <Menu className={classes.list}>
             {items.map(item =>
                 (
-                    <ListItem
+                    <MenuItem
                         className={classes.item}
                         button
                         onClick={() => onSelect(item.value)}
                         key={item.value}
-                    >
-                        <ListItemText
-                            primary={(
-                                <div
-                                    className={classes.itemContents}
-                                >
-                                    {item.iconLeft}
-                                    {item.label}
-                                </div>
-                            )}
-                        />
-                    </ListItem>
+                        icon={item.iconLeft}
+                        label={item.label}
+                    />
                 ),
             )}
-        </List>
+        </Menu>
     );
 };
 

@@ -2,12 +2,8 @@
 
 import * as React from 'react';
 import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
-import {
-    List,
-    ListItem,
-    withStyles,
-} from '@material-ui/core';
-import { Tooltip } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { Tooltip, Menu, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withFocusSaver } from 'capture-ui';
 import { Button } from '../Buttons';
@@ -22,7 +18,8 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'normal',
-        background: theme.palette.grey.lighter,
+        cursor: 'default !important',
+        background: `${theme.palette.grey.lighter} !important`,
         marginBottom: theme.typography.pxToRem(3),
         fontSize: theme.typography.pxToRem(14),
     },
@@ -212,23 +209,28 @@ class NotesPlain extends React.Component<Props, State> {
         const { notes, classes, entityAccess } = this.props;
         return (
             <div className={classes.notesContainer}>
-                <List dense className={classes.notesList} data-test="comments-list">
+                <Menu dense className={classes.notesList} data-test="comments-list">
                     {notes.map(n => (
-                        <ListItem className={classes.noteItem} key={n.clientId} data-test="comment">
-                            <div className={classes.noteItemHeader}>
-                                <div className={classes.noteItemUser} data-test="comment-user">
-                                    {n.createdBy ? `${n.createdBy.firstName} ${n.createdBy.surname}` : `${n.storedBy}` }
+                        <MenuItem
+                            className={classes.noteItem}
+                            key={n.clientId}
+                            data-test="comment"
+                            label={<>
+                                <div className={classes.noteItemHeader}>
+                                    <div className={classes.noteItemUser} data-test="comment-user">
+                                        {n.createdBy ? `${n.createdBy.firstName} ${n.createdBy.surname}` : `${n.storedBy}` }
+                                    </div>
+                                    <div className={classes.noteItemDate} data-test="comment-date">
+                                        {n.storedDate}
+                                    </div>
                                 </div>
-                                <div className={classes.noteItemDate} data-test="comment-date">
-                                    {n.storedDate}
+                                <div data-test="comment-text">
+                                    <Parser>{n.value}</Parser>
                                 </div>
-                            </div>
-                            <div data-test="comment-text">
-                                <Parser>{n.value}</Parser>
-                            </div>
-                        </ListItem>
+                            </>}
+                        />
                     ))}
-                </List>
+                </Menu>
                 {
                     <div className={classes.newNoteContainer} data-test="new-comment-container">
                         { this.state.addIsOpen ? this.renderInput() : this.renderButton(entityAccess.write) }

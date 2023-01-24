@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useState } from 'react';
 import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
+import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
@@ -16,6 +17,7 @@ import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
+import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
 
 const styles = ({ typography }) => ({
     marginTop: {
@@ -55,13 +57,21 @@ const EnrollmentRegistrationEntryPlain =
       orgUnitId,
       orgUnit,
       teiId,
+      isUserInteractionInProgress,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
-
+      const [showWarning, setShowWarning] = useState(false);
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
 
+      const handleOnCancel = () => {
+          if (!isUserInteractionInProgress) {
+              navigateToWorkingListsPage();
+          } else {
+              setShowWarning(true);
+          }
+      };
       const navigateToWorkingListsPage = () => {
           const url =
             scopeType === scopeTypes.TRACKER_PROGRAM
@@ -105,7 +115,7 @@ const EnrollmentRegistrationEntryPlain =
                           <Button
                               dataTest="cancel-button"
                               secondary
-                              onClick={navigateToWorkingListsPage}
+                              onClick={handleOnCancel}
                               className={classes.marginLeft}
                           >
                               {i18n.t('Cancel')}
@@ -117,6 +127,12 @@ const EnrollmentRegistrationEntryPlain =
                       </InfoIconText>
                   </>
               }
+              <ConfirmDialog
+                  {...defaultDialogProps}
+                  onConfirm={navigateToWorkingListsPage}
+                  open={!!showWarning}
+                  onCancel={() => { setShowWarning(false); }}
+              />
           </>
       );
   };
