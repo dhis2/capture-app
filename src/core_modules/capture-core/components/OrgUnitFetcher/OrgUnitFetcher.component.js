@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { fetchOrgUnit } from './OrgUnitFetcher.actions';
 
-export const OrgUnitFetcher = ({ orgUnitId, children }: Object) => {
+export const OrgUnitFetcher = (({ orgUnitId, children, error }: Object) => {
     const dispatch = useDispatch();
     const { orgUnit } = useSelector(
         ({
@@ -20,5 +20,5 @@ export const OrgUnitFetcher = ({ orgUnitId, children }: Object) => {
         }
     }, [orgUnitId, orgUnit, dispatch]);
 
-    return orgUnit || !orgUnitId ? children : <LoadingMaskElementCenter />;
-};
+    return orgUnit || !orgUnitId || error ? children : <LoadingMaskElementCenter />;
+});

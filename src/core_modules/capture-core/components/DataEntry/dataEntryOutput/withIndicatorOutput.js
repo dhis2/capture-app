@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import { Menu, MenuItem } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
@@ -24,7 +23,7 @@ type Props = {
 const styles = (theme: Theme) => ({
     listItem: {
         display: 'flex',
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#f5f5f5 !important',
         paddingLeft: theme.typography.pxToRem(10),
         marginTop: theme.typography.pxToRem(8),
     },
@@ -40,6 +39,9 @@ const styles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(10),
         borderRadius: theme.typography.pxToRem(5),
     },
+    labelContainer: {
+        display: 'flex',
+    },
 });
 
 const getIndicatorOutput = () =>
@@ -48,25 +50,29 @@ const getIndicatorOutput = () =>
             (<div>
                 {indicatorItems.displayTexts &&
                     indicatorItems.displayTexts.map(item => (
-                        <ListItem
+                        <MenuItem
                             key={item.id}
                             className={classes.listItem}
                             button={false}
-                        >
-                            <p className={classes.keyValuePairKey}>{item.message}</p>
-                        </ListItem>
+                            dense
+                            label={<p className={classes.keyValuePairKey}>{item.message}</p>}
+                        />
                     ),
                     )}
                 {indicatorItems.displayKeyValuePairs &&
                     indicatorItems.displayKeyValuePairs.map(item => (
-                        <ListItem
+                        <MenuItem
                             key={item.id}
                             className={classes.listItem}
                             button={false}
-                        >
-                            <p className={classes.keyValuePairKey}> {item.key} </p>
-                            <p className={classes.keyValue}> {item.value} </p>
-                        </ListItem>
+                            dense
+                            label={
+                                <div className={classes.labelContainer}>
+                                    <p className={classes.keyValuePairKey}> {item.key} </p>
+                                    <p className={classes.keyValue}> {item.value} </p>
+                                </div>
+                            }
+                        />
                     ),
                     )}
             </div>)
@@ -79,9 +85,9 @@ const getIndicatorOutput = () =>
                     {hasItems &&
                         <Card className={classes.card}>
                             {i18n.t('Indicators')}
-                            <List dense>
+                            <Menu dense>
                                 {indicatorItems && this.renderIndicatorItems(indicatorItems, classes)}
-                            </List>
+                            </Menu>
                         </Card>
                     }
                 </div>
