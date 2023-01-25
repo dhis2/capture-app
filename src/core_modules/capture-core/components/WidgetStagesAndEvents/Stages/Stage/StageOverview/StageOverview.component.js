@@ -2,6 +2,7 @@
 import React, { type ComponentType } from 'react';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16, IconClockHistory16, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment-timezone';
@@ -9,7 +10,6 @@ import { statusTypes } from 'capture-core/events/statusTypes';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
-import { useSystemSettingsFromIndexedDB } from '../../../../../utils/cachedDataHooks/useSystemSettingsFromIndexedDB';
 
 const styles = {
     container: {
@@ -48,31 +48,22 @@ const styles = {
     },
 };
 
-const getLastUpdatedAt = (serverTimeZoneId, events) => {
-    const lastEventUpdated = events.reduce((acc, event) => {
-        if (serverTimeZoneId) {
-            return moment.tz(acc.updatedAt, serverTimeZoneId).isAfter(moment.tz(event.updatedAt, serverTimeZoneId))
-                ? acc
-                : event;
-        }
-        return new Date(acc.updatedAt).getTime() > new Date(event.updatedAt).getTime() ? acc : event;
-    });
+const getLastUpdatedAt = (events, fromServerDate) => {
+    const lastEventUpdated = events.reduce((acc, event) => (
+        new Date(acc.updatedAt).getTime() > new Date(event.updatedAt).getTime() ? acc : event
+    ));
 
     if (lastEventUpdated) {
         const { updatedAt } = lastEventUpdated;
         return lastEventUpdated?.updatedAt && moment(updatedAt).isValid()
-            ? i18n.t('Last updated {{date}}', {
-                date: serverTimeZoneId
-                    ? moment.tz(updatedAt, serverTimeZoneId).fromNow()
-                    : moment(updatedAt).fromNow(),
-            })
+            ? i18n.t('Last updated {{date}}', { date: moment(fromServerDate(updatedAt)).fromNow() })
             : null;
     }
     return null;
 };
 
 export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => {
-    const { serverTimeZoneId } = useSystemSettingsFromIndexedDB('serverTimeZoneId');
+    const { fromServerDate } = useTimeZoneConversion();
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
@@ -124,7 +115,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
             <div className={classes.indicatorIcon}>
                 <IconClockHistory16 />
             </div>
-            {getLastUpdatedAt(serverTimeZoneId, events)}
+            {getLastUpdatedAt(events, fromServerDate)}
         </div>}
     </div>);
 };

@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import moment from 'moment-timezone';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router-dom';
 import { NoticeBox } from '@dhis2/ui';
@@ -17,7 +18,6 @@ import {
 } from '../../Enrollment/EnrollmentPageDefault/hooks';
 import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
-import { useSystemSettingsFromIndexedDB } from '../../../../utils/cachedDataHooks/useSystemSettingsFromIndexedDB';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 
 export const EnrollmentAddEventPageDefault = ({
@@ -29,7 +29,7 @@ export const EnrollmentAddEventPageDefault = ({
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const { serverTimeZoneId } = useSystemSettingsFromIndexedDB('serverTimeZoneId');
+    const { fromClientDate } = useTimeZoneConversion();
 
     const handleCancel = useCallback(() => {
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
@@ -37,16 +37,18 @@ export const EnrollmentAddEventPageDefault = ({
 
     const handleSave = useCallback(
         (data, uid) => {
-            const clientGeneratedUpdatedAt = moment().tz(serverTimeZoneId).format('YYYY-MM-DDTHH:mm:ss');
+            const nowClient = fromClientDate(new Date());
+            const nowServer = new Date(nowClient.getServerZonedISOString());
+            const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
             dispatch(
                 updateEnrollmentEventsWithoutId(uid, {
                     ...data.events[0],
-                    updatedAt: clientGeneratedUpdatedAt,
+                    updatedAt,
                 }),
             );
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [dispatch, history, programId, orgUnitId, teiId, enrollmentId, serverTimeZoneId],
+        [dispatch, history, programId, orgUnitId, teiId, enrollmentId, fromClientDate],
     );
     const handleAddNew = useCallback(() => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
@@ -140,7 +142,7 @@ export const EnrollmentAddEventPageDefault = ({
                 widgetReducerName={widgetReducerName}
                 rulesExecutionDependencies={rulesExecutionDependencies}
                 pageFailure={commonDataError}
-                ready={Boolean(enrollment) && Boolean(serverTimeZoneId)}
+                ready={Boolean(enrollment)}
                 dataEntryHasChanges={dataEntryHasChanges}
                 onEnrollmentError={onEnrollmentError}
             />
