@@ -79,7 +79,7 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
         enrollment,
         userRoles,
     } = context;
-    const { dataEntryId, itemId, elementId, value, uiState } = innerAction.payload || {};
+    const { dataEntryId, itemId, elementId, value, uiState, formBuilderId } = innerAction.payload || {};
     const fieldData: FieldData = {
         elementId,
         value,
@@ -99,8 +99,9 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
         otherEvents,
         dataElements,
         userRoles,
+        formBuilderId,
     });
-
+    console.log({ innerAction });
     return batchActions(
         [
             innerAction,

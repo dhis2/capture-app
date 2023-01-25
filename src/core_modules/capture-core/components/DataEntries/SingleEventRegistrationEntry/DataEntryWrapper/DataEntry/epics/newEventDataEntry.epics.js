@@ -127,7 +127,7 @@ const runRulesForNewSingleEvent = (
     itemId: string,
     uid: string,
     orgUnit: OrgUnit,
-    history: Object,
+    formBuilderId: string,
     fieldData?: ?FieldData,
 ) => {
     const state = store.value;
@@ -149,7 +149,7 @@ const runRulesForNewSingleEvent = (
     });
 
     return batchActions([
-        updateRulesEffects(effects, formId),
+        updateRulesEffects(effects, formId, formBuilderId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
@@ -162,8 +162,8 @@ export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputO
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
-            const { dataEntryId, itemId, uid, orgUnit } = action.payload;
-            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, orgUnit);
+            const { dataEntryId, itemId, uid, orgUnit, formBuilderId } = action.payload;
+            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, orgUnit, formBuilderId);
         }));
 
 export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -172,11 +172,11 @@ export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
-            const { dataEntryId, itemId, uid, orgUnit, elementId, value, uiState } = action.payload;
+            const { dataEntryId, itemId, uid, orgUnit, elementId, value, uiState, formBuilderId } = action.payload;
             const fieldData: FieldData = {
                 elementId,
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, orgUnit, fieldData);
+            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, orgUnit, formBuilderId, fieldData);
         }));

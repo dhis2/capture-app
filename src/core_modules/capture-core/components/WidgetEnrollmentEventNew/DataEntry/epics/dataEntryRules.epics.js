@@ -29,6 +29,7 @@ const runRulesForNewEvent = (
     orgUnit: OrgUnit,
     history: Object,
     { events, attributeValues, enrollmentData }: RulesExecutionDependenciesClientFormatted,
+    formBuilderId: string,
     fieldData?: ?FieldData,
 ) => {
     const state = store.value;
@@ -58,7 +59,7 @@ const runRulesForNewEvent = (
     });
 
     return batchActions([
-        updateRulesEffects(ruleEffects, formId),
+        updateRulesEffects(ruleEffects, formId, formBuilderId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     newEventWidgetDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
@@ -72,7 +73,7 @@ export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (action$:
             actionBatch.payload
                 .find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
         map((action) => {
-            const { dataEntryId, itemId, uid, orgUnit, rulesExecutionDependenciesClientFormatted } = action.payload;
+            const { dataEntryId, itemId, uid, orgUnit, rulesExecutionDependenciesClientFormatted, formBuilderId } = action.payload;
             return runRulesForNewEvent(
                 store,
                 dataEntryId,
@@ -81,6 +82,7 @@ export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (action$:
                 orgUnit,
                 history,
                 rulesExecutionDependenciesClientFormatted,
+                formBuilderId,
             );
         }));
 
@@ -100,6 +102,7 @@ export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (action$: InputObs
                 uiState,
                 orgUnit,
                 rulesExecutionDependenciesClientFormatted,
+                formBuilderId,
             } = action.payload;
 
             const fieldData: FieldData = {
@@ -115,6 +118,7 @@ export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (action$: InputObs
                 orgUnit,
                 history,
                 rulesExecutionDependenciesClientFormatted,
+                formBuilderId,
                 fieldData,
             );
         }));

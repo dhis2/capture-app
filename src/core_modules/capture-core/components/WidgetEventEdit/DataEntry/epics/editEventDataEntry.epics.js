@@ -31,6 +31,7 @@ const runRulesForEditSingleEvent = ({
     uid,
     orgUnit,
     fieldData,
+    formBuilderId,
     programId,
 }: {
     store: ReduxStore,
@@ -39,6 +40,7 @@ const runRulesForEditSingleEvent = ({
     uid: string,
     programId: string,
     orgUnit: OrgUnit,
+    formBuilderId: string,
     fieldData?: ?FieldData,
 }) => {
     const state = store.value;
@@ -85,7 +87,7 @@ const runRulesForEditSingleEvent = ({
     }
 
     return batchActions([
-        updateRulesEffects(effects, formId),
+        updateRulesEffects(effects, formId, formBuilderId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
@@ -99,8 +101,8 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (action$: In
             actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         map((action) => {
-            const { dataEntryId, itemId, uid, orgUnit, programId } = action.payload;
-            return runRulesForEditSingleEvent({ store, dataEntryId, itemId, uid, orgUnit, programId });
+            const { dataEntryId, itemId, uid, orgUnit, programId, formBuilderId } = action.payload;
+            return runRulesForEditSingleEvent({ store, dataEntryId, itemId, uid, orgUnit, programId, formBuilderId });
         }));
 
 export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -111,12 +113,31 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObserv
             actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         map((action) => {
-            const { elementId, value, uiState, dataEntryId, itemId, uid, orgUnit, programId } = action.payload;
+            const {
+                elementId,
+                value,
+                uiState,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                programId,
+                formBuilderId,
+            } = action.payload;
             const fieldData: FieldData = {
                 elementId,
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForEditSingleEvent({ store, dataEntryId, itemId, uid, orgUnit, fieldData, programId });
+            return runRulesForEditSingleEvent({
+                store,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                fieldData,
+                programId,
+                formBuilderId,
+            });
         }));
 
