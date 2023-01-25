@@ -6,9 +6,10 @@ import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import { Map, TileLayer, Marker, FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
+import L from 'leaflet';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
-import type { ModalProps } from './mapCoordinates.types';
+import type { ModalProps, FeatureCollection } from './mapCoordinates.types';
 
 const styles = () => ({
     modalContent: {
@@ -37,9 +38,11 @@ const convertToServerCoordinates =
     }
 };
 
+
 const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defaultValues, onSetCoordinates }: ModalProps) => {
     const [position, setPosition] = useState(type === dataElementTypes.COORDINATE ? defaultValues : null);
     const [coordinates, setCoordinates] = useState(type === dataElementTypes.POLYGON ? defaultValues : null);
+    const [hasChanges, setChanges] = useState(false);
 
     const onHandleMapClicked = (mapCoordinates) => {
         if (type === dataElementTypes.COORDINATE) {
@@ -52,16 +55,44 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defa
     const onMapPolygonCreated = (e: any) => {
         const polygonCoordinates = e.layer.toGeoJSON().geometry.coordinates;
         setCoordinates(polygonCoordinates);
+        setChanges(true);
     };
 
     const onMapPolygonEdited = (e: any) => {
         const polygonCoordinates = e.layers.getLayers()[0].toGeoJSON().geometry.coordinates;
         setCoordinates(polygonCoordinates);
+        setChanges(true);
     };
 
     const onMapPolygonDelete = () => {
         setCoordinates(null);
     };
+
+    const coordsToFeatureCollection = (inputCoordinates): ?FeatureCollection => {
+        if (!inputCoordinates) {
+            return null;
+        }
+        const list = inputCoordinates[0].length > 2
+            ? inputCoordinates[0]
+            : inputCoordinates.map(c => [c[1], c[0]]);
+
+        return {
+            type: 'FeatureCollection',
+            features: [
+                {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                        type: 'Polygon',
+                        coordinates: [list],
+                    },
+                },
+            ],
+        };
+    };
+
+    const getFeatureCollection = () =>
+        (Array.isArray(coordinates) ? coordsToFeatureCollection(coordinates) : null);
 
     const renderMap = () => (<Map
         center={center}
@@ -78,7 +109,11 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defa
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
-        {type === dataElementTypes.POLYGON && <FeatureGroup>
+        {type === dataElementTypes.POLYGON && <FeatureGroup
+            ref={(reactFGref) => {
+                onFeatureGroupReady(reactFGref, getFeatureCollection());
+            }}
+        >
             <EditControl
                 position="topright"
                 onEdited={onMapPolygonEdited}
@@ -91,13 +126,27 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defa
                     marker: false,
                     circlemarker: false,
                 }}
-                edit={{
-                    remove: false,
-                }}
             />
         </FeatureGroup>}
         {type === dataElementTypes.COORDINATE && position && <Marker position={position} />}
     </Map>);
+
+    const onFeatureGroupReady = (reactFGref: any, featureCollection: ?FeatureCollection) => {
+        if (featureCollection) {
+            const leafletGeoJSON = new L.GeoJSON(featureCollection);
+            if (reactFGref) {
+                const leafletFG = reactFGref.leafletElement;
+                leafletFG.clearLayers();
+
+                leafletGeoJSON.eachLayer((layer) => {
+                    leafletFG.addLayer(layer);
+                });
+            }
+        } else if (reactFGref) {
+            const leafletFG = reactFGref.leafletElement;
+            leafletFG.clearLayers();
+        }
+    };
 
     const getTitle = () => {
         switch (type) {
@@ -121,6 +170,7 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defa
             {i18n.t('Cancel')}
         </Button>
         <Button
+            disabled={!hasChanges}
             onClick={() => {
                 if (position ?? coordinates) {
                     const clientValue = position ? [position] : coordinates;

@@ -1,5 +1,21 @@
 // @flow
 
+
+type Feature = {
+    type: string,
+    properties: Object,
+    geometry: {
+        type: string,
+        coordinates: Array<Array<Array<Number>>>,
+    },
+}
+
+export type FeatureCollection = {
+    type: string,
+    features: Array<Feature>,
+};
+
+
 export type MiniMapProps = {
     coordinates: any,
     type: string,
