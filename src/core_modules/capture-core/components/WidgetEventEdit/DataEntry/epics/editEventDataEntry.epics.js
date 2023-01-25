@@ -31,7 +31,6 @@ const runRulesForEditSingleEvent = ({
     uid,
     orgUnit,
     fieldData,
-    formBuilderId,
     programId,
 }: {
     store: ReduxStore,
@@ -40,7 +39,6 @@ const runRulesForEditSingleEvent = ({
     uid: string,
     programId: string,
     orgUnit: OrgUnit,
-    formBuilderId: string,
     fieldData?: ?FieldData,
 }) => {
     const state = store.value;
@@ -87,7 +85,7 @@ const runRulesForEditSingleEvent = ({
     }
 
     return batchActions([
-        updateRulesEffects(effects, formId, formBuilderId),
+        updateRulesEffects(effects, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
@@ -101,8 +99,8 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (action$: In
             actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         map((action) => {
-            const { dataEntryId, itemId, uid, orgUnit, programId, formBuilderId } = action.payload;
-            return runRulesForEditSingleEvent({ store, dataEntryId, itemId, uid, orgUnit, programId, formBuilderId });
+            const { dataEntryId, itemId, uid, orgUnit, programId } = action.payload;
+            return runRulesForEditSingleEvent({ store, dataEntryId, itemId, uid, orgUnit, programId });
         }));
 
 export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -122,7 +120,6 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObserv
                 uid,
                 orgUnit,
                 programId,
-                formBuilderId,
             } = action.payload;
             const fieldData: FieldData = {
                 elementId,
@@ -137,7 +134,6 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObserv
                 orgUnit,
                 fieldData,
                 programId,
-                formBuilderId,
             });
         }));
 

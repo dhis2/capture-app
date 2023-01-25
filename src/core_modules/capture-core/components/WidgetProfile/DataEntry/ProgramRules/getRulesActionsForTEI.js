@@ -36,9 +36,9 @@ const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>
         {},
     );
 
-const getRulesActions = (rulesEffects: OutputEffects, foundation: RenderFoundation, formId: string, formBuilderId?: string) => {
+const getRulesActions = (rulesEffects: OutputEffects, foundation: RenderFoundation, formId: string) => {
     const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(rulesEffects, foundation));
-    return [updateRulesEffects(effectsHierarchy, formId, formBuilderId)];
+    return [updateRulesEffects(effectsHierarchy, formId)];
 };
 
 export const getRulesActionsForTEI = ({
@@ -53,7 +53,6 @@ export const getRulesActionsForTEI = ({
     otherEvents,
     dataElements,
     userRoles,
-    formBuilderId,
 }: {
     foundation: RenderFoundation,
     formId: string,
@@ -66,7 +65,6 @@ export const getRulesActionsForTEI = ({
     otherEvents?: ?EventsData,
     dataElements: ?DataElements,
     userRoles: Array<string>,
-    formBuilderId?: string
 }) => {
     const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
         programRulesContainer: rulesContainer,
@@ -80,5 +78,5 @@ export const getRulesActionsForTEI = ({
         selectedUserRoles: userRoles,
         optionSets,
     });
-    return getRulesActions(effects, foundation, formId, formBuilderId);
+    return getRulesActions(effects, foundation, formId);
 };

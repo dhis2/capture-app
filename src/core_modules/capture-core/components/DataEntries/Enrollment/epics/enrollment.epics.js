@@ -14,13 +14,12 @@ type Context = {
     uid: string,
     programId: string,
     orgUnit: OrgUnit,
-    formBuilderId: string
 }
 
 const runRulesOnEnrollmentUpdate =
     (store: ReduxStore, context: Context, fieldData?: ?FieldData, searchActions?: any = []) => {
         const state = store.value;
-        const { programId, dataEntryId, itemId, orgUnit, uid, formBuilderId } = context;
+        const { programId, dataEntryId, itemId, orgUnit, uid } = context;
         const formId = getDataEntryKey(dataEntryId, itemId);
         const program = getTrackerProgramThrowIfNotFound(programId);
         const foundation = program.enrollment.enrollmentForm;
@@ -39,7 +38,6 @@ const runRulesOnEnrollmentUpdate =
             currentTEIValues ?? undefined,
             searchActions,
             uid,
-            formBuilderId,
         );
     };
 
@@ -60,7 +58,6 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObser
             const {
                 dataEntryId,
                 itemId,
-                formBuilderId,
             } = innerPayload;
 
             return runRulesOnEnrollmentUpdate(store, {
@@ -69,7 +66,6 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObser
                 uid,
                 programId,
                 orgUnit,
-                formBuilderId,
             });
         }));
 
@@ -80,7 +76,7 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, st
             actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
             const { innerPayload: payload, searchActions, uid, programId, orgUnit } = action.payload;
-            const { dataEntryId, itemId, elementId, value, uiState, formBuilderId } = payload;
+            const { dataEntryId, itemId, elementId, value, uiState } = payload;
 
             const fieldData: FieldData = {
                 elementId,
@@ -94,7 +90,6 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, st
                 dataEntryId,
                 itemId,
                 uid,
-                formBuilderId,
             }, fieldData, searchActions);
         }),
     );
