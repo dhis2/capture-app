@@ -62,6 +62,7 @@ const MapCoordinatesPlain = ({ coordinates, type, classes, onSetCoordinates }: M
                 isOpen={isModalOpen}
                 setOpen={setModalOpen}
                 onSetCoordinates={onSetCoordinates}
+                defaultValues={clientValues}
             />
         </>
     );

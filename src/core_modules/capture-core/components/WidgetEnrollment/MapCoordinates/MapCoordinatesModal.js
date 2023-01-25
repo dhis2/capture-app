@@ -37,9 +37,9 @@ const convertToServerCoordinates =
     }
 };
 
-const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, onSetCoordinates }: ModalProps) => {
-    const [position, setPosition] = useState(null);
-    const [coordinates, setCoordinates] = useState(null);
+const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defaultValues, onSetCoordinates }: ModalProps) => {
+    const [position, setPosition] = useState(type === dataElementTypes.COORDINATE ? defaultValues : null);
+    const [coordinates, setCoordinates] = useState(type === dataElementTypes.POLYGON ? defaultValues : null);
 
     const onHandleMapClicked = (mapCoordinates) => {
         if (type === dataElementTypes.COORDINATE) {
