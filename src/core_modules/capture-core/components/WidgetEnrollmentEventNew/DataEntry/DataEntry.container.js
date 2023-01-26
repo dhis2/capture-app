@@ -47,7 +47,6 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) => {
             const uid = uuid();
-            console.log({ successInnerAction });
             return batchActions([
                 successInnerAction,
                 startRunRulesPostUpdateField(dataEntryId, itemId, uid),
