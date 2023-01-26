@@ -49,6 +49,7 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defa
             const { lat, lng } = mapCoordinates.latlng;
             const newPosition: [number, number] = [lat, lng];
             setPosition(newPosition);
+            setChanges(true);
         }
     };
 
