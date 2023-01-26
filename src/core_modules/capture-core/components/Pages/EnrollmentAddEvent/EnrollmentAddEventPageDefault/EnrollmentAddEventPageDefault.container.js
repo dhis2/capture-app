@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
-import moment from 'moment-timezone';
+import moment from 'moment';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';

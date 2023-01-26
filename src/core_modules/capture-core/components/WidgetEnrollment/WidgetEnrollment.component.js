@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useCallback, type ComponentType } from 'react';
-import moment from 'moment-timezone';
+import moment from 'moment';
 import {
     IconClock16,
     IconDimensionOrgUnit16,
