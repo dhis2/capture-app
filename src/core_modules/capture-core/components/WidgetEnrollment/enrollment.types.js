@@ -23,6 +23,5 @@ export type PlainProps = {|
     onAddNew: () => void,
     onError?: (message: string) => void,
     onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
-    serverTimeZoneId?: string,
     ...CssClasses,
 |};

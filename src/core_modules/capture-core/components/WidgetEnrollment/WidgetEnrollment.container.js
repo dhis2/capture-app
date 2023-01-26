@@ -7,7 +7,6 @@ import { useOrganizationUnit } from './hooks/useOrganizationUnit';
 import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
-import { useSystemSettings } from './hooks/useSystemSettings';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
 import { useUpdateEnrollment } from './dataMutation/dataMutation';
@@ -25,9 +24,8 @@ export const WidgetEnrollment = ({
         refetch: refetchTEI,
     } = useTrackedEntityInstances(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
-    const { error: errorSystemSettings, systemSettings } = useSystemSettings();
     const canAddNew = enrollments.every(item => item.status !== plainStatus.ACTIVE);
-    const error = errorEnrollment || errorProgram || errorOwnerOrgUnit || errorOrgUnit || errorSystemSettings;
+    const error = errorEnrollment || errorProgram || errorOwnerOrgUnit || errorOrgUnit;
 
     const { updateMutation } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError);
 
@@ -55,7 +53,6 @@ export const WidgetEnrollment = ({
             onSetCoordinates={handleSetCoordinates}
             error={error}
             onError={onError}
-            serverTimeZoneId={systemSettings?.serverTimeZoneId}
         />
     );
 };
