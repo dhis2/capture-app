@@ -32,7 +32,7 @@ const convertToServerCoordinates =
         return [lng, lat];
     }
     case dataElementTypes.POLYGON:
-        return Array<[number, number]>(coordinates[0]);
+        return Array<[number, number]>(coordinates.map(c => [c[1], c[0]]));
     default:
         return coordinates;
     }
@@ -54,13 +54,13 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defa
     };
 
     const onMapPolygonCreated = (e: any) => {
-        const polygonCoordinates = e.layer.toGeoJSON().geometry.coordinates;
+        const polygonCoordinates = e.layer.toGeoJSON().geometry.coordinates[0].map(c => [c[1], c[0]]);
         setCoordinates(polygonCoordinates);
         setChanges(true);
     };
 
     const onMapPolygonEdited = (e: any) => {
-        const polygonCoordinates = e.layers.getLayers()[0].toGeoJSON().geometry.coordinates;
+        const polygonCoordinates = e.layers.getLayers()[0].toGeoJSON().geometry.coordinates[0].map(c => [c[1], c[0]]);
         setCoordinates(polygonCoordinates);
         setChanges(true);
     };
@@ -100,7 +100,13 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defa
         zoom={13}
         ref={(ref) => {
             if (ref?.leafletElement) {
-                setTimeout(() => { ref.leafletElement.invalidateSize(); }, 250);
+                setTimeout(() => {
+                    ref.leafletElement.invalidateSize();
+                    if (type === dataElementTypes.POLYGON && coordinates) {
+                        const { map } = ref.contextValue;
+                        map.fitBounds(coordinates);
+                    }
+                }, 250);
             }
         }}
         className={classes.map}

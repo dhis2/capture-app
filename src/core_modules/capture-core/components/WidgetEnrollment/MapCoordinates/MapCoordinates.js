@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
@@ -33,11 +33,20 @@ const MapCoordinatesPlain = ({ coordinates, type, classes, onSetCoordinates }: M
     const [isModalOpen, setModalOpen] = useState(false);
     const clientValues = convertToClientCoordinates(coordinates, type);
     const center = type === dataElementTypes.COORDINATE ? clientValues : clientValues[0];
+    const onMapReady = (mapRef) => {
+        if (mapRef && type === dataElementTypes.POLYGON) {
+            const { map } = mapRef.contextValue;
+            map.fitBounds(clientValues);
+        }
+    };
 
     return (
         <>
             <div className={classes.mapContainer}>
                 <Map
+                    ref={(mapRef) => {
+                        onMapReady(mapRef);
+                    }}
                     center={center}
                     className={classes.map}
                     zoom={11}
