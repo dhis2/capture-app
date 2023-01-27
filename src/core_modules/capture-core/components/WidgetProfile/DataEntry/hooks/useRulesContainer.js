@@ -1,6 +1,6 @@
 // @flow
 import { useState, useEffect } from 'react';
-import type { ProgramRulesContainer } from 'rules-engine';
+import type { ProgramRulesContainer } from '@dhis2/rules-engine-javascript';
 
 import { useProgramRules, useConstants } from './index';
 import { buildRulesContainer } from '../ProgramRules';

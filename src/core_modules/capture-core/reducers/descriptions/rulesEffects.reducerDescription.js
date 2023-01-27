@@ -1,10 +1,10 @@
 // @flow
-import { effectActions } from 'rules-engine';
+import { effectActions } from '@dhis2/rules-engine-javascript';
 import type {
     OutputEffect,
     GeneralErrorEffect,
     GeneralWarningEffect,
-} from 'rules-engine';
+} from '@dhis2/rules-engine-javascript';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { rulesEffectsActionTypes } from '../../rules';
 

@@ -9,7 +9,7 @@ import type {
     ProgramRulesContainer,
     EventsData,
     DataElements,
-} from 'rules-engine';
+} from '@dhis2/rules-engine-javascript';
 import { rulesEngine } from '../../../../rules/rulesEngine';
 import type { RenderFoundation } from '../../../../metaData';
 import { updateRulesEffects, postProcessRulesEffects, buildEffectsHierarchy } from '../../../../rules';

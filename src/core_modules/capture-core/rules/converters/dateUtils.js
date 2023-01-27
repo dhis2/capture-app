@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import moment from 'moment';
-import type { IDateUtils } from 'rules-engine';
+import type { IDateUtils } from '@dhis2/rules-engine-javascript';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 
 const momentFormat = 'YYYY-MM-DD';

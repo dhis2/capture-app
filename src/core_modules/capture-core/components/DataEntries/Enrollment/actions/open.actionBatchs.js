@@ -1,6 +1,6 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
-import type { OrgUnit } from 'rules-engine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import type { TrackerProgram } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';

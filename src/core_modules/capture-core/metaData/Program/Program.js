@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { ProgramRule, ProgramRuleVariable } from 'rules-engine';
+import type { ProgramRule, ProgramRuleVariable } from '@dhis2/rules-engine-javascript';
 import type{ CategoryCombination } from '../CategoryCombinations';
 import type { Icon } from '../Icon';
 import type { Access } from '../Access';

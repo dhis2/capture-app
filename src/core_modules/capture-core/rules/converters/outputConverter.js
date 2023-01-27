@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 import log from 'loglevel';
 import moment from 'moment';
-import type { IConvertOutputRulesEffectsValue } from 'rules-engine';
+import type { IConvertOutputRulesEffectsValue } from '@dhis2/rules-engine-javascript';
 import { convertMomentToDateFormatString } from '../../utils/converters/date';
 
 const dateMomentFormat = 'YYYY-MM-DD';

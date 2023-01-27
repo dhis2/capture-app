@@ -5,7 +5,7 @@ import type {
     Enrollment,
     TEIValues,
     OrgUnit,
-} from 'rules-engine';
+} from '@dhis2/rules-engine-javascript';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import type { TrackerProgram, RenderFoundation } from '../../../../metaData';

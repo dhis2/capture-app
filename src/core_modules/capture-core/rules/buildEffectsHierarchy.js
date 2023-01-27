@@ -1,5 +1,5 @@
 // @flow
-import type { OutputEffect } from 'rules-engine';
+import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 
 export const buildEffectsHierarchy = (effects: Array<OutputEffect>) =>
     effects.reduce((accEffectsObject, effect) => {

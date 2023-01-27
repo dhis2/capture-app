@@ -8,7 +8,7 @@ import type {
     OptionSets,
     ProgramRulesContainer,
     DataElements,
-} from 'rules-engine';
+} from '@dhis2/rules-engine-javascript';
 import { cleanUpDataEntry } from '../../../DataEntry';
 import { RenderFoundation } from '../../../../metaData';
 import { getOpenDataEntryActions, cleanTeiModal } from '../dataEntry.actions';

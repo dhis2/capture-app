@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { type OrgUnit } from 'rules-engine';
+import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,

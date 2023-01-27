@@ -2,7 +2,7 @@
 import { useEffect, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
-import type { OrgUnit } from 'rules-engine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getEventProgramThrowIfNotFound } from '../../../../metaData';
 import { getRulesActions } from './DataEntry';
 import type { RenderFoundation } from '../../../../metaData';

@@ -1,5 +1,5 @@
 // @flow
-import type { ProgramRulesContainer } from 'rules-engine';
+import type { ProgramRulesContainer } from '@dhis2/rules-engine-javascript';
 import { getTrackedEntityAttributeId, getProgramId, getProgramRuleActions, getProgramStageId } from '../helpers';
 import { getRulesAndVariablesFromProgramIndicators } from '../../../../metaDataMemoryStoreBuilders/programs/getRulesAndVariablesFromIndicators';
 

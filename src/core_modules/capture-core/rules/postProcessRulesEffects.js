@@ -1,6 +1,6 @@
 // @flow
-import { effectActions } from 'rules-engine';
-import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from 'rules-engine';
+import { effectActions } from '@dhis2/rules-engine-javascript';
+import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from '@dhis2/rules-engine-javascript';
 import type { RenderFoundation } from '.././metaData';
 
 const getAssignEffectsBasedOnHideField = (hideEffects: Array<HideOutputEffect>) =>

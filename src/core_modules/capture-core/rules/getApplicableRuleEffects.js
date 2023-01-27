@@ -1,5 +1,5 @@
 // @flow
-import type { OutputEffects } from 'rules-engine';
+import type { OutputEffects } from '@dhis2/rules-engine-javascript';
 import { rulesEngine } from './rulesEngine';
 import type { DataElement, ProgramStage } from '../metaData';
 import { constantsStore } from '../metaDataMemoryStores/constants/constants.store';

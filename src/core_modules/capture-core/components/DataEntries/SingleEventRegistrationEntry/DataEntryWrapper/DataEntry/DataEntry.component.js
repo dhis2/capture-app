@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { type OrgUnit } from 'rules-engine';
+import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
 import { withCancelButton } from '../../../../DataEntry/withCancelButton';
 import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';

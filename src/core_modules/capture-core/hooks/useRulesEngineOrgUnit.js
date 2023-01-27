@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import type { OrgUnit } from 'rules-engine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
 import { useOrganisationUnit } from '../dataQueries';
 

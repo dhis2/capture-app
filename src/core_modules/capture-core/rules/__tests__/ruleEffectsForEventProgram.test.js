@@ -1,4 +1,4 @@
-import { rulesEngineEffectTargetDataTypes } from 'rules-engine';
+import { rulesEngineEffectTargetDataTypes } from '@dhis2/rules-engine-javascript';
 import { rulesEngine } from '../rulesEngine';
 
 describe('Event Event rules engine', () => {

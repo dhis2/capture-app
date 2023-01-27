@@ -1,5 +1,5 @@
 // @flow
-import type { OrgUnit } from 'rules-engine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { connect } from 'react-redux';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';

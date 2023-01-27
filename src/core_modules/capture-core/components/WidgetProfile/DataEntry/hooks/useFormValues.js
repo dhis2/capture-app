@@ -1,6 +1,6 @@
 // @flow
 import { useState, useEffect, useRef } from 'react';
-import type { OrgUnit } from 'rules-engine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { getUniqueValuesForAttributesWithoutValue } from '../../../DataEntries/common/TEIAndEnrollment';

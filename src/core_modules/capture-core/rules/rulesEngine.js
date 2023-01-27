@@ -1,5 +1,5 @@
 // @flow
-import { RulesEngine, environmentTypes } from 'rules-engine';
+import { RulesEngine, environmentTypes } from '@dhis2/rules-engine-javascript';
 import {
     inputConverter,
     outputConverter,

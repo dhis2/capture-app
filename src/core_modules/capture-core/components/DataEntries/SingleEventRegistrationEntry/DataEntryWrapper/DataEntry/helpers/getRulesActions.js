@@ -1,5 +1,5 @@
 // @flow
-import type { OrgUnit } from 'rules-engine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
