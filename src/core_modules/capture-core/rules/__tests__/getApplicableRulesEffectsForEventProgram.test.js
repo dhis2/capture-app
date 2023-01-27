@@ -1,4 +1,3 @@
-
 import {
     EventProgram,
     ProgramStage,
@@ -18,7 +17,7 @@ const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [{
 }]);
 
 const mockOptionSet = new OptionSet('optionSet1', [new Option('option1', 'opt1')]);
-jest.mock('rules-engine/build/cjs/RulesEngine', () => ({
+jest.mock('@dhis2/rules-engine-javascript/build/cjs/RulesEngine', () => ({
     RulesEngine: jest.fn().mockImplementation(() =>
         ({ getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) })),
 }));
@@ -141,4 +140,3 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
         expect(effects.DISPLAYTEXT).toBeDefined();
     });
 });
-
