@@ -1,1 +1,0 @@
-export { getStructureEvents } from './structureEvents';
