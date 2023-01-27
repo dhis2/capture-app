@@ -34,9 +34,9 @@ const MapCoordinatesPlain = ({ coordinates, type, classes, onSetCoordinates }: M
     const clientValues = convertToClientCoordinates(coordinates, type);
     const center = type === dataElementTypes.COORDINATE ? clientValues : clientValues[0];
     const onMapReady = (mapRef) => {
-        if (mapRef && type === dataElementTypes.POLYGON) {
+        if (mapRef?.contextValue && type === dataElementTypes.POLYGON) {
             const { map } = mapRef.contextValue;
-            map.fitBounds(clientValues);
+            map?.fitBounds(clientValues);
         }
     };
 

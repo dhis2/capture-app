@@ -102,9 +102,9 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defa
             if (ref?.leafletElement) {
                 setTimeout(() => {
                     ref.leafletElement.invalidateSize();
-                    if (type === dataElementTypes.POLYGON && coordinates) {
+                    if (ref.contextValue && type === dataElementTypes.POLYGON && coordinates) {
                         const { map } = ref.contextValue;
-                        map.fitBounds(coordinates);
+                        map?.fitBounds(coordinates);
                     }
                 }, 250);
             }
