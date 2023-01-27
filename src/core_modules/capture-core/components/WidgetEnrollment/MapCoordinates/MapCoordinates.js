@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
