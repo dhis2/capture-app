@@ -61,6 +61,10 @@ export const withDescription = () =>
                             <div className={classes.label}>{i18n.t('URL')}</div>
                             <a href={url} target={'_blank'} rel="noreferrer">{url}</a>
                         </div> : null}
+                        {url ? <div className={classes.popOverContainer}>
+                            <p className={classes.label}>{i18n.t('URL')}</p>
+                            <a className={classes.url} href={url} target={'_blank'} rel="noreferrer">{url}</a>
+                        </div> : null}
                     </Popover>}
                 </div>);
             }

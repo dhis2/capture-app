@@ -1,5 +1,6 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
+import { spacers } from '@dhis2/ui';
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { D2Form } from '../D2Form';
@@ -17,9 +18,9 @@ const styles = theme => ({
     d2FormContainer: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '10px',
-        paddingTop: 10,
-        paddingBottom: 10,
+        gap: spacers.dp16,
+        marginTop: spacers.dp12,
+        marginBottom: spacers.dp12,
     },
     footerBar: {
         display: 'flex',
@@ -27,13 +28,13 @@ const styles = theme => ({
     },
     footerLeft: {
         display: 'flex',
+        gap: spacers.dp8,
     },
     footerRight: {
         display: 'flex',
     },
     button: {
         marginTop: theme.typography.pxToRem(2),
-        paddingRight: theme.spacing.unit * 2,
     },
     horizontalFormInnerContainer: {
         display: 'flex',
@@ -43,7 +44,7 @@ const styles = theme => ({
     verticalFormContainer: {
         flexGrow: 10,
         maxWidth: '100%',
-        paddingTop: theme.typography.pxToRem(10),
+        marginBottom: spacers.dp12,
     },
     verticalFormInnerContainer: {
         maxWidth: theme.typography.pxToRem(892),
@@ -69,8 +70,7 @@ const styles = theme => ({
         marginBottom: theme.typography.pxToRem(10),
     },
     dataEntryFieldSectionContainer: {
-        paddingTop: theme.typography.pxToRem(10),
-        paddingBottom: theme.typography.pxToRem(10),
+        marginBottom: spacers.dp16,
     },
 });
 

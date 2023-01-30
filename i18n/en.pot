@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-12-07T22:27:53.732Z\n"
-"PO-Revision-Date: 2022-12-07T22:27:53.732Z\n"
+"POT-Creation-Date: 2023-01-30T07:47:37.878Z\n"
+"PO-Revision-Date: 2023-01-30T07:47:37.878Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1452,6 +1452,9 @@ msgstr "Delete polygon"
 
 msgid "Set area"
 msgstr "Set area"
+
+msgid "Area on map saved"
+msgstr "Area on map saved"
 
 msgid "Compatibility mode"
 msgstr "Compatibility mode"

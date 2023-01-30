@@ -7,9 +7,9 @@ import { usePreviousOrganizationUnit } from './usePreviousOrganizationUnit';
 
 const getStyles = () => ({
     orgunitTree: {
-        padding: 5,
+        padding: 4,
         minHeight: 42,
-        paddingTop: 10,
+        paddingTop: 8,
         backgroundColor: 'white',
     },
 });
