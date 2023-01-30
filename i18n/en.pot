@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-12-07T22:27:53.732Z\n"
-"PO-Revision-Date: 2022-12-07T22:27:53.732Z\n"
+"POT-Creation-Date: 2023-01-30T16:42:50.374Z\n"
+"PO-Revision-Date: 2023-01-30T16:42:50.374Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -595,6 +595,9 @@ msgstr "There is an error while opening this enrollment. Please enter a valid ur
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
 
+msgid "An error occurred while fetching enrollments. Please enter a valid url."
+msgstr "An error occurred while fetching enrollments. Please enter a valid url."
+
 msgid "Enrollment Dashboard"
 msgstr "Enrollment Dashboard"
 
@@ -634,6 +637,9 @@ msgstr "{{programName}} has categories. Choose all categories to view dashboard.
 
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Choose an enrollment to view the dashboard."
+
+msgid "No access to program owner."
+msgstr "No access to program owner."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is not enrolled in this program."
@@ -1033,6 +1039,26 @@ msgstr "To work with the selected program,"
 
 msgid "open the Tracker Capture app"
 msgstr "open the Tracker Capture app"
+
+msgid "Reason to check for enrollment"
+msgstr "Reason to check for enrollment"
+
+msgid ""
+"Describe the reason you are checking for enrollment in this protected "
+"program"
+msgstr ""
+"Describe the reason you are checking for enrollment in this protected "
+"program"
+
+msgid "Check for enrollment"
+msgstr "Check for enrollment"
+
+msgid ""
+"You must provide a reason to check for enrollment in this protected "
+"program. All activity will be logged."
+msgstr ""
+"You must provide a reason to check for enrollment in this protected "
+"program. All activity will be logged."
 
 msgid "Save comment"
 msgstr "Save comment"

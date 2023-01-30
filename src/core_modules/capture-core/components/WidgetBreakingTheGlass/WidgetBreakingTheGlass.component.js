@@ -16,7 +16,7 @@ const styles = ({ typography }) => ({
         ...typography.title,
     },
     background: {
-        maxWidth: "1000px",
+        maxWidth: '1000px',
     },
     wrapper: {
         padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
@@ -26,8 +26,8 @@ const styles = ({ typography }) => ({
 const WidgetBreakingTheGlassPlain = ({
     classes,
 }) => {
-    const reasonHeader = i18n.t("Reason to check for enrollment");
-    const reasonPlaceholder = i18n.t("Describe the reason you are checking for enrollment in this protected program");
+    const reasonHeader = i18n.t('Reason to check for enrollment');
+    const reasonPlaceholder = i18n.t('Describe the reason you are checking for enrollment in this protected program');
 
     const [reason, setReason] = useState('');
     const reasonChangeHandler = useCallback(({ value }) => {
@@ -43,11 +43,11 @@ const WidgetBreakingTheGlassPlain = ({
             >
                 <div className={classes.wrapper}>
                     <div className={classes.title}>
-                        {i18n.t("Check for enrollment")}
+                        {i18n.t('Check for enrollment')}
                     </div>
                     <br />
                     <NoticeBox title="This program is protected" warning>
-                        {i18n.t("You must provide a reason to check for enrollment in this protected program. All activity will be logged.")}
+                        {i18n.t('You must provide a reason to check for enrollment in this protected program. All activity will be logged.')}
                     </NoticeBox>
                     <br />
                     <TextAreaField
@@ -59,16 +59,16 @@ const WidgetBreakingTheGlassPlain = ({
                     <br />
                     <ButtonStrip>
                         <Button>
-                            {i18n.t("Check for enrollment")}
+                            {i18n.t('Check for enrollment')}
                         </Button>
                         <Button>
-                            {i18n.t("Cancel")}
+                            {i18n.t('Cancel')}
                         </Button>
                     </ButtonStrip>
                 </div>
             </Widget>
         </div>
     );
-}
+};
 
 export const WidgetBreakingTheGlass = withStyles(styles)(WidgetBreakingTheGlassPlain);
