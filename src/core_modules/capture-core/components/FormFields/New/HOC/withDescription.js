@@ -70,7 +70,7 @@ export const withDescription = () =>
                         role="button"
                         tabIndex={-1}
                         ref={this.iconRef}
-                        className={`${classes.iconContainer} ${this.state.popOverOpen && classes.iconContainerActive}`}
+                        className={`${classes.iconContainer} ${this.state.popOverOpen ? classes.iconContainerActive : ''}`}
                         onClick={() => { this.setState({ popOverOpen: true }); }}
                     >
                         <IconInfo16 />
