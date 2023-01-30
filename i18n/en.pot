@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
-"PO-Revision-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2022-12-07T22:27:53.732Z\n"
+"PO-Revision-Date: 2022-12-07T22:27:53.732Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -307,9 +307,6 @@ msgstr "Show registered {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Registered person"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "Leaving this page will discard the changes you made to this event."
-
 msgid "validation failed"
 msgstr "validation failed"
 
@@ -336,6 +333,9 @@ msgstr "No, cancel"
 
 msgid "Yes, create new event"
 msgstr "Yes, create new event"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr "Leaving this page will discard the changes you made to this event."
 
 msgid "Warnings found"
 msgstr "Warnings found"
@@ -699,8 +699,8 @@ msgstr "Schedule"
 msgid "Refer"
 msgstr "Refer"
 
-msgid "You can’t add any more events in this program"
-msgstr "You can’t add any more events in this program"
+msgid "You can’t add any more {{ programStageName }} events"
+msgstr "You can’t add any more {{ programStageName }} events"
 
 msgid "Cancel without saving"
 msgstr "Cancel without saving"
@@ -906,8 +906,18 @@ msgstr "Create new"
 msgid "Saved lists in this program"
 msgstr "Saved lists in this program"
 
-msgid "Create custom working list"
-msgstr "Create custom working list"
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr "Saved lists offer quick access to your most used views in a program."
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+
+msgid "Create saved list"
+msgstr "Create saved list"
 
 msgid "events"
 msgstr "events"
@@ -1073,9 +1083,6 @@ msgstr "Enrollment date"
 msgid "Incident date"
 msgstr "Incident date"
 
-msgid "Last updated {{date}}"
-msgstr "Last updated {{date}}"
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "Enrollment widget could not be loaded. Please try again later"
 
@@ -1087,6 +1094,9 @@ msgstr "Started at {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Owned by {{ownerOrgUnit}}"
+
+msgid "Last updated {{date}}"
+msgstr "Last updated {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"

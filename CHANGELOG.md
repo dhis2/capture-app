@@ -1,3 +1,65 @@
+## [100.24.2](https://github.com/dhis2/capture-app/compare/v100.24.1...v100.24.2) (2023-01-26)
+
+
+### Bug Fixes
+
+* [DHIS2-13646] temporarily generate the updatedAt on the client ([#3122](https://github.com/dhis2/capture-app/issues/3122)) ([2d3bdee](https://github.com/dhis2/capture-app/commit/2d3bdeeef61ad3eeb213c3bb9c9eec2b95b4138a))
+
+## [100.24.1](https://github.com/dhis2/capture-app/compare/v100.24.0...v100.24.1) (2023-01-18)
+
+
+### Bug Fixes
+
+* [DHIS2-14340][DHIS2-13197] Sort blank cells in stages & event widget ([#3142](https://github.com/dhis2/capture-app/issues/3142)) ([063d73b](https://github.com/dhis2/capture-app/commit/063d73b0bb9502e67dda3549441262fdaf6d6f48))
+
+# [100.24.0](https://github.com/dhis2/capture-app/compare/v100.23.2...v100.24.0) (2023-01-17)
+
+
+### Features
+
+* [DHIS-14336] enter press should trigger search ([#3164](https://github.com/dhis2/capture-app/issues/3164)) ([6ed5d34](https://github.com/dhis2/capture-app/commit/6ed5d34f2604c56b3265a6bc0866efa5006fb870))
+
+## [100.23.2](https://github.com/dhis2/capture-app/compare/v100.23.1...v100.23.2) (2023-01-13)
+
+
+### Bug Fixes
+
+* [DHIS2-12472] List all messages related to field ([d9d60d0](https://github.com/dhis2/capture-app/commit/d9d60d01087dd9e58bf9916f4341bdd9c7fb1932))
+
+## [100.23.1](https://github.com/dhis2/capture-app/compare/v100.23.0...v100.23.1) (2023-01-12)
+
+
+### Bug Fixes
+
+* [DHIS2-13965] stay in app when there is error on org unit ([#3155](https://github.com/dhis2/capture-app/issues/3155)) ([726efae](https://github.com/dhis2/capture-app/commit/726efae0510ead4a3a78f950ba930d3a877112e2))
+
+# [100.23.0](https://github.com/dhis2/capture-app/compare/v100.22.1...v100.23.0) (2023-01-10)
+
+
+### Bug Fixes
+
+* [DHIS2-14411] change tooltip for program stage selector ([#3156](https://github.com/dhis2/capture-app/issues/3156)) ([654e0f6](https://github.com/dhis2/capture-app/commit/654e0f63c2261c784efb3e47d8f1388fb10fd34f))
+* [TECH-1495] cypress tests with dynamic dates  ([#3162](https://github.com/dhis2/capture-app/issues/3162)) ([b90b582](https://github.com/dhis2/capture-app/commit/b90b5828aa8cd4a0a7ff44b2113e3910df201329))
+
+
+### Features
+
+* [TECH-1486] Utility hook for fetching indexed db data ([#3150](https://github.com/dhis2/capture-app/issues/3150)) ([680e1e4](https://github.com/dhis2/capture-app/commit/680e1e434c6afaada0c6b2892f1513818463316a))
+
+## [100.22.1](https://github.com/dhis2/capture-app/compare/v100.22.0...v100.22.1) (2022-12-13)
+
+
+### Bug Fixes
+
+* [DHIS2-14286] Replace LGTM with CodeQL ([53ee196](https://github.com/dhis2/capture-app/commit/53ee19604a8c589d045ffe081600bab4a20b4236))
+
+# [100.22.0](https://github.com/dhis2/capture-app/compare/v100.21.7...v100.22.0) (2022-12-13)
+
+
+### Features
+
+* [DHIS2-14125] improve no saved list  ([#3132](https://github.com/dhis2/capture-app/issues/3132)) ([0918fee](https://github.com/dhis2/capture-app/commit/0918fee3f47b75a53efe631f63b2706181557a12))
+
 ## [100.21.7](https://github.com/dhis2/capture-app/compare/v100.21.6...v100.21.7) (2022-12-01)
 
 

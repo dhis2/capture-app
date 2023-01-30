@@ -7,7 +7,6 @@ import { useOrganizationUnit } from './hooks/useOrganizationUnit';
 import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
-import { useSystemSettings } from './hooks/useSystemSettings';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
 
@@ -21,9 +20,8 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
         refetch: refetchTEI,
     } = useTrackedEntityInstances(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
-    const { error: errorSystemSettings, systemSettings } = useSystemSettings();
     const canAddNew = enrollments.every(item => item.status !== plainStatus.ACTIVE);
-    const error = errorEnrollment || errorProgram || errorOwnerOrgUnit || errorOrgUnit || errorSystemSettings;
+    const error = errorEnrollment || errorProgram || errorOwnerOrgUnit || errorOrgUnit;
 
     if (error) {
         log.error(errorCreator('Enrollment widget could not be loaded')({ error }));
@@ -42,7 +40,6 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
             onAddNew={onAddNew}
             error={error}
             onError={onError}
-            serverTimeZoneId={systemSettings?.serverTimeZoneId}
         />
     );
 };
