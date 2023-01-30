@@ -1,23 +1,50 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { IconInfo16, Popover, colors, spacers } from '@dhis2/ui';
+import { IconInfo16, IconLaunch16, Popover, colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 
 const getStylesLabel = () => ({
     iconContainer: {
-        paddingLeft: spacers.dp8,
+        display: 'flex',
+        alignItems: 'center',
+        marginLeft: spacers.dp4,
+        padding: 2,
+        borderRadius: 3,
+        background: 'transparent',
+        color: colors.grey700,
         '&:hover': {
             cursor: 'pointer',
+            background: colors.grey200,
+            color: colors.grey900,
         },
     },
+    iconContainerActive: {
+        background: colors.grey300,
+        color: colors.grey900,
+    },
     popOverContainer: {
-        padding: `${spacers.dp8} ${spacers.dp12}`,
+        padding: `${spacers.dp12} ${spacers.dp12}`,
         wordBreak: 'break-word',
+        '& + &': {
+            paddingTop: 0,
+        },
     },
     label: {
-        fontWeight: 600,
+        fontWeight: 500,
+        fontSize: 14,
+        color: colors.grey900,
         paddingBottom: 4,
+        margin: 0,
+    },
+    content: {
+        fontSize: '14px',
+        lineHeight: '18px',
+        color: colors.grey900,
+        margin: 0,
+    },
+    url: {
+        fontSize: 14,
     },
 });
 
@@ -43,10 +70,10 @@ export const withDescription = () =>
                         role="button"
                         tabIndex={-1}
                         ref={this.iconRef}
-                        className={classes.iconContainer}
+                        className={`${classes.iconContainer} ${this.state.popOverOpen && classes.iconContainerActive}`}
                         onClick={() => { this.setState({ popOverOpen: true }); }}
                     >
-                        <IconInfo16 color={colors.grey600} />
+                        <IconInfo16 />
                     </div>
                     {this.state.popOverOpen &&
                     <Popover
@@ -54,12 +81,8 @@ export const withDescription = () =>
                         onClickOutside={() => this.setState({ popOverOpen: false })}
                     >
                         { description ? <div className={classes.popOverContainer}>
-                            <div className={classes.label}>{i18n.t('Description')}</div>
-                            <div>{description}</div>
-                        </div> : null}
-                        { url ? <div className={classes.popOverContainer}>
-                            <div className={classes.label}>{i18n.t('URL')}</div>
-                            <a href={url} target={'_blank'} rel="noreferrer">{url}</a>
+                            <p className={classes.label}>{i18n.t('Description')}</p>
+                            <p className={classes.content}>{description}</p>
                         </div> : null}
                         {url ? <div className={classes.popOverContainer}>
                             <p className={classes.label}>{i18n.t('URL')}</p>
