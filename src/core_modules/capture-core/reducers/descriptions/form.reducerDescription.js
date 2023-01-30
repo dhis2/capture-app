@@ -211,7 +211,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const { formId, rulesEffects } = action.payload;
-        const formBuilderIds = Object.keys(state).filter(key => key.startsWith(formId));
+        const formBuilderIds = Object.keys(state).filter(key => key.startsWith(formId) && Object.keys(state[key]).length > 0);
         const assignEffects: { [id: string]: Array<AssignOutputEffect> } =
             rulesEffects && rulesEffects[effectActions.ASSIGN_VALUE];
 
@@ -225,20 +225,17 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
                 formAcc[formBuilderId] = {
                     ...state[formBuilderId],
                     ...Object.keys(assignEffects).reduce((acc, id) => {
-                        assignEffects[id].forEach((effect) => {
-                            if (effect.type === effectActions.ASSIGN_VALUE && effect.value !== null) {
-                                acc[id] = {
-                                    valid: true,
-                                    errorData: undefined,
-                                    errorMessage: undefined,
-                                    errorType: undefined,
-                                    modified: true,
-                                    touched: true,
-                                    validatingMessage: null,
-                                };
-                            }
-                        });
-
+                        if (state[formBuilderId][id]) {
+                            acc[id] = {
+                                valid: true,
+                                errorData: undefined,
+                                errorMessage: undefined,
+                                errorType: undefined,
+                                modified: true,
+                                touched: true,
+                                validatingMessage: null,
+                            };
+                        }
                         return acc;
                     }, {}),
                 };
