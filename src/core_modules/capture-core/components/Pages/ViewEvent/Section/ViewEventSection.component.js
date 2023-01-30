@@ -2,11 +2,14 @@
 
 import * as React from 'react';
 import { withStyles, IconButton, Paper } from '@material-ui/core';
-import { IconChevronDown24, IconChevronUp24 } from '@dhis2/ui';
+import { IconChevronDown24, IconChevronUp24, colors } from '@dhis2/ui';
 
 const getStyles = (theme: Theme) => ({
     container: {
-        margin: theme.typography.pxToRem(10),
+        background: colors.white,
+        border: '1px solid',
+        borderColor: colors.grey400,
+        borderRadius: 3,
     },
     headerContainer: {
         display: 'flex',
@@ -85,13 +88,13 @@ class ViewEventSectionPlain extends React.Component<Props, State> {
     render() {
         const { header, collapsable, classes } = this.props;
         return (
-            <Paper className={classes.container}>
+            <div className={classes.container}>
                 <div className={classes.headerContainer}>
                     {header}
                     {collapsable && this.renderCollapsable()}
                 </div>
                 {!this.state.collapsed && this.renderContent()}
-            </Paper>
+            </div>
         );
     }
 }

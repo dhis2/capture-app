@@ -1,25 +1,29 @@
 // @flow
+import { colors, spacers } from '@dhis2/ui';
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import { TeiWorkingListsReduxProvider } from './ReduxProvider';
 import type { Props } from './teiWorkingLists.types';
 import { TEI_WORKING_LISTS_STORE_ID } from './constants';
 
-const getStyles = ({ typography }) => ({
+const getStyles = () => ({
     listContainer: {
-        padding: typography.pxToRem(24),
+        padding: spacers.dp16,
+        background: colors.white,
+        border: '1px solid',
+        borderColor: colors.grey400,
+        borderRadius: 3,
     },
 });
 
 const TeiWorkingListsPlain = ({ classes: { listContainer }, ...passOnProps }: Props) => (
     <div data-test="tei-working-lists">
-        <Paper className={listContainer}>
+        <div className={listContainer}>
             <TeiWorkingListsReduxProvider
                 storeId={TEI_WORKING_LISTS_STORE_ID}
                 {...passOnProps}
             />
-        </Paper>
+        </div>
     </div>
 );
 

@@ -14,9 +14,9 @@ import {
     NoticeBox,
     IconChevronLeft24,
     spacers,
+    colors,
 } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Paper from '@material-ui/core/Paper/Paper';
 import { useLocation } from 'react-router-dom';
 
 import type { ContainerProps, Props } from './SearchPage.types';
@@ -39,21 +39,25 @@ const getStyles = (theme: Theme) => ({
         flex: 0.4,
     },
     title: {
-        padding: '8px 0 0px 8px',
         fontWeight: 500,
-        marginBottom: theme.typography.pxToRem(16),
+        marginBottom: spacers.dp24,
     },
     container: {
-        padding: '10px 24px 24px 24px',
+        color: colors.grey900,
+        padding: '8px 24px 24px 24px',
     },
     innerContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         gap: spacers.dp16,
     },
-    paper: {
-        padding: theme.typography.pxToRem(10),
+    searchFormContainer: {
+        padding: spacers.dp16,
         flex: 1,
+        background: colors.white,
+        border: '1px solid',
+        borderColor: colors.grey400,
+        borderRadius: 3,
     },
     emptySelectionPaperContent: {
         display: 'flex',
@@ -63,7 +67,7 @@ const getStyles = (theme: Theme) => ({
         paddingBottom: 50,
     },
     backButton: {
-        marginBottom: 10,
+        marginBottom: spacers.dp8,
     },
     informativeMessage: {
         marginLeft: theme.typography.pxToRem(10),
@@ -247,13 +251,12 @@ const Index = ({
         <>
             <div data-test="search-page-content" className={classes.container}>
                 {navigateToMainPage && (
-                    <Button dataTest="back-button" className={classes.backButton} onClick={navigateToMainPage}>
-                        <IconChevronLeft24 />
+                    <Button dataTest="back-button" className={classes.backButton} onClick={navigateToMainPage} icon={ <IconChevronLeft24/> }>
                         {i18n.t('Back')}
                     </Button>
                 )}
                 <div className={classes.innerContainer}>
-                    <Paper className={classes.paper}>
+                    <div className={classes.searchFormContainer}>
                         <div className={classes.title}>
                             {i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } })}
                         </div>
@@ -277,7 +280,7 @@ const Index = ({
                                 {searchStatusComponents()}
                             </div>
                         </div>
-                    </Paper>
+                    </div>
                     <div className={classes.quarter}>
                         <TemplateSelector />
                     </div>
