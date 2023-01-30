@@ -9,10 +9,13 @@ import {
     showErrorViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
     successfulFetchingEnrollmentPageInformationFromUrl,
+    updateEnrollmentAccessLevel,
+    saveEnrollments,
     openEnrollmentPage,
     startFetchingTeiFromEnrollmentId,
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
+import { enrollmentAccessLevels } from './EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 
@@ -23,21 +26,28 @@ const teiQuery = id => ({
     resource: 'tracker/trackedEntities',
     id,
     params: {
-        fields: ['attributes', 'enrollments', 'trackedEntityType'],
+        fields: ['attributes', 'trackedEntityType'],
+    },
+});
+
+const enrollmentsQuery = (teiId, programId) => ({
+    resource: 'tracker/trackedEntities',
+    id: teiId,
+    params: {
+        program: programId,
+        fields: ['enrollments'],
     },
 });
 
 const fetchTeiStream = (teiId, querySingleResource) =>
     from(querySingleResource(teiQuery(teiId)))
         .pipe(
-            map(({ attributes, enrollments, trackedEntityType }) => {
-                const enrollmentsSortedByDate = sortByDate(enrollments);
+            map(({ attributes, trackedEntityType }) => {
                 const teiDisplayName = deriveTeiName(attributes, trackedEntityType, teiId);
 
                 return successfulFetchingEnrollmentPageInformationFromUrl({
                     teiDisplayName,
                     tetId: trackedEntityType,
-                    enrollmentsSortedByDate,
                 });
             }),
             catchError(() => {
@@ -99,6 +109,40 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
             const { teiId } = getLocationQuery();
 
             return fetchTeiStream(teiId, querySingleResource);
+        }),
+    );
+
+export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+    action$.pipe(
+        ofType(enrollmentPageActionTypes.ENROLLMENTS_FETCH, enrollmentPageActionTypes.INFORMATION_SUCCESS_FETCH),
+        flatMap(() => {
+            const { teiId, programId } = getLocationQuery();
+
+            if (!programId) {
+                return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS }));
+            }
+
+            return from(querySingleResource(enrollmentsQuery(teiId, programId)))
+                .pipe(
+                    map(({ enrollments }) => {
+                        const enrollmentsSortedByDate = sortByDate(enrollments
+                            .filter(enrollment => enrollment.program === programId));
+                        return saveEnrollments({ enrollments: enrollmentsSortedByDate });
+                    }),
+                    catchError((error) => {
+                        if (error.message) {
+                            if (error.message === 'OWNERSHIP_ACCESS_PARTIALLY_DENIED') {
+                                return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS }));
+                            } else if (error.message === 'OWNERSHIP_ACCESS_DENIED') {
+                                return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS })); // Todo: Change to NO_ACCESS
+                            } else if (error.message.startsWith('[User has no read access to organisation unit:')) {
+                                return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
+                            }
+                        }
+                        const errorMessage = i18n.t('An error occurred while fetching enrollments. Please enter a valid url.');
+                        return of(showErrorViewOnEnrollmentPage({ error: errorMessage }));
+                    }),
+                );
         }),
     );
 

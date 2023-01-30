@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import type { ComponentType } from 'react';
+import React, { type ComponentType, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { compose } from 'redux';
 import i18n from '@dhis2/d2-i18n';
@@ -18,10 +18,11 @@ import {
 import { TopBarActions } from '../../TopBarActions';
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import type { Props } from './EnrollmentPage.types';
-import { enrollmentPageStatuses } from './EnrollmentPage.constants';
+import { enrollmentPageStatuses, enrollmentAccessLevels } from './EnrollmentPage.constants';
+import { fetchEnrollments, updateEnrollmentAccessLevel } from './EnrollmentPage.actions';
 import { LoadingMaskForPage } from '../../LoadingMasks/LoadingMaskForPage.component';
 import { withErrorMessageHandler } from '../../../HOC';
-import { EnrollmentNotSelected } from './EnrollmentNotSelected/EnrollmentNotSelected.component';
+import { MissingMessage } from './MissingMessage.component';
 import { EnrollmentPageDefault } from './EnrollmentPageDefault';
 
 const getStyles = ({ typography }) => ({
@@ -35,6 +36,30 @@ const getStyles = ({ typography }) => ({
         ...typography.title,
     },
 });
+
+const useSelectProgram = (selectHandler) => {
+    const dispatch = useDispatch();
+
+    return useCallback(
+        (programId) => {
+            selectHandler(programId);
+            dispatch(fetchEnrollments());
+        },
+        [dispatch, selectHandler],
+    );
+};
+
+const useDeselectProgram = (deselectProgramHandler) => {
+    const dispatch = useDispatch();
+
+    return useCallback(
+        () => {
+            deselectProgramHandler();
+            dispatch(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS }));
+        },
+        [dispatch, deselectProgramHandler],
+    );
+};
 
 const EnrollmentPagePlain = ({
     classes,
@@ -60,9 +85,9 @@ const EnrollmentPagePlain = ({
             <ScopeSelector
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
-                onSetProgramId={id => setProgramId(id)}
+                onSetProgramId={useSelectProgram(setProgramId)}
                 onSetOrgUnit={id => setOrgUnitId(id)}
-                onResetProgramId={() => resetProgramIdAndEnrollmentContext()}
+                onResetProgramId={useDeselectProgram(resetProgramIdAndEnrollmentContext)}
                 onResetOrgUnitId={() => resetOrgUnitId()}
             >
                 <Grid item xs={12} sm={6} md={4} lg={2}>
@@ -100,9 +125,7 @@ const EnrollmentPagePlain = ({
             >
                 {enrollmentPageStatus ===
                     enrollmentPageStatuses.MISSING_SELECTIONS && (
-                    <EnrollmentNotSelected
-                        programId={programId}
-                    />
+                    <MissingMessage />
                 )}
 
                 {enrollmentPageStatus === enrollmentPageStatuses.DEFAULT && (
