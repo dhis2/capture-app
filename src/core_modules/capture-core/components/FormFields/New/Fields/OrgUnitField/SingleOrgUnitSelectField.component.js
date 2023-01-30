@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles, IconButton } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import { Chip } from '@dhis2/ui';
 import { OrgUnitField } from './OrgUnitField.component';
 

@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import {
     SingleSelectField,
     SingleSelectOption,
-    spacers
+    spacers,
 } from '@dhis2/ui';
 import type { Props } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
@@ -48,7 +48,7 @@ export const TrackedEntityTypeSelectorPlain =
           <div className={classes.searchRow}>
               <div className={classes.searchRowSelectElement}>
                   <SingleSelectField
-                      label={ headerText }
+                      label={headerText}
                       onChange={handleSelectionChange}
                       selected={selectedSearchScopeId}
                       empty={<div className={classes.customEmpty}>Custom empty component</div>}

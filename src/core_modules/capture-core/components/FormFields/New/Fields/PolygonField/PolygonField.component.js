@@ -5,7 +5,7 @@ import { PolygonField as UIPolygonField } from 'capture-ui';
 import { Dialog, DialogTitle } from '@material-ui/core';
 import { typeof orientations } from '../../../New';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     dialogPaper: {
         maxWidth: 'none',
         width: '75%',

@@ -1,10 +1,8 @@
 // @flow
-import { colors } from '@dhis2/ui';
+import { IconChevronDown24, IconChevronUp24, colors } from '@dhis2/ui';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
 import IconButton from '@material-ui/core/IconButton';
-import { IconChevronDown24, IconChevronUp24 } from '@dhis2/ui';
 
 const styles = () => ({
     container: {

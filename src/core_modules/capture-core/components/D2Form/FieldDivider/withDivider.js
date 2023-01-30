@@ -1,5 +1,5 @@
 // @flow
-import { colors } from '@dhis2/ui'
+import { colors } from '@dhis2/ui';
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { DividerHorizontal as Divider } from 'capture-ui';

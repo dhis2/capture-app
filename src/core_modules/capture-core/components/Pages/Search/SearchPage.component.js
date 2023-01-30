@@ -251,7 +251,7 @@ const Index = ({
         <>
             <div data-test="search-page-content" className={classes.container}>
                 {navigateToMainPage && (
-                    <Button dataTest="back-button" className={classes.backButton} onClick={navigateToMainPage} icon={ <IconChevronLeft24/> }>
+                    <Button dataTest="back-button" className={classes.backButton} onClick={navigateToMainPage} icon={<IconChevronLeft24 />}>
                         {i18n.t('Back')}
                     </Button>
                 )}
