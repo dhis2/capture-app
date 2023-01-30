@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { IconInfo16, IconLaunch16, Popover, colors, spacers } from '@dhis2/ui';
+import { IconInfo16, Popover, colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 
 const getStylesLabel = () => ({
