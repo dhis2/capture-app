@@ -2,19 +2,23 @@
 import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
+import { enrollmentAccessLevels } from './EnrollmentPage.constants';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { WidgetBreakingTheGlass } from '../../WidgetBreakingTheGlass';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
 
 export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',
     TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED: 'TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED',
+    PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS: 'PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS',
+    RESTRICTED_PROGRAM_NO_ACCESS: 'RESTRICTED_PROGRAM_NO_ACCESS',
     EVENT_PROGRAM_SELECTED: 'EVENT_PROGRAM_SELECTED',
     MISSING_ENROLLMENT_SELECTION: 'MISSING_ENROLLMENT_SELECTION',
     MISSING_PROGRAM_CATEGORIES_SELECTION: 'MISSING_PROGRAM_CATEGORIES_SELECTION',
@@ -22,7 +26,6 @@ export const missingStatuses = {
 };
 
 const useMissingStatus = () => {
-    const dispatch = useDispatch();
     const [missingStatus, setStatus] = useState(null);
 
     const { programId, enrollmentId } = useLocationQuery();
@@ -30,12 +33,17 @@ const useMissingStatus = () => {
     const { scopeType, tetId: scopeTetId } = useScopeInfo(programId);
     const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
     const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, tetId } = useEnrollmentInfo(enrollmentId, programId);
+    const { enrollmentAccessLevel } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const selectedProgramIsOfDifferentTypTetype = scopeTetId !== tetId;
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
         const selectedProgramIsEvent = programId && scopeType === scopeTypes.EVENT_PROGRAM;
 
-        if (selectedProgramIsTracker && programSelectionIsIncomplete) {
+        if (enrollmentAccessLevel === enrollmentAccessLevels.LIMITED_ACCESS) {
+            setStatus(missingStatuses.PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS);
+        } else if (enrollmentAccessLevel === enrollmentAccessLevels.NO_ACCESS) {
+            setStatus(missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS);
+        } else if (selectedProgramIsTracker && programSelectionIsIncomplete) {
             setStatus(missingStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION);
         } else if (selectedProgramIsTracker && selectedProgramIsOfDifferentTypTetype) {
             setStatus(missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED);
@@ -49,13 +57,13 @@ const useMissingStatus = () => {
             setStatus(missingStatuses.MISSING_PROGRAM_SELECTION);
         }
     }, [
-        dispatch,
         programId,
         programSelectionIsIncomplete,
         programHasEnrollments,
         enrollmentsOnProgramContainEnrollmentId,
         selectedProgramIsOfDifferentTypTetype,
         scopeType,
+        enrollmentAccessLevel,
     ]);
 
     return { missingStatus };
@@ -92,6 +100,7 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
+
     return (<>
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
@@ -121,6 +130,18 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
         }
 
         {
+            missingStatus === missingStatuses.PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS &&
+            <WidgetBreakingTheGlass />
+        }
+
+        {
+            missingStatus === missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS &&
+            <IncompleteSelectionsMessage>
+                {i18n.t('No access to program owner.')}
+            </IncompleteSelectionsMessage>
+        }
+
+        {
             missingStatus === missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
@@ -128,7 +149,6 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
                         teiDisplayName, interpolation: { escapeValue: false },
                     })}
                     <div>
-
                         <LinkButton
                             className={classes.link}
                             onClick={navigateToProgramRegistrationPage}
