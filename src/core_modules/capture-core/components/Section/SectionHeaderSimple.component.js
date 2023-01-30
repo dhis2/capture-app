@@ -1,11 +1,12 @@
 // @flow
+import { colors } from '@dhis2/ui';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import IconButton from '@material-ui/core/IconButton';
 import { IconChevronDown24, IconChevronUp24 } from '@dhis2/ui';
 
-const styles = theme => ({
+const styles = () => ({
     container: {
         display: 'flex',
     },
@@ -13,10 +14,12 @@ const styles = theme => ({
         display: 'flex',
     },
     title: {
-        ...theme.typography.title,
-        fontSize: 16,
+        color: colors.grey900,
+        fontSize: 14,
         fontWeight: 500,
-        padding: '16px 8px 16px 12px',
+        backgroundColor: colors.grey300,
+        padding: '4px 8px',
+        marginBottom: '8px',
     },
     children: {
         flexGrow: 1,
@@ -87,7 +90,7 @@ class SectionHeaderSimplePlain extends Component<Props> {
                                     <IconButton
                                         data-test="collapsible-button"
                                         disabled={!this.props.isCollapseButtonEnabled}
-                                        title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
+                                        title={this.props.isCollapsed ? 'Open' : 'Close'}
                                         onClick={this.handleChangeCollapse}
                                     >
                                         {this.props.isCollapsed ? <IconChevronDown24 /> : <IconChevronUp24 />}
