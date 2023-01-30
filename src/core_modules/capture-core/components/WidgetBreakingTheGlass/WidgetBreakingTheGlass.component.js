@@ -55,13 +55,14 @@ const WidgetBreakingTheGlassPlain = ({
                         placeholder={reasonPlaceholder}
                         onChange={reasonChangeHandler}
                         value={reason}
+                        inputWidth="680px"
                     />
                     <br />
                     <ButtonStrip>
                         <Button>
                             {i18n.t('Check for enrollment')}
                         </Button>
-                        <Button>
+                        <Button secondary>
                             {i18n.t('Cancel')}
                         </Button>
                     </ButtonStrip>
