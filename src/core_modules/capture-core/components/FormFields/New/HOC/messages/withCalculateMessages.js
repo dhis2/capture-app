@@ -24,10 +24,10 @@ const typeKeysForProperty = {
 };
 
 const messageKeys = {
-    errorMessage: 'errorMessage',
-    warningMessage: 'warningMessage',
-    infoMessage: 'infoMessage',
-    validatingMessage: 'validatingMessage',
+    errorMessages: 'errorMessage',
+    warningMessages: 'warningMessage',
+    infoMessages: 'infoMessage',
+    validatingMessages: 'validatingMessage',
 };
 
 
@@ -116,10 +116,10 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
             let messageContainer =
                 (touched || validationAttempted) ?
                     CalculateMessagesHOC.getMessage(
-                        this.getMessage(messageKeys.errorMessage),
-                        this.getMessage(messageKeys.warningMessage),
-                        this.getMessage(messageKeys.infoMessage),
-                        this.getMessage(messageKeys.validatingMessage),
+                        this.getMessage(messageKeys.errorMessages),
+                        this.getMessage(messageKeys.warningMessages),
+                        this.getMessage(messageKeys.infoMessages),
+                        this.getMessage(messageKeys.validatingMessages),
                     ) :
                     {};
 
