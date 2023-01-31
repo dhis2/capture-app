@@ -67,7 +67,7 @@
     "uuid": "^9.0.0"
   },
   "scripts": {
-    "start": "yarn verifyCacheVersion && yarn workspaces run build && d2-app-scripts start",
+    "start": "yarn verifyCacheVersion && concurrently --kill-others \"yarn workspaces run build:watch\" \"d2-app-scripts start\"",
     "start:forCypress": "yarn workspaces run build && node scripts/startAppForCypress.js",
     "build": "yarn verifyCacheVersion && yarn workspaces run build && GENERATE_SOURCEMAP=false d2-app-scripts build && cp ./package.json ./build/app/package.json",
     "build:standalone": "yarn workspaces run build && GENERATE_SOURCEMAP=false d2-app-scripts build --standalone",

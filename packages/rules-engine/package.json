@@ -7,6 +7,7 @@
         "linter:check": "eslint -c .eslintrc . --quiet",
         "build:flow": "gen-flow-files src --out-dir build/cjs",
         "build": "d2-app-scripts build && yarn run build:flow",
+        "build:watch": "d2-app-scripts build --watch",
         "clean": "../../scripts/clean.sh"
     },
     "dependencies": {
