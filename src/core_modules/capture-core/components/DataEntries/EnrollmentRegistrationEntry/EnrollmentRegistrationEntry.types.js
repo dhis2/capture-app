@@ -27,6 +27,7 @@ type ContainerProps = {|
   ready: boolean,
   orgUnitId: string,
   orgUnit: ?OrgUnit,
+  isUserInteractionInProgress: boolean
 |};
 
 export type Props = $ReadOnly<{|
