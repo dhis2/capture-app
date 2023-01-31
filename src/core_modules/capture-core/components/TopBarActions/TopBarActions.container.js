@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import i18n from '@dhis2/d2-i18n';
 import { ActionButtons } from './TopBarActions.component';
@@ -13,6 +13,7 @@ const defaultContext = {
     openNewRegistrationPageWithoutProgramId: false,
     openSearchPage: false,
     openSearchPageWithoutProgramId: false,
+    fallback: null,
 };
 
 const defaultDialogProps = {
@@ -26,6 +27,8 @@ export const TopBarActions = ({
     selectedProgramId,
     selectedOrgUnitId,
     isUserInteractionInProgress = false,
+    isSavingInProgress = false,
+    onContextSwitch,
 }: Props) => {
     const [context, setContext] = useState(defaultContext);
     const {
@@ -34,6 +37,7 @@ export const TopBarActions = ({
         openNewRegistrationPageWithoutProgramId,
         openSearchPage,
         openSearchPageWithoutProgramId,
+        fallback,
     } = context;
     const openConfirmDialog =
         openStartAgainWarning ||
@@ -42,6 +46,13 @@ export const TopBarActions = ({
         openSearchPage ||
         openSearchPageWithoutProgramId;
     const history = useHistory();
+
+    useEffect(() => {
+        if (!isSavingInProgress && fallback) {
+            fallback();
+            setContext(prev => ({ ...prev, fallback: null }));
+        }
+    }, [isSavingInProgress, fallback]);
 
     const startAgain = () => history.push('/');
 
@@ -80,6 +91,11 @@ export const TopBarActions = ({
     };
 
     const handleOpenStartAgainWarning = () => {
+        if (isSavingInProgress) {
+            setContext(prev => ({ ...prev, fallback: () => startAgain() }));
+            onContextSwitch && onContextSwitch();
+            return;
+        }
         isUserInteractionInProgress ? setContext(prev => ({ ...prev, openStartAgainWarning: true })) : startAgain();
     };
 

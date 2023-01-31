@@ -3,6 +3,7 @@ import type { Node } from 'react';
 
 export type OwnProps = $ReadOnly<{|
   isUserInteractionInProgress?: boolean,
+  isSavingInProgress?: boolean,
   pageToPush?: string,
   selectedOrgUnitId?: string,
   selectedProgramId?: string,
@@ -15,6 +16,7 @@ export type OwnProps = $ReadOnly<{|
   onSetCategoryOption?: (categoryOption: Object, categoryId: string) => void,
   onResetAllCategoryOptions?: () => void,
   onResetCategoryOption?: (categoryId: string) => void,
+  onContextSwitch?: () => void,
   children: Node,
 |}>
 
@@ -35,4 +37,5 @@ export type State = {|
   openProgramWarning: ?Object;
   openCatComboWarning: boolean;
   categoryIdToReset: string;
+  fallback?: ?(arg?: any) => void;
 |};

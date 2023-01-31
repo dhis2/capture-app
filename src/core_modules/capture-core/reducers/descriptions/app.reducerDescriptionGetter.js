@@ -133,6 +133,14 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         previousOrgUnitId: action.payload.previousOrgUnitId,
     }),
+    [newPageActionTypes.SWITCH_CONTEXT_WHILE_SAVING]: state => ({
+        ...state,
+        switchContext: true,
+    }),
+    [newPageActionTypes.CLEAR_CONTEXT_SWITCH]: state => ({
+        ...state,
+        switchContext: undefined,
+    }),
     [initActionTypes.SET_CURRENT_ORG_UNIT_ROOT]: (state, action) => ({
         ...state,
         roots: action.payload.roots,
