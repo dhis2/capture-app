@@ -1083,9 +1083,6 @@ msgstr "Enrollment date"
 msgid "Incident date"
 msgstr "Incident date"
 
-msgid "Last updated {{date}}"
-msgstr "Last updated {{date}}"
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "Enrollment widget could not be loaded. Please try again later"
 
@@ -1097,6 +1094,9 @@ msgstr "Started at {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Owned by {{ownerOrgUnit}}"
+
+msgid "Last updated {{date}}"
+msgstr "Last updated {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"
