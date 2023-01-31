@@ -1,7 +1,7 @@
 /src/locales/index.js
 /flow-typed/**
 **/flow/**
-/build/**
+**/build/**
 
 #libs
 /packages/**
