@@ -7,8 +7,6 @@ export type Props = {|
 |};
 
 export type PlainProps = {|
-    reason: string,
-    setReason: Function,
     onBreakingTheGlass: Function,
     ...CssClasses,
 |};

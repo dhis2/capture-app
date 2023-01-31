@@ -1,40 +1,38 @@
 // @flow
-import React, { useState, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useDataMutation } from '@dhis2/app-runtime';
 import type { Props } from './WidgetBreakingTheGlass.types';
 import { WidgetBreakingTheGlassComponent } from './WidgetBreakingTheGlass.component';
+
+const glassBreakRequest = {
+    resource: 'tracker/ownership/override',
+    type: 'create',
+    params: ({ tei, program, reason }) => ({
+        trackedEntityInstance: tei,
+        program,
+        reason,
+    }),
+    data: payload => payload,
+};
 
 export const WidgetBreakingTheGlass = ({
     teiId,
     programId,
     onBreakingTheGlass,
 }: Props) => {
-    const [reason, setReason] = useState('');
+    const [postGlassBreakRequest] = useDataMutation(glassBreakRequest);
 
-    const resource = useMemo(
-        () => `tracker/ownership/override?trackedEntityInstance=${teiId}&program=${programId}&reason=${reason}`,
-        [teiId, programId, reason],
-    );
-
-    const [postGlassBreakRequest] = useDataMutation({
-        resource,
-        type: 'create',
-        data: obj => obj,
-    });
-
-    const performGlassBreak = async () => {
+    const performGlassBreak = useCallback(async (reason) => {
         await postGlassBreakRequest({
             tei: teiId,
             program: programId,
             reason,
         });
         onBreakingTheGlass();
-    };
+    }, [onBreakingTheGlass, postGlassBreakRequest, teiId, programId]);
 
     return (
         <WidgetBreakingTheGlassComponent
-            reason={reason}
-            setReason={setReason}
             onBreakingTheGlass={performGlassBreak}
         />
     );

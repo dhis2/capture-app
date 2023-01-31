@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
     NoticeBox,
     TextAreaField,
@@ -24,15 +24,14 @@ const styles = ({ typography }) => ({
     },
 });
 
+const reasonHeader = i18n.t('Reason to check for enrollment');
+const reasonPlaceholder = i18n.t('Describe the reason you are checking for enrollment in this protected program');
+
 const WidgetBreakingTheGlassPlain = ({
-    reason,
-    setReason,
     onBreakingTheGlass,
     classes,
 }: PlainProps) => {
-    const reasonHeader = i18n.t('Reason to check for enrollment');
-    const reasonPlaceholder = i18n.t('Describe the reason you are checking for enrollment in this protected program');
-
+    const [reason, setReason] = useState('');
     const reasonChangeHandler = useCallback(({ value }) => {
         setReason(value);
     }, [setReason]);
