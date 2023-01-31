@@ -1,1 +1,1 @@
-export { WidgetBreakingTheGlass } from './WidgetBreakingTheGlass.component';
+export { WidgetBreakingTheGlass } from './WidgetBreakingTheGlass.container';

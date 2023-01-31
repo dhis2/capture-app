@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
@@ -13,6 +13,7 @@ import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetBreakingTheGlass } from '../../WidgetBreakingTheGlass';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
+import { fetchEnrollments } from './EnrollmentPage.actions';
 
 export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',
@@ -93,10 +94,11 @@ const getStyles = () => ({
 });
 
 export const MissingMessage = withStyles(getStyles)(({ classes }) => {
+    const dispatch = useDispatch();
     const { navigateToProgramRegistrationPage, navigateToEventWorkingList } = useNavigations();
     const { missingStatus } = useMissingStatus();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
-    const { programId } = useLocationQuery();
+    const { programId, teiId } = useLocationQuery();
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
@@ -131,7 +133,11 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
 
         {
             missingStatus === missingStatuses.PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS &&
-            <WidgetBreakingTheGlass />
+            <WidgetBreakingTheGlass
+                teiId={teiId}
+                programId={programId}
+                onBreakingTheGlass={() => dispatch(fetchEnrollments())}
+            />
         }
 
         {
