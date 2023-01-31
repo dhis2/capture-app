@@ -135,6 +135,8 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS }));
                             } else if (error.message === 'OWNERSHIP_ACCESS_DENIED') {
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS })); // Todo: Change to NO_ACCESS
+                            } else if (error.message === 'PROGRAM_ACCESS_CLOSED') {
+                                return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
                             } else if (error.message.startsWith('[User has no read access to organisation unit:')) {
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
                             }

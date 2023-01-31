@@ -50,7 +50,7 @@ const useMissingStatus = () => {
             setStatus(missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED);
         } else if (selectedProgramIsTracker && programHasEnrollments && !enrollmentsOnProgramContainEnrollmentId) {
             setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION);
-        } else if (selectedProgramIsTracker && !programHasEnrollments) {
+        } else if (selectedProgramIsTracker && !programHasEnrollments && enrollmentAccessLevel !== enrollmentAccessLevels.UNKNOWN_ACCESS) {
             setStatus(missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED);
         } else if (selectedProgramIsEvent) {
             setStatus(missingStatuses.EVENT_PROGRAM_SELECTED);
