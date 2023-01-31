@@ -1,7 +1,6 @@
 // @flow
 import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
-// $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
 import type { EnrollmentPageStatus } from './EnrollmentPage.types';
