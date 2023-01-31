@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { MenuDivider, Button, colors, spacers } from '@dhis2/ui';
+import { MenuDivider, MenuItem, Button, colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { FiltrableMenuItems } from '../FiltrableMenuItems';
@@ -35,12 +35,24 @@ const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgU
 
     return (
         <>
-            <FiltrableMenuItems
-                options={programOptions}
-                onChange={onChange}
-                searchText={i18n.t('Search for a program')}
-                dataTest="program"
-            />
+            {programOptions.length > 10 ? (
+                <FiltrableMenuItems
+                    options={programOptions}
+                    onChange={onChange}
+                    searchText={i18n.t('Search for a program')}
+                    dataTest="program"
+                />
+            ) : (
+                programOptions.map(option => (
+                    <MenuItem
+                        key={option.value}
+                        label={<div className={classes.label}>{option.label}</div>}
+                        value={option.value}
+                        onClick={onChange}
+                    />
+                ))
+            )}
+
             {!areAllProgramsAvailable && (
                 <>
                     <MenuDivider />

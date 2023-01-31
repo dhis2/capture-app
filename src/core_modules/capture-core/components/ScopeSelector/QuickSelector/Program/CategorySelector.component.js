@@ -184,16 +184,30 @@ class CategorySelectorPlain extends React.Component<Props, State> {
                 {options && (
                     <div className={classes.selectBarMenu}>
                         <Menu>
-                            <FiltrableMenuItems
-                                options={options}
-                                onChange={(item) => {
-                                    this.setState({ open: false });
-                                    handleSelect(item.value);
-                                }}
-                                searchText={i18n.t(`Search for a ${passOnProps.category.name}`)}
-                                dataTest="category"
-                            />
-                            {Boolean(selectedCategoryName) && (
+                            {options.length > 10 ? (
+                                <FiltrableMenuItems
+                                    options={options}
+                                    onChange={(item) => {
+                                        this.setState({ open: false });
+                                        handleSelect(item.value);
+                                    }}
+                                    searchText={i18n.t(`Search for a ${passOnProps.category.name}`)}
+                                    dataTest="category"
+                                />
+                            ) : (
+                                options.map(option => (
+                                    <MenuItem
+                                        key={option.value}
+                                        label={<div className={classes.label}>{option.label}</div>}
+                                        value={option.value}
+                                        onClick={(item) => {
+                                            this.setState({ open: false });
+                                            handleSelect(item.value);
+                                        }}
+                                    />
+                                ))
+                            )}
+                            {Boolean(selectedCategoryName) && options.length > 10 && (
                                 <>
                                     <MenuDivider />
                                     <MenuItem

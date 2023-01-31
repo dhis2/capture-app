@@ -8,6 +8,7 @@ import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
 import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
+import { FiltrableMenuItems } from '../QuickSelector/FiltrableMenuItems';
 
 type Props = {|
     isUserInteractionInProgress?: boolean,
@@ -70,8 +71,13 @@ const SingleLockedSelectPlain = ({
         },
         [onSelect],
     );
+    const handleOnChange = (item) => {
+        setOpenSelectorBarItem(false);
+        handleOnSelect(item);
+    };
 
     const { label } = options.find(({ value }) => value === selectedValue) || {};
+    const manyOptions = options.length > 10;
 
     return (
         <span data-test="single-locked-select">
@@ -89,18 +95,25 @@ const SingleLockedSelectPlain = ({
                 {hasMenu && (
                     <div className={classes.selectBarMenu}>
                         <Menu>
-                            {options.map(option => (
-                                <MenuItem
-                                    key={option.value}
-                                    label={<div className={classes.label}>{option.label}</div>}
-                                    value={option.value}
-                                    onClick={(item) => {
-                                        setOpenSelectorBarItem(false);
-                                        handleOnSelect(item);
-                                    }}
+                            {manyOptions ? (
+                                <FiltrableMenuItems
+                                    options={options}
+                                    onChange={handleOnChange}
+                                    searchText={i18n.t(`Search for a ${title}`)}
+                                    dataTest={title}
                                 />
-                            ))}
-                            {label && (
+                            ) : (
+                                options.map(option => (
+                                    <MenuItem
+                                        key={option.value}
+                                        label={<div className={classes.label}>{option.label}</div>}
+                                        value={option.value}
+                                        onClick={handleOnChange}
+                                    />
+                                ))
+                            )}
+
+                            {label && manyOptions && (
                                 <>
                                     <MenuDivider />
                                     <MenuItem

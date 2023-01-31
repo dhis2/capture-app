@@ -52,7 +52,6 @@ const ProgramSelectorPlain = ({
         setProgramsArray(Array.from(programCollection.values()));
     }, []);
 
-
     const renderCategories = () => {
         if (selectedProgram?.categoryCombination) {
             return Array.from(selectedProgram.categoryCombination.categories.values()).map(category => (
@@ -98,7 +97,7 @@ const ProgramSelectorPlain = ({
                                     }}
                                     onResetOrgUnit={() => onResetOrgUnit()}
                                 />
-                                {Boolean(selectedProgram) && (
+                                {Boolean(selectedProgram) && programOptions.length > 10 && (
                                     <>
                                         <MenuDivider />
                                         <MenuItem
