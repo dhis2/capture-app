@@ -7,6 +7,10 @@ Given('you open the enrollment page which has multiple events and stages', () =>
     cy.visit('#/enrollment?enrollmentId=ek4WWAgXX5i');
 });
 
+And('the widgets are done rendering', () => {
+    cy.contains('[data-test=profile-widget]', 'Person profile');
+});
+
 When('the user clicks the first second antenatal care visit event', () => {
     cy.contains('[data-test="stage-content"]', 'Second antenatal care visit')
         .find('tbody>tr>td')

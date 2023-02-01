@@ -8,6 +8,7 @@ Feature: User interacts with Enrollment event page
   Scenario: User can navigate back and forward between the enrollment event edit page and the enrollment page 
     Given you open the enrollment page which has multiple events and stages
     Then you see the following Enrollment Dashboard
+    And the widgets are done rendering
     And the program stages should be displayed
     When the user clicks the first second antenatal care visit event
     Then you see the following Enrollment: View Event
