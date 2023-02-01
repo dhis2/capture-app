@@ -574,7 +574,7 @@ When('you select a data element columns and save from the column selector', () =
 });
 
 Then('you see data elements specific filters and columns', () => {
-    cy.get('[data-test="filter-button-container-scheduledAt"]')
+    cy.get('[data-test="filter-button-container-DX4LVYeP7bw"]')
         .should('exist');
     cy.get('[data-test="tei-working-lists"]')
         .should('exist');
