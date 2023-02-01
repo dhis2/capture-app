@@ -37,30 +37,6 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-const useSelectProgram = (selectHandler) => {
-    const dispatch = useDispatch();
-
-    return useCallback(
-        (programId) => {
-            selectHandler(programId);
-            dispatch(fetchEnrollments());
-        },
-        [dispatch, selectHandler],
-    );
-};
-
-const useDeselectProgram = (deselectProgramHandler) => {
-    const dispatch = useDispatch();
-
-    return useCallback(
-        () => {
-            deselectProgramHandler();
-            dispatch(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS }));
-        },
-        [dispatch, deselectProgramHandler],
-    );
-};
-
 const EnrollmentPagePlain = ({
     classes,
     programId,
@@ -71,6 +47,7 @@ const EnrollmentPagePlain = ({
     enrollmentPageStatus,
     enrollmentsAsOptions,
 }) => {
+    const dispatch = useDispatch();
     const { setProgramId } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
     const { setEnrollmentId } = useSetEnrollmentId();
@@ -80,14 +57,30 @@ const EnrollmentPagePlain = ({
     const { resetEnrollmentId } = useResetEnrollmentId();
     const { resetTeiId } = useResetTeiId();
 
+    const selectProgramHandler = useCallback(
+        (id) => {
+            setProgramId(id);
+            dispatch(fetchEnrollments());
+        },
+        [dispatch, setProgramId],
+    );
+
+    const deselectProgramHandler = useCallback(
+        () => {
+            resetProgramIdAndEnrollmentContext();
+            dispatch(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS }));
+        },
+        [dispatch, resetProgramIdAndEnrollmentContext],
+    );
+
     return (
         <>
             <ScopeSelector
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
-                onSetProgramId={useSelectProgram(setProgramId)}
+                onSetProgramId={selectProgramHandler}
+                onResetProgramId={deselectProgramHandler}
                 onSetOrgUnit={id => setOrgUnitId(id)}
-                onResetProgramId={useDeselectProgram(resetProgramIdAndEnrollmentContext)}
                 onResetOrgUnitId={() => resetOrgUnitId()}
             >
                 <Grid item xs={12} sm={6} md={4} lg={2}>
