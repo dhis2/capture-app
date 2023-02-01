@@ -1,3 +1,10 @@
+## [100.24.2](https://github.com/dhis2/capture-app/compare/v100.24.1...v100.24.2) (2023-01-26)
+
+
+### Bug Fixes
+
+* [DHIS2-13646] temporarily generate the updatedAt on the client ([#3122](https://github.com/dhis2/capture-app/issues/3122)) ([2d3bdee](https://github.com/dhis2/capture-app/commit/2d3bdeeef61ad3eeb213c3bb9c9eec2b95b4138a))
+
 ## [100.24.1](https://github.com/dhis2/capture-app/compare/v100.24.0...v100.24.1) (2023-01-18)
 
 
