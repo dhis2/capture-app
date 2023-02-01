@@ -131,9 +131,9 @@ Then the custom TEI is deleted
 
 @v>=39
 Scenario: The user can open and select a program stage filter
-Given you open the main page with Ngelehun and WHO RMNCH Tracker context
+Given you open the main page with Ngelehun and Malaria focus investigation context
 When you open the program stage filters from the more filters dropdown menu
-When you select the First antenatal care visit program stage
+When you select the Foci response program stage
 And you apply the current filter
 And you open the column selector
 And you select a data element columns and save from the column selector
