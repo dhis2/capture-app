@@ -30,6 +30,16 @@ type Props = {
 class D2SectionPlain extends React.PureComponent<Props> {
     // $FlowFixMe[speculation-ambiguous] automated comment
     sectionFieldsInstance: ?D2SectionFields;
+    componentDidMount() {
+        if (this.props.isHidden) {
+            // Inform withSaveHandler that this section is done initialising
+            this.props.onFieldsValidated && this.props.onFieldsValidated(
+                {},
+                this.props.formBuilderId,
+            );
+        }
+    }
+
     renderSectionHeader() {
         const title = this.props.sectionMetaData.name;
 
@@ -60,11 +70,6 @@ class D2SectionPlain extends React.PureComponent<Props> {
         const { sectionMetaData, isHidden, classes, sectionId, ...passOnProps } = this.props;
 
         if (isHidden) {
-            // Inform withSaveHandler that this section is done initialising
-            this.props.onFieldsValidated && this.props.onFieldsValidated(
-                {},
-                this.props.formBuilderId,
-            );
             return null;
         }
 
