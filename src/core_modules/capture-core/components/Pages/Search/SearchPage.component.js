@@ -22,7 +22,7 @@ import { useLocation } from 'react-router-dom';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
-import { SearchResults } from './SearchResults/SearchResults.container';
+import { SearchResults } from './SearchResults';
 import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
@@ -171,7 +171,7 @@ const Index = ({
         <>
             {searchStatus === searchPageStatus.SHOW_RESULTS && (
                 <SearchResults
-                    availableSearchOptions={availableSearchOption}
+                    availableSearchOption={availableSearchOption}
                     fallbackTriggered={fallbackTriggered}
                 />
             )}

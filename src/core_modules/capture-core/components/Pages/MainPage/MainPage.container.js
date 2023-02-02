@@ -10,7 +10,6 @@ import {
     navigateToNewUserPage,
     showInitialViewOnSearchPage,
 } from '../Search';
-import { useSearchOptions } from '../../../hooks';
 import { MainPageComponent } from './MainPage.component';
 import { withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
@@ -18,6 +17,7 @@ import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
+import { useSearchOptionForSearchPage } from '../../../utils/cachedDataHooks/useSearchOptionForSearchPage';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
@@ -128,7 +128,9 @@ const MainPageContainer = () => {
     // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
-    const availableSearchOptions = useSearchOptions();
+    const {
+        searchOption,
+    } = useSearchOptionForSearchPage({ programId, trackedEntityTypeId });
     const MainPageStatus = useMainPageStatus({ programId, selectedProgram, categories, orgUnitId, showAllAccessible });
 
     const {
@@ -163,7 +165,6 @@ const MainPageContainer = () => {
         history,
     ]);
 
-
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId} error={error}>
             <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
@@ -184,7 +185,7 @@ const MainPageContainer = () => {
                         showInitialSearchPage={dispatchShowInitialSearchPage}
                         cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
                         navigateToRegisterUser={dispatchNavigateToNewUserPage}
-                        availableSearchOptions={availableSearchOptions}
+                        availableSearchOption={searchOption}
                         preselectedProgramId={programId}
                         trackedEntityTypeId={trackedEntityTypeId}
                         searchStatus={searchStatus}
