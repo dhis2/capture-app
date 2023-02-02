@@ -17,7 +17,6 @@ type Props = {
     orgUnitId: string,
     enrollmentType: string,
     programName?: string,
-    program?: Object,
 }
 
 const buttonStyles = (theme: Theme) => ({
@@ -60,20 +59,12 @@ const CardListButtons = ({
     orgUnitId,
     enrollmentType,
     programName,
-    program,
 }: Props) => {
     const dispatch = useDispatch();
     const navigationButtonsState = deriveNavigationButtonState(enrollmentType);
-    const currentSearchScopeProgramName = program?.name;
     const onHandleClick = () => {
         switch (currentSearchScopeType) {
         case searchScopes.ALL_PROGRAMS:
-            dispatch(navigateToEnrollmentOverview({
-                teiId: id,
-                programId: program?.id,
-                orgUnitId,
-            }));
-            break;
         case searchScopes.PROGRAM:
             dispatch(navigateToEnrollmentOverview({
                 teiId: id,
@@ -96,7 +87,7 @@ const CardListButtons = ({
         dataTest: 'view-dashboard-button',
         onClick: onHandleClick,
         label: currentSearchScopeType === searchScopes.ALL_PROGRAMS ? i18n.t('View {{programName}} dashboard', {
-            programName: currentSearchScopeProgramName,
+            programName,
             interpolation: { escapeValue: false },
         })
             : i18n.t('View dashboard'),

@@ -152,7 +152,7 @@ export const SearchResultsIndex = ({
                 items={otherResults}
                 dataElements={dataElements}
                 renderCustomCardActions={({
-                    item, enrollmentType, currentSearchScopeType: searchScopeType, programName, program,
+                    item, enrollmentType, currentSearchScopeType: searchScopeType, programName,
                 }) => (<CardListButtons
                     programName={programName}
                     currentSearchScopeType={searchScopeType}
@@ -160,7 +160,6 @@ export const SearchResultsIndex = ({
                     id={item.id}
                     orgUnitId={orgUnitId}
                     enrollmentType={enrollmentType}
-                    program={program}
                 />)}
             />
             <div className={classes.pagination}>

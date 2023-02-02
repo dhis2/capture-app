@@ -135,6 +135,11 @@ const CardListItemIndex = ({
     currentSearchScopeName,
     currentSearchScopeType,
 }: Props) => {
+    const enrollments = item.tei ? item.tei.enrollments : [];
+    const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
+    const { orgUnitName, enrolledAt } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
+    const program = enrollments && deriveProgramFromEnrollment(enrollments, currentSearchScopeType);
+
     const renderImageDataElement = (imageElement?: ?CardProfileImageElementInformation) => {
         if (!imageElement) { return null; }
         const imageValue = item.values[imageElement.id];
@@ -144,10 +149,6 @@ const CardListItemIndex = ({
             </div>
         );
     };
-    const enrollments = item.tei ? item.tei.enrollments : [];
-    const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
-    const { orgUnitName, enrolledAt } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
-    const program = enrollments && deriveProgramFromEnrollment(enrollments, currentSearchScopeType);
 
     const renderTag = () => {
         switch (enrollmentType) {
@@ -185,6 +186,22 @@ const CardListItemIndex = ({
         }
     };
 
+    const renderEnrollmentDetails = () => {
+        if (currentSearchScopeType === searchScopes.ALL_PROGRAMS) {
+            return null;
+        }
+        return (<>
+            <ListEntry
+                name={i18n.t('Organisation unit')}
+                value={orgUnitName}
+            />  <ListEntry
+                name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of enrollment')}
+                value={enrolledAt}
+                type={dataElementTypes.DATE}
+            />
+        </>);
+    };
+
     return (
         <div data-test="card-list-item" className={classes.itemContainer}>
             <div className={classes.itemDataContainer}>
@@ -205,15 +222,8 @@ const CardListItemIndex = ({
                                             type={type}
                                         />))
                                 }
-                                <ListEntry
-                                    name={i18n.t('Organisation unit')}
-                                    value={orgUnitName}
-                                />
-                                <ListEntry
-                                    name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of enrollment')}
-                                    value={enrolledAt}
-                                    type={dataElementTypes.DATE}
-                                />
+
+                                {renderEnrollmentDetails()}
                             </Grid>
                             <Grid item>
                                 {
@@ -245,7 +255,6 @@ const CardListItemIndex = ({
                             programName: currentSearchScopeName,
                             programId: currentProgramId,
                             currentSearchScopeType,
-                            program,
                             enrollmentType,
                         })
                     }
