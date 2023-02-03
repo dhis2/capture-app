@@ -27,6 +27,7 @@ import {
     rulesEffectsGeneralErrorsDesc,
     rulesEffectsDisabledFieldsDesc,
     ruleEffectsOptionsVisibilityDesc,
+    rulesEffectsHiddenFieldsContentDesc,
 } from 'capture-core/reducers/descriptions/rulesEffects.reducerDescription';
 import {
     workingListsDesc,
@@ -117,6 +118,7 @@ export const reducerDescriptions = [
     recentlyAddedEventsValuesDesc,
     relationshipsDesc,
     rulesEffectsHiddenFieldsDesc,
+    rulesEffectsHiddenFieldsContentDesc,
     rulesEffectsErrorMessagesDesc,
     rulesEffectsHiddenSectionsDesc,
     rulesEffectsCompulsoryFieldsDesc,

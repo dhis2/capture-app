@@ -15,6 +15,8 @@ export type OutputEffect = {
     type: $Values<effectActions>,
     id: string,
     targetDataType?: $Values<rulesEngineEffectTargetDataTypes>,
+    content?: string,
+    name?: string,
 };
 
 export type OutputEffects = Array<OutputEffect>;
@@ -97,6 +99,7 @@ export type DataElement = {
     id: string,
     valueType: string,
     optionSetId?: ?string,
+    name: string,
 };
 
 export type DataElements = { [elementId: string]: DataElement };
@@ -117,6 +120,8 @@ export type TrackedEntityAttribute = {
     id: string,
     valueType: string,
     optionSetId?: ?string,
+    displayFormName: string,
+    displayName: string,
 };
 
 export type TrackedEntityAttributes = {

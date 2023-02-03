@@ -31,6 +31,23 @@ export const rulesEffectsHiddenFieldsDesc = createReducerDescription({
     },
 }, 'rulesEffectsHiddenFields');
 
+export const rulesEffectsHiddenFieldsContentDesc = createReducerDescription({
+    [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+        const newState = { ...state };
+
+        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.HIDE_FIELD];
+        newState[action.payload.formId] = hideEffects ?
+            Object.keys(hideEffects).reduce((accState, key) => {
+                const [value] = hideEffects[key];
+                accState[key] = { content: value.content, name: value.name };
+                return accState;
+            }, {}) :
+            null;
+
+        return newState;
+    },
+}, 'rulesEffectsNotice');
+
 export const rulesEffectsCompulsoryFieldsDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };

@@ -30,6 +30,23 @@ const sanitiseFalsy = (value) => {
     return '';
 };
 
+const getFormName = ({ dataElementId, dataElements, trackedEntityAttributes, trackedEntityAttributeId }) => {
+    if (dataElementId) {
+        return dataElements && dataElements[dataElementId] && dataElements[dataElementId].name;
+    }
+
+    if (trackedEntityAttributeId) {
+        return (
+            trackedEntityAttributes &&
+            trackedEntityAttributes[trackedEntityAttributeId] &&
+            trackedEntityAttributes[trackedEntityAttributeId].displayFormName &&
+            trackedEntityAttributes[trackedEntityAttributeId].displayName
+        );
+    }
+
+    return '';
+};
+
 type BaseValueType = number | ?string | boolean;
 type WarningEffect = Array<MessageEffect> | GeneralWarningEffect;
 type ErrorEffect = Array<MessageEffect> | GeneralErrorEffect;
@@ -152,9 +169,20 @@ export function getRulesEffectsProcessor(
         return effects;
     }
 
-    function processHideField(effect: ProgramRuleEffect): Array<HideOutputEffect> {
+    function processHideField(
+        effect: ProgramRuleEffect,
+        dataElements: ?DataElements,
+        trackedEntityAttributes: ?TrackedEntityAttributes,
+    ): Array<HideOutputEffect> {
         return createEffectsForConfiguredDataTypes(effect, () => ({
             type: effectActions.HIDE_FIELD,
+            content: effect.content,
+            name: getFormName({
+                dataElements,
+                dataElementId: effect.dataElementId,
+                trackedEntityAttributes,
+                trackedEntityAttributeId: effect.trackedEntityAttributeId,
+            }),
         }));
     }
 
