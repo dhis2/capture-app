@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-12-30T09:38:56.765Z\n"
-"PO-Revision-Date: 2022-12-30T09:38:56.765Z\n"
+"POT-Creation-Date: 2022-12-07T22:27:53.732Z\n"
+"PO-Revision-Date: 2022-12-07T22:27:53.732Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1083,9 +1083,6 @@ msgstr "Enrollment date"
 msgid "Incident date"
 msgstr "Incident date"
 
-msgid "Last updated {{date}}"
-msgstr "Last updated {{date}}"
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "Enrollment widget could not be loaded. Please try again later"
 
@@ -1097,6 +1094,9 @@ msgstr "Started at {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Owned by {{ownerOrgUnit}}"
+
+msgid "Last updated {{date}}"
+msgstr "Last updated {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"
