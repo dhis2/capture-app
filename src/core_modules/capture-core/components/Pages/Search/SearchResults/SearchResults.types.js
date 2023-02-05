@@ -21,6 +21,7 @@ export type PropsFromRedux ={|
   +dataElements: CardDataElementsInformation,
   +otherResults: Array<ListItem>,
   +otherCurrentPage: number,
+  +orgUnitId: string
 |}
 
 export type OwnProps ={|

@@ -1,3 +1,24 @@
+# [100.25.0](https://github.com/dhis2/capture-app/compare/v100.24.3...v100.25.0) (2023-02-05)
+
+
+### Features
+
+* [DHIS2-13803] change label and path of view dashboard in search fallback ([#3125](https://github.com/dhis2/capture-app/issues/3125)) ([e200815](https://github.com/dhis2/capture-app/commit/e200815dbb0253bea8f010c5c013656b62c64e66))
+
+## [100.24.3](https://github.com/dhis2/capture-app/compare/v100.24.2...v100.24.3) (2023-02-02)
+
+
+### Bug Fixes
+
+* [TECH-1499] hiding a section should not erase its fields ([#3171](https://github.com/dhis2/capture-app/issues/3171)) ([4388cef](https://github.com/dhis2/capture-app/commit/4388cef4fc3beac0722610522860f2c1fb432256))
+
+## [100.24.2](https://github.com/dhis2/capture-app/compare/v100.24.1...v100.24.2) (2023-01-26)
+
+
+### Bug Fixes
+
+* [DHIS2-13646] temporarily generate the updatedAt on the client ([#3122](https://github.com/dhis2/capture-app/issues/3122)) ([2d3bdee](https://github.com/dhis2/capture-app/commit/2d3bdeeef61ad3eeb213c3bb9c9eec2b95b4138a))
+
 ## [100.24.1](https://github.com/dhis2/capture-app/compare/v100.24.0...v100.24.1) (2023-01-18)
 
 
