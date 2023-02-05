@@ -1,3 +1,10 @@
+# [100.25.0](https://github.com/dhis2/capture-app/compare/v100.24.3...v100.25.0) (2023-02-05)
+
+
+### Features
+
+* [DHIS2-13803] change label and path of view dashboard in search fallback ([#3125](https://github.com/dhis2/capture-app/issues/3125)) ([e200815](https://github.com/dhis2/capture-app/commit/e200815dbb0253bea8f010c5c013656b62c64e66))
+
 ## [100.24.3](https://github.com/dhis2/capture-app/compare/v100.24.2...v100.24.3) (2023-02-02)
 
 
