@@ -10,8 +10,11 @@ Given('you open the enrollment page which has multiples events and stages', () =
     cy.visit('#/enrollment?enrollmentId=ek4WWAgXX5i');
 });
 
-When(/^the user clicks the event with the report date (.*)$/, (date) => {
-    cy.contains(date).click();
+When('the user clicks the first second antenatal care visit event', () => {
+    cy.contains('[data-test="stage-content"]', 'Second antenatal care visit')
+        .find('tbody>tr>td')
+        .first()
+        .click();
 });
 
 When(/^the user clicks the "Back to all stages and events" button/, () =>
