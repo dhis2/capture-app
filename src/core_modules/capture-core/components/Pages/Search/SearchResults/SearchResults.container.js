@@ -47,6 +47,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const dataElements = currentSearchScopeDataElements
         .filter(({ displayInReports }) => displayInReports)
         .map(({ id, name, type }) => ({ id, name, type }));
+    const { orgUnitId } = state.currentSelections;
 
     return {
         currentPage,
@@ -59,6 +60,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         currentFormId,
         currentSearchTerms,
         dataElements,
+        orgUnitId,
     };
 };
 
