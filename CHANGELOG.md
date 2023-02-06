@@ -1,3 +1,10 @@
+## [100.24.3](https://github.com/dhis2/capture-app/compare/v100.24.2...v100.24.3) (2023-02-02)
+
+
+### Bug Fixes
+
+* [TECH-1499] hiding a section should not erase its fields ([#3171](https://github.com/dhis2/capture-app/issues/3171)) ([4388cef](https://github.com/dhis2/capture-app/commit/4388cef4fc3beac0722610522860f2c1fb432256))
+
 ## [100.24.2](https://github.com/dhis2/capture-app/compare/v100.24.1...v100.24.2) (2023-01-26)
 
 
