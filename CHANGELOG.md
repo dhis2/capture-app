@@ -1,3 +1,10 @@
+## [100.25.1](https://github.com/dhis2/capture-app/compare/v100.25.0...v100.25.1) (2023-02-06)
+
+
+### Bug Fixes
+
+* [DHIS2-13346] assigned value ([#3087](https://github.com/dhis2/capture-app/issues/3087)) ([41e5d27](https://github.com/dhis2/capture-app/commit/41e5d277b2625de7f4ba948fb6223cdac8d47cd6))
+
 # [100.25.0](https://github.com/dhis2/capture-app/compare/v100.24.3...v100.25.0) (2023-02-05)
 
 
