@@ -14,6 +14,7 @@ import {
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
     useCommentDetails,
+    useCategoryCombo,
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
@@ -31,8 +32,7 @@ export const WidgetEventSchedule = ({
     initialScheduleDate,
     ...passOnProps
 }: ContainerProps) => {
-    const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const dispatch = useDispatch();
+    const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]); const dispatch = useDispatch();
     const { orgUnit } = useOrganisationUnit(orgUnitId, 'displayName');
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
@@ -45,6 +45,7 @@ export const WidgetEventSchedule = ({
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events.filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
+    const { categoryCombo } = useCategoryCombo(programId);
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
@@ -123,6 +124,7 @@ export const WidgetEventSchedule = ({
             stageId={stageId}
             stageName={stage.name}
             programId={programId}
+            categoryCombo={categoryCombo}
             programName={program.name}
             scheduleDate={scheduleDate}
             dueDateLabel={programStageScheduleConfig.dueDateLabel}

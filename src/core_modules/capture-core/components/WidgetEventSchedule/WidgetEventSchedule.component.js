@@ -9,6 +9,7 @@ import { ScheduleDate } from './ScheduleDate';
 import { ScheduleText } from './ScheduleText';
 import { CommentSection } from '../WidgetComment';
 import type { Props } from './widgetEventSchedule.types';
+import { CategorySelector } from '../ScopeSelector/QuickSelector/Program/CategorySelector.component';
 
 
 const styles = () => ({
@@ -31,6 +32,23 @@ const styles = () => ({
         flexBasis: '200px',
         flexGrow: 1,
     },
+    containerWrapper: {
+        padding: `${spacers.dp8}  ${spacers.dp16}`,
+    },
+    container: {
+        display: 'flex',
+        alignItems: 'center',
+        paddingTop: 8,
+        paddingBottom: 8,
+    },
+    label: {
+        flexBasis: 200,
+        paddingLeft: 5,
+    },
+    field: {
+        flexBasis: 150,
+        flexGrow: 1,
+    },
 });
 
 const WidgetEventSchedulePlain = ({
@@ -47,6 +65,8 @@ const WidgetEventSchedulePlain = ({
     scheduleDate,
     suggestedScheduleDate,
     comments,
+    categoryCombo,
+    onClickCategoryOption,
     ...passOnProps
 }: Props) => (
     <div className={classes.wrapper}>
@@ -70,6 +90,26 @@ const WidgetEventSchedulePlain = ({
                 </div>
             </div>
         </DataSection>
+        {categoryCombo && <DataSection
+            dataTest="cat-combo-section"
+            sectionName={categoryCombo.displayName}
+        >
+            <div className={classes.containerWrapper}>
+                {categoryCombo.categories.map(category => (<div className={classes.container}>
+                    <div className={classes.label}>
+                        {category.displayName}
+                    </div>
+                    <div className={classes.field}>
+                        <CategorySelector
+                            category={category}
+                            selectedOrgUnitId={null}
+                            onSelect={(option) => { onClickCategoryOption(option, category.id); }}
+                        />
+                    </div>
+                </div>
+                ))}
+            </div>
+        </DataSection>}
         <DataSection
             dataTest="comment-section"
             sectionName={i18n.t('Event comments')}

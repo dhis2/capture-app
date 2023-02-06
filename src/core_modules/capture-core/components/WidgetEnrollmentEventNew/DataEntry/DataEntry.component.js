@@ -27,6 +27,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
+    CatCombo,
 } from '../../FormFields/New';
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -71,6 +72,7 @@ const dataEntrySectionNames = {
     COMMENTS: 'COMMENTS',
     RELATIONSHIPS: 'RELATIONSHIPS',
     ASSIGNEE: 'ASSIGNEE',
+    CATEGORYCOMBO: 'CATEGORYCOMBO',
 };
 
 const overrideMessagePropNames = {
@@ -151,6 +153,38 @@ const buildReportDateSettingsFn = () => {
     };
 
     return reportDateSettings;
+};
+
+const buildCatComboSettingsFn = () => {
+    const catComboComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withDefaultFieldContainer()(
+                withDefaultShouldUpdateInterface()(
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(
+                            withFilterProps(defaultFilterProps)(CatCombo),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const catComboSettings = {
+        getComponent: () => catComboComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            orientation: getOrientation(props.formHorizontal),
+            categories: props.program && props.program.categoryCombo?.categories,
+            selectedOrgUnitId: props.orgUnitId,
+            onClickCategoryOption: (id) => { console.log(id); },
+        }),
+        getPropName: () => 'catCombo',
+        getValidatorContainers: () => getNoteValidatorContainers(),
+        getMeta: () => ({
+            placement: placements.BOTTOM,
+            section: dataEntrySectionNames.CATEGORYCOMBO,
+        }),
+    };
+
+    return catComboSettings;
 };
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
@@ -308,6 +342,7 @@ const WrappedDataEntry = compose(
     withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
     withDataEntryField(buildNotesSettingsFn()),
     withDataEntryFieldIfApplicable(buildAssigneeSettingsFn()),
+    withDataEntryField(buildCatComboSettingsFn()),
     withCleanUp(),
     withFilterProps(dataEntryFilterProps),
 )(DataEntryContainer);
@@ -360,6 +395,9 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Assignee'),
     },
+    [dataEntrySectionNames.CATEGORYCOMBO]: {
+        placement: placements.TOP,
+    },
 };
 class DataEntryPlain extends Component<Props> {
     fieldOptions: { theme: Theme };
@@ -372,7 +410,10 @@ class DataEntryPlain extends Component<Props> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
+
+        this.state = {
+            dataEntrySections: dataEntrySectionDefinitions,
+        };
     }
 
     UNSAFE_componentWillMount() {
@@ -384,6 +425,15 @@ class DataEntryPlain extends Component<Props> {
             this.relationshipsInstance.scrollIntoView();
             // $FlowFixMe[prop-missing] automated comment
             this.props.onScrollToRelationships();
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.props.program && this.props.program.categoryCombo
+            && !this.state.dataEntrySections[dataEntrySectionNames.CATEGORYCOMBO].name) {
+            dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO].name
+            = this.props.program.categoryCombo.displayName;
+            this.setState({ dataEntrySectionNames: dataEntrySectionDefinitions });
         }
     }
 
@@ -414,7 +464,7 @@ class DataEntryPlain extends Component<Props> {
                     onUpdateFormField={onUpdateField}
                     onUpdateFormFieldAsync={onStartAsyncUpdateField}
                     fieldOptions={this.fieldOptions}
-                    dataEntrySections={this.dataEntrySections}
+                    dataEntrySections={this.state.dataEntrySections}
                     relationshipsRef={this.setRelationshipsInstance}
                     {...passOnProps}
                 />
