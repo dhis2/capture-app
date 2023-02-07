@@ -14,12 +14,10 @@ import {
 } from './actions/dataEntry.actions';
 import typeof { addEventSaveTypes } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
-import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
-    const { programId, orgUnitId } = useSelector(({ currentSelections }) => currentSelections);
-    const { program } = useProgramFromIndexedDB(programId);
+    const { orgUnitId } = useSelector(({ currentSelections }) => currentSelections);
 
     const onUpdateDataEntryField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
@@ -72,7 +70,6 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
     return (
         <DataEntryComponent
             {...passOnProps}
-            program={program}
             orgUnitId={orgUnitId}
             onUpdateDataEntryField={onUpdateDataEntryField}
             onUpdateField={onUpdateField}

@@ -21,6 +21,7 @@ import {
     withDefaultFieldContainer,
     ViewModeField,
     withFilterProps,
+    CatComboViewMode,
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
@@ -65,6 +66,7 @@ const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
     COMMENTS: 'COMMENTS',
+    CATEGORYCOMBO: 'CATEGORYCOMBO',
 };
 
 const baseComponentStyles = {
@@ -132,6 +134,26 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
+const buildCatComboSettingsFn = () => {
+    const catComboViewMode = withDefaultFieldContainer()(
+        withFilterProps(defaultFilterProps)(CatComboViewMode),
+    );
+    const catComboSettings = {
+        getComponent: () => catComboViewMode,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            categories: props.program && props.program.categoryCombo?.categories,
+            categoryCombo: props.categoryCombo,
+        }),
+        getPropName: () => 'catCombo',
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.CATEGORYCOMBO,
+        }),
+    };
+
+    return catComboSettings;
+};
+
 const buildScheduleDateSettingsFn = () => {
     const dataElement = new DataElement((o) => {
         o.type = dataElementTypes.DATE;
@@ -193,7 +215,7 @@ const buildCompleteFieldSettingsFn = () => {
     });
 
     const completeSettings = {
-        getComponent: () => viewModeComponent,
+        getComponent: (props) => { console.log({ props }); return viewModeComponent; },
         getComponentProps: (props: Object) => createComponentProps(props, {
             label: i18n.t('Event completed'),
             id: dataElement.id,
@@ -213,7 +235,8 @@ const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
-const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
+const CatComboField = withDataEntryField(buildCatComboSettingsFn())(ReportDateField);
+const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CatComboField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
 type Props = {
@@ -247,19 +270,30 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Comments'),
     },
+    [dataEntrySectionNames.CATEGORYCOMBO]: {
+        placement: placements.TOP,
+    },
 };
 
 class ViewEventDataEntryPlain extends Component<Props> {
     fieldOptions: { theme: Theme };
-    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
+    // dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
+
+        if (props.program && props.program.categoryCombo) {
+            dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO].name
+            = props.program.categoryCombo.displayName;
+        }
+        this.state = {
+            dataEntrySections: dataEntrySectionDefinitions,
+        };
     }
+
     render() {
         const {
             classes,
@@ -273,7 +307,7 @@ class ViewEventDataEntryPlain extends Component<Props> {
                 id={dataEntryId}
                 viewMode
                 fieldOptions={this.fieldOptions}
-                dataEntrySections={this.dataEntrySections}
+                dataEntrySections={this.state.dataEntrySections}
                 {...passOnProps}
             />
         );

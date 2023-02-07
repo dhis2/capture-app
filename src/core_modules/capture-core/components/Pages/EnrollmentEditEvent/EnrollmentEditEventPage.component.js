@@ -52,6 +52,7 @@ const EnrollmentEditEventPagePain = ({
     teiId,
     enrollmentId,
     programId,
+    categoryCombo,
     enrollmentsAsOptions,
     trackedEntityName,
     teiDisplayName,
@@ -104,6 +105,7 @@ const EnrollmentEditEventPagePain = ({
                             initialScheduleDate={scheduleDate}
                             onCancelEditEvent={onCancelEditEvent}
                             onHandleScheduleSave={onHandleScheduleSave}
+                            categoryCombo={categoryCombo}
                         />
                     )}
                     {pageStatus === pageStatuses.MISSING_DATA && (

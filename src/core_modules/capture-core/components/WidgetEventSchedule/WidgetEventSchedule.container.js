@@ -14,10 +14,10 @@ import {
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
     useCommentDetails,
-    useCategoryCombo,
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
+import { useProgramFromIndexedDB } from '../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -45,7 +45,7 @@ export const WidgetEventSchedule = ({
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events.filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
-    const { categoryCombo } = useCategoryCombo(programId);
+    const { program: programDB } = useProgramFromIndexedDB(programId);
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
@@ -124,7 +124,7 @@ export const WidgetEventSchedule = ({
             stageId={stageId}
             stageName={stage.name}
             programId={programId}
-            categoryCombo={categoryCombo}
+            categoryCombo={programDB?.categoryCombo}
             programName={program.name}
             scheduleDate={scheduleDate}
             dueDateLabel={programStageScheduleConfig.dueDateLabel}

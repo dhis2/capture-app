@@ -14,6 +14,7 @@ import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../metaData';
 import { cleanUpDataEntry } from '../DataEntry';
+import { useProgramFromIndexedDB } from '../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 const styles = {
     header: {
@@ -54,6 +55,7 @@ export const WidgetEventEditPlain = ({
     orgUnitId,
     enrollmentId,
     teiId,
+    categoryCombo,
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
@@ -65,6 +67,7 @@ export const WidgetEventEditPlain = ({
 
     const eventAccess = getProgramEventAccess(programId, programStage.id);
     const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
+    const { program } = useProgramFromIndexedDB(programId);
 
     if (error) {
         return error.errorComponent;
@@ -132,6 +135,8 @@ export const WidgetEventEditPlain = ({
                             formFoundation={programStage.stageForm}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             hideDueDate={programStage.hideDueDate}
+                            program={program}
+                            categoryCombo={categoryCombo}
                         />
                     ) : (
                         <EditEventDataEntry
@@ -150,6 +155,7 @@ export const WidgetEventEditPlain = ({
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
                             availableProgramStages={availableProgramStages}
                             hideDueDate={programStage.hideDueDate}
+                            program={program}
                         />
                     )}
                 </div>

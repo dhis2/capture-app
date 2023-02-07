@@ -10,6 +10,7 @@ import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
+import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
@@ -43,6 +44,9 @@ export const Validated = ({
         // $FlowFixMe Investigate
         rulesExecutionDependenciesClientFormatted,
     });
+
+    const { program: programDB, isLoading } = useProgramFromIndexedDB(program.id);
+
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, program.id);
 
     const dispatch = useDispatch();
@@ -109,14 +113,14 @@ export const Validated = ({
         availableProgramStages,
     ]);
 
-
     return (
         <AskToCreateNewHandlerHOC
             {...passOnProps}
             stage={stage}
+            program={programDB}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
             availableProgramStages={availableProgramStages}
-            ready={ready}
+            ready={ready && !isLoading}
             id={dataEntryId}
             itemId={itemId}
             formFoundation={formFoundation}
