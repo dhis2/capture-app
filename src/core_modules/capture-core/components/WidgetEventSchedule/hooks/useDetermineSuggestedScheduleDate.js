@@ -10,20 +10,23 @@ const convertDate = (date): any => convertServerToClient(date, dataElementTypes.
 const sortByMostRecentDate = (a, b) => moment.utc(b.eventDate).diff(moment.utc(a.eventDate));
 
 const getSuggestedDateByNextScheduleDate = (id, eventData) => {
-    const possibleNextScheduleValues = eventData.reduce((acc, event) => {
-        event.dataValues.forEach((item) => {
-            if (item.dataElement === id && item.value !== null) {
-                acc.push({ ...item, eventDate: convertDate(event.eventDate) });
-            }
-        });
-        return acc;
-    }, []).sort(sortByMostRecentDate);
+    const possibleNextScheduleValues = eventData
+        .map(event => ({ ...event, eventDate: event.scheduledAt ?? event.occurredAt }))
+        .reduce((acc, event) => {
+            event.dataValues.forEach((item) => {
+                if (item.dataElement === id && item.value !== null) {
+                    acc.push({ ...item, eventDate: convertDate(event.eventDate) });
+                }
+            });
+            return acc;
+        }, []).sort(sortByMostRecentDate);
     if (!possibleNextScheduleValues.length) { return undefined; }
     return possibleNextScheduleValues[0].value;
 };
 
 const getSuggestedDateByStandardInterval = (standardInterval, eventData) => {
     const events = eventData
+        .map(event => ({ eventDate: event.scheduledAt ?? event.occurredAt }))
         .filter(event => event.eventDate)
         .map(event => ({ eventDate: convertDate(event.eventDate) }))
         .sort(sortByMostRecentDate);
