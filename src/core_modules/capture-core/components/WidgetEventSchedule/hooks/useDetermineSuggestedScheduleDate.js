@@ -65,19 +65,14 @@ const calculateSuggestedDateFromStart = ({
     enrolledAt,
     occurredAt,
     minDaysFromStart,
-    stageEvents,
 }: Object) => {
-    let baseDate;
-    if (stageEvents && stageEvents.length) {
-        const mostRecentScheduledEvent = stageEvents
-            .sort((a, b) => moment.utc(b.scheduledAt).diff(moment.utc(a.scheduledAt)))[0];
-        baseDate = mostRecentScheduledEvent.scheduledAt;
-    } else if (generatedByEnrollmentDate || !displayIncidentDate) {
-        baseDate = enrolledAt;
+    let suggestedScheduleDate;
+    if (generatedByEnrollmentDate || !displayIncidentDate) {
+        suggestedScheduleDate = moment(enrolledAt).add(minDaysFromStart, 'days').format();
     } else {
-        baseDate = occurredAt;
+        suggestedScheduleDate = moment(occurredAt).add(minDaysFromStart, 'days').format();
     }
-    return moment(baseDate).add(minDaysFromStart, 'days').format();
+    return suggestedScheduleDate;
 };
 
 export const useDetermineSuggestedScheduleDate = ({
@@ -113,20 +108,18 @@ export const useDetermineSuggestedScheduleDate = ({
                     enrolledAt,
                     occurredAt,
                     minDaysFromStart,
-                    stageEvents,
                 });
             }
             return undefined;
         },
-        () => nextScheduleDate?.id && getSuggestedDateByNextScheduleDate(nextScheduleDate.id, eventData),
-        () => standardInterval && getSuggestedDateByStandardInterval(standardInterval, eventData),
+        () => nextScheduleDate?.id && getSuggestedDateByNextScheduleDate(nextScheduleDate.id, stageEvents),
+        () => standardInterval && getSuggestedDateByStandardInterval(standardInterval, stageEvents),
         () => calculateSuggestedDateFromStart({
             generatedByEnrollmentDate,
             displayIncidentDate,
             enrolledAt,
             occurredAt,
             minDaysFromStart,
-            stageEvents,
         }),
     ];
     const suggestedDate = scheduleDateComputeSteps.reduce((currentScheduleDate, computeScheduleDate) =>
