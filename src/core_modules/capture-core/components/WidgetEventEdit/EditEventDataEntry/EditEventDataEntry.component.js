@@ -213,7 +213,7 @@ const buildCatComboSettingsFn = () => {
             orientation: getOrientation(props.formHorizontal),
             categories: props?.programCategory?.categories,
             selectedOrgUnitId: props.orgUnitId,
-            onClickCategoryOption: (id) => { console.log(id); },
+            onClickCategoryOption: props.onClickCategoryOption(props.itemId),
         }),
         getPropName: () => 'catCombo',
         getValidatorContainers: () => getEventDateValidatorContainers(),
@@ -443,7 +443,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onCancelEditEvent,
             ...passOnProps
         } = this.props;
-
         return (
             <div>
                 <TabBar dataTest="edit-event-tab-bar">

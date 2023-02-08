@@ -67,6 +67,11 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
         dispatch(setNewEventSaveTypes(newSaveTypes));
     }, [dispatch]);
 
+    const onClickCategoryOption = (itemId: string) => (option: Object, category: string) => {
+        const { dataEntryId } = this.props;
+        console.log({ option, category, itemId, dataEntryId });
+    };
+
     return (
         <DataEntryComponent
             {...passOnProps}
@@ -76,6 +81,7 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
             onStartAsyncUpdateField={onStartAsyncUpdateField}
             onAddNote={onAddNote}
             onSetSaveTypes={onSetSaveTypes}
+            onClickCategoryOption={onClickCategoryOption}
         />
     );
 };

@@ -124,6 +124,10 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
             enrollmentId, isCreateNew: true, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
         }));
     },
+    onClickCategoryOption: (itemId: string) => (option: Object, category: string) => {
+        const { dataEntryId } = props;
+        console.log({ option, category, itemId, dataEntryId });
+    },
 });
 
 // $FlowFixMe[missing-annot] automated comment

@@ -224,7 +224,6 @@ const getSaveHandler = (
 
         render() {
             const {
-                itemId,
                 onSave,
                 onSaveValidationFailed,
                 onSaveAbort,

@@ -169,12 +169,13 @@ const buildCatComboSettingsFn = () => {
             ),
         );
     const catComboSettings = {
+        isApplicable: (props: Object) => !!props?.programCategory?.categories,
         getComponent: () => catComboComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
-            categories: props?.categoryCombo?.categories,
+            categories: props?.programCategory?.categories,
             selectedOrgUnitId: props.orgUnitId,
-            onClickCategoryOption: (id) => { console.log(id); },
+            onClickCategoryOption: props.onClickCategoryOption(props.itemId),
         }),
         getPropName: () => 'catCombo',
         getValidatorContainers: () => getNoteValidatorContainers(),
@@ -342,7 +343,7 @@ const WrappedDataEntry = compose(
     withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
     withDataEntryField(buildNotesSettingsFn()),
     withDataEntryFieldIfApplicable(buildAssigneeSettingsFn()),
-    withDataEntryField(buildCatComboSettingsFn()),
+    withDataEntryFieldIfApplicable(buildCatComboSettingsFn()),
     withCleanUp(),
     withFilterProps(dataEntryFilterProps),
 )(DataEntryContainer);
@@ -411,9 +412,9 @@ class DataEntryPlain extends Component<Props> {
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
 
-        if (props.categoryCombo) {
+        if (props.programCategory) {
             dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO].name
-            = props.categoryCombo.displayName;
+            = props.programCategory.displayName;
         }
 
         this.state = {
