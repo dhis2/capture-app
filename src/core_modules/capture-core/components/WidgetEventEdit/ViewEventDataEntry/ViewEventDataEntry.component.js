@@ -141,7 +141,7 @@ const buildCatComboSettingsFn = () => {
     const catComboSettings = {
         getComponent: () => catComboViewMode,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            categories: props.program && props.program.categoryCombo?.categories,
+            categories: props?.programCategory?.categories,
             categoryCombo: props.categoryCombo,
         }),
         getPropName: () => 'catCombo',
@@ -215,7 +215,7 @@ const buildCompleteFieldSettingsFn = () => {
     });
 
     const completeSettings = {
-        getComponent: (props) => { console.log({ props }); return viewModeComponent; },
+        getComponent: () => viewModeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             label: i18n.t('Event completed'),
             id: dataElement.id,
@@ -285,9 +285,9 @@ class ViewEventDataEntryPlain extends Component<Props> {
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
 
-        if (props.program && props.program.categoryCombo) {
+        if (props.programCategory) {
             dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO].name
-            = props.program.categoryCombo.displayName;
+            = props.programCategory.displayName;
         }
         this.state = {
             dataEntrySections: dataEntrySectionDefinitions,

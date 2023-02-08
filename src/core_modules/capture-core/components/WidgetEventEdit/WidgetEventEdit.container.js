@@ -67,7 +67,7 @@ export const WidgetEventEditPlain = ({
 
     const eventAccess = getProgramEventAccess(programId, programStage.id);
     const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
-    const { program } = useProgramFromIndexedDB(programId);
+    const { programData } = useProgramFromIndexedDB(programId, ['categoryCombo']);
 
     if (error) {
         return error.errorComponent;
@@ -135,8 +135,8 @@ export const WidgetEventEditPlain = ({
                             formFoundation={programStage.stageForm}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             hideDueDate={programStage.hideDueDate}
-                            program={program}
                             categoryCombo={categoryCombo}
+                            programCategory={programData?.categoryCombo}
                         />
                     ) : (
                         <EditEventDataEntry
@@ -155,7 +155,8 @@ export const WidgetEventEditPlain = ({
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
                             availableProgramStages={availableProgramStages}
                             hideDueDate={programStage.hideDueDate}
-                            program={program}
+                            categoryCombo={categoryCombo}
+                            programCategory={programData?.categoryCombo}
                         />
                     )}
                 </div>

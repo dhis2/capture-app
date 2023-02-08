@@ -65,7 +65,7 @@ const WidgetEventSchedulePlain = ({
     scheduleDate,
     suggestedScheduleDate,
     comments,
-    categoryCombo,
+    programCategory,
     onClickCategoryOption,
     ...passOnProps
 }: Props) => (
@@ -90,12 +90,12 @@ const WidgetEventSchedulePlain = ({
                 </div>
             </div>
         </DataSection>
-        {categoryCombo && <DataSection
+        {programCategory && <DataSection
             dataTest="cat-combo-section"
-            sectionName={categoryCombo.displayName}
+            sectionName={programCategory.displayName}
         >
             <div className={classes.containerWrapper}>
-                {categoryCombo.categories.map(category => (<div className={classes.container}>
+                {programCategory.categories.map(category => (<div className={classes.container}>
                     <div className={classes.label}>
                         {category.displayName}
                     </div>

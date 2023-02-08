@@ -32,6 +32,8 @@ import {
     withDisplayMessages,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
+    CatCombo,
+    orientations,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -58,6 +60,7 @@ const getStyles = (theme: Theme) => ({
 const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
+    CATEGORYCOMBO: 'CATEGORYCOMBO',
 };
 
 const overrideMessagePropNames = {
@@ -102,6 +105,8 @@ const createComponentProps = (props: Object, componentProps: Object) => ({
     ...getBaseComponentProps(props),
     ...componentProps,
 });
+
+const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
@@ -187,6 +192,38 @@ const buildScheduleDateSettingsFn = () => {
     };
 
     return scheduleDateSettings;
+};
+
+const buildCatComboSettingsFn = () => {
+    const catComboComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withDefaultFieldContainer()(
+                withDefaultShouldUpdateInterface()(
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(
+                            withFilterProps(defaultFilterProps)(CatCombo),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const catComboSettings = {
+        getComponent: () => catComboComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            orientation: getOrientation(props.formHorizontal),
+            categories: props?.programCategory?.categories,
+            selectedOrgUnitId: props.orgUnitId,
+            onClickCategoryOption: (id) => { console.log(id); },
+        }),
+        getPropName: () => 'catCombo',
+        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getMeta: () => ({
+            placement: placements.BOTTOM,
+            section: dataEntrySectionNames.CATEGORYCOMBO,
+        }),
+    };
+
+    return catComboSettings;
 };
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
@@ -310,7 +347,8 @@ const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
-const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
+const CatComboFields = withDataEntryField(buildCatComboSettingsFn())(ReportDateField);
+const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CatComboFields));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
 const DeletableDataEntry = withDeleteButton()(CompletableDataEntry);
@@ -362,19 +400,25 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Status'),
     },
+    [dataEntrySectionNames.CATEGORYCOMBO]: {
+        placement: placements.TOP,
+    },
 };
 
 class EditEventDataEntryPlain extends Component<Props, State> {
     fieldOptions: { theme: Theme };
-    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
+    // dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
-        this.state = { mode: tabMode.REPORT };
+        if (props.programCategory) {
+            dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO].name
+            = props.programCategory.displayName;
+        }
+        this.state = { mode: tabMode.REPORT, dataEntrySections: dataEntrySectionDefinitions };
         this.onHandleSwitchTab = this.onHandleSwitchTab.bind(this);
     }
 
@@ -451,7 +495,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
                 onSave={onSave(orgUnit)}
                 fieldOptions={this.fieldOptions}
-                dataEntrySections={this.dataEntrySections}
+                dataEntrySections={this.state.dataEntrySections}
                 {...passOnProps}
             />
         );

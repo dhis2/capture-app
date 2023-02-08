@@ -25,6 +25,7 @@ type Props = {
 
 const CatComboViewModePlain = (props: Props) => {
     const { classes, orientation, categories, categoryCombo } = props;
+
     return (
         categories ? <div>
             { categories.map(category => (

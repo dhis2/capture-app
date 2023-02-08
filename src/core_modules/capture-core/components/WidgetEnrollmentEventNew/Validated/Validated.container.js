@@ -45,7 +45,7 @@ export const Validated = ({
         rulesExecutionDependenciesClientFormatted,
     });
 
-    const { program: programDB, isLoading } = useProgramFromIndexedDB(program.id);
+    const { programData, isLoading } = useProgramFromIndexedDB(program.id, ['categoryCombo']);
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, program.id);
 
@@ -117,7 +117,7 @@ export const Validated = ({
         <AskToCreateNewHandlerHOC
             {...passOnProps}
             stage={stage}
-            program={programDB}
+            programCategory={programData?.categoryCombo}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
             availableProgramStages={availableProgramStages}
             ready={ready && !isLoading}

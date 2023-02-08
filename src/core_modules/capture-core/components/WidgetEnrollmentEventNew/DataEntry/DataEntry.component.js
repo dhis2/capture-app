@@ -172,7 +172,7 @@ const buildCatComboSettingsFn = () => {
         getComponent: () => catComboComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
-            categories: props.program && props.program.categoryCombo?.categories,
+            categories: props?.categoryCombo?.categories,
             selectedOrgUnitId: props.orgUnitId,
             onClickCategoryOption: (id) => { console.log(id); },
         }),
@@ -411,6 +411,11 @@ class DataEntryPlain extends Component<Props> {
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
 
+        if (props.categoryCombo) {
+            dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO].name
+            = props.categoryCombo.displayName;
+        }
+
         this.state = {
             dataEntrySections: dataEntrySectionDefinitions,
         };
@@ -425,15 +430,6 @@ class DataEntryPlain extends Component<Props> {
             this.relationshipsInstance.scrollIntoView();
             // $FlowFixMe[prop-missing] automated comment
             this.props.onScrollToRelationships();
-        }
-    }
-
-    componentDidUpdate() {
-        if (this.props.program && this.props.program.categoryCombo
-            && !this.state.dataEntrySections[dataEntrySectionNames.CATEGORYCOMBO].name) {
-            dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO].name
-            = this.props.program.categoryCombo.displayName;
-            this.setState({ dataEntrySectionNames: dataEntrySectionDefinitions });
         }
     }
 

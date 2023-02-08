@@ -45,7 +45,7 @@ export const WidgetEventSchedule = ({
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events.filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
-    const { program: programDB } = useProgramFromIndexedDB(programId);
+    const { programData } = useProgramFromIndexedDB(programId, ['categoryCombo']);
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
@@ -124,7 +124,7 @@ export const WidgetEventSchedule = ({
             stageId={stageId}
             stageName={stage.name}
             programId={programId}
-            categoryCombo={programDB?.categoryCombo}
+            programCategory={programData?.categoryCombo}
             programName={program.name}
             scheduleDate={scheduleDate}
             dueDateLabel={programStageScheduleConfig.dueDateLabel}
