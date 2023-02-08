@@ -100,22 +100,42 @@ export const TopBarActions = ({
     };
 
     const handleOpenNewRegistrationPage = () => {
+        if (isSavingInProgress) {
+            setContext(prev => ({ ...prev, fallback: () => newRegistrationPage() }));
+            onContextSwitch && onContextSwitch();
+            return;
+        }
         isUserInteractionInProgress
             ? setContext(prev => ({ ...prev, openNewRegistrationPage: true }))
             : newRegistrationPage();
     };
 
     const handleOpenNewRegistrationPageWithoutProgramId = () => {
+        if (isSavingInProgress) {
+            setContext(prev => ({ ...prev, fallback: () => newRegistrationPageWithoutProgramId() }));
+            onContextSwitch && onContextSwitch();
+            return;
+        }
         isUserInteractionInProgress
             ? setContext(prev => ({ ...prev, openNewRegistrationPageWithoutProgramId: true }))
             : newRegistrationPageWithoutProgramId();
     };
 
     const handleOpenSearchPage = () => {
+        if (isSavingInProgress) {
+            setContext(prev => ({ ...prev, fallback: () => searchPage() }));
+            onContextSwitch && onContextSwitch();
+            return;
+        }
         isUserInteractionInProgress ? setContext(prev => ({ ...prev, openSearchPage: true })) : searchPage();
     };
 
     const handleOpenSearchPageWithoutProgramId = () => {
+        if (isSavingInProgress) {
+            setContext(prev => ({ ...prev, fallback: () => searchPageWithoutProgramId() }));
+            onContextSwitch && onContextSwitch();
+            return;
+        }
         isUserInteractionInProgress
             ? setContext(prev => ({ ...prev, openSearchPageWithoutProgramId: true }))
             : searchPageWithoutProgramId();

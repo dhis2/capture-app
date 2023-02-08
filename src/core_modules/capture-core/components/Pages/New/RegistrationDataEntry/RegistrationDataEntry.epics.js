@@ -133,7 +133,13 @@ export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputO
         flatMap(({ payload: { bundleReport: { typeReportMap } } }) => {
             const {
                 currentSelections: { orgUnitId },
+                app: { switchContext },
             } = store.value;
+
+            if (switchContext) {
+                clearContextSwitch();
+                return EMPTY;
+            }
 
             return of(navigateToEnrollmentOverview({
                 teiId: typeReportMap.TRACKED_ENTITY.objectReports[0].uid,

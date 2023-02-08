@@ -22,6 +22,7 @@ import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
 const styles = ({ typography }) => ({
     marginTop: {
         marginTop: typography.pxToRem(2),
+        display: 'flex',
     },
     marginLeft: {
         marginLeft: typography.pxToRem(16),
