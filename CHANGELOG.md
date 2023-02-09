@@ -1,3 +1,10 @@
+## [100.25.2](https://github.com/dhis2/capture-app/compare/v100.25.1...v100.25.2) (2023-02-09)
+
+
+### Bug Fixes
+
+* [DHIS2-14697] asterisk working list chip name ([#3187](https://github.com/dhis2/capture-app/issues/3187)) ([bdcacbd](https://github.com/dhis2/capture-app/commit/bdcacbde2e4a197d19bb5fcd7934ae3bbf950922))
+
 ## [100.25.1](https://github.com/dhis2/capture-app/compare/v100.25.0...v100.25.1) (2023-02-06)
 
 
