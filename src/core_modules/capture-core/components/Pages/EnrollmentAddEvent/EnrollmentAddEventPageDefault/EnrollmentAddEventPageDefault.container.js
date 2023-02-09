@@ -41,7 +41,12 @@ export const EnrollmentAddEventPageDefault = ({
             const nowServer = new Date(nowClient.getServerZonedISOString());
             const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
 
-            dispatch(updateEnrollmentEventsWithoutId({ events }));
+            const eventsWithUpdatedDate = events.map(event => ({
+                ...event,
+                updatedAt,
+            }));
+
+            dispatch(updateEnrollmentEventsWithoutId({ events: eventsWithUpdatedDate }));
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
         [dispatch, history, programId, orgUnitId, teiId, enrollmentId, fromClientDate],
