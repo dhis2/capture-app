@@ -7,7 +7,7 @@ import { dataElementTypes } from '../../metaData';
 
 type Props = {|
   name: string,
-  value: string,
+  value?: string,
   type?: $Values<typeof dataElementTypes>,
   ...CssClasses
 |}
@@ -33,14 +33,13 @@ const ListEntryPlain = ({
     value,
     classes,
     type = dataElementTypes.TEXT,
-}: Props) => (
-    <div className={classes.entry}>
-        <span className={classes.elementName}>
-            {name}:&nbsp;
-        </span>
-        <span className={classes.elementValue}>
-            {convertValue(value, type)}
-        </span>
-    </div>);
+}: Props) => (value ? <div className={classes.entry}>
+    <span className={classes.elementName}>
+        {name}:&nbsp;
+    </span>
+    <span className={classes.elementValue}>
+        {convertValue(value, type)}
+    </span>
+</div> : null);
 
 export const ListEntry: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(ListEntryPlain);
