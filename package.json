@@ -1,12 +1,12 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "100.24.1",
+  "version": "100.25.1",
   "cacheVersion": "4",
   "serverVersion": "38",
   "private": true,
   "dependencies": {
-    "@dhis2/app-runtime": "^3.5.0",
+    "@dhis2/app-runtime": "^3.8.0",
     "@dhis2/d2-i18n": "^1.1.0",
     "@dhis2/d2-icons": "^1.0.1",
     "@dhis2/d2-ui-app": "^2.0.0",
@@ -31,7 +31,6 @@
     "lodash": "^4.17.21",
     "loglevel": "^1.8.1",
     "moment": "^2.29.4",
-    "moment-timezone": "^0.5.40",
     "prop-types": "^15.8.1",
     "query-string": "^7.1.1",
     "react": "^16.14.0",
