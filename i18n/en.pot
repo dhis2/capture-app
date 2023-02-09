@@ -35,23 +35,35 @@ msgstr ""
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
 
-msgid "Organisation unit"
-msgstr "Organisation unit"
+msgid "View {{programName}} dashboard"
+msgstr "View {{programName}} dashboard"
 
-msgid "Date of enrollment"
-msgstr "Date of enrollment"
+msgid "View dashboard"
+msgstr "View dashboard"
 
-msgid "Program name"
-msgstr "Program name"
+msgid "View active enrollment"
+msgstr "View active enrollment"
 
-msgid "Last updated"
-msgstr "Last updated"
+msgid "Re-enroll"
+msgstr "Re-enroll"
+
+msgid "in"
+msgstr "in"
 
 msgid "Enrolled"
 msgstr "Enrolled"
 
 msgid "Previously enrolled"
 msgstr "Previously enrolled"
+
+msgid "Organisation unit"
+msgstr "Organisation unit"
+
+msgid "Date of enrollment"
+msgstr "Date of enrollment"
+
+msgid "Last updated"
+msgstr "Last updated"
 
 msgid "This value is validating"
 msgstr "This value is validating"
@@ -271,9 +283,6 @@ msgstr "without"
 
 msgid "enrollment"
 msgstr "enrollment"
-
-msgid "in"
-msgstr "in"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Enroll in a program by selecting a program from the top bar."
@@ -759,9 +768,6 @@ msgstr "Choose the {{missingCategories}} to start reporting"
 msgid "Save as new"
 msgstr "Save as new"
 
-msgid "View dashboard"
-msgstr "View dashboard"
-
 msgid "View enrollment"
 msgstr "View enrollment"
 
@@ -886,12 +892,6 @@ msgstr "You can also choose a program from the top bar and search in that progra
 
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
-
-msgid "View active enrollment"
-msgstr "View active enrollment"
-
-msgid "Re-enroll"
-msgstr "Re-enroll"
 
 msgid "all programs"
 msgstr "all programs"
@@ -1306,6 +1306,12 @@ msgstr "Download data..."
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
 
+msgid "Registration Date"
+msgstr "Registration Date"
+
+msgid "Inactive"
+msgstr "Inactive"
+
 msgid "Enrollment status"
 msgstr "Enrollment status"
 
@@ -1314,12 +1320,6 @@ msgstr "Assigned to"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Registration Date"
-msgstr "Registration Date"
-
-msgid "Inactive"
-msgstr "Inactive"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
