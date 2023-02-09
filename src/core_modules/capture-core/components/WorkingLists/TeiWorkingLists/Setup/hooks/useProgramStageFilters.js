@@ -6,7 +6,7 @@ import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTy
 import { type TrackerProgram, type ProgramStage } from '../../../../../metaData';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 
-const useLabels = (programStageId, stages) =>
+const useProgramStageData = (programStageId, stages) =>
     useMemo(() => {
         const programStage = programStageId && stages.get(programStageId);
         if (programStage) {
@@ -35,7 +35,7 @@ const useProgramStageDropdowOptions = stages =>
 
 export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageId?: string) => {
     const supportsProgramStageWorkingLists = useFeature(FEATURES.programStageWorkingList);
-    const { hideDueDate, occurredAtLabel, scheduledAtLabel } = useLabels(programStageId, stages);
+    const { hideDueDate, occurredAtLabel, scheduledAtLabel } = useProgramStageData(programStageId, stages);
     const options: Array<{ text: string, value: string }> = useProgramStageDropdowOptions(stages);
 
     return useMemo(() => {

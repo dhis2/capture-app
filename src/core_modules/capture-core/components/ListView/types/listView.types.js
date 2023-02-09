@@ -26,7 +26,7 @@ export type FilterOnly = {
     multiValueFilter?: boolean,
     tooltipContent?: string,
     disabled?: boolean,
-    transformRecordsFilter: (rawFilter: any) => Object
+    transformRecordsFilter: (rawFilter: any) => Object,
 };
 
 export type AdditionalFilter = {

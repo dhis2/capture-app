@@ -111,12 +111,29 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObserv
             actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         map((action) => {
-            const { elementId, value, uiState, dataEntryId, itemId, uid, orgUnit, programId } = action.payload;
+            const {
+                elementId,
+                value,
+                uiState,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                programId,
+            } = action.payload;
             const fieldData: FieldData = {
                 elementId,
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForEditSingleEvent({ store, dataEntryId, itemId, uid, orgUnit, fieldData, programId });
+            return runRulesForEditSingleEvent({
+                store,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                fieldData,
+                programId,
+            });
         }));
 
