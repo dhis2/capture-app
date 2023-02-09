@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React from 'react';
 import type { ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import classNames from 'classnames';
@@ -7,6 +7,7 @@ import i18n from '@dhis2/d2-i18n';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { convertStringToDateFormat } from '../../../utils/converters/date';
 import { DateField, SingleOrgUnitSelectField } from '../../FormFields/New';
+import type { ReferralDataValueStates } from '../../WidgetEnrollmentEventNew/Validated/validated.types';
 
 const styles = {
     wrapper: {
@@ -36,24 +37,34 @@ const styles = {
 };
 
 type Props = {
+    referralDataValues: ReferralDataValueStates,
+    setReferralDataValues: (() => Object) => void,
     ...CssClasses,
 }
 
-export const ReferToOrgUnitContainerPlain = ({ classes }: Props) => {
-    const [scheduleDate, setScheduleDate] = useState(null);
-    const [orgUnit, setOrgUnit] = useState(null);
-
-    const onBlurDateField = (e) => { setScheduleDate(convertStringToDateFormat(e)); };
-
-    const onSelectOrgUnit = (e) => {
-        setOrgUnit({
-            id: e.id,
-            name: e.displayName,
-        });
+export const ReferToOrgUnitContainerPlain = ({ referralDataValues, setReferralDataValues, classes }: Props) => {
+    const onBlurDateField = (e) => {
+        setReferralDataValues(prevValues => ({
+            ...prevValues,
+            scheduledAt: convertStringToDateFormat(e),
+        }));
     };
 
-    const onDeselctOrgUnit = () => {
-        setOrgUnit(null);
+    const onSelectOrgUnit = (e) => {
+        setReferralDataValues(prevValues => ({
+            ...prevValues,
+            orgUnit: {
+                id: e.id,
+                name: e.displayName,
+            },
+        }));
+    };
+
+    const onDeselectOrgUnit = () => {
+        setReferralDataValues(prevValues => ({
+            ...prevValues,
+            orgUnit: null,
+        }));
     };
 
     return (
@@ -64,7 +75,7 @@ export const ReferToOrgUnitContainerPlain = ({ classes }: Props) => {
                 </div>
                 <div className={classes.fieldContent}>
                     <DateField
-                        value={scheduleDate ? convertStringToDateFormat(scheduleDate) : ''}
+                        value={referralDataValues.scheduledAt ? convertStringToDateFormat(referralDataValues.scheduledAt) : ''}
                         width="100%"
                         calendarWidth={350}
                         onSetFocus={() => {}}
@@ -82,9 +93,9 @@ export const ReferToOrgUnitContainerPlain = ({ classes }: Props) => {
 
                 <div className={classes.fieldContent}>
                     <SingleOrgUnitSelectField
-                        value={orgUnit}
+                        value={referralDataValues.orgUnit}
                         onSelectClick={onSelectOrgUnit}
-                        onBlur={onDeselctOrgUnit}
+                        onBlur={onDeselectOrgUnit}
                     />
                 </div>
             </div>

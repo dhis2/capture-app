@@ -1,15 +1,18 @@
 // @flow
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { withAskToCreateNew, withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';
 import { requestSaveEvent, startCreateNewAfterCompleting } from './validated.actions';
-import type { ContainerProps } from './validated.types';
+import type { ContainerProps, ReferralDataValueStates } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
-import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
+import { actions as ReferralModes } from '../../WidgetReferral/constants';
+import { getConvertedReferralEvent } from './getConvertedReferralEvent';
+import { generateUID } from '../../../utils/uid/generateUID';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
@@ -29,6 +32,12 @@ export const Validated = ({
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
+    const [selectedReferralType, setSelectedReferralType] = useState(null);
+    const [referralDataValues, setReferralDataValues] = useState<ReferralDataValueStates>({
+        referralMode: ReferralModes.REFER_ORG,
+        scheduledAt: '',
+        orgUnit: undefined,
+    });
 
     const rulesExecutionDependenciesClientFormatted =
         useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
@@ -47,52 +56,75 @@ export const Validated = ({
 
     const dispatch = useDispatch();
     const handleSave = useCallback((
-        eventId: string,
+        dataEntryItemId: string,
         dataEntryIdArgument: string,
         formFoundationArgument: RenderFoundation,
-        saveType?: ?string,
+        saveType: ?$Values<typeof addEventSaveTypes>,
     ) => {
+        const requestEvent = {
+            dataEntryItemId,
+            eventId: generateUID(),
+            dataEntryId: dataEntryIdArgument,
+            formFoundation: formFoundationArgument,
+            programId: program.id,
+            orgUnitId: orgUnit.id,
+            orgUnitName: orgUnit.name || '',
+            teiId,
+            enrollmentId,
+            onSaveExternal,
+        };
+
+        if (saveType === addEventSaveTypes.COMPLETE && selectedReferralType) {
+            const { referralEvent, relationship, isValid } = getConvertedReferralEvent({
+                referralDataValues,
+                programId: program.id,
+                teiId,
+                enrollmentId,
+                currentProgramStageId: stage.id,
+                currentEventId: requestEvent.eventId,
+                referralType: selectedReferralType,
+            });
+
+            if (isValid) {
+                dispatch(requestSaveEvent({
+                    requestEvent: {
+                        completed: true,
+                        ...requestEvent,
+                    },
+                    referralEvent,
+                    relationship,
+                    onSaveSuccessActionType,
+                    onSaveErrorActionType,
+                }));
+            }
+            return;
+        }
+
         window.scrollTo(0, 0);
         const completed = saveType === addEventSaveTypes.COMPLETE;
         dispatch(requestSaveEvent({
-            eventId,
-            dataEntryId: dataEntryIdArgument,
-            formFoundation: formFoundationArgument,
-            completed,
-            programId: program.id,
-            orgUnitId: orgUnit.id,
-            orgUnitName: orgUnit.name || '',
-            teiId,
-            enrollmentId,
-            onSaveExternal,
+            requestEvent: { completed, ...requestEvent },
             onSaveSuccessActionType,
             onSaveErrorActionType,
         }));
-    }, [
-        dispatch,
-        program.id,
-        orgUnit,
-        teiId,
-        enrollmentId,
-        onSaveExternal,
-        onSaveSuccessActionType,
-        onSaveErrorActionType,
-    ]);
+    }, [program.id, orgUnit.id, orgUnit.name, teiId, enrollmentId, onSaveExternal, dispatch, onSaveSuccessActionType, onSaveErrorActionType, referralDataValues, stage.id, selectedReferralType]);
 
     const handleCreateNew = useCallback((isCreateNew?: boolean) => {
         dispatch(requestSaveEvent({
-            eventId: itemId,
-            dataEntryId,
-            formFoundation,
-            completed: true,
-            programId: program.id,
-            orgUnitId: orgUnit.id,
-            orgUnitName: orgUnit.name || '',
-            teiId,
-            enrollmentId,
-            onSaveExternal,
-            onSaveSuccessActionType,
-            onSaveErrorActionType,
+            requestEvent: {
+                dataEntryItemId: itemId,
+                dataEntryId,
+                formFoundation,
+                completed: true,
+                programId: program.id,
+                orgUnitId: orgUnit.id,
+                orgUnitName: orgUnit.name || '',
+                teiId,
+                enrollmentId,
+                onSaveExternal,
+                onSaveSuccessActionType,
+                onSaveErrorActionType,
+            },
         }));
         dispatch(startCreateNewAfterCompleting({
             enrollmentId, isCreateNew, orgUnitId: orgUnit.id, programId: program.id, teiId, availableProgramStages,
@@ -121,6 +153,9 @@ export const Validated = ({
             itemId={itemId}
             formFoundation={formFoundation}
             onSave={handleSave}
+            referralDataValues={referralDataValues}
+            setReferralDataValues={setReferralDataValues}
+            setSelectedReferralType={setSelectedReferralType}
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}
             programName={program.name}

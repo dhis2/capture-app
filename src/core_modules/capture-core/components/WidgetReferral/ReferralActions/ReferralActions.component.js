@@ -6,9 +6,14 @@ import { withStyles } from '@material-ui/core';
 import { actions as ReferalActionTypes, mainOptionTranslatedTexts, referralStatus } from '../constants';
 import { DataSection } from '../../DataSection';
 import { ReferToOrgUnit } from '../ReferToOrgUnit';
+import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
+import type { ReferralDataValueStates } from '../../WidgetEnrollmentEventNew/Validated/validated.types';
 
 type Props = {|
     type: string,
+    selectedType: Object,
+    referralDataValues: ReferralDataValueStates,
+    setReferralDataValues: (() => Object) => void,
     ...CssClasses
 |}
 
@@ -35,8 +40,18 @@ const styles = () => ({
     },
 });
 
-export const ReferralActionsPlain = ({ classes, type }: Props) => {
+export const ReferralActionsPlain = ({
+    classes,
+    type,
+    selectedType,
+    ...passOnProps
+}: Props) => {
     const [selectedAction, setSelectedAction] = React.useState();
+    const { programStage } = useProgramStageInfo(selectedType.toConstraint.programStage.id);
+
+    if (!programStage) {
+        return null;
+    }
 
     return (
         <DataSection
@@ -49,7 +64,7 @@ export const ReferralActionsPlain = ({ classes, type }: Props) => {
                         key={key}
                         name={`referral-action-${key}`}
                         checked={key === selectedAction}
-                        label={mainOptionTranslatedTexts[key]}
+                        label={mainOptionTranslatedTexts[key](programStage.stageForm.name)}
                         onChange={(e: Object) => setSelectedAction(e.value)}
                         value={key}
                     />
@@ -61,7 +76,9 @@ export const ReferralActionsPlain = ({ classes, type }: Props) => {
             </div>
 
             {selectedAction === ReferalActionTypes.REFER_ORG && (
-                <ReferToOrgUnit />
+                <ReferToOrgUnit
+                    {...passOnProps}
+                />
             )}
         </DataSection>);
 };

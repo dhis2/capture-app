@@ -33,8 +33,8 @@ export const EnrollmentAddEventPageDefault = ({
     }, [history, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
-        (data, uid) => {
-            dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
+        ({ events }) => {
+            dispatch(updateEnrollmentEventsWithoutId({ events }));
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
         [dispatch, history, programId, orgUnitId, teiId, enrollmentId],

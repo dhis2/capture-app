@@ -1,6 +1,12 @@
 // @flow
 import type { FetchError, QueryRefetchFunction } from '@dhis2/app-runtime';
 
+export type EventReducerProps = {|
+    events: Array<{
+        event: string,
+    }>
+|}
+
 export type Props = {|
     teiId: string,
     enrollmentId: string,

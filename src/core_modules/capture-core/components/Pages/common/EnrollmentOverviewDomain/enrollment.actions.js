@@ -1,5 +1,6 @@
 // @flow
 import { actionCreator } from '../../../../actions/actions.utils';
+import type { EventReducerProps } from '../../../WidgetEnrollment/enrollment.types';
 // import type { EnrollmentData } from '../../Enrollment/EnrollmentPageDefault/types/common.types';
 
 export const enrollmentSiteActionTypes = {
@@ -34,22 +35,15 @@ export const commitEnrollmentEvent = (eventId: string) =>
         eventId,
     });
 
-export const updateEnrollmentEventsWithoutId = (uid: string, eventData: Object) =>
-    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID)({
-        eventData,
-        uid,
-    });
+export const updateEnrollmentEventsWithoutId = ({ events }: EventReducerProps) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID)({ events });
 
-export const rollbackEnrollmentEventWithoutId = (uid: string) =>
-    actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID)({
-        uid,
-    });
+export const rollbackEnrollmentEventWithoutId = ({ events }: EventReducerProps) =>
+    actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID)({ events });
 
-export const commitEnrollmentEventWithoutId = (uid: string, eventId: string) =>
-    actionCreator(enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT_WITHOUT_ID)({
-        eventId,
-        uid,
-    });
+export const commitEnrollmentEventWithoutId = ({ events }: EventReducerProps) =>
+    actionCreator(enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT_WITHOUT_ID)({ events });
+
 export const saveFailed = () => actionCreator(enrollmentSiteActionTypes.SAVE_FAILED)();
 
 export const updateEnrollmentAttributeValues = (attributeValues: Array<{ [key: string]: string }>) =>

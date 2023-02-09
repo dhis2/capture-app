@@ -21,6 +21,9 @@ const ValidatedPlain = ({
     programName,
     formFoundation,
     classes,
+    referralDataValues,
+    setReferralDataValues,
+    setSelectedReferralType,
     onSave,
     onCancel,
     orgUnit,
@@ -43,7 +46,12 @@ const ValidatedPlain = ({
                     id={id}
                     orgUnit={orgUnit}
                 />
-                <WidgetReferral programStageId={stage?.id} />
+                <WidgetReferral
+                    programStageId={stage?.id}
+                    onSelectReferralType={setSelectedReferralType}
+                    referralDataValues={referralDataValues}
+                    setReferralDataValues={setReferralDataValues}
+                />
                 <FinishButtons
                     onSave={onSave}
                     onCancel={onCancel}

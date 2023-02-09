@@ -18,9 +18,8 @@ export const saveNewEventSucceededEpic = (action$: InputObservable) =>
             addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_SUCCESS,
         ),
         map((action) => {
-            const meta = action.meta;
-            const eventId = action.payload.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
-            return commitEnrollmentEventWithoutId(meta.uid, eventId);
+            const events = action.payload.bundleReport.typeReportMap.EVENT.objectReports;
+            return commitEnrollmentEventWithoutId({ events });
         }),
     );
 
@@ -31,7 +30,7 @@ export const saveNewEventFailedEpic = (action$: InputObservable) =>
             addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR,
         ),
         map((action) => {
-            const meta = action.meta;
-            return batchActions([saveFailed(), rollbackEnrollmentEventWithoutId(meta.uid)]);
+            const { serverData } = action.meta;
+            return batchActions([saveFailed(), rollbackEnrollmentEventWithoutId({ events: serverData.events })]);
         }),
     );
