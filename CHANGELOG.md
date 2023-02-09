@@ -1,3 +1,10 @@
+## [100.25.3](https://github.com/dhis2/capture-app/compare/v100.25.2...v100.25.3) (2023-02-09)
+
+
+### Bug Fixes
+
+* [DHIS2-14141] change the base date based on events ([#3177](https://github.com/dhis2/capture-app/issues/3177)) ([d69ee66](https://github.com/dhis2/capture-app/commit/d69ee668f7cf34ceeb38d41e559d34e61b4447cc))
+
 ## [100.25.2](https://github.com/dhis2/capture-app/compare/v100.25.1...v100.25.2) (2023-02-09)
 
 
