@@ -127,7 +127,6 @@ const runRulesForNewSingleEvent = (
     itemId: string,
     uid: string,
     orgUnit: OrgUnit,
-    history: Object,
     fieldData?: ?FieldData,
 ) => {
     const state = store.value;

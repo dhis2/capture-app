@@ -4,6 +4,13 @@ import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
 
+export class IndexedDBError extends Error {
+    constructor(error) {
+        super(error.message);
+        this.error = error;
+    }
+}
+
 export class StorageController {
     static errorMessages = {
         INVALID_NAME: 'A valid database name must be provided',
@@ -44,7 +51,7 @@ export class StorageController {
         const ValidAdapters = Adapters
             .filter((Adapter) => {
                 if (!StorageController.isAdapterValid(Adapter)) {
-                    throw new Error(
+                    throw new IndexedDBError(
                         errorCreator(StorageController.errorMessages.INVALID_ADAPTER_PROVIDED)({ Adapter }));
                 }
                 return Adapter.isSupported();
@@ -72,15 +79,17 @@ export class StorageController {
     throwIfNotOpen() {
         const openError = this.getOpenStatusError();
         if (openError) {
-            throw Error(
-                errorCreator(StorageController.errorMessages.STORAGE_NOT_OPEN)({ adapter: this.adapter }),
+            throw new IndexedDBError(
+                errorCreator(
+                    StorageController.errorMessages.STORAGE_NOT_OPEN)(
+                    { adapter: this.adapter }),
             );
         }
     }
 
     throwIfStoreNotFound(store, caller) {
         if (!store || !this.adapter.objectStoreNames.includes(store)) {
-            throw Error(
+            throw new IndexedDBError(
                 errorCreator(
                     StorageController.errorMessages.INVALID_OBJECTSTORE)(
                     { storageContainer: this, adapter: this.adapter, method: caller }),
@@ -90,7 +99,7 @@ export class StorageController {
 
     throwIfDataObjectError = (dataObject) => {
         if (!dataObject || !dataObject[this.adapter.keyPath]) {
-            throw Error(
+            throw new IndexedDBError(
                 errorCreator(StorageController.errorMessages.INVALID_STORAGE_OBJECT)({ adapter: this.adapter }),
             );
         }
@@ -98,7 +107,7 @@ export class StorageController {
 
     throwIfDataArrayError(dataArray) {
         if (!dataArray) {
-            throw Error(
+            throw new IndexedDBError(
                 errorCreator(StorageController.errorMessages.INVALID_STORAGE_ARRAY)({ adapter: this.adapter }),
             );
         }
@@ -111,7 +120,7 @@ export class StorageController {
         const currentAdapterIndex = this.AvailableAdapters.findIndex(AA => AA === this.adapterType);
         const nextAdapterIndex = currentAdapterIndex + 1;
         if (this.AvailableAdapters.length <= nextAdapterIndex) {
-            throw new Error(StorageController.errorMessages.OPEN_FAILED);
+            throw new IndexedDBError(StorageController.errorMessages.OPEN_FAILED);
         }
 
         const Adapter = this.AvailableAdapters[nextAdapterIndex];
@@ -129,13 +138,13 @@ export class StorageController {
     // using async ensures that the the return value is wrapped in a promise
     async open(...args) {
         if (this.adapter.isOpen()) {
-            throw new Error(
+            throw new IndexedDBError(
                 errorCreator(StorageController.errorMessages.STORAGE_ALREADY_OPEN)({ adapter: this.adapter }),
             );
         }
         const objectStores = this.adapter.objectStoreNames;
         if (!objectStores || !isArray(objectStores) || objectStores.length === 0) {
-            throw new Error(StorageController.errorMessages.NO_OBJECTSTORES_DEFINED);
+            throw new IndexedDBError(StorageController.errorMessages.NO_OBJECTSTORES_DEFINED);
         }
 
         try {

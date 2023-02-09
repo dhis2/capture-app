@@ -1,3 +1,135 @@
+## [100.25.2](https://github.com/dhis2/capture-app/compare/v100.25.1...v100.25.2) (2023-02-09)
+
+
+### Bug Fixes
+
+* [DHIS2-14697] asterisk working list chip name ([#3187](https://github.com/dhis2/capture-app/issues/3187)) ([bdcacbd](https://github.com/dhis2/capture-app/commit/bdcacbde2e4a197d19bb5fcd7934ae3bbf950922))
+
+## [100.25.1](https://github.com/dhis2/capture-app/compare/v100.25.0...v100.25.1) (2023-02-06)
+
+
+### Bug Fixes
+
+* [DHIS2-13346] assigned value ([#3087](https://github.com/dhis2/capture-app/issues/3087)) ([41e5d27](https://github.com/dhis2/capture-app/commit/41e5d277b2625de7f4ba948fb6223cdac8d47cd6))
+
+# [100.25.0](https://github.com/dhis2/capture-app/compare/v100.24.3...v100.25.0) (2023-02-05)
+
+
+### Features
+
+* [DHIS2-13803] change label and path of view dashboard in search fallback ([#3125](https://github.com/dhis2/capture-app/issues/3125)) ([e200815](https://github.com/dhis2/capture-app/commit/e200815dbb0253bea8f010c5c013656b62c64e66))
+
+## [100.24.3](https://github.com/dhis2/capture-app/compare/v100.24.2...v100.24.3) (2023-02-02)
+
+
+### Bug Fixes
+
+* [TECH-1499] hiding a section should not erase its fields ([#3171](https://github.com/dhis2/capture-app/issues/3171)) ([4388cef](https://github.com/dhis2/capture-app/commit/4388cef4fc3beac0722610522860f2c1fb432256))
+
+## [100.24.2](https://github.com/dhis2/capture-app/compare/v100.24.1...v100.24.2) (2023-01-26)
+
+
+### Bug Fixes
+
+* [DHIS2-13646] temporarily generate the updatedAt on the client ([#3122](https://github.com/dhis2/capture-app/issues/3122)) ([2d3bdee](https://github.com/dhis2/capture-app/commit/2d3bdeeef61ad3eeb213c3bb9c9eec2b95b4138a))
+
+## [100.24.1](https://github.com/dhis2/capture-app/compare/v100.24.0...v100.24.1) (2023-01-18)
+
+
+### Bug Fixes
+
+* [DHIS2-14340][DHIS2-13197] Sort blank cells in stages & event widget ([#3142](https://github.com/dhis2/capture-app/issues/3142)) ([063d73b](https://github.com/dhis2/capture-app/commit/063d73b0bb9502e67dda3549441262fdaf6d6f48))
+
+# [100.24.0](https://github.com/dhis2/capture-app/compare/v100.23.2...v100.24.0) (2023-01-17)
+
+
+### Features
+
+* [DHIS-14336] enter press should trigger search ([#3164](https://github.com/dhis2/capture-app/issues/3164)) ([6ed5d34](https://github.com/dhis2/capture-app/commit/6ed5d34f2604c56b3265a6bc0866efa5006fb870))
+
+## [100.23.2](https://github.com/dhis2/capture-app/compare/v100.23.1...v100.23.2) (2023-01-13)
+
+
+### Bug Fixes
+
+* [DHIS2-12472] List all messages related to field ([d9d60d0](https://github.com/dhis2/capture-app/commit/d9d60d01087dd9e58bf9916f4341bdd9c7fb1932))
+
+## [100.23.1](https://github.com/dhis2/capture-app/compare/v100.23.0...v100.23.1) (2023-01-12)
+
+
+### Bug Fixes
+
+* [DHIS2-13965] stay in app when there is error on org unit ([#3155](https://github.com/dhis2/capture-app/issues/3155)) ([726efae](https://github.com/dhis2/capture-app/commit/726efae0510ead4a3a78f950ba930d3a877112e2))
+
+# [100.23.0](https://github.com/dhis2/capture-app/compare/v100.22.1...v100.23.0) (2023-01-10)
+
+
+### Bug Fixes
+
+* [DHIS2-14411] change tooltip for program stage selector ([#3156](https://github.com/dhis2/capture-app/issues/3156)) ([654e0f6](https://github.com/dhis2/capture-app/commit/654e0f63c2261c784efb3e47d8f1388fb10fd34f))
+* [TECH-1495] cypress tests with dynamic dates  ([#3162](https://github.com/dhis2/capture-app/issues/3162)) ([b90b582](https://github.com/dhis2/capture-app/commit/b90b5828aa8cd4a0a7ff44b2113e3910df201329))
+
+
+### Features
+
+* [TECH-1486] Utility hook for fetching indexed db data ([#3150](https://github.com/dhis2/capture-app/issues/3150)) ([680e1e4](https://github.com/dhis2/capture-app/commit/680e1e434c6afaada0c6b2892f1513818463316a))
+
+## [100.22.1](https://github.com/dhis2/capture-app/compare/v100.22.0...v100.22.1) (2022-12-13)
+
+
+### Bug Fixes
+
+* [DHIS2-14286] Replace LGTM with CodeQL ([53ee196](https://github.com/dhis2/capture-app/commit/53ee19604a8c589d045ffe081600bab4a20b4236))
+
+# [100.22.0](https://github.com/dhis2/capture-app/compare/v100.21.7...v100.22.0) (2022-12-13)
+
+
+### Features
+
+* [DHIS2-14125] improve no saved list  ([#3132](https://github.com/dhis2/capture-app/issues/3132)) ([0918fee](https://github.com/dhis2/capture-app/commit/0918fee3f47b75a53efe631f63b2706181557a12))
+
+## [100.21.7](https://github.com/dhis2/capture-app/compare/v100.21.6...v100.21.7) (2022-12-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([26ca51f](https://github.com/dhis2/capture-app/commit/26ca51f8325e9116ffa9aed13c6cdd3cc10e93bf))
+
+## [100.21.6](https://github.com/dhis2/capture-app/compare/v100.21.5...v100.21.6) (2022-11-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([79d22d0](https://github.com/dhis2/capture-app/commit/79d22d0611e2a2e93f2c6edfdecf49b014d7a582))
+
+## [100.21.5](https://github.com/dhis2/capture-app/compare/v100.21.4...v100.21.5) (2022-11-29)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([09687f4](https://github.com/dhis2/capture-app/commit/09687f4403fb237304292dd4db5291daf836f03c))
+
+## [100.21.4](https://github.com/dhis2/capture-app/compare/v100.21.3...v100.21.4) (2022-11-28)
+
+
+### Bug Fixes
+
+* [DHIS2-14156] program stage WL event status convertor ([#3115](https://github.com/dhis2/capture-app/issues/3115)) ([e7cf97d](https://github.com/dhis2/capture-app/commit/e7cf97ddbb761691e944b87ecb0d17b12daa5eaa))
+
+## [100.21.3](https://github.com/dhis2/capture-app/compare/v100.21.2...v100.21.3) (2022-11-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([26135f1](https://github.com/dhis2/capture-app/commit/26135f11257eeec0f3da96e0cb8a755248501871))
+
+## [100.21.2](https://github.com/dhis2/capture-app/compare/v100.21.1...v100.21.2) (2022-11-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([96caa5e](https://github.com/dhis2/capture-app/commit/96caa5e69ff457fab1ce52ad8a8fd83d5391b9f8))
+
 ## [100.21.1](https://github.com/dhis2/capture-app/compare/v100.21.0...v100.21.1) (2022-11-22)
 
 

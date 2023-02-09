@@ -25,7 +25,8 @@ export type ApiEvent = {
     dataValues?: ApiDataElement,
     parent: ApiTei,
     trackedEntity: string,
-    enrollment: string
+    enrollment: string,
+    scheduledAt: string,
 };
 
 export type ApiEvents = Array<ApiEvent>;

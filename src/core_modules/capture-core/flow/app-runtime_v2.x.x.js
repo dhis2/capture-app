@@ -94,6 +94,19 @@ declare module '@dhis2/app-runtime' {
     }
     declare export function useDataEngine(): DataEngine;
 
+    declare type DHIS2Date = {|
+        serverOffset: number;
+        serverTimezone: string;
+        clientTimezone: string;
+        getServerZonedISOString: () => string;
+        getClientZonedISOString: () => string;
+    |}
+
+    declare export function useTimeZoneConversion(): {
+        fromServerDate: (date?: string | Date | number | null) => DHIS2Date;
+        fromClientDate: (date?: string | Date | number | null) => DHIS2Date;
+    };
+
     declare export function useConfig(): {|
         baseUrl: string,
         apiVersion: string,
