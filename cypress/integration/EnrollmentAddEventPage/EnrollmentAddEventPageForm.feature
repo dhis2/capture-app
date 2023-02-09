@@ -28,6 +28,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 0
+    And the form is finished loading
     When you click the button to Save without completing without post request
     Then the input should throw an error with error-message A value is required
 

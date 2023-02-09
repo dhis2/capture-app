@@ -28,6 +28,5 @@ export type PlainProps = {|
     onDelete: () => void,
     onAddNew: () => void,
     onError?: (message: string) => void,
-    serverTimeZoneId?: string,
     ...CssClasses,
 |};
