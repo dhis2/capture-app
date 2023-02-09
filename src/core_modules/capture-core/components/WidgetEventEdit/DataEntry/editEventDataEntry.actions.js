@@ -17,7 +17,7 @@ import {
     convertStatusOut,
 } from '../../DataEntries';
 import {
-    getDataEntryMeta, validateDataEntryValues, getDataEntryNotes,
+    getDataEntryMeta, validateDataEntryValues, getDataEntryNotes, getDataEntryCategoryCombo,
 } from '../../DataEntry/actions/dataEntryLoad.utils';
 import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { addFormData } from '../../D2Form/actions/form.actions';
@@ -46,7 +46,7 @@ function getLoadActions(
     formValues: Object,
     dataEntryPropsToInclude: Array<Object>,
     clientValuesForDataEntry: Object,
-    extraProps: { [key: string]: any },
+    extraProps: { [key: string]: any, attributeCategoryOptions: Object },
 ) {
     const dataEntryNotes = getDataEntryNotes(clientValuesForDataEntry);
     const key = getDataEntryKey(dataEntryId, itemId);
@@ -81,6 +81,7 @@ export const openEventForEditInDataEntry = ({
     attributeValues,
     dataEntryId,
     dataEntryKey,
+    attributeCategoryOptions,
 }: {
     loadedValues: {
         eventContainer: Object,
@@ -94,6 +95,7 @@ export const openEventForEditInDataEntry = ({
     dataEntryKey: string,
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
+    attributeCategoryOptions: Object
 }) => {
     const dataEntryPropsToInclude = [
         {
@@ -130,6 +132,7 @@ export const openEventForEditInDataEntry = ({
             eventContainer.event,
             {
                 eventId: eventContainer.event.eventId,
+                attributeCategoryOptions,
             },
         );
     const currentEvent = { ...eventContainer.event, ...eventContainer.values };

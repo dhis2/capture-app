@@ -9,6 +9,7 @@ import {
 import { getDataEntryKey } from '../../components/DataEntry/common/getDataEntryKey';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
+import { newEventWidgetDataEntryActionTypes } from '../../components/WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
 
 // cleans up data entries that start with dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {
@@ -109,6 +110,9 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         const newState = { ...state };
         const { dataEntryValues, key } = action.payload;
         newState[key] = dataEntryValues || {};
+        // if (action?.payload.extraProps?.attributeCategoryOptions) {
+        //     newState[key].attributeCategoryOptions = action?.payload.extraProps.attributeCategoryOptions;
+        // }
         return newState;
     },
     [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
@@ -116,6 +120,11 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         const payload = action.payload;
         const key = payload.key;
         newState[key] = payload.dataEntryValues;
+        if (payload.extraProps?.attributeCategoryOptions) {
+            newState[key].attributeCategoryOptions = payload.extraProps.attributeCategoryOptions;
+        }
+        console.log({ payload });
+
         return newState;
     },
     [actionTypes.UPDATE_FIELD]: (state, action) => {
@@ -126,6 +135,28 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         newState[key] = { ...newState[key] };
         const dataEntryValues = newState[key];
         dataEntryValues[payload.fieldId] = payload.value;
+        return newState;
+    },
+    [newEventWidgetDataEntryActionTypes.UPDATE_CAT_COMBO]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const fieldId = 'attributeCategoryOptions';
+        const { dataEntryId, itemId, value } = payload;
+        const key = getDataEntryKey(dataEntryId, itemId);
+
+        newState[key][fieldId] = { ...newState[key][fieldId], ...value };
+        return newState;
+    },
+    [newEventWidgetDataEntryActionTypes.REMOVE_CAT_COMBO]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const fieldId = 'attributeCategoryOptions';
+        const { dataEntryId, itemId, categoryId } = payload;
+        const key = getDataEntryKey(dataEntryId, itemId);
+
+        if (newState[key]?.[fieldId]?.[categoryId]) {
+            delete newState[key][fieldId][categoryId];
+        }
         return newState;
     },
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
@@ -209,6 +240,10 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
             };
             return accValuesUI;
         }, {});
+
+        if (payload.extraProps?.attributeCategoryOptions) {
+            newState[key].attributeCategoryOptions = { isValid: true, touched: false };
+        }
 
         return newState;
     },

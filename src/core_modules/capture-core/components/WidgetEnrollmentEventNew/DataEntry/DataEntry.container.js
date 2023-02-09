@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
@@ -11,6 +11,8 @@ import {
     newEventWidgetDataEntryBatchActionTypes,
     setNewEventSaveTypes,
     addNewEventNote,
+    updateCatCombo,
+    removeCatCombo,
 } from './actions/dataEntry.actions';
 import typeof { addEventSaveTypes } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
@@ -18,7 +20,7 @@ import type { ContainerProps } from './dataEntry.types';
 export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
     const { orgUnitId } = useSelector(({ currentSelections }) => currentSelections);
-
+    const dataValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue?.[`${passOnProps.id}-${passOnProps.itemId}`]);
     const onUpdateDataEntryField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
@@ -67,14 +69,25 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
         dispatch(setNewEventSaveTypes(newSaveTypes));
     }, [dispatch]);
 
-    const onClickCategoryOption = (itemId: string) => (option: Object, category: string) => {
-        const { dataEntryId } = this.props;
-        console.log({ option, category, itemId, dataEntryId });
-    };
+    const onClickCategoryOption = useCallback((option: Object, categoryId: string) => {
+        const value = { [categoryId]: option };
+        const { id, itemId } = passOnProps;
+        const valueMeta = {
+            isValid: true,
+            touched: true,
+        };
+        dispatch(updateCatCombo(value, valueMeta, id, itemId));
+    }, [dispatch, passOnProps]);
+
+    const onResetCategoryOption = useCallback((categoryId: string) => {
+        const { id, itemId } = passOnProps;
+        dispatch(removeCatCombo(categoryId, id, itemId));
+    }, [dispatch, passOnProps]);
 
     return (
         <DataEntryComponent
             {...passOnProps}
+            selectedCategories={dataValues?.attributeCategoryOptions}
             orgUnitId={orgUnitId}
             onUpdateDataEntryField={onUpdateDataEntryField}
             onUpdateField={onUpdateField}
@@ -82,6 +95,7 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
             onAddNote={onAddNote}
             onSetSaveTypes={onSetSaveTypes}
             onClickCategoryOption={onClickCategoryOption}
+            onResetCategoryOption={onResetCategoryOption}
         />
     );
 };

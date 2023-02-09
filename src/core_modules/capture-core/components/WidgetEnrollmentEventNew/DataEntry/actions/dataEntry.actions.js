@@ -13,6 +13,8 @@ export const newEventWidgetDataEntryActionTypes = {
     RULES_ON_UPDATE_EXECUTE: 'NewEvent.ExecuteRulesOnUpdate',
     EVENT_NOTE_ADD: 'NewEvent.AddEventNote',
     SET_ADD_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',  // TODO: https://jira.dhis2.org/browse/DHIS2-11669
+    UPDATE_CAT_COMBO: 'UpdateCatCombo',
+    REMOVE_CAT_COMBO: 'RemoveCatCombo',
 };
 
 export const executeRulesOnUpdateForNewEvent = (actionData: { payload: Object}) =>
@@ -30,3 +32,15 @@ export const startAsyncUpdateFieldForNewEvent = (
     onError: Function,
 ) =>
     actionPayloadAppender(innerAction)({ onSuccess, onError });
+
+export const updateCatCombo =
+    (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, itemId: string) =>
+        actionCreator(newEventWidgetDataEntryActionTypes.UPDATE_CAT_COMBO)({
+            value, valueMeta, fieldId, dataEntryId, itemId,
+        });
+
+export const removeCatCombo =
+    (categoryId: string, dataEntryId: string, itemId: string) =>
+        actionCreator(newEventWidgetDataEntryActionTypes.REMOVE_CAT_COMBO)({
+            categoryId, dataEntryId, itemId,
+        });

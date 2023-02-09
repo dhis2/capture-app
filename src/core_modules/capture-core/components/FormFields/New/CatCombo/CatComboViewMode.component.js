@@ -24,7 +24,7 @@ type Props = {
 };
 
 const CatComboViewModePlain = (props: Props) => {
-    const { classes, orientation, categories, categoryCombo } = props;
+    const { classes, categories, selectedCategories } = props;
 
     return (
         categories ? <div>
@@ -34,7 +34,7 @@ const CatComboViewModePlain = (props: Props) => {
                         {category.displayName}
                     </div>
                     <div className={classes.field}>
-                        {categoryCombo?.[category.id]?.[0].displayName}
+                        {selectedCategories?.[category.id]?.displayName}
                     </div>
                 </div>
             ))}

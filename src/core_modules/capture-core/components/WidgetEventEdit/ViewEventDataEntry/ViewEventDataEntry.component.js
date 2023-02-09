@@ -142,7 +142,7 @@ const buildCatComboSettingsFn = () => {
         getComponent: () => catComboViewMode,
         getComponentProps: (props: Object) => createComponentProps(props, {
             categories: props?.programCategory?.categories,
-            categoryCombo: props.categoryCombo,
+            selectedCategories: props.selectedCategories,
         }),
         getPropName: () => 'catCombo',
         getMeta: () => ({
@@ -300,7 +300,7 @@ class ViewEventDataEntryPlain extends Component<Props> {
             dataEntryId,
             ...passOnProps
         } = this.props;
-
+        console.log(this.props);
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper

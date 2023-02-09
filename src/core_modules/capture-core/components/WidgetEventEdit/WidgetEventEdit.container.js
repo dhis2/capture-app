@@ -55,7 +55,7 @@ export const WidgetEventEditPlain = ({
     orgUnitId,
     enrollmentId,
     teiId,
-    categoryCombo,
+    selectedCategories,
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
@@ -135,7 +135,7 @@ export const WidgetEventEditPlain = ({
                             formFoundation={programStage.stageForm}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             hideDueDate={programStage.hideDueDate}
-                            categoryCombo={categoryCombo}
+                            selectedCategories={selectedCategories}
                             programCategory={programData?.categoryCombo}
                         />
                     ) : (
@@ -155,7 +155,7 @@ export const WidgetEventEditPlain = ({
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
                             availableProgramStages={availableProgramStages}
                             hideDueDate={programStage.hideDueDate}
-                            categoryCombo={categoryCombo}
+                            selectedCategories={selectedCategories}
                             programCategory={programData?.categoryCombo}
                         />
                     )}

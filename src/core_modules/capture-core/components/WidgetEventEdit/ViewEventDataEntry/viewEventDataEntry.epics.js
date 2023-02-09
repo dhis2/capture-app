@@ -35,7 +35,7 @@ const getDataEntryId = (event): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
+export const loadViewEventDataEntryEpic: Epic = (action$, store, { querySingleResource }) =>
     action$.pipe(
         ofType(
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -76,8 +76,7 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
             const { enrollment, attributeValues } = state.enrollmentDomain;
-
-            return from(loadViewEventDataEntry({
+            const loadViewEventDataEntryPayload = {
                 eventContainer,
                 orgUnit,
                 foundation,
@@ -86,7 +85,18 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
                 attributeValues,
                 dataEntryId: getDataEntryId(eventContainer.event),
                 dataEntryKey: getDataEntryKey(eventContainer.event?.status),
-            }))
+            };
+            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
+                const categoryIds = eventContainer.event.attributeCategoryOptions.split(';');
+                loadViewEventDataEntryPayload.onCategoriesQuery = querySingleResource({
+                    resource: 'categoryOptions',
+                    params: {
+                        fields: 'id,displayName,name,categories[id]',
+                        filter: `id:in:[${categoryIds.join(',')}]`,
+                    },
+                });
+            }
+            return from(loadViewEventDataEntry(loadViewEventDataEntryPayload))
                 .pipe(
                     map(item => batchActions(item)),
                 );

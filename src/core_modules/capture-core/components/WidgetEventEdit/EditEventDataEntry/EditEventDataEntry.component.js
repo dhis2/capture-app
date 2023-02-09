@@ -211,9 +211,11 @@ const buildCatComboSettingsFn = () => {
         getComponent: () => catComboComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
-            categories: props?.programCategory?.categories,
+            categories: props.programCategory?.categories,
+            selectedCategories: props.selectedCategories,
             selectedOrgUnitId: props.orgUnitId,
             onClickCategoryOption: props.onClickCategoryOption(props.itemId),
+            onResetCategoryOption: props.onResetCategoryOption(props.itemId),
         }),
         getPropName: () => 'catCombo',
         getValidatorContainers: () => getEventDateValidatorContainers(),

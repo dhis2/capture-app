@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter, flatMap } from 'rxjs/operators';
+import { map, filter, flatMap, switchMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
@@ -47,10 +47,11 @@ const getDataEntryId = (event): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+
+export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
-        map((action) => {
+        switchMap((action) => {
             const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
@@ -64,18 +65,42 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
             const orgUnit = action.payload.orgUnit;
             const { enrollment, attributeValues } = state.enrollmentDomain;
 
+            const editDataEntryPayload = {
+                loadedValues,
+                orgUnit,
+                foundation,
+                program,
+                enrollment,
+                attributeValues,
+                dataEntryId: getDataEntryId(eventContainer.event),
+                dataEntryKey: dataEntryKeys.EDIT,
+            };
+
+            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
+                const categoryIds = eventContainer.event.attributeCategoryOptions.split(';');
+                return querySingleResource({
+                    resource: 'categoryOptions',
+                    params: {
+                        fields: 'id,displayName,name,categories[id]',
+                        filter: `id:in:[${categoryIds.join(',')}]`,
+                    },
+                }).then(({ categoryOptions }) => {
+                    editDataEntryPayload.attributeCategoryOptions = categoryOptions.reduce((acc, { categories, ...rest }) => {
+                        categories.forEach(({ id }) => {
+                            acc[id] = { ...rest };
+                        });
+                        return acc;
+                    }, {});
+                    return batchActions([
+                        showEditEventDataEntry(),
+                        ...openEventForEditInDataEntry(editDataEntryPayload),
+                    ]);
+                });
+            }
+
             return batchActions([
                 showEditEventDataEntry(),
-                ...openEventForEditInDataEntry({
-                    loadedValues,
-                    orgUnit,
-                    foundation,
-                    program,
-                    enrollment,
-                    attributeValues,
-                    dataEntryId: getDataEntryId(eventContainer.event),
-                    dataEntryKey: dataEntryKeys.EDIT,
-                }),
+                ...openEventForEditInDataEntry(editDataEntryPayload),
             ]);
         }));
 

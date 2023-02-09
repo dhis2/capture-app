@@ -173,9 +173,11 @@ const buildCatComboSettingsFn = () => {
         getComponent: () => catComboComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
-            categories: props?.programCategory?.categories,
+            categories: props.programCategory?.categories,
             selectedOrgUnitId: props.orgUnitId,
-            onClickCategoryOption: props.onClickCategoryOption(props.itemId),
+            selectedCategories: props.selectedCategories,
+            onClickCategoryOption: props.onClickCategoryOption,
+            onResetCategoryOption: props.onResetCategoryOption,
         }),
         getPropName: () => 'catCombo',
         getValidatorContainers: () => getNoteValidatorContainers(),

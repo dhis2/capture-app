@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 // $FlowFixMe
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
@@ -20,7 +20,6 @@ import { dataElementTypes } from '../../../metaData/DataElement';
 import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
-import { useBuildCatCombo } from './hooks/useBuildCatCombo';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -41,12 +40,6 @@ const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntit
             : pageStatuses.MISSING_DATA;
     }
     return pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
-};
-
-const getCatComboForEvent = (event) => {
-    if (!event?.attributeCategoryOptions) { return undefined; }
-    const categoryOptions = event.attributeCategoryOptions.split(';');
-    return categoryOptions;
 };
 
 export const EnrollmentEditEventPage = () => {
@@ -102,12 +95,11 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
-    const { categoryCombo } = useBuildCatCombo(getCatComboForEvent(event) ?? undefined);
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
-
+    const dataValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
     const pageStatus = getPageStatus({
         orgUnitId,
         enrollmentSite,
@@ -138,7 +130,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             onEnrollmentError={onEnrollmentError}
             eventStatus={event?.status}
             scheduleDate={scheduleDate}
-            categoryCombo={categoryCombo}
+            selectedCategories={dataValues?.attributeCategoryOptions}
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}
         />

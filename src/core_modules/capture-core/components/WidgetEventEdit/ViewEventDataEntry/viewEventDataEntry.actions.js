@@ -44,6 +44,7 @@ export const loadViewEventDataEntry =
         attributeValues,
         dataEntryId,
         dataEntryKey,
+        onCategoriesQuery,
     }: {
         eventContainer: ClientEventContainer,
         orgUnit: OrgUnit,
@@ -53,6 +54,7 @@ export const loadViewEventDataEntry =
         dataEntryKey: string,
         enrollment?: EnrollmentData,
         attributeValues?: Array<AttributeValue>,
+        onCategoriesQuery: Promise<Object>
     }) => {
         const dataEntryPropsToInclude = [
             {
@@ -79,6 +81,19 @@ export const loadViewEventDataEntry =
         ];
 
         const formId = getDataEntryKey(dataEntryId, dataEntryKey);
+        const extraProps = {
+            eventId: eventContainer.event.eventId,
+        };
+        if (onCategoriesQuery) {
+            const { categoryOptions } = await onCategoriesQuery;
+            extraProps.attributeCategoryOptions = categoryOptions.reduce((acc, { categories, ...rest }) => {
+                categories.forEach(({ id }) => {
+                    acc[id] = { ...rest };
+                });
+                return acc;
+            }, {});
+        }
+
         const { actions: dataEntryActions, dataEntryValues, formValues } = await
         loadEditDataEntryAsync(
             dataEntryId,
@@ -87,9 +102,7 @@ export const loadViewEventDataEntry =
             eventContainer.values,
             dataEntryPropsToInclude,
             foundation,
-            {
-                eventId: eventContainer.event.eventId,
-            },
+            extraProps,
         );
 
         // $FlowFixMe[cannot-spread-indexer] automated comment

@@ -25,6 +25,7 @@ import {
 } from './editEventDataEntry.actions';
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
+import { removeCatCombo, updateCatCombo } from '../../WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
 
 
 const mapStateToProps = (state: ReduxState, props) => {
@@ -124,9 +125,18 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
             enrollmentId, isCreateNew: true, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
         }));
     },
-    onClickCategoryOption: (itemId: string) => (option: Object, category: string) => {
+    onClickCategoryOption: (itemId: string) => (option: Object, categoryId: string) => {
         const { dataEntryId } = props;
-        console.log({ option, category, itemId, dataEntryId });
+        const value = { [categoryId]: option };
+        const valueMeta = {
+            isValid: true,
+            touched: true,
+        };
+        dispatch(updateCatCombo(value, valueMeta, dataEntryId, itemId));
+    },
+    onResetCategoryOption: (itemId: string) => (categoryId: string) => {
+        const { dataEntryId } = props;
+        dispatch(removeCatCombo(categoryId, dataEntryId, itemId));
     },
 });
 
