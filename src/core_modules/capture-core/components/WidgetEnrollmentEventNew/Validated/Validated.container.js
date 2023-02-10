@@ -107,11 +107,24 @@ export const Validated = ({
             onSaveSuccessActionType,
             onSaveErrorActionType,
         }));
-    }, [program.id, orgUnit.id, orgUnit.name, teiId, enrollmentId, onSaveExternal, dispatch, onSaveSuccessActionType, onSaveErrorActionType, referralDataValues, stage.id, selectedReferralType]);
+    }, [
+        program.id,
+        orgUnit,
+        teiId,
+        enrollmentId,
+        onSaveExternal,
+        dispatch,
+        onSaveSuccessActionType,
+        onSaveErrorActionType,
+        referralDataValues,
+        stage.id,
+        selectedReferralType,
+    ]);
 
     const handleCreateNew = useCallback((isCreateNew?: boolean) => {
         dispatch(requestSaveEvent({
             requestEvent: {
+                eventId: generateUID(),
                 dataEntryItemId: itemId,
                 dataEntryId,
                 formFoundation,
