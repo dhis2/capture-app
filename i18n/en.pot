@@ -5,8 +5,9 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-01-30T16:42:50.374Z\n"
-"PO-Revision-Date: 2023-01-30T16:42:50.374Z\n"
+
+"POT-Creation-Date: 2023-02-08T11:55:44.282Z\n"
+"PO-Revision-Date: 2023-02-08T11:55:44.282Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1323,6 +1324,12 @@ msgstr "Download data..."
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
 
+msgid "Registration Date"
+msgstr "Registration Date"
+
+msgid "Inactive"
+msgstr "Inactive"
+
 msgid "Enrollment status"
 msgstr "Enrollment status"
 
@@ -1331,12 +1338,6 @@ msgstr "Assigned to"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Registration Date"
-msgstr "Registration Date"
-
-msgid "Inactive"
-msgstr "Inactive"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
