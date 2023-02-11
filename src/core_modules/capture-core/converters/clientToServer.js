@@ -53,3 +53,13 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     // $FlowFixMe dataElementTypes flow error
     return (valueConvertersForType[type] ? valueConvertersForType[type](value) : value);
 }
+
+export function convertCategoryOptionsToServer(value) {
+    if (typeof value !== 'string') {
+        value = Object.keys(value).reduce((acc, categoryId) => {
+            acc.push(value[categoryId]?.id);
+            return acc;
+        }, []).join(';');
+    }
+    return value;
+}

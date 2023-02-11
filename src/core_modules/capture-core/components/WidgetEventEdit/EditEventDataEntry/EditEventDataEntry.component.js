@@ -217,8 +217,8 @@ const buildCatComboSettingsFn = () => {
             onClickCategoryOption: props.onClickCategoryOption(props.itemId),
             onResetCategoryOption: props.onResetCategoryOption(props.itemId),
         }),
-        getPropName: () => 'catCombo',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getPropName: () => 'attributeCategoryOptions',
+        // getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.CATEGORYCOMBO,

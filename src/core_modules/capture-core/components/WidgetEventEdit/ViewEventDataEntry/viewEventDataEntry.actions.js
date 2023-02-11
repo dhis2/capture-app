@@ -93,6 +93,10 @@ export const loadViewEventDataEntry =
                 return acc;
             }, {});
         }
+        if (eventContainer.event?.attributeCategoryOptions
+            && typeof eventContainer.event?.attributeCategoryOptions !== 'string') {
+            extraProps.attributeCategoryOptions = eventContainer.event.attributeCategoryOptions;
+        }
 
         const { actions: dataEntryActions, dataEntryValues, formValues } = await
         loadEditDataEntryAsync(

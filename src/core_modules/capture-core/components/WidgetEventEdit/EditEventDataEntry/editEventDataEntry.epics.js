@@ -6,7 +6,7 @@ import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
 import { EMPTY, of } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
-import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
+import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
@@ -75,33 +75,37 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
                 dataEntryId: getDataEntryId(eventContainer.event),
                 dataEntryKey: dataEntryKeys.EDIT,
             };
-
-            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
-                const categoryIds = eventContainer.event.attributeCategoryOptions.split(';');
-                return querySingleResource({
-                    resource: 'categoryOptions',
-                    params: {
-                        fields: 'id,displayName,name,categories[id]',
-                        filter: `id:in:[${categoryIds.join(',')}]`,
-                    },
-                }).then(({ categoryOptions }) => {
-                    editDataEntryPayload.attributeCategoryOptions = categoryOptions.reduce((acc, { categories, ...rest }) => {
-                        categories.forEach(({ id }) => {
-                            acc[id] = { ...rest };
-                        });
-                        return acc;
-                    }, {});
-                    return batchActions([
-                        showEditEventDataEntry(),
-                        ...openEventForEditInDataEntry(editDataEntryPayload),
-                    ]);
-                });
-            }
-
-            return batchActions([
+            const actions = batchActions([
                 showEditEventDataEntry(),
                 ...openEventForEditInDataEntry(editDataEntryPayload),
             ]);
+
+            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
+                if (typeof (eventContainer.event.attributeCategoryOptions) === 'string') {
+                    const categoryIds = eventContainer.event.attributeCategoryOptions.split(';');
+                    return querySingleResource({
+                        resource: 'categoryOptions',
+                        params: {
+                            fields: 'id,displayName,name,categories[id]',
+                            filter: `id:in:[${categoryIds.join(',')}]`,
+                        },
+                    }).then(({ categoryOptions }) => {
+                        editDataEntryPayload.attributeCategoryOptions = categoryOptions.reduce((acc, { categories, ...rest }) => {
+                            categories.forEach(({ id }) => {
+                                acc[id] = { ...rest };
+                            });
+                            return acc;
+                        }, {});
+                        return batchActions([
+                            showEditEventDataEntry(),
+                            ...openEventForEditInDataEntry(editDataEntryPayload),
+                        ]);
+                    });
+                }
+                return of(actions);
+            }
+
+            return actions;
         }));
 
 export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -134,6 +138,13 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             }
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
+
+            if (prevEventContainer.event && prevEventContainer.event.attributeCategoryOptions) {
+                prevEventContainer.event.attributeCategoryOptions =
+                    convertCategoryOptionsToServer(prevEventContainer.event.attributeCategoryOptions);
+                prevEventContainer.event.attributeOptionCombo = '';
+            }
+
             const eventContainer = {
                 ...prevEventContainer,
                 event: {
@@ -200,6 +211,11 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             const viewEventPage = state.viewEventPage;
             const eventContainer = viewEventPage.loadedValues.eventContainer;
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
+            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
+                eventContainer.event.attributeCategoryOptions =
+                    convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions);
+                eventContainer.event.attributeOptionCombo = '';
+            }
             let actions = [updateEventContainer(eventContainer, orgUnit)];
 
             if (meta.triggerAction === enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT) {

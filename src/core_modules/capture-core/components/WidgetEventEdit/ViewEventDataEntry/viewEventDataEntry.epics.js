@@ -87,14 +87,16 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store, { querySingleRe
                 dataEntryKey: getDataEntryKey(eventContainer.event?.status),
             };
             if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
-                const categoryIds = eventContainer.event.attributeCategoryOptions.split(';');
-                loadViewEventDataEntryPayload.onCategoriesQuery = querySingleResource({
-                    resource: 'categoryOptions',
-                    params: {
-                        fields: 'id,displayName,name,categories[id]',
-                        filter: `id:in:[${categoryIds.join(',')}]`,
-                    },
-                });
+                if (typeof (eventContainer.event.attributeCategoryOptions) === 'string') {
+                    const categoryIds = eventContainer.event.attributeCategoryOptions.split(';');
+                    loadViewEventDataEntryPayload.onCategoriesQuery = querySingleResource({
+                        resource: 'categoryOptions',
+                        params: {
+                            fields: 'id,displayName,name,categories[id]',
+                            filter: `id:in:[${categoryIds.join(',')}]`,
+                        },
+                    });
+                }
             }
             return from(loadViewEventDataEntry(loadViewEventDataEntryPayload))
                 .pipe(

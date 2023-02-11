@@ -34,9 +34,9 @@ export const startAsyncUpdateFieldForNewEvent = (
     actionPayloadAppender(innerAction)({ onSuccess, onError });
 
 export const updateCatCombo =
-    (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, itemId: string) =>
+    (value: any, valueMeta: Object, dataEntryId: string, itemId: string) =>
         actionCreator(newEventWidgetDataEntryActionTypes.UPDATE_CAT_COMBO)({
-            value, valueMeta, fieldId, dataEntryId, itemId,
+            value, valueMeta, dataEntryId, itemId,
         });
 
 export const removeCatCombo =

@@ -34,7 +34,7 @@ const CatComboViewModePlain = (props: Props) => {
                         {category.displayName}
                     </div>
                     <div className={classes.field}>
-                        {selectedCategories?.[category.id]?.displayName}
+                        {selectedCategories?.[category.id]?.name}
                     </div>
                 </div>
             ))}

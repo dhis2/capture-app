@@ -2,6 +2,7 @@
 import { convertClientToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
+import { convertCategoryOptionsToServer } from '../../converters/clientToServer';
 
 export function convertMainEventClientToServer(event: Object) {
     const mapClientKeyToServerKey = {
@@ -26,6 +27,12 @@ export function convertMainEventClientToServer(event: Object) {
             break;
         case 'assignee':
             convertedValue = value && ({ uid: value.id });
+            break;
+        case 'attributeCategoryOptions':
+            convertedValue = convertCategoryOptionsToServer(value);
+            break;
+        case 'attributeOptionCombo':
+            convertedValue = '';
             break;
         default:
             convertedValue = value;
