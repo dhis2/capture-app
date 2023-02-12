@@ -17,8 +17,8 @@ export { TextRangeField } from './Fields/TextField/TextRangeField.component';
 export { DateRangeField } from './Fields/DateAndTimeFields/DateRangeField/DateRangeField.component';
 export { ViewModeField } from './Fields/ViewModeField/ViewModeField.component';
 export { DateTimeRangeField } from './Fields/DateAndTimeFields/DateTimeRangeField/DateTimeRangeField.component';
-export { CatCombo } from './CatCombo/CatCombo.component';
-export { CatComboViewMode } from './CatCombo/CatComboViewMode.component';
+export { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
+export { CategoryOptionsViewMode } from './CategoryOptions/CategoryOptionsViewMode.component';
 
 // Generic HOCs
 export { withCalculateMessages } from './HOC/messages/withCalculateMessages';

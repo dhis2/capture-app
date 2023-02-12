@@ -9,8 +9,7 @@ import { ScheduleDate } from './ScheduleDate';
 import { ScheduleText } from './ScheduleText';
 import { CommentSection } from '../WidgetComment';
 import type { Props } from './widgetEventSchedule.types';
-import { CategorySelector } from '../ScopeSelector/QuickSelector/Program/CategorySelector.component';
-import { CatCombo } from '../FormFields/New/CatCombo/CatCombo.component';
+import { CategoryOptions } from '../FormFields/New/CategoryOptions/CategoryOptions.component';
 
 
 const styles = () => ({
@@ -94,11 +93,11 @@ const WidgetEventSchedulePlain = ({
             </div>
         </DataSection>
         {programCategory && <DataSection
-            dataTest="cat-combo-section"
+            dataTest="category-options-section"
             sectionName={programCategory.displayName}
         >
             <div className={classes.containerWrapper}>
-                <CatCombo
+                <CategoryOptions
                     categories={programCategory.categories}
                     selectedOrgUnitId={orgUnit?.id}
                     selectedCategories={selectedCategories}

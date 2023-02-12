@@ -21,7 +21,7 @@ import {
     withDefaultFieldContainer,
     ViewModeField,
     withFilterProps,
-    CatComboViewMode,
+    CategoryOptionsViewMode,
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
@@ -134,24 +134,24 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
-const buildCatComboSettingsFn = () => {
-    const catComboViewMode = withDefaultFieldContainer()(
-        withFilterProps(defaultFilterProps)(CatComboViewMode),
+const buildCategoryOptionsSettingsFn = () => {
+    const categoryOptionsViewModeComponent = withDefaultFieldContainer()(
+        withFilterProps(defaultFilterProps)(CategoryOptionsViewMode),
     );
-    const catComboSettings = {
-        getComponent: () => catComboViewMode,
+    const categoryOptionsSettings = {
+        getComponent: () => categoryOptionsViewModeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             categories: props?.programCategory?.categories,
             selectedCategories: props.selectedCategories,
         }),
-        getPropName: () => 'catCombo',
+        getPropName: () => 'attributeCategoryOptions',
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.CATEGORYCOMBO,
         }),
     };
 
-    return catComboSettings;
+    return categoryOptionsSettings;
 };
 
 const buildScheduleDateSettingsFn = () => {
@@ -235,8 +235,8 @@ const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
-const CatComboField = withDataEntryField(buildCatComboSettingsFn())(ReportDateField);
-const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CatComboField);
+const CategoryOptionsField = withDataEntryField(buildCategoryOptionsSettingsFn())(ReportDateField);
+const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CategoryOptionsField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
 type Props = {

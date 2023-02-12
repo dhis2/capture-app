@@ -20,10 +20,12 @@ const getStyles = () => ({
 
 type Props = {
     classes: Object,
-    orientation: string
+    orientation?: string,
+    categories: Array<Object>,
+    selectedCategories?: Object,
 };
 
-const CatComboViewModePlain = (props: Props) => {
+const CategoryOptionsViewModePlain = (props: Props) => {
     const { classes, categories, selectedCategories } = props;
 
     return (
@@ -42,4 +44,4 @@ const CatComboViewModePlain = (props: Props) => {
     );
 };
 
-export const CatComboViewMode = withStyles(getStyles)(CatComboViewModePlain);
+export const CategoryOptionsViewMode = withStyles(getStyles)(CategoryOptionsViewModePlain);

@@ -6,6 +6,7 @@ import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getCategoryOptionsValidatorContainers } from '../DataEntry/fieldValidators/categoryOptions.validatorContainersGetter';
 import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
 import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
@@ -32,7 +33,7 @@ import {
     withDisplayMessages,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
-    CatCombo,
+    CategoryOptions,
     orientations,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
@@ -194,21 +195,21 @@ const buildScheduleDateSettingsFn = () => {
     return scheduleDateSettings;
 };
 
-const buildCatComboSettingsFn = () => {
-    const catComboComponent =
+const buildCategoryOptionsSettingsFn = () => {
+    const categoryOptionsComponent =
         withCalculateMessages(overrideMessagePropNames)(
             withDefaultFieldContainer()(
                 withDefaultShouldUpdateInterface()(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(CatCombo),
+                            withFilterProps(defaultFilterProps)(CategoryOptions),
                         ),
                     ),
                 ),
             ),
         );
-    const catComboSettings = {
-        getComponent: () => catComboComponent,
+    const categoryOptionsSettings = {
+        getComponent: () => categoryOptionsComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
             categories: props.programCategory?.categories,
@@ -216,16 +217,20 @@ const buildCatComboSettingsFn = () => {
             selectedOrgUnitId: props.orgUnitId,
             onClickCategoryOption: props.onClickCategoryOption(props.itemId),
             onResetCategoryOption: props.onResetCategoryOption(props.itemId),
+            required: true,
         }),
         getPropName: () => 'attributeCategoryOptions',
-        // getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: (props) => {
+            console.log({ props });
+            return getCategoryOptionsValidatorContainers();
+        },
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.CATEGORYCOMBO,
         }),
     };
 
-    return catComboSettings;
+    return categoryOptionsSettings;
 };
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
@@ -349,8 +354,8 @@ const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
-const CatComboFields = withDataEntryField(buildCatComboSettingsFn())(ReportDateField);
-const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CatComboFields));
+const CategoryOptionsFields = withDataEntryField(buildCategoryOptionsSettingsFn())(ReportDateField);
+const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CategoryOptionsFields));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
 const DeletableDataEntry = withDeleteButton()(CompletableDataEntry);

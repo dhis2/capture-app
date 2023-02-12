@@ -27,7 +27,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
-    CatCombo,
+    CategoryOptions,
 } from '../../FormFields/New';
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -35,6 +35,7 @@ import { addEventSaveTypes } from './addEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { withTransformPropName } from '../../../HOC';
+import { getCategoryOptionsValidatorContainers } from '../../WidgetEventEdit/DataEntry/fieldValidators/note.validatorContainersGetter';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -155,14 +156,14 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
-const buildCatComboSettingsFn = () => {
-    const catComboComponent =
+const buildCategoryOptionsSettingsFn = () => {
+    const categoryOptionsComponent =
         withCalculateMessages(overrideMessagePropNames)(
             withDefaultFieldContainer()(
                 withDefaultShouldUpdateInterface()(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(CatCombo),
+                            withFilterProps(defaultFilterProps)(CategoryOptions),
                         ),
                     ),
                 ),
@@ -170,7 +171,7 @@ const buildCatComboSettingsFn = () => {
         );
     const catComboSettings = {
         isApplicable: (props: Object) => !!props?.programCategory?.categories,
-        getComponent: () => catComboComponent,
+        getComponent: () => categoryOptionsComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
             categories: props.programCategory?.categories,
@@ -180,7 +181,7 @@ const buildCatComboSettingsFn = () => {
             onResetCategoryOption: props.onResetCategoryOption,
         }),
         getPropName: () => 'attributeCategoryOptions',
-        // getValidatorContainers: () => getNoteValidatorContainers(),
+        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.CATEGORYCOMBO,
@@ -345,7 +346,7 @@ const WrappedDataEntry = compose(
     withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
     withDataEntryField(buildNotesSettingsFn()),
     withDataEntryFieldIfApplicable(buildAssigneeSettingsFn()),
-    withDataEntryFieldIfApplicable(buildCatComboSettingsFn()),
+    withDataEntryFieldIfApplicable(buildCategoryOptionsSettingsFn()),
     withCleanUp(),
     withFilterProps(dataEntryFilterProps),
 )(DataEntryContainer);
