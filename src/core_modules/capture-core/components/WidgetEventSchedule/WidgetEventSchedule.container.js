@@ -32,7 +32,8 @@ export const WidgetEventSchedule = ({
     initialScheduleDate,
     ...passOnProps
 }: ContainerProps) => {
-    const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]); const dispatch = useDispatch();
+    const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
+    const dispatch = useDispatch();
     const { orgUnit } = useOrganisationUnit(orgUnitId, 'displayName');
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
@@ -46,6 +47,7 @@ export const WidgetEventSchedule = ({
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events.filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
     const { programData } = useProgramFromIndexedDB(programId, ['categoryCombo']);
+    const [categoryOptions, setCategoryOptions] = useState();
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
@@ -61,6 +63,7 @@ export const WidgetEventSchedule = ({
             teiId,
             enrollmentId,
             eventId,
+            categoryOptions,
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
@@ -75,6 +78,7 @@ export const WidgetEventSchedule = ({
         teiId,
         enrollmentId,
         eventId,
+        categoryOptions,
         onSave,
         onSaveSuccessActionType,
         onSaveErrorActionType,
@@ -101,6 +105,18 @@ export const WidgetEventSchedule = ({
         setComments([...comments, newComment]);
     };
 
+    const onClickCategoryOption = useCallback((option: Object, categoryId: string) => {
+        setCategoryOptions(prevCategoryOptions => ({
+            ...prevCategoryOptions,
+            ...{ [categoryId]: option },
+        }));
+    }, [setCategoryOptions]);
+
+    const onResetCategoryOption = useCallback((categoryId: string) => {
+        const newCategoryOptions = { ...categoryOptions };
+        delete newCategoryOptions[categoryId];
+        setCategoryOptions(newCategoryOptions);
+    }, [setCategoryOptions, categoryOptions]);
 
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
@@ -136,6 +152,8 @@ export const WidgetEventSchedule = ({
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
             comments={comments}
+            onClickCategoryOption={onClickCategoryOption}
+            onResetCategoryOption={onResetCategoryOption}
             {...passOnProps}
         />
 

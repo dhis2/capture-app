@@ -10,6 +10,7 @@ import { ScheduleText } from './ScheduleText';
 import { CommentSection } from '../WidgetComment';
 import type { Props } from './widgetEventSchedule.types';
 import { CategorySelector } from '../ScopeSelector/QuickSelector/Program/CategorySelector.component';
+import { CatCombo } from '../FormFields/New/CatCombo/CatCombo.component';
 
 
 const styles = () => ({
@@ -67,6 +68,7 @@ const WidgetEventSchedulePlain = ({
     comments,
     programCategory,
     onClickCategoryOption,
+    onResetCategoryOption,
     ...passOnProps
 }: Props) => (
     <div className={classes.wrapper}>
@@ -95,19 +97,13 @@ const WidgetEventSchedulePlain = ({
             sectionName={programCategory.displayName}
         >
             <div className={classes.containerWrapper}>
-                {programCategory.categories.map(category => (<div className={classes.container}>
-                    <div className={classes.label}>
-                        {category.displayName}
-                    </div>
-                    <div className={classes.field}>
-                        <CategorySelector
-                            category={category}
-                            selectedOrgUnitId={null}
-                            onSelect={(option) => { onClickCategoryOption(option, category.id); }}
-                        />
-                    </div>
-                </div>
-                ))}
+                <CatCombo
+                    categories={programCategory.categories}
+                    selectedOrgUnitId={orgUnit?.id}
+                    selectedCategories={null}
+                    onClickCategoryOption={onClickCategoryOption}
+                    onResetCategoryOption={onResetCategoryOption}
+                />
             </div>
         </DataSection>}
         <DataSection

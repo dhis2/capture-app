@@ -23,6 +23,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
                 teiId,
                 enrollmentId,
                 eventId,
+                categoryOptions,
                 onSaveExternal,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
@@ -31,6 +32,8 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
             const { events } = store.value;
             const existingEnrollment = events[eventId]
             && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(events[eventId].status);
+            const attributeCategoryOptions = categoryOptions && Object.keys(categoryOptions)
+                .map(key => categoryOptions[key].id).join(';');
 
             const serverData = { events: [{
                 scheduledAt: scheduleDate,
@@ -44,6 +47,8 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
                 status: 'SCHEDULE',
                 notes: comments ?? [],
             }] };
+
+            if (attributeCategoryOptions) { serverData.events[0].attributeCategoryOptions = attributeCategoryOptions; }
 
             if (existingEnrollment) {
                 onSaveExternal && onSaveExternal(serverData.events[0]);

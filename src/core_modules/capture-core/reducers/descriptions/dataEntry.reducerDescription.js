@@ -120,8 +120,6 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         if (payload.extraProps?.attributeCategoryOptions) {
             newState[key].attributeCategoryOptions = payload.extraProps.attributeCategoryOptions;
         }
-        console.log({ payload });
-
         return newState;
     },
     [actionTypes.UPDATE_FIELD]: (state, action) => {
@@ -239,7 +237,6 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         }, {});
 
         if (payload.extraProps?.attributeCategoryOptions) {
-            console.log({ payload });
             newState[key].attributeCategoryOptions = { isValid: true, touched: false };
         }
 
