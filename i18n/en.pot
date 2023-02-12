@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-02-12T16:36:33.511Z\n"
-"PO-Revision-Date: 2023-02-12T16:36:33.511Z\n"
+"POT-Creation-Date: 2023-02-12T17:09:58.431Z\n"
+"PO-Revision-Date: 2023-02-12T17:09:58.431Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1110,6 +1110,9 @@ msgstr "Write a comment about this enrollment"
 msgid "This enrollment doesn't have any comments"
 msgstr "This enrollment doesn't have any comments"
 
+msgid "Please add category before saving the event"
+msgstr "Please add category before saving the event"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
 
@@ -1136,9 +1139,6 @@ msgstr "This event doesn't have any comments"
 
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
-
-msgid "Please add category before saving the event"
-msgstr "Please add category before saving the event"
 
 msgid "Delete event"
 msgstr "Delete event"

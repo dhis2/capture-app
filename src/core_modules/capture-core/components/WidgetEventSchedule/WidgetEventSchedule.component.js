@@ -103,6 +103,7 @@ const WidgetEventSchedulePlain = ({
                     selectedCategories={selectedCategories}
                     onClickCategoryOption={onClickCategoryOption}
                     onResetCategoryOption={onResetCategoryOption}
+                    required
                 />
             </div>
         </DataSection>}

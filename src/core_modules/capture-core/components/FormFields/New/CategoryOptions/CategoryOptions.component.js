@@ -91,6 +91,11 @@ const CategoryOptionsPlain = (props: Props) => {
         <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
             <div className={orientation === 'horizontal' && classes.label}>
                 {category.displayName}
+                {required && <span
+                    className={classes.requiredClass}
+                >
+                    &nbsp;*
+                </span>}
             </div>
             <div className={orientation === 'horizontal' && classes.field}>
                 <CategorySelector

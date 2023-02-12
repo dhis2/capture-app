@@ -35,7 +35,7 @@ import { addEventSaveTypes } from './addEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { withTransformPropName } from '../../../HOC';
-import { getCategoryOptionsValidatorContainers } from '../../WidgetEventEdit/DataEntry/fieldValidators/note.validatorContainersGetter';
+import { getCategoryOptionsValidatorContainers } from './fieldValidators/categoryOptions.validatorContainersGetter';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -179,6 +179,7 @@ const buildCategoryOptionsSettingsFn = () => {
             selectedCategories: props.selectedCategories,
             onClickCategoryOption: props.onClickCategoryOption,
             onResetCategoryOption: props.onResetCategoryOption,
+            required: true,
         }),
         getPropName: () => 'attributeCategoryOptions',
         getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
