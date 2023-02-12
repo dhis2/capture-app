@@ -36,6 +36,7 @@ import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { withTransformPropName } from '../../../HOC';
 import { getCategoryOptionsValidatorContainers } from './fieldValidators/categoryOptions.validatorContainersGetter';
+import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -373,6 +374,7 @@ type Props = {
     theme: Theme,
     formHorizontal: ?boolean,
     recentlyAddedRelationshipId?: ?string,
+    programCategory?: ?ProgramCategory
 };
 type DataEntrySection = {
     placement: $Values<typeof placements>,
@@ -402,11 +404,15 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.CATEGORYCOMBO]: {
         placement: placements.TOP,
+        name: '',
     },
 };
-class DataEntryPlain extends Component<Props> {
+
+type State = {
+    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection }
+}
+class DataEntryPlain extends Component<Props, State> {
     fieldOptions: { theme: Theme };
-    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     relationshipsInstance: ?HTMLDivElement;
 
     constructor(props: Props) {

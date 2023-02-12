@@ -35,7 +35,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
             const attributeCategoryOptions = categoryOptions && Object.keys(categoryOptions)
                 .map(key => categoryOptions[key].id).join(';');
 
-            const serverData = { events: [{
+            let serverData = { events: [{
                 scheduledAt: scheduleDate,
                 dataValues: [],
                 trackedEntity: teiId,
@@ -48,7 +48,14 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
                 notes: comments ?? [],
             }] };
 
-            if (attributeCategoryOptions) { serverData.events[0].attributeCategoryOptions = attributeCategoryOptions; }
+            if (attributeCategoryOptions) {
+                serverData = {
+                    events: [{
+                        ...serverData.events[0],
+                        attributeCategoryOptions,
+                    }],
+                };
+            }
 
             if (existingEnrollment) {
                 onSaveExternal && onSaveExternal(serverData.events[0]);

@@ -42,6 +42,7 @@ import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
 import { actionTypes } from './editEventDataEntry.actions';
+import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -384,16 +385,19 @@ type Props = {
     eventStatus?: string,
     enrollmentId?: string,
     isCompleted?: boolean,
+    programCategory?: ?ProgramCategory,
 };
 
-type State = {
-    mode: string
-}
 
 type DataEntrySection = {
     placement: $Values<typeof placements>,
     name: string,
 };
+
+type State = {
+    mode: string,
+    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection }
+}
 
 const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
@@ -406,12 +410,12 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.CATEGORYCOMBO]: {
         placement: placements.TOP,
+        name: '',
     },
 };
 
 class EditEventDataEntryPlain extends Component<Props, State> {
     fieldOptions: { theme: Theme };
-    // dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {

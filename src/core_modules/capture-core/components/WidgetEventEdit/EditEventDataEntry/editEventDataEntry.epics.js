@@ -57,7 +57,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
             const eventContainer = loadedValues.eventContainer;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
-                return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
+                return of(prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error));
             }
 
             const program = metadataContainer.program;
@@ -74,6 +74,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
                 attributeValues,
                 dataEntryId: getDataEntryId(eventContainer.event),
                 dataEntryKey: dataEntryKeys.EDIT,
+                attributeCategoryOptions: null,
             };
             const actions = batchActions([
                 showEditEventDataEntry(),
@@ -90,12 +91,14 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
                             filter: `id:in:[${categoryIds.join(',')}]`,
                         },
                     }).then(({ categoryOptions }) => {
-                        editDataEntryPayload.attributeCategoryOptions = categoryOptions.reduce((acc, { categories, ...rest }) => {
-                            categories.forEach(({ id }) => {
-                                acc[id] = { ...rest };
-                            });
-                            return acc;
-                        }, {});
+                        editDataEntryPayload.attributeCategoryOptions = categoryOptions
+                            .reduce((acc, { categories, ...rest }) => {
+                                categories.forEach(({ id }) => {
+                                    acc[id] = { ...rest };
+                                });
+                                return acc;
+                            }, {});
+
                         return batchActions([
                             showEditEventDataEntry(),
                             ...openEventForEditInDataEntry(editDataEntryPayload),

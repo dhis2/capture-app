@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import { CategorySelector } from '../../../ScopeSelector/QuickSelector/Program/CategorySelector.component';
+import type { ProgramCategory, CategoryOption } from './CategoryOptions.types';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -35,13 +36,14 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    classes: Object,
     orientation: string,
+    categories: Array<Object>,
     selectedOrgUnitId: string,
-    selectedCategories: Object,
+    selectedCategories: ProgramCategory,
     onClickCategoryOption: (option: Object, categoryId: string, isValid: boolean) => void,
     onResetCategoryOption: (categoryId: string) => void,
-    required?: boolean
+    required?: boolean,
+    ...CssClasses
 };
 
 const CategoryOptionsPlain = (props: Props) => {

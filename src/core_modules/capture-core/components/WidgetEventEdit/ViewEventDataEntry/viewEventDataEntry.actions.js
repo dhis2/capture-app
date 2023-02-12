@@ -54,7 +54,7 @@ export const loadViewEventDataEntry =
         dataEntryKey: string,
         enrollment?: EnrollmentData,
         attributeValues?: Array<AttributeValue>,
-        onCategoriesQuery: Promise<Object>
+        onCategoriesQuery?: ?Promise<Object>
     }) => {
         const dataEntryPropsToInclude = [
             {
@@ -81,12 +81,11 @@ export const loadViewEventDataEntry =
         ];
 
         const formId = getDataEntryKey(dataEntryId, dataEntryKey);
-        const extraProps = {
-            eventId: eventContainer.event.eventId,
-        };
+
+        let attributeCategoryOptions;
         if (onCategoriesQuery) {
             const { categoryOptions } = await onCategoriesQuery;
-            extraProps.attributeCategoryOptions = categoryOptions.reduce((acc, { categories, ...rest }) => {
+            attributeCategoryOptions = categoryOptions.reduce((acc, { categories, ...rest }) => {
                 categories.forEach(({ id }) => {
                     acc[id] = { ...rest };
                 });
@@ -95,8 +94,13 @@ export const loadViewEventDataEntry =
         }
         if (eventContainer.event?.attributeCategoryOptions
             && typeof eventContainer.event?.attributeCategoryOptions !== 'string') {
-            extraProps.attributeCategoryOptions = eventContainer.event.attributeCategoryOptions;
+            attributeCategoryOptions = eventContainer.event.attributeCategoryOptions;
         }
+
+        const extraProps = {
+            eventId: eventContainer.event.eventId,
+            attributeCategoryOptions,
+        };
 
         const { actions: dataEntryActions, dataEntryValues, formValues } = await
         loadEditDataEntryAsync(

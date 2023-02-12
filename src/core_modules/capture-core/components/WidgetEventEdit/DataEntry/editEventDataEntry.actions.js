@@ -17,7 +17,7 @@ import {
     convertStatusOut,
 } from '../../DataEntries';
 import {
-    getDataEntryMeta, validateDataEntryValues, getDataEntryNotes, getDataEntryCategoryCombo,
+    getDataEntryMeta, validateDataEntryValues, getDataEntryNotes,
 } from '../../DataEntry/actions/dataEntryLoad.utils';
 import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { addFormData } from '../../D2Form/actions/form.actions';

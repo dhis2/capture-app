@@ -45,9 +45,11 @@ export const WidgetEventSchedule = ({
     const [comments, setComments] = useState([]);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
     const { eventId } = useLocationQuery();
-    const eventCountInOrgUnit = events.filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
+    const eventCountInOrgUnit = events
+        .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
     const { programData } = useProgramFromIndexedDB(programId, ['categoryCombo']);
-    const selectedCategories = useSelector(({ events: storedEvents }) => storedEvents[eventId]?.attributeCategoryOptions);
+    const selectedCategories = useSelector(({ events: storedEvents }) =>
+        storedEvents[eventId]?.attributeCategoryOptions);
     const [categoryOptions, setCategoryOptions] = useState();
 
     useEffect(() => {

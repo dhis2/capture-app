@@ -25,6 +25,7 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
+import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -248,6 +249,7 @@ type Props = {
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     classes: Object,
     theme: Theme,
+    programCategory?: ?ProgramCategory,
     onOpenEditEvent: () => void,
     dataEntryId: string,
 };
@@ -272,12 +274,15 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.CATEGORYCOMBO]: {
         placement: placements.TOP,
+        name: '',
     },
 };
-
-class ViewEventDataEntryPlain extends Component<Props> {
+type State = {
+    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
+}
+class ViewEventDataEntryPlain extends Component<Props, State> {
     fieldOptions: { theme: Theme };
-    // dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
+
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {
@@ -300,7 +305,6 @@ class ViewEventDataEntryPlain extends Component<Props> {
             dataEntryId,
             ...passOnProps
         } = this.props;
-        console.log(this.props);
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper

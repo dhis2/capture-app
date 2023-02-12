@@ -35,7 +35,7 @@ const getDataEntryId = (event): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadViewEventDataEntryEpic: Epic = (action$, store, { querySingleResource }) =>
+export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -85,6 +85,7 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store, { querySingleRe
                 attributeValues,
                 dataEntryId: getDataEntryId(eventContainer.event),
                 dataEntryKey: getDataEntryKey(eventContainer.event?.status),
+                onCategoriesQuery: null,
             };
             if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
                 if (typeof (eventContainer.event.attributeCategoryOptions) === 'string') {
@@ -98,6 +99,7 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store, { querySingleRe
                     });
                 }
             }
+
             return from(loadViewEventDataEntry(loadViewEventDataEntryPayload))
                 .pipe(
                     map(item => batchActions(item)),

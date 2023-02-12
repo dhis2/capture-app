@@ -54,9 +54,10 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     return (valueConvertersForType[type] ? valueConvertersForType[type](value) : value);
 }
 
-export function convertCategoryOptionsToServer(value) {
-    if (typeof value !== 'string') {
-        value = Object.keys(value).reduce((acc, categoryId) => {
+export function convertCategoryOptionsToServer(value: Object | string) {
+    if (typeof value === 'object') {
+        const categoryObject: Object = value;
+        return Object.keys(categoryObject).reduce((acc, categoryId) => {
             acc.push(value[categoryId]?.id);
             return acc;
         }, []).join(';');
