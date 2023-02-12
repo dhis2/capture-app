@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { type OrgUnit } from 'capture-core-utils/rulesEngine';
+import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,
@@ -127,7 +127,6 @@ const runRulesForNewSingleEvent = (
     itemId: string,
     uid: string,
     orgUnit: OrgUnit,
-    history: Object,
     fieldData?: ?FieldData,
 ) => {
     const state = store.value;

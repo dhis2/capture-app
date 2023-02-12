@@ -1300,6 +1300,12 @@ msgstr "Download data..."
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
 
+msgid "Registration Date"
+msgstr "Registration Date"
+
+msgid "Inactive"
+msgstr "Inactive"
+
 msgid "Enrollment status"
 msgstr "Enrollment status"
 
@@ -1308,12 +1314,6 @@ msgstr "Assigned to"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Registration Date"
-msgstr "Registration Date"
-
-msgid "Inactive"
-msgstr "Inactive"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"

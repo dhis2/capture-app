@@ -1,3 +1,24 @@
+## [100.25.3](https://github.com/dhis2/capture-app/compare/v100.25.2...v100.25.3) (2023-02-09)
+
+
+### Bug Fixes
+
+* [DHIS2-14141] change the base date based on events ([#3177](https://github.com/dhis2/capture-app/issues/3177)) ([d69ee66](https://github.com/dhis2/capture-app/commit/d69ee668f7cf34ceeb38d41e559d34e61b4447cc))
+
+## [100.25.2](https://github.com/dhis2/capture-app/compare/v100.25.1...v100.25.2) (2023-02-09)
+
+
+### Bug Fixes
+
+* [DHIS2-14697] asterisk working list chip name ([#3187](https://github.com/dhis2/capture-app/issues/3187)) ([bdcacbd](https://github.com/dhis2/capture-app/commit/bdcacbde2e4a197d19bb5fcd7934ae3bbf950922))
+
+## [100.25.1](https://github.com/dhis2/capture-app/compare/v100.25.0...v100.25.1) (2023-02-06)
+
+
+### Bug Fixes
+
+* [DHIS2-13346] assigned value ([#3087](https://github.com/dhis2/capture-app/issues/3087)) ([41e5d27](https://github.com/dhis2/capture-app/commit/41e5d277b2625de7f4ba948fb6223cdac8d47cd6))
+
 # [100.25.0](https://github.com/dhis2/capture-app/compare/v100.24.3...v100.25.0) (2023-02-05)
 
 

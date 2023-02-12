@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
