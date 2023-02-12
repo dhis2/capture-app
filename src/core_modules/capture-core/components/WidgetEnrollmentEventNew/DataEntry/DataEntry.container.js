@@ -16,6 +16,7 @@ import {
 } from './actions/dataEntry.actions';
 import typeof { addEventSaveTypes } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
+import { getCategoryOptionsValidatorContainers } from '../../WidgetEventEdit/DataEntry/fieldValidators/categoryOptions.validatorContainersGetter';
 
 export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
@@ -83,7 +84,12 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
 
     const onResetCategoryOption = useCallback((categoryId: string) => {
         const { id, itemId } = passOnProps;
-        dispatch(removeCatCombo(categoryId, id, itemId));
+        const valueMeta = {
+            isValid: false,
+            touched: true,
+            validationError: getCategoryOptionsValidatorContainers()[0].message,
+        };
+        dispatch(removeCatCombo(categoryId, valueMeta, id, itemId));
     }, [dispatch, passOnProps]);
 
     return (

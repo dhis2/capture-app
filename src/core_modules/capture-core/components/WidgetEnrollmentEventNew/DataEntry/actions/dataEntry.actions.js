@@ -40,7 +40,7 @@ export const updateCatCombo =
         });
 
 export const removeCatCombo =
-    (categoryId: string, dataEntryId: string, itemId: string) =>
+    (categoryId: string, valueMeta: Object, dataEntryId: string, itemId: string) =>
         actionCreator(newEventWidgetDataEntryActionTypes.REMOVE_CAT_COMBO)({
-            categoryId, dataEntryId, itemId,
+            categoryId, valueMeta, dataEntryId, itemId,
         });

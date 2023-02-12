@@ -26,6 +26,7 @@ import {
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 import { removeCatCombo, updateCatCombo } from '../../WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
+import { getCategoryOptionsValidatorContainers } from '../DataEntry/fieldValidators/categoryOptions.validatorContainersGetter';
 
 
 const mapStateToProps = (state: ReduxState, props) => {
@@ -137,7 +138,12 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
     },
     onResetCategoryOption: (itemId: string) => (categoryId: string) => {
         const { dataEntryId } = props;
-        dispatch(removeCatCombo(categoryId, dataEntryId, itemId));
+        const valueMeta = {
+            isValid: false,
+            touched: true,
+            validationError: getCategoryOptionsValidatorContainers()[0].message,
+        };
+        dispatch(removeCatCombo(categoryId, valueMeta, dataEntryId, itemId));
     },
 });
 

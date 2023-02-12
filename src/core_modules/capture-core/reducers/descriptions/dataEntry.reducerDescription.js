@@ -264,12 +264,12 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         const newState = { ...state };
         const payload = action.payload;
 
-        const { dataEntryId, itemId } = payload;
+        const { dataEntryId, itemId, valueMeta } = payload;
         const key = getDataEntryKey(dataEntryId, itemId);
 
         newState[key][categoryOptionsFieldId] = {
             ...newState[key][categoryOptionsFieldId],
-            ...{ isValid: false, touched: true, validationError: null },
+            ...valueMeta,
         };
         return newState;
     },
