@@ -2,7 +2,6 @@
 import { userStores } from '../../storageControllers/stores';
 import { getUserStorageController } from '../../storageControllers';
 import { useIndexedDBQuery } from '../reactQueryHelpers';
-import type { CachedProgram } from '../../storageControllers/cache.types';
 
 export const useProgramFromIndexedDB = (programId: string, fields?: Array<string>): {
     programData?: Object,

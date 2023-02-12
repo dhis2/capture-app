@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import { CategorySelector } from '../../../ScopeSelector/QuickSelector/Program/CategorySelector.component';
-import type { ProgramCategory, CategoryOption } from './CategoryOptions.types';
+import type { ProgramCategory } from './CategoryOptions.types';
 
 const getStyles = (theme: Theme) => ({
     container: {

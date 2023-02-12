@@ -20,7 +20,6 @@ const getStyles = () => ({
 
 type Props = {
     classes: Object,
-    orientation?: string,
     categories: Array<Object>,
     selectedCategories?: Object,
 };
