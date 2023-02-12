@@ -20,6 +20,8 @@ const cleanUp = (state, { payload: { dataEntryId } }) => {
     return newState;
 };
 
+const categoryOptionsFieldId = 'attributeCategoryOptions';
+
 export const dataEntriesDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
         const newState = { ...state };
@@ -135,22 +137,20 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
     [newEventWidgetDataEntryActionTypes.UPDATE_CAT_COMBO]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        const fieldId = 'attributeCategoryOptions';
         const { dataEntryId, itemId, value } = payload;
         const key = getDataEntryKey(dataEntryId, itemId);
 
-        newState[key][fieldId] = { ...newState[key][fieldId], ...value };
+        newState[key][categoryOptionsFieldId] = { ...newState[key][categoryOptionsFieldId], ...value };
         return newState;
     },
     [newEventWidgetDataEntryActionTypes.REMOVE_CAT_COMBO]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        const fieldId = 'attributeCategoryOptions';
         const { dataEntryId, itemId, categoryId } = payload;
         const key = getDataEntryKey(dataEntryId, itemId);
 
-        if (newState[key]?.[fieldId]?.[categoryId]) {
-            delete newState[key][fieldId][categoryId];
+        if (newState[key]?.[categoryOptionsFieldId]?.[categoryId]) {
+            delete newState[key][categoryOptionsFieldId][categoryId];
         }
         return newState;
     },
@@ -255,11 +255,22 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
     [newEventWidgetDataEntryActionTypes.UPDATE_CAT_COMBO]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        const fieldId = 'attributeCategoryOptions';
         const { dataEntryId, itemId, valueMeta } = payload;
         const key = getDataEntryKey(dataEntryId, itemId);
+        newState[key][categoryOptionsFieldId] = { ...newState[key][categoryOptionsFieldId], ...valueMeta };
+        return newState;
+    },
+    [newEventWidgetDataEntryActionTypes.REMOVE_CAT_COMBO]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
 
-        newState[key][fieldId] = { ...newState[key][fieldId], ...valueMeta };
+        const { dataEntryId, itemId } = payload;
+        const key = getDataEntryKey(dataEntryId, itemId);
+
+        newState[key][categoryOptionsFieldId] = {
+            ...newState[key][categoryOptionsFieldId],
+            ...{ isValid: false, touched: true, validationError: null },
+        };
         return newState;
     },
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,

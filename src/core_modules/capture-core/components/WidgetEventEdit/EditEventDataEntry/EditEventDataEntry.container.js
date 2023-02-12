@@ -125,12 +125,13 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
             enrollmentId, isCreateNew: true, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
         }));
     },
-    onClickCategoryOption: (itemId: string) => (option: Object, categoryId: string) => {
+    onClickCategoryOption: (itemId: string) => (option: Object, categoryId: string, isValid: boolean) => {
         const { dataEntryId } = props;
         const value = { [categoryId]: option };
         const valueMeta = {
-            isValid: true,
+            isValid,
             touched: true,
+            validationError: !isValid,
         };
         dispatch(updateCatCombo(value, valueMeta, dataEntryId, itemId));
     },

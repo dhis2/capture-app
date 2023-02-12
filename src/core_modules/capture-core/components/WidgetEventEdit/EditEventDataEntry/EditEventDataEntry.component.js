@@ -220,10 +220,7 @@ const buildCategoryOptionsSettingsFn = () => {
             required: true,
         }),
         getPropName: () => 'attributeCategoryOptions',
-        getValidatorContainers: (props) => {
-            console.log({ props });
-            return getCategoryOptionsValidatorContainers();
-        },
+        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.CATEGORYCOMBO,

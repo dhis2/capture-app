@@ -39,7 +39,7 @@ type Props = {
     orientation: string,
     selectedOrgUnitId: string,
     selectedCategories: Object,
-    onClickCategoryOption: (option: Object) => void,
+    onClickCategoryOption: (option: Object, categoryId: string, isValid: boolean) => void,
     onResetCategoryOption: (categoryId: string) => void,
     required?: boolean
 };
@@ -102,11 +102,13 @@ const CategoryOptionsPlain = (props: Props) => {
                     category={category}
                     selectedOrgUnitId={selectedOrgUnitId}
                     onSelect={(option) => {
-                        setSelectedCategories({
+                        const newCategories = {
                             ...selectedCategories,
                             ...{ [category.id]: option },
-                        });
-                        onClickCategoryOption(option, category.id);
+                        };
+                        setSelectedCategories(newCategories);
+                        const isValid = categories.every(({ id }) => newCategories[id]);
+                        onClickCategoryOption(option, category.id, isValid);
                     }}
                 />
             </div>

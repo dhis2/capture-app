@@ -21,6 +21,7 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
     const dispatch = useDispatch();
     const { orgUnitId } = useSelector(({ currentSelections }) => currentSelections);
     const dataValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue?.[`${passOnProps.id}-${passOnProps.itemId}`]);
+    const selectedCategories = dataValues?.attributeCategoryOptions;
     const onUpdateDataEntryField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
@@ -69,12 +70,13 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
         dispatch(setNewEventSaveTypes(newSaveTypes));
     }, [dispatch]);
 
-    const onClickCategoryOption = useCallback((option: Object, categoryId: string) => {
+    const onClickCategoryOption = useCallback((option: Object, categoryId: string, isValid: boolean) => {
         const value = { [categoryId]: option };
         const { id, itemId } = passOnProps;
         const valueMeta = {
-            isValid: true,
+            isValid,
             touched: true,
+            validationError: !isValid,
         };
         dispatch(updateCatCombo(value, valueMeta, id, itemId));
     }, [dispatch, passOnProps]);
@@ -87,7 +89,7 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
     return (
         <DataEntryComponent
             {...passOnProps}
-            selectedCategories={dataValues?.attributeCategoryOptions}
+            selectedCategories={selectedCategories}
             orgUnitId={orgUnitId}
             onUpdateDataEntryField={onUpdateDataEntryField}
             onUpdateField={onUpdateField}

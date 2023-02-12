@@ -4,6 +4,7 @@ import { convertGeometryOut } from 'capture-core/components/DataEntries/converte
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
+import { getCategoryOptionsValidatorContainers } from '../fieldValidators/categoryOptions.validatorContainersGetter';
 
 type DataEntryPropsToInclude = Array<Object>;
 
@@ -31,6 +32,11 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     },
     {
         id: 'assignee',
+    },
+    {
+        id: 'attributeCategoryOptions',
+        type: 'TEXT',
+        validatorContainers: getCategoryOptionsValidatorContainers(),
     },
 ];
 
