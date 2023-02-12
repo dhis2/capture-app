@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';
@@ -47,6 +47,7 @@ export const WidgetEventSchedule = ({
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events.filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
     const { programData } = useProgramFromIndexedDB(programId, ['categoryCombo']);
+    const selectedCategories = useSelector(({ events: storedEvents }) => storedEvents[eventId]?.attributeCategoryOptions);
     const [categoryOptions, setCategoryOptions] = useState();
 
     useEffect(() => {
@@ -152,6 +153,7 @@ export const WidgetEventSchedule = ({
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
             comments={comments}
+            selectedCategories={selectedCategories}
             onClickCategoryOption={onClickCategoryOption}
             onResetCategoryOption={onResetCategoryOption}
             {...passOnProps}

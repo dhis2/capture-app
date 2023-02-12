@@ -67,6 +67,7 @@ const WidgetEventSchedulePlain = ({
     suggestedScheduleDate,
     comments,
     programCategory,
+    selectedCategories,
     onClickCategoryOption,
     onResetCategoryOption,
     ...passOnProps
@@ -100,7 +101,7 @@ const WidgetEventSchedulePlain = ({
                 <CatCombo
                     categories={programCategory.categories}
                     selectedOrgUnitId={orgUnit?.id}
-                    selectedCategories={null}
+                    selectedCategories={selectedCategories}
                     onClickCategoryOption={onClickCategoryOption}
                     onResetCategoryOption={onResetCategoryOption}
                 />

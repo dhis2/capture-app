@@ -252,7 +252,6 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         dataEntryValuesUI[payload.fieldId] = { ...dataEntryValuesUI[payload.fieldId], ...payload.valueMeta, modified: true };
         return newState;
     },
-
     [newEventWidgetDataEntryActionTypes.UPDATE_CAT_COMBO]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
