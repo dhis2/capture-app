@@ -50,13 +50,26 @@ export const WidgetEventSchedule = ({
     const { programData } = useProgramFromIndexedDB(programId, ['categoryCombo']);
     const selectedCategories = useSelector(({ events: storedEvents }) =>
         storedEvents[eventId]?.attributeCategoryOptions);
+    const programCategory = !programData?.isDefault && programData?.categoryCombo;
     const [categoryOptions, setCategoryOptions] = useState();
+    const [categoryOptionsError, setCategoryOptionsError] = useState();
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
     }, [suggestedScheduleDate, scheduleDate]);
 
+    useEffect(() => {
+        if (programCategory && categoryOptions) {
+            setCategoryOptionsError(Object.keys(categoryOptions).length < programCategory?.categories?.length);
+        }
+    }, [programCategory, categoryOptions]);
+
     const onHandleSchedule = useCallback(() => {
+        if (programCategory && (!categoryOptions ||
+            Object.keys(categoryOptions).length !== programCategory?.categories?.length)) {
+            setCategoryOptionsError(true);
+            return;
+        }
         dispatch(requestScheduleEvent({
             scheduleDate,
             comments,
@@ -85,6 +98,7 @@ export const WidgetEventSchedule = ({
         onSave,
         onSaveSuccessActionType,
         onSaveErrorActionType,
+        programCategory,
     ]);
 
     React.useEffect(() => {
@@ -143,7 +157,7 @@ export const WidgetEventSchedule = ({
             stageId={stageId}
             stageName={stage.name}
             programId={programId}
-            programCategory={programData?.categoryCombo}
+            programCategory={programCategory}
             programName={program.name}
             scheduleDate={scheduleDate}
             dueDateLabel={programStageScheduleConfig.dueDateLabel}
@@ -156,6 +170,7 @@ export const WidgetEventSchedule = ({
             orgUnit={orgUnit}
             comments={comments}
             selectedCategories={selectedCategories}
+            categoryOptionsError={categoryOptionsError}
             onClickCategoryOption={onClickCategoryOption}
             onResetCategoryOption={onResetCategoryOption}
             {...passOnProps}

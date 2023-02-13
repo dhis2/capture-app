@@ -69,6 +69,7 @@ const WidgetEventSchedulePlain = ({
     selectedCategories,
     onClickCategoryOption,
     onResetCategoryOption,
+    categoryOptionsError,
     ...passOnProps
 }: Props) => (
     <div className={classes.wrapper}>
@@ -95,6 +96,8 @@ const WidgetEventSchedulePlain = ({
         {programCategory && <DataSection
             dataTest="category-options-section"
             sectionName={programCategory.displayName}
+            error={categoryOptionsError}
+            errorMessage={i18n.t('Please add category before saving the event')}
         >
             <div className={classes.containerWrapper}>
                 <CategoryOptions

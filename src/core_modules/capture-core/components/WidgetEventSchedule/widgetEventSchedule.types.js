@@ -36,6 +36,7 @@ export type Props = {|
    hideDueDate?: boolean,
    selectedCategories?: ?Object,
    programCategory?: Object,
+   categoryOptionsError?: boolean,
    onSchedule: () => void,
    onCancel: () => void,
    setScheduleDate: (date: string) => void,
