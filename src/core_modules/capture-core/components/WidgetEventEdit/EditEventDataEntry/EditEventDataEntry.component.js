@@ -210,6 +210,7 @@ const buildCategoryOptionsSettingsFn = () => {
             ),
         );
     const categoryOptionsSettings = {
+        isApplicable: (props: Object) => !!props.programCategory?.categories && !props.programCategory?.isDefault,
         getComponent: () => categoryOptionsComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
@@ -352,7 +353,7 @@ const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
-const CategoryOptionsFields = withDataEntryField(buildCategoryOptionsSettingsFn())(ReportDateField);
+const CategoryOptionsFields = withDataEntryFieldIfApplicable(buildCategoryOptionsSettingsFn())(ReportDateField);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CategoryOptionsFields));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);

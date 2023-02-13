@@ -140,6 +140,7 @@ const buildCategoryOptionsSettingsFn = () => {
         withFilterProps(defaultFilterProps)(CategoryOptionsViewMode),
     );
     const categoryOptionsSettings = {
+        isApplicable: (props: Object) => !!props.programCategory?.categories && !props.programCategory?.isDefault,
         getComponent: () => categoryOptionsViewModeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             categories: props?.programCategory?.categories,
@@ -236,7 +237,7 @@ const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
-const CategoryOptionsField = withDataEntryField(buildCategoryOptionsSettingsFn())(ReportDateField);
+const CategoryOptionsField = withDataEntryFieldIfApplicable(buildCategoryOptionsSettingsFn())(ReportDateField);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CategoryOptionsField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 

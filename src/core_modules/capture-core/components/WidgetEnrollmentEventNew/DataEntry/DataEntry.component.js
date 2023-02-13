@@ -171,7 +171,7 @@ const buildCategoryOptionsSettingsFn = () => {
             ),
         );
     const catComboSettings = {
-        isApplicable: (props: Object) => !!props?.programCategory?.categories,
+        isApplicable: (props: Object) => !!props.programCategory?.categories && !props.programCategory?.isDefault,
         getComponent: () => categoryOptionsComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
