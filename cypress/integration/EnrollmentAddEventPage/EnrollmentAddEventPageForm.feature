@@ -15,7 +15,6 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 2
-    And the user selects Improve access to clean water
     And you type 13 in the input number 1
     And the user selects Positive
     And you click the Save without completing button
