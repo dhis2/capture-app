@@ -7,6 +7,7 @@ export type WidgetProps = {|
     teiId: string,
     enrollmentId: string,
     orgUnitId: string,
+    programCategory?: Object,
     rulesExecutionDependencies: RulesExecutionDependencies,
     onSave?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,

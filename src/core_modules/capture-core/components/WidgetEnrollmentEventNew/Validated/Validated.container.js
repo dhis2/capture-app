@@ -10,7 +10,6 @@ import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
-import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
@@ -45,7 +44,6 @@ export const Validated = ({
         rulesExecutionDependenciesClientFormatted,
     });
 
-    const { programData, isLoading } = useProgramFromIndexedDB(program.id, ['categoryCombo']);
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, program.id);
 
@@ -117,10 +115,9 @@ export const Validated = ({
         <AskToCreateNewHandlerHOC
             {...passOnProps}
             stage={stage}
-            programCategory={programData?.categoryCombo}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
             availableProgramStages={availableProgramStages}
-            ready={ready && !isLoading}
+            ready={ready}
             id={dataEntryId}
             itemId={itemId}
             formFoundation={formFoundation}

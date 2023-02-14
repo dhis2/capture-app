@@ -3,6 +3,7 @@ import React, { type ComponentType, useState, useRef, useMemo } from 'react';
 import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
+import { useProgramFromIndexedDB } from 'capture-core/utils/cachedDataHooks/useProgramFromIndexedDB';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { tabMode } from './newEventWorkspace.constants';
 import { getProgramAndStageForProgram } from '../../../../metaData';
@@ -40,6 +41,8 @@ const NewEventWorkspacePlain = ({
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
+    const { programData } = useProgramFromIndexedDB(programId, ['categoryCombo']);
+    const programCategory = !programData?.categoryCombo?.isDefault && programData?.categoryCombo;
 
     const onHandleSwitchTab = (newMode) => {
         if (dataEntryHasChanges) {
@@ -85,6 +88,7 @@ const NewEventWorkspacePlain = ({
                         orgUnitId={orgUnitId}
                         teiId={teiId}
                         enrollmentId={enrollmentId}
+                        programCategory={programCategory}
                         onSaveSuccessActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS}
                         onSaveErrorActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR}
                         onSave={onSave}
@@ -105,6 +109,7 @@ const NewEventWorkspacePlain = ({
                         onSave={onSave}
                         onCancel={onCancel}
                         hideDueDate={stage?.hideDueDate}
+                        programCategory={programCategory}
                     />}
                 </div>
             </Widget>

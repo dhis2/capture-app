@@ -17,7 +17,6 @@ import {
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
-import { useProgramFromIndexedDB } from '../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -30,6 +29,7 @@ export const WidgetEventSchedule = ({
     onSaveErrorActionType,
     onCancel,
     initialScheduleDate,
+    programCategory,
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
@@ -47,10 +47,8 @@ export const WidgetEventSchedule = ({
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events
         .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
-    const { programData } = useProgramFromIndexedDB(programId, ['categoryCombo']);
     const selectedCategories = useSelector(({ events: storedEvents }) =>
         storedEvents[eventId]?.attributeCategoryOptions);
-    const programCategory = !programData?.isDefault && programData?.categoryCombo;
     const [categoryOptions, setCategoryOptions] = useState();
     const [categoryOptionsError, setCategoryOptionsError] = useState();
 
