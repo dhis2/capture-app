@@ -9,6 +9,7 @@ export type ContainerProps = {|
     teiId: string,
     enrollmentId: string,
     orgUnitId: string,
+    programCategory?: Object,
     rulesExecutionDependencies: RulesExecutionDependencies,
     onSaveExternal?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,

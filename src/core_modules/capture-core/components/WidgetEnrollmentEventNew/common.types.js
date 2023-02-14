@@ -57,6 +57,7 @@ export type CommonValidatedProps = {|
     enrollmentId: string,
     rulesExecutionDependencies: RulesExecutionDependencies,
     onSaveExternal?: ExternalSaveHandler,
+    programCategory?: Object,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
     widgetReducerName: string,
