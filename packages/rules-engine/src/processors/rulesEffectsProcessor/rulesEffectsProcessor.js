@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils/errorCreator';
+import { errorCreator } from '../../errorCreator';
 import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes } from '../../constants';
 
 import type {
