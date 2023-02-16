@@ -14,7 +14,7 @@ const buildContentListToDisplay = (rulesEffectsNotice, previousFormsValues, form
             const text =
                 rulesEffectsNotice[key].content ||
                 `${rulesEffectsNotice[key].name} ${i18n.t('was blanked out and hidden by your last action')}`;
-            return [...acc, text];
+            return [...acc, { key, text }];
         }
         return acc;
     }, []);
@@ -57,7 +57,7 @@ export const NoticeBox = ({ formId }: { formId: string }) => {
             <ModalContent>
                 <ul>
                     {contentList.map(content => (
-                        <li>{content}</li>
+                        <li key={content.key}>{content.text}</li>
                     ))}
                 </ul>
                 <ModalActions>

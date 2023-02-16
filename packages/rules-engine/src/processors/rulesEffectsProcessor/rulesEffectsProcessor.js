@@ -30,20 +30,27 @@ const sanitiseFalsy = (value) => {
     return '';
 };
 
-const getFormName = ({ dataElementId, dataElements, trackedEntityAttributes, trackedEntityAttributeId }) => {
-    if (dataElementId) {
-        return dataElements && dataElements[dataElementId] && dataElements[dataElementId].name;
+const getFormName = ({
+    dataElementId,
+    dataElements,
+    trackedEntityAttributes,
+    trackedEntityAttributeId,
+}: {
+    dataElementId: ?string,
+    trackedEntityAttributeId: ?string,
+    dataElements: ?DataElements,
+    trackedEntityAttributes: ?TrackedEntityAttributes,
+}): string => {
+    if (dataElementId && dataElements && dataElements[dataElementId]) {
+        return dataElements[dataElementId].name;
     }
 
-    if (trackedEntityAttributeId) {
+    if (trackedEntityAttributeId && trackedEntityAttributes && trackedEntityAttributes[trackedEntityAttributeId]) {
         return (
-            trackedEntityAttributes &&
-            trackedEntityAttributes[trackedEntityAttributeId] &&
             trackedEntityAttributes[trackedEntityAttributeId].displayFormName &&
             trackedEntityAttributes[trackedEntityAttributeId].displayName
         );
     }
-
     return '';
 };
 
