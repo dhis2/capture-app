@@ -1,12 +1,12 @@
 // @flow
 import { useMemo } from 'react';
-import { useProgramFromIndexedDB } from './useProgramFromIndexedDB';
-import { buildSearchOption } from '../../hooks/useSearchOptions';
-import { useTrackedEntityTypeFromIndexedDB } from './useTrackedEntityTypeFromIndexedDB';
-import { useUserLocale } from '../localeData/useUserLocale';
-import type { AvailableSearchOption, SearchGroups } from '../../components/Pages/Search/SearchPage.types';
-import { useIndexedDBQuery } from '../reactQueryHelpers';
-import { buildSearchGroup } from '../cachedData';
+import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
+import { buildSearchOption } from '../../../../hooks/useSearchOptions';
+import { useTrackedEntityTypeFromIndexedDB } from '../../../../utils/cachedDataHooks/useTrackedEntityTypeFromIndexedDB';
+import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
+import type { AvailableSearchOption, SearchGroups } from '../SearchPage.types';
+import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
+import { buildSearchGroup } from './index';
 
 const searchScopes = {
     PROGRAM: 'PROGRAM',
@@ -19,7 +19,7 @@ type Props = {|
 |};
 
 
-export const useSearchOptionForSearchPage = ({ programId, trackedEntityTypeId }: Props) => {
+export const useSearchOption = ({ programId, trackedEntityTypeId }: Props) => {
     const { locale } = useUserLocale();
 
     const searchScope = useMemo(() => {

@@ -30,6 +30,7 @@ import { searchScopes } from './SearchPage.constants';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
 import { cleanFallbackRelatedData } from './SearchPage.actions';
 import { TemplateSelector } from './TemplateSelector';
+import { useSearchOption } from './hooks';
 
 const getStyles = (theme: Theme) => ({
     half: {
@@ -89,7 +90,6 @@ const Index = ({
     navigateToMainPage,
     cleanSearchRelatedInfo,
     classes,
-    availableSearchOption,
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
@@ -101,6 +101,9 @@ const Index = ({
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
     const titleText = useScopeTitleText(selectedSearchScopeId);
     const fallbackTriggered = useFallbackTriggered();
+    const {
+        searchOption: availableSearchOption,
+    } = useSearchOption({ programId: preselectedProgramId, trackedEntityTypeId });
 
     useEffect(() => {
         const scopeId = preselectedProgramId || trackedEntityTypeId;

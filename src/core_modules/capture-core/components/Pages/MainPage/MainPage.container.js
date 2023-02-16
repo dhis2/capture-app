@@ -17,7 +17,6 @@ import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
-import { useSearchOptionForSearchPage } from '../../../utils/cachedDataHooks/useSearchOptionForSearchPage';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
@@ -128,9 +127,6 @@ const MainPageContainer = () => {
     // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
-    const {
-        searchOption,
-    } = useSearchOptionForSearchPage({ programId, trackedEntityTypeId });
     const MainPageStatus = useMainPageStatus({ programId, selectedProgram, categories, orgUnitId, showAllAccessible });
 
     const {
@@ -185,7 +181,6 @@ const MainPageContainer = () => {
                         showInitialSearchPage={dispatchShowInitialSearchPage}
                         cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
                         navigateToRegisterUser={dispatchNavigateToNewUserPage}
-                        availableSearchOption={searchOption}
                         preselectedProgramId={programId}
                         trackedEntityTypeId={trackedEntityTypeId}
                         searchStatus={searchStatus}

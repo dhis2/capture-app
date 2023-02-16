@@ -17,7 +17,6 @@ import {
 } from '../../../hooks';
 import { TopBar } from './TopBar.container';
 import { ResultsPageSizeContext } from '../shared-contexts';
-import { useSearchOptionForSearchPage } from '../../../utils/cachedDataHooks/useSearchOptionForSearchPage';
 
 const usePreselectedProgram = (currentSelectionsId): ?string => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
@@ -54,9 +53,6 @@ export const SearchPage: ComponentType<{||}> = () => {
 
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
     const preselectedProgramId = usePreselectedProgram(programId);
-    const {
-        searchOption,
-    } = useSearchOptionForSearchPage({ trackedEntityTypeId, programId: preselectedProgramId });
 
     const searchStatus: string =
       useSelector(({ searchPage }) => searchPage.searchStatus);
@@ -91,8 +87,6 @@ export const SearchPage: ComponentType<{||}> = () => {
                 navigateToRegisterUser={dispatchNavigateToNewUserPage}
                 preselectedProgramId={preselectedProgramId}
                 trackedEntityTypeId={trackedEntityTypeId}
-                // $FlowFixMe - searchOption is not null when ready is true
-                availableSearchOption={searchOption}
                 searchStatus={searchStatus}
                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                 searchableFields={searchableFields}
