@@ -1,7 +1,9 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
+import moment from 'moment';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router-dom';
 import { NoticeBox } from '@dhis2/ui';
@@ -27,6 +29,7 @@ export const EnrollmentAddEventPageDefault = ({
 
     const history = useHistory();
     const dispatch = useDispatch();
+    const { fromClientDate } = useTimeZoneConversion();
 
     const handleCancel = useCallback(() => {
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
@@ -34,10 +37,18 @@ export const EnrollmentAddEventPageDefault = ({
 
     const handleSave = useCallback(
         (data, uid) => {
-            dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
+            const nowClient = fromClientDate(new Date());
+            const nowServer = new Date(nowClient.getServerZonedISOString());
+            const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
+            dispatch(
+                updateEnrollmentEventsWithoutId(uid, {
+                    ...data.events[0],
+                    updatedAt,
+                }),
+            );
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [dispatch, history, programId, orgUnitId, teiId, enrollmentId],
+        [dispatch, history, programId, orgUnitId, teiId, enrollmentId, fromClientDate],
     );
     const handleAddNew = useCallback(() => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);

@@ -1,6 +1,6 @@
 // @flow
-import { effectActions } from 'capture-core-utils/rulesEngine';
-import type { AssignOutputEffect } from 'capture-core-utils/rulesEngine';
+import { effectActions } from '@dhis2/rules-engine-javascript';
+import type { AssignOutputEffect } from '@dhis2/rules-engine-javascript';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
@@ -209,6 +209,40 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+        const { formId, rulesEffects } = action.payload;
+        const formBuilderIds = Object.keys(state).filter(key => key.startsWith(formId) && Object.keys(state[key]).length > 0);
+        const assignEffects: { [id: string]: Array<AssignOutputEffect> } =
+            rulesEffects && rulesEffects[effectActions.ASSIGN_VALUE];
+
+        if (!assignEffects || !formBuilderIds?.length) {
+            return state;
+        }
+
+        return {
+            ...state,
+            ...formBuilderIds.reduce((formAcc, formBuilderId) => {
+                formAcc[formBuilderId] = {
+                    ...state[formBuilderId],
+                    ...Object.keys(assignEffects).reduce((acc, id) => {
+                        if (state[formBuilderId][id]) {
+                            acc[id] = {
+                                valid: true,
+                                errorData: undefined,
+                                errorMessage: undefined,
+                                errorType: undefined,
+                                modified: true,
+                                touched: true,
+                                validatingMessage: null,
+                            };
+                        }
+                        return acc;
+                    }, {}),
+                };
+                return formAcc;
+            }, {}),
+        };
+    },
 }, 'formsSectionsFieldsUI');
 
 export const formsDesc = createReducerDescription({

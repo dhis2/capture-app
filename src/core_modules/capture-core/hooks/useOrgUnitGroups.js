@@ -1,7 +1,7 @@
 // @flow
 import { useState, useEffect, useRef } from 'react';
 import { getAssociatedOrgUnitGroups } from 'capture-core/MetaDataStoreUtils/getAssociatedOrgUnitGroups';
-import type { OrgUnitGroup } from 'capture-core-utils/rulesEngine';
+import type { OrgUnitGroup } from '@dhis2/rules-engine-javascript';
 
 type Request = {
     orgUnitId: ?string,

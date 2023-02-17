@@ -3,6 +3,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../Buttons';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
+import { defaultDialogProps } from '../Dialogs/ConfirmDialog.constants';
 
 type Props = {
     dataEntryHasChanges: boolean,
@@ -40,10 +41,7 @@ export class CancelButtonComponent extends React.Component<Props, State> {
                     { i18n.t('Cancel') }
                 </Button>
                 <ConfirmDialog
-                    header={i18n.t('Unsaved changes')}
-                    text={i18n.t('Leaving this page will discard the changes you made to this event.')}
-                    confirmText={i18n.t('Yes, discard')}
-                    cancelText={i18n.t('No, stay here')}
+                    {...defaultDialogProps}
                     onConfirm={this.props.onCancel}
                     open={this.state.dialogOpen}
                     onCancel={this.handleCancelDiscard}
