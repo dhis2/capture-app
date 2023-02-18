@@ -7,7 +7,7 @@ import { actions as ReferalActionTypes, mainOptionTranslatedTexts, referralStatu
 import { DataSection } from '../../DataSection';
 import { ReferToOrgUnit } from '../ReferToOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import type { Props } from './referralActions.types';
+import type { Props } from './ReferralActions.types';
 
 const styles = () => ({
     wrapper: {
