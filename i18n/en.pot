@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-02-08T11:55:44.282Z\n"
-"PO-Revision-Date: 2023-02-08T11:55:44.282Z\n"
+"POT-Creation-Date: 2023-02-18T19:30:27.827Z\n"
+"PO-Revision-Date: 2023-02-18T19:30:27.827Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1240,14 +1240,11 @@ msgstr "{{TETName}} profile"
 msgid "Edit"
 msgstr "Edit"
 
-msgid "Refer to organisation unit"
-msgstr "Refer to organisation unit"
-
 msgid "Referral actions"
 msgstr "Referral actions"
 
-msgid "Ambigous referrals, contact system administrator"
-msgstr "Ambigous referrals, contact system administrator"
+msgid "Ambiguous referrals, contact system administrator"
+msgstr "Ambiguous referrals, contact system administrator"
 
 msgid "Schedule in {{displayName}}"
 msgstr "Schedule in {{displayName}}"
@@ -1260,6 +1257,9 @@ msgstr "Enter {{displayName}} details now"
 
 msgid "Don't link to a {{displayName}}"
 msgstr "Don't link to a {{displayName}}"
+
+msgid "Scheduled date"
+msgstr "Scheduled date"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"

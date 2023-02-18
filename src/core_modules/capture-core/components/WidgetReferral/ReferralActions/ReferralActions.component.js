@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Radio, colors, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -7,15 +7,7 @@ import { actions as ReferalActionTypes, mainOptionTranslatedTexts, referralStatu
 import { DataSection } from '../../DataSection';
 import { ReferToOrgUnit } from '../ReferToOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import type { ReferralDataValueStates } from '../../WidgetEnrollmentEventNew/Validated/validated.types';
-
-type Props = {|
-    type: string,
-    selectedType: Object,
-    referralDataValues: ReferralDataValueStates,
-    setReferralDataValues: (() => Object) => void,
-    ...CssClasses
-|}
+import type { Props } from './referralActions.types';
 
 const styles = () => ({
     wrapper: {
@@ -44,10 +36,11 @@ export const ReferralActionsPlain = ({
     classes,
     type,
     selectedType,
+    constraint,
     ...passOnProps
 }: Props) => {
-    const [selectedAction, setSelectedAction] = React.useState();
-    const { programStage } = useProgramStageInfo(selectedType.toConstraint.programStage.id);
+    const [selectedAction, setSelectedAction] = useState();
+    const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
     if (!programStage) {
         return null;
@@ -70,7 +63,7 @@ export const ReferralActionsPlain = ({
                     />
                 )) : null}
                 {type === referralStatus.AMBIGUOUS_REFERRALS ?
-                    <div>{i18n.t('Ambigous referrals, contact system administrator')}</div>
+                    <div>{i18n.t('Ambiguous referrals, contact system administrator')}</div>
                     : null
                 }
             </div>

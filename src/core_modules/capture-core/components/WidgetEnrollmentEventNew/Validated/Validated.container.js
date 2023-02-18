@@ -1,17 +1,15 @@
 // @flow
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { withAskToCreateNew, withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';
 import { requestSaveEvent, startCreateNewAfterCompleting } from './validated.actions';
-import type { ContainerProps, ReferralDataValueStates } from './validated.types';
+import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
-import { actions as ReferralModes } from '../../WidgetReferral/constants';
-import { getConvertedReferralEvent } from './getConvertedReferralEvent';
 import { generateUID } from '../../../utils/uid/generateUID';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
@@ -32,12 +30,7 @@ export const Validated = ({
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
-    const [selectedReferralType, setSelectedReferralType] = useState(null);
-    const [referralDataValues, setReferralDataValues] = useState<ReferralDataValueStates>({
-        referralMode: ReferralModes.REFER_ORG,
-        scheduledAt: '',
-        orgUnit: undefined,
-    });
+    const referralRef = useRef();
 
     const rulesExecutionDependenciesClientFormatted =
         useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
@@ -74,18 +67,15 @@ export const Validated = ({
             onSaveExternal,
         };
 
-        if (saveType === addEventSaveTypes.COMPLETE && selectedReferralType) {
-            const { referralEvent, relationship, isValid } = getConvertedReferralEvent({
-                referralDataValues,
-                programId: program.id,
-                teiId,
-                enrollmentId,
-                currentProgramStageId: stage.id,
-                currentEventId: requestEvent.eventId,
-                referralType: selectedReferralType,
-            });
+        if (
+            referralRef.current &&
+            saveType === addEventSaveTypes.COMPLETE
+            && referralRef.current.eventHasReferralRelationship()
+        ) {
+            const isValid = referralRef.current.formIsValidOnSave();
 
             if (isValid) {
+                const { referralEvent, relationship } = referralRef.current.getReferralValues(requestEvent.eventId);
                 dispatch(requestSaveEvent({
                     requestEvent: {
                         completed: true,
@@ -116,9 +106,6 @@ export const Validated = ({
         dispatch,
         onSaveSuccessActionType,
         onSaveErrorActionType,
-        referralDataValues,
-        stage.id,
-        selectedReferralType,
     ]);
 
     const handleCreateNew = useCallback((isCreateNew?: boolean) => {
@@ -165,10 +152,8 @@ export const Validated = ({
             id={dataEntryId}
             itemId={itemId}
             formFoundation={formFoundation}
+            referralRef={referralRef}
             onSave={handleSave}
-            referralDataValues={referralDataValues}
-            setReferralDataValues={setReferralDataValues}
-            setSelectedReferralType={setSelectedReferralType}
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}
             programName={program.name}

@@ -2,12 +2,14 @@
 import React from 'react';
 import type { ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
-import classNames from 'classnames';
-import i18n from '@dhis2/d2-i18n';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { convertStringToDateFormat } from '../../../utils/converters/date';
-import { DateField, SingleOrgUnitSelectField } from '../../FormFields/New';
 import type { ReferralDataValueStates } from '../../WidgetEnrollmentEventNew/Validated/validated.types';
+import { DateFieldForReferral, OrgUnitSelectorForReferral } from '../FormComponents';
+import {
+    isScheduledDateValid,
+} from '../../WidgetEnrollmentEventNew/Validated/getConvertedReferralEvent/getConvertedReferralEvent';
+import { isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
 
 const styles = {
     wrapper: {
@@ -39,11 +41,26 @@ const styles = {
 type Props = {
     referralDataValues: ReferralDataValueStates,
     setReferralDataValues: (() => Object) => void,
+    errorMessages: Object,
+    scheduledLabel: string,
+    addErrorMessage: (Object) => void,
+    saveAttempted: boolean,
     ...CssClasses,
 }
 
-export const ReferToOrgUnitContainerPlain = ({ referralDataValues, setReferralDataValues, classes }: Props) => {
+export const ReferToOrgUnitContainerPlain = ({
+    referralDataValues,
+    setReferralDataValues,
+    saveAttempted,
+    errorMessages,
+    scheduledLabel,
+    addErrorMessage,
+    classes,
+}: Props) => {
     const onBlurDateField = (e) => {
+        if (isScheduledDateValid(e)) {
+            addErrorMessage({ scheduledAt: null });
+        }
         setReferralDataValues(prevValues => ({
             ...prevValues,
             scheduledAt: convertStringToDateFormat(e),
@@ -51,12 +68,18 @@ export const ReferToOrgUnitContainerPlain = ({ referralDataValues, setReferralDa
     };
 
     const onSelectOrgUnit = (e) => {
+        const orgUnit = {
+            id: e.id,
+            name: e.displayName,
+            path: e.path,
+        };
+
+        if (isValidOrgUnit(orgUnit)) {
+            addErrorMessage({ orgUnit: null });
+        }
         setReferralDataValues(prevValues => ({
             ...prevValues,
-            orgUnit: {
-                id: e.id,
-                name: e.displayName,
-            },
+            orgUnit,
         }));
     };
 
@@ -69,35 +92,24 @@ export const ReferToOrgUnitContainerPlain = ({ referralDataValues, setReferralDa
 
     return (
         <div className={classes.wrapper}>
-            <div className={classes.fieldWrapper}>
-                <div className={classes.fieldLabel}>
-                    {i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } })}
-                </div>
-                <div className={classes.fieldContent}>
-                    <DateField
-                        value={referralDataValues.scheduledAt ? convertStringToDateFormat(referralDataValues.scheduledAt) : ''}
-                        width="100%"
-                        calendarWidth={350}
-                        onSetFocus={() => {}}
-                        onFocus={() => { }}
-                        onRemoveFocus={() => { }}
-                        onBlur={onBlurDateField}
-                    />
-                </div>
+            <div>
+                <DateFieldForReferral
+                    scheduledLabel={scheduledLabel}
+                    errorMessages={errorMessages}
+                    saveAttempted={saveAttempted}
+                    onBlurDateField={onBlurDateField}
+                    referralDataValues={referralDataValues}
+                />
             </div>
 
-            <div className={classNames(classes.fieldWrapper, classes.alternateColor)}>
-                <div className={classes.fieldLabel}>
-                    {i18n.t('Refer to organisation unit', { interpolation: { escapeValue: false } })}
-                </div>
-
-                <div className={classes.fieldContent}>
-                    <SingleOrgUnitSelectField
-                        value={referralDataValues.orgUnit}
-                        onSelectClick={onSelectOrgUnit}
-                        onBlur={onDeselectOrgUnit}
-                    />
-                </div>
+            <div>
+                <OrgUnitSelectorForReferral
+                    referralDataValues={referralDataValues}
+                    onSelectOrgUnit={onSelectOrgUnit}
+                    onDeselectOrgUnit={onDeselectOrgUnit}
+                    errorMessages={errorMessages}
+                    saveAttempted={saveAttempted}
+                />
             </div>
         </div>
     );

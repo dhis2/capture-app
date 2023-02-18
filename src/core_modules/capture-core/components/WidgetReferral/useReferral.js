@@ -17,6 +17,10 @@ export const useReferral = (programStageId: string) => {
         select: allRelationshipTypes => allRelationshipTypes
             ?.filter(relationshipType => relationshipType.referral && relationshipType.access.data.write) ?? [],
     });
+    const selectedRelationshipType = currentReferralStatus === referralStatus.REFERRABLE ?
+        relationshipTypes?.[0] : undefined;
+    const constraint = selectedRelationshipType?.toConstraint?.programStage?.id === programStageId ?
+        selectedRelationshipType?.fromConstraint : selectedRelationshipType?.toConstraint;
 
     useEffect(() => {
         if (relationshipTypes) {
@@ -40,7 +44,7 @@ export const useReferral = (programStageId: string) => {
 
     return {
         currentReferralStatus,
-        selectedRelationshipType: currentReferralStatus === referralStatus.REFERRABLE ?
-            relationshipTypes?.[0] : undefined,
+        selectedRelationshipType,
+        constraint,
     };
 };
