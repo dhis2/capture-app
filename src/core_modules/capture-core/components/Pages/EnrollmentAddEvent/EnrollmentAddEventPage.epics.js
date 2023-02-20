@@ -6,8 +6,8 @@ import {
     addEnrollmentEventPageDefaultActionTypes,
 } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import {
-    commitEnrollmentEventWithoutId,
-    rollbackEnrollmentEventWithoutId,
+    commitEnrollmentEvents,
+    rollbackEnrollmentEvents,
     saveFailed,
 } from '../common/EnrollmentOverviewDomain/enrollment.actions';
 
@@ -19,7 +19,7 @@ export const saveNewEventSucceededEpic = (action$: InputObservable) =>
         ),
         map((action) => {
             const events = action.payload.bundleReport.typeReportMap.EVENT.objectReports;
-            return commitEnrollmentEventWithoutId({ events });
+            return commitEnrollmentEvents({ events });
         }),
     );
 
@@ -31,6 +31,6 @@ export const saveNewEventFailedEpic = (action$: InputObservable) =>
         ),
         map((action) => {
             const { serverData } = action.meta;
-            return batchActions([saveFailed(), rollbackEnrollmentEventWithoutId({ events: serverData.events })]);
+            return batchActions([saveFailed(), rollbackEnrollmentEvents({ events: serverData.events })]);
         }),
     );

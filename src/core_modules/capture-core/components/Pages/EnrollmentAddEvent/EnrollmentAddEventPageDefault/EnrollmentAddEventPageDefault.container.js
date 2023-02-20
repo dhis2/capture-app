@@ -16,7 +16,7 @@ import { useWidgetDataFromStore } from '../hooks';
 import {
     useHideWidgetByRuleLocations,
 } from '../../Enrollment/EnrollmentPageDefault/hooks';
-import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
+import { addEnrollmentEvents, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 
@@ -46,7 +46,7 @@ export const EnrollmentAddEventPageDefault = ({
                 updatedAt,
             }));
 
-            dispatch(updateEnrollmentEventsWithoutId({ events: eventsWithUpdatedDate }));
+            dispatch(addEnrollmentEvents({ events: eventsWithUpdatedDate }));
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
         [dispatch, history, programId, orgUnitId, teiId, enrollmentId, fromClientDate],

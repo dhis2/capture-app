@@ -8,13 +8,13 @@ import { actionTypes as editEventActionTypes } from '../../components/WidgetEven
 const initialReducerValue = {};
 const {
     COMMON_ENROLLMENT_SITE_DATA_SET,
-    UPDATE_ENROLLMENT_EVENTS,
-    UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID,
+    UPDATE_ENROLLMENT_EVENT,
+    ADD_ENROLLMENT_EVENTS,
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES,
     ROLLBACK_ENROLLMENT_EVENT,
-    ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID,
+    ROLLBACK_ENROLLMENT_EVENTS,
     COMMIT_ENROLLMENT_EVENT,
-    COMMIT_ENROLLMENT_EVENT_WITHOUT_ID,
+    COMMIT_ENROLLMENT_EVENTS,
 } = enrollmentSiteActionTypes;
 
 export const enrollmentDomainDesc = createReducerDescription(
@@ -25,7 +25,7 @@ export const enrollmentDomainDesc = createReducerDescription(
             attributeValues,
             enrollmentId: enrollment?.enrollment,
         }),
-        [UPDATE_ENROLLMENT_EVENTS]: (
+        [UPDATE_ENROLLMENT_EVENT]: (
             state,
             { payload: { eventId, eventData } },
         ) => {
@@ -63,7 +63,7 @@ export const enrollmentDomainDesc = createReducerDescription(
 
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
-        [UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID]: (
+        [ADD_ENROLLMENT_EVENTS]: (
             state,
             { payload: { events } },
         ) => {
@@ -72,13 +72,13 @@ export const enrollmentDomainDesc = createReducerDescription(
 
             return { ...state, enrollment: { ...state.enrollment, events: enrollmentEvents } };
         },
-        [ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID]: (state, { payload: { events } }) => {
+        [ROLLBACK_ENROLLMENT_EVENTS]: (state, { payload: { events } }) => {
             const comittedEventIds = events.map(event => event.event);
             const enrollmentEvents = state.enrollment.events.filter(event => !comittedEventIds.includes(event.event));
 
             return { ...state, enrollment: { ...state.enrollment, events: enrollmentEvents } };
         },
-        [COMMIT_ENROLLMENT_EVENT_WITHOUT_ID]: (state, { payload: { events } }) => {
+        [COMMIT_ENROLLMENT_EVENTS]: (state, { payload: { events } }) => {
             const comittedEventIds = events.map(event => event.uid);
             const enrollmentEvents = state.enrollment.events?.map((event) => {
                 if (comittedEventIds.includes(event.event)) {

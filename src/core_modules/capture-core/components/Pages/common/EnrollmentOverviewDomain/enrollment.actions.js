@@ -1,17 +1,16 @@
 // @flow
 import { actionCreator } from '../../../../actions/actions.utils';
 import type { EventReducerProps } from '../../../WidgetEnrollment/enrollment.types';
-// import type { EnrollmentData } from '../../Enrollment/EnrollmentPageDefault/types/common.types';
 
 export const enrollmentSiteActionTypes = {
     COMMON_ENROLLMENT_SITE_DATA_SET: 'EnrollmentSite.SetCommonData',
-    UPDATE_ENROLLMENT_EVENTS: 'Enrollment.UpdateEnrollmentEvents',
-    UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID: 'Enrollment.UpdateEnrollmentEventsWithoutId',
+    UPDATE_ENROLLMENT_EVENT: 'Enrollment.UpdateEnrollmentEvent',
+    ADD_ENROLLMENT_EVENTS: 'Enrollment.AddEnrollmentEvents',
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES: 'Enrollment.UpdateEnrollmentAttributeValues',
     ROLLBACK_ENROLLMENT_EVENT: 'Enrollment.RollbackEnrollmentEvent',
-    ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID: 'Enrollment.RollbackEnrollmentEventWithoutId',
+    ROLLBACK_ENROLLMENT_EVENTS: 'Enrollment.RollbackEnrollmentEvents',
     COMMIT_ENROLLMENT_EVENT: 'Enrollment.CommitEnrollmentEvent',
-    COMMIT_ENROLLMENT_EVENT_WITHOUT_ID: 'Enrollment.CommitEnrollmentEventWithoutId',
+    COMMIT_ENROLLMENT_EVENTS: 'Enrollment.CommitEnrollmentEvents',
     SAVE_FAILED: 'Enrollment.SaveFailed',
     ERROR_ENROLLMENT: 'Enrollment.ErrorEnrollment',
 };
@@ -19,8 +18,8 @@ export const enrollmentSiteActionTypes = {
 export const setCommonEnrollmentSiteData = (enrollment: ApiEnrollment, attributeValues: ApiAttributeValues) =>
     actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({ enrollment, attributeValues });
 
-export const updateEnrollmentEvents = (eventId: string, eventData: Object) =>
-    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENTS)({
+export const updateEnrollmentEvent = (eventId: string, eventData: Object) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENT)({
         eventId,
         eventData,
     });
@@ -35,14 +34,14 @@ export const commitEnrollmentEvent = (eventId: string) =>
         eventId,
     });
 
-export const updateEnrollmentEventsWithoutId = ({ events }: EventReducerProps) =>
-    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID)({ events });
+export const addEnrollmentEvents = ({ events }: EventReducerProps) =>
+    actionCreator(enrollmentSiteActionTypes.ADD_ENROLLMENT_EVENTS)({ events });
 
-export const rollbackEnrollmentEventWithoutId = ({ events }: EventReducerProps) =>
-    actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID)({ events });
+export const rollbackEnrollmentEvents = ({ events }: EventReducerProps) =>
+    actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENTS)({ events });
 
-export const commitEnrollmentEventWithoutId = ({ events }: EventReducerProps) =>
-    actionCreator(enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT_WITHOUT_ID)({ events });
+export const commitEnrollmentEvents = ({ events }: EventReducerProps) =>
+    actionCreator(enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENTS)({ events });
 
 export const saveFailed = () => actionCreator(enrollmentSiteActionTypes.SAVE_FAILED)();
 
