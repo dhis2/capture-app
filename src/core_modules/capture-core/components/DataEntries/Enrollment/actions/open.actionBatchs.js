@@ -67,11 +67,24 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
             );
 
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
-    const effects = getApplicableRuleEffectsForTrackerProgram({
-        program,
-        orgUnit,
-        attributeValues: clientValues,
-    });
+
+    let effects;
+    if (program.useFirstStageDuringRegistration) {
+        const firstStage = [...program.stages][0][1];
+
+        effects = getApplicableRuleEffectsForTrackerProgram({
+            program,
+            orgUnit,
+            stage: firstStage,
+            attributeValues: clientValues,
+        });
+    } else {
+        effects = getApplicableRuleEffectsForTrackerProgram({
+            program,
+            orgUnit,
+            attributeValues: clientValues,
+        });
+    }
 
     return batchActions([
         openDataEntryForNewEnrollment(

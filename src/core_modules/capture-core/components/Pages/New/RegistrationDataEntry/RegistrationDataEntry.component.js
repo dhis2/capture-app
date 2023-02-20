@@ -129,7 +129,7 @@ const RegistrationDataEntryPlain = ({
             </Button>
         );
     }, []);
-    console.log({ scopeType, titleText, firstStageForm });
+
     return (
         <>
             {
