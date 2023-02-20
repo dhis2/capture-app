@@ -5,13 +5,13 @@ import { isValidDate, isValidOrgUnit } from '../../../../../capture-core-utils/v
 import { generateUID } from '../../../../utils/uid/generateUID';
 import type { ConvertedReferralEventProps, ReferralIsValidProps } from './getConvertedReferralEvent.types';
 
-export const isScheduledDateValid = (scheduledDate: ?string) => {
+export const isScheduledDateValid = (scheduledDate: string) => {
     const dateFormat = systemSettingsStore.get().dateFormat;
     return isValidDate(scheduledDate, dateFormat);
 };
 
 export const referralWidgetIsValid = ({ scheduledAt, orgUnit, setErrorMessages }: ReferralIsValidProps): boolean => {
-    const scheduledAtIsValid = isScheduledDateValid(scheduledAt);
+    const scheduledAtIsValid = !!scheduledAt && isScheduledDateValid(scheduledAt);
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 
     if (!scheduledAtIsValid) {
