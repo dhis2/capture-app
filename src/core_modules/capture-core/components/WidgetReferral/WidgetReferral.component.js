@@ -11,6 +11,7 @@ import {
 } from '../WidgetEnrollmentEventNew/Validated/getConvertedReferralEvent';
 import { useLocationQuery } from '../../utils/routing';
 import { useScheduledLabel } from './hooks/useScheduledLabel';
+import type { ErrorMessagesForReferral } from './ReferralActions/ReferralActions.types';
 
 const WidgetReferralPlain = ({ programStageId, ...passOnProps }: Props, ref) => {
     const { programId, teiId, enrollmentId } = useLocationQuery();
@@ -24,8 +25,8 @@ const WidgetReferralPlain = ({ programStageId, ...passOnProps }: Props, ref) => 
         orgUnit: undefined,
     });
 
-    const addErrorMessage = (message) => {
-        setErrorMessages(prevMessages => ({
+    const addErrorMessage = (message: ErrorMessagesForReferral) => {
+        setErrorMessages((prevMessages: Object) => ({
             ...prevMessages,
             ...message,
         }));

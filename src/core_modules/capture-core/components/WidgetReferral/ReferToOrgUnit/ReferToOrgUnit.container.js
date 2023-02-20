@@ -10,6 +10,7 @@ import {
     isScheduledDateValid,
 } from '../../WidgetEnrollmentEventNew/Validated/getConvertedReferralEvent/getConvertedReferralEvent';
 import { isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
+import type { ErrorMessagesForReferral } from '../ReferralActions/ReferralActions.types';
 
 const styles = {
     wrapper: {
@@ -41,9 +42,9 @@ const styles = {
 type Props = {
     referralDataValues: ReferralDataValueStates,
     setReferralDataValues: (() => Object) => void,
-    errorMessages: Object,
+    errorMessages: ErrorMessagesForReferral,
     scheduledLabel: string,
-    addErrorMessage: (Object) => void,
+    addErrorMessage: (error: ErrorMessagesForReferral) => void,
     saveAttempted: boolean,
     ...CssClasses,
 }

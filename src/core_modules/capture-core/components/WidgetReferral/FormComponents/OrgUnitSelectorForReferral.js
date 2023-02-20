@@ -10,13 +10,14 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from '../../WidgetEnrollmentEventNew/DataEntry/dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
+import type { ErrorMessagesForReferral } from '../ReferralActions/ReferralActions.types';
 
 type Props = {
     referralDataValues: Object,
     onSelectOrgUnit: (orgUnit: Object) => void,
     onDeselectOrgUnit: () => void,
     saveAttempted: boolean,
-    errorMessages: Object,
+    errorMessages: ErrorMessagesForReferral,
 };
 
 const OrgUnitFieldForForm = withDefaultFieldContainer()(

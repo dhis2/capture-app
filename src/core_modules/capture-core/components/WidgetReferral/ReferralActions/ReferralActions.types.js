@@ -1,6 +1,20 @@
 // @flow
-
 import type { ReferralDataValueStates } from '../../WidgetEnrollmentEventNew/Validated/validated.types';
+
+type ReferralRelationshipType = {|
+    id: string,
+    fromConstraint: {
+        entity: string,
+        programStageId?: {
+            id: string,
+        }
+    },
+    toConstraint: {
+        programStage?: {
+            id: string,
+        },
+    },
+|}
 
 type Constraint = {
     programStage: {
@@ -9,15 +23,20 @@ type Constraint = {
     relationshipEntity: 'PROGRAM_STAGE_INSTANCE',
 }
 
+export type ErrorMessagesForReferral = {|
+    scheduledAt?: ?string,
+    orgUnit?: ?string,
+|}
+
 export type Props = {|
     type: string,
-    selectedType: Object,
+    selectedType: ReferralRelationshipType,
     referralDataValues: ReferralDataValueStates,
     scheduledLabel: string,
     saveAttempted: boolean,
-    errorMessages: Object,
+    errorMessages: ErrorMessagesForReferral,
     constraint: ?Constraint,
-    addErrorMessage: (Object) => void,
+    addErrorMessage: (ErrorMessagesForReferral) => void,
     setReferralDataValues: (() => Object) => void,
     ...CssClasses
 |}
