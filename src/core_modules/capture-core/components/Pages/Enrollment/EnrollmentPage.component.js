@@ -118,7 +118,9 @@ const EnrollmentPagePlain = ({
             >
                 {enrollmentPageStatus ===
                     enrollmentPageStatuses.MISSING_SELECTIONS && (
-                    <MissingMessage />
+                    <MissingMessage
+                        deselectProgramHandler={deselectProgramHandler}
+                    />
                 )}
 
                 {enrollmentPageStatus === enrollmentPageStatuses.DEFAULT && (

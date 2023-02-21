@@ -93,7 +93,10 @@ const getStyles = () => ({
     },
 });
 
-export const MissingMessage = withStyles(getStyles)(({ classes }) => {
+export const MissingMessage = withStyles(getStyles)(({
+    deselectProgramHandler,
+    classes,
+}) => {
     const dispatch = useDispatch();
     const { navigateToProgramRegistrationPage, navigateToEventWorkingList } = useNavigations();
     const { missingStatus } = useMissingStatus();
@@ -137,6 +140,7 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
                 teiId={teiId}
                 programId={programId}
                 onBreakingTheGlass={() => dispatch(fetchEnrollments())}
+                onCancel={deselectProgramHandler}
             />
         }
 

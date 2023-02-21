@@ -30,6 +30,7 @@ const reasonPlaceholder = i18n.t('Describe the reason you are checking for enrol
 
 const WidgetBreakingTheGlassPlain = ({
     onBreakingTheGlass,
+    onCancel,
     classes,
 }: PlainProps) => {
     const [reason, setReason] = useState('');
@@ -65,7 +66,7 @@ const WidgetBreakingTheGlassPlain = ({
                         <Button onClick={() => onBreakingTheGlass(reason)}>
                             {i18n.t('Check for enrollments')}
                         </Button>
-                        <Button secondary>
+                        <Button secondary onClick={onCancel}>
                             {i18n.t('Cancel')}
                         </Button>
                     </ButtonStrip>

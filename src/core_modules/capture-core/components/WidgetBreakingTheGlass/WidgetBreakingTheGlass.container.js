@@ -19,6 +19,7 @@ export const WidgetBreakingTheGlass = ({
     teiId,
     programId,
     onBreakingTheGlass,
+    onCancel,
 }: Props) => {
     const [postGlassBreakRequest] = useDataMutation(glassBreakRequest);
 
@@ -34,6 +35,7 @@ export const WidgetBreakingTheGlass = ({
     return (
         <WidgetBreakingTheGlassComponent
             onBreakingTheGlass={performGlassBreak}
+            onCancel={onCancel}
         />
     );
 };
