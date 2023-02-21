@@ -30,13 +30,29 @@ export const runRulesOnUpdateFieldBatch = (
     extraActions: Array<ReduxAction<any, any>> = [],
     uid: string,
 ) => {
-    const effects = getApplicableRuleEffectsForTrackerProgram({
-        program,
-        orgUnit,
-        enrollmentData,
-        attributeValues,
-    });
+    let effects;
+    if (program.useFirstStageDuringRegistration) {
+        const firstStage = [...program.stages][0][1];
 
+        // $FlowFixMe
+        const currentEvent = { ...attributeValues, ...enrollmentData, programStageId: firstStage.id };
+
+        effects = getApplicableRuleEffectsForTrackerProgram({
+            program,
+            orgUnit,
+            stage: firstStage,
+            currentEvent,
+            enrollmentData,
+            attributeValues,
+        });
+    } else {
+        effects = getApplicableRuleEffectsForTrackerProgram({
+            program,
+            orgUnit,
+            enrollmentData,
+            attributeValues,
+        });
+    }
     return batchActions([
         updateRulesEffects(effects, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),

@@ -152,8 +152,25 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
             const { dataStore, userDataStore } = store.value.useNewDashboard;
             const { occurredAt, enrolledAt, geometry } =
                 dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
-            const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
+            const { trackedEntityType, stages, useFirstStageDuringRegistration } = getTrackerProgramThrowIfNotFound(programId);
+
             const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
+            const stageValues = {};
+            if (useFirstStageDuringRegistration) {
+                const firstStage = [...stages][0][1];
+                const stageDataElementIds = [...firstStage.stageForm.sections].reduce((acc, section) => {
+                    const ids = [...section[1].elements].map(e => e[0]);
+                    acc = [...acc, ...ids];
+                    return acc;
+                }, []);
+                Object.keys(values).forEach((dataElementId) => {
+                    if (stageDataElementIds.includes(dataElementId)) {
+                        stageValues[dataElementId] = values[dataElementId];
+                        delete values[dataElementId];
+                    }
+                });
+            }
+
             const stageWithOpenAfterEnrollment = getStageWithOpenAfterEnrollment(stages);
             const redirectToEnrollmentEventNew =
             shouldUseNewDashboard(userDataStore, dataStore, programId) && stageWithOpenAfterEnrollment !== undefined;
