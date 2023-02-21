@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-01-03T18:15:16.995Z\n"
-"PO-Revision-Date: 2023-01-03T18:15:16.995Z\n"
+"POT-Creation-Date: 2023-02-21T13:49:10.488Z\n"
+"PO-Revision-Date: 2023-02-21T13:49:10.488Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -137,8 +137,14 @@ msgstr "Area"
 msgid "Coordinate"
 msgstr "Coordinate"
 
+msgid "Complete event"
+msgstr "Complete event"
+
 msgid "Enrollment"
 msgstr "Enrollment"
+
+msgid "Status"
+msgstr "Status"
 
 msgid "A future date is not allowed"
 msgstr "A future date is not allowed"
@@ -161,14 +167,8 @@ msgstr "Assigned user"
 msgid "Search for user"
 msgstr "Search for user"
 
-msgid "Complete event"
-msgstr "Complete event"
-
 msgid "Basic info"
 msgstr "Basic info"
-
-msgid "Status"
-msgstr "Status"
 
 msgid "Comments"
 msgstr "Comments"

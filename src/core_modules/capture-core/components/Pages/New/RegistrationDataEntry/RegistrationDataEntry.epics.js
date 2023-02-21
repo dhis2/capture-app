@@ -63,6 +63,7 @@ const deriveEvents = ({
     redirectToStageId,
     useFirstStageDuringRegistration,
     stageValues,
+    complete,
 }) => {
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate (enrolledAt)
@@ -76,7 +77,7 @@ const deriveEvents = ({
         return [
             {
                 dataValues,
-                status: 'ACTIVE',
+                status: complete ? 'COMPLETED' : 'ACTIVE',
                 occurredAt: convertFn(enrolledAt, dataElementTypes.DATE),
                 scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE),
                 programStage: firstStage.id,
@@ -167,13 +168,14 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
+            const formId = 'newPageDataEntryId-newEnrollment';
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
             const { dataStore, userDataStore } = store.value.useNewDashboard;
-            const { occurredAt, enrolledAt, geometry } =
-                dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
+            const { occurredAt, enrolledAt, geometry, complete } =
+                dataEntriesFieldsValue[formId] || {};
             const { trackedEntityType, stages, useFirstStageDuringRegistration } = getTrackerProgramThrowIfNotFound(programId);
 
-            const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
+            const values = formsValues[formId] || {};
             const stageValues = {};
             if (useFirstStageDuringRegistration) {
                 const firstStage = [...stages][0][1];
@@ -203,6 +205,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 redirectToStageId: stageWithOpenAfterEnrollment?.id,
                 useFirstStageDuringRegistration,
                 stageValues,
+                complete: complete === 'true',
             });
             const { formFoundation, teiId: trackedEntity } = action.payload;
             const formServerValues = formFoundation?.convertValues(values, convertFn);

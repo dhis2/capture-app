@@ -25,6 +25,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
+    TrueOnlyField,
 } from '../../FormFields/New';
 
 import labelTypeClasses from './fieldLabels.module.css';
@@ -248,6 +249,48 @@ const getGeometrySettings = () => ({
     }),
 });
 
+
+const getCompleteFieldSettingsFn = () => {
+    const completeComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(TrueOnlyField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const completeSettings = {
+        isApplicable: (props: Object) => props.firstStageForm && props.firstStageForm.stageForm,
+        getComponent: () => completeComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            label: i18n.t('Complete event'),
+            id: 'complete',
+        }),
+        getPropName: () => 'complete',
+        getValidatorContainers: () => [
+        ],
+        getMeta: () => ({
+            placement: placements.BOTTOM,
+            section: sectionKeysForEnrollmentDataEntry.STATUS,
+        }),
+        getPassOnFieldData: () => true,
+    };
+
+    return completeSettings;
+};
+
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
     firstStageForm?: Object,
@@ -263,6 +306,10 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
             placement: placements.TOP,
             name: i18n.t('Enrollment'),
+        },
+        [sectionKeysForEnrollmentDataEntry.STATUS]: {
+            placement: placements.BOTTOM,
+            name: i18n.t('Status'),
         },
     };
 
@@ -282,7 +329,8 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(FinalEnrollmentDataEntry);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
-const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
+const CompletableDataEntryHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(IncidentDateFieldHOC);
+const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(CompletableDataEntryHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 
 type PreEnrollmentDataEntryProps = {
