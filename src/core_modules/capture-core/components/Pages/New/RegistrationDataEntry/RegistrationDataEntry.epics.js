@@ -61,10 +61,30 @@ const deriveEvents = ({
     orgUnitId,
     redirectToEnrollmentEventNew,
     redirectToStageId,
+    useFirstStageDuringRegistration,
+    stageValues,
 }) => {
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate (enrolledAt)
     const sanitizedOccurredAt = occurredAt || enrolledAt;
+    if (useFirstStageDuringRegistration) {
+        const firstStage = [...stages.values()][0];
+        const dataValues = Object.keys(stageValues).reduce((acc, dataElement) => {
+            acc.push({ dataElement, value: stageValues[dataElement] });
+            return acc;
+        }, []);
+        return [
+            {
+                dataValues,
+                status: 'ACTIVE',
+                occurredAt: convertFn(enrolledAt, dataElementTypes.DATE),
+                scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE),
+                programStage: firstStage.id,
+                program: programId,
+                orgUnit: orgUnitId,
+            },
+        ];
+    }
     return [...stages.values()]
         .filter(({ id }) => (redirectToEnrollmentEventNew && id !== redirectToStageId) || !redirectToEnrollmentEventNew)
         .filter(({ autoGenerateEvent }) => autoGenerateEvent)
@@ -133,7 +153,6 @@ export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputO
             const {
                 currentSelections: { orgUnitId },
             } = store.value;
-
             return of(navigateToEnrollmentOverview({
                 teiId: typeReportMap.TRACKED_ENTITY.objectReports[0].uid,
                 orgUnitId,
@@ -182,6 +201,8 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 orgUnitId,
                 redirectToEnrollmentEventNew,
                 redirectToStageId: stageWithOpenAfterEnrollment?.id,
+                useFirstStageDuringRegistration,
+                stageValues,
             });
             const { formFoundation, teiId: trackedEntity } = action.payload;
             const formServerValues = formFoundation?.convertValues(values, convertFn);
