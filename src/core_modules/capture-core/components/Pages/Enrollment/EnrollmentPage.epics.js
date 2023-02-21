@@ -18,6 +18,7 @@ import {
 import { enrollmentAccessLevels } from './EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { serverErrorMessages } from '../../../constants';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
@@ -131,13 +132,13 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
                     }),
                     catchError((error) => {
                         if (error.message) {
-                            if (error.message === 'OWNERSHIP_ACCESS_PARTIALLY_DENIED') {
+                            if (error.message === serverErrorMessages.OWNERSHIP_ACCESS_PARTIALLY_DENIED) {
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS }));
-                            } else if (error.message === 'OWNERSHIP_ACCESS_DENIED') {
+                            } else if (error.message === serverErrorMessages.OWNERSHIP_ACCESS_DENIED) {
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS })); // Todo: Change to NO_ACCESS
-                            } else if (error.message === 'PROGRAM_ACCESS_CLOSED') {
+                            } else if (error.message === serverErrorMessages.PROGRAM_ACCESS_CLOSED) {
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
-                            } else if (error.message.startsWith('[User has no read access to organisation unit:')) {
+                            } else if (error.message.startsWith(serverErrorMessages.ORGUNIT_OUT_OF_SCOPE)) {
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
                             }
                         }
