@@ -24,8 +24,9 @@ const styles = ({ typography }) => ({
     },
 });
 
-const reasonHeader = i18n.t('Reason to check for enrollment');
-const reasonPlaceholder = i18n.t('Describe the reason you are checking for enrollment in this protected program');
+const noticeBoxTitle = i18n.t('This program is protected');
+const reasonHeader = i18n.t('Reason to check for enrollments');
+const reasonPlaceholder = i18n.t('Describe the reason you are checking for enrollments in this protected program');
 
 const WidgetBreakingTheGlassPlain = ({
     onBreakingTheGlass,
@@ -45,11 +46,11 @@ const WidgetBreakingTheGlassPlain = ({
             >
                 <div className={classes.wrapper}>
                     <div className={classes.title}>
-                        {i18n.t('Check for enrollment')}
+                        {i18n.t('Check for enrollments')}
                     </div>
                     <br />
-                    <NoticeBox title="This program is protected" warning>
-                        {i18n.t('You must provide a reason to check for enrollment in this protected program. All activity will be logged.')}
+                    <NoticeBox title={noticeBoxTitle} warning>
+                        {i18n.t('You must provide a reason to check for enrollments in this protected program. All activity will be logged.')}
                     </NoticeBox>
                     <br />
                     <TextAreaField
@@ -62,7 +63,7 @@ const WidgetBreakingTheGlassPlain = ({
                     <br />
                     <ButtonStrip>
                         <Button onClick={() => onBreakingTheGlass(reason)}>
-                            {i18n.t('Check for enrollment')}
+                            {i18n.t('Check for enrollments')}
                         </Button>
                         <Button secondary>
                             {i18n.t('Cancel')}
