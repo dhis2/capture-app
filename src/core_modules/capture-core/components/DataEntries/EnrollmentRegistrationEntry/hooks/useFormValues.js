@@ -114,23 +114,18 @@ const buildFormValues = async ({
     formValuesReadyRef: { current: boolean },
     searchTerms?: ?Array<{[key: string]: any}>,
     querySingleResource: QuerySingleResource,
-    removeUniqueValue: boolean
 }) => {
-    const clientAttributesWithoutUniqueValue = removeUniqueValue ?
-        clientAttributesWithSubvalues?.filter(value => !value.unique)
-        : clientAttributesWithSubvalues;
     const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
-    const formValues = clientAttributesWithSubvalues
-        ?.reduce(
-            (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
-            {},
-        );
+    const formValues = clientAttributesWithSubvalues?.reduce(
+        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
+        {},
+    );
     const searchClientValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: item.value }), {});
     const searchFormValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }), {});
 
     const uniqueValues = await getUniqueValuesForAttributesWithoutValue(
         foundation,
-        clientAttributesWithoutUniqueValue,
+        clientAttributesWithSubvalues,
         staticPatternValues,
         querySingleResource,
     );
@@ -170,7 +165,6 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
                 formValuesReadyRef,
                 searchTerms,
                 querySingleResource,
-                removeUniqueValue: !!teiId,
             });
         }
     }, [
@@ -181,7 +175,6 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
         areAttributesWithSubvaluesReady,
         searchTerms,
         dataEngine,
-        teiId,
     ]);
 
 
