@@ -104,7 +104,6 @@ const buildFormValues = async ({
     formValuesReadyRef,
     searchTerms,
     querySingleResource,
-    removeUniqueValue,
 }: {
     foundation: ?RenderFoundation,
     clientAttributesWithSubvalues: Array<any>,
