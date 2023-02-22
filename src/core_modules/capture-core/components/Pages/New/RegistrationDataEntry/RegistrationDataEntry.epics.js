@@ -68,13 +68,14 @@ const deriveEvents = ({
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate (enrolledAt)
     const sanitizedOccurredAt = occurredAt || enrolledAt;
+    const events = [];
     if (useFirstStageDuringRegistration) {
         const firstStage = [...stages.values()][0];
         const dataValues = Object.keys(stageValues).reduce((acc, dataElement) => {
             acc.push({ dataElement, value: stageValues[dataElement] });
             return acc;
         }, []);
-        return [
+        events.push(
             {
                 dataValues,
                 status: complete ? 'COMPLETED' : 'ACTIVE',
@@ -84,9 +85,9 @@ const deriveEvents = ({
                 program: programId,
                 orgUnit: orgUnitId,
             },
-        ];
+        );
     }
-    return [...stages.values()]
+    const otherEvents = [...stages.values()]
         .filter(({ id }) => (redirectToEnrollmentEventNew && id !== redirectToStageId) || !redirectToEnrollmentEventNew)
         .filter(({ autoGenerateEvent }) => autoGenerateEvent)
         .map(({
@@ -124,6 +125,7 @@ const deriveEvents = ({
                 orgUnit: orgUnitId,
             };
         });
+    return [...events, ...otherEvents];
 };
 
 export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
