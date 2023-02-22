@@ -44,7 +44,12 @@ export type MainColumnConfig = {
     mainProperty: true,
 };
 
-export type TeiWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfig;
+export type AdditionalColumnConfig = {
+    ...ColumnConfigBase,
+    additionalColumn: true,
+};
+
+export type TeiWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfig | AdditionalColumnConfig;
 
 export type TeiWorkingListsColumnConfigs = Array<TeiWorkingListsColumnConfig>;
 
