@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { convertStringToDateFormat } from '../../../utils/converters/date';
 import {
     DateField,
@@ -10,8 +10,8 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from '../../WidgetEnrollmentEventNew/DataEntry/dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
-import type { ErrorMessagesForReferral } from '../ReferralActions/ReferralActions.types';
-import type { ReferralDataValueStates } from '../../WidgetEnrollmentEventNew/Validated/validated.types';
+import type { ErrorMessagesForReferral } from '../ReferralActions';
+import type { ReferralDataValueStates } from '../WidgetReferral.types';
 
 type Props = {|
     scheduledLabel: string,
@@ -40,17 +40,27 @@ export const DateFieldForReferral = ({
     onBlurDateField,
     saveAttempted,
     errorMessages,
-}: Props) => (
-    <DateFieldForForm
-        label={scheduledLabel}
-        value={referralDataValues.scheduledAt ? convertStringToDateFormat(referralDataValues.scheduledAt) : ''}
-        required
-        onSetFocus={() => {}}
-        onFocus={() => {}}
-        onRemoveFocus={() => {}}
-        styles={baseInputStyles}
-        calendarWidth={350}
-        onBlur={onBlurDateField}
-        errorMessage={saveAttempted && errorMessages?.scheduledAt}
-    />
-);
+}: Props) => {
+    const [touched, setTouched] = useState(false);
+
+    const onBlur = (event) => {
+        setTouched(true);
+        onBlurDateField(event);
+    };
+
+    const shouldShowError = (touched || saveAttempted);
+    return (
+        <DateFieldForForm
+            label={scheduledLabel}
+            value={referralDataValues.scheduledAt ? convertStringToDateFormat(referralDataValues.scheduledAt) : ''}
+            required
+            onSetFocus={() => {}}
+            onFocus={() => {}}
+            onRemoveFocus={() => {}}
+            styles={baseInputStyles}
+            calendarWidth={350}
+            onBlur={onBlur}
+            errorMessage={shouldShowError && errorMessages?.scheduledAt}
+        />
+    );
+};

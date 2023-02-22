@@ -11,6 +11,7 @@ import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
 import { generateUID } from '../../../utils/uid/generateUID';
+import { getConvertedReferralEvent } from './getConvertedReferralEvent';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
@@ -54,7 +55,7 @@ export const Validated = ({
         formFoundationArgument: RenderFoundation,
         saveType: ?$Values<typeof addEventSaveTypes>,
     ) => {
-        const requestEvent = {
+        const clientRequestEvent = {
             dataEntryItemId,
             eventId: generateUID(),
             dataEntryId: dataEntryIdArgument,
@@ -68,18 +69,30 @@ export const Validated = ({
         };
 
         if (
-            referralRef.current &&
-            saveType === addEventSaveTypes.COMPLETE
+            referralRef.current
+            && saveType === addEventSaveTypes.COMPLETE
             && referralRef.current.eventHasReferralRelationship()
         ) {
             const isValid = referralRef.current.formIsValidOnSave();
 
             if (isValid) {
-                const { referralEvent, relationship } = referralRef.current.getReferralValues(requestEvent.eventId);
+                const { referralValues, referralType } = referralRef.current
+                    .getReferralValues(clientRequestEvent.eventId);
+
+                const { referralEvent, relationship } = getConvertedReferralEvent({
+                    referralDataValues: referralValues,
+                    currentEventId: clientRequestEvent.eventId,
+                    referralType,
+                    programId: program.id,
+                    currentProgramStageId: stage.id,
+                    teiId,
+                    enrollmentId,
+                });
+
                 dispatch(requestSaveEvent({
                     requestEvent: {
                         completed: true,
-                        ...requestEvent,
+                        ...clientRequestEvent,
                     },
                     referralEvent,
                     relationship,
@@ -93,12 +106,12 @@ export const Validated = ({
         window.scrollTo(0, 0);
         const completed = saveType === addEventSaveTypes.COMPLETE;
         dispatch(requestSaveEvent({
-            requestEvent: { completed, ...requestEvent },
+            requestEvent: { completed, ...clientRequestEvent },
             onSaveSuccessActionType,
             onSaveErrorActionType,
         }));
     }, [
-        program.id,
+        program,
         orgUnit,
         teiId,
         enrollmentId,
@@ -106,6 +119,7 @@ export const Validated = ({
         dispatch,
         onSaveSuccessActionType,
         onSaveErrorActionType,
+        stage.id,
     ]);
 
     const handleCreateNew = useCallback((isCreateNew?: boolean) => {
@@ -156,6 +170,7 @@ export const Validated = ({
             onSave={handleSave}
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}
+            programId={program.id}
             programName={program.name}
             orgUnit={orgUnit}
             rulesExecutionDependenciesClientFormatted={rulesExecutionDependenciesClientFormatted}

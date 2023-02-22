@@ -4,13 +4,9 @@ import type { ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { convertStringToDateFormat } from '../../../utils/converters/date';
-import type { ReferralDataValueStates } from '../../WidgetEnrollmentEventNew/Validated/validated.types';
 import { DateFieldForReferral, OrgUnitSelectorForReferral } from '../FormComponents';
-import {
-    isScheduledDateValid,
-} from '../../WidgetEnrollmentEventNew/Validated/getConvertedReferralEvent/getConvertedReferralEvent';
-import { isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
-import type { ErrorMessagesForReferral } from '../ReferralActions/ReferralActions.types';
+import type { ErrorMessagesForReferral } from '../ReferralActions';
+import type { ReferralDataValueStates } from '../WidgetReferral.types';
 
 const styles = {
     wrapper: {
@@ -44,7 +40,6 @@ type Props = {
     setReferralDataValues: (() => Object) => void,
     errorMessages: ErrorMessagesForReferral,
     scheduledLabel: string,
-    addErrorMessage: (error: ErrorMessagesForReferral) => void,
     saveAttempted: boolean,
     ...CssClasses,
 }
@@ -55,13 +50,9 @@ export const ReferToOrgUnitContainerPlain = ({
     saveAttempted,
     errorMessages,
     scheduledLabel,
-    addErrorMessage,
     classes,
 }: Props) => {
     const onBlurDateField = (e) => {
-        if (isScheduledDateValid(e)) {
-            addErrorMessage({ scheduledAt: null });
-        }
         setReferralDataValues(prevValues => ({
             ...prevValues,
             scheduledAt: convertStringToDateFormat(e),
@@ -75,9 +66,6 @@ export const ReferToOrgUnitContainerPlain = ({
             path: e.path,
         };
 
-        if (isValidOrgUnit(orgUnit)) {
-            addErrorMessage({ orgUnit: null });
-        }
         setReferralDataValues(prevValues => ({
             ...prevValues,
             orgUnit,

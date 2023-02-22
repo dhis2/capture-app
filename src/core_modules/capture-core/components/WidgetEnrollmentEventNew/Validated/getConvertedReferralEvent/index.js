@@ -1,2 +1,2 @@
 // @flow
-export { getConvertedReferralEvent, referralWidgetIsValid } from './getConvertedReferralEvent';
+export { getConvertedReferralEvent } from './getConvertedReferralEvent';

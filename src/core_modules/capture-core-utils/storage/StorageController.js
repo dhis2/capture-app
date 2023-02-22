@@ -194,7 +194,7 @@ export class StorageController {
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async get(store, key) {
+    async get(store, key, options) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'get');
 
@@ -206,7 +206,7 @@ export class StorageController {
             );
         }
 
-        return this.adapter.get(store, key);
+        return this.adapter.get(store, key, options);
     }
 
     // using async ensures that the the return value is wrapped in a promise

@@ -1,16 +1,5 @@
 // @flow
-import type { ReferralDataValueStates } from '../validated.types';
-import type { ErrorMessagesForReferral } from '../../../WidgetReferral/ReferralActions/ReferralActions.types';
-
-export type ReferralIsValidProps = {|
-    scheduledAt: ?string,
-    orgUnit: ?{
-        id: string,
-        name: string,
-        path: string,
-    },
-    setErrorMessages: (message: ErrorMessagesForReferral) => void,
-|}
+import type { ReferralDataValueStates } from '../../../WidgetReferral';
 
 type ReferralType = {|
     id: string,

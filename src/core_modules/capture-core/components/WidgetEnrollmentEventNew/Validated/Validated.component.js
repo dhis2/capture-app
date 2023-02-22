@@ -6,7 +6,7 @@ import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
 import { SavingText } from '../SavingText';
-import { WidgetReferral } from '../../WidgetReferral/';
+import { WidgetReferral } from '../../WidgetReferral';
 import type { Props } from './validated.types';
 
 const styles = () => ({
@@ -19,6 +19,7 @@ const ValidatedPlain = ({
     ready,
     stage,
     programName,
+    programId,
     formFoundation,
     classes,
     referralRef,
@@ -46,6 +47,7 @@ const ValidatedPlain = ({
                 />
                 <WidgetReferral
                     ref={referralRef}
+                    programId={programId}
                     programStageId={stage?.id}
                 />
                 <FinishButtons

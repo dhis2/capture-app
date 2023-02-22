@@ -1,5 +1,5 @@
 // @flow
-import type { ReferralDataValueStates } from '../../WidgetEnrollmentEventNew/Validated/validated.types';
+import type { ReferralDataValueStates } from '../WidgetReferral.types';
 
 type ReferralRelationshipType = {|
     id: string,

@@ -1,33 +1,6 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { systemSettingsStore } from '../../../../metaDataMemoryStores';
-import { isValidDate, isValidOrgUnit } from '../../../../../capture-core-utils/validators/form';
 import { generateUID } from '../../../../utils/uid/generateUID';
-import type { ConvertedReferralEventProps, ReferralIsValidProps } from './getConvertedReferralEvent.types';
-
-export const isScheduledDateValid = (scheduledDate: string) => {
-    const dateFormat = systemSettingsStore.get().dateFormat;
-    return isValidDate(scheduledDate, dateFormat);
-};
-
-export const referralWidgetIsValid = ({ scheduledAt, orgUnit, setErrorMessages }: ReferralIsValidProps): boolean => {
-    const scheduledAtIsValid = !!scheduledAt && isScheduledDateValid(scheduledAt);
-    const orgUnitIsValid = isValidOrgUnit(orgUnit);
-
-    if (!scheduledAtIsValid) {
-        setErrorMessages({
-            scheduledAt: i18n.t('Please provide a valid date'),
-        });
-    }
-
-    if (!orgUnitIsValid) {
-        setErrorMessages({
-            orgUnit: i18n.t('Please provide a valid organisation unit'),
-        });
-    }
-
-    return scheduledAtIsValid && orgUnitIsValid;
-};
+import type { ConvertedReferralEventProps } from './getConvertedReferralEvent.types';
 
 export const getConvertedReferralEvent = ({
     referralDataValues,

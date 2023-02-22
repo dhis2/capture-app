@@ -1,24 +1,18 @@
 // @flow
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import { useReferral } from './useReferral';
-import type { Props } from './widgetReferral.types';
+import type { Props, ReferralDataValueStates } from './WidgetReferral.types';
 import { ReferralActions } from './ReferralActions';
-import type { ReferralDataValueStates } from '../WidgetEnrollmentEventNew/Validated/validated.types';
 import { actions as ReferralModes, referralStatus } from './constants';
-import {
-    getConvertedReferralEvent,
-    referralWidgetIsValid,
-} from '../WidgetEnrollmentEventNew/Validated/getConvertedReferralEvent';
-import { useLocationQuery } from '../../utils/routing';
 import { useScheduledLabel } from './hooks/useScheduledLabel';
-import type { ErrorMessagesForReferral } from './ReferralActions/ReferralActions.types';
+import type { ErrorMessagesForReferral } from './ReferralActions';
+import { referralWidgetIsValid } from './referralEventIsValid/referralEventIsValid';
 
-const WidgetReferralPlain = ({ programStageId, ...passOnProps }: Props, ref) => {
-    const { programId, teiId, enrollmentId } = useLocationQuery();
+const WidgetReferralPlain = ({ programId, programStageId, ...passOnProps }: Props, ref) => {
     const { currentReferralStatus, selectedRelationshipType, constraint } = useReferral(programStageId);
     const [saveAttempted, setSaveAttempted] = useState(false);
     const [errorMessages, setErrorMessages] = useState({});
-    const { scheduledLabel } = useScheduledLabel(constraint?.programStage?.id);
+    const { scheduledLabel } = useScheduledLabel(programId, constraint?.programStage?.id);
     const [referralDataValues, setReferralDataValues] = useState<ReferralDataValueStates>({
         referralMode: ReferralModes.REFER_ORG,
         scheduledAt: '',
@@ -39,32 +33,19 @@ const WidgetReferralPlain = ({ programStageId, ...passOnProps }: Props, ref) => 
         return formIsValid();
     };
 
-    const formIsValid = () => {
+    const formIsValid = useCallback(() => {
         const { scheduledAt, orgUnit } = referralDataValues;
         return referralWidgetIsValid({
             scheduledAt,
             orgUnit,
             setErrorMessages: addErrorMessage,
         });
-    };
+    }, [referralDataValues]);
 
-    const getReferralValues = (eventId: string) => {
-        const { referralEvent, relationship } = getConvertedReferralEvent({
-            referralDataValues,
-            currentProgramStageId: programStageId,
-            currentEventId: eventId,
-            programId,
-            teiId,
-            enrollmentId,
-            // $FlowFixMe - selectedRelationshipType is not null
-            referralType: selectedRelationshipType,
-        });
-
-        return {
-            referralEvent,
-            relationship,
-        };
-    };
+    const getReferralValues = () => ({
+        referralValues: referralDataValues,
+        referralType: selectedRelationshipType,
+    });
 
     // useImperativeHandler for exposing functions to ref
     useImperativeHandle(ref, () => ({
@@ -72,6 +53,12 @@ const WidgetReferralPlain = ({ programStageId, ...passOnProps }: Props, ref) => 
         formIsValidOnSave,
         getReferralValues,
     }));
+
+    useEffect(() => {
+        if (referralDataValues) {
+            formIsValid();
+        }
+    }, [formIsValid, referralDataValues]);
 
     if (!currentReferralStatus || !selectedRelationshipType) {
         return null;

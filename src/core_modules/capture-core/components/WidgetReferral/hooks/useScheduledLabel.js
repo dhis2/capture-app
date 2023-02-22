@@ -1,33 +1,26 @@
 // @flow
-import { useQuery } from 'react-query';
-import { useMemo } from 'react';
-import { useDataEngine } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
+import { getUserStorageController } from '../../../storageControllers';
+import { userStores } from '../../../storageControllers/stores';
+import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 
-export const useScheduledLabel = (programStageId?: string) => {
-    const dataEngine = useDataEngine();
-    const scheduledLabelQuery = useMemo(() => ({
-        scheduledLabelQuery: {
-            resource: 'programStages',
-            id: programStageId,
-            params: {
-                fields: 'dueDateLabel',
-            },
-        },
-    }), [programStageId]);
+export const useScheduledLabel = (programId: string, programStageId?: string) => {
+    const storageController = getUserStorageController();
 
-    const { data, error, isLoading } = useQuery(
+    const { data, error, isLoading } = useIndexedDBQuery(
         ['ScheduledAtLabel', programStageId],
-        () => dataEngine.query(scheduledLabelQuery),
+        () =>
+            storageController.get(userStores.PROGRAMS, programId, {
+                project: ({ programStages }) => programStages
+                    ?.find(stage => stage.id === programStageId)?.dueDateLabel,
+            }),
         {
             enabled: !!programStageId,
-            staleTime: Infinity,
-            cacheTime: Infinity,
         },
     );
 
     return {
-        scheduledLabel: data?.scheduledLabelQuery?.dueDateLabel ?? i18n.t('Scheduled date'),
+        scheduledLabel: data ?? i18n.t('Scheduled date'),
         isLoading,
         error,
     };

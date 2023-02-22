@@ -2,9 +2,9 @@
 import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import { typeof addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
-import { actions as ReferralModes } from '../../WidgetReferral/constants';
 import type {
-    CommonValidatedProps, ExternalSaveHandler,
+    CommonValidatedProps,
+    ExternalSaveHandler,
     RulesExecutionDependenciesClientFormatted,
 } from '../common.types';
 
@@ -24,16 +24,6 @@ export type RequestEvent = {
     onSaveErrorActionType?: string,
 }
 
-export type ReferralDataValueStates = {|
-    referralMode: typeof ReferralModes.REFER_ORG,
-    scheduledAt: string,
-    orgUnit: ?{
-        path: string,
-        id: string,
-        name: string,
-    },
-|}
-
 export type ContainerProps = {|
     ...CommonValidatedProps,
     orgUnit: OrgUnit,
@@ -41,6 +31,7 @@ export type ContainerProps = {|
 
 export type Props = {|
     programName: string,
+    programId: string,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
     orgUnit: OrgUnit,
