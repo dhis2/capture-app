@@ -20,6 +20,8 @@ export class ProgramStage {
     _openAfterEnrollment: boolean;
     _allowGenerateNextVisit: boolean;
     _generatedByEnrollmentDate: boolean;
+    _access: Object;
+    _repeatable: boolean;
     _hideDueDate: boolean;
     _reportDateToUse: string;
     _minDaysFromStart: number;
@@ -96,6 +98,22 @@ export class ProgramStage {
 
     set autoGenerateEvent(autoGenerate: boolean) {
         this._autoGenerateEvent = autoGenerate;
+    }
+
+    get repeatable(): boolean {
+        return this._repeatable;
+    }
+
+    set repeatable(repeatable: boolean) {
+        this._repeatable = repeatable;
+    }
+
+    get access(): Object {
+        return this._access;
+    }
+
+    set access(access: Object) {
+        this._access = access;
     }
 
     get allowGenerateNextVisit(): boolean {

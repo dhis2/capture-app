@@ -249,7 +249,6 @@ const getGeometrySettings = () => ({
     }),
 });
 
-
 const getCompleteFieldSettingsFn = () => {
     const completeComponent =
         withCalculateMessages(overrideMessagePropNames)(
@@ -279,8 +278,6 @@ const getCompleteFieldSettingsFn = () => {
             id: 'complete',
         }),
         getPropName: () => 'complete',
-        getValidatorContainers: () => [
-        ],
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: sectionKeysForEnrollmentDataEntry.STATUS,
@@ -291,6 +288,49 @@ const getCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
+const getReportDateSettingsFn = () => {
+    const reportDateComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(DateField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const reportDateSettings = {
+        isApplicable: (props: Object) => props.firstStageForm?.stageForm,
+        getComponent: () => reportDateComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : '100%',
+            label: props.firstStageForm?.stageForm?.getLabel('occurredAt'),
+            required: true,
+            calendarWidth: props.formHorizontal ? 250 : 350,
+            popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+        }),
+        getPropName: () => 'stage-occurredAt',
+        getValidatorContainers: () => [],
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: sectionKeysForEnrollmentDataEntry.STAGE_BASIC_INFO,
+        }),
+    };
+
+    return reportDateSettings;
+};
+
+
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
     firstStageForm?: Object,
@@ -298,40 +338,61 @@ type FinalTeiDataEntryProps = {
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
+    constructor(props) {
+        super(props);
+        this.firstStageDataEntrySectionDefinitions = {
+            [sectionKeysForEnrollmentDataEntry.STAGE_BASIC_INFO]: {
+                placement: placements.TOP,
+                name: i18n.t('Data Entry ({{ stageName }})', {
+                    stageName: props?.firstStageForm?.stageName,
+                }),
+            },
+            [sectionKeysForEnrollmentDataEntry.STATUS]: {
+                placement: placements.BOTTOM,
+                name: i18n.t('Status'),
+            },
+        };
+    }
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
+
+    firstStageDataEntrySectionDefinitions;
 
     static dataEntrySectionDefinitions = {
         [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
             placement: placements.TOP,
             name: i18n.t('Enrollment'),
         },
-        [sectionKeysForEnrollmentDataEntry.STATUS]: {
-            placement: placements.BOTTOM,
-            name: i18n.t('Status'),
-        },
     };
 
     render() {
         const { enrollmentMetadata, firstStageForm, programId, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <DataEntry
-                {...passOnProps}
-                dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
-                formFoundation={enrollmentMetadata.enrollmentForm}
-                stageForm={firstStageForm?.stageForm}
-            />
+            <>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                <DataEntry
+                    {...passOnProps}
+                    dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
+                    formFoundation={enrollmentMetadata.enrollmentForm}
+                    stageForm={firstStageForm?.stageForm}
+                />
+                {firstStageForm && <DataEntry
+                    {...passOnProps}
+                    dataEntrySections={this.firstStageDataEntrySectionDefinitions}
+                    formFoundation={firstStageForm.stageForm}
+                />}
+            </>
         );
     }
 }
 
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(FinalEnrollmentDataEntry);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
-const CompletableDataEntryHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(IncidentDateFieldHOC);
-const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(CompletableDataEntryHOC);
-const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
+const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
+const CompletableDataEntryHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(EnrollmentDateFieldHOC);
+const ReportDateDataEntryHOC = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(CompletableDataEntryHOC);
+const BrowserBackWarningHOC = withBrowserBackWarning()(ReportDateDataEntryHOC);
 
 type PreEnrollmentDataEntryProps = {
     programId: string,

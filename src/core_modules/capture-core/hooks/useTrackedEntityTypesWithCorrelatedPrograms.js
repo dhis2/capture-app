@@ -40,16 +40,20 @@ export const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityType
                   acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
                 const programMetadata = { programId, programName, searchGroups, enrollment };
                 if (useFirstStageDuringRegistration) {
-                    const firstStage = [...stages][0][1];
-                    firstStage.stageForm.getSection(Section.MAIN_SECTION_ID).name = i18n.t('Data Entry ({{ stageName }})', {
-                        stageName: firstStage.name,
-                    });
-                    // $FlowFixMe
-                    programMetadata.firstStageForm = {
-                        stageId: firstStage.id,
-                        stageName: firstStage.name,
-                        stageForm: firstStage.stageForm,
-                    };
+                    const accessibleStages = [...stages.values()].filter(({ access }) => access.write);
+                    if (accessibleStages.length) {
+                        const firstAccessibleStage = accessibleStages[0];
+                        firstAccessibleStage.stageForm.getSection(Section.MAIN_SECTION_ID).name
+                        = i18n.t('Data Entry ({{ stageName }})', {
+                                stageName: firstAccessibleStage.name,
+                            });
+                        // $FlowFixMe
+                        programMetadata.firstStageForm = {
+                            stageId: firstAccessibleStage.id,
+                            stageName: firstAccessibleStage.name,
+                            stageForm: firstAccessibleStage.stageForm,
+                        };
+                    }
                 }
                 return {
                     ...acc,

@@ -139,7 +139,6 @@ const getSaveHandler = (
             }
 
             const isCompleting = this.shouldComplete(saveType);
-
             const isValid =
                 formInstance.validateFormScrollToFirstFailedField({ isCompleting })
                 && this.validateGeneralErrorsFromRules(isCompleting);

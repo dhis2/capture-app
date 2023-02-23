@@ -124,10 +124,12 @@ export class ProgramStageFactory {
             _stage.autoGenerateEvent = !!cachedProgramStage.autoGenerateEvent;
             _stage.allowGenerateNextVisit = !!cachedProgramStage.allowGenerateNextVisit;
             _stage.hideDueDate = !!cachedProgramStage.hideDueDate;
+            _stage.repeatable = !!cachedProgramStage.repeatable;
             _stage.openAfterEnrollment = !!cachedProgramStage.openAfterEnrollment;
             _stage.generatedByEnrollmentDate = !!cachedProgramStage.generatedByEnrollmentDate;
             _stage.reportDateToUse = cachedProgramStage.reportDateToUse;
             _stage.minDaysFromStart = cachedProgramStage.minDaysFromStart;
+            _stage.access = cachedProgramStage.access;
             _stage.stageForm = new RenderFoundation((_form) => {
                 _form.id = cachedProgramStage.id;
                 _form.name = cachedProgramStage.displayName;

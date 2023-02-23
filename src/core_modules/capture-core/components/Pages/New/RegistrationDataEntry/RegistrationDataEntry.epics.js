@@ -69,8 +69,10 @@ const deriveEvents = ({
     // we want the incident to default to enrollmentDate (enrolledAt)
     const sanitizedOccurredAt = occurredAt || enrolledAt;
     const events = [];
-    if (useFirstStageDuringRegistration) {
-        const firstStage = [...stages.values()][0];
+    const accessibleStages = [...stages.values()].filter(({ access }) => access.write);
+    if (!accessibleStages.length) { return []; }
+    const firstAccessibleStage = accessibleStages[0];
+    if (useFirstStageDuringRegistration && accessibleStages.length) {
         const dataValues = Object.keys(stageValues).reduce((acc, dataElement) => {
             acc.push({ dataElement, value: stageValues[dataElement] });
             return acc;
@@ -81,7 +83,7 @@ const deriveEvents = ({
                 status: complete ? 'COMPLETED' : 'ACTIVE',
                 occurredAt: convertFn(enrolledAt, dataElementTypes.DATE),
                 scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE),
-                programStage: firstStage.id,
+                programStage: firstAccessibleStage.id,
                 program: programId,
                 orgUnit: orgUnitId,
             },
@@ -90,6 +92,7 @@ const deriveEvents = ({
     const otherEvents = [...stages.values()]
         .filter(({ id }) => (redirectToEnrollmentEventNew && id !== redirectToStageId) || !redirectToEnrollmentEventNew)
         .filter(({ autoGenerateEvent }) => autoGenerateEvent)
+        .filter(({ id }) => !useFirstStageDuringRegistration || firstAccessibleStage.id !== id)
         .map(({
             id: programStage,
             reportDateToUse: reportDateToUseInActiveStatus,

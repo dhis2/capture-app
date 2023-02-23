@@ -251,26 +251,15 @@ class DataEntryPlain extends React.Component<Props> {
         } = this.props;
 
         const d2Form = (
-            <>
-                {/* $FlowFixMe */}
-                <D2Form
-                    id={getDataEntryKey(id, itemId)}
-                    validationAttempted={completionAttempted || saveAttempted}
-                    onUpdateField={this.handleUpdateField}
-                    onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                    formFoundation={formFoundation}
-                    {...passOnProps}
-                />
-                {/* $FlowFixMe */}
-                {stageForm && <D2Form
-                    id={getDataEntryKey(id, itemId)}
-                    validationAttempted={completionAttempted || saveAttempted}
-                    onUpdateField={this.handleUpdateField}
-                    onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                    formFoundation={stageForm}
-                    {...passOnProps}
-                />}
-            </>
+            /* $FlowFixMe */
+            <D2Form
+                id={getDataEntryKey(id, itemId)}
+                validationAttempted={completionAttempted || saveAttempted}
+                onUpdateField={this.handleUpdateField}
+                onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                formFoundation={formFoundation}
+                {...passOnProps}
+            />
         );
         return this.props.formHorizontal ? d2Form : <div className={classes.d2FormContainer}>{d2Form}</div>;
     }

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-02-21T13:49:10.488Z\n"
-"PO-Revision-Date: 2023-02-21T13:49:10.488Z\n"
+"POT-Creation-Date: 2023-02-23T15:23:55.285Z\n"
+"PO-Revision-Date: 2023-02-23T15:23:55.285Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -140,11 +140,14 @@ msgstr "Coordinate"
 msgid "Complete event"
 msgstr "Complete event"
 
-msgid "Enrollment"
-msgstr "Enrollment"
+msgid "Data Entry ({{ stageName }})"
+msgstr "Data Entry ({{ stageName }})"
 
 msgid "Status"
 msgstr "Status"
+
+msgid "Enrollment"
+msgstr "Enrollment"
 
 msgid "A future date is not allowed"
 msgstr "A future date is not allowed"
@@ -1374,9 +1377,6 @@ msgstr "Visited"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"
-
-msgid "Data Entry ({{ stageName }})"
-msgstr "Data Entry ({{ stageName }})"
 
 msgid "Program not found"
 msgstr "Program not found"
