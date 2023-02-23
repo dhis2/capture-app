@@ -176,7 +176,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
             const formId = 'newPageDataEntryId-newEnrollment';
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
             const { dataStore, userDataStore } = store.value.useNewDashboard;
-            const { occurredAt, enrolledAt, geometry, complete } =
+            const { occurredAt, enrolledAt, geometry, stageComplete } =
                 dataEntriesFieldsValue[formId] || {};
             const { trackedEntityType, stages, useFirstStageDuringRegistration } = getTrackerProgramThrowIfNotFound(programId);
 
@@ -210,7 +210,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 redirectToStageId: stageWithOpenAfterEnrollment?.id,
                 useFirstStageDuringRegistration,
                 stageValues,
-                complete: complete === 'true',
+                complete: stageComplete === 'true',
             });
             const { formFoundation, teiId: trackedEntity } = action.payload;
             const formServerValues = formFoundation?.convertValues(values, convertFn);

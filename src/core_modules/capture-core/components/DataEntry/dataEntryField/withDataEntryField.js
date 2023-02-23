@@ -29,6 +29,7 @@ type Settings = {
     getComponent: (props: Object) => React.ComponentType<any>,
     getComponentProps?: ?(props: Object) => Object,
     getPropName: (props: Object) => string,
+    getSkipValidate?: ?(props: Object) => boolean,
     getValidatorContainers?: ?(props: Object) => Array<ValidatorContainer>,
     getMeta?: ?(props: Props) => Object,
     getIsHidden?: ?(props: Object) => boolean,
@@ -46,7 +47,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
         }
         // $FlowFixMe[speculation-ambiguous] automated comment
         handleRef = (instance: DataEntryField) => {
-            if (this.props.dataEntryFieldRef) {
+            if (this.props.dataEntryFieldRef && (!settings.getSkipValidate || !settings?.getSkipValidate())) {
                 const { getPropName } = settings;
                 const key = getPropName(this.props);
 

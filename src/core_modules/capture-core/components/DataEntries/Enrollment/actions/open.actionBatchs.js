@@ -6,7 +6,7 @@ import type { TrackerProgram } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewEnrollment } from './open.actions';
-import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer } from '../fieldValidators';
+import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer, getReportDateValidatorContainers } from '../fieldValidators';
 import { convertGeometryOut } from '../../converters';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import { addFormData } from '../../../D2Form/actions/form.actions';
@@ -57,14 +57,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     clientValues: { [key: string]: any },
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
-
-    const dataEntryActions =
-            loadNewDataEntry(
-                dataEntryId,
-                itemId,
-                [...dataEntryPropsToInclude, ...extraDataEntryProps],
-                { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
-            );
+    const programStageDataEntryProps = [];
 
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
 
@@ -78,6 +71,12 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
             stage: firstStage,
             attributeValues: clientValues,
         });
+        programStageDataEntryProps.push({
+            id: 'stageOccurredAt',
+            type: 'DATE',
+            // $FlowFixMe[incompatible-call] automated comment
+            validatorContainers: getReportDateValidatorContainers(),
+        });
     } else {
         effects = getApplicableRuleEffectsForTrackerProgram({
             program,
@@ -85,6 +84,15 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
             attributeValues: clientValues,
         });
     }
+
+    const dataEntryActions =
+            loadNewDataEntry(
+                dataEntryId,
+                itemId,
+                [...dataEntryPropsToInclude, ...extraDataEntryProps, ...programStageDataEntryProps],
+                { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
+            );
+
 
     return batchActions([
         openDataEntryForNewEnrollment(
