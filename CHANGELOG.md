@@ -1,3 +1,10 @@
+## [100.25.4](https://github.com/dhis2/capture-app/compare/v100.25.3...v100.25.4) (2023-02-23)
+
+
+### Bug Fixes
+
+* [DHIS2-14740] enrollment data missing in rules engine during page reload ([#3194](https://github.com/dhis2/capture-app/issues/3194)) ([b3a413b](https://github.com/dhis2/capture-app/commit/b3a413b7b72fec692aea0674bfa07943f817aefa))
+
 ## [100.25.3](https://github.com/dhis2/capture-app/compare/v100.25.2...v100.25.3) (2023-02-09)
 
 
