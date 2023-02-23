@@ -277,11 +277,12 @@ const getCompleteFieldSettingsFn = () => {
             label: i18n.t('Complete event'),
             id: 'complete',
         }),
-        getPropName: () => 'complete',
+        getPropName: () => 'stageComplete',
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: sectionKeysForEnrollmentDataEntry.STATUS,
         }),
+        getSkipValidate: () => true,
         getPassOnFieldData: () => true,
     };
 
@@ -319,7 +320,7 @@ const getReportDateSettingsFn = () => {
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
         }),
-        getPropName: () => 'stage-occurredAt',
+        getPropName: () => 'stageOccurredAt',
         getValidatorContainers: () => [],
         getMeta: () => ({
             placement: placements.TOP,
