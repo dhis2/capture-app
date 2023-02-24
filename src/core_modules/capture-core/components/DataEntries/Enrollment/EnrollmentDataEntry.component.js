@@ -249,6 +249,49 @@ const getGeometrySettings = () => ({
     }),
 });
 
+const getStageGeometrySettings = () => ({
+    isApplicable: (props: Object) => {
+        const featureType = props.firstStageForm?.stageForm?.featureType;
+        return ['Polygon', 'Point'].includes(featureType);
+    },
+    getComponent: (props: Object) => {
+        const featureType = props.firstStageForm?.stageForm?.featureType;
+        if (featureType === 'Polygon') {
+            return polygonComponent;
+        }
+
+        return pointComponent;
+    },
+    getComponentProps: (props: Object) => {
+        const featureType = props.firstStageForm?.stageForm?.featureType;
+        if (featureType === 'Polygon') {
+            return createComponentProps(props, {
+                width: props && props.formHorizontal ? 150 : 350,
+                label: i18n.t('Area'),
+                dialogLabel: i18n.t('Area'),
+                required: false,
+                orientation: getOrientation(props.formHorizontal),
+            });
+        }
+
+        return createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: i18n.t('Coordinate'),
+            dialogLabel: i18n.t('Coordinate'),
+            required: false,
+            orientation: getOrientation(props.formHorizontal),
+            shrinkDisabled: props.formHorizontal,
+        });
+    },
+    getPropName: () => 'stageGeometry',
+    getSkipValidate: () => true,
+    getValidatorContainers: () => [],
+    getMeta: () => ({
+        placement: placements.TOP,
+        section: sectionKeysForEnrollmentDataEntry.STAGE_BASIC_INFO,
+    }),
+});
+
 const getCompleteFieldSettingsFn = () => {
     const completeComponent =
         withCalculateMessages(overrideMessagePropNames)(
@@ -391,7 +434,8 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(FinalEnrollmentDataEntry);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
-const CompletableDataEntryHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(EnrollmentDateFieldHOC);
+const StageLocationHOC = withDataEntryFieldIfApplicable(getStageGeometrySettings())(EnrollmentDateFieldHOC);
+const CompletableDataEntryHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(StageLocationHOC);
 const ReportDateDataEntryHOC = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(CompletableDataEntryHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(ReportDateDataEntryHOC);
 

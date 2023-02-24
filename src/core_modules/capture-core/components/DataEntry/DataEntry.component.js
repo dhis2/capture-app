@@ -93,7 +93,6 @@ type Props = {
     itemId: string,
     ready: boolean,
     formFoundation: ?RenderFoundation,
-    stageForm?: ?RenderFoundation,
     completeButton?: ?React.Element<any>,
     mainButton?: ?React.Element<any>,
     cancelButton?: ?React.Element<any>,
@@ -245,19 +244,16 @@ class DataEntryPlain extends React.Component<Props> {
             onAddNote,
             onOpenAddRelationship,
             dataEntryFieldRef,
-            formFoundation,
-            stageForm,
             ...passOnProps
         } = this.props;
 
         const d2Form = (
-            /* $FlowFixMe */
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <D2Form
                 id={getDataEntryKey(id, itemId)}
                 validationAttempted={completionAttempted || saveAttempted}
                 onUpdateField={this.handleUpdateField}
                 onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                formFoundation={formFoundation}
                 {...passOnProps}
             />
         );
