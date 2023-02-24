@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
 import type { TrackerProgram, ProgramStage, RenderFoundation } from '../../../metaData';
 import type { RulesExecutionDependenciesClientFormatted } from '../common.types';
