@@ -1,6 +1,6 @@
 // @flow
 import { typeof StorageController } from 'capture-core-utils/storage';
-import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/rulesEngine';
+import type { ProgramRule, ProgramRuleVariable } from '@dhis2/rules-engine-javascript';
 import { ProgramFactory } from './factory';
 import type { TrackedEntityType, EventProgram, TrackerProgram } from '../../metaData';
 import { programCollection } from '../../metaDataMemoryStores';
