@@ -1,3 +1,10 @@
+## [100.25.6](https://github.com/dhis2/capture-app/compare/v100.25.5...v100.25.6) (2023-02-24)
+
+
+### Bug Fixes
+
+* [TECH-1485] Retrieve search groups on demand ([#3159](https://github.com/dhis2/capture-app/issues/3159)) ([80ea7c5](https://github.com/dhis2/capture-app/commit/80ea7c573bbf38b539380070f14dcb5e9c181d59))
+
 ## [100.25.5](https://github.com/dhis2/capture-app/compare/v100.25.4...v100.25.5) (2023-02-24)
 
 
