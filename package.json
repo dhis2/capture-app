@@ -37,7 +37,7 @@
         "loglevel": "^1.8.1",
         "moment": "^2.29.4",
         "prop-types": "^15.8.1",
-        "query-string": "^7.1.1",
+        "query-string": "^8.1.0",
         "react": "^16.14.0",
         "react-addons-update": "^15.6.3",
         "react-dnd": "^14.0.5",
