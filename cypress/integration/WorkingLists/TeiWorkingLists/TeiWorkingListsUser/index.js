@@ -633,3 +633,19 @@ When('you select a scheduledAt column and save from the column selector', () => 
         .contains('Save')
         .click();
 });
+
+When('you select the events scheduled today', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Appointment date')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Today')
+        .click();
+});
+
+Then('you see the selected option in the scheduledAt filter', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Appointment date: Today')
+        .should('exist');
+});

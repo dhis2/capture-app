@@ -183,4 +183,6 @@ And you apply the current filter
 Then you see scheduledAt filter
 And you open the column selector
 When you select a scheduledAt column and save from the column selector
-# TODO add more check steps after DHIS2-14497 is fixed 
+And you select the events scheduled today
+And you apply the current filter
+Then you see the selected option in the scheduledAt filter
