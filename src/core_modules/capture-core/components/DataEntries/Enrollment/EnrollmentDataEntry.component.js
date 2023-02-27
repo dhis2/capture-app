@@ -289,6 +289,7 @@ const getGeometrySettings = () => ({
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
     programId: string,
+    programCategory?: Object,
 };
 // final step before the generic dataEntry is inserted
 
@@ -304,7 +305,7 @@ const dataEntrySectionDefinitions = {
 };
 
 type State = {
-    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection }
+    dataEntrySections: { [string]: {name: string, placement: $Values<typeof placements>}},
 }
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps, State> {
     constructor(props) {
@@ -318,15 +319,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps, S
             dataEntrySections: dataEntrySectionDefinitions,
         };
     }
-    componentDidUpdate(prevProps) {
-        if (this.props.programCategory && !prevProps.programCategory) {
-            dataEntrySectionDefinitions[sectionKeysForEnrollmentDataEntry.CATEGORYCOMBO].name
-            = this.props.programCategory.displayName;
-            this.setState({
-                dataEntrySections: dataEntrySectionDefinitions,
-            });
-        }
-    }
+
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
