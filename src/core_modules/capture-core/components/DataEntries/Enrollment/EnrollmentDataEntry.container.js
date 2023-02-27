@@ -1,29 +1,34 @@
 // @flow
+import React from 'react';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
+import { getCategoryOptionsValidatorContainers } from './fieldValidators';
+import { updateCatCombo, removeCatCombo } from '../../WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
 
-const mapStateToProps = () => ({});
+export const EnrollmentDataEntry = (props) => {
+    const dispatch = useDispatch();
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateDataEntryField: (
+    const onUpdateDataEntryField = (
         innerAction: ReduxAction<any, any>,
         data: any,
         programId: string,
         orgUnit: OrgUnit,
     ) => {
         dispatch(updateDataEntryFieldBatch(innerAction, programId, orgUnit));
-    },
-    onUpdateField: (
+    };
+
+    const onUpdateField = (
         innerAction: ReduxAction<any, any>,
         programId: string,
         orgUnit: OrgUnit,
     ) => {
         dispatch(updateFieldBatch(innerAction, programId, orgUnit));
-    },
-    onStartAsyncUpdateField: (
+    };
+
+    const onStartAsyncUpdateField = (
         innerAction: ReduxAction<any, any>,
         dataEntryId: string,
         itemId: string,
@@ -35,9 +40,35 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
         dispatch(startAsyncUpdateFieldForNewEnrollment(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
-    },
-});
+    };
 
-// $FlowFixMe
-export const EnrollmentDataEntry = connect(mapStateToProps, mapDispatchToProps)(EnrollmentDataEntryComponent);
+    const onClickCategoryOption = (option: Object, categoryId: string, isValid: boolean) => {
+        const value = { [categoryId]: option };
+        const { id, itemId } = props;
+        const valueMeta = {
+            isValid,
+            touched: true,
+            validationError: !isValid,
+        };
+        dispatch(updateCatCombo(value, valueMeta, id, itemId));
+    };
 
+    const onResetCategoryOption = (categoryId: string) => {
+        const { id, itemId } = props;
+        const valueMeta = {
+            isValid: false,
+            touched: true,
+            validationError: getCategoryOptionsValidatorContainers()[0].message,
+        };
+        dispatch(removeCatCombo(categoryId, valueMeta, id, itemId));
+    };
+
+    return (<EnrollmentDataEntryComponent
+        {...props}
+        onUpdateDataEntryField={onUpdateDataEntryField}
+        onUpdateField={onUpdateField}
+        onStartAsyncUpdateField={onStartAsyncUpdateField}
+        onClickCategoryOption={onClickCategoryOption}
+        onResetCategoryOption={onResetCategoryOption}
+    />);
+};

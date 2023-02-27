@@ -17,7 +17,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
 }) => {
     const orgUnitId = useCurrentOrgUnitInfo().id;
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
-    const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
+    const { teiId, ready, skipDuplicateCheck, programCategory } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
     const isUserInteractionInProgress: boolean = useSelector(
         state =>
             dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
@@ -41,6 +41,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             orgUnitId={orgUnitId}
             orgUnit={orgUnit}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            programCategory={programCategory}
         />
     );
 };

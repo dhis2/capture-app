@@ -9,6 +9,7 @@ import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../common/useRegistrationFormInfoForSelectedScope';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
+import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const useLifecycle = (
     selectedScopeId: string,
@@ -23,6 +24,12 @@ export const useLifecycle = (
     const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]) && !!orgUnit;
     const searchTerms = useSelector(({ searchPage }) => searchPage.currentSearchInfo.currentSearchTerms);
     const { scopeType } = useScopeInfo(selectedScopeId);
+    const {
+        program: programFromIndexedDB,
+        isLoading,
+    } = useProgramFromIndexedDB(programId, { enabled: scopeType === scopeTypes.TRACKER_PROGRAM && !!programId });
+    const programCategory = !programFromIndexedDB?.categoryCombo?.isDefault && programFromIndexedDB?.categoryCombo;
+
     const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
@@ -56,5 +63,5 @@ export const useLifecycle = (
         }
     }, [scopeType, dataEntryId, selectedScopeId, orgUnit, formValuesReadyRef, formValues, clientValues, dispatch]);
 
-    return { teiId, ready, skipDuplicateCheck: !!teiId };
+    return { teiId, ready: ready && !isLoading, skipDuplicateCheck: !!teiId, programCategory };
 };
