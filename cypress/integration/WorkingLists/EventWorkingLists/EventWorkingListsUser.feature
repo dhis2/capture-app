@@ -112,7 +112,7 @@ Given you open the main page with Ngelehun and Contraceptives Voucher Program
 When the user selects CARE International
 Then the working list should be displayed
 
-Scenario: The user can delete a working list right imediatly after creating it.
+Scenario: The user can delete a working list right immediately after creating it.
 Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
 When you set the date of admission filter
 And you save the view as toDeleteWorkingList
