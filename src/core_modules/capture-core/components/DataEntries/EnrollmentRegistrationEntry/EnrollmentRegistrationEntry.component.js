@@ -88,6 +88,7 @@ const EnrollmentRegistrationEntryPlain =
                   scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
                   <>
                       <EnrollmentDataEntry
+                          teiId={teiId}
                           orgUnit={orgUnit}
                           programId={selectedScopeId}
                           formFoundation={formFoundation}
