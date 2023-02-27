@@ -50,7 +50,7 @@ function getCategories(
         }, {}));
 }
 
-async function getBuilderPrerequisites() {
+export async function getBuilderPrerequisites() {
     const storageController = getUserStorageController();
 
     const cachedProgramsPromise = getPrograms(storageController, stores.PROGRAMS);

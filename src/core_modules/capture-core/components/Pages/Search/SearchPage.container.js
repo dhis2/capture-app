@@ -12,7 +12,6 @@ import {
     openSearchPage,
 } from './SearchPage.actions';
 import {
-    useSearchOptions,
     useTrackedEntityTypesWithCorrelatedPrograms,
     useCurrentTrackedEntityTypeId,
 } from '../../../hooks';
@@ -52,8 +51,7 @@ export const SearchPage: ComponentType<{||}> = () => {
         [dispatch]);
     const dispatchNavigateToNewUserPage = useCallback(() => { dispatch(navigateToNewUserPage()); }, [dispatch]);
 
-
-    const availableSearchOptions = useSearchOptions();
+    const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
     const preselectedProgramId = usePreselectedProgram(programId);
 
     const searchStatus: string =
@@ -63,7 +61,6 @@ export const SearchPage: ComponentType<{||}> = () => {
     const ready: boolean =
       useSelector(({ activePage }) => !activePage.isLoading);
 
-    const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
     const { searchableFields, minAttributesRequiredToSearch } =
         useSelector(({ searchPage }) => searchPage);
@@ -88,7 +85,6 @@ export const SearchPage: ComponentType<{||}> = () => {
                 showInitialSearchPage={dispatchShowInitialSearchPage}
                 cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
                 navigateToRegisterUser={dispatchNavigateToNewUserPage}
-                availableSearchOptions={availableSearchOptions}
                 preselectedProgramId={preselectedProgramId}
                 trackedEntityTypeId={trackedEntityTypeId}
                 searchStatus={searchStatus}

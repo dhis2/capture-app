@@ -5,19 +5,19 @@ import { getUserStorageController } from '../../storageControllers';
 import { useIndexedDBQuery } from '../reactQueryHelpers';
 
 
-export const useProgramFromIndexedDB = (programId: ?string, QueryOptions?: UseQueryOptions<>) => {
+export const useTrackedEntityTypeFromIndexedDB = (trackedEntityTypeId: ?string, { enabled }: UseQueryOptions<>) => {
     const storageController = getUserStorageController();
-    const { enabled = true } = QueryOptions ?? {};
 
     const { data, isLoading, isError } = useIndexedDBQuery(
-        ['programs', programId],
-        () => storageController.get(userStores.PROGRAMS, programId),
+        ['trackedEntityType', trackedEntityTypeId],
+        () => storageController.get(userStores.TRACKED_ENTITY_TYPES, trackedEntityTypeId),
         {
             enabled,
         },
     );
+
     return {
-        program: data,
+        trackedEntityType: data,
         isLoading,
         isError,
     };

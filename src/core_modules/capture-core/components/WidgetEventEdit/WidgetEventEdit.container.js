@@ -67,8 +67,8 @@ export const WidgetEventEditPlain = ({
 
     const eventAccess = getProgramEventAccess(programId, programStage.id);
     const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
-    const { programData } = useProgramFromIndexedDB(programId, ['categoryCombo']);
-    const programCategory = !programData?.categoryCombo?.isDefault && programData?.categoryCombo;
+    const { program } = useProgramFromIndexedDB(programId);
+    const programCategory = !program?.categoryCombo?.isDefault && program?.categoryCombo;
 
     if (error) {
         return error.errorComponent;
