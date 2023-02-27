@@ -1,3 +1,10 @@
+## [100.25.7](https://github.com/dhis2/capture-app/compare/v100.25.6...v100.25.7) (2023-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-14578] fix unique value re enrollment ([#3178](https://github.com/dhis2/capture-app/issues/3178)) ([eb5c31c](https://github.com/dhis2/capture-app/commit/eb5c31c5120629bc308f5fe4de88b1292708a2dc))
+
 ## [100.25.6](https://github.com/dhis2/capture-app/compare/v100.25.5...v100.25.6) (2023-02-24)
 
 
