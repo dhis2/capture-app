@@ -6,12 +6,13 @@ import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEn
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import { useRulesEngineOrgUnit } from '../../../hooks/useRulesEngineOrgUnit';
+import { useRulesEngineOrgUnit } from '../../../hooks';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
     id,
+    enrollmentMetadata,
     trackedEntityInstanceAttributes,
     ...passOnProps
 }) => {
@@ -35,8 +36,9 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             {...passOnProps}
             selectedScopeId={selectedScopeId}
             id={id}
-            ready={ready}
+            ready={ready && !!enrollmentMetadata}
             teiId={teiId}
+            enrollmentMetadata={enrollmentMetadata}
             skipDuplicateCheck={skipDuplicateCheck}
             orgUnitId={orgUnitId}
             orgUnit={orgUnit}

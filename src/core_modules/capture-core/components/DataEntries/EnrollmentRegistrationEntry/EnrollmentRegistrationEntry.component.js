@@ -9,12 +9,11 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
-import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
-import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
@@ -49,6 +48,8 @@ const EnrollmentRegistrationEntryPlain =
   ({
       id,
       selectedScopeId,
+      formId,
+      formFoundation,
       enrollmentMetadata,
       saveButtonText,
       classes,
@@ -63,7 +64,6 @@ const EnrollmentRegistrationEntryPlain =
       const { push } = useHistory();
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
-      const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {

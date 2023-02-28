@@ -44,7 +44,7 @@ const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
 };
 
 
-export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, ...rest }) => {
+export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, teiRegistrationMetadata, id, ...rest }) => {
     const { trackedEntityName } = useInitialiseTeiRegistration(selectedScopeId, id);
     const ready = useSelector(({ dataEntries }) => (!!dataEntries[id]));
     const dataEntry = useSelector(({ dataEntries }) => (dataEntries[id]));
@@ -61,11 +61,16 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId,
             dataEntryHasChanges(state, dataEntryKey),
     );
 
+    if (!teiRegistrationMetadata) {
+        return null;
+    }
+
     return (
         <TeiRegistrationEntryComponent
             selectedScopeId={selectedScopeId}
             id={id}
-            ready={ready}
+            ready={ready && !!teiRegistrationMetadata}
+            teiRegistrationMetadata={teiRegistrationMetadata}
             trackedEntityName={trackedEntityName}
             isUserInteractionInProgress={isUserInteractionInProgress}
             {...rest}

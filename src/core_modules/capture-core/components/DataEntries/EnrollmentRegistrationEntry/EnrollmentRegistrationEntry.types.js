@@ -6,33 +6,36 @@ import type { RenderCustomCardActions } from '../../CardList';
 import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
 import type { InputAttribute } from './hooks/useFormValues';
+import { RenderFoundation } from '../../../metaData';
 
 export type OwnProps = $ReadOnly<{|
-  id: string,
-  enrollmentMetadata: RegistrationFormMetadata,
-  selectedScopeId: string,
-  saveButtonText: string,
-  fieldOptions?: Object,
-  onSave: SaveForDuplicateCheck,
-  duplicatesReviewPageSize: number,
-  renderDuplicatesCardActions?: RenderCustomCardActions,
-  renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
-  ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
-  teiId?: ?string,
-  skipDuplicateCheck?: ?boolean,
-  trackedEntityInstanceAttributes?: Array<InputAttribute>,
+    id: string,
+    enrollmentMetadata: RegistrationFormMetadata,
+    formFoundation: ?RenderFoundation,
+    formId: ?string,
+    selectedScopeId: string,
+    saveButtonText: string,
+    fieldOptions?: Object,
+    onSave: SaveForDuplicateCheck,
+    duplicatesReviewPageSize: number,
+    renderDuplicatesCardActions?: RenderCustomCardActions,
+    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
+    ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
+    teiId?: ?string,
+    skipDuplicateCheck?: ?boolean,
+    trackedEntityInstanceAttributes?: Array<InputAttribute>,
 |}>;
 
 type ContainerProps = {|
-  ready: boolean,
-  orgUnitId: string,
-  orgUnit: ?OrgUnit,
-  isUserInteractionInProgress: boolean
+    ready: boolean,
+    orgUnitId: string,
+    orgUnit: ?OrgUnit,
+    isUserInteractionInProgress: boolean
 |};
 
 export type Props = $ReadOnly<{|
-  ...OwnProps,
-  ...ContainerProps
+    ...OwnProps,
+    ...ContainerProps
 |}>;
 
 type PropsAddedInHOC = {|

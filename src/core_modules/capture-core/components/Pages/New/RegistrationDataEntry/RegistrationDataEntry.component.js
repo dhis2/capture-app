@@ -8,13 +8,13 @@ import type { Props } from './RegistrationDataEntry.types';
 import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useLocationQuery } from '../../../../utils/routing';
+import { useMetadataForRegistrationForm } from '../../../DataEntries/common/useMetadataForRegistrationForm';
 
 const getStyles = ({ typography }) => ({
     paper: {
@@ -90,7 +90,11 @@ const RegistrationDataEntryPlain = ({
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const {
+        formId,
+        registrationMetaData,
+        formFoundation,
+    } = useMetadataForRegistrationForm({ selectedScopeId });
     const titleText = useScopeTitleText(selectedScopeId);
 
     const handleRegistrationScopeSelection = (id) => {
@@ -171,6 +175,8 @@ const RegistrationDataEntryPlain = ({
                                 <EnrollmentRegistrationEntry
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
+                                    formId={formId}
+                                    formFoundation={formFoundation}
                                     enrollmentMetadata={registrationMetaData}
                                     saveButtonText={i18n.t('Save {{trackedEntityName}}', {
                                         trackedEntityName,
