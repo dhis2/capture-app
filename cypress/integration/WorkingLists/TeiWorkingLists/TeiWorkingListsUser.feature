@@ -118,7 +118,7 @@ Then the enrollment status filter button should show that the active filter is i
 And you delete the name My custom list
 Then the custom TEI is deleted
 
-Scenario: The user can delete a working list right imediatly after creating it.
+Scenario: The user can delete a working list right immediately after creating it.
 Given you open the main page with Ngelehun and Malaria case diagnosis context
 And you set the enrollment status filter to completed
 And you apply the current filter
