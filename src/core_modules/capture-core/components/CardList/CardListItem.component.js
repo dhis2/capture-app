@@ -138,7 +138,7 @@ const CardListItemIndex = ({
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitName, enrolledAt } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
-    const program = enrollments && deriveProgramFromEnrollment(enrollments, currentSearchScopeType);
+    const program = enrollments?.length && deriveProgramFromEnrollment(enrollments, currentSearchScopeType);
 
     const renderImageDataElement = (imageElement?: ?CardProfileImageElementInformation) => {
         if (!imageElement) { return null; }
