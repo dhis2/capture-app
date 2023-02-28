@@ -384,18 +384,20 @@ type FinalTeiDataEntryProps = {
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     constructor(props) {
         super(props);
-        this.firstStageDataEntrySectionDefinitions = {
-            [sectionKeysForEnrollmentDataEntry.STAGE_BASIC_INFO]: {
-                placement: placements.TOP,
-                name: i18n.t('Data Entry ({{ stageName }})', {
-                    stageName: props?.firstStageForm?.stageName,
-                }),
-            },
-            [sectionKeysForEnrollmentDataEntry.STATUS]: {
-                placement: placements.BOTTOM,
-                name: i18n.t('Status'),
-            },
-        };
+        if (props.firstStageForm) {
+            this.firstStageDataEntrySectionDefinitions = {
+                [sectionKeysForEnrollmentDataEntry.STAGE_BASIC_INFO]: {
+                    placement: placements.TOP,
+                    name: i18n.t('Data Entry ({{ stageName }})', {
+                        stageName: props.firstStageForm.stageName,
+                    }),
+                },
+                [sectionKeysForEnrollmentDataEntry.STATUS]: {
+                    placement: placements.BOTTOM,
+                    name: i18n.t('Status'),
+                },
+            };
+        }
     }
     componentWillUnmount() {
         inMemoryFileStore.clear();
