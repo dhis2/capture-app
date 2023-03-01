@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import log from 'loglevel';
 import type { QueryFunction, QueryKey, UseQueryOptions } from 'react-query';
 import type { Result } from './useMetadataQuery.types';
-import { IndexedDBError } from '../../../../capture-core-utils/storage/StorageController';
+import { IndexedDBError } from '../../../../capture-core-utils/storage/IndexedDBError/IndexedDBError';
 
 const throwErrorForIndexedDB = (error) => {
     if (error instanceof IndexedDBError) {
