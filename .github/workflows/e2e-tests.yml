@@ -108,7 +108,7 @@ jobs:
                   version: ${{ matrix.versions }}
 
             - name: Cypress run
-              uses: cypress-io/github-action@v2
+              uses: cypress-io/github-action@v4
               with:
                   record: true
                   parallel: true

@@ -132,7 +132,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Cypress run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           record: true
           parallel: true
@@ -200,7 +200,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
-      - uses: dhis2/action-semantic-release@master
+      - uses: dhis2/action-semantic-release@ignore-app-hub-lib
         with:
           publish-apphub: true
           publish-github: true

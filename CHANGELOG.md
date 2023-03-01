@@ -1,3 +1,45 @@
+## [100.25.7](https://github.com/dhis2/capture-app/compare/v100.25.6...v100.25.7) (2023-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-14578] fix unique value re enrollment ([#3178](https://github.com/dhis2/capture-app/issues/3178)) ([eb5c31c](https://github.com/dhis2/capture-app/commit/eb5c31c5120629bc308f5fe4de88b1292708a2dc))
+
+## [100.25.6](https://github.com/dhis2/capture-app/compare/v100.25.5...v100.25.6) (2023-02-24)
+
+
+### Bug Fixes
+
+* [TECH-1485] Retrieve search groups on demand ([#3159](https://github.com/dhis2/capture-app/issues/3159)) ([80ea7c5](https://github.com/dhis2/capture-app/commit/80ea7c573bbf38b539380070f14dcb5e9c181d59))
+
+## [100.25.5](https://github.com/dhis2/capture-app/compare/v100.25.4...v100.25.5) (2023-02-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#3134](https://github.com/dhis2/capture-app/issues/3134)) ([5933e05](https://github.com/dhis2/capture-app/commit/5933e052971aeaa4662806c4ce35934276fe2cee))
+
+## [100.25.4](https://github.com/dhis2/capture-app/compare/v100.25.3...v100.25.4) (2023-02-23)
+
+
+### Bug Fixes
+
+* [DHIS2-14740] enrollment data missing in rules engine during page reload ([#3194](https://github.com/dhis2/capture-app/issues/3194)) ([b3a413b](https://github.com/dhis2/capture-app/commit/b3a413b7b72fec692aea0674bfa07943f817aefa))
+
+## [100.25.3](https://github.com/dhis2/capture-app/compare/v100.25.2...v100.25.3) (2023-02-09)
+
+
+### Bug Fixes
+
+* [DHIS2-14141] change the base date based on events ([#3177](https://github.com/dhis2/capture-app/issues/3177)) ([d69ee66](https://github.com/dhis2/capture-app/commit/d69ee668f7cf34ceeb38d41e559d34e61b4447cc))
+
+## [100.25.2](https://github.com/dhis2/capture-app/compare/v100.25.1...v100.25.2) (2023-02-09)
+
+
+### Bug Fixes
+
+* [DHIS2-14697] asterisk working list chip name ([#3187](https://github.com/dhis2/capture-app/issues/3187)) ([bdcacbd](https://github.com/dhis2/capture-app/commit/bdcacbde2e4a197d19bb5fcd7934ae3bbf950922))
+
 ## [100.25.1](https://github.com/dhis2/capture-app/compare/v100.25.0...v100.25.1) (2023-02-06)
 
 

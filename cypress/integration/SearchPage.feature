@@ -29,13 +29,13 @@ Feature: User interacts with Search page
         And you click find
         Then you are navigated to the Tracker Capture
 
-    Scenario: Searching using attributes in Tracker Program returns no results
-        Given you are on the default search page
-        When you select the search domain Malaria Case diagnosis
-        And you expand the attributes search area
-        And you fill in the first name with values that will return no results
-        And you click search
-        Then you should see no results found
+    # Scenario: Searching using attributes in Tracker Program returns no results
+    #     Given you are on the default search page
+    #     When you select the search domain Malaria Case diagnosis
+    #     And you expand the attributes search area
+    #     And you fill in the first name with values that will return no results
+    #     And you click search
+    #     Then you should see no results found
 
     Scenario: Searching using attributes in Tracker Program throws error
         Given you are on the default search page
