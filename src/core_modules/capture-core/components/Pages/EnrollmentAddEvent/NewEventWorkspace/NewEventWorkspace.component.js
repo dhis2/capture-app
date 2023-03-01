@@ -3,7 +3,6 @@ import React, { type ComponentType, useState, useRef, useMemo } from 'react';
 import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
-import { useProgramFromIndexedDB } from 'capture-core/utils/cachedDataHooks/useProgramFromIndexedDB';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { tabMode } from './newEventWorkspace.constants';
 import { getProgramAndStageForProgram } from '../../../../metaData';
