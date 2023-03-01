@@ -1,3 +1,10 @@
+## [100.25.9](https://github.com/dhis2/capture-app/compare/v100.25.8...v100.25.9) (2023-03-01)
+
+
+### Bug Fixes
+
+* [DHIS2-14418] show only future events when filter by scheduled status ([#3166](https://github.com/dhis2/capture-app/issues/3166)) ([deddbf0](https://github.com/dhis2/capture-app/commit/deddbf0176af477a755cfae6b41cc331c0eaa11a))
+
 ## [100.25.8](https://github.com/dhis2/capture-app/compare/v100.25.7...v100.25.8) (2023-03-01)
 
 

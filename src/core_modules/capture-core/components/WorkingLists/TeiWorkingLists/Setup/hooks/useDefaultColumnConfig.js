@@ -46,6 +46,18 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
             type: dataElementTypes.DATE,
             header: programStage.stageForm.getLabel('occurredAt') || i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
         },
+        ...(programStage.hideDueDate === false
+            ? [
+                {
+                    id: ADDITIONAL_FILTERS.scheduledAt,
+                    visible: false,
+                    type: dataElementTypes.DATE,
+                    header:
+                          programStage.stageForm.getLabel('scheduledAt') ||
+                          i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
+                },
+            ]
+            : []),
     ].map(field => ({
         ...field,
         mainProperty: true,
