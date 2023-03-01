@@ -5,9 +5,10 @@ import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui
 import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
-import { buildCategoryOptionsAsync } from '../../metaDataMemoryStoreBuilders';
+import type { Category as CategoryMetadata } from '../../../../metaData';
+import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
 import { makeOnSelectSelector } from './categorySelector.selectors';
-import { FiltrableMenuItems } from '../ScopeSelector/QuickSelector/FiltrableMenuItems';
+import { FiltrableMenuItems } from '../FiltrableMenuItems';
 
 
 type SelectOption = {
@@ -16,7 +17,7 @@ type SelectOption = {
 };
 
 type Props = {
-    category: { id: string, name: string},
+    category: CategoryMetadata,
     selectedOrgUnitId: ?string,
     onSelect: (option: SelectOption) => void,
     selectedCategoryName: ?string,

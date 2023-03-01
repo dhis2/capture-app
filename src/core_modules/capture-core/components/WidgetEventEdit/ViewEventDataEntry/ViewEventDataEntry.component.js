@@ -143,7 +143,7 @@ const buildCategoryOptionsSettingsFn = () => {
         isApplicable: (props: Object) => !!props.programCategory?.categories && !props.programCategory?.isDefault,
         getComponent: () => categoryOptionsViewModeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            categories: props?.programCategory.categories.map(({ id, displayName }) => ({ id, name: displayName })),
+            categories: props?.programCategory.categories,
             selectedCategories: props.selectedCategories,
         }),
         getPropName: () => 'attributeCategoryOptions',

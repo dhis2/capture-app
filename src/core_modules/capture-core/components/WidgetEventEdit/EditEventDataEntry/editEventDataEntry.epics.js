@@ -87,7 +87,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
                     return querySingleResource({
                         resource: 'categoryOptions',
                         params: {
-                            fields: 'id,displayName,name,categories[id]',
+                            fields: 'id,displayName,categories[id]',
                             filter: `id:in:[${categoryIds.join(',')}]`,
                         },
                     }).then(({ categoryOptions }) => {

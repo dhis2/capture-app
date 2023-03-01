@@ -1,9 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
-import { CategorySelector } from '../../../CategorySelector';
+import { CategorySelector } from './CategorySelector.component';
 import type { CategoryOption } from './CategoryOptions.types';
 
 const getStyles = (theme: Theme) => ({
@@ -40,7 +38,7 @@ type Props = {
     categories: Array<CategoryOption>,
     selectedOrgUnitId: string,
     selectedCategories: ?{[categoryId: string]: CategoryOption },
-    onClickCategoryOption: (option: {label: string, value: string}, categoryId: string, isValid: boolean) => void,
+    onClickCategoryOption: (option: CategoryOption, categoryId: string, isValid: boolean) => void,
     onResetCategoryOption: (categoryId: string) => void,
     required?: boolean,
     ...CssClasses
@@ -58,42 +56,15 @@ const CategoryOptionsPlain = (props: Props) => {
     } = props;
     const [selectedCategories, setSelectedCategories] = React.useState(initalSelectedCategories);
 
-    const renderSelectedCategory = category => (
-        <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
+    const renderCategorySelector = (category) => {
+        const initialValue = initalSelectedCategories?.[category.id] ?
+            {
+                value: initalSelectedCategories[category.id].id,
+                label: initalSelectedCategories[category.id].displayName,
+            } : undefined;
+        return (<div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
             <div className={orientation === 'horizontal' && classes.label}>
-                {category.name}
-                {required && <span
-                    className={classes.requiredClass}
-                >
-                    &nbsp;*
-                </span>}
-            </div>
-            <div className={orientation === 'horizontal' && classes.field}>
-                <div className={classes.selectedText}>
-                    <div className={classes.selectedCategoryNameContainer}>
-                        {selectedCategories && selectedCategories[category.id].name}
-                    </div>
-                    <IconButton
-                        data-test="reset-category"
-                        className={classes.selectedButton}
-                        onClick={() => {
-                            const newCategories = { ...selectedCategories };
-                            delete newCategories[category.id];
-                            setSelectedCategories(newCategories);
-                            onResetCategoryOption(category.id);
-                        }}
-                    >
-                        <ClearIcon className={classes.selectedButtonIcon} />
-                    </IconButton>
-                </div>
-            </div>
-        </div>
-    );
-
-    const renderCategorySelector = category => (
-        <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
-            <div className={orientation === 'horizontal' && classes.label}>
-                {category.name}
+                {category.displayName}
                 {required && <span
                     className={classes.requiredClass}
                 >
@@ -102,29 +73,34 @@ const CategoryOptionsPlain = (props: Props) => {
             </div>
             <div className={orientation === 'horizontal' && classes.field}>
                 <CategorySelector
+                    initialValue={initialValue}
                     category={category}
                     selectedOrgUnitId={selectedOrgUnitId}
-                    onSelect={(option) => {
-                        const newCategories = {
-                            ...selectedCategories,
-                            ...{ [category.id]: option },
-                        };
-                        setSelectedCategories(newCategories);
-                        const isValid = categories.every(({ id }) => newCategories[id]);
-                        onClickCategoryOption(option, category.id, isValid);
+                    onChange={(option) => {
+                        if (!option) {
+                            const newCategories = { ...selectedCategories };
+                            delete newCategories[category.id];
+                            setSelectedCategories(newCategories);
+                            onResetCategoryOption(category.id);
+                        } else {
+                            const newOption = { id: option.value, displayName: option.label };
+                            const newCategories = {
+                                ...selectedCategories,
+                                ...{ [category.id]: newOption },
+                            };
+                            setSelectedCategories(newCategories);
+                            const isValid = categories.every(({ id: categoryId }) => newCategories[categoryId]);
+                            onClickCategoryOption(newOption, category.id, isValid);
+                        }
                     }}
                 />
             </div>
         </div>);
+    };
 
     return (
         categories ? <div>
-            { categories.map((category) => {
-                if (selectedCategories && selectedCategories[category.id]) {
-                    return renderSelectedCategory(category);
-                }
-                return renderCategorySelector(category);
-            })}
+            {categories.map(renderCategorySelector)}
         </div> : null
     );
 };

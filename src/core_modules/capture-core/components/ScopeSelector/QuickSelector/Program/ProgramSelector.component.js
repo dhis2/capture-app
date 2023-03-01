@@ -10,7 +10,7 @@ import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import { EmptyPrograms } from './EmptyPrograms';
 import { ProgramList } from './ProgramList';
 import { getOptions } from './getOptions';
-import { CategorySelector } from '../../../CategorySelector';
+import { CategorySelector } from './CategorySelector.component';
 
 const styles = () => ({
     selectBarMenu: {

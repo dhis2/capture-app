@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-03-01T15:06:49.159Z\n"
-"PO-Revision-Date: 2023-03-01T15:06:49.160Z\n"
+"POT-Creation-Date: 2023-03-01T17:44:20.369Z\n"
+"PO-Revision-Date: 2023-03-01T17:44:20.369Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -64,9 +64,6 @@ msgstr "Date of enrollment"
 
 msgid "Last updated"
 msgstr "Last updated"
-
-msgid "Clear selection"
-msgstr "Clear selection"
 
 msgid "This value is validating"
 msgstr "This value is validating"
@@ -994,6 +991,9 @@ msgstr "Registering unit"
 
 msgid "Choose a registering unit"
 msgstr "Choose a registering unit"
+
+msgid "Clear selection"
+msgstr "Clear selection"
 
 msgid "No programs available."
 msgstr "No programs available."

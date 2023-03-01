@@ -2,11 +2,11 @@
 
 export type CategoryOption = {
     id: string,
-    name: string,
+    displayName: string,
 }
 
 export type ProgramCategory = {
     displayName: string,
     id: string,
-    categories: Array<{ id: string, displayName: string }>
+    categories: Array<CategoryOption>
 }

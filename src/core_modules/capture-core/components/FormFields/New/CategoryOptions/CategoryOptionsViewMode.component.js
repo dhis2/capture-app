@@ -33,10 +33,10 @@ const CategoryOptionsViewModePlain = (props: Props) => {
             { categories.map(category => (
                 <div className={classes.container}>
                     <div className={classes.label}>
-                        {category.name}
+                        {category.displayName}
                     </div>
                     <div className={classes.field}>
-                        {selectedCategories?.[category.id]?.name}
+                        {selectedCategories?.[category.id]?.displayName}
                     </div>
                 </div>
             ))}

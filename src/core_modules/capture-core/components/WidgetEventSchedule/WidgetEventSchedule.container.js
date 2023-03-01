@@ -17,6 +17,7 @@ import {
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
+import type { CategoryOption } from '../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -120,7 +121,7 @@ export const WidgetEventSchedule = ({
         setComments([...comments, newComment]);
     };
 
-    const onClickCategoryOption = useCallback((option: { value: string, label: string }, categoryId: string) => {
+    const onClickCategoryOption = useCallback((option: CategoryOption, categoryId: string) => {
         setCategoryOptions(prevCategoryOptions => ({
             ...prevCategoryOptions,
             ...{ [categoryId]: option },

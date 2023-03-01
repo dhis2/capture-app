@@ -214,7 +214,7 @@ const buildCategoryOptionsSettingsFn = () => {
         getComponent: () => categoryOptionsComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
-            categories: props.programCategory.categories.map(({ id, displayName }) => ({ id, name: displayName })),
+            categories: props.programCategory.categories,
             selectedCategories: props.selectedCategories,
             selectedOrgUnitId: props.orgUnitId,
             onClickCategoryOption: props.onClickCategoryOption(props.itemId),

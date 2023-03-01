@@ -6,6 +6,7 @@ import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.acti
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
 import { getCategoryOptionsValidatorContainers } from './fieldValidators';
 import { updateCatCombo, removeCatCombo } from '../../WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
+import type { CategoryOption } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 const mapStateToProps = () => ({});
 
@@ -38,7 +39,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props) => ({
 
         dispatch(startAsyncUpdateFieldForNewEnrollment(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
-    onClickCategoryOption: (option: Object, categoryId: string, isValid: boolean) => {
+    onClickCategoryOption: (option: CategoryOption, categoryId: string, isValid: boolean) => {
         const value = { [categoryId]: option };
         const { id, itemId } = props;
         const valueMeta = {

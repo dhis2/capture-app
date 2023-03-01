@@ -43,6 +43,6 @@ export type Props = {|
    setScheduleDate: (date: string) => void,
    onAddComment: (comment: string) => void,
    onResetCategoryOption: (categoryId: string) => void,
-   onClickCategoryOption: (option: { label: string, value: string }, categoryId: string, isValid: boolean) => void,
+   onClickCategoryOption: (option: CategoryOption, categoryId: string, isValid: boolean) => void,
    ...CssClasses
 |};

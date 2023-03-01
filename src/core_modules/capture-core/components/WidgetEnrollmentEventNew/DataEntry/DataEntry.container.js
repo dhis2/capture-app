@@ -17,6 +17,7 @@ import {
 import typeof { addEventSaveTypes } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
 import { getCategoryOptionsValidatorContainers } from '../../WidgetEventEdit/DataEntry/fieldValidators/categoryOptions.validatorContainersGetter';
+import type { CategoryOption } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
@@ -71,7 +72,7 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
         dispatch(setNewEventSaveTypes(newSaveTypes));
     }, [dispatch]);
 
-    const onClickCategoryOption = useCallback((option: { label: string, value: string }, categoryId: string, isValid: boolean) => {
+    const onClickCategoryOption = useCallback((option: CategoryOption, categoryId: string, isValid: boolean) => {
         const value = { [categoryId]: option };
         const { id, itemId } = passOnProps;
         const valueMeta = {

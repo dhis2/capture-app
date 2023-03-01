@@ -27,7 +27,7 @@ import {
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 import { removeCatCombo, updateCatCombo } from '../../WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
 import { getCategoryOptionsValidatorContainers } from '../DataEntry/fieldValidators/categoryOptions.validatorContainersGetter';
-
+import type { CategoryOption } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 const mapStateToProps = (state: ReduxState, props) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
@@ -126,7 +126,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
             enrollmentId, isCreateNew: true, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
         }));
     },
-    onClickCategoryOption: (itemId: string) => (option: { value: string, label: string }, categoryId: string, isValid: boolean) => {
+    onClickCategoryOption: (itemId: string) => (option: CategoryOption, categoryId: string, isValid: boolean) => {
         const { dataEntryId } = props;
         const value = { [categoryId]: option };
         const valueMeta = {
