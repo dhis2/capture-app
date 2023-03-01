@@ -14,10 +14,6 @@ const VirtualizedSelectLoadingIndicatorHOC =
         () => ({ size: 22 }),
         (props: Object) => props.options)(OptionsSelectVirtualized);
 
-type CategoryMetadata = {
-    id: string,
-    displayName: string,
-}
 
 type SelectOption = {
     label: string,
@@ -25,7 +21,7 @@ type SelectOption = {
 };
 
 type Props = {
-    category: CategoryMetadata,
+    category: { id: string, name: string},
     selectedOrgUnitId: ?string,
     onSelect: (option: SelectOption) => void,
 };

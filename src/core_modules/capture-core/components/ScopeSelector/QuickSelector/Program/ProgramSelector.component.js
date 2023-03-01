@@ -289,7 +289,7 @@ class ProgramSelectorPlain extends Component<Props> {
                                             }
                                             return (
                                                 <CategorySelector
-                                                    category={{ id, displayName: name }}
+                                                    category={{ id, name }}
                                                     // $FlowFixMe[incompatible-call] automated comment
                                                     onSelect={(option) => { this.handleClickCategoryOption(option, category.id); }}
                                                     selectedOrgUnitId={selectedOrgUnitId}
