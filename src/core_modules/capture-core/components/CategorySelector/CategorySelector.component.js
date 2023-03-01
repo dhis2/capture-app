@@ -5,9 +5,9 @@ import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui
 import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
-import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
+import { buildCategoryOptionsAsync } from '../../metaDataMemoryStoreBuilders';
 import { makeOnSelectSelector } from './categorySelector.selectors';
-import { FiltrableMenuItems } from '../FiltrableMenuItems';
+import { FiltrableMenuItems } from '../ScopeSelector/QuickSelector/FiltrableMenuItems';
 
 
 type SelectOption = {
