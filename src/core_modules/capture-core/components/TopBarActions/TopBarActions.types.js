@@ -8,12 +8,10 @@ export type Props = {
 
 export type PlainProps = {
     selectedProgramId?: string,
-    onStartAgainClick: () => void,
     onNewClick: () => void,
     onNewClickWithoutProgramId: () => void,
     onFindClick: () => void,
     onFindClickWithoutProgramId: () => void,
-    showResetButton: boolean,
     openConfirmDialog: boolean,
 };
 
