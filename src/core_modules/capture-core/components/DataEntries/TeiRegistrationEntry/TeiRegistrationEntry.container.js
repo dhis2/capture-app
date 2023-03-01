@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { scopeTypes } from '../../../metaData';
 import { startNewTeiDataEntryInitialisation } from './TeiRegistrationEntry.actions';
@@ -11,12 +10,13 @@ import type { OwnProps } from './TeiRegistrationEntry.types';
 import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component';
 import { useFormValuesFromSearchTerms } from './hooks/useFormValuesFromSearchTerms';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { useMetadataForRegistrationForm } from '../common/useMetadataForRegistrationForm';
 
 const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
     const dispatch = useDispatch();
     const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
     const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
-    const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
     const formValues = useFormValuesFromSearchTerms();
     const registrationFormReady = !!formId;
 

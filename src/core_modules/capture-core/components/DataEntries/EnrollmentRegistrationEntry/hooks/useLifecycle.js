@@ -6,9 +6,9 @@ import { startNewEnrollmentDataEntryInitialisation } from '../EnrollmentRegistra
 import { scopeTypes, getProgramThrowIfNotFound } from '../../../../metaData';
 import { useLocationQuery } from '../../../../utils/routing';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import { useRegistrationFormInfoForSelectedScope } from '../../common/useRegistrationFormInfoForSelectedScope';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
+import { useMetadataForRegistrationForm } from '../../common/useMetadataForRegistrationForm';
 
 export const useLifecycle = (
     selectedScopeId: string,
@@ -23,7 +23,7 @@ export const useLifecycle = (
     const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]) && !!orgUnit;
     const searchTerms = useSelector(({ searchPage }) => searchPage.currentSearchInfo.currentSearchTerms);
     const { scopeType } = useScopeInfo(selectedScopeId);
-    const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
