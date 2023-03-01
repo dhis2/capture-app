@@ -6,6 +6,7 @@ import type {
 } from '../../../../WidgetProfile/DataEntry/FormFoundation/types';
 import type { CachedProgram, CachedTrackedEntityType } from '../../../../../storageControllers/cache.types';
 import type { TrackedEntityType } from '../../../../../metaData';
+import { buildSearchGroup } from '../../../../Pages/Search/hooks';
 
 type Props = {|
     cachedOptionSets: OptionSet[],
@@ -24,6 +25,7 @@ export const buildEnrollmentForm = async ({
     cachedTrackedEntityAttributes,
     locale,
 }: Props) => {
+    const searchGroups = await buildSearchGroup(cachedProgram);
     const enrollmentFactory = new EnrollmentFactory({
         cachedTrackedEntityAttributes: new Map(cachedTrackedEntityAttributes.map(tea => [tea.id, tea])),
         cachedOptionSets: new Map(cachedOptionSets.map(optionSet => [optionSet.id, optionSet])),
@@ -32,5 +34,5 @@ export const buildEnrollmentForm = async ({
         locale,
     });
 
-    return enrollmentFactory.build(cachedProgram);
+    return enrollmentFactory.build(cachedProgram, searchGroups);
 };
