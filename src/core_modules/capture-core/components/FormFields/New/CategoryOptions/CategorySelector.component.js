@@ -15,9 +15,8 @@ type Props = {
     category: { id: string, name: string},
     selectedOrgUnitId: ?string,
     onChange: (option: SelectOption) => void,
-    selectedCategoryName: ?string,
     initialValue?: ?SelectOption,
-    classes: Object,
+    ...CssClasses
 };
 
 type State = {
