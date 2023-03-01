@@ -12,6 +12,7 @@ import type { InputMeta } from './getEventListData.types';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
 import { addTEIsData } from './addTEIsData';
 import { getColumnsQueryArgs, getOrderQueryArgs } from './getColumnsQueryArgs';
+import { getScheduledDateQueryArgs } from './getScheduledDateQueryArgs';
 
 const createApiEventQueryArgs = (
     {
@@ -28,7 +29,7 @@ const createApiEventQueryArgs = (
     filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
 ): { [string]: any } => {
     const rawSplitFilters = splitFilters(filters, columnsMetaForDataFetching);
-    return {
+    const queryArgs = {
         ...getApiFilterQueryArgs(rawSplitFilters.filters, filtersOnlyMetaForDataFetching),
         ...getApiFilterAttributesQueryArgs(rawSplitFilters.filterAttributes, filtersOnlyMetaForDataFetching),
         ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
@@ -41,6 +42,8 @@ const createApiEventQueryArgs = (
         programStage,
         fields: '*',
     };
+
+    return getScheduledDateQueryArgs(queryArgs);
 };
 
 const createApiTEIsQueryArgs =
