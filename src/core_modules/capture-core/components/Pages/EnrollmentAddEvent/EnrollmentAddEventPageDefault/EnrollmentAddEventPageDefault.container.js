@@ -20,6 +20,7 @@ import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../comm
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
+import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const EnrollmentAddEventPageDefault = ({
     enrollment,
@@ -80,6 +81,11 @@ export const EnrollmentAddEventPageDefault = ({
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
     // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name;
+
+    const { program: programData, isLoading } = useProgramFromIndexedDB(programId);
+    const programCategory = programData &&
+    !programData?.categoryCombo?.isDefault ? programData.categoryCombo : undefined;
+
 
     const rulesExecutionDependencies = useMemo(() => ({
         events: enrollment?.events,
@@ -153,9 +159,10 @@ export const EnrollmentAddEventPageDefault = ({
                 widgetReducerName={widgetReducerName}
                 rulesExecutionDependencies={rulesExecutionDependencies}
                 pageFailure={commonDataError}
-                ready={Boolean(enrollment)}
+                ready={Boolean(enrollment) && !isLoading}
                 dataEntryHasChanges={dataEntryHasChanges}
                 onEnrollmentError={onEnrollmentError}
+                programCategory={programCategory}
             />
         </>
     );

@@ -1,6 +1,7 @@
 // @flow
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
+import type { ProgramCategory } from '../../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 export type Props = {|
     programId: string,
@@ -20,6 +21,7 @@ export type Props = {|
     pageFailure: boolean,
     ready: boolean,
     widgetReducerName: string,
+    programCategory?: ProgramCategory,
     ...CssClasses,
 |};
 

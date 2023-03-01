@@ -120,7 +120,7 @@ export const WidgetEventSchedule = ({
         setComments([...comments, newComment]);
     };
 
-    const onClickCategoryOption = useCallback((option: Object, categoryId: string) => {
+    const onClickCategoryOption = useCallback((option: { value: string, label: string }, categoryId: string) => {
         setCategoryOptions(prevCategoryOptions => ({
             ...prevCategoryOptions,
             ...{ [categoryId]: option },

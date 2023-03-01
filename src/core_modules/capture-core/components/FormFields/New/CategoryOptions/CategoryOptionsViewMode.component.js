@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import type { CategoryOption } from './CategoryOptions.types';
 
 const getStyles = () => ({
     container: {
@@ -19,9 +20,9 @@ const getStyles = () => ({
 });
 
 type Props = {
-    classes: Object,
-    categories: Array<Object>,
-    selectedCategories?: Object,
+    categories: Array<CategoryOption>,
+    selectedCategories?: ?{[categoryId: string]: CategoryOption },
+    ...CssClasses
 };
 
 const CategoryOptionsViewModePlain = (props: Props) => {
@@ -32,7 +33,7 @@ const CategoryOptionsViewModePlain = (props: Props) => {
             { categories.map(category => (
                 <div className={classes.container}>
                     <div className={classes.label}>
-                        {category.displayName}
+                        {category.name}
                     </div>
                     <div className={classes.field}>
                         {selectedCategories?.[category.id]?.name}

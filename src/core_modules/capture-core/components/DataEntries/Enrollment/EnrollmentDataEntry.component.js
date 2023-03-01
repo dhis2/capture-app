@@ -27,7 +27,7 @@ import {
     orientations,
     CategoryOptions,
 } from '../../FormFields/New';
-
+import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
     getEnrollmentDateValidatorContainer,
@@ -137,7 +137,7 @@ const getCategoryOptionsSettingsFn = () => {
         getComponent: () => categoryOptionsComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
-            categories: props.programCategory?.categories,
+            categories: props.programCategory.categories.map(({ id, displayName }) => ({ id, name: displayName })),
             selectedCategories: props.selectedCategories,
             selectedOrgUnitId: props.orgUnitId,
             onClickCategoryOption: props.onClickCategoryOption,
@@ -289,7 +289,7 @@ const getGeometrySettings = () => ({
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
     programId: string,
-    programCategory?: Object,
+    programCategory?: ProgramCategory,
 };
 // final step before the generic dataEntry is inserted
 

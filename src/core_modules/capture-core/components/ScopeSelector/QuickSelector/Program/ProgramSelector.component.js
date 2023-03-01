@@ -12,7 +12,7 @@ import { colors } from '@dhis2/ui';
 import { programCollection } from '../../../../metaDataMemoryStores';
 import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { ProgramList } from './ProgramList';
-import { CategorySelector } from './CategorySelector.component';
+import { CategorySelector } from '../../../CategorySelector';
 
 import type { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
@@ -270,13 +270,14 @@ class ProgramSelectorPlain extends Component<Props> {
                     </Grid>
                     {
                         // $FlowFixMe
-                        Array.from(selectedProgram.categoryCombination.categories.values()).map(category =>
-                            (<Grid key={category.id} item xs={12} sm={6}>
+                        Array.from(selectedProgram.categoryCombination.categories.values()).map((category) => {
+                            const { id, name } = category;
+                            return (<Grid key={id} item xs={12} sm={6}>
                                 <Paper square elevation={0} className={classes.selectedPaper}>
-                                    <h4 className={classes.title}>{category.name}</h4>
+                                    <h4 className={classes.title}>{name}</h4>
                                     {
                                         (() => {
-                                            if (selectedCategories && selectedCategories[category.id]) {
+                                            if (selectedCategories && selectedCategories[id]) {
                                                 return (
                                                     <div className={classes.selectedText}>
                                                         <div className={classes.selectedCategoryNameContainer}>{selectedCategories[category.id].name}</div>
@@ -288,7 +289,7 @@ class ProgramSelectorPlain extends Component<Props> {
                                             }
                                             return (
                                                 <CategorySelector
-                                                    category={category}
+                                                    category={{ id, displayName: name }}
                                                     // $FlowFixMe[incompatible-call] automated comment
                                                     onSelect={(option) => { this.handleClickCategoryOption(option, category.id); }}
                                                     selectedOrgUnitId={selectedOrgUnitId}
@@ -297,7 +298,8 @@ class ProgramSelectorPlain extends Component<Props> {
                                         })()
                                     }
                                 </Paper>
-                            </Grid>))
+                            </Grid>);
+                        })
                     }
                 </Grid>
             );

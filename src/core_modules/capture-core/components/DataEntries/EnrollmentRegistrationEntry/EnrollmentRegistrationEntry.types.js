@@ -6,6 +6,7 @@ import type { RenderCustomCardActions } from '../../CardList';
 import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
 import type { InputAttribute } from './hooks/useFormValues';
+import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 export type OwnProps = $ReadOnly<{|
   id: string,
@@ -21,7 +22,7 @@ export type OwnProps = $ReadOnly<{|
   teiId?: ?string,
   skipDuplicateCheck?: ?boolean,
   trackedEntityInstanceAttributes?: Array<InputAttribute>,
-  programCategory?: Object,
+  programCategory?: ProgramCategory,
 |}>;
 
 type ContainerProps = {|

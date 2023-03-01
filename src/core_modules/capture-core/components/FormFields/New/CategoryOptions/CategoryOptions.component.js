@@ -3,8 +3,8 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
-import { CategorySelector } from '../../../ScopeSelector/QuickSelector/Program/CategorySelector.component';
-import type { ProgramCategory } from './CategoryOptions.types';
+import { CategorySelector } from '../../../CategorySelector';
+import type { CategoryOption } from './CategoryOptions.types';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -37,10 +37,10 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     orientation: string,
-    categories: Array<Object>,
+    categories: Array<CategoryOption>,
     selectedOrgUnitId: string,
-    selectedCategories: ProgramCategory,
-    onClickCategoryOption: (option: Object, categoryId: string, isValid: boolean) => void,
+    selectedCategories: ?{[categoryId: string]: CategoryOption },
+    onClickCategoryOption: (option: {label: string, value: string}, categoryId: string, isValid: boolean) => void,
     onResetCategoryOption: (categoryId: string) => void,
     required?: boolean,
     ...CssClasses
@@ -61,7 +61,7 @@ const CategoryOptionsPlain = (props: Props) => {
     const renderSelectedCategory = category => (
         <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
             <div className={orientation === 'horizontal' && classes.label}>
-                {category.displayName}
+                {category.name}
                 {required && <span
                     className={classes.requiredClass}
                 >
@@ -71,7 +71,8 @@ const CategoryOptionsPlain = (props: Props) => {
             <div className={orientation === 'horizontal' && classes.field}>
                 <div className={classes.selectedText}>
                     <div className={classes.selectedCategoryNameContainer}>
-                        {selectedCategories[category.id]?.name}</div>
+                        {selectedCategories && selectedCategories[category.id].name}
+                    </div>
                     <IconButton
                         data-test="reset-category"
                         className={classes.selectedButton}
@@ -92,7 +93,7 @@ const CategoryOptionsPlain = (props: Props) => {
     const renderCategorySelector = category => (
         <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
             <div className={orientation === 'horizontal' && classes.label}>
-                {category.displayName}
+                {category.name}
                 {required && <span
                     className={classes.requiredClass}
                 >

@@ -101,7 +101,7 @@ const WidgetEventSchedulePlain = ({
         >
             <div className={classes.containerWrapper}>
                 <CategoryOptions
-                    categories={programCategory.categories}
+                    categories={programCategory.categories?.map(({ id, displayName }) => ({ id, name: displayName }))}
                     selectedOrgUnitId={orgUnit?.id}
                     selectedCategories={selectedCategories}
                     onClickCategoryOption={onClickCategoryOption}

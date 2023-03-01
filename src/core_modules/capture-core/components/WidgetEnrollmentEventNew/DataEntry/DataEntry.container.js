@@ -71,7 +71,7 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
         dispatch(setNewEventSaveTypes(newSaveTypes));
     }, [dispatch]);
 
-    const onClickCategoryOption = useCallback((option: Object, categoryId: string, isValid: boolean) => {
+    const onClickCategoryOption = useCallback((option: { label: string, value: string }, categoryId: string, isValid: boolean) => {
         const value = { [categoryId]: option };
         const { id, itemId } = passOnProps;
         const valueMeta = {

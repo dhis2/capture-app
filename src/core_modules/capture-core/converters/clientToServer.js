@@ -2,6 +2,7 @@
 import moment from 'moment';
 import { dataElementTypes } from '../metaData';
 import { stringifyNumber } from './common/stringifyNumber';
+import type { ProgramCategory } from '../components/FormFields/New/CategoryOptions/CategoryOptions.types';
 
 type RangeValue = {
     from: any,
@@ -54,11 +55,13 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     return (valueConvertersForType[type] ? valueConvertersForType[type](value) : value);
 }
 
-export function convertCategoryOptionsToServer(value: Object | string) {
+export function convertCategoryOptionsToServer(value: ProgramCategory | string) {
     if (typeof value === 'object') {
         const categoryObject: Object = value;
         return Object.keys(categoryObject).reduce((acc, categoryId) => {
-            acc.push(value[categoryId]?.id);
+            if (value[categoryId]) {
+                acc.push(value[categoryId].id);
+            }
             return acc;
         }, []).join(';');
     }

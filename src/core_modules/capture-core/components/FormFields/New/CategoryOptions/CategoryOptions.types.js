@@ -2,8 +2,7 @@
 
 export type CategoryOption = {
     id: string,
-    displayName?: string,
-    name?: string
+    name: string,
 }
 
 export type ProgramCategory = {
