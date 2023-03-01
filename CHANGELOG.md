@@ -1,3 +1,10 @@
+## [100.25.8](https://github.com/dhis2/capture-app/compare/v100.25.7...v100.25.8) (2023-03-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13203] show default column when no displayInReports attributes are available ([#3175](https://github.com/dhis2/capture-app/issues/3175)) ([b5a06a9](https://github.com/dhis2/capture-app/commit/b5a06a9ee0df985cd20cb992df7308976fc1ccb2))
+
 ## [100.25.7](https://github.com/dhis2/capture-app/compare/v100.25.6...v100.25.7) (2023-02-27)
 
 
