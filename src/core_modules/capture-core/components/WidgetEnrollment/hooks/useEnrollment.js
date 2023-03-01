@@ -1,5 +1,5 @@
 // @flow
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useEnrollment = (enrollmentId: string) => {
@@ -7,12 +7,18 @@ export const useEnrollment = (enrollmentId: string) => {
         useMemo(
             () => ({
                 enrollment: {
-                    resource: `tracker/enrollments/${enrollmentId}`,
+                    resource: 'tracker/enrollments/',
+                    id: ({ variables: { enrollmentId: updatedEnrollmentId } }) => updatedEnrollmentId,
                 },
             }),
-            [enrollmentId],
+            [],
         ),
+        { lazy: true },
     );
+
+    useEffect(() => {
+        enrollmentId && refetch({ variables: { enrollmentId } });
+    }, [refetch, enrollmentId]);
 
     return { error, refetch, enrollment: !loading && data?.enrollment };
 };
