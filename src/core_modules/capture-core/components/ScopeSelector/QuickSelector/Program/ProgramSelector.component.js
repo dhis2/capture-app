@@ -5,12 +5,12 @@ import { withStyles } from '@material-ui/core/styles';
 import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { programCollection } from '../../../../metaDataMemoryStores';
-import { CategorySelector } from './CategorySelector.component';
 import type { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import { EmptyPrograms } from './EmptyPrograms';
 import { ProgramList } from './ProgramList';
 import { getOptions } from './getOptions';
+import { CategorySelector } from '../../../CategorySelector';
 
 const styles = () => ({
     selectBarMenu: {
