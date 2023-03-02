@@ -48,7 +48,7 @@ const EnrollmentPagePlain = ({
         />
 
         <div data-test="enrollment-page-content" className={classes.container}>
-            {enrollmentPageStatus === enrollmentPageStatuses.MISSING_SELECTIONS && <MissingMessage selectProgramHandler />}
+            {enrollmentPageStatus === enrollmentPageStatuses.MISSING_SELECTIONS && <MissingMessage deselectProgramHandler={deselectProgramHandler} />}
 
             {enrollmentPageStatus === enrollmentPageStatuses.DEFAULT && <EnrollmentPageDefault />}
 
