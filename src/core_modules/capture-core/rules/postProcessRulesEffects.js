@@ -115,7 +115,7 @@ export function postProcessRulesEffects(
     const filteredAssignValueEffects = postProcessAssignEffects({
         // $FlowFixMe
         assignValueEffects,
-        hideFieldEffects: filteredHideFieldEffects,
+        hideFieldEffects,
     });
 
     return [
