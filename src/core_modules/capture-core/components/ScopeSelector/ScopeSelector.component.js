@@ -71,6 +71,13 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     handleStartAgainWarning = () => {
+        if (this.props.isSavingInProgress) {
+            this.props.onContextSwitch && this.props.onContextSwitch();
+            this.setState({
+                fallback: () => this.props.onStartAgain && this.props.onStartAgain(),
+            });
+            return;
+        }
         if (this.dontShowWarning()) {
             this.props.onStartAgain && this.props.onStartAgain();
             return;

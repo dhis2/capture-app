@@ -101,8 +101,6 @@ export const TopBar = ({
                     selectedValue="alwaysPreselected"
                     title={trackedEntityName}
                     isUserInteractionInProgress={isUserInteractionInProgress}
-                    isSavingInProgress={isSavingInProgress}
-                    onContextSwitch={onContextSwitch}
                 />
             )}
             <TopBarActions
