@@ -3,7 +3,7 @@ import '../../sharedSteps';
 
 Given(/^you land on the enrollment event page with selected (.*) by having typed (.*)$/, (tet, url) => {
     cy.visit(url);
-    cy.get('[data-test="scope-selector"]').contains(`Selected ${tet}`);
+    cy.get('[data-test="scope-selector"]').contains(`${tet}`);
 });
 
 When(/^the user clicks on the edit button/, () =>

@@ -1,3 +1,24 @@
+## [100.25.10](https://github.com/dhis2/capture-app/compare/v100.25.9...v100.25.10) (2023-03-01)
+
+
+### Bug Fixes
+
+* [DHIS2-14439] add scheduledAt filter and column logic ([#3173](https://github.com/dhis2/capture-app/issues/3173)) ([28f8927](https://github.com/dhis2/capture-app/commit/28f8927ef77c108d03482a102925f71b50584342))
+
+## [100.25.9](https://github.com/dhis2/capture-app/compare/v100.25.8...v100.25.9) (2023-03-01)
+
+
+### Bug Fixes
+
+* [DHIS2-14418] show only future events when filter by scheduled status ([#3166](https://github.com/dhis2/capture-app/issues/3166)) ([deddbf0](https://github.com/dhis2/capture-app/commit/deddbf0176af477a755cfae6b41cc331c0eaa11a))
+
+## [100.25.8](https://github.com/dhis2/capture-app/compare/v100.25.7...v100.25.8) (2023-03-01)
+
+
+### Bug Fixes
+
+* [DHIS2-13203] show default column when no displayInReports attributes are available ([#3175](https://github.com/dhis2/capture-app/issues/3175)) ([b5a06a9](https://github.com/dhis2/capture-app/commit/b5a06a9ee0df985cd20cb992df7308976fc1ccb2))
+
 ## [100.25.7](https://github.com/dhis2/capture-app/compare/v100.25.6...v100.25.7) (2023-02-27)
 
 
