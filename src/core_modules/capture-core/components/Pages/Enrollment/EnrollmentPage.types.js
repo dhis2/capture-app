@@ -12,6 +12,8 @@ export type ContainerProps = $ReadOnly<{|
   trackedEntityName: string,
   teiDisplayName: string,
   enrollmentsAsOptions: Array<Object>,
+  selectProgramHandler: () => void,
+  deselectProgramHandler: () => void,
 |}>
 
 export type Props = {|

@@ -1,6 +1,6 @@
 Given(/^you land on the enrollment event page by having typed (.*)$/, (url) => {
     cy.visit(url);
-    cy.get('[data-test="scope-selector"]').contains('Selected person');
+    cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
 Given('you open the enrollment page which has multiple events and stages', () => {
