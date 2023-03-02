@@ -20,7 +20,7 @@ type TopBarProps = {
     trackedEntityName: string,
     teiDisplayName: string,
     enrollmentsAsOptions: Array<Object>,
-    selectProgramHandler: () => void,
+    selectProgramHandler: (id: string) => void,
     deselectProgramHandler: () => void,
 };
 
