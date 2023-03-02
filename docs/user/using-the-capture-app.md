@@ -152,7 +152,8 @@ The second option, is to register a tracked entity instance with program and enr
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. Click **Save new** to register the tracked entity instance.
+7. Click **Save new** to register the tracked entity instance. 
+    The **Cancel** button will be disabled, and a spinner on the **Save** button will indicate that the request has been sent.
     
 8. You will now be prompted to the tracked entity instance dashboard. 
 
@@ -307,6 +308,14 @@ To see a rule being executed while enrolling a tracked entity instance you will 
 
 5. You will now be able to see the warning produced by the program rule underneath the birth date field. 
 ![](resources/images/program-rules-on-creation-02.png)
+
+### Leaving the page
+
+If the user attempts to change their context, either by changing the program or the organisation unit from the locked selector or by clicking the **Clear selections** button the outcome will depend on the page state:
+1. The user has not typed anything in the fields: The context is updated without any message and the user is redirected.
+2. The user has already pressed the **Save** button, and a new registration has been sent to the server, the redirection to enrollment dashboard page will be cancelled and user will be navigated to the new context page. 
+3. The user has entered details into the fields, see a modal warning them that they will lose their data.
+
 
 ## Re-enroll an existing tracked entity instance
 
