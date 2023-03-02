@@ -1,3 +1,10 @@
+# [100.26.0](https://github.com/dhis2/capture-app/compare/v100.25.10...v100.26.0) (2023-03-02)
+
+
+### Features
+
+* [DHIS2-14008] use the SelectionBar ui component inside ScopeSelector ([#3165](https://github.com/dhis2/capture-app/issues/3165)) ([b912c2b](https://github.com/dhis2/capture-app/commit/b912c2b0d7aa3c40060f28b1c92202952bb57db0))
+
 ## [100.25.10](https://github.com/dhis2/capture-app/compare/v100.25.9...v100.25.10) (2023-03-01)
 
 
