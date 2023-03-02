@@ -28,6 +28,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     onResetOrgUnitId,
     onResetCategoryOption,
     onResetAllCategoryOptions,
+    onStartAgain,
     children,
     ...restProps
 }) => {
@@ -79,6 +80,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
             selectedProgramId={selectedProgramId}
             selectedCategories={selectedCategories}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            onStartAgain={onStartAgain}
             ready={ready}
             {...restProps}
         >

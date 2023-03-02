@@ -1,7 +1,6 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Grid } from '@material-ui/core';
 import {
     ScopeSelector,
     useSetProgramId,
@@ -9,6 +8,7 @@ import {
     useResetProgramId,
     useResetOrgUnitId,
     useResetTeiId,
+    useReset,
     SingleLockedSelect,
 } from '../../ScopeSelector';
 import {
@@ -43,6 +43,7 @@ export const TopBar = ({
     const { resetProgramIdAndTeiId } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
     const { resetTeiId } = useResetTeiId();
+    const { reset } = useReset();
 
     const { selectedCategories } = useSelector(({ currentSelections }) => ({
         selectedCategories: currentSelections.categoriesMeta,
@@ -84,33 +85,31 @@ export const TopBar = ({
             onResetOrgUnitId={() => resetOrgUnitId()}
             isUserInteractionInProgress={isUserInteractionInProgress}
             isSavingInProgress={isSavingInProgress}
+            onStartAgain={() => reset()}
         >
             {teiId && (
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                    <SingleLockedSelect
-                        ready={!!(trackedEntityName && teiDisplayName)}
-                        onClear={() => resetTeiId()}
-                        options={[
-                            {
-                                label: teiDisplayName,
-                                value: 'alwaysPreselected',
-                            },
-                        ]}
-                        selectedValue="alwaysPreselected"
-                        title={trackedEntityName}
-                        isUserInteractionInProgress={isUserInteractionInProgress}
-                    />
-                </Grid>
-            )}
-            <Grid item xs={12} sm={6} md={6} lg={2}>
-                <TopBarActions
-                    selectedProgramId={programId}
-                    selectedOrgUnitId={orgUnitId}
+                <SingleLockedSelect
+                    displayOnly
+                    ready={Boolean(trackedEntityName && teiDisplayName)}
+                    onClear={() => resetTeiId()}
+                    options={[
+                        {
+                            label: teiDisplayName,
+                            value: 'alwaysPreselected',
+                        },
+                    ]}
+                    selectedValue="alwaysPreselected"
+                    title={trackedEntityName}
                     isUserInteractionInProgress={isUserInteractionInProgress}
                     isSavingInProgress={isSavingInProgress}
                     onContextSwitch={onContextSwitch}
                 />
-            </Grid>
+            )}
+            <TopBarActions
+                selectedProgramId={programId}
+                selectedOrgUnitId={orgUnitId}
+                isUserInteractionInProgress={isUserInteractionInProgress}
+            />
         </ScopeSelector>
     );
 };

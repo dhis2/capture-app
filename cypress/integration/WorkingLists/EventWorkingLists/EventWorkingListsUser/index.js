@@ -495,7 +495,9 @@ Then(/^you are told to select (.*)$/, (text) => {
 });
 
 When('the user selects CARE International', () => {
-    cy.get('[data-test="virtualized-select"]')
+    cy.get('[data-test="category-selector-container"]')
+        .click();
+    cy.get('[data-test="category-filterinput"]')
         .type('CARE Internatio');
     cy.contains('CARE International')
         .click();

@@ -2,40 +2,28 @@
 import React, { type ComponentType, useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { Button, colors, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
+import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
 import { scopeTypes } from '../../metaData';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
 import type { PlainProps } from './TopBarActions.types';
 
-const styles = ({ typography }) => ({
+const styles = () => ({
     container: {
-        marginLeft: typography.pxToRem(8),
-        marginBottom: typography.pxToRem(8),
-        marginTop: typography.pxToRem(8),
-    },
-    marginRight: {
-        marginRight: typography.pxToRem(12),
-    },
-    buttonAsLink: {
-        fontSize: typography.pxToRem(13),
-        background: 'none!important',
-        border: 'none',
-        padding: '0!important',
-        color: colors.grey700,
-        textDecoration: 'underline',
-        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        marginLeft: `${spacers.dp8}`,
+        gap: `${spacers.dp4}`,
+        height: '40px',
     },
 });
 
 const ActionButtonsPlain = ({
-    onStartAgainClick,
     onNewClick,
     onNewClickWithoutProgramId,
     onFindClick,
     onFindClickWithoutProgramId,
     selectedProgramId,
     classes,
-    showResetButton,
     openConfirmDialog,
 }: PlainProps & CssClasses) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
@@ -129,12 +117,6 @@ const ActionButtonsPlain = ({
                     {i18n.t('Search')}
                 </DropdownButton>
             )}
-
-            {showResetButton ? (
-                <button className={classes.buttonAsLink} data-test="start-again-button" onClick={onStartAgainClick}>
-                    {i18n.t('Clear selections')}
-                </button>
-            ) : null}
         </div>
     );
 };

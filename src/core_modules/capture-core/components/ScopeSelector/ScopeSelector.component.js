@@ -15,6 +15,7 @@ class ScopeSelectorClass extends Component<Props, State> {
             openOrgUnitWarning: false,
             openProgramWarning: null,
             openCatComboWarning: false,
+            openStartAgainWarning: false,
             categoryIdToReset: '',
             fallback: null,
         };
@@ -69,11 +70,20 @@ class ScopeSelectorClass extends Component<Props, State> {
         this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
     }
 
+    handleStartAgainWarning = () => {
+        if (this.dontShowWarning()) {
+            this.props.onStartAgain && this.props.onStartAgain();
+            return;
+        }
+        this.setState({ openStartAgainWarning: true });
+    }
+
     handleClose = () => {
         this.setState({
             openOrgUnitWarning: false,
             openProgramWarning: null,
             openCatComboWarning: false,
+            openStartAgainWarning: false,
         });
     }
 
@@ -94,6 +104,11 @@ class ScopeSelectorClass extends Component<Props, State> {
         this.handleClose();
     }
 
+    handleAcceptStartAgain = () => {
+        this.props.onStartAgain && this.props.onStartAgain();
+        this.handleClose();
+    }
+
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
 
@@ -107,11 +122,13 @@ class ScopeSelectorClass extends Component<Props, State> {
                     onResetOrgUnitId={this.handleOpenOrgUnitWarning}
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
+                    onStartAgain={this.handleStartAgainWarning}
                     previousOrgUnitId={this.props.previousOrgUnitId}
                     selectedOrgUnitId={this.props.selectedOrgUnitId}
                     selectedProgramId={this.props.selectedProgramId}
                     selectedOrgUnit={this.props.selectedOrgUnit}
                     selectedCategories={this.props.selectedCategories}
+                    isUserInteractionInProgress={this.props.isUserInteractionInProgress}
                 >
                     {this.props.children}
                 </QuickSelector>
@@ -130,6 +147,12 @@ class ScopeSelectorClass extends Component<Props, State> {
                 <ConfirmDialog
                     onConfirm={this.handleAcceptCatCombo}
                     open={this.state.openCatComboWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptStartAgain}
+                    open={this.state.openStartAgainWarning}
                     onCancel={this.handleClose}
                     {...defaultDialogProps}
                 />

@@ -8,7 +8,6 @@ import type { Props } from './TopBarActions.types';
 import { buildUrlQueryString } from '../../utils/routing';
 
 const defaultContext = {
-    openStartAgainWarning: false,
     openNewRegistrationPage: false,
     openNewRegistrationPageWithoutProgramId: false,
     openSearchPage: false,
@@ -32,7 +31,6 @@ export const TopBarActions = ({
 }: Props) => {
     const [context, setContext] = useState(defaultContext);
     const {
-        openStartAgainWarning,
         openNewRegistrationPage,
         openNewRegistrationPageWithoutProgramId,
         openSearchPage,
@@ -40,7 +38,6 @@ export const TopBarActions = ({
         fallback,
     } = context;
     const openConfirmDialog =
-        openStartAgainWarning ||
         openNewRegistrationPage ||
         openNewRegistrationPageWithoutProgramId ||
         openSearchPage ||
@@ -53,8 +50,6 @@ export const TopBarActions = ({
             setContext(prev => ({ ...prev, fallback: null }));
         }
     }, [isSavingInProgress, fallback]);
-
-    const startAgain = () => history.push('/');
 
     const newRegistrationPage = () => {
         const queryArgs = {};
@@ -88,15 +83,6 @@ export const TopBarActions = ({
     const searchPageWithoutProgramId = () => {
         const queryArgs = selectedOrgUnitId ? { orgUnitId: selectedOrgUnitId } : {};
         history.push(`search?${buildUrlQueryString(queryArgs)}`);
-    };
-
-    const handleOpenStartAgainWarning = () => {
-        if (isSavingInProgress) {
-            setContext(prev => ({ ...prev, fallback: () => startAgain() }));
-            onContextSwitch && onContextSwitch();
-            return;
-        }
-        isUserInteractionInProgress ? setContext(prev => ({ ...prev, openStartAgainWarning: true })) : startAgain();
     };
 
     const handleOpenNewRegistrationPage = () => {
@@ -142,7 +128,6 @@ export const TopBarActions = ({
     };
 
     const handleAccept = () => {
-        openStartAgainWarning && startAgain();
         openNewRegistrationPage && newRegistrationPage();
         openNewRegistrationPageWithoutProgramId && newRegistrationPageWithoutProgramId();
         openSearchPage && searchPage();
@@ -154,12 +139,10 @@ export const TopBarActions = ({
         <>
             <ActionButtons
                 selectedProgramId={selectedProgramId}
-                onStartAgainClick={handleOpenStartAgainWarning}
                 onFindClick={handleOpenSearchPage}
                 onFindClickWithoutProgramId={handleOpenSearchPageWithoutProgramId}
                 onNewClick={handleOpenNewRegistrationPage}
                 onNewClickWithoutProgramId={handleOpenNewRegistrationPageWithoutProgramId}
-                showResetButton={!!(selectedProgramId || selectedOrgUnitId)}
                 openConfirmDialog={openConfirmDialog}
             />
             <ConfirmDialog

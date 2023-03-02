@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 
 import {
     ScopeSelector,
@@ -8,6 +7,7 @@ import {
     useSetOrgUnitId,
     useResetProgramId,
     useResetOrgUnitId,
+    useReset,
 } from '../../ScopeSelector';
 import { TopBarActions } from '../../TopBarActions';
 
@@ -21,6 +21,7 @@ export const TopBar = ({ programId, orgUnitId }: TopBarProps) => {
     const { setOrgUnitId } = useSetOrgUnitId();
     const { resetProgramId } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
+    const { reset } = useReset();
 
     return (
         <ScopeSelector
@@ -30,10 +31,9 @@ export const TopBar = ({ programId, orgUnitId }: TopBarProps) => {
             onSetOrgUnit={id => setOrgUnitId(id)}
             onResetProgramId={() => resetProgramId()}
             onResetOrgUnitId={() => resetOrgUnitId()}
+            onStartAgain={() => reset()}
         >
-            <Grid item xs={12} sm={6} md={6} lg={2}>
-                <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />
-            </Grid>
+            <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />
         </ScopeSelector>
     );
 };
