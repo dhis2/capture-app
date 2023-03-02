@@ -170,7 +170,7 @@ class ScopeSelectorClass extends Component<Props, State> {
             return;
         }
         if (this.dontShowWarning()) {
-            this.props.onSetCategoryOption && this.props.onResetAllCategoryOptions();
+            this.props.onResetAllCategoryOptions && this.props.onResetAllCategoryOptions();
             return;
         }
         this.setState({ openCatComboWarning: true });
