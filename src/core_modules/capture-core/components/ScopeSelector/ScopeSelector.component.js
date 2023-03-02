@@ -116,16 +116,74 @@ class ScopeSelectorClass extends Component<Props, State> {
         this.handleClose();
     }
 
-    render() {
-        const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
+    handleOnSetOrgUnit = (id: string, orgUnit: Object) => {
+        if (this.props.isSavingInProgress) {
+            this.props.onContextSwitch && this.props.onContextSwitch();
+            this.setState({
+                fallback: () => this.props.onSetOrgUnit && this.props.onSetOrgUnit(id, orgUnit),
+            });
+            return;
+        }
+        if (this.dontShowWarning()) {
+            this.props.onSetOrgUnit && this.props.onSetOrgUnit(id, orgUnit);
+            return;
+        }
+        this.setState({ openOrgUnitWarning: true });
+    }
 
+    handleOnSetProgramId = (id: string) => {
+        if (this.props.isSavingInProgress) {
+            this.props.onContextSwitch && this.props.onContextSwitch();
+            this.setState({
+                fallback: () => this.props.onSetProgramId && this.props.onSetProgramId(id),
+            });
+            return;
+        }
+        if (this.dontShowWarning()) {
+            this.props.onSetProgramId && this.props.onSetProgramId(id);
+            return;
+        }
+        this.setState({ openProgramWarning: true });
+    }
+
+    handleOnSetCategoryOption = (categoryOption: Object, categoryId: string) => {
+        if (this.props.isSavingInProgress) {
+            this.props.onContextSwitch && this.props.onContextSwitch();
+            this.setState({
+                fallback: () => this.props.onSetCategoryOption && this.props.onSetCategoryOption(categoryOption, categoryId),
+            });
+            return;
+        }
+        if (this.dontShowWarning()) {
+            this.props.onSetCategoryOption && this.props.onSetCategoryOption(categoryOption, categoryId);
+            return;
+        }
+        this.setState({ openCatComboWarning: true });
+    }
+
+    handleOnResetAllCategoryOptions = () => {
+        if (this.props.isSavingInProgress) {
+            this.props.onContextSwitch && this.props.onContextSwitch();
+            this.setState({
+                fallback: () => this.props.onResetAllCategoryOptions && this.props.onResetAllCategoryOptions(),
+            });
+            return;
+        }
+        if (this.dontShowWarning()) {
+            this.props.onSetCategoryOption && this.props.onResetAllCategoryOptions();
+            return;
+        }
+        this.setState({ openCatComboWarning: true });
+    }
+
+    render() {
         return (
             <div data-test={'scope-selector'}>
                 <QuickSelector
-                    onSetOrgUnit={onSetOrgUnit}
-                    onSetProgramId={onSetProgramId}
-                    onSetCategoryOption={onSetCategoryOption}
-                    onResetAllCategoryOptions={onResetAllCategoryOptions}
+                    onSetOrgUnit={this.handleOnSetOrgUnit}
+                    onSetProgramId={this.handleOnSetProgramId}
+                    onSetCategoryOption={this.handleOnSetCategoryOption}
+                    onResetAllCategoryOptions={this.handleOnResetAllCategoryOptions}
                     onResetOrgUnitId={this.handleOpenOrgUnitWarning}
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
