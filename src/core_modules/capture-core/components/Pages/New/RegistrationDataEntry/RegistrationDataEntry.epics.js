@@ -166,9 +166,9 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 redirectToEnrollmentEventNew,
                 redirectToStageId: stageWithOpenAfterEnrollment?.id,
             });
-            const { formFoundation, teiId: trackedEntity } = action.payload;
+            const { formFoundation, teiId: trackedEntity, randomId } = action.payload;
             const formServerValues = formFoundation?.convertValues(values, convertFn);
-
+            debugger;
 
             return saveNewTrackedEntityInstanceWithEnrollment({
                 candidateForRegistration: {
@@ -195,6 +195,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 },
                 redirectToEnrollmentEventNew,
                 stageId: stageWithOpenAfterEnrollment?.id,
+                randomId,
             });
         }),
     );
@@ -210,9 +211,17 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             const { payload: { bundleReport: { typeReportMap } }, meta } = action;
             const {
                 currentSelections: { orgUnitId, programId },
+                newPage: { randomId: stateRandomId },
             } = store.value;
             const teiId = typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const enrollmentId = typeReportMap.ENROLLMENT.objectReports[0].uid;
+            const randomId = meta.randomId;
+
+            debugger;
+
+            if (randomId !== stateRandomId) {
+                return EMPTY;
+            }
 
             if (meta?.redirectToEnrollmentEventNew) {
                 history.push(

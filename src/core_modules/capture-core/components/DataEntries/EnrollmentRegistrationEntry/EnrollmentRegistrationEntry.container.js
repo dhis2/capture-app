@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { ComponentType } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
@@ -29,6 +29,12 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     if (error) {
         return error.errorComponent;
     }
+    
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        return () => dispatch({ type: "CLEANUPTHERANDOMID" });
+    }, []);
 
     return (
         <EnrollmentRegistrationEntryComponent

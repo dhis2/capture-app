@@ -24,6 +24,14 @@ export const newPageDesc = createReducerDescription(
             ...state,
             newPageStatus: newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED,
         }),
+        StartSavingNewTrackedEntityInstanceWithEnrollment: (state, action) => ({
+            ...state,
+            randomId: action.payload.randomId,
+        }),
+        CLEANUPTHERANDOMID: state => ({
+            ...state,
+            randomId: undefined,
+        }),
     },
     'newPage',
     initialNewPageState,
