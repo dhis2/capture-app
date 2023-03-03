@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import i18n from '@dhis2/d2-i18n';
 import { ActionButtons } from './TopBarActions.component';
