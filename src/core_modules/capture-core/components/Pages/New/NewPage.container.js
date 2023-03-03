@@ -8,6 +8,8 @@ import {
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
     showMessageToSelectProgramCategoryOnNewPage,
+    assignUid,
+    removeUid,
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
@@ -98,6 +100,13 @@ export const NewPage: ComponentType<{||}> = () => {
           || dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
           || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
     );
+    const handleAssignUid = useCallback(() => {
+        dispatch(assignUid({ formId: 'newPageDataEntryId-newEnrollment' }));
+    }, [dispatch]);
+
+    const handleRemoveUid = useCallback((location?: Object) => {
+        dispatch(removeUid({ formId: 'newPageDataEntryId-newEnrollment', location }));
+    }, [dispatch]);
 
     return (
         <NewPageComponent
@@ -119,5 +128,7 @@ export const NewPage: ComponentType<{||}> = () => {
             trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
             trackedEntityName={trackedEntityType?.name}
             teiDisplayName={teiDisplayName}
+            handleAssignUid={handleAssignUid}
+            handleRemoveUid={handleRemoveUid}
         />);
 };

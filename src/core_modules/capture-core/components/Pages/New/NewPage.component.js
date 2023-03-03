@@ -15,6 +15,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { useBlockNavigation } from './hooks/useBlockNavigation';
 
 const getStyles = () => ({
     container: {
@@ -40,12 +41,15 @@ const NewPagePlain = ({
     trackedEntityName,
     teiDisplayName,
     trackedEntityInstanceAttributes,
+    handleAssignUid,
+    handleRemoveUid,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
     useEffect(() => {
         setScopeId(currentScopeId);
     }, [scopeType, currentScopeId]);
+    useBlockNavigation(handleAssignUid, handleRemoveUid);
 
     useEffect(() => {
         if (orgUnitSelectionIncomplete) {

@@ -30,7 +30,6 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     onResetAllCategoryOptions,
     onStartAgain,
     children,
-    ...restProps
 }) => {
     const dispatch = useDispatch();
     const { refetch: refetchOrganisationUnit, displayName } = useOrganizationUnit();
@@ -82,7 +81,6 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
             isUserInteractionInProgress={isUserInteractionInProgress}
             onStartAgain={onStartAgain}
             ready={ready}
-            {...restProps}
         >
             {children}
         </ScopeSelectorComponent>

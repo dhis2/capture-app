@@ -18,6 +18,8 @@ export type ContainerProps = $ReadOnly<{|
   showMessageToSelectProgramCategoryOnNewPage: ()=>void,
   showDefaultViewOnNewPage: ()=>void,
   handleMainPageNavigation: ()=>void,
+  handleAssignUid: () => void,
+  handleRemoveUid: (location?: Object) => void,
   currentScopeId: string,
   orgUnitSelectionIncomplete: boolean,
   programCategorySelectionIncomplete: boolean,

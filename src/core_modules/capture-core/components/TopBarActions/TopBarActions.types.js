@@ -4,8 +4,6 @@ export type Props = {
     selectedProgramId?: string,
     selectedOrgUnitId?: string,
     isUserInteractionInProgress?: boolean,
-    isSavingInProgress?: boolean,
-    onContextSwitch?: () => void,
 };
 
 export type PlainProps = {

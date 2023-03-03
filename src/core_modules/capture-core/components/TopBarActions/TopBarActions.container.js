@@ -12,7 +12,6 @@ const defaultContext = {
     openNewRegistrationPageWithoutProgramId: false,
     openSearchPage: false,
     openSearchPageWithoutProgramId: false,
-    fallback: null,
 };
 
 const defaultDialogProps = {
@@ -26,8 +25,6 @@ export const TopBarActions = ({
     selectedProgramId,
     selectedOrgUnitId,
     isUserInteractionInProgress = false,
-    isSavingInProgress = false,
-    onContextSwitch,
 }: Props) => {
     const [context, setContext] = useState(defaultContext);
     const {
@@ -35,7 +32,6 @@ export const TopBarActions = ({
         openNewRegistrationPageWithoutProgramId,
         openSearchPage,
         openSearchPageWithoutProgramId,
-        fallback,
     } = context;
     const openConfirmDialog =
         openNewRegistrationPage ||
@@ -43,13 +39,6 @@ export const TopBarActions = ({
         openSearchPage ||
         openSearchPageWithoutProgramId;
     const history = useHistory();
-
-    useEffect(() => {
-        if (!isSavingInProgress && fallback) {
-            fallback();
-            setContext(prev => ({ ...prev, fallback: null }));
-        }
-    }, [isSavingInProgress, fallback]);
 
     const newRegistrationPage = () => {
         const queryArgs = {};
@@ -86,42 +75,22 @@ export const TopBarActions = ({
     };
 
     const handleOpenNewRegistrationPage = () => {
-        if (isSavingInProgress) {
-            setContext(prev => ({ ...prev, fallback: () => newRegistrationPage() }));
-            onContextSwitch && onContextSwitch();
-            return;
-        }
         isUserInteractionInProgress
             ? setContext(prev => ({ ...prev, openNewRegistrationPage: true }))
             : newRegistrationPage();
     };
 
     const handleOpenNewRegistrationPageWithoutProgramId = () => {
-        if (isSavingInProgress) {
-            setContext(prev => ({ ...prev, fallback: () => newRegistrationPageWithoutProgramId() }));
-            onContextSwitch && onContextSwitch();
-            return;
-        }
         isUserInteractionInProgress
             ? setContext(prev => ({ ...prev, openNewRegistrationPageWithoutProgramId: true }))
             : newRegistrationPageWithoutProgramId();
     };
 
     const handleOpenSearchPage = () => {
-        if (isSavingInProgress) {
-            setContext(prev => ({ ...prev, fallback: () => searchPage() }));
-            onContextSwitch && onContextSwitch();
-            return;
-        }
         isUserInteractionInProgress ? setContext(prev => ({ ...prev, openSearchPage: true })) : searchPage();
     };
 
     const handleOpenSearchPageWithoutProgramId = () => {
-        if (isSavingInProgress) {
-            setContext(prev => ({ ...prev, fallback: () => searchPageWithoutProgramId() }));
-            onContextSwitch && onContextSwitch();
-            return;
-        }
         isUserInteractionInProgress
             ? setContext(prev => ({ ...prev, openSearchPageWithoutProgramId: true }))
             : searchPageWithoutProgramId();

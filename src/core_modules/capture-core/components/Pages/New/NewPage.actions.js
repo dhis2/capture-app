@@ -10,8 +10,8 @@ export const newPageActionTypes = {
     CATEGORY_OPTION_SET: 'NewPage.CategoryOptionSet',
     CATEGORY_OPTION_RESET: 'NewPage.CategoryOptionReset',
     ALL_CATEGORY_OPTIONS_RESET: 'NewPage.AllCategoryOptionsReset',
-    SWITCH_CONTEXT_WHILE_SAVING: 'NewPage.SwitchContextWhileSaving',
-    CLEAR_CONTEXT_SWITCH: 'NewPage.ClearContextSwitch',
+    ASSIGN_UID: 'NewPage.AssignUid',
+    REMOVE_UID: 'NewPage.RemoveUid',
 };
 
 export const showMessageToSelectOrgUnitOnNewPage = () =>
@@ -35,6 +35,5 @@ export const resetAllCategoryOptions = () => actionCreator(newPageActionTypes.AL
 
 export const openNewPage = () => actionCreator(newPageActionTypes.NEW_PAGE_OPEN)();
 
-export const switchContextWhileSaving = () => actionCreator(newPageActionTypes.SWITCH_CONTEXT_WHILE_SAVING)();
-
-export const clearContextSwitch = () => actionCreator(newPageActionTypes.CLEAR_CONTEXT_SWITCH)();
+export const assignUid = ({ formId }: { formId: string}) => actionCreator(newPageActionTypes.ASSIGN_UID)({ formId });
+export const removeUid = ({ formId, location }: { formId: string, location?: Object}) => actionCreator(newPageActionTypes.REMOVE_UID)({ formId, location });

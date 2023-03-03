@@ -61,9 +61,6 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId,
             dataEntryHasChanges(state, dataEntryKey),
     );
 
-    const isSavingInProgress = useSelector(({ possibleDuplicates }) =>
-        possibleDuplicates.isLoading || possibleDuplicates.isUpdating);
-
     return (
         <TeiRegistrationEntryComponent
             selectedScopeId={selectedScopeId}
@@ -71,7 +68,6 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId,
             ready={ready}
             trackedEntityName={trackedEntityName}
             isUserInteractionInProgress={isUserInteractionInProgress}
-            isSavingInProgress={isSavingInProgress}
             {...rest}
         />);
 };

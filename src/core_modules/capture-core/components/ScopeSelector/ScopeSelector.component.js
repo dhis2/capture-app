@@ -17,24 +17,12 @@ class ScopeSelectorClass extends Component<Props, State> {
             openCatComboWarning: false,
             openStartAgainWarning: false,
             categoryIdToReset: '',
-            fallback: null,
         };
-    }
-    componentDidUpdate(prevProps) {
-        if (prevProps.isSavingInProgress && !this.props.isSavingInProgress && this.state.fallback) {
-            this.state.fallback();
-            this.setState({ fallback: null });
-        }
     }
 
     dontShowWarning = () => !this.props.isUserInteractionInProgress;
 
     handleOpenOrgUnitWarning = () => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({ fallback: () => this.props.onResetOrgUnitId() });
-            return;
-        }
         if (this.dontShowWarning()) {
             this.props.onResetOrgUnitId();
             return;
@@ -43,11 +31,6 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     handleOpenProgramWarning = (baseAction: ReduxAction<any, any>) => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({ fallback: () => this.props.onResetProgramId(baseAction) });
-            return;
-        }
         if (this.dontShowWarning()) {
             this.props.onResetProgramId(baseAction);
             return;
@@ -56,13 +39,6 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     handleOpenCatComboWarning = (categoryId: string) => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({
-                fallback: () => this.props.onResetCategoryOption && this.props.onResetCategoryOption(categoryId),
-            });
-            return;
-        }
         if (this.dontShowWarning()) {
             this.props.onResetCategoryOption && this.props.onResetCategoryOption(categoryId);
             return;
@@ -71,13 +47,6 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     handleStartAgainWarning = () => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({
-                fallback: () => this.props.onStartAgain && this.props.onStartAgain(),
-            });
-            return;
-        }
         if (this.dontShowWarning()) {
             this.props.onStartAgain && this.props.onStartAgain();
             return;
@@ -116,74 +85,15 @@ class ScopeSelectorClass extends Component<Props, State> {
         this.handleClose();
     }
 
-    handleOnSetOrgUnit = (id: string, orgUnit: Object) => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({
-                fallback: () => this.props.onSetOrgUnit && this.props.onSetOrgUnit(id, orgUnit),
-            });
-            return;
-        }
-        if (this.dontShowWarning()) {
-            this.props.onSetOrgUnit && this.props.onSetOrgUnit(id, orgUnit);
-            return;
-        }
-        this.setState({ openOrgUnitWarning: true });
-    }
-
-    handleOnSetProgramId = (id: string) => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({
-                fallback: () => this.props.onSetProgramId && this.props.onSetProgramId(id),
-            });
-            return;
-        }
-        if (this.dontShowWarning()) {
-            this.props.onSetProgramId && this.props.onSetProgramId(id);
-            return;
-        }
-        this.setState({ openProgramWarning: true });
-    }
-
-    handleOnSetCategoryOption = (categoryOption: Object, categoryId: string) => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({
-                fallback: () => this.props.onSetCategoryOption && this.props.onSetCategoryOption(categoryOption, categoryId),
-            });
-            return;
-        }
-        if (this.dontShowWarning()) {
-            this.props.onSetCategoryOption && this.props.onSetCategoryOption(categoryOption, categoryId);
-            return;
-        }
-        this.setState({ openCatComboWarning: true });
-    }
-
-    handleOnResetAllCategoryOptions = () => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({
-                fallback: () => this.props.onResetAllCategoryOptions && this.props.onResetAllCategoryOptions(),
-            });
-            return;
-        }
-        if (this.dontShowWarning()) {
-            this.props.onResetAllCategoryOptions && this.props.onResetAllCategoryOptions();
-            return;
-        }
-        this.setState({ openCatComboWarning: true });
-    }
-
     render() {
+        const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
         return (
             <div data-test={'scope-selector'}>
                 <QuickSelector
-                    onSetOrgUnit={this.handleOnSetOrgUnit}
-                    onSetProgramId={this.handleOnSetProgramId}
-                    onSetCategoryOption={this.handleOnSetCategoryOption}
-                    onResetAllCategoryOptions={this.handleOnResetAllCategoryOptions}
+                    onSetOrgUnit={onSetOrgUnit}
+                    onSetProgramId={onSetProgramId}
+                    onSetCategoryOption={onSetCategoryOption}
+                    onResetAllCategoryOptions={onResetAllCategoryOptions}
                     onResetOrgUnitId={this.handleOpenOrgUnitWarning}
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
