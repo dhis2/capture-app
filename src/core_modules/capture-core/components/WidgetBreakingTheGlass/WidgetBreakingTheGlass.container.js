@@ -12,7 +12,6 @@ const glassBreakRequest = {
         program,
         reason,
     }),
-    data: payload => payload,
 };
 
 export const WidgetBreakingTheGlass = ({
