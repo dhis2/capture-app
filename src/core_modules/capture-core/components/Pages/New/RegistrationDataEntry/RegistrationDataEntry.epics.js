@@ -148,13 +148,12 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
-            const { currentSelections: { orgUnitId, programId }, formsValues, newPage, dataEntriesFieldsValue } = store.value;
+            const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
             const { dataStore, userDataStore } = store.value.useNewDashboard;
             const { occurredAt, enrolledAt, geometry } =
                 dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
             const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
-            const { uid, location } = newPage['newPageDataEntryId-newEnrollment'] || {};
             const stageWithOpenAfterEnrollment = getStageWithOpenAfterEnrollment(stages);
             const redirectToEnrollmentEventNew =
             shouldUseNewDashboard(userDataStore, dataStore, programId) && stageWithOpenAfterEnrollment !== undefined;
@@ -196,7 +195,6 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 },
                 redirectToEnrollmentEventNew,
                 stageId: stageWithOpenAfterEnrollment?.id,
-                fallback: { uid, location },
             });
         }),
     );
@@ -212,14 +210,13 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             const { payload: { bundleReport: { typeReportMap } }, meta } = action;
             const {
                 currentSelections: { orgUnitId, programId },
+                newPage,
             } = store.value;
+            const { uid } = newPage['newPageDataEntryId-newEnrollment'] || {};
             const teiId = typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const enrollmentId = typeReportMap.ENROLLMENT.objectReports[0].uid;
 
-            if (meta?.fallback && !meta.fallback.uid) {
-                if (meta.fallback.location) {
-                    history.push(meta.fallback.location);
-                }
+            if (!uid) {
                 return EMPTY;
             }
 

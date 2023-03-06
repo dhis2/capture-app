@@ -34,13 +34,11 @@ export const newPageDesc = createReducerDescription(
             };
         },
         [newPageActionTypes.REMOVE_UID]: (state, action) => {
-            const { formId, location } = action.payload;
+            const { formId } = action.payload;
             const newState = { ...state };
-            if (location) {
-                newState[formId] = { location };
-            } else {
-                delete newState[formId];
-            }
+
+            delete newState[formId];
+
             return {
                 ...newState,
             };

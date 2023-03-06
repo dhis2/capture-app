@@ -36,4 +36,4 @@ export const resetAllCategoryOptions = () => actionCreator(newPageActionTypes.AL
 export const openNewPage = () => actionCreator(newPageActionTypes.NEW_PAGE_OPEN)();
 
 export const assignUid = ({ formId }: { formId: string}) => actionCreator(newPageActionTypes.ASSIGN_UID)({ formId });
-export const removeUid = ({ formId, location }: { formId: string, location?: Object}) => actionCreator(newPageActionTypes.REMOVE_UID)({ formId, location });
+export const removeUid = ({ formId }: { formId: string }) => actionCreator(newPageActionTypes.REMOVE_UID)({ formId });
