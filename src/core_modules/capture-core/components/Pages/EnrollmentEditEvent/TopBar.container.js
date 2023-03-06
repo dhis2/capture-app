@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import Grid from '@material-ui/core/Grid';
 import { dataEntryKeys } from 'capture-core/constants';
 import type { ProgramStage } from '../../../metaData';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
@@ -14,8 +13,9 @@ import {
     useResetEnrollmentId,
     useResetStageId,
     useResetEventId,
+    useReset,
+    SingleLockedSelect,
 } from '../../ScopeSelector';
-import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import { TopBarActions } from '../../TopBarActions';
 
 type Props = {|
@@ -53,6 +53,7 @@ export const TopBar = ({
     const { resetTeiId } = useResetTeiId();
     const { resetStageId } = useResetStageId();
     const { resetEventId } = useResetEventId();
+    const { reset } = useReset();
     const isUserInteractionInProgress = mode === dataEntryKeys.EDIT;
 
     return (
@@ -63,71 +64,65 @@ export const TopBar = ({
             onResetProgramId={() => resetProgramIdAndEnrollmentContext('enrollment', { teiId })}
             onResetOrgUnitId={() => resetOrgUnitId()}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            onStartAgain={() => reset()}
         >
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-                <SingleLockedSelect
-                    ready={pageStatus !== pageStatuses.MISSING_DATA}
-                    onClear={() => resetTeiId('/', { programId })}
-                    options={[
-                        {
-                            label: teiDisplayName,
-                            value: 'alwaysPreselected',
-                        },
-                    ]}
-                    selectedValue="alwaysPreselected"
-                    title={trackedEntityName}
-                    isUserInteractionInProgress={isUserInteractionInProgress}
-                />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-                <SingleLockedSelect
-                    ready={pageStatus !== pageStatuses.MISSING_DATA}
-                    onClear={() => resetEnrollmentId('enrollment', { programId, teiId })}
-                    options={enrollmentsAsOptions}
-                    selectedValue={enrollmentId}
-                    title={i18n.t('Enrollment')}
-                    isUserInteractionInProgress={isUserInteractionInProgress}
-                />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-                <SingleLockedSelect
-                    ready={pageStatus !== pageStatuses.MISSING_DATA}
-                    onClear={() => resetStageId('enrollment', { enrollmentId })}
-                    options={[
-                        {
-                            label: programStage?.name || '',
-                            value: 'alwaysPreselected',
-                        },
-                    ]}
-                    selectedValue="alwaysPreselected"
-                    title={i18n.t('stage')}
-                    isUserInteractionInProgress={isUserInteractionInProgress}
-                />
-            </Grid>
+            <SingleLockedSelect
+                displayOnly
+                ready={pageStatus !== pageStatuses.MISSING_DATA}
+                onClear={() => resetTeiId('/', { programId })}
+                options={[
+                    {
+                        label: teiDisplayName,
+                        value: 'alwaysPreselected',
+                    },
+                ]}
+                selectedValue="alwaysPreselected"
+                title={trackedEntityName}
+                isUserInteractionInProgress={isUserInteractionInProgress}
+            />
+            <SingleLockedSelect
+                ready={pageStatus !== pageStatuses.MISSING_DATA}
+                onClear={() => resetEnrollmentId('enrollment', { programId, teiId })}
+                options={enrollmentsAsOptions}
+                selectedValue={enrollmentId}
+                title={i18n.t('Enrollment')}
+                isUserInteractionInProgress={isUserInteractionInProgress}
+            />
+            <SingleLockedSelect
+                displayOnly
+                ready={pageStatus !== pageStatuses.MISSING_DATA}
+                onClear={() => resetStageId('enrollment', { enrollmentId })}
+                options={[
+                    {
+                        label: programStage?.name || '',
+                        value: 'alwaysPreselected',
+                    },
+                ]}
+                selectedValue="alwaysPreselected"
+                title={i18n.t('Stage')}
+                isUserInteractionInProgress={isUserInteractionInProgress}
+            />
             {programStage && (
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                    <SingleLockedSelect
-                        ready={pageStatus !== pageStatuses.MISSING_DATA}
-                        onClear={() => resetEventId('enrollment', { enrollmentId })}
-                        options={[
-                            {
-                                label: eventDate || '',
-                                value: 'alwaysPreselected',
-                            },
-                        ]}
-                        selectedValue="alwaysPreselected"
-                        title={programStage.stageForm.getLabel('occurredAt')}
-                        isUserInteractionInProgress={isUserInteractionInProgress}
-                    />
-                </Grid>
-            )}
-            <Grid item xs={12} sm={6} md={6} lg={2}>
-                <TopBarActions
-                    selectedProgramId={programId}
-                    selectedOrgUnitId={orgUnitId}
-                    isUserInteractionInProgress={mode === dataEntryKeys.EDIT}
+                <SingleLockedSelect
+                    displayOnly
+                    ready={pageStatus !== pageStatuses.MISSING_DATA}
+                    onClear={() => resetEventId('enrollment', { enrollmentId })}
+                    options={[
+                        {
+                            label: eventDate || '',
+                            value: 'alwaysPreselected',
+                        },
+                    ]}
+                    selectedValue="alwaysPreselected"
+                    title={programStage.stageForm.getLabel('occurredAt')}
+                    isUserInteractionInProgress={isUserInteractionInProgress}
                 />
-            </Grid>
+            )}
+            <TopBarActions
+                selectedProgramId={programId}
+                selectedOrgUnitId={orgUnitId}
+                isUserInteractionInProgress={mode === dataEntryKeys.EDIT}
+            />
         </ScopeSelector>
     );
 };

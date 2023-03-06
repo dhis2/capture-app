@@ -118,7 +118,7 @@ Then the enrollment status filter button should show that the active filter is i
 And you delete the name My custom list
 Then the custom TEI is deleted
 
-Scenario: The user can delete a working list right imediatly after creating it.
+Scenario: The user can delete a working list right immediately after creating it.
 Given you open the main page with Ngelehun and Malaria case diagnosis context
 And you set the enrollment status filter to completed
 And you apply the current filter
@@ -131,9 +131,9 @@ Then the custom TEI is deleted
 
 @v>=39
 Scenario: The user can open and select a program stage filter
-Given you open the main page with Ngelehun and WHO RMNCH Tracker context
+Given you open the main page with Ngelehun and Malaria focus investigation context
 When you open the program stage filters from the more filters dropdown menu
-When you select the First antenatal care visit program stage
+When you select the Foci response program stage
 And you apply the current filter
 And you open the column selector
 And you select a data element columns and save from the column selector
@@ -173,3 +173,16 @@ And you apply the current filter
 Then you see program stage working list events
 When you remove the program stage filter
 Then you don't see program stage working list events
+
+@v>=39
+Scenario: The user can filter the events by scheduledAt date
+Given you open the main page with Ngelehun and WHO RMNCH Tracker context
+When you open the program stage filters from the more filters dropdown menu
+And you select the First antenatal care visit program stage
+And you apply the current filter
+Then you see scheduledAt filter
+And you open the column selector
+When you select a scheduledAt column and save from the column selector
+And you select the events scheduled today
+And you apply the current filter
+Then you see the selected option in the scheduledAt filter

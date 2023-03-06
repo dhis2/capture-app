@@ -1,10 +1,10 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import Grid from '@material-ui/core/Grid';
 import {
     ScopeSelector,
     useResetViewEventId,
+    useReset,
 } from '../../ScopeSelector';
 import {
     setCategoryOption,
@@ -24,6 +24,7 @@ type TopBarProps = {
 export const TopBar = ({ programId, orgUnitId, selectedCategories, isUserInteractionInProgress }: TopBarProps) => {
     const dispatch = useDispatch();
     const { resetViewEventId } = useResetViewEventId();
+    const { reset } = useReset();
     const dispatchOnSetCategoryOption = useCallback(
         (categoryOption: Object, categoryId: string) => {
             dispatch(setCategoryOption(categoryId, categoryOption));
@@ -53,14 +54,13 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories, isUserInterac
             onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
             onResetCategoryOption={dispatchOnResetCategoryOption}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            onStartAgain={() => reset()}
         >
-            <Grid item xs={12} sm={6} md={6} lg={2}>
-                <TopBarActions
-                    selectedProgramId={programId}
-                    selectedOrgUnitId={orgUnitId}
-                    isUserInteractionInProgress={isUserInteractionInProgress}
-                />
-            </Grid>
+            <TopBarActions
+                selectedProgramId={programId}
+                selectedOrgUnitId={orgUnitId}
+                isUserInteractionInProgress={isUserInteractionInProgress}
+            />
         </ScopeSelector>
     );
 };
