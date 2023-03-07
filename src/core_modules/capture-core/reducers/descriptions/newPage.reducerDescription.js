@@ -1,8 +1,8 @@
 // @flow
-import { v4 as uuid } from 'uuid';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { newPageStatuses } from '../../components/Pages/New/NewPage.constants';
+import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 
 type NewPageState = {
     newPageStatus: $Keys<typeof newPageStatuses>
@@ -25,19 +25,17 @@ export const newPageDesc = createReducerDescription(
             ...state,
             newPageStatus: newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED,
         }),
-        [newPageActionTypes.ASSIGN_UID]: (state, action) => {
-            const { formId } = action.payload;
-            const uid = uuid();
+        [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START]: (state, action) => {
+            const { uid } = action.payload;
+
             return {
                 ...state,
-                [formId]: { uid },
+                uid,
             };
         },
-        [newPageActionTypes.REMOVE_UID]: (state, action) => {
-            const { formId } = action.payload;
+        [newPageActionTypes.CLEAN_UP_UID]: (state) => {
             const newState = { ...state };
-
-            delete newState[formId];
+            delete newState.uid;
 
             return {
                 ...newState,

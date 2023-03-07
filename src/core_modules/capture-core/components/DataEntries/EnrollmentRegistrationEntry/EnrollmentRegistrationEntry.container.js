@@ -26,8 +26,9 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
           || dataEntryHasChanges(state, 'relationship-newEnrollment'),
     );
 
-    const isSavingInProgress = useSelector(({ possibleDuplicates }) =>
-        possibleDuplicates.isLoading || possibleDuplicates.isUpdating);
+
+    const isSavingInProgress = useSelector(({ possibleDuplicates, newPage }) =>
+        possibleDuplicates.isLoading || possibleDuplicates.isUpdating || !!newPage.uid);
 
     if (error) {
         return error.errorComponent;
