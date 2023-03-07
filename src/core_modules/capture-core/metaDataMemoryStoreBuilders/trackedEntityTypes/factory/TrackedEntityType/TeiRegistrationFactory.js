@@ -17,6 +17,8 @@ import type {
 } from '../../../../storageControllers/cache.types';
 import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './teiRegistrationFactory.types';
+import { DataEntryPlugin } from '../../../../metaData/DataEntryPlugin';
+import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/types';
 
 export class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
@@ -50,10 +52,12 @@ export class TeiRegistrationFactory {
 
     dataElementFactory: DataElementFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+    dataEntryFormConfig: ?DataEntryFormConfig;
 
     constructor({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
+        dataEntryFormConfig,
         locale,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
@@ -62,6 +66,7 @@ export class TeiRegistrationFactory {
             cachedOptionSets,
             locale,
         });
+        this.dataEntryFormConfig = dataEntryFormConfig;
     }
 
     async _buildSection(
@@ -70,7 +75,7 @@ export class TeiRegistrationFactory {
         const featureTypeField = TeiRegistrationFactory._buildTetFeatureTypeField(cachedType);
         const cachedTrackedEntityTypeAttributes = cachedType.trackedEntityTypeAttributes;
         if ((!cachedTrackedEntityTypeAttributes ||
-            cachedTrackedEntityTypeAttributes.length <= 0) &&
+                cachedTrackedEntityTypeAttributes.length <= 0) &&
             !featureTypeField) {
             return null;
         }
@@ -79,13 +84,75 @@ export class TeiRegistrationFactory {
             o.id = Section.MAIN_SECTION_ID;
             o.name = i18n.t('Profile');
         });
-
         featureTypeField && section.addElement(featureTypeField);
+
+        if (this.dataEntryFormConfig && cachedTrackedEntityTypeAttributes) {
+            const trackedEntityAttributeDictionary = cachedTrackedEntityTypeAttributes
+                .reduce((acc, trackedEntityAttribute) => {
+                    if (trackedEntityAttribute.trackedEntityAttributeId) {
+                        acc[trackedEntityAttribute.trackedEntityAttributeId] = trackedEntityAttribute;
+                    }
+                    return acc;
+                }, {});
+
+            // $FlowFixMe
+            this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
+                const attributes = formConfigSection.elements.reduce((acc, element) => {
+                    if (element.type === 'plugin') {
+                        const fieldMap = element
+                            .fieldMap
+                            ?.map(field => ({
+                                ...field,
+                                ...trackedEntityAttributeDictionary[field.IdFromApp],
+                            }));
+
+                        acc.push({ ...element, fieldMap });
+                        return acc;
+                    }
+                    const attribute = trackedEntityAttributeDictionary[element.id];
+                    if (attribute) {
+                        acc.push(attribute);
+                    }
+                    return acc;
+                }, []);
+
+                await attributes.asyncForEach(async (trackedEntityAttribute) => {
+                    if (trackedEntityAttribute?.type === 'plugin') {
+                        const element = new DataEntryPlugin((o) => {
+                            o.id = trackedEntityAttribute.id;
+                            o.name = trackedEntityAttribute.name;
+                            o.fields = new Map();
+                        });
+
+                        await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
+                            const dataElement = await this.dataElementFactory.build(field);
+                            dataElement && element.addField(field.IdFromPlugin, dataElement);
+                        });
+
+                        element && section.addElement(element);
+                    } else {
+                        const element = await this.dataElementFactory.build(trackedEntityAttribute);
+                        element && section.addElement(element);
+                    }
+                });
+            });
+            return section;
+        }
+
         if (cachedTrackedEntityTypeAttributes && cachedTrackedEntityTypeAttributes.length > 0) {
             // $FlowFixMe
-            await cachedTrackedEntityTypeAttributes.asyncForEach(async (ttea) => {
-                const element = await this.dataElementFactory.build(ttea);
-                element && section.addElement(element);
+            await cachedTrackedEntityTypeAttributes.asyncForEach(async (trackedEntityAttribute) => {
+                if (trackedEntityAttribute?.type === 'plugin') {
+                    const element = new DataEntryPlugin((o) => {
+                        o.id = trackedEntityAttribute.id;
+                        o.name = trackedEntityAttribute.name;
+                        o.fields = trackedEntityAttribute.fieldMap;
+                    });
+                    element && section.addElement(element);
+                } else {
+                    const element = await this.dataElementFactory.build(trackedEntityAttribute);
+                    element && section.addElement(element);
+                }
             });
         }
 

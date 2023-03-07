@@ -7,6 +7,7 @@ import type {
 import type { CachedProgram, CachedTrackedEntityType } from '../../../../../storageControllers/cache.types';
 import type { TrackedEntityType } from '../../../../../metaData';
 import { buildSearchGroup } from '../../../../Pages/Search/hooks';
+import type { DataEntryFormConfig } from '../../types';
 
 type Props = {|
     cachedOptionSets: OptionSet[],
@@ -14,6 +15,7 @@ type Props = {|
     trackedEntityTypeCollection: TrackedEntityType,
     cachedProgram: CachedProgram,
     cachedTrackedEntityAttributes: TrackedEntityAttribute[],
+    dataEntryFormConfig: ?DataEntryFormConfig,
     locale: string,
 |}
 
@@ -23,6 +25,7 @@ export const buildEnrollmentForm = async ({
     trackedEntityTypeCollection,
     cachedProgram,
     cachedTrackedEntityAttributes,
+    dataEntryFormConfig,
     locale,
 }: Props) => {
     const searchGroups = await buildSearchGroup(cachedProgram);
@@ -32,6 +35,7 @@ export const buildEnrollmentForm = async ({
         cachedTrackedEntityTypes: new Map([[cachedTrackedEntityType.id, cachedTrackedEntityType]]),
         trackedEntityTypeCollection: new Map([[trackedEntityTypeCollection.id, trackedEntityTypeCollection]]),
         locale,
+        dataEntryFormConfig,
     });
 
     return enrollmentFactory.build(cachedProgram, searchGroups);

@@ -1,5 +1,24 @@
 // @flow
-import type { TeiRegistration } from '../../../metaData/TrackedEntityType/TeiRegistration';
-import type { Enrollment } from '../../../metaData/Program/Enrollment';
+import type { TeiRegistration, Enrollment } from '../../../metaData';
 
 export type RegistrationFormMetadata = ?(TeiRegistration | Enrollment)
+
+type ConfigElement = ?({|
+    id: string,
+    dataElement: 'plugin',
+    fieldMap: Array<{|
+        IdFromApp: string,
+        IdFromPlugin: string,
+    |}>
+|} | {|
+    id: string,
+    dataElement: 'dataElement',
+|})
+
+export type DataEntryFormConfig = {|
+    [key: string]: Array<{|
+        id: string,
+        name: string,
+        elements: Array<ConfigElement>,
+    |}>
+|}

@@ -4,6 +4,7 @@ import { buildEnrollmentForm } from '../buildFunctions/buildEnrollmentForm';
 import type { TrackedEntityType, Program } from '../../../../../metaData';
 import type { OptionSet, TrackedEntityAttribute } from '../../../../WidgetProfile/DataEntry/FormFoundation/types';
 import { scopeTypes } from '../../../../../metaData';
+import type { DataEntryFormConfig } from '../../types';
 
 type Props = {
     scopeType: $Values<typeof scopeTypes>,
@@ -12,6 +13,8 @@ type Props = {
     trackedEntityTypeCollection: ?TrackedEntityType,
     program: ?Program,
     cachedTrackedEntityAttributes: ?TrackedEntityAttribute[],
+    dataEntryFormConfig: ?DataEntryFormConfig,
+    configIsFetched: boolean,
     locale: string,
 };
 
@@ -21,6 +24,8 @@ export const useEnrollmentFormFoundation = ({
     trackedEntityType,
     trackedEntityTypeCollection,
     cachedTrackedEntityAttributes,
+    dataEntryFormConfig,
+    configIsFetched,
     program,
     locale,
 }: Props) => {
@@ -37,6 +42,7 @@ export const useEnrollmentFormFoundation = ({
             cachedTrackedEntityAttributes,
             // $FlowFixMe
             cachedOptionSets: optionSets,
+            dataEntryFormConfig,
             locale,
         }),
         {
@@ -45,7 +51,8 @@ export const useEnrollmentFormFoundation = ({
                 !!optionSets &&
                 !!trackedEntityType &&
                 !!trackedEntityTypeCollection &&
-                !!program
+                !!program &&
+                configIsFetched
             ),
         },
     );
