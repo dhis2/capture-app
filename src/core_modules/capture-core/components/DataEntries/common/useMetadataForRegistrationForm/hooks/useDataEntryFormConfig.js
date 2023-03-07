@@ -1,21 +1,21 @@
 // @flow
 
 import { useDataEngine } from '@dhis2/app-runtime';
-import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 
 type Props = {|
     selectedScopeId: string,
 |}
 
+const configQuery = {
+    dataEntryFormConfigQuery: {
+        resource: 'dataStore/capture/dataEntryForms',
+    },
+};
+
 export const useDataEntryFormConfig = ({ selectedScopeId }: Props) => {
     const dataEngine = useDataEngine();
 
-    const configQuery = useMemo(() => ({
-        dataEntryFormConfigQuery: {
-            resource: 'dataStore/capture/dataEntryForms',
-        },
-    }), []);
 
     const { data: dataEntryFormConfig, isFetched: configIsFetched } = useQuery(
         ['dataEntryFormConfig'],

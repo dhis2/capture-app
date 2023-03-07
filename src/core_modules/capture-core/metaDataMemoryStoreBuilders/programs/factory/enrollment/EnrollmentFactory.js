@@ -134,7 +134,7 @@ export class EnrollmentFactory {
     ) {
         // $FlowFixMe
         await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
-            if (trackedEntityAttribute?.type === 'plugin') {
+            if (trackedEntityAttribute?.id === 'plugin') {
                 const element = new DataEntryPlugin((o) => {
                     o.id = trackedEntityAttribute.id;
                     o.name = trackedEntityAttribute.name;
@@ -231,7 +231,7 @@ export class EnrollmentFactory {
 
             if (cachedProgramTrackedEntityAttributes) {
                 const trackedEntityAttributeDictionary = cachedProgramTrackedEntityAttributes
-                    ?.reduce((acc, trackedEntityAttribute) => {
+                    .reduce((acc, trackedEntityAttribute) => {
                         if (trackedEntityAttribute.trackedEntityAttributeId) {
                             acc[trackedEntityAttribute.trackedEntityAttributeId] = trackedEntityAttribute;
                         }

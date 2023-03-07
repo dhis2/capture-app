@@ -142,7 +142,7 @@ export class RenderFoundation {
             .reduce((accElements, section) => {
                 const elementsInSection =
                     Array.from(section.elements.entries()).reduce((accElementsInSection, elementEntry) => {
-                        const dataEntryElement = elementEntry[0];
+                        const dataEntryElement = elementEntry[1];
                         if (dataEntryElement instanceof DataEntryPlugin) {
                             accElementsInSection[dataEntryElement.id] = Array.from(dataEntryElement.fields.entries())
                                 .reduce((accFields, fieldEntry) => {
@@ -151,7 +151,7 @@ export class RenderFoundation {
                                     return accFields;
                                 }, {});
                         } else if (dataEntryElement instanceof DataElement) {
-                            accElementsInSection[dataEntryElement.id] = dataEntryElement;
+                            accElementsInSection[elementEntry[0]] = dataEntryElement;
                         }
                         return accElementsInSection;
                     }, {});

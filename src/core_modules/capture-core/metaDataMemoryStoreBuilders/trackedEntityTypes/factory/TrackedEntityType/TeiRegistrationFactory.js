@@ -117,7 +117,7 @@ export class TeiRegistrationFactory {
                 }, []);
 
                 await attributes.asyncForEach(async (trackedEntityAttribute) => {
-                    if (trackedEntityAttribute?.type === 'plugin') {
+                    if (trackedEntityAttribute?.id === 'plugin') {
                         const element = new DataEntryPlugin((o) => {
                             o.id = trackedEntityAttribute.id;
                             o.name = trackedEntityAttribute.name;
@@ -142,17 +142,8 @@ export class TeiRegistrationFactory {
         if (cachedTrackedEntityTypeAttributes && cachedTrackedEntityTypeAttributes.length > 0) {
             // $FlowFixMe
             await cachedTrackedEntityTypeAttributes.asyncForEach(async (trackedEntityAttribute) => {
-                if (trackedEntityAttribute?.type === 'plugin') {
-                    const element = new DataEntryPlugin((o) => {
-                        o.id = trackedEntityAttribute.id;
-                        o.name = trackedEntityAttribute.name;
-                        o.fields = trackedEntityAttribute.fieldMap;
-                    });
-                    element && section.addElement(element);
-                } else {
-                    const element = await this.dataElementFactory.build(trackedEntityAttribute);
-                    element && section.addElement(element);
-                }
+                const element = await this.dataElementFactory.build(trackedEntityAttribute);
+                element && section.addElement(element);
             });
         }
 

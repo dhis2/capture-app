@@ -5,7 +5,8 @@ export type RegistrationFormMetadata = ?(TeiRegistration | Enrollment)
 
 type ConfigElement = ?({|
     id: string,
-    dataElement: 'plugin',
+    type: 'plugin',
+    name: string,
     fieldMap: Array<{|
         IdFromApp: string,
         IdFromPlugin: string,
