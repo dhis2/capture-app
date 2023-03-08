@@ -17,5 +17,5 @@ export const serverErrorMessages = {
     OWNERSHIP_ACCESS_PARTIALLY_DENIED: 'OWNERSHIP_ACCESS_PARTIALLY_DENIED',
     OWNERSHIP_ACCESS_DENIED: 'OWNERSHIP_ACCESS_DENIED',
     PROGRAM_ACCESS_CLOSED: 'PROGRAM_ACCESS_CLOSED',
-    ORGUNIT_OUT_OF_SCOPE: '[User has no read access to organisation unit:',
+    ORGUNIT_OUT_OF_SCOPE: 'User has no read access to organisation unit:',
 };

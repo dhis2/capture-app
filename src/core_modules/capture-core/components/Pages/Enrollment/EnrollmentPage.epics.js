@@ -39,6 +39,22 @@ const enrollmentsQuery = (teiId, programId) => ({
     },
 });
 
+const autoSelectEnrollment = (
+    programId: string,
+    orgUnitId: string,
+    teiId: string,
+): InputObservable => {
+    if (teiId && programId) {
+        return of(openEnrollmentPage({
+            programId,
+            orgUnitId,
+            teiId,
+            enrollmentId: 'AUTO',
+        }));
+    }
+    return of(startFetchingTeiFromTeiId());
+};
+
 const fetchTeiStream = (teiId, querySingleResource) =>
     from(querySingleResource(teiQuery(teiId)))
         .pipe(
@@ -77,12 +93,7 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
         flatMap(() => {
             const { enrollmentId, programId, orgUnitId, teiId } = getLocationQuery();
             if (enrollmentId === 'AUTO') {
-                return of(openEnrollmentPage({
-                    programId,
-                    orgUnitId,
-                    teiId,
-                    enrollmentId,
-                }));
+                return autoSelectEnrollment(programId, orgUnitId, teiId);
             }
             return from(querySingleResource({ resource: 'tracker/enrollments', id: enrollmentId }))
                 .pipe(
@@ -93,10 +104,7 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
                             teiId: trackedEntity,
                             enrollmentId,
                         })),
-                    catchError(() => {
-                        const error = i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId });
-                        return of(showErrorViewOnEnrollmentPage({ error }));
-                    }),
+                    catchError(() => autoSelectEnrollment(programId, orgUnitId, teiId)),
                     startWith(showLoadingViewOnEnrollmentPage()),
                 );
         }),
@@ -131,13 +139,13 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
                     }),
                     catchError((error) => {
                         if (error.message) {
-                            if (error.message === serverErrorMessages.OWNERSHIP_ACCESS_PARTIALLY_DENIED) {
+                            if (error.message.includes(serverErrorMessages.OWNERSHIP_ACCESS_PARTIALLY_DENIED)) {
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS }));
-                            } else if (error.message === serverErrorMessages.OWNERSHIP_ACCESS_DENIED) {
+                            } else if (error.message.includes(serverErrorMessages.OWNERSHIP_ACCESS_DENIED)) {
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS })); // Todo: Change to NO_ACCESS
-                            } else if (error.message === serverErrorMessages.PROGRAM_ACCESS_CLOSED) {
+                            } else if (error.message.includes(serverErrorMessages.PROGRAM_ACCESS_CLOSED)) {
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
-                            } else if (error.message.startsWith(serverErrorMessages.ORGUNIT_OUT_OF_SCOPE)) {
+                            } else if (error.message.includes(serverErrorMessages.ORGUNIT_OUT_OF_SCOPE)) {
                                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
                             }
                         }
@@ -158,11 +166,12 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
                 programId: queryProgramId,
                 teiId: queryTeiId,
             } = getLocationQuery();
-            const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
-            if (!urlCompleted) {
+            if (enrollmentId !== queryEnrollment ||
+                orgUnitId !== queryOrgUnitId ||
+                programId !== queryProgramId ||
+                teiId !== queryTeiId) {
                 history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
-                return fetchTeiStream(teiId, querySingleResource);
             }
             return fetchTeiStream(teiId, querySingleResource);
         },

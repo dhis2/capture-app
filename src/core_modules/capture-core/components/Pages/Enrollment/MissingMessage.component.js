@@ -29,11 +29,11 @@ export const missingStatuses = {
 const useMissingStatus = () => {
     const [missingStatus, setStatus] = useState(null);
 
-    const { programId, enrollmentId } = useLocationQuery();
+    const { programId, enrollmentId, teiId } = useLocationQuery();
 
     const { scopeType, tetId: scopeTetId } = useScopeInfo(programId);
     const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
-    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, tetId } = useEnrollmentInfo(enrollmentId, programId);
+    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, tetId } = useEnrollmentInfo(enrollmentId, programId, teiId);
     const { enrollmentAccessLevel } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const selectedProgramIsOfDifferentTypTetype = scopeTetId !== tetId;
     useEffect(() => {
