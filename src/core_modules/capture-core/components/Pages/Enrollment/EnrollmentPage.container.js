@@ -58,14 +58,19 @@ const useComputedEnrollmentPageStatus = () => {
     useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
 
     const { teiId, programId, enrollmentId } = useLocationQuery();
+    const { scopeType } = useScopeInfo(programId);
 
     return useMemo(() => {
+        if (scopeType === scopeTypes.EVENT_PROGRAM) {
+            return enrollmentPageStatuses.MISSING_SELECTIONS;
+        }
         if (enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
             !(programId && teiId && enrollmentId)) {
             return enrollmentPageStatuses.LOADING;
         }
         return enrollmentPageStatus;
     }, [
+        scopeType,
         enrollmentPageStatus,
         enrollmentId,
         teiId,

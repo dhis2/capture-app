@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useEffect } from 'react';
 // $FlowFixMe
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -20,6 +20,7 @@ import { dataElementTypes } from '../../../metaData/DataElement';
 import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
+import { cleanUpDataEntry } from '../../DataEntry';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -63,6 +64,10 @@ export const EnrollmentEditEventPage = () => {
 const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollmentId, orgUnitId, eventId }: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
+
+    useEffect(() => () => {
+        dispatch(cleanUpDataEntry(dataEntryIds.ENROLLMENT_EVENT));
+    }, [dispatch]);
 
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);

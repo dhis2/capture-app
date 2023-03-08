@@ -15,6 +15,7 @@ export type OwnProps = $ReadOnly<{|
   onSetCategoryOption?: (categoryOption: Object, categoryId: string) => void,
   onResetAllCategoryOptions?: () => void,
   onResetCategoryOption?: (categoryId: string) => void,
+  onStartAgain: () => void,
   children: Node,
 |}>
 
@@ -34,5 +35,6 @@ export type State = {|
   openOrgUnitWarning: boolean;
   openProgramWarning: ?Object;
   openCatComboWarning: boolean;
+  openStartAgainWarning: boolean;
   categoryIdToReset: string;
 |};

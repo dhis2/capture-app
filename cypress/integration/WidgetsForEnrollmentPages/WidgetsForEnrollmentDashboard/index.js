@@ -44,7 +44,7 @@ Then(/^the profile widget attributes list contains the text (.*)$/, (name) => {
 
 Then(/^the scope selector list contains the text (.*)$/, (name) => {
     cy.get('[data-test="scope-selector"]').within(() => {
-        cy.contains('Selected person').should('exist');
+        cy.contains('Person').should('exist');
         cy.contains(name).should('exist');
     });
 });
