@@ -3,8 +3,10 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
     ScopeSelector,
+    useSetProgramId,
     useSetOrgUnitId,
     useSetEnrollmentId,
+    useResetProgramId,
     useResetOrgUnitId,
     useResetTeiId,
     useResetEnrollmentId,
@@ -20,8 +22,6 @@ type TopBarProps = {
     trackedEntityName: string,
     teiDisplayName: string,
     enrollmentsAsOptions: Array<Object>,
-    selectProgramHandler: (id: string) => void,
-    deselectProgramHandler: () => void,
 };
 
 export const TopBar = ({
@@ -31,12 +31,12 @@ export const TopBar = ({
     trackedEntityName,
     teiDisplayName,
     enrollmentsAsOptions,
-    selectProgramHandler,
-    deselectProgramHandler,
 }: TopBarProps) => {
+    const { setProgramId } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
     const { setEnrollmentId } = useSetEnrollmentId();
 
+    const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
     const { resetEnrollmentId } = useResetEnrollmentId();
     const { resetTeiId } = useResetTeiId();
@@ -46,9 +46,9 @@ export const TopBar = ({
         <ScopeSelector
             selectedProgramId={programId}
             selectedOrgUnitId={orgUnitId}
-            onSetProgramId={selectProgramHandler}
+            onSetProgramId={id => setProgramId(id)}
             onSetOrgUnit={id => setOrgUnitId(id)}
-            onResetProgramId={deselectProgramHandler}
+            onResetProgramId={() => resetProgramIdAndEnrollmentContext()}
             onResetOrgUnitId={() => resetOrgUnitId()}
             onStartAgain={() => reset()}
         >

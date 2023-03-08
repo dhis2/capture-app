@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
@@ -20,8 +20,6 @@ import { getScopeInfo } from '../../../metaData';
 import {
     buildEnrollmentsAsOptions,
     useSetEnrollmentId,
-    useSetProgramId,
-    useResetProgramId,
 } from '../../ScopeSelector';
 import { useLocationQuery } from '../../../utils/routing';
 
@@ -92,24 +90,6 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const { trackedEntityName } = getScopeInfo(tetId);
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
-    const { setProgramId } = useSetProgramId();
-    const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
-
-    const selectProgramHandler = useCallback(
-        (id) => {
-            setProgramId(id);
-            dispatch(fetchEnrollments());
-        },
-        [dispatch, setProgramId],
-    );
-
-    const deselectProgramHandler = useCallback(
-        () => {
-            resetProgramIdAndEnrollmentContext();
-            dispatch(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS }));
-        },
-        [dispatch, resetProgramIdAndEnrollmentContext],
-    );
 
     useEffect(() => {
         dispatch(fetchEnrollmentPageInformation());
@@ -117,6 +97,16 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     [
         dispatch,
         teiId,
+    ]);
+
+    useEffect(() => {
+        programId ?
+            dispatch(fetchEnrollments()) :
+            dispatch(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS }));
+    },
+    [
+        dispatch,
+        programId,
     ]);
 
     const error: boolean =
@@ -132,8 +122,6 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
             trackedEntityName={trackedEntityName}
             enrollmentsAsOptions={enrollmentsAsOptions}
             enrollmentPageStatus={useComputedEnrollmentPageStatus()}
-            selectProgramHandler={selectProgramHandler}
-            deselectProgramHandler={deselectProgramHandler}
         />
     );
 };

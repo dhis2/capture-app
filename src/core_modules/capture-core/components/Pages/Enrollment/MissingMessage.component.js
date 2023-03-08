@@ -14,6 +14,7 @@ import { WidgetBreakingTheGlass } from '../../WidgetBreakingTheGlass';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
 import { fetchEnrollments } from './EnrollmentPage.actions';
+import { useResetProgramId } from '../../ScopeSelector';
 
 export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',
@@ -94,12 +95,12 @@ const getStyles = () => ({
 });
 
 export const MissingMessage = withStyles(getStyles)(({
-    deselectProgramHandler,
     classes,
 }) => {
     const dispatch = useDispatch();
     const { navigateToProgramRegistrationPage, navigateToEventWorkingList } = useNavigations();
     const { missingStatus } = useMissingStatus();
+    const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const { programId, teiId } = useLocationQuery();
 
@@ -140,7 +141,7 @@ export const MissingMessage = withStyles(getStyles)(({
                 teiId={teiId}
                 programId={programId}
                 onBreakingTheGlass={() => dispatch(fetchEnrollments())}
-                onCancel={deselectProgramHandler}
+                onCancel={resetProgramIdAndEnrollmentContext}
             />
         }
 

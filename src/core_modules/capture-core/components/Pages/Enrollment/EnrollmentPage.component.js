@@ -32,8 +32,6 @@ const EnrollmentPagePlain = ({
     teiDisplayName,
     enrollmentPageStatus,
     enrollmentsAsOptions,
-    selectProgramHandler,
-    deselectProgramHandler,
 }) => (
     <>
         <TopBar
@@ -43,12 +41,10 @@ const EnrollmentPagePlain = ({
             teiDisplayName={teiDisplayName}
             enrollmentsAsOptions={enrollmentsAsOptions}
             enrollmentId={enrollmentId}
-            selectProgramHandler={selectProgramHandler}
-            deselectProgramHandler={deselectProgramHandler}
         />
 
         <div data-test="enrollment-page-content" className={classes.container}>
-            {enrollmentPageStatus === enrollmentPageStatuses.MISSING_SELECTIONS && <MissingMessage deselectProgramHandler={deselectProgramHandler} />}
+            {enrollmentPageStatus === enrollmentPageStatuses.MISSING_SELECTIONS && <MissingMessage />}
 
             {enrollmentPageStatus === enrollmentPageStatuses.DEFAULT && <EnrollmentPageDefault />}
 
