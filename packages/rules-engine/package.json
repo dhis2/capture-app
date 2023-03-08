@@ -1,0 +1,22 @@
+{
+    "name": "@dhis2/rules-engine-javascript",
+    "version": "100.26.0",
+    "license": "BSD-3-Clause",
+    "main": "./build/cjs/index.js",
+    "scripts": {
+        "linter:check": "eslint -c .eslintrc . --quiet",
+        "build": "d2-app-scripts build",
+        "build:flow": "gen-flow-files src --out-dir build/cjs",
+        "build:watch": "d2-app-scripts build --watch",
+        "clean": "../../scripts/clean.sh"
+    },
+    "dependencies": {
+        "d2-utilizr": "^0.2.15",
+        "loglevel": "^1.8.0"
+    },
+    "module": "./build/es/index.js",
+    "exports": {
+        "import": "./build/es/index.js",
+        "require": "./build/cjs/index.js"
+    }
+}

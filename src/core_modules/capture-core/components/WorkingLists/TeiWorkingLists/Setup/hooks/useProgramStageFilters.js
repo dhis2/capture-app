@@ -11,11 +11,15 @@ const useProgramStageData = (programStageId, stages) =>
         const programStage = programStageId && stages.get(programStageId);
         if (programStage) {
             return {
+                hideDueDate: programStage.hideDueDate,
                 occurredAtLabel: programStage.stageForm.getLabel('occurredAt'),
+                scheduledAtLabel: programStage.stageForm.getLabel('scheduledAt'),
             };
         }
         return {
             occurredAtLabel: i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
+            scheduledAtLabel: i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
+            hideDueDate: undefined,
         };
     }, [programStageId, stages]);
 
@@ -31,7 +35,7 @@ const useProgramStageDropdowOptions = stages =>
 
 export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageId?: string) => {
     const supportsProgramStageWorkingLists = useFeature(FEATURES.programStageWorkingList);
-    const { occurredAtLabel } = useProgramStageData(programStageId, stages);
+    const { hideDueDate, occurredAtLabel, scheduledAtLabel } = useProgramStageData(programStageId, stages);
     const options: Array<{ text: string, value: string }> = useProgramStageDropdowOptions(stages);
 
     return useMemo(() => {
@@ -89,8 +93,35 @@ export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageI
                         status: rawFilter.split(':')[1],
                     }),
                 },
+                ...(hideDueDate === false
+                    ? [
+                        {
+                            id: ADDITIONAL_FILTERS.scheduledAt,
+                            type: 'DATE',
+                            header: scheduledAtLabel,
+                            disabled: !programStageId,
+                            tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
+                                label: scheduledAtLabel,
+                                interpolation: { escapeValue: false },
+                            }),
+                            transformRecordsFilter: (filter: string) => {
+                                const queryArgs = {};
+                                const filterParts = filter.split(':');
+                                const indexGe = filterParts.indexOf('ge');
+                                const indexLe = filterParts.indexOf('le');
+                                if (indexGe !== -1 && filterParts[indexGe + 1]) {
+                                    queryArgs.scheduledAfter = filterParts[indexGe + 1];
+                                }
+                                if (indexLe !== -1 && filterParts[indexLe + 1]) {
+                                    queryArgs.scheduledBefore = filterParts[indexLe + 1];
+                                }
+                                return queryArgs;
+                            },
+                        },
+                    ]
+                    : []),
             ];
         }
         return [];
-    }, [programStageId, supportsProgramStageWorkingLists, occurredAtLabel, options]);
+    }, [programStageId, supportsProgramStageWorkingLists, occurredAtLabel, scheduledAtLabel, hideDueDate, options]);
 };
