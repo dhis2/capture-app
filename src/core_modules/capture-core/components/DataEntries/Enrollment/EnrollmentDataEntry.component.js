@@ -137,7 +137,7 @@ const getCategoryOptionsSettingsFn = () => {
         getComponent: () => categoryOptionsComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
-            categories: props.programCategory.categories.map(({ id, displayName }) => ({ id, name: displayName })),
+            categories: props.programCategory.categories,
             selectedCategories: props.selectedCategories,
             selectedOrgUnitId: props.orgUnitId,
             onClickCategoryOption: props.onClickCategoryOption,
@@ -310,13 +310,17 @@ type State = {
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps, State> {
     constructor(props) {
         super(props);
-        if (props.programCategory) {
-            dataEntrySectionDefinitions[sectionKeysForEnrollmentDataEntry.CATEGORYCOMBO].name
-            = props.programCategory.displayName;
-        }
+
+        const dataEntrySections = props.programCategory ? {
+            ...dataEntrySectionDefinitions,
+            [sectionKeysForEnrollmentDataEntry.CATEGORYCOMBO]: {
+                ...dataEntrySectionDefinitions[sectionKeysForEnrollmentDataEntry.CATEGORYCOMBO],
+                name: props.programCategory.displayName,
+            },
+        } : dataEntrySectionDefinitions;
 
         this.state = {
-            dataEntrySections: dataEntrySectionDefinitions,
+            dataEntrySections,
         };
     }
 

@@ -422,13 +422,16 @@ class DataEntryPlain extends Component<Props, State> {
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
 
-        if (props.programCategory) {
-            dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO].name
-            = props.programCategory.displayName;
-        }
+        const dataEntrySections = props.programCategory ? {
+            ...dataEntrySectionDefinitions,
+            [dataEntrySectionNames.CATEGORYCOMBO]: {
+                ...dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO],
+                name: props.programCategory.displayName,
+            },
+        } : dataEntrySectionDefinitions;
 
         this.state = {
-            dataEntrySections: dataEntrySectionDefinitions,
+            dataEntrySections,
         };
     }
 

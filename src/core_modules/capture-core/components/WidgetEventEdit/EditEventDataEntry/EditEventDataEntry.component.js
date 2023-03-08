@@ -423,11 +423,15 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        if (props.programCategory) {
-            dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO].name
-            = props.programCategory.displayName;
-        }
-        this.state = { mode: tabMode.REPORT, dataEntrySections: dataEntrySectionDefinitions };
+        const dataEntrySections = props.programCategory ? {
+            ...dataEntrySectionDefinitions,
+            [dataEntrySectionNames.CATEGORYCOMBO]: {
+                ...dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO],
+                name: props.programCategory.displayName,
+            },
+        } : dataEntrySectionDefinitions;
+
+        this.state = { mode: tabMode.REPORT, dataEntrySections };
         this.onHandleSwitchTab = this.onHandleSwitchTab.bind(this);
     }
 
