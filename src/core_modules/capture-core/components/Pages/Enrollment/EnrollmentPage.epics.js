@@ -126,7 +126,7 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
         flatMap(() => {
             const { teiId, programId } = getLocationQuery();
 
-            if (!programId) {
+            if (!teiId || !programId) {
                 return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS }));
             }
 
