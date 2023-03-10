@@ -7,8 +7,19 @@ import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
 import { getCategoryOptionsValidatorContainers } from './fieldValidators';
 import { updateCatCombo, removeCatCombo } from '../../WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
 import type { CategoryOption } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
+import { getProgramThrowIfNotFound } from '../../../metaData';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state: ReduxState, props: Object) => {
+    const { stages } = getProgramThrowIfNotFound(props.programId);
+    /**
+     * Show AOC selection ONLY if there are any program stages in the program with:
+        “Auto-generate event” and NOT “Open data entry form after enrollment”.
+     */
+    const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
+
+    const { attributeCategoryOptions } = state.dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
+    return { shouldShowAOC, stateCategoryOptions: attributeCategoryOptions };
+};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch, props) => ({
     onUpdateDataEntryField: (

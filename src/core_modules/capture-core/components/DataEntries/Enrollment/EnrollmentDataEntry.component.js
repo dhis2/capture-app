@@ -133,7 +133,7 @@ const getCategoryOptionsSettingsFn = () => {
             ),
         );
     const categoryOptionsSettings = {
-        isApplicable: (props: Object) => !!props.programCategory?.categories && !props.programCategory.isDefault,
+        isApplicable: (props: Object) => props.shouldShowAOC && !!props.programCategory?.categories && !props.programCategory.isDefault,
         getComponent: () => categoryOptionsComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             orientation: getOrientation(props.formHorizontal),
