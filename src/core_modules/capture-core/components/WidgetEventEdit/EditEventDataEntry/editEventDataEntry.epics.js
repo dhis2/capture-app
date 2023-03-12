@@ -1,12 +1,12 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter, flatMap, switchMap } from 'rxjs/operators';
+import { map, filter, flatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
 import { EMPTY, of } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
-import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
+import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
@@ -34,7 +34,6 @@ import {
     showEditEventDataEntry,
 } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString';
-
 import {
     updateEventContainer,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
@@ -47,17 +46,16 @@ const getDataEntryId = (event): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
-
-export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
-        switchMap((action) => {
+        map((action) => {
             const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
-                return of(prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error));
+                return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
             }
 
             const program = metadataContainer.program;
@@ -65,50 +63,19 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
             const orgUnit = action.payload.orgUnit;
             const { enrollment, attributeValues } = state.enrollmentDomain;
 
-            const editDataEntryPayload = {
-                loadedValues,
-                orgUnit,
-                foundation,
-                program,
-                enrollment,
-                attributeValues,
-                dataEntryId: getDataEntryId(eventContainer.event),
-                dataEntryKey: dataEntryKeys.EDIT,
-                attributeCategoryOptions: null,
-            };
-            const actions = batchActions([
+            return batchActions([
                 showEditEventDataEntry(),
-                ...openEventForEditInDataEntry(editDataEntryPayload),
+                ...openEventForEditInDataEntry({
+                    loadedValues,
+                    orgUnit,
+                    foundation,
+                    program,
+                    enrollment,
+                    attributeValues,
+                    dataEntryId: getDataEntryId(eventContainer.event),
+                    dataEntryKey: dataEntryKeys.EDIT,
+                }),
             ]);
-
-            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
-                if (typeof (eventContainer.event.attributeCategoryOptions) === 'string') {
-                    const categoryIds = eventContainer.event.attributeCategoryOptions.split(';');
-                    return querySingleResource({
-                        resource: 'categoryOptions',
-                        params: {
-                            fields: 'id,displayName,categories[id]',
-                            filter: `id:in:[${categoryIds.join(',')}]`,
-                        },
-                    }).then(({ categoryOptions }) => {
-                        editDataEntryPayload.attributeCategoryOptions = categoryOptions
-                            .reduce((acc, { categories, ...rest }) => {
-                                categories.forEach(({ id }) => {
-                                    acc[id] = { ...rest };
-                                });
-                                return acc;
-                            }, {});
-
-                        return batchActions([
-                            showEditEventDataEntry(),
-                            ...openEventForEditInDataEntry(editDataEntryPayload),
-                        ]);
-                    });
-                }
-                return of(actions);
-            }
-
-            return actions;
         }));
 
 export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -125,14 +92,21 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
             const prevEventMainData = state.viewEventPage.loadedValues.eventContainer.event;
             const formFoundation = payload.formFoundation;
-            const { formClientValues, dataEntryClientValues } = convertDataEntryToClientValues(
+            const categoryCombinationForm = payload.categoryCombinationForm;
+            const { formClientValues, dataEntryClientValues, categoryValues } = convertDataEntryToClientValues(
                 formFoundation,
                 formValues,
                 dataEntryValues,
                 dataEntryValuesMeta,
+                categoryCombinationForm,
             );
 
-            const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
+            const mainDataClientValues = {
+                ...prevEventMainData,
+                ...dataEntryClientValues,
+                attributeCategoryOptions: categoryValues,
+                notes: [],
+            };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
             const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
@@ -141,12 +115,6 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             }
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
-
-            if (prevEventContainer.event && prevEventContainer.event.attributeCategoryOptions) {
-                prevEventContainer.event.attributeCategoryOptions =
-                    convertCategoryOptionsToServer(prevEventContainer.event.attributeCategoryOptions);
-                prevEventContainer.event.attributeOptionCombo = '';
-            }
 
             const eventContainer = {
                 ...prevEventContainer,
@@ -214,11 +182,7 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             const viewEventPage = state.viewEventPage;
             const eventContainer = viewEventPage.loadedValues.eventContainer;
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
-            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
-                eventContainer.event.attributeCategoryOptions =
-                    convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions);
-                eventContainer.event.attributeOptionCombo = '';
-            }
+
             let actions = [updateEventContainer(eventContainer, orgUnit)];
 
             if (meta.triggerAction === enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT) {

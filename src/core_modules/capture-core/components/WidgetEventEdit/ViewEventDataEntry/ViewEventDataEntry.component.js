@@ -237,8 +237,8 @@ const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
-const CategoryOptionsField = withDataEntryFieldIfApplicable(buildCategoryOptionsSettingsFn())(ReportDateField);
-const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CategoryOptionsField);
+// const CategoryOptionsField = withDataEntryFieldIfApplicable(buildCategoryOptionsSettingsFn())(ReportDateField);
+const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
 type Props = {

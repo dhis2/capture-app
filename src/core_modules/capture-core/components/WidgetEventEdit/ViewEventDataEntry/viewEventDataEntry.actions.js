@@ -34,6 +34,22 @@ function getAssignee(clientAssignee: ?Object) {
     return clientAssignee ? convertClientToForm(clientAssignee, dataElementTypes.USERNAME) : clientAssignee;
 }
 
+const deriveAttributeOptions = (event: CaptureClientEvent, categoryCombinationForm?: ?RenderFoundation) => {
+    if (!categoryCombinationForm || !event.attributeCategoryOptions) { return undefined; }
+    const sectionId = categoryCombinationForm.id;
+    const attributeOptionIds = [...categoryCombinationForm.sections.get(sectionId).elements.entries()].map(([id, el]) => ({ id, options: el.optionSet.options.map(option => option.id) }));
+    const optionValues = event.attributeCategoryOptions.split(';');
+    if (optionValues.length === attributeOptionIds.length && attributeOptionIds.length > 0) {
+        return optionValues.reduce((acc, val) => {
+            const foundAttribute = attributeOptionIds.find(({ options }) => options.includes(val));
+            if (foundAttribute) {
+                acc[foundAttribute.id] = val;
+            }
+            return acc;
+        }, {});
+    }
+    return undefined;
+};
 export const loadViewEventDataEntry =
     async ({
         eventContainer,
@@ -44,7 +60,6 @@ export const loadViewEventDataEntry =
         attributeValues,
         dataEntryId,
         dataEntryKey,
-        onCategoriesQuery,
     }: {
         eventContainer: ClientEventContainer,
         orgUnit: OrgUnit,
@@ -54,7 +69,6 @@ export const loadViewEventDataEntry =
         dataEntryKey: string,
         enrollment?: EnrollmentData,
         attributeValues?: Array<AttributeValue>,
-        onCategoriesQuery?: ?Promise<Object>
     }) => {
         const dataEntryPropsToInclude = [
             {
@@ -82,24 +96,10 @@ export const loadViewEventDataEntry =
 
         const formId = getDataEntryKey(dataEntryId, dataEntryKey);
 
-        let attributeCategoryOptions;
-        if (onCategoriesQuery) {
-            const { categoryOptions } = await onCategoriesQuery;
-            attributeCategoryOptions = categoryOptions.reduce((acc, { categories, ...rest }) => {
-                categories.forEach(({ id }) => {
-                    acc[id] = { ...rest };
-                });
-                return acc;
-            }, {});
-        }
-        if (eventContainer.event?.attributeCategoryOptions
-            && typeof eventContainer.event?.attributeCategoryOptions !== 'string') {
-            attributeCategoryOptions = eventContainer.event.attributeCategoryOptions;
-        }
+        const categoryValues = deriveAttributeOptions(eventContainer.event, program.categoryCombinationForm);
 
         const extraProps = {
             eventId: eventContainer.event.eventId,
-            attributeCategoryOptions,
         };
 
         const { actions: dataEntryActions, dataEntryValues, formValues } = await
@@ -107,7 +107,7 @@ export const loadViewEventDataEntry =
             dataEntryId,
             dataEntryKey,
             eventContainer.event,
-            eventContainer.values,
+            { ...eventContainer.values, ...categoryValues },
             dataEntryPropsToInclude,
             foundation,
             extraProps,

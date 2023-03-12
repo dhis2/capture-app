@@ -353,8 +353,8 @@ const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
-const CategoryOptionsFields = withDataEntryFieldIfApplicable(buildCategoryOptionsSettingsFn())(ReportDateField);
-const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CategoryOptionsFields));
+// const CategoryOptionsFields = withDataEntryFieldIfApplicable(buildCategoryOptionsSettingsFn())(ReportDateField);
+const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
 const DeletableDataEntry = withDeleteButton()(CompletableDataEntry);
@@ -496,18 +496,21 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onStartAsyncUpdateField,
             onSave,
             classes,
+            formFoundation,
+            categoryCombinationForm,
             ...passOnProps
         } = this.props;
-
         return ( // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={dataEntryId}
                 onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
                 onUpdateFormField={onUpdateField(orgUnit, programId)}
                 onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
-                onSave={onSave(orgUnit)}
+                onSave={onSave(orgUnit, categoryCombinationForm)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.state.dataEntrySections}
+                formFoundation={formFoundation}
+                categoryCombinationForm={categoryCombinationForm}
                 {...passOnProps}
             />
         );

@@ -38,6 +38,24 @@ const getDataEntryId = (event): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
+const deriveAttributeOptions = (event, categoryCombinationForm?: ?RenderFoundation) => {
+    if (!categoryCombinationForm || !event.attributeCategoryOptions) { return undefined; }
+
+    const sectionId = categoryCombinationForm.id;
+    const attributeOptionIds = [...categoryCombinationForm.sections.get(sectionId).elements.entries()].map(([id, el]) => ({ id, options: el.optionSet.options.map(option => option.id) }));
+    const optionValues = event.attributeCategoryOptions.split(';');
+    if (optionValues.length === attributeOptionIds.length && attributeOptionIds.length > 0) {
+        return optionValues.reduce((acc, val) => {
+            const foundAttribute = attributeOptionIds.find(({ options }) => options.includes(val));
+            if (foundAttribute) {
+                acc.push({ id: foundAttribute.id, value: val });
+            }
+            return acc;
+        }, []);
+    }
+    return undefined;
+};
+
 export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(
@@ -79,6 +97,7 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
             const { enrollment, attributeValues } = state.enrollmentDomain;
+            const categoryValues = deriveAttributeOptions(eventContainer.event, program.categoryCombinationForm);
 
             const args = {
                 eventContainer,
@@ -86,24 +105,11 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
                 foundation,
                 program,
                 enrollment,
-                attributeValues,
+                attributeValues: [...attributeValues, ...categoryValues],
                 dataEntryId: getDataEntryId(eventContainer.event),
                 dataEntryKey: getDataEntryKey(eventContainer.event?.status),
                 onCategoriesQuery: null,
             };
-            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
-                if (typeof (eventContainer.event.attributeCategoryOptions) === 'string') {
-                    const categoryIds = eventContainer.event.attributeCategoryOptions.split(';');
-                    args.onCategoriesQuery = querySingleResource({
-                        resource: 'categoryOptions',
-                        params: {
-                            fields: 'id,displayName,categories[id]',
-                            filter: `id:in:[${categoryIds.join(',')}]`,
-                        },
-                    });
-                }
-            }
-
 
             if (!enrollment && program instanceof TrackerProgram) {
                 // Wait for enrollment data

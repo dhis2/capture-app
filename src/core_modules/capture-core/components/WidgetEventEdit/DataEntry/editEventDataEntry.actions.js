@@ -81,7 +81,6 @@ export const openEventForEditInDataEntry = ({
     attributeValues,
     dataEntryId,
     dataEntryKey,
-    attributeCategoryOptions,
 }: {
     loadedValues: {
         eventContainer: Object,
@@ -95,7 +94,6 @@ export const openEventForEditInDataEntry = ({
     dataEntryKey: string,
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
-    attributeCategoryOptions: Object
 }) => {
     const dataEntryPropsToInclude = [
         {
@@ -132,7 +130,6 @@ export const openEventForEditInDataEntry = ({
             eventContainer.event,
             {
                 eventId: eventContainer.event.eventId,
-                attributeCategoryOptions,
             },
         );
     const currentEvent = { ...eventContainer.event, ...eventContainer.values };

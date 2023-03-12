@@ -55,11 +55,11 @@ export const WidgetEventEditPlain = ({
     enrollmentId,
     teiId,
     selectedCategories,
+    categoryCombinationForm,
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
-
     const eventAccess = getProgramEventAccess(programId, programStage.id);
     const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
     const { program } = useProgramFromIndexedDB(programId);
@@ -133,6 +133,7 @@ export const WidgetEventEditPlain = ({
                             hideDueDate={programStage.hideDueDate}
                             selectedCategories={selectedCategories}
                             programCategory={programCategory}
+                            categoryCombinationForm={categoryCombinationForm}
                         />
                     ) : (
                         <EditEventDataEntry
@@ -153,6 +154,7 @@ export const WidgetEventEditPlain = ({
                             hideDueDate={programStage.hideDueDate}
                             selectedCategories={selectedCategories}
                             programCategory={programCategory}
+                            categoryCombinationForm={categoryCombinationForm}
                         />
                     )}
                 </div>

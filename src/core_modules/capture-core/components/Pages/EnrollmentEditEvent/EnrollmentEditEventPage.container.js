@@ -119,6 +119,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             mode={currentPageMode}
             pageStatus={pageStatus}
             programStage={programStage}
+            categoryCombinationForm={program.categoryCombinationForm}
             onGoBack={onGoBack}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}

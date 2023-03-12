@@ -17,6 +17,7 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import { FEATURETYPE } from '../../../../constants';
 import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../utils/routing';
 import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
+import { deriveFormValuesAndCategoryValues } from '../../../DataEntry/common/convertDataEntryToClientValues';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
@@ -157,10 +158,15 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
         map((action) => {
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
             const { dataStore, userDataStore } = store.value.useNewDashboard;
-            const { occurredAt, enrolledAt, geometry, attributeCategoryOptions } =
+            const { occurredAt, enrolledAt, geometry } =
                 dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
-            const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
-            const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
+            const { trackedEntityType, stages, categoryCombinationForm } = getTrackerProgramThrowIfNotFound(programId);
+
+            const { formValues: values, categoryValues } = deriveFormValuesAndCategoryValues(
+                formsValues['newPageDataEntryId-newEnrollment'] || {},
+                categoryCombinationForm,
+            );
+
             const stageWithOpenAfterEnrollment = getStageWithOpenAfterEnrollment(stages);
             const redirectToEnrollmentEventNew =
             shouldUseNewDashboard(userDataStore, dataStore, programId) && stageWithOpenAfterEnrollment !== undefined;
@@ -172,7 +178,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 orgUnitId,
                 redirectToEnrollmentEventNew,
                 redirectToStageId: stageWithOpenAfterEnrollment?.id,
-                attributeCategoryOptions,
+                attributeCategoryOptions: categoryValues,
             });
             const { formFoundation, teiId: trackedEntity } = action.payload;
             const formServerValues = formFoundation?.convertValues(values, convertFn);

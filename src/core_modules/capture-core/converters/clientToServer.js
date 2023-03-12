@@ -60,7 +60,7 @@ export function convertCategoryOptionsToServer(value: ProgramCategory | string) 
         const categoryObject: Object = value;
         return Object.keys(categoryObject).reduce((acc, categoryId) => {
             if (value[categoryId]) {
-                acc.push(value[categoryId].id);
+                acc.push(value[categoryId]);
             }
             return acc;
         }, []).join(';');

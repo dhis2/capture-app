@@ -244,18 +244,31 @@ class DataEntryPlain extends React.Component<Props> {
             onAddNote,
             onOpenAddRelationship,
             dataEntryFieldRef,
+            formFoundation,
+            categoryCombinationForm,
             ...passOnProps
         } = this.props;
 
         const d2Form = (
             // $FlowFixMe[cannot-spread-inexact] automated comment
-            <D2Form
-                id={getDataEntryKey(id, itemId)}
-                validationAttempted={completionAttempted || saveAttempted}
-                onUpdateField={this.handleUpdateField}
-                onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                {...passOnProps}
-            />
+            <>
+                <D2Form
+                    id={getDataEntryKey(id, itemId)}
+                    validationAttempted={completionAttempted || saveAttempted}
+                    onUpdateField={this.handleUpdateField}
+                    onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                    formFoundation={formFoundation}
+                    {...passOnProps}
+                />
+                {categoryCombinationForm && <D2Form
+                    id={getDataEntryKey(id, itemId)}
+                    validationAttempted={completionAttempted || saveAttempted}
+                    onUpdateField={this.handleUpdateField}
+                    onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                    formFoundation={categoryCombinationForm}
+                    {...passOnProps}
+                />}
+            </>
         );
         return this.props.formHorizontal ? d2Form : <div className={classes.d2FormContainer}>{d2Form}</div>;
     }
