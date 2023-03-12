@@ -3,7 +3,7 @@ import { convertValue } from '../../../converters/formToClient';
 import { convertDataEntryValuesToClientValues } from './convertDataEntryValuesToClientValues';
 import type { RenderFoundation } from '../../../metaData';
 
-export const deriveFormValuesAndCategoryValues = (formValues: Object,, categoryCombinationForm?: ?RenderFoundation) => {
+export const deriveFormValuesAndCategoryValues = (formValues: Object, categoryCombinationForm?: ?RenderFoundation) => {
     if (!categoryCombinationForm) { return { formValues, categoryValues: undefined }; }
     const attributeCategoryOptionIds = [...categoryCombinationForm.sections.get(categoryCombinationForm.id).elements.keys()];
     const categoryValues = {};

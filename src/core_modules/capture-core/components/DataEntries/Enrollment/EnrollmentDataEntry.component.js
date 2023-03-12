@@ -253,13 +253,6 @@ type FinalTeiDataEntryProps = {
 };
 // final step before the generic dataEntry is inserted
 
-const dataEntrySectionDefinitions = {
-    [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
-        placement: placements.TOP,
-        name: i18n.t('Enrollment'),
-    },
-};
-
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     componentWillUnmount() {
         inMemoryFileStore.clear();

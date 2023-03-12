@@ -9,7 +9,6 @@ import {
 import { getDataEntryKey } from '../../components/DataEntry/common/getDataEntryKey';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
-import { newEventWidgetDataEntryActionTypes } from '../../components/WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
 
 // cleans up data entries that start with dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {

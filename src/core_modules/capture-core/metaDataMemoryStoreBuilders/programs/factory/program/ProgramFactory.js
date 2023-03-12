@@ -126,7 +126,7 @@ export class ProgramFactory {
         section.name = cachedCategoryCombination.displayName;
         section.visible = true;
 
-        const predicate = (categoryOption: Object) => true;
+        const predicate = () => true;
 
         const project = (categoryOption: Object) => ({
             label: categoryOption.displayName,

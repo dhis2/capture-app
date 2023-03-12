@@ -19,7 +19,7 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     return { shouldShowAOC, stateCategoryOptions: attributeCategoryOptions, categoryCombinationForm };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch, props) => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateDataEntryField: (
         innerAction: ReduxAction<any, any>,
         data: any,

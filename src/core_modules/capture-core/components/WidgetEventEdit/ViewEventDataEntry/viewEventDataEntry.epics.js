@@ -56,7 +56,7 @@ const deriveAttributeOptions = (event, categoryCombinationForm?: ?RenderFoundati
     return undefined;
 };
 
-export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
