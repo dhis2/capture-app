@@ -65,19 +65,20 @@ function getDataEntriesNotes(state: ReduxState, dataEntryKey: string) {
     return notes ? notes.map(note => ({ value: note.value })) : [];
 }
 
-export const getNewEventClientValues = (state: ReduxState, dataEntryKey: string, formFoundation: RenderFoundation) => {
+export const getNewEventClientValues = (state: ReduxState, dataEntryKey: string, formFoundation: RenderFoundation, categoryCombinationForm?: ?RenderFoundation) => {
     const formValues = state.formsValues[dataEntryKey];
     const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
     const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
     const prevEventMainData = {};
 
-    const { formClientValues, dataEntryClientValues } = convertDataEntryToClientValues(
+    const { formClientValues, dataEntryClientValues, categoryValues } = convertDataEntryToClientValues(
         formFoundation,
         formValues,
         dataEntryValues,
         dataEntryValuesMeta,
+        categoryCombinationForm,
     );
     const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: getDataEntriesNotes(state, dataEntryKey) };
 
-    return { formClientValues, mainDataClientValues };
+    return { formClientValues, mainDataClientValues, categoryValues };
 };

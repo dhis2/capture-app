@@ -26,6 +26,7 @@ export const requestSaveEvent = ({
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
+    categoryCombinationForm,
 }: {
     eventId: string,
     dataEntryId: string,
@@ -39,6 +40,7 @@ export const requestSaveEvent = ({
     onSaveExternal?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
+    categoryCombinationForm?: Object
 }) =>
     actionCreator(newEventWidgetActionTypes.EVENT_SAVE_REQUEST)({
         eventId,
@@ -53,7 +55,8 @@ export const requestSaveEvent = ({
         onSaveExternal,
         onSaveSuccessActionType,
         onSaveErrorActionType,
-    }, { skipLogging: ['formFoundation'] });
+        categoryCombinationForm,
+    }, { skipLogging: ['formFoundation', 'categoryCombinationForm'] });
 
 export const saveEvent = (serverData: Object, onSaveSuccessActionType?: string, onSaveErrorActionType?: string, uid: string) =>
     actionCreator(newEventWidgetActionTypes.EVENT_SAVE)({}, {

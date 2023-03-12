@@ -13,7 +13,6 @@ import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../metaData';
-import { useProgramFromIndexedDB } from '../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 const styles = {
     header: {

@@ -26,16 +26,17 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: Redu
                 onSaveExternal,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
+                categoryCombinationForm,
             } = action.payload;
 
             const dataEntryKey = getDataEntryKey(dataEntryId, eventId);
-            const { formClientValues, mainDataClientValues }
-                = getNewEventClientValues(state, dataEntryKey, formFoundation);
+            const { formClientValues, mainDataClientValues, categoryValues }
+                = getNewEventClientValues(state, dataEntryKey, formFoundation, categoryCombinationForm);
 
             const serverData = getAddEventEnrollmentServerData({
                 formFoundation,
                 formClientValues,
-                mainDataClientValues,
+                mainDataClientValues: { ...mainDataClientValues, attributeCategoryOptions: categoryValues },
                 programId,
                 orgUnitId,
                 orgUnitName,
