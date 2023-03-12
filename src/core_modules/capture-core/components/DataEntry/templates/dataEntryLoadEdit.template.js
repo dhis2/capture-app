@@ -15,7 +15,7 @@ export async function loadEditDataEntryAsync(
     clientValuesForForm: Object,
     dataEntryPropsToInclude?: ?Array<DataEntryPropToInclude>,
     formFoundation: RenderFoundation,
-    extraProps?: ?{ [key: string]: any, attributeCategoryOptions?: Object },
+    extraProps?: ?{ [key: string]: any },
     onAddSubValues?: (preDataEntryValues: Object, preFormValues: Object, formFoundation: RenderFoundation) => Promise<{ formValues: Object, dataEntryValues: Object }>,
 ) {
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};

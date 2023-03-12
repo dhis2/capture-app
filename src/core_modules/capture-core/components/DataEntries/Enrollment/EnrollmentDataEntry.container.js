@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
-import { getCategoryOptionsValidatorContainers } from './fieldValidators';
-import { updateCatCombo, removeCatCombo } from '../../WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
-import type { CategoryOption } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 import { getProgramThrowIfNotFound } from '../../../metaData';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
@@ -50,25 +47,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props) => ({
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
         dispatch(startAsyncUpdateFieldForNewEnrollment(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
-    },
-    onClickCategoryOption: (option: CategoryOption, categoryId: string, isValid: boolean) => {
-        const value = { [categoryId]: option };
-        const { id, itemId } = props;
-        const valueMeta = {
-            isValid,
-            touched: true,
-            validationError: !isValid,
-        };
-        dispatch(updateCatCombo(value, valueMeta, id, itemId));
-    },
-    onResetCategoryOption: (categoryId: string) => {
-        const { id, itemId } = props;
-        const valueMeta = {
-            isValid: false,
-            touched: true,
-            validationError: getCategoryOptionsValidatorContainers()[0].message,
-        };
-        dispatch(removeCatCombo(categoryId, valueMeta, id, itemId));
     },
 });
 

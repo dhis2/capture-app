@@ -54,7 +54,6 @@ export const WidgetEventEditPlain = ({
     orgUnitId,
     enrollmentId,
     teiId,
-    selectedCategories,
     categoryCombinationForm,
 }: Props) => {
     const dispatch = useDispatch();
@@ -62,8 +61,6 @@ export const WidgetEventEditPlain = ({
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
     const eventAccess = getProgramEventAccess(programId, programStage.id);
     const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
-    const { program } = useProgramFromIndexedDB(programId);
-    const programCategory = !program?.categoryCombo?.isDefault && program?.categoryCombo;
 
     if (error) {
         return error.errorComponent;
@@ -131,8 +128,6 @@ export const WidgetEventEditPlain = ({
                             formFoundation={programStage.stageForm}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             hideDueDate={programStage.hideDueDate}
-                            selectedCategories={selectedCategories}
-                            programCategory={programCategory}
                             categoryCombinationForm={categoryCombinationForm}
                         />
                     ) : (
@@ -152,8 +147,6 @@ export const WidgetEventEditPlain = ({
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
                             availableProgramStages={availableProgramStages}
                             hideDueDate={programStage.hideDueDate}
-                            selectedCategories={selectedCategories}
-                            programCategory={programCategory}
                             categoryCombinationForm={categoryCombinationForm}
                         />
                     )}

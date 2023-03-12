@@ -157,42 +157,6 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
-const buildCategoryOptionsSettingsFn = () => {
-    const categoryOptionsComponent =
-        withCalculateMessages(overrideMessagePropNames)(
-            withDefaultFieldContainer()(
-                withDefaultShouldUpdateInterface()(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(CategoryOptions),
-                        ),
-                    ),
-                ),
-            ),
-        );
-    const catComboSettings = {
-        isApplicable: (props: Object) => !!props.programCategory?.categories && !props.programCategory?.isDefault,
-        getComponent: () => categoryOptionsComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
-            orientation: getOrientation(props.formHorizontal),
-            categories: props.programCategory.categories,
-            selectedOrgUnitId: props.orgUnitId,
-            selectedCategories: props.selectedCategories,
-            onClickCategoryOption: props.onClickCategoryOption,
-            onResetCategoryOption: props.onResetCategoryOption,
-            required: true,
-        }),
-        getPropName: () => 'attributeCategoryOptions',
-        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
-        getMeta: () => ({
-            placement: placements.BOTTOM,
-            section: dataEntrySectionNames.CATEGORYCOMBO,
-        }),
-    };
-
-    return catComboSettings;
-};
-
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
@@ -348,7 +312,6 @@ const WrappedDataEntry = compose(
     withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
     withDataEntryField(buildNotesSettingsFn()),
     withDataEntryFieldIfApplicable(buildAssigneeSettingsFn()),
-    withDataEntryFieldIfApplicable(buildCategoryOptionsSettingsFn()),
     withCleanUp(),
     withFilterProps(dataEntryFilterProps),
 )(DataEntryContainer);
@@ -374,7 +337,6 @@ type Props = {
     theme: Theme,
     formHorizontal: ?boolean,
     recentlyAddedRelationshipId?: ?string,
-    programCategory?: ?ProgramCategory
 };
 type DataEntrySection = {
     placement: $Values<typeof placements>,
@@ -402,17 +364,11 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Assignee'),
     },
-    [dataEntrySectionNames.CATEGORYCOMBO]: {
-        placement: placements.TOP,
-        name: '',
-    },
 };
 
-type State = {
-    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection }
-}
-class DataEntryPlain extends Component<Props, State> {
+class DataEntryPlain extends Component<Props> {
     fieldOptions: { theme: Theme };
+    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     relationshipsInstance: ?HTMLDivElement;
 
     constructor(props: Props) {
@@ -422,17 +378,7 @@ class DataEntryPlain extends Component<Props, State> {
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
 
-        const dataEntrySections = props.programCategory ? {
-            ...dataEntrySectionDefinitions,
-            [dataEntrySectionNames.CATEGORYCOMBO]: {
-                ...dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO],
-                name: props.programCategory.displayName,
-            },
-        } : dataEntrySectionDefinitions;
-
-        this.state = {
-            dataEntrySections,
-        };
+        this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
     UNSAFE_componentWillMount() {
@@ -474,7 +420,7 @@ class DataEntryPlain extends Component<Props, State> {
                     onUpdateFormField={onUpdateField}
                     onUpdateFormFieldAsync={onStartAsyncUpdateField}
                     fieldOptions={this.fieldOptions}
-                    dataEntrySections={this.state.dataEntrySections}
+                    dataEntrySections={this.dataEntrySections}
                     relationshipsRef={this.setRelationshipsInstance}
                     {...passOnProps}
                 />

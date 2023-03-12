@@ -25,14 +25,11 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
-    CategoryOptions,
 } from '../../FormFields/New';
-import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
-    getCategoryOptionsValidatorContainers,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
 import { type Enrollment } from '../../../metaData';
@@ -117,42 +114,6 @@ const getEnrollmentDateSettings = () => {
     };
 
     return enrollmentDateSettings;
-};
-
-const getCategoryOptionsSettingsFn = () => {
-    const categoryOptionsComponent =
-        withCalculateMessages(overrideMessagePropNames)(
-            withDefaultFieldContainer()(
-                withDefaultShouldUpdateInterface()(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(CategoryOptions),
-                        ),
-                    ),
-                ),
-            ),
-        );
-    const categoryOptionsSettings = {
-        isApplicable: (props: Object) => props.shouldShowAOC && !!props.programCategory?.categories && !props.programCategory.isDefault,
-        getComponent: () => categoryOptionsComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
-            orientation: getOrientation(props.formHorizontal),
-            categories: props.programCategory.categories,
-            selectedCategories: props.selectedCategories,
-            selectedOrgUnitId: props.orgUnitId,
-            onClickCategoryOption: props.onClickCategoryOption,
-            onResetCategoryOption: props.onResetCategoryOption,
-            required: true,
-        }),
-        getPropName: () => 'attributeCategoryOptions',
-        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
-        getMeta: () => ({
-            placement: placements.BOTTOM,
-            section: sectionKeysForEnrollmentDataEntry.CATEGORYCOMBO,
-        }),
-    };
-
-    return categoryOptionsSettings;
 };
 
 const getIncidentDateSettings = () => {
@@ -289,7 +250,6 @@ const getGeometrySettings = () => ({
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
     programId: string,
-    programCategory?: ProgramCategory,
 };
 // final step before the generic dataEntry is inserted
 
@@ -298,55 +258,37 @@ const dataEntrySectionDefinitions = {
         placement: placements.TOP,
         name: i18n.t('Enrollment'),
     },
-    [sectionKeysForEnrollmentDataEntry.CATEGORYCOMBO]: {
-        placement: placements.TOP,
-        name: 'Data entry',
-    },
 };
 
-type State = {
-    dataEntrySections: { [string]: {name: string, placement: $Values<typeof placements>}},
-}
-class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps, State> {
-    constructor(props) {
-        super(props);
-
-        const dataEntrySections = props.programCategory ? {
-            ...dataEntrySectionDefinitions,
-            [sectionKeysForEnrollmentDataEntry.CATEGORYCOMBO]: {
-                ...dataEntrySectionDefinitions[sectionKeysForEnrollmentDataEntry.CATEGORYCOMBO],
-                name: props.programCategory.displayName,
-            },
-        } : dataEntrySectionDefinitions;
-
-        this.state = {
-            dataEntrySections,
-        };
-    }
-
+class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
 
+     static dataEntrySectionDefinitions = {
+         [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
+             placement: placements.TOP,
+             name: i18n.t('Enrollment'),
+         },
+     };
 
-    render() {
-        const { enrollmentMetadata, programId, programCategory, categoryCombinationForm, ...passOnProps } = this.props;
-        return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
-            <DataEntry
-                {...passOnProps}
-                dataEntrySections={this.state.dataEntrySections}
-                formFoundation={enrollmentMetadata.enrollmentForm}
-                categoryCombinationForm={categoryCombinationForm}
-            />
-        );
-    }
+     render() {
+         const { enrollmentMetadata, programId, programCategory, categoryCombinationForm, ...passOnProps } = this.props;
+         return (
+         // $FlowFixMe[cannot-spread-inexact] automated comment
+             <DataEntry
+                 {...passOnProps}
+                 dataEntrySections={this.state.dataEntrySections}
+                 formFoundation={enrollmentMetadata.enrollmentForm}
+                 categoryCombinationForm={categoryCombinationForm}
+             />
+         );
+     }
 }
 
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(FinalEnrollmentDataEntry);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
-// const CategoryComboFieldsHOC = withDataEntryFieldIfApplicable(getCategoryOptionsSettingsFn())(EnrollmentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 
 type PreEnrollmentDataEntryProps = {

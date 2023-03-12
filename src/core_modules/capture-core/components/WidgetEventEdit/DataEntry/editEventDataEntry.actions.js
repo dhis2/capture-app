@@ -46,7 +46,7 @@ function getLoadActions(
     formValues: Object,
     dataEntryPropsToInclude: Array<Object>,
     clientValuesForDataEntry: Object,
-    extraProps: { [key: string]: any, attributeCategoryOptions: Object },
+    extraProps: { [key: string]: any },
 ) {
     const dataEntryNotes = getDataEntryNotes(clientValuesForDataEntry);
     const key = getDataEntryKey(dataEntryId, itemId);

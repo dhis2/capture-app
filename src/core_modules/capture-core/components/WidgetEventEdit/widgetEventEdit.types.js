@@ -1,7 +1,6 @@
 // @flow
 
 import type { ProgramStage } from '../../metaData';
-import type { CategoryOption } from '../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 export type Props = {|
     programStage: ProgramStage,
@@ -14,6 +13,5 @@ export type Props = {|
     enrollmentId: string,
     teiId: string,
     initialScheduleDate?: string,
-    selectedCategories?: ?{ [categoryId: string]: CategoryOption },
     ...CssClasses,
 |};
