@@ -10,7 +10,8 @@ import type { CategoryOption } from '../../FormFields/New/CategoryOptions/Catego
 import { getProgramThrowIfNotFound } from '../../../metaData';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
-    const { stages } = getProgramThrowIfNotFound(props.programId);
+    const { stages, categoryCombinationForm } = getProgramThrowIfNotFound(props.programId);
+
     /**
      * Show AOC selection ONLY if there are any program stages in the program with:
         “Auto-generate event” and NOT “Open data entry form after enrollment”.
@@ -18,7 +19,7 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
 
     const { attributeCategoryOptions } = state.dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
-    return { shouldShowAOC, stateCategoryOptions: attributeCategoryOptions };
+    return { shouldShowAOC, stateCategoryOptions: attributeCategoryOptions, categoryCombinationForm };
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch, props) => ({

@@ -7,6 +7,7 @@ import type{ CategoryCombination } from '../CategoryCombinations';
 import type { Icon } from '../Icon';
 import type { Access } from '../Access';
 import type { ProgramStage } from './ProgramStage';
+import { RenderFoundation } from '../RenderFoundation';
 
 export class Program {
     static errorMessages = {
@@ -21,6 +22,7 @@ export class Program {
     _stages: Map<string, ProgramStage>;
     _organisationUnits: Object;
     _categoryCombination: ?CategoryCombination;
+    _categoryCombinationForm: ?RenderFoundation;
     _programRules: Array<ProgramRule>;
     _programRuleVariables: Array<ProgramRuleVariable>;
     _icon: Icon | void;
@@ -90,6 +92,14 @@ export class Program {
     }
     get programRules(): Array<ProgramRule> {
         return this._programRules;
+    }
+
+    set categoryCombinationForm(categoryCombinationForm: RenderFoundation) {
+        this._categoryCombinationForm = categoryCombinationForm;
+    }
+
+    get categoryCombinationForm(): ?RenderFoundation {
+        return this._categoryCombinationForm;
     }
 
     set programRuleVariables(programRuleVariables: Array<ProgramRuleVariable>) {

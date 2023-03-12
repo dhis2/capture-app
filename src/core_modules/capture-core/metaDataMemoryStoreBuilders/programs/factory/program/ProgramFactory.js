@@ -4,7 +4,12 @@
 import {
     EventProgram,
     TrackerProgram,
+    RenderFoundation,
+    Section,
     CategoryCombination,
+    OptionSet,
+    DataElement,
+    Option,
     type TrackedEntityType,
     type Category,
 } from '../../../../metaData';
@@ -32,6 +37,7 @@ import type
     CachedTrackedEntityType,
     CachedProgramTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
+import { buildCategoryOptionsAsync } from '../category/buildCategoryOptions';
 
 export class ProgramFactory {
     programStageFactory: ProgramStageFactory;
@@ -109,6 +115,53 @@ export class ProgramFactory {
                 this._buildCategories(cachedCategoryCombination.categories, this.cachedCategories);
         });
     }
+    // eslint-disable-next-line
+    async _buildCategoryOptionsForm(cachedCategoryCombination: ?ProgramCachedCategoryCombo, selectedOrgUnitId: string) {
+        const form = new RenderFoundation();
+        form.validationStrategy = 'onUpdateAndInsert';
+        form.name = cachedCategoryCombination.displayName;
+        form.id = cachedCategoryCombination.id;
+        const section = new Section();
+        section.id = cachedCategoryCombination.id;
+        section.name = cachedCategoryCombination.displayName;
+        section.visible = true;
+
+        const predicate = (categoryOption: Object) => true;
+
+        const project = (categoryOption: Object) => ({
+            label: categoryOption.displayName,
+            value: categoryOption.id,
+            writeAccess: categoryOption.access.data.write,
+        });
+        const onIsAborted = () => {};
+        const optionPromises = cachedCategoryCombination.categories.map(async (cat) => {
+            const options = await buildCategoryOptionsAsync(cat.id, { predicate, project, onIsAborted });
+            return { options, ...cat };
+        });
+        const optionResults = await Promise.all(optionPromises);
+
+        optionResults.forEach(({ id, displayName, options }) => {
+            const el = new DataElement();
+            el.name = displayName;
+            el.formName = displayName;
+            el.id = id;
+            el.type = 'TEXT';
+            el.compulsory = true;
+            const formOptions = options.map((op) => {
+                const option = new Option();
+                option.id = op.value;
+                option.value = op.value;
+                option.text = op.label;
+                return option;
+            });
+            el.optionSet = new OptionSet(id, formOptions, new Map(), el);
+            section.addElement(el);
+        });
+
+        form.addSection(section);
+
+        return form;
+    }
 
     async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
@@ -156,6 +209,9 @@ export class ProgramFactory {
                 // $FlowFixMe
                 program.attributes = await this._buildProgramAttributes(cachedProgram.programTrackedEntityAttributes);
             }
+            if (cachedProgram.categoryCombo && !cachedProgram.categoryCombo.isDefault) {
+                program.categoryCombinationForm = await this._buildCategoryOptionsForm(cachedProgram.categoryCombo);
+            }
 
             // $FlowFixMe
             await cachedProgram.programStages.asyncForEach(async (cachedProgramStage: CachedProgramStage) => {
@@ -172,7 +228,7 @@ export class ProgramFactory {
         program.organisationUnits = (await getUserStorageController().get(userStores.ORGANISATION_UNITS_BY_PROGRAM, program.id))?.organisationUnits;
         program.icon = buildIcon(cachedProgram.style);
         program.displayFrontPageList = cachedProgram.displayFrontPageList;
-
+        console.log({ program });
         return program;
     }
 }

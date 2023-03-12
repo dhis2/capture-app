@@ -330,14 +330,18 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps, S
 
 
     render() {
-        const { enrollmentMetadata, programId, ...passOnProps } = this.props;
+        const { enrollmentMetadata, programId, programCategory, categoryCombinationForm, ...passOnProps } = this.props;
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
-            <DataEntry
-                {...passOnProps}
-                dataEntrySections={this.state.dataEntrySections}
-                formFoundation={enrollmentMetadata.enrollmentForm}
-            />
+            <>
+                <DataEntry
+                    {...passOnProps}
+                    dataEntrySections={this.state.dataEntrySections}
+                    formFoundation={enrollmentMetadata.enrollmentForm}
+                    categoryCombinationForm={categoryCombinationForm}
+                />
+                { categoryCombinationForm && <DataEntry {...passOnProps} formFoundation={categoryCombinationForm} />}
+            </>
         );
     }
 }
@@ -345,8 +349,8 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps, S
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(FinalEnrollmentDataEntry);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
-const CategoryComboFieldsHOC = withDataEntryFieldIfApplicable(getCategoryOptionsSettingsFn())(EnrollmentDateFieldHOC);
-const BrowserBackWarningHOC = withBrowserBackWarning()(CategoryComboFieldsHOC);
+// const CategoryComboFieldsHOC = withDataEntryFieldIfApplicable(getCategoryOptionsSettingsFn())(EnrollmentDateFieldHOC);
+const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 
 type PreEnrollmentDataEntryProps = {
     programId: string,
