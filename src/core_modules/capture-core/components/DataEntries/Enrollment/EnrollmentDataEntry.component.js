@@ -271,7 +271,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntry
                 {...passOnProps}
-                dataEntrySections={this.state.dataEntrySections}
+                dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
                 formFoundation={enrollmentMetadata.enrollmentForm}
                 categoryCombinationForm={categoryCombinationForm}
             />

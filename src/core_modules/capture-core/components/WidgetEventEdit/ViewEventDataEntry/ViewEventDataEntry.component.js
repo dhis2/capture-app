@@ -257,10 +257,8 @@ class ViewEventDataEntryPlain extends Component<Props> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
-
     render() {
         const {
             classes,
@@ -268,7 +266,7 @@ class ViewEventDataEntryPlain extends Component<Props> {
             ...passOnProps
         } = this.props;
         return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={dataEntryId}
                 viewMode

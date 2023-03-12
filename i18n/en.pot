@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-03-12T11:01:28.620Z\n"
-"PO-Revision-Date: 2023-03-12T11:01:28.620Z\n"
+"POT-Creation-Date: 2023-03-12T13:38:40.344Z\n"
+"PO-Revision-Date: 2023-03-12T13:38:40.344Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1185,9 +1185,6 @@ msgstr "Schedule info"
 
 msgid "Schedule date / Due date"
 msgstr "Schedule date / Due date"
-
-msgid "Please add category before saving the event"
-msgstr "Please add category before saving the event"
 
 msgid "Event comments"
 msgstr "Event comments"

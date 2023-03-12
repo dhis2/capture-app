@@ -155,10 +155,10 @@ class CategorySelectorPlain extends React.Component<Props, State> {
 
         return (
             options ? <OptionsSelectVirtualized
-                value={this.state.selectedOption?.value}
+                value={this.state.selectedOption}
                 nullable
                 onChange={(option) => {
-                    this.setState({ selectedOption: option });
+                    this.setState({ selectedOption: option?.value });
                     onChange(option);
                 }}
                 options={options}

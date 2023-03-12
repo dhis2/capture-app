@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { spacers } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { CategorySelector } from './CategorySelector.component';
 import type { CategoryOption } from './CategoryOptions.types';
 
@@ -8,8 +10,10 @@ const getStyles = (theme: Theme) => ({
     container: {
         display: 'flex',
         alignItems: 'center',
-        paddingTop: 8,
-        paddingBottom: 8,
+        padding: `${spacers.dp8}  ${spacers.dp16}`,
+    },
+    error: {
+        backgroundColor: theme.palette.error.lighter,
     },
     containerVertical: {
         display: 'flex',
@@ -31,14 +35,20 @@ const getStyles = (theme: Theme) => ({
     requiredClass: {
         color: theme.palette.required,
     },
+    errorMessage: {
+        color: theme.palette.error.main,
+        fontSize: theme.typography.pxToRem(14),
+        padding: '10px 8px',
+    },
 });
 
 type Props = {
     orientation: string,
     categories: Array<CategoryOption>,
     selectedOrgUnitId: string,
-    selectedCategories: ?{[categoryId: string]: CategoryOption },
-    onClickCategoryOption: (option: CategoryOption, categoryId: string, isValid: boolean) => void,
+    categoryOptionsError?: {[categoryId: string]: string },
+    selectedCategories: ?{[categoryId: string]: string },
+    onClickCategoryOption: (optionId: string, categoryId: string) => void,
     onResetCategoryOption: (categoryId: string) => void,
     required?: boolean,
     ...CssClasses
@@ -49,51 +59,41 @@ const CategoryOptionsPlain = (props: Props) => {
         orientation = 'horizontal',
         categories,
         selectedOrgUnitId,
-        selectedCategories: initalSelectedCategories,
+        selectedCategories,
+        categoryOptionsError,
         onClickCategoryOption,
         onResetCategoryOption,
         required,
     } = props;
-    const [selectedCategories, setSelectedCategories] = React.useState(initalSelectedCategories);
 
     const renderCategorySelector = (category) => {
-        const initialValue = initalSelectedCategories?.[category.id] ?
-            {
-                value: initalSelectedCategories[category.id].id,
-                label: initalSelectedCategories[category.id].displayName,
-            } : undefined;
-        return (<div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
-            <div className={orientation === 'horizontal' && classes.label}>
-                {category.displayName}
-                {required && <span
-                    className={classes.requiredClass}
-                >
+        const { id } = category;
+        const hasError = categoryOptionsError?.[id]?.touched && !categoryOptionsError?.[id]?.valid;
+        return (<div className={hasError ? classes.error : ''}>
+            <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
+                <div className={orientation === 'horizontal' && classes.label}>
+                    {category.displayName}
+                    {required && <span
+                        className={classes.requiredClass}
+                    >
                     &nbsp;*
-                </span>}
-            </div>
-            <div className={orientation === 'horizontal' && classes.field}>
-                <CategorySelector
-                    initialValue={initialValue}
-                    category={category}
-                    selectedOrgUnitId={selectedOrgUnitId}
-                    onChange={(option) => {
-                        if (!option) {
-                            const newCategories = { ...selectedCategories };
-                            delete newCategories[category.id];
-                            setSelectedCategories(newCategories);
-                            onResetCategoryOption(category.id);
-                        } else {
-                            const newOption = { id: option.value, displayName: option.label };
-                            const newCategories = {
-                                ...selectedCategories,
-                                ...{ [category.id]: newOption },
-                            };
-                            setSelectedCategories(newCategories);
-                            const isValid = categories.every(({ id: categoryId }) => newCategories[categoryId]);
-                            onClickCategoryOption(newOption, category.id, isValid);
-                        }
-                    }}
-                />
+                    </span>}
+                </div>
+                <div className={orientation === 'horizontal' && classes.field}>
+                    <CategorySelector
+                        initialValue={selectedCategories?.[category.id]}
+                        category={category}
+                        selectedOrgUnitId={selectedOrgUnitId}
+                        onChange={(option) => {
+                            if (!option) {
+                                onResetCategoryOption(category.id);
+                            } else {
+                                onClickCategoryOption(option.value, category.id);
+                            }
+                        }}
+                    />
+                    {hasError && <div className={classes.errorMessage}>{i18n.t('A value is required')}</div>}
+                </div>
             </div>
         </div>);
     };

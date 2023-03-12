@@ -30,7 +30,6 @@ export const WidgetEventSchedule = ({
     onSaveErrorActionType,
     onCancel,
     initialScheduleDate,
-    programCategory,
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
@@ -48,27 +47,24 @@ export const WidgetEventSchedule = ({
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events
         .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
-    const selectedCategories = useSelector(({ events: storedEvents }) =>
-        storedEvents[eventId]?.attributeCategoryOptions);
-    const [categoryOptions, setCategoryOptions] = useState();
+    const [selectedCategories, setSelectedCategories] = useState({});
     const [categoryOptionsError, setCategoryOptionsError] = useState();
+    const programCategory = program.categoryCombinationForm ? {
+        id: program.categoryCombinationForm.id,
+        displayName: program.categoryCombinationForm.name,
+        categories: [...program.categoryCombinationForm.sections.get(program.categoryCombinationForm.id).elements.entries()]
+            .map(([id, category]) => ({
+                id,
+                displayName: category.name,
+            })),
+    } : undefined;
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
     }, [suggestedScheduleDate, scheduleDate]);
 
-    useEffect(() => {
-        if (programCategory && categoryOptions) {
-            setCategoryOptionsError(Object.keys(categoryOptions).length < programCategory?.categories?.length);
-        }
-    }, [programCategory, categoryOptions]);
 
     const onHandleSchedule = useCallback(() => {
-        if (programCategory && (!categoryOptions ||
-            Object.keys(categoryOptions).length !== programCategory?.categories?.length)) {
-            setCategoryOptionsError(true);
-            return;
-        }
         dispatch(requestScheduleEvent({
             scheduleDate,
             comments,
@@ -78,10 +74,11 @@ export const WidgetEventSchedule = ({
             teiId,
             enrollmentId,
             eventId,
-            categoryOptions,
+            selectedCategories,
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
+            categoryOptions: selectedCategories,
         }));
     }, [
         dispatch,
@@ -93,11 +90,10 @@ export const WidgetEventSchedule = ({
         teiId,
         enrollmentId,
         eventId,
-        categoryOptions,
+        selectedCategories,
         onSave,
         onSaveSuccessActionType,
         onSaveErrorActionType,
-        programCategory,
     ]);
 
     React.useEffect(() => {
@@ -121,18 +117,26 @@ export const WidgetEventSchedule = ({
         setComments([...comments, newComment]);
     };
 
-    const onClickCategoryOption = useCallback((option: CategoryOption, categoryId: string) => {
-        setCategoryOptions(prevCategoryOptions => ({
+    const onClickCategoryOption = useCallback((optionId: string, categoryId: string) => {
+        setSelectedCategories(prevCategoryOptions => ({
             ...prevCategoryOptions,
-            ...{ [categoryId]: option },
+            ...{ [categoryId]: optionId },
         }));
-    }, [setCategoryOptions]);
+        setCategoryOptionsError(prevError => ({
+            ...prevError,
+            ...{ [categoryId]: { touched: true, valid: true } },
+        }));
+    }, [setSelectedCategories]);
 
     const onResetCategoryOption = useCallback((categoryId: string) => {
-        const newCategoryOptions = { ...categoryOptions };
+        const newCategoryOptions = { ...selectedCategories };
         delete newCategoryOptions[categoryId];
-        setCategoryOptions(newCategoryOptions);
-    }, [setCategoryOptions, categoryOptions]);
+        setSelectedCategories(newCategoryOptions);
+        setCategoryOptionsError(prevError => ({
+            ...prevError,
+            ...{ [categoryId]: { touched: true, valid: false } },
+        }));
+    }, [setSelectedCategories, selectedCategories]);
 
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
