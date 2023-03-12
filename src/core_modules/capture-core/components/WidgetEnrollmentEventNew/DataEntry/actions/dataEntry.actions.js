@@ -30,4 +30,3 @@ export const startAsyncUpdateFieldForNewEvent = (
     onError: Function,
 ) =>
     actionPayloadAppender(innerAction)({ onSuccess, onError });
-

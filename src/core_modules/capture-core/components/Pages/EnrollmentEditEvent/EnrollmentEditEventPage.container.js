@@ -100,10 +100,10 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
-
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
+
     const pageStatus = getPageStatus({
         orgUnitId,
         enrollmentSite,

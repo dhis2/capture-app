@@ -265,25 +265,25 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         inMemoryFileStore.clear();
     }
 
-     static dataEntrySectionDefinitions = {
-         [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
-             placement: placements.TOP,
-             name: i18n.t('Enrollment'),
-         },
-     };
+    static dataEntrySectionDefinitions = {
+        [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
+            placement: placements.TOP,
+            name: i18n.t('Enrollment'),
+        },
+    };
 
-     render() {
-         const { enrollmentMetadata, programId, programCategory, categoryCombinationForm, ...passOnProps } = this.props;
-         return (
-         // $FlowFixMe[cannot-spread-inexact] automated comment
-             <DataEntry
-                 {...passOnProps}
-                 dataEntrySections={this.state.dataEntrySections}
-                 formFoundation={enrollmentMetadata.enrollmentForm}
-                 categoryCombinationForm={categoryCombinationForm}
-             />
-         );
-     }
+    render() {
+        const { enrollmentMetadata, programId, programCategory, categoryCombinationForm, ...passOnProps } = this.props;
+        return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
+            <DataEntry
+                {...passOnProps}
+                dataEntrySections={this.state.dataEntrySections}
+                formFoundation={enrollmentMetadata.enrollmentForm}
+                categoryCombinationForm={categoryCombinationForm}
+            />
+        );
+    }
 }
 
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(FinalEnrollmentDataEntry);

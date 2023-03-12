@@ -39,7 +39,6 @@ import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
 import { actionTypes } from './editEventDataEntry.actions';
-import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -345,6 +344,9 @@ type Props = {
     isCompleted?: boolean,
 };
 
+type State = {
+    mode: string
+}
 
 type DataEntrySection = {
     placement: $Values<typeof placements>,
@@ -398,6 +400,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onCancelEditEvent,
             ...passOnProps
         } = this.props;
+
         return (
             <div>
                 <TabBar dataTest="edit-event-tab-bar">
@@ -442,6 +445,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             categoryCombinationForm,
             ...passOnProps
         } = this.props;
+
         return ( // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={dataEntryId}

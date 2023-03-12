@@ -52,7 +52,6 @@ const EnrollmentEditEventPagePain = ({
     teiId,
     enrollmentId,
     programId,
-    selectedCategories,
     enrollmentsAsOptions,
     trackedEntityName,
     teiDisplayName,
@@ -106,7 +105,6 @@ const EnrollmentEditEventPagePain = ({
                             initialScheduleDate={scheduleDate}
                             onCancelEditEvent={onCancelEditEvent}
                             onHandleScheduleSave={onHandleScheduleSave}
-                            selectedCategories={selectedCategories}
                             categoryCombinationForm={categoryCombinationForm}
                         />
                     )}

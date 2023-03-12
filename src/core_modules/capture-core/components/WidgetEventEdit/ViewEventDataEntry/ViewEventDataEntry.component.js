@@ -24,7 +24,6 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
-import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -66,7 +65,6 @@ const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
     COMMENTS: 'COMMENTS',
-    CATEGORYCOMBO: 'CATEGORYCOMBO',
 };
 
 const baseComponentStyles = {
@@ -252,34 +250,34 @@ const dataEntrySectionDefinitions = {
 };
 class ViewEventDataEntryPlain extends Component<Props> {
     fieldOptions: { theme: Theme };
-dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
-constructor(props: Props) {
-    super(props);
-    this.fieldOptions = {
-        theme: props.theme,
-        fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
-    };
+    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
+    constructor(props: Props) {
+        super(props);
+        this.fieldOptions = {
+            theme: props.theme,
+            fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
+        };
 
-    this.dataEntrySections = dataEntrySectionDefinitions;
-}
+        this.dataEntrySections = dataEntrySectionDefinitions;
+    }
 
-render() {
-    const {
-        classes,
-        dataEntryId,
-        ...passOnProps
-    } = this.props;
-    return (
-    // $FlowFixMe[cannot-spread-inexact] automated comment
-        <DataEntryWrapper
-            id={dataEntryId}
-            viewMode
-            fieldOptions={this.fieldOptions}
-            dataEntrySections={this.dataEntrySections}
-            {...passOnProps}
-        />
-    );
-}
+    render() {
+        const {
+            classes,
+            dataEntryId,
+            ...passOnProps
+        } = this.props;
+        return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
+            <DataEntryWrapper
+                id={dataEntryId}
+                viewMode
+                fieldOptions={this.fieldOptions}
+                dataEntrySections={this.dataEntrySections}
+                {...passOnProps}
+            />
+        );
+    }
 }
 
 export const ViewEventDataEntryComponent = withStyles(getStyles)(ViewEventDataEntryPlain);
