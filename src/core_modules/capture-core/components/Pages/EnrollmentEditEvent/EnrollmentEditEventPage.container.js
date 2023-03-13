@@ -1,7 +1,6 @@
 // @flow
 import React, { useEffect } from 'react';
-// $FlowFixMe
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
@@ -14,6 +13,7 @@ import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
+import { changeEventFromUrl } from '../ViewEvent/ViewEventComponent/viewEvent.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
@@ -21,6 +21,7 @@ import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { cleanUpDataEntry } from '../../DataEntry';
+import { pageKeys } from '../../../components/App/withAppUrlSync';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -44,11 +45,24 @@ const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntit
 };
 
 export const EnrollmentEditEventPage = () => {
-    const { orgUnitId, eventId } = useLocationQuery();
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const eventId = useSelector(({ viewEventPage }) => viewEventPage.eventId);
     const { loading, event } = useEvent(eventId);
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
+    const { orgUnitId, eventId: urlEventId } = useLocationQuery();
 
-    return !loading && eventId ? (
+    useEffect(() => {
+        if (!urlEventId) {
+            // return to main page
+            history.push(`/?${buildUrlQueryString({ orgUnitId })}`);
+        } else if (eventId !== urlEventId) {
+            dispatch(changeEventFromUrl(urlEventId, pageKeys.ENROLLMENT_EVENT));
+        }
+    }, [dispatch, history, eventId, urlEventId, orgUnitId]);
+
+    return !loading && eventId === urlEventId ? (
         <EnrollmentEditEventPageWithContext
             programId={programId}
             stageId={stageId}

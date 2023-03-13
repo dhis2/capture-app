@@ -4,6 +4,7 @@ import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 
 export const actionTypes = {
     VIEW_EVENT_FROM_URL: 'ViewEventFromUrl',
+    CHANGE_EVENT_FROM_URL: 'viewEventFromUrl',
     EVENT_FROM_URL_RETRIEVED: 'EventFromUrlRetrievedForViewEvent',
     EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED: 'EventFromUrlCouldNotBeRetrievedForViewEvent',
     ORG_UNIT_RETRIEVED_ON_URL_UPDATE: 'OrgUnitRetrievedForViewEventOnUrlUpdate',
@@ -26,6 +27,9 @@ export const viewEventFromUrl = (data: Object) =>
         eventId: data.nextProps.viewEventId || data.nextProps.eventId,
         page: data.nextPage,
     });
+
+export const changeEventFromUrl = (eventId: string, page: string) =>
+    actionCreator(actionTypes.VIEW_EVENT_FROM_URL)({ eventId, page });
 
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)({ error: message });
