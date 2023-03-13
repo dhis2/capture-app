@@ -22,6 +22,7 @@ import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { cleanUpDataEntry } from '../../DataEntry';
 import { pageKeys } from '../../../components/App/withAppUrlSync';
+import { withErrorMessageHandler } from '../../../HOC';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -49,6 +50,7 @@ export const EnrollmentEditEventPage = () => {
     const dispatch = useDispatch();
 
     const eventId = useSelector(({ viewEventPage }) => viewEventPage.eventId);
+    const error = useSelector(({ activePage }) => activePage.viewEventLoadError?.error);
     const { loading, event } = useEvent(eventId);
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId } = useLocationQuery();
@@ -62,7 +64,7 @@ export const EnrollmentEditEventPage = () => {
         }
     }, [dispatch, history, eventId, urlEventId, orgUnitId]);
 
-    return !loading && eventId === urlEventId ? (
+    return !loading && eventId === urlEventId || error ? (
         <EnrollmentEditEventPageWithContext
             programId={programId}
             stageId={stageId}
@@ -70,12 +72,12 @@ export const EnrollmentEditEventPage = () => {
             enrollmentId={enrollmentId}
             orgUnitId={orgUnitId}
             eventId={eventId}
-
+            error={error}
         />
     ) : <LoadingMaskForPage />;
 };
 
-const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollmentId, orgUnitId, eventId }: Props) => {
+const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, enrollmentId, orgUnitId, eventId }: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -153,3 +155,5 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         />
     );
 };
+
+const EnrollmentEditEventPageWithContext = withErrorMessageHandler()(EnrollmentEditEventPageWithContextPlain);
