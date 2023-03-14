@@ -4,7 +4,6 @@ import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 
 export const actionTypes = {
     VIEW_EVENT_FROM_URL: 'ViewEventFromUrl',
-    CHANGE_EVENT_FROM_URL: 'viewEventFromUrl',
     EVENT_FROM_URL_RETRIEVED: 'EventFromUrlRetrievedForViewEvent',
     EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED: 'EventFromUrlCouldNotBeRetrievedForViewEvent',
     ORG_UNIT_RETRIEVED_ON_URL_UPDATE: 'OrgUnitRetrievedForViewEventOnUrlUpdate',

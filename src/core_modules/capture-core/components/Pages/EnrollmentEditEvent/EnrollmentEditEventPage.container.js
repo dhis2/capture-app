@@ -64,7 +64,7 @@ export const EnrollmentEditEventPage = () => {
         }
     }, [dispatch, history, eventId, urlEventId, orgUnitId]);
 
-    return !loading && eventId === urlEventId || error ? (
+    return (!loading && eventId === urlEventId) || error ? (
         <EnrollmentEditEventPageWithContext
             programId={programId}
             stageId={stageId}
