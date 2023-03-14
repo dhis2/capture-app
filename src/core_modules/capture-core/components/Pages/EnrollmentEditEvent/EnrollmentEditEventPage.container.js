@@ -21,7 +21,7 @@ import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { cleanUpDataEntry } from '../../DataEntry';
-import { pageKeys } from '../../../components/App/withAppUrlSync';
+import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
 
 const getEventDate = (event) => {
