@@ -273,7 +273,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
                 {...passOnProps}
                 dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
                 formFoundation={enrollmentMetadata.enrollmentForm}
-                categoryCombinationForm={categoryCombinationForm}
+                categoryCombination={{ position: placements.BOTTOM, form: categoryCombinationForm }}
             />
         );
     }

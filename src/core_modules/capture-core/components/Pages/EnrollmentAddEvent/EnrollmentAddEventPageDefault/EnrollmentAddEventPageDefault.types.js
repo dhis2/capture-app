@@ -21,7 +21,7 @@ export type Props = {|
     pageFailure: boolean,
     ready: boolean,
     widgetReducerName: string,
-    categoryCombinationForm?: ?RenderFoundation,
+    categoryCombination?: ?{ position: string, form: ?RenderFoundation},
     ...CssClasses,
 |};
 

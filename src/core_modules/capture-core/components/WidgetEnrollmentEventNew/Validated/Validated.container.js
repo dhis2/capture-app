@@ -25,7 +25,7 @@ export const Validated = ({
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
-    categoryCombinationForm,
+    categoryCombination,
     ...passOnProps
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
@@ -68,7 +68,7 @@ export const Validated = ({
             onSaveExternal,
             onSaveSuccessActionType,
             onSaveErrorActionType,
-            categoryCombinationForm,
+            categoryCombinationForm: categoryCombination?.form,
         }));
     }, [
         dispatch,
@@ -79,7 +79,7 @@ export const Validated = ({
         onSaveExternal,
         onSaveSuccessActionType,
         onSaveErrorActionType,
-        categoryCombinationForm,
+        categoryCombination,
     ]);
 
     const handleCreateNew = useCallback((isCreateNew?: boolean) => {
@@ -96,7 +96,7 @@ export const Validated = ({
             onSaveExternal,
             onSaveSuccessActionType,
             onSaveErrorActionType,
-            categoryCombinationForm,
+            categoryCombinationForm: categoryCombination?.form,
         }));
         dispatch(startCreateNewAfterCompleting({
             enrollmentId, isCreateNew, orgUnitId: orgUnit.id, programId: program.id, teiId, availableProgramStages,
@@ -111,7 +111,7 @@ export const Validated = ({
         onSaveErrorActionType,
         formFoundation,
         availableProgramStages,
-        categoryCombinationForm,
+        categoryCombination,
     ]);
 
     return (
@@ -124,7 +124,7 @@ export const Validated = ({
             id={dataEntryId}
             itemId={itemId}
             formFoundation={formFoundation}
-            categoryCombinationForm={categoryCombinationForm}
+            categoryCombination={categoryCombination}
             onSave={handleSave}
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}

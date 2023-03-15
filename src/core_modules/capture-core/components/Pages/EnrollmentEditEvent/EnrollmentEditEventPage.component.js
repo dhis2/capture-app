@@ -69,7 +69,7 @@ const EnrollmentEditEventPagePain = ({
     onEnrollmentError,
     onCancelEditEvent,
     onHandleScheduleSave,
-    categoryCombinationForm,
+    categoryCombination,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -105,7 +105,7 @@ const EnrollmentEditEventPagePain = ({
                             initialScheduleDate={scheduleDate}
                             onCancelEditEvent={onCancelEditEvent}
                             onHandleScheduleSave={onHandleScheduleSave}
-                            categoryCombinationForm={categoryCombinationForm}
+                            categoryCombination={categoryCombination}
                         />
                     )}
                     {pageStatus === pageStatuses.MISSING_DATA && (

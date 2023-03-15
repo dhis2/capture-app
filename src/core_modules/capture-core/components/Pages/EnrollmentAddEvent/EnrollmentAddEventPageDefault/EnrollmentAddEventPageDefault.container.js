@@ -19,6 +19,7 @@ import {
 import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
+import { placements } from '../../../DataEntry';
 
 export const EnrollmentAddEventPageDefault = ({
     enrollment,
@@ -147,7 +148,7 @@ export const EnrollmentAddEventPageDefault = ({
                 ready={Boolean(enrollment)}
                 dataEntryHasChanges={dataEntryHasChanges}
                 onEnrollmentError={onEnrollmentError}
-                categoryCombinationForm={program.categoryCombinationForm}
+                categoryCombination={{ position: placements.TOP, form: program.categoryCombinationForm }}
             />
         </>
     );

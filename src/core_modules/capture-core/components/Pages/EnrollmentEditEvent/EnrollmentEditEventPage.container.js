@@ -20,7 +20,7 @@ import { dataElementTypes } from '../../../metaData/DataElement';
 import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
-import { cleanUpDataEntry } from '../../DataEntry';
+import { cleanUpDataEntry, placements } from '../../DataEntry';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -118,7 +118,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             mode={currentPageMode}
             pageStatus={pageStatus}
             programStage={programStage}
-            categoryCombinationForm={program.categoryCombinationForm}
+            categoryCombination={{ position: placements.TOP, form: program.categoryCombinationForm }}
             onGoBack={onGoBack}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}

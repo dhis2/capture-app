@@ -442,7 +442,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onSave,
             classes,
             formFoundation,
-            categoryCombinationForm,
+            categoryCombination,
             ...passOnProps
         } = this.props;
 
@@ -452,11 +452,11 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
                 onUpdateFormField={onUpdateField(orgUnit, programId)}
                 onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
-                onSave={onSave(orgUnit, categoryCombinationForm)}
+                onSave={onSave(orgUnit, categoryCombination?.form)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
                 formFoundation={formFoundation}
-                categoryCombinationForm={categoryCombinationForm}
+                categoryCombination={categoryCombination}
                 {...passOnProps}
             />
         );

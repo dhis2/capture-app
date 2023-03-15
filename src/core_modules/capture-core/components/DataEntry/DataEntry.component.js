@@ -222,6 +222,44 @@ class DataEntryPlain extends React.Component<Props> {
         return fieldsByPlacement;
     }
 
+    renderCategoryCombination = () => {
+        const {
+            id,
+            classes,
+            itemId,
+            completeButton,
+            mainButton,
+            cancelButton,
+            deleteButton,
+            notes,
+            completionAttempted,
+            saveAttempted,
+            fields,
+            dataEntrySections,
+            onUpdateDataEntryField,
+            onUpdateFormField,
+            onUpdateFieldInner,
+            onUpdateFormFieldAsync,
+            dataEntryOutputs,
+            onAddNote,
+            onOpenAddRelationship,
+            dataEntryFieldRef,
+            formFoundation,
+            categoryCombination,
+            ...passOnProps
+        } = this.props;
+        return (
+            <>{categoryCombination && <D2Form
+                id={getDataEntryKey(id, itemId)}
+                validationAttempted={completionAttempted || saveAttempted}
+                onUpdateField={this.handleUpdateField}
+                onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                formFoundation={categoryCombination.form}
+                {...passOnProps}
+            />}</>
+        );
+    }
+
     renderD2Form = () => {
         const {
             id,
@@ -245,30 +283,20 @@ class DataEntryPlain extends React.Component<Props> {
             onOpenAddRelationship,
             dataEntryFieldRef,
             formFoundation,
-            categoryCombinationForm,
+            categoryCombination,
             ...passOnProps
         } = this.props;
 
         const d2Form = (
             // $FlowFixMe[cannot-spread-inexact] automated comment
-            <>
-                <D2Form
-                    id={getDataEntryKey(id, itemId)}
-                    validationAttempted={completionAttempted || saveAttempted}
-                    onUpdateField={this.handleUpdateField}
-                    onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                    formFoundation={formFoundation}
-                    {...passOnProps}
-                />
-                {categoryCombinationForm && <D2Form
-                    id={getDataEntryKey(id, itemId)}
-                    validationAttempted={completionAttempted || saveAttempted}
-                    onUpdateField={this.handleUpdateField}
-                    onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                    formFoundation={categoryCombinationForm}
-                    {...passOnProps}
-                />}
-            </>
+            <D2Form
+                id={getDataEntryKey(id, itemId)}
+                validationAttempted={completionAttempted || saveAttempted}
+                onUpdateField={this.handleUpdateField}
+                onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                formFoundation={formFoundation}
+                {...passOnProps}
+            />
         );
         return this.props.formHorizontal ? d2Form : <div className={classes.d2FormContainer}>{d2Form}</div>;
     }
@@ -284,6 +312,7 @@ class DataEntryPlain extends React.Component<Props> {
             deleteButton,
             notes,
             dataEntryOutputs,
+            categoryCombination,
         } = this.props;
 
         if (!itemId) {
@@ -310,7 +339,9 @@ class DataEntryPlain extends React.Component<Props> {
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <div className={directionClasses.formInnerContainer}>
                             {this.renderDataEntryFieldsByPlacement(placements.TOP)}
+                            {categoryCombination?.position === placements.TOP && this.renderCategoryCombination()}
                             {this.renderD2Form()}
+                            {categoryCombination?.position === placements.BOTTOM && this.renderCategoryCombination()}
                             {this.renderDataEntryFieldsByPlacement(placements.BOTTOM)}
                             {notes &&
                                 <div className={classes.notes}>

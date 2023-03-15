@@ -13,6 +13,6 @@ export type Props = {|
     rulesExecutionDependencies: Object,
     onSave: ExternalSaveHandler,
     onCancel: () => void,
-    categoryCombinationForm?: ?RenderFoundation,
+    categoryCombination?: ?{ position: string, form: RenderFoundation},
     ...CssClasses
 |};

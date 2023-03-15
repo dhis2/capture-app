@@ -32,7 +32,7 @@ const NewEventWorkspacePlain = ({
     onCancel,
     onSave,
     classes,
-    categoryCombinationForm,
+    categoryCombination,
     ...passOnProps
 }: Props) => {
     const { tab } = useLocationQuery();
@@ -85,7 +85,7 @@ const NewEventWorkspacePlain = ({
                         orgUnitId={orgUnitId}
                         teiId={teiId}
                         enrollmentId={enrollmentId}
-                        categoryCombinationForm={categoryCombinationForm}
+                        categoryCombination={categoryCombination}
                         onSaveSuccessActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS}
                         onSaveErrorActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR}
                         onSave={onSave}
@@ -106,7 +106,7 @@ const NewEventWorkspacePlain = ({
                         onSave={onSave}
                         onCancel={onCancel}
                         hideDueDate={stage?.hideDueDate}
-                        categoryCombinationForm={categoryCombinationForm}
+                        categoryCombination={categoryCombination}
                     />}
                 </div>
             </Widget>
