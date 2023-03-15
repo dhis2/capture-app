@@ -25,7 +25,7 @@ And for a tracker program the page navigation should show that you are on the fi
 
 # DHIS2-13960: /trackedEntities filter by assignee results are not consistent
 # Scenario: Show only teis with active enrollments and unassinged events using the filter
-# Given you open the main page with Ngelehun and malaria focus investigation program context
+# Given you open the main page with Ngelehun and Malaria focus investigation context
 # When you set the enrollment status filter to active
 # And you apply the current filter
 # And you set the assginee filter to none
@@ -89,13 +89,12 @@ And the list should display data ordered ascendingly by first name
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: The TEI custom working lists is loaded
-Given you open the main page with Ngelehun and malaria focus investigation program context
+Given you open the main page with Ngelehun and Malaria focus investigation context
 Then you see the custom TEI working lists
 And you can load the view with the name Events assigned to me
 
-
 Scenario: The TEI custom working can be shared
-Given you open the main page with Ngelehun and malaria focus investigation program context
+Given you open the main page with Ngelehun and Malaria focus investigation context
 And you see the custom TEI working lists
 And you can load the view with the name Events assigned to me
 And you create a copy of the working list
@@ -109,25 +108,25 @@ And you apply the current filter
 And you set the enrollment date to a relative range
 And you apply the current filter
 When you save the list with the name My custom list
-Then the new custom TEI working list is created
+Then the new My custom list is created
 And the enrollment status filter button should show that the completed filter is in effect
 When you set the enrollment status filter to active
 And you apply the current filter
 When you update the list with the name My custom list
 Then the enrollment status filter button should show that the active filter is in effect
 And you delete the name My custom list
-Then the custom TEI is deleted
+Then the My custom list is deleted
 
-Scenario: The user can delete a working list right immediately after creating it.
+Scenario: The user can delete a TEI working list right immediately after creating it.
 Given you open the main page with Ngelehun and Malaria case diagnosis context
 And you set the enrollment status filter to completed
 And you apply the current filter
 And you set the enrollment date to a relative range
 And you apply the current filter
 When you save the list with the name My custom list
-Then the new custom TEI working list is created
+Then the new My custom list is created
 When you delete the name My custom list
-Then the custom TEI is deleted
+Then the My custom list is deleted
 
 @v>=39
 Scenario: The user can open and select a program stage filter
@@ -186,3 +185,63 @@ When you select a scheduledAt column and save from the column selector
 And you select the events scheduled today
 And you apply the current filter
 Then you see the selected option in the scheduledAt filter
+
+@v>=40
+Scenario: The user creates, updates and deletes a Program stage custom working list
+Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
+And you set the enrollment status filter to completed
+And you apply the current filter
+And you set the enrollment date to a relative range
+And you apply the current filter
+When you save the list with the name Custom Program stage list
+Then the new Custom Program stage list is created
+And the enrollment status filter button should show that the completed filter is in effect
+When you set the enrollment status filter to active
+And you apply the current filter
+When you update the list with the name Custom Program stage list
+Then the enrollment status filter button should show that the active filter is in effect
+And you delete the name Custom Program stage list
+Then the Custom Program stage list is deleted
+
+@v>=40
+Scenario: The user can delete a Program stage working list right immediately after creating it.
+Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
+When you save the list with the name Custom Program stage list
+Then the new Custom Program stage list is created
+And you delete the name Custom Program stage list
+Then the Custom Program stage list is deleted
+
+# For the program stage WL scenarios I need to create/delete my own because there are no program stage working lists in the demo database.
+@v>=40
+Scenario: The Program stage custom working can be shared
+Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
+And you save the list with the name Custom Program stage list
+When you change the sharing settings
+Then you see the new sharing settings
+
+@v>=40
+Scenario: The Program stage working list configuration is kept when changing the org unit
+Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
+And you save the list with the name Custom Program stage list
+Then the new Custom Program stage list is created
+And you set the event status filter to completed
+And you apply the current filter
+And you change the org unit
+Then the working list configuration was kept
+And you delete the name Custom Program stage list
+And the Custom Program stage list is deleted
+
+@v>=40
+Scenario: The user can save a program stage working list, based on a TEI working list configuration
+Given you open the main page with Ngelehun and Malaria focus investigation context
+Then you see the custom TEI working lists
+And you can load the view with the name Events assigned to me
+And you open the program stage filters from the more filters dropdown menu
+And you select the Foci response program stage
+And you apply the current filter
+Then you are redirect to the default templete
+When you save the list with the name Custom Program stage list
+Then the new Custom Program stage list is created
+And the TEI working list initial configuration was kept
+And you delete the name Custom Program stage list
+Then the Custom Program stage list is deleted

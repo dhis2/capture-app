@@ -32,4 +32,5 @@ export type Input = {|
     sortById?: string,
     sortByDirection?: string,
     programStage?: string,
+    isDefaultTemplateAltered?: boolean,
 |};

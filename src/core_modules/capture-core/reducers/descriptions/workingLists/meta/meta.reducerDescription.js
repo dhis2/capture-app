@@ -297,4 +297,15 @@ export const workingListsMetaDesc = createReducerDescription({
         newState[action.payload.listId] = action.payload.meta;
         return newState;
     },
+    [workingListsCommonActionTypes.LIST_COLUMN_ORDER_RESET]: (state, action) => {
+        const { storeId } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                sortByDirection: 'desc',
+                sortById: 'createdAt',
+            },
+        };
+    },
 }, 'workingListsMeta');

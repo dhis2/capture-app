@@ -1,10 +1,11 @@
 // @flow
 import { useMemo } from 'react';
+import type { WorkingListTemplate } from '../../../WorkingListsBase';
 
-export const useStaticTemplates = () =>
+export const useStaticTemplates = (defaultAlteredTemplate?: WorkingListTemplate) =>
     useMemo(
         () => [
-            {
+            defaultAlteredTemplate || {
                 id: 'default',
                 isDefault: true,
                 name: 'default',
@@ -58,5 +59,5 @@ export const useStaticTemplates = () =>
                 },
             },
         ],
-        [],
+        [defaultAlteredTemplate],
     );
