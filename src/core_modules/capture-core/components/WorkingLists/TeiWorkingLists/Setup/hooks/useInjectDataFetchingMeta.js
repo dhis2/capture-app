@@ -13,6 +13,7 @@ import type { FiltersOnly } from '../../../../ListView';
 export const useInjectDataFetchingMetaToLoadList = (
     defaultColumns: TeiWorkingListsColumnConfigs,
     filtersOnly: FiltersOnly,
+    programStageFiltersOnly: FiltersOnly,
     onLoadView: LoadTeiView,
 ) =>
     useCallback(
@@ -23,6 +24,9 @@ export const useInjectDataFetchingMetaToLoadList = (
                     const mainProperty = defaultColumn.mainProperty && typeof defaultColumn.mainProperty === 'boolean'
                         ? defaultColumn.mainProperty
                         : undefined;
+                    const additionalColumn = defaultColumn.additionalColumn
+                        ? defaultColumn.additionalColumn
+                        : undefined;
 
                     return [
                         id,
@@ -31,17 +35,27 @@ export const useInjectDataFetchingMetaToLoadList = (
                             type,
                             visible,
                             mainProperty,
+                            additionalColumn,
                         },
                     ];
                 }),
             );
+            const transformFiltersOnly = filtersOnly.map(({ id, type, transformRecordsFilter }) => [
+                id,
+                { id, type, transformRecordsFilter },
+            ]);
+
+            const transformProgramStageFiltersOnly = programStageFiltersOnly.map(
+                ({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }],
+            );
+
             const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
-                filtersOnly.map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]),
+                transformFiltersOnly.concat(transformProgramStageFiltersOnly),
             );
 
             onLoadView(selectedTemplate, context, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching });
         },
-        [defaultColumns, filtersOnly, onLoadView],
+        [defaultColumns, filtersOnly, programStageFiltersOnly, onLoadView],
     );
 
 export const useInjectDataFetchingMetaToUpdateList = (

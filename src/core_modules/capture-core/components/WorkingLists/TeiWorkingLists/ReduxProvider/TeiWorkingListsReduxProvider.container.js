@@ -9,6 +9,7 @@ import { TEI_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './teiWorkingListsReduxProvider.types';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
+import { getDefaultTemplate } from '../helpers';
 
 const useApiTemplate = () => {
     const workingListsTemplatesTEI = useSelector(({ workingListsTemplates }) => workingListsTemplates.teiList);
@@ -25,6 +26,7 @@ export const TeiWorkingListsReduxProvider = ({
     const program = useTrackerProgram(programId);
     const apiTemplates = useApiTemplate();
     const history = useHistory();
+    const defaultTemplate = getDefaultTemplate(programId);
 
     const {
         lastTransaction,
@@ -34,7 +36,7 @@ export const TeiWorkingListsReduxProvider = ({
         onSelectTemplate,
         onAddTemplate,
         onDeleteTemplate,
-        onResetListColumnOrder,
+        onUpdateDefaultTemplate,
         programStage,
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
@@ -46,11 +48,8 @@ export const TeiWorkingListsReduxProvider = ({
 
     useEffect(() => {
         selectedTemplateId && onSelectTemplate && onSelectTemplate(selectedTemplateId);
-    }, [selectedTemplateId, onSelectTemplate]);
-
-    useEffect(() => {
-        programStage && onResetListColumnOrder && onResetListColumnOrder();
-    }, [programStage, onResetListColumnOrder]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const onSelectListRow = useCallback(({ id }) => {
         const record = records[id];
@@ -65,23 +64,36 @@ export const TeiWorkingListsReduxProvider = ({
             }));
     }, [dispatch, orgUnitId, programId, records, programStage, history]);
 
+    const handlePreserveCurrentViewState = useCallback((templateId, criteria) => {
+        onUpdateDefaultTemplate({ ...defaultTemplate, criteria, isAltered: true });
+        onSelectTemplate(templateId, criteria?.programStage);
+        templateId && onChangeTemplate && onChangeTemplate(templateId);
+    }, [onChangeTemplate, onSelectTemplate, onUpdateDefaultTemplate, defaultTemplate]);
+
     const handleOnSelectTemplate = useCallback((templateId) => {
+        onUpdateDefaultTemplate(defaultTemplate);
         onSelectTemplate(templateId);
         templateId && onChangeTemplate && onChangeTemplate(templateId);
-    }, [onChangeTemplate, onSelectTemplate]);
+    }, [onChangeTemplate, onSelectTemplate, onUpdateDefaultTemplate, defaultTemplate]);
 
     const injectCallbacksForAddTemplate = useCallback((name: string, criteria: Object, data: Object) =>
         onAddTemplate(name, criteria, data, { onChangeTemplate }),
     [onAddTemplate, onChangeTemplate]);
 
-    const injectCallbacksForDeleteTemplate = useCallback((template: Object, programIdArg: string) =>
-        onDeleteTemplate(template, programIdArg, { onChangeTemplate }),
-    [onDeleteTemplate, onChangeTemplate]);
+    const injectCallbacksForDeleteTemplate = useCallback(
+        (template: Object, programIdArg: string, programStageArg?: string) =>
+            onDeleteTemplate(template, programIdArg, programStageArg, { onChangeTemplate }),
+        [onDeleteTemplate, onChangeTemplate],
+    );
+    const templateSharingType = programStage
+        ? TEMPLATE_SHARING_TYPE[storeId]?.programStageWorkingList
+        : TEMPLATE_SHARING_TYPE[storeId]?.tei;
 
     return (
         <TeiWorkingListsSetup
             {...commonStateManagementProps}
-            templateSharingType={TEMPLATE_SHARING_TYPE[storeId]}
+            storeId={storeId}
+            templateSharingType={templateSharingType}
             onSelectListRow={onSelectListRow}
             onLoadTemplates={onLoadTemplates}
             program={program}
@@ -90,6 +102,7 @@ export const TeiWorkingListsReduxProvider = ({
             orgUnitId={orgUnitId}
             apiTemplates={apiTemplates}
             onSelectTemplate={handleOnSelectTemplate}
+            onPreserveCurrentViewState={handlePreserveCurrentViewState}
             onAddTemplate={injectCallbacksForAddTemplate}
             onDeleteTemplate={injectCallbacksForDeleteTemplate}
         />

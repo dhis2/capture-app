@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-01-20T09:11:14.026Z\n"
-"PO-Revision-Date: 2023-01-20T09:11:14.026Z\n"
+"POT-Creation-Date: 2023-03-15T10:53:17.676Z\n"
+"PO-Revision-Date: 2023-03-15T10:53:17.676Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1311,6 +1311,9 @@ msgstr "Working list could not be updated"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "an error occurred loading Tracked entity instance lists"
+
+msgid "an error occurred loading the working lists"
+msgstr "an error occurred loading the working lists"
 
 msgid "Update view"
 msgstr "Update view"

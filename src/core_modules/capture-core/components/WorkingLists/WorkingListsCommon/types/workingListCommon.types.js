@@ -11,9 +11,12 @@ export type AddTemplate = (name: string, criteria: Object, data: Object, callBac
 
 export type UpdateTemplate = (template: Object, criteria: Object, data: Object) => void;
 
+export type UpdateDefaultTemplate = (template: Object) => void;
+
 export type DeleteTemplate = (
     template: Object,
     programId: string,
+    programStage?: string,
     callBacks?: Callbacks,
 ) => void;
 
