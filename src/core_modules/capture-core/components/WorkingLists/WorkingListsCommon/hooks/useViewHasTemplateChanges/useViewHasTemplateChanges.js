@@ -42,7 +42,7 @@ export const useViewHasTemplateChanges = ({
     columns,
     sortById,
     sortByDirection,
-    programStage,
+    programStageId,
     isDefaultTemplateAltered,
 }: Input) => {
     const supportsStoreProgramStageWorkingList = useFeature(FEATURES.storeProgramStageWorkingList);
@@ -66,7 +66,7 @@ export const useViewHasTemplateChanges = ({
         if (isDefaultTemplateAltered) {
             return true;
         }
-        if (!supportsStoreProgramStageWorkingList && programStage) {
+        if (!supportsStoreProgramStageWorkingList && programStageId) {
             return undefined;
         }
         if (!calculatedInitialViewConfig) {
@@ -81,7 +81,7 @@ export const useViewHasTemplateChanges = ({
         sortById,
         sortByDirection,
         calculatedInitialViewConfig,
-        programStage,
+        programStageId,
         supportsStoreProgramStageWorkingList,
         isDefaultTemplateAltered,
     ]);

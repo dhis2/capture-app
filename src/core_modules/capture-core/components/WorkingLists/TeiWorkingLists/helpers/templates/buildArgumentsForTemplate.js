@@ -16,7 +16,7 @@ export const buildArgumentsForTemplate = ({
     sortById,
     sortByDirection,
     programId,
-    programStage,
+    programStageId,
 }: {
     filters?: FiltersData,
     filtersOnly: Array<{ id: string, type: string }>,
@@ -25,7 +25,7 @@ export const buildArgumentsForTemplate = ({
     sortById: string,
     sortByDirection: string,
     programId: string,
-    programStage?: string,
+    programStageId?: string,
 }) => {
     const { programStatus, occurredAt, enrolledAt, assignedUserMode, assignedUsers } = convertMainFilters({
         filters,
@@ -37,9 +37,9 @@ export const buildArgumentsForTemplate = ({
     });
     const attributeValueFilters = convertToTEIFilterAttributes({
         filters,
-        attributeValueFilters: programStage ? columns.filter(column => !column.additionalColumn) : columns,
+        attributeValueFilters: programStageId ? columns.filter(column => !column.additionalColumn) : columns,
     });
-    const dataFilters = programStage
+    const dataFilters = programStageId
         ? convertToEventFilterQuery({
             filters,
             mainFilters: programStageFiltersOnly,
@@ -60,11 +60,11 @@ export const buildArgumentsForTemplate = ({
         dataFilters,
         order: `${sortById}:${sortByDirection}`,
         displayColumnOrder: visibleColumnIds,
-        programStage,
+        programStage: programStageId,
     };
     const data = {
         program: { id: programId },
-        programStage: { id: programStage },
+        programStage: { id: programStageId },
         clientId: uuid(),
         sortById,
         sortByDirection,

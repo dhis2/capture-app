@@ -16,10 +16,10 @@ import { buildArgumentsForTemplate } from '../helpers';
 
 const DEFAULT_TEMPLATES_LENGTH = 1;
 
-const shouldPreserveViewState = ({ currentTemplateId, defaultTemplateId, programStage, prevProgramStageId }) =>
+const shouldPreserveViewState = ({ currentTemplateId, defaultTemplateId, programStageId, prevProgramStageId }) =>
     currentTemplateId !== defaultTemplateId &&
-    ((programStage && prevProgramStageId.current === undefined) ||
-        (programStage === undefined && prevProgramStageId.current));
+    ((programStageId && prevProgramStageId.current === undefined) ||
+        (programStageId === undefined && prevProgramStageId.current));
 
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
     (currentTemplateId && templates.find(template => template.id === currentTemplateId)) || templates[0],
@@ -27,7 +27,7 @@ const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
 
 export const TeiWorkingListsSetup = ({
     program,
-    programStage,
+    programStageId,
     onUpdateList,
     onLoadView,
     onClearFilters,
@@ -49,11 +49,11 @@ export const TeiWorkingListsSetup = ({
     onDeleteTemplate,
     ...passOnProps
 }: Props) => {
-    const prevProgramStageId = useRef(programStage);
-    const defaultColumns = useDefaultColumnConfig(program, orgUnitId, programStage);
+    const prevProgramStageId = useRef(programStageId);
+    const defaultColumns = useDefaultColumnConfig(program, orgUnitId, programStageId);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
-    const programStageFiltersOnly = useProgramStageFilters(program, programStage);
+    const programStageFiltersOnly = useProgramStageFilters(program, programStageId);
     const staticTemplates = useStaticTemplates(
         apiTemplates?.find(apiTemplate => apiTemplate.isDefault && apiTemplate.isAltered),
     );
@@ -65,12 +65,12 @@ export const TeiWorkingListsSetup = ({
         columns,
         sortById,
         sortByDirection,
-        programStage,
+        programStageId,
         isDefaultTemplateAltered: storedTemplates?.find(template => template.isDefault)?.isAltered,
     });
 
     useEffect(() => {
-        const viewHasProgramStageChanges = viewHasChanges && programStage !== prevProgramStageId.current;
+        const viewHasProgramStageChanges = viewHasChanges && programStageId !== prevProgramStageId.current;
 
         if (viewHasProgramStageChanges) {
             onResetListColumnOrder && onResetListColumnOrder();
@@ -79,7 +79,7 @@ export const TeiWorkingListsSetup = ({
                 shouldPreserveViewState({
                     currentTemplateId,
                     defaultTemplateId,
-                    programStage,
+                    programStageId,
                     prevProgramStageId,
                 })
             ) {
@@ -91,15 +91,15 @@ export const TeiWorkingListsSetup = ({
                     sortById,
                     sortByDirection,
                     programId: program.id,
-                    programStage,
+                    programStageId,
                 });
 
                 onPreserveCurrentViewState(defaultTemplateId, criteria);
             }
         }
-        prevProgramStageId.current = programStage;
+        prevProgramStageId.current = programStageId;
     }, [
-        programStage,
+        programStageId,
         onResetListColumnOrder,
         viewHasChanges,
         program,
@@ -123,7 +123,7 @@ export const TeiWorkingListsSetup = ({
                 sortById,
                 sortByDirection,
                 programId: program.id,
-                programStage,
+                programStageId,
             });
             onAddTemplate(name, criteria, data);
         },
@@ -136,7 +136,7 @@ export const TeiWorkingListsSetup = ({
             sortById,
             sortByDirection,
             program.id,
-            programStage,
+            programStageId,
         ],
     );
 
@@ -150,7 +150,7 @@ export const TeiWorkingListsSetup = ({
                 sortById,
                 sortByDirection,
                 programId: program.id,
-                programStage,
+                programStageId,
             });
             onUpdateTemplate(template, criteria, data);
         },
@@ -163,13 +163,13 @@ export const TeiWorkingListsSetup = ({
             sortById,
             sortByDirection,
             program.id,
-            programStage,
+            programStageId,
         ],
     );
 
     const injectArgumentsForDeleteTemplate = useCallback(
-        template => onDeleteTemplate(template, program.id, programStage),
-        [onDeleteTemplate, program.id, programStage],
+        template => onDeleteTemplate(template, program.id, programStageId),
+        [onDeleteTemplate, program.id, programStageId],
     );
 
     return (
@@ -197,7 +197,7 @@ export const TeiWorkingListsSetup = ({
                 onUpdateList,
             )}
             programId={program.id}
-            programStageId={programStage}
+            programStageId={programStageId}
             rowIdKey="id"
             orgUnitId={orgUnitId}
             currentViewHasTemplateChanges={viewHasChanges}

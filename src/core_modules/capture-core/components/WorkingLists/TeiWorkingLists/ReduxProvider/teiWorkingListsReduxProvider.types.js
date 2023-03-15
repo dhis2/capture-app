@@ -77,7 +77,7 @@ export type TeiWorkingListsReduxOutputProps = {|
     onUpdateList: UpdateList,
     orgUnitId: string,
     program: TrackerProgram,
-    programStage?: string,
+    programStageId?: string,
     records?: TeiRecords,
     recordsOrder?: RecordsOrder,
     rowsPerPage?: number,

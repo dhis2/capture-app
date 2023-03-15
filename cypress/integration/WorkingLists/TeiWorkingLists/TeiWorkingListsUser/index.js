@@ -708,7 +708,7 @@ Then('you are redirect to the default templete', () => {
 
 Then('the TEI working list initial configuration was kept', () => {
     cy.get('[data-test="tei-working-lists"]')
-        .contains('Assigned to: Me')
+        .contains('Enrollment status: Active')
         .should('exist');
     cy.get('[data-test="tei-working-lists"]')
         .find('[data-test="more-filters"]')
