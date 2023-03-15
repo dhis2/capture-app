@@ -104,7 +104,7 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
                             teiId: trackedEntity,
                             enrollmentId,
                         })),
-                    catchError(() => autoSelectEnrollment(programId, orgUnitId, teiId)),
+                    catchError(() => of(startFetchingTeiFromTeiId())),
                     startWith(showLoadingViewOnEnrollmentPage()),
                 );
         }),
