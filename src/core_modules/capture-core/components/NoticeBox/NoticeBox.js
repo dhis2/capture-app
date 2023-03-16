@@ -6,14 +6,14 @@ import { useSelector, shallowEqual } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalActions, ModalContent, ModalTitle, Button, ButtonStrip } from '@dhis2/ui';
 
-const buildContentListToDisplay = (rulesEffectsNotice, previousFormsValues, formsValues) =>
-    Object.keys(rulesEffectsNotice).reduce((acc, key) => {
+const buildContentListToDisplay = (rulesEffectsHiddenFields, previousFormsValues, formsValues) =>
+    Object.keys(rulesEffectsHiddenFields).reduce((acc, key) => {
         const fieldWasHidden =
             previousFormsValues && previousFormsValues[key] && formsValues && formsValues[key] === null;
         if (fieldWasHidden) {
             const text =
-                rulesEffectsNotice[key].content ||
-                `${rulesEffectsNotice[key].name} ${i18n.t('was blanked out and hidden by your last action')}`;
+            rulesEffectsHiddenFields[key].content ||
+                `${rulesEffectsHiddenFields[key].name} ${i18n.t('was blanked out and hidden by your last action')}`;
             return [...acc, { key, text }];
         }
         return acc;
@@ -23,11 +23,11 @@ export const NoticeBox = ({ formId }: { formId: string }) => {
     const [toggle, setToggle] = useState(false);
     const [contentList, setContentList] = useState([]);
     const [previousFormsValues, setPreviousFormsValues] = useState();
-    const [previousRulesEffectsNotice, setPreviousRulesEffectsNotice] = useState();
+    const [previousRulesEffectsHiddenFields, setPreviousRulesEffectsHiddenFields] = useState();
 
-    const { rulesEffectsNotice, formsValues } = useSelector(
+    const { rulesEffectsHiddenFields, formsValues } = useSelector(
         state => ({
-            rulesEffectsNotice: state.rulesEffectsNotice[formId] || [],
+            rulesEffectsHiddenFields: state.rulesEffectsHiddenFields[formId] || [],
             formsValues: state.formsValues[formId] || [],
         }),
         shallowEqual,
@@ -35,9 +35,9 @@ export const NoticeBox = ({ formId }: { formId: string }) => {
 
     useEffect(() => {
         if (!isEqual(previousFormsValues, formsValues)) {
-            if (!isEqual(previousRulesEffectsNotice, rulesEffectsNotice)) {
+            if (!isEqual(previousRulesEffectsHiddenFields, rulesEffectsHiddenFields)) {
                 const contentListToDisplay = buildContentListToDisplay(
-                    rulesEffectsNotice,
+                    rulesEffectsHiddenFields,
                     previousFormsValues,
                     formsValues,
                 );
@@ -45,11 +45,11 @@ export const NoticeBox = ({ formId }: { formId: string }) => {
                     setContentList(contentListToDisplay);
                     setToggle(true);
                 }
-                setPreviousRulesEffectsNotice(rulesEffectsNotice);
+                setPreviousRulesEffectsHiddenFields(rulesEffectsHiddenFields);
             }
             setPreviousFormsValues(formsValues);
         }
-    }, [rulesEffectsNotice, formsValues, previousFormsValues, previousRulesEffectsNotice]);
+    }, [rulesEffectsHiddenFields, formsValues, previousFormsValues, previousRulesEffectsHiddenFields]);
 
     return toggle ? (
         <Modal onClose={() => setToggle(false)} position="middle">
