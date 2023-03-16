@@ -1,3 +1,10 @@
+## [100.26.1](https://github.com/dhis2/capture-app/compare/v100.26.0...v100.26.1) (2023-03-16)
+
+
+### Bug Fixes
+
+* [DHIS2-14283] change format of TEA values dispatched to `enrollmentDomain` ([#3143](https://github.com/dhis2/capture-app/issues/3143)) ([60c7fdc](https://github.com/dhis2/capture-app/commit/60c7fdc02ca5582a350dff2cc71cd55c15d09e60))
+
 # [100.26.0](https://github.com/dhis2/capture-app/compare/v100.25.10...v100.26.0) (2023-03-02)
 
 
