@@ -1,7 +1,9 @@
 // @flow
 import { getOptionSets } from '../getFunctions/getOptionSets';
-import { useIndexedDBQuery } from '../../../../../utils/reactQueryHelpers';
-import type { TrackedEntityAttribute } from '../../../../WidgetProfile/DataEntry/FormFoundation/types';
+import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
+import type {
+    TrackedEntityAttribute,
+} from '../types';
 
 type Props = {
     selectedScopeId: string,

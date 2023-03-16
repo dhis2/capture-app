@@ -1,6 +1,6 @@
 // @flow
-import { getUserStorageController } from '../../../../../storageControllers';
-import { userStores } from '../../../../../storageControllers/stores';
+import { getUserStorageController } from '../../../storageControllers';
+import { userStores } from '../../../storageControllers/stores';
 
 export const getTrackedEntityTypeById = (tetId: string) => {
     const storageController = getUserStorageController();

@@ -1,9 +1,12 @@
 // @flow
-import { useIndexedDBQuery } from '../../../../../utils/reactQueryHelpers';
+import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 import { buildEnrollmentForm } from '../buildFunctions/buildEnrollmentForm';
-import type { TrackedEntityType, Program } from '../../../../../metaData';
-import type { OptionSet, TrackedEntityAttribute } from '../../../../WidgetProfile/DataEntry/FormFoundation/types';
-import { scopeTypes } from '../../../../../metaData';
+import type { TrackedEntityType, Program } from '../../../metaData';
+import type {
+    OptionSet,
+    TrackedEntityAttribute,
+} from '../types';
+import { scopeTypes } from '../../../metaData';
 
 type Props = {
     scopeType: $Values<typeof scopeTypes>,

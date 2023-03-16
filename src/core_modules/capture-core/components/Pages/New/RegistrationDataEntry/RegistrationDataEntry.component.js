@@ -14,7 +14,7 @@ import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryW
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useLocationQuery } from '../../../../utils/routing';
-import { useMetadataForRegistrationForm } from '../../../DataEntries/common/useMetadataForRegistrationForm';
+import { useMetadataForRegistrationForm } from '../../../../hooks/useMetadataForRegistrationForm';
 
 const getStyles = ({ typography }) => ({
     paper: {

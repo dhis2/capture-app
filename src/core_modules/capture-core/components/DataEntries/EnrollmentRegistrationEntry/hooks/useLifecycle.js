@@ -8,7 +8,7 @@ import { useLocationQuery } from '../../../../utils/routing';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
-import { useMetadataForRegistrationForm } from '../../common/useMetadataForRegistrationForm';
+import { useMetadataForRegistrationForm } from '../../../../hooks/useMetadataForRegistrationForm';
 
 export const useLifecycle = (
     selectedScopeId: string,

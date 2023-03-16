@@ -1,12 +1,12 @@
 // @flow
-import { EnrollmentFactory } from '../../../../../metaDataMemoryStoreBuilders/programs/factory/enrollment';
+import { EnrollmentFactory } from '../../../metaDataMemoryStoreBuilders/programs/factory/enrollment';
 import type {
     OptionSet,
     TrackedEntityAttribute,
-} from '../../../../WidgetProfile/DataEntry/FormFoundation/types';
-import type { CachedProgram, CachedTrackedEntityType } from '../../../../../storageControllers/cache.types';
-import type { TrackedEntityType } from '../../../../../metaData';
-import { buildSearchGroup } from '../../../../Pages/Search/hooks';
+} from '../types';
+import type { CachedProgram, CachedTrackedEntityType } from '../../../storageControllers/cache.types';
+import type { TrackedEntityType } from '../../../metaData';
+import { buildSearchGroup } from '../../../components/Pages/Search/hooks';
 
 type Props = {|
     cachedOptionSets: OptionSet[],

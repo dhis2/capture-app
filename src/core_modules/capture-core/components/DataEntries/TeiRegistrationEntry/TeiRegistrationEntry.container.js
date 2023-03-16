@@ -10,7 +10,7 @@ import type { OwnProps } from './TeiRegistrationEntry.types';
 import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component';
 import { useFormValuesFromSearchTerms } from './hooks/useFormValuesFromSearchTerms';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
-import { useMetadataForRegistrationForm } from '../common/useMetadataForRegistrationForm';
+import { useMetadataForRegistrationForm } from '../../../hooks/useMetadataForRegistrationForm';
 
 const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
     const dispatch = useDispatch();

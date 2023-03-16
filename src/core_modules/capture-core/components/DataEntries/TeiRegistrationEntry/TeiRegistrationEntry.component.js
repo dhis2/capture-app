@@ -13,11 +13,11 @@ import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
-import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
-import { useMetadataForRegistrationForm } from '../common/useMetadataForRegistrationForm';
+import { useMetadataForRegistrationForm } from '../../../hooks/useMetadataForRegistrationForm';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>

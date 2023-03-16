@@ -1,5 +1,5 @@
 // @flow
-import { useIndexedDBQuery } from '../../../../../utils/reactQueryHelpers';
+import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 import { getTrackedEntityAttributes } from '../getFunctions/getTrackedEntityAttributes';
 
 type Props = {

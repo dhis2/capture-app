@@ -6,7 +6,7 @@ import { DATA_ENTRY_ID } from '../../registerTei.const';
 import enrollmentClasses from './enrollment.module.css';
 import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
 import type { Props } from './dataEntryEnrollment.types';
-import { useMetadataForRegistrationForm } from '../../../../../DataEntries/common/useMetadataForRegistrationForm';
+import { useMetadataForRegistrationForm } from '../../../../../../hooks/useMetadataForRegistrationForm';
 
 const NewEnrollmentRelationshipPlain =
     ({
