@@ -140,6 +140,7 @@ export class RulesEngine {
                             content,
                             displayContent,
                             style,
+                            name,
                         }) => {
                         let actionExpressionResult;
                         if (actionExpression) {
@@ -172,6 +173,7 @@ export class RulesEngine {
                             content,
                             displayContent,
                             style,
+                            name,
                         };
                     });
                 }

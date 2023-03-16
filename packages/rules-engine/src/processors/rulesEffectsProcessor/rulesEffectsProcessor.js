@@ -31,23 +31,24 @@ const sanitiseFalsy = (value) => {
 };
 
 const getFormName = ({
+    idName,
     dataElementId,
-    dataElements,
-    trackedEntityAttributes,
     trackedEntityAttributeId,
+    dataElements,
+    trackedEntityAttributes = [],
 }: {
+    idName: string,
     dataElementId: ?string,
     trackedEntityAttributeId: ?string,
     dataElements: ?DataElements,
     trackedEntityAttributes: ?TrackedEntityAttributes,
 }): string => {
-    if (dataElementId && dataElements && dataElements[dataElementId]) {
+    if (idName === idNames.DATA_ELEMENT_ID && dataElementId && dataElements) {
         return dataElements[dataElementId].name;
     }
-
-    if (trackedEntityAttributeId && trackedEntityAttributes && trackedEntityAttributes[trackedEntityAttributeId]) {
+    if (idName === idNames.TRACKED_ENTITY_ATTRIBUTE_ID && trackedEntityAttributeId && trackedEntityAttributes) {
         return (
-            trackedEntityAttributes[trackedEntityAttributeId].displayFormName &&
+            trackedEntityAttributes[trackedEntityAttributeId].displayFormName ||
             trackedEntityAttributes[trackedEntityAttributeId].displayName
         );
     }
@@ -65,15 +66,26 @@ export function getRulesEffectsProcessor(
 
     function createEffectsForConfiguredDataTypes(
         effect: ProgramRuleEffect,
-        getOutputEffect: () => any): any {
+        getOutputEffect: () => any,
+        dataElements: ?DataElements,
+        trackedEntityAttributes: ?TrackedEntityAttributes,
+    ): any {
         return idNamesArray
             .filter(idName => effect[idName])
             .map((idName) => {
                 const outputEffect = getOutputEffect();
                 outputEffect.id = effect[idName];
-                outputEffect.targetDataType = idName === idNames.DATA_ELEMENT_ID ?
-                    rulesEngineEffectTargetDataTypes.DATA_ELEMENT :
-                    rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE;
+                outputEffect.targetDataType =
+                    idName === idNames.DATA_ELEMENT_ID
+                        ? rulesEngineEffectTargetDataTypes.DATA_ELEMENT
+                        : rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE;
+                outputEffect.name = getFormName({
+                    idName,
+                    dataElementId: effect.dataElementId,
+                    trackedEntityAttributeId: effect.trackedEntityAttributeId,
+                    dataElements,
+                    trackedEntityAttributes,
+                });
                 return outputEffect;
             });
     }
@@ -181,16 +193,16 @@ export function getRulesEffectsProcessor(
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
     ): Array<HideOutputEffect> {
-        return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.HIDE_FIELD,
-            content: effect.content,
-            name: getFormName({
-                dataElements,
-                dataElementId: effect.dataElementId,
-                trackedEntityAttributes,
-                trackedEntityAttributeId: effect.trackedEntityAttributeId,
+        return createEffectsForConfiguredDataTypes(
+            effect,
+            () => ({
+                type: effectActions.HIDE_FIELD,
+                content: effect.content,
+                name: effect.name,
             }),
-        }));
+            dataElements,
+            trackedEntityAttributes,
+        );
     }
 
     function processShowError(effect: ProgramRuleEffect): ErrorEffect {
