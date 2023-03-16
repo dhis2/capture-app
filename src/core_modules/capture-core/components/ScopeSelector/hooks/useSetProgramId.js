@@ -12,5 +12,12 @@ export const useSetProgramId = () => {
         history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId })}`);
     };
 
-    return { setProgramId };
+    const setProgramIdAndResetEnrollmentContext = (programId: string, pageToPush: string = pathname) => {
+        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, enrollmentId: 'AUTO' })}`);
+    };
+
+    return {
+        setProgramId,
+        setProgramIdAndResetEnrollmentContext,
+    };
 };
