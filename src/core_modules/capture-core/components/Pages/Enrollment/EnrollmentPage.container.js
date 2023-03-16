@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
@@ -29,23 +29,17 @@ const useComponentLifecycle = () => {
 
     const { scopeType } = useScopeInfo(programId);
     const { setEnrollmentId } = useSetEnrollmentId();
-    const programRef = useRef(programId);
-    const enrollmentRef = useRef(enrollmentId);
 
     const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, autoEnrollmentId } = useEnrollmentInfo(enrollmentId, programId, teiId);
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
         if (enrollmentId === 'AUTO' && autoEnrollmentId) {
             setEnrollmentId({ enrollmentId: autoEnrollmentId, shouldReplaceHistory: true });
-        } else if (programId !== programRef.current && enrollmentId === enrollmentRef.current && enrollmentId !== 'AUTO') {
-            setEnrollmentId({ enrollmentId: 'AUTO', shouldReplaceHistory: true });
         } else if (selectedProgramIsTracker && programHasEnrollments && enrollmentsOnProgramContainEnrollmentId) {
             dispatch(showDefaultViewOnEnrollmentPage());
         } else {
             dispatch(showMissingMessageViewOnEnrollmentPage());
         }
-        programRef.current = programId;
-        enrollmentRef.current = enrollmentId;
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
