@@ -102,7 +102,7 @@ export const MissingMessage = withStyles(getStyles)(({
     const { missingStatus } = useMissingStatus();
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
-    const { programId, teiId } = useLocationQuery();
+    const { programId, teiId, enrollmentId } = useLocationQuery();
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
@@ -130,9 +130,14 @@ export const MissingMessage = withStyles(getStyles)(({
         {
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose an enrollment to view the dashboard.')}
+                {enrollmentId ?
+                    i18n.t('Invalid enrollment id {{enrollmentId}}.', {
+                        enrollmentId,
+                        interpolation: { escapeValue: false },
+                    }) :
+                    i18n.t('Choose an enrollment to view the dashboard.')
+                }
             </IncompleteSelectionsMessage>
-
         }
 
         {
