@@ -76,14 +76,21 @@ const useNavigations = () => {
     const { tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
     const { programId, orgUnitId, teiId } = useLocationQuery();
-    const navigateToProgramRegistrationPage = () =>
+    const navigateToTrackerProgramRegistrationPage = () =>
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+    const navigateToEventProgramRegistrationPage = () =>
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToEventWorkingList = () =>
         history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToTetRegistrationPage = () =>
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId: tetId })}`);
 
-    return { navigateToProgramRegistrationPage, navigateToEventWorkingList, navigateToTetRegistrationPage };
+    return {
+        navigateToTrackerProgramRegistrationPage,
+        navigateToEventProgramRegistrationPage,
+        navigateToEventWorkingList,
+        navigateToTetRegistrationPage,
+    };
 };
 
 const getStyles = () => ({
@@ -98,7 +105,11 @@ export const MissingMessage = withStyles(getStyles)(({
     classes,
 }) => {
     const dispatch = useDispatch();
-    const { navigateToProgramRegistrationPage, navigateToEventWorkingList } = useNavigations();
+    const {
+        navigateToTrackerProgramRegistrationPage,
+        navigateToEventProgramRegistrationPage,
+        navigateToEventWorkingList,
+    } = useNavigations();
     const { missingStatus } = useMissingStatus();
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
@@ -167,7 +178,7 @@ export const MissingMessage = withStyles(getStyles)(({
                     <div>
                         <LinkButton
                             className={classes.link}
-                            onClick={navigateToProgramRegistrationPage}
+                            onClick={navigateToTrackerProgramRegistrationPage}
                         >
                             {i18n.t('Enroll {{teiDisplayName}} in this program.', { teiDisplayName })}
                         </LinkButton>
@@ -186,7 +197,7 @@ export const MissingMessage = withStyles(getStyles)(({
                     <div>
                         <LinkButton
                             className={classes.link}
-                            onClick={navigateToProgramRegistrationPage}
+                            onClick={navigateToTrackerProgramRegistrationPage}
                         >
                             {i18n.t('Enroll a new {{selectedTetName}} in this program.', {
                                 selectedTetName, interpolation: { escapeValue: false },
@@ -207,7 +218,7 @@ export const MissingMessage = withStyles(getStyles)(({
                     <div>
                         <LinkButton
                             className={classes.link}
-                            onClick={navigateToProgramRegistrationPage}
+                            onClick={navigateToEventProgramRegistrationPage}
                         >
                             {i18n.t('Create a new event in this program.')}
                         </LinkButton>
