@@ -9,7 +9,6 @@ import {
 import { getDataEntryKey } from '../../components/DataEntry/common/getDataEntryKey';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
-import { newEventWidgetDataEntryActionTypes } from '../../components/WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
 
 // cleans up data entries that start with dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {
@@ -19,8 +18,6 @@ const cleanUp = (state, { payload: { dataEntryId } }) => {
 
     return newState;
 };
-
-const categoryOptionsFieldId = 'attributeCategoryOptions';
 
 export const dataEntriesDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
@@ -119,9 +116,6 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         const payload = action.payload;
         const key = payload.key;
         newState[key] = payload.dataEntryValues;
-        if (payload.extraProps?.attributeCategoryOptions) {
-            newState[key].attributeCategoryOptions = payload.extraProps.attributeCategoryOptions;
-        }
         return newState;
     },
     [actionTypes.UPDATE_FIELD]: (state, action) => {
@@ -132,26 +126,6 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         newState[key] = { ...newState[key] };
         const dataEntryValues = newState[key];
         dataEntryValues[payload.fieldId] = payload.value;
-        return newState;
-    },
-    [newEventWidgetDataEntryActionTypes.UPDATE_CAT_COMBO]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const { dataEntryId, itemId, value } = payload;
-        const key = getDataEntryKey(dataEntryId, itemId);
-
-        newState[key][categoryOptionsFieldId] = { ...newState[key][categoryOptionsFieldId], ...value };
-        return newState;
-    },
-    [newEventWidgetDataEntryActionTypes.REMOVE_CAT_COMBO]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const { dataEntryId, itemId, categoryId } = payload;
-        const key = getDataEntryKey(dataEntryId, itemId);
-
-        if (newState[key]?.[categoryOptionsFieldId]?.[categoryId]) {
-            delete newState[key][categoryOptionsFieldId][categoryId];
-        }
         return newState;
     },
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
@@ -250,27 +224,6 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         newState[key] = { ...newState[key] };
         const dataEntryValuesUI = newState[key];
         dataEntryValuesUI[payload.fieldId] = { ...dataEntryValuesUI[payload.fieldId], ...payload.valueMeta, modified: true };
-        return newState;
-    },
-    [newEventWidgetDataEntryActionTypes.UPDATE_CAT_COMBO]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const { dataEntryId, itemId, valueMeta } = payload;
-        const key = getDataEntryKey(dataEntryId, itemId);
-        newState[key][categoryOptionsFieldId] = { ...newState[key][categoryOptionsFieldId], ...valueMeta };
-        return newState;
-    },
-    [newEventWidgetDataEntryActionTypes.REMOVE_CAT_COMBO]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-
-        const { dataEntryId, itemId, valueMeta } = payload;
-        const key = getDataEntryKey(dataEntryId, itemId);
-
-        newState[key][categoryOptionsFieldId] = {
-            ...newState[key][categoryOptionsFieldId],
-            ...valueMeta,
-        };
         return newState;
     },
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,

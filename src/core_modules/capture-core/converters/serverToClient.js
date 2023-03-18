@@ -61,4 +61,3 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
-

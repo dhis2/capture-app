@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter, flatMap, switchMap } from 'rxjs/operators';
+import { map, filter, flatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
@@ -48,7 +48,6 @@ const getDataEntryId = (event): string => (
         ? dataEntryIds.ENROLLMENT_EVENT
         : dataEntryIds.SINGLE_EVENT
 );
-
 
 export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(

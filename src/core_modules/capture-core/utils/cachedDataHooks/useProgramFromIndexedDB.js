@@ -16,6 +16,7 @@ export const useProgramFromIndexedDB = (programId: ?string, QueryOptions?: UseQu
             enabled,
         },
     );
+
     return {
         program: data,
         isLoading,

@@ -66,7 +66,6 @@ const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
     COMMENTS: 'COMMENTS',
-    CATEGORYCOMBO: 'CATEGORYCOMBO',
 };
 
 const baseComponentStyles = {

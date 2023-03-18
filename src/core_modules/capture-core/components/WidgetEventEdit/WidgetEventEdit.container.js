@@ -53,7 +53,6 @@ export const WidgetEventEditPlain = ({
     orgUnitId,
     enrollmentId,
     teiId,
-    selectedCategories,
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
@@ -128,7 +127,6 @@ export const WidgetEventEditPlain = ({
                             formFoundation={programStage.stageForm}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             hideDueDate={programStage.hideDueDate}
-                            selectedCategories={selectedCategories}
                         />
                     ) : (
                         <EditEventDataEntry
@@ -147,7 +145,6 @@ export const WidgetEventEditPlain = ({
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
                             availableProgramStages={availableProgramStages}
                             hideDueDate={programStage.hideDueDate}
-                            selectedCategories={selectedCategories}
                         />
                     )}
                 </div>

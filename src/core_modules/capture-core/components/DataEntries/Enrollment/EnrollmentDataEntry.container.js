@@ -4,21 +4,10 @@ import { connect } from 'react-redux';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
-import { getProgramThrowIfNotFound } from '../../../metaData';
 
-const mapStateToProps = (state: ReduxState, props: Object) => {
-    const { stages } = getProgramThrowIfNotFound(props.programId);
-    /**
-     * Show AOC selection ONLY if there are any program stages in the program with:
-        “Auto-generate event” and NOT “Open data entry form after enrollment”.
-     */
-    const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
+const mapStateToProps = () => {};
 
-    const { attributeCategoryOptions } = state.dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
-    return { shouldShowAOC, stateCategoryOptions: attributeCategoryOptions };
-};
-
-const mapDispatchToProps = (dispatch: ReduxDispatch, props) => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateDataEntryField: (
         innerAction: ReduxAction<any, any>,
         data: any,

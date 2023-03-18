@@ -14,6 +14,5 @@ export type Props = {|
     enrollmentId: string,
     teiId: string,
     initialScheduleDate?: string,
-    selectedCategories?: ?{ [categoryId: string]: CategoryOption },
     ...CssClasses,
 |};

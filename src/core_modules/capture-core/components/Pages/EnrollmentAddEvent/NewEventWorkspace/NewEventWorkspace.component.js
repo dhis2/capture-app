@@ -40,6 +40,7 @@ const NewEventWorkspacePlain = ({
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
+
     const onHandleSwitchTab = (newMode) => {
         if (dataEntryHasChanges) {
             setWarningVisible(true);

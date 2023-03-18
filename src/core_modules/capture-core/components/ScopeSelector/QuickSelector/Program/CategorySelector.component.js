@@ -10,7 +10,6 @@ import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilde
 import { makeOnSelectSelector } from './categorySelector.selectors';
 import { FiltrableMenuItems } from '../FiltrableMenuItems';
 
-
 type SelectOption = {
     label: string,
     value: string,

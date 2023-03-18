@@ -32,7 +32,6 @@ import {
     withDisplayMessages,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
-    orientations,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -60,13 +59,11 @@ const getStyles = (theme: Theme) => ({
 const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
-    CATEGORYCOMBO: 'CATEGORYCOMBO',
 };
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
 };
-
 
 const baseComponentStyles = {
     labelContainerStyle: {
@@ -105,8 +102,6 @@ const createComponentProps = (props: Object, componentProps: Object) => ({
     ...getBaseComponentProps(props),
     ...componentProps,
 });
-
-const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
@@ -405,6 +400,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onCancelEditEvent,
             ...passOnProps
         } = this.props;
+
         return (
             <div>
                 <TabBar dataTest="edit-event-tab-bar">
