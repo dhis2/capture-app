@@ -8,7 +8,7 @@ export const getCategoryOptionsValidatorContainers = () => {
     const validatorContainers = [
         {
             validator: validateCategories,
-            message: i18n.t('Please add category before saving the event'),
+            message: i18n.t('A value is required'),
         },
     ];
     return validatorContainers;

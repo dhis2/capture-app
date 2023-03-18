@@ -5,3 +5,5 @@ export const EventLabelsByStatus = Object.freeze({
     COMPLETED: 'occurredAt',
     SCHEDULE: 'scheduledAt',
 });
+
+export const attributeCategoryKey = 'attributeCategoryOptions';

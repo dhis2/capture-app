@@ -19,8 +19,7 @@ import {
 import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
-import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
-import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
+import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
 
 export const EnrollmentAddEventPageDefault = ({
     enrollment,
@@ -42,16 +41,7 @@ export const EnrollmentAddEventPageDefault = ({
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());
             const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
-
-            const eventData = data.events[0];
-            if (eventData?.attributeCategoryOptions) {
-                if (typeof eventData.attributeCategoryOptions === 'string') {
-                    eventData.attributeCategoryOptions =
-                    convertCategoryOptionsToServer(eventData.attributeCategoryOptions);
-                    eventData.attributeOptionCombo = '';
-                }
-            }
-
+            const eventData = convertEventAttributeOptions(data.events[0]);
             dispatch(
                 updateEnrollmentEventsWithoutId(uid, {
                     ...eventData,
@@ -81,11 +71,6 @@ export const EnrollmentAddEventPageDefault = ({
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
     // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name;
-
-    const { program: programData, isLoading } = useProgramFromIndexedDB(programId);
-    const programCategory = programData &&
-    !programData?.categoryCombo?.isDefault ? programData.categoryCombo : undefined;
-
 
     const rulesExecutionDependencies = useMemo(() => ({
         events: enrollment?.events,
@@ -159,10 +144,9 @@ export const EnrollmentAddEventPageDefault = ({
                 widgetReducerName={widgetReducerName}
                 rulesExecutionDependencies={rulesExecutionDependencies}
                 pageFailure={commonDataError}
-                ready={Boolean(enrollment) && !isLoading}
+                ready={Boolean(enrollment)}
                 dataEntryHasChanges={dataEntryHasChanges}
                 onEnrollmentError={onEnrollmentError}
-                programCategory={programCategory}
             />
         </>
     );

@@ -35,8 +35,8 @@ import { addEventSaveTypes } from './addEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { withTransformPropName } from '../../../HOC';
-import { getCategoryOptionsValidatorContainers } from './fieldValidators/categoryOptions.validatorContainersGetter';
 import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
+import { AOCFieldBuilder } from '../../DataEntryDhis2Helpers/AOC/AOCFieldBuilder.container';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -74,7 +74,6 @@ const dataEntrySectionNames = {
     COMMENTS: 'COMMENTS',
     RELATIONSHIPS: 'RELATIONSHIPS',
     ASSIGNEE: 'ASSIGNEE',
-    CATEGORYCOMBO: 'CATEGORYCOMBO',
 };
 
 const overrideMessagePropNames = {
@@ -155,42 +154,6 @@ const buildReportDateSettingsFn = () => {
     };
 
     return reportDateSettings;
-};
-
-const buildCategoryOptionsSettingsFn = () => {
-    const categoryOptionsComponent =
-        withCalculateMessages(overrideMessagePropNames)(
-            withDefaultFieldContainer()(
-                withDefaultShouldUpdateInterface()(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(CategoryOptions),
-                        ),
-                    ),
-                ),
-            ),
-        );
-    const catComboSettings = {
-        isApplicable: (props: Object) => !!props.programCategory?.categories && !props.programCategory?.isDefault,
-        getComponent: () => categoryOptionsComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
-            orientation: getOrientation(props.formHorizontal),
-            categories: props.programCategory.categories,
-            selectedOrgUnitId: props.orgUnitId,
-            selectedCategories: props.selectedCategories,
-            onClickCategoryOption: props.onClickCategoryOption,
-            onResetCategoryOption: props.onResetCategoryOption,
-            required: true,
-        }),
-        getPropName: () => 'attributeCategoryOptions',
-        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
-        getMeta: () => ({
-            placement: placements.BOTTOM,
-            section: dataEntrySectionNames.CATEGORYCOMBO,
-        }),
-    };
-
-    return catComboSettings;
 };
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
@@ -348,7 +311,6 @@ const WrappedDataEntry = compose(
     withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
     withDataEntryField(buildNotesSettingsFn()),
     withDataEntryFieldIfApplicable(buildAssigneeSettingsFn()),
-    withDataEntryFieldIfApplicable(buildCategoryOptionsSettingsFn()),
     withCleanUp(),
     withFilterProps(dataEntryFilterProps),
 )(DataEntryContainer);
@@ -402,17 +364,10 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Assignee'),
     },
-    [dataEntrySectionNames.CATEGORYCOMBO]: {
-        placement: placements.TOP,
-        name: '',
-    },
 };
-
-type State = {
-    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection }
-}
-class DataEntryPlain extends Component<Props, State> {
+class DataEntryPlain extends Component<Props> {
     fieldOptions: { theme: Theme };
+    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     relationshipsInstance: ?HTMLDivElement;
 
     constructor(props: Props) {
@@ -421,18 +376,7 @@ class DataEntryPlain extends Component<Props, State> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-
-        const dataEntrySections = props.programCategory ? {
-            ...dataEntrySectionDefinitions,
-            [dataEntrySectionNames.CATEGORYCOMBO]: {
-                ...dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO],
-                name: props.programCategory.displayName,
-            },
-        } : dataEntrySectionDefinitions;
-
-        this.state = {
-            dataEntrySections,
-        };
+        this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
     UNSAFE_componentWillMount() {
@@ -469,12 +413,13 @@ class DataEntryPlain extends Component<Props, State> {
         return (
             <div data-test="new-enrollment-event-form">
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                <AOCFieldBuilder {...this.props} />
                 <WrappedDataEntry
                     id={id}
                     onUpdateFormField={onUpdateField}
                     onUpdateFormFieldAsync={onStartAsyncUpdateField}
                     fieldOptions={this.fieldOptions}
-                    dataEntrySections={this.state.dataEntrySections}
+                    dataEntrySections={this.dataEntrySections}
                     relationshipsRef={this.setRelationshipsInstance}
                     {...passOnProps}
                 />

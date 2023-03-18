@@ -11,19 +11,13 @@ import {
     newEventWidgetDataEntryBatchActionTypes,
     setNewEventSaveTypes,
     addNewEventNote,
-    updateCatCombo,
-    removeCatCombo,
 } from './actions/dataEntry.actions';
 import typeof { addEventSaveTypes } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
-import { getCategoryOptionsValidatorContainers } from '../../WidgetEventEdit/DataEntry/fieldValidators/categoryOptions.validatorContainersGetter';
-import type { CategoryOption } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
-    const { orgUnitId } = useSelector(({ currentSelections }) => currentSelections);
-    const dataValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue?.[`${passOnProps.id}-${passOnProps.itemId}`]);
-    const selectedCategories = dataValues?.attributeCategoryOptions;
+    const { orgUnitId, programId } = useSelector(({ currentSelections }) => currentSelections);
     const onUpdateDataEntryField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
@@ -72,39 +66,16 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
         dispatch(setNewEventSaveTypes(newSaveTypes));
     }, [dispatch]);
 
-    const onClickCategoryOption = useCallback((option: CategoryOption, categoryId: string, isValid: boolean) => {
-        const value = { [categoryId]: option };
-        const { id, itemId } = passOnProps;
-        const valueMeta = {
-            isValid,
-            touched: true,
-            validationError: !isValid,
-        };
-        dispatch(updateCatCombo(value, valueMeta, id, itemId));
-    }, [dispatch, passOnProps]);
-
-    const onResetCategoryOption = useCallback((categoryId: string) => {
-        const { id, itemId } = passOnProps;
-        const valueMeta = {
-            isValid: false,
-            touched: true,
-            validationError: getCategoryOptionsValidatorContainers()[0].message,
-        };
-        dispatch(removeCatCombo(categoryId, valueMeta, id, itemId));
-    }, [dispatch, passOnProps]);
-
     return (
         <DataEntryComponent
             {...passOnProps}
-            selectedCategories={selectedCategories}
             orgUnitId={orgUnitId}
+            programId={programId}
             onUpdateDataEntryField={onUpdateDataEntryField}
             onUpdateField={onUpdateField}
             onStartAsyncUpdateField={onStartAsyncUpdateField}
             onAddNote={onAddNote}
             onSetSaveTypes={onSetSaveTypes}
-            onClickCategoryOption={onClickCategoryOption}
-            onResetCategoryOption={onResetCategoryOption}
         />
     );
 };

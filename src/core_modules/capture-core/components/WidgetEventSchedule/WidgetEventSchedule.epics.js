@@ -33,7 +33,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
             const existingEnrollment = events[eventId]
             && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(events[eventId].status);
             const attributeCategoryOptions = categoryOptions && Object.keys(categoryOptions)
-                .map(key => categoryOptions[key].id).join(';');
+                .map(key => categoryOptions[key]).join(';');
 
             let serverData = { events: [{
                 scheduledAt: scheduleDate,

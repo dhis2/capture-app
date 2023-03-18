@@ -24,6 +24,8 @@ import {
 import { enrollmentSiteActionTypes } from '../../../components/Pages/common/EnrollmentOverviewDomain';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { TrackerProgram } from '../../../metaData/Program';
+import { attributeCategoryKey } from './viewEventDataEntry.const';
+import { convertEventAttributeOptions } from '../../../events/convertEventAttributeOptions';
 
 
 const getDataEntryKey = (eventStatus?: string): string => (
@@ -91,19 +93,7 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
                 dataEntryKey: getDataEntryKey(eventContainer.event?.status),
                 onCategoriesQuery: null,
             };
-            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
-                if (typeof (eventContainer.event.attributeCategoryOptions) === 'string') {
-                    const categoryIds = eventContainer.event.attributeCategoryOptions.split(';');
-                    args.onCategoriesQuery = querySingleResource({
-                        resource: 'categoryOptions',
-                        params: {
-                            fields: 'id,displayName,categories[id]',
-                            filter: `id:in:[${categoryIds.join(',')}]`,
-                        },
-                    });
-                }
-            }
-
+            eventContainer.event = convertEventAttributeOptions(eventContainer.event);
 
             if (!enrollment && program instanceof TrackerProgram) {
                 // Wait for enrollment data

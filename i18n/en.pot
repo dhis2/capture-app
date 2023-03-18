@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-03-01T17:44:20.369Z\n"
-"PO-Revision-Date: 2023-03-01T17:44:20.369Z\n"
+"POT-Creation-Date: 2023-03-18T21:53:16.417Z\n"
+"PO-Revision-Date: 2023-03-18T21:53:16.417Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -139,9 +139,6 @@ msgstr "Coordinate"
 
 msgid "Enrollment"
 msgstr "Enrollment"
-
-msgid "Please add category before saving the event"
-msgstr "Please add category before saving the event"
 
 msgid "A future date is not allowed"
 msgstr "A future date is not allowed"
@@ -1109,6 +1106,9 @@ msgstr "Write a comment about this enrollment"
 
 msgid "This enrollment doesn't have any comments"
 msgstr "This enrollment doesn't have any comments"
+
+msgid "Please add category before saving the event"
+msgstr "Please add category before saving the event"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."

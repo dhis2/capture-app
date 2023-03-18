@@ -13,7 +13,6 @@ import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../metaData';
-import { useProgramFromIndexedDB } from '../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 const styles = {
     header: {
@@ -62,8 +61,6 @@ export const WidgetEventEditPlain = ({
 
     const eventAccess = getProgramEventAccess(programId, programStage.id);
     const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
-    const { program } = useProgramFromIndexedDB(programId);
-    const programCategory = !program?.categoryCombo?.isDefault && program?.categoryCombo;
 
     if (error) {
         return error.errorComponent;
@@ -132,7 +129,6 @@ export const WidgetEventEditPlain = ({
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             hideDueDate={programStage.hideDueDate}
                             selectedCategories={selectedCategories}
-                            programCategory={programCategory}
                         />
                     ) : (
                         <EditEventDataEntry
@@ -152,7 +148,6 @@ export const WidgetEventEditPlain = ({
                             availableProgramStages={availableProgramStages}
                             hideDueDate={programStage.hideDueDate}
                             selectedCategories={selectedCategories}
-                            programCategory={programCategory}
                         />
                     )}
                 </div>

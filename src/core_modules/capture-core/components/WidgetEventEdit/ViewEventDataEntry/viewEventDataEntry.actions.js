@@ -23,6 +23,8 @@ import type {
     AttributeValue,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getCachedSingleResourceFromKeyAsync } from '../../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
+import { userStores } from '../../../storageControllers/stores';
 
 
 export const actionTypes = {
@@ -81,27 +83,26 @@ export const loadViewEventDataEntry =
         ];
 
         const formId = getDataEntryKey(dataEntryId, dataEntryKey);
-
+        const attributeCategoryId = 'attributeCategoryOptions';
         let attributeCategoryOptions;
-        if (onCategoriesQuery) {
-            const { categoryOptions } = await onCategoriesQuery;
-            attributeCategoryOptions = categoryOptions.reduce((acc, { categories, ...rest }) => {
-                categories.forEach(({ id }) => {
-                    acc[id] = { ...rest };
-                });
+
+        if (eventContainer.event?.attributeCategoryOptions) {
+            const optionIds = eventContainer.event?.attributeCategoryOptions.split(';');
+            const categoryOptionsFromIndexedDB = await Promise.all(
+                optionIds
+                    .map(optionId =>
+                        getCachedSingleResourceFromKeyAsync(userStores.CATEGORY_OPTIONS, optionId),
+                    ),
+            );
+            attributeCategoryOptions = categoryOptionsFromIndexedDB.reduce((acc, categoryOption) => {
+                acc[`${attributeCategoryId}-${categoryOption.categories[0]}`] = categoryOption.id;
                 return acc;
             }, {});
-        }
-        if (eventContainer.event?.attributeCategoryOptions
-            && typeof eventContainer.event?.attributeCategoryOptions !== 'string') {
-            attributeCategoryOptions = eventContainer.event.attributeCategoryOptions;
         }
 
         const extraProps = {
             eventId: eventContainer.event.eventId,
-            attributeCategoryOptions,
         };
-
         const { actions: dataEntryActions, dataEntryValues, formValues } = await
         loadEditDataEntryAsync(
             dataEntryId,
@@ -110,6 +111,7 @@ export const loadViewEventDataEntry =
             eventContainer.values,
             dataEntryPropsToInclude,
             foundation,
+            attributeCategoryOptions,
             extraProps,
         );
 

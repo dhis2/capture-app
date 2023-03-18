@@ -25,9 +25,6 @@ import {
 } from './editEventDataEntry.actions';
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
-import { removeCatCombo, updateCatCombo } from '../../WidgetEnrollmentEventNew/DataEntry/actions/dataEntry.actions';
-import { getCategoryOptionsValidatorContainers } from '../DataEntry/fieldValidators/categoryOptions.validatorContainersGetter';
-import type { CategoryOption } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 const mapStateToProps = (state: ReduxState, props) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
@@ -125,25 +122,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         dispatch(startCreateNewAfterCompleting({
             enrollmentId, isCreateNew: true, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
         }));
-    },
-    onClickCategoryOption: (itemId: string) => (option: CategoryOption, categoryId: string, isValid: boolean) => {
-        const { dataEntryId } = props;
-        const value = { [categoryId]: option };
-        const valueMeta = {
-            isValid,
-            touched: true,
-            validationError: !isValid,
-        };
-        dispatch(updateCatCombo(value, valueMeta, dataEntryId, itemId));
-    },
-    onResetCategoryOption: (itemId: string) => (categoryId: string) => {
-        const { dataEntryId } = props;
-        const valueMeta = {
-            isValid: false,
-            touched: true,
-            validationError: getCategoryOptionsValidatorContainers()[0].message,
-        };
-        dispatch(removeCatCombo(categoryId, valueMeta, dataEntryId, itemId));
     },
 });
 

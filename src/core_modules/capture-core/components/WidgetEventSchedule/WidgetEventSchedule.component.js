@@ -96,19 +96,16 @@ const WidgetEventSchedulePlain = ({
         {programCategory && <DataSection
             dataTest="category-options-section"
             sectionName={programCategory.displayName}
-            error={categoryOptionsError}
-            errorMessage={i18n.t('Please add category before saving the event')}
         >
-            <div className={classes.containerWrapper}>
-                <CategoryOptions
-                    categories={programCategory.categories}
-                    selectedOrgUnitId={orgUnit?.id}
-                    selectedCategories={selectedCategories}
-                    onClickCategoryOption={onClickCategoryOption}
-                    onResetCategoryOption={onResetCategoryOption}
-                    required
-                />
-            </div>
+            <CategoryOptions
+                categories={programCategory.categories}
+                selectedOrgUnitId={orgUnit?.id}
+                selectedCategories={selectedCategories}
+                categoryOptionsError={categoryOptionsError}
+                onClickCategoryOption={onClickCategoryOption}
+                onResetCategoryOption={onResetCategoryOption}
+                required
+            />
         </DataSection>}
         <DataSection
             dataTest="comment-section"

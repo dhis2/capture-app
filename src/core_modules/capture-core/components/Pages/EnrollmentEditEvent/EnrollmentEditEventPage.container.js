@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect } from 'react';
 // $FlowFixMe
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
@@ -104,7 +104,6 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
-    const dataValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
     const pageStatus = getPageStatus({
         orgUnitId,
         enrollmentSite,
@@ -135,7 +134,6 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             onEnrollmentError={onEnrollmentError}
             eventStatus={event?.status}
             scheduleDate={scheduleDate}
-            selectedCategories={dataValues?.attributeCategoryOptions}
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}
         />

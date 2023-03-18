@@ -40,6 +40,8 @@ import {
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { navigateToEnrollmentOverview } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
+import { attributeCategoryKey } from '../ViewEventDataEntry/viewEventDataEntry.const';
+import { convertEventAttributeOptions } from '../../../events/convertEventAttributeOptions';
 
 const getDataEntryId = (event): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
@@ -51,13 +53,13 @@ const getDataEntryId = (event): string => (
 export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
-        switchMap((action) => {
+        map((action) => {
             const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
-                return of(prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error));
+                return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
             }
 
             const program = metadataContainer.program;
@@ -65,50 +67,19 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
             const orgUnit = action.payload.orgUnit;
             const { enrollment, attributeValues } = state.enrollmentDomain;
 
-            const editDataEntryPayload = {
-                loadedValues,
-                orgUnit,
-                foundation,
-                program,
-                enrollment,
-                attributeValues,
-                dataEntryId: getDataEntryId(eventContainer.event),
-                dataEntryKey: dataEntryKeys.EDIT,
-                attributeCategoryOptions: null,
-            };
-            const actions = batchActions([
+            return batchActions([
                 showEditEventDataEntry(),
-                ...openEventForEditInDataEntry(editDataEntryPayload),
+                ...openEventForEditInDataEntry({
+                    loadedValues,
+                    orgUnit,
+                    foundation,
+                    program,
+                    enrollment,
+                    attributeValues,
+                    dataEntryId: getDataEntryId(eventContainer.event),
+                    dataEntryKey: dataEntryKeys.EDIT,
+                }),
             ]);
-
-            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
-                if (typeof (eventContainer.event.attributeCategoryOptions) === 'string') {
-                    const categoryIds = eventContainer.event.attributeCategoryOptions.split(';');
-                    return querySingleResource({
-                        resource: 'categoryOptions',
-                        params: {
-                            fields: 'id,displayName,categories[id]',
-                            filter: `id:in:[${categoryIds.join(',')}]`,
-                        },
-                    }).then(({ categoryOptions }) => {
-                        editDataEntryPayload.attributeCategoryOptions = categoryOptions
-                            .reduce((acc, { categories, ...rest }) => {
-                                categories.forEach(({ id }) => {
-                                    acc[id] = { ...rest };
-                                });
-                                return acc;
-                            }, {});
-
-                        return batchActions([
-                            showEditEventDataEntry(),
-                            ...openEventForEditInDataEntry(editDataEntryPayload),
-                        ]);
-                    });
-                }
-                return of(actions);
-            }
-
-            return actions;
         }));
 
 export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -141,12 +112,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             }
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
-
-            if (prevEventContainer.event && prevEventContainer.event.attributeCategoryOptions) {
-                prevEventContainer.event.attributeCategoryOptions =
-                    convertCategoryOptionsToServer(prevEventContainer.event.attributeCategoryOptions);
-                prevEventContainer.event.attributeOptionCombo = '';
-            }
+            prevEventContainer.event = convertEventAttributeOptions(prevEventContainer.event);
 
             const eventContainer = {
                 ...prevEventContainer,
@@ -160,7 +126,6 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             };
 
             const orgUnit = payload.orgUnit;
-
             const serverData = {
                 events: [{
                     ...mainDataServerValues,

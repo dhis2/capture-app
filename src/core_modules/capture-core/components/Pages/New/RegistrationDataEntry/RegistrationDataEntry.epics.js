@@ -157,8 +157,16 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
         map((action) => {
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
             const { dataStore, userDataStore } = store.value.useNewDashboard;
-            const { occurredAt, enrolledAt, geometry, attributeCategoryOptions } =
-                dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
+            const fieldsValue = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
+            const { occurredAt, enrolledAt, geometry } = fieldsValue;
+            const attributeCategoryOptionsId = 'attributeCategoryOptions';
+            const attributeCategoryOptions = Object.keys(fieldsValue)
+                .filter(key => key.startsWith(attributeCategoryOptionsId))
+                .reduce((acc, key) => {
+                    const categoryId = key.split('-')[1];
+                    acc[categoryId] = fieldsValue[key];
+                    return acc;
+                }, {});
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
             const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
             const stageWithOpenAfterEnrollment = getStageWithOpenAfterEnrollment(stages);

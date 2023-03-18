@@ -2,7 +2,7 @@
 import { convertClientToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
-import { convertCategoryOptionsToServer } from '../../converters/clientToServer';
+import { convertEventAttributeOptions } from '../convertEventAttributeOptions';
 
 export function convertMainEventClientToServer(event: Object) {
     const mapClientKeyToServerKey = {
@@ -14,7 +14,7 @@ export function convertMainEventClientToServer(event: Object) {
         enrollmentId: 'enrollment',
         assignee: 'assignedUser',
     };
-
+    event = convertEventAttributeOptions(event);
     // eslint-disable-next-line complexity
     return convertMainEvent(event, mapClientKeyToServerKey, (key, value) => {
         let convertedValue;
@@ -27,12 +27,6 @@ export function convertMainEventClientToServer(event: Object) {
             break;
         case 'assignee':
             convertedValue = value && ({ uid: value.id });
-            break;
-        case 'attributeCategoryOptions':
-            convertedValue = convertCategoryOptionsToServer(value);
-            break;
-        case 'attributeOptionCombo':
-            convertedValue = '';
             break;
         default:
             convertedValue = value;

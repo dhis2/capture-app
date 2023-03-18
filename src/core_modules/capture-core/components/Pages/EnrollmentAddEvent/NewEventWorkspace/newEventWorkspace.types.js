@@ -1,6 +1,5 @@
 // @flow
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
-import type { ProgramCategory } from '../../../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 export type Props = {|
     programId: string,
@@ -13,6 +12,5 @@ export type Props = {|
     rulesExecutionDependencies: Object,
     onSave: ExternalSaveHandler,
     onCancel: () => void,
-    programCategory?: ProgramCategory,
     ...CssClasses
 |};

@@ -18,7 +18,6 @@ export { DateRangeField } from './Fields/DateAndTimeFields/DateRangeField/DateRa
 export { ViewModeField } from './Fields/ViewModeField/ViewModeField.component';
 export { DateTimeRangeField } from './Fields/DateAndTimeFields/DateTimeRangeField/DateTimeRangeField.component';
 export { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
-export { CategoryOptionsViewMode } from './CategoryOptions/CategoryOptionsViewMode.component';
 
 // Generic HOCs
 export { withCalculateMessages } from './HOC/messages/withCalculateMessages';

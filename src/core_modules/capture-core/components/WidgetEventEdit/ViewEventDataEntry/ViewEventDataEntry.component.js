@@ -21,11 +21,10 @@ import {
     withDefaultFieldContainer,
     ViewModeField,
     withFilterProps,
-    CategoryOptionsViewMode,
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
-import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
+import { AOCFieldViewMode } from '../../DataEntryDhis2Helpers/AOC/AOCFieldViewMode.component';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -135,27 +134,6 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
-const buildCategoryOptionsSettingsFn = () => {
-    const categoryOptionsViewModeComponent = withDefaultFieldContainer()(
-        withFilterProps(defaultFilterProps)(CategoryOptionsViewMode),
-    );
-    const categoryOptionsSettings = {
-        isApplicable: (props: Object) => !!props.programCategory?.categories && !props.programCategory?.isDefault,
-        getComponent: () => categoryOptionsViewModeComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
-            categories: props?.programCategory.categories,
-            selectedCategories: props.selectedCategories,
-        }),
-        getPropName: () => 'attributeCategoryOptions',
-        getMeta: () => ({
-            placement: placements.TOP,
-            section: dataEntrySectionNames.CATEGORYCOMBO,
-        }),
-    };
-
-    return categoryOptionsSettings;
-};
-
 const buildScheduleDateSettingsFn = () => {
     const dataElement = new DataElement((o) => {
         o.type = dataElementTypes.DATE;
@@ -237,8 +215,7 @@ const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
-const CategoryOptionsField = withDataEntryFieldIfApplicable(buildCategoryOptionsSettingsFn())(ReportDateField);
-const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CategoryOptionsField);
+const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
 type Props = {
@@ -250,7 +227,6 @@ type Props = {
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     classes: Object,
     theme: Theme,
-    programCategory?: ?ProgramCategory,
     onOpenEditEvent: () => void,
     dataEntryId: string,
 };
@@ -273,52 +249,44 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Comments'),
     },
-    [dataEntrySectionNames.CATEGORYCOMBO]: {
-        placement: placements.TOP,
-        name: '',
-    },
 };
-type State = {
-    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
-}
-class ViewEventDataEntryPlain extends Component<Props, State> {
-    fieldOptions: { theme: Theme };
 
+class ViewEventDataEntryPlain extends Component<Props> {
+    fieldOptions: { theme: Theme };
+    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-
-        const dataEntrySections = props.programCategory ? {
-            ...dataEntrySectionDefinitions,
-            [dataEntrySectionNames.CATEGORYCOMBO]: {
-                ...dataEntrySectionDefinitions[dataEntrySectionNames.CATEGORYCOMBO],
-                name: props.programCategory.displayName,
-            },
-        } : dataEntrySectionDefinitions;
-
-        this.state = {
-            dataEntrySections,
-        };
+        this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
     render() {
         const {
             classes,
             dataEntryId,
+            itemId,
+            programId,
             ...passOnProps
         } = this.props;
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
-            <DataEntryWrapper
-                id={dataEntryId}
-                viewMode
-                fieldOptions={this.fieldOptions}
-                dataEntrySections={this.state.dataEntrySections}
-                {...passOnProps}
-            />
+            <>
+                <AOCFieldViewMode
+                    id={dataEntryId}
+                    itemId={itemId}
+                    programId={programId}
+                />
+                <DataEntryWrapper
+                    id={dataEntryId}
+                    viewMode
+                    fieldOptions={this.fieldOptions}
+                    dataEntrySections={this.dataEntrySections}
+                    {...passOnProps}
+                />
+            </>
         );
     }
 }
