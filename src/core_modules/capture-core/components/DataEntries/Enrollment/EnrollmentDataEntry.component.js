@@ -26,7 +26,6 @@ import {
     withDefaultShouldUpdateInterface,
     orientations,
 } from '../../FormFields/New';
-import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
     getEnrollmentDateValidatorContainer,

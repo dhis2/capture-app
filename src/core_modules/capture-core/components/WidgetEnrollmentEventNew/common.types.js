@@ -1,6 +1,5 @@
 // @flow
 import type { ProgramStage, RenderFoundation, TrackerProgram } from '../../metaData';
-import type { ProgramCategory } from '../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 export type ExternalSaveHandler = (eventServerValues: Object, uid: string) => void;
 
@@ -58,7 +57,6 @@ export type CommonValidatedProps = {|
     enrollmentId: string,
     rulesExecutionDependencies: RulesExecutionDependencies,
     onSaveExternal?: ExternalSaveHandler,
-    programCategory?: ProgramCategory,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
     widgetReducerName: string,

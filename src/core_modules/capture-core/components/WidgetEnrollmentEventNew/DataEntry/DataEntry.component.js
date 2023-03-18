@@ -35,7 +35,6 @@ import { addEventSaveTypes } from './addEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { withTransformPropName } from '../../../HOC';
-import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 import { AOCFieldBuilder } from '../../DataEntryDhis2Helpers/AOC/AOCFieldBuilder.container';
 
 const getStyles = theme => ({
@@ -336,7 +335,6 @@ type Props = {
     theme: Theme,
     formHorizontal: ?boolean,
     recentlyAddedRelationshipId?: ?string,
-    programCategory?: ?ProgramCategory
 };
 type DataEntrySection = {
     placement: $Values<typeof placements>,

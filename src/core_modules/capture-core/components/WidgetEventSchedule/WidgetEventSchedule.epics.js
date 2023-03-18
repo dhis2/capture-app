@@ -8,6 +8,7 @@ import {
     updateScheduledDateForEvent,
 } from './WidgetEventSchedule.actions';
 import { statusTypes } from '../../events/statusTypes';
+import { convertCategoryOptionsToServer } from '../../converters/clientToServer';
 
 export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -32,8 +33,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
             const { events } = store.value;
             const existingEnrollment = events[eventId]
             && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(events[eventId].status);
-            const attributeCategoryOptions = categoryOptions && Object.keys(categoryOptions)
-                .map(key => categoryOptions[key]).join(';');
+            const attributeCategoryOptions = categoryOptions && convertCategoryOptionsToServer(categoryOptions);
 
             let serverData = { events: [{
                 scheduledAt: scheduleDate,

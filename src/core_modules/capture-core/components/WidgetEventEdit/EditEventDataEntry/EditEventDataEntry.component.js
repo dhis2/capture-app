@@ -40,7 +40,6 @@ import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
 import { actionTypes } from './editEventDataEntry.actions';
-import type { ProgramCategory } from '../../FormFields/New/CategoryOptions/CategoryOptions.types';
 import { AOCFieldBuilder } from '../../DataEntryDhis2Helpers/AOC/AOCFieldBuilder.container';
 
 const tabMode = Object.freeze({
@@ -348,7 +347,6 @@ type Props = {
     eventStatus?: string,
     enrollmentId?: string,
     isCompleted?: boolean,
-    programCategory?: ?ProgramCategory,
 };
 
 
