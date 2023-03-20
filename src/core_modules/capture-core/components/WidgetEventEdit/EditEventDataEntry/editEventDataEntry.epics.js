@@ -40,7 +40,6 @@ import {
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { navigateToEnrollmentOverview } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
-import { attributeCategoryKey } from '../ViewEventDataEntry/viewEventDataEntry.const';
 import { convertEventAttributeOptions } from '../../../events/convertEventAttributeOptions';
 
 const getDataEntryId = (event): string => (
@@ -63,7 +62,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
 
             const program = metadataContainer.program;
             const foundation = metadataContainer.stage.stageForm;
-            const orgUnit = action.payload.orgUnit;
+            const { orgUnit, programCategory } = action.payload;
             const { enrollment, attributeValues } = state.enrollmentDomain;
 
             return batchActions([
@@ -77,6 +76,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
                     attributeValues,
                     dataEntryId: getDataEntryId(eventContainer.event),
                     dataEntryKey: dataEntryKeys.EDIT,
+                    programCategory,
                 }),
             ]);
         }));

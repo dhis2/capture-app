@@ -32,6 +32,7 @@ import {
     withDisplayMessages,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
+    VirtualizedSelectField,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -39,7 +40,13 @@ import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
 import { actionTypes } from './editEventDataEntry.actions';
-import { AOCFieldBuilder } from '../../DataEntryDhis2Helpers/AOC/AOCFieldBuilder.container';
+import {
+    AOCsectionKey,
+    attributeOptionsKey,
+    getCategoryOptionsValidatorContainers,
+    withAOCFieldBuilder,
+    withDataEntryFields,
+} from '../../DataEntryDhis2Helpers/';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -298,6 +305,45 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
+const getCategoryOptionsSettingsFn = () => {
+    const categoryOptionsComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withDefaultFieldContainer()(
+                withDefaultShouldUpdateInterface()(
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: Object) =>
+                            `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const categoryOptionsSettings = {
+        getComponent: () => categoryOptionsComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            options: [],
+            onSetFocus: () => {},
+            onRemoveFocus: () => {},
+            required: true,
+        }),
+        getPropName: () => attributeOptionsKey,
+        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
+        getMeta: (props: Object) => ({
+            section: AOCsectionKey,
+            placement: placements.BOTTOM,
+            sectionName: props.programCategory?.displayName,
+        }),
+    };
+
+    return categoryOptionsSettings;
+};
+
 const saveHandlerConfig = {
     onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
     onFilterProps: (props: Object) => {
@@ -306,7 +352,8 @@ const saveHandlerConfig = {
     },
 };
 
-const CleanUpHOC = withCleanUp()(DataEntry);
+const AOCFieldBuilderHOC = withAOCFieldBuilder()(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
+const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
@@ -362,6 +409,10 @@ const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.STATUS]: {
         placement: placements.BOTTOM,
         name: i18n.t('Status'),
+    },
+    [AOCsectionKey]: {
+        placement: placements.BOTTOM,
+        name: '',
     },
 };
 
@@ -443,28 +494,20 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             classes,
             ...passOnProps
         } = this.props;
-
-        return ( // $FlowFixMe[cannot-spread-inexact] automated comment
-            <>
-                <AOCFieldBuilder
-                    {...this.props}
-                    onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
-                    onUpdateFormField={onUpdateField(orgUnit, programId)}
-                    onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
-                    id={dataEntryId}
-
-                />
-                <DataEntryWrapper
-                    id={dataEntryId}
-                    onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
-                    onUpdateFormField={onUpdateField(orgUnit, programId)}
-                    onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
-                    onSave={onSave(orgUnit)}
-                    fieldOptions={this.fieldOptions}
-                    dataEntrySections={this.dataEntrySections}
-                    {...passOnProps}
-                />
-            </>
+        return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
+            <DataEntryWrapper
+                id={dataEntryId}
+                onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
+                onUpdateFormField={onUpdateField(orgUnit, programId)}
+                onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
+                onSave={onSave(orgUnit)}
+                fieldOptions={this.fieldOptions}
+                dataEntrySections={this.dataEntrySections}
+                programId={programId}
+                selectedOrgUnitId={orgUnit?.id}
+                {...passOnProps}
+            />
         );
     }
 

@@ -55,7 +55,7 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     return (valueConvertersForType[type] ? valueConvertersForType[type](value) : value);
 }
 
-export function convertCategoryOptionsToServer(value: ProgramCategory | string) {
+export function convertCategoryOptionsToServer(value: {[categoryId: string]: string} | string) {
     if (typeof value === 'object') {
         const categoryObject: Object = value;
         return Object.keys(categoryObject).reduce((acc, categoryId) => {

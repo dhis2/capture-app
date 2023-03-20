@@ -78,6 +78,7 @@ type FieldContainer = {
     field: React.Element<any>,
     placement: $Values<typeof placements>,
     section?: ?string,
+    sectionName?: ?string
 };
 
 type DirectionClasses = {
@@ -170,19 +171,17 @@ class DataEntryPlain extends React.Component<Props> {
             Object.keys(this.props.dataEntrySections).reduce((accSections, sectionKey) => {
                 const section = sections[sectionKey];
                 if (section.placement === placement) {
-                    const sectionFields = fields ?
-                        fields
-                            .filter(fieldContainer => fieldContainer.section === sectionKey)
-                            .map((fieldContainer, index) => (
-                                <React.Fragment
-                                    // using index for now
+                    const sectionFields = fields
+                        .filter(fieldContainer => fieldContainer.section === sectionKey);
+                    const sectionFieldsContainer = sectionFields.map((fieldContainer, index) => (
+                        <React.Fragment
+                            // using index for now
                                     key={index} // eslint-disable-line
-                                >
-                                    { fieldContainer.field }
-                                </React.Fragment>
-                            ))
-                        : null;
-
+                        >
+                            { fieldContainer.field }
+                        </React.Fragment>
+                    ));
+                    const sectionFieldName = sectionFields.length && sectionFields[0].sectionName;
                     if (sectionFields && sectionFields.length > 0) {
                         accSections.push(
                             <div
@@ -192,11 +191,11 @@ class DataEntryPlain extends React.Component<Props> {
                                 <Section
                                     header={
                                         <SectionHeaderSimple
-                                            title={section.name}
+                                            title={sectionFieldName ?? section.name}
                                         />
                                     }
                                 >
-                                    {sectionFields}
+                                    {sectionFieldsContainer}
                                 </Section>
                             </div>,
                         );

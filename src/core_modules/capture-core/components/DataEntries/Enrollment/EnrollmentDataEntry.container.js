@@ -5,7 +5,7 @@ import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } 
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
 
-const mapStateToProps = () => {};
+const mapStateToProps = (state: ReduxState) => ({ orgUnitId: state.currentSelections.orgUnitId });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateDataEntryField: (

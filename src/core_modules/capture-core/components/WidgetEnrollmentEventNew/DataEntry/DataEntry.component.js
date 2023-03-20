@@ -27,7 +27,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
-    CategoryOptions,
+    VirtualizedSelectField,
 } from '../../FormFields/New';
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -35,7 +35,13 @@ import { addEventSaveTypes } from './addEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { withTransformPropName } from '../../../HOC';
-import { AOCFieldBuilder } from '../../DataEntryDhis2Helpers/AOC/AOCFieldBuilder.container';
+import {
+    AOCsectionKey,
+    withAOCFieldBuilder,
+    withDataEntryFields,
+    attributeOptionsKey,
+    getCategoryOptionsValidatorContainers,
+} from '../../DataEntryDhis2Helpers';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -300,12 +306,54 @@ const buildAssigneeSettingsFn = () => {
     };
 };
 
+const getCategoryOptionsSettingsFn = () => {
+    const categoryOptionsComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withDefaultFieldContainer()(
+                withDefaultShouldUpdateInterface()(
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: Object) =>
+                            `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const categoryOptionsSettings = {
+        getComponent: () => categoryOptionsComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            options: [],
+            onSetFocus: () => {},
+            onRemoveFocus: () => {},
+            required: true,
+        }),
+        getPropName: () => attributeOptionsKey,
+        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
+        getMeta: (props: Object) => ({
+            section: AOCsectionKey,
+            placement: placements.BOTTOM,
+            sectionName: props.programCategory?.displayName,
+        }),
+    };
+
+    return categoryOptionsSettings;
+};
+
+
 const dataEntryFilterProps = (props: Object) => {
     const { stage, onScrollToRelationships, recentlyAddedRelationshipId, relationshipsRef, ...passOnProps } = props;
     return passOnProps;
 };
 
 const WrappedDataEntry = compose(
+    withAOCFieldBuilder(),
+    withDataEntryFields(getCategoryOptionsSettingsFn()),
     withDataEntryField(buildReportDateSettingsFn()),
     withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
     withDataEntryField(buildNotesSettingsFn()),
@@ -316,6 +364,8 @@ const WrappedDataEntry = compose(
 
 type Props = {
     id: string,
+    orgUnitId: string,
+    programId: string,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
@@ -361,6 +411,10 @@ const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.ASSIGNEE]: {
         placement: placements.BOTTOM,
         name: i18n.t('Assignee'),
+    },
+    [AOCsectionKey]: {
+        placement: placements.TOP,
+        name: '',
     },
 };
 class DataEntryPlain extends Component<Props> {
@@ -411,7 +465,6 @@ class DataEntryPlain extends Component<Props> {
         return (
             <div data-test="new-enrollment-event-form">
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <AOCFieldBuilder {...this.props} />
                 <WrappedDataEntry
                     id={id}
                     onUpdateFormField={onUpdateField}

@@ -25,6 +25,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
+    VirtualizedSelectField,
 } from '../../FormFields/New';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
@@ -33,7 +34,13 @@ import {
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
 import { type Enrollment } from '../../../metaData';
-import { AOCFieldBuilder } from '../../DataEntryDhis2Helpers/AOC/AOCFieldBuilder.container';
+import {
+    getCategoryOptionsValidatorContainers,
+    attributeOptionsKey,
+    AOCsectionKey,
+    withAOCFieldBuilder,
+    withDataEntryFields,
+} from '../../DataEntryDhis2Helpers';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -249,9 +256,53 @@ const getGeometrySettings = () => ({
     }),
 });
 
+const getCategoryOptionsSettingsFn = () => {
+    const categoryOptionsComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withDefaultFieldContainer()(
+                withDefaultShouldUpdateInterface()(
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: Object) =>
+                            `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const categoryOptionsSettings = {
+        getComponent: () => categoryOptionsComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            options: [],
+            onSetFocus: () => {},
+            onRemoveFocus: () => {},
+            required: true,
+        }),
+        getPropName: () => attributeOptionsKey,
+        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
+        getMeta: (props: Object) => ({
+            section: AOCsectionKey,
+            placement: placements.BOTTOM,
+            sectionName: props.programCategory?.displayName,
+        }),
+    };
+
+    return categoryOptionsSettings;
+};
+
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
     programId: string,
+    id: string,
+    orgUnitId: string,
+    onUpdateDataEntryField: Function,
+    onUpdateFormFieldAsync: Function,
+    onUpdateFormField: Function
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -264,25 +315,27 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
             placement: placements.TOP,
             name: i18n.t('Enrollment'),
         },
+        [AOCsectionKey]: {
+            placement: placements.BOTTOM,
+        },
     };
 
     render() {
-        const { enrollmentMetadata, programId, ...passOnProps } = this.props;
+        const { enrollmentMetadata, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <>
-                <DataEntry
-                    {...passOnProps}
-                    dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
-                    formFoundation={enrollmentMetadata.enrollmentForm}
-                />
-                <AOCFieldBuilder {...this.props} />
-            </>
+        // $FlowFixMe[cannot-spread-inexact] automated comment
+            <DataEntry
+                {...passOnProps}
+                dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
+                formFoundation={enrollmentMetadata.enrollmentForm}
+            />
         );
     }
 }
 
-const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(FinalEnrollmentDataEntry);
+
+const AOCFieldBuilderHOC = withAOCFieldBuilder()(withDataEntryFields(getCategoryOptionsSettingsFn())(FinalEnrollmentDataEntry));
+const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);

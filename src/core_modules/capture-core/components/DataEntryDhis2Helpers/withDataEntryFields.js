@@ -19,6 +19,7 @@ type FieldContainer = {
 type Props = {
     id: string,
     fields?: ?Array<React.Element<any>>,
+    rawFields?: ?Array<any>,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     dataEntryFieldRef?: ?(instance: any, key: string) => void,
@@ -27,13 +28,14 @@ type Props = {
 
 type Settings = {
     getComponent: (props: Object) => React.ComponentType<any>,
-    getComponentProps?: ?(props: Object) => Object,
+    getComponentProps?: ?(props: Object, extraProps?: any) => Object,
     getPropName: (props: Object) => string,
     getValidatorContainers?: ?(props: Object) => Array<ValidatorContainer>,
     getMeta?: ?(props: Props) => Object,
     getIsHidden?: ?(props: Object) => boolean,
     getPassOnFieldData?: ?(props: Props) => boolean,
     getOnUpdateField?: ?(props: Object) => (innerAction: ReduxAction<any, any>, data: { value: any }) => void,
+    getConverter?: ?(props: Object) => (value: any) => string
 };
 
 
@@ -61,14 +63,14 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             }
         };
 
-        getFieldElement() {
+        getFieldElement(customProps?: Object, customPropsName?: Function, converter?: Function) {
             const { id, completionAttempted, saveAttempted, onUpdateDataEntryField } = this.props;
             const { getComponent, getComponentProps, getValidatorContainers, getPropName } = settings;
 
             const Component = getComponent(this.props);
-            const componentProps = this.reselectComponentProps(getComponentProps && getComponentProps(this.props));
+            const componentProps = this.reselectComponentProps(getComponentProps && getComponentProps(this.props, converter));
             const validatorContainers = (getValidatorContainers && getValidatorContainers(this.props)) || [];
-
+            const propName = customPropsName ?? getPropName(this.props);
             return (
                 <DataEntryField
                     ref={this.handleRef}
@@ -77,58 +79,60 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
                     saveAttempted={saveAttempted}
                     Component={Component}
                     validatorContainers={validatorContainers}
-                    propName={getPropName(this.props)}
+                    propName={propName}
                     onUpdateField={onUpdateDataEntryField}
-                    componentProps={componentProps}
+                    componentProps={{ ...componentProps, ...customProps }}
                 />
             );
         }
 
         getFieldElementFromProps(field: Object) {
-            const { id, completionAttempted, saveAttempted, onUpdateDataEntryField } = this.props;
             const { id: fieldId } = field;
-            const { getComponent, getComponentProps, getValidatorContainers, getPropName, getMeta } = settings;
+            const { getPropName, getMeta, getConverter } = settings;
             const meta = getMeta && getMeta(this.props);
-
-            const Component = getComponent(this.props);
-            const componentProps = this.reselectComponentProps(getComponentProps && getComponentProps(this.props));
-            const validatorContainers = (getValidatorContainers && getValidatorContainers(this.props)) || [];
-
+            const converter = getConverter && getConverter(field);
+            const fieldContainer = this.getFieldElement(field, `${getPropName(this.props)}-${fieldId}`, converter);
+            const metaData = meta ? {
+                placement: meta.placement ?? placements.TOP,
+                section: meta.section,
+                sectionName: meta.sectionName,
+            } : null;
             return {
-                field: <DataEntryField
-                    ref={this.handleRef}
-                    dataEntryId={id}
-                    completionAttempted={completionAttempted}
-                    saveAttempted={saveAttempted}
-                    Component={Component}
-                    validatorContainers={validatorContainers}
-                    propName={`${getPropName(this.props)}-${fieldId}`}
-                    onUpdateField={onUpdateDataEntryField}
-                    componentProps={{ ...componentProps, ...field }}
-                />,
-                placement: (meta && meta.placement) || placements.TOP,
-                section: meta && meta.section,
+                field: fieldContainer,
+                ...metaData,
             };
         }
 
-        getFields() {
-            const { getMeta, getIsHidden } = settings;
-            const fields = this.props.fields;
+        getSingleField() {
+            const { getMeta } = settings;
             const meta = getMeta && getMeta(this.props);
-
-            if (getIsHidden && getIsHidden(this.props)) return fields ? [...fields] : [];
 
             const fieldContainer: FieldContainer = {
                 field: this.getFieldElement(),
                 placement: (meta && meta.placement) || placements.TOP,
                 section: meta && meta.section,
             };
-            return fields ? [...fields.map(field => this.getFieldElementFromProps(field))] : [fieldContainer];
+            return fieldContainer;
+        }
+
+        getFields() {
+            const { getIsHidden } = settings;
+            const { fields, rawFields } = this.props;
+            if (getIsHidden && getIsHidden(this.props)) return fields ? [...fields] : [];
+
+            const allFields = [];
+            if (rawFields) {
+                allFields.push(...rawFields.map(field => this.getFieldElementFromProps(field)));
+            }
+            if (fields) {
+                allFields.push(...fields);
+            }
+
+            return allFields.length ? allFields : [this.getSingleField()];
         }
 
         render() {
-            const { fields, ...passOnProps } = this.props;
-
+            const { fields, rawFields, ...passOnProps } = this.props;
             return (
                 <div>
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}

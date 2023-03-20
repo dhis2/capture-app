@@ -37,12 +37,12 @@ export type Props = {|
    hideDueDate?: boolean,
    selectedCategories?: ?{ [categoryId: string]: CategoryOption },
    programCategory?: ProgramCategory,
-   categoryOptionsError?: boolean,
+   categoryOptionsError?: ?{[categoryId: string]: { touched: boolean, valid: boolean} },
    onSchedule: () => void,
    onCancel: () => void,
    setScheduleDate: (date: string) => void,
    onAddComment: (comment: string) => void,
    onResetCategoryOption: (categoryId: string) => void,
-   onClickCategoryOption: (option: CategoryOption, categoryId: string, isValid: boolean) => void,
+   onClickCategoryOption: (optionId: string, categoryId: string) => void,
    ...CssClasses
 |};

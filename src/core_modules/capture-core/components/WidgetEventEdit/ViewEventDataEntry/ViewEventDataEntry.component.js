@@ -24,7 +24,13 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
-import { AOCFieldViewMode } from '../../DataEntryDhis2Helpers/AOC/AOCFieldViewMode.component';
+import {
+    withAOCFieldBuilder,
+    withDataEntryFields,
+    attributeOptionsKey,
+    getCategoryOptionsValidatorContainers,
+    AOCsectionKey,
+} from '../../DataEntryDhis2Helpers';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -210,7 +216,30 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
-const CleanUpHOC = withCleanUp()(DataEntry);
+const getCategoryOptionsSettingsFn = () => {
+    const categoryOptionsSettings = {
+        getComponent: () => viewModeComponent,
+        getComponentProps: (props: Object, converter?: (value: string) => void) => createComponentProps(props, {
+            options: [],
+            onSetFocus: () => {},
+            onRemoveFocus: () => {},
+            valueConverter: value => (converter ? converter(value) : value),
+        }),
+        getPropName: () => attributeOptionsKey,
+        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
+        getMeta: (props: Object) => ({
+            section: AOCsectionKey,
+            placement: placements.BOTTOM,
+            sectionName: props.programCategory?.displayName,
+        }),
+        getConverter: (props: Object) => (value: string) => props.options?.find(option => option.value === value)?.label,
+    };
+
+    return categoryOptionsSettings;
+};
+
+const AOCFieldBuilderHOC = withAOCFieldBuilder()(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
+const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
@@ -228,6 +257,8 @@ type Props = {
     theme: Theme,
     onOpenEditEvent: () => void,
     dataEntryId: string,
+    programId: string,
+    itemId: string,
 };
 
 type DataEntrySection = {
@@ -248,6 +279,10 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Comments'),
     },
+    [AOCsectionKey]: {
+        placement: placements.TOP,
+        name: '',
+    },
 };
 
 class ViewEventDataEntryPlain extends Component<Props> {
@@ -267,25 +302,18 @@ class ViewEventDataEntryPlain extends Component<Props> {
             classes,
             dataEntryId,
             itemId,
-            programId,
             ...passOnProps
         } = this.props;
+
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
-            <>
-                <AOCFieldViewMode
-                    id={dataEntryId}
-                    itemId={itemId}
-                    programId={programId}
-                />
-                <DataEntryWrapper
-                    id={dataEntryId}
-                    viewMode
-                    fieldOptions={this.fieldOptions}
-                    dataEntrySections={this.dataEntrySections}
-                    {...passOnProps}
-                />
-            </>
+            <DataEntryWrapper
+                id={dataEntryId}
+                viewMode
+                fieldOptions={this.fieldOptions}
+                dataEntrySections={this.dataEntrySections}
+                {...passOnProps}
+            />
         );
     }
 }

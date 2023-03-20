@@ -46,7 +46,7 @@ type Props = {
     orientation: string,
     categories: Array<CategoryOption>,
     selectedOrgUnitId: string,
-    categoryOptionsError?: {[categoryId: string]: string },
+    categoryOptionsError?: ?{[categoryId: string]: { touched: boolean, valid: boolean} },
     selectedCategories: ?{[categoryId: string]: string },
     onClickCategoryOption: (optionId: string, categoryId: string) => void,
     onResetCategoryOption: (categoryId: string) => void,

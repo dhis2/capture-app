@@ -103,6 +103,7 @@ export const loadViewEventDataEntry =
         const extraProps = {
             eventId: eventContainer.event.eventId,
         };
+
         const { actions: dataEntryActions, dataEntryValues, formValues } = await
         loadEditDataEntryAsync(
             dataEntryId,
