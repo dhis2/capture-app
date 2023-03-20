@@ -17,7 +17,6 @@ import {
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
-import type { CategoryOption } from '../FormFields/New/CategoryOptions/CategoryOptions.types';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 
 export const WidgetEventSchedule = ({

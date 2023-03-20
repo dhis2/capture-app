@@ -24,7 +24,6 @@ import {
 import { enrollmentSiteActionTypes } from '../../../components/Pages/common/EnrollmentOverviewDomain';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { TrackerProgram } from '../../../metaData/Program';
-import { attributeCategoryKey } from './viewEventDataEntry.const';
 import { convertEventAttributeOptions } from '../../../events/convertEventAttributeOptions';
 
 
@@ -40,7 +39,7 @@ const getDataEntryId = (event): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,

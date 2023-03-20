@@ -1,7 +1,6 @@
 // @flow
 
 import type { ProgramStage } from '../../metaData';
-import type { CategoryOption } from '../FormFields/New/CategoryOptions/CategoryOptions.types';
 
 export type Props = {|
     programStage: ProgramStage,

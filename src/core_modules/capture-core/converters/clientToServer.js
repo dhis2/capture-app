@@ -2,7 +2,6 @@
 import moment from 'moment';
 import { dataElementTypes } from '../metaData';
 import { stringifyNumber } from './common/stringifyNumber';
-import type { ProgramCategory } from '../components/FormFields/New/CategoryOptions/CategoryOptions.types';
 
 type RangeValue = {
     from: any,

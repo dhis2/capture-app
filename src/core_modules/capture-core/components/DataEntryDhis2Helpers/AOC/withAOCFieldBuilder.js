@@ -11,7 +11,7 @@ type Props = {
 }
 
 const getAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
-    (props: Object) => {
+    (props: Props) => {
         const { programId, selectedOrgUnitId } = props;
         const [fields, setFields] = useState(null);
         const cancelablePromiseRef = useRef(null);

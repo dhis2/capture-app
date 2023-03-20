@@ -46,7 +46,6 @@ export const loadViewEventDataEntry =
         attributeValues,
         dataEntryId,
         dataEntryKey,
-        onCategoriesQuery,
     }: {
         eventContainer: ClientEventContainer,
         orgUnit: OrgUnit,
