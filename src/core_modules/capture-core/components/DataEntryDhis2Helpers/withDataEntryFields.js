@@ -10,12 +10,6 @@ import { makeReselectComponentProps } from '../DataEntry/dataEntryField/withData
 
 import type { ValidatorContainer } from '../DataEntry/dataEntryField/internal/dataEntryField.utils';
 
-type FieldContainer = {
-    field: React.Element<any>,
-    placement: $Values<typeof placements>,
-    section?: ?string,
-};
-
 type Props = {
     id: string,
     fields?: ?Array<React.Element<any>>,
