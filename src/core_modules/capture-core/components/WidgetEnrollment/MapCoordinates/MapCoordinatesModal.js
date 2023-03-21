@@ -1,25 +1,33 @@
 // @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { spacers, Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import log from 'loglevel';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { capitalizeFirstLetter } from 'capture-core-utils/string';
-import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import { Map, TileLayer, Marker, FeatureGroup, withLeaflet } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
 import type { ModalProps, FeatureCollection } from './mapCoordinates.types';
+import { CoordinateInput } from '../../../../capture-ui/internal/CoordinateInput/CoordinateInput.component';
 
 const styles = () => ({
     modalContent: {
         width: '100%',
-        height: '75vh',
+        height: '100vh',
     },
     map: {
         width: '100%',
-        height: '100%',
+        height: 'calc(100vh - 320px)',
+    },
+    inputWrapper: {
+        display: 'flex',
+    },
+    inputContent: {
+        paddingTop: spacers.dp8,
+        flexGrow: 1,
     },
 });
 
@@ -54,6 +62,7 @@ const MapCoordinatesModalPlain = ({
     const [coordinates, setCoordinates] = useState(type === dataElementTypes.POLYGON ? defaultValues : null);
     const [hasChanges, setChanges] = useState(false);
     const [center, setCenter] = useState(initalCenter);
+    const [mousePosition, setMousePosition] = useState();
 
     const onHandleMapClicked = (mapCoordinates) => {
         if (type === dataElementTypes.COORDINATE) {
@@ -120,7 +129,7 @@ const MapCoordinatesModalPlain = ({
         ref={(ref) => {
             if (ref?.leafletElement) {
                 setTimeout(() => {
-                    ref.leafletElement.invalidateSize();
+                    ref?.leafletElement?.invalidateSize();
                     if (ref.contextValue && type === dataElementTypes.POLYGON && coordinates) {
                         const { map } = ref.contextValue;
                         map?.fitBounds(coordinates);
@@ -130,6 +139,7 @@ const MapCoordinatesModalPlain = ({
         }}
         className={classes.map}
         onClick={onHandleMapClicked}
+        onMouseMove={(e) => { setMousePosition(e.latlng); }}
     >
         <WrappedLeafletSearch
             position="topleft"
@@ -194,6 +204,43 @@ const MapCoordinatesModalPlain = ({
         }
     };
 
+    const renderLatitude = () =>
+        (
+            <CoordinateInput
+                label={i18n.t('Latitude')}
+                value={mousePosition?.lat}
+                classes={classes}
+                onBlur={(latValue) => {
+                    const newPosition = [Number(latValue), position[1]];
+                    setPosition(newPosition);
+                    setCenter(newPosition);
+                    setChanges(true);
+                }}
+                onChange={(latValue) => {
+                    setMousePosition(prevPos => ({ ...prevPos, lat: latValue }));
+                }}
+                disabled={type !== dataElementTypes.COORDINATE}
+            />
+        );
+    const renderLongtitude = () =>
+        (
+            <CoordinateInput
+                label={i18n.t('Longtitude')}
+                value={mousePosition?.lng}
+                classes={classes}
+                onBlur={(lngValue) => {
+                    const newPosition = [position[0], Number(lngValue)];
+                    setPosition(newPosition);
+                    setCenter(newPosition);
+                    setChanges(true);
+                }}
+                onChange={(lngValue) => {
+                    setMousePosition(prevPos => ({ ...prevPos, lng: lngValue }));
+                }}
+                disabled={type !== dataElementTypes.COORDINATE}
+            />
+        );
+
     const renderActions = () => (<ButtonStrip end>
         <Button
             onClick={() => {
@@ -228,7 +275,17 @@ const MapCoordinatesModalPlain = ({
                 {capitalizeFirstLetter(getTitle())}
             </ModalTitle>
             <ModalContent>
-                <div className={classes.modalContent}>{renderMap()}</div>
+                <div className={classes.modalContent}>
+                    {renderMap()}
+                    <div className={classes.inputWrapper}>
+                        <div className={classes.inputContent}>
+                            {renderLatitude()}
+                        </div>
+                        <div className={classes.inputContent}>
+                            {renderLongtitude()}
+                        </div>
+                    </div>
+                </div>
             </ModalContent>
             <ModalActions>
                 {renderActions()}
