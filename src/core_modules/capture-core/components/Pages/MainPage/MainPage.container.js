@@ -10,7 +10,6 @@ import {
     navigateToNewUserPage,
     showInitialViewOnSearchPage,
 } from '../Search';
-import { useSearchOptions } from '../../../hooks';
 import { MainPageComponent } from './MainPage.component';
 import { withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
@@ -128,7 +127,6 @@ const MainPageContainer = () => {
     // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
-    const availableSearchOptions = useSearchOptions();
     const MainPageStatus = useMainPageStatus({ programId, selectedProgram, categories, orgUnitId, showAllAccessible });
 
     const {
@@ -163,7 +161,6 @@ const MainPageContainer = () => {
         history,
     ]);
 
-
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId} error={error}>
             <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
@@ -184,7 +181,6 @@ const MainPageContainer = () => {
                         showInitialSearchPage={dispatchShowInitialSearchPage}
                         cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
                         navigateToRegisterUser={dispatchNavigateToNewUserPage}
-                        availableSearchOptions={availableSearchOptions}
                         preselectedProgramId={programId}
                         trackedEntityTypeId={trackedEntityTypeId}
                         searchStatus={searchStatus}

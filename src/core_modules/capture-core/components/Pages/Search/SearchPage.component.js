@@ -22,7 +22,7 @@ import { useLocation } from 'react-router-dom';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
-import { SearchResults } from './SearchResults/SearchResults.container';
+import { SearchResults } from './SearchResults';
 import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
@@ -30,6 +30,7 @@ import { searchScopes } from './SearchPage.constants';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
 import { cleanFallbackRelatedData } from './SearchPage.actions';
 import { TemplateSelector } from './TemplateSelector';
+import { useSearchOption } from './hooks';
 
 const getStyles = (theme: Theme) => ({
     half: {
@@ -89,7 +90,6 @@ const Index = ({
     navigateToMainPage,
     cleanSearchRelatedInfo,
     classes,
-    availableSearchOptions,
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
@@ -101,6 +101,9 @@ const Index = ({
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
     const titleText = useScopeTitleText(selectedSearchScopeId);
     const fallbackTriggered = useFallbackTriggered();
+    const {
+        searchOption: availableSearchOption,
+    } = useSearchOption({ programId: preselectedProgramId, trackedEntityTypeId });
 
     useEffect(() => {
         const scopeId = preselectedProgramId || trackedEntityTypeId;
@@ -127,9 +130,7 @@ const Index = ({
         };
     }, [fallbackTriggered, cleanSearchRelatedInfo, preselectedProgramId, showInitialSearchPage]);
 
-    const searchGroupsForSelectedScope = selectedSearchScopeId
-        ? availableSearchOptions[selectedSearchScopeId].searchGroups
-        : [];
+    const searchGroupsForSelectedScope = availableSearchOption?.searchGroups ?? [];
 
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
@@ -172,7 +173,10 @@ const Index = ({
     const searchStatusComponents = () => (
         <>
             {searchStatus === searchPageStatus.SHOW_RESULTS && (
-                <SearchResults availableSearchOptions={availableSearchOptions} fallbackTriggered={fallbackTriggered} />
+                <SearchResults
+                    availableSearchOption={availableSearchOption}
+                    fallbackTriggered={fallbackTriggered}
+                />
             )}
 
             {searchStatus === searchPageStatus.NO_RESULTS && (
@@ -217,7 +221,7 @@ const Index = ({
                     <NoticeBox title={i18n.t('Too many results')} warning>
                         {i18n.t(
                             'This search returned too many results to show. Try changing search terms or searching ' +
-                                'by more attributes to narrow down the results.',
+                            'by more attributes to narrow down the results.',
                         )}
                     </NoticeBox>
                 </div>
@@ -269,11 +273,13 @@ const Index = ({
                                     />
                                 )}
 
-                                <SearchForm
-                                    fallbackTriggered={fallbackTriggered}
-                                    selectedSearchScopeId={selectedSearchScopeId}
-                                    searchGroupsForSelectedScope={searchGroupsForSelectedScope}
-                                />
+                                {searchGroupsForSelectedScope && (
+                                    <SearchForm
+                                        fallbackTriggered={fallbackTriggered}
+                                        selectedSearchScopeId={selectedSearchScopeId}
+                                        searchGroupsForSelectedScope={searchGroupsForSelectedScope}
+                                    />
+                                )}
                                 {searchStatusComponents()}
                             </div>
                         </div>

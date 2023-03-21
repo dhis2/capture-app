@@ -1,5 +1,4 @@
 [ignore]
-.*/build/.*
 .*/contents/.*
 
 [declarations]
@@ -13,4 +12,5 @@ src/core_modules/capture-core/flow/
 module.name_mapper='^capture-core' ->'<PROJECT_ROOT>/src/core_modules/capture-core'
 module.name_mapper='^capture-ui' ->'<PROJECT_ROOT>/src/core_modules/capture-ui'
 module.name_mapper='^capture-core-utils' ->'<PROJECT_ROOT>/src/core_modules/capture-core-utils'
+module.name_mapper='^@dhis2/rules-engine-javascript' ->'<PROJECT_ROOT>/packages/rules-engine/src'
 esproposal.optional_chaining=enable

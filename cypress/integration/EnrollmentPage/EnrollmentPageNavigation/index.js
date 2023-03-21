@@ -1,4 +1,3 @@
-import { getCurrentYear } from '../../../support/date';
 import '../../sharedSteps';
 
 Given('you are on an enrollment page', () => {
@@ -8,7 +7,9 @@ Given('you are on an enrollment page', () => {
 });
 
 And('you select the Inpatient morbidity program', () => {
-    cy.get('.Select').eq(0)
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Inpatient morbidi');
     cy.contains('Inpatient morbidity and mortality')
         .click();
@@ -49,7 +50,9 @@ And('you see the working lists for the Inpatient morbidity program', () => {
 });
 
 And('you select the Malaria case diagnosis program', () => {
-    cy.get('.Select').eq(0)
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Malaria case diag');
     cy.contains('Malaria case diagnosis')
         .click();
@@ -95,8 +98,7 @@ Given('you land on the enrollment page by having typed only the enrollmentId in 
 });
 
 When('you reset the tei selection', () => {
-    cy.contains('[data-test="single-locked-select"]', 'Carlos Cruz')
-        .find('[data-test="reset-selection-button"]')
+    cy.get('[data-test="person-selector-container-clear-icon"]')
         .click();
 });
 
@@ -104,8 +106,7 @@ Then('you are navigated to the main page', () => {
     cy.url().should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW`);
 });
 When('you reset the program selection', () => {
-    cy.contains('[data-test="program-selector-container"]', 'Child Programme')
-        .find('[data-test="reset-selection-button"]')
+    cy.get('[data-test="program-selector-container-clear-icon"]')
         .click();
 });
 
@@ -116,8 +117,7 @@ Then('you see message explaining you need to select a program', () => {
 });
 
 When('you reset the org unit selection', () => {
-    cy.contains('[data-test="org-unit-selector"]', 'Taninahun (Malen) CHP')
-        .find('[data-test="reset-selection-button"]')
+    cy.get('[data-test="org-unit-selector-container-clear-icon"]')
         .click();
 });
 
@@ -128,8 +128,7 @@ Then('you see the enrollment page but there is no org unit id in the url', () =>
 });
 
 When('you reset the enrollment selection', () => {
-    cy.contains('[data-test="single-locked-select"]', `${getCurrentYear() + 1}-07-01 12:05`)
-        .find('[data-test="reset-selection-button"]')
+    cy.get('[data-test="enrollment-selector-container-clear-icon"]')
         .click();
 });
 

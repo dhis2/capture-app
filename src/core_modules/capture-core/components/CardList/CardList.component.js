@@ -12,6 +12,7 @@ type OwnProps = $ReadOnly<{|
     items: Array<ListItem>,
     currentProgramId?: string,
     currentSearchScopeName?: string,
+    currentSearchScopeType?: string,
     noItemsText?: string,
     renderCustomCardActions?: RenderCustomCardActions,
 |}>
@@ -32,6 +33,7 @@ const CardListIndex = ({
     noItemsText,
     currentProgramId,
     currentSearchScopeName,
+    currentSearchScopeType,
 }: OwnProps & CssClasses) => {
     const { profileImageDataElement, dataElementsExceptProfileImage } = makeElementsContainerSelector()(dataElements);
     return (
@@ -47,6 +49,7 @@ const CardListIndex = ({
                         <CardListItem
                             key={item.id}
                             item={item}
+                            currentSearchScopeType={currentSearchScopeType}
                             currentSearchScopeName={currentSearchScopeName}
                             currentProgramId={currentProgramId}
                             renderCustomCardActions={renderCustomCardActions}

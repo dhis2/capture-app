@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-01-19T18:17:46.027Z\n"
-"PO-Revision-Date: 2023-01-19T18:17:46.027Z\n"
+"POT-Creation-Date: 2023-01-20T09:11:14.026Z\n"
+"PO-Revision-Date: 2023-01-20T09:11:14.026Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -35,23 +35,35 @@ msgstr ""
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
 
-msgid "Organisation unit"
-msgstr "Organisation unit"
+msgid "View {{programName}} dashboard"
+msgstr "View {{programName}} dashboard"
 
-msgid "Date of enrollment"
-msgstr "Date of enrollment"
+msgid "View dashboard"
+msgstr "View dashboard"
 
-msgid "Program name"
-msgstr "Program name"
+msgid "View active enrollment"
+msgstr "View active enrollment"
 
-msgid "Last updated"
-msgstr "Last updated"
+msgid "Re-enroll"
+msgstr "Re-enroll"
+
+msgid "in"
+msgstr "in"
 
 msgid "Enrolled"
 msgstr "Enrolled"
 
 msgid "Previously enrolled"
 msgstr "Previously enrolled"
+
+msgid "Organisation unit"
+msgstr "Organisation unit"
+
+msgid "Date of enrollment"
+msgstr "Date of enrollment"
+
+msgid "Last updated"
+msgstr "Last updated"
 
 msgid "This value is validating"
 msgstr "This value is validating"
@@ -271,9 +283,6 @@ msgstr "without"
 
 msgid "enrollment"
 msgstr "enrollment"
-
-msgid "in"
-msgstr "in"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Enroll in a program by selecting a program from the top bar."
@@ -711,8 +720,8 @@ msgstr "Choose a stage for a new event"
 msgid "Program Stages could not be loaded"
 msgstr "Program Stages could not be loaded"
 
-msgid "stage"
-msgstr "stage"
+msgid "Stage"
+msgstr "Stage"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Enrollment{{escape}} View Event"
@@ -749,9 +758,6 @@ msgstr "Choose the {{missingCategories}} to start reporting"
 
 msgid "Save as new"
 msgstr "Save as new"
-
-msgid "View dashboard"
-msgstr "View dashboard"
 
 msgid "View enrollment"
 msgstr "View enrollment"
@@ -878,12 +884,6 @@ msgstr "You can also choose a program from the top bar and search in that progra
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
 
-msgid "View active enrollment"
-msgstr "View active enrollment"
-
-msgid "Re-enroll"
-msgstr "Re-enroll"
-
 msgid "all programs"
 msgstr "all programs"
 
@@ -980,38 +980,38 @@ msgstr "You don't have access to create any relationships"
 msgid "Add relationship"
 msgstr "Add relationship"
 
-msgid "Selected registering unit"
-msgstr "Selected registering unit"
+msgid "No results found for "
+msgstr "No results found for "
 
-msgid "Start Again"
-msgstr "Start Again"
+msgid "Registering unit"
+msgstr "Registering unit"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Are you sure? All unsaved data will be lost."
+msgid "Choose a registering unit"
+msgstr "Choose a registering unit"
 
-msgid "Accept"
-msgstr "Accept"
-
-msgid "Registering Organisation Unit"
-msgstr "Registering Organisation Unit"
-
-msgid "Select"
-msgstr "Select"
+msgid "Clear selection"
+msgstr "Clear selection"
 
 msgid "No programs available."
 msgstr "No programs available."
 
-msgid "Selected program"
-msgstr "Selected program"
+msgid "Search for a program"
+msgstr "Search for a program"
 
-msgid "Select program"
-msgstr "Select program"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr "Some programs are being filtered by the chosen registering unit"
 
-msgid "Selected"
-msgstr "Selected"
+msgid "Show all programs"
+msgstr "Show all programs"
+
+msgid "Choose a program"
+msgstr "Choose a program"
 
 msgid "Results found"
 msgstr "Results found"
+
+msgid "Selected program"
+msgstr "Selected program"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Search {{uniqueAttrName}}"
@@ -1024,9 +1024,6 @@ msgstr "New {{trackedEntityName}} in {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
-
-msgid "Clear selections"
-msgstr "Clear selections"
 
 msgid "To work with the selected program,"
 msgstr "To work with the selected program,"
@@ -1276,9 +1273,6 @@ msgstr "This stage can only have one event"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
 
-msgid "Registering unit"
-msgstr "Registering unit"
-
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"
 
@@ -1312,6 +1306,12 @@ msgstr "Download data..."
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
 
+msgid "Registration Date"
+msgstr "Registration Date"
+
+msgid "Inactive"
+msgstr "Inactive"
+
 msgid "Enrollment status"
 msgstr "Enrollment status"
 
@@ -1320,12 +1320,6 @@ msgstr "Assigned to"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Registration Date"
-msgstr "Registration Date"
-
-msgid "Inactive"
-msgstr "Inactive"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"

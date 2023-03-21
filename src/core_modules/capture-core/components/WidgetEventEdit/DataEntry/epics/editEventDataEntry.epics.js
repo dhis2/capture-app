@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
@@ -111,12 +111,29 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObserv
             actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         map((action) => {
-            const { elementId, value, uiState, dataEntryId, itemId, uid, orgUnit, programId } = action.payload;
+            const {
+                elementId,
+                value,
+                uiState,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                programId,
+            } = action.payload;
             const fieldData: FieldData = {
                 elementId,
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForEditSingleEvent({ store, dataEntryId, itemId, uid, orgUnit, fieldData, programId });
+            return runRulesForEditSingleEvent({
+                store,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                fieldData,
+                programId,
+            });
         }));
 
