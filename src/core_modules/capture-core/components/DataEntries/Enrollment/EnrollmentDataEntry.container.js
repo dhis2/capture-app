@@ -1,11 +1,20 @@
 // @flow
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { connect } from 'react-redux';
+import { getProgramThrowIfNotFound } from '../../../metaData';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
 
-const mapStateToProps = (state: ReduxState) => ({ orgUnitId: state.currentSelections.orgUnitId });
+const mapStateToProps = (state: ReduxState, props: Object) => {
+    const { stages } = getProgramThrowIfNotFound(props.programId);
+    /*
+     * Show AOC selection ONLY if there are any program stages in the program with:
+     * “Auto-generate event” and NOT “Open data entry form after enrollment”.
+     */
+    const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
+    return { orgUnitId: state.currentSelections.orgUnitId, shouldShowAOC };
+};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateDataEntryField: (
