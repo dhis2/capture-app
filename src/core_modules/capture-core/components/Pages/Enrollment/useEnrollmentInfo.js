@@ -1,10 +1,5 @@
 // @flow
 import { useSelector } from 'react-redux';
-import moment from 'moment';
-
-const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
-    moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
-
 
 const getSuitableEnrollmentId = (enrollments, teiId) => {
     if (!enrollments) {
@@ -27,8 +22,8 @@ const getSuitableEnrollmentId = (enrollments, teiId) => {
     if (activeEnrollments.length) {
         return activeEnrollments[0].enrollment;
     }
-    const sortedEnrollmentsByDate = sortByDate(enrollments);
-    return sortedEnrollmentsByDate[0].enrollment;
+
+    return undefined;
 };
 
 export const useEnrollmentInfo = (enrollmentId: string, programId: string, teiId: string) => {

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-02-21T10:45:59.932Z\n"
-"PO-Revision-Date: 2023-02-21T10:45:59.932Z\n"
+"POT-Creation-Date: 2023-03-20T21:43:14.752Z\n"
+"PO-Revision-Date: 2023-03-20T21:43:14.752Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -601,9 +601,6 @@ msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgid "There is an error while opening this enrollment. Please enter a valid url."
 msgstr "There is an error while opening this enrollment. Please enter a valid url."
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
-
 msgid "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 
@@ -643,6 +640,9 @@ msgstr ""
 
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
+
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr "Invalid enrollment id {{enrollmentId}}."
 
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Choose an enrollment to view the dashboard."
