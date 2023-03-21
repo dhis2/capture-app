@@ -1,13 +1,13 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { Grid } from '@material-ui/core';
 import {
     ScopeSelector,
     useSetProgramId,
     useSetOrgUnitId,
     useResetProgramId,
     useResetOrgUnitId,
+    useReset,
     setOrgUnitFromScopeSelector,
 } from '../../ScopeSelector';
 import {
@@ -29,6 +29,8 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories }: TopBarProps
     const { setOrgUnitId } = useSetOrgUnitId();
     const { resetProgramIdAndSelectedTemplateId } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
+    const { reset } = useReset();
+
     const dispatchOnSetCategoryOption = useCallback(
         (categoryOption: Object, categoryId: string) => {
             dispatch(setCategoryOption(categoryId, categoryOption));
@@ -65,10 +67,9 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories }: TopBarProps
             onSetCategoryOption={dispatchOnSetCategoryOption}
             onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
             onResetCategoryOption={dispatchOnResetCategoryOption}
+            onStartAgain={() => reset()}
         >
-            <Grid item xs={12} sm={6} md={6} lg={2}>
-                <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />
-            </Grid>
+            <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />
         </ScopeSelector>
     );
 };
