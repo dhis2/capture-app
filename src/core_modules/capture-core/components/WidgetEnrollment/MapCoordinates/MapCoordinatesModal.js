@@ -2,9 +2,10 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
+import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
-import { Map, TileLayer, Marker, FeatureGroup } from 'react-leaflet';
+import { Map, TileLayer, Marker, FeatureGroup, withLeaflet } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import { withStyles } from '@material-ui/core';
@@ -38,11 +39,21 @@ const convertToServerCoordinates =
     }
 };
 
+const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
-const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defaultValues, onSetCoordinates }: ModalProps) => {
+const MapCoordinatesModalPlain = ({
+    classes,
+    center: initalCenter,
+    isOpen,
+    setOpen,
+    type,
+    defaultValues,
+    onSetCoordinates,
+}: ModalProps) => {
     const [position, setPosition] = useState(type === dataElementTypes.COORDINATE ? defaultValues : null);
     const [coordinates, setCoordinates] = useState(type === dataElementTypes.POLYGON ? defaultValues : null);
     const [hasChanges, setChanges] = useState(false);
+    const [center, setCenter] = useState(initalCenter);
 
     const onHandleMapClicked = (mapCoordinates) => {
         if (type === dataElementTypes.COORDINATE) {
@@ -67,6 +78,14 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defa
 
     const onMapPolygonDelete = () => {
         setCoordinates(null);
+    };
+
+    const onSearch = (searchPosition: any) => {
+        setCenter(searchPosition);
+        if (type === dataElementTypes.COORDINATE) {
+            setPosition(searchPosition);
+            setChanges(true);
+        }
     };
 
     const coordsToFeatureCollection = (inputCoordinates): ?FeatureCollection => {
@@ -112,6 +131,14 @@ const MapCoordinatesModalPlain = ({ classes, center, isOpen, setOpen, type, defa
         className={classes.map}
         onClick={onHandleMapClicked}
     >
+        <WrappedLeafletSearch
+            position="topleft"
+            inputPlaceholder="Search"
+            closeResultsOnClick
+            search={null}
+            mapStateModifier={onSearch}
+            showMarker={false}
+        />
         <TileLayer
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
