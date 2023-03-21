@@ -103,18 +103,6 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             };
         }
 
-        getSingleField() {
-            const { getMeta } = settings;
-            const meta = getMeta && getMeta(this.props);
-
-            const fieldContainer: FieldContainer = {
-                field: this.getFieldElement(),
-                placement: (meta && meta.placement) || placements.TOP,
-                section: meta && meta.section,
-            };
-            return fieldContainer;
-        }
-
         getFields() {
             const { getIsHidden } = settings;
             const { fields, rawFields } = this.props;
@@ -128,11 +116,12 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
                 allFields.push(...fields);
             }
 
-            return allFields.length ? allFields : [this.getSingleField()];
+            return allFields;
         }
 
         render() {
             const { fields, rawFields, ...passOnProps } = this.props;
+
             return (
                 <div>
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
