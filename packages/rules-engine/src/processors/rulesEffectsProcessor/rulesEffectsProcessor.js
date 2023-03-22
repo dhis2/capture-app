@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from '../../errorCreator';
-import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes } from '../../constants';
+import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes, typeKeys } from '../../constants';
 
 import type {
     ProgramRuleEffect,
@@ -19,6 +19,7 @@ import type {
     OutputEffects,
 } from '../../rulesEngine.types';
 import { normalizeRuleVariable, numberToString } from '../../commonUtils';
+import { getOutputEffectsWithPreviousValueCheck } from '../../helpers';
 
 const sanitiseFalsy = (value) => {
     if (value) {
@@ -26,31 +27,6 @@ const sanitiseFalsy = (value) => {
     }
     if (value === 0) {
         return 0;
-    }
-    return '';
-};
-
-const getFormName = ({
-    idName,
-    dataElementId,
-    trackedEntityAttributeId,
-    dataElements,
-    trackedEntityAttributes = [],
-}: {
-    idName: string,
-    dataElementId: ?string,
-    trackedEntityAttributeId: ?string,
-    dataElements: ?DataElements,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-}): string => {
-    if (idName === idNames.DATA_ELEMENT_ID && dataElementId && dataElements) {
-        return dataElements[dataElementId].name;
-    }
-    if (idName === idNames.TRACKED_ENTITY_ATTRIBUTE_ID && trackedEntityAttributeId && trackedEntityAttributes) {
-        return (
-            trackedEntityAttributes[trackedEntityAttributeId].displayFormName ||
-            trackedEntityAttributes[trackedEntityAttributeId].displayName
-        );
     }
     return '';
 };
@@ -67,8 +43,6 @@ export function getRulesEffectsProcessor(
     function createEffectsForConfiguredDataTypes(
         effect: ProgramRuleEffect,
         getOutputEffect: () => any,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
     ): any {
         return idNamesArray
             .filter(idName => effect[idName])
@@ -79,13 +53,6 @@ export function getRulesEffectsProcessor(
                     idName === idNames.DATA_ELEMENT_ID
                         ? rulesEngineEffectTargetDataTypes.DATA_ELEMENT
                         : rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE;
-                outputEffect.name = getFormName({
-                    idName,
-                    dataElementId: effect.dataElementId,
-                    trackedEntityAttributeId: effect.trackedEntityAttributeId,
-                    dataElements,
-                    trackedEntityAttributes,
-                });
                 return outputEffect;
             });
     }
@@ -192,17 +159,25 @@ export function getRulesEffectsProcessor(
         effect: ProgramRuleEffect,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
+        formValues?: ?{[key: string]: any},
+        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
     ): Array<HideOutputEffect> {
-        return createEffectsForConfiguredDataTypes(
+        const outputEffects = createEffectsForConfiguredDataTypes(
             effect,
             () => ({
                 type: effectActions.HIDE_FIELD,
                 content: effect.content,
-                name: effect.name,
             }),
+        );
+        return getOutputEffectsWithPreviousValueCheck({
+            outputEffects,
+            formValues,
+            dataElementId: effect.dataElementId,
+            trackedEntityAttributeId: effect.trackedEntityAttributeId,
             dataElements,
             trackedEntityAttributes,
-        );
+            onProcessValue,
+        });
     }
 
     function processShowError(effect: ProgramRuleEffect): ErrorEffect {
@@ -301,10 +276,19 @@ export function getRulesEffectsProcessor(
         [effectActions.SHOW_OPTION_GROUP]: processShowOptionGroup,
     };
 
-    function processRulesEffects(
+    function processRulesEffects({
+        effects,
+        dataElements,
+        trackedEntityAttributes,
+        formValues,
+        onProcessValue,
+    }: {
         effects: ?Array<ProgramRuleEffect>,
         dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes): OutputEffects {
+        trackedEntityAttributes: ?TrackedEntityAttributes,
+        formValues?: ?{ [key: string]: any },
+        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+    }): OutputEffects {
         if (effects) {
             return effects
                 .filter(({ action }) => mapActionsToProcessor[action])
@@ -312,6 +296,8 @@ export function getRulesEffectsProcessor(
                     effect,
                     dataElements,
                     trackedEntityAttributes,
+                    formValues,
+                    onProcessValue,
                 ))
             // when mapActionsToProcessor function returns `null` we filter those value out.
                 .filter(keepTruthyValues => keepTruthyValues);

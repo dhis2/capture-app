@@ -17,6 +17,7 @@ import { effectActions, typeof environmentTypes } from './constants';
 export class RulesEngine {
     inputConverter: IConvertInputRulesValue;
     outputConverter: IConvertOutputRulesEffectsValue;
+    valueProcessor: ValueProcessor;
     variableService: VariableService;
     dateUtils: IDateUtils;
     userRoles: Array<string>;
@@ -29,8 +30,8 @@ export class RulesEngine {
     ) {
         this.inputConverter = inputConverter;
         this.outputConverter = outputConverter;
-        const valueProcessor = new ValueProcessor(inputConverter);
-        this.variableService = new VariableService(valueProcessor.processValue, dateUtils, environment);
+        this.valueProcessor = new ValueProcessor(inputConverter);
+        this.variableService = new VariableService(this.valueProcessor.processValue, dateUtils, environment);
         this.dateUtils = dateUtils;
     }
 
@@ -182,7 +183,14 @@ export class RulesEngine {
             .filter(ruleEffects => ruleEffects);
 
         const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
-        return processRulesEffects(effects, dataElements, trackedEntityAttributes);
+        const formValues = currentEvent || selectedEntity;
+        return processRulesEffects({
+            effects,
+            dataElements,
+            trackedEntityAttributes,
+            formValues,
+            onProcessValue: this.valueProcessor.processValue,
+        });
     }
 
     setSelectedUserRoles(userRoles: Array<string>) {

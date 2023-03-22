@@ -6,13 +6,18 @@ import { useSelector, shallowEqual } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalActions, ModalContent, ModalTitle, Button, ButtonStrip } from '@dhis2/ui';
 
-const buildContentListToDisplay = (rulesEffectsHiddenFields, previousFormsValues, formsValues) =>
+const isFormTouched = (formsSectionsFieldsUI, formId) =>
+    formsSectionsFieldsUI &&
+    Object.entries(formsSectionsFieldsUI).some(
+        // $FlowFixMe https://github.com/facebook/flow/issues/2221
+        ([key, fields]) => key.startsWith(formId) && Object.values(fields).some(field => field.touched),
+    );
+
+const buildContentListToDisplay = rulesEffectsHiddenFields =>
     Object.keys(rulesEffectsHiddenFields).reduce((acc, key) => {
-        const fieldWasHidden =
-            previousFormsValues && previousFormsValues[key] && formsValues && formsValues[key] === null;
-        if (fieldWasHidden) {
+        if (rulesEffectsHiddenFields[key].hadValue) {
             const text =
-            rulesEffectsHiddenFields[key].content ||
+                rulesEffectsHiddenFields[key].content ||
                 `${rulesEffectsHiddenFields[key].name} ${i18n.t('was blanked out and hidden by your last action')}`;
             return [...acc, { key, text }];
         }
@@ -22,34 +27,26 @@ const buildContentListToDisplay = (rulesEffectsHiddenFields, previousFormsValues
 export const NoticeBox = ({ formId }: { formId: string }) => {
     const [toggle, setToggle] = useState(false);
     const [contentList, setContentList] = useState([]);
-    const [previousFormsValues, setPreviousFormsValues] = useState();
     const [previousRulesEffectsHiddenFields, setPreviousRulesEffectsHiddenFields] = useState();
 
-    const { rulesEffectsHiddenFields, formsValues } = useSelector(
+    const { rulesEffectsHiddenFields, formTouched } = useSelector(
         state => ({
             rulesEffectsHiddenFields: state.rulesEffectsHiddenFields[formId] || [],
-            formsValues: state.formsValues[formId] || [],
+            formTouched: isFormTouched(state.formsSectionsFieldsUI, formId),
         }),
         shallowEqual,
     );
 
     useEffect(() => {
-        if (!isEqual(previousFormsValues, formsValues)) {
-            if (!isEqual(previousRulesEffectsHiddenFields, rulesEffectsHiddenFields)) {
-                const contentListToDisplay = buildContentListToDisplay(
-                    rulesEffectsHiddenFields,
-                    previousFormsValues,
-                    formsValues,
-                );
-                if (contentListToDisplay?.length > 0) {
-                    setContentList(contentListToDisplay);
-                    setToggle(true);
-                }
-                setPreviousRulesEffectsHiddenFields(rulesEffectsHiddenFields);
+        if (formTouched && !isEqual(previousRulesEffectsHiddenFields, rulesEffectsHiddenFields)) {
+            const contentListToDisplay = buildContentListToDisplay(rulesEffectsHiddenFields);
+            if (contentListToDisplay?.length > 0) {
+                setContentList(contentListToDisplay);
+                setToggle(true);
             }
-            setPreviousFormsValues(formsValues);
+            setPreviousRulesEffectsHiddenFields(rulesEffectsHiddenFields);
         }
-    }, [rulesEffectsHiddenFields, formsValues, previousFormsValues, previousRulesEffectsHiddenFields]);
+    }, [rulesEffectsHiddenFields, previousRulesEffectsHiddenFields, formTouched]);
 
     return toggle ? (
         <Modal onClose={() => setToggle(false)} position="middle">

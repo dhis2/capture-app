@@ -17,6 +17,7 @@ export type OutputEffect = {
     targetDataType?: $Values<rulesEngineEffectTargetDataTypes>,
     content?: string,
     name?: string,
+    hadValue?: boolean,
 };
 
 export type OutputEffects = Array<OutputEffect>;
