@@ -29,9 +29,7 @@ declare module '@dhis2/app-runtime' {
 
     declare type QueryResult = any;
 
-    declare type RefetchOptions = {|
-        variables?: QueryVariables
-    |};
+    declare type RefetchOptions = QueryVariables;
     declare type RefetchFunction<ReturnType> = (options?: RefetchOptions) => Promise<ReturnType>;
     declare export type QueryRefetchFunction = RefetchFunction<QueryResult>;
 
