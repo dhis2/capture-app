@@ -20,7 +20,9 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
         refetch: refetchTEI,
     } = useTrackedEntityInstances(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
-    const canAddNew = enrollments.every(item => item.status !== plainStatus.ACTIVE);
+    const canAddNew = enrollments
+        .filter(item => item.program === programId)
+        .every(item => item.status !== plainStatus.ACTIVE);
     const error = errorEnrollment || errorProgram || errorOwnerOrgUnit || errorOrgUnit;
 
     if (error) {
