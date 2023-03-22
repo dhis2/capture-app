@@ -62,7 +62,7 @@ const MapCoordinatesModalPlain = ({
     const [coordinates, setCoordinates] = useState(type === dataElementTypes.POLYGON ? defaultValues : null);
     const [hasChanges, setChanges] = useState(false);
     const [center, setCenter] = useState(initalCenter);
-    const [mousePosition, setMousePosition] = useState();
+    const [mousePosition, setMousePosition] = useState({ lat: null, lng: null });
 
     const onHandleMapClicked = (mapCoordinates) => {
         if (type === dataElementTypes.COORDINATE) {
@@ -211,7 +211,8 @@ const MapCoordinatesModalPlain = ({
                 value={mousePosition?.lat}
                 classes={classes}
                 onBlur={(latValue) => {
-                    const newPosition = [Number(latValue), position[1]];
+                    const newPosition = [Number(latValue), position && position[1]];
+                    // $FlowFixMe
                     setPosition(newPosition);
                     setCenter(newPosition);
                     setChanges(true);
@@ -229,7 +230,8 @@ const MapCoordinatesModalPlain = ({
                 value={mousePosition?.lng}
                 classes={classes}
                 onBlur={(lngValue) => {
-                    const newPosition = [position[0], Number(lngValue)];
+                    const newPosition = [position && position[0], Number(lngValue)];
+                    // $FlowFixMe
                     setPosition(newPosition);
                     setCenter(newPosition);
                     setChanges(true);
