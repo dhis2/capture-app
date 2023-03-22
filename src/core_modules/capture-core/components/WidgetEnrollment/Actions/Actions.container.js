@@ -1,6 +1,8 @@
 // @flow
 import { useDataMutation } from '@dhis2/app-runtime';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchEnrollments } from '../../Pages/Enrollment/EnrollmentPage.actions';
 import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';
 
@@ -34,12 +36,15 @@ export const Actions = ({
     onError,
     ...passOnProps
 }: Props) => {
+    const dispatch = useDispatch();
+
     const [updateMutation, { loading: updateLoading }] = useDataMutation(
         enrollmentUpdate,
         {
             onComplete: () => {
                 refetchEnrollment();
                 refetchTEI();
+                dispatch(fetchEnrollments());
             },
             onError: (e) => {
                 onError && onError(processErrorReports(e));
@@ -49,7 +54,10 @@ export const Actions = ({
     const [deleteMutation, { loading: deleteLoading }] = useDataMutation(
         enrollmentDelete,
         {
-            onComplete: onDelete,
+            onComplete: () => {
+                onDelete();
+                dispatch(fetchEnrollments());
+            },
             onError: (e) => {
                 onError && onError(processErrorReports(e));
             },
