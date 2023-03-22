@@ -1,5 +1,6 @@
 // @flow
 import { useSelector } from 'react-redux';
+import { programCollection } from '../../../metaDataMemoryStores';
 
 const getSuitableEnrollmentId = (enrollments, teiId) => {
     if (!enrollments) {
@@ -30,11 +31,21 @@ export const useEnrollmentInfo = (enrollmentId: string, programId: string, teiId
     const enrollments = useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
     const tetId = useSelector(({ enrollmentPage }) => enrollmentPage.tetId);
     const programHasEnrollments = enrollments && enrollments.some(({ program }) => programId === program);
+    const programHasActiveEnrollments = programHasEnrollments && enrollments
+        .filter(({ program }) => program === programId)
+        .some(({ status }) => status === 'ACTIVE');
     const enrollmentsOnProgramContainEnrollmentId = enrollments && enrollments
         .filter(({ program }) => program === programId)
         .some(({ enrollment }) => enrollmentId === enrollment);
+    const onlyEnrollOnce = programId && programCollection.get(programId)?.onlyEnrollOnce;
     const enrollmentsInProgram = enrollments && enrollments.filter(({ program }) => program === programId);
     const autoEnrollmentId = enrollmentId === 'AUTO' && getSuitableEnrollmentId(enrollmentsInProgram, teiId);
-    return { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, tetId, autoEnrollmentId };
+    return {
+        programHasEnrollments,
+        programHasActiveEnrollments,
+        enrollmentsOnProgramContainEnrollmentId,
+        onlyEnrollOnce,
+        tetId,
+        autoEnrollmentId,
+    };
 };
-

@@ -23,6 +23,7 @@ export const missingStatuses = {
     RESTRICTED_PROGRAM_NO_ACCESS: 'RESTRICTED_PROGRAM_NO_ACCESS',
     EVENT_PROGRAM_SELECTED: 'EVENT_PROGRAM_SELECTED',
     MISSING_ENROLLMENT_SELECTION: 'MISSING_ENROLLMENT_SELECTION',
+    MISSING_ENROLLMENT_SELECTION_ADD_NEW: 'MISSING_ENROLLMENT_SELECTION_ADD_NEW',
     MISSING_PROGRAM_CATEGORIES_SELECTION: 'MISSING_PROGRAM_CATEGORIES_SELECTION',
     MISSING_PROGRAM_SELECTION: 'MISSING_PROGRAM_SELECTION',
 };
@@ -34,7 +35,13 @@ const useMissingStatus = () => {
 
     const { scopeType, tetId: scopeTetId } = useScopeInfo(programId);
     const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
-    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, tetId } = useEnrollmentInfo(enrollmentId, programId, teiId);
+    const {
+        programHasEnrollments,
+        programHasActiveEnrollments,
+        enrollmentsOnProgramContainEnrollmentId,
+        onlyEnrollOnce,
+        tetId,
+    } = useEnrollmentInfo(enrollmentId, programId, teiId);
     const { enrollmentAccessLevel } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const selectedProgramIsOfDifferentTypTetype = scopeTetId !== tetId;
     useEffect(() => {
@@ -50,7 +57,11 @@ const useMissingStatus = () => {
         } else if (selectedProgramIsTracker && selectedProgramIsOfDifferentTypTetype) {
             setStatus(missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED);
         } else if (selectedProgramIsTracker && programHasEnrollments && !enrollmentsOnProgramContainEnrollmentId) {
-            setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION);
+            if (programHasActiveEnrollments || onlyEnrollOnce) {
+                setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION);
+            } else {
+                setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW);
+            }
         } else if (selectedProgramIsTracker && !programHasEnrollments && enrollmentAccessLevel !== enrollmentAccessLevels.UNKNOWN_ACCESS) {
             setStatus(missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED);
         } else if (selectedProgramIsEvent) {
@@ -62,10 +73,12 @@ const useMissingStatus = () => {
         programId,
         programSelectionIsIncomplete,
         programHasEnrollments,
+        programHasActiveEnrollments,
         enrollmentsOnProgramContainEnrollmentId,
         selectedProgramIsOfDifferentTypTetype,
         scopeType,
         enrollmentAccessLevel,
+        onlyEnrollOnce,
     ]);
 
     return { missingStatus };
@@ -148,6 +161,23 @@ export const MissingMessage = withStyles(getStyles)(({
                     }) :
                     i18n.t('Choose an enrollment to view the dashboard.')
                 }
+            </IncompleteSelectionsMessage>
+        }
+
+        {
+            missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW &&
+            <IncompleteSelectionsMessage>
+                <div className={classes.lineHeight}>
+                    {i18n.t('There are no active enrollments.')}
+                    <div>
+                        <LinkButton
+                            className={classes.link}
+                            onClick={navigateToTrackerProgramRegistrationPage}
+                        >
+                            {i18n.t('Add new enrollment for {{teiDisplayName}} in this program.', { teiDisplayName })}
+                        </LinkButton>
+                    </div>
+                </div>
             </IncompleteSelectionsMessage>
         }
 

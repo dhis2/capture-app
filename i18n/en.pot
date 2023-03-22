@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-03-20T21:43:14.752Z\n"
-"PO-Revision-Date: 2023-03-20T21:43:14.752Z\n"
+"POT-Creation-Date: 2023-03-21T20:34:52.414Z\n"
+"PO-Revision-Date: 2023-03-21T20:34:52.414Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -646,6 +646,12 @@ msgstr "Invalid enrollment id {{enrollmentId}}."
 
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Choose an enrollment to view the dashboard."
+
+msgid "There are no active enrollments."
+msgstr "There are no active enrollments."
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr "Add new enrollment for {{teiDisplayName}} in this program."
 
 msgid "No access to program owner."
 msgstr "No access to program owner."
