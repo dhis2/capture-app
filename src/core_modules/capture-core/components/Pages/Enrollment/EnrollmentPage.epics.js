@@ -127,7 +127,7 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
             const { teiId, programId } = getLocationQuery();
 
             if (!teiId || !programId) {
-                return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS }));
+                return of(updateEnrollmentAccessLevel({ programId, accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS }));
             }
 
             return from(querySingleResource(enrollmentsQuery(teiId, programId)))
@@ -135,18 +135,18 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
                     map(({ enrollments }) => {
                         const enrollmentsSortedByDate = sortByDate(enrollments
                             .filter(enrollment => enrollment.program === programId));
-                        return saveEnrollments({ enrollments: enrollmentsSortedByDate });
+                        return saveEnrollments({ programId, enrollments: enrollmentsSortedByDate });
                     }),
                     catchError((error) => {
                         if (error.message) {
                             if (error.message.includes(serverErrorMessages.OWNERSHIP_ACCESS_PARTIALLY_DENIED)) {
-                                return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS }));
+                                return of(updateEnrollmentAccessLevel({ programId, accessLevel: enrollmentAccessLevels.LIMITED_ACCESS }));
                             } else if (error.message.includes(serverErrorMessages.OWNERSHIP_ACCESS_DENIED)) {
-                                return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS })); // Todo: Change to NO_ACCESS
+                                return of(updateEnrollmentAccessLevel({ programId, accessLevel: enrollmentAccessLevels.LIMITED_ACCESS })); // Todo: Change to NO_ACCESS
                             } else if (error.message.includes(serverErrorMessages.PROGRAM_ACCESS_CLOSED)) {
-                                return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
+                                return of(updateEnrollmentAccessLevel({ programId, accessLevel: enrollmentAccessLevels.NO_ACCESS }));
                             } else if (error.message.includes(serverErrorMessages.ORGUNIT_OUT_OF_SCOPE)) {
-                                return of(updateEnrollmentAccessLevel({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
+                                return of(updateEnrollmentAccessLevel({ programId, accessLevel: enrollmentAccessLevels.NO_ACCESS }));
                             }
                         }
                         const errorMessage = i18n.t('An error occurred while fetching enrollments. Please enter a valid url.');

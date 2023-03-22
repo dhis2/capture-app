@@ -44,14 +44,16 @@ export const enrollmentPageDesc = createReducerDescription({
           tetId,
       }),
     [ENROLLMENTS_ERROR_FETCH]:
-      ({ enrollments, ...state }, { payload: { accessLevel } }) => ({
+      ({ enrollments, ...state }, { payload: { accessLevel, programId } }) => ({
           ...state,
+          programId,
           enrollmentPageStatus: enrollmentPageStatuses.MISSING_SELECTIONS,
           enrollmentAccessLevel: accessLevel,
       }),
     [ENROLLMENTS_SUCCESS_FETCH]:
-      (state, { payload: { enrollments } }) => ({
+      (state, { payload: { enrollments, programId } }) => ({
           ...state,
+          programId,
           enrollments,
           enrollmentAccessLevel: enrollmentAccessLevels.FULL_ACCESS,
       }),

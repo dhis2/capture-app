@@ -52,11 +52,11 @@ export const successfulFetchingEnrollmentPageInformationFromUrl = ({ teiDisplayN
 export const fetchEnrollments = () =>
     actionCreator(enrollmentPageActionTypes.ENROLLMENTS_FETCH)();
 
-export const updateEnrollmentAccessLevel = ({ accessLevel }: { accessLevel: string }) =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENTS_ERROR_FETCH)({ accessLevel });
+export const updateEnrollmentAccessLevel = ({ programId, accessLevel }: { programId: string, accessLevel: string }) =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENTS_ERROR_FETCH)({ programId, accessLevel });
 
-export const saveEnrollments = ({ enrollments }: any) =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENTS_SUCCESS_FETCH)({ enrollments });
+export const saveEnrollments = ({ programId, enrollments }: any) =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENTS_SUCCESS_FETCH)({ programId, enrollments });
 
 export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
     actionCreator(enrollmentPageActionTypes.PAGE_OPEN)({ programId, orgUnitId, teiId, enrollmentId });
