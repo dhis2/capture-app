@@ -210,10 +210,6 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
             return accValuesUI;
         }, {});
 
-        if (payload.extraProps?.attributeCategoryOptions) {
-            newState[key].attributeCategoryOptions = { isValid: true, touched: false };
-        }
-
         return newState;
     },
     [actionTypes.UPDATE_FIELD]: (state, action) => {

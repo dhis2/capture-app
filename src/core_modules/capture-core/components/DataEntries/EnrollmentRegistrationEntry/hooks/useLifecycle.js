@@ -23,7 +23,6 @@ export const useLifecycle = (
     const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]) && !!orgUnit;
     const searchTerms = useSelector(({ searchPage }) => searchPage.currentSearchInfo.currentSearchTerms);
     const { scopeType } = useScopeInfo(selectedScopeId);
-
     const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
