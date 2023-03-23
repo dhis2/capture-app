@@ -39,7 +39,7 @@ const WidgetBreakingTheGlassPlain = ({
     }, [setReason]);
 
     return (
-        <div className={classes.background}>
+        <div data-test="breaking-the-glass-widget" className={classes.background}>
             <Widget
                 noncollapsible
                 borderless
