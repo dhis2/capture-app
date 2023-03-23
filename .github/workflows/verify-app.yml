@@ -201,7 +201,8 @@ jobs:
           github-token: ${{ env.GH_TOKEN }}
           apphub-token: ${{ secrets.DHIS2_BOT_APPHUB_TOKEN }}
 
-      - uses: dhis2/deploy-build@master
+      - uses: dhis2/deploy-build@specify-packages
         with:
           build-dir: build/app
           github-token: ${{ env.GH_TOKEN }}
+          packages: capture-app
