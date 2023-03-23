@@ -19,10 +19,15 @@ export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH: 'UpdateDataEntryFieldNewEnrollmentActionBatch',
 };
 
-export const getCurrentEventValuesFromStage = (attributeValues?: TEIValues, stage: ProgramStage) => {
+export const getCurrentEventValuesFromStage = (attributeValues?: TEIValues, stage?: ProgramStage) => {
+    const currentEventValues = {};
+    if (!stage) {
+        return { currentEventValues, attributeValues };
+    }
+
     const section = stage.stageForm.getSection(Section.MAIN_SECTION_ID);
     const dataElements = [...section.elements.entries()].map(([key, val]) => ({ id: key, type: val.type }));
-    const currentEventValues = {};
+
     if (attributeValues) {
         Object.keys(attributeValues).forEach((attributeId) => {
             const found = dataElements.find(element => element.id === attributeId);

@@ -13,18 +13,19 @@ type Props = {
 }
 export const FirstStageRegistrationContainer = (props: Props) => {
     const { firstStageMetaData } = props;
+    const stageName = useMemo(() => firstStageMetaData?.stage?.name, [firstStageMetaData]);
     const firstStageDataEntrySectionDefinitions = useMemo(() => ({
         [sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO]: {
             placement: placements.TOP,
             name: i18n.t('Data Entry ({{ stageName }})', {
-                stageName: firstStageMetaData?.stage?.name,
+                stageName,
             }),
         },
         [sectionKeysForFirstStageDataEntry.STATUS]: {
             placement: placements.BOTTOM,
             name: i18n.t('Status'),
         } }
-    ), [firstStageMetaData]);
+    ), [stageName]);
 
     return (<FirstStageRegistrationComponent
         {...props}
