@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { FirstStageRegistrationComponent } from './FirstStageRegistration.component';
 import { placements } from '../../DataEntry/constants/placements.const';
 import { sectionKeysForFirstStageDataEntry } from './FirstStageRegistration.constants';
-import { type ProgramStage, RenderFoundation } from '../../../metaData';
+import { type ProgramStage } from '../../../metaData';
 
 type Props = {
     firstStageMetaData?: {
