@@ -9,7 +9,7 @@ import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/mak
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
-import type { PostProcessErrorMessage, ErrorData } from './formbuilder.types';
+import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
 
 export type ValidatorContainer = {
     validator: (value: any, validationContext: ?Object) => boolean,
@@ -22,6 +22,7 @@ export type ValidatorContainer = {
 export type FieldConfig = {
     id: string,
     component: React.ComponentType<any>,
+    plugin?: boolean,
     props?: ?Object,
     validators?: ?Array<ValidatorContainer>,
     commitEvent?: ?string,
@@ -500,6 +501,32 @@ export class FormBuilder extends React.Component<Props> {
         }, []);
     }
 
+    renderPlugin = (
+        field: Object,
+    ) => {
+        const {
+            onUpdateField,
+            onUpdateFieldUIOnly,
+        } = this.props;
+        const {
+            fieldsMetadata,
+            pluginSource,
+            name,
+            formId,
+        } = field.props;
+
+        return (
+            <field.component
+                name={name}
+                fieldsMetadata={fieldsMetadata}
+                pluginSource={pluginSource}
+                formId={formId}
+                onUpdateField={onUpdateField}
+                onUpdateFieldUIOnly={onUpdateFieldUIOnly}
+            />
+        );
+    }
+
     renderField = (
         field: FieldConfig,
         index: number,
@@ -591,8 +618,13 @@ export class FormBuilder extends React.Component<Props> {
         }
         // $FlowFixMe
         return fields.map(
-            (field, index) =>
-                this.renderField(field, index, onRenderDivider, onGetContainerProps),
+            (field, index) => {
+                if (field.plugin) {
+                    return this.renderPlugin(field);
+                }
+
+                return this.renderField(field, index, onRenderDivider, onGetContainerProps);
+            },
         );
     }
 

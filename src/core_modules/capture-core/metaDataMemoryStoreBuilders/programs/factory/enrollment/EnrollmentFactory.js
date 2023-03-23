@@ -17,7 +17,7 @@ import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section, Da
 import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './enrollmentFactory.types';
 import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
-import { DataEntryPlugin } from '../../../../metaData/DataEntryPlugin';
+import { DataEntryPluginConfig } from '../../../../metaData/DataEntryPluginConfig';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/types';
 
 export class EnrollmentFactory {
@@ -135,7 +135,7 @@ export class EnrollmentFactory {
         // $FlowFixMe
         await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
             if (trackedEntityAttribute?.id === 'plugin') {
-                const element = new DataEntryPlugin((o) => {
+                const element = new DataEntryPluginConfig((o) => {
                     o.id = trackedEntityAttribute.id;
                     o.name = trackedEntityAttribute.name;
                     o.fields = new Map();

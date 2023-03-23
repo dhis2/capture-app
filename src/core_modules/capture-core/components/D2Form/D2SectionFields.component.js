@@ -2,17 +2,20 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type { FormBuilder, FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
+import type { FieldConfig, FormBuilder } from 'capture-ui/FormBuilder/FormBuilder.component';
 import { FormBuilderContainer } from './FormBuilder.container';
 import { withDivider } from './FieldDivider/withDivider';
 import { withAlternateBackgroundColors } from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
 import { withCustomForm } from './D2CustomForm/withCustomForm';
 import { buildField } from './field/buildField';
 import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
-import type { DataElement, CustomForm } from '../../metaData';
+import type { CustomForm } from '../../metaData';
+import { DataElement } from '../../metaData';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 import { validatorTypes } from './field/validators/constants';
 import type { QuerySingleResource } from '../../utils/api/api.types';
+import { DataEntryPlugin } from './DataEntryPlugin';
+import { DataEntryPluginConfig } from '../../metaData/DataEntryPluginConfig';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 type FormsValues = {
@@ -64,17 +67,34 @@ export class D2SectionFieldsComponent extends Component<Props> {
         return Array.from(fieldsMetaData.entries())
             .map(entry => entry[1])
             // $FlowFixMe[incompatible-return] automated comment
-            .map(metaDataElement => buildField(
-                metaDataElement,
-                {
-                    formHorizontal: props.formHorizontal,
-                    formId: props.formId,
-                    viewMode: props.viewMode,
-                    ...fieldOptions,
-                },
-                !!customForm,
-                querySingleResource,
-            ))
+            .map((metaDataElement) => {
+                if (metaDataElement instanceof DataElement) {
+                    return buildField(
+                        metaDataElement,
+                        {
+                            formHorizontal: props.formHorizontal,
+                            formId: props.formId,
+                            viewMode: props.viewMode,
+                            ...fieldOptions,
+                        },
+                        !!customForm,
+                        querySingleResource,
+                    );
+                }
+                if (metaDataElement instanceof DataEntryPluginConfig) {
+                    return ({
+                        id: 'plugin',
+                        component: DataEntryPlugin,
+                        plugin: true,
+                        props: {
+                            pluginSource: 'http://localhost:8080/api/apps/tracker-plugin/plugin.html',
+                            fieldsMetadata: metaDataElement.fields,
+                            formId: props.formId,
+                        },
+                    });
+                }
+                return null;
+            })
             .filter(field => field);
     }
 

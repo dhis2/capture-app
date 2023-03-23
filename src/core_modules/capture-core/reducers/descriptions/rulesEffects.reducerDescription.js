@@ -92,7 +92,15 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
                 // $FlowFixMe[prop-missing] automated comment
                 const typeKey = mapMessageEffectTypeToStateKey[effectsByKey[0].type];
                 // $FlowFixMe[prop-missing] automated comment
-                accMessagesByIdInCurrentEffects[key][typeKey] = effectsByKey.map(effect => effect.message);
+                accMessagesByIdInCurrentEffects[key][typeKey] = effectsByKey.map((effect) => {
+                    if (effect.error) {
+                        return effect.error.message;
+                    }
+                    if (effect.warning) {
+                        return effect.warning.message;
+                    }
+                    return effect.message;
+                });
                 return accMessagesByIdInCurrentEffects;
             }, accMessagesById);
         }, {});

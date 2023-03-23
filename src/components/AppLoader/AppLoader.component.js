@@ -16,6 +16,12 @@ type Props = {
     onCacheExpired: Function,
 };
 
+window.process = {
+    env: {
+        NODE_ENV: 'development',
+    },
+};
+
 const useApiUtils = () => {
     const dataEngine = useDataEngine();
     return useMemo(() => ({

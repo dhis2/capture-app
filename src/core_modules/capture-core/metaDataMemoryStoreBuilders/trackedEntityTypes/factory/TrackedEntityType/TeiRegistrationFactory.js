@@ -17,7 +17,7 @@ import type {
 } from '../../../../storageControllers/cache.types';
 import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './teiRegistrationFactory.types';
-import { DataEntryPlugin } from '../../../../metaData/DataEntryPlugin';
+import { DataEntryPluginConfig } from '../../../../metaData/DataEntryPluginConfig';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/types';
 
 export class TeiRegistrationFactory {
@@ -118,7 +118,7 @@ export class TeiRegistrationFactory {
 
                 await attributes.asyncForEach(async (trackedEntityAttribute) => {
                     if (trackedEntityAttribute?.id === 'plugin') {
-                        const element = new DataEntryPlugin((o) => {
+                        const element = new DataEntryPluginConfig((o) => {
                             o.id = trackedEntityAttribute.id;
                             o.name = trackedEntityAttribute.name;
                             o.fields = new Map();

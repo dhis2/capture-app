@@ -6,7 +6,7 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import type { DataElement } from '../DataElement';
 import type { CustomForm } from './CustomForm';
-import type { DataEntryPlugin } from '../DataEntryPlugin';
+import type { DataEntryPluginConfig } from '../DataEntryPluginConfig';
 
 export class Section {
     static MAIN_SECTION_ID = '#MAIN#';
@@ -21,7 +21,7 @@ export class Section {
     _open: boolean;
     _visible: boolean;
     _collapsible: boolean;
-    _elements: Map<string, DataElement | DataEntryPlugin>;
+    _elements: Map<string, DataElement | DataEntryPluginConfig>;
     _showContainer: boolean;
     _customForm: ?CustomForm;
 
@@ -86,11 +86,11 @@ export class Section {
         return this._showContainer;
     }
 
-    get elements(): Map<string, DataElement | DataEntryPlugin> {
+    get elements(): Map<string, DataElement | DataEntryPluginConfig> {
         return this._elements;
     }
 
-    addElement(element: DataElement | DataEntryPlugin) {
+    addElement(element: DataElement | DataEntryPluginConfig) {
         if (!this.elements.has(element.id)) {
             this.elements.set(element.id, element);
         }

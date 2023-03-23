@@ -6,12 +6,12 @@
 import isFunction from 'd2-utilizr/lib/isFunction';
 import { DataElement } from '../DataElement';
 
-export class DataEntryPlugin {
+export class DataEntryPluginConfig {
     _id: string;
     _name: string;
     _fields: Map<string, DataElement>;
 
-    constructor(initFn: ?(_this: DataEntryPlugin) => void) {
+    constructor(initFn: ?(_this: DataEntryPluginConfig) => void) {
         initFn && isFunction(initFn) && initFn(this);
     }
 

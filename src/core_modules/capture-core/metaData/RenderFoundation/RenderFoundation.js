@@ -10,7 +10,7 @@ import type { Access } from '../Access';
 import { convertDataElementsValues } from '../helpers';
 import type { ValuesType } from '../helpers/DataElements/convertValues';
 import { DataElement } from '../DataElement';
-import { DataEntryPlugin } from '../DataEntryPlugin';
+import { DataEntryPluginConfig } from '../DataEntryPluginConfig';
 
 export class RenderFoundation {
     static errorMessages = {
@@ -125,7 +125,7 @@ export class RenderFoundation {
                 const elementsInSection = Array.from(section.elements.entries())
                     .reduce((acc, entry) => {
                         const dataEntryElement = entry[1];
-                        if (dataEntryElement instanceof DataEntryPlugin) {
+                        if (dataEntryElement instanceof DataEntryPluginConfig) {
                             acc.push(...Array.from(dataEntryElement.fields.entries())
                                 .map(fieldEntry => fieldEntry[1]));
                         } else if (dataEntryElement instanceof DataElement) {
@@ -143,7 +143,7 @@ export class RenderFoundation {
                 const elementsInSection =
                     Array.from(section.elements.entries()).reduce((accElementsInSection, elementEntry) => {
                         const dataEntryElement = elementEntry[1];
-                        if (dataEntryElement instanceof DataEntryPlugin) {
+                        if (dataEntryElement instanceof DataEntryPluginConfig) {
                             accElementsInSection[dataEntryElement.id] = Array.from(dataEntryElement.fields.entries())
                                 .reduce((accFields, fieldEntry) => {
                                     const field = fieldEntry[1];
