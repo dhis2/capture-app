@@ -9,6 +9,7 @@ import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../common/useRegistrationFormInfoForSelectedScope';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
+import { useBuildFirstStageRegistration } from '../../../DataEntryDhis2Helpers/FirstStageRegistration/useBuildFirstStageRegistration';
 
 export const useLifecycle = (
     selectedScopeId: string,
@@ -24,6 +25,7 @@ export const useLifecycle = (
     const searchTerms = useSelector(({ searchPage }) => searchPage.currentSearchInfo.currentSearchTerms);
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { firstStageMetaData } = useBuildFirstStageRegistration(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
@@ -51,10 +53,21 @@ export const useLifecycle = (
                     dataEntryId,
                     formValues,
                     clientValues,
+                    firstStage: firstStageMetaData?.stage,
                 }),
             );
         }
-    }, [scopeType, dataEntryId, selectedScopeId, orgUnit, formValuesReadyRef, formValues, clientValues, dispatch]);
+    }, [
+        scopeType,
+        dataEntryId,
+        selectedScopeId,
+        orgUnit,
+        formValuesReadyRef,
+        formValues,
+        clientValues,
+        firstStageMetaData,
+        dispatch,
+    ]);
 
-    return { teiId, ready, skipDuplicateCheck: !!teiId };
+    return { teiId, ready, skipDuplicateCheck: !!teiId, firstStageMetaData };
 };

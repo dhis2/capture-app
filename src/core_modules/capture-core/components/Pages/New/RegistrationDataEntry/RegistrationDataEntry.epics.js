@@ -16,6 +16,7 @@ import {
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { FEATURETYPE } from '../../../../constants';
 import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../utils/routing';
+import { getCurrentEventValuesFromStage } from '../../../DataEntries/Enrollment/actions/enrollment.actionBatchs';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
@@ -61,13 +62,37 @@ const deriveEvents = ({
     orgUnitId,
     redirectToEnrollmentEventNew,
     redirectToStageId,
+    stageDetails,
 }) => {
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate (enrolledAt)
     const sanitizedOccurredAt = occurredAt || enrolledAt;
-    return [...stages.values()]
+    const events = [];
+    if (stageDetails) {
+        const { dataValues: stageDataValues, complete, stageOccurredAt, stageGeometry, stageId } = stageDetails;
+        const dataValues = Object.keys(stageDataValues).reduce((acc, dataElement) => {
+            acc.push({ dataElement, value: stageDataValues[dataElement] });
+            return acc;
+        }, []);
+
+        events.push(
+            {
+                dataValues,
+                status: complete ? 'COMPLETED' : 'ACTIVE',
+                geometry: stageGeometry,
+                occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
+                scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE),
+                programStage: stageId,
+                program: programId,
+                orgUnit: orgUnitId,
+            },
+        );
+    }
+
+    const otherEvents = [...stages.values()]
         .filter(({ id }) => (redirectToEnrollmentEventNew && id !== redirectToStageId) || !redirectToEnrollmentEventNew)
         .filter(({ autoGenerateEvent }) => autoGenerateEvent)
+        .filter(({ id }) => !stageDetails || stageDetails.stageId !== id)
         .map(({
             id: programStage,
             reportDateToUse: reportDateToUseInActiveStatus,
@@ -103,6 +128,7 @@ const deriveEvents = ({
                 orgUnit: orgUnitId,
             };
         });
+    return [...events, ...otherEvents];
 };
 
 export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
@@ -148,15 +174,29 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
+            const formId = 'newPageDataEntryId-newEnrollment';
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
             const { dataStore, userDataStore } = store.value.useNewDashboard;
-            const { occurredAt, enrolledAt, geometry } =
-                dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
+            const { occurredAt, enrolledAt, geometry, stageComplete, stageOccurredAt, stageGeometry } =
+                dataEntriesFieldsValue[formId] || {};
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
-            const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
+            const values = formsValues[formId] || {};
             const stageWithOpenAfterEnrollment = getStageWithOpenAfterEnrollment(stages);
             const redirectToEnrollmentEventNew =
             shouldUseNewDashboard(userDataStore, dataStore, programId) && stageWithOpenAfterEnrollment !== undefined;
+
+            const { formFoundation, teiId: trackedEntity, firstStage } = action.payload;
+            const { attributeValues, currentEventValues } = getCurrentEventValuesFromStage(values, firstStage);
+            const formServerValues = formFoundation?.convertValues(attributeValues, convertFn);
+
+            const stageDetails = firstStage && {
+                stageId: firstStage.id,
+                dataValues: currentEventValues,
+                complete: stageComplete === 'true',
+                stageOccurredAt,
+                stageGeometry: standardGeoJson(stageGeometry),
+            };
+
             const events = deriveEvents({
                 stages,
                 enrolledAt,
@@ -165,16 +205,14 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 orgUnitId,
                 redirectToEnrollmentEventNew,
                 redirectToStageId: stageWithOpenAfterEnrollment?.id,
+                stageDetails,
             });
-            const { formFoundation, teiId: trackedEntity } = action.payload;
-            const formServerValues = formFoundation?.convertValues(values, convertFn);
-
 
             return saveNewTrackedEntityInstanceWithEnrollment({
                 candidateForRegistration: {
                     trackedEntities: [
                         {
-                            geometry: deriveGeometryFromFormValues(values),
+                            geometry: deriveGeometryFromFormValues(attributeValues),
                             enrollments: [
                                 {
                                     geometry: standardGeoJson(geometry),

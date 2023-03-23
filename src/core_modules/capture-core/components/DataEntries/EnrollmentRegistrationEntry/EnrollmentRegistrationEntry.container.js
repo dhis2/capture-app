@@ -17,7 +17,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
 }) => {
     const orgUnitId = useCurrentOrgUnitInfo().id;
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
-    const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
+    const { teiId, ready, skipDuplicateCheck, firstStageMetaData } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
     const isUserInteractionInProgress: boolean = useSelector(
         state =>
             dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
@@ -33,6 +33,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     return (
         <EnrollmentRegistrationEntryComponent
             {...passOnProps}
+            firstStageMetaData={firstStageMetaData}
             selectedScopeId={selectedScopeId}
             id={id}
             ready={ready}

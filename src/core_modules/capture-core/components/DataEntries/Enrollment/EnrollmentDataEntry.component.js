@@ -5,7 +5,6 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import {
-    DataEntry,
     placements,
     withDataEntryField,
     withDataEntryFieldIfApplicable,
@@ -33,7 +32,8 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment } from '../../../metaData';
+import { type Enrollment, ProgramStage } from '../../../metaData';
+import { FirstStageRegistrationContainer } from '../../DataEntryDhis2Helpers/FirstStageRegistration/FirstStageRegistration.container';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -251,6 +251,9 @@ const getGeometrySettings = () => ({
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
     programId: string,
+    firstStageMetaData?: {
+        stage: ProgramStage,
+    }
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -266,10 +269,14 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     };
 
     render() {
-        const { enrollmentMetadata, programId, ...passOnProps } = this.props;
+        const {
+            enrollmentMetadata,
+            ...passOnProps
+        } = this.props;
+
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
-            <DataEntry
+            <FirstStageRegistrationContainer
                 {...passOnProps}
                 dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
                 formFoundation={enrollmentMetadata.enrollmentForm}
@@ -291,6 +298,9 @@ type PreEnrollmentDataEntryProps = {
     onStartAsyncUpdateField: Function,
     onGetUnsavedAttributeValues?: ?Function,
     teiId?: ?string,
+    firstStageMetaData?: {
+        stage: ProgramStage,
+    }
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
@@ -315,30 +325,30 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     }
 
     handleUpdateField = (...args: Array<any>) => {
-        const { programId, orgUnit } = this.props;
-        this.props.onUpdateField(...args, programId, orgUnit);
+        const { programId, orgUnit, firstStageMetaData } = this.props;
+        this.props.onUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage);
     }
 
     handleUpdateDataEntryField = (...args: Array<any>) => {
-        const { programId, orgUnit } = this.props;
-        this.props.onUpdateDataEntryField(...args, programId, orgUnit);
+        const { programId, orgUnit, firstStageMetaData } = this.props;
+        this.props.onUpdateDataEntryField(...args, programId, orgUnit, firstStageMetaData?.stage);
     }
 
     handleStartAsyncUpdateField = (...args: Array<any>) => {
-        const { programId, orgUnit } = this.props;
-        this.props.onStartAsyncUpdateField(...args, programId, orgUnit);
+        const { programId, orgUnit, firstStageMetaData } = this.props;
+        this.props.onStartAsyncUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage);
     }
 
     render() {
         const {
             orgUnit,
-            programId,
             onUpdateField,
             onUpdateDataEntryField,
             onStartAsyncUpdateField,
             onGetUnsavedAttributeValues,
             ...passOnProps
         } = this.props;
+
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <PreEnrollmentDataEntryPure

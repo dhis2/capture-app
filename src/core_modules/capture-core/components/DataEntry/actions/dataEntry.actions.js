@@ -1,5 +1,6 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
+import { ProgramStage } from '../../../metaData';
 
 export const batchActionTypes = {
     ASYNC_UPDATE_FIELD_FAILED_BATCH: 'AsyncUpdateFieldFailedBatch',
@@ -117,12 +118,12 @@ export const updateFormField =
         });
 
 export const startRunRulesPostUpdateField =
-    (dataEntryId: string, itemId: string, uid: string) =>
-        actionCreator(actionTypes.START_RUN_RULES_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
+    (dataEntryId: string, itemId: string, uid: string, stage?: ProgramStage) =>
+        actionCreator(actionTypes.START_RUN_RULES_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid, stage });
 
 export const rulesExecutedPostUpdateField =
-    (dataEntryId: string, itemId: string, uid: string) =>
-        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
+    (dataEntryId: string, itemId: string, uid: string, stage?: ProgramStage) =>
+        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid, stage });
 
 export const addNote =
     (dataEntryId: string, itemId: string, note: Object) =>

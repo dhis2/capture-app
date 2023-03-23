@@ -1,5 +1,5 @@
 // @flow
-import type { RenderFoundation } from '../../../../metaData';
+import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { actionCreator } from '../../../../actions/actions.utils';
 import { effectMethods } from '../../../../trackerOffline';
 
@@ -41,10 +41,11 @@ export const saveNewTrackedEntityInstance = (candidateForRegistration: any) =>
     );
 
 // with enrollment
-export const startSavingNewTrackedEntityInstanceWithEnrollment = (formFoundation: RenderFoundation, teiId: string) =>
+export const startSavingNewTrackedEntityInstanceWithEnrollment = (formFoundation: RenderFoundation, teiId: string, firstStage?: ProgramStage) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START)({
         formFoundation,
         teiId,
+        firstStage,
     });
 
 export const saveNewTrackedEntityInstanceWithEnrollment = ({

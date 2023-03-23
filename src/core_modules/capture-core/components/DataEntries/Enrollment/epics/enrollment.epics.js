@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
 import { actionTypes } from '../actions/enrollment.actions';
-import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
+import { getTrackerProgramThrowIfNotFound, ProgramStage } from '../../../../metaData';
 import { getCurrentClientValues, getCurrentClientMainData, type FieldData } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 
@@ -14,12 +14,13 @@ type Context = {
     uid: string,
     programId: string,
     orgUnit: OrgUnit,
+    stage?: ProgramStage
 }
 
 const runRulesOnEnrollmentUpdate =
     (store: ReduxStore, context: Context, fieldData?: ?FieldData, searchActions?: any = []) => {
         const state = store.value;
-        const { programId, dataEntryId, itemId, orgUnit, uid } = context;
+        const { programId, dataEntryId, itemId, orgUnit, uid, stage } = context;
         const formId = getDataEntryKey(dataEntryId, itemId);
         const program = getTrackerProgramThrowIfNotFound(programId);
         const foundation = program.enrollment.enrollmentForm;
@@ -38,6 +39,7 @@ const runRulesOnEnrollmentUpdate =
             currentTEIValues ?? undefined,
             searchActions,
             uid,
+            stage,
         );
     };
 
@@ -53,6 +55,7 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObser
                 programId,
                 orgUnit,
                 innerPayload,
+                stage,
             } = action.payload;
 
             const {
@@ -66,6 +69,7 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObser
                 uid,
                 programId,
                 orgUnit,
+                stage,
             });
         }));
 
@@ -75,7 +79,7 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, st
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
-            const { innerPayload: payload, searchActions, uid, programId, orgUnit } = action.payload;
+            const { innerPayload: payload, searchActions, uid, programId, orgUnit, stage } = action.payload;
             const { dataEntryId, itemId, elementId, value, uiState } = payload;
 
             const fieldData: FieldData = {
@@ -90,6 +94,7 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, st
                 dataEntryId,
                 itemId,
                 uid,
+                stage,
             }, fieldData, searchActions);
         }),
     );

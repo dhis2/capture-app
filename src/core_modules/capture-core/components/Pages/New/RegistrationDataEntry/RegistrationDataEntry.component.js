@@ -90,7 +90,7 @@ const RegistrationDataEntryPlain = ({
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { registrationMetaData, formFoundation, firstStageMetaData } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
 
     const handleRegistrationScopeSelection = (id) => {
@@ -176,7 +176,9 @@ const RegistrationDataEntryPlain = ({
                                         trackedEntityName,
                                         interpolation: { escapeValue: false },
                                     })}
-                                    onSave={() => onSaveWithEnrollment(formFoundation)}
+                                    onSave={() => {
+                                        onSaveWithEnrollment(formFoundation, firstStageMetaData?.stage);
+                                    }}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}

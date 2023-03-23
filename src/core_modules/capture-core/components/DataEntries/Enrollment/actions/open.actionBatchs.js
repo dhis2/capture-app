@@ -2,11 +2,11 @@
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
-import type { TrackerProgram } from '../../../../metaData';
+import type { ProgramStage, RenderFoundation, TrackerProgram } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewEnrollment } from './open.actions';
-import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer } from '../fieldValidators';
+import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer, getReportDateValidatorContainers } from '../fieldValidators';
 import { convertGeometryOut } from '../../converters';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import { addFormData } from '../../../D2Form/actions/form.actions';
@@ -47,6 +47,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     extraDataEntryProps = [],
     formValues,
     clientValues,
+    firstStage,
 }: {
     program: TrackerProgram,
     orgUnit: OrgUnit,
@@ -55,23 +56,40 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     extraDataEntryProps?: Array<Object>,
     formValues: { [key: string]: any },
     clientValues: { [key: string]: any },
+    firstStage?: ?ProgramStage,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
+    const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
+    let effects;
+    const programStageDataEntryProps = [];
+    if (firstStage) {
+        effects = getApplicableRuleEffectsForTrackerProgram({
+            program,
+            orgUnit,
+            stage: firstStage,
+            attributeValues: clientValues,
+        });
+        programStageDataEntryProps.push({
+            id: 'stageOccurredAt',
+            type: 'DATE',
+            // $FlowFixMe[incompatible-call] automated comment
+            validatorContainers: getReportDateValidatorContainers(),
+        });
+    } else {
+        effects = getApplicableRuleEffectsForTrackerProgram({
+            program,
+            orgUnit,
+            attributeValues: clientValues,
+        });
+    }
 
     const dataEntryActions =
             loadNewDataEntry(
                 dataEntryId,
                 itemId,
-                [...dataEntryPropsToInclude, ...extraDataEntryProps],
+                [...dataEntryPropsToInclude, ...extraDataEntryProps, ...programStageDataEntryProps],
                 { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
             );
-
-    const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
-    const effects = getApplicableRuleEffectsForTrackerProgram({
-        program,
-        orgUnit,
-        attributeValues: clientValues,
-    });
 
     return batchActions([
         openDataEntryForNewEnrollment(
