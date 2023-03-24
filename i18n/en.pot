@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-03-21T17:56:23.103Z\n"
-"PO-Revision-Date: 2023-03-21T17:56:23.103Z\n"
+"POT-Creation-Date: 2023-03-24T16:59:30.870Z\n"
+"PO-Revision-Date: 2023-03-24T16:59:30.870Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1092,6 +1092,9 @@ msgstr "Latitude"
 msgid "Longtitude"
 msgstr "Longtitude"
 
+msgid "Edit"
+msgstr "Edit"
+
 msgid "Set"
 msgstr "Set"
 
@@ -1254,9 +1257,6 @@ msgstr "Profile widget could not be loaded. Please try again later"
 
 msgid "{{TETName}} profile"
 msgstr "{{TETName}} profile"
-
-msgid "Edit"
-msgstr "Edit"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
