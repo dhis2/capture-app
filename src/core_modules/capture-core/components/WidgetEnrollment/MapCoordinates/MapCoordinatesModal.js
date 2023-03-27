@@ -147,7 +147,7 @@ const MapCoordinatesModalPlain = ({
         onClick={onHandleMapClicked}
     >
         <WrappedLeafletSearch
-            position="topleft"
+            position="topright"
             inputPlaceholder="Search"
             closeResultsOnClick
             search={null}
@@ -235,10 +235,10 @@ const MapCoordinatesModalPlain = ({
             />
         );
 
-    const renderLongtitude = () =>
+    const renderLongitude = () =>
         (
             <CoordinateInput
-                label={i18n.t('Longtitude')}
+                label={i18n.t('Longitude')}
                 value={position && position[1]}
                 classes={classes}
                 disabled={!isEditing}
@@ -322,7 +322,7 @@ const MapCoordinatesModalPlain = ({
                             {renderLatitude()}
                         </div>
                         <div className={classes.inputContent}>
-                            {renderLongtitude()}
+                            {renderLongitude()}
                         </div>
                         {renderFieldButton()}
                     </div>}
