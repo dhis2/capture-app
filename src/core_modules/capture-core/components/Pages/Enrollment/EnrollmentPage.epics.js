@@ -39,6 +39,32 @@ const enrollmentsQuery = (teiId, programId) => ({
     },
 });
 
+const captureScopeQuery = () => ({
+    resource: 'organisationUnits',
+    params: {
+        paging: false,
+        userOnly: true,
+        fields: 'id',
+    },
+});
+
+const ancestorsQuery = orgUnitId => ({
+    resource: 'organisationUnits',
+    id: orgUnitId,
+    params: {
+        fields: 'ancestors',
+    },
+});
+
+const inCaptureScope = (querySingleResource, orgUnitId) =>
+    Promise.all([
+        querySingleResource(captureScopeQuery()),
+        querySingleResource(ancestorsQuery(orgUnitId)),
+    ]).then(([{ organisationUnits }, { ancestors }]) => {
+        ancestors.push({ id: orgUnitId });
+        return ancestors.some(({ id: ancestorId }) => organisationUnits.some(({ id }) => ancestorId === id));
+    }).catch(error => console.log(error));
+
 const autoSelectEnrollment = (
     programId: string,
     orgUnitId: string,
@@ -97,13 +123,17 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
             }
             return from(querySingleResource({ resource: 'tracker/enrollments', id: enrollmentId }))
                 .pipe(
-                    map(({ trackedEntity, program }) =>
-                        openEnrollmentPage({
-                            programId: program,
-                            teiId: trackedEntity,
-                            orgUnitId,
-                            enrollmentId,
-                        })),
+                    flatMap(({ trackedEntity, program, orgUnit }) =>
+                        from(inCaptureScope(querySingleResource, orgUnit))
+                            .pipe(
+                                map(programOwnerInCaptureScope =>
+                                    openEnrollmentPage({
+                                        programId: program,
+                                        teiId: trackedEntity,
+                                        orgUnitId: programOwnerInCaptureScope ? orgUnit : orgUnitId,
+                                        enrollmentId,
+                                    }),
+                                ))),
                     catchError(() => of(startFetchingTeiFromTeiId())),
                     startWith(showLoadingViewOnEnrollmentPage()),
                 );
