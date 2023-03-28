@@ -97,11 +97,11 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
             }
             return from(querySingleResource({ resource: 'tracker/enrollments', id: enrollmentId }))
                 .pipe(
-                    map(({ trackedEntity, program, orgUnit }) =>
+                    map(({ trackedEntity, program }) =>
                         openEnrollmentPage({
                             programId: program,
-                            orgUnitId: orgUnit,
                             teiId: trackedEntity,
+                            orgUnitId,
                             enrollmentId,
                         })),
                     catchError(() => of(startFetchingTeiFromTeiId())),
