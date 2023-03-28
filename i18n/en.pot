@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-01-20T09:11:14.026Z\n"
-"PO-Revision-Date: 2023-01-20T09:11:14.026Z\n"
+"POT-Creation-Date: 2023-03-24T14:57:15.177Z\n"
+"PO-Revision-Date: 2023-03-24T14:57:15.177Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -486,6 +486,12 @@ msgstr "Select image"
 
 msgid "Search"
 msgstr "Search"
+
+msgid "Type to filter options"
+msgstr "Type to filter options"
+
+msgid "No match found"
+msgstr "No match found"
 
 msgid "Clear"
 msgstr "Clear"

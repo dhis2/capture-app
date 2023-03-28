@@ -8,6 +8,7 @@ export { getDateTimeFieldConfig } from './dateTimeField/getDateTimeFieldConfig';
 export { getFileResourceFieldConfig } from './fileResourceField/getFileResourceFieldConfig';
 export { getImageFieldConfig } from './imageField/getImageFieldConfig';
 export { getOptionSetFieldConfig } from './optionSetField/getOptionSetFieldConfig';
+export { getMultiOptionSetFieldConfig } from './multiOptionSetField/getMultiOptionSetFieldConfig';
 export { getOrgUnitFieldConfig } from './orgUnitField/getOrgUnitFieldConfig';
 export { getPolygonFieldConfig } from './polygonField/getPolygonFieldConfig';
 export { getTextFieldConfig } from './textField/getTextFieldConfig';
@@ -27,6 +28,8 @@ export { getDateTimeFieldConfigForCustomForm } from './dateTimeField/getDateTime
 export { getFileResourceFieldConfigForCustomForm } from './fileResourceField/getFileResourceFieldConfigForCustomForm';
 export { getImageFieldConfigForCustomForm } from './imageField/getImageFieldConfigForCustomForm';
 export { getOptionSetFieldConfigForCustomForm } from './optionSetField/getOptionSetFieldConfigForCustomForm';
+export { getMultiOptionSetFieldConfigForCustomForm }
+    from './multiOptionSetField/getMultiOptionSetFieldConfigForCustomForm';
 export { getOrgUnitFieldConfigForCustomForm } from './orgUnitField/getOrgUnitFieldConfigForCustomForm';
 export { getPolygonFieldConfigForCustomForm } from './polygonField/getPolygonFieldConfigForCustomForm';
 export { getTextFieldConfigForCustomForm } from './textField/getTextFieldConfigForCustomForm';

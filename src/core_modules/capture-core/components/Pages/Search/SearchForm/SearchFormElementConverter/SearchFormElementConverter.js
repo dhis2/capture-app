@@ -50,6 +50,7 @@ const unsupportedType = () => null;
 
 export const dataElementConvertFunctions = {
     TEXT: convertString,
+    MULTI_TEXT: convertString,
     LONG_TEXT: convertString,
     NUMBER: convertRange,
     NUMBER_RANGE: convertRange,
