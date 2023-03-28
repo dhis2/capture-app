@@ -451,12 +451,20 @@ export class VariableService {
         );
     }
 
+    buildRawContextVariable(value: any, valueType: string) {
+        return this.buildVariable(
+            value,
+            valueType, {
+                variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+            },
+        );
+    }
+
     getContextVariables(sourceData: SourceData): RuleVariables {
         let variables = {};
 
-        variables.environment = this.buildContextVariable(this.environment, typeKeys.TEXT);
-        variables.current_date = this.buildContextVariable(VariableService.dateUtils.getToday(), typeKeys.DATE);
-
+        variables.environment = this.buildRawContextVariable(this.environment, typeKeys.TEXT);
+        variables.current_date = this.buildRawContextVariable(VariableService.dateUtils.getToday(), typeKeys.DATE);
         variables = {
             ...variables,
             ...this.getEventContextVariables(sourceData.executingEvent, sourceData.eventsContainer),
@@ -488,7 +496,7 @@ export class VariableService {
         }
 
         if (eventsContainer) {
-            variables.event_count = this.buildContextVariable((eventsContainer.all && eventsContainer.all.length) || 0, typeKeys.INTEGER);
+            variables.event_count = this.buildRawContextVariable((eventsContainer.all && eventsContainer.all.length) || 0, typeKeys.INTEGER);
         }
 
         return variables;
@@ -500,8 +508,8 @@ export class VariableService {
         if (selectedEnrollment) {
             variables.enrollment_date = this.buildContextVariable(selectedEnrollment.enrolledAt, typeKeys.DATE);
             variables.enrollment_id = this.buildContextVariable(selectedEnrollment.enrollmentId, typeKeys.TEXT);
-            variables.enrollment_count = this.buildContextVariable(1, typeKeys.INTEGER);
-            variables.tei_count = this.buildContextVariable(1, typeKeys.INTEGER);
+            variables.enrollment_count = this.buildRawContextVariable(1, typeKeys.INTEGER);
+            variables.tei_count = this.buildRawContextVariable(1, typeKeys.INTEGER);
             variables.incident_date = this.buildContextVariable(selectedEnrollment.occurredAt, typeKeys.DATE);
         }
 
