@@ -11,7 +11,8 @@ import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
-import { deleteEnrollment } from '../../Enrollment/EnrollmentPage.actions';
+import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentPage.actions';
+
 import { useWidgetDataFromStore } from '../hooks';
 import {
     useHideWidgetByRuleLocations,
@@ -61,6 +62,7 @@ export const EnrollmentAddEventPageDefault = ({
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     }, [dispatch, enrollmentId, history, programId, orgUnitId, teiId]);
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
@@ -147,6 +149,7 @@ export const EnrollmentAddEventPageDefault = ({
                 ready={Boolean(enrollment)}
                 dataEntryHasChanges={dataEntryHasChanges}
                 onEnrollmentError={onEnrollmentError}
+                onEnrollmentSuccess={onEnrollmentSuccess}
             />
         </>
     );

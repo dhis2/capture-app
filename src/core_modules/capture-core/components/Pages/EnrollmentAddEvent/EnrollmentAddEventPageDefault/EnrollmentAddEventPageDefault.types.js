@@ -14,6 +14,7 @@ export type Props = {|
     onDelete: () => void,
     onAddNew: () => void,
     onEnrollmentError: (message: string) => void,
+    onEnrollmentSuccess: () => void,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
     rulesExecutionDependencies: Object,

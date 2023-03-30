@@ -184,6 +184,7 @@ import {
     fetchEnrollmentPageInformationFromUrlEpic,
     startFetchingTeiFromEnrollmentIdEpic,
     startFetchingTeiFromTeiIdEpic,
+    fetchEnrollmentsEpic,
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 import {
@@ -310,6 +311,7 @@ export const epics = combineEpics(
     fetchEnrollmentPageInformationFromUrlEpic,
     startFetchingTeiFromEnrollmentIdEpic,
     startFetchingTeiFromTeiIdEpic,
+    fetchEnrollmentsEpic,
     openEnrollmentPageEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
