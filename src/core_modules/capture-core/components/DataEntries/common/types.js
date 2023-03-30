@@ -7,6 +7,7 @@ type ConfigElement = ?({|
     id: string,
     type: 'plugin',
     name: string,
+    pluginSource: string,
     fieldMap: Array<{|
         IdFromApp: string,
         IdFromPlugin: string,
@@ -20,6 +21,7 @@ export type DataEntryFormConfig = {|
     [key: string]: Array<{|
         id: string,
         name: string,
+        pluginSource: string,
         elements: Array<ConfigElement>,
     |}>
 |}

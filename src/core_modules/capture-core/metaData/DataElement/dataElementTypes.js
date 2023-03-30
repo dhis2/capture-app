@@ -33,5 +33,6 @@ export const dataElementTypes = {
     USERNAME: 'USERNAME',
     ASSIGNEE: 'ASSIGNEE',
     STATUS: 'STATUS',
+    PLUGIN: 'PLUGIN',
     UNKNOWN: 'UNKNOWN',
 };

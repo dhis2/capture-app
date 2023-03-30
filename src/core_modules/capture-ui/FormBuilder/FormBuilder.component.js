@@ -32,7 +32,7 @@ export type FieldConfig = {
 type FieldUI = {
     touched?: ?boolean,
     valid?: ?boolean,
-    errorMessage?: ?string,
+    errorMessage?: ?string | Array<string>,
     errorType?: ?string,
     errorData?: ErrorData,
     validatingMessage?: ?string,
@@ -59,6 +59,7 @@ type IsValidatingFn = (
 type Props = {
     id: string,
     fields: Array<FieldConfig>,
+    dataElements: Array<FieldConfig>,
     values: { [id: string]: any },
     fieldsUI: { [id: string]: FieldUI },
     onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => void,
@@ -79,6 +80,8 @@ type Props = {
 
 type FieldCommitOptions = {
     touched?: boolean,
+    valid?: boolean,
+    error?: string | Array<string>,
 };
 
 // container for handling async validations
@@ -343,7 +346,7 @@ export class FormBuilder extends React.Component<Props> {
     */
     getFieldProp(fieldId: string): FieldConfig {
         // $FlowFixMe[incompatible-return] automated comment
-        return this.props.fields.find(f => f.id === fieldId);
+        return this.props.dataElements.find(f => f.id === fieldId);
     }
 
     hasCommitedValueChanged(field: FieldConfig, value: any) {
@@ -369,6 +372,7 @@ export class FormBuilder extends React.Component<Props> {
             id,
             onIsValidating,
         } = this.props;
+
         const field = this.getFieldProp(fieldId);
         const touched = options && isDefined(options.touched) ? options.touched : true;
 
@@ -411,9 +415,9 @@ export class FormBuilder extends React.Component<Props> {
                 onUpdateField(
                     value,
                     {
-                        valid,
+                        valid: options?.valid ?? valid,
                         touched,
-                        errorMessage,
+                        errorMessage: options?.error ?? errorMessage,
                         errorType,
                         errorData,
                     },
@@ -505,7 +509,6 @@ export class FormBuilder extends React.Component<Props> {
         field: Object,
     ) => {
         const {
-            onUpdateField,
             onUpdateFieldUIOnly,
         } = this.props;
         const {
@@ -521,7 +524,7 @@ export class FormBuilder extends React.Component<Props> {
                 fieldsMetadata={fieldsMetadata}
                 pluginSource={pluginSource}
                 formId={formId}
-                onUpdateField={onUpdateField}
+                onUpdateField={this.commitFieldUpdate.bind(this)}
                 onUpdateFieldUIOnly={onUpdateFieldUIOnly}
             />
         );

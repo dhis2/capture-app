@@ -41,7 +41,7 @@ type RulesMessages = {
 };
 
 type Props = {
-    fieldsMetaData: Map<string, DataElement>,
+    fieldsMetaData: Map<string, DataElement | DataEntryPluginConfig>,
     values: FormsValues,
     rulesMessages: RulesMessages,
     rulesHiddenFields: RulesHiddenFields,
@@ -61,41 +61,61 @@ type Props = {
 };
 
 export class D2SectionFieldsComponent extends Component<Props> {
-    static buildFormFields(props: Props): Array<FieldConfig> {
+    static buildFormFields(props: Props): {| renderElements: Array<FieldConfig>, elementMetadata: Array<FieldConfig> |} {
         const { fieldsMetaData, customForm, fieldOptions, querySingleResource } = props;
 
         return Array.from(fieldsMetaData.entries())
             .map(entry => entry[1])
-            // $FlowFixMe[incompatible-return] automated comment
-            .map((metaDataElement) => {
-                if (metaDataElement instanceof DataElement) {
-                    return buildField(
-                        metaDataElement,
-                        {
-                            formHorizontal: props.formHorizontal,
-                            formId: props.formId,
-                            viewMode: props.viewMode,
-                            ...fieldOptions,
-                        },
-                        !!customForm,
-                        querySingleResource,
-                    );
-                }
+            .reduce((acc, metaDataElement) => {
                 if (metaDataElement instanceof DataEntryPluginConfig) {
-                    return ({
-                        id: 'plugin',
+                    acc.renderElements.push({
+                        id: metaDataElement.id,
                         component: DataEntryPlugin,
                         plugin: true,
                         props: {
-                            pluginSource: 'http://localhost:8080/api/apps/tracker-plugin/plugin.html',
+                            pluginSource: metaDataElement.pluginSource,
                             fieldsMetadata: metaDataElement.fields,
                             formId: props.formId,
                         },
                     });
+                    const fieldsMetadata = metaDataElement.fields;
+                    const fields = Array.from(fieldsMetadata.entries())
+                        .map(entry => entry[1])
+                        .map(field => buildField(
+                            field,
+                            {
+                                formHorizontal: props.formHorizontal,
+                                formId: props.formId,
+                                viewMode: props.viewMode,
+                                ...fieldOptions,
+                            },
+                            !!customForm,
+                            querySingleResource,
+                        ))
+                        .filter(field => field);
+                    if (fields) {
+                        acc.elementMetadata.push(...fields);
+                    }
+                    return acc;
                 }
-                return null;
-            })
-            .filter(field => field);
+                const field = buildField(
+                    metaDataElement,
+                    {
+                        formHorizontal: props.formHorizontal,
+                        formId: props.formId,
+                        viewMode: props.viewMode,
+                        ...fieldOptions,
+                    },
+                    !!customForm,
+                    querySingleResource,
+                );
+                if (field) {
+                    acc.renderElements.push(field);
+                    acc.elementMetadata.push(field);
+                }
+                return acc;
+                // $FlowFixMe
+            }, { renderElements: [], elementMetadata: [] });
     }
 
     static validateBaseOnly(formBuilderInstance: FormBuilder) {
@@ -105,6 +125,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
     handleUpdateField: (elementId: string, value: any) => void;
     formBuilderInstance: ?FormBuilder;
     formFields: Array<FieldConfig>;
+    dataElements: Array<FieldConfig>
     rulesCompulsoryErrors: { [elementId: string]: boolean };
 
     static defaultProps = {
@@ -114,13 +135,17 @@ export class D2SectionFieldsComponent extends Component<Props> {
     constructor(props: Props) {
         super(props);
         this.handleUpdateField = this.handleUpdateField.bind(this);
-        this.formFields = D2SectionFieldsComponent.buildFormFields(this.props);
+        const { renderElements, elementMetadata } = D2SectionFieldsComponent.buildFormFields(this.props);
+        this.formFields = renderElements;
+        this.dataElements = elementMetadata;
         this.rulesCompulsoryErrors = {};
     }
 
     UNSAFE_componentWillReceiveProps(newProps: Props) {
         if (newProps.fieldsMetaData !== this.props.fieldsMetaData) {
-            this.formFields = D2SectionFieldsComponent.buildFormFields(newProps);
+            const { renderElements, elementMetadata } = D2SectionFieldsComponent.buildFormFields(newProps);
+            this.formFields = renderElements;
+            this.dataElements = elementMetadata;
         }
     }
 
@@ -259,7 +284,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
             values,
             onUpdateField,
             formId,
-            formBuilderId,
             rulesCompulsoryFields,
             rulesDisabledFields,
             rulesHiddenFields,
@@ -276,8 +300,9 @@ export class D2SectionFieldsComponent extends Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <CustomFormHOC
                 formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
-                id={formBuilderId}
+                id={formId}
                 fields={this.getFieldConfigWithRulesEffects()}
+                dataElements={this.dataElements}
                 values={values}
                 onUpdateField={this.handleUpdateField}
                 onUpdateFieldAsync={this.handleUpdateFieldAsync}

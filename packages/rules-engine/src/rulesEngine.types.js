@@ -15,6 +15,9 @@ export type OutputEffect = {
     type: $Values<effectActions>,
     id: string,
     targetDataType?: $Values<rulesEngineEffectTargetDataTypes>,
+    error?: { message: string },
+    warning?: { message: string },
+    message?: string,
 };
 
 export type OutputEffects = Array<OutputEffect>;

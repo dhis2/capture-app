@@ -133,7 +133,9 @@
         "@dhis2/ui": "8.4.5",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/cli-app-scripts": "^10.4.0-alpha.1",
-        "@babel/preset-react": "7.16.7"
+        "@babel/preset-react": "7.16.7",
+        "react-error-overlay": "6.0.9",
+        "react-scripts": "4.0.3"
     },
     "browserslist": {
         "production": [

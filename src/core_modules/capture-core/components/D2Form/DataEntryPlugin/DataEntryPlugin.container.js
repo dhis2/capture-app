@@ -1,90 +1,53 @@
 // @flow
-import React, { useCallback, useEffect, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useMemo } from 'react';
 import { DataEntryPluginComponent } from './DataEntryPlugin.component';
 import type { ContainerProps } from './DataEntryPlugin.types';
+import { usePluginMessages } from './hooks/usePluginMessages';
+import { usePluginCallbacks } from './hooks/usePluginCallbacks';
+import { usePluginFormValues } from './hooks/usePluginFormValues';
 
 export const DataEntryPlugin = (props: ContainerProps) => {
     const { pluginSource, fieldsMetadata, formId, onUpdateField } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
+    const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
 
-    useEffect(() => {
-        document.querySelector('iframe').style.height = '500px';
-    }, []);
-
-    const formValues = useSelector(({ formsValues }) => formsValues[formId]);
-
-    const { errors, warnings } = useSelector(({ rulesEffectsMessages }) => {
-        const messages = rulesEffectsMessages[formId];
-
-        if (!messages) {
-            return { errors: {}, warnings: {} };
-        }
-
-        return Object.entries(messages)
-            .reduce((acc, [id, message]) => {
-                if (message.error) {
-                    acc.errors[id] = message.error;
-                }
-                if (message.warning) {
-                    acc.warnings[id] = message.warning;
-                }
-                return acc;
-            }, { errors: {}, warnings: {} });
+    // Plugin related functionality and feedback
+    const { pluginValues } = usePluginFormValues(formId, metadataByPluginId);
+    const { errors, warnings } = usePluginMessages(formId, metadataByPluginId);
+    const { setFieldValue } = usePluginCallbacks({
+        configuredPluginIds,
+        onUpdateField,
+        metadataByPluginId,
     });
 
-    const setFieldValue = useCallback(({ fieldId, value, options = {} }) => {
-        onUpdateField && onUpdateField(
-            value,
-            {
-                valid: options.valid ?? true,
-                touched: options.touched ?? true,
-                errorMessage: options.error,
-            },
-            fieldId,
-            `${formId}-test`,
-        );
-    }, [formId, onUpdateField]);
+    // Expanding iframe height temporarily to fit content - LIBS-487
+    useEffect(() => {
+        const iframe = document.querySelector('iframe');
+        if (iframe) iframe.style.height = '500px';
+    }, []);
 
-    const setFieldValues = useCallback((updatedValues: {| [id: string]: any |}) => {
-        Object.entries(updatedValues).forEach(([fieldId, value]) => {
-            setFieldValue({ fieldId, value });
-        });
-    }, [setFieldValue]);
 
-    const setError = useCallback((fieldId, error) => {
-        setFieldValue({ fieldId, value: formValues[fieldId], options: { error } });
-    }, [formValues, setFieldValue]);
+    // Formatted metadata is needed to remove the underscore from the keys
+    const formattedMetadata = useMemo(() => Array.from(fieldsMetadata.entries())
+        .reduce((acc: any, [pluginId, dataElement]) => {
+            const modifiedDataElement = Object.entries(dataElement)
+                .map(([attributeKey, value]) => {
+                    const modifiedKey = attributeKey.replace(/^_/, '');
+                    return [modifiedKey, value];
+                });
 
-    const setErrors = useCallback((updatedErrors: {| [id: string]: any |}) => {
-        Object.entries(updatedErrors).forEach(([fieldId, error]) => {
-            setError(fieldId, error);
-        });
-    }, [setError]);
-
-    const setWarning = useCallback((fieldId, warning) => {
-        setFieldValue({ fieldId, value: formValues[fieldId], options: { warning } });
-    }, [formValues, setFieldValue]);
-
-    const setWarnings = useCallback((updatedWarnings: {| [id: string]: any |}) => {
-        Object.entries(updatedWarnings).forEach(([fieldId, warning]) => {
-            setWarning(fieldId, warning);
-        });
-    }, [setWarning]);
+            acc[pluginId] = Object.fromEntries(modifiedDataElement);
+            return acc;
+        }, {}), [fieldsMetadata]);
 
     return (
         <DataEntryPluginComponent
             pluginSource={pluginSource}
-            fieldsMetadata={metadataByPluginId}
-            values={formValues}
+            fieldsMetadata={formattedMetadata}
+            values={pluginValues}
+            setFieldValue={setFieldValue}
             errors={errors}
             warnings={warnings}
-            setError={setError}
-            setErrors={setErrors}
-            setWarning={setWarning}
-            setWarnings={setWarnings}
-            setFieldValue={setFieldValue}
-            setFieldValues={setFieldValues}
         />
     );
 };

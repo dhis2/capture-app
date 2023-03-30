@@ -9,6 +9,7 @@ import { DataElement } from '../DataElement';
 export class DataEntryPluginConfig {
     _id: string;
     _name: string;
+    _pluginSource: string;
     _fields: Map<string, DataElement>;
 
     constructor(initFn: ?(_this: DataEntryPluginConfig) => void) {
@@ -37,6 +38,14 @@ export class DataEntryPluginConfig {
 
     set fields(value: Map<string, DataElement>) {
         this._fields = value;
+    }
+
+    get pluginSource(): string {
+        return this._pluginSource;
+    }
+
+    set pluginSource(value: string) {
+        this._pluginSource = value;
     }
 
     addField(idFromPlugin: string, field: DataElement) {

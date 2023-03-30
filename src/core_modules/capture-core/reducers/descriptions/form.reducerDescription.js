@@ -1,7 +1,7 @@
 // @flow
 import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { AssignOutputEffect } from '@dhis2/rules-engine-javascript';
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+import { createReducerDescription } from '../../trackerRedux';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
 import { actionTypes as loaderActionTypes } from '../../components/D2Form/actions/form.actions';
@@ -94,12 +94,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         const newState = { ...state };
         const formId = action.payload.formId;
 
-        Object
-            .keys(newState)
-            .filter(sectionKey => sectionKey.startsWith(formId))
-            .forEach((formSectionKey) => {
-                delete newState[formSectionKey];
-            });
+        newState[formId] && delete newState[formId];
 
         return newState;
     },
@@ -107,10 +102,10 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         const newState = { ...state };
         const payload = action.payload;
 
-        newState[payload.formBuilderId] = Object.keys(payload.fieldsUI).reduce((accSectionFieldsUI, key) => {
+        newState[payload.formId] = Object.keys(payload.fieldsUI).reduce((accSectionFieldsUI, key) => {
             accSectionFieldsUI[key] = { ...accSectionFieldsUI[key], ...payload.fieldsUI[key], validatingMessage: null };
             return accSectionFieldsUI;
-        }, { ...newState[payload.formBuilderId] });
+        }, { ...newState[payload.formId] });
         return newState;
     },
     [fieldActionTypes.UPDATE_FIELD]: (state, action) => {
@@ -175,8 +170,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        newState[payload.formBuilderId] = { ...newState[payload.formBuilderId] };
-        const formBuilderFieldsUI = newState[payload.formBuilderId];
+        const formBuilderFieldsUI = newState[payload.formId];
         formBuilderFieldsUI[payload.elementId] = {
             ...formBuilderFieldsUI[payload.elementId],
             ...payload.uiState,
@@ -194,13 +188,13 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         return newState;
     },
     [formAsyncActionTypes.FIELD_IS_VALIDATING]: (state, action) => {
-        const { fieldId, formBuilderId, message, fieldUIUpdates } = action.payload;
+        const { fieldId, formId, message, fieldUIUpdates } = action.payload;
         return {
             ...state,
-            [formBuilderId]: {
-                ...state[formBuilderId],
+            [formId]: {
+                ...state[formId],
                 [fieldId]: {
-                    ...(state[formBuilderId] && state[formBuilderId][fieldId]),
+                    ...(state[formId] && state[formId][fieldId]),
                     ...fieldUIUpdates,
                     validatingMessage: message,
                 },
@@ -211,36 +205,35 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const { formId, rulesEffects } = action.payload;
-        const formBuilderIds = Object.keys(state).filter(key => key.startsWith(formId) && Object.keys(state[key]).length > 0);
+        const formSectionFields = state[formId];
         const assignEffects: { [id: string]: Array<AssignOutputEffect> } =
             rulesEffects && rulesEffects[effectActions.ASSIGN_VALUE];
 
-        if (!assignEffects || !formBuilderIds?.length) {
+        if (!assignEffects || !formSectionFields) {
             return state;
         }
 
+        const updatedFields = Object.keys(assignEffects).reduce((acc, id) => {
+            if (formSectionFields[id]) {
+                acc[id] = {
+                    valid: true,
+                    errorData: undefined,
+                    errorMessage: undefined,
+                    errorType: undefined,
+                    modified: true,
+                    touched: true,
+                    validatingMessage: null,
+                };
+            }
+            return acc;
+        }, {});
+
         return {
             ...state,
-            ...formBuilderIds.reduce((formAcc, formBuilderId) => {
-                formAcc[formBuilderId] = {
-                    ...state[formBuilderId],
-                    ...Object.keys(assignEffects).reduce((acc, id) => {
-                        if (state[formBuilderId][id]) {
-                            acc[id] = {
-                                valid: true,
-                                errorData: undefined,
-                                errorMessage: undefined,
-                                errorType: undefined,
-                                modified: true,
-                                touched: true,
-                                validatingMessage: null,
-                            };
-                        }
-                        return acc;
-                    }, {}),
-                };
-                return formAcc;
-            }, {}),
+            formId: {
+                ...state[formId],
+                ...updatedFields,
+            },
         };
     },
 }, 'formsSectionsFieldsUI');

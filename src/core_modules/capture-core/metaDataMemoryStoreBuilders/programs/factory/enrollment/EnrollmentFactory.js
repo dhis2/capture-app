@@ -138,6 +138,7 @@ export class EnrollmentFactory {
                 const element = new DataEntryPluginConfig((o) => {
                     o.id = trackedEntityAttribute.id;
                     o.name = trackedEntityAttribute.name;
+                    o.pluginSource = trackedEntityAttribute.pluginSource;
                     o.fields = new Map();
                 });
 
