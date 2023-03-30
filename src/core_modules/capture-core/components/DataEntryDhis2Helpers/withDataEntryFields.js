@@ -103,7 +103,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
 
             if (getIsHidden && getIsHidden(this.props)) return fields ? [...fields] : [];
 
-            const otherFields = [...fieldIds.map(fieldId => this.getFieldElementFromProps(fieldId))];
+            const otherFields = fieldIds ? [...fieldIds.map(fieldId => this.getFieldElementFromProps(fieldId))] : [];
             return fields ? [...otherFields, ...fields] : [...otherFields];
         }
 
