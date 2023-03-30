@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+// $FlowFixMe - app-runtime has not yet published the Plugin component
 import { Plugin } from '@dhis2/app-runtime';
 import type { ComponentProps } from './DataEntryPlugin.types';
 
