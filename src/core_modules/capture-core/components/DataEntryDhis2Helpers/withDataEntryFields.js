@@ -29,7 +29,7 @@ type Settings = {
     getIsHidden?: ?(props: Object) => boolean,
     getPassOnFieldData?: ?(props: Props) => boolean,
     getOnUpdateField?: ?(props: Object) => (innerAction: ReduxAction<any, any>, data: { value: any }) => void,
-    getConverter?: ?(props: Object) => (value: any) => string
+    getConverter?: ?(props: Object, fieldId: string) => (value: any) => string
 };
 
 
