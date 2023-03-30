@@ -52,6 +52,7 @@ const EnrollmentAddEventPagePain = ({
     onDelete,
     onAddNew,
     onEnrollmentError,
+    onEnrollmentSuccess,
     pageFailure,
     ready,
     classes,
@@ -128,6 +129,7 @@ const EnrollmentAddEventPagePain = ({
                             onDelete={onDelete}
                             onAddNew={onAddNew}
                             onError={onEnrollmentError}
+                            onSuccess={onEnrollmentSuccess}
                         />
                     </div>
                 </div>

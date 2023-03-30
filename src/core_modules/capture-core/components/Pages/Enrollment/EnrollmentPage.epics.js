@@ -9,10 +9,13 @@ import {
     showErrorViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
     successfulFetchingEnrollmentPageInformationFromUrl,
+    updateEnrollmentAccessLevel,
+    saveEnrollments,
     openEnrollmentPage,
     startFetchingTeiFromEnrollmentId,
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
+import { enrollmentAccessLevels, serverErrorMessages } from './EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 
@@ -23,21 +26,70 @@ const teiQuery = id => ({
     resource: 'tracker/trackedEntities',
     id,
     params: {
-        fields: ['attributes', 'enrollments', 'trackedEntityType'],
+        fields: ['attributes', 'trackedEntityType'],
     },
 });
+
+const enrollmentsQuery = (teiId, programId) => ({
+    resource: 'tracker/trackedEntities',
+    id: teiId,
+    params: {
+        program: programId,
+        fields: ['enrollments'],
+    },
+});
+
+const captureScopeQuery = () => ({
+    resource: 'organisationUnits',
+    params: {
+        paging: false,
+        userOnly: true,
+        fields: 'id',
+    },
+});
+
+const ancestorsQuery = orgUnitId => ({
+    resource: 'organisationUnits',
+    id: orgUnitId,
+    params: {
+        fields: 'ancestors',
+    },
+});
+
+const inCaptureScope = (querySingleResource, orgUnitId) =>
+    Promise.all([
+        querySingleResource(captureScopeQuery()),
+        querySingleResource(ancestorsQuery(orgUnitId)),
+    ]).then(([{ organisationUnits }, { ancestors }]) => {
+        ancestors.push({ id: orgUnitId });
+        return ancestors.some(({ id: ancestorId }) => organisationUnits.some(({ id }) => ancestorId === id));
+    }).catch(error => console.log(error));
+
+const autoSelectEnrollment = (
+    programId: string,
+    orgUnitId: string,
+    teiId: string,
+): InputObservable => {
+    if (teiId && programId) {
+        return of(openEnrollmentPage({
+            programId,
+            orgUnitId,
+            teiId,
+            enrollmentId: 'AUTO',
+        }));
+    }
+    return of(startFetchingTeiFromTeiId());
+};
 
 const fetchTeiStream = (teiId, querySingleResource) =>
     from(querySingleResource(teiQuery(teiId)))
         .pipe(
-            map(({ attributes, enrollments, trackedEntityType }) => {
-                const enrollmentsSortedByDate = sortByDate(enrollments);
+            map(({ attributes, trackedEntityType }) => {
                 const teiDisplayName = deriveTeiName(attributes, trackedEntityType, teiId);
 
                 return successfulFetchingEnrollmentPageInformationFromUrl({
                     teiDisplayName,
                     tetId: trackedEntityType,
-                    enrollmentsSortedByDate,
                 });
             }),
             catchError(() => {
@@ -67,26 +119,22 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
         flatMap(() => {
             const { enrollmentId, programId, orgUnitId, teiId } = getLocationQuery();
             if (enrollmentId === 'AUTO') {
-                return of(openEnrollmentPage({
-                    programId,
-                    orgUnitId,
-                    teiId,
-                    enrollmentId,
-                }));
+                return autoSelectEnrollment(programId, orgUnitId, teiId);
             }
             return from(querySingleResource({ resource: 'tracker/enrollments', id: enrollmentId }))
                 .pipe(
-                    map(({ trackedEntity, program, orgUnit }) =>
-                        openEnrollmentPage({
-                            programId: program,
-                            orgUnitId: orgUnit,
-                            teiId: trackedEntity,
-                            enrollmentId,
-                        })),
-                    catchError(() => {
-                        const error = i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId });
-                        return of(showErrorViewOnEnrollmentPage({ error }));
-                    }),
+                    flatMap(({ trackedEntity, program, orgUnit }) =>
+                        from(inCaptureScope(querySingleResource, orgUnit))
+                            .pipe(
+                                map(programOwnerInCaptureScope =>
+                                    openEnrollmentPage({
+                                        programId: program,
+                                        teiId: trackedEntity,
+                                        orgUnitId: programOwnerInCaptureScope ? orgUnit : orgUnitId,
+                                        enrollmentId,
+                                    }),
+                                ))),
+                    catchError(() => of(startFetchingTeiFromTeiId())),
                     startWith(showLoadingViewOnEnrollmentPage()),
                 );
         }),
@@ -102,6 +150,42 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
         }),
     );
 
+export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+    action$.pipe(
+        ofType(enrollmentPageActionTypes.ENROLLMENTS_FETCH, enrollmentPageActionTypes.INFORMATION_SUCCESS_FETCH),
+        flatMap(() => {
+            const { teiId, programId } = getLocationQuery();
+
+            if (!teiId || !programId) {
+                return of(updateEnrollmentAccessLevel({ programId, accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS }));
+            }
+
+            return from(querySingleResource(enrollmentsQuery(teiId, programId)))
+                .pipe(
+                    map(({ enrollments }) => {
+                        const enrollmentsSortedByDate = sortByDate(enrollments
+                            .filter(enrollment => enrollment.program === programId));
+                        return saveEnrollments({ programId, enrollments: enrollmentsSortedByDate });
+                    }),
+                    catchError((error) => {
+                        if (error.message) {
+                            if (error.message.includes(serverErrorMessages.OWNERSHIP_ACCESS_PARTIALLY_DENIED)) {
+                                return of(updateEnrollmentAccessLevel({ programId, accessLevel: enrollmentAccessLevels.LIMITED_ACCESS }));
+                            } else if (error.message.includes(serverErrorMessages.OWNERSHIP_ACCESS_DENIED)) {
+                                return of(updateEnrollmentAccessLevel({ programId, accessLevel: enrollmentAccessLevels.LIMITED_ACCESS })); // Todo: Change to NO_ACCESS
+                            } else if (error.message.includes(serverErrorMessages.PROGRAM_ACCESS_CLOSED)) {
+                                return of(updateEnrollmentAccessLevel({ programId, accessLevel: enrollmentAccessLevels.NO_ACCESS }));
+                            } else if (error.message.includes(serverErrorMessages.ORGUNIT_OUT_OF_SCOPE)) {
+                                return of(updateEnrollmentAccessLevel({ programId, accessLevel: enrollmentAccessLevels.NO_ACCESS }));
+                            }
+                        }
+                        const errorMessage = i18n.t('An error occurred while fetching enrollments. Please enter a valid url.');
+                        return of(showErrorViewOnEnrollmentPage({ error: errorMessage }));
+                    }),
+                );
+        }),
+    );
+
 export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PAGE_OPEN),
@@ -112,11 +196,12 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
                 programId: queryProgramId,
                 teiId: queryTeiId,
             } = getLocationQuery();
-            const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
-            if (!urlCompleted) {
+            if (enrollmentId !== queryEnrollment ||
+                orgUnitId !== queryOrgUnitId ||
+                programId !== queryProgramId ||
+                teiId !== queryTeiId) {
                 history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
-                return fetchTeiStream(teiId, querySingleResource);
             }
             return fetchTeiStream(teiId, querySingleResource);
         },
