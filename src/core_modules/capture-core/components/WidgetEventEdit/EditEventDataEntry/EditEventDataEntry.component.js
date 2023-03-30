@@ -326,13 +326,14 @@ const getCategoryOptionsSettingsFn = () => {
         );
     const categoryOptionsSettings = {
         getComponent: () => categoryOptionsComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
-            options: [],
+        getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
+            ...props.categories?.find(category => category.id === fieldId) ?? {},
             onSetFocus: () => {},
             onRemoveFocus: () => {},
             required: true,
         }),
-        getPropName: () => attributeOptionsKey,
+        getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
+        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
         getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
         getMeta: (props: Object) => ({
             section: AOCsectionKey,

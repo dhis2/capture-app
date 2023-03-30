@@ -1,5 +1,5 @@
 // @flow
-import type { ProgramCategory, CategoryOption } from '../FormFields/New/CategoryOptions/CategoryOptions.types';
+import type { ProgramCategory, CategoryOption } from './CategoryOptions/CategoryOptions.types';
 
 export type ContainerProps = {|
    programId: string,

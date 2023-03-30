@@ -13,7 +13,6 @@ import type { ValidatorContainer } from '../DataEntry/dataEntryField/internal/da
 type Props = {
     id: string,
     fields?: ?Array<React.Element<any>>,
-    rawFields?: ?Array<any>,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     dataEntryFieldRef?: ?(instance: any, key: string) => void,
@@ -22,10 +21,11 @@ type Props = {
 
 type Settings = {
     getComponent: (props: Object) => React.ComponentType<any>,
-    getComponentProps?: ?(props: Object, extraProps?: any) => Object,
-    getPropName: (props: Object) => string,
-    getValidatorContainers?: ?(props: Object) => Array<ValidatorContainer>,
+    getComponentProps?: ?(props: Object, fieldId: string, extraProps?: any) => Object,
+    getPropName: (props: Object, fieldId?: string) => string,
+    getValidatorContainers?: ?(props: Object, fieldId?: string) => Array<ValidatorContainer>,
     getMeta?: ?(props: Props) => Object,
+    getFieldIds?: ?(props: Props) => Array<any>,
     getIsHidden?: ?(props: Object) => boolean,
     getPassOnFieldData?: ?(props: Props) => boolean,
     getOnUpdateField?: ?(props: Object) => (innerAction: ReduxAction<any, any>, data: { value: any }) => void,
@@ -57,14 +57,15 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             }
         };
 
-        getFieldElement(customProps?: Object, customPropsName?: Function, converter?: Function) {
+        getFieldElement(fieldId: string) {
             const { id, completionAttempted, saveAttempted, onUpdateDataEntryField } = this.props;
-            const { getComponent, getComponentProps, getValidatorContainers, getPropName } = settings;
+            const { getComponent, getComponentProps, getValidatorContainers, getPropName, getConverter } = settings;
 
             const Component = getComponent(this.props);
-            const componentProps = this.reselectComponentProps(getComponentProps && getComponentProps(this.props, converter));
-            const validatorContainers = (getValidatorContainers && getValidatorContainers(this.props)) || [];
-            const propName = customPropsName ?? getPropName(this.props);
+            const converter = getConverter && getConverter(this.props, fieldId);
+            const componentProps = this.reselectComponentProps(getComponentProps && getComponentProps(this.props, fieldId, converter));
+            const validatorContainers = (getValidatorContainers && getValidatorContainers(this.props, fieldId)) || [];
+            const propName = getPropName(this.props, fieldId);
             return (
                 <DataEntryField
                     ref={this.handleRef}
@@ -75,17 +76,15 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
                     validatorContainers={validatorContainers}
                     propName={propName}
                     onUpdateField={onUpdateDataEntryField}
-                    componentProps={{ ...componentProps, ...customProps }}
+                    componentProps={{ ...componentProps }}
                 />
             );
         }
 
-        getFieldElementFromProps(field: Object) {
-            const { id: fieldId } = field;
-            const { getPropName, getMeta, getConverter } = settings;
+        getFieldElementFromProps(fieldId: string) {
+            const { getMeta } = settings;
             const meta = getMeta && getMeta(this.props);
-            const converter = getConverter && getConverter(field);
-            const fieldContainer = this.getFieldElement(field, `${getPropName(this.props)}-${fieldId}`, converter);
+            const fieldContainer = this.getFieldElement(fieldId);
             const metaData = meta ? {
                 placement: meta.placement ?? placements.TOP,
                 section: meta.section,
@@ -98,23 +97,18 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
         }
 
         getFields() {
-            const { getIsHidden } = settings;
-            const { fields, rawFields } = this.props;
+            const { getIsHidden, getFieldIds } = settings;
+            const { fields } = this.props;
+            const fieldIds = getFieldIds ? getFieldIds(this.props) : [];
+
             if (getIsHidden && getIsHidden(this.props)) return fields ? [...fields] : [];
 
-            const allFields = [];
-            if (rawFields) {
-                allFields.push(...rawFields.map(field => this.getFieldElementFromProps(field)));
-            }
-            if (fields) {
-                allFields.push(...fields);
-            }
-
-            return allFields;
+            const otherFields = [...fieldIds.map(fieldId => this.getFieldElementFromProps(fieldId))];
+            return fields ? [...otherFields, ...fields] : [...otherFields];
         }
 
         render() {
-            const { fields, rawFields, ...passOnProps } = this.props;
+            const { fields, ...passOnProps } = this.props;
 
             return (
                 <div>

@@ -219,20 +219,26 @@ const buildCompleteFieldSettingsFn = () => {
 const getCategoryOptionsSettingsFn = () => {
     const categoryOptionsSettings = {
         getComponent: () => viewModeComponent,
-        getComponentProps: (props: Object, converter?: (value: string) => void) => createComponentProps(props, {
-            options: [],
+        getComponentProps: (props: Object, fieldId?: string, converter?: (value: string) => void) => createComponentProps(props, {
+            ...props.categories?.find(category => category.id === fieldId) ?? {},
             onSetFocus: () => {},
             onRemoveFocus: () => {},
             valueConverter: value => (converter ? converter(value) : value),
         }),
-        getPropName: () => attributeOptionsKey,
+        getPropName: (props: Object, fieldId?: string) => (
+            fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey
+        ),
+        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
         getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
         getMeta: (props: Object) => ({
             section: AOCsectionKey,
             placement: placements.BOTTOM,
             sectionName: props.programCategory?.displayName,
         }),
-        getConverter: (props: Object) => (value: string) => props.options?.find(option => option.value === value)?.label,
+        getConverter: (props: Object, fieldId?: string) => (value: string) => props.categories
+            ?.find(category => category.id === fieldId)
+            ?.options?.find(option => option.value === value)
+            ?.label,
     };
 
     return categoryOptionsSettings;

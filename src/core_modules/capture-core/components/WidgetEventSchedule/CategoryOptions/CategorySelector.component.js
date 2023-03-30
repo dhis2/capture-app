@@ -3,8 +3,8 @@ import * as React from 'react';
 import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
-import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
-import { OptionsSelectVirtualized } from '../../Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
+import { OptionsSelectVirtualized } from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 
 type SelectOption = {
     label: string,

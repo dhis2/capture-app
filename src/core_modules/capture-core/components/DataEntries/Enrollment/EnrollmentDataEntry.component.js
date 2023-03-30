@@ -39,7 +39,7 @@ import {
     attributeOptionsKey,
     AOCsectionKey,
     withAOCFieldBuilder,
-    withDataEntryFieldsIfApplicable,
+    withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
 
 const overrideMessagePropNames = {
@@ -276,15 +276,15 @@ const getCategoryOptionsSettingsFn = () => {
             ),
         );
     const categoryOptionsSettings = {
-        isApplicable: (props: Object) => props.shouldShowAOC,
         getComponent: () => categoryOptionsComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
-            options: [],
+        getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
+            ...props.categories?.find(category => category.id === fieldId) ?? {},
             onSetFocus: () => {},
             onRemoveFocus: () => {},
             required: true,
         }),
-        getPropName: () => attributeOptionsKey,
+        getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
+        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
         getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
         getMeta: (props: Object) => ({
             section: AOCsectionKey,
@@ -336,7 +336,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 
 
 const AOCFieldBuilderHOC = withAOCFieldBuilder()(
-    withDataEntryFieldsIfApplicable(
+    withDataEntryFields(
         getCategoryOptionsSettingsFn(),
     )(FinalEnrollmentDataEntry));
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);

@@ -9,7 +9,7 @@ import { ScheduleDate } from './ScheduleDate';
 import { ScheduleText } from './ScheduleText';
 import { CommentSection } from '../WidgetComment';
 import type { Props } from './widgetEventSchedule.types';
-import { CategoryOptions } from '../FormFields/New/CategoryOptions/CategoryOptions.component';
+import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 
 
 const styles = () => ({

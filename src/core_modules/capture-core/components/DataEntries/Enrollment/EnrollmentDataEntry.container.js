@@ -6,15 +6,7 @@ import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } 
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
 
-const mapStateToProps = (state: ReduxState, props: Object) => {
-    const { stages } = getProgramThrowIfNotFound(props.programId);
-    /*
-     * Show AOC selection ONLY if there are any program stages in the program with:
-     * “Auto-generate event” and NOT “Open data entry form after enrollment”.
-     */
-    const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
-    return { orgUnitId: state.currentSelections.orgUnitId, shouldShowAOC };
-};
+const mapStateToProps = () => {};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateDataEntryField: (

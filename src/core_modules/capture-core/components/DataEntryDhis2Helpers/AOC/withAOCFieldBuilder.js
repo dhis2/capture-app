@@ -4,6 +4,8 @@ import log from 'loglevel';
 import { makeCancelablePromise, errorCreator } from '../../../../capture-core-utils';
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
 import { useCategoryCombinations } from './useCategoryCombinations';
+import { LoadingMaskElementCenter } from '../../LoadingMasks';
+import { getProgramThrowIfNotFound } from '../../../metaData';
 
 type Props = {
     programId: string,
@@ -13,10 +15,16 @@ type Props = {
 const getAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
     (props: Props) => {
         const { programId, selectedOrgUnitId } = props;
-        const [fields, setFields] = useState(null);
+        const { stages } = getProgramThrowIfNotFound(programId);
+        /*
+        * Show AOC selection ONLY if there are any program stages in the program with:
+        * “Auto-generate event” and NOT “Open data entry form after enrollment”.
+        */
+        const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
+        const [categories, setCategories] = useState(null);
         const cancelablePromiseRef = useRef(null);
-        const { programCategory, isLoading } = useCategoryCombinations(programId);
-        const categories = useMemo(() => (
+        const { programCategory, isLoading } = useCategoryCombinations(programId, !shouldShowAOC);
+        const programCategories = useMemo(() => (
             !isLoading && programCategory ? programCategory.categories : []),
         [isLoading, programCategory]);
 
@@ -49,7 +57,7 @@ const getAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
         };
 
         const loadCagoryOptions = useCallback(() => {
-            setFields(null);
+            setCategories([]);
             cancelablePromiseRef.current && cancelablePromiseRef.current.cancel();
 
             let currentRequestCancelablePromises;
@@ -58,7 +66,7 @@ const getAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
                 (currentRequestCancelablePromises && cancelablePromiseRef.current !== currentRequestCancelablePromises);
 
             currentRequestCancelablePromises = makeCancelablePromise(
-                Promise.all(categories.map(category =>
+                Promise.all(programCategories.map(category =>
                     getOptionsAsync(
                         category,
                         selectedOrgUnitId,
@@ -68,7 +76,7 @@ const getAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
             currentRequestCancelablePromises
                 .promise
                 .then((optionResults) => {
-                    const newFields = optionResults.map(({ options, ...rest }) => {
+                    const newCategories = optionResults.map(({ options, ...rest }) => {
                         options.sort((a, b) => {
                             if (a.label === b.label) {
                                 return 0;
@@ -81,7 +89,7 @@ const getAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
 
                         return { options, ...rest };
                     });
-                    setFields(newFields);
+                    setCategories(newCategories);
                     cancelablePromiseRef.current = null;
                 })
                 .catch((error) => {
@@ -89,28 +97,31 @@ const getAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
                         log.error(
                             errorCreator('An error occured loading category options')({ error }),
                         );
-                        setFields(null);
+                        setCategories([]);
                     }
                 });
 
             cancelablePromiseRef.current = currentRequestCancelablePromises;
-        }, [categories, selectedOrgUnitId]);
+        }, [programCategories, selectedOrgUnitId]);
 
         useEffect(() => {
-            loadCagoryOptions();
-        }, [loadCagoryOptions]);
+            if (shouldShowAOC) {
+                loadCagoryOptions();
+            }
+        }, [loadCagoryOptions, shouldShowAOC]);
 
         useEffect(() => () => {
             cancelablePromiseRef.current && cancelablePromiseRef.current.cancel();
             cancelablePromiseRef.current = null;
         }, []);
 
+        if (!shouldShowAOC) { return <InnerComponent{...props} />; }
         return (
-            <InnerComponent
+            !isLoading && categories ? <InnerComponent
                 {...props}
                 programCategory={programCategory}
-                rawFields={fields}
-            />
+                categories={categories}
+            /> : <LoadingMaskElementCenter />
         );
     };
 

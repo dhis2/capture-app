@@ -97,6 +97,8 @@ export const loadViewEventDataEntry =
                 acc[`${attributeCategoryId}-${categoryOption.categories[0]}`] = categoryOption.id;
                 return acc;
             }, {});
+
+            dataEntryPropsToInclude.push(...Object.keys(attributeCategoryOptions).map(id => ({ id, type: 'TEXT' })));
         }
 
         const extraProps = {
