@@ -1,3 +1,10 @@
+# [100.27.0](https://github.com/dhis2/capture-app/compare/v100.26.2...v100.27.0) (2023-03-30)
+
+
+### Features
+
+* [DHIS2-13804] breaking the glass page ([#3186](https://github.com/dhis2/capture-app/issues/3186)) ([f7ae7c2](https://github.com/dhis2/capture-app/commit/f7ae7c2ba59bce44f05ef515f85e86c7ab14d21e))
+
 ## [100.26.2](https://github.com/dhis2/capture-app/compare/v100.26.1...v100.26.2) (2023-03-24)
 
 
