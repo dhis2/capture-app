@@ -13,6 +13,7 @@ export type OwnProps = $ReadOnly<{|
   fieldOptions?: Object,
   onSave: SaveForDuplicateCheck,
   duplicatesReviewPageSize: number,
+  isSavingInProgress?: boolean,
   renderDuplicatesCardActions?: RenderCustomCardActions,
   renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
   ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,

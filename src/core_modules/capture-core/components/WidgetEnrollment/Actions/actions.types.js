@@ -8,6 +8,7 @@ export type Props = {|
     onDelete: () => void,
     onAddNew: () => void,
     onError?: (message: string) => void,
+    onSuccess?: () => void,
     canAddNew: boolean,
     onlyEnrollOnce: boolean,
     tetName: string,
