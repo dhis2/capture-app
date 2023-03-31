@@ -185,7 +185,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
             const redirectToEnrollmentEventNew =
             shouldUseNewDashboard(userDataStore, dataStore, programId) && stageWithOpenAfterEnrollment !== undefined;
 
-            const { formFoundation, teiId: trackedEntity, firstStage } = action.payload;
+            const { formFoundation, teiId: trackedEntity, firstStage, uid } = action.payload;
             const { attributeValues, currentEventValues } = getCurrentEventValuesFromStage(values, firstStage);
             const formServerValues = formFoundation?.convertValues(attributeValues, convertFn);
 
