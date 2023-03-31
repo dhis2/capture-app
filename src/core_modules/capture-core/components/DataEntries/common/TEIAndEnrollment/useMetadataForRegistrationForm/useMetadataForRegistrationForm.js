@@ -1,13 +1,13 @@
 // @flow
 import { useMemo } from 'react';
 import { useOptionSetsForAttributes } from './hooks/useOptionSetsForAttributes';
-import { scopeTypes } from '../../metaData';
-import { useProgramFromIndexedDB } from '../../utils/cachedDataHooks/useProgramFromIndexedDB';
-import { useScopeInfo } from '../useScopeInfo';
+import { scopeTypes } from '../../../../../metaData';
+import { useProgramFromIndexedDB } from '../../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
+import { useScopeInfo } from '../../../../../hooks/useScopeInfo';
 import { useTrackedEntityTypeCollection } from './hooks/useTrackedEntityTypeCollection';
 import { useEnrollmentFormFoundation } from './hooks/useEnrollmentFormFoundation';
-import { useTrackedEntityTypeFromIndexedDB } from '../../utils/cachedDataHooks/useTrackedEntityTypeFromIndexedDB';
-import { useUserLocale } from '../../utils/localeData/useUserLocale';
+import { useTrackedEntityTypeFromIndexedDB } from '../../../../../utils/cachedDataHooks/useTrackedEntityTypeFromIndexedDB';
+import { useUserLocale } from '../../../../../utils/localeData/useUserLocale';
 import { useTrackedEntityAttributes } from './hooks/useTrackedEntityAttributes';
 
 type Props = {|

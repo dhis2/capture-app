@@ -1,10 +1,10 @@
 // @flow
-import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
+import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { getTrackedEntityAttributes } from '../getFunctions/getTrackedEntityAttributes';
 
 type Props = {
     selectedScopeId: string,
-    attributeIds: ?string[],
+    attributeIds: ?Array<string>,
 };
 
 export const useTrackedEntityAttributes = ({ selectedScopeId, attributeIds }: Props) => {

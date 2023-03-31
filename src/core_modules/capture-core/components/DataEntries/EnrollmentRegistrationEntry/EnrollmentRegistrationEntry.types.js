@@ -10,11 +10,7 @@ import { RenderFoundation } from '../../../metaData';
 
 export type OwnProps = $ReadOnly<{|
     id: string,
-    enrollmentMetadata: RegistrationFormMetadata,
-    formFoundation: ?RenderFoundation,
-    formId: ?string,
     selectedScopeId: string,
-    saveButtonText: string,
     fieldOptions?: Object,
     onSave: SaveForDuplicateCheck,
     duplicatesReviewPageSize: number,
@@ -32,6 +28,10 @@ type ContainerProps = {|
     orgUnit: ?OrgUnit,
     isUserInteractionInProgress: boolean,
     isSavingInProgress: boolean,
+    enrollmentMetadata: RegistrationFormMetadata,
+    formFoundation: ?RenderFoundation,
+    formId: ?string,
+    saveButtonText: string,
 |};
 
 export type Props = $ReadOnly<{|

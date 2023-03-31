@@ -17,7 +17,7 @@ import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor'
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
-import { useMetadataForRegistrationForm } from '../../../hooks/useMetadataForRegistrationForm';
+import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>

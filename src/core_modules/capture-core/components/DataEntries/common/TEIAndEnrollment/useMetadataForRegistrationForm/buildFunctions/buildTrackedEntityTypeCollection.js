@@ -1,12 +1,13 @@
 // @flow
-import { TrackedEntityTypeFactory } from '../../../metaDataMemoryStoreBuilders/trackedEntityTypes/factory';
+import { TrackedEntityTypeFactory } from '../../../../../../metaDataMemoryStoreBuilders/trackedEntityTypes/factory';
 import type {
-    TrackedEntityAttribute,
-} from '../types';
-import type { CachedOptionSet, CachedTrackedEntityType } from '../../../storageControllers/cache.types';
+    CachedOptionSet,
+    CachedTrackedEntityAttribute,
+    CachedTrackedEntityType,
+} from '../../../../../../storageControllers/cache.types';
 
 type Props = {|
-    cachedTrackedEntityAttributes: Map<string, TrackedEntityAttribute>,
+    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
     cachedOptionSets: Map<string, CachedOptionSet>,
     cachedTrackedEntityType: CachedTrackedEntityType,
     locale: string,

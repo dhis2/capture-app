@@ -1,19 +1,20 @@
 // @flow
-import { EnrollmentFactory } from '../../../metaDataMemoryStoreBuilders/programs/factory/enrollment';
+import { EnrollmentFactory } from '../../../../../../metaDataMemoryStoreBuilders/programs/factory/enrollment';
 import type {
-    OptionSet,
-    TrackedEntityAttribute,
-} from '../types';
-import type { CachedProgram, CachedTrackedEntityType } from '../../../storageControllers/cache.types';
-import type { TrackedEntityType } from '../../../metaData';
-import { buildSearchGroup } from '../../../components/Pages/Search/hooks';
+    CachedOptionSet,
+    CachedTrackedEntityAttribute,
+    CachedProgram,
+    CachedTrackedEntityType,
+} from '../../../../../../storageControllers/cache.types';
+import type { TrackedEntityType } from '../../../../../../metaData';
+import { buildSearchGroup } from '../../../../../Pages/Search/hooks';
 
 type Props = {|
-    cachedOptionSets: OptionSet[],
+    cachedOptionSets: Array<CachedOptionSet>,
     cachedTrackedEntityType: CachedTrackedEntityType,
     trackedEntityTypeCollection: TrackedEntityType,
     cachedProgram: CachedProgram,
-    cachedTrackedEntityAttributes: TrackedEntityAttribute[],
+    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
     locale: string,
 |}
 

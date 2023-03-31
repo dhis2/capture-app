@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
@@ -8,17 +9,23 @@ import { useLifecycle } from './hooks';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRulesEngineOrgUnit } from '../../../hooks';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
     id,
-    enrollmentMetadata,
     trackedEntityInstanceAttributes,
     ...passOnProps
 }) => {
     const orgUnitId = useCurrentOrgUnitInfo().id;
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
     const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
+    const {
+        formId,
+        registrationMetaData: enrollmentMetadata,
+        formFoundation,
+    } = useMetadataForRegistrationForm({ selectedScopeId });
+
     const isUserInteractionInProgress: boolean = useSelector(
         state =>
             dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
@@ -26,6 +33,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
           || dataEntryHasChanges(state, 'relationship-newTei')
           || dataEntryHasChanges(state, 'relationship-newEnrollment'),
     );
+    const trackedEntityTypeNameLC = enrollmentMetadata?.trackedEntityType?.name.toLocaleLowerCase();
 
 
     const isSavingInProgress = useSelector(({ possibleDuplicates, newPage }) =>
@@ -39,10 +47,16 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         <EnrollmentRegistrationEntryComponent
             {...passOnProps}
             selectedScopeId={selectedScopeId}
+            formId={formId}
+            formFoundation={formFoundation}
             id={id}
             ready={ready && !!enrollmentMetadata}
             teiId={teiId}
             enrollmentMetadata={enrollmentMetadata}
+            saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', {
+                trackedEntityTypeName: trackedEntityTypeNameLC,
+                interpolation: { escapeValue: false },
+            })}
             skipDuplicateCheck={skipDuplicateCheck}
             orgUnitId={orgUnitId}
             orgUnit={orgUnit}
