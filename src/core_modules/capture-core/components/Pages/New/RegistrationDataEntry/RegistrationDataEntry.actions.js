@@ -41,20 +41,23 @@ export const saveNewTrackedEntityInstance = (candidateForRegistration: any) =>
     );
 
 // with enrollment
-export const startSavingNewTrackedEntityInstanceWithEnrollment = (formFoundation: RenderFoundation, teiId: string, firstStage?: ProgramStage) =>
+export const startSavingNewTrackedEntityInstanceWithEnrollment = (formFoundation: RenderFoundation, teiId: string, uid: string, firstStage?: ProgramStage) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START)({
         formFoundation,
         teiId,
         firstStage,
+        uid,
     });
 
 export const saveNewTrackedEntityInstanceWithEnrollment = ({
     candidateForRegistration,
     redirectToEnrollmentEventNew,
+    uid,
     stageId,
 }: {
     candidateForRegistration: any,
     redirectToEnrollmentEventNew: boolean,
+    uid: string,
     stageId?: string,
 }) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE)(
@@ -68,7 +71,7 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
                 },
                 commit: {
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED,
-                    meta: { redirectToEnrollmentEventNew, stageId },
+                    meta: { redirectToEnrollmentEventNew, stageId, uid },
                 },
                 rollback: {
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED,

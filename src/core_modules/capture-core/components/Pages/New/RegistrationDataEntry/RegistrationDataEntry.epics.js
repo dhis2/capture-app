@@ -233,6 +233,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 },
                 redirectToEnrollmentEventNew,
                 stageId: stageWithOpenAfterEnrollment?.id,
+                uid,
             });
         }),
     );
@@ -248,9 +249,15 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             const { payload: { bundleReport: { typeReportMap } }, meta } = action;
             const {
                 currentSelections: { orgUnitId, programId },
+                newPage,
             } = store.value;
+            const { uid: stateUid } = newPage || {};
             const teiId = typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const enrollmentId = typeReportMap.ENROLLMENT.objectReports[0].uid;
+
+            if (stateUid !== meta.uid) {
+                return EMPTY;
+            }
 
             if (meta?.redirectToEnrollmentEventNew) {
                 history.push(
