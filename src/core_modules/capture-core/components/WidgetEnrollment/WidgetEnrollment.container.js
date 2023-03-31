@@ -11,10 +11,7 @@ import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
 import { useUpdateEnrollment } from './dataMutation/dataMutation';
 
-
-export const WidgetEnrollment = ({
-    teiId, enrollmentId, programId, onDelete, onAddNew, onError,
-}: Props) => {
+export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onAddNew, onError, onSuccess }: Props) => {
     const { error: errorEnrollment, enrollment, refetch: refetchEnrollment } = useEnrollment(enrollmentId);
     const { error: errorProgram, program } = useProgram(programId);
     const {
@@ -24,7 +21,9 @@ export const WidgetEnrollment = ({
         refetch: refetchTEI,
     } = useTrackedEntityInstances(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
-    const canAddNew = enrollments.every(item => item.status !== plainStatus.ACTIVE);
+    const canAddNew = enrollments
+        .filter(item => item.program === programId)
+        .every(item => item.status !== plainStatus.ACTIVE);
     const error = errorEnrollment || errorProgram || errorOwnerOrgUnit || errorOrgUnit;
 
     const { updateMutation } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError);
@@ -53,6 +52,7 @@ export const WidgetEnrollment = ({
             onSetCoordinates={handleSetCoordinates}
             error={error}
             onError={onError}
+            onSuccess={onSuccess}
         />
     );
 };

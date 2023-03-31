@@ -1,3 +1,17 @@
+# [100.27.0](https://github.com/dhis2/capture-app/compare/v100.26.2...v100.27.0) (2023-03-30)
+
+
+### Features
+
+* [DHIS2-13804] breaking the glass page ([#3186](https://github.com/dhis2/capture-app/issues/3186)) ([f7ae7c2](https://github.com/dhis2/capture-app/commit/f7ae7c2ba59bce44f05ef515f85e86c7ab14d21e))
+
+## [100.26.2](https://github.com/dhis2/capture-app/compare/v100.26.1...v100.26.2) (2023-03-24)
+
+
+### Bug Fixes
+
+* [DHIS2-14845] crash on searching in all programs when enrollment not found ([#3199](https://github.com/dhis2/capture-app/issues/3199)) ([e55b2b9](https://github.com/dhis2/capture-app/commit/e55b2b90bc789d6bc9771c8ef5bac9ad06217d6d))
+
 ## [100.26.1](https://github.com/dhis2/capture-app/compare/v100.26.0...v100.26.1) (2023-03-16)
 
 

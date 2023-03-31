@@ -13,7 +13,7 @@ import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.comp
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
+import { deleteEnrollment, fetchEnrollments } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
@@ -78,6 +78,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         dispatch(deleteEnrollment({ enrollmentId }));
     };
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
@@ -132,6 +133,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             orgUnitId={orgUnitId}
             eventDate={eventDate}
             onEnrollmentError={onEnrollmentError}
+            onEnrollmentSuccess={onEnrollmentSuccess}
             eventStatus={event?.status}
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}

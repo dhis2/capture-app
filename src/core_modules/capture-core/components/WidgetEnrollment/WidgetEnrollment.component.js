@@ -59,6 +59,7 @@ export const WidgetEnrollmentPlain = ({
     onAddNew,
     onError,
     onSetCoordinates,
+    onSuccess,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
@@ -160,6 +161,7 @@ export const WidgetEnrollmentPlain = ({
                             onAddNew={onAddNew}
                             canAddNew={canAddNew}
                             onError={onError}
+                            onSuccess={onSuccess}
                         />
                     </div>
                 )}
