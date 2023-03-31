@@ -22,7 +22,7 @@ const FirstStageRegistrationPlain = (props) => {
             {...passOnProps}
             firstStageMetaData={firstStageMetaData}
             dataEntrySections={firstStageDataEntrySectionDefinitions}
-            formFoundation={firstStageMetaData.stageForm}
+            formFoundation={firstStageMetaData.stage?.stageForm}
         />}
     </>);
 };
