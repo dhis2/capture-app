@@ -1,11 +1,11 @@
 // @flow
 import { useMemo } from 'react';
-import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
-import { buildSearchOption } from '../../../../hooks/useSearchOptions';
-import { useTrackedEntityTypeFromIndexedDB } from '../../../../utils/cachedDataHooks/useTrackedEntityTypeFromIndexedDB';
-import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
-import type { AvailableSearchOption, SearchGroups } from '../SearchPage.types';
-import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
+import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgramFromIndexedDB';
+import { buildSearchOption } from '../../../hooks/useSearchOptions';
+import { useTrackedEntityTypeFromIndexedDB } from '../../../utils/cachedDataHooks/useTrackedEntityTypeFromIndexedDB';
+import { useUserLocale } from '../../../utils/localeData/useUserLocale';
+import type { AvailableSearchOption, SearchGroups } from '../SearchBox.types';
+import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 import { buildSearchGroup } from './index';
 
 const searchScopes = {

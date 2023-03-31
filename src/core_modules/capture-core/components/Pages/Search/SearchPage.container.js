@@ -1,19 +1,15 @@
 // @flow
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import React, { useCallback, useMemo, useEffect } from 'react';
 import type { ComponentType } from 'react';
 import { useLocationQuery } from '../../../utils/routing';
-import { SearchPageComponent } from './SearchPage.component';
+import { SearchBox } from '../../SearchBox';
 import {
-    cleanSearchRelatedData,
     navigateToMainPage,
-    navigateToNewUserPage,
-    showInitialViewOnSearchPage,
     openSearchPage,
 } from './SearchPage.actions';
 import {
     useTrackedEntityTypesWithCorrelatedPrograms,
-    useCurrentTrackedEntityTypeId,
 } from '../../../hooks';
 import { TopBar } from './TopBar.container';
 import { ResultsPageSizeContext } from '../shared-contexts';
@@ -35,35 +31,14 @@ const usePreselectedProgram = (currentSelectionsId): ?string => {
     );
 };
 
-
 export const SearchPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const { programId, orgUnitId } = useLocationQuery();
 
-    const dispatchShowInitialSearchPage = useCallback(
-        () => { dispatch(showInitialViewOnSearchPage()); },
-        [dispatch]);
     const dispatchNavigateToMainPage = useCallback(
         () => { dispatch(navigateToMainPage()); },
         [dispatch]);
-    const dispatchCleanSearchRelatedData = useCallback(
-        () => { dispatch(cleanSearchRelatedData()); },
-        [dispatch]);
-    const dispatchNavigateToNewUserPage = useCallback(() => { dispatch(navigateToNewUserPage()); }, [dispatch]);
-
-    const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
     const preselectedProgramId = usePreselectedProgram(programId);
-
-    const searchStatus: string =
-      useSelector(({ searchPage }) => searchPage.searchStatus);
-    const error: boolean =
-      useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
-    const ready: boolean =
-      useSelector(({ activePage }) => !activePage.isLoading);
-
-
-    const { searchableFields, minAttributesRequiredToSearch } =
-        useSelector(({ searchPage }) => searchPage);
 
     useEffect(() => {
         if (programId && (programId !== preselectedProgramId)) {
@@ -80,19 +55,7 @@ export const SearchPage: ComponentType<{||}> = () => {
     return (
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
             <TopBar programId={programId} orgUnitId={orgUnitId} />
-            <SearchPageComponent
-                navigateToMainPage={dispatchNavigateToMainPage}
-                showInitialSearchPage={dispatchShowInitialSearchPage}
-                cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
-                navigateToRegisterUser={dispatchNavigateToNewUserPage}
-                preselectedProgramId={preselectedProgramId}
-                trackedEntityTypeId={trackedEntityTypeId}
-                searchStatus={searchStatus}
-                minAttributesRequiredToSearch={minAttributesRequiredToSearch}
-                searchableFields={searchableFields}
-                error={error}
-                ready={ready}
-            />
+            <SearchBox dispatchNavigateToMainPage={dispatchNavigateToMainPage} />
         </ResultsPageSizeContext.Provider>
     );
 };

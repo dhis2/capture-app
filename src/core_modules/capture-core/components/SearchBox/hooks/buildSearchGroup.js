@@ -1,11 +1,11 @@
 // @flow
-import { getUserStorageController } from '../../../../storageControllers';
-import { userStores } from '../../../../storageControllers/stores';
-import { SearchGroupFactory } from '../../../../metaDataMemoryStoreBuilders/common/factory';
+import { getUserStorageController } from '../../../storageControllers';
+import { userStores } from '../../../storageControllers/stores';
+import { SearchGroupFactory } from '../../../metaDataMemoryStoreBuilders/common/factory';
 import type {
     ProgramTrackedEntityAttribute,
     TrackedEntityAttribute,
-} from '../../../WidgetProfile/DataEntry/FormFoundation/types';
+} from '../../WidgetProfile/DataEntry/FormFoundation/types';
 
 type SearchProgramOrTET = {|
     minAttributesRequiredToSearch: number,

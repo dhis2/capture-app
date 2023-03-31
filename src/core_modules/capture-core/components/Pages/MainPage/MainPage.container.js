@@ -4,12 +4,7 @@ import React, { useEffect, useMemo, useCallback } from 'react';
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import {
-    SearchPageComponent,
-    cleanSearchRelatedData,
-    navigateToNewUserPage,
-    showInitialViewOnSearchPage,
-} from '../Search';
+import { SearchBox } from '../../SearchBox';
 import { MainPageComponent } from './MainPage.component';
 import { withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
@@ -72,22 +67,16 @@ const useMainPageStatus = ({ programId, selectedProgram, categories, orgUnitId, 
 
 const useSelectorMainPage = () =>
     useSelector(
-        ({ currentSelections, searchPage, activePage }) => ({
+        ({ currentSelections, activePage }) => ({
             categories: currentSelections.categories,
             selectedCategories: currentSelections.categoriesMeta,
-            searchStatus: searchPage.searchStatus,
             ready: !activePage.isLoading && !activePage.lockedSelectorLoads,
             error: activePage.selectionsError && activePage.selectionsError.error,
-            searchableFields: searchPage.searchableFields,
-            minAttributesRequiredToSearch: searchPage.minAttributesRequiredToSearch,
         }),
         shallowEqual,
     );
 
-const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, history, dispatch }) => {
-    const dispatchShowInitialSearchPage = useCallback(() => dispatch(showInitialViewOnSearchPage()), [dispatch]);
-    const dispatchCleanSearchRelatedData = useCallback(() => dispatch(cleanSearchRelatedData()), [dispatch]);
-    const dispatchNavigateToNewUserPage = useCallback(() => dispatch(navigateToNewUserPage()), [dispatch]);
+const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, history }) => {
     const onChangeTemplate = useCallback(
         id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, history }),
         [history, orgUnitId, programId, showAllAccessible],
@@ -99,9 +88,6 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, history,
     );
 
     return {
-        dispatchShowInitialSearchPage,
-        dispatchCleanSearchRelatedData,
-        dispatchNavigateToNewUserPage,
         onChangeTemplate,
         onSetShowAccessible,
     };
@@ -116,9 +102,6 @@ const MainPageContainer = () => {
     const {
         categories,
         selectedCategories,
-        searchStatus,
-        searchableFields,
-        minAttributesRequiredToSearch,
         error,
         ready,
     } = useSelectorMainPage();
@@ -130,9 +113,6 @@ const MainPageContainer = () => {
     const MainPageStatus = useMainPageStatus({ programId, selectedProgram, categories, orgUnitId, showAllAccessible });
 
     const {
-        dispatchShowInitialSearchPage,
-        dispatchCleanSearchRelatedData,
-        dispatchNavigateToNewUserPage,
         onChangeTemplate,
         onSetShowAccessible,
     } = useCallbackMainPage({ orgUnitId, programId, showAllAccessible, history, dispatch });
@@ -177,18 +157,7 @@ const MainPageContainer = () => {
                         ready={ready}
                     />
                 ) : (
-                    <SearchPageComponent
-                        showInitialSearchPage={dispatchShowInitialSearchPage}
-                        cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
-                        navigateToRegisterUser={dispatchNavigateToNewUserPage}
-                        preselectedProgramId={programId}
-                        trackedEntityTypeId={trackedEntityTypeId}
-                        searchStatus={searchStatus}
-                        minAttributesRequiredToSearch={minAttributesRequiredToSearch}
-                        searchableFields={searchableFields}
-                        error={error}
-                        ready={ready}
-                    />
+                    <SearchBox />
                 )}
             </>
         </OrgUnitFetcher>

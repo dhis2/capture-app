@@ -3,12 +3,12 @@ import React, { type ComponentType, useContext, useEffect, useMemo, useState } f
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { D2Form } from '../../../D2Form';
-import { searchScopes } from '../SearchPage.constants';
-import { Section, SectionHeaderSimple } from '../../../Section';
+import { D2Form } from '../../D2Form';
+import { searchScopes } from '../SearchBox.constants';
+import { Section, SectionHeaderSimple } from '../../Section';
 import type { Props } from './SearchForm.types';
-import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
-import { ResultsPageSizeContext } from '../../shared-contexts';
+import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
+import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 
 const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
@@ -239,7 +239,7 @@ const SearchFormIndex = ({
                                         ref={(ref) => { containerButtonRef[formId] = ref; }}
                                     >
                                         <Button
-                                            disabled={searchStatus === searchPageStatus.LOADING}
+                                            disabled={searchStatus === searchBoxStatus.LOADING}
                                             onClick={() =>
                                                 selectedSearchScopeId &&
                                             handleSearchViaUniqueId(
@@ -294,7 +294,7 @@ const SearchFormIndex = ({
                                         ref={(ref) => { containerButtonRef[formId] = ref; }}
                                     >
                                         <Button
-                                            disabled={searchStatus === searchPageStatus.LOADING}
+                                            disabled={searchStatus === searchBoxStatus.LOADING}
                                             onClick={() =>
                                                 selectedSearchScopeId &&
                                             handleSearchViaAttributes(

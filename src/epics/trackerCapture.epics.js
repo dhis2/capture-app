@@ -156,10 +156,10 @@ import {
     startFallbackSearchEpic,
     fallbackSearchEpic,
     fallbackPushPageEpic,
-} from '../core_modules/capture-core/components/Pages/Search/SearchForm/SearchForm.epics';
+    navigateToNewUserPageEpic,
+} from '../core_modules/capture-core/components/SearchBox';
 import {
     navigateBackToMainPageEpic,
-    navigateToNewUserPageEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
 import { updateTeiEpic, updateTeiSucceededEpic, updateTeiFailedEpic } from '../core_modules/capture-core/components/WidgetProfile';
 import { initTeiViewEpic, updateTeiListEpic,

@@ -4,11 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
 import { Button, spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { localeCompareStrings } from '../../../../utils/localeCompareStrings';
+import { localeCompareStrings } from '../../../utils/localeCompareStrings';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';
 import type { WorkingListTemplates, WorkingListTemplate } from './workingListsBase.types';
-import { Widget } from '../../../Widget';
-import { BookmarkAddIcon } from '../../../../../capture-ui/Icons';
+import { Widget } from '../../Widget';
+import { BookmarkAddIcon } from '../../../../capture-ui/Icons';
 
 
 const getStyles = (theme: Theme) => ({

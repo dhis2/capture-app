@@ -10,8 +10,8 @@ import {
     searchViaAttributesOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
     searchViaUniqueIdOnScopeTrackedEntityType,
-} from '../SearchPage.actions';
-import { addFormData, removeFormData } from '../../../D2Form/actions/form.actions';
+} from '../SearchBox.actions';
+import { addFormData, removeFormData } from '../../D2Form/actions/form.actions';
 
 const isValueContainingCharacter = (value: any) => {
     if (!value) {
@@ -56,7 +56,7 @@ const collectCurrentSearchTerms = (searchGroupsForSelectedScope, formsValues): C
 const mapStateToProps = (state: ReduxState, { searchGroupsForSelectedScope }: OwnProps): PropsFromRedux => {
     const {
         formsValues,
-        searchPage: {
+        searchDomain: {
             searchStatus,
             keptFallbackSearchFormValues,
         },
