@@ -20,6 +20,7 @@ export type OwnProps = $ReadOnly<{|
     teiId?: ?string,
     skipDuplicateCheck?: ?boolean,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
+    saveButtonText: (trackedEntityName: string) => string,
 |}>;
 
 type ContainerProps = {|

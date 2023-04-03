@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-03-31T17:45:03.814Z\n"
-"PO-Revision-Date: 2023-03-31T17:45:03.814Z\n"
+"POT-Creation-Date: 2023-04-03T08:19:10.930Z\n"
+"PO-Revision-Date: 2023-04-03T08:19:10.930Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -151,9 +151,6 @@ msgstr "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 
 msgid "Cancel"
 msgstr "Cancel"
-
-msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr "Save new {{trackedEntityTypeName}} and link"
 
 msgid "Metadata error. see log for details"
 msgstr "Metadata error. see log for details"
@@ -786,8 +783,14 @@ msgstr "You can also choose a program from the top bar and create in that progra
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "New Enrollment in program{{escape}} {{programName}}"
 
+msgid "Save {{trackedEntityTypeName}}"
+msgstr "Save {{trackedEntityTypeName}}"
+
 msgid "Save {{trackedEntityName}}"
 msgstr "Save {{trackedEntityName}}"
+
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr "Save new {{trackedEntityTypeName}} and link"
 
 msgid "Link"
 msgstr "Link"

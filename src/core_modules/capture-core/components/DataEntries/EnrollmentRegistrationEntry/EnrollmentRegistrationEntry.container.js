@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
@@ -14,6 +13,7 @@ import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMe
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
     id,
+    saveButtonText,
     trackedEntityInstanceAttributes,
     ...passOnProps
 }) => {
@@ -33,7 +33,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
           || dataEntryHasChanges(state, 'relationship-newTei')
           || dataEntryHasChanges(state, 'relationship-newEnrollment'),
     );
-    const trackedEntityTypeNameLC = enrollmentMetadata?.trackedEntityType?.name.toLocaleLowerCase();
+    const trackedEntityTypeNameLC = enrollmentMetadata?.trackedEntityType?.name.toLocaleLowerCase() ?? '';
 
 
     const isSavingInProgress = useSelector(({ possibleDuplicates, newPage }) =>
@@ -50,13 +50,10 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             formId={formId}
             formFoundation={formFoundation}
             id={id}
+            saveButtonText={saveButtonText(trackedEntityTypeNameLC)}
             ready={ready && !!enrollmentMetadata}
             teiId={teiId}
             enrollmentMetadata={enrollmentMetadata}
-            saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', {
-                trackedEntityTypeName: trackedEntityTypeNameLC,
-                interpolation: { escapeValue: false },
-            })}
             skipDuplicateCheck={skipDuplicateCheck}
             orgUnitId={orgUnitId}
             orgUnit={orgUnit}

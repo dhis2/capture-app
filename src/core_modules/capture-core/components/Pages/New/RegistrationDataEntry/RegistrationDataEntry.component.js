@@ -175,6 +175,10 @@ const RegistrationDataEntryPlain = ({
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     onSave={() => onSaveWithEnrollment(formFoundation)}
+                                    saveButtonText={(trackedEntityTypeNameLC: string) => i18n.t('Save {{trackedEntityTypeName}}', {
+                                        trackedEntityTypeName: trackedEntityTypeNameLC,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
