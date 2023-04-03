@@ -43,6 +43,7 @@ const NewPagePlain = ({
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
+
     useEffect(() => {
         setScopeId(currentScopeId);
     }, [scopeType, currentScopeId]);
