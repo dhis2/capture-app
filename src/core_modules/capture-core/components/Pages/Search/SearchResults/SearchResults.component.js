@@ -124,7 +124,7 @@ export const SearchResultsIndex = ({
                         currentSearchScopeId={currentSearchScopeId}
                         currentSearchScopeType={currentSearchScopeType}
                         id={item.id}
-                        orgUnitId={item.tei.orgUnit}
+                        orgUnitId={orgUnitId}
                         enrollmentType={enrollmentType}
                     />
                 )}

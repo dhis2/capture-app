@@ -68,6 +68,7 @@ const EnrollmentEditEventPagePain = ({
     eventStatus,
     pageStatus,
     onEnrollmentError,
+    onEnrollmentSuccess,
     onCancelEditEvent,
     onHandleScheduleSave,
 }: PlainProps) => (
@@ -140,6 +141,7 @@ const EnrollmentEditEventPagePain = ({
                         onDelete={onDelete}
                         onAddNew={onAddNew}
                         onError={onEnrollmentError}
+                        onSuccess={onEnrollmentSuccess}
                     />
                 </div>
             </div>
