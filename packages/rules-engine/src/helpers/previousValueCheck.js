@@ -12,13 +12,13 @@ const processDataElementValue = ({
     if (dataElementId && dataElements && dataElements[dataElementId]) {
         const dataElement = dataElements[dataElementId];
         return {
-            valueName: dataElement.name,
+            name: dataElement.name,
             valueType: dataElement.optionSetId ? typeKeys.TEXT : dataElement.valueType,
         };
     }
 
     return {
-        valueName: '',
+        name: undefined,
         valueType: typeKeys.TEXT,
     };
 };
@@ -33,13 +33,13 @@ const processTEAValue = ({
     if (trackedEntityAttributeId && trackedEntityAttributes && trackedEntityAttributes[trackedEntityAttributeId]) {
         const attribute = trackedEntityAttributes[trackedEntityAttributeId];
         return {
-            valueName: attribute.displayFormName || attribute.displayName,
+            name: attribute.displayFormName || attribute.displayName,
             valueType: attribute.optionSetId ? typeKeys.TEXT : attribute.valueType,
         };
     }
 
     return {
-        valueName: '',
+        name: undefined,
         valueType: typeKeys.TEXT,
     };
 };
@@ -69,15 +69,15 @@ export const getOutputEffectsWithPreviousValueCheck = ({
     outputEffects.reduce((acc, outputEffect) => {
         if (formValues && outputEffect.targetDataType) {
             const rawValue = formValues[outputEffect.id];
-            const { valueType, valueName } = mapByTargetDataTypes[outputEffect.targetDataType]({
+            const { valueType, name } = mapByTargetDataTypes[outputEffect.targetDataType]({
                 dataElementId,
                 trackedEntityAttributeId,
                 dataElements,
                 trackedEntityAttributes,
             });
             const value = onProcessValue(rawValue, valueType);
-            if (value) {
-                return [...acc, { ...outputEffect, hadValue: true, name: valueName }];
+            if (value != null) {
+                return [...acc, { ...outputEffect, hadValue: true, name }];
             }
             return [...acc, outputEffect];
         }

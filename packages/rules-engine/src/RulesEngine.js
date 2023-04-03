@@ -183,12 +183,12 @@ export class RulesEngine {
             .filter(ruleEffects => ruleEffects);
 
         const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
-        const formValues = currentEvent || selectedEntity;
         return processRulesEffects({
             effects,
             dataElements,
             trackedEntityAttributes,
-            formValues,
+            // $FlowFixMe[exponential-spread]
+            formValues: { ...selectedEntity, ...currentEvent },
             onProcessValue: this.valueProcessor.processValue,
         });
     }
