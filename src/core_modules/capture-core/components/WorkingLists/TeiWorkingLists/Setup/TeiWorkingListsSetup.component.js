@@ -1,173 +1,35 @@
 // @flow
-import React, { useCallback, useMemo } from 'react';
-import uuid from 'uuid/v4';
-import i18n from '@dhis2/d2-i18n';
-import {
-    dataElementTypes,
-    type TrackerProgram,
-} from '../../../../metaData';
+import React, { useCallback, useMemo, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 import type { Props } from './teiWorkingListsSetup.types';
 import { WorkingListsBase } from '../../WorkingListsBase';
-import { useDefaultColumnConfig } from './useDefaultColumnConfig';
+import {
+    useDefaultColumnConfig,
+    useStaticTemplates,
+    useFiltersOnly,
+    useFiltersToKeep,
+    useProgramStageFilters,
+    useInjectDataFetchingMetaToLoadList,
+    useInjectDataFetchingMetaToUpdateList,
+} from './hooks';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
-import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
-import { convertToTEIFilterMainFilters, convertToTEIFilterAttributes } from '../helpers/TEIFilters/clientConfigToApiTEIFilterQueryConverter';
-import { MAIN_FILTERS } from '../constants';
+import type { TeiWorkingListsColumnConfigs } from '../types';
+import {
+    convertToTEIFilterMainFilters,
+    convertToTEIFilterAttributes,
+} from '../helpers/TEIFilters/clientConfigToApiTEIFilterQueryConverter';
 
 const DEFAULT_TEMPLATES_LENGTH = 1;
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
     (currentTemplateId && templates.find(template => template.id === currentTemplateId)) || templates[0],
 [templates, currentTemplateId]);
 
-const useStaticTemplates = () => useMemo(() => ([{
-    id: 'default',
-    isDefault: true,
-    name: 'default',
-    access: {
-        update: false,
-        delete: false,
-        write: false,
-        manage: false,
-    },
-}, {
-    id: 'active',
-    name: 'Active enrollments',
-    order: 1,
-    access: {
-        update: false,
-        delete: false,
-        write: false,
-        manage: false,
-    },
-    criteria: {
-        programStatus: 'ACTIVE',
-    },
-}, {
-    id: 'complete',
-    name: 'Completed enrollments',
-    order: 2,
-    access: {
-        update: false,
-        delete: false,
-        write: false,
-        manage: false,
-    },
-    criteria: {
-        programStatus: 'COMPLETED',
-    },
-}, {
-    id: 'cancelled',
-    name: 'Cancelled enrollments',
-    order: 3,
-    access: {
-        update: false,
-        delete: false,
-        write: false,
-        manage: false,
-    },
-    criteria: {
-        programStatus: 'CANCELLED',
-    },
-}]), []);
-
-const useFiltersOnly = ({
-    enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate },
-    stages,
-}: TrackerProgram) =>
-    useMemo(() => {
-        const enableUserAssignment = Array.from(stages.values()).find(stage => stage.enableUserAssignment);
-
-        return [
-            {
-                id: MAIN_FILTERS.PROGRAM_STATUS,
-                type: dataElementTypes.TEXT,
-                header: i18n.t('Enrollment status'),
-                options: [
-                    { text: i18n.t('Active'), value: 'ACTIVE' },
-                    { text: i18n.t('Completed'), value: 'COMPLETED' },
-                    { text: i18n.t('Cancelled'), value: 'CANCELLED' },
-                ],
-                transformRecordsFilter: (rawFilter: string) => ({
-                    programStatus: rawFilter.split(':')[1],
-                }),
-            },
-            {
-                id: MAIN_FILTERS.ENROLLED_AT,
-                type: dataElementTypes.DATE,
-                header: enrollmentDateLabel,
-                transformRecordsFilter: (filter: string) => {
-                    const queryArgs = {};
-                    const filterParts = filter.split(':');
-                    const indexGe = filterParts.indexOf('ge');
-                    const indexLe = filterParts.indexOf('le');
-                    if (indexGe !== -1 && filterParts[indexGe + 1]) {
-                        queryArgs.enrollmentEnrolledAfter = filterParts[indexGe + 1];
-                    }
-                    if (indexLe !== -1 && filterParts[indexLe + 1]) {
-                        queryArgs.enrollmentEnrolledBefore = filterParts[indexLe + 1];
-                    }
-                    return queryArgs;
-                },
-            },
-            ...(showIncidentDate ? [{
-                id: MAIN_FILTERS.OCCURED_AT,
-                type: dataElementTypes.DATE,
-                header: incidentDateLabel,
-                transformRecordsFilter: (filter: string) => {
-                    const queryArgs = {};
-                    const filterParts = filter.split(':');
-                    const indexGe = filterParts.indexOf('ge');
-                    const indexLe = filterParts.indexOf('le');
-                    if (indexGe !== -1 && filterParts[indexGe + 1]) {
-                        queryArgs.enrollmentOccurredAfter = filterParts[indexGe + 1];
-                    }
-                    if (indexLe !== -1 && filterParts[indexLe + 1]) {
-                        queryArgs.enrollmentOccurredBefore = filterParts[indexLe + 1];
-                    }
-                    return queryArgs;
-                },
-            }] : []),
-            ...(enableUserAssignment ? [{
-                id: MAIN_FILTERS.ASSIGNEE,
-                type: dataElementTypes.ASSIGNEE,
-                header: i18n.t('Assigned to'),
-                transformRecordsFilter: (rawFilter: Object) => rawFilter,
-            }] : []),
-        ];
-    }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages]);
-
-const useInjectDataFetchingMetaToLoadList = (defaultColumns, filtersOnly, onLoadView) =>
-    useCallback((selectedTemplate: Object, context: Object) => {
-        const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
-            defaultColumns
-                // $FlowFixMe
-                .map(({ id, type, mainProperty, visible }) => [id, { id, type, mainProperty, visible }]),
-        );
-        const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
-            filtersOnly
-                .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]));
-
-        onLoadView(selectedTemplate, context, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching });
-    }, [defaultColumns, filtersOnly, onLoadView]);
-
-const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, onUpdateList) =>
-    useCallback((queryArgs: Object) => {
-        const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
-            defaultColumns
-                // $FlowFixMe
-                .map(({ id, type, mainProperty }) => [id, { id, type, mainProperty }]),
-        );
-        const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
-            filtersOnly
-                .map(({ id, type, transformRecordsFilter }) => [id, { id, type, transformRecordsFilter }]));
-
-        onUpdateList(queryArgs, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching }, 0);
-    }, [defaultColumns, filtersOnly, onUpdateList]);
-
 export const TeiWorkingListsSetup = ({
     program,
+    programStage,
     onUpdateList,
     onLoadView,
+    onClearFilters,
     customColumnOrder,
     records,
     recordsOrder,
@@ -183,11 +45,19 @@ export const TeiWorkingListsSetup = ({
     onDeleteTemplate,
     ...passOnProps
 }: Props) => {
-    const defaultColumns = useDefaultColumnConfig(program, orgUnitId);
+    const defaultColumns = useDefaultColumnConfig(program, orgUnitId, programStage);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
+    const programStageFiltersOnly = useProgramStageFilters(program, programStage);
+    const filtersObjectToKeep =
+        JSON.stringify(useFiltersToKeep(columns, filters, filtersOnly, programStageFiltersOnly));
+
     const staticTemplates = useStaticTemplates();
     const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
+
+    useEffect(() => {
+        onClearFilters && onClearFilters(JSON.parse(filtersObjectToKeep));
+    }, [onClearFilters, filtersObjectToKeep]);
 
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
@@ -196,6 +66,7 @@ export const TeiWorkingListsSetup = ({
         columns,
         sortById,
         sortByDirection,
+        programStage,
     });
 
     const injectArgumentsForAddTemplate = useCallback(
@@ -255,9 +126,10 @@ export const TeiWorkingListsSetup = ({
             onUpdateTemplate={injectArgumentsForUpdateTemplate}
             onDeleteTemplate={injectArgumentsForDeleteTemplate}
             filtersOnly={filtersOnly}
+            additionalFilters={programStageFiltersOnly}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectDataFetchingMetaToLoadList(defaultColumns, filtersOnly, onLoadView)}
-            onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, onUpdateList)}
+            onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, programStageFiltersOnly, onUpdateList)}
             programId={program.id}
             rowIdKey="id"
             orgUnitId={orgUnitId}

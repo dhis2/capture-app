@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useEffect } from 'react';
 // $FlowFixMe
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -13,16 +13,17 @@ import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.comp
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
+import { deleteEnrollment, fetchEnrollments } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
-import { convertValue } from '../../../converters/clientToView';
+import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
+import { cleanUpDataEntry } from '../../DataEntry';
 
 const getEventDate = (event) => {
-    const eventDataConvertValue = convertValue(event?.occurredAt || event?.scheduledAt, dataElementTypes.DATETIME);
+    const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
     return eventDate;
 };
@@ -64,6 +65,10 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const history = useHistory();
     const dispatch = useDispatch();
 
+    useEffect(() => () => {
+        dispatch(cleanUpDataEntry(dataEntryIds.ENROLLMENT_EVENT));
+    }, [dispatch]);
+
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules.concat(programStage?.programRules));
@@ -73,6 +78,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         dispatch(deleteEnrollment({ enrollmentId }));
     };
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
@@ -127,6 +133,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             orgUnitId={orgUnitId}
             eventDate={eventDate}
             onEnrollmentError={onEnrollmentError}
+            onEnrollmentSuccess={onEnrollmentSuccess}
             eventStatus={event?.status}
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}

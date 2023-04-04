@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SearchResultsComponent } from './SearchResults.component';
 import type { Props, PropsFromRedux, DispatchersFromRedux, OwnProps } from './SearchResults.types';
-import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram, startFallbackSearch } from '../SearchPage.actions';
+import { navigateToNewUserPage, searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram, startFallbackSearch } from '../SearchPage.actions';
 import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
 import { searchScopes, PAGINATION } from '../SearchPage.constants';
 
@@ -47,6 +47,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const dataElements = currentSearchScopeDataElements
         .filter(({ displayInReports }) => displayInReports)
         .map(({ id, name, type }) => ({ id, name, type }));
+    const { orgUnitId } = state.currentSelections;
 
     return {
         currentPage,
@@ -59,6 +60,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         currentFormId,
         currentSearchTerms,
         dataElements,
+        orgUnitId,
     };
 };
 
@@ -90,6 +92,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { availableSearchOptions })
             pageSize: resultsPageSize,
             page,
         }));
+    },
+    handleCreateNew: () => {
+        dispatch(navigateToNewUserPage());
     },
 });
 

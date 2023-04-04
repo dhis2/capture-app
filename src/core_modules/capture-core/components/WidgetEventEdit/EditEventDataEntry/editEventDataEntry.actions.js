@@ -1,6 +1,6 @@
 // @flow
 
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
 
@@ -22,6 +22,7 @@ export const actionTypes = {
     DELETE_EVENT_DATA_ENTRY_SUCCEEDED: 'DeleteEventDataEntrySucceeded',
     EVENT_SCHEDULE_SUCCESS: 'ScheduleEvent.UpdateScheduleEventSuccess',
     EVENT_SCHEDULE_ERROR: 'ScheduleEvent.UpdateScheduleEventError',
+    START_CREATE_NEW_AFTER_COMPLETING: 'WidgetEventEdit.StartCreateNewAfterCompleting',
 };
 
 export const cancelEditEventDataEntry = () =>
@@ -68,3 +69,6 @@ export const startDeleteEventDataEntry = (eventId: string, params: Object) =>
         },
     });
 
+
+export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages }: Object) =>
+    actionCreator(actionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages });

@@ -1,14 +1,14 @@
 # 
 # Translators:
 # phil_dhis2, 2022
-# 晓东 林 <13981924470@126.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
+# 晓东 林 <13981924470@126.com>, 2022
 # easylin <lin_xd@126.com>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
+"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2022\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -321,6 +321,18 @@ msgstr "指标"
 msgid "Warnings"
 msgstr "错误"
 
+msgid "Generate new event"
+msgstr "生成新事件"
+
+msgid "Do you want to create another event?"
+msgstr "你要创建另外的事件？"
+
+msgid "No, cancel"
+msgstr "不，取消"
+
+msgid "Yes, create new event"
+msgstr "是的，创建新活动"
+
 msgid "Warnings found"
 msgstr "发现警告"
 
@@ -501,6 +513,9 @@ msgstr "更新"
 msgid "Reset filter"
 msgstr "重置过滤器"
 
+msgid "Remove filter"
+msgstr "移除过滤器"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} 到 {{toDate}}"
 
@@ -518,6 +533,9 @@ msgstr "小于等于"
 
 msgid "More filters"
 msgstr "更多过滤器"
+
+msgid "Stage filters"
+msgstr "阶段过滤器"
 
 msgid "Rows per page"
 msgstr "行每页"
@@ -554,9 +572,6 @@ msgstr "为 {{programName}} 使用新的注册仪表板"
 
 msgid "Opt in for {{programName}}"
 msgstr "选择加入 {{programName}}"
-
-msgid "No, cancel"
-msgstr "不，取消"
 
 msgid "Yes, opt in"
 msgstr "是的，选择加入"
@@ -746,8 +761,8 @@ msgstr "您也可以从顶部栏中选择一个项目并在该项目中创建"
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}的新报名"
 
-msgid "Save new"
-msgstr "保存新"
+msgid "Save {{trackedEntityName}}"
+msgstr "保存{{trackedEntityName}}"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
@@ -868,12 +883,6 @@ msgstr "重新报名"
 msgid "all programs"
 msgstr "所有项目"
 
-msgid "If none of search results match, you can create new "
-msgstr "如果没有搜索结果匹配，您可以创建新的"
-
-msgid "Create new"
-msgstr "新建"
-
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
@@ -881,6 +890,12 @@ msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
 
 msgid "Search in all programs"
 msgstr "搜索所有项目"
+
+msgid "If none of search results match, you can create a new "
+msgstr "如果没有匹配的搜索结果，您可以创建一个新的"
+
+msgid "Create new"
+msgstr "新建"
 
 msgid "Saved lists in this program"
 msgstr "此项目中保存的列表"
@@ -1111,6 +1126,9 @@ msgstr "是的，删除事件"
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "转到`调度`选项卡以重新安排调度此事件"
 
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr "无法更改 {{ eventStatus }} 事件的预定日期"
+
 msgid "Event completed"
 msgstr "事件完成"
 
@@ -1120,16 +1138,17 @@ msgstr "回到所有阶段和事件"
 msgid "Schedule date info"
 msgstr "预定日期信息"
 
-msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
-msgstr ""
-"此日期是根据定义的时间间隔建议的计划日期，\n"
-"                    如果需要，可以对其进行调整。"
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
+msgstr "自动安排在 {{suggestedScheduleDate}}"
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
-msgstr[0] "此日期是建议日期 {{count}} 天 {{position}}。"
+msgid ""
+"The scheduled date matches the suggested date, but can be changed if needed."
+msgstr "预定日期与建议日期相符，但可以根据需要进行更改。"
+
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
 
 msgid "after"
 msgstr "后"
@@ -1263,6 +1282,9 @@ msgstr "报名状态"
 msgid "Assigned to"
 msgstr "指派到"
 
+msgid "Choose a program stage to filter by {{label}}"
+msgstr "选择要按 {{label}} 筛选的程序阶段"
+
 msgid "Registration Date"
 msgstr "登记日期"
 
@@ -1325,6 +1347,9 @@ msgstr "逾期"
 
 msgid "Skipped"
 msgstr "跳过"
+
+msgid "Visited"
+msgstr "已随访"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}中的{{trackedEntityName}}"

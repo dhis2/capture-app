@@ -108,8 +108,10 @@ export type CachedProgramStage = {
     validationStrategy: string,
     enableUserAssignment?: ?boolean,
     autoGenerateEvent?: ?boolean,
+    allowGenerateNextVisit?: ?boolean,
     openAfterEnrollment?: ?boolean,
     generatedByEnrollmentDate?: ?boolean,
+    hideDueDate?: ?boolean,
     reportDateToUse: string,
     minDaysFromStart: number,
     style?: ?CachedStyle,
@@ -195,6 +197,7 @@ export type CachedProgram = {
     displayFrontPageList: boolean,
     selectIncidentDatesInFuture: boolean,
     displayIncidentDate: boolean,
+    onlyEnrollOnce: boolean,
 };
 
 export type CachedProgramStageDataElementsAsObject = {

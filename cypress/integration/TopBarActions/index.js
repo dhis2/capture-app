@@ -2,7 +2,7 @@ import '../sharedSteps';
 
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);
-    cy.get('[data-test="scope-selector"]').contains('Selected person');
+    cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
 When(/^the user clicks on the edit button/, () =>

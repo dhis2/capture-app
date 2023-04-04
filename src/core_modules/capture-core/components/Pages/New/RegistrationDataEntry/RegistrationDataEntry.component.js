@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { Grid, Paper, withStyles } from '@material-ui/core';
 import type { Props } from './RegistrationDataEntry.types';
-import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
+import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
@@ -15,6 +15,7 @@ import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryW
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useLocationQuery } from '../../../../utils/routing';
+import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
 
 const getStyles = ({ typography }) => ({
     paper: {
@@ -89,7 +90,7 @@ const RegistrationDataEntryPlain = ({
     trackedEntityInstanceAttributes,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
-    const { scopeType, programName } = useScopeInfo(selectedScopeId);
+    const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
 
@@ -168,11 +169,14 @@ const RegistrationDataEntryPlain = ({
                     <div className={classes.registrationContainer}>
                         <Grid container justify="space-between">
                             <Grid item md sm={9} xs={9} >
-                                <EnrollmentRegistrationEntry
+                                <EnrollmentRegistrationEntryWrapper
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     enrollmentMetadata={registrationMetaData}
-                                    saveButtonText={i18n.t('Save new')}
+                                    saveButtonText={i18n.t('Save {{trackedEntityName}}', {
+                                        trackedEntityName,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     onSave={() => onSaveWithEnrollment(formFoundation)}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
@@ -222,7 +226,10 @@ const RegistrationDataEntryPlain = ({
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     teiRegistrationMetadata={registrationMetaData}
-                                    saveButtonText={i18n.t('Save new')}
+                                    saveButtonText={i18n.t('Save {{trackedEntityName}}', {
+                                        trackedEntityName,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     onSave={() => onSaveWithoutEnrollment(formFoundation)}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}

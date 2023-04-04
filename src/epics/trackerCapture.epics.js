@@ -53,6 +53,7 @@ import {
     saveEditedEventFailedEpic,
     saveEditedEventSucceededEpic,
     requestDeleteEventDataEntryEpic,
+    startCreateNewAfterCompletingEpic,
 } from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
 
 import {
@@ -183,6 +184,7 @@ import {
     fetchEnrollmentPageInformationFromUrlEpic,
     startFetchingTeiFromEnrollmentIdEpic,
     startFetchingTeiFromTeiIdEpic,
+    fetchEnrollmentsEpic,
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 import {
@@ -309,6 +311,7 @@ export const epics = combineEpics(
     fetchEnrollmentPageInformationFromUrlEpic,
     startFetchingTeiFromEnrollmentIdEpic,
     startFetchingTeiFromTeiIdEpic,
+    fetchEnrollmentsEpic,
     openEnrollmentPageEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
@@ -330,4 +333,5 @@ export const epics = combineEpics(
     updateTeiFailedEpic,
     navigateToNewUserPageEpic,
     requestDeleteEventDataEntryEpic,
+    startCreateNewAfterCompletingEpic,
 );

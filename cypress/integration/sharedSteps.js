@@ -12,6 +12,8 @@ And('you see the dropdown menu for selecting tracked entity type', () => {
 });
 
 And('you select org unit', () => {
+    cy.get('[data-test="org-unit-selector-container"]')
+        .click();
     cy.get('[data-test="capture-ui-input"]')
         .type('Ngelehun C');
     cy.contains('Ngelehun CHC')
@@ -53,7 +55,9 @@ And('you navigate to find a person relationship', () => {
 });
 
 And('you select Child Programme', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Child Program');
     cy.contains('Child Programme')
         .click();
@@ -61,7 +65,7 @@ And('you select Child Programme', () => {
 
 When('you have no program selection', () => {
     cy.get('[data-test="program-selector-container"]')
-        .contains('Select program');
+        .contains('Choose a program');
 });
 
 When('you click the next page button', () => {
@@ -111,15 +115,14 @@ And('you click search', () => {
 });
 
 And('you reset the program selection', () => {
-    cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 2);
-    cy.get('[data-test="reset-selection-button"]')
-        .eq(0)
+    cy.get('[data-test="program-selector-container-clear-icon"]')
         .click();
 });
 
 And('you select the MNCH PNC program', () => {
-    cy.get('.Select').eq(0)
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('MNCH');
     cy.contains('PNC (Adult Woman)')
         .click();
@@ -151,13 +154,17 @@ Then('you should see no results found', () => {
 });
 
 When(/^the user selects the program (.*)$/, (program) => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type(program.slice(0, -1));
     cy.contains(program)
         .click();
 });
 
 When(/^the user selects the org unit (.*)$/, (orgUnit) => {
+    cy.get('[data-test="org-unit-selector-container"]')
+        .click();
     cy.get('[data-test="capture-ui-input"]')
         .type(orgUnit.slice(0, -1));
     cy.contains(orgUnit)
@@ -165,9 +172,13 @@ When(/^the user selects the org unit (.*)$/, (orgUnit) => {
 });
 
 When(/^you opt in to use the new enrollment Dashboard for (.*)$/, (program) => {
-    cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`).click();
-    cy.contains('[data-test="dhis2-uicore-button"]', 'Yes, opt in').click();
-    cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`);
+    cy.get('[data-test="main-page-working-list"]').then(($wrapper) => {
+        if ($wrapper.find('[data-test="opt-in"]').length > 0) {
+            cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`).click();
+            cy.contains('[data-test="dhis2-uicore-button"]', 'Yes, opt in').click();
+            cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`);
+        }
+    });
 });
 
 Then(/^you see the opt out component for (.*)$/, (program) => {

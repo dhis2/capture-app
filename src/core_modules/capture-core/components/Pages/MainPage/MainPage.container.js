@@ -10,9 +10,8 @@ import {
     navigateToNewUserPage,
     showInitialViewOnSearchPage,
 } from '../Search';
-import { useSearchOptions } from '../../../hooks';
 import { MainPageComponent } from './MainPage.component';
-import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
+import { withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
@@ -128,7 +127,6 @@ const MainPageContainer = () => {
     // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
-    const availableSearchOptions = useSearchOptions();
     const MainPageStatus = useMainPageStatus({ programId, selectedProgram, categories, orgUnitId, showAllAccessible });
 
     const {
@@ -163,9 +161,8 @@ const MainPageContainer = () => {
         history,
     ]);
 
-
     return (
-        <OrgUnitFetcher orgUnitId={orgUnitId}>
+        <OrgUnitFetcher orgUnitId={orgUnitId} error={error}>
             <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
             <>
                 {showMainPage({ programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId }) ? (
@@ -184,7 +181,6 @@ const MainPageContainer = () => {
                         showInitialSearchPage={dispatchShowInitialSearchPage}
                         cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
                         navigateToRegisterUser={dispatchNavigateToNewUserPage}
-                        availableSearchOptions={availableSearchOptions}
                         preselectedProgramId={programId}
                         trackedEntityTypeId={trackedEntityTypeId}
                         searchStatus={searchStatus}
@@ -200,4 +196,4 @@ const MainPageContainer = () => {
 };
 
 // $FlowFixMe[missing-annot] automated comment
-export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(MainPageContainer)));
+export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(MainPageContainer));

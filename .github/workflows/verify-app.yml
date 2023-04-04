@@ -125,14 +125,8 @@ jobs:
         with:
           node-version: 14.x
 
-      - uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
       - name: Cypress run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           record: true
           parallel: true
@@ -200,14 +194,15 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
-      - uses: dhis2/action-semantic-release@master
+      - uses: dhis2/action-semantic-release@ignore-app-hub-lib
         with:
           publish-apphub: true
           publish-github: true
           github-token: ${{ env.GH_TOKEN }}
           apphub-token: ${{ secrets.DHIS2_BOT_APPHUB_TOKEN }}
 
-      - uses: dhis2/deploy-build@master
+      - uses: dhis2/deploy-build@specify-packages
         with:
           build-dir: build/app
           github-token: ${{ env.GH_TOKEN }}
+          packages: capture-app

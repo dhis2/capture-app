@@ -24,9 +24,18 @@ export type FilterOnly = {
     header: string,
     options?: ?Options,
     multiValueFilter?: boolean,
+    tooltipContent?: string,
+    disabled?: boolean,
+    transformRecordsFilter: (rawFilter: any) => Object,
+};
+
+export type AdditionalFilter = {
+    ...FilterOnly,
+    mainButton?: boolean
 };
 
 export type FiltersOnly = Array<FilterOnly>;
+export type AdditionalFilters = Array<AdditionalFilter>;
 export type DataSourceItem = {| [id: string]: string |};
 
 export type DataSource = Array<DataSourceItem>;
@@ -70,13 +79,17 @@ export type ChangePage = (pageNumber: number) => void;
 export type ChangeRowsPerPage = (rowsPerPage: number) => void;
 export type UpdateFilter = (data: ?Object, id: string) => void;
 export type ClearFilter = (id: string) => void;
+export type ClearFilters = (filterIds: Object) => void;
+export type RemoveFilter = (id: string, includeFilters: Object) => void;
 export type SelectRestMenuItem = (id: string) => void;
 export type SetColumnOrder = (columns: Columns) => void;
+export type ResetColumnOrder = () => void;
 export type SelectRow = (rowData: DataSourceItem) => void;
 export type Sort = (id: string, direction: string) => void;
 export type InterfaceProps = $ReadOnly<{|
     columns?: Columns,
     filtersOnly?: FiltersOnly,
+    additionalFilters?: AdditionalFilters,
     currentPage: number,
     customMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
@@ -85,6 +98,7 @@ export type InterfaceProps = $ReadOnly<{|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectRow: SelectRow,
     onSetColumnOrder: SetColumnOrder,

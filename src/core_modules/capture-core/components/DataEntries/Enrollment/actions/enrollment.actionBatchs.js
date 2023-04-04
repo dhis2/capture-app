@@ -1,11 +1,11 @@
 // @flow
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { batchActions } from 'redux-batched-actions';
 import type {
     Enrollment,
     TEIValues,
     OrgUnit,
-} from 'capture-core-utils/rulesEngine';
+} from '@dhis2/rules-engine-javascript';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import type { TrackerProgram, RenderFoundation } from '../../../../metaData';

@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { map } from 'rxjs/operators';
 import { newEventWidgetActionTypes, saveEvent } from './validated.actions';
 

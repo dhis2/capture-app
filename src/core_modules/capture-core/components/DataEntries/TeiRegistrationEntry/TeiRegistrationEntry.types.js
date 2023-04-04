@@ -13,6 +13,7 @@ export type OwnProps = $ReadOnly<{|
   fieldOptions?: Object,
   onSave: SaveForDuplicateCheck,
   duplicatesReviewPageSize: number,
+  isSavingInProgress?: boolean,
   renderDuplicatesCardActions?: RenderCustomCardActions,
   renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
   ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
@@ -21,6 +22,7 @@ export type OwnProps = $ReadOnly<{|
 type ContainerProps = {|
     ready: boolean,
     trackedEntityName: string,
+    isUserInteractionInProgress: boolean
 |};
 
 export type Props = $ReadOnly<{|

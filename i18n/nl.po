@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-08-17T08:14:13.865Z\n"
+"POT-Creation-Date: 2022-11-14T12:39:36.890Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Rica Zamora Duchateau, 2022\n"
 "Language-Team: Dutch (https://www.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -42,6 +42,9 @@ msgid "Organisation unit"
 msgstr "Organisatieëenheid"
 
 msgid "Date of enrollment"
+msgstr ""
+
+msgid "Program name"
 msgstr ""
 
 msgid "Last updated"
@@ -89,7 +92,7 @@ msgstr ""
 msgid "Please provide a valid time"
 msgstr ""
 
-msgid "Please provide a valid percentage"
+msgid "Please provide an integer between 0 and 100"
 msgstr ""
 
 msgid "Please provide a valid url"
@@ -495,6 +498,9 @@ msgstr "Bijwerken"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr "Verwijder filter"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
@@ -511,6 +517,9 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "More filters"
+msgstr ""
+
+msgid "Stage filters"
 msgstr ""
 
 msgid "Rows per page"
@@ -537,7 +546,7 @@ msgstr ""
 msgid "Add comment"
 msgstr ""
 
-msgid "You dont have access to write comments"
+msgid "You don't have access to write comments"
 msgstr ""
 
 msgid "Write comment"
@@ -739,7 +748,7 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
-msgid "Save new"
+msgid "Save {{trackedEntityName}}"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -811,19 +820,6 @@ msgstr ""
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
-msgid "Back"
-msgstr ""
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr ""
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-
 msgid "No results found"
 msgstr "Geen resultaten gevonden"
 
@@ -841,20 +837,23 @@ msgstr ""
 msgid "An error has occurred"
 msgstr ""
 
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-
 msgid "Too many results"
 msgstr ""
 
-msgid ""
-"This search returned too many results to show. Try changing search terms or "
-"searching by more attributes to narrow down the results."
+msgid "Cannot search in all programs"
 msgstr ""
 
-msgid "Cannot search in all programs"
+msgid "Back"
+msgstr ""
+
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "Choose a type to start searching"
@@ -883,13 +882,19 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Create custom working list"
+msgstr ""
+
 msgid "events"
 msgstr ""
 
 msgid "event"
 msgstr "gebeurtenis"
 
-msgid "You dont have access to edit this event"
+msgid "You don't have access to edit this event"
 msgstr ""
 
 msgid "Edit event"
@@ -933,10 +938,10 @@ msgstr ""
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You dont have access to delete this relationship"
+msgid "You don't have access to delete this relationship"
 msgstr ""
 
-msgid "You dont have access to create any relationships"
+msgid "You don't have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
@@ -1005,10 +1010,10 @@ msgstr ""
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Add new"
+msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
-msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgid "Add new"
 msgstr ""
 
 msgid "Reactivate"
@@ -1043,6 +1048,9 @@ msgstr ""
 msgid "Incident date"
 msgstr ""
 
+msgid "Last updated {{date}}"
+msgstr ""
+
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -1053,9 +1061,6 @@ msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
-msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1103,25 +1108,25 @@ msgstr ""
 msgid "Yes, delete event"
 msgstr ""
 
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
 msgstr ""
 
-msgid "You don't have access to edit this event"
-msgstr ""
-
 msgid "Schedule date info"
 msgstr ""
 
 msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+"The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1256,6 +1261,9 @@ msgid "Enrollment status"
 msgstr ""
 
 msgid "Assigned to"
+msgstr ""
+
+msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
 msgid "Registration Date"

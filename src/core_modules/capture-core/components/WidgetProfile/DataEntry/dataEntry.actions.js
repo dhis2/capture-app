@@ -1,5 +1,5 @@
 // @flow
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { batchActions } from 'redux-batched-actions';
 import type {
     OrgUnit,
@@ -9,7 +9,7 @@ import type {
     EventsData,
     DataElements,
     Enrollment,
-} from 'capture-core-utils/rulesEngine';
+} from '@dhis2/rules-engine-javascript';
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';

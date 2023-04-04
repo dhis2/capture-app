@@ -2,7 +2,7 @@
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 import { typeof searchScopes } from '../SearchPage.constants';
 import { typeof dataElementTypes } from '../../../../metaData';
-import type { AvailableSearchOptions } from '../SearchPage.types';
+import type { AvailableSearchOption } from '../SearchPage.types';
 import type { ListItem } from '../../../CardList/CardList.types';
 
 
@@ -21,17 +21,19 @@ export type PropsFromRedux ={|
   +dataElements: CardDataElementsInformation,
   +otherResults: Array<ListItem>,
   +otherCurrentPage: number,
+  +orgUnitId: string
 |}
 
 export type OwnProps ={|
     fallbackTriggered: boolean,
-    availableSearchOptions: AvailableSearchOptions,
+    availableSearchOption: ?AvailableSearchOption,
 |}
 
 export type DispatchersFromRedux = {|
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string, page: string, resultsPageSize: number |}) => void,
   startFallbackSearch: ({| programId: string, formId: string, resultsPageSize: number, page?: ?number |}) => void,
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page: string, resultsPageSize: number |}) => void,
+  handleCreateNew: () => void
 |}
 
 export type Props = {|

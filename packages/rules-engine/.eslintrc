@@ -1,0 +1,65 @@
+{
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "ecmaVersion": 2017,
+        "sourceType": "module",
+        "babelOptions": {
+            "presets": ["@babel/preset-flow"]
+        }
+    },
+    "extends": ["airbnb", "plugin:flowtype/recommended"],
+    "plugins": ["flowtype"],
+    "rules": {
+        "indent": [2, 4],
+        "max-len": [
+            1,
+            120,
+            4,
+            {
+                "ignoreComments": true,
+                "ignoreUrls": true,
+                "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("
+            }
+        ],
+        "complexity": [1, 8],
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+        "comma-dangle": [
+            "error",
+            {
+                "arrays": "always-multiline",
+                "objects": "always-multiline",
+                "imports": "always-multiline",
+                "exports": "always-multiline",
+                "functions": "always-multiline"
+            }
+        ],
+        "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
+        "no-return-assign": ["error", "except-parens"],
+        "no-param-reassign": 0,
+        "import/prefer-default-export": 0,
+        "no-unused-expressions": 0,
+        "no-unused-vars": [
+            "error",
+            {
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": true
+            }
+        ],
+        "import/no-extraneous-dependencies": ["error"],
+        "camelcase": [
+            "error",
+            {
+                "properties": "never"
+            }
+        ],
+        "import/extensions": ["error", "never"],
+        "eqeqeq": "off",
+        "no-restricted-syntax": "off"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": { "extensions": [".js", ".mjs"] }
+        }
+    }
+}

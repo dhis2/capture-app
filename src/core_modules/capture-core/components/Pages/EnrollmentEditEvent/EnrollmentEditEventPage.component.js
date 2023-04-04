@@ -67,6 +67,7 @@ const EnrollmentEditEventPagePain = ({
     eventStatus,
     pageStatus,
     onEnrollmentError,
+    onEnrollmentSuccess,
     onCancelEditEvent,
     onHandleScheduleSave,
 }: PlainProps) => (
@@ -98,6 +99,7 @@ const EnrollmentEditEventPagePain = ({
                             onGoBack={onGoBack}
                             programId={programId}
                             orgUnitId={orgUnitId}
+                            teiId={teiId}
                             enrollmentId={enrollmentId}
                             eventStatus={eventStatus}
                             initialScheduleDate={scheduleDate}
@@ -138,6 +140,7 @@ const EnrollmentEditEventPagePain = ({
                         onDelete={onDelete}
                         onAddNew={onAddNew}
                         onError={onEnrollmentError}
+                        onSuccess={onEnrollmentSuccess}
                     />
                 </div>
             </div>

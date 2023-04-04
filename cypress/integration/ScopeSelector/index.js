@@ -1,13 +1,14 @@
+import { getCurrentYear } from '../../support/date';
 import '../sharedSteps';
 
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);
-    cy.get('[data-test="scope-selector"]').contains('Selected person');
+    cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
 Given(/^you land on a enrollment page domain in Malaria focus investigation by having typed (.*)$/, (url) => {
     cy.visit(url);
-    cy.get('[data-test="scope-selector"]').contains('Selected focus area');
+    cy.get('[data-test="focus area-selector-container"]').contains('Focus area');
 });
 
 When('you click the "New" button to add a new event', () => {
@@ -29,6 +30,7 @@ Then('you should see informative text saying you should do finish your selection
 
 Given('you are in the main page with organisation unit preselected', () => {
     cy.visit('/#/?orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="org-unit-selector-container"]').contains('Ngelehun CHC');
     cy.get('[data-test="new-event-button"]')
         .should('exist');
 });
@@ -39,18 +41,23 @@ Then('you should be taken to the new page', () => {
 
 Given('you are in the main page with program preselected', () => {
     cy.visit('/#/?programId=VBqh0ynB2wv');
+    cy.get('[data-test="program-selector-container"]').contains('Malaria case registration');
     cy.get('[data-test="new-button"]')
         .should('exist');
 });
 
 Given('you select both org unit and program Malaria case registration', () => {
+    cy.get('[data-test="org-unit-selector-container"]')
+        .click();
     cy.get('[data-test="capture-ui-input"]')
         .type('Ngelehun C');
     cy.contains('Ngelehun CHC')
         .click();
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
 
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Malaria case re');
     cy.contains('Malaria case registration')
         .click();
@@ -58,13 +65,17 @@ Given('you select both org unit and program Malaria case registration', () => {
 });
 
 Given('you select both org unit and program Child Programme', () => {
+    cy.get('[data-test="org-unit-selector-container"]')
+        .click();
     cy.get('[data-test="capture-ui-input"]')
         .type('Ngelehun C');
     cy.contains('Ngelehun CHC')
         .click();
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
 
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Child Program');
     cy.contains('Child Programme')
         .click();
@@ -72,7 +83,7 @@ Given('you select both org unit and program Child Programme', () => {
 });
 
 When('you click the "Start again" button', () => {
-    cy.get('[data-test="start-again-button"]')
+    cy.contains('Clear selections')
         .click();
 });
 
@@ -89,8 +100,8 @@ Then('you should see the table', () => {
 });
 
 Then('you can see the new event page', () => {
-    cy.get('[data-test="start-again-button"]')
-        .should('exist');
+    cy.contains('Clear selections')
+        .click();
 });
 
 When('you select the first entity from the table', () => {
@@ -162,7 +173,9 @@ Given('you land on a main event page with preselected org unit', () => {
 });
 
 When('you select program', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Malaria case re');
     cy.contains('Malaria case registration')
         .click();
@@ -177,15 +190,13 @@ Then('main page page url is valid', () => {
 });
 
 When('you remove the program selection', () => {
-    cy.get('[data-test="scope-selector"]').within(() => {
-        cy.get('[data-test="reset-selection-button"]').eq(0).click();
-    });
+    cy.get('[data-test="program-selector-container-clear-icon"]')
+        .click();
 });
 
 When('you remove the org unit selection', () => {
-    cy.get('[data-test="scope-selector"]').within(() => {
-        cy.get('[data-test="reset-selection-button"]').eq(1).click();
-    });
+    cy.get('[data-test="org-unit-selector-container-clear-icon"]')
+        .click();
 });
 
 Then('you should be taken to the main page with only org unit selected', () => {
@@ -232,22 +243,21 @@ And('there should be Child Programme domain forms visible to search with', () =>
         .should('have.length', 1);
 });
 
-const selectedChildProgram = ['Selected program', 'Child Programme'];
-const selectedMalariaProgram = ['Selected program', 'Malaria case diagnosis'];
-const selectedEventProgram = ['Selected program', 'Antenatal care visit'];
-const emptyProgramSelection = ['Program', 'Select program'];
-const selectedOrgUnit = ['Selected registering unit', 'Taninahun (Malen) CHP'];
-const emptyOrgUnitSelection = ['Registering Organisation Unit'];
-const selectedTei = ['Selected person', 'Carlos Cruz'];
-const selectedEnrollment = ['Selected enrollment', '2023-07-01 12:05'];
-const emptyEnrollmentSelection = ['Enrollment', 'Select...'];
+const selectedChildProgram = ['Program', 'Child Programme'];
+const selectedMalariaProgram = ['Program', 'Malaria case diagnosis'];
+const selectedEventProgram = ['Program', 'Antenatal care visit'];
+const emptyProgramSelection = ['Program', 'Choose a program'];
+const selectedOrgUnit = ['Registering unit', 'Taninahun (Malen) CHP'];
+const emptyOrgUnitSelection = ['Choose a registering unit'];
+const selectedTei = ['Person', 'Carlos Cruz'];
+const selectedEnrollment = ['Enrollment', `${getCurrentYear() + 1}-07-01 12:05`];
 
 const scopeSelectorCases = {
     all: [...selectedChildProgram, ...selectedOrgUnit, ...selectedTei, ...selectedEnrollment],
-    teiAndOrgUnit: [...emptyProgramSelection, ...selectedOrgUnit, ...selectedTei, ...emptyEnrollmentSelection],
-    teiAndChildProgram: [...selectedChildProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
-    teiAndMalariaProgram: [...selectedMalariaProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
-    teiAndEventProgram: [...selectedEventProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
+    teiAndOrgUnit: [...emptyProgramSelection, ...selectedOrgUnit, ...selectedTei],
+    teiAndChildProgram: [...selectedChildProgram, ...emptyOrgUnitSelection, ...selectedTei],
+    teiAndMalariaProgram: [...selectedMalariaProgram, ...emptyOrgUnitSelection, ...selectedTei],
+    teiAndEventProgram: [...selectedEventProgram, ...emptyOrgUnitSelection, ...selectedTei],
     error: [],
 };
 
@@ -270,10 +280,7 @@ And('you land on the enrollment page by having typed only the enrollmentId on th
 });
 
 And('you reset the tei selection', () => {
-    cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 2);
-    cy.get('[data-test="reset-selection-button"]')
-        .eq(2)
+    cy.get('[data-test="person-selector-container-clear-icon"]')
         .click();
 });
 
@@ -287,11 +294,7 @@ And('you see message explaining you need to select a program', () => {
 });
 
 And('you reset the org unit selection', () => {
-    cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 2);
-
-    cy.get('[data-test="reset-selection-button"]')
-        .eq(1)
+    cy.get('[data-test="org-unit-selector-container-clear-icon"]')
         .click();
 });
 
@@ -317,26 +320,17 @@ And('you see the enrollment page', () => {
 });
 
 And('you reset the enrollment selection', () => {
-    cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 3);
-    cy.get('[data-test="reset-selection-button"]')
-        .eq(3)
+    cy.get('[data-test="enrollment-selector-container-clear-icon"]')
         .click();
 });
 
 And('you reset the stage selection', () => {
-    cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 4);
-    cy.get('[data-test="reset-selection-button"]')
-        .eq(4)
+    cy.get('[data-test="stage-selector-container-clear-icon"]')
         .click();
 });
 
 And('you reset the event selection', () => {
-    cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 5);
-    cy.get('[data-test="reset-selection-button"]')
-        .eq(5)
+    cy.get('[data-test="report date-selector-container-clear-icon"]')
         .click();
 });
 
@@ -347,7 +341,9 @@ And('you see message explaining you need to select an enrollment', () => {
 });
 
 And('you select the Child Programme', () => {
-    cy.get('.Select').eq(0)
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Child Program');
     cy.contains('Child Programme')
         .click();
@@ -361,7 +357,9 @@ And('you see message explaining there are no enrollments for this program', () =
 });
 
 And('you select the Antenatal care visit', () => {
-    cy.get('.Select').eq(0)
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Antenatal care');
     cy.contains('Antenatal care visit')
         .click();
@@ -373,6 +371,8 @@ And('you see message explaining this is an Event program', () => {
 });
 
 When('you select org unit that is incompatible with the already selected program', () => {
+    cy.get('[data-test="org-unit-selector-container"]')
+        .click();
     cy.get('[data-test="capture-ui-input"]')
         .type('Biriw');
     cy.contains('Biriwa')
@@ -380,9 +380,13 @@ When('you select org unit that is incompatible with the already selected program
 });
 
 Then('you can see message on the scope selector', () => {
-    cy.get('[data-test="scope-selector"]')
-        .contains('No programs available.');
-    cy.get('[data-test="scope-selector"]')
+    cy.get('[data-test="error-message-handler"]')
+        .contains('Selected program is invalid for selected registering unit');
+    cy.get('[data-test="program-selector-container-clear-icon"]')
+        .click();
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-selector-no-programs"]')
         .contains('Show all');
 });
 

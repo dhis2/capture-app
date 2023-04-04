@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useCallback, type ComponentType } from 'react';
-import moment from 'moment-timezone';
+import moment from 'moment';
 import {
     IconClock16,
     IconDimensionOrgUnit16,
@@ -11,6 +11,7 @@ import {
     spacersNum,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withStyles } from '@material-ui/core';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
@@ -22,18 +23,20 @@ import { dataElementTypes } from '../../metaData';
 import { Actions } from './Actions';
 
 const styles = {
-    icon: {
-        margin: `0 ${spacersNum.dp4}px`,
-    },
     enrollment: {
         padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
     },
     row: {
         display: 'flex',
-        margin: `${spacersNum.dp4}px 0`,
+        alignItems: 'center',
+        margin: `${spacersNum.dp8}px 0`,
+        fontSize: '14px',
+        color: colors.grey900,
+        gap: `${spacersNum.dp4}px`,
     },
-    followup: {
-        margin: spacersNum.dp4,
+    statuses: {
+        display: 'flex',
+        gap: `${spacersNum.dp4}px`,
     },
 };
 
@@ -41,12 +44,6 @@ const getGeometryType = geometryType =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
 const getEnrollmentDateLabel = program => program.enrollmentDateLabel || i18n.t('Enrollment date');
 const getIncidentDateLabel = program => program.incidentDateLabel || i18n.t('Incident date');
-const getLastUpdatedAt = (serverTimeZoneId, enrollment) => (
-    i18n.t('Last updated {{date}}', {
-        date: serverTimeZoneId
-            ? moment.tz(enrollment.updatedAt, serverTimeZoneId).fromNow()
-            : moment(enrollment.updatedAt).fromNow(),
-    }));
 
 export const WidgetEnrollmentPlain = ({
     classes,
@@ -61,9 +58,10 @@ export const WidgetEnrollmentPlain = ({
     onDelete,
     onAddNew,
     onError,
-    serverTimeZoneId,
+    onSuccess,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
+    const { fromServerDate } = useTimeZoneConversion();
     const geometryType = getGeometryType(enrollment?.geometry?.type);
 
     return (
@@ -82,7 +80,7 @@ export const WidgetEnrollmentPlain = ({
                 {loading && <LoadingMaskElementCenter />}
                 {!error && !loading && (
                     <div className={classes.enrollment}>
-                        <div data-test="widget-enrollment-status">
+                        <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag className={classes.followup} negative>
                                     {i18n.t('Follow-up')}
@@ -93,7 +91,7 @@ export const WidgetEnrollmentPlain = ({
 
                         <div className={classes.row} data-test="widget-enrollment-enrollment-date">
                             <span className={classes.icon} data-test="widget-enrollment-icon-calendar">
-                                <IconCalendar16 color={colors.grey700} />
+                                <IconCalendar16 color={colors.grey600} />
                             </span>
                             {getEnrollmentDateLabel(program)}{' '}
                             {convertValueClientToView(
@@ -105,7 +103,7 @@ export const WidgetEnrollmentPlain = ({
                         {program.displayIncidentDate && (
                             <div className={classes.row} data-test="widget-enrollment-incident-date">
                                 <span className={classes.icon}>
-                                    <IconCalendar16 color={colors.grey700} />
+                                    <IconCalendar16 color={colors.grey600} />
                                 </span>
                                 {getIncidentDateLabel(program)}{' '}
                                 {convertValueClientToView(
@@ -117,7 +115,7 @@ export const WidgetEnrollmentPlain = ({
 
                         <div className={classes.row} data-test="widget-enrollment-orgunit">
                             <span className={classes.icon} data-test="widget-enrollment-icon-orgunit">
-                                <IconDimensionOrgUnit16 color={colors.grey700} />
+                                <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
                             {i18n.t('Started at {{orgUnitName}}', {
                                 orgUnitName: enrollment.orgUnitName,
@@ -127,7 +125,7 @@ export const WidgetEnrollmentPlain = ({
 
                         <div className={classes.row} data-test="widget-enrollment-owner-orgunit">
                             <span className={classes.icon} data-test="widget-enrollment-icon-owner-orgunit">
-                                <IconDimensionOrgUnit16 color={colors.grey700} />
+                                <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
                             {i18n.t('Owned by {{ownerOrgUnit}}', {
                                 ownerOrgUnit: ownerOrgUnit.displayName,
@@ -136,15 +134,17 @@ export const WidgetEnrollmentPlain = ({
 
                         <div className={classes.row} data-test="widget-enrollment-last-update">
                             <span className={classes.icon} data-test="widget-enrollment-icon-clock">
-                                <IconClock16 color={colors.grey700} />
+                                <IconClock16 color={colors.grey600} />
                             </span>
-                            {getLastUpdatedAt(serverTimeZoneId, enrollment)}
+                            {i18n.t('Last updated {{date}}', {
+                                date: moment(fromServerDate(enrollment.updatedAt)).fromNow(),
+                            })}
                         </div>
 
                         {enrollment.geometry && (
                             <div className={classes.row}>
                                 <span className={classes.icon} data-test="widget-enrollment-icon-clock">
-                                    <IconLocation16 color={colors.grey700} />
+                                    <IconLocation16 color={colors.grey600} />
                                 </span>
                                 {convertValueClientToView(
                                     convertValueServerToClient(enrollment.geometry.coordinates, geometryType),
@@ -162,6 +162,7 @@ export const WidgetEnrollmentPlain = ({
                             onAddNew={onAddNew}
                             canAddNew={canAddNew}
                             onError={onError}
+                            onSuccess={onSuccess}
                         />
                     </div>
                 )}

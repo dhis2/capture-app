@@ -29,15 +29,23 @@ Given('you are in the search page with the Child Programme being preselected fro
     cy.visit('/#/search?programId=IpHINAT79UW');
 });
 
+Given('you are in the search page with domain Person and org unit being preselected', () => {
+    cy.visit('/#/search?orgUnitId=DiszpKrYNg8&trackedEntityTypeId=nEenWmSyUEp');
+});
+
 And('you select the search domain Malaria Case diagnosis', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Malaria case diagn');
     cy.contains('Malaria case diagnosis')
         .click();
 });
 
 When('you select the search domain WHO RMNCH Tracker', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('WHO RMNCH');
     cy.contains('WHO RMNCH Tracker')
         .click();
@@ -242,9 +250,8 @@ When('you click the view dashboard button', () => {
 });
 
 When('you remove the Child Programme selection', () => {
-    cy.get('[data-test="scope-selector"]').within(() => {
-        cy.get('[data-test="reset-selection-button"]').eq(0).click();
-    });
+    cy.get('[data-test="program-selector-container-clear-icon"]')
+        .click();
 });
 
 Then('there should be visible a title with Malaria case diagnosis', () => {
@@ -320,6 +327,29 @@ When('you fill in the first and last name with values that will return results',
         .blur();
 });
 
+When('you press enter after filling in the first and last name with values that will return results', () => {
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('Go')
+        .blur();
+
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Sarah')
+        .wait(500)
+        .type('{enter}', { force: true });
+});
+
+When('you press enter after filling in the unique identifier field with values that will return a tracked entity instance', () => {
+    cy.get('[data-test="form-unique"]')
+        .find('[data-test="capture-ui-input"]')
+        .first()
+        .clear()
+        .type('3131112445555{enter}');
+});
+
 When('you fill in the first name with value and last name with empty space', () => {
     cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
@@ -386,4 +416,29 @@ Then('you should be taken to the main page with org unit and program preselected
 
 Then('you stay in the same page with results from all programs being displayed', () => {
     cy.contains('Results found in all programs').should('exist');
+});
+
+Then('you should be able to see the Create new section', () => {
+    cy.contains('If none of search results match, you can create a new "person".');
+});
+
+When('you click Create new button', () => {
+    cy.get('[data-test="create-new-button"]').click();
+});
+
+Then('you should be taken to the registration page with program with prefilled values', () => {
+    cy.get('[data-test="registration-page-content"]')
+        .contains('New person in program: Child Programme')
+        .should('exist');
+    cy.get('[data-test="registration-page-content"]').contains('First name').should('exist');
+    cy.get('[data-test="capture-ui-input"]').eq(4).should('have.value', 'Sarah');
+    cy.get('[data-test="registration-page-content"]').contains('Last name').should('exist');
+    cy.get('[data-test="capture-ui-input"]').eq(5).should('have.value', 'Go');
+});
+
+Then('you should be taken to the registration page without program with prefilled values', () => {
+    cy.get('[data-test="registration-page-content"]').contains('First name').should('exist');
+    cy.get('[data-test="capture-ui-input"]').eq(1).should('have.value', 'Sara');
+    cy.get('[data-test="registration-page-content"]').contains('Last name').should('exist');
+    cy.get('[data-test="capture-ui-input"]').eq(2).should('have.value', 'Fis');
 });

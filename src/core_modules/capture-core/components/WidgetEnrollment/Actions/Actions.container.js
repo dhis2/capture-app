@@ -32,6 +32,7 @@ export const Actions = ({
     refetchTEI,
     onDelete,
     onError,
+    onSuccess,
     ...passOnProps
 }: Props) => {
     const [updateMutation, { loading: updateLoading }] = useDataMutation(
@@ -40,6 +41,7 @@ export const Actions = ({
             onComplete: () => {
                 refetchEnrollment();
                 refetchTEI();
+                onSuccess && onSuccess();
             },
             onError: (e) => {
                 onError && onError(processErrorReports(e));
@@ -49,7 +51,10 @@ export const Actions = ({
     const [deleteMutation, { loading: deleteLoading }] = useDataMutation(
         enrollmentDelete,
         {
-            onComplete: onDelete,
+            onComplete: () => {
+                onDelete();
+                onSuccess && onSuccess();
+            },
             onError: (e) => {
                 onError && onError(processErrorReports(e));
             },

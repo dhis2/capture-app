@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { getCurrentYear } from '../../support/date';
 import '../sharedSteps';
 
 And('you are on the default registration page', () => {
@@ -37,7 +38,7 @@ And('you see the registration form for the Person', () => {
         .should('exist');
 
     cy.get('[data-test="create-and-link-button"]')
-        .contains('Save new')
+        .contains('Save person')
         .should('exist');
 
     cy.get('[data-test="registration-page-content"]')
@@ -78,7 +79,7 @@ And('you see a registration form for the Child Programme', () => {
         .should('exist');
 
     cy.get('[data-test="create-and-link-button"]')
-        .contains('Save new')
+        .contains('Save person')
         .should('exist');
 
     cy.get('[data-test="registration-page-content"]')
@@ -141,7 +142,9 @@ And('you see the registration form for the Malaria case registration', () => {
 });
 
 And('you select the Antenatal care visit program', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Antenatal care vis');
     cy.contains('Antenatal care visit')
         .click();
@@ -176,7 +179,9 @@ Then('program and organisation unit is still selected in top bar', () => {
 });
 
 And('you select the Malaria case registration program', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Malaria case registr');
     cy.contains('Malaria case registration')
         .click();
@@ -189,7 +194,9 @@ Then('you see a description text for one section', () => {
 });
 
 When('you select the Inpatient morbidity and mortality program', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Inpatient mor');
     cy.contains('Inpatient morbidity and mortality')
         .click();
@@ -231,7 +238,9 @@ When('you have Child Programme selected', () => {
 });
 
 And('you select the Contraceptives Voucher Program', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Contraceptives Vouch');
     cy.contains('Contraceptives Voucher Program')
         .click();
@@ -249,7 +258,9 @@ And('there should be informative message explaining you need to complete your se
 });
 
 And('you select the first category', () => {
-    cy.get('.Select')
+    cy.get('[data-test="category-selector-container"]')
+        .click();
+    cy.get('[data-test="category-filterinput"]')
         .type('AIDSRelief Con');
     cy.contains('AIDSRelief Consortium')
         .click();
@@ -335,7 +346,7 @@ And('you see validation error on hemoglobin', () => {
 And('you fill in the visit date', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(0)
-        .type('2021-01-01');
+        .type(`${getCurrentYear()}-01-01`);
 });
 
 And('you fill in the hemoglobin', () => {
@@ -349,10 +360,32 @@ And('you are navigated to the working list', () => {
         .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=lxAQ7Zs9VYR`);
 
     cy.get('[data-test="event-working-lists"]')
-        .contains('2021-01-01')
+        .contains(`${getCurrentYear()}-01-01`)
         .should('exist');
 });
 
+Then('you should see confirm dialog', () => {
+    cy.get('[data-test="dhis2-uicore-layer"].translucent').within(() => {
+        cy.get('[role="dialog"]')
+            .find('[data-test="dhis2-uicore-modaltitle"]')
+            .contains('Unsaved changes')
+            .should('exist');
+        cy.get('[role="dialog"]')
+            .find('[data-test="dhis2-uicore-button"]')
+            .contains('Yes, discard')
+            .click();
+    });
+});
+
+Then(/^you are navigated to the working list with programId (.*)$/, (programId) => {
+    cy.url()
+        .should('include', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=${programId}`);
+});
+
+When('you click the cancel button', () => {
+    cy.get('[data-test="cancel-button"]')
+        .click();
+});
 
 // New person
 And('you are in the Person registration page', () => {
@@ -373,8 +406,8 @@ And('you fill in a unique first name', () => {
         .blur();
 });
 
-And('you click the save new submit button', () => {
-    cy.contains('Save new')
+And(/^you click the save (.*) submit button$/, (TEType) => {
+    cy.contains(`Save ${TEType}`)
         .click();
 });
 
@@ -500,7 +533,7 @@ And('you see the form prefield with existing TEI attributes values', () => {
 
 And('the scope selector has the TEI context', () => {
     cy.get('[data-test="scope-selector"]').within(() => {
-        cy.contains('Selected person').should('exist');
+        cy.contains('Person').should('exist');
         cy.contains('Anna Jones').should('exist');
     });
 });
@@ -524,7 +557,7 @@ And('you fill the Malaria case diagnosis registration form with values', () => {
         .blur();
     cy.get('[data-test="capture-ui-input"]')
         .eq(5)
-        .type('2022-05-04')
+        .type(moment().add(-1, 'day').format('YYYY-MM-DD'))
         .blur();
 });
 

@@ -1,5 +1,5 @@
 // @flow
-import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum } from '@dhis2/ui';
+import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import React, { type ComponentType, useState } from 'react';
@@ -13,12 +13,14 @@ import { LoadingMaskForButton } from '../../LoadingMasks';
 
 const styles = {
     actions: {
-        margin: spacersNum.dp4,
+        margin: `${spacersNum.dp8}px 0 0 0`,
     },
     loading: {
         display: 'flex',
-        margin: spacersNum.dp8,
         alignItems: 'center',
+        margin: `${spacersNum.dp8}px 0 0 0`,
+        fontSize: '14px',
+        color: colors.grey900,
     },
 };
 
