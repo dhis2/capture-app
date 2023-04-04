@@ -1,2 +1,2 @@
 // @flow
-export { SearchStatus } from './SearchStatus';
+export { SearchStatus } from './SearchStatus.component';
