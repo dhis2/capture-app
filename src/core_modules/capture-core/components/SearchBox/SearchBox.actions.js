@@ -21,6 +21,7 @@ export const searchBoxActionTypes = {
     ALL_SEARCH_RELATED_DATA_CLEAN: 'CleanSearchRelatedData',
     FALLBACK_SEARCH_RELATED_DATA_CLEAN: 'CleanFallbackSearchRelatedData',
     NAVIGATE_TO_NEW_USER_PAGE: 'NavigateToNewUserPage',
+    SEARCH_UNIQUE_SEARCH_VALUE_EMPTY: 'SearchWithEmptyUniqueValue',
 };
 
 export const saveCurrentSearchInfo = ({
@@ -84,3 +85,6 @@ export const cleanFallbackRelatedData = () =>
 
 export const navigateToNewUserPage = () =>
     actionCreator(searchBoxActionTypes.NAVIGATE_TO_NEW_USER_PAGE)();
+
+export const showUniqueSearchValueEmptyModal = ({ uniqueTEAName }) =>
+    actionCreator(searchBoxActionTypes.SEARCH_UNIQUE_SEARCH_VALUE_EMPTY)({ uniqueTEAName });

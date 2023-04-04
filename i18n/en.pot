@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-03-21T20:34:52.414Z\n"
-"PO-Revision-Date: 2023-03-21T20:34:52.414Z\n"
+"POT-Creation-Date: 2023-04-04T12:18:16.080Z\n"
+"PO-Revision-Date: 2023-04-04T12:18:16.080Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -937,8 +937,10 @@ msgstr "You can also choose a program from the top bar and search in that progra
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
 
-msgid "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] "Fill in at least {{count}} attribute to search"
+msgstr[1] "Fill in at least {{count}} attributes to search"
 
 msgid "Search {{name}}"
 msgstr "Search {{name}}"
@@ -1003,6 +1005,9 @@ msgstr "Too many results"
 msgid "Cannot search in all programs"
 msgstr "Cannot search in all programs"
 
+msgid "Missing search criteria"
+msgstr "Missing search criteria"
+
 msgid "Saved lists in this program"
 msgstr "Saved lists in this program"
 
@@ -1027,9 +1032,6 @@ msgstr "Selected program"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Search {{uniqueAttrName}}"
-
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Fill in at least {{minAttributesRequired}} attributes to search"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "New {{trackedEntityName}} in {{programName}}"

@@ -106,6 +106,8 @@ const SearchFormIndex = ({
     formsValues,
     searchStatus,
     isSearchViaAttributesValid,
+    isSearchViaUniqueIdValid,
+    showUniqueSearchValueEmptyModal,
     keptFallbackSearchFormValues,
     fallbackTriggered,
 }: Props) => {
@@ -139,19 +141,24 @@ const SearchFormIndex = ({
         const formReference = {};
         const containerButtonRef = {};
 
-        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId) => {
-            const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
-            if (isValid) {
-                switch (searchScopeType) {
-                case searchScopes.PROGRAM:
-                    searchViaUniqueIdOnScopeProgram({ programId: searchScopeId, formId });
-                    break;
-                case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
-                    break;
-                default:
-                    break;
+        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId, uniqueTEAName) => {
+            const isSearchUniqueIdValid = isSearchViaUniqueIdValid(formId);
+            if (isSearchUniqueIdValid) {
+                const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
+                if (isValid) {
+                    switch (searchScopeType) {
+                    case searchScopes.PROGRAM:
+                        searchViaUniqueIdOnScopeProgram({ programId: searchScopeId, formId });
+                        break;
+                    case searchScopes.TRACKED_ENTITY_TYPE:
+                        searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
+                        break;
+                    default:
+                        break;
+                    }
                 }
+            } else {
+                showUniqueSearchValueEmptyModal({ uniqueTEAName });
             }
         };
 
@@ -179,10 +186,11 @@ const SearchFormIndex = ({
         const FormInformativeMessage = ({ minAttributesRequiredToSearch }) =>
             (<div className={error ? classes.textError : classes.textInfo}>
                 {
-                    i18n.t(
-                        'Fill in at least {{minAttributesRequiredToSearch}}  attributes to search',
-                        { minAttributesRequiredToSearch },
-                    )
+                    i18n.t('Fill in at least {{count}} attribute to search', {
+                        count: minAttributesRequiredToSearch,
+                        defaultValue: 'Fill in at least {{count}} attribute to search',
+                        defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+                    })
                 }
             </div>);
 
@@ -246,6 +254,7 @@ const SearchFormIndex = ({
                                                 searchScope,
                                                 selectedSearchScopeId,
                                                 formId,
+                                                name,
                                             )}
                                         >
                                             {i18n.t('Search by {{name}}', {
@@ -334,6 +343,8 @@ const SearchFormIndex = ({
         searchViaAttributesOnScopeTrackedEntityType,
         searchGroupsForSelectedScope,
         isSearchViaAttributesValid,
+        isSearchViaUniqueIdValid,
+        showUniqueSearchValueEmptyModal,
         saveCurrentFormData,
         formsValues,
         resultsPageSize,

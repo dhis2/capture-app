@@ -10,6 +10,7 @@ export const searchBoxStatus = {
     ERROR: 'ERROR',
     TOO_MANY_RESULTS: 'TOO_MANY_RESULTS',
     NOT_ENOUGH_ATTRIBUTES: 'NOT_ENOUGH_ATTRIBUTES',
+    UNIQUE_SEARCH_VALUE_EMPTY: 'UNIQUE_SEARCH_VALUE_EMPTY',
 };
 const initialReducerValue = {
     searchStatus: searchBoxStatus.INITIAL,
@@ -74,6 +75,11 @@ export const searchDomainDesc = createReducerDescription({
     [searchBoxActionTypes.FALLBACK_SEARCH_RELATED_DATA_CLEAN]: state => ({
         ...state,
         keptFallbackSearchFormValues: {},
+    }),
+    [searchBoxActionTypes.SEARCH_UNIQUE_SEARCH_VALUE_EMPTY]: (state, { payload }) => ({
+        ...state,
+        searchStatus: searchBoxStatus.UNIQUE_SEARCH_VALUE_EMPTY,
+        currentSearchInfo: { uniqueTEAName: payload.uniqueTEAName },
     }),
 
 }, 'searchDomain', initialReducerValue);

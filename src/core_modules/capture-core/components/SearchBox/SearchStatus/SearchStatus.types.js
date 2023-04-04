@@ -11,6 +11,11 @@ export type ContainerProps = $ReadOnly<{|
     availableSearchOption: AvailableSearchOption,
 |}>;
 
+export type ComponentProps = $ReadOnly<{|
+    ...ContainerProps,
+    uniqueTEAName?: string,
+|}>;
+
 export type Props = {|
     ...CssClasses,
     ...ContainerProps,
