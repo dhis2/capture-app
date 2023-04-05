@@ -1,16 +1,10 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { spacers } from '@dhis2/ui';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import type { Icon } from '../../../metaData';
 
 const styles = () => ({
-    selectBarMenu: {
-        maxHeight: '80vh',
-        overflow: 'auto',
-        paddingBottom: `${spacers.dp4}`,
-    },
     icon: {
         display: 'flex',
         alignItems: 'center',
