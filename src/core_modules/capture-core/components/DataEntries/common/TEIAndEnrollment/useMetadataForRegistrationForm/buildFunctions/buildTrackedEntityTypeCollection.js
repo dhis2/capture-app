@@ -1,11 +1,14 @@
 // @flow
-import { TrackedEntityTypeFactory } from '../../../../../metaDataMemoryStoreBuilders/trackedEntityTypes/factory';
-import type { TrackedEntityAttribute } from '../../../../WidgetProfile/DataEntry/FormFoundation/types';
-import type { CachedOptionSet, CachedTrackedEntityType } from '../../../../../storageControllers/cache.types';
+import { TrackedEntityTypeFactory } from '../../../../../../metaDataMemoryStoreBuilders/trackedEntityTypes/factory';
+import type {
+    CachedOptionSet,
+    CachedTrackedEntityAttribute,
+    CachedTrackedEntityType,
+} from '../../../../../../storageControllers/cache.types';
 import type { DataEntryFormConfig } from '../../types';
 
 type Props = {|
-    cachedTrackedEntityAttributes: Map<string, TrackedEntityAttribute>,
+    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
     cachedOptionSets: Map<string, CachedOptionSet>,
     cachedTrackedEntityType: CachedTrackedEntityType,
     dataEntryFormConfig: ?DataEntryFormConfig,

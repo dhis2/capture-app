@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-02-08T11:55:44.282Z\n"
-"PO-Revision-Date: 2023-02-08T11:55:44.282Z\n"
+"POT-Creation-Date: 2023-04-03T08:19:10.930Z\n"
+"PO-Revision-Date: 2023-04-03T08:19:10.930Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -601,8 +601,8 @@ msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgid "There is an error while opening this enrollment. Please enter a valid url."
 msgstr "There is an error while opening this enrollment. Please enter a valid url."
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgid "An error occurred while fetching enrollments. Please enter a valid url."
+msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 
 msgid "Enrollment Dashboard"
 msgstr "Enrollment Dashboard"
@@ -641,8 +641,20 @@ msgstr ""
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr "Invalid enrollment id {{enrollmentId}}."
+
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Choose an enrollment to view the dashboard."
+
+msgid "There are no active enrollments."
+msgstr "There are no active enrollments."
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr "Add new enrollment for {{teiDisplayName}} in this program."
+
+msgid "No access to program owner."
+msgstr "No access to program owner."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is not enrolled in this program."
@@ -720,8 +732,8 @@ msgstr "Choose a stage for a new event"
 msgid "Program Stages could not be loaded"
 msgstr "Program Stages could not be loaded"
 
-msgid "stage"
-msgstr "stage"
+msgid "Stage"
+msgstr "Stage"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Enrollment{{escape}} View Event"
@@ -770,6 +782,9 @@ msgstr "You can also choose a program from the top bar and create in that progra
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "New Enrollment in program{{escape}} {{programName}}"
+
+msgid "Save {{trackedEntityTypeName}}"
+msgstr "Save {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Save {{trackedEntityName}}"
@@ -980,38 +995,38 @@ msgstr "You don't have access to create any relationships"
 msgid "Add relationship"
 msgstr "Add relationship"
 
-msgid "Selected registering unit"
-msgstr "Selected registering unit"
+msgid "No results found for "
+msgstr "No results found for "
 
-msgid "Start Again"
-msgstr "Start Again"
+msgid "Registering unit"
+msgstr "Registering unit"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Are you sure? All unsaved data will be lost."
+msgid "Choose a registering unit"
+msgstr "Choose a registering unit"
 
-msgid "Accept"
-msgstr "Accept"
-
-msgid "Registering Organisation Unit"
-msgstr "Registering Organisation Unit"
-
-msgid "Select"
-msgstr "Select"
+msgid "Clear selection"
+msgstr "Clear selection"
 
 msgid "No programs available."
 msgstr "No programs available."
 
-msgid "Selected program"
-msgstr "Selected program"
+msgid "Search for a program"
+msgstr "Search for a program"
 
-msgid "Select program"
-msgstr "Select program"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr "Some programs are being filtered by the chosen registering unit"
 
-msgid "Selected"
-msgstr "Selected"
+msgid "Show all programs"
+msgstr "Show all programs"
+
+msgid "Choose a program"
+msgstr "Choose a program"
 
 msgid "Results found"
 msgstr "Results found"
+
+msgid "Selected program"
+msgstr "Selected program"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Search {{uniqueAttrName}}"
@@ -1025,14 +1040,34 @@ msgstr "New {{trackedEntityName}} in {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
 
-msgid "Clear selections"
-msgstr "Clear selections"
-
 msgid "To work with the selected program,"
 msgstr "To work with the selected program,"
 
 msgid "open the Tracker Capture app"
 msgstr "open the Tracker Capture app"
+
+msgid "This program is protected"
+msgstr "This program is protected"
+
+msgid "Reason to check for enrollments"
+msgstr "Reason to check for enrollments"
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+
+msgid "Check for enrollments"
+msgstr "Check for enrollments"
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
 
 msgid "Save comment"
 msgstr "Save comment"
@@ -1260,9 +1295,6 @@ msgstr "This stage can only have one event"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
-
-msgid "Registering unit"
-msgstr "Registering unit"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"

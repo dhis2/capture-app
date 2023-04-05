@@ -10,11 +10,7 @@ import { RenderFoundation } from '../../../metaData';
 
 export type OwnProps = $ReadOnly<{|
     id: string,
-    enrollmentMetadata: RegistrationFormMetadata,
-    formFoundation: ?RenderFoundation,
-    formId: ?string,
     selectedScopeId: string,
-    saveButtonText: string,
     fieldOptions?: Object,
     onSave: SaveForDuplicateCheck,
     duplicatesReviewPageSize: number,
@@ -24,13 +20,19 @@ export type OwnProps = $ReadOnly<{|
     teiId?: ?string,
     skipDuplicateCheck?: ?boolean,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
+    saveButtonText: (trackedEntityName: string) => string,
 |}>;
 
 type ContainerProps = {|
     ready: boolean,
     orgUnitId: string,
     orgUnit: ?OrgUnit,
-    isUserInteractionInProgress: boolean
+    isUserInteractionInProgress: boolean,
+    isSavingInProgress: boolean,
+    enrollmentMetadata: RegistrationFormMetadata,
+    formFoundation: ?RenderFoundation,
+    formId: ?string,
+    saveButtonText: string,
 |};
 
 export type Props = $ReadOnly<{|

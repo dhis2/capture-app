@@ -13,11 +13,11 @@ import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
-import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
-import { useMetadataForRegistrationForm } from '../common/useMetadataForRegistrationForm';
+import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>
@@ -31,6 +31,7 @@ const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
 const styles = ({ typography }) => ({
     marginTop: {
         marginTop: typography.pxToRem(2),
+        display: 'flex',
     },
     marginLeft: {
         marginLeft: typography.pxToRem(16),
@@ -49,6 +50,7 @@ const TeiRegistrationEntryPlain =
       onPostProcessErrorMessage,
       trackedEntityName,
       isUserInteractionInProgress,
+      isSavingInProgress,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
@@ -99,6 +101,7 @@ const TeiRegistrationEntryPlain =
                                   dataTest="create-and-link-button"
                                   primary
                                   onClick={onSave}
+                                  loading={isSavingInProgress}
                               >
                                   {saveButtonText}
                               </Button>
@@ -109,6 +112,7 @@ const TeiRegistrationEntryPlain =
                               secondary
                               onClick={handleOnCancel}
                               className={classes.marginLeft}
+                              disabled={isSavingInProgress}
                           >
                               {i18n.t('Cancel')}
                           </Button>
