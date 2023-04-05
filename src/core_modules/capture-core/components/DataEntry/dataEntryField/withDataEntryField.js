@@ -9,6 +9,7 @@ import { getDataEntryKey } from '../common/getDataEntryKey';
 import { makeReselectComponentProps } from './withDataEntryField.selectors';
 
 import type { ValidatorContainer } from './internal/dataEntryField.utils';
+import type { PluginContext } from '../../D2Form/DataEntryPlugin/DataEntryPlugin.types';
 
 type FieldContainer = {
     field: React.Element<any>,
@@ -19,6 +20,7 @@ type FieldContainer = {
 type Props = {
     id: string,
     fields?: ?Array<React.Element<any>>,
+    pluginContext?: PluginContext,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     dataEntryFieldRef?: ?(instance: any, key: string) => void,
@@ -40,15 +42,22 @@ type Settings = {
 const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentType<any>) => {
     class DataEntryFieldBuilder extends React.Component<Props> {
         reselectComponentProps: (?Object) => Object;
+
+        // $FlowFixMe[speculation-ambiguous]
+        dataEntryFieldInstance: DataEntryField;
+
         constructor(props: Props) {
             super(props);
             this.reselectComponentProps = makeReselectComponentProps();
         }
+
         // $FlowFixMe[speculation-ambiguous] automated comment
         handleRef = (instance: DataEntryField) => {
             if (this.props.dataEntryFieldRef) {
                 const { getPropName } = settings;
                 const key = getPropName(this.props);
+
+                this.dataEntryFieldInstance = instance;
 
                 if (!key) {
                     log.error(
@@ -84,6 +93,16 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             );
         }
 
+        setField(value: any) {
+            if (!this.dataEntryFieldInstance) {
+                log.error(
+                    errorCreator(
+                        'No data entry field instance ')({}));
+                return;
+            }
+            this.dataEntryFieldInstance.handleSet(value);
+        }
+
         getFields() {
             const fields = this.props.fields;
             const { getMeta, getIsHidden } = settings;
@@ -103,14 +122,23 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
         render() {
             const {
                 fields,
+                pluginContext = {},
                 ...passOnProps
             } = this.props;
+            const key = settings.getPropName(this.props);
 
             return (
                 <div>
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         fields={this.getFields()}
+                        pluginContext={{
+                            [key]: {
+                                setDataEntryFieldValue: this.setField.bind(this),
+                                value: this.props[`${key}DataEntryFieldValue`],
+                            },
+                            ...pluginContext,
+                        }}
                         {...passOnProps}
                     />
                 </div>

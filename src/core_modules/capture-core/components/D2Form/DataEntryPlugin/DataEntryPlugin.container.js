@@ -7,17 +7,18 @@ import { usePluginCallbacks } from './hooks/usePluginCallbacks';
 import { usePluginFormValues } from './hooks/usePluginFormValues';
 
 export const DataEntryPlugin = (props: ContainerProps) => {
-    const { pluginSource, fieldsMetadata, formId, onUpdateField } = props;
+    const { pluginSource, fieldsMetadata, formId, onUpdateField, pluginContext } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
 
     // Plugin related functionality and feedback
     const { pluginValues } = usePluginFormValues(formId, metadataByPluginId);
     const { errors, warnings } = usePluginMessages(formId, metadataByPluginId);
-    const { setFieldValue } = usePluginCallbacks({
+    const { setFieldValue, setContextFieldValue } = usePluginCallbacks({
         configuredPluginIds,
         onUpdateField,
         metadataByPluginId,
+        pluginContext,
     });
 
     // Expanding iframe height temporarily to fit content - LIBS-487
@@ -46,6 +47,7 @@ export const DataEntryPlugin = (props: ContainerProps) => {
             fieldsMetadata={formattedMetadata}
             values={pluginValues}
             setFieldValue={setFieldValue}
+            setContextFieldValue={setContextFieldValue}
             errors={errors}
             warnings={warnings}
         />

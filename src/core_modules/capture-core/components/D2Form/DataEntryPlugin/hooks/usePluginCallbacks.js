@@ -9,6 +9,7 @@ export const usePluginCallbacks = ({
     configuredPluginIds,
     metadataByPluginId,
     onUpdateField,
+    pluginContext,
 }: UsePluginCallbacksProps) => {
     const setFieldValue = useCallback(({ fieldId, value, options = {} }: SetFieldValueProps) => {
         if (!fieldId) {
@@ -26,7 +27,12 @@ export const usePluginCallbacks = ({
         onUpdateField && onUpdateField(idFromApp, value, options);
     }, [configuredPluginIds, metadataByPluginId, onUpdateField]);
 
+    const setContextFieldValue = useCallback(({ fieldId, value }: SetFieldValueProps) => {
+        pluginContext[fieldId]?.setDataEntryFieldValue(value);
+    }, [pluginContext]);
+
     return {
         setFieldValue,
+        setContextFieldValue,
     };
 };

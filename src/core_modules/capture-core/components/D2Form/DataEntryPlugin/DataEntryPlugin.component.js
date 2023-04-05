@@ -5,11 +5,14 @@ import { Plugin } from '@dhis2/app-runtime';
 import type { ComponentProps } from './DataEntryPlugin.types';
 
 export const DataEntryPluginComponent = (props: ComponentProps) => {
-    const { pluginSource, ...passOnProps } = props;
+    const {
+        pluginSource,
+        ...passOnProps
+    } = props;
 
     return (
         <Plugin
-            pluginSource={pluginSource}
+            pluginSource={'http://localhost:3002/plugin.html'}
             {...passOnProps}
         />
     );

@@ -10,6 +10,7 @@ import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
 import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
+import type { PluginContext } from '../../capture-core/components/D2Form/DataEntryPlugin/DataEntryPlugin.types';
 
 export type ValidatorContainer = {
     validator: (value: any, validationContext: ?Object) => boolean,
@@ -74,6 +75,7 @@ type Props = {
     onGetContainerProps?: ?GetContainerPropsFn,
     onGetValidationContext?: ?() => ?Object,
     onIsValidating: ?IsValidatingFn,
+    pluginContext?: PluginContext,
     loadNr: number,
     onPostProcessErrorMessage?: PostProcessErrorMessage,
 };
@@ -510,6 +512,7 @@ export class FormBuilder extends React.Component<Props> {
     ) => {
         const {
             onUpdateFieldUIOnly,
+            pluginContext,
         } = this.props;
         const {
             fieldsMetadata,
@@ -526,6 +529,7 @@ export class FormBuilder extends React.Component<Props> {
                 formId={formId}
                 onUpdateField={this.commitFieldUpdate.bind(this)}
                 onUpdateFieldUIOnly={onUpdateFieldUIOnly}
+                pluginContext={pluginContext}
             />
         );
     }
