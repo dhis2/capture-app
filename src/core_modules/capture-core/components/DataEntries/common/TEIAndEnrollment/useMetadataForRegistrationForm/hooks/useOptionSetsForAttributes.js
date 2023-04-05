@@ -1,11 +1,11 @@
 // @flow
 import { getOptionSets } from '../getFunctions/getOptionSets';
-import { useIndexedDBQuery } from '../../../../../utils/reactQueryHelpers';
-import type { TrackedEntityAttribute } from '../../../../WidgetProfile/DataEntry/FormFoundation/types';
+import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
+import type { CachedTrackedEntityAttribute } from '../../../../../../storageControllers/cache.types';
 
 type Props = {
     selectedScopeId: string,
-    attributes: ?Array<TrackedEntityAttribute>,
+    attributes: ?Array<CachedTrackedEntityAttribute>,
 };
 
 export const useOptionSetsForAttributes = ({ attributes, selectedScopeId }: Props) => {

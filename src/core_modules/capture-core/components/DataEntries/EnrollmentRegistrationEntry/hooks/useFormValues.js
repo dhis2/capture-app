@@ -128,8 +128,8 @@ const buildFormValues = async ({
         staticPatternValues,
         querySingleResource,
     );
-    setFormValues && setFormValues({ ...formValues, ...uniqueValues, ...searchFormValues });
-    setClientValues && setClientValues({ ...clientValues, ...uniqueValues, ...searchClientValues });
+    setFormValues && setFormValues({ ...searchFormValues, ...formValues, ...uniqueValues });
+    setClientValues && setClientValues({ ...searchClientValues, ...clientValues, ...uniqueValues });
     formValuesReadyRef.current = true;
 };
 

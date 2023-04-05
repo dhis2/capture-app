@@ -91,16 +91,6 @@ jobs:
               with:
                   node-version: 14.x
 
-            - uses: actions/cache@v2
-              id: yarn-cache
-              with:
-                  path: '**/node_modules'
-                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
-            - name: Install
-              if: steps.yarn-cache.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
-
             - name: compute-instance-url
               id: instance-url
               run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/$version}"

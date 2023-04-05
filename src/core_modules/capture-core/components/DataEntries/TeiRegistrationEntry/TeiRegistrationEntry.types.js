@@ -6,19 +6,20 @@ import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/Duplicate
 import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
 
 export type OwnProps = $ReadOnly<{|
-  id: string,
-  teiRegistrationMetadata: RegistrationFormMetadata,
-  selectedScopeId: string,
-  saveButtonText: string,
-  fieldOptions?: Object,
-  onSave: SaveForDuplicateCheck,
-  duplicatesReviewPageSize: number,
-  renderDuplicatesCardActions?: RenderCustomCardActions,
-  renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
-  ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
+    id: string,
+    selectedScopeId: string,
+    saveButtonText: string,
+    fieldOptions?: Object,
+    onSave: SaveForDuplicateCheck,
+    duplicatesReviewPageSize: number,
+    isSavingInProgress?: boolean,
+    renderDuplicatesCardActions?: RenderCustomCardActions,
+    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
+    ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
 |}>;
 
 type ContainerProps = {|
+    teiRegistrationMetadata: RegistrationFormMetadata,
     ready: boolean,
     trackedEntityName: string,
     isUserInteractionInProgress: boolean
@@ -27,7 +28,7 @@ type ContainerProps = {|
 export type Props = $ReadOnly<{|
     ...OwnProps,
     ...ContainerProps
-  |}>;
+|}>;
 
 type PropsAddedInHOC = {|
     onPostProcessErrorMessage: Function,

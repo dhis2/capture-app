@@ -22,6 +22,7 @@ const RelationshipTrackedEntityInstancePlain =
       const trackedEntityTypeNameLC = trackedEntityType.name.toLocaleLowerCase();
 
       return (
+          // $FlowFixMe - flow error will be resolved when rewriting relationship metadata fetching
           <TeiRegistrationEntry
               id={DATA_ENTRY_ID}
               teiRegistrationMetadata={teiRegistrationMetadata}

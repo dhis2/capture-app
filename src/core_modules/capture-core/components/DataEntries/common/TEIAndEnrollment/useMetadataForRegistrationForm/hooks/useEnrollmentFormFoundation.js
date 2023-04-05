@@ -1,18 +1,18 @@
 // @flow
-import { useIndexedDBQuery } from '../../../../../utils/reactQueryHelpers';
+import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildEnrollmentForm } from '../buildFunctions/buildEnrollmentForm';
-import type { TrackedEntityType, Program } from '../../../../../metaData';
-import type { OptionSet, TrackedEntityAttribute } from '../../../../WidgetProfile/DataEntry/FormFoundation/types';
-import { scopeTypes } from '../../../../../metaData';
+import type { TrackedEntityType, Program } from '../../../../../../metaData';
+import { scopeTypes } from '../../../../../../metaData';
+import type { CachedOptionSet, CachedTrackedEntityAttribute } from '../../../../../../storageControllers/cache.types';
 import type { DataEntryFormConfig } from '../../types';
 
 type Props = {
     scopeType: $Values<typeof scopeTypes>,
-    optionSets: ?Array<OptionSet>,
+    optionSets: ?Array<CachedOptionSet>,
     trackedEntityType: ?TrackedEntityType,
     trackedEntityTypeCollection: ?TrackedEntityType,
     program: ?Program,
-    cachedTrackedEntityAttributes: ?TrackedEntityAttribute[],
+    cachedTrackedEntityAttributes: ?Array<CachedTrackedEntityAttribute>,
     dataEntryFormConfig: ?DataEntryFormConfig,
     configIsFetched: boolean,
     locale: string,

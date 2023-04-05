@@ -1,9 +1,9 @@
 // @flow
-import { useIndexedDBQuery } from '../../../../../utils/reactQueryHelpers';
+import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildTrackedEntityTypeCollection } from '../buildFunctions/buildTrackedEntityTypeCollection';
-import type { OptionSet, TrackedEntityType } from '../../../../../metaData';
+import type { OptionSet, TrackedEntityType } from '../../../../../../metaData';
 import { getTrackedEntityAttributes } from '../getFunctions/getTrackedEntityAttributes';
-import type { CachedTrackedEntityType } from '../../../../../storageControllers/cache.types';
+import type { CachedTrackedEntityType } from '../../../../../../storageControllers/cache.types';
 import type { DataEntryFormConfig } from '../../types';
 
 type Props = {
