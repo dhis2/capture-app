@@ -8,7 +8,7 @@ import type {
 } from '../../../../../../storageControllers/cache.types';
 import type { TrackedEntityType } from '../../../../../../metaData';
 import { buildSearchGroup } from '../../../../../Pages/Search/hooks';
-import type { DataEntryFormConfig } from '../../types';
+import type { DataEntryFormConfig } from '../types';
 
 type Props = {|
     cachedOptionSets: Array<CachedOptionSet>,

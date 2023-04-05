@@ -4,7 +4,7 @@ import { buildTrackedEntityTypeCollection } from '../buildFunctions/buildTracked
 import type { OptionSet, TrackedEntityType } from '../../../../../../metaData';
 import { getTrackedEntityAttributes } from '../getFunctions/getTrackedEntityAttributes';
 import type { CachedTrackedEntityType } from '../../../../../../storageControllers/cache.types';
-import type { DataEntryFormConfig } from '../../types';
+import type { DataEntryFormConfig } from '../types';
 
 type Props = {
     trackedEntityType: ?CachedTrackedEntityType,

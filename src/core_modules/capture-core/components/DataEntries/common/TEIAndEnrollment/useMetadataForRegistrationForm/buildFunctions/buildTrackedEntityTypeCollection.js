@@ -5,7 +5,7 @@ import type {
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
 } from '../../../../../../storageControllers/cache.types';
-import type { DataEntryFormConfig } from '../../types';
+import type { DataEntryFormConfig } from '../types';
 
 type Props = {|
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,

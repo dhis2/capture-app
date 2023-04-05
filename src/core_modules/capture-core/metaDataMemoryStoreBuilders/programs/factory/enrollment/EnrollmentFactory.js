@@ -18,7 +18,7 @@ import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './enrollmentFactory.types';
 import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
 import { DataEntryPluginConfig } from '../../../../metaData/DataEntryPluginConfig';
-import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/types';
+import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 
 export class EnrollmentFactory {
     static errorMessages = {
@@ -251,7 +251,11 @@ export class EnrollmentFactory {
                                         ...trackedEntityAttributeDictionary[field.IdFromApp],
                                     }));
 
-                                acc.push({ ...element, fieldMap });
+                                acc.push({
+                                    ...element,
+                                    fieldMap,
+                                    pluginSource: formConfigSection.pluginSource,
+                                });
                                 return acc;
                             }
                             const attribute = trackedEntityAttributeDictionary[element.id];

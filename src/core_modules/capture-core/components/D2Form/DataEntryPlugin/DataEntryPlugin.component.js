@@ -12,7 +12,7 @@ export const DataEntryPluginComponent = (props: ComponentProps) => {
 
     return (
         <Plugin
-            pluginSource={'http://localhost:3002/plugin.html'}
+            pluginSource={pluginSource}
             {...passOnProps}
         />
     );

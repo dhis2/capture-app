@@ -18,7 +18,7 @@ import type {
 import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './teiRegistrationFactory.types';
 import { DataEntryPluginConfig } from '../../../../metaData/DataEntryPluginConfig';
-import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/types';
+import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 
 export class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {

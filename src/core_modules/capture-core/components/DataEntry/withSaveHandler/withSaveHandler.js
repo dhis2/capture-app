@@ -288,7 +288,8 @@ const getSaveHandler = (
             const key = getDataEntryKey(props.id, itemId);
             const generalErrors = state.rulesEffectsGeneralErrors[key] && state.rulesEffectsGeneralErrors[key].error;
             const foundation = onGetFormFoundation ? onGetFormFoundation(props) : props.formFoundation;
-            const reduxSectionKeys = [...foundation.sections.values()].map(section => `${key}-${section.id}`);
+            const reduxSections = state.formsSectionsFieldsUI[key];
+
             return {
                 itemId,
                 saveAttempted:
@@ -300,12 +301,8 @@ const getSaveHandler = (
                 hasGeneralErrors: (generalErrors && generalErrors.length > 0),
                 inProgressList: state.dataEntriesInProgressList[key] || [],
                 calculatedFoundation: foundation,
-                sectionsInitialised: reduxSectionKeys
-                    .every((reduxSectionKey) => {
-                        const reduxSection = state.formsSectionsFieldsUI[reduxSectionKey];
-                        // $FlowFixMe
-                        return reduxSection && Object.values(reduxSection).every(({ valid }) => valid !== undefined);
-                    }),
+                sectionsInitialised: reduxSections && Object.values(reduxSections)
+                    .every(({ valid }: any) => valid !== undefined),
             };
         };
 
