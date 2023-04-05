@@ -97,41 +97,41 @@ export class TeiRegistrationFactory {
 
             // $FlowFixMe
             this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
-                const attributes = formConfigSection.elements.reduce((acc, element) => {
-                    if (element.type === 'plugin') {
-                        const fieldMap = element
+                const formElements = formConfigSection.elements.reduce((acc, sourceElement) => {
+                    if (sourceElement.type === 'plugin') {
+                        const fieldMap = sourceElement
                             .fieldMap
                             ?.map(field => ({
                                 ...field,
                                 ...trackedEntityAttributeDictionary[field.IdFromApp],
                             }));
 
-                        acc.push({ ...element, fieldMap });
+                        acc.push({ ...sourceElement, fieldMap });
                         return acc;
                     }
-                    const attribute = trackedEntityAttributeDictionary[element.id];
+                    const attribute = trackedEntityAttributeDictionary[sourceElement.id];
                     if (attribute) {
                         acc.push(attribute);
                     }
                     return acc;
                 }, []);
 
-                await attributes.asyncForEach(async (trackedEntityAttribute) => {
-                    if (trackedEntityAttribute?.id === 'plugin') {
+                await formElements.asyncForEach(async (sourceElement) => {
+                    if (sourceElement?.id === 'plugin') {
                         const element = new DataEntryPlugin((o) => {
-                            o.id = trackedEntityAttribute.id;
-                            o.name = trackedEntityAttribute.name;
+                            o.id = sourceElement.id;
+                            o.name = sourceElement.name;
                             o.fields = new Map();
                         });
 
-                        await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
+                        await sourceElement.fieldMap.asyncForEach(async (field) => {
                             const dataElement = await this.dataElementFactory.build(field);
                             dataElement && element.addField(field.IdFromPlugin, dataElement);
                         });
 
                         element && section.addElement(element);
                     } else {
-                        const element = await this.dataElementFactory.build(trackedEntityAttribute);
+                        const element = await this.dataElementFactory.build(sourceElement);
                         element && section.addElement(element);
                     }
                 });

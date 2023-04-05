@@ -15,7 +15,7 @@ import type {
 import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
 import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section, DataElement } from '../../../../metaData';
 import { DataElementFactory } from './DataElementFactory';
-import type { ConstructorInput } from './enrollmentFactory.types';
+import type { ConstructorInput, SourceElement } from './enrollmentFactory.types';
 import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
 import { DataEntryPlugin } from '../../../../metaData/DataEntryPlugin';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/types';
@@ -156,11 +156,11 @@ export class EnrollmentFactory {
     }
 
     async _buildSection(
-        cachedProgramTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute>,
+        sourceElements?: Array<SourceElement>,
         cachedSectionCustomLabel: string,
         cachedSectionCustomId: string,
     ) {
-        if (!cachedProgramTrackedEntityAttributes?.length) {
+        if (!sourceElements?.length) {
             return null;
         }
 
@@ -169,16 +169,16 @@ export class EnrollmentFactory {
             o.name = cachedSectionCustomLabel;
         });
 
-        await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+        await this._buildElementsForSection(sourceElements, section);
         return section;
     }
 
     async _buildCustomEnrollmentForm(
         enrollmentForm: RenderFoundation,
         dataEntryForm: CachedDataEntryForm,
-        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
+        sourceElements: ?Array<CachedProgramTrackedEntityAttribute>,
     ) {
-        if (!cachedProgramTrackedEntityAttributes) { return null; }
+        if (!sourceElements) { return null; }
 
         let section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
@@ -186,7 +186,7 @@ export class EnrollmentFactory {
 
         section.showContainer = false;
 
-        section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+        section = await this._buildElementsForSection(sourceElements, section);
         section && enrollmentForm.addSection(section);
         try {
             section.customForm = new CustomForm((o) => {
@@ -241,7 +241,7 @@ export class EnrollmentFactory {
                 if (this.dataEntryFormConfig) {
                     // $FlowFixMe
                     this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
-                        const attributes = formConfigSection.elements.reduce((acc, element) => {
+                        const sourceElements = formConfigSection.elements.reduce((acc, element) => {
                             if (element.type === 'plugin') {
                                 const fieldMap = element
                                     .fieldMap
@@ -261,7 +261,7 @@ export class EnrollmentFactory {
                         }, []);
 
                         section = await this._buildSection(
-                            attributes,
+                            sourceElements,
                             formConfigSection.name,
                             formConfigSection.id,
                         );
