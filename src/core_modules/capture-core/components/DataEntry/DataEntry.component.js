@@ -9,6 +9,7 @@ import { getDataEntryKey } from './common/getDataEntryKey';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { Section } from '../Section/Section.component';
 import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
+import { FieldSection } from './FieldSection.component';
 
 const styles = theme => ({
     loadingContainer: {
@@ -173,13 +174,13 @@ class DataEntryPlain extends React.Component<Props> {
                     const sectionFields = fields ?
                         fields
                             .filter(fieldContainer => fieldContainer.section === sectionKey)
-                            .map((fieldContainer, index) => (
-                                <React.Fragment
-                                    // using index for now
-                                    key={index} // eslint-disable-line
-                                >
-                                    { fieldContainer.field }
-                                </React.Fragment>
+                            .map((fieldContainer, index, array) => (
+                                <FieldSection
+                                    formHorizontal={this.props.formHorizontal}
+                                    fieldContainer={fieldContainer}
+                                    index={index}
+                                    total={array.length}
+                                />
                             ))
                         : null;
 
@@ -213,7 +214,12 @@ class DataEntryPlain extends React.Component<Props> {
         const fieldsByPlacement = fields ?
             fields
                 .filter(fieldFilter)
-                .map(fieldContainer => fieldContainer.field)
+                .map((fieldContainer, index, array) => (<FieldSection
+                    formHorizontal={this.props.formHorizontal}
+                    fieldContainer={fieldContainer}
+                    index={index}
+                    total={array.length}
+                />))
             : [];
 
         if (!this.props.formHorizontal) {
