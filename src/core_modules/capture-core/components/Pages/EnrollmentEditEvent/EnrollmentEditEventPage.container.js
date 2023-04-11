@@ -12,7 +12,7 @@ import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.comp
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
+import { deleteEnrollment, fetchEnrollments } from '../Enrollment/EnrollmentPage.actions';
 import { changeEventFromUrl } from '../ViewEvent/ViewEventComponent/viewEvent.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
