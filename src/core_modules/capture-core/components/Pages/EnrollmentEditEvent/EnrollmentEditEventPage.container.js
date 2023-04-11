@@ -94,6 +94,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
         dispatch(deleteEnrollment({ enrollmentId }));
     };
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
@@ -148,6 +149,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
             orgUnitId={orgUnitId}
             eventDate={eventDate}
             onEnrollmentError={onEnrollmentError}
+            onEnrollmentSuccess={onEnrollmentSuccess}
             eventStatus={event?.status}
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}

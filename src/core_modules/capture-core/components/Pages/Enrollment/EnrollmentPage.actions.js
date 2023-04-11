@@ -9,6 +9,10 @@ export const enrollmentPageActionTypes = {
     INFORMATION_ERROR_FETCH: 'EnrollmentPage.ErrorOnFetching',
     INFORMATION_SUCCESS_FETCH: 'EnrollmentPage.SuccessOnFetching',
 
+    ENROLLMENTS_FETCH: 'EnrollmentPage.EnrollmentFetch',
+    ENROLLMENTS_ERROR_FETCH: 'EnrollmentPage.EnrollmentFetchFailure',
+    ENROLLMENTS_SUCCESS_FETCH: 'EnrollmentPage.EnrollmentFetchSuccess',
+
     PAGE_OPEN: 'EnrollmentPage.Open',
     PAGE_CLEAN: 'EnrollmentPage.CleanOnUnmount',
     CUSTOM_PROGRAM_RESET: 'EnrollmentPage.CustomProgramReset',
@@ -41,9 +45,18 @@ export const showMissingMessageViewOnEnrollmentPage = () =>
 export const showErrorViewOnEnrollmentPage = ({ error }: { error: string }) =>
     actionCreator(enrollmentPageActionTypes.INFORMATION_ERROR_FETCH)({ error });
 
-export const successfulFetchingEnrollmentPageInformationFromUrl = ({ teiDisplayName, tetId, enrollmentsSortedByDate }: Object) =>
+export const successfulFetchingEnrollmentPageInformationFromUrl = ({ teiDisplayName, tetId }: Object) =>
     actionCreator(enrollmentPageActionTypes.INFORMATION_SUCCESS_FETCH)(
-        { teiDisplayName, tetId, enrollmentsSortedByDate });
+        { teiDisplayName, tetId });
+
+export const fetchEnrollments = () =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENTS_FETCH)();
+
+export const updateEnrollmentAccessLevel = ({ programId, accessLevel }: { programId: string, accessLevel: string }) =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENTS_ERROR_FETCH)({ programId, accessLevel });
+
+export const saveEnrollments = ({ programId, enrollments }: any) =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENTS_SUCCESS_FETCH)({ programId, enrollments });
 
 export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
     actionCreator(enrollmentPageActionTypes.PAGE_OPEN)({ programId, orgUnitId, teiId, enrollmentId });

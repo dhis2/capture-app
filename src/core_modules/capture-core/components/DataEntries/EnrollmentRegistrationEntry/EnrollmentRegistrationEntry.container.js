@@ -26,6 +26,10 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
           || dataEntryHasChanges(state, 'relationship-newEnrollment'),
     );
 
+
+    const isSavingInProgress = useSelector(({ possibleDuplicates, newPage }) =>
+        possibleDuplicates.isLoading || possibleDuplicates.isUpdating || !!newPage.uid);
+
     if (error) {
         return error.errorComponent;
     }
@@ -41,6 +45,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             orgUnitId={orgUnitId}
             orgUnit={orgUnit}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            isSavingInProgress={isSavingInProgress}
         />
     );
 };

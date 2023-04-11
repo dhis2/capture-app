@@ -32,7 +32,7 @@ export const TopBar = ({
     teiDisplayName,
     enrollmentsAsOptions,
 }: TopBarProps) => {
-    const { setProgramId } = useSetProgramId();
+    const { setProgramIdAndResetEnrollmentContext } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
     const { setEnrollmentId } = useSetEnrollmentId();
 
@@ -46,7 +46,7 @@ export const TopBar = ({
         <ScopeSelector
             selectedProgramId={programId}
             selectedOrgUnitId={orgUnitId}
-            onSetProgramId={id => setProgramId(id)}
+            onSetProgramId={id => setProgramIdAndResetEnrollmentContext(id)}
             onSetOrgUnit={id => setOrgUnitId(id)}
             onResetProgramId={() => resetProgramIdAndEnrollmentContext()}
             onResetOrgUnitId={() => resetOrgUnitId()}
