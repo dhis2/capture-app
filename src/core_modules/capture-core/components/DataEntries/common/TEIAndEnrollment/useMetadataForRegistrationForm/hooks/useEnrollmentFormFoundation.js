@@ -4,7 +4,7 @@ import { buildEnrollmentForm } from '../buildFunctions/buildEnrollmentForm';
 import type { TrackedEntityType, Program } from '../../../../../../metaData';
 import { scopeTypes } from '../../../../../../metaData';
 import type { CachedOptionSet, CachedTrackedEntityAttribute } from '../../../../../../storageControllers/cache.types';
-import type { DataEntryFormConfig } from '../../types';
+import type { DataEntryFormConfig } from '../types';
 
 type Props = {
     scopeType: $Values<typeof scopeTypes>,

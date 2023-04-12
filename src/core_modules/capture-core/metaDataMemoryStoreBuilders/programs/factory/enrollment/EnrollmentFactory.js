@@ -15,10 +15,12 @@ import type {
 import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
 import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section, DataElement } from '../../../../metaData';
 import { DataElementFactory } from './DataElementFactory';
-import type { ConstructorInput, SourceElement } from './enrollmentFactory.types';
+import type { ConstructorInput, DataEntryPluginSettings, SourceElement } from './enrollmentFactory.types';
 import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
 import { DataEntryPlugin } from '../../../../metaData/DataEntryPlugin';
-import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/types';
+import type {
+    DataEntryFormConfig,
+} from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 
 export class EnrollmentFactory {
     static errorMessages = {
@@ -129,26 +131,27 @@ export class EnrollmentFactory {
     }
 
     async _buildElementsForSection(
-        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
+        sourceElements: Array<DataEntryPluginSettings> | Array<CachedProgramTrackedEntityAttribute>,
         section: Section,
     ) {
         // $FlowFixMe
-        await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
-            if (trackedEntityAttribute?.id === 'plugin') {
+        await sourceElements.asyncForEach(async (sourceElement) => {
+            if (sourceElement.type === 'plugin') {
                 const element = new DataEntryPlugin((o) => {
-                    o.id = trackedEntityAttribute.id;
-                    o.name = trackedEntityAttribute.name;
+                    o.id = sourceElement.id;
+                    o.name = sourceElement.name;
                     o.fields = new Map();
                 });
 
-                await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
+                // $FlowFixMe
+                await sourceElement.fieldMap.asyncForEach(async (field) => {
                     const dataElement = await this.dataElementFactory.build(field);
                     dataElement && element.addField(field.IdFromPlugin, dataElement);
                 });
 
                 element && section.addElement(element);
             } else {
-                const element = await this.dataElementFactory.build(trackedEntityAttribute);
+                const element = await this.dataElementFactory.build(sourceElement);
                 element && section.addElement(element);
             }
         });
@@ -156,7 +159,7 @@ export class EnrollmentFactory {
     }
 
     async _buildSection(
-        sourceElements?: Array<SourceElement>,
+        sourceElements: Array<SourceElement>,
         cachedSectionCustomLabel: string,
         cachedSectionCustomId: string,
     ) {
@@ -169,6 +172,7 @@ export class EnrollmentFactory {
             o.name = cachedSectionCustomLabel;
         });
 
+        // $FlowFixMe
         await this._buildElementsForSection(sourceElements, section);
         return section;
     }
@@ -204,7 +208,8 @@ export class EnrollmentFactory {
         cachedProgram: CachedProgram,
         cachedProgramSections: ?Array<CachedProgramSection>,
     ) {
-        const cachedProgramTrackedEntityAttributes = cachedProgram?.programTrackedEntityAttributes;
+        const cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute> =
+            cachedProgram?.programTrackedEntityAttributes;
 
         const enrollmentForm = new RenderFoundation((o) => {
             o.featureType = EnrollmentFactory._getFeatureType(cachedProgram.featureType);

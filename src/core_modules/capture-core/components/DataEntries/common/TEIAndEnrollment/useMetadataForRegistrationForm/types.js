@@ -1,5 +1,5 @@
 // @flow
-import type { TeiRegistration, Enrollment } from '../../../metaData';
+import type { TeiRegistration, Enrollment } from '../../../../../metaData';
 
 export type RegistrationFormMetadata = ?(TeiRegistration | Enrollment)
 

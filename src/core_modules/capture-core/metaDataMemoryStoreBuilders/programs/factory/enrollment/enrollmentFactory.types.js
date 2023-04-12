@@ -4,19 +4,20 @@ import type {
 } from '../../../../metaData';
 
 import type {
-    CachedOptionSet,
+    CachedOptionSet, CachedProgramTrackedEntityAttribute,
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
 } from '../../../../storageControllers/cache.types';
 
-type DataEntryPluginSettings = {|
+export type DataEntryPluginSettings = {|
     id: string,
     name: string,
     pluginSource: string,
+    type: 'plugin',
     fieldMap: Array<CachedTrackedEntityAttribute>
 |}
 
-export type SourceElement = DataEntryPluginSettings | CachedTrackedEntityAttribute;
+export type SourceElement = DataEntryPluginSettings | CachedProgramTrackedEntityAttribute;
 
 export type ConstructorInput = {|
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
