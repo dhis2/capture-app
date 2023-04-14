@@ -3,13 +3,7 @@
 import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
-
-export class IndexedDBError extends Error {
-    constructor(error) {
-        super(error.message);
-        this.error = error;
-    }
-}
+import { IndexedDBError } from './IndexedDBError/IndexedDBError';
 
 export class StorageController {
     static errorMessages = {

@@ -7,41 +7,62 @@ import { withStyles } from '@material-ui/core/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
+import { enrollmentAccessLevels } from './EnrollmentPage.constants';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { WidgetBreakingTheGlass } from '../../WidgetBreakingTheGlass';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
+import { fetchEnrollments } from './EnrollmentPage.actions';
+import { useResetProgramId } from '../../ScopeSelector';
 
 export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',
     TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED: 'TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED',
+    PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS: 'PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS',
+    RESTRICTED_PROGRAM_NO_ACCESS: 'RESTRICTED_PROGRAM_NO_ACCESS',
     EVENT_PROGRAM_SELECTED: 'EVENT_PROGRAM_SELECTED',
     MISSING_ENROLLMENT_SELECTION: 'MISSING_ENROLLMENT_SELECTION',
+    MISSING_ENROLLMENT_SELECTION_ADD_NEW: 'MISSING_ENROLLMENT_SELECTION_ADD_NEW',
     MISSING_PROGRAM_CATEGORIES_SELECTION: 'MISSING_PROGRAM_CATEGORIES_SELECTION',
     MISSING_PROGRAM_SELECTION: 'MISSING_PROGRAM_SELECTION',
 };
 
 const useMissingStatus = () => {
-    const dispatch = useDispatch();
     const [missingStatus, setStatus] = useState(null);
 
-    const { programId, enrollmentId } = useLocationQuery();
+    const { programId, enrollmentId, teiId } = useLocationQuery();
 
     const { scopeType, tetId: scopeTetId } = useScopeInfo(programId);
     const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
-    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, tetId } = useEnrollmentInfo(enrollmentId, programId);
+    const {
+        programHasEnrollments,
+        programHasActiveEnrollments,
+        enrollmentsOnProgramContainEnrollmentId,
+        onlyEnrollOnce,
+        tetId,
+    } = useEnrollmentInfo(enrollmentId, programId, teiId);
+    const { enrollmentAccessLevel } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const selectedProgramIsOfDifferentTypTetype = scopeTetId !== tetId;
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
         const selectedProgramIsEvent = programId && scopeType === scopeTypes.EVENT_PROGRAM;
 
-        if (selectedProgramIsTracker && programSelectionIsIncomplete) {
+        if (enrollmentAccessLevel === enrollmentAccessLevels.LIMITED_ACCESS) {
+            setStatus(missingStatuses.PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS);
+        } else if (enrollmentAccessLevel === enrollmentAccessLevels.NO_ACCESS) {
+            setStatus(missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS);
+        } else if (selectedProgramIsTracker && programSelectionIsIncomplete) {
             setStatus(missingStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION);
         } else if (selectedProgramIsTracker && selectedProgramIsOfDifferentTypTetype) {
             setStatus(missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED);
         } else if (selectedProgramIsTracker && programHasEnrollments && !enrollmentsOnProgramContainEnrollmentId) {
-            setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION);
-        } else if (selectedProgramIsTracker && !programHasEnrollments) {
+            if (programHasActiveEnrollments || onlyEnrollOnce) {
+                setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION);
+            } else {
+                setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW);
+            }
+        } else if (selectedProgramIsTracker && !programHasEnrollments && enrollmentAccessLevel !== enrollmentAccessLevels.UNKNOWN_ACCESS) {
             setStatus(missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED);
         } else if (selectedProgramIsEvent) {
             setStatus(missingStatuses.EVENT_PROGRAM_SELECTED);
@@ -49,13 +70,15 @@ const useMissingStatus = () => {
             setStatus(missingStatuses.MISSING_PROGRAM_SELECTION);
         }
     }, [
-        dispatch,
         programId,
         programSelectionIsIncomplete,
         programHasEnrollments,
+        programHasActiveEnrollments,
         enrollmentsOnProgramContainEnrollmentId,
         selectedProgramIsOfDifferentTypTetype,
         scopeType,
+        enrollmentAccessLevel,
+        onlyEnrollOnce,
     ]);
 
     return { missingStatus };
@@ -66,14 +89,21 @@ const useNavigations = () => {
     const { tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
     const { programId, orgUnitId, teiId } = useLocationQuery();
-    const navigateToProgramRegistrationPage = () =>
+    const navigateToTrackerProgramRegistrationPage = () =>
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+    const navigateToEventProgramRegistrationPage = () =>
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToEventWorkingList = () =>
         history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToTetRegistrationPage = () =>
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId: tetId })}`);
 
-    return { navigateToProgramRegistrationPage, navigateToEventWorkingList, navigateToTetRegistrationPage };
+    return {
+        navigateToTrackerProgramRegistrationPage,
+        navigateToEventProgramRegistrationPage,
+        navigateToEventWorkingList,
+        navigateToTetRegistrationPage,
+    };
 };
 
 const getStyles = () => ({
@@ -84,14 +114,23 @@ const getStyles = () => ({
     },
 });
 
-export const MissingMessage = withStyles(getStyles)(({ classes }) => {
-    const { navigateToProgramRegistrationPage, navigateToEventWorkingList } = useNavigations();
+export const MissingMessage = withStyles(getStyles)(({
+    classes,
+}) => {
+    const dispatch = useDispatch();
+    const {
+        navigateToTrackerProgramRegistrationPage,
+        navigateToEventProgramRegistrationPage,
+        navigateToEventWorkingList,
+    } = useNavigations();
     const { missingStatus } = useMissingStatus();
+    const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
-    const { programId } = useLocationQuery();
+    const { programId, teiId, enrollmentId } = useLocationQuery();
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
+
     return (<>
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
@@ -115,9 +154,48 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
         {
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose an enrollment to view the dashboard.')}
+                {enrollmentId ?
+                    i18n.t('Invalid enrollment id {{enrollmentId}}.', {
+                        enrollmentId,
+                        interpolation: { escapeValue: false },
+                    }) :
+                    i18n.t('Choose an enrollment to view the dashboard.')
+                }
             </IncompleteSelectionsMessage>
+        }
 
+        {
+            missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW &&
+            <IncompleteSelectionsMessage>
+                <div className={classes.lineHeight}>
+                    {i18n.t('There are no active enrollments.')}
+                    <div>
+                        <LinkButton
+                            className={classes.link}
+                            onClick={navigateToTrackerProgramRegistrationPage}
+                        >
+                            {i18n.t('Add new enrollment for {{teiDisplayName}} in this program.', { teiDisplayName })}
+                        </LinkButton>
+                    </div>
+                </div>
+            </IncompleteSelectionsMessage>
+        }
+
+        {
+            missingStatus === missingStatuses.PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS &&
+            <WidgetBreakingTheGlass
+                teiId={teiId}
+                programId={programId}
+                onBreakingTheGlass={() => dispatch(fetchEnrollments())}
+                onCancel={resetProgramIdAndEnrollmentContext}
+            />
+        }
+
+        {
+            missingStatus === missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS &&
+            <IncompleteSelectionsMessage>
+                {i18n.t('No access to program owner.')}
+            </IncompleteSelectionsMessage>
         }
 
         {
@@ -128,10 +206,9 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
                         teiDisplayName, interpolation: { escapeValue: false },
                     })}
                     <div>
-
                         <LinkButton
                             className={classes.link}
-                            onClick={navigateToProgramRegistrationPage}
+                            onClick={navigateToTrackerProgramRegistrationPage}
                         >
                             {i18n.t('Enroll {{teiDisplayName}} in this program.', { teiDisplayName })}
                         </LinkButton>
@@ -150,7 +227,7 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
                     <div>
                         <LinkButton
                             className={classes.link}
-                            onClick={navigateToProgramRegistrationPage}
+                            onClick={navigateToTrackerProgramRegistrationPage}
                         >
                             {i18n.t('Enroll a new {{selectedTetName}} in this program.', {
                                 selectedTetName, interpolation: { escapeValue: false },
@@ -171,7 +248,7 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
                     <div>
                         <LinkButton
                             className={classes.link}
-                            onClick={navigateToProgramRegistrationPage}
+                            onClick={navigateToEventProgramRegistrationPage}
                         >
                             {i18n.t('Create a new event in this program.')}
                         </LinkButton>

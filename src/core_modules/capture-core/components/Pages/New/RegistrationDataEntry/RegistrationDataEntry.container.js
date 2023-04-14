@@ -1,5 +1,6 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuid } from 'uuid';
 import React, { useCallback, type ComponentType, useEffect } from 'react';
 import { useLocationQuery } from '../../../../utils/routing';
 import { RegistrationDataEntryComponent } from './RegistrationDataEntry.component';
@@ -29,7 +30,10 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
         [dispatch]);
 
     const dispatchOnSaveWithEnrollment = useCallback(
-        (formFoundation) => { dispatch(startSavingNewTrackedEntityInstanceWithEnrollment(formFoundation, teiId)); },
+        (formFoundation) => {
+            const uid = uuid();
+            dispatch(startSavingNewTrackedEntityInstanceWithEnrollment(formFoundation, teiId, uid));
+        },
         [dispatch, teiId]);
 
     const dataEntryIsReady = useSelector(({ dataEntries }) => (!!dataEntries[dataEntryId]));

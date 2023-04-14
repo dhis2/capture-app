@@ -1,4 +1,5 @@
 // @flow
+import { isEqual } from 'lodash';
 
 export function areFiltersEqual(prevFilters: Object, newFilters: Object) {
     if (prevFilters === newFilters) {
@@ -12,5 +13,5 @@ export function areFiltersEqual(prevFilters: Object, newFilters: Object) {
     }
 
     return newFilterKeys
-        .every(key => newFilters[key] === prevFilters[key]);
+        .every(key => isEqual(newFilters[key], prevFilters[key]));
 }

@@ -197,6 +197,7 @@ export type CachedProgram = {
     displayFrontPageList: boolean,
     selectIncidentDatesInFuture: boolean,
     displayIncidentDate: boolean,
+    onlyEnrollOnce: boolean,
 };
 
 export type CachedProgramStageDataElementsAsObject = {

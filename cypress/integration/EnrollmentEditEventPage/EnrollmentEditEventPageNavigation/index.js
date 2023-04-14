@@ -1,10 +1,14 @@
 Given(/^you land on the enrollment event page by having typed (.*)$/, (url) => {
     cy.visit(url);
-    cy.get('[data-test="scope-selector"]').contains('Selected person');
+    cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
 Given('you open the enrollment page which has multiple events and stages', () => {
     cy.visit('#/enrollment?enrollmentId=ek4WWAgXX5i');
+});
+
+And('the widgets are done rendering', () => {
+    cy.contains('[data-test=profile-widget]', 'Person profile');
 });
 
 When('the user clicks the first second antenatal care visit event', () => {
