@@ -1,3 +1,10 @@
+# [100.28.0](https://github.com/dhis2/capture-app/compare/v100.27.0...v100.28.0) (2023-04-14)
+
+
+### Features
+
+* [DHIS2-12337] indicate waiting on saving new tei ([#3181](https://github.com/dhis2/capture-app/issues/3181)) ([3f294c4](https://github.com/dhis2/capture-app/commit/3f294c42985f1164c40ee57e74c242b50eda1b24))
+
 # [100.27.0](https://github.com/dhis2/capture-app/compare/v100.26.2...v100.27.0) (2023-03-30)
 
 
