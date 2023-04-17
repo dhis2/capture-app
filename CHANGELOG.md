@@ -1,3 +1,10 @@
+## [100.28.2](https://github.com/dhis2/capture-app/compare/v100.28.1...v100.28.2) (2023-04-17)
+
+
+### Bug Fixes
+
+* [DHIS2-14976] apply input converters on context variables ([#3221](https://github.com/dhis2/capture-app/issues/3221)) ([4470e78](https://github.com/dhis2/capture-app/commit/4470e7891ec1800db280233a8cd1dca56206370c))
+
 ## [100.28.1](https://github.com/dhis2/capture-app/compare/v100.28.0...v100.28.1) (2023-04-17)
 
 
