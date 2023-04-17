@@ -1,3 +1,10 @@
+# [100.29.0](https://github.com/dhis2/capture-app/compare/v100.28.3...v100.29.0) (2023-04-17)
+
+
+### Features
+
+* [DHIS2-12256] use display label for due date and execution date ([#3228](https://github.com/dhis2/capture-app/issues/3228)) ([70b23a6](https://github.com/dhis2/capture-app/commit/70b23a60fa2d75722bb82461c68bf29ca2bfe66e))
+
 ## [100.28.3](https://github.com/dhis2/capture-app/compare/v100.28.2...v100.28.3) (2023-04-17)
 
 
