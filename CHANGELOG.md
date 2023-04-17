@@ -1,3 +1,10 @@
+## [100.28.3](https://github.com/dhis2/capture-app/compare/v100.28.2...v100.28.3) (2023-04-17)
+
+
+### Bug Fixes
+
+* [DHIS2-14868] extend the clickable zone for search header ([#3226](https://github.com/dhis2/capture-app/issues/3226)) ([a065ebb](https://github.com/dhis2/capture-app/commit/a065ebbaf01ffeae46c2586e9c766581a6db9399))
+
 ## [100.28.2](https://github.com/dhis2/capture-app/compare/v100.28.1...v100.28.2) (2023-04-17)
 
 
