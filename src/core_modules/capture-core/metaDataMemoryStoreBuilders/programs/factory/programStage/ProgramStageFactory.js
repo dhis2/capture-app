@@ -96,7 +96,7 @@ export class ProgramStageFactory {
         }
 
         return cachedProgramStageDataElements.reduce((accObject, d2ProgramStageDataElement) => {
-            accObject[d2ProgramStageDataElement.dataElement.id] = d2ProgramStageDataElement;
+            accObject[d2ProgramStageDataElement.dataElementId] = d2ProgramStageDataElement;
             return accObject;
         }, {});
     }

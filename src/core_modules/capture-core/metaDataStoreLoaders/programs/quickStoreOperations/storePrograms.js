@@ -1,6 +1,7 @@
 // @flow
 import { quickStore } from '../../IOUtils';
 import { getContext } from '../../context';
+import type { CachedProgramStageDataElement } from '../../../storageControllers';
 import type { apiProgramsResponse } from './types';
 
 const convert = (() => {
@@ -19,16 +20,6 @@ const convert = (() => {
         return arr;
     };
 
-    const convertTranslationsToObject = translations =>
-        (translations || [])
-            .reduce((accTranslationObject, translation) => {
-                if (!accTranslationObject[translation.locale]) {
-                    accTranslationObject[translation.locale] = {};
-                }
-                accTranslationObject[translation.locale][translation.property] = translation.value;
-                return accTranslationObject;
-            }, {});
-
     const convertProgramSections = apiProgramSections =>
         (apiProgramSections || [])
             .map(apiProgramSection => ({
@@ -39,14 +30,16 @@ const convert = (() => {
 
     const getProgramStageSections = apiSections => (apiSections ? sort(apiSections) : []);
 
-    const getProgramStageDataElements = programStageDataElements =>
+    const getProgramStageDataElements = (programStageDataElements): Array<CachedProgramStageDataElement> =>
         (programStageDataElements || [])
-            .filter(programStageDataElement => programStageDataElement.dataElement)
+            .filter(programStageDataElement => programStageDataElement.dataElement?.id)
             .map((programStageDataElement) => {
-                programStageDataElement.dataElement.translations =
-                    // $FlowFixMe[incompatible-type] automated comment
-                    convertTranslationsToObject(programStageDataElement.dataElement.translations);
-                return programStageDataElement;
+                const { dataElement, ...passOnProps } = programStageDataElement;
+                const cachedProgramStageDataElement = {
+                    ...passOnProps,
+                    dataElementId: dataElement.id,
+                };
+                return cachedProgramStageDataElement;
             });
 
     const getProgramStages = (apiProgramStages) => {
@@ -63,12 +56,13 @@ const convert = (() => {
     const getProgramTrackedEntityAttribute = programAttribute => ({
         ...programAttribute,
         trackedEntityAttribute: undefined,
-        trackedEntityAttributeId: programAttribute.trackedEntityAttribute && programAttribute.trackedEntityAttribute.id,
+        trackedEntityAttributeId: programAttribute.trackedEntityAttribute.id,
     });
 
     const getProgramTrackedEntityAttributes = programAttributes =>
         (programAttributes || [])
-            .map(pa => getProgramTrackedEntityAttribute(pa));
+            .filter(({ trackedEntityAttribute }) => trackedEntityAttribute?.id)
+            .map(programAttribute => getProgramTrackedEntityAttribute(programAttribute));
 
     return (response: apiProgramsResponse) => {
         const apiPrograms = (response && response.programs) || [];
@@ -94,10 +88,13 @@ const fieldsParam = 'id,displayName,displayShortName,description,programType,sty
 'trackedEntityType[id],' +
 'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
 'userRoles[id,displayName],' +
+// eslint-disable-next-line max-len
 'programStages[id,access,autoGenerateEvent,openAfterEnrollment,hideDueDate,allowGenerateNextVisit,repeatable,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,name,displayName,description,executionDateLabel,dueDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode]' +
-'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],' +
-'dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,url,optionSetValue,style,optionSet[id]]]],' +
+'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],' +
+// eslint-disable-next-line max-len
+'programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],dataElement[id]]]' +
 'programSections[id, displayFormName, sortOrder, trackedEntityAttributes],' +
+// eslint-disable-next-line max-len
 'programTrackedEntityAttributes[trackedEntityAttribute[id],displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate]';
 
 export const storePrograms = (programIds: Array<string>) => {
