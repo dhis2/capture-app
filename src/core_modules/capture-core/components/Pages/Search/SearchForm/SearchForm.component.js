@@ -207,6 +207,7 @@ const SearchFormIndex = ({
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}
+                                            extendedCollapsibility
                                         />
                                     }
                                 >
@@ -261,6 +262,7 @@ const SearchFormIndex = ({
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}
+                                            extendedCollapsibility
                                         />
                                     }
                                 >
