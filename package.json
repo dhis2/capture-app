@@ -134,7 +134,8 @@
         "@dhis2/cli-app-scripts": "^10.4.0-alpha.1",
         "@babel/preset-react": "7.16.7",
         "react-error-overlay": "6.0.9",
-        "react-scripts": "4.0.3"
+        "react-scripts": "4.0.3",
+        "core-js": "2.5.7"
     },
     "browserslist": {
         "production": [
