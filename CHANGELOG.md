@@ -1,3 +1,10 @@
+## [100.28.1](https://github.com/dhis2/capture-app/compare/v100.28.0...v100.28.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* [DHIS2-15109] eventDate breaks saved working lists ([#3234](https://github.com/dhis2/capture-app/issues/3234)) ([cde8b50](https://github.com/dhis2/capture-app/commit/cde8b50d3202cda84f2e96dc86f8ff10bdfbea3a))
+
 # [100.28.0](https://github.com/dhis2/capture-app/compare/v100.27.0...v100.28.0) (2023-04-14)
 
 
