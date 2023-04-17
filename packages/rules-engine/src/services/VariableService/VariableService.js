@@ -442,23 +442,29 @@ export class VariableService {
         );
     }
 
+    buildContextVariable(rawValue: any, valueType: string, params: any = {}) {
+        params.variablePrefix = variablePrefixes.CONTEXT_VARIABLE;
+        return this.buildVariable(
+            this.onProcessValue(rawValue, valueType),
+            valueType,
+            params,
+        );
+    }
+
+    buildRawContextVariable(value: any, valueType: string) {
+        return this.buildVariable(
+            value,
+            valueType, {
+                variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+            },
+        );
+    }
+
     getContextVariables(sourceData: SourceData): RuleVariables {
         let variables = {};
 
-        variables.environment = this.buildVariable(
-            this.environment,
-            typeKeys.TEXT, {
-                variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-            },
-        );
-
-        variables.current_date = this.buildVariable(
-            VariableService.dateUtils.getToday(),
-            typeKeys.DATE, {
-                variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-            },
-        );
-
+        variables.environment = this.buildRawContextVariable(this.environment, typeKeys.TEXT);
+        variables.current_date = this.buildRawContextVariable(VariableService.dateUtils.getToday(), typeKeys.DATE);
         variables = {
             ...variables,
             ...this.getEventContextVariables(sourceData.executingEvent, sourceData.eventsContainer),
@@ -473,64 +479,24 @@ export class VariableService {
         const variables = {};
 
         if (executingEvent) {
-            variables.event_date = this.buildVariable(
-                executingEvent.occurredAt,
-                typeKeys.DATE, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
+            variables.event_date = this.buildContextVariable(executingEvent.occurredAt, typeKeys.DATE);
+            variables.due_date = this.buildContextVariable(executingEvent.scheduledAt, typeKeys.DATE);
+            variables.completed_date = this.buildContextVariable(executingEvent.completedAt, typeKeys.DATE);
 
-            variables.due_date = this.buildVariable(
-                executingEvent.scheduledAt,
-                typeKeys.DATE, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
-
-            variables.completed_date = this.buildVariable(
-                executingEvent.completedAt,
-                typeKeys.DATE, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
-
-            variables.event_id = this.buildVariable(
+            variables.event_id = this.buildContextVariable(
                 executingEvent.eventId,
                 typeKeys.TEXT, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                     variableEventDate: this.onProcessValue(executingEvent.occurredAt, typeKeys.DATE),
                 },
             );
 
-            variables.event_status = this.buildVariable(
-                executingEvent.status,
-                typeKeys.TEXT, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
-
-            variables.program_stage_id = this.buildVariable(
-                executingEvent.programStageId,
-                typeKeys.TEXT, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
-
-            variables.program_stage_name = this.buildVariable(
-                executingEvent.programStageName,
-                typeKeys.TEXT, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
+            variables.event_status = this.buildContextVariable(executingEvent.status, typeKeys.TEXT);
+            variables.program_stage_id = this.buildContextVariable(executingEvent.programStageId, typeKeys.TEXT);
+            variables.program_stage_name = this.buildContextVariable(executingEvent.programStageName, typeKeys.TEXT);
         }
 
         if (eventsContainer) {
-            variables.event_count = this.buildVariable(
-                (eventsContainer.all && eventsContainer.all.length) || 0,
-                typeKeys.INTEGER, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
+            variables.event_count = this.buildRawContextVariable((eventsContainer.all && eventsContainer.all.length) || 0, typeKeys.INTEGER);
         }
 
         return variables;
@@ -540,40 +506,11 @@ export class VariableService {
         const variables = {};
 
         if (selectedEnrollment) {
-            variables.enrollment_date = this.buildVariable(
-                selectedEnrollment.enrolledAt,
-                typeKeys.DATE, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
-
-            variables.enrollment_id = this.buildVariable(
-                selectedEnrollment.enrollmentId,
-                typeKeys.TEXT, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
-
-            variables.enrollment_count = this.buildVariable(
-                1,
-                typeKeys.INTEGER, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
-
-            variables.tei_count = this.buildVariable(
-                1,
-                typeKeys.INTEGER, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
-
-            variables.incident_date = this.buildVariable(
-                selectedEnrollment.occurredAt,
-                typeKeys.DATE, {
-                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-                },
-            );
+            variables.enrollment_date = this.buildContextVariable(selectedEnrollment.enrolledAt, typeKeys.DATE);
+            variables.enrollment_id = this.buildContextVariable(selectedEnrollment.enrollmentId, typeKeys.TEXT);
+            variables.enrollment_count = this.buildRawContextVariable(1, typeKeys.INTEGER);
+            variables.tei_count = this.buildRawContextVariable(1, typeKeys.INTEGER);
+            variables.incident_date = this.buildContextVariable(selectedEnrollment.occurredAt, typeKeys.DATE);
         }
 
         return variables;
@@ -581,13 +518,7 @@ export class VariableService {
 
     getOrganisationContextVariables(orgUnit: OrgUnit) {
         const variables = {};
-        variables.orgunit_code = this.buildVariable(
-            // $FlowFixMe[prop-missing] automated comment
-            orgUnit?.code,
-            typeKeys.TEXT, {
-                variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
-            },
-        );
+        variables.orgunit_code = this.buildContextVariable(orgUnit?.code, typeKeys.TEXT);
         return variables;
     }
 

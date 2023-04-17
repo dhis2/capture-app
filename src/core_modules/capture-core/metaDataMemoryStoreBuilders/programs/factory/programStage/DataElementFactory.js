@@ -2,11 +2,12 @@
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { getUserStorageController } from '../../../../storageControllers';
+import { userStores } from '../../../../storageControllers/stores';
 import type {
     CachedDataElement,
     CachedProgramStageDataElement,
     CachedOptionSet,
-
 } from '../../../../storageControllers/cache.types';
 import { DataElement, DateDataElement, dataElementTypes } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
@@ -53,8 +54,8 @@ export class DataElementFactory {
     async _setBaseProperties(
         dataElement: DataElement,
         cachedProgramStageDataElement: CachedProgramStageDataElement,
+        cachedDataElement: CachedDataElement,
     ) {
-        const cachedDataElement = cachedProgramStageDataElement.dataElement;
         dataElement.id = cachedDataElement.id;
         dataElement.name = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.NAME) ||
             cachedDataElement.displayName;
@@ -89,37 +90,44 @@ export class DataElementFactory {
 
     async _buildBaseDataElement(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
+        cachedDataElement: CachedDataElement,
         dataElementType: $Keys<typeof dataElementTypes>,
     ) {
         const dataElement = new DataElement();
         dataElement.type = dataElementType;
-        await this._setBaseProperties(dataElement, cachedProgramStageDataElement);
+        await this._setBaseProperties(dataElement, cachedProgramStageDataElement, cachedDataElement);
         return dataElement;
     }
 
-    async _buildDateDataElement(cachedProgramStageDataElement: CachedProgramStageDataElement) {
+    async _buildDateDataElement(
+        cachedProgramStageDataElement: CachedProgramStageDataElement,
+        cachedDataElement: CachedDataElement,
+    ) {
         const dateDataElement = new DateDataElement();
         dateDataElement.type = dataElementTypes.DATE;
         dateDataElement.allowFutureDate = cachedProgramStageDataElement.allowFutureDate;
-        await this._setBaseProperties(dateDataElement, cachedProgramStageDataElement);
+        await this._setBaseProperties(dateDataElement, cachedProgramStageDataElement, cachedDataElement);
         return dateDataElement;
     }
 
-    build(
+    async build(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
-    ): ?Promise<DataElement> {
-        if (!cachedProgramStageDataElement.dataElement) {
+    ): Promise<?DataElement> {
+        const cachedDataElement =
+            await getUserStorageController().get(userStores.DATA_ELEMENTS, cachedProgramStageDataElement.dataElementId);
+
+        if (!cachedDataElement) {
             log.error(
-                errorCreator('programStageDataElement does not contain a dataElement')(
+                errorCreator('could not find underlying dataElement for programStageDataElement')(
                     { programStageDataElement: cachedProgramStageDataElement }));
             return null;
         }
 
         const dataElementType =
-            DataElementFactory._getDataElementType(cachedProgramStageDataElement.dataElement.valueType);
+            DataElementFactory._getDataElementType(cachedDataElement.valueType);
 
         return dataElementType === dataElementTypes.DATE ?
-            this._buildDateDataElement(cachedProgramStageDataElement) :
-            this._buildBaseDataElement(cachedProgramStageDataElement, dataElementType);
+            this._buildDateDataElement(cachedProgramStageDataElement, cachedDataElement) :
+            this._buildBaseDataElement(cachedProgramStageDataElement, cachedDataElement, dataElementType);
     }
 }
