@@ -23,7 +23,7 @@ type OptionGroup = {
 };
 
 type TrackedEntityTypeAttribute = {
-    trackedEntityAttributeId: ?string,
+    trackedEntityAttributeId: string,
     displayInList: boolean,
     mandatory: boolean,
     searchable: boolean,
@@ -55,7 +55,7 @@ export type TrackedEntityAttribute = {
 };
 
 export type ProgramTrackedEntityAttribute = {
-    trackedEntityAttributeId: ?string,
+    trackedEntityAttributeId: string,
     displayInList: boolean,
     searchable: boolean,
     mandatory: boolean,
