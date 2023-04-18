@@ -4,7 +4,7 @@ import { DataEntryPluginComponent } from './DataEntryPlugin.component';
 import type { ContainerProps } from './DataEntryPlugin.types';
 import { usePluginMessages } from './hooks/usePluginMessages';
 import { usePluginCallbacks } from './hooks/usePluginCallbacks';
-import { usePluginFormValues } from './hooks/usePluginFormValues';
+import { usePluginValues } from './hooks/usePluginValues';
 
 export const DataEntryPlugin = (props: ContainerProps) => {
     const { pluginSource, fieldsMetadata, formId, onUpdateField, pluginContext } = props;
@@ -12,7 +12,7 @@ export const DataEntryPlugin = (props: ContainerProps) => {
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
 
     // Plugin related functionality and feedback
-    const { pluginValues } = usePluginFormValues(formId, metadataByPluginId);
+    const { pluginValues } = usePluginValues(formId, metadataByPluginId, pluginContext);
     const { errors, warnings } = usePluginMessages(formId, metadataByPluginId);
     const { setFieldValue, setContextFieldValue } = usePluginCallbacks({
         configuredPluginIds,
