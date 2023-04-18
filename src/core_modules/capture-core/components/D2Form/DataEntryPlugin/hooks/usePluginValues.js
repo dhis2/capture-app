@@ -28,6 +28,7 @@ export const usePluginValues = (
 
     const contextValues = useMemo(() => Object.entries(pluginContext)
         .reduce((acc, [key, value]) => {
+            // $FlowFixMe
             acc[key] = value.value;
             return acc;
         }, {}), [pluginContext]);
