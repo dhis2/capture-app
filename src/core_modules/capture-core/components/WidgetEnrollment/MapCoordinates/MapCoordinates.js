@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
 import { MapCoordinatesModal } from './MapCoordinatesModal';
 import type { MiniMapProps } from './mapCoordinates.types';
+import { convertToClientCoordinates } from './helpers';
 
 const styles = () => ({
     mapContainer: {
@@ -16,18 +17,6 @@ const styles = () => ({
         height: '100%',
     },
 });
-
-const convertToClientCoordinates = (coordinates, type) => {
-    switch (type) {
-    case dataElementTypes.COORDINATE:
-        return [coordinates[1], coordinates[0]];
-    case dataElementTypes.POLYGON:
-        return coordinates[0].map(coord => [coord[1], coord[0]]);
-    default:
-        return coordinates;
-    }
-};
-
 
 const MapCoordinatesPlain = ({ coordinates, type, classes, onSetCoordinates }: MiniMapProps) => {
     const [isModalOpen, setModalOpen] = useState(false);

@@ -56,7 +56,7 @@ const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
 const MapCoordinatesModalPlain = ({
     classes,
-    center: initalCenter,
+    center: initialCenter,
     isOpen,
     setOpen,
     type,
@@ -67,7 +67,9 @@ const MapCoordinatesModalPlain = ({
     const [position, setPosition] = useState(isPoint ? defaultValues : null);
     const [coordinates, setCoordinates] = useState(type === dataElementTypes.POLYGON ? defaultValues : null);
     const [hasChanges, setChanges] = useState(false);
-    const [center, setCenter] = useState(initalCenter);
+    const [center, setCenter] = useState(initialCenter);
+    const [tempLat, setLat] = useState();
+    const [tempLng, setLng] = useState();
     const [isEditing, setEditing] = useState(!(isPoint && defaultValues));
 
     const onHandleMapClicked = (mapCoordinates) => {
@@ -75,6 +77,8 @@ const MapCoordinatesModalPlain = ({
             const { lat, lng } = mapCoordinates.latlng;
             const newPosition: [number, number] = [lat, lng];
             setPosition(newPosition);
+            setLat(lat);
+            setLng(lng);
             setChanges(true);
         }
     };
@@ -98,6 +102,8 @@ const MapCoordinatesModalPlain = ({
     const onSearch = (searchPosition: any) => {
         setCenter(searchPosition);
         if (isPoint) {
+            setLat(searchPosition[0]);
+            setLng(searchPosition[1]);
             setPosition(searchPosition);
             setChanges(true);
         }
@@ -214,12 +220,14 @@ const MapCoordinatesModalPlain = ({
         (
             <CoordinateInput
                 label={i18n.t('Latitude')}
-                value={position && position[0]}
+                value={tempLat}
                 classes={classes}
                 disabled={!isEditing}
                 onBlur={(latValue) => {
                     if (!latValue) { return; }
-                    const newPosition = [Number(latValue), position && position[1]];
+                    const lngValue = tempLng || (position?.[1] ? position[1] : undefined);
+                    if (!lngValue) { return; }
+                    const newPosition = [Number(latValue), lngValue];
                     if (newPosition?.length === 2) {
                         // $FlowFixMe
                         setPosition(newPosition);
@@ -228,9 +236,7 @@ const MapCoordinatesModalPlain = ({
                     }
                 }}
                 onChange={(latValue) => {
-                    const newPosition = [Number(latValue), position && position[1]];
-                    // $FlowFixMe
-                    setPosition(newPosition);
+                    setLat(latValue);
                 }}
             />
         );
@@ -239,12 +245,14 @@ const MapCoordinatesModalPlain = ({
         (
             <CoordinateInput
                 label={i18n.t('Longitude')}
-                value={position && position[1]}
+                value={tempLng}
                 classes={classes}
                 disabled={!isEditing}
                 onBlur={(lngValue) => {
                     if (!lngValue) { return; }
-                    const newPosition = [position && position[0], Number(lngValue)];
+                    const latValue = tempLat || (position?.[1] ? position[0] : undefined);
+                    if (!latValue) { return; }
+                    const newPosition = [latValue, Number(lngValue)];
                     if (newPosition?.length === 2) {
                         // $FlowFixMe
                         setPosition(newPosition);
@@ -253,9 +261,7 @@ const MapCoordinatesModalPlain = ({
                     }
                 }}
                 onChange={(lngValue) => {
-                    const newPosition = [position && position[0], Number(lngValue)];
-                    // $FlowFixMe
-                    setPosition(newPosition);
+                    setLng(lngValue);
                 }}
             />
         );
@@ -275,6 +281,8 @@ const MapCoordinatesModalPlain = ({
                 onClick={() => {
                     // $FlowFixMe
                     setPosition(null);
+                    setLat(null);
+                    setLng(null);
                 }}
             />}
         </div>
