@@ -67,7 +67,7 @@ const MapCoordinatesModalPlain = ({
     const [position, setPosition] = useState(isPoint ? defaultValues : null);
     const [coordinates, setCoordinates] = useState(type === dataElementTypes.POLYGON ? defaultValues : null);
     const [hasChanges, setChanges] = useState(false);
-    const [center, setCenter] = useState(initialCenter);
+    const [center, setCenter] = useState();
     const [tempLat, setLat] = useState();
     const [tempLng, setLng] = useState();
     const [isEditing, setEditing] = useState(!(isPoint && defaultValues));
@@ -136,7 +136,7 @@ const MapCoordinatesModalPlain = ({
         (Array.isArray(coordinates) ? coordsToFeatureCollection(coordinates) : null);
 
     const renderMap = () => (<Map
-        center={center}
+        center={center ?? initialCenter}
         zoom={13}
         ref={(ref) => {
             if (ref?.leafletElement) {
