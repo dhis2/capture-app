@@ -12,6 +12,7 @@ export const userStores = {
     PROGRAM_RULES_VARIABLES: 'programRulesVariables',
     PROGRAM_INDICATORS: 'programIndicators',
     TRACKED_ENTITY_ATTRIBUTES: 'trackedEntityAttributes',
+    DATA_ELEMENTS: 'dataElements',
     OPTION_SETS: 'optionSets',
     CATEGORIES: 'categories',
     CATEGORY_OPTIONS_BY_CATEGORY: 'categoryOptionsByCategory',

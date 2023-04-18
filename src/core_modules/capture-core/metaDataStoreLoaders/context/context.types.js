@@ -14,6 +14,7 @@ type StoreNames = {
     PROGRAM_RULES_VARIABLES: string,
     PROGRAM_INDICATORS: string,
     TRACKED_ENTITY_ATTRIBUTES: string,
+    DATA_ELEMENTS: string,
     OPTION_SETS: string,
     CATEGORIES: string,
     CATEGORY_OPTIONS_BY_CATEGORY: string,
