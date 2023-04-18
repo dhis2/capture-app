@@ -3,8 +3,7 @@
 import { dataElementTypes } from '../../../metaData';
 
 
-export const convertToClientCoordinates = (coordinates, type) => {
-    console.log({ coordinates, type });
+export const convertToClientCoordinates = (coordinates: any[], type: $Values<typeof dataElementTypes>) => {
     switch (type) {
     case dataElementTypes.COORDINATE:
         return [coordinates[1], coordinates[0]];
