@@ -137,10 +137,10 @@ const SearchFormIndex = ({
 
     return useMemo(() => {
         const formReference = {};
+        const containerButtonRef = {};
 
         const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId) => {
             const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
-
             if (isValid) {
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
@@ -185,7 +185,20 @@ const SearchFormIndex = ({
                     )
                 }
             </div>);
-        return (<>
+
+        const handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+            if (event.key === 'Enter' && expandedFormId && selectedSearchScopeId) {
+                const buttonRef = containerButtonRef[expandedFormId].children[0];
+                buttonRef.focus();
+                setTimeout(() => { buttonRef.click(); });
+            }
+        };
+
+        return (<div
+            tabIndex={-1}
+            onKeyPress={handleKeyPress}
+            role={'none'}
+        >
             {
                 searchGroupsForSelectedScope
                     .filter(searchGroup => searchGroup.unique)
@@ -207,6 +220,7 @@ const SearchFormIndex = ({
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}
+                                            extendedCollapsibility
                                         />
                                     }
                                 >
@@ -221,7 +235,10 @@ const SearchFormIndex = ({
                                             />
                                         </div>
                                     </div>
-                                    <div className={classes.searchButtonContainer}>
+                                    <div
+                                        className={classes.searchButtonContainer}
+                                        ref={(ref) => { containerButtonRef[formId] = ref; }}
+                                    >
                                         <Button
                                             disabled={searchStatus === searchPageStatus.LOADING}
                                             onClick={() =>
@@ -261,6 +278,7 @@ const SearchFormIndex = ({
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}
+                                            extendedCollapsibility
                                         />
                                     }
                                 >
@@ -273,7 +291,10 @@ const SearchFormIndex = ({
                                             />
                                         </div>
                                     </div>
-                                    <div className={classes.searchButtonContainer}>
+                                    <div
+                                        className={classes.searchButtonContainer}
+                                        ref={(ref) => { containerButtonRef[formId] = ref; }}
+                                    >
                                         <Button
                                             disabled={searchStatus === searchPageStatus.LOADING}
                                             onClick={() =>
@@ -298,7 +319,7 @@ const SearchFormIndex = ({
                         );
                     })
             }
-        </>);
+        </div>);
     },
     [
         classes.searchButtonContainer,

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { statusTypes } from 'capture-core/events/statusTypes';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys } from 'capture-core/constants';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import {
@@ -40,6 +40,7 @@ const mapStateToProps = (state: ReduxState, props) => {
         isCompleted,
         enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
         occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
+        eventData: state.enrollmentDomain?.enrollment?.events,
     };
 };
 

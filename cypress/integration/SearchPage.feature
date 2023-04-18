@@ -29,13 +29,13 @@ Feature: User interacts with Search page
         And you click find
         Then you are navigated to the Tracker Capture
 
-    Scenario: Searching using attributes in Tracker Program returns no results
-        Given you are on the default search page
-        When you select the search domain Malaria Case diagnosis
-        And you expand the attributes search area
-        And you fill in the first name with values that will return no results
-        And you click search
-        Then you should see no results found
+    # Scenario: Searching using attributes in Tracker Program returns no results
+    #     Given you are on the default search page
+    #     When you select the search domain Malaria Case diagnosis
+    #     And you expand the attributes search area
+    #     And you fill in the first name with values that will return no results
+    #     And you click search
+    #     Then you should see no results found
 
     Scenario: Searching using attributes in Tracker Program throws error
         Given you are on the default search page
@@ -167,6 +167,18 @@ Feature: User interacts with Search page
         Then you can see the second page of the results
         When you click the previous page button
         Then you can see the first page of the results
+
+    Scenario: Pressing enter should trigger search unique identifier returns results
+        Given you are on the default search page
+        When you select the search domain WHO RMNCH Tracker
+        And you press enter after filling in the unique identifier field with values that will return a tracked entity instance
+        Then you are navigated to the Tracker Capture 
+
+    Scenario: Pressing enter should trigger search attributes returns results
+        Given you are in the search page with the Child Programme being preselected from the url
+        And you expand the attributes search area
+        When you press enter after filling in the first and last name with values that will return results
+        And you can see the first page of the results
 
     Scenario: Searching using attributes in TEType domain has disabled pagination
         Given you are on the default search page

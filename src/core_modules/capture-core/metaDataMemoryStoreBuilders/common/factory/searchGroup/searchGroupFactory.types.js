@@ -11,7 +11,7 @@ export type ConstructorInput = {|
 |};
 
 export type InputSearchAttribute = {
-    trackedEntityAttributeId: ?string,
+    trackedEntityAttributeId: string,
     searchable: boolean,
     displayInList: boolean,
     renderOptionsAsRadio: ?boolean,

@@ -1,72 +1,71 @@
 // @flow
 import * as React from 'react';
+import { MenuDivider, MenuItem, Button, colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import i18n from '@dhis2/d2-i18n';
+import { FiltrableMenuItems } from '../FiltrableMenuItems';
+import type { Program } from '../../../../metaData';
 
-const getStyles = () => ({
-    list: {
-        padding: 0,
-    },
-    item: {
-        wordBreak: 'break-word',
-        hyphens: 'auto',
-        backgroundColor: '#ffffff',
-        borderRadius: 5,
-        marginBottom: 5,
-        padding: 5,
-        border: '1px solid lightGrey',
-        '&:hover': {
-            backgroundColor: 'white',
-            borderColor: '#71a4f8',
-        },
-    },
-    itemContents: {
+const styles = () => ({
+    filterWarning: {
+        fontSize: '14px',
+        color: `${colors.grey700}`,
         display: 'flex',
         alignItems: 'center',
+        gap: `${spacers.dp8}`,
+        padding: `${spacers.dp4} ${spacers.dp12}`,
     },
 });
 
-type Item = { label: string, value: string, iconLeft: React.Node };
-
 type Props = {
-    items: Array<Item>,
-    onSelect: (id: string) => void,
-    classes: {
-        list: string,
-        item: string,
-        itemContents: string,
-    },
+    programOptions: Array<{
+        value: string,
+        label: string,
+        icon?: React.Node,
+    }>,
+    programsArray: Array<Program>,
+    onChange: ({ value: string }) => void,
+    onResetOrgUnit: () => void,
+    ...CssClasses,
 };
 
-const ProgramListPlain = (props: Props) => {
-    const { items, onSelect, classes } = props;
+const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgUnit, classes }: Props) => {
+    const areAllProgramsAvailable =
+        programOptions.length === programsArray.filter(program => program.access.data.read).length;
+
     return (
-        <List className={classes.list}>
-            {items.map(item =>
-                (
-                    <ListItem
-                        className={classes.item}
-                        button
-                        onClick={() => onSelect(item.value)}
-                        key={item.value}
-                    >
-                        <ListItemText
-                            primary={(
-                                <div
-                                    className={classes.itemContents}
-                                >
-                                    {item.iconLeft}
-                                    {item.label}
-                                </div>
-                            )}
-                        />
-                    </ListItem>
-                ),
+        <>
+            {programOptions.length > 10 ? (
+                <FiltrableMenuItems
+                    options={programOptions}
+                    onChange={onChange}
+                    searchText={i18n.t('Search for a program')}
+                    dataTest="program"
+                />
+            ) : (
+                programOptions.map(option => (
+                    <MenuItem
+                        key={option.value}
+                        label={<div className={classes.label}>{option.label}</div>}
+                        value={option.value}
+                        onClick={onChange}
+                    />
+                ))
             )}
-        </List>
+
+            {!areAllProgramsAvailable && (
+                <>
+                    <MenuDivider />
+                    <div className={classes.filterWarning}>
+                        <span>{i18n.t('Some programs are being filtered by the chosen registering unit')}</span>
+                        <Button small secondary onClick={() => onResetOrgUnit()}>
+                            {i18n.t('Show all programs')}
+                        </Button>
+                    </div>
+                </>
+            )}
+        </>
     );
 };
 
-export const ProgramList = withStyles(getStyles)(ProgramListPlain);
+export const ProgramList = withStyles(styles)(ProgramListPlain);

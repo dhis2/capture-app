@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useState } from 'react';
 import { compose } from 'redux';
 import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -10,12 +10,14 @@ import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
+import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
+import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>
@@ -29,6 +31,7 @@ const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
 const styles = ({ typography }) => ({
     marginTop: {
         marginTop: typography.pxToRem(2),
+        display: 'flex',
     },
     marginLeft: {
         marginLeft: typography.pxToRem(16),
@@ -46,13 +49,23 @@ const TeiRegistrationEntryPlain =
       classes,
       onPostProcessErrorMessage,
       trackedEntityName,
+      isUserInteractionInProgress,
+      isSavingInProgress,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
-
+      const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
       const orgUnit = useCurrentOrgUnitInfo();
+
+      const handleOnCancel = () => {
+          if (!isUserInteractionInProgress) {
+              navigateToWorkingListsPage();
+          } else {
+              setShowWarning(true);
+          }
+      };
 
       const navigateToWorkingListsPage = () => {
           const url =
@@ -88,6 +101,7 @@ const TeiRegistrationEntryPlain =
                                   dataTest="create-and-link-button"
                                   primary
                                   onClick={onSave}
+                                  loading={isSavingInProgress}
                               >
                                   {saveButtonText}
                               </Button>
@@ -96,8 +110,9 @@ const TeiRegistrationEntryPlain =
                           <Button
                               dataTest="cancel-button"
                               secondary
-                              onClick={navigateToWorkingListsPage}
+                              onClick={handleOnCancel}
                               className={classes.marginLeft}
+                              disabled={isSavingInProgress}
                           >
                               {i18n.t('Cancel')}
                           </Button>
@@ -106,6 +121,12 @@ const TeiRegistrationEntryPlain =
                           {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
                       </InfoIconText>
 
+                      <ConfirmDialog
+                          {...defaultDialogProps}
+                          onConfirm={navigateToWorkingListsPage}
+                          open={!!showWarning}
+                          onCancel={() => { setShowWarning(false); }}
+                      />
                   </>
               }
           </>

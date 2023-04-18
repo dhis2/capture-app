@@ -1,10 +1,10 @@
 // @flow
-import { effectActions } from 'capture-core-utils/rulesEngine';
+import { effectActions } from '@dhis2/rules-engine-javascript';
 import type {
     OutputEffect,
     GeneralErrorEffect,
     GeneralWarningEffect,
-} from 'capture-core-utils/rulesEngine';
+} from '@dhis2/rules-engine-javascript';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { rulesEffectsActionTypes } from '../../rules';
 
@@ -88,20 +88,11 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
             return Object.keys(effects).reduce((accMessagesByIdInCurrentEffects, key) => {
                 accMessagesByIdInCurrentEffects[key] = accMessagesByIdInCurrentEffects[key] || {};
 
-                if (effects[key]?.length > 1) {
-                    const effectsByKey = effects[key];
-                    // $FlowFixMe[prop-missing] automated comment
-                    const typeKey = mapMessageEffectTypeToStateKey[effectsByKey[0].type];
-                    // $FlowFixMe[prop-missing] automated comment
-                    accMessagesByIdInCurrentEffects[key][typeKey] = effectsByKey.map(effect => effect.message);
-                    return accMessagesByIdInCurrentEffects;
-                }
-
-                const effect = effects[key][0];
+                const effectsByKey = effects[key];
                 // $FlowFixMe[prop-missing] automated comment
-                const typeKey = mapMessageEffectTypeToStateKey[effect.type];
+                const typeKey = mapMessageEffectTypeToStateKey[effectsByKey[0].type];
                 // $FlowFixMe[prop-missing] automated comment
-                accMessagesByIdInCurrentEffects[key][typeKey] = effect.message;
+                accMessagesByIdInCurrentEffects[key][typeKey] = effectsByKey.map(effect => effect.message);
                 return accMessagesByIdInCurrentEffects;
             }, accMessagesById);
         }, {});

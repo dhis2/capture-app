@@ -1,6 +1,6 @@
 // @flow
 import type { Node } from 'react';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { RegistrationFormMetadata } from '../common/types';
 import type { RenderCustomCardActions } from '../../CardList';
 import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
@@ -27,6 +27,8 @@ type ContainerProps = {|
   ready: boolean,
   orgUnitId: string,
   orgUnit: ?OrgUnit,
+  isUserInteractionInProgress: boolean,
+  isSavingInProgress: boolean,
 |};
 
 export type Props = $ReadOnly<{|

@@ -9,14 +9,18 @@ Given('you open the main page with Ngelehun and child programme context', () => 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
     cy.get('[data-test="search-page-content"]')
-        .contains('Create custom working list')
+        .contains('Create saved list')
         .click();
+});
+
+Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
     cy.get('[data-test="search-page-content"]')
-        .contains('Create custom working list')
+        .contains('Create saved list')
         .click();
 
     cy.get('[data-test="tei-working-lists"]')
@@ -552,9 +556,15 @@ When('you select the First antenatal care visit program stage', () => {
         .click();
 });
 
+When('you select the Foci response program stage', () => {
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Foci response')
+        .click();
+});
+
 When('you select a data element columns and save from the column selector', () => {
     cy.get('div[role="dialog"]')
-        .contains('WHOMCH Chronic conditions')
+        .contains('People included')
         .find('input')
         .click();
 
@@ -564,7 +574,7 @@ When('you select a data element columns and save from the column selector', () =
 });
 
 Then('you see data elements specific filters and columns', () => {
-    cy.get('[data-test="filter-button-container-de0FEHSIoxh"]')
+    cy.get('[data-test="filter-button-container-DX4LVYeP7bw"]')
         .should('exist');
     cy.get('[data-test="tei-working-lists"]')
         .should('exist');
@@ -605,4 +615,37 @@ When('you remove the program stage filter', () => {
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('Remove filter')
         .click();
+});
+
+Then('you see scheduledAt filter', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Appointment date')
+        .should('exist');
+});
+
+When('you select a scheduledAt column and save from the column selector', () => {
+    cy.get('div[role="dialog"]')
+        .contains('Appointment date')
+        .find('input')
+        .click();
+
+    cy.get('div[role="dialog"]')
+        .contains('Save')
+        .click();
+});
+
+When('you select the events scheduled today', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Appointment date')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Today')
+        .click();
+});
+
+Then('you see the selected option in the scheduledAt filter', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Appointment date: Today')
+        .should('exist');
 });

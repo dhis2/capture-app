@@ -29,9 +29,7 @@ declare module '@dhis2/app-runtime' {
 
     declare type QueryResult = any;
 
-    declare type RefetchOptions = {|
-        variables?: QueryVariables
-    |};
+    declare type RefetchOptions = QueryVariables;
     declare type RefetchFunction<ReturnType> = (options?: RefetchOptions) => Promise<ReturnType>;
     declare export type QueryRefetchFunction = RefetchFunction<QueryResult>;
 
@@ -65,14 +63,14 @@ declare module '@dhis2/app-runtime' {
     declare type CreateMutation = {|
         ...ResourceQuery,
         type: 'create',
-        data: MutationData,
+        data?: MutationData,
     |};
     declare type UpdateMutation = {|
         ...ResourceQuery,
         type: 'update' | 'replace' | 'delete',
         id?: string | (data: Object) => string,
         partial?: boolean,
-        data: MutationData,
+        data?: MutationData,
     |};
     declare type DeleteMutation = {|
         ...ResourceQuery,
@@ -93,6 +91,19 @@ declare module '@dhis2/app-runtime' {
         link: {| config: { baseUrl: string, apiVersion: string }, versionedApiPath: string, |};
     }
     declare export function useDataEngine(): DataEngine;
+
+    declare type DHIS2Date = {|
+        serverOffset: number;
+        serverTimezone: string;
+        clientTimezone: string;
+        getServerZonedISOString: () => string;
+        getClientZonedISOString: () => string;
+    |}
+
+    declare export function useTimeZoneConversion(): {
+        fromServerDate: (date?: string | Date | number | null) => DHIS2Date;
+        fromClientDate: (date?: string | Date | number | null) => DHIS2Date;
+    };
 
     declare export function useConfig(): {|
         baseUrl: string,

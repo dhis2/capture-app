@@ -30,7 +30,7 @@ export type CachedTrackedEntityAttribute = {
 }
 
 export type CachedProgramTrackedEntityAttribute = {
-    trackedEntityAttributeId: ?string,
+    trackedEntityAttributeId: string,
     displayInList: boolean,
     searchable: boolean,
     mandatory: boolean,
@@ -73,7 +73,7 @@ export type CachedProgramStageDataElement = {
             type: string,
         },
     },
-    dataElement: CachedDataElement,
+    dataElementId: string,
 };
 
 export type CachedSectionDataElements = {
@@ -98,10 +98,10 @@ export type CachedProgramStage = {
     name: string,
     displayName: string,
     description: ?string,
-    executionDateLabel?: ?string,
-    dueDateLabel?: ?string,
+    displayExecutionDateLabel?: ?string,
+    displayDueDateLabel?: ?string,
     programStageSections: ?Array<CachedProgramStageSection>,
-    programStageDataElements: ?Array<CachedProgramStageDataElement>,
+    programStageDataElements: Array<CachedProgramStageDataElement>,
     formType: string,
     dataEntryForm: ?CachedDataEntryForm,
     featureType: ?string,
@@ -146,7 +146,7 @@ export type ProgramCachedCategoryCombo = {
 };
 
 export type CachedTrackedEntityTypeAttribute = {
-    trackedEntityAttributeId: ?string,
+    trackedEntityAttributeId: string,
     displayInList: boolean,
     mandatory: boolean,
     searchable: boolean,
@@ -187,7 +187,7 @@ export type CachedProgram = {
     categoryCombo: ?ProgramCachedCategoryCombo,
     style?: ?CachedStyle,
     minAttributesRequiredToSearch: number,
-    programTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
+    programTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
     trackedEntityTypeId: ?string,
     incidentDateLabel: ?string,
     enrollmentDateLabel: ?string,
@@ -197,6 +197,7 @@ export type CachedProgram = {
     displayFrontPageList: boolean,
     selectIncidentDatesInFuture: boolean,
     displayIncidentDate: boolean,
+    onlyEnrollOnce: boolean,
 };
 
 export type CachedProgramStageDataElementsAsObject = {

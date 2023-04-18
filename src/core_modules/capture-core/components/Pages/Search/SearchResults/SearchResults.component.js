@@ -4,18 +4,13 @@ import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, colors } from '@dhis2/ui';
-import { useDispatch } from 'react-redux';
-import { CardList } from '../../../CardList';
+import { CardList, CardListButtons } from '../../../CardList';
 import { withNavigation } from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
 import type { Props } from './SearchResults.types';
-import { availableCardListButtonState, enrollmentTypes } from '../../../CardList/CardList.constants';
 import { SearchResultsHeader } from '../../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import {
-    navigateToEnrollmentOverview,
-} from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { Widget } from '../../../Widget';
 
 const SearchPagination = withNavigation()(Pagination);
@@ -37,92 +32,6 @@ export const getStyles = (theme: Theme) => ({
     },
 });
 
-const buttonStyles = (theme: Theme) => ({
-    buttonMargin: {
-        marginLeft: theme.typography.pxToRem(8),
-    },
-});
-
-const CardListButtons = withStyles(buttonStyles)(
-    ({
-        currentSearchScopeId,
-        currentSearchScopeType,
-        id,
-        orgUnitId,
-        enrollmentType,
-        programName,
-        classes,
-    }) => {
-        const deriveNavigationButtonState =
-          (type): $Keys<typeof availableCardListButtonState> => {
-              switch (type) {
-              case enrollmentTypes.ACTIVE:
-                  return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
-              case enrollmentTypes.CANCELLED:
-              case enrollmentTypes.COMPLETED:
-                  return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
-              default:
-                  return availableCardListButtonState.DONT_SHOW_BUTTON;
-              }
-          };
-        const dispatch = useDispatch();
-
-        const navigationButtonsState = deriveNavigationButtonState(enrollmentType);
-
-        const onHandleClick = () => {
-            switch (currentSearchScopeType) {
-            case searchScopes.PROGRAM:
-                dispatch(navigateToEnrollmentOverview({
-                    teiId: id,
-                    programId: currentSearchScopeId,
-                    orgUnitId,
-                }));
-                break;
-            case searchScopes.TRACKED_ENTITY_TYPE:
-                dispatch(navigateToEnrollmentOverview({
-                    teiId: id,
-                    orgUnitId,
-                }));
-                break;
-            default:
-                break;
-            }
-        };
-
-        return (
-            <>
-                <Button
-                    small
-                    dataTest="view-dashboard-button"
-                    onClick={onHandleClick}
-                >
-                    {i18n.t('View dashboard')}
-                </Button>
-                {
-                    navigationButtonsState === availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON &&
-                    <Button
-                        small
-                        className={classes.buttonMargin}
-                        dataTest="view-active-enrollment-button"
-                        onClick={onHandleClick}
-                    >
-                        {i18n.t('View active enrollment')}
-                    </Button>
-                }
-                {
-                    navigationButtonsState === availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON &&
-                    <Button
-                        small
-                        className={classes.buttonMargin}
-                        dataTest="re-enrollment-button"
-                        onClick={onHandleClick}
-                    >
-                        {i18n.t('Re-enroll')} {programName && `${i18n.t('in')} ${programName}`}
-                    </Button>
-                }
-            </>
-        );
-    });
 
 export const SearchResultsIndex = ({
     searchViaAttributesOnScopeProgram,
@@ -141,6 +50,7 @@ export const SearchResultsIndex = ({
     currentSearchTerms,
     fallbackTriggered,
     handleCreateNew,
+    orgUnitId,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const [isTopResultsOpen, setTopResultsOpen] = useState(true);
@@ -204,6 +114,7 @@ export const SearchResultsIndex = ({
             <CardList
                 noItemsText={i18n.t('No results found')}
                 currentSearchScopeName={currentSearchScopeName}
+                currentSearchScopeType={currentSearchScopeType}
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={dataElements}
@@ -213,7 +124,7 @@ export const SearchResultsIndex = ({
                         currentSearchScopeId={currentSearchScopeId}
                         currentSearchScopeType={currentSearchScopeType}
                         id={item.id}
-                        orgUnitId={item.tei.orgUnit}
+                        orgUnitId={orgUnitId}
                         enrollmentType={enrollmentType}
                     />
                 )}
@@ -237,14 +148,17 @@ export const SearchResultsIndex = ({
             <CardList
                 noItemsText={i18n.t('No results found')}
                 currentSearchScopeName={currentSearchScopeName}
+                currentSearchScopeType={searchScopes.ALL_PROGRAMS}
                 items={otherResults}
                 dataElements={dataElements}
-                renderCustomCardActions={({ item, enrollmentType, programName, programId: currentScopeProgramId }) => (<CardListButtons
+                renderCustomCardActions={({
+                    item, enrollmentType, currentSearchScopeType: searchScopeType, programName,
+                }) => (<CardListButtons
                     programName={programName}
-                    currentSearchScopeType={currentSearchScopeType}
-                    currentSearchScopeId={currentScopeProgramId}
+                    currentSearchScopeType={searchScopeType}
+                    currentSearchScopeId={currentSearchScopeId}
                     id={item.id}
-                    orgUnitId={item.tei.orgUnit}
+                    orgUnitId={orgUnitId}
                     enrollmentType={enrollmentType}
                 />)}
             />

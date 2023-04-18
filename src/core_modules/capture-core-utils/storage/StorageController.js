@@ -3,6 +3,7 @@
 import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
+import { IndexedDBError } from './IndexedDBError/IndexedDBError';
 
 export class IndexedDBError extends Error {
     constructor(error) {

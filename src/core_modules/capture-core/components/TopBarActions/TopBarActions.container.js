@@ -8,7 +8,6 @@ import type { Props } from './TopBarActions.types';
 import { buildUrlQueryString } from '../../utils/routing';
 
 const defaultContext = {
-    openStartAgainWarning: false,
     openNewRegistrationPage: false,
     openNewRegistrationPageWithoutProgramId: false,
     openSearchPage: false,
@@ -29,21 +28,17 @@ export const TopBarActions = ({
 }: Props) => {
     const [context, setContext] = useState(defaultContext);
     const {
-        openStartAgainWarning,
         openNewRegistrationPage,
         openNewRegistrationPageWithoutProgramId,
         openSearchPage,
         openSearchPageWithoutProgramId,
     } = context;
     const openConfirmDialog =
-        openStartAgainWarning ||
         openNewRegistrationPage ||
         openNewRegistrationPageWithoutProgramId ||
         openSearchPage ||
         openSearchPageWithoutProgramId;
     const history = useHistory();
-
-    const startAgain = () => history.push('/');
 
     const newRegistrationPage = () => {
         const queryArgs = {};
@@ -79,10 +74,6 @@ export const TopBarActions = ({
         history.push(`search?${buildUrlQueryString(queryArgs)}`);
     };
 
-    const handleOpenStartAgainWarning = () => {
-        isUserInteractionInProgress ? setContext(prev => ({ ...prev, openStartAgainWarning: true })) : startAgain();
-    };
-
     const handleOpenNewRegistrationPage = () => {
         isUserInteractionInProgress
             ? setContext(prev => ({ ...prev, openNewRegistrationPage: true }))
@@ -106,7 +97,6 @@ export const TopBarActions = ({
     };
 
     const handleAccept = () => {
-        openStartAgainWarning && startAgain();
         openNewRegistrationPage && newRegistrationPage();
         openNewRegistrationPageWithoutProgramId && newRegistrationPageWithoutProgramId();
         openSearchPage && searchPage();
@@ -118,12 +108,10 @@ export const TopBarActions = ({
         <>
             <ActionButtons
                 selectedProgramId={selectedProgramId}
-                onStartAgainClick={handleOpenStartAgainWarning}
                 onFindClick={handleOpenSearchPage}
                 onFindClickWithoutProgramId={handleOpenSearchPageWithoutProgramId}
                 onNewClick={handleOpenNewRegistrationPage}
                 onNewClickWithoutProgramId={handleOpenNewRegistrationPageWithoutProgramId}
-                showResetButton={!!(selectedProgramId || selectedOrgUnitId)}
                 openConfirmDialog={openConfirmDialog}
             />
             <ConfirmDialog

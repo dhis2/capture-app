@@ -13,6 +13,7 @@ import {
     Button,
     NoticeBox,
     IconChevronLeft24,
+    spacers,
 } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
@@ -21,7 +22,7 @@ import { useLocation } from 'react-router-dom';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
-import { SearchResults } from './SearchResults/SearchResults.container';
+import { SearchResults } from './SearchResults';
 import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
@@ -29,10 +30,14 @@ import { searchScopes } from './SearchPage.constants';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
 import { cleanFallbackRelatedData } from './SearchPage.actions';
 import { TemplateSelector } from './TemplateSelector';
+import { useSearchOption } from './hooks';
 
 const getStyles = (theme: Theme) => ({
     half: {
         flex: 1,
+    },
+    quarter: {
+        flex: 0.4,
     },
     title: {
         padding: '8px 0 0px 8px',
@@ -42,12 +47,14 @@ const getStyles = (theme: Theme) => ({
     container: {
         padding: '10px 24px 24px 24px',
     },
-    flex: {
+    innerContainer: {
         display: 'flex',
         flexWrap: 'wrap',
+        gap: spacers.dp16,
     },
     paper: {
         padding: theme.typography.pxToRem(10),
+        flex: 1,
     },
     emptySelectionPaperContent: {
         display: 'flex',
@@ -83,7 +90,6 @@ const Index = ({
     navigateToMainPage,
     cleanSearchRelatedInfo,
     classes,
-    availableSearchOptions,
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
@@ -95,6 +101,9 @@ const Index = ({
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
     const titleText = useScopeTitleText(selectedSearchScopeId);
     const fallbackTriggered = useFallbackTriggered();
+    const {
+        searchOption: availableSearchOption,
+    } = useSearchOption({ programId: preselectedProgramId, trackedEntityTypeId });
 
     useEffect(() => {
         const scopeId = preselectedProgramId || trackedEntityTypeId;
@@ -121,9 +130,7 @@ const Index = ({
         };
     }, [fallbackTriggered, cleanSearchRelatedInfo, preselectedProgramId, showInitialSearchPage]);
 
-    const searchGroupsForSelectedScope = selectedSearchScopeId
-        ? availableSearchOptions[selectedSearchScopeId].searchGroups
-        : [];
+    const searchGroupsForSelectedScope = availableSearchOption?.searchGroups ?? [];
 
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
@@ -166,7 +173,10 @@ const Index = ({
     const searchStatusComponents = () => (
         <>
             {searchStatus === searchPageStatus.SHOW_RESULTS && (
-                <SearchResults availableSearchOptions={availableSearchOptions} fallbackTriggered={fallbackTriggered} />
+                <SearchResults
+                    availableSearchOption={availableSearchOption}
+                    fallbackTriggered={fallbackTriggered}
+                />
             )}
 
             {searchStatus === searchPageStatus.NO_RESULTS && (
@@ -211,7 +221,7 @@ const Index = ({
                     <NoticeBox title={i18n.t('Too many results')} warning>
                         {i18n.t(
                             'This search returned too many results to show. Try changing search terms or searching ' +
-                                'by more attributes to narrow down the results.',
+                            'by more attributes to narrow down the results.',
                         )}
                     </NoticeBox>
                 </div>
@@ -246,36 +256,40 @@ const Index = ({
                         {i18n.t('Back')}
                     </Button>
                 )}
-
-                <Paper className={classes.paper}>
-                    <div className={classes.title}>
-                        {i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } })}
-                    </div>
-                    <div className={classes.flex}>
-                        <div className={classes.half}>
-                            {selectedSearchScopeType !== searchScopes.PROGRAM && (
-                                <TrackedEntityTypeSelector
-                                    onSelect={handleSearchScopeSelection}
-                                    headerText={i18n.t('Search for')}
-                                    footerText={i18n.t(
-                                        'You can also choose a program from the top bar and search in that program',
-                                    )}
-                                />
-                            )}
-
-                            <SearchForm
-                                fallbackTriggered={fallbackTriggered}
-                                selectedSearchScopeId={selectedSearchScopeId}
-                                searchGroupsForSelectedScope={searchGroupsForSelectedScope}
-                            />
-                            {searchStatusComponents()}
+                <div className={classes.innerContainer}>
+                    <Paper className={classes.paper}>
+                        <div className={classes.title}>
+                            {i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } })}
                         </div>
-                        <div className={classes.half}>
-                            <TemplateSelector />
+                        <div>
+                            <div className={classes.half}>
+                                {selectedSearchScopeType !== searchScopes.PROGRAM && (
+                                    <TrackedEntityTypeSelector
+                                        onSelect={handleSearchScopeSelection}
+                                        headerText={i18n.t('Search for')}
+                                        footerText={i18n.t(
+                                            'You can also choose a program from the top bar and search in that program',
+                                        )}
+                                    />
+                                )}
+
+                                {searchGroupsForSelectedScope && (
+                                    <SearchForm
+                                        fallbackTriggered={fallbackTriggered}
+                                        selectedSearchScopeId={selectedSearchScopeId}
+                                        searchGroupsForSelectedScope={searchGroupsForSelectedScope}
+                                    />
+                                )}
+                                {searchStatusComponents()}
+                            </div>
                         </div>
+                    </Paper>
+                    <div className={classes.quarter}>
+                        <TemplateSelector />
                     </div>
-                </Paper>
+                </div>
             </div>
+
             {searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId && (
                 <IncompleteSelectionsMessage>{i18n.t('Choose a type to start searching')}</IncompleteSelectionsMessage>
             )}
