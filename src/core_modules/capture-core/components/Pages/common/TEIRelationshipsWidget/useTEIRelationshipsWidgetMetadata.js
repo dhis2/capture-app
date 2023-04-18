@@ -13,7 +13,7 @@ const elementTypes = {
     DATA_ELEMENT: 'dataElement',
 };
 
-const mapElementIdsToObject = (elementIds, elements, { relationshipType, elementType }) => {
+const mapElementIdsToObject = (elementIds, elements, { relationshipType, elementType }) =>
     (elementIds || [])
         .map((elementId) => {
             const element = elements[elementId];
@@ -41,7 +41,6 @@ const mapElementIdsToObject = (elementIds, elements, { relationshipType, element
             };
         })
         .filter(element => element);
-};
 
 const getRelationshipTypes = async (): Promise<RelationshipTypes> => {
     const userStorageController = getUserStorageController();

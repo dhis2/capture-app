@@ -5,13 +5,6 @@ import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
 import { IndexedDBError } from './IndexedDBError/IndexedDBError';
 
-export class IndexedDBError extends Error {
-    constructor(error) {
-        super(error.message);
-        this.error = error;
-    }
-}
-
 export class StorageController {
     static errorMessages = {
         INVALID_NAME: 'A valid database name must be provided',

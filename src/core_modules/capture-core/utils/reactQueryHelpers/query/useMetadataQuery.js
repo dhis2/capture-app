@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import log from 'loglevel';
 import { useDataEngine, type ResourceQuery } from '@dhis2/app-runtime';
 import type { QueryFunction, QueryKey, UseQueryOptions } from 'react-query';
-import { IndexedDBError } from '../../../../capture-core-utils/storage/StorageController';
+import { IndexedDBError } from '../../../../capture-core-utils/storage/IndexedDBError/IndexedDBError';
 import type { Result } from './useMetadataQuery.types';
 
 const throwErrorForIndexedDB = (error) => {
@@ -29,7 +29,7 @@ const useAsyncMetadata = <TResultData>(
 export const useMetadataCustomQuery = <TResultData>(
     queryKey: QueryKey,
     queryFn: QueryFunction<TResultData>,
-    queryOptions: UseQueryOptions<TResultData>,
+    queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> =>
         useAsyncMetadata(queryKey, queryFn, {
             cacheTime: 5,
@@ -40,7 +40,7 @@ export const useMetadataCustomQuery = <TResultData>(
 export const useIndexedDBQuery = <TResultData>(
     queryKey: QueryKey,
     queryFn: QueryFunction<TResultData>,
-    queryOptions: UseQueryOptions<TResultData>,
+    queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> =>
         useAsyncMetadata(queryKey, queryFn, {
             cacheTime: 0,
@@ -54,7 +54,7 @@ export const useIndexedDBQuery = <TResultData>(
 export const useMetadataApiQuery = <TResultData>(
     queryKey: QueryKey,
     queryObject: ResourceQuery,
-    queryOptions: UseQueryOptions<TResultData>,
+    queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> => {
     const dataEngine = useDataEngine();
     const queryFn: QueryFunction<TResultData> = () => dataEngine.query({ theQuerykey: queryObject })

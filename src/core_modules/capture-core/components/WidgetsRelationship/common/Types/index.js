@@ -1,3 +1,3 @@
 // @flow
 
-export * from './RelationshipTypes.types';
+export type * from './RelationshipTypes.types';
