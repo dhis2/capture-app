@@ -34,6 +34,7 @@ import {
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
 import { type Enrollment } from '../../../metaData';
+import { withCenterPoint } from '../../DataEntry/withCenterPoint';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -228,6 +229,7 @@ const getGeometrySettings = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
+                center: props.center,
             });
         }
 
@@ -238,6 +240,7 @@ const getGeometrySettings = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
+            center: props.center,
         });
     },
     getPropName: () => 'geometry',
@@ -278,7 +281,8 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(FinalEnrollmentDataEntry);
+const CenterPointHOC = withCenterPoint()(FinalEnrollmentDataEntry);
+const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(CenterPointHOC);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
@@ -331,7 +335,6 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
 
     render() {
         const {
-            orgUnit,
             programId,
             onUpdateField,
             onUpdateDataEntryField,

@@ -19,6 +19,7 @@ import {
     placements,
     withCleanUp,
     withBrowserBackWarning,
+    withCenterPoint,
 } from '../../../components/DataEntry';
 import {
     withInternalChangeHandler,
@@ -244,6 +245,7 @@ const buildGeometrySettingsFn = () => ({
                 label: i18n.t('Area'),
                 dialogLabel: i18n.t('Area'),
                 required: false,
+                center: props.center,
             });
         }
         return createComponentProps(props, {
@@ -251,6 +253,7 @@ const buildGeometrySettingsFn = () => ({
             label: i18n.t('Coordinate'),
             dialogLabel: i18n.t('Coordinate'),
             required: false,
+            center: props.center,
         });
     },
     getPropName: () => 'geometry',
@@ -307,7 +310,7 @@ const saveHandlerConfig = {
 };
 
 const CleanUpHOC = withCleanUp()(DataEntry);
-const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
+const GeometryField = withCenterPoint()(withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC));
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
@@ -452,6 +455,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 onSave={onSave(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
+                orgUnit={orgUnit}
                 {...passOnProps}
             />
         );

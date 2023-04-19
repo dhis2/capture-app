@@ -23,6 +23,7 @@ type Props = {
   onBlur: (value: any) => void,
   orientation: $Values<typeof orientations>,
   mapCenter: Array<number>,
+  center?: ?Array<number>,
   onChange?: ?(value: any) => void,
   value?: ?Coordinate,
   shrinkDisabled?: ?boolean,
@@ -165,7 +166,7 @@ export class CoordinateField extends React.Component<Props, State> {
 
     renderMap = () => {
         const { position, zoom } = this.state;
-        const center = position || this.props.mapCenter;
+        const center = position || this.props.center || this.props.mapCenter;
         return (
             <div className={defaultClasses.mapContainer}>
                 <Map
@@ -205,7 +206,7 @@ export class CoordinateField extends React.Component<Props, State> {
     );
 
     renderLatitude = () => {
-        const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
+        const { mapCenter, center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
@@ -224,7 +225,7 @@ export class CoordinateField extends React.Component<Props, State> {
     }
 
     renderLongitude = () => {
-        const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
+        const { mapCenter, center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
