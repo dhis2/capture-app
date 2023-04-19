@@ -39,6 +39,7 @@ const mapStateToProps = (state: ReduxState, props) => {
         isCompleted,
         enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
         occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
+        eventData: state.enrollmentDomain?.enrollment?.events,
     };
 };
 

@@ -26,7 +26,7 @@ export type Props = {|
    eventData: Object,
    enrolledAt: string,
    occurredAt: string,
-   dueDateLabel: string,
+   displayDueDateLabel: string,
    orgUnit: Object,
    stageName: string,
    programName: string,
