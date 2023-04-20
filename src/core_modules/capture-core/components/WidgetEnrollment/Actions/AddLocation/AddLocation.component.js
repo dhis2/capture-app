@@ -19,7 +19,7 @@ export const AddLocation = ({ enrollment, onUpdate }: Props) => {
     if (error) {
         return null;
     }
-    if (enrollment.geometry || !program?.featureType) {
+    if (enrollment.geometry || !program?.featureType || program.featureType === 'NONE') {
         return null;
     }
     const getServerFeatureType = () => {
@@ -55,6 +55,12 @@ export const AddLocation = ({ enrollment, onUpdate }: Props) => {
             type={geometryType}
             setOpen={setOpen}
             onSetCoordinates={(coord) => {
+                if (!coord) {
+                    const copyEnrollment = { ...enrollment };
+                    delete copyEnrollment.geometry;
+                    onUpdate(copyEnrollment);
+                    return;
+                }
                 onUpdate({ ...enrollment, geometry: { type: getServerFeatureType(), coordinates: coord } });
             }}
         />

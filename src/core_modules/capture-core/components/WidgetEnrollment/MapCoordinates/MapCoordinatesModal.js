@@ -12,6 +12,7 @@ import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
 import type { ModalProps, FeatureCollection } from './mapCoordinates.types';
 import { CoordinateInput } from '../../../../capture-ui/internal/CoordinateInput/CoordinateInput.component';
+import { isEqual } from '../../../utils/valueEqualityChecker';
 
 const styles = () => ({
     modalContent: {
@@ -66,11 +67,16 @@ const MapCoordinatesModalPlain = ({
     const isPoint = useMemo(() => type === dataElementTypes.COORDINATE, [type]);
     const [position, setPosition] = useState(isPoint ? defaultValues : null);
     const [coordinates, setCoordinates] = useState(type === dataElementTypes.POLYGON ? defaultValues : null);
-    const [hasChanges, setChanges] = useState(false);
     const [center, setCenter] = useState(initialCenter);
-    const [tempLat, setLat] = useState();
-    const [tempLng, setLng] = useState();
+    const [tempLat, setLat] = useState(position?.[0]);
+    const [tempLng, setLng] = useState(position?.[1]);
     const [isEditing, setEditing] = useState(!(isPoint && defaultValues));
+    const changed = useMemo(() => {
+        if (isPoint) {
+            return !isEqual(position, defaultValues);
+        }
+        return !isEqual(coordinates, defaultValues);
+    }, [position, coordinates, defaultValues, isPoint]);
 
     const onHandleMapClicked = (mapCoordinates) => {
         if (isPoint && isEditing) {
@@ -79,7 +85,6 @@ const MapCoordinatesModalPlain = ({
             setPosition(newPosition);
             setLat(lat);
             setLng(lng);
-            setChanges(true);
         }
     };
 
@@ -92,7 +97,6 @@ const MapCoordinatesModalPlain = ({
     const onMapPolygonEdited = (e: any) => {
         const polygonCoordinates = e.layers.getLayers()[0].toGeoJSON().geometry.coordinates[0].map(c => [c[1], c[0]]);
         setCoordinates(polygonCoordinates);
-        setChanges(true);
     };
 
     const onMapPolygonDelete = () => {
@@ -105,7 +109,6 @@ const MapCoordinatesModalPlain = ({
             setLat(searchPosition[0]);
             setLng(searchPosition[1]);
             setPosition(searchPosition);
-            setChanges(true);
         }
     };
 
@@ -228,12 +231,9 @@ const MapCoordinatesModalPlain = ({
                     const lngValue = tempLng || (position?.[1] ? position[1] : undefined);
                     if (!lngValue) { return; }
                     const newPosition = [Number(latValue), lngValue];
-                    if (newPosition?.length === 2) {
-                        // $FlowFixMe
-                        setPosition(newPosition);
-                        setCenter(newPosition);
-                        setChanges(true);
-                    }
+                    // $FlowFixMe
+                    setPosition(newPosition);
+                    setCenter(newPosition);
                 }}
                 onChange={(latValue) => {
                     setLat(latValue);
@@ -253,12 +253,9 @@ const MapCoordinatesModalPlain = ({
                     const latValue = tempLat || (position?.[1] ? position[0] : undefined);
                     if (!latValue) { return; }
                     const newPosition = [latValue, Number(lngValue)];
-                    if (newPosition?.length === 2) {
-                        // $FlowFixMe
-                        setPosition(newPosition);
-                        setCenter(newPosition);
-                        setChanges(true);
-                    }
+                    // $FlowFixMe
+                    setPosition(newPosition);
+                    setCenter(newPosition);
                 }}
                 onChange={(lngValue) => {
                     setLng(lngValue);
@@ -293,20 +290,20 @@ const MapCoordinatesModalPlain = ({
         <Button
             onClick={() => {
                 setOpen(false);
+                setEditing(false);
             }}
             secondary
         >
             {i18n.t('Cancel')}
         </Button>
         <Button
-            disabled={!hasChanges}
+            disabled={!changed}
             onClick={() => {
-                if (position ?? coordinates) {
-                    const clientValue = position ? [position] : coordinates;
-                    const convertedCoordinates = convertToServerCoordinates(clientValue, type);
-                    onSetCoordinates(convertedCoordinates);
-                    setOpen(false);
-                }
+                const clientValue = position ? [position] : coordinates;
+                const convertedCoordinates = convertToServerCoordinates(clientValue, type);
+                onSetCoordinates(convertedCoordinates);
+                setOpen(false);
+                setEditing(false);
             }}
             primary
         >

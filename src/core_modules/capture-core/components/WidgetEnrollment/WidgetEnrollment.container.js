@@ -34,6 +34,12 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
 
     const handleSetCoordinates = useCallback((coordinates) => {
         if (enrollment) {
+            if (!coordinates) {
+                const copyEnrollment = { ...enrollment };
+                delete copyEnrollment.geometry;
+                updateMutation(copyEnrollment);
+                return;
+            }
             updateMutation({ ...enrollment, geometry: { ...enrollment.geometry, coordinates } });
         }
     }, [enrollment, updateMutation]);
