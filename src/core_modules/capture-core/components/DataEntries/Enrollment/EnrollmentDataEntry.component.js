@@ -33,7 +33,7 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment } from '../../../metaData';
+import { type Enrollment, getProgramThrowIfNotFound } from '../../../metaData';
 import {
     getCategoryOptionsValidatorContainers,
     attributeOptionsKey,
@@ -259,16 +259,18 @@ const getGeometrySettings = () => ({
 const getCategoryOptionsSettingsFn = () => {
     const categoryOptionsComponent =
         withCalculateMessages(overrideMessagePropNames)(
-            withDefaultFieldContainer()(
-                withDefaultShouldUpdateInterface()(
-                    withLabel({
-                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                        onGetCustomFieldLabeClass: (props: Object) =>
-                            `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
-                    })(
-                        withDisplayMessages()(
-                            withInternalChangeHandler()(
-                                withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                ),
                             ),
                         ),
                     ),
@@ -279,13 +281,11 @@ const getCategoryOptionsSettingsFn = () => {
         getComponent: () => categoryOptionsComponent,
         getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
             ...props.categories?.find(category => category.id === fieldId) ?? {},
-            onSetFocus: () => {},
-            onRemoveFocus: () => {},
             required: true,
         }),
         getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
         getFieldIds: (props: Object) => props.categories?.map(category => category.id),
-        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
+        getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
         getMeta: (props: Object) => ({
             section: AOCsectionKey,
             placement: placements.BOTTOM,
@@ -295,6 +295,18 @@ const getCategoryOptionsSettingsFn = () => {
 
     return categoryOptionsSettings;
 };
+
+const getAOCSettingsFn = () => ({
+    hideAOC: (props: Object) => {
+        const { stages } = getProgramThrowIfNotFound(props.programId);
+        /*
+        * Show AOC selection ONLY if there are any program stages in the program with:
+        * “Auto-generate event” and NOT “Open data entry form after enrollment”.
+        */
+        const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
+        return !shouldShowAOC;
+    },
+});
 
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
@@ -335,7 +347,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 }
 
 
-const AOCFieldBuilderHOC = withAOCFieldBuilder()(
+const AOCFieldBuilderHOC = withAOCFieldBuilder(getAOCSettingsFn())(
     withDataEntryFields(
         getCategoryOptionsSettingsFn(),
     )(FinalEnrollmentDataEntry));

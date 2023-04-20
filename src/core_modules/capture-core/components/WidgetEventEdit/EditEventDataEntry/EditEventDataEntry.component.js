@@ -308,16 +308,18 @@ const buildCompleteFieldSettingsFn = () => {
 const getCategoryOptionsSettingsFn = () => {
     const categoryOptionsComponent =
         withCalculateMessages(overrideMessagePropNames)(
-            withDefaultFieldContainer()(
-                withDefaultShouldUpdateInterface()(
-                    withLabel({
-                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                        onGetCustomFieldLabeClass: (props: Object) =>
-                            `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
-                    })(
-                        withDisplayMessages()(
-                            withInternalChangeHandler()(
-                                withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                ),
                             ),
                         ),
                     ),
@@ -328,13 +330,11 @@ const getCategoryOptionsSettingsFn = () => {
         getComponent: () => categoryOptionsComponent,
         getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
             ...props.categories?.find(category => category.id === fieldId) ?? {},
-            onSetFocus: () => {},
-            onRemoveFocus: () => {},
             required: true,
         }),
         getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
         getFieldIds: (props: Object) => props.categories?.map(category => category.id),
-        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
+        getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
         getMeta: (props: Object) => ({
             section: AOCsectionKey,
             placement: placements.BOTTOM,
@@ -353,7 +353,7 @@ const saveHandlerConfig = {
     },
 };
 
-const AOCFieldBuilderHOC = withAOCFieldBuilder()(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
+const AOCFieldBuilderHOC = withAOCFieldBuilder({})(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
 const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);

@@ -5,25 +5,22 @@ import { makeCancelablePromise, errorCreator } from '../../../../capture-core-ut
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
 import { useCategoryCombinations } from './useCategoryCombinations';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
-import { getProgramThrowIfNotFound } from '../../../metaData';
 
 type Props = {
     programId: string,
     selectedOrgUnitId: string,
 }
+type Settings = {
+    hideAOC?: ?(props: Object) => boolean;
+};
 
-const getAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
+const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<any>) =>
     (props: Props) => {
         const { programId, selectedOrgUnitId } = props;
-        const { stages } = getProgramThrowIfNotFound(programId);
-        /*
-        * Show AOC selection ONLY if there are any program stages in the program with:
-        * “Auto-generate event” and NOT “Open data entry form after enrollment”.
-        */
-        const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
+        const hideAOC = settings && settings.hideAOC?.(props);
         const [categories, setCategories] = useState(null);
         const cancelablePromiseRef = useRef(null);
-        const { programCategory, isLoading } = useCategoryCombinations(programId, !shouldShowAOC);
+        const { programCategory, isLoading } = useCategoryCombinations(programId, hideAOC);
         const programCategories = useMemo(() => (
             !isLoading && programCategory ? programCategory.categories : []),
         [isLoading, programCategory]);
@@ -105,17 +102,17 @@ const getAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
         }, [programCategories, selectedOrgUnitId]);
 
         useEffect(() => {
-            if (shouldShowAOC) {
+            if (!hideAOC) {
                 loadCagoryOptions();
             }
-        }, [loadCagoryOptions, shouldShowAOC]);
+        }, [loadCagoryOptions, hideAOC]);
 
         useEffect(() => () => {
             cancelablePromiseRef.current && cancelablePromiseRef.current.cancel();
             cancelablePromiseRef.current = null;
         }, []);
 
-        if (!shouldShowAOC) { return <InnerComponent{...props} />; }
+        if (hideAOC) { return <InnerComponent{...props} />; }
         return (
             !isLoading && categories ? <InnerComponent
                 {...props}
@@ -125,6 +122,6 @@ const getAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
         );
     };
 
-export const withAOCFieldBuilder = () =>
+export const withAOCFieldBuilder = (settings: Settings) =>
     (InnerComponent: ComponentType<any>) =>
-        getAOCFieldBuilder(InnerComponent);
+        getAOCFieldBuilder(settings, InnerComponent);

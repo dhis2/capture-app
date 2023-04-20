@@ -219,11 +219,12 @@ const buildCompleteFieldSettingsFn = () => {
 const getCategoryOptionsSettingsFn = () => {
     const categoryOptionsSettings = {
         getComponent: () => viewModeComponent,
-        getComponentProps: (props: Object, fieldId?: string, converter?: (value: string) => void) => createComponentProps(props, {
+        getComponentProps: (props: Object, fieldId?: string) => createComponentProps(props, {
             ...props.categories?.find(category => category.id === fieldId) ?? {},
-            onSetFocus: () => {},
-            onRemoveFocus: () => {},
-            valueConverter: value => (converter ? converter(value) : value),
+            valueConverter: value => props.categories
+                ?.find(category => category.id === fieldId)
+                ?.options?.find(option => option.value === value)
+                ?.label,
         }),
         getPropName: (props: Object, fieldId?: string) => (
             fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey
@@ -235,16 +236,12 @@ const getCategoryOptionsSettingsFn = () => {
             placement: placements.BOTTOM,
             sectionName: props.programCategory?.displayName,
         }),
-        getConverter: (props: Object, fieldId?: string) => (value: string) => props.categories
-            ?.find(category => category.id === fieldId)
-            ?.options?.find(option => option.value === value)
-            ?.label,
     };
 
     return categoryOptionsSettings;
 };
 
-const AOCFieldBuilderHOC = withAOCFieldBuilder()(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
+const AOCFieldBuilderHOC = withAOCFieldBuilder({})(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
 const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);

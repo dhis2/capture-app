@@ -92,7 +92,10 @@ const CategoryOptionsPlain = (props: Props) => {
                             }
                         }}
                     />
-                    {hasError && <div className={classes.errorMessage}>{i18n.t('A value is required')}</div>}
+                    {hasError && <div className={classes.errorMessage}>{
+                        i18n.t('Please select {{categoryName}} before saving event',
+                            { categoryName: category.displayName })}</div>
+                    }
                 </div>
             </div>
         </div>);

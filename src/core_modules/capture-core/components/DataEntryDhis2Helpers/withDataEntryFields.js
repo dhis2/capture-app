@@ -1,13 +1,10 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { placements } from '../DataEntry/constants/placements.const';
 import { DataEntryField } from '../DataEntry/dataEntryField/internal/DataEntryField.component';
-import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { makeReselectComponentProps } from '../DataEntry/dataEntryField/withDataEntryField.selectors';
-
 import type { ValidatorContainer } from '../DataEntry/dataEntryField/internal/dataEntryField.utils';
 
 type Props = {
@@ -29,7 +26,6 @@ type Settings = {
     getIsHidden?: ?(props: Object) => boolean,
     getPassOnFieldData?: ?(props: Props) => boolean,
     getOnUpdateField?: ?(props: Object) => (innerAction: ReduxAction<any, any>, data: { value: any }) => void,
-    getConverter?: ?(props: Object, fieldId: string) => (value: any) => string
 };
 
 
@@ -40,41 +36,40 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             super(props);
             this.reselectComponentProps = makeReselectComponentProps();
         }
-        // $FlowFixMe[speculation-ambiguous] automated comment
-        handleRef = (instance: DataEntryField) => {
-            if (this.props.dataEntryFieldRef) {
-                const { getPropName } = settings;
-                const key = getPropName(this.props);
 
-                if (!key) {
-                    log.error(
-                        errorCreator(
-                            'data entry field needs a key, but no propName was specified')({}));
-                    return;
-                }
-                // $FlowFixMe
-                this.props.dataEntryFieldRef(instance, key);
-            }
-        };
 
         getFieldElement(fieldId: string) {
             const { id, completionAttempted, saveAttempted, onUpdateDataEntryField } = this.props;
-            const { getComponent, getComponentProps, getValidatorContainers, getPropName, getConverter } = settings;
+            const { getComponent, getComponentProps, getValidatorContainers, getPropName } = settings;
 
             const Component = getComponent(this.props);
-            const converter = getConverter && getConverter(this.props, fieldId);
-            const componentProps = this.reselectComponentProps(getComponentProps && getComponentProps(this.props, fieldId, converter));
+            const componentProps = this.reselectComponentProps(getComponentProps && getComponentProps(this.props, fieldId));
             const validatorContainers = (getValidatorContainers && getValidatorContainers(this.props, fieldId)) || [];
-            const propName = getPropName(this.props, fieldId);
+            const key = getPropName(this.props, fieldId);
+
+            // $FlowFixMe[speculation-ambiguous] automated comment
+            const handleRef = (instance: DataEntryField) => {
+                if (this.props.dataEntryFieldRef) {
+                    if (!key) {
+                        log.error(
+                            errorCreator(
+                                'data entry field needs a key, but no propName was specified')({}));
+                        return;
+                    }
+                    // $FlowFixMe
+                    this.props.dataEntryFieldRef(instance, key);
+                }
+            };
+
             return (
                 <DataEntryField
-                    ref={this.handleRef}
+                    ref={handleRef}
                     dataEntryId={id}
                     completionAttempted={completionAttempted}
                     saveAttempted={saveAttempted}
                     Component={Component}
                     validatorContainers={validatorContainers}
-                    propName={propName}
+                    propName={key}
                     onUpdateField={onUpdateDataEntryField}
                     componentProps={{ ...componentProps }}
                 />
@@ -124,28 +119,6 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
     return DataEntryFieldBuilder;
 };
 
-const getMapStateToProps = (settings: Settings) => (state: ReduxState, props: Object) => {
-    let passOnFieldDataProp;
-    const { getPassOnFieldData, getPropName } = settings;
-    if (getPassOnFieldData && getPassOnFieldData(props)) {
-        const propName = getPropName(props);
-        const itemId = state.dataEntries[props.id].itemId;
-        const key = getDataEntryKey(props.id, itemId);
-        const value = state.dataEntriesFieldsValue[key][propName];
-        passOnFieldDataProp = {
-            [`${propName}DataEntryFieldValue`]: value,
-        };
-    }
-
-    return {
-        ...passOnFieldDataProp,
-    };
-};
-
 
 export const withDataEntryFields = (settings: Settings) =>
-    (InnerComponent: React.ComponentType<any>) =>
-        // $FlowFixMe
-        connect(getMapStateToProps(settings), () => ({}))(
-            getDataEntryField(settings, InnerComponent),
-        );
+    (InnerComponent: React.ComponentType<any>) => getDataEntryField(settings, InnerComponent);

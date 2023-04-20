@@ -2,13 +2,21 @@
 import i18n from '@dhis2/d2-i18n';
 import { hasValue } from 'capture-core-utils/validators/form';
 
-const validateCategories = (value?: ?string) => hasValue(value);
+const validateCategories = (value?: ?string, props?: Object, fieldId?: string) => {
+    const categoryName = props?.categories
+        ?.find(category => category.id === fieldId)?.label;
 
-export const getCategoryOptionsValidatorContainers = () => {
+    return {
+        valid: hasValue(value),
+        message: i18n.t('Please select {{categoryName}} before saving the event', { categoryName }),
+    };
+};
+
+export const getCategoryOptionsValidatorContainers = (props?: Object, fieldId?: string) => {
     const validatorContainers = [
         {
-            validator: validateCategories,
-            message: i18n.t('A value is required'),
+            validator: (value?: ?string) => validateCategories(value, props, fieldId),
+            message: '',
         },
     ];
     return validatorContainers;
