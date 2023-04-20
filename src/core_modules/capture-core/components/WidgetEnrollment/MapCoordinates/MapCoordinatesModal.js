@@ -91,7 +91,6 @@ const MapCoordinatesModalPlain = ({
     const onMapPolygonCreated = (e: any) => {
         const polygonCoordinates = e.layer.toGeoJSON().geometry.coordinates[0].map(c => [c[1], c[0]]);
         setCoordinates(polygonCoordinates);
-        setChanges(true);
     };
 
     const onMapPolygonEdited = (e: any) => {
