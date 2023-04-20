@@ -1,3 +1,31 @@
+# [100.29.0](https://github.com/dhis2/capture-app/compare/v100.28.3...v100.29.0) (2023-04-17)
+
+
+### Features
+
+* [DHIS2-12256] use display label for due date and execution date ([#3228](https://github.com/dhis2/capture-app/issues/3228)) ([70b23a6](https://github.com/dhis2/capture-app/commit/70b23a60fa2d75722bb82461c68bf29ca2bfe66e))
+
+## [100.28.3](https://github.com/dhis2/capture-app/compare/v100.28.2...v100.28.3) (2023-04-17)
+
+
+### Bug Fixes
+
+* [DHIS2-14868] extend the clickable zone for search header ([#3226](https://github.com/dhis2/capture-app/issues/3226)) ([a065ebb](https://github.com/dhis2/capture-app/commit/a065ebbaf01ffeae46c2586e9c766581a6db9399))
+
+## [100.28.2](https://github.com/dhis2/capture-app/compare/v100.28.1...v100.28.2) (2023-04-17)
+
+
+### Bug Fixes
+
+* [DHIS2-14976] apply input converters on context variables ([#3221](https://github.com/dhis2/capture-app/issues/3221)) ([4470e78](https://github.com/dhis2/capture-app/commit/4470e7891ec1800db280233a8cd1dca56206370c))
+
+## [100.28.1](https://github.com/dhis2/capture-app/compare/v100.28.0...v100.28.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* [DHIS2-15109] eventDate breaks saved working lists ([#3234](https://github.com/dhis2/capture-app/issues/3234)) ([cde8b50](https://github.com/dhis2/capture-app/commit/cde8b50d3202cda84f2e96dc86f8ff10bdfbea3a))
+
 # [100.28.0](https://github.com/dhis2/capture-app/compare/v100.27.0...v100.28.0) (2023-04-14)
 
 
