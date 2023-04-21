@@ -33,7 +33,7 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment, getProgramThrowIfNotFound } from '../../../metaData';
+import { type Enrollment } from '../../../metaData';
 import {
     getCategoryOptionsValidatorContainers,
     attributeOptionsKey,
@@ -297,7 +297,7 @@ const getCategoryOptionsSettingsFn = () => {
 };
 
 const getAOCSettingsFn = () => ({
-    hideAOC: (props: Object) =>
+    hideAOC: (/* props: Object */) =>
         true
         // enable after DHIS2-9661
         // const { stages } = getProgramThrowIfNotFound(props.programId);
