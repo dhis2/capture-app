@@ -10,6 +10,7 @@ import {
 } from '../../../rules';
 import { RenderFoundation, Program } from '../../../metaData';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import { getCategoryOptionsValidatorContainers } from './fieldValidators/categoryOptions.validatorContainersGetter';
 import {
     getConvertGeometryIn,
     convertGeometryOut,
@@ -128,6 +129,7 @@ export const openEventForEditInDataEntry = ({
         dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
             id: `attributeCategoryOptions-${category.id}`,
             type: 'TEXT',
+            validatorContainers: getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
         })));
     }
     const dataEntryActions =

@@ -337,7 +337,7 @@ const getCategoryOptionsSettingsFn = () => {
         getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
         getMeta: (props: Object) => ({
             section: AOCsectionKey,
-            placement: placements.BOTTOM,
+            placement: placements.TOP,
             sectionName: props.programCategory?.displayName,
         }),
     };
@@ -412,7 +412,7 @@ const dataEntrySectionDefinitions = {
         name: i18n.t('Status'),
     },
     [AOCsectionKey]: {
-        placement: placements.BOTTOM,
+        placement: placements.TOP,
         name: '',
     },
 };

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-04-20T09:53:43.016Z\n"
-"PO-Revision-Date: 2023-04-20T09:53:43.016Z\n"
+"POT-Creation-Date: 2023-04-21T16:37:40.412Z\n"
+"PO-Revision-Date: 2023-04-21T16:37:40.412Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -139,6 +139,9 @@ msgstr "Coordinate"
 
 msgid "Enrollment"
 msgstr "Enrollment"
+
+msgid "Please select {{categoryName}}"
+msgstr "Please select {{categoryName}}"
 
 msgid "A future date is not allowed"
 msgstr "A future date is not allowed"
@@ -372,9 +375,6 @@ msgstr "Some operations are still runnning. Please wait.."
 
 msgid "Operations running"
 msgstr "Operations running"
-
-msgid "Please select {{categoryName}} before saving the event"
-msgstr "Please select {{categoryName}} before saving the event"
 
 msgid "Sort"
 msgstr "Sort"
@@ -1189,9 +1189,6 @@ msgstr "Event completed"
 
 msgid "Back to all stages and events"
 msgstr "Back to all stages and events"
-
-msgid "Please select {{categoryName}} before saving event"
-msgstr "Please select {{categoryName}} before saving event"
 
 msgid "Schedule date info"
 msgstr "Schedule date info"

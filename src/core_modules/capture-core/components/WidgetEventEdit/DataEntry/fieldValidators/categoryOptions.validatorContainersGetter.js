@@ -4,11 +4,10 @@ import { hasValue } from 'capture-core-utils/validators/form';
 
 const validateCategories = (value?: ?string, props?: Object, fieldId?: string) => {
     const categoryName = props?.categories
-        ?.find(category => category.id === fieldId)?.label;
-
+        ?.find(category => category.id === fieldId)?.displayName;
     return {
         valid: hasValue(value),
-        message: i18n.t('Please select {{categoryName}} before saving the event', { categoryName }),
+        message: i18n.t('Please select {{categoryName}}', { categoryName }),
     };
 };
 

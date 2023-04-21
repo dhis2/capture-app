@@ -297,15 +297,17 @@ const getCategoryOptionsSettingsFn = () => {
 };
 
 const getAOCSettingsFn = () => ({
-    hideAOC: (props: Object) => {
-        const { stages } = getProgramThrowIfNotFound(props.programId);
-        /*
-        * Show AOC selection ONLY if there are any program stages in the program with:
-        * “Auto-generate event” and NOT “Open data entry form after enrollment”.
-        */
-        const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
-        return !shouldShowAOC;
-    },
+    hideAOC: (props: Object) =>
+        true
+        // enable after DHIS2-9661
+        // const { stages } = getProgramThrowIfNotFound(props.programId);
+        // /*
+        // * Show AOC selection ONLY if there are any program stages in the program with:
+        // * “Auto-generate event” and NOT “Open data entry form after enrollment”.
+        // */
+        // const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
+        // return !shouldShowAOC;
+    ,
 });
 
 type FinalTeiDataEntryProps = {

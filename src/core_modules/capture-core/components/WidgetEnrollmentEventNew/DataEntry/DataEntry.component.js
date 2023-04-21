@@ -338,7 +338,7 @@ const getCategoryOptionsSettingsFn = () => {
         getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
         getMeta: (props: Object) => ({
             section: AOCsectionKey,
-            placement: placements.BOTTOM,
+            placement: placements.TOP,
             sectionName: props.programCategory?.displayName,
         }),
     };

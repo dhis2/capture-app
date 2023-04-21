@@ -56,6 +56,14 @@ export const WidgetEventSchedule = ({
     }, [suggestedScheduleDate, scheduleDate]);
 
     const onHandleSchedule = useCallback(() => {
+        if (programCategory?.categories && !Object.keys(selectedCategories).length) {
+            const errors = programCategory.categories.reduce((acc, category) => {
+                acc[category.id] = { touched: true, valid: false };
+                return acc;
+            }, {});
+            setCategoryOptionsError(errors);
+            return;
+        }
         dispatch(requestScheduleEvent({
             scheduleDate,
             comments,
@@ -84,6 +92,7 @@ export const WidgetEventSchedule = ({
         onSave,
         onSaveSuccessActionType,
         onSaveErrorActionType,
+        programCategory,
     ]);
 
     React.useEffect(() => {

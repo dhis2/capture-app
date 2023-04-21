@@ -8,7 +8,7 @@ const validateCategories = (value?: ?string, props?: Object, fieldId?: string) =
 
     return {
         valid: hasValue(value),
-        message: i18n.t('Please select {{categoryName}} before saving the event', { categoryName }),
+        message: i18n.t('Please select {{categoryName}}', { categoryName }),
     };
 };
 

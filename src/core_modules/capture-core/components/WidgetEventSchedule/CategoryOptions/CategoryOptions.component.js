@@ -93,7 +93,7 @@ const CategoryOptionsPlain = (props: Props) => {
                         }}
                     />
                     {hasError && <div className={classes.errorMessage}>{
-                        i18n.t('Please select {{categoryName}} before saving event',
+                        i18n.t('Please select {{categoryName}}',
                             { categoryName: category.displayName })}</div>
                     }
                 </div>

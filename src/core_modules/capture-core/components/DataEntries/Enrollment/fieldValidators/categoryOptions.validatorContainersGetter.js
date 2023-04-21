@@ -4,7 +4,7 @@ import { hasValue } from 'capture-core-utils/validators/form';
 
 const validateCategories = (value?: ?string, props?: Object, fieldId?: string) => {
     const categoryName = props?.categories
-        ?.find(category => category.id === fieldId)?.label;
+        ?.find(category => category.id === fieldId)?.displayName;
 
     return {
         valid: hasValue(value),
