@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
-import { from, of } from 'rxjs';
+import { EMPTY, from, of } from 'rxjs';
 import moment from 'moment';
 import {
     enrollmentPageActionTypes,
@@ -18,6 +18,8 @@ import {
 import { enrollmentAccessLevels, serverErrorMessages } from './EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { getProgramFromProgramIdThrowIfNotFound, EventProgram }
+    from '../../../metaData';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
@@ -204,6 +206,38 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
                 history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
             }
             return fetchTeiStream(teiId, querySingleResource);
+        },
+        ),
+    );
+
+export const clickLinkedRecordEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+    action$.pipe(
+        ofType(enrollmentPageActionTypes.LINKED_RECORD_CLICK),
+        flatMap(({ payload }) => {
+            let url;
+            const { programId, orgUnitId } = payload;
+            if (payload.eventId) {
+                const recordProgram = getProgramFromProgramIdThrowIfNotFound(programId);
+                if (recordProgram instanceof EventProgram) {
+                    url = `/viewEvent?viewEventId=${payload.eventId}`;
+                } else {
+                    url = `/enrollmentEventEdit?${buildUrlQueryString({
+                        orgUnitId,
+                        eventId: payload.eventId,
+                    })}`;
+                }
+            } else if (payload.teiId) {
+                url = `/enrollment?${buildUrlQueryString({
+                    programId,
+                    orgUnitId,
+                    teiId: payload.teiId,
+                    enrollmentId: 'AUTO',
+                })}`;
+            }
+            if (url) {
+                history.push(url);
+            }
+            return EMPTY;
         },
         ),
     );

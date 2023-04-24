@@ -15,8 +15,8 @@ export const enrollmentSiteActionTypes = {
     ERROR_ENROLLMENT: 'Enrollment.ErrorEnrollment',
 };
 
-export const setCommonEnrollmentSiteData = (enrollment: ApiEnrollment, attributeValues: ApiAttributeValues) =>
-    actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({ enrollment, attributeValues });
+export const setCommonEnrollmentSiteData = (enrollment: ApiEnrollment, attributeValues: ApiAttributeValues, relationships: Object) =>
+    actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({ enrollment, attributeValues, relationships });
 
 export const updateEnrollmentEvents = (eventId: string, eventData: Object) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENTS)({

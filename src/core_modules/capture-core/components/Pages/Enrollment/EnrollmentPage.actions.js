@@ -1,5 +1,6 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
+import type { Url } from '../../../utils/url';
 
 export const enrollmentPageActionTypes = {
     INFORMATION_FETCH: 'EnrollmentPage.Fetch',
@@ -22,6 +23,9 @@ export const enrollmentPageActionTypes = {
 
     DELETE_ENROLLMENT: 'EnrollmentPage.DeleteEnrollment',
     UPDATE_TEI_DISPLAY_NAME: 'EnrollmentPage.UpdateTeiDisplayName',
+
+    SET_EVENT_RELATIONSHIPS_DATA: 'EnrollmentPage.SetEventRelationshipsData',
+    LINKED_RECORD_CLICK: 'EnrollmentPage.LinkedRecordClick',
 };
 
 export const fetchEnrollmentPageInformation = () =>
@@ -73,3 +77,9 @@ export const updateTeiDisplayName = (teiDisplayName: string) =>
     actionCreator(enrollmentPageActionTypes.UPDATE_TEI_DISPLAY_NAME)({
         teiDisplayName,
     });
+
+export const setEventRelationshipsData = (eventId: string, relationships: Array<Object>) =>
+    actionCreator(enrollmentPageActionTypes.SET_EVENT_RELATIONSHIPS_DATA)({ eventId, relationships });
+
+export const clickLinkedRecord = (parameters: Url) =>
+    actionCreator(enrollmentPageActionTypes.LINKED_RECORD_CLICK)({ ...parameters });

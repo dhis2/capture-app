@@ -20,8 +20,9 @@ import {
     useRuleEffects,
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
-import { deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
+import { clickLinkedRecord, deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
+import { useRelationshipTypesMetadata } from '../../common/EnrollmentOverviewDomain/useRelationshipTypesMetadata';
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
@@ -34,6 +35,7 @@ export const EnrollmentPageDefault = () => {
         error: enrollmentsError,
         enrollment,
         attributeValues,
+        relationships,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata?.programStages);
@@ -74,6 +76,11 @@ export const EnrollmentPageDefault = () => {
     const onEventClick = (eventId: string) => {
         history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
     };
+
+    const onLinkedRecordClick = (parameters) => {
+        dispatch(clickLinkedRecord(parameters));
+    };
+
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
         dispatch(updateEnrollmentAttributeValues(updatedAttributeValues
             .map(({ attribute, value }) => ({ id: attribute, value })),
@@ -84,6 +91,8 @@ export const EnrollmentPageDefault = () => {
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
+
+    const relationshipTypes = useRelationshipTypesMetadata(relationships);
 
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     if (error) {
@@ -99,6 +108,8 @@ export const EnrollmentPageDefault = () => {
             stages={stages}
             events={enrollment?.events}
             enrollmentId={enrollmentId}
+            relationships={relationships}
+            relationshipTypes={relationshipTypes}
             onAddNew={onAddNew}
             onDelete={onDelete}
             onViewAll={onViewAll}
@@ -106,6 +117,7 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
+            onLinkedRecordClick={onLinkedRecordClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
             onEnrollmentError={onEnrollmentError}
         />

@@ -13,6 +13,7 @@ import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 import { EnrollmentQuickActions } from './EnrollmentQuickActions';
+import { WidgetTeisRelationships } from '../../../WidgetRelationships';
 import { TrackedEntityRelationshipsWrapper } from './TrackedEntityRelationshipsWrapper';
 
 const getStyles = () => ({
@@ -54,6 +55,8 @@ export const EnrollmentPageDefaultPlain = ({
     orgUnitId,
     events,
     enrollmentId,
+    relationships,
+    relationshipTypes,
     stages,
     onDelete,
     onAddNew,
@@ -63,6 +66,7 @@ export const EnrollmentPageDefaultPlain = ({
     hideWidgets,
     classes,
     onEventClick,
+    onLinkedRecordClick,
     onUpdateTeiAttributeValues,
     onEnrollmentError,
 }: PlainProps) => {
@@ -76,7 +80,7 @@ export const EnrollmentPageDefaultPlain = ({
 
     const a = (c, d, e) => {
         debugger;
-        onEventClick(c,d,e);
+        onEventClick(c, d, e);
     };
 
     const toggleVisibility = useCallback(() => setMainContentVisibility(current => !current), []);
@@ -118,6 +122,13 @@ export const EnrollmentPageDefaultPlain = ({
                         <WidgetEnrollmentComment />
                         <WidgetError error={widgetEffects?.errors} />
                         <WidgetWarning warning={widgetEffects?.warnings} />
+                        <WidgetTeisRelationships
+                            relationships={relationships}
+                            relationshipTypes={relationshipTypes}
+                            teiId={teiId}
+                            onAddRelationship={() => {}}
+                            onLinkedRecordClick={onLinkedRecordClick}
+                        />
                         {!hideWidgets.indicator && (
                             <WidgetIndicator
                                 indicators={widgetEffects?.indicators}

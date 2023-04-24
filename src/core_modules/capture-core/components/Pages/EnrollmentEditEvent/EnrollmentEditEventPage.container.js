@@ -8,15 +8,17 @@ import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { useCommonEnrollmentDomainData, showEnrollmentError, updateEnrollmentEvents } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
+import { useEventsRelationships } from './useEventsRelationships';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { deleteEnrollment, fetchEnrollments } from '../Enrollment/EnrollmentPage.actions';
+import { clickLinkedRecord, deleteEnrollment, fetchEnrollments } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
+import { useRelationshipTypesMetadata } from '../common/EnrollmentOverviewDomain/useRelationshipTypesMetadata';
 import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
@@ -86,6 +88,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
+    const { enrollment: enrollmentSite, relationships } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const onGoBack = () =>
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
 
@@ -93,7 +96,9 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         dispatch(updateEnrollmentEvents(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
-    const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
+    const onLinkedRecordClick = (parameters) => {
+        dispatch(clickLinkedRecord(parameters));
+    };
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name;
@@ -104,6 +109,10 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
+
+    const { relationships: eventRelationships } = useEventsRelationships(eventId);
+    const teiRelationshipTypes = useRelationshipTypesMetadata(relationships);
+    const eventRelationshipTypes = useRelationshipTypesMetadata(eventRelationships);
 
     const pageStatus = getPageStatus({
         orgUnitId,
@@ -122,7 +131,12 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             onGoBack={onGoBack}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
+            relationships={relationships}
+            eventRelationships={eventRelationships}
+            teiRelationshipTypes={teiRelationshipTypes}
+            eventRelationshipTypes={eventRelationshipTypes}
             teiId={teiId}
+            eventId={eventId}
             enrollmentId={enrollmentId}
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}
@@ -132,6 +146,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            onLinkedRecordClick={onLinkedRecordClick}
             onEnrollmentError={onEnrollmentError}
             onEnrollmentSuccess={onEnrollmentSuccess}
             eventStatus={event?.status}

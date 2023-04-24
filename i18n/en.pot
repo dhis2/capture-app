@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-03-21T20:34:52.414Z\n"
-"PO-Revision-Date: 2023-03-21T20:34:52.414Z\n"
+"POT-Creation-Date: 2023-04-24T12:30:29.719Z\n"
+"PO-Revision-Date: 2023-04-24T12:30:29.719Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1275,14 +1275,29 @@ msgstr "{{TETName}} profile"
 msgid "Edit"
 msgstr "Edit"
 
+msgid "Show {{ rest }} more"
+msgstr "Show {{ rest }} more"
+
+msgid "Event's Relationships"
+msgstr "Event's Relationships"
+
+msgid "TEI's Relationships"
+msgstr "TEI's Relationships"
+
+msgid "TET name"
+msgstr "TET name"
+
+msgid "Created date"
+msgstr "Created date"
+
+msgid "Program stage name"
+msgstr "Program stage name"
+
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
 
 msgid "This event is not yet preserved and cannot be edited"
 msgstr "This event is not yet preserved and cannot be edited"
-
-msgid "Show {{ rest }} more"
-msgstr "Show {{ rest }} more"
 
 msgid "Reset list"
 msgstr "Reset list"
@@ -1316,9 +1331,6 @@ msgstr "Go back without saving relationship"
 
 msgid "Link to an existing person"
 msgstr "Link to an existing person"
-
-msgid "Create new"
-msgstr "Create new"
 
 msgid "An error occurred"
 msgstr "An error occurred"
