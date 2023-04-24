@@ -5,7 +5,7 @@ import { getContext } from '../../context';
 const convert = (() => {
     const getTrackedEntityTypeAttribute = (trackedEntityTypeAttribute) => {
         const { trackedEntityAttribute, ...restAttribute } = trackedEntityTypeAttribute;
-        const trackedEntityAttributeId = trackedEntityAttribute && trackedEntityAttribute.id;
+        const trackedEntityAttributeId = trackedEntityAttribute.id;
 
         return {
             ...restAttribute,
@@ -15,6 +15,7 @@ const convert = (() => {
 
     const getTrackedEntityTypeAttributes = trackedEntityTypeAttributes =>
         (trackedEntityTypeAttributes || [])
+            .filter(({ trackedEntityAttribute }) => trackedEntityAttribute?.id)
             .map(trackedEntityTypeAttribute => getTrackedEntityTypeAttribute(trackedEntityTypeAttribute));
 
     return response =>
