@@ -1,3 +1,10 @@
+## [100.29.1](https://github.com/dhis2/capture-app/compare/v100.29.0...v100.29.1) (2023-04-26)
+
+
+### Bug Fixes
+
+* [DHIS2-14190] restrict which values can be assigned to option sets ([#3211](https://github.com/dhis2/capture-app/issues/3211)) ([00b8917](https://github.com/dhis2/capture-app/commit/00b89171f1af4ec1b95e5b7e9a62bac383442003))
+
 # [100.29.0](https://github.com/dhis2/capture-app/compare/v100.28.3...v100.29.0) (2023-04-17)
 
 
