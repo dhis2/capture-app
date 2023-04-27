@@ -14,7 +14,6 @@ export const convertEventAttributeOptions = (event: Object) => {
         return {
             ...event,
             attributeCategoryOptions: newAttributeCategoryOptions.join(';'),
-            attributeOptionCombo: '',
         };
     }
     return event;

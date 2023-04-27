@@ -181,7 +181,6 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
                 eventContainer.event.attributeCategoryOptions =
                     convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions);
-                eventContainer.event.attributeOptionCombo = '';
             }
             let actions = [updateEventContainer(eventContainer, orgUnit)];
 

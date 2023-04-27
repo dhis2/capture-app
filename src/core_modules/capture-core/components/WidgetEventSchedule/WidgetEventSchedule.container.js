@@ -56,11 +56,14 @@ export const WidgetEventSchedule = ({
     }, [suggestedScheduleDate, scheduleDate]);
 
     const onHandleSchedule = useCallback(() => {
-        if (programCategory?.categories && !Object.keys(selectedCategories).length) {
-            const errors = programCategory.categories.reduce((acc, category) => {
-                acc[category.id] = { touched: true, valid: false };
-                return acc;
-            }, {});
+        if (programCategory?.categories &&
+            Object.keys(selectedCategories).length !== programCategory?.categories?.length) {
+            const errors = programCategory.categories
+                .filter(({ id }) => !selectedCategories[id])
+                .reduce((acc, category) => {
+                    acc[category.id] = { touched: true, valid: false };
+                    return acc;
+                }, {});
             setCategoryOptionsError(errors);
             return;
         }

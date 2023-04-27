@@ -83,7 +83,6 @@ const deriveEvents = ({
             const eventAttributeCategoryOptions = {};
             if (attributeCategoryOptions) {
                 eventAttributeCategoryOptions.attributeCategoryOptions = convertCategoryOptionsToServer(attributeCategoryOptions);
-                eventAttributeCategoryOptions.attributeOptionCombo = '';
             }
             const eventInfo =
               openAfterEnrollment
@@ -156,7 +155,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
-            const { dataStore, userDataStore } = store.value.useNewDashboard;
+            const { dataStore, userDataStore, temp } = store.value.useNewDashboard;
             const fieldsValue = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
             const { occurredAt, enrolledAt, geometry } = fieldsValue;
             const attributeCategoryOptionsId = 'attributeCategoryOptions';
@@ -171,7 +170,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
             const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
             const stageWithOpenAfterEnrollment = getStageWithOpenAfterEnrollment(stages);
             const redirectToEnrollmentEventNew =
-            shouldUseNewDashboard(userDataStore, dataStore, programId) && stageWithOpenAfterEnrollment !== undefined;
+            shouldUseNewDashboard(userDataStore, dataStore, temp, programId) && stageWithOpenAfterEnrollment !== undefined;
             const events = deriveEvents({
                 stages,
                 enrolledAt,
