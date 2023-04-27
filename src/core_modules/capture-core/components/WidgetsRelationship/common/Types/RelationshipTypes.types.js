@@ -1,7 +1,7 @@
 // @flow
 
 export type TrackerDataView = {
-    atttributes: Array<string>,
+    attributes: Array<string>,
     dataElements: Array<string>,
 };
 
@@ -18,6 +18,8 @@ export type RelationshipType = {
     id: string,
     displayName: string,
     access: Object,
+    toFromName: string,
+    fromToName: string,
     fromConstraint: RelationshipConstraint,
     toConstraint: RelationshipConstraint,
 };

@@ -1,28 +1,14 @@
 // @flow
 import type { GetPrograms, GetSearchGroups, GetSearchGroupsAsync } from './NewTrackedEntityRelationship';
-
-type Constraint = {|
-    program?: { id: string },
-    trackedEntityType?: { id: string },
-|}
-
-export type RelationshipType = $ReadOnly<{|
-    id: string,
-    displayName: string,
-    bidirectional: boolean,
-    fromToName: string,
-    toFromName?: string,
-    fromConstraint: Constraint,
-    toConstraint: Constraint,
-|}>;
-
-export type RelationshipTypes = Array<RelationshipType>;
+import type { RelationshipType, RelationshipTypes } from '../common/Types';
 
 export type Props = {|
-    relationshipTypes?: RelationshipTypes,
+    cachedRelationshipTypes: RelationshipTypes,
     trackedEntityTypeId: string,
+    teiId: string,
     programId: string,
     addRelationshipRenderElement: HTMLElement,
+    onLinkedRecordClick: () => void,
     onOpenAddRelationship?: () => void,
     onCloseAddRelationship?: () => void,
      /*

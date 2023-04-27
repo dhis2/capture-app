@@ -16,7 +16,6 @@ import { WidgetProfile } from '../../WidgetProfile';
 import { WidgetEnrollment } from '../../WidgetEnrollment';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetEventComment } from '../../WidgetEventComment';
-import { WidgetTeisRelationships, WidgetEventsRelationships } from '../../WidgetRelationships';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
 
@@ -127,20 +126,13 @@ const EnrollmentEditEventPagePain = ({
                     <WidgetEventComment dataEntryKey={mode} dataEntryId={dataEntryIds.ENROLLMENT_EVENT} />
                     <WidgetError error={widgetEffects.errors} />
                     <WidgetWarning warning={widgetEffects.warnings} />
-                    <WidgetTeisRelationships
+                    {/* <TrackedEntityRelationshipsWrapper
                         teiId={teiId}
                         relationships={relationships}
                         relationshipTypes={teiRelationshipTypes}
                         onAddRelationship={() => {}}
                         onLinkedRecordClick={onLinkedRecordClick}
-                    />
-                    <WidgetEventsRelationships
-                        eventId={eventId}
-                        relationships={eventRelationships}
-                        relationshipTypes={eventRelationshipTypes}
-                        onAddRelationship={() => {}}
-                        onLinkedRecordClick={onLinkedRecordClick}
-                    />
+                    /> */}
                     {!hideWidgets.feedback && (
                         <WidgetFeedback
                             emptyText={i18n.t('There are no feedback for this event')}

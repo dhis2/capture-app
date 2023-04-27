@@ -1,19 +1,19 @@
 // @flow
 import { useCallback, useEffect, useState } from 'react';
 import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import moment from 'moment';
+import { errorCreator } from 'capture-core-utils';
 import { getProgramAndStageFromEvent, getTrackedEntityTypeThrowIfNotFound }
-    from '../../../metaData';
+    from '../../../../metaData';
 import type {
     InputRelationship,
-    RelationshipType,
     RelationshipData,
     TEIAttribute,
-} from '../common.types';
-import type { DataValue } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
-import { getBaseConfigHeaders, relationshipEntities } from '../constants';
-import { convertServerToClient, convertClientToList } from '../../../converters';
+} from '../../../WidgetRelationships/common.types';
+import type { DataValue } from '../../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import { getBaseConfigHeaders, relationshipEntities } from '../../constants';
+import { convertServerToClient, convertClientToList } from '../../../../converters';
+import type { RelationshipTypes } from '../Types';
 
 const convertAttributes = (
     attributes: Array<TEIAttribute> | Array<DataValue>,
@@ -160,12 +160,12 @@ const getLinkedEntityInfo = (
 
 export const useLinkedEntityGroups = (
     targetId: string,
-    relationshipTypes: Array<RelationshipType>,
+    relationshipTypes: ?RelationshipTypes,
     relationships?: Array<InputRelationship>,
 ) => {
     const [relationshipsByType, setRelationshipByType] = useState([]);
 
-    const computeData = useCallback(async () => {
+    const computeData = useCallback(() => {
         if (relationships?.length && relationshipTypes?.length) {
             const linkedEntityGroups = relationships
                 .sort((a, b) => moment.utc(b.createdAt).diff(moment.utc(a.createdAt)))

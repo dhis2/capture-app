@@ -119,11 +119,13 @@ const NewTrackedEntityRelationshipPlain = ({
             </div>
             <Widget
                 noncollapsible
-                header={<Breadcrumbs
-                    currentStep={currentStep}
-                    onNavigate={handleNavigation}
-                    linkedEntityMetadataName={selectedLinkedEntityMetadata?.name}
-                />}
+                header={(
+                    <Breadcrumbs
+                        currentStep={currentStep}
+                        onNavigate={handleNavigation}
+                        linkedEntityMetadataName={selectedLinkedEntityMetadata?.name}
+                    />
+                )}
             >
                 {stepContents[currentStep.id]()}
             </Widget>

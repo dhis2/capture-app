@@ -88,7 +88,7 @@ export const useRelationshipTypesMetadata = (relationships?: Array<InputRelation
                 .then(results => Promise.all(results.map(res => fetchDataView(res))))
                 .then((res) => {
                     setRelationshipTypesMetadata(res);
-                    storageController.setAll(userStores.RELATIONSHIP_TYPES, res);
+                    // storageController.setAll(userStores.RELATIONSHIP_TYPES, res);
                 });
         }
     }, [relationships, fetchDataView]);

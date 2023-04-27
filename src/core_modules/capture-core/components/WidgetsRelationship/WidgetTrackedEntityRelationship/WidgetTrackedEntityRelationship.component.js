@@ -1,55 +1,40 @@
 // @flow
-import React, { useCallback, useState } from 'react';
-import { Button } from '@dhis2/ui';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 import type { Props } from './WidgetTrackedEntityRelationship.types';
+import { useLinkedEntityGroups } from '../common/hooks';
+import { RelationshipsWidget } from '../common/RelationshipsComponent';
+import { RelationshipSearchEntities, useRelationships } from '../common/hooks/useRelationships';
+import { useRelationshipTypes } from '../common/hooks/useRelationshipTypes';
 
 export const WidgetTrackedEntityRelationship = ({
-    relationshipTypes = [],
+    cachedRelationshipTypes,
     trackedEntityTypeId,
-    programId,
-    addRelationshipRenderElement,
-    onOpenAddRelationship,
-    onCloseAddRelationship,
-    getPrograms,
-    getSearchGroups,
-    getSearchGroupsAsync,
+    teiId,
+    ...passOnProps
 }: Props) => {
-    const [addWizardVisible, setAddWizardVisibility] = useState(false);
+    const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
+    const { data: relationships, isError } = useRelationships(teiId, RelationshipSearchEntities.TRACKED_ENTITY);
 
-    const closeAddWizard = useCallback(() => {
-        setAddWizardVisibility(false);
-        onCloseAddRelationship && onCloseAddRelationship();
-    }, [onCloseAddRelationship]);
+    // TODO: Refactor this to be self contained
+    const { relationships: linkedEntityRelationships } = useLinkedEntityGroups(teiId, relationshipTypes, relationships);
 
-    const openAddWizard = useCallback(() => {
-        setAddWizardVisibility(true);
-        onOpenAddRelationship && onOpenAddRelationship();
-    }, [onOpenAddRelationship]);
+    if (isError) {
+        return (
+            <div>
+                {i18n.t('Something went wrong while loading relationships. Please try again later.')}
+            </div>
+        );
+    }
 
     return (
-        <>
-            <Button
-                onClick={openAddWizard}
-            >
-                {i18n.t('New Relationship')}
-            </Button>
-            {
-                addWizardVisible &&
-                <NewTrackedEntityRelationship
-                    // $FlowFixMe
-                    relationshipTypes={relationshipTypes}
-                    trackedEntityTypeId={trackedEntityTypeId}
-                    programId={programId}
-                    renderElement={addRelationshipRenderElement}
-                    onSave={closeAddWizard}
-                    onCancel={closeAddWizard}
-                    getPrograms={getPrograms}
-                    getSearchGroups={getSearchGroups}
-                    getSearchGroupsAsync={getSearchGroupsAsync}
-                />
-            }
-        </>
+        <RelationshipsWidget
+            title={i18n.t("TEI's Relationships")}
+            relationshipTypes={relationshipTypes}
+            relationships={linkedEntityRelationships}
+            trackedEntityTypeId={trackedEntityTypeId}
+            teiId={teiId}
+            {...passOnProps}
+        />
     );
 };

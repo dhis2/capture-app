@@ -1,9 +1,9 @@
 // @flow
 import { useMemo } from 'react';
-import { RELATIONSHIP_ENTITIES } from '../../common';
 import { TARGET_SIDES } from '../common';
 import type { TargetSides } from '../MOVE_WidgetsCommon';
 import type { RelationshipType, ApplicableTypesInfo } from './linkedEntityMetadataSelector.types';
+import { RELATIONSHIP_ENTITIES } from '../../../constants';
 
 const isApplicableProgram = (programId, sourceProgramIds) =>
     (!sourceProgramIds || !programId || sourceProgramIds.includes(programId));

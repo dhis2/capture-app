@@ -12,7 +12,7 @@ import {
     spacers,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import type { Url } from '../../../utils/url';
+import type { Url } from '../../../../utils/url';
 
 
 type Props = {
@@ -79,20 +79,22 @@ const RelationshipsTablePlain = (props: Props) => {
     const renderShowMoreButton = () => {
         const shouldShowMore = linkedEntityData.length > DEFAULT_NUMBER_OF_ROW
             && displayedRowNumber < linkedEntityData.length;
-        return shouldShowMore ? <Button
-            small
-            secondary
-            dataTest="show-more-button"
-            className={classes.button}
-            onClick={() => {
-                const nextRowIndex = Math.min(linkedEntityData.length, displayedRowNumber + DEFAULT_NUMBER_OF_ROW);
-                setDisplayedRowNumber(nextRowIndex);
-            }}
-        >
-            {i18n.t('Show {{ rest }} more', {
-                rest: Math.min(linkedEntityData.length - displayedRowNumber, DEFAULT_NUMBER_OF_ROW),
-            })}
-        </Button> : null;
+        return shouldShowMore ? (
+            <Button
+                small
+                secondary
+                dataTest="show-more-button"
+                className={classes.button}
+                onClick={() => {
+                    const nextRowIndex = Math.min(linkedEntityData.length, displayedRowNumber + DEFAULT_NUMBER_OF_ROW);
+                    setDisplayedRowNumber(nextRowIndex);
+                }}
+            >
+                {i18n.t('Show {{ rest }} more', {
+                    rest: Math.min(linkedEntityData.length - displayedRowNumber, DEFAULT_NUMBER_OF_ROW),
+                })}
+            </Button>
+        ) : null;
     };
 
     return (

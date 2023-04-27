@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes } from '../../metaData';
-import { convertServerToClient, convertClientToList } from '../../converters';
+import { convertClientToList, convertServerToClient } from '../../converters';
 
 export const relationshipEntities = Object.freeze({
     TRACKED_ENTITY_INSTANCE: 'TRACKED_ENTITY_INSTANCE',
@@ -40,3 +40,9 @@ export const getBaseConfigHeaders = {
         ),
     }],
 };
+
+export const RELATIONSHIP_ENTITIES = Object.freeze({
+    PROGRAM_STAGE_INSTANCE: 'PROGRAM_STAGE_INSTANCE',
+    TRACKED_ENTITY_INSTANCE: 'TRACKED_ENTITY_INSTANCE',
+    PROGRAM_INSTANCE: 'PROGRAM_INSTANCE',
+});

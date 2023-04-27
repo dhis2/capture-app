@@ -13,7 +13,6 @@ import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 import { EnrollmentQuickActions } from './EnrollmentQuickActions';
-import { WidgetTeisRelationships } from '../../../WidgetRelationships';
 import { TrackedEntityRelationshipsWrapper } from './TrackedEntityRelationshipsWrapper';
 
 const getStyles = () => ({
@@ -56,7 +55,6 @@ export const EnrollmentPageDefaultPlain = ({
     events,
     enrollmentId,
     relationships,
-    relationshipTypes,
     stages,
     onDelete,
     onAddNew,
@@ -78,11 +76,6 @@ export const EnrollmentPageDefaultPlain = ({
         setAddRelationshipContainerElement(renderRelationshipRef.current);
     }, []);
 
-    const a = (c, d, e) => {
-        debugger;
-        onEventClick(c, d, e);
-    };
-
     const toggleVisibility = useCallback(() => setMainContentVisibility(current => !current), []);
 
     return (
@@ -102,11 +95,12 @@ export const EnrollmentPageDefaultPlain = ({
                             events={events}
                         />
                         <WidgetStagesAndEvents
+                            programId={program.id}
                             stages={stages}
                             events={events}
                             onViewAll={onViewAll}
                             onCreateNew={onCreateNew}
-                            onEventClick={a}
+                            onEventClick={onEventClick}
                         />
                     </div>
                     <div className={classes.rightColumn}>
@@ -117,18 +111,16 @@ export const EnrollmentPageDefaultPlain = ({
                                 addRelationshipRenderElement={addRelationShipContainerElement}
                                 onOpenAddRelationship={toggleVisibility}
                                 onCloseAddRelationship={toggleVisibility}
+                                relationships={relationships}
+                                // relationshipTypes={relationshipTypes}
+                                teiId={teiId}
+                                onAddRelationship={() => {}}
+                                onLinkedRecordClick={onLinkedRecordClick}
                             />
                         }
                         <WidgetEnrollmentComment />
                         <WidgetError error={widgetEffects?.errors} />
                         <WidgetWarning warning={widgetEffects?.warnings} />
-                        <WidgetTeisRelationships
-                            relationships={relationships}
-                            relationshipTypes={relationshipTypes}
-                            teiId={teiId}
-                            onAddRelationship={() => {}}
-                            onLinkedRecordClick={onLinkedRecordClick}
-                        />
                         {!hideWidgets.indicator && (
                             <WidgetIndicator
                                 indicators={widgetEffects?.indicators}
