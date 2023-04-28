@@ -23,6 +23,8 @@ const MULTI_TEXT_SEPARATOR = ',';
 
 type Props = {
     onSelect: (value: any) => void,
+    onFocus: () => void,
+    onBlur: () => void,
     options: Array<VirtualizedOptionConfig>,
     value: any,
     translations: {
@@ -40,6 +42,8 @@ const MultiSelectFieldComponentPlain = (props: Props) => {
         options,
         value,
         translations,
+        onFocus,
+        onBlur,
     } = props;
     const [selected, setSelected] = useState([]);
 
@@ -55,17 +59,22 @@ const MultiSelectFieldComponentPlain = (props: Props) => {
     };
 
     return (
-        <MultiSelectFieldUI
-            onChange={onHandleChange}
-            selected={selected}
-            filterable
-            filterPlaceholder={translations.filterPlaceholder}
-            noMatchText={translations.noMatchText}
-        >
-            {options.map(option => (
-                <MultiSelectOption key={option.id} label={option.label} value={option.value} />
-            ))}
-        </MultiSelectFieldUI>
+        <div onBlur={onBlur} tabIndex={-1}>
+            <MultiSelectFieldUI
+                onChange={onHandleChange}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onKeyDown={onFocus}
+                selected={selected}
+                filterable
+                filterPlaceholder={translations.filterPlaceholder}
+                noMatchText={translations.noMatchText}
+            >
+                {options.map(option => (
+                    <MultiSelectOption key={option.id} label={option.label} value={option.value} />
+                ))}
+            </MultiSelectFieldUI>
+        </div>
     );
 };
 
