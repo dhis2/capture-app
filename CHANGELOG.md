@@ -1,3 +1,59 @@
+## [100.29.1](https://github.com/dhis2/capture-app/compare/v100.29.0...v100.29.1) (2023-04-26)
+
+
+### Bug Fixes
+
+* [DHIS2-14190] restrict which values can be assigned to option sets ([#3211](https://github.com/dhis2/capture-app/issues/3211)) ([00b8917](https://github.com/dhis2/capture-app/commit/00b89171f1af4ec1b95e5b7e9a62bac383442003))
+
+# [100.29.0](https://github.com/dhis2/capture-app/compare/v100.28.3...v100.29.0) (2023-04-17)
+
+
+### Features
+
+* [DHIS2-12256] use display label for due date and execution date ([#3228](https://github.com/dhis2/capture-app/issues/3228)) ([70b23a6](https://github.com/dhis2/capture-app/commit/70b23a60fa2d75722bb82461c68bf29ca2bfe66e))
+
+## [100.28.3](https://github.com/dhis2/capture-app/compare/v100.28.2...v100.28.3) (2023-04-17)
+
+
+### Bug Fixes
+
+* [DHIS2-14868] extend the clickable zone for search header ([#3226](https://github.com/dhis2/capture-app/issues/3226)) ([a065ebb](https://github.com/dhis2/capture-app/commit/a065ebbaf01ffeae46c2586e9c766581a6db9399))
+
+## [100.28.2](https://github.com/dhis2/capture-app/compare/v100.28.1...v100.28.2) (2023-04-17)
+
+
+### Bug Fixes
+
+* [DHIS2-14976] apply input converters on context variables ([#3221](https://github.com/dhis2/capture-app/issues/3221)) ([4470e78](https://github.com/dhis2/capture-app/commit/4470e7891ec1800db280233a8cd1dca56206370c))
+
+## [100.28.1](https://github.com/dhis2/capture-app/compare/v100.28.0...v100.28.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* [DHIS2-15109] eventDate breaks saved working lists ([#3234](https://github.com/dhis2/capture-app/issues/3234)) ([cde8b50](https://github.com/dhis2/capture-app/commit/cde8b50d3202cda84f2e96dc86f8ff10bdfbea3a))
+
+# [100.28.0](https://github.com/dhis2/capture-app/compare/v100.27.0...v100.28.0) (2023-04-14)
+
+
+### Features
+
+* [DHIS2-12337] indicate waiting on saving new tei ([#3181](https://github.com/dhis2/capture-app/issues/3181)) ([3f294c4](https://github.com/dhis2/capture-app/commit/3f294c42985f1164c40ee57e74c242b50eda1b24))
+
+# [100.27.0](https://github.com/dhis2/capture-app/compare/v100.26.2...v100.27.0) (2023-03-30)
+
+
+### Features
+
+* [DHIS2-13804] breaking the glass page ([#3186](https://github.com/dhis2/capture-app/issues/3186)) ([f7ae7c2](https://github.com/dhis2/capture-app/commit/f7ae7c2ba59bce44f05ef515f85e86c7ab14d21e))
+
+## [100.26.2](https://github.com/dhis2/capture-app/compare/v100.26.1...v100.26.2) (2023-03-24)
+
+
+### Bug Fixes
+
+* [DHIS2-14845] crash on searching in all programs when enrollment not found ([#3199](https://github.com/dhis2/capture-app/issues/3199)) ([e55b2b9](https://github.com/dhis2/capture-app/commit/e55b2b90bc789d6bc9771c8ef5bac9ad06217d6d))
+
 ## [100.26.1](https://github.com/dhis2/capture-app/compare/v100.26.0...v100.26.1) (2023-03-16)
 
 

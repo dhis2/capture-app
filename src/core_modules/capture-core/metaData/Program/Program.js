@@ -25,6 +25,7 @@ export class Program {
     _programRuleVariables: Array<ProgramRuleVariable>;
     _icon: Icon | void;
     _displayFrontPageList: boolean;
+    _onlyEnrollOnce: boolean;
 
     constructor(initFn: ?(_this: Program) => void) {
         this.programRules = [];
@@ -112,6 +113,14 @@ export class Program {
 
     get displayFrontPageList() {
         return this._displayFrontPageList;
+    }
+
+    set onlyEnrollOnce(onlyEnrollOnce: boolean) {
+        this._onlyEnrollOnce = onlyEnrollOnce;
+    }
+
+    get onlyEnrollOnce() {
+        return this._onlyEnrollOnce;
     }
 
     get stages(): Map<string, ProgramStage> {

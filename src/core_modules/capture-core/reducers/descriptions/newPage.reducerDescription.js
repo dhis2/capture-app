@@ -2,6 +2,7 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { newPageStatuses } from '../../components/Pages/New/NewPage.constants';
+import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 
 type NewPageState = {
     newPageStatus: $Keys<typeof newPageStatuses>
@@ -24,6 +25,22 @@ export const newPageDesc = createReducerDescription(
             ...state,
             newPageStatus: newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED,
         }),
+        [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START]: (state, action) => {
+            const { uid } = action.payload;
+
+            return {
+                ...state,
+                uid,
+            };
+        },
+        [newPageActionTypes.CLEAN_UP_UID]: (state) => {
+            const newState = { ...state };
+            delete newState.uid;
+
+            return {
+                ...newState,
+            };
+        },
     },
     'newPage',
     initialNewPageState,
