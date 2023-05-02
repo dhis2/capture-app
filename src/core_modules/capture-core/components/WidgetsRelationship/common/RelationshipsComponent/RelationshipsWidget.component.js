@@ -4,17 +4,17 @@ import { Chip, IconLink24, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../../Widget';
 import { RelationshipTables } from './RelationshipsTables.component';
-import type { OutputRelationship } from '../../../WidgetRelationships/common.types';
-import type { Url } from '../../../../utils/url';
-import { NewTrackedEntityRelationship } from '../../WidgetTrackedEntityRelationship/NewTrackedEntityRelationship';
+import { AddNewRelationship } from '../AddNewRelationship';
+import type { OutputRelationshipData, UrlParameters } from '../Types';
 
 type Props = {|
-    relationships: Array<OutputRelationship>,
+    relationships: Array<OutputRelationshipData>,
     title: string,
     onAddRelationship: () => void,
-    onLinkedRecordClick: (parameters: Url) => void,
+    onLinkedRecordClick: (parameters: UrlParameters) => void,
     teiId?: string,
     eventId?: string,
+    addRelationshipRenderElement: HTMLElement,
     ...CssClasses,
 |}
 
@@ -28,7 +28,15 @@ const styles = {
     },
 };
 
-const RelationshipsWidgetPlain = ({ relationships, title, teiId, eventId, classes, ...passOnProps }: Props) => {
+const RelationshipsWidgetPlain = ({
+    relationships,
+    title,
+    teiId,
+    eventId,
+    classes,
+    onLinkedRecordClick,
+    ...passOnProps
+}: Props) => {
     const [open, setOpenStatus] = useState(true);
     const count = relationships.reduce((acc, curr) => { acc += curr.linkedEntityData.length; return acc; }, 0);
     return (
@@ -38,7 +46,9 @@ const RelationshipsWidgetPlain = ({ relationships, title, teiId, eventId, classe
             <Widget
                 header={(
                     <div className={classes.header}>
-                        <span className={classes.icon}><IconLink24 /></span>
+                        <span className={classes.icon}>
+                            <IconLink24 />
+                        </span>
                         <span>{title}</span>
                         {relationships && (
                             <Chip dense>
@@ -51,25 +61,18 @@ const RelationshipsWidgetPlain = ({ relationships, title, teiId, eventId, classe
                 onClose={() => setOpenStatus(false)}
                 open={open}
             >
+                {/* TODO: investigate why flow expect classes here */}
+                {/* $FlowFixMe */}
                 <RelationshipTables
                     relationships={relationships}
-                    classes={classes}
-                    {...passOnProps}
+                    onLinkedRecordClick={onLinkedRecordClick}
                 />
 
-                {teiId && (
-                    <NewTrackedEntityRelationship
-                        teiId={teiId}
-                        {...passOnProps}
-                    />
-                )}
-
-                {eventId && (
-                    <div>
-                        <h3>Add event relationships</h3>
-                        <p>Not implemented yet</p>
-                    </div>
-                )}
+                <AddNewRelationship
+                    teiId={teiId}
+                    eventId={eventId}
+                    {...passOnProps}
+                />
             </Widget>
         </div>
     );

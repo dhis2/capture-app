@@ -1,23 +1,19 @@
 // @flow
-import type { RelationshipTypes } from './LinkedEntityMetadataSelector';
-import type { GetPrograms } from './common';
-import type { GetSearchGroups, GetSearchGroupsAsync } from './TrackedEntityFinder';
+
+import type { RelationshipTypes } from '../../common/Types';
 
 export type Props = $ReadOnly<{|
-    addRelationshipRenderElement: HTMLElement,
     relationshipTypes: RelationshipTypes,
     trackedEntityTypeId: string,
     programId: string,
     onSave: () => void,
     onCancel: () => void,
-    onCloseAddRelationship: () => void,
-    onOpenAddRelationship: () => void,
-    getPrograms: GetPrograms,
-    getSearchGroups?: GetSearchGroups,
-    getSearchGroupsAsync?: GetSearchGroupsAsync,
+    onCloseAddRelationship?: () => void,
+    onOpenAddRelationship?: () => void,
 |}>;
 
 export type PlainProps = $ReadOnly<{|
+    addRelationshipRenderElement: HTMLElement,
     ...Props,
     ...CssClasses,
 |}>;

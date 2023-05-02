@@ -13,13 +13,13 @@ type Element = {|
 const relationshipTypesQuery = {
     resource: 'relationshipTypes',
     params: {
-        fields: 'id,displayName,fromConstraint,toConstraint',
+        fields: 'id,displayName,fromToName,toFromName,fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]],toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]]',
     },
 };
 
-export const useRelationshipTypes = (cachedRelationshipTypes: RelationshipTypes) => {
+export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes) => {
     const { data: apiRelationshipTypes, isError, isLoading } = useMetadataApiQuery<?RelationshipTypes>(
-        ['relationshipTypesForRelationshipWidget'],
+        ['widgetRelationship', 'relationshipTypes'],
         relationshipTypesQuery,
         {
             enabled: !cachedRelationshipTypes?.length,
@@ -56,7 +56,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes: RelationshipTypes)
     }, [apiRelationshipTypes]);
 
     const { data: apiAttributes } = useMetadataApiQuery<Array<Element>>(
-        ['attributesForRelationshipWidget'],
+        ['widgetRelationship', 'attributes'],
         attributeQuery,
         {
             enabled: !cachedRelationshipTypes?.length && !!attributeQuery,
@@ -65,7 +65,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes: RelationshipTypes)
     );
 
     const { data: apiDataElements } = useMetadataApiQuery<Array<Element>>(
-        ['dataElementsForRelationshipWidget'],
+        ['widgetRelationship', 'dataElements'],
         dataElementQuery,
         {
             enabled: !cachedRelationshipTypes?.length && !!dataElementQuery,

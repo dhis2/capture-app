@@ -19,9 +19,6 @@ export const NewTrackedEntityRelationshipPlain = ({
     trackedEntityTypeId,
     onCloseAddRelationship,
     onOpenAddRelationship,
-    getPrograms,
-    getSearchGroups = () => {},
-    getSearchGroupsAsync = () => {},
     classes,
 }: PlainProps) => {
     const [addWizardVisible, setAddWizardVisibility] = useState(false);
@@ -49,16 +46,12 @@ export const NewTrackedEntityRelationshipPlain = ({
             {
                 addWizardVisible && (
                     <NewTrackedEntityRelationshipPortal
-                        // $FlowFixMe
                         relationshipTypes={relationshipTypes}
                         trackedEntityTypeId={trackedEntityTypeId}
                         programId={programId}
                         renderElement={addRelationshipRenderElement}
                         onSave={closeAddWizard}
                         onCancel={closeAddWizard}
-                        getPrograms={getPrograms}
-                        getSearchGroups={getSearchGroups}
-                        getSearchGroupsAsync={getSearchGroupsAsync}
                     />
                 )
             }

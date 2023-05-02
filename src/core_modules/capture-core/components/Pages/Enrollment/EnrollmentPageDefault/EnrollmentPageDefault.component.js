@@ -54,7 +54,6 @@ export const EnrollmentPageDefaultPlain = ({
     orgUnitId,
     events,
     enrollmentId,
-    relationships,
     stages,
     onDelete,
     onAddNew,
@@ -109,12 +108,10 @@ export const EnrollmentPageDefaultPlain = ({
                                 trackedEntityTypeId={program.trackedEntityType.id}
                                 programId={program.id}
                                 addRelationshipRenderElement={addRelationShipContainerElement}
+                                onAddRelationship={() => {}}
                                 onOpenAddRelationship={toggleVisibility}
                                 onCloseAddRelationship={toggleVisibility}
-                                relationships={relationships}
-                                // relationshipTypes={relationshipTypes}
                                 teiId={teiId}
-                                onAddRelationship={() => {}}
                                 onLinkedRecordClick={onLinkedRecordClick}
                             />
                         }

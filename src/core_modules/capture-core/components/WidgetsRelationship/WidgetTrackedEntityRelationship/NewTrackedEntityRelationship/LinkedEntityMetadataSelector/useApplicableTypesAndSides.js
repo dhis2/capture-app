@@ -1,9 +1,10 @@
 // @flow
 import { useMemo } from 'react';
 import { TARGET_SIDES } from '../common';
-import type { TargetSides } from '../MOVE_WidgetsCommon';
-import type { RelationshipType, ApplicableTypesInfo } from './linkedEntityMetadataSelector.types';
+import type { ApplicableTypesInfo } from './linkedEntityMetadataSelector.types';
+import type { RelationshipType } from '../../../common/Types';
 import { RELATIONSHIP_ENTITIES } from '../../../constants';
+import type { TargetSides } from '../../../common/LinkedEntityMetadataSelector';
 
 const isApplicableProgram = (programId, sourceProgramIds) =>
     (!sourceProgramIds || !programId || sourceProgramIds.includes(programId));
@@ -90,79 +91,80 @@ const getApplicableTargetSidesForBidirectionalRelationshipType = ({
 export const useApplicableTypesAndSides = (
     relationshipTypes: $ReadOnlyArray<RelationshipType>,
     sourceTrackedEntityTypeId: string,
-    sourceProgramIds: $ReadOnlyArray<string>): ApplicableTypesInfo =>
-    useMemo(() =>
-        relationshipTypes.map(({
-            fromConstraint,
-            toConstraint,
-            bidirectional,
-            id,
-            displayName,
-            fromToName,
-            toFromName,
-        }) => {
-            if (fromConstraint.relationshipEntity === RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE &&
+    sourceProgramIds: $ReadOnlyArray<string>,
+): ApplicableTypesInfo => useMemo(() =>
+    relationshipTypes.map(({
+        fromConstraint,
+        toConstraint,
+        bidirectional,
+        id,
+        displayName,
+        fromToName,
+        toFromName,
+    }) => {
+        if (fromConstraint.relationshipEntity === RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE &&
                 toConstraint.relationshipEntity === RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE) {
-                if (!bidirectional) {
-                    const applicable = isApplicableUnidirectionalRelationshipType(
-                        fromConstraint,
-                        sourceTrackedEntityTypeId,
-                        sourceProgramIds,
-                    );
-
-                    if (!applicable) {
-                        // $FlowFixMe filter
-                        return null;
-                    }
-                    const { trackedEntityType, program } = toConstraint;
-                    return {
-                        id,
-                        name: displayName,
-                        sides: [{
-                            programId: program?.id,
-                            trackedEntityTypeId: trackedEntityType.id,
-                            targetSide: TARGET_SIDES.TO,
-                            name: fromToName,
-                        }],
-                    };
-                }
-
-                const targetSides = getApplicableTargetSidesForBidirectionalRelationshipType(
-                    { fromConstraint, toConstraint },
+            if (!bidirectional) {
+                const applicable = isApplicableUnidirectionalRelationshipType(
+                    fromConstraint,
                     sourceTrackedEntityTypeId,
                     sourceProgramIds,
                 );
 
-                if (!targetSides.length) {
+                if (!applicable) {
                     // $FlowFixMe filter
                     return null;
                 }
+                const { trackedEntityType, program } = toConstraint;
 
                 return {
                     id,
                     name: displayName,
-                    sides: targetSides.map((targetSide) => {
-                        const { trackedEntityTypeId, programId, name } = targetSide === TARGET_SIDES.TO ? {
-                            trackedEntityTypeId: toConstraint.trackedEntityType.id,
-                            programId: toConstraint.program?.id,
-                            name: fromToName,
-                        } : {
-                            trackedEntityTypeId: fromConstraint.trackedEntityType.id,
-                            programId: fromConstraint.program?.id,
-                            name: toFromName,
-                        };
-
-                        return {
-                            trackedEntityTypeId,
-                            programId,
-                            targetSide,
-                            // $FlowFixMe
-                            name,
-                        };
-                    }),
+                    sides: [{
+                        programId: program?.id,
+                        trackedEntityTypeId: trackedEntityType.id,
+                        targetSide: TARGET_SIDES.TO,
+                        name: fromToName,
+                    }],
                 };
             }
-            // $FlowFixMe filter
-            return null;
-        }).filter(applicableType => applicableType),
-    [relationshipTypes, sourceTrackedEntityTypeId, sourceProgramIds]);
+
+            const targetSides = getApplicableTargetSidesForBidirectionalRelationshipType(
+                { fromConstraint, toConstraint },
+                sourceTrackedEntityTypeId,
+                sourceProgramIds,
+            );
+
+            if (!targetSides.length) {
+                // $FlowFixMe filter
+                return null;
+            }
+
+            return {
+                id,
+                name: displayName,
+                sides: targetSides.map((targetSide) => {
+                    const { trackedEntityTypeId, programId, name } = targetSide === TARGET_SIDES.TO ? {
+                        trackedEntityTypeId: toConstraint.trackedEntityType.id,
+                        programId: toConstraint.program?.id,
+                        name: fromToName,
+                    } : {
+                        trackedEntityTypeId: fromConstraint.trackedEntityType.id,
+                        programId: fromConstraint.program?.id,
+                        name: toFromName,
+                    };
+
+                    return {
+                        trackedEntityTypeId,
+                        programId,
+                        targetSide,
+                        // $FlowFixMe
+                        name,
+                    };
+                }),
+            };
+        }
+        // $FlowFixMe filter
+        return null;
+    }).filter(applicableType => applicableType),
+[relationshipTypes, sourceTrackedEntityTypeId, sourceProgramIds]);

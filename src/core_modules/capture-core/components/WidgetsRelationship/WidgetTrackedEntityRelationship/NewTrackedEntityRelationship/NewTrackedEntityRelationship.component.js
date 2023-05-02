@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState, type ComponentType } from 'react';
+import React, { useCallback, useState, type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../../Widget';
@@ -12,18 +12,6 @@ import {
 } from './LinkedEntityMetadataSelector';
 import { RetrieverModeSelector } from './RetrieverModeSelector';
 import type { Props, PlainProps } from './NewTrackedEntityRelationship.types';
-import { TrackedEntityFinder } from './TrackedEntityFinder';
-
-/*
-import { Button, IconSearch16, IconAdd16, spacers } from '@dhis2/ui';
-import { NewTEIRelationshipStatuses } from '../WidgetTrackedEntityRelationship.const';
-import { RelationshipTypeSelector } from './RelationshipTypeSelector/RelationshipTypeSelector';
-import { creationModeStatuses } from './NewTrackedEntityRelationship.const';
-import { TeiSearch } from './TeiSearch/TeiSearch.container';
-import {
-    TeiRelationshipSearchResults,
-} from '../../Pages/NewRelationship/TeiRelationship/SearchResults/TeiRelationshipSearchResults.component';
-*/
 
 const styles = {
     container: {
@@ -50,11 +38,7 @@ const NewTrackedEntityRelationshipPlain = ({
     relationshipTypes,
     trackedEntityTypeId,
     programId,
-    // onSave,
     onCancel,
-    getPrograms,
-    getSearchGroups,
-    getSearchGroupsAsync,
     classes,
 }: PlainProps) => {
     const [currentStep, setCurrentStep] =
@@ -76,26 +60,32 @@ const NewTrackedEntityRelationshipPlain = ({
     const handleNewRetrieverModeSelected = useCallback(() =>
         setCurrentStep(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.NEW_LINKED_ENTITY), []);
 
-    const stepContents = {
-        [NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA.id]: () => (
-            <LinkedEntityMetadataSelectorFromTrackedEntity
-                relationshipTypes={relationshipTypes}
-                trackedEntityTypeId={trackedEntityTypeId}
-                programId={programId}
-                onSelectLinkedEntityMetadata={handleLinkedEntityMetadataSelection}
-            />
-        ),
-        [NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_RETRIEVER_MODE.id]: () => (
-            <RetrieverModeSelector
-                onSearchSelected={handleSearchRetrieverModeSelected}
-                onNewSelected={handleNewRetrieverModeSelected}
-            />
-        ),
-        [NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY.id]: () => {
+    const stepContents = useMemo(() => {
+        if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA.id) {
+            return (
+                <LinkedEntityMetadataSelectorFromTrackedEntity
+                    relationshipTypes={relationshipTypes}
+                    trackedEntityTypeId={trackedEntityTypeId}
+                    programId={programId}
+                    onSelectLinkedEntityMetadata={handleLinkedEntityMetadataSelection}
+                />
+            );
+        }
+        if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_RETRIEVER_MODE.id) {
+            return (
+                <RetrieverModeSelector
+                    onSearchSelected={handleSearchRetrieverModeSelected}
+                    onNewSelected={handleNewRetrieverModeSelected}
+                />
+            );
+        }
+
+        // Steps below will be implemented by new PR
+        /* if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY.id) {
             const {
                 trackedEntityTypeId: linkedEntityTrackedEntityTypeId,
                 programId: linkedEntityProgramId,
-            // $FlowFixMe business logic dictates that we will have the linkedEntityMetadata at this step
+                // $FlowFixMe business logic dictates that we will have the linkedEntityMetadata at this step
             }: LinkedEntityMetadata = selectedLinkedEntityMetadata;
 
             return (
@@ -107,8 +97,22 @@ const NewTrackedEntityRelationshipPlain = ({
                     getSearchGroupsAsync={getSearchGroupsAsync}
                 />
             );
-        },
-    };
+        } */
+
+        return (
+            <div>
+                {i18n.t('Missing implementation step')}
+            </div>
+        );
+    }, [
+        currentStep.id,
+        handleLinkedEntityMetadataSelection,
+        handleNewRetrieverModeSelected,
+        handleSearchRetrieverModeSelected,
+        programId,
+        relationshipTypes,
+        trackedEntityTypeId,
+    ]);
 
     return (
         <div className={classes.container}>
@@ -127,7 +131,7 @@ const NewTrackedEntityRelationshipPlain = ({
                     />
                 )}
             >
-                {stepContents[currentStep.id]()}
+                {stepContents}
             </Widget>
         </div>
     );
@@ -135,78 +139,3 @@ const NewTrackedEntityRelationshipPlain = ({
 
 export const NewTrackedEntityRelationshipComponent: ComponentType<Props> =
     withStyles(styles)(NewTrackedEntityRelationshipPlain);
-
-/*
-
-const NewTrackedEntityRelationshipComponentPlain = (props) => {
-    if (pageStatus === NewTEIRelationshipStatuses.MISSING_RELATIONSHIP_TYPE) {
-        return (
-            <RelationshipTypeSelector
-                {...PassOnProps}
-            />
-        );
-    }
-
-    if (pageStatus === NewTEIRelationshipStatuses.MISSING_CREATION_MODE) {
-        return (
-            <div className={classes.container}>
-                <div className={classes.creationselector}>
-                    <Button
-                        className={classes.creationselector}
-                        onClick={() => onSetCreationMode(creationModeStatuses.SEARCH)}
-                    >
-                        <IconSearch16 />
-                        <p>{i18n.t('Link to an existing person')}</p>
-                    </Button>
-                    <Button className={classes.creationselector}>
-                        <IconAdd16 />
-                        <p>{i18n.t('Create new')}</p>
-                    </Button>
-                </div>
-            </div>
-        );
-    }
-
-    if (pageStatus === NewTEIRelationshipStatuses.LINK_TO_EXISTING) {
-        return (
-            <div className={classes.container}>
-                <TeiSearch
-                    resultsPageSize={5}
-                    id="relationshipTeiSearch"
-                    getResultsView={viewProps => (
-                        <TeiRelationshipSearchResults
-                            onAddRelationship={addRelationship}
-                            {...viewProps}
-                        />
-                    )}
-                />
-            </div>
-        );
-    }
-
-    return <p>{i18n.t('An error occurred')}</p>;
-};
-
-export const NewTrackedEntityRelationshipComponent = withStyles(styles)(NewTrackedEntityRelationshipComponentPlain);
-
-  const handleAddRelationship = useCallback((linkedTei) => {
-        if (selectedRelationshipType) {
-            const {
-                constraintSide,
-                id,
-            } = selectedRelationshipType;
-            const linkedTeiConstraintSide: string = constraintSide !== 'from' ? 'from' : 'to';
-
-            const serverData = {
-                relationships: [{
-                    relationshipType: id,
-                    [constraintSide]: {
-                        trackedEntity: teiId,
-                    },
-                    [linkedTeiConstraintSide]: {
-                        trackedEntity: linkedTei,
-                    },
-                }],
-            };
-
-*/

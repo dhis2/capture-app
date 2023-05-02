@@ -19,12 +19,11 @@ const {
 
 export const enrollmentDomainDesc = createReducerDescription(
     {
-        [COMMON_ENROLLMENT_SITE_DATA_SET]: (state, { payload: { enrollment, attributeValues, relationships } }) => ({
+        [COMMON_ENROLLMENT_SITE_DATA_SET]: (state, { payload: { enrollment, attributeValues } }) => ({
             ...state,
             enrollment,
             attributeValues,
             enrollmentId: enrollment?.enrollment,
-            relationships,
         }),
         [UPDATE_ENROLLMENT_EVENTS]: (
             state,

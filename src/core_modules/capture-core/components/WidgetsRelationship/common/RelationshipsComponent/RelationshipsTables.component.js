@@ -3,12 +3,11 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { spacersNum, spacers, colors } from '@dhis2/ui';
 import { RelationshipsTable } from './RelationshipsTable.component';
-import type { Url } from '../../../../utils/url';
+import type { OutputRelationshipData, UrlParameters } from '../Types';
 
 type Props = {
-    relationships: Object,
-    onAddRelationship: () => void,
-    onLinkedRecordClick: (parameters: Url) =>void,
+    relationships: Array<OutputRelationshipData>,
+    onLinkedRecordClick: (parameters: UrlParameters) => void,
     ...CssClasses,
 }
 
@@ -30,7 +29,7 @@ const styles = {
         overflow: 'scroll',
     },
 };
-const RelationshipsTablesPlain = ({ relationships, classes, onLinkedRecordClick }: Props) => (
+const RelationshipsTablesPlain = ({ relationships, onLinkedRecordClick, classes }: Props) => (
     <div
         data-test="relationships"
         className={classes.container}
@@ -39,8 +38,13 @@ const RelationshipsTablesPlain = ({ relationships, classes, onLinkedRecordClick 
             const { relationshipName, id, ...passOnProps } = relationship;
             return (
                 <div key={id} className={classes.wrapper}>
-                    <div className={classes.title} >{relationshipName}</div>
-                    <RelationshipsTable {...passOnProps} onLinkedRecordClick={onLinkedRecordClick} />
+                    <div className={classes.title}>{relationshipName}</div>
+                    {/* TODO: investigate why flow expect classes here */}
+                    {/* $FlowFixMe */}
+                    <RelationshipsTable
+                        {...passOnProps}
+                        onLinkedRecordClick={onLinkedRecordClick}
+                    />
                 </div>
             );
         })}

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
@@ -18,9 +18,16 @@ import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetEventComment } from '../../WidgetEventComment';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
+import {
+    TrackedEntityRelationshipsWrapper,
+} from '../Enrollment/EnrollmentPageDefault/TrackedEntityRelationshipsWrapper';
+import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 
 const styles = ({ typography }) => ({
     page: {
+        margin: spacersNum.dp16,
+    },
+    addRelationshipContainer: {
         margin: spacersNum.dp16,
     },
     columns: {
@@ -50,13 +57,8 @@ const EnrollmentEditEventPagePain = ({
     mode,
     programStage,
     teiId,
-    eventId,
     enrollmentId,
     programId,
-    relationships,
-    eventRelationships,
-    teiRelationshipTypes,
-    eventRelationshipTypes,
     enrollmentsAsOptions,
     trackedEntityName,
     teiDisplayName,
@@ -76,90 +78,108 @@ const EnrollmentEditEventPagePain = ({
     onEnrollmentSuccess,
     onCancelEditEvent,
     onHandleScheduleSave,
-}: PlainProps) => (
-    <OrgUnitFetcher orgUnitId={orgUnitId}>
-        <TopBar
-            mode={mode}
-            programStage={programStage}
-            enrollmentId={enrollmentId}
-            programId={programId}
-            enrollmentsAsOptions={enrollmentsAsOptions}
-            trackedEntityName={trackedEntityName}
-            teiDisplayName={teiDisplayName}
-            orgUnitId={orgUnitId}
-            eventDate={eventDate}
-            teiId={teiId}
-            pageStatus={pageStatus}
-        />
-        <div className={classes.page}>
-            <div className={classes.title}>
-                {mode === dataEntryKeys.VIEW
-                    ? i18n.t('Enrollment{{escape}} View Event', { escape: ':' })
-                    : i18n.t('Enrollment{{escape}} Edit Event', { escape: ':' })}
+}: PlainProps) => {
+    const [mainContentVisible, setMainContentVisible] = useState(true);
+    const [addRelationShipContainerElement, setAddRelationShipContainerElement] = useState<?HTMLDivElement>(undefined);
+
+    const toggleVisibility = useCallback(() => setMainContentVisible(current => !current), []);
+
+    return (
+        <OrgUnitFetcher orgUnitId={orgUnitId}>
+            <TopBar
+                mode={mode}
+                programStage={programStage}
+                enrollmentId={enrollmentId}
+                programId={programId}
+                enrollmentsAsOptions={enrollmentsAsOptions}
+                trackedEntityName={trackedEntityName}
+                teiDisplayName={teiDisplayName}
+                orgUnitId={orgUnitId}
+                eventDate={eventDate}
+                teiId={teiId}
+                pageStatus={pageStatus}
+            />
+            <div className={classes.addRelationshipContainer}>
+                <AddRelationshipRefWrapper setRelationshipRef={setAddRelationShipContainerElement} />
             </div>
-            <div className={classes.columns}>
-                <div className={classes.leftColumn}>
-                    {pageStatus === pageStatuses.DEFAULT && programStage && (
-                        <WidgetEventEdit
-                            programStage={programStage}
-                            onGoBack={onGoBack}
-                            programId={programId}
-                            orgUnitId={orgUnitId}
+            <div
+                className={classes.page}
+                style={!mainContentVisible ? { display: 'none' } : undefined}
+            >
+                <div className={classes.title}>
+                    {mode === dataEntryKeys.VIEW
+                        ? i18n.t('Enrollment{{escape}} View Event', { escape: ':' })
+                        : i18n.t('Enrollment{{escape}} Edit Event', { escape: ':' })}
+                </div>
+                <div className={classes.columns}>
+                    <div className={classes.leftColumn}>
+                        {pageStatus === pageStatuses.DEFAULT && programStage && (
+                            <WidgetEventEdit
+                                programStage={programStage}
+                                onGoBack={onGoBack}
+                                programId={programId}
+                                orgUnitId={orgUnitId}
+                                teiId={teiId}
+                                enrollmentId={enrollmentId}
+                                eventStatus={eventStatus}
+                                initialScheduleDate={scheduleDate}
+                                onCancelEditEvent={onCancelEditEvent}
+                                onHandleScheduleSave={onHandleScheduleSave}
+                            />
+                        )}
+                        {pageStatus === pageStatuses.MISSING_DATA && (
+                            <span>{i18n.t('The enrollment event data could not be found')}</span>
+                        )}
+                        {pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
+                            <IncompleteSelectionsMessage>
+                                {i18n.t('Choose a registering unit to start reporting')}
+                            </IncompleteSelectionsMessage>
+                        )}
+                    </div>
+                    <div className={classes.rightColumn}>
+                        <WidgetEventComment dataEntryKey={mode} dataEntryId={dataEntryIds.ENROLLMENT_EVENT} />
+                        <WidgetError error={widgetEffects.errors} />
+                        <WidgetWarning warning={widgetEffects.warnings} />
+                        {!hideWidgets.feedback && (
+                            <WidgetFeedback
+                                emptyText={i18n.t('There are no feedback for this event')}
+                                feedback={widgetEffects.feedbacks}
+                            />
+                        )}
+                        {!hideWidgets.indicator && (
+                            <WidgetIndicator
+                                emptyText={i18n.t('There are no indicators for this event')}
+                                indicators={widgetEffects.indicators}
+                            />
+                        )}
+                        {addRelationShipContainerElement &&
+                            <TrackedEntityRelationshipsWrapper
+                                trackedEntityTypeId={'nEenWmSyUEp'}
+                                teiId={teiId}
+                                programId={programId}
+                                addRelationshipRenderElement={addRelationShipContainerElement}
+                                onOpenAddRelationship={toggleVisibility}
+                                onCloseAddRelationship={toggleVisibility}
+                                onAddRelationship={() => {}}
+                                onLinkedRecordClick={onLinkedRecordClick}
+                            />
+                        }
+                        <WidgetProfile teiId={teiId} programId={programId} />
+                        <WidgetEnrollment
                             teiId={teiId}
                             enrollmentId={enrollmentId}
-                            eventStatus={eventStatus}
-                            initialScheduleDate={scheduleDate}
-                            onCancelEditEvent={onCancelEditEvent}
-                            onHandleScheduleSave={onHandleScheduleSave}
+                            programId={programId}
+                            onDelete={onDelete}
+                            onAddNew={onAddNew}
+                            onError={onEnrollmentError}
+                            onSuccess={onEnrollmentSuccess}
                         />
-                    )}
-                    {pageStatus === pageStatuses.MISSING_DATA && (
-                        <span>{i18n.t('The enrollment event data could not be found')}</span>
-                    )}
-                    {pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
-                        <IncompleteSelectionsMessage>
-                            {i18n.t('Choose a registering unit to start reporting')}
-                        </IncompleteSelectionsMessage>
-                    )}
-                </div>
-                <div className={classes.rightColumn}>
-                    <WidgetEventComment dataEntryKey={mode} dataEntryId={dataEntryIds.ENROLLMENT_EVENT} />
-                    <WidgetError error={widgetEffects.errors} />
-                    <WidgetWarning warning={widgetEffects.warnings} />
-                    {/* <TrackedEntityRelationshipsWrapper
-                        teiId={teiId}
-                        relationships={relationships}
-                        relationshipTypes={teiRelationshipTypes}
-                        onAddRelationship={() => {}}
-                        onLinkedRecordClick={onLinkedRecordClick}
-                    /> */}
-                    {!hideWidgets.feedback && (
-                        <WidgetFeedback
-                            emptyText={i18n.t('There are no feedback for this event')}
-                            feedback={widgetEffects.feedbacks}
-                        />
-                    )}
-                    {!hideWidgets.indicator && (
-                        <WidgetIndicator
-                            emptyText={i18n.t('There are no indicators for this event')}
-                            indicators={widgetEffects.indicators}
-                        />
-                    )}
-                    <WidgetProfile teiId={teiId} programId={programId} />
-                    <WidgetEnrollment
-                        teiId={teiId}
-                        enrollmentId={enrollmentId}
-                        programId={programId}
-                        onDelete={onDelete}
-                        onAddNew={onAddNew}
-                        onError={onEnrollmentError}
-                        onSuccess={onEnrollmentSuccess}
-                    />
+                    </div>
                 </div>
             </div>
-        </div>
-    </OrgUnitFetcher>
-);
+        </OrgUnitFetcher>
+    );
+};
 
 export const EnrollmentEditEventPageComponent: ComponentType<$Diff<PlainProps, CssClasses>> =
     withStyles(styles)(EnrollmentEditEventPagePain);

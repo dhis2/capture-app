@@ -12,13 +12,13 @@ import {
     spacers,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import type { Url } from '../../../../utils/url';
+import type { LinkedEntityData, RelationshipTableHeader, UrlParameters } from '../Types';
 
 
 type Props = {
-    headers: Array<Object>,
-    linkedEntityData: Array<Object>,
-    onLinkedRecordClick: (parameters: Url) => void,
+    headers: Array<RelationshipTableHeader>,
+    linkedEntityData: Array<LinkedEntityData>,
+    onLinkedRecordClick: (parameters: UrlParameters) => void,
     ...CssClasses,
 }
 const DEFAULT_NUMBER_OF_ROW = 5;
@@ -34,8 +34,7 @@ const styles = {
     },
 };
 
-const RelationshipsTablePlain = (props: Props) => {
-    const { headers, linkedEntityData, classes, onLinkedRecordClick } = props;
+const RelationshipsTablePlain = ({ headers, linkedEntityData, classes, onLinkedRecordClick }: Props) => {
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
     function renderHeader() {
@@ -64,13 +63,14 @@ const RelationshipsTablePlain = (props: Props) => {
                 <DataTableRow key={targetId}>
                     {headers.map(({ id }) => {
                         const entity = values.find(item => item.id === id);
-                        return (<DataTableCell
-                            className={classes.row}
-                            key={id}
-                            onClick={() => onLinkedRecordClick(parameters)}
-                        >
-                            {entity?.value}
-                        </DataTableCell>
+                        return (
+                            <DataTableCell
+                                className={classes.row}
+                                key={id}
+                                onClick={() => onLinkedRecordClick(parameters)}
+                            >
+                                {entity?.value}
+                            </DataTableCell>
                         );
                     })}
                 </DataTableRow>

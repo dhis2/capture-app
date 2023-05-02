@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-04-26T13:23:00.268Z\n"
-"PO-Revision-Date: 2023-04-26T13:23:00.268Z\n"
+"POT-Creation-Date: 2023-05-02T13:40:48.661Z\n"
+"PO-Revision-Date: 2023-05-02T13:40:48.661Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1311,17 +1311,17 @@ msgstr "Stages and Events"
 msgid "New TEI Relationship"
 msgstr "New TEI Relationship"
 
+msgid "Missing implementation step"
+msgstr "Missing implementation step"
+
 msgid "Go back without saving relationship"
 msgstr "Go back without saving relationship"
 
-msgid "Link to an existing person"
-msgstr "Link to an existing person"
-
-msgid "An error occurred"
-msgstr "An error occurred"
-
 msgid "New Relationship"
 msgstr "New Relationship"
+
+msgid "Link to an existing person"
+msgstr "Link to an existing person"
 
 msgid "Something went wrong while loading relationships. Please try again later."
 msgstr "Something went wrong while loading relationships. Please try again later."

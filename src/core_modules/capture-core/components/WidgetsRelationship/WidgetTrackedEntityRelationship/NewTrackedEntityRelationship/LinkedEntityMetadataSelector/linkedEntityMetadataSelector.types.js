@@ -1,39 +1,7 @@
 // @flow
-import type { TargetSides } from '../MOVE_WidgetsCommon';
+import type { RelationshipType } from '../../../common/Types';
+import type { TargetSides } from '../../../common/LinkedEntityMetadataSelector';
 
-type TeiConstraint = $ReadOnly<{
-    relationshipEntity: 'TRACKED_ENTITY_INSTANCE',
-    program?: { id: string },
-    trackedEntityType: { id: string },
-}>;
-
-type OtherConstraint = $ReadOnly<{
-    relationshipEntity: 'PROGRAM_STAGE_INSTANCE' | 'PROGRAM_INSTANCE',
-}>;
-
-type RelationshipTypeUnidirectional = $ReadOnly<{
-    id: string,
-    displayName: string,
-    bidirectional: false,
-    fromToName: string,
-    toFromName: void,
-    fromConstraint: TeiConstraint | OtherConstraint,
-    toConstraint: TeiConstraint | OtherConstraint,
-}>;
-
-type RelationshipTypeBidirectional = $ReadOnly<{
-    id: string,
-    displayName: string,
-    bidirectional: true,
-    fromToName: string,
-    toFromName: string,
-    fromConstraint: TeiConstraint | OtherConstraint,
-    toConstraint: TeiConstraint | OtherConstraint,
-}>;
-
-export type RelationshipType = RelationshipTypeUnidirectional | RelationshipTypeBidirectional;
-
-export type RelationshipTypes = $ReadOnlyArray<RelationshipType>;
 
 export type Side = $ReadOnly<{|
     trackedEntityTypeId: string,
@@ -59,7 +27,7 @@ export type LinkedEntityMetadata = $ReadOnly<{|
 |}>;
 
 export type Props = $ReadOnly<{|
-    relationshipTypes: RelationshipTypes,
+    relationshipTypes: Array<RelationshipType>,
     trackedEntityTypeId: string,
     programId: string,
     onSelectLinkedEntityMetadata: (linkedEntityMetadata: LinkedEntityMetadata) => void,

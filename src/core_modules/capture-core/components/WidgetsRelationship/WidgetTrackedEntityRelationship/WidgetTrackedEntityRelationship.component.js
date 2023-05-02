@@ -9,14 +9,12 @@ import { useRelationshipTypes } from '../common/hooks/useRelationshipTypes';
 
 export const WidgetTrackedEntityRelationship = ({
     cachedRelationshipTypes,
-    trackedEntityTypeId,
     teiId,
     ...passOnProps
 }: Props) => {
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: relationships, isError } = useRelationships(teiId, RelationshipSearchEntities.TRACKED_ENTITY);
 
-    // TODO: Refactor this to be self contained
     const { relationships: linkedEntityRelationships } = useLinkedEntityGroups(teiId, relationshipTypes, relationships);
 
     if (isError) {
@@ -32,7 +30,6 @@ export const WidgetTrackedEntityRelationship = ({
             title={i18n.t("TEI's Relationships")}
             relationshipTypes={relationshipTypes}
             relationships={linkedEntityRelationships}
-            trackedEntityTypeId={trackedEntityTypeId}
             teiId={teiId}
             {...passOnProps}
         />

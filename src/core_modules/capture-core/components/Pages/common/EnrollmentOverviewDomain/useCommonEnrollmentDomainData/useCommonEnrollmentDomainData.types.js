@@ -1,6 +1,4 @@
 // @flow
-import type { InputRelationship } from '../../../../WidgetRelationships/common.types';
-
 export type DataValue = {
     dataElement: string,
     value: string,
@@ -55,5 +53,4 @@ export type Output = {|
     error?: any,
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
-    relationships?: Array<InputRelationship>
 |};

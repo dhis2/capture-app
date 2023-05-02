@@ -13,7 +13,6 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         enrollmentId: storedEnrollmentId,
         enrollment: storedEnrollment,
         attributeValues: storedAttributeValues,
-        relationships: storedRelationships,
     } = useSelector(({ enrollmentDomain }) => enrollmentDomain);
 
     const { data, error, refetch } = useDataQuery(
@@ -33,32 +32,11 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         { lazy: true },
     );
 
-    const {
-        data: relationshipsData,
-        error: relationshipsError,
-        refetch: refetchRelationships,
-    } = useDataQuery(
-        useMemo(
-            () => ({
-                teiRelationships: {
-                    resource: 'tracker/relationships',
-                    params: ({ variables: { teiId: updatedTeiId } }) => ({
-                        tei: updatedTeiId,
-                        fields: ['relationshipType,to,from,createdAt'],
-                    }),
-                },
-            }),
-            [],
-        ),
-        { lazy: true },
-    );
-
     const fetchedEnrollmentData = {
         reference: data,
         enrollment: data?.trackedEntityInstance?.enrollments
             ?.find(enrollment => enrollment.enrollment === enrollmentId),
         attributeValues: data?.trackedEntityInstance?.attributes,
-        relationships: relationshipsData?.teiRelationships?.instances,
     };
 
     useEffect(() => {
@@ -67,7 +45,6 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
                 fetchedEnrollmentData.enrollment,
                 fetchedEnrollmentData.attributeValues
                     .map(({ attribute, value }) => ({ id: attribute, value })),
-                fetchedEnrollmentData.relationships,
             ));
         }
     }, [
@@ -75,24 +52,21 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         fetchedEnrollmentData.reference,
         fetchedEnrollmentData.enrollment,
         fetchedEnrollmentData.attributeValues,
-        fetchedEnrollmentData.relationships,
     ]);
 
     useEffect(() => {
         if (storedEnrollmentId !== enrollmentId) {
             refetch({ variables: { teiId, programId } });
-            refetchRelationships({ variables: { teiId } });
         }
-    }, [refetch, refetchRelationships, storedEnrollmentId, enrollmentId, teiId, programId]);
+    }, [refetch, storedEnrollmentId, enrollmentId, teiId, programId]);
 
     const inEffectData = enrollmentId === storedEnrollmentId ? {
         enrollment: storedEnrollment,
         attributeValues: storedAttributeValues,
-        relationships: storedRelationships,
-    } : { enrollment: undefined, attributeValues: undefined, relationships: undefined };
+    } : { enrollment: undefined, attributeValues: undefined };
 
     return {
-        error: error || relationshipsError,
+        error,
         ...inEffectData,
     };
 };

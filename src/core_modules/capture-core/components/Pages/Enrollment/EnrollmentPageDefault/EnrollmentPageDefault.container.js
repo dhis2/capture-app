@@ -22,7 +22,6 @@ import {
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { clickLinkedRecord, deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
-import { useRelationshipTypesMetadata } from '../../common/EnrollmentOverviewDomain/useRelationshipTypesMetadata';
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
@@ -35,7 +34,6 @@ export const EnrollmentPageDefault = () => {
         error: enrollmentsError,
         enrollment,
         attributeValues,
-        relationships,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata?.programStages);
@@ -92,9 +90,8 @@ export const EnrollmentPageDefault = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
 
-    const relationshipTypes = useRelationshipTypesMetadata(relationships);
-
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+
     if (error) {
         return error.errorComponent;
     }
@@ -108,8 +105,6 @@ export const EnrollmentPageDefault = () => {
             stages={stages}
             events={enrollment?.events}
             enrollmentId={enrollmentId}
-            relationships={relationships}
-            relationshipTypes={relationshipTypes}
             onAddNew={onAddNew}
             onDelete={onDelete}
             onViewAll={onViewAll}

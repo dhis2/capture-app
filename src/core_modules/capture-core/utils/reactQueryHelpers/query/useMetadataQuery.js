@@ -60,7 +60,9 @@ export const useMetadataApiQuery = <TResultData>(
     const queryFn: QueryFunction<TResultData> = () => dataEngine.query({ theQuerykey: queryObject })
         .then(response => response.theQuerykey);
     return useAsyncMetadata(queryKey, queryFn, {
-        cacheTime: 5,
+        // TODO: What do you think is sensible here?
+        cacheTime: Infinity,
+        staleTime: Infinity,
         ...queryOptions,
     });
 };

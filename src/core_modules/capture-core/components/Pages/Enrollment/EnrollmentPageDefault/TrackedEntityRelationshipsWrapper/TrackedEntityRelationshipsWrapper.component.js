@@ -14,7 +14,7 @@ export const TrackedEntityRelationshipsWrapper = ({
     onCloseAddRelationship,
     onLinkedRecordClick,
 }: Props) => {
-    const { getPrograms, relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
+    const { relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
 
     if (isError) {
         return (
@@ -31,19 +31,16 @@ export const TrackedEntityRelationshipsWrapper = ({
     return (
         <>
             <WidgetTrackedEntityRelationship
-                cachedRelationshipTypes={relationshipTypes}
-                trackedEntityTypeId={trackedEntityTypeId}
                 programId={programId}
+                trackedEntityTypeId={trackedEntityTypeId}
                 teiId={teiId}
+                // $FlowFixMe - widget only needs partial URL params
                 onLinkedRecordClick={onLinkedRecordClick}
                 addRelationshipRenderElement={addRelationshipRenderElement}
                 onOpenAddRelationship={onOpenAddRelationship}
                 onCloseAddRelationship={onCloseAddRelationship}
-                // Advanced props for metadata, at some point the Widget should work without these
-                // These are callbacks so we avoid compution before the data is actually needed, the disadvantage is that these will not automatially re-render inner components if there are changes (not needed in our app)
-                // We might also want to implement async versions of these (async callbacks should be called from useEffects)
-                getPrograms={getPrograms}
-                getSearchGroups={() => [{ unique: false, fields: [{ id: 'id1', type: 'TEXT' }] }]}
+                // optional props
+                cachedRelationshipTypes={relationshipTypes}
             />
         </>
     );

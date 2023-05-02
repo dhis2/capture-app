@@ -8,7 +8,6 @@ import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { useCommonEnrollmentDomainData, showEnrollmentError, updateEnrollmentEvents } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
-import { useEventsRelationships } from './useEventsRelationships';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
@@ -18,7 +17,6 @@ import { clickLinkedRecord, deleteEnrollment, fetchEnrollments } from '../Enroll
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
-import { useRelationshipTypesMetadata } from '../common/EnrollmentOverviewDomain/useRelationshipTypesMetadata';
 import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
@@ -88,7 +86,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
-    const { enrollment: enrollmentSite, relationships } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+    const { enrollment: enrollmentSite } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const onGoBack = () =>
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
 
@@ -110,9 +108,6 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
 
-    const { relationships: eventRelationships } = useEventsRelationships(eventId);
-    const teiRelationshipTypes = useRelationshipTypesMetadata(relationships);
-    const eventRelationshipTypes = useRelationshipTypesMetadata(eventRelationships);
 
     const pageStatus = getPageStatus({
         orgUnitId,
@@ -131,12 +126,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             onGoBack={onGoBack}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
-            relationships={relationships}
-            eventRelationships={eventRelationships}
-            teiRelationshipTypes={teiRelationshipTypes}
-            eventRelationshipTypes={eventRelationshipTypes}
             teiId={teiId}
-            eventId={eventId}
             enrollmentId={enrollmentId}
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}

@@ -5,7 +5,7 @@ import type { Stage, StageCommonProps, Event } from './types/common.types';
 type ExtractedProps = {|
     stages?: Array<Stage>,
     events: ?Array<Event>,
-    onEventClick: (eventId: string) => void,
+    onEventClick: (eventId: string, stageId: string) => void,
     className?: string,
 |};
 

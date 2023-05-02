@@ -4,7 +4,6 @@ import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 import type { Url } from '../../../../utils/url';
 import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
-import type { InputRelationship, RelationshipType } from '../../../WidgetRelationships/common.types';
 
 export type Props = {|
     program: TrackerProgram,
@@ -12,8 +11,6 @@ export type Props = {|
     teiId: string,
     events: ?Array<Event>,
     stages?: Array<Stage>,
-    relationships?: Array<InputRelationship>,
-    relationshipTypes?: Array<RelationshipType>,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
     orgUnitId: string,
@@ -21,7 +18,7 @@ export type Props = {|
     onAddNew: () =>void,
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,
-    onEventClick: (eventId: string, stageId: string) => void,
+    onEventClick: (eventId: string) => void,
     onUpdateTeiAttributeValues: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
     onLinkedRecordClick: (parameters: Url) => void,
     onEnrollmentError: (message: string) => void,

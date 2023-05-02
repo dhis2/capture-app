@@ -1,6 +1,9 @@
 // @flow
 
-export const TARGET_SIDES = Object.freeze({
+export const TARGET_SIDES: {|
+    FROM: 'FROM',
+    TO: 'TO',
+|} = Object.freeze({
     FROM: 'FROM',
     TO: 'TO',
 });

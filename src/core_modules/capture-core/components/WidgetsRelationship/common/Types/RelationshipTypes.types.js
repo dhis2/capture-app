@@ -5,18 +5,36 @@ export type TrackerDataView = {
     dataElements: Array<string>,
 };
 
-// Should probably differentiate between the different relationshipEntities here
-export type RelationshipConstraint = {
-    relationshipEntity: string,
-    trackedEntityType?: ?{ id: string },
-    program?: ?{ id: string },
-    programStage?: ?{ id: string },
-    trackerDataView?: ?TrackerDataView,
-};
+export type ElementValue = {|
+    attribute?: string,
+    dataElement?: string,
+    displayName: string,
+    valueType: string,
+    value: any,
+|}
+type CommonConstraintTypes = {|
+    trackerDataView: TrackerDataView,
+    program?: { id: string, name: string },
+|}
+
+export type TrackedEntityConstraint = {
+    ...CommonConstraintTypes,
+    relationshipEntity: 'TRACKED_ENTITY_INSTANCE',
+    trackedEntityType: { id: string, name: string },
+}
+
+export type ProgramStageInstanceConstraint = {|
+    ...CommonConstraintTypes,
+    relationshipEntity: 'PROGRAM_STAGE_INSTANCE',
+    programStage: { id: string, name: string },
+|}
+
+export type RelationshipConstraint = TrackedEntityConstraint | ProgramStageInstanceConstraint;
 
 export type RelationshipType = {
     id: string,
     displayName: string,
+    bidirectional: boolean,
     access: Object,
     toFromName: string,
     fromToName: string,
