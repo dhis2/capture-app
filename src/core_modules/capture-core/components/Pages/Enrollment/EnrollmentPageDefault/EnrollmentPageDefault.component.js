@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useRef, useEffect, useState, useCallback } from 'react';
+import React, { type ComponentType, useState, useCallback } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum, spacers, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -14,6 +14,7 @@ import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 import { EnrollmentQuickActions } from './EnrollmentQuickActions';
 import { TrackedEntityRelationshipsWrapper } from './TrackedEntityRelationshipsWrapper';
+import { AddRelationshipRefWrapper } from '../../EnrollmentEditEvent/AddRelationshipRefWrapper';
 
 const getStyles = () => ({
     container: {
@@ -68,20 +69,14 @@ export const EnrollmentPageDefaultPlain = ({
     onEnrollmentError,
 }: PlainProps) => {
     const [mainContentVisible, setMainContentVisibility] = useState(true);
-    const [addRelationShipContainerElement, setAddRelationshipContainerElement] = useState(undefined);
-    const renderRelationshipRef = useRef();
-
-    useEffect(() => {
-        setAddRelationshipContainerElement(renderRelationshipRef.current);
-    }, []);
+    const [addRelationShipContainerElement, setAddRelationshipContainerElement] =
+        useState<?HTMLDivElement>(undefined);
 
     const toggleVisibility = useCallback(() => setMainContentVisibility(current => !current), []);
 
     return (
         <>
-            <div
-                ref={renderRelationshipRef}
-            />
+            <AddRelationshipRefWrapper setRelationshipRef={setAddRelationshipContainerElement} />
             <div
                 className={classes.container}
                 style={!mainContentVisible ? { display: 'none' } : undefined}

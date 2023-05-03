@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import log from 'loglevel';
 import moment from 'moment';
 import { errorCreator } from 'capture-core-utils';
-import { getBaseConfigHeaders, relationshipEntities } from '../../constants';
+import { getBaseConfigHeaders, RELATIONSHIP_ENTITIES } from '../../constants';
 import { convertServerToClient, convertClientToList } from '../../../../converters';
 import type {
     ApiLinkedEntity,
@@ -40,9 +40,9 @@ const convertAttributes = (
 
 const getDisplayFields = (linkedEntity) => {
     let displayFields;
-    if (linkedEntity.relationshipEntity === relationshipEntities.TRACKED_ENTITY_INSTANCE) {
+    if (linkedEntity.relationshipEntity === RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE) {
         displayFields = linkedEntity.trackerDataView.attributes;
-    } else if (linkedEntity.relationshipEntity === relationshipEntities.PROGRAM_STAGE_INSTANCE) {
+    } else if (linkedEntity.relationshipEntity === RELATIONSHIP_ENTITIES.PROGRAM_STAGE_INSTANCE) {
         displayFields = linkedEntity.trackerDataView.dataElements;
     }
     if (!displayFields?.length) {
@@ -73,7 +73,7 @@ const determineLinkedEntity = (
 };
 
 
-const getLinkedRecordURLParameters = (linkedEntity: Object, entityConstraint: RelationshipConstraint) => {
+const getLinkedRecordURLParameters = (linkedEntity: ApiLinkedEntity, entityConstraint: RelationshipConstraint) => {
     if (linkedEntity.event) {
         const {
             event: eventId,

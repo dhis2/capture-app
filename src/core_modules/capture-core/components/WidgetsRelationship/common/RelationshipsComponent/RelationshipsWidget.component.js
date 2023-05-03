@@ -61,8 +61,6 @@ const RelationshipsWidgetPlain = ({
                 onClose={() => setOpenStatus(false)}
                 open={open}
             >
-                {/* TODO: investigate why flow expect classes here */}
-                {/* $FlowFixMe */}
                 <RelationshipTables
                     relationships={relationships}
                     onLinkedRecordClick={onLinkedRecordClick}

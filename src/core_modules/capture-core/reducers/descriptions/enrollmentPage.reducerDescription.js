@@ -20,7 +20,6 @@ const {
     MISSING_MESSAGE_VIEW,
     DELETE_ENROLLMENT,
     UPDATE_TEI_DISPLAY_NAME,
-    SET_EVENT_RELATIONSHIPS_DATA,
 } = enrollmentPageActionTypes;
 
 export const enrollmentPageDesc = createReducerDescription({
@@ -75,11 +74,6 @@ export const enrollmentPageDesc = createReducerDescription({
            teiDisplayName,
        }),
     [PAGE_CLEAN]: () => initialReducerValue,
-    [SET_EVENT_RELATIONSHIPS_DATA]: (state, { payload: { eventId, relationships } }) => ({
-        ...state,
-        eventId,
-        relationships,
-    }),
     [DELETE_ENROLLMENT]: (state, { payload: { enrollmentId } }) => ({
         ...state,
         enrollments: [

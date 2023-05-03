@@ -20,8 +20,7 @@ export const useApiDataQuery = <TResultData>(
             refetchOnWindowFocus: false,
             refetchOnMount: false,
             refetchOnReconnect: false,
-            // TODO: Not sure what we want here either
-            staleTime: 4 * 60 * 1000,
-            cacheTime: 10 * 60 * 1000,
+            staleTime: 2 * 60 * 1000,
+            cacheTime: 5 * 60 * 1000,
         });
 };

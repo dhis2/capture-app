@@ -11,14 +11,6 @@ export const getCachedSingleResourceFromKeyAsync = (
     return storageController.get(store, key).then(response => ({ response, ...propsToPass }));
 };
 
-export const getCachedResourceAsync = (
-    store: $Values<userStores>,
-    propsToPass?: any = {},
-) => {
-    const storageController = getUserStorageController();
-    return storageController.getAll(store).then(response => ({ response, ...propsToPass }));
-};
-
 export const containsKeyInStorageAsync = (store: $Values<userStores>, key: string, propsToPass?: any = {}) => {
     const storageController = getUserStorageController();
     return storageController.contains(store, key).then(response => ({ response, ...propsToPass }));

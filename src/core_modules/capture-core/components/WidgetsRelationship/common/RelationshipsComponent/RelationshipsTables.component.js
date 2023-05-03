@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core';
 import { spacersNum, spacers, colors } from '@dhis2/ui';
 import { RelationshipsTable } from './RelationshipsTable.component';
@@ -39,8 +39,6 @@ const RelationshipsTablesPlain = ({ relationships, onLinkedRecordClick, classes 
             return (
                 <div key={id} className={classes.wrapper}>
                     <div className={classes.title}>{relationshipName}</div>
-                    {/* TODO: investigate why flow expect classes here */}
-                    {/* $FlowFixMe */}
                     <RelationshipsTable
                         {...passOnProps}
                         onLinkedRecordClick={onLinkedRecordClick}
@@ -50,4 +48,4 @@ const RelationshipsTablesPlain = ({ relationships, onLinkedRecordClick, classes 
         })}
     </div>);
 
-export const RelationshipTables: ComponentType<Props> = withStyles(styles)(RelationshipsTablesPlain);
+export const RelationshipTables = withStyles(styles)(RelationshipsTablesPlain);

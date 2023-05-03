@@ -112,7 +112,8 @@ class RelationshipsPlain extends React.Component<Props> {
         return numberOfChanges > 0;
     }
 
-    renderRelationships = () => this.props.relationships.map(r => r && this.renderRelationship(r))
+    renderRelationships = () => this.props.relationships.map(relationship => relationship &&
+        this.renderRelationship(relationship))
 
     renderRelationship = (relationship: Relationship) => {
         const { classes, onRemoveRelationship } = this.props;

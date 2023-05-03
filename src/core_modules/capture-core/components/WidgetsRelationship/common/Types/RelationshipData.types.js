@@ -23,11 +23,15 @@ export type ApiLinkedEntity = {|
     event?: {
         event: string,
         orgUnitName: string,
+        program: string,
+        orgUnit: string,
         status: string,
         dataValues: Array<{ dataElement: string, value: string }>,
     },
     trackedEntity?: {
         trackedEntity: string,
+        program: string,
+        orgUnit: string,
         orgUnitName: string,
         attributes: Array<{ attribute: string, value: string }>,
     }

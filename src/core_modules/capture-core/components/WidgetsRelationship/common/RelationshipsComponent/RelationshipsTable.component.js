@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, type ComponentType } from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import {
     DataTableBody,
@@ -113,4 +113,4 @@ const RelationshipsTablePlain = ({ headers, linkedEntityData, classes, onLinkedR
     );
 };
 
-export const RelationshipsTable: ComponentType<Props> = withStyles(styles)(RelationshipsTablePlain);
+export const RelationshipsTable = withStyles(styles)(RelationshipsTablePlain);
