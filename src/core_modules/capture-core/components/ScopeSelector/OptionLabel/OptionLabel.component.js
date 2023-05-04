@@ -27,8 +27,8 @@ export const OptionLabelPlain = ({ icon, label, classes }: Props) => (
         {icon ? (
             <div className={classes.icon}>
                 <NonBundledDhis2Icon
-                    name={icon.name || 'clinical_fe_outline'}
-                    color={icon.color || '#e0e0e0'}
+                    name={icon.name}
+                    color={icon.color}
                     alternativeText={icon.name}
                     width={22}
                     height={22}
