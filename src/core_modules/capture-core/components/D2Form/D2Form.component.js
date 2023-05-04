@@ -91,7 +91,6 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
             formId={this.getFormId()}
             formBuilderId={this.getFormBuilderId(section.id)}
             sectionId={section.id}
-            customForm={section.customForm}
             applyCustomFormClass={false}
             {...passOnProps}
         />
