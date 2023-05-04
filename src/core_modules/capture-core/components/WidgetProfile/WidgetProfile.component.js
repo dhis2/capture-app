@@ -13,7 +13,8 @@ import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
 import type { Props } from './widgetProfile.types';
 import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues, useUserRoles } from './hooks';
-import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, getTeiDisplayName } from './DataEntry';
+import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, getTeiDisplayName, getMultiTextValue } from './DataEntry';
+import { dataElementTypes } from '../../metaData';
 
 const styles = {
     header: {
@@ -71,11 +72,16 @@ const WidgetProfilePlain = ({
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
-        .map(({ optionSet, attribute, key, value: clientValue, valueType }) => {
+        .map((clientAttribute) => {
+            const { optionSet, attribute, key, value: clientValue, valueType } = clientAttribute;
             let value;
             if (optionSet && optionSet.id) {
-                const selectedOption = optionSet.options.find(option => option.code === clientValue);
-                value = selectedOption && selectedOption.name;
+                if (valueType === dataElementTypes.MULTI_TEXT) {
+                    value = getMultiTextValue(clientValue, clientAttribute);
+                } else {
+                    const selectedOption = optionSet.options.find(option => option.code === clientValue);
+                    value = selectedOption && selectedOption.name;
+                }
             } else {
                 value = convertClientToView(clientValue, valueType);
             }

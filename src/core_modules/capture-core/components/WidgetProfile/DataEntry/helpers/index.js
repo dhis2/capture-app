@@ -14,3 +14,4 @@ export {
 } from './convertors';
 export { getTeiDisplayName } from './getTeiDisplayName';
 export { GEOMETRY, getFeatureType, getDataElement, getLabel } from './geometry';
+export { getMultiTextValue } from './getMultiTextValue';

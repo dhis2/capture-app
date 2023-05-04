@@ -103,6 +103,9 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
     }
 
     if (dataElement && dataElement.optionSet) {
+        if (dataElement.type === dataElementTypes.MULTI_TEXT) {
+            return dataElement.optionSet.getMultiOptionsText(value);
+        }
         return dataElement.optionSet.getOptionText(value);
     }
 
