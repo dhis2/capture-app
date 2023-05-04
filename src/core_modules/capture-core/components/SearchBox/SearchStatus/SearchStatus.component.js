@@ -134,7 +134,7 @@ export const SearchStatusPlain = ({
 
     if (searchStatus === searchBoxStatus.UNIQUE_SEARCH_VALUE_EMPTY) {
         return (
-            <Modal position="middle">
+            <Modal position="middle" onClose={showInitialSearchBox}>
                 <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
                 <ModalContent>
                     {i18n.t(`Please fill in ${uniqueTEAName} to search`)}
