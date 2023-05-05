@@ -19,7 +19,10 @@ type Props = {|
 |};
 
 
-export const useSearchOption = ({ programId, trackedEntityTypeId }: Props) => {
+export const useSearchOption = ({
+    programId,
+    trackedEntityTypeId,
+}: Props): { searchOption: ?AvailableSearchOption, isLoading: boolean, isError: boolean } => {
     const { locale } = useUserLocale();
 
     const searchScope = useMemo(() => {
@@ -66,7 +69,7 @@ export const useSearchOption = ({ programId, trackedEntityTypeId }: Props) => {
 
 
     return {
-        searchOption: data ?? {},
+        searchOption: data,
         isLoading,
         isError,
         error,

@@ -9,7 +9,7 @@ export type ContainerProps = $ReadOnly<{|
     searchStatus: string,
     trackedEntityName: string,
     fallbackTriggered: boolean,
-    availableSearchOption: AvailableSearchOption,
+    availableSearchOption: ?AvailableSearchOption,
 |}>;
 
 export type Props = {|
