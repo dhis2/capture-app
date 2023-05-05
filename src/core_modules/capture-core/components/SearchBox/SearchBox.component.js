@@ -16,7 +16,7 @@ import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage';
 import { searchScopes } from './SearchBox.constants';
 import { useScopeTitleText } from '../../hooks/useScopeTitleText';
 import { cleanFallbackRelatedData } from './SearchBox.actions';
-import { TemplateSelector } from './TemplateSelector';
+import { TemplateSelector } from '../TemplateSelector';
 import { useSearchOption, useFallbackTriggered } from './hooks';
 import { SearchStatus } from './SearchStatus';
 
