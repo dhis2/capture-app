@@ -5,3 +5,5 @@ export { useCurrentTrackedEntityTypeId } from './useCurrentTrackedEntityTypeId';
 export { useEnrollmentEditEventPageMode } from './useEnrollmentEditEventPageMode';
 export { useRulesEngineOrgUnit } from './useRulesEngineOrgUnit';
 export { useAvailableProgramStages } from './useAvailableProgramStages';
+export { useScopeInfo } from './useScopeInfo';
+export { useScopeTitleText } from './useScopeTitleText';

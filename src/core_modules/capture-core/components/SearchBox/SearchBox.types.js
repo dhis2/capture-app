@@ -26,7 +26,7 @@ export type ComponentProps = $ReadOnly<{|
     cleanSearchRelatedInfo: () => void,
     navigateToMainPage?: () => void,
     showInitialSearchBox: () => void,
-    navigateToRegisterUser: () => void,
+    navigateToRegisterTrackedEntity: () => void,
     trackedEntityTypeId: string,
     preselectedProgramId: SelectedSearchScopeId,
     minAttributesRequiredToSearch: number,

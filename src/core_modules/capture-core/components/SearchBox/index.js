@@ -1,13 +1,13 @@
 // @flow
 export {
     cleanSearchRelatedData,
-    navigateToNewUserPage,
+    navigateToNewTrackedEntityPage,
     showInitialViewOnSearchBox,
     searchBoxActionTypes,
 } from './SearchBox.actions';
 export { SearchBox } from './SearchBox.container';
 export { searchScopes } from './SearchBox.constants';
-export { navigateToNewUserPageEpic } from './SearchBox.epics';
+export { navigateToNewTrackedEntityPageEpic } from './SearchBox.epics';
 
 export type { AvailableSearchOption } from './SearchBox.types';
 export type { CardDataElementsInformation, CardProfileImageElementInformation } from './SearchResults';

@@ -4,7 +4,11 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import React, { useCallback } from 'react';
 import { useLocationQuery } from '../../utils/routing';
 import { SearchBoxComponent } from './SearchBox.component';
-import { cleanSearchRelatedData, navigateToNewUserPage, showInitialViewOnSearchBox } from './SearchBox.actions';
+import {
+    cleanSearchRelatedData,
+    navigateToNewTrackedEntityPage,
+    showInitialViewOnSearchBox,
+} from './SearchBox.actions';
 import { useCurrentTrackedEntityTypeId } from '../../hooks';
 import { ResultsPageSizeContext } from '../Pages/shared-contexts';
 import { usePreselectedProgram } from './hooks';
@@ -24,7 +28,9 @@ export const SearchBox = ({
     const dispatchCleanSearchRelatedData = useCallback(
         () => { dispatch(cleanSearchRelatedData()); },
         [dispatch]);
-    const dispatchNavigateToNewUserPage = useCallback(() => { dispatch(navigateToNewUserPage()); }, [dispatch]);
+    const dispatchNavigateToNewTrackedEntityPage = useCallback(() => {
+        dispatch(navigateToNewTrackedEntityPage());
+    }, [dispatch]);
 
     const { searchStatus, error, ready, searchableFields, minAttributesRequiredToSearch } = useSelector(
         ({ searchDomain, activePage }) => ({
@@ -43,7 +49,7 @@ export const SearchBox = ({
                 navigateToMainPage={dispatchNavigateToMainPage}
                 showInitialSearchBox={dispatchShowInitialSearchBox}
                 cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
-                navigateToRegisterUser={dispatchNavigateToNewUserPage}
+                navigateToRegisterTrackedEntity={dispatchNavigateToNewTrackedEntityPage}
                 preselectedProgramId={preselectedProgramId}
                 trackedEntityTypeId={trackedEntityTypeId}
                 searchStatus={searchStatus}

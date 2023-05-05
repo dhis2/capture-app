@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-05-04T08:50:26.661Z\n"
-"PO-Revision-Date: 2023-05-04T08:50:26.661Z\n"
+"POT-Creation-Date: 2023-05-05T11:10:50.300Z\n"
+"PO-Revision-Date: 2023-05-05T11:10:50.300Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -937,6 +937,11 @@ msgstr "You can also choose a program from the top bar and search in that progra
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
 
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] "Fill in at least {{count}} attribute to search"
+msgstr[1] "Fill in at least {{count}} attributes to search"
+
 msgid "Search {{name}}"
 msgstr "Search {{name}}"
 
@@ -985,9 +990,6 @@ msgstr ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 
-msgid "Register a user"
-msgstr "Register a user"
-
 msgid "Back to search"
 msgstr "Back to search"
 
@@ -1002,6 +1004,15 @@ msgstr "Cannot search in all programs"
 
 msgid "Missing search criteria"
 msgstr "Missing search criteria"
+
+msgid "Results found"
+msgstr "Results found"
+
+msgid "Selected program"
+msgstr "Selected program"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Search {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr "Saved lists in this program"
@@ -1018,15 +1029,6 @@ msgstr ""
 
 msgid "Create saved list"
 msgstr "Create saved list"
-
-msgid "Results found"
-msgstr "Results found"
-
-msgid "Selected program"
-msgstr "Selected program"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Search {{uniqueAttrName}}"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "New {{trackedEntityName}} in {{programName}}"
@@ -1193,11 +1195,21 @@ msgstr "Scheduled automatically for {{suggestedScheduleDate}}"
 msgid "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr "The scheduled date matches the suggested date, but can be changed if needed."
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural "The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] "The scheduled date is {{count}} day {{position}} the suggested date."
+msgstr[1] "The scheduled date is {{count}} days {{position}} the suggested date."
+
 msgid "after"
 msgstr "after"
 
 msgid "before"
 msgstr "before"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[1] "There are {{count}} scheduled events in {{orgUnitName}} on this day."
 
 msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"

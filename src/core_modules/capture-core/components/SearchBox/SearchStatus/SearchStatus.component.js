@@ -38,10 +38,11 @@ export const SearchStatusPlain = ({
     availableSearchOption,
     minAttributesRequiredToSearch,
     searchableFields,
-    navigateToRegisterUser,
+    navigateToRegisterTrackedEntity,
     showInitialSearchBox,
     fallbackTriggered,
     uniqueTEAName = '',
+    trackedEntityName,
     classes,
 }: Props) => {
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
@@ -57,8 +58,8 @@ export const SearchStatusPlain = ({
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
-                        <Button type="button" onClick={navigateToRegisterUser}>
-                            {i18n.t('Register a user')}
+                        <Button type="button" onClick={navigateToRegisterTrackedEntity}>
+                            {i18n.t(`Register a ${trackedEntityName}`)}
                         </Button>
                         <Button
                             disabled={searchStatus === searchBoxStatus.LOADING}

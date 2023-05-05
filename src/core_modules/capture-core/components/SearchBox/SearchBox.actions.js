@@ -20,8 +20,8 @@ export const searchBoxActionTypes = {
     FALLBACK_SEARCH_COMPLETED: 'FallbackWillPushToSearchDomainWithoutProgramSelected',
     ALL_SEARCH_RELATED_DATA_CLEAN: 'CleanSearchRelatedData',
     FALLBACK_SEARCH_RELATED_DATA_CLEAN: 'CleanFallbackSearchRelatedData',
-    NAVIGATE_TO_NEW_USER_PAGE: 'NavigateToNewUserPage',
     SEARCH_UNIQUE_SEARCH_VALUE_EMPTY: 'SearchWithEmptyUniqueValue',
+    NAVIGATE_TO_NEW_TRACKED_ENTITY_PAGE: 'NavigateToNewTrackedEntityPage',
 };
 
 export const saveCurrentSearchInfo = ({
@@ -83,8 +83,8 @@ export const cleanSearchRelatedData = () =>
 export const cleanFallbackRelatedData = () =>
     actionCreator(searchBoxActionTypes.FALLBACK_SEARCH_RELATED_DATA_CLEAN)();
 
-export const navigateToNewUserPage = () =>
-    actionCreator(searchBoxActionTypes.NAVIGATE_TO_NEW_USER_PAGE)();
-
 export const showUniqueSearchValueEmptyModal = ({ uniqueTEAName }) =>
     actionCreator(searchBoxActionTypes.SEARCH_UNIQUE_SEARCH_VALUE_EMPTY)({ uniqueTEAName });
+
+export const navigateToNewTrackedEntityPage = () =>
+    actionCreator(searchBoxActionTypes.NAVIGATE_TO_NEW_TRACKED_ENTITY_PAGE)();
