@@ -156,7 +156,7 @@ import {
     startFallbackSearchEpic,
     fallbackSearchEpic,
     fallbackPushPageEpic,
-    navigateToNewUserPageEpic,
+    navigateToNewTrackedEntityPageEpic,
 } from '../core_modules/capture-core/components/SearchBox';
 import {
     navigateBackToMainPageEpic,
@@ -331,7 +331,7 @@ export const epics = combineEpics(
     updateTeiEpic,
     updateTeiSucceededEpic,
     updateTeiFailedEpic,
-    navigateToNewUserPageEpic,
+    navigateToNewTrackedEntityPageEpic,
     requestDeleteEventDataEntryEpic,
     startCreateNewAfterCompletingEpic,
 );

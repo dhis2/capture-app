@@ -3,10 +3,11 @@ import type { AvailableSearchOption } from '../SearchBox.types';
 
 export type ContainerProps = $ReadOnly<{|
     showInitialSearchBox: () => void,
-    navigateToRegisterUser: () => void,
+    navigateToRegisterTrackedEntity: () => void,
     minAttributesRequiredToSearch: number,
     searchableFields: Array<Object>,
     searchStatus: string,
+    trackedEntityName: string,
     fallbackTriggered: boolean,
     availableSearchOption: AvailableSearchOption,
 |}>;

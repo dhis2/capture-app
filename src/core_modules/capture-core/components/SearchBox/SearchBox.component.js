@@ -14,7 +14,7 @@ import { TrackedEntityTypeSelector } from '../TrackedEntityTypeSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../HOC';
 import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage';
 import { searchScopes } from './SearchBox.constants';
-import { useScopeTitleText } from '../../hooks/useScopeTitleText';
+import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { cleanFallbackRelatedData } from './SearchBox.actions';
 import { TemplateSelector } from '../TemplateSelector';
 import { useSearchOption, useFallbackTriggered } from './hooks';
@@ -64,12 +64,13 @@ const Index = ({
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
-    navigateToRegisterUser,
+    navigateToRegisterTrackedEntity,
     minAttributesRequiredToSearch,
     searchableFields,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
+    const { trackedEntityName } = useScopeInfo(selectedSearchScopeId);
     const titleText = useScopeTitleText(selectedSearchScopeId);
     const fallbackTriggered = useFallbackTriggered();
     const {
@@ -148,9 +149,10 @@ const Index = ({
                                     availableSearchOption={availableSearchOption}
                                     minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                                     searchableFields={searchableFields}
-                                    navigateToRegisterUser={navigateToRegisterUser}
+                                    navigateToRegisterTrackedEntity={navigateToRegisterTrackedEntity}
                                     showInitialSearchBox={showInitialSearchBox}
                                     fallbackTriggered={fallbackTriggered}
+                                    trackedEntityName={trackedEntityName}
                                 />
                             </div>
                         </div>
