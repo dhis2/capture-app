@@ -10,8 +10,9 @@ import type { ExecuteExpressionInput, ErrorHandler, ExpressionSet, DhisFunctions
  * @returns {*}
  */
 function evaluate(code) {
+    const codeWithNewline = code.replace(/\n/g, '\\n');
     // eslint-disable-next-line no-new-func
-    const func = new Function(`"use strict";return ${code}`);
+    const func = new Function(`"use strict";return ${codeWithNewline}`);
     return func();
 }
 

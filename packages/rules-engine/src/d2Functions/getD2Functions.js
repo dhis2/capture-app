@@ -186,7 +186,7 @@ export const getD2Functions = ({
     },
     length: {
         parameters: 1,
-        execute: (params: any) => String(params[0]).length,
+        execute: (params: any) => String(params[0]).replace(/\n/g, '').length,
     },
     inOrgUnitGroup: {
         parameters: 1,
