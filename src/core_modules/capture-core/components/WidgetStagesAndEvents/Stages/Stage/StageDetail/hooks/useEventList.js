@@ -5,7 +5,7 @@ import log from 'loglevel';
 import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator, buildUrl } from 'capture-core-utils';
-import { dataElementTypes } from '../../../../../../metaData';
+import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../../../metaData';
 import type { StageDataElement } from '../../../../types/common.types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
@@ -126,16 +126,43 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
     return headerColumns;
 };
 
+const getDataElement = (stageDataElement, type) => {
+    if (!stageDataElement) {
+        return null;
+    }
+
+    const dataElement = new DataElement((o) => {
+        o.id = stageDataElement.id;
+        o.type = type;
+    });
+
+    if (stageDataElement.options) {
+        const options = Object.keys(stageDataElement.options).map(
+            (code: string) =>
+                new Option((o) => {
+                    // $FlowFixMe
+                    o.text = stageDataElement.options[code];
+                    o.value = code;
+                }),
+        );
+        const optionSet = new OptionSet(stageDataElement.id, options);
+        dataElement.optionSet = optionSet;
+    }
+    return dataElement;
+};
+
 const formatRowForView = (row: Object, dataElements: Array<StageDataElement>) => Object.keys(row).reduce((acc, id) => {
     const { type: predefinedType } = baseFields.find(f => f.id === id) || {};
-    const { type } = dataElements.find(el => el.id === id) || {};
+    const stageDataElement = dataElements.find(el => el.id === id);
+    const { type } = stageDataElement || {};
     const value = row[id];
     if (predefinedType) {
         acc[id] = convertClientToList(value, predefinedType);
     } else if (!type) {
         acc[id] = value;
     } else {
-        acc[id] = convertClientToList(value, type);
+        const dataElement = getDataElement(stageDataElement, type);
+        acc[id] = convertClientToList(value, type, dataElement);
     }
     return acc;
 }, {});
