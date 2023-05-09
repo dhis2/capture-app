@@ -41,6 +41,7 @@ import {
     withAOCFieldBuilder,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
+import { shouldUseNewDashboard } from '../../../utils/routing';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -297,17 +298,30 @@ const getCategoryOptionsSettingsFn = () => {
 };
 
 const getAOCSettingsFn = () => ({
-    hideAOC: (props: Object) => {
-        const { stages: stagesMap } = getProgramThrowIfNotFound(props.programId);
+    hideAOC: ({ programId, newDashboardConfig }) => {
+        const { stages: stagesMap } = getProgramThrowIfNotFound(programId);
+
         /*
         Show AOC selection if:
         - There are any program stages in the program with “Auto-generate" event and NOT “Open data entry form after enrollment”.
         - There are multiple program stages with "Auto-generate" event and "Open data entry form after enrollment"
             (in this scenario we are currently generating events for the program stages that are not the first one)
+        - Using the old dashboard and we have a stage with auto generate event.
         */
+
         const stages = [...stagesMap.values()];
-        const shouldShowAOC = stages.some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment) ||
+
+        const usingNewDashboardForProgram = shouldUseNewDashboard(
+            newDashboardConfig.userDataStore,
+            newDashboardConfig.dataStore,
+            newDashboardConfig.temp,
+            programId,
+        );
+
+        const shouldShowAOC = (!usingNewDashboardForProgram && stages.some(stage => stage.autoGenerateEvent)) ||
+        stages.some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment) ||
             stages.filter(stage => stage.autoGenerateEvent && stage.openAfterEnrollment).length > 1;
+
         return !shouldShowAOC;
     },
 });
