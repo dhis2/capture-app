@@ -1,22 +1,27 @@
 // @flow
 import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
-// $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
 import type { EnrollmentPageStatus } from './EnrollmentPage.types';
 import {
     cleanEnrollmentPage,
     fetchEnrollmentPageInformation,
+    fetchEnrollments,
+    updateEnrollmentAccessLevel,
     showDefaultViewOnEnrollmentPage,
     showMissingMessageViewOnEnrollmentPage,
+    showLoadingViewOnEnrollmentPage,
 } from './EnrollmentPage.actions';
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
-import { enrollmentPageStatuses } from './EnrollmentPage.constants';
+import { enrollmentPageStatuses, enrollmentAccessLevels } from './EnrollmentPage.constants';
 import { getScopeInfo } from '../../../metaData';
-import { buildEnrollmentsAsOptions, useSetEnrollmentId } from '../../ScopeSelector';
+import {
+    buildEnrollmentsAsOptions,
+    useSetEnrollmentId,
+} from '../../ScopeSelector';
 import { useLocationQuery } from '../../../utils/routing';
 
 const useComponentLifecycle = () => {
@@ -25,16 +30,19 @@ const useComponentLifecycle = () => {
 
     const { scopeType } = useScopeInfo(programId);
     const { setEnrollmentId } = useSetEnrollmentId();
+    const { enrollmentAccessLevel, programId: enrollmentProgramId } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
-    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, autoEnrollmentId } = useEnrollmentInfo(enrollmentId, programId);
+    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, autoEnrollmentId } = useEnrollmentInfo(enrollmentId, programId, teiId);
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
         if (enrollmentId === 'AUTO' && autoEnrollmentId) {
             setEnrollmentId({ enrollmentId: autoEnrollmentId, shouldReplaceHistory: true });
         } else if (selectedProgramIsTracker && programHasEnrollments && enrollmentsOnProgramContainEnrollmentId) {
             dispatch(showDefaultViewOnEnrollmentPage());
-        } else {
+        } else if (programId === enrollmentProgramId) {
             dispatch(showMissingMessageViewOnEnrollmentPage());
+        } else {
+            dispatch(showLoadingViewOnEnrollmentPage());
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,6 +54,8 @@ const useComponentLifecycle = () => {
         scopeType,
         enrollmentId,
         autoEnrollmentId,
+        enrollmentAccessLevel,
+        enrollmentProgramId,
     ]);
 
     useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch, teiId]);
@@ -93,6 +103,19 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     [
         dispatch,
         teiId,
+    ]);
+
+    useEffect(() => {
+        programId ?
+            dispatch(fetchEnrollments()) :
+            dispatch(updateEnrollmentAccessLevel({
+                programId,
+                accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS,
+            }));
+    },
+    [
+        dispatch,
+        programId,
     ]);
 
     const error: boolean =

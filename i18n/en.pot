@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-05-09T12:43:56.495Z\n"
-"PO-Revision-Date: 2023-05-09T12:43:56.495Z\n"
+"POT-Creation-Date: 2023-03-21T20:34:52.414Z\n"
+"PO-Revision-Date: 2023-03-21T20:34:52.414Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -601,8 +601,8 @@ msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgid "There is an error while opening this enrollment. Please enter a valid url."
 msgstr "There is an error while opening this enrollment. Please enter a valid url."
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgid "An error occurred while fetching enrollments. Please enter a valid url."
+msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 
 msgid "Enrollment Dashboard"
 msgstr "Enrollment Dashboard"
@@ -641,8 +641,20 @@ msgstr ""
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr "Invalid enrollment id {{enrollmentId}}."
+
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Choose an enrollment to view the dashboard."
+
+msgid "There are no active enrollments."
+msgstr "There are no active enrollments."
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr "Add new enrollment for {{teiDisplayName}} in this program."
+
+msgid "No access to program owner."
+msgstr "No access to program owner."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is not enrolled in this program."
@@ -1030,6 +1042,29 @@ msgstr "To work with the selected program,"
 
 msgid "open the Tracker Capture app"
 msgstr "open the Tracker Capture app"
+
+msgid "This program is protected"
+msgstr "This program is protected"
+
+msgid "Reason to check for enrollments"
+msgstr "Reason to check for enrollments"
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+
+msgid "Check for enrollments"
+msgstr "Check for enrollments"
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
 
 msgid "Save comment"
 msgstr "Save comment"
