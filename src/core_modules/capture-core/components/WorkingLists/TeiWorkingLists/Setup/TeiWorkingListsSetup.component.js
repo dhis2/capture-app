@@ -55,7 +55,7 @@ export const TeiWorkingListsSetup = ({
     const filtersOnly = useFiltersOnly(program);
     const programStageFiltersOnly = useProgramStageFilters(program, programStageId);
     const staticTemplates = useStaticTemplates(
-        apiTemplates?.find(apiTemplate => apiTemplate.isDefault && apiTemplate.isAltered),
+        storedTemplates?.find(storedTemplate => storedTemplate.isDefault && storedTemplate.isAltered),
     );
     const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
     const viewHasChanges = useViewHasTemplateChanges({

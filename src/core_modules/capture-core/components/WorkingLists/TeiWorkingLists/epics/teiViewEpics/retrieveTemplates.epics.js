@@ -65,3 +65,36 @@ export const retrieveAllTemplatesEpic = (
             );
         }),
     );
+
+export const retrieveTEITemplatesEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { querySingleResource, serverVersion: { minor: minorVersion } }: ApiUtils,
+) =>
+    action$.pipe(
+        ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
+        filter(
+            ({ payload: { workingListsType } }) =>
+                workingListsType === TEI_WORKING_LISTS_TYPE &&
+                    !hasAPISupportForFeature(minorVersion, FEATURES.storeProgramStageWorkingList),
+        ),
+        concatMap(({ payload: { storeId, programId, selectedTemplateId } }) => {
+            const promise = getTEITemplates(programId, querySingleResource)
+                .then(({ templates, defaultTemplateId }) =>
+                    fetchTemplatesSuccess(templates, selectedTemplateId || defaultTemplateId, storeId),
+                )
+                .catch((error) => {
+                    log.error(errorCreator(error)({ epic: 'retrieveTEITemplatesEpic' }));
+                    return fetchTemplatesError(i18n.t('an error occurred loading Tracked entity instance lists'), storeId);
+                });
+
+            return from(promise).pipe(
+                takeUntil(
+                    action$.pipe(
+                        ofType(workingListsCommonActionTypes.TEMPLATES_FETCH_CANCEL),
+                        filter(cancelAction => cancelAction.payload.storeId === storeId),
+                    ),
+                ),
+            );
+        }),
+    );

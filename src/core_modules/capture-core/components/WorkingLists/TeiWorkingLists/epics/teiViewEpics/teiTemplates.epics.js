@@ -1,9 +1,8 @@
 // @flow
 import log from 'loglevel';
-import i18n from '@dhis2/d2-i18n';
 import { from } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
-import { errorCreator, FEATURES, hasAPISupportForFeature } from 'capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import {
@@ -12,50 +11,14 @@ import {
     addTemplateError,
     deleteTemplateSuccess,
     deleteTemplateError,
-    fetchTemplatesSuccess,
-    fetchTemplatesError,
     updateTemplateSuccess,
     updateTemplateError,
     updateDefaultTemplate,
     workingListsCommonActionTypesBatchActionTypes,
 } from '../../../WorkingListsCommon';
-import { getTEITemplates } from './templates/getTEITemplates';
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
 import { getLocationQuery } from '../../../../../utils/routing';
 import { getDefaultTemplate } from '../../helpers';
-
-export const retrieveTEITemplatesEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { querySingleResource, serverVersion: { minor: minorVersion } }: ApiUtils,
-) =>
-    action$.pipe(
-        ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
-        filter(
-            ({ payload: { workingListsType } }) =>
-                workingListsType === TEI_WORKING_LISTS_TYPE &&
-                !hasAPISupportForFeature(minorVersion, FEATURES.storeProgramStageWorkingList),
-        ),
-        concatMap(({ payload: { storeId, programId, selectedTemplateId } }) => {
-            const promise = getTEITemplates(programId, querySingleResource)
-                .then(({ templates, defaultTemplateId }) =>
-                    fetchTemplatesSuccess(templates, selectedTemplateId || defaultTemplateId, storeId),
-                )
-                .catch((error) => {
-                    log.error(errorCreator(error)({ epic: 'retrieveTEITemplatesEpic' }));
-                    return fetchTemplatesError(i18n.t('an error occurred loading Tracked entity instance lists'), storeId);
-                });
-
-            return from(promise).pipe(
-                takeUntil(
-                    action$.pipe(
-                        ofType(workingListsCommonActionTypes.TEMPLATES_FETCH_CANCEL),
-                        filter(cancelAction => cancelAction.payload.storeId === storeId),
-                    ),
-                ),
-            );
-        }),
-    );
 
 export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, { mutate }: ApiUtils) =>
     action$.pipe(

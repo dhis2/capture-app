@@ -33,8 +33,6 @@ export type WorkingListTemplate = {
     updating?: boolean,
     deleted?: boolean,
     order?: number,
-    criteria?: Object,
-    isAltered?: boolean,
 };
 
 export type WorkingListTemplates = Array<WorkingListTemplate>;
