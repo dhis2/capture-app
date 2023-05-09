@@ -85,6 +85,7 @@
         "clean": "./scripts/clean.sh && yarn workspaces run clean"
     },
     "devDependencies": {
+        "@dhis2/rules-engine-javascript": "100.29.0",
         "@actions/core": "^1.9.1",
         "@babel/core": "^7.17.8",
         "@babel/eslint-parser": "^7.19.1",

@@ -22,9 +22,9 @@ export const usePluginCallbacks = ({
             return;
         }
 
-        const idFromApp = metadataByPluginId[fieldId].id;
+        const fieldMetadata = metadataByPluginId[fieldId];
 
-        onUpdateField && onUpdateField(idFromApp, value, options);
+        onUpdateField && onUpdateField(fieldMetadata, value, options);
     }, [configuredPluginIds, metadataByPluginId, onUpdateField]);
 
     const setContextFieldValue = useCallback(({ fieldId, value }: SetFieldValueProps) => {

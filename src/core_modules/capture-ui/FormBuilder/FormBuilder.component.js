@@ -11,6 +11,7 @@ import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
 import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
 import type { PluginContext } from '../../capture-core/components/D2Form/DataEntryPlugin/DataEntryPlugin.types';
+import { getValidators } from '../../capture-core/components/D2Form/field/validators';
 
 export type ValidatorContainer = {
     validator: (value: any, validationContext: ?Object) => boolean,
@@ -60,7 +61,6 @@ type IsValidatingFn = (
 type Props = {
     id: string,
     fields: Array<FieldConfig>,
-    dataElements: Array<FieldConfig>,
     values: { [id: string]: any },
     fieldsUI: { [id: string]: FieldUI },
     onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => void,
@@ -91,18 +91,18 @@ type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValida
 
 export class FormBuilder extends React.Component<Props> {
     static async validateField(
-        field: FieldConfig,
+        { validators }: FieldConfig,
         value: any,
         validationContext: ?Object,
         onIsValidatingInternal: ?Function,
     ): Promise<{ valid: boolean, errorMessage?: ?string, errorType?: ?string }> {
-        if (!field.validators || field.validators.length === 0) {
+        if (!validators || validators.length === 0) {
             return {
                 valid: true,
             };
         }
 
-        const validatorResult = await field.validators
+        const validatorResult = await validators
             .reduce(async (passPromise, currentValidator) => {
                 const pass = await passPromise;
                 if (pass === true) {
@@ -348,25 +348,38 @@ export class FormBuilder extends React.Component<Props> {
     */
     getFieldProp(fieldId: string): FieldConfig {
         // $FlowFixMe[incompatible-return] automated comment
-        return this.props.dataElements.find(f => f.id === fieldId);
+        return this.props.fields.find(f => f.id === fieldId);
     }
 
-    hasCommitedValueChanged(field: FieldConfig, value: any) {
+    hasCommitedValueChanged({ onIsEqual, id }: FieldConfig, value: any) {
         let valueChanged = true;
-        const oldValue = this.props.values[field.id];
+        const oldValue = this.props.values[id];
 
         if (!isObject(value)) {
             if ((value || '') === (oldValue || '')) {
                 valueChanged = false;
             }
-        } else if (field.onIsEqual && field.onIsEqual(value, oldValue)) {
+        } else if (onIsEqual && onIsEqual(value, oldValue)) {
             valueChanged = false;
         }
 
         return valueChanged;
     }
 
-    async commitFieldUpdate(fieldId: string, value: any, options?: ?FieldCommitOptions) {
+    commitFieldUpdateFromDataElement(fieldId: string, value: any, options?: ?FieldCommitOptions) {
+        const { validators, onIsEqual } = this.getFieldProp(fieldId);
+
+        this.commitFieldUpdate({ fieldId, validators, onIsEqual }, value, options);
+    }
+
+    commitFieldUpdateFromPlugin(fieldMetadata, value, options?: ?FieldCommitOptions) {
+        const { id: fieldId } = fieldMetadata;
+        const validators = getValidators(fieldMetadata);
+
+        this.commitFieldUpdate({ fieldId, validators }, value, options);
+    }
+
+    async commitFieldUpdate({ fieldId, validators, onIsEqual }, value: any, options?: ?FieldCommitOptions) {
         const {
             onUpdateFieldUIOnly,
             onUpdateField,
@@ -375,10 +388,9 @@ export class FormBuilder extends React.Component<Props> {
             onIsValidating,
         } = this.props;
 
-        const field = this.getFieldProp(fieldId);
         const touched = options && isDefined(options.touched) ? options.touched : true;
 
-        if (!this.hasCommitedValueChanged(field, value)) {
+        if (!this.hasCommitedValueChanged({ id, onIsEqual }, value)) {
             onUpdateFieldUIOnly({ touched }, fieldId, id);
             return;
         }
@@ -407,7 +419,7 @@ export class FormBuilder extends React.Component<Props> {
 
         this.commitUpdateTriggeredForFields[fieldId] = true;
         const updatePromise = FormBuilder.validateField(
-            field,
+            { validators },
             value,
             onGetValidationContext && onGetValidationContext(),
             handleIsValidatingInternal,
@@ -431,7 +443,7 @@ export class FormBuilder extends React.Component<Props> {
             })
             .catch((reason) => {
                 if (!reason || !isObject(reason) || !reason.isCanceled) {
-                    log.error({ reason, field, value });
+                    log.error({ reason, fieldId, value });
                     onUpdateField(
                         value,
                         {
@@ -511,7 +523,6 @@ export class FormBuilder extends React.Component<Props> {
         field: Object,
     ) => {
         const {
-            onUpdateFieldUIOnly,
             pluginContext,
         } = this.props;
         const {
@@ -527,8 +538,7 @@ export class FormBuilder extends React.Component<Props> {
                 fieldsMetadata={fieldsMetadata}
                 pluginSource={pluginSource}
                 formId={formId}
-                onUpdateField={this.commitFieldUpdate.bind(this)}
-                onUpdateFieldUIOnly={onUpdateFieldUIOnly}
+                onUpdateField={this.commitFieldUpdateFromPlugin.bind(this)}
                 pluginContext={pluginContext}
             />
         );
@@ -564,7 +574,7 @@ export class FormBuilder extends React.Component<Props> {
         const fieldUI = fieldsUI[field.id] || {};
         const value = values[field.id];
 
-        const commitFieldHandler = this.commitFieldUpdate.bind(this, field.id);
+        const commitFieldHandler = this.commitFieldUpdateFromDataElement.bind(this, field.id);
         const commitEvent = field.commitEvent || 'onBlur';
         const commitPropObject = {
             [commitEvent]: commitFieldHandler,

@@ -9,8 +9,7 @@ import { withAlternateBackgroundColors } from './FieldAlternateBackgroundColors/
 import { withCustomForm } from './D2CustomForm/withCustomForm';
 import { buildField } from './field/buildField';
 import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
-import type { CustomForm } from '../../metaData';
-import { DataElement } from '../../metaData';
+import type { CustomForm, DataElement } from '../../metaData';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 import { validatorTypes } from './field/validators/constants';
 import type { QuerySingleResource } from '../../utils/api/api.types';
@@ -61,14 +60,15 @@ type Props = {
 };
 
 export class D2SectionFieldsComponent extends Component<Props> {
-    static buildFormFields(props: Props): {| renderElements: Array<FieldConfig>, elementMetadata: Array<FieldConfig> |} {
+    static buildFormFields(props: Props): Array<FieldConfig> {
         const { fieldsMetaData, customForm, fieldOptions, querySingleResource } = props;
 
         return Array.from(fieldsMetaData.entries())
             .map(entry => entry[1])
-            .reduce((acc, metaDataElement) => {
+            // $FlowFixMe[incompatible-return] automated comment
+            .map((metaDataElement) => {
                 if (metaDataElement instanceof DataEntryPluginConfig) {
-                    acc.renderElements.push({
+                    return ({
                         id: metaDataElement.id,
                         component: DataEntryPlugin,
                         plugin: true,
@@ -78,27 +78,9 @@ export class D2SectionFieldsComponent extends Component<Props> {
                             formId: props.formId,
                         },
                     });
-                    const fieldsMetadata = metaDataElement.fields;
-                    const fields = Array.from(fieldsMetadata.entries())
-                        .map(entry => entry[1])
-                        .map(field => buildField(
-                            field,
-                            {
-                                formHorizontal: props.formHorizontal,
-                                formId: props.formId,
-                                viewMode: props.viewMode,
-                                ...fieldOptions,
-                            },
-                            !!customForm,
-                            querySingleResource,
-                        ))
-                        .filter(field => field);
-                    if (fields) {
-                        acc.elementMetadata.push(...fields);
-                    }
-                    return acc;
                 }
-                const field = buildField(
+
+                return buildField(
                     metaDataElement,
                     {
                         formHorizontal: props.formHorizontal,
@@ -109,13 +91,8 @@ export class D2SectionFieldsComponent extends Component<Props> {
                     !!customForm,
                     querySingleResource,
                 );
-                if (field) {
-                    acc.renderElements.push(field);
-                    acc.elementMetadata.push(field);
-                }
-                return acc;
-                // $FlowFixMe
-            }, { renderElements: [], elementMetadata: [] });
+            })
+            .filter(field => field);
     }
 
     static validateBaseOnly(formBuilderInstance: FormBuilder) {
@@ -125,7 +102,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
     handleUpdateField: (elementId: string, value: any) => void;
     formBuilderInstance: ?FormBuilder;
     formFields: Array<FieldConfig>;
-    dataElements: Array<FieldConfig>
     rulesCompulsoryErrors: { [elementId: string]: boolean };
 
     static defaultProps = {
@@ -135,17 +111,13 @@ export class D2SectionFieldsComponent extends Component<Props> {
     constructor(props: Props) {
         super(props);
         this.handleUpdateField = this.handleUpdateField.bind(this);
-        const { renderElements, elementMetadata } = D2SectionFieldsComponent.buildFormFields(this.props);
-        this.formFields = renderElements;
-        this.dataElements = elementMetadata;
+        this.formFields = D2SectionFieldsComponent.buildFormFields(this.props);
         this.rulesCompulsoryErrors = {};
     }
 
     UNSAFE_componentWillReceiveProps(newProps: Props) {
         if (newProps.fieldsMetaData !== this.props.fieldsMetaData) {
-            const { renderElements, elementMetadata } = D2SectionFieldsComponent.buildFormFields(newProps);
-            this.formFields = renderElements;
-            this.dataElements = elementMetadata;
+            this.formFields = D2SectionFieldsComponent.buildFormFields(newProps);
         }
     }
 
