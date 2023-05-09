@@ -40,7 +40,6 @@ import {
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { navigateToEnrollmentOverview } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
-import { convertEventAttributeOptions } from '../../../events/convertEventAttributeOptions';
 
 const getDataEntryId = (event): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
@@ -111,7 +110,6 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             }
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
-            prevEventContainer.event = convertEventAttributeOptions(prevEventContainer.event);
 
             const eventContainer = {
                 ...prevEventContainer,
@@ -128,6 +126,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const serverData = {
                 events: [{
                     ...mainDataServerValues,
+                    attributeOptionCombo: undefined,
                     dataValues: formFoundation
                         .getElements()
                         .map(({ id }) => ({
