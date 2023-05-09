@@ -33,7 +33,7 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment } from '../../../metaData';
+import { type Enrollment, getProgramThrowIfNotFound } from '../../../metaData';
 import {
     getCategoryOptionsValidatorContainers,
     attributeOptionsKey,
@@ -297,17 +297,19 @@ const getCategoryOptionsSettingsFn = () => {
 };
 
 const getAOCSettingsFn = () => ({
-    hideAOC: (/* props: Object */) =>
-        true
-        // enable after DHIS2-9661
-        // const { stages } = getProgramThrowIfNotFound(props.programId);
-        // /*
-        // * Show AOC selection ONLY if there are any program stages in the program with:
-        // * “Auto-generate event” and NOT “Open data entry form after enrollment”.
-        // */
-        // const shouldShowAOC = [...stages.values()].some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment);
-        // return !shouldShowAOC;
-    ,
+    hideAOC: (props: Object) => {
+        const { stages: stagesMap } = getProgramThrowIfNotFound(props.programId);
+        /*
+        Show AOC selection if:
+        - There are any program stages in the program with “Auto-generate" event and NOT “Open data entry form after enrollment”.
+        - There are multiple program stages with "Auto-generate" event and "Open data entry form after enrollment"
+            (in this scenario we are currently generating events for the program stages that are not the first one)
+        */
+        const stages = [...stagesMap.values()];
+        const shouldShowAOC = stages.some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment) ||
+            stages.filter(stage => stage.autoGenerateEvent && stage.openAfterEnrollment).length > 1;
+        return !shouldShowAOC;
+    },
 });
 
 type FinalTeiDataEntryProps = {
