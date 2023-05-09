@@ -17,6 +17,7 @@ export type CachedAttributeTranslation = Translation;
 export type CachedTrackedEntityAttribute = {
     id: string,
     displayName: string,
+    code: string,
     displayShortName: string,
     displayFormName: string,
     description: string,
@@ -52,6 +53,7 @@ export type CachedStyle = {
 export type CachedDataElement = {
     id: string,
     displayName: string,
+    code: string,
     displayShortName: string,
     displayFormName: string,
     valueType: string,
@@ -221,6 +223,7 @@ export type CachedOptionGroup = {
 export type CachedOptionSet = {
     id: string,
     displayName: string,
+    code: string,
     valueType: string,
     options: Array<CachedOption>,
     optionGroups: Array<CachedOptionGroup>,

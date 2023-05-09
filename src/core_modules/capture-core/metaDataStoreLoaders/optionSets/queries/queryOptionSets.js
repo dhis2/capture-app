@@ -5,7 +5,7 @@ export const queryOptionSets = async (ids: Array<string>) => {
     const specification = {
         resource: 'optionSets',
         params: {
-            fields: 'id,displayName,version,valueType,options[id,displayName,code,style, translations]',
+            fields: 'id,displayName,code,version,valueType,options[id,displayName,code,style, translations]',
             filter: `id:in:[${ids.join(',')}]`,
             pageSize: ids.length,
         },

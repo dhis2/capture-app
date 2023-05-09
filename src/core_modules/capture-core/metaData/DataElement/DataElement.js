@@ -22,6 +22,7 @@ export class DataElement {
     _id: string;
     _name: string;
     _shortName: string;
+    _code: string;
     _formName: string;
     _disabled: boolean;
     _compulsory: boolean;
@@ -55,6 +56,14 @@ export class DataElement {
     }
     get name(): string {
         return this._name;
+    }
+
+    set code(code: string) {
+        this._code = code;
+    }
+
+    get code(): string {
+        return this._code;
     }
 
     set shortName(shortName: string) {

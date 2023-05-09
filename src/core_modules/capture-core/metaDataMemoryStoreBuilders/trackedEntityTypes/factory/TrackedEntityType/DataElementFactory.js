@@ -90,6 +90,7 @@ export class DataElementFactory {
         const dataElement = new DataElement((o) => {
             o.id = cachedAttribute.id;
             o.compulsory = cachedTrackedEntityTypeAttribute.mandatory;
+            o.code = cachedAttribute.code;
             o.name =
                 this._getAttributeTranslation(
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.NAME) ||
