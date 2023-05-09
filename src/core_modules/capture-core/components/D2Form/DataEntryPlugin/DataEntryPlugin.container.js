@@ -34,8 +34,10 @@ export const DataEntryPlugin = (props: ContainerProps) => {
             const modifiedDataElement = Object.entries(dataElement)
                 .map(([attributeKey, value]) => {
                     const modifiedKey = attributeKey.replace(/^_/, '');
+                    if (modifiedKey === 'id') return null;
                     return [modifiedKey, value];
-                });
+                })
+                .filter(Boolean);
 
             acc[pluginId] = Object.fromEntries(modifiedDataElement);
             return acc;
