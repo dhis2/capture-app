@@ -9,7 +9,7 @@ import { getDataEntryKey } from '../common/getDataEntryKey';
 import { makeReselectComponentProps } from './withDataEntryField.selectors';
 
 import type { ValidatorContainer } from './internal/dataEntryField.utils';
-import type { PluginContext } from '../../D2Form/DataEntryPlugin/DataEntryPlugin.types';
+import type { PluginContext } from '../../D2Form/FormFieldPlugin/FormFieldPlugin.types';
 
 type FieldContainer = {
     field: React.Element<any>,

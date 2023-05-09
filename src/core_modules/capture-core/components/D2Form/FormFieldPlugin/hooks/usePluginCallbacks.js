@@ -1,9 +1,9 @@
 // @flow
 import log from 'loglevel';
 import { useCallback } from 'react';
-import type { SetFieldValueProps, UsePluginCallbacksProps } from '../DataEntryPlugin.types';
+import type { SetFieldValueProps, UsePluginCallbacksProps } from '../FormFieldPlugin.types';
 import { errorCreator } from '../../../../../capture-core-utils';
-import { PluginErrorMessages } from '../DataEntryPlugin.const';
+import { PluginErrorMessages } from '../FormFieldPlugin.const';
 
 export const usePluginCallbacks = ({
     configuredPluginIds,

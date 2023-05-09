@@ -2,7 +2,7 @@
 
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
-import type { MetadataByPluginId } from '../DataEntryPlugin.types';
+import type { MetadataByPluginId } from '../FormFieldPlugin.types';
 
 export const usePluginMessages = (formId: string, metadataByPluginId: MetadataByPluginId) => {
     const rulesEffects = useSelector(({ rulesEffectsMessages }) => rulesEffectsMessages[formId]);

@@ -1,7 +1,7 @@
 // @flow
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
-import type { MetadataByPluginId, PluginContext } from '../DataEntryPlugin.types';
+import type { MetadataByPluginId, PluginContext } from '../FormFieldPlugin.types';
 
 export const usePluginValues = (
     formId: string,

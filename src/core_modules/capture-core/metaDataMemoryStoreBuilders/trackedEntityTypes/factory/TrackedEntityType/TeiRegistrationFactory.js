@@ -17,7 +17,7 @@ import type {
 } from '../../../../storageControllers/cache.types';
 import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './teiRegistrationFactory.types';
-import { DataEntryPluginConfig } from '../../../../metaData/DataEntryPluginConfig';
+import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 
 export class TeiRegistrationFactory {
@@ -118,7 +118,7 @@ export class TeiRegistrationFactory {
 
                 await attributes.asyncForEach(async (trackedEntityAttribute) => {
                     if (trackedEntityAttribute?.id === 'plugin') {
-                        const element = new DataEntryPluginConfig((o) => {
+                        const element = new FormFieldPluginConfig((o) => {
                             o.id = trackedEntityAttribute.id;
                             o.name = trackedEntityAttribute.name;
                             o.pluginSource = trackedEntityAttribute.pluginSource;

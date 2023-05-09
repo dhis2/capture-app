@@ -13,8 +13,8 @@ import type { CustomForm, DataElement } from '../../metaData';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 import { validatorTypes } from './field/validators/constants';
 import type { QuerySingleResource } from '../../utils/api/api.types';
-import { DataEntryPlugin } from './DataEntryPlugin';
-import { DataEntryPluginConfig } from '../../metaData/DataEntryPluginConfig';
+import { FormFieldPlugin } from './FormFieldPlugin';
+import { FormFieldPluginConfig } from '../../metaData/FormFieldPluginConfig';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 type FormsValues = {
@@ -40,7 +40,7 @@ type RulesMessages = {
 };
 
 type Props = {
-    fieldsMetaData: Map<string, DataElement | DataEntryPluginConfig>,
+    fieldsMetaData: Map<string, DataElement | FormFieldPluginConfig>,
     values: FormsValues,
     rulesMessages: RulesMessages,
     rulesHiddenFields: RulesHiddenFields,
@@ -67,10 +67,10 @@ export class D2SectionFieldsComponent extends Component<Props> {
             .map(entry => entry[1])
             // $FlowFixMe[incompatible-return] automated comment
             .map((metaDataElement) => {
-                if (metaDataElement instanceof DataEntryPluginConfig) {
+                if (metaDataElement instanceof FormFieldPluginConfig) {
                     return ({
                         id: metaDataElement.id,
-                        component: DataEntryPlugin,
+                        component: FormFieldPlugin,
                         plugin: true,
                         props: {
                             pluginSource: metaDataElement.pluginSource,

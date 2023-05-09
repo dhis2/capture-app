@@ -1,12 +1,12 @@
 // @flow
 import React, { useEffect, useMemo } from 'react';
-import { DataEntryPluginComponent } from './DataEntryPlugin.component';
-import type { ContainerProps } from './DataEntryPlugin.types';
+import { FormFieldPluginComponent } from './FormFieldPlugin.component';
+import type { ContainerProps } from './FormFieldPlugin.types';
 import { usePluginMessages } from './hooks/usePluginMessages';
 import { usePluginCallbacks } from './hooks/usePluginCallbacks';
 import { usePluginValues } from './hooks/usePluginValues';
 
-export const DataEntryPlugin = (props: ContainerProps) => {
+export const FormFieldPlugin = (props: ContainerProps) => {
     const { pluginSource, fieldsMetadata, formId, onUpdateField, pluginContext } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
@@ -44,7 +44,7 @@ export const DataEntryPlugin = (props: ContainerProps) => {
         }, {}), [fieldsMetadata]);
 
     return (
-        <DataEntryPluginComponent
+        <FormFieldPluginComponent
             pluginSource={pluginSource}
             fieldsMetadata={formattedMetadata}
             values={pluginValues}

@@ -10,7 +10,7 @@ import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
 import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
-import type { PluginContext } from '../../capture-core/components/D2Form/DataEntryPlugin/DataEntryPlugin.types';
+import type { PluginContext } from '../../capture-core/components/D2Form/FormFieldPlugin/FormFieldPlugin.types';
 import { getValidators } from '../../capture-core/components/D2Form/field/validators';
 
 export type ValidatorContainer = {
