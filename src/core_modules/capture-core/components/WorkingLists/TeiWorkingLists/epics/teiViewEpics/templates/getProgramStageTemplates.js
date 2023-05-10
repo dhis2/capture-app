@@ -1,57 +1,51 @@
 // @flow
 import type { QuerySingleResource } from 'capture-core/utils/api';
-import type { TeiWorkingListsTemplates } from '../../types';
+import type { TeiWorkingListsTemplates } from '../../../types';
+import { PROGRAM_STAGE_WORKING_LISTS } from '../../../constants';
+import { getDefaultTemplate } from '../../../helpers';
 
 type ApiConfig = {
-    trackedEntityInstanceFilters: Array<Object>,
+    programStageWorkingLists: Array<Object>,
     pager: Object,
 };
 
 const getApiTEIFilters = async (programId: string, querySingleResource: QuerySingleResource) => {
     const apiRes: ApiConfig = await querySingleResource({
-        resource: 'trackedEntityInstanceFilters',
+        resource: 'programStageWorkingLists',
         params: {
             filter: `program.id:eq:${programId}`,
-            fields: 'id,displayName,sortOrder,entityQueryCriteria,access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
+            fields: 'id,displayName,programStage,sortOrder,programStageQueryCriteria,access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
         },
     });
-    return apiRes && apiRes.trackedEntityInstanceFilters ? apiRes.trackedEntityInstanceFilters : [];
+    return apiRes && apiRes.programStageWorkingLists ? apiRes.programStageWorkingLists : [];
 };
 
-export const getTemplates = (
+export const getProgramStageTemplates = (
     programId: string,
     querySingleResource: QuerySingleResource,
-): Promise<{ templates: TeiWorkingListsTemplates, defaultTemplateId: string }> =>
+): Promise<{ templates: TeiWorkingListsTemplates, defaultTemplateId: string, id: string, }> =>
     getApiTEIFilters(programId, querySingleResource).then((apiTEIFilters) => {
-        const defaultTemplate = {
-            id: `${programId}-default`,
-            isDefault: true,
-            name: 'default',
-            access: {
-                update: false,
-                delete: false,
-                write: false,
-                manage: false,
-            },
-            criteria: {
-                order: 'createdAt:desc',
-            },
-        };
+        const defaultTemplate = getDefaultTemplate(programId);
+
         return {
             templates: [
                 defaultTemplate,
                 ...apiTEIFilters.map(
                     ({
                         displayName,
-                        sortOrder,
                         id,
                         access,
-                        entityQueryCriteria: {
+                        programStage: { id: programStage },
+                        programStageQueryCriteria: {
                             enrollmentStatus,
-                            enrollmentCreatedDate,
-                            enrollmentIncidentDate,
+                            enrolledAt,
+                            enrollmentOccurredAt,
+                            eventStatus,
+                            eventScheduledAt,
+                            eventOccurredAt,
                             order,
                             attributeValueFilters,
+                            dataFilters,
                             displayColumnOrder,
                             assignedUserMode,
                             assignedUsers,
@@ -64,11 +58,15 @@ export const getTemplates = (
                     }) => ({
                         id,
                         name: displayName,
-                        order: sortOrder,
                         criteria: {
                             programStatus: enrollmentStatus,
-                            enrolledAt: enrollmentCreatedDate,
-                            occurredAt: enrollmentIncidentDate,
+                            enrolledAt,
+                            occurredAt: enrollmentOccurredAt,
+                            programStage,
+                            eventOccurredAt,
+                            status: eventStatus,
+                            scheduledAt: eventScheduledAt,
+                            dataFilters,
                             order,
                             displayColumnOrder,
                             assignedUserMode,
@@ -85,5 +83,6 @@ export const getTemplates = (
                 ),
             ],
             defaultTemplateId: defaultTemplate.id,
+            id: PROGRAM_STAGE_WORKING_LISTS,
         };
     });
