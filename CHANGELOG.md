@@ -1,3 +1,10 @@
+# [100.30.0](https://github.com/dhis2/capture-app/compare/v100.29.1...v100.30.0) (2023-05-10)
+
+
+### Features
+
+* [DHIS2-14465] AOC for Tracker programs ([#3190](https://github.com/dhis2/capture-app/issues/3190)) ([f8729c4](https://github.com/dhis2/capture-app/commit/f8729c41b7ba36d079659d4c43c85be84312acdb))
+
 ## [100.29.1](https://github.com/dhis2/capture-app/compare/v100.29.0...v100.29.1) (2023-04-26)
 
 
