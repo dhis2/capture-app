@@ -16,8 +16,15 @@ import { buildArgumentsForTemplate } from '../helpers';
 
 const DEFAULT_TEMPLATES_LENGTH = 1;
 
-const shouldPreserveViewState = ({ currentTemplateId, defaultTemplateId, programStageId, prevProgramStageId }) =>
+const shouldPreserveViewState = ({
+    currentTemplateId,
+    prevTemplateId,
+    defaultTemplateId,
+    programStageId,
+    prevProgramStageId,
+}) =>
     currentTemplateId !== defaultTemplateId &&
+    currentTemplateId === prevTemplateId.current &&
     ((programStageId && prevProgramStageId.current === undefined) ||
         (programStageId === undefined && prevProgramStageId.current));
 
@@ -50,6 +57,7 @@ export const TeiWorkingListsSetup = ({
     ...passOnProps
 }: Props) => {
     const prevProgramStageId = useRef(programStageId);
+    const prevTemplateId = useRef(currentTemplateId);
     const defaultColumns = useDefaultColumnConfig(program, orgUnitId, programStageId);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
@@ -81,6 +89,7 @@ export const TeiWorkingListsSetup = ({
                     defaultTemplateId,
                     programStageId,
                     prevProgramStageId,
+                    prevTemplateId,
                 })
             ) {
                 const { criteria } = buildArgumentsForTemplate({
@@ -97,6 +106,7 @@ export const TeiWorkingListsSetup = ({
                 onPreserveCurrentViewState(defaultTemplateId, criteria);
             }
         }
+        prevTemplateId.current = currentTemplateId;
         prevProgramStageId.current = programStageId;
     }, [
         programStageId,
@@ -111,6 +121,7 @@ export const TeiWorkingListsSetup = ({
         sortById,
         sortByDirection,
         currentTemplateId,
+        prevTemplateId,
     ]);
 
     const injectArgumentsForAddTemplate = useCallback(
