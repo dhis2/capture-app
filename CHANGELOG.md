@@ -1,3 +1,10 @@
+# [100.31.0](https://github.com/dhis2/capture-app/compare/v100.30.0...v100.31.0) (2023-05-10)
+
+
+### Features
+
+* [DHIS2-14574] store program stage working lists ([#3213](https://github.com/dhis2/capture-app/issues/3213)) ([4f5817d](https://github.com/dhis2/capture-app/commit/4f5817dc2f2104aa2f5eb5d05eef53fe66f6a752))
+
 # [100.30.0](https://github.com/dhis2/capture-app/compare/v100.29.1...v100.30.0) (2023-05-10)
 
 
