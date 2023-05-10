@@ -6,7 +6,7 @@ import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
 import { actionTypes as loaderActionTypes } from '../../components/D2Form/actions/form.actions';
 import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
-import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/formBuilder.actions';
+import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/FormBuilder/formBuilder.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { rulesEffectsActionTypes } from '../../rules';
 import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';

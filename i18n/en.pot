@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-04-05T11:16:02.981Z\n"
-"PO-Revision-Date: 2023-04-05T11:16:02.981Z\n"
+"POT-Creation-Date: 2023-05-10T07:48:38.005Z\n"
+"PO-Revision-Date: 2023-05-10T07:48:38.005Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -64,6 +64,12 @@ msgstr "Date of enrollment"
 
 msgid "Last updated"
 msgstr "Last updated"
+
+msgid "error encountered during field validation"
+msgstr "error encountered during field validation"
+
+msgid "error"
+msgstr "error"
 
 msgid "This value is validating"
 msgstr "This value is validating"
@@ -1462,12 +1468,6 @@ msgstr "To date"
 
 msgid "To time"
 msgstr "To time"
-
-msgid "error encountered during field validation"
-msgstr "error encountered during field validation"
-
-msgid "error"
-msgstr "error"
 
 msgid "Delete polygon"
 msgstr "Delete polygon"
