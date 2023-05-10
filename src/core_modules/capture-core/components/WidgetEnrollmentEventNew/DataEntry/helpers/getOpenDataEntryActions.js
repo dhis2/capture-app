@@ -4,6 +4,8 @@ import { convertGeometryOut } from 'capture-core/components/DataEntries/converte
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
+import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
+import { getCategoryOptionsValidatorContainers } from '../fieldValidators/categoryOptions.validatorContainersGetter';
 
 type DataEntryPropsToInclude = Array<Object>;
 
@@ -35,5 +37,14 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 ];
 
 export const getOpenDataEntryActions =
-    (dataEntryId: string, itemId: string) =>
-        loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
+    (dataEntryId: string, itemId: string, programCategory?: ProgramCategory) => {
+        if (programCategory && programCategory.categories) {
+            dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
+                id: `attributeCategoryOptions-${category.id}`,
+                type: 'TEXT',
+                validatorContainers: getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
+            })));
+        }
+        return loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
+    };
+
