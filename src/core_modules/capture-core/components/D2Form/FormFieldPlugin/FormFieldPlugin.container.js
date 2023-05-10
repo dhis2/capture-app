@@ -13,7 +13,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
 
     // Plugin related functionality and feedback
     const { pluginValues } = usePluginValues(formId, metadataByPluginId, pluginContext);
-    const { errors, warnings } = usePluginMessages(formId, metadataByPluginId);
+    const { errors, warnings, formSubmitted } = usePluginMessages(formId, metadataByPluginId);
     const { setFieldValue, setContextFieldValue } = usePluginCallbacks({
         configuredPluginIds,
         onUpdateField,
@@ -49,6 +49,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
             fieldsMetadata={formattedMetadata}
             values={pluginValues}
             setFieldValue={setFieldValue}
+            formSubmitted={formSubmitted}
             setContextFieldValue={setContextFieldValue}
             errors={errors}
             warnings={warnings}
