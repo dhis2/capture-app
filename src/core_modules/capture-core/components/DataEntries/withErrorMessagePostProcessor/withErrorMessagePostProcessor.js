@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type { PostProcessErrorMessage } from 'capture-ui/FormBuilder';
+import type { PostProcessErrorMessage } from '../../D2Form/FormBuilder';
 import { UniqueTEADuplicate } from './UniqueTEADuplicate/UniqueTEADuplicate.component';
 import type { ExistingUniqueValueDialogActionsComponent } from './UniqueTEADuplicate/existingTeiContents.types';
 

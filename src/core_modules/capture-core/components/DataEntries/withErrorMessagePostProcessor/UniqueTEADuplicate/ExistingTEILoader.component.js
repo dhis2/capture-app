@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { makeCancelablePromise } from 'capture-core-utils';
-import type { ErrorData } from 'capture-ui/FormBuilder';
+import type { ErrorData } from '../../../D2Form/FormBuilder';
 import { ExistingTEIContents } from './ExistingTEIContents.container';
 import { withLoadingIndicator, withApiUtils } from '../../../../HOC';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';

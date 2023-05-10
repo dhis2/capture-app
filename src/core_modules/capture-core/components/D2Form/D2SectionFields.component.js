@@ -80,6 +80,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
                     });
                 }
 
+                // $FlowFixMe - filter removes undefined values
                 return buildField(
                     metaDataElement,
                     {
@@ -274,7 +275,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
                 formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
                 id={formId}
                 fields={this.getFieldConfigWithRulesEffects()}
-                dataElements={this.dataElements}
+                dataElements={this.formFields}
                 values={values}
                 onUpdateField={this.handleUpdateField}
                 onUpdateFieldAsync={this.handleUpdateFieldAsync}

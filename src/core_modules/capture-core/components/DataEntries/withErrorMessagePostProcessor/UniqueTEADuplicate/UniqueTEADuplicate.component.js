@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type { ErrorData } from 'capture-ui/FormBuilder';
+import type { ErrorData } from '../../../D2Form/FormBuilder';
 import { UniqueTEADuplicateErrorMessageCreator } from './ErrorMessageCreator.component';
 import { ExistingTEIDialog } from './ExistingTEIDialog.component';
 

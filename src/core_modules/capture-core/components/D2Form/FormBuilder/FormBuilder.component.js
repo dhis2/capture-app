@@ -12,9 +12,11 @@ import defaultClasses from './formBuilder.module.css';
 import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
 import type { PluginContext } from '../FormFieldPlugin/FormFieldPlugin.types';
 import { getValidators } from '../field/validators';
+import type { DataElement } from '../../../metaData';
+import type { QuerySingleResource } from '../../../utils/api';
 
 export type ValidatorContainer = {
-    validator: (value: any, validationContext: ?Object) => boolean,
+    validator: (value: any, validationContext: ?Object) => boolean | Promise<boolean>,
     message: string,
     validatingMessage?: ?string,
     type?: ?string,
@@ -43,6 +45,12 @@ type FieldUI = {
 type RenderDividerFn = (index: number, fieldsCount: number, field: FieldConfig) => React.Node;
 type GetContainerPropsFn = (index: number, fieldsCount: number, field: FieldConfig) => Object;
 
+type FieldCommitConfig = {|
+    fieldId: string,
+    validators?: ?Array<ValidatorContainer>,
+    onIsEqual?: ?(newValue: any, oldValue: any) => boolean,
+|}
+
 type RenderFieldFn = (
     field: FieldConfig,
     index: number,
@@ -67,6 +75,7 @@ type Props = {
     onUpdateField: (value: any, uiState: FieldUI, fieldId: string, formBuilderId: string, promiseForIsValidating: string) => void,
     onUpdateFieldUIOnly: (uiState: FieldUI, fieldId: string, formBuilderId: string) => void,
     onFieldsValidated: ?(fieldsUI: { [id: string]: FieldUI }, formBuilderId: string, uidsForIsValidating: Array<string>) => void,
+    querySingleResource: QuerySingleResource,
     validationAttempted?: ?boolean,
     validateIfNoUIData?: ?boolean,
     formHorizontal: ?boolean,
@@ -91,7 +100,7 @@ type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValida
 
 export class FormBuilder extends React.Component<Props> {
     static async validateField(
-        { validators }: FieldConfig,
+        { validators }: { validators?: ?Array<ValidatorContainer> },
         value: any,
         validationContext: ?Object,
         onIsValidatingInternal: ?Function,
@@ -351,9 +360,9 @@ export class FormBuilder extends React.Component<Props> {
         return this.props.fields.find(f => f.id === fieldId);
     }
 
-    hasCommitedValueChanged({ onIsEqual, id }: FieldConfig, value: any) {
+    hasCommitedValueChanged({ onIsEqual, fieldId }: FieldCommitConfig, value: any) {
         let valueChanged = true;
-        const oldValue = this.props.values[id];
+        const oldValue = this.props.values[fieldId];
 
         if (!isObject(value)) {
             if ((value || '') === (oldValue || '')) {
@@ -372,14 +381,16 @@ export class FormBuilder extends React.Component<Props> {
         this.commitFieldUpdate({ fieldId, validators, onIsEqual }, value, options);
     }
 
-    commitFieldUpdateFromPlugin(fieldMetadata, value, options?: ?FieldCommitOptions) {
+    commitFieldUpdateFromPlugin(fieldMetadata: DataElement, value: any, options?: ?FieldCommitOptions) {
         const { id: fieldId } = fieldMetadata;
-        const validators = getValidators(fieldMetadata);
+        const { querySingleResource } = this.props;
+        const validators = getValidators(fieldMetadata, querySingleResource);
 
+        // $FlowFixMe - Async handled in business logic
         this.commitFieldUpdate({ fieldId, validators }, value, options);
     }
 
-    async commitFieldUpdate({ fieldId, validators, onIsEqual }, value: any, options?: ?FieldCommitOptions) {
+    async commitFieldUpdate({ fieldId, validators, onIsEqual }: FieldCommitConfig, value: any, options?: ?FieldCommitOptions) {
         const {
             onUpdateFieldUIOnly,
             onUpdateField,
@@ -390,7 +401,7 @@ export class FormBuilder extends React.Component<Props> {
 
         const touched = options && isDefined(options.touched) ? options.touched : true;
 
-        if (!this.hasCommitedValueChanged({ id, onIsEqual }, value)) {
+        if (!this.hasCommitedValueChanged({ fieldId, onIsEqual }, value)) {
             onUpdateFieldUIOnly({ touched }, fieldId, id);
             return;
         }
