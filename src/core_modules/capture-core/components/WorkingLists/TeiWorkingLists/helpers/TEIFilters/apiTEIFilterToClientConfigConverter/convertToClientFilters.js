@@ -17,11 +17,12 @@ import type {
     ApiDataFilterDate,
     ApiDataFilterDateContents,
     ApiDataFilterOptionSet,
-    ApiTEIQueryCriteria,
+    ApiTrackerQueryCriteria,
     TeiColumnsMetaForDataFetching,
 } from '../../../types';
 import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
-import { DATE_TYPES, ASSIGNEE_MODES } from '../../../constants';
+import { DATE_TYPES, ASSIGNEE_MODES, MAIN_FILTERS } from '../../../constants';
+import { ADDITIONAL_FILTERS } from '../../../helpers';
 
 const getTextFilter = (filter: ApiDataFilterText): ?TextFilterData => {
     const value = filter.like;
@@ -71,7 +72,6 @@ const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
             type: dateFilter.type,
             ge: moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString(),
             le: moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString(),
-
         };
     }
     return undefined;
@@ -99,24 +99,6 @@ const getFilterByType = {
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-const convertDataElementFilters = (filters: Array<ApiDataFilter>, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching): Object =>
-    filters.reduce((acc, serverFilter: ApiDataFilter) => {
-        const element = columnsMetaForDataFetching.get(serverFilter.attribute);
-
-        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
-        if (!element || !getFilterByType[element.type]) {
-            return acc;
-        }
-        // $FlowFixMe
-        const value = isOptionSetFilter(element.type, serverFilter)
-            ? // $FlowFixMe
-            getOptionSetFilter(serverFilter, element.type)
-            : // $FlowFixMe
-            getFilterByType[element.type](serverFilter);
-
-        return value ? { ...acc, [serverFilter.attribute]: value } : acc;
-    }, {});
-
 const getAssigneeFilter = async (assignedUsers: ?Array<string>, querySingleResource: QuerySingleResource) => {
     // DHIS2-12500 - The UI element provides suport for only one user
     const assignedUserId = assignedUsers && assignedUsers.length > 0 && assignedUsers[0];
@@ -133,43 +115,103 @@ const getAssigneeFilter = async (assignedUsers: ?Array<string>, querySingleResou
     return { id, name, username };
 };
 
-export const convertToClientFilters = async (
-    TEIQueryCriteria: ?ApiTEIQueryCriteria,
-    columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
-    querySingleResource: QuerySingleResource,
-): { [id: string]: any } => {
-    let filters = {};
-    if (!TEIQueryCriteria) {
-        return filters;
-    }
-    const { programStatus, enrolledAt, occurredAt, assignedUserMode, assignedUsers, attributeValueFilters } = TEIQueryCriteria;
-
-    if (programStatus) {
-        filters = {
-            ...filters,
-            programStatus: {
-                usingOptionSet: true,
-                values: [programStatus],
-            },
-        };
-    }
-    if (enrolledAt) {
-        filters = { ...filters, enrolledAt: getDateFilterContent(enrolledAt) };
-    }
-    if (occurredAt) {
-        filters = { ...filters, occurredAt: getDateFilterContent(occurredAt) };
-    }
+const getAssignee = async (assignedUserMode, assignedUsers, querySingleResource) => {
     if (assignedUserMode && assignedUserMode !== ASSIGNEE_MODES.PROVIDED) {
-        filters = { ...filters, assignee: { assignedUserMode } };
+        return { assignedUserMode };
     }
     if (assignedUserMode && assignedUserMode === ASSIGNEE_MODES.PROVIDED && assignedUsers) {
         const assignedUser = await getAssigneeFilter(assignedUsers, querySingleResource);
         if (assignedUser) {
-            filters = { ...filters, assignee: { assignedUserMode, assignedUser } };
+            return { assignedUserMode, assignedUser };
         }
     }
-    if (attributeValueFilters && attributeValueFilters.length > 0) {
-        filters = { ...filters, ...convertDataElementFilters(attributeValueFilters, columnsMetaForDataFetching) };
+    return null;
+};
+
+const getMainFilterOptionSet = value => ({
+    usingOptionSet: true,
+    values: [value],
+});
+
+const mainFiltersTable = {
+    [MAIN_FILTERS.PROGRAM_STATUS]: getMainFilterOptionSet,
+    [MAIN_FILTERS.ENROLLED_AT]: getDateFilterContent,
+    [MAIN_FILTERS.OCCURED_AT]: getDateFilterContent,
+    [ADDITIONAL_FILTERS.programStage]: getMainFilterOptionSet,
+    [ADDITIONAL_FILTERS.status]: getMainFilterOptionSet,
+    [ADDITIONAL_FILTERS.occurredAt]: getDateFilterContent,
+    [ADDITIONAL_FILTERS.scheduledAt]: getDateFilterContent,
+};
+
+const convertDataElementFilters = (
+    filters?: ?Array<ApiDataFilter>,
+    columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
+): Object =>
+    filters?.reduce((acc, serverFilter: ApiDataFilter) => {
+        const element = columnsMetaForDataFetching.get(serverFilter.dataItem);
+
+        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
+        if (!element || !getFilterByType[element.type]) {
+            return acc;
+        }
+        // $FlowFixMe
+        const value = isOptionSetFilter(element.type, serverFilter)
+            ? // $FlowFixMe
+            getOptionSetFilter(serverFilter, element.type)
+            : // $FlowFixMe
+            getFilterByType[element.type](serverFilter);
+
+        return value ? { ...acc, [serverFilter.dataItem]: value } : acc;
+    }, {});
+
+const convertAttributeFilters = (
+    filters?: ?Array<ApiDataFilter>,
+    columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
+): Object =>
+    filters?.reduce((acc, serverFilter: ApiDataFilter) => {
+        const element = columnsMetaForDataFetching.get(serverFilter.attribute);
+
+        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
+        if (!element || !getFilterByType[element.type]) {
+            return acc;
+        }
+        // $FlowFixMe
+        const value = isOptionSetFilter(element.type, serverFilter)
+            ? // $FlowFixMe
+            getOptionSetFilter(serverFilter, element.type)
+            : // $FlowFixMe
+            getFilterByType[element.type](serverFilter);
+
+        return value ? { ...acc, [serverFilter.attribute]: value } : acc;
+    }, {});
+
+const convertToClientMainFilters = TEIQueryCriteria =>
+    Object.entries(TEIQueryCriteria).reduce((acc, [key, value]) => {
+        // $FlowFixMe I accept that not every filter type is listed, thats why I'm doing this test
+        if (!mainFiltersTable[key] || !value) {
+            return acc;
+        }
+
+        const mainValue = mainFiltersTable[key](value);
+        return mainValue ? { ...acc, [key]: mainValue } : acc;
+    }, {});
+
+export const convertToClientFilters = async (
+    TEIQueryCriteria: ?ApiTrackerQueryCriteria,
+    columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
+    querySingleResource: QuerySingleResource,
+): { [id: string]: any } => {
+    if (!TEIQueryCriteria) {
+        return {};
     }
-    return filters;
+    const { assignedUserMode, assignedUsers, attributeValueFilters, dataFilters, ...restTEIQueryCriteria } =
+        TEIQueryCriteria;
+    const assignee = await getAssignee(assignedUserMode, assignedUsers, querySingleResource);
+
+    return {
+        assignee,
+        ...convertToClientMainFilters(restTEIQueryCriteria),
+        ...convertAttributeFilters(attributeValueFilters, columnsMetaForDataFetching),
+        ...convertDataElementFilters(dataFilters, columnsMetaForDataFetching),
+    };
 };
