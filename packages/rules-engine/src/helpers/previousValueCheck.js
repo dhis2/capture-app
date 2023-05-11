@@ -13,14 +13,10 @@ const processDataElementValue = ({
         const dataElement = dataElements[dataElementId];
         return {
             name: dataElement.name,
-            valueType: dataElement.optionSetId ? typeKeys.TEXT : dataElement.valueType,
+            valueType: dataElement.valueType,
         };
     }
-
-    return {
-        name: undefined,
-        valueType: typeKeys.TEXT,
-    };
+    return null;
 };
 
 const processTEAValue = ({
@@ -34,14 +30,10 @@ const processTEAValue = ({
         const attribute = trackedEntityAttributes[trackedEntityAttributeId];
         return {
             name: attribute.displayFormName || attribute.displayName,
-            valueType: attribute.optionSetId ? typeKeys.TEXT : attribute.valueType,
+            valueType: attribute.valueType,
         };
     }
-
-    return {
-        name: undefined,
-        valueType: typeKeys.TEXT,
-    };
+    return null;
 };
 
 const mapByTargetDataTypes = Object.freeze({
@@ -68,16 +60,20 @@ export const getOutputEffectsWithPreviousValueCheck = ({
 }) =>
     outputEffects.reduce((acc, outputEffect) => {
         if (formValues && outputEffect.targetDataType) {
-            const rawValue = formValues[outputEffect.id];
-            const { valueType, name } = mapByTargetDataTypes[outputEffect.targetDataType]({
+            const formValue = formValues[outputEffect.id];
+            const rawValue = mapByTargetDataTypes[outputEffect.targetDataType]({
                 dataElementId,
                 trackedEntityAttributeId,
                 dataElements,
                 trackedEntityAttributes,
             });
-            const value = onProcessValue(rawValue, valueType);
-            if (value != null) {
-                return [...acc, { ...outputEffect, hadValue: true, name }];
+            if (rawValue) {
+                const { valueType, name } = rawValue;
+                const value = onProcessValue(formValue, valueType);
+
+                if (value != null) {
+                    return [...acc, { ...outputEffect, hadValue: true, name }];
+                }
             }
             return [...acc, outputEffect];
         }
