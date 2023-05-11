@@ -8,6 +8,7 @@ export type Value = string | number | boolean | {};
 
 export class Option {
     _id: string;
+    _code: string;
     _value: Value;
     _text: string;
     _description: ?string;
@@ -23,6 +24,14 @@ export class Option {
 
     get id(): string {
         return this._id;
+    }
+
+    get code(): string {
+        return this._code;
+    }
+
+    set code(value: string) {
+        this._code = value;
     }
 
     set value(value: Value) {

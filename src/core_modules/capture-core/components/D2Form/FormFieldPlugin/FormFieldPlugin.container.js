@@ -6,6 +6,31 @@ import { usePluginMessages } from './hooks/usePluginMessages';
 import { usePluginCallbacks } from './hooks/usePluginCallbacks';
 import { usePluginValues } from './hooks/usePluginValues';
 
+const attributesToOmit = ['id', 'dataElement', 'optionGroups'];
+
+const removeUnderscoreFromObjectAttributes = (obj) => {
+    const newObj = {};
+
+    for (const [key, value] of Object.entries(obj)) {
+        const modifiedKey = key.replace(/^_/, '');
+        if (!attributesToOmit.includes(modifiedKey)) {
+            if (value && typeof value === 'object') {
+                if (Array.isArray(value)) {
+                    newObj[modifiedKey] = value.map((nestedVal: any) =>
+                        removeUnderscoreFromObjectAttributes(nestedVal),
+                    ).filter(Boolean);
+                } else {
+                    newObj[modifiedKey] = removeUnderscoreFromObjectAttributes(value);
+                }
+            } else {
+                newObj[modifiedKey] = value;
+            }
+        }
+    }
+
+    return newObj;
+};
+
 export const FormFieldPlugin = (props: ContainerProps) => {
     const { pluginSource, fieldsMetadata, formId, onUpdateField, pluginContext } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
@@ -27,21 +52,29 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         if (iframe) iframe.style.height = '500px';
     }, []);
 
+    // Removing underscore from plugin attributes
+    const formattedMetadata = useMemo(() => {
+        const metadata = {};
+        for (const [pluginId, dataElement] of fieldsMetadata.entries()) {
+            const modifiedDataElement = {};
 
-    // Formatted metadata is needed to remove the underscore from the keys
-    const formattedMetadata = useMemo(() => Array.from(fieldsMetadata.entries())
-        .reduce((acc: any, [pluginId, dataElement]) => {
-            const modifiedDataElement = Object.entries(dataElement)
-                .map(([attributeKey, value]) => {
-                    const modifiedKey = attributeKey.replace(/^_/, '');
-                    if (modifiedKey === 'id') return null;
-                    return [modifiedKey, value];
-                })
-                .filter(Boolean);
+            for (const [attributeKey, value] of Object.entries(dataElement)) {
+                const modifiedKey = attributeKey.replace(/^_/, '');
 
-            acc[pluginId] = Object.fromEntries(modifiedDataElement);
-            return acc;
-        }, {}), [fieldsMetadata]);
+                // eslint-disable-next-line no-continue
+                if (attributesToOmit.includes(modifiedKey)) continue;
+
+                let modifiedValue = value;
+                if (value && typeof value === 'object') {
+                    modifiedValue = removeUnderscoreFromObjectAttributes(value);
+                }
+                modifiedDataElement[modifiedKey] = modifiedValue;
+            }
+            metadata[pluginId] = modifiedDataElement;
+        }
+        return metadata;
+    }, [fieldsMetadata]);
+
 
     return (
         <FormFieldPluginComponent

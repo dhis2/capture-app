@@ -73,6 +73,7 @@ export class OptionSetFactory {
                 return new Option((o) => {
                     o.id = cachedOption.id;
                     o.value = cachedOption.code;
+                    o.code = cachedOption.code;
                     o.text =
                         this._getTranslation(
                             cachedOption.translations,
