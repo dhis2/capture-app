@@ -35,7 +35,8 @@ Then('the event working list is displayed', () => {
 });
 
 Then('the search form is displayed', () => {
-    cy.get('[data-test="search-page-content"]')
-        .contains('Search for person in program: MNCH / PNC (Adult Woman)')
-        .should('exist');
+    cy.get('[data-test="search-page-content"]').within(() => {
+        cy.contains('Search for person in program: MNCH / PNC (Adult Woman)').should('exist');
+        cy.contains('Search by attributes').should('exist');
+    });
 });

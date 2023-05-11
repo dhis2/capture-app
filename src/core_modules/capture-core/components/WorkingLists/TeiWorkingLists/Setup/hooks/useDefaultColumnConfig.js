@@ -67,7 +67,7 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
 
 const getEventsMetaDataConfig = (programStage): Array<MetadataColumnConfig> => {
     const stageForm = programStage.stageForm;
-    const dataElements = programStage.stageForm ? [...stageForm?.getElements()] : [];
+    const dataElements = stageForm ? [...stageForm?.getElements()] : [];
     return getDataValuesMetaDataConfig(dataElements);
 };
 

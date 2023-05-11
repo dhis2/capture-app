@@ -9,6 +9,7 @@ import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
 import { useMetadataForRegistrationForm } from '../../common/TEIAndEnrollment/useMetadataForRegistrationForm';
+import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 
 export const useLifecycle = (
     selectedScopeId: string,
@@ -24,6 +25,7 @@ export const useLifecycle = (
     const searchTerms = useSelector(({ searchPage }) => searchPage.currentSearchInfo.currentSearchTerms);
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
+    const { programCategory } = useCategoryCombinations(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
@@ -51,10 +53,11 @@ export const useLifecycle = (
                     dataEntryId,
                     formValues,
                     clientValues,
+                    programCategory,
                 }),
             );
         }
-    }, [scopeType, dataEntryId, selectedScopeId, orgUnit, formValuesReadyRef, formValues, clientValues, dispatch]);
+    }, [scopeType, dataEntryId, selectedScopeId, orgUnit, formValuesReadyRef, formValues, clientValues, programCategory, dispatch]);
 
     return { teiId, ready, skipDuplicateCheck: !!teiId };
 };
