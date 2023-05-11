@@ -26,7 +26,9 @@ export const useAvailableProgramStages = (programStage: ProgramStage, teiId: str
             const eventCount = enrollment?.events
                 ?.filter(event => event.programStage === currentStage.id)
                 ?.length;
-            const isAvailableStage = currentStage.repeatable || eventCount === 0;
+            const isAvailableStage = currentStage.repeatable ||
+                (programStage.id !== currentStage.id && eventCount === 0);
+
             accStage.push({ id: currentStage.id, isAvailableStage, eventCount, currentStage });
 
             return accStage;
@@ -34,6 +36,7 @@ export const useAvailableProgramStages = (programStage: ProgramStage, teiId: str
         enrollment?.events,
         program?.programStages, programLoading,
         programStage.allowGenerateNextVisit,
+        programStage.id,
     ]);
 
     return availableProgramStages ? availableProgramStages.filter(stage => stage.isAvailableStage) : [];
