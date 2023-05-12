@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-05-05T09:00:16.914Z\n"
-"PO-Revision-Date: 2023-05-05T09:00:16.914Z\n"
+"POT-Creation-Date: 2023-05-12T08:14:06.911Z\n"
+"PO-Revision-Date: 2023-05-12T08:14:06.911Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -831,6 +831,9 @@ msgstr "Create new {{trackedEntityType}}"
 msgid "Register"
 msgstr "Register"
 
+msgid "Back"
+msgstr "Back"
+
 msgid "events"
 msgstr "events"
 
@@ -921,9 +924,6 @@ msgstr "Show all programs"
 
 msgid "Choose a program"
 msgstr "Choose a program"
-
-msgid "Back"
-msgstr "Back"
 
 msgid "Search for {{titleText}}"
 msgstr "Search for {{titleText}}"
