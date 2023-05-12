@@ -12,11 +12,8 @@ import {
 import { useCurrentTrackedEntityTypeId } from '../../hooks';
 import { ResultsPageSizeContext } from '../Pages/shared-contexts';
 import { usePreselectedProgram } from './hooks';
-import type { ContainerProps } from './SearchBox.types';
 
-export const SearchBox = ({
-    dispatchNavigateToMainPage,
-}: ContainerProps) => {
+export const SearchBox = () => {
     const dispatch = useDispatch();
     const { programId } = useLocationQuery();
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
@@ -46,7 +43,6 @@ export const SearchBox = ({
     return (
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
             <SearchBoxComponent
-                navigateToMainPage={dispatchNavigateToMainPage}
                 showInitialSearchBox={dispatchShowInitialSearchBox}
                 cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
                 navigateToRegisterTrackedEntity={dispatchNavigateToNewTrackedEntityPage}

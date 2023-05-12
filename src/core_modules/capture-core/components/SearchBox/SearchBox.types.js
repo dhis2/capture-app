@@ -18,13 +18,8 @@ export type AvailableSearchOption = {|
     +searchGroups: SearchGroups,
 |};
 
-export type ContainerProps = $ReadOnly<{|
-    dispatchNavigateToMainPage?: () => void
-|}>;
-
 export type ComponentProps = $ReadOnly<{|
     cleanSearchRelatedInfo: () => void,
-    navigateToMainPage?: () => void,
     showInitialSearchBox: () => void,
     navigateToRegisterTrackedEntity: () => void,
     trackedEntityTypeId: string,

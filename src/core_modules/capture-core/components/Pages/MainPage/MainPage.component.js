@@ -1,6 +1,7 @@
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
 import { compose } from 'redux';
+import { spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { WorkingListsType } from './WorkingListsType';
 import type { Props, PlainProps } from './mainPage.types';
@@ -10,10 +11,23 @@ import { WithoutCategorySelectedMessage } from './WithoutCategorySelectedMessage
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
+import { TemplateSelector } from '../../TemplateSelector';
 
 const getStyles = () => ({
     listContainer: {
         padding: 24,
+    },
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: spacers.dp16,
+    },
+    half: {
+        flex: 1,
+    },
+    quarter: {
+        flex: 0.4,
+        padding: `${spacers.dp12} ${spacers.dp24} ${spacers.dp24} 0`,
     },
 });
 
@@ -73,7 +87,14 @@ const MainPagePlain = ({
                         )}
                     </>
                 ) : (
-                    <SearchBox />
+                    <div className={classes.container}>
+                        <div className={classes.half}>
+                            <SearchBox />
+                        </div>
+                        <div className={classes.quarter}>
+                            <TemplateSelector />
+                        </div>
+                    </div>
                 )}
             </>
         </>

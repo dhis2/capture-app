@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { compose } from 'redux';
 import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button, IconChevronLeft24, spacers } from '@dhis2/ui';
+import { spacers } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 
@@ -16,7 +16,6 @@ import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage';
 import { searchScopes } from './SearchBox.constants';
 import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { cleanFallbackRelatedData } from './SearchBox.actions';
-import { TemplateSelector } from '../TemplateSelector';
 import { useSearchOption, useFallbackTriggered } from './hooks';
 import { SearchStatus } from './SearchStatus';
 
@@ -24,16 +23,13 @@ const getStyles = (theme: Theme) => ({
     half: {
         flex: 1,
     },
-    quarter: {
-        flex: 0.4,
-    },
     title: {
-        padding: '8px 0 0px 8px',
+        padding: `${spacers.dp8} 0 0px ${spacers.dp8}`,
         fontWeight: 500,
         marginBottom: theme.typography.pxToRem(16),
     },
     container: {
-        padding: '10px 24px 24px 24px',
+        padding: `${spacers.dp12} 0 ${spacers.dp24} ${spacers.dp24}`,
     },
     innerContainer: {
         display: 'flex',
@@ -51,14 +47,10 @@ const getStyles = (theme: Theme) => ({
         paddingTop: 50,
         paddingBottom: 50,
     },
-    backButton: {
-        marginBottom: 10,
-    },
 });
 
 const Index = ({
     showInitialSearchBox,
-    navigateToMainPage,
     cleanSearchRelatedInfo,
     classes,
     preselectedProgramId,
@@ -114,12 +106,6 @@ const Index = ({
     return (
         <>
             <div data-test="search-page-content" className={classes.container}>
-                {navigateToMainPage && (
-                    <Button dataTest="back-button" className={classes.backButton} onClick={navigateToMainPage}>
-                        <IconChevronLeft24 />
-                        {i18n.t('Back')}
-                    </Button>
-                )}
                 <div className={classes.innerContainer}>
                     <Paper className={classes.paper}>
                         <div className={classes.title}>
@@ -157,9 +143,6 @@ const Index = ({
                             </div>
                         </div>
                     </Paper>
-                    <div className={classes.quarter}>
-                        <TemplateSelector />
-                    </div>
                 </div>
             </div>
 
