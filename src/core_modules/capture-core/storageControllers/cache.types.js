@@ -8,6 +8,8 @@ type Translation = {
     value: string,
 };
 
+export type CachedAttributeValue = { attribute: string, value: any };
+
 export type CachedOptionTranslation = Translation;
 
 export type CachedOptionSetTranslation = Translation;
@@ -28,6 +30,7 @@ export type CachedTrackedEntityAttribute = {
     unique: ?boolean,
     orgunitScope: ?boolean,
     pattern: ?string,
+    attributeValues: Array<CachedAttributeValue>
 }
 
 export type CachedProgramTrackedEntityAttribute = {
@@ -63,6 +66,7 @@ export type CachedDataElement = {
     optionSet: { id: string },
     style: CachedStyle,
     url: string,
+    attributeValues: Array<CachedAttributeValue>
 };
 
 export type CachedProgramStageDataElement = {

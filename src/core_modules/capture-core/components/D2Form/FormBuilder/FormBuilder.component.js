@@ -385,6 +385,7 @@ export class FormBuilder extends React.Component<Props> {
         const { id: fieldId } = fieldMetadata;
         const { querySingleResource } = this.props;
         const validators = getValidators(fieldMetadata, querySingleResource);
+        console.log('options', options);
 
         // $FlowFixMe - Async handled in business logic
         this.commitFieldUpdate({ fieldId, validators }, value, options);

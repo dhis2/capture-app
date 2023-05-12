@@ -6,7 +6,7 @@ import { usePluginMessages } from './hooks/usePluginMessages';
 import { usePluginCallbacks } from './hooks/usePluginCallbacks';
 import { usePluginValues } from './hooks/usePluginValues';
 
-const attributesToOmit = ['id', 'dataElement', 'optionGroups'];
+const attributesToOmit = ['dataElement', 'optionGroups'];
 
 const removeUnderscoreFromObjectAttributes = (obj) => {
     const newObj = {};
@@ -55,23 +55,11 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     // Removing underscore from plugin attributes
     const formattedMetadata = useMemo(() => {
         const metadata = {};
+
         for (const [pluginId, dataElement] of fieldsMetadata.entries()) {
-            const modifiedDataElement = {};
-
-            for (const [attributeKey, value] of Object.entries(dataElement)) {
-                const modifiedKey = attributeKey.replace(/^_/, '');
-
-                // eslint-disable-next-line no-continue
-                if (attributesToOmit.includes(modifiedKey)) continue;
-
-                let modifiedValue = value;
-                if (value && typeof value === 'object') {
-                    modifiedValue = removeUnderscoreFromObjectAttributes(value);
-                }
-                modifiedDataElement[modifiedKey] = modifiedValue;
-            }
-            metadata[pluginId] = modifiedDataElement;
+            metadata[pluginId] = removeUnderscoreFromObjectAttributes(dataElement);
         }
+
         return metadata;
     }, [fieldsMetadata]);
 

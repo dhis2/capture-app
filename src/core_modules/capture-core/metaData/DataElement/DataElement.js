@@ -10,6 +10,7 @@ import type { Icon } from '../Icon/Icon';
 import { OptionSet } from '../OptionSet/OptionSet';
 import type { Unique } from './Unique';
 import { dataElementTypes } from './dataElementTypes';
+import type { CachedAttributeValue } from '../../storageControllers';
 
 // eslint-disable-next-line no-use-before-define
 export type ConvertFn = (value: any, type: $Keys<typeof dataElementTypes>, element: DataElement) => any;
@@ -35,6 +36,7 @@ export class DataElement {
     _unique: ?Unique;
     _searchable: ?boolean;
     _url: ?string;
+    _attributeValues: Array<CachedAttributeValue>
 
     constructor(initFn: ?(_this: DataElement) => void) {
         this._displayInReports = true;
@@ -160,6 +162,14 @@ export class DataElement {
 
     get url(): ?string {
         return this._url;
+    }
+
+    get attributeValues(): Array<CachedAttributeValue> {
+        return this._attributeValues;
+    }
+
+    set attributeValues(value: Array<CachedAttributeValue>) {
+        this._attributeValues = value;
     }
 
     * getPropertyNames(): Generator<string, void, void> {
