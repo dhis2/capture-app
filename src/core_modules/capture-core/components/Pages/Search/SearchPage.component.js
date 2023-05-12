@@ -37,7 +37,7 @@ const SearchPagePlain = ({ programId, orgUnitId, onNavigateToMainPage, classes }
 
         <div className={classes.container}>
             <div className={classes.half}>
-                <SearchBox />
+                <SearchBox programId={programId} />
             </div>
             <div className={classes.quarter}>
                 <TemplateSelector />

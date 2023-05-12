@@ -27,7 +27,6 @@ export type ComponentProps = $ReadOnly<{|
     minAttributesRequiredToSearch: number,
     searchableFields: Array<Object>,
     searchStatus: string,
-    error: boolean,
     ready: boolean,
 |}>;
 

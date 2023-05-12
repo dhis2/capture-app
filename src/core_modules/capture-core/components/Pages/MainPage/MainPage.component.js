@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { compose } from 'redux';
 import { spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
@@ -40,18 +40,47 @@ const useShowMainPage = ({ programId, orgUnitId, trackedEntityTypeId, displayFro
         return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
     }, [programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId]);
 
-const MainPagePlain = ({
-    MainPageStatus,
-    setShowAccessible,
+const MainPageBody = compose(
+    withErrorMessageHandler(),
+    withStyles(getStyles),
+)(({ MainPageStatus, setShowAccessible, programId, showMainPage, classes, ...passOnProps }: PlainProps) => (
+    <>
+        {showMainPage ? (
+            <>
+                {MainPageStatus === MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
+                    <WithoutOrgUnitSelectedMessage programId={programId} setShowAccessible={setShowAccessible} />
+                )}
+                {MainPageStatus === MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED && (
+                    <WithoutCategorySelectedMessage programId={programId} />
+                )}
+                {MainPageStatus === MainPageStatuses.SHOW_WORKING_LIST && (
+                    <div className={classes.listContainer} data-test={'main-page-working-list'}>
+                        <WorkingListsType programId={programId} {...passOnProps} />
+                    </div>
+                )}
+            </>
+        ) : (
+            <div className={classes.container}>
+                <div className={classes.half}>
+                    <SearchBox programId={programId} />
+                </div>
+                <div className={classes.quarter}>
+                    <TemplateSelector />
+                </div>
+            </div>
+        )}
+    </>
+));
+
+const MainPage = ({
     programId,
     orgUnitId,
     trackedEntityTypeId,
     displayFrontPageList,
     selectedTemplateId,
     selectedCategories,
-    classes,
     ...passOnProps
-}: PlainProps) => {
+}: Props) => {
     const showMainPage = useShowMainPage({
         programId,
         orgUnitId,
@@ -63,46 +92,15 @@ const MainPagePlain = ({
     return (
         <>
             <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
-            <>
-                {showMainPage ? (
-                    <>
-                        {MainPageStatus === MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
-                            <WithoutOrgUnitSelectedMessage
-                                programId={programId}
-                                setShowAccessible={setShowAccessible}
-                            />
-                        )}
-                        {MainPageStatus === MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED && (
-                            <WithoutCategorySelectedMessage programId={programId} />
-                        )}
-                        {MainPageStatus === MainPageStatuses.SHOW_WORKING_LIST && (
-                            <div className={classes.listContainer} data-test={'main-page-working-list'}>
-                                <WorkingListsType
-                                    programId={programId}
-                                    selectedTemplateId={selectedTemplateId}
-                                    orgUnitId={orgUnitId}
-                                    {...passOnProps}
-                                />
-                            </div>
-                        )}
-                    </>
-                ) : (
-                    <div className={classes.container}>
-                        <div className={classes.half}>
-                            <SearchBox />
-                        </div>
-                        <div className={classes.quarter}>
-                            <TemplateSelector />
-                        </div>
-                    </div>
-                )}
-            </>
+            <MainPageBody
+                programId={programId}
+                orgUnitId={orgUnitId}
+                selectedTemplateId={selectedTemplateId}
+                showMainPage={showMainPage}
+                {...passOnProps}
+            />
         </>
     );
 };
 
-export const MainPageComponent: ComponentType<$Diff<Props, CssClasses>> = compose(
-    withLoadingIndicator(),
-    withErrorMessageHandler(),
-    withStyles(getStyles),
-)(MainPagePlain);
+export const MainPageComponent = withLoadingIndicator()(MainPage);

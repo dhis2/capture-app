@@ -8,8 +8,7 @@ Given('you open the main page with Ngelehun and child programme context', () => 
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="search-page-content"]')
-        .contains('Create saved list')
+    cy.get('[data-test="template-selector-create-list"]')
         .click();
 });
 
@@ -19,8 +18,7 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="search-page-content"]')
-        .contains('Create saved list')
+    cy.get('[data-test="template-selector-create-list"]')
         .click();
 
     cy.get('[data-test="tei-working-lists"]')

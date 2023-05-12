@@ -11,7 +11,7 @@ import type { ComponentProps, Props } from './SearchBox.types';
 import { searchBoxStatus } from '../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchForm } from './SearchForm';
 import { TrackedEntityTypeSelector } from '../TrackedEntityTypeSelector';
-import { withErrorMessageHandler, withLoadingIndicator } from '../../HOC';
+import { withLoadingIndicator } from '../../HOC';
 import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage';
 import { searchScopes } from './SearchBox.constants';
 import { useScopeTitleText, useScopeInfo } from '../../hooks';
@@ -155,6 +155,5 @@ const Index = ({
 
 export const SearchBoxComponent: ComponentType<ComponentProps> = compose(
     withLoadingIndicator(),
-    withErrorMessageHandler(),
     withStyles(getStyles),
 )(Index);
