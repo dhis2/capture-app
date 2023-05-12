@@ -1,4 +1,5 @@
 // @flow
+import type { ProgramCategory, CategoryOption } from './CategoryOptions/CategoryOptions.types';
 
 export type ContainerProps = {|
    programId: string,
@@ -11,6 +12,8 @@ export type ContainerProps = {|
    enrollmentId: string,
    initialScheduleDate?: string,
    hideDueDate?: boolean,
+   selectedCategories?: ?{ [categoryId: string]: CategoryOption },
+   programCategory?: ProgramCategory,
    onSave: (eventServerValues: Object, uid: string) => void,
    onSaveSuccessActionType: string,
    onSaveErrorActionType: string,
@@ -32,9 +35,14 @@ export type Props = {|
    eventCountInOrgUnit: number,
    comments: Array<{value: string}>,
    hideDueDate?: boolean,
+   selectedCategories?: ?{ [categoryId: string]: CategoryOption },
+   programCategory?: ProgramCategory,
+   categoryOptionsError?: ?{[categoryId: string]: { touched: boolean, valid: boolean} },
    onSchedule: () => void,
    onCancel: () => void,
    setScheduleDate: (date: string) => void,
    onAddComment: (comment: string) => void,
+   onResetCategoryOption: (categoryId: string) => void,
+   onClickCategoryOption: (optionId: string, categoryId: string) => void,
    ...CssClasses
 |};

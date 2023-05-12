@@ -23,6 +23,8 @@ import type {
     AttributeValue,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getCachedSingleResourceFromKeyAsync } from '../../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
+import { userStores } from '../../../storageControllers/stores';
 
 
 export const actionTypes = {
@@ -53,6 +55,7 @@ export const loadViewEventDataEntry =
         dataEntryKey: string,
         enrollment?: EnrollmentData,
         attributeValues?: Array<AttributeValue>,
+        onCategoriesQuery?: ?Promise<Object>
     }) => {
         const dataEntryPropsToInclude = [
             {
@@ -79,6 +82,29 @@ export const loadViewEventDataEntry =
         ];
 
         const formId = getDataEntryKey(dataEntryId, dataEntryKey);
+        const attributeCategoryId = 'attributeCategoryOptions';
+        let attributeCategoryOptions;
+
+        if (eventContainer.event?.attributeCategoryOptions) {
+            const optionIds = eventContainer.event?.attributeCategoryOptions.split(';');
+            const categoryOptionsFromIndexedDB = await Promise.all(
+                optionIds
+                    .map(optionId =>
+                        getCachedSingleResourceFromKeyAsync(userStores.CATEGORY_OPTIONS, optionId),
+                    ),
+            );
+            attributeCategoryOptions = categoryOptionsFromIndexedDB.reduce((acc, categoryOption) => {
+                acc[`${attributeCategoryId}-${categoryOption.categories[0]}`] = categoryOption.id;
+                return acc;
+            }, {});
+
+            dataEntryPropsToInclude.push(...Object.keys(attributeCategoryOptions).map(id => ({ id, type: 'TEXT' })));
+        }
+
+        const extraProps = {
+            eventId: eventContainer.event.eventId,
+        };
+
         const { actions: dataEntryActions, dataEntryValues, formValues } = await
         loadEditDataEntryAsync(
             dataEntryId,
@@ -87,9 +113,8 @@ export const loadViewEventDataEntry =
             eventContainer.values,
             dataEntryPropsToInclude,
             foundation,
-            {
-                eventId: eventContainer.event.eventId,
-            },
+            attributeCategoryOptions,
+            extraProps,
         );
 
         // $FlowFixMe[cannot-spread-indexer] automated comment

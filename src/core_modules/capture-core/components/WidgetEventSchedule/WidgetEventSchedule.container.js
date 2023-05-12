@@ -17,6 +17,7 @@ import {
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
+import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -44,13 +45,28 @@ export const WidgetEventSchedule = ({
     const [comments, setComments] = useState([]);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
     const { eventId } = useLocationQuery();
-    const eventCountInOrgUnit = events.filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
+    const eventCountInOrgUnit = events
+        .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === scheduleDate).length;
 
+    const [selectedCategories, setSelectedCategories] = useState({});
+    const [categoryOptionsError, setCategoryOptionsError] = useState();
+    const { programCategory } = useCategoryCombinations(programId);
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
     }, [suggestedScheduleDate, scheduleDate]);
 
     const onHandleSchedule = useCallback(() => {
+        if (programCategory?.categories &&
+            Object.keys(selectedCategories).length !== programCategory?.categories?.length) {
+            const errors = programCategory.categories
+                .filter(({ id }) => !selectedCategories[id])
+                .reduce((acc, category) => {
+                    acc[category.id] = { touched: true, valid: false };
+                    return acc;
+                }, {});
+            setCategoryOptionsError(errors);
+            return;
+        }
         dispatch(requestScheduleEvent({
             scheduleDate,
             comments,
@@ -60,6 +76,7 @@ export const WidgetEventSchedule = ({
             teiId,
             enrollmentId,
             eventId,
+            categoryOptions: selectedCategories,
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
@@ -74,9 +91,11 @@ export const WidgetEventSchedule = ({
         teiId,
         enrollmentId,
         eventId,
+        selectedCategories,
         onSave,
         onSaveSuccessActionType,
         onSaveErrorActionType,
+        programCategory,
     ]);
 
     React.useEffect(() => {
@@ -100,6 +119,26 @@ export const WidgetEventSchedule = ({
         setComments([...comments, newComment]);
     };
 
+    const onClickCategoryOption = useCallback((optionId: string, categoryId: string) => {
+        setSelectedCategories(prevCategoryOptions => ({
+            ...prevCategoryOptions,
+            ...{ [categoryId]: optionId },
+        }));
+        setCategoryOptionsError(prevError => ({
+            ...prevError,
+            ...{ [categoryId]: { touched: true, valid: true } },
+        }));
+    }, [setSelectedCategories]);
+
+    const onResetCategoryOption = useCallback((categoryId: string) => {
+        const newCategoryOptions = { ...selectedCategories };
+        delete newCategoryOptions[categoryId];
+        setSelectedCategories(newCategoryOptions);
+        setCategoryOptionsError(prevError => ({
+            ...prevError,
+            ...{ [categoryId]: { touched: true, valid: false } },
+        }));
+    }, [setSelectedCategories, selectedCategories]);
 
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
@@ -123,6 +162,7 @@ export const WidgetEventSchedule = ({
             stageId={stageId}
             stageName={stage.name}
             programId={programId}
+            programCategory={programCategory}
             programName={program.name}
             scheduleDate={scheduleDate}
             displayDueDateLabel={programStageScheduleConfig.displayDueDateLabel}
@@ -134,6 +174,10 @@ export const WidgetEventSchedule = ({
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
             comments={comments}
+            selectedCategories={selectedCategories}
+            categoryOptionsError={categoryOptionsError}
+            onClickCategoryOption={onClickCategoryOption}
+            onResetCategoryOption={onResetCategoryOption}
             {...passOnProps}
         />
 

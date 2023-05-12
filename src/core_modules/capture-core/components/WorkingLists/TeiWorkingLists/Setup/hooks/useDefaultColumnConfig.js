@@ -67,7 +67,7 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
 
 const getEventsMetaDataConfig = (programStage): Array<MetadataColumnConfig> => {
     const stageForm = programStage.stageForm;
-    const sections = programStage.stageForm?.sections ? [...stageForm.sections?.values()] : [];
+    const sections = stageForm?.sections ? [...stageForm.sections?.values()] : [];
 
     return sections.reduce((acc, section) => {
         const dataElements = [...section.elements.values()];
