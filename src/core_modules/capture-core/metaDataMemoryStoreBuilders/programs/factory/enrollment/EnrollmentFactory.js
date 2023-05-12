@@ -19,6 +19,7 @@ import type { ConstructorInput } from './enrollmentFactory.types';
 import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
 import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
+import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
 
 export class EnrollmentFactory {
     static errorMessages = {
@@ -134,7 +135,7 @@ export class EnrollmentFactory {
     ) {
         // $FlowFixMe
         await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
-            if (trackedEntityAttribute?.id === 'plugin') {
+            if (trackedEntityAttribute?.type === FormFieldTypes.PLUGIN) {
                 const element = new FormFieldPluginConfig((o) => {
                     o.id = trackedEntityAttribute.id;
                     o.name = trackedEntityAttribute.name;
@@ -243,7 +244,7 @@ export class EnrollmentFactory {
                     // $FlowFixMe
                     this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
                         const attributes = formConfigSection.elements.reduce((acc, element) => {
-                            if (element.type === 'plugin') {
+                            if (element.type === FormFieldTypes.PLUGIN) {
                                 const fieldMap = element
                                     .fieldMap
                                     ?.map(field => ({
@@ -254,7 +255,6 @@ export class EnrollmentFactory {
                                 acc.push({
                                     ...element,
                                     fieldMap,
-                                    pluginSource: formConfigSection.pluginSource,
                                 });
                                 return acc;
                             }

@@ -1,7 +1,22 @@
 // @flow
 
-import type { DataElement } from '../../../metaData';
-
+type PluginFormFieldMetadata = {|
+    id: string;
+    name: string;
+    shortName: string;
+    code: string;
+    formName: string;
+    disabled: boolean;
+    compulsory: boolean;
+    description: string;
+    type: string;
+    optionSet?: { id: string, name: string, options: Array<{ id: string, name: string }> };
+    displayInForms: boolean;
+    displayInReports: boolean;
+    searchable: ?boolean;
+    url: ?string;
+    attributeValues: Array<{ [id: string]: any }>
+|}
 
 type FieldValueOptions = {|
     valid?: boolean,
@@ -9,7 +24,7 @@ type FieldValueOptions = {|
     error?: string,
 |}
 
-export type MetadataByPluginId = { [id: string]: DataElement }
+export type MetadataByPluginId = { [id: string]: PluginFormFieldMetadata }
 
 export type SetFieldValueProps = {|
     fieldId: string,
@@ -26,16 +41,16 @@ export type PluginContext = {|
 
 export type ContainerProps = {|
     pluginSource: string,
-    fieldsMetadata: Map<string, DataElement>,
+    fieldsMetadata: Map<string, PluginFormFieldMetadata>,
     pluginContext: PluginContext,
     formId: string,
-    onUpdateField: (fieldMetadata: DataElement, value: any, options?: FieldValueOptions) => void,
+    onUpdateField: (fieldMetadata: PluginFormFieldMetadata, value: any, options?: FieldValueOptions) => void,
 |}
 
 export type UsePluginCallbacksProps = {|
     configuredPluginIds: Array<string>,
     metadataByPluginId: MetadataByPluginId,
-    onUpdateField: (fieldMetadata: DataElement, value: any, options?: FieldValueOptions) => void,
+    onUpdateField: (fieldMetadata: PluginFormFieldMetadata, value: any, options?: FieldValueOptions) => void,
     pluginContext: PluginContext,
 |}
 

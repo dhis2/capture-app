@@ -19,6 +19,7 @@ import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './teiRegistrationFactory.types';
 import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
+import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
 
 export class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
@@ -98,7 +99,7 @@ export class TeiRegistrationFactory {
             // $FlowFixMe
             this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
                 const attributes = formConfigSection.elements.reduce((acc, element) => {
-                    if (element.type === 'plugin') {
+                    if (element.type === FormFieldTypes.PLUGIN) {
                         const fieldMap = element
                             .fieldMap
                             ?.map(field => ({
@@ -117,7 +118,7 @@ export class TeiRegistrationFactory {
                 }, []);
 
                 await attributes.asyncForEach(async (trackedEntityAttribute) => {
-                    if (trackedEntityAttribute?.id === 'plugin') {
+                    if (trackedEntityAttribute?.type === FormFieldTypes.PLUGIN) {
                         const element = new FormFieldPluginConfig((o) => {
                             o.id = trackedEntityAttribute.id;
                             o.name = trackedEntityAttribute.name;
