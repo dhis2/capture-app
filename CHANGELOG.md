@@ -1,3 +1,10 @@
+## [100.31.1](https://github.com/dhis2/capture-app/compare/v100.31.0...v100.31.1) (2023-05-15)
+
+
+### Bug Fixes
+
+* [DHIS2-14862] show icon for selected program inside the ScopeSelector ([#3230](https://github.com/dhis2/capture-app/issues/3230)) ([e57cd3e](https://github.com/dhis2/capture-app/commit/e57cd3eeb63731d624adfa1efae86389a0f4a541))
+
 # [100.31.0](https://github.com/dhis2/capture-app/compare/v100.30.0...v100.31.0) (2023-05-10)
 
 
