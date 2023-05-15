@@ -3,10 +3,9 @@
 import * as React from 'react';
 import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
 import { withStyles } from '@material-ui/core';
-import { Tooltip, Menu, MenuItem } from '@dhis2/ui';
+import { Tooltip, Menu, MenuItem, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withFocusSaver } from 'capture-ui';
-import { Button } from '../Buttons';
 import { TextField } from '../FormFields/New';
 import type { Note } from './notes.types';
 
