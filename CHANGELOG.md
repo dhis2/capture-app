@@ -1,3 +1,24 @@
+# [100.31.0](https://github.com/dhis2/capture-app/compare/v100.30.0...v100.31.0) (2023-05-10)
+
+
+### Features
+
+* [DHIS2-14574] store program stage working lists ([#3213](https://github.com/dhis2/capture-app/issues/3213)) ([4f5817d](https://github.com/dhis2/capture-app/commit/4f5817dc2f2104aa2f5eb5d05eef53fe66f6a752))
+
+# [100.30.0](https://github.com/dhis2/capture-app/compare/v100.29.1...v100.30.0) (2023-05-10)
+
+
+### Features
+
+* [DHIS2-14465] AOC for Tracker programs ([#3190](https://github.com/dhis2/capture-app/issues/3190)) ([f8729c4](https://github.com/dhis2/capture-app/commit/f8729c41b7ba36d079659d4c43c85be84312acdb))
+
+## [100.29.1](https://github.com/dhis2/capture-app/compare/v100.29.0...v100.29.1) (2023-04-26)
+
+
+### Bug Fixes
+
+* [DHIS2-14190] restrict which values can be assigned to option sets ([#3211](https://github.com/dhis2/capture-app/issues/3211)) ([00b8917](https://github.com/dhis2/capture-app/commit/00b89171f1af4ec1b95e5b7e9a62bac383442003))
+
 # [100.29.0](https://github.com/dhis2/capture-app/compare/v100.28.3...v100.29.0) (2023-04-17)
 
 

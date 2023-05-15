@@ -20,6 +20,7 @@ import {
 import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
+import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
 
 export const EnrollmentAddEventPageDefault = ({
     enrollment,
@@ -41,9 +42,10 @@ export const EnrollmentAddEventPageDefault = ({
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());
             const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
+            const eventData = convertEventAttributeOptions(data.events[0]);
             dispatch(
                 updateEnrollmentEventsWithoutId(uid, {
-                    ...data.events[0],
+                    ...eventData,
                     updatedAt,
                 }),
             );

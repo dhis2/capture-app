@@ -1,4 +1,7 @@
 export const TEMPLATE_SHARING_TYPE = {
-    teiList: 'trackedEntityInstanceFilter',
+    teiList: {
+        tei: 'trackedEntityInstanceFilter',
+        programStageWorkingList: 'programStageWorkingList',
+    },
     eventList: 'eventFilter',
 };
