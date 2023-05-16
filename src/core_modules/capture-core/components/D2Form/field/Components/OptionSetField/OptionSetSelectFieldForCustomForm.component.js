@@ -9,6 +9,7 @@ import {
     withCalculateMessages,
     withDisplayMessages,
     withOptionsIconElement,
+    withRulesOptionVisibilityHandler,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
@@ -16,7 +17,6 @@ import {
     withCustomElementContainer,
 } from '../internal';
 import customFormStyles from './optionSetSelectFieldForCustomForm.module.css';
-import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 

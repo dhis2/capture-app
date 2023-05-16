@@ -32,6 +32,7 @@ export { withHideCompatibility } from './HOC/withHideCompatibility';
 export { withLabel } from './HOC/withLabel';
 export { withStyledContainer } from './HOC/withStyledContainer';
 export { withOptionsIconElement } from './HOC/withOptionsIconElement';
+export { withRulesOptionVisibilityHandler } from './HOC/withRulesOptionVisibilityHandler';
 export { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 
 // OrgUnit HOCs

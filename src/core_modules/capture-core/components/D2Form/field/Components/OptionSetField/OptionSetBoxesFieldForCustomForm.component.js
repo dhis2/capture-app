@@ -7,12 +7,12 @@ import {
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
+    withRulesOptionVisibilityHandler,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
-import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 export const OptionSetBoxesFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
