@@ -1,3 +1,10 @@
+## [100.31.2](https://github.com/dhis2/capture-app/compare/v100.31.1...v100.31.2) (2023-05-16)
+
+
+### Bug Fixes
+
+* [DHIS2-11345] support newline in program rule expressions ([#3243](https://github.com/dhis2/capture-app/issues/3243)) ([eb1cc0a](https://github.com/dhis2/capture-app/commit/eb1cc0a25bfe26c24dc8b95a2d5601f33239bd1a))
+
 ## [100.31.1](https://github.com/dhis2/capture-app/compare/v100.31.0...v100.31.1) (2023-05-15)
 
 
