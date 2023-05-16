@@ -4,12 +4,11 @@ import { useState, useEffect } from 'react';
 import { MultiSelectField as MultiSelectFieldUI, MultiSelectOption } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 
-export type VirtualizedOptionConfig = {
+export type MultiSelectOptionConfig = {
     label: string,
     value: any,
     id: string,
-    iconLeft?: ?React.Node,
-    iconRight?: ?React.Node,
+    icon?: ?React.Node,
 };
 
 const styles = () => ({
@@ -25,7 +24,7 @@ type Props = {
     onSelect: (value: any) => void,
     onFocus: () => void,
     onBlur: () => void,
-    options: Array<VirtualizedOptionConfig>,
+    options: Array<MultiSelectOptionConfig>,
     value: any,
     translations: {
         filterPlaceholder: string,

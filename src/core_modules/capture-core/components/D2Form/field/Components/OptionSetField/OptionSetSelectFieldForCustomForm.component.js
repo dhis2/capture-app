@@ -8,13 +8,13 @@ import {
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
+    withOptionsIconElement,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
     withCustomElementContainer,
 } from '../internal';
-import { withOptionsIconElement } from './withOptionsIconElement';
 import customFormStyles from './optionSetSelectFieldForCustomForm.module.css';
 import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 

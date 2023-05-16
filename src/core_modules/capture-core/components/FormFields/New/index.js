@@ -31,6 +31,7 @@ export { withGotoInterface } from './HOC/withGotoInterface';
 export { withHideCompatibility } from './HOC/withHideCompatibility';
 export { withLabel } from './HOC/withLabel';
 export { withStyledContainer } from './HOC/withStyledContainer';
+export { withOptionsIconElement } from './HOC/withOptionsIconElement';
 export { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 
 // OrgUnit HOCs
