@@ -39,14 +39,28 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenat
         .click();
 });
 
-Given('you open the main page with Ngelehun and malaria focus investigation program context', () => {
-    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
-});
-
 Given('you open the main page with Ngelehun and Malaria case diagnosis context', () => {
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context', () => {
+    cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
+
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+            cy.contains('Program stage')
+                .click();
+        });
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Household investigation')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});
 
 Then('the default working list should be displayed', () => {
     const names = [
@@ -175,7 +189,7 @@ When(/^you set the first name filter to (.*)$/, (name) => {
 When('you set the WHOMCH Smoking filter to No', () => {
     cy.get('[data-test="tei-working-lists"]')
         .within(() => {
-            cy.get('[data-test="dhis2-uicore-button"]').eq(9)
+            cy.get('[data-test="more-filters"]').eq(1)
                 .click();
             cy.contains('WHOMCH Smoking')
                 .click();
@@ -429,6 +443,21 @@ When('you save the list with the name My custom list', () => {
     cy.wait('@newTrackedEntityInstanceFilters', { timeout: 30000 });
 });
 
+When('you save the list with the name Custom Program stage list', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.contains('Save current view')
+        .click();
+    cy.get('[data-test="view-name-content"]')
+        .type('Custom Program stage list');
+    cy.server();
+    cy.route('POST', '**/programStageWorkingLists**').as('newProgramStageWorkingLists');
+    cy.get('button')
+        .contains('Save')
+        .click();
+    cy.wait('@newProgramStageWorkingLists', { timeout: 30000 });
+});
+
 When('you update the list with the name My custom list', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -439,10 +468,20 @@ When('you update the list with the name My custom list', () => {
     cy.wait('@editTrackedEntityInstanceFilters', { timeout: 30000 });
 });
 
-Then('you can load the view with the name Events assigned to me', () => {
+When('you update the list with the name Custom Program stage list', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.server();
+    cy.route('PUT', '**/programStageWorkingLists/**').as('editProgramStageWorkingLists');
+    cy.contains('Update view')
+        .click();
+    cy.wait('@editProgramStageWorkingLists', { timeout: 30000 });
+});
+
+Then(/^you can load the view with the name ?(.*)/, (name) => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
-            cy.contains('Events assigned to me').click();
+            cy.contains(name).click();
         });
 });
 
@@ -459,17 +498,30 @@ When('you delete the name My custom list', () => {
     cy.wait('@deleteTrackedEntityInstanceFilters', { timeout: 30000 });
 });
 
-Then('the new custom TEI working list is created', () => {
+When('you delete the name Custom Program stage list', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.contains('Delete view')
+        .click();
+    cy.server();
+    cy.route('DELETE', '**/programStageWorkingLists/**').as('deleteProgramStageWorkingLists');
+    cy.get('button')
+        .contains('Confirm')
+        .click();
+    cy.wait('@deleteProgramStageWorkingLists', { timeout: 30000 });
+});
+
+Then(/^the new ?(.*) is created/, (name) => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
-            cy.contains('My custom list').should('exist');
+            cy.contains(name).should('exist');
         });
 });
 
-Then('the custom TEI is deleted', () => {
+Then(/^the ?(.*) is deleted/, (name) => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
-            cy.contains('My custom list').should('not.exist');
+            cy.contains(name).should('not.exist');
         });
 });
 
@@ -648,4 +700,44 @@ Then('you see the selected option in the scheduledAt filter', () => {
     cy.get('[data-test="tei-working-lists"]')
         .contains('Appointment date: Today')
         .should('exist');
+});
+
+Then('you are redirect to the default templete', () => {
+    cy.url().should('include', '-default');
+});
+
+Then('the TEI working list initial configuration was kept', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Enrollment status: Active')
+        .should('exist');
+    cy.get('[data-test="tei-working-lists"]')
+        .find('[data-test="more-filters"]')
+        .should('have.length', 2);
+});
+
+And('you change the org unit', () => {
+    cy.get('[data-test="org-unit-selector-container"]')
+        .click();
+    cy.get('[data-test="capture-ui-input"]')
+        .type('Njandama MCHP');
+    cy.contains('Njandama MCHP')
+        .click();
+});
+
+Then('the working list configuration was kept', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Event status: Completed')
+        .should('exist');
+});
+
+Then('the working list configuration was kept', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Event status: Completed')
+        .should('exist');
+});
+
+Then('the program stage custom working list filters are loaded', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .find('[data-test="more-filters"]')
+        .should('have.length', 2);
 });

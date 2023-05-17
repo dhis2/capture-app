@@ -1,3 +1,31 @@
+## [100.31.2](https://github.com/dhis2/capture-app/compare/v100.31.1...v100.31.2) (2023-05-16)
+
+
+### Bug Fixes
+
+* [DHIS2-11345] support newline in program rule expressions ([#3243](https://github.com/dhis2/capture-app/issues/3243)) ([eb1cc0a](https://github.com/dhis2/capture-app/commit/eb1cc0a25bfe26c24dc8b95a2d5601f33239bd1a))
+
+## [100.31.1](https://github.com/dhis2/capture-app/compare/v100.31.0...v100.31.1) (2023-05-15)
+
+
+### Bug Fixes
+
+* [DHIS2-14862] show icon for selected program inside the ScopeSelector ([#3230](https://github.com/dhis2/capture-app/issues/3230)) ([e57cd3e](https://github.com/dhis2/capture-app/commit/e57cd3eeb63731d624adfa1efae86389a0f4a541))
+
+# [100.31.0](https://github.com/dhis2/capture-app/compare/v100.30.0...v100.31.0) (2023-05-10)
+
+
+### Features
+
+* [DHIS2-14574] store program stage working lists ([#3213](https://github.com/dhis2/capture-app/issues/3213)) ([4f5817d](https://github.com/dhis2/capture-app/commit/4f5817dc2f2104aa2f5eb5d05eef53fe66f6a752))
+
+# [100.30.0](https://github.com/dhis2/capture-app/compare/v100.29.1...v100.30.0) (2023-05-10)
+
+
+### Features
+
+* [DHIS2-14465] AOC for Tracker programs ([#3190](https://github.com/dhis2/capture-app/issues/3190)) ([f8729c4](https://github.com/dhis2/capture-app/commit/f8729c41b7ba36d079659d4c43c85be84312acdb))
+
 ## [100.29.1](https://github.com/dhis2/capture-app/compare/v100.29.0...v100.29.1) (2023-04-26)
 
 

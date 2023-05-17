@@ -2,6 +2,7 @@
 import { convertClientToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
+import { convertEventAttributeOptions } from '../convertEventAttributeOptions';
 
 export function convertMainEventClientToServer(event: Object) {
     const mapClientKeyToServerKey = {
@@ -13,7 +14,7 @@ export function convertMainEventClientToServer(event: Object) {
         enrollmentId: 'enrollment',
         assignee: 'assignedUser',
     };
-
+    event = convertEventAttributeOptions(event);
     // eslint-disable-next-line complexity
     return convertMainEvent(event, mapClientKeyToServerKey, (key, value) => {
         let convertedValue;

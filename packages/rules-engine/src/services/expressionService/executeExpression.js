@@ -11,7 +11,7 @@ import type { ExecuteExpressionInput, ErrorHandler, ExpressionSet, DhisFunctions
  */
 function evaluate(code) {
     // eslint-disable-next-line no-new-func
-    const func = new Function(`"use strict";return ${code}`);
+    const func = new Function(`"use strict";return ${code.replace(/\n/g, '\\n')}`);
     return func();
 }
 
@@ -155,6 +155,24 @@ const internalExecuteExpression = (
     return evaluate(expressionToEvaluate);
 };
 
+const removeNewLinesFromNonStrings = (expression, expressionModuloStrings) => {
+    const fragments = expressionModuloStrings.split(/\n+/g);
+    const result = fragments.reduce(({ reducedExpression, remainder }, fragment) => {
+        remainder = remainder.replace(/^\n*/, '');
+        reducedExpression += remainder.substring(0, fragment.length);
+
+        return {
+            reducedExpression,
+            remainder: remainder.substring(fragment.length),
+        };
+    }, { reducedExpression: '', remainder: expression });
+
+    return {
+        expression: result.reducedExpression,
+        expressionModuloStrings: fragments.join(''),
+    };
+};
+
 export const executeExpression = ({
     expression,
     dhisFunctions,
@@ -170,7 +188,7 @@ export const executeExpression = ({
         const applicableDhisFunctions = Object.entries(dhisFunctions).map(([key, value]) => ({ ...value, name: key }));
         answer = internalExecuteExpression(
             { dhisFunctionsObject: dhisFunctions, applicableDhisFunctions },
-            { expression: expressionWithInjectedVariableValues, expressionModuloStrings },
+            removeNewLinesFromNonStrings(expressionWithInjectedVariableValues, expressionModuloStrings),
             onError,
         );
     } catch (error) {

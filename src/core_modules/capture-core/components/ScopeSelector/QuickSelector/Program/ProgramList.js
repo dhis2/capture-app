@@ -4,7 +4,8 @@ import { MenuDivider, MenuItem, Button, colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { FiltrableMenuItems } from '../FiltrableMenuItems';
-import type { Program } from '../../../../metaData';
+import type { Program, Icon } from '../../../../metaData';
+import { OptionLabel } from '../../OptionLabel';
 
 const styles = () => ({
     filterWarning: {
@@ -21,7 +22,7 @@ type Props = {
     programOptions: Array<{
         value: string,
         label: string,
-        icon?: React.Node,
+        icon?: Icon,
     }>,
     programsArray: Array<Program>,
     onChange: ({ value: string }) => void,
@@ -46,7 +47,7 @@ const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgU
                 programOptions.map(option => (
                     <MenuItem
                         key={option.value}
-                        label={<div className={classes.label}>{option.label}</div>}
+                        label={<OptionLabel icon={option.icon} label={option.label} />}
                         value={option.value}
                         onClick={onChange}
                     />
