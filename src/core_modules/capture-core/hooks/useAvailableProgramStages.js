@@ -20,24 +20,27 @@ export const useAvailableProgramStages = (programStage: ProgramStage, teiId: str
             programError,
         }));
     }
-    const availableProgramStages = useMemo(() => programStage.allowGenerateNextVisit
-    && !programLoading && program?.programStages
-        ?.reduce((accStage, currentStage) => {
-            const eventCount = enrollment?.events
-                ?.filter(event => event.programStage === currentStage.id)
-                ?.length;
-            const isAvailableStage = currentStage.repeatable ||
-                (programStage.id !== currentStage.id && eventCount === 0);
+    const availableProgramStages = useMemo(
+        () =>
+            programStage.allowGenerateNextVisit &&
+            !programLoading &&
+            program?.programStages?.map((currentStage) => {
+                const eventCount = enrollment?.events
+                    ?.filter(event => event.programStage === currentStage.id)
+                    ?.length;
+                const isAvailableStage = currentStage.repeatable ||
+                    (programStage.id !== currentStage.id && eventCount === 0);
 
-            accStage.push({ id: currentStage.id, isAvailableStage, eventCount, currentStage });
-
-            return accStage;
-        }, []), [
-        enrollment?.events,
-        program?.programStages, programLoading,
-        programStage.allowGenerateNextVisit,
-        programStage.id,
-    ]);
+                return { id: currentStage.id, isAvailableStage, eventCount, currentStage };
+            }, []),
+        [
+            enrollment?.events,
+            program?.programStages,
+            programLoading,
+            programStage.allowGenerateNextVisit,
+            programStage.id,
+        ],
+    );
 
     return availableProgramStages ? availableProgramStages.filter(stage => stage.isAvailableStage) : [];
 };
