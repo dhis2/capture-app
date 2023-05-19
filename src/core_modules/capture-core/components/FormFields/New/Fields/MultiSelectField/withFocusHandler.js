@@ -17,9 +17,8 @@ type Props = {
 
 export const withFocusHandler = () => (InnerCompnent: React.ComponentType<any>) =>
     class FocusHandlerHOC extends React.Component<Props> {
-        handleBlur = (event: SyntheticEvent<HTMLInputElement>) => {
+        handleRemoveFocus = () => {
             this.props.onRemoveFocus();
-            this.props.onBlur && this.props.onBlur(event);
         }
 
         handleFocus = () => {
@@ -27,10 +26,15 @@ export const withFocusHandler = () => (InnerCompnent: React.ComponentType<any>) 
             this.props.onFocus && this.props.onFocus();
         }
 
+        handleSelect = (value: any) => {
+            this.props.onBlur && this.props.onBlur(value);
+        };
+
         render() {
             const { onSetFocus, onRemoveFocus, onFocus, inFocus, onBlur, classes, ...passOnProps } = this.props;
             const { inputWrapperFocused, inputWrapperUnfocused, ...passOnClasses } = classes;
             const inputWrapper = inFocus ? inputWrapperFocused : inputWrapperUnfocused;
+
             return (
                 <div
                     className={classNames(defaultClasses.inputWrapper, inputWrapper)}
@@ -38,7 +42,8 @@ export const withFocusHandler = () => (InnerCompnent: React.ComponentType<any>) 
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerCompnent
                         onFocus={this.handleFocus}
-                        onBlur={this.handleBlur}
+                        onBlur={this.handleRemoveFocus}
+                        onSelect={this.handleSelect}
                         {...passOnProps}
                         classes={passOnClasses}
                     />

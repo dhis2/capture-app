@@ -1,6 +1,6 @@
 // @flow
 import {
-    VirtualizedMultiSelectField,
+    MultiSelectField,
     withSelectMultiTranslations,
     withGotoInterface,
     withHideCompatibility,
@@ -32,7 +32,7 @@ export const MultiOptionSetSelectFieldForCustomForm = withGotoInterface()(
                                     withCustomElementContainer(getContainerClass)(
                                         withOptionsIconElement()(
                                             withRulesOptionVisibilityHandler()(
-                                                VirtualizedMultiSelectField,
+                                                MultiSelectField,
                                             ),
                                         ),
                                     ),
