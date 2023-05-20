@@ -13,26 +13,7 @@ export const storeTrackedEntityAttributes = (ids: Array<string>) => {
         },
     };
 
-    const convert = (response) => {
-        if (!response.trackedEntityAttributes) {
-            return false;
-        }
-        return response && response.trackedEntityAttributes.map((attribute) => {
-            const { attributeValues, ...rest } = attribute;
-
-            if (!attributeValues) {
-                return rest;
-            }
-
-            return {
-                ...rest,
-                attributeValues: attributeValues && attributeValues.reduce((acc, attributeValue) => {
-                    acc[attributeValue.attribute.id] = attributeValue.value;
-                    return acc;
-                }, {}),
-            };
-        });
-    };
+    const convert = response => response.trackedEntityAttributes;
 
     return quickStore({
         query,

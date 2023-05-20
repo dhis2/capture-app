@@ -15,6 +15,11 @@ type Props = {|
     selectedScopeId: string,
 |}
 
+export const FieldElementObjectTypes = Object.freeze({
+    TRACKED_ENTITY_ATTRIBUTE: 'TrackedEntityAttribute',
+    ATTRIBUTE: 'Attribute',
+});
+
 export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
     const { program } = useProgramFromIndexedDB(selectedScopeId, { enabled: !!selectedScopeId });
     const { locale } = useUserLocale();

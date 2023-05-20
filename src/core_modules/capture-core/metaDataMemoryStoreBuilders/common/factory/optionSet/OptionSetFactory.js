@@ -74,6 +74,7 @@ export class OptionSetFactory {
                     o.id = cachedOption.id;
                     o.value = cachedOption.code;
                     o.code = cachedOption.code;
+                    o.attributeValues = cachedOption.attributeValues;
                     o.text =
                         this._getTranslation(
                             cachedOption.translations,
@@ -90,7 +91,14 @@ export class OptionSetFactory {
             o.optionIds = new Map(group.options.map(option => [option, option]));
         })]));
 
-        const optionSet = new OptionSet(cachedOptionSet.id, options, optionGroups, dataElement, convertOptionSetValue);
+        const optionSet = new OptionSet(
+            cachedOptionSet.id,
+            options,
+            optionGroups,
+            dataElement,
+            convertOptionSetValue,
+            cachedOptionSet.attributeValues,
+        );
         optionSet.inputType = OptionSetFactory.getRenderType(renderType) ||
             (renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null);
         return optionSet;

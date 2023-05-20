@@ -193,7 +193,7 @@ export class DataElement {
         if (this.optionSet) {
             const currentOptions = this.optionSet.options.map(option => option.clone());
             // $FlowFixMe[incompatible-use] automated comment
-            const convertedOptionSet = new OptionSet(this.optionSet.id, currentOptions, null, this, onConvert);
+            const convertedOptionSet = new OptionSet(this.optionSet.id, currentOptions, null, this, onConvert, this.optionSet.attributeValues);
             // $FlowFixMe[incompatible-use] automated comment
             convertedOptionSet.inputType = this.optionSet.inputType;
             // $FlowFixMe[incompatible-use] automated comment

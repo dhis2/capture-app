@@ -5,31 +5,7 @@ import type { ContainerProps } from './FormFieldPlugin.types';
 import { usePluginMessages } from './hooks/usePluginMessages';
 import { usePluginCallbacks } from './hooks/usePluginCallbacks';
 import { usePluginValues } from './hooks/usePluginValues';
-
-const attributesToOmit = ['dataElement', 'optionGroups'];
-
-const removeUnderscoreFromObjectAttributes = (obj) => {
-    const newObj = {};
-
-    for (const [key, value] of Object.entries(obj)) {
-        const modifiedKey = key.replace(/^_/, '');
-        if (!attributesToOmit.includes(modifiedKey)) {
-            if (value && typeof value === 'object') {
-                if (Array.isArray(value)) {
-                    newObj[modifiedKey] = value.map((nestedVal: any) =>
-                        removeUnderscoreFromObjectAttributes(nestedVal),
-                    ).filter(Boolean);
-                } else {
-                    newObj[modifiedKey] = removeUnderscoreFromObjectAttributes(value);
-                }
-            } else {
-                newObj[modifiedKey] = value;
-            }
-        }
-    }
-
-    return newObj;
-};
+import { formatPluginConfig } from './formatPluginConfig';
 
 export const FormFieldPlugin = (props: ContainerProps) => {
     const { pluginSource, fieldsMetadata, formId, onUpdateField, pluginContext } = props;
@@ -52,17 +28,14 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         if (iframe) iframe.style.height = '500px';
     }, []);
 
-    // Removing underscore from plugin attributes
+    // Remove ids from plugin metadata before passing to plugin
     const formattedMetadata = useMemo(() => {
-        const metadata = {};
-
-        for (const [pluginId, dataElement] of fieldsMetadata.entries()) {
-            metadata[pluginId] = removeUnderscoreFromObjectAttributes(dataElement);
-        }
-
-        return metadata;
+        const metadata = [...fieldsMetadata.entries()];
+        return metadata.reduce((acc, [pluginId, pluginMetadata]) => {
+            const formattedPluginMetadata = formatPluginConfig(pluginMetadata, { keysToOmit: ['id'] });
+            return { ...acc, [pluginId]: formattedPluginMetadata };
+        }, {});
     }, [fieldsMetadata]);
-
 
     return (
         <FormFieldPluginComponent

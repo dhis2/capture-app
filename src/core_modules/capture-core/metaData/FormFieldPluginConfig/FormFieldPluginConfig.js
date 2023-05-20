@@ -4,13 +4,13 @@
 /* eslint-disable no-restricted-syntax */
 
 import isFunction from 'd2-utilizr/lib/isFunction';
-import { DataElement } from '../DataElement';
+import type { PluginFormFieldMetadata } from '../../components/D2Form/FormFieldPlugin';
 
 export class FormFieldPluginConfig {
     _id: string;
     _name: string;
     _pluginSource: string;
-    _fields: Map<string, DataElement>;
+    _fields: Map<string, PluginFormFieldMetadata>;
 
     constructor(initFn: ?(_this: FormFieldPluginConfig) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -32,11 +32,11 @@ export class FormFieldPluginConfig {
         this._name = value;
     }
 
-    get fields(): Map<string, DataElement> {
+    get fields(): Map<string, PluginFormFieldMetadata> {
         return this._fields;
     }
 
-    set fields(value: Map<string, DataElement>) {
+    set fields(value: Map<string, PluginFormFieldMetadata>) {
         this._fields = value;
     }
 
@@ -48,7 +48,7 @@ export class FormFieldPluginConfig {
         this._pluginSource = value;
     }
 
-    addField(idFromPlugin: string, field: DataElement) {
+    addField(idFromPlugin: string, field: PluginFormFieldMetadata) {
         if (!this.fields.has(idFromPlugin)) {
             this.fields.set(idFromPlugin, field);
         }

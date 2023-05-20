@@ -1,21 +1,26 @@
 // @flow
 
-type PluginFormFieldMetadata = {|
-    id: string;
+export type PluginFormFieldMetadata = {|
     name: string;
+    id: string,
     shortName: string;
     code: string;
     formName: string;
-    disabled: boolean;
     compulsory: boolean;
     description: string;
     type: string;
-    optionSet?: { id: string, name: string, options: Array<{ id: string, name: string }> };
-    displayInForms: boolean;
-    displayInReports: boolean;
+    optionSet?: {
+        code: string,
+        name: string,
+        options: Array<{
+            code: string,
+            name: string,
+            attributeValues?: { [pluginId: string]: any }
+        }>
+    };
     searchable: ?boolean;
     url: ?string;
-    attributeValues: Array<{ [id: string]: any }>
+    attributeValues?: { [pluginId: string]: any }
 |}
 
 type FieldValueOptions = {|

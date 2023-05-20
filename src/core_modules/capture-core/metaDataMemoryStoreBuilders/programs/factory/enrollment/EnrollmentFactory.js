@@ -20,6 +20,9 @@ import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunc
 import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
+import {
+    formatPluginConfig,
+} from '../../../../components/D2Form/FormFieldPlugin/formatPluginConfig';
 
 export class EnrollmentFactory {
     static errorMessages = {
@@ -143,9 +146,22 @@ export class EnrollmentFactory {
                     o.fields = new Map();
                 });
 
+                const attributes = trackedEntityAttribute.fieldMap
+                    .filter(attributeField => attributeField.objectType === 'Attribute')
+                    .reduce((acc, attribute) => {
+                        acc[attribute.IdFromApp] = attribute;
+                        return acc;
+                    }, {});
+
                 await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
-                    const dataElement = await this.dataElementFactory.build(field);
-                    dataElement && element.addField(field.IdFromPlugin, dataElement);
+                    if (field.objectType) {
+                        const fieldElement = await this.dataElementFactory.build(field);
+                        if (!fieldElement) return;
+
+                        const fieldMetadata = formatPluginConfig(fieldElement, { attributes });
+
+                        element.addField(field.IdFromPlugin, fieldMetadata);
+                    }
                 });
 
                 element && section.addElement(element);

@@ -4,7 +4,14 @@ import { FormFieldTypes } from '../../../../D2Form/FormFieldPlugin/FormFieldPlug
 
 export type RegistrationFormMetadata = ?(TeiRegistration | Enrollment)
 
-type ConfigElement = ?({|
+type FieldElementObjectTypes = 'TrackedEntityAttribute' | 'Attribute'
+
+type DataElementConfigElement = {|
+    id: string,
+    type: typeof FormFieldTypes.DATA_ELEMENT,
+|}
+
+type PluginConfigElement = {|
     id: string,
     type: typeof FormFieldTypes.PLUGIN,
     name: string,
@@ -12,11 +19,11 @@ type ConfigElement = ?({|
     fieldMap: Array<{|
         IdFromApp: string,
         IdFromPlugin: string,
+        objectType: FieldElementObjectTypes,
     |}>
-|} | {|
-    id: string,
-    dataElement: 'dataElement',
-|})
+|}
+
+export type ConfigElement = PluginConfigElement | DataElementConfigElement;
 
 export type DataEntryFormConfig = {|
     [key: string]: Array<{|

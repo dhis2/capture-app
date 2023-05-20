@@ -20,6 +20,10 @@ import type { ConstructorInput } from './teiRegistrationFactory.types';
 import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
+import { formatPluginConfig } from '../../../../components/D2Form/FormFieldPlugin/formatPluginConfig';
+import {
+    FieldElementObjectTypes,
+} from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 export class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
@@ -98,7 +102,7 @@ export class TeiRegistrationFactory {
 
             // $FlowFixMe
             this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
-                const attributes = formConfigSection.elements.reduce((acc, element) => {
+                const fieldElements = formConfigSection.elements.reduce((acc, element) => {
                     if (element.type === FormFieldTypes.PLUGIN) {
                         const fieldMap = element
                             .fieldMap
@@ -110,14 +114,14 @@ export class TeiRegistrationFactory {
                         acc.push({ ...element, fieldMap });
                         return acc;
                     }
-                    const attribute = trackedEntityAttributeDictionary[element.id];
-                    if (attribute) {
-                        acc.push(attribute);
+                    const cachedElement = trackedEntityAttributeDictionary[element.id];
+                    if (cachedElement) {
+                        acc.push(cachedElement);
                     }
                     return acc;
                 }, []);
 
-                await attributes.asyncForEach(async (trackedEntityAttribute) => {
+                await fieldElements.asyncForEach(async (trackedEntityAttribute) => {
                     if (trackedEntityAttribute?.type === FormFieldTypes.PLUGIN) {
                         const element = new FormFieldPluginConfig((o) => {
                             o.id = trackedEntityAttribute.id;
@@ -126,9 +130,21 @@ export class TeiRegistrationFactory {
                             o.fields = new Map();
                         });
 
+                        const attributes = trackedEntityAttribute.fieldMap
+                            .filter(attributeField => attributeField.objectType === 'Attribute')
+                            .reduce((acc, attribute) => {
+                                acc[attribute.IdFromApp] = attribute;
+                                return acc;
+                            }, {});
+
                         await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
-                            const dataElement = await this.dataElementFactory.build(field);
-                            dataElement && element.addField(field.IdFromPlugin, dataElement);
+                            if (field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+                                const dataElement = await this.dataElementFactory.build(field);
+                                if (!dataElement) return;
+
+                                const fieldMetadata = formatPluginConfig(dataElement, { attributes });
+                                element.addField(field.IdFromPlugin, fieldMetadata);
+                            }
                         });
 
                         element && section.addElement(element);

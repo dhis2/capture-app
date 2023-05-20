@@ -8,7 +8,7 @@ type Translation = {
     value: string,
 };
 
-export type CachedAttributeValue = { attribute: string, value: any };
+export type CachedAttributeValue = { attribute: { id: string }, value: any };
 
 export type CachedOptionTranslation = Translation;
 
@@ -216,6 +216,7 @@ export type CachedOption = {
     displayName: string,
     style?: ?CachedStyle,
     translations: Array<CachedOptionTranslation>,
+    attributeValues: Array<CachedAttributeValue>,
 };
 
 export type CachedOptionGroup = {
@@ -232,6 +233,7 @@ export type CachedOptionSet = {
     options: Array<CachedOption>,
     optionGroups: Array<CachedOptionGroup>,
     translations: Array<CachedOptionSetTranslation>,
+    attributeValues: Array<CachedAttributeValue>,
 };
 
 export type CachedRelationshipConstraint = {
