@@ -45,7 +45,7 @@ const FindExistingStep = ({ currentStep }) => {
     return (
         <>
             <Slash />
-            <span>{'Search'}</span>
+            <span>{i18n.t('Search')}</span>
         </>
     );
 };

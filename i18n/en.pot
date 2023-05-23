@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-05-02T13:40:48.661Z\n"
-"PO-Revision-Date: 2023-05-02T13:40:48.661Z\n"
+"POT-Creation-Date: 2023-05-23T11:35:43.493Z\n"
+"PO-Revision-Date: 2023-05-23T11:35:43.493Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1328,6 +1328,12 @@ msgstr "Something went wrong while loading relationships. Please try again later
 
 msgid "TEI's Relationships"
 msgstr "TEI's Relationships"
+
+msgid "Event based relationship"
+msgstr "Event based relationship"
+
+msgid "Event based relationships are not supported yet"
+msgstr "Event based relationships are not supported yet"
 
 msgid "TET name"
 msgstr "TET name"

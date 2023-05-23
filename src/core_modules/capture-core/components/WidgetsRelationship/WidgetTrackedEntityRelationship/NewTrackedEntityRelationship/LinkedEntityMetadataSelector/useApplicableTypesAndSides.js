@@ -124,7 +124,7 @@ export const useApplicableTypesAndSides = (
                         programId: program?.id,
                         trackedEntityTypeId: trackedEntityType.id,
                         targetSide: TARGET_SIDES.TO,
-                        name: fromToName,
+                        name: fromToName ?? displayName,
                     }],
                 };
             }
