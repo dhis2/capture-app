@@ -1,7 +1,7 @@
 // @flow
 import { PluginConfigConvertFns } from './formatPluginConfig.const';
 import type { PluginFormFieldMetadata } from '../FormFieldPlugin.types';
-import { DataElement } from '../../../../metaData';
+import type { DataElement } from '../../../../metaData';
 
 type FormattedAttributes = {| [key: string]: any |};
 
@@ -17,40 +17,35 @@ export const formatPluginConfig = <TConfigReturn = PluginFormFieldMetadata>(
         keysToOmit = ['dataElement', 'optionGroups'],
     }: FormatOptions = {},
 ): TConfigReturn => {
-    const removeUnderscoreFromObjectAttributes = (obj) => {
-        const newObj = {};
-
-        for (const [key, value] of Object.entries(obj)) {
+    const removeUnderscoreFromObjectAttributes = obj => Object.entries(obj)
+        .reduce((acc, [key, value]) => {
             const modifiedKey = key.replace(/^_/, '');
 
-            // Skip any keys that should be omitted
             if (keysToOmit.includes(modifiedKey)) {
-                continue;
+                return acc;
             }
 
-            // If we encounter a key that has a conversion function, apply it
             if (PluginConfigConvertFns[modifiedKey]) {
                 const transformed = PluginConfigConvertFns[modifiedKey](value, attributes);
                 if (transformed) {
-                    newObj[transformed.key] = transformed.value;
+                    acc[transformed.key] = transformed.value;
                 }
-                continue;
+                return acc;
             }
 
             // Recursively process nested objects and arrays
             if (value && typeof value === 'object') {
                 if (Array.isArray(value)) {
-                    newObj[modifiedKey] = value.map(removeUnderscoreFromObjectAttributes).filter(Boolean);
+                    acc[modifiedKey] = value.map(removeUnderscoreFromObjectAttributes).filter(Boolean);
                 } else {
-                    newObj[modifiedKey] = removeUnderscoreFromObjectAttributes(value);
+                    acc[modifiedKey] = removeUnderscoreFromObjectAttributes(value);
                 }
             } else {
-                newObj[modifiedKey] = value;
+                acc[modifiedKey] = value;
             }
-        }
 
-        return newObj;
-    };
+            return acc;
+        }, {});
 
     // $FlowFixMe
     return removeUnderscoreFromObjectAttributes(dataElement);

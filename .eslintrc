@@ -34,7 +34,6 @@
     },
     "rules": {
         "indent": [2, 4],
-        "no-continue": "off",
         "max-len": [
             1,
             120,
