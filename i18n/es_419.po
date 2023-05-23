@@ -1,14 +1,15 @@
 # 
 # Translators:
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2022
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-11-29T10:05:06.420Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
-"Last-Translator: Jaime Bosque <jaime.bosque@dhis2.org>, 2022\n"
-"Language-Team: Spanish (Latin America) (https://www.transifex.com/hisp-uio/teams/100509/es_419/)\n"
+"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2023\n"
+"Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,10 +17,10 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Elige una o más fechas..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Elija una fecha..."
 
 msgid "Today"
 msgstr "Hoy"
@@ -28,6 +29,9 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"Una posible razón de esto es que el navegador o el modo (por ejemplo, el "
+"modo de privacidad) no son compatibles. Un administrador deberá ver el "
+"registro de auditoría para obtener más detalles."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -35,90 +39,95 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Abrió otra versión de la aplicación Capture en el mismo dominio. "
+"Actualmente, la aplicación Capture solo admite la ejecución de una versión "
+"al mismo tiempo (en el mismo dominio). Actualice esta página si desea volver"
+" a utilizar esta versión, pero tenga en cuenta que esto cerrará otras "
+"versiones."
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Columns to show in table"
 
 msgid "Column"
-msgstr ""
+msgstr "Columna"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Este valor está siendo validado"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "La actualización del campo asíncrono falló"
 
 msgid "A value is required"
-msgstr ""
+msgstr "Se requiere un valor"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Proporcione un número válido"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Proporcione un número entero válido"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Proporcione un número entero positivo"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Proporcione cero o un número entero positivo"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Proporcione un número entero negativo"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Proporcione una fecha válida"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "No se permite una fecha en el futuro"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Proporcione una fecha y hora válidas"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "Proporcione una hora válida"
 
 msgid "Please provide a valid percentage"
 msgstr ""
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Proporcione una URL válida"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Por favor ingrese una dirección de correo electrónico válida"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "Proporcione una edad válida"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "Por favor provea un número de teléfono válido"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "Proporcione una unidad organizativa válida"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "Proporcione coordenadas válidas"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "Este valor ya existe"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "\"Desde\" no puede ser mayor que \"Hasta\""
 
 msgid "Checking..."
-msgstr ""
+msgstr "Verificando..."
 
 msgid "Area"
-msgstr ""
+msgstr "Área"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Coordenadas"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Inscripción"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "No se permite una fecha futura"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -127,19 +136,21 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Cambios no guardados"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"Al salir de esta página, se descartarán los cambios realizados en este "
+"evento."
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "Si, descartar"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "No, quedarme aquí."
 
 msgid "validation failed"
-msgstr ""
+msgstr "La validación ha fallado"
 
 msgid "Errors"
 msgstr "Errores"
@@ -151,7 +162,7 @@ msgid "Indicators"
 msgstr "Indicadores"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Advertencias"
 
 msgid "search group result could not be retrieved"
 msgstr ""
@@ -160,70 +171,70 @@ msgid "Complete"
 msgstr "Completar"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Advertencias encontradas"
 
 msgid "Abort"
-msgstr ""
+msgstr "Abortar"
 
 msgid "Back to form"
-msgstr ""
+msgstr "Volver al formulario"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "Guardar de todos modos"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "Errores de validación y advertencias"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "Errores de validación"
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "Advertencias de validación"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "Algunas operaciones aún se están ejecutando. Espere por favor.."
 
 msgid "Operations running"
-msgstr ""
+msgstr "Operaciones en ejecución"
 
 msgid "Sort"
-msgstr ""
+msgstr "Clasificar"
 
 msgid "No events to display"
-msgstr ""
+msgstr "No hay eventos para mostrar"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Los datos de la lista sin conexión no están presentes"
 
 msgid "Close"
 msgstr "Cerrar"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "Por favor seleccione el usuario"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Buscar usuario"
 
 msgid "Me"
-msgstr ""
+msgstr "A mí"
 
 msgid "Anyone"
-msgstr ""
+msgstr "Quien sea"
 
 msgid "None"
 msgstr "Ninguno"
 
 msgid "Select user"
-msgstr ""
+msgstr "Seleccionar usuario"
 
 msgid "to"
-msgstr ""
+msgstr "a"
 
 msgid "From"
-msgstr ""
+msgstr "De"
 
 msgid "To"
-msgstr ""
+msgstr "A"
 
 msgid "This week"
 msgstr "Esta semana"
@@ -241,7 +252,7 @@ msgid "Last month"
 msgstr "Mes anterior"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "Últimos 3 meses"
 
 msgid "Custom range"
 msgstr ""
@@ -250,16 +261,16 @@ msgid "Max"
 msgstr "Máx"
 
 msgid "Min"
-msgstr ""
+msgstr "Mínimo"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Contiene texto"
 
 msgid "Yes"
 msgstr "Sí"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/aaaa"
 
 msgid "Years"
 msgstr "Años"
@@ -271,25 +282,25 @@ msgid "Days"
 msgstr "Días"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Subiendo archivo"
 
 msgid "selected"
-msgstr ""
+msgstr "seleccionado"
 
 msgid "Delete"
 msgstr "Borrar"
 
 msgid "Select file"
-msgstr ""
+msgstr "Seleccione Archivo"
 
 msgid "No"
 msgstr "No"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Cargando imagen"
 
 msgid "Select image"
-msgstr ""
+msgstr "Seleccionar imagen"
 
 msgid "Search"
 msgstr "Buscar"
@@ -298,31 +309,33 @@ msgid "Clear"
 msgstr "Limpiar"
 
 msgid "No results"
-msgstr ""
+msgstr "No hay resultados"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "empieza a escribir para buscar"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "no se pudieron recuperar las sugerencias"
 
 msgid "No items to display"
-msgstr ""
+msgstr "No hay artículos para mostrar"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "No se pudo obtener la unidad de organización"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "El programa no existe"
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
+"El programa seleccionado no es válido para la unidad de registro "
+"seleccionada"
 
 msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Nuevo"
 
 msgid "Start again"
 msgstr ""
@@ -367,28 +380,28 @@ msgid "No programs available."
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "En línea"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Sincronizando"
 
 msgid "Add comment"
-msgstr ""
+msgstr "Agregar comentario"
 
 msgid "You dont have access to write comments"
 msgstr ""
 
 msgid "Write comment"
-msgstr ""
+msgstr "Escribir comentario"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Evento completo"
 
 msgid "Basic info"
-msgstr ""
+msgstr " "
 
 msgid "Status"
 msgstr "Estado"
@@ -397,10 +410,10 @@ msgid "Comments"
 msgstr "Comentarios"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr ""
+msgstr "Agregue o cancele un comentario antes de guardar el evento."
 
 msgid "No write access"
-msgstr ""
+msgstr "Sin acceso de escritura"
 
 msgid "Save"
 msgstr "Guardar"
@@ -430,25 +443,25 @@ msgid "Update"
 msgstr "Actualizar"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
+msgstr "{{fromDate}} a {{toDate}}"
 
 msgid "after or equal to {{date}}"
-msgstr ""
+msgstr "después o igual a {{fecha}}"
 
 msgid "before or equal to {{date}}"
-msgstr ""
+msgstr "antes o igual a {{fecha}}"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "Mayor qué o igual a"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "Menos que o igual a"
 
 msgid "More filters"
-msgstr ""
+msgstr "Más filtros"
 
 msgid "Select columns"
-msgstr ""
+msgstr "Seleccionar columnas"
 
 msgid "Download as JSON"
 msgstr ""
@@ -466,7 +479,7 @@ msgid "Download data..."
 msgstr ""
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Filas por página"
 
 msgid "Update view"
 msgstr ""
@@ -508,7 +521,7 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
-msgstr ""
+msgstr "Eventos registrados"
 
 msgid "Active"
 msgstr "Activo"
@@ -520,19 +533,19 @@ msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Guardar y agregar otro"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Guardar y Salir"
 
 msgid "Finish"
 msgstr "Acabar"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Cambiar a vista de formulario"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Cambiar a vista de fila"
 
 msgid "New {{TET}}"
 msgstr ""
@@ -546,32 +559,35 @@ msgid ""
 msgstr ""
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Usuario asignado"
 
 msgid "Relationships"
 msgstr "Relaciones"
 
 msgid "Assignee"
-msgstr ""
+msgstr "Asignado a"
 
 msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "en"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Este no es un programa de eventos o los metadatos están dañados. Ver "
+"registro para más detalles."
 
 msgid "This event"
-msgstr ""
+msgstr "Este evento"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
+"La relación de tipo {{relationshipTypeName}} con {{entityName}} ya existe"
 
 msgid "Assigned to"
 msgstr ""
@@ -580,24 +596,26 @@ msgid "New event"
 msgstr "Evento nuevo"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "Nueva relación de eventos"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "Agregar relación al evento."
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "Volver al evento sin guardar la relación"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
+"Si deja esta página, se descartarán las selecciones que hizo para una nueva "
+"relación."
 
 msgid "events added"
-msgstr ""
+msgstr "eventos añadidos"
 
 msgid "No events added"
-msgstr ""
+msgstr "No se añadieron eventos"
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
@@ -616,31 +634,38 @@ msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"Existe un duplicado (pero hubo algunos errores, consulte el registro para "
+"obtener más detalles)"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"Un elemento con este {{attributeName}} ya está registrado, pero no tienes "
+"acceso a él"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "Ya has registrado este {{attributeName}}"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
+"Un {{trackedEntityTypeName}} con este {{attributeName}} ya está registrado"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Mostrar {{trackedEntityTypeName}} registrado"
 
 msgid "Registered person"
-msgstr ""
+msgstr "persona registrada"
 
 msgid "Link"
 msgstr ""
 
 msgid "Metadata error. see log for details"
 msgstr ""
+"Error de metadatos. Un administrador deberá ver el registro de auditoría "
+"para más detalles"
 
 msgid "Review duplicates"
 msgstr ""
@@ -717,7 +742,7 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "Comentarios"
 
 msgid "You dont have access to delete this relationship"
 msgstr ""
