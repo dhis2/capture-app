@@ -32,7 +32,7 @@ export const useAvailableProgramStages = (programStage: ProgramStage, teiId: str
                     (programStage.id !== currentStage.id && eventCount === 0);
 
                 return { id: currentStage.id, isAvailableStage, eventCount, currentStage };
-            }, []),
+            }),
         [
             enrollment?.events,
             program?.programStages,
