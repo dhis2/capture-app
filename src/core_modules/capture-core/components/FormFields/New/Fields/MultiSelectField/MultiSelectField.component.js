@@ -48,7 +48,8 @@ const MultiSelectFieldComponentPlain = (props: Props) => {
             selected={selected}
             filterable
             filterPlaceholder={translations.filterPlaceholder}
-            noMatchText={translations.noMatchText}>
+            noMatchText={translations.noMatchText}
+        >
             {options.map(option => (
                 <MultiSelectOption key={option.id} label={option.label} value={option.value} />
             ))}

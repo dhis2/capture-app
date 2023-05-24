@@ -2,4 +2,4 @@
 export { DataEntry } from './DataEntry.container';
 export { dataEntryActionTypes, TEI_MODAL_STATE, setTeiModalError, cleanTeiModal } from './dataEntry.actions';
 export { updateTeiEpic, updateTeiSucceededEpic, updateTeiFailedEpic } from './dataEntry.epics';
-export { getTeiDisplayName, getMultiTextValue } from './helpers';
+export { getTeiDisplayName, getMultiTextValue, isNotValidOptionSet } from './helpers';

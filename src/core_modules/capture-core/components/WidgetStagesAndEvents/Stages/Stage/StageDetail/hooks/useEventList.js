@@ -15,7 +15,8 @@ import {
     getValueByKeyFromEvent,
     groupRecordsByType,
 } from './helpers';
-import { SORT_DIRECTION } from './constants';
+import { SORT_DIRECTION, MULIT_TEXT_WITH_NO_OPTIONS_SET } from './constants';
+import { isNotValidOptionSet } from '../../../../../../utils/isNotValidOptionSet';
 
 const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'comments' }];
 const basedFieldTypes = [
@@ -112,8 +113,12 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
 const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, formFoundation: Object) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
-            const { id, name, type } = currDataElement;
+            const { id, name, type, optionSet } = currDataElement;
             if (!acc.find(item => item.id === id)) {
+                if (isNotValidOptionSet(type, optionSet)) {
+                    log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ currDataElement }));
+                    return acc;
+                }
                 acc.push({ id, header: name, type, sortDirection: SORT_DIRECTION.DEFAULT });
             }
             return acc;

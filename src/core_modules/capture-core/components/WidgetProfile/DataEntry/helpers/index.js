@@ -15,3 +15,4 @@ export {
 export { getTeiDisplayName } from './getTeiDisplayName';
 export { GEOMETRY, getFeatureType, getDataElement, getLabel } from './geometry';
 export { getMultiTextValue } from './getMultiTextValue';
+export { isNotValidOptionSet } from './isNotValidOptionSet';
