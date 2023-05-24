@@ -1,3 +1,10 @@
+## [100.31.4](https://github.com/dhis2/capture-app/compare/v100.31.3...v100.31.4) (2023-05-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13884] remove padding caused by hidden sections ([#3242](https://github.com/dhis2/capture-app/issues/3242)) ([073c650](https://github.com/dhis2/capture-app/commit/073c650eb52a85a0ba65fc541d260e463de23de2))
+
 ## [100.31.3](https://github.com/dhis2/capture-app/compare/v100.31.2...v100.31.3) (2023-05-23)
 
 
