@@ -105,7 +105,7 @@ msgid "Please provide a valid time"
 msgstr "Proporcione una hora válida"
 
 msgid "Please provide an integer between 0 and 100"
-msgstr ""
+msgstr "Proporcione un número entero entre 0 y 100"
 
 msgid "Please provide a valid url"
 msgstr "Proporcione un enlace válido."
