@@ -1,18 +1,10 @@
 // @flow
-import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
+import React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { D2SectionContainer } from './D2Section.container';
 import type { Props, PropsForPureComponent } from './D2Form.types';
 import { type Section } from '../../metaData';
-
-export const styles = () => ({
-    containerCustomForm: {
-        paddingTop: 10,
-        paddingBottom: 10,
-    },
-});
 
 class D2Form extends React.PureComponent<PropsForPureComponent> {
     name: string;
@@ -95,32 +87,27 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
             key={section.id}
             innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
             sectionMetaData={section}
-            customForm={section.customForm}
             validationStrategy={this.props.formFoundation.validationStrategy}
             formId={this.getFormId()}
             formBuilderId={this.getFormBuilderId(section.id)}
             sectionId={section.id}
+            applyCustomFormClass={false}
             {...passOnProps}
         />
     )
-    renderVertical = (section: Section, passOnProps: any, classes: Object) => (
-        <div
-            data-test="d2-form-component"
-            className={section.customForm ? classes.containerCustomForm : ''}
+
+    renderVertical = (section: Section, passOnProps: any) => (
+        <D2SectionContainer
             key={section.id}
-        >
-            <D2SectionContainer
-                innerRef={(sectionInstance) => {
-                    this.setSectionInstance(sectionInstance, section.id);
-                }}
-                sectionMetaData={section}
-                validationStrategy={this.props.formFoundation.validationStrategy}
-                formId={this.getFormId()}
-                formBuilderId={this.getFormBuilderId(section.id)}
-                sectionId={section.id}
-                {...passOnProps}
-            />
-        </div>
+            innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
+            sectionMetaData={section}
+            validationStrategy={this.props.formFoundation.validationStrategy}
+            formId={this.getFormId()}
+            formBuilderId={this.getFormBuilderId(section.id)}
+            sectionId={section.id}
+            applyCustomFormClass={!!section.customForm}
+            {...passOnProps}
+        />
     )
 
     render() {
@@ -133,7 +120,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         } = this.props;
         const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(entry => entry[1]);
 
-        const sections = metaDataSectionsAsArray.map(section => (passOnProps.formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps, classes)));
+        const sections = metaDataSectionsAsArray.map(section => (passOnProps.formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps)));
 
         return (
             <>
@@ -157,7 +144,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
     }
 }
 
-const D2FormWithRef = (props: Props) => {
+export const D2FormComponent = (props: Props) => {
     const { formRef, ...passOnProps } = props;
 
     const handleRef = (instance) => {
@@ -173,5 +160,3 @@ const D2FormWithRef = (props: Props) => {
         />
     );
 };
-
-export const D2FormComponent: ComponentType<Props> = withStyles(styles)(D2FormWithRef);
