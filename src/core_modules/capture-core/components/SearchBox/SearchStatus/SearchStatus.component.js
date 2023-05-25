@@ -58,7 +58,7 @@ export const SearchStatusPlain = ({
                 <ModalActions>
                     <ButtonStrip end>
                         <Button type="button" onClick={navigateToRegisterTrackedEntity}>
-                            {i18n.t(`Register a ${trackedEntityName}`)}
+                            {i18n.t(`Create new ${trackedEntityName}`)}
                         </Button>
                         <Button
                             disabled={searchStatus === searchBoxStatus.LOADING}
