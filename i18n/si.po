@@ -19,10 +19,10 @@ msgid "Choose one or more dates..."
 msgstr ""
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "දිනය තෝරන්න"
 
 msgid "Today"
-msgstr ""
+msgstr "අද"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -100,13 +100,13 @@ msgid "Please provide valid coordinates"
 msgstr ""
 
 msgid "This value already exists"
-msgstr ""
+msgstr "මෙම අගය දැනටමත් පවතී"
 
 msgid "\"From\" cannot be greater than \"To\""
 msgstr ""
 
 msgid "Checking..."
-msgstr ""
+msgstr "පිරික්සමින්..."
 
 msgid "Area"
 msgstr ""
@@ -133,7 +133,7 @@ msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "ඔව්, ඉවතලන්න"
 
 msgid "No, stay here"
 msgstr "නැත. මෙතන රැඳෙන්"
@@ -187,7 +187,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "පෙළ ගස්වන්න"
 
 msgid "No events to display"
 msgstr ""
@@ -196,7 +196,7 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "වසන්න"
 
 msgid "Please select the user"
 msgstr ""
@@ -205,10 +205,10 @@ msgid "Search for user"
 msgstr ""
 
 msgid "Me"
-msgstr ""
+msgstr "මම"
 
 msgid "Anyone"
-msgstr ""
+msgstr "ඕනෑම කෙනෙක්"
 
 msgid "None"
 msgstr ""
@@ -232,7 +232,7 @@ msgid "This month"
 msgstr ""
 
 msgid "This Year"
-msgstr ""
+msgstr "මෙම වසර"
 
 msgid "Last week"
 msgstr ""
@@ -247,16 +247,16 @@ msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr ""
+msgstr "උපරිම"
 
 msgid "Min"
-msgstr ""
+msgstr "අවම"
 
 msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
+msgstr "ඔව්"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -283,7 +283,7 @@ msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr ""
+msgstr "නැත"
 
 msgid "Uploading image"
 msgstr ""
@@ -292,7 +292,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "සොයන්න"
 
 msgid "Clear"
 msgstr ""
@@ -322,7 +322,7 @@ msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "නව"
 
 msgid "Start again"
 msgstr ""
