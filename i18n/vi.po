@@ -2,16 +2,16 @@
 # Translators:
 # phil_dhis2, 2022
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2022
-# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022\n"
-"Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
+"Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -45,23 +45,35 @@ msgstr ""
 " Vui lòng làm mới trang này nếu bạn muốn sử dụng lại phiên bản này, nhưng "
 "lưu ý rằng điều này sẽ đóng các phiên bản khác."
 
-msgid "Organisation unit"
-msgstr "Đơn vị"
+msgid "View {{programName}} dashboard"
+msgstr ""
 
-msgid "Date of enrollment"
-msgstr "Ngày đăng ký"
+msgid "View dashboard"
+msgstr "Xem bảng điều khiển"
 
-msgid "Program name"
-msgstr "Tên chương trình"
+msgid "View active enrollment"
+msgstr "Xem đăng ký đang hoạt động"
 
-msgid "Last updated"
-msgstr "Lần cập nhật cuối"
+msgid "Re-enroll"
+msgstr "Đăng ký lại"
+
+msgid "in"
+msgstr "trong"
 
 msgid "Enrolled"
 msgstr "Đã đăng ký"
 
 msgid "Previously enrolled"
 msgstr "Đã đăng ký trước đây"
+
+msgid "Organisation unit"
+msgstr "Đơn vị"
+
+msgid "Date of enrollment"
+msgstr "Ngày đăng ký"
+
+msgid "Last updated"
+msgstr "Lần cập nhật cuối"
 
 msgid "This value is validating"
 msgstr "Giá trị này đang xác thực"
@@ -137,6 +149,9 @@ msgstr "Tọa độ"
 
 msgid "Enrollment"
 msgstr "Đăng ký"
+
+msgid "Please select {{categoryName}}"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr "Ngày tương lai không được phép"
@@ -280,9 +295,6 @@ msgstr "không có"
 msgid "enrollment"
 msgstr "đăng ký"
 
-msgid "in"
-msgstr "trong"
-
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 "Đăng ký chương trình bằng cách chọn một chương trình từ thanh trên cùng."
@@ -315,10 +327,6 @@ msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
 msgid "Registered person"
 msgstr "Người đã đăng ký"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Rời khỏi trang ngày sẽ hủy các thay đổi bạn đã thực hiện cho sự kiện này."
-
 msgid "validation failed"
 msgstr "xác thực không thành công"
 
@@ -345,6 +353,10 @@ msgstr "Không"
 
 msgid "Yes, create new event"
 msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Rời khỏi trang ngày sẽ hủy các thay đổi bạn đã thực hiện cho sự kiện này."
 
 msgid "Warnings found"
 msgstr "Cảnh báo đã tìm thấy"
@@ -602,7 +614,8 @@ msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
 msgid "Enrollment Dashboard"
@@ -641,7 +654,19 @@ msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
 msgid "Choose an enrollment to view the dashboard."
+msgstr ""
+
+msgid "There are no active enrollments."
+msgstr ""
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid "No access to program owner."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -706,7 +731,7 @@ msgstr "Lịch biểu"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more events in this program"
+msgid "You can’t add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -718,8 +743,8 @@ msgstr ""
 msgid "Program Stages could not be loaded"
 msgstr ""
 
-msgid "stage"
-msgstr ""
+msgid "Stage"
+msgstr "Giai Đoạn Chương Trình"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -756,9 +781,6 @@ msgstr "Chọn {{missingCategories}} để bắt đầu báo cáo"
 
 msgid "Save as new"
 msgstr ""
-
-msgid "View dashboard"
-msgstr "Xem bảng điều khiển"
 
 msgid "View enrollment"
 msgstr ""
@@ -889,12 +911,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr "Chọn một loại để bắt đầu tìm kiếm"
 
-msgid "View active enrollment"
-msgstr "Xem đăng ký đang hoạt động"
-
-msgid "Re-enroll"
-msgstr "Đăng ký lại"
-
 msgid "all programs"
 msgstr ""
 
@@ -917,7 +933,15 @@ msgstr "Tạo mới"
 msgid "Saved lists in this program"
 msgstr ""
 
-msgid "Create custom working list"
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
 msgstr ""
 
 msgid "events"
@@ -981,38 +1005,38 @@ msgstr ""
 msgid "Add relationship"
 msgstr "Thêm Quan Hệ"
 
-msgid "Selected registering unit"
-msgstr "Đơn vị đăng ký đã chọn"
+msgid "No results found for "
+msgstr ""
 
-msgid "Start Again"
-msgstr "Khởi Đầu Lại"
+msgid "Registering unit"
+msgstr "Đơn Vị đăng ký"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Bạn có chắc không? Tất cả dữ liệu chưa được lưu sẽ bị mất."
+msgid "Choose a registering unit"
+msgstr ""
 
-msgid "Accept"
-msgstr "Chấp nhận"
-
-msgid "Registering Organisation Unit"
-msgstr "Đơn Vị Đăng Ký"
-
-msgid "Select"
-msgstr "Chọn"
+msgid "Clear selection"
+msgstr ""
 
 msgid "No programs available."
 msgstr "Không có chương trình"
 
-msgid "Selected program"
-msgstr "Chương trình đã chọn"
+msgid "Search for a program"
+msgstr ""
 
-msgid "Select program"
-msgstr "Chọn Chương Trình"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr ""
 
-msgid "Selected"
-msgstr "Đã chọn"
+msgid "Show all programs"
+msgstr ""
+
+msgid "Choose a program"
+msgstr ""
 
 msgid "Results found"
 msgstr "Kết quả tìm thấy"
+
+msgid "Selected program"
+msgstr "Chương trình đã chọn"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Tìm kiếm {{uniqueAttrName}}"
@@ -1026,14 +1050,30 @@ msgstr ""
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
-msgid "Clear selections"
-msgstr "Xóa các lựa chọn"
-
 msgid "To work with the selected program,"
 msgstr "Để làm việc với chương trình đã chọn,"
 
 msgid "open the Tracker Capture app"
 msgstr "mở ứng dụng Tracker Capture"
+
+msgid "This program is protected"
+msgstr "Chương trình này đã được bảo vệ"
+
+msgid "Reason to check for enrollments"
+msgstr ""
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+
+msgid "Check for enrollments"
+msgstr ""
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
 
 msgid "Save comment"
 msgstr "Lưu chú thích"
@@ -1082,9 +1122,6 @@ msgstr "Ngày ghi vào"
 msgid "Incident date"
 msgstr "Ngày đến"
 
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -1095,6 +1132,9 @@ msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1259,9 +1299,6 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Registering unit"
-msgstr "Đơn Vị đăng ký"
-
 msgid "{{ totalEvents }} events"
 msgstr ""
 
@@ -1295,6 +1332,12 @@ msgstr "Tải xuống dữ liệu ..."
 msgid "an error occurred loading working lists"
 msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
 
+msgid "Registration Date"
+msgstr "Ngày đăng ký"
+
+msgid "Inactive"
+msgstr "Không kích hoạt"
+
 msgid "Enrollment status"
 msgstr "Trạng thái đăng ký"
 
@@ -1304,14 +1347,11 @@ msgstr "Đã gán cho"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Registration Date"
-msgstr "Ngày đăng ký"
-
-msgid "Inactive"
-msgstr "Không kích hoạt"
-
 msgid "Working list could not be updated"
 msgstr "Không thể cập nhật danh sách làm việc"
+
+msgid "an error occurred loading the working lists"
+msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""

@@ -6,10 +6,16 @@ import type { ProgramStage, TrackerProgram } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewEnrollment } from './open.actions';
-import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer, getReportDateValidatorContainers } from '../fieldValidators';
+import {
+    getEnrollmentDateValidatorContainer,
+    getIncidentDateValidatorContainer,
+    getCategoryOptionsValidatorContainers,
+    getReportDateValidatorContainers,
+} from '../fieldValidators';
 import { convertGeometryOut } from '../../converters';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import { addFormData } from '../../../D2Form/actions/form.actions';
+import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 
 const itemId = 'newEnrollment';
 
@@ -48,6 +54,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     formValues,
     clientValues,
     firstStage,
+    programCategory,
 }: {
     program: TrackerProgram,
     orgUnit: OrgUnit,
@@ -57,6 +64,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     formValues: { [key: string]: any },
     clientValues: { [key: string]: any },
     firstStage?: ?ProgramStage,
+    programCategory?: ProgramCategory,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
@@ -83,6 +91,13 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         });
     }
 
+    if (programCategory && programCategory.categories) {
+        dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
+            id: `attributeCategoryOptions-${category.id}`,
+            type: 'TEXT',
+            validatorContainers: getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
+        })));
+    }
     const dataEntryActions =
             loadNewDataEntry(
                 dataEntryId,

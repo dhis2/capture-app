@@ -17,6 +17,7 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import { FEATURETYPE } from '../../../../constants';
 import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../utils/routing';
 import { getCurrentEventValuesFromStage } from '../../../DataEntries/Enrollment/actions/enrollment.actionBatchs';
+import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
@@ -63,6 +64,7 @@ const deriveEvents = ({
     redirectToEnrollmentEventNew,
     redirectToStageId,
     stageDetails,
+    attributeCategoryOptions,
 }) => {
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate (enrolledAt)
@@ -103,7 +105,10 @@ const deriveEvents = ({
             const dateToUseInActiveStatus =
             reportDateToUseInActiveStatus === 'enrolledAt' ? enrolledAt : sanitizedOccurredAt;
             const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrolledAt : sanitizedOccurredAt;
-
+            const eventAttributeCategoryOptions = {};
+            if (attributeCategoryOptions) {
+                eventAttributeCategoryOptions.attributeCategoryOptions = convertCategoryOptionsToServer(attributeCategoryOptions);
+            }
             const eventInfo =
               openAfterEnrollment
                   ?
@@ -123,6 +128,7 @@ const deriveEvents = ({
 
             return {
                 ...eventInfo,
+                ...eventAttributeCategoryOptions,
                 programStage,
                 program: programId,
                 orgUnit: orgUnitId,
@@ -176,14 +182,23 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
         map((action) => {
             const formId = 'newPageDataEntryId-newEnrollment';
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
-            const { dataStore, userDataStore } = store.value.useNewDashboard;
+            const { dataStore, userDataStore, temp } = store.value.useNewDashboard;
+            const fieldsValue = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
             const { occurredAt, enrolledAt, geometry, stageComplete, stageOccurredAt, stageGeometry } =
                 dataEntriesFieldsValue[formId] || {};
+            const attributeCategoryOptionsId = 'attributeCategoryOptions';
+            const attributeCategoryOptions = Object.keys(fieldsValue)
+                .filter(key => key.startsWith(attributeCategoryOptionsId))
+                .reduce((acc, key) => {
+                    const categoryId = key.split('-')[1];
+                    acc[categoryId] = fieldsValue[key];
+                    return acc;
+                }, {});
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
             const values = formsValues[formId] || {};
             const stageWithOpenAfterEnrollment = getStageWithOpenAfterEnrollment(stages);
             const redirectToEnrollmentEventNew =
-            shouldUseNewDashboard(userDataStore, dataStore, programId) && stageWithOpenAfterEnrollment !== undefined;
+            shouldUseNewDashboard(userDataStore, dataStore, temp, programId) && stageWithOpenAfterEnrollment !== undefined;
 
             const { formFoundation, teiId: trackedEntity, firstStage, uid } = action.payload;
             const { attributeValues, currentEventValues } = getCurrentEventValuesFromStage(values, firstStage);
@@ -197,6 +212,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 stageGeometry: standardGeoJson(stageGeometry),
             };
 
+
             const events = deriveEvents({
                 stages,
                 enrolledAt,
@@ -206,6 +222,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 redirectToEnrollmentEventNew,
                 redirectToStageId: stageWithOpenAfterEnrollment?.id,
                 stageDetails,
+                attributeCategoryOptions,
             });
 
             return saveNewTrackedEntityInstanceWithEnrollment({

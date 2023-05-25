@@ -6,7 +6,9 @@ import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } 
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ useNewDashboard }) => ({
+    newDashboardConfig: useNewDashboard,
+});
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateDataEntryField: (

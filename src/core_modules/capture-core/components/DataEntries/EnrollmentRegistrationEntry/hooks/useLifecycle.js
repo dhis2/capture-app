@@ -10,6 +10,7 @@ import { useRegistrationFormInfoForSelectedScope } from '../../common/useRegistr
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
 import { useBuildFirstStageRegistration } from '../../../DataEntryDhis2Helpers/FirstStageRegistration/useBuildFirstStageRegistration';
+import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 
 export const useLifecycle = (
     selectedScopeId: string,
@@ -26,6 +27,7 @@ export const useLifecycle = (
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
+    const { programCategory } = useCategoryCombinations(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
@@ -53,6 +55,7 @@ export const useLifecycle = (
                     dataEntryId,
                     formValues,
                     clientValues,
+                    programCategory,
                     firstStage: firstStageMetaData?.stage,
                 }),
             );
@@ -65,6 +68,7 @@ export const useLifecycle = (
         formValuesReadyRef,
         formValues,
         clientValues,
+        programCategory,
         firstStageMetaData,
         dispatch,
     ]);

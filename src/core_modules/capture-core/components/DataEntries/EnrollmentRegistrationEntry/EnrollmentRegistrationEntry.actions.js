@@ -6,9 +6,20 @@ export const enrollmentRegistrationEntryActionTypes = {
 };
 
 export const startNewEnrollmentDataEntryInitialisation = ({
-    selectedOrgUnit, selectedScopeId, dataEntryId, formValues, clientValues, firstStage,
+    selectedOrgUnit,
+    selectedScopeId,
+    dataEntryId,
+    formValues,
+    clientValues,
+    programCategory,
+    firstStage,
 }: Object) =>
     actionCreator(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START)({
-        selectedOrgUnit, selectedScopeId, dataEntryId, formValues, clientValues, firstStage,
+        selectedOrgUnit,
+        selectedScopeId,
+        dataEntryId,
+        formValues,
+        clientValues,
+        programCategory,
+        firstStage,
     });
-

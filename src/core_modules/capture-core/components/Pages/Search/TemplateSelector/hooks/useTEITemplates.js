@@ -1,13 +1,12 @@
 // @flow
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
-export const useTEIFilters = (programId: string) => {
-    const [TEIFilters, setTEIFilters] = useState([]);
+export const useTEITemplates = (programId: string) => {
     const { error, loading, data, refetch } = useDataQuery(
         useMemo(
             () => ({
-                filters: {
+                templates: {
                     resource: 'trackedEntityInstanceFilters',
                     params: ({ variables }) => ({
                         filter: `program.id:eq:${variables.programId}`,
@@ -21,16 +20,12 @@ export const useTEIFilters = (programId: string) => {
     );
 
     useEffect(() => {
-        data?.filters?.trackedEntityInstanceFilters && setTEIFilters(data.filters.trackedEntityInstanceFilters);
-    }, [data]);
-
-    useEffect(() => {
         refetch({ variables: { programId } });
     }, [refetch, programId]);
 
     return {
         error,
         loading,
-        TEIFilters,
+        TEITemplates: data?.templates?.trackedEntityInstanceFilters ? data.templates.trackedEntityInstanceFilters : [],
     };
 };
