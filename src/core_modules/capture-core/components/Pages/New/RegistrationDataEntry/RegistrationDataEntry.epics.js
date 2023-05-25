@@ -183,9 +183,8 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
             const formId = 'newPageDataEntryId-newEnrollment';
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
             const { dataStore, userDataStore, temp } = store.value.useNewDashboard;
-            const fieldsValue = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
-            const { occurredAt, enrolledAt, geometry, stageComplete, stageOccurredAt, stageGeometry } =
-                dataEntriesFieldsValue[formId] || {};
+            const fieldsValue = dataEntriesFieldsValue[formId] || {};
+            const { occurredAt, enrolledAt, geometry, stageComplete, stageOccurredAt, stageGeometry } = fieldsValue;
             const attributeCategoryOptionsId = 'attributeCategoryOptions';
             const attributeCategoryOptions = Object.keys(fieldsValue)
                 .filter(key => key.startsWith(attributeCategoryOptionsId))

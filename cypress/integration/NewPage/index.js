@@ -502,6 +502,13 @@ And('you fill the Child programme registration form with a first name with value
         .blur();
 });
 
+And('you fill in the birth report date', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(7)
+        .type('2023-01-01')
+        .blur();
+});
+
 And('you are in the WNCH PNC program registration page', () => {
     cy.visit('/#/new?programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
 });

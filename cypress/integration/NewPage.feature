@@ -169,6 +169,7 @@ Feature: User creates a new entries from the registration page
   Scenario: New person in Tracker Program > Submitting the form shows a list with duplicates
     Given you are in Child programme registration page
     When you fill the Child programme registration form with a first name with value that has duplicates
+    And you fill in the birth report date
     And you click the save person submit button
     And you see the possible duplicates modal
     When you click the next page button
