@@ -256,7 +256,7 @@ msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "සුරකින්න"
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
@@ -374,25 +374,25 @@ msgid "From"
 msgstr ""
 
 msgid "To"
-msgstr ""
+msgstr "වෙත"
 
 msgid "This week"
-msgstr ""
+msgstr "මෙම සතිය"
 
 msgid "This month"
-msgstr ""
+msgstr "මෙම මාසය"
 
 msgid "This Year"
 msgstr "මෙම වසර"
 
 msgid "Last week"
-msgstr ""
+msgstr "පසුගිය සතිය"
 
 msgid "Last month"
-msgstr ""
+msgstr "පසුගිය මාසය"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "පසුගිය මාස 3"
 
 msgid "Custom range"
 msgstr ""
@@ -413,13 +413,13 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "අවුරුදු"
 
 msgid "Months"
-msgstr ""
+msgstr "මාස"
 
 msgid "Days"
-msgstr ""
+msgstr "දින"
 
 msgid "Uploading file"
 msgstr ""
@@ -1178,7 +1178,7 @@ msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "දිනය"
 
 msgid "Time"
 msgstr ""
