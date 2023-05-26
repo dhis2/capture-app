@@ -29,5 +29,6 @@ export type Props = $ReadOnly<{|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     stickyFilters?: StickyFilters,
+    programStageId?: string,
     children: React$Node,
 |}>;

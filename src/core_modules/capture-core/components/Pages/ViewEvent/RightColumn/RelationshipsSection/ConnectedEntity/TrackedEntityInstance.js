@@ -15,10 +15,10 @@ type Props = {
 
 export const TrackedEntityInstance = ({ name, id, orgUnitId, linkProgramId }: Props) => {
     const { baseUrl } = useConfig();
-    const { dataStore, userDataStore } = useSelector(({ useNewDashboard }) => useNewDashboard);
+    const { dataStore, userDataStore, temp } = useSelector(({ useNewDashboard }) => useNewDashboard);
 
     const getUrl = useCallback(() => {
-        if (linkProgramId && shouldUseNewDashboard(userDataStore, dataStore, linkProgramId)) {
+        if (linkProgramId && shouldUseNewDashboard(userDataStore, dataStore, temp, linkProgramId)) {
             return `/#/enrollment?${buildUrlQueryString({ teiId: id, programId: linkProgramId, orgUnitId })}`;
         }
         const trackerBaseUrl = buildUrl(baseUrl, systemSettingsStore.get().trackerAppRelativePath, '/#/dashboard?');
@@ -32,6 +32,7 @@ export const TrackedEntityInstance = ({ name, id, orgUnitId, linkProgramId }: Pr
         linkProgramId,
         dataStore,
         userDataStore,
+        temp,
     ]);
 
     return (

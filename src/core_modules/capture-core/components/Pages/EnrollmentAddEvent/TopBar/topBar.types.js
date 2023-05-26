@@ -1,4 +1,5 @@
 // @flow
+import type { Icon } from '../../../../metaData';
 
 export type Props = {|
     programId: string,
@@ -7,6 +8,7 @@ export type Props = {|
     teiDisplayName?: string,
     trackedEntityName?: string,
     stageName?: string,
+    stageIcon?: Icon,
     eventDateLabel?: string,
     enrollmentsAsOptions?: Array<Object>,
     onSetOrgUnitId: (orgUnitId: string) => void,

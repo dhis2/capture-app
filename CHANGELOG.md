@@ -1,3 +1,59 @@
+## [100.31.5](https://github.com/dhis2/capture-app/compare/v100.31.4...v100.31.5) (2023-05-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6324fe1](https://github.com/dhis2/capture-app/commit/6324fe1197c2509c8efb818fd6671d96e8839537))
+
+## [100.31.4](https://github.com/dhis2/capture-app/compare/v100.31.3...v100.31.4) (2023-05-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13884] remove padding caused by hidden sections ([#3242](https://github.com/dhis2/capture-app/issues/3242)) ([073c650](https://github.com/dhis2/capture-app/commit/073c650eb52a85a0ba65fc541d260e463de23de2))
+
+## [100.31.3](https://github.com/dhis2/capture-app/compare/v100.31.2...v100.31.3) (2023-05-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9305b5a](https://github.com/dhis2/capture-app/commit/9305b5a3f593e9dfff7daebfa3111093daf61932))
+
+## [100.31.2](https://github.com/dhis2/capture-app/compare/v100.31.1...v100.31.2) (2023-05-16)
+
+
+### Bug Fixes
+
+* [DHIS2-11345] support newline in program rule expressions ([#3243](https://github.com/dhis2/capture-app/issues/3243)) ([eb1cc0a](https://github.com/dhis2/capture-app/commit/eb1cc0a25bfe26c24dc8b95a2d5601f33239bd1a))
+
+## [100.31.1](https://github.com/dhis2/capture-app/compare/v100.31.0...v100.31.1) (2023-05-15)
+
+
+### Bug Fixes
+
+* [DHIS2-14862] show icon for selected program inside the ScopeSelector ([#3230](https://github.com/dhis2/capture-app/issues/3230)) ([e57cd3e](https://github.com/dhis2/capture-app/commit/e57cd3eeb63731d624adfa1efae86389a0f4a541))
+
+# [100.31.0](https://github.com/dhis2/capture-app/compare/v100.30.0...v100.31.0) (2023-05-10)
+
+
+### Features
+
+* [DHIS2-14574] store program stage working lists ([#3213](https://github.com/dhis2/capture-app/issues/3213)) ([4f5817d](https://github.com/dhis2/capture-app/commit/4f5817dc2f2104aa2f5eb5d05eef53fe66f6a752))
+
+# [100.30.0](https://github.com/dhis2/capture-app/compare/v100.29.1...v100.30.0) (2023-05-10)
+
+
+### Features
+
+* [DHIS2-14465] AOC for Tracker programs ([#3190](https://github.com/dhis2/capture-app/issues/3190)) ([f8729c4](https://github.com/dhis2/capture-app/commit/f8729c41b7ba36d079659d4c43c85be84312acdb))
+
+## [100.29.1](https://github.com/dhis2/capture-app/compare/v100.29.0...v100.29.1) (2023-04-26)
+
+
+### Bug Fixes
+
+* [DHIS2-14190] restrict which values can be assigned to option sets ([#3211](https://github.com/dhis2/capture-app/issues/3211)) ([00b8917](https://github.com/dhis2/capture-app/commit/00b89171f1af4ec1b95e5b7e9a62bac383442003))
+
 # [100.29.0](https://github.com/dhis2/capture-app/compare/v100.28.3...v100.29.0) (2023-04-17)
 
 

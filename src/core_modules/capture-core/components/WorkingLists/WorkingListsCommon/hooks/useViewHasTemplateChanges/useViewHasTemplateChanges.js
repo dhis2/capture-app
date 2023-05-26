@@ -1,5 +1,6 @@
 // @flow
 import { useMemo } from 'react';
+import { useFeature, FEATURES } from 'capture-core-utils';
 import { areFiltersEqual } from '../../../WorkingListsBase';
 import type { Input, InitialViewConfigComputed, CurrentViewConfig } from './useViewHasTemplateChanges.types';
 
@@ -41,13 +42,14 @@ export const useViewHasTemplateChanges = ({
     columns,
     sortById,
     sortByDirection,
-    programStage,
+    programStageId,
+    isDefaultTemplateAltered,
 }: Input) => {
+    const supportsStoreProgramStageWorkingList = useFeature(FEATURES.storeProgramStageWorkingList);
     const calculatedInitialViewConfig = useMemo(() => {
         if (!initialViewConfig) {
             return initialViewConfig;
         }
-
 
         const visibleColumnIds = initialViewConfig.customVisibleColumnIds || defaultColumns
             .filter(defaultColumn => defaultColumn.visible)
@@ -61,8 +63,10 @@ export const useViewHasTemplateChanges = ({
     }, [initialViewConfig, defaultColumns]);
 
     const viewHasChanges = useMemo(() => {
-        // DHIS2-14574 Disable for now viewHasChanges and the working list buttons when the programStage filter is active.
-        if (programStage) {
+        if (isDefaultTemplateAltered) {
+            return true;
+        }
+        if (!supportsStoreProgramStageWorkingList && programStageId) {
             return undefined;
         }
         if (!calculatedInitialViewConfig) {
@@ -77,7 +81,9 @@ export const useViewHasTemplateChanges = ({
         sortById,
         sortByDirection,
         calculatedInitialViewConfig,
-        programStage,
+        programStageId,
+        supportsStoreProgramStageWorkingList,
+        isDefaultTemplateAltered,
     ]);
 
     return viewHasChanges;

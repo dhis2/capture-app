@@ -24,6 +24,13 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 import { EventLabelsByStatus } from './viewEventDataEntry.const';
+import {
+    withAOCFieldBuilder,
+    withDataEntryFields,
+    attributeOptionsKey,
+    getCategoryOptionsValidatorContainers,
+    AOCsectionKey,
+} from '../../DataEntryDhis2Helpers';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -209,7 +216,33 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
-const CleanUpHOC = withCleanUp()(DataEntry);
+const getCategoryOptionsSettingsFn = () => {
+    const categoryOptionsSettings = {
+        getComponent: () => viewModeComponent,
+        getComponentProps: (props: Object, fieldId?: string) => createComponentProps(props, {
+            ...props.categories?.find(category => category.id === fieldId) ?? {},
+            valueConverter: value => props.categories
+                ?.find(category => category.id === fieldId)
+                ?.options?.find(option => option.value === value)
+                ?.label,
+        }),
+        getPropName: (props: Object, fieldId?: string) => (
+            fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey
+        ),
+        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
+        getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
+        getMeta: (props: Object) => ({
+            section: AOCsectionKey,
+            placement: placements.BOTTOM,
+            sectionName: props.programCategory?.displayName,
+        }),
+    };
+
+    return categoryOptionsSettings;
+};
+
+const AOCFieldBuilderHOC = withAOCFieldBuilder({})(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
+const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
@@ -227,6 +260,8 @@ type Props = {
     theme: Theme,
     onOpenEditEvent: () => void,
     dataEntryId: string,
+    programId: string,
+    itemId: string,
 };
 
 type DataEntrySection = {
@@ -247,6 +282,10 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Comments'),
     },
+    [AOCsectionKey]: {
+        placement: placements.TOP,
+        name: '',
+    },
 };
 
 class ViewEventDataEntryPlain extends Component<Props> {
@@ -260,10 +299,12 @@ class ViewEventDataEntryPlain extends Component<Props> {
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
+
     render() {
         const {
             classes,
             dataEntryId,
+            itemId,
             ...passOnProps
         } = this.props;
 

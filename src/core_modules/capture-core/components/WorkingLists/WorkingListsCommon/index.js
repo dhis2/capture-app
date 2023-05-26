@@ -14,6 +14,7 @@ export type {
     AddTemplate,
     DeleteTemplate,
     UpdateTemplate,
+    UpdateDefaultTemplate,
     UpdateList,
     RecordsOrder,
     CustomColumnOrder,
