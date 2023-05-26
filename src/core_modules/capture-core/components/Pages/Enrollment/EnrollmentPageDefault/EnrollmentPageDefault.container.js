@@ -20,14 +20,16 @@ import {
     useRuleEffects,
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
-import { clickLinkedRecord, deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
+import { deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
+import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { onLinkedRecordClick } = useLinkedRecordClick();
 
     const program = useTrackerProgram(programId);
     const {
@@ -73,10 +75,6 @@ export const EnrollmentPageDefault = () => {
 
     const onEventClick = (eventId: string) => {
         history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
-    };
-
-    const onLinkedRecordClick = (parameters) => {
-        dispatch(clickLinkedRecord(parameters));
     };
 
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {

@@ -1,6 +1,5 @@
 // @flow
-
-import type { Url } from '../../../../../utils/url';
+import type { UrlParameters } from '../../../../WidgetsRelationship/common/Types';
 
 export type Props = {|
     trackedEntityTypeId: string,
@@ -10,5 +9,5 @@ export type Props = {|
     addRelationshipRenderElement: HTMLDivElement,
     onOpenAddRelationship: () => void,
     onCloseAddRelationship: () => void,
-    onLinkedRecordClick: (parameters: Url) => void,
+    onLinkedRecordClick: (parameters: UrlParameters) => void,
 |};

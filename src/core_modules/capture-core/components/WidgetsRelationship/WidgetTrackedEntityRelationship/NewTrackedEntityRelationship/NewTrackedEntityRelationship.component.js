@@ -71,11 +71,15 @@ const NewTrackedEntityRelationshipPlain = ({
                 />
             );
         }
-        if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_RETRIEVER_MODE.id) {
+        if (
+            currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_RETRIEVER_MODE.id
+            && selectedLinkedEntityMetadata?.trackedEntityName
+        ) {
             return (
                 <RetrieverModeSelector
                     onSearchSelected={handleSearchRetrieverModeSelected}
                     onNewSelected={handleNewRetrieverModeSelected}
+                    trackedEntityName={selectedLinkedEntityMetadata.trackedEntityName}
                 />
             );
         }
@@ -111,6 +115,7 @@ const NewTrackedEntityRelationshipPlain = ({
         handleSearchRetrieverModeSelected,
         programId,
         relationshipTypes,
+        selectedLinkedEntityMetadata?.trackedEntityName,
         trackedEntityTypeId,
     ]);
 

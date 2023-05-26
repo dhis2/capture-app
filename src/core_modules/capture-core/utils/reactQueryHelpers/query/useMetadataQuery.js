@@ -2,9 +2,10 @@
 import { useQuery } from 'react-query';
 import log from 'loglevel';
 import { useDataEngine, type ResourceQuery } from '@dhis2/app-runtime';
-import type { QueryFunction, QueryKey, UseQueryOptions } from 'react-query';
+import type { QueryFunction, UseQueryOptions } from 'react-query';
 import { IndexedDBError } from '../../../../capture-core-utils/storage/IndexedDBError/IndexedDBError';
 import type { Result } from './useMetadataQuery.types';
+import { ReactQueryAppNamespace } from '../reactQueryHelpers.const';
 
 const throwErrorForIndexedDB = (error) => {
     if (error instanceof IndexedDBError) {
@@ -18,16 +19,16 @@ const throwErrorForIndexedDB = (error) => {
 };
 
 const useAsyncMetadata = <TResultData>(
-    queryKey: QueryKey,
+    queryKey: Array<string | number>,
     queryFn: QueryFunction<TResultData>,
     queryOptions: UseQueryOptions<TResultData>,
-): Result<TResultData> => useQuery<TResultData>(queryKey, queryFn, {
+): Result<TResultData> => useQuery<TResultData>([ReactQueryAppNamespace, ...queryKey], queryFn, {
     staleTime: Infinity,
     ...queryOptions,
 });
 
-export const useMetadataCustomQuery = <TResultData>(
-    queryKey: QueryKey,
+export const useCustomMetadataQuery = <TResultData>(
+    queryKey: Array<string | number>,
     queryFn: QueryFunction<TResultData>,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> =>
@@ -38,7 +39,7 @@ export const useMetadataCustomQuery = <TResultData>(
 
 
 export const useIndexedDBQuery = <TResultData>(
-    queryKey: QueryKey,
+    queryKey: Array<string | number>,
     queryFn: QueryFunction<TResultData>,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> =>
@@ -51,8 +52,8 @@ export const useIndexedDBQuery = <TResultData>(
             },
         });
 
-export const useMetadataApiQuery = <TResultData>(
-    queryKey: QueryKey,
+export const useApiMetadataQuery = <TResultData>(
+    queryKey: Array<string | number>,
     queryObject: ResourceQuery,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> => {

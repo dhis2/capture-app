@@ -1,6 +1,6 @@
 // @flow
 import { useMemo } from 'react';
-import { useApiDataQuery } from '../../../../utils/reactQueryHelpers/query/useApiDataQuery';
+import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 import type { InputRelationshipData } from '../Types';
 
 export const RelationshipSearchEntities = Object.freeze({
@@ -21,7 +21,7 @@ export const useRelationships = (entityId: string, searchMode: string) => {
     }), [entityId, searchMode]);
 
     return useApiDataQuery<ReturnData>(
-        ['widgetRelationship', 'relationships', entityId],
+        ['relationships', entityId],
         query,
         {
             enabled: !!entityId,

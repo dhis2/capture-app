@@ -2,8 +2,8 @@
 import type { TrackerProgram } from 'capture-core/metaData';
 import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
-import type { Url } from '../../../../utils/url';
 import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import type { UrlParameters } from '../../../WidgetsRelationship/common/Types';
 
 export type Props = {|
     program: TrackerProgram,
@@ -20,7 +20,7 @@ export type Props = {|
     onCreateNew: (stageId: string) => void,
     onEventClick: (eventId: string) => void,
     onUpdateTeiAttributeValues: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
-    onLinkedRecordClick: (parameters: Url) => void,
+    onLinkedRecordClick: (parameters: UrlParameters) => void,
     onEnrollmentError: (message: string) => void,
 |};
 

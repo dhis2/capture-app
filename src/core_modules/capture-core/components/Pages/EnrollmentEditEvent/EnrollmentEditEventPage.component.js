@@ -20,7 +20,7 @@ import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
 import {
     TrackedEntityRelationshipsWrapper,
-} from '../Enrollment/EnrollmentPageDefault/TrackedEntityRelationshipsWrapper';
+} from '../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 
 const styles = ({ typography }) => ({
@@ -58,6 +58,7 @@ const EnrollmentEditEventPagePain = ({
     programStage,
     teiId,
     enrollmentId,
+    trackedEntityTypeId,
     programId,
     enrollmentsAsOptions,
     trackedEntityName,
@@ -154,7 +155,7 @@ const EnrollmentEditEventPagePain = ({
                         )}
                         {addRelationShipContainerElement &&
                             <TrackedEntityRelationshipsWrapper
-                                trackedEntityTypeId={'nEenWmSyUEp'}
+                                trackedEntityTypeId={trackedEntityTypeId}
                                 teiId={teiId}
                                 programId={programId}
                                 addRelationshipRenderElement={addRelationShipContainerElement}

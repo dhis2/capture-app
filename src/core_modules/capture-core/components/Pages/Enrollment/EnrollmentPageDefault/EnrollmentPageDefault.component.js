@@ -13,7 +13,7 @@ import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 import { EnrollmentQuickActions } from './EnrollmentQuickActions';
-import { TrackedEntityRelationshipsWrapper } from './TrackedEntityRelationshipsWrapper';
+import { TrackedEntityRelationshipsWrapper } from '../../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 import { AddRelationshipRefWrapper } from '../../EnrollmentEditEvent/AddRelationshipRefWrapper';
 
 const getStyles = () => ({

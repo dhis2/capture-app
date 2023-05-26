@@ -13,7 +13,7 @@ import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.comp
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { clickLinkedRecord, deleteEnrollment, fetchEnrollments } from '../Enrollment/EnrollmentPage.actions';
+import { deleteEnrollment, fetchEnrollments } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
@@ -21,6 +21,7 @@ import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { cleanUpDataEntry } from '../../DataEntry';
+import { useLinkedRecordClick } from '../common/TEIRelationshipsWidget';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -65,6 +66,8 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const { onLinkedRecordClick } = useLinkedRecordClick();
+
     useEffect(() => () => {
         dispatch(cleanUpDataEntry(dataEntryIds.ENROLLMENT_EVENT));
     }, [dispatch]);
@@ -94,12 +97,9 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
         dispatch(updateEnrollmentEvents(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
-    const onLinkedRecordClick = (parameters) => {
-        dispatch(clickLinkedRecord(parameters));
-    };
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
-    const trackedEntityName = program?.trackedEntityType?.name;
+    const { name: trackedEntityName, id: trackedEntityTypeId } = program?.trackedEntityType;
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
@@ -128,6 +128,7 @@ const EnrollmentEditEventPageWithContext = ({ programId, stageId, teiId, enrollm
             hideWidgets={hideWidgets}
             teiId={teiId}
             enrollmentId={enrollmentId}
+            trackedEntityTypeId={trackedEntityTypeId}
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}
             trackedEntityName={trackedEntityName}

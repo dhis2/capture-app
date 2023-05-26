@@ -8,7 +8,7 @@ import { RelationshipSearchEntities, useRelationships } from '../common/hooks/us
 import { useRelationshipTypes } from '../common/hooks/useRelationshipTypes';
 
 export const WidgetTrackedEntityRelationship = ({
-    cachedRelationshipTypes,
+    relationshipTypes: cachedRelationshipTypes,
     teiId,
     ...passOnProps
 }: Props) => {

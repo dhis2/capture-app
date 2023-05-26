@@ -1,7 +1,7 @@
 // @flow
 import type { ProgramStage } from '../../../metaData';
 import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
-import type { Url } from '../../../utils/url';
+import type { UrlParameters } from '../../WidgetsRelationship/common/Types';
 
 export type PlainProps = {|
     programStage: ?ProgramStage,
@@ -10,6 +10,7 @@ export type PlainProps = {|
     teiId: string,
     enrollmentId: string,
     programId: string,
+    trackedEntityTypeId: string,
     mode: string,
     orgUnitId: string,
     trackedEntityName: string,
@@ -20,7 +21,7 @@ export type PlainProps = {|
     onDelete: () => void,
     onAddNew: () => void,
     onGoBack: () => void,
-    onLinkedRecordClick: (parameters: Url) => void,
+    onLinkedRecordClick: (parameters: UrlParameters) => void,
     onEnrollmentError: (message: string) => void,
     onEnrollmentSuccess: () => void,
     onCancelEditEvent: () => void,

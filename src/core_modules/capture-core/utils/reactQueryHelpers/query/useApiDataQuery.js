@@ -1,11 +1,12 @@
 // @flow
 import { useQuery } from 'react-query';
 import { useDataEngine, type ResourceQuery } from '@dhis2/app-runtime';
-import type { QueryFunction, QueryKey, UseQueryOptions } from 'react-query';
+import type { QueryFunction, UseQueryOptions } from 'react-query';
 import type { Result } from './useMetadataQuery.types';
+import { ReactQueryAppNamespace } from '../reactQueryHelpers.const';
 
 export const useApiDataQuery = <TResultData>(
-    queryKey: QueryKey,
+    queryKey: Array<string | number>,
     queryObject: ResourceQuery,
     queryOptions: UseQueryOptions<TResultData>,
 ): Result<TResultData> => {
@@ -13,7 +14,7 @@ export const useApiDataQuery = <TResultData>(
     const queryFn: QueryFunction<TResultData> = () => dataEngine.query({ theQuerykey: queryObject })
         .then(response => response.theQuerykey);
     return useQuery<TResultData>(
-        queryKey,
+        [ReactQueryAppNamespace, ...queryKey],
         queryFn,
         {
             ...queryOptions,

@@ -5,6 +5,7 @@ import type { TargetSides } from '../../../common/LinkedEntityMetadataSelector';
 
 export type Side = $ReadOnly<{|
     trackedEntityTypeId: string,
+    trackedEntityName: string,
     programId?: string,
     name: string,
     targetSide: TargetSides,
@@ -24,6 +25,7 @@ export type LinkedEntityMetadata = $ReadOnly<{|
     name: string,
     targetSide: TargetSides,
     relationshipId: string,
+    trackedEntityName: string,
 |}>;
 
 export type Props = $ReadOnly<{|

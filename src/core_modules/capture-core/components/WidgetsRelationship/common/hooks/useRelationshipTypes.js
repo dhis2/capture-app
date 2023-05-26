@@ -1,6 +1,6 @@
 // @flow
 import { useMemo } from 'react';
-import { useMetadataApiQuery } from '../../../../utils/reactQueryHelpers';
+import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
 import type { RelationshipTypes } from '../Types';
 import { extractElementIdsFromRelationshipTypes, formatRelationshipTypes } from '../utils';
 
@@ -18,8 +18,8 @@ const relationshipTypesQuery = {
 };
 
 export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes) => {
-    const { data: apiRelationshipTypes, isError, isLoading } = useMetadataApiQuery<?RelationshipTypes>(
-        ['widgetRelationship', 'relationshipTypes'],
+    const { data: apiRelationshipTypes, isError, isLoading } = useApiMetadataQuery<?RelationshipTypes>(
+        ['relationshipTypes'],
         relationshipTypesQuery,
         {
             enabled: !cachedRelationshipTypes?.length,
@@ -55,8 +55,8 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         };
     }, [apiRelationshipTypes]);
 
-    const { data: apiAttributes } = useMetadataApiQuery<Array<Element>>(
-        ['widgetRelationship', 'attributes'],
+    const { data: apiAttributes } = useApiMetadataQuery<Array<Element>>(
+        ['attributes'],
         attributeQuery,
         {
             enabled: !cachedRelationshipTypes?.length && !!attributeQuery,
@@ -64,8 +64,8 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         },
     );
 
-    const { data: apiDataElements } = useMetadataApiQuery<Array<Element>>(
-        ['widgetRelationship', 'dataElements'],
+    const { data: apiDataElements } = useApiMetadataQuery<Array<Element>>(
+        ['dataElements'],
         dataElementQuery,
         {
             enabled: !cachedRelationshipTypes?.length && !!dataElementQuery,

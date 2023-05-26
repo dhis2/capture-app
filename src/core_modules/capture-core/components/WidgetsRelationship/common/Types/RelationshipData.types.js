@@ -11,6 +11,7 @@ export type UrlParameters = {|
     orgUnitId?: string,
     teiId?: string,
     enrollmentId?: string,
+    eventId?: string,
 |}
 
 export type LinkedEntityData = {

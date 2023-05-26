@@ -123,6 +123,7 @@ export const useApplicableTypesAndSides = (
                     sides: [{
                         programId: program?.id,
                         trackedEntityTypeId: trackedEntityType.id,
+                        trackedEntityName: trackedEntityType.name.toLowerCase(),
                         targetSide: TARGET_SIDES.TO,
                         name: fromToName ?? displayName,
                     }],
@@ -144,18 +145,26 @@ export const useApplicableTypesAndSides = (
                 id,
                 name: displayName,
                 sides: targetSides.map((targetSide) => {
-                    const { trackedEntityTypeId, programId, name } = targetSide === TARGET_SIDES.TO ? {
+                    const {
+                        trackedEntityTypeId,
+                        trackedEntityName,
+                        programId,
+                        name,
+                    } = targetSide === TARGET_SIDES.TO ? {
                         trackedEntityTypeId: toConstraint.trackedEntityType.id,
+                        trackedEntityName: toConstraint.trackedEntityType.name.toLowerCase(),
                         programId: toConstraint.program?.id,
                         name: fromToName,
                     } : {
                         trackedEntityTypeId: fromConstraint.trackedEntityType.id,
+                        trackedEntityName: fromConstraint.trackedEntityType.name.toLowerCase(),
                         programId: fromConstraint.program?.id,
                         name: toFromName,
                     };
 
                     return {
                         trackedEntityTypeId,
+                        trackedEntityName,
                         programId,
                         targetSide,
                         // $FlowFixMe

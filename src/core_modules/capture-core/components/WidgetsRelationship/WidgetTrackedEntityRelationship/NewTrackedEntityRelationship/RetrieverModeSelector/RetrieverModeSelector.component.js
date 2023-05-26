@@ -16,7 +16,12 @@ const styles = {
     },
 };
 
-const RetrieverModeSelectorPlain = ({ classes, onSearchSelected, onNewSelected }: PlainProps) => (
+const RetrieverModeSelectorPlain = ({
+    classes,
+    onSearchSelected,
+    onNewSelected,
+    trackedEntityName,
+}: PlainProps) => (
     <div className={classes.container}>
         <div className={classes.retrieverSelector}>
             <Button
@@ -24,7 +29,7 @@ const RetrieverModeSelectorPlain = ({ classes, onSearchSelected, onNewSelected }
                 onClick={onSearchSelected}
             >
                 <IconSearch16 />
-                <p>{i18n.t('Link to an existing person')}</p>
+                <p>{i18n.t('Link to an existing {{tetName}}', { tetName: trackedEntityName })}</p>
             </Button>
             <Button
                 className={classes.retrieverSelector}

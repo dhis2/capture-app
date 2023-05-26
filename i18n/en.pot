@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-05-23T11:35:43.493Z\n"
-"PO-Revision-Date: 2023-05-23T11:35:43.493Z\n"
+"POT-Creation-Date: 2023-05-26T08:53:52.765Z\n"
+"PO-Revision-Date: 2023-05-26T08:53:52.765Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -628,9 +628,6 @@ msgstr "Make referral"
 msgid "No available program stages"
 msgstr "No available program stages"
 
-msgid "Could not retrieve metadata. Please try again later."
-msgstr "Could not retrieve metadata. Please try again later."
-
 msgid "Program stage not found"
 msgstr "Program stage not found"
 
@@ -980,6 +977,9 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
+msgid "Could not retrieve metadata. Please try again later."
+msgstr "Could not retrieve metadata. Please try again later."
+
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
 
@@ -1320,8 +1320,8 @@ msgstr "Go back without saving relationship"
 msgid "New Relationship"
 msgstr "New Relationship"
 
-msgid "Link to an existing person"
-msgstr "Link to an existing person"
+msgid "Link to an existing {{tetName}}"
+msgstr "Link to an existing {{tetName}}"
 
 msgid "Something went wrong while loading relationships. Please try again later."
 msgstr "Something went wrong while loading relationships. Please try again later."

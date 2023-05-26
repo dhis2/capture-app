@@ -9,5 +9,5 @@ export type Props = {|
     onLinkedRecordClick: (parameters: UrlParameters) => void,
     onOpenAddRelationship?: () => void,
     onCloseAddRelationship?: () => void,
-    cachedRelationshipTypes?: RelationshipTypes,
+    relationshipTypes?: RelationshipTypes,
 |}

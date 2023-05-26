@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useTEIRelationshipsWidgetMetadata } from '../../../common/TEIRelationshipsWidget';
+import { useTEIRelationshipsWidgetMetadata } from '../index';
 import { WidgetTrackedEntityRelationship } from '../../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import type { Props } from './TrackedEntityRelationshipsWrapper.types';
 
@@ -34,13 +34,12 @@ export const TrackedEntityRelationshipsWrapper = ({
                 programId={programId}
                 trackedEntityTypeId={trackedEntityTypeId}
                 teiId={teiId}
-                // $FlowFixMe - widget only needs partial URL params
                 onLinkedRecordClick={onLinkedRecordClick}
                 addRelationshipRenderElement={addRelationshipRenderElement}
                 onOpenAddRelationship={onOpenAddRelationship}
                 onCloseAddRelationship={onCloseAddRelationship}
                 // optional props
-                cachedRelationshipTypes={relationshipTypes}
+                relationshipTypes={relationshipTypes}
             />
         </>
     );

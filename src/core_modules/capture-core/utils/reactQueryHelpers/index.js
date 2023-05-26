@@ -1,2 +1,9 @@
 // @flow
-export { useIndexedDBQuery, useMetadataCustomQuery, useMetadataApiQuery } from './query';
+export {
+    useIndexedDBQuery,
+    useCustomMetadataQuery,
+    useApiMetadataQuery,
+    useApiDataQuery,
+} from './query';
+
+export { ReactQueryAppNamespace } from './reactQueryHelpers.const';
