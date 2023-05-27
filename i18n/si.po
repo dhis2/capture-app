@@ -223,25 +223,25 @@ msgid "From"
 msgstr ""
 
 msgid "To"
-msgstr ""
+msgstr "වෙත"
 
 msgid "This week"
-msgstr ""
+msgstr "මෙම සතිය"
 
 msgid "This month"
-msgstr ""
+msgstr "මෙම මාසය"
 
 msgid "This Year"
 msgstr "මෙම වසර"
 
 msgid "Last week"
-msgstr ""
+msgstr "පසුගිය සතිය"
 
 msgid "Last month"
-msgstr ""
+msgstr "පසුගිය මාසය"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "පසුගිය මාස 3"
 
 msgid "Custom range"
 msgstr ""
@@ -262,13 +262,13 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "අවුරුදු"
 
 msgid "Months"
-msgstr ""
+msgstr "මාස"
 
 msgid "Days"
-msgstr ""
+msgstr "දින"
 
 msgid "Uploading file"
 msgstr ""
@@ -403,7 +403,7 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "සුරකින්න"
 
 msgid "Show all events"
 msgstr ""
@@ -729,7 +729,7 @@ msgid "Add relationship"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "විවෘත කරන්න"
 
 msgid "All accessible"
 msgstr ""
@@ -801,7 +801,7 @@ msgid "Longitude"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "දිනය"
 
 msgid "Time"
 msgstr ""
