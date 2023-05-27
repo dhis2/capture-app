@@ -536,7 +536,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "පිළිගන්න"
 
 msgid "Registering Organisation Unit"
 msgstr ""
