@@ -1,3 +1,10 @@
+## [100.31.6](https://github.com/dhis2/capture-app/compare/v100.31.5...v100.31.6) (2023-05-29)
+
+
+### Bug Fixes
+
+* [TECH-1508][DHIS2-15103] extract search component ([#3223](https://github.com/dhis2/capture-app/issues/3223)) ([dd72c50](https://github.com/dhis2/capture-app/commit/dd72c5053a8aea8620e51fd80260654d6a6815ed))
+
 ## [100.31.5](https://github.com/dhis2/capture-app/compare/v100.31.4...v100.31.5) (2023-05-25)
 
 
