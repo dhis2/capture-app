@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { useDispatch } from 'react-redux';
-import { searchScopes } from '../Pages/Search/SearchPage.constants';
+import { searchScopes } from '../SearchBox';
 import { availableCardListButtonState, enrollmentTypes } from './CardList.constants';
 import {
     navigateToEnrollmentOverview,

@@ -1,7 +1,7 @@
 // @flow
-import { pipe as pipeD2 } from '../../../../../../capture-core-utils';
-import { convertClientToServer, convertFormToClient } from '../../../../../converters';
-import { type DataElement } from '../../../../../metaData';
+import { pipe as pipeD2 } from '../../../../../capture-core-utils';
+import { convertClientToServer, convertFormToClient } from '../../../../converters';
+import { type DataElement } from '../../../../metaData';
 
 type FormValues = { [key: string]: any}
 

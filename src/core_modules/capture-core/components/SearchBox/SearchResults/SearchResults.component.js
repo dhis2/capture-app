@@ -4,14 +4,14 @@ import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, colors } from '@dhis2/ui';
-import { CardList, CardListButtons } from '../../../CardList';
-import { withNavigation } from '../../../Pagination/withDefaultNavigation';
-import { searchScopes } from '../SearchPage.constants';
+import { CardList, CardListButtons } from '../../CardList';
+import { withNavigation } from '../../Pagination/withDefaultNavigation';
+import { searchScopes } from '../SearchBox.constants';
 import type { Props } from './SearchResults.types';
-import { SearchResultsHeader } from '../../../SearchResultsHeader';
-import { ResultsPageSizeContext } from '../../shared-contexts';
-import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import { Widget } from '../../../Widget';
+import { SearchResultsHeader } from '../../SearchResultsHeader';
+import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
+import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { Widget } from '../../Widget';
 
 const SearchPagination = withNavigation()(Pagination);
 

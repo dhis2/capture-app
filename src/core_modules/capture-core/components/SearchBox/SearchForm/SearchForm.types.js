@@ -1,6 +1,6 @@
 // @flow
-import type { SearchGroups } from '../SearchPage.types';
-import { typeof dataElementTypes } from '../../../../metaData';
+import type { SearchGroups } from '../SearchBox.types';
+import { typeof dataElementTypes } from '../../../metaData';
 
 export type CurrentSearchTerms = Array<{|
   +name: string,
