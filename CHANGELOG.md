@@ -1,3 +1,10 @@
+## [100.31.7](https://github.com/dhis2/capture-app/compare/v100.31.6...v100.31.7) (2023-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15153] ask user to create new event  ([#3248](https://github.com/dhis2/capture-app/issues/3248)) ([d061efc](https://github.com/dhis2/capture-app/commit/d061efca2bbc5c4ecf3b8b1614e0ccb7a7d909d3))
+
 ## [100.31.6](https://github.com/dhis2/capture-app/compare/v100.31.5...v100.31.6) (2023-05-29)
 
 
