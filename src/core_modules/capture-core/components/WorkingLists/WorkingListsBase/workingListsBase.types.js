@@ -45,6 +45,7 @@ export type ColumnConfig = {
     options?: ?Array<{text: string, value: any}>,
     multiValueFilter?: boolean,
     filterHidden?: boolean,
+    additionalColumn?: boolean,
 };
 
 export type ColumnConfigs = Array<ColumnConfig>;
@@ -54,6 +55,7 @@ export type ColumnOrder = Array<{ id: string, visible: boolean }>;
 export type LoadedContext = {|
     programIdTemplates?: string,
     programIdView?: string,
+    programStageId?: string,
     orgUnitId?: string,
     categories?: Object,
 |};
@@ -75,7 +77,7 @@ export type LoadView = (
     template: WorkingListTemplate,
     meta: {| programId: string, orgUnitId: string, categories?: Categories, programStageId?: string |}) => void;
 export type LoadTemplates = (programId: string) => void;
-export type SelectTemplate = (templateId: string) => void;
+export type SelectTemplate = (templateId: string, programStageId?: ?string) => void;
 export type UnloadingContext = () => void;
 export type UpdateTemplate = (template: WorkingListTemplate) => void;
 export type UpdateList = (data: {
@@ -145,6 +147,7 @@ export type ListViewBuilderContextData = {|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     stickyFilters?: StickyFilters,
+    programStageId?: string,
 |};
 
 export type SharingSettings = {|
