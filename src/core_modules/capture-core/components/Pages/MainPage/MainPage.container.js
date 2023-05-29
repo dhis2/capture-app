@@ -4,27 +4,18 @@ import React, { useEffect, useMemo, useCallback } from 'react';
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import { SearchBox } from '../../SearchBox';
 import { MainPageComponent } from './MainPage.component';
 import { withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
+import { enableNewDashboardsTemporarily } from '../../../utils/routing/newDashboard.actions';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
-import { TopBar } from './TopBar.container';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
     ready: !state.activePage.lockedSelectorLoads,  // TODO: Should probably remove this
 });
-
-const showMainPage = ({ programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId }) => {
-    const noProgramSelected = !programId;
-    const noOrgUnitSelected = !orgUnitId;
-    const isEventProgram = !trackedEntityTypeId;
-
-    return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
-};
 
 const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, showAllAccessible, history }) => {
     if (orgUnitId) {
@@ -96,7 +87,7 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, history 
 const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
+    const { all, programId, orgUnitId, selectedTemplateId, newDashboard } = useLocationQuery();
     const showAllAccessible = all !== undefined;
 
     const {
@@ -122,6 +113,12 @@ const MainPageContainer = () => {
     }, [showAllAccessible, dispatch]);
 
     useEffect(() => {
+        if (newDashboard) {
+            dispatch(enableNewDashboardsTemporarily(newDashboard.split(',')));
+        }
+    }, [dispatch, newDashboard]);
+
+    useEffect(() => {
         if (programId && trackedEntityTypeId && displayFrontPageList && selectedTemplateId === undefined) {
             handleChangeTemplateUrl({
                 programId,
@@ -143,23 +140,19 @@ const MainPageContainer = () => {
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId} error={error}>
-            <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
-            <>
-                {showMainPage({ programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId }) ? (
-                    <MainPageComponent
-                        MainPageStatus={MainPageStatus}
-                        programId={programId}
-                        orgUnitId={orgUnitId}
-                        selectedTemplateId={selectedTemplateId}
-                        setShowAccessible={onSetShowAccessible}
-                        onChangeTemplate={onChangeTemplate}
-                        error={error}
-                        ready={ready}
-                    />
-                ) : (
-                    <SearchBox />
-                )}
-            </>
+            <MainPageComponent
+                MainPageStatus={MainPageStatus}
+                programId={programId}
+                orgUnitId={orgUnitId}
+                trackedEntityTypeId={trackedEntityTypeId}
+                selectedTemplateId={selectedTemplateId}
+                setShowAccessible={onSetShowAccessible}
+                onChangeTemplate={onChangeTemplate}
+                error={error}
+                ready={ready}
+                displayFrontPageList={displayFrontPageList}
+                selectedCategories={selectedCategories}
+            />
         </OrgUnitFetcher>
     );
 };

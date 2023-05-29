@@ -4,23 +4,16 @@ import { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Input, MenuItem, spacers, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
+import { OptionLabel } from '../../OptionLabel';
+import type { Icon } from '../../../../metaData';
 
 const styles = () => ({
-    icon: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingRight: 5,
-    },
     input: {
         position: 'sticky',
         top: '0',
         background: `${colors.white}`,
         padding: `${spacers.dp8} ${spacers.dp8} ${spacers.dp4} ${spacers.dp8}`,
         zIndex: '1',
-    },
-    label: {
-        display: 'flex',
-        alignItems: 'center',
     },
     empty: {
         fontSize: '14px',
@@ -34,7 +27,7 @@ const styles = () => ({
 type Option = {
     value: string,
     label: string,
-    icon?: React.Node,
+    icon?: Icon,
 };
 
 type Props = {
@@ -71,12 +64,7 @@ const FiltrableMenuItemsPlain = ({ dataTest, options, onChange, searchText, clas
                 filtered.map(option => (
                     <MenuItem
                         key={option.value}
-                        label={
-                            <div className={classes.label}>
-                                <div className={classes.icon}> {option.icon} </div>
-                                {option.label}
-                            </div>
-                        }
+                        label={<OptionLabel icon={option.icon} label={option.label} />}
                         value={option.value}
                         onClick={onChange}
                     />

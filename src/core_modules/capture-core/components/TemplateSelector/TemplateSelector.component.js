@@ -104,7 +104,7 @@ const TemplateSelectorPlain = (props: Props) => {
                         </p>
                     </>
                 )}
-                <Button small onClick={onCreateTemplate} color="secondary">
+                <Button small onClick={onCreateTemplate} color="secondary" dataTest="template-selector-create-list">
                     {i18n.t('Create saved list')}
                 </Button>
             </div>

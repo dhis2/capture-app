@@ -18,13 +18,8 @@ export type AvailableSearchOption = {|
     +searchGroups: SearchGroups,
 |};
 
-export type ContainerProps = $ReadOnly<{|
-    dispatchNavigateToMainPage?: () => void
-|}>;
-
 export type ComponentProps = $ReadOnly<{|
     cleanSearchRelatedInfo: () => void,
-    navigateToMainPage?: () => void,
     showInitialSearchBox: () => void,
     navigateToRegisterTrackedEntity: () => void,
     trackedEntityTypeId: string,
@@ -32,7 +27,6 @@ export type ComponentProps = $ReadOnly<{|
     minAttributesRequiredToSearch: number,
     searchableFields: Array<Object>,
     searchStatus: string,
-    error: boolean,
     ready: boolean,
 |}>;
 

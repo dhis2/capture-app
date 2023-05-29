@@ -162,11 +162,18 @@ import {
     navigateBackToMainPageEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
 import { updateTeiEpic, updateTeiSucceededEpic, updateTeiFailedEpic } from '../core_modules/capture-core/components/WidgetProfile';
-import { initTeiViewEpic, updateTeiListEpic,
-    retrieveTemplatesEpic as retrieveTEITemplatesEpic,
-    updateTemplateEpic as updateTEITemplateEpic,
-    addTemplateEpic as addTEITemplateEpic,
-    deleteTemplateEpic as deleteTEITemplateEpic } from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
+import {
+    initTeiViewEpic,
+    updateTeiListEpic,
+    retrieveTEITemplatesEpic,
+    updateTEITemplateEpic,
+    addTEITemplateEpic,
+    deleteTEITemplateEpic,
+    retrieveAllTemplatesEpic,
+    addProgramStageTemplateEpic,
+    deleteProgramStageTemplateEpic,
+    updateProgramStageTemplateEpic,
+} from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
 import {
     startNewEnrollmentDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
@@ -227,6 +234,10 @@ export const epics = combineEpics(
     updateTEITemplateEpic,
     addTEITemplateEpic,
     deleteTEITemplateEpic,
+    retrieveAllTemplatesEpic,
+    addProgramStageTemplateEpic,
+    updateProgramStageTemplateEpic,
+    deleteProgramStageTemplateEpic,
     requestDeleteEventEpic,
     openNewEventInDataEntryEpic,
     resetDataEntryForNewEventEpic,

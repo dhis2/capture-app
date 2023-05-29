@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-05-05T11:10:50.300Z\n"
-"PO-Revision-Date: 2023-05-05T11:10:50.300Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"PO-Revision-Date: 2023-05-29T07:35:17.403Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -139,6 +139,9 @@ msgstr "Coordinate"
 
 msgid "Enrollment"
 msgstr "Enrollment"
+
+msgid "Please select {{categoryName}}"
+msgstr "Please select {{categoryName}}"
 
 msgid "A future date is not allowed"
 msgstr "A future date is not allowed"
@@ -831,6 +834,9 @@ msgstr "Create new {{trackedEntityType}}"
 msgid "Register"
 msgstr "Register"
 
+msgid "Back"
+msgstr "Back"
+
 msgid "events"
 msgstr "events"
 
@@ -921,9 +927,6 @@ msgstr "Show all programs"
 
 msgid "Choose a program"
 msgstr "Choose a program"
-
-msgid "Back"
-msgstr "Back"
 
 msgid "Search for {{titleText}}"
 msgstr "Search for {{titleText}}"
@@ -1342,6 +1345,9 @@ msgstr "Choose a program stage to filter by {{label}}"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
+
+msgid "an error occurred loading the working lists"
+msgstr "an error occurred loading the working lists"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "an error occurred loading Tracked entity instance lists"
