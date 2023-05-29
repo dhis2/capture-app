@@ -870,114 +870,8 @@ msgstr "Crear nuevo {{trackedEntityType}}"
 msgid "Register"
 msgstr "Registrar"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Complete al menos {{minAttributesRequiredToSearch}} atributos para buscar"
-
-msgid "Search {{name}}"
-msgstr "Buscar {{name}}"
-
-msgid "Search by {{name}}"
-msgstr "Buscar por {{name}}"
-
-msgid "Search by attributes"
-msgstr "Buscar por atributos"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-"Complete estos campos para buscar{{escape}} {{ searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Complete al menos {{minAttributesRequiredToSearch}} de estos campos para "
-"buscar{{escape}} {{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "Complete este campo para buscar{{escape}} {{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "No results found"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Puede cambiar los términos de búsqueda y volver a buscar para encontrar lo "
-"que busca."
-
-msgid "Register a user"
-msgstr "Registrar un usuario"
-
-msgid "Back to search"
-msgstr "Volver a buscar"
-
-msgid "An error has occurred"
-msgstr "Se ha producido un error"
-
-msgid "Too many results"
-msgstr "Demasiados resultados"
-
-msgid "Cannot search in all programs"
-msgstr "No se puede buscar en todos los programas"
-
 msgid "Back"
 msgstr "Atrás"
-
-msgid "Search for {{titleText}}"
-msgstr "Buscar para {{titleText}}"
-
-msgid "Search for"
-msgstr "Buscar por"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"También puede elegir un programa de la barra superior y buscar en ese "
-"programa"
-
-msgid "Choose a type to start searching"
-msgstr "Elija un tipo para comenzar a buscar"
-
-msgid "all programs"
-msgstr "todos los programas"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"¿No encuentra los resultados que buscaba? Intente buscar todos los programas"
-" que usan el tipo"
-
-msgid "Search in all programs"
-msgstr "Buscar en todos los programas"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-"Si ninguno de los resultados de la búsqueda coincide, puede crear una nueva"
-
-msgid "Create new"
-msgstr "Crear nuevo"
-
-msgid "Saved lists in this program"
-msgstr "Listas guardadas en este programa"
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-"Las listas guardadas ofrecen acceso rápido a las vistas más utilizadas en un"
-" programa."
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-"Todavía no hay listas guardadas en este programa, cree una usando el botón "
-"de abajo."
-
-msgid "Create saved list"
-msgstr "Crear lista guardada"
 
 msgid "events"
 msgstr "Eventos"
@@ -1028,6 +922,9 @@ msgstr "No se pudo cargar la unidad organizativa"
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados"
 
+msgid "No results found"
+msgstr "No results found"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Se produjo un error al cargar posibles duplicados"
 
@@ -1067,6 +964,88 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr "Buscar para {{titleText}}"
+
+msgid "Search for"
+msgstr "Buscar por"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"También puede elegir un programa de la barra superior y buscar en ese "
+"programa"
+
+msgid "Choose a type to start searching"
+msgstr "Elija un tipo para comenzar a buscar"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+"Complete al menos {{minAttributesRequiredToSearch}} atributos para buscar"
+
+msgid "Search {{name}}"
+msgstr "Buscar {{name}}"
+
+msgid "Search by {{name}}"
+msgstr "Buscar por {{name}}"
+
+msgid "Search by attributes"
+msgstr "Buscar por atributos"
+
+msgid "all programs"
+msgstr "todos los programas"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"¿No encuentra los resultados que buscaba? Intente buscar todos los programas"
+" que usan el tipo"
+
+msgid "Search in all programs"
+msgstr "Buscar en todos los programas"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+"Si ninguno de los resultados de la búsqueda coincide, puede crear una nueva"
+
+msgid "Create new"
+msgstr "Crear nuevo"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+"Complete estos campos para buscar{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Complete al menos {{minAttributesRequiredToSearch}} de estos campos para "
+"buscar{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "Complete este campo para buscar{{escape}} {{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Puede cambiar los términos de búsqueda y volver a buscar para encontrar lo "
+"que busca."
+
+msgid "Back to search"
+msgstr "Volver a buscar"
+
+msgid "An error has occurred"
+msgstr "Se ha producido un error"
+
+msgid "Too many results"
+msgstr "Demasiados resultados"
+
+msgid "Cannot search in all programs"
+msgstr "No se puede buscar en todos los programas"
+
 msgid "Results found"
 msgstr "Resultados encontrados"
 
@@ -1078,6 +1057,24 @@ msgstr "Buscar {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Complete al menos {{minAttributesRequired}} atributos para buscar"
+
+msgid "Saved lists in this program"
+msgstr "Listas guardadas en este programa"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+"Las listas guardadas ofrecen acceso rápido a las vistas más utilizadas en un"
+" programa."
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+"Todavía no hay listas guardadas en este programa, cree una usando el botón "
+"de abajo."
+
+msgid "Create saved list"
+msgstr "Crear lista guardada"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Nuevo {{trackedEntityName}} en {{programName}}"
@@ -1248,30 +1245,11 @@ msgstr ""
 "La fecha programada coincide con la fecha sugerida, pero se puede cambiar si"
 " es necesario."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-"La fecha programada es {{count}} día {{position}} la fecha sugerida."
-msgstr[1] ""
-"La fecha programada es {{count}} días {{position}} la fecha sugerida."
-msgstr[2] ""
-"La fecha programada es {{count}} días {{position}} la fecha sugerida."
-
 msgid "after"
 msgstr "después"
 
 msgid "before"
 msgstr "antes"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "Hay {{count}} evento programado en {{orgUnitName}} para este día."
-msgstr[1] ""
-"Hay {{count}} eventos programados en {{orgUnitName}} para este día."
-msgstr[2] ""
-"Hay {{count}} eventos programados en {{orgUnitName}} para este día."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"

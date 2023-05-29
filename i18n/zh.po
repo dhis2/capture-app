@@ -831,101 +831,8 @@ msgstr "创建新的{{trackedEntityType}}"
 msgid "Register"
 msgstr "注册"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
-
-msgid "Search {{name}}"
-msgstr "搜索{{name}}"
-
-msgid "Search by {{name}}"
-msgstr "按{{name}}搜索"
-
-msgid "Search by attributes"
-msgstr "按属性搜索"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr "填写这些字段进行搜索{{escape}} {{ searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"至少填写 {{minAttributesRequiredToSearch}} 这些字段以进行搜索{{escape}} "
-"{{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "填写此字段进行搜索{{escape}} {{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "没有结果"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
-
-msgid "Register a user"
-msgstr "注册用户"
-
-msgid "Back to search"
-msgstr "返回搜寻"
-
-msgid "An error has occurred"
-msgstr "发生了错误"
-
-msgid "Too many results"
-msgstr "结果太多"
-
-msgid "Cannot search in all programs"
-msgstr "无法在所有项目中搜索"
-
 msgid "Back"
 msgstr "后退"
-
-msgid "Search for {{titleText}}"
-msgstr "搜索{{titleText}}"
-
-msgid "Search for"
-msgstr "搜索"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
-
-msgid "Choose a type to start searching"
-msgstr "选择一种类型以开始搜索"
-
-msgid "all programs"
-msgstr "所有项目"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
-
-msgid "Search in all programs"
-msgstr "搜索所有项目"
-
-msgid "If none of search results match, you can create a new "
-msgstr "如果没有匹配的搜索结果，您可以创建一个新的"
-
-msgid "Create new"
-msgstr "新建"
-
-msgid "Saved lists in this program"
-msgstr "此项目中保存的列表"
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr "保存的列表提供对项目中最常用视图的快速访问。"
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr "此项目中还没有保存的列表，请使用下面的按钮创建一个。"
-
-msgid "Create saved list"
-msgstr "创建保存列表"
 
 msgid "events"
 msgstr "事件"
@@ -974,6 +881,9 @@ msgstr "机构不能载入"
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
 
+msgid "No results found"
+msgstr "没有结果"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
 
@@ -1013,6 +923,79 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr "搜索{{titleText}}"
+
+msgid "Search for"
+msgstr "搜索"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
+
+msgid "Choose a type to start searching"
+msgstr "选择一种类型以开始搜索"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
+
+msgid "Search {{name}}"
+msgstr "搜索{{name}}"
+
+msgid "Search by {{name}}"
+msgstr "按{{name}}搜索"
+
+msgid "Search by attributes"
+msgstr "按属性搜索"
+
+msgid "all programs"
+msgstr "所有项目"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
+
+msgid "Search in all programs"
+msgstr "搜索所有项目"
+
+msgid "If none of search results match, you can create a new "
+msgstr "如果没有匹配的搜索结果，您可以创建一个新的"
+
+msgid "Create new"
+msgstr "新建"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr "填写这些字段进行搜索{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"至少填写 {{minAttributesRequiredToSearch}} 这些字段以进行搜索{{escape}} "
+"{{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "填写此字段进行搜索{{escape}} {{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
+
+msgid "Back to search"
+msgstr "返回搜寻"
+
+msgid "An error has occurred"
+msgstr "发生了错误"
+
+msgid "Too many results"
+msgstr "结果太多"
+
+msgid "Cannot search in all programs"
+msgstr "无法在所有项目中搜索"
+
 msgid "Results found"
 msgstr "找到的结果"
 
@@ -1024,6 +1007,20 @@ msgstr "搜索 {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
+
+msgid "Saved lists in this program"
+msgstr "此项目中保存的列表"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr "保存的列表提供对项目中最常用视图的快速访问。"
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr "此项目中还没有保存的列表，请使用下面的按钮创建一个。"
+
+msgid "Create saved list"
+msgstr "创建保存列表"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "{{programName}}中的新{{trackedEntityName}}"
@@ -1185,21 +1182,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr "预定日期与建议日期相符，但可以根据需要进行更改。"
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] "预定日期是 {{count}} 天 {{position}} 建议的日期。"
-
 msgid "after"
 msgstr "后"
 
 msgid "before"
 msgstr "前"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "今天在 {{orgUnitName}} 有 {{count}} 个已经安排的事件。"
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
