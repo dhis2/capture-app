@@ -10,6 +10,7 @@ import {
     searchViaAttributesOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
     searchViaUniqueIdOnScopeTrackedEntityType,
+    showUniqueSearchValueEmptyModal,
 } from '../SearchBox.actions';
 import { addFormData, removeFormData } from '../../D2Form/actions/form.actions';
 
@@ -71,6 +72,10 @@ const mapStateToProps = (state: ReduxState, { searchGroupsForSelectedScope }: Ow
 
             return Object.values(currentSearchTerms).length >= minAttributesRequiredToSearch;
         },
+        isSearchViaUniqueIdValid: (formId) => {
+            const searchTerms = formsValues[formId] || {};
+            return Object.values(searchTerms).some(value => isValueContainingCharacter(value));
+        },
     };
 };
 
@@ -106,6 +111,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedSc
             .forEach(({ formId }) => {
                 dispatch(removeFormData(formId));
             });
+    },
+    showUniqueSearchValueEmptyModal: ({ uniqueTEAName }) => {
+        dispatch(showUniqueSearchValueEmptyModal({ uniqueTEAName }));
     },
 });
 
