@@ -1,3 +1,10 @@
+## [100.32.1](https://github.com/dhis2/capture-app/compare/v100.32.0...v100.32.1) (2023-05-30)
+
+
+### Bug Fixes
+
+* [DHIS2-12520] change enrollment event from url ([#3210](https://github.com/dhis2/capture-app/issues/3210)) ([c126fe4](https://github.com/dhis2/capture-app/commit/c126fe479bc04c5cbacfe309b8400782f2727be4))
+
 # [100.32.0](https://github.com/dhis2/capture-app/compare/v100.31.7...v100.32.0) (2023-05-30)
 
 
