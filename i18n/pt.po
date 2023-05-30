@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -856,107 +856,8 @@ msgstr "Crie um novo {{trackedEntityType}}"
 msgid "Register"
 msgstr "Registo"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Preencha pelo menos {{minAttributesRequiredToSearch}} atributos para "
-"pesquisar"
-
-msgid "Search {{name}}"
-msgstr "Pesquise {{name}}"
-
-msgid "Search by {{name}}"
-msgstr "Procura por nome}}"
-
-msgid "Search by attributes"
-msgstr "Pesquisa por atributos"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr "Nenhum resultado encontrado"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Você pode alterar seus termos de pesquisa e pesquisar novamente para "
-"encontrar o que está procurando."
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr "Voltar para pesquisar"
-
-msgid "An error has occurred"
-msgstr "ocorreu um erro"
-
-msgid "Too many results"
-msgstr "Muitos resultados"
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "Voltar"
-
-msgid "Search for {{titleText}}"
-msgstr "Pesquise por {{titleText}}"
-
-msgid "Search for"
-msgstr "Procurar"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Você também pode escolher um programa na barra superior e pesquisar nesse "
-"programa"
-
-msgid "Choose a type to start searching"
-msgstr "Escolha um tipo para começar a pesquisar"
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Não encontrou os resultados que procurava? Tente pesquisar todos os "
-"programas que usam tipo"
-
-msgid "Search in all programs"
-msgstr "Pesquisa em todos os programas"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Crie um novo"
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-
-msgid "Create saved list"
-msgstr ""
 
 msgid "events"
 msgstr "eventos"
@@ -1007,6 +908,9 @@ msgstr "Não foi possível carregar a unidade organizacional"
 msgid "Possible duplicates found"
 msgstr "Possíveis duplicatas encontradas"
 
+msgid "No results found"
+msgstr "Nenhum resultado encontrado"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Ocorreu um erro ao carregar possíveis duplicatas"
 
@@ -1046,6 +950,88 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr "Pesquise por {{titleText}}"
+
+msgid "Search for"
+msgstr "Procurar"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Você também pode escolher um programa na barra superior e pesquisar nesse "
+"programa"
+
+msgid "Choose a type to start searching"
+msgstr "Escolha um tipo para começar a pesquisar"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Search {{name}}"
+msgstr "Pesquise {{name}}"
+
+msgid "Search by {{name}}"
+msgstr "Procura por nome}}"
+
+msgid "Search by attributes"
+msgstr "Pesquisa por atributos"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Não encontrou os resultados que procurava? Tente pesquisar todos os "
+"programas que usam tipo"
+
+msgid "Search in all programs"
+msgstr "Pesquisa em todos os programas"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Crie um novo"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Você pode alterar seus termos de pesquisa e pesquisar novamente para "
+"encontrar o que está procurando."
+
+msgid "Back to search"
+msgstr "Voltar para pesquisar"
+
+msgid "An error has occurred"
+msgstr "ocorreu um erro"
+
+msgid "Too many results"
+msgstr "Muitos resultados"
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr "Resultados encontrados"
 
@@ -1055,9 +1041,19 @@ msgstr "Programa selecionado"
 msgid "Search {{uniqueAttrName}}"
 msgstr "Pesquise {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Saved lists in this program"
 msgstr ""
-"Preencha pelo menos {{minAttributesRequired}} atributos para pesquisar"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Novo {{trackedEntityName}} em {{programName}}"
@@ -1223,25 +1219,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
 msgid "after"
 msgstr "Depois "
 
 msgid "before"
 msgstr "Antes "
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
