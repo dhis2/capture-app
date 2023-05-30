@@ -8,7 +8,7 @@ import type {
 } from '@dhis2/rules-engine-javascript';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
-import { TrackerProgram, RenderFoundation, Section, ProgramStage } from '../../../../metaData';
+import { TrackerProgram, RenderFoundation, ProgramStage } from '../../../../metaData';
 import { startRunRulesPostUpdateField } from '../../../DataEntry';
 import { startRunRulesOnUpdateForNewEnrollment } from './enrollment.actions';
 import { convertValue } from '../../../../converters/formToClient';
@@ -25,8 +25,7 @@ export const getCurrentEventValuesFromStage = (attributeValues?: TEIValues, stag
         return { currentEventValues, attributeValues };
     }
 
-    const section = stage.stageForm.getSection(Section.MAIN_SECTION_ID);
-    const dataElements = [...section.elements.entries()].map(([key, val]) => ({ id: key, type: val.type }));
+    const dataElements = [...stage.stageForm.getElements().values()].map(({ id, type }) => ({ id, type }));
 
     if (attributeValues) {
         Object.keys(attributeValues).forEach((attributeId) => {

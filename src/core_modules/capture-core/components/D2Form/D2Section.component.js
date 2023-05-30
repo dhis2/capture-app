@@ -31,6 +31,7 @@ type Props = {
     formBuilderId: string,
     formId: string,
     onFieldsValidated: ?(any, formBuilderId: string) => void,
+    onGetCustomSectionName: ?(name?: string) => string,
 };
 
 class D2SectionPlain extends React.PureComponent<Props> {
@@ -48,6 +49,14 @@ class D2SectionPlain extends React.PureComponent<Props> {
 
     renderSectionHeader() {
         const title = this.props.sectionMetaData.name;
+
+        if (this.props.onGetCustomSectionName) {
+            return (
+                <SectionHeaderSimple
+                    title={this.props.onGetCustomSectionName(title)}
+                />
+            );
+        }
 
         if (!title) {
             return null;

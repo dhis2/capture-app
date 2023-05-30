@@ -80,8 +80,8 @@ const convert = (() => {
     };
 })();
 
-const fieldsParam = 'id,displayName,displayShortName,description,programType,style,displayFrontPageList,onlyEnrollOnce,' +
-'minAttributesRequiredToSearch,enrollmentDateLabel,incidentDateLabel,' +
+const fieldsParam = 'id,displayName,displayShortName,description,programType,style,displayFrontPageList,useFirstStageDuringRegistration,onlyEnrollOnce,' +
+'minAttributesRequiredToSearch,enrollmentDateLabel,incidentDateLabel' +
 'featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,' +
 'dataEntryForm[id,htmlCode],' +
 'access[*],' +
