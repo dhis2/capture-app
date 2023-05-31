@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-03-21T20:34:52.414Z\n"
-"PO-Revision-Date: 2023-03-21T20:34:52.414Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"PO-Revision-Date: 2023-05-29T07:35:17.403Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -139,6 +139,9 @@ msgstr "Coordinate"
 
 msgid "Enrollment"
 msgstr "Enrollment"
+
+msgid "Please select {{categoryName}}"
+msgstr "Please select {{categoryName}}"
 
 msgid "A future date is not allowed"
 msgstr "A future date is not allowed"
@@ -831,105 +834,8 @@ msgstr "Create new {{trackedEntityType}}"
 msgid "Register"
 msgstr "Register"
 
-msgid "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-
-msgid "Search {{name}}"
-msgstr "Search {{name}}"
-
-msgid "Search by {{name}}"
-msgstr "Search by {{name}}"
-
-msgid "Search by attributes"
-msgstr "Search by attributes"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "Fill in this field to search{{escape}} {{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "No results found"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-
-msgid "Register a user"
-msgstr "Register a user"
-
-msgid "Back to search"
-msgstr "Back to search"
-
-msgid "An error has occurred"
-msgstr "An error has occurred"
-
-msgid "Too many results"
-msgstr "Too many results"
-
-msgid "Cannot search in all programs"
-msgstr "Cannot search in all programs"
-
 msgid "Back"
 msgstr "Back"
-
-msgid "Search for {{titleText}}"
-msgstr "Search for {{titleText}}"
-
-msgid "Search for"
-msgstr "Search for"
-
-msgid "You can also choose a program from the top bar and search in that program"
-msgstr "You can also choose a program from the top bar and search in that program"
-
-msgid "Choose a type to start searching"
-msgstr "Choose a type to start searching"
-
-msgid "all programs"
-msgstr "all programs"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-
-msgid "Search in all programs"
-msgstr "Search in all programs"
-
-msgid "If none of search results match, you can create a new "
-msgstr "If none of search results match, you can create a new "
-
-msgid "Create new"
-msgstr "Create new"
-
-msgid "Saved lists in this program"
-msgstr "Saved lists in this program"
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr "Saved lists offer quick access to your most used views in a program."
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-
-msgid "Create saved list"
-msgstr "Create saved list"
 
 msgid "events"
 msgstr "events"
@@ -980,6 +886,9 @@ msgstr "Organisation unit could not be loaded"
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
 
+msgid "No results found"
+msgstr "No results found"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
@@ -1019,6 +928,86 @@ msgstr "Show all programs"
 msgid "Choose a program"
 msgstr "Choose a program"
 
+msgid "Search for {{titleText}}"
+msgstr "Search for {{titleText}}"
+
+msgid "Search for"
+msgstr "Search for"
+
+msgid "You can also choose a program from the top bar and search in that program"
+msgstr "You can also choose a program from the top bar and search in that program"
+
+msgid "Choose a type to start searching"
+msgstr "Choose a type to start searching"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] "Fill in at least {{count}} attribute to search"
+msgstr[1] "Fill in at least {{count}} attributes to search"
+
+msgid "Search {{name}}"
+msgstr "Search {{name}}"
+
+msgid "Search by {{name}}"
+msgstr "Search by {{name}}"
+
+msgid "Search by attributes"
+msgstr "Search by attributes"
+
+msgid "all programs"
+msgstr "all programs"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+
+msgid "Search in all programs"
+msgstr "Search in all programs"
+
+msgid "If none of search results match, you can create a new "
+msgstr "If none of search results match, you can create a new "
+
+msgid "Create new"
+msgstr "Create new"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "Fill in this field to search{{escape}} {{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+
+msgid "Back to search"
+msgstr "Back to search"
+
+msgid "An error has occurred"
+msgstr "An error has occurred"
+
+msgid "Too many results"
+msgstr "Too many results"
+
+msgid "Cannot search in all programs"
+msgstr "Cannot search in all programs"
+
+msgid "Missing search criteria"
+msgstr "Missing search criteria"
+
 msgid "Results found"
 msgstr "Results found"
 
@@ -1028,8 +1017,21 @@ msgstr "Selected program"
 msgid "Search {{uniqueAttrName}}"
 msgstr "Search {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Saved lists in this program"
+msgstr "Saved lists in this program"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr "Saved lists offer quick access to your most used views in a program."
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+
+msgid "Create saved list"
+msgstr "Create saved list"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "New {{trackedEntityName}} in {{programName}}"
@@ -1196,21 +1198,11 @@ msgstr "Scheduled automatically for {{suggestedScheduleDate}}"
 msgid "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr "The scheduled date matches the suggested date, but can be changed if needed."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural "The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] "The scheduled date is {{count}} day {{position}} the suggested date."
-msgstr[1] "The scheduled date is {{count}} days {{position}} the suggested date."
-
 msgid "after"
 msgstr "after"
 
 msgid "before"
 msgstr "before"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[1] "There are {{count}} scheduled events in {{orgUnitName}} on this day."
 
 msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1343,6 +1335,9 @@ msgstr "Choose a program stage to filter by {{label}}"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
+
+msgid "an error occurred loading the working lists"
+msgstr "an error occurred loading the working lists"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "an error occurred loading Tracked entity instance lists"

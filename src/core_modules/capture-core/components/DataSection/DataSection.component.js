@@ -18,7 +18,6 @@ const styles = {
         width: 'fit-content',
         padding: 4,
     },
-
 };
 
 const DataSectionPlain = ({ sectionName, children, classes, dataTest }: Props) => (

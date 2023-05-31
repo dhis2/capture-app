@@ -1,3 +1,80 @@
+## [100.32.1](https://github.com/dhis2/capture-app/compare/v100.32.0...v100.32.1) (2023-05-30)
+
+
+### Bug Fixes
+
+* [DHIS2-12520] change enrollment event from url ([#3210](https://github.com/dhis2/capture-app/issues/3210)) ([c126fe4](https://github.com/dhis2/capture-app/commit/c126fe479bc04c5cbacfe309b8400782f2727be4))
+
+# [100.32.0](https://github.com/dhis2/capture-app/compare/v100.31.7...v100.32.0) (2023-05-30)
+
+
+### Features
+
+* [DHIS2-14577] search UX improvements ([#3229](https://github.com/dhis2/capture-app/issues/3229)) ([967ba52](https://github.com/dhis2/capture-app/commit/967ba5273df26ca1cc0e5276f7682da479548121))
+
+## [100.31.7](https://github.com/dhis2/capture-app/compare/v100.31.6...v100.31.7) (2023-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15153] ask user to create new event  ([#3248](https://github.com/dhis2/capture-app/issues/3248)) ([d061efc](https://github.com/dhis2/capture-app/commit/d061efca2bbc5c4ecf3b8b1614e0ccb7a7d909d3))
+
+## [100.31.6](https://github.com/dhis2/capture-app/compare/v100.31.5...v100.31.6) (2023-05-29)
+
+
+### Bug Fixes
+
+* [TECH-1508][DHIS2-15103] extract search component ([#3223](https://github.com/dhis2/capture-app/issues/3223)) ([dd72c50](https://github.com/dhis2/capture-app/commit/dd72c5053a8aea8620e51fd80260654d6a6815ed))
+
+## [100.31.5](https://github.com/dhis2/capture-app/compare/v100.31.4...v100.31.5) (2023-05-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6324fe1](https://github.com/dhis2/capture-app/commit/6324fe1197c2509c8efb818fd6671d96e8839537))
+
+## [100.31.4](https://github.com/dhis2/capture-app/compare/v100.31.3...v100.31.4) (2023-05-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13884] remove padding caused by hidden sections ([#3242](https://github.com/dhis2/capture-app/issues/3242)) ([073c650](https://github.com/dhis2/capture-app/commit/073c650eb52a85a0ba65fc541d260e463de23de2))
+
+## [100.31.3](https://github.com/dhis2/capture-app/compare/v100.31.2...v100.31.3) (2023-05-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9305b5a](https://github.com/dhis2/capture-app/commit/9305b5a3f593e9dfff7daebfa3111093daf61932))
+
+## [100.31.2](https://github.com/dhis2/capture-app/compare/v100.31.1...v100.31.2) (2023-05-16)
+
+
+### Bug Fixes
+
+* [DHIS2-11345] support newline in program rule expressions ([#3243](https://github.com/dhis2/capture-app/issues/3243)) ([eb1cc0a](https://github.com/dhis2/capture-app/commit/eb1cc0a25bfe26c24dc8b95a2d5601f33239bd1a))
+
+## [100.31.1](https://github.com/dhis2/capture-app/compare/v100.31.0...v100.31.1) (2023-05-15)
+
+
+### Bug Fixes
+
+* [DHIS2-14862] show icon for selected program inside the ScopeSelector ([#3230](https://github.com/dhis2/capture-app/issues/3230)) ([e57cd3e](https://github.com/dhis2/capture-app/commit/e57cd3eeb63731d624adfa1efae86389a0f4a541))
+
+# [100.31.0](https://github.com/dhis2/capture-app/compare/v100.30.0...v100.31.0) (2023-05-10)
+
+
+### Features
+
+* [DHIS2-14574] store program stage working lists ([#3213](https://github.com/dhis2/capture-app/issues/3213)) ([4f5817d](https://github.com/dhis2/capture-app/commit/4f5817dc2f2104aa2f5eb5d05eef53fe66f6a752))
+
+# [100.30.0](https://github.com/dhis2/capture-app/compare/v100.29.1...v100.30.0) (2023-05-10)
+
+
+### Features
+
+* [DHIS2-14465] AOC for Tracker programs ([#3190](https://github.com/dhis2/capture-app/issues/3190)) ([f8729c4](https://github.com/dhis2/capture-app/commit/f8729c41b7ba36d079659d4c43c85be84312acdb))
+
 ## [100.29.1](https://github.com/dhis2/capture-app/compare/v100.29.0...v100.29.1) (2023-04-26)
 
 

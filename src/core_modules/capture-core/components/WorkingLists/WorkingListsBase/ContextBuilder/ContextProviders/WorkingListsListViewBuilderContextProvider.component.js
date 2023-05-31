@@ -20,6 +20,7 @@ export const WorkingListsListViewBuilderContextProvider = ({
     onChangePage,
     onChangeRowsPerPage,
     stickyFilters,
+    programStageId,
     children,
 }: Props) => {
     const listViewBuilderContextData = useMemo(() => ({
@@ -37,6 +38,7 @@ export const WorkingListsListViewBuilderContextProvider = ({
         onChangePage,
         onChangeRowsPerPage,
         stickyFilters,
+        programStageId,
     }), [
         updating,
         updatingWithDialog,
@@ -52,6 +54,7 @@ export const WorkingListsListViewBuilderContextProvider = ({
         onChangePage,
         onChangeRowsPerPage,
         stickyFilters,
+        programStageId,
     ]);
 
     return (

@@ -5,7 +5,7 @@ import { convertClientToForm } from '../../../../converters';
 
 
 export const useFormValuesFromSearchTerms = () => {
-    const searchTerms = useSelector(({ searchPage }) => searchPage.currentSearchInfo.currentSearchTerms);
+    const searchTerms = useSelector(({ searchDomain }) => searchDomain.currentSearchInfo.currentSearchTerms);
     const [formValues, setFormValues] = useState();
     useEffect(() => {
         if (searchTerms) {

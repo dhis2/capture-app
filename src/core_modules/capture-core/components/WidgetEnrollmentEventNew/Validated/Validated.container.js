@@ -43,6 +43,8 @@ export const Validated = ({
         // $FlowFixMe Investigate
         rulesExecutionDependenciesClientFormatted,
     });
+
+
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, program.id);
 
     const dispatch = useDispatch();
@@ -108,7 +110,6 @@ export const Validated = ({
         formFoundation,
         availableProgramStages,
     ]);
-
 
     return (
         <AskToCreateNewHandlerHOC

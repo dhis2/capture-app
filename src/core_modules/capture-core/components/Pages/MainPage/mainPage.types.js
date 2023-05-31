@@ -11,6 +11,8 @@ export type PlainProps = $ReadOnly<{|
     ...PassOnProps,
     setShowAccessible: () => void,
     MainPageStatus: boolean,
+    selectedTemplateId: string,
+    showMainPage: boolean,
     ...CssClasses,
 |}>;
 
@@ -19,4 +21,7 @@ export type Props = $ReadOnly<{|
     ...PlainProps,
     error: boolean,
     ready: boolean,
+    trackedEntityTypeId?: string,
+    displayFrontPageList?: boolean,
+    selectedCategories: ?{ [categoryId: string]: { writeAccess: boolean } },
 |}>;
