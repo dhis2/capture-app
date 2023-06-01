@@ -1,3 +1,10 @@
+## [100.32.3](https://github.com/dhis2/capture-app/compare/v100.32.2...v100.32.3) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-15231] Information widgets wrongly hidden in Add Event Page ([4adea95](https://github.com/dhis2/capture-app/commit/4adea952b60f78953091aca011813885a24d7407))
+
 ## [100.32.2](https://github.com/dhis2/capture-app/compare/v100.32.1...v100.32.2) (2023-06-01)
 
 
