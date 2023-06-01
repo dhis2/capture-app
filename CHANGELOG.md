@@ -1,3 +1,10 @@
+## [100.32.2](https://github.com/dhis2/capture-app/compare/v100.32.1...v100.32.2) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-15342] program stage WL trackedEntities request ([#3269](https://github.com/dhis2/capture-app/issues/3269)) ([2a50baf](https://github.com/dhis2/capture-app/commit/2a50baf6a2015d22a0c66fd50027dfe98191fe98))
+
 ## [100.32.1](https://github.com/dhis2/capture-app/compare/v100.32.0...v100.32.1) (2023-05-30)
 
 
