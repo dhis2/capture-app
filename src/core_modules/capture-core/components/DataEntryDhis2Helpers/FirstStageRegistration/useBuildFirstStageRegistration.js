@@ -7,7 +7,7 @@ export const useBuildFirstStageRegistration = (programId: string, skip: boolean 
     const { program, isLoading } = useProgramFromIndexedDB(programId);
 
     const firstStage = useMemo(() => {
-        if (!skip && !isLoading && program && program.useFirstStageDuringRegistration) {
+        if (!skip && !isLoading && program?.useFirstStageDuringRegistration) {
             const { programStages } = program;
             const programStagesWithAccess = programStages
                 .filter((stage) => {

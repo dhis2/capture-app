@@ -113,6 +113,7 @@ export type CachedProgramStage = {
     generatedByEnrollmentDate?: ?boolean,
     hideDueDate?: ?boolean,
     reportDateToUse: string,
+    repeatable: boolean,
     minDaysFromStart: number,
     style?: ?CachedStyle,
 };
