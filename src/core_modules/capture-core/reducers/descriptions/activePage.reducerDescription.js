@@ -59,6 +59,7 @@ export const activePageDesc = createReducerDescription({
     [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: state => ({
         ...state,
         isDataEntryLoading: true,
+        viewEventLoadError: null,
     }),
     [viewEventPageActionTypes.OPEN_VIEW_EVENT_PAGE_FAILED]: (state, action) => ({
         ...state,

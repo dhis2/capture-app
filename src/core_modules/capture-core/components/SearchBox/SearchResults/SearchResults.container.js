@@ -4,9 +4,14 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SearchResultsComponent } from './SearchResults.component';
 import type { Props, PropsFromRedux, DispatchersFromRedux, OwnProps } from './SearchResults.types';
-import { navigateToNewUserPage, searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram, startFallbackSearch } from '../SearchPage.actions';
-import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
-import { searchScopes, PAGINATION } from '../SearchPage.constants';
+import {
+    navigateToNewTrackedEntityPage,
+    searchViaAttributesOnScopeTrackedEntityType,
+    searchViaAttributesOnScopeProgram,
+    startFallbackSearch,
+} from '../SearchBox.actions';
+import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../metaData/helpers';
+import { searchScopes, PAGINATION } from '../SearchBox.constants';
 
 const getCurrentScope = (scopeId: string, scopeType: $Keys<typeof searchScopes>) => {
     if (!scopeId) {
@@ -37,7 +42,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             formId: currentFormId,
             currentSearchTerms,
         },
-    } = state.searchPage;
+    } = state.searchDomain;
 
     const scopeEntity = getCurrentScope(currentSearchScopeId, currentSearchScopeType);
 
@@ -94,7 +99,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { availableSearchOptions })
         }));
     },
     handleCreateNew: () => {
-        dispatch(navigateToNewUserPage());
+        dispatch(navigateToNewTrackedEntityPage());
     },
 });
 

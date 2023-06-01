@@ -27,6 +27,9 @@ export const viewEventFromUrl = (data: Object) =>
         page: data.nextPage,
     });
 
+export const changeEventFromUrl = (eventId: string, page: string) =>
+    actionCreator(actionTypes.VIEW_EVENT_FROM_URL)({ eventId, page });
+
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)({ error: message });
 

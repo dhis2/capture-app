@@ -10,8 +10,9 @@ import {
     searchViaAttributesOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
     searchViaUniqueIdOnScopeTrackedEntityType,
-} from '../SearchPage.actions';
-import { addFormData, removeFormData } from '../../../D2Form/actions/form.actions';
+    showUniqueSearchValueEmptyModal,
+} from '../SearchBox.actions';
+import { addFormData, removeFormData } from '../../D2Form/actions/form.actions';
 
 const isValueContainingCharacter = (value: any) => {
     if (!value) {
@@ -56,7 +57,7 @@ const collectCurrentSearchTerms = (searchGroupsForSelectedScope, formsValues): C
 const mapStateToProps = (state: ReduxState, { searchGroupsForSelectedScope }: OwnProps): PropsFromRedux => {
     const {
         formsValues,
-        searchPage: {
+        searchDomain: {
             searchStatus,
             keptFallbackSearchFormValues,
         },
@@ -70,6 +71,10 @@ const mapStateToProps = (state: ReduxState, { searchGroupsForSelectedScope }: Ow
             const currentSearchTerms = collectCurrentSearchTerms(searchGroupsForSelectedScope, formsValues);
 
             return Object.values(currentSearchTerms).length >= minAttributesRequiredToSearch;
+        },
+        isSearchViaUniqueIdValid: (formId) => {
+            const searchTerms = formsValues[formId] || {};
+            return Object.values(searchTerms).some(value => isValueContainingCharacter(value));
         },
     };
 };
@@ -106,6 +111,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedSc
             .forEach(({ formId }) => {
                 dispatch(removeFormData(formId));
             });
+    },
+    showUniqueSearchValueEmptyModal: ({ uniqueTEAName }) => {
+        dispatch(showUniqueSearchValueEmptyModal({ uniqueTEAName }));
     },
 });
 

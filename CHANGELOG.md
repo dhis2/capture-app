@@ -1,3 +1,45 @@
+## [100.32.3](https://github.com/dhis2/capture-app/compare/v100.32.2...v100.32.3) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-15231] Information widgets wrongly hidden in Add Event Page ([4adea95](https://github.com/dhis2/capture-app/commit/4adea952b60f78953091aca011813885a24d7407))
+
+## [100.32.2](https://github.com/dhis2/capture-app/compare/v100.32.1...v100.32.2) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-15342] program stage WL trackedEntities request ([#3269](https://github.com/dhis2/capture-app/issues/3269)) ([2a50baf](https://github.com/dhis2/capture-app/commit/2a50baf6a2015d22a0c66fd50027dfe98191fe98))
+
+## [100.32.1](https://github.com/dhis2/capture-app/compare/v100.32.0...v100.32.1) (2023-05-30)
+
+
+### Bug Fixes
+
+* [DHIS2-12520] change enrollment event from url ([#3210](https://github.com/dhis2/capture-app/issues/3210)) ([c126fe4](https://github.com/dhis2/capture-app/commit/c126fe479bc04c5cbacfe309b8400782f2727be4))
+
+# [100.32.0](https://github.com/dhis2/capture-app/compare/v100.31.7...v100.32.0) (2023-05-30)
+
+
+### Features
+
+* [DHIS2-14577] search UX improvements ([#3229](https://github.com/dhis2/capture-app/issues/3229)) ([967ba52](https://github.com/dhis2/capture-app/commit/967ba5273df26ca1cc0e5276f7682da479548121))
+
+## [100.31.7](https://github.com/dhis2/capture-app/compare/v100.31.6...v100.31.7) (2023-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15153] ask user to create new event  ([#3248](https://github.com/dhis2/capture-app/issues/3248)) ([d061efc](https://github.com/dhis2/capture-app/commit/d061efca2bbc5c4ecf3b8b1614e0ccb7a7d909d3))
+
+## [100.31.6](https://github.com/dhis2/capture-app/compare/v100.31.5...v100.31.6) (2023-05-29)
+
+
+### Bug Fixes
+
+* [TECH-1508][DHIS2-15103] extract search component ([#3223](https://github.com/dhis2/capture-app/issues/3223)) ([dd72c50](https://github.com/dhis2/capture-app/commit/dd72c5053a8aea8620e51fd80260654d6a6815ed))
+
 ## [100.31.5](https://github.com/dhis2/capture-app/compare/v100.31.4...v100.31.5) (2023-05-25)
 
 
