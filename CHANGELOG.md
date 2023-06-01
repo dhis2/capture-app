@@ -1,3 +1,10 @@
+## [100.32.4](https://github.com/dhis2/capture-app/compare/v100.32.3...v100.32.4) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-14412] validate date-string arguments in d2-functions ([#3236](https://github.com/dhis2/capture-app/issues/3236)) ([cab376e](https://github.com/dhis2/capture-app/commit/cab376e7fbf76de17a6b8dfdbda23b8ed680e006))
+
 ## [100.32.3](https://github.com/dhis2/capture-app/compare/v100.32.2...v100.32.3) (2023-06-01)
 
 
