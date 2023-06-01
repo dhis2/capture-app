@@ -26,7 +26,8 @@ export const buildEnrollmentForm = async ({
     cachedTrackedEntityAttributes,
     locale,
 }: Props) => {
-    const searchGroups = await buildSearchGroup(cachedProgram);
+    // $FlowFixMe - cachedProgram does not contain trackedEntityTypeAttributes
+    const searchGroups = await buildSearchGroup(cachedProgram, locale);
     const enrollmentFactory = new EnrollmentFactory({
         cachedTrackedEntityAttributes: new Map(cachedTrackedEntityAttributes.map(tea => [tea.id, tea])),
         cachedOptionSets: new Map(cachedOptionSets.map(optionSet => [optionSet.id, optionSet])),
