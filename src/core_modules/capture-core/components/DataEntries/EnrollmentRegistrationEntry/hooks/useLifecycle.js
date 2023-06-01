@@ -23,7 +23,7 @@ export const useLifecycle = (
     const dispatch = useDispatch();
     const program = programId && getProgramThrowIfNotFound(programId);
     const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]) && !!orgUnit;
-    const searchTerms = useSelector(({ searchPage }) => searchPage.currentSearchInfo.currentSearchTerms);
+    const searchTerms = useSelector(({ searchDomain }) => searchDomain.currentSearchInfo.currentSearchTerms);
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
