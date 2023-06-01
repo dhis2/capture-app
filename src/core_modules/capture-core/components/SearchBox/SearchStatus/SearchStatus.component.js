@@ -15,7 +15,7 @@ import {
 } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import type { ContainerProps, Props } from './SearchStatus.types';
+import type { ComponentProps, Props } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchResults } from '../SearchResults';
 import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
@@ -41,6 +41,7 @@ export const SearchStatusPlain = ({
     navigateToRegisterTrackedEntity,
     showInitialSearchBox,
     fallbackTriggered,
+    uniqueTEAName = '',
     trackedEntityName,
     classes,
 }: Props) => {
@@ -131,7 +132,29 @@ export const SearchStatusPlain = ({
             </Modal>
         );
     }
+
+    if (searchStatus === searchBoxStatus.UNIQUE_SEARCH_VALUE_EMPTY) {
+        return (
+            <Modal position="middle" onClose={showInitialSearchBox}>
+                <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
+                <ModalContent>
+                    {i18n.t(`Please fill in ${uniqueTEAName} to search`)}
+                </ModalContent>
+                <ModalActions>
+                    <ButtonStrip end>
+                        <Button
+                            disabled={searchStatus === searchBoxStatus.LOADING}
+                            onClick={showInitialSearchBox}
+                            primary
+                        >
+                            {i18n.t('Back to search')}
+                        </Button>
+                    </ButtonStrip>
+                </ModalActions>
+            </Modal>
+        );
+    }
     return null;
 };
 
-export const SearchStatus: ComponentType<ContainerProps> = compose(withStyles(getStyles))(SearchStatusPlain);
+export const SearchStatus: ComponentType<ComponentProps> = compose(withStyles(getStyles))(SearchStatusPlain);
