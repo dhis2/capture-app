@@ -60,7 +60,14 @@ const deriveGeometryFromFormValues = (formValues = {}) =>
         .filter(key => geometryType(key))
         .reduce((acc, currentKey) => (standardGeoJson(formValues[currentKey])), undefined);
 
-const deriveFirstStageEvent = ({ firstStage, programId, orgUnitId, currentEventValues, fieldsValue }) => {
+const deriveFirstStageEvent = ({
+    firstStage,
+    programId,
+    orgUnitId,
+    currentEventValues,
+    fieldsValue,
+    attributeCategoryOptions,
+}) => {
     if (!firstStage) {
         return null;
     }
@@ -79,6 +86,10 @@ const deriveFirstStageEvent = ({ firstStage, programId, orgUnitId, currentEventV
         return acc;
     }, []);
 
+    const eventAttributeCategoryOptions = attributeCategoryOptions
+        ? { attributeCategoryOptions: convertCategoryOptionsToServer(attributeCategoryOptions) }
+        : {};
+
     return {
         dataValues,
         status: complete ? 'COMPLETED' : 'ACTIVE',
@@ -88,6 +99,7 @@ const deriveFirstStageEvent = ({ firstStage, programId, orgUnitId, currentEventV
         programStage: stageId,
         program: programId,
         orgUnit: orgUnitId,
+        ...eventAttributeCategoryOptions,
     };
 };
 
@@ -223,6 +235,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 orgUnitId,
                 currentEventValues,
                 fieldsValue,
+                attributeCategoryOptions,
             });
             const events = deriveEvents({
                 stages,
