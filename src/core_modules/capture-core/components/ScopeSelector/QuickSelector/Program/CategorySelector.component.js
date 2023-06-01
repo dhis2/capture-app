@@ -198,7 +198,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
                                 options.map(option => (
                                     <MenuItem
                                         key={option.value}
-                                        label={<div className={classes.label}>{option.label}</div>}
+                                        label={option.label}
                                         value={option.value}
                                         onClick={(item) => {
                                             this.setState({ open: false });

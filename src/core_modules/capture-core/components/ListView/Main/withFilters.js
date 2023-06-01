@@ -12,6 +12,7 @@ type Props = {
     onRemoveFilter: Function,
     onSelectRestMenuItem: Function,
     stickyFilters: Object,
+    programStageId?: string,
 };
 
 export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
@@ -24,6 +25,7 @@ export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
         onRemoveFilter,
         onSelectRestMenuItem,
         stickyFilters,
+        programStageId,
         ...passOnProps
     }: Props) => (
         <InnerComponent
@@ -32,6 +34,7 @@ export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
             filters={
                 <FiltersRows
                     columns={columns}
+                    programStageId={programStageId}
                     filtersOnly={filtersOnly}
                     additionalFilters={additionalFilters}
                     onUpdateFilter={onUpdateFilter}

@@ -45,24 +45,9 @@ type Props = {
     onRemoveFilter: Function,
     onSelectRestMenuItem: Function,
     stickyFilters: Object,
+    shouldRenderAdditionalFiltersButtons: boolean,
+    visibleSelectorId: ?string,
     classes: Object,
-};
-
-const renderAdditionalFiltersButtons = (additionalFilters, stickyFilters) => {
-    if (additionalFilters && stickyFilters) {
-        const { filtersWithValueOnInit = {}, userSelectedFilters = {} } = stickyFilters;
-        const mainButtonAdditionalFilters = additionalFilters.find(filter => filter.mainButton);
-
-        return mainButtonAdditionalFilters
-            ? {
-                shouldRenderAdditionalFiltersButtons:
-                    userSelectedFilters[mainButtonAdditionalFilters.id] ||
-                    filtersWithValueOnInit[mainButtonAdditionalFilters.id],
-                visibleSelectorId: mainButtonAdditionalFilters.id,
-            }
-            : { shouldRenderAdditionalFiltersButtons: false, visibleSelectorId: undefined };
-    }
-    return { shouldRenderAdditionalFiltersButtons: false, visibleSelectorId: undefined };
 };
 
 export const FiltersRowsPlain = ({
@@ -74,45 +59,42 @@ export const FiltersRowsPlain = ({
     onRemoveFilter,
     onSelectRestMenuItem,
     stickyFilters,
+    shouldRenderAdditionalFiltersButtons,
+    visibleSelectorId,
     classes,
-}: Props) => {
-    const { shouldRenderAdditionalFiltersButtons, visibleSelectorId } =
-        renderAdditionalFiltersButtons(additionalFilters, stickyFilters);
-
-    return (
-        <>
-            <div className={classes.filtersButtons}>
-                <Filters
-                    columns={columns.filter(item => !item.additionalColumn)}
-                    filtersOnly={filtersOnly}
-                    additionalFilters={additionalFilters}
-                    onUpdateFilter={onUpdateFilter}
-                    onClearFilter={onClearFilter}
-                    onSelectRestMenuItem={onSelectRestMenuItem}
-                    stickyFilters={stickyFilters}
-                />
-            </div>
-            {shouldRenderAdditionalFiltersButtons && (
-                <>
+}: Props) => (
+    <>
+        <div className={classes.filtersButtons}>
+            <Filters
+                columns={columns.filter(item => !item.additionalColumn)}
+                filtersOnly={filtersOnly}
+                additionalFilters={additionalFilters}
+                onUpdateFilter={onUpdateFilter}
+                onClearFilter={onClearFilter}
+                onSelectRestMenuItem={onSelectRestMenuItem}
+                stickyFilters={stickyFilters}
+            />
+        </div>
+        {shouldRenderAdditionalFiltersButtons && (
+            <>
+                <div className={classes.break} />
+                <div className={classes.additionalFiltersContainer}>
+                    <div className={classes.additionalFiltersTitle}>{i18n.t('Stage filters').toUpperCase()}</div>
                     <div className={classes.break} />
-                    <div className={classes.additionalFiltersContainer}>
-                        <div className={classes.additionalFiltersTitle}>{i18n.t('Stage filters').toUpperCase()}</div>
-                        <div className={classes.break} />
-                        <Filters
-                            columns={columns.filter(item => item.additionalColumn)}
-                            filtersOnly={additionalFilters}
-                            onUpdateFilter={onUpdateFilter}
-                            onClearFilter={onClearFilter}
-                            onSelectRestMenuItem={onSelectRestMenuItem}
-                            stickyFilters={stickyFilters}
-                            visibleSelectorId={visibleSelectorId}
-                            onRemoveFilter={itemId => onRemoveFilter(itemId, stickyFilters.filtersWithValueOnInit)}
-                        />
-                    </div>
-                </>
-            )}
-        </>
-    );
-};
+                    <Filters
+                        columns={columns.filter(item => item.additionalColumn)}
+                        filtersOnly={additionalFilters}
+                        onUpdateFilter={onUpdateFilter}
+                        onClearFilter={onClearFilter}
+                        onSelectRestMenuItem={onSelectRestMenuItem}
+                        stickyFilters={stickyFilters}
+                        visibleSelectorId={visibleSelectorId}
+                        onRemoveFilter={itemId => onRemoveFilter(itemId, stickyFilters.filtersWithValueOnInit)}
+                    />
+                </div>
+            </>
+        )}
+    </>
+);
 
-export const FiltersRows = withStyles(getStyles)(FiltersRowsPlain);
+export const FiltersRowsComponent = withStyles(getStyles)(FiltersRowsPlain);

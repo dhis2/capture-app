@@ -1,7 +1,7 @@
 // @flow
 import { typeof dataElementTypes } from '../../../../metaData';
 import type { Categories } from '../../WorkingListsBase';
-import type { ApiTEIQueryCriteria } from './apiTemplate.types';
+import type { ApiTrackerQueryCriteria } from './apiTemplate.types';
 
 type TeiRecord = {| [id: string]: any |};
 
@@ -17,11 +17,12 @@ export type TeiWorkingListsTemplate = {
         write: boolean,
         manage: boolean,
     },
-    criteria?: ApiTEIQueryCriteria,
+    criteria?: ApiTrackerQueryCriteria,
     notPreserved?: boolean,
     deleted?: boolean,
     updating?: boolean,
     order?: number,
+    isAltered?: boolean,
 };
 
 export type TeiWorkingListsTemplates = Array<TeiWorkingListsTemplate>;
@@ -34,6 +35,7 @@ export type ColumnConfigBase = {|
     options?: ?Array<{text: string, value: any}>,
     multiValueFilter?: boolean,
     filterHidden?: boolean,
+    additionalColumn?: boolean,
 |};
 export type MetadataColumnConfig = {
     ...ColumnConfigBase,
@@ -44,12 +46,7 @@ export type MainColumnConfig = {
     mainProperty: true,
 };
 
-export type AdditionalColumnConfig = {
-    ...ColumnConfigBase,
-    additionalColumn: true,
-};
-
-export type TeiWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfig | AdditionalColumnConfig;
+export type TeiWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfig;
 
 export type TeiWorkingListsColumnConfigs = Array<TeiWorkingListsColumnConfig>;
 

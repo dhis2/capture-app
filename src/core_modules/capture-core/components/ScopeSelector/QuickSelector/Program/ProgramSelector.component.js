@@ -11,6 +11,7 @@ import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import { EmptyPrograms } from './EmptyPrograms';
 import { ProgramList } from './ProgramList';
 import { getOptions } from './getOptions';
+import { OptionLabel } from '../../OptionLabel';
 
 const styles = () => ({
     selectBarMenu: {
@@ -76,7 +77,7 @@ const ProgramSelectorPlain = ({
             <SelectorBarItem
                 label={i18n.t('Program')}
                 noValueMessage={i18n.t('Choose a program')}
-                value={selectedProgram?.name}
+                value={selectedProgram && <OptionLabel icon={selectedProgram.icon} label={selectedProgram.name} />}
                 open={open}
                 setOpen={openSelectorBarItem => setOpen(openSelectorBarItem)}
                 onClearSelectionClick={() => onResetProgramId(resetProgramIdBase())}

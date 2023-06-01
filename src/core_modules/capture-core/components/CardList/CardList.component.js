@@ -4,7 +4,7 @@ import type { ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { CardListItem } from './CardListItem.component';
 import { makeElementsContainerSelector } from './CardList.selectors';
-import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.types';
+import type { CardDataElementsInformation } from '../SearchBox';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 type OwnProps = $ReadOnly<{|

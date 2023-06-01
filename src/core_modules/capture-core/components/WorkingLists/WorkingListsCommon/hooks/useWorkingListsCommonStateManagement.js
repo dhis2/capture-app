@@ -26,6 +26,7 @@ import {
     changePage,
     changeRowsPerPage,
     setTemplateSharingSettings,
+    updateDefaultTemplate,
 } from '../actions';
 import type { Program } from '../../../../metaData';
 import type {
@@ -47,7 +48,15 @@ import type {
     Sort,
     UpdateFilter,
 } from '../../WorkingListsBase';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList, LoadView, Callbacks } from '..';
+import type {
+    AddTemplate,
+    DeleteTemplate,
+    UpdateTemplate,
+    UpdateDefaultTemplate,
+    UpdateList,
+    LoadView,
+    Callbacks,
+} from '..';
 
 const useTemplates = (
     dispatch: ReduxDispatch,
@@ -69,7 +78,11 @@ const useTemplates = (
     }, shallowEqual);
 
     const templateDispatch = useMemo(() => ({
-        onSelectTemplate: (...args) => dispatch(selectTemplate(...args, storeId)),
+        onSelectTemplate: (templateId, programStageIdArg) => {
+            const selectedTemplate = templateState.templates?.find(templete => templete.id === templateId);
+            const programStageId = programStageIdArg || selectedTemplate?.criteria?.programStage;
+            return dispatch(selectTemplate(templateId, storeId, programStageId));
+        },
         onLoadTemplates: (...args) => dispatch(fetchTemplates(...args, storeId, workingListsType)),
         onCancelLoadTemplates: () => dispatch(fetchTemplatesCancel(storeId)),
         onAddTemplate: (name: string, criteria: Object, data: Object, callBacks?: Callbacks) =>
@@ -91,8 +104,8 @@ const useTemplates = (
                     workingListsType,
                 },
             )),
-        onDeleteTemplate: (template: Object, programId: string, callBacks?: Callbacks) =>
-            dispatch(deleteTemplate(template, programId, { storeId, workingListsType }, callBacks)),
+        onDeleteTemplate: (template: Object, programId: string, programStageId?: string, callBacks?: Callbacks) =>
+            dispatch(deleteTemplate(template, programId, { storeId, workingListsType, programStageId }, callBacks)),
         onSetTemplateSharingSettings: (sharingSettings: SharingSettings, templateId: string) => dispatch(setTemplateSharingSettings(sharingSettings, templateId, storeId)),
     }: {|
         onSelectTemplate: SelectTemplate,
@@ -102,7 +115,7 @@ const useTemplates = (
         onUpdateTemplate: UpdateTemplate,
         onDeleteTemplate: DeleteTemplate,
         onSetTemplateSharingSettings: SetTemplateSharingSettings,
-    |}), [storeId, dispatch, workingListsType]);
+    |}), [storeId, dispatch, workingListsType, templateState.templates]);
 
     return {
         ...templateState,
@@ -121,6 +134,7 @@ const useView = (
         workingListsColumnsOrder,
         workingListsStickyFilters,
         workingListsListRecords,
+        workingListsContext,
     }) => {
         const {
             order: recordsOrder,
@@ -159,7 +173,7 @@ const useView = (
             updatingWithDialog: !!updatingWithDialog,
             loadViewError,
             customColumnOrder: workingListsColumnsOrder[storeId],
-            programStage: workingListsMeta[storeId]?.filters?.programStage?.values[0],
+            programStage: workingListsContext[storeId]?.programStageId,
             stickyFilters: workingListsStickyFilters[storeId],
             rowsPerPage: nextRowsPerPage || rowsPerPage,
             currentPage: nextCurrentPage || currentPage,
@@ -215,6 +229,7 @@ const useView = (
         onSelectRestMenuItem: (...args) => dispatch(selectRestMenuItem(...args, storeId)),
         onChangePage: (...args) => dispatch(changePage(...args, storeId)),
         onChangeRowsPerPage: (...args) => dispatch(changeRowsPerPage(...args, storeId)),
+        onUpdateDefaultTemplate: defaultTemplate => dispatch(updateDefaultTemplate(defaultTemplate, storeId)),
     }: {|
         onLoadView: LoadView,
         onUpdateList: UpdateList,
@@ -230,6 +245,7 @@ const useView = (
         onSelectRestMenuItem: SelectRestMenuItem,
         onChangePage: ChangePage,
         onChangeRowsPerPage: ChangeRowsPerPage,
+        onUpdateDefaultTemplate: UpdateDefaultTemplate,
     |}), [storeId, dispatch, categoryCombinationId, workingListsType]);
 
     return {
