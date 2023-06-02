@@ -153,7 +153,7 @@ The second option, is to register a tracked entity instance with program and enr
     a polygon (button in the upper right corner of the map).
 
 7. Click **Save new** to register the tracked entity instance. 
-    The **Cancel** button will be disabled, and a spinner on the **Save** button will indicate that the request has been sent.
+    The **Save** button shows a loading spinner and the **Cancel** button is disabled while the request is processing.
     
 8. You will now be prompted to the tracked entity instance dashboard. 
 
@@ -300,7 +300,6 @@ To see a rule being executed while enrolling a tracked entity instance you will 
 
 5. You will now be able to see the warning produced by the program rule underneath the birth date field. 
 ![](resources/images/program-rules-on-creation-02.png)
-
 
 ## Re-enroll an existing tracked entity instance
 
