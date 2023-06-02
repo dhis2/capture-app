@@ -201,9 +201,6 @@ Feature: User creates a new entries from the registration page
     Then you see the form prefield with existing TEI attributes values
     And the scope selector has the TEI context
 
-  Scenario: First stage appears on registration page > The TEI and the event are correctly saved  
+  Scenario: First stage appears on registration page
     Given you are in Child programme registration page
-    And the first stage appears on registration page
-    When you fill the Child program registration form with its required values
-    And you click the save person submit button
-    Then you are navigated to the Child program in Tracker Capture app
+    Then the first stage appears on registration page

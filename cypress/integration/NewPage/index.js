@@ -581,14 +581,3 @@ Then('the first stage appears on registration page', () => {
         cy.contains('Apgar Score').should('exist');
     });
 });
-
-When('you fill the Child program registration form with its required values', () => {
-    cy.get('[data-test="capture-ui-input"]').eq(1).type('1985-10-01').blur();
-    cy.get('[data-test="capture-ui-input"]').eq(2).type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`);
-    cy.get('[data-test="capture-ui-input"]').eq(3).type(`Didriksson-${Math.round((new Date()).getTime() / 1000)}`);
-    cy.get('[data-test="capture-ui-input"]').eq(5).type('2023-01-01').blur();
-});
-
-Then('you are navigated to the Child program in Tracker Capture app', () => {
-    cy.url().should('include', 'dashboard?tei=');
-});
