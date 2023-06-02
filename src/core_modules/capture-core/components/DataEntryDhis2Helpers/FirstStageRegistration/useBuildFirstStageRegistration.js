@@ -4,10 +4,10 @@ import { getProgramAndStageForProgram } from '../../../metaData';
 import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const useBuildFirstStageRegistration = (programId: string, skip: boolean = false) => {
-    const { program, isLoading } = useProgramFromIndexedDB(programId);
+    const { program, isLoading } = useProgramFromIndexedDB(programId, { enabled: !skip });
 
     const firstStage = useMemo(() => {
-        if (!skip && !isLoading && program?.useFirstStageDuringRegistration) {
+        if (!isLoading && program?.useFirstStageDuringRegistration) {
             const { programStages } = program;
             const programStagesWithAccess = programStages
                 .filter((stage) => {
@@ -21,7 +21,7 @@ export const useBuildFirstStageRegistration = (programId: string, skip: boolean 
             return programStagesWithAccess[0]?.id;
         }
         return null;
-    }, [program, isLoading, skip]);
+    }, [program, isLoading]);
 
     const firstStageMetaData = useMemo(
         () => (firstStage && programId ? getProgramAndStageForProgram(programId, firstStage) : null),
