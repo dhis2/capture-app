@@ -206,4 +206,4 @@ Feature: User creates a new entries from the registration page
     And the first stage appears on registration page
     When you fill the Child program registration form with its required values
     And you click the save person submit button
-    Then you are navigated to the WHO RMNCH program in Tracker Capture app
+    Then you are navigated to the Tracker Capture
