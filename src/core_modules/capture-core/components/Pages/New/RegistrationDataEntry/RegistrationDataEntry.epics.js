@@ -16,7 +16,6 @@ import {
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { FEATURETYPE } from '../../../../constants';
 import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../utils/routing';
-import { clearContextSwitch } from '../NewPage.actions';
 import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
@@ -139,13 +138,7 @@ export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputO
         flatMap(({ payload: { bundleReport: { typeReportMap } } }) => {
             const {
                 currentSelections: { orgUnitId },
-                app: { switchContext },
             } = store.value;
-
-            if (switchContext) {
-                clearContextSwitch();
-                return EMPTY;
-            }
 
             return of(navigateToEnrollmentOverview({
                 teiId: typeReportMap.TRACKED_ENTITY.objectReports[0].uid,
@@ -233,17 +226,11 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             const { payload: { bundleReport: { typeReportMap } }, meta } = action;
             const {
                 currentSelections: { orgUnitId, programId },
-                app: { switchContext },
                 newPage,
             } = store.value;
             const { uid: stateUid } = newPage || {};
             const teiId = typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const enrollmentId = typeReportMap.ENROLLMENT.objectReports[0].uid;
-
-            if (switchContext) {
-                clearContextSwitch();
-                return EMPTY;
-            }
 
             if (stateUid !== meta.uid) {
                 return EMPTY;

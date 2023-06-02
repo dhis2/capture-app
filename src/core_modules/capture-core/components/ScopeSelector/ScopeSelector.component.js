@@ -17,24 +17,12 @@ class ScopeSelectorClass extends Component<Props, State> {
             openCatComboWarning: false,
             openStartAgainWarning: false,
             categoryIdToReset: '',
-            fallback: null,
         };
-    }
-    componentDidUpdate(prevProps) {
-        if (prevProps.isSavingInProgress && !this.props.isSavingInProgress && this.state.fallback) {
-            this.state.fallback();
-            this.setState({ fallback: null });
-        }
     }
 
     dontShowWarning = () => !this.props.isUserInteractionInProgress;
 
     handleOpenOrgUnitWarning = () => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({ fallback: () => this.props.onResetOrgUnitId() });
-            return;
-        }
         if (this.dontShowWarning()) {
             this.props.onResetOrgUnitId();
             return;
@@ -43,11 +31,6 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     handleOpenProgramWarning = (baseAction: ReduxAction<any, any>) => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({ fallback: () => this.props.onResetProgramId(baseAction) });
-            return;
-        }
         if (this.dontShowWarning()) {
             this.props.onResetProgramId(baseAction);
             return;
@@ -56,13 +39,6 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     handleOpenCatComboWarning = (categoryId: string) => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({
-                fallback: () => this.props.onResetCategoryOption && this.props.onResetCategoryOption(categoryId),
-            });
-            return;
-        }
         if (this.dontShowWarning()) {
             this.props.onResetCategoryOption && this.props.onResetCategoryOption(categoryId);
             return;
@@ -71,13 +47,6 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     handleStartAgainWarning = () => {
-        if (this.props.isSavingInProgress) {
-            this.props.onContextSwitch && this.props.onContextSwitch();
-            this.setState({
-                fallback: () => this.props.onStartAgain && this.props.onStartAgain(),
-            });
-            return;
-        }
         if (this.dontShowWarning()) {
             this.props.onStartAgain && this.props.onStartAgain();
             return;

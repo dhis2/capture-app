@@ -15,7 +15,6 @@ import {
     setCategoryOption,
     resetCategoryOption,
     resetAllCategoryOptions,
-    switchContextWhileSaving,
 } from './NewPage.actions';
 import { TopBarActions } from '../../TopBarActions';
 
@@ -65,11 +64,6 @@ export const TopBar = ({
         dispatch(resetAllCategoryOptions());
     }, [dispatch]);
 
-    const isSavingInProgress = useSelector(({ possibleDuplicates }) =>
-        possibleDuplicates.isLoading || possibleDuplicates.isUpdating);
-
-    const onContextSwitch = useCallback(() => { dispatch(switchContextWhileSaving()); }, [dispatch]);
-
     return (
         <ScopeSelector
             selectedProgramId={programId}
@@ -77,14 +71,12 @@ export const TopBar = ({
             selectedCategories={selectedCategories}
             onSetProgramId={id => setProgramId(id)}
             onSetOrgUnit={id => setOrgUnitId(id)}
-            onContextSwitch={onContextSwitch}
             onSetCategoryOption={dispatchOnSetCategoryOption}
             onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
             onResetCategoryOption={dispatchOnResetCategoryOption}
             onResetProgramId={() => resetProgramIdAndTeiId()}
             onResetOrgUnitId={() => resetOrgUnitId()}
             isUserInteractionInProgress={isUserInteractionInProgress}
-            isSavingInProgress={isSavingInProgress}
             onStartAgain={() => reset()}
         >
             {teiId && (
