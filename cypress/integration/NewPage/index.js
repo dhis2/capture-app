@@ -572,3 +572,19 @@ Then('you see the enrollment event New page', () => {
     cy.url().should('include', '/#/enrollmentEventNew?');
     cy.url().should('include', 'stageId=hYyB7FUS5eR');
 });
+
+
+Then('the first stage appears on registration page', () => {
+    cy.get('[data-test="registration-page-content"]').within(() => {
+        cy.contains('Data Entry (Birth)').should('exist');
+        cy.contains('Report date').should('exist');
+        cy.contains('Apgar Score').should('exist');
+    });
+});
+
+When('you fill the Child program registration form with its required values', () => {
+    cy.get('[data-test="capture-ui-input"]').eq(1).type('1985-10-01').blur();
+    cy.get('[data-test="capture-ui-input"]').eq(4).type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`);
+    cy.get('[data-test="capture-ui-input"]').eq(5).type(`Didriksson-${Math.round((new Date()).getTime() / 1000)}`);
+    cy.get('[data-test="capture-ui-input"]').eq(7).type('2023-01-01').blur();
+});
