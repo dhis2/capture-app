@@ -8,8 +8,8 @@ import { colors, Tag, IconCheckmark16 } from '@dhis2/ui';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
-} from '../Pages/Search/SearchResults/SearchResults.types';
-import { searchScopes } from '../Pages/Search/SearchPage.constants';
+} from '../SearchBox';
+import { searchScopes } from '../SearchBox';
 import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
 import { dataElementTypes, getTrackerProgramThrowIfNotFound } from '../../metaData';
@@ -138,7 +138,9 @@ const CardListItemIndex = ({
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitName, enrolledAt } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
-    const program = enrollments && deriveProgramFromEnrollment(enrollments, currentSearchScopeType);
+    const program = enrollments && enrollments.length
+        ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
+        : undefined;
 
     const renderImageDataElement = (imageElement?: ?CardProfileImageElementInformation) => {
         if (!imageElement) { return null; }

@@ -11,7 +11,8 @@ import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
-import { deleteEnrollment } from '../../Enrollment/EnrollmentPage.actions';
+import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentPage.actions';
+
 import { useWidgetDataFromStore } from '../hooks';
 import {
     useHideWidgetByRuleLocations,
@@ -19,6 +20,7 @@ import {
 import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
+import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
 
 export const EnrollmentAddEventPageDefault = ({
     enrollment,
@@ -40,9 +42,10 @@ export const EnrollmentAddEventPageDefault = ({
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());
             const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
+            const eventData = convertEventAttributeOptions(data.events[0]);
             dispatch(
                 updateEnrollmentEventsWithoutId(uid, {
-                    ...data.events[0],
+                    ...eventData,
                     updatedAt,
                 }),
             );
@@ -59,6 +62,7 @@ export const EnrollmentAddEventPageDefault = ({
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     }, [dispatch, enrollmentId, history, programId, orgUnitId, teiId]);
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
@@ -66,7 +70,7 @@ export const EnrollmentAddEventPageDefault = ({
     const { program } = useProgramInfo(programId);
     const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
-    const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
+    const hideWidgets = useHideWidgetByRuleLocations(program.programRules.concat(selectedProgramStage?.programRules ?? []));
     // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name;
 
@@ -114,6 +118,7 @@ export const EnrollmentAddEventPageDefault = ({
                 teiDisplayName={teiDisplayName}
                 trackedEntityName={trackedEntityName}
                 stageName={selectedProgramStage?.stageForm.name}
+                stageIcon={selectedProgramStage?.icon}
                 eventDateLabel={selectedProgramStage?.stageForm.getLabel('occurredAt')}
                 enrollmentsAsOptions={enrollmentsAsOptions}
                 onSetOrgUnitId={handleSetOrgUnitId}
@@ -145,6 +150,7 @@ export const EnrollmentAddEventPageDefault = ({
                 ready={Boolean(enrollment)}
                 dataEntryHasChanges={dataEntryHasChanges}
                 onEnrollmentError={onEnrollmentError}
+                onEnrollmentSuccess={onEnrollmentSuccess}
             />
         </>
     );

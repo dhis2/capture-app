@@ -12,6 +12,7 @@ export const newPageActionTypes = {
     ALL_CATEGORY_OPTIONS_RESET: 'NewPage.AllCategoryOptionsReset',
     SWITCH_CONTEXT_WHILE_SAVING: 'NewPage.SwitchContextWhileSaving',
     CLEAR_CONTEXT_SWITCH: 'NewPage.ClearContextSwitch',
+    CLEAN_UP_UID: 'NewPage.CleanUpUid',
 };
 
 export const showMessageToSelectOrgUnitOnNewPage = () =>
@@ -38,3 +39,5 @@ export const openNewPage = () => actionCreator(newPageActionTypes.NEW_PAGE_OPEN)
 export const switchContextWhileSaving = () => actionCreator(newPageActionTypes.SWITCH_CONTEXT_WHILE_SAVING)();
 
 export const clearContextSwitch = () => actionCreator(newPageActionTypes.CLEAR_CONTEXT_SWITCH)();
+
+export const cleanUpUid = () => actionCreator(newPageActionTypes.CLEAN_UP_UID)({ });

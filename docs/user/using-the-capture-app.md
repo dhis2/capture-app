@@ -176,10 +176,9 @@ The second option, is to register a tracked entity instance with program and enr
 
 ### Enrollment with auto generated events 
 
-A program can be configured to have zero or more program stages which are automatically generated upon a new enrollment. 
-These stages will be auto generated based on the metadata configuration, as explained below.
+Events can automatically be created when enrolling in a program.
 
-To configure the auto generation of an event you need to take the following steps. 
+To automatically generate events, you can do the necessary configuration in the maintenance app.
 1. Open the maintenance app
 
 2. Select the Program tab
@@ -191,20 +190,13 @@ To configure the auto generation of an event you need to take the following step
 4. Select the Program stages tab
 ![](resources/images/auto-generated-03.png)
 
-5. Click on the stage you would like to configure
+5. Click on the program stage you would like to generate an event for
 ![](resources/images/auto-generated-04.png)
 
-6. Mark the stage as Auto-generated
+6. Select "Auto-generate event"
 ![](resources/images/auto-generated-05.png)
 
-Now, for every new enrollment in this program one event will be auto generated. One program can also have multiple stages marked as auto generated.
-For all the auto generated events 
-
- a) the organisation unit will be the same as the user is reporting for, during the enrollment and 
- 
- b) all the events will be part of the current enrollment. 
-
-Based on configuration, the status of the auto generated event can either be ACTIVE or SCHEDULE.
+You can set multiple program stages within a program to be auto-generating (this will create an event for each program stage configured this way)
 
 ### Enrollment with open data entry form
 
@@ -643,11 +635,9 @@ The Capture app supports the workinglists in tracker programs, but when you open
 
     You will only see programs associated with the selected organisation unit and programs you have access to, and that are shared with your user group through data level sharing.
 
-3. If the program has a category combination set the category option will have to be selected.
+3. Click the Search button.
 
-4. Click the Search button.
-
-5. From the dropdown menu click the first option.
+4. From the dropdown menu click the first option.
 
     ![](resources/images/search-by-attributes-find-button.png)
 
@@ -812,7 +802,7 @@ You can show data elements from a single stage in a working list. Select the "Pr
 
 ![](resources/images/program_stage_working_list.png)
 
-The list can be [filtered](#filter-the-list), [sorted](#sort-the-list) and [modified](#modify-the-list-layout) in the same way as other working lists.
+The tracker program stage list can be [filtered](#filter-the-list), [sorted](#sort-the-list), [modified](#modify-the-list-layout), [saved](#capture_view_save), [updated](#capture_view_update), [deleted](#capture_view_delete) and [shared](#capture_view_share) in the same way as other working lists.
 
 ## Implementer / administrator info { #implementer_info } 
 
@@ -1231,3 +1221,13 @@ In this view you can see all events in a stage
 In the header, you can see the stage name and icon 
 
 ![](resources/images/program-stage-event-list-header.png)
+
+## Attribute option combo for Tracker
+
+You can add segregation to your Tracker event data using attribute option combos. To get started, add a category combination to your Tracker program configuration.
+
+The attribute option combo selector will be displayed when you are adding or changing/viewing Tracker events. Additionally, the selector will be displayed when enrolling if events are being auto-generated as part of the enrollment process.
+
+Example from new Tracker event:
+
+![](resources/images/attribute-option-combo-tracker.png)

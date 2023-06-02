@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-01-20T09:11:14.026Z\n"
-"PO-Revision-Date: 2023-01-20T09:11:14.026Z\n"
+"POT-Creation-Date: 2023-06-02T09:13:17.085Z\n"
+"PO-Revision-Date: 2023-06-02T09:13:17.085Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -139,6 +139,9 @@ msgstr "Coordinate"
 
 msgid "Enrollment"
 msgstr "Enrollment"
+
+msgid "Please select {{categoryName}}"
+msgstr "Please select {{categoryName}}"
 
 msgid "A future date is not allowed"
 msgstr "A future date is not allowed"
@@ -601,8 +604,8 @@ msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgid "There is an error while opening this enrollment. Please enter a valid url."
 msgstr "There is an error while opening this enrollment. Please enter a valid url."
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgid "An error occurred while fetching enrollments. Please enter a valid url."
+msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 
 msgid "Enrollment Dashboard"
 msgstr "Enrollment Dashboard"
@@ -641,8 +644,20 @@ msgstr ""
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr "Invalid enrollment id {{enrollmentId}}."
+
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Choose an enrollment to view the dashboard."
+
+msgid "There are no active enrollments."
+msgstr "There are no active enrollments."
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr "Add new enrollment for {{teiDisplayName}} in this program."
+
+msgid "No access to program owner."
+msgstr "No access to program owner."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is not enrolled in this program."
@@ -819,105 +834,8 @@ msgstr "Create new {{trackedEntityType}}"
 msgid "Register"
 msgstr "Register"
 
-msgid "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-
-msgid "Search {{name}}"
-msgstr "Search {{name}}"
-
-msgid "Search by {{name}}"
-msgstr "Search by {{name}}"
-
-msgid "Search by attributes"
-msgstr "Search by attributes"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "Fill in this field to search{{escape}} {{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "No results found"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-
-msgid "Register a user"
-msgstr "Register a user"
-
-msgid "Back to search"
-msgstr "Back to search"
-
-msgid "An error has occurred"
-msgstr "An error has occurred"
-
-msgid "Too many results"
-msgstr "Too many results"
-
-msgid "Cannot search in all programs"
-msgstr "Cannot search in all programs"
-
 msgid "Back"
 msgstr "Back"
-
-msgid "Search for {{titleText}}"
-msgstr "Search for {{titleText}}"
-
-msgid "Search for"
-msgstr "Search for"
-
-msgid "You can also choose a program from the top bar and search in that program"
-msgstr "You can also choose a program from the top bar and search in that program"
-
-msgid "Choose a type to start searching"
-msgstr "Choose a type to start searching"
-
-msgid "all programs"
-msgstr "all programs"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-
-msgid "Search in all programs"
-msgstr "Search in all programs"
-
-msgid "If none of search results match, you can create a new "
-msgstr "If none of search results match, you can create a new "
-
-msgid "Create new"
-msgstr "Create new"
-
-msgid "Saved lists in this program"
-msgstr "Saved lists in this program"
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr "Saved lists offer quick access to your most used views in a program."
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-
-msgid "Create saved list"
-msgstr "Create saved list"
 
 msgid "events"
 msgstr "events"
@@ -968,6 +886,9 @@ msgstr "Organisation unit could not be loaded"
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
 
+msgid "No results found"
+msgstr "No results found"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
@@ -1007,6 +928,86 @@ msgstr "Show all programs"
 msgid "Choose a program"
 msgstr "Choose a program"
 
+msgid "Search for {{titleText}}"
+msgstr "Search for {{titleText}}"
+
+msgid "Search for"
+msgstr "Search for"
+
+msgid "You can also choose a program from the top bar and search in that program"
+msgstr "You can also choose a program from the top bar and search in that program"
+
+msgid "Choose a type to start searching"
+msgstr "Choose a type to start searching"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] "Fill in at least {{count}} attribute to search"
+msgstr[1] "Fill in at least {{count}} attributes to search"
+
+msgid "Search {{name}}"
+msgstr "Search {{name}}"
+
+msgid "Search by {{name}}"
+msgstr "Search by {{name}}"
+
+msgid "Search by attributes"
+msgstr "Search by attributes"
+
+msgid "all programs"
+msgstr "all programs"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+
+msgid "Search in all programs"
+msgstr "Search in all programs"
+
+msgid "If none of search results match, you can create a new "
+msgstr "If none of search results match, you can create a new "
+
+msgid "Create new"
+msgstr "Create new"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "Fill in this field to search{{escape}} {{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+
+msgid "Back to search"
+msgstr "Back to search"
+
+msgid "An error has occurred"
+msgstr "An error has occurred"
+
+msgid "Too many results"
+msgstr "Too many results"
+
+msgid "Cannot search in all programs"
+msgstr "Cannot search in all programs"
+
+msgid "Missing search criteria"
+msgstr "Missing search criteria"
+
 msgid "Results found"
 msgstr "Results found"
 
@@ -1016,8 +1017,21 @@ msgstr "Selected program"
 msgid "Search {{uniqueAttrName}}"
 msgstr "Search {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Saved lists in this program"
+msgstr "Saved lists in this program"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr "Saved lists offer quick access to your most used views in a program."
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+
+msgid "Create saved list"
+msgstr "Create saved list"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "New {{trackedEntityName}} in {{programName}}"
@@ -1030,6 +1044,29 @@ msgstr "To work with the selected program,"
 
 msgid "open the Tracker Capture app"
 msgstr "open the Tracker Capture app"
+
+msgid "This program is protected"
+msgstr "This program is protected"
+
+msgid "Reason to check for enrollments"
+msgstr "Reason to check for enrollments"
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+
+msgid "Check for enrollments"
+msgstr "Check for enrollments"
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
 
 msgid "Save comment"
 msgstr "Save comment"
@@ -1308,6 +1345,9 @@ msgstr "Choose a program stage to filter by {{label}}"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
+
+msgid "an error occurred loading the working lists"
+msgstr "an error occurred loading the working lists"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "an error occurred loading Tracked entity instance lists"
