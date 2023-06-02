@@ -9,10 +9,12 @@ import { withLoadingIndicator } from '../../../HOC';
 import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
 import { FiltrableMenuItems } from '../QuickSelector/FiltrableMenuItems';
+import { OptionLabel } from '../OptionLabel';
+import type { Icon } from '../../../metaData';
 
 type Props = {|
     isUserInteractionInProgress?: boolean,
-    options: Array<{| label: string, value: any |}>,
+    options: Array<{| label: string, value: any, icon?: Icon |}>,
     onClear?: () => void,
     onSelect?: (value: string) => void,
     title: string,
@@ -35,6 +37,9 @@ const styles = () => ({
         alignItems: 'center',
     },
 });
+
+const getSelectedOption = (options, selectedValue) => (
+    options.find(({ value }) => value === selectedValue) || {});
 
 const SingleLockedSelectPlain = ({
     onClear,
@@ -76,7 +81,7 @@ const SingleLockedSelectPlain = ({
         handleOnSelect(item);
     };
 
-    const { label } = options.find(({ value }) => value === selectedValue) || {};
+    const { label, icon } = getSelectedOption(options, selectedValue);
     const manyOptions = options.length > 10;
 
     return (
@@ -85,7 +90,7 @@ const SingleLockedSelectPlain = ({
                 disabled={options.length === 0}
                 displayOnly={displayOnly}
                 label={capitalizeFirstLetter(title)}
-                value={label}
+                value={label && (<OptionLabel icon={icon} label={label} />)}
                 noValueMessage={hasMenu ? i18n.t(`Choose a ${lowerCaseFirstLetter(title)}`) : ''}
                 open={openSelectorBarItem}
                 setOpen={open => hasMenu && setOpenSelectorBarItem(open)}
@@ -106,7 +111,7 @@ const SingleLockedSelectPlain = ({
                                 options.map(option => (
                                     <MenuItem
                                         key={option.value}
-                                        label={<div className={classes.label}>{option.label}</div>}
+                                        label={<OptionLabel icon={option.icon} label={option.label} />}
                                         value={option.value}
                                         onClick={handleOnChange}
                                     />

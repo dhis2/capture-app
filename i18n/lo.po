@@ -2,16 +2,16 @@
 # Translators:
 # phil_dhis2, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2022
-# Saysamone Sibounma, 2022
+# Saysamone Sibounma, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Saysamone Sibounma, 2022\n"
-"Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
+"Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,23 +39,35 @@ msgid ""
 "again, but be aware that this will close other versions."
 msgstr ""
 
-msgid "Organisation unit"
-msgstr "​ຫົວ​ໜ່ວຍ​ການ​ຈັດ​ຕັ້ງ"
+msgid "View {{programName}} dashboard"
+msgstr ""
 
-msgid "Date of enrollment"
-msgstr "Date of enrollment"
+msgid "View dashboard"
+msgstr ""
 
-msgid "Program name"
-msgstr "Program name"
+msgid "View active enrollment"
+msgstr ""
 
-msgid "Last updated"
-msgstr "ປັບປຸງ​ຄັ້ງຫລ້າສຸດ"
+msgid "Re-enroll"
+msgstr ""
+
+msgid "in"
+msgstr "in"
 
 msgid "Enrolled"
 msgstr ""
 
 msgid "Previously enrolled"
 msgstr ""
+
+msgid "Organisation unit"
+msgstr "​ຫົວ​ໜ່ວຍ​ການ​ຈັດ​ຕັ້ງ"
+
+msgid "Date of enrollment"
+msgstr "Date of enrollment"
+
+msgid "Last updated"
+msgstr "ປັບປຸງ​ຄັ້ງຫລ້າສຸດ"
 
 msgid "This value is validating"
 msgstr ""
@@ -131,6 +143,9 @@ msgstr "ເສັ້ນສະແດງ"
 
 msgid "Enrollment"
 msgstr "ການລົງທະບຽນ"
+
+msgid "Please select {{categoryName}}"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -270,9 +285,6 @@ msgstr ""
 msgid "enrollment"
 msgstr ""
 
-msgid "in"
-msgstr "in"
-
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
@@ -301,9 +313,6 @@ msgstr ""
 msgid "Registered person"
 msgstr ""
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-
 msgid "validation failed"
 msgstr ""
 
@@ -329,6 +338,9 @@ msgid "No, cancel"
 msgstr ""
 
 msgid "Yes, create new event"
+msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
 msgid "Warnings found"
@@ -587,7 +599,8 @@ msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
 msgid "Enrollment Dashboard"
@@ -626,7 +639,19 @@ msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
 msgid "Choose an enrollment to view the dashboard."
+msgstr ""
+
+msgid "There are no active enrollments."
+msgstr ""
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid "No access to program owner."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -691,7 +716,7 @@ msgstr "ກຳນົດເວລາ"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more events in this program"
+msgid "You can’t add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -703,8 +728,8 @@ msgstr ""
 msgid "Program Stages could not be loaded"
 msgstr ""
 
-msgid "stage"
-msgstr ""
+msgid "Stage"
+msgstr "ຍະຫວ່າງ"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -740,9 +765,6 @@ msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
 msgid "Save as new"
-msgstr ""
-
-msgid "View dashboard"
 msgstr ""
 
 msgid "View enrollment"
@@ -869,12 +891,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr ""
 
-msgid "View active enrollment"
-msgstr ""
-
-msgid "Re-enroll"
-msgstr ""
-
 msgid "all programs"
 msgstr ""
 
@@ -895,7 +911,15 @@ msgstr "ສ້າງໃໝ່"
 msgid "Saved lists in this program"
 msgstr ""
 
-msgid "Create custom working list"
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
 msgstr ""
 
 msgid "events"
@@ -957,38 +981,38 @@ msgstr ""
 msgid "Add relationship"
 msgstr "ເພີ່ມຄວາມສໍາພັນ"
 
-msgid "Selected registering unit"
+msgid "No results found for "
 msgstr ""
 
-msgid "Start Again"
+msgid "Registering unit"
+msgstr "ສະຖານທີ່ລົງທະບຽນ"
+
+msgid "Choose a registering unit"
 msgstr ""
 
-msgid "Are you sure? All unsaved data will be lost."
+msgid "Clear selection"
 msgstr ""
-
-msgid "Accept"
-msgstr "​ການ​ຮັບ​ຮອງ"
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "ເລືອກ"
 
 msgid "No programs available."
 msgstr ""
 
-msgid "Selected program"
-msgstr "ເລືອກສາຍງານ"
+msgid "Search for a program"
+msgstr ""
 
-msgid "Select program"
-msgstr "ຂະແໜງທີ່ຖືກເລືອກ"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr ""
 
-msgid "Selected"
-msgstr "ເລືອກ"
+msgid "Show all programs"
+msgstr ""
+
+msgid "Choose a program"
+msgstr ""
 
 msgid "Results found"
 msgstr ""
+
+msgid "Selected program"
+msgstr "ເລືອກສາຍງານ"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -1002,13 +1026,29 @@ msgstr ""
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
-msgid "Clear selections"
-msgstr ""
-
 msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "This program is protected"
+msgstr "ໂປຣແກຣມນີ້ໄດ້ຮັບການຄຸ້ມຄອງ"
+
+msgid "Reason to check for enrollments"
+msgstr ""
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+
+msgid "Check for enrollments"
+msgstr ""
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
 msgstr ""
 
 msgid "Save comment"
@@ -1058,9 +1098,6 @@ msgstr "ວັນທີ່ລົງທະບຽນ"
 msgid "Incident date"
 msgstr "ວັນທີເດືອນປີທີ່ເຫດການເກີດຂື້ນ"
 
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -1071,6 +1108,9 @@ msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1235,9 +1275,6 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Registering unit"
-msgstr "ສະຖານທີ່ລົງທະບຽນ"
-
 msgid "{{ totalEvents }} events"
 msgstr ""
 
@@ -1271,6 +1308,12 @@ msgstr ""
 msgid "an error occurred loading working lists"
 msgstr ""
 
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr "ບໍ່ໄດ້ໃຊ້ງານ"
+
 msgid "Enrollment status"
 msgstr "ສະຖານະການລົງທະບຽນ"
 
@@ -1280,13 +1323,10 @@ msgstr "Assigned to"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Registration Date"
+msgid "Working list could not be updated"
 msgstr ""
 
-msgid "Inactive"
-msgstr "ບໍ່ໄດ້ໃຊ້ງານ"
-
-msgid "Working list could not be updated"
+msgid "an error occurred loading the working lists"
 msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"

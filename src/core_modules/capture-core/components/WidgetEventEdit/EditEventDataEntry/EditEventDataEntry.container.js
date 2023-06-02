@@ -26,7 +26,6 @@ import {
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
-
 const mapStateToProps = (state: ReduxState, props) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     const itemId = state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;

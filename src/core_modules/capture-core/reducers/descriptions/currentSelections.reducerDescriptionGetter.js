@@ -16,7 +16,7 @@ import {
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
-import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { searchBoxActionTypes } from '../../components/SearchBox';
 import { mainPageActionTypes } from '../../components/Pages/MainPage/MainPage.actions';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
@@ -220,7 +220,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [viewEventPageActionTypes.CATEGORY_OPTION_RESET]: categoryOptionReset,
     [viewEventPageActionTypes.ALL_CATEGORY_OPTIONS_RESET]: allCategoryOptionsReset,
 
-    [searchPageActionTypes.FALLBACK_SEARCH_COMPLETED]:
+    [searchBoxActionTypes.FALLBACK_SEARCH_COMPLETED]:
       (state, { payload: { trackedEntityTypeId } }) => ({
           ...state,
           complete: false,
