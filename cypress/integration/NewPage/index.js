@@ -481,7 +481,7 @@ And('you fill the WHO RMNCH program registration form with its required values',
 
 And('you fill in child programme first name with value that has duplicates', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(4)
+        .eq(2)
         .type('Sarah')
         .blur();
 });
@@ -497,7 +497,7 @@ And('you fill the Child programme registration form with a first name with value
         .type('2021-01-01')
         .blur();
     cy.get('[data-test="capture-ui-input"]')
-        .eq(4)
+        .eq(2)
         .type('Sarah')
         .blur();
 });
@@ -530,9 +530,9 @@ And('you see the form prefield with existing TEI attributes values', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {
         cy.contains('New Enrollment in program: Child Programme').should('exist');
         cy.contains('First name').should('exist');
-        cy.get('[data-test="capture-ui-input"]').eq(4).should('have.value', 'Anna');
+        cy.get('[data-test="capture-ui-input"]').eq(2).should('have.value', 'Anna');
         cy.contains('Last name').should('exist');
-        cy.get('[data-test="capture-ui-input"]').eq(5).should('have.value', 'Jones');
+        cy.get('[data-test="capture-ui-input"]').eq(3).should('have.value', 'Jones');
         cy.contains('Gender').should('exist');
         cy.contains('Female').should('exist');
     });
@@ -587,4 +587,8 @@ When('you fill the Child program registration form with its required values', ()
     cy.get('[data-test="capture-ui-input"]').eq(4).type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`);
     cy.get('[data-test="capture-ui-input"]').eq(5).type(`Didriksson-${Math.round((new Date()).getTime() / 1000)}`);
     cy.get('[data-test="capture-ui-input"]').eq(7).type('2023-01-01').blur();
+});
+
+Then('you are navigated to the Child program in Tracker Capture app', () => {
+    cy.url().should('include', 'dashboard?tei=');
 });
