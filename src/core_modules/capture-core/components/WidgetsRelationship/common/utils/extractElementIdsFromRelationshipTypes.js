@@ -1,8 +1,8 @@
 // @flow
 
-import type { RelationshipTypes } from '../Types';
+import type { ApiRelationshipTypes } from '../Types';
 
-export const extractElementIdsFromRelationshipTypes = (relationshipTypes: RelationshipTypes) => {
+export const extractElementIdsFromRelationshipTypes = (relationshipTypes: ApiRelationshipTypes) => {
     const attributeIds = relationshipTypes
         .flatMap((relationshipType) => {
             const { fromConstraint, toConstraint } = relationshipType;

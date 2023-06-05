@@ -1,7 +1,10 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from '../../../../../capture-core-utils';
-import type { RelationshipType } from '../Types';
+import type { ApiRelationshipType } from '../Types';
+import {
+    dataElementTypes,
+} from '../../../../metaData';
 
 const elementTypes = {
     ATTRIBUTE: 'attribute',
@@ -12,19 +15,25 @@ type Elements = {|
     [key: string]: {
         id: string,
         displayName: string,
-        valueType?: string,
+        valueType: $Keys<typeof dataElementTypes>,
     },
 |}
 
 type Context = {|
-    relationshipType: RelationshipType,
+    relationshipType: ApiRelationshipType,
     elementType: $Values<typeof elementTypes>
 |}
 
-export const mapRelationshipElementToId = (
-    elementIds: ?Array<string>,
+type ElementArray = $ReadOnlyArray<{|
+    id: string,
+    type: $Keys<typeof dataElementTypes>,
+    displayName: string,
+|}>;
+
+export const replaceElementIdsWithElement = (
+    elementIds: ?$ReadOnlyArray<string>,
     elements: Elements,
-    { relationshipType, elementType }: Context) =>
+    { relationshipType, elementType }: Context): ElementArray =>
     // $FlowFixMe
     (elementIds || [])
         .map((elementId) => {
@@ -36,6 +45,8 @@ export const mapRelationshipElementToId = (
                         { elementId, relationshipType },
                     ),
                 );
+
+                // $FlowFixMe filter is unhandled
                 return null;
             }
 
@@ -44,6 +55,8 @@ export const mapRelationshipElementToId = (
                     errorCreator(`cached ${elementType} is missing value type`)(
                         { elementId, element }),
                 );
+
+                // $FlowFixMe filter is unhandled
                 return null;
             }
 

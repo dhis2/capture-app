@@ -1,21 +1,22 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import type { Props } from './WidgetTrackedEntityRelationship.types';
-import { useLinkedEntityGroups } from '../common/hooks';
-import { RelationshipsWidget } from '../common/RelationshipsComponent';
-import { RelationshipSearchEntities, useRelationships } from '../common/hooks/useRelationships';
-import { useRelationshipTypes } from '../common/hooks/useRelationshipTypes';
+import type { WidgetTrackedEntityRelationshipProps } from './WidgetTrackedEntityRelationship.types';
+import { RelationshipsWidget } from '../common/RelationshipsWidget';
+import { RelationshipSearchEntities, useRelationships } from '../common/useRelationships';
+import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,
     teiId,
-    ...passOnProps
-}: Props) => {
-    const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
+    trackedEntityTypeId,
+    programId,
+    addRelationshipRenderElement,
+    onLinkedRecordClick,
+    onOpenAddRelationship,
+    onCloseAddRelationship,
+}: WidgetTrackedEntityRelationshipProps) => {
     const { data: relationships, isError } = useRelationships(teiId, RelationshipSearchEntities.TRACKED_ENTITY);
-
-    const { relationships: linkedEntityRelationships } = useLinkedEntityGroups(teiId, relationshipTypes, relationships);
 
     if (isError) {
         return (
@@ -28,10 +29,23 @@ export const WidgetTrackedEntityRelationship = ({
     return (
         <RelationshipsWidget
             title={i18n.t("TEI's Relationships")}
-            relationshipTypes={relationshipTypes}
-            relationships={linkedEntityRelationships}
-            teiId={teiId}
-            {...passOnProps}
-        />
+            relationships={relationships}
+            cachedRelationshipTypes={cachedRelationshipTypes}
+            sourceId={teiId}
+            onLinkedRecordClick={onLinkedRecordClick}
+        >
+            {
+                relationshipTypes => (
+                    <NewTrackedEntityRelationship
+                        renderElement={addRelationshipRenderElement}
+                        relationshipTypes={relationshipTypes}
+                        trackedEntityTypeId={trackedEntityTypeId}
+                        programId={programId}
+                        onOpenAddRelationship={onOpenAddRelationship}
+                        onCloseAddRelationship={onCloseAddRelationship}
+                    />
+                )
+            }
+        </RelationshipsWidget>
     );
 };

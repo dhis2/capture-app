@@ -1,5 +1,5 @@
 // @flow
-import type { RelationshipType } from '../../../common/Types';
+import type { RelationshipTypes } from '../../../common/Types';
 import type { TargetSides } from '../../../common/LinkedEntityMetadataSelector';
 
 
@@ -29,7 +29,7 @@ export type LinkedEntityMetadata = $ReadOnly<{|
 |}>;
 
 export type Props = $ReadOnly<{|
-    relationshipTypes: Array<RelationshipType>,
+    relationshipTypes: RelationshipTypes,
     trackedEntityTypeId: string,
     programId: string,
     onSelectLinkedEntityMetadata: (linkedEntityMetadata: LinkedEntityMetadata) => void,

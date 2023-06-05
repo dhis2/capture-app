@@ -1,13 +1,14 @@
 // @flow
-import type { RelationshipTypes, UrlParameters } from '../common/Types';
+import type { RelationshipTypes } from '../common/Types';
+import type { LinkedRecordClick } from '../common/RelationshipsWidget';
 
-export type Props = {|
+export type WidgetTrackedEntityRelationshipProps = {|
     trackedEntityTypeId: string,
     teiId: string,
     programId: string,
     addRelationshipRenderElement: HTMLElement,
-    onLinkedRecordClick: (parameters: UrlParameters) => void,
+    onLinkedRecordClick: LinkedRecordClick,
     onOpenAddRelationship?: () => void,
     onCloseAddRelationship?: () => void,
     relationshipTypes?: RelationshipTypes,
-|}
+|};

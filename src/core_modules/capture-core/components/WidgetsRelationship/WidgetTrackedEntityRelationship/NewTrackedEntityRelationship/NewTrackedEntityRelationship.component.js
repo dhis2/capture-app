@@ -11,7 +11,7 @@ import {
     type LinkedEntityMetadata,
 } from './LinkedEntityMetadataSelector';
 import { RetrieverModeSelector } from './RetrieverModeSelector';
-import type { Props, PlainProps } from './NewTrackedEntityRelationship.types';
+import type { ComponentProps, StyledComponentProps } from './NewTrackedEntityRelationship.types';
 
 const styles = {
     container: {
@@ -40,7 +40,7 @@ const NewTrackedEntityRelationshipPlain = ({
     programId,
     onCancel,
     classes,
-}: PlainProps) => {
+}: StyledComponentProps) => {
     const [currentStep, setCurrentStep] =
         useState(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA);
     const [selectedLinkedEntityMetadata: LinkedEntityMetadata, setSelectedLinkedEntityMetadata] = useState(undefined);
@@ -142,5 +142,5 @@ const NewTrackedEntityRelationshipPlain = ({
     );
 };
 
-export const NewTrackedEntityRelationshipComponent: ComponentType<Props> =
+export const NewTrackedEntityRelationshipComponent: ComponentType<ComponentProps> =
     withStyles(styles)(NewTrackedEntityRelationshipPlain);

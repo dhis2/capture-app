@@ -1,25 +1,5 @@
 // @flow
 
-export type RelationshipTableHeader = {|
-    id: string,
-    displayName: string,
-    convertValue: (value: any) => any,
-|}
-
-export type UrlParameters = {|
-    programId?: string,
-    orgUnitId?: string,
-    teiId?: string,
-    enrollmentId?: string,
-    eventId?: string,
-|}
-
-export type LinkedEntityData = {
-    id: string,
-    values: Array<{ id: string, value: ?string }>,
-    parameters: UrlParameters,
-}
-
 export type ApiLinkedEntity = {|
     event?: {
         event: string,
@@ -35,7 +15,8 @@ export type ApiLinkedEntity = {|
         orgUnit: string,
         orgUnitName: string,
         attributes: Array<{ attribute: string, value: string }>,
-    }
+    },
+    enrollment?: {},
 |}
 
 export type InputRelationshipData = {
@@ -47,11 +28,4 @@ export type InputRelationshipData = {
     bidirectional: string,
     from: ApiLinkedEntity,
     to: ApiLinkedEntity,
-}
-
-export type OutputRelationshipData = {
-    id: string,
-    relationshipName: string,
-    headers: Array<RelationshipTableHeader>,
-    linkedEntityData: Array<LinkedEntityData>,
 }

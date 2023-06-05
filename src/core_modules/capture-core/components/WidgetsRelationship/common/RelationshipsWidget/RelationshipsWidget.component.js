@@ -3,20 +3,10 @@ import React, { type ComponentType, useState } from 'react';
 import { Chip, IconLink24, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../../Widget';
-import { RelationshipTables } from './RelationshipsTables.component';
-import { AddNewRelationship } from '../AddNewRelationship';
-import type { OutputRelationshipData, UrlParameters } from '../Types';
-
-type Props = {|
-    relationships: Array<OutputRelationshipData>,
-    title: string,
-    onAddRelationship: () => void,
-    onLinkedRecordClick: (parameters: UrlParameters) => void,
-    teiId?: string,
-    eventId?: string,
-    addRelationshipRenderElement: HTMLElement,
-    ...CssClasses,
-|}
+import { useGroupedLinkedEntities } from './useGroupedLinkedEntities';
+import { useRelationshipTypes } from './useRelationshipTypes';
+import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
+import type { Props, StyledProps } from './relationshipsWidget.types';
 
 const styles = {
     header: {
@@ -29,16 +19,18 @@ const styles = {
 };
 
 const RelationshipsWidgetPlain = ({
-    relationships,
     title,
-    teiId,
-    eventId,
-    classes,
+    relationships,
+    cachedRelationshipTypes,
+    sourceId,
     onLinkedRecordClick,
-    ...passOnProps
-}: Props) => {
+    children,
+    classes,
+}: StyledProps) => {
     const [open, setOpenStatus] = useState(true);
-    const count = relationships.reduce((acc, curr) => { acc += curr.linkedEntityData.length; return acc; }, 0);
+    const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
+    const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships);
+
     return (
         <div
             data-test="relationship-widget"
@@ -52,7 +44,7 @@ const RelationshipsWidgetPlain = ({
                         <span>{title}</span>
                         {relationships && (
                             <Chip dense>
-                                {count}
+                                {relationships.length}
                             </Chip>
                         )}
                     </div>
@@ -61,16 +53,16 @@ const RelationshipsWidgetPlain = ({
                 onClose={() => setOpenStatus(false)}
                 open={open}
             >
-                <RelationshipTables
-                    relationships={relationships}
-                    onLinkedRecordClick={onLinkedRecordClick}
-                />
-
-                <AddNewRelationship
-                    teiId={teiId}
-                    eventId={eventId}
-                    {...passOnProps}
-                />
+                {
+                    groupedLinkedEntities && (
+                        <LinkedEntitiesViewer
+                            groupedLinkedEntities={groupedLinkedEntities}
+                            onLinkedRecordClick={onLinkedRecordClick}
+                        />
+                    )
+                }{
+                    relationshipTypes && children(relationshipTypes)
+                }
             </Widget>
         </div>
     );

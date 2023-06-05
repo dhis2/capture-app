@@ -1,6 +1,6 @@
 // @flow
-import type { RelationshipTypes } from '../Types';
-import { mapRelationshipElementToId } from './mapRelationshipElementToId';
+import type { ApiRelationshipTypes, RelationshipTypes } from '../Types';
+import { replaceElementIdsWithElement } from './replaceElementIdsWithElement';
 
 const elementTypes = {
     ATTRIBUTE: 'ATTRIBUTE',
@@ -14,7 +14,7 @@ type Element = {|
 |}
 
 type Props = {|
-    relationshipTypes: RelationshipTypes,
+    relationshipTypes: ApiRelationshipTypes,
     attributes: Array<Element>,
     dataElements: Array<Element>,
 |}
@@ -23,7 +23,7 @@ export const formatRelationshipTypes = ({
     relationshipTypes = [],
     attributes,
     dataElements,
-}: Props) => {
+}: Props): RelationshipTypes => {
     const attributesById = attributes.reduce((acc, { id, valueType, displayName }) => {
         acc[id] = { valueType, displayName };
         return acc;
@@ -34,26 +34,25 @@ export const formatRelationshipTypes = ({
         return acc;
     }, {});
 
-    // $FlowFixMe
     return relationshipTypes
         .map((relationshipType) => {
             const { fromConstraint, toConstraint } = relationshipType;
-            const fromAttributes = mapRelationshipElementToId(
+            const fromAttributes = replaceElementIdsWithElement(
                 fromConstraint.trackerDataView?.attributes,
                 attributesById,
                 { relationshipType, elementType: elementTypes.ATTRIBUTE },
             );
-            const toAttributes = mapRelationshipElementToId(
+            const toAttributes = replaceElementIdsWithElement(
                 toConstraint.trackerDataView?.attributes,
                 attributesById,
                 { relationshipType, elementType: elementTypes.ATTRIBUTE },
             );
-            const fromDataElements = mapRelationshipElementToId(
+            const fromDataElements = replaceElementIdsWithElement(
                 fromConstraint.trackerDataView?.dataElements,
                 dataElementsById,
                 { relationshipType, elementType: elementTypes.DATA_ELEMENT },
             );
-            const toDataElements = mapRelationshipElementToId(
+            const toDataElements = replaceElementIdsWithElement(
                 toConstraint.trackerDataView?.dataElements,
                 dataElementsById,
                 { relationshipType, elementType: elementTypes.DATA_ELEMENT },
@@ -61,6 +60,7 @@ export const formatRelationshipTypes = ({
 
             return {
                 ...relationshipType,
+                // $FlowFixMe Might be fixable with generics
                 fromConstraint: {
                     ...fromConstraint,
                     trackerDataView: {
@@ -68,6 +68,7 @@ export const formatRelationshipTypes = ({
                         dataElements: fromDataElements,
                     },
                 },
+                // $FlowFixMe Might be fixable with generics
                 toConstraint: {
                     ...toConstraint,
                     trackerDataView: {

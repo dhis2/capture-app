@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
 import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
-import type { RelationshipTypes } from '../Types';
+import type { ApiRelationshipTypes, RelationshipTypes } from '../Types';
 import { extractElementIdsFromRelationshipTypes, formatRelationshipTypes } from '../utils';
 
 type Element = {|
@@ -18,7 +18,7 @@ const relationshipTypesQuery = {
 };
 
 export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes) => {
-    const { data: apiRelationshipTypes, isError, isLoading } = useApiMetadataQuery<?RelationshipTypes>(
+    const { data: apiRelationshipTypes, isError, isLoading } = useApiMetadataQuery<?ApiRelationshipTypes>(
         ['relationshipTypes'],
         relationshipTypesQuery,
         {

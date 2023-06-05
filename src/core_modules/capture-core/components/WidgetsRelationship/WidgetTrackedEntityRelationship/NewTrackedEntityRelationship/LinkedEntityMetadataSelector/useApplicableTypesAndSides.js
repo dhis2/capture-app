@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { TARGET_SIDES } from '../common';
 import type { ApplicableTypesInfo } from './linkedEntityMetadataSelector.types';
 import type { RelationshipType } from '../../../common/Types';
-import { RELATIONSHIP_ENTITIES } from '../../../constants';
+import { RELATIONSHIP_ENTITIES } from '../../../common/constants';
 import type { TargetSides } from '../../../common/LinkedEntityMetadataSelector';
 
 const isApplicableProgram = (programId, sourceProgramIds) =>

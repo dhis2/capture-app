@@ -2,10 +2,11 @@
 
 const LOCALE_EN = 'en';
 
-export const buildUrlQueryString = (queryArgs: { [id: string]: string }) =>
+export const buildUrlQueryString = (queryArgs: $ReadOnly<{ [id: string]: ?string }>) =>
     Object
         .entries(queryArgs)
-        .sort((a, b) => a[0].localeCompare(b[0], LOCALE_EN))
+        .filter(([, value]) => value != null)
+        .sort(([keyA], [keyB]) => keyA.localeCompare(keyB, LOCALE_EN))
         .reduce((searchParams, [key, value]) => {
             // $FlowFixMe
             value && searchParams.append(key, value);

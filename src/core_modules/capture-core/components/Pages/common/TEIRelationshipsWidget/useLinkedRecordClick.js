@@ -1,31 +1,18 @@
 // @flow
-
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import log from 'loglevel';
-import type { UrlParameters } from '../../../WidgetsRelationship/common/Types';
+import type { NavigationArgs } from '../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import { EventProgram, getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
-import { buildUrlQueryString } from '../../../../utils/routing';
-import { errorCreator } from '../../../../../capture-core-utils';
+import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 
 export const useLinkedRecordClick = () => {
     const history = useHistory();
+    const { orgUnitId } = useLocationQuery();
 
-    const onLinkedRecordClick = useCallback((urlParameters: UrlParameters) => {
+    const onLinkedRecordClick = useCallback((navigationArgs: NavigationArgs) => {
         let url;
-        const {
-            programId,
-            orgUnitId,
-            eventId,
-            teiId,
-        } = urlParameters;
-
-        if (!programId || !orgUnitId) {
-            log.error(errorCreator('programId and orgUnitId must be provided')({ programId, orgUnitId }));
-            return;
-        }
-
-        if (eventId) {
+        if (navigationArgs.eventId) {
+            const { eventId, programId } = navigationArgs;
             const recordProgram = getProgramFromProgramIdThrowIfNotFound(programId);
             if (recordProgram instanceof EventProgram) {
                 url = `/viewEvent?viewEventId=${eventId}`;
@@ -35,11 +22,12 @@ export const useLinkedRecordClick = () => {
                     eventId,
                 })}`;
             }
-        } else if (teiId) {
+        } else if (navigationArgs.trackedEntityId) {
+            const { trackedEntityId, programId } = navigationArgs;
             url = `/enrollment?${buildUrlQueryString({
                 programId,
                 orgUnitId,
-                teiId,
+                teiId: trackedEntityId,
                 enrollmentId: 'AUTO',
             })}`;
         }
@@ -47,7 +35,7 @@ export const useLinkedRecordClick = () => {
         if (url) {
             history.push(url);
         }
-    }, [history]);
+    }, [history, orgUnitId]);
 
     return {
         onLinkedRecordClick,

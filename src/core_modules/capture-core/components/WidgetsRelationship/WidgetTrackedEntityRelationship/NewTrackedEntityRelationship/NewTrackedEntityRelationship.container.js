@@ -1,10 +1,10 @@
 // @flow
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, type ComponentType } from 'react';
 import { Button, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
-import type { PlainProps } from './NewTrackedEntityRelationship.types';
+import type { ContainerProps, StyledContainerProps } from './NewTrackedEntityRelationship.types';
 
 const styles = {
     container: {
@@ -13,14 +13,14 @@ const styles = {
 };
 
 export const NewTrackedEntityRelationshipPlain = ({
-    addRelationshipRenderElement,
+    renderElement,
     programId,
     relationshipTypes,
     trackedEntityTypeId,
     onCloseAddRelationship,
     onOpenAddRelationship,
     classes,
-}: PlainProps) => {
+}: StyledContainerProps) => {
     const [addWizardVisible, setAddWizardVisibility] = useState(false);
 
     const closeAddWizard = useCallback(() => {
@@ -49,7 +49,7 @@ export const NewTrackedEntityRelationshipPlain = ({
                         relationshipTypes={relationshipTypes}
                         trackedEntityTypeId={trackedEntityTypeId}
                         programId={programId}
-                        renderElement={addRelationshipRenderElement}
+                        renderElement={renderElement}
                         onSave={closeAddWizard}
                         onCancel={closeAddWizard}
                     />
@@ -59,4 +59,5 @@ export const NewTrackedEntityRelationshipPlain = ({
     );
 };
 
-export const NewTrackedEntityRelationship = withStyles(styles)(NewTrackedEntityRelationshipPlain);
+export const NewTrackedEntityRelationship: ComponentType<ContainerProps> =
+    withStyles(styles)(NewTrackedEntityRelationshipPlain);
