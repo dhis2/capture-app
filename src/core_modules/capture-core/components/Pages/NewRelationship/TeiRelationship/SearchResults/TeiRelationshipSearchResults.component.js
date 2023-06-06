@@ -8,7 +8,7 @@ import { Button } from '@dhis2/ui';
 import { withNavigation } from '../../../../Pagination/withDefaultNavigation';
 import { makeAttributesSelector } from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
-import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
+import type { CurrentSearchTerms } from '../../../../SearchBox';
 import { SearchResultsHeader } from '../../../../SearchResultsHeader';
 import { type SearchGroup } from '../../../../../metaData';
 import { ResultsPageSizeContext } from '../../../shared-contexts';

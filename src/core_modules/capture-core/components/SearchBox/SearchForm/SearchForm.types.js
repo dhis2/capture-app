@@ -1,6 +1,6 @@
 // @flow
-import type { SearchGroups } from '../SearchPage.types';
-import { typeof dataElementTypes } from '../../../../metaData';
+import type { SearchGroups } from '../SearchBox.types';
+import { typeof dataElementTypes } from '../../../metaData';
 
 export type CurrentSearchTerms = Array<{|
   +name: string,
@@ -26,6 +26,7 @@ export type PropsFromRedux ={|
   +formsValues: FormsValues,
   +searchStatus: string,
   +isSearchViaAttributesValid: (minAttributesRequiredToSearch: number, formId: string)=> boolean,
+  +isSearchViaUniqueIdValid: (formId: string)=> boolean,
 |}
 
 export type DispatchersFromRedux = {|
@@ -36,6 +37,7 @@ export type DispatchersFromRedux = {|
   saveCurrentFormData: ({| searchScopeType: string, searchScopeId: string, formId: string, formsValues: FormsValues, searchGroupsForSelectedScope: SearchGroups |}) => void,
   removeFormDataFromReduxStore: () => void,
   addFormIdToReduxStore: (formId: string, keptFallbackSearchFormValues: FormsValues) => void,
+  showUniqueSearchValueEmptyModal: ({ uniqueTEAName: string }) => void
 |}
 
 export type Props = {|

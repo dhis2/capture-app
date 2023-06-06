@@ -1,14 +1,14 @@
 # 
 # Translators:
-# trendspotter <jirka.p@volny.cz>, 2022
+# Jiří Podhorecký, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: trendspotter <jirka.p@volny.cz>, 2022\n"
-"Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
+"Last-Translator: Jiří Podhorecký, 2023\n"
+"Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,23 +42,35 @@ msgstr ""
 "doméně). Chcete-li tuto verzi znovu použít, obnovte prosím tuto stránku, "
 "mějte však na paměti, že se tím zavřou další verze."
 
-msgid "Organisation unit"
-msgstr "Organizační jednotka"
+msgid "View {{programName}} dashboard"
+msgstr ""
 
-msgid "Date of enrollment"
-msgstr "Datum zápisu"
+msgid "View dashboard"
+msgstr "Zobrazit ovládací panel"
 
-msgid "Program name"
-msgstr "Název programu"
+msgid "View active enrollment"
+msgstr "Zobrazit aktivní zápisy"
 
-msgid "Last updated"
-msgstr "Naposledy aktualizováno"
+msgid "Re-enroll"
+msgstr "Znovu zapsat"
+
+msgid "in"
+msgstr "v"
 
 msgid "Enrolled"
 msgstr "Zapsáno"
 
 msgid "Previously enrolled"
 msgstr "Dříve zapsáno"
+
+msgid "Organisation unit"
+msgstr "Organizační jednotka"
+
+msgid "Date of enrollment"
+msgstr "Datum zápisu"
+
+msgid "Last updated"
+msgstr "Naposledy aktualizováno"
 
 msgid "This value is validating"
 msgstr "Tato hodnota se ověřuje"
@@ -134,6 +146,9 @@ msgstr "Souřadnice"
 
 msgid "Enrollment"
 msgstr "Zápis"
+
+msgid "Please select {{categoryName}}"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr "Budoucí datum není povoleno"
@@ -276,9 +291,6 @@ msgstr "bez"
 msgid "enrollment"
 msgstr "zápis"
 
-msgid "in"
-msgstr "v"
-
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Zapište se do programu výběrem programu v horní liště."
 
@@ -312,9 +324,6 @@ msgstr "Zobrazit registrovaného {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Registrovaná osoba"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
-
 msgid "validation failed"
 msgstr "ověření selhalo"
 
@@ -340,7 +349,10 @@ msgid "No, cancel"
 msgstr "Ne, zrušit"
 
 msgid "Yes, create new event"
-msgstr ""
+msgstr "Ano, vytvořit novou událost"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
 
 msgid "Warnings found"
 msgstr "Nalezena varování"
@@ -544,7 +556,7 @@ msgid "More filters"
 msgstr "Více filtrů"
 
 msgid "Stage filters"
-msgstr ""
+msgstr "Filtry fází"
 
 msgid "Rows per page"
 msgstr "Řádků na stránku"
@@ -599,8 +611,9 @@ msgid ""
 msgstr ""
 "Při otevírání tohoto zápuisu došlo k chybě. Zadejte platnou adresu URL."
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
 
 msgid "Enrollment Dashboard"
 msgstr "Ovládací panel zápisu"
@@ -642,8 +655,20 @@ msgstr ""
 "Program {{programName}} má kategorie. Chcete-li zobrazit ovládací panel, "
 "vyberte všechny kategorie."
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Chcete-li zobrazit ovládací panel, vyberte zápis."
+
+msgid "There are no active enrollments."
+msgstr ""
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid "No access to program owner."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} není v tomto programu zapsán."
@@ -709,8 +734,8 @@ msgstr "Plán"
 msgid "Refer"
 msgstr "Odkazovat"
 
-msgid "You can’t add any more events in this program"
-msgstr "Do tohoto programu nemůžete přidávat žádné další události"
+msgid "You can’t add any more {{ programStageName }} events"
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "Zrušit bez uložení"
@@ -721,8 +746,8 @@ msgstr "Vyberte scénu pro novou událost"
 msgid "Program Stages could not be loaded"
 msgstr "Program Stages nelze načíst"
 
-msgid "stage"
-msgstr "fáze"
+msgid "Stage"
+msgstr "Fáze"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Zobrazit událost Enrollment{{escape}}"
@@ -760,9 +785,6 @@ msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}
 msgid "Save as new"
 msgstr "Uložit jako nové"
 
-msgid "View dashboard"
-msgstr "Zobrazit ovládací panel"
-
 msgid "View enrollment"
 msgstr "Zobrazit zápis"
 
@@ -777,7 +799,7 @@ msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nový zápis do programu{{escape}} {{programName}}"
 
 msgid "Save {{trackedEntityName}}"
-msgstr ""
+msgstr "Uložit {{trackedEntityName}}"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
@@ -824,104 +846,8 @@ msgstr "Vytvořit nový {{trackedEntityType}}"
 msgid "Register"
 msgstr "Registrovat"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Chcete-li hledat, vyplňte alespoň {{minAttributesRequiredToSearch}} atributy"
-
-msgid "Search {{name}}"
-msgstr "Hledat {{name}}"
-
-msgid "Search by {{name}}"
-msgstr "Hledat podle {{name}}"
-
-msgid "Search by attributes"
-msgstr "Hledání podle atributů"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-"Vyplňte tato pole pro vyhledávání{{escape}} {{ searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Chcete-li hledat, vyplňte alespoň {{minAttributesRequiredToSearch}} z těchto"
-" polí{{escape}} {{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "Vyplňte toto pole pro vyhledávání{{escape}} {{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "Nenalezeny žádné výsledky"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
-
-msgid "Register a user"
-msgstr "Registrovat uživatele"
-
-msgid "Back to search"
-msgstr "Zpět na vyhledávání"
-
-msgid "An error has occurred"
-msgstr "Došlo k chybě"
-
-msgid "Too many results"
-msgstr "Příliš mnoho výsledků"
-
-msgid "Cannot search in all programs"
-msgstr "Nelze vyhledávat ve všech programech"
-
 msgid "Back"
 msgstr "Zpět"
-
-msgid "Search for {{titleText}}"
-msgstr "Hledat {{titleText}}"
-
-msgid "Search for"
-msgstr "Hledat"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
-
-msgid "Choose a type to start searching"
-msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
-
-msgid "View active enrollment"
-msgstr "Zobrazit aktivní zápisy"
-
-msgid "Re-enroll"
-msgstr "Znovu zapsat"
-
-msgid "all programs"
-msgstr "všechny programy"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Nenašli jste hledané výsledky? Zkuste vyhledat všechny programy, které "
-"používají typ"
-
-msgid "Search in all programs"
-msgstr "Hledat ve všech programech"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Vytvořit nový"
-
-msgid "Saved lists in this program"
-msgstr "Uložené seznamy v tomto programu"
-
-msgid "Create custom working list"
-msgstr "Vytvořit vlastní pracovní seznam"
 
 msgid "events"
 msgstr "události"
@@ -972,6 +898,9 @@ msgstr "Organizační jednotku se nepodařilo načíst"
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
 
+msgid "No results found"
+msgstr "Nenalezeny žádné výsledky"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Při načítání možných duplikátů došlo k chybě"
 
@@ -984,44 +913,142 @@ msgstr "Nemáte přístup k vytváření žádných vztahů."
 msgid "Add relationship"
 msgstr "Přidat vztah"
 
-msgid "Selected registering unit"
-msgstr "Vybraná registrační jednotka"
+msgid "No results found for "
+msgstr ""
 
-msgid "Start Again"
-msgstr "Začít znovu"
+msgid "Registering unit"
+msgstr "Registrační jednotka"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Jste si jist? Všechna neuložená data budou ztracena."
+msgid "Choose a registering unit"
+msgstr ""
 
-msgid "Accept"
-msgstr "Přijmout"
-
-msgid "Registering Organisation Unit"
-msgstr "Registrování organizační jednotky"
-
-msgid "Select"
-msgstr "Vybrat"
+msgid "Clear selection"
+msgstr ""
 
 msgid "No programs available."
 msgstr "Nejsou k dispozici žádné programy."
 
-msgid "Selected program"
-msgstr "Vybraný program"
+msgid "Search for a program"
+msgstr ""
 
-msgid "Select program"
-msgstr "Vybrat program"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr ""
 
-msgid "Selected"
-msgstr "Vybráno"
+msgid "Show all programs"
+msgstr ""
+
+msgid "Choose a program"
+msgstr "Vyberte program"
+
+msgid "Search for {{titleText}}"
+msgstr "Hledat {{titleText}}"
+
+msgid "Search for"
+msgstr "Hledat"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
+
+msgid "Choose a type to start searching"
+msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Search {{name}}"
+msgstr "Hledat {{name}}"
+
+msgid "Search by {{name}}"
+msgstr "Hledat podle {{name}}"
+
+msgid "Search by attributes"
+msgstr "Hledání podle atributů"
+
+msgid "all programs"
+msgstr "všechny programy"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Nenašli jste hledané výsledky? Zkuste vyhledat všechny programy, které "
+"používají typ"
+
+msgid "Search in all programs"
+msgstr "Hledat ve všech programech"
+
+msgid "If none of search results match, you can create a new "
+msgstr "Pokud žádný z výsledků vyhledávání neodpovídá, můžete vytvořit nový"
+
+msgid "Create new"
+msgstr "Vytvořit nový"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+"Vyplňte tato pole pro vyhledávání{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Chcete-li hledat, vyplňte alespoň {{minAttributesRequiredToSearch}} z těchto"
+" polí{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "Vyplňte toto pole pro vyhledávání{{escape}} {{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
+
+msgid "Back to search"
+msgstr "Zpět na vyhledávání"
+
+msgid "An error has occurred"
+msgstr "Došlo k chybě"
+
+msgid "Too many results"
+msgstr "Příliš mnoho výsledků"
+
+msgid "Cannot search in all programs"
+msgstr "Nelze vyhledávat ve všech programech"
+
+msgid "Missing search criteria"
+msgstr ""
 
 msgid "Results found"
 msgstr "Nalezeny výsledky"
 
+msgid "Selected program"
+msgstr "Vybraný program"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Hledat {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Chcete-li hledat, vyplňte alespoň {{minAttributesRequired}} atributy"
+msgid "Saved lists in this program"
+msgstr "Uložené seznamy v tomto programu"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+"Uložené seznamy nabízejí rychlý přístup k nejpoužívanějším pohledům v "
+"programu."
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+"V tomto programu zatím nejsou žádné uložené seznamy, vytvořte si je pomocí "
+"tlačítka níže."
+
+msgid "Create saved list"
+msgstr "Vytvořte uložený seznam"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Nový {{trackedEntityName}} v {{programName}}"
@@ -1029,14 +1056,30 @@ msgstr "Nový {{trackedEntityName}} v {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
 
-msgid "Clear selections"
-msgstr "Vymazat výběry"
-
 msgid "To work with the selected program,"
 msgstr "Chcete-li pracovat s vybraným programem,"
 
 msgid "open the Tracker Capture app"
 msgstr "otevřít aplikaci Tracker Capture"
+
+msgid "This program is protected"
+msgstr "Tento program je chráněn"
+
+msgid "Reason to check for enrollments"
+msgstr ""
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+
+msgid "Check for enrollments"
+msgstr ""
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
 
 msgid "Save comment"
 msgstr "Uložit komentář"
@@ -1087,9 +1130,6 @@ msgstr "Datum zápisu"
 msgid "Incident date"
 msgstr "Datum incidentu"
 
-msgid "Last updated {{date}}"
-msgstr "Poslední aktualizace {{date}}"
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "Widget pro zápis nelze načíst. Prosím zkuste to znovu později"
 
@@ -1101,6 +1141,9 @@ msgstr "Zahájeno v {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Vlastník: {{ownerOrgUnit}}"
+
+msgid "Last updated {{date}}"
+msgstr "Poslední aktualizace {{date}}"
 
 msgid "Cancelled"
 msgstr "Zrušeno"
@@ -1151,7 +1194,7 @@ msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "Chcete-li tuto událost přeplánovat, přejděte na kartu \"Plán\"."
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
-msgstr ""
+msgstr "Naplánované datum nelze změnit pro události {{ eventStatus }}"
 
 msgid "Event completed"
 msgstr "Událost dokončena"
@@ -1163,36 +1206,19 @@ msgid "Schedule date info"
 msgstr "Informace o termínu"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
-msgstr ""
+msgstr "Naplánováno automaticky na {{suggestedScheduleDate}}"
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
-
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+"Naplánované datum odpovídá navrhovanému datu, ale v případě potřeby jej lze "
+"změnit."
 
 msgid "after"
 msgstr "po"
 
 msgid "before"
 msgstr "před"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "Na tento den je v {{orgUnitName}} naplánovaná {{count}} událost."
-msgstr[1] ""
-"Na tento den jsou v {{orgUnitName}} naplánované {{count}} události."
-msgstr[2] ""
-"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
-msgstr[3] ""
-"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1277,9 +1303,6 @@ msgstr "Tato fáze může mít pouze jednu událost"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Události se nepodařilo načíst. Prosím zkuste to znovu později."
 
-msgid "Registering unit"
-msgstr "Registrační jednotka"
-
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} událostí"
 
@@ -1313,6 +1336,12 @@ msgstr "Stáhnout data ..."
 msgid "an error occurred loading working lists"
 msgstr "při načítání pracovních seznamů došlo k chybě"
 
+msgid "Registration Date"
+msgstr "Datum registrace"
+
+msgid "Inactive"
+msgstr "Neaktivní"
+
 msgid "Enrollment status"
 msgstr "Stav zápisu"
 
@@ -1320,16 +1349,13 @@ msgid "Assigned to"
 msgstr "Přiřazen k"
 
 msgid "Choose a program stage to filter by {{label}}"
-msgstr ""
-
-msgid "Registration Date"
-msgstr "Datum registrace"
-
-msgid "Inactive"
-msgstr "Neaktivní"
+msgstr "Vyberte fázi programu, kterou chcete filtrovat podle {{label}}"
 
 msgid "Working list could not be updated"
 msgstr "Pracovní seznam nelze aktualizovat"
+
+msgid "an error occurred loading the working lists"
+msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "došlo k chybě při načítání seznamů instancí trasovaných entit"

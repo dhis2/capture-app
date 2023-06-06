@@ -96,6 +96,7 @@ export const TopBar = ({
                     {
                         label: programStage?.name || '',
                         value: 'alwaysPreselected',
+                        icon: programStage?.icon,
                     },
                 ]}
                 selectedValue="alwaysPreselected"

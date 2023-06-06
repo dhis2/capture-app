@@ -12,6 +12,7 @@ export const EnrollmentAddEventTopBar = ({
     teiDisplayName,
     trackedEntityName,
     stageName,
+    stageIcon,
     eventDateLabel,
     onSetOrgUnitId,
     onResetOrgUnitId,
@@ -66,6 +67,7 @@ export const EnrollmentAddEventTopBar = ({
                             {
                                 label: stageName,
                                 value: 'alwaysPreselected',
+                                icon: stageIcon,
                             },
                         ]}
                         selectedValue="alwaysPreselected"
