@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Yury Rogachev <yury@dhis2.org>, 2022
+# Yury Rogachev <yury@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
-"Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2023\n"
+"Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -44,23 +44,35 @@ msgstr ""
 "ishlatmoqchi boʼlsangiz, Iltimos, sahifani yangilang, ammo boshqa versiyalar"
 " yopilishini unutmang."
 
-msgid "Organisation unit"
-msgstr "Tashkiliy birlik"
-
-msgid "Date of enrollment"
-msgstr "Roʼyxatga kiritilgan sana"
-
-msgid "Program name"
+msgid "View {{programName}} dashboard"
 msgstr ""
 
-msgid "Last updated"
-msgstr "Oxirgi yangilangan"
+msgid "View dashboard"
+msgstr "Boshqaruv panelini koʼrish"
+
+msgid "View active enrollment"
+msgstr "Faol roʼyxatdan oʼtayotganlarni koʼrish"
+
+msgid "Re-enroll"
+msgstr "Qayta roʼyxatdan oʼtish"
+
+msgid "in"
+msgstr "ichida"
 
 msgid "Enrolled"
 msgstr "Roʼyxatga kiritilgan"
 
 msgid "Previously enrolled"
 msgstr "Ilgari roʼyxatga kiritilgan"
+
+msgid "Organisation unit"
+msgstr "Tashkiliy birlik"
+
+msgid "Date of enrollment"
+msgstr "Roʼyxatga kiritilgan sana"
+
+msgid "Last updated"
+msgstr "Oxirgi yangilangan"
 
 msgid "This value is validating"
 msgstr "Ushbu qiymat tasdiqlanmoqda"
@@ -136,6 +148,9 @@ msgstr "Muvofiqlashtirish"
 
 msgid "Enrollment"
 msgstr "Roʼyxatga olish"
+
+msgid "Please select {{categoryName}}"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr "Kelajakdagi sana tanloviga ruxsat berilmaydi"
@@ -282,9 +297,6 @@ msgstr ""
 msgid "enrollment"
 msgstr ""
 
-msgid "in"
-msgstr "ichida"
-
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
@@ -319,11 +331,6 @@ msgstr "Roʼyxatdan oʼtgan {{trackedEntityTypeName}} ni koʼrsatish"
 msgid "Registered person"
 msgstr "Roʼyxatdan oʼtgan shaxs"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Аgarda ushbu sahifani tark etsangiz, hodisa/tadbir boʼyicha kiritgan barcha "
-"oʼzgartirishlar saqlanmaydi."
-
 msgid "validation failed"
 msgstr "Tasdiqlash amalga oshmadi"
 
@@ -350,6 +357,11 @@ msgstr "Yoʼq, bekor qiling"
 
 msgid "Yes, create new event"
 msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Аgarda ushbu sahifani tark etsangiz, hodisa/tadbir boʼyicha kiritgan barcha "
+"oʼzgartirishlar saqlanmaydi."
 
 msgid "Warnings found"
 msgstr "Ogohlantirishlar topildi"
@@ -608,7 +620,8 @@ msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
 msgid "Enrollment Dashboard"
@@ -647,7 +660,19 @@ msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
 msgid "Choose an enrollment to view the dashboard."
+msgstr ""
+
+msgid "There are no active enrollments."
+msgstr ""
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid "No access to program owner."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -712,7 +737,7 @@ msgstr "Reja"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more events in this program"
+msgid "You can’t add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -724,8 +749,8 @@ msgstr ""
 msgid "Program Stages could not be loaded"
 msgstr ""
 
-msgid "stage"
-msgstr ""
+msgid "Stage"
+msgstr "Босқич"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -762,9 +787,6 @@ msgstr ""
 
 msgid "Save as new"
 msgstr ""
-
-msgid "View dashboard"
-msgstr "Boshqaruv panelini koʼrish"
 
 msgid "View enrollment"
 msgstr ""
@@ -827,103 +849,8 @@ msgstr "Yangi {{trackedEntityType}} yaratish"
 msgid "Register"
 msgstr "Roʼyxatga olish"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Qidirish uchun kamida {{minAttributesRequiredToSearch}} atributlarini "
-"toʼldiring"
-
-msgid "Search {{name}}"
-msgstr "{{name}} orqali qidirish"
-
-msgid "Search by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr "Аtribut orqali qidirish"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr "Hech qanday natija topilmadi"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Qidiruv soʼzlarini oʼzgartirib, qidirilayotgan axborotni qayta qidiruvga "
-"topshirishingiz mumkin."
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr "Qidiruvga qaytish"
-
-msgid "An error has occurred"
-msgstr "Xatolik yuz berdi"
-
-msgid "Too many results"
-msgstr "Natija juda koʼp"
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "Orqaga"
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr "Qidirish"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Bundan tashqari, yuqori satrda dasturni tanlashingiz va ushbu dastur ichida "
-"qidirishingiz mumkin"
-
-msgid "Choose a type to start searching"
-msgstr "Qidiruv turini tanlang va qidirishni boshlang"
-
-msgid "View active enrollment"
-msgstr "Faol roʼyxatdan oʼtayotganlarni koʼrish"
-
-msgid "Re-enroll"
-msgstr "Qayta roʼyxatdan oʼtish"
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-
-msgid "Search in all programs"
-msgstr "Barcha dasturlarda qidirish"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Yangisini yaratish"
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Create custom working list"
-msgstr ""
 
 msgid "events"
 msgstr ""
@@ -975,6 +902,9 @@ msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
 msgid "Possible duplicates found"
 msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
 
+msgid "No results found"
+msgstr "Hech qanday natija topilmadi"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -987,45 +917,133 @@ msgstr ""
 msgid "Add relationship"
 msgstr "Oʼzaro aloqa kiritish"
 
-msgid "Selected registering unit"
-msgstr "Boʼlimni tanlangan roʼyxatga olish"
+msgid "No results found for "
+msgstr ""
 
-msgid "Start Again"
-msgstr "Qayta boshlang"
+msgid "Registering unit"
+msgstr "Roʼyxatga olish muassasasi"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Ishonchingiz komilmi? Barcha saqlanmagan maʼlumotlar yoʼqoladi."
+msgid "Choose a registering unit"
+msgstr ""
 
-msgid "Accept"
-msgstr "Qabul qiling"
-
-msgid "Registering Organisation Unit"
-msgstr "Tanlangan boʼlim roʼyxatdan oʼtkazilmoqda"
-
-msgid "Select"
-msgstr "Tanlang"
+msgid "Clear selection"
+msgstr ""
 
 msgid "No programs available."
 msgstr "Hech qanday dastur mavjud emas."
 
-msgid "Selected program"
-msgstr "Tanlangan dastur"
+msgid "Search for a program"
+msgstr ""
 
-msgid "Select program"
-msgstr "Dasturni tanlash"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr ""
 
-msgid "Selected"
-msgstr "Tanlangan"
+msgid "Show all programs"
+msgstr ""
+
+msgid "Choose a program"
+msgstr ""
+
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr "Qidirish"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Bundan tashqari, yuqori satrda dasturni tanlashingiz va ushbu dastur ichida "
+"qidirishingiz mumkin"
+
+msgid "Choose a type to start searching"
+msgstr "Qidiruv turini tanlang va qidirishni boshlang"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+
+msgid "Search {{name}}"
+msgstr "{{name}} orqali qidirish"
+
+msgid "Search by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr "Аtribut orqali qidirish"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr "Barcha dasturlarda qidirish"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Yangisini yaratish"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Qidiruv soʼzlarini oʼzgartirib, qidirilayotgan axborotni qayta qidiruvga "
+"topshirishingiz mumkin."
+
+msgid "Back to search"
+msgstr "Qidiruvga qaytish"
+
+msgid "An error has occurred"
+msgstr "Xatolik yuz berdi"
+
+msgid "Too many results"
+msgstr "Natija juda koʼp"
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
 
 msgid "Results found"
 msgstr "Natijalar topildi"
 
+msgid "Selected program"
+msgstr "Tanlangan dastur"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "{{uniqueAttrName}} orqali qidirish"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Saved lists in this program"
 msgstr ""
-"Qidirish uchun kamida {{minAttributesRequired}} atributlarini toʼldiring"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -1033,14 +1051,30 @@ msgstr ""
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
-msgid "Clear selections"
-msgstr "Tanlovlarni tozalash"
-
 msgid "To work with the selected program,"
 msgstr "Tanlangan dastur bilan ishlash uchun,"
 
 msgid "open the Tracker Capture app"
 msgstr "Kuzatuv-Nazorat dasturini oching"
+
+msgid "This program is protected"
+msgstr ""
+
+msgid "Reason to check for enrollments"
+msgstr ""
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+
+msgid "Check for enrollments"
+msgstr ""
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
 
 msgid "Save comment"
 msgstr "Fikr/izohni saqlang"
@@ -1089,9 +1123,6 @@ msgstr "Qayd qilingan sana"
 msgid "Incident date"
 msgstr "Hodisa sanasi"
 
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -1102,6 +1133,9 @@ msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1171,21 +1205,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1266,9 +1290,6 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Registering unit"
-msgstr "Roʼyxatga olish muassasasi"
-
 msgid "{{ totalEvents }} events"
 msgstr ""
 
@@ -1302,6 +1323,12 @@ msgstr "Maʼlumotlarni yuklab olish ..."
 msgid "an error occurred loading working lists"
 msgstr "ishchi roʼyxatni yuklashda xatolik yuz berdi"
 
+msgid "Registration Date"
+msgstr "Roʼyxatga olingan sana"
+
+msgid "Inactive"
+msgstr "Faol emas"
+
 msgid "Enrollment status"
 msgstr "Roʼyxatga olish holati"
 
@@ -1311,13 +1338,10 @@ msgstr ""
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Registration Date"
-msgstr "Roʼyxatga olingan sana"
-
-msgid "Inactive"
-msgstr "Faol emas"
-
 msgid "Working list could not be updated"
+msgstr ""
+
+msgid "an error occurred loading the working lists"
 msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"

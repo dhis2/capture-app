@@ -1,22 +1,22 @@
 # 
 # Translators:
-# Yayra Gomado <ygomado@hispwca.org>, 2021
 # Edem Kossi <ekossi@hispwca.org>, 2022
 # phil_dhis2, 2022
 # Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2022
 # Bram Piot <bram.piot@gmail.com>, 2022
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
-# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2022
+# Yayra Gomado <ygomado@hispwca.org>, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2022\n"
-"Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
+"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2023\n"
+"Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,23 +52,35 @@ msgstr ""
 "cette page si vous souhaitez utiliser à nouveau cette version, mais "
 "attention, cette opération entraînera la fermeture des autres versions."
 
-msgid "Organisation unit"
-msgstr "Unité d'organisation"
+msgid "View {{programName}} dashboard"
+msgstr ""
 
-msgid "Date of enrollment"
-msgstr "Date d'inscription"
+msgid "View dashboard"
+msgstr "Voir le tableau de bord"
 
-msgid "Program name"
-msgstr "Nom du programme"
+msgid "View active enrollment"
+msgstr "Voir les inscriptions actives"
 
-msgid "Last updated"
-msgstr "Dernière mise à jour"
+msgid "Re-enroll"
+msgstr "Réinscrire"
+
+msgid "in"
+msgstr "dans"
 
 msgid "Enrolled"
 msgstr "Inscrit"
 
 msgid "Previously enrolled"
 msgstr "Précédemment inscrit"
+
+msgid "Organisation unit"
+msgstr "Unité d'organisation"
+
+msgid "Date of enrollment"
+msgstr "Date d'inscription"
+
+msgid "Last updated"
+msgstr "Dernière mise à jour"
 
 msgid "This value is validating"
 msgstr "Valeur en cours de validation"
@@ -144,6 +156,9 @@ msgstr "Coordonnée"
 
 msgid "Enrollment"
 msgstr "Enrôlement"
+
+msgid "Please select {{categoryName}}"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr "Une date future n'est pas permise"
@@ -296,9 +311,6 @@ msgstr "Sans"
 msgid "enrollment"
 msgstr "Enrôlement"
 
-msgid "in"
-msgstr "dans"
-
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 "Inscrivez-vous dans un programme en sélectionnant un programme dans la barre"
@@ -335,11 +347,6 @@ msgstr "Afficher le {{Nom de type d'entité suivie}} enregistré"
 msgid "Registered person"
 msgstr "Personne inscrite"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"En quittant cette page, les modifications apportées à cet événement seront "
-"annulées."
-
 msgid "validation failed"
 msgstr "validation échouée"
 
@@ -366,6 +373,11 @@ msgstr "Non, annuler"
 
 msgid "Yes, create new event"
 msgstr "Oui, créer un nouvel évènement"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"En quittant cette page, les modifications apportées à cet événement seront "
+"annulées."
 
 msgid "Warnings found"
 msgstr "Avertissements trouvés"
@@ -630,8 +642,9 @@ msgstr ""
 "Une erreur s'est produite lors de l'ouverture de cette inscription. Veuillez"
 " saisir une URL valide."
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "L'inscription avec id \"{{enrollmentId}}\" n'existe pas"
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
 
 msgid "Enrollment Dashboard"
 msgstr "Tableau de bord des inscriptions"
@@ -673,8 +686,20 @@ msgstr ""
 "{{programName}} a des catégories. Choisir toutes les catégories pour "
 "afficher le tableau de bord."
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Choisir une inscription pour afficher le tableau de bord."
+
+msgid "There are no active enrollments."
+msgstr ""
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid "No access to program owner."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} n'est pas inscrit à ce programme"
@@ -742,8 +767,8 @@ msgstr "Planning"
 msgid "Refer"
 msgstr "Référer"
 
-msgid "You can’t add any more events in this program"
-msgstr "Vous ne pouvez pas ajouter d'autres événements dans ce programme"
+msgid "You can’t add any more {{ programStageName }} events"
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "Annuler sans sauvegarder"
@@ -754,8 +779,8 @@ msgstr "Choisir un stade pour un nouvel événement"
 msgid "Program Stages could not be loaded"
 msgstr "Les stades de programme n'ont pas pu être chargés"
 
-msgid "stage"
-msgstr "stade"
+msgid "Stage"
+msgstr "Etape"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Inscription{{escape}} Afficher l'événement"
@@ -794,9 +819,6 @@ msgstr "Choisir le {{missingCategories}} pour commencer à rapporter"
 
 msgid "Save as new"
 msgstr "Enregistrer comme nouveau"
-
-msgid "View dashboard"
-msgstr "Voir le tableau de bord"
 
 msgid "View enrollment"
 msgstr "Afficher l'inscription"
@@ -861,113 +883,8 @@ msgstr "Créer un nouveau {{Type d'entité suivie}}"
 msgid "Register"
 msgstr "Enregistrer"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Renseigner au moins les attributs {{Nombre minimal d'attributs requis pour "
-"la recherche}} pour la recherche"
-
-msgid "Search {{name}}"
-msgstr "Rechercher {{nom}}"
-
-msgid "Search by {{name}}"
-msgstr "Rechercher par {{name}}"
-
-msgid "Search by attributes"
-msgstr "Chercher par attributs"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-"Renseigner ces champs pour effectuer une recherche {{escape}} {{ "
-"searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Renseigner au moins {{minAttributesRequiredToSearch}} de ces champs pour "
-"effectuer une recherche{{escape}} {{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Renseigner ce champ pour effectuer une recherche{{escape}} "
-"{{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "Aucun résultat trouvé"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Vous pouvez modifier vos termes de recherche et effectuer une nouvelle "
-"recherche pour trouver les éléments que vous recherchez."
-
-msgid "Register a user"
-msgstr "Enregistrer un utilisateur"
-
-msgid "Back to search"
-msgstr " Retour à l'écran de recherche"
-
-msgid "An error has occurred"
-msgstr "Une erreur s'est produite."
-
-msgid "Too many results"
-msgstr "Résultats trop nombreux"
-
-msgid "Cannot search in all programs"
-msgstr "Impossible d'effectuer une recherche dans tous les programmes"
-
 msgid "Back"
 msgstr "Précédent"
-
-msgid "Search for {{titleText}}"
-msgstr "Rechercher {{texte du titre}}"
-
-msgid "Search for"
-msgstr "Rechercher"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Vous pouvez également choisir un programme dans la barre supérieure et y "
-"effectuer une recherche"
-
-msgid "Choose a type to start searching"
-msgstr "Choisir un type pour commencer la recherche"
-
-msgid "View active enrollment"
-msgstr "Voir les inscriptions actives"
-
-msgid "Re-enroll"
-msgstr "Réinscrire"
-
-msgid "all programs"
-msgstr "tous les programmes"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Vous ne trouvez pas les résultats désirés ? Essayez de rechercher tous les "
-"programmes utilisant le type "
-
-msgid "Search in all programs"
-msgstr "Rechercher dans tous les programmes"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-"Si aucun des résultats de la recherche ne correspond, vous pouvez créer une "
-"nouvelle"
-
-msgid "Create new"
-msgstr "Créer nouveau"
-
-msgid "Saved lists in this program"
-msgstr "Listes sauvegardées dans ce programme"
-
-msgid "Create custom working list"
-msgstr "Créer une liste de travail personnalisée"
 
 msgid "events"
 msgstr "événements"
@@ -1017,6 +934,9 @@ msgstr "L'unité d'organisation n'a pas pu être chargée"
 msgid "Possible duplicates found"
 msgstr "Doublons éventuellement détectés"
 
+msgid "No results found"
+msgstr "Aucun résultat trouvé"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Une erreur s'est produite lors du chargement des doublons possibles"
 
@@ -1029,46 +949,145 @@ msgstr "Vous n'êtes pas autorisé à créer des relations"
 msgid "Add relationship"
 msgstr "Ajouetr relation"
 
-msgid "Selected registering unit"
-msgstr "Unité d'enregistrement sélectionnée"
+msgid "No results found for "
+msgstr ""
 
-msgid "Start Again"
-msgstr "Recommencer"
+msgid "Registering unit"
+msgstr "Unité qui enregistre"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Êtes-vous sûr ? Toutes les données non sauvegardées seront perdues."
+msgid "Choose a registering unit"
+msgstr ""
 
-msgid "Accept"
-msgstr "Accepter"
-
-msgid "Registering Organisation Unit"
-msgstr "Unité d'organisation d'enregistrement"
-
-msgid "Select"
-msgstr "Sélectionner"
+msgid "Clear selection"
+msgstr ""
 
 msgid "No programs available."
 msgstr "Aucun programme disponible"
 
-msgid "Selected program"
-msgstr "Programme choisi"
+msgid "Search for a program"
+msgstr ""
 
-msgid "Select program"
-msgstr "Sélectionner le programme"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr ""
 
-msgid "Selected"
-msgstr "Sélectionné"
+msgid "Show all programs"
+msgstr ""
+
+msgid "Choose a program"
+msgstr "Choisir un programme"
+
+msgid "Search for {{titleText}}"
+msgstr "Rechercher {{texte du titre}}"
+
+msgid "Search for"
+msgstr "Rechercher"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Vous pouvez également choisir un programme dans la barre supérieure et y "
+"effectuer une recherche"
+
+msgid "Choose a type to start searching"
+msgstr "Choisir un type pour commencer la recherche"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Search {{name}}"
+msgstr "Rechercher {{nom}}"
+
+msgid "Search by {{name}}"
+msgstr "Rechercher par {{name}}"
+
+msgid "Search by attributes"
+msgstr "Chercher par attributs"
+
+msgid "all programs"
+msgstr "tous les programmes"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Vous ne trouvez pas les résultats désirés ? Essayez de rechercher tous les "
+"programmes utilisant le type "
+
+msgid "Search in all programs"
+msgstr "Rechercher dans tous les programmes"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+"Si aucun des résultats de la recherche ne correspond, vous pouvez créer une "
+"nouvelle"
+
+msgid "Create new"
+msgstr "Créer nouveau"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+"Renseigner ces champs pour effectuer une recherche {{escape}} {{ "
+"searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Renseigner au moins {{minAttributesRequiredToSearch}} de ces champs pour "
+"effectuer une recherche{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Renseigner ce champ pour effectuer une recherche{{escape}} "
+"{{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Vous pouvez modifier vos termes de recherche et effectuer une nouvelle "
+"recherche pour trouver les éléments que vous recherchez."
+
+msgid "Back to search"
+msgstr " Retour à l'écran de recherche"
+
+msgid "An error has occurred"
+msgstr "Une erreur s'est produite."
+
+msgid "Too many results"
+msgstr "Résultats trop nombreux"
+
+msgid "Cannot search in all programs"
+msgstr "Impossible d'effectuer une recherche dans tous les programmes"
+
+msgid "Missing search criteria"
+msgstr ""
 
 msgid "Results found"
 msgstr "Résultats trouvés"
 
+msgid "Selected program"
+msgstr "Programme choisi"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Chercher {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Saved lists in this program"
+msgstr "Listes sauvegardées dans ce programme"
+
+msgid "Saved lists offer quick access to your most used views in a program."
 msgstr ""
-"Renseigner au moins les attributs {{Nombre minimal d'attributs requis}} pour"
-" la recherche"
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Nouveau {{trackedEntityName}} dans {{programName}}"
@@ -1076,14 +1095,30 @@ msgstr "Nouveau {{trackedEntityName}} dans {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
 
-msgid "Clear selections"
-msgstr "Effacer les sélections"
-
 msgid "To work with the selected program,"
 msgstr "Pour utiliser le programme sélectionné,"
 
 msgid "open the Tracker Capture app"
 msgstr "ouvrez l'application Saisie Tracker"
+
+msgid "This program is protected"
+msgstr "Ce programme est protégé"
+
+msgid "Reason to check for enrollments"
+msgstr ""
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+
+msgid "Check for enrollments"
+msgstr ""
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
 
 msgid "Save comment"
 msgstr "Enregistrer commentaires "
@@ -1135,9 +1170,6 @@ msgstr "Date d'enrôlement"
 msgid "Incident date"
 msgstr "Date de l´incident"
 
-msgid "Last updated {{date}}"
-msgstr "Dernière mise à jour {{date}}"
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 "Le widget d'inscription n'a pas pu être chargé. Veuillez réessayer plus tard"
@@ -1150,6 +1182,9 @@ msgstr "Commencé à {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Propriété de {{ownerOrgUnit}}"
+
+msgid "Last updated {{date}}"
+msgstr "Dernière mise à jour {{date}}"
 
 msgid "Cancelled"
 msgstr "Annulé"
@@ -1224,25 +1259,11 @@ msgstr ""
 "La date prévue correspond à la date suggérée, mais elle peut être modifiée "
 "si nécessaire."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] "La date prévue est {{count}} jour {{position}} la date suggérée."
-msgstr[1] "xx"
-msgstr[2] "La date prévue est {{count}} jour {{position}} la date suggérée."
-
 msgid "after"
 msgstr "après"
 
 msgid "before"
 msgstr "avant"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1332,9 +1353,6 @@ msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 "Les événements n'ont pas pu être récupérés. Veuillez réessayer plus tard."
 
-msgid "Registering unit"
-msgstr "Unité qui enregistre"
-
 msgid "{{ totalEvents }} events"
 msgstr "{{total des événements}} événements"
 
@@ -1368,6 +1386,12 @@ msgstr "Télécharger des données..."
 msgid "an error occurred loading working lists"
 msgstr "une erreur est survenue lors du chargement des listes de tâches"
 
+msgid "Registration Date"
+msgstr "Date d'inscription"
+
+msgid "Inactive"
+msgstr "Inactif"
+
 msgid "Enrollment status"
 msgstr "Statut de l'enrôlement"
 
@@ -1377,14 +1401,11 @@ msgstr "Attribue"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choisir un stade de programme pour filtrer par {{label}}"
 
-msgid "Registration Date"
-msgstr "Date d'inscription"
-
-msgid "Inactive"
-msgstr "Inactif"
-
 msgid "Working list could not be updated"
 msgstr "La liste de travail n'a pas pu être mise à jour"
+
+msgid "an error occurred loading the working lists"
+msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""

@@ -5,6 +5,12 @@ import type { IDateUtils } from '@dhis2/rules-engine-javascript';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 
 const momentFormat = 'YYYY-MM-DD';
+const momentRegex = /^\d{4}-\d{2}-\d{2}$/g;
+
+function isDate(rulesDate: ?string) {
+    momentRegex.lastIndex = 0;
+    return rulesDate && momentRegex.test(rulesDate);
+}
 
 function rulesDateToMoment(rulesEngineValue: string): moment$Moment {
     return moment(rulesEngineValue, momentFormat);
@@ -23,21 +29,32 @@ export const dateUtils: IDateUtils = {
         const todayMoment = moment();
         return momentToRulesDate(todayMoment);
     },
-    daysBetween: (firstRulesDate: string, secondRulesDate: string): number =>
-        between('days', firstRulesDate, secondRulesDate),
-    weeksBetween: (firstRulesDate: string, secondRulesDate: string): number =>
-        between('weeks', firstRulesDate, secondRulesDate),
-    monthsBetween: (firstRulesDate: string, secondRulesDate: string): number =>
-        between('months', firstRulesDate, secondRulesDate),
-    yearsBetween: (firstRulesDate: string, secondRulesDate: string): number =>
-        between('years', firstRulesDate, secondRulesDate),
-    addDays: (rulesDate: string, daysToAdd: number): string => {
+    daysBetween: (firstRulesDate: ?string, secondRulesDate: ?string): ?number =>
+        // $FlowExpectedError
+        (isDate(firstRulesDate) && isDate(secondRulesDate) ? between('days', firstRulesDate, secondRulesDate) : null),
+    weeksBetween: (firstRulesDate: ?string, secondRulesDate: ?string): ?number =>
+        // $FlowExpectedError
+        (isDate(firstRulesDate) && isDate(secondRulesDate) ? between('weeks', firstRulesDate, secondRulesDate) : null),
+    monthsBetween: (firstRulesDate: ?string, secondRulesDate: ?string): ?number =>
+        // $FlowExpectedError
+        (isDate(firstRulesDate) && isDate(secondRulesDate) ? between('months', firstRulesDate, secondRulesDate) : null),
+    yearsBetween: (firstRulesDate: ?string, secondRulesDate: ?string): ?number =>
+        // $FlowExpectedError
+        (isDate(firstRulesDate) && isDate(secondRulesDate) ? between('years', firstRulesDate, secondRulesDate) : null),
+    addDays: (rulesDate: ?string, daysToAdd: number): ?string => {
+        if (!isDate(rulesDate)) {
+            return null;
+        }
+        // $FlowExpectedError
         const dateMoment = rulesDateToMoment(rulesDate);
         const newDateMoment = dateMoment.add(daysToAdd, 'days');
         return momentToRulesDate(newDateMoment);
     },
-    compareDates: (firstRulesDate: string, secondRulesDate: string): number => {
+    compareDates: (firstRulesDate: ?string, secondRulesDate: ?string): number => {
         const diff = dateUtils.daysBetween(secondRulesDate, firstRulesDate);
+        if (!diff) {
+            return 0;
+        }
         if (diff < 0) {
             return -1;
         }

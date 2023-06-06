@@ -1,3 +1,94 @@
+## [100.32.6](https://github.com/dhis2/capture-app/compare/v100.32.5...v100.32.6) (2023-06-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b46d1cf](https://github.com/dhis2/capture-app/commit/b46d1cf6cc97452b78b708e41ffe689fe1eab5af))
+
+## [100.32.5](https://github.com/dhis2/capture-app/compare/v100.32.4...v100.32.5) (2023-06-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e00489c](https://github.com/dhis2/capture-app/commit/e00489c2f216e8f0ace13655a8b810fd281bc7cf))
+
+## [100.32.4](https://github.com/dhis2/capture-app/compare/v100.32.3...v100.32.4) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-14412] validate date-string arguments in d2-functions ([#3236](https://github.com/dhis2/capture-app/issues/3236)) ([cab376e](https://github.com/dhis2/capture-app/commit/cab376e7fbf76de17a6b8dfdbda23b8ed680e006))
+
+## [100.32.3](https://github.com/dhis2/capture-app/compare/v100.32.2...v100.32.3) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-15231] Information widgets wrongly hidden in Add Event Page ([4adea95](https://github.com/dhis2/capture-app/commit/4adea952b60f78953091aca011813885a24d7407))
+
+## [100.32.2](https://github.com/dhis2/capture-app/compare/v100.32.1...v100.32.2) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-15342] program stage WL trackedEntities request ([#3269](https://github.com/dhis2/capture-app/issues/3269)) ([2a50baf](https://github.com/dhis2/capture-app/commit/2a50baf6a2015d22a0c66fd50027dfe98191fe98))
+
+## [100.32.1](https://github.com/dhis2/capture-app/compare/v100.32.0...v100.32.1) (2023-05-30)
+
+
+### Bug Fixes
+
+* [DHIS2-12520] change enrollment event from url ([#3210](https://github.com/dhis2/capture-app/issues/3210)) ([c126fe4](https://github.com/dhis2/capture-app/commit/c126fe479bc04c5cbacfe309b8400782f2727be4))
+
+# [100.32.0](https://github.com/dhis2/capture-app/compare/v100.31.7...v100.32.0) (2023-05-30)
+
+
+### Features
+
+* [DHIS2-14577] search UX improvements ([#3229](https://github.com/dhis2/capture-app/issues/3229)) ([967ba52](https://github.com/dhis2/capture-app/commit/967ba5273df26ca1cc0e5276f7682da479548121))
+
+## [100.31.7](https://github.com/dhis2/capture-app/compare/v100.31.6...v100.31.7) (2023-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15153] ask user to create new event  ([#3248](https://github.com/dhis2/capture-app/issues/3248)) ([d061efc](https://github.com/dhis2/capture-app/commit/d061efca2bbc5c4ecf3b8b1614e0ccb7a7d909d3))
+
+## [100.31.6](https://github.com/dhis2/capture-app/compare/v100.31.5...v100.31.6) (2023-05-29)
+
+
+### Bug Fixes
+
+* [TECH-1508][DHIS2-15103] extract search component ([#3223](https://github.com/dhis2/capture-app/issues/3223)) ([dd72c50](https://github.com/dhis2/capture-app/commit/dd72c5053a8aea8620e51fd80260654d6a6815ed))
+
+## [100.31.5](https://github.com/dhis2/capture-app/compare/v100.31.4...v100.31.5) (2023-05-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6324fe1](https://github.com/dhis2/capture-app/commit/6324fe1197c2509c8efb818fd6671d96e8839537))
+
+## [100.31.4](https://github.com/dhis2/capture-app/compare/v100.31.3...v100.31.4) (2023-05-24)
+
+
+### Bug Fixes
+
+* [DHIS2-13884] remove padding caused by hidden sections ([#3242](https://github.com/dhis2/capture-app/issues/3242)) ([073c650](https://github.com/dhis2/capture-app/commit/073c650eb52a85a0ba65fc541d260e463de23de2))
+
+## [100.31.3](https://github.com/dhis2/capture-app/compare/v100.31.2...v100.31.3) (2023-05-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9305b5a](https://github.com/dhis2/capture-app/commit/9305b5a3f593e9dfff7daebfa3111093daf61932))
+
+## [100.31.2](https://github.com/dhis2/capture-app/compare/v100.31.1...v100.31.2) (2023-05-16)
+
+
+### Bug Fixes
+
+* [DHIS2-11345] support newline in program rule expressions ([#3243](https://github.com/dhis2/capture-app/issues/3243)) ([eb1cc0a](https://github.com/dhis2/capture-app/commit/eb1cc0a25bfe26c24dc8b95a2d5601f33239bd1a))
+
 ## [100.31.1](https://github.com/dhis2/capture-app/compare/v100.31.0...v100.31.1) (2023-05-15)
 
 

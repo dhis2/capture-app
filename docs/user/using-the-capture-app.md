@@ -152,7 +152,8 @@ The second option, is to register a tracked entity instance with program and enr
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. Click **Save new** to register the tracked entity instance.
+7. Click **Save new** to register the tracked entity instance. 
+    The **Save** button shows a loading spinner and the **Cancel** button is disabled while the request is processing.
     
 8. You will now be prompted to the tracked entity instance dashboard. 
 
