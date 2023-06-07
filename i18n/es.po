@@ -696,7 +696,7 @@ msgid "There are no indicators for this event"
 msgstr "No hay indicadores para este evento."
 
 msgid "program stage is invalid"
-msgstr ""
+msgstr "la etapa del programa no es válida"
 
 msgid "stage"
 msgstr "etapa"
