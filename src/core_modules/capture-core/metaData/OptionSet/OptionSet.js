@@ -183,7 +183,7 @@ export class OptionSet {
                 log.warn(errorCreator(OptionSet.errorMessages.OPTION_NOT_FOUND)({ OptionSet: this, code }));
             }
             return acc;
-        }, []).join(OptionSet.multiOptionsValuesSeparator);
+        }, []).join(`${OptionSet.multiOptionsValuesSeparator} `);
     }
 
     getOptionsTextAsString(values: Array<Value>): string {
