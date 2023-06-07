@@ -1,3 +1,45 @@
+## [100.32.7](https://github.com/dhis2/capture-app/compare/v100.32.6...v100.32.7) (2023-06-07)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e252444](https://github.com/dhis2/capture-app/commit/e252444524c71e41bf2967ae1c2d2738c2af750d))
+
+## [100.32.6](https://github.com/dhis2/capture-app/compare/v100.32.5...v100.32.6) (2023-06-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b46d1cf](https://github.com/dhis2/capture-app/commit/b46d1cf6cc97452b78b708e41ffe689fe1eab5af))
+
+## [100.32.5](https://github.com/dhis2/capture-app/compare/v100.32.4...v100.32.5) (2023-06-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e00489c](https://github.com/dhis2/capture-app/commit/e00489c2f216e8f0ace13655a8b810fd281bc7cf))
+
+## [100.32.4](https://github.com/dhis2/capture-app/compare/v100.32.3...v100.32.4) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-14412] validate date-string arguments in d2-functions ([#3236](https://github.com/dhis2/capture-app/issues/3236)) ([cab376e](https://github.com/dhis2/capture-app/commit/cab376e7fbf76de17a6b8dfdbda23b8ed680e006))
+
+## [100.32.3](https://github.com/dhis2/capture-app/compare/v100.32.2...v100.32.3) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-15231] Information widgets wrongly hidden in Add Event Page ([4adea95](https://github.com/dhis2/capture-app/commit/4adea952b60f78953091aca011813885a24d7407))
+
+## [100.32.2](https://github.com/dhis2/capture-app/compare/v100.32.1...v100.32.2) (2023-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-15342] program stage WL trackedEntities request ([#3269](https://github.com/dhis2/capture-app/issues/3269)) ([2a50baf](https://github.com/dhis2/capture-app/commit/2a50baf6a2015d22a0c66fd50027dfe98191fe98))
+
 ## [100.32.1](https://github.com/dhis2/capture-app/compare/v100.32.0...v100.32.1) (2023-05-30)
 
 

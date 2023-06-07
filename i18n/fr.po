@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-06-02T09:13:17.085Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2023\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -883,115 +883,8 @@ msgstr "Créer un nouveau {{Type d'entité suivie}}"
 msgid "Register"
 msgstr "Enregistrer"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Renseigner au moins les attributs {{Nombre minimal d'attributs requis pour "
-"la recherche}} pour la recherche"
-
-msgid "Search {{name}}"
-msgstr "Rechercher {{nom}}"
-
-msgid "Search by {{name}}"
-msgstr "Rechercher par {{name}}"
-
-msgid "Search by attributes"
-msgstr "Chercher par attributs"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-"Renseigner ces champs pour effectuer une recherche {{escape}} {{ "
-"searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Renseigner au moins {{minAttributesRequiredToSearch}} de ces champs pour "
-"effectuer une recherche{{escape}} {{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Renseigner ce champ pour effectuer une recherche{{escape}} "
-"{{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "Aucun résultat trouvé"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Vous pouvez modifier vos termes de recherche et effectuer une nouvelle "
-"recherche pour trouver les éléments que vous recherchez."
-
-msgid "Register a user"
-msgstr "Enregistrer un utilisateur"
-
-msgid "Back to search"
-msgstr " Retour à l'écran de recherche"
-
-msgid "An error has occurred"
-msgstr "Une erreur s'est produite."
-
-msgid "Too many results"
-msgstr "Résultats trop nombreux"
-
-msgid "Cannot search in all programs"
-msgstr "Impossible d'effectuer une recherche dans tous les programmes"
-
 msgid "Back"
 msgstr "Précédent"
-
-msgid "Search for {{titleText}}"
-msgstr "Rechercher {{texte du titre}}"
-
-msgid "Search for"
-msgstr "Rechercher"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Vous pouvez également choisir un programme dans la barre supérieure et y "
-"effectuer une recherche"
-
-msgid "Choose a type to start searching"
-msgstr "Choisir un type pour commencer la recherche"
-
-msgid "all programs"
-msgstr "tous les programmes"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Vous ne trouvez pas les résultats désirés ? Essayez de rechercher tous les "
-"programmes utilisant le type "
-
-msgid "Search in all programs"
-msgstr "Rechercher dans tous les programmes"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-"Si aucun des résultats de la recherche ne correspond, vous pouvez créer une "
-"nouvelle"
-
-msgid "Create new"
-msgstr "Créer nouveau"
-
-msgid "Saved lists in this program"
-msgstr "Listes sauvegardées dans ce programme"
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-
-msgid "Create saved list"
-msgstr ""
 
 msgid "events"
 msgstr "événements"
@@ -1041,6 +934,9 @@ msgstr "L'unité d'organisation n'a pas pu être chargée"
 msgid "Possible duplicates found"
 msgstr "Doublons éventuellement détectés"
 
+msgid "No results found"
+msgstr "Aucun résultat trouvé"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Une erreur s'est produite lors du chargement des doublons possibles"
 
@@ -1080,6 +976,96 @@ msgstr ""
 msgid "Choose a program"
 msgstr "Choisir un programme"
 
+msgid "Search for {{titleText}}"
+msgstr "Rechercher {{texte du titre}}"
+
+msgid "Search for"
+msgstr "Rechercher"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Vous pouvez également choisir un programme dans la barre supérieure et y "
+"effectuer une recherche"
+
+msgid "Choose a type to start searching"
+msgstr "Choisir un type pour commencer la recherche"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Search {{name}}"
+msgstr "Rechercher {{nom}}"
+
+msgid "Search by {{name}}"
+msgstr "Rechercher par {{name}}"
+
+msgid "Search by attributes"
+msgstr "Chercher par attributs"
+
+msgid "all programs"
+msgstr "tous les programmes"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Vous ne trouvez pas les résultats désirés ? Essayez de rechercher tous les "
+"programmes utilisant le type "
+
+msgid "Search in all programs"
+msgstr "Rechercher dans tous les programmes"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+"Si aucun des résultats de la recherche ne correspond, vous pouvez créer une "
+"nouvelle"
+
+msgid "Create new"
+msgstr "Créer nouveau"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+"Renseigner ces champs pour effectuer une recherche {{escape}} {{ "
+"searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Renseigner au moins {{minAttributesRequiredToSearch}} de ces champs pour "
+"effectuer une recherche{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Renseigner ce champ pour effectuer une recherche{{escape}} "
+"{{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Vous pouvez modifier vos termes de recherche et effectuer une nouvelle "
+"recherche pour trouver les éléments que vous recherchez."
+
+msgid "Back to search"
+msgstr " Retour à l'écran de recherche"
+
+msgid "An error has occurred"
+msgstr "Une erreur s'est produite."
+
+msgid "Too many results"
+msgstr "Résultats trop nombreux"
+
+msgid "Cannot search in all programs"
+msgstr "Impossible d'effectuer une recherche dans tous les programmes"
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr "Résultats trouvés"
 
@@ -1089,10 +1075,19 @@ msgstr "Programme choisi"
 msgid "Search {{uniqueAttrName}}"
 msgstr "Chercher {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Saved lists in this program"
+msgstr "Listes sauvegardées dans ce programme"
+
+msgid "Saved lists offer quick access to your most used views in a program."
 msgstr ""
-"Renseigner au moins les attributs {{Nombre minimal d'attributs requis}} pour"
-" la recherche"
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Nouveau {{trackedEntityName}} dans {{programName}}"

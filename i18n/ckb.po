@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Central Kurdish (https://app.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -843,99 +843,8 @@ msgstr " {{trackedEntityType}}ی نوێ دروست بکە"
 msgid "Register"
 msgstr "تۆمار بکە"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-
-msgid "Search {{name}}"
-msgstr ""
-
-msgid "Search by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr "بە پێ ئاتریبیوت بگەڕێ"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr ""
-
-msgid "An error has occurred"
-msgstr ""
-
-msgid "Too many results"
-msgstr ""
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "كةرانةوة"
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr ""
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-
-msgid "Choose a type to start searching"
-msgstr ""
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-
-msgid "Search in all programs"
-msgstr ""
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr ""
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-
-msgid "Create saved list"
-msgstr ""
 
 msgid "events"
 msgstr ""
@@ -986,6 +895,9 @@ msgstr "ئۆرگانیزەیشن یونتەکە نەتواندرا بهێندر�
 msgid "Possible duplicates found"
 msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 
+msgid "No results found"
+msgstr ""
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1025,6 +937,81 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Search by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr "بە پێ ئاتریبیوت بگەڕێ"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr ""
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid "Too many results"
+msgstr ""
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr ""
 
@@ -1034,8 +1021,19 @@ msgstr "پرۆگرامە هەڵبژێردراوەکە"
 msgid "Search {{uniqueAttrName}}"
 msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "بەلانی کەم ئەتریبیوتی{{minAttributesRequired}} پڕبەکەرەوەبۆ گەڕان"
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -1197,23 +1195,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
