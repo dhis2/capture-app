@@ -2,15 +2,15 @@
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2021
 # phil_dhis2, 2022
-# easylin <lin_xd@126.com>, 2023
 # 晓东 林 <13981924470@126.com>, 2023
+# easylin <lin_xd@126.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"POT-Creation-Date: 2023-06-02T09:13:17.085Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2023\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2023\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1182,11 +1182,21 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr "预定日期与建议日期相符，但可以根据需要进行更改。"
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] "预定日期是 {{count}} 天 {{position}} 建议的日期。"
+
 msgid "after"
 msgstr "后"
 
 msgid "before"
 msgstr "前"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "这天在 {{orgUnitName}} 有 {{count}} 个预定活动。"
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
