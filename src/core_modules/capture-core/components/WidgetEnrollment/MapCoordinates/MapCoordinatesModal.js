@@ -144,13 +144,11 @@ const MapCoordinatesModalPlain = ({
             zoom={13}
             ref={(ref) => {
                 if (ref?.leafletElement) {
-                    setTimeout(() => {
-                        ref?.leafletElement?.invalidateSize();
-                        if (ref.contextValue && type === dataElementTypes.POLYGON && coordinates) {
-                            const { map } = ref.contextValue;
-                            map?.fitBounds(coordinates);
-                        }
-                    }, 250);
+                    ref.leafletElement.invalidateSize();
+                    if (ref.contextValue && type === dataElementTypes.POLYGON && coordinates) {
+                        const { map } = ref.contextValue;
+                        map?.fitBounds(coordinates);
+                    }
                 }
             }}
             className={classes.map}
@@ -286,7 +284,7 @@ const MapCoordinatesModalPlain = ({
             ) : (
                 <Button
                     className={classes.fieldButton}
-                    disabled={!position}
+                    disabled={!position && isValid}
                     icon={<IconCross24 />}
                     onClick={() => {
                         setPosition(null);
