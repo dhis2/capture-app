@@ -61,6 +61,7 @@ export const WidgetEnrollmentPlain = ({
     error,
     loading,
     canAddNew,
+    editDateEnabled,
     onDelete,
     onAddNew,
     onUpdateDate,
@@ -99,7 +100,7 @@ export const WidgetEnrollmentPlain = ({
                         <EnrollmentDate
                             enrollmentDateLabel={getEnrollmentDateLabel(program)}
                             enrollment={enrollment}
-                            editEnabled={true}
+                            editEnabled={editDateEnabled}
                             onUpdateDate={onUpdateDate}
                             classes={classes}
                         />
