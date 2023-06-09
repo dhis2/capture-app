@@ -19,7 +19,7 @@ type Props = {
     enrollmentDateLabel: string,
     enrollmentDate: string,
     editEnabled: boolean,
-    onSave: (?string) => void,
+    onSave: (string) => void,
     ...CssClasses,
 }
 

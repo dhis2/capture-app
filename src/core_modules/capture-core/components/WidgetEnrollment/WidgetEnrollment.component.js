@@ -63,6 +63,7 @@ export const WidgetEnrollmentPlain = ({
     canAddNew,
     onDelete,
     onAddNew,
+    onUpdateDate,
     onError,
     onSuccess,
 }: PlainProps) => {
@@ -99,7 +100,7 @@ export const WidgetEnrollmentPlain = ({
                             enrollmentDateLabel={getEnrollmentDateLabel(program)}
                             enrollment={enrollment}
                             editEnabled={true}
-                            refetchEnrollment={refetchEnrollment}
+                            onUpdateDate={onUpdateDate}
                             classes={classes}
                         />
 

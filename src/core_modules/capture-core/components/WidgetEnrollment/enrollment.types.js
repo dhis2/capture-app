@@ -7,6 +7,7 @@ export type Props = {|
     programId: string,
     onDelete: () => void,
     onAddNew: () => void,
+    onUpdateDate?: (enrollmentDate: string) => void,
     onError?: (message: string) => void,
     onSuccess?: () => void,
 |};
@@ -22,6 +23,7 @@ export type PlainProps = {|
     canAddNew: boolean,
     onDelete: () => void,
     onAddNew: () => void,
+    onUpdateDate?: (enrollmentDate: string) => void,
     onError?: (message: string) => void,
     onSuccess?: () => void,
     ...CssClasses,

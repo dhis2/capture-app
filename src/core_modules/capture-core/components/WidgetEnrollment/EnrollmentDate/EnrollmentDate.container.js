@@ -10,7 +10,7 @@ type Props = {
     enrollmentDateLabel: string,
     enrollment: any,
     editEnabled: boolean,
-    executeRules?: void => void,
+    onUpdateDate?: (enrollmentDate: string) => void,
     ...CssClasses,
 }
 
@@ -26,20 +26,15 @@ export const EnrollmentDate = ({
     enrollmentDateLabel,
     enrollment,
     editEnabled,
-    executeRules,
+    onUpdateDate,
     classes,
 }: Props) => {
-    const [updateMutation] = useDataMutation(
-        enrollmentUpdate,
-        {
-            onComplete: () => {
-                executeRules && executeRules();
-            },
-        },
-    );
-    const saveHandler = (selectedDate) => {
+    const [updateMutation] = useDataMutation(enrollmentUpdate);
+
+    const saveHandler = (selectedDate: string) => {
         enrollment.enrolledAt = convertValueClientToServer(selectedDate, dataElementTypes.DATE);
         updateMutation(enrollment);
+        onUpdateDate && onUpdateDate(enrollment.enrolledAt);
     };
     const clientDate = String(convertValueServerToClient(enrollment.enrolledAt, dataElementTypes.DATE));
 

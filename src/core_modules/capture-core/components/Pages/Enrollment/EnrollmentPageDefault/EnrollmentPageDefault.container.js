@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import {
     useCommonEnrollmentDomainData,
     updateEnrollmentAttributeValues,
+    updateEnrollmentDate,
     showEnrollmentError,
 } from '../../common/EnrollmentOverviewDomain';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
@@ -74,12 +75,16 @@ export const EnrollmentPageDefault = () => {
     const onEventClick = (eventId: string) => {
         history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
     };
+
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
         dispatch(updateEnrollmentAttributeValues(updatedAttributeValues
             .map(({ attribute, value }) => ({ id: attribute, value })),
         ));
         dispatch(updateTeiDisplayName(teiDisplayName));
     }, [dispatch]);
+
+    const onUpdateEnrollmentDate = useCallback((enrollmentDate) =>
+        dispatch(updateEnrollmentDate(enrollmentDate)), [dispatch]);
 
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
@@ -107,6 +112,7 @@ export const EnrollmentPageDefault = () => {
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
+            onUpdateEnrollmentDate={onUpdateEnrollmentDate}
             onEnrollmentError={onEnrollmentError}
         />
     );
