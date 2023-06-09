@@ -44,7 +44,7 @@ msgstr ""
 "at dette vil lukke andre versjoner."
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "Vis {{programName}} dashbord"
 
 msgid "View dashboard"
 msgstr "Vis dashbord"
@@ -929,7 +929,7 @@ msgid "Choose a registering unit"
 msgstr ""
 
 msgid "Clear selection"
-msgstr ""
+msgstr "Fjern valg"
 
 msgid "No programs available."
 msgstr "Ingen programmer tilgjengelig."
