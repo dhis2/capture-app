@@ -20,6 +20,7 @@ import { Status } from './Status';
 import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
 import { convertValue as convertValueClientToView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
+import { EnrollmentDate } from './EnrollmentDate/';
 import { Actions } from './Actions';
 
 const styles = {
@@ -32,6 +33,11 @@ const styles = {
         margin: `${spacersNum.dp8}px 0`,
         fontSize: '14px',
         color: colors.grey900,
+        gap: `${spacersNum.dp4}px`,
+    },
+    column: {
+        margin: `${spacersNum.dp8}px 0`,
+        fontSize: '14px',
         gap: `${spacersNum.dp4}px`,
     },
     statuses: {
@@ -89,16 +95,13 @@ export const WidgetEnrollmentPlain = ({
                             <Status status={enrollment.status} />
                         </div>
 
-                        <div className={classes.row} data-test="widget-enrollment-enrollment-date">
-                            <span className={classes.icon} data-test="widget-enrollment-icon-calendar">
-                                <IconCalendar16 color={colors.grey600} />
-                            </span>
-                            {getEnrollmentDateLabel(program)}{' '}
-                            {convertValueClientToView(
-                                convertValueServerToClient(enrollment.enrolledAt, dataElementTypes.DATE),
-                                dataElementTypes.DATE,
-                            )}
-                        </div>
+                        <EnrollmentDate
+                            enrollmentDateLabel={getEnrollmentDateLabel(program)}
+                            enrollment={enrollment}
+                            editEnabled={true}
+                            refetchEnrollment={refetchEnrollment}
+                            classes={classes}
+                        />
 
                         {program.displayIncidentDate && (
                             <div className={classes.row} data-test="widget-enrollment-incident-date">

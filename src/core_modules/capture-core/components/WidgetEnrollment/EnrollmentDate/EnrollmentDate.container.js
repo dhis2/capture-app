@@ -1,0 +1,53 @@
+// @flow
+import React, { useState, useCallback } from 'react';
+import { useDataMutation, type QueryRefetchFunction } from '@dhis2/app-runtime';
+import { EnrollmentDateComponent } from './EnrollmentDate.component';
+import { convertValue as convertValueServerToClient } from '../../../converters/serverToClient';
+import { convertValue as convertValueClientToServer } from '../../../converters/clientToServer';
+import { dataElementTypes } from '../../../metaData';
+
+type Props = {
+    enrollmentDateLabel: string,
+    enrollment: any,
+    editEnabled: boolean,
+    executeRules?: void => void,
+    ...CssClasses,
+}
+
+const enrollmentUpdate = {
+    resource: 'tracker?async=false&importStrategy=UPDATE',
+    type: 'create',
+    data: enrollment => ({
+        enrollments: [enrollment],
+    }),
+};
+
+export const EnrollmentDate = ({
+    enrollmentDateLabel,
+    enrollment,
+    editEnabled,
+    executeRules,
+    classes,
+}: Props) => {
+    const [updateMutation] = useDataMutation(
+        enrollmentUpdate,
+        {
+            onComplete: () => {
+                executeRules && executeRules();
+            },
+        },
+    );
+    const saveHandler = (selectedDate) => {
+        enrollment.enrolledAt = convertValueClientToServer(selectedDate, dataElementTypes.DATE);
+        updateMutation(enrollment);
+    };
+    const clientDate = String(convertValueServerToClient(enrollment.enrolledAt, dataElementTypes.DATE));
+
+    return <EnrollmentDateComponent
+        enrollmentDateLabel={enrollmentDateLabel}
+        enrollmentDate={clientDate}
+        editEnabled={editEnabled}
+        onSave={saveHandler}
+        classes={classes}
+    />
+};
