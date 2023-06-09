@@ -8,6 +8,7 @@ msgstr ""
 "POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2023-06-08T11:11:29.783Z\n"
 
+
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
 
@@ -1310,8 +1311,8 @@ msgstr "Edit"
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
 
-msgid "This event is not yet preserved and cannot be edited"
-msgstr "This event is not yet preserved and cannot be edited"
+msgid "To open this event, please wait until saving is complete"
+msgstr "To open this event, please wait until saving is complete"
 
 msgid "Show {{ rest }} more"
 msgstr "Show {{ rest }} more"
