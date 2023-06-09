@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"POT-Creation-Date: 2023-06-02T09:13:17.085Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -1180,11 +1180,21 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+
 msgid "after"
 msgstr "后"
 
 msgid "before"
 msgstr "前"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "今天在 {{orgUnitName}} 有 {{count}} 个已经安排的事件。"
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"

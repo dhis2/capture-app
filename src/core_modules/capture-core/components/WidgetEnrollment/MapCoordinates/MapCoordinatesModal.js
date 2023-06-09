@@ -37,7 +37,7 @@ const styles = (theme: Theme) => ({
         borderRadius: '0 !important',
     },
     errorContainer: {
-        backgroundColor: '#FBEAE5',
+        backgroundColor: theme.palette.error.lighter,
         color: theme.palette.error.main,
     },
 });
