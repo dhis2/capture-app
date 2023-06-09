@@ -28,6 +28,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
+    VirtualizedSelectField,
 } from '../../FormFields/New';
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -35,6 +36,13 @@ import { addEventSaveTypes } from './addEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { withTransformPropName } from '../../../HOC';
+import {
+    AOCsectionKey,
+    withAOCFieldBuilder,
+    withDataEntryFields,
+    attributeOptionsKey,
+    getCategoryOptionsValidatorContainers,
+} from '../../DataEntryDhis2Helpers';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -301,12 +309,55 @@ const buildAssigneeSettingsFn = () => {
     };
 };
 
+const getCategoryOptionsSettingsFn = () => {
+    const categoryOptionsComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const categoryOptionsSettings = {
+        getComponent: () => categoryOptionsComponent,
+        getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
+            ...props.categories?.find(category => category.id === fieldId) ?? {},
+            required: true,
+        }),
+        getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
+        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
+        getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
+        getMeta: (props: Object) => ({
+            section: AOCsectionKey,
+            placement: placements.TOP,
+            sectionName: props.programCategory?.displayName,
+        }),
+    };
+
+    return categoryOptionsSettings;
+};
+
+
 const dataEntryFilterProps = (props: Object) => {
     const { stage, onScrollToRelationships, recentlyAddedRelationshipId, relationshipsRef, ...passOnProps } = props;
     return passOnProps;
 };
 
 const WrappedDataEntry = compose(
+    withAOCFieldBuilder({}),
+    withDataEntryFields(getCategoryOptionsSettingsFn()),
     withDataEntryField(buildReportDateSettingsFn()),
     withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
     withCenterPoint(),
@@ -318,6 +369,8 @@ const WrappedDataEntry = compose(
 
 type Props = {
     id: string,
+    orgUnitId: string,
+    programId: string,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
@@ -363,6 +416,10 @@ const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.ASSIGNEE]: {
         placement: placements.BOTTOM,
         name: i18n.t('Assignee'),
+    },
+    [AOCsectionKey]: {
+        placement: placements.TOP,
+        name: '',
     },
 };
 class DataEntryPlain extends Component<Props> {

@@ -89,4 +89,4 @@ export type VariableServiceInput = {|
     constants: ?Constants,
 |};
 
-export type CompareDates = (firstRulesDate: string, secondRulesDate: string) => number;
+export type CompareDates = (firstRulesDate: ?string, secondRulesDate: ?string) => number;

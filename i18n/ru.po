@@ -4,15 +4,15 @@
 # Wanda <wanda@frontlineaids.org>, 2021
 # phil_dhis2, 2022
 # Valeriu Plesca <vplesca@gmail.com>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2022
+# Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-09-16T07:55:37.554Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
-"Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
+"Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,23 +47,35 @@ msgstr ""
 " вы хотите снова использовать эту версию, но имейте в виду, что это закроет "
 "другие версии."
 
-msgid "Organisation unit"
-msgstr "Организационная единица"
+msgid "View {{programName}} dashboard"
+msgstr ""
 
-msgid "Date of enrollment"
-msgstr "Дата включения"
+msgid "View dashboard"
+msgstr "Смотреть Панель"
 
-msgid "Program name"
-msgstr "Название программы"
+msgid "View active enrollment"
+msgstr "Смотреть действующие регистрации"
 
-msgid "Last updated"
-msgstr "Последнее обновление"
+msgid "Re-enroll"
+msgstr "Перерегистрация"
+
+msgid "in"
+msgstr "в"
 
 msgid "Enrolled"
 msgstr "Зарегистрирован"
 
 msgid "Previously enrolled"
 msgstr "Зарегистрирован ранее"
+
+msgid "Organisation unit"
+msgstr "Организационная единица"
+
+msgid "Date of enrollment"
+msgstr "Дата включения"
+
+msgid "Last updated"
+msgstr "Последнее обновление"
 
 msgid "This value is validating"
 msgstr "Идет валидация значения"
@@ -139,6 +151,9 @@ msgstr "Координата"
 
 msgid "Enrollment"
 msgstr "Регистрация"
+
+msgid "Please select {{categoryName}}"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr "Ввод даты будущего периода запрещена"
@@ -284,9 +299,6 @@ msgstr ""
 msgid "enrollment"
 msgstr ""
 
-msgid "in"
-msgstr "в"
-
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
@@ -321,11 +333,6 @@ msgstr "Показать зарегистрированную {{trackedEntityTyp
 msgid "Registered person"
 msgstr "Зарегистрированное лицо"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Произведенные изменения в данных не будут сохранены, если вы покинете данную"
-" страницу."
-
 msgid "validation failed"
 msgstr "Не удалась валидация"
 
@@ -340,6 +347,23 @@ msgstr "Индикаторы"
 
 msgid "Warnings"
 msgstr "Предупреждения"
+
+msgid "Generate new event"
+msgstr ""
+
+msgid "Do you want to create another event?"
+msgstr ""
+
+msgid "No, cancel"
+msgstr ""
+
+msgid "Yes, create new event"
+msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Произведенные изменения в данных не будут сохранены, если вы покинете данную"
+" страницу."
 
 msgid "Warnings found"
 msgstr "Имеются предупреждения"
@@ -521,6 +545,9 @@ msgstr "Обновить"
 msgid "Reset filter"
 msgstr ""
 
+msgid "Remove filter"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} по {{toDate}}"
 
@@ -538,6 +565,9 @@ msgstr "меньше или равно"
 
 msgid "More filters"
 msgstr "Еще фильтры"
+
+msgid "Stage filters"
+msgstr ""
 
 msgid "Rows per page"
 msgstr "Строк в странице"
@@ -576,9 +606,6 @@ msgstr ""
 msgid "Opt in for {{programName}}"
 msgstr ""
 
-msgid "No, cancel"
-msgstr ""
-
 msgid "Yes, opt in"
 msgstr ""
 
@@ -595,7 +622,8 @@ msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
 msgid "Enrollment Dashboard"
@@ -634,7 +662,19 @@ msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
 msgid "Choose an enrollment to view the dashboard."
+msgstr ""
+
+msgid "There are no active enrollments."
+msgstr ""
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid "No access to program owner."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -699,7 +739,7 @@ msgstr "Расписание"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more events in this program"
+msgid "You can’t add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -711,8 +751,8 @@ msgstr ""
 msgid "Program Stages could not be loaded"
 msgstr ""
 
-msgid "stage"
-msgstr ""
+msgid "Stage"
+msgstr "Этап"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -750,9 +790,6 @@ msgstr ""
 msgid "Save as new"
 msgstr ""
 
-msgid "View dashboard"
-msgstr "Смотреть Панель"
-
 msgid "View enrollment"
 msgstr ""
 
@@ -766,7 +803,7 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
-msgid "Save new"
+msgid "Save {{trackedEntityName}}"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -814,98 +851,8 @@ msgstr "Создать новую  {{trackedEntityType}}"
 msgid "Register"
 msgstr "Зарегистрировать"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Заполните хотя бы {{minAttributesRequiredToSearch}} атрибутов для поиска"
-
-msgid "Search {{name}}"
-msgstr "Искать {{name}}"
-
-msgid "Search by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr "Поиск по атрибутам"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr "Результаты не найдены"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr "Вы можете изменить параметры поиска и заново перезапустить поиск "
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr "Назад к Поиску"
-
-msgid "An error has occurred"
-msgstr "Произошла ошибка"
-
-msgid "Too many results"
-msgstr ""
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "Назад"
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr "Поиск"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-
-msgid "Choose a type to start searching"
-msgstr ""
-
-msgid "View active enrollment"
-msgstr "Смотреть действующие регистрации"
-
-msgid "Re-enroll"
-msgstr "Перерегистрация"
-
-msgid "all programs"
-msgstr ""
-
-msgid "If none of search results match, you can create new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Создать новый"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-
-msgid "Search in all programs"
-msgstr ""
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Create custom working list"
-msgstr ""
 
 msgid "events"
 msgstr ""
@@ -956,6 +903,9 @@ msgstr "Не могу загрузить Организационную един
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты"
 
+msgid "No results found"
+msgstr "Результаты не найдены"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -968,45 +918,132 @@ msgstr ""
 msgid "Add relationship"
 msgstr "Добавить зависимость"
 
-msgid "Selected registering unit"
-msgstr "Выберите организацию-регистратор"
+msgid "No results found for "
+msgstr ""
 
-msgid "Start Again"
-msgstr "Начать заново"
+msgid "Registering unit"
+msgstr "Регистрирующая единица"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Вы уверены? Все несохраненные данные будут утеряны."
+msgid "Choose a registering unit"
+msgstr ""
 
-msgid "Accept"
-msgstr "Принять"
-
-msgid "Registering Organisation Unit"
-msgstr "Регистрация Организационной единицы"
-
-msgid "Select"
-msgstr "Выбрать"
+msgid "Clear selection"
+msgstr ""
 
 msgid "No programs available."
 msgstr "Нет доступных программ"
 
-msgid "Selected program"
-msgstr "Выбранная программа"
+msgid "Search for a program"
+msgstr ""
 
-msgid "Select program"
-msgstr "Выбрать программу"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr ""
 
-msgid "Selected"
-msgstr "Выбранный"
+msgid "Show all programs"
+msgstr ""
+
+msgid "Choose a program"
+msgstr ""
+
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr "Поиск"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Search {{name}}"
+msgstr "Искать {{name}}"
+
+msgid "Search by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr "Поиск по атрибутам"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Создать новый"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "Вы можете изменить параметры поиска и заново перезапустить поиск "
+
+msgid "Back to search"
+msgstr "Назад к Поиску"
+
+msgid "An error has occurred"
+msgstr "Произошла ошибка"
+
+msgid "Too many results"
+msgstr ""
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
 
 msgid "Results found"
 msgstr "Найдены результаты"
 
+msgid "Selected program"
+msgstr "Выбранная программа"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Поиск {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Saved lists in this program"
 msgstr ""
-"Заполните хотя бы {{minAttributesRequiredToSearch}} атрибутов для поиска"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -1014,14 +1051,30 @@ msgstr ""
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
-msgid "Clear selections"
-msgstr ""
-
 msgid "To work with the selected program,"
 msgstr "Работать с выбранной программой"
 
 msgid "open the Tracker Capture app"
 msgstr "Открыть приложение \"Отслеживание объектов\""
+
+msgid "This program is protected"
+msgstr ""
+
+msgid "Reason to check for enrollments"
+msgstr ""
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+
+msgid "Check for enrollments"
+msgstr ""
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
 
 msgid "Save comment"
 msgstr "Сохранить комментарий"
@@ -1070,9 +1123,6 @@ msgstr "Дата зачисления"
 msgid "Incident date"
 msgstr "Дата происшествия"
 
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -1083,6 +1133,9 @@ msgid "Started at {{orgUnitName}}"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1130,6 +1183,12 @@ msgstr "Удалить событие"
 msgid "Yes, delete event"
 msgstr ""
 
+msgid "Go to “Schedule” tab to reschedule this event"
+msgstr ""
+
+msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1139,31 +1198,18 @@ msgstr ""
 msgid "Schedule date info"
 msgstr ""
 
-msgid ""
-"This date is the suggested scheduled date based on the intervals defined, \n"
-"                    it can be adjusted if needed."
+msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
 
-msgid "This date is {{count}} days {{position}} the suggested date."
-msgid_plural "This date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgid ""
+"The scheduled date matches the suggested date, but can be changed if needed."
+msgstr ""
 
 msgid "after"
 msgstr "после"
 
 msgid "before"
 msgstr "до"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1244,9 +1290,6 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Registering unit"
-msgstr "Регистрирующая единица"
-
 msgid "{{ totalEvents }} events"
 msgstr ""
 
@@ -1280,19 +1323,25 @@ msgstr "Загрузка данных..."
 msgid "an error occurred loading working lists"
 msgstr "Произошла ошибка во время загрузки Рабочих списков"
 
-msgid "Enrollment status"
-msgstr "Статус регистрации"
-
-msgid "Assigned to"
-msgstr "закреплено за"
-
 msgid "Registration Date"
 msgstr "Дата регистрации"
 
 msgid "Inactive"
 msgstr "Неактивный"
 
+msgid "Enrollment status"
+msgstr "Статус регистрации"
+
+msgid "Assigned to"
+msgstr "закреплено за"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
 msgid "Working list could not be updated"
+msgstr ""
+
+msgid "an error occurred loading the working lists"
 msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
@@ -1348,6 +1397,9 @@ msgstr "Просроченный"
 
 msgid "Skipped"
 msgstr "Пропущенный"
+
+msgid "Visited"
+msgstr ""
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""

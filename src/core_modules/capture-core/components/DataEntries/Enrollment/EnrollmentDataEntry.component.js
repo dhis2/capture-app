@@ -25,16 +25,24 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
+    VirtualizedSelectField,
 } from '../../FormFields/New';
-
 import labelTypeClasses from './fieldLabels.module.css';
 import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment } from '../../../metaData';
 import { withCenterPoint } from '../../DataEntry/withCenterPoint';
+import { type Enrollment, getProgramThrowIfNotFound } from '../../../metaData';
+import {
+    getCategoryOptionsValidatorContainers,
+    attributeOptionsKey,
+    AOCsectionKey,
+    withAOCFieldBuilder,
+    withDataEntryFields,
+} from '../../DataEntryDhis2Helpers';
+import { shouldUseNewDashboard } from '../../../utils/routing';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -117,6 +125,7 @@ const getEnrollmentDateSettings = () => {
 
     return enrollmentDateSettings;
 };
+
 
 const getIncidentDateSettings = () => {
     const reportDateComponent =
@@ -251,9 +260,83 @@ const getGeometrySettings = () => ({
     }),
 });
 
+const getCategoryOptionsSettingsFn = () => {
+    const categoryOptionsComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const categoryOptionsSettings = {
+        getComponent: () => categoryOptionsComponent,
+        getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
+            ...props.categories?.find(category => category.id === fieldId) ?? {},
+            required: true,
+        }),
+        getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
+        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
+        getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
+        getMeta: (props: Object) => ({
+            section: AOCsectionKey,
+            placement: placements.BOTTOM,
+            sectionName: props.programCategory?.displayName,
+        }),
+    };
+
+    return categoryOptionsSettings;
+};
+
+const getAOCSettingsFn = () => ({
+    hideAOC: ({ programId, newDashboardConfig }) => {
+        const { stages: stagesMap } = getProgramThrowIfNotFound(programId);
+
+        /*
+        Show AOC selection if:
+        - There are any program stages in the program with “Auto-generate" event and NOT “Open data entry form after enrollment”.
+        - There are multiple program stages with "Auto-generate" event and "Open data entry form after enrollment"
+            (in this scenario we are currently generating events for the program stages that are not the first one)
+        - Using the old dashboard and we have a stage with auto generate event.
+        */
+
+        const stages = [...stagesMap.values()];
+
+        const usingNewDashboardForProgram = shouldUseNewDashboard(
+            newDashboardConfig.userDataStore,
+            newDashboardConfig.dataStore,
+            newDashboardConfig.temp,
+            programId,
+        );
+
+        const shouldShowAOC = (!usingNewDashboardForProgram && stages.some(stage => stage.autoGenerateEvent)) ||
+        stages.some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment) ||
+            stages.filter(stage => stage.autoGenerateEvent && stage.openAfterEnrollment).length > 1;
+
+        return !shouldShowAOC;
+    },
+});
+
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
     programId: string,
+    id: string,
+    orgUnitId: string,
+    onUpdateDataEntryField: Function,
+    onUpdateFormFieldAsync: Function,
+    onUpdateFormField: Function
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -266,12 +349,15 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
             placement: placements.TOP,
             name: i18n.t('Enrollment'),
         },
+        [AOCsectionKey]: {
+            placement: placements.BOTTOM,
+        },
     };
 
     render() {
-        const { enrollmentMetadata, programId, ...passOnProps } = this.props;
+        const { enrollmentMetadata, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
+        // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntry
                 {...passOnProps}
                 dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
@@ -281,7 +367,11 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const CenterPointHOC = withCenterPoint()(FinalEnrollmentDataEntry);
+const AOCFieldBuilderHOC = withAOCFieldBuilder(getAOCSettingsFn())(
+    withDataEntryFields(
+        getCategoryOptionsSettingsFn(),
+    )(FinalEnrollmentDataEntry));
+const CenterPointHOC = withCenterPoint()(AOCFieldBuilderHOC);
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(CenterPointHOC);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
@@ -335,7 +425,6 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
 
     render() {
         const {
-            programId,
             onUpdateField,
             onUpdateDataEntryField,
             onStartAsyncUpdateField,

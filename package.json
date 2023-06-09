@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "100.29.0",
+    "version": "100.32.8",
     "cacheVersion": "5",
     "serverVersion": "38",
     "license": "BSD-3-Clause",
@@ -10,7 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2/rules-engine-javascript": "100.29.0",
+        "@dhis2/rules-engine-javascript": "100.32.8",
         "@dhis2/app-runtime": "^3.8.0",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-icons": "^1.0.1",
@@ -73,6 +73,7 @@
         "build": "yarn verifyCacheVersion && yarn workspaces run build && GENERATE_SOURCEMAP=false d2-app-scripts build && cp ./package.json ./build/app/package.json",
         "build:standalone": "yarn workspaces run build && GENERATE_SOURCEMAP=false d2-app-scripts build --standalone",
         "test": "yarn workspaces run build && d2-app-scripts test",
+        "test2": "react-scripts test",
         "test:debug": "yarn workspaces run build && react-scripts --inspect-brk test --runInBand",
         "jsdoc": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
         "linter:check": "yarn workspaces run linter:check && yarn workspaces run build && eslint -c .eslintrc . --quiet",

@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { DataEntryComponent } from './DataEntry.component';
 import { startRunRulesPostUpdateField } from '../../DataEntry';
@@ -17,7 +17,7 @@ import type { ContainerProps } from './dataEntry.types';
 
 export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
-
+    const { orgUnitId, programId } = useSelector(({ currentSelections }) => currentSelections);
     const onUpdateDataEntryField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
@@ -66,10 +66,13 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
         dispatch(setNewEventSaveTypes(newSaveTypes));
     }, [dispatch]);
 
+
     return (
         <DataEntryComponent
             {...passOnProps}
             orgUnit={orgUnit}
+            orgUnitId={orgUnitId}
+            programId={programId}
             onUpdateDataEntryField={onUpdateDataEntryField}
             onUpdateField={onUpdateField}
             onStartAsyncUpdateField={onStartAsyncUpdateField}

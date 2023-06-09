@@ -143,6 +143,7 @@ class FilterRestMenuPlain extends React.Component<Props, State> {
                                     ref={this.handleReferenceInstanceRetrieved}
                                 >
                                     <Button
+                                        dataTest="more-filters"
                                         variant="outlined"
                                         color="default"
                                         size="small"

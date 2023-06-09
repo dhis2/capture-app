@@ -13,6 +13,7 @@ export type ColumnConfigBase = {|
     options?: ?Array<{text: string, value: any}>,
     multiValueFilter?: boolean,
     filterHidden?: boolean,
+    additionalColumn?: boolean,
 |};
 export type MetadataColumnConfig = {
     ...ColumnConfigBase,

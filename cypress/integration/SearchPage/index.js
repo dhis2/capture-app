@@ -219,7 +219,7 @@ When('you clear the values', () => {
 
 Then('there should be a validation error message', () => {
     cy.get('[data-test="form-attributes"]')
-        .contains('Fill in at least 1 attributes to search')
+        .contains('Fill in at least 1 attribute to search')
         .shouldIncludeClass('textError');
 });
 
