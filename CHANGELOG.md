@@ -1,3 +1,10 @@
+## [100.32.9](https://github.com/dhis2/capture-app/compare/v100.32.8...v100.32.9) (2023-06-09)
+
+
+### Bug Fixes
+
+* updating saving text ([#3251](https://github.com/dhis2/capture-app/issues/3251)) ([12439b6](https://github.com/dhis2/capture-app/commit/12439b6e635d8967f2cff550cfbb144c0d44b3a7))
+
 ## [100.32.8](https://github.com/dhis2/capture-app/compare/v100.32.7...v100.32.8) (2023-06-08)
 
 
