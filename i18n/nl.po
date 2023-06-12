@@ -3,14 +3,15 @@
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
 # Rica Zamora Duchateau, 2022
+# Charel van den Elsen, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Rica Zamora Duchateau, 2022\n"
-"Language-Team: Dutch (https://www.transifex.com/hisp-uio/teams/100509/nl/)\n"
+"Last-Translator: Charel van den Elsen, 2023\n"
+"Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -126,7 +127,7 @@ msgid "Coordinate"
 msgstr ""
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Inschrijving"
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -156,7 +157,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "status"
 
 msgid "Comments"
 msgstr ""
@@ -246,7 +247,7 @@ msgid "No, stay here"
 msgstr ""
 
 msgid "New event"
-msgstr ""
+msgstr "Nieuw evenement"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
@@ -301,7 +302,7 @@ msgid "Errors"
 msgstr ""
 
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 msgid "Indicators"
 msgstr ""
@@ -310,7 +311,7 @@ msgid "Warnings"
 msgstr ""
 
 msgid "Complete"
-msgstr ""
+msgstr "Compleet"
 
 msgid "Warnings found"
 msgstr ""
@@ -370,7 +371,7 @@ msgid "to"
 msgstr ""
 
 msgid "From"
-msgstr ""
+msgstr "Van"
 
 msgid "To"
 msgstr ""
@@ -445,7 +446,7 @@ msgid "Search"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "Duidelijk"
 
 msgid "No results"
 msgstr ""
@@ -475,7 +476,7 @@ msgid "Column"
 msgstr "Kolom"
 
 msgid "Apply"
-msgstr ""
+msgstr "Toepassen"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -508,7 +509,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Nieuw"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -547,7 +548,7 @@ msgid "Show all"
 msgstr ""
 
 msgid "Selected program"
-msgstr ""
+msgstr "Geselecteerd programma"
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -556,7 +557,7 @@ msgid "Select program"
 msgstr ""
 
 msgid "Selected"
-msgstr ""
+msgstr "Geselecteerd"
 
 msgid "Online"
 msgstr ""
@@ -670,7 +671,7 @@ msgid "Cancelled"
 msgstr "Geannuleerd"
 
 msgid "Registering unit"
-msgstr ""
+msgstr "Eenheid registreren"
 
 msgid "Registration Date"
 msgstr ""
@@ -749,7 +750,7 @@ msgid "Organisation Unit"
 msgstr "Organisatieëenheid"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registratie"
 
 msgid "Search results"
 msgstr ""
@@ -770,7 +771,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr ""
+msgstr "Register"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -786,7 +787,7 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Terug"
 
 msgid "Search for {{titleText}}"
 msgstr ""
@@ -881,7 +882,7 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Relatie toevoegen"
 
 msgid "Results found"
 msgstr ""
