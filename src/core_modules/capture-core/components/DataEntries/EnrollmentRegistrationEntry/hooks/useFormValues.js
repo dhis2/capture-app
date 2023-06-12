@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getUniqueValuesForAttributesWithoutValue } from '../../common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToForm, convertServerToClient } from '../../../../converters';
@@ -128,8 +128,8 @@ const buildFormValues = async ({
         staticPatternValues,
         querySingleResource,
     );
-    setFormValues && setFormValues({ ...formValues, ...uniqueValues, ...searchFormValues });
-    setClientValues && setClientValues({ ...clientValues, ...uniqueValues, ...searchClientValues });
+    setFormValues && setFormValues({ ...searchFormValues, ...formValues, ...uniqueValues });
+    setClientValues && setClientValues({ ...searchClientValues, ...clientValues, ...uniqueValues });
     formValuesReadyRef.current = true;
 };
 

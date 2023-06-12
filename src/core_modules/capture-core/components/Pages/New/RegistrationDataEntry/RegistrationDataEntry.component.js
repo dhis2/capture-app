@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers } from '@dhis2/ui';
 import { Grid, withStyles } from '@material-ui/core';
 import type { Props } from './RegistrationDataEntry.types';
-import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
+import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
@@ -15,6 +15,7 @@ import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryW
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useLocationQuery } from '../../../../utils/routing';
+import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
 
 const getStyles = ({ typography }) => ({
     container: {
@@ -173,7 +174,7 @@ const RegistrationDataEntryPlain = ({
                     <div className={classes.registrationContainer}>
                         <Grid container justify="space-between">
                             <Grid item md sm={9} xs={9} >
-                                <EnrollmentRegistrationEntry
+                                <EnrollmentRegistrationEntryWrapper
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     enrollmentMetadata={registrationMetaData}

@@ -8,10 +8,11 @@ import { colors, Tag, IconCheckmark16 } from '@dhis2/ui';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
-} from '../Pages/Search/SearchResults/SearchResults.types';
+} from '../SearchBox';
+import { searchScopes } from '../SearchBox';
 import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
-import { dataElementTypes, getProgramFromProgramIdThrowIfNotFound } from '../../metaData';
+import { dataElementTypes, getTrackerProgramThrowIfNotFound } from '../../metaData';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 
@@ -19,6 +20,7 @@ type OwnProps = $ReadOnly<{|
     item: ListItem,
     currentSearchScopeName?: string,
     currentProgramId?: string,
+    currentSearchScopeType?: string,
     renderCustomCardActions?: RenderCustomCardActions,
     profileImageDataElement: ?CardProfileImageElementInformation,
     dataElements: CardDataElementsInformation,
@@ -94,30 +96,34 @@ const deriveEnrollmentType =
       return enrollmentTypes.DONT_SHOW_TAG;
   };
 
-const deriveEnrollmentOrgUnitAndDate =
-  (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrolledAt?: string, programFromEnrollment?: string, programNameFromEnrollment?: string} => {
-      if (!enrollments?.length) { return {}; }
-      if (!currentProgramId && enrollments.length) {
-          const { orgUnitName, enrolledAt, program: programFromEnrollment } = enrollments[0];
-          const program = getProgramFromProgramIdThrowIfNotFound(programFromEnrollment);
+const deriveEnrollmentOrgUnitAndDate = (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrolledAt?: string} => {
+    if (!enrollments?.length) { return {}; }
+    if (!currentProgramId && enrollments.length) {
+        const { orgUnitName, enrolledAt } = enrollments[0];
 
-          return {
-              orgUnitName,
-              enrolledAt,
-              programFromEnrollment,
-              programNameFromEnrollment: program.name,
-          };
-      }
-      const { orgUnitName, enrolledAt } =
+        return {
+            orgUnitName,
+            enrolledAt,
+        };
+    }
+    const { orgUnitName, enrolledAt } =
         enrollments
             .filter(({ program }) => program === currentProgramId)
             .filter(({ status }) => status === enrollmentType)
             .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0]
         || {};
 
-      return { orgUnitName, enrolledAt };
-  };
+    return { orgUnitName, enrolledAt };
+};
 
+const deriveProgramFromEnrollment = (enrollments, currentSearchScopeType) => {
+    if (currentSearchScopeType === searchScopes.ALL_PROGRAMS || currentSearchScopeType === searchScopes.PROGRAM) {
+        const program = getTrackerProgramThrowIfNotFound(enrollments[0].program);
+
+        return program;
+    }
+    return undefined;
+};
 
 const CardListItemIndex = ({
     item,
@@ -127,8 +133,17 @@ const CardListItemIndex = ({
     dataElements,
     currentProgramId,
     currentSearchScopeName,
+    currentSearchScopeType,
 }: Props) => {
-    const renderImageDataElement = (imageElement: CardProfileImageElementInformation) => {
+    const enrollments = item.tei ? item.tei.enrollments : [];
+    const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
+    const { orgUnitName, enrolledAt } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
+    const program = enrollments && enrollments.length
+        ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
+        : undefined;
+
+    const renderImageDataElement = (imageElement?: ?CardProfileImageElementInformation) => {
+        if (!imageElement) { return null; }
         const imageValue = item.values[imageElement.id];
         return (
             <div>
@@ -136,9 +151,58 @@ const CardListItemIndex = ({
             </div>
         );
     };
-    const enrollments = item.tei ? item.tei.enrollments : [];
-    const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
-    const { orgUnitName, enrolledAt, programFromEnrollment, programNameFromEnrollment } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
+
+    const renderTag = () => {
+        switch (enrollmentType) {
+        case enrollmentTypes.ACTIVE:
+            return (
+                <Tag
+                    dataTest="dhis2-uicore-tag"
+                    positive
+                    icon={
+                        <span className={classes.checkIcon}>
+                            <IconCheckmark16 />
+                        </span>
+                    }
+                >
+                    {i18n.t('Enrolled')}
+                </Tag>
+            );
+        case enrollmentTypes.CANCELLED:
+        case enrollmentTypes.COMPLETED:
+            return (
+                <Tag
+                    dataTest="dhis2-uicore-tag"
+                    neutral
+                    icon={
+                        <span className={classes.checkIcon}>
+                            <IconCheckmark16 />
+                        </span>
+                    }
+                >
+                    {i18n.t('Previously enrolled')}
+                </Tag>
+            );
+        default:
+            return null;
+        }
+    };
+
+    const renderEnrollmentDetails = () => {
+        if (currentSearchScopeType === searchScopes.ALL_PROGRAMS) {
+            return null;
+        }
+        return (<>
+            <ListEntry
+                name={i18n.t('Organisation unit')}
+                value={orgUnitName}
+            />  <ListEntry
+                name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of enrollment')}
+                value={enrolledAt}
+                type={dataElementTypes.DATE}
+            />
+        </>);
+    };
 
     return (
         <div data-test="card-list-item" className={classes.itemContainer}>
@@ -146,40 +210,22 @@ const CardListItemIndex = ({
 
                 <div className={classes.itemValuesContainer}>
                     <Grid container >
-                        {
-                            profileImageDataElement &&
-                            <Grid item>
-                                {renderImageDataElement(profileImageDataElement)}
-                            </Grid>
-                        }
+                        <Grid item>
+                            {renderImageDataElement(profileImageDataElement)}
+                        </Grid>
                         <Grid item sm container>
                             <Grid item xs container direction="column" >
-                                {
-                                    dataElements
-                                        .map(({ id, name, type }) => (
-                                            <ListEntry
-                                                key={id}
-                                                name={name}
-                                                value={item.values[id]}
-                                                type={type}
-                                            />))
-                                }
-                                {
-                                    orgUnitName &&
-                                    <ListEntry name={i18n.t('Organisation unit')} value={orgUnitName} />
+                                {dataElements
+                                    .map(({ id, name, type }) => (
+                                        <ListEntry
+                                            key={id}
+                                            name={name}
+                                            value={item.values[id]}
+                                            type={type}
+                                        />))
                                 }
 
-                                {
-                                    enrolledAt &&
-                                    // $FlowFixMe[prop-missing] automated comment
-                                    <ListEntry name={i18n.t('Date of enrollment')} value={enrolledAt} type={dataElementTypes.DATE} />
-                                }
-
-                                {
-                                    programNameFromEnrollment &&
-                                    <ListEntry name={i18n.t('Program name')} value={programNameFromEnrollment} />
-                                }
-
+                                {renderEnrollmentDetails()}
                             </Grid>
                             <Grid item>
                                 {
@@ -190,37 +236,7 @@ const CardListItemIndex = ({
                                 }
 
                                 <div className={classes.enrolled}>
-                                    {
-                                        (enrollmentType === enrollmentTypes.ACTIVE) &&
-                                        <Tag
-                                            dataTest="dhis2-uicore-tag"
-                                            positive
-                                            icon={
-                                                <span className={classes.checkIcon}>
-                                                    <IconCheckmark16 />
-                                                </span>
-                                            }
-                                        >
-                                            {i18n.t('Enrolled')}
-                                        </Tag>
-                                    }
-
-                                    {
-                                        (enrollmentType === enrollmentTypes.CANCELLED ||
-                                          enrollmentType === enrollmentTypes.COMPLETED) &&
-                                          <Tag
-                                              dataTest="dhis2-uicore-tag"
-                                              neutral
-                                              icon={
-                                                  <span className={classes.checkIcon}>
-                                                      <IconCheckmark16 />
-                                                  </span>
-                                              }
-                                          >
-                                              {i18n.t('Previously enrolled')}
-                                          </Tag>
-                                    }
-
+                                    {renderTag()}
                                 </div>
                             </Grid>
                         </Grid>
@@ -239,7 +255,8 @@ const CardListItemIndex = ({
                             // can be different that the scopeId from the url
                             // this can happen for example when you are registering through the relationships
                             programName: currentSearchScopeName,
-                            programId: currentProgramId ?? programFromEnrollment,
+                            programId: currentProgramId,
+                            currentSearchScopeType,
                             enrollmentType,
                         })
                     }

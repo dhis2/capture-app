@@ -12,6 +12,10 @@ const getStyles = theme => ({
         backgroundColor: 'white',
         maxWidth: theme.typography.pxToRem(892),
     },
+    containerCustomForm: {
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
 });
 
 type Props = {
@@ -19,8 +23,10 @@ type Props = {
     isHidden?: ?boolean,
     classes: {
         section: string,
+        containerCustomForm: string,
     },
     formHorizontal: ?boolean,
+    applyCustomFormClass: boolean,
     sectionId: string,
     formBuilderId: string,
     formId: string,
@@ -30,6 +36,16 @@ type Props = {
 class D2SectionPlain extends React.PureComponent<Props> {
     // $FlowFixMe[speculation-ambiguous] automated comment
     sectionFieldsInstance: ?D2SectionFields;
+    componentDidMount() {
+        if (this.props.isHidden) {
+            // Inform withSaveHandler that this section is done initialising
+            this.props.onFieldsValidated && this.props.onFieldsValidated(
+                {},
+                this.props.formBuilderId,
+            );
+        }
+    }
+
     renderSectionHeader() {
         const title = this.props.sectionMetaData.name;
 
@@ -56,17 +72,8 @@ class D2SectionPlain extends React.PureComponent<Props> {
         );
     }
 
-    render() {
-        const { sectionMetaData, isHidden, classes, sectionId, ...passOnProps } = this.props;
-
-        if (isHidden) {
-            // Inform withSaveHandler that this section is done initialising
-            this.props.onFieldsValidated && this.props.onFieldsValidated(
-                {},
-                this.props.formBuilderId,
-            );
-            return null;
-        }
+    renderSection(sectionProps) {
+        const { sectionMetaData, classes, sectionId, ...passOnProps } = sectionProps;
 
         if (!sectionMetaData.showContainer || this.props.formHorizontal) {
             return (
@@ -99,6 +106,23 @@ class D2SectionPlain extends React.PureComponent<Props> {
                 </Section>
             </div>
         );
+    }
+
+    render() {
+        const { isHidden, applyCustomFormClass, ...passOnProps } = this.props;
+
+        if (isHidden) {
+            return null;
+        }
+
+        return (<div
+            data-test="d2-form-component"
+            className={applyCustomFormClass ? this.props.classes.containerCustomForm : ''}
+        >
+            {
+                this.renderSection(passOnProps)
+            }
+        </div>);
     }
 }
 

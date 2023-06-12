@@ -11,6 +11,8 @@ const getStyles = () => ({
         minHeight: 42,
         paddingTop: 8,
         backgroundColor: 'white',
+        display: 'flex',
+        maxWidth: '100vw',
     },
 });
 
@@ -89,7 +91,7 @@ const OrgUnitTreePlain = (props: Props) => {
                 handleExpand={handleExpand}
                 handleCollapse={handleCollapse}
                 singleSelection
-                highlighted={getHighlightedItems()}
+                selected={getHighlightedItems()}
                 onChange={onSelectClick}
             />
         </div>

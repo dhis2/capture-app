@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { EventDetailsSection } from './EventDetailsSection.component';
 import {
     startShowEditEventDataEntry,

@@ -20,7 +20,6 @@ const styles = {
         marginBottom: '8px',
         width: 'fit-content',
     },
-
 };
 
 const DataSectionPlain = ({ sectionName, children, classes, dataTest }: Props) => (

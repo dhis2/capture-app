@@ -1,6 +1,6 @@
 // @flow
 import type { ComponentType } from 'react';
-import type { CardDataElementsInformation } from '../../../Pages/Search/SearchResults/SearchResults.types';
+import type { CardDataElementsInformation } from '../../../SearchBox';
 
 type AttributeValues = {[id: string]: any};
 

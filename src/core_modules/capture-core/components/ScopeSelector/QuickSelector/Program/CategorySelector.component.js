@@ -1,19 +1,14 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import log from 'loglevel';
+import { withStyles } from '@material-ui/core/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import type { Category as CategoryMetadata } from '../../../../metaData';
-import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
-import { withLoadingIndicator } from '../../../../HOC/withLoadingIndicator';
 import { makeOnSelectSelector } from './categorySelector.selectors';
-
-const VirtualizedSelectLoadingIndicatorHOC =
-    withLoadingIndicator(
-        () => ({ marginTop: 5, paddingTop: 3, height: 0 }),
-        () => ({ size: 22 }),
-        (props: Object) => props.options)(OptionsSelectVirtualized);
+import { FiltrableMenuItems } from '../FiltrableMenuItems';
 
 type SelectOption = {
     label: string,
@@ -24,14 +19,26 @@ type Props = {
     category: CategoryMetadata,
     selectedOrgUnitId: ?string,
     onSelect: (option: SelectOption) => void,
+    selectedCategoryName: ?string,
+    onClearSelectionClick: () => void,
+    classes: Object,
 };
 
 type State = {
     options: ?Array<SelectOption>,
     prevOrgUnitId: ?string,
+    open: boolean,
 };
 
-export class CategorySelector extends React.Component<Props, State> {
+const styles = () => ({
+    selectBarMenu: {
+        maxHeight: '80vh',
+        overflow: 'auto',
+        paddingBottom: `${spacers.dp4}`,
+    },
+});
+
+class CategorySelectorPlain extends React.Component<Props, State> {
     static getOptionsAsync(
         categoryId: string,
         selectedOrgUnitId: ?string,
@@ -80,6 +87,7 @@ export class CategorySelector extends React.Component<Props, State> {
         this.state = {
             options: null,
             prevOrgUnitId: null,
+            open: false,
         };
         this.onSelectSelector = makeOnSelectSelector();
         // todo you cannot setState from this component (lgtm report)
@@ -152,19 +160,71 @@ export class CategorySelector extends React.Component<Props, State> {
     }
 
     render() {
-        const { selectedOrgUnitId, onSelect, ...passOnProps } = this.props;
+        const {
+            selectedOrgUnitId,
+            onSelect,
+            onClearSelectionClick,
+            selectedCategoryName,
+            classes,
+            ...passOnProps
+        } = this.props;
         const { options } = this.state;
         const handleSelect = this.onSelectSelector({ options, onSelect });
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <VirtualizedSelectLoadingIndicatorHOC
-                options={options}
-                value={''}
-                placeholder={i18n.t('Select')}
-                {...passOnProps}
-                onSelect={handleSelect}
-            />
+            <SelectorBarItem
+                label={passOnProps.category.name}
+                value={selectedCategoryName}
+                noValueMessage={i18n.t(`Choose a ${passOnProps.category.name}`)}
+                open={this.state.open}
+                setOpen={open => this.setState({ open })}
+                onClearSelectionClick={onClearSelectionClick}
+                dataTest="category-selector-container"
+            >
+                {options && (
+                    <div className={classes.selectBarMenu}>
+                        <Menu>
+                            {options.length > 10 ? (
+                                <FiltrableMenuItems
+                                    options={options}
+                                    onChange={(item) => {
+                                        this.setState({ open: false });
+                                        handleSelect(item.value);
+                                    }}
+                                    searchText={i18n.t(`Search for a ${passOnProps.category.name}`)}
+                                    dataTest="category"
+                                />
+                            ) : (
+                                options.map(option => (
+                                    <MenuItem
+                                        key={option.value}
+                                        label={option.label}
+                                        value={option.value}
+                                        onClick={(item) => {
+                                            this.setState({ open: false });
+                                            handleSelect(item.value);
+                                        }}
+                                    />
+                                ))
+                            )}
+                            {Boolean(selectedCategoryName) && options.length > 10 && (
+                                <>
+                                    <MenuDivider />
+                                    <MenuItem
+                                        dense
+                                        onClick={() => {
+                                            this.setState({ open: false });
+                                            onClearSelectionClick();
+                                        }}
+                                        label={i18n.t('Clear selection')}
+                                    />
+                                </>
+                            )}
+                        </Menu>
+                    </div>
+                )}
+            </SelectorBarItem>
         );
     }
 }
+export const CategorySelector = withStyles(styles)(CategorySelectorPlain);

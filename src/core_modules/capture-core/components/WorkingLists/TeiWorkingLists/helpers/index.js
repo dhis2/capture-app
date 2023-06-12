@@ -5,3 +5,5 @@ export {
     getFilterApiName,
     getFilterClientName,
 } from './eventFilters';
+export { buildArgumentsForTemplate, getDefaultTemplate } from './templates';
+

@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/rulesEngine';
+import type { ProgramRule, ProgramRuleVariable } from '@dhis2/rules-engine-javascript';
 import type{ CategoryCombination } from '../CategoryCombinations';
 import type { Icon } from '../Icon';
 import type { Access } from '../Access';
@@ -25,6 +25,7 @@ export class Program {
     _programRuleVariables: Array<ProgramRuleVariable>;
     _icon: Icon | void;
     _displayFrontPageList: boolean;
+    _onlyEnrollOnce: boolean;
 
     constructor(initFn: ?(_this: Program) => void) {
         this.programRules = [];
@@ -112,6 +113,14 @@ export class Program {
 
     get displayFrontPageList() {
         return this._displayFrontPageList;
+    }
+
+    set onlyEnrollOnce(onlyEnrollOnce: boolean) {
+        this._onlyEnrollOnce = onlyEnrollOnce;
+    }
+
+    get onlyEnrollOnce() {
+        return this._onlyEnrollOnce;
     }
 
     get stages(): Map<string, ProgramStage> {

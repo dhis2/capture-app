@@ -56,6 +56,7 @@ const EnrollmentRegistrationEntryPlain =
       orgUnit,
       teiId,
       isUserInteractionInProgress,
+      isSavingInProgress,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
@@ -86,6 +87,7 @@ const EnrollmentRegistrationEntryPlain =
                   scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
                   <>
                       <EnrollmentDataEntry
+                          teiId={teiId}
                           orgUnit={orgUnit}
                           programId={selectedScopeId}
                           formFoundation={formFoundation}
@@ -105,6 +107,7 @@ const EnrollmentRegistrationEntryPlain =
                                   dataTest="create-and-link-button"
                                   primary
                                   onClick={onSave}
+                                  loading={isSavingInProgress}
                               >
                                   {saveButtonText}
                               </Button>
@@ -114,6 +117,7 @@ const EnrollmentRegistrationEntryPlain =
                               dataTest="cancel-button"
                               secondary
                               onClick={handleOnCancel}
+                              disabled={isSavingInProgress}
                           >
                               {i18n.t('Cancel')}
                           </Button>

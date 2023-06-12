@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
-import { Grid } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import { ScopeSelector, SingleLockedSelect } from '../../../ScopeSelector';
+import { ScopeSelector, SingleLockedSelect, useReset } from '../../../ScopeSelector';
 import { TopBarActions } from '../../../TopBarActions';
 import type { Props } from './topBar.types';
 
@@ -13,6 +12,7 @@ export const EnrollmentAddEventTopBar = ({
     teiDisplayName,
     trackedEntityName,
     stageName,
+    stageIcon,
     eventDateLabel,
     onSetOrgUnitId,
     onResetOrgUnitId,
@@ -23,18 +23,20 @@ export const EnrollmentAddEventTopBar = ({
     onResetEventId,
     userInteractionInProgress,
     enrollmentsAsOptions,
-
-}: Props) => (
-    <ScopeSelector
-        selectedProgramId={programId}
-        selectedOrgUnitId={orgUnitId}
-        onSetOrgUnit={id => onSetOrgUnitId(id)}
-        onResetProgramId={() => onResetProgramId()}
-        onResetOrgUnitId={() => onResetOrgUnitId()}
-        isUserInteractionInProgress={userInteractionInProgress}
-    >
-        <Grid item xs={12} sm={6} md={4} lg={2}>
+}: Props) => {
+    const { reset } = useReset();
+    return (
+        <ScopeSelector
+            selectedProgramId={programId}
+            selectedOrgUnitId={orgUnitId}
+            onSetOrgUnit={id => onSetOrgUnitId(id)}
+            onResetProgramId={() => onResetProgramId()}
+            onResetOrgUnitId={() => onResetOrgUnitId()}
+            isUserInteractionInProgress={userInteractionInProgress}
+            onStartAgain={() => reset()}
+        >
             <SingleLockedSelect
+                displayOnly
                 ready={Boolean(teiDisplayName && trackedEntityName)}
                 onClear={() => onResetTeiId()}
                 options={[
@@ -47,8 +49,6 @@ export const EnrollmentAddEventTopBar = ({
                 title={trackedEntityName || ''}
                 isUserInteractionInProgress={userInteractionInProgress}
             />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={2}>
             <SingleLockedSelect
                 ready={Boolean(enrollmentsAsOptions)}
                 onClear={() => onResetEnrollmentId()}
@@ -57,26 +57,26 @@ export const EnrollmentAddEventTopBar = ({
                 title={i18n.t('Enrollment')}
                 isUserInteractionInProgress={userInteractionInProgress}
             />
-        </Grid>
-        {stageName && (
-            <>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
+            {stageName && (
+                <>
                     <SingleLockedSelect
+                        displayOnly
                         ready
                         onClear={() => onResetStageId()}
                         options={[
                             {
                                 label: stageName,
                                 value: 'alwaysPreselected',
+                                icon: stageIcon,
                             },
                         ]}
                         selectedValue="alwaysPreselected"
-                        title={i18n.t('stage')}
+                        title={i18n.t('Stage')}
                         isUserInteractionInProgress={userInteractionInProgress}
                     />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
+
                     <SingleLockedSelect
+                        displayOnly
                         ready
                         onClear={() => onResetEventId()}
                         options={[
@@ -89,15 +89,14 @@ export const EnrollmentAddEventTopBar = ({
                         title={eventDateLabel || ''}
                         isUserInteractionInProgress={userInteractionInProgress}
                     />
-                </Grid>
-            </>
-        )}
-        <Grid item xs={12} sm={6} md={6} lg={2}>
+                </>
+            )}
+
             <TopBarActions
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
                 isUserInteractionInProgress={userInteractionInProgress}
             />
-        </Grid>
-    </ScopeSelector>
-);
+        </ScopeSelector>
+    );
+};
