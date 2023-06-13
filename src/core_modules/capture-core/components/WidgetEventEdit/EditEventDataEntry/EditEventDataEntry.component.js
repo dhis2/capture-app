@@ -498,7 +498,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             classes,
             ...passOnProps
         } = this.props;
-
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper

@@ -66,7 +66,6 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
         dispatch(setNewEventSaveTypes(newSaveTypes));
     }, [dispatch]);
 
-
     return (
         <DataEntryComponent
             {...passOnProps}

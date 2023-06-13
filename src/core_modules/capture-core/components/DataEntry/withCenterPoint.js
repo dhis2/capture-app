@@ -22,16 +22,12 @@ const getCenterPoint = (InnerComponent: ComponentType<any>) => (props: Object) =
                 organisationUnits: {
                     resource: 'organisationUnits',
                     id: ({ variables: { orgUnitId: id } }) => id,
-                    params: {
-                        fields: ['geometry,parent'],
-                    },
+                    params: { fields: ['geometry,parent'] },
                 },
             }),
             [],
         ),
-        {
-            lazy: true,
-        },
+        { lazy: true },
     );
     if (orgUnit && !called) {
         refetch({ variables: { orgUnitId: orgUnit.id } });

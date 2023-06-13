@@ -16,15 +16,13 @@ const convertToClientCoordinates = ({ coordinates, type }: { coordinates: any[],
 };
 
 export const useCenterPoint = (orgUnitId: string | boolean) => {
-    const { error, loading, data, refetch, called } = useDataQuery(
+    const { error, data, refetch, called, loading } = useDataQuery(
         useMemo(
             () => ({
                 organisationUnits: {
                     resource: 'organisationUnits',
                     id: ({ variables: { orgUnitId: id } }) => id,
-                    params: {
-                        fields: ['geometry,parent'],
-                    },
+                    params: { fields: ['geometry,parent'] },
                 },
             }),
             [],
