@@ -1,15 +1,15 @@
 # 
 # Translators:
-# easylin <lin_xd@126.com>, 2022
 # 晓东 林 <13981924470@126.com>, 2022
+# easylin <lin_xd@126.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2023-06-02T09:13:17.085Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2022\n"
-"Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2023\n"
+"Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,23 +39,35 @@ msgstr ""
 "您在同一域中打开了另一个版本的Capture App。当前，Capture "
 "App仅支持同时运行一个版本（在同一域中）。如果您想再次使用此版本，请刷新此页面，但是请注意，它将关闭其他版本。"
 
-msgid "Organisation unit"
-msgstr "机构"
+msgid "View {{programName}} dashboard"
+msgstr ""
 
-msgid "Date of enrollment"
-msgstr "报名日期"
+msgid "View dashboard"
+msgstr "查看仪表盘"
 
-msgid "Program name"
-msgstr "项目名称"
+msgid "View active enrollment"
+msgstr "查看有效的报名"
 
-msgid "Last updated"
-msgstr "上次更新"
+msgid "Re-enroll"
+msgstr "重新报名"
+
+msgid "in"
+msgstr " 在"
 
 msgid "Enrolled"
 msgstr "已报名"
 
 msgid "Previously enrolled"
 msgstr "以前报名的"
+
+msgid "Organisation unit"
+msgstr "机构"
+
+msgid "Date of enrollment"
+msgstr "报名日期"
+
+msgid "Last updated"
+msgstr "上次更新"
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -131,6 +143,9 @@ msgstr "坐标"
 
 msgid "Enrollment"
 msgstr "报名"
+
+msgid "Please select {{categoryName}}"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
@@ -270,9 +285,6 @@ msgstr "没有"
 msgid "enrollment"
 msgstr "报名"
 
-msgid "in"
-msgstr " 在"
-
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "通过从顶部栏中选择一个项目来报名"
 
@@ -301,9 +313,6 @@ msgstr "显示登记的 {{attributeName}} "
 msgid "Registered person"
 msgstr "登记的人"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "离开此页面将放弃您对此事件所做的更改。"
-
 msgid "validation failed"
 msgstr "验证失败"
 
@@ -330,6 +339,9 @@ msgstr "不，取消"
 
 msgid "Yes, create new event"
 msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr "离开此页面将放弃您对此事件所做的更改。"
 
 msgid "Warnings found"
 msgstr "发现警告"
@@ -587,8 +599,9 @@ msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr "打开此报名时出现错误。请输入有效网址。"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "ID为“ {{enrollmentId}}”的报名不存在"
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
 
 msgid "Enrollment Dashboard"
 msgstr "报名仪表板"
@@ -626,8 +639,20 @@ msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}}具有类别。选择所有类别以查看仪表板。"
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
 msgid "Choose an enrollment to view the dashboard."
 msgstr "选择一个报名以查看仪表板。"
+
+msgid "There are no active enrollments."
+msgstr ""
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid "No access to program owner."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "该项目未报名{{teiDisplayName}} 。"
@@ -692,8 +717,8 @@ msgstr "调度"
 msgid "Refer"
 msgstr "转诊"
 
-msgid "You can’t add any more events in this program"
-msgstr "您无法在此程序中添加更多事件"
+msgid "You can’t add any more {{ programStageName }} events"
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "取消而不保存"
@@ -704,7 +729,7 @@ msgstr "为新活动选择一个舞台"
 msgid "Program Stages could not be loaded"
 msgstr "无法加载程序阶段"
 
-msgid "stage"
+msgid "Stage"
 msgstr "阶段"
 
 msgid "Enrollment{{escape}} View Event"
@@ -742,9 +767,6 @@ msgstr "选择{{missingCategories}}开始报告"
 
 msgid "Save as new"
 msgstr "另存为新"
-
-msgid "View dashboard"
-msgstr "查看仪表盘"
 
 msgid "View enrollment"
 msgstr "查看报名"
@@ -807,97 +829,8 @@ msgstr "创建新的{{trackedEntityType}}"
 msgid "Register"
 msgstr "注册"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
-
-msgid "Search {{name}}"
-msgstr "搜索{{name}}"
-
-msgid "Search by {{name}}"
-msgstr "按{{name}}搜索"
-
-msgid "Search by attributes"
-msgstr "按属性搜索"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr "没有结果"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr "返回搜寻"
-
-msgid "An error has occurred"
-msgstr "发生了错误"
-
-msgid "Too many results"
-msgstr "结果太多"
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "后退"
-
-msgid "Search for {{titleText}}"
-msgstr "搜索{{titleText}}"
-
-msgid "Search for"
-msgstr "搜索"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
-
-msgid "Choose a type to start searching"
-msgstr "选择一种类型以开始搜索"
-
-msgid "View active enrollment"
-msgstr "查看有效的报名"
-
-msgid "Re-enroll"
-msgstr "重新报名"
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
-
-msgid "Search in all programs"
-msgstr "搜索所有项目"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "新建"
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Create custom working list"
-msgstr ""
 
 msgid "events"
 msgstr "事件"
@@ -946,6 +879,9 @@ msgstr "机构不能载入"
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
 
+msgid "No results found"
+msgstr "没有结果"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
 
@@ -958,44 +894,131 @@ msgstr ""
 msgid "Add relationship"
 msgstr "添加关系"
 
-msgid "Selected registering unit"
-msgstr "选择注册的机构"
+msgid "No results found for "
+msgstr ""
 
-msgid "Start Again"
-msgstr "再开始"
+msgid "Registering unit"
+msgstr "注册机构"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "你确信？所以未保存的数据将丢失"
+msgid "Choose a registering unit"
+msgstr ""
 
-msgid "Accept"
-msgstr "接受<br>"
-
-msgid "Registering Organisation Unit"
-msgstr "在注册的机构"
-
-msgid "Select"
-msgstr "选择"
+msgid "Clear selection"
+msgstr ""
 
 msgid "No programs available."
 msgstr "无可用项目"
 
-msgid "Selected program"
-msgstr "选择的项目"
+msgid "Search for a program"
+msgstr ""
 
-msgid "Select program"
-msgstr "选择项目"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr ""
 
-msgid "Selected"
-msgstr "选择的"
+msgid "Show all programs"
+msgstr ""
+
+msgid "Choose a program"
+msgstr ""
+
+msgid "Search for {{titleText}}"
+msgstr "搜索{{titleText}}"
+
+msgid "Search for"
+msgstr "搜索"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
+
+msgid "Choose a type to start searching"
+msgstr "选择一种类型以开始搜索"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+
+msgid "Search {{name}}"
+msgstr "搜索{{name}}"
+
+msgid "Search by {{name}}"
+msgstr "按{{name}}搜索"
+
+msgid "Search by attributes"
+msgstr "按属性搜索"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
+
+msgid "Search in all programs"
+msgstr "搜索所有项目"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "新建"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"至少填写这些字段中的 {{minAttributesRequiredToSearch}} 以搜索{{escape}} "
+"{{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
+
+msgid "Back to search"
+msgstr "返回搜寻"
+
+msgid "An error has occurred"
+msgstr "发生了错误"
+
+msgid "Too many results"
+msgstr "结果太多"
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
 
 msgid "Results found"
 msgstr "找到的结果"
 
+msgid "Selected program"
+msgstr "选择的项目"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "{{programName}}中的新{{trackedEntityName}}"
@@ -1003,14 +1026,30 @@ msgstr "{{programName}}中的新{{trackedEntityName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "在{{programName}}中搜索{{trackedEntityName}}"
 
-msgid "Clear selections"
-msgstr "清除选择"
-
 msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"
 
 msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访采集APP"
+
+msgid "This program is protected"
+msgstr "该项目受保护"
+
+msgid "Reason to check for enrollments"
+msgstr ""
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+
+msgid "Check for enrollments"
+msgstr ""
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
 
 msgid "Save comment"
 msgstr "保存注释"
@@ -1059,9 +1098,6 @@ msgstr "报名日期"
 msgid "Incident date"
 msgstr "事件日期"
 
-msgid "Last updated {{date}}"
-msgstr "最近更新的{{date}}"
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "无法加载报名的小部件。请稍后再试"
 
@@ -1073,6 +1109,9 @@ msgstr "始于{{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "由{{ownerOrgUnit}}拥有"
+
+msgid "Last updated {{date}}"
+msgstr "最近更新的{{date}}"
 
 msgid "Cancelled"
 msgstr "已取消"
@@ -1236,9 +1275,6 @@ msgstr "这个阶段只能有一个事件"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "无法检索事件。请稍后再试。"
 
-msgid "Registering unit"
-msgstr "注册机构"
-
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} 个事件"
 
@@ -1272,6 +1308,12 @@ msgstr "下载数据"
 msgid "an error occurred loading working lists"
 msgstr "载入工作列表发生错误"
 
+msgid "Registration Date"
+msgstr "登记日期"
+
+msgid "Inactive"
+msgstr "闲置"
+
 msgid "Enrollment status"
 msgstr "报名状态"
 
@@ -1281,14 +1323,11 @@ msgstr "指派到"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Registration Date"
-msgstr "登记日期"
-
-msgid "Inactive"
-msgstr "闲置"
-
 msgid "Working list could not be updated"
 msgstr "工作清单无法更新"
+
+msgid "an error occurred loading the working lists"
+msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "加载跟踪的实体实例列表时出错"

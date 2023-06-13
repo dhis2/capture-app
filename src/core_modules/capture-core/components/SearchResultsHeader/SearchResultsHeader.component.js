@@ -2,7 +2,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import type { CurrentSearchTerms } from '../Pages/Search/SearchForm/SearchForm.types';
+import type { CurrentSearchTerms } from '../SearchBox';
 import { convertValue } from '../../converters/clientToList';
 
 const styles = (theme: Theme) => ({

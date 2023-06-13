@@ -20,6 +20,7 @@ import type {
     SelectRow,
     SelectTemplate,
     SetColumnOrder,
+    ResetColumnOrder,
     Sort,
     StickyFilters,
     UnloadingContext,
@@ -31,7 +32,7 @@ import type {
     UpdateList,
     InitialViewConfig,
 } from '../../WorkingListsCommon';
-import type { TeiWorkingListsTemplates, TeiRecords } from '../types';
+import type { TeiWorkingListsTemplates, TeiRecords, ApiTrackerQueryCriteria } from '../types';
 
 export type Props = $ReadOnly<{|
     storeId: string,
@@ -69,13 +70,14 @@ export type TeiWorkingListsReduxOutputProps = {|
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectTemplate: SelectTemplate,
     onSetListColumnOrder: SetColumnOrder,
+    onResetListColumnOrder: ResetColumnOrder,
     onSortList: Sort,
     onUnloadingContext?: UnloadingContext,
     onUpdateFilter: UpdateFilter,
     onUpdateList: UpdateList,
     orgUnitId: string,
     program: TrackerProgram,
-    programStage?: string,
+    programStageId?: string,
     records?: TeiRecords,
     recordsOrder?: RecordsOrder,
     rowsPerPage?: number,
@@ -87,4 +89,5 @@ export type TeiWorkingListsReduxOutputProps = {|
     updating: boolean,
     updatingWithDialog: boolean,
     viewPreloaded?: boolean,
+    onPreserveCurrentViewState: (templateId: string, critera: ApiTrackerQueryCriteria) => void
 |};

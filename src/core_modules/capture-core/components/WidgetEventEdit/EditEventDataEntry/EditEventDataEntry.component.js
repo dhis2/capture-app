@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
@@ -32,6 +32,7 @@ import {
     withDisplayMessages,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
+    VirtualizedSelectField,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -39,6 +40,13 @@ import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
 import { actionTypes } from './editEventDataEntry.actions';
+import {
+    AOCsectionKey,
+    attributeOptionsKey,
+    getCategoryOptionsValidatorContainers,
+    withAOCFieldBuilder,
+    withDataEntryFields,
+} from '../../DataEntryDhis2Helpers/';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -63,7 +71,6 @@ const dataEntrySectionNames = {
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
 };
-
 
 const baseComponentStyles = {
     labelContainerStyle: {
@@ -298,6 +305,46 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
+const getCategoryOptionsSettingsFn = () => {
+    const categoryOptionsComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const categoryOptionsSettings = {
+        getComponent: () => categoryOptionsComponent,
+        getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
+            ...props.categories?.find(category => category.id === fieldId) ?? {},
+            required: true,
+        }),
+        getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
+        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
+        getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
+        getMeta: (props: Object) => ({
+            section: AOCsectionKey,
+            placement: placements.TOP,
+            sectionName: props.programCategory?.displayName,
+        }),
+    };
+
+    return categoryOptionsSettings;
+};
+
 const saveHandlerConfig = {
     onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
     onFilterProps: (props: Object) => {
@@ -306,7 +353,8 @@ const saveHandlerConfig = {
     },
 };
 
-const CleanUpHOC = withCleanUp()(DataEntry);
+const AOCFieldBuilderHOC = withAOCFieldBuilder({})(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
+const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
@@ -344,14 +392,15 @@ type Props = {
     isCompleted?: boolean,
 };
 
-type State = {
-    mode: string
-}
 
 type DataEntrySection = {
     placement: $Values<typeof placements>,
     name: string,
 };
+
+type State = {
+    mode: string,
+}
 
 const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
@@ -361,6 +410,10 @@ const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.STATUS]: {
         placement: placements.BOTTOM,
         name: i18n.t('Status'),
+    },
+    [AOCsectionKey]: {
+        placement: placements.TOP,
+        name: '',
     },
 };
 
@@ -442,8 +495,8 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             classes,
             ...passOnProps
         } = this.props;
-
-        return ( // $FlowFixMe[cannot-spread-inexact] automated comment
+        return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={dataEntryId}
                 onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
@@ -452,6 +505,8 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 onSave={onSave(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
+                programId={programId}
+                selectedOrgUnitId={orgUnit?.id}
                 {...passOnProps}
             />
         );

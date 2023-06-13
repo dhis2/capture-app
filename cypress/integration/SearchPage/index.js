@@ -34,14 +34,18 @@ Given('you are in the search page with domain Person and org unit being preselec
 });
 
 And('you select the search domain Malaria Case diagnosis', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('Malaria case diagn');
     cy.contains('Malaria case diagnosis')
         .click();
 });
 
 When('you select the search domain WHO RMNCH Tracker', () => {
-    cy.get('.Select')
+    cy.get('[data-test="program-selector-container"]')
+        .click();
+    cy.get('[data-test="program-filterinput"]')
         .type('WHO RMNCH');
     cy.contains('WHO RMNCH Tracker')
         .click();
@@ -215,7 +219,7 @@ When('you clear the values', () => {
 
 Then('there should be a validation error message', () => {
     cy.get('[data-test="form-attributes"]')
-        .contains('Fill in at least 1 attributes to search')
+        .contains('Fill in at least 1 attribute to search')
         .shouldIncludeClass('textError');
 });
 
@@ -246,9 +250,8 @@ When('you click the view dashboard button', () => {
 });
 
 When('you remove the Child Programme selection', () => {
-    cy.get('[data-test="scope-selector"]').within(() => {
-        cy.get('[data-test="reset-selection-button"]').eq(0).click();
-    });
+    cy.get('[data-test="program-selector-container-clear-icon"]')
+        .click();
 });
 
 Then('there should be visible a title with Malaria case diagnosis', () => {
@@ -322,6 +325,29 @@ When('you fill in the first and last name with values that will return results',
         .eq(0)
         .type('Sarah')
         .blur();
+});
+
+When('you press enter after filling in the first and last name with values that will return results', () => {
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('Go')
+        .blur();
+
+    cy.get('[data-test="form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Sarah')
+        .wait(500)
+        .type('{enter}', { force: true });
+});
+
+When('you press enter after filling in the unique identifier field with values that will return a tracked entity instance', () => {
+    cy.get('[data-test="form-unique"]')
+        .find('[data-test="capture-ui-input"]')
+        .first()
+        .clear()
+        .type('3131112445555{enter}');
 });
 
 When('you fill in the first name with value and last name with empty space', () => {

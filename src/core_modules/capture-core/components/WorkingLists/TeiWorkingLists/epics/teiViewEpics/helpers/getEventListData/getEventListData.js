@@ -12,6 +12,7 @@ import type { InputMeta } from './getEventListData.types';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
 import { addTEIsData } from './addTEIsData';
 import { getColumnsQueryArgs, getOrderQueryArgs } from './getColumnsQueryArgs';
+import { getScheduledDateQueryArgs } from './getScheduledDateQueryArgs';
 
 const createApiEventQueryArgs = (
     {
@@ -28,7 +29,7 @@ const createApiEventQueryArgs = (
     filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
 ): { [string]: any } => {
     const rawSplitFilters = splitFilters(filters, columnsMetaForDataFetching);
-    return {
+    const queryArgs = {
         ...getApiFilterQueryArgs(rawSplitFilters.filters, filtersOnlyMetaForDataFetching),
         ...getApiFilterAttributesQueryArgs(rawSplitFilters.filterAttributes, filtersOnlyMetaForDataFetching),
         ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
@@ -41,6 +42,8 @@ const createApiEventQueryArgs = (
         programStage,
         fields: '*',
     };
+
+    return getScheduledDateQueryArgs(queryArgs);
 };
 
 const createApiTEIsQueryArgs =
@@ -67,10 +70,9 @@ export const getEventListData = async (
         params: queryArgsEvents,
     });
 
-    const trackedEntityIds = apiEvents.reduce(
-        (acc, apiEvent) => (acc.includes(apiEvent.trackedEntity) ? acc : `${acc};${apiEvent.trackedEntity}`),
-        '',
-    );
+    const trackedEntityIds = apiEvents
+        .reduce((acc, { trackedEntity }) => (acc.includes(trackedEntity) ? acc : [...acc, trackedEntity]), [])
+        .join(';');
 
     const { resource: resourceTEIs, queryArgs: queryArgsTEIs } = {
         resource: 'tracker/trackedEntities',

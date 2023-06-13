@@ -1,5 +1,6 @@
 // @flow
 import { useMemo } from 'react';
+import { useFeature, FEATURES } from 'capture-core-utils';
 import { areFiltersEqual } from '../../../WorkingListsBase';
 import type { Input, InitialViewConfigComputed, CurrentViewConfig } from './useViewHasTemplateChanges.types';
 
@@ -41,17 +42,13 @@ export const useViewHasTemplateChanges = ({
     columns,
     sortById,
     sortByDirection,
-    programStage,
+    programStageId,
+    isDefaultTemplateAltered,
 }: Input) => {
+    const supportsStoreProgramStageWorkingList = useFeature(FEATURES.storeProgramStageWorkingList);
     const calculatedInitialViewConfig = useMemo(() => {
         if (!initialViewConfig) {
             return initialViewConfig;
-        }
-
-        // DHIS2-13751 the API to interact with a programStage working list template doesn't exist yet
-        // Disable for now viewHasChanges and the working list buttons when the programStage filter is active.
-        if (programStage) {
-            return false;
         }
 
         const visibleColumnIds = initialViewConfig.customVisibleColumnIds || defaultColumns
@@ -63,9 +60,15 @@ export const useViewHasTemplateChanges = ({
             customVisibleColumnIds: undefined,
             visibleColumnIds,
         };
-    }, [initialViewConfig, defaultColumns, programStage]);
+    }, [initialViewConfig, defaultColumns]);
 
     const viewHasChanges = useMemo(() => {
+        if (isDefaultTemplateAltered) {
+            return true;
+        }
+        if (!supportsStoreProgramStageWorkingList && programStageId) {
+            return undefined;
+        }
         if (!calculatedInitialViewConfig) {
             return undefined;
         }
@@ -78,6 +81,9 @@ export const useViewHasTemplateChanges = ({
         sortById,
         sortByDirection,
         calculatedInitialViewConfig,
+        programStageId,
+        supportsStoreProgramStageWorkingList,
+        isDefaultTemplateAltered,
     ]);
 
     return viewHasChanges;

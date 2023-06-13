@@ -2,7 +2,7 @@
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, filter, switchMap } from 'rxjs/operators';
+import { map, filter, switchMap, take } from 'rxjs/operators';
 import {
     filterByInnerAction,
     mapToInnerAction,
@@ -21,7 +21,11 @@ import {
 import {
     actionTypes as viewEventPageActionTypes,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { enrollmentSiteActionTypes } from '../../../components/Pages/common/EnrollmentOverviewDomain';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
+import { TrackerProgram } from '../../../metaData/Program';
+import { convertEventAttributeOptions } from '../../../events/convertEventAttributeOptions';
+
 
 const getDataEntryKey = (eventStatus?: string): string => (
     (eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE)
@@ -35,7 +39,7 @@ const getDataEntryId = (event): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
+export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -77,7 +81,7 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
             const program = metadataContainer.program;
             const { enrollment, attributeValues } = state.enrollmentDomain;
 
-            return from(loadViewEventDataEntry({
+            const args = {
                 eventContainer,
                 orgUnit,
                 foundation,
@@ -86,7 +90,27 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
                 attributeValues,
                 dataEntryId: getDataEntryId(eventContainer.event),
                 dataEntryKey: getDataEntryKey(eventContainer.event?.status),
-            }))
+                onCategoriesQuery: null,
+            };
+            eventContainer.event = convertEventAttributeOptions(eventContainer.event);
+
+            if (!enrollment && program instanceof TrackerProgram) {
+                // Wait for enrollment data
+                return action$.pipe(
+                    ofType(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET),
+                    take(1),
+                    switchMap(({ payload }) => {
+                        args.enrollment = payload.enrollment;
+                        args.attributeValues = payload.attributeValues;
+                        return from(loadViewEventDataEntry(args))
+                            .pipe(
+                                map(item => batchActions(item)),
+                            );
+                    }),
+                );
+            }
+
+            return from(loadViewEventDataEntry(args))
                 .pipe(
                     map(item => batchActions(item)),
                 );

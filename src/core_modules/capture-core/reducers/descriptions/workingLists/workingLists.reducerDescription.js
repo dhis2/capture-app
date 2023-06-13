@@ -94,6 +94,31 @@ export const workingListsTemplatesDesc = createReducerDescription({
             },
         };
     },
+    [workingListsCommonActionTypes.TEMPLATE_DEFAULT_UPDATE]: (
+        state, {
+            payload: {
+                defaultTemplate,
+                storeId,
+            },
+        }) => {
+        const storedTemplates = state[storeId].templates?.filter(template => !template.isDefault);
+        if (!storedTemplates) {
+            return state;
+        }
+
+        const updatedTemplates = [
+            ...storedTemplates,
+            defaultTemplate,
+        ];
+
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                templates: updatedTemplates,
+            },
+        };
+    },
     [workingListsCommonActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
         const { criteria, templateId, storeId } = action.payload;
         const templates = state[storeId].templates;
@@ -517,6 +542,27 @@ export const workingListsContextDesc = createReducerDescription({
             },
         };
     },
+    [workingListsCommonActionTypes.TEMPLATE_SELECT]: (state, action) => {
+        const { storeId, programStageId } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                programStageId,
+            },
+        };
+    },
+    [workingListsCommonActionTypes.TEMPLATES_FETCH_SUCCESS]: (state, action) => {
+        const { templates, storeId, defaultTemplateId } = action.payload;
+        const selectedTemplate = templates.find(templete => templete.id === defaultTemplateId);
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                programStageId: selectedTemplate?.criteria?.programStage,
+            },
+        };
+    },
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
         const { storeId, context: { programId, lastTransaction, ...restContext } } = action.payload;
         return {
@@ -527,6 +573,16 @@ export const workingListsContextDesc = createReducerDescription({
                 programIdView: programId,
                 listDataRefreshTimestamp: moment().toISOString(),
                 lastTransactionOnListDataRefresh: lastTransaction,
+            },
+        };
+    },
+    [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
+        const { storeId, context } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                programStageId: context?.programStageId,
             },
         };
     },
@@ -548,6 +604,48 @@ export const workingListsContextDesc = createReducerDescription({
         const newState = { ...state };
         newState[action.payload.listId] = action.payload.selections;
         return newState;
+    },
+    [workingListsCommonActionTypes.FILTER_SET]: (state, action) => {
+        const { itemId, filter, storeId } = action.payload;
+
+        if (itemId === 'programStage') {
+            return {
+                ...state,
+                [storeId]: {
+                    ...state[storeId],
+                    programStageId: filter.values[0],
+                },
+            };
+        }
+        return state;
+    },
+    [workingListsCommonActionTypes.FILTER_CLEAR]: (state, action) => {
+        const { itemId, storeId } = action.payload;
+
+        if (itemId === 'programStage') {
+            return {
+                ...state,
+                [storeId]: {
+                    ...state[storeId],
+                    programStageId: undefined,
+                },
+            };
+        }
+        return state;
+    },
+    [workingListsCommonActionTypes.FILTER_REMOVE]: (state, action) => {
+        const { itemId, storeId } = action.payload;
+
+        if (itemId === 'programStage') {
+            return {
+                ...state,
+                [storeId]: {
+                    ...state[storeId],
+                    programStageId: undefined,
+                },
+            };
+        }
+        return state;
     },
 }, 'workingListsContext');
 

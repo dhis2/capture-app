@@ -5,6 +5,6 @@ export const enrollmentRegistrationEntryActionTypes = {
     TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START: 'StartInitForEnrollmentRegistrationForm',
 };
 
-export const startNewEnrollmentDataEntryInitialisation = ({ selectedOrgUnit, selectedScopeId, dataEntryId, formValues, clientValues }: Object) =>
-    actionCreator(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START)({ selectedOrgUnit, selectedScopeId, dataEntryId, formValues, clientValues });
+export const startNewEnrollmentDataEntryInitialisation = ({ selectedOrgUnit, selectedScopeId, dataEntryId, formValues, clientValues, programCategory }: Object) =>
+    actionCreator(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START)({ selectedOrgUnit, selectedScopeId, dataEntryId, formValues, clientValues, programCategory });
 

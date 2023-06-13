@@ -1,6 +1,6 @@
 # default code owner for repo
-*        @dhis2/team-tracker
+*        @dhis2/tracker-frontend
 
 # code owners for functionality
-/src/    @dhis2/team-tracker
-/docs/   @dhis2/team-tracker @dhis2/team-tracker-docs @dhis2/team-qa
+/src/    @dhis2/tracker-frontend
+/docs/   @dhis2/tracker-frontend @dhis2/team-tracker-docs @dhis2/team-qa

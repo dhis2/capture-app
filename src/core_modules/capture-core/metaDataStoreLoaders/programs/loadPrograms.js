@@ -65,20 +65,37 @@ const getStalePrograms = (apiPrograms, cachedPrograms): StalePrograms => {
 /**
  * Update the cache for the program ids passed in.
  * The program ids that are passed in are ids of programs that needs updating (meaning the version retrieved from the api is different from the one in the cache)
- * The returned data is needed for building the side effects of trackedEntityAttributeIds, categories and trackedEntityTypeIds.
+ * The returned data is needed for building the side effects.
  * The side effects data is used later when determining what other metadata to load.
  */
-const loadProgramBatch = async (programIds) => {
-    await storeOrganisationUnitsByProgram(programIds);
-    const { convertedData: programs = [] } = await storePrograms(programIds);
-    await loadRulesCentricMetadata(programIds);
-    return programs
-        .map(({ programTrackedEntityAttributes, categoryCombo, trackedEntityTypeId }) => ({
-            programTrackedEntityAttributes,
-            categoryCombo,
-            trackedEntityTypeId,
-        }));
-};
+
+const loadProgramBatch = (() => {
+    const getDataElementIdsFromBatch = programStages =>
+        programStages
+            .flatMap(({ programStageDataElements }) =>
+                programStageDataElements
+                    .map(({ dataElementId }) => dataElementId),
+            );
+
+    const getTrackedEntityAttributeIdsFromBatch = programTrackedEntityAttributes =>
+        programTrackedEntityAttributes
+            .map(programAttribute => programAttribute.trackedEntityAttributeId);
+
+
+    return async (programIds) => {
+        await storeOrganisationUnitsByProgram(programIds);
+        const { convertedData: programs = [] } = await storePrograms(programIds);
+        await loadRulesCentricMetadata(programIds);
+
+        return programs
+            .map(({ programTrackedEntityAttributes, categoryCombo, trackedEntityTypeId, programStages }) => ({
+                trackedEntityAttributeIds: getTrackedEntityAttributeIdsFromBatch(programTrackedEntityAttributes),
+                dataElementIds: getDataElementIdsFromBatch(programStages),
+                categoryCombo,
+                trackedEntityTypeId,
+            }));
+    };
+})();
 
 /**
  * Self executing function to scope the side effect helper functions
@@ -111,12 +128,15 @@ const getSideEffects = (() => {
     const getTrackedEntityAttributeIds = stalePrograms =>
         pipe(
             () => stalePrograms
-                .flatMap(program =>
-                    (program.programTrackedEntityAttributes || [])
-                        .map(programAttribute => programAttribute.trackedEntityAttributeId)
-                        .filter(TEAId => TEAId),
-                ),
+                .flatMap(({ trackedEntityAttributeIds }) => trackedEntityAttributeIds),
             attributeIds => [...new Set(attributeIds).values()],
+        )();
+
+    const getDataElementIds = stalePrograms =>
+        pipe(
+            () => stalePrograms
+                .flatMap(({ dataElementIds }) => dataElementIds),
+            dataElementIds => [...new Set(dataElementIds).values()],
         )();
 
     const getCategories = stalePrograms =>
@@ -149,6 +169,7 @@ const getSideEffects = (() => {
     return (programsOutline, stalePrograms) => ({
         optionSetsOutline: getOptionSetsOutline(programsOutline),
         trackedEntityAttributeIds: getTrackedEntityAttributeIds(stalePrograms),
+        dataElementIds: getDataElementIds(stalePrograms),
         categories: getCategories(stalePrograms),
         trackedEntityTypeIds: getTrackedEntityTypes(stalePrograms),
         changesDetected: stalePrograms.length > 0,

@@ -1,185 +1,78 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { SelectorBarItem, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
-import { Button } from '../../Buttons';
 import { OrgUnitField } from '../../FormFields/New';
 
-const styles = (theme: Theme) => ({
-    paper: {
-        padding: 8,
-        backgroundColor: theme.palette.grey.lighter,
-    },
-    title: {
-        margin: 0,
-        fontWeight: 425,
-        fontSize: 15,
-        paddingBottom: 5,
-    },
-    form: {
-        width: '100%',
-    },
-    listItem: {
-        backgroundColor: '#ffffff',
-        borderRadius: 5,
-        marginBottom: 5,
-        padding: 5,
-        border: '1px solid lightGrey',
-    },
-    selectedText: {
-        marginTop: 5,
-        marginBottom: 5,
-        padding: 5,
-        borderLeft: '2px solid #71a4f8',
-    },
-    selectedPaper: {
-        backgroundColor: theme.palette.grey.lighter,
-        padding: 8,
-    },
-    selectedButton: {
-        width: 20,
-        height: 20,
-        padding: 0,
-    },
-    selectedButtonIcon: {
-        width: 20,
-        height: 20,
-    },
-    selectedItemContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        minHeight: 28,
-        marginTop: 8,
-        marginBottom: 4,
-        paddingLeft: 5,
-        borderLeft: `2px solid ${theme.palette.primary.light}`,
-    },
-    selectedItemClear: {
-        flexGrow: 1,
-        display: 'flex',
-        justifyContent: 'flex-end',
+const styles = () => ({
+    selectBarMenu: {
+        minWidth: '640px',
+        maxHeight: '80vh',
+        overflow: 'auto',
+        minHeight: spacers.dp96,
     },
 });
-
 type Props = {
-    handleClickOrgUnit: (orgUnitId: ?string, orgUnitObject: ?Object) => void,
+    handleClickOrgUnit?: (orgUnitId: ?string, orgUnitObject: ?Object) => void,
     onReset: () => void,
-    selectedOrgUnitId: string,
-    showWarning: boolean,
-    selectedOrgUnit: Object,
+    selectedOrgUnitId?: string,
+    selectedOrgUnit?: {
+        name: string
+    },
     previousOrgUnitId?: string,
     classes: Object,
 };
 
 type State = {
-    open: boolean,
+   open: boolean,
 };
 
 class OrgUnitSelectorPlain extends Component<Props, State> {
-    handleShowWarning: () => void;
     handleClose: () => void;
     handleClick: (orgUnit: Object) => void;
-    handleReset: () => void;
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
             open: false,
         };
 
-        this.handleShowWarning = this.handleShowWarning.bind(this);
-        this.handleClose = this.handleClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.handleReset = this.handleReset.bind(this);
     }
 
-    handleShowWarning() {
-        if (this.props.showWarning) {
-            this.setState({ open: true });
-        } else {
-            this.handleReset();
-        }
-    }
-
-    handleClose() {
-        this.setState({ open: false });
-    }
-
-    handleClick(selectedOu) {
+    handleClick(selectedOu: {id: string, displayName: string, code?: string}) {
         const orgUnitObject = { id: selectedOu.id, name: selectedOu.displayName, code: selectedOu.code };
-        this.props.handleClickOrgUnit(selectedOu.id, orgUnitObject);
-    }
-
-    handleReset() {
-        this.props.handleClickOrgUnit(undefined, null);
+        const { handleClickOrgUnit } = this.props;
+        handleClickOrgUnit && handleClickOrgUnit(selectedOu.id, orgUnitObject);
     }
 
     render() {
-        // If orgUnit is set in Redux state.
-        if (this.props.selectedOrgUnitId) {
-            return (
-                <div data-test="org-unit-selector">
-                    <Paper square elevation={0} className={this.props.classes.selectedPaper}>
-                        <h4 className={this.props.classes.title}>{ i18n.t('Selected registering unit') }</h4>
-                        <div className={this.props.classes.selectedItemContainer}>
-                            <div>{this.props.selectedOrgUnit.name}</div>
-                            <div className={this.props.classes.selectedItemClear}>
-                                <IconButton data-test="reset-selection-button" className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
-                                    <ClearIcon className={this.props.classes.selectedButtonIcon} />
-                                </IconButton>
-                            </div>
-                        </div>
-                    </Paper>
-                    <Dialog
-                        open={this.state.open}
-                        onClose={this.handleClose}
-                    >
-                        <DialogTitle>{i18n.t('Start Again')}</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                {i18n.t('Are you sure? All unsaved data will be lost.')}
-                            </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button
-                                onClick={this.handleClose}
-                                secondary
-                            >
-                                {i18n.t('Cancel')}
-                            </Button>
-                            <Button
-                                onClick={this.handleReset}
-                                primary
-                            >
-                                {i18n.t('Accept')}
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-                </div>
-            );
-        }
+        const { selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, classes } = this.props;
 
         return (
-            <div data-test="org-unit-selector-container">
-                <Paper square elevation={0} className={this.props.classes.paper}>
-                    <h4 className={this.props.classes.title}>{ i18n.t('Registering Organisation Unit') }</h4>
-                    <div>
-                        <OrgUnitField
-                            data-test="org-unit-field"
-                            onSelectClick={this.handleClick}
-                            previousOrgUnitId={this.props.previousOrgUnitId}
-                        />
-                    </div>
-                </Paper>
-            </div>
+            <SelectorBarItem
+                label={i18n.t('Registering unit')}
+                noValueMessage={i18n.t('Choose a registering unit')}
+                value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
+                open={this.state.open}
+                setOpen={open => this.setState({ open })}
+                onClearSelectionClick={() => onReset()}
+                dataTest="org-unit-selector-container"
+            >
+                <div className={classes.selectBarMenu}>
+                    <OrgUnitField
+                        data-test="org-unit-field"
+                        onSelectClick={(selectedOu, event) => {
+                            event.stopPropagation();
+                            event.preventDefault();
+                            this.setState({ open: false });
+                            this.handleClick(selectedOu);
+                        }}
+                        previousOrgUnitId={selectedOrgUnitId || previousOrgUnitId}
+                    />
+                </div>
+            </SelectorBarItem>
         );
     }
 }

@@ -1,2 +1,4 @@
 // @flow
-export { convertToTEIFilterMainFilters, convertToTEIFilterAttributes } from './convertToTEIFilterQuery';
+export { convertToTEIFilterAttributes } from './convertToTEIFilterQuery';
+export { convertToEventFilterQuery } from './convertToEventFilterQuery';
+export { convertMainFilters } from './convertors';

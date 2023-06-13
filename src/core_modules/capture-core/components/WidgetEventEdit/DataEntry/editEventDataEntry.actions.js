@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
@@ -8,8 +8,9 @@ import {
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
 } from '../../../rules';
-import type { RenderFoundation, Program } from '../../../metaData';
+import { RenderFoundation, Program } from '../../../metaData';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import { getCategoryOptionsValidatorContainers } from './fieldValidators/categoryOptions.validatorContainersGetter';
 import {
     getConvertGeometryIn,
     convertGeometryOut,
@@ -26,6 +27,7 @@ import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../helpers';
 import type { EnrollmentData, AttributeValue } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
+import type { ProgramCategory } from '../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',
@@ -81,6 +83,7 @@ export const openEventForEditInDataEntry = ({
     attributeValues,
     dataEntryId,
     dataEntryKey,
+    programCategory,
 }: {
     loadedValues: {
         eventContainer: Object,
@@ -94,6 +97,7 @@ export const openEventForEditInDataEntry = ({
     dataEntryKey: string,
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
+    programCategory?: ProgramCategory
 }) => {
     const dataEntryPropsToInclude = [
         {
@@ -120,6 +124,14 @@ export const openEventForEditInDataEntry = ({
         },
     ];
     const formId = getDataEntryKey(dataEntryId, dataEntryKey);
+
+    if (programCategory && programCategory.categories) {
+        dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
+            id: `attributeCategoryOptions-${category.id}`,
+            type: 'TEXT',
+            validatorContainers: getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
+        })));
+    }
     const dataEntryActions =
         getLoadActions(
             dataEntryId,

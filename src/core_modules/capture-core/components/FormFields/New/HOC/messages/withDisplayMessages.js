@@ -46,7 +46,7 @@ const messageTypes = {
 
 type Props = {
     validatingMessage?: ?string | ?Array<string>,
-    errorMessage?: ?(string | Object | ?Array<string>),
+    errorMessage?: ?string | ?Array<string>,
     warningMessage?: ?string | ?Array<string>,
     infoMessage?: ?string | ?Array<string>,
     classes: {
@@ -96,11 +96,11 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                     data-test="error-message"
                     className={classNames(baseClass, messageClass)}
                 >
-                    {!Array.isArray(text) ? text : text.map(message => (
+                    {Array.isArray(text) ? text?.map(message => (
                         <span>
                             {message}<br />
                         </span>
-                    ))}
+                    )) : text}
                 </div>
             );
         }
@@ -127,20 +127,20 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             };
         }
 
-        getMessage(errorMessage, warningMessage, infoMessage, validatingMessage) {
-            let message = {};
+        getMessage(errorMessages, warningMessage, infoMessage, validatingMessage) {
+            let messages = {};
 
             if (validatingMessage) {
-                message = this.convertMessage(validatingMessage, messageTypes.validating);
-            } else if (errorMessage) {
-                message = this.convertMessage(errorMessage, messageTypes.error);
+                messages = this.convertMessage(validatingMessage, messageTypes.validating);
+            } else if (errorMessages) {
+                messages = this.convertMessage(errorMessages, messageTypes.error);
             } else if (warningMessage) {
-                message = this.convertMessage(warningMessage, messageTypes.warning);
+                messages = this.convertMessage(warningMessage, messageTypes.warning);
             } else if (infoMessage) {
-                message = this.convertMessage(infoMessage, messageTypes.info);
+                messages = this.convertMessage(infoMessage, messageTypes.info);
             }
 
-            return message;
+            return messages;
         }
 
         render() {
@@ -153,10 +153,10 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                 ...passOnProps
             } = this.props;
 
-            const message =
+            const messages =
                 this.getMessage(errorMessage, warningMessage, infoMessage, validatingMessage);
 
-            const calculatedMessageProps = message.innerMessage ? { innerMessage: message.innerMessage } : null;
+            const calculatedMessageProps = messages.innerMessage ? { innerMessage: messages.innerMessage } : null;
             return (
                 <div>
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
@@ -164,7 +164,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                         {...calculatedMessageProps}
                         {...passOnProps}
                     />
-                    {message.element}
+                    {messages.element}
                 </div>
             );
         }
