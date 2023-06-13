@@ -10,3 +10,4 @@ export { useOptionSets } from './useOptionSets';
 export { useProgramTrackedEntityAttributes } from './useProgramTrackedEntityAttributes';
 export { useFormValidations } from './useFormValidations';
 export { useGeometryValues } from './useGeometryValues';
+export { useCenterPoint } from './useCenterPoint';

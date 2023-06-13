@@ -5,28 +5,17 @@ import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes } from '../../../../metaData';
 import { MapCoordinatesModal } from '../../MapCoordinates';
 import { useProgram } from '../../hooks/useProgram';
-import { useOrganizationUnitGeometry } from '../../hooks/useOrganizationUnitGeometry';
+import { useCenterPoint } from '../../hooks/useCenterPoint';
 import type { Props } from './addLocation.types';
-import { convertToClientCoordinates } from '../../MapCoordinates/helpers';
 
-const DEFAULT_CENTER = [51.505, -0.09];
 export const AddLocation = ({ enrollment, onUpdate }: Props) => {
     const [isOpen, setOpen] = useState(false);
     const { program, error } = useProgram(enrollment.program);
-    const { geometry: orgUnitGeometry, error: orgUnitGeoError, loading } = useOrganizationUnitGeometry(enrollment.orgUnit);
     const geometryType = useMemo(() => {
         if (!program) { return undefined; }
         return program.featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
     }, [program]);
-    const center = useMemo(() => {
-        if (!orgUnitGeoError && orgUnitGeometry) {
-            const orgUnitGeoType = orgUnitGeometry.type === 'Point' ?
-                dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
-            return convertToClientCoordinates(orgUnitGeometry.coordinates, orgUnitGeoType);
-        }
-
-        return DEFAULT_CENTER;
-    }, [orgUnitGeometry, orgUnitGeoError]);
+    const { center, loading } = useCenterPoint(enrollment.orgUnit);
     if (error) {
         return null;
     }

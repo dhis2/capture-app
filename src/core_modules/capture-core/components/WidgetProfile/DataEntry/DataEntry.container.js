@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import type { Props } from './dataEntry.types';
 import { DataEntryComponent } from './DataEntry.component';
-import { useLifecycle, useFormValidations } from './hooks';
+import { useLifecycle, useFormValidations, useCenterPoint } from './hooks';
 import { getUpdateFieldActions, updateTeiRequest, setTeiModalError } from './dataEntry.actions';
 
 export const DataEntry = ({
@@ -25,6 +25,7 @@ export const DataEntry = ({
     const itemId = 'edit';
     const dispatch = useDispatch();
     const [saveAttempted, setSaveAttempted] = useState(false);
+    const { center } = useCenterPoint(orgUnitId);
 
     const context = useLifecycle({
         programAPI,
@@ -107,6 +108,7 @@ export const DataEntry = ({
                 onGetValidationContext={getValidationContext}
                 errorsMessages={errorsMessages}
                 warningsMessages={warningsMessages}
+                center={center}
             />
         )
     );

@@ -371,9 +371,9 @@ const AOCFieldBuilderHOC = withAOCFieldBuilder(getAOCSettingsFn())(
     withDataEntryFields(
         getCategoryOptionsSettingsFn(),
     )(FinalEnrollmentDataEntry));
-const CenterPointHOC = withCenterPoint()(AOCFieldBuilderHOC);
-const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(CenterPointHOC);
-const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
+const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);
+const CenterPointHOC = withCenterPoint()(LocationHOC);
+const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(CenterPointHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 

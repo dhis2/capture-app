@@ -17,6 +17,7 @@ type Props = {
   onBlur: (value: any) => void,
   value?: ?any,
   mapCenter: Array<number>,
+  center?: ?Array<number>,
   mapDialog?: ?React.Element<any>,
 };
 
@@ -99,7 +100,7 @@ export class PolygonField extends React.Component<Props, State> {
 
     getCenter = (featureCollection: ?FeatureCollection) => {
         if (!featureCollection) {
-            return this.props.mapCenter;
+            return this.props.center || this.props.mapCenter;
         }
         const coordinates = featureCollection.features[0].geometry.coordinates[0];
         const { lat, lng } = L.latLngBounds(coordinates.map(c => ([c[0], c[1]]))).getCenter();

@@ -21,6 +21,7 @@ export const DataEntryComponent = ({
     onGetValidationContext,
     errorsMessages,
     warningsMessages,
+    center,
 }: PlainProps) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
         <ModalTitle>{i18n.t(`Edit ${trackedEntityName}`)}</ModalTitle>
@@ -36,6 +37,7 @@ export const DataEntryComponent = ({
                 onUpdateFormField={onUpdateFormField}
                 onUpdateFormFieldAsync={onUpdateFormFieldAsync}
                 onGetValidationContext={onGetValidationContext}
+                center={center}
             />
             <NoticeBoxes
                 dataEntryId={dataEntryId}

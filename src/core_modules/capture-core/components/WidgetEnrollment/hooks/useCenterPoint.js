@@ -1,6 +1,8 @@
 // @flow
-import React, { type ComponentType, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+
+const DEFAULT_CENTER = [51.505, -0.09];
 
 const convertToClientCoordinates = ({ coordinates, type }: { coordinates: any[], type: string }) => {
     switch (type) {
@@ -9,14 +11,12 @@ const convertToClientCoordinates = ({ coordinates, type }: { coordinates: any[],
     case 'Polygon':
         return coordinates[0][0];
     default:
-        return undefined;
+        return DEFAULT_CENTER;
     }
 };
 
-const getCenterPoint = (InnerComponent: ComponentType<any>) => (props: Object) => {
-    const { orgUnit, ...passOnProps } = props;
-
-    const { data, refetch, called } = useDataQuery(
+export const useCenterPoint = (orgUnitId: string | boolean) => {
+    const { error, loading, data, refetch, called } = useDataQuery(
         useMemo(
             () => ({
                 organisationUnits: {
@@ -29,27 +29,28 @@ const getCenterPoint = (InnerComponent: ComponentType<any>) => (props: Object) =
             }),
             [],
         ),
-        {
-            lazy: true,
-        },
+        { lazy: true },
     );
-    if (orgUnit && !called) {
-        refetch({ variables: { orgUnitId: orgUnit.id } });
+
+    if (orgUnitId && !called) {
+        refetch({ variables: { orgUnitId } });
     }
+
     const center = useMemo(() => {
-        if (data?.organisationUnits) {
+        if (!error && data?.organisationUnits) {
             const { geometry, parent } = data.organisationUnits;
             if (geometry) {
                 return convertToClientCoordinates(geometry);
             } else if (parent?.id) {
                 refetch({ variables: { orgUnitId: parent.id } });
             }
-            return undefined;
+            return DEFAULT_CENTER;
         }
         return undefined;
-    }, [data, refetch]);
+    }, [data, refetch, error]);
 
-    return <InnerComponent {...passOnProps} center={center || passOnProps.center} />;
+    return {
+        center,
+        loading,
+    };
 };
-
-export const withCenterPoint = () => (InnerComponent: ComponentType<any>) => getCenterPoint(InnerComponent);
