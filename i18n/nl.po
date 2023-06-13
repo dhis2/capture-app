@@ -3,14 +3,15 @@
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
 # Rica Zamora Duchateau, 2022
+# Charel van den Elsen, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-11-29T10:05:06.420Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
-"Last-Translator: Rica Zamora Duchateau, 2022\n"
-"Language-Team: Dutch (https://www.transifex.com/hisp-uio/teams/100509/nl/)\n"
+"Last-Translator: Charel van den Elsen, 2023\n"
+"Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -117,7 +118,7 @@ msgid "Coordinate"
 msgstr ""
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Inschrijving"
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -147,7 +148,7 @@ msgid "Errors"
 msgstr ""
 
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 msgid "Indicators"
 msgstr ""
@@ -159,7 +160,7 @@ msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Complete"
-msgstr ""
+msgstr "Compleet"
 
 msgid "Warnings found"
 msgstr ""
@@ -222,7 +223,7 @@ msgid "to"
 msgstr ""
 
 msgid "From"
-msgstr ""
+msgstr "Van"
 
 msgid "To"
 msgstr ""
@@ -297,7 +298,7 @@ msgid "Search"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "Duidelijk"
 
 msgid "No results"
 msgstr ""
@@ -324,13 +325,13 @@ msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Nieuw"
 
 msgid "Start again"
 msgstr ""
 
 msgid "Find"
-msgstr ""
+msgstr "Vinden"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -393,7 +394,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "status"
 
 msgid "Comments"
 msgstr ""
@@ -579,7 +580,7 @@ msgid "Assigned to"
 msgstr ""
 
 msgid "New event"
-msgstr ""
+msgstr "Nieuw evenement"
 
 msgid "New event relationship"
 msgstr ""
@@ -666,7 +667,7 @@ msgid "Organisation Unit"
 msgstr "Organisatieëenheid"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registratie"
 
 msgid "Review Duplicates"
 msgstr ""
@@ -693,7 +694,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr ""
+msgstr "Register"
 
 msgid "You dont have access to edit this event"
 msgstr ""
@@ -728,7 +729,7 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Relatie toevoegen"
 
 msgid "Open"
 msgstr ""
@@ -737,13 +738,13 @@ msgid "All accessible"
 msgstr ""
 
 msgid "Selected"
-msgstr ""
+msgstr "Geselecteerd"
 
 msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Selected program"
-msgstr ""
+msgstr "Geselecteerd programma"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
