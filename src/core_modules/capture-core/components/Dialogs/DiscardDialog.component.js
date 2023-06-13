@@ -4,7 +4,7 @@ import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } fr
 import type { Props } from './discardDialog.types';
 
 export const DiscardDialog = ({
-    open, header, text, confirmText, onConfirm, cancelText, onCancel, destructiveText, onDestroy,
+    open, header, text, cancelText, onCancel, destructiveText, onDestroy,
 }: Props) => (
     <Modal hide={!open} onClose={onCancel} small>
         <ModalTitle>
@@ -18,12 +18,9 @@ export const DiscardDialog = ({
                 <Button onClick={onCancel} secondary>
                     {cancelText}
                 </Button>
-                {confirmText ? <Button onClick={onConfirm} primary>
-                    {confirmText}
-                </Button> : null }
-                {destructiveText ? <Button onClick={onDestroy} destructive>
+                <Button onClick={onDestroy} destructive>
                     {destructiveText}
-                </Button> : null}
+                </Button>
             </ButtonStrip>
         </ModalActions>
     </Modal>

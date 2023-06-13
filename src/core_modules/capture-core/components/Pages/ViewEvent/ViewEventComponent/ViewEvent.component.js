@@ -98,7 +98,7 @@ class ViewEventPlain extends Component<Props, State> {
                 <DiscardDialog
                     {...defaultDialogProps}
                     onCancel={() => { this.setState({ warningOpen: false }); }}
-                    onConfirm={() => this.props.onBackToAllEvents()}
+                    onDestroy={() => this.props.onBackToAllEvents()}
                     open={this.state.warningOpen}
                 />
             </div>
