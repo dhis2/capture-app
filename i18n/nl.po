@@ -139,7 +139,7 @@ msgid "Area"
 msgstr "Oppervlakte"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Coördineren"
 
 msgid "Enrollment"
 msgstr "Inschrijving"
@@ -317,7 +317,7 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr ""
+msgstr "Fouten"
 
 msgid "Feedback"
 msgstr "Feedback"
@@ -410,7 +410,7 @@ msgid "Days in the past"
 msgstr ""
 
 msgid "To"
-msgstr ""
+msgstr "Naar"
 
 msgid "This week"
 msgstr "Deze week"
@@ -452,13 +452,13 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "Jaren"
 
 msgid "Months"
-msgstr ""
+msgstr "Maanden"
 
 msgid "Days"
-msgstr ""
+msgstr "Dagen"
 
 msgid "Uploading file"
 msgstr ""
@@ -817,7 +817,7 @@ msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "Toon alles"
 
 msgid "Program"
 msgstr "Programma"
@@ -1157,7 +1157,7 @@ msgid "Error"
 msgstr "Fout"
 
 msgid "Warning"
-msgstr ""
+msgstr "Waarschuwing"
 
 msgid "Comments about this event"
 msgstr ""
@@ -1246,7 +1246,7 @@ msgid "Save changes"
 msgstr "Wijzigingen opslaan"
 
 msgid "Profile"
-msgstr ""
+msgstr "Profiel"
 
 msgid "There is a problem with this form"
 msgstr ""
@@ -1336,10 +1336,10 @@ msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
-msgstr ""
+msgstr "Inactief"
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "Inschrijving Status"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
@@ -1462,7 +1462,7 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Coördinaat instellen"
 
 msgid "Page {{currentPage}}"
 msgstr ""
