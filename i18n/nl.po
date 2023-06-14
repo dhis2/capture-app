@@ -115,7 +115,7 @@ msgid "Area"
 msgstr "Oppervlakte"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Coördineren"
 
 msgid "Enrollment"
 msgstr "Inschrijving"
@@ -145,7 +145,7 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr ""
+msgstr "Fouten"
 
 msgid "Feedback"
 msgstr "Feedback"
@@ -226,7 +226,7 @@ msgid "From"
 msgstr "Van"
 
 msgid "To"
-msgstr ""
+msgstr "Naar"
 
 msgid "This week"
 msgstr "Deze week"
@@ -265,13 +265,13 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "Jaren"
 
 msgid "Months"
-msgstr ""
+msgstr "Maanden"
 
 msgid "Days"
-msgstr ""
+msgstr "Dagen"
 
 msgid "Uploading file"
 msgstr ""
@@ -358,7 +358,7 @@ msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "Toon alles"
 
 msgid "Program"
 msgstr "Programma"
@@ -732,7 +732,7 @@ msgid "Add relationship"
 msgstr "Relatie toevoegen"
 
 msgid "Open"
-msgstr ""
+msgstr "Open"
 
 msgid "All accessible"
 msgstr ""
@@ -768,7 +768,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr ""
+msgstr "Profiel"
 
 msgid "Error saving event"
 msgstr ""
@@ -795,7 +795,7 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Coördinaat instellen"
 
 msgid "Latitude"
 msgstr "Breedtegraad"
