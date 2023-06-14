@@ -124,7 +124,7 @@ msgid "Area"
 msgstr "Oppervlakte"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Coördineren"
 
 msgid "Enrollment"
 msgstr "Inschrijving"
@@ -305,7 +305,7 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr ""
+msgstr "Fouten"
 
 msgid "Feedback"
 msgstr "Feedback"
@@ -377,7 +377,7 @@ msgid "From"
 msgstr "Van"
 
 msgid "To"
-msgstr ""
+msgstr "Naar"
 
 msgid "This week"
 msgstr "Deze week"
@@ -416,13 +416,13 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "Jaren"
 
 msgid "Months"
-msgstr ""
+msgstr "Maanden"
 
 msgid "Days"
-msgstr ""
+msgstr "Dagen"
 
 msgid "Uploading file"
 msgstr ""
@@ -554,7 +554,7 @@ msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "Toon alles"
 
 msgid "Selected program"
 msgstr "Geselecteerd programma"
@@ -977,7 +977,7 @@ msgid "Error"
 msgstr "Fout"
 
 msgid "Warning"
-msgstr ""
+msgstr "Waarschuwing"
 
 msgid "Comments about this event"
 msgstr ""
@@ -1025,7 +1025,7 @@ msgid "Registering unit"
 msgstr "Eenheid registreren"
 
 msgid "Due date"
-msgstr ""
+msgstr "Deadline"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
@@ -1064,7 +1064,7 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "Inschrijving Status"
 
 msgid "Assigned to"
 msgstr ""
@@ -1073,7 +1073,7 @@ msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
-msgstr ""
+msgstr "Inactief"
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -1139,7 +1139,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr ""
+msgstr "Profiel"
 
 msgid "Error saving event"
 msgstr ""
@@ -1175,7 +1175,7 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Coördinaat instellen"
 
 msgid "Page {{currentPage}}"
 msgstr ""
