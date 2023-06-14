@@ -29,7 +29,6 @@ const styles = theme => ({
     },
     footerLeft: {
         display: 'flex',
-        gap: spacers.dp8,
     },
     footerRight: {
         display: 'flex',
