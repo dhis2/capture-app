@@ -1,31 +1,28 @@
 # 
 # Translators:
-# Cherise Beek <cherise.beek@gmail.com>, 2021
-# Yury Rogachev <yury@dhis2.org>, 2021
-# Rica Zamora Duchateau, 2022
-# Charel van den Elsen, 2023
+# Malinda Wijeratne, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Charel van den Elsen, 2023\n"
-"Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
+"Last-Translator: Malinda Wijeratne, 2023\n"
+"Language-Team: Sinhala (https://app.transifex.com/hisp-uio/teams/100509/si/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
+"Language: si\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "දිනය තෝරන්න"
 
 msgid "Today"
-msgstr "Vandaag"
+msgstr "අද"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -40,13 +37,13 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr "Organisatieëenheid"
+msgstr ""
 
 msgid "Date of enrollment"
 msgstr ""
 
 msgid "Last updated"
-msgstr "Laatst bijgewerkt"
+msgstr ""
 
 msgid "Enrolled"
 msgstr ""
@@ -112,22 +109,22 @@ msgid "Please provide valid coordinates"
 msgstr ""
 
 msgid "This value already exists"
-msgstr ""
+msgstr "මෙම අගය දැනටමත් පවතී"
 
 msgid "\"From\" cannot be greater than \"To\""
 msgstr ""
 
 msgid "Checking..."
-msgstr ""
+msgstr "පිරික්සමින්..."
 
 msgid "Area"
-msgstr "Oppervlakte"
+msgstr ""
 
 msgid "Coordinate"
-msgstr "Coördineren"
+msgstr ""
 
 msgid "Enrollment"
-msgstr "Inschrijving"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -136,10 +133,10 @@ msgid "Saving a {{trackedEntityName}} in"
 msgstr ""
 
 msgid "in"
-msgstr "in"
+msgstr ""
 
 msgid "Cancel"
-msgstr "Annuleer"
+msgstr ""
 
 msgid "Metadata error. see log for details"
 msgstr ""
@@ -157,13 +154,13 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr "status"
+msgstr ""
 
 msgid "Comments"
 msgstr ""
 
 msgid "Relationships"
-msgstr "Relaties"
+msgstr ""
 
 msgid "Assignee"
 msgstr ""
@@ -185,10 +182,10 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr "Actief"
+msgstr ""
 
 msgid "Completed"
-msgstr "Voltooid"
+msgstr ""
 
 msgid "Assigned to"
 msgstr ""
@@ -241,19 +238,19 @@ msgid ""
 msgstr ""
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "ඔව්, ඉවතලන්න"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "නැත. මෙතන රැඳෙන්"
 
 msgid "New event"
-msgstr "Nieuw evenement"
+msgstr ""
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr "Sla op"
+msgstr "සුරකින්න"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -299,10 +296,10 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr "Fouten"
+msgstr ""
 
 msgid "Feedback"
-msgstr "Feedback"
+msgstr ""
 
 msgid "Indicators"
 msgstr ""
@@ -311,7 +308,7 @@ msgid "Warnings"
 msgstr ""
 
 msgid "Complete"
-msgstr "Compleet"
+msgstr ""
 
 msgid "Warnings found"
 msgstr ""
@@ -341,7 +338,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "පෙළ ගස්වන්න"
 
 msgid "No events to display"
 msgstr ""
@@ -350,19 +347,19 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr "Sluit"
+msgstr "වසන්න"
 
 msgid "Please select the user"
 msgstr ""
 
 msgid "Me"
-msgstr ""
+msgstr "මම"
 
 msgid "Anyone"
-msgstr ""
+msgstr "ඕනෑම කෙනෙක්"
 
 msgid "None"
-msgstr "Geen"
+msgstr ""
 
 msgid "Select user"
 msgstr ""
@@ -371,70 +368,70 @@ msgid "to"
 msgstr ""
 
 msgid "From"
-msgstr "Van"
-
-msgid "To"
-msgstr "Naar"
-
-msgid "This week"
-msgstr "Deze week"
-
-msgid "This month"
-msgstr "Deze maand"
-
-msgid "This Year"
 msgstr ""
 
+msgid "To"
+msgstr "වෙත"
+
+msgid "This week"
+msgstr "මෙම සතිය"
+
+msgid "This month"
+msgstr "මෙම මාසය"
+
+msgid "This Year"
+msgstr "මෙම වසර"
+
 msgid "Last week"
-msgstr "Laatste week"
+msgstr "පසුගිය සතිය"
 
 msgid "Last month"
-msgstr "Laatste maand"
+msgstr "පසුගිය මාසය"
 
 msgid "Last 3 months"
-msgstr "Laatste 3 maanden"
+msgstr "පසුගිය මාස 3"
 
 msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "Max"
+msgstr "උපරිම"
 
 msgid "Min"
-msgstr "Min"
+msgstr "අවම"
 
 msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "Ja"
+msgstr "ඔව්"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "Jaren"
+msgstr "අවුරුදු"
 
 msgid "Months"
-msgstr "Maanden"
+msgstr "මාස"
 
 msgid "Days"
-msgstr "Dagen"
+msgstr "දින"
 
 msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr "geselecteerd"
+msgstr ""
 
 msgid "Delete"
-msgstr "Verwijderen"
+msgstr "ඉවත් කරන්න"
 
 msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "Nee"
+msgstr "නැත"
 
 msgid "Uploading image"
 msgstr ""
@@ -443,19 +440,19 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "සොයන්න"
 
 msgid "Clear"
-msgstr "Duidelijk"
+msgstr ""
 
 msgid "No results"
 msgstr ""
 
 msgid "Description"
-msgstr "Beschrijving"
+msgstr "විස්තරය"
 
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 msgid "start typing to search"
 msgstr ""
@@ -473,10 +470,10 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr "Kolom"
+msgstr ""
 
 msgid "Apply"
-msgstr "Toepassen"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -509,7 +506,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "New"
-msgstr "Nieuw"
+msgstr "නව"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -530,25 +527,25 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "පිළිගන්න"
 
 msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Select"
-msgstr "Selecteer"
+msgstr ""
 
 msgid "Program"
-msgstr "Programma"
+msgstr ""
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr "Toon alles"
+msgstr ""
 
 msgid "Selected program"
-msgstr "Geselecteerd programma"
+msgstr ""
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -557,7 +554,7 @@ msgid "Select program"
 msgstr ""
 
 msgid "Selected"
-msgstr "Geselecteerd"
+msgstr ""
 
 msgid "Online"
 msgstr ""
@@ -665,19 +662,19 @@ msgid "Registered events"
 msgstr ""
 
 msgid "Enrollment status"
-msgstr "Inschrijving Status"
+msgstr ""
 
 msgid "Cancelled"
-msgstr "Geannuleerd"
+msgstr ""
 
 msgid "Registering unit"
-msgstr "Eenheid registreren"
+msgstr ""
 
 msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
-msgstr "Inactief"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -701,7 +698,7 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "තහවුරු කරන්න"
 
 msgid "Save As view"
 msgstr ""
@@ -741,16 +738,16 @@ msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Link"
-msgstr "Link"
+msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr "Organisatieëenheid"
+msgstr ""
 
 msgid "Registration"
-msgstr "Registratie"
+msgstr ""
 
 msgid "Search results"
 msgstr ""
@@ -771,7 +768,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr "Register"
+msgstr ""
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -787,7 +784,7 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr "Terug"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr ""
@@ -800,7 +797,7 @@ msgid ""
 msgstr ""
 
 msgid "No results found"
-msgstr "Geen resultaten gevonden"
+msgstr ""
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -882,13 +879,13 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr "Relatie toevoegen"
+msgstr ""
 
 msgid "Results found"
 msgstr ""
 
 msgid "Open"
-msgstr "Open"
+msgstr "විවෘත කරන්න"
 
 msgid "All accessible"
 msgstr ""
@@ -921,7 +918,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr "Profiel"
+msgstr ""
 
 msgid "Error saving event"
 msgstr ""
@@ -954,19 +951,19 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "Coördinaat instellen"
+msgstr ""
 
 msgid "Latitude"
-msgstr "Breedtegraad"
+msgstr ""
 
 msgid "Longitude"
-msgstr "Lengtegraad"
+msgstr ""
 
 msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr "Datum\n"
+msgstr "දිනය"
 
 msgid "Time"
 msgstr ""
