@@ -124,10 +124,10 @@ msgid "Area"
 msgstr "Oppervlakte"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Coördineren"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Inschrijving"
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -157,7 +157,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "status"
 
 msgid "Comments"
 msgstr ""
@@ -209,7 +209,7 @@ msgid "Save without completing"
 msgstr ""
 
 msgid "Complete"
-msgstr ""
+msgstr "Compleet"
 
 msgid "No write access"
 msgstr ""
@@ -253,7 +253,7 @@ msgid "No, stay here"
 msgstr ""
 
 msgid "New event"
-msgstr ""
+msgstr "Nieuw evenement"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
@@ -305,10 +305,10 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr ""
+msgstr "Fouten"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 msgid "Indicators"
 msgstr ""
@@ -374,10 +374,10 @@ msgid "to"
 msgstr ""
 
 msgid "From"
-msgstr ""
+msgstr "Van"
 
 msgid "To"
-msgstr ""
+msgstr "Naar"
 
 msgid "This week"
 msgstr "Deze week"
@@ -416,13 +416,13 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "Jaren"
 
 msgid "Months"
-msgstr ""
+msgstr "Maanden"
 
 msgid "Days"
-msgstr ""
+msgstr "Dagen"
 
 msgid "Uploading file"
 msgstr ""
@@ -449,7 +449,7 @@ msgid "Search"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "Duidelijk"
 
 msgid "No results"
 msgstr ""
@@ -518,7 +518,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Nieuw"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -554,10 +554,10 @@ msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "Toon alles"
 
 msgid "Selected program"
-msgstr ""
+msgstr "Geselecteerd programma"
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -566,7 +566,7 @@ msgid "Select program"
 msgstr ""
 
 msgid "Selected"
-msgstr ""
+msgstr "Geselecteerd"
 
 msgid "Online"
 msgstr ""
@@ -726,7 +726,7 @@ msgid "Organisation Unit"
 msgstr "Organisatieëenheid"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registratie"
 
 msgid "Search results"
 msgstr ""
@@ -747,7 +747,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr ""
+msgstr "Register"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -763,7 +763,7 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Terug"
 
 msgid "Search for {{titleText}}"
 msgstr ""
@@ -876,7 +876,7 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Relatie toevoegen"
 
 msgid "Results found"
 msgstr ""
@@ -912,7 +912,7 @@ msgid "Mark incomplete"
 msgstr ""
 
 msgid "Delete enrollment"
-msgstr ""
+msgstr "Inschrijving verwijderen"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
@@ -932,10 +932,10 @@ msgid "Mark for follow-up"
 msgstr ""
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "Inschrijvingsdatum"
 
 msgid "Incident date"
-msgstr ""
+msgstr "Incident datum"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
@@ -977,7 +977,7 @@ msgid "Error"
 msgstr "Fout"
 
 msgid "Warning"
-msgstr ""
+msgstr "Waarschuwing"
 
 msgid "Comments about this event"
 msgstr ""
@@ -1019,13 +1019,13 @@ msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Report date"
-msgstr ""
+msgstr "Rapporteer datum"
 
 msgid "Registering unit"
 msgstr "Eenheid registreren"
 
 msgid "Due date"
-msgstr ""
+msgstr "Deadline"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
@@ -1064,7 +1064,7 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "Inschrijving Status"
 
 msgid "Assigned to"
 msgstr ""
@@ -1073,7 +1073,7 @@ msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
-msgstr ""
+msgstr "Inactief"
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -1139,7 +1139,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr ""
+msgstr "Profiel"
 
 msgid "Error saving event"
 msgstr ""
@@ -1175,7 +1175,7 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Coördinaat instellen"
 
 msgid "Page {{currentPage}}"
 msgstr ""
