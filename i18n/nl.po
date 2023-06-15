@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Charel van den Elsen, 2023\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -139,10 +139,10 @@ msgid "Area"
 msgstr "Oppervlakte"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Coördineren"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Inschrijving"
 
 msgid "Please select {{categoryName}}"
 msgstr ""
@@ -175,7 +175,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "status"
 
 msgid "Comments"
 msgstr ""
@@ -224,7 +224,7 @@ msgid "Save without completing"
 msgstr ""
 
 msgid "Complete"
-msgstr ""
+msgstr "Compleet"
 
 msgid "No write access"
 msgstr ""
@@ -268,7 +268,7 @@ msgid "No, stay here"
 msgstr ""
 
 msgid "New event"
-msgstr ""
+msgstr "Nieuw evenement"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
@@ -317,10 +317,10 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr ""
+msgstr "Fouten"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 msgid "Indicators"
 msgstr ""
@@ -404,13 +404,13 @@ msgid "Days in the future"
 msgstr ""
 
 msgid "From"
-msgstr ""
+msgstr "Van"
 
 msgid "Days in the past"
 msgstr ""
 
 msgid "To"
-msgstr ""
+msgstr "Naar"
 
 msgid "This week"
 msgstr "Deze week"
@@ -452,13 +452,13 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "Jaren"
 
 msgid "Months"
-msgstr ""
+msgstr "Maanden"
 
 msgid "Days"
-msgstr ""
+msgstr "Dagen"
 
 msgid "Uploading file"
 msgstr ""
@@ -485,7 +485,7 @@ msgid "Search"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "Duidelijk"
 
 msgid "No results"
 msgstr ""
@@ -581,6 +581,27 @@ msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
 
 msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
 msgstr ""
 
 msgid "Yes, opt in"
@@ -708,7 +729,7 @@ msgid "Program stage is invalid"
 msgstr ""
 
 msgid "Report"
-msgstr ""
+msgstr "Rapport"
 
 msgid "Schedule"
 msgstr "Schema"
@@ -759,7 +780,7 @@ msgid "Please select an organisation unit."
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Nieuw"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
@@ -796,7 +817,7 @@ msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "Toon alles"
 
 msgid "Program"
 msgstr "Programma"
@@ -805,7 +826,7 @@ msgid "Organisation Unit"
 msgstr "Organisatieëenheid"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registratie"
 
 msgid "Search results"
 msgstr ""
@@ -826,10 +847,10 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr ""
+msgstr "Register"
 
 msgid "Back"
-msgstr ""
+msgstr "Terug"
 
 msgid "events"
 msgstr ""
@@ -891,7 +912,7 @@ msgid "You don't have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Relatie toevoegen"
 
 msgid "No results found for "
 msgstr ""
@@ -999,7 +1020,7 @@ msgid "Results found"
 msgstr ""
 
 msgid "Selected program"
-msgstr ""
+msgstr "Geselecteerd programma"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -1062,7 +1083,7 @@ msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Add new"
-msgstr ""
+msgstr "Nieuw toevoegen"
 
 msgid "Reactivate"
 msgstr ""
@@ -1074,7 +1095,7 @@ msgid "Mark incomplete"
 msgstr ""
 
 msgid "Delete enrollment"
-msgstr ""
+msgstr "Inschrijving verwijderen"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
@@ -1091,10 +1112,10 @@ msgid "Mark for follow-up"
 msgstr ""
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "Inschrijvingsdatum"
 
 msgid "Incident date"
-msgstr ""
+msgstr "Incident datum"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
@@ -1136,7 +1157,7 @@ msgid "Error"
 msgstr "Fout"
 
 msgid "Warning"
-msgstr ""
+msgstr "Waarschuwing"
 
 msgid "Comments about this event"
 msgstr ""
@@ -1178,11 +1199,23 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] ""
+msgstr[1] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1213,7 +1246,7 @@ msgid "Save changes"
 msgstr "Wijzigingen opslaan"
 
 msgid "Profile"
-msgstr ""
+msgstr "Profiel"
 
 msgid "There is a problem with this form"
 msgstr ""
@@ -1245,7 +1278,7 @@ msgstr "Bewerk"
 msgid "New {{ eventName }} event"
 msgstr ""
 
-msgid "This event is not yet preserved and cannot be edited"
+msgid "To open this event, please wait until saving is complete"
 msgstr ""
 
 msgid "Show {{ rest }} more"
@@ -1296,19 +1329,28 @@ msgstr ""
 msgid "an error occurred loading working lists"
 msgstr ""
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
-msgstr ""
+msgstr "Inactief"
 
 msgid "Enrollment status"
-msgstr ""
-
-msgid "Assigned to"
-msgstr ""
+msgstr "Inschrijving Status"
 
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1420,7 +1462,7 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Coördinaat instellen"
 
 msgid "Page {{currentPage}}"
 msgstr ""
