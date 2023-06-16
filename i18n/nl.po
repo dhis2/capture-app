@@ -85,10 +85,10 @@ msgid "Please provide a valid percentage"
 msgstr ""
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Geef een geldige URL op"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "geef alstublieft een geldig email adres"
 
 msgid "Please provide a valid age"
 msgstr ""
@@ -139,7 +139,7 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Nee, blijf hier"
 
 msgid "validation failed"
 msgstr ""
@@ -295,7 +295,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "Zoek"
 
 msgid "Clear"
 msgstr "Duidelijk"
@@ -370,10 +370,10 @@ msgid "No programs available."
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "offline"
 
 msgid "Syncing"
 msgstr ""
@@ -490,7 +490,7 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "Bevestigen"
 
 msgid "Save As view"
 msgstr ""
