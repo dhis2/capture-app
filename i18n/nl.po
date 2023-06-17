@@ -323,7 +323,7 @@ msgid "Feedback"
 msgstr "Feedback"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicatoren"
 
 msgid "Warnings"
 msgstr ""
@@ -643,7 +643,7 @@ msgid "Schedule an event"
 msgstr ""
 
 msgid "Make referral"
-msgstr ""
+msgstr "Doorverwijzen"
 
 msgid "No available program stages"
 msgstr ""
@@ -945,7 +945,7 @@ msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search for"
-msgstr ""
+msgstr "Zoeken"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
@@ -1109,7 +1109,7 @@ msgid "Remove mark for follow-up"
 msgstr ""
 
 msgid "Mark for follow-up"
-msgstr ""
+msgstr "Markeer voor vervolg"
 
 msgid "Enrollment date"
 msgstr "Inschrijvingsdatum"
@@ -1402,7 +1402,7 @@ msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Scheduled"
-msgstr ""
+msgstr "Gepland"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
