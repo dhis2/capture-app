@@ -151,7 +151,7 @@ msgid "Feedback"
 msgstr "Feedback"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicatoren"
 
 msgid "Warnings"
 msgstr ""
@@ -735,13 +735,13 @@ msgid "Open"
 msgstr "Open"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Allemaal toegankelijk"
 
 msgid "Selected"
 msgstr "Geselecteerd"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Bereik organisatie-eenheid"
 
 msgid "Selected program"
 msgstr "Geselecteerd programma"
