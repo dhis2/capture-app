@@ -94,10 +94,10 @@ msgid "Please provide an integer between 0 and 100"
 msgstr ""
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Geef een geldige URL op"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "geef alstublieft een geldig email adres"
 
 msgid "Please provide a valid age"
 msgstr ""
@@ -250,7 +250,7 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Nee, blijf hier"
 
 msgid "New event"
 msgstr "Nieuw evenement"
@@ -311,7 +311,7 @@ msgid "Feedback"
 msgstr "Feedback"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicatoren"
 
 msgid "Warnings"
 msgstr ""
@@ -446,7 +446,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "Zoek"
 
 msgid "Clear"
 msgstr "Duidelijk"
@@ -569,10 +569,10 @@ msgid "Selected"
 msgstr "Geselecteerd"
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "offline"
 
 msgid "Syncing"
 msgstr ""
@@ -769,7 +769,7 @@ msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search for"
-msgstr ""
+msgstr "Zoeken"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
@@ -929,7 +929,7 @@ msgid "Remove mark for follow-up"
 msgstr ""
 
 msgid "Mark for follow-up"
-msgstr ""
+msgstr "Markeer voor vervolg"
 
 msgid "Enrollment date"
 msgstr "Inschrijvingsdatum"
@@ -1097,7 +1097,7 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "Bevestigen"
 
 msgid "Save As view"
 msgstr ""
@@ -1118,7 +1118,7 @@ msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Scheduled"
-msgstr ""
+msgstr "Gepland"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
