@@ -2,7 +2,7 @@
 import React, { type ComponentType, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { Button, spacersNum } from '@dhis2/ui';
+import { Button, spacers } from '@dhis2/ui';
 import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import type { Props } from './scheduleButtons.types';
 import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
@@ -10,9 +10,9 @@ import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
 const styles = {
     container: {
         display: 'flex',
+        gap: spacers.dp8,
     },
     button: {
-        paddingRight: spacersNum.dp16,
     },
 };
 
@@ -33,6 +33,7 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes }: Pro
         <div className={classes.button}>
             <Button
                 onClick={handleCancelClick}
+                secondary
             >
                 {i18n.t('Cancel')}
             </Button>

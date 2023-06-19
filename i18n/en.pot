@@ -1530,5 +1530,8 @@ msgstr "Delete polygon"
 msgid "Set area"
 msgstr "Set area"
 
+msgid "Area on map saved"
+msgstr "Area on map saved"
+
 msgid "Compatibility mode"
 msgstr "Compatibility mode"
