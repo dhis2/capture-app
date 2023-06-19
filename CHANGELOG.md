@@ -1,3 +1,10 @@
+## [100.32.14](https://github.com/dhis2/capture-app/compare/v100.32.13...v100.32.14) (2023-06-19)
+
+
+### Bug Fixes
+
+* [DHIS2-15127] insert correct orgunit group object ([#3270](https://github.com/dhis2/capture-app/issues/3270)) ([14dbbe0](https://github.com/dhis2/capture-app/commit/14dbbe040785c1b0c3cbd51f3af9062a7b089137))
+
 ## [100.32.13](https://github.com/dhis2/capture-app/compare/v100.32.12...v100.32.13) (2023-06-18)
 
 
