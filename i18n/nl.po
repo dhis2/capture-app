@@ -379,7 +379,7 @@ msgid "Syncing"
 msgstr ""
 
 msgid "Add comment"
-msgstr ""
+msgstr "Voeg opmerking toe"
 
 msgid "You dont have access to write comments"
 msgstr ""
