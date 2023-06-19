@@ -1,3 +1,45 @@
+## [100.32.14](https://github.com/dhis2/capture-app/compare/v100.32.13...v100.32.14) (2023-06-19)
+
+
+### Bug Fixes
+
+* [DHIS2-15127] insert correct orgunit group object ([#3270](https://github.com/dhis2/capture-app/issues/3270)) ([14dbbe0](https://github.com/dhis2/capture-app/commit/14dbbe040785c1b0c3cbd51f3af9062a7b089137))
+
+## [100.32.13](https://github.com/dhis2/capture-app/compare/v100.32.12...v100.32.13) (2023-06-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([fb242e6](https://github.com/dhis2/capture-app/commit/fb242e60ec1c4546a31665d7a76403a109279248))
+
+## [100.32.12](https://github.com/dhis2/capture-app/compare/v100.32.11...v100.32.12) (2023-06-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([d14ad97](https://github.com/dhis2/capture-app/commit/d14ad97ea0988b40a9dfa5db60eb50e38262a68f))
+
+## [100.32.11](https://github.com/dhis2/capture-app/compare/v100.32.10...v100.32.11) (2023-06-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([df36162](https://github.com/dhis2/capture-app/commit/df36162600b3c0e66b6dbb421a2bc9b2a6fe08f6))
+
+## [100.32.10](https://github.com/dhis2/capture-app/compare/v100.32.9...v100.32.10) (2023-06-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e79ebf0](https://github.com/dhis2/capture-app/commit/e79ebf0f439cc1a148fa98b433d8494cbeadc87d))
+
+## [100.32.9](https://github.com/dhis2/capture-app/compare/v100.32.8...v100.32.9) (2023-06-09)
+
+
+### Bug Fixes
+
+* updating saving text ([#3251](https://github.com/dhis2/capture-app/issues/3251)) ([12439b6](https://github.com/dhis2/capture-app/commit/12439b6e635d8967f2cff550cfbb144c0d44b3a7))
+
 ## [100.32.8](https://github.com/dhis2/capture-app/compare/v100.32.7...v100.32.8) (2023-06-08)
 
 

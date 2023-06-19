@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-02T09:13:17.085Z\n"
+"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2023\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -584,6 +584,27 @@ msgstr "为 {{programName}} 使用新的注册仪表板"
 
 msgid "Opt in for {{programName}}"
 msgstr "选择加入 {{programName}}"
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
+msgstr ""
 
 msgid "Yes, opt in"
 msgstr "是的，选择加入"
@@ -1259,8 +1280,8 @@ msgstr "编辑"
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
 
-msgid "This event is not yet preserved and cannot be edited"
-msgstr "此事件尚未保留且无法编辑"
+msgid "To open this event, please wait until saving is complete"
+msgstr ""
 
 msgid "Show {{ rest }} more"
 msgstr "显示 {{ rest}} 更多"
@@ -1310,6 +1331,9 @@ msgstr "下载数据"
 msgid "an error occurred loading working lists"
 msgstr "载入工作列表发生错误"
 
+msgid "Assigned to"
+msgstr "指派到"
+
 msgid "Registration Date"
 msgstr "登记日期"
 
@@ -1319,11 +1343,17 @@ msgstr "闲置"
 msgid "Enrollment status"
 msgstr "报名状态"
 
-msgid "Assigned to"
-msgstr "指派到"
-
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "选择要按 {{label}} 筛选的项目阶段"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "工作清单无法更新"
