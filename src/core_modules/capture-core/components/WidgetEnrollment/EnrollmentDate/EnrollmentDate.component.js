@@ -69,13 +69,21 @@ export const EnrollmentDateComponent = ({
                 onRemoveFocus={() => {}}
                 onBlur={(e) => { setSelectedDate(e) }}
             /> */}
-            <div className={classes.column}>
+            {/* <div className={classes.column}>
                 <InputField
                     dense
                     value={selectedDate}
                     onChange={dateChangeHandler}
                 />
-            </div>
+            </div> */}
+            <CalendarInput
+                calendar="gregory"
+                dense
+                label={null}
+                inputWidth="50%"
+                date={selectedDate}
+                onDateSelect={dateChangeHandler}
+            />
             <div className={classes.column}>
             <ButtonStrip>
                 <Button
