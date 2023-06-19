@@ -1,3 +1,10 @@
+## [100.32.15](https://github.com/dhis2/capture-app/compare/v100.32.14...v100.32.15) (2023-06-19)
+
+
+### Bug Fixes
+
+* [DHIS2-15426] ui design changes ([#3179](https://github.com/dhis2/capture-app/issues/3179)) ([557f18b](https://github.com/dhis2/capture-app/commit/557f18b35734bc0918e2a61e2f1bb70bfeef63fc))
+
 ## [100.32.14](https://github.com/dhis2/capture-app/compare/v100.32.13...v100.32.14) (2023-06-19)
 
 
