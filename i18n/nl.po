@@ -578,7 +578,7 @@ msgid "Syncing"
 msgstr ""
 
 msgid "Add comment"
-msgstr ""
+msgstr "Voeg opmerking toe"
 
 msgid "You dont have access to write comments"
 msgstr ""
@@ -894,7 +894,7 @@ msgid "open the Tracker Capture app"
 msgstr ""
 
 msgid "Save comment"
-msgstr ""
+msgstr "Opmerking opslaan"
 
 msgid "Enrollment actions"
 msgstr ""
@@ -909,7 +909,7 @@ msgid "Mark as cancelled"
 msgstr ""
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "Markering onvolledig"
 
 msgid "Delete enrollment"
 msgstr "Inschrijving verwijderen"
