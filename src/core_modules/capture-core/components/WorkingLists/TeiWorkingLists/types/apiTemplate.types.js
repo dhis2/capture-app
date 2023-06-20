@@ -31,12 +31,20 @@ export type ApiDataFilterOptionSet = {|
     in: Array<string>,
 |};
 
-type ApiDataFilterCommon = {|
+type ApiAttributeFilterCommon = {|
     attribute: string,
 |};
 
-export type ApiTEIQueryCriteria = {|
+type ApiDataFilterCommon = {|
+    dataItem: string,
+|};
+
+export type ApiTrackerQueryCriteria = {|
     programStatus?: ?string,
+    programStage?: ?string,
+    status?: ?string,
+    eventOccurredAt?: ?ApiDataFilterDateContents,
+    scheduledAt?: ?ApiDataFilterDateContents,
     occurredAt?: ?ApiDataFilterDateContents,
     enrolledAt?: ?ApiDataFilterDateContents,
     order?: ?string,
@@ -44,6 +52,7 @@ export type ApiTEIQueryCriteria = {|
     assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
     assignedUsers?: Array<string>,
     attributeValueFilters?: ?Array<any>,
+    dataFilters?: ?Array<any>,
 |};
 
 export type ApiDataFilter = (
@@ -54,4 +63,4 @@ export type ApiDataFilter = (
     | ApiDataFilterDate
     | ApiDataFilterOptionSet
 ) &
-    ApiDataFilterCommon;
+    (ApiDataFilterCommon & ApiAttributeFilterCommon);

@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     batchActionTypes as editEventDataEntryBatchActionTypes,

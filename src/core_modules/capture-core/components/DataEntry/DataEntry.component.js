@@ -1,5 +1,6 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
+import { spacers } from '@dhis2/ui';
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { D2Form } from '../D2Form';
@@ -9,6 +10,7 @@ import { getDataEntryKey } from './common/getDataEntryKey';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { Section } from '../Section/Section.component';
 import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
+import { FieldSection } from './FieldSection.component';
 
 const styles = theme => ({
     loadingContainer: {
@@ -17,9 +19,9 @@ const styles = theme => ({
     d2FormContainer: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '10px',
-        paddingTop: 10,
-        paddingBottom: 10,
+        gap: spacers.dp16,
+        marginTop: spacers.dp12,
+        marginBottom: spacers.dp12,
     },
     footerBar: {
         display: 'flex',
@@ -33,7 +35,6 @@ const styles = theme => ({
     },
     button: {
         marginTop: theme.typography.pxToRem(2),
-        paddingRight: theme.spacing.unit * 2,
     },
     horizontalFormInnerContainer: {
         display: 'flex',
@@ -43,7 +44,7 @@ const styles = theme => ({
     verticalFormContainer: {
         flexGrow: 10,
         maxWidth: '100%',
-        paddingTop: theme.typography.pxToRem(10),
+        marginBottom: spacers.dp12,
     },
     verticalFormInnerContainer: {
         maxWidth: theme.typography.pxToRem(892),
@@ -69,8 +70,7 @@ const styles = theme => ({
         marginBottom: theme.typography.pxToRem(10),
     },
     dataEntryFieldSectionContainer: {
-        paddingTop: theme.typography.pxToRem(10),
-        paddingBottom: theme.typography.pxToRem(10),
+        marginBottom: spacers.dp16,
     },
 });
 
@@ -78,6 +78,7 @@ type FieldContainer = {
     field: React.Element<any>,
     placement: $Values<typeof placements>,
     section?: ?string,
+    sectionName?: ?string
 };
 
 type DirectionClasses = {
@@ -170,19 +171,17 @@ class DataEntryPlain extends React.Component<Props> {
             Object.keys(this.props.dataEntrySections).reduce((accSections, sectionKey) => {
                 const section = sections[sectionKey];
                 if (section.placement === placement) {
-                    const sectionFields = fields ?
-                        fields
-                            .filter(fieldContainer => fieldContainer.section === sectionKey)
-                            .map((fieldContainer, index) => (
-                                <React.Fragment
-                                    // using index for now
-                                    key={index} // eslint-disable-line
-                                >
-                                    { fieldContainer.field }
-                                </React.Fragment>
-                            ))
-                        : null;
-
+                    const sectionFields = fields
+                        .filter(fieldContainer => fieldContainer.section === sectionKey);
+                    const sectionFieldsContainer = sectionFields.map((fieldContainer, index, array) => (
+                        <FieldSection
+                            formHorizontal={this.props.formHorizontal}
+                            fieldContainer={fieldContainer}
+                            index={index}
+                            total={array.length}
+                        />
+                    ));
+                    const sectionFieldName = sectionFields.length && sectionFields[0].sectionName;
                     if (sectionFields && sectionFields.length > 0) {
                         accSections.push(
                             <div
@@ -192,11 +191,11 @@ class DataEntryPlain extends React.Component<Props> {
                                 <Section
                                     header={
                                         <SectionHeaderSimple
-                                            title={section.name}
+                                            title={sectionFieldName ?? section.name}
                                         />
                                     }
                                 >
-                                    {sectionFields}
+                                    {sectionFieldsContainer}
                                 </Section>
                             </div>,
                         );
@@ -213,7 +212,12 @@ class DataEntryPlain extends React.Component<Props> {
         const fieldsByPlacement = fields ?
             fields
                 .filter(fieldFilter)
-                .map(fieldContainer => fieldContainer.field)
+                .map((fieldContainer, index, array) => (<FieldSection
+                    formHorizontal={this.props.formHorizontal}
+                    fieldContainer={fieldContainer}
+                    index={index}
+                    total={array.length}
+                />))
             : [];
 
         if (!this.props.formHorizontal) {

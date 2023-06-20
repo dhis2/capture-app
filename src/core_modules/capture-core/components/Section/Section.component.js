@@ -1,15 +1,16 @@
 // @flow
+import { colors } from '@dhis2/ui';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
-const styles = theme => ({
+const styles = () => ({
     container: {
         flexGrow: 1,
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        border: `1px solid ${theme.palette.grey.blueGrey}`,
+        border: `1px solid ${colors.grey300}`,
     },
     mainActionButton: {
         position: 'absolute',

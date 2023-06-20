@@ -20,6 +20,7 @@ export type PlainProps = {|
     onAddNew: () => void,
     onGoBack: () => void,
     onEnrollmentError: (message: string) => void,
+    onEnrollmentSuccess: () => void,
     onCancelEditEvent: () => void,
     onHandleScheduleSave: (eventData: Object) => void,
     pageStatus: string,

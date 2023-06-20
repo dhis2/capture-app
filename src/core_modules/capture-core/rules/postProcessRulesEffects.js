@@ -1,6 +1,6 @@
 // @flow
-import { effectActions } from 'capture-core-utils/rulesEngine';
-import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from 'capture-core-utils/rulesEngine';
+import { effectActions } from '@dhis2/rules-engine-javascript';
+import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from '@dhis2/rules-engine-javascript';
 import type { RenderFoundation } from '.././metaData';
 
 const getAssignEffectsBasedOnHideField = (hideEffects: Array<HideOutputEffect>) =>
@@ -17,19 +17,36 @@ const deduplicateEffectArray = (effectArray: Array<OutputEffect>) => {
 };
 
 const postProcessAssignEffects = ({
+    foundation,
     assignValueEffects,
     hideFieldEffects,
 }: {
+    foundation: RenderFoundation,
     assignValueEffects: Array<AssignOutputEffect>,
     hideFieldEffects: Array<HideOutputEffect>,
-}) => (
+}) => {
+    const optionSets = foundation.getElements().filter(({ optionSet }) => optionSet).reduce((acc, { id, optionSet }) => {
+        // $FlowFixMe
+        acc[id] = optionSet.options;
+        return acc;
+    }, {});
+
+    // If a value gets assigned to an option set it must match one of its available options
+    assignValueEffects.map((effect) => {
+        // Using == because effect.value is always a string whereas option.value can be a number
+        if (optionSets[effect.id] && !optionSets[effect.id].some(option => option.value == effect.value)) {
+            effect.value = null;
+        }
+        return effect;
+    });
+
     // assignValueEffects has precedence over "blank a hidden field"-assignments.
     // This requirement is met by destructuring assignValueEffects *last*.
-    deduplicateEffectArray([
+    return deduplicateEffectArray([
         ...getAssignEffectsBasedOnHideField(hideFieldEffects),
         ...assignValueEffects,
-    ])
-);
+    ]);
+};
 
 const postProcessHideSectionEffects = (
     hideSectionEffects: Array<HideOutputEffect>,
@@ -113,6 +130,7 @@ export function postProcessRulesEffects(
     );
 
     const filteredAssignValueEffects = postProcessAssignEffects({
+        foundation,
         // $FlowFixMe
         assignValueEffects,
         hideFieldEffects,

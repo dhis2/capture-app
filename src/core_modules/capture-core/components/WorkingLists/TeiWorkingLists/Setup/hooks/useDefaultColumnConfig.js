@@ -5,31 +5,32 @@ import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 import { dataElementTypes, type TrackerProgram, type DataElement } from '../../../../../metaData';
 import type { MainColumnConfig, MetadataColumnConfig, TeiWorkingListsColumnConfigs } from '../../types';
 
-const mainConfig: Array<MainColumnConfig> = [
-    {
-        id: 'orgUnit',
-        visible: false,
-        type: dataElementTypes.ORGANISATION_UNIT,
-        header: i18n.t('Registering unit'),
-    },
-    {
-        id: 'createdAt',
-        visible: false,
-        type: dataElementTypes.DATE,
-        header: i18n.t('Registration Date'),
-        filterHidden: true,
-    },
-    {
-        id: 'inactive',
-        visible: false,
-        type: dataElementTypes.BOOLEAN,
-        header: i18n.t('Inactive'),
-        filterHidden: true,
-    },
-].map(field => ({
-    ...field,
-    mainProperty: true,
-}));
+const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumnConfig> =>
+    [
+        {
+            id: 'orgUnit',
+            visible: false,
+            type: dataElementTypes.ORGANISATION_UNIT,
+            header: i18n.t('Registering unit'),
+        },
+        {
+            id: 'createdAt',
+            visible: !hasDisplayInReportsAttributes,
+            type: dataElementTypes.DATE,
+            header: i18n.t('Registration Date'),
+            filterHidden: true,
+        },
+        {
+            id: 'inactive',
+            visible: false,
+            type: dataElementTypes.BOOLEAN,
+            header: i18n.t('Inactive'),
+            filterHidden: true,
+        },
+    ].map(field => ({
+        ...field,
+        mainProperty: true,
+    }));
 
 const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
     [
@@ -45,6 +46,18 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
             type: dataElementTypes.DATE,
             header: programStage.stageForm.getLabel('occurredAt') || i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
         },
+        ...(programStage.hideDueDate === false
+            ? [
+                {
+                    id: ADDITIONAL_FILTERS.scheduledAt,
+                    visible: false,
+                    type: dataElementTypes.DATE,
+                    header:
+                          programStage.stageForm.getLabel('scheduledAt') ||
+                          i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
+                },
+            ]
+            : []),
     ].map(field => ({
         ...field,
         mainProperty: true,
@@ -54,7 +67,7 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
 
 const getEventsMetaDataConfig = (programStage): Array<MetadataColumnConfig> => {
     const stageForm = programStage.stageForm;
-    const sections = programStage.stageForm?.sections ? [...stageForm.sections?.values()] : [];
+    const sections = stageForm?.sections ? [...stageForm.sections?.values()] : [];
 
     return sections.reduce((acc, section) => {
         const dataElements = [...section.elements.values()];
@@ -92,7 +105,12 @@ export const useDefaultColumnConfig = (
     useMemo(() => {
         const { attributes, stages } = program;
         const programStage = programStageId && stages.get(programStageId);
-        const defaultColumns = [...mainConfig, ...getTEIMetaDataConfig(attributes, orgUnitId)];
+        const hasDisplayInReportsAttributes = attributes.some(attribute => attribute.displayInReports);
+
+        const defaultColumns = [
+            ...getMainConfig(hasDisplayInReportsAttributes),
+            ...getTEIMetaDataConfig(attributes, orgUnitId),
+        ];
 
         if (programStageId && programStage) {
             return defaultColumns.concat([

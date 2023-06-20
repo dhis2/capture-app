@@ -1,6 +1,6 @@
 // @flow
 import React, { type ComponentType, useState } from 'react';
-import { Button } from '@dhis2/ui';
+import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
@@ -19,12 +19,10 @@ import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
 
-const styles = ({ typography }) => ({
-    marginTop: {
-        marginTop: typography.pxToRem(2),
-    },
-    marginLeft: {
-        marginLeft: typography.pxToRem(16),
+const styles = () => ({
+    actions: {
+        display: 'flex',
+        gap: spacers.dp8,
     },
 });
 
@@ -58,6 +56,7 @@ const EnrollmentRegistrationEntryPlain =
       orgUnit,
       teiId,
       isUserInteractionInProgress,
+      isSavingInProgress,
       ...rest
   }: PlainProps) => {
       const { push } = useHistory();
@@ -88,6 +87,7 @@ const EnrollmentRegistrationEntryPlain =
                   scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
                   <>
                       <EnrollmentDataEntry
+                          teiId={teiId}
                           orgUnit={orgUnit}
                           programId={selectedScopeId}
                           formFoundation={formFoundation}
@@ -99,7 +99,7 @@ const EnrollmentRegistrationEntryPlain =
                           onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future')}
                           {...rest}
                       />
-                      <div className={classes.marginTop}>
+                      <div className={classes.actions}>
 
                           {
                               onSave &&
@@ -107,6 +107,7 @@ const EnrollmentRegistrationEntryPlain =
                                   dataTest="create-and-link-button"
                                   primary
                                   onClick={onSave}
+                                  loading={isSavingInProgress}
                               >
                                   {saveButtonText}
                               </Button>
@@ -116,7 +117,7 @@ const EnrollmentRegistrationEntryPlain =
                               dataTest="cancel-button"
                               secondary
                               onClick={handleOnCancel}
-                              className={classes.marginLeft}
+                              disabled={isSavingInProgress}
                           >
                               {i18n.t('Cancel')}
                           </Button>

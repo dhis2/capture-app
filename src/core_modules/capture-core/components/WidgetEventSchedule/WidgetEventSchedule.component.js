@@ -9,6 +9,7 @@ import { ScheduleDate } from './ScheduleDate';
 import { ScheduleText } from './ScheduleText';
 import { CommentSection } from '../WidgetComment';
 import type { Props } from './widgetEventSchedule.types';
+import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 
 
 const styles = () => ({
@@ -31,6 +32,23 @@ const styles = () => ({
         flexBasis: '200px',
         flexGrow: 1,
     },
+    containerWrapper: {
+        padding: `${spacers.dp8}  ${spacers.dp16}`,
+    },
+    container: {
+        display: 'flex',
+        alignItems: 'center',
+        paddingTop: 8,
+        paddingBottom: 8,
+    },
+    label: {
+        flexBasis: 200,
+        paddingLeft: 5,
+    },
+    field: {
+        flexBasis: 150,
+        flexGrow: 1,
+    },
 });
 
 const WidgetEventSchedulePlain = ({
@@ -38,7 +56,7 @@ const WidgetEventSchedulePlain = ({
     programId,
     programName,
     stageName,
-    dueDateLabel,
+    displayDueDateLabel,
     orgUnit,
     onCancel,
     onSchedule,
@@ -47,6 +65,11 @@ const WidgetEventSchedulePlain = ({
     scheduleDate,
     suggestedScheduleDate,
     comments,
+    programCategory,
+    selectedCategories,
+    onClickCategoryOption,
+    onResetCategoryOption,
+    categoryOptionsError,
     ...passOnProps
 }: Props) => (
     <div className={classes.wrapper}>
@@ -56,7 +79,9 @@ const WidgetEventSchedulePlain = ({
         >
             <div className={classes.fieldWrapper}>
                 <div className={classes.fieldLabel}>
-                    {dueDateLabel ?? i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } })}
+                    {displayDueDateLabel ?? i18n.t('Schedule date / Due date', {
+                        interpolation: { escapeValue: false } },
+                    )}
                 </div>
                 <div className={classes.fieldContent}>
                     <ScheduleDate
@@ -70,6 +95,20 @@ const WidgetEventSchedulePlain = ({
                 </div>
             </div>
         </DataSection>
+        {programCategory && <DataSection
+            dataTest="category-options-section"
+            sectionName={programCategory.displayName}
+        >
+            <CategoryOptions
+                categories={programCategory.categories}
+                selectedOrgUnitId={orgUnit?.id}
+                selectedCategories={selectedCategories}
+                categoryOptionsError={categoryOptionsError}
+                onClickCategoryOption={onClickCategoryOption}
+                onResetCategoryOption={onResetCategoryOption}
+                required
+            />
+        </DataSection>}
         <DataSection
             dataTest="comment-section"
             sectionName={i18n.t('Event comments')}

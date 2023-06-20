@@ -4,6 +4,9 @@ import type {
     SharingSettings,
 } from '../../WorkingListsBase';
 
+export const workingListsCommonActionTypesBatchActionTypes = {
+    TEMPLATE_ADD_SUCCESS: 'WorkingListsTemplateAddSuccessBatchAction',
+};
 
 export const workingListsCommonActionTypes = {
     TEMPLATES_FETCH: 'WorkingListsTemplatesFetch',
@@ -20,6 +23,7 @@ export const workingListsCommonActionTypes = {
     TEMPLATE_UPDATE: 'WorkingListsTemplateUpdate',
     TEMPLATE_UPDATE_SUCCESS: 'WorkingListsTemplateUpdateSuccess',
     TEMPLATE_UPDATE_ERROR: 'WorkingListsTemplateUpdateError',
+    TEMPLATE_DEFAULT_UPDATE: 'WorkingListsTemplateDefaultUpdate',
     LIST_VIEW_INIT: 'WorkingListsListViewInit',
     LIST_VIEW_INIT_SUCCESS: 'WorkingListsListViewInitSuccess',
     LIST_VIEW_INIT_ERROR: 'WorkingListsListViewInitError',
@@ -65,8 +69,8 @@ export const fetchTemplatesError = (error: string, storeId: string) =>
 export const fetchTemplatesCancel = (storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH_CANCEL)({ storeId });
 
-export const selectTemplate = (templateId: string, storeId: string) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATE_SELECT)({ templateId, storeId });
+export const selectTemplate = (templateId: string, storeId: string, programStageId?: string) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_SELECT)({ templateId, storeId, programStageId });
 
 export const updateTemplate = (template: Object, criteria: Object, data: Object) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE)({ template, criteria, ...data });
@@ -89,7 +93,7 @@ export const addTemplateError = (clientId: Object, data: Object) =>
 export const deleteTemplate = (
     template: Object,
     programId: string,
-    { storeId, workingListsType }: { storeId: string, workingListsType: string },
+    { storeId, workingListsType, programStageId }: { storeId: string, workingListsType: string, programStageId?: string },
     callBacks?: Object,
 ) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_DELETE)({
@@ -98,6 +102,7 @@ export const deleteTemplate = (
         storeId,
         workingListsType,
         callBacks,
+        programStageId,
     });
 
 export const deleteTemplateSuccess = (template: Object, storeId: string) =>
@@ -168,3 +173,6 @@ export const changeRowsPerPage = (rowsPerPage: number, storeId: string) =>
 
 export const setTemplateSharingSettings = (sharingSettings: SharingSettings, templateId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_SHARING_SETTINGS_SET)({ sharingSettings, templateId, storeId });
+
+export const updateDefaultTemplate = (defaultTemplate: Object, storeId: string) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_DEFAULT_UPDATE)({ defaultTemplate, storeId });

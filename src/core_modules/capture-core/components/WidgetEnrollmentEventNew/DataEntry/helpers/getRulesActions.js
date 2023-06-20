@@ -1,5 +1,5 @@
 // @flow
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getCurrentClientValues,

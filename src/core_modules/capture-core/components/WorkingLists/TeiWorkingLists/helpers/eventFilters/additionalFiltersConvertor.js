@@ -2,12 +2,14 @@
 export const ADDITIONAL_FILTERS = {
     programStage: 'programStage',
     occurredAt: 'eventOccurredAt',
+    scheduledAt: 'scheduledAt',
     status: 'status',
 };
 
 export const ADDITIONAL_FILTERS_LABELS = {
     programStage: 'Program stage',
     occurredAt: 'Report date',
+    scheduledAt: 'Scheduled date',
     status: 'Event status',
 };
 

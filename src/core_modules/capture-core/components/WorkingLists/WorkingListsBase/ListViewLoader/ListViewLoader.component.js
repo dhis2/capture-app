@@ -49,7 +49,6 @@ const useLoadView = ({
 
     const triggerLoad = useCalculateTriggerLoad({
         programId,
-        programStageId,
         categories,
         loadedViewContext,
         currentTemplate,

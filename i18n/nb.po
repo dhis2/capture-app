@@ -1,16 +1,15 @@
 # 
 # Translators:
-# phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2022
+# Karoline Tufte Lien <karoline@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
-"Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2023\n"
+"Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -44,23 +43,35 @@ msgstr ""
 "denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
 "at dette vil lukke andre versjoner."
 
-msgid "Organisation unit"
-msgstr "Organisasjonsenhet"
+msgid "View {{programName}} dashboard"
+msgstr "Vis {{programName}} dashbord"
 
-msgid "Date of enrollment"
-msgstr "Dato for registrering"
+msgid "View dashboard"
+msgstr "Vis dashbord"
 
-msgid "Program name"
-msgstr "Programnavn"
+msgid "View active enrollment"
+msgstr "Vis aktiv registrering"
 
-msgid "Last updated"
-msgstr "Sist oppdatert"
+msgid "Re-enroll"
+msgstr "Registrer på nytt"
+
+msgid "in"
+msgstr "i"
 
 msgid "Enrolled"
 msgstr "Registrert"
 
 msgid "Previously enrolled"
 msgstr "Tidligere registrert"
+
+msgid "Organisation unit"
+msgstr "Organisasjonsenhet"
+
+msgid "Date of enrollment"
+msgstr "Dato for registrering"
+
+msgid "Last updated"
+msgstr "Sist oppdatert"
 
 msgid "This value is validating"
 msgstr "Denne verdien validerer"
@@ -136,6 +147,9 @@ msgstr "Koordinater"
 
 msgid "Enrollment"
 msgstr "Registrering"
+
+msgid "Please select {{categoryName}}"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
@@ -280,9 +294,6 @@ msgstr "uten"
 msgid "enrollment"
 msgstr "registrering"
 
-msgid "in"
-msgstr "i"
-
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Registrer i et program ved å velge et program fra topplinjen."
 
@@ -315,11 +326,6 @@ msgstr "Vis registrert {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Registrert person"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
-"denne hendelsen."
-
 msgid "validation failed"
 msgstr "validering mislyktes"
 
@@ -345,7 +351,12 @@ msgid "No, cancel"
 msgstr "Nei, avbryt"
 
 msgid "Yes, create new event"
+msgstr "Ja, legg til ny hendelse"
+
+msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
+"denne hendelsen."
 
 msgid "Warnings found"
 msgstr "Advarsler funnet"
@@ -549,7 +560,7 @@ msgid "More filters"
 msgstr "Flere filtre"
 
 msgid "Stage filters"
-msgstr ""
+msgstr "Fasefilter"
 
 msgid "Rows per page"
 msgstr "Rader per side"
@@ -587,6 +598,27 @@ msgstr "Bruk nytt registreringsdashbord for {{programName}}"
 msgid "Opt in for {{programName}}"
 msgstr "Meld på for {{programName}}"
 
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
+msgstr ""
+
 msgid "Yes, opt in"
 msgstr "Ja, meld på"
 
@@ -605,8 +637,9 @@ msgstr ""
 "Det oppsto en feil under åpningen av denne registreringen. Vennligst skriv "
 "inn en gyldig url."
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Registrering med ID-en \"{{enrollmentId}}\" eksisterer ikke"
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
 
 msgid "Enrollment Dashboard"
 msgstr "Registreringsdashbord"
@@ -647,8 +680,20 @@ msgid ""
 msgstr ""
 "{{programName}} har kategorier. Velg alle kategorier for å se dashbordet."
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Velg en registrering for å se dashbordet."
+
+msgid "There are no active enrollments."
+msgstr ""
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid "No access to program owner."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
@@ -715,8 +760,8 @@ msgstr "Planlegg"
 msgid "Refer"
 msgstr "Henvis"
 
-msgid "You can’t add any more events in this program"
-msgstr "Du kan ikke legge til flere hendelser i dette programmet"
+msgid "You can’t add any more {{ programStageName }} events"
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "Avbryt uten å lagre"
@@ -727,8 +772,8 @@ msgstr "Velg fase for ny hendelse"
 msgid "Program Stages could not be loaded"
 msgstr "Programfaser kunne ikke lastes inn"
 
-msgid "stage"
-msgstr "fase"
+msgid "Stage"
+msgstr "Fase"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Registrering{{escape}} Vis hendelse"
@@ -766,9 +811,6 @@ msgstr "Velg {{missingCategories}} for å starte rapportering"
 msgid "Save as new"
 msgstr "Lagre som ny"
 
-msgid "View dashboard"
-msgstr "Vis dashbord"
-
 msgid "View enrollment"
 msgstr "Se registrering"
 
@@ -784,7 +826,7 @@ msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Ny registrering i programmet{{escape}} {{programName}}"
 
 msgid "Save {{trackedEntityName}}"
-msgstr ""
+msgstr "Lagre {{trackedEntityName}}"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Opprett ny {{trackedEntityTypeName}} og link"
@@ -831,102 +873,8 @@ msgstr "Opprett ny {{trackedEntityType}}"
 msgid "Register"
 msgstr "Registrere"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Fyll inn minst {{minAttributesRequiredToSearch}} attributter for å søke"
-
-msgid "Search {{name}}"
-msgstr "Søk {{name}}"
-
-msgid "Search by {{name}}"
-msgstr "Søk etter {{name}}"
-
-msgid "Search by attributes"
-msgstr "Søk etter attributter"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr "Fyll ut disse feltene for å søke{{escape}} {{ searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Fyll ut minst {{minAttributesRequiredToSearch}} av disse feltene for å "
-"søke{{escape}} {{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "Fyll ut dette feltet for å søke {{escape}} {{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "Ingen resultater funnet"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
-
-msgid "Register a user"
-msgstr "Registrer en bruker"
-
-msgid "Back to search"
-msgstr "Tilbake til søk"
-
-msgid "An error has occurred"
-msgstr "Det har oppstått en feil"
-
-msgid "Too many results"
-msgstr "For mange resultat"
-
-msgid "Cannot search in all programs"
-msgstr "Kan ikke søke i alle programmer"
-
 msgid "Back"
 msgstr "Tilbake"
-
-msgid "Search for {{titleText}}"
-msgstr "Søk etter {{titleText}}"
-
-msgid "Search for"
-msgstr "Søk etter"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "Du kan også velge et program fra topplinjen og søke i det programmet"
-
-msgid "Choose a type to start searching"
-msgstr "Velg en type for å begynne å søke"
-
-msgid "View active enrollment"
-msgstr "Vis aktiv registrering"
-
-msgid "Re-enroll"
-msgstr "Registrer på nytt"
-
-msgid "all programs"
-msgstr "alle programmer"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Finner du ikke resultatene du leter etter? Prøv å søke i alle programmer som"
-" bruker type"
-
-msgid "Search in all programs"
-msgstr "Søk i alle programmer"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Opprett ny"
-
-msgid "Saved lists in this program"
-msgstr "Lagrede lister i dette programmet"
-
-msgid "Create custom working list"
-msgstr "Lag tilpasset arbeidsliste"
 
 msgid "events"
 msgstr "hendelser"
@@ -977,6 +925,9 @@ msgstr "Organisasjonsenhet kunne ikke lastes inn"
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
 
+msgid "No results found"
+msgstr "Ingen resultater funnet"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "En feil oppsto ved lasting av mulige duplikater"
 
@@ -989,44 +940,137 @@ msgstr "Du har ikke tilgang til å opprette noen relasjoner"
 msgid "Add relationship"
 msgstr "Legg til relasjon"
 
-msgid "Selected registering unit"
-msgstr "Valgt registreringsenhet"
+msgid "No results found for "
+msgstr ""
 
-msgid "Start Again"
-msgstr "Start på nytt"
+msgid "Registering unit"
+msgstr "Registreringsenhet"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Er du sikker? All data som ikke er lagret vil bli borte."
+msgid "Choose a registering unit"
+msgstr ""
 
-msgid "Accept"
-msgstr "Aksepter"
-
-msgid "Registering Organisation Unit"
-msgstr "Registrering av organisasjonsenhet"
-
-msgid "Select"
-msgstr "Velg"
+msgid "Clear selection"
+msgstr "Fjern valg"
 
 msgid "No programs available."
 msgstr "Ingen programmer tilgjengelig."
 
-msgid "Selected program"
-msgstr "Valgt program"
+msgid "Search for a program"
+msgstr ""
 
-msgid "Select program"
-msgstr "Velg program"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr ""
 
-msgid "Selected"
-msgstr "Valgt"
+msgid "Show all programs"
+msgstr ""
+
+msgid "Choose a program"
+msgstr "Velg et program"
+
+msgid "Search for {{titleText}}"
+msgstr "Søk etter {{titleText}}"
+
+msgid "Search for"
+msgstr "Søk etter"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "Du kan også velge et program fra topplinjen og søke i det programmet"
+
+msgid "Choose a type to start searching"
+msgstr "Velg en type for å begynne å søke"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Search {{name}}"
+msgstr "Søk {{name}}"
+
+msgid "Search by {{name}}"
+msgstr "Søk etter {{name}}"
+
+msgid "Search by attributes"
+msgstr "Søk etter attributter"
+
+msgid "all programs"
+msgstr "alle programmer"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Finner du ikke resultatene du leter etter? Prøv å søke i alle programmer som"
+" bruker type"
+
+msgid "Search in all programs"
+msgstr "Søk i alle programmer"
+
+msgid "If none of search results match, you can create a new "
+msgstr "Hvis ingen av søkeresultatene samsvarer, kan du opprette ny"
+
+msgid "Create new"
+msgstr "Opprett ny"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr "Fyll ut disse feltene for å søke{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Fyll ut minst {{minAttributesRequiredToSearch}} av disse feltene for å "
+"søke{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "Fyll ut dette feltet for å søke {{escape}} {{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
+
+msgid "Back to search"
+msgstr "Tilbake til søk"
+
+msgid "An error has occurred"
+msgstr "Det har oppstått en feil"
+
+msgid "Too many results"
+msgstr "For mange resultat"
+
+msgid "Cannot search in all programs"
+msgstr "Kan ikke søke i alle programmer"
+
+msgid "Missing search criteria"
+msgstr ""
 
 msgid "Results found"
 msgstr "Resultater funnet"
 
+msgid "Selected program"
+msgstr "Valgt program"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Fyll inn minst {{minAttributesRequired}} attributter for å søke"
+msgid "Saved lists in this program"
+msgstr "Lagrede lister i dette programmet"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+"Lagrede lister gir rask tilgang til dine mest brukte visninger i et program."
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+"Det er ingen lagrede lister i dette programmet ennå, lag en ved å bruke "
+"knappen nedenfor."
+
+msgid "Create saved list"
+msgstr "Lag lagret liste"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Ny {{trackedEntityName}} i {{programName}}"
@@ -1034,14 +1078,30 @@ msgstr "Ny {{trackedEntityName}} i {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
 
-msgid "Clear selections"
-msgstr "Tøm valg"
-
 msgid "To work with the selected program,"
 msgstr "For å jobbe med det valgte programmet,"
 
 msgid "open the Tracker Capture app"
 msgstr "åpne Tracker Capture app"
+
+msgid "This program is protected"
+msgstr ""
+
+msgid "Reason to check for enrollments"
+msgstr ""
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+
+msgid "Check for enrollments"
+msgstr ""
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
 
 msgid "Save comment"
 msgstr "Lagre kommentar"
@@ -1092,9 +1152,6 @@ msgstr "Registreringsdato"
 msgid "Incident date"
 msgstr "Forekomstdato"
 
-msgid "Last updated {{date}}"
-msgstr "Sist oppdatert {{date}}"
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "Registreringsmodulen kunne ikke lastes inn. Prøv igjen senere"
 
@@ -1106,6 +1163,9 @@ msgstr "Begynt på {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Eid av {{ownerOrgUnit}}"
+
+msgid "Last updated {{date}}"
+msgstr "Sist oppdatert {{date}}"
 
 msgid "Cancelled"
 msgstr "Kansellert"
@@ -1156,7 +1216,7 @@ msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "Gå til \"Planlegg\"-fanen for å endre planlagt dato for denne hendelsen"
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
-msgstr ""
+msgstr "Planlagt dato kan ikke endres for {{ eventStatus }} hendelser"
 
 msgid "Event completed"
 msgstr "Hendelse fullført"
@@ -1168,17 +1228,21 @@ msgid "Schedule date info"
 msgstr "Informasjon for planlagt dato"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
-msgstr ""
+msgstr "Planlagt automatisk for {{suggestedScheduleDate}}"
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
+"Den planlagte datoen samsvarer med den foreslåtte datoen, men kan endres om "
+"nødvendig."
 
 msgid "The scheduled date is {{count}} days {{position}} the suggested date."
 msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
+"Den planlagte datoen er {{count}} dag {{posisjon}} den foreslåtte datoen."
 msgstr[1] ""
+"Den planlagte datoen er {{count}} dager {{posisjon}} den foreslåtte datoen."
 
 msgid "after"
 msgstr "etter"
@@ -1258,8 +1322,8 @@ msgstr "Rediger"
 msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"
 
-msgid "This event is not yet preserved and cannot be edited"
-msgstr "Denne hendelsen er ikke bevart ennå og kan ikke redigeres"
+msgid "To open this event, please wait until saving is complete"
+msgstr ""
 
 msgid "Show {{ rest }} more"
 msgstr "Vis {{ rest }} flere"
@@ -1275,9 +1339,6 @@ msgstr "Denne fasen kan bare ha en hendelse"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Hendelser kunne ikke hentes. Prøv igjen senere."
-
-msgid "Registering unit"
-msgstr "Registreringsenhet"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} hendelser"
@@ -1312,14 +1373,8 @@ msgstr "Last ned data..."
 msgid "an error occurred loading working lists"
 msgstr "en feil oppstod ved lasting av arbeidslister"
 
-msgid "Enrollment status"
-msgstr "Registreringsstatus"
-
 msgid "Assigned to"
 msgstr "Tildelt til"
-
-msgid "Choose a program stage to filter by {{label}}"
-msgstr ""
 
 msgid "Registration Date"
 msgstr "Innregistreringsdato"
@@ -1327,8 +1382,26 @@ msgstr "Innregistreringsdato"
 msgid "Inactive"
 msgstr "Inaktiv"
 
+msgid "Enrollment status"
+msgstr "Registreringsstatus"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr "Velg en programfase å filtrere etter {{label}}"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
 msgid "Working list could not be updated"
 msgstr "Arbeidslisten kunne ikke oppdateres"
+
+msgid "an error occurred loading the working lists"
+msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "det oppstod en feil ved lasting av lister over sporede enheter"

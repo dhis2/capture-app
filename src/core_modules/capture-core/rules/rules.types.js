@@ -8,7 +8,7 @@ import type {
     ProgramRule,
     ProgramRuleVariable,
     TrackedEntityAttribute,
-} from 'capture-core-utils/rulesEngine';
+} from '@dhis2/rules-engine-javascript';
 import type { ProgramStage, TrackerProgram, EventProgram, RenderFoundation } from '../metaData';
 
 export type GetApplicableRuleEffectsForTrackerProgramInput = {|

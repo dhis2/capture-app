@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useEffect } from 'react';
+import React, { type ComponentType } from 'react';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useDispatch } from 'react-redux';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24, Tooltip } from '@dhis2/ui';
@@ -13,7 +13,7 @@ import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../metaData';
-import { cleanUpDataEntry } from '../DataEntry';
+import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 
 const styles = {
     header: {
@@ -59,13 +59,9 @@ export const WidgetEventEditPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
 
-    useEffect(() => () => {
-        dispatch(cleanUpDataEntry(dataEntryIds.ENROLLMENT_EVENT));
-    }, [dispatch]);
-
     const eventAccess = getProgramEventAccess(programId, programStage.id);
     const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
-
+    const { programCategory } = useCategoryCombinations(programId);
     if (error) {
         return error.errorComponent;
     }
@@ -97,7 +93,7 @@ export const WidgetEventEditPlain = ({
                                     secondary
                                     disabled={!eventAccess?.write}
                                     className={classes.button}
-                                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit))}
+                                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
                                 >
                                     <IconEdit24 />
                                     {i18n.t('Edit event')}
@@ -129,6 +125,7 @@ export const WidgetEventEditPlain = ({
                 <div className={classes.form}>
                     {currentPageMode === dataEntryKeys.VIEW ? (
                         <ViewEventDataEntry
+                            programId={programId}
                             formFoundation={programStage.stageForm}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             hideDueDate={programStage.hideDueDate}

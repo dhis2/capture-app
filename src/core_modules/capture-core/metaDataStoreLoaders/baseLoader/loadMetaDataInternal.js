@@ -8,6 +8,7 @@ import {
 import { loadPrograms } from '../programs';
 import { loadTrackedEntityTypes } from '../trackedEntityTypes';
 import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
+import { loadDataElements } from '../dataElements';
 import { loadCategories } from '../categories';
 import { loadOptionSets } from '../optionSets';
 import { confirmLoadingSequence } from './confirmLoadingSequence';
@@ -32,6 +33,7 @@ export const loadMetaDataInternal = async () => {
     const {
         optionSetsOutline: optionSetsOutlineFromPrograms,
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromPrograms,
+        dataElementIds,
         categories,
         trackedEntityTypeIds,
         changesDetected,
@@ -49,6 +51,8 @@ export const loadMetaDataInternal = async () => {
         ...trackedEntityAttributeIdsFromPrograms,
         ...trackedEntityAttributeIdsFromTrackedEntityTypes,
     ]);
+
+    await loadDataElements(dataElementIds);
 
     await loadCategories(categories);
 
