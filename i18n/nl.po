@@ -3,14 +3,15 @@
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
 # Rica Zamora Duchateau, 2022
+# Charel van den Elsen, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Rica Zamora Duchateau, 2022\n"
-"Language-Team: Dutch (https://www.transifex.com/hisp-uio/teams/100509/nl/)\n"
+"Last-Translator: Charel van den Elsen, 2023\n"
+"Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -93,10 +94,10 @@ msgid "Please provide a valid percentage"
 msgstr ""
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Geef een geldige URL op"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "geef alstublieft een geldig email adres"
 
 msgid "Please provide a valid age"
 msgstr ""
@@ -123,10 +124,10 @@ msgid "Area"
 msgstr "Oppervlakte"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Coördineren"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Inschrijving"
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -156,7 +157,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "status"
 
 msgid "Comments"
 msgstr ""
@@ -243,10 +244,10 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Nee, blijf hier"
 
 msgid "New event"
-msgstr ""
+msgstr "Nieuw evenement"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
@@ -298,19 +299,19 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr ""
+msgstr "Fouten"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicatoren"
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Complete"
-msgstr ""
+msgstr "Compleet"
 
 msgid "Warnings found"
 msgstr ""
@@ -370,10 +371,10 @@ msgid "to"
 msgstr ""
 
 msgid "From"
-msgstr ""
+msgstr "Van"
 
 msgid "To"
-msgstr ""
+msgstr "Naar"
 
 msgid "This week"
 msgstr "Deze week"
@@ -412,13 +413,13 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "Jaren"
 
 msgid "Months"
-msgstr ""
+msgstr "Maanden"
 
 msgid "Days"
-msgstr ""
+msgstr "Dagen"
 
 msgid "Uploading file"
 msgstr ""
@@ -442,10 +443,10 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "Zoek"
 
 msgid "Clear"
-msgstr ""
+msgstr "Duidelijk"
 
 msgid "No results"
 msgstr ""
@@ -475,7 +476,7 @@ msgid "Column"
 msgstr "Kolom"
 
 msgid "Apply"
-msgstr ""
+msgstr "Toepassen"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -508,7 +509,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Nieuw"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -544,10 +545,10 @@ msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "Toon alles"
 
 msgid "Selected program"
-msgstr ""
+msgstr "Geselecteerd programma"
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -556,19 +557,19 @@ msgid "Select program"
 msgstr ""
 
 msgid "Selected"
-msgstr ""
+msgstr "Geselecteerd"
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "offline"
 
 msgid "Syncing"
 msgstr ""
 
 msgid "Add comment"
-msgstr ""
+msgstr "Voeg opmerking toe"
 
 msgid "You dont have access to write comments"
 msgstr ""
@@ -664,19 +665,19 @@ msgid "Registered events"
 msgstr ""
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "Inschrijving Status"
 
 msgid "Cancelled"
 msgstr "Geannuleerd"
 
 msgid "Registering unit"
-msgstr ""
+msgstr "Eenheid registreren"
 
 msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
-msgstr ""
+msgstr "Inactief"
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -700,7 +701,7 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "Bevestigen"
 
 msgid "Save As view"
 msgstr ""
@@ -749,7 +750,7 @@ msgid "Organisation Unit"
 msgstr "Organisatieëenheid"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registratie"
 
 msgid "Search results"
 msgstr ""
@@ -770,7 +771,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr ""
+msgstr "Register"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -786,13 +787,13 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Terug"
 
 msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search for"
-msgstr ""
+msgstr "Zoeken"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
@@ -881,19 +882,19 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Relatie toevoegen"
 
 msgid "Results found"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "Open"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Allemaal toegankelijk"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Bereik organisatie-eenheid"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -920,7 +921,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr ""
+msgstr "Profiel"
 
 msgid "Error saving event"
 msgstr ""
@@ -953,7 +954,7 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Coördinaat instellen"
 
 msgid "Latitude"
 msgstr "Breedtegraad"
