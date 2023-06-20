@@ -1,30 +1,31 @@
 // @flow
+import { colors, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import type { Props } from './eventWorkingListsInitHeader.types';
 
-const getStyles = ({ typography, palette }) => ({
-    headerContainer: {
-        padding: typography.pxToRem(24),
-        borderColor: palette.type === 'light'
-            ? palette.dividerLighter
-            : palette.dividerDarker,
-        borderWidth: '0 0 1px 0',
-        borderStyle: 'solid',
+const getStyles = () => ({
+    container: {
+        background: colors.white,
+        border: '1px solid',
+        borderColor: colors.grey400,
+        borderRadius: 3,
+        padding: spacers.dp16,
     },
-    listContainer: {
-        padding: typography.pxToRem(24),
+    headerContainer: {
+        marginBottom: spacers.dp16,
     },
     title: {
-        ...typography.title,
+        fontSize: 16,
+        color: colors.grey800,
+        fontWeight: 500,
     },
 });
 
 const EventWorkingListsInitHeaderPlain =
-    ({ children, classes: { headerContainer, listContainer, title } }: Props) => (
-        <Paper>
+    ({ children, classes: { container, headerContainer, listContainer, title } }: Props) => (
+        <div className={container}>
             <div
                 className={headerContainer}
             >
@@ -39,7 +40,7 @@ const EventWorkingListsInitHeaderPlain =
             >
                 {children}
             </div>
-        </Paper>
+        </div>
     );
 
 export const EventWorkingListsInitHeader: ComponentType<$Diff<Props, CssClasses>> =

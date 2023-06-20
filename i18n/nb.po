@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2023\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -44,7 +44,7 @@ msgstr ""
 "at dette vil lukke andre versjoner."
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "Vis {{programName}} dashbord"
 
 msgid "View dashboard"
 msgstr "Vis dashbord"
@@ -598,6 +598,27 @@ msgstr "Bruk nytt registreringsdashbord for {{programName}}"
 msgid "Opt in for {{programName}}"
 msgstr "Meld på for {{programName}}"
 
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
+msgstr ""
+
 msgid "Yes, opt in"
 msgstr "Ja, meld på"
 
@@ -929,7 +950,7 @@ msgid "Choose a registering unit"
 msgstr ""
 
 msgid "Clear selection"
-msgstr ""
+msgstr "Fjern valg"
 
 msgid "No programs available."
 msgstr "Ingen programmer tilgjengelig."
@@ -1215,11 +1236,26 @@ msgstr ""
 "Den planlagte datoen samsvarer med den foreslåtte datoen, men kan endres om "
 "nødvendig."
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+"Den planlagte datoen er {{count}} dag {{posisjon}} den foreslåtte datoen."
+msgstr[1] ""
+"Den planlagte datoen er {{count}} dager {{posisjon}} den foreslåtte datoen."
+
 msgid "after"
 msgstr "etter"
 
 msgid "before"
 msgstr "før"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "Det er {{count}} planlagt hendelse i {{orgUnitName}} denne dagen."
+msgstr[1] ""
+"Det er {{count}} planlagte hendelser i {{orgUnitName}} denne dagen."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1286,8 +1322,8 @@ msgstr "Rediger"
 msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"
 
-msgid "This event is not yet preserved and cannot be edited"
-msgstr "Denne hendelsen er ikke bevart ennå og kan ikke redigeres"
+msgid "To open this event, please wait until saving is complete"
+msgstr ""
 
 msgid "Show {{ rest }} more"
 msgstr "Vis {{ rest }} flere"
@@ -1337,6 +1373,9 @@ msgstr "Last ned data..."
 msgid "an error occurred loading working lists"
 msgstr "en feil oppstod ved lasting av arbeidslister"
 
+msgid "Assigned to"
+msgstr "Tildelt til"
+
 msgid "Registration Date"
 msgstr "Innregistreringsdato"
 
@@ -1346,11 +1385,17 @@ msgstr "Inaktiv"
 msgid "Enrollment status"
 msgstr "Registreringsstatus"
 
-msgid "Assigned to"
-msgstr "Tildelt til"
-
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Velg en programfase å filtrere etter {{label}}"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "Arbeidslisten kunne ikke oppdateres"

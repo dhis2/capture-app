@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký, 2023\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -593,6 +593,27 @@ msgstr "Použít nový ovládací panel zápisu pro {{programName}}"
 
 msgid "Opt in for {{programName}}"
 msgstr "Přihlásit se do {{programName}}"
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
+msgstr ""
 
 msgid "Yes, opt in"
 msgstr "Ano, přihlásit se"
@@ -1214,11 +1235,30 @@ msgstr ""
 "Naplánované datum odpovídá navrhovanému datu, ale v případě potřeby jej lze "
 "změnit."
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 msgid "after"
 msgstr "po"
 
 msgid "before"
 msgstr "před"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "Na tento den je v {{orgUnitName}} naplánovaná {{count}} událost."
+msgstr[1] ""
+"Na tento den jsou v {{orgUnitName}} naplánované {{count}} události."
+msgstr[2] ""
+"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
+msgstr[3] ""
+"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1285,8 +1325,8 @@ msgstr "Upravit"
 msgid "New {{ eventName }} event"
 msgstr "Nová událost {{ eventName }}"
 
-msgid "This event is not yet preserved and cannot be edited"
-msgstr "Tato událost zatím není zachována a nelze ji upravit"
+msgid "To open this event, please wait until saving is complete"
+msgstr ""
 
 msgid "Show {{ rest }} more"
 msgstr "Zobrazit {{rest}} více"
@@ -1336,6 +1376,9 @@ msgstr "Stáhnout data ..."
 msgid "an error occurred loading working lists"
 msgstr "při načítání pracovních seznamů došlo k chybě"
 
+msgid "Assigned to"
+msgstr "Přiřazen k"
+
 msgid "Registration Date"
 msgstr "Datum registrace"
 
@@ -1345,11 +1388,17 @@ msgstr "Neaktivní"
 msgid "Enrollment status"
 msgstr "Stav zápisu"
 
-msgid "Assigned to"
-msgstr "Přiřazen k"
-
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Vyberte fázi programu, kterou chcete filtrovat podle {{label}}"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "Pracovní seznam nelze aktualizovat"

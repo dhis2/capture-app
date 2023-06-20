@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -613,6 +613,27 @@ msgstr "Usar el nuevo panel de inscripción para {{programName}}"
 
 msgid "Opt in for {{programName}}"
 msgstr "Utilizar el nuevo capture para {{programName}}"
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
+msgstr ""
 
 msgid "Yes, opt in"
 msgstr "Sí, aceptar"
@@ -1253,11 +1274,30 @@ msgstr ""
 "La fecha programada coincide con la fecha sugerida, pero se puede cambiar si"
 " es necesario."
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+"La fecha programada es {{count}} día {{position}} la fecha sugerida."
+msgstr[1] ""
+"La fecha programada es {{count}} días {{position}} la fecha sugerida."
+msgstr[2] ""
+"La fecha programada es {{count}} días {{position}} la fecha sugerida."
+
 msgid "after"
 msgstr "después"
 
 msgid "before"
 msgstr "antes"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "Hay {{count}} evento programado en {{orgUnitName}} para este día."
+msgstr[1] ""
+"Hay {{count}} eventos programados en {{orgUnitName}} para este día."
+msgstr[2] ""
+"Hay {{count}} eventos programados en {{orgUnitName}} para este día."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1329,10 +1369,8 @@ msgstr "Editar"
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
 
-msgid "This event is not yet preserved and cannot be edited"
+msgid "To open this event, please wait until saving is complete"
 msgstr ""
-"Para abrir este evento, por favor espere a que se termine de guardar en el "
-"servidor"
 
 msgid "Show {{ rest }} more"
 msgstr "Mostrar más {{ resto }} "
@@ -1384,6 +1422,9 @@ msgstr "Descargar datos"
 msgid "an error occurred loading working lists"
 msgstr "se produjo un error al cargar listas de trabajo"
 
+msgid "Assigned to"
+msgstr "Asignado a"
+
 msgid "Registration Date"
 msgstr "Fecha de registro"
 
@@ -1393,11 +1434,17 @@ msgstr "Inactivo"
 msgid "Enrollment status"
 msgstr "Estado de la inscripción."
 
-msgid "Assigned to"
-msgstr "Asignado a"
-
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Elija una etapa del programa para filtrar por {{label}}"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "No se pudo actualizar la lista de trabajo"

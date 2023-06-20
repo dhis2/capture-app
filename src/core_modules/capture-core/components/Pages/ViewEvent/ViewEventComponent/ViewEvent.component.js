@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import { IconChevronLeft24, Button } from '@dhis2/ui';
+import { spacers, IconChevronLeft24, Button } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
@@ -20,14 +20,7 @@ const getStyles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(10),
     },
     showAllEvents: {
-        paddingLeft: 8,
-        marginBottom: 10,
-        textTransform: 'none',
-        backgroundColor: '#E9EEF4',
-        boxShadow: 'none',
-        color: '#494949',
-        fontSize: 14,
-        fontWeight: 'normal',
+        marginBottom: spacers.dp12,
     },
     header: {
         ...theme.typography.title,
@@ -38,6 +31,7 @@ const getStyles = (theme: Theme) => ({
     contentContainer: {
         display: 'flex',
         flexWrap: 'wrap',
+        gap: spacers.dp16,
     },
 });
 
@@ -79,8 +73,11 @@ class ViewEventPlain extends Component<Props, State> {
         const { classes, programStage, currentDataEntryKey, eventAccess } = this.props;
         return (
             <div className={classes.container}>
-                <Button className={classes.showAllEvents} variant="raised" onClick={this.handleGoBackToAllEvents}>
-                    <IconChevronLeft24 />
+                <Button
+                    className={classes.showAllEvents}
+                    onClick={this.handleGoBackToAllEvents}
+                    icon={<IconChevronLeft24 />}
+                >
                     {i18n.t('Show all events')}
                 </Button>
                 <div className={classes.contentContainer}>
