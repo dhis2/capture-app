@@ -569,7 +569,7 @@ msgid "Syncing"
 msgstr ""
 
 msgid "Add comment"
-msgstr ""
+msgstr "Voeg opmerking toe"
 
 msgid "You don't have access to write comments"
 msgstr ""
@@ -939,7 +939,7 @@ msgid "Show all programs"
 msgstr ""
 
 msgid "Choose a program"
-msgstr ""
+msgstr "Kies een programma"
 
 msgid "Search for {{titleText}}"
 msgstr ""
@@ -1071,7 +1071,7 @@ msgid ""
 msgstr ""
 
 msgid "Save comment"
-msgstr ""
+msgstr "Opmerking opslaan"
 
 msgid "Enrollment actions"
 msgstr ""
@@ -1092,7 +1092,7 @@ msgid "Mark as cancelled"
 msgstr ""
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "Markering onvolledig"
 
 msgid "Delete enrollment"
 msgstr "Inschrijving verwijderen"
@@ -1495,6 +1495,9 @@ msgid "Delete polygon"
 msgstr ""
 
 msgid "Set area"
+msgstr ""
+
+msgid "Area on map saved"
 msgstr ""
 
 msgid "Compatibility mode"
