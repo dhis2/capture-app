@@ -69,6 +69,7 @@ type ExtractedProps = $ReadOnly<{|
     sortByDirection?: string,
     sortById?: string,
     stickyFilters?: StickyFilters,
+    programStageId?: string,
     updating: boolean,
     updatingWithDialog: boolean,
     templates?: WorkingListTemplates,

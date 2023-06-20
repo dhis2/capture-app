@@ -1,10 +1,12 @@
 // @flow
 import { useMemo } from 'react';
+import i18n from '@dhis2/d2-i18n';
+import type { WorkingListTemplate } from '../../../WorkingListsBase';
 
-export const useStaticTemplates = () =>
+export const useStaticTemplates = (defaultAlteredTemplate?: WorkingListTemplate) =>
     useMemo(
         () => [
-            {
+            defaultAlteredTemplate || {
                 id: 'default',
                 isDefault: true,
                 name: 'default',
@@ -17,7 +19,7 @@ export const useStaticTemplates = () =>
             },
             {
                 id: 'active',
-                name: 'Active enrollments',
+                name: i18n.t('Active enrollments'),
                 order: 1,
                 access: {
                     update: false,
@@ -31,7 +33,7 @@ export const useStaticTemplates = () =>
             },
             {
                 id: 'complete',
-                name: 'Completed enrollments',
+                name: i18n.t('Completed enrollments'),
                 order: 2,
                 access: {
                     update: false,
@@ -45,7 +47,7 @@ export const useStaticTemplates = () =>
             },
             {
                 id: 'cancelled',
-                name: 'Cancelled enrollments',
+                name: i18n.t('Cancelled enrollments'),
                 order: 3,
                 access: {
                     update: false,
@@ -58,5 +60,5 @@ export const useStaticTemplates = () =>
                 },
             },
         ],
-        [],
+        [defaultAlteredTemplate],
     );

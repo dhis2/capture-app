@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Ibatov <ibatovk@who.int>, 2022
+# Ibatov <ibatovk@who.int>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-14T13:43:34.731Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Ibatov <ibatovk@who.int>, 2022\n"
-"Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
+"Last-Translator: Ibatov <ibatovk@who.int>, 2023\n"
+"Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,23 +42,35 @@ msgstr ""
 "ишлашини қўллаб қувватлайди. Ушбу версияни қайта ишлатмоқчи бўлсангиз, "
 "Илтимос, саҳифани янгиланг, аммо бошқа версиялар ёпилишини унутманг."
 
-msgid "Organisation unit"
-msgstr "Ташкилий бўлим"
+msgid "View {{programName}} dashboard"
+msgstr ""
 
-msgid "Date of enrollment"
-msgstr "Рўйхатга киритилган сана"
+msgid "View dashboard"
+msgstr "Бошқарув панелини кўриш"
 
-msgid "Program name"
-msgstr "Дастур номи"
+msgid "View active enrollment"
+msgstr "Фаол рўйхатдан ўтаётганларни кўриш"
 
-msgid "Last updated"
-msgstr "Охирги янгиланган"
+msgid "Re-enroll"
+msgstr "Қайта рўйхатдан ўтиш"
+
+msgid "in"
+msgstr "ичида"
 
 msgid "Enrolled"
 msgstr "Рўйхатга киритилган"
 
 msgid "Previously enrolled"
 msgstr "Илгари рўйхатга киритилган"
+
+msgid "Organisation unit"
+msgstr "Ташкилий бўлим"
+
+msgid "Date of enrollment"
+msgstr "Рўйхатга киритилган сана"
+
+msgid "Last updated"
+msgstr "Охирги янгиланган"
 
 msgid "This value is validating"
 msgstr "Ушбу қиймат тасдиқланмоқда"
@@ -134,6 +146,9 @@ msgstr "Мувофиқлаштириш"
 
 msgid "Enrollment"
 msgstr "Рўйхатга олиш"
+
+msgid "Please select {{categoryName}}"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr "Келажакдаги сана танловига рухсат берилмайди"
@@ -279,9 +294,6 @@ msgstr "бирон нимасиз"
 msgid "enrollment"
 msgstr "қайд этиш"
 
-msgid "in"
-msgstr "ичида"
-
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Юқори панелдан дастурни танлаб, дастур рўйхатидан ўтинг"
 
@@ -316,11 +328,6 @@ msgstr "Рўйхатдан ўтган {{trackedEntityTypeName}} ни кўрса�
 msgid "Registered person"
 msgstr "Рўйхатдан ўтган шахс"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Агарда ушбу саҳифани тарк этсангиз, ҳодиса/тадбир бўйича киритган барча "
-"ўзгартиришлар сақланмайди."
-
 msgid "validation failed"
 msgstr "Тасдиқлаш амалга ошмади"
 
@@ -347,6 +354,11 @@ msgstr "Йўқ, бекор қилинг"
 
 msgid "Yes, create new event"
 msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Агарда ушбу саҳифани тарк этсангиз, ҳодиса/тадбир бўйича киритган барча "
+"ўзгартиришлар сақланмайди."
 
 msgid "Warnings found"
 msgstr "Огоҳлантиришлар топилди"
@@ -607,8 +619,9 @@ msgstr ""
 "Ушбу қайд бўлимини очишда хатолик юз берди. Илтимос, Ҳақиқий URL манзилни "
 "киритинг."
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "\"{{enrollmentId}}\" идентификатори билан қайд қилиш имконсиз"
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
 
 msgid "Enrollment Dashboard"
 msgstr ""
@@ -647,7 +660,19 @@ msgid ""
 msgstr ""
 "{{programName}} тоифаларга эга. Панелни кўриш учун барча тоифаларни танланг."
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
 msgid "Choose an enrollment to view the dashboard."
+msgstr ""
+
+msgid "There are no active enrollments."
+msgstr ""
+
+msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid "No access to program owner."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -715,7 +740,7 @@ msgstr "Режа"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more events in this program"
+msgid "You can’t add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -727,8 +752,8 @@ msgstr ""
 msgid "Program Stages could not be loaded"
 msgstr ""
 
-msgid "stage"
-msgstr ""
+msgid "Stage"
+msgstr "Босқич"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -765,9 +790,6 @@ msgstr "Ҳисоботни бошлаш учун {{missingCategories}} ни та
 
 msgid "Save as new"
 msgstr "Янги сифатида сақлаш"
-
-msgid "View dashboard"
-msgstr "Бошқарув панелини кўриш"
 
 msgid "View enrollment"
 msgstr ""
@@ -832,105 +854,8 @@ msgstr "Янги {{trackedEntityType}} яратиш"
 msgid "Register"
 msgstr "Рўйхатга олиш"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Қидириш учун камида {{minAttributesRequiredToSearch}} атрибутларини "
-"тўлдиринг"
-
-msgid "Search {{name}}"
-msgstr "{{name}} орқали қидириш"
-
-msgid "Search by {{name}}"
-msgstr "{{name}} орқали қидириш"
-
-msgid "Search by attributes"
-msgstr "Атрибут орқали қидириш"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr "Ҳеч қандай натижа топилмади"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Қидирув сўзларини ўзгартириб, қидирилаётган ахборотни қайта қидирувга "
-"топширишингиз мумкин."
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr "Қидирувга қайтиш"
-
-msgid "An error has occurred"
-msgstr "Хатолик юз берди"
-
-msgid "Too many results"
-msgstr "Натижа жуда кўп"
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "Орқага"
-
-msgid "Search for {{titleText}}"
-msgstr " {{titleText}} орқали қидириш"
-
-msgid "Search for"
-msgstr "Қидириш"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Бундан ташқари, юқори сатрда дастурни танлашингиз ва ушбу дастур ичида "
-"қидиришингиз мумкин"
-
-msgid "Choose a type to start searching"
-msgstr "Қидирув турини танланг ва қидиришни бошланг"
-
-msgid "View active enrollment"
-msgstr "Фаол рўйхатдан ўтаётганларни кўриш"
-
-msgid "Re-enroll"
-msgstr "Қайта рўйхатдан ўтиш"
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Излаган натижаларни тополмадингизми? Тегишли турлардан  фойдаланадиган "
-"дастурлар ичидан қидиришга ҳаракат қилинг."
-
-msgid "Search in all programs"
-msgstr "Барча дастурларда қидириш"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Янгисини яратиш"
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Create custom working list"
-msgstr ""
 
 msgid "events"
 msgstr "ҳодиса/тадбирлар"
@@ -981,6 +906,9 @@ msgstr "Ташкилий бўлимни юклаб бўлмади"
 msgid "Possible duplicates found"
 msgstr "Бўлиши мумкин бўлган нусхалар топилди"
 
+msgid "No results found"
+msgstr "Ҳеч қандай натижа топилмади"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Эҳтимолий нусхаларни юклашда хатолик юз берди"
 
@@ -993,44 +921,135 @@ msgstr ""
 msgid "Add relationship"
 msgstr "Ўзаро алоқа киритиш"
 
-msgid "Selected registering unit"
-msgstr "Бўлимни танланган рўйхатга олиш"
+msgid "No results found for "
+msgstr ""
 
-msgid "Start Again"
-msgstr "Қайта бошланг"
+msgid "Registering unit"
+msgstr "Рўйхатга олиш муассасаси"
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Ишончингиз комилми? Барча сақланмаган маълумотлар йўқолади."
+msgid "Choose a registering unit"
+msgstr ""
 
-msgid "Accept"
-msgstr "Қабул қилинг"
-
-msgid "Registering Organisation Unit"
-msgstr "Танланган бўлим рўйхатдан ўтказилмоқда"
-
-msgid "Select"
-msgstr "Танланг"
+msgid "Clear selection"
+msgstr ""
 
 msgid "No programs available."
 msgstr "Ҳеч қандай дастур мавжуд эмас."
 
-msgid "Selected program"
-msgstr "Танланган дастур"
+msgid "Search for a program"
+msgstr ""
 
-msgid "Select program"
-msgstr "Дастурни танлаш"
+msgid "Some programs are being filtered by the chosen registering unit"
+msgstr ""
 
-msgid "Selected"
-msgstr "Танланган"
+msgid "Show all programs"
+msgstr ""
+
+msgid "Choose a program"
+msgstr ""
+
+msgid "Search for {{titleText}}"
+msgstr " {{titleText}} орқали қидириш"
+
+msgid "Search for"
+msgstr "Қидириш"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Бундан ташқари, юқори сатрда дастурни танлашингиз ва ушбу дастур ичида "
+"қидиришингиз мумкин"
+
+msgid "Choose a type to start searching"
+msgstr "Қидирув турини танланг ва қидиришни бошланг"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+
+msgid "Search {{name}}"
+msgstr "{{name}} орқали қидириш"
+
+msgid "Search by {{name}}"
+msgstr "{{name}} орқали қидириш"
+
+msgid "Search by attributes"
+msgstr "Атрибут орқали қидириш"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Излаган натижаларни тополмадингизми? Тегишли турлардан  фойдаланадиган "
+"дастурлар ичидан қидиришга ҳаракат қилинг."
+
+msgid "Search in all programs"
+msgstr "Барча дастурларда қидириш"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Янгисини яратиш"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Қидирув сўзларини ўзгартириб, қидирилаётган ахборотни қайта қидирувга "
+"топширишингиз мумкин."
+
+msgid "Back to search"
+msgstr "Қидирувга қайтиш"
+
+msgid "An error has occurred"
+msgstr "Хатолик юз берди"
+
+msgid "Too many results"
+msgstr "Натижа жуда кўп"
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
 
 msgid "Results found"
 msgstr "Натижалар топилди"
 
+msgid "Selected program"
+msgstr "Танланган дастур"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "{{uniqueAttrName}} орқали қидириш"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Қидириш учун камида {{minAttributesRequired}} атрибутларини тўлдиринг"
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Янги {{trackedEntityName}} да {{programName}}"
@@ -1038,14 +1057,30 @@ msgstr "Янги {{trackedEntityName}} да {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Қидирув {{trackedEntityName}} да {{programName}}"
 
-msgid "Clear selections"
-msgstr "Танловларни тозалаш"
-
 msgid "To work with the selected program,"
 msgstr "Танланган дастур билан ишлаш учун,"
 
 msgid "open the Tracker Capture app"
 msgstr "Кузатув-Назорат дастурини очинг"
+
+msgid "This program is protected"
+msgstr "Ушбу дастур ҳимояланган"
+
+msgid "Reason to check for enrollments"
+msgstr ""
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+
+msgid "Check for enrollments"
+msgstr ""
+
+msgid ""
+"You must provide a reason to check for enrollments in this protected "
+"program. All activity will be logged."
+msgstr ""
 
 msgid "Save comment"
 msgstr "Фикр/изоҳни сақланг"
@@ -1094,9 +1129,6 @@ msgstr "Қайд этилган сана"
 msgid "Incident date"
 msgstr "Ҳодиса санаси"
 
-msgid "Last updated {{date}}"
-msgstr " {{date}}да охирги марта янгиланган"
-
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 "Қайд этиш виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
@@ -1109,6 +1141,9 @@ msgstr " {{orgUnitName}} да бошланган"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr " {{orgUnitName}} эгалиги асосида"
+
+msgid "Last updated {{date}}"
+msgstr " {{date}}да охирги марта янгиланган"
 
 msgid "Cancelled"
 msgstr "Бекор қилинди"
@@ -1177,21 +1212,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-
 msgid "after"
 msgstr "кейин"
 
 msgid "before"
 msgstr "олдин"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1273,9 +1298,6 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "Registering unit"
-msgstr "Рўйхатга олиш муассасаси"
-
 msgid "{{ totalEvents }} events"
 msgstr ""
 
@@ -1309,6 +1331,12 @@ msgstr "Маълумотларни юклаб олиш ..."
 msgid "an error occurred loading working lists"
 msgstr "ишчи рўйхатни юклашда хатолик юз берди"
 
+msgid "Registration Date"
+msgstr "Рўйхатга олинган сана"
+
+msgid "Inactive"
+msgstr "Фаол эмас"
+
 msgid "Enrollment status"
 msgstr "Рўйхатга олиш ҳолати"
 
@@ -1318,14 +1346,11 @@ msgstr "Тайинланган"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Registration Date"
-msgstr "Рўйхатга олинган сана"
-
-msgid "Inactive"
-msgstr "Фаол эмас"
-
 msgid "Working list could not be updated"
 msgstr "Ишчи рўйхатни янгилаб бўлмади"
+
+msgid "an error occurred loading the working lists"
+msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""

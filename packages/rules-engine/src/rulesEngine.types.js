@@ -153,12 +153,12 @@ export type Translator = (value: string) => string;
 
 export type IDateUtils = {|
     getToday(): string,
-    daysBetween(firstRulesDate: string, secondRulesDate: string): number,
-    weeksBetween(firstRulesDate: string, secondRulesDate: string): number,
-    monthsBetween(firstRulesDate: string, secondRulesDate: string): number,
-    yearsBetween(firstRulesDate: string, secondRulesDate: string): number,
+    daysBetween(firstRulesDate: ?string, secondRulesDate: ?string): ?number,
+    weeksBetween(firstRulesDate: ?string, secondRulesDate: ?string): ?number,
+    monthsBetween(firstRulesDate: ?string, secondRulesDate: ?string): ?number,
+    yearsBetween(firstRulesDate: ?string, secondRulesDate: ?string): ?number,
     +compareDates: CompareDates,
-    addDays(rulesDate: string, daysToAdd: number): string,
+    addDays(rulesDate: ?string, daysToAdd: number): ?string,
 |};
 
 export type IConvertInputRulesValue = {|

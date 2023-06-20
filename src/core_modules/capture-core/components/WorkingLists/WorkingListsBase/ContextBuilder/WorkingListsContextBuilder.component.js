@@ -53,6 +53,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
         viewPreloaded,
         customUpdateTrigger,
         forceUpdateOnMount,
+        programStageId,
         ...passOnProps
     } = props;
 
@@ -138,12 +139,14 @@ export const WorkingListsContextBuilder = (props: Props) => {
                             onChangePage={onChangePage}
                             onChangeRowsPerPage={onChangeRowsPerPage}
                             stickyFilters={stickyFilters}
+                            programStageId={programStageId}
                         >
                             <TemplatesLoader
                                 {...passOnProps}
                                 templates={templates}
                                 dirtyTemplates={!!dirtyTemplatesStateFirstRunRef.current}
                                 loadedProgramIdForTemplates={loadedProgramIdForTemplates}
+                                programStageId={programStageId}
                             />
                         </WorkingListsListViewBuilderContextProvider>
                     </WorkingListsListViewUpdaterContextProvider>

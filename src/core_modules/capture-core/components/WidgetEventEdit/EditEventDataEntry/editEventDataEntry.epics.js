@@ -6,7 +6,7 @@ import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
 import { EMPTY, of } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
-import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
+import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
@@ -61,7 +61,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
 
             const program = metadataContainer.program;
             const foundation = metadataContainer.stage.stageForm;
-            const orgUnit = action.payload.orgUnit;
+            const { orgUnit, programCategory } = action.payload;
             const { enrollment, attributeValues } = state.enrollmentDomain;
 
             return batchActions([
@@ -75,6 +75,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
                     attributeValues,
                     dataEntryId: getDataEntryId(eventContainer.event),
                     dataEntryKey: dataEntryKeys.EDIT,
+                    programCategory,
                 }),
             ]);
         }));
@@ -109,6 +110,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             }
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
+
             const eventContainer = {
                 ...prevEventContainer,
                 event: {
@@ -121,10 +123,10 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             };
 
             const orgUnit = payload.orgUnit;
-
             const serverData = {
                 events: [{
                     ...mainDataServerValues,
+                    attributeOptionCombo: undefined,
                     dataValues: formFoundation
                         .getElements()
                         .map(({ id }) => ({
@@ -175,6 +177,10 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             const viewEventPage = state.viewEventPage;
             const eventContainer = viewEventPage.loadedValues.eventContainer;
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
+            if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
+                eventContainer.event.attributeCategoryOptions =
+                    convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions);
+            }
             let actions = [updateEventContainer(eventContainer, orgUnit)];
 
             if (meta.triggerAction === enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT) {

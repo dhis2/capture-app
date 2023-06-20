@@ -1,21 +1,22 @@
 // @flow
+import { colors } from '@dhis2/ui';
 import * as React from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = (theme: Theme) => ({
+const styles = () => ({
     container: {
         padding: '8px 8px 8px 12px',
     },
     activeContainer: {
-        backgroundColor: theme.palette.info.main,
+        backgroundColor: colors.blue100,
     },
     validatingContainer: {},
     errorContainer: {
-        backgroundColor: theme.palette.error.lighter,
+        backgroundColor: colors.red100,
     },
     warningContainer: {
-        backgroundColor: theme.palette.warning.lighter,
+        backgroundColor: colors.yellow100,
     },
     infoContainer: {},
 });

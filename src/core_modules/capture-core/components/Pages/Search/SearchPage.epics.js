@@ -1,6 +1,5 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { EMPTY } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { searchPageActionTypes } from './SearchPage.actions';
 import { buildUrlQueryString } from '../../../utils/routing';
@@ -18,13 +17,3 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
         }),
     );
 
-export const navigateToNewUserPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
-    action$.pipe(
-        ofType(searchPageActionTypes.NAVIGATE_TO_NEW_USER_PAGE),
-        switchMap(() => {
-            const { currentSelections: { programId, orgUnitId, trackedEntityTypeId } } = store.value;
-            history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId })}`);
-
-            return EMPTY;
-        }),
-    );

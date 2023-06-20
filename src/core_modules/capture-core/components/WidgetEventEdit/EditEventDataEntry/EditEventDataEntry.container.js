@@ -26,7 +26,6 @@ import {
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
-
 const mapStateToProps = (state: ReduxState, props) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     const itemId = state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
@@ -40,6 +39,7 @@ const mapStateToProps = (state: ReduxState, props) => {
         isCompleted,
         enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
         occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
+        eventData: state.enrollmentDomain?.enrollment?.events,
     };
 };
 

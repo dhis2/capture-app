@@ -3,14 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField as UITextField } from 'capture-ui';
 
-const getStyles = (theme: Theme) => ({
-    inputWrapperFocused: {
-        border: `2px solid ${theme.palette.primary.light}`,
-        borderRadius: '5px',
-    },
-    inputWrapperUnfocused: {
-        padding: 2,
-    },
+const getStyles = () => ({
 });
 
 type Props = {
