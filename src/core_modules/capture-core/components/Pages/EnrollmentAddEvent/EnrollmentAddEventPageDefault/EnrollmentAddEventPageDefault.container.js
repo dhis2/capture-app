@@ -42,6 +42,7 @@ export const EnrollmentAddEventPageDefault = ({
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());
             const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
+
             const eventsWithUpdatedDate = events.map(event => ({
                 ...convertEventAttributeOptions(event),
                 updatedAt,

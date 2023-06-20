@@ -125,37 +125,12 @@ export const Validated = ({
     ]);
 
     const handleCreateNew = useCallback((isCreateNew?: boolean) => {
-        dispatch(requestSaveEvent({
-            requestEvent: {
-                eventId: generateUID(),
-                dataEntryItemId: itemId,
-                dataEntryId,
-                formFoundation,
-                completed: true,
-                programId: program.id,
-                orgUnitId: orgUnit.id,
-                orgUnitName: orgUnit.name || '',
-                teiId,
-                enrollmentId,
-                onSaveExternal,
-                onSaveSuccessActionType,
-                onSaveErrorActionType,
-            },
-        }));
+        handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
+
         dispatch(startCreateNewAfterCompleting({
             enrollmentId, isCreateNew, orgUnitId: orgUnit.id, programId: program.id, teiId, availableProgramStages,
         }));
-    }, [dispatch,
-        program.id,
-        orgUnit,
-        teiId,
-        enrollmentId,
-        onSaveExternal,
-        onSaveSuccessActionType,
-        onSaveErrorActionType,
-        formFoundation,
-        availableProgramStages,
-    ]);
+    }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnit.id, program.id, teiId, availableProgramStages]);
 
     return (
         <AskToCreateNewHandlerHOC

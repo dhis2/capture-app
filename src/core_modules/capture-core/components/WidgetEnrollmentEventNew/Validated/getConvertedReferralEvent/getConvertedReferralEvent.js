@@ -33,7 +33,7 @@ export const getConvertedReferralEvent = ({
         relationshipType: referralType.id,
         from: {
             event: {
-                event: requestEventIsFromConstraint ? currentEventId : referralEvent.programStage,
+                event: requestEventIsFromConstraint ? currentEventId : referralEvent.event,
             },
         },
         to: {
