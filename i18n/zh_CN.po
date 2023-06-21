@@ -2,15 +2,15 @@
 # Translators:
 # Aung Kyi Min <AungKyi.Min@savethechildren.org>, 2020
 # 晓东 林 <13981924470@126.com>, 2021
-# easylin <lin_xd@126.com>, 2022
+# easylin <lin_xd@126.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-11-29T10:05:06.420Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
-"Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2023\n"
+"Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -323,13 +323,13 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr "选择的项目对选择的机构无效"
 
 msgid "New {{typeName}}"
-msgstr ""
+msgstr "新的{{typeName}}"
 
 msgid "New"
 msgstr "新建"
 
 msgid "Start again"
-msgstr ""
+msgstr "重新开始"
 
 msgid "Find"
 msgstr "发现"
@@ -425,7 +425,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
 
 msgid "View event info"
-msgstr ""
+msgstr "查看活动信息"
 
 msgid "Delete event"
 msgstr "删除事件"
@@ -521,7 +521,7 @@ msgid "Completed"
 msgstr "完成"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "在 {{orgUnit}} 的 {{program}} 中创建新的 {{TET}}"
 
 msgid "Save and add another"
 msgstr "保存并另外添加"
@@ -539,15 +539,15 @@ msgid "Switch to row view"
 msgstr "切换到行视图"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "新的{{TET}}"
 
 msgid "Working Lists"
-msgstr ""
+msgstr "工作清单"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
-msgstr ""
+msgstr "程序 ID 为 {{programId}} 的程序不是跟踪器程序。只能在跟踪程序中进行注册。"
 
 msgid "Assigned user"
 msgstr "指派的用户"
@@ -604,16 +604,16 @@ msgid "No events added"
 msgstr "没有事件被添加"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "在上面选择一个注册单元和程序以开始"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "选择一个程序开始报告"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "选择登记单位开始申报"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "选择类别选项以开始报告"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "你没有在当前选择创建事件的权限"
@@ -647,10 +647,10 @@ msgid "Metadata error. see log for details"
 msgstr "元数据错误"
 
 msgid "Review duplicates"
-msgstr ""
+msgstr "检查重复项"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "创建 {{trackedEntityTypeName}} 并链接"
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
@@ -680,7 +680,7 @@ msgid "No {{trackedEntityTypeName}} found."
 msgstr "没有发现  {{trackedEntityTypeName}} "
 
 msgid "{{teiCount}} results found for"
-msgstr ""
+msgstr "找到 {{teiCount}} 个结果"
 
 msgid "New search"
 msgstr "新搜索"
