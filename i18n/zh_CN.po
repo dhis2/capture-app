@@ -1,14 +1,14 @@
 # 
 # Translators:
 # 晓东 林 <13981924470@126.com>, 2022
-# easylin <lin_xd@126.com>, 2022
+# easylin <lin_xd@126.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2022\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,7 +91,7 @@ msgid "Please provide a valid time"
 msgstr "有效的时间"
 
 msgid "Please provide an integer between 0 and 100"
-msgstr ""
+msgstr "请提供 0 到 100 之间的整数"
 
 msgid "Please provide a valid url"
 msgstr "有效的URL"
@@ -660,7 +660,7 @@ msgid "There are no indicators for this event"
 msgstr "此事件没有指标"
 
 msgid "program stage is invalid"
-msgstr ""
+msgstr "节目阶段无效"
 
 msgid "stage"
 msgstr "阶段"
