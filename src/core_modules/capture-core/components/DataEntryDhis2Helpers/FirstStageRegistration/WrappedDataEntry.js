@@ -21,6 +21,7 @@ import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/w
 import { sectionKeysForFirstStageDataEntry } from './FirstStageRegistration.constants';
 import labelTypeClasses from './fieldLabels.module.css';
 import { withCleanUp } from './withCleanUp';
+import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -216,7 +217,7 @@ const getReportDateSettingsFn = () => {
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
         }),
         getPropName: () => 'stageOccurredAt',
-        getValidatorContainers: () => [],
+        getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,
