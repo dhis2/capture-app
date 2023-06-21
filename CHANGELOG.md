@@ -1,3 +1,80 @@
+## [100.32.15](https://github.com/dhis2/capture-app/compare/v100.32.14...v100.32.15) (2023-06-19)
+
+
+### Bug Fixes
+
+* [DHIS2-15426] ui design changes ([#3179](https://github.com/dhis2/capture-app/issues/3179)) ([557f18b](https://github.com/dhis2/capture-app/commit/557f18b35734bc0918e2a61e2f1bb70bfeef63fc))
+
+## [100.32.14](https://github.com/dhis2/capture-app/compare/v100.32.13...v100.32.14) (2023-06-19)
+
+
+### Bug Fixes
+
+* [DHIS2-15127] insert correct orgunit group object ([#3270](https://github.com/dhis2/capture-app/issues/3270)) ([14dbbe0](https://github.com/dhis2/capture-app/commit/14dbbe040785c1b0c3cbd51f3af9062a7b089137))
+
+## [100.32.13](https://github.com/dhis2/capture-app/compare/v100.32.12...v100.32.13) (2023-06-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([fb242e6](https://github.com/dhis2/capture-app/commit/fb242e60ec1c4546a31665d7a76403a109279248))
+
+## [100.32.12](https://github.com/dhis2/capture-app/compare/v100.32.11...v100.32.12) (2023-06-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([d14ad97](https://github.com/dhis2/capture-app/commit/d14ad97ea0988b40a9dfa5db60eb50e38262a68f))
+
+## [100.32.11](https://github.com/dhis2/capture-app/compare/v100.32.10...v100.32.11) (2023-06-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([df36162](https://github.com/dhis2/capture-app/commit/df36162600b3c0e66b6dbb421a2bc9b2a6fe08f6))
+
+## [100.32.10](https://github.com/dhis2/capture-app/compare/v100.32.9...v100.32.10) (2023-06-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e79ebf0](https://github.com/dhis2/capture-app/commit/e79ebf0f439cc1a148fa98b433d8494cbeadc87d))
+
+## [100.32.9](https://github.com/dhis2/capture-app/compare/v100.32.8...v100.32.9) (2023-06-09)
+
+
+### Bug Fixes
+
+* updating saving text ([#3251](https://github.com/dhis2/capture-app/issues/3251)) ([12439b6](https://github.com/dhis2/capture-app/commit/12439b6e635d8967f2cff550cfbb144c0d44b3a7))
+
+## [100.32.8](https://github.com/dhis2/capture-app/compare/v100.32.7...v100.32.8) (2023-06-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e47a90a](https://github.com/dhis2/capture-app/commit/e47a90a56957c9adcf6c3a0c177cef09b81eecc6))
+
+## [100.32.7](https://github.com/dhis2/capture-app/compare/v100.32.6...v100.32.7) (2023-06-07)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e252444](https://github.com/dhis2/capture-app/commit/e252444524c71e41bf2967ae1c2d2738c2af750d))
+
+## [100.32.6](https://github.com/dhis2/capture-app/compare/v100.32.5...v100.32.6) (2023-06-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b46d1cf](https://github.com/dhis2/capture-app/commit/b46d1cf6cc97452b78b708e41ffe689fe1eab5af))
+
+## [100.32.5](https://github.com/dhis2/capture-app/compare/v100.32.4...v100.32.5) (2023-06-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e00489c](https://github.com/dhis2/capture-app/commit/e00489c2f216e8f0ace13655a8b810fd281bc7cf))
+
 ## [100.32.4](https://github.com/dhis2/capture-app/compare/v100.32.3...v100.32.4) (2023-06-01)
 
 

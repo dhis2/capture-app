@@ -26,7 +26,7 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
         visible: true,
         // $FlowFixMe[prop-missing] automated comment
         type: elementTypeKeys.TEXT,
-        header: 'Status',
+        header: i18n.t('Status'),
         options: [
             { text: i18n.t('Active'), value: 'ACTIVE' },
             { text: i18n.t('Completed'), value: 'COMPLETED' },
@@ -40,7 +40,7 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
             id: mainPropertyNames.ASSIGNEE,
             visible: true,
             type: 'ASSIGNEE',
-            header: 'Assigned to',
+            header: i18n.t('Assigned to'),
             apiName: 'assignedUser',
         });
     }

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -843,106 +843,8 @@ msgstr "Tạo {{trackedEntityType}} mới"
 msgid "Register"
 msgstr "Đăng ký"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Điền vào ít nhất {{minAttributesRequiredToSearch}} thuộc tính để tìm kiếm"
-
-msgid "Search {{name}}"
-msgstr "Tim kiêm {{name}}"
-
-msgid "Search by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr "Tìm kiếm theo thuộc tính"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr "Không tìm thấy kết quả nào"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Bạn có thể thay đổi cụm từ tìm kiếm của mình và tìm kiếm lại để tìm những gì"
-" bạn muốn."
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr "Quay lại tìm kiếm"
-
-msgid "An error has occurred"
-msgstr "một lỗi đã xảy ra"
-
-msgid "Too many results"
-msgstr "Quá nhiều kết quả"
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "Trở lại"
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr "Tìm"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Bạn cũng có thể chọn một chương trình từ thanh trên cùng và tìm kiếm trong "
-"chương trình đó"
-
-msgid "Choose a type to start searching"
-msgstr "Chọn một loại để bắt đầu tìm kiếm"
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Không tìm thấy kết quả bạn đang tìm kiếm? Cố gắng tìm kiếm tất cả các chương"
-" trình sử dụng loại"
-
-msgid "Search in all programs"
-msgstr "Tìm kiếm trong tất cả các chương trình"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Tạo mới"
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-
-msgid "Create saved list"
-msgstr ""
 
 msgid "events"
 msgstr "sự kiện"
@@ -993,6 +895,9 @@ msgstr "Không thể tải đơn vị"
 msgid "Possible duplicates found"
 msgstr "Có thể tìm thấy các bản sao"
 
+msgid "No results found"
+msgstr "Không tìm thấy kết quả nào"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1032,6 +937,86 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr "Tìm"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Bạn cũng có thể chọn một chương trình từ thanh trên cùng và tìm kiếm trong "
+"chương trình đó"
+
+msgid "Choose a type to start searching"
+msgstr "Chọn một loại để bắt đầu tìm kiếm"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+
+msgid "Search {{name}}"
+msgstr "Tim kiêm {{name}}"
+
+msgid "Search by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr "Tìm kiếm theo thuộc tính"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Không tìm thấy kết quả bạn đang tìm kiếm? Cố gắng tìm kiếm tất cả các chương"
+" trình sử dụng loại"
+
+msgid "Search in all programs"
+msgstr "Tìm kiếm trong tất cả các chương trình"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Tạo mới"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Bạn có thể thay đổi cụm từ tìm kiếm của mình và tìm kiếm lại để tìm những gì"
+" bạn muốn."
+
+msgid "Back to search"
+msgstr "Quay lại tìm kiếm"
+
+msgid "An error has occurred"
+msgstr "một lỗi đã xảy ra"
+
+msgid "Too many results"
+msgstr "Quá nhiều kết quả"
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr "Kết quả tìm thấy"
 
@@ -1041,8 +1026,19 @@ msgstr "Chương trình đã chọn"
 msgid "Search {{uniqueAttrName}}"
 msgstr "Tìm kiếm {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Điền vào ít nhất {{minAttributesRequired}} thuộc tính để tìm kiếm"
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -1204,21 +1200,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"

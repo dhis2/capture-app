@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -583,6 +583,27 @@ msgstr ""
 msgid "Opt in for {{programName}}"
 msgstr ""
 
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
+msgstr ""
+
 msgid "Yes, opt in"
 msgstr ""
 
@@ -829,101 +850,8 @@ msgstr "创建新的{{trackedEntityType}}"
 msgid "Register"
 msgstr "注册"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
-
-msgid "Search {{name}}"
-msgstr "搜索{{name}}"
-
-msgid "Search by {{name}}"
-msgstr "按{{name}}搜索"
-
-msgid "Search by attributes"
-msgstr "按属性搜索"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"至少填写这些字段中的 {{minAttributesRequiredToSearch}} 以搜索{{escape}} "
-"{{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr "没有结果"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr "返回搜寻"
-
-msgid "An error has occurred"
-msgstr "发生了错误"
-
-msgid "Too many results"
-msgstr "结果太多"
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "后退"
-
-msgid "Search for {{titleText}}"
-msgstr "搜索{{titleText}}"
-
-msgid "Search for"
-msgstr "搜索"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
-
-msgid "Choose a type to start searching"
-msgstr "选择一种类型以开始搜索"
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
-
-msgid "Search in all programs"
-msgstr "搜索所有项目"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "新建"
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-
-msgid "Create saved list"
-msgstr ""
 
 msgid "events"
 msgstr "事件"
@@ -972,6 +900,9 @@ msgstr "机构不能载入"
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
 
+msgid "No results found"
+msgstr "没有结果"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
 
@@ -1011,6 +942,82 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr "搜索{{titleText}}"
+
+msgid "Search for"
+msgstr "搜索"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
+
+msgid "Choose a type to start searching"
+msgstr "选择一种类型以开始搜索"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+
+msgid "Search {{name}}"
+msgstr "搜索{{name}}"
+
+msgid "Search by {{name}}"
+msgstr "按{{name}}搜索"
+
+msgid "Search by attributes"
+msgstr "按属性搜索"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
+
+msgid "Search in all programs"
+msgstr "搜索所有项目"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "新建"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"至少填写这些字段中的 {{minAttributesRequiredToSearch}} 以搜索{{escape}} "
+"{{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
+
+msgid "Back to search"
+msgstr "返回搜寻"
+
+msgid "An error has occurred"
+msgstr "发生了错误"
+
+msgid "Too many results"
+msgstr "结果太多"
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr "找到的结果"
 
@@ -1020,8 +1027,19 @@ msgstr "选择的项目"
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "{{programName}}中的新{{trackedEntityName}}"
@@ -1260,8 +1278,8 @@ msgstr "编辑"
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
 
-msgid "This event is not yet preserved and cannot be edited"
-msgstr "此事件尚未保留且无法编辑"
+msgid "To open this event, please wait until saving is complete"
+msgstr ""
 
 msgid "Show {{ rest }} more"
 msgstr "显示 {{ rest}} 更多"
@@ -1311,6 +1329,9 @@ msgstr "下载数据"
 msgid "an error occurred loading working lists"
 msgstr "载入工作列表发生错误"
 
+msgid "Assigned to"
+msgstr "指派到"
+
 msgid "Registration Date"
 msgstr "登记日期"
 
@@ -1320,10 +1341,16 @@ msgstr "闲置"
 msgid "Enrollment status"
 msgstr "报名状态"
 
-msgid "Assigned to"
-msgstr "指派到"
-
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"

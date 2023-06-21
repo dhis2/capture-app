@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-start;
 }
 
 .coordinateFieldsVertical {
@@ -19,14 +20,8 @@
     align-items: center;
 }
 
-.mapIcon {
-    height: 42px;
-    width: 42px;
-}
-  
 .mapIconContainer {
     position: relative;
-    padding: 2px;
 }
 
 .mapIconContainerWithMargin {
@@ -34,31 +29,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 42px;
-    width: 42px;
-    margin-top: 2px;
-    border: 1px solid #C4C4C4;
-    border-radius: 3px 0px 0px 3px;
-    box-shadow: 0px 0px 2px 0px #C4C4C4 inset;
-    background: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
-}
-
-.clearIcon {
-    padding: 2px;
-}
-
-.clearIconWithMargin {
-    padding: 1px;
+    height: 41px;
+    width: 41px;
+    border: 1px solid #a0adba;
+    border-radius: 4px 0px 0px 4px;
+    color: #212934;
+    background-color: #f9fafb;
 }
 
 .inputContainer {
     flex-grow: 1;
+    padding: 0;
 }
 
 .latitudeTextInput {
     border-radius: 0px;
 }
-
 
 .longitudeTextInput {
     border-radius: 0px 3px 3px 0px;

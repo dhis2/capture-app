@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2023\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -859,106 +859,8 @@ msgstr "Buat {{trackedEntityType}} baru"
 msgid "Register"
 msgstr "Daftar"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Isi setidaknya {{minAttributesRequiredToSearch}} atribut untuk mencari"
-
-msgid "Search {{name}}"
-msgstr "Telusuri {{nama}}"
-
-msgid "Search by {{name}}"
-msgstr "Cari berdasarkan {{nama}}"
-
-msgid "Search by attributes"
-msgstr "Cari berdasarkan atribut"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr "Tidak ada hasil ditemukan"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Anda dapat mengubah istilah pencarian dan mencari lagi untuk menemukan apa "
-"yang Anda cari."
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr "Kembali ke pencarian"
-
-msgid "An error has occurred"
-msgstr "Sebuah kesalahan telah terjadi"
-
-msgid "Too many results"
-msgstr "Terlalu banyak hasil"
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "Kembali"
-
-msgid "Search for {{titleText}}"
-msgstr "Telusuri {{titleText}}"
-
-msgid "Search for"
-msgstr "Cari tentang"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Anda juga dapat memilih program dari bilah atas dan mencari di program "
-"tersebut"
-
-msgid "Choose a type to start searching"
-msgstr "Pilih jenis untuk mulai mencari"
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Tidak menemukan hasil yang Anda cari? Coba cari semua program yang "
-"menggunakan type"
-
-msgid "Search in all programs"
-msgstr "Cari di semua program"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr ""
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-
-msgid "Create saved list"
-msgstr ""
 
 msgid "events"
 msgstr "Even"
@@ -1009,6 +911,9 @@ msgstr "Unit organisasi tidak dapat dimuat"
 msgid "Possible duplicates found"
 msgstr "Kemungkinan duplikat ditemukan"
 
+msgid "No results found"
+msgstr "Tidak ada hasil ditemukan"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Terjadi kesalahan saat memuat kemungkinan duplikat"
 
@@ -1048,6 +953,86 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr "Telusuri {{titleText}}"
+
+msgid "Search for"
+msgstr "Cari tentang"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Anda juga dapat memilih program dari bilah atas dan mencari di program "
+"tersebut"
+
+msgid "Choose a type to start searching"
+msgstr "Pilih jenis untuk mulai mencari"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+
+msgid "Search {{name}}"
+msgstr "Telusuri {{nama}}"
+
+msgid "Search by {{name}}"
+msgstr "Cari berdasarkan {{nama}}"
+
+msgid "Search by attributes"
+msgstr "Cari berdasarkan atribut"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Tidak menemukan hasil yang Anda cari? Coba cari semua program yang "
+"menggunakan type"
+
+msgid "Search in all programs"
+msgstr "Cari di semua program"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr ""
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Anda dapat mengubah istilah pencarian dan mencari lagi untuk menemukan apa "
+"yang Anda cari."
+
+msgid "Back to search"
+msgstr "Kembali ke pencarian"
+
+msgid "An error has occurred"
+msgstr "Sebuah kesalahan telah terjadi"
+
+msgid "Too many results"
+msgstr "Terlalu banyak hasil"
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr "Hasil ditemukan"
 
@@ -1057,8 +1042,19 @@ msgstr "Program yang dipilih"
 msgid "Search {{uniqueAttrName}}"
 msgstr "Telusuri {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Isi setidaknya {{minAttributesRequired}} atribut untuk mencari"
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "{{trackedEntityName}} baru di {{programName}}"
@@ -1222,21 +1218,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-
 msgid "after"
 msgstr "Setelah"
 
 msgid "before"
 msgstr "Sebelum"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"

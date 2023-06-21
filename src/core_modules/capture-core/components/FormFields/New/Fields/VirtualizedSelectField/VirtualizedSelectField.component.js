@@ -4,14 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { OptionsSelectVirtualized } from '../../../Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { withFocusHandler } from './withFocusHandler';
 
-const getStyles = (theme: Theme) => ({
-    inputWrapperFocused: {
-        border: `2px solid ${theme.palette.primary.light}`,
-        borderRadius: '5px',
-    },
-    inputWrapperUnfocused: {
-        padding: 2,
-    },
+const getStyles = () => ({
 });
 
 type Props = {
