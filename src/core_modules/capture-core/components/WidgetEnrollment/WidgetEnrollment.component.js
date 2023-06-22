@@ -35,15 +35,6 @@ const styles = {
         color: colors.grey900,
         gap: `${spacersNum.dp4}px`,
     },
-    column: {
-        margin: `${spacersNum.dp8}px 0`,
-        fontSize: '14px',
-        gap: `${spacersNum.dp4}px`,
-    },
-    note: {
-        fontSize: '12px',
-        color: colors.grey600,
-    },
     statuses: {
         display: 'flex',
         gap: `${spacersNum.dp4}px`,
@@ -116,7 +107,7 @@ export const WidgetEnrollmentPlain = ({
                                 <span className={classes.icon}>
                                     <IconCalendar16 color={colors.grey600} />
                                 </span>
-                                {getIncidentDateLabel(program)}{' '}
+                                {getIncidentDateLabel(program)}{': '}
                                 {convertValueClientToView(
                                     convertValueServerToClient(enrollment.occurredAt, dataElementTypes.DATE),
                                     dataElementTypes.DATE,
