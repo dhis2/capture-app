@@ -354,7 +354,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "Aanvaarden"
 
 msgid "Registering Organisation Unit"
 msgstr ""
