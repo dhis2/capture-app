@@ -19,10 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Kies één of meerdere data..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Kies een datum..."
 
 msgid "Today"
 msgstr "Vandaag"
@@ -31,6 +31,8 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"Een mogelijke reden hiervoor is dat de browser of modus (bijvoorbeeld "
+"privacymodus) niet wordt ondersteund. Zie logboek voor details."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -38,48 +40,53 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Je hebt een andere versie van de Capture App geopend in hetzelfde domein. "
+"Momenteel ondersteunt de Capture App slechts één versie tegelijkertijd (in "
+"hetzelfde domein). Vernieuw deze pagina als u deze versie opnieuw wilt "
+"gebruiken, maar houd er rekening mee dat hierdoor andere versies worden "
+"gesloten."
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Kolommen om in tabel weer te geven"
 
 msgid "Column"
 msgstr "Kolom"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Deze waarde is validerend"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "Asynchrone veldupdate is mislukt"
 
 msgid "A value is required"
-msgstr ""
+msgstr "Een waarde is verplicht"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Geef een geldig nummer op"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Geef een geldig geheel getal op"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Geef een positief geheel getal op"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Geef nul of een positief geheel getal op"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Geef een negatief geheel getal op"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Geef een geldige datum op"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Een datum in de toekomst is niet toegestaan"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Geef een geldige datum en tijd op"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "Geef een geldige tijd op"
 
 msgid "Please provide a valid percentage"
 msgstr ""
@@ -91,25 +98,25 @@ msgid "Please provide a valid email address"
 msgstr "geef alstublieft een geldig email adres"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "Geef een geldige leeftijd op"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "Gelieve een geldig telefoonnummer op te geven"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "Geef een geldige organisatie-eenheid op"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "Geef geldige coördinaten op"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "Deze waarde bestaat al"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "\"Van\" kan niet groter zijn dan \"Naar\""
 
 msgid "Checking..."
-msgstr ""
+msgstr "Controleren..."
 
 msgid "Area"
 msgstr "Oppervlakte"
@@ -121,28 +128,30 @@ msgid "Enrollment"
 msgstr "Inschrijving"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "Een datum in de toekomst is niet toegestaan"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Er is een fout opgetreden. Zie logboek voor details"
 
 msgid "Cancel"
 msgstr "Annuleer"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Niet-opgeslagen wijzigingen"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"Als je deze pagina verlaat, worden de wijzigingen die je in dit evenement "
+"hebt aangebracht, ongedaan gemaakt."
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "Ja, weggooien"
 
 msgid "No, stay here"
 msgstr "Nee, blijf hier"
 
 msgid "validation failed"
-msgstr ""
+msgstr "validatie mislukt"
 
 msgid "Errors"
 msgstr "Fouten"
@@ -154,7 +163,7 @@ msgid "Indicators"
 msgstr "Indicatoren"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Waarschuwingen"
 
 msgid "search group result could not be retrieved"
 msgstr ""
@@ -163,64 +172,64 @@ msgid "Complete"
 msgstr "Compleet"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Waarschuwingen gevonden"
 
 msgid "Abort"
-msgstr ""
+msgstr "Afbreken"
 
 msgid "Back to form"
-msgstr ""
+msgstr "Terug naar vorm"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "Toch opslaan"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "Validatiefouten en waarschuwingen"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "Validatie fouten"
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "Validatiewaarschuwingen"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "Sommige operaties lopen nog. Even geduld aub.."
 
 msgid "Operations running"
-msgstr ""
+msgstr "Operaties lopen"
 
 msgid "Sort"
-msgstr ""
+msgstr "Soort"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Geen evenementen om weer te geven"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Gegevens voor offline lijst niet aanwezig"
 
 msgid "Close"
 msgstr "Sluit"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "Selecteer de gebruiker"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Zoek naar gebruiker"
 
 msgid "Me"
-msgstr ""
+msgstr "Mij"
 
 msgid "Anyone"
-msgstr ""
+msgstr "Iedereen"
 
 msgid "None"
 msgstr "Geen"
 
 msgid "Select user"
-msgstr ""
+msgstr "Selecteer gebruiker"
 
 msgid "to"
-msgstr ""
+msgstr "naar"
 
 msgid "From"
 msgstr "Van"
@@ -235,7 +244,7 @@ msgid "This month"
 msgstr "Deze maand"
 
 msgid "This Year"
-msgstr ""
+msgstr "Dit jaar"
 
 msgid "Last week"
 msgstr "Laatste week"
@@ -256,13 +265,13 @@ msgid "Min"
 msgstr "Min"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Bevat tekst"
 
 msgid "Yes"
 msgstr "Ja"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/jjjj"
 
 msgid "Years"
 msgstr "Jaren"
@@ -274,7 +283,7 @@ msgid "Days"
 msgstr "Dagen"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Bestand uploaden"
 
 msgid "selected"
 msgstr "geselecteerd"
@@ -283,16 +292,16 @@ msgid "Delete"
 msgstr "Verwijderen"
 
 msgid "Select file"
-msgstr ""
+msgstr "Selecteer bestand"
 
 msgid "No"
 msgstr "Nee"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Afbeelding uploaden"
 
 msgid "Select image"
-msgstr ""
+msgstr "Selecteer afbeelding"
 
 msgid "Search"
 msgstr "Zoek"
@@ -301,25 +310,27 @@ msgid "Clear"
 msgstr "Duidelijk"
 
 msgid "No results"
-msgstr ""
+msgstr "Geen resultaten"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "begin met typen om te zoeken"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "suggesties konden niet worden opgehaald"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Geen items om weer te geven"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Kan organisatie-eenheid niet ophalen"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Programma bestaat niet"
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
+"Het geselecteerde programma is ongeldig voor de geselecteerde registratie-"
+"eenheid"
 
 msgid "New {{typeName}}"
 msgstr ""
@@ -355,7 +366,7 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Sommige programma's worden gefilterd."
 
 msgid "Show all"
 msgstr "Toon alles"
@@ -367,7 +378,7 @@ msgid "Select program"
 msgstr ""
 
 msgid "No programs available."
-msgstr ""
+msgstr "Geen programma's beschikbaar."
 
 msgid "Online"
 msgstr "Online"
@@ -376,7 +387,7 @@ msgid "Offline"
 msgstr "offline"
 
 msgid "Syncing"
-msgstr ""
+msgstr "synchroniseren"
 
 msgid "Add comment"
 msgstr "Voeg opmerking toe"
@@ -385,133 +396,134 @@ msgid "You dont have access to write comments"
 msgstr ""
 
 msgid "Write comment"
-msgstr ""
+msgstr "Schrijf commentaar"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Compleet evenement"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Basis informatie"
 
 msgid "Status"
 msgstr "status"
 
 msgid "Comments"
-msgstr ""
+msgstr "Opmerkingen"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
+"Voeg een opmerking toe of annuleer deze voordat u het evenement opslaat"
 
 msgid "No write access"
-msgstr ""
+msgstr "Geen schrijfrechten"
 
 msgid "Save"
 msgstr "Sla op"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Toon alle evenementen"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Evenement bewerken"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Evenement kan niet worden geladen. Weet je zeker dat het bestaat?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Evenement kan niet worden geladen"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Organisatie-eenheid kan niet worden geladen"
 
 msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "evenement verwijderen"
 
 msgid "Update"
 msgstr "Bijwerken"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
+msgstr "{{vanDatum}} tot {{totDatum}}"
 
 msgid "after or equal to {{date}}"
-msgstr ""
+msgstr "na of gelijk aan {{datum}}"
 
 msgid "before or equal to {{date}}"
-msgstr ""
+msgstr "voor of gelijk aan {{datum}}"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "groter dan of gelijk aan"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "minder dan of gelijk aan"
 
 msgid "More filters"
-msgstr ""
+msgstr "Meer filters"
 
 msgid "Select columns"
-msgstr ""
+msgstr "Selecteer kolommen"
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Downloaden als JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "Downloaden als XML"
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "Downloaden als CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "Downloaden met huidige filters"
 
 msgid "Download data..."
-msgstr ""
+msgstr "Gegevens downloaden..."
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Rijen per pagina"
 
 msgid "Update view"
-msgstr ""
+msgstr "Weergave bijwerken"
 
 msgid "Save current view..."
-msgstr ""
+msgstr "Huidige weergave opslaan..."
 
 msgid "Save current view as..."
-msgstr ""
+msgstr "Huidige weergave opslaan als..."
 
 msgid "Delete view"
-msgstr ""
+msgstr "Weergave verwijderen"
 
 msgid "Share view..."
-msgstr ""
+msgstr "Weergave delen..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
+msgstr "Weet u zeker dat u de weergave '{{templateNaam}}' wilt verwijderen?"
 
 msgid "Confirm"
 msgstr "Bevestigen"
 
 msgid "Save As view"
-msgstr ""
+msgstr "Opslaan als weergave"
 
 msgid "View name"
-msgstr ""
+msgstr "Naam bekijken"
 
 msgid "Show Less"
-msgstr ""
+msgstr "Laat minder zien"
 
 msgid "Show All"
-msgstr ""
+msgstr "Toon alles"
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "Werklijst kon niet worden geladen"
 
 msgid "an error occurred loading working lists"
-msgstr ""
+msgstr "er is een fout opgetreden bij het laden van werklijsten"
 
 msgid "Registered events"
-msgstr ""
+msgstr "Geregistreerde evenementen"
 
 msgid "Active"
 msgstr "Actief"
@@ -523,19 +535,19 @@ msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Sla op en voeg er nog een toe"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Opslaan en afsluiten"
 
 msgid "Finish"
-msgstr ""
+msgstr "Finish"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Schakel over naar formulierweergave"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Schakel over naar rijweergave"
 
 msgid "New {{TET}}"
 msgstr ""
@@ -549,13 +561,13 @@ msgid ""
 msgstr ""
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Toegewezen gebruiker"
 
 msgid "Relationships"
 msgstr "Relaties"
 
 msgid "Assignee"
-msgstr ""
+msgstr "Cessionaris"
 
 msgid "Saving to"
 msgstr ""
@@ -567,40 +579,45 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Dit is geen evenementprogramma of de metagegevens zijn beschadigd. Zie "
+"logboek voor details."
 
 msgid "This event"
-msgstr ""
+msgstr "Dit evenement"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
+"Relatie van het type {{relationshipTypeName}} met {{entityName}} bestaat al"
 
 msgid "Assigned to"
-msgstr ""
+msgstr "Toegewezen aan"
 
 msgid "New event"
 msgstr "Nieuw evenement"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "Nieuwe evenementrelatie"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "Relatie toevoegen aan evenement."
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "Ga terug naar het evenement zonder de relatie op te slaan"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
+"Als u deze pagina verlaat, worden de selecties die u voor een nieuwe relatie"
+" hebt gemaakt, verwijderd"
 
 msgid "events added"
-msgstr ""
+msgstr "evenementen toegevoegd"
 
 msgid "No events added"
-msgstr ""
+msgstr "Geen evenementen toegevoegd"
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
@@ -619,31 +636,36 @@ msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"Er bestaat een duplicaat (maar er waren enkele fouten, zie logboek voor "
+"details"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"Een item met deze {{attribuutNaam}} is al geregistreerd, maar je hebt er "
+"geen toegang toe"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "Je hebt deze {{attribuutNaam}} al geregistreerd"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
+"Een {{trackedEntityTypeNaam}} met deze {{attribuutNaam}} is al geregistreerd"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Toon geregistreerde {{trackedEntityTypeNaam}}"
 
 msgid "Registered person"
-msgstr ""
+msgstr "Geregistreerde persoon"
 
 msgid "Link"
 msgstr "Link"
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "Metadatafout. zie logboek voor details"
 
 msgid "Review duplicates"
 msgstr ""
@@ -652,7 +674,7 @@ msgid "Create {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "Mogelijke duplicaten gevonden"
 
 msgid "An error occured loading possible duplicates"
 msgstr ""
@@ -673,25 +695,25 @@ msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"
-msgstr ""
+msgstr "Zoekresultaten"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "Geen {{trackedEntityTypeNaam}} gevonden."
 
 msgid "{{teiCount}} results found for"
 msgstr ""
 
 msgid "New search"
-msgstr ""
+msgstr "Nieuwe zoekopdracht"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Zoekopdracht bewerken"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "Link naar een bestaande {{trackedEntityType}}"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Nieuwe {{trackedEntityType}} maken"
 
 msgid "Register"
 msgstr "Register"
@@ -700,27 +722,29 @@ msgid "You dont have access to edit this event"
 msgstr ""
 
 msgid "Event details"
-msgstr ""
+msgstr "Evenement details"
 
 msgid "Event completed"
-msgstr ""
+msgstr "Evenement voltooid"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
+"Als u deze pagina verlaat, worden alle selecties die u voor een nieuwe "
+"relatie hebt gemaakt, verwijderd"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "Er is niemand toegewezen aan dit evenement"
 
 msgid "Assign"
-msgstr ""
+msgstr "Toewijzen"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "Evenement toegewezen aan {{naam}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "Feedbacks"
 
 msgid "You dont have access to delete this relationship"
 msgstr ""
@@ -747,52 +771,52 @@ msgid "Selected program"
 msgstr "Geselecteerd programma"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Zoek {{uniqueAttrNaam}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Zoek op attributen"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "Om met het geselecteerde programma te werken,"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "open de Tracker Capture-app"
 
 msgid "Program not found"
-msgstr ""
+msgstr "Programma niet gevonden"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "Programma is geen tracker-programma"
 
 msgid "Profile"
 msgstr "Profiel"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Fout bij opslaan van evenement"
 
 msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "Kan evenement niet verwijderen"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "Kan werklijst niet opslaan"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "Kan werklijst niet toevoegen"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "Kan werklijst niet verwijderen"
 
 msgid "Organisation unit search failed. See log for details"
 msgstr ""
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "gevolgd entiteitsexemplaar"
 
 msgid "Set coordinate"
 msgstr "Coördinaat instellen"
@@ -807,31 +831,31 @@ msgid "Date"
 msgstr "Datum\n"
 
 msgid "Time"
-msgstr ""
+msgstr "Tijd"
 
 msgid "From date"
-msgstr ""
+msgstr "Van datum"
 
 msgid "From time"
-msgstr ""
+msgstr "Van tijd"
 
 msgid "To date"
-msgstr ""
+msgstr "Daten"
 
 msgid "To time"
-msgstr ""
+msgstr "Timen"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "fout opgetreden tijdens veldvalidatie"
 
 msgid "error"
-msgstr ""
+msgstr "fout"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Polygoon verwijderen"
 
 msgid "Set area"
-msgstr ""
+msgstr "Gebied instellen"
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "Compatibiliteitsmodus"
