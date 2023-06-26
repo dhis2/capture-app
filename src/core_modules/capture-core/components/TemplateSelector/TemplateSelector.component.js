@@ -2,27 +2,29 @@
 import React, { useMemo, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
-import { Button, spacersNum, colors } from '@dhis2/ui';
+import { Button, spacers, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { localeCompareStrings } from '../../../../utils/localeCompareStrings';
+import { localeCompareStrings } from '../../utils/localeCompareStrings';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';
 import type { WorkingListTemplates, WorkingListTemplate } from './workingListsBase.types';
-import { Widget } from '../../../Widget';
-import { BookmarkAddIcon } from '../../../../../capture-ui/Icons';
+import { Widget } from '../Widget';
+import { BookmarkAddIcon } from '../../../capture-ui/Icons';
 
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     configsContainer: {
         display: 'flex',
         flexWrap: 'wrap',
-        padding: `${theme.typography.pxToRem(3)} 0rem`,
+        padding: 0,
+        gap: '4px',
+        marginBottom: spacers.dp8,
         overflow: 'hidden',
     },
     chipContainer: {
-        padding: `${theme.typography.pxToRem(5)} ${theme.typography.pxToRem(8)}`,
+        padding: 0,
     },
     innerContainer: {
-        margin: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+        margin: `0 ${spacers.dp16} ${spacers.dp16}`,
         '&.empty': {
             display: 'flex',
             flexDirection: 'column',
@@ -39,8 +41,8 @@ const getStyles = (theme: Theme) => ({
         },
     },
     icon: {
-        width: `${spacersNum.dp32}px`,
-        height: `${spacersNum.dp32}px`,
+        width: spacers.dp32,
+        height: spacers.dp32,
     },
 });
 
@@ -104,7 +106,7 @@ const TemplateSelectorPlain = (props: Props) => {
                         </p>
                     </>
                 )}
-                <Button small onClick={onCreateTemplate} color="secondary">
+                <Button small onClick={onCreateTemplate} color="secondary" dataTest="template-selector-create-list">
                     {i18n.t('Create saved list')}
                 </Button>
             </div>

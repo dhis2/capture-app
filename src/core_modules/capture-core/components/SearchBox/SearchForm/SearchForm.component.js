@@ -2,17 +2,17 @@
 import React, { type ComponentType, useContext, useEffect, useMemo, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
-import { D2Form } from '../../../D2Form';
-import { searchScopes } from '../SearchPage.constants';
-import { Section, SectionHeaderSimple } from '../../../Section';
+import { Button, spacers, colors } from '@dhis2/ui';
+import { D2Form } from '../../D2Form';
+import { searchScopes } from '../SearchBox.constants';
+import { Section, SectionHeaderSimple } from '../../Section';
 import type { Props } from './SearchForm.types';
-import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
-import { ResultsPageSizeContext } from '../../shared-contexts';
+import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
+import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     searchDomainSelectorSection: {
-        margin: '16px 8px 8px 8px',
+        marginBottom: spacers.dp8,
     },
     searchRow: {
         display: 'flex',
@@ -23,7 +23,7 @@ const getStyles = (theme: Theme) => ({
         width: '100%',
     },
     searchButtonContainer: {
-        padding: theme.typography.pxToRem(10),
+        padding: spacers.dp8,
         display: 'flex',
         alignItems: 'center',
     },
@@ -31,12 +31,14 @@ const getStyles = (theme: Theme) => ({
         textAlign: 'right',
         fontSize: '14px',
         flexGrow: 1,
+        color: colors.grey700,
     },
     textError: {
         textAlign: 'right',
-        fontSize: theme.typography.pxToRem(14),
+        fontSize: '14px',
+        fontWeight: 500,
         flexGrow: 1,
-        color: theme.palette.error.main,
+        color: colors.red600,
     },
 });
 
@@ -106,6 +108,8 @@ const SearchFormIndex = ({
     formsValues,
     searchStatus,
     isSearchViaAttributesValid,
+    isSearchViaUniqueIdValid,
+    showUniqueSearchValueEmptyModal,
     keptFallbackSearchFormValues,
     fallbackTriggered,
 }: Props) => {
@@ -139,19 +143,24 @@ const SearchFormIndex = ({
         const formReference = {};
         const containerButtonRef = {};
 
-        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId) => {
-            const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
-            if (isValid) {
-                switch (searchScopeType) {
-                case searchScopes.PROGRAM:
-                    searchViaUniqueIdOnScopeProgram({ programId: searchScopeId, formId });
-                    break;
-                case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
-                    break;
-                default:
-                    break;
+        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId, uniqueTEAName) => {
+            const isSearchUniqueIdValid = isSearchViaUniqueIdValid(formId);
+            if (isSearchUniqueIdValid) {
+                const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
+                if (isValid) {
+                    switch (searchScopeType) {
+                    case searchScopes.PROGRAM:
+                        searchViaUniqueIdOnScopeProgram({ programId: searchScopeId, formId });
+                        break;
+                    case searchScopes.TRACKED_ENTITY_TYPE:
+                        searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
+                        break;
+                    default:
+                        break;
+                    }
                 }
+            } else {
+                showUniqueSearchValueEmptyModal({ uniqueTEAName });
             }
         };
 
@@ -179,10 +188,11 @@ const SearchFormIndex = ({
         const FormInformativeMessage = ({ minAttributesRequiredToSearch }) =>
             (<div className={error ? classes.textError : classes.textInfo}>
                 {
-                    i18n.t(
-                        'Fill in at least {{minAttributesRequiredToSearch}}  attributes to search',
-                        { minAttributesRequiredToSearch },
-                    )
+                    i18n.t('Fill in at least {{count}} attribute to search', {
+                        count: minAttributesRequiredToSearch,
+                        defaultValue: 'Fill in at least {{count}} attribute to search',
+                        defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+                    })
                 }
             </div>);
 
@@ -213,10 +223,11 @@ const SearchFormIndex = ({
                                     className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
-                                            containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
+                                            containerStyle={{ alignItems: 'center' }}
                                             title={i18n.t('Search {{name}}', {
                                                 name, interpolation: { escapeValue: false },
                                             })}
+                                            titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}
@@ -240,13 +251,14 @@ const SearchFormIndex = ({
                                         ref={(ref) => { containerButtonRef[formId] = ref; }}
                                     >
                                         <Button
-                                            disabled={searchStatus === searchPageStatus.LOADING}
+                                            disabled={searchStatus === searchBoxStatus.LOADING}
                                             onClick={() =>
                                                 selectedSearchScopeId &&
                                             handleSearchViaUniqueId(
                                                 searchScope,
                                                 selectedSearchScopeId,
                                                 formId,
+                                                name,
                                             )}
                                         >
                                             {i18n.t('Search by {{name}}', {
@@ -273,8 +285,9 @@ const SearchFormIndex = ({
                                     className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
-                                            containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
+                                            containerStyle={{ alignItems: 'center' }}
                                             title={searchByText}
+                                            titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}
@@ -296,7 +309,7 @@ const SearchFormIndex = ({
                                         ref={(ref) => { containerButtonRef[formId] = ref; }}
                                     >
                                         <Button
-                                            disabled={searchStatus === searchPageStatus.LOADING}
+                                            disabled={searchStatus === searchBoxStatus.LOADING}
                                             onClick={() =>
                                                 selectedSearchScopeId &&
                                             handleSearchViaAttributes(
@@ -336,6 +349,8 @@ const SearchFormIndex = ({
         searchViaAttributesOnScopeTrackedEntityType,
         searchGroupsForSelectedScope,
         isSearchViaAttributesValid,
+        isSearchViaUniqueIdValid,
+        showUniqueSearchValueEmptyModal,
         saveCurrentFormData,
         formsValues,
         resultsPageSize,

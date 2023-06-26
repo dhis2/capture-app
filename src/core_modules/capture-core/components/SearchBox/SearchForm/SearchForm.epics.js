@@ -3,32 +3,32 @@ import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { empty, from, of, EMPTY } from 'rxjs';
 import {
-    searchPageActionTypes,
+    searchBoxActionTypes,
     fallbackSearch,
-    showEmptyResultsViewOnSearchPage,
-    showErrorViewOnSearchPage,
-    showLoadingViewOnSearchPage,
-    showSuccessResultsViewOnSearchPage,
-    addSuccessResultsViewOnSearchPage,
-    showTooManyResultsViewOnSearchPage,
-    showFallbackNotEnoughAttributesOnSearchPage,
-} from '../SearchPage.actions';
+    showEmptyResultsViewOnSearchBox,
+    showErrorViewOnSearchBox,
+    showLoadingViewOnSearchBox,
+    showSuccessResultsViewOnSearchBox,
+    addSuccessResultsViewOnSearchBox,
+    showTooManyResultsViewOnSearchBox,
+    showFallbackNotEnoughAttributesOnSearchBox,
+} from '../SearchBox.actions';
 import {
     getTrackedEntityInstances,
-} from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
+} from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
     type DataElement,
     dataElementTypes,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
-} from '../../../../metaData';
-import { PAGINATION } from '../SearchPage.constants';
-import { buildUrlQueryString } from '../../../../utils/routing';
+} from '../../../metaData';
+import { PAGINATION } from '../SearchBox.constants';
+import { buildUrlQueryString } from '../../../utils/routing';
 import {
     navigateToEnrollmentOverview,
-} from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+} from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { dataElementConvertFunctions } from './SearchFormElementConverter/SearchFormElementConverter';
-import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import type { QuerySingleResource } from '../../../utils/api/api.types';
 
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
@@ -61,10 +61,10 @@ const searchViaUniqueIdStream = ({
                     programId,
                 }));
             }
-            return of(showEmptyResultsViewOnSearchPage());
+            return of(showEmptyResultsViewOnSearchBox());
         }),
-        startWith(showLoadingViewOnSearchPage()),
-        catchError(() => of(showErrorViewOnSearchPage())),
+        startWith(showLoadingViewOnSearchBox()),
+        catchError(() => of(showErrorViewOnSearchBox())),
     );
 
 export const deriveFilterKeyword = (fieldId: string, attributes: Array<DataElement>): ("eq" | "like") => {
@@ -92,34 +92,34 @@ const getFiltersForAttributesSearchQuery = (formValues, attributes) => Object.ke
 
 const handleErrors = ({ httpStatusCode, message }) => {
     if (httpStatusCode === 409 && message === 'maxteicountreached') {
-        return of(showTooManyResultsViewOnSearchPage());
+        return of(showTooManyResultsViewOnSearchBox());
     }
-    return of(showErrorViewOnSearchPage());
+    return of(showErrorViewOnSearchBox());
 };
 
 const searchViaAttributesStream = ({ queryArgs, attributes, triggeredFrom, absoluteApiPath, querySingleResource }) =>
     from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
-                return showSuccessResultsViewOnSearchPage(
+                return showSuccessResultsViewOnSearchBox(
                     searchResults,
                     pagingData.currentPage,
                 );
             }
 
             if (searchResults.length === 0 && triggeredFrom === PAGINATION) {
-                return showSuccessResultsViewOnSearchPage(
+                return showSuccessResultsViewOnSearchBox(
                     [],
                     pagingData.currentPage,
                 );
             }
 
-            return showSuccessResultsViewOnSearchPage(
+            return showSuccessResultsViewOnSearchBox(
                 searchResults,
                 1,
             );
         }),
-        startWith(showLoadingViewOnSearchPage()),
+        startWith(showLoadingViewOnSearchBox()),
         catchError(handleErrors),
     );
 
@@ -129,7 +129,7 @@ export const searchViaUniqueIdOnScopeProgramEpic = (
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
-        ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH),
+        ofType(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId } }) => {
             const {
                 formsValues,
@@ -160,7 +160,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
-        ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
+        ofType(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
             const {
                 formsValues,
@@ -189,7 +189,7 @@ export const searchViaAttributesOnScopeProgramEpic = (
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
-        ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
+        ofType(searchBoxActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId, page, triggeredFrom } }) => {
             const { formsValues } = store.value;
             const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
@@ -219,7 +219,7 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
-        ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
+        ofType(searchBoxActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId, page, triggeredFrom } }) => {
             const { formsValues } = store.value;
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
@@ -244,7 +244,7 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
 
 export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(searchPageActionTypes.FALLBACK_SEARCH_START),
+        ofType(searchBoxActionTypes.FALLBACK_SEARCH_START),
         flatMap(({ payload: { programId, pageSize, page } }) => {
             const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
             if (trackerProgram.trackedEntityType) {
@@ -256,8 +256,8 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
                         minAttributesRequiredToSearch,
                         searchForm,
                     } = availableSearchGroup;
-                    const { searchPage } = store.value;
-                    const searchTerms = searchPage.currentSearchInfo.currentSearchTerms;
+                    const { searchDomain } = store.value;
+                    const searchTerms = searchDomain.currentSearchInfo.currentSearchTerms;
                     const searchableFields = searchForm.getElements();
 
                     const { searchableValuesCount, fallbackFormValues } = searchTerms.reduce((acc, term) => {
@@ -269,7 +269,7 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
                     }, { searchableValuesCount: 0, fallbackFormValues: {} });
 
                     if (!minAttributesRequiredToSearch && !searchableValuesCount) {
-                        return of(showFallbackNotEnoughAttributesOnSearchPage({
+                        return of(showFallbackNotEnoughAttributesOnSearchBox({
                             searchableFields, minAttributesRequiredToSearch: 1,
                         }));
                     }
@@ -278,11 +278,11 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
                         return of(fallbackSearch({ trackedEntityTypeId, fallbackFormValues, page, pageSize }));
                     }
 
-                    return of(showFallbackNotEnoughAttributesOnSearchPage({
+                    return of(showFallbackNotEnoughAttributesOnSearchBox({
                         searchableFields, minAttributesRequiredToSearch,
                     }));
                 }
-                return of(showErrorViewOnSearchPage());
+                return of(showErrorViewOnSearchBox());
             }
 
             return empty();
@@ -295,7 +295,7 @@ export const fallbackSearchEpic = (
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
-        ofType(searchPageActionTypes.FALLBACK_SEARCH),
+        ofType(searchBoxActionTypes.FALLBACK_SEARCH),
         flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }) => {
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
             const filter = getFiltersForAttributesSearchQuery(fallbackFormValues, attributes).filter(query => query);
@@ -313,9 +313,9 @@ export const fallbackSearchEpic = (
             return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
                 map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
                     if (searchResults.length) {
-                        return addSuccessResultsViewOnSearchPage(searchResults, pagingData.currentPage);
+                        return addSuccessResultsViewOnSearchBox(searchResults, pagingData.currentPage);
                     }
-                    return showEmptyResultsViewOnSearchPage();
+                    return showEmptyResultsViewOnSearchBox();
                 }),
                 catchError(handleErrors),
             );
@@ -324,7 +324,7 @@ export const fallbackSearchEpic = (
 
 export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
-        ofType(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED),
+        ofType(searchBoxActionTypes.FALLBACK_SEARCH_COMPLETED),
         switchMap(({ payload: { orgUnitId, trackedEntityTypeId } }) => {
             history.push(`/search?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`);
             return EMPTY;

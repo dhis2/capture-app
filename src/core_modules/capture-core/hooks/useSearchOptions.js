@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import type { RenderFoundation } from '../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from './useTrackedEntityTypesWithCorrelatedPrograms';
-import type { AvailableSearchOption } from '../components/Pages/Search/SearchPage.types';
+import type { AvailableSearchOption } from '../components/SearchBox';
 
 type SearchGroups = Array<{|
     +searchForm: RenderFoundation,
@@ -37,11 +37,11 @@ export const buildSearchOption =
                 .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
                     unique,
                     searchForm,
-                    // We adding the `formId` here for the reason that we will use it in the SearchPage component.
+                    // We adding the `formId` here for the reason that we will use it in the SearchBox component.
                     // Specifically the function `addFormData` will add an object for each input field to the store.
                     // Also the formId is passed in the `Form` component and needs to be identical with the one in
                     // the store in order for the `Form` to function. For these reasons we generate it once here.
-                    formId: `searchPageForm-${id}-${index}`,
+                    formId: `searchDomainForm-${id}-${index}`,
                     searchScope,
                     minAttributesRequiredToSearch,
                 })),
