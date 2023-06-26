@@ -354,12 +354,6 @@ msgstr "Ano, vytvořit novou událost"
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
 
-msgid "Warnings found"
-msgstr "Nalezena varování"
-
-msgid "Abort"
-msgstr "Přerušit"
-
 msgid "Back to form"
 msgstr "Zpět do formuláře"
 
@@ -1543,6 +1537,9 @@ msgstr "Smazat polygon"
 
 msgid "Set area"
 msgstr "Nastavit oblast"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "Režim kompatibility"

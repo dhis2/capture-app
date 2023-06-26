@@ -372,12 +372,6 @@ msgstr ""
 "Al salir de esta página, se descartarán los cambios que realizó en este "
 "evento."
 
-msgid "Warnings found"
-msgstr "Advertencias encontradas"
-
-msgid "Abort"
-msgstr "Cancelar"
-
 msgid "Back to form"
 msgstr "Volver al formulario"
 
@@ -1591,6 +1585,9 @@ msgstr "Eliminar polígono"
 
 msgid "Set area"
 msgstr "Establecer área"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "Modo de compatibilidad"

@@ -358,12 +358,6 @@ msgstr ""
 "Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
 "denne hendelsen."
 
-msgid "Warnings found"
-msgstr "Advarsler funnet"
-
-msgid "Abort"
-msgstr "Avbryt"
-
 msgid "Back to form"
 msgstr "Tilbake til skjemaet"
 
@@ -1540,6 +1534,9 @@ msgstr "Slett polygon"
 
 msgid "Set area"
 msgstr "Sett område"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "Kompabilitetsmodus"

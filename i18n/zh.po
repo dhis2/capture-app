@@ -42,7 +42,7 @@ msgstr ""
 "App仅支持同时运行一个版本（在同一域中）。如果您想再次使用此版本，请刷新此页面，但是请注意，它将关闭其他版本。"
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "查看 {{programName}} 仪表板"
 
 msgid "View dashboard"
 msgstr "查看仪表盘"
@@ -147,7 +147,7 @@ msgid "Enrollment"
 msgstr "报名"
 
 msgid "Please select {{categoryName}}"
-msgstr ""
+msgstr "请选择{{categoryName}}"
 
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
@@ -344,12 +344,6 @@ msgstr "是的，创建新事件"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "离开此页面将放弃您对此事件所做的更改。"
-
-msgid "Warnings found"
-msgstr "发现警告"
-
-msgid "Abort"
-msgstr "关于"
 
 msgid "Back to form"
 msgstr "回到表单"
@@ -593,18 +587,20 @@ msgid ""
 "functionality in Capture is ongoing and will be added in upcoming app "
 "releases."
 msgstr ""
+"通过单击下面的选择加入，您将开始使用 Capture 应用程序中的新注册仪表板来执行此跟踪项目。目前，Tracker Capture "
+"的某些功能尚未添加，包括关系和推荐功能。在 Capture 中包含此 Tracker 功能的工作正在进行中，并将添加到即将发布的应用程序中。"
 
 msgid ""
 "The core team appreciates any feedback on this new functionality which is "
 "currently being beta tested, please report any issues and feedback in the "
 "DHIS2 JIRA project."
-msgstr ""
+msgstr "核心团队感谢对目前正在 Beta 测试的这个新功能的任何反馈，请报告 DHIS2 JIRA 项目中的任何问题和反馈。"
 
 msgid ""
 "Click the button below to opt-in to the new enrollment dashboard "
 "functionality in the Capture app (beta) for this Tracker program for all "
 "users."
-msgstr ""
+msgstr "单击下面的按钮，为所有用户选择加入此 Tracker 程序的 Capture 应用程序（测试版）中的新注册仪表板功能。"
 
 msgid "Yes, opt in"
 msgstr "是的，选择加入"
@@ -624,7 +620,7 @@ msgstr "打开此报名时出现错误。请输入有效网址。"
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
+msgstr "获取注册时出错。请输入有效网址。"
 
 msgid "Enrollment Dashboard"
 msgstr "报名仪表板"
@@ -663,19 +659,19 @@ msgid ""
 msgstr "{{programName}}具有类别。选择所有类别以查看仪表板。"
 
 msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
+msgstr "注册 ID {{enrollmentId}} 无效。"
 
 msgid "Choose an enrollment to view the dashboard."
 msgstr "选择一个报名以查看仪表板。"
 
 msgid "There are no active enrollments."
-msgstr ""
+msgstr "没有有效的注册。"
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "在此计划中为 {{teiDisplayName}} 添加新注册。"
 
 msgid "No access to program owner."
-msgstr ""
+msgstr "无法访问项目所有者。"
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "该项目未报名{{teiDisplayName}} 。"
@@ -741,7 +737,7 @@ msgid "Refer"
 msgstr "转诊"
 
 msgid "You can’t add any more {{ programStageName }} events"
-msgstr ""
+msgstr "您不能再添加 {{ programStageName }} 事件"
 
 msgid "Cancel without saving"
 msgstr "取消而不保存"
@@ -750,7 +746,7 @@ msgid "Choose a stage for a new event"
 msgstr "为新活动选择一个舞台"
 
 msgid "Program Stages could not be loaded"
-msgstr "无法加载程序阶段"
+msgstr "无法加载项目阶段"
 
 msgid "Stage"
 msgstr "阶段"
@@ -918,31 +914,31 @@ msgid "Add relationship"
 msgstr "添加关系"
 
 msgid "No results found for "
-msgstr ""
+msgstr "没有找到结果"
 
 msgid "Registering unit"
 msgstr "注册机构"
 
 msgid "Choose a registering unit"
-msgstr ""
+msgstr "选择报名单位"
 
 msgid "Clear selection"
-msgstr ""
+msgstr "清空选项"
 
 msgid "No programs available."
 msgstr "无可用项目"
 
 msgid "Search for a program"
-msgstr ""
+msgstr "搜索项目"
 
 msgid "Some programs are being filtered by the chosen registering unit"
-msgstr ""
+msgstr "部分节目正在被选定的注册单位过滤"
 
 msgid "Show all programs"
-msgstr ""
+msgstr "显示所有项目"
 
 msgid "Choose a program"
-msgstr ""
+msgstr "选择一个项目"
 
 msgid "Search for {{titleText}}"
 msgstr "搜索{{titleText}}"
@@ -959,7 +955,7 @@ msgstr "选择一种类型以开始搜索"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
+msgstr[0] "至少填写 {{count}} 个属性进行搜索"
 
 msgid "Search {{name}}"
 msgstr "搜索{{name}}"
@@ -1018,7 +1014,7 @@ msgid "Cannot search in all programs"
 msgstr "无法在所有项目中搜索"
 
 msgid "Missing search criteria"
-msgstr ""
+msgstr "缺少搜索条件"
 
 msgid "Results found"
 msgstr "找到的结果"
@@ -1059,20 +1055,20 @@ msgid "This program is protected"
 msgstr "该项目受保护"
 
 msgid "Reason to check for enrollments"
-msgstr ""
+msgstr "检查注册的原因"
 
 msgid ""
 "Describe the reason you are checking for enrollments in this protected "
 "program"
-msgstr ""
+msgstr "描述您检查此受保护计划的注册情况的原因"
 
 msgid "Check for enrollments"
-msgstr ""
+msgstr "检查注册"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
-msgstr ""
+msgstr "您必须提供一个理由来检查此受保护计划的注册情况。所有活动都将被记录。"
 
 msgid "Save comment"
 msgstr "保存注释"
@@ -1281,7 +1277,7 @@ msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
 
 msgid "To open this event, please wait until saving is complete"
-msgstr ""
+msgstr "要打开此活动，请等待保存完成"
 
 msgid "Show {{ rest }} more"
 msgstr "显示 {{ rest}} 更多"
@@ -1347,19 +1343,19 @@ msgid "Choose a program stage to filter by {{label}}"
 msgstr "选择要按 {{label}} 筛选的项目阶段"
 
 msgid "Active enrollments"
-msgstr ""
+msgstr "活跃注册"
 
 msgid "Completed enrollments"
-msgstr ""
+msgstr "完成注册"
 
 msgid "Cancelled enrollments"
-msgstr ""
+msgstr "取消注册"
 
 msgid "Working list could not be updated"
 msgstr "工作清单无法更新"
 
 msgid "an error occurred loading the working lists"
-msgstr ""
+msgstr "加载工作列表时发生错误"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "加载跟踪的实体实例列表时出错"
@@ -1498,6 +1494,9 @@ msgstr "删除多边形"
 
 msgid "Set area"
 msgstr "设置区域"
+
+msgid "Area on map saved"
+msgstr "地图上的区域已保存"
 
 msgid "Compatibility mode"
 msgstr "兼容性模式"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -357,12 +357,6 @@ msgstr ""
 "Părăsirea acestei pagini presupune pierderea modificărilor pe care le-ați "
 "făcut la acest eveniment."
 
-msgid "Warnings found"
-msgstr "Avertizări găsite"
-
-msgid "Abort"
-msgstr ""
-
 msgid "Back to form"
 msgstr "Înapoi la formă"
 
@@ -595,6 +589,27 @@ msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
 
 msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
 msgstr ""
 
 msgid "Yes, opt in"
@@ -1199,11 +1214,25 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "after"
 msgstr "după"
 
 msgid "before"
 msgstr "pînă la"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1267,7 +1296,7 @@ msgstr "Editare"
 msgid "New {{ eventName }} event"
 msgstr "Eveniment nou {{ eventName }}"
 
-msgid "This event is not yet preserved and cannot be edited"
+msgid "To open this event, please wait until saving is complete"
 msgstr ""
 
 msgid "Show {{ rest }} more"
@@ -1318,6 +1347,9 @@ msgstr "Descărcare date..."
 msgid "an error occurred loading working lists"
 msgstr ""
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "Data Înregistrării"
 
@@ -1327,10 +1359,16 @@ msgstr "Inactiv"
 msgid "Enrollment status"
 msgstr "Starea înrolării"
 
-msgid "Assigned to"
+msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Choose a program stage to filter by {{label}}"
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1475,6 +1513,9 @@ msgid "Delete polygon"
 msgstr "Lichidare poligon"
 
 msgid "Set area"
+msgstr ""
+
+msgid "Area on map saved"
 msgstr ""
 
 msgid "Compatibility mode"
