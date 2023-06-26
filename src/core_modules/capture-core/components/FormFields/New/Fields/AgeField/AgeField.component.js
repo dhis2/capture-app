@@ -8,13 +8,6 @@ import { parseDate, convertMomentToDateFormatString } from '../../../../../utils
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 
 const getStyles = (theme: Theme) => ({
-    inputWrapperFocused: {
-        border: `2px solid ${theme.palette.primary.light}`,
-        borderRadius: '5px',
-    },
-    inputWrapperUnfocused: {
-        padding: 2,
-    },
     innerInputError: {
         color: theme.palette.error.main,
         padding: theme.typography.pxToRem(3),

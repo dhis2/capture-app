@@ -19,7 +19,7 @@ export const TemplateSelectorChip = (props: Props) => {
     const text = displayName.length > 30 ? `${displayName.substring(0, 27)}...` : displayName;
 
     return (
-        <Chip dataTest="workinglist-template-selector-chip" onClick={selectTemplateHandler}>
+        <Chip marginTop="0" marginBottom="0" marginLeft="0" marginRight="0" dataTest="workinglist-template-selector-chip" onClick={selectTemplateHandler}>
             {text}
         </Chip>
     );

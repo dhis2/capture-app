@@ -3,9 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
 import { withStyles } from '@material-ui/core/';
-import { IconFileDocument24, Tooltip } from '@dhis2/ui';
+import { spacers, IconFileDocument24, Tooltip, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '../../../Buttons/Button.component';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
@@ -14,28 +13,25 @@ import type { ProgramStage } from '../../../../metaData';
 import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
 
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     container: {
         flexGrow: 2,
         flexBasis: 0,
     },
     content: {
         display: 'flex',
+        gap: spacers.dp8,
     },
     dataEntryContainer: {
         flexGrow: 1,
-        padding: theme.typography.pxToRem(10),
     },
     actionsContainer: {
-        minWidth: theme.typography.pxToRem(128),
-        padding: theme.typography.pxToRem(10),
-        paddingTop: theme.typography.pxToRem(30),
+        flexShrink: 0,
     },
     button: {
         whiteSpace: 'nowrap',
     },
     editButtonContainer: {
-        display: 'inline-block',
     },
 });
 
@@ -102,9 +98,10 @@ const EventDetailsSectionPlain = (props: Props) => {
                 >
                     <Button
                         className={classes.button}
-                        variant="raised"
                         onClick={() => onOpenEditEvent(orgUnit)}
                         disabled={!canEdit}
+                        secondary
+                        small
                     >
                         <Tooltip content={i18n.t('You don\'t have access to edit this event')}>
                             {({ onMouseOver, onMouseOut, ref }) => (<div ref={(divRef) => {

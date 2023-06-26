@@ -3,9 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { compose } from 'redux';
 import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { spacers } from '@dhis2/ui';
+import { spacers, colors } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Paper from '@material-ui/core/Paper/Paper';
 
 import type { ComponentProps, Props } from './SearchBox.types';
 import { searchBoxStatus } from '../../reducers/descriptions/searchDomain.reducerDescription';
@@ -19,26 +18,30 @@ import { cleanFallbackRelatedData } from './SearchBox.actions';
 import { useSearchOption, useFallbackTriggered } from './hooks';
 import { SearchStatus } from './SearchStatus';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     half: {
         flex: 1,
     },
     title: {
-        padding: `${spacers.dp8} 0 0px ${spacers.dp8}`,
         fontWeight: 500,
-        marginBottom: theme.typography.pxToRem(16),
+        marginBottom: spacers.dp24,
     },
     container: {
-        padding: `${spacers.dp12} 0 ${spacers.dp24} ${spacers.dp24}`,
+        color: colors.grey900,
+        padding: '8px 24px 24px 24px',
     },
     innerContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         gap: spacers.dp16,
     },
-    paper: {
-        padding: theme.typography.pxToRem(10),
+    searchFormContainer: {
+        padding: spacers.dp16,
         flex: 1,
+        background: colors.white,
+        border: '1px solid',
+        borderColor: colors.grey400,
+        borderRadius: 3,
     },
     emptySelectionPaperContent: {
         display: 'flex',
@@ -107,7 +110,7 @@ const Index = ({
         <>
             <div data-test="search-page-content" className={classes.container}>
                 <div className={classes.innerContainer}>
-                    <Paper className={classes.paper}>
+                    <div className={classes.searchFormContainer}>
                         <div className={classes.title}>
                             {i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } })}
                         </div>
@@ -142,7 +145,7 @@ const Index = ({
                                 />
                             </div>
                         </div>
-                    </Paper>
+                    </div>
                 </div>
             </div>
 

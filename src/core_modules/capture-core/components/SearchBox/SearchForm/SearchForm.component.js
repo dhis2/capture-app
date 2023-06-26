@@ -2,7 +2,7 @@
 import React, { type ComponentType, useContext, useEffect, useMemo, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
+import { Button, spacers, colors } from '@dhis2/ui';
 import { D2Form } from '../../D2Form';
 import { searchScopes } from '../SearchBox.constants';
 import { Section, SectionHeaderSimple } from '../../Section';
@@ -10,9 +10,9 @@ import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     searchDomainSelectorSection: {
-        margin: '16px 8px 8px 8px',
+        marginBottom: spacers.dp8,
     },
     searchRow: {
         display: 'flex',
@@ -23,7 +23,7 @@ const getStyles = (theme: Theme) => ({
         width: '100%',
     },
     searchButtonContainer: {
-        padding: theme.typography.pxToRem(10),
+        padding: spacers.dp8,
         display: 'flex',
         alignItems: 'center',
     },
@@ -31,12 +31,14 @@ const getStyles = (theme: Theme) => ({
         textAlign: 'right',
         fontSize: '14px',
         flexGrow: 1,
+        color: colors.grey700,
     },
     textError: {
         textAlign: 'right',
-        fontSize: theme.typography.pxToRem(14),
+        fontSize: '14px',
+        fontWeight: 500,
         flexGrow: 1,
-        color: theme.palette.error.main,
+        color: colors.red600,
     },
 });
 
@@ -221,10 +223,11 @@ const SearchFormIndex = ({
                                     className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
-                                            containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
+                                            containerStyle={{ alignItems: 'center' }}
                                             title={i18n.t('Search {{name}}', {
                                                 name, interpolation: { escapeValue: false },
                                             })}
+                                            titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}
@@ -282,8 +285,9 @@ const SearchFormIndex = ({
                                     className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
-                                            containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
+                                            containerStyle={{ alignItems: 'center' }}
                                             title={searchByText}
+                                            titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}

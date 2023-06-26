@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "100.32.13",
+    "version": "100.32.15",
     "cacheVersion": "5",
     "serverVersion": "38",
     "license": "BSD-3-Clause",
@@ -17,7 +17,7 @@
         "@dhis2/d2-ui-org-unit-tree": "^7.3.3",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/d2-ui-sharing-dialog": "^7.3.3",
-        "@dhis2/rules-engine-javascript": "100.32.13",
+        "@dhis2/rules-engine-javascript": "100.32.15",
         "@dhis2/ui": "8.12.2",
         "@joakim_sm/react-infinite-calendar": "^2.4.2",
         "@material-ui/core": "3.9.4",

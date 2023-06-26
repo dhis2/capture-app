@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '../Buttons';
+import { Button } from '@dhis2/ui';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import { defaultDialogProps } from '../Dialogs/ConfirmDialog.constants';
 

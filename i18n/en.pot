@@ -349,12 +349,6 @@ msgstr "Yes, create new event"
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Leaving this page will discard the changes you made to this event."
 
-msgid "Warnings found"
-msgstr "Warnings found"
-
-msgid "Abort"
-msgstr "Abort"
-
 msgid "Back to form"
 msgstr "Back to form"
 
@@ -1531,6 +1525,9 @@ msgstr "Delete polygon"
 
 msgid "Set area"
 msgstr "Set area"
+
+msgid "Area on map saved"
+msgstr "Area on map saved"
 
 msgid "Compatibility mode"
 msgstr "Compatibility mode"
