@@ -22,7 +22,7 @@ Then('the user sees the enrollment date', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-icon-calendar"]').should('exist');
         cy.get('[data-test="widget-enrollment-enrollment-date"]')
-            .contains(`Date of enrollment ${getCurrentYear()}-08-01`)
+            .contains(`Date of enrollment: ${getCurrentYear()}-08-01`)
             .should('exist');
     });
 });
@@ -30,7 +30,7 @@ Then('the user sees the enrollment date', () => {
 Then('the user sees the incident date', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-incident-date"]')
-            .contains(`Date of birth ${getCurrentYear()}-08-01`)
+            .contains(`Date of birth: ${getCurrentYear()}-08-01`)
             .should('exist');
     });
 });
