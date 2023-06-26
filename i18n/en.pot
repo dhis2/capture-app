@@ -5,9 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
-"PO-Revision-Date: 2023-06-08T11:11:29.783Z\n"
-
+"POT-Creation-Date: 2023-06-19T09:32:52.277Z\n"
+"PO-Revision-Date: 2023-06-19T09:32:52.277Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1144,6 +1143,9 @@ msgstr "Remove mark for follow-up"
 
 msgid "Mark for follow-up"
 msgstr "Mark for follow-up"
+
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr "Existing dates for auto-generated events will not be updated."
 
 msgid "Enrollment date"
 msgstr "Enrollment date"
