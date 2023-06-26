@@ -8,7 +8,6 @@ import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
 import defaultClasses from './polygonField.module.css';
 import './styles.css';
-// import { Button } from '../Buttons/Button.component';
 import { DeleteControl } from './DeleteControl.component';
 
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
