@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-26T12:43:11.368Z\n"
-"PO-Revision-Date: 2023-06-26T12:43:11.368Z\n"
+"POT-Creation-Date: 2023-06-26T12:50:23.751Z\n"
+"PO-Revision-Date: 2023-06-26T12:50:23.751Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -70,6 +70,9 @@ msgstr "error encountered during field validation"
 
 msgid "error"
 msgstr "error"
+
+msgid "Plugins are not yet available - Please contact your system administrator"
+msgstr "Plugins are not yet available - Please contact your system administrator"
 
 msgid "This value is validating"
 msgstr "This value is validating"

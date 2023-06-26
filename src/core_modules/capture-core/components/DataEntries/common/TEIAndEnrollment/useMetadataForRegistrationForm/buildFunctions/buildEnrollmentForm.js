@@ -7,7 +7,7 @@ import type {
     CachedTrackedEntityType,
 } from '../../../../../../storageControllers/cache.types';
 import type { TrackedEntityType } from '../../../../../../metaData';
-import { buildSearchGroup } from '../../../../../Pages/Search/hooks';
+import { buildSearchGroup } from '../../../../../SearchBox/hooks';
 import type { DataEntryFormConfig } from '../types';
 
 type Props = {|
@@ -29,6 +29,7 @@ export const buildEnrollmentForm = async ({
     dataEntryFormConfig,
     locale,
 }: Props) => {
+    // $FlowFixMe
     const searchGroups = await buildSearchGroup(cachedProgram);
     const enrollmentFactory = new EnrollmentFactory({
         cachedTrackedEntityAttributes: new Map(cachedTrackedEntityAttributes.map(tea => [tea.id, tea])),
