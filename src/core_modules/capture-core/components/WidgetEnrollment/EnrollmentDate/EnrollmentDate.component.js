@@ -1,10 +1,9 @@
 // @flow
-import React, { useState, useCallback, type ComponentType } from 'react';
+import React, { useState, useCallback } from 'react';
 import moment from 'moment';
 import {
     Button,
     CalendarInput,
-    InputField,
     IconCalendar16,
     IconEdit16,
     colors,
@@ -12,7 +11,6 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { DateField } from 'capture-core/components/FormFields/New';
 import { parseDate } from 'capture-core-utils/parsers';
 import { convertValue as convertValueClientToView } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData';
@@ -55,7 +53,7 @@ const styles = {
         gap: `${spacersNum.dp2}px`,
     },
     calendar: {
-        paddingTop: `6px`,
+        paddingTop: '6px',
     },
     buttonStrip: {
         display: 'flex',
@@ -96,8 +94,8 @@ const EnrollmentDateComponentPlain = ({
             onSave(date);
         }
         setEditMode(false);
-    }
-    
+    };
+
     return editMode ? (
         <div data-test="widget-enrollment-enrollment-date">
             <CalendarInput

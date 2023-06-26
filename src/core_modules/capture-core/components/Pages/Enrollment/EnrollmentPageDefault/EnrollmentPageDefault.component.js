@@ -107,7 +107,7 @@ export const EnrollmentPageDefaultPlain = ({
                     teiId={teiId}
                     enrollmentId={enrollmentId}
                     programId={program.id}
-                    mayEditDate={true}
+                    mayEditDate
                     onDelete={onDelete}
                     onAddNew={onAddNew}
                     onUpdateDate={onUpdateEnrollmentDate}

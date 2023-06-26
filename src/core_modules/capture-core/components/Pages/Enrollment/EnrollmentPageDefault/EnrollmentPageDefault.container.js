@@ -83,7 +83,7 @@ export const EnrollmentPageDefault = () => {
         dispatch(updateTeiDisplayName(teiDisplayName));
     }, [dispatch]);
 
-    const onUpdateEnrollmentDate = useCallback((enrollmentDate) =>
+    const onUpdateEnrollmentDate = useCallback(enrollmentDate =>
         dispatch(updateEnrollmentDate(enrollmentDate)), [dispatch]);
 
     const onAddNew = () => {
