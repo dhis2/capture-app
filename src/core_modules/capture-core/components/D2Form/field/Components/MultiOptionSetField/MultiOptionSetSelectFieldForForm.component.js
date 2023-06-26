@@ -12,11 +12,11 @@ import {
     withDisplayMessages,
     withFilterProps,
     withOptionsIconElement,
-    withRulesOptionVisibilityHandler,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
+    withRulesOptionVisibilityHandler,
 } from '../internal';
 import labelTypeClasses from '../../buildField.module.css';
 

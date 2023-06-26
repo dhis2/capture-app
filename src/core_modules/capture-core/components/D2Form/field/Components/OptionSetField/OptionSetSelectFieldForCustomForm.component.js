@@ -9,12 +9,12 @@ import {
     withCalculateMessages,
     withDisplayMessages,
     withOptionsIconElement,
-    withRulesOptionVisibilityHandler,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
     withCustomElementContainer,
+    withRulesOptionVisibilityHandler,
 } from '../internal';
 import customFormStyles from './optionSetSelectFieldForCustomForm.module.css';
 
