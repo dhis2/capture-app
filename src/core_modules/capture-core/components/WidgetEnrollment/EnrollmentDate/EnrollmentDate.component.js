@@ -1,5 +1,6 @@
 // @flow
 import React, { useState, useCallback, type ComponentType } from 'react';
+import moment from 'moment';
 import {
     Button,
     CalendarInput,
@@ -12,8 +13,8 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { DateField } from 'capture-core/components/FormFields/New';
+import { parseDate } from 'capture-core-utils/parsers';
 import { convertValue as convertValueClientToView } from '../../../converters/clientToView';
-import { convertValue as convertFormToClient } from '../../../converters/formToClient';
 import { dataElementTypes } from '../../../metaData';
 
 type Props = {
@@ -83,16 +84,17 @@ const EnrollmentDateComponentPlain = ({
     const displayEnrollmentDate = String(convertValueClientToView(enrollmentDate, dataElementTypes.DATE));
 
     const onOpenEdit = () => {
-        setSelectedDate(displayEnrollmentDate);
+        // CalendarInput component only supports the YYYY-MM-DD format
+        setSelectedDate(moment(enrollmentDate).format('YYYY-MM-DD'));
         setEditMode(true);
     };
     const saveHandler = () => {
-        if (selectedDate === displayEnrollmentDate) {
-            setEditMode(false);
-            return;
+        // CalendarInput component only supports the YYYY-MM-DD format
+        // $FlowFixMe[incompatible-use]
+        const date = selectedDate ? parseDate(selectedDate, 'YYYY-MM-DD').momentDate.toISOString() : enrollmentDate;
+        if (date !== enrollmentDate) {
+            onSave(date);
         }
-
-        onSave(String(convertFormToClient(selectedDate, dataElementTypes.DATE)));
         setEditMode(false);
     }
     
