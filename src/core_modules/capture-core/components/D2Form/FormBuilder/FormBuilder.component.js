@@ -27,7 +27,7 @@ export type FieldConfig = {
     id: string,
     component: React.ComponentType<any>,
     plugin?: boolean,
-    props?: ?Object,
+    props: Object,
     validators?: ?Array<ValidatorContainer>,
     commitEvent?: ?string,
     onIsEqual?: ?(newValue: any, oldValue: any) => boolean,
@@ -385,7 +385,6 @@ export class FormBuilder extends React.Component<Props> {
         const { id: fieldId } = fieldMetadata;
         const { querySingleResource } = this.props;
         const validators = getValidators(fieldMetadata, querySingleResource);
-        console.log('options', options);
 
         // $FlowFixMe - Async handled in business logic
         this.commitFieldUpdate({ fieldId, validators }, value, options);
@@ -532,7 +531,7 @@ export class FormBuilder extends React.Component<Props> {
     }
 
     renderPlugin = (
-        field: Object,
+        field: FieldConfig,
     ) => {
         const {
             pluginContext,
@@ -648,7 +647,7 @@ export class FormBuilder extends React.Component<Props> {
         // $FlowFixMe
         return fields.map(
             (field, index) => {
-                if (field.plugin) {
+                if (field.plugin && field.props) {
                     return this.renderPlugin(field);
                 }
 
