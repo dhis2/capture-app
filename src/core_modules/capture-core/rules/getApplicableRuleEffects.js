@@ -21,6 +21,7 @@ const getDataElementsForRulesExecution = (stages: Map<string, ProgramStage>) =>
                 id: dataElement.id,
                 valueType: dataElement.type,
                 optionSetId: dataElement.optionSet && dataElement.optionSet.id,
+                name: dataElement.formName || dataElement.name,
             };
             return accRulesDataElements;
         }, {});

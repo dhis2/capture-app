@@ -578,6 +578,15 @@ msgstr "You don't have access to write comments"
 msgid "Write comment"
 msgstr "Write comment"
 
+msgid "was blanked out and hidden by your last action"
+msgstr "was blanked out and hidden by your last action"
+
+msgid "Notice"
+msgstr "Notice"
+
+msgid "Close the notice"
+msgstr "Close the notice"
+
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "Use new Enrollment dashboard for {{programName}}"
 
