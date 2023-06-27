@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { dataEntryIds } from 'capture-core/constants';
+import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from '@material-ui/core/';
 import { spacers, IconFileDocument24, Tooltip, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -11,7 +11,7 @@ import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/
 import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
 import type { ProgramStage } from '../../../../metaData';
 import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
-
+import { NoticeBox } from '../../../NoticeBox';
 
 const getStyles = () => ({
     container: {
@@ -131,6 +131,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                     {renderDataEntryContainer()}
                     {renderActionsContainer()}
                 </div>
+                {showEditEvent && <NoticeBox formId={`${dataEntryIds.SINGLE_EVENT}-${dataEntryKeys.EDIT}`} /> }
             </ViewEventSection>
         </div>
     ) : null;

@@ -18,6 +18,7 @@ import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetEventComment } from '../../WidgetEventComment';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
+import { NoticeBox } from '../../NoticeBox';
 
 const styles = ({ typography }) => ({
     page: {
@@ -145,6 +146,7 @@ const EnrollmentEditEventPagePain = ({
                     />
                 </div>
             </div>
+            <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
         </div>
     </OrgUnitFetcher>
 );

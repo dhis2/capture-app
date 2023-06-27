@@ -22,7 +22,8 @@ export const rulesEffectsHiddenFieldsDesc = createReducerDescription({
         const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.HIDE_FIELD];
         newState[action.payload.formId] = hideEffects ?
             Object.keys(hideEffects).reduce((accState, key) => {
-                accState[key] = true;
+                const [value] = hideEffects[key];
+                accState[key] = { content: value.content, name: value.name, hadValue: value.hadValue };
                 return accState;
             }, {}) :
             null;
