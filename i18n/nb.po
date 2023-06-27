@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
+"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2023\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -260,8 +260,8 @@ msgstr "Legger til relasjon til hendelsen."
 msgid "Go back to event without saving relationship"
 msgstr "Gå tilbake til hendelsen uten å lagre relasjonen"
 
-msgid "Unsaved changes"
-msgstr "Ikke lagrede endringer"
+msgid "Discard unsaved changes?"
+msgstr "Vil du forkaste ulagrede endringer?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -270,11 +270,11 @@ msgstr ""
 "Hvis du forlater denne siden, vil du forkaste valgene du gjorde for en ny "
 "relasjon"
 
-msgid "Yes, discard"
-msgstr "Ja, kast"
+msgid "Yes, discard changes"
+msgstr ""
 
-msgid "No, stay here"
-msgstr "Nei, bli her"
+msgid "No, cancel"
+msgstr "Nei, avbryt"
 
 msgid "New event"
 msgstr "Ny hendelse"
@@ -347,22 +347,8 @@ msgstr "Generer en ny hendelse"
 msgid "Do you want to create another event?"
 msgstr "Vil du opprette en ny hendelse?"
 
-msgid "No, cancel"
-msgstr "Nei, avbryt"
-
 msgid "Yes, create new event"
 msgstr "Ja, legg til ny hendelse"
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
-"denne hendelsen."
-
-msgid "Warnings found"
-msgstr "Advarsler funnet"
-
-msgid "Abort"
-msgstr "Avbryt"
 
 msgid "Back to form"
 msgstr "Tilbake til skjemaet"
@@ -387,6 +373,11 @@ msgstr "Operasjoner kjører"
 
 msgid "Sort"
 msgstr "Sorter"
+
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr "Ingen hendelser å vise"
@@ -591,6 +582,15 @@ msgstr "Du har ikke tilgang til å skrive kommentarer"
 
 msgid "Write comment"
 msgstr "Skriv kommentar"
+
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "Bruk nytt registreringsdashbord for {{programName}}"
@@ -1540,6 +1540,9 @@ msgstr "Slett polygon"
 
 msgid "Set area"
 msgstr "Sett område"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "Kompabilitetsmodus"
