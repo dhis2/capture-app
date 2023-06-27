@@ -47,11 +47,6 @@ const styles = {
             color: colors.grey800,
         },
     },
-    row2: {
-        margin: `${spacersNum.dp4}px 0`,
-        fontSize: '14px',
-        gap: `${spacersNum.dp2}px`,
-    },
     calendar: {
         paddingTop: '6px',
     },
