@@ -50,12 +50,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const trackedEntityType = program?.trackedEntityType;
     const teiDisplayName =
         trackedEntityInstanceAttributes &&
-        deriveTeiName({
-            attributes: trackedEntityInstanceAttributes,
-            trackedEntityType: trackedEntityType?.id || '',
-            teiId,
-            programId,
-        });
+        deriveTeiName(trackedEntityInstanceAttributes, trackedEntityType?.id || '', teiId);
 
     const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },

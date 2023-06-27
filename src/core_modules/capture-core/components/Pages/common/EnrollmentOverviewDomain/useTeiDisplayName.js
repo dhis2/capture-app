@@ -4,7 +4,6 @@ import { pipe } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { getAttributesFromScopeId } from '../../../../metaData/helpers';
 import type { DataElement } from '../../../../metaData/DataElement';
-import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import { convertServerToClient, convertClientToView } from '../../../../converters';
 
 type Attribute = {
@@ -15,53 +14,33 @@ type Attribute = {
 
 const convertFn = pipe(convertServerToClient, convertClientToView);
 
-const convertValue = (attribute?: Attribute, programId: string) => {
-    if (attribute?.value) {
-        const program = getTrackerProgramThrowIfNotFound(programId);
-        const dataElement = program.attributes.find(dL => dL.id === attribute.attribute);
-        return convertFn(attribute.value, attribute.valueType, dataElement);
-    }
-    return '';
-};
+const convertValue = (attribute?: Attribute, dataElement) =>
+    (attribute?.value ? convertFn(attribute.value, attribute.valueType, dataElement) : '');
 
-const getAttributesValues = (attributes: Array<Attribute>, firstId: string, secondId: string, programId: string) => {
-    const firstValue = convertValue(attributes.find(({ attribute }) => attribute === firstId), programId);
-    const secondValue = convertValue(attributes.find(({ attribute }) => attribute === secondId), programId);
+const getAttributesValues = (attributes: Array<Attribute>, first: DataElement, second: DataElement) => {
+    const firstValue = convertValue(attributes.find(({ attribute }) => attribute === first.id), first);
+    const secondValue = convertValue(attributes.find(({ attribute }) => attribute === second.id), second);
 
     return firstValue || secondValue ? `${firstValue}${firstValue && ' '}${secondValue}` : '';
 };
 
-const getTetAttributesDisplayInReports = (
-    attributes: Array<Attribute>,
-    tetAttributes: Array<DataElement>,
-    programId: string,
-) => {
-    const [firstId, secondId] = tetAttributes.filter(({ displayInReports }) => displayInReports).map(({ id }) => id);
-    return getAttributesValues(attributes, firstId, secondId, programId);
+const getTetAttributesDisplayInReports = (attributes: Array<Attribute>, tetAttributes: Array<DataElement>) => {
+    const [first, second] = tetAttributes.filter(({ displayInReports }) => displayInReports);
+    return getAttributesValues(attributes, first, second);
 };
 
-const getTetAttributes = (attributes: Array<Attribute>, tetAttributes: Array<DataElement>, programId: string) => {
-    const [firstId, secondId] = tetAttributes.map(({ id }) => id);
-    return getAttributesValues(attributes, firstId, secondId, programId);
+const getTetAttributes = (attributes: Array<Attribute>, tetAttributes: Array<DataElement>) => {
+    const [first, second] = tetAttributes;
+    return getAttributesValues(attributes, first, second);
 };
 
-export const deriveTeiName = ({
-    attributes,
-    trackedEntityType,
-    teiId,
-    programId,
-}: {attributes: Array<Attribute>,
-    trackedEntityType: string,
-    teiId: string,
-    programId: string,
-    },
-) => {
+export const deriveTeiName = (attributes: Array<Attribute>, trackedEntityType: string, teiId: string) => {
     const tetAttributes = getAttributesFromScopeId(trackedEntityType);
-    const teiNameDisplayInReports = getTetAttributesDisplayInReports(attributes, tetAttributes, programId);
+    const teiNameDisplayInReports = getTetAttributesDisplayInReports(attributes, tetAttributes);
 
     if (teiNameDisplayInReports) return teiNameDisplayInReports;
 
-    const teiName = getTetAttributes(attributes, tetAttributes, programId);
+    const teiName = getTetAttributes(attributes, tetAttributes);
 
     if (teiName) return teiName;
 
@@ -87,15 +66,9 @@ export const useTeiDisplayName = (teiId: string, programId: string) => {
     const teiDisplayName = useMemo(
         () =>
             (data?.trackedEntities?.attributes && data?.trackedEntities?.trackedEntityType
-                ? deriveTeiName({
-                    attributes: data.trackedEntities.attributes,
-                    trackedEntityType: data.trackedEntities.trackedEntityType,
-                    teiId,
-                    programId,
-                },
-                )
+                ? deriveTeiName(data.trackedEntities.attributes, data.trackedEntities.trackedEntityType, teiId)
                 : ''),
-        [data?.trackedEntities?.attributes, data?.trackedEntities?.trackedEntityType, teiId, programId],
+        [data?.trackedEntities?.attributes, data?.trackedEntities?.trackedEntityType, teiId],
     );
 
     return {

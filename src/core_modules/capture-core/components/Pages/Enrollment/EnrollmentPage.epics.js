@@ -81,11 +81,11 @@ const autoSelectEnrollment = (
     return of(startFetchingTeiFromTeiId());
 };
 
-const fetchTeiStream = (teiId, programId, querySingleResource) =>
+const fetchTeiStream = (teiId, querySingleResource) =>
     from(querySingleResource(teiQuery(teiId)))
         .pipe(
             map(({ attributes, trackedEntityType }) => {
-                const teiDisplayName = deriveTeiName({ attributes, trackedEntityType, teiId, programId });
+                const teiDisplayName = deriveTeiName(attributes, trackedEntityType, teiId);
 
                 return successfulFetchingEnrollmentPageInformationFromUrl({
                     teiDisplayName,
@@ -144,9 +144,9 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
         flatMap(() => {
-            const { teiId, programId } = getLocationQuery();
+            const { teiId } = getLocationQuery();
 
-            return fetchTeiStream(teiId, programId, querySingleResource);
+            return fetchTeiStream(teiId, querySingleResource);
         }),
     );
 
@@ -203,7 +203,7 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
                 teiId !== queryTeiId) {
                 history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
             }
-            return fetchTeiStream(teiId, programId, querySingleResource);
+            return fetchTeiStream(teiId, querySingleResource);
         },
         ),
     );
