@@ -2,10 +2,9 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import createSvgIcon from '@material-ui/icons/utils/createSvgIcon';
-import { Tooltip } from '@dhis2/ui';
+import { Tooltip, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
-import { Button } from '../../../Buttons';
 
 const ClearIcon = createSvgIcon(
     <React.Fragment>

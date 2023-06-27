@@ -20,6 +20,7 @@ Object {
   "dataElements": Object {
     "da1Id": Object {
       "id": "da1Id",
+      "name": "dataElement1",
       "optionSetId": undefined,
       "valueType": "TEXT",
     },

@@ -10,6 +10,7 @@ import { FlatList } from 'capture-ui';
 import { errorCreator } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
+import { NoticeBox } from '../NoticeBox';
 import type { Props } from './widgetProfile.types';
 import {
     useProgram,
@@ -135,20 +136,23 @@ const WidgetProfilePlain = ({
                 {renderProfile()}
             </Widget>
             {showEditModal(loading, error, isEditable, modalState) && (
-                <DataEntry
-                    onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
-                    onDisable={() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE)}
-                    programAPI={program}
-                    orgUnitId={orgUnitId}
-                    clientAttributesWithSubvalues={clientAttributesWithSubvalues}
-                    userRoles={userRoles}
-                    trackedEntityInstanceId={teiId}
-                    onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
-                    onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}
-                    modalState={modalState}
-                    geometry={geometry}
-                    trackedEntityName={trackedEntityTypeName}
-                />
+                <>
+                    <DataEntry
+                        onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
+                        onDisable={() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE)}
+                        programAPI={program}
+                        orgUnitId={orgUnitId}
+                        clientAttributesWithSubvalues={clientAttributesWithSubvalues}
+                        userRoles={userRoles}
+                        trackedEntityInstanceId={teiId}
+                        onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
+                        onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}
+                        modalState={modalState}
+                        geometry={geometry}
+                        trackedEntityName={trackedEntityTypeName}
+                    />
+                    <NoticeBox formId="trackedEntityProfile-edit" />
+                </>
             )}
         </div>
     );

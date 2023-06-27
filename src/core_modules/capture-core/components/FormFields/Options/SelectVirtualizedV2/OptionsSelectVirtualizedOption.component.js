@@ -30,21 +30,23 @@ class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
     static defaultContainerStyle = {
         display: 'flex',
         alignItems: 'center',
-        cursor: 'pointer',
-        paddingLeft: 5,
+        cursor: 'default',
+        paddingLeft: 8,
         overflow: 'hidden',
         paddingTop: 4,
         paddingBottom: 2,
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
+        fontSize: 14,
     };
 
     static selectedStyle = {
-        fontWeight: 'bold',
+        fontWeight: '600',
+        backgroundColor: '#fbfcfd',
     };
 
     static inFocusStyle = {
-        backgroundColor: 'rgba(0,0,0,0.1)',
+        backgroundColor: '#f3f5f7',
     };
 
     render() {

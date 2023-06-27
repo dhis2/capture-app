@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType, useState } from 'react';
 import { compose } from 'redux';
-import { Button } from '@dhis2/ui';
+import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
@@ -28,13 +28,10 @@ const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
         {i18n.t('Enroll in a program by selecting a program from the top bar.')}
     </>);
 
-const styles = ({ typography }) => ({
-    marginTop: {
-        marginTop: typography.pxToRem(2),
+const styles = () => ({
+    actions: {
         display: 'flex',
-    },
-    marginLeft: {
-        marginLeft: typography.pxToRem(16),
+        gap: spacers.dp8,
     },
 });
 
@@ -94,7 +91,7 @@ const TeiRegistrationEntryPlain =
                           onGetUnsavedAttributeValues={() => console.log('similar to the withErrorMessagePostProcessor this will come in the future')}
                           {...rest}
                       />
-                      <div className={classes.marginTop}>
+                      <div className={classes.actions}>
                           {
                               onSave &&
                               <Button
@@ -111,7 +108,6 @@ const TeiRegistrationEntryPlain =
                               dataTest="cancel-button"
                               secondary
                               onClick={handleOnCancel}
-                              className={classes.marginLeft}
                               disabled={isSavingInProgress}
                           >
                               {i18n.t('Cancel')}

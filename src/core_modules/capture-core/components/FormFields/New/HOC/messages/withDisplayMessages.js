@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { CircularLoader } from '@dhis2/ui';
+import { CircularLoader, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import isObject from 'd2-utilizr/lib/isObject';
@@ -10,25 +10,25 @@ const styles = (theme: Theme) => ({
         paddingTop: 10,
     },
     error: {
-        color: theme.palette.error.main,
+        color: colors.red600,
         fontSize: theme.typography.pxToRem(14),
     },
     warning: {
-        color: theme.palette.warning.dark,
+        color: colors.yellow800,
         fontSize: theme.typography.pxToRem(14),
     },
     info: {
-        color: 'green',
+        color: colors.green700,
         fontSize: theme.typography.pxToRem(14),
     },
     validating: {
-        color: theme.palette.grey.dark,
+        color: colors.grey700,
         fontSize: theme.typography.pxToRem(14),
     },
     validatingContainer: {
         display: 'flex',
         alignItems: 'center',
-        color: theme.palette.grey.dark,
+        color: colors.grey700,
     },
     validatingIndicator: {
         fontSize: 12,
