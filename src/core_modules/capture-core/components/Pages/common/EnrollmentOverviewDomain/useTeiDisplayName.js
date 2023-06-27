@@ -17,9 +17,9 @@ const convertFn = pipe(convertServerToClient, convertClientToView);
 const convertValue = (attribute?: Attribute, dataElement) =>
     (attribute?.value ? convertFn(attribute.value, attribute.valueType, dataElement) : '');
 
-const getAttributesValues = (attributes: Array<Attribute>, first: DataElement, second: DataElement) => {
-    const firstValue = convertValue(attributes.find(({ attribute }) => attribute === first.id), first);
-    const secondValue = convertValue(attributes.find(({ attribute }) => attribute === second.id), second);
+const getAttributesValues = (attributes: Array<Attribute>, first?: DataElement, second?: DataElement) => {
+    const firstValue = convertValue(attributes.find(({ attribute }) => attribute === first?.id), first);
+    const secondValue = convertValue(attributes.find(({ attribute }) => attribute === second?.id), second);
 
     return firstValue || secondValue ? `${firstValue}${firstValue && ' '}${secondValue}` : '';
 };
