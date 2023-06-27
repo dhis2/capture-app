@@ -57,7 +57,7 @@ const styles = {
     },
     note: {
         fontSize: '12px',
-        color: colors.grey600,
+        color: colors.grey700,
     },
 };
 
