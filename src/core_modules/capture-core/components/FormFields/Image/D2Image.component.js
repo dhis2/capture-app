@@ -1,10 +1,9 @@
 // @flow
-import { IconCheckmark24, colors, CircularLoader } from '@dhis2/ui';
+import { IconCheckmark24, colors, CircularLoader, Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
-import { Button } from '../../Buttons/Button.component';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { withApiUtils } from '../../../HOC';

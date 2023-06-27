@@ -5,9 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
-"PO-Revision-Date: 2023-06-08T11:11:29.783Z\n"
-
+"POT-Creation-Date: 2023-06-27T06:19:35.054Z\n"
+"PO-Revision-Date: 2023-06-27T06:19:35.054Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -347,12 +346,6 @@ msgstr "No, cancel"
 msgid "Yes, create new event"
 msgstr "Yes, create new event"
 
-msgid "Warnings found"
-msgstr "Warnings found"
-
-msgid "Abort"
-msgstr "Abort"
-
 msgid "Back to form"
 msgstr "Back to form"
 
@@ -587,6 +580,15 @@ msgstr "You don't have access to write comments"
 
 msgid "Write comment"
 msgstr "Write comment"
+
+msgid "was blanked out and hidden by your last action"
+msgstr "was blanked out and hidden by your last action"
+
+msgid "Notice"
+msgstr "Notice"
+
+msgid "Close the notice"
+msgstr "Close the notice"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "Use new Enrollment dashboard for {{programName}}"

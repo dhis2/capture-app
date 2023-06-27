@@ -12,16 +12,6 @@ const primary = {
 
 export const theme = createMuiTheme({
     overrides: {
-        MuiButton: { // Name of the component ⚛️ / style sheet
-            raisedPrimary: { // Name of the rule
-                '&:hover': { backgroundColor: primary.main },
-                backgroundColor: primary.dark, // Some CSS
-            },
-            flatPrimary: {
-                '&:hover': { backgroundColor: primary.lightest },
-                color: primary.dark,
-            },
-        },
         MuiDialog: {
             paperWidthLg: {
                 width: 800,

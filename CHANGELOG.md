@@ -1,3 +1,17 @@
+## [100.32.16](https://github.com/dhis2/capture-app/compare/v100.32.15...v100.32.16) (2023-06-27)
+
+
+### Bug Fixes
+
+* [DHIS2-14484] show notice when fields are about to be blank out by a program rule ([#3185](https://github.com/dhis2/capture-app/issues/3185)) ([747a8ea](https://github.com/dhis2/capture-app/commit/747a8ea1a395d1ca673f9bf37de0ff11da46610c))
+
+## [100.32.15](https://github.com/dhis2/capture-app/compare/v100.32.14...v100.32.15) (2023-06-19)
+
+
+### Bug Fixes
+
+* [DHIS2-15426] ui design changes ([#3179](https://github.com/dhis2/capture-app/issues/3179)) ([557f18b](https://github.com/dhis2/capture-app/commit/557f18b35734bc0918e2a61e2f1bb70bfeef63fc))
+
 ## [100.32.14](https://github.com/dhis2/capture-app/compare/v100.32.13...v100.32.14) (2023-06-19)
 
 
