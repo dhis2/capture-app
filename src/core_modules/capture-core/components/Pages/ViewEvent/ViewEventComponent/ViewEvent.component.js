@@ -2,13 +2,12 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import { spacers, IconChevronLeft24 } from '@dhis2/ui';
+import { spacers, IconChevronLeft24, Button } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
-import { Button } from '../../../Buttons/Button.component';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
-import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
-import { defaultDialogProps } from '../../../Dialogs/ConfirmDialog.constants';
+import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
+import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
 
 const getStyles = (theme: Theme) => ({
@@ -92,10 +91,10 @@ class ViewEventPlain extends Component<Props, State> {
                         dataEntryKey={currentDataEntryKey}
                     />
                 </div>
-                <ConfirmDialog
+                <DiscardDialog
                     {...defaultDialogProps}
                     onCancel={() => { this.setState({ warningOpen: false }); }}
-                    onConfirm={() => this.props.onBackToAllEvents()}
+                    onDestroy={() => this.props.onBackToAllEvents()}
                     open={this.state.warningOpen}
                 />
             </div>

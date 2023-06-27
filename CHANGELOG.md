@@ -1,3 +1,17 @@
+# [100.33.0](https://github.com/dhis2/capture-app/compare/v100.32.16...v100.33.0) (2023-06-27)
+
+
+### Features
+
+* [DHIS2-5437] change wording for discard modal ([#3157](https://github.com/dhis2/capture-app/issues/3157)) ([74604fe](https://github.com/dhis2/capture-app/commit/74604fe2b57d1353b02d52ac78f704d71216985c))
+
+## [100.32.16](https://github.com/dhis2/capture-app/compare/v100.32.15...v100.32.16) (2023-06-27)
+
+
+### Bug Fixes
+
+* [DHIS2-14484] show notice when fields are about to be blank out by a program rule ([#3185](https://github.com/dhis2/capture-app/issues/3185)) ([747a8ea](https://github.com/dhis2/capture-app/commit/747a8ea1a395d1ca673f9bf37de0ff11da46610c))
+
 ## [100.32.15](https://github.com/dhis2/capture-app/compare/v100.32.14...v100.32.15) (2023-06-19)
 
 

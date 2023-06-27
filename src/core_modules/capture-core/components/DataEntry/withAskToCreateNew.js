@@ -50,6 +50,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
         renderAskToCreateNewModal = () => (
             <Modal
                 hide={!this.state.isOpen}
+                dataTest="modal-ask-to-create-new"
             >
                 <ModalTitle>
                     {i18n.t('Generate new event')}

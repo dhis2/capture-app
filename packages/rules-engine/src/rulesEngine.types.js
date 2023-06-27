@@ -15,9 +15,9 @@ export type OutputEffect = {
     type: $Values<effectActions>,
     id: string,
     targetDataType?: $Values<rulesEngineEffectTargetDataTypes>,
-    error?: { message: string },
-    warning?: { message: string },
-    message?: string,
+    content?: string,
+    name?: string,
+    hadValue?: boolean,
 };
 
 export type OutputEffects = Array<OutputEffect>;
@@ -60,6 +60,7 @@ export type ProgramRuleEffect = {
     displayContent: ?string,
     data: any,
     style?: ?Object,
+    name: string,
 };
 
 export type ProgramRuleAction = {
@@ -76,6 +77,7 @@ export type ProgramRuleAction = {
     optionGroupId: ?string,
     optionId: ?string,
     style?: ?Object,
+    name: string,
 };
 
 export type ProgramRule = {
@@ -100,6 +102,7 @@ export type DataElement = {
     id: string,
     valueType: string,
     optionSetId?: ?string,
+    name: string,
 };
 
 export type DataElements = { [elementId: string]: DataElement };
@@ -120,6 +123,8 @@ export type TrackedEntityAttribute = {
     id: string,
     valueType: string,
     optionSetId?: ?string,
+    displayFormName: string,
+    displayName: string,
 };
 
 export type TrackedEntityAttributes = {

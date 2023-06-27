@@ -368,11 +368,11 @@ Then('you should see confirm dialog', () => {
     cy.get('[data-test="dhis2-uicore-layer"].translucent').within(() => {
         cy.get('[role="dialog"]')
             .find('[data-test="dhis2-uicore-modaltitle"]')
-            .contains('Unsaved changes')
+            .contains('Discard unsaved changes?')
             .should('exist');
         cy.get('[role="dialog"]')
             .find('[data-test="dhis2-uicore-button"]')
-            .contains('Yes, discard')
+            .contains('Yes, discard changes')
             .click();
     });
 });

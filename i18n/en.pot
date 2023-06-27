@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-26T12:50:23.751Z\n"
-"PO-Revision-Date: 2023-06-26T12:50:23.751Z\n"
+"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"PO-Revision-Date: 2023-06-27T06:20:33.460Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -262,8 +262,8 @@ msgstr "Adding relationship to event."
 msgid "Go back to event without saving relationship"
 msgstr "Go back to event without saving relationship"
 
-msgid "Unsaved changes"
-msgstr "Unsaved changes"
+msgid "Discard unsaved changes?"
+msgstr "Discard unsaved changes?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -272,11 +272,11 @@ msgstr ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 
-msgid "Yes, discard"
-msgstr "Yes, discard"
+msgid "Yes, discard changes"
+msgstr "Yes, discard changes"
 
-msgid "No, stay here"
-msgstr "No, stay here"
+msgid "No, cancel"
+msgstr "No, cancel"
 
 msgid "New event"
 msgstr "New event"
@@ -349,20 +349,8 @@ msgstr "Generate new event"
 msgid "Do you want to create another event?"
 msgstr "Do you want to create another event?"
 
-msgid "No, cancel"
-msgstr "No, cancel"
-
 msgid "Yes, create new event"
 msgstr "Yes, create new event"
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "Leaving this page will discard the changes you made to this event."
-
-msgid "Warnings found"
-msgstr "Warnings found"
-
-msgid "Abort"
-msgstr "Abort"
 
 msgid "Back to form"
 msgstr "Back to form"
@@ -387,6 +375,13 @@ msgstr "Operations running"
 
 msgid "Sort"
 msgstr "Sort"
+
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
 
 msgid "No events to display"
 msgstr "No events to display"
@@ -591,6 +586,15 @@ msgstr "You don't have access to write comments"
 
 msgid "Write comment"
 msgstr "Write comment"
+
+msgid "was blanked out and hidden by your last action"
+msgstr "was blanked out and hidden by your last action"
+
+msgid "Notice"
+msgstr "Notice"
+
+msgid "Close the notice"
+msgstr "Close the notice"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "Use new Enrollment dashboard for {{programName}}"
