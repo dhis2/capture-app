@@ -6,8 +6,8 @@ import { spacers, IconChevronLeft24, Button } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
-import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
-import { defaultDialogProps } from '../../../Dialogs/ConfirmDialog.constants';
+import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
+import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
 
 const getStyles = (theme: Theme) => ({
@@ -91,10 +91,10 @@ class ViewEventPlain extends Component<Props, State> {
                         dataEntryKey={currentDataEntryKey}
                     />
                 </div>
-                <ConfirmDialog
+                <DiscardDialog
                     {...defaultDialogProps}
                     onCancel={() => { this.setState({ warningOpen: false }); }}
-                    onConfirm={() => this.props.onBackToAllEvents()}
+                    onDestroy={() => this.props.onBackToAllEvents()}
                     open={this.state.warningOpen}
                 />
             </div>
