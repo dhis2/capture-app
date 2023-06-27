@@ -122,7 +122,7 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
                     header={i18n.t('Discard unsaved changes?')}
                     text={i18n.t('Leaving this page will discard the selections you made for a new relationship')}
                     destructiveText={i18n.t('Yes, discard changes')}
-                    cancelText={i18n.t('No, stay here')}
+                    cancelText={i18n.t('No, cancel')}
                     onDestroy={() => this.props.onCancel('relationship')}
                     open={!!this.state.discardDialogOpen}
                     onCancel={this.handleCancelDiscard}
