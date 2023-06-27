@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-02T09:13:17.085Z\n"
-"PO-Revision-Date: 2023-06-02T09:13:17.085Z\n"
+"POT-Creation-Date: 2023-06-26T08:37:27.864Z\n"
+"PO-Revision-Date: 2023-06-26T08:37:27.864Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1265,9 +1265,6 @@ msgstr "There was a problem saving changes"
 msgid "Try again or contact your system administrator for support"
 msgstr "Try again or contact your system administrator for support"
 
-msgid "tracked entity instance"
-msgstr "tracked entity instance"
-
 msgid "Fix errors in the form to continue."
 msgstr "Fix errors in the form to continue."
 
@@ -1279,6 +1276,9 @@ msgstr "{{TETName}} profile"
 
 msgid "Edit"
 msgstr "Edit"
+
+msgid "tracked entity instance"
+msgstr "tracked entity instance"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"

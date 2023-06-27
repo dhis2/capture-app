@@ -10,11 +10,15 @@ import { FlatList } from 'capture-ui';
 import { errorCreator } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
-import { convertValue as convertClientToView } from '../../converters/clientToView';
 import type { Props } from './widgetProfile.types';
-import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues, useUserRoles } from './hooks';
-import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, getTeiDisplayName, getMultiTextValue } from './DataEntry';
-import { dataElementTypes } from '../../metaData';
+import {
+    useProgram,
+    useTrackedEntityInstances,
+    useClientAttributesWithSubvalues,
+    useUserRoles,
+    useTeiDisplayName,
+} from './hooks';
+import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
 
 const styles = {
     header: {
@@ -68,23 +72,13 @@ const WidgetProfilePlain = ({
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
     const error = programsError || trackedEntityInstancesError || userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
-    const teiDisplayName = getTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
+    const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
         .map((clientAttribute) => {
-            const { optionSet, attribute, key, value: clientValue, valueType } = clientAttribute;
-            let value;
-            if (optionSet && optionSet.id) {
-                if (valueType === dataElementTypes.MULTI_TEXT) {
-                    value = getMultiTextValue(clientValue, clientAttribute);
-                } else {
-                    const selectedOption = optionSet.options.find(option => option.code === clientValue);
-                    value = selectedOption && selectedOption.name;
-                }
-            } else {
-                value = convertClientToView(clientValue, valueType);
-            }
+            const { attribute, key } = clientAttribute;
+            const value = convertClientToView(clientAttribute);
             return {
                 attribute, key, value, reactKey: attribute,
             };
