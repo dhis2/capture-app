@@ -75,10 +75,10 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const errorEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
-        const warningEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
-        const errorEffectsOnComplete: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR_ONCOMPLETE];
-        const warningEffectsOnComplete: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING_ONCOMPLETE];
+        const errorEffects: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
+        const warningEffects: { [id: string]: Array<GeneralWarningEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
+        const errorEffectsOnComplete: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR_ONCOMPLETE];
+        const warningEffectsOnComplete: { [id: string]: Array<GeneralWarningEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING_ONCOMPLETE];
 
         const messageEffectsArray = [errorEffects, warningEffects, errorEffectsOnComplete, warningEffectsOnComplete];
         newState[action.payload.formId] = messageEffectsArray.reduce((accMessagesById, effects) => {
@@ -93,7 +93,7 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
                 // $FlowFixMe[prop-missing] automated comment
                 const typeKey = mapMessageEffectTypeToStateKey[effectsByKey[0].type];
                 // $FlowFixMe[prop-missing] automated comment
-                accMessagesByIdInCurrentEffects[key][typeKey] = effectsByKey.map((effect) => {
+                accMessagesByIdInCurrentEffects[key][typeKey] = effectsByKey.map((effect: any) => {
                     if (effect.error) {
                         return effect.error.message;
                     }
