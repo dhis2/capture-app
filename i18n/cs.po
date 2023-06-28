@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
+"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký, 2023\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -258,8 +258,8 @@ msgstr "Přidání vztahu k události."
 msgid "Go back to event without saving relationship"
 msgstr "Vraťte se k události bez uložení vztahu"
 
-msgid "Unsaved changes"
-msgstr "Neuložené změny"
+msgid "Discard unsaved changes?"
+msgstr "Zahodit neuložené změny?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -267,11 +267,11 @@ msgid ""
 msgstr ""
 "Opuštěním této stránky zrušíte výběr, který jste provedli pro nový vztah"
 
-msgid "Yes, discard"
-msgstr "Ano, zahodit"
+msgid "Yes, discard changes"
+msgstr "Ano, zahodit změny"
 
-msgid "No, stay here"
-msgstr "Ne, zůstat zde"
+msgid "No, cancel"
+msgstr "Ne, zrušit"
 
 msgid "New event"
 msgstr "Nová událost"
@@ -345,20 +345,8 @@ msgstr "Generovat novou událost"
 msgid "Do you want to create another event?"
 msgstr "Chcete vytvořit další událost?"
 
-msgid "No, cancel"
-msgstr "Ne, zrušit"
-
 msgid "Yes, create new event"
 msgstr "Ano, vytvořit novou událost"
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
-
-msgid "Warnings found"
-msgstr "Nalezena varování"
-
-msgid "Abort"
-msgstr "Přerušit"
 
 msgid "Back to form"
 msgstr "Zpět do formuláře"
@@ -383,6 +371,11 @@ msgstr "Provoz běží"
 
 msgid "Sort"
 msgstr "Třídit"
+
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr "Žádné události k zobrazení"
@@ -587,6 +580,15 @@ msgstr "Nemáte přístup k psaní komentářů"
 
 msgid "Write comment"
 msgstr "Napsat komentář"
+
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "Použít nový ovládací panel zápisu pro {{programName}}"
@@ -1543,6 +1545,9 @@ msgstr "Smazat polygon"
 
 msgid "Set area"
 msgstr "Nastavit oblast"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "Režim kompatibility"
