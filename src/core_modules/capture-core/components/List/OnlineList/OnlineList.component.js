@@ -2,68 +2,20 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { CircularLoader } from '@dhis2/ui';
+import { DataTableHead, DataTable, DataTableBody, DataTableRow, DataTableCell, DataTableColumnHeader } from '@dhis2/ui';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import {
-    Table,
-    Head,
-    Body,
-    Row,
-    Cell,
-    HeaderCell,
-    sortLabelDirections,
-    sorLabelPlacements,
-} from 'capture-ui';
-import { SortLabelWrapper } from '../../DataTable/SortLabelWrapper.component';
 import { dataElementTypes } from '../../../metaData';
 import type { OptionSet } from '../../../metaData';
 
-
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     tableContainer: {
         overflowX: 'auto',
     },
-    table: {},
-    row: {},
-    loadingRow: {
-        height: 100,
-    },
-    dataRow: {
-        cursor: 'pointer',
-        '&:hover': {
-            backgroundColor: '#F1FBFF',
+    headerAlign: {
+        '&>span.container': {
+            alignItems: 'flex-end',
         },
-    },
-
-    cell: {
-        padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 7}px ${theme.spacing.unit /
-            2}px ${theme.spacing.unit * 3}px`,
-        '&:last-child': {
-            paddingRight: theme.spacing.unit * 3,
-        },
-        borderBottomColor: theme.palette.type === 'light'
-            ? theme.palette.dividerLighter
-            : theme.palette.dividerDarker,
-    },
-    bodyCell: {
-        fontSize: theme.typography.pxToRem(13),
-        color: theme.palette.text.primary,
-    },
-    staticHeaderCell: {
-        width: 1,
-    },
-    headerCell: {
-        fontSize: theme.typography.pxToRem(12),
-        color: theme.palette.text.secondary,
-        // $FlowFixMe
-        fontWeight: theme.typography.fontWeightMedium,
-    },
-    loadingCell: {
-        textAlign: 'center',
-    },
-    loader: {
-        display: 'inline-block',
     },
 });
 
@@ -90,33 +42,11 @@ type Props = {
     customEndCellBodyStyle?: ?Object,
     classes: {
         tableContainer: string,
-        table: string,
-        cell: string,
-        headerCell: string,
-        bodyCell: string,
-        loadingCell: string,
-        sortLabelChilden: string,
-        loadingRow: string,
-        row: string,
-        dataRow: string,
-        loader: string,
-    }
-}
-
+        headerAlign: string,
+    },
+};
 
 class Index extends React.Component<Props> {
-    columnHeaderInstances: Array<HTMLElement>;
-    constructor(props: Props) {
-        super(props);
-        this.columnHeaderInstances = [];
-    }
-    static typesWithAscendingInitialDirection = [
-        dataElementTypes.TEXT,
-        dataElementTypes.LONG_TEXT,
-        dataElementTypes.USERNAME,
-        'ASSIGNEE',
-    ];
-
     static typesWithRightPlacement = [
         dataElementTypes.NUMBER,
         dataElementTypes.INTEGER,
@@ -124,181 +54,100 @@ class Index extends React.Component<Props> {
         dataElementTypes.INTEGER_NEGATIVE,
         dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
-    getSortHandler = (id: string) => (direction: string) => {
-        this.props.onSort(id, direction);
-    }
 
-    setColumnWidth(columnInstance: any, index: number) {
-        if (columnInstance && !this.props.updating) {
-            this.columnHeaderInstances[index] = columnInstance;
-        }
-    }
+    getSortHandler = (id: string) => ({ direction }: { direction: string }) => {
+        this.props.onSort(id, direction);
+    };
 
     getCustomEndCellHeader = () => {
-        const { getCustomEndCellHeader, getCustomEndCellBody, customEndCellHeaderStyle, classes } = this.props;
+        const { getCustomEndCellHeader, getCustomEndCellBody, customEndCellHeaderStyle } = this.props;
 
-        return getCustomEndCellBody ?
-            (
-                <HeaderCell
-                    className={classNames(classes.cell, classes.headerCell)}
-                    style={customEndCellHeaderStyle}
-                >
-                    {getCustomEndCellHeader && getCustomEndCellHeader(this.props)}
-                </HeaderCell>
-            ) :
-            null;
-    }
+        return getCustomEndCellBody ? (
+            <DataTableColumnHeader style={customEndCellHeaderStyle}>
+                {getCustomEndCellHeader && getCustomEndCellHeader(this.props)}
+            </DataTableColumnHeader>
+        ) : null;
+    };
 
     getCustomEndCellBody = (row: Object, customEndCellBodyProps: Object) => {
-        const { getCustomEndCellBody, customEndCellBodyStyle, classes } = this.props;
+        const { getCustomEndCellBody, customEndCellBodyStyle } = this.props;
 
-        return getCustomEndCellBody ?
-            (
-                <HeaderCell
-                    className={classNames(classes.cell, classes.bodyCell)}
-                    style={customEndCellBodyStyle}
-                >
-                    {getCustomEndCellBody(row, customEndCellBodyProps)}
-                </HeaderCell>
-            ) :
-            null;
-    }
+        return getCustomEndCellBody ? (
+            <DataTableCell style={customEndCellBodyStyle}>
+                {getCustomEndCellBody(row, customEndCellBodyProps)}
+            </DataTableCell>
+        ) : null;
+    };
 
     renderHeaderRow(visibleColumns: Array<Column>) {
-        const sortById = this.props.sortById;
-        const sortByDirection = this.props.sortByDirection;
+        const { classes, sortById, sortByDirection } = this.props;
 
-        const headerCells = visibleColumns
-            .map((column, index) => (
-                <HeaderCell
-                    innerRef={(instance) => { this.setColumnWidth(instance, index); }}
-                    key={column.id}
-                    className={classNames(this.props.classes.cell, this.props.classes.headerCell)}
-                    style={{ width: this.props.updating && this.columnHeaderInstances.length - 1 >= index ? this.columnHeaderInstances[index].clientWidth : 'auto' }}
-                >
-                    <SortLabelWrapper
-                        isActive={column.id === sortById}
-                        initialDirection={
-                            Index.typesWithAscendingInitialDirection.includes(column.type)
-                                ? sortLabelDirections.ASC
-                                : sortLabelDirections.DESC
-                        }
-                        placement={
-                            Index.typesWithRightPlacement.includes(column.type)
-                                ? sorLabelPlacements.RIGHT
-                                : sorLabelPlacements.LEFT
-                        }
-                        direction={sortByDirection}
-                        onSort={this.getSortHandler(column.id)}
-                        childrenClass={this.props.classes.sortLabelChilden}
-                    >
-                        {column.header}
-                    </SortLabelWrapper>
-                </HeaderCell>
-            ));
+        const headerCells = visibleColumns.map(column => (
+            <DataTableColumnHeader
+                onSortIconClick={this.getSortHandler(column.id)}
+                sortDirection={sortById === column.id ? sortByDirection : 'default'}
+                key={column.id}
+                align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
+                className={classNames({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type) })}
+            >
+                {column.header}
+            </DataTableColumnHeader>
+        ));
 
         return (
-            <Row
-                className={this.props.classes.row}
-            >
+            <DataTableRow>
                 {headerCells}
                 {this.getCustomEndCellHeader()}
-            </Row>
+            </DataTableRow>
         );
     }
 
     renderBody(visibleColumns: Array<Column>) {
-        const { classes, getCustomEndCellBody, updating } = this.props;
+        const { getCustomEndCellBody } = this.props;
         const columnsCount = visibleColumns.length + (getCustomEndCellBody ? 1 : 0);
 
-        return updating ?
-            (
-                <Row
-                    className={classes.loadingRow}
-                >
-                    <Cell
-                        colSpan={columnsCount}
-                        className={classNames(classes.cell, classes.bodyCell, classes.loadingCell)}
-                    >
-                        <CircularLoader className={classes.loader} />
-                    </Cell>
-                </Row>
-            ) : this.renderRows(visibleColumns, columnsCount);
+        return this.renderRows(visibleColumns, columnsCount);
     }
 
     renderRows(visibleColumns: Array<Column>, columnsCount: number) {
-        const { dataSource, classes, rowIdKey, ...customEndCellBodyProps } = this.props;
+        const { dataSource, rowIdKey, ...customEndCellBodyProps } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             return (
-                <Row
-                    className={classes.row}
-                >
-                    <Cell
-                        colSpan={columnsCount}
-                        className={classNames(classes.cell, classes.bodyCell)}
-                    >
-                        {i18n.t('No items to display')}
-                    </Cell>
-                </Row>
+                <DataTableRow>
+                    <DataTableCell colSpan={columnsCount}>{i18n.t('No items to display')}</DataTableCell>
+                </DataTableRow>
             );
         }
 
-        return (
-            <React.Fragment>
-                {
-                    dataSource
-                        .map((row) => {
-                            const cells = visibleColumns
-                                .map(column => (
-                                    <Cell
-                                        key={column.id}
-                                        className={classNames(classes.cell, classes.bodyCell)}
-                                    >
-                                        <div
-                                            style={Index.typesWithRightPlacement.includes(column.type) ? { textAlign: 'right' } : null}
-                                        >
-                                            {row[column.id]}
-                                        </div>
-                                    </Cell>
-                                ));
-                            return (
-                                <Row
-                                    key={row[rowIdKey]}
-                                    id={row[rowIdKey]}
-                                    className={classNames(classes.row, classes.dataRow)}
-                                    onClick={() => this.props.onRowClick(row)}
-                                >
-                                    {cells}
-                                    {this.getCustomEndCellBody(row, customEndCellBodyProps)}
-                                </Row>
-                            );
-                        })
-                }
-            </React.Fragment>
-        );
+        return dataSource.map((row) => {
+            const cells = visibleColumns.map(column => (
+                <DataTableCell
+                    key={column.id}
+                    align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
+                    onClick={() => this.props.onRowClick(row)}
+                >
+                    {row[column.id]}
+                </DataTableCell>
+            ));
+            return (
+                <DataTableRow key={row[rowIdKey]} id={row[rowIdKey]}>
+                    {cells}
+                    {this.getCustomEndCellBody(row, customEndCellBodyProps)}
+                </DataTableRow>
+            );
+        });
     }
 
     render() {
-        const { classes, columns } = this.props;
+        const { classes, columns, updating } = this.props;
         const visibleColumns = columns ? columns.filter(column => column.visible) : [];
         return (
-            <div
-                className={classes.tableContainer}
-            >
-                <Table
-                    className={classes.table}
-                    data-test="online-list-table"
-                >
-                    <Head>
-                        {this.renderHeaderRow(visibleColumns)}
-                    </Head>
-                    <Body
-                        data-test="online-list-body"
-                    >
-                        {this.renderBody(visibleColumns)}
-                    </Body>
-                </Table>
+            <div className={classes.tableContainer}>
+                <DataTable>
+                    <DataTableHead>{this.renderHeaderRow(visibleColumns)}</DataTableHead>
+                    <DataTableBody loading={updating}>{this.renderBody(visibleColumns)}</DataTableBody>
+                </DataTable>
             </div>
         );
     }
