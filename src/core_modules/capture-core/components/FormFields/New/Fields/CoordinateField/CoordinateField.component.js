@@ -9,12 +9,7 @@ import { typeof orientations } from '../../../New';
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
         position: 'relative',
-        boxShadow: `0px 0px 0px 2px ${theme.palette.primary.light}`,
         zIndex: 10,
-        margin: '2px 0px 2px 0px',
-    },
-    inputWrapperUnfocused: {
-        margin: '2px 0px 2px 0px',
     },
     innerInputError: {
         color: theme.palette.error.main,

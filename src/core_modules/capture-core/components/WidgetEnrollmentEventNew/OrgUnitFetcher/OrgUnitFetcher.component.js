@@ -16,9 +16,9 @@ export const OrgUnitFetcher = ({
     ...passOnProps
 }: OrgUnitFetcherProps) => {
     const { error, orgUnit } = useOrganisationUnit(orgUnitId, 'displayName,code');
-    const groups = useOrgUnitGroups(orgUnitId);
+    const { orgUnitGroups, error: groupError } = useOrgUnitGroups(orgUnitId);
 
-    if (error) {
+    if (error || groupError) {
         return (
             <div>
                 {i18n.t('organisation unit could not be retrieved. Please try again later.')}
@@ -26,8 +26,8 @@ export const OrgUnitFetcher = ({
         );
     }
 
-    if (orgUnit && groups) {
-        orgUnit.groups = groups;
+    if (orgUnit && orgUnitGroups) {
+        orgUnit.groups = orgUnitGroups;
 
         return (
             <Validated

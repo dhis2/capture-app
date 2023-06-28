@@ -1,12 +1,11 @@
 // @flow
 import * as React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
-import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
+import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
 import { getDataEntryKey } from './common/getDataEntryKey';
 import { dataEntryHasChanges as getDataEntryHasChanges } from './common/dataEntryHasChanges';
+import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
 
 type Props = {
     dataEntryHasChanges: boolean,
@@ -67,12 +66,9 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
                     <InnerComponent
                         {...passOnProps}
                     />
-                    <ConfirmDialog
-                        header={i18n.t('Unsaved changes')}
-                        text={i18n.t('Leaving this page will discard the changes you made to this event.')}
-                        confirmText={i18n.t('Yes, discard')}
-                        cancelText={i18n.t('No, stay here')}
-                        onConfirm={this.handleDialogConfirm}
+                    <DiscardDialog
+                        {...defaultDialogProps}
+                        onDestroy={this.handleDialogConfirm}
                         open={this.state.dialogOpen}
                         onCancel={this.handleDialogCancel}
                     />

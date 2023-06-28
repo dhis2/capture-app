@@ -101,7 +101,6 @@ export class SearchGroupFactory {
 
             o.displayInForms = true;
             o.displayInReports = searchAttribute.displayInList;
-            o.compulsory = !!unique;
             o.disabled = false;
             o.type = SearchGroupFactory._getSearchAttributeValueType(valueType, unique);
         });

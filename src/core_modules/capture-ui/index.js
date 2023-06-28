@@ -29,7 +29,6 @@ export { Pagination } from './DataTable/Pagination.component';
 
 // UI-Elements
 export { DividerHorizontal } from './Divider/DividerHorizontal.component';
-export { Button } from './Buttons/Button.component';
 export { IconButton } from './IconButton';
 export { NonBundledIcon } from './NonBundledIcon';
 export { FlatList } from './FlatList';

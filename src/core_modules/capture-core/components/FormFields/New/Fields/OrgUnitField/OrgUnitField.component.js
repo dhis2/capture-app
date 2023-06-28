@@ -1,4 +1,5 @@
 // @flow
+import { colors } from '@dhis2/ui';
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDataQuery } from '@dhis2/app-runtime';
@@ -8,27 +9,31 @@ import { OrgUnitTree } from './OrgUnitTree.component';
 
 const getStyles = () => ({
     container: {
-        border: '1px solid #C4C4C4',
+        border: '1px solid',
+        borderColor: colors.grey300,
         borderRadius: '3px',
         height: '100%',
         width: '100%',
-        boxShadow: '0px 0px 2px 0px #C4C4C4 inset',
         zIndex: 0,
         backgroundColor: 'white',
     },
     searchField: {
         height: '40px',
+        overflow: 'hidden',
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
         boxShadow: 'none',
         border: 'none',
     },
     debounceFieldContainer: {
-        paddingBottom: 0,
+        padding: 8,
+        background: colors.grey100,
+        borderTopLeftRadius: 3,
+        borderTopRightRadius: 3,
     },
     orgUnitTreeContainer: {
-        padding: 2,
-        borderTop: '1px solid #C4C4C4',
+        borderBottomLeftRadius: 3,
+        borderBottomRightRadius: 3,
         overflow: 'auto',
     },
 });

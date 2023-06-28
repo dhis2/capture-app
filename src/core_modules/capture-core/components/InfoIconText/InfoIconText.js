@@ -10,7 +10,7 @@ type OwnProps = {| children: string | Node |}
 const styles = () => ({
     icon: {
         position: 'relative',
-        top: '2px',
+        top: 1,
     },
     container: {
         marginTop: 12,
@@ -19,8 +19,8 @@ const styles = () => ({
     text: {
         fontSize: 14,
         fontWeight: 'normal',
-        marginLeft: 8,
         color: colors.grey800,
+        marginLeft: 6,
     },
 });
 
