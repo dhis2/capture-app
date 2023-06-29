@@ -28,7 +28,7 @@ const MultiSelectFieldComponentPlain = (props: Props) => {
     const [selected, setSelected] = useState([]);
 
     useEffect(() => {
-        const multiSelectValue = value === '' ? [] : value.split(MULTI_TEXT_SEPARATOR);
+        const multiSelectValue = (value === null || value === '') ? [] : value.split(MULTI_TEXT_SEPARATOR);
         setSelected(multiSelectValue);
     }, [value]);
 
@@ -41,6 +41,7 @@ const MultiSelectFieldComponentPlain = (props: Props) => {
 
     return (
         <MultiSelectFieldUI
+            dataTest="multi-select-field"
             onChange={onHandleChange}
             onFocus={onFocus}
             onBlur={onBlur}

@@ -166,6 +166,11 @@ Feature: User creates a new entries from the registration page
     When you submit the form again from the duplicates modal
     Then you are navigated to the WHO RMNCH program in Tracker Capture app
 
+  Scenario: New person in Tracker Program > Filling the Allergies with multiple options
+    Given you are in the WHO RMNCH program registration page
+    And you fill in multiple Allergies options
+    Then you can see the multiple selections in the form
+
   Scenario: New person in Tracker Program > Submitting the form shows a list with duplicates
     Given you are in Child programme registration page
     When you fill the Child programme registration form with a first name with value that has duplicates

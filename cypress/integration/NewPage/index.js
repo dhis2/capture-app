@@ -565,3 +565,22 @@ Then('you see the enrollment event New page', () => {
     cy.url().should('include', '/#/enrollmentEventNew?');
     cy.url().should('include', 'stageId=hYyB7FUS5eR');
 });
+
+
+And('you fill in multiple Allergies options', () => {
+    cy.get('[data-test="registration-page-content"]').within(() => {
+        cy.contains('Allergies').should('exist');
+    });
+    cy.get('[data-test="multi-select-field"]').click();
+    cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Penicillin and related antibiotics').click();
+    cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Anticonvulsants').click();
+    cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Other').click();
+});
+
+Then('you can see the multiple selections in the form', () => {
+    cy.get('[data-test="multi-select-field-content"]').within(() => {
+        cy.contains('Penicillin and related antibiotics').should('exist');
+        cy.contains('Anticonvulsants').should('exist');
+        cy.contains('Other').should('exist');
+    });
+});
