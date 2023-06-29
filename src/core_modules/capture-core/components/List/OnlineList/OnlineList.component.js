@@ -84,6 +84,7 @@ class Index extends React.Component<Props> {
 
         const headerCells = visibleColumns.map(column => (
             <DataTableColumnHeader
+                dataTest={`table-row-${sortById === column.id ? sortByDirection : 'default'}`}
                 onSortIconClick={this.getSortHandler(column.id)}
                 sortDirection={sortById === column.id ? sortByDirection : 'default'}
                 key={column.id}
@@ -95,7 +96,7 @@ class Index extends React.Component<Props> {
         ));
 
         return (
-            <DataTableRow>
+            <DataTableRow dataTest="table-row">
                 {headerCells}
                 {this.getCustomEndCellHeader()}
             </DataTableRow>
@@ -114,7 +115,7 @@ class Index extends React.Component<Props> {
 
         if (!dataSource || dataSource.length === 0) {
             return (
-                <DataTableRow>
+                <DataTableRow dataTest="table-row">
                     <DataTableCell colSpan={columnsCount}>{i18n.t('No items to display')}</DataTableCell>
                 </DataTableRow>
             );
@@ -131,7 +132,7 @@ class Index extends React.Component<Props> {
                 </DataTableCell>
             ));
             return (
-                <DataTableRow key={row[rowIdKey]} id={row[rowIdKey]}>
+                <DataTableRow key={row[rowIdKey]} dataTest={row[rowIdKey]}>
                     {cells}
                     {this.getCustomEndCellBody(row, customEndCellBodyProps)}
                 </DataTableRow>
@@ -144,7 +145,7 @@ class Index extends React.Component<Props> {
         const visibleColumns = columns ? columns.filter(column => column.visible) : [];
         return (
             <div className={classes.tableContainer}>
-                <DataTable>
+                <DataTable dataTest="online-list-table">
                     <DataTableHead>{this.renderHeaderRow(visibleColumns)}</DataTableHead>
                     <DataTableBody loading={updating}>{this.renderBody(visibleColumns)}</DataTableBody>
                 </DataTable>

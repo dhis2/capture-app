@@ -69,8 +69,11 @@ When('you have no program selection', () => {
 });
 
 When('you click the next page button', () => {
+    cy.server();
+    cy.route('GET', '**/**/**page=2**').as('getResults');
     cy.get('[data-test="search-pagination-next-page"]')
         .click();
+    cy.wait('@getResults', { timeout: 30000 });
 });
 
 Then('you can see the second page of the results', () => {
@@ -84,8 +87,10 @@ Then('you can see the second page of the results', () => {
 });
 
 When('you click the previous page button', () => {
+    cy.route('GET', '**/**/**page=1**').as('getResults');
     cy.get('[data-test="search-pagination-previous-page"]')
         .click();
+    cy.wait('@getResults', { timeout: 30000 });
 });
 
 And('you can see the first page of the results', () => {

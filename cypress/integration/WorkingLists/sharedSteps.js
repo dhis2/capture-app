@@ -75,8 +75,9 @@ Then('the pagination for the tei working list should show the second page', () =
 });
 
 Then('the sort arrow should indicate ascending order', () => {
-    cy.get('[data-test="data-table-asc-sort-icon"]')
-        .should('exist');
+    cy.get('[data-test="table-row"]').within(() => {
+        cy.get('[data-test="table-row-asc"]').should('exist');
+    });
 });
 
 Then('the enrollment status filter button should show that the active filter is in effect', () => {
@@ -106,8 +107,9 @@ When('you set the assginee filter to none', () => {
 });
 
 When('you set the first name filter to John', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('First name')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(0)
+        .click()
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
@@ -128,13 +130,16 @@ Then('the first name filter button should show that the filter is in effect', ()
 });
 
 When('you click the first page button', () => {
+    cy.route('GET', '**/**/**page=1**').as('getResults');
     cy.get('[data-test="search-pagination-first-page"]')
         .click();
+    cy.wait('@getResults', { timeout: 30000 });
 });
 
 Then('the sort arrow should indicate descending order', () => {
-    cy.get('[data-test="data-table-desc-sort-icon"]')
-        .should('exist');
+    cy.get('[data-test="table-row"]').within(() => {
+        cy.get('[data-test="desc"]').should('exist');
+    });
 });
 
 Then('rows per page should be set to 15', () => {

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
-"PO-Revision-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-06-29T09:11:23.191Z\n"
+"PO-Revision-Date: 2023-06-29T09:11:23.191Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -363,9 +363,6 @@ msgstr "Some operations are still runnning. Please wait.."
 
 msgid "Operations running"
 msgstr "Operations running"
-
-msgid "Sort"
-msgstr "Sort"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "

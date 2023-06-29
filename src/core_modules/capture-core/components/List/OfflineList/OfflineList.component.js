@@ -57,7 +57,7 @@ class Index extends Component<Props> {
             </DataTableColumnHeader>
         ));
 
-        return <DataTableRow>{headerCells}</DataTableRow>;
+        return <DataTableRow dataTest="table-row">{headerCells}</DataTableRow>;
     }
 
     renderRows(visibleColumns: Array<Column>) {
@@ -66,7 +66,7 @@ class Index extends Component<Props> {
         if (!dataSource || dataSource.length === 0) {
             const columnsCount = visibleColumns.length;
             return (
-                <DataTableRow>
+                <DataTableRow dataTest="table-row">
                     <DataTableCell colSpan={columnsCount}>{noItemsText || i18n.t('No items to display')}</DataTableCell>
                 </DataTableRow>
             );
@@ -82,7 +82,7 @@ class Index extends Component<Props> {
                 </DataTableCell>
             ));
 
-            return <DataTableRow key={row[rowIdKey]}>{cells}</DataTableRow>;
+            return <DataTableRow key={row[rowIdKey]} dataTest="table-row">{cells}</DataTableRow>;
         });
     }
 

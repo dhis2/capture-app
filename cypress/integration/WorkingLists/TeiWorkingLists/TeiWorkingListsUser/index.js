@@ -174,8 +174,9 @@ When('you set the event status filter to completed', () => {
 });
 
 When(/^you set the first name filter to (.*)$/, (name) => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('First name')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(0)
+        .click()
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
@@ -332,8 +333,9 @@ Then('the list should display 10 rows of data', () => {
 });
 
 When('you click the first name column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('First name')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(0)
+        .click()
         .click();
 });
 
