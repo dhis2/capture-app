@@ -571,10 +571,11 @@ And('you fill in multiple Allergies options', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {
         cy.contains('Allergies').should('exist');
     });
-    cy.get('[data-test="multi-select-field"]').click();
+    cy.get('[data-test="dhis2-uicore-select-input"]').click();
     cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Penicillin and related antibiotics').click();
     cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Anticonvulsants').click();
     cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Other').click();
+    cy.get('[data-test="dhis2-uicore-select-input"]').click({ force: true });
 });
 
 Then('you can see the multiple selections in the form', () => {
