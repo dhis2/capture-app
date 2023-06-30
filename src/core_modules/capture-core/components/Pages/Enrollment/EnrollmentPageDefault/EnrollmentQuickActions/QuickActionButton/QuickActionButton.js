@@ -23,6 +23,12 @@ const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disable,
                     btnRef.onmouseover = onMouseOver;
                     btnRef.onmouseout = onMouseOut;
                     ref.current = btnRef;
+                } else {
+                    if (btnRef) {
+                        btnRef.onmouseover = null;
+                        btnRef.onmouseout = null;
+                    }
+                    ref.current = null;
                 }
             }}
             >
