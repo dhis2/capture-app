@@ -11,6 +11,11 @@ import {
     updateEnrollmentDate,
     showEnrollmentError,
 } from '../../common/EnrollmentOverviewDomain';
+import {
+    updateEnrollmentDate as updateTopBarEnrollmentDate,
+    deleteEnrollment,
+    updateTeiDisplayName,
+} from '../EnrollmentPage.actions';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
@@ -21,7 +26,6 @@ import {
     useRuleEffects,
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
-import { deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 
 export const EnrollmentPageDefault = () => {
@@ -83,8 +87,10 @@ export const EnrollmentPageDefault = () => {
         dispatch(updateTeiDisplayName(teiDisplayName));
     }, [dispatch]);
 
-    const onUpdateEnrollmentDate = useCallback(enrollmentDate =>
-        dispatch(updateEnrollmentDate(enrollmentDate)), [dispatch]);
+    const onUpdateEnrollmentDate = useCallback((enrollmentDate) => {
+        dispatch(updateEnrollmentDate(enrollmentDate));
+        dispatch(updateTopBarEnrollmentDate({ enrollmentId, enrollmentDate }));
+    }, [dispatch, enrollmentId]);
 
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
