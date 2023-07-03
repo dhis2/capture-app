@@ -5,6 +5,7 @@ on: [push]
 jobs:
   cypress:
     runs-on: ubuntu-latest
+    if: "!(startsWith(github.event.head_commit.message, 'fix(translations)') && github.actor == 'dhis2-bot') && !contains(github.event.head_commit.message, '[skip ci]')"
     container: cypress/browsers:node14.7.0-chrome84
     strategy:
       # when one test fails, DO NOT cancel the other
