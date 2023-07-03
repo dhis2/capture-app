@@ -130,7 +130,8 @@
         "wait-on": "^6.0.1"
     },
     "resolutions": {
-        "@babel/preset-react": "7.16.7"
+        "@babel/preset-react": "7.16.7",
+        "core-js": "2.5.7"
     },
     "browserslist": {
         "production": [
