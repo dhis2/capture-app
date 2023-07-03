@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2023\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -44,7 +44,7 @@ msgstr ""
 "at dette vil lukke andre versjoner."
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "Vis {{programName}} dashbord"
 
 msgid "View dashboard"
 msgstr "Vis dashbord"
@@ -598,6 +598,27 @@ msgstr "Bruk nytt registreringsdashbord for {{programName}}"
 msgid "Opt in for {{programName}}"
 msgstr "Meld på for {{programName}}"
 
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
+msgstr ""
+
 msgid "Yes, opt in"
 msgstr "Ja, meld på"
 
@@ -852,107 +873,8 @@ msgstr "Opprett ny {{trackedEntityType}}"
 msgid "Register"
 msgstr "Registrere"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Fyll inn minst {{minAttributesRequiredToSearch}} attributter for å søke"
-
-msgid "Search {{name}}"
-msgstr "Søk {{name}}"
-
-msgid "Search by {{name}}"
-msgstr "Søk etter {{name}}"
-
-msgid "Search by attributes"
-msgstr "Søk etter attributter"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr "Fyll ut disse feltene for å søke{{escape}} {{ searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Fyll ut minst {{minAttributesRequiredToSearch}} av disse feltene for å "
-"søke{{escape}} {{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "Fyll ut dette feltet for å søke {{escape}} {{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "Ingen resultater funnet"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
-
-msgid "Register a user"
-msgstr "Registrer en bruker"
-
-msgid "Back to search"
-msgstr "Tilbake til søk"
-
-msgid "An error has occurred"
-msgstr "Det har oppstått en feil"
-
-msgid "Too many results"
-msgstr "For mange resultat"
-
-msgid "Cannot search in all programs"
-msgstr "Kan ikke søke i alle programmer"
-
 msgid "Back"
 msgstr "Tilbake"
-
-msgid "Search for {{titleText}}"
-msgstr "Søk etter {{titleText}}"
-
-msgid "Search for"
-msgstr "Søk etter"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "Du kan også velge et program fra topplinjen og søke i det programmet"
-
-msgid "Choose a type to start searching"
-msgstr "Velg en type for å begynne å søke"
-
-msgid "all programs"
-msgstr "alle programmer"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Finner du ikke resultatene du leter etter? Prøv å søke i alle programmer som"
-" bruker type"
-
-msgid "Search in all programs"
-msgstr "Søk i alle programmer"
-
-msgid "If none of search results match, you can create a new "
-msgstr "Hvis ingen av søkeresultatene samsvarer, kan du opprette ny"
-
-msgid "Create new"
-msgstr "Opprett ny"
-
-msgid "Saved lists in this program"
-msgstr "Lagrede lister i dette programmet"
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-"Lagrede lister gir rask tilgang til dine mest brukte visninger i et program."
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-"Det er ingen lagrede lister i dette programmet ennå, lag en ved å bruke "
-"knappen nedenfor."
-
-msgid "Create saved list"
-msgstr "Lag lagret liste"
 
 msgid "events"
 msgstr "hendelser"
@@ -1003,6 +925,9 @@ msgstr "Organisasjonsenhet kunne ikke lastes inn"
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
 
+msgid "No results found"
+msgstr "Ingen resultater funnet"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "En feil oppsto ved lasting av mulige duplikater"
 
@@ -1025,7 +950,7 @@ msgid "Choose a registering unit"
 msgstr ""
 
 msgid "Clear selection"
-msgstr ""
+msgstr "Fjern valg"
 
 msgid "No programs available."
 msgstr "Ingen programmer tilgjengelig."
@@ -1042,6 +967,85 @@ msgstr ""
 msgid "Choose a program"
 msgstr "Velg et program"
 
+msgid "Search for {{titleText}}"
+msgstr "Søk etter {{titleText}}"
+
+msgid "Search for"
+msgstr "Søk etter"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "Du kan også velge et program fra topplinjen og søke i det programmet"
+
+msgid "Choose a type to start searching"
+msgstr "Velg en type for å begynne å søke"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Search {{name}}"
+msgstr "Søk {{name}}"
+
+msgid "Search by {{name}}"
+msgstr "Søk etter {{name}}"
+
+msgid "Search by attributes"
+msgstr "Søk etter attributter"
+
+msgid "all programs"
+msgstr "alle programmer"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Finner du ikke resultatene du leter etter? Prøv å søke i alle programmer som"
+" bruker type"
+
+msgid "Search in all programs"
+msgstr "Søk i alle programmer"
+
+msgid "If none of search results match, you can create a new "
+msgstr "Hvis ingen av søkeresultatene samsvarer, kan du opprette ny"
+
+msgid "Create new"
+msgstr "Opprett ny"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr "Fyll ut disse feltene for å søke{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Fyll ut minst {{minAttributesRequiredToSearch}} av disse feltene for å "
+"søke{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "Fyll ut dette feltet for å søke {{escape}} {{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
+
+msgid "Back to search"
+msgstr "Tilbake til søk"
+
+msgid "An error has occurred"
+msgstr "Det har oppstått en feil"
+
+msgid "Too many results"
+msgstr "For mange resultat"
+
+msgid "Cannot search in all programs"
+msgstr "Kan ikke søke i alle programmer"
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr "Resultater funnet"
 
@@ -1051,8 +1055,22 @@ msgstr "Valgt program"
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Fyll inn minst {{minAttributesRequired}} attributter for å søke"
+msgid "Saved lists in this program"
+msgstr "Lagrede lister i dette programmet"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+"Lagrede lister gir rask tilgang til dine mest brukte visninger i et program."
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+"Det er ingen lagrede lister i dette programmet ennå, lag en ved å bruke "
+"knappen nedenfor."
+
+msgid "Create saved list"
+msgstr "Lag lagret liste"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Ny {{trackedEntityName}} i {{programName}}"
@@ -1304,8 +1322,8 @@ msgstr "Rediger"
 msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"
 
-msgid "This event is not yet preserved and cannot be edited"
-msgstr "Denne hendelsen er ikke bevart ennå og kan ikke redigeres"
+msgid "To open this event, please wait until saving is complete"
+msgstr ""
 
 msgid "Show {{ rest }} more"
 msgstr "Vis {{ rest }} flere"
@@ -1355,6 +1373,9 @@ msgstr "Last ned data..."
 msgid "an error occurred loading working lists"
 msgstr "en feil oppstod ved lasting av arbeidslister"
 
+msgid "Assigned to"
+msgstr "Tildelt til"
+
 msgid "Registration Date"
 msgstr "Innregistreringsdato"
 
@@ -1364,11 +1385,17 @@ msgstr "Inaktiv"
 msgid "Enrollment status"
 msgstr "Registreringsstatus"
 
-msgid "Assigned to"
-msgstr "Tildelt til"
-
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Velg en programfase å filtrere etter {{label}}"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "Arbeidslisten kunne ikke oppdateres"

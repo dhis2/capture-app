@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType, useState } from 'react';
 import { compose } from 'redux';
-import { Button } from '@dhis2/ui';
+import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
@@ -10,13 +10,13 @@ import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
-import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
+import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
-import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
@@ -28,13 +28,10 @@ const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
         {i18n.t('Enroll in a program by selecting a program from the top bar.')}
     </>);
 
-const styles = ({ typography }) => ({
-    marginTop: {
-        marginTop: typography.pxToRem(2),
+const styles = () => ({
+    actions: {
         display: 'flex',
-    },
-    marginLeft: {
-        marginLeft: typography.pxToRem(16),
+        gap: spacers.dp8,
     },
 });
 
@@ -94,7 +91,7 @@ const TeiRegistrationEntryPlain =
                           onGetUnsavedAttributeValues={() => console.log('similar to the withErrorMessagePostProcessor this will come in the future')}
                           {...rest}
                       />
-                      <div className={classes.marginTop}>
+                      <div className={classes.actions}>
                           {
                               onSave &&
                               <Button
@@ -111,7 +108,6 @@ const TeiRegistrationEntryPlain =
                               dataTest="cancel-button"
                               secondary
                               onClick={handleOnCancel}
-                              className={classes.marginLeft}
                               disabled={isSavingInProgress}
                           >
                               {i18n.t('Cancel')}
@@ -121,9 +117,9 @@ const TeiRegistrationEntryPlain =
                           {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
                       </InfoIconText>
 
-                      <ConfirmDialog
+                      <DiscardDialog
                           {...defaultDialogProps}
-                          onConfirm={navigateToWorkingListsPage}
+                          onDestroy={navigateToWorkingListsPage}
                           open={!!showWarning}
                           onCancel={() => { setShowWarning(false); }}
                       />

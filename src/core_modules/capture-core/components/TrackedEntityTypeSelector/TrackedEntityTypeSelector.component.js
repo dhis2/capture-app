@@ -2,8 +2,9 @@
 import React, { useMemo, type ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
-    SingleSelect,
+    SingleSelectField,
     SingleSelectOption,
+    spacers,
 } from '@dhis2/ui';
 import type { Props } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
@@ -12,19 +13,14 @@ import { useCurrentTrackedEntityTypeId } from '../../hooks/useCurrentTrackedEnti
 import { InfoIconText } from '../InfoIconText';
 
 const styles = ({ typography }) => ({
-    header: {
-        paddingLeft: 8,
-    },
     searchRow: {
         maxWidth: typography.pxToRem(400),
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'start',
-        paddingTop: '8px',
+        marginBottom: spacers.dp8,
     },
     searchRowSelectElement: {
-        marginLeft: 8,
-        marginRight: 8,
         width: '100%',
     },
     informativeIcon: {
@@ -48,13 +44,11 @@ export const TrackedEntityTypeSelectorPlain =
       };
 
       return (<>
-          <div className={classes.header}>
-              { headerText }
-          </div>
 
           <div className={classes.searchRow}>
               <div className={classes.searchRowSelectElement}>
-                  <SingleSelect
+                  <SingleSelectField
+                      label={headerText}
                       onChange={handleSelectionChange}
                       selected={selectedSearchScopeId}
                       empty={<div className={classes.customEmpty}>Custom empty component</div>}
@@ -87,7 +81,7 @@ export const TrackedEntityTypeSelectorPlain =
                               trackedEntityTypesWithCorrelatedPrograms,
                           ])
                       }
-                  </SingleSelect>
+                  </SingleSelectField>
               </div>
           </div>
           {

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Malinda Wijeratne, 2023\n"
 "Language-Team: Sinhala (https://app.transifex.com/hisp-uio/teams/100509/si/)\n"
@@ -271,7 +271,7 @@ msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "සුරකින්න"
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
@@ -407,25 +407,25 @@ msgid "Days in the past"
 msgstr ""
 
 msgid "To"
-msgstr ""
+msgstr "වෙත"
 
 msgid "This week"
-msgstr ""
+msgstr "මෙම සතිය"
 
 msgid "This month"
-msgstr ""
+msgstr "මෙම මාසය"
 
 msgid "This Year"
 msgstr "මෙම වසර"
 
 msgid "Last week"
-msgstr ""
+msgstr "පසුගිය සතිය"
 
 msgid "Last month"
-msgstr ""
+msgstr "පසුගිය මාසය"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "පසුගිය මාස 3"
 
 msgid "Absolute range"
 msgstr ""
@@ -449,13 +449,13 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "අවුරුදු"
 
 msgid "Months"
-msgstr ""
+msgstr "මාස"
 
 msgid "Days"
-msgstr ""
+msgstr "දින"
 
 msgid "Uploading file"
 msgstr ""
@@ -705,7 +705,7 @@ msgid "Program stage is invalid"
 msgstr ""
 
 msgid "Report"
-msgstr ""
+msgstr "වාර්තාව"
 
 msgid "Schedule"
 msgstr ""
@@ -825,98 +825,7 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-
-msgid "Search {{name}}"
-msgstr ""
-
-msgid "Search by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr ""
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr ""
-
-msgid "An error has occurred"
-msgstr ""
-
-msgid "Too many results"
-msgstr ""
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
-msgstr ""
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr ""
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-
-msgid "Choose a type to start searching"
-msgstr ""
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-
-msgid "Search in all programs"
-msgstr ""
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr ""
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-
-msgid "Create saved list"
 msgstr ""
 
 msgid "events"
@@ -966,6 +875,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr ""
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1005,6 +917,81 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Search by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr ""
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr ""
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid "Too many results"
+msgstr ""
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr ""
 
@@ -1014,7 +1001,18 @@ msgstr ""
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
 msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
@@ -1177,23 +1175,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1437,7 +1423,7 @@ msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "දිනය"
 
 msgid "Time"
 msgstr ""

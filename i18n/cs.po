@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký, 2023\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -594,6 +594,27 @@ msgstr "Použít nový ovládací panel zápisu pro {{programName}}"
 msgid "Opt in for {{programName}}"
 msgstr "Přihlásit se do {{programName}}"
 
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
+msgstr ""
+
 msgid "Yes, opt in"
 msgstr "Ano, přihlásit se"
 
@@ -846,110 +867,8 @@ msgstr "Vytvořit nový {{trackedEntityType}}"
 msgid "Register"
 msgstr "Registrovat"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Chcete-li hledat, vyplňte alespoň {{minAttributesRequiredToSearch}} atributy"
-
-msgid "Search {{name}}"
-msgstr "Hledat {{name}}"
-
-msgid "Search by {{name}}"
-msgstr "Hledat podle {{name}}"
-
-msgid "Search by attributes"
-msgstr "Hledání podle atributů"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-"Vyplňte tato pole pro vyhledávání{{escape}} {{ searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Chcete-li hledat, vyplňte alespoň {{minAttributesRequiredToSearch}} z těchto"
-" polí{{escape}} {{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "Vyplňte toto pole pro vyhledávání{{escape}} {{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "Nenalezeny žádné výsledky"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
-
-msgid "Register a user"
-msgstr "Registrovat uživatele"
-
-msgid "Back to search"
-msgstr "Zpět na vyhledávání"
-
-msgid "An error has occurred"
-msgstr "Došlo k chybě"
-
-msgid "Too many results"
-msgstr "Příliš mnoho výsledků"
-
-msgid "Cannot search in all programs"
-msgstr "Nelze vyhledávat ve všech programech"
-
 msgid "Back"
 msgstr "Zpět"
-
-msgid "Search for {{titleText}}"
-msgstr "Hledat {{titleText}}"
-
-msgid "Search for"
-msgstr "Hledat"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
-
-msgid "Choose a type to start searching"
-msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
-
-msgid "all programs"
-msgstr "všechny programy"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"Nenašli jste hledané výsledky? Zkuste vyhledat všechny programy, které "
-"používají typ"
-
-msgid "Search in all programs"
-msgstr "Hledat ve všech programech"
-
-msgid "If none of search results match, you can create a new "
-msgstr "Pokud žádný z výsledků vyhledávání neodpovídá, můžete vytvořit nový"
-
-msgid "Create new"
-msgstr "Vytvořit nový"
-
-msgid "Saved lists in this program"
-msgstr "Uložené seznamy v tomto programu"
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-"Uložené seznamy nabízejí rychlý přístup k nejpoužívanějším pohledům v "
-"programu."
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-"V tomto programu zatím nejsou žádné uložené seznamy, vytvořte si je pomocí "
-"tlačítka níže."
-
-msgid "Create saved list"
-msgstr "Vytvořte uložený seznam"
 
 msgid "events"
 msgstr "události"
@@ -1000,6 +919,9 @@ msgstr "Organizační jednotku se nepodařilo načíst"
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
 
+msgid "No results found"
+msgstr "Nenalezeny žádné výsledky"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Při načítání možných duplikátů došlo k chybě"
 
@@ -1039,6 +961,89 @@ msgstr ""
 msgid "Choose a program"
 msgstr "Vyberte program"
 
+msgid "Search for {{titleText}}"
+msgstr "Hledat {{titleText}}"
+
+msgid "Search for"
+msgstr "Hledat"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
+
+msgid "Choose a type to start searching"
+msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Search {{name}}"
+msgstr "Hledat {{name}}"
+
+msgid "Search by {{name}}"
+msgstr "Hledat podle {{name}}"
+
+msgid "Search by attributes"
+msgstr "Hledání podle atributů"
+
+msgid "all programs"
+msgstr "všechny programy"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Nenašli jste hledané výsledky? Zkuste vyhledat všechny programy, které "
+"používají typ"
+
+msgid "Search in all programs"
+msgstr "Hledat ve všech programech"
+
+msgid "If none of search results match, you can create a new "
+msgstr "Pokud žádný z výsledků vyhledávání neodpovídá, můžete vytvořit nový"
+
+msgid "Create new"
+msgstr "Vytvořit nový"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+"Vyplňte tato pole pro vyhledávání{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+"Chcete-li hledat, vyplňte alespoň {{minAttributesRequiredToSearch}} z těchto"
+" polí{{escape}} {{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "Vyplňte toto pole pro vyhledávání{{escape}} {{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
+
+msgid "Back to search"
+msgstr "Zpět na vyhledávání"
+
+msgid "An error has occurred"
+msgstr "Došlo k chybě"
+
+msgid "Too many results"
+msgstr "Příliš mnoho výsledků"
+
+msgid "Cannot search in all programs"
+msgstr "Nelze vyhledávat ve všech programech"
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr "Nalezeny výsledky"
 
@@ -1048,8 +1053,23 @@ msgstr "Vybraný program"
 msgid "Search {{uniqueAttrName}}"
 msgstr "Hledat {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "Chcete-li hledat, vyplňte alespoň {{minAttributesRequired}} atributy"
+msgid "Saved lists in this program"
+msgstr "Uložené seznamy v tomto programu"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+"Uložené seznamy nabízejí rychlý přístup k nejpoužívanějším pohledům v "
+"programu."
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+"V tomto programu zatím nejsou žádné uložené seznamy, vytvořte si je pomocí "
+"tlačítka níže."
+
+msgid "Create saved list"
+msgstr "Vytvořte uložený seznam"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Nový {{trackedEntityName}} v {{programName}}"
@@ -1305,8 +1325,8 @@ msgstr "Upravit"
 msgid "New {{ eventName }} event"
 msgstr "Nová událost {{ eventName }}"
 
-msgid "This event is not yet preserved and cannot be edited"
-msgstr "Tato událost zatím není zachována a nelze ji upravit"
+msgid "To open this event, please wait until saving is complete"
+msgstr ""
 
 msgid "Show {{ rest }} more"
 msgstr "Zobrazit {{rest}} více"
@@ -1356,6 +1376,9 @@ msgstr "Stáhnout data ..."
 msgid "an error occurred loading working lists"
 msgstr "při načítání pracovních seznamů došlo k chybě"
 
+msgid "Assigned to"
+msgstr "Přiřazen k"
+
 msgid "Registration Date"
 msgstr "Datum registrace"
 
@@ -1365,11 +1388,17 @@ msgstr "Neaktivní"
 msgid "Enrollment status"
 msgstr "Stav zápisu"
 
-msgid "Assigned to"
-msgstr "Přiřazen k"
-
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Vyberte fázi programu, kterou chcete filtrovat podle {{label}}"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "Pracovní seznam nelze aktualizovat"

@@ -1,13 +1,13 @@
 // @flow
 import React, { type ComponentType, useState } from 'react';
-import { Button } from '@dhis2/ui';
+import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
-import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
+import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
@@ -16,15 +16,12 @@ import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
-import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 
-const styles = ({ typography }) => ({
-    marginTop: {
-        marginTop: typography.pxToRem(2),
+const styles = () => ({
+    actions: {
         display: 'flex',
-    },
-    marginLeft: {
-        marginLeft: typography.pxToRem(16),
+        gap: spacers.dp8,
     },
 });
 
@@ -102,7 +99,7 @@ const EnrollmentRegistrationEntryPlain =
                           onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future')}
                           {...rest}
                       />
-                      <div className={classes.marginTop}>
+                      <div className={classes.actions}>
 
                           {
                               onSave &&
@@ -121,7 +118,6 @@ const EnrollmentRegistrationEntryPlain =
                               secondary
                               onClick={handleOnCancel}
                               disabled={isSavingInProgress}
-                              className={classes.marginLeft}
                           >
                               {i18n.t('Cancel')}
                           </Button>
@@ -132,9 +128,9 @@ const EnrollmentRegistrationEntryPlain =
                       </InfoIconText>
                   </>
               }
-              <ConfirmDialog
+              <DiscardDialog
                   {...defaultDialogProps}
-                  onConfirm={navigateToWorkingListsPage}
+                  onDestroy={navigateToWorkingListsPage}
                   open={!!showWarning}
                   onCancel={() => { setShowWarning(false); }}
               />

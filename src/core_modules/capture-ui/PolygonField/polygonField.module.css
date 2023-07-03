@@ -5,18 +5,10 @@
     display: flex;
     align-items: center;
 }
-
-.mapIcon {
-    cursor: pointer;
-    padding: 2px;
-}
 .statusText {
-    padding: 2px;
+    margin: 0 8px 0 4px;
+    font-size: 14px;
 }
-.checkIcon {
-    padding: 2px;
-}
-
 .dialogActionOuterContainer {
     display: flex;
     align-items: center;
