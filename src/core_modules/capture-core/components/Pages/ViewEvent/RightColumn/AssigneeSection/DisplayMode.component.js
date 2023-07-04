@@ -2,8 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, IconButton } from '@material-ui/core';
-import { IconEdit24 } from '@dhis2/ui';
-import { Button } from '../../../../Buttons';
+import { IconEdit24, Button } from '@dhis2/ui';
 
 const getStyles = () => ({
     container: {

@@ -5,14 +5,7 @@ import { UserSearch } from './UserSearch.component';
 import { Selected } from './Selected.component';
 import type { User } from './types';
 
-const getStyles = (theme: Theme) => ({
-    inputWrapperFocused: {
-        border: `2px solid ${theme.palette.primary.light}`,
-        borderRadius: '5px',
-    },
-    inputWrapperUnfocused: {
-        padding: 2,
-    },
+const getStyles = () => ({
 });
 
 type Props = {

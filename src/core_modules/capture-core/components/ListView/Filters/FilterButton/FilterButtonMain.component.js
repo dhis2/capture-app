@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
-import { IconChevronDown16, IconChevronUp16, Tooltip } from '@dhis2/ui';
-import { Button } from '../../../Buttons';
+import { IconChevronDown16, IconChevronUp16, Tooltip, Button } from '@dhis2/ui';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';

@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button, IconChevronLeft24, spacers } from '@dhis2/ui';
+import { Button, IconChevronLeft24, spacers, colors } from '@dhis2/ui';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import type { Props, PlainProps } from './searchPage.types';
@@ -20,6 +20,10 @@ const getStyles = () => ({
     },
     half: {
         flex: 1,
+        background: colors.white,
+        border: '1px solid',
+        borderColor: colors.grey400,
+        borderRadius: 3,
     },
     quarter: {
         flex: 0.4,

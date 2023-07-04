@@ -7,14 +7,14 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { tabMode } from './newEventWorkspace.constants';
 import { getProgramAndStageForProgram } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
-import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
+import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
 import { addEnrollmentEventPageDefaultActionTypes } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import type { Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
-import { defaultDialogProps } from '../../../Dialogs/ConfirmDialog.constants';
+import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
 const styles = () => ({
     innerWrapper: {
@@ -108,9 +108,9 @@ const NewEventWorkspacePlain = ({
                     />}
                 </div>
             </Widget>
-            <ConfirmDialog
+            <DiscardDialog
                 {...defaultDialogProps}
-                onConfirm={() => { setMode(tempMode.current); setWarningVisible(false); }}
+                onDestroy={() => { setMode(tempMode.current); setWarningVisible(false); }}
                 open={isWarningVisible}
                 onCancel={() => setWarningVisible(false)}
             />

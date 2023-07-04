@@ -3,10 +3,9 @@
 import * as React from 'react';
 import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
 import { withStyles } from '@material-ui/core';
-import { Tooltip, Menu, MenuItem } from '@dhis2/ui';
+import { colors, spacersNum, Tooltip, Menu, MenuItem, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withFocusSaver } from 'capture-ui';
-import { Button } from '../Buttons';
 import { TextField } from '../FormFields/New';
 import type { Note } from './notes.types';
 
@@ -19,9 +18,14 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'normal',
         cursor: 'default !important',
-        background: `${theme.palette.grey.lighter} !important`,
-        marginBottom: theme.typography.pxToRem(3),
-        fontSize: theme.typography.pxToRem(14),
+        padding: spacersNum.dp12,
+        marginRight: spacersNum.dp4,
+        backgroundColor: '#f3f5f7 !important',
+        borderRadius: '5px',
+        fontSize: '14px',
+        lineHeight: '19px',
+        color: colors.grey900,
+        marginBottom: spacersNum.dp8,
     },
     commandButton: {
         width: theme.typography.pxToRem(30),
@@ -31,25 +35,18 @@ const styles = theme => ({
         margin: theme.typography.pxToRem(10),
     },
     newCommentButtonContainer: {
-        marginTop: theme.typography.pxToRem(10),
-    },
-    newNoteContainer: {
-    },
-    newNoteFormContainer: {
-        background: theme.palette.grey.lighter,
-        padding: theme.typography.pxToRem(10),
-    },
-    notesContainer: {
+        marginTop: spacersNum.dp4,
     },
     noteItemHeader: {
         display: 'flex',
     },
     noteItemUser: {
         flexGrow: 1,
-        fontWeight: 'bold',
+        fontSize: '13px',
+        fontWeight: 500,
     },
     noteItemDate: {
-        color: '#757575',
+        color: '#4a5768',
     },
     notesList: {
         padding: 0,
@@ -160,11 +157,14 @@ class NotesPlain extends React.Component<Props, State> {
                         onClick={this.handleAddNote}
                         className={classes.addCommentContainer}
                         primary
+                        small
                     >
                         {i18n.t('Add comment')}
                     </Button>
                     <Button
                         onClick={this.onCancel}
+                        secondary
+                        small
                     >
                         {i18n.t('Cancel')}
                     </Button>

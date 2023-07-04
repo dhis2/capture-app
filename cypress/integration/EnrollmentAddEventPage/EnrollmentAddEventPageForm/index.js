@@ -133,12 +133,12 @@ Then(/^the input should throw an error with error-message (.*)$/, (error) => {
 
 
 Then('there should be a modal popping up', () => {
-    cy.contains('[data-test="dhis2-uicore-modal"]', 'Generate new event')
+    cy.contains('[data-test="modal-ask-to-create-new"]', 'Generate new event')
         .should('exist');
 });
 
 When(/^you choose option (.*) in the modal$/, (buttonText) => {
-    cy.get('[data-test="dhis2-uicore-modal"]')
+    cy.get('[data-test="modal-ask-to-create-new"]')
         .find('[data-test="dhis2-uicore-button"]')
         .contains(buttonText)
         .click();

@@ -7,15 +7,15 @@
 }
 
 .textLabel {
-    padding-top: 13px;
+    padding-top: 8px;
 }
 
 .ageLabel {
-    padding-top: 13px;
+    padding-top: 8px;
 }
 
 .coordinateLabel {
-    padding-top: 13px;
+    padding-top: 8px;
 }
 
 .polygonLabel {
@@ -23,11 +23,11 @@
 }
 
 .dateLabel {
-    padding-top: 13px;
+    padding-top: 8px;
 }
 
 .dateTimeLabel {
-    padding-top: 13px;
+    padding-top: 8px;
 }
 
 .imageLabel {
@@ -43,5 +43,5 @@
 }
 
 .optionSetBoxesLabel {
-    padding-top: 13px;
+    padding-top: 8px;
 }
