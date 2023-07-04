@@ -1,5 +1,6 @@
 // @flow
 import React, { useState, useMemo } from 'react';
+import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconCross24, spacers, Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import log from 'loglevel';
@@ -22,7 +23,7 @@ const styles = (theme: Theme) => ({
     },
     map: {
         width: '100%',
-        height: 'calc(100vh - 320px)',
+        height: 'calc(100vh - 380px)',
     },
     inputWrapper: {
         paddingTop: spacers.dp8,
@@ -75,17 +76,18 @@ const MapCoordinatesModalPlain = ({
     onSetCoordinates,
 }: ModalProps) => {
     const isPoint = useMemo(() => type === dataElementTypes.COORDINATE, [type]);
+    const isPolygon = useMemo(() => type === dataElementTypes.POLYGON, [type]);
     const [position, setPosition] = useState(isPoint ? defaultValues : null);
-    const [coordinates, setCoordinates] = useState(type === dataElementTypes.POLYGON ? defaultValues : null);
+    const [polygonArea, setPolygonArea] = useState(isPolygon ? defaultValues : null);
     const [center, setCenter] = useState(initialCenter);
     const [tempLat, setLat] = useState(position?.[0]);
     const [tempLng, setLng] = useState(position?.[1]);
     const [isEditing, setEditing] = useState(!(isPoint && defaultValues));
     const [isValid, setValid] = useState(true);
     const hasErrors = useMemo(() => {
-        const changed = isPoint ? !isEqual(position, defaultValues) : !isEqual(coordinates, defaultValues);
+        const changed = isPoint ? !isEqual(position, defaultValues) : !isEqual(polygonArea, defaultValues);
         return changed && !isValid;
-    }, [position, coordinates, defaultValues, isPoint, isValid]);
+    }, [position, polygonArea, defaultValues, isPoint, isValid]);
     const title = useMemo(() => {
         switch (type) {
         case dataElementTypes.COORDINATE:
@@ -97,6 +99,24 @@ const MapCoordinatesModalPlain = ({
             return '';
         }
     }, [type]);
+
+    const resetToDefaultValues = () => {
+        setCenter(initialCenter);
+        if (isPoint) {
+            setPosition(defaultValues);
+            if (defaultValues) {
+                setLat(defaultValues[0]);
+                setLng(defaultValues[1]);
+                setEditing(false);
+            } else {
+                setLat(null);
+                setLng(null);
+            }
+        }
+        if (isPolygon) {
+            setPolygonArea(defaultValues);
+        }
+    };
 
     const onHandleMapClicked = (mapCoordinates) => {
         if (isPoint && isEditing) {
@@ -111,7 +131,7 @@ const MapCoordinatesModalPlain = ({
 
     const onMapPolygonCreated = (e: any) => {
         const polygonCoordinates = e.layer.toGeoJSON().geometry.coordinates[0].map(c => [c[1], c[0]]);
-        setCoordinates(polygonCoordinates);
+        setPolygonArea(polygonCoordinates);
     };
 
     const onMapPolygonEdited = (e: any) => {
@@ -119,11 +139,11 @@ const MapCoordinatesModalPlain = ({
             .getLayers()[0]
             .toGeoJSON()
             .geometry.coordinates[0].map(c => [c[1], c[0]]);
-        setCoordinates(polygonCoordinates);
+        setPolygonArea(polygonCoordinates);
     };
 
     const onMapPolygonDelete = () => {
-        setCoordinates(null);
+        setPolygonArea(null);
     };
 
     const onSearch = (searchPosition: any) => {
@@ -136,7 +156,7 @@ const MapCoordinatesModalPlain = ({
         }
     };
 
-    const getFeatureCollection = () => (Array.isArray(coordinates) ? coordsToFeatureCollection(coordinates) : null);
+    const getFeatureCollection = () => (Array.isArray(polygonArea) ? coordsToFeatureCollection(polygonArea) : null);
 
     const renderMap = () => (
         <Map
@@ -145,9 +165,9 @@ const MapCoordinatesModalPlain = ({
             ref={(ref) => {
                 if (ref?.leafletElement) {
                     ref.leafletElement.invalidateSize();
-                    if (ref.contextValue && type === dataElementTypes.POLYGON && coordinates) {
+                    if (ref.contextValue && isPolygon && polygonArea) {
                         const { map } = ref.contextValue;
-                        map?.fitBounds(coordinates);
+                        map?.fitBounds(polygonArea);
                     }
                 }
             }}
@@ -167,7 +187,7 @@ const MapCoordinatesModalPlain = ({
                 url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-            {type === dataElementTypes.POLYGON && (
+            {isPolygon && (
                 <FeatureGroup
                     ref={(reactFGref) => {
                         onFeatureGroupReady(reactFGref, getFeatureCollection());
@@ -300,8 +320,8 @@ const MapCoordinatesModalPlain = ({
         <ButtonStrip end>
             <Button
                 onClick={() => {
+                    resetToDefaultValues();
                     setOpen(false);
-                    setEditing(false);
                 }}
                 secondary
             >
@@ -310,7 +330,7 @@ const MapCoordinatesModalPlain = ({
             <Button
                 disabled={hasErrors}
                 onClick={() => {
-                    const clientValue = position ? [position] : coordinates;
+                    const clientValue = position ? [position] : polygonArea;
                     const convertedCoordinates = convertToServerCoordinates(clientValue, type);
                     onSetCoordinates(convertedCoordinates);
                     setOpen(false);
@@ -326,22 +346,20 @@ const MapCoordinatesModalPlain = ({
     return (
         <Modal hide={!isOpen} large>
             <ModalTitle>{capitalizeFirstLetter(title)}</ModalTitle>
-            <ModalContent>
-                <div className={classes.modalContent}>
-                    {renderMap()}
-                    {isPoint && (
-                        <div className={hasErrors && classes.errorContainer}>
-                            <div className={classes.inputWrapper}>
-                                <div className={classes.inputContent}>{renderLatitude()}</div>
-                                <div className={classes.inputContent}>{renderLongitude()}</div>
-                                {renderFieldButton()}
-                            </div>
-                            {hasErrors && (
-                                <div className={classes.inputWrapper}>{i18n.t('Please provide valid coordinates')}</div>
-                            )}
+            <ModalContent className={classes.modalContent}>
+                {renderMap()}
+                {isPoint && (
+                    <div className={classNames({ [classes.errorContainer]: hasErrors })}>
+                        <div className={classes.inputWrapper}>
+                            <div className={classes.inputContent}>{renderLatitude()}</div>
+                            <div className={classes.inputContent}>{renderLongitude()}</div>
+                            {renderFieldButton()}
                         </div>
-                    )}
-                </div>
+                        {hasErrors && (
+                            <div className={classes.inputWrapper}>{i18n.t('Please provide valid coordinates')}</div>
+                        )}
+                    </div>
+                )}
             </ModalContent>
             <ModalActions>{renderActions()}</ModalActions>
         </Modal>
