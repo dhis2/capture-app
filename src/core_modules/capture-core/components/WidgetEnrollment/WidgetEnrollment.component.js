@@ -20,7 +20,7 @@ import { convertValue as convertValueServerToClient } from '../../converters/ser
 import { convertValue as convertValueClientToView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
 import { Actions } from './Actions';
-import { MapCoordinates } from './MapCoordinates';
+import { MiniMap } from './MapCoordinates';
 
 const styles = {
     enrollment: {
@@ -144,7 +144,7 @@ export const WidgetEnrollmentPlain = ({
 
                         {enrollment.geometry && (
                             <div className={classes.row}>
-                                <MapCoordinates
+                                <MiniMap
                                     coordinates={enrollment.geometry.coordinates}
                                     type={geometryType}
                                     onSetCoordinates={onSetCoordinates}

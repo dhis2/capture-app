@@ -1,6 +1,4 @@
 // @flow
-
-
 type Feature = {
     type: string,
     properties: Object,
@@ -14,7 +12,6 @@ export type FeatureCollection = {
     type: string,
     features: Array<Feature>,
 };
-
 
 export type MiniMapProps = {
     coordinates: any,
@@ -32,3 +29,10 @@ export type ModalProps = {
     onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
     ...CssClasses
 }
+
+export type MapCoordinatesProps = {|
+    enrollment: Object,
+    onUpdate: (arg: Object) => void,
+    isOpenMap: boolean,
+    setOpenMap: (toggle: boolean) => void,
+|};

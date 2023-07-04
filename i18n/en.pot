@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-02T09:13:17.085Z\n"
-"PO-Revision-Date: 2023-06-02T09:13:17.085Z\n"
+"POT-Creation-Date: 2023-07-03T12:54:27.958Z\n"
+"PO-Revision-Date: 2023-07-03T12:54:27.958Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1077,12 +1077,6 @@ msgstr "Enrollment actions"
 msgid "We are processing your request."
 msgstr "We are processing your request."
 
-msgid "Add coordinates"
-msgstr "Add coordinates"
-
-msgid "Add area"
-msgstr "Add area"
-
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr "Only one enrollment per {{tetName}} is allowed in this program"
 
@@ -1158,6 +1152,12 @@ msgstr "Last updated {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"
+
+msgid "Add coordinates"
+msgstr "Add coordinates"
+
+msgid "Add area"
+msgstr "Add area"
 
 msgid "Comments about this enrollment"
 msgstr "Comments about this enrollment"

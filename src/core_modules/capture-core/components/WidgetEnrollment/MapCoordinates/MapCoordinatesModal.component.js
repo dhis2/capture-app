@@ -347,4 +347,4 @@ const MapCoordinatesModalPlain = ({
         </Modal>
     );
 };
-export const MapCoordinatesModal = withStyles(styles)(MapCoordinatesModalPlain);
+export const MapCoordinatesModalComponent = withStyles(styles)(MapCoordinatesModalPlain);

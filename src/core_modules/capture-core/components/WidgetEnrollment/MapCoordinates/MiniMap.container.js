@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
-import { MapCoordinatesModal } from './MapCoordinatesModal';
+import { MapCoordinatesModalComponent } from './MapCoordinatesModal.component';
 import type { MiniMapProps } from './mapCoordinates.types';
-import { convertToClientCoordinates } from './helpers';
+import { convertToClientCoordinates } from './convertor';
 
 const styles = () => ({
     mapContainer: {
@@ -18,7 +18,7 @@ const styles = () => ({
     },
 });
 
-const MapCoordinatesPlain = ({ coordinates, type, classes, onSetCoordinates }: MiniMapProps) => {
+const MiniMapPlain = ({ coordinates, type, classes, onSetCoordinates }: MiniMapProps) => {
     const [isModalOpen, setModalOpen] = useState(false);
     const clientValues = convertToClientCoordinates(coordinates, type);
     const center = type === dataElementTypes.COORDINATE ? clientValues : clientValues[0];
@@ -54,7 +54,7 @@ const MapCoordinatesPlain = ({ coordinates, type, classes, onSetCoordinates }: M
                     {type === dataElementTypes.POLYGON && <Polygon positions={clientValues} />}
                 </Map>
             </div>
-            <MapCoordinatesModal
+            <MapCoordinatesModalComponent
                 type={type}
                 center={center}
                 isOpen={isModalOpen}
@@ -66,4 +66,4 @@ const MapCoordinatesPlain = ({ coordinates, type, classes, onSetCoordinates }: M
     );
 };
 
-export const MapCoordinates = withStyles(styles)(MapCoordinatesPlain);
+export const MiniMap = withStyles(styles)(MiniMapPlain);

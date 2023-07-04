@@ -1,3 +1,3 @@
 // @flow
-export { MapCoordinates } from './MapCoordinates';
-export { MapCoordinatesModal } from './MapCoordinatesModal';
+export { MiniMap } from './MiniMap.container';
+export { MapCoordinatesModal } from './MapCoordinatesModal.container';
