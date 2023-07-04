@@ -1,3 +1,10 @@
+## [100.33.1](https://github.com/dhis2/capture-app/compare/v100.33.0...v100.33.1) (2023-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-15312] AOC for event programs ([#3293](https://github.com/dhis2/capture-app/issues/3293)) ([ed1983c](https://github.com/dhis2/capture-app/commit/ed1983c50ba99a72a92d70af7d4fd52e9264c99d))
+
 # [100.33.0](https://github.com/dhis2/capture-app/compare/v100.32.16...v100.33.0) (2023-06-27)
 
 
