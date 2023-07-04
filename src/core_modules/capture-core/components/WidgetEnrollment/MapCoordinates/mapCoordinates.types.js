@@ -1,5 +1,5 @@
 // @flow
-
+import { dataElementTypes } from '../../../metaData';
 
 type Feature = {
     type: string,
@@ -15,10 +15,9 @@ export type FeatureCollection = {
     features: Array<Feature>,
 };
 
-
 export type MiniMapProps = {
     coordinates: any,
-    type: string,
+    type: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON,
     onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
     ...CssClasses
 }
@@ -26,9 +25,16 @@ export type MiniMapProps = {
 export type ModalProps = {
     center: ?[number, number],
     isOpen: boolean,
-    type: string,
+    type: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON,
     defaultValues?: ?any,
     setOpen: (open: boolean) => void,
     onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
     ...CssClasses
 }
+
+export type MapCoordinatesProps = {|
+    enrollment: Object,
+    onUpdate: (arg: Object) => void,
+    isOpenMap: boolean,
+    setOpenMap: (toggle: boolean) => void,
+|};

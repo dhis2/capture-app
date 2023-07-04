@@ -1,5 +1,6 @@
 
 // @flow
+import { colors } from '@dhis2/ui';
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -15,6 +16,8 @@ const getStyles = () => ({
     container: {
         width: '100%',
         fontWeight: 500,
+        fontSize: 14,
+        color: colors.grey900,
     },
 });
 

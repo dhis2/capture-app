@@ -1,9 +1,11 @@
 // @flow
 import React from 'react';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
-import type { Props } from './confirmDialog.types';
+import type { Props } from './discardDialog.types';
 
-export const ConfirmDialog = ({ open, header, text, confirmText, onConfirm, cancelText, onCancel }: Props) => (
+export const DiscardDialog = ({
+    open, header, text, cancelText, onCancel, destructiveText, onDestroy,
+}: Props) => (
     <Modal hide={!open} onClose={onCancel} small>
         <ModalTitle>
             {header}
@@ -16,8 +18,8 @@ export const ConfirmDialog = ({ open, header, text, confirmText, onConfirm, canc
                 <Button onClick={onCancel} secondary>
                     {cancelText}
                 </Button>
-                <Button onClick={onConfirm} primary>
-                    {confirmText}
+                <Button onClick={onDestroy} destructive>
+                    {destructiveText}
                 </Button>
             </ButtonStrip>
         </ModalActions>

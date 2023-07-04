@@ -2,5 +2,5 @@
 
 export type Props = {|
     enrollment: Object,
-    onUpdate: (arg: Object) => void,
+    setOpenMap: (toogle: boolean) => void,
 |};

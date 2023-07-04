@@ -68,7 +68,7 @@ const sectionHiddenFieldsSelector = (state, props) => {
     const sectionHiddenFields = Array.from(metaData.entries())
         .map(entry => entry[1])
         .reduce((accHiddenFields, metaDataElement) => {
-            accHiddenFields[metaDataElement.id] = hiddenFields[metaDataElement.id];
+            accHiddenFields[metaDataElement.id] = hiddenFields[metaDataElement.id] ? true : undefined;
             return accHiddenFields;
         }, {});
     return sectionHiddenFields;

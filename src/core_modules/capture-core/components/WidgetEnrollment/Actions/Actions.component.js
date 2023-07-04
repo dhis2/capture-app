@@ -11,6 +11,7 @@ import { AddNew } from './AddNew';
 import { AddLocation } from './AddLocation';
 import type { PlainProps } from './actions.types';
 import { LoadingMaskForButton } from '../../LoadingMasks';
+import { MapCoordinatesModal } from '../MapCoordinates';
 
 const styles = {
     actions: {
@@ -36,13 +37,14 @@ export const ActionsPlain = ({
     onlyEnrollOnce,
     classes,
 }: PlainProps) => {
-    const [open, setOpen] = useState(false);
+    const [isOpenActions, setOpenActions] = useState(false);
+    const [isOpenMap, setOpenMap] = useState(false);
     const handleOnUpdate = (arg) => {
-        setOpen(prev => !prev);
+        setOpenActions(false);
         onUpdate(arg);
     };
     const handleOnDelete = (arg) => {
-        setOpen(prev => !prev);
+        setOpenActions(false);
         onDelete(arg);
     };
 
@@ -54,8 +56,8 @@ export const ActionsPlain = ({
                 small
                 disabled={loading}
                 className={classes.actions}
-                open={open}
-                onClick={() => setOpen(prev => !prev)}
+                open={isOpenActions}
+                onClick={() => setOpenActions(prev => !prev)}
                 component={
                     loading ? null : (
                         <FlyoutMenu dense maxWidth="250px">
@@ -75,7 +77,10 @@ export const ActionsPlain = ({
                             />
                             <AddLocation
                                 enrollment={enrollment}
-                                onUpdate={handleOnUpdate}
+                                setOpenMap={() => {
+                                    setOpenMap(true);
+                                    setOpenActions(false);
+                                }}
                             />
                             <MenuDivider />
                             <Cancel
@@ -100,6 +105,12 @@ export const ActionsPlain = ({
                     {i18n.t('We are processing your request.')}
                 </div>
             )}
+            <MapCoordinatesModal
+                enrollment={enrollment}
+                onUpdate={handleOnUpdate}
+                setOpenMap={setOpenMap}
+                isOpenMap={isOpenMap}
+            />
         </>
     );
 };

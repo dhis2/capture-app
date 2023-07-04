@@ -6,8 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { capitalizeFirstLetter, lowerCaseFirstLetter } from 'capture-core-utils/string';
 import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
-import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
-import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
+import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { FiltrableMenuItems } from '../QuickSelector/FiltrableMenuItems';
 import { OptionLabel } from '../OptionLabel';
 import type { Icon } from '../../../metaData';
@@ -58,7 +58,7 @@ const SingleLockedSelectPlain = ({
     const handleClose = () => {
         setOpenStartAgainWarning(false);
     };
-    const handleConfirm = () => {
+    const handleDestroy = () => {
         handleClose();
         onClear && onClear();
     };
@@ -136,8 +136,8 @@ const SingleLockedSelectPlain = ({
                 )}
             </SelectorBarItem>
 
-            <ConfirmDialog
-                onConfirm={handleConfirm}
+            <DiscardDialog
+                onDestroy={handleDestroy}
                 open={openStartAgainWarning}
                 onCancel={handleClose}
                 {...defaultDialogProps}
