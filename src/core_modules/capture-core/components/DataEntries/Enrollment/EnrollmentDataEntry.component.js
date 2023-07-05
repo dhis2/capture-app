@@ -33,7 +33,7 @@ import {
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
 import { type Enrollment, ProgramStage, getProgramThrowIfNotFound } from '../../../metaData';
-import { FirstStageRegistrationContainer } from '../../DataEntryDhis2Helpers/FirstStageRegistration/FirstStageRegistration.container';
+import { FirstStageRegistration } from './FirstStageRegistration';
 import {
     getCategoryOptionsValidatorContainers,
     attributeOptionsKey,
@@ -359,7 +359,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 
         return (
         // $FlowFixMe[cannot-spread-inexact] automated comment
-            <FirstStageRegistrationContainer
+            <FirstStageRegistration
                 {...passOnProps}
                 dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
                 formFoundation={enrollmentMetadata.enrollmentForm}

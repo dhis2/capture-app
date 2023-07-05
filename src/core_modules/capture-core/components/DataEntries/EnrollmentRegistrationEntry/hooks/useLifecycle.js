@@ -9,7 +9,7 @@ import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../common/useRegistrationFormInfoForSelectedScope';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
-import { useBuildFirstStageRegistration } from '../../../DataEntryDhis2Helpers/FirstStageRegistration/useBuildFirstStageRegistration';
+import { useBuildFirstStageRegistration } from '../../../../hooks';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 
 export const useLifecycle = (

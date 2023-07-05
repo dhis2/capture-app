@@ -16,7 +16,7 @@ import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
-import { useBuildFirstStageRegistration } from '../../../DataEntryDhis2Helpers/FirstStageRegistration/useBuildFirstStageRegistration';
+import { useBuildFirstStageRegistration } from '../../../../hooks';
 
 const getStyles = ({ typography }) => ({
     container: {

@@ -5,9 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
-"PO-Revision-Date: 2023-06-08T11:11:29.783Z\n"
-
+"POT-Creation-Date: 2023-07-05T07:20:09.589Z\n"
+"PO-Revision-Date: 2023-07-05T07:20:09.589Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -141,6 +140,18 @@ msgstr "Coordinate"
 msgid "Enrollment"
 msgstr "Enrollment"
 
+msgid "Data Entry ({{ stageName }})"
+msgstr "Data Entry ({{ stageName }})"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Data Entry ({{ stageName }} - {{ sectionName }})"
+msgstr "Data Entry ({{ stageName }} - {{ sectionName }})"
+
+msgid "Complete event"
+msgstr "Complete event"
+
 msgid "Please select {{categoryName}}"
 msgstr "Please select {{categoryName}}"
 
@@ -165,14 +176,8 @@ msgstr "Assigned user"
 msgid "Search for user"
 msgstr "Search for user"
 
-msgid "Complete event"
-msgstr "Complete event"
-
 msgid "Basic info"
 msgstr "Basic info"
-
-msgid "Status"
-msgstr "Status"
 
 msgid "Comments"
 msgstr "Comments"
@@ -376,12 +381,6 @@ msgstr "Some operations are still runnning. Please wait.."
 
 msgid "Operations running"
 msgstr "Operations running"
-
-msgid "Data Entry ({{ stageName }})"
-msgstr "Data Entry ({{ stageName }})"
-
-msgid "Data Entry ({{ stageName }} - {{ sectionName }})"
-msgstr "Data Entry ({{ stageName }} - {{ sectionName }})"
 
 msgid "Sort"
 msgstr "Sort"

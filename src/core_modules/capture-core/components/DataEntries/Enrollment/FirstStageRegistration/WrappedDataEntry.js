@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { DataEntry } from '../../DataEntry/DataEntry.container';
+import { DataEntry } from '../../../DataEntry/DataEntry.container';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -15,9 +15,9 @@ import {
     withDefaultShouldUpdateInterface,
     TrueOnlyField,
     orientations,
-} from '../../FormFields/New';
-import { placements } from '../../DataEntry/constants/placements.const';
-import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
+} from '../../../FormFields/New';
+import { placements } from '../../../DataEntry/constants/placements.const';
+import { withDataEntryFieldIfApplicable } from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { sectionKeysForFirstStageDataEntry } from './FirstStageRegistration.constants';
 import labelTypeClasses from './fieldLabels.module.css';
 import { withCleanUp } from './withCleanUp';
