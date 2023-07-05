@@ -16,6 +16,7 @@ import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
+import { useBuildFirstStageRegistration } from '../../../DataEntryDhis2Helpers/FirstStageRegistration/useBuildFirstStageRegistration';
 
 const getStyles = ({ typography }) => ({
     container: {
@@ -96,7 +97,12 @@ const RegistrationDataEntryPlain = ({
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { registrationMetaData, formFoundation, firstStageMetaData } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { firstStageMetaData } = useBuildFirstStageRegistration(
+        selectedScopeId,
+        scopeType !== scopeTypes.TRACKER_PROGRAM,
+    );
+
     const titleText = useScopeTitleText(selectedScopeId);
 
     const handleRegistrationScopeSelection = (id) => {

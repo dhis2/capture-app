@@ -4,7 +4,6 @@ import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks/useT
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import type { RegistrationFormMetadata } from './types';
-import { useBuildFirstStageRegistration } from '../../DataEntryDhis2Helpers/FirstStageRegistration/useBuildFirstStageRegistration';
 
 type RegistrationOptions = $ReadOnly<{|
   [elementId: string]: {|
@@ -45,11 +44,10 @@ const useRegistrationOptions = (): RegistrationOptions => {
 export const useRegistrationFormInfoForSelectedScope = (selectedScopeId: string) => {
     const options = useRegistrationOptions();
     const { scopeType } = useScopeInfo(selectedScopeId);
-    const { firstStageMetaData } = useBuildFirstStageRegistration(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
 
     if (scopeType === scopeTypes.TRACKED_ENTITY_TYPE || scopeType === scopeTypes.TRACKER_PROGRAM) {
         const { formFoundation, formId, registrationMetaData } = options[selectedScopeId];
-        return { formFoundation, formId, registrationMetaData, firstStageMetaData };
+        return { formFoundation, formId, registrationMetaData };
     }
-    return { formFoundation: [], formId: null, registrationMetaData: null, firstStageMetaData: null };
+    return { formFoundation: [], formId: null, registrationMetaData: null };
 };
