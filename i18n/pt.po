@@ -2,17 +2,17 @@
 # Translators:
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
 # Ge Joao <gsimango@saudigitus.org>, 2021
-# Sheila André <sandre@saudigitus.org>, 2021
 # David Júnior <davidjr.mondlane@gmail.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
+# Sheila André <sandre@saudigitus.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Sheila André <sandre@saudigitus.org>, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,7 +99,7 @@ msgid "Please provide a valid time"
 msgstr "Forneça um horário válido"
 
 msgid "Please provide an integer between 0 and 100"
-msgstr ""
+msgstr "Forneça um número inteiro entre 0 e 100"
 
 msgid "Please provide a valid url"
 msgstr "Forneça uma URL válida"
@@ -631,6 +631,8 @@ msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
 msgstr ""
+"Escolha um programa para adicionar novos ou veja inscrições existentes para "
+"{{teiDisplayName}}"
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -639,7 +641,7 @@ msgstr ""
 "o painel."
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr ""
+msgstr "Escolha uma inscrição para visualizar o painel."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} não está inscrito neste programa."
