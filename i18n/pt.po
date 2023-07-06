@@ -706,7 +706,7 @@ msgid "Registered events"
 msgstr "Eventos registrados"
 
 msgid "Please select {{category}}."
-msgstr ""
+msgstr "Selecione {{categoria}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "Ou veja todos os registros acessíveis a si em {{program}}"
@@ -727,7 +727,7 @@ msgid "View dashboard"
 msgstr "Ver painel"
 
 msgid "View enrollment"
-msgstr ""
+msgstr "Ver inscrição"
 
 msgid "Create for"
 msgstr "Criar para"
