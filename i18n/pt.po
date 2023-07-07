@@ -712,13 +712,13 @@ msgid "Choose an enrollment to view the dashboard."
 msgstr "Escolha uma inscrição para visualizar o painel."
 
 msgid "There are no active enrollments."
-msgstr ""
+msgstr "Não há inscrições ativas."
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "Adicione uma nova inscrição para {{teiDisplayName}} neste programa."
 
 msgid "No access to program owner."
-msgstr ""
+msgstr "Sem acesso ao proprietário do programa."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} não está inscrito neste programa."
@@ -747,16 +747,16 @@ msgid "View working list in this program."
 msgstr "Veja a lista de trabalho neste programa."
 
 msgid "Page is missing required values from URL"
-msgstr ""
+msgstr "A página tem em falta os valores obrigatórios do URL"
 
 msgid "Program is not valid"
-msgstr ""
+msgstr "O programa não é válido"
 
 msgid "Org unit is not valid with current program"
-msgstr ""
+msgstr "A unidade organizacional não é válida com o programa atual"
 
 msgid "There was an error opening the Page"
-msgstr ""
+msgstr "Ocorreu um erro ao abrir a Página"
 
 msgid "Enrollment{{escape}} New Event"
 msgstr "Inscrição {{escape}} Novo Evento"
@@ -774,7 +774,7 @@ msgid "There are no indicators for this event"
 msgstr "Não há indicadores para este evento"
 
 msgid "Program stage is invalid"
-msgstr ""
+msgstr "O estagio do programa é inválida"
 
 msgid "Report"
 msgstr "Relatório"
@@ -786,7 +786,7 @@ msgid "Refer"
 msgstr "Referir"
 
 msgid "You can’t add any more {{ programStageName }} events"
-msgstr ""
+msgstr "Não pode adicionar mais eventos {{ programStageName }}"
 
 msgid "Cancel without saving"
 msgstr "Cancelar sem gravar"
@@ -816,7 +816,7 @@ msgid "Registered events"
 msgstr "Eventos registrados"
 
 msgid "Please select {{category}}."
-msgstr ""
+msgstr "Selecione {{categoria}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "Ou veja todos os registros acessíveis a você no {{program}}"
@@ -837,7 +837,7 @@ msgid "Save as new"
 msgstr "Gravar como novo"
 
 msgid "View enrollment"
-msgstr ""
+msgstr "Ver inscrição"
 
 msgid "Create for"
 msgstr "Criar para"
@@ -849,10 +849,10 @@ msgstr ""
 "programa"
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "Nova Inscrição no programa{{escape}} {{programName}}"
 
 msgid "Save {{trackedEntityName}}"
-msgstr ""
+msgstr "Gravar {{trackedEntityName}}"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Salve o novo {{trackedEntityTypeName}} e vincule-o"
@@ -909,7 +909,7 @@ msgid "event"
 msgstr "evento"
 
 msgid "You don't have access to edit this event"
-msgstr ""
+msgstr "Não tem acesso para editar este evento"
 
 msgid "Edit event"
 msgstr "Editar evento"
@@ -958,40 +958,41 @@ msgid "An error occurred loading possible duplicates"
 msgstr "Ocorreu um erro ao carregar possíveis duplicatas"
 
 msgid "You don't have access to delete this relationship"
-msgstr ""
+msgstr "Não tem acesso para apagar este relacionamento"
 
 msgid "You don't have access to create any relationships"
-msgstr ""
+msgstr "Não tem acesso para criar relacionamentos"
 
 msgid "Add relationship"
 msgstr "Adicionar relacionamento"
 
 msgid "No results found for "
-msgstr ""
+msgstr "Nenhum resultado encontrado para"
 
 msgid "Registering unit"
 msgstr "Registrando unidade"
 
 msgid "Choose a registering unit"
-msgstr ""
+msgstr "Escolha uma unidade de registro"
 
 msgid "Clear selection"
-msgstr ""
+msgstr "Limpar seleção"
 
 msgid "No programs available."
 msgstr "Nenhum programa disponível."
 
 msgid "Search for a program"
-msgstr ""
+msgstr "Procurar um programa"
 
 msgid "Some programs are being filtered by the chosen registering unit"
 msgstr ""
+"Alguns programas estão sendo filtrados pela unidade de registro escolhida"
 
 msgid "Show all programs"
-msgstr ""
+msgstr "Mostrar todos os programas"
 
 msgid "Choose a program"
-msgstr ""
+msgstr "Escolha um programa"
 
 msgid "Search for {{titleText}}"
 msgstr "Pesquise por {{titleText}}"
@@ -1024,7 +1025,7 @@ msgid "Search by attributes"
 msgstr "Pesquisa por atributos"
 
 msgid "all programs"
-msgstr ""
+msgstr "todos os programas"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -1037,18 +1038,21 @@ msgid "Search in all programs"
 msgstr "Pesquisa em todos os programas"
 
 msgid "If none of search results match, you can create a new "
-msgstr ""
+msgstr "Se nenhum dos resultados da pesquisa corresponder, pode criar um novo"
 
 msgid "Create new"
 msgstr "Crie um novo"
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
 msgstr ""
+"Preencha estes campos para pesquisar{{escape}} {{ searchableAttributes }}"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
 "search{{escape}} {{searchableAttributes}}"
 msgstr ""
+"Preencha pelo menos {{minAttributesRequiredToSearch}} destes campos para "
+"pesquisar{{escape}} {{searchableAttributes}}"
 
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr ""
