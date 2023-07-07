@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "100.33.3",
+    "version": "100.33.4",
     "cacheVersion": "5",
     "serverVersion": "38",
     "license": "BSD-3-Clause",
@@ -10,7 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2/rules-engine-javascript": "100.33.3",
+        "@dhis2/rules-engine-javascript": "100.33.4",
         "@dhis2/app-runtime": "^3.8.0",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-icons": "^1.0.1",
