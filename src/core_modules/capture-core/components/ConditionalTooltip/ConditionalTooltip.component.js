@@ -6,7 +6,6 @@ type Props = {
     enabled: boolean,
     className?: string,
     children: any,
-    ...CssClasses,
 };
 
 export const ConditionalTooltip = (props: Props) => {
