@@ -1011,9 +1011,9 @@ msgstr "Escolha um tipo para começar a pesquisar"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Preencha pelo menos {{count}} atributo para pesquisar"
+msgstr[1] "Preencha pelo menos {{count}} atributos para pesquisar"
+msgstr[2] "Preencha pelo menos {{count}} atributos para pesquisar"
 
 msgid "Search {{name}}"
 msgstr "Pesquise {{name}}"
@@ -1055,7 +1055,7 @@ msgstr ""
 "pesquisar{{escape}} {{searchableAttributes}}"
 
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
+msgstr "Preencha este campo para pesquisar{{escape}} {{searchableAttributes}}"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -1074,10 +1074,10 @@ msgid "Too many results"
 msgstr "Muitos resultados"
 
 msgid "Cannot search in all programs"
-msgstr ""
+msgstr "Não é possível pesquisar em todos os programas"
 
 msgid "Missing search criteria"
-msgstr ""
+msgstr "Critérios de pesquisa ausentes"
 
 msgid "Results found"
 msgstr "Resultados encontrados"
@@ -1089,18 +1089,21 @@ msgid "Search {{uniqueAttrName}}"
 msgstr "Pesquise {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
-msgstr ""
+msgstr "Listas gravadas neste programa"
 
 msgid "Saved lists offer quick access to your most used views in a program."
 msgstr ""
+"As listas gravadas oferecem acesso rápido às visualizações mais usadas em um"
+" programa."
 
 msgid ""
 "There are no saved lists in this program yet, create one using the button "
 "below."
 msgstr ""
+"Ainda não há listas gravadas neste programa, crie uma usando o botão abaixo."
 
 msgid "Create saved list"
-msgstr ""
+msgstr "Criar lista gravadas"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Novo {{trackedEntityName}} em {{programName}}"
@@ -1115,23 +1118,27 @@ msgid "open the Tracker Capture app"
 msgstr "abra o aplicativo Tracker Capture"
 
 msgid "This program is protected"
-msgstr ""
+msgstr "Este programa está protegido"
 
 msgid "Reason to check for enrollments"
-msgstr ""
+msgstr "Motivo para verificar as inscrições"
 
 msgid ""
 "Describe the reason you are checking for enrollments in this protected "
 "program"
 msgstr ""
+"Descreva o motivo pelo qual está a verificar as inscrições neste programa "
+"protegido"
 
 msgid "Check for enrollments"
-msgstr ""
+msgstr "Verifique as inscrições"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
 msgstr ""
+"Deve fornecer um motivo para verificar as inscrições neste programa "
+"protegido. Todas as atividades serão registradas."
 
 msgid "Save comment"
 msgstr "Gravar comentário"
@@ -1143,7 +1150,7 @@ msgid "We are processing your request."
 msgstr "Estamos processando sua requisição."
 
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
-msgstr ""
+msgstr "Apenas uma inscrição por {{tetName}} é permitida neste programa"
 
 msgid "Add new"
 msgstr "Novo"
@@ -1213,6 +1220,8 @@ msgstr "Esta inscrição não possui comentários"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
+"unidade de organização não pôde ser recuperada. Por favor, tente novamente "
+"mais tarde."
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Gravar em {{stageName}} para {{programName}} em {{orgUnitName}}"
@@ -1236,19 +1245,19 @@ msgid "This event doesn't have any comments"
 msgstr "Este evento não possui comentários"
 
 msgid "stage not found in rules execution"
-msgstr ""
+msgstr "estágio não encontrado na execução das regras"
 
 msgid "Delete event"
 msgstr "Apagar evento"
 
 msgid "Yes, delete event"
-msgstr ""
+msgstr "Sim, apagar evento"
 
 msgid "Go to “Schedule” tab to reschedule this event"
-msgstr ""
+msgstr "Vá para pagina “Agendar” para reagendar este evento"
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
-msgstr ""
+msgstr "A data agendada não pode ser alterada para eventos {{ eventStatus }}"
 
 msgid "Event completed"
 msgstr "Evento concluído"
@@ -1260,18 +1269,20 @@ msgid "Schedule date info"
 msgstr "Informação da data da programação"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
-msgstr ""
+msgstr "Agendado automaticamente para {{suggestedScheduleDate}}"
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
+"A data agendada corresponde à data sugerida, mas pode ser alterada se "
+"necessário."
 
 msgid "The scheduled date is {{count}} days {{position}} the suggested date."
 msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "A data agendada é {{count}} dia {{position}} da data sugerida."
+msgstr[1] "A data agendada é de {{count}} dias {{position}} da data sugerida."
+msgstr[2] "A data agendada é de {{count}} dias {{position}} da data sugerida."
 
 msgid "after"
 msgstr "Depois "
@@ -1282,9 +1293,9 @@ msgstr "Antes "
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Há {{count}} evento agendado em {{orgUnitName}} neste dia."
+msgstr[1] "Existem {{count}} eventos agendados em {{orgUnitName}} neste dia."
+msgstr[2] "Existem {{count}} eventos agendados em {{orgUnitName}} neste dia."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1308,9 +1319,12 @@ msgid ""
 "information about this enrollment, use the Edit button in the in the "
 "Enrollment box on this dashboard"
 msgstr ""
+"Altere as informações sobre este {{trackedEntityName}} aqui. Para alterar as"
+" informações sobre esta inscrição, use o botão Editar na caixa Inscrição "
+"neste painel"
 
 msgid " Loading..."
-msgstr ""
+msgstr "Carregando..."
 
 msgid "Save changes"
 msgstr "Gravar alterações"
@@ -1319,22 +1333,24 @@ msgid "Profile"
 msgstr "Perfil"
 
 msgid "There is a problem with this form"
-msgstr ""
+msgstr "Há um problema com este formulário"
 
 msgid "There are warnings in this form"
-msgstr ""
+msgstr "Há avisos neste formulário"
 
 msgid "There was a problem saving changes"
-msgstr ""
+msgstr "Ocorreu um problema ao gravar as alterações"
 
 msgid "Try again or contact your system administrator for support"
 msgstr ""
+"Tente novamente ou entre em contato com o administrador do sistema para "
+"obter suporte"
 
 msgid "tracked entity instance"
 msgstr "instância de entidade rastreada"
 
 msgid "Fix errors in the form to continue."
-msgstr ""
+msgstr "Corrija os erros no formulário para continuar."
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -1342,7 +1358,7 @@ msgstr ""
 "tarde"
 
 msgid "{{TETName}} profile"
-msgstr ""
+msgstr "{{TETName}} perfil"
 
 msgid "Edit"
 msgstr "Editar"
@@ -1352,6 +1368,7 @@ msgstr "Novo evento de {{eventName}}"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr ""
+"Para abrir este evento, aguarde até que o processo de gravar seja concluído"
 
 msgid "Show {{ rest }} more"
 msgstr "Mostrar mais {{rest}}"
@@ -1367,6 +1384,8 @@ msgstr "Esta etapa só pode ter um evento"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
+"Os eventos não puderam ser recuperados. Por favor, tente novamente mais "
+"tarde."
 
 msgid "{{ totalEvents }} events"
 msgstr "{{totalEvents}} eventos"
@@ -1414,25 +1433,26 @@ msgid "Enrollment status"
 msgstr "Status da inscrição"
 
 msgid "Choose a program stage to filter by {{label}}"
-msgstr ""
+msgstr "Escolha uma etapa do programa para filtrar por {{label}}"
 
 msgid "Active enrollments"
-msgstr ""
+msgstr "Inscrições ativas"
 
 msgid "Completed enrollments"
-msgstr ""
+msgstr "Inscrições concluídas"
 
 msgid "Cancelled enrollments"
-msgstr ""
+msgstr "Inscrições canceladas"
 
 msgid "Working list could not be updated"
 msgstr "A lista de trabalho não pôde ser atualizada"
 
 msgid "an error occurred loading the working lists"
-msgstr ""
+msgstr "ocorreu um erro ao carregar as listas de trabalho"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
+"ocorreu um erro ao carregar as listas de instâncias de entidades rastreadas"
 
 msgid "Update view"
 msgstr "Vista de atualização"
@@ -1528,10 +1548,10 @@ msgid "Error saving the enrollment event"
 msgstr "Erro ao gravar o evento de inscrição"
 
 msgid "Error deleting the enrollment event"
-msgstr ""
+msgstr "Erro ao apagar o evento de inscrição"
 
 msgid "Error editing the event, the changes made were not saved"
-msgstr ""
+msgstr "Erro ao editar o evento, as alterações feitas não foram gravadas"
 
 msgid "Set coordinate"
 msgstr "Definir coordenada"
@@ -1570,7 +1590,7 @@ msgid "Set area"
 msgstr "Definir área"
 
 msgid "Area on map saved"
-msgstr ""
+msgstr "Área no mapa gravada"
 
 msgid "Compatibility mode"
 msgstr "Modo de compatibilidade"
