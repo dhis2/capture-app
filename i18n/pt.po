@@ -1039,7 +1039,7 @@ msgid "This event doesn't have any comments"
 msgstr "Este evento não tem comentários"
 
 msgid "stage not found in rules execution"
-msgstr ""
+msgstr "estágio não encontrado na execução das regras"
 
 msgid "Event completed"
 msgstr "Evento concluído"
