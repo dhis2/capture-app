@@ -22,10 +22,10 @@ export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
 
     const cachedTrackedEntityAttributeIds = useMemo(() => {
         if (scopeType === scopeTypes.TRACKER_PROGRAM && program) {
-            return program.programTrackedEntityAttributes.map(({ trackedEntityAttributeId }) => trackedEntityAttributeId);
+            return program.programTrackedEntityAttributes?.map(({ trackedEntityAttributeId }) => trackedEntityAttributeId);
         }
         if (scopeType === scopeTypes.TRACKED_ENTITY_TYPE && trackedEntityType) {
-            return trackedEntityType.trackedEntityTypeAttributes.map(({ id }) => id);
+            return trackedEntityType.trackedEntityTypeAttributes?.map(({ id }) => id);
         }
         return undefined;
     }, [program, scopeType, trackedEntityType]);
