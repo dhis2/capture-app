@@ -1,6 +1,7 @@
 // @flow
 import {
-    SelectionBoxes,
+    MultiSelectField,
+    withSelectMultiTranslations,
     withGotoInterface,
     withHideCompatibility,
     withDefaultShouldUpdateInterface,
@@ -10,6 +11,7 @@ import {
     withLabel,
     withDisplayMessages,
     withFilterProps,
+    withOptionsIconElement,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
@@ -23,7 +25,7 @@ const getFilteredProps = (props: Object) => {
     return passOnProps;
 };
 
-export const OptionSetBoxesFieldForForm = withGotoInterface()(
+export const MultiOptionSetSelectFieldForForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(
@@ -34,12 +36,14 @@ export const OptionSetBoxesFieldForForm = withGotoInterface()(
                                 withLabel({
                                     onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
                                     onGetCustomFieldLabeClass: (props: Object) =>
-                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.optionSetBoxesLabel}`,
+                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
                                 })(
                                     withDisplayMessages()(
-                                        withFilterProps(getFilteredProps)(
+                                        withOptionsIconElement()(
                                             withRulesOptionVisibilityHandler()(
-                                                SelectionBoxes,
+                                                withFilterProps(getFilteredProps)(
+                                                    withSelectMultiTranslations()(MultiSelectField),
+                                                ),
                                             ),
                                         ),
                                     ),

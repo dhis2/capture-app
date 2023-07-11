@@ -31,6 +31,7 @@ const searchAttributeElementTypes = {
     [dataElementTypes.DATE]: dataElementTypes.DATE_RANGE,
     [dataElementTypes.DATETIME]: dataElementTypes.DATETIME_RANGE,
     [dataElementTypes.TIME]: dataElementTypes.TIME_RANGE,
+    [dataElementTypes.MULTI_TEXT]: dataElementTypes.TEXT,
 };
 
 

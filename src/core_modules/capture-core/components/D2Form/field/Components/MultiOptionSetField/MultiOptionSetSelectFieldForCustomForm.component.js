@@ -1,7 +1,7 @@
 // @flow
 import {
-    VirtualizedSelectField,
-    withSelectTranslations,
+    MultiSelectField,
+    withSelectMultiTranslations,
     withGotoInterface,
     withHideCompatibility,
     withDefaultShouldUpdateInterface,
@@ -20,7 +20,7 @@ import customFormStyles from './optionSetSelectFieldForCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
-export const OptionSetSelectFieldForCustomForm = withGotoInterface()(
+export const MultiOptionSetSelectFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(
@@ -28,11 +28,11 @@ export const OptionSetSelectFieldForCustomForm = withGotoInterface()(
                     withFocusSaver()(
                         withCalculateMessages()(
                             withDisplayMessages()(
-                                withSelectTranslations()(
+                                withSelectMultiTranslations()(
                                     withCustomElementContainer(getContainerClass)(
                                         withOptionsIconElement()(
                                             withRulesOptionVisibilityHandler()(
-                                                VirtualizedSelectField,
+                                                MultiSelectField,
                                             ),
                                         ),
                                     ),

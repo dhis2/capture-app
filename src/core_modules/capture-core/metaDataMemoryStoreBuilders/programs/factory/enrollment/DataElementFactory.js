@@ -20,6 +20,7 @@ import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import type { ConstructorInput } from './dataElementFactory.types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { isNotValidOptionSet } from '../../../../utils/isNotValidOptionSet';
 
 export class DataElementFactory {
     static translationPropertyNames = {
@@ -31,6 +32,8 @@ export class DataElementFactory {
 
     static errorMessages = {
         TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'TrackedEntityAttributeId missing from programTrackedEntityAttribute or trackedEntityAttribute not found',
+        MULIT_TEXT_WITH_NO_OPTIONS_SET:
+            'could not create the metadata because a MULIT_TEXT without associated option sets was found',
     };
 
     static buildtetFeatureType(featureType: 'POINT' | 'POLYGON') {
@@ -208,6 +211,10 @@ export class DataElementFactory {
             cachedProgramTrackedEntityAttribute,
             cachedTrackedEntityAttribute,
         );
+        if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
+            log.error(errorCreator(DataElementFactory.errorMessages.MULIT_TEXT_WITH_NO_OPTIONS_SET)({ dataElement }));
+            return null;
+        }
         return dataElement;
     }
 
