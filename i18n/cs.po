@@ -485,6 +485,12 @@ msgstr "Nahrávání obrázku"
 msgid "Select image"
 msgstr "Vybrat obrázek"
 
+msgid "Type to filter options"
+msgstr "Zadáním filtrujete možnosti"
+
+msgid "No match found"
+msgstr "Žádná shoda nenalezena"
+
 msgid "Search"
 msgstr "Hledat"
 
@@ -1309,9 +1315,6 @@ msgstr "Při ukládání změn došlo k problému"
 msgid "Try again or contact your system administrator for support"
 msgstr "Zkuste to znovu nebo požádejte o podporu správce systému"
 
-msgid "tracked entity instance"
-msgstr "sledovaná instance entity"
-
 msgid "Fix errors in the form to continue."
 msgstr "Chcete-li pokračovat, opravte chyby ve formuláři."
 
@@ -1323,6 +1326,9 @@ msgstr "profil {{TETName}}"
 
 msgid "Edit"
 msgstr "Upravit"
+
+msgid "tracked entity instance"
+msgstr "sledovaná instance entity"
 
 msgid "New {{ eventName }} event"
 msgstr "Nová událost {{ eventName }}"

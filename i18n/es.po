@@ -7,17 +7,18 @@
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # Marta Vila <marta@dhis2.org>, 2022
 # Pablo Pajuelo Cabezas <pablo@dhis2.org>, 2022
-# Prabhjot Singh, 2023
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
 # Alison Andrade <aandrade@ippfwhr.org>, 2023
+# Janeth Cruz, 2023
+# Prabhjot Singh, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Alison Andrade <aandrade@ippfwhr.org>, 2023\n"
+"Last-Translator: Prabhjot Singh, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -500,6 +501,12 @@ msgstr "Subiendo imagen"
 
 msgid "Select image"
 msgstr "Seleccionar imagen"
+
+msgid "Type to filter options"
+msgstr "Escriba para filtrar opciones"
+
+msgid "No match found"
+msgstr "No se encontraron coincidencias"
 
 msgid "Search"
 msgstr "Buscar"
@@ -1349,9 +1356,6 @@ msgstr ""
 "Vuelva a intentarlo o póngase en contacto con el administrador del sistema "
 "para obtener asistencia"
 
-msgid "tracked entity instance"
-msgstr "instancia de entidad rastreada"
-
 msgid "Fix errors in the form to continue."
 msgstr "Corregir errores en el formulario para continuar"
 
@@ -1365,6 +1369,9 @@ msgstr "Perfil de {{TETName}} "
 
 msgid "Edit"
 msgstr "Editar"
+
+msgid "tracked entity instance"
+msgstr "instancia de entidad rastreada"
 
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"

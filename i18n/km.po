@@ -473,6 +473,12 @@ msgstr ""
 msgid "Select image"
 msgstr ""
 
+msgid "Type to filter options"
+msgstr "វាយបញ្ចូលមុខងារដើម្បីច្រោះ"
+
+msgid "No match found"
+msgstr ""
+
 msgid "Search"
 msgstr "ស្វែងរក"
 
@@ -1258,9 +1264,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr ""
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1272,6 +1275,9 @@ msgstr ""
 
 msgid "Edit"
 msgstr "កែសម្រួល​"
+
+msgid "tracked entity instance"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr ""
