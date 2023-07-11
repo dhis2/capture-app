@@ -1,3 +1,10 @@
+# [100.34.0](https://github.com/dhis2/capture-app/compare/v100.33.5...v100.34.0) (2023-07-11)
+
+
+### Features
+
+* [DHIS2-14778][DHIS2-14779][DHIS2-14780][DHIS2-14781] MULTI_TEXT field ([#3231](https://github.com/dhis2/capture-app/issues/3231)) ([d7b7100](https://github.com/dhis2/capture-app/commit/d7b7100cadfa4d3f3c1a162161f34dc7df2833e8))
+
 ## [100.33.5](https://github.com/dhis2/capture-app/compare/v100.33.4...v100.33.5) (2023-07-08)
 
 
