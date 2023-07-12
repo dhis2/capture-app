@@ -487,6 +487,12 @@ msgstr "Laster opp bilde"
 msgid "Select image"
 msgstr "Velg bilde"
 
+msgid "Type to filter options"
+msgstr "Skriv for å filtrere alternativer"
+
+msgid "No match found"
+msgstr ""
+
 msgid "Search"
 msgstr "Søk"
 
@@ -1304,9 +1310,6 @@ msgstr "Det oppsto et problem under lagring av endringer"
 msgid "Try again or contact your system administrator for support"
 msgstr "Prøv igjen eller kontakt systemadministratoren din for hjelp"
 
-msgid "tracked entity instance"
-msgstr "Sporet enhetforekomst"
-
 msgid "Fix errors in the form to continue."
 msgstr "Rett opp feil i skjemaet for å fortsette."
 
@@ -1318,6 +1321,9 @@ msgstr "{{TETName}} profil"
 
 msgid "Edit"
 msgstr "Rediger"
+
+msgid "tracked entity instance"
+msgstr "Sporet enhetforekomst"
 
 msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"

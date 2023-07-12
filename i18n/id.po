@@ -1,6 +1,5 @@
 # 
 # Translators:
-# Farida Sibuea <farida_sibuea@yahoo.com>, 2021
 # Carwoto Sa'an <carwoto@gmail.com>, 2021
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2022
@@ -9,13 +8,14 @@
 # phil_dhis2, 2023
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2023
 # Raja Fathurrahim, 2023
+# Farida Sibuea <farida_sibuea@yahoo.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Raja Fathurrahim, 2023\n"
+"Last-Translator: Farida Sibuea <farida_sibuea@yahoo.com>, 2023\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -494,6 +494,12 @@ msgstr "Mengunggah gambar"
 
 msgid "Select image"
 msgstr "Pilih gambar"
+
+msgid "Type to filter options"
+msgstr "Tipe opsi filter"
+
+msgid "No match found"
+msgstr "tidak ditemukan data yang sesuai"
 
 msgid "Search"
 msgstr "Pencarian"
@@ -1298,9 +1304,6 @@ msgstr "Terjadi masalah saat menyimpan perubahan"
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "contoh entitas yang dilacak"
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1312,6 +1315,9 @@ msgstr ""
 
 msgid "Edit"
 msgstr "Sunting"
+
+msgid "tracked entity instance"
+msgstr "contoh entitas yang dilacak"
 
 msgid "New {{ eventName }} event"
 msgstr ""

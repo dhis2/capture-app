@@ -484,6 +484,12 @@ msgstr "تحميل الصورة"
 msgid "Select image"
 msgstr "حدد الصورة"
 
+msgid "Type to filter options"
+msgstr "اكتب لتصفية الخيارات"
+
+msgid "No match found"
+msgstr ""
+
 msgid "Search"
 msgstr "البحث"
 
@@ -1286,9 +1292,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "نموذج الكيان المتتبع"
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1300,6 +1303,9 @@ msgstr ""
 
 msgid "Edit"
 msgstr "تعديل"
+
+msgid "tracked entity instance"
+msgstr "نموذج الكيان المتتبع"
 
 msgid "New {{ eventName }} event"
 msgstr ""

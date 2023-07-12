@@ -497,6 +497,12 @@ msgstr "Afbeelding uploaden"
 msgid "Select image"
 msgstr "Selecteer afbeelding"
 
+msgid "Type to filter options"
+msgstr "Typ om opties te filteren"
+
+msgid "No match found"
+msgstr ""
+
 msgid "Search"
 msgstr "Zoek"
 
@@ -1356,9 +1362,6 @@ msgstr ""
 "Probeer het opnieuw of neem contact op met uw systeembeheerder voor "
 "ondersteuning"
 
-msgid "tracked entity instance"
-msgstr "gevolgd entiteitsexemplaar"
-
 msgid "Fix errors in the form to continue."
 msgstr "Corrigeer fouten in het formulier om door te gaan."
 
@@ -1370,6 +1373,9 @@ msgstr "{{TETNaam}} profiel"
 
 msgid "Edit"
 msgstr "Bewerk"
+
+msgid "tracked entity instance"
+msgstr "gevolgd entiteitsexemplaar"
 
 msgid "New {{ eventName }} event"
 msgstr "Nieuwe {{ evenementNaam }} evenement"
