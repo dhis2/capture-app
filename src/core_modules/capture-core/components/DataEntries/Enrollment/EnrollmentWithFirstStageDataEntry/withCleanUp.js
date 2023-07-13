@@ -5,6 +5,7 @@ const getCleanUpHOC = (InnerComponent: React.ComponentType<any>) =>
     (props: Object) => {
         const {
             dataEntryFieldRef,
+            firstStageMetaData,
             ...passOnProps
         } = props;
 

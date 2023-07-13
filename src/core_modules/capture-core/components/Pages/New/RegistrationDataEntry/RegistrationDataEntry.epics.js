@@ -18,6 +18,7 @@ import { FEATURETYPE } from '../../../../constants';
 import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../utils/routing';
 import { getCurrentEventValuesFromStage } from '../../../DataEntries/Enrollment/actions/enrollment.actionBatchs';
 import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
+import { convertStatusOut } from '../../../DataEntries';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
@@ -75,12 +76,9 @@ const deriveFirstStageEvent = ({
     const firstStageDetails = {
         stageId: firstStage.id,
         dataValues: currentEventValues,
-        complete: stageComplete === 'true',
-        stageOccurredAt,
-        stageGeometry: standardGeoJson(stageGeometry),
     };
 
-    const { dataValues: stageDataValues, complete, stageId } = firstStageDetails;
+    const { dataValues: stageDataValues, stageId } = firstStageDetails;
     const dataValues = Object.keys(stageDataValues).reduce((acc, dataElement) => {
         acc.push({ dataElement, value: stageDataValues[dataElement] });
         return acc;
@@ -92,8 +90,8 @@ const deriveFirstStageEvent = ({
 
     return {
         dataValues,
-        status: complete ? 'COMPLETED' : 'ACTIVE',
-        geometry: stageGeometry,
+        status: convertStatusOut(stageComplete),
+        geometry: standardGeoJson(stageGeometry),
         occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
         scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE),
         programStage: stageId,

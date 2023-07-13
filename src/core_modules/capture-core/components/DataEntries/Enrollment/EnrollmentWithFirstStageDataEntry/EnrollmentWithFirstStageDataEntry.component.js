@@ -18,7 +18,7 @@ import {
 } from '../../../FormFields/New';
 import { placements } from '../../../DataEntry/constants/placements.const';
 import { withDataEntryFieldIfApplicable } from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
-import { sectionKeysForFirstStageDataEntry } from './FirstStageRegistration.constants';
+import { sectionKeysForFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry.constants';
 import labelTypeClasses from './fieldLabels.module.css';
 import { withCleanUp } from './withCleanUp';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
@@ -140,7 +140,7 @@ const getStageGeometrySettings = () => ({
     getPropName: () => 'stageGeometry',
     getValidatorContainers: () => [],
     getMeta: () => ({
-        placement: placements.TOP,
+        placement: placements.MIDDLE,
         section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,
     }),
 });
@@ -219,7 +219,7 @@ const getReportDateSettingsFn = () => {
         getPropName: () => 'stageOccurredAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
-            placement: placements.TOP,
+            placement: placements.MIDDLE,
             section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,
         }),
     };
@@ -227,7 +227,6 @@ const getReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
-
-const StageLocationHOC = withCleanUp()(withDataEntryFieldIfApplicable(getStageGeometrySettings())(DataEntry));
-const CompleteHOC = withCleanUp()(withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(StageLocationHOC));
-export const WrappedDataEntry = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(CompleteHOC);
+const StageLocationHOC = withDataEntryFieldIfApplicable(getStageGeometrySettings())(withCleanUp()(DataEntry));
+const CompleteHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(StageLocationHOC);
+export const FirstStageDataEntry = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(CompleteHOC);

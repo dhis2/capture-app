@@ -10,6 +10,7 @@ export type OwnProps = $ReadOnly<{|
   formFoundation: RenderFoundation,
   id: string,
   formHorizontal?: boolean,
+  onRenderDataEntryFieldsByPlacement?: () => void,
   ...FormRef
 |}>
 

@@ -258,6 +258,7 @@ class DataEntryPlain extends React.Component<Props> {
                 validationAttempted={completionAttempted || saveAttempted}
                 onUpdateField={this.handleUpdateField}
                 onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                onRenderDataEntryFieldsByPlacement={() => this.renderDataEntryFieldsByPlacement(placements.MIDDLE)}
                 {...passOnProps}
             />
         );

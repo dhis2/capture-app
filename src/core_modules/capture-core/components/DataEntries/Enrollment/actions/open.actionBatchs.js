@@ -10,18 +10,18 @@ import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
     getCategoryOptionsValidatorContainers,
-    getReportDateValidatorContainers,
 } from '../fieldValidators';
 import { convertGeometryOut } from '../../converters';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
+import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
 
 const itemId = 'newEnrollment';
 
 type DataEntryPropsToInclude = Array<Object>;
 
-const dataEntryPropsToInclude: DataEntryPropsToInclude = [
+const enrollmentDataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
         id: 'enrolledAt',
         type: 'DATE',
@@ -63,48 +63,38 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     extraDataEntryProps?: Array<Object>,
     formValues: { [key: string]: any },
     clientValues: { [key: string]: any },
-    firstStage?: ?ProgramStage,
+    firstStage?: ProgramStage,
     programCategory?: ProgramCategory,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
-    let effects;
-    const programStageDataEntryProps = [];
-    if (firstStage) {
-        effects = getApplicableRuleEffectsForTrackerProgram({
-            program,
-            orgUnit,
-            stage: firstStage,
-            attributeValues: clientValues,
-        });
-        programStageDataEntryProps.push({
-            id: 'stageOccurredAt',
-            type: 'DATE',
-            // $FlowFixMe[incompatible-call] automated comment
-            validatorContainers: getReportDateValidatorContainers(),
-        });
-    } else {
-        effects = getApplicableRuleEffectsForTrackerProgram({
-            program,
-            orgUnit,
-            attributeValues: clientValues,
-        });
-    }
-
-    if (programCategory && programCategory.categories) {
-        dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
+    const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage.stageForm);
+    const dataEntryPropsToInclude = [
+        ...enrollmentDataEntryPropsToInclude,
+        ...extraDataEntryProps,
+        ...(firstStageDataEntryPropsToInclude || []),
+        ...(programCategory && programCategory.categories ? programCategory.categories.map(category => ({
             id: `attributeCategoryOptions-${category.id}`,
             type: 'TEXT',
-            validatorContainers: getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
-        })));
-    }
+            validatorContainers:
+                getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
+        })) : []),
+    ];
+
     const dataEntryActions =
             loadNewDataEntry(
                 dataEntryId,
                 itemId,
-                [...dataEntryPropsToInclude, ...extraDataEntryProps, ...programStageDataEntryProps],
+                dataEntryPropsToInclude,
                 { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
             );
+
+    const effects = getApplicableRuleEffectsForTrackerProgram({
+        program,
+        orgUnit,
+        stage: firstStage,
+        attributeValues: clientValues,
+    });
 
     return batchActions([
         openDataEntryForNewEnrollment(

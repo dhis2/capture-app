@@ -5,6 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import {
+    DataEntry,
     placements,
     withDataEntryField,
     withDataEntryFieldIfApplicable,
@@ -33,7 +34,7 @@ import {
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
 import { type Enrollment, ProgramStage, getProgramThrowIfNotFound } from '../../../metaData';
-import { FirstStageRegistration } from './FirstStageRegistration';
+import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
     attributeOptionsKey,
@@ -355,15 +356,23 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     };
 
     render() {
-        const { enrollmentMetadata, ...passOnProps } = this.props;
+        const { enrollmentMetadata, firstStageMetaData, ...passOnProps } = this.props;
 
         return (
         // $FlowFixMe[cannot-spread-inexact] automated comment
-            <FirstStageRegistration
-                {...passOnProps}
-                dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
-                formFoundation={enrollmentMetadata.enrollmentForm}
-            />
+            firstStageMetaData ? (
+                <EnrollmentWithFirstStageDataEntry
+                    {...passOnProps}
+                    firstStageMetaData={firstStageMetaData}
+                    enrollmentFormFoundation={enrollmentMetadata.enrollmentForm}
+                />
+            ) : (
+                <DataEntry
+                    {...passOnProps}
+                    dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
+                    formFoundation={enrollmentMetadata.enrollmentForm}
+                />
+            )
         );
     }
 }
