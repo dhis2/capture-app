@@ -568,8 +568,8 @@ And('you fill the Malaria case diagnosis registration form with values', () => {
         .blur();
 });
 
-Then('you see the enrollment event New page', () => {
-    cy.url().should('include', '/#/enrollmentEventNew?');
+Then('you see the enrollment event Edit page', () => {
+    cy.url().should('include', '/#/enrollmentEventEdit?');
     cy.url().should('include', 'stageId=hYyB7FUS5eR');
 });
 

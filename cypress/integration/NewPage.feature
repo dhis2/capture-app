@@ -198,7 +198,7 @@ Feature: User creates a new entries from the registration page
     When you are in the Malaria case diagnosis, treatment and investigation program registration page
     And you fill the Malaria case diagnosis registration form with values
     And you click the save malaria entity submit button
-    Then you see the enrollment event New page
+    Then you see the enrollment event Edit page
     When you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context
     And you opt out to use the new enrollment Dashboard for Malaria case diagnosis, treatment and investigation
     Then you see the opt in component for Malaria case diagnosis, treatment and investigation
