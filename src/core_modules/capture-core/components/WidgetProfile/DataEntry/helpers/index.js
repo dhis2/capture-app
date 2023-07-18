@@ -12,5 +12,6 @@ export {
     getTrackedEntityTypeId,
     getProgramTrackedEntityAttributes,
 } from './convertors';
-export { getTeiDisplayName } from './getTeiDisplayName';
 export { GEOMETRY, getFeatureType, getDataElement, getLabel } from './geometry';
+export { convertClientToView } from './convertClientToView';
+export { isNotValidOptionSet } from './isNotValidOptionSet';

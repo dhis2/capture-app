@@ -368,11 +368,11 @@ Then('you should see confirm dialog', () => {
     cy.get('[data-test="dhis2-uicore-layer"].translucent').within(() => {
         cy.get('[role="dialog"]')
             .find('[data-test="dhis2-uicore-modaltitle"]')
-            .contains('Unsaved changes')
+            .contains('Discard unsaved changes?')
             .should('exist');
         cy.get('[role="dialog"]')
             .find('[data-test="dhis2-uicore-button"]')
-            .contains('Yes, discard')
+            .contains('Yes, discard changes')
             .click();
     });
 });
@@ -573,6 +573,24 @@ Then('you see the enrollment event New page', () => {
     cy.url().should('include', 'stageId=hYyB7FUS5eR');
 });
 
+And('you fill in multiple Allergies options', () => {
+    cy.get('[data-test="registration-page-content"]').within(() => {
+        cy.contains('Allergies').should('exist');
+    });
+    cy.get('[data-test="dhis2-uicore-select-input"]').click();
+    cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Penicillin and related antibiotics').click();
+    cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Anticonvulsants').click();
+    cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Other').click();
+    cy.get('[data-test="dhis2-uicore-select-input"]').click({ force: true });
+});
+
+Then('you can see the multiple selections in the form', () => {
+    cy.get('[data-test="multi-select-field-content"]').within(() => {
+        cy.contains('Penicillin and related antibiotics').should('exist');
+        cy.contains('Anticonvulsants').should('exist');
+        cy.contains('Other').should('exist');
+    });
+});
 
 Then('the first stage appears on registration page', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {

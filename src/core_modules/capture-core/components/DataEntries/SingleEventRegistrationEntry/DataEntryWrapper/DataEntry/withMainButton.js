@@ -2,11 +2,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { Tooltip } from '@dhis2/ui';
+import { Tooltip, Button } from '@dhis2/ui';
 import { newEventSaveTypes } from './newEventSaveTypes';
 import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { type RenderFoundation } from '../../../../../metaData';
-import { SimpleSplitButton, Button } from '../../../../Buttons';
+import { SimpleSplitButton } from '../../../../Buttons';
 import { getDataEntryHasChanges } from '../../getNewEventDataEntryHasChanges';
 
 type Props = {

@@ -9,7 +9,7 @@ import { withBrowserBackWarning } from '../../../HOC/withBrowserBackWarning';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selectors';
 import { withLoadingIndicator } from '../../../HOC';
-import { defaultDialogProps as dialogConfig } from '../../Dialogs/ConfirmDialog.constants';
+import { defaultDialogProps as dialogConfig } from '../../Dialogs/DiscardDialog.constants';
 import { getOpenDataEntryActions } from './DataEntryWrapper/DataEntry';
 import type { ContainerProps, StateProps, MapStateToProps } from './SingleEventRegistrationEntry.types';
 

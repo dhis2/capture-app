@@ -1,6 +1,7 @@
 // @flow
 export const dataElementTypes = {
     TEXT: 'TEXT',
+    MULTI_TEXT: 'MULTI_TEXT',
     LONG_TEXT: 'LONG_TEXT',
     NUMBER: 'NUMBER',
     NUMBER_RANGE: 'NUMBER_RANGE',

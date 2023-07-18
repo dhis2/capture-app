@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from '../../errorCreator';
-import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes } from '../../constants';
+import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes, typeKeys } from '../../constants';
 
 import type {
     ProgramRuleEffect,
@@ -19,6 +19,7 @@ import type {
     OutputEffects,
 } from '../../rulesEngine.types';
 import { normalizeRuleVariable, numberToString } from '../../commonUtils';
+import { getOutputEffectsWithPreviousValueCheck } from '../../helpers';
 
 const sanitiseFalsy = (value) => {
     if (value) {
@@ -41,15 +42,17 @@ export function getRulesEffectsProcessor(
 
     function createEffectsForConfiguredDataTypes(
         effect: ProgramRuleEffect,
-        getOutputEffect: () => any): any {
+        getOutputEffect: () => any,
+    ): any {
         return idNamesArray
             .filter(idName => effect[idName])
             .map((idName) => {
                 const outputEffect = getOutputEffect();
                 outputEffect.id = effect[idName];
-                outputEffect.targetDataType = idName === idNames.DATA_ELEMENT_ID ?
-                    rulesEngineEffectTargetDataTypes.DATA_ELEMENT :
-                    rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE;
+                outputEffect.targetDataType =
+                    idName === idNames.DATA_ELEMENT_ID
+                        ? rulesEngineEffectTargetDataTypes.DATA_ELEMENT
+                        : rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE;
                 return outputEffect;
             });
     }
@@ -152,10 +155,29 @@ export function getRulesEffectsProcessor(
         return effects;
     }
 
-    function processHideField(effect: ProgramRuleEffect): Array<HideOutputEffect> {
-        return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.HIDE_FIELD,
-        }));
+    function processHideField(
+        effect: ProgramRuleEffect,
+        dataElements: ?DataElements,
+        trackedEntityAttributes: ?TrackedEntityAttributes,
+        formValues?: ?{[key: string]: any},
+        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+    ): Array<HideOutputEffect> {
+        const outputEffects = createEffectsForConfiguredDataTypes(
+            effect,
+            () => ({
+                type: effectActions.HIDE_FIELD,
+                content: effect.content,
+            }),
+        );
+        return getOutputEffectsWithPreviousValueCheck({
+            outputEffects,
+            formValues,
+            dataElementId: effect.dataElementId,
+            trackedEntityAttributeId: effect.trackedEntityAttributeId,
+            dataElements,
+            trackedEntityAttributes,
+            onProcessValue,
+        });
     }
 
     function processShowError(effect: ProgramRuleEffect): ErrorEffect {
@@ -254,10 +276,19 @@ export function getRulesEffectsProcessor(
         [effectActions.SHOW_OPTION_GROUP]: processShowOptionGroup,
     };
 
-    function processRulesEffects(
+    function processRulesEffects({
+        effects,
+        dataElements,
+        trackedEntityAttributes,
+        formValues,
+        onProcessValue,
+    }: {
         effects: ?Array<ProgramRuleEffect>,
         dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes): OutputEffects {
+        trackedEntityAttributes: ?TrackedEntityAttributes,
+        formValues?: ?{ [key: string]: any },
+        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+    }): OutputEffects {
         if (effects) {
             return effects
                 .filter(({ action }) => mapActionsToProcessor[action])
@@ -265,6 +296,8 @@ export function getRulesEffectsProcessor(
                     effect,
                     dataElements,
                     trackedEntityAttributes,
+                    formValues,
+                    onProcessValue,
                 ))
             // when mapActionsToProcessor function returns `null` we filter those value out.
                 .filter(keepTruthyValues => keepTruthyValues);

@@ -7,10 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import { IconCross24 } from '@dhis2/ui';
+import { IconCross24, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import isDefined from 'd2-utilizr/lib/isDefined';
-import { Button } from '../Buttons';
 
 const styles = theme => ({
     closeButton: {
