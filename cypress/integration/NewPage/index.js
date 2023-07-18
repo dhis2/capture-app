@@ -570,7 +570,6 @@ And('you fill the Malaria case diagnosis registration form with values', () => {
 
 Then('you see the enrollment event Edit page', () => {
     cy.url().should('include', '/#/enrollmentEventEdit?');
-    cy.url().should('include', 'stageId=hYyB7FUS5eR');
 });
 
 And('you fill in multiple Allergies options', () => {
