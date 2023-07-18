@@ -51,14 +51,16 @@ export const startSavingNewTrackedEntityInstanceWithEnrollment = (formFoundation
 
 export const saveNewTrackedEntityInstanceWithEnrollment = ({
     candidateForRegistration,
-    redirectToEnrollmentEventNew,
+    redirectTo,
     uid,
     stageId,
+    eventIndex,
 }: {
     candidateForRegistration: any,
-    redirectToEnrollmentEventNew: boolean,
+    redirectTo: string,
     uid: string,
     stageId?: string,
+    eventIndex: number,
 }) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE)(
         { ...candidateForRegistration },
@@ -71,7 +73,7 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
                 },
                 commit: {
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED,
-                    meta: { redirectToEnrollmentEventNew, stageId, uid },
+                    meta: { redirectTo, stageId, uid, eventIndex },
                 },
                 rollback: {
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED,

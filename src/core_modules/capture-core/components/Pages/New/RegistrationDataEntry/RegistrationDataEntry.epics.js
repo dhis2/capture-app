@@ -3,7 +3,6 @@ import { ofType } from 'redux-observable';
 import { pipe } from 'capture-core-utils';
 import { flatMap, map } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
-import moment from 'moment';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,
@@ -17,39 +16,17 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import { FEATURETYPE } from '../../../../constants';
 import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../utils/routing';
 import { getCurrentEventValuesFromStage } from '../../../DataEntries/Enrollment/actions/enrollment.actionBatchs';
-import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
-import { convertStatusOut } from '../../../DataEntries';
+import {
+    deriveAutoGenerateEvents,
+    deriveFirstStageDuringRegistrationEvent,
+    getStageWithOpenAfterEnrollment,
+    standardGeoJson,
+    PAGES,
+} from './helpers';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
 const geometryType = formValuesKey => Object.values(FEATURETYPE).find(geometryKey => geometryKey === formValuesKey);
-
-const standardGeoJson = (geometry) => {
-    if (!geometry) {
-        return undefined;
-    }
-    if (Array.isArray(geometry)) {
-        return {
-            type: 'Polygon',
-            coordinates: geometry,
-        };
-    } else if (geometry.longitude && geometry.latitude) {
-        return {
-            type: 'Point',
-            coordinates: [geometry.longitude, geometry.latitude],
-        };
-    }
-    return undefined;
-};
-
-const getStageWithOpenAfterEnrollment = (stages, firstStage) => {
-    const stagesArray = [...stages.values()];
-    if (!firstStage) {
-        return stagesArray.find(({ openAfterEnrollment }) => openAfterEnrollment);
-    }
-    const [first, second] = stagesArray.filter(({ openAfterEnrollment }) => openAfterEnrollment);
-    return (firstStage.id === first?.id && first?.repeatable) ? first : second;
-};
 
 const deriveAttributesFromFormValues = (formValues = {}) =>
     Object.keys(formValues)
@@ -60,106 +37,6 @@ const deriveGeometryFromFormValues = (formValues = {}) =>
     Object.keys(formValues)
         .filter(key => geometryType(key))
         .reduce((acc, currentKey) => (standardGeoJson(formValues[currentKey])), undefined);
-
-const deriveFirstStageEvent = ({
-    firstStage,
-    programId,
-    orgUnitId,
-    currentEventValues,
-    fieldsValue,
-    attributeCategoryOptions,
-}) => {
-    if (!firstStage) {
-        return null;
-    }
-    const { enrolledAt, stageComplete, stageOccurredAt, stageGeometry } = fieldsValue;
-    const firstStageDetails = {
-        stageId: firstStage.id,
-        dataValues: currentEventValues,
-    };
-
-    const { dataValues: stageDataValues, stageId } = firstStageDetails;
-    const dataValues = Object.keys(stageDataValues).reduce((acc, dataElement) => {
-        acc.push({ dataElement, value: stageDataValues[dataElement] });
-        return acc;
-    }, []);
-
-    const eventAttributeCategoryOptions = attributeCategoryOptions
-        ? { attributeCategoryOptions: convertCategoryOptionsToServer(attributeCategoryOptions) }
-        : {};
-
-    return {
-        dataValues,
-        status: convertStatusOut(stageComplete),
-        geometry: standardGeoJson(stageGeometry),
-        occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
-        scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE),
-        programStage: stageId,
-        program: programId,
-        orgUnit: orgUnitId,
-        ...eventAttributeCategoryOptions,
-    };
-};
-
-const deriveEvents = ({
-    stages,
-    enrolledAt,
-    occurredAt,
-    programId,
-    orgUnitId,
-    redirectToEnrollmentEventNew,
-    redirectToStageId,
-    firstStageEvent,
-    attributeCategoryOptions,
-}) => {
-    // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
-    // we want the incident to default to enrollmentDate (enrolledAt)
-    const sanitizedOccurredAt = occurredAt || enrolledAt;
-
-    return [...stages.values()]
-        .filter(({ id }) => (redirectToEnrollmentEventNew && id !== redirectToStageId) || !redirectToEnrollmentEventNew)
-        .filter(({ autoGenerateEvent }) => autoGenerateEvent)
-        .filter(({ id }) => !firstStageEvent || firstStageEvent.programStage !== id)
-        .map(({
-            id: programStage,
-            reportDateToUse: reportDateToUseInActiveStatus,
-            generatedByEnrollmentDate: generateScheduleDateByEnrollmentDate,
-            openAfterEnrollment,
-            minDaysFromStart,
-        }) => {
-            const dateToUseInActiveStatus =
-            reportDateToUseInActiveStatus === 'enrolledAt' ? enrolledAt : sanitizedOccurredAt;
-            const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrolledAt : sanitizedOccurredAt;
-            const eventAttributeCategoryOptions = {};
-            if (attributeCategoryOptions) {
-                eventAttributeCategoryOptions.attributeCategoryOptions = convertCategoryOptionsToServer(attributeCategoryOptions);
-            }
-            const eventInfo =
-              openAfterEnrollment
-                  ?
-                  {
-                      status: 'ACTIVE',
-                      occurredAt: convertFn(dateToUseInActiveStatus, dataElementTypes.DATE),
-                      scheduledAt: convertFn(dateToUseInActiveStatus, dataElementTypes.DATE),
-                  }
-                  :
-                  {
-                      status: 'SCHEDULE',
-                      // for schedule type of events we want to add the standard interval days to the date
-                      scheduledAt: moment(convertFn(dateToUseInScheduleStatus, dataElementTypes.DATE))
-                          .add(minDaysFromStart, 'days')
-                          .format('YYYY-MM-DD'),
-                  };
-
-            return {
-                ...eventInfo,
-                ...eventAttributeCategoryOptions,
-                programStage,
-                program: programId,
-                orgUnit: orgUnitId,
-            };
-        });
-};
 
 export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -207,7 +84,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
             const formId = 'newPageDataEntryId-newEnrollment';
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
             const { dataStore, userDataStore, temp } = store.value.useNewDashboard;
-            const { formFoundation, teiId: trackedEntity, firstStage, uid } = action.payload;
+            const { formFoundation, teiId: trackedEntity, firstStage: firstStageMetadata, uid } = action.payload;
             const fieldsValue = dataEntriesFieldsValue[formId] || {};
             const { occurredAt, enrolledAt, geometry } = fieldsValue;
             const attributeCategoryOptionsId = 'attributeCategoryOptions';
@@ -220,32 +97,40 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 }, {});
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
             const values = formsValues[formId] || {};
-            const stageWithOpenAfterEnrollment = getStageWithOpenAfterEnrollment(stages, firstStage);
-            const redirectToEnrollmentEventNew =
-            shouldUseNewDashboard(userDataStore, dataStore, temp, programId) && stageWithOpenAfterEnrollment !== undefined;
+            const shouldRedirect = shouldUseNewDashboard(userDataStore, dataStore, temp, programId);
+            const { stageWithOpenAfterEnrollment, redirectTo } = getStageWithOpenAfterEnrollment(
+                stages,
+                firstStageMetadata,
+                shouldRedirect,
+            );
 
-            const { attributeValues, currentEventValues } = getCurrentEventValuesFromStage(values, firstStage);
+            const { attributeValues, currentEventValues } = getCurrentEventValuesFromStage(values, firstStageMetadata);
             const formServerValues = formFoundation?.convertValues(attributeValues, convertFn);
 
-            const firstStageEvent = deriveFirstStageEvent({
-                firstStage,
+            const firstStageDuringRegistrationEvent = deriveFirstStageDuringRegistrationEvent({
+                firstStageMetadata,
                 programId,
                 orgUnitId,
                 currentEventValues,
                 fieldsValue,
                 attributeCategoryOptions,
             });
-            const events = deriveEvents({
+            const autoGenerateEvents = deriveAutoGenerateEvents({
                 stages,
                 enrolledAt,
                 occurredAt,
                 programId,
                 orgUnitId,
-                redirectToEnrollmentEventNew,
-                redirectToStageId: stageWithOpenAfterEnrollment?.id,
-                firstStageEvent,
+                firstStageMetadata,
                 attributeCategoryOptions,
             });
+
+            const allEventsToBeCreated = firstStageDuringRegistrationEvent
+                ? [firstStageDuringRegistrationEvent, ...autoGenerateEvents]
+                : autoGenerateEvents;
+            const eventIndex = allEventsToBeCreated.findIndex(
+                eventsToBeCreated => eventsToBeCreated.programStage === stageWithOpenAfterEnrollment?.id,
+            );
 
             return saveNewTrackedEntityInstanceWithEnrollment({
                 candidateForRegistration: {
@@ -261,7 +146,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                                     orgUnit: orgUnitId,
                                     attributes: deriveAttributesFromFormValues(formServerValues),
                                     status: 'ACTIVE',
-                                    events: firstStageEvent ? [...events, firstStageEvent] : events,
+                                    events: allEventsToBeCreated,
                                 },
                             ],
                             orgUnit: orgUnitId,
@@ -270,7 +155,8 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                         },
                     ],
                 },
-                redirectToEnrollmentEventNew,
+                redirectTo,
+                eventIndex,
                 stageId: stageWithOpenAfterEnrollment?.id,
                 uid,
             });
@@ -285,7 +171,12 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED),
         flatMap((action) => {
-            const { payload: { bundleReport: { typeReportMap } }, meta } = action;
+            const {
+                payload: {
+                    bundleReport: { typeReportMap },
+                },
+                meta: { uid, redirectTo, stageId, eventIndex },
+            } = action;
             const {
                 currentSelections: { orgUnitId, programId },
                 newPage,
@@ -293,19 +184,30 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             const { uid: stateUid } = newPage || {};
             const teiId = typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const enrollmentId = typeReportMap.ENROLLMENT.objectReports[0].uid;
+            const eventId = typeReportMap.EVENT.objectReports.find(event => event.index === eventIndex)?.uid;
 
-            if (stateUid !== meta.uid) {
+            if (stateUid !== uid) {
                 return EMPTY;
             }
 
-            if (meta?.redirectToEnrollmentEventNew) {
+            if (redirectTo === PAGES.enrollmentEventNew) {
                 history.push(
-                    `/enrollmentEventNew?${buildUrlQueryString({
+                    `/${redirectTo}?${buildUrlQueryString({
                         programId,
                         orgUnitId,
                         teiId,
                         enrollmentId,
-                        stageId: meta?.stageId,
+                        stageId,
+                    })}`,
+                );
+                return EMPTY;
+            }
+
+            if (redirectTo === PAGES.enrollmentEventEdit) {
+                history.push(
+                    `/${redirectTo}?${buildUrlQueryString({
+                        eventId,
+                        orgUnitId,
                     })}`,
                 );
                 return EMPTY;
