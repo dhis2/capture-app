@@ -12,6 +12,9 @@ const getStyles = () => ({
     tableContainer: {
         overflowX: 'auto',
     },
+    loadingRow: {
+        height: 100,
+    },
     headerAlign: {
         '&>span.container': {
             alignItems: 'flex-end',
@@ -42,6 +45,7 @@ type Props = {
     customEndCellBodyStyle?: ?Object,
     classes: {
         tableContainer: string,
+        loadingRow: string,
         headerAlign: string,
     },
 };
@@ -104,10 +108,14 @@ class Index extends React.Component<Props> {
     }
 
     renderBody(visibleColumns: Array<Column>) {
-        const { getCustomEndCellBody } = this.props;
+        const { getCustomEndCellBody, updating, classes } = this.props;
         const columnsCount = visibleColumns.length + (getCustomEndCellBody ? 1 : 0);
 
-        return this.renderRows(visibleColumns, columnsCount);
+        return updating ? (
+            <DataTableRow className={classes.loadingRow} />
+        ) : (
+            this.renderRows(visibleColumns, columnsCount)
+        );
     }
 
     renderRows(visibleColumns: Array<Column>, columnsCount: number) {
