@@ -107,9 +107,8 @@ When('you set the assginee filter to none', () => {
 });
 
 When('you set the first name filter to John', () => {
-    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
-        .eq(0)
-        .click()
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('First name')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
@@ -138,7 +137,7 @@ When('you click the first page button', () => {
 
 Then('the sort arrow should indicate descending order', () => {
     cy.get('[data-test="table-row"]').within(() => {
-        cy.get('[data-test="desc"]').should('exist');
+        cy.get('[data-test="table-row-desc"]').should('exist');
     });
 });
 
