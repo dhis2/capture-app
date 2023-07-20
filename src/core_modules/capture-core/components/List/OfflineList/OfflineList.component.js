@@ -82,7 +82,11 @@ class Index extends Component<Props> {
                 </DataTableCell>
             ));
 
-            return <DataTableRow key={row[rowIdKey]} dataTest="table-row">{cells}</DataTableRow>;
+            return (
+                <DataTableRow key={row[rowIdKey]} dataTest="table-row">
+                    {cells}
+                </DataTableRow>
+            );
         });
     }
 

@@ -59,9 +59,11 @@ class Index extends React.Component<Props> {
         dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
 
-    getSortHandler = (id: string) => ({ direction }: { direction: string }) => {
-        this.props.onSort(id, direction);
-    };
+    getSortHandler =
+        (id: string) =>
+            ({ direction }: { direction: string }) => {
+                this.props.onSort(id, direction);
+            };
 
     getCustomEndCellHeader = () => {
         const { getCustomEndCellHeader, getCustomEndCellBody, customEndCellHeaderStyle } = this.props;

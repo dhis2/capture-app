@@ -24,8 +24,7 @@ export { withLabel } from './HOC/withLabel';
 export { withShrinkLabel } from './HOC/withShrinkLabel';
 export { withTextFieldFocusHandler } from './internal/TextInput/withFocusHandler';
 
-// Datatable
-export { Pagination } from './DataTable/Pagination.component';
+export { Pagination } from './Pagination/Pagination.component';
 
 // UI-Elements
 export { DividerHorizontal } from './Divider/DividerHorizontal.component';
