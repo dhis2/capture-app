@@ -479,6 +479,12 @@ msgstr "Uploading image"
 msgid "Select image"
 msgstr "Select image"
 
+msgid "Type to filter options"
+msgstr "Type to filter options"
+
+msgid "No match found"
+msgstr "No match found"
+
 msgid "Search"
 msgstr "Search"
 
@@ -1293,9 +1299,6 @@ msgstr "There was a problem saving changes"
 msgid "Try again or contact your system administrator for support"
 msgstr "Try again or contact your system administrator for support"
 
-msgid "tracked entity instance"
-msgstr "tracked entity instance"
-
 msgid "Fix errors in the form to continue."
 msgstr "Fix errors in the form to continue."
 
@@ -1307,6 +1310,9 @@ msgstr "{{TETName}} profile"
 
 msgid "Edit"
 msgstr "Edit"
+
+msgid "tracked entity instance"
+msgstr "tracked entity instance"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"

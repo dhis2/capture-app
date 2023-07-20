@@ -5,7 +5,9 @@ export { BooleanField } from './Fields/BooleanField/BooleanField.component';
 export { AgeField } from './Fields/AgeField/AgeField.component';
 export { TrueOnlyField } from './Fields/TrueOnlyField/TrueOnlyField.component';
 export { VirtualizedSelectField } from './Fields/VirtualizedSelectField/VirtualizedSelectField.component';
+export { MultiSelectField } from './Fields/MultiSelectField/MultiSelectField.component';
 export { withSelectTranslations } from './Fields/VirtualizedSelectField/withTranslations';
+export { withSelectMultiTranslations } from './Fields/MultiSelectField/withTranslations';
 export { SelectionBoxes } from './Fields/SelectionBoxes/SelectionBoxes.component';
 export { DateField } from './Fields/DateAndTimeFields/DateField/DateField.component';
 export { DateTimeField } from './Fields/DateAndTimeFields/DateTimeField/DateTimeField.component';
@@ -29,6 +31,7 @@ export { withGotoInterface } from './HOC/withGotoInterface';
 export { withHideCompatibility } from './HOC/withHideCompatibility';
 export { withLabel } from './HOC/withLabel';
 export { withStyledContainer } from './HOC/withStyledContainer';
+export { withOptionsIconElement } from './HOC/withOptionsIconElement';
 export { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 
 // OrgUnit HOCs
