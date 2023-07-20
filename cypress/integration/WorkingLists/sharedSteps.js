@@ -129,10 +129,8 @@ Then('the first name filter button should show that the filter is in effect', ()
 });
 
 When('you click the first page button', () => {
-    cy.route('GET', '**/**/**page=1**').as('getResults');
     cy.get('[data-test="search-pagination-first-page"]')
         .click();
-    cy.wait('@getResults', { timeout: 30000 });
 });
 
 Then('the sort arrow should indicate descending order', () => {
