@@ -2,15 +2,15 @@
 # Translators:
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # phil_dhis2, 2022
-# Hamza Assada <7amza.it@gmail.com>, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
+# Hamza Assada <7amza.it@gmail.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
+"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2023\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -262,19 +262,19 @@ msgstr "إضافة علاقة للحدث."
 msgid "Go back to event without saving relationship"
 msgstr "ارجع إلى الحدث بدون حفظ العلاقة"
 
-msgid "Unsaved changes"
-msgstr "تعديلات لم يتم حفظها"
+msgid "Discard unsaved changes?"
+msgstr "تجاهل التغييرات غير المحفوظة؟"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
 
-msgid "Yes, discard"
-msgstr "نعم ، تجاهل"
+msgid "Yes, discard changes"
+msgstr "نعم ، تجاهل التغييرات"
 
-msgid "No, stay here"
-msgstr "لا ، ابق هنا"
+msgid "No, cancel"
+msgstr "لا، الغاء"
 
 msgid "New event"
 msgstr "حدث جديد"
@@ -344,21 +344,8 @@ msgstr "توليد حدث جديد"
 msgid "Do you want to create another event?"
 msgstr "هل تريد إنشاء حدث جديد"
 
-msgid "No, cancel"
-msgstr "لا، الغاء"
-
 msgid "Yes, create new event"
 msgstr ""
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"ستؤدي مغادرة هذه الصفحة إلى تجاهل التغييرات التي أجريتها على هذا الحدث."
-
-msgid "Warnings found"
-msgstr "تم العثور على إشعارات تحذيرية"
-
-msgid "Abort"
-msgstr "إحباط"
 
 msgid "Back to form"
 msgstr "العودة اللنموذج"
@@ -383,6 +370,11 @@ msgstr "العمليات الجارية"
 
 msgid "Sort"
 msgstr "فرز"
+
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr "لايوجد احداث للعرض"
@@ -492,6 +484,12 @@ msgstr "تحميل الصورة"
 msgid "Select image"
 msgstr "حدد الصورة"
 
+msgid "Type to filter options"
+msgstr "اكتب لتصفية الخيارات"
+
+msgid "No match found"
+msgstr ""
+
 msgid "Search"
 msgstr "البحث"
 
@@ -588,10 +586,40 @@ msgstr ""
 msgid "Write comment"
 msgstr "اكتب تعليقاً"
 
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
+
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
 
 msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
 msgstr ""
 
 msgid "Yes, opt in"
@@ -839,101 +867,8 @@ msgstr "إنشاء {{trackedEntityType}} جديد"
 msgid "Register"
 msgstr "تسجيل"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr "املأ ما لا يقل عن {{minAttributesRequiredToSearch}} سمة للبحث"
-
-msgid "Search {{name}}"
-msgstr "البحث عن {{name}}"
-
-msgid "Search by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr "البحث حسب السمة"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr "لم يتم العثور على أي نتائج"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr "يمكنك تغيير مصطلحات البحث والبحث مرة أخرى للعثور على ما تبحث عنه."
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr "العودة للبحث"
-
-msgid "An error has occurred"
-msgstr "حدث خطأ"
-
-msgid "Too many results"
-msgstr "نتائج كثيرة جدًا"
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "الخلف"
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr "ابحث عن"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "يمكنك أيضًا اختيار برنامج من الشريط العلوي والبحث فيه"
-
-msgid "Choose a type to start searching"
-msgstr "اختر نوعًا لبدء البحث"
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-"لم يتم إيجاد النتائج التي كنت تبحث عنها؟ حاول البحث في جميع البرامج التي "
-"تستخدم النوع"
-
-msgid "Search in all programs"
-msgstr "البحث في جميع البرامج"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "إنشاء جديد"
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-
-msgid "Create saved list"
-msgstr ""
 
 msgid "events"
 msgstr "الأحداث"
@@ -982,6 +917,9 @@ msgstr "تعذر تحميل الوحدة التنظيمية"
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
 
+msgid "No results found"
+msgstr "لم يتم العثور على أي نتائج"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1021,6 +959,87 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr "ابحث عن"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "يمكنك أيضًا اختيار برنامج من الشريط العلوي والبحث فيه"
+
+msgid "Choose a type to start searching"
+msgstr "اختر نوعًا لبدء البحث"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "Search {{name}}"
+msgstr "البحث عن {{name}}"
+
+msgid "Search by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr "البحث حسب السمة"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"لم يتم إيجاد النتائج التي كنت تبحث عنها؟ حاول البحث في جميع البرامج التي "
+"تستخدم النوع"
+
+msgid "Search in all programs"
+msgstr "البحث في جميع البرامج"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "إنشاء جديد"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "يمكنك تغيير مصطلحات البحث والبحث مرة أخرى للعثور على ما تبحث عنه."
+
+msgid "Back to search"
+msgstr "العودة للبحث"
+
+msgid "An error has occurred"
+msgstr "حدث خطأ"
+
+msgid "Too many results"
+msgstr "نتائج كثيرة جدًا"
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr "العثور على نتائج"
 
@@ -1030,8 +1049,19 @@ msgstr "البرنامج المحدد"
 msgid "Search {{uniqueAttrName}}"
 msgstr "بحث {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "املأ {{minAttributesRequired}} سمات على الأقل للبحث"
+msgid "Saved lists in this program"
+msgstr ""
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -1262,9 +1292,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "نموذج الكيان المتتبع"
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1277,10 +1304,13 @@ msgstr ""
 msgid "Edit"
 msgstr "تعديل"
 
+msgid "tracked entity instance"
+msgstr "نموذج الكيان المتتبع"
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
-msgid "This event is not yet preserved and cannot be edited"
+msgid "To open this event, please wait until saving is complete"
 msgstr ""
 
 msgid "Show {{ rest }} more"
@@ -1331,6 +1361,9 @@ msgstr "تنزيل البيانات"
 msgid "an error occurred loading working lists"
 msgstr "حدث خطأ اثناء تحميل قوائم العمل"
 
+msgid "Assigned to"
+msgstr "مسندة إلى"
+
 msgid "Registration Date"
 msgstr "تاريخ التسجيل"
 
@@ -1340,10 +1373,16 @@ msgstr "الغير نشطة"
 msgid "Enrollment status"
 msgstr "حالة التسجيل"
 
-msgid "Assigned to"
-msgstr "مسندة إلى"
-
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1489,6 +1528,9 @@ msgstr "حذف المضلع"
 
 msgid "Set area"
 msgstr "عين المساحة"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "وضع التوافق"

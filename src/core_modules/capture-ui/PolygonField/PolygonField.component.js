@@ -1,14 +1,13 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { IconCheckmark24, IconLocation16, colors } from '@dhis2/ui';
+import { IconCheckmark16, IconLocation16, colors, Button } from '@dhis2/ui';
 import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
 import defaultClasses from './polygonField.module.css';
 import './styles.css';
-import { Button } from '../Buttons/Button.component';
 import { DeleteControl } from './DeleteControl.component';
 
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
@@ -194,13 +193,13 @@ export class PolygonField extends React.Component<Props, State> {
         <div className={defaultClasses.dialogActionOuterContainer}>
             <div className={defaultClasses.dialogActionInnerContainer}>
                 {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button kind="basic" onClick={this.closeMap}>
+                <Button secondary onClick={this.closeMap}>
                     {i18n.t('Cancel')}
                 </Button>
             </div>
             <div className={defaultClasses.dialogActionInnerContainer}>
                 {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button kind="primary" onClick={this.onSetPolygon}>
+                <Button primary onClick={this.onSetPolygon}>
                     {i18n.t('Set area')}
                 </Button>
             </div>
@@ -212,18 +211,25 @@ export class PolygonField extends React.Component<Props, State> {
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.statusContainer}>
-                    <div className={defaultClasses.mapIcon} onClick={this.openMap} role="button" tabIndex="0" >
-                        <IconLocation16 />
-                    </div>
-                    <div className={defaultClasses.statusText}>
-                        {hasValue ? 'Polygon captured' : 'No polygon captured'}
-                    </div>
                     { hasValue && (
-                        <span className={defaultClasses.checkIcon}>
-                            <IconCheckmark24 color={colors.blue600} />
-                        </span>
+                        <>
+                            <span className={defaultClasses.checkIcon}>
+                                <IconCheckmark16 color={colors.blue600} />
+                            </span>
+                            <div className={defaultClasses.statusText}>
+                                {i18n.t('Area on map saved')}
+                            </div>
+                        </>
                     )
                     }
+                    <Button
+                        onClick={this.openMap}
+                        icon={<IconLocation16 />}
+                        small
+                    >
+                        {hasValue ? 'Edit area on map' : 'Choose area on map'}
+                    </Button>
+
                 </div>
                 {this.renderMapDialog()}
             </div>

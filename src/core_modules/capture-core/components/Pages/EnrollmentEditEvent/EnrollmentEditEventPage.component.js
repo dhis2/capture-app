@@ -18,6 +18,7 @@ import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetEventComment } from '../../WidgetEventComment';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
+import { NoticeBox } from '../../NoticeBox';
 import {
     TrackedEntityRelationshipsWrapper,
 } from '../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
@@ -177,6 +178,7 @@ const EnrollmentEditEventPagePain = ({
                         />
                     </div>
                 </div>
+                <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
             </div>
         </OrgUnitFetcher>
     );

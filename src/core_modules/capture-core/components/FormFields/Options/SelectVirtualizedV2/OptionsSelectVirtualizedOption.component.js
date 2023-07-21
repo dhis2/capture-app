@@ -8,10 +8,7 @@ const getStyles = () => ({
     popper: {
         zIndex: 9999,
     },
-    iconLeftContainer: {
-        paddingRight: 5,
-    },
-    iconRightContainer: {
+    iconContainer: {
         paddingLeft: 5,
     },
 });
@@ -23,8 +20,7 @@ type Props = {
     currentlySelectedValues: ?Array<VirtualizedOptionConfig>,
     classes: {
         popper: string,
-        iconLeftContainer: string,
-        iconRightContainer: string,
+        iconContainer: string,
     },
     inFocus: ?boolean,
     onFocusOption: (option: VirtualizedOptionConfig) => void,
@@ -34,26 +30,28 @@ class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
     static defaultContainerStyle = {
         display: 'flex',
         alignItems: 'center',
-        cursor: 'pointer',
-        paddingLeft: 5,
+        cursor: 'default',
+        paddingLeft: 8,
         overflow: 'hidden',
         paddingTop: 4,
         paddingBottom: 2,
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
+        fontSize: 14,
     };
 
     static selectedStyle = {
-        fontWeight: 'bold',
+        fontWeight: '600',
+        backgroundColor: '#fbfcfd',
     };
 
     static inFocusStyle = {
-        backgroundColor: 'rgba(0,0,0,0.1)',
+        backgroundColor: '#f3f5f7',
     };
 
     render() {
         const { option, style, onSelect, currentlySelectedValues, classes, inFocus, onFocusOption } = this.props;
-        const { label, iconLeft, iconRight } = option;
+        const { label, icon } = option;
         const isSelected = !!currentlySelectedValues && currentlySelectedValues.includes(option);
         const renderStyle = Object.assign(
             {},
@@ -79,24 +77,15 @@ class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
                     tabIndex={-1}
                     onMouseOver={() => onFocusOption(option)}
                 >
-                    {
-                        iconLeft ? (
-                            <div
-                                className={classes.iconLeftContainer}
-                            >
-                                {iconLeft}
-                            </div>
-                        ) : null
-                    }
                     <div>
                         {label}
                     </div>
                     {
-                        iconRight ? (
+                        icon ? (
                             <div
-                                className={classes.iconRightContainer}
+                                className={classes.iconContainer}
                             >
-                                {iconRight}
+                                {icon}
                             </div>
                         ) : null
                     }

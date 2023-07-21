@@ -1,7 +1,5 @@
 // @flow
-import type {
-    CardDataElementsInformation,
-} from '../../Pages/Search/SearchResults/SearchResults.types';
+import type { CardDataElementsInformation } from '../../SearchBox';
 import type { ListItem, RenderCustomCardActions } from '../../CardList/CardList.types';
 
 export type OwnProps = {|

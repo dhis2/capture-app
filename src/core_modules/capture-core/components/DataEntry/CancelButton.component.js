@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '../Buttons';
-import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
-import { defaultDialogProps } from '../Dialogs/ConfirmDialog.constants';
+import { Button } from '@dhis2/ui';
+import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
+import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
 
 type Props = {
     dataEntryHasChanges: boolean,
@@ -40,9 +40,9 @@ export class CancelButtonComponent extends React.Component<Props, State> {
                 >
                     { i18n.t('Cancel') }
                 </Button>
-                <ConfirmDialog
+                <DiscardDialog
                     {...defaultDialogProps}
-                    onConfirm={this.props.onCancel}
+                    onDestroy={this.props.onCancel}
                     open={this.state.dialogOpen}
                     onCancel={this.handleCancelDiscard}
                 />

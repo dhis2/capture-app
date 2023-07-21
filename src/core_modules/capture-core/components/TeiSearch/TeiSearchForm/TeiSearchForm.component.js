@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { errorCreator } from 'capture-core-utils';
-import { Button } from '../../Buttons/Button.component';
+import { Button } from '@dhis2/ui';
 import { D2Form } from '../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import type { SearchGroup } from '../../../metaData';
@@ -127,11 +127,13 @@ class SearchFormPlain extends React.Component<Props> {
 
         return (
             <div className={minAttributesRequiredClass}>
-                {i18n.t(
-                    'Fill in at least {{minAttributesRequired}} attributes to search',
-                    {
-                        minAttributesRequired: searchGroup.minAttributesRequiredToSearch,
-                    })}
+                {
+                    i18n.t('Fill in at least {{count}} attribute to search', {
+                        count: searchGroup.minAttributesRequiredToSearch,
+                        defaultValue: 'Fill in at least {{count}} attribute to search',
+                        defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+                    })
+                }
             </div>
         );
     }

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'; //eslint-disable-line
-import { ConfirmDialog } from '../components/Dialogs/ConfirmDialog.component';
+import { DiscardDialog } from '../components/Dialogs/DiscardDialog.component';
 
 type Props = {
     dataEntryHasChanges: boolean,
@@ -20,7 +20,7 @@ type State = {
 type DialogConfig = {
     header: string,
     text: string,
-    confirmText: string,
+    destructiveText: string,
     cancelText: string,
 }
 
@@ -78,9 +78,9 @@ const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig
                     <InnerComponent
                         {...passOnProps}
                     />
-                    <ConfirmDialog
+                    <DiscardDialog
                         {...dialogConfig}
-                        onConfirm={this.handleDialogConfirm}
+                        onDestroy={this.handleDialogConfirm}
                         open={this.state.dialogOpen}
                         onCancel={this.handleDialogCancel}
                     />

@@ -23,25 +23,16 @@ export const OptInPlain = ({ classes, programName, handleOptIn, loading }: Plain
         programName,
         interpolation: { escapeValue: false },
     });
-    const modalContent = i18n.t(
-        'By clicking opt-in below, you will start using the new enrollment dashboard in the Capture app ' +
-            'for this Tracker program. At the moment, there is certain functionality from Tracker Capture that ' +
-            'has not yet been added, including relationship and referral functionality. The work on including ' +
-            'this Tracker functionality in Capture is ongoing and will be added in upcoming app releases.',
-    );
-    const modalContentFeedback = i18n.t(
-        'The core team appreciates any feedback on this new functionality which is currently being beta ' +
-            'tested, please report any issues and feedback in the DHIS2 JIRA project.',
-    );
+
+    const modalContent = i18n.t('By clicking opt-in below, you will start using the new enrollment dashboard in the Capture app for this Tracker program. At the moment, there is certain functionality from Tracker Capture that has not yet been added, including relationship and referral functionality. The work on including this Tracker functionality in Capture is ongoing and will be added in upcoming app releases.');
+
+    const modalContentFeedback = i18n.t('The core team appreciates any feedback on this new functionality which is currently being beta tested, please report any issues and feedback in the DHIS2 JIRA project.');
 
     return (
         <div data-test="opt-in">
             <NoticeBox title={title} className={classes.container}>
                 <p>
-                    {i18n.t(
-                        'Click the button below to opt-in to the new enrollment dashboard ' +
-                            'functionality in the Capture app (beta) for this Tracker program for all users.',
-                    )}
+                    {i18n.t('Click the button below to opt-in to the new enrollment dashboard functionality in the Capture app (beta) for this Tracker program for all users.')}
                 </p>
                 <Button onClick={() => setToggle(true)}>
                     {button}

@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { NewRelationship } from '../../../Pages/NewRelationship/NewRelationship.container';
-import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
+import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 
 
@@ -118,12 +118,12 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
                         {...passOnProps}
                     />
                 </Paper>
-                <ConfirmDialog
-                    header={i18n.t('Unsaved changes')}
+                <DiscardDialog
+                    header={i18n.t('Discard unsaved changes?')}
                     text={i18n.t('Leaving this page will discard the selections you made for a new relationship')}
-                    confirmText={i18n.t('Yes, discard')}
-                    cancelText={i18n.t('No, stay here')}
-                    onConfirm={() => this.props.onCancel('relationship')}
+                    destructiveText={i18n.t('Yes, discard changes')}
+                    cancelText={i18n.t('No, cancel')}
+                    onDestroy={() => this.props.onCancel('relationship')}
                     open={!!this.state.discardDialogOpen}
                     onCancel={this.handleCancelDiscard}
                 />

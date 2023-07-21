@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '../../Buttons/Button.component';
+import { Button } from '@dhis2/ui';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 
 const getStyles = (theme: Theme) => ({

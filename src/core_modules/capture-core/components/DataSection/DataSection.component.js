@@ -12,11 +12,13 @@ const styles = {
         marginBottom: spacersNum.dp16,
     },
     sectionHeader: {
+        color: colors.grey900,
+        fontSize: 14,
+        fontWeight: 500,
         backgroundColor: colors.grey300,
-        color: '#404B5A',
-        fontSize: 12,
+        padding: '4px 8px',
+        marginBottom: '8px',
         width: 'fit-content',
-        padding: 4,
     },
 };
 

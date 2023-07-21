@@ -4,8 +4,7 @@
 
 .chipContainer {
     position: absolute;
-    padding-top: 3px;
-    padding-left: 1px;
+    padding-top: 1px;
     z-index: 10;
     top: 0;
     left: 0;
@@ -16,12 +15,12 @@
 }
 
 .inputContainer {
-    padding: 2px;
+    padding: 0px;
 }
 
 .inputContainer:focus {
-    border: 2px solid rgb(20, 124, 215);
-    border-radius: 5px;
-    padding: 0px;
     outline: none;
+    box-shadow: inset 0 0 0 2px #147cd7;
+    border-color: #147cd7;
+    border-radius: 3px;
 }

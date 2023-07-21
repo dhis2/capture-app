@@ -31,6 +31,7 @@ const searchAttributeElementTypes = {
     [dataElementTypes.DATE]: dataElementTypes.DATE_RANGE,
     [dataElementTypes.DATETIME]: dataElementTypes.DATETIME_RANGE,
     [dataElementTypes.TIME]: dataElementTypes.TIME_RANGE,
+    [dataElementTypes.MULTI_TEXT]: dataElementTypes.TEXT,
 };
 
 
@@ -101,7 +102,6 @@ export class SearchGroupFactory {
 
             o.displayInForms = true;
             o.displayInReports = searchAttribute.displayInList;
-            o.compulsory = !!unique;
             o.disabled = false;
             o.type = SearchGroupFactory._getSearchAttributeValueType(valueType, unique);
         });
