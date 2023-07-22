@@ -5,13 +5,10 @@ import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../metaData';
-import { RELATIONSHIP_ENTITIES } from '../../common/constants';
-import { convertServerToClient, convertClientToList } from '../../../../converters';
+import { RELATIONSHIP_ENTITIES } from '../constants';
+import { convertClientToList, convertServerToClient } from '../../../../converters';
 import type { GroupedLinkedEntities, LinkedEntityData } from './types';
-import type {
-    InputRelationshipData,
-    RelationshipTypes,
-} from '../Types';
+import type { InputRelationshipData, RelationshipTypes } from '../Types';
 
 
 const getFallbackFieldsByRelationshipEntity = {
@@ -155,68 +152,64 @@ export const useGroupedLinkedEntities = (
     sourceId: string,
     relationshipTypes: ?RelationshipTypes,
     relationships?: Array<InputRelationshipData>,
-): GroupedLinkedEntities => {
-    const groupedLinkedEntities = useMemo(() => {
-        if (!relationships?.length || !relationshipTypes?.length) {
-            return [];
-        }
+): GroupedLinkedEntities => useMemo(() => {
+    if (!relationships?.length || !relationshipTypes?.length) {
+        return [];
+    }
 
+    return relationships
+        .sort((a, b) => moment(b.createdAt)
+            .diff(moment(a.createdAt)))
+        .reduce((accGroupedLinkedEntities, relationship) => {
+            const {
+                relationshipType: relationshipTypeId,
+                from: fromEntity,
+                to: toEntity,
+                createdAt: relationshipCreatedAt,
+            } = relationship;
 
-        return relationships
-            .sort((a, b) => moment(b.createdAt).diff(moment(a.createdAt)))
-            .reduce((accGroupedLinkedEntities, relationship) => {
-                const {
-                    relationshipType: relationshipTypeId,
-                    from: fromEntity,
-                    to: toEntity,
-                    createdAt: relationshipCreatedAt,
-                } = relationship;
-
-                const relationshipType = relationshipTypes.find(type => type.id === relationshipTypeId);
-                if (!relationshipType) {
-                    log.error(
-                        errorCreator('Could not find relationshipType')({ relationshipTypeId, relationshipTypes }),
-                    );
-                    return accGroupedLinkedEntities;
-                }
-
-                const apiLinkedEntity = determineLinkedEntity(fromEntity, toEntity, sourceId);
-                if (!apiLinkedEntity) {
-                    return accGroupedLinkedEntities;
-                }
-
-                const linkedEntityData = getLinkedEntityData(apiLinkedEntity, relationshipCreatedAt);
-                if (!linkedEntityData) {
-                    return accGroupedLinkedEntities;
-                }
-
-                const groupId = `${relationshipTypeId}-${apiLinkedEntity === fromEntity ? 'from' : 'to'}`;
-                const group = accGroupedLinkedEntities.find(({ id }) => id === groupId);
-                if (group) {
-                    group.linkedEntities = [
-                        ...group.linkedEntities,
-                        linkedEntityData,
-                    ];
-                } else {
-                    const { constraint, name } = apiLinkedEntity === fromEntity ?
-                        { constraint: relationshipType.fromConstraint, name: relationshipType.toFromName } :
-                        { constraint: relationshipType.toConstraint, name: relationshipType.fromToName };
-
-                    const columns = getColumns(constraint);
-                    const context = getContext(constraint);
-
-                    accGroupedLinkedEntities.push({
-                        id: groupId,
-                        name: name || relationshipType.displayName,
-                        linkedEntities: [linkedEntityData],
-                        columns,
-                        context,
-                    });
-                }
-
+            const relationshipType = relationshipTypes.find(type => type.id === relationshipTypeId);
+            if (!relationshipType) {
+                log.error(
+                    errorCreator('Could not find relationshipType')({ relationshipTypeId, relationshipTypes }),
+                );
                 return accGroupedLinkedEntities;
-            }, []);
-    }, [relationships, relationshipTypes, sourceId]);
+            }
 
-    return groupedLinkedEntities;
-};
+            const apiLinkedEntity = determineLinkedEntity(fromEntity, toEntity, sourceId);
+            if (!apiLinkedEntity) {
+                return accGroupedLinkedEntities;
+            }
+
+            const linkedEntityData = getLinkedEntityData(apiLinkedEntity, relationshipCreatedAt);
+            if (!linkedEntityData) {
+                return accGroupedLinkedEntities;
+            }
+
+            const groupId = `${relationshipTypeId}-${apiLinkedEntity === fromEntity ? 'from' : 'to'}`;
+            const group = accGroupedLinkedEntities.find(({ id }) => id === groupId);
+            if (group) {
+                group.linkedEntities = [
+                    ...group.linkedEntities,
+                    linkedEntityData,
+                ];
+            } else {
+                const { constraint, name } = apiLinkedEntity === fromEntity ?
+                    { constraint: relationshipType.fromConstraint, name: relationshipType.toFromName } :
+                    { constraint: relationshipType.toConstraint, name: relationshipType.fromToName };
+
+                const columns = getColumns(constraint);
+                const context = getContext(constraint);
+
+                accGroupedLinkedEntities.push({
+                    id: groupId,
+                    name: name || relationshipType.displayName,
+                    linkedEntities: [linkedEntityData],
+                    columns,
+                    context,
+                });
+            }
+
+            return accGroupedLinkedEntities;
+        }, []);
+}, [relationships, relationshipTypes, sourceId]);

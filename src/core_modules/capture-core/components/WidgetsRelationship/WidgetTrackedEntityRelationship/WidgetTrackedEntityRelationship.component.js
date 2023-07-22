@@ -15,6 +15,8 @@ export const WidgetTrackedEntityRelationship = ({
     onLinkedRecordClick,
     onOpenAddRelationship,
     onCloseAddRelationship,
+    onSelectFindMode,
+    renderTrackedEntitySearch,
 }: WidgetTrackedEntityRelationshipProps) => {
     const { data: relationships, isError } = useRelationships(teiId, RelationshipSearchEntities.TRACKED_ENTITY);
 
@@ -37,12 +39,15 @@ export const WidgetTrackedEntityRelationship = ({
             {
                 relationshipTypes => (
                     <NewTrackedEntityRelationship
+                        teiId={teiId}
                         renderElement={addRelationshipRenderElement}
                         relationshipTypes={relationshipTypes}
                         trackedEntityTypeId={trackedEntityTypeId}
                         programId={programId}
                         onOpenAddRelationship={onOpenAddRelationship}
                         onCloseAddRelationship={onCloseAddRelationship}
+                        onSelectFindMode={onSelectFindMode}
+                        renderTrackedEntitySearch={renderTrackedEntitySearch}
                     />
                 )
             }

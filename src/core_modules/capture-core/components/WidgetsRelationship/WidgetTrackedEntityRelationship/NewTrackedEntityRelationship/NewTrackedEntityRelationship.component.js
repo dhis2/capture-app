@@ -12,6 +12,8 @@ import {
 } from './LinkedEntityMetadataSelector';
 import { RetrieverModeSelector } from './RetrieverModeSelector';
 import type { ComponentProps, StyledComponentProps } from './NewTrackedEntityRelationship.types';
+import { useAddRelationship } from './hooks/useAddRelationship';
+import { TARGET_SIDES } from './common';
 
 const styles = {
     container: {
@@ -38,12 +40,58 @@ const NewTrackedEntityRelationshipPlain = ({
     relationshipTypes,
     trackedEntityTypeId,
     programId,
+    teiId,
     onCancel,
+    onSave,
+    renderTrackedEntitySearch,
+    onSelectFindMode,
     classes,
 }: StyledComponentProps) => {
+    const { mutate } = useAddRelationship({
+        teiId,
+        onMutate: () => onSave(),
+    });
+
     const [currentStep, setCurrentStep] =
         useState(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA);
     const [selectedLinkedEntityMetadata: LinkedEntityMetadata, setSelectedLinkedEntityMetadata] = useState(undefined);
+
+    const onLinkToTrackedEntityFromSearch = useCallback(
+        (linkedTrackedEntityId: string, attributes?: { [attributeId: string]: string }) => {
+            if (!selectedLinkedEntityMetadata) return;
+            const { relationshipId, targetSide } = selectedLinkedEntityMetadata;
+
+            const apiData = targetSide === TARGET_SIDES.TO ?
+                { from: { trackedEntity: { trackedEntity: teiId } }, to: { trackedEntity: { trackedEntity: linkedTrackedEntityId } } } :
+                { from: { trackedEntity: { trackedEntity: linkedTrackedEntityId } }, to: { trackedEntity: { trackedEntity: teiId } } };
+
+            const clientData = {
+                createdAt: new Date().toISOString(),
+                ...apiData,
+            };
+
+            if (attributes) {
+                const targetSideLC = targetSide.toLowerCase();
+                clientData[targetSideLC].trackedEntity = {
+                    ...clientData[targetSideLC].trackedEntity,
+                    attributes: Object.keys(attributes).map(attributeId => ({
+                        attribute: attributeId,
+                        value: attributes[attributeId],
+                    })),
+                };
+            }
+
+            mutate({
+                relationship: {
+                    relationshipType: relationshipId,
+                    ...apiData,
+                },
+                clientRelationship: {
+                    relationshipType: relationshipId,
+                    ...clientData,
+                },
+            });
+        }, [mutate, selectedLinkedEntityMetadata, teiId]);
 
     const handleNavigation = useCallback(
         (destination: $Values<typeof NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS>) => {
@@ -55,10 +103,22 @@ const NewTrackedEntityRelationshipPlain = ({
         setCurrentStep(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_RETRIEVER_MODE);
     }, []);
 
-    const handleSearchRetrieverModeSelected = useCallback(() =>
-        setCurrentStep(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY), []);
+    const handleSearchRetrieverModeSelected = useCallback(() => {
+        if (selectedLinkedEntityMetadata) {
+            onSelectFindMode && onSelectFindMode({
+                findMode: 'TEI_SEARCH',
+                relationshipConstraint: {
+                    programId: selectedLinkedEntityMetadata?.programId,
+                    trackedEntityTypeId: selectedLinkedEntityMetadata.trackedEntityTypeId,
+                },
+            });
+        }
+        setCurrentStep(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY);
+    }, [onSelectFindMode, selectedLinkedEntityMetadata]);
+
     const handleNewRetrieverModeSelected = useCallback(() =>
         setCurrentStep(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.NEW_LINKED_ENTITY), []);
+
 
     const stepContents = useMemo(() => {
         if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA.id) {
@@ -85,39 +145,28 @@ const NewTrackedEntityRelationshipPlain = ({
         }
 
         // Steps below will be implemented by new PR
-        /* if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY.id) {
+        if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY.id) {
             const {
                 trackedEntityTypeId: linkedEntityTrackedEntityTypeId,
                 programId: linkedEntityProgramId,
                 // $FlowFixMe business logic dictates that we will have the linkedEntityMetadata at this step
             }: LinkedEntityMetadata = selectedLinkedEntityMetadata;
 
-            return (
-                <TrackedEntityFinder
-                    trackedEntityTypeId={linkedEntityTrackedEntityTypeId}
-                    defaultProgramId={linkedEntityProgramId}
-                    getPrograms={getPrograms}
-                    getSearchGroups={getSearchGroups}
-                    getSearchGroupsAsync={getSearchGroupsAsync}
-                />
-            );
-        } */
+            if (renderTrackedEntitySearch) {
+                return renderTrackedEntitySearch(
+                    linkedEntityTrackedEntityTypeId,
+                    linkedEntityProgramId,
+                    onLinkToTrackedEntityFromSearch,
+                );
+            }
+        }
 
         return (
             <div>
                 {i18n.t('Missing implementation step')}
             </div>
         );
-    }, [
-        currentStep.id,
-        handleLinkedEntityMetadataSelection,
-        handleNewRetrieverModeSelected,
-        handleSearchRetrieverModeSelected,
-        programId,
-        relationshipTypes,
-        selectedLinkedEntityMetadata?.trackedEntityName,
-        trackedEntityTypeId,
-    ]);
+    }, [currentStep.id, handleLinkedEntityMetadataSelection, handleNewRetrieverModeSelected, handleSearchRetrieverModeSelected, onLinkToTrackedEntityFromSearch, programId, relationshipTypes, renderTrackedEntitySearch, selectedLinkedEntityMetadata, trackedEntityTypeId]);
 
     return (
         <div className={classes.container}>

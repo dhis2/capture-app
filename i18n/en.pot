@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
-"PO-Revision-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-07-27T19:19:14.053Z\n"
+"PO-Revision-Date: 2023-07-27T19:19:14.053Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -926,6 +926,20 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
+msgid "Selected program"
+msgstr "Selected program"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Search {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Search by attributes"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] "Fill in at least {{count}} attribute to search"
+msgstr[1] "Fill in at least {{count}} attributes to search"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
 
@@ -986,19 +1000,11 @@ msgstr "You can also choose a program from the top bar and search in that progra
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] "Fill in at least {{count}} attribute to search"
-msgstr[1] "Fill in at least {{count}} attributes to search"
-
 msgid "Search {{name}}"
 msgstr "Search {{name}}"
 
 msgid "Search by {{name}}"
 msgstr "Search by {{name}}"
-
-msgid "Search by attributes"
-msgstr "Search by attributes"
 
 msgid "all programs"
 msgstr "all programs"
@@ -1056,12 +1062,6 @@ msgstr "Missing search criteria"
 
 msgid "Results found"
 msgstr "Results found"
-
-msgid "Selected program"
-msgstr "Selected program"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Search {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr "Saved lists in this program"
