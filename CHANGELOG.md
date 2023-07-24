@@ -1,3 +1,10 @@
+# [100.35.0](https://github.com/dhis2/capture-app/compare/v100.34.1...v100.35.0) (2023-07-24)
+
+
+### Features
+
+* [DHIS2-14775][DHIS2-14729] Render data entry plugins ([80a218e](https://github.com/dhis2/capture-app/commit/80a218e2dea3f4b25694b25e491dac20a310b8bb))
+
 ## [100.34.1](https://github.com/dhis2/capture-app/compare/v100.34.0...v100.34.1) (2023-07-12)
 
 
