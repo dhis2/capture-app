@@ -11,10 +11,15 @@ import { errorCreator } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
-import { convertValue as convertClientToView } from '../../converters/clientToView';
 import type { Props } from './widgetProfile.types';
-import { useProgram, useTrackedEntityInstances, useClientAttributesWithSubvalues, useUserRoles } from './hooks';
-import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, getTeiDisplayName } from './DataEntry';
+import {
+    useProgram,
+    useTrackedEntityInstances,
+    useClientAttributesWithSubvalues,
+    useUserRoles,
+    useTeiDisplayName,
+} from './hooks';
+import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
 
 const styles = {
     header: {
@@ -68,18 +73,13 @@ const WidgetProfilePlain = ({
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
     const error = programsError || trackedEntityInstancesError || userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
-    const teiDisplayName = getTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
+    const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
-        .map(({ optionSet, attribute, key, value: clientValue, valueType }) => {
-            let value;
-            if (optionSet && optionSet.id) {
-                const selectedOption = optionSet.options.find(option => option.code === clientValue);
-                value = selectedOption && selectedOption.name;
-            } else {
-                value = convertClientToView(clientValue, valueType);
-            }
+        .map((clientAttribute) => {
+            const { attribute, key } = clientAttribute;
+            const value = convertClientToView(clientAttribute);
             return {
                 attribute, key, value, reactKey: attribute,
             };

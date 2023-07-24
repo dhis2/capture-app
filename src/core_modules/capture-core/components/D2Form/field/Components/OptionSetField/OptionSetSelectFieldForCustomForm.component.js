@@ -8,15 +8,15 @@ import {
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
+    withOptionsIconElement,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
     withCustomElementContainer,
+    withRulesOptionVisibilityHandler,
 } from '../internal';
-import { withOptionsIconElement } from './withOptionsIconElement';
 import customFormStyles from './optionSetSelectFieldForCustomForm.module.css';
-import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 

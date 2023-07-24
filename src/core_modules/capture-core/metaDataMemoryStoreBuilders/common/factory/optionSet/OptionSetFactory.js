@@ -65,7 +65,7 @@ export class OptionSetFactory {
             return null;
         }
 
-        dataElement.type = onGetDataElementType(cachedOptionSet.valueType);
+        dataElement.type = onGetDataElementType(dataElement.type || cachedOptionSet.valueType);
         const optionsPromises = cachedOptionSet
             .options
             .map(async (cachedOption) => {

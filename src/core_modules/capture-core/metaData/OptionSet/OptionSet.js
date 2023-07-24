@@ -16,6 +16,7 @@ export class OptionSet {
         UNSUPPORTED_VIEWTYPE: 'Tried to set an unsupported viewType',
         UNSUPPORTED_INPUTTYPE: 'Tried to set an unsuported inputType',
     };
+    static multiOptionsValuesSeparator = ',';
 
     _id: ?string;
     _emptyText: ?string;
@@ -184,6 +185,18 @@ export class OptionSet {
     getOptionsText(values: Array<Value>): Array<string> {
         const options = this.getOptions(values);
         return options.map((option: Option) => option.text);
+    }
+
+    getMultiOptionsText(codes: string): string {
+        return codes.split(OptionSet.multiOptionsValuesSeparator).reduce((acc, code) => {
+            const option = this.options.find(o => o.value === code);
+            if (option) {
+                acc.push(option.text);
+            } else {
+                log.warn(errorCreator(OptionSet.errorMessages.OPTION_NOT_FOUND)({ OptionSet: this, code }));
+            }
+            return acc;
+        }, []).join(`${OptionSet.multiOptionsValuesSeparator} `);
     }
 
     getOptionsTextAsString(values: Array<Value>): string {

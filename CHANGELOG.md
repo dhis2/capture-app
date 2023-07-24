@@ -1,3 +1,52 @@
+## [100.34.1](https://github.com/dhis2/capture-app/compare/v100.34.0...v100.34.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6edf2e8](https://github.com/dhis2/capture-app/commit/6edf2e86370a1e51460282760836c9271aceb123))
+
+# [100.34.0](https://github.com/dhis2/capture-app/compare/v100.33.5...v100.34.0) (2023-07-11)
+
+
+### Features
+
+* [DHIS2-14778][DHIS2-14779][DHIS2-14780][DHIS2-14781] MULTI_TEXT field ([#3231](https://github.com/dhis2/capture-app/issues/3231)) ([d7b7100](https://github.com/dhis2/capture-app/commit/d7b7100cadfa4d3f3c1a162161f34dc7df2833e8))
+
+## [100.33.5](https://github.com/dhis2/capture-app/compare/v100.33.4...v100.33.5) (2023-07-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5a252ff](https://github.com/dhis2/capture-app/commit/5a252ff89fed79ddbbb6b3a8420fadcae1d9dadd))
+
+## [100.33.4](https://github.com/dhis2/capture-app/compare/v100.33.3...v100.33.4) (2023-07-07)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([446c1fe](https://github.com/dhis2/capture-app/commit/446c1fedd79cc8a816680c2a066d0dd13cf4cd27))
+
+## [100.33.3](https://github.com/dhis2/capture-app/compare/v100.33.2...v100.33.3) (2023-07-06)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5648b98](https://github.com/dhis2/capture-app/commit/5648b98b251008a2202ce596f12d8c57e17b914d))
+
+## [100.33.2](https://github.com/dhis2/capture-app/compare/v100.33.1...v100.33.2) (2023-07-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6d24a67](https://github.com/dhis2/capture-app/commit/6d24a67df569d60ee451474f9c8f45836459ca03))
+
+## [100.33.1](https://github.com/dhis2/capture-app/compare/v100.33.0...v100.33.1) (2023-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-15312] AOC for event programs ([#3293](https://github.com/dhis2/capture-app/issues/3293)) ([ed1983c](https://github.com/dhis2/capture-app/commit/ed1983c50ba99a72a92d70af7d4fd52e9264c99d))
+
 # [100.33.0](https://github.com/dhis2/capture-app/compare/v100.32.16...v100.33.0) (2023-06-27)
 
 

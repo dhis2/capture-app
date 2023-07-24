@@ -12,6 +12,7 @@ import type {
 import { DataElement, DateDataElement, dataElementTypes } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { OptionSetFactory } from '../../../common/factory';
+import { isNotValidOptionSet } from '../../../../utils/isNotValidOptionSet';
 
 export class DataElementFactory {
     static propertyNames = {
@@ -19,6 +20,11 @@ export class DataElementFactory {
         DESCRIPTION: 'DESCRIPTION',
         SHORT_NAME: 'SHORT_NAME',
         FORM_NAME: 'FORM_NAME',
+    };
+
+    static errorMessages = {
+        MULIT_TEXT_WITH_NO_OPTIONS_SET:
+            'could not create the metadata because a MULIT_TEXT without associated option sets was found',
     };
 
     static _getDataElementType(cachedValueType: string) {
@@ -97,6 +103,10 @@ export class DataElementFactory {
         const dataElement = new DataElement();
         dataElement.type = dataElementType;
         await this._setBaseProperties(dataElement, cachedProgramStageDataElement, cachedDataElement);
+        if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
+            log.error(errorCreator(DataElementFactory.errorMessages.MULIT_TEXT_WITH_NO_OPTIONS_SET)({ dataElement }));
+            return null;
+        }
         return dataElement;
     }
 
