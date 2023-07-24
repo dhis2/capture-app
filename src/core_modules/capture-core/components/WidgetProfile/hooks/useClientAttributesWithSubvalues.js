@@ -1,9 +1,13 @@
 // @flow
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { useState, useCallback, useEffect } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { convertValue as convertServerToClient } from '../../../converters/serverToClient';
 import { subValueGetterByElementType } from './getSubValueForTei';
+import { isNotValidOptionSet } from '../DataEntry';
+import { Option } from '../../../metaData';
 
 type InputProgramData = {
     programTrackedEntityAttributes: Array<{
@@ -11,11 +15,8 @@ type InputProgramData = {
             id: string,
             displayFormName?: ?string,
             optionSet?: ?{
-                id: string,
-                options?: ?Array<{
-                    code: string,
-                    name: string,
-                }>,
+                id: ?string,
+                options: Array<Option>,
             },
             valueType: string,
             unique: boolean,
@@ -33,6 +34,9 @@ type InputAttribute = {
     value: string,
     valueType: string,
 };
+
+const MULIT_TEXT_WITH_NO_OPTIONS_SET =
+    'could not create the metadata because a MULIT_TEXT without associated option sets was found';
 
 export const useClientAttributesWithSubvalues = (program: InputProgramData, trackedEntityInstanceAttributes: Array<InputAttribute>) => {
     const dataEngine = useDataEngine();
@@ -61,6 +65,10 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
 
                 const acc = await promisedAcc;
 
+                if (isNotValidOptionSet(valueType, optionSet)) {
+                    log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ optionSet }));
+                    return acc;
+                }
                 return [
                     ...acc,
                     {

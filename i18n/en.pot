@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
-"PO-Revision-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
+"PO-Revision-Date: 2023-06-01T08:11:59.116Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -482,6 +482,12 @@ msgstr "Uploading image"
 msgid "Select image"
 msgstr "Select image"
 
+msgid "Type to filter options"
+msgstr "Type to filter options"
+
+msgid "No match found"
+msgstr "No match found"
+
 msgid "Search"
 msgstr "Search"
 
@@ -822,6 +828,9 @@ msgstr "You can also choose a program from the top bar and create in that progra
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "New Enrollment in program{{escape}} {{programName}}"
+
+msgid "Save {{trackedEntityTypeName}}"
+msgstr "Save {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Save {{trackedEntityName}}"
@@ -1320,9 +1329,6 @@ msgstr "There was a problem saving changes"
 msgid "Try again or contact your system administrator for support"
 msgstr "Try again or contact your system administrator for support"
 
-msgid "tracked entity instance"
-msgstr "tracked entity instance"
-
 msgid "Fix errors in the form to continue."
 msgstr "Fix errors in the form to continue."
 
@@ -1331,6 +1337,12 @@ msgstr "Profile widget could not be loaded. Please try again later"
 
 msgid "{{TETName}} profile"
 msgstr "{{TETName}} profile"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "tracked entity instance"
+msgstr "tracked entity instance"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"

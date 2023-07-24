@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
+import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const getStyles = () => ({
     iconContainer: {
@@ -31,7 +31,7 @@ type Props = {
 };
 
 /**
- * Converts icon objects in options to React nodes, with property key iconRight.
+ * Converts icon objects in options to React nodes, with property key icon.
 */
 
 export const withOptionsIconElement = () =>
@@ -69,8 +69,7 @@ export const withOptionsIconElement = () =>
                 return options
                     .map(option => ({
                         ...option,
-                        iconRight: this.getIcon(option.icon),
-                        iconLeft: null,
+                        icon: this.getIcon(option.icon),
                     }));
             }
 

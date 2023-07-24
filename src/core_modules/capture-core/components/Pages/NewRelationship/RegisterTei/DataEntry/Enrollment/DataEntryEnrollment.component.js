@@ -8,37 +8,34 @@ import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
 import type { Props } from './dataEntryEnrollment.types';
 
 const NewEnrollmentRelationshipPlain =
-  ({
-      theme,
-      onSave,
-      enrollmentMetadata,
-      programId,
-      duplicatesReviewPageSize,
-      renderDuplicatesDialogActions,
-      renderDuplicatesCardActions,
-      ExistingUniqueValueDialogActions,
-  }: Props) => {
-      const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
-      const { trackedEntityType } = enrollmentMetadata || {};
-      const trackedEntityTypeNameLC = trackedEntityType.name.toLocaleLowerCase();
+    ({
+        theme,
+        onSave,
+        programId,
+        duplicatesReviewPageSize,
+        renderDuplicatesDialogActions,
+        renderDuplicatesCardActions,
+        ExistingUniqueValueDialogActions,
+    }: Props) => {
+        const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
 
-      return (
-          <EnrollmentRegistrationEntry
-              id={DATA_ENTRY_ID}
-              enrollmentMetadata={enrollmentMetadata}
-              selectedScopeId={programId}
-              saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', {
-                  trackedEntityTypeName: trackedEntityTypeNameLC,
-                  interpolation: { escapeValue: false },
-              })}
-              fieldOptions={fieldOptions}
-              onSave={onSave}
-              duplicatesReviewPageSize={duplicatesReviewPageSize}
-              renderDuplicatesDialogActions={renderDuplicatesDialogActions}
-              renderDuplicatesCardActions={renderDuplicatesCardActions}
-              ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
-          />
-      );
-  };
+
+        return (
+            <EnrollmentRegistrationEntry
+                id={DATA_ENTRY_ID}
+                selectedScopeId={programId}
+                fieldOptions={fieldOptions}
+                saveButtonText={(trackedEntityTypeName: string) => i18n.t('Save new {{trackedEntityTypeName}} and link', {
+                    trackedEntityTypeName,
+                    interpolation: { escapeValue: false },
+                })}
+                onSave={onSave}
+                duplicatesReviewPageSize={duplicatesReviewPageSize}
+                renderDuplicatesDialogActions={renderDuplicatesDialogActions}
+                renderDuplicatesCardActions={renderDuplicatesCardActions}
+                ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
+            />
+        );
+    };
 
 export const NewEnrollmentRelationship = withTheme()(NewEnrollmentRelationshipPlain);

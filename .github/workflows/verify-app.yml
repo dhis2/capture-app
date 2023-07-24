@@ -95,7 +95,7 @@ jobs:
   instance-version:
     runs-on: ubuntu-latest
     needs: [lint, flow, unit-tests]
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    if: "!(startsWith(github.event.head_commit.message, 'fix(translations)') && github.actor == 'dhis2-bot') && !contains(github.event.head_commit.message, '[skip ci]')"
     outputs:
       version: ${{ steps.instance-version.outputs.version }}
     steps:
@@ -109,7 +109,6 @@ jobs:
   cypress-dev:
     runs-on: ubuntu-latest
     needs: instance-version
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     container: cypress/browsers:node14.7.0-chrome84
     strategy:
       # when one test fails, DO NOT cancel the other
@@ -118,7 +117,7 @@ jobs:
       # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
       matrix:
-        containers: [1, 2, 3, 4, 5, 6, 7, 8]
+        containers: [1, 2, 3, 4, 5]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1

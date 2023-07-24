@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Central Kurdish (https://app.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -260,8 +260,8 @@ msgstr "زیادکردنی پەوەندی بۆ حاڵەت"
 msgid "Go back to event without saving relationship"
 msgstr "بگەڕێەوە بۆ حاڵەتەکە بێئەوەی پەوەندیەکە تۆمار بکەیت"
 
-msgid "Unsaved changes"
-msgstr "گۆڕانکاریە تۆمارنەکراوەکان"
+msgid "Discard unsaved changes?"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -270,11 +270,11 @@ msgstr ""
 "بەجێهێشتنی ئەم پەڕەیە هەڵبژاردنەکانت هەڵدەسپێری کە بۆ پەیوەندیە نوێیەکان "
 "کردووتە"
 
-msgid "Yes, discard"
-msgstr "بەڵێ، لایببە"
+msgid "Yes, discard changes"
+msgstr ""
 
-msgid "No, stay here"
-msgstr "نەخێر، بمێنەوە"
+msgid "No, cancel"
+msgstr ""
 
 msgid "New event"
 msgstr "رووداوي نوي"
@@ -347,20 +347,8 @@ msgstr ""
 msgid "Do you want to create another event?"
 msgstr ""
 
-msgid "No, cancel"
-msgstr ""
-
 msgid "Yes, create new event"
 msgstr ""
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "بەجێهێشنتی ئەم پەڕەیە هەموو چاڵآکیەکانت دەسرێتەوە کە کردووتە"
-
-msgid "Warnings found"
-msgstr "ئاگادارکردنەوە دۆزرایەوە"
-
-msgid "Abort"
-msgstr "دەرچوون"
 
 msgid "Back to form"
 msgstr "گەڕانەوە بۆ فۆرمەکە"
@@ -387,6 +375,11 @@ msgstr "کردارەکان کاردەکەن"
 
 msgid "Sort"
 msgstr "پۆلینکردن"
+
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr "هیچ ئیڤێنتێک نیە بۆ پشاندان"
@@ -592,10 +585,40 @@ msgstr ""
 msgid "Write comment"
 msgstr "کۆمێنت بنووسە"
 
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
+
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
 
 msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
 msgstr ""
 
 msgid "Yes, opt in"
@@ -1195,11 +1218,23 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] ""
+msgstr[1] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1262,7 +1297,7 @@ msgstr "دةستكاري"
 msgid "New {{ eventName }} event"
 msgstr ""
 
-msgid "This event is not yet preserved and cannot be edited"
+msgid "To open this event, please wait until saving is complete"
 msgstr ""
 
 msgid "Show {{ rest }} more"
@@ -1313,6 +1348,9 @@ msgstr "زانیاریەکان دابەزێنە"
 msgid "an error occurred loading working lists"
 msgstr "هەڵەیەک ڕوویدا لە هێنانی  لیستی کارکردن"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Registration Date"
 msgstr ""
 
@@ -1322,10 +1360,16 @@ msgstr ""
 msgid "Enrollment status"
 msgstr ""
 
-msgid "Assigned to"
+msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Choose a program stage to filter by {{label}}"
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1471,6 +1515,9 @@ msgstr "فرەلاکە بسڕەوە"
 
 msgid "Set area"
 msgstr "ناوچە دیاریبکە"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "مۆدی گونجان"
