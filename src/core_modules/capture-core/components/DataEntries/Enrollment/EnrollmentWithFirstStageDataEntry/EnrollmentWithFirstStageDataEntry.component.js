@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { DataEntry } from '../../../DataEntry/DataEntry.container';
+import { DataEntry } from '../../../DataEntry';
 import {
     withInternalChangeHandler,
     withLabel,
