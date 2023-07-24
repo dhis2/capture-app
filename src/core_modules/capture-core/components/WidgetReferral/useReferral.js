@@ -1,48 +1,48 @@
 // @flow
-import { useEffect, useState, useCallback } from 'react';
+import { useMemo } from 'react';
 import { referralStatus } from './constants';
 import { getUserStorageController } from '../../storageControllers';
 import { userStores } from '../../storageControllers/stores';
+import { useIndexedDBQuery } from '../../utils/reactQueryHelpers';
+
+const getRelationshipTypeFromIndexedDB = () => {
+    const storageController = getUserStorageController();
+    return storageController.getAll(userStores.RELATIONSHIP_TYPES);
+};
 
 export const useReferral = (programStageId: string) => {
-    const [currentReferralStatus, setReferralStatus] = useState();
-    const [selectedRelationshipTypes, setSelectedRelationshipTypes] = useState([]);
+    const { data: relationshipTypes } = useIndexedDBQuery('relationshipTypes',
+        () => getRelationshipTypeFromIndexedDB(), {
+            select: allRelationshipTypes => allRelationshipTypes
+                ?.filter(relationshipType => relationshipType.referral && relationshipType.access.data.write) ?? [],
+        });
 
-    const getRelationshipTypeFromIndexedDB = useCallback(async () => {
-        const storageController = getUserStorageController();
-        const allRelationshipTypes = await storageController.getAll(userStores.RELATIONSHIP_TYPES);
-        const referrableRelationshipTypes = allRelationshipTypes
-            .filter(relationshipType => relationshipType.referral && relationshipType.access.data.write);
+    const currentReferralStatus = useMemo(() => {
+        if (relationshipTypes) {
+            if (relationshipTypes.length === 1) {
+                const { fromConstraint, toConstraint } = relationshipTypes[0];
 
-        setSelectedRelationshipTypes(referrableRelationshipTypes);
-    }, []);
-
-    useEffect(() => {
-        getRelationshipTypeFromIndexedDB();
-    }, [getRelationshipTypeFromIndexedDB]);
-
-    useEffect(() => {
-        if (selectedRelationshipTypes.length === 1) {
-            const { fromConstraint, toConstraint } = selectedRelationshipTypes[0];
-
-            if ((fromConstraint?.programStage?.id === programStageId
-                || toConstraint?.programStage?.id === programStageId)
-            ) {
-                setReferralStatus(referralStatus.REFERRABLE);
+                if ((fromConstraint?.programStage?.id === programStageId
+                    || toConstraint?.programStage?.id === programStageId)
+                ) {
+                    return referralStatus.REFERRABLE;
+                }
+            } else if (relationshipTypes.length > 1) {
+                return referralStatus.AMBIGUOUS_REFERRALS;
             }
-        } else if (selectedRelationshipTypes.length > 1) {
-            setReferralStatus(referralStatus.AMBIGUOUS_REFERRALS);
         }
-    }, [
-        setSelectedRelationshipTypes,
-        selectedRelationshipTypes,
-        setReferralStatus,
-        programStageId,
-    ]);
+        return null;
+    }, [programStageId, relationshipTypes]);
+
+    const selectedRelationshipType = currentReferralStatus === referralStatus.REFERRABLE ?
+        relationshipTypes?.[0] : undefined;
+    const constraint = selectedRelationshipType?.toConstraint?.programStage?.id === programStageId ?
+        selectedRelationshipType?.fromConstraint : selectedRelationshipType?.toConstraint;
 
 
     return {
         currentReferralStatus,
-        selectedRelationshipTypes,
+        selectedRelationshipType,
+        constraint,
     };
 };

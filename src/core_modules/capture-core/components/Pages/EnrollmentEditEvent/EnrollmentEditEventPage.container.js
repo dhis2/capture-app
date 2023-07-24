@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
-import { useCommonEnrollmentDomainData, showEnrollmentError, updateEnrollmentEvents } from '../common/EnrollmentOverviewDomain';
+import { useCommonEnrollmentDomainData, showEnrollmentError, updateEnrollmentEvent } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
@@ -106,7 +106,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
 
     const onHandleScheduleSave = (eventData: Object) => {
-        dispatch(updateEnrollmentEvents(eventId, eventData));
+        dispatch(updateEnrollmentEvent(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;

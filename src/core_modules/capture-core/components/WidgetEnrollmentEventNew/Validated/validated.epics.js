@@ -1,22 +1,24 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { v4 as uuid } from 'uuid';
 import { map } from 'rxjs/operators';
-import { newEventWidgetActionTypes, saveEvent } from './validated.actions';
-
+import { newEventWidgetActionTypes, saveEvents } from './validated.actions';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedAddEvent';
 
 export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(newEventWidgetActionTypes.EVENT_SAVE_REQUEST),
+        ofType(
+            newEventWidgetActionTypes.EVENT_SAVE_REQUEST,
+        ),
         map((action) => {
             const state = store.value;
-            const uid = uuid();
+            const { requestEvent, referralEvent, relationship } = action.payload;
+
             const {
+                eventId,
                 formFoundation,
                 dataEntryId,
-                eventId,
+                dataEntryItemId,
                 completed,
                 programId,
                 orgUnitId,
@@ -24,18 +26,22 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: Redu
                 teiId,
                 enrollmentId,
                 onSaveExternal,
+            } = requestEvent;
+
+            const {
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
             } = action.payload;
 
-            const dataEntryKey = getDataEntryKey(dataEntryId, eventId);
+            const dataEntryKey = getDataEntryKey(dataEntryId, dataEntryItemId);
             const { formClientValues, mainDataClientValues }
                 = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
-            const serverData = getAddEventEnrollmentServerData({
+            const requestEventWithValues = getAddEventEnrollmentServerData({
                 formFoundation,
                 formClientValues,
                 mainDataClientValues,
+                eventId,
                 programId,
                 orgUnitId,
                 orgUnitName,
@@ -44,7 +50,19 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: Redu
                 completed,
             });
 
-            onSaveExternal && onSaveExternal(serverData, uid);
-            return saveEvent(serverData, onSaveSuccessActionType, onSaveErrorActionType, uid);
+            const serverData = referralEvent ? {
+                events: [requestEventWithValues, referralEvent],
+                relationships: [relationship],
+            } : {
+                events: [requestEventWithValues],
+            };
+
+            onSaveExternal && onSaveExternal(serverData);
+            return saveEvents({
+                serverData,
+                onSaveSuccessActionType,
+                onSaveErrorActionType,
+                ...action.payload,
+            });
         }),
     );

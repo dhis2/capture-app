@@ -14,8 +14,8 @@ export const actions = Object.freeze({
 });
 
 export const mainOptionTranslatedTexts = {
-    [actions.REFER_ORG]: i18n.t('Refer to an organisation unit'),
-    [actions.LINK_EXISTING_RESPONSE]: i18n.t('Link to an existing response'),
-    [actions.ENTER_DATA]: i18n.t('Enter data for response now'),
-    [actions.DO_NOT_LINK_RESPONSE]: i18n.t("Don't link to a response"),
+    [actions.REFER_ORG]: (displayName?: string) => i18n.t('Schedule in {{displayName}}', { displayName }),
+    [actions.LINK_EXISTING_RESPONSE]: (displayName?: string) => i18n.t('Link to an existing {{displayName}}', { displayName }),
+    [actions.ENTER_DATA]: (displayName?: string) => i18n.t('Enter {{displayName}} details now', { displayName }),
+    [actions.DO_NOT_LINK_RESPONSE]: (displayName?: string) => i18n.t("Don't link to a {{displayName}}", { displayName }),
 };

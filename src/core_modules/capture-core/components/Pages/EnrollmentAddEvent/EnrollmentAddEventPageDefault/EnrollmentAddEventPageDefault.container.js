@@ -17,7 +17,7 @@ import { useWidgetDataFromStore } from '../hooks';
 import {
     useHideWidgetByRuleLocations,
 } from '../../Enrollment/EnrollmentPageDefault/hooks';
-import { updateEnrollmentEventsWithoutId, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
+import { addEnrollmentEvents, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
@@ -38,17 +38,17 @@ export const EnrollmentAddEventPageDefault = ({
     }, [history, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
-        (data, uid) => {
+        ({ events }) => {
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());
             const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
-            const eventData = convertEventAttributeOptions(data.events[0]);
-            dispatch(
-                updateEnrollmentEventsWithoutId(uid, {
-                    ...eventData,
-                    updatedAt,
-                }),
-            );
+
+            const eventsWithUpdatedDate = events.map(event => ({
+                ...convertEventAttributeOptions(event),
+                updatedAt,
+            }));
+
+            dispatch(addEnrollmentEvents({ events: eventsWithUpdatedDate }));
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
         [dispatch, history, programId, orgUnitId, teiId, enrollmentId, fromClientDate],

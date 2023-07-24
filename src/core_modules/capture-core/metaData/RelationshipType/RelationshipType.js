@@ -13,6 +13,7 @@ type RelationshipConstraint = {
 export class RelationshipType {
     _id: string;
     _name: string;
+    _referral: boolean;
     _access: Access;
     _from: RelationshipConstraint;
     _to: RelationshipConstraint;
@@ -39,6 +40,14 @@ export class RelationshipType {
 
     set access(access: Access) {
         this._access = access;
+    }
+
+    set referral(value: boolean) {
+        this._referral = value;
+    }
+
+    get referral(): boolean {
+        return this._referral;
     }
 
     get access(): Access {
