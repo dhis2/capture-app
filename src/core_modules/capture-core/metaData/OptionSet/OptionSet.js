@@ -8,6 +8,7 @@ import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
 import type { DataElement } from '../DataElement';
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { Option, Value } from './Option';
+import type { CachedAttributeValue } from '../../storageControllers';
 
 export class OptionSet {
     static errorMessages = {
@@ -19,6 +20,7 @@ export class OptionSet {
 
     _id: ?string;
     _emptyText: ?string;
+    _attributeValues: Array<CachedAttributeValue>;
     _options: Array<Option>;
     _optionGroups: Map<string, OptionGroup>;
     _viewType: $Values<typeof viewTypes>;
@@ -30,7 +32,9 @@ export class OptionSet {
         options?: ?Array<Option>,
         optionGroups?: ?Map<string, OptionGroup>,
         dataElement?: ?DataElement,
-        onConvert?: ?ConvertFn) {
+        onConvert?: ?ConvertFn,
+        attributeValues?: ?Array<CachedAttributeValue>,
+    ) {
         this._options = !options ? [] : options.reduce((accOptions: Array<Option>, currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
                 currentOption.value = onConvert && dataElement ?
@@ -47,6 +51,7 @@ export class OptionSet {
 
         this._id = id;
         this._dataElement = dataElement;
+        this._attributeValues = attributeValues || [];
         this._inputType = inputTypes.DROPDOWN;
     }
 
@@ -92,6 +97,14 @@ export class OptionSet {
     }
     set emptyText(emptyText?: ?string): ?string {
         this._emptyText = emptyText;
+    }
+
+    get attributeValues(): Array<ApiAttributeValues> {
+        return this._attributeValues;
+    }
+
+    set attributeValues(value: Array<ApiAttributeValues>) {
+        this._attributeValues = value;
     }
 
     get options(): Array<Option> {

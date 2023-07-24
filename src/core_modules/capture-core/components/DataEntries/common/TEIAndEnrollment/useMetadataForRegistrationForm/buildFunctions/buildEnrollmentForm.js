@@ -8,6 +8,7 @@ import type {
 } from '../../../../../../storageControllers/cache.types';
 import type { TrackedEntityType } from '../../../../../../metaData';
 import { buildSearchGroup } from '../../../../../SearchBox/hooks';
+import type { DataEntryFormConfig } from '../types';
 
 type Props = {|
     cachedOptionSets: Array<CachedOptionSet>,
@@ -15,6 +16,7 @@ type Props = {|
     trackedEntityTypeCollection: TrackedEntityType,
     cachedProgram: CachedProgram,
     cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
+    dataEntryFormConfig: ?DataEntryFormConfig,
     locale: string,
 |}
 
@@ -24,6 +26,7 @@ export const buildEnrollmentForm = async ({
     trackedEntityTypeCollection,
     cachedProgram,
     cachedTrackedEntityAttributes,
+    dataEntryFormConfig,
     locale,
 }: Props) => {
     // $FlowFixMe - cachedProgram does not contain trackedEntityTypeAttributes
@@ -34,6 +37,7 @@ export const buildEnrollmentForm = async ({
         cachedTrackedEntityTypes: new Map([[cachedTrackedEntityType.id, cachedTrackedEntityType]]),
         trackedEntityTypeCollection: new Map([[trackedEntityTypeCollection.id, trackedEntityTypeCollection]]),
         locale,
+        dataEntryFormConfig,
     });
 
     return enrollmentFactory.build(cachedProgram, searchGroups);

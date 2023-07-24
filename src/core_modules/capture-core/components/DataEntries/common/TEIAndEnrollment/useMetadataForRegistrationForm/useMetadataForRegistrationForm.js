@@ -9,10 +9,16 @@ import { useEnrollmentFormFoundation } from './hooks/useEnrollmentFormFoundation
 import { useTrackedEntityTypeFromIndexedDB } from '../../../../../utils/cachedDataHooks/useTrackedEntityTypeFromIndexedDB';
 import { useUserLocale } from '../../../../../utils/localeData/useUserLocale';
 import { useTrackedEntityAttributes } from './hooks/useTrackedEntityAttributes';
+import { useDataEntryFormConfig } from './hooks/useDataEntryFormConfig';
 
 type Props = {|
     selectedScopeId: string,
 |}
+
+export const FieldElementObjectTypes = Object.freeze({
+    TRACKED_ENTITY_ATTRIBUTE: 'TrackedEntityAttribute',
+    ATTRIBUTE: 'Attribute',
+});
 
 export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
     const { program } = useProgramFromIndexedDB(selectedScopeId, { enabled: !!selectedScopeId });
@@ -22,10 +28,12 @@ export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
 
     const cachedTrackedEntityAttributeIds = useMemo(() => {
         if (scopeType === scopeTypes.TRACKER_PROGRAM && program) {
-            return program.programTrackedEntityAttributes?.map(({ trackedEntityAttributeId }) => trackedEntityAttributeId);
+            return program
+                .programTrackedEntityAttributes
+                .map(({ trackedEntityAttributeId }) => trackedEntityAttributeId);
         }
         if (scopeType === scopeTypes.TRACKED_ENTITY_TYPE && trackedEntityType) {
-            return trackedEntityType.trackedEntityTypeAttributes?.map(({ id }) => id);
+            return trackedEntityType.trackedEntityTypeAttributes.map(({ id }) => id);
         }
         return undefined;
     }, [program, scopeType, trackedEntityType]);
@@ -39,9 +47,13 @@ export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
         selectedScopeId,
         attributes: cachedTrackedEntityAttributes,
     });
+    const { dataEntryFormConfig, configIsFetched } = useDataEntryFormConfig({ selectedScopeId });
+
     const { trackedEntityTypeCollection } = useTrackedEntityTypeCollection({
         trackedEntityType,
         optionSets,
+        dataEntryFormConfig,
+        configIsFetched,
         locale,
     });
 
@@ -53,6 +65,8 @@ export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
         trackedEntityTypeCollection,
         cachedTrackedEntityAttributes,
         selectedScopeId,
+        dataEntryFormConfig,
+        configIsFetched,
         locale,
     });
 
