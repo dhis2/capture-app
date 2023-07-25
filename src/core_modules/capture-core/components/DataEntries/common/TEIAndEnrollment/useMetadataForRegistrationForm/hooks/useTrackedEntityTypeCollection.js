@@ -27,7 +27,7 @@ export const useTrackedEntityTypeCollection = ({
 }: Props): ReturnValues => {
     const { data: trackedEntityAttributes } = useIndexedDBQuery(
         // $FlowFixMe
-        ['trackedEntityAttributes', trackedEntityType.id],
+        ['trackedEntityAttributes', trackedEntityType?.id],
         () => getTrackedEntityAttributes(
             trackedEntityType
                 ?.trackedEntityTypeAttributes
@@ -42,7 +42,7 @@ export const useTrackedEntityTypeCollection = ({
 
     const { data: trackedEntityTypeCollection } = useIndexedDBQuery(
         // $FlowFixMe
-        ['trackedEntityTypeCollection', trackedEntityType.id],
+        ['trackedEntityTypeCollection', trackedEntityType?.id],
         () => buildTrackedEntityTypeCollection({
             // $FlowFixMe
             cachedTrackedEntityType: trackedEntityType,
