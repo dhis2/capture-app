@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2023\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -72,6 +72,16 @@ msgstr "Dato for registrering"
 
 msgid "Last updated"
 msgstr "Sist oppdatert"
+
+msgid "error encountered during field validation"
+msgstr "En feil oppsto under feltvalidering"
+
+msgid "error"
+msgstr "Feil"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Denne verdien validerer"
@@ -831,6 +841,9 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Ny registrering i programmet{{escape}} {{programName}}"
 
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Save {{trackedEntityName}}"
 msgstr "Lagre {{trackedEntityName}}"
 
@@ -985,11 +998,6 @@ msgstr "Du kan også velge et program fra topplinjen og søke i det programmet"
 
 msgid "Choose a type to start searching"
 msgstr "Velg en type for å begynne å søke"
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
 
 msgid "Search {{name}}"
 msgstr "Søk {{name}}"
@@ -1242,26 +1250,11 @@ msgstr ""
 "Den planlagte datoen samsvarer med den foreslåtte datoen, men kan endres om "
 "nødvendig."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-"Den planlagte datoen er {{count}} dag {{posisjon}} den foreslåtte datoen."
-msgstr[1] ""
-"Den planlagte datoen er {{count}} dager {{posisjon}} den foreslåtte datoen."
-
 msgid "after"
 msgstr "etter"
 
 msgid "before"
 msgstr "før"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "Det er {{count}} planlagt hendelse i {{orgUnitName}} denne dagen."
-msgstr[1] ""
-"Det er {{count}} planlagte hendelser i {{orgUnitName}} denne dagen."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1534,12 +1527,6 @@ msgstr "Til dato"
 
 msgid "To time"
 msgstr "Til klokkeslett"
-
-msgid "error encountered during field validation"
-msgstr "En feil oppsto under feltvalidering"
-
-msgid "error"
-msgstr "Feil"
 
 msgid "Delete polygon"
 msgstr "Slett polygon"
