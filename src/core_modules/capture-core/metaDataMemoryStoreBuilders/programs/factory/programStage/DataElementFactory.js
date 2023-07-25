@@ -65,6 +65,7 @@ export class DataElementFactory {
         dataElement.id = cachedDataElement.id;
         dataElement.name = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.NAME) ||
             cachedDataElement.displayName;
+        dataElement.code = cachedDataElement.code;
         dataElement.shortName =
             this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.SHORT_NAME) ||
             cachedDataElement.displayShortName;

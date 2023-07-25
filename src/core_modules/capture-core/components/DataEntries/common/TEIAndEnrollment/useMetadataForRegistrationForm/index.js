@@ -1,2 +1,2 @@
 // @flow
-export { useMetadataForRegistrationForm } from './useMetadataForRegistrationForm';
+export { useMetadataForRegistrationForm, FieldElementObjectTypes } from './useMetadataForRegistrationForm';
