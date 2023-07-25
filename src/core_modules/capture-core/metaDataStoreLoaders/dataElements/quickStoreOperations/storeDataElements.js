@@ -21,7 +21,7 @@ export const storeDataElements = (ids: Array<string>) => {
     const query = {
         resource: 'dataElements',
         params: {
-            fields: 'id,displayName,displayShortName,displayFormName,valueType,' +
+            fields: 'id,displayName,code,displayShortName,displayFormName,valueType,' +
                 'translations[*],description,url,optionSetValue,style,optionSet[id]',
             filter: `id:in:[${ids.join(',')}]`,
             pageSize: ids.length,

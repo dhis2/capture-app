@@ -2,15 +2,15 @@
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2021
 # phil_dhis2, 2022
-# easylin <lin_xd@126.com>, 2023
 # 晓东 林 <13981924470@126.com>, 2023
+# easylin <lin_xd@126.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2023\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2023\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +42,7 @@ msgstr ""
 "App仅支持同时运行一个版本（在同一域中）。如果您想再次使用此版本，请刷新此页面，但是请注意，它将关闭其他版本。"
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "查看 {{programName}} 仪表板"
 
 msgid "View dashboard"
 msgstr "查看仪表盘"
@@ -70,6 +70,16 @@ msgstr "报名日期"
 
 msgid "Last updated"
 msgstr "上次更新"
+
+msgid "error encountered during field validation"
+msgstr "字段验证发生错误。"
+
+msgid "error"
+msgstr "错误"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -147,7 +157,7 @@ msgid "Enrollment"
 msgstr "报名"
 
 msgid "Please select {{categoryName}}"
-msgstr ""
+msgstr "请选择{{categoryName}}"
 
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
@@ -255,19 +265,19 @@ msgstr "添加关系到事件"
 msgid "Go back to event without saving relationship"
 msgstr "后退到事件不保存关系"
 
-msgid "Unsaved changes"
-msgstr "未保存的更改"
+msgid "Discard unsaved changes?"
+msgstr "放弃没有保存的修改?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr "离开本页将丢掉你的新关系的选择"
 
-msgid "Yes, discard"
-msgstr "是的，丢弃"
+msgid "Yes, discard changes"
+msgstr ""
 
-msgid "No, stay here"
-msgstr "不，待在这里"
+msgid "No, cancel"
+msgstr "不，取消"
 
 msgid "New event"
 msgstr "新事件"
@@ -336,20 +346,8 @@ msgstr "生成新事件"
 msgid "Do you want to create another event?"
 msgstr "你要创建另外的事件？"
 
-msgid "No, cancel"
-msgstr "不，取消"
-
 msgid "Yes, create new event"
 msgstr "是的，创建新事件"
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "离开此页面将放弃您对此事件所做的更改。"
-
-msgid "Warnings found"
-msgstr "发现警告"
-
-msgid "Abort"
-msgstr "关于"
 
 msgid "Back to form"
 msgstr "回到表单"
@@ -374,6 +372,11 @@ msgstr "运作中"
 
 msgid "Sort"
 msgstr "排序"
+
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr "无事件可显示"
@@ -483,6 +486,12 @@ msgstr "上传图像"
 msgid "Select image"
 msgstr "选择图像"
 
+msgid "Type to filter options"
+msgstr "键入过滤选项"
+
+msgid "No match found"
+msgstr "未找到匹配项"
+
 msgid "Search"
 msgstr "搜索"
 
@@ -579,11 +588,43 @@ msgstr "您无权撰写评论"
 msgid "Write comment"
 msgstr "写备注"
 
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
+
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "为 {{programName}} 使用新的注册仪表板"
 
 msgid "Opt in for {{programName}}"
 msgstr "选择加入 {{programName}}"
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+"通过单击下面的选择加入，您将开始使用 Capture 应用程序中的新注册仪表板来执行此跟踪项目。目前，Tracker Capture "
+"的某些功能尚未添加，包括关系和推荐功能。在 Capture 中包含此 Tracker 功能的工作正在进行中，并将添加到即将发布的应用程序中。"
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr "核心团队感谢对目前正在 Beta 测试的这个新功能的任何反馈，请报告 DHIS2 JIRA 项目中的任何问题和反馈。"
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
+msgstr "单击下面的按钮，为所有用户选择加入此 Tracker 程序的 Capture 应用程序（测试版）中的新注册仪表板功能。"
 
 msgid "Yes, opt in"
 msgstr "是的，选择加入"
@@ -603,7 +644,7 @@ msgstr "打开此报名时出现错误。请输入有效网址。"
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
+msgstr "获取注册时出错。请输入有效网址。"
 
 msgid "Enrollment Dashboard"
 msgstr "报名仪表板"
@@ -642,19 +683,19 @@ msgid ""
 msgstr "{{programName}}具有类别。选择所有类别以查看仪表板。"
 
 msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
+msgstr "注册 ID {{enrollmentId}} 无效。"
 
 msgid "Choose an enrollment to view the dashboard."
 msgstr "选择一个报名以查看仪表板。"
 
 msgid "There are no active enrollments."
-msgstr ""
+msgstr "没有有效的注册。"
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "在此计划中为 {{teiDisplayName}} 添加新注册。"
 
 msgid "No access to program owner."
-msgstr ""
+msgstr "无法访问项目所有者。"
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "该项目未报名{{teiDisplayName}} 。"
@@ -720,7 +761,7 @@ msgid "Refer"
 msgstr "转诊"
 
 msgid "You can’t add any more {{ programStageName }} events"
-msgstr ""
+msgstr "您不能再添加 {{ programStageName }} 事件"
 
 msgid "Cancel without saving"
 msgstr "取消而不保存"
@@ -729,7 +770,7 @@ msgid "Choose a stage for a new event"
 msgstr "为新活动选择一个舞台"
 
 msgid "Program Stages could not be loaded"
-msgstr "无法加载程序阶段"
+msgstr "无法加载项目阶段"
 
 msgid "Stage"
 msgstr "阶段"
@@ -783,6 +824,9 @@ msgstr "您也可以从顶部栏中选择一个项目并在该项目中创建"
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}的新报名"
 
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Save {{trackedEntityName}}"
 msgstr "保存{{trackedEntityName}}"
 
@@ -831,101 +875,8 @@ msgstr "创建新的{{trackedEntityType}}"
 msgid "Register"
 msgstr "注册"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
-
-msgid "Search {{name}}"
-msgstr "搜索{{name}}"
-
-msgid "Search by {{name}}"
-msgstr "按{{name}}搜索"
-
-msgid "Search by attributes"
-msgstr "按属性搜索"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr "填写这些字段进行搜索{{escape}} {{ searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"至少填写 {{minAttributesRequiredToSearch}} 这些字段以进行搜索{{escape}} "
-"{{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "填写此字段进行搜索{{escape}} {{searchableAttributes}}"
-
-msgid "No results found"
-msgstr "没有结果"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
-
-msgid "Register a user"
-msgstr "注册用户"
-
-msgid "Back to search"
-msgstr "返回搜寻"
-
-msgid "An error has occurred"
-msgstr "发生了错误"
-
-msgid "Too many results"
-msgstr "结果太多"
-
-msgid "Cannot search in all programs"
-msgstr "无法在所有项目中搜索"
-
 msgid "Back"
 msgstr "后退"
-
-msgid "Search for {{titleText}}"
-msgstr "搜索{{titleText}}"
-
-msgid "Search for"
-msgstr "搜索"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
-
-msgid "Choose a type to start searching"
-msgstr "选择一种类型以开始搜索"
-
-msgid "all programs"
-msgstr "所有项目"
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
-
-msgid "Search in all programs"
-msgstr "搜索所有项目"
-
-msgid "If none of search results match, you can create a new "
-msgstr "如果没有匹配的搜索结果，您可以创建一个新的"
-
-msgid "Create new"
-msgstr "新建"
-
-msgid "Saved lists in this program"
-msgstr "此项目中保存的列表"
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr "保存的列表提供对项目中最常用视图的快速访问。"
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr "此项目中还没有保存的列表，请使用下面的按钮创建一个。"
-
-msgid "Create saved list"
-msgstr "创建保存列表"
 
 msgid "events"
 msgstr "事件"
@@ -974,6 +925,9 @@ msgstr "机构不能载入"
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
 
+msgid "No results found"
+msgstr "没有结果"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
 
@@ -987,31 +941,103 @@ msgid "Add relationship"
 msgstr "添加关系"
 
 msgid "No results found for "
-msgstr ""
+msgstr "没有找到结果"
 
 msgid "Registering unit"
 msgstr "注册机构"
 
 msgid "Choose a registering unit"
-msgstr ""
+msgstr "选择报名单位"
 
 msgid "Clear selection"
-msgstr ""
+msgstr "清空选项"
 
 msgid "No programs available."
 msgstr "无可用项目"
 
 msgid "Search for a program"
-msgstr ""
+msgstr "搜索项目"
 
 msgid "Some programs are being filtered by the chosen registering unit"
-msgstr ""
+msgstr "部分节目正在被选定的注册单位过滤"
 
 msgid "Show all programs"
-msgstr ""
+msgstr "显示所有项目"
 
 msgid "Choose a program"
+msgstr "选择一个项目"
+
+msgid "Search for {{titleText}}"
+msgstr "搜索{{titleText}}"
+
+msgid "Search for"
+msgstr "搜索"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
+
+msgid "Choose a type to start searching"
+msgstr "选择一种类型以开始搜索"
+
+msgid "Search {{name}}"
+msgstr "搜索{{name}}"
+
+msgid "Search by {{name}}"
+msgstr "按{{name}}搜索"
+
+msgid "Search by attributes"
+msgstr "按属性搜索"
+
+msgid "all programs"
+msgstr "所有项目"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
+
+msgid "Search in all programs"
+msgstr "搜索所有项目"
+
+msgid "If none of search results match, you can create a new "
+msgstr "如果没有匹配的搜索结果，您可以创建一个新的"
+
+msgid "Create new"
+msgstr "新建"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr "填写这些字段进行搜索{{escape}} {{ searchableAttributes }}"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
 msgstr ""
+"至少填写 {{minAttributesRequiredToSearch}} 这些字段以进行搜索{{escape}} "
+"{{searchableAttributes}}"
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr "填写此字段进行搜索{{escape}} {{searchableAttributes}}"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
+
+msgid "Back to search"
+msgstr "返回搜寻"
+
+msgid "An error has occurred"
+msgstr "发生了错误"
+
+msgid "Too many results"
+msgstr "结果太多"
+
+msgid "Cannot search in all programs"
+msgstr "无法在所有项目中搜索"
+
+msgid "Missing search criteria"
+msgstr "缺少搜索条件"
 
 msgid "Results found"
 msgstr "找到的结果"
@@ -1022,8 +1048,19 @@ msgstr "选择的项目"
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
+msgid "Saved lists in this program"
+msgstr "此项目中保存的列表"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr "保存的列表提供对项目中最常用视图的快速访问。"
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr "此项目中还没有保存的列表，请使用下面的按钮创建一个。"
+
+msgid "Create saved list"
+msgstr "创建保存列表"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "{{programName}}中的新{{trackedEntityName}}"
@@ -1041,20 +1078,20 @@ msgid "This program is protected"
 msgstr "该项目受保护"
 
 msgid "Reason to check for enrollments"
-msgstr ""
+msgstr "检查注册的原因"
 
 msgid ""
 "Describe the reason you are checking for enrollments in this protected "
 "program"
-msgstr ""
+msgstr "描述您检查此受保护计划的注册情况的原因"
 
 msgid "Check for enrollments"
-msgstr ""
+msgstr "检查注册"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
-msgstr ""
+msgstr "您必须提供一个理由来检查此受保护计划的注册情况。所有活动都将被记录。"
 
 msgid "Save comment"
 msgstr "保存注释"
@@ -1185,21 +1222,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr "预定日期与建议日期相符，但可以根据需要进行更改。"
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] "预定日期是 {{count}} 天 {{position}} 建议的日期。"
-
 msgid "after"
 msgstr "后"
 
 msgid "before"
 msgstr "前"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "今天在 {{orgUnitName}} 有 {{count}} 个已经安排的事件。"
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1244,9 +1271,6 @@ msgstr "保存更改时出现问题"
 msgid "Try again or contact your system administrator for support"
 msgstr "重试或联系您的系统管理员寻求支持"
 
-msgid "tracked entity instance"
-msgstr "跟踪的实体实例"
-
 msgid "Fix errors in the form to continue."
 msgstr "修正表单中的错误以继续。"
 
@@ -1259,11 +1283,14 @@ msgstr "{{TETName}} 基本资料"
 msgid "Edit"
 msgstr "编辑"
 
+msgid "tracked entity instance"
+msgstr "跟踪的实体实例"
+
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
 
-msgid "This event is not yet preserved and cannot be edited"
-msgstr "此事件尚未保留且无法编辑"
+msgid "To open this event, please wait until saving is complete"
+msgstr "要打开此活动，请等待保存完成"
 
 msgid "Show {{ rest }} more"
 msgstr "显示 {{ rest}} 更多"
@@ -1313,6 +1340,9 @@ msgstr "下载数据"
 msgid "an error occurred loading working lists"
 msgstr "载入工作列表发生错误"
 
+msgid "Assigned to"
+msgstr "指派到"
+
 msgid "Registration Date"
 msgstr "登记日期"
 
@@ -1322,17 +1352,23 @@ msgstr "闲置"
 msgid "Enrollment status"
 msgstr "报名状态"
 
-msgid "Assigned to"
-msgstr "指派到"
-
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "选择要按 {{label}} 筛选的项目阶段"
+
+msgid "Active enrollments"
+msgstr "活跃注册"
+
+msgid "Completed enrollments"
+msgstr "完成注册"
+
+msgid "Cancelled enrollments"
+msgstr "取消注册"
 
 msgid "Working list could not be updated"
 msgstr "工作清单无法更新"
 
 msgid "an error occurred loading the working lists"
-msgstr ""
+msgstr "加载工作列表时发生错误"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "加载跟踪的实体实例列表时出错"
@@ -1460,17 +1496,14 @@ msgstr "到目前为止"
 msgid "To time"
 msgstr "到时间"
 
-msgid "error encountered during field validation"
-msgstr "字段验证发生错误。"
-
-msgid "error"
-msgstr "错误"
-
 msgid "Delete polygon"
 msgstr "删除多边形"
 
 msgid "Set area"
 msgstr "设置区域"
+
+msgid "Area on map saved"
+msgstr "地图上的区域已保存"
 
 msgid "Compatibility mode"
 msgstr "兼容性模式"

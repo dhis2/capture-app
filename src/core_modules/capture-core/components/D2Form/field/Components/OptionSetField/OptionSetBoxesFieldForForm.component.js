@@ -14,9 +14,9 @@ import {
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
+    withRulesOptionVisibilityHandler,
 } from '../internal';
 import labelTypeClasses from '../../buildField.module.css';
-import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;

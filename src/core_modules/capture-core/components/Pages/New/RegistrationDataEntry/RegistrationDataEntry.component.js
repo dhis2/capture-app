@@ -2,13 +2,12 @@
 import React, { type ComponentType, useContext, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
-import { Grid, Paper, withStyles } from '@material-ui/core';
+import { Button, colors, spacers } from '@dhis2/ui';
+import { Grid, withStyles } from '@material-ui/core';
 import type { Props } from './RegistrationDataEntry.types';
 import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
@@ -16,15 +15,23 @@ import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
+import {
+    useMetadataForRegistrationForm,
+} from '../../../DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 const getStyles = ({ typography }) => ({
-    paper: {
-        marginBottom: typography.pxToRem(10),
-        padding: typography.pxToRem(10),
+    container: {
+        marginBottom: spacers.dp12,
+        padding: spacers.dp16,
+        background: colors.white,
+        border: '1px solid',
+        borderColor: colors.grey400,
+        borderRadius: 3,
     },
     title: {
         padding: '8px 0 0px 8px',
         fontWeight: 500,
+        marginBottom: spacers.dp16,
     },
     tetypeContainer: {
         marginTop: typography.pxToRem(16),
@@ -33,8 +40,8 @@ const getStyles = ({ typography }) => ({
         marginLeft: typography.pxToRem(8),
         marginRight: typography.pxToRem(8),
     },
-    marginTop: {
-        marginTop: typography.pxToRem(20),
+    marginBottom: {
+        marginBottom: spacers.dp16,
     },
 });
 
@@ -91,8 +98,8 @@ const RegistrationDataEntryPlain = ({
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
+    const { formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
 
     const handleRegistrationScopeSelection = (id) => {
         setScopeId(id);
@@ -135,7 +142,7 @@ const RegistrationDataEntryPlain = ({
         <>
             {
                 !scopeType &&
-                <Paper className={classes.paper}>
+                <div className={classes.container}>
                     <div className={classes.title} >
                         {i18n.t('New')}
                     </div>
@@ -147,12 +154,12 @@ const RegistrationDataEntryPlain = ({
                             accessNeeded="write"
                         />
                     </div>
-                </Paper>
+                </div>
             }
 
             {
                 scopeType === scopeTypes.TRACKER_PROGRAM &&
-                <Paper className={classes.paper}>
+                <div className={classes.container}>
                     <div className={classes.title} >
                         {
                             teiId ? i18n.t('New Enrollment in program{{escape}} {{programName}}', {
@@ -172,12 +179,11 @@ const RegistrationDataEntryPlain = ({
                                 <EnrollmentRegistrationEntryWrapper
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
-                                    enrollmentMetadata={registrationMetaData}
-                                    saveButtonText={i18n.t('Save {{trackedEntityName}}', {
-                                        trackedEntityName,
+                                    onSave={() => onSaveWithEnrollment(formFoundation)}
+                                    saveButtonText={(trackedEntityTypeNameLC: string) => i18n.t('Save {{trackedEntityTypeName}}', {
+                                        trackedEntityTypeName: trackedEntityTypeNameLC,
                                         interpolation: { escapeValue: false },
                                     })}
-                                    onSave={() => onSaveWithEnrollment(formFoundation)}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
@@ -198,12 +204,12 @@ const RegistrationDataEntryPlain = ({
                             }
                         </Grid>
                     </div>
-                </Paper>
+                </div>
             }
 
             {
                 scopeType === scopeTypes.TRACKED_ENTITY_TYPE &&
-                <Paper className={classes.paper}>
+                <div className={classes.container}>
                     <div className={classes.title} >
                         {i18n.t('New {{titleText}}', {
                             titleText,
@@ -225,7 +231,6 @@ const RegistrationDataEntryPlain = ({
                                 <TeiRegistrationEntry
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
-                                    teiRegistrationMetadata={registrationMetaData}
                                     saveButtonText={i18n.t('Save {{trackedEntityName}}', {
                                         trackedEntityName,
                                         interpolation: { escapeValue: false },
@@ -240,7 +245,7 @@ const RegistrationDataEntryPlain = ({
                             {
                                 dataEntryIsReady &&
                                 <Grid item>
-                                    <div className={classes.marginTop}>
+                                    <div className={classes.marginBottom}>
                                         <DataEntryWidgetOutput
                                             selectedScopeId={selectedScopeId}
                                             dataEntryId={dataEntryId}
@@ -250,7 +255,7 @@ const RegistrationDataEntryPlain = ({
                             }
                         </Grid>
                     </div>
-                </Paper>
+                </div>
             }
 
             {

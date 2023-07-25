@@ -4,8 +4,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconButton, withStyles } from '@material-ui/core';
-import { IconArrowRight16, IconCross24, Tooltip } from '@dhis2/ui';
-import { Button } from '../Buttons';
+import { IconArrowRight16, IconCross24, Tooltip, Button } from '@dhis2/ui';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 

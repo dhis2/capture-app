@@ -22,6 +22,7 @@ import {
     TrackedEntityRelationshipsWrapper,
 } from '../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
+import { NoticeBox } from '../../NoticeBox';
 
 const styles = ({ typography }) => ({
     page: {
@@ -177,6 +178,7 @@ const EnrollmentEditEventPagePain = ({
                         />
                     </div>
                 </div>
+                <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
             </div>
         </OrgUnitFetcher>
     );

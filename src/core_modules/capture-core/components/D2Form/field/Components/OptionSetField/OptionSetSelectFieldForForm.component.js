@@ -11,14 +11,14 @@ import {
     withLabel,
     withDisplayMessages,
     withFilterProps,
+    withOptionsIconElement,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
+    withRulesOptionVisibilityHandler,
 } from '../internal';
-import { withOptionsIconElement } from './withOptionsIconElement';
 import labelTypeClasses from '../../buildField.module.css';
-import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;

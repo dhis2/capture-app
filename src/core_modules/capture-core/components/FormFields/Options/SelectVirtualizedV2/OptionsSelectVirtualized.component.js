@@ -13,17 +13,14 @@ import './optionsSelectVirtualized.css';
 
 import { OptionsSelectVirtualizedOption } from './OptionsSelectVirtualizedOption.component';
 
-export type VirtualizedOptionConfig = {label: string, value: any, iconLeft?: ?React.Node, iconRight?: ?React.Node };
+export type VirtualizedOptionConfig = {label: string, value: any, icon?: ?React.Node };
 
 const getStyles = () => ({
     selectedOptionContainer: {
         display: 'flex',
         alignItems: 'center',
     },
-    selectedIconLeftContainer: {
-        paddingRight: 5,
-    },
-    selectedIconRightContainer: {
+    selectedIconContainer: {
         paddingLeft: 5,
     },
 });
@@ -50,8 +47,7 @@ type Props = {
     multi?: ?boolean,
     classes: {
         selectedOptionContainer: string,
-        selectedIconLeftContainer: string,
-        selectedIconRightContainer: string,
+        selectedIconContainer: string,
     },
     dataTest?: string,
 };
@@ -176,29 +172,20 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
 
     renderValue = (option: VirtualizedOptionConfig) => {
         const { classes } = this.props;
-        const { iconLeft, iconRight, label } = option;
+        const { icon, label } = option;
         return (
             <div
                 className={classes.selectedOptionContainer}
             >
-                {
-                    iconLeft ? (
-                        <div
-                            className={classes.selectedIconLeftContainer}
-                        >
-                            {iconLeft}
-                        </div>
-                    ) : null
-                }
                 <div>
                     {label}
                 </div>
                 {
-                    iconRight ? (
+                    icon ? (
                         <div
-                            className={classes.selectedIconRightContainer}
+                            className={classes.selectedIconContainer}
                         >
-                            {iconRight}
+                            {icon}
                         </div>
                     ) : null
                 }

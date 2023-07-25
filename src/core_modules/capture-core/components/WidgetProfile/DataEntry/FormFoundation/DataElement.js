@@ -19,12 +19,14 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import { buildIcon } from '../../../../metaDataMemoryStoreBuilders/common/helpers';
 import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
-import { getFeatureType, getDataElement, getLabel } from '../helpers';
+import { getFeatureType, getDataElement, getLabel, isNotValidOptionSet } from '../helpers';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const OPTION_SET_NOT_FOUND = 'Optionset not found';
 const TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND =
     'TrackedEntityAttributeId missing from programTrackedEntityAttribute or trackedEntityAttribute not found';
+const MULIT_TEXT_WITH_NO_OPTIONS_SET =
+    'could not create the metadata because a MULIT_TEXT without associated option sets was found';
 
 const buildDataElementUnique = (
     dataElement: DataElement,
@@ -153,6 +155,10 @@ const buildBaseDataElement = async (
         trackedEntityAttribute,
         querySingleResource,
     });
+    if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
+        log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ dataElement }));
+        return null;
+    }
     return dataElement;
 };
 
@@ -213,7 +219,14 @@ const buildOptionSet = async (
             ]),
         );
 
-    const optionSet = new OptionSet(optionSetAPI.id, options, optionGroups, dataElement, convertOptionSetValue);
+    const optionSet = new OptionSet(
+        optionSetAPI.id,
+        options,
+        optionGroups,
+        dataElement,
+        convertOptionSetValue,
+        optionSetAPI.attributeValues,
+    );
     optionSet.inputType = renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null;
     return optionSet;
 };

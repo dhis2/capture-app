@@ -6,9 +6,9 @@ import { startNewEnrollmentDataEntryInitialisation } from '../EnrollmentRegistra
 import { scopeTypes, getProgramThrowIfNotFound } from '../../../../metaData';
 import { useLocationQuery } from '../../../../utils/routing';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import { useRegistrationFormInfoForSelectedScope } from '../../common/useRegistrationFormInfoForSelectedScope';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
+import { useMetadataForRegistrationForm } from '../../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 
 export const useLifecycle = (
@@ -22,9 +22,9 @@ export const useLifecycle = (
     const dispatch = useDispatch();
     const program = programId && getProgramThrowIfNotFound(programId);
     const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]) && !!orgUnit;
-    const searchTerms = useSelector(({ searchPage }) => searchPage.currentSearchInfo.currentSearchTerms);
+    const searchTerms = useSelector(({ searchDomain }) => searchDomain.currentSearchInfo.currentSearchTerms);
     const { scopeType } = useScopeInfo(selectedScopeId);
-    const { formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
     const { programCategory } = useCategoryCombinations(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,

@@ -1,10 +1,8 @@
 // @flow
-
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Paper } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Button } from '@dhis2/ui';
+import { Button, spacers, colors } from '@dhis2/ui';
 import { DataEntry } from './DataEntry/DataEntry.container';
 import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
@@ -14,26 +12,30 @@ import { useLocationQuery } from '../../../../utils/routing';
 import { useRulesEngine } from './useRulesEngine';
 import type { PlainProps } from './NewEventDataEntryWrapper.types';
 
-const getStyles = ({ typography }) => ({
+const getStyles = () => ({
     flexContainer: {
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'top',
+        justifyContent: 'space-between',
+        marginBottom: spacers.dp12,
     },
     flexEnd: {
         justifyContent: 'flex-end',
-        marginLeft: 'auto',
+        flexShrink: 0,
     },
-    paper: {
-        marginBottom: typography.pxToRem(10),
-        padding: typography.pxToRem(10),
+    container: {
+        marginBottom: spacers.dp16,
+        padding: spacers.dp16,
+        background: colors.white,
+        border: '1px solid',
+        borderColor: colors.grey400,
+        borderRadius: 3,
+        color: colors.grey900,
     },
     title: {
-        padding: '8px 0 0px 8px',
         fontWeight: 500,
-    },
-    marginLeft: {
-        marginLeft: 8,
+        fontSize: 16,
+        color: colors.grey800,
     },
 });
 
@@ -65,15 +67,14 @@ const NewEventDataEntryWrapperPlain = ({
     const isCustomForm = checkIfCustomForm();
 
     return rulesReady && (
-        <Paper className={classes.paper}>
-            <div className={classes.title} >
-                {i18n.t('New {{titleText}}', {
-                    titleText,
-                    interpolation: { escapeValue: false },
-                })}
-            </div>
-
+        <div className={classes.container}>
             <div className={classes.flexContainer}>
+                <div className={classes.title} >
+                    {i18n.t('New {{titleText}}', {
+                        titleText,
+                        interpolation: { escapeValue: false },
+                    })}
+                </div>
                 <div className={classes.flexEnd}>
                     {
                         isCustomForm ?
@@ -95,7 +96,7 @@ const NewEventDataEntryWrapperPlain = ({
                     }
                 </div>
             </div>
-            <div className={classes.marginLeft}>
+            <div>
                 <DataEntry
                     stage={stage}
                     orgUnit={orgUnit}
@@ -104,7 +105,7 @@ const NewEventDataEntryWrapperPlain = ({
                 />
                 <EventsList />
             </div>
-        </Paper>
+        </div>
     );
 };
 

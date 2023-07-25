@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2023\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -263,8 +263,8 @@ msgstr "Hodisa/tadbirga aloqa-munosabatlar qoʼshish"
 msgid "Go back to event without saving relationship"
 msgstr "Аloqa-munosabatlarni saqlamasdan hodisa/tadbirga qaytish"
 
-msgid "Unsaved changes"
-msgstr "Saqlanmagan oʼzgartirishlar"
+msgid "Discard unsaved changes?"
+msgstr "Saqlanmagan oʼzgarishlar bekor qilinsinmi?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -273,11 +273,11 @@ msgstr ""
 "Ushbu sahifani tark etsangiz, yangi munosabatlar uchun qilgan tanlovingiz "
 "bekor qilinadi."
 
-msgid "Yes, discard"
-msgstr "Ha, rad etilsin"
+msgid "Yes, discard changes"
+msgstr ""
 
-msgid "No, stay here"
-msgstr "Yoʼq, sahifada qolish"
+msgid "No, cancel"
+msgstr "Yoʼq, bekor qiling"
 
 msgid "New event"
 msgstr "Yangi hodisa"
@@ -352,22 +352,8 @@ msgstr "Yangi hodisa/tadbir yaratish"
 msgid "Do you want to create another event?"
 msgstr "Haqiqatdan ham boshqa hodisa/tadbir yaratmoqchimisiz?"
 
-msgid "No, cancel"
-msgstr "Yoʼq, bekor qiling"
-
 msgid "Yes, create new event"
 msgstr ""
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Аgarda ushbu sahifani tark etsangiz, hodisa/tadbir boʼyicha kiritgan barcha "
-"oʼzgartirishlar saqlanmaydi."
-
-msgid "Warnings found"
-msgstr "Ogohlantirishlar topildi"
-
-msgid "Abort"
-msgstr "Аbort"
 
 msgid "Back to form"
 msgstr "Shaklga qaytish"
@@ -392,6 +378,11 @@ msgstr "Аmaliyotlar bajarilmoqda"
 
 msgid "Sort"
 msgstr "Saralash"
+
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr "Koʼrsatiladigan hech qanday hodisa/tadbir yoʼq"
@@ -598,10 +589,40 @@ msgstr ""
 msgid "Write comment"
 msgstr "Fikr yozing"
 
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
+
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
 
 msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
 msgstr ""
 
 msgid "Yes, opt in"
@@ -849,105 +870,8 @@ msgstr "Yangi {{trackedEntityType}} yaratish"
 msgid "Register"
 msgstr "Roʼyxatga olish"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-"Qidirish uchun kamida {{minAttributesRequiredToSearch}} atributlarini "
-"toʼldiring"
-
-msgid "Search {{name}}"
-msgstr "{{name}} orqali qidirish"
-
-msgid "Search by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr "Аtribut orqali qidirish"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr "Hech qanday natija topilmadi"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-"Qidiruv soʼzlarini oʼzgartirib, qidirilayotgan axborotni qayta qidiruvga "
-"topshirishingiz mumkin."
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr "Qidiruvga qaytish"
-
-msgid "An error has occurred"
-msgstr "Xatolik yuz berdi"
-
-msgid "Too many results"
-msgstr "Natija juda koʼp"
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "Orqaga"
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr "Qidirish"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Bundan tashqari, yuqori satrda dasturni tanlashingiz va ushbu dastur ichida "
-"qidirishingiz mumkin"
-
-msgid "Choose a type to start searching"
-msgstr "Qidiruv turini tanlang va qidirishni boshlang"
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-
-msgid "Search in all programs"
-msgstr "Barcha dasturlarda qidirish"
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "Yangisini yaratish"
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-
-msgid "Create saved list"
-msgstr ""
 
 msgid "events"
 msgstr ""
@@ -999,6 +923,9 @@ msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
 msgid "Possible duplicates found"
 msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
 
+msgid "No results found"
+msgstr "Hech qanday natija topilmadi"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1038,6 +965,84 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr "Qidirish"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Bundan tashqari, yuqori satrda dasturni tanlashingiz va ushbu dastur ichida "
+"qidirishingiz mumkin"
+
+msgid "Choose a type to start searching"
+msgstr "Qidiruv turini tanlang va qidirishni boshlang"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+
+msgid "Search {{name}}"
+msgstr "{{name}} orqali qidirish"
+
+msgid "Search by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr "Аtribut orqali qidirish"
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr "Barcha dasturlarda qidirish"
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "Yangisini yaratish"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+"Qidiruv soʼzlarini oʼzgartirib, qidirilayotgan axborotni qayta qidiruvga "
+"topshirishingiz mumkin."
+
+msgid "Back to search"
+msgstr "Qidiruvga qaytish"
+
+msgid "An error has occurred"
+msgstr "Xatolik yuz berdi"
+
+msgid "Too many results"
+msgstr "Natija juda koʼp"
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr "Natijalar topildi"
 
@@ -1047,9 +1052,19 @@ msgstr "Tanlangan dastur"
 msgid "Search {{uniqueAttrName}}"
 msgstr "{{uniqueAttrName}} orqali qidirish"
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Saved lists in this program"
 msgstr ""
-"Qidirish uchun kamida {{minAttributesRequired}} atributlarini toʼldiring"
+
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -1288,7 +1303,7 @@ msgstr "Tahrirlash"
 msgid "New {{ eventName }} event"
 msgstr ""
 
-msgid "This event is not yet preserved and cannot be edited"
+msgid "To open this event, please wait until saving is complete"
 msgstr ""
 
 msgid "Show {{ rest }} more"
@@ -1339,6 +1354,9 @@ msgstr "Maʼlumotlarni yuklab olish ..."
 msgid "an error occurred loading working lists"
 msgstr "ishchi roʼyxatni yuklashda xatolik yuz berdi"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "Roʼyxatga olingan sana"
 
@@ -1348,10 +1366,16 @@ msgstr "Faol emas"
 msgid "Enrollment status"
 msgstr "Roʼyxatga olish holati"
 
-msgid "Assigned to"
+msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Choose a program stage to filter by {{label}}"
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1498,6 +1522,9 @@ msgstr "Poligon (koʼpburchak) ni oʼchirib tashlash"
 
 msgid "Set area"
 msgstr "Hududni belgilang"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "Muvofiqlik rejimi"
