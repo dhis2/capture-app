@@ -5,7 +5,7 @@ import { placements } from '../../../../DataEntry/constants/placements.const';
 import { sectionKeysForFirstStageDataEntry } from '../EnrollmentWithFirstStageDataEntry.constants';
 import { AOCsectionKey } from '../../../../DataEntryDhis2Helpers';
 
-export const useDataEntrySections = (stageName?: string) =>
+export const useDataEntrySections = (stageName: string, beforeSectionId: string) =>
     useMemo(
         () => ({
             [sectionKeysForFirstStageDataEntry.ENROLLMENT]: {
@@ -13,18 +13,20 @@ export const useDataEntrySections = (stageName?: string) =>
                 name: i18n.t('Enrollment'),
             },
             [sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO]: {
-                placement: placements.MIDDLE,
+                beforeSectionId,
+                placement: placements.BEFORE_METADATA_BASED_SECTION,
                 name: i18n.t('Data Entry ({{ stageName }})', {
                     stageName,
                 }),
             },
             [AOCsectionKey]: {
-                placement: placements.MIDDLE,
+                beforeSectionId,
+                placement: placements.BEFORE_METADATA_BASED_SECTION,
             },
             [sectionKeysForFirstStageDataEntry.STATUS]: {
                 placement: placements.BOTTOM,
                 name: i18n.t('Status'),
             },
         }),
-        [stageName],
+        [stageName, beforeSectionId],
     );

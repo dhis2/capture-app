@@ -10,7 +10,7 @@ import { getDataEntryKey } from './common/getDataEntryKey';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { Section } from '../Section/Section.component';
 import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
-import { FieldSection } from './FieldSection.component';
+import { Field } from './Field.component';
 
 const styles = theme => ({
     loadingContainer: {
@@ -69,10 +69,16 @@ const styles = theme => ({
     verticalOutputsContainer: {
         marginBottom: theme.typography.pxToRem(10),
     },
-    dataEntryFieldSectionContainer: {
+    dataEntrySectionContainer: {
         marginBottom: spacers.dp16,
     },
 });
+
+type DataEntrySection = {
+    placement: $Values<typeof placements>,
+    name: string,
+    beforeSectionId?: string
+};
 
 type FieldContainer = {
     field: React.Element<any>,
@@ -120,7 +126,7 @@ type Props = {
         dataEntryId: string,
         itemId: string,
     ) => void,
-    dataEntrySections?: { [string]: {name: string, placement: $Values<typeof placements>}},
+    dataEntrySections?: { [string]: DataEntrySection },
     dataEntryFieldRef: any,
     onAddNote?: ?Function,
     onOpenAddRelationship?: ?Function,
@@ -159,22 +165,34 @@ class DataEntryPlain extends React.Component<Props> {
         };
     }
 
+    hasPlacement = (
+        dataEntrySection: DataEntrySection,
+        placement: $Values<typeof placements>,
+        beforeSectionId?: string,
+    ) =>
+        dataEntrySection.placement === placement &&
+        (dataEntrySection.placement !== placements.BEFORE_METADATA_BASED_SECTION ||
+            (dataEntrySection.placement === placements.BEFORE_METADATA_BASED_SECTION &&
+                dataEntrySection.beforeSectionId === beforeSectionId
+            )
+        );
+
     handleUpdateFieldAsync = (...args) => {
         this.props.onUpdateFormFieldAsync(...args, this.props.id, this.props.itemId);
     }
 
-    getFieldSectionsWithPlacement(placement: $Values<typeof placements>) {
+    getSectionsWithPlacement(placement: $Values<typeof placements>, beforeSectionId?: string) {
         const fields = this.props.fields || [];
         const sections = this.props.dataEntrySections || {};
 
         return this.props.dataEntrySections ?
             Object.keys(this.props.dataEntrySections).reduce((accSections, sectionKey) => {
                 const section = sections[sectionKey];
-                if (section.placement === placement) {
+                if (this.hasPlacement(section, placement, beforeSectionId)) {
                     const sectionFields = fields
                         .filter(fieldContainer => fieldContainer.section === sectionKey);
                     const sectionFieldsContainer = sectionFields.map((fieldContainer, index, array) => (
-                        <FieldSection
+                        <Field
                             formHorizontal={this.props.formHorizontal}
                             fieldContainer={fieldContainer}
                             index={index}
@@ -186,7 +204,7 @@ class DataEntryPlain extends React.Component<Props> {
                         accSections.push(
                             <div
                                 key={sectionKey}
-                                className={this.props.classes.dataEntryFieldSectionContainer}
+                                className={this.props.classes.dataEntrySectionContainer}
                             >
                                 <Section
                                     header={
@@ -206,13 +224,13 @@ class DataEntryPlain extends React.Component<Props> {
             : [];
     }
 
-    renderDataEntryFieldsByPlacement = (placement: $Values<typeof placements>) => {
+    renderDataEntryFieldsByPlacement = (placement: $Values<typeof placements>, beforeSectionId?: string) => {
         const fields = this.props.fields || [];
         const fieldFilter = this.props.formHorizontal ? fieldHorizontalFilter(placement) : fieldVerticalFilter(placement);
         const fieldsByPlacement = fields ?
             fields
                 .filter(fieldFilter)
-                .map((fieldContainer, index, array) => (<FieldSection
+                .map((fieldContainer, index, array) => (<Field
                     formHorizontal={this.props.formHorizontal}
                     fieldContainer={fieldContainer}
                     index={index}
@@ -221,7 +239,7 @@ class DataEntryPlain extends React.Component<Props> {
             : [];
 
         if (!this.props.formHorizontal) {
-            return [...fieldsByPlacement, ...this.getFieldSectionsWithPlacement(placement)];
+            return [...fieldsByPlacement, ...this.getSectionsWithPlacement(placement, beforeSectionId)];
         }
         return fieldsByPlacement;
     }
@@ -258,7 +276,9 @@ class DataEntryPlain extends React.Component<Props> {
                 validationAttempted={completionAttempted || saveAttempted}
                 onUpdateField={this.handleUpdateField}
                 onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                onRenderDataEntryFieldsByPlacement={() => this.renderDataEntryFieldsByPlacement(placements.MIDDLE)}
+                onCustomContent={beforeSectionId => (
+                    this.renderDataEntryFieldsByPlacement(placements.BEFORE_METADATA_BASED_SECTION, beforeSectionId)
+                )}
                 {...passOnProps}
             />
         );

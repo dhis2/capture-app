@@ -140,7 +140,6 @@ const getStageGeometrySettings = () => ({
     getPropName: () => 'stageGeometry',
     getValidatorContainers: () => [],
     getMeta: () => ({
-        placement: placements.MIDDLE,
         section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,
     }),
 });
@@ -219,7 +218,6 @@ const getReportDateSettingsFn = () => {
         getPropName: () => 'stageOccurredAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
-            placement: placements.MIDDLE,
             section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,
         }),
     };

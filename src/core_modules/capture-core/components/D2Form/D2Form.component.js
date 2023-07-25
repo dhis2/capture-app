@@ -82,11 +82,6 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         return `${this.props.id}-${sectionId}`;
     }
 
-    renderFormMiddleIfApplicable = (formFoundation, section, onRenderDataEntryFieldsByPlacement) =>
-        formFoundation.middleId === section.id &&
-        onRenderDataEntryFieldsByPlacement &&
-        onRenderDataEntryFieldsByPlacement()
-
     renderHorizontal = (section: Section, passOnProps: any) => (
         <D2SectionContainer
             key={section.id}
@@ -121,7 +116,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
             id,
             classes,
             isFormInReduxStore,
-            onRenderDataEntryFieldsByPlacement,
+            onCustomContent,
             ...passOnProps
         } = this.props;
         const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(entry => entry[1]);
@@ -131,7 +126,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
                 ? this.renderHorizontal(section, passOnProps)
                 : (
                     <>
-                        {this.renderFormMiddleIfApplicable(formFoundation, section, onRenderDataEntryFieldsByPlacement)}
+                        {onCustomContent && onCustomContent(section.id) }
                         {this.renderVertical(section, passOnProps)}
                     </>
                 )

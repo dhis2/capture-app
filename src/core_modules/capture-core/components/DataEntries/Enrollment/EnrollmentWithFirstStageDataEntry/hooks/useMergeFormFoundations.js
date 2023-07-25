@@ -29,7 +29,6 @@ export const useMergeFormFoundations = (
             o.description = description;
             o.featureType = featureType;
             o.validationStrategy = validationStrategy;
-            o.middleId = getSectionId(firstSectionId);
         });
 
         enrollmentFormFoundation.sections.forEach(section => renderFoundation.addSection(section));
@@ -51,5 +50,5 @@ export const useMergeFormFoundations = (
             renderFoundation.addSection(newSection);
         });
 
-        return renderFoundation;
+        return { formFoundation: renderFoundation, beforeSectionId: getSectionId(firstSectionId) };
     }, [enrollmentFormFoundation, firstStageFormFoundation.sections, stageName]);

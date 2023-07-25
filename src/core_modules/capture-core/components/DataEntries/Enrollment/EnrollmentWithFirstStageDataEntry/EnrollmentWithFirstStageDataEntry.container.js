@@ -11,8 +11,12 @@ export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
     } = firstStageMetaData;
 
     const stageName = useMemo(() => firstStageMetaData?.stage?.name, [firstStageMetaData]);
-    const dataEntrySections = useDataEntrySections(stageName);
-    const formFoundation = useMergeFormFoundations(enrollmentFormFoundation, firstStageFormFoundation, stageName);
+    const { formFoundation, beforeSectionId } = useMergeFormFoundations(
+        enrollmentFormFoundation,
+        firstStageFormFoundation,
+        stageName,
+    );
+    const dataEntrySections = useDataEntrySections(stageName, beforeSectionId);
 
     return (
         <FirstStageDataEntry

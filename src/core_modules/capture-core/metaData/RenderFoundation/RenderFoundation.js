@@ -24,7 +24,6 @@ export class RenderFoundation {
     _labels: { [key: string]: string };
     _featureType: string;
     _validationStrategy: $Values<typeof validationStrategies>;
-    _middleId: ?string;
 
     constructor(initFn: ?(_this: RenderFoundation) => void) {
         this._sections = new Map();
@@ -38,13 +37,6 @@ export class RenderFoundation {
     }
     get id(): string {
         return this._id;
-    }
-
-    set middleId(middleId: ?string) {
-        this._middleId = middleId;
-    }
-    get middleId(): ?string {
-        return this._middleId;
     }
 
     set access(access: Access) {
