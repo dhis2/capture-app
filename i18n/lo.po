@@ -3,15 +3,15 @@
 # Viktor Varland <viktor@dhis2.org>, 2022
 # phil_dhis2, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
-# Saysamone Sibounma, 2022
+# Saysamone Sibounma, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Saysamone Sibounma, 2022\n"
-"Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
+"Last-Translator: Saysamone Sibounma, 2023\n"
+"Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -431,7 +431,7 @@ msgid "Delete"
 msgstr "ລົບ"
 
 msgid "Select file"
-msgstr ""
+msgstr "ເລືອກຟາຍ"
 
 msgid "No"
 msgstr "ບໍ່ແມນ"
