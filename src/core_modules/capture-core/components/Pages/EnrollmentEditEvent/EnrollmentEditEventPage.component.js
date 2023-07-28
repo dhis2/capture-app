@@ -18,6 +18,10 @@ import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetEventComment } from '../../WidgetEventComment';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
+import {
+    TrackedEntityRelationshipsWrapper,
+} from '../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
+import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import { NoticeBox } from '../../NoticeBox';
 import {
     TrackedEntityRelationshipsWrapper,
