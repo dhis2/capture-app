@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
-"PO-Revision-Date: 2023-06-01T08:11:59.116Z\n"
+"POT-Creation-Date: 2023-07-25T09:23:57.018Z\n"
+"PO-Revision-Date: 2023-07-25T09:23:57.018Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -938,6 +938,9 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
+msgid "Could not retrieve metadata. Please try again later."
+msgstr "Could not retrieve metadata. Please try again later."
+
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
 
@@ -1346,6 +1349,36 @@ msgstr "{{ scheduledEvents }} scheduled"
 
 msgid "Stages and Events"
 msgstr "Stages and Events"
+
+msgid "New TEI Relationship"
+msgstr "New TEI Relationship"
+
+msgid "Missing implementation step"
+msgstr "Missing implementation step"
+
+msgid "Go back without saving relationship"
+msgstr "Go back without saving relationship"
+
+msgid "New Relationship"
+msgstr "New Relationship"
+
+msgid "Link to an existing {{tetName}}"
+msgstr "Link to an existing {{tetName}}"
+
+msgid "Something went wrong while loading relationships. Please try again later."
+msgstr "Something went wrong while loading relationships. Please try again later."
+
+msgid "TEI's Relationships"
+msgstr "TEI's Relationships"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Created date"
+msgstr "Created date"
+
+msgid "Program stage name"
+msgstr "Program stage name"
 
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"

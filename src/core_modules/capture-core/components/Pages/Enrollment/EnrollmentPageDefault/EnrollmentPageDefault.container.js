@@ -22,12 +22,14 @@ import {
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
+import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { onLinkedRecordClick } = useLinkedRecordClick();
 
     const program = useTrackerProgram(programId);
     const {
@@ -74,6 +76,7 @@ export const EnrollmentPageDefault = () => {
     const onEventClick = (eventId: string) => {
         history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
     };
+
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
         dispatch(updateEnrollmentAttributeValues(updatedAttributeValues
             .map(({ attribute, value }) => ({ id: attribute, value })),
@@ -86,6 +89,7 @@ export const EnrollmentPageDefault = () => {
     };
 
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+
     if (error) {
         return error.errorComponent;
     }
@@ -106,6 +110,7 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
+            onLinkedRecordClick={onLinkedRecordClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
             onEnrollmentError={onEnrollmentError}
         />

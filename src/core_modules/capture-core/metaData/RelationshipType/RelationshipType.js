@@ -13,6 +13,8 @@ type RelationshipConstraint = {
 export class RelationshipType {
     _id: string;
     _name: string;
+    _fromToName: string;
+    _toFromName: string;
     _access: Access;
     _from: RelationshipConstraint;
     _to: RelationshipConstraint;
@@ -59,5 +61,21 @@ export class RelationshipType {
 
     get to(): RelationshipConstraint {
         return this._to;
+    }
+
+    get fromToName(): string {
+        return this._fromToName;
+    }
+
+    set fromToName(value: string) {
+        this._fromToName = value;
+    }
+
+    get toFromName(): string {
+        return this._toFromName;
+    }
+
+    set toFromName(value: string) {
+        this._toFromName = value;
     }
 }

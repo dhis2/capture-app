@@ -21,6 +21,7 @@ import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { cleanUpDataEntry } from '../../DataEntry';
+import { useLinkedRecordClick } from '../common/TEIRelationshipsWidget';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
 
@@ -81,6 +82,8 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const { onLinkedRecordClick } = useLinkedRecordClick();
+
     useEffect(() => () => {
         dispatch(cleanUpDataEntry(dataEntryIds.ENROLLMENT_EVENT));
     }, [dispatch]);
@@ -102,6 +105,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
+    const { enrollment: enrollmentSite } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const onGoBack = () =>
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
 
@@ -109,10 +113,9 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
         dispatch(updateEnrollmentEvents(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
-    const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
-    const trackedEntityName = program?.trackedEntityType?.name;
+    const { name: trackedEntityName, id: trackedEntityTypeId } = program?.trackedEntityType;
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
@@ -120,6 +123,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
+
 
     const pageStatus = getPageStatus({
         orgUnitId,
@@ -140,6 +144,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
             hideWidgets={hideWidgets}
             teiId={teiId}
             enrollmentId={enrollmentId}
+            trackedEntityTypeId={trackedEntityTypeId}
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}
             trackedEntityName={trackedEntityName}
@@ -148,6 +153,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            onLinkedRecordClick={onLinkedRecordClick}
             onEnrollmentError={onEnrollmentError}
             onEnrollmentSuccess={onEnrollmentSuccess}
             eventStatus={event?.status}

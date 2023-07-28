@@ -82,4 +82,5 @@ export const enrollmentPageDesc = createReducerDescription({
             ),
         ],
     }),
+
 }, 'enrollmentPage', initialReducerValue);
