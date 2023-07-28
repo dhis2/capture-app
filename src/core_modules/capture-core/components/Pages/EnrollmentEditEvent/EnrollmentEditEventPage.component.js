@@ -23,10 +23,6 @@ import {
 } from '../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import { NoticeBox } from '../../NoticeBox';
-import {
-    TrackedEntityRelationshipsWrapper,
-} from '../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
-import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 
 const styles = ({ typography }) => ({
     page: {
