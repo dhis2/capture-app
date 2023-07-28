@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Sheila André <sandre@saudigitus.org>, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -77,6 +77,16 @@ msgstr "Data de inscrição"
 
 msgid "Last updated"
 msgstr "Ultima actualização"
+
+msgid "error encountered during field validation"
+msgstr "erro encontrado durante a validação de campo"
+
+msgid "error"
+msgstr "erro"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Este valor está ser validado"
@@ -498,6 +508,12 @@ msgstr "Carregando imagem"
 msgid "Select image"
 msgstr "Selecione a imagem"
 
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
+msgstr ""
+
 msgid "Search"
 msgstr "Pesquisar"
 
@@ -851,6 +867,9 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nova Inscrição no programa{{escape}} {{programName}}"
 
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Save {{trackedEntityName}}"
 msgstr "Gravar {{trackedEntityName}}"
 
@@ -1008,12 +1027,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "Escolha um tipo para começar a pesquisar"
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] "Preencha pelo menos {{count}} atributo para pesquisar"
-msgstr[1] "Preencha pelo menos {{count}} atributos para pesquisar"
-msgstr[2] "Preencha pelo menos {{count}} atributos para pesquisar"
 
 msgid "Search {{name}}"
 msgstr "Pesquise {{name}}"
@@ -1277,25 +1290,11 @@ msgstr ""
 "A data agendada corresponde à data sugerida, mas pode ser alterada se "
 "necessário."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] "A data agendada é {{count}} dia {{position}} da data sugerida."
-msgstr[1] "A data agendada é de {{count}} dias {{position}} da data sugerida."
-msgstr[2] "A data agendada é de {{count}} dias {{position}} da data sugerida."
-
 msgid "after"
 msgstr "Depois "
 
 msgid "before"
 msgstr "Antes "
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "Há {{count}} evento agendado em {{orgUnitName}} neste dia."
-msgstr[1] "Existem {{count}} eventos agendados em {{orgUnitName}} neste dia."
-msgstr[2] "Existem {{count}} eventos agendados em {{orgUnitName}} neste dia."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1346,9 +1345,6 @@ msgstr ""
 "Tente novamente ou entre em contato com o administrador do sistema para "
 "obter suporte"
 
-msgid "tracked entity instance"
-msgstr "instância de entidade rastreada"
-
 msgid "Fix errors in the form to continue."
 msgstr "Corrija os erros no formulário para continuar."
 
@@ -1362,6 +1358,9 @@ msgstr "{{TETName}} perfil"
 
 msgid "Edit"
 msgstr "Editar"
+
+msgid "tracked entity instance"
+msgstr "instância de entidade rastreada"
 
 msgid "New {{ eventName }} event"
 msgstr "Novo evento de {{eventName}}"
@@ -1576,12 +1575,6 @@ msgstr "Até à data"
 
 msgid "To time"
 msgstr "Para o tempo"
-
-msgid "error encountered during field validation"
-msgstr "erro encontrado durante a validação de campo"
-
-msgid "error"
-msgstr "erro"
 
 msgid "Delete polygon"
 msgstr "Excluir polígono"

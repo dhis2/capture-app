@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-07-27T19:19:14.053Z\n"
-"PO-Revision-Date: 2023-07-27T19:19:14.053Z\n"
+"POT-Creation-Date: 2023-07-28T09:35:30.528Z\n"
+"PO-Revision-Date: 2023-07-28T09:35:30.528Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -64,6 +64,15 @@ msgstr "Date of enrollment"
 
 msgid "Last updated"
 msgstr "Last updated"
+
+msgid "error encountered during field validation"
+msgstr "error encountered during field validation"
+
+msgid "error"
+msgstr "error"
+
+msgid "Plugins are not yet available - Please contact your system administrator"
+msgstr "Plugins are not yet available - Please contact your system administrator"
 
 msgid "This value is validating"
 msgstr "This value is validating"
@@ -829,6 +838,9 @@ msgstr "You can also choose a program from the top bar and create in that progra
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "New Enrollment in program{{escape}} {{programName}}"
 
+msgid "Save {{trackedEntityTypeName}}"
+msgstr "Save {{trackedEntityTypeName}}"
+
 msgid "Save {{trackedEntityName}}"
 msgstr "Save {{trackedEntityName}}"
 
@@ -1559,12 +1571,6 @@ msgstr "To date"
 
 msgid "To time"
 msgstr "To time"
-
-msgid "error encountered during field validation"
-msgstr "error encountered during field validation"
-
-msgid "error"
-msgstr "error"
 
 msgid "Delete polygon"
 msgstr "Delete polygon"

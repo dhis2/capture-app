@@ -25,7 +25,7 @@ declare type ApiEnrollmentEvent = {|
 |};
 
 type ApiAttributeValues = {
-    attribute: string,
+    attribute: { id: string },
     value: string,
 };
 

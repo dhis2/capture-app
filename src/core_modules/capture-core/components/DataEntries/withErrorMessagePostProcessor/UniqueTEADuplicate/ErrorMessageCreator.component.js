@@ -2,7 +2,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import type { ErrorData } from 'capture-ui/FormBuilder';
+import type { ErrorData } from '../../../D2Form/FormBuilder';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 
 const getStyles = () => ({

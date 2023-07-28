@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { FormBuilder } from 'capture-ui/FormBuilder/FormBuilder.component';
+import { FormBuilder } from './index';
 import { updateFieldUIOnly } from './formBuilder.actions';
 
 const FormBuilderRefBuilder = (props: Object) => {

@@ -6,18 +6,26 @@ import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEn
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import { useRulesEngineOrgUnit } from '../../../hooks/useRulesEngineOrgUnit';
+import { useRulesEngineOrgUnit } from '../../../hooks';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
     id,
+    saveButtonText,
     trackedEntityInstanceAttributes,
     ...passOnProps
 }) => {
     const orgUnitId = useCurrentOrgUnitInfo().id;
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
     const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
+    const {
+        formId,
+        registrationMetaData: enrollmentMetadata,
+        formFoundation,
+    } = useMetadataForRegistrationForm({ selectedScopeId });
+
     const isUserInteractionInProgress: boolean = useSelector(
         state =>
             dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
@@ -25,6 +33,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
           || dataEntryHasChanges(state, 'relationship-newTei')
           || dataEntryHasChanges(state, 'relationship-newEnrollment'),
     );
+    const trackedEntityTypeNameLC = enrollmentMetadata?.trackedEntityType?.name.toLocaleLowerCase() ?? '';
 
 
     const isSavingInProgress = useSelector(({ possibleDuplicates, newPage }) =>
@@ -38,9 +47,13 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         <EnrollmentRegistrationEntryComponent
             {...passOnProps}
             selectedScopeId={selectedScopeId}
+            formId={formId}
+            formFoundation={formFoundation}
             id={id}
-            ready={ready}
+            saveButtonText={saveButtonText(trackedEntityTypeNameLC)}
+            ready={ready && !!enrollmentMetadata}
             teiId={teiId}
+            enrollmentMetadata={enrollmentMetadata}
             skipDuplicateCheck={skipDuplicateCheck}
             orgUnitId={orgUnitId}
             orgUnit={orgUnit}
