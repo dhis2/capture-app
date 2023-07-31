@@ -8,7 +8,6 @@ import { useLifecycle } from './hooks';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRulesEngineOrgUnit } from '../../../hooks';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
-import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
@@ -19,17 +18,15 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
 }) => {
     const orgUnitId = useCurrentOrgUnitInfo().id;
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
-    const { teiId, ready, skipDuplicateCheck, firstStageMetaData } = useLifecycle(
-        selectedScopeId,
-        id,
-        trackedEntityInstanceAttributes,
-        orgUnit,
-    );
     const {
+        teiId,
+        ready,
+        skipDuplicateCheck,
+        firstStageMetaData,
         formId,
-        registrationMetaData: enrollmentMetadata,
+        enrollmentMetadata,
         formFoundation,
-    } = useMetadataForRegistrationForm({ selectedScopeId });
+    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
 
     const isUserInteractionInProgress: boolean = useSelector(
         state =>

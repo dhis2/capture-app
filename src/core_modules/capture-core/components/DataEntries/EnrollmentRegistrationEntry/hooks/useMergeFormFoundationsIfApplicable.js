@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { RenderFoundation, Section } from '../../../../../metaData';
+import { RenderFoundation, Section, ProgramStage } from '../../../../metaData';
 
 const addElements = (section, newSection) =>
     Array.from(section.elements.entries())
@@ -13,15 +13,24 @@ const addElements = (section, newSection) =>
 const getSectionId = sectionId =>
     (sectionId === Section.MAIN_SECTION_ID ? `${Section.MAIN_SECTION_ID}-stage` : sectionId);
 
-export const useMergeFormFoundations = (
-    enrollmentFormFoundation: RenderFoundation,
-    firstStageFormFoundation: RenderFoundation,
-    stageName: string,
-) =>
-    useMemo(() => {
+export const useMergeFormFoundationsIfApplicable = (
+    enrollmentFormFoundation?: ?RenderFoundation,
+    firstStageMetaData?: ?{ stage: ?ProgramStage },
+) => {
+    const enrollmentSectionsSize = enrollmentFormFoundation?.sections.size;
+
+    return useMemo(() => {
+        const firstStageFormFoundation = firstStageMetaData?.stage?.stageForm;
+        if (!enrollmentFormFoundation) {
+            return { formFoundation: null };
+        }
+
+        if (!firstStageFormFoundation || enrollmentSectionsSize === 0) {
+            return { formFoundation: enrollmentFormFoundation };
+        }
+
+        const stageName = firstStageMetaData?.stage?.name;
         const { id, name, access, description, featureType, validationStrategy } = enrollmentFormFoundation;
-        // $FlowFixMe[incompatible-type]
-        const [[firstSectionId]] = firstStageFormFoundation.sections;
         const renderFoundation = new RenderFoundation((o) => {
             o.id = id;
             o.name = name;
@@ -50,5 +59,6 @@ export const useMergeFormFoundations = (
             renderFoundation.addSection(newSection);
         });
 
-        return { formFoundation: renderFoundation, beforeSectionId: getSectionId(firstSectionId) };
-    }, [enrollmentFormFoundation, firstStageFormFoundation.sections, stageName]);
+        return { formFoundation: renderFoundation };
+    }, [enrollmentFormFoundation, firstStageMetaData, enrollmentSectionsSize]);
+};

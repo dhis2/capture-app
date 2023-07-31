@@ -21,9 +21,7 @@ export type OwnProps = $ReadOnly<{|
     skipDuplicateCheck?: ?boolean,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
     saveButtonText: (trackedEntityName: string) => string,
-    firstStageMetaData?: {
-        stage: ProgramStage,
-    }
+    firstStageMetaData?: ?{ stage: ?ProgramStage },
 |}>;
 
 type ContainerProps = {|

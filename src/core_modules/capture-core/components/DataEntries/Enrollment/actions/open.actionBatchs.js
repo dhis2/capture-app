@@ -2,7 +2,7 @@
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
-import type { ProgramStage, TrackerProgram } from '../../../../metaData';
+import type { ProgramStage, TrackerProgram, RenderFoundation } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewEnrollment } from './open.actions';
@@ -55,6 +55,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     clientValues,
     firstStage,
     programCategory,
+    formFoundation,
 }: {
     program: TrackerProgram,
     orgUnit: OrgUnit,
@@ -65,6 +66,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     clientValues: { [key: string]: any },
     firstStage?: ProgramStage,
     programCategory?: ProgramCategory,
+    formFoundation: RenderFoundation,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
@@ -94,6 +96,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         orgUnit,
         stage: firstStage,
         attributeValues: clientValues,
+        formFoundation,
     });
 
     return batchActions([

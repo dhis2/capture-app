@@ -33,7 +33,7 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment, ProgramStage, getProgramThrowIfNotFound } from '../../../metaData';
+import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
@@ -338,9 +338,8 @@ type FinalTeiDataEntryProps = {
     onUpdateDataEntryField: Function,
     onUpdateFormFieldAsync: Function,
     onUpdateFormField: Function,
-    firstStageMetaData?: {
-        stage: ProgramStage,
-    },
+    firstStageMetaData?: ?{ stage: ProgramStage },
+    formFoundation: RenderFoundation,
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -367,13 +366,11 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
                 <EnrollmentWithFirstStageDataEntry
                     {...passOnProps}
                     firstStageMetaData={firstStageMetaData}
-                    enrollmentFormFoundation={enrollmentMetadata.enrollmentForm}
                 />
             ) : (
                 <DataEntry
                     {...passOnProps}
                     dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
-                    formFoundation={enrollmentMetadata.enrollmentForm}
                 />
             )
         );
@@ -398,9 +395,8 @@ type PreEnrollmentDataEntryProps = {
     onStartAsyncUpdateField: Function,
     onGetUnsavedAttributeValues?: ?Function,
     teiId?: ?string,
-    firstStageMetaData?: {
-        stage: ProgramStage,
-    }
+    firstStageMetaData?: ?{ stage: ProgramStage },
+    formFoundation: RenderFoundation,
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
@@ -425,18 +421,18 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     }
 
     handleUpdateField = (...args: Array<any>) => {
-        const { programId, orgUnit, firstStageMetaData } = this.props;
-        this.props.onUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage);
+        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        this.props.onUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
     }
 
     handleUpdateDataEntryField = (...args: Array<any>) => {
-        const { programId, orgUnit, firstStageMetaData } = this.props;
-        this.props.onUpdateDataEntryField(...args, programId, orgUnit, firstStageMetaData?.stage);
+        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        this.props.onUpdateDataEntryField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
     }
 
     handleStartAsyncUpdateField = (...args: Array<any>) => {
-        const { programId, orgUnit, firstStageMetaData } = this.props;
-        this.props.onStartAsyncUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage);
+        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        this.props.onStartAsyncUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
     }
 
     render() {

@@ -13,6 +13,7 @@ export const startNewEnrollmentDataEntryInitialisation = ({
     clientValues,
     programCategory,
     firstStage,
+    formFoundation,
 }: Object) =>
     actionCreator(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START)({
         selectedOrgUnit,
@@ -22,4 +23,5 @@ export const startNewEnrollmentDataEntryInitialisation = ({
         clientValues,
         programCategory,
         firstStage,
+        formFoundation,
     });

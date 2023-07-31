@@ -15,7 +15,16 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: Input
     action$.pipe(
         ofType(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
-        switchMap(({ selectedOrgUnit, selectedScopeId: programId, dataEntryId, formValues, clientValues, programCategory, firstStage }) => {
+        switchMap(({
+            selectedOrgUnit,
+            selectedScopeId: programId,
+            dataEntryId,
+            formValues,
+            clientValues,
+            programCategory,
+            firstStage,
+            formFoundation,
+        }) => {
             if (selectedOrgUnit) {
                 let trackerProgram: ?TrackerProgram;
                 try {
@@ -35,6 +44,7 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: Input
                     clientValues,
                     firstStage,
                     programCategory,
+                    formFoundation,
                 });
 
                 return from(openEnrollmentPromise);

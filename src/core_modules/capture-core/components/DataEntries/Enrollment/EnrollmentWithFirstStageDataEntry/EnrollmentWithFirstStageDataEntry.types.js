@@ -5,5 +5,5 @@ export type Props = {
     firstStageMetaData: {
         stage: ProgramStage,
     },
-    enrollmentFormFoundation: RenderFoundation,
+    formFoundation: RenderFoundation,
 };
