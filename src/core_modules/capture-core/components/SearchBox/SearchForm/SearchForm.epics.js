@@ -17,7 +17,6 @@ import {
     getTrackedEntityInstances,
 } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
-    type DataElement,
     dataElementTypes,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
@@ -66,11 +65,6 @@ const searchViaUniqueIdStream = ({
         startWith(showLoadingViewOnSearchBox()),
         catchError(() => of(showErrorViewOnSearchBox())),
     );
-
-export const deriveFilterKeyword = (fieldId: string, attributes: Array<DataElement>): ("eq" | "like") => {
-    const hasOptionSet = Boolean(attributes.find(({ id, optionSet }) => (id === fieldId) && (optionSet)));
-    return hasOptionSet ? 'eq' : 'like';
-};
 
 const getFiltersForAttributesSearchQuery = (formValues, attributes) => Object.keys(formValues)
     .filter(fieldId => formValues[fieldId])
