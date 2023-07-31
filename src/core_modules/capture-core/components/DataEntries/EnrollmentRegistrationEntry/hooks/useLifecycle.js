@@ -8,7 +8,7 @@ import { useLocationQuery } from '../../../../utils/routing';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
-import { useBuildFirstStageRegistration } from '../../../../hooks';
+import { useBuildFirstStageRegistration } from './useBuildFirstStageRegistration';
 import { useMetadataForRegistrationForm } from '../../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMergeFormFoundationsIfApplicable } from './useMergeFormFoundationsIfApplicable';

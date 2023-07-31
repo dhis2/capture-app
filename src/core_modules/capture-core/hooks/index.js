@@ -7,4 +7,3 @@ export { useRulesEngineOrgUnit } from './useRulesEngineOrgUnit';
 export { useAvailableProgramStages } from './useAvailableProgramStages';
 export { useScopeInfo } from './useScopeInfo';
 export { useScopeTitleText } from './useScopeTitleText';
-export { useBuildFirstStageRegistration } from './useBuildFirstStageRegistration';

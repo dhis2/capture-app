@@ -14,6 +14,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     id,
     saveButtonText,
     trackedEntityInstanceAttributes,
+    onSave,
     ...passOnProps
 }) => {
     const orgUnitId = useCurrentOrgUnitInfo().id;
@@ -61,6 +62,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             orgUnit={orgUnit}
             isUserInteractionInProgress={isUserInteractionInProgress}
             isSavingInProgress={isSavingInProgress}
+            onSave={() => onSave(firstStageMetaData)}
         />
     );
 };

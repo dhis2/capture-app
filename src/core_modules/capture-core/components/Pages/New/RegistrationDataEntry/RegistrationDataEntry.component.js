@@ -15,7 +15,6 @@ import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
-import { useBuildFirstStageRegistration } from '../../../../hooks';
 import {
     useMetadataForRegistrationForm,
 } from '../../../DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
@@ -101,10 +100,6 @@ const RegistrationDataEntryPlain = ({
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
     const { formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
-    const { firstStageMetaData } = useBuildFirstStageRegistration(
-        selectedScopeId,
-        scopeType !== scopeTypes.TRACKER_PROGRAM,
-    );
 
     const handleRegistrationScopeSelection = (id) => {
         setScopeId(id);
@@ -184,7 +179,9 @@ const RegistrationDataEntryPlain = ({
                                 <EnrollmentRegistrationEntryWrapper
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
-                                    onSave={() => onSaveWithEnrollment(formFoundation, firstStageMetaData?.stage)}
+                                    onSave={firstStageMetaData =>
+                                        onSaveWithEnrollment(formFoundation, firstStageMetaData?.stage)
+                                    }
                                     saveButtonText={(trackedEntityTypeNameLC: string) => i18n.t('Save {{trackedEntityTypeName}}', {
                                         trackedEntityTypeName: trackedEntityTypeNameLC,
                                         interpolation: { escapeValue: false },

@@ -93,7 +93,7 @@ export const updateDataEntryFieldBatch = (
 
     return batchActions([
         innerAction,
-        startRunRulesPostUpdateField(dataEntryId, itemId, uid, stage),
+        startRunRulesPostUpdateField(dataEntryId, itemId, uid),
         startRunRulesOnUpdateForNewEnrollment(innerAction.payload, uid, programId, orgUnit, stage, formFoundation),
     ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
@@ -110,7 +110,7 @@ export const updateFieldBatch = (
 
     return batchActions([
         innerAction,
-        startRunRulesPostUpdateField(dataEntryId, itemId, uid, stage),
+        startRunRulesPostUpdateField(dataEntryId, itemId, uid),
         startRunRulesOnUpdateForNewEnrollment(innerAction.payload, uid, programId, orgUnit, stage, formFoundation),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
@@ -128,7 +128,7 @@ export const asyncUpdateSuccessBatch = (
 
     return batchActions([
         innerAction,
-        startRunRulesPostUpdateField(dataEntryId, itemId, uid, stage),
+        startRunRulesPostUpdateField(dataEntryId, itemId, uid),
         startRunRulesOnUpdateForNewEnrollment({ ...innerAction.payload, dataEntryId, itemId }, uid, programId, orgUnit, stage, formFoundation),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };

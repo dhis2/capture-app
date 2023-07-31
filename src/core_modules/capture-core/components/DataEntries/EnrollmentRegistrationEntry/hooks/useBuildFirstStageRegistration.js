@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
-import { getProgramAndStageForProgram } from '../metaData';
-import { useProgramFromIndexedDB } from '../utils/cachedDataHooks/useProgramFromIndexedDB';
+import { getProgramAndStageForProgram } from '../../../../metaData';
+import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const useBuildFirstStageRegistration = (programId: string, skip: boolean = false) => {
     const { program, isLoading } = useProgramFromIndexedDB(programId, { enabled: !skip });
