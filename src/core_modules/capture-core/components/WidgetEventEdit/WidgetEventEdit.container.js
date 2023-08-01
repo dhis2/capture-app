@@ -81,7 +81,7 @@ export const WidgetEventEditPlain = ({
                         <ConditionalTooltip
                             content={i18n.t('You don\'t have access to edit this event')}
                             enabled={!eventAccess?.write}
-                            className={classes.tooltip}
+                            wrapperClassName={classes.tooltip}
                         >
                             <Button
                                 small

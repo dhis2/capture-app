@@ -4,18 +4,18 @@ import { Tooltip } from '@dhis2/ui';
 
 type Props = {
     enabled: boolean,
-    className?: string,
+    wrapperClassName?: string,
     children: any,
 };
 
 export const ConditionalTooltip = (props: Props) => {
-    const { enabled, className, children, ...passOnProps } = props;
+    const { enabled, wrapperClassName, children, ...passOnProps } = props;
 
     return enabled ?
         (<Tooltip {...passOnProps}>
             { ({ onMouseOver, onMouseOut, ref }) => (
                 <span
-                    className={className}
+                    className={wrapperClassName}
                     ref={(btnRef) => {
                         if (btnRef) {
                             btnRef.onpointerenter = onMouseOver;

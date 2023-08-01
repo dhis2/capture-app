@@ -141,7 +141,7 @@ class RelationshipsPlain extends React.Component<Props> {
                     <ConditionalTooltip
                         content={i18n.t('You don\'t have access to delete this relationship')}
                         enabled={!canDelete}
-                        className={classes.tooltip}
+                        wrapperClassName={classes.tooltip}
                     >
                         <IconButton
                             onClick={() => { onRemoveRelationship(relationship.clientId); }}
