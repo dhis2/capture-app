@@ -184,7 +184,7 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             const { uid: stateUid } = newPage || {};
             const teiId = typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const enrollmentId = typeReportMap.ENROLLMENT.objectReports[0].uid;
-            const eventId = typeReportMap.EVENT.objectReports.find(event => event.index === eventIndex)?.uid;
+            const eventId = typeReportMap.EVENT.objectReports.objectReports[eventIndex]?.uid;
 
             if (stateUid !== uid) {
                 return EMPTY;
