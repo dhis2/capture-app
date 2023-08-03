@@ -228,7 +228,6 @@ When('you click the first name column header', () => {
 
     cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
         .eq(0)
-        .click()
         .click();
 });
 

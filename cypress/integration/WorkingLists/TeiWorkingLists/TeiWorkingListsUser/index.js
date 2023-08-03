@@ -334,7 +334,6 @@ Then('the list should display 10 rows of data', () => {
 When('you click the first name column header', () => {
     cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
         .eq(0)
-        .click()
         .click();
 });
 
