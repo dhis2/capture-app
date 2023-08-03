@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2023\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -70,6 +70,16 @@ msgstr "报名日期"
 
 msgid "Last updated"
 msgstr "上次更新"
+
+msgid "error encountered during field validation"
+msgstr "字段验证发生错误。"
+
+msgid "error"
+msgstr "错误"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr "插件尚不可用 - 请联系您的系统管理员"
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -264,7 +274,7 @@ msgid ""
 msgstr "离开本页将丢掉你的新关系的选择"
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "是的，放弃更改"
 
 msgid "No, cancel"
 msgstr "不，取消"
@@ -366,7 +376,7 @@ msgstr "排序"
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
-msgstr ""
+msgstr "此事件有未保存的更改。离开此页面而不保存将丢失这些更改。您确定要放弃未保存的更改吗？"
 
 msgid "No events to display"
 msgstr "无事件可显示"
@@ -579,13 +589,13 @@ msgid "Write comment"
 msgstr "写备注"
 
 msgid "was blanked out and hidden by your last action"
-msgstr ""
+msgstr "被你的最后一个动作清空并隐藏"
 
 msgid "Notice"
-msgstr ""
+msgstr "注意"
 
 msgid "Close the notice"
-msgstr ""
+msgstr "关闭通知"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "为 {{programName}} 使用新的注册仪表板"
@@ -814,6 +824,9 @@ msgstr "您也可以从顶部栏中选择一个项目并在该项目中创建"
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}的新报名"
 
+msgid "Save {{trackedEntityTypeName}}"
+msgstr "保存 {{trackedEntityTypeName}}"
+
 msgid "Save {{trackedEntityName}}"
 msgstr "保存{{trackedEntityName}}"
 
@@ -966,10 +979,6 @@ msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进
 
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] "至少填写 {{count}} 个属性进行搜索"
 
 msgid "Search {{name}}"
 msgstr "搜索{{name}}"
@@ -1213,21 +1222,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr "预定日期与建议日期相符，但可以根据需要进行更改。"
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] "预定日期是 {{count}} 天 {{position}} 建议的日期。"
-
 msgid "after"
 msgstr "后"
 
 msgid "before"
 msgstr "前"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "这天在 {{orgUnitName}} 有 {{count}} 个预定活动。"
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1496,12 +1495,6 @@ msgstr "到目前为止"
 
 msgid "To time"
 msgstr "到时间"
-
-msgid "error encountered during field validation"
-msgstr "字段验证发生错误。"
-
-msgid "error"
-msgstr "错误"
 
 msgid "Delete polygon"
 msgstr "删除多边形"

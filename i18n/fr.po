@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yayra Gomado <ygomado@hispwca.org>, 2023\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -81,6 +81,16 @@ msgstr "Date d'inscription"
 
 msgid "Last updated"
 msgstr "Dernière mise à jour"
+
+msgid "error encountered during field validation"
+msgstr "erreur survenue lors de la validation du champ"
+
+msgid "error"
+msgstr "erreur"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Valeur en cours de validation"
@@ -862,6 +872,9 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nouvelle inscription au programme {{escape}} {{programName}}"
 
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Save {{trackedEntityName}}"
 msgstr "Enrégistrer {{trackedEntityName}}"
 
@@ -1017,12 +1030,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "Choisir un type pour commencer la recherche"
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 msgid "Search {{name}}"
 msgstr "Rechercher {{nom}}"
@@ -1286,25 +1293,11 @@ msgstr ""
 "La date prévue correspond à la date suggérée, mais elle peut être modifiée "
 "si nécessaire."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] "La date prévue est {{count}} jour {{position}} la date suggérée."
-msgstr[1] "xx"
-msgstr[2] "La date prévue est {{count}} jour {{position}} la date suggérée."
-
 msgid "after"
 msgstr "après"
 
 msgid "before"
 msgstr "avant"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1586,12 +1579,6 @@ msgstr "Date de fin"
 
 msgid "To time"
 msgstr "À"
-
-msgid "error encountered during field validation"
-msgstr "erreur survenue lors de la validation du champ"
-
-msgid "error"
-msgstr "erreur"
 
 msgid "Delete polygon"
 msgstr "Supprimer polygone"

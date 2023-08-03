@@ -15,6 +15,7 @@ import type
     CachedTrackedEntityAttribute,
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
+import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 
 export class TrackedEntityTypeFactory {
     static translationPropertyNames = {
@@ -32,6 +33,7 @@ export class TrackedEntityTypeFactory {
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
         cachedOptionSets: Map<string, CachedOptionSet>,
         locale: ?string,
+        dataEntryFormConfig: ?DataEntryFormConfig,
     ) {
         this.locale = locale;
         this.dataElementFactory = new DataElementFactory({
@@ -47,6 +49,7 @@ export class TrackedEntityTypeFactory {
         this.teiRegistrationFactory = new TeiRegistrationFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
+            dataEntryFormConfig,
             locale,
         });
     }
@@ -93,7 +96,11 @@ export class TrackedEntityTypeFactory {
         }
 
         trackedEntityType.teiRegistration =
-            await this.teiRegistrationFactory.build(cachedType, trackedEntityType.searchGroups, trackedEntityType);
+            await this.teiRegistrationFactory.build(
+                cachedType,
+                trackedEntityType.searchGroups,
+                trackedEntityType,
+            );
 
         return trackedEntityType;
     }

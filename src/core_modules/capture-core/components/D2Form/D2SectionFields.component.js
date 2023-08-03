@@ -2,17 +2,19 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type { FormBuilder, FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
-import { FormBuilderContainer } from './FormBuilder.container';
+import type { FieldConfig, FormBuilder } from './FormBuilder/FormBuilder.component';
+import { FormBuilderContainer } from './FormBuilder/FormBuilder.container';
 import { withDivider } from './FieldDivider/withDivider';
 import { withAlternateBackgroundColors } from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
 import { withCustomForm } from './D2CustomForm/withCustomForm';
 import { buildField } from './field/buildField';
 import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
-import type { DataElement, CustomForm } from '../../metaData';
+import type { CustomForm, DataElement } from '../../metaData';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 import { validatorTypes } from './field/validators/constants';
 import type { QuerySingleResource } from '../../utils/api/api.types';
+import { FormFieldPlugin } from './FormFieldPlugin';
+import { FormFieldPluginConfig } from '../../metaData/FormFieldPluginConfig';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 type FormsValues = {
@@ -38,7 +40,7 @@ type RulesMessages = {
 };
 
 type Props = {
-    fieldsMetaData: Map<string, DataElement>,
+    fieldsMetaData: Map<string, DataElement | FormFieldPluginConfig>,
     values: FormsValues,
     rulesMessages: RulesMessages,
     rulesHiddenFields: RulesHiddenFields,
@@ -64,17 +66,33 @@ export class D2SectionFieldsComponent extends Component<Props> {
         return Array.from(fieldsMetaData.entries())
             .map(entry => entry[1])
             // $FlowFixMe[incompatible-return] automated comment
-            .map(metaDataElement => buildField(
-                metaDataElement,
-                {
-                    formHorizontal: props.formHorizontal,
-                    formId: props.formId,
-                    viewMode: props.viewMode,
-                    ...fieldOptions,
-                },
-                !!customForm,
-                querySingleResource,
-            ))
+            .map((metaDataElement) => {
+                if (metaDataElement instanceof FormFieldPluginConfig) {
+                    return ({
+                        id: metaDataElement.id,
+                        component: FormFieldPlugin,
+                        plugin: true,
+                        props: {
+                            pluginSource: metaDataElement.pluginSource,
+                            fieldsMetadata: metaDataElement.fields,
+                            formId: props.formId,
+                        },
+                    });
+                }
+
+                // $FlowFixMe - filter removes undefined values
+                return buildField(
+                    metaDataElement,
+                    {
+                        formHorizontal: props.formHorizontal,
+                        formId: props.formId,
+                        viewMode: props.viewMode,
+                        ...fieldOptions,
+                    },
+                    !!customForm,
+                    querySingleResource,
+                );
+            })
             .filter(field => field);
     }
 
@@ -239,7 +257,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
             values,
             onUpdateField,
             formId,
-            formBuilderId,
             rulesCompulsoryFields,
             rulesDisabledFields,
             rulesHiddenFields,
@@ -256,8 +273,9 @@ export class D2SectionFieldsComponent extends Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <CustomFormHOC
                 formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
-                id={formBuilderId}
+                id={formId}
                 fields={this.getFieldConfigWithRulesEffects()}
+                dataElements={this.formFields}
                 values={values}
                 onUpdateField={this.handleUpdateField}
                 onUpdateFieldAsync={this.handleUpdateFieldAsync}

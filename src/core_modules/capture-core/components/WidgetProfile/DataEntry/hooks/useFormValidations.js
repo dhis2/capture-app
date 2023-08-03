@@ -29,7 +29,7 @@ export const useFormValidations = (dataEntryId: string, itemId: string, saveAtte
         rulesEffectsGeneralErrors: store.rulesEffectsGeneralErrors && store.rulesEffectsGeneralErrors[ruleId],
         rulesEffectsGeneralWarnings: store.rulesEffectsGeneralWarnings && store.rulesEffectsGeneralWarnings[ruleId],
         rulesEffectsMessages: store.rulesEffectsMessages && store.rulesEffectsMessages[ruleId],
-        formsSectionsFieldsUI: store.formsSectionsFieldsUI && store.formsSectionsFieldsUI[`${ruleId}-#MAIN#`],
+        formsSectionsFieldsUI: store.formsSectionsFieldsUI && store.formsSectionsFieldsUI[ruleId],
     }));
 
     // $FlowFixMe[incompatible-use]

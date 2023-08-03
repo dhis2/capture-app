@@ -1,6 +1,6 @@
 // @flow
 import { type ComponentType } from 'react';
-import type { ValidatorContainer } from 'capture-ui/FormBuilder/FormBuilder.component';
+import type { ValidatorContainer } from '../../../FormBuilder';
 import { getValidators } from '../../validators';
 import type { DataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';

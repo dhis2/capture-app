@@ -1,5 +1,5 @@
 // @flow
-import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
+import type { FieldConfig } from '../../../FormBuilder';
 import { getBaseConfigForField } from './configBase';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import type { FieldConfigForType } from './configBase';
