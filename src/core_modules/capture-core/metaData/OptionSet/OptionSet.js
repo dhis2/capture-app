@@ -8,6 +8,7 @@ import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
 import type { DataElement } from '../DataElement';
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { Option, Value } from './Option';
+import type { CachedAttributeValue } from '../../storageControllers';
 
 export class OptionSet {
     static errorMessages = {
@@ -15,9 +16,11 @@ export class OptionSet {
         UNSUPPORTED_VIEWTYPE: 'Tried to set an unsupported viewType',
         UNSUPPORTED_INPUTTYPE: 'Tried to set an unsuported inputType',
     };
+    static multiOptionsValuesSeparator = ',';
 
     _id: ?string;
     _emptyText: ?string;
+    _attributeValues: Array<CachedAttributeValue>;
     _options: Array<Option>;
     _optionGroups: Map<string, OptionGroup>;
     _viewType: $Values<typeof viewTypes>;
@@ -29,7 +32,9 @@ export class OptionSet {
         options?: ?Array<Option>,
         optionGroups?: ?Map<string, OptionGroup>,
         dataElement?: ?DataElement,
-        onConvert?: ?ConvertFn) {
+        onConvert?: ?ConvertFn,
+        attributeValues?: ?Array<CachedAttributeValue>,
+    ) {
         this._options = !options ? [] : options.reduce((accOptions: Array<Option>, currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
                 currentOption.value = onConvert && dataElement ?
@@ -46,6 +51,7 @@ export class OptionSet {
 
         this._id = id;
         this._dataElement = dataElement;
+        this._attributeValues = attributeValues || [];
         this._inputType = inputTypes.DROPDOWN;
     }
 
@@ -91,6 +97,14 @@ export class OptionSet {
     }
     set emptyText(emptyText?: ?string): ?string {
         this._emptyText = emptyText;
+    }
+
+    get attributeValues(): Array<ApiAttributeValues> {
+        return this._attributeValues;
+    }
+
+    set attributeValues(value: Array<ApiAttributeValues>) {
+        this._attributeValues = value;
     }
 
     get options(): Array<Option> {
@@ -171,6 +185,18 @@ export class OptionSet {
     getOptionsText(values: Array<Value>): Array<string> {
         const options = this.getOptions(values);
         return options.map((option: Option) => option.text);
+    }
+
+    getMultiOptionsText(codes: string): string {
+        return codes.split(OptionSet.multiOptionsValuesSeparator).reduce((acc, code) => {
+            const option = this.options.find(o => o.value === code);
+            if (option) {
+                acc.push(option.text);
+            } else {
+                log.warn(errorCreator(OptionSet.errorMessages.OPTION_NOT_FOUND)({ OptionSet: this, code }));
+            }
+            return acc;
+        }, []).join(`${OptionSet.multiOptionsValuesSeparator} `);
     }
 
     getOptionsTextAsString(values: Array<Value>): string {

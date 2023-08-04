@@ -16,6 +16,7 @@ import {
     getFileResourceFieldConfig,
     getImageFieldConfig,
     getOptionSetFieldConfig,
+    getMultiOptionSetFieldConfig,
     getTextRangeFieldConfig,
     getDateRangeFieldConfig,
     getDateTimeRangeFieldConfig,
@@ -38,6 +39,7 @@ type FieldForTypes = {
 const fieldForTypes: FieldForTypes = {
     [dataElementTypes.EMAIL]: getTextFieldConfig,
     [dataElementTypes.TEXT]: getTextFieldConfig,
+    [dataElementTypes.MULTI_TEXT]: getMultiOptionSetFieldConfig,
     [dataElementTypes.PHONE_NUMBER]: getTextFieldConfig,
     [dataElementTypes.LONG_TEXT]:
     (metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) => {
@@ -86,7 +88,7 @@ export function getDefaultFormField(metaData: DataElement, options: Object, quer
         return fieldForTypes[dataElementTypes.UNKNOWN](metaData, options, querySingleResource);
     }
 
-    if (metaData.optionSet) {
+    if (metaData.optionSet && metaData.type !== dataElementTypes.MULTI_TEXT) {
         return getOptionSetFieldConfig(metaData, options, querySingleResource);
     }
 

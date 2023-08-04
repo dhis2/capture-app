@@ -6,16 +6,16 @@
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2022
 # Bram Piot <bram.piot@gmail.com>, 2022
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
-# Yayra Gomado <ygomado@hispwca.org>, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2023
+# Yayra Gomado <ygomado@hispwca.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
+"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2023\n"
+"Last-Translator: Yayra Gomado <ygomado@hispwca.org>, 2023\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,6 +81,16 @@ msgstr "Date d'inscription"
 
 msgid "Last updated"
 msgstr "Dernière mise à jour"
+
+msgid "error encountered during field validation"
+msgstr "erreur survenue lors de la validation du champ"
+
+msgid "error"
+msgstr "erreur"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Valeur en cours de validation"
@@ -276,8 +286,8 @@ msgstr "Ajouter une relation à l'événement."
 msgid "Go back to event without saving relationship"
 msgstr "Revenir à l'événement sans sauvegarder la relation"
 
-msgid "Unsaved changes"
-msgstr "Modifications non enregistrées"
+msgid "Discard unsaved changes?"
+msgstr "Abandonner les modifications non enregistrées?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -286,11 +296,11 @@ msgstr ""
 "En quittant cette page, les choix effectués dans le cadre d'une nouvelle "
 "relation seront rejetés"
 
-msgid "Yes, discard"
-msgstr "Oui, supprimer"
+msgid "Yes, discard changes"
+msgstr "Oui, annuler les modifications"
 
-msgid "No, stay here"
-msgstr "Non, continuer ici"
+msgid "No, cancel"
+msgstr "Non, annuler"
 
 msgid "New event"
 msgstr "Nouvel événement"
@@ -368,22 +378,8 @@ msgstr "Générer un nouvel événement"
 msgid "Do you want to create another event?"
 msgstr "Voulez-vous créer un autre événement?"
 
-msgid "No, cancel"
-msgstr "Non, annuler"
-
 msgid "Yes, create new event"
 msgstr "Oui, créer un nouvel évènement"
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"En quittant cette page, les modifications apportées à cet événement seront "
-"annulées."
-
-msgid "Warnings found"
-msgstr "Avertissements trouvés"
-
-msgid "Abort"
-msgstr "Annuler"
 
 msgid "Back to form"
 msgstr "Retour au formulaire"
@@ -408,6 +404,11 @@ msgstr "Opérations en cours"
 
 msgid "Sort"
 msgstr "Trier"
+
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr "Aucun évènement à afficher"
@@ -517,6 +518,12 @@ msgstr "Téléchargement de l'image"
 msgid "Select image"
 msgstr "Sélectionner l'image"
 
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
+msgstr "Pas de résultat trouvé"
+
 msgid "Search"
 msgstr "Chercher"
 
@@ -614,6 +621,15 @@ msgstr "Vous n'êtes pas autorisé à écrire des commentaires"
 
 msgid "Write comment"
 msgstr "Ecrire commentaire"
+
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
@@ -856,6 +872,9 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nouvelle inscription au programme {{escape}} {{programName}}"
 
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Save {{trackedEntityName}}"
 msgstr "Enrégistrer {{trackedEntityName}}"
 
@@ -1011,12 +1030,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "Choisir un type pour commencer la recherche"
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 msgid "Search {{name}}"
 msgstr "Rechercher {{nom}}"
@@ -1280,25 +1293,11 @@ msgstr ""
 "La date prévue correspond à la date suggérée, mais elle peut être modifiée "
 "si nécessaire."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] "La date prévue est {{count}} jour {{position}} la date suggérée."
-msgstr[1] "xx"
-msgstr[2] "La date prévue est {{count}} jour {{position}} la date suggérée."
-
 msgid "after"
 msgstr "après"
 
 msgid "before"
 msgstr "avant"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1350,9 +1349,6 @@ msgstr ""
 "Essayez à nouveau ou contactez votre administrateur système pour obtenir de "
 "l'aide"
 
-msgid "tracked entity instance"
-msgstr "instance d'entité suivie"
-
 msgid "Fix errors in the form to continue."
 msgstr "Corriger les erreurs dans le formulaire pour continuer."
 
@@ -1365,6 +1361,9 @@ msgstr "Profil {{Nom de la TET}}"
 
 msgid "Edit"
 msgstr "Modifier"
+
+msgid "tracked entity instance"
+msgstr "instance d'entité suivie"
 
 msgid "New {{ eventName }} event"
 msgstr "Nouvel événement {{nomdel'événement}}"
@@ -1581,17 +1580,14 @@ msgstr "Date de fin"
 msgid "To time"
 msgstr "À"
 
-msgid "error encountered during field validation"
-msgstr "erreur survenue lors de la validation du champ"
-
-msgid "error"
-msgstr "erreur"
-
 msgid "Delete polygon"
 msgstr "Supprimer polygone"
 
 msgid "Set area"
 msgstr "Définir l'aire"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "Mode compatibilité"

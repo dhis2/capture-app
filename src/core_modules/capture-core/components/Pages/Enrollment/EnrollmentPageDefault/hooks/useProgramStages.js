@@ -34,6 +34,7 @@ export const useProgramStages = (program: Program, programStages?: Array<apiProg
                                 name: dataElement.displayName,
                                 type: dataElement.valueType,
                                 options,
+                                optionSet: dataElement.optionSet,
                             });
                         }
                         return acc;
