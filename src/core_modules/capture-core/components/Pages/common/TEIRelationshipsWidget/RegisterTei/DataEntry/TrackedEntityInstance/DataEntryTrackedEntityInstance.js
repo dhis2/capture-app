@@ -4,24 +4,31 @@ import i18n from '@dhis2/d2-i18n';
 import { withTheme } from '@material-ui/core';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import teiClasses from './trackedEntityInstance.module.css';
-import { TeiRegistrationEntry } from '../../../../../DataEntries';
+import { TeiRegistrationEntry } from '../../../../../../DataEntries';
 import type { Props } from './dataEntryTrackedEntityInstance.types';
-import { useCurrentOrgUnitInfo } from '../../../../../../hooks/useCurrentOrgUnitInfo';
+import { getTeiRegistrationMetadata } from './tei.selectors';
+import { useLocationQuery } from '../../../../../../../utils/routing';
 
 const RelationshipTrackedEntityInstancePlain =
     ({
         theme,
         onSave,
-        teiRegistrationMetadata = {},
+        trackedEntityTypeId,
+        // teiRegistrationMetadata = {},
         duplicatesReviewPageSize,
         renderDuplicatesDialogActions,
         renderDuplicatesCardActions,
         ExistingUniqueValueDialogActions,
     }: Props) => {
-        const { id: orgUnitId } = useCurrentOrgUnitInfo();
+        const { orgUnitId } = useLocationQuery();
         const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
+        const teiRegistrationMetadata = getTeiRegistrationMetadata(trackedEntityTypeId);
         const { trackedEntityType } = teiRegistrationMetadata || {};
         const trackedEntityTypeNameLC = trackedEntityType.name.toLocaleLowerCase();
+
+        if (!teiRegistrationMetadata && !teiRegistrationMetadata?.form) {
+            return null;
+        }
 
         return (
             // $FlowFixMe - flow error will be resolved when rewriting relationship metadata fetching
@@ -43,4 +50,4 @@ const RelationshipTrackedEntityInstancePlain =
         );
     };
 
-export const RelationshipTrackedEntityInstance = withTheme()(RelationshipTrackedEntityInstancePlain);
+export const DataEntryTrackedEntityInstance = withTheme()(RelationshipTrackedEntityInstancePlain);

@@ -159,6 +159,7 @@ const EnrollmentEditEventPagePain = ({
                                 trackedEntityTypeId={trackedEntityTypeId}
                                 teiId={teiId}
                                 programId={programId}
+                                orgUnitId={orgUnitId}
                                 addRelationshipRenderElement={addRelationShipContainerElement}
                                 onOpenAddRelationship={toggleVisibility}
                                 onCloseAddRelationship={toggleVisibility}

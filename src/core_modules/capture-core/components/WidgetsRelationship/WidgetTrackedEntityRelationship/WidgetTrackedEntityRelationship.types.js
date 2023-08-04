@@ -13,6 +13,7 @@ export type OnLinkToTrackedEntity =
 
 export type OnSelectFindModeProps = {|
     findMode: string,
+    orgUnitId?: string,
     relationshipConstraint: RelationshipConstraint,
 |}
 
@@ -22,12 +23,18 @@ export type WidgetTrackedEntityRelationshipProps = {|
     trackedEntityTypeId: string,
     teiId: string,
     programId: string,
+    orgUnitId: string,
     addRelationshipRenderElement: HTMLElement,
     onLinkedRecordClick: LinkedRecordClick,
     onOpenAddRelationship?: () => void,
     onCloseAddRelationship?: () => void,
     relationshipTypes?: RelationshipTypes,
     onSelectFindMode?: OnSelectFindMode,
+    renderTrackedEntityRegistration: (
+        trackedEntityTypeId: string,
+        programId: string,
+        onLinkToTrackedEntity: OnLinkToTrackedEntity,
+    ) => React.Element<any>,
     renderTrackedEntitySearch?: (
         trackedEntityTypeId: string,
         programId: string,

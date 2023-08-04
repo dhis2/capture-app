@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -38,14 +38,24 @@ const RetrieverModeStep = ({ currentStep, onNavigate, linkedEntityMetadataName }
 };
 
 const FindExistingStep = ({ currentStep }) => {
-    if (currentStep.value < NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY.value) {
+    const stepText = useMemo(() => {
+        if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.NEW_LINKED_ENTITY.id) {
+            return i18n.t('Register');
+        }
+        if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY.id) {
+            return i18n.t('Search');
+        }
+        return null;
+    }, [currentStep.id]);
+
+    if (!stepText) {
         return null;
     }
 
     return (
         <>
             <Slash />
-            <span>{i18n.t('Search')}</span>
+            <span>{stepText}</span>
         </>
     );
 };

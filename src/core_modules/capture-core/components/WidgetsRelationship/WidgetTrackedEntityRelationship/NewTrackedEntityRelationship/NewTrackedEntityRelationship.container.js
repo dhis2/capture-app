@@ -15,12 +15,14 @@ const styles = {
 export const NewTrackedEntityRelationshipPlain = ({
     renderElement,
     teiId,
+    orgUnitId,
     programId,
     relationshipTypes,
     trackedEntityTypeId,
     onCloseAddRelationship,
     onOpenAddRelationship,
     renderTrackedEntitySearch,
+    renderTrackedEntityRegistration,
     onSelectFindMode,
     classes,
 }: StyledContainerProps) => {
@@ -51,12 +53,14 @@ export const NewTrackedEntityRelationshipPlain = ({
                     <NewTrackedEntityRelationshipPortal
                         relationshipTypes={relationshipTypes}
                         teiId={teiId}
+                        orgUnitId={orgUnitId}
                         trackedEntityTypeId={trackedEntityTypeId}
                         programId={programId}
                         renderElement={renderElement}
                         onSave={closeAddWizard}
                         onCancel={closeAddWizard}
                         renderTrackedEntitySearch={renderTrackedEntitySearch}
+                        renderTrackedEntityRegistration={renderTrackedEntityRegistration}
                         onSelectFindMode={onSelectFindMode}
                     />
                 )

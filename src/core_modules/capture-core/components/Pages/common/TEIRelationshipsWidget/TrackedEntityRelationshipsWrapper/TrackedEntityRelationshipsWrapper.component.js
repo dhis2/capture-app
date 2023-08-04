@@ -16,11 +16,15 @@ import {
 import type {
     OnLinkToTrackedEntity,
 } from '../../../../WidgetsRelationship/WidgetTrackedEntityRelationship/WidgetTrackedEntityRelationship.types';
+import { ResultsPageSizeContext } from '../../../shared-contexts';
+import { RegisterTeiComponent } from '../RegisterTei/RegisterTei.component';
+import { RegisterTei } from '../RegisterTei';
 
 export const TrackedEntityRelationshipsWrapper = ({
     trackedEntityTypeId,
     teiId,
     programId,
+    orgUnitId,
     addRelationshipRenderElement,
     onOpenAddRelationship,
     onCloseAddRelationship,
@@ -29,8 +33,8 @@ export const TrackedEntityRelationshipsWrapper = ({
     const dispatch = useDispatch();
     const { relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
 
-    const onSelectFindMode = ({ findMode, relationshipConstraint }: OnSelectFindModeProps) => {
-        dispatch(selectFindMode({ findMode, relationshipConstraint }));
+    const onSelectFindMode = ({ findMode, relationshipConstraint, orgUnitId }: OnSelectFindModeProps) => {
+        dispatch(selectFindMode({ findMode, orgUnitId, relationshipConstraint }));
     };
 
     if (isError) {
@@ -51,6 +55,7 @@ export const TrackedEntityRelationshipsWrapper = ({
                 programId={programId}
                 trackedEntityTypeId={trackedEntityTypeId}
                 teiId={teiId}
+                orgUnitId={orgUnitId}
                 onLinkedRecordClick={onLinkedRecordClick}
                 addRelationshipRenderElement={addRelationshipRenderElement}
                 onOpenAddRelationship={onOpenAddRelationship}
@@ -58,6 +63,27 @@ export const TrackedEntityRelationshipsWrapper = ({
                 // optional props
                 onSelectFindMode={onSelectFindMode}
                 relationshipTypes={relationshipTypes}
+                renderTrackedEntityRegistration={(
+                    selectedTrackedEntityTypeId: string,
+                    suggestedProgramId: string,
+                ) => (
+                    <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
+                        {/* <RegisterTeiComponent
+                            dataEntryId={'relationshipTeiRegistrationWidget'}
+                            itemId={''}
+                            trackedEntityName={'trackedEntityName'}
+                            selectedProgramId={selectedProgramId}
+                            trackedEntityTypeId={selectedTrackedEntityTypeId}
+                            error={''}
+                        /> */}
+                        <RegisterTei
+                            onLink={() => console.log('link')}
+                            onSave={() => console.log('save')}
+                            onGetUnsavedAttributeValues={() => console.log('get unsaved')}
+                            trackedEntityTypeId={selectedTrackedEntityTypeId}
+                        />
+                    </ResultsPageSizeContext.Provider>
+                )}
                 renderTrackedEntitySearch={(
                     searchTrackedEntityTypeId: string,
                     searchProgramId: string,

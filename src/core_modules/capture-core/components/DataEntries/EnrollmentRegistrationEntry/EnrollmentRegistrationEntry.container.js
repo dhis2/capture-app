@@ -15,10 +15,11 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     id,
     saveButtonText,
     trackedEntityInstanceAttributes,
+    cachedOrgUnitId,
     ...passOnProps
 }) => {
     const orgUnitId = useCurrentOrgUnitInfo().id;
-    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useRulesEngineOrgUnit(cachedOrgUnitId ?? orgUnitId);
     const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
     const {
         formId,

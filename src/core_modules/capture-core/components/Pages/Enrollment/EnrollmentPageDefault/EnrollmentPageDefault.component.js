@@ -102,6 +102,7 @@ export const EnrollmentPageDefaultPlain = ({
                             <TrackedEntityRelationshipsWrapper
                                 trackedEntityTypeId={program.trackedEntityType.id}
                                 programId={program.id}
+                                orgUnitId={orgUnitId}
                                 addRelationshipRenderElement={addRelationShipContainerElement}
                                 onAddRelationship={() => {}}
                                 onOpenAddRelationship={toggleVisibility}

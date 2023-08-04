@@ -1,3 +1,6 @@
 // @flow
 export { TrackedEntityRelationshipsWrapper } from './TrackedEntityRelationshipsWrapper.component';
-export { openRelationshipTeiSearchWidgetEpic } from './TrackedEntityRelationshipsWrapper.epics';
+export {
+    openRelationshipTeiSearchWidgetEpic,
+    openRelationshipTeiRegisterWidgetEpic,
+} from './TrackedEntityRelationshipsWrapper.epics';

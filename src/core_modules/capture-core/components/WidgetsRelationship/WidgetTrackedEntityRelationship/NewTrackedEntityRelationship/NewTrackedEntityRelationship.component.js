@@ -18,7 +18,7 @@ import { TARGET_SIDES } from './common';
 const styles = {
     container: {
         backgroundColor: '#FAFAFA',
-        maxWidth: 900,
+        maxWidth: 1200,
     },
     bar: {
         color: '#494949',
@@ -41,9 +41,11 @@ const NewTrackedEntityRelationshipPlain = ({
     trackedEntityTypeId,
     programId,
     teiId,
+    orgUnitId,
     onCancel,
     onSave,
     renderTrackedEntitySearch,
+    renderTrackedEntityRegistration,
     onSelectFindMode,
     classes,
 }: StyledComponentProps) => {
@@ -116,8 +118,19 @@ const NewTrackedEntityRelationshipPlain = ({
         setCurrentStep(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY);
     }, [onSelectFindMode, selectedLinkedEntityMetadata]);
 
-    const handleNewRetrieverModeSelected = useCallback(() =>
-        setCurrentStep(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.NEW_LINKED_ENTITY), []);
+    const handleNewRetrieverModeSelected = useCallback(() => {
+        if (selectedLinkedEntityMetadata) {
+            onSelectFindMode && onSelectFindMode({
+                findMode: 'TEI_REGISTER',
+                orgUnitId,
+                relationshipConstraint: {
+                    programId: selectedLinkedEntityMetadata?.programId,
+                    trackedEntityTypeId: selectedLinkedEntityMetadata.trackedEntityTypeId,
+                },
+            });
+        }
+        setCurrentStep(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.NEW_LINKED_ENTITY);
+    }, [onSelectFindMode, orgUnitId, selectedLinkedEntityMetadata]);
 
 
     const stepContents = useMemo(() => {
@@ -161,12 +174,28 @@ const NewTrackedEntityRelationshipPlain = ({
             }
         }
 
+        if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.NEW_LINKED_ENTITY.id) {
+            const {
+                trackedEntityTypeId: linkedEntityTrackedEntityTypeId,
+                programId: linkedEntityProgramId,
+                // $FlowFixMe business logic dictates that we will have the linkedEntityMetadata at this step
+            }: LinkedEntityMetadata = selectedLinkedEntityMetadata;
+
+            if (renderTrackedEntityRegistration) {
+                return renderTrackedEntityRegistration(
+                    linkedEntityTrackedEntityTypeId,
+                    linkedEntityProgramId,
+                    (...args) => console.log('Registration completed', args),
+                );
+            }
+        }
+
         return (
             <div>
                 {i18n.t('Missing implementation step')}
             </div>
         );
-    }, [currentStep.id, handleLinkedEntityMetadataSelection, handleNewRetrieverModeSelected, handleSearchRetrieverModeSelected, onLinkToTrackedEntityFromSearch, programId, relationshipTypes, renderTrackedEntitySearch, selectedLinkedEntityMetadata, trackedEntityTypeId]);
+    }, [currentStep, handleLinkedEntityMetadataSelection, handleNewRetrieverModeSelected, handleSearchRetrieverModeSelected, onLinkToTrackedEntityFromSearch, programId, relationshipTypes, renderTrackedEntityRegistration, renderTrackedEntitySearch, selectedLinkedEntityMetadata, trackedEntityTypeId]);
 
     return (
         <div className={classes.container}>

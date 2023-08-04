@@ -7,6 +7,7 @@ import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMess
 
 export type OwnProps = $ReadOnly<{|
     id: string,
+    orgUnitId: string,
     selectedScopeId: string,
     saveButtonText: string,
     fieldOptions?: Object,
@@ -19,6 +20,7 @@ export type OwnProps = $ReadOnly<{|
 |}>;
 
 type ContainerProps = {|
+    orgUnitId: string,
     teiRegistrationMetadata: RegistrationFormMetadata,
     ready: boolean,
     trackedEntityName: string,

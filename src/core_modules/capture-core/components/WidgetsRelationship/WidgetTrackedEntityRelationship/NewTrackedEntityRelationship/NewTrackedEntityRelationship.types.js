@@ -6,13 +6,18 @@ import type { OnLinkToTrackedEntity, OnSelectFindMode } from '../WidgetTrackedEn
 type RenderTrackedEntitySearch =
     (trackedEntityTypeId: string, programId: string, onLinkToTrackedEntity: OnLinkToTrackedEntity) => React.Element<any>
 
+type RenderTrackedEntityRegistration =
+     (trackedEntityTypeId: string, programId: string, onLinkToTrackedEntity: OnLinkToTrackedEntity) => React.Element<any>
+
 export type ContainerProps = $ReadOnly<{|
     teiId: string,
+    orgUnitId: string,
     renderElement: HTMLElement,
     relationshipTypes: RelationshipTypes,
     trackedEntityTypeId: string,
     programId: string,
     renderTrackedEntitySearch?: RenderTrackedEntitySearch,
+    renderTrackedEntityRegistration: RenderTrackedEntityRegistration,
     onCloseAddRelationship?: () => void,
     onOpenAddRelationship?: () => void,
     onSelectFindMode?: OnSelectFindMode,
@@ -26,6 +31,7 @@ export type StyledContainerProps = $ReadOnly<{|
 export type PortalProps = $ReadOnly<{|
     renderElement: HTMLElement,
     teiId: string,
+    orgUnitId: string,
     relationshipTypes: RelationshipTypes,
     trackedEntityTypeId: string,
     programId: string,
@@ -33,6 +39,7 @@ export type PortalProps = $ReadOnly<{|
     onCancel: () => void,
     onSelectFindMode?: OnSelectFindMode,
     renderTrackedEntitySearch?: RenderTrackedEntitySearch,
+    renderTrackedEntityRegistration?: RenderTrackedEntityRegistration,
 |}>;
 
 export type StyledPortalProps = $ReadOnly<{|
@@ -43,12 +50,14 @@ export type StyledPortalProps = $ReadOnly<{|
 
 export type ComponentProps = $ReadOnly<{|
     teiId: string,
+    orgUnitId: string,
     relationshipTypes: RelationshipTypes,
     trackedEntityTypeId: string,
     programId: string,
     onSave: () => void,
     onCancel: () => void,
     renderTrackedEntitySearch?: RenderTrackedEntitySearch,
+    renderTrackedEntityRegistration?: RenderTrackedEntityRegistration,
     onSelectFindMode?: OnSelectFindMode,
 |}>;
 

@@ -216,6 +216,7 @@ import {
 } from '../core_modules/capture-core/components/OrgUnitFetcher';
 import {
     openRelationshipTeiSearchWidgetEpic,
+    openRelationshipTeiRegisterWidgetEpic,
 } from '../core_modules/capture-core/components/Pages/common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 
 export const epics = combineEpics(
@@ -229,6 +230,7 @@ export const epics = combineEpics(
     initTeiViewEpic,
     updateTeiListEpic,
     openRelationshipTeiSearchWidgetEpic,
+    openRelationshipTeiRegisterWidgetEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
     updateTemplateEpic,

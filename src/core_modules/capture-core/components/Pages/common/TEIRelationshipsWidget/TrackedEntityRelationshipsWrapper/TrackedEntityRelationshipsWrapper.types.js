@@ -5,6 +5,7 @@ export type Props = {|
     trackedEntityTypeId: string,
     teiId: string,
     programId: string,
+    orgUnitId: string,
     onAddRelationship: () => void,
     addRelationshipRenderElement: HTMLDivElement,
     onOpenAddRelationship: () => void,
