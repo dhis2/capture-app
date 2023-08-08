@@ -138,7 +138,7 @@ export class TeiRegistrationFactory {
                             }, {});
 
                         await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
-                            if (field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+                            if (field.objectType === FieldElementObjectTypes.FORM_FIELD) {
                                 const dataElement = await this.dataElementFactory.build(field);
                                 if (!dataElement) return;
 

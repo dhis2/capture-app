@@ -16,7 +16,7 @@ type Props = {|
 |}
 
 export const FieldElementObjectTypes = Object.freeze({
-    TRACKED_ENTITY_ATTRIBUTE: 'TrackedEntityAttribute',
+    FORM_FIELD: 'dataElement',
     ATTRIBUTE: 'Attribute',
 });
 

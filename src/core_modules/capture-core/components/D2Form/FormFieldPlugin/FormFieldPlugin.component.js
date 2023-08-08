@@ -1,15 +1,19 @@
 // @flow
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
+// $FlowFixMe - app-runtime has not yet published the Plugin component
+import { Plugin } from '@dhis2/app-runtime';
 import type { ComponentProps } from './FormFieldPlugin.types';
 
 export const FormFieldPluginComponent = (props: ComponentProps) => {
-    // eslint-disable-next-line no-unused-vars
-    const { pluginSource, ...passOnProps } = props;
+    const {
+        pluginSource,
+        ...passOnProps
+    } = props;
 
     return (
-        <p>
-            {i18n.t('Plugins are not yet available - Please contact your system administrator')}
-        </p>
+        <Plugin
+            pluginSource={pluginSource}
+            {...passOnProps}
+        />
     );
 };
