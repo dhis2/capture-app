@@ -15,7 +15,7 @@ import type { ModalProps, FeatureCollection } from './mapCoordinates.types';
 import { CoordinateInput } from '../../../../capture-ui/internal/CoordinateInput/CoordinateInput.component';
 import { isEqual } from '../../../utils/valueEqualityChecker';
 import { isValidCoordinate } from './coordinate.validator';
-import { convertToServerCoordinates } from './convertor';
+import { convertToServerCoordinates } from './converters';
 
 const styles = (theme: Theme) => ({
     modalContent: {
@@ -243,7 +243,7 @@ const MapCoordinatesModalPlain = ({
                 if (!lngValue) {
                     return;
                 }
-                if (!isValidCoordinate({ longitude: Number(latValue), latitude: lngValue })) {
+                if (!isValidCoordinate({ longitude: Number(lngValue), latitude: latValue })) {
                     setPosition(null);
                     setValid(false);
                     return;
@@ -273,7 +273,7 @@ const MapCoordinatesModalPlain = ({
                 if (!latValue) {
                     return;
                 }
-                if (!isValidCoordinate({ longitude: latValue, latitude: Number(lngValue) })) {
+                if (!isValidCoordinate({ longitude: lngValue, latitude: Number(latValue) })) {
                     setPosition(null);
                     setValid(false);
                     return;

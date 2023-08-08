@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
 import { MapCoordinatesModalComponent } from './MapCoordinatesModal.component';
 import type { MiniMapProps } from './mapCoordinates.types';
-import { convertToClientCoordinates } from './convertor';
+import { convertToClientCoordinates } from './converters';
 
 const styles = () => ({
     mapContainer: {
