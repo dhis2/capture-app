@@ -1,3 +1,17 @@
+## [100.35.5](https://github.com/dhis2/capture-app/compare/v100.35.4...v100.35.5) (2023-08-03)
+
+
+### Bug Fixes
+
+* [DHIS2-15365] remove orgUnit and ouMode query args ([#3398](https://github.com/dhis2/capture-app/issues/3398)) ([ef35eb3](https://github.com/dhis2/capture-app/commit/ef35eb300fa61343576957e6734a2767dc37b4ec))
+
+## [100.35.4](https://github.com/dhis2/capture-app/compare/v100.35.3...v100.35.4) (2023-08-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([343e5da](https://github.com/dhis2/capture-app/commit/343e5daa158faf257cdf1277ff8f7a3e0e5d24ec))
+
 ## [100.35.3](https://github.com/dhis2/capture-app/compare/v100.35.2...v100.35.3) (2023-07-27)
 
 
