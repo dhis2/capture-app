@@ -100,7 +100,7 @@ const EnrollmentDateComponentPlain = ({
                 dense
                 className={classes.calendar}
                 label={enrollmentDateLabel}
-                inputWidth="50%"
+                inputWidth="180px"
                 date={selectedDate}
                 onDateSelect={dateChangeHandler}
             />
