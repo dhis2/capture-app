@@ -5,7 +5,7 @@ export type Props = {|
     teiId: string,
     enrollmentId: string,
     programId: string,
-    mayEditDate: boolean,
+    readOnlyMode?: boolean,
     onDelete: () => void,
     onAddNew: () => void,
     onUpdateDate?: (enrollmentDate: string) => void,
