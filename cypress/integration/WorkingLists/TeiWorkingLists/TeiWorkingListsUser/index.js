@@ -62,7 +62,6 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 
 Then('the default working list should be displayed', () => {
     const names = [
-        'John',
         'Filona',
         'Gertrude',
         'Frank',
@@ -77,6 +76,7 @@ Then('the default working list should be displayed', () => {
         'Julia',
         'Elizabeth',
         'Donald',
+        'Wayne',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -276,7 +276,6 @@ Then('the registering unit should display in the list', () => {
 
 Then('the list should display data for the second page', () => {
     const names = [
-        'Wayne',
         'Johnny',
         'Donna',
         'Sharon',
@@ -291,6 +290,7 @@ Then('the list should display data for the second page', () => {
         'Noah',
         'Emily',
         'Lily',
+        'Olvia',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -307,7 +307,6 @@ Then('the list should display data for the second page', () => {
 
 Then('the list should display 10 rows of data', () => {
     const names = [
-        'John',
         'Filona',
         'Gertrud',
         'Frank',
@@ -317,6 +316,7 @@ Then('the list should display 10 rows of data', () => {
         'Alan',
         'Heather',
         'Andrea',
+        'Donald',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
