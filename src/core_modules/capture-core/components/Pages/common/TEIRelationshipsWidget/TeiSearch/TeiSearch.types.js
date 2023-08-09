@@ -3,6 +3,7 @@ import { type SearchGroup } from '../../../../../metaData';
 
 type PropsFromRedux = {|
     searchGroups: ?Array<SearchGroup>,
+    selectedProgramId: ?string,
     showResults?: ?boolean,
     openSearchGroupSection: ?string,
     trackedEntityTypeName: string,
@@ -22,7 +23,6 @@ export type OwnProps = {|
     getResultsView: Function,
     resultsPageSize: number,
     selectedTrackedEntityTypeId: string,
-    selectedProgramId: ?string,
 |}
 
 export type Props = {| ...OwnProps, ...DispatchersFromRedux, ...PropsFromRedux, ...CssClasses |}
