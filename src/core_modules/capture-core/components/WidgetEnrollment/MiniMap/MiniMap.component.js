@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
-import { MapCoordinatesModalComponent } from './MapCoordinatesModal.component';
-import type { MiniMapProps } from './mapCoordinates.types';
+import { MapModal } from '../MapModal';
+import type { MiniMapProps } from './MiniMap.types';
 import { convertToClientCoordinates } from './converters';
+import { useUpdateEnrollment } from '../dataMutation/dataMutation';
 
 const styles = () => ({
     mapContainer: {
@@ -18,12 +19,21 @@ const styles = () => ({
     },
 });
 
-const MiniMapPlain = ({ coordinates, type, classes, onSetCoordinates }: MiniMapProps) => {
-    const [isModalOpen, setModalOpen] = useState(false);
-    const clientValues = convertToClientCoordinates(coordinates, type);
-    const center = type === dataElementTypes.COORDINATE ? clientValues : clientValues[0];
+const MiniMapPlain = ({
+    coordinates,
+    geometryType,
+    enrollment,
+    refetchEnrollment,
+    refetchTEI,
+    onError,
+    classes,
+}: MiniMapProps) => {
+    const [isOpenMap, setOpenMap] = useState(false);
+    const { updateMutation } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError);
+    const clientValues = convertToClientCoordinates(coordinates, geometryType);
+    const center = geometryType === dataElementTypes.COORDINATE ? clientValues : clientValues[0];
     const onMapReady = (mapRef) => {
-        if (mapRef?.contextValue && type === dataElementTypes.POLYGON) {
+        if (mapRef?.contextValue && geometryType === dataElementTypes.POLYGON) {
             const { map } = mapRef.contextValue;
             map?.fitBounds(clientValues);
         }
@@ -43,24 +53,24 @@ const MiniMapPlain = ({ coordinates, type, classes, onSetCoordinates }: MiniMapP
                     attributionControl={false}
                     key="minimap"
                     onClick={() => {
-                        setModalOpen(true);
+                        setOpenMap(true);
                     }}
                 >
                     <TileLayer
                         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                     />
-                    {type === dataElementTypes.COORDINATE && <Marker position={clientValues} />}
-                    {type === dataElementTypes.POLYGON && <Polygon positions={clientValues} />}
+                    {geometryType === dataElementTypes.COORDINATE && <Marker position={clientValues} />}
+                    {geometryType === dataElementTypes.POLYGON && <Polygon positions={clientValues} />}
                 </Map>
             </div>
-            <MapCoordinatesModalComponent
-                type={type}
+            <MapModal
                 center={center}
-                isOpen={isModalOpen}
-                setOpen={setModalOpen}
-                onSetCoordinates={onSetCoordinates}
+                isOpenMap={isOpenMap}
+                setOpenMap={setOpenMap}
                 defaultValues={clientValues}
+                onUpdate={updateMutation}
+                enrollment={enrollment}
             />
         </>
     );

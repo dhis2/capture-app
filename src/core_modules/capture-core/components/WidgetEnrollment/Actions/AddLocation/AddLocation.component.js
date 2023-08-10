@@ -1,13 +1,13 @@
 // @flow
 import { IconLocation16, MenuItem } from '@dhis2/ui';
 import React from 'react';
-import { useGeometry } from '../../hooks/useGeometry';
+import { useGeometryLabel } from '../../hooks/useGeometry';
 import type { Props } from './addLocation.types';
 
 export const AddLocation = ({ enrollment, setOpenMap }: Props) => {
-    const { label, geometryType } = useGeometry(enrollment);
+    const label = useGeometryLabel(enrollment);
 
-    if (!geometryType) {
+    if (!label) {
         return null;
     }
 

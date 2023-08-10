@@ -18,5 +18,5 @@ export const useProgram = (programId: string) => {
             [programId],
         ),
     );
-    return { error, program: !loading && data?.program };
+    return { error, loading, program: data?.program };
 };

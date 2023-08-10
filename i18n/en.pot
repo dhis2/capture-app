@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-08-07T14:29:18.530Z\n"
-"PO-Revision-Date: 2023-08-07T14:29:18.530Z\n"
+"POT-Creation-Date: 2023-08-09T09:23:04.450Z\n"
+"PO-Revision-Date: 2023-08-09T09:23:04.450Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1166,15 +1166,6 @@ msgstr "Set coordinates"
 
 msgid "Coordinates"
 msgstr "Coordinates"
-
-msgid "coordinates"
-msgstr "coordinates"
-
-msgid "area"
-msgstr "area"
-
-msgid "Set"
-msgstr "Set"
 
 msgid "Set area"
 msgstr "Set area"

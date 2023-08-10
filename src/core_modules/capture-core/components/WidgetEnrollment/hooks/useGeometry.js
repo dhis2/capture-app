@@ -1,28 +1,39 @@
 // @flow
-import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes } from '../../../metaData';
 import { useProgram } from './useProgram';
 
-export const useGeometry = (enrollment: {program: string, geometry: string}) => {
-    const { program, error } = useProgram(enrollment.program);
-    const dataElementType = useMemo(() => {
-        if (!program) {
-            return undefined;
-        }
-        return program.featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
-    }, [program]);
+export const useGeometry = (enrollment: { program: string }) => {
+    const {
+        program: { featureType },
+    } = useProgram(enrollment.program);
 
-    if (error || enrollment.geometry || !program?.featureType || program.featureType === 'NONE') {
-        return { geometryType: undefined, label: undefined, dataElementType };
+    if (featureType === 'POINT') {
+        return {
+            geometryType: 'Point',
+            dataElementType: dataElementTypes.COORDINATE,
+        };
     }
 
-    switch (dataElementType) {
-    case dataElementTypes.COORDINATE:
-        return { geometryType: 'Point', dataElementType, label: i18n.t('Add coordinates') };
-    case dataElementTypes.POLYGON:
-        return { geometryType: 'Polygon', dataElementType, label: i18n.t('Add area') };
-    default:
-        return { geometryType: undefined, dataElementType, label: undefined };
+    return {
+        geometryType: 'Polygon',
+        dataElementType: dataElementTypes.POLYGON,
+    };
+};
+
+export const useGeometryLabel = (enrollment: { program: string, geometry: { type: string } }) => {
+    const {
+        program: { featureType },
+        error,
+    } = useProgram(enrollment.program);
+
+    if (error || !featureType || !['POINT', 'POLYGON'].includes(featureType) || enrollment.geometry?.type) {
+        return undefined;
     }
+
+    if (featureType === 'POINT') {
+        return i18n.t('Add coordinates');
+    }
+
+    return i18n.t('Add area');
 };

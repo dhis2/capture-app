@@ -11,7 +11,7 @@ import { AddNew } from './AddNew';
 import { AddLocation } from './AddLocation';
 import type { PlainProps } from './actions.types';
 import { LoadingMaskForButton } from '../../LoadingMasks';
-import { MapCoordinatesModal } from '../MapCoordinates';
+import { MapModal } from '../MapModal';
 
 const styles = {
     actions: {
@@ -105,12 +105,12 @@ export const ActionsPlain = ({
                     {i18n.t('We are processing your request.')}
                 </div>
             )}
-            <MapCoordinatesModal
+            {setOpenMap && <MapModal
                 enrollment={enrollment}
                 onUpdate={handleOnUpdate}
                 setOpenMap={setOpenMap}
                 isOpenMap={isOpenMap}
-            />
+            />}
         </>
     );
 };
