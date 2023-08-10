@@ -17,6 +17,13 @@ import type {
 } from '../../../../storageControllers/cache.types';
 import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './teiRegistrationFactory.types';
+import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
+import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
+import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
+import { formatPluginConfig } from '../../../../components/D2Form/FormFieldPlugin/formatPluginConfig';
+import {
+    FieldElementObjectTypes,
+} from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 export class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
@@ -50,10 +57,12 @@ export class TeiRegistrationFactory {
 
     dataElementFactory: DataElementFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+    dataEntryFormConfig: ?DataEntryFormConfig;
 
     constructor({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
+        dataEntryFormConfig,
         locale,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
@@ -62,6 +71,7 @@ export class TeiRegistrationFactory {
             cachedOptionSets,
             locale,
         });
+        this.dataEntryFormConfig = dataEntryFormConfig;
     }
 
     async _buildSection(
@@ -70,7 +80,7 @@ export class TeiRegistrationFactory {
         const featureTypeField = TeiRegistrationFactory._buildTetFeatureTypeField(cachedType);
         const cachedTrackedEntityTypeAttributes = cachedType.trackedEntityTypeAttributes;
         if ((!cachedTrackedEntityTypeAttributes ||
-            cachedTrackedEntityTypeAttributes.length <= 0) &&
+                cachedTrackedEntityTypeAttributes.length <= 0) &&
             !featureTypeField) {
             return null;
         }
@@ -79,12 +89,78 @@ export class TeiRegistrationFactory {
             o.id = Section.MAIN_SECTION_ID;
             o.name = i18n.t('Profile');
         });
-
         featureTypeField && section.addElement(featureTypeField);
+
+        if (this.dataEntryFormConfig && cachedTrackedEntityTypeAttributes) {
+            const trackedEntityAttributeDictionary = cachedTrackedEntityTypeAttributes
+                .reduce((acc, trackedEntityAttribute) => {
+                    if (trackedEntityAttribute.trackedEntityAttributeId) {
+                        acc[trackedEntityAttribute.trackedEntityAttributeId] = trackedEntityAttribute;
+                    }
+                    return acc;
+                }, {});
+
+            // $FlowFixMe
+            this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
+                const fieldElements = formConfigSection.elements.reduce((acc, element) => {
+                    if (element.type === FormFieldTypes.PLUGIN) {
+                        const fieldMap = element
+                            .fieldMap
+                            ?.map(field => ({
+                                ...field,
+                                ...trackedEntityAttributeDictionary[field.IdFromApp],
+                            }));
+
+                        acc.push({ ...element, fieldMap });
+                        return acc;
+                    }
+                    const cachedElement = trackedEntityAttributeDictionary[element.id];
+                    if (cachedElement) {
+                        acc.push(cachedElement);
+                    }
+                    return acc;
+                }, []);
+
+                await fieldElements.asyncForEach(async (trackedEntityAttribute) => {
+                    if (trackedEntityAttribute?.type === FormFieldTypes.PLUGIN) {
+                        const element = new FormFieldPluginConfig((o) => {
+                            o.id = trackedEntityAttribute.id;
+                            o.name = trackedEntityAttribute.name;
+                            o.pluginSource = trackedEntityAttribute.pluginSource;
+                            o.fields = new Map();
+                        });
+
+                        const attributes = trackedEntityAttribute.fieldMap
+                            .filter(attributeField => attributeField.objectType === 'Attribute')
+                            .reduce((acc, attribute) => {
+                                acc[attribute.IdFromApp] = attribute;
+                                return acc;
+                            }, {});
+
+                        await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
+                            if (field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+                                const dataElement = await this.dataElementFactory.build(field);
+                                if (!dataElement) return;
+
+                                const fieldMetadata = formatPluginConfig(dataElement, { attributes });
+                                element.addField(field.IdFromPlugin, fieldMetadata);
+                            }
+                        });
+
+                        element && section.addElement(element);
+                    } else {
+                        const element = await this.dataElementFactory.build(trackedEntityAttribute);
+                        element && section.addElement(element);
+                    }
+                });
+            });
+            return section;
+        }
+
         if (cachedTrackedEntityTypeAttributes && cachedTrackedEntityTypeAttributes.length > 0) {
             // $FlowFixMe
-            await cachedTrackedEntityTypeAttributes.asyncForEach(async (ttea) => {
-                const element = await this.dataElementFactory.build(ttea);
+            await cachedTrackedEntityTypeAttributes.asyncForEach(async (trackedEntityAttribute) => {
+                const element = await this.dataElementFactory.build(trackedEntityAttribute);
                 element && section.addElement(element);
             });
         }

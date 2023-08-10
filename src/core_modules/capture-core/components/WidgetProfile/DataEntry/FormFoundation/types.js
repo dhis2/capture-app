@@ -1,5 +1,7 @@
 // @flow
 
+import type { CachedAttributeValue } from '../../../../storageControllers';
+
 type Style = {
     color?: ?string,
     icon?: ?string,
@@ -37,6 +39,7 @@ export type OptionSet = {
     options: Array<Option>,
     optionGroups: Array<OptionGroup>,
     translations: Array<Translation>,
+    attributeValues: Array<CachedAttributeValue>
 };
 
 export type TrackedEntityAttribute = {

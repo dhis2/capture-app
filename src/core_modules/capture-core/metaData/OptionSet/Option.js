@@ -3,14 +3,17 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { Icon } from '../Icon/Icon';
+import type { CachedAttributeValue } from '../../storageControllers';
 
 export type Value = string | number | boolean | {};
 
 export class Option {
     _id: string;
+    _code: string;
     _value: Value;
     _text: string;
     _description: ?string;
+    _attributeValues: ?Array<CachedAttributeValue>;
     _icon: Icon | void;
 
     constructor(initFn?: (_this: Option) => void) {
@@ -23,6 +26,14 @@ export class Option {
 
     get id(): string {
         return this._id;
+    }
+
+    get code(): string {
+        return this._code;
+    }
+
+    set code(value: string) {
+        this._code = value;
     }
 
     set value(value: Value) {
@@ -49,8 +60,17 @@ export class Option {
     set icon(icon?: Icon) {
         this._icon = icon;
     }
+
     get icon(): Icon | void {
         return this._icon;
+    }
+
+    get attributeValues(): ?Array<CachedAttributeValue> {
+        return this._attributeValues;
+    }
+
+    set attributeValues(value: ?Array<CachedAttributeValue>) {
+        this._attributeValues = value;
     }
 
     clone() {

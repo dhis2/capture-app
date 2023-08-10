@@ -14,6 +14,7 @@ import {
     getFileResourceFieldConfigForCustomForm as getFileResourceFieldConfig,
     getImageFieldConfigForCustomForm as getImageFieldConfig,
     getOptionSetFieldConfigForCustomForm as getOptionSetFieldConfig,
+    getMultiOptionSetFieldConfigForCustomForm as getMultiOptionSetFieldConfig,
     getOrgUnitFieldConfigForCustomForm as getOrgUnitFieldConfig,
     getTextFieldConfigForCustomForm as getTextFieldConfig,
     getTrueOnlyFieldConfigForCustomForm as getTrueOnlyFieldConfig,
@@ -28,6 +29,7 @@ const errorMessages = {
 const fieldForTypes = {
     [dataElementTypes.EMAIL]: getTextFieldConfig,
     [dataElementTypes.TEXT]: getTextFieldConfig,
+    [dataElementTypes.MULTI_TEXT]: getMultiOptionSetFieldConfig,
     [dataElementTypes.PHONE_NUMBER]: getTextFieldConfig,
     [dataElementTypes.LONG_TEXT]:
     (metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) => {
@@ -69,7 +71,7 @@ export function getCustomFormField(metaData: DataElement, options: Object, query
         return fieldForTypes[dataElementTypes.UNKNOWN](metaData, options, querySingleResource);
     }
 
-    if (metaData.optionSet) {
+    if (metaData.optionSet && metaData.type !== dataElementTypes.MULTI_TEXT) {
         return getOptionSetFieldConfig(metaData, options, querySingleResource);
     }
 

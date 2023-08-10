@@ -20,7 +20,7 @@ import { convertValue as convertValueServerToClient } from '../../converters/ser
 import { convertValue as convertValueClientToView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
 import { Actions } from './Actions';
-import { MiniMap } from './MapCoordinates';
+import { MiniMap } from './MiniMap';
 
 const styles = {
     enrollment: {
@@ -58,7 +58,6 @@ export const WidgetEnrollmentPlain = ({
     onDelete,
     onAddNew,
     onError,
-    onSetCoordinates,
     onSuccess,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
@@ -146,8 +145,11 @@ export const WidgetEnrollmentPlain = ({
                             <div className={classes.row}>
                                 <MiniMap
                                     coordinates={enrollment.geometry.coordinates}
-                                    type={geometryType}
-                                    onSetCoordinates={onSetCoordinates}
+                                    geometryType={geometryType}
+                                    enrollment={enrollment}
+                                    refetchEnrollment={refetchEnrollment}
+                                    refetchTEI={refetchTEI}
+                                    onError={onError}
                                 />
                             </div>
                         )}

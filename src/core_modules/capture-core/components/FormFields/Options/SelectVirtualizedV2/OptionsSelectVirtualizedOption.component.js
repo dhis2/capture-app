@@ -8,10 +8,7 @@ const getStyles = () => ({
     popper: {
         zIndex: 9999,
     },
-    iconLeftContainer: {
-        paddingRight: 5,
-    },
-    iconRightContainer: {
+    iconContainer: {
         paddingLeft: 5,
     },
 });
@@ -23,8 +20,7 @@ type Props = {
     currentlySelectedValues: ?Array<VirtualizedOptionConfig>,
     classes: {
         popper: string,
-        iconLeftContainer: string,
-        iconRightContainer: string,
+        iconContainer: string,
     },
     inFocus: ?boolean,
     onFocusOption: (option: VirtualizedOptionConfig) => void,
@@ -55,7 +51,7 @@ class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
 
     render() {
         const { option, style, onSelect, currentlySelectedValues, classes, inFocus, onFocusOption } = this.props;
-        const { label, iconLeft, iconRight } = option;
+        const { label, icon } = option;
         const isSelected = !!currentlySelectedValues && currentlySelectedValues.includes(option);
         const renderStyle = Object.assign(
             {},
@@ -81,24 +77,15 @@ class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
                     tabIndex={-1}
                     onMouseOver={() => onFocusOption(option)}
                 >
-                    {
-                        iconLeft ? (
-                            <div
-                                className={classes.iconLeftContainer}
-                            >
-                                {iconLeft}
-                            </div>
-                        ) : null
-                    }
                     <div>
                         {label}
                     </div>
                     {
-                        iconRight ? (
+                        icon ? (
                             <div
-                                className={classes.iconRightContainer}
+                                className={classes.iconContainer}
                             >
-                                {iconRight}
+                                {icon}
                             </div>
                         ) : null
                     }

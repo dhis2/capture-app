@@ -28,7 +28,7 @@ const useAsyncMetadata = <TResultData>(
 export const useIndexedDBQuery = <TResultData>(
     queryKey: QueryKey,
     queryFn: QueryFunction<TResultData>,
-    queryOptions: UseQueryOptions<TResultData>,
+    queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> =>
         useAsyncMetadata(queryKey, queryFn, {
             cacheTime: 0,

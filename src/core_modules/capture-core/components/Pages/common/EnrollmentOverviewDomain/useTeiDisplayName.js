@@ -1,27 +1,40 @@
 // @flow
-import { useMemo, useEffect, useState } from 'react';
+import { useMemo } from 'react';
+import { pipe } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { getAttributesFromScopeId } from '../../../../metaData/helpers';
 import type { DataElement } from '../../../../metaData/DataElement';
+import { convertServerToClient, convertClientToView } from '../../../../converters';
 
-const getAttributesValues = (attributes, firstId, secondId) => {
-    const firstValue = attributes.find(({ attribute }) => attribute === firstId)?.value || '';
-    const secondValue = attributes.find(({ attribute }) => attribute === secondId)?.value || '';
+type Attribute = {
+    valueType: string,
+    attribute: string,
+    value: string,
+};
+
+const convertFn = pipe(convertServerToClient, convertClientToView);
+
+const convertValue = (attribute?: Attribute, dataElement) =>
+    (attribute?.value ? convertFn(attribute.value, attribute.valueType, dataElement) : '');
+
+const getAttributesValues = (attributes: Array<Attribute>, first?: DataElement, second?: DataElement) => {
+    const firstValue = convertValue(attributes.find(({ attribute }) => attribute === first?.id), first);
+    const secondValue = convertValue(attributes.find(({ attribute }) => attribute === second?.id), second);
 
     return firstValue || secondValue ? `${firstValue}${firstValue && ' '}${secondValue}` : '';
 };
 
-const getTetAttributesDisplayInReports = (attributes: Array<any>, tetAttributes: Array<DataElement>) => {
-    const [firstId, secondId] = tetAttributes.filter(({ displayInReports }) => displayInReports).map(({ id }) => id);
-    return getAttributesValues(attributes, firstId, secondId);
+const getTetAttributesDisplayInReports = (attributes: Array<Attribute>, tetAttributes: Array<DataElement>) => {
+    const [first, second] = tetAttributes.filter(({ displayInReports }) => displayInReports);
+    return getAttributesValues(attributes, first, second);
 };
 
-const getTetAttributes = (attributes: Array<any>, tetAttributes: Array<DataElement>) => {
-    const [firstId, secondId] = tetAttributes.map(({ id }) => id);
-    return getAttributesValues(attributes, firstId, secondId);
+const getTetAttributes = (attributes: Array<Attribute>, tetAttributes: Array<DataElement>) => {
+    const [first, second] = tetAttributes;
+    return getAttributesValues(attributes, first, second);
 };
 
-export const deriveTeiName = (attributes: Array<any>, trackedEntityType: string, teiId: string) => {
+export const deriveTeiName = (attributes: Array<Attribute>, trackedEntityType: string, teiId: string) => {
     const tetAttributes = getAttributesFromScopeId(trackedEntityType);
     const teiNameDisplayInReports = getTetAttributesDisplayInReports(attributes, tetAttributes);
 
@@ -35,7 +48,6 @@ export const deriveTeiName = (attributes: Array<any>, trackedEntityType: string,
 };
 
 export const useTeiDisplayName = (teiId: string, programId: string) => {
-    const [teiDisplayName, setTeiDisplayName] = useState('');
     const { error, data } = useDataQuery(
         useMemo(
             () => ({
@@ -50,17 +62,14 @@ export const useTeiDisplayName = (teiId: string, programId: string) => {
             [teiId, programId],
         ),
     );
-    useEffect(() => {
-        if (data?.trackedEntities?.attributes && data?.trackedEntities?.trackedEntityType) {
-            setTeiDisplayName(
-                deriveTeiName(
-                    data.trackedEntities.attributes,
-                    data.trackedEntities.trackedEntityType,
-                    teiId,
-                ),
-            );
-        }
-    }, [data?.trackedEntities, teiId]);
+
+    const teiDisplayName = useMemo(
+        () =>
+            (data?.trackedEntities?.attributes && data?.trackedEntities?.trackedEntityType
+                ? deriveTeiName(data.trackedEntities.attributes, data.trackedEntities.trackedEntityType, teiId)
+                : ''),
+        [data?.trackedEntities?.attributes, data?.trackedEntities?.trackedEntityType, teiId],
+    );
 
     return {
         error,

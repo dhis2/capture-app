@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from 'react';
+import React from 'react';
 import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import { WidgetEnrollment as WidgetEnrollmentComponent } from './WidgetEnrollment.component';
@@ -9,7 +9,6 @@ import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
-import { useUpdateEnrollment } from './dataMutation/dataMutation';
 
 export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onAddNew, onError, onSuccess }: Props) => {
     const { error: errorEnrollment, enrollment, refetch: refetchEnrollment } = useEnrollment(enrollmentId);
@@ -26,23 +25,9 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
         .every(item => item.status !== plainStatus.ACTIVE);
     const error = errorEnrollment || errorProgram || errorOwnerOrgUnit || errorOrgUnit;
 
-    const { updateMutation } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError);
-
     if (error) {
         log.error(errorCreator('Enrollment widget could not be loaded')({ error }));
     }
-
-    const handleSetCoordinates = useCallback((coordinates) => {
-        if (enrollment) {
-            if (!coordinates) {
-                const copyEnrollment = { ...enrollment };
-                delete copyEnrollment.geometry;
-                updateMutation(copyEnrollment);
-                return;
-            }
-            updateMutation({ ...enrollment, geometry: { ...enrollment.geometry, coordinates } });
-        }
-    }, [enrollment, updateMutation]);
 
     return (
         <WidgetEnrollmentComponent
@@ -55,7 +40,6 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete, onA
             loading={!(enrollment && program && displayName)}
             onDelete={onDelete}
             onAddNew={onAddNew}
-            onSetCoordinates={handleSetCoordinates}
             error={error}
             onError={onError}
             onSuccess={onSuccess}

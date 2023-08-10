@@ -23,7 +23,6 @@ export type PlainProps = {|
     onDelete: () => void,
     onAddNew: () => void,
     onError?: (message: string) => void,
-    onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
     onSuccess?: () => void,
     ...CssClasses,
 |};

@@ -11,7 +11,8 @@ import { AddNew } from './AddNew';
 import { AddLocation } from './AddLocation';
 import type { PlainProps } from './actions.types';
 import { LoadingMaskForButton } from '../../LoadingMasks';
-import { MapCoordinatesModal } from '../MapCoordinates';
+import { MapModal } from '../MapModal';
+import { useCenterPoint } from '../hooks/useCenterPoint';
 
 const styles = {
     actions: {
@@ -39,6 +40,7 @@ export const ActionsPlain = ({
 }: PlainProps) => {
     const [isOpenActions, setOpenActions] = useState(false);
     const [isOpenMap, setOpenMap] = useState(false);
+    const { center } = useCenterPoint(enrollment.orgUnit);
     const handleOnUpdate = (arg) => {
         setOpenActions(false);
         onUpdate(arg);
@@ -105,12 +107,13 @@ export const ActionsPlain = ({
                     {i18n.t('We are processing your request.')}
                 </div>
             )}
-            <MapCoordinatesModal
+            {setOpenMap && <MapModal
                 enrollment={enrollment}
                 onUpdate={handleOnUpdate}
                 setOpenMap={setOpenMap}
                 isOpenMap={isOpenMap}
-            />
+                center={center}
+            />}
         </>
     );
 };
