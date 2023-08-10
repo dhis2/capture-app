@@ -10,7 +10,18 @@ import { useProgram } from './hooks/useProgram';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
 
-export const WidgetEnrollment = ({ teiId, enrollmentId, programId, readOnlyMode = false, onDelete, onAddNew, onUpdateDate, onError, onSuccess }: Props) => {
+export const WidgetEnrollment = ({
+    teiId,
+    enrollmentId,
+    programId,
+    readOnlyMode = false,
+    onDelete,
+    onAddNew,
+    onUpdateEnrollmentDate,
+    onUpdateIncidentDate,
+    onError,
+    onSuccess,
+}: Props) => {
     const { error: errorEnrollment, enrollment, refetch: refetchEnrollment } = useEnrollment(enrollmentId);
     const { error: errorProgram, program } = useProgram(programId);
     const {
@@ -43,7 +54,8 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, readOnlyMode 
             loading={!(enrollment && program && displayName)}
             onDelete={onDelete}
             onAddNew={onAddNew}
-            onUpdateDate={onUpdateDate}
+            onUpdateEnrollmentDate={onUpdateEnrollmentDate}
+            onUpdateIncidentDate={onUpdateIncidentDate}
             error={error}
             onError={onError}
             onSuccess={onSuccess}
