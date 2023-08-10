@@ -2,6 +2,7 @@
 import { chunk } from 'capture-core-utils';
 import { getContext } from '../context';
 import { queryOptionSets, queryOptionGroups } from './queries';
+import type { CachedAttributeValue } from '../../storageControllers';
 
 type InputOutline = {
     id: string,
@@ -21,6 +22,7 @@ type ApiOption = {
     code: string,
     style: string,
     translations: any,
+    attributeValues: Array<CachedAttributeValue>,
 }
 
 type ApiOptionSet = {
@@ -29,6 +31,7 @@ type ApiOptionSet = {
     version: string,
     valueType: string,
     translations: any,
+    attributeValues: Array<CachedAttributeValue>,
     options: Array<ApiOption>,
 }
 
@@ -93,11 +96,13 @@ const getCacheOptionSets = (optionSets: Array<ApiOptionSet>, optionGroupsByOptio
         version: optionSet.version,
         valueType: optionSet.valueType,
         translations: optionSet.translations,
+        attributeValues: optionSet.attributeValues,
         options: optionSet.options && [...optionSet.options.values()]
             .filter(option => option)
             .map(option => ({
                 id: option.id,
                 displayName: option.displayName,
+                attributeValues: option.attributeValues,
                 code: option.code,
                 style: option.style,
                 translations: option.translations,

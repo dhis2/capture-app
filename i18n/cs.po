@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
+"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký, 2023\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -71,6 +71,16 @@ msgstr "Datum zápisu"
 
 msgid "Last updated"
 msgstr "Naposledy aktualizováno"
+
+msgid "error encountered during field validation"
+msgstr "během ověřování pole došlo k chybě"
+
+msgid "error"
+msgstr "chyba"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Tato hodnota se ověřuje"
@@ -258,8 +268,8 @@ msgstr "Přidání vztahu k události."
 msgid "Go back to event without saving relationship"
 msgstr "Vraťte se k události bez uložení vztahu"
 
-msgid "Unsaved changes"
-msgstr "Neuložené změny"
+msgid "Discard unsaved changes?"
+msgstr "Zahodit neuložené změny?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -267,11 +277,11 @@ msgid ""
 msgstr ""
 "Opuštěním této stránky zrušíte výběr, který jste provedli pro nový vztah"
 
-msgid "Yes, discard"
-msgstr "Ano, zahodit"
+msgid "Yes, discard changes"
+msgstr "Ano, zahodit změny"
 
-msgid "No, stay here"
-msgstr "Ne, zůstat zde"
+msgid "No, cancel"
+msgstr "Ne, zrušit"
 
 msgid "New event"
 msgstr "Nová událost"
@@ -345,20 +355,8 @@ msgstr "Generovat novou událost"
 msgid "Do you want to create another event?"
 msgstr "Chcete vytvořit další událost?"
 
-msgid "No, cancel"
-msgstr "Ne, zrušit"
-
 msgid "Yes, create new event"
 msgstr "Ano, vytvořit novou událost"
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
-
-msgid "Warnings found"
-msgstr "Nalezena varování"
-
-msgid "Abort"
-msgstr "Přerušit"
 
 msgid "Back to form"
 msgstr "Zpět do formuláře"
@@ -383,6 +381,11 @@ msgstr "Provoz běží"
 
 msgid "Sort"
 msgstr "Třídit"
+
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr "Žádné události k zobrazení"
@@ -492,6 +495,12 @@ msgstr "Nahrávání obrázku"
 msgid "Select image"
 msgstr "Vybrat obrázek"
 
+msgid "Type to filter options"
+msgstr "Zadáním filtrujete možnosti"
+
+msgid "No match found"
+msgstr "Žádná shoda nenalezena"
+
 msgid "Search"
 msgstr "Hledat"
 
@@ -587,6 +596,15 @@ msgstr "Nemáte přístup k psaní komentářů"
 
 msgid "Write comment"
 msgstr "Napsat komentář"
+
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "Použít nový ovládací panel zápisu pro {{programName}}"
@@ -819,6 +837,9 @@ msgstr "Můžete také vybrat program z horní lišty a vytvořit v něm program
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nový zápis do programu{{escape}} {{programName}}"
 
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Save {{trackedEntityName}}"
 msgstr "Uložit {{trackedEntityName}}"
 
@@ -973,13 +994,6 @@ msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
 
 msgid "Choose a type to start searching"
 msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
 
 msgid "Search {{name}}"
 msgstr "Hledat {{name}}"
@@ -1235,30 +1249,11 @@ msgstr ""
 "Naplánované datum odpovídá navrhovanému datu, ale v případě potřeby jej lze "
 "změnit."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-
 msgid "after"
 msgstr "po"
 
 msgid "before"
 msgstr "před"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "Na tento den je v {{orgUnitName}} naplánovaná {{count}} událost."
-msgstr[1] ""
-"Na tento den jsou v {{orgUnitName}} naplánované {{count}} události."
-msgstr[2] ""
-"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
-msgstr[3] ""
-"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1307,9 +1302,6 @@ msgstr "Při ukládání změn došlo k problému"
 msgid "Try again or contact your system administrator for support"
 msgstr "Zkuste to znovu nebo požádejte o podporu správce systému"
 
-msgid "tracked entity instance"
-msgstr "sledovaná instance entity"
-
 msgid "Fix errors in the form to continue."
 msgstr "Chcete-li pokračovat, opravte chyby ve formuláři."
 
@@ -1321,6 +1313,9 @@ msgstr "profil {{TETName}}"
 
 msgid "Edit"
 msgstr "Upravit"
+
+msgid "tracked entity instance"
+msgstr "sledovaná instance entity"
 
 msgid "New {{ eventName }} event"
 msgstr "Nová událost {{ eventName }}"
@@ -1532,17 +1527,14 @@ msgstr "K datu"
 msgid "To time"
 msgstr "Na čas"
 
-msgid "error encountered during field validation"
-msgstr "během ověřování pole došlo k chybě"
-
-msgid "error"
-msgstr "chyba"
-
 msgid "Delete polygon"
 msgstr "Smazat polygon"
 
 msgid "Set area"
 msgstr "Nastavit oblast"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "Režim kompatibility"
