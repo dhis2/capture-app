@@ -86,7 +86,7 @@ const EnrollmentDateComponentPlain = ({
     const saveHandler = () => {
         // CalendarInput component only supports the YYYY-MM-DD format
         // $FlowFixMe[incompatible-use]
-        const date = selectedDate ? parseDate(selectedDate, 'YYYY-MM-DD').momentDate.toISOString() : enrollmentDate;
+        const date = selectedDate ? parseDate(selectedDate, 'YYYY-MM-DD').momentDate.toISOString(true) : enrollmentDate;
         if (date !== enrollmentDate) {
             onSave(date);
         }
