@@ -65,6 +65,15 @@ msgstr "Date of enrollment"
 msgid "Last updated"
 msgstr "Last updated"
 
+msgid "error encountered during field validation"
+msgstr "error encountered during field validation"
+
+msgid "error"
+msgstr "error"
+
+msgid "Plugins are not yet available - Please contact your system administrator"
+msgstr "Plugins are not yet available - Please contact your system administrator"
+
 msgid "This value is validating"
 msgstr "This value is validating"
 
@@ -1535,12 +1544,6 @@ msgstr "To date"
 
 msgid "To time"
 msgstr "To time"
-
-msgid "error encountered during field validation"
-msgstr "error encountered during field validation"
-
-msgid "error"
-msgstr "error"
 
 msgid "Delete polygon"
 msgstr "Delete polygon"

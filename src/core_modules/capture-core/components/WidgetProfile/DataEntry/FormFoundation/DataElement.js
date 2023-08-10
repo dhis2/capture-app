@@ -219,7 +219,14 @@ const buildOptionSet = async (
             ]),
         );
 
-    const optionSet = new OptionSet(optionSetAPI.id, options, optionGroups, dataElement, convertOptionSetValue);
+    const optionSet = new OptionSet(
+        optionSetAPI.id,
+        options,
+        optionGroups,
+        dataElement,
+        convertOptionSetValue,
+        optionSetAPI.attributeValues,
+    );
     optionSet.inputType = renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null;
     return optionSet;
 };
