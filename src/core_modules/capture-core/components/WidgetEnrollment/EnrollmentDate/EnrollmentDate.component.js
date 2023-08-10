@@ -94,7 +94,7 @@ const EnrollmentDateComponentPlain = ({
     };
 
     return editMode || saveInProgress ? (
-        <div data-test="widget-enrollment-enrollment-date">
+        <div data-test="widget-enrollment-date">
             <CalendarInput
                 calendar="gregory"
                 dense
@@ -129,7 +129,7 @@ const EnrollmentDateComponentPlain = ({
             )}
         </div>
     ) : (
-        <div className={classes.row} data-test="widget-enrollment-enrollment-date">
+        <div className={classes.row} data-test="widget-enrollment-date">
             <span data-test="widget-enrollment-icon-calendar">
                 <IconCalendar16 color={colors.grey600} />
             </span>
@@ -138,7 +138,7 @@ const EnrollmentDateComponentPlain = ({
             {editEnabled &&
                 <button
                     className={classes.editButton}
-                    data-test="widget-enrollment-icon-edit-enrollment-date"
+                    data-test="widget-enrollment-icon-edit-date"
                     onClick={onOpenEdit}
                 >
                     <IconEdit16 />

@@ -96,6 +96,7 @@ export const WidgetEnrollmentPlain = ({
                         </div>
 
                         <EnrollmentDate
+                            data-test="widget-enrollment-enrollment-date"
                             serverDate={enrollment.enrolledAt}
                             enrollmentDateLabel={getEnrollmentDateLabel(program)}
                             editEnabled={editDateEnabled}
@@ -108,6 +109,7 @@ export const WidgetEnrollmentPlain = ({
 
                         {program.displayIncidentDate && (
                             <EnrollmentDate
+                                data-test="widget-enrollment-incident-date"
                                 serverDate={enrollment.occurredAt}
                                 enrollmentDateLabel={getIncidentDateLabel(program)}
                                 editEnabled={editDateEnabled}
