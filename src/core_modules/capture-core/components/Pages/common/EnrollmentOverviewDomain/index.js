@@ -3,6 +3,7 @@ export type { HideWidgets, WidgetEffects } from './enrollmentOverviewDomain.type
 export {
     enrollmentSiteActionTypes,
     updateEnrollmentDate,
+    updateIncidentDate,
     updateEnrollmentEvents,
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,

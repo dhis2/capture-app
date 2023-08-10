@@ -5,6 +5,7 @@ import { actionCreator } from '../../../../actions/actions.utils';
 export const enrollmentSiteActionTypes = {
     COMMON_ENROLLMENT_SITE_DATA_SET: 'EnrollmentSite.SetCommonData',
     UPDATE_ENROLLMENT_DATE: 'Enrollment.UpdateEnrollmentDate',
+    UPDATE_INCIDENT_DATE: 'Enrollment.UpdateIncidentDate',
     UPDATE_ENROLLMENT_EVENTS: 'Enrollment.UpdateEnrollmentEvents',
     UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID: 'Enrollment.UpdateEnrollmentEventsWithoutId',
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES: 'Enrollment.UpdateEnrollmentAttributeValues',
@@ -22,6 +23,11 @@ export const setCommonEnrollmentSiteData = (enrollment: ApiEnrollment, attribute
 export const updateEnrollmentDate = (enrollmentDate: string) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_DATE)({
         enrollmentDate,
+    });
+
+export const updateIncidentDate = (incidentDate: string) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_INCIDENT_DATE)({
+        incidentDate,
     });
 
 export const updateEnrollmentEvents = (eventId: string, eventData: Object) =>

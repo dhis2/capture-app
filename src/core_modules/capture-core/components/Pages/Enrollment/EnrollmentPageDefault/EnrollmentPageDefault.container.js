@@ -9,6 +9,7 @@ import {
     useCommonEnrollmentDomainData,
     updateEnrollmentAttributeValues,
     updateEnrollmentDate,
+    updateIncidentDate,
     showEnrollmentError,
 } from '../../common/EnrollmentOverviewDomain';
 import {
@@ -92,6 +93,10 @@ export const EnrollmentPageDefault = () => {
         dispatch(updateTopBarEnrollmentDate({ enrollmentId, enrollmentDate }));
     }, [dispatch, enrollmentId]);
 
+    const onUpdateIncidentDate = useCallback((incidentDate) => {
+        dispatch(updateIncidentDate(incidentDate));
+    }, [dispatch]);
+
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
@@ -119,6 +124,7 @@ export const EnrollmentPageDefault = () => {
             onEventClick={onEventClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
             onUpdateEnrollmentDate={onUpdateEnrollmentDate}
+            onUpdateIncidentDate={onUpdateIncidentDate}
             onEnrollmentError={onEnrollmentError}
         />
     );
