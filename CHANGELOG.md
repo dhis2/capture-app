@@ -1,3 +1,94 @@
+## [100.35.5](https://github.com/dhis2/capture-app/compare/v100.35.4...v100.35.5) (2023-08-03)
+
+
+### Bug Fixes
+
+* [DHIS2-15365] remove orgUnit and ouMode query args ([#3398](https://github.com/dhis2/capture-app/issues/3398)) ([ef35eb3](https://github.com/dhis2/capture-app/commit/ef35eb300fa61343576957e6734a2767dc37b4ec))
+
+## [100.35.4](https://github.com/dhis2/capture-app/compare/v100.35.3...v100.35.4) (2023-08-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([343e5da](https://github.com/dhis2/capture-app/commit/343e5daa158faf257cdf1277ff8f7a3e0e5d24ec))
+
+## [100.35.3](https://github.com/dhis2/capture-app/compare/v100.35.2...v100.35.3) (2023-07-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4568f0f](https://github.com/dhis2/capture-app/commit/4568f0f3da3bc979a64bf3650c8e658756f2a580))
+
+## [100.35.2](https://github.com/dhis2/capture-app/compare/v100.35.1...v100.35.2) (2023-07-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([085b3a3](https://github.com/dhis2/capture-app/commit/085b3a3eb5e1fe67cc66d1ef741dde64dabfdc7e))
+
+## [100.35.1](https://github.com/dhis2/capture-app/compare/v100.35.0...v100.35.1) (2023-07-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([fa0dfb0](https://github.com/dhis2/capture-app/commit/fa0dfb013c0ef4415b5fed1e38ab576124c87b4c))
+
+# [100.35.0](https://github.com/dhis2/capture-app/compare/v100.34.1...v100.35.0) (2023-07-24)
+
+
+### Features
+
+* [DHIS2-14775][DHIS2-14729] Render data entry plugins ([80a218e](https://github.com/dhis2/capture-app/commit/80a218e2dea3f4b25694b25e491dac20a310b8bb))
+
+## [100.34.1](https://github.com/dhis2/capture-app/compare/v100.34.0...v100.34.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6edf2e8](https://github.com/dhis2/capture-app/commit/6edf2e86370a1e51460282760836c9271aceb123))
+
+# [100.34.0](https://github.com/dhis2/capture-app/compare/v100.33.5...v100.34.0) (2023-07-11)
+
+
+### Features
+
+* [DHIS2-14778][DHIS2-14779][DHIS2-14780][DHIS2-14781] MULTI_TEXT field ([#3231](https://github.com/dhis2/capture-app/issues/3231)) ([d7b7100](https://github.com/dhis2/capture-app/commit/d7b7100cadfa4d3f3c1a162161f34dc7df2833e8))
+
+## [100.33.5](https://github.com/dhis2/capture-app/compare/v100.33.4...v100.33.5) (2023-07-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5a252ff](https://github.com/dhis2/capture-app/commit/5a252ff89fed79ddbbb6b3a8420fadcae1d9dadd))
+
+## [100.33.4](https://github.com/dhis2/capture-app/compare/v100.33.3...v100.33.4) (2023-07-07)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([446c1fe](https://github.com/dhis2/capture-app/commit/446c1fedd79cc8a816680c2a066d0dd13cf4cd27))
+
+## [100.33.3](https://github.com/dhis2/capture-app/compare/v100.33.2...v100.33.3) (2023-07-06)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5648b98](https://github.com/dhis2/capture-app/commit/5648b98b251008a2202ce596f12d8c57e17b914d))
+
+## [100.33.2](https://github.com/dhis2/capture-app/compare/v100.33.1...v100.33.2) (2023-07-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6d24a67](https://github.com/dhis2/capture-app/commit/6d24a67df569d60ee451474f9c8f45836459ca03))
+
+## [100.33.1](https://github.com/dhis2/capture-app/compare/v100.33.0...v100.33.1) (2023-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-15312] AOC for event programs ([#3293](https://github.com/dhis2/capture-app/issues/3293)) ([ed1983c](https://github.com/dhis2/capture-app/commit/ed1983c50ba99a72a92d70af7d4fd52e9264c99d))
+
 # [100.33.0](https://github.com/dhis2/capture-app/compare/v100.32.16...v100.33.0) (2023-06-27)
 
 

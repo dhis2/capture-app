@@ -3,3 +3,4 @@ export { withRequiredFieldCalculation } from './withRequiredFieldCalculation/wit
 export { withDisabledFieldCalculation } from './withDisabledFieldCalculation/withDisabledFieldCalculation';
 export { withDefaultFieldWrapperForForm } from './withDefaultFieldWrapperForForm/withDefaultFieldWrapperForForm';
 export { withCustomElementContainer } from './withCustomElementContainer/withCustomElementContainer';
+export { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler/withRulesOptionVisibilityHandler';

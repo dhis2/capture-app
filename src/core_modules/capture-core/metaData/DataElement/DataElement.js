@@ -10,6 +10,7 @@ import type { Icon } from '../Icon/Icon';
 import { OptionSet } from '../OptionSet/OptionSet';
 import type { Unique } from './Unique';
 import { dataElementTypes } from './dataElementTypes';
+import type { CachedAttributeValue } from '../../storageControllers';
 
 // eslint-disable-next-line no-use-before-define
 export type ConvertFn = (value: any, type: $Keys<typeof dataElementTypes>, element: DataElement) => any;
@@ -22,6 +23,7 @@ export class DataElement {
     _id: string;
     _name: string;
     _shortName: string;
+    _code: string;
     _formName: string;
     _disabled: boolean;
     _compulsory: boolean;
@@ -34,6 +36,7 @@ export class DataElement {
     _unique: ?Unique;
     _searchable: ?boolean;
     _url: ?string;
+    _attributeValues: Array<CachedAttributeValue>
 
     constructor(initFn: ?(_this: DataElement) => void) {
         this._displayInReports = true;
@@ -55,6 +58,14 @@ export class DataElement {
     }
     get name(): string {
         return this._name;
+    }
+
+    set code(code: string) {
+        this._code = code;
+    }
+
+    get code(): string {
+        return this._code;
     }
 
     set shortName(shortName: string) {
@@ -153,6 +164,14 @@ export class DataElement {
         return this._url;
     }
 
+    get attributeValues(): Array<CachedAttributeValue> {
+        return this._attributeValues;
+    }
+
+    set attributeValues(value: Array<CachedAttributeValue>) {
+        this._attributeValues = value;
+    }
+
     * getPropertyNames(): Generator<string, void, void> {
         const excluded = ['getPropertyNames', 'constructor', 'copyPropertiesTo', 'getConvertedOptionSet', 'convertValue'];
         for (const name of Object.getOwnPropertyNames(Object.getPrototypeOf(this))) {
@@ -174,7 +193,7 @@ export class DataElement {
         if (this.optionSet) {
             const currentOptions = this.optionSet.options.map(option => option.clone());
             // $FlowFixMe[incompatible-use] automated comment
-            const convertedOptionSet = new OptionSet(this.optionSet.id, currentOptions, null, this, onConvert);
+            const convertedOptionSet = new OptionSet(this.optionSet.id, currentOptions, null, this, onConvert, this.optionSet.attributeValues);
             // $FlowFixMe[incompatible-use] automated comment
             convertedOptionSet.inputType = this.optionSet.inputType;
             // $FlowFixMe[incompatible-use] automated comment
