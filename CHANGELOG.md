@@ -1,3 +1,10 @@
+## [100.35.6](https://github.com/dhis2/capture-app/compare/v100.35.5...v100.35.6) (2023-08-11)
+
+
+### Bug Fixes
+
+* [TECH-1623] rename TEI "Launchpad McQuack" -> "Breaking TheGlass" ([#3400](https://github.com/dhis2/capture-app/issues/3400)) ([7f26237](https://github.com/dhis2/capture-app/commit/7f262372499b98d9fd8071c7b8069238ad3a1d15))
+
 ## [100.35.5](https://github.com/dhis2/capture-app/compare/v100.35.4...v100.35.5) (2023-08-03)
 
 
