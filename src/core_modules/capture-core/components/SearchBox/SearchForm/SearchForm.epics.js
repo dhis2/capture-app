@@ -29,11 +29,12 @@ import {
 } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { dataElementConvertFunctions } from './SearchFormElementConverter/SearchFormElementConverter';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
+import { escapeString } from '../../../utils/escapeString';
 
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
-    return [`${fieldId}:eq:${formValues[fieldId]}`];
+    return [`${fieldId}:eq:${escapeString(formValues[fieldId])}`];
 };
 
 const searchViaUniqueIdStream = ({
