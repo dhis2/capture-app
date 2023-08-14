@@ -15,15 +15,16 @@ import { getSearchGroups } from './getSearchGroups';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../../metaData';
 
 const mapStateToProps = (state: ReduxState, props: OwnProps) => {
-    const { selectedProgramId, selectedTrackedEntityTypeId } = props;
-    const searchGroups = getSearchGroups(selectedTrackedEntityTypeId, selectedProgramId);
-    const { name } = getTrackedEntityTypeThrowIfNotFound(selectedTrackedEntityTypeId);
     const currentTeiSearch = state.teiSearch[props.id] ?? {};
+    const { selectedTrackedEntityTypeId } = props;
+    const searchGroups = getSearchGroups(selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId);
+    const { name } = getTrackedEntityTypeThrowIfNotFound(selectedTrackedEntityTypeId);
     return {
         searchGroups,
         showResults: !!currentTeiSearch.searchResults,
         openSearchGroupSection: currentTeiSearch.openSearchGroupSection,
         trackedEntityTypeName: name.toLowerCase(),
+        selectedProgramId: currentTeiSearch.selectedProgramId,
     };
 };
 

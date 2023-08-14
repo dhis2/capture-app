@@ -89,7 +89,6 @@ export const TrackedEntityRelationshipsWrapper = ({
                     <TeiSearch
                         resultsPageSize={5}
                         id="relationshipTeiSearchWidget"
-                        selectedProgramId={searchProgramId}
                         selectedTrackedEntityTypeId={searchTrackedEntityTypeId}
                         getResultsView={viewProps => (
                             <TeiRelationshipSearchResults
