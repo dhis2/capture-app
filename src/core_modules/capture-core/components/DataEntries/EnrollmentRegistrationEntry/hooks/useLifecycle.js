@@ -16,8 +16,9 @@ export const useLifecycle = (
     dataEntryId: string,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
     orgUnit: ?OrgUnit,
+    teiId: ?string,
 ) => {
-    const { teiId, programId } = useLocationQuery();
+    const { programId } = useLocationQuery();
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
     const program = programId && getProgramThrowIfNotFound(programId);

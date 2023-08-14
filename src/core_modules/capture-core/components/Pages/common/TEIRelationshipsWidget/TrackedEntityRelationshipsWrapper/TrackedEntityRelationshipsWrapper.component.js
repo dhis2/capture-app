@@ -13,12 +13,9 @@ import { TeiSearch } from '../TeiSearch/TeiSearch.container';
 import {
     TeiRelationshipSearchResults,
 } from '../../../NewRelationship/TeiRelationship/SearchResults/TeiRelationshipSearchResults.component';
-import type {
-    OnLinkToTrackedEntity,
-} from '../../../../WidgetsRelationship/WidgetTrackedEntityRelationship/WidgetTrackedEntityRelationship.types';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
-import { RegisterTeiComponent } from '../RegisterTei/RegisterTei.component';
 import { RegisterTei } from '../RegisterTei';
+import { useOrganisationUnit } from '../../../../../dataQueries';
 
 export const TrackedEntityRelationshipsWrapper = ({
     trackedEntityTypeId,
@@ -32,9 +29,14 @@ export const TrackedEntityRelationshipsWrapper = ({
 }: Props) => {
     const dispatch = useDispatch();
     const { relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
+    const { orgUnit: initialOrgUnit } = useOrganisationUnit(orgUnitId, 'id,displayName,code');
 
-    const onSelectFindMode = ({ findMode, relationshipConstraint, orgUnitId }: OnSelectFindModeProps) => {
-        dispatch(selectFindMode({ findMode, orgUnitId, relationshipConstraint }));
+    const onSelectFindMode = ({ findMode, relationshipConstraint }: OnSelectFindModeProps) => {
+        dispatch(selectFindMode({
+            findMode,
+            orgUnit: initialOrgUnit,
+            relationshipConstraint,
+        }));
     };
 
     if (isError) {
@@ -64,30 +66,25 @@ export const TrackedEntityRelationshipsWrapper = ({
                 onSelectFindMode={onSelectFindMode}
                 relationshipTypes={relationshipTypes}
                 renderTrackedEntityRegistration={(
-                    selectedTrackedEntityTypeId: string,
-                    suggestedProgramId: string,
+                    selectedTrackedEntityTypeId,
+                    suggestedProgramId,
+                    onLinkToTrackedEntityFromRegistration,
+                    onLinkToTrackedEntityFromSearch,
                 ) => (
                     <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-                        {/* <RegisterTeiComponent
-                            dataEntryId={'relationshipTeiRegistrationWidget'}
-                            itemId={''}
-                            trackedEntityName={'trackedEntityName'}
-                            selectedProgramId={selectedProgramId}
-                            trackedEntityTypeId={selectedTrackedEntityTypeId}
-                            error={''}
-                        /> */}
                         <RegisterTei
-                            onLink={() => console.log('link')}
-                            onSave={() => console.log('save')}
+                            suggestedProgramId={suggestedProgramId}
+                            onLink={onLinkToTrackedEntityFromSearch}
+                            onSave={onLinkToTrackedEntityFromRegistration}
                             onGetUnsavedAttributeValues={() => console.log('get unsaved')}
                             trackedEntityTypeId={selectedTrackedEntityTypeId}
                         />
                     </ResultsPageSizeContext.Provider>
                 )}
                 renderTrackedEntitySearch={(
-                    searchTrackedEntityTypeId: string,
-                    searchProgramId: string,
-                    onLinkToTrackedEntity: OnLinkToTrackedEntity,
+                    searchTrackedEntityTypeId,
+                    searchProgramId,
+                    onLinkToTrackedEntityFromSearch,
                 ) => (
                     <TeiSearch
                         resultsPageSize={5}
@@ -96,7 +93,7 @@ export const TrackedEntityRelationshipsWrapper = ({
                         selectedTrackedEntityTypeId={searchTrackedEntityTypeId}
                         getResultsView={viewProps => (
                             <TeiRelationshipSearchResults
-                                onAddRelationship={onLinkToTrackedEntity}
+                                onAddRelationship={onLinkToTrackedEntityFromSearch}
                                 {...viewProps}
                             />
                         )}

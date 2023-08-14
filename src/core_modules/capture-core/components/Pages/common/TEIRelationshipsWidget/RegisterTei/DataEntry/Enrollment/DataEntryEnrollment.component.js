@@ -24,7 +24,7 @@ const NewEnrollmentRelationshipPlain =
             <EnrollmentRegistrationEntry
                 id={DATA_ENTRY_ID}
                 selectedScopeId={programId}
-                cachedOrgUnitId={orgUnitId}
+                orgUnitId={orgUnitId}
                 fieldOptions={fieldOptions}
                 saveButtonText={(trackedEntityTypeName: string) => i18n.t('Save new {{trackedEntityTypeName}} and link', {
                     trackedEntityTypeName,

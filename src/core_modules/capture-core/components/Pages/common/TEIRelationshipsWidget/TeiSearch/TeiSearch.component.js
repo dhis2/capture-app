@@ -1,8 +1,7 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useCallback, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { SearchGroup } from '../../../../../metaData';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
 import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSelector.container';
@@ -25,114 +24,106 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type State = {
-    programSectionOpen: boolean,
-}
+const TeiSearchPlain = (props) => {
+    const [programSectionOpen, setProgramSectionOpen] = useState(true);
 
-class TeiSearchPlain extends React.Component<Props, State> {
-    constructor(props) {
-        super(props);
-        this.state = { programSectionOpen: true };
-    }
+    const getFormId = useCallback((searchGroupId) => {
+        const contextId = props.selectedProgramId || props.selectedTrackedEntityTypeId || '';
+        return `${props.id}-${contextId}-${searchGroupId}`;
+    }, [props.selectedProgramId, props.selectedTrackedEntityTypeId, props.id]);
 
+    const handleSearch = (formId, searchGroupId) => {
+        props.onSearch(formId, searchGroupId, props.id);
+    };
 
-    getFormId = (searchGroupId: string) => {
-        const contextId = this.props.selectedProgramId || this.props.selectedTrackedEntityTypeId || '';
-        return `${this.props.id}-${contextId}-${searchGroupId}`;
-    }
+    const handleSearchResultsChangePage = (pageNumber) => {
+        props.onSearchResultsChangePage(props.id, pageNumber);
+    };
 
-    handleSearch = (formId: string, searchGroupId: string) => {
-        const { id } = this.props;
-        this.props.onSearch(formId, searchGroupId, id);
-    }
+    const handleNewSearch = () => {
+        props.onNewSearch(props.id);
+    };
 
-    handleSearchResultsChangePage = (pageNumber: number) => {
-        this.props.onSearchResultsChangePage(this.props.id, pageNumber);
-    }
+    const handleEditSearch = () => {
+        props.onEditSearch(props.id);
+    };
 
-    handleNewSearch = () => {
-        this.props.onNewSearch(this.props.id);
-    }
+    const handleSearchValidationFailed = (...args) => {
+        props.onSearchValidationFailed(...args, props.id);
+    };
 
-    handleEditSearch = () => {
-        this.props.onEditSearch(this.props.id);
-    }
-
-    handleSearchValidationFailed = (...args) => {
-        const { id } = this.props;
-        this.props.onSearchValidationFailed(...args, id);
-    }
-
-    renderSearchForms = (searchGroups: Array<SearchGroup>) => (
-        <div className={this.props.classes.container}>
-            {this.renderProgramSection()}
-            {this.renderSearchGroups(searchGroups)}
+    const renderSearchForms = searchGroups => (
+        <div className={props.classes.container}>
+            {renderProgramSection()}
+            {renderSearchGroups(searchGroups)}
         </div>
     );
 
-    renderProgramSection = () => {
-        const isCollapsed = !this.state.programSectionOpen;
+    const renderProgramSection = () => {
+        const isCollapsed = !programSectionOpen;
         return (
             <Section
-                className={this.props.classes.programSection}
+                className={props.classes.programSection}
                 isCollapsed={isCollapsed}
                 header={
                     <SectionHeaderSimple
                         containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
                         isCollapsed={isCollapsed}
-                        onChangeCollapseState={() => { this.setState({ programSectionOpen: !!isCollapsed }); }}
+                        onChangeCollapseState={() => { setProgramSectionOpen(!isCollapsed); }}
                         title={i18n.t('Program')}
                     />
                 }
             >
                 <SearchProgramSelector
-                    searchId={this.props.id}
-                    selectedProgramId={this.props.selectedProgramId}
-                    selectedTrackedEntityTypeId={this.props.selectedTrackedEntityTypeId}
+                    searchId={props.id}
+                    selectedProgramId={props.selectedProgramId}
+                    selectedTrackedEntityTypeId={props.selectedTrackedEntityTypeId}
                 />
             </Section>
         );
-    }
+    };
 
-    onChangeSectionCollapseState = (id) => {
-        if (this.props.openSearchGroupSection === id) {
-            this.props.onSetOpenSearchGroupSection(this.props.id, null);
+    const onChangeSectionCollapseState = (id) => {
+        if (props.openSearchGroupSection === id) {
+            props.onSetOpenSearchGroupSection(props.id, null);
             return;
         }
-        this.props.onSetOpenSearchGroupSection(this.props.id, id);
-    }
+        props.onSetOpenSearchGroupSection(props.id, id);
+    };
 
-    renderSearchGroups = (searchGroups: Array<SearchGroup>) => searchGroups.map((sg, i) => {
+    const renderSearchGroups = searchGroups => searchGroups.map((sg, i) => {
         const searchGroupId = i.toString();
-        const formId = this.getFormId(searchGroupId);
+        const formId = getFormId(searchGroupId);
         const header = sg.unique ? i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : i18n.t('Search by attributes');
-        const collapsed = this.props.openSearchGroupSection !== searchGroupId;
+        const collapsed = props.openSearchGroupSection !== searchGroupId;
         return (
             <Section
                 data-test="search-by-attributes-forms"
                 key={formId}
                 isCollapsed={collapsed}
-                className={this.props.classes.formContainerSection}
+                className={props.classes.formContainerSection}
                 header={
                     <SectionHeaderSimple
                         containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
-                        onChangeCollapseState={() => { this.onChangeSectionCollapseState(searchGroupId); }}
+                        onChangeCollapseState={() => { onChangeSectionCollapseState(searchGroupId); }}
                         isCollapsed={collapsed}
                         title={header}
-                    />}
+                    />
+                }
             >
                 <TeiSearchForm
                     id={formId}
-                    searchId={this.props.id}
+                    searchId={props.id}
                     searchGroupId={searchGroupId}
                     searchGroup={sg}
-                    onSearch={this.handleSearch}
-                    onSearchValidationFailed={this.handleSearchValidationFailed}
+                    onSearch={handleSearch}
+                    onSearchValidationFailed={handleSearchValidationFailed}
                 />
             </Section>
         );
-    })
-    renderSearchResult = () => {
+    });
+
+    const renderSearchResult = () => {
         const {
             id,
             searchGroups,
@@ -140,14 +131,15 @@ class TeiSearchPlain extends React.Component<Props, State> {
             selectedProgramId,
             selectedTrackedEntityTypeId,
             trackedEntityTypeName,
-        } = this.props;
+        } = props;
+
         return (
             <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
                 <TeiSearchResults
                     id={id}
-                    onChangePage={this.handleSearchResultsChangePage}
-                    onNewSearch={this.handleNewSearch}
-                    onEditSearch={this.handleEditSearch}
+                    onChangePage={handleSearchResultsChangePage}
+                    onNewSearch={handleNewSearch}
+                    onEditSearch={handleEditSearch}
                     getResultsView={getResultsView}
                     searchGroups={searchGroups}
                     selectedProgramId={selectedProgramId}
@@ -156,17 +148,15 @@ class TeiSearchPlain extends React.Component<Props, State> {
                 />
             </ResultsPageSizeContext.Provider>
         );
+    };
+
+    const searchGroups = props.searchGroups;
+
+    if (props.showResults) {
+        return renderSearchResult();
     }
 
-    render() {
-        const searchGroups = this.props.searchGroups;
-
-        if (this.props.showResults) {
-            return this.renderSearchResult();
-        }
-
-        return searchGroups ? this.renderSearchForms(searchGroups) : (<div />);
-    }
-}
+    return searchGroups ? renderSearchForms(searchGroups) : (<div />);
+};
 
 export const TeiSearchComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(TeiSearchPlain);

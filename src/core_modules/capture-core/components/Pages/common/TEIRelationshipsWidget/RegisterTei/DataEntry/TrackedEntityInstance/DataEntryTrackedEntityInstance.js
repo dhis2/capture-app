@@ -14,7 +14,6 @@ const RelationshipTrackedEntityInstancePlain =
         theme,
         onSave,
         trackedEntityTypeId,
-        // teiRegistrationMetadata = {},
         duplicatesReviewPageSize,
         renderDuplicatesDialogActions,
         renderDuplicatesCardActions,

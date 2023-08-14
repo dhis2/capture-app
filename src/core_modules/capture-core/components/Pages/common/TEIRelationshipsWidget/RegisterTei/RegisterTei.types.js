@@ -1,17 +1,22 @@
 // @flow
-type PropsFromRedux = {|
-    dataEntryId: string,
-    itemId: string,
-    trackedEntityName: ?string,
-    error: string,
-|};
-
-export type OwnProps = {|
+export type SharedProps = {|
     onLink: (teiId: string, values: Object) => void,
     onGetUnsavedAttributeValues?: ?Function,
-    onSave: (itemId: string, dataEntryId: string) => void,
-    suggestedProgramId: string,
     trackedEntityTypeId: string,
 |};
 
-export type Props = {|...PropsFromRedux, ...OwnProps, ...CssClasses |}
+export type ContainerProps = {|
+    suggestedProgramId: string,
+    onSave: (teiPayload: Object) => void,
+    ...SharedProps,
+|};
+
+export type ComponentProps = {|
+    selectedScopeId: string,
+    error: string,
+    dataEntryId: string,
+    trackedEntityName: ?string,
+    onSave: () => void,
+    ...SharedProps,
+    ...CssClasses,
+|};

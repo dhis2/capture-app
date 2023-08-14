@@ -9,6 +9,7 @@ import type {
 
 export type Props = {|
     theme: Theme,
+    trackedEntityTypeId: string,
     onSave: SaveForEnrollmentAndTeiRegistration,
     teiRegistrationMetadata?: TeiRegistration,
     duplicatesReviewPageSize: number,

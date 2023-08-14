@@ -10,6 +10,7 @@ import { RenderFoundation } from '../../../metaData';
 
 export type OwnProps = $ReadOnly<{|
     id: string,
+    orgUnitId: string,
     selectedScopeId: string,
     fieldOptions?: Object,
     onSave: SaveForDuplicateCheck,
@@ -21,7 +22,6 @@ export type OwnProps = $ReadOnly<{|
     skipDuplicateCheck?: ?boolean,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
     saveButtonText: (trackedEntityName: string) => string,
-    cachedOrgUnitId?: string,
 |}>;
 
 type ContainerProps = {|

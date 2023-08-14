@@ -8,7 +8,7 @@ import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container
 import { RegistrationSection } from './RegistrationSection';
 import { DataEntryWidgetOutput } from '../../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
-import type { Props } from './RegisterTei.types';
+import type { ComponentProps } from './RegisterTei.types';
 import { withErrorMessageHandler } from '../../../../../HOC';
 
 const getStyles = () => ({
@@ -57,15 +57,14 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
 
 const RegisterTeiPlain = ({
     dataEntryId,
-    itemId,
     onLink,
     onSave,
     onGetUnsavedAttributeValues,
     trackedEntityName,
     trackedEntityTypeId,
-    selectedProgramId,
+    selectedScopeId,
     classes,
-}: Props) => {
+}: ComponentProps) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
 
     const renderDuplicatesCardActions = useCallback(({ item }) => (
@@ -94,10 +93,6 @@ const RegisterTeiPlain = ({
         </Button>
     ), [onLink]);
 
-    const handleSave = useCallback(() => {
-        onSave(itemId, dataEntryId);
-    }, [onSave, itemId, dataEntryId]);
-
     return (
         <div className={classes.container}>
             <div className={classes.leftContainer}>
@@ -106,7 +101,7 @@ const RegisterTeiPlain = ({
                 />
                 <RegisterTeiDataEntry
                     onLink={onLink}
-                    onSave={handleSave}
+                    onSave={onSave}
                     trackedEntityTypeId={trackedEntityTypeId}
                     onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
                     duplicatesReviewPageSize={resultsPageSize}
@@ -117,7 +112,7 @@ const RegisterTeiPlain = ({
             </div>
             <DataEntryWidgetOutput
                 dataEntryId={dataEntryId}
-                selectedScopeId={selectedProgramId}
+                selectedScopeId={selectedScopeId}
                 renderCardActions={({ item }) =>
                     <CardListButton teiId={item.id} values={item.values} handleOnClick={onLink} />
                 }
@@ -126,7 +121,7 @@ const RegisterTeiPlain = ({
     );
 };
 
-export const RegisterTeiComponent: ComponentType<$Diff<Props, CssClasses>> =
+export const RegisterTeiComponent: ComponentType<$Diff<ComponentProps, CssClasses>> =
   compose(
       withErrorMessageHandler(),
       withStyles(getStyles),

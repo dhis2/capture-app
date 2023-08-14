@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRulesEngineOrgUnit } from '../../../hooks';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
@@ -15,12 +14,12 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     id,
     saveButtonText,
     trackedEntityInstanceAttributes,
-    cachedOrgUnitId,
+    orgUnitId,
+    teiId,
     ...passOnProps
 }) => {
-    const orgUnitId = useCurrentOrgUnitInfo().id;
-    const { orgUnit, error } = useRulesEngineOrgUnit(cachedOrgUnitId ?? orgUnitId);
-    const { teiId, ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
+    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit, teiId);
     const {
         formId,
         registrationMetaData: enrollmentMetadata,

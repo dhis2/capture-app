@@ -2,8 +2,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RegisterTeiComponent } from './RegisterTei.component';
-import type { OwnProps } from './RegisterTei.types';
+import type { ContainerProps } from './RegisterTei.types';
 import { useScopeInfo } from '../../../../../hooks/useScopeInfo';
+import { useDataEntryReduxConverter } from '../TrackedEntityRelationshipsWrapper/hooks/useDataEntryReduxConverter';
 
 export const RegisterTei = ({
     onLink,
@@ -11,22 +12,31 @@ export const RegisterTei = ({
     onGetUnsavedAttributeValues,
     trackedEntityTypeId,
     suggestedProgramId,
-}: OwnProps) => {
+}: ContainerProps) => {
     const dataEntryId = 'relationship';
     const itemId = useSelector(({ dataEntries }) => dataEntries[dataEntryId]?.itemId);
     const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
-    const newRelationshipProgramId = suggestedProgramId || trackedEntityTypeId;
-    const { trackedEntityName } = useScopeInfo(newRelationshipProgramId);
+    const selectedScopeId = suggestedProgramId || trackedEntityTypeId;
+    const { trackedEntityName } = useScopeInfo(selectedScopeId);
+    const { buildTeiPayload } = useDataEntryReduxConverter({
+        dataEntryId,
+        itemId,
+        trackedEntityTypeId,
+    });
+
+    const onCreateNewTei = () => {
+        const teiPayload = buildTeiPayload();
+        onSave(teiPayload);
+    };
 
     return (
         <RegisterTeiComponent
             dataEntryId={dataEntryId}
-            itemId={itemId}
             onLink={onLink}
-            onSave={onSave}
+            onSave={onCreateNewTei}
             onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
             trackedEntityName={trackedEntityName}
-            newRelationshipProgramId={newRelationshipProgramId}
+            selectedScopeId={selectedScopeId}
             error={error}
             trackedEntityTypeId={trackedEntityTypeId}
         />

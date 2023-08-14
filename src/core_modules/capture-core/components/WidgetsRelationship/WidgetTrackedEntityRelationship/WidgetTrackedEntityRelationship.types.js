@@ -8,12 +8,15 @@ export type RelationshipConstraint = {|
     programId: ?string,
 |}
 
-export type OnLinkToTrackedEntity =
+export type OnLinkToTrackedEntityFromSearch =
     (linkedTrackedEntityId: string, attributes?: { [attributeId: string]: string }) => void;
+
+export type OnLinkToTrackedEntityFromRegistration =
+    (teiPayload: Object) => void;
 
 export type OnSelectFindModeProps = {|
     findMode: string,
-    orgUnitId?: string,
+    orgUnitId: string,
     relationshipConstraint: RelationshipConstraint,
 |}
 
@@ -33,11 +36,12 @@ export type WidgetTrackedEntityRelationshipProps = {|
     renderTrackedEntityRegistration: (
         trackedEntityTypeId: string,
         programId: string,
-        onLinkToTrackedEntity: OnLinkToTrackedEntity,
+        onLinkToTrackedEntityFromRegistration: OnLinkToTrackedEntityFromRegistration,
+        onLinkToTrackedEntityFromSearch: OnLinkToTrackedEntityFromSearch,
     ) => React.Element<any>,
     renderTrackedEntitySearch?: (
         trackedEntityTypeId: string,
         programId: string,
-        onLinkToTrackedEntity: OnLinkToTrackedEntity,
+        onLinkToTrackedEntityFromSearch: OnLinkToTrackedEntityFromSearch,
     ) => React.Element<any>,
 |};

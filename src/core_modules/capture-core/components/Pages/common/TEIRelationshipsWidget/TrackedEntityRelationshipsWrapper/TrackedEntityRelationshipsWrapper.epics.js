@@ -35,16 +35,6 @@ function getTrackerProgram(suggestedProgramId: string) {
     return trackerProgram;
 }
 
-function getOrgUnitId(suggestedOrgUnitId: string, trackerProgram: ?TrackerProgram) {
-    let orgUnitId;
-    if (trackerProgram) {
-        orgUnitId = trackerProgram.organisationUnits[suggestedOrgUnitId] ? suggestedOrgUnitId : null;
-    } else {
-        orgUnitId = suggestedOrgUnitId;
-    }
-    return orgUnitId;
-}
-
 export const openRelationshipTeiSearchWidgetEpic =
     (action$: InputObservable) =>
         action$.pipe(
@@ -71,13 +61,12 @@ export const openRelationshipTeiSearchWidgetEpic =
             }),
         );
 
-export const openRelationshipTeiRegisterWidgetEpic = (action$: InputObservable, store: ReduxStore) =>
+export const openRelationshipTeiRegisterWidgetEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.WIDGET_SELECT_FIND_MODE),
         filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER),
         switchMap((action) => {
-            const state = store.value;
-            const { relationshipConstraint, orgUnitId: suggestedOrgUnitId } = action.payload;
+            const { relationshipConstraint, orgUnit } = action.payload;
             const { programId } = relationshipConstraint;
 
             let trackerProgram: ?TrackerProgram;
@@ -88,17 +77,11 @@ export const openRelationshipTeiRegisterWidgetEpic = (action$: InputObservable, 
                     return Promise.resolve(initializeRegisterTeiFailed(error));
                 }
             }
-            const orgUnitId = getOrgUnitId(suggestedOrgUnitId, trackerProgram);
 
             // can't run rules when no valid organisation unit is specified, i.e. only the registration section will be visible
-            if (!orgUnitId) {
+            if (!orgUnit) {
                 return Promise.resolve(initializeRegisterTei(trackerProgram && trackerProgram.id));
             }
-            const orgUnit = {
-                id: 'DiszpKrYNg8',
-                name: 'Ngelehun CHC',
-                code: 'OU_559',
-            };
 
             return of(initializeRegisterTei(programId, orgUnit));
         }));

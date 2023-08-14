@@ -49,14 +49,14 @@ const NewTrackedEntityRelationshipPlain = ({
     onSelectFindMode,
     classes,
 }: StyledComponentProps) => {
-    const { mutate } = useAddRelationship({
-        teiId,
-        onMutate: () => onSave(),
-    });
-
     const [currentStep, setCurrentStep] =
         useState(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA);
     const [selectedLinkedEntityMetadata: LinkedEntityMetadata, setSelectedLinkedEntityMetadata] = useState(undefined);
+    const { mutate } = useAddRelationship({
+        teiId,
+        onMutate: () => onSave && onSave(),
+    });
+
 
     const onLinkToTrackedEntityFromSearch = useCallback(
         (linkedTrackedEntityId: string, attributes?: { [attributeId: string]: string }) => {
@@ -84,9 +84,11 @@ const NewTrackedEntityRelationshipPlain = ({
             }
 
             mutate({
-                relationship: {
-                    relationshipType: relationshipId,
-                    ...apiData,
+                apiData: {
+                    relationships: [{
+                        relationshipType: relationshipId,
+                        ...apiData,
+                    }],
                 },
                 clientRelationship: {
                     relationshipType: relationshipId,
@@ -94,6 +96,37 @@ const NewTrackedEntityRelationshipPlain = ({
                 },
             });
         }, [mutate, selectedLinkedEntityMetadata, teiId]);
+
+    const onLinkToTrackedEntityFromRegistration = useCallback((trackedEntity: Object) => {
+        if (!selectedLinkedEntityMetadata) return;
+        const { relationshipId, targetSide } = selectedLinkedEntityMetadata;
+
+        const relationshipData = targetSide === TARGET_SIDES.TO ?
+            { from: { trackedEntity: { trackedEntity: teiId } }, to: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } } } :
+            { from: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } }, to: { trackedEntity: { trackedEntity: teiId } } };
+
+        const clientData = {
+            relationshipType: relationshipId,
+            createdAt: new Date().toISOString(),
+            ...relationshipData,
+            [targetSide.toLowerCase()]: {
+                trackedEntity: {
+                    attributes: trackedEntity.attributes ?? trackedEntity.enrollments?.[0]?.attributes,
+                    orgUnitId: trackedEntity.orgUnit,
+                    trackedEntity: trackedEntity.trackedEntity,
+                    trackedEntityType: trackedEntity.trackedEntityType,
+                },
+            },
+        };
+
+        mutate({
+            apiData: {
+                trackedEntities: [trackedEntity],
+                relationships: [{ relationshipType: relationshipId, ...relationshipData }],
+            },
+            clientRelationship: clientData,
+        });
+    }, [mutate, selectedLinkedEntityMetadata, teiId]);
 
     const handleNavigation = useCallback(
         (destination: $Values<typeof NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS>) => {
@@ -109,6 +142,7 @@ const NewTrackedEntityRelationshipPlain = ({
         if (selectedLinkedEntityMetadata) {
             onSelectFindMode && onSelectFindMode({
                 findMode: 'TEI_SEARCH',
+                orgUnitId,
                 relationshipConstraint: {
                     programId: selectedLinkedEntityMetadata?.programId,
                     trackedEntityTypeId: selectedLinkedEntityMetadata.trackedEntityTypeId,
@@ -116,7 +150,7 @@ const NewTrackedEntityRelationshipPlain = ({
             });
         }
         setCurrentStep(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY);
-    }, [onSelectFindMode, selectedLinkedEntityMetadata]);
+    }, [onSelectFindMode, orgUnitId, selectedLinkedEntityMetadata]);
 
     const handleNewRetrieverModeSelected = useCallback(() => {
         if (selectedLinkedEntityMetadata) {
@@ -185,7 +219,8 @@ const NewTrackedEntityRelationshipPlain = ({
                 return renderTrackedEntityRegistration(
                     linkedEntityTrackedEntityTypeId,
                     linkedEntityProgramId,
-                    (...args) => console.log('Registration completed', args),
+                    onLinkToTrackedEntityFromRegistration,
+                    onLinkToTrackedEntityFromSearch,
                 );
             }
         }
@@ -195,7 +230,20 @@ const NewTrackedEntityRelationshipPlain = ({
                 {i18n.t('Missing implementation step')}
             </div>
         );
-    }, [currentStep, handleLinkedEntityMetadataSelection, handleNewRetrieverModeSelected, handleSearchRetrieverModeSelected, onLinkToTrackedEntityFromSearch, programId, relationshipTypes, renderTrackedEntityRegistration, renderTrackedEntitySearch, selectedLinkedEntityMetadata, trackedEntityTypeId]);
+    }, [
+        currentStep.id,
+        handleLinkedEntityMetadataSelection,
+        handleNewRetrieverModeSelected,
+        handleSearchRetrieverModeSelected,
+        onLinkToTrackedEntityFromRegistration,
+        onLinkToTrackedEntityFromSearch,
+        programId,
+        relationshipTypes,
+        renderTrackedEntityRegistration,
+        renderTrackedEntitySearch,
+        selectedLinkedEntityMetadata,
+        trackedEntityTypeId,
+    ]);
 
     return (
         <div className={classes.container}>

@@ -1,6 +1,8 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
+// $FlowFixMe - useAlert is exported from app-runtime
+import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
-import { useDataEngine } from '@dhis2/app-runtime';
 
 type Props = {
     teiId: string;
@@ -13,25 +15,37 @@ const ReactQueryAppNamespace = 'capture';
 const addRelationshipMutation = {
     resource: '/tracker?async=false&importStrategy=CREATE',
     type: 'create',
-    data: ({ relationship }) => ({
-        relationships: [relationship],
-    }),
+    data: ({ apiData }) => apiData,
 };
 
 export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
     const queryClient = useQueryClient();
     const dataEngine = useDataEngine();
+    const { show: showSnackbar } = useAlert(
+        ({ text }) => text,
+        ({ barStatus }) => barStatus,
+    );
+
     // $FlowFixMe - Is there something wrong with the types?
     const { mutate } = useMutation(
-        ({ relationship }) => dataEngine.mutate(addRelationshipMutation, {
+        ({ apiData }) => dataEngine.mutate(addRelationshipMutation, {
             variables: {
-                relationship,
+                apiData,
             },
         }),
         {
+            onError: () => {
+                queryClient.invalidateQueries([ReactQueryAppNamespace, 'relationships']);
+                showSnackbar({
+                    text: i18n.t('An error occurred while adding the relationship'),
+                    barStatus: { critical: true },
+                });
+            },
             onMutate: (...props) => {
                 onMutate && onMutate(...props);
                 const { clientRelationship } = props[0];
+                if (!clientRelationship) return;
+
                 queryClient.setQueryData([ReactQueryAppNamespace, 'relationships', teiId], (oldData) => {
                     const instances = oldData?.instances || [];
                     const updatedInstances = [clientRelationship, ...instances];
@@ -40,6 +54,10 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
             },
             onSuccess: (...props) => {
                 queryClient.invalidateQueries([ReactQueryAppNamespace, 'relationships']);
+                showSnackbar({
+                    text: i18n.t('Relationship added'),
+                    barStatus: { success: true },
+                });
                 onSuccess && onSuccess(...props);
             },
         },

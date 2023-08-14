@@ -180,6 +180,8 @@ const RegistrationDataEntryPlain = ({
                             <Grid item md sm={9} xs={9} >
                                 <EnrollmentRegistrationEntryWrapper
                                     id={dataEntryId}
+                                    orgUnitId={reduxOrgUnitId}
+                                    teiId={teiId}
                                     selectedScopeId={selectedScopeId}
                                     onSave={() => onSaveWithEnrollment(formFoundation)}
                                     saveButtonText={(trackedEntityTypeNameLC: string) => i18n.t('Save {{trackedEntityTypeName}}', {

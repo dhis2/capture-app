@@ -15,6 +15,7 @@ export class RegisterTeiDataEntryComponent extends React.Component<Props> {
         if (!showDataEntry) {
             return null;
         }
+
         if (programId) {
             return (
                 <DataEntryEnrollment

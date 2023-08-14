@@ -1,13 +1,22 @@
 // @flow
 import * as React from 'react';
 import type { RelationshipTypes } from '../../common/Types';
-import type { OnLinkToTrackedEntity, OnSelectFindMode } from '../WidgetTrackedEntityRelationship.types';
+import type {
+    OnLinkToTrackedEntityFromSearch,
+    OnLinkToTrackedEntityFromRegistration,
+    OnSelectFindMode,
+} from '../WidgetTrackedEntityRelationship.types';
 
 type RenderTrackedEntitySearch =
-    (trackedEntityTypeId: string, programId: string, onLinkToTrackedEntity: OnLinkToTrackedEntity) => React.Element<any>
+    (trackedEntityTypeId: string, programId: string, onLinkToTrackedEntity: OnLinkToTrackedEntityFromSearch) => React.Element<any>
 
 type RenderTrackedEntityRegistration =
-     (trackedEntityTypeId: string, programId: string, onLinkToTrackedEntity: OnLinkToTrackedEntity) => React.Element<any>
+     (
+         trackedEntityTypeId: string,
+         programId: string,
+         onLinkToTrackedEntityFromRegistration: OnLinkToTrackedEntityFromRegistration,
+         onLinkToTrackedEntity: OnLinkToTrackedEntityFromSearch,
+     ) => React.Element<any>
 
 export type ContainerProps = $ReadOnly<{|
     teiId: string,
