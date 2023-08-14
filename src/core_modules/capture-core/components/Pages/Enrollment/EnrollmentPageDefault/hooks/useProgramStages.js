@@ -32,6 +32,7 @@ export const useProgramStages = (program: Program, programStages?: Array<apiProg
                             acc.push({
                                 id: dataElement.id,
                                 name: dataElement.displayName,
+                                formName: dataElement.displayFormName,
                                 type: dataElement.valueType,
                                 options,
                                 optionSet: dataElement.optionSet,
