@@ -47,11 +47,9 @@ const createApiEventQueryArgs = (
 };
 
 const createApiTEIsQueryArgs =
-({ pageSize, programId: program, orgUnitId: orgUnit }, trackedEntityIds): { [string]: any } => ({
+({ pageSize, programId: program }, trackedEntityIds): { [string]: any } => ({
     program,
     pageSize,
-    orgUnit,
-    ouMode: orgUnit ? 'SELECTED' : 'ACCESSIBLE',
     trackedEntity: trackedEntityIds,
     fields:
     'trackedEntity,createdAt,orgUnit,attributes[attribute,value],enrollments[enrollment,status,orgUnit,enrolledAt]',

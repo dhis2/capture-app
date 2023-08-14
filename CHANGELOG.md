@@ -1,3 +1,17 @@
+## [100.35.6](https://github.com/dhis2/capture-app/compare/v100.35.5...v100.35.6) (2023-08-11)
+
+
+### Bug Fixes
+
+* [TECH-1623] rename TEI "Launchpad McQuack" -> "Breaking TheGlass" ([#3400](https://github.com/dhis2/capture-app/issues/3400)) ([7f26237](https://github.com/dhis2/capture-app/commit/7f262372499b98d9fd8071c7b8069238ad3a1d15))
+
+## [100.35.5](https://github.com/dhis2/capture-app/compare/v100.35.4...v100.35.5) (2023-08-03)
+
+
+### Bug Fixes
+
+* [DHIS2-15365] remove orgUnit and ouMode query args ([#3398](https://github.com/dhis2/capture-app/issues/3398)) ([ef35eb3](https://github.com/dhis2/capture-app/commit/ef35eb300fa61343576957e6734a2767dc37b4ec))
+
 ## [100.35.4](https://github.com/dhis2/capture-app/compare/v100.35.3...v100.35.4) (2023-08-01)
 
 
