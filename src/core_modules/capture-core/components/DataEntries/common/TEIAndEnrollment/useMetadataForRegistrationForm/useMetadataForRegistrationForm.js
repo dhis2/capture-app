@@ -33,7 +33,9 @@ export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
                 .map(({ trackedEntityAttributeId }) => trackedEntityAttributeId);
         }
         if (scopeType === scopeTypes.TRACKED_ENTITY_TYPE && trackedEntityType) {
-            return trackedEntityType.trackedEntityTypeAttributes.map(({ id }) => id);
+            return trackedEntityType
+                .trackedEntityTypeAttributes
+                .map(({ trackedEntityAttributeId }) => trackedEntityAttributeId);
         }
         return undefined;
     }, [program, scopeType, trackedEntityType]);
