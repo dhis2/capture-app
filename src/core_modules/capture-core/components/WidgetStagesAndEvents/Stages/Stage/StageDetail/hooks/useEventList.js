@@ -113,13 +113,13 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
 const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, formFoundation: Object) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
-            const { id, name, type, optionSet } = currDataElement;
+            const { id, name, formName, type, optionSet } = currDataElement;
             if (!acc.find(item => item.id === id)) {
                 if (isNotValidOptionSet(type, optionSet)) {
                     log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ currDataElement }));
                     return acc;
                 }
-                acc.push({ id, header: name, type, sortDirection: SORT_DIRECTION.DEFAULT });
+                acc.push({ id, header: formName || name, type, sortDirection: SORT_DIRECTION.DEFAULT });
             }
             return acc;
         }, []);
