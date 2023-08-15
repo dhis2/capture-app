@@ -1,3 +1,10 @@
+## [100.35.7](https://github.com/dhis2/capture-app/compare/v100.35.6...v100.35.7) (2023-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-15525] show formNames in the enrollment dashboard ([#3402](https://github.com/dhis2/capture-app/issues/3402)) ([c02c3ee](https://github.com/dhis2/capture-app/commit/c02c3ee46ed4209215946636682ec86c97c9d905))
+
 ## [100.35.6](https://github.com/dhis2/capture-app/compare/v100.35.5...v100.35.6) (2023-08-11)
 
 
