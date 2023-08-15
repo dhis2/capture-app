@@ -2,7 +2,7 @@
     "name": "capture-app",
     "homepage": ".",
     "version": "100.35.1",
-    "cacheVersion": "5",
+    "cacheVersion": "6",
     "serverVersion": "38",
     "license": "BSD-3-Clause",
     "private": true,
