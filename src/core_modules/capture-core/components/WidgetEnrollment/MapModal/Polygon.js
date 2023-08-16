@@ -152,6 +152,9 @@ const PolygonPlain = ({
     );
 
     const onFeatureGroupReady = (reactFGref: any, featureCollection: ?FeatureCollection) => {
+        if (!reactFGref) {
+            return;
+        }
         if (featureCollection) {
             const leafletGeoJSON = new L.GeoJSON(featureCollection);
             if (reactFGref) {
@@ -162,7 +165,7 @@ const PolygonPlain = ({
                     leafletFG.addLayer(layer);
                 });
             }
-        } else if (reactFGref) {
+        } else {
             const leafletFG = reactFGref.leafletElement;
             leafletFG.clearLayers();
         }

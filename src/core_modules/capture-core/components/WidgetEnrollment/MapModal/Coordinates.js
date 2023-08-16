@@ -134,7 +134,7 @@ const CoordinatesPlain = ({
                 if (!longitude) {
                     return;
                 }
-                if (!isValidCoordinate({ longitude: Number(longitude), latitude })) {
+                if (!isValidCoordinate({ longitude: Number(longitude), latitude: Number(latitude) })) {
                     setPosition(null);
                     setValid(false);
                     return;
@@ -164,7 +164,7 @@ const CoordinatesPlain = ({
                 if (!latitude) {
                     return;
                 }
-                if (!isValidCoordinate({ longitude, latitude: Number(latitude) })) {
+                if (!isValidCoordinate({ longitude: Number(longitude), latitude: Number(latitude) })) {
                     setPosition(null);
                     setValid(false);
                     return;
