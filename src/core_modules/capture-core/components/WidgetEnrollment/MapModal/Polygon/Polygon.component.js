@@ -7,7 +7,7 @@ import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import { withStyles } from '@material-ui/core';
-import type { PolygonProps, FeatureCollection } from './MapModal.types';
+import type { PolygonProps, FeatureCollection } from './Polygon.types';
 import { convertPolygonToServer } from './converters';
 import { DeleteControl } from './DeleteControl.component';
 

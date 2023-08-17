@@ -6,9 +6,9 @@ import { IconCross24, spacers, Modal, ModalTitle, ModalContent, ModalActions, Bu
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
-import type { CoordinatesProps } from './MapModal.types';
-import { CoordinateInput } from '../../../../capture-ui/internal/CoordinateInput/CoordinateInput.component';
-import { isEqual } from '../../../utils/valueEqualityChecker';
+import type { CoordinatesProps } from './Coordinates.types';
+import { CoordinateInput } from '../../../../../capture-ui/internal/CoordinateInput/CoordinateInput.component';
+import { isEqual } from '../../../../utils/valueEqualityChecker';
 import { isValidCoordinate } from './coordinate.validator';
 import { convertCoordinatesToServer } from './converters';
 

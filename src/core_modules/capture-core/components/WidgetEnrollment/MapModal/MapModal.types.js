@@ -1,21 +1,7 @@
 // @flow
 import { dataElementTypes } from '../../../metaData';
 
-type Feature = {
-    type: string,
-    properties: Object,
-    geometry: {
-        type: string,
-        coordinates: Array<Array<Array<number> | number>>,
-    },
-}
-
-export type FeatureCollection = {
-    type: string,
-    features: Array<Feature>,
-};
-
-export type ModalProps = {
+export type MapModalComponentProps = {
     center: ?[number, number],
     type: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON,
     defaultValues?: ?Array<Array<number>> | ?[number, number],
@@ -23,21 +9,6 @@ export type ModalProps = {
     onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
 }
 
-export type PolygonProps = {
-    center: ?[number, number],
-    setOpen: (open: boolean) => void,
-    onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
-    defaultValues?: ?Array<Array<number>>,
-    ...CssClasses,
-}
-
-export type CoordinatesProps = {
-    center: ?[number, number],
-    setOpen: (open: boolean) => void,
-    onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
-    defaultValues?: ?[number, number],
-    ...CssClasses,
-}
 export type MapModalProps = {|
     center?: ?[number, number],
     enrollment: Object,
