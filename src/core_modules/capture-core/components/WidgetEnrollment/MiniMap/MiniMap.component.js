@@ -64,14 +64,15 @@ const MiniMapPlain = ({
                     {geometryType === dataElementTypes.POLYGON && <Polygon positions={clientValues} />}
                 </Map>
             </div>
-            <MapModal
-                center={center}
-                isOpenMap={isOpenMap}
-                setOpenMap={setOpenMap}
-                defaultValues={clientValues}
-                onUpdate={updateMutation}
-                enrollment={enrollment}
-            />
+            {isOpenMap && (
+                <MapModal
+                    center={center}
+                    setOpenMap={setOpenMap}
+                    defaultValues={clientValues}
+                    onUpdate={updateMutation}
+                    enrollment={enrollment}
+                />
+            )}
         </>
     );
 };

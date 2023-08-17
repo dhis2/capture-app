@@ -9,7 +9,6 @@ const DEFAULT_CENTER = [51.505, -0.09];
 export const MapModal = ({
     enrollment,
     onUpdate,
-    isOpenMap,
     setOpenMap,
     defaultValues,
     center,
@@ -29,7 +28,6 @@ export const MapModal = ({
     return (
         <MapModalComponent
             center={center || DEFAULT_CENTER}
-            isOpen={isOpenMap}
             type={dataElementType}
             setOpen={setOpenMap}
             onSetCoordinates={onSetCoordinates}

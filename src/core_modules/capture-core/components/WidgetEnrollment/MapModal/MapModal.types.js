@@ -17,7 +17,6 @@ export type FeatureCollection = {
 
 export type ModalProps = {
     center: ?[number, number],
-    isOpen: boolean,
     type: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON,
     defaultValues?: ?Array<Array<number>> | ?[number, number],
     setOpen: (open: boolean) => void,
@@ -26,7 +25,6 @@ export type ModalProps = {
 
 export type PolygonProps = {
     center: ?[number, number],
-    isOpen: boolean,
     setOpen: (open: boolean) => void,
     onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
     defaultValues?: ?Array<Array<number>>,
@@ -35,7 +33,6 @@ export type PolygonProps = {
 
 export type CoordinatesProps = {
     center: ?[number, number],
-    isOpen: boolean,
     setOpen: (open: boolean) => void,
     onSetCoordinates: (coordinates: ?[number, number] | ?Array<[number, number]>) => void,
     defaultValues?: ?[number, number],
@@ -45,7 +42,6 @@ export type MapModalProps = {|
     center?: ?[number, number],
     enrollment: Object,
     onUpdate: (arg: Object) => void,
-    isOpenMap: boolean,
     setOpenMap: (toggle: boolean) => void,
     defaultValues?: ?Array<Array<number>> | ?[number, number],
 |};

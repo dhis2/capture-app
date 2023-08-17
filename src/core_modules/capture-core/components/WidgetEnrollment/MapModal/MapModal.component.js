@@ -5,12 +5,11 @@ import type { ModalProps } from './MapModal.types';
 import { Coordinates } from './Coordinates';
 import { Polygon } from './Polygon';
 
-export const MapModal = ({ type, center, isOpen, setOpen, onSetCoordinates, defaultValues }: ModalProps) => (
+export const MapModal = ({ type, center, setOpen, onSetCoordinates, defaultValues }: ModalProps) => (
     <>
         {type === dataElementTypes.COORDINATE && (
             <Coordinates
                 center={center}
-                isOpen={isOpen}
                 setOpen={setOpen}
                 onSetCoordinates={onSetCoordinates}
                 defaultValues={defaultValues}
@@ -19,7 +18,6 @@ export const MapModal = ({ type, center, isOpen, setOpen, onSetCoordinates, defa
         {type === dataElementTypes.POLYGON && (
             <Polygon
                 center={center}
-                isOpen={isOpen}
                 setOpen={setOpen}
                 onSetCoordinates={onSetCoordinates}
                 defaultValues={defaultValues}

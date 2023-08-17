@@ -43,7 +43,6 @@ const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 const CoordinatesPlain = ({
     classes,
     center: initialCenter,
-    isOpen,
     setOpen,
     defaultValues,
     onSetCoordinates,
@@ -235,7 +234,7 @@ const CoordinatesPlain = ({
     );
 
     return (
-        <Modal hide={!isOpen} large>
+        <Modal large>
             <ModalTitle>{i18n.t('Coordinates')}</ModalTitle>
             <ModalContent className={classes.modalContent}>
                 {renderMap()}

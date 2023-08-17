@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
@@ -8,8 +8,8 @@ import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import { withStyles } from '@material-ui/core';
 import type { PolygonProps, FeatureCollection } from './MapModal.types';
-import { isEqual } from '../../../utils/valueEqualityChecker';
 import { convertPolygonToServer } from './converters';
+import { DeleteControl } from './DeleteControl.component';
 
 const styles = () => ({
     modalContent: {
@@ -47,25 +47,13 @@ const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 const PolygonPlain = ({
     classes,
     center: initialCenter,
-    isOpen,
     setOpen,
     defaultValues,
     onSetCoordinates,
 }: PolygonProps) => {
     const [polygonArea, setPolygonArea] = useState(defaultValues);
-    const [isEditing, setIsEditing] = useState(false);
-    const [isDeleting, setIsDeleting] = useState(false);
-    const [isDrawing, setIsDrawing] = useState(false);
     const [center, setCenter] = useState(initialCenter);
-    const disabledCancel = useMemo(() => isEditing || isDeleting || isDrawing, [isEditing, isDeleting, isDrawing]);
 
-    const disabledSetArea = useMemo(() => {
-        if (disabledCancel) {
-            return true;
-        }
-        const changed = !isEqual(polygonArea, defaultValues);
-        return !changed;
-    }, [polygonArea, defaultValues, disabledCancel]);
 
     const resetToDefaultValues = () => {
         setCenter(initialCenter);
@@ -133,12 +121,6 @@ const PolygonPlain = ({
                     onEdited={onMapPolygonEdited}
                     onCreated={onMapPolygonCreated}
                     onDeleted={onMapPolygonDelete}
-                    onEditStart={() => setIsEditing(true)}
-                    onEditStop={() => setIsEditing(false)}
-                    onDeleteStart={() => setIsDeleting(true)}
-                    onDeleteStop={() => setIsDeleting(false)}
-                    onDrawStart={() => setIsDrawing(true)}
-                    onDrawStop={() => setIsDrawing(false)}
                     draw={{
                         rectangle: false,
                         polyline: false,
@@ -146,7 +128,11 @@ const PolygonPlain = ({
                         marker: false,
                         circlemarker: false,
                     }}
+                    edit={{
+                        remove: false,
+                    }}
                 />
+                <DeleteControl onClick={onMapPolygonDelete} disabled={!polygonArea} />
             </FeatureGroup>
         </Map>
     );
@@ -174,7 +160,6 @@ const PolygonPlain = ({
     const renderActions = () => (
         <ButtonStrip end>
             <Button
-                disabled={disabledCancel}
                 onClick={() => {
                     resetToDefaultValues();
                     setOpen(false);
@@ -184,7 +169,6 @@ const PolygonPlain = ({
                 {i18n.t('Cancel')}
             </Button>
             <Button
-                disabled={disabledSetArea}
                 onClick={() => {
                     const clientValue = polygonArea;
                     const convertedCoordinates = convertPolygonToServer(clientValue);
@@ -199,7 +183,7 @@ const PolygonPlain = ({
     );
 
     return (
-        <Modal hide={!isOpen} large>
+        <Modal large>
             <ModalTitle> {i18n.t('Area')}</ModalTitle>
             <ModalContent className={classes.modalContent}>{renderMap()}</ModalContent>
             <ModalActions>{renderActions()}</ModalActions>
