@@ -6,9 +6,9 @@ import { IconCross24, spacers, Modal, ModalTitle, ModalContent, ModalActions, Bu
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
-import type { CoordinatesProps } from './MapModal.types';
-import { CoordinateInput } from '../../../../capture-ui/internal/CoordinateInput/CoordinateInput.component';
-import { isEqual } from '../../../utils/valueEqualityChecker';
+import type { CoordinatesProps } from './Coordinates.types';
+import { CoordinateInput } from '../../../../../capture-ui/internal/CoordinateInput/CoordinateInput.component';
+import { isEqual } from '../../../../utils/valueEqualityChecker';
 import { isValidCoordinate } from './coordinate.validator';
 import { convertCoordinatesToServer } from './converters';
 
@@ -43,7 +43,6 @@ const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 const CoordinatesPlain = ({
     classes,
     center: initialCenter,
-    isOpen,
     setOpen,
     defaultValues,
     onSetCoordinates,
@@ -134,7 +133,7 @@ const CoordinatesPlain = ({
                 if (!longitude) {
                     return;
                 }
-                if (!isValidCoordinate({ longitude: Number(longitude), latitude })) {
+                if (!isValidCoordinate({ longitude: Number(longitude), latitude: Number(latitude) })) {
                     setPosition(null);
                     setValid(false);
                     return;
@@ -164,7 +163,7 @@ const CoordinatesPlain = ({
                 if (!latitude) {
                     return;
                 }
-                if (!isValidCoordinate({ longitude, latitude: Number(latitude) })) {
+                if (!isValidCoordinate({ longitude: Number(longitude), latitude: Number(latitude) })) {
                     setPosition(null);
                     setValid(false);
                     return;
@@ -235,7 +234,7 @@ const CoordinatesPlain = ({
     );
 
     return (
-        <Modal hide={!isOpen} large>
+        <Modal large>
             <ModalTitle>{i18n.t('Coordinates')}</ModalTitle>
             <ModalContent className={classes.modalContent}>
                 {renderMap()}

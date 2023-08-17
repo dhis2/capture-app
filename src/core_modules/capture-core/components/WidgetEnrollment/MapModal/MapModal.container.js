@@ -7,7 +7,6 @@ import { MapModal as MapModalComponent } from './MapModal.component';
 export const MapModal = ({
     enrollment,
     onUpdate,
-    isOpenMap,
     setOpenMap,
     defaultValues,
     center,
@@ -27,7 +26,6 @@ export const MapModal = ({
     return (
         <MapModalComponent
             center={center}
-            isOpen={isOpenMap}
             type={dataElementType}
             setOpen={setOpenMap}
             onSetCoordinates={onSetCoordinates}

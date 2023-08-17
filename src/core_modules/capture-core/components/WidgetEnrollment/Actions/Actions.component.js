@@ -107,11 +107,10 @@ export const ActionsPlain = ({
                     {i18n.t('We are processing your request.')}
                 </div>
             )}
-            {setOpenMap && <MapModal
+            {isOpenMap && <MapModal
                 enrollment={enrollment}
                 onUpdate={handleOnUpdate}
                 setOpenMap={setOpenMap}
-                isOpenMap={isOpenMap}
                 center={center}
             />}
         </>

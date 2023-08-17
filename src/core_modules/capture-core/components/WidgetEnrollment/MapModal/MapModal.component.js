@@ -1,16 +1,15 @@
 // @flow
 import React from 'react';
 import { dataElementTypes } from '../../../metaData';
-import type { ModalProps } from './MapModal.types';
+import type { MapModalComponentProps } from './MapModal.types';
 import { Coordinates } from './Coordinates';
 import { Polygon } from './Polygon';
 
-export const MapModal = ({ type, center, isOpen, setOpen, onSetCoordinates, defaultValues }: ModalProps) => (
+export const MapModal = ({ type, center, setOpen, onSetCoordinates, defaultValues }: MapModalComponentProps) => (
     <>
         {type === dataElementTypes.COORDINATE && (
             <Coordinates
                 center={center}
-                isOpen={isOpen}
                 setOpen={setOpen}
                 onSetCoordinates={onSetCoordinates}
                 defaultValues={defaultValues}
@@ -19,7 +18,6 @@ export const MapModal = ({ type, center, isOpen, setOpen, onSetCoordinates, defa
         {type === dataElementTypes.POLYGON && (
             <Polygon
                 center={center}
-                isOpen={isOpen}
                 setOpen={setOpen}
                 onSetCoordinates={onSetCoordinates}
                 defaultValues={defaultValues}
