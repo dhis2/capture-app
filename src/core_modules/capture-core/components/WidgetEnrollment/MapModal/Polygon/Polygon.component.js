@@ -54,7 +54,6 @@ const PolygonPlain = ({
     const [polygonArea, setPolygonArea] = useState(defaultValues);
     const [center, setCenter] = useState(initialCenter);
 
-
     const resetToDefaultValues = () => {
         setCenter(initialCenter);
         setPolygonArea(defaultValues);
@@ -143,14 +142,12 @@ const PolygonPlain = ({
         }
         if (featureCollection) {
             const leafletGeoJSON = new L.GeoJSON(featureCollection);
-            if (reactFGref) {
-                const leafletFG = reactFGref.leafletElement;
-                leafletFG.clearLayers();
+            const leafletFG = reactFGref.leafletElement;
+            leafletFG.clearLayers();
 
-                leafletGeoJSON.eachLayer((layer) => {
-                    leafletFG.addLayer(layer);
-                });
-            }
+            leafletGeoJSON.eachLayer((layer) => {
+                leafletFG.addLayer(layer);
+            });
         } else {
             const leafletFG = reactFGref.leafletElement;
             leafletFG.clearLayers();
