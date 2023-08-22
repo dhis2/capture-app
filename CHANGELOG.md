@@ -1,3 +1,10 @@
+# [100.37.0](https://github.com/dhis2/capture-app/compare/v100.36.0...v100.37.0) (2023-08-22)
+
+
+### Features
+
+* [DHIS2-15299] escape value for attribute filter ([#3403](https://github.com/dhis2/capture-app/issues/3403)) ([5db743e](https://github.com/dhis2/capture-app/commit/5db743eaf7f67bbb4a9391ac9ade25317e4d3642))
+
 # [100.36.0](https://github.com/dhis2/capture-app/compare/v100.35.9...v100.36.0) (2023-08-22)
 
 
