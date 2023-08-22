@@ -2,9 +2,10 @@
 import React, { type ComponentType } from 'react';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useDispatch } from 'react-redux';
-import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24, Tooltip } from '@dhis2/ui';
+import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
+import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
 import { useEnrollmentEditEventPageMode, useRulesEngineOrgUnit, useAvailableProgramStages } from 'capture-core/hooks';
 import type { Props } from './widgetEventEdit.types';
 import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
@@ -39,6 +40,7 @@ const styles = {
         borderBottomWidth: 0,
     },
     button: { margin: spacersNum.dp8 },
+    tooltip: { display: 'inline-flex' },
 };
 
 export const WidgetEventEditPlain = ({
@@ -75,32 +77,23 @@ export const WidgetEventEditPlain = ({
                 </Button>
 
                 {currentPageMode === dataEntryKeys.VIEW && (
-                    <Tooltip
-                        content={i18n.t('You don\'t have access to edit this event')}
-                    >
-                        {({ onMouseOver, onMouseOut, ref }) => (
-                            <div
-                                ref={(btnRef) => {
-                                    if (btnRef && !eventAccess?.write) {
-                                        btnRef.onmouseover = onMouseOver;
-                                        btnRef.onmouseout = onMouseOut;
-                                        ref.current = btnRef;
-                                    }
-                                }}
+                    <div className={classes.button}>
+                        <ConditionalTooltip
+                            content={i18n.t('You don\'t have access to edit this event')}
+                            enabled={!eventAccess?.write}
+                            wrapperClassName={classes.tooltip}
+                        >
+                            <Button
+                                small
+                                secondary
+                                disabled={!eventAccess?.write}
+                                onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
                             >
-                                <Button
-                                    small
-                                    secondary
-                                    disabled={!eventAccess?.write}
-                                    className={classes.button}
-                                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
-                                >
-                                    <IconEdit24 />
-                                    {i18n.t('Edit event')}
-                                </Button>
-                            </div>
-                        )}
-                    </Tooltip>
+                                <IconEdit24 />
+                                {i18n.t('Edit event')}
+                            </Button>
+                        </ConditionalTooltip>
+                    </div>
                 )}
             </div>
             <Widget
