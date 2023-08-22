@@ -37,14 +37,6 @@ Feature: User interacts with Search page
     #     And you click search
     #     Then you should see no results found
 
-    Scenario: Searching using attributes in Tracker Program throws error
-        Given you are on the default search page
-        When you select the search domain Malaria Case diagnosis
-        And you expand the attributes search area
-        And you fill in the first name with values that will return an error
-        And you click search
-        Then there should be an generic error message
-
     Scenario: Searching using attributes in Tracker Program is invalid because no terms typed
         Given you are on the default search page
         When you select the search domain Malaria Case diagnosis

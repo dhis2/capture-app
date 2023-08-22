@@ -151,19 +151,6 @@ When('for Person you fill in values that will return less than 5 results', () =>
         .blur();
 });
 
-When('you fill in the first name with values that will return an error', () => {
-    cy.get('[data-test="form-attributes"]')
-        .find('[data-test="capture-ui-input"]')
-        .first()
-        .type(',,,,')
-        .blur();
-});
-
-Then('there should be an generic error message', () => {
-    cy.get('[data-test="general-purpose-error-mesage"]')
-        .should('exist');
-});
-
 When('you dont fill in any of the values', () => {
     cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')

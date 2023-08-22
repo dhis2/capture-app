@@ -19,7 +19,7 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import { buildIcon } from '../../../../metaDataMemoryStoreBuilders/common/helpers';
 import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
-import { getFeatureType, getDataElement, getLabel, isNotValidOptionSet } from '../helpers';
+import { getFeatureType, getDataElement, getLabel, isNotValidOptionSet, escapeString } from '../helpers';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const OPTION_SET_NOT_FOUND = 'Optionset not found';
@@ -67,7 +67,7 @@ const buildDataElementUnique = (
                     params: {
                         program: contextProps.programId,
                         orgUnit: orgUnitId,
-                        filter: `${dataElement.id}:EQ:${serverValue}`,
+                        filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                     },
                 });
             } else {
@@ -76,7 +76,7 @@ const buildDataElementUnique = (
                     params: {
                         program: contextProps.programId,
                         ouMode: 'ACCESSIBLE',
-                        filter: `${dataElement.id}:EQ:${serverValue}`,
+                        filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                     },
                 });
             }
