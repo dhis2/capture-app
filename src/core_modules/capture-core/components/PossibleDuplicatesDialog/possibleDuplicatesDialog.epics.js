@@ -16,6 +16,7 @@ import { convertFormToClient, convertClientToServer } from '../../converters';
 import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
 import { getAttributesFromScopeId } from '../../metaData/helpers';
 import { searchGroupDuplicateActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
+import { escapeString } from '../../utils/escapeString';
 
 function getGroupElementsFromScopeId(scopeId: ?string) {
     if (!scopeId) {
@@ -66,7 +67,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                         }
                         const serverValue = element.convertValue(value, pipeD2(convertFormToClient, convertClientToServer));
                         const hasOptionSet = element.optionSet && element.type !== dataElementTypes.MULTI_TEXT;
-                        return `${element.id}:${hasOptionSet ? 'eq' : 'like'}:${serverValue}`;
+                        return `${element.id}:${hasOptionSet ? 'eq' : 'like'}:${escapeString(serverValue)}`;
                     })
                     .filter(f => f);
 
