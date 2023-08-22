@@ -1,3 +1,10 @@
+## [100.35.9](https://github.com/dhis2/capture-app/compare/v100.35.8...v100.35.9) (2023-08-22)
+
+
+### Bug Fixes
+
+* [DHIS2-15700] Option sets not working in TEI Registration ([2e47477](https://github.com/dhis2/capture-app/commit/2e4747719151b042d3539fe61a612ebd0ac122d4))
+
 ## [100.35.8](https://github.com/dhis2/capture-app/compare/v100.35.7...v100.35.8) (2023-08-22)
 
 
