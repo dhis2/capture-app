@@ -1,3 +1,10 @@
+## [100.35.8](https://github.com/dhis2/capture-app/compare/v100.35.7...v100.35.8) (2023-08-22)
+
+
+### Bug Fixes
+
+* [DHIS2-15492] transition of tooltip enabled state ([#3381](https://github.com/dhis2/capture-app/issues/3381)) ([adb6b32](https://github.com/dhis2/capture-app/commit/adb6b32f1bffc5020ca34ab5c7568b5a323a8002))
+
 ## [100.35.7](https://github.com/dhis2/capture-app/compare/v100.35.6...v100.35.7) (2023-08-15)
 
 
