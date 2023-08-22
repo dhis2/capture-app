@@ -1,3 +1,10 @@
+# [100.36.0](https://github.com/dhis2/capture-app/compare/v100.35.9...v100.36.0) (2023-08-22)
+
+
+### Features
+
+* [DHIS2-15229] search for MULTI_TEXT ([#3395](https://github.com/dhis2/capture-app/issues/3395)) ([c5d9a7d](https://github.com/dhis2/capture-app/commit/c5d9a7d57547153dd62cf36c8e3323685f43978f))
+
 ## [100.35.9](https://github.com/dhis2/capture-app/compare/v100.35.8...v100.35.9) (2023-08-22)
 
 
