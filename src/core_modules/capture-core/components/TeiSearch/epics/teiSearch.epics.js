@@ -34,7 +34,7 @@ import { getSearchFormId } from '../getSearchFormId';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
 
 const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
-    (orgUnitScope !== 'ACCESSIBLE' ?
+    (orgUnitScope !== 'ACCESSIBLE' || 'CAPTURE' || 'ALL' ?
         { ou: orgUnit && orgUnit.id, ouMode: orgUnitScope } :
         { ouMode: orgUnitScope });
 
