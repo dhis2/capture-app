@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { Tooltip, Button } from '@dhis2/ui';
+import { Button } from '@dhis2/ui';
+import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
 import { newEventSaveTypes } from './newEventSaveTypes';
 import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { type RenderFoundation } from '../../../../../metaData';
@@ -86,29 +87,21 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             const primary = buttons[0];
             const secondaries = buttons.slice(1);
             return (
-                <Tooltip content={i18n.t('No write access')}>
-                    {({ onMouseOver, onMouseOut, ref }) => (
-                        <div
-                            data-test="main-button"
-                            ref={(divRef) => {
-                                if (divRef && !hasWriteAccess) {
-                                    divRef.onmouseover = onMouseOver;
-                                    divRef.onmouseout = onMouseOut;
-                                    ref.current = divRef;
-                                }
-                            }}
+                <ConditionalTooltip
+                    content={i18n.t('No write access')}
+                    enabled={!hasWriteAccess}
+                >
+                    <div data-test="main-button">
+                        <SimpleSplitButton
+                            primary
+                            disabled={!hasWriteAccess}
+                            onClick={primary.onClick}
+                            dropDownItems={secondaries}
                         >
-                            <SimpleSplitButton
-                                primary
-                                disabled={!hasWriteAccess}
-                                onClick={primary.onClick}
-                                dropDownItems={secondaries}
-                            >
-                                {primary.text}
-                            </SimpleSplitButton>
-                        </div>
-                    )}
-                </Tooltip>
+                            {primary.text}
+                        </SimpleSplitButton>
+                    </div>
+                </ConditionalTooltip>
             );
         }
 
