@@ -332,20 +332,21 @@ Then('the list should display 10 rows of data', () => {
 });
 
 When('you click the first name column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('First name')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(0)
         .click();
 });
 
 When('you click the last name column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('Last name')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(2)
         .click();
 });
 
 When('you click the WHOMCH Smoking column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('WHOMCH Smoking')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(6)
+        .click()
         .click();
 });
 
