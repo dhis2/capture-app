@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-08-14T09:17:11.587Z\n"
-"PO-Revision-Date: 2023-08-14T09:17:11.587Z\n"
+"POT-Creation-Date: 2023-08-24T06:53:32.074Z\n"
+"PO-Revision-Date: 2023-08-24T06:53:32.074Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1367,9 +1367,6 @@ msgstr "Link to an existing {{tetName}}"
 
 msgid "An error occurred while adding the relationship"
 msgstr "An error occurred while adding the relationship"
-
-msgid "Relationship added"
-msgstr "Relationship added"
 
 msgid "Something went wrong while loading relationships. Please try again later."
 msgstr "Something went wrong while loading relationships. Please try again later."

@@ -22,8 +22,8 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
     const queryClient = useQueryClient();
     const dataEngine = useDataEngine();
     const { show: showSnackbar } = useAlert(
-        ({ text }) => text,
-        ({ barStatus }) => barStatus,
+        i18n.t('An error occurred while adding the relationship'),
+        { critical: true },
     );
 
     // $FlowFixMe - Is there something wrong with the types?
@@ -36,10 +36,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
         {
             onError: () => {
                 queryClient.invalidateQueries([ReactQueryAppNamespace, 'relationships']);
-                showSnackbar({
-                    text: i18n.t('An error occurred while adding the relationship'),
-                    barStatus: { critical: true },
-                });
+                showSnackbar();
             },
             onMutate: (...props) => {
                 onMutate && onMutate(...props);
@@ -54,10 +51,6 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
             },
             onSuccess: (...props) => {
                 queryClient.invalidateQueries([ReactQueryAppNamespace, 'relationships']);
-                showSnackbar({
-                    text: i18n.t('Relationship added'),
-                    barStatus: { success: true },
-                });
                 onSuccess && onSuccess(...props);
             },
         },
