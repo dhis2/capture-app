@@ -17,10 +17,11 @@ const styles = {
     },
 };
 
-const FinishButtonsPlain = ({ onSave, cancelButton, classes }: Props) => (
+const FinishButtonsPlain = ({ onSave, cancelButton, hiddenProgramStage, classes }: Props) => (
     <div className={classes.container}>
         <div className={classes.button}>
             <Button
+                disabled={hiddenProgramStage}
                 onClick={() => onSave(addEventSaveTypes.COMPLETE)}
                 primary
             >
@@ -29,6 +30,7 @@ const FinishButtonsPlain = ({ onSave, cancelButton, classes }: Props) => (
         </div>
         <div className={classes.button}>
             <Button
+                disabled={hiddenProgramStage}
                 onClick={() => onSave(addEventSaveTypes.SAVE_WITHOUT_COMPLETING)}
             >
                 {i18n.t('Save without completing')}

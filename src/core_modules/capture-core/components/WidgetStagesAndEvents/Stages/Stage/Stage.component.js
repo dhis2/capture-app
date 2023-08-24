@@ -23,11 +23,15 @@ const styles = {
         alignItems: 'center',
     },
 };
+const hideProgramStage = (ruleEffects, stageId) => (
+    Boolean(ruleEffects?.find(ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === stageId))
+);
 
-
-export const StagePlain = ({ stage, events, classes, className, onCreateNew, ...passOnProps }: Props) => {
+export const StagePlain = ({ stage, events, classes, className, onCreateNew, ruleEffects, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable } = stage;
+    const hiddenProgramStage = hideProgramStage(ruleEffects, id);
+
     return (
         <div
             data-test="stage-content"
@@ -53,10 +57,12 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, ...
                     hideDueDate={hideDueDate}
                     repeatable={repeatable}
                     onCreateNew={onCreateNew}
+                    hiddenProgramStage={hiddenProgramStage}
                     {...passOnProps}
                 /> : <Button
                     small
                     secondary
+                    disabled={hiddenProgramStage}
                     icon={<IconAdd16 />}
                     className={classes.button}
                     dataTest="create-new-button"

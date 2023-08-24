@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
     useCommonEnrollmentDomainData,
+    useRuleEffects,
     updateEnrollmentAttributeValues,
     showEnrollmentError,
 } from '../../common/EnrollmentOverviewDomain';
@@ -17,7 +18,6 @@ import {
     useProgramMetadata,
     useHideWidgetByRuleLocations,
     useProgramStages,
-    useRuleEffects,
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
@@ -108,6 +108,7 @@ export const EnrollmentPageDefault = () => {
             onEventClick={onEventClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
             onEnrollmentError={onEnrollmentError}
+            ruleEffects={ruleEffects}
         />
     );
 };

@@ -19,19 +19,26 @@ const styles = {
 
 };
 
-const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
+const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes }) => {
     const [open, setOpen] = useState(true);
     const history = useHistory();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
 
-    const stagesWithEventCount = useMemo(() => stages.map((stage) => {
-        const mutatedStage = { ...stage };
-        mutatedStage.eventCount = (events
-            ?.filter(event => event.programStage === stage.id)
-            ?.length
-        );
-        return mutatedStage;
-    }), [events, stages]);
+    const stagesWithEventCount = useMemo(
+        () =>
+            stages
+                .map((stage) => {
+                    const mutatedStage = { ...stage };
+                    mutatedStage.eventCount = events?.filter(event => event.programStage === stage.id)?.length;
+                    return mutatedStage;
+                })
+                .filter(stage =>
+                    ruleEffects?.find(
+                        ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id !== stage.id,
+                    ),
+                ),
+        [events, stages, ruleEffects],
+    );
 
     const noStageAvailable = useMemo(
         () => stagesWithEventCount.every(programStage =>
