@@ -24,26 +24,29 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
     const history = useHistory();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
 
-    const stagesWithEventCount = useMemo(
-        () =>
-            stages
-                .map((stage) => {
-                    const mutatedStage = { ...stage };
-                    mutatedStage.eventCount = events?.filter(event => event.programStage === stage.id)?.length;
-                    return mutatedStage;
-                })
-                .filter(stage =>
-                    ruleEffects?.find(
-                        ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id !== stage.id,
-                    ),
-                ),
-        [events, stages, ruleEffects],
+    const stagesWithEventCount = useMemo(() => stages.map((stage) => {
+        const mutatedStage = { ...stage };
+        mutatedStage.eventCount = (events
+            ?.filter(event => event.programStage === stage.id)
+            ?.length
+        );
+        return mutatedStage;
+    }), [events, stages]);
+
+    const hiddenProgramStageRuleEffects = useMemo(
+        () => ruleEffects?.filter(ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE'),
+        [ruleEffects],
     );
 
     const noStageAvailable = useMemo(
-        () => stagesWithEventCount.every(programStage =>
-            (!programStage.repeatable && programStage.eventCount > 0),
-        ), [stagesWithEventCount]);
+        () =>
+            stagesWithEventCount.every(
+                programStage =>
+                    (!programStage.repeatable && programStage.eventCount > 0) ||
+                    hiddenProgramStageRuleEffects?.find(ruleEffect => ruleEffect.id === programStage.id),
+            ),
+        [stagesWithEventCount, hiddenProgramStageRuleEffects],
+    );
 
     const onNavigationFromQuickActions = (tab: string) => {
         history.push(`/enrollmentEventNew?${buildUrlQueryString({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
