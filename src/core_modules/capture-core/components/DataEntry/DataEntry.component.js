@@ -276,7 +276,7 @@ class DataEntryPlain extends React.Component<Props> {
                 validationAttempted={completionAttempted || saveAttempted}
                 onUpdateField={this.handleUpdateField}
                 onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                onCustomContent={beforeSectionId => (
+                getCustomContent={beforeSectionId => (
                     this.renderDataEntryFieldsByPlacement(placements.BEFORE_METADATA_BASED_SECTION, beforeSectionId)
                 )}
                 {...passOnProps}

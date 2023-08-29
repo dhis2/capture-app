@@ -10,7 +10,7 @@ export type OwnProps = $ReadOnly<{|
   formFoundation: RenderFoundation,
   id: string,
   formHorizontal?: boolean,
-  onCustomContent?: (beforeSectionId: string) => React.Node,
+  getCustomContent?: (beforeSectionId: string) => React.Node,
   ...FormRef
 |}>
 
