@@ -75,8 +75,9 @@ Then('the pagination for the tei working list should show the second page', () =
 });
 
 Then('the sort arrow should indicate ascending order', () => {
-    cy.get('[data-test="data-table-asc-sort-icon"]')
-        .should('exist');
+    cy.get('[data-test="table-row"]').within(() => {
+        cy.get('[data-test="table-row-asc"]').should('exist');
+    });
 });
 
 Then('the enrollment status filter button should show that the active filter is in effect', () => {
@@ -133,8 +134,9 @@ When('you click the first page button', () => {
 });
 
 Then('the sort arrow should indicate descending order', () => {
-    cy.get('[data-test="data-table-desc-sort-icon"]')
-        .should('exist');
+    cy.get('[data-test="table-row"]').within(() => {
+        cy.get('[data-test="table-row-desc"]').should('exist');
+    });
 });
 
 Then('rows per page should be set to 15', () => {

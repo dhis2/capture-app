@@ -1,3 +1,38 @@
+# [100.37.0](https://github.com/dhis2/capture-app/compare/v100.36.0...v100.37.0) (2023-08-22)
+
+
+### Features
+
+* [DHIS2-15299] escape value for attribute filter ([#3403](https://github.com/dhis2/capture-app/issues/3403)) ([5db743e](https://github.com/dhis2/capture-app/commit/5db743eaf7f67bbb4a9391ac9ade25317e4d3642))
+
+# [100.36.0](https://github.com/dhis2/capture-app/compare/v100.35.9...v100.36.0) (2023-08-22)
+
+
+### Features
+
+* [DHIS2-15229] search for MULTI_TEXT ([#3395](https://github.com/dhis2/capture-app/issues/3395)) ([c5d9a7d](https://github.com/dhis2/capture-app/commit/c5d9a7d57547153dd62cf36c8e3323685f43978f))
+
+## [100.35.9](https://github.com/dhis2/capture-app/compare/v100.35.8...v100.35.9) (2023-08-22)
+
+
+### Bug Fixes
+
+* [DHIS2-15700] Option sets not working in TEI Registration ([2e47477](https://github.com/dhis2/capture-app/commit/2e4747719151b042d3539fe61a612ebd0ac122d4))
+
+## [100.35.8](https://github.com/dhis2/capture-app/compare/v100.35.7...v100.35.8) (2023-08-22)
+
+
+### Bug Fixes
+
+* [DHIS2-15492] transition of tooltip enabled state ([#3381](https://github.com/dhis2/capture-app/issues/3381)) ([adb6b32](https://github.com/dhis2/capture-app/commit/adb6b32f1bffc5020ca34ab5c7568b5a323a8002))
+
+## [100.35.7](https://github.com/dhis2/capture-app/compare/v100.35.6...v100.35.7) (2023-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-15525] show formNames in the enrollment dashboard ([#3402](https://github.com/dhis2/capture-app/issues/3402)) ([c02c3ee](https://github.com/dhis2/capture-app/commit/c02c3ee46ed4209215946636682ec86c97c9d905))
+
 ## [100.35.6](https://github.com/dhis2/capture-app/compare/v100.35.5...v100.35.6) (2023-08-11)
 
 

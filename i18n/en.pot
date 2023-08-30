@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
-"PO-Revision-Date: 2023-06-01T08:11:59.116Z\n"
+"POT-Creation-Date: 2023-08-22T12:04:52.436Z\n"
+"PO-Revision-Date: 2023-08-22T12:04:52.436Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -372,9 +372,6 @@ msgstr "Some operations are still runnning. Please wait.."
 
 msgid "Operations running"
 msgstr "Operations running"
-
-msgid "Sort"
-msgstr "Sort"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -775,8 +772,8 @@ msgstr "Schedule"
 msgid "Refer"
 msgstr "Refer"
 
-msgid "You can’t add any more {{ programStageName }} events"
-msgstr "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
+msgstr "You can't add any more {{ programStageName }} events"
 
 msgid "Cancel without saving"
 msgstr "Cancel without saving"
@@ -1506,9 +1503,6 @@ msgstr "Error editing the event, the changes made were not saved"
 msgid "Set coordinate"
 msgstr "Set coordinate"
 
-msgid "Page {{currentPage}}"
-msgstr "Page {{currentPage}}"
-
 msgid "Date"
 msgstr "Date"
 
@@ -1526,6 +1520,9 @@ msgstr "To date"
 
 msgid "To time"
 msgstr "To time"
+
+msgid "Page {{currentPage}}"
+msgstr "Page {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Delete polygon"
