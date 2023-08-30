@@ -56,7 +56,7 @@ export const WidgetEnrollment = ({
             onAddNew={onAddNew}
             onUpdateEnrollmentDate={onUpdateEnrollmentDate}
             onUpdateIncidentDate={onUpdateIncidentDate}
-            error={error}
+            initError={error}
             onError={onError}
             onSuccess={onSuccess}
         />

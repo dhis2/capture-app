@@ -52,7 +52,7 @@ export const WidgetEnrollmentPlain = ({
     ownerOrgUnit = {},
     refetchEnrollment,
     refetchTEI,
-    error,
+    initError,
     loading,
     canAddNew,
     editDateEnabled,
@@ -78,13 +78,13 @@ export const WidgetEnrollmentPlain = ({
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                {error && (
+                {initError && (
                     <div className={classes.enrollment}>
                         {i18n.t('Enrollment widget could not be loaded. Please try again later')}
                     </div>
                 )}
                 {loading && <LoadingMaskElementCenter />}
-                {!error && !loading && (
+                {!initError && !loading && (
                     <div className={classes.enrollment}>
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (

@@ -20,7 +20,7 @@ export type PlainProps = {|
     ownerOrgUnit: Object,
     refetchEnrollment: QueryRefetchFunction,
     refetchTEI: QueryRefetchFunction,
-    error?: FetchError,
+    initError?: FetchError,
     loading: boolean,
     canAddNew: boolean,
     editDateEnabled: boolean,
