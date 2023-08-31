@@ -4,9 +4,10 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
 import { actionTypes } from '../actions/enrollment.actions';
-import { getTrackerProgramThrowIfNotFound, ProgramStage, RenderFoundation } from '../../../../metaData';
-import { getCurrentClientValues, getCurrentClientMainData, type FieldData } from '../../../../rules';
+import { getTrackerProgramThrowIfNotFound, ProgramStage, RenderFoundation, Section } from '../../../../metaData';
+import { getCurrentClientMainData, type FieldData } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
+import { convertFormToClient } from '../../../../converters';
 
 type Context = {
     dataEntryId: string,
@@ -24,24 +25,29 @@ const runRulesOnEnrollmentUpdate =
         const { programId, dataEntryId, itemId, orgUnit, uid, stage, formFoundation } = context;
         const formId = getDataEntryKey(dataEntryId, itemId);
         const program = getTrackerProgramThrowIfNotFound(programId);
-        const foundation = program.enrollment.enrollmentForm;
-        const currentTEIValues = getCurrentClientValues(state, foundation, formId, fieldData);
+        const currentFormData = state.formsValues[formId] || {};
+        const convertedValues = formFoundation.convertAndGroupBySection(currentFormData, convertFormToClient);
+        const attributeValues = convertedValues[Section.groups.ENROLLMENT];
+        const currentEventValues = convertedValues[Section.groups.EVENT];
+        const currentEvent = stage && currentEventValues
+            ? { ...currentEventValues, programStageId: stage.id } : undefined;
         const currentEnrollmentValues =
-            getCurrentClientMainData(state, itemId, dataEntryId, foundation);
+            getCurrentClientMainData(state, itemId, dataEntryId, formFoundation);
 
-        return runRulesOnUpdateFieldBatch(
+        return runRulesOnUpdateFieldBatch({
             program,
             formId,
             dataEntryId,
             itemId,
             orgUnit,
-            currentEnrollmentValues,
-            currentTEIValues ?? undefined,
-            searchActions,
+            enrollmentData: currentEnrollmentValues,
+            attributeValues,
+            currentEvent,
+            extraActions: searchActions,
             uid,
             stage,
-            formFoundation,
-        );
+            formFoundation: stage ? formFoundation : undefined,
+        });
     };
 
 

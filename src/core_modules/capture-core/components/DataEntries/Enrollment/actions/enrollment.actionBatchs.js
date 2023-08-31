@@ -11,7 +11,6 @@ import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEnt
 import { TrackerProgram, RenderFoundation, ProgramStage } from '../../../../metaData';
 import { startRunRulesPostUpdateField } from '../../../DataEntry';
 import { startRunRulesOnUpdateForNewEnrollment } from './enrollment.actions';
-import { convertValue } from '../../../../converters/formToClient';
 
 export const batchActionTypes = {
     RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT: 'RulesExecutedPostUpdateFieldForEnrollment',
@@ -19,61 +18,42 @@ export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH: 'UpdateDataEntryFieldNewEnrollmentActionBatch',
 };
 
-export const getCurrentEventValuesFromStage = (attributeValues?: TEIValues, stage?: ProgramStage) => {
-    const currentEventValues = {};
-    if (!stage) {
-        return { currentEventValues, attributeValues };
-    }
-
-    const dataElements = [...stage.stageForm.getElements().values()].map(({ id, type }) => ({ id, type }));
-
-    if (attributeValues) {
-        Object.keys(attributeValues).forEach((attributeId) => {
-            const found = dataElements.find(element => element.id === attributeId);
-            if (found) {
-                currentEventValues[attributeId] = convertValue(attributeValues[attributeId], found.type);
-                delete attributeValues[attributeId];
-            }
-        });
-    }
-
-    return { currentEventValues, attributeValues };
-};
-
-export const runRulesOnUpdateFieldBatch = (
+export const runRulesOnUpdateFieldBatch = ({
+    program,
+    formId,
+    dataEntryId,
+    itemId,
+    orgUnit,
+    enrollmentData,
+    attributeValues,
+    extraActions = [],
+    uid,
+    stage,
+    formFoundation,
+    currentEvent,
+}: {
     program: TrackerProgram,
     formId: string,
     dataEntryId: string,
     itemId: string,
     orgUnit: OrgUnit,
     enrollmentData?: Enrollment,
-    teiAttributeValues?: TEIValues,
-    extraActions: Array<ReduxAction<any, any>> = [],
+    attributeValues?: TEIValues,
+    extraActions: Array<ReduxAction<any, any>>,
     uid: string,
     stage?: ProgramStage,
-    formFoundation: RenderFoundation,
-) => {
-    let effects;
-    if (stage) {
-        const { attributeValues, currentEventValues } = getCurrentEventValuesFromStage(teiAttributeValues, stage);
-        const currentEvent = { ...currentEventValues, programStageId: stage.id };
-        effects = getApplicableRuleEffectsForTrackerProgram({
-            program,
-            stage,
-            orgUnit,
-            currentEvent,
-            enrollmentData,
-            attributeValues,
-            formFoundation,
-        });
-    } else {
-        effects = getApplicableRuleEffectsForTrackerProgram({
-            program,
-            orgUnit,
-            enrollmentData,
-            attributeValues: teiAttributeValues,
-        });
-    }
+    formFoundation?: RenderFoundation,
+    currentEvent: any,
+}) => {
+    const effects = getApplicableRuleEffectsForTrackerProgram({
+        program,
+        stage,
+        orgUnit,
+        currentEvent,
+        enrollmentData,
+        attributeValues,
+        formFoundation,
+    });
     return batchActions([
         updateRulesEffects(effects, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),

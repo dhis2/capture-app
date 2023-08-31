@@ -8,14 +8,13 @@ import {
     saveNewTrackedEntityInstance,
     saveNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
-import { getTrackerProgramThrowIfNotFound, dataElementTypes } from '../../../../metaData';
+import { getTrackerProgramThrowIfNotFound, dataElementTypes, Section } from '../../../../metaData';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { FEATURETYPE } from '../../../../constants';
 import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../utils/routing';
-import { getCurrentEventValuesFromStage } from '../../../DataEntries/Enrollment/actions/enrollment.actionBatchs';
 import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
@@ -96,16 +95,16 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                     return acc;
                 }, {});
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
-            const values = formsValues[formId] || {};
+            const currentFormData = formsValues[formId] || {};
             const shouldRedirect = shouldUseNewDashboard(userDataStore, dataStore, temp, programId);
             const { stageWithOpenAfterEnrollment, redirectTo } = getStageWithOpenAfterEnrollment(
                 stages,
                 firstStageMetadata,
                 shouldRedirect,
             );
-
-            const { attributeValues, currentEventValues } = getCurrentEventValuesFromStage(values, firstStageMetadata);
-            const formServerValues = formFoundation?.convertValues(attributeValues, convertFn);
+            const convertedValues = formFoundation.convertAndGroupBySection(currentFormData, convertFn);
+            const formServerValues = convertedValues[Section.groups.ENROLLMENT];
+            const currentEventValues = convertedValues[Section.groups.EVENT];
 
             const firstStageDuringRegistrationEvent = deriveFirstStageDuringRegistrationEvent({
                 firstStageMetadata,
@@ -136,7 +135,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                 candidateForRegistration: {
                     trackedEntities: [
                         {
-                            geometry: deriveGeometryFromFormValues(attributeValues),
+                            geometry: deriveGeometryFromFormValues(currentFormData),
                             enrollments: [
                                 {
                                     geometry: standardGeoJson(geometry),

@@ -1,4 +1,7 @@
 // @flow
-import { ProgramStage } from '../../../../../../metaData';
+import { ProgramStage, RenderFoundation } from '../../../../../../metaData';
 
-export type SaveForDuplicateCheck = (firstStageMetaData?: { stage: ProgramStage }) => void;
+export type SaveForDuplicateCheck = (
+    formFoundation?: RenderFoundation,
+    firstStageMetaData?: { stage: ProgramStage },
+) => void;

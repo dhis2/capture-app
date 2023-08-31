@@ -7,6 +7,8 @@ const addElements = (section, newSection) =>
     Array.from(section.elements.entries())
         .map(entry => entry[1])
         .forEach((element) => {
+            // $FlowFixMe[prop-missing] section is missing in FormFieldPluginConfig
+            element.section = newSection;
             newSection.addElement(element);
         });
 
@@ -54,6 +56,7 @@ export const useMergeFormFoundationsIfApplicable = (
                         stageName,
                         sectionName: section.name,
                     });
+                o.group = Section.groups.EVENT;
             });
             addElements(section, newSection);
             renderFoundation.addSection(newSection);

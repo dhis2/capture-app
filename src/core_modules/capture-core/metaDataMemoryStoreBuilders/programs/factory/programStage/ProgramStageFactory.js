@@ -65,7 +65,7 @@ export class ProgramStageFactory {
                             { sectionDataElement }));
                     return;
                 }
-                const element = await this.dataElementFactory.build(cachedProgramStageDataElement);
+                const element = await this.dataElementFactory.build(cachedProgramStageDataElement, section);
                 element && section.addElement(element);
             });
         }
@@ -81,7 +81,7 @@ export class ProgramStageFactory {
         if (cachedProgramStageDataElements) {
             // $FlowFixMe
             await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
-                const element = await this.dataElementFactory.build(cachedProgramStageDataElement);
+                const element = await this.dataElementFactory.build(cachedProgramStageDataElement, section);
                 element && section.addElement(element);
             }));
         }

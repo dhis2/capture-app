@@ -9,7 +9,7 @@ import type {
     CachedProgramStageDataElement,
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
-import { DataElement, DateDataElement, dataElementTypes } from '../../../../metaData';
+import { DataElement, DateDataElement, dataElementTypes, Section } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { OptionSetFactory } from '../../../common/factory';
 import { isNotValidOptionSet } from '../../../../utils/isNotValidOptionSet';
@@ -99,8 +99,10 @@ export class DataElementFactory {
         cachedProgramStageDataElement: CachedProgramStageDataElement,
         cachedDataElement: CachedDataElement,
         dataElementType: $Keys<typeof dataElementTypes>,
+        section: ?Section,
     ) {
         const dataElement = new DataElement();
+        dataElement.section = section;
         dataElement.type = dataElementType;
         await this._setBaseProperties(dataElement, cachedProgramStageDataElement, cachedDataElement);
         if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
@@ -123,6 +125,7 @@ export class DataElementFactory {
 
     async build(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
+        section: ?Section,
     ): Promise<?DataElement> {
         const cachedDataElement =
             await getUserStorageController().get(userStores.DATA_ELEMENTS, cachedProgramStageDataElement.dataElementId);
@@ -139,6 +142,6 @@ export class DataElementFactory {
 
         return dataElementType === dataElementTypes.DATE ?
             this._buildDateDataElement(cachedProgramStageDataElement, cachedDataElement) :
-            this._buildBaseDataElement(cachedProgramStageDataElement, cachedDataElement, dataElementType);
+            this._buildBaseDataElement(cachedProgramStageDataElement, cachedDataElement, dataElementType, section);
     }
 }

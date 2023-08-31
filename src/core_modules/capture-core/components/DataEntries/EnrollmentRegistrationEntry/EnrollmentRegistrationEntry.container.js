@@ -62,7 +62,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             orgUnit={orgUnit}
             isUserInteractionInProgress={isUserInteractionInProgress}
             isSavingInProgress={isSavingInProgress}
-            onSave={() => onSave(firstStageMetaData)}
+            onSave={() => onSave(formFoundation, firstStageMetaData)}
         />
     );
 };
