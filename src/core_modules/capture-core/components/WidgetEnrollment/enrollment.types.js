@@ -18,6 +18,7 @@ export type PlainProps = {|
     enrollment: Object,
     program: Object,
     ownerOrgUnit: Object,
+    setEnrollment: EnrollmentData => void,
     refetchEnrollment: QueryRefetchFunction,
     refetchTEI: QueryRefetchFunction,
     initError?: FetchError,
@@ -33,3 +34,9 @@ export type PlainProps = {|
     onSuccess?: () => void,
     ...CssClasses,
 |};
+
+export type EnrollmentData = {
+    enrollment: string,
+    enrolledAt: string,
+    occurredAt: string,
+};
