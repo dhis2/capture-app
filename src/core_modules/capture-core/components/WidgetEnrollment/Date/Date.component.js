@@ -61,7 +61,7 @@ const styles = {
     },
 };
 
-const EnrollmentDateComponentPlain = ({
+const DateComponentPlain = ({
     enrollmentDateLabel,
     enrollmentDate,
     editEnabled,
@@ -144,4 +144,4 @@ const EnrollmentDateComponentPlain = ({
     );
 };
 
-export const EnrollmentDateComponent = withStyles(styles)(EnrollmentDateComponentPlain);
+export const DateComponent = withStyles(styles)(DateComponentPlain);

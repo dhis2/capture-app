@@ -19,7 +19,7 @@ import { Status } from './Status';
 import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
 import { convertValue as convertValueClientToView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
-import { EnrollmentDate } from './EnrollmentDate/';
+import { Date } from './Date';
 import { Actions } from './Actions';
 
 const styles = {
@@ -104,7 +104,7 @@ export const WidgetEnrollmentPlain = ({
                         </div>
 
                         <span data-test="widget-enrollment-enrollment-date">
-                            <EnrollmentDate
+                            <Date
                                 serverDate={enrollment.enrolledAt}
                                 enrollmentDateLabel={getEnrollmentDateLabel(program)}
                                 editEnabled={editDateEnabled}
@@ -118,7 +118,7 @@ export const WidgetEnrollmentPlain = ({
 
                         {program.displayIncidentDate && (
                             <span data-test="widget-enrollment-incident-date">
-                                <EnrollmentDate
+                                <Date
                                     serverDate={enrollment.occurredAt}
                                     enrollmentDateLabel={getIncidentDateLabel(program)}
                                     editEnabled={editDateEnabled}

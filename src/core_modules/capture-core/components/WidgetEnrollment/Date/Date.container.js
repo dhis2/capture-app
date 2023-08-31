@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { useDataMutation } from '@dhis2/app-runtime';
-import { EnrollmentDateComponent } from './EnrollmentDate.component';
+import { DateComponent } from './Date.component';
 import { convertValue as convertValueServerToClient } from '../../../converters/serverToClient';
 import { dataElementTypes } from '../../../metaData';
 import { processErrorReports } from '../processErrorReports';
@@ -28,7 +28,7 @@ const enrollmentUpdate = {
     }),
 };
 
-export const EnrollmentDate = ({
+export const Date = ({
     serverDate,
     enrollmentDateLabel,
     editEnabled,
@@ -57,7 +57,7 @@ export const EnrollmentDate = ({
         });
     };
 
-    return (<EnrollmentDateComponent
+    return (<DateComponent
         enrollmentDateLabel={enrollmentDateLabel}
         enrollmentDate={enrollmentDate}
         editEnabled={editEnabled}
