@@ -50,6 +50,9 @@ const styles = {
     calendar: {
         paddingTop: '6px',
     },
+    inputField: {
+        maxWidth: '200px',
+    },
     buttonStrip: {
         display: 'flex',
         gap: `${spacersNum.dp4}px`,
@@ -93,15 +96,16 @@ const DateComponentPlain = ({
 
     return editMode ? (
         <div data-test="widget-enrollment-date">
-            <CalendarInput
-                calendar="gregory"
-                dense
-                className={classes.calendar}
-                label={enrollmentDateLabel}
-                inputWidth="180px"
-                date={selectedDate}
-                onDateSelect={dateChangeHandler}
-            />
+            <div className={classes.inputField}>
+                <CalendarInput
+                    calendar="gregory"
+                    dense
+                    className={classes.calendar}
+                    label={enrollmentDateLabel}
+                    date={selectedDate}
+                    onDateSelect={dateChangeHandler}
+                />
+            </div>
             <div className={classes.buttonStrip}>
                 <Button
                     primary
