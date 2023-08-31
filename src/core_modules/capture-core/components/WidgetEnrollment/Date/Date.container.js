@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { useDataMutation } from '@dhis2/app-runtime';
 import { DateComponent } from './Date.component';
 import { convertValue as convertValueServerToClient } from '../../../converters/serverToClient';
@@ -38,13 +38,13 @@ export const Date = ({
     onError,
     classes,
 }: Props) => {
-    const date = String(convertValueServerToClient(serverDate, dataElementTypes.DATE));
-
+    const [date, setDate] = useState(String(convertValueServerToClient(serverDate, dataElementTypes.DATE)));
     const [updateMutation] = useDataMutation(enrollmentUpdate, {
         onComplete: () => {
             onSuccess && onSuccess();
         },
         onError: (e) => {
+            setDate(date);
             updateDate({ date: serverDate });
             onError && onError(processErrorReports(e));
         },
@@ -55,6 +55,7 @@ export const Date = ({
             date: selectedDate,
             updateMutation,
         });
+        setDate(selectedDate);
     };
 
     return (<DateComponent
