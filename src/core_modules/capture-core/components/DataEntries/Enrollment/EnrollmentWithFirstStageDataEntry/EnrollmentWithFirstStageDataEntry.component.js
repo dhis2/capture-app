@@ -22,6 +22,7 @@ import { sectionKeysForFirstStageDataEntry } from './EnrollmentWithFirstStageDat
 import labelTypeClasses from './fieldLabels.module.css';
 import { withCleanUp } from './withCleanUp';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import { stageMainDataIds } from './getDataEntryPropsToInclude';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -137,7 +138,7 @@ const getStageGeometrySettings = () => ({
             shrinkDisabled: props.formHorizontal,
         });
     },
-    getPropName: () => 'stageGeometry',
+    getPropName: () => stageMainDataIds.GEOMETRY,
     getValidatorContainers: () => [],
     getMeta: () => ({
         section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,
@@ -172,7 +173,7 @@ const getCompleteFieldSettingsFn = () => {
             label: i18n.t('Complete event'),
             id: 'complete',
         }),
-        getPropName: () => 'stageComplete',
+        getPropName: () => stageMainDataIds.COMPLETE,
         getValidatorContainers: () => [],
         getMeta: () => ({
             placement: placements.BOTTOM,
@@ -215,7 +216,7 @@ const getReportDateSettingsFn = () => {
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
         }),
-        getPropName: () => 'stageOccurredAt',
+        getPropName: () => stageMainDataIds.OCCURRED_AT,
         getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
             section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,

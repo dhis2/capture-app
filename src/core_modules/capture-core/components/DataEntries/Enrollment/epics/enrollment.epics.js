@@ -8,6 +8,7 @@ import { getTrackerProgramThrowIfNotFound, ProgramStage, RenderFoundation, Secti
 import { getCurrentClientMainData, type FieldData } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertFormToClient } from '../../../../converters';
+import { stageMainDataIds } from '../EnrollmentWithFirstStageDataEntry';
 
 type Context = {
     dataEntryId: string,
@@ -19,6 +20,20 @@ type Context = {
     formFoundation: RenderFoundation,
 }
 
+const splitCurrentClientMainData = (stage, currentClientMainData) => {
+    if (!stage) {
+        return { currentEnrollmentValues: currentClientMainData, currentEventMainData: {} };
+    }
+    return Object.keys(currentClientMainData).reduce((acc, id) => {
+        if (Object.keys(stageMainDataIds).find(key => stageMainDataIds[key] === id)) {
+            acc.currentEventMainData = { ...acc.currentEventMainData, [id]: currentClientMainData[id] };
+        } else {
+            acc.currentEnrollmentValues = { ...acc.currentEnrollmentValues, [id]: currentClientMainData[id] };
+        }
+        return acc;
+    }, { currentEnrollmentValues: {}, currentEventMainData: {} });
+};
+
 const runRulesOnEnrollmentUpdate =
     (store: ReduxStore, context: Context, fieldData?: ?FieldData, searchActions?: any = []) => {
         const state = store.value;
@@ -28,11 +43,13 @@ const runRulesOnEnrollmentUpdate =
         const currentFormData = state.formsValues[formId] || {};
         const convertedValues = formFoundation.convertAndGroupBySection(currentFormData, convertFormToClient);
         const attributeValues = convertedValues[Section.groups.ENROLLMENT];
-        const currentEventValues = convertedValues[Section.groups.EVENT];
-        const currentEvent = stage && currentEventValues
-            ? { ...currentEventValues, programStageId: stage.id } : undefined;
-        const currentEnrollmentValues =
-            getCurrentClientMainData(state, itemId, dataEntryId, formFoundation);
+        const currentEventValues = convertedValues[Section.groups.EVENT] || {};
+        const currentClientMainData =
+            getCurrentClientMainData(state, itemId, dataEntryId, formFoundation) || {};
+        const { currentEnrollmentValues, currentEventMainData }
+            = splitCurrentClientMainData(state, currentClientMainData);
+        const currentEvent = stage
+            ? { ...currentEventValues, ...currentEventMainData, programStageId: stage.id } : undefined;
 
         return runRulesOnUpdateFieldBatch({
             program,
