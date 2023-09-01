@@ -19,7 +19,7 @@ export const deriveFirstStageDuringRegistrationEvent = ({
     firstStageMetadata: ProgramStage,
     programId: string,
     orgUnitId: string,
-    currentEventValues: { [id: string]: any },
+    currentEventValues?: { [id: string]: any },
     fieldsValue: { [id: string]: any },
     attributeCategoryOptions: { [categoryId: string]: string } | string,
 }) => {
@@ -28,17 +28,11 @@ export const deriveFirstStageDuringRegistrationEvent = ({
     }
     const { enrolledAt, stageComplete, stageOccurredAt, stageGeometry } = fieldsValue;
 
-    const dataValues = currentEventValues ? Object.keys(currentEventValues).reduce((acc, dataElement) => {
-        acc.push({ dataElement, value: currentEventValues[dataElement] });
-        return acc;
-    }, []) : undefined;
-
     const eventAttributeCategoryOptions = attributeCategoryOptions
         ? { attributeCategoryOptions: convertCategoryOptionsToServer(attributeCategoryOptions) }
         : {};
 
-    return {
-        ...(dataValues && { dataValues }),
+    const event = {
         status: convertStatusOut(stageComplete),
         geometry: standardGeoJson(stageGeometry),
         occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
@@ -48,4 +42,14 @@ export const deriveFirstStageDuringRegistrationEvent = ({
         orgUnit: orgUnitId,
         ...eventAttributeCategoryOptions,
     };
+
+    const dataValues = currentEventValues ? Object.keys(currentEventValues).reduce((acc, dataElement) => {
+        acc.push({ dataElement, value: currentEventValues[dataElement] });
+        return acc;
+    }, []) : undefined;
+
+    if (dataValues) {
+        return { ...event, dataValues };
+    }
+    return event;
 };
