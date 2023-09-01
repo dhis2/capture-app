@@ -1,2 +1,2 @@
 // @flow
-export { Date } from './Date.container';
+export { Date } from './Date.component';

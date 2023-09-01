@@ -149,4 +149,4 @@ const DateComponentPlain = ({
     );
 };
 
-export const DateComponent = withStyles(styles)(DateComponentPlain);
+export const Date = withStyles(styles)(DateComponentPlain);

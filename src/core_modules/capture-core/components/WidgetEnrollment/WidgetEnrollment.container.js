@@ -22,7 +22,18 @@ export const WidgetEnrollment = ({
     onError,
     onSuccess,
 }: Props) => {
-    const { error: errorEnrollment, enrollment, refetch: refetchEnrollment } = useEnrollment(enrollmentId);
+    const {
+        enrollment,
+        updateEnrollmentDate,
+        updateIncidentDate,
+        error: errorEnrollment,
+        refetch: refetchEnrollment,
+    } = useEnrollment({
+        enrollmentId,
+        onUpdateEnrollmentDate,
+        onUpdateIncidentDate,
+        onError,
+    });
     const { error: errorProgram, program } = useProgram(programId);
     const {
         error: errorOwnerOrgUnit,
@@ -54,8 +65,8 @@ export const WidgetEnrollment = ({
             loading={!(enrollment && program && displayName)}
             onDelete={onDelete}
             onAddNew={onAddNew}
-            onUpdateEnrollmentDate={onUpdateEnrollmentDate}
-            onUpdateIncidentDate={onUpdateIncidentDate}
+            updateEnrollmentDate={updateEnrollmentDate}
+            updateIncidentDate={updateIncidentDate}
             initError={error}
             onError={onError}
             onSuccess={onSuccess}

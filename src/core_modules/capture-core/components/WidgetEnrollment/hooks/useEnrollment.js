@@ -1,8 +1,23 @@
 // @flow
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import { useUpdateEnrollment } from './useUpdateEnrollment';
 
-export const useEnrollment = (enrollmentId: string) => {
+type Props = {
+    enrollmentId: string,
+    onUpdateEnrollmentDate?: (date: string) => void,
+    onUpdateIncidentDate?: (date: string) => void,
+    onError?: (error: any) => void,
+}
+
+export const useEnrollment = ({
+    enrollmentId,
+    onUpdateEnrollmentDate,
+    onUpdateIncidentDate,
+    onError,
+}: Props) => {
+    const [enrollment, setEnrollment] = useState();
+
     const { error, loading, data, refetch } = useDataQuery(
         useMemo(
             () => ({
@@ -20,5 +35,33 @@ export const useEnrollment = (enrollmentId: string) => {
         enrollmentId && refetch({ variables: { enrollmentId } });
     }, [refetch, enrollmentId]);
 
-    return { error, refetch, enrollment: !loading && data?.enrollment };
+    useEffect(() => {
+        if (data) {
+            setEnrollment(data.enrollment);
+        }
+    }, [setEnrollment, data]);
+
+    const updateEnrollmentDate = useUpdateEnrollment({
+        enrollment,
+        setEnrollment,
+        propertyName: 'enrolledAt',
+        updateHandler: onUpdateEnrollmentDate,
+        onError,
+    });
+
+    const updateIncidentDate = useUpdateEnrollment({
+        enrollment,
+        setEnrollment,
+        propertyName: 'occurredAt',
+        updateHandler: onUpdateIncidentDate,
+        onError,
+    });
+
+    return {
+        error,
+        refetch,
+        enrollment: !loading && enrollment,
+        updateEnrollmentDate,
+        updateIncidentDate,
+    };
 };
