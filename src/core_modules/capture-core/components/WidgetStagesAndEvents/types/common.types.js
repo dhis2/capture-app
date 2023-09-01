@@ -8,6 +8,7 @@ type StageOptions = {
 export type StageDataElement = {
     id: string,
     name: string,
+    formName: string,
     type: $Keys<typeof dataElementTypes>,
     options?: StageOptions,
     optionSet?: { options: Array<Option> },

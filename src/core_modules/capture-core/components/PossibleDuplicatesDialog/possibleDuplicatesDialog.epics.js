@@ -9,13 +9,14 @@ import {
     duplicatesForReviewRetrievalFailed,
 } from './possibleDuplicatesDialog.actions';
 import {
-    scopeTypes, getScopeFromScopeId, EventProgram, TrackerProgram, TrackedEntityType,
+    scopeTypes, getScopeFromScopeId, EventProgram, TrackerProgram, TrackedEntityType, dataElementTypes,
 } from '../../metaData';
 import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
 import { getAttributesFromScopeId } from '../../metaData/helpers';
 import { searchGroupDuplicateActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
+import { escapeString } from '../../utils/escapeString';
 
 function getGroupElementsFromScopeId(scopeId: ?string) {
     if (!scopeId) {
@@ -65,7 +66,8 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                             return null;
                         }
                         const serverValue = element.convertValue(value, pipeD2(convertFormToClient, convertClientToServer));
-                        return `${element.id}:${element.optionSet ? 'eq' : 'like'}:${serverValue}`;
+                        const hasOptionSet = element.optionSet && element.type !== dataElementTypes.MULTI_TEXT;
+                        return `${element.id}:${hasOptionSet ? 'eq' : 'like'}:${escapeString(serverValue)}`;
                     })
                     .filter(f => f);
 

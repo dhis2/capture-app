@@ -2,12 +2,11 @@
 import * as React from 'react';
 import { Manager, Popper, Reference } from 'react-popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { IconMore24 } from '@dhis2/ui';
+import { spacers, IconMore24, colors } from '@dhis2/ui';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
-import IconButton from '@material-ui/core/IconButton';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props, State } from './rowMenu.types';
 
@@ -21,12 +20,19 @@ const styles = theme => ({
     popperContainer: {
         zIndex: 100,
     },
-    iconContainer: {
-        position: 'relative',
-    },
-    icon: {
-        position: 'absolute',
-        marginTop: '-24px',
+    iconButton: {
+        display: 'flex',
+        borderRadius: '50%',
+        border: 'none',
+        cursor: 'pointer',
+        background: 'transparent',
+        padding: spacers.dp12,
+        marginTop: `-${spacers.dp12}`,
+        marginBottom: `-${spacers.dp12}`,
+        color: colors.grey600,
+        '&:hover': {
+            background: colors.grey400,
+        },
     },
 });
 
@@ -105,15 +111,14 @@ class Index extends React.Component<Props, State> {
                             return (
                                 <div
                                     ref={this.handleReferenceInstanceRetrieved}
-                                    className={classes.iconContainer}
                                 >
-                                    <IconButton
+                                    <button
                                         data-test="event-content-menu"
                                         onClick={this.toggleMenu}
-                                        className={classes.icon}
+                                        className={classes.iconButton}
                                     >
                                         <IconMore24 />
-                                    </IconButton>
+                                    </button>
                                 </div>
                             );
                         }

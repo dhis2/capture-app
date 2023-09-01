@@ -16,6 +16,7 @@ import { colors,
     IconAdd16,
     Tooltip,
 } from '@dhis2/ui';
+import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
 import { sortDataFromEvent } from './hooks/sortFuntions';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
@@ -146,17 +147,20 @@ const StageDetailPlain = (props: Props) => {
                                 key={id}
                                 onClick={() => !row.pendingApiResponse && onEventClick(row.id)}
                                 ref={(tableCell) => {
-                                    if (tableCell && row.pendingApiResponse) {
-                                        tableCell.onmouseover = onMouseOver;
-                                        tableCell.onmouseout = onMouseOut;
-                                        ref.current = tableCell;
+                                    if (tableCell) {
+                                        if (row.pendingApiResponse) {
+                                            tableCell.onmouseover = onMouseOver;
+                                            tableCell.onmouseout = onMouseOut;
+                                            ref.current = tableCell;
+                                        } else {
+                                            tableCell.onmouseover = null;
+                                            tableCell.onmouseout = null;
+                                        }
                                     }
                                 }}
                             >
                                 <div>
-                                    { // $FlowFixMe
-                                        row[id]
-                                    }
+                                    {row[id]}
                                 </div>
                             </DataTableCell>
                         )}
@@ -212,35 +216,26 @@ const StageDetailPlain = (props: Props) => {
         const renderCreateNewButton = () => {
             const shouldDisableCreateNew = !repeatable && events.length > 0;
 
-            return (<Button
-                small
-                secondary
-                icon={<IconAdd16 />}
-                disabled={shouldDisableCreateNew}
-                className={classes.button}
-                dataTest="create-new-button"
-                onClick={handleCreateNew}
-            >
-                <Tooltip
+            return (
+                <ConditionalTooltip
                     content={i18n.t('This stage can only have one event')}
+                    enabled={shouldDisableCreateNew}
                     closeDelay={50}
                 >
-                    {({ onMouseOver, onMouseOut, ref }) => (
-                        <div ref={(divRef) => {
-                            if (divRef && shouldDisableCreateNew) {
-                                divRef.onmouseover = onMouseOver;
-                                divRef.onmouseout = onMouseOut;
-                                ref.current = divRef;
-                            }
-                        }}
-                        >
-                            {i18n.t('New {{ eventName }} event', {
-                                eventName, interpolation: { escapeValue: false },
-                            })}
-                        </div>
-                    )}
-                </Tooltip>
-            </Button>);
+                    <Button
+                        small
+                        secondary
+                        icon={<IconAdd16 />}
+                        disabled={shouldDisableCreateNew}
+                        dataTest="create-new-button"
+                        onClick={handleCreateNew}
+                    >
+                        {i18n.t('New {{ eventName }} event', {
+                            eventName, interpolation: { escapeValue: false },
+                        })}
+                    </Button>
+                </ConditionalTooltip>
+            );
         };
 
         return (

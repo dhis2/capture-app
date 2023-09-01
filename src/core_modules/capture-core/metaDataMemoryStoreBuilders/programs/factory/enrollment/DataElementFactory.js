@@ -22,6 +22,7 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import type { ConstructorInput } from './dataElementFactory.types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import { isNotValidOptionSet } from '../../../../utils/isNotValidOptionSet';
+import { escapeString } from '../../../../utils/escapeString';
 
 export class DataElementFactory {
     static translationPropertyNames = {
@@ -90,7 +91,7 @@ export class DataElementFactory {
                         params: {
                             program: contextProps.programId,
                             orgUnit: orgUnitId,
-                            filter: `${dataElement.id}:EQ:${serverValue}`,
+                            filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                         },
                     });
                 } else {
@@ -99,7 +100,7 @@ export class DataElementFactory {
                         params: {
                             program: contextProps.programId,
                             ouMode: 'ACCESSIBLE',
-                            filter: `${dataElement.id}:EQ:${serverValue}`,
+                            filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                         },
                     });
                 }

@@ -1,7 +1,7 @@
 import '../sharedSteps';
 
 Given('the tei created by this test is cleared from the database', () => {
-    cy.buildApiUrl('tracker', 'trackedEntities?filter=w75KJ2mc4zz:like:Launchpad&filter=zDhUuAYrxNC:like:McQuack&trackedEntityType=nEenWmSyUEp&page=1&pageSize=5&ouMode=ACCESSIBLE')
+    cy.buildApiUrl('tracker', 'trackedEntities?filter=w75KJ2mc4zz:like:Breaking&filter=zDhUuAYrxNC:like:TheGlass&trackedEntityType=nEenWmSyUEp&page=1&pageSize=5&ouMode=ACCESSIBLE')
         .then(url => cy.request(url))
         .then(({ body }) =>
             body.instances.forEach(({ trackedEntity }) =>
@@ -24,12 +24,12 @@ And('you create a new tei in Child programme from Ngelehun CHC', () => {
     cy.get('[data-test="d2-form-component"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
-        .type('Launchpad')
+        .type('Breaking')
         .blur();
     cy.get('[data-test="d2-form-component"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
-        .type('McQuack')
+        .type('TheGlass')
         .blur();
     cy.get('[data-test="capture-ui-input"]')
         .eq(7)
@@ -65,7 +65,7 @@ And('you enroll the tei from Njandama MCHP', () => {
         .click();
 
     cy.get('[data-test="enrollment-page-content"]')
-        .contains('Enroll Launchpad McQuack in this program')
+        .contains('Enroll Breaking TheGlass in this program')
         .click();
 
     cy.get('[data-test="d2-form-component"]')
@@ -101,7 +101,7 @@ And('you log in as tracker2 user', () => {
 
 And('you select the new tei', () => {
     cy.visit('/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW');
-    cy.contains('Launchpad')
+    cy.contains('Breaking')
         .click();
     // Wait for enrollment dashboard
     cy.get('[data-test="profile-widget"]')
