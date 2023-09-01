@@ -43,7 +43,7 @@ export const runRulesOnUpdateFieldBatch = ({
     uid: string,
     stage?: ProgramStage,
     formFoundation?: RenderFoundation,
-    currentEvent: any,
+    currentEvent?: {[id: string]: any},
 }) => {
     const effects = getApplicableRuleEffectsForTrackerProgram({
         program,

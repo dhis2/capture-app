@@ -28,17 +28,17 @@ export const deriveFirstStageDuringRegistrationEvent = ({
     }
     const { enrolledAt, stageComplete, stageOccurredAt, stageGeometry } = fieldsValue;
 
-    const dataValues = Object.keys(currentEventValues).reduce((acc, dataElement) => {
+    const dataValues = currentEventValues ? Object.keys(currentEventValues).reduce((acc, dataElement) => {
         acc.push({ dataElement, value: currentEventValues[dataElement] });
         return acc;
-    }, []);
+    }, []) : undefined;
 
     const eventAttributeCategoryOptions = attributeCategoryOptions
         ? { attributeCategoryOptions: convertCategoryOptionsToServer(attributeCategoryOptions) }
         : {};
 
     return {
-        dataValues,
+        ...(dataValues && { dataValues }),
         status: convertStatusOut(stageComplete),
         geometry: standardGeoJson(stageGeometry),
         occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
