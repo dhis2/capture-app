@@ -4,6 +4,7 @@ import cx from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { spacersNum, colors, IconAdd16, Button } from '@dhis2/ui';
+import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
@@ -59,17 +60,30 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                     onCreateNew={onCreateNew}
                     hiddenProgramStage={hiddenProgramStage}
                     {...passOnProps}
-                /> : <Button
-                    small
-                    secondary
-                    disabled={hiddenProgramStage}
-                    icon={<IconAdd16 />}
-                    className={classes.button}
-                    dataTest="create-new-button"
-                    onClick={() => onCreateNew(id)}
-                >
-                    {i18n.t('New {{ eventName }} event', { eventName: name, interpolation: { escapeValue: false } })}
-                </Button>}
+                /> : (
+                    <ConditionalTooltip
+                        content={i18n.t("You can't add any more {{ programStageName }} events", {
+                            programStageName: name,
+                            interpolation: { escapeValue: false },
+                        })}
+                        enabled={hiddenProgramStage}
+                    >
+                        <Button
+                            small
+                            secondary
+                            disabled={hiddenProgramStage}
+                            icon={<IconAdd16 />}
+                            className={classes.button}
+                            dataTest="create-new-button"
+                            onClick={() => onCreateNew(id)}
+                        >
+                            {i18n.t('New {{ eventName }} event', {
+                                eventName: name,
+                                interpolation: { escapeValue: false },
+                            })}
+                        </Button>
+                    </ConditionalTooltip>
+                )}
             </Widget>
         </div>
     );

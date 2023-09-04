@@ -49,6 +49,7 @@ const ValidatedPlain = ({
                     onCancel={onCancel}
                     id={id}
                     hiddenProgramStage={hiddenProgramStage}
+                    stageName={stage.name}
                 />
                 {hiddenProgramStage ? (
                     <ErrorText stageName={stage.name} />

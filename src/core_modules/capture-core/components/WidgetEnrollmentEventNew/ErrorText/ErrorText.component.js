@@ -9,7 +9,7 @@ export const ErrorText = ({ stageName }: Props) => (
         <br />
         <NoticeBox error>
             <span>
-                {i18n.t('You can’t add any more {{ programStageName }} events', {
+                {i18n.t("You can't add any more {{ programStageName }} events", {
                     programStageName: stageName,
                     interpolation: { escapeValue: false },
                 })}
