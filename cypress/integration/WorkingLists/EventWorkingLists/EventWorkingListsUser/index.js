@@ -256,8 +256,9 @@ Then('the list should display 10 rows of data', () => {
 });
 
 When('you click the report date column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('Report date')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(0)
+        .click()
         .click();
 });
 
@@ -364,8 +365,9 @@ When('you change the sharing settings', () => {
 
 
 When('you update the working list', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('Report date')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(0)
+        .click()
         .click();
 
     cy.get('[data-test="list-view-menu-button"]')
