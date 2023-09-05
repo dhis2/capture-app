@@ -1,25 +1,26 @@
 import moment from 'moment';
 
-const cleanUp = () => {
-    cy.visit(
-        '/#/enrollment?enrollmentId=fmhIsWXVDmS&orgUnitId=s7SLtx8wmRA&programId=WSGAb5XwJ3Y&teiId=uW8Y7AIcRKA',
-    );
-
-    cy.get('[data-test="enrollment-page-content"]').contains('Enrollment Dashboard');
-
-    cy.get('[data-test="stages-and-events-widget"]')
-        .find('[data-test="stage-content"]')
-        .eq(3)
-        .click();
-
-    cy.contains('WHOMCH Pregnancy outcome').should('exist');
-    cy.contains('[data-test="dhis2-uicore-button"]', 'Edit event').click();
-    cy.contains('[data-test="dhis2-uicore-button"]', 'Delete').click();
-    cy.contains('[data-test="dhis2-uicore-button"]', 'Yes, delete event').click();
+const cleanUpIfApplicable = () => {
+    cy.buildApiUrl(
+        'tracker',
+        'trackedEntities/uW8Y7AIcRKA?program=WSGAb5XwJ3Y&fields=enrollments',
+    )
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const enrollment = body.enrollments?.find(e => e.enrollment === 'fmhIsWXVDmS');
+            const event = enrollment?.events?.find(e => e.programStage === 'PFDfvmGpsR3');
+            if (!event) {
+                return null;
+            }
+            return cy
+                .buildApiUrl('events', event.event)
+                .then(eventUrl =>
+                    cy.request('DELETE', eventUrl));
+        });
 };
 
 Given('you add an enrollment event that will result in a rule effect to hide a program stage', () => {
-    cleanUp();
+    cleanUpIfApplicable();
     cy.visit(
         '/#/enrollmentEventNew?enrollmentId=fmhIsWXVDmS&orgUnitId=s7SLtx8wmRA&programId=WSGAb5XwJ3Y&stageId=PFDfvmGpsR3&teiId=uW8Y7AIcRKA',
     );
