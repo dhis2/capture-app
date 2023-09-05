@@ -11,7 +11,6 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { parseDate } from 'capture-core-utils/parsers';
 import { convertValue as convertValueClientToView } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData';
 
@@ -87,9 +86,9 @@ const DateComponentPlain = ({
     const saveHandler = () => {
         // CalendarInput component only supports the YYYY-MM-DD format
         if (selectedDate) {
-            const dateObject = parseDate(selectedDate, 'YYYY-MM-DD').momentDate;
-            if (dateObject && dateObject.toISOString() !== date) {
-                onSave(dateObject.toISOString(true));
+            const newDate = moment.utc(selectedDate, 'YYYY-MM-DD').format('YYYY-MM-DDTHH:mm:ss.SSS');
+            if (newDate !== date) {
+                onSave(newDate);
             }
         }
         setEditMode(false);
