@@ -1,3 +1,10 @@
+# [100.38.0](https://github.com/dhis2/capture-app/compare/v100.37.0...v100.38.0) (2023-09-06)
+
+
+### Features
+
+* [DHIS2-14334] edit enrollment date ([#3350](https://github.com/dhis2/capture-app/issues/3350)) ([9dd1b6a](https://github.com/dhis2/capture-app/commit/9dd1b6a046e94021ae4e63a67a3d6b16a099212d))
+
 # [100.37.0](https://github.com/dhis2/capture-app/compare/v100.36.0...v100.37.0) (2023-08-22)
 
 
