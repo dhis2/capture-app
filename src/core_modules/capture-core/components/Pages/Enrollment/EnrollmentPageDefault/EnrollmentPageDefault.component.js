@@ -60,6 +60,8 @@ export const EnrollmentPageDefaultPlain = ({
     classes,
     onEventClick,
     onUpdateTeiAttributeValues,
+    onUpdateEnrollmentDate,
+    onUpdateIncidentDate,
     onEnrollmentError,
 }: PlainProps) => (
     <>
@@ -108,6 +110,8 @@ export const EnrollmentPageDefaultPlain = ({
                     programId={program.id}
                     onDelete={onDelete}
                     onAddNew={onAddNew}
+                    onUpdateEnrollmentDate={onUpdateEnrollmentDate}
+                    onUpdateIncidentDate={onUpdateIncidentDate}
                     onError={onEnrollmentError}
                 />}
             </div>

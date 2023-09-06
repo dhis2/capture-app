@@ -1158,6 +1158,9 @@ msgstr "Remove mark for follow-up"
 msgid "Mark for follow-up"
 msgstr "Mark for follow-up"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr "Existing dates for auto-generated events will not be updated."
+
 msgid "Enrollment date"
 msgstr "Enrollment date"
 

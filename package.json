@@ -131,6 +131,7 @@
     },
     "resolutions": {
         "@babel/preset-react": "7.16.7",
+        "@js-temporal/polyfill": "0.4.3",
         "core-js": "2.5.7"
     },
     "browserslist": {
