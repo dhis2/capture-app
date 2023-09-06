@@ -3,6 +3,7 @@ import { ofType } from 'redux-observable';
 import { pipe } from 'capture-core-utils';
 import { flatMap, map } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
+import { dataEntryKeys } from 'capture-core/constants';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,
@@ -207,6 +208,7 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                     `/${redirectTo}?${buildUrlQueryString({
                         eventId,
                         orgUnitId,
+                        initMode: dataEntryKeys.EDIT,
                     })}`,
                 );
                 return EMPTY;
