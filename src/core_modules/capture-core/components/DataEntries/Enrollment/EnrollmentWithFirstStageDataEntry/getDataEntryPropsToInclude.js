@@ -9,6 +9,14 @@ export const stageMainDataIds = {
     GEOMETRY: 'stageGeometry',
 };
 
+const stageMainDataRulesEngineIds = {
+    OCCURRED_AT: 'occurredAt',
+    COMPLETE: 'complete',
+    GEOMETRY: 'geometry',
+};
+
+export const convertToRulesEngineIds = (id: string) => stageMainDataRulesEngineIds[id];
+
 export const getDataEntryPropsToInclude = (formFoundation: RenderFoundation) => [
     {
         id: stageMainDataIds.OCCURRED_AT,

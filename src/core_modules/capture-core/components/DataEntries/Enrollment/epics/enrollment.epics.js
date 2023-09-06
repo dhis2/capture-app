@@ -8,7 +8,7 @@ import { getTrackerProgramThrowIfNotFound, ProgramStage, RenderFoundation, Secti
 import { getCurrentClientMainData, type FieldData } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertFormToClient } from '../../../../converters';
-import { stageMainDataIds } from '../EnrollmentWithFirstStageDataEntry';
+import { stageMainDataIds, convertToRulesEngineIds } from '../EnrollmentWithFirstStageDataEntry';
 
 type Context = {
     dataEntryId: string,
@@ -25,8 +25,12 @@ const splitCurrentClientMainData = (stage, currentClientMainData) => {
         return { currentEnrollmentValues: currentClientMainData, currentEventMainData: {} };
     }
     return Object.keys(currentClientMainData).reduce((acc, id) => {
-        if (Object.keys(stageMainDataIds).find(key => stageMainDataIds[key] === id)) {
-            acc.currentEventMainData = { ...acc.currentEventMainData, [id]: currentClientMainData[id] };
+        const stageMainDataId = Object.keys(stageMainDataIds).find(key => stageMainDataIds[key] === id);
+        if (stageMainDataId) {
+            acc.currentEventMainData = {
+                ...acc.currentEventMainData,
+                [convertToRulesEngineIds(stageMainDataId)]: currentClientMainData[id],
+            };
         } else {
             acc.currentEnrollmentValues = { ...acc.currentEnrollmentValues, [id]: currentClientMainData[id] };
         }
