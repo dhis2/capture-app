@@ -8,8 +8,15 @@ import { useHistory } from 'react-router-dom';
 import {
     useCommonEnrollmentDomainData,
     updateEnrollmentAttributeValues,
+    updateEnrollmentDate,
+    updateIncidentDate,
     showEnrollmentError,
 } from '../../common/EnrollmentOverviewDomain';
+import {
+    updateEnrollmentDate as updateTopBarEnrollmentDate,
+    deleteEnrollment,
+    updateTeiDisplayName,
+} from '../EnrollmentPage.actions';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
@@ -20,7 +27,6 @@ import {
     useRuleEffects,
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
-import { deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 
 export const EnrollmentPageDefault = () => {
@@ -74,11 +80,21 @@ export const EnrollmentPageDefault = () => {
     const onEventClick = (eventId: string) => {
         history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
     };
+
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
         dispatch(updateEnrollmentAttributeValues(updatedAttributeValues
             .map(({ attribute, value }) => ({ id: attribute, value })),
         ));
         dispatch(updateTeiDisplayName(teiDisplayName));
+    }, [dispatch]);
+
+    const onUpdateEnrollmentDate = useCallback((enrollmentDate) => {
+        dispatch(updateEnrollmentDate(enrollmentDate));
+        dispatch(updateTopBarEnrollmentDate({ enrollmentId, enrollmentDate }));
+    }, [dispatch, enrollmentId]);
+
+    const onUpdateIncidentDate = useCallback((incidentDate) => {
+        dispatch(updateIncidentDate(incidentDate));
     }, [dispatch]);
 
     const onAddNew = () => {
@@ -107,6 +123,8 @@ export const EnrollmentPageDefault = () => {
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
+            onUpdateEnrollmentDate={onUpdateEnrollmentDate}
+            onUpdateIncidentDate={onUpdateIncidentDate}
             onEnrollmentError={onEnrollmentError}
         />
     );
