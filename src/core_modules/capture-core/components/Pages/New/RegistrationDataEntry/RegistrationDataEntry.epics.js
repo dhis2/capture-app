@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { pipe } from 'capture-core-utils';
 import { flatMap, map } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
-import { dataEntryKeys } from 'capture-core/constants';
+import { FEATURETYPE, dataEntryKeys } from 'capture-core/constants';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,
@@ -14,7 +14,6 @@ import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
-import { FEATURETYPE } from '../../../../constants';
 import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../utils/routing';
 import {
     deriveAutoGenerateEvents,
