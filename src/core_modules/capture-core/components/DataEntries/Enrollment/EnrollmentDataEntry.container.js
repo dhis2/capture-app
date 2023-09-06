@@ -6,10 +6,6 @@ import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } 
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
 
-const mapStateToProps = ({ useNewDashboard }) => ({
-    newDashboardConfig: useNewDashboard,
-});
-
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateDataEntryField: (
         innerAction: ReduxAction<any, any>,
@@ -48,5 +44,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe
-export const EnrollmentDataEntry = connect(mapStateToProps, mapDispatchToProps)(EnrollmentDataEntryComponent);
+export const EnrollmentDataEntry = connect(() => ({}), mapDispatchToProps)(EnrollmentDataEntryComponent);
 
