@@ -30,6 +30,10 @@ export type HideOutputEffect = OutputEffect & {
 
 };
 
+export type HideProgramStageEffect = OutputEffect & {
+
+};
+
 export type MessageEffect = OutputEffect & {
     message: string,
 };

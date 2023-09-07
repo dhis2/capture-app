@@ -12,6 +12,7 @@ import type {
     IConvertOutputRulesEffectsValue,
     AssignOutputEffect,
     HideOutputEffect,
+    HideProgramStageEffect,
     MessageEffect,
     GeneralErrorEffect,
     GeneralWarningEffect,
@@ -207,6 +208,17 @@ export function getRulesEffectsProcessor(
         };
     }
 
+    function processHideProgramStage(effect: ProgramRuleEffect): ?HideProgramStageEffect {
+        if (!effect.programStageId) {
+            return null;
+        }
+
+        return {
+            type: effectActions.HIDE_PROGRAM_STAGE,
+            id: effect.programStageId,
+        };
+    }
+
     function processMakeCompulsory(effect: ProgramRuleEffect): Array<CompulsoryEffect> {
         return createEffectsForConfiguredDataTypes(effect, () => ({
             type: effectActions.MAKE_COMPULSORY,
@@ -267,6 +279,7 @@ export function getRulesEffectsProcessor(
         [effectActions.SHOW_WARNING]: processShowWarning,
         [effectActions.SHOW_ERROR_ONCOMPLETE]: processShowErrorOnComplete,
         [effectActions.SHOW_WARNING_ONCOMPLETE]: processShowWarningOnComplete,
+        [effectActions.HIDE_PROGRAM_STAGE]: processHideProgramStage,
         [effectActions.HIDE_SECTION]: processHideSection,
         [effectActions.MAKE_COMPULSORY]: processMakeCompulsory,
         [effectActions.DISPLAY_TEXT]: processDisplayText,

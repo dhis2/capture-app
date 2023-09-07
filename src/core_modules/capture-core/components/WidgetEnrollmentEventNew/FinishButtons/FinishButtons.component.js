@@ -3,6 +3,7 @@ import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Button, spacersNum } from '@dhis2/ui';
+import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
 import { withCancelButton } from '../../DataEntry/withCancelButton';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import type { InputProps, Props } from './finishButtons.types';
@@ -17,26 +18,43 @@ const styles = {
     },
 };
 
-const FinishButtonsPlain = ({ onSave, cancelButton, classes }: Props) => (
+const FinishButtonsPlain = ({ onSave, cancelButton, hiddenProgramStage, stageName, classes }: Props) => (
     <div className={classes.container}>
         <div className={classes.button}>
-            <Button
-                onClick={() => onSave(addEventSaveTypes.COMPLETE)}
-                primary
+            <ConditionalTooltip
+                content={i18n.t("You can't add any more {{ programStageName }} events", {
+                    programStageName: stageName,
+                    interpolation: { escapeValue: false },
+                })}
+                enabled={hiddenProgramStage}
             >
-                {i18n.t('Complete')}
-            </Button>
+                <Button
+                    disabled={hiddenProgramStage}
+                    onClick={() => onSave(addEventSaveTypes.COMPLETE)}
+                    primary
+                >
+                    {i18n.t('Complete')}
+                </Button>
+            </ConditionalTooltip>
         </div>
         <div className={classes.button}>
-            <Button
-                onClick={() => onSave(addEventSaveTypes.SAVE_WITHOUT_COMPLETING)}
+            <ConditionalTooltip
+                content={i18n.t("You can't add any more {{ programStageName }} events", {
+                    programStageName: stageName,
+                    interpolation: { escapeValue: false },
+                })}
+                enabled={hiddenProgramStage}
             >
-                {i18n.t('Save without completing')}
-            </Button>
+                <Button
+                    disabled={hiddenProgramStage}
+                    onClick={() => onSave(addEventSaveTypes.SAVE_WITHOUT_COMPLETING)}
+                >
+                    {i18n.t('Save without completing')}
+                </Button>
+            </ConditionalTooltip>
         </div>
         {cancelButton}
     </div>
 );
 
-export const FinishButtons: ComponentType<InputProps> =
-    withCancelButton()(withStyles(styles)(FinishButtonsPlain));
+export const FinishButtons: ComponentType<InputProps> = withCancelButton()(withStyles(styles)(FinishButtonsPlain));

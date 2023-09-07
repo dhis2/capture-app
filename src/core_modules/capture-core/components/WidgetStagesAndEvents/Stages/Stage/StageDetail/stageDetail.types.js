@@ -8,6 +8,7 @@ import type { StageDataElement, StageCommonProps } from '../../../types/common.t
     hideDueDate?: boolean,
     repeatable?: boolean,
     stageId: string,
+    hiddenProgramStage?: boolean,
     ...CssClasses,
 |};
 
