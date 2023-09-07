@@ -26,7 +26,8 @@ const styles = {
 const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStage, onCancel, classes }) => (
     <div className={classes.container}>
         {programStages.map((programStage) => {
-            const disableStage = !programStage.repeatable && programStage.eventCount > 0;
+            const disableStage =
+                (!programStage.repeatable && programStage.eventCount > 0) || programStage.hiddenProgramStage;
             return (
                 <div
                     key={programStage.id}
