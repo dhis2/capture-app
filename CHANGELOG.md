@@ -1,3 +1,10 @@
+# [100.39.0](https://github.com/dhis2/capture-app/compare/v100.38.0...v100.39.0) (2023-09-07)
+
+
+### Features
+
+* [DHIS2-13343] hidden program stage rule effect ([#3406](https://github.com/dhis2/capture-app/issues/3406)) ([4ef2973](https://github.com/dhis2/capture-app/commit/4ef2973b71d6376f99db07e70bc4d51facb8018e))
+
 # [100.38.0](https://github.com/dhis2/capture-app/compare/v100.37.0...v100.38.0) (2023-09-06)
 
 
