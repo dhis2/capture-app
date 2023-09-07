@@ -12,3 +12,4 @@ export {
     showEnrollmentError,
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';
+export { useRuleEffects } from './useRuleEffects';

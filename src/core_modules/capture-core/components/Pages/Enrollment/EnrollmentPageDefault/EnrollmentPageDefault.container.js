@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
     useCommonEnrollmentDomainData,
+    useRuleEffects,
     updateEnrollmentAttributeValues,
     updateEnrollmentDate,
     updateIncidentDate,
@@ -24,7 +25,6 @@ import {
     useProgramMetadata,
     useHideWidgetByRuleLocations,
     useProgramStages,
-    useRuleEffects,
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
@@ -126,6 +126,7 @@ export const EnrollmentPageDefault = () => {
             onUpdateEnrollmentDate={onUpdateEnrollmentDate}
             onUpdateIncidentDate={onUpdateIncidentDate}
             onEnrollmentError={onEnrollmentError}
+            ruleEffects={ruleEffects}
         />
     );
 };

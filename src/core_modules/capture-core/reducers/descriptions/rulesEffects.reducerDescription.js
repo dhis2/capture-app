@@ -64,6 +64,23 @@ export const rulesEffectsHiddenSectionsDesc = createReducerDescription({
     },
 }, 'rulesEffectsHiddenSections');
 
+export const rulesEffectsHiddenProgramStageDesc = createReducerDescription({
+    [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+        const newState = { ...state };
+
+        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.HIDE_PROGRAM_STAGE];
+        newState[action.payload.formId] = hideEffects ?
+            Object.keys(hideEffects).reduce((accState, key) => {
+                accState[key] = true;
+                return accState;
+            }, {}) :
+            null;
+
+        return newState;
+    },
+}, 'rulesEffectsHiddenProgramStageDesc');
+
+
 const mapMessageEffectTypeToStateKey = {
     [effectActions.SHOW_ERROR]: messageStateKeys.ERROR,
     [effectActions.SHOW_WARNING]: messageStateKeys.WARNING,
