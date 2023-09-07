@@ -1,19 +1,20 @@
 // @flow
 import { pipe as pipeD2 } from '../../../../../capture-core-utils';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
-import { type DataElement } from '../../../../metaData';
+import { type DataElement, dataElementTypes } from '../../../../metaData';
+import { escapeString } from '../../../../utils/escapeString';
 
 type FormValues = { [key: string]: any}
 
 const derivedFilterKeyword = (dataElement) => {
-    const hasOptionSet = !!dataElement.optionSet;
+    const hasOptionSet = dataElement.optionSet && dataElement.type !== dataElementTypes.MULTI_TEXT;
     return hasOptionSet ? 'eq' : 'like';
 };
 
 const convertString = (formValues: string, dataElement: DataElement) => {
     const sanitizedString = formValues.trim();
     const convertedString = (dataElement.convertValue(sanitizedString, pipeD2(convertFormToClient, convertClientToServer)));
-    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${convertedString}`;
+    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${escapeString(convertedString)}`;
 };
 
 const convertRange = (formValues: FormValues, dataElement: DataElement) => {
@@ -38,7 +39,7 @@ const convertAge = (formValues: FormValues, dataElement: DataElement) => {
 
 const convertFile = (formValues: FormValues, dataElement: DataElement) => {
     const convertedFileName = (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
-    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${convertedFileName}`;
+    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${escapeString(convertedFileName)}`;
 };
 
 const convertBoolean = (formValues: boolean, dataElement: DataElement) => {

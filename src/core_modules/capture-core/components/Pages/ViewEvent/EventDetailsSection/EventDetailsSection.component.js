@@ -3,8 +3,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from '@material-ui/core/';
-import { spacers, IconFileDocument24, Tooltip, Button } from '@dhis2/ui';
+import { spacers, IconFileDocument24, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
@@ -96,26 +97,20 @@ const EventDetailsSectionPlain = (props: Props) => {
                 <div
                     className={classes.editButtonContainer}
                 >
-                    <Button
-                        className={classes.button}
-                        onClick={() => onOpenEditEvent(orgUnit)}
-                        disabled={!canEdit}
-                        secondary
-                        small
+                    <ConditionalTooltip
+                        content={i18n.t('You don\'t have access to edit this event')}
+                        enabled={!canEdit}
                     >
-                        <Tooltip content={i18n.t('You don\'t have access to edit this event')}>
-                            {({ onMouseOver, onMouseOut, ref }) => (<div ref={(divRef) => {
-                                if (divRef && !canEdit) {
-                                    divRef.onmouseover = onMouseOver;
-                                    divRef.onmouseout = onMouseOut;
-                                    ref.current = divRef;
-                                }
-                            }}
-                            >
-                                {i18n.t('Edit event')}
-                            </div>)}
-                        </Tooltip>
-                    </Button>
+                        <Button
+                            className={classes.button}
+                            onClick={() => onOpenEditEvent(orgUnit)}
+                            disabled={!canEdit}
+                            secondary
+                            small
+                        >
+                            {i18n.t('Edit event')}
+                        </Button>
+                    </ConditionalTooltip>
                 </div>}
             </div>
         );

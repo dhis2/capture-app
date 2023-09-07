@@ -4,7 +4,7 @@ import type { TrackerProgram } from 'capture-core/metaData';
 import type {
     EnrollmentData,
     AttributeValue,
-} from '../../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+} from '../useCommonEnrollmentDomainData';
 
 export type UseRuleEffectsInput = {|
     orgUnit?: ?OrgUnit,

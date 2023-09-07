@@ -1,4 +1,5 @@
 // @flow
+import { typeof effectActions } from '@dhis2/rules-engine-javascript';
 import type { Icon } from 'capture-core/metaData';
 import { dataElementTypes, Option } from '../../../metaData';
 
@@ -8,6 +9,7 @@ type StageOptions = {
 export type StageDataElement = {
     id: string,
     name: string,
+    formName: string,
     type: $Keys<typeof dataElementTypes>,
     options?: StageOptions,
     optionSet?: { options: Array<Option> },
@@ -28,7 +30,8 @@ export type StageCommonProps = {|
     programId: string,
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,
-    onEventClick: (eventId: string) => void
+    onEventClick: (eventId: string) => void,
+    ruleEffects?: Array<{id: string, type: $Values<effectActions>}>,
 |}
 
 export type DataValue = {
