@@ -373,9 +373,6 @@ msgstr "Some operations are still runnning. Please wait.."
 msgid "Operations running"
 msgstr "Operations running"
 
-msgid "Sort"
-msgstr "Sort"
-
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
@@ -775,8 +772,8 @@ msgstr "Schedule"
 msgid "Refer"
 msgstr "Refer"
 
-msgid "You can’t add any more {{ programStageName }} events"
-msgstr "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
+msgstr "You can't add any more {{ programStageName }} events"
 
 msgid "Cancel without saving"
 msgstr "Cancel without saving"
@@ -1164,6 +1161,9 @@ msgstr "Remove mark for follow-up"
 msgid "Mark for follow-up"
 msgstr "Mark for follow-up"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr "Existing dates for auto-generated events will not be updated."
+
 msgid "Enrollment date"
 msgstr "Enrollment date"
 
@@ -1539,9 +1539,6 @@ msgstr "Error editing the event, the changes made were not saved"
 msgid "Set coordinate"
 msgstr "Set coordinate"
 
-msgid "Page {{currentPage}}"
-msgstr "Page {{currentPage}}"
-
 msgid "Date"
 msgstr "Date"
 
@@ -1559,6 +1556,9 @@ msgstr "To date"
 
 msgid "To time"
 msgstr "To time"
+
+msgid "Page {{currentPage}}"
+msgstr "Page {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Delete polygon"

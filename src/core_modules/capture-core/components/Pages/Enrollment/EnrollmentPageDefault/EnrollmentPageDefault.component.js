@@ -66,7 +66,10 @@ export const EnrollmentPageDefaultPlain = ({
     onEventClick,
     onLinkedRecordClick,
     onUpdateTeiAttributeValues,
+    onUpdateEnrollmentDate,
+    onUpdateIncidentDate,
     onEnrollmentError,
+    ruleEffects,
 }: PlainProps) => {
     const [mainContentVisible, setMainContentVisibility] = useState(true);
     const [addRelationShipContainerElement, setAddRelationshipContainerElement] =
@@ -87,7 +90,7 @@ export const EnrollmentPageDefaultPlain = ({
                         <EnrollmentQuickActions
                             stages={stages}
                             events={events}
-                        />
+                        ruleEffects={ruleEffects}/>
                         <WidgetStagesAndEvents
                             programId={program.id}
                             stages={stages}
@@ -95,7 +98,7 @@ export const EnrollmentPageDefaultPlain = ({
                             onViewAll={onViewAll}
                             onCreateNew={onCreateNew}
                             onEventClick={onEventClick}
-                        />
+                        ruleEffects={ruleEffects}/>
                     </div>
                     <div className={classes.rightColumn}>
                         {addRelationShipContainerElement &&
@@ -139,6 +142,8 @@ export const EnrollmentPageDefaultPlain = ({
                             programId={program.id}
                             onDelete={onDelete}
                             onAddNew={onAddNew}
+                            onUpdateEnrollmentDate={onUpdateEnrollmentDate}
+                            onUpdateIncidentDate={onUpdateIncidentDate}
                             onError={onEnrollmentError}
                         />}
                     </div>

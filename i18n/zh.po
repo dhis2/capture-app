@@ -79,7 +79,7 @@ msgstr "错误"
 
 msgid ""
 "Plugins are not yet available - Please contact your system administrator"
-msgstr ""
+msgstr "插件尚不可用 - 请联系您的系统管理员"
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -274,7 +274,7 @@ msgid ""
 msgstr "离开本页将丢掉你的新关系的选择"
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "是的，放弃更改"
 
 msgid "No, cancel"
 msgstr "不，取消"
@@ -376,7 +376,7 @@ msgstr "排序"
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
-msgstr ""
+msgstr "此事件有未保存的更改。离开此页面而不保存将丢失这些更改。您确定要放弃未保存的更改吗？"
 
 msgid "No events to display"
 msgstr "无事件可显示"
@@ -589,13 +589,13 @@ msgid "Write comment"
 msgstr "写备注"
 
 msgid "was blanked out and hidden by your last action"
-msgstr ""
+msgstr "被你的最后一个动作清空并隐藏"
 
 msgid "Notice"
-msgstr ""
+msgstr "注意"
 
 msgid "Close the notice"
-msgstr ""
+msgstr "关闭通知"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "为 {{programName}} 使用新的注册仪表板"
@@ -825,7 +825,7 @@ msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}的新报名"
 
 msgid "Save {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "保存 {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "保存{{trackedEntityName}}"

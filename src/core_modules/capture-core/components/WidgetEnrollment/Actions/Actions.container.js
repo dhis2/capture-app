@@ -3,6 +3,7 @@ import { useDataMutation } from '@dhis2/app-runtime';
 import React from 'react';
 import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';
+import { processErrorReports } from '../processErrorReports';
 
 const enrollmentUpdate = {
     resource: 'tracker?async=false&importStrategy=UPDATE',
@@ -17,13 +18,6 @@ const enrollmentDelete = {
     data: enrollment => ({
         enrollments: [enrollment],
     }),
-};
-const processErrorReports = (error) => {
-    // $FlowFixMe[prop-missing]
-    const errorReports = error?.details?.validationReport?.errorReports;
-    return errorReports?.length > 0
-        ? errorReports.reduce((acc, errorReport) => `${acc} ${errorReport.message}`, '')
-        : error.message;
 };
 
 export const Actions = ({

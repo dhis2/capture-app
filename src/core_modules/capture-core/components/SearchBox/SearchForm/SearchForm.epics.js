@@ -17,7 +17,6 @@ import {
     getTrackedEntityInstances,
 } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
-    type DataElement,
     dataElementTypes,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
@@ -29,11 +28,12 @@ import {
 } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { dataElementConvertFunctions } from './SearchFormElementConverter/SearchFormElementConverter';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
+import { escapeString } from '../../../utils/escapeString';
 
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
-    return [`${fieldId}:eq:${formValues[fieldId]}`];
+    return [`${fieldId}:eq:${escapeString(formValues[fieldId])}`];
 };
 
 const searchViaUniqueIdStream = ({
@@ -66,11 +66,6 @@ const searchViaUniqueIdStream = ({
         startWith(showLoadingViewOnSearchBox()),
         catchError(() => of(showErrorViewOnSearchBox())),
     );
-
-export const deriveFilterKeyword = (fieldId: string, attributes: Array<DataElement>): ("eq" | "like") => {
-    const hasOptionSet = Boolean(attributes.find(({ id, optionSet }) => (id === fieldId) && (optionSet)));
-    return hasOptionSet ? 'eq' : 'like';
-};
 
 const getFiltersForAttributesSearchQuery = (formValues, attributes) => Object.keys(formValues)
     .filter(fieldId => formValues[fieldId])

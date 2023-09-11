@@ -1,4 +1,5 @@
 // @flow
+import { typeof effectActions } from '@dhis2/rules-engine-javascript';
 import type { TrackerProgram } from 'capture-core/metaData';
 import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
@@ -21,7 +22,10 @@ export type Props = {|
     onEventClick: (eventId: string) => void,
     onUpdateTeiAttributeValues: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
     onLinkedRecordClick: LinkedRecordClick,
+    onUpdateEnrollmentDate: (enrollmentDate: string) => void,
+    onUpdateIncidentDate: (incidentDate: string) => void,
     onEnrollmentError: (message: string) => void,
+    ruleEffects?: Array<{id: string, type: $Values<effectActions>}>;
 |};
 
 export type PlainProps = {|

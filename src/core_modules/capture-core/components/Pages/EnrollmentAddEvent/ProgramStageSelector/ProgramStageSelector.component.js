@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button, Tooltip, spacers, spacersNum } from '@dhis2/ui';
+import { Button, spacers, spacersNum } from '@dhis2/ui';
+import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
 import { withStyles } from '@material-ui/core';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
@@ -25,52 +26,42 @@ const styles = {
 const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStage, onCancel, classes }) => (
     <div className={classes.container}>
         {programStages.map((programStage) => {
-            const disableStage = !programStage.repeatable && programStage.eventCount > 0;
+            const disableStage =
+                (!programStage.repeatable && programStage.eventCount > 0) || programStage.hiddenProgramStage;
             return (
                 <div
                     key={programStage.id}
                 >
-                    <Button
-                        className={classes.button}
-                        secondary
-                        disabled={disableStage}
-                        onClick={() => onSelectProgramStage(programStage.id)}
-                        dataTest={'program-stage-selector-button'}
-                        icon={
-                            programStage.style?.icon && (
-                                <div className={classes.icon}>
-                                    <NonBundledDhis2Icon
-                                        name={programStage.style?.icon}
-                                        color={programStage.style?.color}
-                                        width={24}
-                                        height={24}
-                                        cornerRadius={5}
-                                    />
-                                </div>
-                            )
-                        }
+                    <ConditionalTooltip
+                        content={i18n.t('You can\'t add any more {{ programStageName }} events', {
+                            programStageName: programStage.displayName,
+                            interpolation: { escapeValue: false },
+                        })}
+                        enabled={disableStage}
                     >
-                        <Tooltip
-                            content={i18n.t('You can’t add any more {{ programStageName }} events', {
-                                programStageName: programStage.displayName,
-                                interpolation: { escapeValue: false },
-                            })}
+                        <Button
+                            className={classes.button}
+                            secondary
+                            disabled={disableStage}
+                            onClick={() => onSelectProgramStage(programStage.id)}
+                            dataTest={'program-stage-selector-button'}
+                            icon={
+                                programStage.style?.icon && (
+                                    <div className={classes.icon}>
+                                        <NonBundledDhis2Icon
+                                            name={programStage.style?.icon}
+                                            color={programStage.style?.color}
+                                            width={24}
+                                            height={24}
+                                            cornerRadius={5}
+                                        />
+                                    </div>
+                                )
+                            }
                         >
-                            {({ onMouseOver, onMouseOut, ref }) => (
-                                <div
-                                    ref={(divRef) => {
-                                        if (divRef && disableStage) {
-                                            divRef.onmouseover = onMouseOver;
-                                            divRef.onmouseout = onMouseOut;
-                                            ref.current = divRef;
-                                        }
-                                    }}
-                                >
-                                    {programStage.displayName}
-                                </div>
-                            )}
-                        </Tooltip>
-                    </Button>
+                            {programStage.displayName}
+                        </Button>
+                    </ConditionalTooltip>
                 </div>
             );
         })}

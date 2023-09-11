@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withAskToCreateNew, withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
@@ -29,6 +29,11 @@ export const Validated = ({
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
+    const rulesEffectsHiddenProgram = useSelector(
+        ({ rulesEffectsHiddenProgramStageDesc }) =>
+            rulesEffectsHiddenProgramStageDesc && rulesEffectsHiddenProgramStageDesc[`${dataEntryId}-${itemId}`],
+    );
+    const hiddenProgramStage = rulesEffectsHiddenProgram && rulesEffectsHiddenProgram[stage.id];
 
     const rulesExecutionDependenciesClientFormatted =
         useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
@@ -127,6 +132,7 @@ export const Validated = ({
             programName={program.name}
             orgUnit={orgUnit}
             rulesExecutionDependenciesClientFormatted={rulesExecutionDependenciesClientFormatted}
+            hiddenProgramStage={hiddenProgramStage}
         />
     );
 };
