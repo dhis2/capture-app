@@ -1,13 +1,14 @@
 // @flow
 import { type DataElement, dataElementTypes } from '../../../../../metaData';
+import { escapeString } from '../../../../../utils/escapeString';
 
 type RangeValue = {
     from: number,
     to: number,
 }
 
-const equals = (value: any, elementId: string) => `${elementId}:eq:${value}`;
-const like = (value: any, elementId: string) => `${elementId}:like:${value}`;
+const equals = (value: any, elementId: string) => `${elementId}:eq:${escapeString(value)}`;
+const like = (value: any, elementId: string) => `${elementId}:like:${escapeString(value)}`;
 
 
 function convertRange(value: RangeValue, elementId: string) {

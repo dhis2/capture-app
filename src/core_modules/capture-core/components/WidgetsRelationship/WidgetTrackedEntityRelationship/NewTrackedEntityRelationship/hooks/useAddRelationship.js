@@ -26,7 +26,6 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
         { critical: true },
     );
 
-    // $FlowFixMe - Is there something wrong with the types?
     const { mutate } = useMutation(
         ({ apiData }) => dataEngine.mutate(addRelationshipMutation, {
             variables: {
