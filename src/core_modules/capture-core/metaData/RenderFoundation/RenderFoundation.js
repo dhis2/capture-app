@@ -125,10 +125,7 @@ export class RenderFoundation {
                 const elementsInSection = Array.from(section.elements.entries())
                     .reduce((acc, entry) => {
                         const dataEntryElement = entry[1];
-                        if (dataEntryElement instanceof FormFieldPluginConfig) {
-                            acc.push(...Array.from(dataEntryElement.fields.entries())
-                                .map(fieldEntry => fieldEntry[1]));
-                        } else if (dataEntryElement instanceof DataElement) {
+                        if (dataEntryElement instanceof DataElement) {
                             acc.push(dataEntryElement);
                         }
                         return acc;

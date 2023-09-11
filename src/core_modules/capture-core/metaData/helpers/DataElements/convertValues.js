@@ -21,6 +21,7 @@ function convertObjectValues(values: ValuesType, elementsById: { [id: string]: D
     return Object.keys(values).reduce((inProgressValues, id) => {
         const metaElement = elementsById[id];
         const rawValue = values[id];
+        if (rawValue && !metaElement) log.warn(`DataElement with id ${id} was not found in the programStage`);
         const convertedValue = metaElement ? metaElement.convertValue(rawValue, onConvert) : rawValue;
         return { ...inProgressValues, [id]: convertedValue };
     }, {});
