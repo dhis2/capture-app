@@ -4,6 +4,9 @@ import i18n from '@dhis2/d2-i18n';
 import { SelectionBoxes } from '../SelectionBoxes/SelectionBoxes.component';
 import { MultiSelectionCheckedIcon, MultiSelectionUncheckedIcon } from '../Icons';
 import type { OptionRendererInputData } from '../internal/SelectionBoxes/selectBoxes.types';
+import { withKeyboardNavigation } from '../HOC/withKeyboardNavigation';
+
+const SelectionBoxesWrapped = withKeyboardNavigation()(SelectionBoxes);
 
 type Props = {
     useRealTrueValue?: ?boolean, // instead of string as option values
@@ -34,7 +37,7 @@ export class TrueOnlyField extends Component<Props> {
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <SelectionBoxes
+                <SelectionBoxesWrapped
                     options={this.options}
                     {...passOnProps}
                 >
@@ -42,7 +45,7 @@ export class TrueOnlyField extends Component<Props> {
                         (optionData, isSelected) =>
                             (isSelected ? <MultiSelectionCheckedIcon /> : <MultiSelectionUncheckedIcon />)
                     }
-                </SelectionBoxes>
+                </SelectionBoxesWrapped>
             </div>
         );
     }

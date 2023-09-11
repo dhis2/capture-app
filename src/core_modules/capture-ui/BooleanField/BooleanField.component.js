@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { SelectionBoxes } from '../SelectionBoxes/SelectionBoxes.component';
 import type { OptionRendererInputData } from '../internal/SelectionBoxes/selectBoxes.types';
+import { withKeyboardNavigation } from '../HOC/withKeyboardNavigation';
+
+const SelectionBoxesWrapped = withKeyboardNavigation()(SelectionBoxes);
 
 type Props = {
     allowMultiple?: boolean,
@@ -38,7 +41,7 @@ export class BooleanField extends Component<Props> {
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <SelectionBoxes
+                <SelectionBoxesWrapped
                     options={this.options}
                     multiSelect={allowMultiple}
                     {...passOnProps}

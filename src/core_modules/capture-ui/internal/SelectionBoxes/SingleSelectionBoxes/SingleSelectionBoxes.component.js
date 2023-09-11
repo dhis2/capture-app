@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
+import type { KeyboardManager } from 'capture-ui/HOC/withKeyboardNavigation';
 import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from '../../../Icons';
 import { SingleSelectBox } from './SingleSelectBox/SingleSelectBox.component';
 import { withFocusHandler } from './SingleSelectBox/withFocusHandler';
@@ -28,12 +29,32 @@ type Props = {
     onSelect: (value: any) => void,
     onSetFocus?: () => void,
     onRemoveFocus?: () => void,
+    keyboardManager: KeyboardManager,
     disabled?: ?boolean,
 };
 
-export class SingleSelectionBoxes extends React.Component<Props> {
+type State = {
+    refList: Array<HTMLInputElement>,
+};
+
+export class SingleSelectionBoxes extends React.Component<Props, State> {
     static getFocusClass(classes: Object, isSelected: boolean) {
         return isSelected ? classes.focusSelected : classes.focusUnselected;
+    }
+
+    refList: Array<HTMLInputElement>;
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            refList: [],
+        };
+    }
+
+    onBlur = (event: SyntheticFocusEvent<HTMLInputElement>, value: any) => {
+        if (!this.state.refList.includes(event.relatedTarget)) {
+            this.props.keyboardManager.clear();
+            this.props.onSelect(value);
+        }
     }
 
     getCheckedClass = (iconSelected: ?string, iconDisabled?: string, isDisabled: ?boolean) => classNames(
@@ -85,29 +106,36 @@ export class SingleSelectionBoxes extends React.Component<Props> {
     }
 
     getOption(optionData: OptionRendererInputData, isSelected: boolean, index: number) {
-        const { orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus, disabled } = this.props;
+        const { orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus, keyboardManager, disabled } = this.props;
         const containerClass = orientation === orientations.HORIZONTAL ?
             defaultClasses.optionContainerHorizontal : defaultClasses.optionContainerVertical;
         const tabIndex = isSelected || (index === 0 && !value && value !== false && value !== 0) ? 0 : -1;
         const IconElement = this.getIconElement(optionData, isSelected);
+        const setInputRef = (element: HTMLInputElement) => {
+            this.setState((state) => {
+                state.refList[index] = element;
+            });
+        };
 
         return (
             <div
                 className={containerClass}
                 key={optionData.id || optionData.name}
             >
-                { /* $FlowSuppress */ }
                 {/* $FlowFixMe[prop-missing] automated comment */}
                 <SingleSelectBoxWrapped
+                    setInputRef={setInputRef}
                     optionData={optionData}
                     isSelected={isSelected}
                     tabIndex={tabIndex}
                     groupId={groupId}
                     onSelect={onSelect}
+                    onBlur={this.onBlur}
                     focusClass={classes && SingleSelectionBoxes.getFocusClass(classes, isSelected)}
                     unFocusClass={classes && classes.unFocus}
                     onSetFocus={onSetFocus}
                     onRemoveFocus={onRemoveFocus}
+                    keyboardManager={keyboardManager}
                     disabled={disabled}
                 >
                     {IconElement}

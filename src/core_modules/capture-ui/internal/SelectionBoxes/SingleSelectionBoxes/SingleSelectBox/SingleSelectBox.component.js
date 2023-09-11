@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import type { KeyboardManager } from 'capture-ui/HOC/withKeyboardNavigation';
 import classNames from 'classnames';
 import defaultClasses from './singleSelectBox.module.css';
 import type { OptionRendererInputData } from '../../selectBoxes.types';
@@ -10,45 +11,68 @@ type Props = {
     groupId: string,
     children: React.Node,
     onSelect: (value: any) => void,
+    onBlur: (event: SyntheticFocusEvent<HTMLInputElement>, value: any) => void,
     inputRef?: (instance: ?HTMLInputElement) => void,
     inFocus?: ?boolean,
     focusClass?: string,
     unFocusClass?: string,
+    keyboardManager: KeyboardManager,
     disabled?: ?boolean,
 };
 
-const keyboardKeys = {
+const keys = {
+    TAB: 'Tab',
     SPACE: ' ',
     ENTER: 'Enter',
+    ARROW_LEFT: 'ArrowLeft',
+    ARROW_RIGHT: 'ArrowRight',
+    ARROW_UP: 'ArrowUp',
+    ARROW_DOWN: 'ArrowDown',
 };
 
-export class SingleSelectBox extends React.Component<Props> {
-    isSpaceClickWhenSelected: ?boolean; // Pressing space when the radio is already selected, triggers both onKeyPress and onClick. This variable is used to prevent the onClick event in these circumstances.
-    handleSelect = () => {
-        if (this.isSpaceClickWhenSelected) {
-            this.isSpaceClickWhenSelected = false;
-            return;
-        }
+let ignoreFlag = false;
 
+export class SingleSelectBox extends React.Component<Props> {
+    handleSelect = () => {
         const { onSelect, optionData, isSelected } = this.props;
-        if (isSelected) {
-            onSelect(null);
-            return;
+        if (ignoreFlag) {
+            ignoreFlag = false;
+        } else {
+            onSelect(isSelected ? null : optionData.value);
         }
-        onSelect(optionData.value);
     }
 
-    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
-        if ([keyboardKeys.SPACE, keyboardKeys.ENTER].includes(event.key)) {
-            const { onSelect, optionData, isSelected } = this.props;
-            if (isSelected) {
-                this.isSpaceClickWhenSelected = event.key === keyboardKeys.SPACE;
-                onSelect(null);
-                return;
-            }
-            this.isSpaceClickWhenSelected = false;
-            onSelect(optionData.value);
+    handleKeyDown = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+        const { keyboardManager } = this.props;
+        if (!keyboardManager.managedKeys.includes(event.key)) {
+            return;
         }
+        const handleKeyPress = keyboardManager.keyDown(event.key);
+        if (!handleKeyPress) {
+            event.preventDefault();
+            return;
+        }
+        if (event.key == keys.TAB) {
+            keyboardManager.clear();
+            ignoreFlag = false;
+        } else if ([keys.SPACE, keys.ENTER].includes(event.key)) {
+            const { onSelect, optionData, isSelected } = this.props;
+            onSelect(isSelected ? null : optionData.value);
+            if (event.key === keys.SPACE) {
+                ignoreFlag = true;
+            }
+        } else {
+            ignoreFlag = true;
+        }
+    }
+
+    handleKeyUp = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+        this.props.keyboardManager.keyUp(event.key);
+    }
+
+    handleBlur = (event: SyntheticFocusEvent<HTMLInputElement>) => {
+        const { isSelected, optionData } = this.props;
+        this.props.onBlur(event, isSelected ? optionData.value : null);
     }
 
     render() {
@@ -62,6 +86,7 @@ export class SingleSelectBox extends React.Component<Props> {
             focusClass,
             unFocusClass,
             onSelect,
+            onBlur,
             disabled,
             ...passOnProps
         } = this.props;
@@ -82,8 +107,10 @@ export class SingleSelectBox extends React.Component<Props> {
                         checked={isSelected}
                         value={optionData.value}
                         onClick={this.handleSelect}
+                        onBlur={this.handleBlur}
+                        onKeyDown={this.handleKeyDown}
+                        onKeyUp={this.handleKeyUp}
                         onChange={() => {}}
-                        onKeyPress={this.handleKeyPress}
                         disabled={disabled}
                         {...passOnProps}
                     />
