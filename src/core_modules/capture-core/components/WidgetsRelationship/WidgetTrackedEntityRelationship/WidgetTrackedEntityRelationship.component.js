@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { WidgetTrackedEntityRelationshipProps } from './WidgetTrackedEntityRelationship.types';
 import { RelationshipsWidget } from '../common/RelationshipsWidget';
@@ -21,8 +21,12 @@ export const WidgetTrackedEntityRelationship = ({
     renderTrackedEntitySearch,
     renderTrackedEntityRegistration,
 }: WidgetTrackedEntityRelationshipProps) => {
-    const { data: relationships, isError } = useRelationships(teiId, RelationshipSearchEntities.TRACKED_ENTITY);
-    const { data: trackedEntityTypeName } = useTrackedEntityTypeName(trackedEntityTypeId);
+    const { data: relationships, isError, isLoading: isLoadingRelationships } = useRelationships(teiId, RelationshipSearchEntities.TRACKED_ENTITY);
+    const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
+
+    const isLoading = useMemo(() => isLoadingRelationships || isLoadingTEType,
+        [isLoadingRelationships, isLoadingTEType],
+    );
 
     if (isError) {
         return (
@@ -38,6 +42,7 @@ export const WidgetTrackedEntityRelationship = ({
                 trackedEntityTypeName,
                 interpolation: { escapeValue: false },
             })}
+            isLoading={isLoading}
             relationships={relationships}
             cachedRelationshipTypes={cachedRelationshipTypes}
             sourceId={teiId}

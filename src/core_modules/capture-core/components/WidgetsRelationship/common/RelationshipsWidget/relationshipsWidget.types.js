@@ -7,6 +7,7 @@ export type Props = $ReadOnly<{|
     title: string,
     relationships?: Array<InputRelationshipData>,
     cachedRelationshipTypes?: RelationshipTypes,
+    isLoading: boolean,
     sourceId: string,
     onLinkedRecordClick: LinkedRecordClick,
     children: (relationshipTypes: RelationshipTypes) => Node,

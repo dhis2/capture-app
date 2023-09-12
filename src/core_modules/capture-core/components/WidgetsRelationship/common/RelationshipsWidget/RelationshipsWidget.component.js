@@ -7,6 +7,7 @@ import { useGroupedLinkedEntities } from './useGroupedLinkedEntities';
 import { useRelationshipTypes } from './useRelationshipTypes';
 import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
 import type { Props, StyledProps } from './relationshipsWidget.types';
+import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 
 const styles = {
     header: {
@@ -21,6 +22,7 @@ const styles = {
 const RelationshipsWidgetPlain = ({
     title,
     relationships,
+    isLoading,
     cachedRelationshipTypes,
     sourceId,
     onLinkedRecordClick,
@@ -30,6 +32,27 @@ const RelationshipsWidgetPlain = ({
     const [open, setOpenStatus] = useState(true);
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships);
+
+    if (isLoading) {
+        return (
+            <Widget
+                header={(
+                    <div className={classes.header}>
+                        <span className={classes.icon}>
+                            <IconLink24 />
+                        </span>
+                    </div>
+                )}
+                onOpen={() => setOpenStatus(true)}
+                onClose={() => setOpenStatus(false)}
+                open={open}
+            >
+                <LoadingMaskElementCenter
+                    containerStyle={{ height: '100px', marginBottom: '50px' }}
+                />
+            </Widget>
+        );
+    }
 
     return (
         <div
