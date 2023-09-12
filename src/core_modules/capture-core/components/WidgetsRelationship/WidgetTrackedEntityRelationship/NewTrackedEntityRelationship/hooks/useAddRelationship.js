@@ -26,6 +26,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
         { critical: true },
     );
 
+    // $FlowFixMe
     const { mutate } = useMutation(
         ({ apiData }) => dataEngine.mutate(addRelationshipMutation, {
             variables: {

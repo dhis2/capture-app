@@ -5,6 +5,7 @@ import type { WidgetTrackedEntityRelationshipProps } from './WidgetTrackedEntity
 import { RelationshipsWidget } from '../common/RelationshipsWidget';
 import { RelationshipSearchEntities, useRelationships } from '../common/useRelationships';
 import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
+import { useTrackedEntityTypeName } from './hooks/useTrackedEntityTypeName';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,
@@ -21,6 +22,7 @@ export const WidgetTrackedEntityRelationship = ({
     renderTrackedEntityRegistration,
 }: WidgetTrackedEntityRelationshipProps) => {
     const { data: relationships, isError } = useRelationships(teiId, RelationshipSearchEntities.TRACKED_ENTITY);
+    const { data: trackedEntityTypeName } = useTrackedEntityTypeName(trackedEntityTypeId);
 
     if (isError) {
         return (
@@ -32,7 +34,10 @@ export const WidgetTrackedEntityRelationship = ({
 
     return (
         <RelationshipsWidget
-            title={i18n.t("TEI's Relationships")}
+            title={i18n.t('{{trackedEntityTypeName}} relationships', {
+                trackedEntityTypeName,
+                interpolation: { escapeValue: false },
+            })}
             relationships={relationships}
             cachedRelationshipTypes={cachedRelationshipTypes}
             sourceId={teiId}

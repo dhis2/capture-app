@@ -13,7 +13,9 @@ import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 import { EnrollmentQuickActions } from './EnrollmentQuickActions';
-import { TrackedEntityRelationshipsWrapper } from '../../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
+import {
+    TrackedEntityRelationshipsWrapper,
+} from '../../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 import { AddRelationshipRefWrapper } from '../../EnrollmentEditEvent/AddRelationshipRefWrapper';
 
 const getStyles = () => ({
@@ -90,7 +92,8 @@ export const EnrollmentPageDefaultPlain = ({
                         <EnrollmentQuickActions
                             stages={stages}
                             events={events}
-                        ruleEffects={ruleEffects}/>
+                            ruleEffects={ruleEffects}
+                        />
                         <WidgetStagesAndEvents
                             programId={program.id}
                             stages={stages}
@@ -98,7 +101,8 @@ export const EnrollmentPageDefaultPlain = ({
                             onViewAll={onViewAll}
                             onCreateNew={onCreateNew}
                             onEventClick={onEventClick}
-                        ruleEffects={ruleEffects}/>
+                            ruleEffects={ruleEffects}
+                        />
                     </div>
                     <div className={classes.rightColumn}>
                         {addRelationShipContainerElement &&

@@ -5,15 +5,19 @@ import {
     DataTableBody,
     DataTableRow,
     DataTableCell,
+    Tooltip,
 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { convertServerToClient, convertClientToList } from '../../../../converters';
 import type { Props, StyledProps } from './linkedEntityTableBody.types';
 
 const styles = {
     row: {
-        '&:hover': {
-            cursor: 'pointer',
-        },
+        cursor: 'pointer',
+    },
+    rowDisabled: {
+        cursor: 'not-allowed',
+        opacity: 0.5,
     },
 };
 
@@ -27,28 +31,54 @@ const LinkedEntityTableBodyPlain = ({
     <DataTableBody>
         {
             linkedEntities
-                .map(({ id: entityId, values, baseValues, navigation }) => (
-                    <DataTableRow key={entityId}>
-                        {
-                            // $FlowFixMe flow doesn't like destructering
-                            columns.map(({ id, type, convertValue }) => {
-                                const value = type ?
-                                    convertClientToList(convertServerToClient(values[id], type), type) :
-                                    convertValue(baseValues?.[id] ?? context.display[id]);
+                .map(({ id: entityId, values, baseValues, navigation }) => {
+                    const { pendingApiResponse } = baseValues || {};
+                    return (
+                        <DataTableRow
+                            key={entityId}
+                            className={pendingApiResponse ? classes.rowDisabled : classes.row}
+                        >
+                            {
+                                // $FlowFixMe flow doesn't like destructering
+                                columns.map(({ id, type, convertValue }) => {
+                                    const value = type ?
+                                        convertClientToList(convertServerToClient(values[id], type), type) :
+                                        convertValue(baseValues?.[id] ?? context.display[id]);
 
-                                return (
-                                    <DataTableCell
-                                        className={classes.row}
-                                        key={`${entityId}-${id}`}
-                                        // $FlowFixMe
-                                        onClick={() => onLinkedRecordClick({ ...context.navigation, ...navigation })}
-                                    >
-                                        {value}
-                                    </DataTableCell>
-                                );
-                            })}
-                    </DataTableRow>
-                ))
+                                    return (
+                                        <Tooltip
+                                            key={`${entityId}-${id}`}
+                                            content={i18n.t('To open this relationship, please wait until saving is complete')}
+                                            closeDelay={50}
+                                        >
+                                            {({ onMouseOver, onMouseOut, ref }) => (
+                                                <DataTableCell
+                                                    className={classes.row}
+                                                    key={`${entityId}-${id}`}
+                                                    // $FlowFixMe flow doesn't like destructering
+                                                    onClick={() => !pendingApiResponse && onLinkedRecordClick({ ...context.navigation, ...navigation })}
+                                                    ref={(tableCell) => {
+                                                        if (tableCell) {
+                                                            if (pendingApiResponse) {
+                                                                tableCell.onmouseover = onMouseOver;
+                                                                tableCell.onmouseout = onMouseOut;
+                                                                ref.current = tableCell;
+                                                            } else {
+                                                                tableCell.onmouseover = null;
+                                                                tableCell.onmouseout = null;
+                                                            }
+                                                        }
+                                                    }}
+                                                >
+                                                    {value}
+                                                </DataTableCell>
+                                            )}
+                                        </Tooltip>
+                                    );
+                                })}
+                        </DataTableRow>
+                    );
+                })
         }
     </DataTableBody>
 );

@@ -69,6 +69,7 @@ const NewTrackedEntityRelationshipPlain = ({
 
             const clientData = {
                 createdAt: new Date().toISOString(),
+                pendingApiResponse: true,
                 ...apiData,
             };
 
@@ -108,6 +109,7 @@ const NewTrackedEntityRelationshipPlain = ({
         const clientData = {
             relationshipType: relationshipId,
             createdAt: new Date().toISOString(),
+            pendingApiResponse: true,
             ...relationshipData,
             [targetSide.toLowerCase()]: {
                 trackedEntity: {

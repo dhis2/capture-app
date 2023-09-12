@@ -80,7 +80,7 @@ const getContext = ({ relationshipEntity, program, programStage, trackedEntityTy
     };
 };
 
-const getEventData = ({ dataValues, event, program: programId }, relatonshipCreatedAt): LinkedEntityData => {
+const getEventData = ({ dataValues, event, program: programId }, relatonshipCreatedAt, pendingApiResponse): LinkedEntityData => {
     const values = dataValues.reduce((acc, dataValue) => {
         acc[dataValue.dataElement] = dataValue.value;
         return acc;
@@ -91,6 +91,7 @@ const getEventData = ({ dataValues, event, program: programId }, relatonshipCrea
         values,
         baseValues: {
             relatonshipCreatedAt,
+            pendingApiResponse,
         },
         navigation: {
             eventId: event,
@@ -99,7 +100,7 @@ const getEventData = ({ dataValues, event, program: programId }, relatonshipCrea
     };
 };
 
-const getTrackedEntityData = ({ attributes, trackedEntity }, relatonshipCreatedAt): LinkedEntityData => {
+const getTrackedEntityData = ({ attributes, trackedEntity }, relatonshipCreatedAt, pendingApiResponse?: boolean): LinkedEntityData => {
     const values = attributes.reduce((acc, attribute) => {
         acc[attribute.attribute] = attribute.value;
         return acc;
@@ -109,6 +110,7 @@ const getTrackedEntityData = ({ attributes, trackedEntity }, relatonshipCreatedA
         id: trackedEntity,
         values,
         baseValues: {
+            pendingApiResponse,
             relatonshipCreatedAt,
         },
         navigation: {
@@ -117,13 +119,13 @@ const getTrackedEntityData = ({ attributes, trackedEntity }, relatonshipCreatedA
     };
 };
 
-const getLinkedEntityData = (apiLinkedEntity, relatonshipCreatedAt) => {
+const getLinkedEntityData = (apiLinkedEntity, relatonshipCreatedAt, pendingApiResponse) => {
     if (apiLinkedEntity.trackedEntity) {
-        return getTrackedEntityData(apiLinkedEntity.trackedEntity, relatonshipCreatedAt);
+        return getTrackedEntityData(apiLinkedEntity.trackedEntity, relatonshipCreatedAt, pendingApiResponse);
     }
 
     if (apiLinkedEntity.event) {
-        return getEventData(apiLinkedEntity.event, relatonshipCreatedAt);
+        return getEventData(apiLinkedEntity.event, relatonshipCreatedAt, pendingApiResponse);
     }
 
     if (apiLinkedEntity.enrollment) {
@@ -165,6 +167,7 @@ export const useGroupedLinkedEntities = (
                 relationshipType: relationshipTypeId,
                 from: fromEntity,
                 to: toEntity,
+                pendingApiResponse,
                 createdAt: relationshipCreatedAt,
             } = relationship;
 
@@ -181,7 +184,7 @@ export const useGroupedLinkedEntities = (
                 return accGroupedLinkedEntities;
             }
 
-            const linkedEntityData = getLinkedEntityData(apiLinkedEntity, relationshipCreatedAt);
+            const linkedEntityData = getLinkedEntityData(apiLinkedEntity, relationshipCreatedAt, pendingApiResponse);
             if (!linkedEntityData) {
                 return accGroupedLinkedEntities;
             }

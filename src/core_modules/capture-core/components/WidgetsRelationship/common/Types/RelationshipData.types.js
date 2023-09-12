@@ -26,6 +26,7 @@ export type InputRelationshipData = {
     relationship: string,
     createdAt: string,
     bidirectional: string,
+    pendingApiResponse?: boolean,
     from: ApiLinkedEntity,
     to: ApiLinkedEntity,
 }
