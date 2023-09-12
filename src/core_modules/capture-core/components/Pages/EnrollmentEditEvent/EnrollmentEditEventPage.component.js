@@ -171,6 +171,7 @@ const EnrollmentEditEventPagePain = ({
                             teiId={teiId}
                             enrollmentId={enrollmentId}
                             programId={programId}
+                            readOnlyMode
                             onDelete={onDelete}
                             onAddNew={onAddNew}
                             onError={onEnrollmentError}

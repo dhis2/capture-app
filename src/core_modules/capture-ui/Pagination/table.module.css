@@ -1,0 +1,19 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.paginationRowsPerPageElementContainer {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.paginationRowsPerPageElement {
+    margin-left: 20px;
+}
+
+.paginationDisplayRowsContainer {
+    margin-right: 20px;
+}

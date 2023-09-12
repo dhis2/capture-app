@@ -31,6 +31,7 @@ test('expressions with d2Functions in tracker program', () => {
             { id: 'Tx4gHcLselM', displayContent: 'd2:oizp( 10000000 ) = ', data: 'd2:oizp( 10000000 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' },
             { id: 'f3MrrcCf1z2', displayContent: 'd2:modulus( 12 , 100 ) = ', data: 'd2:modulus( 12 , 100 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' },
             { id: 'Eeb7Ixr4Pv6', displayContent: 'd2:floor((5+5) / 2) = ', data: 'd2:floor((5+5) / 2)', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' },
+            { id: 'nKNmayYigcy', programStageId: 'PUZaKR0Jh2k', programRuleActionType: 'HIDEPROGRAMSTAGE' },
         ],
     }];
     const programRulesVariables = [];
@@ -72,5 +73,6 @@ test('expressions with d2Functions in tracker program', () => {
         { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Tx4gHcLselM', message: 'd2:oizp( 10000000 ) =  1' } },
         { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'f3MrrcCf1z2', message: 'd2:modulus( 12 , 100 ) =  12' } },
         { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Eeb7Ixr4Pv6', message: 'd2:floor((5+5) / 2) =  5' } },  // check double parentheses
+        { type: 'HIDEPROGRAMSTAGE', id: 'PUZaKR0Jh2k' },
     ]);
 });

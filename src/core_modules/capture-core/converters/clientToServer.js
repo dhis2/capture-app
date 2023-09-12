@@ -4,8 +4,8 @@ import { dataElementTypes } from '../metaData';
 import { stringifyNumber } from './common/stringifyNumber';
 
 type RangeValue = {
-    from: any,
-    to: any,
+    from: number,
+    to: number,
 }
 
 
