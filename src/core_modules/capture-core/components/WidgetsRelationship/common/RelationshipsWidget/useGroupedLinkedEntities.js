@@ -17,7 +17,7 @@ const getFallbackFieldsByRelationshipEntity = {
         displayName: i18n.t('Type'),
         convertValue: trackedEntityTypeName => trackedEntityTypeName,
     }, {
-        id: 'relatonshipCreatedAt',
+        id: 'relationshipCreatedAt',
         displayName: i18n.t('Created date'),
         convertValue: createdDate => convertClientToList(
             convertServerToClient(createdDate, dataElementTypes.DATE), dataElementTypes.DATE,
@@ -29,7 +29,7 @@ const getFallbackFieldsByRelationshipEntity = {
         convertValue: programStageName => programStageName,
     },
     {
-        id: 'relatonshipCreatedAt',
+        id: 'relationshipCreatedAt',
         displayName: i18n.t('Created date'),
         convertValue: createdDate => convertClientToList(
             convertServerToClient(createdDate, dataElementTypes.DATE), dataElementTypes.DATE,
@@ -80,7 +80,7 @@ const getContext = ({ relationshipEntity, program, programStage, trackedEntityTy
     };
 };
 
-const getEventData = ({ dataValues, event, program: programId }, relatonshipCreatedAt, pendingApiResponse): LinkedEntityData => {
+const getEventData = ({ dataValues, event, program: programId }, relationshipCreatedAt, pendingApiResponse): LinkedEntityData => {
     const values = dataValues.reduce((acc, dataValue) => {
         acc[dataValue.dataElement] = dataValue.value;
         return acc;
@@ -90,7 +90,7 @@ const getEventData = ({ dataValues, event, program: programId }, relatonshipCrea
         id: event,
         values,
         baseValues: {
-            relatonshipCreatedAt,
+            relationshipCreatedAt,
             pendingApiResponse,
         },
         navigation: {
@@ -100,7 +100,7 @@ const getEventData = ({ dataValues, event, program: programId }, relatonshipCrea
     };
 };
 
-const getTrackedEntityData = ({ attributes, trackedEntity }, relatonshipCreatedAt, pendingApiResponse?: boolean): LinkedEntityData => {
+const getTrackedEntityData = ({ attributes, trackedEntity }, relationshipCreatedAt, pendingApiResponse?: boolean): LinkedEntityData => {
     const values = attributes.reduce((acc, attribute) => {
         acc[attribute.attribute] = attribute.value;
         return acc;
@@ -111,7 +111,7 @@ const getTrackedEntityData = ({ attributes, trackedEntity }, relatonshipCreatedA
         values,
         baseValues: {
             pendingApiResponse,
-            relatonshipCreatedAt,
+            relationshipCreatedAt,
         },
         navigation: {
             trackedEntityId: trackedEntity,
@@ -119,13 +119,13 @@ const getTrackedEntityData = ({ attributes, trackedEntity }, relatonshipCreatedA
     };
 };
 
-const getLinkedEntityData = (apiLinkedEntity, relatonshipCreatedAt, pendingApiResponse) => {
+const getLinkedEntityData = (apiLinkedEntity, relationshipCreatedAt, pendingApiResponse) => {
     if (apiLinkedEntity.trackedEntity) {
-        return getTrackedEntityData(apiLinkedEntity.trackedEntity, relatonshipCreatedAt, pendingApiResponse);
+        return getTrackedEntityData(apiLinkedEntity.trackedEntity, relationshipCreatedAt, pendingApiResponse);
     }
 
     if (apiLinkedEntity.event) {
-        return getEventData(apiLinkedEntity.event, relatonshipCreatedAt, pendingApiResponse);
+        return getEventData(apiLinkedEntity.event, relationshipCreatedAt, pendingApiResponse);
     }
 
     if (apiLinkedEntity.enrollment) {

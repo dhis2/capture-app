@@ -25,7 +25,7 @@ export type LinkedEntityData = $ReadOnly<{|
     id: string,
     values: $ReadOnly<{| [id: string]: ?string |}>,
     baseValues?: {
-        relatonshipCreatedAt?: string,
+        relationshipCreatedAt?: string,
         pendingApiResponse?: boolean,
     },
     navigation?: {
