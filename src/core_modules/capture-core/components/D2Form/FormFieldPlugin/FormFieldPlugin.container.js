@@ -6,11 +6,13 @@ import { usePluginMessages } from './hooks/usePluginMessages';
 import { usePluginCallbacks } from './hooks/usePluginCallbacks';
 import { usePluginValues } from './hooks/usePluginValues';
 import { formatPluginConfig } from './formatPluginConfig';
+import { useLocationQuery } from '../../../utils/routing';
 
 export const FormFieldPlugin = (props: ContainerProps) => {
     const { pluginSource, fieldsMetadata, formId, onUpdateField, pluginContext } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
+    const { programId, orgUnitId } = useLocationQuery();
 
     // Plugin related functionality and feedback
     const { pluginValues } = usePluginValues(formId, metadataByPluginId, pluginContext);
@@ -39,6 +41,8 @@ export const FormFieldPlugin = (props: ContainerProps) => {
 
     return (
         <FormFieldPluginComponent
+            orgUnitId={orgUnitId}
+            programId={programId}
             pluginSource={pluginSource}
             fieldsMetadata={formattedMetadata}
             values={pluginValues}
@@ -50,3 +54,4 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         />
     );
 };
+
