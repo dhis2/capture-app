@@ -22,6 +22,7 @@ export const enrollmentPageActionTypes = {
 
     DELETE_ENROLLMENT: 'EnrollmentPage.DeleteEnrollment',
     UPDATE_TEI_DISPLAY_NAME: 'EnrollmentPage.UpdateTeiDisplayName',
+    UPDATE_ENROLLMENT_DATE: 'EnrollmentPage.UpdateEnrollmentDate',
 };
 
 export const fetchEnrollmentPageInformation = () =>
@@ -73,3 +74,6 @@ export const updateTeiDisplayName = (teiDisplayName: string) =>
     actionCreator(enrollmentPageActionTypes.UPDATE_TEI_DISPLAY_NAME)({
         teiDisplayName,
     });
+
+export const updateEnrollmentDate = ({ enrollmentId, enrollmentDate }: { enrollmentId: string, enrollmentDate: string }) =>
+    actionCreator(enrollmentPageActionTypes.UPDATE_ENROLLMENT_DATE)({ enrollmentId, enrollmentDate });
