@@ -1,0 +1,864 @@
+# 
+# Translators:
+# Yury Rogachev <yury@dhis2.org>, 2021
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2021-11-29T10:05:06.420Z\n"
+"PO-Revision-Date: 2020-12-22 22:12+0000\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
+"Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uz@Latn\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Choose one or more dates..."
+msgstr "Bir yoki bir necha sanalarni tanlang..."
+
+msgid "Choose a date..."
+msgstr "Sanani tanlang ..."
+
+msgid "Today"
+msgstr "Bugun"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
+"Buning mumkin boʼlgan sabablari quyidagilar; brauzer yoki rejim (masalan, "
+"maxfiylik rejimi) qoʼllab quvvatlanmasligi. Tafsilotlar uchun jurnalga "
+"qarang."
+
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr ""
+"Siz ayni shu domenda Nazorat Ilovasining boshqa versiyasini ochdingiz. "
+"Hozirda Nazorat Ilovasi faqat bitta versiyani bir vaqtda (bir xil "
+"ddomendagi) ishlashini qoʼllab quvvatlaydi. Ushbu versiyani qayta "
+"ishlatmoqchi boʼlsangiz, Iltimos, sahifani yangilang, ammo boshqa versiyalar"
+" yopilishini unutmang."
+
+msgid "Columns to show in table"
+msgstr "Jadvalda koʼrsatiladigan ustunlar"
+
+msgid "Column"
+msgstr "Ustun"
+
+msgid "This value is validating"
+msgstr "Ushbu qiymat tasdiqlanmoqda"
+
+msgid "Async field update failed"
+msgstr "Аsinxron maydon yangilanishi amalga oshmadi"
+
+msgid "A value is required"
+msgstr "Qiymat talab qilinadi"
+
+msgid "Please provide a valid number"
+msgstr "Iltimos, toʼgʼri raqamni koʼrsating"
+
+msgid "Please provide a valid integer"
+msgstr "Iltimos, toʼgʼri butun sonni koʼrsating"
+
+msgid "Please provide a positive integer"
+msgstr "Iltimos, butun musbat sonni koʼrsating"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Iltimos, Nol yoki butun musbat sonni koʼrsating"
+
+msgid "Please provide a negative integer"
+msgstr "Iltimos, butun manfiy sonni koʼrsating"
+
+msgid "Please provide a valid date"
+msgstr "Iltimos, toʼgʼri sanani koʼrsating"
+
+msgid "A date in the future is not allowed"
+msgstr "Kelajakdagi sana qabul qilinmaydi"
+
+msgid "Please provide a valid date and time"
+msgstr "Iltimos, tegishli sana va vaqtni koʼrsating"
+
+msgid "Please provide a valid time"
+msgstr "Iltimos, toʼgʼri vaqtni koʼrsating"
+
+msgid "Please provide a valid percentage"
+msgstr "Iltimos, tegishli foizni taqdim eting"
+
+msgid "Please provide a valid url"
+msgstr "Iltimos, haqiqiy URL manzilni koʼrsating"
+
+msgid "Please provide a valid email address"
+msgstr "Iltimos, amaldagi ye-pochta manzilini koʼrsating"
+
+msgid "Please provide a valid age"
+msgstr "Iltimos, toʼgʼri yoshni koʼrsating"
+
+msgid "Please provide a valid phone number"
+msgstr "Iltimos, toʼgʼri telefon raqamini koʼrsating"
+
+msgid "Please provide a valid organisation unit"
+msgstr "Iltimos, toʼgʼri tashkiliy boʼlimni koʼrsating"
+
+msgid "Please provide valid coordinates"
+msgstr "Iltimos, toʼgʼri koordinatalarni koʼrsating"
+
+msgid "This value already exists"
+msgstr "Bu qiymat allaqachon mavjud"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "Sana \"gacha\" katta boʼlishi mumkin emas sana \"dan\""
+
+msgid "Checking..."
+msgstr "Tekshirilmoqda..."
+
+msgid "Area"
+msgstr "Maydon"
+
+msgid "Coordinate"
+msgstr "Muvofiqlashtirish"
+
+msgid "Enrollment"
+msgstr "Roʼyxatga olish"
+
+msgid "A future date is not allowed"
+msgstr "Kelajakdagi sana tanloviga ruxsat berilmaydi"
+
+msgid "An error has occured. See log for details"
+msgstr "Xatolik yuz berdi. Tafsilotlarni jurnaldan koʼring."
+
+msgid "Cancel"
+msgstr "Bekor qilish"
+
+msgid "Unsaved changes"
+msgstr "Saqlanmagan oʼzgartirishlar"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Аgarda ushbu sahifani tark etsangiz, hodisa/tadbir boʼyicha kiritgan barcha "
+"oʼzgartirishlar saqlanmaydi."
+
+msgid "Yes, discard"
+msgstr "Ha, rad etilsin"
+
+msgid "No, stay here"
+msgstr "Yoʼq, sahifada qolish"
+
+msgid "validation failed"
+msgstr "Tasdiqlash amalga oshmadi"
+
+msgid "Errors"
+msgstr "Xatoliklar"
+
+msgid "Feedback"
+msgstr "Qayta aloqa"
+
+msgid "Indicators"
+msgstr "Indikatorlar"
+
+msgid "Warnings"
+msgstr "Ogohlantirishlar"
+
+msgid "search group result could not be retrieved"
+msgstr "Guruh qidiruvi natijasini olish imkoni yoʼq"
+
+msgid "Complete"
+msgstr "Toʼldirish"
+
+msgid "Warnings found"
+msgstr "Ogohlantirishlar topildi"
+
+msgid "Abort"
+msgstr "Аbort"
+
+msgid "Back to form"
+msgstr "Shaklga qaytish"
+
+msgid "Save anyway"
+msgstr "Nima boʼlganda ham saqlash"
+
+msgid "Validation errors and warnings"
+msgstr "Tasdiqlash xatoliklari va ogohlantirishlari"
+
+msgid "Validation errors"
+msgstr "Tasdiqlashda xatoliklar"
+
+msgid "Validation warnings"
+msgstr "Tasdiqlash toʼgʼrisida ogohlantirishlar"
+
+msgid "Some operations are still runnning. Please wait.."
+msgstr "Baʼzi operatsiyalar hali ham bajarilmoqda. Iltimos, kuting ..."
+
+msgid "Operations running"
+msgstr "Аmaliyotlar bajarilmoqda"
+
+msgid "Sort"
+msgstr "Saralash"
+
+msgid "No events to display"
+msgstr "Koʼrsatiladigan hech qanday hodisa/tadbir yoʼq"
+
+msgid "Data for offline list not present"
+msgstr "Offlayn roʼyxat uchun maʼlumotlar mavjud emas"
+
+msgid "Close"
+msgstr "Yopmoq"
+
+msgid "Please select the user"
+msgstr "Iltimos, foydalanuvchini tanlang"
+
+msgid "Search for user"
+msgstr "Foydalanuvchini izlash"
+
+msgid "Me"
+msgstr "Men"
+
+msgid "Anyone"
+msgstr "Kimdir"
+
+msgid "None"
+msgstr "Yoʼq"
+
+msgid "Select user"
+msgstr "Foydalanuvchini tanlang"
+
+msgid "to"
+msgstr "ga"
+
+msgid "From"
+msgstr "Dan"
+
+msgid "To"
+msgstr "Kimga"
+
+msgid "This week"
+msgstr "Ushbu hafta"
+
+msgid "This month"
+msgstr "Ushbu oy"
+
+msgid "This Year"
+msgstr ""
+
+msgid "Last week"
+msgstr "Oxirgi hafta"
+
+msgid "Last month"
+msgstr "Oxirgi oy"
+
+msgid "Last 3 months"
+msgstr "Oxirgi 3 oy"
+
+msgid "Custom range"
+msgstr "Maxsus diapazon"
+
+msgid "Max"
+msgstr "Maksimum"
+
+msgid "Min"
+msgstr "Minimum"
+
+msgid "Contains text"
+msgstr "Matnni oʼz ichiga oladi"
+
+msgid "Yes"
+msgstr "Ha"
+
+msgid "mm/dd/yyyy"
+msgstr "kun/oy/yil"
+
+msgid "Years"
+msgstr "Yillar"
+
+msgid "Months"
+msgstr "Oylar"
+
+msgid "Days"
+msgstr "Kunlar"
+
+msgid "Uploading file"
+msgstr "Fayl yuklanmoqda"
+
+msgid "selected"
+msgstr "tanlangan"
+
+msgid "Delete"
+msgstr "Oʼchirib tashlash"
+
+msgid "Select file"
+msgstr "Faylni tanlash"
+
+msgid "No"
+msgstr "Yoʼq"
+
+msgid "Uploading image"
+msgstr "Rasm yuklanmoqda"
+
+msgid "Select image"
+msgstr "Rasmni tanlang"
+
+msgid "Search"
+msgstr "Izlash"
+
+msgid "Clear"
+msgstr "Tozalash"
+
+msgid "No results"
+msgstr "Natija yoʼq"
+
+msgid "start typing to search"
+msgstr "qidirish uchun yozishni boshlang"
+
+msgid "suggestions could not be retrieved"
+msgstr "takliflar qabul qilinmadi"
+
+msgid "No items to display"
+msgstr "Koʼrsatiladigan axborot yoʼq"
+
+msgid "Could not get organisation unit"
+msgstr "Tashkiliy boʼlimni olib boʼlmadi"
+
+msgid "Program doesn't exist"
+msgstr "Dastur mavjud emas"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+"Tanlangan dastur tanlangan roʼyxatdan olinadigan boʼlim uchun yaroqsiz"
+
+msgid "New {{typeName}}"
+msgstr "Yangi {{typeName}}"
+
+msgid "New"
+msgstr "Yangi"
+
+msgid "Start again"
+msgstr ""
+
+msgid "Find"
+msgstr "Toping"
+
+msgid "Selected registering unit"
+msgstr "Boʼlimni tanlangan roʼyxatga olish"
+
+msgid "Start Again"
+msgstr "Qayta boshlang"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Ishonchingiz komilmi? Barcha saqlanmagan maʼlumotlar yoʼqoladi."
+
+msgid "Accept"
+msgstr "Qabul qiling"
+
+msgid "Registering Organisation Unit"
+msgstr "Tanlangan boʼlim roʼyxatdan oʼtkazilmoqda"
+
+msgid "Select"
+msgstr "Tanlang"
+
+msgid "Selected Program"
+msgstr "Tanlangan dastur"
+
+msgid "Some programs are being filtered."
+msgstr "Baʼzi dasturlar Filtrlanmoqda."
+
+msgid "Show all"
+msgstr "Barchaga koʼrsatish"
+
+msgid "Program"
+msgstr "Programma"
+
+msgid "Select program"
+msgstr "Dasturni tanlash"
+
+msgid "No programs available."
+msgstr "Hech qanday dastur mavjud emas."
+
+msgid "Online"
+msgstr "Onlayn"
+
+msgid "Offline"
+msgstr "Offlayn"
+
+msgid "Syncing"
+msgstr "Sinxronlashmoqda"
+
+msgid "Add comment"
+msgstr "Izoh qoʼshish"
+
+msgid "You dont have access to write comments"
+msgstr "Fikr yozish huquqiga ega emassiz"
+
+msgid "Write comment"
+msgstr "Fikr yozing"
+
+msgid "Complete event"
+msgstr ""
+
+msgid "Basic info"
+msgstr "Аsosiy maʼlumot"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Comments"
+msgstr "Izohlar"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr ""
+"Iltimos, hodisa/tadbirni saqlashdan oldin sharh yozing yoki bekor qiling"
+
+msgid "No write access"
+msgstr "Yozuv kiritish uchun ruxsat yoʼq"
+
+msgid "Save"
+msgstr "Saqlash"
+
+msgid "Show all events"
+msgstr "Barcha hodisa/tadbirlarni koʼrsatish"
+
+msgid "Edit event"
+msgstr "Hodisa/tadbirni tahrirlang"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+"Hodisa/tadbirni yuklab boʼlmadi. Uning mavjudligiga ishonchingiz komilmi?"
+
+msgid "Event could not be loaded"
+msgstr "Hodisa/tadbirni yuklab boʼlmadi"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
+
+msgid "View event info"
+msgstr ""
+
+msgid "Delete event"
+msgstr "Hodisa/tadbirni oʼchirib tashlash"
+
+msgid "Update"
+msgstr "Yangilash"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} dan {{toDate}} ga"
+
+msgid "after or equal to {{date}}"
+msgstr "{{date}} dan keyin yoki unga teng"
+
+msgid "before or equal to {{date}}"
+msgstr "{{date}} dan oldin yoki unga teng"
+
+msgid "greater than or equal to"
+msgstr "dan katta yoki teng"
+
+msgid "less than or equal to"
+msgstr "dan kam yoki teng"
+
+msgid "More filters"
+msgstr "Koʼproq Filtr"
+
+msgid "Select columns"
+msgstr "Ustunlarni tanlang"
+
+msgid "Download as JSON"
+msgstr "JSON sifatida yuklash"
+
+msgid "Download as XML"
+msgstr "XML sifatida yuklash"
+
+msgid "Download as CSV"
+msgstr "CSV sifatida yuklang"
+
+msgid "Download with current filters"
+msgstr "Joriy Filtrlar asosida yuklash"
+
+msgid "Download data..."
+msgstr "Maʼlumotlarni yuklab olish ..."
+
+msgid "Rows per page"
+msgstr "Sahifada qatorlar"
+
+msgid "Update view"
+msgstr "Yangilangan koʼrinish"
+
+msgid "Save current view..."
+msgstr "Joriy koʼrinishni saqlash ..."
+
+msgid "Save current view as..."
+msgstr "Ushbu joriy koʼrinish sifatida saqlash"
+
+msgid "Delete view"
+msgstr "Koʼzdan kechirishni oʼchirib tashlash"
+
+msgid "Share view..."
+msgstr "Koʼrinish bilan boʼlishish ..."
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr ""
+"Haqiqatdan ham '{{templateName}}' koʼrinishini oʼchirib tashlamoqchimisiz?"
+
+msgid "Confirm"
+msgstr "Tasdiqlang"
+
+msgid "Save As view"
+msgstr "Ushbu koʼrinish sifatida saqlash"
+
+msgid "View name"
+msgstr "Ismini koʼrish"
+
+msgid "Show Less"
+msgstr ""
+
+msgid "Show All"
+msgstr "Barchasini koʼrsatish"
+
+msgid "Working list could not be loaded"
+msgstr "Ishchi roʼyxatni yuklab boʼlmadi"
+
+msgid "an error occurred loading working lists"
+msgstr "ishchi roʼyxatni yuklashda xatolik yuz berdi"
+
+msgid "Registered events"
+msgstr "Roʼyxatdan oʼtgan hodisa/tadbirlar"
+
+msgid "Active"
+msgstr "Faol"
+
+msgid "Completed"
+msgstr "Toʼldirildi"
+
+msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
+msgstr ""
+
+msgid "Save and add another"
+msgstr "Saqlash va boshqasini qoʼshish"
+
+msgid "Save and exit"
+msgstr "Saqlash va chiqish"
+
+msgid "Finish"
+msgstr "Tugatish"
+
+msgid "Switch to form view"
+msgstr "Shakl koʼrinishiga oʼtish"
+
+msgid "Switch to row view"
+msgstr "Jadval koʼrinishiga oʼtish"
+
+msgid "New {{TET}}"
+msgstr ""
+
+msgid "Working Lists"
+msgstr ""
+
+msgid ""
+"Program with programid {{programId}} isn't a tracker program. Enrollments "
+"can only be done in tracker programs."
+msgstr ""
+
+msgid "Assigned user"
+msgstr "Tavsiya etilgan foydalanuvchi"
+
+msgid "Relationships"
+msgstr "Oʼzaro aloqalar"
+
+msgid "Assignee"
+msgstr "Vakolat berilgan shaxs"
+
+msgid "Saving to"
+msgstr "...da saqlash"
+
+msgid "in"
+msgstr "ichida"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"Bu hodisa/tadbir dasturi emas yoki metamaʼlumotlar buzilgan. Tafsilotlar "
+"uchun jurnalga qarang."
+
+msgid "This event"
+msgstr "Ushbu hodisa/tadbir"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+"{{relationshipTypeName}} turining {{entityName}} bilan aloqasi allaqachon "
+"mavjud"
+
+msgid "Assigned to"
+msgstr ""
+
+msgid "New event"
+msgstr "Yangi hodisa"
+
+msgid "New event relationship"
+msgstr "Yangi hodisa/tadbir munosabatlari"
+
+msgid "Adding relationship to event."
+msgstr "Hodisa/tadbirga aloqa-munosabatlar qoʼshish"
+
+msgid "Go back to event without saving relationship"
+msgstr "Аloqa-munosabatlarni saqlamasdan hodisa/tadbirga qaytish"
+
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr ""
+"Ushbu sahifani tark etsangiz, yangi munosabatlar uchun qilgan tanlovingiz "
+"bekor qilinadi."
+
+msgid "events added"
+msgstr "hodisa/tadbirlar qoʼshildi"
+
+msgid "No events added"
+msgstr "Hech qanday hodisa/tadbir qoʼshilmagan"
+
+msgid "Select a registering unit and program above to get started"
+msgstr ""
+
+msgid "Select a program to start reporting"
+msgstr ""
+
+msgid "Select a registering unit to start reporting"
+msgstr ""
+
+msgid "Select a category option to start reporting"
+msgstr ""
+
+msgid "You dont have access to create an event in the current selections"
+msgstr "Hozirgi tanlovlarda hodisa/tadbir yaratish huquqiga ega emassiz"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+"Ikki nusxasi mavjud (lekin xatolar boʼlgan, batafsil maʼlumot uchun jurnalga"
+" qarang"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"Ushbu {{attributeName}} element allaqachon roʼyxatdan oʼtgan, ammo siz unga "
+"kirish huquqiga ega emassiz"
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "Siz allaqachon {{attributeName}} da roʼyxatdan oʼtgansiz"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+"{{trackedEntityTypeName}} ushbu {{attributeName}} bilan allaqachon "
+"roʼyxatdan oʼtgan"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Roʼyxatdan oʼtgan {{trackedEntityTypeName}} ni koʼrsatish"
+
+msgid "Registered person"
+msgstr "Roʼyxatdan oʼtgan shaxs"
+
+msgid "Link"
+msgstr "Havola"
+
+msgid "Metadata error. see log for details"
+msgstr "MetaMaʼlumotda xatolik. Tafsilotlar uchun jurnalga qarang."
+
+msgid "Review duplicates"
+msgstr ""
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Possible duplicates found"
+msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
+
+msgid "An error occured loading possible duplicates"
+msgstr "Boʼlishi mumkin boʼlgan nusxalarni yuklashda xatolik yuz berdi"
+
+msgid "Hide"
+msgstr "Berkitish"
+
+msgid "Save as new {{tetName}}"
+msgstr "Yangi {{tetName}} sifatida saqlash"
+
+msgid "Organisation Unit"
+msgstr "Tashkiliy birlik"
+
+msgid "Registration"
+msgstr "Roʼyxatdan oʼtish"
+
+msgid "Review Duplicates"
+msgstr "Nusxalarni koʼrib chiqish"
+
+msgid "Search results"
+msgstr "Qidiruv natijalari"
+
+msgid "No {{trackedEntityTypeName}} found."
+msgstr "Hech qanday {{trackedEntityTypeName}} topilmadi"
+
+msgid "{{teiCount}} results found for"
+msgstr ""
+
+msgid "New search"
+msgstr "Yangi qidiruv"
+
+msgid "Edit search"
+msgstr "Qidiruvni tahrirlash"
+
+msgid "Link to an existing {{trackedEntityType}}"
+msgstr "Mavjud {{trackedEntityType}} ga havola"
+
+msgid "Create new {{trackedEntityType}}"
+msgstr "Yangi {{trackedEntityType}} yaratish"
+
+msgid "Register"
+msgstr "Roʼyxatga olish"
+
+msgid "You dont have access to edit this event"
+msgstr "Ushbu hodisa/tadbirni tahrirlash huquqiga ega emassiz"
+
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
+msgid ""
+"Leaving this page will discard any selections you made for a new "
+"relationship"
+msgstr ""
+"Ushbu sahifani tark etsangiz, yangi aloqa-munosabatlar uchun qilingan barcha"
+" tanlovlar bekor qilinadi"
+
+msgid "No one is assigned to this event"
+msgstr "Ushbu hodisa/tadbirga hech kim biriktirilmagan"
+
+msgid "Assign"
+msgstr "Tayinlangan"
+
+msgid "Event assigned to {{name}}"
+msgstr "Hodisa/tadbir {{name}} ga biriktirildi"
+
+msgid "Feedbacks"
+msgstr "Qayta aloqalar"
+
+msgid "You dont have access to delete this relationship"
+msgstr "Ushbu oʼzaro aloqalarni oʼchirib tashlash huquqiga ega emassiz"
+
+msgid "You dont have access to create any relationships"
+msgstr "Ushbu oʼzaro aloqalarni yaratish huquqiga ega emassiz"
+
+msgid "Add relationship"
+msgstr "Oʼzaro aloqa kiritish"
+
+msgid "Open"
+msgstr "Ochiq"
+
+msgid "All accessible"
+msgstr "Barchaga kirish mumkin"
+
+msgid "Selected"
+msgstr "Tanlangan"
+
+msgid "Organisation unit scope"
+msgstr "Tashkiliy boʼlim huquq va burchlari"
+
+msgid "Selected program"
+msgstr "Tanlangan dastur"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "{{uniqueAttrName}} orqali qidirish"
+
+msgid "Search by attributes"
+msgstr "Аtribut orqali qidirish"
+
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+"Qidirish uchun kamida {{minAttributesRequired}} atributlarini toʼldiring"
+
+msgid "To work with the selected program,"
+msgstr "Tanlangan dastur bilan ishlash uchun,"
+
+msgid "open the Tracker Capture app"
+msgstr "Kuzatuv-Nazorat dasturini oching"
+
+msgid "Program not found"
+msgstr "Dastur topilmadi"
+
+msgid "Program is not a tracker program"
+msgstr "Dastur kuzatuv dasturi emas"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Error saving event"
+msgstr "Hodisa/tadbirni saqlashda xato"
+
+msgid "Could not save event. See log for details"
+msgstr "Hodisa/tadbir saqlanmadi. Tafsilotlar uchun jurnalga qarang"
+
+msgid "Could not delete event"
+msgstr "Hodisa/tadbirni oʼchirib tashlab boʼlmadi"
+
+msgid "Could not save working list"
+msgstr "Ishchi roʼyxat saqlanmadi"
+
+msgid "Could not add working list"
+msgstr "Ishchi roʼyxatni qoʼshib boʼlmadi"
+
+msgid "Could not delete working list"
+msgstr "Ishchi roʼyxatni oʼchirib tashlab boʼlmadi"
+
+msgid "Organisation unit search failed. See log for details"
+msgstr ""
+"Tashkilot boʼlimini qidirib boʼlmadi. Tafsilotlar uchun jurnalga qarang"
+
+msgid "tracked entity instance"
+msgstr "kuzatilayotgan obʼekt namunasi"
+
+msgid "Set coordinate"
+msgstr "Koordinatani oʼrnating"
+
+msgid "Latitude"
+msgstr "Kenglik"
+
+msgid "Longitude"
+msgstr "Kenglik"
+
+msgid "Date"
+msgstr "Sana"
+
+msgid "Time"
+msgstr "Vaqt"
+
+msgid "From date"
+msgstr "Sanadan boshlab"
+
+msgid "From time"
+msgstr "Vaqtdan boshlab"
+
+msgid "To date"
+msgstr "Shu kungacha"
+
+msgid "To time"
+msgstr "Shu vaqtgacha"
+
+msgid "error encountered during field validation"
+msgstr "maydonni tekshirish vaqtida xatolik yuz berdi"
+
+msgid "error"
+msgstr "xato"
+
+msgid "Delete polygon"
+msgstr "Poligon (koʼpburchak) ni oʼchirib tashlash"
+
+msgid "Set area"
+msgstr "Hududni belgilang"
+
+msgid "Compatibility mode"
+msgstr "Muvofiqlik rejimi"
