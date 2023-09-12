@@ -15,7 +15,7 @@ export const useDataEntrySections = (stageName: string, beforeSectionId: string)
             [sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO]: {
                 beforeSectionId,
                 placement: placements.BEFORE_METADATA_BASED_SECTION,
-                name: i18n.t('Data Entry ({{ stageName }})', {
+                name: i18n.t('{{ stageName }} - Basic info', {
                     stageName,
                 }),
             },
@@ -25,7 +25,9 @@ export const useDataEntrySections = (stageName: string, beforeSectionId: string)
             },
             [sectionKeysForFirstStageDataEntry.STATUS]: {
                 placement: placements.BOTTOM,
-                name: i18n.t('Status'),
+                name: i18n.t('{{ stageName }} - Status', {
+                    stageName,
+                }),
             },
         }),
         [stageName, beforeSectionId],

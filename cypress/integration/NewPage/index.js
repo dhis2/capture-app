@@ -593,7 +593,9 @@ Then('you can see the multiple selections in the form', () => {
 
 Then('the first stage appears on registration page', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {
-        cy.contains('Data Entry (Birth)').should('exist');
+        cy.contains('Birth - Basic info').should('exist');
+        cy.contains('Birth - Details').should('exist');
+        cy.contains('Birth - Status').should('exist');
         cy.contains('Report date').should('exist');
         cy.contains('Apgar Score').should('exist');
     });

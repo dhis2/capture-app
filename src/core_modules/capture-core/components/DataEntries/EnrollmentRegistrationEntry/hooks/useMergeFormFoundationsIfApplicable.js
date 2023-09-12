@@ -49,10 +49,10 @@ export const useMergeFormFoundationsIfApplicable = (
             const newSection = new Section((o) => {
                 o.id = getSectionId(section.id);
                 o.name = isMainSection
-                    ? i18n.t('Data Entry ({{ stageName }})', {
+                    ? i18n.t('{{ stageName }} - Details', {
                         stageName,
                     })
-                    : i18n.t('Data Entry ({{ stageName }} - {{ sectionName }})', {
+                    : i18n.t('{{ stageName }} - {{ sectionName }}', {
                         stageName,
                         sectionName: section.name,
                     });

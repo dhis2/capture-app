@@ -290,11 +290,17 @@ const getCategoryOptionsSettingsFn = () => {
         getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
         getFieldIds: (props: Object) => props.categories?.map(category => category.id),
         getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
-        getMeta: (props: Object) => ({
-            section: AOCsectionKey,
-            placement: placements.BOTTOM,
-            sectionName: props.programCategory?.displayName,
-        }),
+        getMeta: (props: Object) => {
+            const { firstStageMetaData, programCategory } = props;
+
+            return {
+                section: AOCsectionKey,
+                placement: placements.BOTTOM,
+                sectionName: firstStageMetaData
+                    ? `${firstStageMetaData.stage.name} - ${programCategory?.displayName}`
+                    : programCategory?.displayName,
+            };
+        },
     };
 
     return categoryOptionsSettings;
