@@ -8,7 +8,7 @@
 # Alison Andrade <aandrade@ippfwhr.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2022
 # Prabhjot Singh, 2022
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2023
 # 
 msgid ""
@@ -806,7 +806,7 @@ msgid "Back"
 msgstr "Atrás"
 
 msgid "Search for {{titleText}}"
-msgstr "Buscar para {{titleText}}"
+msgstr "Buscar por {{titleText}}"
 
 msgid "Search for"
 msgstr "Buscar por"
