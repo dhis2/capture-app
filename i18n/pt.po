@@ -1,7 +1,7 @@
 # 
 # Translators:
 # David Júnior <davidjr.mondlane@gmail.com>, 2021
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # Ge Joao <gsimango@saudigitus.org>, 2022
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2023
@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Sheila André <sandre@saudigitus.org>, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -388,9 +388,6 @@ msgstr "Algumas operações ainda estão em execução. Por favor, espere.."
 
 msgid "Operations running"
 msgstr "Operações em execução"
-
-msgid "Sort"
-msgstr "Ordenar"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -801,8 +798,8 @@ msgstr "Cronograma"
 msgid "Refer"
 msgstr "Referir"
 
-msgid "You can’t add any more {{ programStageName }} events"
-msgstr "Não pode adicionar mais eventos {{ programStageName }}"
+msgid "You can't add any more {{ programStageName }} events"
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "Cancelar sem gravar"
@@ -1196,6 +1193,9 @@ msgstr "Remova a marca para acompanhamento"
 msgid "Mark for follow-up"
 msgstr "Marcar para acompanhamento"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Data de inscrição"
 
@@ -1555,9 +1555,6 @@ msgstr "Erro ao editar o evento, as alterações feitas não foram gravadas"
 msgid "Set coordinate"
 msgstr "Definir coordenada"
 
-msgid "Page {{currentPage}}"
-msgstr "Página {{currentPage}}"
-
 msgid "Date"
 msgstr "Encontro"
 
@@ -1575,6 +1572,9 @@ msgstr "Até à data"
 
 msgid "To time"
 msgstr "Para o tempo"
+
+msgid "Page {{currentPage}}"
+msgstr "Página {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Excluir polígono"

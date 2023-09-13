@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Enzo Nicolas Rossi <enzo@dhis2.org>, 2023
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2023
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Jaime Bosque <jaime.bosque@dhis2.org>, 2023\n"
+"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2023\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,6 +74,16 @@ msgstr "Fecha de inscripción"
 
 msgid "Last updated"
 msgstr "Última actualización"
+
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Este valor está siendo validado"
@@ -267,7 +277,7 @@ msgid "Go back to event without saving relationship"
 msgstr "Volver al evento sin guardar la relación"
 
 msgid "Discard unsaved changes?"
-msgstr ""
+msgstr "¿Descartar los cambios no guardados?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -378,9 +388,6 @@ msgstr "Algunas operaciones aún se están ejecutando. Espere por favor.."
 
 msgid "Operations running"
 msgstr "Operaciones en ejecución"
-
-msgid "Sort"
-msgstr "Clasificar"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -494,6 +501,12 @@ msgstr "Cargando imagen"
 
 msgid "Select image"
 msgstr "Seleccionar imagen"
+
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
+msgstr ""
 
 msgid "Search"
 msgstr "Buscar"
@@ -770,7 +783,7 @@ msgstr "Programado"
 msgid "Refer"
 msgstr "Referir"
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -835,6 +848,9 @@ msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nueva inscripción en el programa{{escape}} {{programName}}"
+
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Guardar {{trackedEntityName}}"
@@ -989,12 +1005,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr ""
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
 msgid "Search {{name}}"
 msgstr ""
 
@@ -1147,6 +1157,9 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Fecha de inscripción"
 
@@ -1235,25 +1248,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1298,9 +1297,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr ""
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1311,6 +1307,9 @@ msgid "{{TETName}} profile"
 msgstr "Perfil de {{TETName}} "
 
 msgid "Edit"
+msgstr ""
+
+msgid "tracked entity instance"
 msgstr ""
 
 msgid "New {{ eventName }} event"
@@ -1502,9 +1501,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr ""
 
-msgid "Page {{currentPage}}"
-msgstr ""
-
 msgid "Date"
 msgstr "Fecha"
 
@@ -1523,10 +1519,7 @@ msgstr ""
 msgid "To time"
 msgstr ""
 
-msgid "error encountered during field validation"
-msgstr ""
-
-msgid "error"
+msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Delete polygon"

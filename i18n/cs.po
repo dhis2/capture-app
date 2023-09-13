@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký, 2023\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -378,9 +378,6 @@ msgstr "Některé operace stále běží. Prosím, čekejte.."
 
 msgid "Operations running"
 msgstr "Provoz běží"
-
-msgid "Sort"
-msgstr "Třídit"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -773,7 +770,7 @@ msgstr "Plán"
 msgid "Refer"
 msgstr "Odkazovat"
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -1159,6 +1156,9 @@ msgstr "Odstranit značku pro další sledování"
 msgid "Mark for follow-up"
 msgstr "Označit pro další sledování"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Datum zápisu"
 
@@ -1506,9 +1506,6 @@ msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
 
-msgid "Page {{currentPage}}"
-msgstr "Stránka {{currentPage}}"
-
 msgid "Date"
 msgstr "datum"
 
@@ -1526,6 +1523,9 @@ msgstr "K datu"
 
 msgid "To time"
 msgstr "Na čas"
+
+msgid "Page {{currentPage}}"
+msgstr "Stránka {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Smazat polygon"
