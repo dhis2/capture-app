@@ -69,6 +69,7 @@ const StageDetailPlain = (props: Props) => {
         onEventClick,
         onViewAll,
         onCreateNew,
+        hiddenProgramStage,
         classes } = props;
     const defaultSortState = {
         columnName: 'status',
@@ -214,11 +215,18 @@ const StageDetailPlain = (props: Props) => {
         >{i18n.t('Go to full {{ eventName }}', { eventName, interpolation: { escapeValue: false } })}</Button> : null);
 
         const renderCreateNewButton = () => {
-            const shouldDisableCreateNew = !repeatable && events.length > 0;
+            const shouldDisableCreateNew = (!repeatable && events.length > 0) || hiddenProgramStage;
+
+            const tooltipContent = hiddenProgramStage
+                ? i18n.t("You can't add any more {{ programStageName }} events", {
+                    programStageName: eventName,
+                    interpolation: { escapeValue: false },
+                })
+                : i18n.t('This stage can only have one event');
 
             return (
                 <ConditionalTooltip
-                    content={i18n.t('This stage can only have one event')}
+                    content={tooltipContent}
                     enabled={shouldDisableCreateNew}
                     closeDelay={50}
                 >

@@ -1,3 +1,24 @@
+## [100.39.1](https://github.com/dhis2/capture-app/compare/v100.39.0...v100.39.1) (2023-09-13)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0fab0eb](https://github.com/dhis2/capture-app/commit/0fab0eba7b63cbfd080990913313fc6b6ff2d38f))
+
+# [100.39.0](https://github.com/dhis2/capture-app/compare/v100.38.0...v100.39.0) (2023-09-07)
+
+
+### Features
+
+* [DHIS2-13343] hidden program stage rule effect ([#3406](https://github.com/dhis2/capture-app/issues/3406)) ([4ef2973](https://github.com/dhis2/capture-app/commit/4ef2973b71d6376f99db07e70bc4d51facb8018e))
+
+# [100.38.0](https://github.com/dhis2/capture-app/compare/v100.37.0...v100.38.0) (2023-09-06)
+
+
+### Features
+
+* [DHIS2-14334] edit enrollment date ([#3350](https://github.com/dhis2/capture-app/issues/3350)) ([9dd1b6a](https://github.com/dhis2/capture-app/commit/9dd1b6a046e94021ae4e63a67a3d6b16a099212d))
+
 # [100.37.0](https://github.com/dhis2/capture-app/compare/v100.36.0...v100.37.0) (2023-08-22)
 
 
