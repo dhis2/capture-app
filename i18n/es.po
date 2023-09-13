@@ -4,7 +4,7 @@
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
 # Pablo Pajuelo Cabezas <pablo@dhis2.org>, 2020
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
-# phil_dhis2, 2021
+# Philip Larsen Donnelly, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Marta Vila <marta@dhis2.org>, 2021
 # Alison Andrade <aandrade@ippfwhr.org>, 2021
