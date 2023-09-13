@@ -4,6 +4,7 @@ import { enrollmentSiteActionTypes } from '../../components/Pages/common/Enrollm
 import { actionTypes as enrollmentNoteActionTypes }
     from '../../components/WidgetEnrollmentComment/WidgetEnrollmentComment.actions';
 import { actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
+import { assigneeSectionActionTypes } from '../../components/WidgetAssignee';
 
 const initialReducerValue = {};
 const {
@@ -126,6 +127,29 @@ export const enrollmentDomainDesc = createReducerDescription(
                 return event;
             });
             return { ...state, enrollment: { ...state.enrollment, events } };
+        },
+        [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SET]: (state, action) => {
+            const { serverData, eventId } = action.payload;
+            const event = state.enrollment?.events?.find(e => e.event === eventId);
+            if (!event) {
+                return state;
+            }
+
+            return { ...state, enrollment: { ...state.enrollment, events: serverData.events } };
+        },
+        [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SAVE_FAILED]: (state, action) => {
+            const { assignedUser, eventId } = action.meta;
+            const events = state.enrollment?.events;
+            if (!events) {
+                return state;
+            }
+            return {
+                ...state,
+                enrollment: {
+                    ...state.enrollment,
+                    events: events.map(e => (e.event === eventId ? { ...e, assignedUser } : e)),
+                },
+            };
         },
     },
     'enrollmentDomain',

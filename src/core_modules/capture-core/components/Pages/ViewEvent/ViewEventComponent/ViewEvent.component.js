@@ -8,7 +8,7 @@ import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component'
 import type { ProgramStage } from '../../../../metaData';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
-
+import type { UserFormField } from '../../../FormFields/UserField';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -48,6 +48,8 @@ type Props = {
         header: string,
         showAllEvents: string,
     },
+    assignee: UserFormField,
+    onGetAssignedUserSaveContext: (assignee: UserFormField) => { eventId: string, events: Array<ApiEnrollmentEvent> },
 };
 
 type State = {
@@ -70,7 +72,7 @@ class ViewEventPlain extends Component<Props, State> {
     }
 
     render() {
-        const { classes, programStage, currentDataEntryKey, eventAccess } = this.props;
+        const { classes, programStage, currentDataEntryKey, eventAccess, assignee, onGetAssignedUserSaveContext } = this.props;
         return (
             <div className={classes.container}>
                 <Button
@@ -89,6 +91,8 @@ class ViewEventPlain extends Component<Props, State> {
                         eventAccess={eventAccess}
                         programStage={programStage}
                         dataEntryKey={currentDataEntryKey}
+                        assignee={assignee}
+                        onGetSaveContext={onGetAssignedUserSaveContext}
                     />
                 </div>
                 <DiscardDialog

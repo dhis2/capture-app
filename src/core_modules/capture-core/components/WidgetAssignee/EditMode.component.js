@@ -3,9 +3,9 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import { UserSearch } from '../../../../FormFields/UserField/UserSearch.component';
+import { UserSearch, type UserFormField } from '../FormFields/UserField';
 
-const getStyles = () => ({
+const styles = () => ({
     container: {
         display: 'flex',
         alignItems: 'center',
@@ -22,35 +22,26 @@ const getStyles = () => ({
 });
 
 type Props = {
-    onCancel: Function,
-    classes: Object,
+    onCancel: () => {},
+    onSet: (user: UserFormField) => void,
+    ...CssClasses,
 };
 
 const EditModePlain = (props: Props) => {
-    const { onCancel, classes, ...passOnProps } = props;
+    const { onCancel, onSet, classes } = props;
     return (
-        <div
-            className={classes.container}
-        >
-            <div
-                className={classes.searchContainer}
-            >
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+        <div className={classes.container}>
+            <div className={classes.searchContainer}>
                 <UserSearch
                     inputWrapperClasses={{}}
                     focusInputOnMount
                     exitBehaviour="doNothing"
                     inputPlaceholderText={i18n.t('Search for user')}
-                    {...passOnProps}
+                    onSet={onSet}
                 />
             </div>
-            <div
-                className={classes.buttonContainer}
-            >
-                <Button
-                    onClick={onCancel}
-                    small
-                >
+            <div className={classes.buttonContainer}>
+                <Button onClick={onCancel} small>
                     {i18n.t('Cancel')}
                 </Button>
             </div>
@@ -58,4 +49,4 @@ const EditModePlain = (props: Props) => {
     );
 };
 
-export const EditMode = withStyles(getStyles)(EditModePlain);
+export const EditMode = withStyles(styles)(EditModePlain);

@@ -54,4 +54,5 @@ export type Event = {|
     trackedEntityInstance: string,
     notes?: Array<Object>,
     pendingApiResponse?: ?boolean,
+    assignedUser?: ApiAssignedUser,
 |};

@@ -12,7 +12,7 @@ import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
-import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
+import { assigneeSectionActionTypes } from '../../components/WidgetAssignee';
 import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
 import {
     actionTypes as widgetEventEditActionTypes,
@@ -144,7 +144,7 @@ export const viewEventPageDesc = createReducerDescription({
             eventHasChanged: true,
         };
     },
-    [assigneeSectionActionTypes.VIEW_EVENT_ASSIGNEE_SET]: (state, action) => {
+    [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SET]: (state, action) => {
         const { assignee } = action.payload;
 
         const newState = {
@@ -164,7 +164,7 @@ export const viewEventPageDesc = createReducerDescription({
 
         return newState;
     },
-    [assigneeSectionActionTypes.VIEW_EVENT_ASSIGNEE_SAVE_COMPLETED]: (state, action) => {
+    [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SAVE_COMPLETED]: (state, action) => {
         if (action.meta.eventId !== state.eventId) {
             return state;
         }
@@ -175,14 +175,25 @@ export const viewEventPageDesc = createReducerDescription({
             eventHasChanged: true,
         };
     },
-    [assigneeSectionActionTypes.VIEW_EVENT_ASSIGNEE_SAVE_FAILED]: (state, action) => {
-        if (action.meta.eventId !== state.eventId) {
+    [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SAVE_FAILED]: (state, action) => {
+        const { assignee, eventId } = action.meta;
+        if (eventId !== state.eventId) {
             return state;
         }
 
         return {
             ...state,
             saveInProgress: false,
+            loadedValues: {
+                ...state.loadedValues,
+                eventContainer: {
+                    ...state.loadedValues.eventContainer,
+                    event: {
+                        ...state.loadedValues.eventContainer.event,
+                        assignee,
+                    },
+                },
+            },
         };
     },
 }, 'viewEventPage');

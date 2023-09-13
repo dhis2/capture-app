@@ -1,6 +1,7 @@
 // @flow
 import type { ProgramStage } from '../../../metaData';
 import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
+import type { UserFormField } from '../../FormFields/UserField';
 
 export type PlainProps = {|
     programStage: ?ProgramStage,
@@ -25,6 +26,16 @@ export type PlainProps = {|
     onHandleScheduleSave: (eventData: Object) => void,
     pageStatus: string,
     eventStatus?: string,
+    eventAccess: {|
+        read: boolean,
+        write: boolean,
+    |} | null,
+    onGetAssignedUserSaveContext: (assignee: UserFormField) => {
+        eventId: string,
+        events: Array<ApiEnrollmentEvent>,
+        assignedUser?: ApiAssignedUser,
+    },
+    assignee: UserFormField | null,
     ...CssClasses,
 |};
 

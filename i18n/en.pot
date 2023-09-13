@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-08-22T12:04:52.436Z\n"
-"PO-Revision-Date: 2023-08-22T12:04:52.436Z\n"
+"POT-Creation-Date: 2023-09-08T10:24:43.998Z\n"
+"PO-Revision-Date: 2023-09-08T10:24:43.998Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -911,15 +911,6 @@ msgstr ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 
-msgid "No one is assigned to this event"
-msgstr "No one is assigned to this event"
-
-msgid "Assign"
-msgstr "Assign"
-
-msgid "Event assigned to {{name}}"
-msgstr "Event assigned to {{name}}"
-
 msgid "Feedbacks"
 msgstr "Feedbacks"
 
@@ -1091,6 +1082,15 @@ msgstr "To work with the selected program,"
 
 msgid "open the Tracker Capture app"
 msgstr "open the Tracker Capture app"
+
+msgid "Assign"
+msgstr "Assign"
+
+msgid "Event assigned to {{name}}"
+msgstr "Event assigned to {{name}}"
+
+msgid "No one is assigned to this event"
+msgstr "No one is assigned to this event"
 
 msgid "This program is protected"
 msgstr "This program is protected"
@@ -1496,6 +1496,9 @@ msgstr "Error deleting the enrollment event"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "Error editing the event, the changes made were not saved"
+
+msgid "Error updating the Assignee"
+msgstr "Error updating the Assignee"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"

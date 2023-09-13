@@ -8,13 +8,17 @@ import { ViewEventComponent } from './ViewEvent.component';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 
 import { withErrorMessageHandler } from '../../../../HOC/withErrorMessageHandler';
-import { makeProgramStageSelector, makeEventAccessSelector } from './viewEvent.selectors';
+import {
+    makeProgramStageSelector,
+    makeEventAccessSelector,
+    makeAssignedUserContextSelector,
+} from './viewEvent.selectors';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
-
 
 const makeMapStateToProps = () => {
     const programStageSelector = makeProgramStageSelector();
     const eventAccessSelector = makeEventAccessSelector();
+    const assignedUserContextSelector = makeAssignedUserContextSelector();
 
     // $FlowFixMe[not-an-object] automated comment
     return (state: ReduxState) => {
@@ -29,6 +33,8 @@ const makeMapStateToProps = () => {
             error: state.viewEventPage.loadError,
             currentDataEntryKey,
             isUserInteractionInProgress,
+            assignee: state.viewEventPage.loadedValues?.eventContainer.event.assignee,
+            onGetAssignedUserSaveContext: assignee => assignedUserContextSelector(state)(assignee),
         };
     };
 };

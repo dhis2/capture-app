@@ -1,5 +1,11 @@
 // @flow
 
+declare type ApiAssignedUser = {|
+    uid: string,
+    username: string,
+    displayName: string,
+|};
+
 declare type ApiDataValue = {
     dataElement: string,
     value: string,
@@ -22,6 +28,7 @@ declare type ApiEnrollmentEvent = {|
     notes?: Array<Object>,
     deleted?: boolean,
     pendingApiResponse?: ?boolean,
+    assignedUser?: ApiAssignedUser,
 |};
 
 type ApiAttributeValues = {

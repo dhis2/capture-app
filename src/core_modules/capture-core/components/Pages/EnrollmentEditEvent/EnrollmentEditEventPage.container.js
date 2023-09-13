@@ -17,12 +17,13 @@ import { changeEventFromUrl } from '../ViewEvent/ViewEventComponent/viewEvent.ac
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
-import { useEvent } from './hooks';
+import { useEvent, useAssignee, useAssignedUserSaveContext } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { cleanUpDataEntry } from '../../DataEntry';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
+import { getProgramEventAccess } from '../../../metaData';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -120,6 +121,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
+    const eventAccess = getProgramEventAccess(programId, programStage?.id);
 
     const pageStatus = getPageStatus({
         orgUnitId,
@@ -129,6 +131,8 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
         programStage,
         event,
     });
+    const assignee = useAssignee(event);
+    const onGetAssignedUserSaveContext = useAssignedUserSaveContext(enrollmentSite, event, eventId);
 
     return (
         <EnrollmentEditEventPageComponent
@@ -148,12 +152,15 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            assignee={assignee}
             onEnrollmentError={onEnrollmentError}
             onEnrollmentSuccess={onEnrollmentSuccess}
             eventStatus={event?.status}
+            eventAccess={eventAccess}
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}
+            onGetAssignedUserSaveContext={onGetAssignedUserSaveContext}
         />
     );
 };

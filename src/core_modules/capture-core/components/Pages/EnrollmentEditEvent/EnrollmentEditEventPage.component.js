@@ -14,6 +14,7 @@ import { WidgetFeedback } from '../../WidgetFeedback';
 import { WidgetIndicator } from '../../WidgetIndicator';
 import { WidgetProfile } from '../../WidgetProfile';
 import { WidgetEnrollment } from '../../WidgetEnrollment';
+import { WidgetAssignee } from '../../WidgetAssignee';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetEventComment } from '../../WidgetEventComment';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
@@ -66,11 +67,14 @@ const EnrollmentEditEventPagePain = ({
     eventDate,
     scheduleDate,
     eventStatus,
+    eventAccess,
+    assignee,
     pageStatus,
     onEnrollmentError,
     onEnrollmentSuccess,
     onCancelEditEvent,
     onHandleScheduleSave,
+    onGetAssignedUserSaveContext,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -118,6 +122,12 @@ const EnrollmentEditEventPagePain = ({
                     )}
                 </div>
                 <div className={classes.rightColumn}>
+                    <WidgetAssignee
+                        programStage={programStage}
+                        assignee={assignee}
+                        onGetSaveContext={onGetAssignedUserSaveContext}
+                        eventAccess={eventAccess}
+                    />
                     <WidgetEventComment dataEntryKey={mode} dataEntryId={dataEntryIds.ENROLLMENT_EVENT} />
                     <WidgetError error={widgetEffects.errors} />
                     <WidgetWarning warning={widgetEffects.warnings} />
