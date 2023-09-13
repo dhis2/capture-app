@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import { MultiSelectionsBoxes } from '../internal/SelectionBoxes/MultiSelectionsBoxes/MultiSelectionsBoxes.component';
 import { SingleSelectionBoxes } from '../internal/SelectionBoxes/SingleSelectionBoxes/SingleSelectionBoxes.component';
+import { withKeyboardNavigation } from '../HOC/withKeyboardNavigation';
 
 import { orientations } from '../constants/orientations.const';
 
@@ -10,7 +11,7 @@ type Props = {
     multiSelect?: ?boolean,
 };
 
-export const SelectionBoxes = (props: Props) => {
+const SelectionBoxesPlain = (props: Props) => {
     const { multiSelect, ...passOnProps } = props;
 
     if (multiSelect) {
@@ -31,3 +32,5 @@ export const SelectionBoxes = (props: Props) => {
         />
     );
 };
+
+export const SelectionBoxes = withKeyboardNavigation()(SelectionBoxesPlain);
