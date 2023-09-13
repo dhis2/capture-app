@@ -139,7 +139,7 @@ const OrgUnitFieldPlain = (props: Props) => {
     };
 
     const handleBlur = () => {
-        onBlur(null);
+        onBlur && onBlur(null);
     };
 
     const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' } : null;
