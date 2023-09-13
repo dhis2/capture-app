@@ -106,6 +106,10 @@ class D2FilePlain extends Component<Props> {
         this.props.onBlur(null);
     }
 
+    handleBlur = () => {
+        this.props.onBlur(this.getFileUrl());
+    }
+
     getFileUrl = () => {
         const value = this.props.value;
         if (value) {
@@ -122,7 +126,7 @@ class D2FilePlain extends Component<Props> {
         const containerClass = isVertical ? classes.verticalContainer : classes.horizontalContainer;
         const selectedFileTextContainerClass = isVertical ? classes.verticalSelectedFileTextContainer : classes.horizontalSelectedFileTextContainer;
         return (
-            <div>
+            <div onBlur={this.handleBlur}>
                 <input
                     className={classes.input}
                     type="file"

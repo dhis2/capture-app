@@ -40,6 +40,7 @@ const getStyles = () => ({
 
 type Props = {
     onSelectClick: (selectedOrgUnit: Object) => void,
+    onBlur: (selectedOrgUnit: Object) => void,
     selected?: ?string,
     maxTreeHeight?: ?number,
     disabled?: ?boolean,
@@ -56,6 +57,7 @@ type Props = {
 const OrgUnitFieldPlain = (props: Props) => {
     const {
         onSelectClick,
+        onBlur,
         classes,
         selected,
         maxTreeHeight,
@@ -136,10 +138,15 @@ const OrgUnitFieldPlain = (props: Props) => {
         setSearchText(event.currentTarget.value);
     };
 
+    const handleBlur = () => {
+        onBlur(null);
+    };
+
     const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' } : null;
     return (
         <div
             className={classes.container}
+            onBlur={handleBlur}
         >
             <div className={classes.debounceFieldContainer}>
                 <DebounceField

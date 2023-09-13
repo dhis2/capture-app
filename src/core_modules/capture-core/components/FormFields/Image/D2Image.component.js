@@ -104,7 +104,11 @@ class D2ImagePlain extends Component<Props> {
         this.props.onBlur(null);
     }
 
-    getimageUrl = () => {
+    handleBlur = () => {
+        this.props.onBlur(this.getImageUrl());
+    }
+
+    getImageUrl = () => {
         const value = this.props.value;
         if (value) {
             return value.url || inMemoryFileStore.get(value.value);
@@ -116,13 +120,13 @@ class D2ImagePlain extends Component<Props> {
         const { value, classes, asyncUIState, orientation, disabled } = this.props;
         const isVertical = orientation === orientations.VERTICAL;
         const isUploading = asyncUIState && asyncUIState.loading;
-        const imageUrl = this.getimageUrl();
+        const imageUrl = this.getImageUrl();
         // $FlowFixMe[prop-missing] automated comment
         const containerClass = isVertical ? classes.verticalContainer : classes.horizontalContainer;
         // $FlowFixMe[prop-missing] automated comment
         const selectedImageTextContainerClass = isVertical ? classes.verticalSelectedImageTextContainer : classes.horizontalSelectedImageTextContainer;
         return (
-            <div>
+            <div onBlur={this.handleBlur}>
                 <input
                     className={classes.input}
                     type="file"
