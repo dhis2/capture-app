@@ -1,3 +1,10 @@
+## [100.39.3](https://github.com/dhis2/capture-app/compare/v100.39.2...v100.39.3) (2023-09-14)
+
+
+### Bug Fixes
+
+* [DHIS2-15356] change tei search parameter from `ou` to `orgUnit` ([#3362](https://github.com/dhis2/capture-app/issues/3362)) ([c7ab828](https://github.com/dhis2/capture-app/commit/c7ab82826254be24959ff25d643b68c1e525c893))
+
 ## [100.39.2](https://github.com/dhis2/capture-app/compare/v100.39.1...v100.39.2) (2023-09-14)
 
 
