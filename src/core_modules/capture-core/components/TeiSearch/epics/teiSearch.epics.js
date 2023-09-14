@@ -35,7 +35,7 @@ import type { QuerySingleResource } from '../../../utils/api/api.types';
 
 const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
     (orgUnitScope !== 'ACCESSIBLE' ?
-        { ou: orgUnit && orgUnit.id, ouMode: orgUnitScope } :
+        { orgUnit: orgUnit && orgUnit.id, ouMode: orgUnitScope } :
         { ouMode: orgUnitScope });
 
 const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>
