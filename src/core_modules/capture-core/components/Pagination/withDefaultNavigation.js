@@ -4,13 +4,13 @@
  */
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton } from 'capture-ui';
 import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
 
 const styles = (theme: Theme) => ({
     root: {
         flexShrink: 0,
+        display: 'flex',
         color: theme.palette.text.secondary,
     },
 });
@@ -75,6 +75,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
 
         renderNavigationElement() {
             const { currentPage, classes, theme, nextPageButtonDisabled } = this.props;
+            console.log('currentPage', currentPage);
 
             return (
                 <div
@@ -83,7 +84,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                     <IconButton
                         data-test={'search-pagination-first-page'}
                         onClick={this.handleFirstPageButtonClick}
-                        disabled={currentPage <= 1}
+                        disabled
                         aria-label="First Page"
                     >
                         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}

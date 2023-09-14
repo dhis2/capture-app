@@ -1,10 +1,36 @@
 // @flow
 import React, { useCallback } from 'react';
 import cx from 'classnames';
-import classes from './iconButton.module.css';
+import { withStyles } from '@material-ui/core/styles';
+import { colors } from '@dhis2/ui';
 import type { Props } from './iconButton.types';
 
-export const IconButton = ({ children, className, dataTest, onClick, ...passOnProps }: Props) => {
+const styles = {
+    button: {
+        cursor: 'pointer',
+        borderRadius: '3px',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '2px',
+        justifyContent: 'center',
+        color: colors.grey700,
+        '&:hover': {
+            background: colors.grey200,
+            color: colors.grey800,
+        },
+        '&:focus': {
+            outline: 'solid',
+            background: colors.grey200,
+            color: colors.grey800,
+        },
+        '&.disabled': {
+            color: colors.grey500,
+            cursor: 'not-allowed',
+        },
+    },
+};
+
+const IconButtonPlain = ({ children, className, dataTest, onClick, disabled, classes, ...passOnProps }: Props) => {
     const handleKeyDown = useCallback((event: SyntheticKeyboardEvent<HTMLSpanElement>) => {
         if ([' ', 'Enter', 'Spacebar'].includes(event.key)) {
             onClick(event);
@@ -18,9 +44,9 @@ export const IconButton = ({ children, className, dataTest, onClick, ...passOnPr
     return (
         <span
             {...passOnProps}
-            onClick={onClick}
+            onClick={!disabled ? onClick : null}
             data-test={dataTest}
-            className={cx(classes.button, className)}
+            className={cx(classes.button, { disabled, ...(className ? { [className]: true } : {}) })}
             type="button"
             role="button"
             tabIndex="0"
@@ -31,3 +57,5 @@ export const IconButton = ({ children, className, dataTest, onClick, ...passOnPr
         </span>
     );
 };
+
+export const IconButton = withStyles(styles)(IconButtonPlain);
