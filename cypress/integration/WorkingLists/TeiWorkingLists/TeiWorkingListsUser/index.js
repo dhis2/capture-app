@@ -345,7 +345,7 @@ When('you click the last name column header', () => {
 
 When('you click the WHOMCH Hemoglobin value column header', () => {
     cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
-        .eq(9)
+        .last()
         .click()
         .click();
 });
