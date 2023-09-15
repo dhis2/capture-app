@@ -75,7 +75,6 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
 
         renderNavigationElement() {
             const { currentPage, classes, theme, nextPageButtonDisabled } = this.props;
-            console.log('currentPage', currentPage);
 
             return (
                 <div
@@ -84,7 +83,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                     <IconButton
                         data-test={'search-pagination-first-page'}
                         onClick={this.handleFirstPageButtonClick}
-                        disabled
+                        disabled={currentPage <= 1}
                         aria-label="First Page"
                     >
                         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}

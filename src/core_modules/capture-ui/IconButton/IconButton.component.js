@@ -41,10 +41,16 @@ const IconButtonPlain = ({ children, className, dataTest, onClick, disabled, cla
         event.preventDefault();
     }, []);
 
+    const onClickHandler = useCallback((event: SyntheticMouseEvent<HTMLSpanElement>) => {
+        if (disabled) return null;
+        return onClick(event);
+    }, [disabled, onClick]);
+
     return (
         <span
             {...passOnProps}
-            onClick={!disabled ? onClick : null}
+            onClick={onClickHandler}
+            disabled={disabled}
             data-test={dataTest}
             className={cx(classes.button, { disabled, ...(className ? { [className]: true } : {}) })}
             type="button"
