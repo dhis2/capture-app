@@ -343,9 +343,9 @@ When('you click the last name column header', () => {
         .click();
 });
 
-When('you click the WHOMCH Smoking column header', () => {
+When('you click the WHOMCH Hemoglobin value column header', () => {
     cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
-        .eq(6)
+        .eq(9)
         .click()
         .click();
 });
@@ -400,10 +400,10 @@ Then('the list should display data ordered ascendingly by last name', () => {
         });
 });
 
-Then('the list should display data ordered ascendingly by WHOMCH Smoking', () => {
+Then('the list should display data ordered descending by WHOMCH Hemoglobin', () => {
     const names = [
-        'Siren',
         'Hertz',
+        'Siren',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
