@@ -758,7 +758,7 @@ msgid "Refer"
 msgstr "转诊"
 
 msgid "You can't add any more {{ programStageName }} events"
-msgstr ""
+msgstr "您无法添加更多的 {{ programStageName }} 事件"
 
 msgid "Cancel without saving"
 msgstr "取消而不保存"
@@ -1132,7 +1132,7 @@ msgid "Mark for follow-up"
 msgstr "后续标记"
 
 msgid "Existing dates for auto-generated events will not be updated."
-msgstr ""
+msgstr "自动生成的事件的现有日期将不会更新。"
 
 msgid "Enrollment date"
 msgstr "报名日期"
