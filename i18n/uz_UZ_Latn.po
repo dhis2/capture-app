@@ -1,36 +1,36 @@
 # 
 # Translators:
-# Caroline Hesthagen Holen <caroline@devotta.no>, 2022
-# Karoline Tufte Lien <karoline@dhis2.org>, 2023
+# Yury Rogachev <yury@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2023\n"
-"Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2023\n"
+"Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nb\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: uz@Latn\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
-msgstr "Velg en eller flere datoer"
+msgstr "Bir yoki bir necha sanalarni tanlang..."
 
 msgid "Choose a date..."
-msgstr "Velg en dato"
+msgstr "Sanani tanlang ..."
 
 msgid "Today"
-msgstr "I dag"
+msgstr "Bugun"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
-"En mulig årsak til dette er at nettleseren eller modusen (f.eks. "
-"Personvernmodus) ikke støttes. Se logg for detaljer."
+"Buning mumkin boʼlgan sabablari quyidagilar; brauzer yoki rejim (masalan, "
+"maxfiylik rejimi) qoʼllab quvvatlanmasligi. Tafsilotlar uchun jurnalga "
+"qarang."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -38,348 +38,353 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
-"Du åpnet en annen versjon av Capture-appen i samme domene. Foreløpig støtter"
-" Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
-"denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
-"at dette vil lukke andre versjoner."
+"Siz ayni shu domenda Nazorat Ilovasining boshqa versiyasini ochdingiz. "
+"Hozirda Nazorat Ilovasi faqat bitta versiyani bir vaqtda (bir xil "
+"ddomendagi) ishlashini qoʼllab quvvatlaydi. Ushbu versiyani qayta "
+"ishlatmoqchi boʼlsangiz, Iltimos, sahifani yangilang, ammo boshqa versiyalar"
+" yopilishini unutmang."
 
 msgid "View {{programName}} dashboard"
-msgstr "Vis {{programName}} dashbord"
+msgstr ""
 
 msgid "View dashboard"
-msgstr "Vis dashbord"
+msgstr "Boshqaruv panelini koʼrish"
 
 msgid "View active enrollment"
-msgstr "Vis aktiv registrering"
+msgstr "Faol roʼyxatdan oʼtayotganlarni koʼrish"
 
 msgid "Re-enroll"
-msgstr "Registrer på nytt"
+msgstr "Qayta roʼyxatdan oʼtish"
 
 msgid "in"
-msgstr "i"
+msgstr "ichida"
 
 msgid "Enrolled"
-msgstr "Registrert"
+msgstr "Roʼyxatga kiritilgan"
 
 msgid "Previously enrolled"
-msgstr "Tidligere registrert"
+msgstr "Ilgari roʼyxatga kiritilgan"
 
 msgid "Organisation unit"
-msgstr "Organisasjonsenhet"
+msgstr "Tashkiliy birlik"
 
 msgid "Date of enrollment"
-msgstr "Dato for registrering"
+msgstr "Roʼyxatga kiritilgan sana"
 
 msgid "Last updated"
-msgstr "Sist oppdatert"
+msgstr "Oxirgi yangilangan"
 
 msgid "error encountered during field validation"
-msgstr "En feil oppsto under feltvalidering"
+msgstr "maydonni tekshirish vaqtida xatolik yuz berdi"
 
 msgid "error"
-msgstr "Feil"
+msgstr "xato"
 
 msgid ""
 "Plugins are not yet available - Please contact your system administrator"
 msgstr ""
 
 msgid "This value is validating"
-msgstr "Denne verdien validerer"
+msgstr "Ushbu qiymat tasdiqlanmoqda"
 
 msgid "Async field update failed"
-msgstr "Asynkront feltoppdatering mislyktes"
+msgstr "Аsinxron maydon yangilanishi amalga oshmadi"
 
 msgid "A value is required"
-msgstr "En verdi kreves"
+msgstr "Qiymat talab qilinadi"
 
 msgid "Please provide a valid number"
-msgstr "Oppgi et gyldig nummer"
+msgstr "Iltimos, toʼgʼri raqamni koʼrsating"
 
 msgid "Please provide a valid integer"
-msgstr "Oppgi et gyldig heltall"
+msgstr "Iltimos, toʼgʼri butun sonni koʼrsating"
 
 msgid "Please provide a positive integer"
-msgstr "Oppgi et positivt heltall"
+msgstr "Iltimos, butun musbat sonni koʼrsating"
 
 msgid "Please provide zero or a positive integer"
-msgstr "Oppgi null eller et positivt heltall"
+msgstr "Iltimos, Nol yoki butun musbat sonni koʼrsating"
 
 msgid "Please provide a negative integer"
-msgstr "Oppgi et negativt heltall"
+msgstr "Iltimos, butun manfiy sonni koʼrsating"
 
 msgid "Please provide a valid date"
-msgstr "Oppgi en gyldig dato"
+msgstr "Iltimos, toʼgʼri sanani koʼrsating"
 
 msgid "A date in the future is not allowed"
-msgstr "En dato i fremtiden er ikke tillatt"
+msgstr "Kelajakdagi sana qabul qilinmaydi"
 
 msgid "Please provide a valid date and time"
-msgstr "Oppgi en gyldig dato og tid"
+msgstr "Iltimos, tegishli sana va vaqtni koʼrsating"
 
 msgid "Please provide a valid time"
-msgstr "Oppgi en gyldig tid"
+msgstr "Iltimos, toʼgʼri vaqtni koʼrsating"
 
 msgid "Please provide an integer between 0 and 100"
-msgstr "Oppgi et heltall mellom 0 og 100"
+msgstr ""
 
 msgid "Please provide a valid url"
-msgstr "Oppgi en gyldig url"
+msgstr "Iltimos, haqiqiy URL manzilni koʼrsating"
 
 msgid "Please provide a valid email address"
-msgstr "Vennligst fyll ut en gyldig e-postadresse"
+msgstr "Iltimos, amaldagi ye-pochta manzilini koʼrsating"
 
 msgid "Please provide a valid age"
-msgstr "Oppgi en gyldig alder"
+msgstr "Iltimos, toʼgʼri yoshni koʼrsating"
 
 msgid "Please provide a valid phone number"
-msgstr "Oppgi et gyldig telefonnummer"
+msgstr "Iltimos, toʼgʼri telefon raqamini koʼrsating"
 
 msgid "Please provide a valid organisation unit"
-msgstr "Oppgi en gyldig organisasjonsenhet"
+msgstr "Iltimos, toʼgʼri tashkiliy boʼlimni koʼrsating"
 
 msgid "Please provide valid coordinates"
-msgstr "Oppgi gyldige koordinater"
+msgstr "Iltimos, toʼgʼri koordinatalarni koʼrsating"
 
 msgid "This value already exists"
-msgstr "Denne verdien finnes allerede"
+msgstr "Bu qiymat allaqachon mavjud"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"Fra\" kan ikke være større enn \"Til\""
+msgstr "Sana \"gacha\" katta boʼlishi mumkin emas sana \"dan\""
 
 msgid "Checking..."
-msgstr "Sjekker..."
+msgstr "Tekshirilmoqda..."
 
 msgid "Area"
-msgstr "Areal"
+msgstr "Maydon"
 
 msgid "Coordinate"
-msgstr "Koordinater"
+msgstr "Muvofiqlashtirish"
 
 msgid "Enrollment"
-msgstr "Registrering"
+msgstr "Roʼyxatga olish"
 
 msgid "Please select {{categoryName}}"
 msgstr ""
 
 msgid "A future date is not allowed"
-msgstr "En fremtidig dato er ikke tillatt"
+msgstr "Kelajakdagi sana tanloviga ruxsat berilmaydi"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
-msgstr "Lagrer en ny registrering i {{programName}} i {{orgUnitName}}."
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
-msgstr "Lagrer {{trackedEntityName}} i {{programName}} i {{orgUnitName}}."
+msgstr ""
 
 msgid "Cancel"
-msgstr "Avbryt"
+msgstr "Bekor qilish"
 
 msgid "Metadata error. see log for details"
-msgstr "Metadata feil, se logg for detaljer"
+msgstr "MetaMaʼlumotda xatolik. Tafsilotlar uchun jurnalga qarang."
 
 msgid "Assigned user"
-msgstr "Tildelt programbruker"
+msgstr "Tavsiya etilgan foydalanuvchi"
 
 msgid "Search for user"
-msgstr "Søk etter bruker"
+msgstr "Foydalanuvchini izlash"
 
 msgid "Complete event"
-msgstr "Fullfør hendelse"
+msgstr ""
 
 msgid "Basic info"
-msgstr "Grunnleggende informasjon"
+msgstr "Аsosiy maʼlumot"
 
 msgid "Status"
 msgstr "Status"
 
 msgid "Comments"
-msgstr "Kommentarer"
+msgstr "Izohlar"
 
 msgid "Relationships"
-msgstr "Relasjoner"
+msgstr "Oʼzaro aloqalar"
 
 msgid "Assignee"
-msgstr "Tildelt programbruker"
+msgstr "Vakolat berilgan shaxs"
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr "Lagrer i {{programName}} i {{orgUnitName}}"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Dette er ikke et hendelsesprogram, eller metadataene er korrupte. Se logg "
-"for detaljer."
+"Bu hodisa/tadbir dasturi emas yoki metamaʼlumotlar buzilgan. Tafsilotlar "
+"uchun jurnalga qarang."
 
 msgid "This event"
-msgstr "Denne hendelsen"
+msgstr "Ushbu hodisa/tadbir"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"Relasjon av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
+"{{relationshipTypeName}} turining {{entityName}} bilan aloqasi allaqachon "
+"mavjud"
 
 msgid "Active"
-msgstr "Aktiv"
+msgstr "Faol"
 
 msgid "Completed"
-msgstr "Fullført"
+msgstr "Toʼldirildi"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr "Legg til eller avbryt kommentar før du lagrer hendelsen"
+msgstr ""
+"Iltimos, hodisa/tadbirni saqlashdan oldin sharh yozing yoki bekor qiling"
 
 msgid "Save and add another"
-msgstr "Lagre og legg til en til"
+msgstr "Saqlash va boshqasini qoʼshish"
 
 msgid "Save and exit"
-msgstr "Lagre og avslutt"
+msgstr "Saqlash va chiqish"
 
 msgid "Finish"
-msgstr "Fullfør"
+msgstr "Tugatish"
 
 msgid "Save without completing"
-msgstr "Lagre uten å fullføre"
+msgstr ""
 
 msgid "Complete"
-msgstr "Fullfør"
+msgstr "Toʼldirish"
 
 msgid "No write access"
-msgstr "Ingen skrivetilgang"
+msgstr "Yozuv kiritish uchun ruxsat yoʼq"
 
 msgid "New {{titleText}}"
-msgstr "Ny {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
-msgstr "Bytt til skjemavisning"
+msgstr "Shakl koʼrinishiga oʼtish"
 
 msgid "Switch to row view"
-msgstr "Bytt til radvisning"
+msgstr "Jadval koʼrinishiga oʼtish"
 
 msgid "events added"
-msgstr "Hendelser lagt til"
+msgstr "hodisa/tadbirlar qoʼshildi"
 
 msgid "No events added"
-msgstr "Ingen hendelser lagt til"
+msgstr "Hech qanday hodisa/tadbir qoʼshilmagan"
 
 msgid "New event relationship"
-msgstr "Ny hendelsesrelasjon"
+msgstr "Yangi hodisa/tadbir munosabatlari"
 
 msgid "Adding relationship to event."
-msgstr "Legger til relasjon til hendelsen."
+msgstr "Hodisa/tadbirga aloqa-munosabatlar qoʼshish"
 
 msgid "Go back to event without saving relationship"
-msgstr "Gå tilbake til hendelsen uten å lagre relasjonen"
+msgstr "Аloqa-munosabatlarni saqlamasdan hodisa/tadbirga qaytish"
 
 msgid "Discard unsaved changes?"
-msgstr "Vil du forkaste ulagrede endringer?"
+msgstr "Saqlanmagan oʼzgarishlar bekor qilinsinmi?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
-"Hvis du forlater denne siden, vil du forkaste valgene du gjorde for en ny "
-"relasjon"
+"Ushbu sahifani tark etsangiz, yangi munosabatlar uchun qilgan tanlovingiz "
+"bekor qilinadi."
 
 msgid "Yes, discard changes"
 msgstr ""
 
 msgid "No, cancel"
-msgstr "Nei, avbryt"
+msgstr "Yoʼq, bekor qiling"
 
 msgid "New event"
-msgstr "Ny hendelse"
+msgstr "Yangi hodisa"
 
 msgid "You don't have access to create an event in the current selections"
-msgstr "Du har ikke tilgang til å lage en hendelse i gjeldende valg"
+msgstr ""
 
 msgid "Save"
-msgstr "Lagre"
+msgstr "Saqlash"
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr "Lagrer en {{trackedEntityName}}"
+msgstr ""
 
 msgid "without"
-msgstr "uten"
+msgstr ""
 
 msgid "enrollment"
-msgstr "registrering"
+msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr "Registrer i et program ved å velge et program fra topplinjen."
+msgstr ""
 
 msgid "An error has occurred. See log for details"
-msgstr "Det har oppstått en feil. Se logg for detaljer"
+msgstr "Xatolik yuz berdi. Tafsilotlar uchun jurnalga qarang"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
+msgstr ""
+"Ikki nusxasi mavjud (lekin xatolar boʼlgan, batafsil maʼlumot uchun jurnalga"
+" qarang"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
-"Et element med dette {{attributeName}} er allerede registrert, men du har "
-"ikke tilgang til den."
+"Ushbu {{attributeName}} element allaqachon roʼyxatdan oʼtgan, ammo siz unga "
+"kirish huquqiga ega emassiz"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr "Du har allerede registrert dette {{attributeName}}"
+msgstr "Siz allaqachon {{attributeName}} da roʼyxatdan oʼtgansiz"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
-"En {{trackedEntityTypeName}} med dette {{attributeName}} er allerede "
-"registrert"
+"{{trackedEntityTypeName}} ushbu {{attributeName}} bilan allaqachon "
+"roʼyxatdan oʼtgan"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Vis registrert {{trackedEntityTypeName}}"
+msgstr "Roʼyxatdan oʼtgan {{trackedEntityTypeName}} ni koʼrsatish"
 
 msgid "Registered person"
-msgstr "Registrert person"
+msgstr "Roʼyxatdan oʼtgan shaxs"
 
 msgid "validation failed"
-msgstr "validering mislyktes"
+msgstr "Tasdiqlash amalga oshmadi"
 
 msgid "Errors"
-msgstr "Feil"
+msgstr "Xatoliklar"
 
 msgid "Feedback"
-msgstr "Tilbakemelding"
+msgstr "Qayta aloqa"
 
 msgid "Indicators"
-msgstr "Indikatorer"
+msgstr "Indikatorlar"
 
 msgid "Warnings"
-msgstr "Advarsler"
+msgstr "Ogohlantirishlar"
 
 msgid "Generate new event"
-msgstr "Generer en ny hendelse"
+msgstr "Yangi hodisa/tadbir yaratish"
 
 msgid "Do you want to create another event?"
-msgstr "Vil du opprette en ny hendelse?"
+msgstr "Haqiqatdan ham boshqa hodisa/tadbir yaratmoqchimisiz?"
 
 msgid "Yes, create new event"
-msgstr "Ja, legg til ny hendelse"
+msgstr ""
 
 msgid "Back to form"
-msgstr "Tilbake til skjemaet"
+msgstr "Shaklga qaytish"
 
 msgid "Save anyway"
-msgstr "Lagre likevel"
+msgstr "Nima boʼlganda ham saqlash"
 
 msgid "Validation errors and warnings"
-msgstr "Valideringsfeil og advarsler"
+msgstr "Tasdiqlash xatoliklari va ogohlantirishlari"
 
 msgid "Validation errors"
-msgstr "Valideringsfeil"
+msgstr "Tasdiqlashda xatoliklar"
 
 msgid "Validation warnings"
-msgstr "Valideringsadvarsler"
+msgstr "Tasdiqlash toʼgʼrisida ogohlantirishlar"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr "Noen operasjoner kjører fortsatt. Vennligst vent.."
+msgstr "Baʼzi operatsiyalar hali ham bajarilmoqda. Iltimos, kuting ..."
 
 msgid "Operations running"
-msgstr "Operasjoner kjører"
+msgstr "Аmaliyotlar bajarilmoqda"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -387,214 +392,215 @@ msgid ""
 msgstr ""
 
 msgid "No events to display"
-msgstr "Ingen hendelser å vise"
+msgstr "Koʼrsatiladigan hech qanday hodisa/tadbir yoʼq"
 
 msgid "Data for offline list not present"
-msgstr "Data for frakoblet liste er ikke til stede"
+msgstr "Offlayn roʼyxat uchun maʼlumotlar mavjud emas"
 
 msgid "Close"
-msgstr "Lukk"
+msgstr "Yopmoq"
 
 msgid "Please select the user"
-msgstr "Velg bruker"
+msgstr "Iltimos, foydalanuvchini tanlang"
 
 msgid "Me"
-msgstr "Meg"
+msgstr "Men"
 
 msgid "Anyone"
-msgstr "Hvem som helst"
+msgstr "Kimdir"
 
 msgid "None"
-msgstr "Ingen"
+msgstr "Yoʼq"
 
 msgid "Select user"
-msgstr "Velg bruker"
+msgstr "Foydalanuvchini tanlang"
 
 msgid "to"
-msgstr "til"
+msgstr "ga"
 
 msgid "Days in the future"
-msgstr "Dager i fremtiden"
+msgstr ""
 
 msgid "From"
-msgstr "Fra"
+msgstr "Dan"
 
 msgid "Days in the past"
-msgstr "Dager i fortiden"
+msgstr ""
 
 msgid "To"
-msgstr "Til"
+msgstr "Kimga"
 
 msgid "This week"
-msgstr "Denne uken"
+msgstr "Ushbu hafta"
 
 msgid "This month"
-msgstr "Denne måneden"
+msgstr "Ushbu oy"
 
 msgid "This Year"
-msgstr "Dette året"
+msgstr ""
 
 msgid "Last week"
-msgstr "Forrige uke"
+msgstr "Oxirgi hafta"
 
 msgid "Last month"
-msgstr "Forrige måned"
+msgstr "Oxirgi oy"
 
 msgid "Last 3 months"
-msgstr "Siste 3 måneder"
+msgstr "Oxirgi 3 oy"
 
 msgid "Absolute range"
-msgstr "Absolutt rekkevidde"
+msgstr ""
 
 msgid "Relative range"
-msgstr "Relativ rekkevidde"
+msgstr ""
 
 msgid "Max"
-msgstr "Max"
+msgstr "Maksimum"
 
 msgid "Min"
-msgstr "Min"
+msgstr "Minimum"
 
 msgid "Contains text"
-msgstr "Inneholder tekst"
+msgstr "Matnni oʼz ichiga oladi"
 
 msgid "Yes"
-msgstr "Ja"
+msgstr "Ha"
 
 msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
+msgstr "kun/oy/yil"
 
 msgid "Years"
-msgstr "År"
+msgstr "Yillar"
 
 msgid "Months"
-msgstr "Måneder"
+msgstr "Oylar"
 
 msgid "Days"
-msgstr "Dager"
+msgstr "Kunlar"
 
 msgid "Uploading file"
-msgstr "Laster opp fil"
+msgstr "Fayl yuklanmoqda"
 
 msgid "selected"
-msgstr "valgt"
+msgstr "tanlangan"
 
 msgid "Delete"
-msgstr "Slett"
+msgstr "Oʼchirib tashlash"
 
 msgid "Select file"
-msgstr "Velg fil"
+msgstr "Faylni tanlash"
 
 msgid "No"
-msgstr "Nei"
+msgstr "Yoʼq"
 
 msgid "Uploading image"
-msgstr "Laster opp bilde"
+msgstr "Rasm yuklanmoqda"
 
 msgid "Select image"
-msgstr "Velg bilde"
+msgstr "Rasmni tanlang"
 
 msgid "Type to filter options"
-msgstr "Skriv for å filtrere alternativer"
+msgstr ""
 
 msgid "No match found"
 msgstr ""
 
 msgid "Search"
-msgstr "Søk"
+msgstr "Izlash"
 
 msgid "Clear"
-msgstr "Fjern"
+msgstr "Tozalash"
 
 msgid "No results"
-msgstr "Ingen resultater"
+msgstr "Natija yoʼq"
 
 msgid "Description"
-msgstr "Beskrivelse"
+msgstr "Tavsif"
 
 msgid "URL"
 msgstr "URL"
 
 msgid "Icon for {{field}}"
-msgstr "Ikon for {{field}}"
+msgstr ""
 
 msgid "start typing to search"
-msgstr "begynn å skrive for å søke"
+msgstr "qidirish uchun yozishni boshlang"
 
 msgid "suggestions could not be retrieved"
-msgstr "forslag kunne ikke hentes"
+msgstr "takliflar qabul qilinmadi"
 
 msgid "No items to display"
-msgstr "Ingen elementer å vise"
+msgstr "Koʼrsatiladigan axborot yoʼq"
 
 msgid "Select columns"
-msgstr "Velg kolonner"
+msgstr "Ustunlarni tanlang"
 
 msgid "Columns to show in table"
-msgstr "Kolonner som skal vises i tabellen"
+msgstr "Jadvalda koʼrsatiladigan ustunlar"
 
 msgid "Column"
-msgstr "Kolonne"
+msgstr "Ustun"
 
 msgid "Update"
-msgstr "Oppdater"
+msgstr "Янгилаш"
 
 msgid "Reset filter"
-msgstr "Nullstill filter"
+msgstr ""
 
 msgid "Remove filter"
-msgstr "Fjern filter"
+msgstr "Filtrni olib tashlash"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} til {{toDate}}"
+msgstr "{{fromDate}} dan {{toDate}} ga"
 
 msgid "after or equal to {{date}}"
-msgstr "etter eller lik {{date}}"
+msgstr "{{date}} dan keyin yoki unga teng"
 
 msgid "before or equal to {{date}}"
-msgstr "før eller lik {{date}}"
+msgstr "{{date}} dan oldin yoki unga teng"
 
 msgid "greater than or equal to"
-msgstr "større enn eller lik"
+msgstr "dan katta yoki teng"
 
 msgid "less than or equal to"
-msgstr "mindre enn eller lik"
+msgstr "dan kam yoki teng"
 
 msgid "More filters"
-msgstr "Flere filtre"
+msgstr "Koʼproq Filtr"
 
 msgid "Stage filters"
-msgstr "Fasefilter"
+msgstr ""
 
 msgid "Rows per page"
-msgstr "Rader per side"
+msgstr "Sahifada qatorlar"
 
 msgid "Could not get organisation unit"
-msgstr "Kunne ikke få tak i organisasjonsenhet"
+msgstr "Tashkiliy boʼlimni olib boʼlmadi"
 
 msgid "Program doesn't exist"
-msgstr "Programmet finnes ikke"
+msgstr "Dastur mavjud emas"
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr "Valgt program er ugyldig for registreringsenhet"
+msgstr ""
+"Tanlangan dastur tanlangan roʼyxatdan olinadigan boʼlim uchun yaroqsiz"
 
 msgid "Online"
-msgstr "Påkoblet"
+msgstr "Onlayn"
 
 msgid "Offline"
-msgstr "Frakoblet"
+msgstr "Offlayn"
 
 msgid "Syncing"
-msgstr "Synkroniserer"
+msgstr "Sinxronlashmoqda"
 
 msgid "Add comment"
-msgstr "Legg til en kommentar"
+msgstr "Izoh qoʼshish"
 
 msgid "You don't have access to write comments"
-msgstr "Du har ikke tilgang til å skrive kommentarer"
+msgstr ""
 
 msgid "Write comment"
-msgstr "Skriv kommentar"
+msgstr "Fikr yozing"
 
 msgid "was blanked out and hidden by your last action"
 msgstr ""
@@ -606,10 +612,10 @@ msgid "Close the notice"
 msgstr ""
 
 msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "Bruk nytt registreringsdashbord for {{programName}}"
+msgstr ""
 
 msgid "Opt in for {{programName}}"
-msgstr "Meld på for {{programName}}"
+msgstr ""
 
 msgid ""
 "By clicking opt-in below, you will start using the new enrollment dashboard "
@@ -633,71 +639,66 @@ msgid ""
 msgstr ""
 
 msgid "Yes, opt in"
-msgstr "Ja, meld på"
+msgstr ""
 
 msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr "Slutt å bruke nytt registreringsdashbord for {{programName}}"
+msgstr ""
 
 msgid "Opt out for {{programName}}"
-msgstr "Meld ut for {{programName}}"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "Sporet enhetsforekomst med id \"{{teiId}}\"  eksisterer ikke"
+msgstr ""
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
-"Det oppsto en feil under åpningen av denne registreringen. Vennligst skriv "
-"inn en gyldig url."
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
 msgid "Enrollment Dashboard"
-msgstr "Registreringsdashbord"
+msgstr ""
 
 msgid "No indicator output for this enrollment yet"
-msgstr "Ingen indikatorresultat for denne registreringen enda"
+msgstr ""
 
 msgid "No feedback for this enrollment yet"
-msgstr "Ingen tilbakemeldinger for denne registreringen enda"
+msgstr ""
 
 msgid "Quick actions"
-msgstr "Snarveier"
+msgstr ""
 
 msgid "New Event"
-msgstr "Ny hendelse"
+msgstr ""
 
 msgid "Schedule an event"
-msgstr "Planlegg en hendelse"
+msgstr ""
 
 msgid "Make referral"
-msgstr "Opprett henvisning"
+msgstr "Yoʼnalish yarating"
 
 msgid "No available program stages"
-msgstr "Ingen tilgjengelige programfaser"
+msgstr ""
 
 msgid "Program stage not found"
-msgstr "Programfase ikke funnet"
+msgstr ""
 
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
 msgstr ""
-"Velg et program for å legge til nye eller se eksisterende registreringer for"
-" {{teiDisplayName}}"
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
-"{{programName}} har kategorier. Velg alle kategorier for å se dashbordet."
 
 msgid "Invalid enrollment id {{enrollmentId}}."
 msgstr ""
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr "Velg en registrering for å se dashbordet."
+msgstr ""
 
 msgid "There are no active enrollments."
 msgstr ""
@@ -709,267 +710,264 @@ msgid "No access to program owner."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
+msgstr ""
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr "Registrer {{teiDisplayName}} i dette programmet"
+msgstr ""
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
-"{{teiDisplayName}} er en {{tetName}} og kan ikke registreres i "
-"{{programName}}. Velg et annet program som tillater registrering av "
-"{{tetName}}."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr "Registrer en ny {{teiDisplayName}} i dette programmet"
+msgstr ""
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr "{{programName}} er et hendelsesprogram og har ikke registreringer."
+msgstr ""
 
 msgid "Create a new event in this program."
-msgstr "Opprett ny hendelse i dette programmet"
+msgstr ""
 
 msgid "View working list in this program."
-msgstr "Se arbeidsliste i dette programmet."
+msgstr ""
 
 msgid "Page is missing required values from URL"
-msgstr "Siden mangler nødvendige verdier fra URL"
+msgstr ""
 
 msgid "Program is not valid"
-msgstr "Programmet er ikke gyldig"
+msgstr ""
 
 msgid "Org unit is not valid with current program"
-msgstr "Organisasjonsenheten er ikke gyldig med gjeldende program"
+msgstr ""
 
 msgid "There was an error opening the Page"
-msgstr "Det oppsto en feil ved åpning av siden"
+msgstr ""
 
 msgid "Enrollment{{escape}} New Event"
-msgstr "Registrering{{escape}} Ny hendelse"
+msgstr ""
 
 msgid "There was an error loading the page"
-msgstr "Det oppsto en feil under lasting av siden"
+msgstr ""
 
 msgid "Choose a registering unit to start reporting"
-msgstr "Velg en registreringsenhet for å starte rapportering"
+msgstr "Xisobot boshlash uchun roʼyxatdan oʼtishni tanlang"
 
 msgid "There are no feedbacks for this event"
-msgstr "Det er ingen tilbakemeldinger for denne hendelsen"
+msgstr ""
 
 msgid "There are no indicators for this event"
-msgstr "Det er ingen indikatorer for denne hendelsen"
+msgstr ""
 
 msgid "Program stage is invalid"
-msgstr "Programfase er ugyldig"
+msgstr ""
 
 msgid "Report"
-msgstr "Rapport"
+msgstr "Hisobot"
 
 msgid "Schedule"
-msgstr "Planlegg"
+msgstr "Reja"
 
 msgid "Refer"
-msgstr "Henvis"
+msgstr ""
 
 msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
-msgstr "Avbryt uten å lagre"
+msgstr ""
 
 msgid "Choose a stage for a new event"
-msgstr "Velg fase for ny hendelse"
+msgstr ""
 
 msgid "Program Stages could not be loaded"
-msgstr "Programfaser kunne ikke lastes inn"
+msgstr ""
 
 msgid "Stage"
-msgstr "Fase"
+msgstr "Босқич"
 
 msgid "Enrollment{{escape}} View Event"
-msgstr "Registrering{{escape}} Vis hendelse"
+msgstr ""
 
 msgid "Enrollment{{escape}} Edit Event"
-msgstr "Registrering{{escape}} Rediger hendelse"
+msgstr ""
 
 msgid "The enrollment event data could not be found"
-msgstr "Hendelsessdataene ble ikke funnet"
+msgstr ""
 
 msgid "There are no feedback for this event"
-msgstr "Det er ingen tilbakemeldinger for denne hendelsen"
+msgstr ""
 
 msgid "Registered events"
-msgstr "Registrerte hendelser"
+msgstr "Roʼyxatdan oʼtgan hodisa/tadbirlar"
 
 msgid "Please select {{category}}."
-msgstr "Velg {{kategori}}."
+msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
-msgstr "Eller se alle opptegnelser som er tilgjengelige for deg i {{program}}"
+msgstr ""
 
 msgid "Or see all events accessible to you in {{program}}"
-msgstr "Eller se alle hendelser som er tilgjengelige for deg i {{program}}"
+msgstr ""
 
 msgid "Please select an organisation unit."
-msgstr "Vennligst velg en organisasjonsenhet"
+msgstr ""
 
 msgid "New"
-msgstr "Ny"
+msgstr "Yangi"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr "Velg {{missingCategories}} for å starte rapportering"
+msgstr ""
 
 msgid "Save as new"
-msgstr "Lagre som ny"
+msgstr ""
 
 msgid "View enrollment"
-msgstr "Se registrering"
+msgstr ""
 
 msgid "Create for"
-msgstr "Opprett for"
+msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
-"Du kan også velge et program fra topplinjen og opprette i det programmet"
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr "Ny registrering i programmet{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
-msgstr "Lagre {{trackedEntityName}}"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr "Opprett ny {{trackedEntityTypeName}} og link"
+msgstr ""
 
 msgid "Link"
-msgstr "Link"
+msgstr "Havola"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr "Lagre som ny {{trackedEntityName}}"
+msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr "Noen programmer blir filtrert."
+msgstr "Baʼzi dasturlar Filtrlanmoqda."
 
 msgid "Show all"
-msgstr "Vis alle"
+msgstr "Barchaga koʼrsatish"
 
 msgid "Program"
-msgstr "Program"
+msgstr "Programma"
 
 msgid "Organisation Unit"
-msgstr "Organisasjonsenhet"
+msgstr "Tashkiliy birlik"
 
 msgid "Registration"
-msgstr "Registrering"
+msgstr "Roʼyxatdan oʼtish"
 
 msgid "Search results"
-msgstr "Søkeresultater"
+msgstr "Qidiruv natijalari"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr "Ingen {{trackedEntityTypeName}} funnet."
+msgstr "Hech qanday {{trackedEntityTypeName}} topilmadi"
 
 msgid "New search"
-msgstr "Nytt søk"
+msgstr "Yangi qidiruv"
 
 msgid "Edit search"
-msgstr "Rediger søk"
+msgstr "Qidiruvni tahrirlash"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr "Link til en eksisterende {{trackedEntityType}}"
+msgstr "Mavjud {{trackedEntityType}} ga havola"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr "Opprett ny {{trackedEntityType}}"
+msgstr "Yangi {{trackedEntityType}} yaratish"
 
 msgid "Register"
-msgstr "Registrere"
+msgstr "Roʼyxatga olish"
 
 msgid "Back"
-msgstr "Tilbake"
+msgstr "Orqaga"
 
 msgid "events"
-msgstr "hendelser"
+msgstr ""
 
 msgid "event"
-msgstr "hendelse"
+msgstr ""
 
 msgid "You don't have access to edit this event"
-msgstr "Du har ikke tilgang til å redigere denne hendelsen"
+msgstr ""
 
 msgid "Edit event"
-msgstr "Rediger hendelse"
+msgstr "Hodisa/tadbirni tahrirlang"
 
 msgid "Event details"
-msgstr "Hendelsesdetaljer"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
-"Hvis du forlater denne siden, vil valgene du har satt bli forkastet for "
-"denne relasjonen"
+"Ushbu sahifani tark etsangiz, yangi aloqa-munosabatlar uchun qilingan barcha"
+" tanlovlar bekor qilinadi"
 
 msgid "No one is assigned to this event"
-msgstr "Ingen er tildelt denne hendelsen"
+msgstr "Ushbu hodisa/tadbirga hech kim biriktirilmagan"
 
 msgid "Assign"
-msgstr "Tildel"
+msgstr "Tayinlangan"
 
 msgid "Event assigned to {{name}}"
-msgstr "Hendelse er tildelt til {{name}}"
+msgstr "Hodisa/tadbir {{name}} ga biriktirildi"
 
 msgid "Feedbacks"
-msgstr "Tilbakemeldinger"
+msgstr "Qayta aloqalar"
 
 msgid "Show all events"
-msgstr "Vis alle hendelser"
+msgstr "Barcha hodisa/tadbirlarni koʼrsatish"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den finnes?"
+msgstr ""
+"Hodisa/tadbirni yuklab boʼlmadi. Uning mavjudligiga ishonchingiz komilmi?"
 
 msgid "Event could not be loaded"
-msgstr "Hendelse kunne ikke lastes inn"
+msgstr "Hodisa/tadbirni yuklab boʼlmadi"
 
 msgid "Organisation unit could not be loaded"
-msgstr "Organisasjonsenhet kunne ikke lastes inn"
+msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
 
 msgid "Possible duplicates found"
-msgstr "Mulige duplikater funnet"
+msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
 
 msgid "No results found"
-msgstr "Ingen resultater funnet"
+msgstr "Hech qanday natija topilmadi"
 
 msgid "An error occurred loading possible duplicates"
-msgstr "En feil oppsto ved lasting av mulige duplikater"
+msgstr ""
 
 msgid "You don't have access to delete this relationship"
-msgstr "Du har ikke tilgang til å slette denne relasjonen"
+msgstr ""
 
 msgid "You don't have access to create any relationships"
-msgstr "Du har ikke tilgang til å opprette noen relasjoner"
+msgstr ""
 
 msgid "Add relationship"
-msgstr "Legg til relasjon"
+msgstr "Oʼzaro aloqa kiritish"
 
 msgid "No results found for "
 msgstr ""
 
 msgid "Registering unit"
-msgstr "Registreringsenhet"
+msgstr "Roʼyxatga olish muassasasi"
 
 msgid "Choose a registering unit"
 msgstr ""
 
 msgid "Clear selection"
-msgstr "Fjern valg"
+msgstr ""
 
 msgid "No programs available."
-msgstr "Ingen programmer tilgjengelig."
+msgstr "Hech qanday dastur mavjud emas."
 
 msgid "Search for a program"
 msgstr ""
@@ -981,119 +979,116 @@ msgid "Show all programs"
 msgstr ""
 
 msgid "Choose a program"
-msgstr "Velg et program"
+msgstr ""
 
 msgid "Search for {{titleText}}"
-msgstr "Søk etter {{titleText}}"
+msgstr ""
 
 msgid "Search for"
-msgstr "Søk etter"
+msgstr "Qidirish"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
-msgstr "Du kan også velge et program fra topplinjen og søke i det programmet"
+msgstr ""
+"Bundan tashqari, yuqori satrda dasturni tanlashingiz va ushbu dastur ichida "
+"qidirishingiz mumkin"
 
 msgid "Choose a type to start searching"
-msgstr "Velg en type for å begynne å søke"
+msgstr "Qidiruv turini tanlang va qidirishni boshlang"
 
 msgid "Search {{name}}"
-msgstr "Søk {{name}}"
+msgstr "{{name}} orqali qidirish"
 
 msgid "Search by {{name}}"
-msgstr "Søk etter {{name}}"
+msgstr ""
 
 msgid "Search by attributes"
-msgstr "Søk etter attributter"
+msgstr "Аtribut orqali qidirish"
 
 msgid "all programs"
-msgstr "alle programmer"
+msgstr ""
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 msgstr ""
-"Finner du ikke resultatene du leter etter? Prøv å søke i alle programmer som"
-" bruker type"
 
 msgid "Search in all programs"
-msgstr "Søk i alle programmer"
+msgstr "Barcha dasturlarda qidirish"
 
 msgid "If none of search results match, you can create a new "
-msgstr "Hvis ingen av søkeresultatene samsvarer, kan du opprette ny"
+msgstr ""
 
 msgid "Create new"
-msgstr "Opprett ny"
+msgstr "Yangisini yaratish"
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr "Fyll ut disse feltene for å søke{{escape}} {{ searchableAttributes }}"
+msgstr ""
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
 "search{{escape}} {{searchableAttributes}}"
 msgstr ""
-"Fyll ut minst {{minAttributesRequiredToSearch}} av disse feltene for å "
-"søke{{escape}} {{searchableAttributes}}"
 
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "Fyll ut dette feltet for å søke {{escape}} {{searchableAttributes}}"
+msgstr ""
 
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
-msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
+msgstr ""
+"Qidiruv soʼzlarini oʼzgartirib, qidirilayotgan axborotni qayta qidiruvga "
+"topshirishingiz mumkin."
 
 msgid "Back to search"
-msgstr "Tilbake til søk"
+msgstr "Qidiruvga qaytish"
 
 msgid "An error has occurred"
-msgstr "Det har oppstått en feil"
+msgstr "Xatolik yuz berdi"
 
 msgid "Too many results"
-msgstr "For mange resultat"
+msgstr "Natija juda koʼp"
 
 msgid "Cannot search in all programs"
-msgstr "Kan ikke søke i alle programmer"
+msgstr ""
 
 msgid "Missing search criteria"
 msgstr ""
 
 msgid "Results found"
-msgstr "Resultater funnet"
+msgstr "Natijalar topildi"
 
 msgid "Selected program"
-msgstr "Valgt program"
+msgstr "Tanlangan dastur"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr "Søk {{uniqueAttrName}}"
+msgstr "{{uniqueAttrName}} orqali qidirish"
 
 msgid "Saved lists in this program"
-msgstr "Lagrede lister i dette programmet"
+msgstr ""
 
 msgid "Saved lists offer quick access to your most used views in a program."
 msgstr ""
-"Lagrede lister gir rask tilgang til dine mest brukte visninger i et program."
 
 msgid ""
 "There are no saved lists in this program yet, create one using the button "
 "below."
 msgstr ""
-"Det er ingen lagrede lister i dette programmet ennå, lag en ved å bruke "
-"knappen nedenfor."
 
 msgid "Create saved list"
-msgstr "Lag lagret liste"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "Ny {{trackedEntityName}} i {{programName}}"
+msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
+msgstr ""
 
 msgid "To work with the selected program,"
-msgstr "For å jobbe med det valgte programmet,"
+msgstr "Tanlangan dastur bilan ishlash uchun,"
 
 msgid "open the Tracker Capture app"
-msgstr "åpne Tracker Capture app"
+msgstr "Kuzatuv-Nazorat dasturini oching"
 
 msgid "This program is protected"
 msgstr ""
@@ -1115,277 +1110,269 @@ msgid ""
 msgstr ""
 
 msgid "Save comment"
-msgstr "Lagre kommentar"
+msgstr "Fikr/izohni saqlang"
 
 msgid "Enrollment actions"
-msgstr "Registreringshandlinger"
+msgstr ""
 
 msgid "We are processing your request."
-msgstr "Vi behandler forespørselen din."
+msgstr ""
 
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
-msgstr "Bare én registrering per {{tetName}} er tillatt i dette programmet"
+msgstr ""
 
 msgid "Add new"
-msgstr "Legg til ny"
+msgstr "Янгисини қўшиш"
 
 msgid "Reactivate"
-msgstr "Reaktiver"
+msgstr ""
 
 msgid "Mark as cancelled"
-msgstr "Merk som kansellert"
+msgstr ""
 
 msgid "Mark incomplete"
-msgstr "Merk som ufullstendig"
+msgstr ""
 
 msgid "Delete enrollment"
-msgstr "Slett registrering"
+msgstr "Roʼyxatdan oʼtkazish oʼchirilsin"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
 msgstr ""
-"Er du sikker på at du vil slette denne registreringen? Dette vil fjerne den "
-"nåværende registreringen permanent."
 
 msgid "Yes, delete enrollment."
-msgstr "Ja, slett registrering"
+msgstr ""
 
 msgid "Remove mark for follow-up"
-msgstr "Fjern merk for oppfølging"
+msgstr ""
 
 msgid "Mark for follow-up"
-msgstr "Merk for oppfølging"
+msgstr "Kuzatuv uchun belgilang"
 
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
 msgid "Enrollment date"
-msgstr "Registreringsdato"
+msgstr "Qayd qilingan sana"
 
 msgid "Incident date"
-msgstr "Forekomstdato"
+msgstr "Hodisa sanasi"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "Registreringsmodulen kunne ikke lastes inn. Prøv igjen senere"
+msgstr ""
 
 msgid "Follow-up"
-msgstr "Oppfølging"
+msgstr "Kuzatish"
 
 msgid "Started at {{orgUnitName}}"
-msgstr "Begynt på {{orgUnitName}}"
+msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Eid av {{ownerOrgUnit}}"
+msgstr ""
 
 msgid "Last updated {{date}}"
-msgstr "Sist oppdatert {{date}}"
+msgstr ""
 
 msgid "Cancelled"
-msgstr "Kansellert"
+msgstr "Bekor qilindi"
 
 msgid "Comments about this enrollment"
-msgstr "Kommentarer om denne registreringen"
+msgstr ""
 
 msgid "Write a comment about this enrollment"
-msgstr "Skriv en kommentar om denne registreringen"
+msgstr ""
 
 msgid "This enrollment doesn't have any comments"
-msgstr "Denne registreringen har ingen kommentarer"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
-msgstr "organisasjonsenheten kunne ikke hentes. Prøv igjen senere."
+msgstr ""
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr "Lagrer i {{stageName}} for {{programName}} i {{orgUnitName}}"
+msgstr ""
 
 msgid "program or stage is invalid"
-msgstr "program eller fase er ugyldig"
+msgstr ""
 
 msgid "Error"
-msgstr "Feil"
+msgstr "Xatolik"
 
 msgid "Warning"
-msgstr "Advarsel"
+msgstr "Ogohlantirish"
 
 msgid "Comments about this event"
-msgstr "Kommentarer om denne hendelsen"
+msgstr ""
 
 msgid "Write a comment about this event"
-msgstr "Skriv en kommentar om denne hendelsen"
+msgstr ""
 
 msgid "This event doesn't have any comments"
-msgstr "Denne hendelsen har ingen kommentarer"
+msgstr ""
 
 msgid "stage not found in rules execution"
-msgstr "fase ikke funnet i regelutførelse"
+msgstr ""
 
 msgid "Delete event"
-msgstr "Slett hendelse"
+msgstr "Hodisa/tadbirni oʼchirib tashlash"
 
 msgid "Yes, delete event"
-msgstr "Ja, slett hendelse"
+msgstr ""
 
 msgid "Go to “Schedule” tab to reschedule this event"
-msgstr "Gå til \"Planlegg\"-fanen for å endre planlagt dato for denne hendelsen"
+msgstr ""
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
-msgstr "Planlagt dato kan ikke endres for {{ eventStatus }} hendelser"
+msgstr ""
 
 msgid "Event completed"
-msgstr "Hendelse fullført"
+msgstr ""
 
 msgid "Back to all stages and events"
-msgstr "Tilbake til alle faser og hendelser"
+msgstr ""
 
 msgid "Schedule date info"
-msgstr "Informasjon for planlagt dato"
+msgstr ""
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
-msgstr "Planlagt automatisk for {{suggestedScheduleDate}}"
+msgstr ""
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
-"Den planlagte datoen samsvarer med den foreslåtte datoen, men kan endres om "
-"nødvendig."
 
 msgid "after"
-msgstr "etter"
+msgstr ""
 
 msgid "before"
-msgstr "før"
+msgstr ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
-"Planlegger en hendelse i {{stageName}} for {{programName}} i {{orgUnitName}}"
 
 msgid "Schedule info"
-msgstr "Tidsplaninformasjon"
+msgstr ""
 
 msgid "Schedule date / Due date"
-msgstr "Planlagt dato / Forfallsdato"
+msgstr ""
 
 msgid "Event comments"
-msgstr "Hendelseskommentarer"
+msgstr ""
 
 msgid "Write a comment about this scheduled event"
-msgstr "Skriv en kommentar om denne planlagte hendelsen"
+msgstr ""
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
 "information about this enrollment, use the Edit button in the in the "
 "Enrollment box on this dashboard"
 msgstr ""
-"Endre informasjon om denne {{trackedEntityName}} her. For å endre "
-"informasjon om denne registreringen, bruk Rediger-knappen i "
-"registreringsboksen på dette dashbordet"
 
 msgid " Loading..."
-msgstr "Laster..."
+msgstr ""
 
 msgid "Save changes"
-msgstr "Lagre endringer"
+msgstr "Oʼzgartirishni saqlash"
 
 msgid "Profile"
 msgstr "Profil"
 
 msgid "There is a problem with this form"
-msgstr "Det er et problem med dette skjemaet"
+msgstr ""
 
 msgid "There are warnings in this form"
-msgstr "Det er advarsler i dette skjemaet"
+msgstr ""
 
 msgid "There was a problem saving changes"
-msgstr "Det oppsto et problem under lagring av endringer"
+msgstr ""
 
 msgid "Try again or contact your system administrator for support"
-msgstr "Prøv igjen eller kontakt systemadministratoren din for hjelp"
+msgstr ""
 
 msgid "Fix errors in the form to continue."
-msgstr "Rett opp feil i skjemaet for å fortsette."
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
-msgstr "Profil -widgeten kunne ikke lastes inn. Prøv igjen senere"
+msgstr ""
 
 msgid "{{TETName}} profile"
-msgstr "{{TETName}} profil"
+msgstr ""
 
 msgid "Edit"
-msgstr "Rediger"
+msgstr "Tahrirlash"
 
 msgid "tracked entity instance"
-msgstr "Sporet enhetforekomst"
+msgstr "kuzatilayotgan obʼekt namunasi"
 
 msgid "New {{ eventName }} event"
-msgstr "Ny {{ eventName }} hendelse"
+msgstr ""
 
 msgid "To open this event, please wait until saving is complete"
 msgstr ""
 
 msgid "Show {{ rest }} more"
-msgstr "Vis {{ rest }} flere"
+msgstr ""
 
 msgid "Reset list"
-msgstr "Nullstill liste"
+msgstr ""
 
 msgid "Go to full {{ eventName }}"
-msgstr "Gå til hele {{ eventName }}"
+msgstr ""
 
 msgid "This stage can only have one event"
-msgstr "Denne fasen kan bare ha en hendelse"
+msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."
-msgstr "Hendelser kunne ikke hentes. Prøv igjen senere."
+msgstr ""
 
 msgid "{{ totalEvents }} events"
-msgstr "{{ totalEvents }} hendelser"
+msgstr ""
 
 msgid "{{ overdueEvents }} overdue"
-msgstr "{{ overdueEvents }} forfalt"
+msgstr ""
 
 msgid "{{ scheduledEvents }} scheduled"
-msgstr "{{ scheduledEvents }} planlagt"
+msgstr ""
 
 msgid "Stages and Events"
-msgstr "Faser og hendelser"
+msgstr ""
 
 msgid "Working list could not be loaded"
-msgstr "Arbeidslisten kunne ikke lastes inn"
+msgstr "Ishchi roʼyxatni yuklab boʼlmadi"
 
 msgid "Download as JSON"
-msgstr "Last ned i JSON format"
+msgstr "JSON sifatida yuklash"
 
 msgid "Download as XML"
-msgstr "Last ned i XML format"
+msgstr "XML sifatida yuklash"
 
 msgid "Download as CSV"
-msgstr "Last ned i CSV format"
+msgstr "CSV sifatida yuklang"
 
 msgid "Download with current filters"
-msgstr "Last ned med gjeldende filtre"
+msgstr "Joriy Filtrlar asosida yuklash"
 
 msgid "Download data..."
-msgstr "Last ned data..."
+msgstr "Maʼlumotlarni yuklab olish ..."
 
 msgid "an error occurred loading working lists"
-msgstr "en feil oppstod ved lasting av arbeidslister"
+msgstr "ishchi roʼyxatni yuklashda xatolik yuz berdi"
 
 msgid "Assigned to"
-msgstr "Tildelt til"
+msgstr ""
 
 msgid "Registration Date"
-msgstr "Innregistreringsdato"
+msgstr "Roʼyxatga olingan sana"
 
 msgid "Inactive"
-msgstr "Inaktiv"
+msgstr "Faol emas"
 
 msgid "Enrollment status"
-msgstr "Registreringsstatus"
+msgstr "Roʼyxatga olish holati"
 
 msgid "Choose a program stage to filter by {{label}}"
-msgstr "Velg en programfase å filtrere etter {{label}}"
+msgstr ""
 
 msgid "Active enrollments"
 msgstr ""
@@ -1397,145 +1384,146 @@ msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
-msgstr "Arbeidslisten kunne ikke oppdateres"
+msgstr ""
 
 msgid "an error occurred loading the working lists"
 msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
-msgstr "det oppstod en feil ved lasting av lister over sporede enheter"
+msgstr ""
 
 msgid "Update view"
-msgstr "Oppdater visning"
+msgstr "Yangilangan koʼrinish"
 
 msgid "Save current view..."
-msgstr "Lagre gjeldende visning..."
+msgstr "Joriy koʼrinishni saqlash ..."
 
 msgid "Save current view as..."
-msgstr "Lagre gjeldende visning som..."
+msgstr "Ushbu joriy koʼrinish sifatida saqlash"
 
 msgid "Delete view"
-msgstr "Slett visning"
+msgstr "Koʼzdan kechirishni oʼchirib tashlash"
 
 msgid "Share view..."
-msgstr "Del visning ..."
+msgstr "Koʼrinish bilan boʼlishish ..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Vil du virkelig slette visningen '{{templateName}}'?"
+msgstr ""
+"Haqiqatdan ham '{{templateName}}' koʼrinishini oʼchirib tashlamoqchimisiz?"
 
 msgid "Confirm"
-msgstr "Bekreft"
+msgstr "Tasdiqlang"
 
 msgid "Save As view"
-msgstr "Lagre som visning"
+msgstr "Ushbu koʼrinish sifatida saqlash"
 
 msgid "View name"
-msgstr "Vis navn"
+msgstr "Ismini koʼrish"
 
 msgid "Show Less"
-msgstr "Vis mindre"
+msgstr ""
 
 msgid "Show All"
-msgstr "Vis alle"
+msgstr "Barchasini koʼrsatish"
 
 msgid "An error has occured. See log for details"
-msgstr "Det har oppstått en feil. Se logg for detaljer"
+msgstr "Xatolik yuz berdi. Tafsilotlarni jurnaldan koʼring."
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr "Planlagt{{ escape }} forfaller {{ time }}"
+msgstr ""
 
 msgid "Scheduled"
-msgstr "Planlagt"
+msgstr "Reja boʼyicha"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr "Forfalt {{ escape }} forfalt {{ time }}"
+msgstr ""
 
 msgid "Overdue"
-msgstr "Forfalt"
+msgstr "Muddat oʼtgan"
 
 msgid "Skipped"
-msgstr "Hoppet over"
+msgstr "Oʼtkazib yuborildi"
 
 msgid "Visited"
-msgstr "Besøkte"
+msgstr "Tashrif buyurdi"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr "{{trackedEntityName}} i program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
-msgstr "Program ble ikke funnet"
+msgstr "Dastur topilmadi"
 
 msgid "Program is not a tracker program"
-msgstr "Programmet er ikke et sporingsprogram"
+msgstr "Dastur kuzatuv dasturi emas"
 
 msgid "Error saving event"
-msgstr "Feil ved lagring av hendelse"
+msgstr "Hodisa/tadbirni saqlashda xato"
 
 msgid "Could not save event"
-msgstr "Kunne ikke lagre hendelse"
+msgstr ""
 
 msgid "Could not delete event"
-msgstr "Kunne ikke slette hendelse"
+msgstr "Hodisa/tadbirni oʼchirib tashlab boʼlmadi"
 
 msgid "Could not save working list"
-msgstr "Kunne ikke lagre arbeidsliste"
+msgstr "Ishchi roʼyxat saqlanmadi"
 
 msgid "Could not add working list"
-msgstr "Kunne ikke legge til arbeidsliste"
+msgstr "Ishchi roʼyxatni qoʼshib boʼlmadi"
 
 msgid "Could not delete working list"
-msgstr "Kunne ikke slette arbeidsliste"
+msgstr "Ishchi roʼyxatni oʼchirib tashlab boʼlmadi"
 
 msgid "Organisation unit search failed."
-msgstr "Organisasjonsenhetssøk mislyktes."
+msgstr ""
 
 msgid "Error saving tracked entity instance"
-msgstr "Feil ved lagring av sporet enhetsforekomst"
+msgstr ""
 
 msgid "Error saving enrollment"
-msgstr "Feil ved lagring av registrering"
+msgstr ""
 
 msgid "Error saving the enrollment event"
-msgstr "Feil under lagring av hendelsen"
+msgstr ""
 
 msgid "Error deleting the enrollment event"
-msgstr "Feil ved sletting av hendelsen"
+msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"
-msgstr "Feil under redigering av hendelsen, endringer ble ikke lagret"
+msgstr ""
 
 msgid "Set coordinate"
-msgstr "Sett koordinater"
+msgstr "Koordinatani oʼrnating"
 
 msgid "Date"
-msgstr "Dato"
+msgstr "Sana"
 
 msgid "Time"
-msgstr "Klokkeslett"
+msgstr "Vaqt"
 
 msgid "From date"
-msgstr "Fra dato"
+msgstr "Sanadan boshlab"
 
 msgid "From time"
-msgstr "Fra klokkeslett"
+msgstr "Vaqtdan boshlab"
 
 msgid "To date"
-msgstr "Til dato"
+msgstr "Shu kungacha"
 
 msgid "To time"
-msgstr "Til klokkeslett"
+msgstr "Shu vaqtgacha"
 
 msgid "Page {{currentPage}}"
-msgstr "Side {{currentPage}}"
+msgstr "{{currentPage}} sahifasi"
 
 msgid "Delete polygon"
-msgstr "Slett polygon"
+msgstr "Poligon (koʼpburchak) ni oʼchirib tashlash"
 
 msgid "Set area"
-msgstr "Sett område"
+msgstr "Hududni belgilang"
 
 msgid "Area on map saved"
 msgstr ""
 
 msgid "Compatibility mode"
-msgstr "Kompabilitetsmodus"
+msgstr "Muvofiqlik rejimi"

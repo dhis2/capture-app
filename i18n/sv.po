@@ -1,14 +1,15 @@
 # 
 # Translators:
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # Viktor Varland <viktor@dhis2.org>, 2023
+# Jason Pickering <jason@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
+"Last-Translator: Jason Pickering <jason@dhis2.org>, 2023\n"
 "Language-Team: Swedish (https://app.transifex.com/hisp-uio/teams/100509/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,6 +66,16 @@ msgid "Date of enrollment"
 msgstr ""
 
 msgid "Last updated"
+msgstr ""
+
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
 msgstr ""
 
 msgid "This value is validating"
@@ -356,9 +367,6 @@ msgstr ""
 msgid "Operations running"
 msgstr ""
 
-msgid "Sort"
-msgstr ""
-
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
@@ -471,6 +479,12 @@ msgstr ""
 
 msgid "Select image"
 msgstr ""
+
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
+msgstr "ingen matchning hittad"
 
 msgid "Search"
 msgstr "Sök"
@@ -737,7 +751,7 @@ msgstr ""
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -799,6 +813,9 @@ msgid ""
 msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
@@ -954,11 +971,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr ""
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "Search {{name}}"
 msgstr ""
 
@@ -1111,6 +1123,9 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "inskrivning datum"
 
@@ -1199,23 +1214,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1260,9 +1263,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr ""
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1274,6 +1274,9 @@ msgstr ""
 
 msgid "Edit"
 msgstr "Redigera"
+
+msgid "tracked entity instance"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr ""
@@ -1318,7 +1321,7 @@ msgid "Download as XML"
 msgstr ""
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "Ladda ner som CSV"
 
 msgid "Download with current filters"
 msgstr ""
@@ -1464,9 +1467,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr ""
 
-msgid "Page {{currentPage}}"
-msgstr ""
-
 msgid "Date"
 msgstr "Datum"
 
@@ -1485,10 +1485,7 @@ msgstr ""
 msgid "To time"
 msgstr ""
 
-msgid "error encountered during field validation"
-msgstr ""
-
-msgid "error"
+msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Delete polygon"

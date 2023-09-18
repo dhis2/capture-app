@@ -159,9 +159,9 @@ And you apply the current filter
 When you click the last name column header
 Then the sort arrow should indicate ascending order
 And the list should display data ordered ascendingly by last name
-When you click the WHOMCH Smoking column header
+When you click the WHOMCH Hemoglobin value column header
 Then the sort arrow should indicate descending order
-And the list should display data ordered ascendingly by WHOMCH Smoking
+And the list should display data ordered descending by WHOMCH Hemoglobin
 
 @v>=39
 Scenario: The user can remove the program stage filter

@@ -1,6 +1,6 @@
 # 
 # Translators:
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2023
 # Saysamone Sibounma, 2023
@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Saysamone Sibounma, 2023\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -367,9 +367,6 @@ msgstr ""
 
 msgid "Operations running"
 msgstr ""
-
-msgid "Sort"
-msgstr "Sort"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -755,7 +752,7 @@ msgstr "ກຳນົດເວລາ"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -1127,6 +1124,9 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "ໝາຍໄວ້ເພື່ອຕິດຕາມ"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "ວັນທີ່ລົງທະບຽນ"
 
@@ -1468,9 +1468,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
 
-msgid "Page {{currentPage}}"
-msgstr ""
-
 msgid "Date"
 msgstr "ວັນທີ່"
 
@@ -1487,6 +1484,9 @@ msgid "To date"
 msgstr "ເຖີງວັນທີ່"
 
 msgid "To time"
+msgstr ""
+
+msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Delete polygon"
