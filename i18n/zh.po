@@ -1,14 +1,14 @@
 # 
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2021
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # 晓东 林 <13981924470@126.com>, 2023
 # easylin <lin_xd@126.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2023\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -369,9 +369,6 @@ msgstr "有些操作一直在运行,请等待"
 
 msgid "Operations running"
 msgstr "运作中"
-
-msgid "Sort"
-msgstr "排序"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -760,8 +757,8 @@ msgstr "调度"
 msgid "Refer"
 msgstr "转诊"
 
-msgid "You can’t add any more {{ programStageName }} events"
-msgstr "您不能再添加 {{ programStageName }} 事件"
+msgid "You can't add any more {{ programStageName }} events"
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "取消而不保存"
@@ -1134,6 +1131,9 @@ msgstr "删除标记以进行后续操作"
 msgid "Mark for follow-up"
 msgstr "后续标记"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "报名日期"
 
@@ -1475,9 +1475,6 @@ msgstr "编辑事件时出错，所做的更改未保存"
 msgid "Set coordinate"
 msgstr "设置坐标"
 
-msgid "Page {{currentPage}}"
-msgstr "第{{currentPage}}页"
-
 msgid "Date"
 msgstr "日期"
 
@@ -1495,6 +1492,9 @@ msgstr "到目前为止"
 
 msgid "To time"
 msgstr "到时间"
+
+msgid "Page {{currentPage}}"
+msgstr "第{{currentPage}}页"
 
 msgid "Delete polygon"
 msgstr "删除多边形"
