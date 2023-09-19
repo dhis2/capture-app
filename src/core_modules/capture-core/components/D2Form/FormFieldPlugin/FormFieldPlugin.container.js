@@ -12,7 +12,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     const { pluginSource, fieldsMetadata, formId, onUpdateField, pluginContext } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
-    const { programId, orgUnitId } = useLocationQuery();
+    const { orgUnitId } = useLocationQuery();
 
     // Plugin related functionality and feedback
     const { pluginValues } = usePluginValues(formId, metadataByPluginId, pluginContext);
@@ -42,7 +42,6 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     return (
         <FormFieldPluginComponent
             orgUnitId={orgUnitId}
-            programId={programId}
             pluginSource={pluginSource}
             fieldsMetadata={formattedMetadata}
             values={pluginValues}

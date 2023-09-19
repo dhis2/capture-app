@@ -65,7 +65,6 @@ export type ComponentProps = {|
     formSubmitted: boolean,
     values: { [id: string]: any },
     orgUnitId: string,
-    programId: string,
     setFieldValue: (SetFieldValueProps) => void,
     errors: { [id: string]: Array<string> },
     warnings: { [id: string]: Array<string> },
