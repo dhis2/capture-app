@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -72,6 +72,16 @@ msgstr "Data înrolării"
 
 msgid "Last updated"
 msgstr "Ultima actualizare"
+
+msgid "error encountered during field validation"
+msgstr "eroare întâlnită în timpul validării câmpului"
+
+msgid "error"
+msgstr "eroare"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Această valoare se validează"
@@ -370,9 +380,6 @@ msgstr "Unele operațiuni sunt încă în desfășurare. Așteptați.."
 msgid "Operations running"
 msgstr "Operațiuni în derulare"
 
-msgid "Sort"
-msgstr "Sortare"
-
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
@@ -485,6 +492,12 @@ msgstr "Încărcare imagine"
 
 msgid "Select image"
 msgstr "Selectați imaginea"
+
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
+msgstr ""
 
 msgid "Search"
 msgstr "Căutare"
@@ -751,7 +764,7 @@ msgstr ""
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -815,6 +828,9 @@ msgstr ""
 "program"
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
@@ -972,12 +988,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr ""
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
 msgid "Search {{name}}"
 msgstr "Căutare {{name}}"
 
@@ -1132,6 +1142,9 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Data înrolării"
 
@@ -1220,25 +1233,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
 msgid "after"
 msgstr "după"
 
 msgid "before"
 msgstr "pînă la"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1284,9 +1283,6 @@ msgid "Try again or contact your system administrator for support"
 msgstr ""
 "Încercați din nou sau contactați administratorul de sistem pentru asistență"
 
-msgid "tracked entity instance"
-msgstr ""
-
 msgid "Fix errors in the form to continue."
 msgstr "Corectați erorile din formular pentru a continua."
 
@@ -1298,6 +1294,9 @@ msgstr ""
 
 msgid "Edit"
 msgstr "Editare"
+
+msgid "tracked entity instance"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr "Eveniment nou {{ eventName }}"
@@ -1488,9 +1487,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "Setarea coordonatelor"
 
-msgid "Page {{currentPage}}"
-msgstr "Pagina {{currentPage}}"
-
 msgid "Date"
 msgstr "Data"
 
@@ -1509,11 +1505,8 @@ msgstr "Până la data"
 msgid "To time"
 msgstr "Pînă la ora"
 
-msgid "error encountered during field validation"
-msgstr "eroare întâlnită în timpul validării câmpului"
-
-msgid "error"
-msgstr "eroare"
+msgid "Page {{currentPage}}"
+msgstr "Pagina {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Lichidare poligon"

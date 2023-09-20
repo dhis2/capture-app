@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký, 2023\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -71,6 +71,16 @@ msgstr "Datum zápisu"
 
 msgid "Last updated"
 msgstr "Naposledy aktualizováno"
+
+msgid "error encountered during field validation"
+msgstr "během ověřování pole došlo k chybě"
+
+msgid "error"
+msgstr "chyba"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Tato hodnota se ověřuje"
@@ -368,9 +378,6 @@ msgstr "Některé operace stále běží. Prosím, čekejte.."
 
 msgid "Operations running"
 msgstr "Provoz běží"
-
-msgid "Sort"
-msgstr "Třídit"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -763,7 +770,7 @@ msgstr "Plán"
 msgid "Refer"
 msgstr "Odkazovat"
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -826,6 +833,9 @@ msgstr "Můžete také vybrat program z horní lišty a vytvořit v něm program
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nový zápis do programu{{escape}} {{programName}}"
+
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Uložit {{trackedEntityName}}"
@@ -981,13 +991,6 @@ msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
 
 msgid "Choose a type to start searching"
 msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
 
 msgid "Search {{name}}"
 msgstr "Hledat {{name}}"
@@ -1153,6 +1156,9 @@ msgstr "Odstranit značku pro další sledování"
 msgid "Mark for follow-up"
 msgstr "Označit pro další sledování"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Datum zápisu"
 
@@ -1243,30 +1249,11 @@ msgstr ""
 "Naplánované datum odpovídá navrhovanému datu, ale v případě potřeby jej lze "
 "změnit."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-
 msgid "after"
 msgstr "po"
 
 msgid "before"
 msgstr "před"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "Na tento den je v {{orgUnitName}} naplánovaná {{count}} událost."
-msgstr[1] ""
-"Na tento den jsou v {{orgUnitName}} naplánované {{count}} události."
-msgstr[2] ""
-"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
-msgstr[3] ""
-"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1519,9 +1506,6 @@ msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
 
-msgid "Page {{currentPage}}"
-msgstr "Stránka {{currentPage}}"
-
 msgid "Date"
 msgstr "datum"
 
@@ -1540,11 +1524,8 @@ msgstr "K datu"
 msgid "To time"
 msgstr "Na čas"
 
-msgid "error encountered during field validation"
-msgstr "během ověřování pole došlo k chybě"
-
-msgid "error"
-msgstr "chyba"
+msgid "Page {{currentPage}}"
+msgstr "Stránka {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Smazat polygon"

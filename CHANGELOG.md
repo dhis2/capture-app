@@ -1,3 +1,136 @@
+# [100.40.0](https://github.com/dhis2/capture-app/compare/v100.39.4...v100.40.0) (2023-09-20)
+
+
+### Features
+
+* [DHIS2-15830] Add orgUnitId to plugin context ([b9ec237](https://github.com/dhis2/capture-app/commit/b9ec237af595a1112dc6db01206e8332c9bb6647))
+
+## [100.39.4](https://github.com/dhis2/capture-app/compare/v100.39.3...v100.39.4) (2023-09-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([712b56e](https://github.com/dhis2/capture-app/commit/712b56e749d08432ac18d854cf06cc45dabeda55))
+
+## [100.39.3](https://github.com/dhis2/capture-app/compare/v100.39.2...v100.39.3) (2023-09-14)
+
+
+### Bug Fixes
+
+* [DHIS2-15356] change tei search parameter from `ou` to `orgUnit` ([#3362](https://github.com/dhis2/capture-app/issues/3362)) ([c7ab828](https://github.com/dhis2/capture-app/commit/c7ab82826254be24959ff25d643b68c1e525c893))
+
+## [100.39.2](https://github.com/dhis2/capture-app/compare/v100.39.1...v100.39.2) (2023-09-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c17c663](https://github.com/dhis2/capture-app/commit/c17c6637f0e6ce93bdd5f5ef3d534d3ac9206c86))
+
+## [100.39.1](https://github.com/dhis2/capture-app/compare/v100.39.0...v100.39.1) (2023-09-13)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0fab0eb](https://github.com/dhis2/capture-app/commit/0fab0eba7b63cbfd080990913313fc6b6ff2d38f))
+
+# [100.39.0](https://github.com/dhis2/capture-app/compare/v100.38.0...v100.39.0) (2023-09-07)
+
+
+### Features
+
+* [DHIS2-13343] hidden program stage rule effect ([#3406](https://github.com/dhis2/capture-app/issues/3406)) ([4ef2973](https://github.com/dhis2/capture-app/commit/4ef2973b71d6376f99db07e70bc4d51facb8018e))
+
+# [100.38.0](https://github.com/dhis2/capture-app/compare/v100.37.0...v100.38.0) (2023-09-06)
+
+
+### Features
+
+* [DHIS2-14334] edit enrollment date ([#3350](https://github.com/dhis2/capture-app/issues/3350)) ([9dd1b6a](https://github.com/dhis2/capture-app/commit/9dd1b6a046e94021ae4e63a67a3d6b16a099212d))
+
+# [100.37.0](https://github.com/dhis2/capture-app/compare/v100.36.0...v100.37.0) (2023-08-22)
+
+
+### Features
+
+* [DHIS2-15299] escape value for attribute filter ([#3403](https://github.com/dhis2/capture-app/issues/3403)) ([5db743e](https://github.com/dhis2/capture-app/commit/5db743eaf7f67bbb4a9391ac9ade25317e4d3642))
+
+# [100.36.0](https://github.com/dhis2/capture-app/compare/v100.35.9...v100.36.0) (2023-08-22)
+
+
+### Features
+
+* [DHIS2-15229] search for MULTI_TEXT ([#3395](https://github.com/dhis2/capture-app/issues/3395)) ([c5d9a7d](https://github.com/dhis2/capture-app/commit/c5d9a7d57547153dd62cf36c8e3323685f43978f))
+
+## [100.35.9](https://github.com/dhis2/capture-app/compare/v100.35.8...v100.35.9) (2023-08-22)
+
+
+### Bug Fixes
+
+* [DHIS2-15700] Option sets not working in TEI Registration ([2e47477](https://github.com/dhis2/capture-app/commit/2e4747719151b042d3539fe61a612ebd0ac122d4))
+
+## [100.35.8](https://github.com/dhis2/capture-app/compare/v100.35.7...v100.35.8) (2023-08-22)
+
+
+### Bug Fixes
+
+* [DHIS2-15492] transition of tooltip enabled state ([#3381](https://github.com/dhis2/capture-app/issues/3381)) ([adb6b32](https://github.com/dhis2/capture-app/commit/adb6b32f1bffc5020ca34ab5c7568b5a323a8002))
+
+## [100.35.7](https://github.com/dhis2/capture-app/compare/v100.35.6...v100.35.7) (2023-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-15525] show formNames in the enrollment dashboard ([#3402](https://github.com/dhis2/capture-app/issues/3402)) ([c02c3ee](https://github.com/dhis2/capture-app/commit/c02c3ee46ed4209215946636682ec86c97c9d905))
+
+## [100.35.6](https://github.com/dhis2/capture-app/compare/v100.35.5...v100.35.6) (2023-08-11)
+
+
+### Bug Fixes
+
+* [TECH-1623] rename TEI "Launchpad McQuack" -> "Breaking TheGlass" ([#3400](https://github.com/dhis2/capture-app/issues/3400)) ([7f26237](https://github.com/dhis2/capture-app/commit/7f262372499b98d9fd8071c7b8069238ad3a1d15))
+
+## [100.35.5](https://github.com/dhis2/capture-app/compare/v100.35.4...v100.35.5) (2023-08-03)
+
+
+### Bug Fixes
+
+* [DHIS2-15365] remove orgUnit and ouMode query args ([#3398](https://github.com/dhis2/capture-app/issues/3398)) ([ef35eb3](https://github.com/dhis2/capture-app/commit/ef35eb300fa61343576957e6734a2767dc37b4ec))
+
+## [100.35.4](https://github.com/dhis2/capture-app/compare/v100.35.3...v100.35.4) (2023-08-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([343e5da](https://github.com/dhis2/capture-app/commit/343e5daa158faf257cdf1277ff8f7a3e0e5d24ec))
+
+## [100.35.3](https://github.com/dhis2/capture-app/compare/v100.35.2...v100.35.3) (2023-07-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4568f0f](https://github.com/dhis2/capture-app/commit/4568f0f3da3bc979a64bf3650c8e658756f2a580))
+
+## [100.35.2](https://github.com/dhis2/capture-app/compare/v100.35.1...v100.35.2) (2023-07-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([085b3a3](https://github.com/dhis2/capture-app/commit/085b3a3eb5e1fe67cc66d1ef741dde64dabfdc7e))
+
+## [100.35.1](https://github.com/dhis2/capture-app/compare/v100.35.0...v100.35.1) (2023-07-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([fa0dfb0](https://github.com/dhis2/capture-app/commit/fa0dfb013c0ef4415b5fed1e38ab576124c87b4c))
+
+# [100.35.0](https://github.com/dhis2/capture-app/compare/v100.34.1...v100.35.0) (2023-07-24)
+
+
+### Features
+
+* [DHIS2-14775][DHIS2-14729] Render data entry plugins ([80a218e](https://github.com/dhis2/capture-app/commit/80a218e2dea3f4b25694b25e491dac20a310b8bb))
+
 ## [100.34.1](https://github.com/dhis2/capture-app/compare/v100.34.0...v100.34.1) (2023-07-12)
 
 

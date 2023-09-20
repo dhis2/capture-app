@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -68,6 +68,16 @@ msgstr "报名日期"
 
 msgid "Last updated"
 msgstr "上次更新"
+
+msgid "error encountered during field validation"
+msgstr "字段验证发生错误。"
+
+msgid "error"
+msgstr "错误"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -358,9 +368,6 @@ msgstr "有些操作一直在运行,请等待"
 msgid "Operations running"
 msgstr "运作中"
 
-msgid "Sort"
-msgstr "排序"
-
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
@@ -473,6 +480,12 @@ msgstr "上传图像"
 
 msgid "Select image"
 msgstr "选择图像"
+
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
+msgstr ""
 
 msgid "Search"
 msgstr "搜索"
@@ -742,8 +755,8 @@ msgstr "调度"
 msgid "Refer"
 msgstr "转诊"
 
-msgid "You can’t add any more {{ programStageName }} events"
-msgstr "您不能再添加 {{ programStageName }} 事件"
+msgid "You can't add any more {{ programStageName }} events"
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "取消而不保存"
@@ -805,6 +818,9 @@ msgstr "您也可以从顶部栏中选择一个项目并在该项目中创建"
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}的新报名"
+
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "Save {{trackedEntityName}}"
 msgstr "保存{{trackedEntityName}}"
@@ -958,10 +974,6 @@ msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进
 
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] "至少填写 {{count}} 个属性进行搜索"
 
 msgid "Search {{name}}"
 msgstr "搜索{{name}}"
@@ -1117,6 +1129,9 @@ msgstr "删除标记以进行后续操作"
 msgid "Mark for follow-up"
 msgstr "后续标记"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "报名日期"
 
@@ -1205,21 +1220,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr "预定日期与建议日期相符，但可以根据需要进行更改。"
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] "预定日期是 {{count}} 天 {{position}} 建议的日期。"
-
 msgid "after"
 msgstr "后"
 
 msgid "before"
 msgstr "前"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "今天在 {{orgUnitName}} 有 {{count}} 个已经安排的事件。"
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1264,9 +1269,6 @@ msgstr "保存更改时出现问题"
 msgid "Try again or contact your system administrator for support"
 msgstr "重试或联系您的系统管理员寻求支持"
 
-msgid "tracked entity instance"
-msgstr "跟踪的实体实例"
-
 msgid "Fix errors in the form to continue."
 msgstr "修正表单中的错误以继续。"
 
@@ -1278,6 +1280,9 @@ msgstr "{{TETName}}个人资料"
 
 msgid "Edit"
 msgstr "编辑"
+
+msgid "tracked entity instance"
+msgstr "跟踪的实体实例"
 
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
@@ -1468,9 +1473,6 @@ msgstr "编辑事件时出错，所做的更改未保存"
 msgid "Set coordinate"
 msgstr "设置坐标"
 
-msgid "Page {{currentPage}}"
-msgstr "第{{currentPage}}页"
-
 msgid "Date"
 msgstr "日期"
 
@@ -1489,11 +1491,8 @@ msgstr "到目前为止"
 msgid "To time"
 msgstr "到时间"
 
-msgid "error encountered during field validation"
-msgstr "字段验证发生错误。"
-
-msgid "error"
-msgstr "错误"
+msgid "Page {{currentPage}}"
+msgstr "第{{currentPage}}页"
 
 msgid "Delete polygon"
 msgstr "删除多边形"

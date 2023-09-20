@@ -3,62 +3,17 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
-
-import {
-    Table,
-    Row,
-    Cell,
-    HeaderCell,
-    Head,
-    Body,
-    sortLabelDirections,
-    sorLabelPlacements,
-} from 'capture-ui';
-import { SortLabelWrapper } from '../../DataTable/SortLabelWrapper.component';
+import { DataTableHead, DataTable, DataTableBody, DataTableRow, DataTableCell, DataTableColumnHeader } from '@dhis2/ui';
 import { dataElementTypes } from '../../../metaData';
 
-const styles = theme => ({
-    loaderContainer: {
-        display: 'flex',
-        justifyContent: 'center',
-    },
-    container: {
-        borderColor: theme.palette.type === 'light'
-            ? theme.palette.dividerLighter
-            : theme.palette.dividerDarker,
-        borderWidth: '1px',
-        borderStyle: 'solid',
-    },
-    topBarContainer: {
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
+const styles = () => ({
     tableContainer: {
         overflow: 'auto',
     },
-    optionsIcon: {
-        color: theme.palette.primary.main,
-    },
-    table: {},
-    row: {},
-    cell: {
-        padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 7}px ${theme.spacing.unit /
-            2}px ${theme.spacing.unit * 3}px`,
-        '&:last-child': {
-            paddingRight: theme.spacing.unit * 3,
+    headerAlign: {
+        '&>span.container': {
+            alignItems: 'flex-end',
         },
-        borderBottomColor: theme.palette.type === 'light'
-            ? theme.palette.dividerLighter
-            : theme.palette.dividerDarker,
-    },
-    bodyCell: {
-        fontSize: theme.typography.pxToRem(13),
-        color: theme.palette.text.primary,
-    },
-    headerCell: {
-        fontSize: theme.typography.pxToRem(12),
-        color: theme.palette.text.secondary,
-        fontWeight: theme.typography.fontWeightMedium,
     },
 });
 
@@ -70,37 +25,17 @@ type Column = {
 };
 
 type Props = {
-    dataSource: Array<{id: string, [elementId: string]: any}>,
+    dataSource: Array<{ id: string, [elementId: string]: any }>,
     columns: ?Array<Column>,
     classes: {
-        loaderContainer: string,
-        container: string,
-        topBarContainer: string,
+        headerAlign: string,
         tableContainer: string,
-        optionsIcon: string,
-        table: string,
-        cell: string,
-        headerCell: string,
-        bodyCell: string,
-        footerCell: string,
-        row: string,
     },
     rowIdKey: string,
-    sortById: string,
-    sortByDirection: string,
     noItemsText: ?string,
 };
 
 class Index extends Component<Props> {
-    static defaultProps = {
-        rowIdKey: 'id',
-    };
-    static typesWithAscendingInitialDirection = [
-        // todo (report lgmt)
-        dataElementTypes.TEXT,
-        dataElementTypes.LONG_TEXT,
-    ];
-
     static typesWithRightPlacement = [
         dataElementTypes.NUMBER,
         dataElementTypes.INTEGER,
@@ -110,122 +45,61 @@ class Index extends Component<Props> {
     ];
 
     renderHeaderRow(visibleColumns: Array<Column>) {
-        const sortById = this.props.sortById;
-        const sortByDirection = this.props.sortByDirection;
+        const { classes } = this.props;
 
-        const headerCells = visibleColumns
-            .map(column => (
-                <HeaderCell
-                    key={column.id}
-                    className={classNames(this.props.classes.cell, this.props.classes.headerCell)}
-                >
-                    <SortLabelWrapper
-                        isActive={column.id === sortById}
-                        initialDirection={
-                            Index.typesWithAscendingInitialDirection.includes(column.type)
-                                ? sortLabelDirections.ASC
-                                : sortLabelDirections.DESC
-                        }
-                        placement={
-                            Index.typesWithRightPlacement.includes(column.type)
-                                ? sorLabelPlacements.RIGHT
-                                : sorLabelPlacements.LEFT
-                        }
-                        direction={sortByDirection}
-                        disabled
-                    >
-                        {column.header}
-                    </SortLabelWrapper>
-                </HeaderCell>
-            ));
-
-        return (
-            <Row
-                className={this.props.classes.row}
+        const headerCells = visibleColumns.map(column => (
+            <DataTableColumnHeader
+                key={column.id}
+                className={classNames({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type) })}
+                align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
             >
-                {headerCells}
-            </Row>
-        );
+                {column.header}
+            </DataTableColumnHeader>
+        ));
+
+        return <DataTableRow dataTest="table-row">{headerCells}</DataTableRow>;
     }
 
     renderRows(visibleColumns: Array<Column>) {
-        const { dataSource, classes, noItemsText, rowIdKey } = this.props;
+        const { dataSource, noItemsText, rowIdKey } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             const columnsCount = visibleColumns.length;
             return (
-                <Row
-                    className={classes.row}
-                >
-                    <Cell
-                        colSpan={columnsCount}
-                        className={classNames(classes.cell, classes.bodyCell)}
-                    >
-                        {noItemsText || i18n.t('No items to display')}
-                    </Cell>
-                </Row>
+                <DataTableRow dataTest="table-row">
+                    <DataTableCell colSpan={columnsCount}>{noItemsText || i18n.t('No items to display')}</DataTableCell>
+                </DataTableRow>
             );
         }
 
-        return dataSource
-            .map((row) => {
-                const cells = visibleColumns
-                    .map(column => (
-                        <Cell
-                            key={column.id}
-                            className={classNames(classes.cell, classes.bodyCell)}
-                        >
-                            <div
-                                style={
-                                    Index.typesWithRightPlacement.includes(column.type) ?
-                                        { textAlign: 'right' } :
-                                        null
-                                }
-                            >
-                                {row[column.id]}
-                            </div>
-                        </Cell>
-                    ));
+        return dataSource.map((row) => {
+            const cells = visibleColumns.map(column => (
+                <DataTableCell
+                    key={column.id}
+                    align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
+                >
+                    {row[column.id]}
+                </DataTableCell>
+            ));
 
-                return (
-                    <Row
-                        key={row[rowIdKey]}
-                        className={classes.row}
-                    >
-                        {cells}
-                    </Row>
-                );
-            });
+            return (
+                <DataTableRow key={row[rowIdKey]} dataTest="table-row">
+                    {cells}
+                </DataTableRow>
+            );
+        });
     }
 
     render() {
         const { columns, classes } = this.props;
-
-        const visibleColumns = columns ?
-            columns
-                .filter(column => column.visible) : [];
+        const visibleColumns = columns ? columns.filter(column => column.visible) : [];
 
         return (
-            <div
-                className={classes.container}
-            >
-                <div
-                    className={classes.topBarContainer}
-                />
-                <div
-                    className={classes.tableContainer}
-                >
-                    <Table
-                        className={classes.table}
-                    >
-                        <Head>
-                            {this.renderHeaderRow(visibleColumns)}
-                        </Head>
-                        <Body>
-                            {this.renderRows(visibleColumns)}
-                        </Body>
-                    </Table>
-                </div>
+            <div className={classes.tableContainer}>
+                <DataTable>
+                    <DataTableHead>{this.renderHeaderRow(visibleColumns)}</DataTableHead>
+                    <DataTableBody>{this.renderRows(visibleColumns)}</DataTableBody>
+                </DataTable>
             </div>
         );
     }

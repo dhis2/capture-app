@@ -1,6 +1,6 @@
 # 
 # Translators:
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -74,6 +74,16 @@ msgstr "Ngày đăng ký"
 
 msgid "Last updated"
 msgstr "Lần cập nhật cuối"
+
+msgid "error encountered during field validation"
+msgstr "gặp lỗi trong quá trình xác thực trường"
+
+msgid "error"
+msgstr "lỗi"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Giá trị này đang xác thực"
@@ -372,9 +382,6 @@ msgstr "Một số hoạt động vẫn đang chạy. Vui lòng đợi .."
 msgid "Operations running"
 msgstr "Hoạt động đang chạy"
 
-msgid "Sort"
-msgstr "Sắp xếp"
-
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
@@ -487,6 +494,12 @@ msgstr "Đang tải ảnh lên"
 
 msgid "Select image"
 msgstr "Chọn ảnh"
+
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
+msgstr ""
 
 msgid "Search"
 msgstr "Tìm kiếm"
@@ -753,7 +766,7 @@ msgstr "Lịch biểu"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -815,6 +828,9 @@ msgid ""
 msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
@@ -974,10 +990,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr "Chọn một loại để bắt đầu tìm kiếm"
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-
 msgid "Search {{name}}"
 msgstr "Tim kiêm {{name}}"
 
@@ -1134,6 +1146,9 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Đánh dấu để theo-dõi"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Ngày ghi vào"
 
@@ -1222,21 +1237,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1281,9 +1286,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "thực thể được theo dõi"
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1295,6 +1297,9 @@ msgstr ""
 
 msgid "Edit"
 msgstr "Chỉnh sửa"
+
+msgid "tracked entity instance"
+msgstr "thực thể được theo dõi"
 
 msgid "New {{ eventName }} event"
 msgstr ""
@@ -1485,9 +1490,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "Đặt tọa độ"
 
-msgid "Page {{currentPage}}"
-msgstr "Trang {{currentPage}}"
-
 msgid "Date"
 msgstr "Ngày"
 
@@ -1506,11 +1508,8 @@ msgstr "Đến ngày"
 msgid "To time"
 msgstr "Đến "
 
-msgid "error encountered during field validation"
-msgstr "gặp lỗi trong quá trình xác thực trường"
-
-msgid "error"
-msgstr "lỗi"
+msgid "Page {{currentPage}}"
+msgstr "Trang {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Xóa đa giác"

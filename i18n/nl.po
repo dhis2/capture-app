@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Charel van den Elsen, 2023\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -75,6 +75,16 @@ msgstr "Datum van inschrijving"
 
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
+
+msgid "error encountered during field validation"
+msgstr "fout opgetreden tijdens veldvalidatie"
+
+msgid "error"
+msgstr "fout"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Deze waarde is validerend"
@@ -380,9 +390,6 @@ msgstr "Sommige operaties lopen nog. Even geduld aub.."
 
 msgid "Operations running"
 msgstr "Operaties lopen"
-
-msgid "Sort"
-msgstr "Soort"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -798,8 +805,8 @@ msgstr "Schema"
 msgid "Refer"
 msgstr "Refereren"
 
-msgid "You can’t add any more {{ programStageName }} events"
-msgstr "Je kunt geen {{ programStageNaam }} evenementen meer toevoegen"
+msgid "You can't add any more {{ programStageName }} events"
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "Annuleer zonder op te slaan"
@@ -865,6 +872,9 @@ msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nieuwe inschrijving voor programma{{escape}} {{programmaNaam}}"
+
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Bewaar {{trackedEntityNaam}}"
@@ -1023,11 +1033,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "Kies een type om te beginnen met zoeken"
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] "Vul minimaal {{count}} attribuut in om te zoeken"
-msgstr[1] "Vul minimaal {{tel}} attributen in om te zoeken"
 
 msgid "Search {{name}}"
 msgstr "Zoek {{naam}}"
@@ -1197,6 +1202,9 @@ msgstr "Markering verwijderen voor vervolg"
 msgid "Mark for follow-up"
 msgstr "Markeer voor vervolg"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Inschrijvingsdatum"
 
@@ -1290,27 +1298,11 @@ msgstr ""
 "De geplande datum komt overeen met de voorgestelde datum, maar kan indien "
 "nodig worden gewijzigd."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-"De geplande datum is {{count}} dag {{position}} de voorgestelde datum."
-msgstr[1] ""
-"De geplande datum is {{getelde}} dagen {{positie}} de voorgestelde datum."
-
 msgid "after"
 msgstr "na"
 
 msgid "before"
 msgstr "voor"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-"Er zijn {{count}} geplande evenementen in {{orgUnitName}} op deze dag."
-msgstr[1] ""
-"Er zijn {{count}} geplande evenementen in {{orgUnitName}} op deze dag."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1571,9 +1563,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "Coördinaat instellen"
 
-msgid "Page {{currentPage}}"
-msgstr "Pagina {{huidigePagina}}"
-
 msgid "Date"
 msgstr "Datum"
 
@@ -1592,11 +1581,8 @@ msgstr "Daten"
 msgid "To time"
 msgstr "Timen"
 
-msgid "error encountered during field validation"
-msgstr "fout opgetreden tijdens veldvalidatie"
-
-msgid "error"
-msgstr "fout"
+msgid "Page {{currentPage}}"
+msgstr "Pagina {{huidigePagina}}"
 
 msgid "Delete polygon"
 msgstr "Polygoon verwijderen"

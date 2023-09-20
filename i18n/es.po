@@ -3,22 +3,23 @@
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
 # ericbp <ericbarredap@gmail.com>, 2021
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2021
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # Marta Vila <marta@dhis2.org>, 2022
 # Pablo Pajuelo Cabezas <pablo@dhis2.org>, 2022
-# Enzo Nicolas Rossi <enzo@dhis2.org>, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
 # Alison Andrade <aandrade@ippfwhr.org>, 2023
 # Janeth Cruz, 2023
 # Prabhjot Singh, 2023
+# Christian Atavillos, 2023
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Prabhjot Singh, 2023\n"
+"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,6 +84,18 @@ msgstr "Fecha de inscripción"
 
 msgid "Last updated"
 msgstr "Última actualización"
+
+msgid "error encountered during field validation"
+msgstr "error encontrado durante la validación de campo"
+
+msgid "error"
+msgstr "error"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
+"Los complementos plugin aún no están disponibles. Comuníquese con el "
+"administrador del sistema."
 
 msgid "This value is validating"
 msgstr "Este valor está siendo validado"
@@ -386,13 +399,13 @@ msgstr "Algunas operaciones aún se están ejecutando. Espere por favor.."
 msgid "Operations running"
 msgstr "Operaciones en ejecución"
 
-msgid "Sort"
-msgstr "Organizar"
-
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
 msgstr ""
+"Este evento tiene cambios no guardados. Si abandona esta página sin guardar,"
+" se perderán estos cambios. ¿Está seguro de que desea descartar los cambios "
+"no guardados?"
 
 msgid "No events to display"
 msgstr "No hay eventos para mostrar"
@@ -607,13 +620,13 @@ msgid "Write comment"
 msgstr "Escribir comentario"
 
 msgid "was blanked out and hidden by your last action"
-msgstr ""
+msgstr "fue borrado y oculto por tu última acción"
 
 msgid "Notice"
-msgstr ""
+msgstr "Aviso"
 
 msgid "Close the notice"
-msgstr ""
+msgstr "cerrar el aviso"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "Usar el nuevo panel de inscripción para {{programName}}"
@@ -629,18 +642,30 @@ msgid ""
 "functionality in Capture is ongoing and will be added in upcoming app "
 "releases."
 msgstr ""
+"Al hacer clic en registrarse a continuación, comenzará a utilizar el nuevo "
+"panel de inscripción en la aplicación Capture para este programa. Por el "
+"momento, hay ciertas funciones de la Tracker Capture que aún no se han "
+"agregado, incluida la función de relación y referencia. El trabajo para "
+"incluir esta funcionalidad Tracker en Capture está en curso y se agregará en"
+" próximos lanzamientos de la aplicación."
 
 msgid ""
 "The core team appreciates any feedback on this new functionality which is "
 "currently being beta tested, please report any issues and feedback in the "
 "DHIS2 JIRA project."
 msgstr ""
+"El equipo de desarrollo agradece cualquier comentario sobre esta nueva "
+"funcionalidad que actualmente se está probando en versión beta. Informe "
+"cualquier problema y comentario en el proyecto de JIRA de DHIS2"
 
 msgid ""
 "Click the button below to opt-in to the new enrollment dashboard "
 "functionality in the Capture app (beta) for this Tracker program for all "
 "users."
 msgstr ""
+"Haga clic en el botón de abajo para optar por la nueva funcionalidad del "
+"panel de inscripción en la aplicación Capture (beta) para este programa "
+"Tracker para todos los usuarios."
 
 msgid "Yes, opt in"
 msgstr "Sí, aceptar"
@@ -786,8 +811,8 @@ msgstr "Programado"
 msgid "Refer"
 msgstr "Referir"
 
-msgid "You can’t add any more {{ programStageName }} events"
-msgstr "Nos e pueden agregar más eventos de {{ programStageName }}"
+msgid "You can't add any more {{ programStageName }} events"
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "Cancelar sin guardar"
@@ -799,7 +824,7 @@ msgid "Program Stages could not be loaded"
 msgstr "No se pudieron cargar las etapas del programa"
 
 msgid "Stage"
-msgstr "Fase"
+msgstr "Etapa"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Inscripción {{escape}} Ver evento"
@@ -851,6 +876,9 @@ msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nueva inscripción en el programa{{escape}} {{programName}}"
+
+msgid "Save {{trackedEntityTypeName}}"
+msgstr "Guardar {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Guardar {{trackedEntityName}}"
@@ -996,7 +1024,7 @@ msgid "Choose a program"
 msgstr "Elija un programa"
 
 msgid "Search for {{titleText}}"
-msgstr "Buscar para {{titleText}}"
+msgstr "Buscar por {{titleText}}"
 
 msgid "Search for"
 msgstr "Buscar por"
@@ -1010,12 +1038,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr "Elija un tipo para comenzar a buscar"
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] "Complete al menos {{count}} atributo para buscar"
-msgstr[1] "Complete al menos {{count}} atributos para buscar"
-msgstr[2] "Complete al menos {{count}} atributo(s) para buscar"
-
 msgid "Search {{name}}"
 msgstr "Buscar {{name}}"
 
@@ -1023,7 +1045,7 @@ msgid "Search by {{name}}"
 msgstr "Buscar por {{name}}"
 
 msgid "Search by attributes"
-msgstr "Buscar por atributos"
+msgstr "Buscar por atributos de {{trackedEntityName}}"
 
 msgid "all programs"
 msgstr "todos los programas"
@@ -1112,7 +1134,7 @@ msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Nuevo {{trackedEntityName}} en {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Buscar un {{trackedEntityName}} en {{programName}}"
+msgstr "Buscar un(a) {{trackedEntityName}} en {{programName}}"
 
 msgid "To work with the selected program,"
 msgstr "Para trabajar con el programa seleccionado,"
@@ -1185,6 +1207,9 @@ msgstr "Elimina la marca para el seguimiento"
 
 msgid "Mark for follow-up"
 msgstr "Marcar para seguimiento"
+
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
 
 msgid "Enrollment date"
 msgstr "Fecha de inscripción"
@@ -1281,30 +1306,11 @@ msgstr ""
 "La fecha programada coincide con la fecha sugerida, pero se puede cambiar si"
 " es necesario."
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-"La fecha programada es {{count}} día {{position}} la fecha sugerida."
-msgstr[1] ""
-"La fecha programada es {{count}} días {{position}} la fecha sugerida."
-msgstr[2] ""
-"La fecha programada es {{count}} días {{position}} la fecha sugerida."
-
 msgid "after"
 msgstr "después"
 
 msgid "before"
 msgstr "antes"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "Hay {{count}} evento programado en {{orgUnitName}} para este día."
-msgstr[1] ""
-"Hay {{count}} eventos programados en {{orgUnitName}} para este día."
-msgstr[2] ""
-"Hay {{count}} eventos programados en {{orgUnitName}} para este día."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1377,7 +1383,7 @@ msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
 
 msgid "To open this event, please wait until saving is complete"
-msgstr ""
+msgstr "Para abrir este evento, espere hasta que se complete el guardado."
 
 msgid "Show {{ rest }} more"
 msgstr "Mostrar más {{ resto }} "
@@ -1445,13 +1451,13 @@ msgid "Choose a program stage to filter by {{label}}"
 msgstr "Elija una etapa del programa para filtrar por {{label}}"
 
 msgid "Active enrollments"
-msgstr ""
+msgstr "Inscripciones activas"
 
 msgid "Completed enrollments"
-msgstr ""
+msgstr "Inscripciónes completadas"
 
 msgid "Cancelled enrollments"
-msgstr ""
+msgstr "Inscripciones canceladas "
 
 msgid "Working list could not be updated"
 msgstr "No se pudo actualizar la lista de trabajo"
@@ -1566,9 +1572,6 @@ msgstr "Error al editar el evento, no se guardaron los cambios realizados"
 msgid "Set coordinate"
 msgstr "Establecer coordenadas"
 
-msgid "Page {{currentPage}}"
-msgstr "Página {{currentPage}}"
-
 msgid "Date"
 msgstr "Fecha"
 
@@ -1587,11 +1590,8 @@ msgstr "A la fecha"
 msgid "To time"
 msgstr "Hasta la hora"
 
-msgid "error encountered during field validation"
-msgstr "error encontrado durante la validación de campo"
-
-msgid "error"
-msgstr "error"
+msgid "Page {{currentPage}}"
+msgstr "Página {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Eliminar polígono"
@@ -1600,7 +1600,7 @@ msgid "Set area"
 msgstr "Establecer área"
 
 msgid "Area on map saved"
-msgstr ""
+msgstr "Área en el mapa guardada"
 
 msgid "Compatibility mode"
 msgstr "Modo de compatibilidad"

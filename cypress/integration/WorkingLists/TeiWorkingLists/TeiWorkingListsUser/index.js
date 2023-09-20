@@ -62,7 +62,6 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 
 Then('the default working list should be displayed', () => {
     const names = [
-        'John',
         'Filona',
         'Gertrude',
         'Frank',
@@ -77,6 +76,7 @@ Then('the default working list should be displayed', () => {
         'Julia',
         'Elizabeth',
         'Donald',
+        'Wayne',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -276,7 +276,6 @@ Then('the registering unit should display in the list', () => {
 
 Then('the list should display data for the second page', () => {
     const names = [
-        'Wayne',
         'Johnny',
         'Donna',
         'Sharon',
@@ -291,6 +290,7 @@ Then('the list should display data for the second page', () => {
         'Noah',
         'Emily',
         'Lily',
+        'Olvia',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -307,7 +307,6 @@ Then('the list should display data for the second page', () => {
 
 Then('the list should display 10 rows of data', () => {
     const names = [
-        'John',
         'Filona',
         'Gertrud',
         'Frank',
@@ -317,6 +316,7 @@ Then('the list should display 10 rows of data', () => {
         'Alan',
         'Heather',
         'Andrea',
+        'Donald',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -332,20 +332,21 @@ Then('the list should display 10 rows of data', () => {
 });
 
 When('you click the first name column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('First name')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(0)
         .click();
 });
 
 When('you click the last name column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('Last name')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(2)
         .click();
 });
 
-When('you click the WHOMCH Smoking column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('WHOMCH Smoking')
+When('you click the WHOMCH Hemoglobin value column header', () => {
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .last()
+        .click()
         .click();
 });
 
@@ -399,10 +400,10 @@ Then('the list should display data ordered ascendingly by last name', () => {
         });
 });
 
-Then('the list should display data ordered ascendingly by WHOMCH Smoking', () => {
+Then('the list should display data ordered descending by WHOMCH Hemoglobin', () => {
     const names = [
-        'Siren',
         'Hertz',
+        'Siren',
     ];
 
     cy.get('[data-test="tei-working-lists"]')

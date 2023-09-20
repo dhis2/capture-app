@@ -2,14 +2,14 @@
 # Translators:
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
 # Wanda <wanda@frontlineaids.org>, 2021
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # Valeriu Plesca <vplesca@gmail.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -76,6 +76,16 @@ msgstr "Дата включения"
 
 msgid "Last updated"
 msgstr "Последнее обновление"
+
+msgid "error encountered during field validation"
+msgstr "Произошла ошибка во время валидации поля"
+
+msgid "error"
+msgstr "ошибка"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Идет валидация значения"
@@ -378,9 +388,6 @@ msgstr "Некоторые операции еще не заверщены. По
 msgid "Operations running"
 msgstr "Операции запущены..."
 
-msgid "Sort"
-msgstr "Сортировать"
-
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
@@ -493,6 +500,12 @@ msgstr "Передача изображения"
 
 msgid "Select image"
 msgstr "Выберите изображение"
+
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
+msgstr ""
 
 msgid "Search"
 msgstr "Поиск"
@@ -760,7 +773,7 @@ msgstr "Расписание"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -822,6 +835,9 @@ msgid ""
 msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
@@ -979,13 +995,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr ""
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-
 msgid "Search {{name}}"
 msgstr "Искать {{name}}"
 
@@ -1138,6 +1147,9 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Отметить для последующего наблюдения"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Дата зачисления"
 
@@ -1226,27 +1238,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-
 msgid "after"
 msgstr "после"
 
 msgid "before"
 msgstr "до"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1291,9 +1287,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "Элемент отслеживаемого объекта"
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1305,6 +1298,9 @@ msgstr ""
 
 msgid "Edit"
 msgstr "Редактировать"
+
+msgid "tracked entity instance"
+msgstr "Элемент отслеживаемого объекта"
 
 msgid "New {{ eventName }} event"
 msgstr ""
@@ -1495,9 +1491,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "Выставить координату"
 
-msgid "Page {{currentPage}}"
-msgstr "Страница {{currentPage}}"
-
 msgid "Date"
 msgstr "Дата"
 
@@ -1516,11 +1509,8 @@ msgstr "До даты"
 msgid "To time"
 msgstr "ко времени"
 
-msgid "error encountered during field validation"
-msgstr "Произошла ошибка во время валидации поля"
-
-msgid "error"
-msgstr "ошибка"
+msgid "Page {{currentPage}}"
+msgstr "Страница {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Удалить полигон"
