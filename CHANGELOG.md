@@ -1,3 +1,10 @@
+# [100.40.0](https://github.com/dhis2/capture-app/compare/v100.39.4...v100.40.0) (2023-09-20)
+
+
+### Features
+
+* [DHIS2-15830] Add orgUnitId to plugin context ([b9ec237](https://github.com/dhis2/capture-app/commit/b9ec237af595a1112dc6db01206e8332c9bb6647))
+
 ## [100.39.4](https://github.com/dhis2/capture-app/compare/v100.39.3...v100.39.4) (2023-09-19)
 
 
