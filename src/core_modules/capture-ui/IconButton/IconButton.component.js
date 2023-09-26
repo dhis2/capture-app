@@ -32,35 +32,18 @@ const styles = {
     },
 };
 
-const IconButtonPlain = ({ children, className, dataTest, onClick, disabled, classes, ...passOnProps }: Props) => {
-    // const handleKeyDown = useCallback((event: SyntheticKeyboardEvent<HTMLSpanElement>) => {
-    //     if ([' ', 'Enter', 'Spacebar'].includes(event.key)) {
-    //         onClick(event);
-    //     }
-    // }, [onClick]);
-
-    // const handleMouseDown = useCallback((event: SyntheticMouseEvent<HTMLSpanElement>) => {
-    //     event.preventDefault();
-    // }, []);
-
-    const onClickHandler = useCallback((event: SyntheticMouseEvent<HTMLButtonElement>) => {
-        if (disabled) return null;
-        return onClick(event);
-    }, [disabled, onClick]);
-
-    return (
-        <button
-            {...passOnProps}
-            onClick={onClickHandler}
-            disabled={disabled}
-            data-test={dataTest}
-            className={cx(classes.button, { disabled, ...(className ? { [className]: true } : {}) })}
-            type="button"
-            tabIndex="0"
-        >
-            {children}
-        </button>
-    );
-};
+const IconButtonPlain = ({ children, className, dataTest, onClick, disabled, classes, ...passOnProps }: Props) => (
+    <button
+        {...passOnProps}
+        onClick={onClick}
+        disabled={disabled}
+        data-test={dataTest}
+        className={cx(classes.button, { disabled, ...(className ? { [className]: true } : {}) })}
+        type="button"
+        tabIndex="0"
+    >
+        {children}
+    </button>
+);
 
 export const IconButton = withStyles(styles)(IconButtonPlain);

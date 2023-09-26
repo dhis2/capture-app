@@ -5,6 +5,6 @@ export type Props = {
     className?: string,
     dataTest?: string,
     disabled?: boolean,
-    onClick: (event: SyntheticKeyboardEvent<HTMLSpanElement> | SyntheticMouseEvent<HTMLSpanElement> | SyntheticTouchEvent<HTMLSpanElement>) => void,
+    onClick: (event: SyntheticKeyboardEvent<HTMLButtonElement> | SyntheticMouseEvent<HTMLButtonElement> | SyntheticTouchEvent<HTMLButtonElement>) => void,
     ...CssClasses,
 };
