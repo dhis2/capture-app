@@ -7,6 +7,7 @@ import { colors, spacersNum, IconChevronUp24 } from '@dhis2/ui';
 
 type ChevronIconProps = {
     open: boolean,
+    dataTest?: string,
     onOpen: () => void,
     onClose: () => void,
     disabled?: boolean,
@@ -47,7 +48,7 @@ const styles = {
     },
 };
 
-const ChevronIconPlain = ({ open, onOpen, onClose, disabled, classes }: ChevronIconProps) => {
+const ChevronIconPlain = ({ open, onOpen, onClose, dataTest, disabled, classes }: ChevronIconProps) => {
     const [postEffectOpen, setPostEffectOpenStatus] = useState(open);
     const [animationsReady, setAnimationsReadyStatus] = useState(false);
 
@@ -68,7 +69,7 @@ const ChevronIconPlain = ({ open, onOpen, onClose, disabled, classes }: ChevronI
 
     return (
         <IconButton
-            dataTest="widget-open-close-toggle-button"
+            dataTest={dataTest}
             className={cx(classes.toggleButton, {
                 closeinit: !animationsReady && !postEffectOpen,
                 open: animationsReady && postEffectOpen,

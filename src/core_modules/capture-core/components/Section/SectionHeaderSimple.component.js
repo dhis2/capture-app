@@ -90,6 +90,7 @@ class SectionHeaderSimplePlain extends Component<Props> {
                                         onOpen={this.handleChangeCollapse}
                                         onClose={this.handleChangeCollapse}
                                         disabled={!this.props.isCollapseButtonEnabled}
+                                        dataTest={'collapsible-button'}
                                     />
                                 );
                             }
