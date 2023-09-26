@@ -96,3 +96,8 @@ Feature: The user interacts with the widgets on the enrollment add event page
     When you click switch tab to Schedule
     Then you should see Schedule tab
     And you should see suggested date: 08-01
+
+  Scenario: You can assign a user when scheduling an event
+  Given you land on the enrollment edit event page by having typed /#/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&stageId=uvMKOn1oWvd&teiId=S3JjTA4QMNe
+  When you click switch tab to Schedule
+  Then you can assign a user when scheduling the event
