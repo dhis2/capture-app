@@ -9,6 +9,8 @@ const styles = {
     button: {
         cursor: 'pointer',
         borderRadius: '3px',
+        border: 'none',
+        background: 'transparent',
         display: 'flex',
         alignItems: 'center',
         padding: '2px',
@@ -31,36 +33,33 @@ const styles = {
 };
 
 const IconButtonPlain = ({ children, className, dataTest, onClick, disabled, classes, ...passOnProps }: Props) => {
-    const handleKeyDown = useCallback((event: SyntheticKeyboardEvent<HTMLSpanElement>) => {
-        if ([' ', 'Enter', 'Spacebar'].includes(event.key)) {
-            onClick(event);
-        }
-    }, [onClick]);
+    // const handleKeyDown = useCallback((event: SyntheticKeyboardEvent<HTMLSpanElement>) => {
+    //     if ([' ', 'Enter', 'Spacebar'].includes(event.key)) {
+    //         onClick(event);
+    //     }
+    // }, [onClick]);
 
-    const handleMouseDown = useCallback((event: SyntheticMouseEvent<HTMLSpanElement>) => {
-        event.preventDefault();
-    }, []);
+    // const handleMouseDown = useCallback((event: SyntheticMouseEvent<HTMLSpanElement>) => {
+    //     event.preventDefault();
+    // }, []);
 
-    const onClickHandler = useCallback((event: SyntheticMouseEvent<HTMLSpanElement>) => {
+    const onClickHandler = useCallback((event: SyntheticMouseEvent<HTMLButtonElement>) => {
         if (disabled) return null;
         return onClick(event);
     }, [disabled, onClick]);
 
     return (
-        <span
+        <button
             {...passOnProps}
             onClick={onClickHandler}
             disabled={disabled}
             data-test={dataTest}
             className={cx(classes.button, { disabled, ...(className ? { [className]: true } : {}) })}
             type="button"
-            role="button"
             tabIndex="0"
-            onKeyDown={handleKeyDown}
-            onMouseDown={handleMouseDown}
         >
             {children}
-        </span>
+        </button>
     );
 };
 

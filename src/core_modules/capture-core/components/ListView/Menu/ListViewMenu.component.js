@@ -33,7 +33,7 @@ const getStyles = () => ({
 const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
     const renderPopperAction = useCallback((togglePopper: Function) => (
         <IconButton
-            data-test="list-view-menu-button"
+            dataTest="list-view-menu-button"
             onClick={togglePopper}
         >
             <IconMore24 />
