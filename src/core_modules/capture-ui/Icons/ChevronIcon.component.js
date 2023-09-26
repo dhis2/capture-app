@@ -56,7 +56,7 @@ const ChevronIconPlain = ({ open, onOpen, onClose, dataTest, disabled, classes }
         if (disabled) {
             return null;
         }
-        return open ? onClose : onOpen;
+        return open ? onClose() : onOpen();
     };
 
     useEffect(() => {
