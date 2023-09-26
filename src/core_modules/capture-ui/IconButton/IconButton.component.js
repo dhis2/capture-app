@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from 'react';
+import React from 'react';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
