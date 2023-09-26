@@ -26,7 +26,6 @@ Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () =
 });
 
 Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
-    cleanUpIfApplicable();
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
@@ -73,6 +72,11 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
+});
+
+Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
+    cleanUpIfApplicable();
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
