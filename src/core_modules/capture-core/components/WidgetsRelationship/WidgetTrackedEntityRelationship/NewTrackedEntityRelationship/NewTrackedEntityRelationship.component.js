@@ -14,6 +14,7 @@ import { RetrieverModeSelector } from './RetrieverModeSelector';
 import type { ComponentProps, StyledComponentProps } from './NewTrackedEntityRelationship.types';
 import { useAddRelationship } from './hooks/useAddRelationship';
 import { TARGET_SIDES } from './common';
+import { generateUID } from '../../../../utils/uid/generateUID';
 
 const styles = {
     container: {
@@ -52,7 +53,7 @@ const NewTrackedEntityRelationshipPlain = ({
     const [currentStep, setCurrentStep] =
         useState(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA);
     const [selectedLinkedEntityMetadata: LinkedEntityMetadata, setSelectedLinkedEntityMetadata] = useState(undefined);
-    const { mutate } = useAddRelationship({
+    const { addRelationship } = useAddRelationship({
         teiId,
         onMutate: () => onSave && onSave(),
     });
@@ -61,7 +62,8 @@ const NewTrackedEntityRelationshipPlain = ({
     const onLinkToTrackedEntityFromSearch = useCallback(
         (linkedTrackedEntityId: string, attributes?: { [attributeId: string]: string }) => {
             if (!selectedLinkedEntityMetadata) return;
-            const { relationshipId, targetSide } = selectedLinkedEntityMetadata;
+            const { relationshipId: relationshipTypeId, targetSide } = selectedLinkedEntityMetadata;
+            const relationshipId = generateUID();
 
             const apiData = targetSide === TARGET_SIDES.TO ?
                 { from: { trackedEntity: { trackedEntity: teiId } }, to: { trackedEntity: { trackedEntity: linkedTrackedEntityId } } } :
@@ -84,30 +86,34 @@ const NewTrackedEntityRelationshipPlain = ({
                 };
             }
 
-            mutate({
+            addRelationship({
                 apiData: {
                     relationships: [{
-                        relationshipType: relationshipId,
+                        relationshipType: relationshipTypeId,
+                        relationship: relationshipId,
                         ...apiData,
                     }],
                 },
                 clientRelationship: {
-                    relationshipType: relationshipId,
+                    relationshipType: relationshipTypeId,
+                    relationship: relationshipId,
                     ...clientData,
                 },
             });
-        }, [mutate, selectedLinkedEntityMetadata, teiId]);
+        }, [addRelationship, selectedLinkedEntityMetadata, teiId]);
 
     const onLinkToTrackedEntityFromRegistration = useCallback((trackedEntity: Object) => {
         if (!selectedLinkedEntityMetadata) return;
-        const { relationshipId, targetSide } = selectedLinkedEntityMetadata;
+        const { relationshipId: relationshipTypeId, targetSide } = selectedLinkedEntityMetadata;
+        const relationshipId = generateUID();
 
         const relationshipData = targetSide === TARGET_SIDES.TO ?
             { from: { trackedEntity: { trackedEntity: teiId } }, to: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } } } :
             { from: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } }, to: { trackedEntity: { trackedEntity: teiId } } };
 
         const clientData = {
-            relationshipType: relationshipId,
+            relationship: relationshipId,
+            relationshipType: relationshipTypeId,
             createdAt: new Date().toISOString(),
             pendingApiResponse: true,
             ...relationshipData,
@@ -121,14 +127,18 @@ const NewTrackedEntityRelationshipPlain = ({
             },
         };
 
-        mutate({
+        addRelationship({
             apiData: {
                 trackedEntities: [trackedEntity],
-                relationships: [{ relationshipType: relationshipId, ...relationshipData }],
+                relationships: [{
+                    relationship: relationshipId,
+                    relationshipType: relationshipTypeId,
+                    ...relationshipData,
+                }],
             },
             clientRelationship: clientData,
         });
-    }, [mutate, selectedLinkedEntityMetadata, teiId]);
+    }, [addRelationship, selectedLinkedEntityMetadata, teiId]);
 
     const handleNavigation = useCallback(
         (destination: $Values<typeof NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS>) => {
