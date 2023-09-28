@@ -64,6 +64,7 @@ export type ComponentProps = {|
     fieldsMetadata: MetadataByPluginId,
     formSubmitted: boolean,
     values: { [id: string]: any },
+    orgUnitId: string,
     setFieldValue: (SetFieldValueProps) => void,
     errors: { [id: string]: Array<string> },
     warnings: { [id: string]: Array<string> },

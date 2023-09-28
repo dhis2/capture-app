@@ -1,14 +1,14 @@
 # 
 # Translators:
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # Viktor Varland <viktor@dhis2.org>, 2023
 # Hamza Assada <7amza.it@gmail.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2023\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -74,6 +74,16 @@ msgstr "تاريخ التسجيل"
 
 msgid "Last updated"
 msgstr "آخر تحديث"
+
+msgid "error encountered during field validation"
+msgstr "حدث خطأ أثناء التحقق من صحة الحقل"
+
+msgid "error"
+msgstr "خطأ"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "يتم التحقق من القيمة"
@@ -367,9 +377,6 @@ msgstr "لا تزال بعض العمليات قيد التشغيل. يرجى ا
 
 msgid "Operations running"
 msgstr "العمليات الجارية"
-
-msgid "Sort"
-msgstr "فرز"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -755,7 +762,7 @@ msgstr "المجدولة زمنياً"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -817,6 +824,9 @@ msgid ""
 msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
@@ -972,15 +982,6 @@ msgstr "يمكنك أيضًا اختيار برنامج من الشريط الع
 msgid "Choose a type to start searching"
 msgstr "اختر نوعًا لبدء البحث"
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
 msgid "Search {{name}}"
 msgstr "البحث عن {{name}}"
 
@@ -1135,6 +1136,9 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "اشر من أجل الملحق"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "تاريخ التسجيل"
 
@@ -1223,31 +1227,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
 msgid "after"
 msgstr "بعد"
 
 msgid "before"
 msgstr "قبل"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1496,9 +1480,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"
 
-msgid "Page {{currentPage}}"
-msgstr "صفحة {{currentPage}}"
-
 msgid "Date"
 msgstr "التاريخ"
 
@@ -1517,11 +1498,8 @@ msgstr "حتى تاريخ"
 msgid "To time"
 msgstr "إلى وقت"
 
-msgid "error encountered during field validation"
-msgstr "حدث خطأ أثناء التحقق من صحة الحقل"
-
-msgid "error"
-msgstr "خطأ"
+msgid "Page {{currentPage}}"
+msgstr "صفحة {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "حذف المضلع"
