@@ -57,6 +57,11 @@ export const useMergeFormFoundationsIfApplicable = (
                         sectionName: section.name,
                     });
                 o.group = Section.groups.EVENT;
+                o.customForm = section.customForm;
+                o.showContainer = section.showContainer;
+                o.open = section.open;
+                o.visible = section.visible;
+                o.displayDescription = section.displayDescription;
             });
             addElements(section, newSection);
             renderFoundation.addSection(newSection);
