@@ -320,7 +320,7 @@ msgid ""
 msgstr "一个具有 {{attributeName}} 的 {{trackedEntityTypeName}} 实体已经登记"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "显示登记的 {{attributeName}} "
+msgstr "显示已注册的{{trackedEntityTypeName}}"
 
 msgid "Registered person"
 msgstr "登记的人"
@@ -1069,7 +1069,7 @@ msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"
 
 msgid "open the Tracker Capture app"
-msgstr "打开跟踪随访采集APP"
+msgstr "打开跟踪记录APP"
 
 msgid "This program is protected"
 msgstr "该项目受保护"
@@ -1257,7 +1257,7 @@ msgid "Save changes"
 msgstr "保存修改"
 
 msgid "Profile"
-msgstr "简历"
+msgstr "基本信息"
 
 msgid "There is a problem with this form"
 msgstr "这个表单有问题"
@@ -1278,7 +1278,7 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
 msgid "{{TETName}} profile"
-msgstr "{{TETName}} 基本资料"
+msgstr "{{TETName}} 基本信息"
 
 msgid "Edit"
 msgstr "编辑"
@@ -1314,7 +1314,7 @@ msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} 逾期"
 
 msgid "{{ scheduledEvents }} scheduled"
-msgstr "{{scheduledEvents}} 已调度"
+msgstr "{{ ScheduledEvents }} 已安排"
 
 msgid "Stages and Events"
 msgstr "阶段与活动"
@@ -1416,7 +1416,7 @@ msgid "Scheduled"
 msgstr "已经调度"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr "逾期{{逃脱}}到期{{时间}}"
+msgstr "逾期{{ escape }}到期{{ time }}"
 
 msgid "Overdue"
 msgstr "逾期"
