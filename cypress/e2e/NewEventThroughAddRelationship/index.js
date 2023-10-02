@@ -16,8 +16,7 @@ When('you add data to the form', () => {
 });
 
 When('you submit the form', () => {
-    cy.server();
-    cy.route('POST', '**/tracker?async=false').as('postData');
+    cy.intercept('POST', '**/tracker?async=false').as('postData');
     cy.get('[data-test="dhis2-uicore-splitbutton-button"]')
         .click();
 });
@@ -25,7 +24,7 @@ When('you submit the form', () => {
 Then('the event should be sent to the server successfully', () => {
     cy.wait('@postData', { timeout: 30000 })
         .then((result) => {
-            expect(result.status).to.equal(200);
+            expect(result.response.statusCode).to.equal(200);
             // clean up
             const id = result.response.body.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
             cy.buildApiUrl('events', id)

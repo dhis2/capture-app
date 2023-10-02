@@ -17,7 +17,6 @@ Then('the widget profile should be closed', () => {
     cy.get('[data-test="profile-widget"]')
         .within(() => {
             cy.get('[data-test="widget-contents"]')
-                .children()
                 .should('not.exist');
         });
 });

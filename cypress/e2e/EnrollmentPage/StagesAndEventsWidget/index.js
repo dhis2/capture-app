@@ -23,7 +23,6 @@ Then('the stages and events widget should be closed', () => {
     cy.get('[data-test="stages-and-events-widget"]')
         .within(() => {
             cy.get('[data-test="widget-contents"]')
-                .children()
                 .should('not.exist');
             cy.contains('Birth').should('not.exist');
         });
@@ -115,22 +114,28 @@ Then('the default list should be displayed', () => {
 });
 
 When(/^you sort list asc by (.*)$/, (columnName) => {
-    cy.get('[data-test="stages-and-events-widget"]')
-        .find('[data-test="widget-contents"]')
+    cy.get('[data-test="stages-and-events-widget"]').should('exist')
+        .find('[data-test="widget-contents"]').should('exist')
         .find('[data-test="stage-content"]')
+        .should('exist')
         .eq(2)
         .find('thead')
+        .should('exist')
         .find('th')
+        .should('exist')
+        .contains(columnName)
+        .parent()
+        .should('exist')
         .within(() => {
-            cy.contains('th', columnName)
-                .find('button')
-                .click();
-            cy.wait(100);
-            cy.contains('th', columnName)
-                .find('button')
-                .click();
+            cy.get('button').should('exist')  // Use cy.get() instead of cy.find()
+                .click()
+                .then(() => {
+                    // Perform further actions or assertions if needed
+                    cy.get('button').should('exist').click();
+                });
         });
 });
+
 
 Then(/^the sorted list by (.*) asc should be displayed$/, () => {
     const rows = [

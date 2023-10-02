@@ -1,6 +1,6 @@
 Feature: User interacts with Main page
 
-    Scenario: The Working list is displayed 
+    Scenario: The Working list is displayed
         Given you are in the main page with no selections made
         And the user selects the program Child Programme
         And the user selects the org unit Ngelehun CHC
@@ -29,7 +29,7 @@ Feature: User interacts with Main page
         Then the current url is /#/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=PpGINOT00UX
 
     Scenario: You are redirected to create a custom working list
-        Given you are in the search page with Ngelehun and MNCH / PNC context
+        Given you are in the search page with Ngelehun and MNCH PNC context
         And the search form is displayed
         When the user clicks the element containing the text: Create saved list
         Then the current url is /#/?orgUnitId=DiszpKrYNg8&programId=uy2gU8kT1jF&selectedTemplateId=uy2gU8kT1jF-default

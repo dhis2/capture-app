@@ -1,7 +1,7 @@
 import { Given, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import '../sharedSteps';
 
-Given('you are in the search page with Ngelehun and MNCH / PNC context', () => {
+Given('you are in the search page with Ngelehun and MNCH PNC context', () => {
     cy.visit('/#/search?orgUnitId=DiszpKrYNg8&programId=uy2gU8kT1jF');
 });
 

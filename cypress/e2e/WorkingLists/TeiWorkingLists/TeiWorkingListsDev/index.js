@@ -1,6 +1,20 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import '../../sharedSteps';
 
+beforeEach(() => {
+    // Disable cache for chromium browsers to force the api to be called
+    if (Cypress.browser.family === 'chromium') {
+        Cypress.automation('remote:debugger:protocol', {
+            command: 'Network.enable',
+            params: {},
+        });
+        Cypress.automation('remote:debugger:protocol', {
+            command: 'Network.setCacheDisabled',
+            params: { cacheDisabled: true },
+        });
+    }
+});
+
 Given('you open the main page with Ngelehun and child programme context', () => {
     cy.intercept('GET', '**/tracker/trackedEntities**').as('getDefaultTeis');
 
@@ -18,7 +32,7 @@ Then('teis should be retrieved from the api using the default query args', () =>
 
     cy.get('@result')
         .its('response.statusCode')
-        .should('be.oneOf', [200, 304]);
+        .should('eq', 200);
 
     cy.get('@result')
         .its('response.url')
@@ -64,8 +78,8 @@ Then('teis with an active enrollment should be retrieved from the api', () => {
     cy.wait('@getTeisWithEnrollmentStatusActive', { timeout: 40000 }).as('result');
 
     cy.get('@result')
-        .its('status')
-        .should('be.oneOf', [200, 304]);
+        .its('response.statusCode')
+        .should('eq', 200);
 
     cy.get('@result')
         .its('response.url')
@@ -89,8 +103,8 @@ Then('teis with active enrollments and unassigned events should be retrieved fro
     cy.wait('@getTeisStatusAndAssigneeFilter', { timeout: 40000 }).as('result');
 
     cy.get('@result')
-        .its('status')
-        .should('be.oneOf', [200, 304]);
+        .its('response.statusCode')
+        .should('eq', 200);
 
     cy.get('@result')
         .its('response.url')
@@ -118,15 +132,15 @@ Then('teis with a first name containing John should be retrieved from the api', 
     cy.wait('@getTeis', { timeout: 40000 }).as('result');
 
     cy.get('@result')
-        .its('status')
-        .should('be.oneOf', [200, 304]);
+        .its('response.statusCode')
+        .should('eq', 200);
 
     cy.get('@result')
-        .its('url')
+        .its('response.url')
         .should('match', /filter=.*John/);
 
     cy.get('@result')
-        .its('url')
+        .its('response.url')
         .should('include', 'page=1');
 
     cy.get('@result').its('response.body.instances').as('teis');
@@ -167,8 +181,8 @@ Then('new teis should be retrieved from the api', () => {
     cy.wait('@getTeis', { timeout: 40000 }).as('result');
 
     cy.get('@result')
-        .its('status')
-        .should('be.oneOf', [200, 304]);
+        .its('response.statusCode')
+        .should('eq', 200);
 
     cy.get('@result').its('response.body.instances').as('teis');
 });
@@ -197,15 +211,15 @@ Then('a tei batch capped at 50 records should be retrieved from the api', () => 
     cy.wait('@getTeis', { timeout: 40000 }).as('result');
 
     cy.get('@result')
-        .its('status')
-        .should('be.oneOf', [200, 304]);
+        .its('response.statusCode')
+        .should('eq', 200);
 
     cy.get('@result')
-        .its('url')
+        .its('response.url')
         .should('include', 'pageSize=50');
 
     cy.get('@result')
-        .its('url')
+        .its('response.url')
         .should('include', 'page=1');
 
     cy.get('@result').its('response.body.instances').as('teis');
@@ -234,15 +248,15 @@ Then('teis should be retrieved from the api ordered ascendingly by first name', 
     cy.wait('@getTeis', { timeout: 40000 }).as('result');
 
     cy.get('@result')
-        .its('status')
-        .should('be.oneOf', [200, 304]);
+        .its('response.statusCode')
+        .should('eq', 200);
 
     cy.get('@result')
-        .its('url')
+        .its('response.url')
         .should('match', /order=.*asc/);
 
     cy.get('@result')
-        .its('url')
+        .its('response.url')
         .should('include', 'page=1');
 
     cy.get('@result').its('response.body.instances').as('teis');

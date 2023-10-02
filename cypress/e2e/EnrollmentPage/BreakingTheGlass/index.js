@@ -86,6 +86,7 @@ And('you log out', () => {
 });
 
 And('you log in as tracker2 user', () => {
+    cy.clearCookies();
     cy.visit('/').then(() => {
         cy.get('#j_username').type('tracker2');
         cy.get('#j_password').type('Tracker@123');

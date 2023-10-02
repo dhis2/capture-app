@@ -193,8 +193,7 @@ Then(/^you see the opt out component for (.*)$/, (program) => {
 });
 
 When(/^you opt out to use the new enrollment Dashboard for (.*)$/, (program) => {
-    cy.server();
-    cy.route('PUT', '**/dataStore/capture/useNewDashboard').as('optOutEnrollmentDashboard');
+    cy.intercept('PUT', '**/dataStore/capture/useNewDashboard').as('optOutEnrollmentDashboard');
     cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`).click();
     cy.wait('@optOutEnrollmentDashboard', { timeout: 30000 });
 });

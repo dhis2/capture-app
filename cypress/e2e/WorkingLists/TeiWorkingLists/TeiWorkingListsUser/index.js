@@ -7,7 +7,7 @@ const cleanUpIfApplicable = () => {
     cy.buildApiUrl('programStageWorkingLists?filter=program.id:eq:qDkgAbB5Jlk&fields=id,displayName')
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const workingList = body.programStageWorkingLists?.find(e => e.displayName === 'Custom Program stage list');
+            const workingList = body.programStageWorkingLists && body.programStageWorkingLists.find(e => e.displayName === 'Custom Program stage list');
             if (!workingList) {
                 return null;
             }
@@ -168,11 +168,6 @@ When('you set the enrollment date to a relative range', () => {
         .type('1000');
 });
 
-When('you apply the current filter', () => {
-    cy.get('[data-test="list-view-filter-apply-button"]')
-        .click();
-});
-
 When('you set the enrollment status filter to active', () => {
     cy.get('[data-test="tei-working-lists"]')
         .contains('Enrollment status')
@@ -191,17 +186,6 @@ When('you set the event status filter to completed', () => {
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('Completed')
         .click();
-});
-
-When(/^you set the first name filter to (.*)$/, (name) => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('First name')
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .find('input')
-        .type(name)
-        .blur();
 });
 
 When('you set the WHOMCH Smoking filter to No', () => {

@@ -59,19 +59,6 @@ When(/^you click the checkbox number (.*)$/, (eq) => {
         .click();
 });
 
-When(/^you click the (.*) button/, (buttonText) => {
-    cy.intercept({
-        method: 'POST',
-        url: '**/tracker?async=false',
-    }).as('postEvents');
-
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains(buttonText)
-        .click();
-
-    cy.wait('@postEvents');
-});
-
 When(/^you click the button to (.*) without post request/, (buttonText) => {
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains(buttonText)

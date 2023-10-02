@@ -9,7 +9,7 @@ When('you click the enrollment widget toggle open close button', () => {
 
 Then('the enrollment widget should be closed', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
-        cy.get('[data-test="widget-contents"]').children().should('not.exist');
+        cy.get('[data-test="widget-contents"]').should('not.exist');
     });
 });
 

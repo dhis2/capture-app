@@ -107,12 +107,6 @@ Then('the list should display active events that are assigned to anyone', () => 
         });
 });
 
-Then('the age filter button should show that the filter is in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years): 10 to 20')
-        .should('exist');
-});
-
 Then('the list should display events where age is between 10 and 20', () => {
     const rows = [
         '14 Male',
