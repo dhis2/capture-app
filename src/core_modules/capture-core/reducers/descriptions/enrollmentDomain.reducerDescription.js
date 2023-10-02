@@ -8,6 +8,8 @@ import { actionTypes as editEventActionTypes } from '../../components/WidgetEven
 const initialReducerValue = {};
 const {
     COMMON_ENROLLMENT_SITE_DATA_SET,
+    UPDATE_ENROLLMENT_DATE,
+    UPDATE_INCIDENT_DATE,
     UPDATE_ENROLLMENT_EVENTS,
     UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID,
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES,
@@ -24,6 +26,20 @@ export const enrollmentDomainDesc = createReducerDescription(
             enrollment,
             attributeValues,
             enrollmentId: enrollment?.enrollment,
+        }),
+        [UPDATE_ENROLLMENT_DATE]: (state, { payload: { enrollmentDate } }) => ({
+            ...state,
+            enrollment: {
+                ...state.enrollment,
+                enrolledAt: enrollmentDate,
+            },
+        }),
+        [UPDATE_INCIDENT_DATE]: (state, { payload: { incidentDate } }) => ({
+            ...state,
+            enrollment: {
+                ...state.enrollment,
+                occurredAt: incidentDate,
+            },
         }),
         [UPDATE_ENROLLMENT_EVENTS]: (
             state,

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2023\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -380,9 +380,6 @@ msgstr "Noen operasjoner kjører fortsatt. Vennligst vent.."
 
 msgid "Operations running"
 msgstr "Operasjoner kjører"
-
-msgid "Sort"
-msgstr "Sorter"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -776,7 +773,7 @@ msgstr "Planlegg"
 msgid "Refer"
 msgstr "Henvis"
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -1160,6 +1157,9 @@ msgstr "Fjern merk for oppfølging"
 msgid "Mark for follow-up"
 msgstr "Merk for oppfølging"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Registreringsdato"
 
@@ -1507,9 +1507,6 @@ msgstr "Feil under redigering av hendelsen, endringer ble ikke lagret"
 msgid "Set coordinate"
 msgstr "Sett koordinater"
 
-msgid "Page {{currentPage}}"
-msgstr "Side {{currentPage}}"
-
 msgid "Date"
 msgstr "Dato"
 
@@ -1527,6 +1524,9 @@ msgstr "Til dato"
 
 msgid "To time"
 msgstr "Til klokkeslett"
+
+msgid "Page {{currentPage}}"
+msgstr "Side {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Slett polygon"

@@ -60,7 +60,10 @@ export const EnrollmentPageDefaultPlain = ({
     classes,
     onEventClick,
     onUpdateTeiAttributeValues,
+    onUpdateEnrollmentDate,
+    onUpdateIncidentDate,
     onEnrollmentError,
+    ruleEffects,
 }: PlainProps) => (
     <>
         <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
@@ -69,6 +72,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <EnrollmentQuickActions
                     stages={stages}
                     events={events}
+                    ruleEffects={ruleEffects}
                 />
                 <WidgetStagesAndEvents
                     programId={program.id}
@@ -77,6 +81,7 @@ export const EnrollmentPageDefaultPlain = ({
                     onViewAll={onViewAll}
                     onCreateNew={onCreateNew}
                     onEventClick={onEventClick}
+                    ruleEffects={ruleEffects}
                 />
             </div>
             <div className={classes.rightColumn}>
@@ -108,6 +113,8 @@ export const EnrollmentPageDefaultPlain = ({
                     programId={program.id}
                     onDelete={onDelete}
                     onAddNew={onAddNew}
+                    onUpdateEnrollmentDate={onUpdateEnrollmentDate}
+                    onUpdateIncidentDate={onUpdateIncidentDate}
                     onError={onEnrollmentError}
                 />}
             </div>

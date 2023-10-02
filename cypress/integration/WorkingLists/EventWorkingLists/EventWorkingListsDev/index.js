@@ -38,7 +38,7 @@ Then('the list should display the events retrieved from the api', () => {
             cy.get('[data-test="event-working-lists"]')
                 .find('tr')
                 .each(($teiRow, index) => {
-                    const rowId = $teiRow.get(0).getAttribute('id');
+                    const rowId = $teiRow.get(0).getAttribute('data-test');
                     if (index > 1) {
                         expect(rowId).to.equal(teis[index - 1].event);
                     }
@@ -232,25 +232,27 @@ When('you click the report date column header', () => {
 
     cy.route('GET', '**/tracker/events**').as('getEvents');
 
-    cy.get('[data-test="online-list-table"]')
-        .contains('Report date')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(0)
+        .click()
         .click();
 });
 
 Then('events should be retrieved from the api ordered ascendingly by report date', () => {
-    cy.wait('@getEvents', { timeout: 40000 }).as('result');
+    cy.wait('@getEvents', { timeout: 40000 }).as('resultDefault');
+    cy.wait('@getEvents', { timeout: 40000 }).as('resultAsc');
 
-    cy.get('@result')
+    cy.get('@resultAsc')
         .its('status')
         .should('equal', 200);
 
-    cy.get('@result')
+    cy.get('@resultAsc')
         .its('url')
         .should('match', /order=.*asc/);
 
-    cy.get('@result')
+    cy.get('@resultAsc')
         .its('url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('events');
+    cy.get('@resultAsc').its('response.body.instances').as('events');
 });

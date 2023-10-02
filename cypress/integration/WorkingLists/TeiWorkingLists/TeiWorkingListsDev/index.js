@@ -146,7 +146,7 @@ Then('the list should display the teis retrieved from the api', () => {
             cy.get('[data-test="tei-working-lists"]')
                 .find('tr')
                 .each(($teiRow, index) => {
-                    const rowId = $teiRow.get(0).getAttribute('id');
+                    const rowId = $teiRow.get(0).getAttribute('data-test');
                     if (index > 1) {
                         expect(rowId).to.equal(teis[index - 1].trackedEntity);
                     }
@@ -226,8 +226,8 @@ When('you click the first name column header', () => {
 
     cy.route('GET', '**/tracker/trackedEntities**').as('getTeis');
 
-    cy.get('[data-test="online-list-table"]')
-        .contains('First name')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(0)
         .click();
 });
 

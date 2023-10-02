@@ -2,6 +2,19 @@ import { v4 as uuid } from 'uuid';
 import '../../sharedSteps';
 import '../../../sharedSteps';
 
+const cleanUpIfApplicable = () => {
+    cy.buildApiUrl('programStageWorkingLists?filter=program.id:eq:qDkgAbB5Jlk&fields=id,displayName')
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const workingList = body.programStageWorkingLists?.find(e => e.displayName === 'Custom Program stage list');
+            if (!workingList) {
+                return null;
+            }
+            return cy
+                .buildApiUrl('programStageWorkingLists', workingList.id)
+                .then(workingListUrl => cy.request('DELETE', workingListUrl));
+        });
+};
 Given('you open the main page with Ngelehun and child programme context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
@@ -42,6 +55,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis context',
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context', () => {
+    cleanUpIfApplicable();
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 
     cy.get('[data-test="tei-working-lists"]')
@@ -58,6 +72,11 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
+});
+
+Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
+    cleanUpIfApplicable();
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
@@ -332,20 +351,21 @@ Then('the list should display 10 rows of data', () => {
 });
 
 When('you click the first name column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('First name')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(0)
         .click();
 });
 
 When('you click the last name column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('Last name')
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .eq(2)
         .click();
 });
 
-When('you click the WHOMCH Smoking column header', () => {
-    cy.get('[data-test="online-list-table"]')
-        .contains('WHOMCH Smoking')
+When('you click the WHOMCH Hemoglobin value column header', () => {
+    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
+        .last()
+        .click()
         .click();
 });
 
@@ -399,10 +419,10 @@ Then('the list should display data ordered ascendingly by last name', () => {
         });
 });
 
-Then('the list should display data ordered ascendingly by WHOMCH Smoking', () => {
+Then('the list should display data ordered descending by WHOMCH Hemoglobin', () => {
     const names = [
-        'Siren',
         'Hertz',
+        'Siren',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -739,3 +759,4 @@ Then('the program stage custom working list filters are loaded', () => {
         .find('[data-test="more-filters"]')
         .should('have.length', 2);
 });
+

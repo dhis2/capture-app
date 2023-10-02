@@ -5,7 +5,7 @@
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2023
-# phil_dhis2, 2023
+# Philip Larsen Donnelly, 2023
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2023
 # Raja Fathurrahim, 2023
 # Farida Sibuea <farida_sibuea@yahoo.com>, 2023
@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Farida Sibuea <farida_sibuea@yahoo.com>, 2023\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -80,6 +80,16 @@ msgstr "Tanggal pendaftaran"
 
 msgid "Last updated"
 msgstr "Terakhir diperbarui"
+
+msgid "error encountered during field validation"
+msgstr "kesalahan yang ditemui selama validasi bidang"
+
+msgid "error"
+msgstr "kesalahan"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Nilai ini memvalidasi"
@@ -378,9 +388,6 @@ msgstr "Beberapa operasi masih berjalan. Mohon tunggu.."
 
 msgid "Operations running"
 msgstr "Operasi berjalan"
-
-msgid "Sort"
-msgstr "Urutkan"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -773,7 +780,7 @@ msgstr "Jadwal"
 msgid "Refer"
 msgstr "Merujuk"
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -836,6 +843,9 @@ msgstr ""
 "Anda juga dapat memilih program dari bilah atas dan membuat program tersebut"
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
@@ -995,10 +1005,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr "Pilih jenis untuk mulai mencari"
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-
 msgid "Search {{name}}"
 msgstr "Telusuri {{nama}}"
 
@@ -1157,6 +1163,9 @@ msgstr "Hapus tanda untuk ditindaklanjuti"
 msgid "Mark for follow-up"
 msgstr "Tandai untuk follow up"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Tanggal pendaftaran"
 
@@ -1245,21 +1254,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-
 msgid "after"
 msgstr "Setelah"
 
 msgid "before"
 msgstr "Sebelum"
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1508,9 +1507,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "Tentukan koordinat"
 
-msgid "Page {{currentPage}}"
-msgstr "Halaman {{Halaman saat ini}}"
-
 msgid "Date"
 msgstr "Tanggal"
 
@@ -1529,11 +1525,8 @@ msgstr "Ke tanggal"
 msgid "To time"
 msgstr "Ke waktu"
 
-msgid "error encountered during field validation"
-msgstr "kesalahan yang ditemui selama validasi bidang"
-
-msgid "error"
-msgstr "kesalahan"
+msgid "Page {{currentPage}}"
+msgstr "Halaman {{Halaman saat ini}}"
 
 msgid "Delete polygon"
 msgstr "Hapus poligon"
