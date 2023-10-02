@@ -2,8 +2,8 @@ import { v4 as uuid } from 'uuid';
 import '../../sharedSteps';
 import '../../../sharedSteps';
 
-const cleanUpIfApplicable = () => {
-    cy.buildApiUrl('programStageWorkingLists?filter=program.id:eq:qDkgAbB5Jlk&fields=id,displayName')
+const cleanUpIfApplicable = (programId) => {
+    cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
         .then(({ body }) => {
             const workingList = body.programStageWorkingLists?.find(e => e.displayName === 'Custom Program stage list');
@@ -55,7 +55,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis context',
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context', () => {
-    cleanUpIfApplicable();
+    cleanUpIfApplicable('qDkgAbB5Jlk');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 
     cy.get('[data-test="tei-working-lists"]')
@@ -75,7 +75,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 });
 
 Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
-    cleanUpIfApplicable();
+    cleanUpIfApplicable('M3xtLkYBlKI');
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
