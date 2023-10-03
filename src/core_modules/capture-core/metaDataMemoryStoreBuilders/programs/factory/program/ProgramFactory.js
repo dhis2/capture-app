@@ -175,6 +175,7 @@ export class ProgramFactory {
         program.icon = buildIcon(cachedProgram.style);
         program.displayFrontPageList = cachedProgram.displayFrontPageList;
         program.onlyEnrollOnce = cachedProgram.onlyEnrollOnce;
+        program.useFirstStageDuringRegistration = cachedProgram.useFirstStageDuringRegistration;
 
         return program;
     }
