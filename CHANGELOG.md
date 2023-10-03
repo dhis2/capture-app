@@ -1,3 +1,10 @@
+# [100.41.0](https://github.com/dhis2/capture-app/compare/v100.40.1...v100.41.0) (2023-10-03)
+
+
+### Features
+
+* [DHIS2-9661][DHIS2-14830] first stage on registration page  ([#3267](https://github.com/dhis2/capture-app/issues/3267)) ([6e5f6fe](https://github.com/dhis2/capture-app/commit/6e5f6fea7b6ab043800e806c7459210f10ef608a))
+
 ## [100.40.1](https://github.com/dhis2/capture-app/compare/v100.40.0...v100.40.1) (2023-09-30)
 
 
