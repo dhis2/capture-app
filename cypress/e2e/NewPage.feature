@@ -1,5 +1,14 @@
 Feature: User creates a new entries from the registration page
 
+  @v>=41
+  Scenario: New person in Tracker Program > Filling the Allergies with multiple options
+    Given you are in the WHO RMNCH program registration page
+    When you fill in multiple Allergies options
+    Then you can see the multiple selections in the form
+    And you fill the WHO RMNCH program registration form with its required unique values
+    And you click the save person submit button
+    Then you are navigated to the WHO RMNCH program in Tracker Capture app
+
   Scenario: Viewing the registration page without any selections
     Given you are on the default registration page
     Then there should be informative message explaining you need to select an organisation unit
@@ -108,10 +117,10 @@ Feature: User creates a new entries from the registration page
 ### New Person
 
   Scenario: New person > Submitting the form with unique name navigates you to the user dashboard
-      Given you are in the Person registration page
-      When you fill in a unique first name
-      And you click the save person submit button
-      Then you are navigated to the Tracker Capture
+    Given you are in the Person registration page
+    When you fill in a unique first name
+    And you click the save person submit button
+    Then you are navigated to the Tracker Capture
 
   Scenario: New person > Submitting the form from the duplicates modal navigates you to the user dashboard
     Given you are in the Person registration page
@@ -166,14 +175,6 @@ Feature: User creates a new entries from the registration page
     When you submit the form again from the duplicates modal
     Then you are navigated to the WHO RMNCH program in Tracker Capture app
 
-@v>=41
-  Scenario: New person in Tracker Program > Filling the Allergies with multiple options
-    Given you are in the WHO RMNCH program registration page
-    When you fill in multiple Allergies options
-    Then you can see the multiple selections in the form
-    And you fill the WHO RMNCH program registration form with its required unique values
-    And you click the save person submit button
-    Then you are navigated to the WHO RMNCH program in Tracker Capture app
 
   Scenario: New person in Tracker Program > Submitting the form shows a list with duplicates
     Given you are in Child programme registration page
