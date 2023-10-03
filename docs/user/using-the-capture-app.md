@@ -982,6 +982,28 @@ The enrollment comment widget displays comments and allows addition of comments,
 
 By clicking in the text field, you will be able to enter new text and see action buttons **Save comment** and **Cancel**. Note that Enrollment comments are attributed to a user and cannot be deleted. 
 
+### Relationship widget
+
+On the enrollment dashboard, you can view the relationship widget. Inside the relationship widget you can view the relationships of the tracked entity instance.
+
+![](resources/images/enrollment-dash-relationship-widget.png)
+
+Click the **Add new** button to add a new relationship. Adding a new relationship opens a dialog where you can select the applicable relationship type.
+
+![](resources/images/enrollment-dash-relationship-widget-add.png)
+
+Choose between linking to an existing tracked entity instance or creating a new one.
+
+![](resources/images/enrollment-dash-relationship-widget-add-choose.png)
+
+#### Existing tracked entity instance
+
+![](resources/images/enrollment-dash-relationship-widget-add-existing.png)
+
+#### New tracked entity instance
+
+![](resources/images/enrollment-dash-relationship-widget-add-new.png)
+
 ### Tracked entity instance profile widget
 
 On the enrollment dashboard, you can view the tracked entity instance profile widget. Inside the profile widget you can view the key attributes values. 
