@@ -27,10 +27,12 @@ const styles = (theme: Theme) => ({
 const NewEventsList = (props: Props) => {
     const { classes, ...passOnProps } = props;
     const { push } = useHistory();
-    const eventsAdded = props.events ? Object.keys(props.events).length : 0;
-    if (eventsAdded === 0) {
+
+    if (!props.events || !Object.keys(props.events).length) {
         return null;
     }
+    const eventsAdded = Object.keys(props.events).length - 1;
+
     return (
         <Paper className={classes.container}>
             <div

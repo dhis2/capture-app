@@ -1,14 +1,24 @@
 // @flow
-import { connect } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
-const mapStateToProps = (state: ReduxState) => ({
-    currentSelectionsComplete: !!state.currentSelections.complete,
-    programId: state.currentSelections.programId,
-    error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
-    ready: !state.activePage.lockedSelectorLoads,  // TODO: Should probably remove this
-});
+const WrappedMainPage = withLoadingIndicator()(withErrorMessageHandler()(MainPageComponent));
 
-// $FlowFixMe[missing-annot] automated comment
-export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(MainPageComponent)));
+export const MainPage = (props) => {
+    const currentSelectionsComplete = useSelector(({ currentSelections }) => !!currentSelections.complete);
+    const programId = useSelector(({ currentSelections }) => currentSelections.programId);
+    const error = useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
+    const ready = useSelector(({ activePage }) => !activePage.lockedSelectorLoads);
+
+    return (
+        <WrappedMainPage
+            currentSelectionsComplete={currentSelectionsComplete}
+            programId={programId}
+            error={error}
+            ready={ready}
+            {...props}
+        />
+    );
+};
