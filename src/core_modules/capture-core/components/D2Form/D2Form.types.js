@@ -1,5 +1,5 @@
 // @flow
-
+import * as React from 'react';
 import type { RenderFoundation } from '../../metaData';
 
 export type FormRef = $ReadOnly<{|
@@ -10,6 +10,7 @@ export type OwnProps = $ReadOnly<{|
   formFoundation: RenderFoundation,
   id: string,
   formHorizontal?: boolean,
+  getCustomContent?: (beforeSectionId: string) => React.Node,
   ...FormRef
 |}>
 
