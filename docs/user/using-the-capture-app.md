@@ -206,7 +206,7 @@ To configure it, you must follow the steps described in the [Enrollment with aut
 
 ### Enrollment with first stage on registration page
 
-A program can be configured to show the first stage on the registration page when enrolling.
+For tracker programs enable the "First stage appears on registration page" flag in the Maintenance. The enrollment registration page will now display the first program stage the user has access to.
 
 ![](resources/images/first-stage-during-registration.png)
 
