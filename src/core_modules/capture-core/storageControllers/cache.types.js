@@ -119,6 +119,7 @@ export type CachedProgramStage = {
     generatedByEnrollmentDate?: ?boolean,
     hideDueDate?: ?boolean,
     reportDateToUse: string,
+    repeatable: boolean,
     minDaysFromStart: number,
     style?: ?CachedStyle,
 };
@@ -204,6 +205,7 @@ export type CachedProgram = {
     selectIncidentDatesInFuture: boolean,
     displayIncidentDate: boolean,
     onlyEnrollOnce: boolean,
+    useFirstStageDuringRegistration: boolean,
 };
 
 export type CachedProgramStageDataElementsAsObject = {

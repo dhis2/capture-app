@@ -2,21 +2,26 @@
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
-import type { TrackerProgram } from '../../../../metaData';
+import type { ProgramStage, TrackerProgram, RenderFoundation } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewEnrollment } from './open.actions';
-import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer, getCategoryOptionsValidatorContainers } from '../fieldValidators';
+import {
+    getEnrollmentDateValidatorContainer,
+    getIncidentDateValidatorContainer,
+    getCategoryOptionsValidatorContainers,
+} from '../fieldValidators';
 import { convertGeometryOut } from '../../converters';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
+import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
 
 const itemId = 'newEnrollment';
 
 type DataEntryPropsToInclude = Array<Object>;
 
-const dataEntryPropsToInclude: DataEntryPropsToInclude = [
+const enrollmentDataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
         id: 'enrolledAt',
         type: 'DATE',
@@ -48,7 +53,9 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     extraDataEntryProps = [],
     formValues,
     clientValues,
+    firstStage,
     programCategory,
+    formFoundation,
 }: {
     program: TrackerProgram,
     orgUnit: OrgUnit,
@@ -57,30 +64,39 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     extraDataEntryProps?: Array<Object>,
     formValues: { [key: string]: any },
     clientValues: { [key: string]: any },
+    firstStage?: ProgramStage,
     programCategory?: ProgramCategory,
+    formFoundation: RenderFoundation,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
-
-    if (programCategory && programCategory.categories) {
-        dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
+    const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
+    const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage.stageForm);
+    const dataEntryPropsToInclude = [
+        ...enrollmentDataEntryPropsToInclude,
+        ...extraDataEntryProps,
+        ...(firstStageDataEntryPropsToInclude || []),
+        ...(programCategory && programCategory.categories ? programCategory.categories.map(category => ({
             id: `attributeCategoryOptions-${category.id}`,
             type: 'TEXT',
-            validatorContainers: getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
-        })));
-    }
+            validatorContainers:
+                getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
+        })) : []),
+    ];
+
     const dataEntryActions =
             loadNewDataEntry(
                 dataEntryId,
                 itemId,
-                [...dataEntryPropsToInclude, ...extraDataEntryProps],
+                dataEntryPropsToInclude,
                 { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
             );
 
-    const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const effects = getApplicableRuleEffectsForTrackerProgram({
         program,
         orgUnit,
+        stage: firstStage,
         attributeValues: clientValues,
+        formFoundation,
     });
 
     return batchActions([

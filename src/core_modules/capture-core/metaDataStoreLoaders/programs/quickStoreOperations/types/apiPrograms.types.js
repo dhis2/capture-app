@@ -140,6 +140,7 @@ type apiProgram = {
     featureType?: ?string,
     selectEnrollmentDatesInFuture: boolean,
     displayFrontPageList: boolean,
+    useFirstStageDuringRegistration: boolean,
     selectIncidentDatesInFuture: boolean,
     displayIncidentDate: boolean,
     dataEntryForm?: ?apiDataEntryForm,

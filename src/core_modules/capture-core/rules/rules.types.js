@@ -19,6 +19,7 @@ export type GetApplicableRuleEffectsForTrackerProgramInput = {|
     otherEvents?: EventsData,
     attributeValues?: TEIValues,
     enrollmentData?: Enrollment,
+    formFoundation?: RenderFoundation,
 |};
 
 export type GetApplicableRuleEffectsForEventProgramInput = {|
