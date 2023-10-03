@@ -1,7 +1,7 @@
 # 
 # Translators:
 # Edem Kossi <ekossi@hispwca.org>, 2022
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2022
 # Bram Piot <bram.piot@gmail.com>, 2022
@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yayra Gomado <ygomado@hispwca.org>, 2023\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -401,9 +401,6 @@ msgstr "Certaines opérations sont encore en cours. Veuillez patienter..."
 
 msgid "Operations running"
 msgstr "Opérations en cours"
-
-msgid "Sort"
-msgstr "Trier"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -804,7 +801,7 @@ msgstr "Planning"
 msgid "Refer"
 msgstr "Référer"
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -1198,6 +1195,9 @@ msgstr "Supprimer le marquage pour suivi"
 msgid "Mark for follow-up"
 msgstr "Marquer pour suivi"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Date d'enrôlement"
 
@@ -1559,9 +1559,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "Définir les coordonnées"
 
-msgid "Page {{currentPage}}"
-msgstr "Page {{page en cours}}"
-
 msgid "Date"
 msgstr "Date"
 
@@ -1579,6 +1576,9 @@ msgstr "Date de fin"
 
 msgid "To time"
 msgstr "À"
+
+msgid "Page {{currentPage}}"
+msgstr "Page {{page en cours}}"
 
 msgid "Delete polygon"
 msgstr "Supprimer polygone"

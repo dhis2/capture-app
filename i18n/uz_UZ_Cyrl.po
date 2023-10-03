@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2023\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -382,9 +382,6 @@ msgstr "Баъзи операциялар ҳали ҳам бажарилмоқд
 
 msgid "Operations running"
 msgstr "Амалиётлар бажарилмоқда"
-
-msgid "Sort"
-msgstr "Саралаш"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -777,7 +774,7 @@ msgstr "Режа"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -1159,6 +1156,9 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Кузатув учун белгиланг"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Қайд этилган сана"
 
@@ -1502,9 +1502,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"
 
-msgid "Page {{currentPage}}"
-msgstr "{{currentPage}} саҳифаси"
-
 msgid "Date"
 msgstr "Сана"
 
@@ -1522,6 +1519,9 @@ msgstr "Шу кунгача"
 
 msgid "To time"
 msgstr "Шу вақтгача"
+
+msgid "Page {{currentPage}}"
+msgstr "{{currentPage}} саҳифаси"
 
 msgid "Delete polygon"
 msgstr "Полигон (кўпбурчак) ни ўчириб ташлаш"

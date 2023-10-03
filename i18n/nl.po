@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-01T08:11:59.116Z\n"
+"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Charel van den Elsen, 2023\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -390,9 +390,6 @@ msgstr "Sommige operaties lopen nog. Even geduld aub.."
 
 msgid "Operations running"
 msgstr "Operaties lopen"
-
-msgid "Sort"
-msgstr "Soort"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -808,8 +805,8 @@ msgstr "Schema"
 msgid "Refer"
 msgstr "Refereren"
 
-msgid "You can’t add any more {{ programStageName }} events"
-msgstr "Je kunt geen {{ programStageNaam }} evenementen meer toevoegen"
+msgid "You can't add any more {{ programStageName }} events"
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "Annuleer zonder op te slaan"
@@ -1205,6 +1202,9 @@ msgstr "Markering verwijderen voor vervolg"
 msgid "Mark for follow-up"
 msgstr "Markeer voor vervolg"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Inschrijvingsdatum"
 
@@ -1563,9 +1563,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "Coördinaat instellen"
 
-msgid "Page {{currentPage}}"
-msgstr "Pagina {{huidigePagina}}"
-
 msgid "Date"
 msgstr "Datum"
 
@@ -1583,6 +1580,9 @@ msgstr "Daten"
 
 msgid "To time"
 msgstr "Timen"
+
+msgid "Page {{currentPage}}"
+msgstr "Pagina {{huidigePagina}}"
 
 msgid "Delete polygon"
 msgstr "Polygoon verwijderen"

@@ -24,7 +24,7 @@ export type PlainProps = {|
     onLinkedRecordClick: LinkedRecordClick,
     onEnrollmentError: (message: string) => void,
     onEnrollmentSuccess: () => void,
-    onCancelEditEvent: () => void,
+    onCancelEditEvent: (isScheduled: boolean) => void,
     onHandleScheduleSave: (eventData: Object) => void,
     pageStatus: string,
     eventStatus?: string,
@@ -38,4 +38,5 @@ export type Props = {|
     enrollmentId: string,
     orgUnitId: string,
     eventId: string,
+    initMode?: string,
 |};

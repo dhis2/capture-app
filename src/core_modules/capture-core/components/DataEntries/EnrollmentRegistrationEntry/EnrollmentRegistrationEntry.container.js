@@ -7,7 +7,6 @@ import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
 import { useRulesEngineOrgUnit } from '../../../hooks';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
-import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
@@ -16,15 +15,18 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     trackedEntityInstanceAttributes,
     orgUnitId,
     teiId,
+    onSave,
     ...passOnProps
 }) => {
     const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
-    const { ready, skipDuplicateCheck } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit, teiId);
     const {
+        ready,
+        skipDuplicateCheck,
+        firstStageMetaData,
         formId,
-        registrationMetaData: enrollmentMetadata,
+        enrollmentMetadata,
         formFoundation,
-    } = useMetadataForRegistrationForm({ selectedScopeId });
+    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
 
     const isUserInteractionInProgress: boolean = useSelector(
         state =>
@@ -34,7 +36,6 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
           || dataEntryHasChanges(state, 'relationship-newEnrollment'),
     );
     const trackedEntityTypeNameLC = enrollmentMetadata?.trackedEntityType?.name.toLocaleLowerCase() ?? '';
-
 
     const isSavingInProgress = useSelector(({ possibleDuplicates, newPage }) =>
         possibleDuplicates.isLoading || possibleDuplicates.isUpdating || !!newPage.uid);
@@ -46,6 +47,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     return (
         <EnrollmentRegistrationEntryComponent
             {...passOnProps}
+            firstStageMetaData={firstStageMetaData}
             selectedScopeId={selectedScopeId}
             formId={formId}
             formFoundation={formFoundation}
@@ -59,6 +61,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             orgUnit={orgUnit}
             isUserInteractionInProgress={isUserInteractionInProgress}
             isSavingInProgress={isSavingInProgress}
+            onSave={() => onSave(formFoundation, firstStageMetaData)}
         />
     );
 };
