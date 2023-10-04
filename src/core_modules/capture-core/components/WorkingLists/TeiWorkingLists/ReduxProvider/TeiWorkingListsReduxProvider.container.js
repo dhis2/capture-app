@@ -51,7 +51,8 @@ export const TeiWorkingListsReduxProvider = ({
         selectedTemplateId !== `${programId}-default` &&
         onSelectTemplate &&
         onSelectTemplate(selectedTemplateId);
-    }, [selectedTemplateId, programId, onSelectTemplate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const onSelectListRow = useCallback(({ id }) => {
         const record = records[id];
