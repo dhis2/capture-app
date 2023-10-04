@@ -984,9 +984,16 @@ By clicking in the text field, you will be able to enter new text and see action
 
 ### Relationship widget
 
-On the enrollment dashboard, you can view the relationship widget. Inside the relationship widget you can view the relationships of the tracked entity instance.
+The Relationships widget on the enrollment dashboard is used for viewing the record’s linked relationships to other records.
+The number next to the title signifies the total number of relationships
 
 ![](resources/images/enrollment-dash-relationship-widget.png)
+
+For tracked entity instance relationships, the key attributes shown in the widget are the attributes that have been selected to be displayed on the relationship type page in Maintenance.
+
+If no attributes are selected, it will just show a row per record with tracked entity type name and relationship creation date.
+
+When clicking a tracked entity instance you should be taken to the Enrollment Dashboard. If the relationship type includes a program, you should be taken to the latest enrollment for that program. If no program is specified, you should still be sent to the enrollment dashboard, but without a program.
 
 Click the **Add new** button to add a new relationship. Adding a new relationship opens a dialog where you can select the applicable relationship type.
 
@@ -998,9 +1005,13 @@ Choose between linking to an existing tracked entity instance or creating a new 
 
 #### Existing tracked entity instance
 
+Use the search form to find any existing record to link to.
+
 ![](resources/images/enrollment-dash-relationship-widget-add-existing.png)
 
 #### New tracked entity instance
+
+Use the form to create a new record and link.
 
 ![](resources/images/enrollment-dash-relationship-widget-add-new.png)
 
