@@ -38,6 +38,8 @@ export const TeiWorkingListsReduxProvider = ({
         onDeleteTemplate,
         onUpdateDefaultTemplate,
         programStage,
+        currentTemplateId,
+        viewPreloaded,
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
     const dispatch = useDispatch();
@@ -47,12 +49,15 @@ export const TeiWorkingListsReduxProvider = ({
     }, [dispatch, programId, storeId, selectedTemplateId]);
 
     useEffect(() => {
-        selectedTemplateId &&
-        selectedTemplateId !== `${programId}-default` &&
-        onSelectTemplate &&
-        onSelectTemplate(selectedTemplateId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        // This hook should only fire when you navigate from the search page to the main page with a working list selected
+        if (selectedTemplateId &&
+            selectedTemplateId !== currentTemplateId &&
+            !viewPreloaded &&
+            onSelectTemplate
+        ) {
+            onSelectTemplate(selectedTemplateId);
+        }
+    }, [selectedTemplateId, viewPreloaded, currentTemplateId, onSelectTemplate]);
 
     const onSelectListRow = useCallback(({ id }) => {
         const record = records[id];
@@ -95,6 +100,8 @@ export const TeiWorkingListsReduxProvider = ({
     return (
         <TeiWorkingListsSetup
             {...commonStateManagementProps}
+            currentTemplateId={currentTemplateId}
+            viewPreloaded={viewPreloaded}
             templateSharingType={templateSharingType}
             onSelectListRow={onSelectListRow}
             onLoadTemplates={onLoadTemplates}
