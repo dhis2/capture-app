@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
-"PO-Revision-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-10-06T08:03:19.570Z\n"
+"PO-Revision-Date: 2023-10-06T08:03:19.570Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1352,9 +1352,6 @@ msgstr "Working list could not be loaded"
 
 msgid "Download as JSON"
 msgstr "Download as JSON"
-
-msgid "Download as XML"
-msgstr "Download as XML"
 
 msgid "Download as CSV"
 msgstr "Download as CSV"
