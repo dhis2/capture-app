@@ -1,7 +1,8 @@
+import { Before } from '@badeball/cypress-cucumber-preprocessor';
 import { filterInstanceVersion } from '../../support/tagUtils';
 
 let skip;
-beforeEach(() => {
+Before(() => {
     cy.log('Before hook from global.js');
     filterInstanceVersion(skip);
 });

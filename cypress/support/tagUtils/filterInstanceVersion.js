@@ -1,9 +1,8 @@
 export const filterInstanceVersion = (skip) => {
-    const { tags } = window.testState.currentScenario;
+    const { tags } = window.testState.pickle;
     if (!tags || !tags.length) {
         return;
     }
-    cy.debug(tags);
 
     const versionTags = tags
         .map(({ name }) => /^@v([><=]*)(\d+)$/.exec(name))
@@ -27,7 +26,13 @@ export const filterInstanceVersion = (skip) => {
         .some((versionTag) => {
             const version = Number(versionTag[2]);
             const operator = versionTag[1] || '=';
-            return operation[operator]?.(currentInstanceVersion, version) ?? false;
+
+            if (!operation[operator] || !currentInstanceVersion) {
+                return false;
+            }
+
+            const test = operation[operator](currentInstanceVersion, version);
+            return test;
         });
 
     cy.log(`Instance version: ${currentInstanceVersion}`);

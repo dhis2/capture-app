@@ -1,7 +1,18 @@
-import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then, defineStep as And, BeforeStep } from '@badeball/cypress-cucumber-preprocessor';
 import moment from 'moment';
 import { getCurrentYear } from '../../support/date';
 import '../sharedSteps';
+import { filterInstanceVersion } from '../../support/tagUtils';
+
+let skip;
+BeforeStep(function callback() {
+    cy.log('Before hook from global.js');
+    filterInstanceVersion(skip);
+});
+
+beforeEach(function callback() {
+    skip = this.skip.bind(this);
+});
 
 And('you are on the default registration page', () => {
     cy.visit('/#/new');
