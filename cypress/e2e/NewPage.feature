@@ -1,5 +1,10 @@
 Feature: User creates a new entries from the registration page
 
+
+  Scenario: Viewing the registration page without any selections
+    Given you are on the default registration page
+    Then there should be informative message explaining you need to select an organisation unit
+
   @v>=41
   Scenario: New person in Tracker Program > Filling the Allergies with multiple options
     Given you are in the WHO RMNCH program registration page
@@ -8,10 +13,6 @@ Feature: User creates a new entries from the registration page
     And you fill the WHO RMNCH program registration form with its required unique values
     And you click the save person submit button
     Then you are navigated to the WHO RMNCH program in Tracker Capture app
-
-  Scenario: Viewing the registration page without any selections
-    Given you are on the default registration page
-    Then there should be informative message explaining you need to select an organisation unit
 
   Scenario: Viewing the registration page with incomplete program categories selection
     Given you are in the main page with no selections made

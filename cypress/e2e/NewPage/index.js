@@ -5,13 +5,11 @@ import '../sharedSteps';
 import { filterInstanceVersion } from '../../support/tagUtils';
 
 let skip;
-BeforeStep(function callback() {
-    cy.log('Before hook from global.js');
+BeforeStep(function callback(...props) {
+    console.log('Before hook from global.js');
+    console.log('Props', props);
+    console.log('This', this);
     filterInstanceVersion(skip);
-});
-
-beforeEach(function callback() {
-    skip = this.skip.bind(this);
 });
 
 And('you are on the default registration page', () => {
