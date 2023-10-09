@@ -74,6 +74,7 @@ export const getApplicableRuleEffectsForTrackerProgram = ({
     otherEvents,
     attributeValues,
     enrollmentData,
+    formFoundation,
 }: GetApplicableRuleEffectsForTrackerProgramInput,
 flattenedResult: boolean = false,
 ) => {
@@ -82,6 +83,7 @@ flattenedResult: boolean = false,
         program.programRules,
         stage?.programRules,
     );
+    const foundationForPostProcessing = formFoundation || (stage ? stage.stageForm : program.enrollment.enrollmentForm);
     if (!programRules.length) {
         return [];
     }
@@ -103,7 +105,7 @@ flattenedResult: boolean = false,
         programRules,
         programRuleVariables,
         trackedEntityAttributes: getTrackedEntityAttributesForRulesExecution(program.attributes),
-        foundationForPostProcessing: stage ? stage.stageForm : program.enrollment.enrollmentForm,
+        foundationForPostProcessing,
     });
 
     return flattenedResult ? effects : buildEffectsHierarchy(effects);
