@@ -10,24 +10,27 @@ import {
 } from '../../metaData';
 import { getApplicableRuleEffectsForEventProgram } from '..';
 
-const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [{
-    id: 'effectId',
-    type: 'DISPLAYTEXT',
-    message: 'display effect',
-}]);
+const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [
+    {
+        id: 'effectId',
+        type: 'DISPLAYTEXT',
+        message: 'display effect',
+    },
+]);
 
 const mockOptionSet = new OptionSet('optionSet1', [new Option('option1', 'opt1')]);
 jest.mock('@dhis2/rules-engine-javascript/build/cjs/RulesEngine', () => ({
-    RulesEngine: jest.fn().mockImplementation(() =>
-        ({ getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) })),
+    RulesEngine: jest
+        .fn()
+        .mockImplementation(() => ({ getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) })),
 }));
 
 jest.mock('../../metaDataMemoryStores/constants/constants.store', () => ({
-    constantsStore: ({ get: () => [{ id: 'constantId1', value: '1' }] }),
+    constantsStore: { get: () => [{ id: 'constantId1', value: '1' }] },
 }));
 
 jest.mock('../../metaDataMemoryStores/optionSets/optionSets.store', () => ({
-    optionSetStore: ({ get: () => [mockOptionSet] }),
+    optionSetStore: { get: () => [mockOptionSet] },
 }));
 
 describe('getApplicableRuleEffectsForEventProgram', () => {
@@ -96,18 +99,22 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
             },
         ];
 
-        initProgram.programRules = [{
-            condition: 'true',
-            displayName: 'TestRule',
-            id: 'JJDQxgHuuL2',
-            programId: 'IpHINAT79UW',
-            programRuleActions: [{
-                data: '#{Test}',
-                id: 'CQaifjkoFEU',
-                location: 'feedback',
-                programRuleActionType: 'DISPLAYTEXT',
-            }],
-        }];
+        initProgram.programRules = [
+            {
+                condition: 'true',
+                displayName: 'TestRule',
+                id: 'JJDQxgHuuL2',
+                programId: 'IpHINAT79UW',
+                programRuleActions: [
+                    {
+                        data: '#{Test}',
+                        id: 'CQaifjkoFEU',
+                        location: 'feedback',
+                        programRuleActionType: 'DISPLAYTEXT',
+                    },
+                ],
+            },
+        ];
     });
 
     test('RulesEngine called with computed arguments from getApplicableRuleEffectsForEventProgram', () => {

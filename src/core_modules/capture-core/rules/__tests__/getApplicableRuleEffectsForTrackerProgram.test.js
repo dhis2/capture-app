@@ -10,24 +10,27 @@ import {
 } from '../../metaData';
 import { getApplicableRuleEffectsForTrackerProgram } from '..';
 
-const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [{
-    id: 'effectId',
-    type: 'DISPLAYTEXT',
-    message: 'display effect',
-}]);
+const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [
+    {
+        id: 'effectId',
+        type: 'DISPLAYTEXT',
+        message: 'display effect',
+    },
+]);
 
 const mockOptionSet = new OptionSet('optionSet1', [new Option('option1', 'opt1')]);
 jest.mock('@dhis2/rules-engine-javascript/build/cjs/RulesEngine', () => ({
-    RulesEngine: jest.fn().mockImplementation(() =>
-        ({ getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) })),
+    RulesEngine: jest
+        .fn()
+        .mockImplementation(() => ({ getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) })),
 }));
 
 jest.mock('../../metaDataMemoryStores/constants/constants.store', () => ({
-    constantsStore: ({ get: () => [{ id: 'constantId1', value: '1' }] }),
+    constantsStore: { get: () => [{ id: 'constantId1', value: '1' }] },
 }));
 
 jest.mock('../../metaDataMemoryStores/optionSets/optionSets.store', () => ({
-    optionSetStore: ({ get: () => [mockOptionSet] }),
+    optionSetStore: { get: () => [mockOptionSet] },
 }));
 
 describe('getApplicableRuleEffectsForTrackerProgram', () => {
@@ -46,20 +49,22 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
         trackedEntityInstanceId: 'vCGpQAWG17I',
     };
 
-    const otherEvents = [{
-        da1Id: 'otherEventText',
-        dueDate: '2021-05-31T09:51:38.134',
-        enrollmentId: 'vVtmDlsu3me',
-        enrollmentStatus: 'ACTIVE',
-        eventDate: '2021-05-31T00:00:00.000',
-        eventId: 'BxGzDJK3JqN',
-        orgUnitId: 'DiszpKrYNg8',
-        orgUnitName: 'Ngelehun CHC',
-        programId: 'IpHINAT79UW',
-        programStageId: 'A03MvHHogjR',
-        status: 'ACTIVE',
-        trackedEntityInstanceId: 'vCGpQAWG17I',
-    }];
+    const otherEvents = [
+        {
+            da1Id: 'otherEventText',
+            dueDate: '2021-05-31T09:51:38.134',
+            enrollmentId: 'vVtmDlsu3me',
+            enrollmentStatus: 'ACTIVE',
+            eventDate: '2021-05-31T00:00:00.000',
+            eventId: 'BxGzDJK3JqN',
+            orgUnitId: 'DiszpKrYNg8',
+            orgUnitName: 'Ngelehun CHC',
+            programId: 'IpHINAT79UW',
+            programStageId: 'A03MvHHogjR',
+            status: 'ACTIVE',
+            trackedEntityInstanceId: 'vCGpQAWG17I',
+        },
+    ];
 
     const orgUnit = { id: 'DiszpKrYNg8', code: 'Ngelehun CHC' };
 
@@ -72,16 +77,18 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
     const programStage = new ProgramStage((stage) => {
         stage.id = 'st1Id';
         stage.name = 'stage1';
-        stage.programRules = [{
-            id: 'rule1Id',
-            name: 'rule1',
-            displayName: 'rule1',
-            priority: 1,
-            condition: 'true',
-            programId: 'IpHINAT79UW',
-            programStageId: 'st1Id',
-            programRuleActions: [],
-        }];
+        stage.programRules = [
+            {
+                id: 'rule1Id',
+                name: 'rule1',
+                displayName: 'rule1',
+                priority: 1,
+                condition: 'true',
+                programId: 'IpHINAT79UW',
+                programStageId: 'st1Id',
+                programRuleActions: [],
+            },
+        ];
 
         stage.stageForm = new RenderFoundation((foundation) => {
             const section = new Section((initSection) => {
@@ -150,18 +157,22 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
             },
         ];
 
-        initProgram.programRules = [{
-            condition: 'true',
-            displayName: 'TestRule',
-            id: 'JJDQxgHuuL2',
-            programId: 'IpHINAT79UW',
-            programRuleActions: [{
-                data: '#{Test}',
-                id: 'CQaifjkoFEU',
-                location: 'feedback',
-                programRuleActionType: 'DISPLAYTEXT',
-            }],
-        }];
+        initProgram.programRules = [
+            {
+                condition: 'true',
+                displayName: 'TestRule',
+                id: 'JJDQxgHuuL2',
+                programId: 'IpHINAT79UW',
+                programRuleActions: [
+                    {
+                        data: '#{Test}',
+                        id: 'CQaifjkoFEU',
+                        location: 'feedback',
+                        programRuleActionType: 'DISPLAYTEXT',
+                    },
+                ],
+            },
+        ];
     });
 
     const attributeValues = {
@@ -210,15 +221,18 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
     });
 
     test('Flat result', () => {
-        const effects = getApplicableRuleEffectsForTrackerProgram({
-            program,
-            stage: programStage,
-            orgUnit,
-            currentEvent,
-            otherEvents,
-            attributeValues,
-            enrollmentData,
-        }, true);
+        const effects = getApplicableRuleEffectsForTrackerProgram(
+            {
+                program,
+                stage: programStage,
+                orgUnit,
+                currentEvent,
+                otherEvents,
+                attributeValues,
+                enrollmentData,
+            },
+            true,
+        );
 
         expect(Array.isArray(effects)).toBe(true);
     });
