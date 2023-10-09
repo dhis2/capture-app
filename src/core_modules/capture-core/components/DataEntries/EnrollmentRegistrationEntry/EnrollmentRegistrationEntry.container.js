@@ -26,7 +26,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         formId,
         enrollmentMetadata,
         formFoundation,
-    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
+    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit, teiId, selectedScopeId);
 
     const isUserInteractionInProgress: boolean = useSelector(
         state =>

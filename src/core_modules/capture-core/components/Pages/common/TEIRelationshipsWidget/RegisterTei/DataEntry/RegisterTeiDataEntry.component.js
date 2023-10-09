@@ -6,11 +6,13 @@ import { DataEntryTrackedEntityInstance } from './TrackedEntityInstance';
 type Props = {
     showDataEntry: boolean,
     programId: string,
+    onSaveWithoutEnrollment: () => void,
+    onSaveWithEnrollment: () => void,
 };
 
 export class RegisterTeiDataEntryComponent extends React.Component<Props> {
     render() {
-        const { showDataEntry, programId, ...passOnProps } = this.props;
+        const { showDataEntry, programId, onSaveWithoutEnrollment, onSaveWithEnrollment, ...passOnProps } = this.props;
 
         if (!showDataEntry) {
             return null;
@@ -20,6 +22,7 @@ export class RegisterTeiDataEntryComponent extends React.Component<Props> {
             return (
                 <DataEntryEnrollment
                     {...passOnProps}
+                    onSave={onSaveWithEnrollment}
                 />
             );
         }
@@ -27,6 +30,7 @@ export class RegisterTeiDataEntryComponent extends React.Component<Props> {
         return (
             <DataEntryTrackedEntityInstance
                 {...passOnProps}
+                onSave={onSaveWithoutEnrollment}
             />
         );
     }
