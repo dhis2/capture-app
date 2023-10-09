@@ -1,3 +1,10 @@
+## [100.41.1](https://github.com/dhis2/capture-app/compare/v100.41.0...v100.41.1) (2023-10-09)
+
+
+### Bug Fixes
+
+* [DHIS2-15734] assign effect dynamic formId object key ([#3422](https://github.com/dhis2/capture-app/issues/3422)) ([85f242b](https://github.com/dhis2/capture-app/commit/85f242b2b0c6092b46e92f087e21e102a2e1e19d))
+
 # [100.41.0](https://github.com/dhis2/capture-app/compare/v100.40.1...v100.41.0) (2023-10-03)
 
 
