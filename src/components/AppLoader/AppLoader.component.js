@@ -33,6 +33,7 @@ const AppLoader = (props: Props) => {
     const logError = useCallback((error) => {
         if (error instanceof Error) {
             log.error(error.toString());
+            error.stack && log.error(error.stack);
         } else if (error) {
             log.error(JSON.stringify(error));
         }
