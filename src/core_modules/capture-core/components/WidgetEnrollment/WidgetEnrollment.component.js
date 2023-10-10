@@ -42,8 +42,8 @@ const styles = {
 
 const getGeometryType = geometryType =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
-const getEnrollmentDateLabel = program => program.enrollmentDateLabel || i18n.t('Enrollment date');
-const getIncidentDateLabel = program => program.incidentDateLabel || i18n.t('Incident date');
+const getEnrollmentDateLabel = program => program.displayEnrollmentDateLabel || i18n.t('Enrollment date');
+const getIncidentDateLabel = program => program.displayIncidentDateLabel || i18n.t('Incident date');
 
 export const WidgetEnrollmentPlain = ({
     classes,
