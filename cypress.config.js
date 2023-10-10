@@ -1,6 +1,7 @@
-const { cucumberPreprocessor, chromeAllowXSiteCookies } = require('@dhis2/cypress-plugins');
+const { chromeAllowXSiteCookies } = require('@dhis2/cypress-plugins');
 const { defineConfig } = require('cypress');
 const getCypressEnvVariables = require('./cypress/support/getCypressEnvVariables');
+const cucumberPreprocessor = require('./cypress/support/cucumberPreprocessor');
 const path = require('path');
 
 async function setupNodeEvents(on, config) {
