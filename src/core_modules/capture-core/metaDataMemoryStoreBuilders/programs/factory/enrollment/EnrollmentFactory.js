@@ -78,7 +78,7 @@ export class EnrollmentFactory {
         });
     }
 
-    _buildTetFeatureTypeField(trackedEntityTypeId: ?string) {
+    _buildTetFeatureTypeField(trackedEntityTypeId: ?string, section: Section) {
         const teType = trackedEntityTypeId && this.cachedTrackedEntityTypes.get(trackedEntityTypeId);
         if (!teType) {
             return null;
@@ -90,23 +90,24 @@ export class EnrollmentFactory {
         }
 
         // $FlowFixMe
-        return DataElementFactory.buildtetFeatureType(featureType);
+        return DataElementFactory.buildtetFeatureType(featureType, section);
     }
 
     async _buildTetFeatureTypeSection(
         cachedProgramTrackedEntityTypeId: string,
     ) {
-        const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
         const trackedEntityType = this.cachedTrackedEntityTypes.get(cachedProgramTrackedEntityTypeId);
-
-        if (!featureTypeField) {
-            return null;
-        }
 
         const section = new Section((o) => {
             o.id = cachedProgramTrackedEntityTypeId;
             o.name = trackedEntityType?.displayName || '';
+            o.group = Section.groups.ENROLLMENT;
         });
+        const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId, section);
+
+        if (!featureTypeField) {
+            return null;
+        }
 
         featureTypeField && section.addElement(featureTypeField);
         return section;
@@ -119,12 +120,13 @@ export class EnrollmentFactory {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
             o.name = i18n.t('Profile');
+            o.group = Section.groups.ENROLLMENT;
         });
 
         if (!cachedProgramTrackedEntityAttributes?.length) { return null; }
 
         if (cachedProgramTrackedEntityTypeId) {
-            const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
+            const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId, section);
             featureTypeField && section.addElement(featureTypeField);
         }
 
@@ -166,7 +168,7 @@ export class EnrollmentFactory {
 
                 element && section.addElement(element);
             } else {
-                const element = await this.dataElementFactory.build(trackedEntityAttribute);
+                const element = await this.dataElementFactory.build(trackedEntityAttribute, section);
                 element && section.addElement(element);
             }
         });
@@ -185,6 +187,7 @@ export class EnrollmentFactory {
         const section = new Section((o) => {
             o.id = cachedSectionCustomId;
             o.name = cachedSectionCustomLabel;
+            o.group = Section.groups.ENROLLMENT;
         });
 
         await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
@@ -200,6 +203,7 @@ export class EnrollmentFactory {
 
         let section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
+            o.group = Section.groups.ENROLLMENT;
         });
 
         section.showContainer = false;
@@ -353,6 +357,7 @@ export class EnrollmentFactory {
         const foundation = new RenderFoundation();
         const section = new Section((oSection) => {
             oSection.id = Section.MAIN_SECTION_ID;
+            oSection.group = Section.groups.ENROLLMENT;
         });
         Array.from(
             searchGroupFoundation
