@@ -8,6 +8,29 @@ import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMess
 import type { InputAttribute } from './hooks/useFormValues';
 import { RenderFoundation, ProgramStage } from '../../../metaData';
 
+export type EnrollmentPayload = {|
+    trackedEntity: string,
+    trackedEntityType: string,
+    orgUnit: string,
+    geometry: any,
+    enrollments: [
+        {|
+            occurredAt: string,
+            orgUnit: string,
+            program: string,
+            status: string,
+            enrolledAt: string,
+            events: Array<{
+                orgUnit: string,
+            }>,
+            attributes: Array<{
+                attribute: string,
+                value: any,
+            }>,
+        |}
+    ]
+|}
+
 export type OwnProps = $ReadOnly<{|
     id: string,
     orgUnitId: string,

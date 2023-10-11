@@ -10,6 +10,7 @@ import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component'
 import { useFormValuesFromSearchTerms } from './hooks/useFormValuesFromSearchTerms';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
+import { useBuildTeiPayload } from './hooks/useBuildTeiPayload';
 
 const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId, orgUnitId) => {
     const dispatch = useDispatch();
@@ -42,13 +43,18 @@ const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId, orgUnitId) =
 };
 
 
-export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, orgUnitId, ...rest }) => {
+export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, orgUnitId, onSave, ...rest }) => {
     const { trackedEntityName } = useInitialiseTeiRegistration(selectedScopeId, id, orgUnitId);
     const ready = useSelector(({ dataEntries }) => (!!dataEntries[id]));
     const dataEntry = useSelector(({ dataEntries }) => (dataEntries[id]));
     const {
         registrationMetaData: teiRegistrationMetadata,
     } = useMetadataForRegistrationForm({ selectedScopeId });
+    const { buildTeiWithoutEnrollment } = useBuildTeiPayload({
+        trackedEntityTypeId: selectedScopeId,
+        dataEntryId: id,
+        orgUnitId,
+    });
 
     const dataEntryKey = useMemo(() => {
         if (dataEntry) {
@@ -66,6 +72,11 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId,
         return null;
     }
 
+    const onSaveWithoutEnrollment = () => {
+        const teiPayload = buildTeiWithoutEnrollment();
+        onSave(teiPayload);
+    };
+
     return (
         <TeiRegistrationEntryComponent
             id={id}
@@ -75,6 +86,7 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId,
             ready={ready && !!teiRegistrationMetadata}
             trackedEntityName={trackedEntityName}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            onSave={onSaveWithoutEnrollment}
             {...rest}
         />
     );

@@ -12,7 +12,7 @@ export const PAGES = {
 // when the event will not be created redirect to enrollmentEventNew
 export const getStageWithOpenAfterEnrollment = (
     stages: Map<string, ProgramStage>,
-    firstStageMetadata: ProgramStage,
+    useFirstStageDuringRegistration: boolean,
     shouldRedirect: boolean,
 ) => {
     const stagesArray = [...stages.values()];
@@ -22,8 +22,8 @@ export const getStageWithOpenAfterEnrollment = (
         if (shouldRedirect && firstStageWithOpenAfterEnrollment) {
             // event will be created during first stage registration
             if (
-                firstStageMetadata &&
-                firstStageMetadata.id === firstStageWithOpenAfterEnrollment.id
+                useFirstStageDuringRegistration
+                && stagesArray[0].id === firstStageWithOpenAfterEnrollment.id
             ) {
                 return PAGES.enrollmentEventEdit;
             }

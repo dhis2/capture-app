@@ -1,36 +1,39 @@
 // @flow
 import { useSelector } from 'react-redux';
-import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getTrackerProgramThrowIfNotFound,
     Section,
-} from '../../../../../../metaData';
-import type { RenderFoundation } from '../../../../../../metaData';
-import { convertClientToServer, convertFormToClient } from '../../../../../../converters';
+} from '../../../../metaData';
+import type { RenderFoundation } from '../../../../metaData';
+import { convertClientToServer, convertFormToClient } from '../../../../converters';
 import {
     convertDataEntryValuesToClientValues,
-} from '../../../../../DataEntry/common/convertDataEntryValuesToClientValues';
-import { capitalizeFirstLetter } from '../../../../../../../capture-core-utils/string';
-import { generateUID } from '../../../../../../utils/uid/generateUID';
+} from '../../../DataEntry/common/convertDataEntryValuesToClientValues';
+import { capitalizeFirstLetter } from '../../../../../capture-core-utils/string';
+import { generateUID } from '../../../../utils/uid/generateUID';
 import {
     useBuildFirstStageRegistration,
-} from '../../../../../DataEntries/EnrollmentRegistrationEntry/hooks/useBuildFirstStageRegistration';
+} from './useBuildFirstStageRegistration';
 import {
     useMetadataForRegistrationForm,
-} from '../../../../../DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
+} from '../../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 import {
     useMergeFormFoundationsIfApplicable,
-} from '../../../../../DataEntries/EnrollmentRegistrationEntry/hooks/useMergeFormFoundationsIfApplicable';
+} from './useMergeFormFoundationsIfApplicable';
 import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
-} from '../../../../New/RegistrationDataEntry/helpers';
-import { FEATURETYPE } from '../../../../../../constants';
+} from '../../../Pages/New/RegistrationDataEntry/helpers';
+import { FEATURETYPE } from '../../../../constants';
+import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 
 type DataEntryReduxConverterProps = {
-    selectedScopeId: string;
+    programId: string;
     dataEntryId: string;
-    itemId: string;
+    itemId?: string;
+    orgUnitId: string;
+    teiId: ?string;
     trackedEntityTypeId: string;
 };
 
@@ -87,22 +90,24 @@ const deriveAttributesFromFormValues = (formValues = {}) =>
         .filter(key => !geometryType(key))
         .map<{ attribute: string, value: ?any }>(key => ({ attribute: key, value: formValues[key] }));
 
-export const useDataEntryReduxConverter = ({
-    selectedScopeId,
+export const useBuildEnrollmentPayload = ({
+    programId,
     dataEntryId,
-    itemId,
+    itemId = 'newEnrollment',
+    orgUnitId,
+    teiId,
     trackedEntityTypeId,
 }: DataEntryReduxConverterProps) => {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
     const formValues = useSelector(({ formsValues }) => formsValues[dataEntryKey]);
     const dataEntryFieldValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
     const dataEntryFieldsMeta = useSelector(({ dataEntriesFieldsMeta }) => dataEntriesFieldsMeta[dataEntryKey]);
-    const { programId, orgUnit } = useSelector(({ newRelationshipRegisterTei }) => newRelationshipRegisterTei);
-    const { formFoundation: scopeFormFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
-    const { firstStageMetaData } = useBuildFirstStageRegistration(programId, !programId);
+    const { formFoundation: scopeFormFoundation } = useMetadataForRegistrationForm({ selectedScopeId: programId });
+    const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
 
-    const buildTeiWithEnrollment = () => {
+    const buildTeiWithEnrollment = (): EnrollmentPayload => {
+        // $FlowFixMe - Business logic dictates that formFoundation is not null in this callback
         if (!formFoundation) return null;
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
         const clientValues = getClientValuesForFormData(formValues, formFoundation);
@@ -132,7 +137,7 @@ export const useDataEntryReduxConverter = ({
         const firstStageDuringRegistrationEvent = deriveFirstStageDuringRegistrationEvent({
             firstStageMetadata: firstStage,
             programId,
-            orgUnitId: orgUnit.id,
+            orgUnitId,
             currentEventValues,
             fieldsValue: dataEntryFieldValues,
             attributeCategoryOptions,
@@ -144,7 +149,7 @@ export const useDataEntryReduxConverter = ({
             enrolledAt,
             occurredAt,
             programId,
-            orgUnitId: orgUnit.id,
+            orgUnitId,
             attributeCategoryOptions,
         });
 
@@ -152,15 +157,15 @@ export const useDataEntryReduxConverter = ({
             ? [firstStageDuringRegistrationEvent, ...autoGenerateEvents]
             : autoGenerateEvents;
 
-        const enrollment = programId ? {
+        const enrollment = {
             program: programId,
             status: 'ACTIVE',
-            orgUnit: orgUnit.id,
+            orgUnit: orgUnitId,
             occurredAt,
             enrolledAt,
             attributes: deriveAttributesFromFormValues(formServerValues),
             events: allEventsToBeCreated,
-        } : null;
+        };
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(serverValuesForFormValues);
         let geometry;
@@ -170,45 +175,15 @@ export const useDataEntryReduxConverter = ({
         }
 
         return {
-            trackedEntity: generateUID(),
-            orgUnit: orgUnit.id,
+            trackedEntity: teiId || generateUID(),
+            orgUnit: orgUnitId,
             trackedEntityType: trackedEntityTypeId,
             geometry,
             enrollments: [enrollment],
         };
     };
 
-    const buildTeiWithoutEnrollment = () => {
-        if (!scopeFormFoundation) return null;
-        const clientValues = getClientValuesForFormData(formValues, scopeFormFoundation);
-        const serverValuesForFormValues = scopeFormFoundation.convertValues(clientValues, convertClientToServer);
-
-        // $FlowFixMe
-        const attributes = Object.keys(serverValuesForFormValues)
-            .map(key => ({
-                attribute: key,
-                value: serverValuesForFormValues[key],
-            }));
-
-        const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(serverValuesForFormValues);
-        let geometry;
-        if (tetFeatureTypeKey) {
-            geometry = buildGeometryProp(tetFeatureTypeKey, serverValuesForFormValues);
-            delete serverValuesForFormValues[tetFeatureTypeKey];
-        }
-
-        return {
-            attributes,
-            trackedEntity: generateUID(),
-            orgUnit: orgUnit.id,
-            trackedEntityType: trackedEntityTypeId,
-            geometry,
-            enrollments: [],
-        };
-    };
-
     return {
         buildTeiWithEnrollment,
-        buildTeiWithoutEnrollment,
     };
 };
