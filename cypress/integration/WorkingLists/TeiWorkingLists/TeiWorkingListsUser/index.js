@@ -2,6 +2,19 @@ import { v4 as uuid } from 'uuid';
 import '../../sharedSteps';
 import '../../../sharedSteps';
 
+const cleanUpIfApplicable = (programId) => {
+    cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const workingList = body.programStageWorkingLists?.find(e => e.displayName === 'Custom Program stage list');
+            if (!workingList) {
+                return null;
+            }
+            return cy
+                .buildApiUrl('programStageWorkingLists', workingList.id)
+                .then(workingListUrl => cy.request('DELETE', workingListUrl));
+        });
+};
 Given('you open the main page with Ngelehun and child programme context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
@@ -42,6 +55,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis context',
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context', () => {
+    cleanUpIfApplicable('qDkgAbB5Jlk');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 
     cy.get('[data-test="tei-working-lists"]')
@@ -58,6 +72,11 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
+});
+
+Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
+    cleanUpIfApplicable('M3xtLkYBlKI');
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
@@ -740,3 +759,4 @@ Then('the program stage custom working list filters are loaded', () => {
         .find('[data-test="more-filters"]')
         .should('have.length', 2);
 });
+

@@ -4,7 +4,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
-import type { Section } from './Section';
+import { Section } from './Section';
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { Access } from '../Access';
 import { convertDataElementsValues } from '../helpers';
@@ -162,5 +162,21 @@ export class RenderFoundation {
     convertValues<T: ?ValuesType | Array<ValuesType>>(values: T, onConvert: ConvertFn): T {
         const dataElements = this.getElements();
         return convertDataElementsValues(values, dataElements, onConvert);
+    }
+
+    convertAndGroupBySection(currentFormData: {[id: string]: any}, onConvert: ConvertFn) {
+        const metaElements = [...this.getElements().values()];
+
+        return Object.keys(currentFormData).reduce((acc, id) => {
+            const metaElement = metaElements.find(o => o.id === id);
+            const rawValue = currentFormData[id];
+            const convertedValue = metaElement ? metaElement.convertValue(rawValue, onConvert) : rawValue;
+            const group = metaElement?.section?.group;
+            if (group) {
+                acc[group] = { ...acc[group], [id]: convertedValue };
+                return acc;
+            }
+            return { ...acc, [id]: convertedValue };
+        }, {});
     }
 }

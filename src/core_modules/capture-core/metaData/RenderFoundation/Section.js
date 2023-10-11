@@ -15,6 +15,11 @@ export class Section {
         DATA_ELEMENT_NOT_FOUND: 'Data element was not found',
     };
 
+    static groups = {
+        ENROLLMENT: 'ENROLLMENT',
+        EVENT: 'EVENT',
+    }
+
     _id: string;
     _name: string;
     _displayDescription: string;
@@ -24,6 +29,7 @@ export class Section {
     _elements: Map<string, DataElement | FormFieldPluginConfig>;
     _showContainer: boolean;
     _customForm: ?CustomForm;
+    _group: string;
 
     constructor(initFn: (_this: Section) => void) {
         this._visible = true;
@@ -88,6 +94,13 @@ export class Section {
 
     get elements(): Map<string, DataElement | FormFieldPluginConfig> {
         return this._elements;
+    }
+
+    set group(group: string) {
+        this._group = group;
+    }
+    get group(): string {
+        return this._group;
     }
 
     addElement(element: DataElement | FormFieldPluginConfig) {

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-25T08:33:17.277Z\n"
-"PO-Revision-Date: 2023-09-25T08:33:17.277Z\n"
+"POT-Creation-Date: 2023-09-29T14:14:34.330Z\n"
+"PO-Revision-Date: 2023-09-29T14:14:34.330Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -149,6 +149,15 @@ msgstr "Coordinate"
 msgid "Enrollment"
 msgstr "Enrollment"
 
+msgid "Complete event"
+msgstr "Complete event"
+
+msgid "{{ stageName }} - Basic info"
+msgstr "{{ stageName }} - Basic info"
+
+msgid "{{ stageName }} - Status"
+msgstr "{{ stageName }} - Status"
+
 msgid "Please select {{categoryName}}"
 msgstr "Please select {{categoryName}}"
 
@@ -167,14 +176,17 @@ msgstr "Cancel"
 msgid "Metadata error. see log for details"
 msgstr "Metadata error. see log for details"
 
+msgid "{{ stageName }} - Details"
+msgstr "{{ stageName }} - Details"
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr "{{ stageName }} - {{ sectionName }}"
+
 msgid "Assigned user"
 msgstr "Assigned user"
 
 msgid "Search for user"
 msgstr "Search for user"
-
-msgid "Complete event"
-msgstr "Complete event"
 
 msgid "Basic info"
 msgstr "Basic info"

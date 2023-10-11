@@ -179,7 +179,9 @@ const RegistrationDataEntryPlain = ({
                                 <EnrollmentRegistrationEntryWrapper
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
-                                    onSave={() => onSaveWithEnrollment(formFoundation)}
+                                    onSave={(customFormFoundation, firstStageMetaData) =>
+                                        onSaveWithEnrollment(customFormFoundation, firstStageMetaData?.stage)
+                                    }
                                     saveButtonText={(trackedEntityTypeNameLC: string) => i18n.t('Save {{trackedEntityTypeName}}', {
                                         trackedEntityTypeName: trackedEntityTypeNameLC,
                                         interpolation: { escapeValue: false },

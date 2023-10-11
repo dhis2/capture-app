@@ -230,7 +230,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
 
         return {
             ...state,
-            formId: {
+            [formId]: {
                 ...state[formId],
                 ...updatedFields,
             },
