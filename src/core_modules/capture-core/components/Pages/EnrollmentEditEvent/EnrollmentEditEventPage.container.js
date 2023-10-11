@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
@@ -54,7 +54,7 @@ export const EnrollmentEditEventPage = () => {
     const error = useSelector(({ activePage }) => activePage.viewEventLoadError?.error);
     const { loading, event } = useEvent(eventId);
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
-    const { orgUnitId, eventId: urlEventId } = useLocationQuery();
+    const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
 
     useEffect(() => {
         if (!urlEventId) {
@@ -74,11 +74,20 @@ export const EnrollmentEditEventPage = () => {
             orgUnitId={orgUnitId}
             eventId={eventId}
             error={error}
+            initMode={initMode}
         />
     ) : <LoadingMaskForPage />;
 };
 
-const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, enrollmentId, orgUnitId, eventId }: Props) => {
+const EnrollmentEditEventPageWithContextPlain = ({
+    programId,
+    stageId,
+    teiId,
+    enrollmentId,
+    orgUnitId,
+    eventId,
+    initMode,
+}: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -99,9 +108,14 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
-    const onCancelEditEvent = () => {
-        history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
-    };
+    const onCancelEditEvent = useCallback((isScheduled: boolean) => {
+        if (isScheduled) {
+            history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
+        }
+        if (initMode) {
+            history.push(`/enrollmentEventEdit?${buildUrlQueryString({ eventId, orgUnitId })}`);
+        }
+    }, [initMode, enrollmentId, eventId, orgUnitId, history]);
 
     const onGoBack = () =>
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
