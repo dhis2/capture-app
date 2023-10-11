@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
-"PO-Revision-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-10-11T07:28:55.943Z\n"
+"PO-Revision-Date: 2023-10-11T07:28:55.943Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1083,11 +1083,11 @@ msgstr "To work with the selected program,"
 msgid "open the Tracker Capture app"
 msgstr "open the Tracker Capture app"
 
-msgid "Assign"
-msgstr "Assign"
-
 msgid "Event assigned to {{name}}"
 msgstr "Event assigned to {{name}}"
+
+msgid "Assign"
+msgstr "Assign"
 
 msgid "No one is assigned to this event"
 msgstr "No one is assigned to this event"

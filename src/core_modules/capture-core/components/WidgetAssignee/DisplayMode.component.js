@@ -24,24 +24,19 @@ type Props = {
     ...CssClasses,
 };
 
-const DisplayModePlain = ({ assignee, onEdit, classes }: Props) => {
-    const renderNoAssigned = () => (
-        <>
-            <Button onClick={onEdit} small>
-                {i18n.t('Assign')}
-            </Button>
-        </>
-    );
-    const renderAssigned = () => (
+const DisplayModePlain = ({ assignee, onEdit, classes }: Props) => (
+    assignee ? (
         <div className={classes.wrapper}>
-            {i18n.t('Event assigned to {{name}}', { name: assignee?.name })}
+            {i18n.t('Event assigned to {{name}}', { name: assignee.name })}
             <Button onClick={onEdit} className={classes.editButton} dataTest="widget-assignee-edit">
                 <IconEdit24 />
             </Button>
         </div>
-    );
-
-    return assignee ? renderAssigned() : renderNoAssigned();
-};
+    ) : (
+        <Button onClick={onEdit} small>
+            {i18n.t('Assign')}
+        </Button>
+    )
+);
 
 export const DisplayMode = withStyles(styles)(DisplayModePlain);
