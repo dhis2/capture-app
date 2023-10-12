@@ -1,3 +1,10 @@
+## [100.41.2](https://github.com/dhis2/capture-app/compare/v100.41.1...v100.41.2) (2023-10-12)
+
+
+### Bug Fixes
+
+* [DHIS2-15827] remove effects of 'Prevent adding new events to stage' action from the form ([#3418](https://github.com/dhis2/capture-app/issues/3418)) ([f17d087](https://github.com/dhis2/capture-app/commit/f17d087f368cf4d6b26923fd5cf4fb15d7795ba2))
+
 ## [100.41.1](https://github.com/dhis2/capture-app/compare/v100.41.0...v100.41.1) (2023-10-09)
 
 
