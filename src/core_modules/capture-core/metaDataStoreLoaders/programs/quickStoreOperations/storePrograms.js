@@ -31,7 +31,7 @@ const convert = (() => {
 
     const getProgramStageDataElements = programStageDataElements =>
         (programStageDataElements || [])
-            .filter(programStageDataElement => programStageDataElement.dataElement)
+            .filter(programStageDataElement => programStageDataElement.dataElement?.id)
             .map((programStageDataElement) => {
                 programStageDataElement.dataElement.translations =
                     // $FlowFixMe[incompatible-type] automated comment
@@ -58,6 +58,7 @@ const convert = (() => {
 
     const getProgramTrackedEntityAttributes = programAttributes =>
         (programAttributes || [])
+            .filter(({ trackedEntityAttribute }) => trackedEntityAttribute?.id)
             .map(pa => getProgramTrackedEntityAttribute(pa));
 
     return (response: apiProgramsResponse) => {

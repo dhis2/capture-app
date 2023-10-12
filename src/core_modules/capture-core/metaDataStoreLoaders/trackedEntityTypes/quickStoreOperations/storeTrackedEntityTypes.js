@@ -15,6 +15,7 @@ const convert = (() => {
 
     const getTrackedEntityTypeAttributes = trackedEntityTypeAttributes =>
         (trackedEntityTypeAttributes || [])
+            .filter(({ trackedEntityAttribute }) => trackedEntityAttribute?.id)
             .map(trackedEntityTypeAttribute => getTrackedEntityTypeAttribute(trackedEntityTypeAttribute));
 
     return response =>
