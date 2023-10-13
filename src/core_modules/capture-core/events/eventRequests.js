@@ -72,15 +72,14 @@ function getConvertedValue(valueToConvert: any, inputKey: string) {
     return convertedValue;
 }
 
-function getAssignee(apiEvent: ApiTEIEvent) {
-    if (!(apiEvent.assignedUserUsername && apiEvent.assignedUser)) {
+function getAssignee(assignedUser) {
+    if (!assignedUser.uid) {
         return undefined;
     }
-
     return {
-        id: apiEvent.assignedUser,
-        username: apiEvent.assignedUserUsername,
-        name: apiEvent.assignedUserDisplayName,
+        id: assignedUser.uid,
+        username: assignedUser.username,
+        name: assignedUser.displayName,
     };
 }
 function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
@@ -90,10 +89,12 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
         .keys(apiEvent)
         .reduce((accEvent, inputKey) => {
             if (inputKey === 'assignedUser') {
-                const assignee = getAssignee(apiEvent);
+                const assignee = getAssignee(apiEvent.assignedUser);
                 if (assignee) {
                     accEvent.assignee = assignee;
                 }
+            } else if (inputKey === 'occurredAt') {
+                accEvent.eventDate = apiEvent[inputKey];
             } else if (!skipProps.includes(inputKey)) {
                 const valueToConvert = apiEvent[inputKey];
                 const convertedValue = getConvertedValue(valueToConvert, inputKey);
@@ -144,16 +145,28 @@ export async function getEvent(eventId: string): Promise<?ClientEventContainer> 
     return eventContainer;
 }
 
-export async function getEvents(queryParams: Object) {
+const getQueryArgsForNewEndpoint = (prevQueryArgs) => {
+    const fields = prevQueryArgs.fields.replace('eventDate', 'occurredAt');
+    const order = prevQueryArgs.order.replace('eventDate', 'occurredAt');
+    return {
+        ...prevQueryArgs,
+        fields,
+        order,
+    };
+};
+
+export async function getEvents(oldQueryParams: Object) {
+    const queryParams = getQueryArgsForNewEndpoint(oldQueryParams);
+
     const api = getApi();
     const req = {
-        url: 'events',
+        url: 'tracker/events',
         queryParams,
     };
     const apiRes = await api
         .get(req.url, { ...req.queryParams });
 
-    const eventContainers = apiRes && apiRes.events ? await apiRes.events.reduce(async (accEventsPromise, apiEvent) => {
+    const eventContainers = apiRes && apiRes.instances ? await apiRes.instances.reduce(async (accEventsPromise, apiEvent) => {
         const accEvents = await accEventsPromise;
         const eventContainer = await convertToClientEvent(apiEvent);
         if (eventContainer) {
