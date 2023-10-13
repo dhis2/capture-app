@@ -63,7 +63,7 @@
   "scripts": {
     "start": "yarn verifyCacheVersion && d2-app-scripts start",
     "start:forCypress": "node scripts/startAppForCypress.js",
-    "build": "yarn verifyCacheVersion && d2-app-scripts build && cp ./package.json ./build/app/package.json",
+    "build": "yarn verifyCacheVersion && GENERATE_SOURCEMAP=false d2-app-scripts build && cp ./package.json ./build/app/package.json",
     "build:standalone": "GENERATE_SOURCEMAP=false d2-app-scripts build --standalone",
     "test": "d2-app-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
