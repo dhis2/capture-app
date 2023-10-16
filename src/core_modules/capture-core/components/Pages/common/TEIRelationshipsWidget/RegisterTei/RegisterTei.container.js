@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RegisterTeiComponent } from './RegisterTei.component';
 import type { ContainerProps } from './RegisterTei.types';
-import { useScopeInfo } from '../../../../../hooks/useScopeInfo';
+import { useScopeInfo } from '../../../../../hooks';
 
 export const RegisterTei = ({
     onLink,
@@ -13,7 +13,6 @@ export const RegisterTei = ({
     suggestedProgramId,
 }: ContainerProps) => {
     const dataEntryId = 'relationship';
-    // const itemId = useSelector(({ dataEntries }) => dataEntries[dataEntryId]?.itemId);
     const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
     const selectedScopeId = suggestedProgramId || trackedEntityTypeId;
     const { trackedEntityName } = useScopeInfo(selectedScopeId);
