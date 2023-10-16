@@ -22,6 +22,7 @@ export function convertDataEntryValuesToClientValues(
             const type = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].type;
             const onConvertOut = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].onConvertOut;
             const clientIgnore = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].clientIgnore;
+            const customFeatureType = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].featureType;
             if (clientIgnore) {
                 return accEventValues;
             }
@@ -32,7 +33,7 @@ export function convertDataEntryValuesToClientValues(
                 const clientId = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].clientId;
                 const dataEntryValue = dataEntryValues[key];
                 const onConvertOutFn = getFunctionFromString(onConvertOut);
-                accEventValues[clientId] = onConvertOutFn(dataEntryValue, foundation);
+                accEventValues[clientId] = onConvertOutFn(dataEntryValue, foundation, customFeatureType);
             } else {
                 accEventValues[key] = dataEntryValues[key];
             }

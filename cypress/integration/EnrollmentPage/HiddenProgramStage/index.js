@@ -45,18 +45,6 @@ Then('the New Postpartum care visit event button is disabled in the stages and e
         .should('be.disabled');
 });
 
-Then('and an error is show in the Postpartum care visit stage', () => {
-    cy.visit(
-        '/#/enrollmentEventNew?enrollmentId=fmhIsWXVDmS&orgUnitId=s7SLtx8wmRA&programId=WSGAb5XwJ3Y&teiId=uW8Y7AIcRKA&stageId=bbKtnxRZKEP',
-    );
-    cy.contains('[data-test="dhis2-uicore-button"]', 'Complete')
-        .should('be.disabled');
-    cy.contains('[data-test="dhis2-uicore-button"]', 'Save without completing')
-        .should('be.disabled');
-    cy.contains('[data-test="dhis2-uicore-noticebox-content"]', 'You can\'t add any more Postpartum care visit events')
-        .should('exist');
-});
-
 Then('the Postpartum care visit button is disabled in the enrollmentEventNew page', () => {
     cy.visit(
         '/#/enrollmentEventNew?enrollmentId=fmhIsWXVDmS&orgUnitId=s7SLtx8wmRA&programId=WSGAb5XwJ3Y&teiId=uW8Y7AIcRKA',

@@ -6,7 +6,6 @@ import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
 import { SavingText } from '../SavingText';
-import { ErrorText } from '../ErrorText';
 import type { Props } from './validated.types';
 
 const styles = () => ({
@@ -24,7 +23,6 @@ const ValidatedPlain = ({
     onSave,
     onCancel,
     orgUnit,
-    hiddenProgramStage,
     id,
     ...passOnProps
 }: Props) => (
@@ -48,14 +46,8 @@ const ValidatedPlain = ({
                     onSave={onSave}
                     onCancel={onCancel}
                     id={id}
-                    hiddenProgramStage={hiddenProgramStage}
-                    stageName={stage.name}
                 />
-                {hiddenProgramStage ? (
-                    <ErrorText stageName={stage.name} />
-                ) : (
-                    <SavingText programName={programName} stageName={stage.name} orgUnitName={orgUnit.name} />
-                )}
+                <SavingText programName={programName} stageName={stage.name} orgUnitName={orgUnit.name} />
             </div>
         )}
     </Widget>
