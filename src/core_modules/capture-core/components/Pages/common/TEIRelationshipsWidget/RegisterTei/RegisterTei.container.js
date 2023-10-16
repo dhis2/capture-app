@@ -17,25 +17,6 @@ export const RegisterTei = ({
     const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
     const selectedScopeId = suggestedProgramId || trackedEntityTypeId;
     const { trackedEntityName } = useScopeInfo(selectedScopeId);
-    /* const {
-        buildTeiWithEnrollment,
-        buildTeiWithoutEnrollment,
-    } = useDataEntryReduxConverter({
-        selectedScopeId,
-        dataEntryId,
-        itemId,
-        trackedEntityTypeId,
-    }); */
-
-    /* const onCreateNewTeiWithoutEnrollment = () => {
-        const teiPayload = buildTeiWithoutEnrollment();
-        onSave(teiPayload);
-    };
-
-    const onCreateNewTeiWithEnrollment = () => {
-        const teiPayload = buildTeiWithEnrollment();
-        onSave(teiPayload);
-    }; */
 
     return (
         <RegisterTeiComponent
