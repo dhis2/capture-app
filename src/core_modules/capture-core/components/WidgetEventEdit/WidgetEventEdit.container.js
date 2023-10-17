@@ -6,7 +6,8 @@ import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24 } from '@dhis2/
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
-import { useEnrollmentEditEventPageMode, useRulesEngineOrgUnit, useAvailableProgramStages } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
+import { useReduxOrgUnit } from 'capture-core/redux/organisationUnits';
 import type { Props } from './widgetEventEdit.types';
 import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
@@ -59,7 +60,7 @@ export const WidgetEventEditPlain = ({
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
-    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useReduxOrgUnit(orgUnitId);
 
     const eventAccess = getProgramEventAccess(programId, programStage.id);
     const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);

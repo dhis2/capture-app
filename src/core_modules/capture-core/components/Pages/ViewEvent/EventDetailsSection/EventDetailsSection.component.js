@@ -11,7 +11,7 @@ import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.compon
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
 import type { ProgramStage } from '../../../../metaData';
-import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
+import { useReduxOrgUnit } from '../../../../redux/organisationUnits';
 import { NoticeBox } from '../../../NoticeBox';
 
 const getStyles = () => ({
@@ -60,7 +60,7 @@ const EventDetailsSectionPlain = (props: Props) => {
         eventAccess,
         ...passOnProps } = props;
     const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
-    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useReduxOrgUnit(orgUnitId);
 
     if (error) {
         return error.errorComponent;

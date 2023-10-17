@@ -9,6 +9,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
+import { useReduxOrgUnit } from '../../../redux/organisationUnits';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { withSaveHandler } from '../../DataEntry';
@@ -54,7 +55,9 @@ const TeiRegistrationEntryPlain =
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
-      const orgUnit = useCurrentOrgUnitInfo();
+      const { id: orgUnitId } = useCurrentOrgUnitInfo();
+      const { orgUnit } = useReduxOrgUnit(id); // [DHIS2-15814] Change this to new hook
+      const orgUnitName = orgUnit ? orgUnit.name : '';
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
@@ -68,9 +71,9 @@ const TeiRegistrationEntryPlain =
           const url =
             scopeType === scopeTypes.TRACKER_PROGRAM
                 ?
-                buildUrlQueryString({ programId: selectedScopeId, orgUnitId: orgUnit.id })
+                buildUrlQueryString({ programId: selectedScopeId, orgUnitId })
                 :
-                buildUrlQueryString({ orgUnitId: orgUnit.id });
+                buildUrlQueryString({ orgUnitId });
           return push(`/?${url}`);
       };
 
@@ -114,7 +117,7 @@ const TeiRegistrationEntryPlain =
                           </Button>
                       </div>
                       <InfoIconText>
-                          {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
+                          {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnitName)}
                       </InfoIconText>
 
                       <DiscardDialog

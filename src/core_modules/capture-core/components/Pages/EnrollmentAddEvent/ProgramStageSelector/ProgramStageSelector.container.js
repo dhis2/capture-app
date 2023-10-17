@@ -10,7 +10,7 @@ import { useCommonEnrollmentDomainData, useRuleEffects } from '../../common/Enro
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
-import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
+import { useReduxOrgUnit } from '../../../../redux/organisationUnits';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 
 
@@ -24,7 +24,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         isError: programError,
     } = useProgramFromIndexedDB(programId);
 
-    const { orgUnit } = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit } = useReduxOrgUnit(orgUnitId);
     const programRules = useTrackerProgram(programId);
 
     const ruleEffects = useRuleEffects({

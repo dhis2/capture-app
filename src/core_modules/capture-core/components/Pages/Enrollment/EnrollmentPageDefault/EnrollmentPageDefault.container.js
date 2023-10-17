@@ -19,7 +19,7 @@ import {
     updateTeiDisplayName,
 } from '../EnrollmentPage.actions';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
-import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
+import { useReduxOrgUnit } from '../../../../redux/organisationUnits';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
     useProgramMetadata,
@@ -33,7 +33,7 @@ export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useReduxOrgUnit(orgUnitId);
 
     const program = useTrackerProgram(programId);
     const {
