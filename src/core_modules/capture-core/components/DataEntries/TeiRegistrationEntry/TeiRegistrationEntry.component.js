@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
+import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
 import { useReduxOrgUnit } from '../../../redux/organisationUnits';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
@@ -55,7 +55,7 @@ const TeiRegistrationEntryPlain =
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
-      const { id: orgUnitId } = useCurrentOrgUnitInfo();
+      const orgUnitId = useCurrentOrgUnitId();
       const { orgUnit } = useReduxOrgUnit(id); // [DHIS2-15814] Change this to new hook
       const orgUnitName = orgUnit ? orgUnit.name : '';
 
@@ -82,9 +82,8 @@ const TeiRegistrationEntryPlain =
               {
                   scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
                   <>
-                      {/* $FlowFixMe */}
                       <TrackedEntityInstanceDataEntry
-                          orgUnit={orgUnit}
+                          orgUnitId={orgUnitId}
                           formFoundation={formFoundation}
                           trackedEntityTypeId={selectedScopeId}
                           teiRegistrationMetadata={teiRegistrationMetadata}

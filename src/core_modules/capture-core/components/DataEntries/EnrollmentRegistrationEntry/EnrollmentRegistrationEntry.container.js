@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
+import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
 import { useReduxOrgUnit } from '../../../redux/organisationUnits';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
@@ -17,7 +17,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     onSave,
     ...passOnProps
 }) => {
-    const orgUnitId = useCurrentOrgUnitInfo().id;
+    const orgUnitId = useCurrentOrgUnitId();
     const { orgUnit, error } = useReduxOrgUnit(orgUnitId);
     const {
         teiId,

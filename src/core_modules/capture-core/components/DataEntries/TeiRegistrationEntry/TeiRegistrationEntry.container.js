@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
+import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
 import { Enrollment, scopeTypes } from '../../../metaData';
 import { startNewTeiDataEntryInitialisation } from './TeiRegistrationEntry.actions';
 import type { OwnProps } from './TeiRegistrationEntry.types';
@@ -15,7 +15,7 @@ import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMe
 const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
     const dispatch = useDispatch();
     const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
+    const selectedOrgUnitId = useCurrentOrgUnitId();
     const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
     const formValues = useFormValuesFromSearchTerms();
     const registrationFormReady = !!formId;
