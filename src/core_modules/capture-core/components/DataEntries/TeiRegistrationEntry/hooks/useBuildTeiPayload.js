@@ -49,7 +49,7 @@ export const useBuildTeiPayload = ({
     const formValues = useSelector(({ formsValues }) => formsValues[dataEntryKey]);
 
     const buildTeiWithoutEnrollment = (): TeiPayload => {
-	if (!formFoundation) throw Error('form foundation object not found');
+        if (!formFoundation) throw Error('form foundation object not found');
         const clientValues = getClientValuesForFormData(formValues, formFoundation);
         const serverValuesForFormValues = formFoundation.convertValues(clientValues, convertClientToServer);
 

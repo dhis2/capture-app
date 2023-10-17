@@ -107,7 +107,7 @@ export const useBuildEnrollmentPayload = ({
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
 
     const buildTeiWithEnrollment = (): EnrollmentPayload => {
-	if (!formFoundation) throw Error('form foundation object not found');
+        if (!formFoundation) throw Error('form foundation object not found');
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
         const clientValues = getClientValuesForFormData(formValues, formFoundation);
         const serverValuesForFormValues = formFoundation.convertAndGroupBySection(clientValues, convertClientToServer);
