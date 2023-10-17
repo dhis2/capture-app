@@ -214,6 +214,9 @@ import {
 import {
     orgUnitFetcherEpic,
 } from '../core_modules/capture-core/components/OrgUnitFetcher';
+import {
+    getReduxOrgUnitEpic,
+} from '../core_modules/capture-core/redux/organisationUnits';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -339,6 +342,7 @@ export const epics = combineEpics(
     navigateToEnrollmentOverviewEpic,
     scheduleEnrollmentEventEpic,
     orgUnitFetcherEpic,
+    getReduxOrgUnitEpic,
     updateTeiEpic,
     updateTeiSucceededEpic,
     updateTeiFailedEpic,
