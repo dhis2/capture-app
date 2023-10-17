@@ -127,7 +127,7 @@ const NewTrackedEntityRelationshipPlain = ({
             },
         };
 
-        addRelationship({
+        const payload = {
             apiData: {
                 trackedEntities: [trackedEntity],
                 relationships: [{
@@ -137,7 +137,9 @@ const NewTrackedEntityRelationshipPlain = ({
                 }],
             },
             clientRelationship: clientData,
-        });
+        };
+
+        addRelationship(payload);
     }, [addRelationship, selectedLinkedEntityMetadata, teiId]);
 
     const handleNavigation = useCallback(

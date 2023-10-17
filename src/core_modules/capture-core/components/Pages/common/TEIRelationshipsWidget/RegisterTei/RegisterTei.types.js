@@ -16,7 +16,8 @@ export type ComponentProps = {|
     error: string,
     dataEntryId: string,
     trackedEntityName: ?string,
-    onSave: () => void,
+    onSaveWithEnrollment: () => void,
+    onSaveWithoutEnrollment: () => void,
     ...SharedProps,
     ...CssClasses,
 |};

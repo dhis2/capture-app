@@ -58,7 +58,8 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
 const RegisterTeiPlain = ({
     dataEntryId,
     onLink,
-    onSave,
+    onSaveWithoutEnrollment,
+    onSaveWithEnrollment,
     onGetUnsavedAttributeValues,
     trackedEntityName,
     trackedEntityTypeId,
@@ -101,7 +102,8 @@ const RegisterTeiPlain = ({
                 />
                 <RegisterTeiDataEntry
                     onLink={onLink}
-                    onSave={onSave}
+                    onSaveWithoutEnrollment={onSaveWithoutEnrollment}
+                    onSaveWithEnrollment={onSaveWithEnrollment}
                     trackedEntityTypeId={trackedEntityTypeId}
                     onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
                     duplicatesReviewPageSize={resultsPageSize}
