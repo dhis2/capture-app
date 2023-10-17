@@ -107,8 +107,7 @@ export const useBuildEnrollmentPayload = ({
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
 
     const buildTeiWithEnrollment = (): EnrollmentPayload => {
-        // $FlowFixMe - Business logic dictates that formFoundation is not null in this callback
-        if (!formFoundation) return null;
+	if (!formFoundation) throw Error('form foundation object not found');
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
         const clientValues = getClientValuesForFormData(formValues, formFoundation);
         const serverValuesForFormValues = formFoundation.convertAndGroupBySection(clientValues, convertClientToServer);

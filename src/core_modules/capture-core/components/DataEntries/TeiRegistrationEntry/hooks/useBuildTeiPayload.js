@@ -49,8 +49,7 @@ export const useBuildTeiPayload = ({
     const formValues = useSelector(({ formsValues }) => formsValues[dataEntryKey]);
 
     const buildTeiWithoutEnrollment = (): TeiPayload => {
-        // $FlowFixMe - Business logic dictates that formFoundation is defined
-        if (!formFoundation) return null;
+	if (!formFoundation) throw Error('form foundation object not found');
         const clientValues = getClientValuesForFormData(formValues, formFoundation);
         const serverValuesForFormValues = formFoundation.convertValues(clientValues, convertClientToServer);
 
