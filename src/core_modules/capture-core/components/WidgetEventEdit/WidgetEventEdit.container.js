@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
@@ -13,6 +13,7 @@ import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
+import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../metaData';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
@@ -61,6 +62,8 @@ export const WidgetEventEditPlain = ({
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const { orgUnit, error } = useReduxOrgUnit(orgUnitId);
+    // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
+    const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
 
     const eventAccess = getProgramEventAccess(programId, programStage.id);
     const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
@@ -69,7 +72,7 @@ export const WidgetEventEditPlain = ({
         return error.errorComponent;
     }
 
-    return orgUnit ? (
+    return orgUnit && loadedValues ? (
         <div data-test="widget-enrollment-event">
             <div className={classes.menu}>
                 <Button small secondary className={classes.button} onClick={onGoBack}>
@@ -146,6 +149,6 @@ export const WidgetEventEditPlain = ({
                 </div>
             </Widget>
         </div>
-    ) : null;
+    ) : <LoadingMaskElementCenter />;
 };
 export const WidgetEventEdit: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetEventEditPlain);
