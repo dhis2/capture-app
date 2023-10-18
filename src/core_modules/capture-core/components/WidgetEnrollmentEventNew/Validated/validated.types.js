@@ -25,6 +25,5 @@ export type Props = {|
     formRef: (formInstance: any) => void,
     dataEntryFieldRef: (instance: any, id: string) => void,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
-    hiddenProgramStage: boolean,
     ...CssClasses,
 |};

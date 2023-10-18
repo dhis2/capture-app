@@ -760,3 +760,42 @@ Then('the program stage custom working list filters are loaded', () => {
         .should('have.length', 2);
 });
 
+Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list', () => {
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="template-selector-create-list"]')
+        .click();
+
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+            cy.contains('Program stage')
+                .click();
+        });
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Postpartum care visit')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});
+
+When('you open an enrollment event from the working list', () => {
+    cy.contains('Linda')
+        .click();
+});
+
+When('you go back using the browser button', () => {
+    cy.go('back');
+});
+
+Then('the program stage working list is loaded', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .find('[data-test="more-filters"]')
+        .should('have.length', 2);
+
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('WHOMCH Hemoglobin value')
+        .should('exist');
+});
