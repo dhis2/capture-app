@@ -1,14 +1,15 @@
 // @flow
 import type { RenderFoundation } from '../../../metaData';
 
-export function convertGeometryOut(dataEntryValue: any, foundation: RenderFoundation) {
-    if (!dataEntryValue || !['Polygon', 'Point'].includes(foundation.featureType)) return null;
+export function convertGeometryOut(dataEntryValue: any, foundation: RenderFoundation, customFeatureType: string) {
+    const featureType = customFeatureType || foundation.featureType;
+    if (!dataEntryValue || !['Polygon', 'Point'].includes(featureType)) return null;
     let coordinates = dataEntryValue;
-    if (foundation.featureType === 'Point') {
+    if (featureType === 'Point') {
         coordinates = [dataEntryValue.longitude, dataEntryValue.latitude];
     }
     return {
-        type: foundation.featureType,
+        type: featureType,
         coordinates,
     };
 }

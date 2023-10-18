@@ -178,6 +178,7 @@ Feature: User creates a new entries from the registration page
   Scenario: New person in Tracker Program > Submitting the form shows a list with duplicates
     Given you are in Child programme registration page
     When you fill the Child programme registration form with a first name with value that has duplicates
+    And you fill in the birth report date
     And you click the save person submit button
     And you see the possible duplicates modal
     When you click the next page button
@@ -197,7 +198,7 @@ Feature: User creates a new entries from the registration page
     When you are in the Malaria case diagnosis, treatment and investigation program registration page
     And you fill the Malaria case diagnosis registration form with values
     And you click the save malaria entity submit button
-    Then you see the enrollment event New page
+    Then you see the enrollment event Edit page
     When you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context
     And you opt out to use the new enrollment Dashboard for Malaria case diagnosis, treatment and investigation
     Then you see the opt in component for Malaria case diagnosis, treatment and investigation
@@ -208,3 +209,7 @@ Feature: User creates a new entries from the registration page
     Given you are in Child programme reenrollment page
     Then you see the form prefield with existing TEI attributes values
     And the scope selector has the TEI context
+
+  Scenario: First stage appears on registration page
+    Given you are in Child programme registration page
+    Then the first stage appears on registration page
