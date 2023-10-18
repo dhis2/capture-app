@@ -56,7 +56,7 @@ const TeiRegistrationEntryPlain =
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
       const orgUnitId = useCurrentOrgUnitId();
-      const { orgUnit } = useReduxOrgUnit(id); // [DHIS2-15814] Change this to new hook
+      const { orgUnit } = useReduxOrgUnit(orgUnitId); // Tony: [DHIS2-15814] Change this to new hook
       const orgUnitName = orgUnit ? orgUnit.name : '';
 
       const handleOnCancel = () => {
