@@ -18,6 +18,7 @@ import {
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import { convertAssigneeToServer } from '../../converters';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -81,7 +82,7 @@ export const WidgetEventSchedule = ({
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
-            ...(assignee && { assignedUser: { uid: assignee.id } }),
+            ...(assignee && { assignedUser: convertAssigneeToServer(assignee) }),
         }));
     }, [
         dispatch,
