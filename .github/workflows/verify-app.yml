@@ -141,7 +141,7 @@ jobs:
           CYPRESS_dhis2InstanceVersion: ${{ needs.instance-version.outputs.version }}
           CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
-          NODE-OPTIONS: "--openssl-legacy-provider"
+          NODE_OPTIONS: "--openssl-legacy-provider"
 
   build:
     runs-on: ubuntu-latest
