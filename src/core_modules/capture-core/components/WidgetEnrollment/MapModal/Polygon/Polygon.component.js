@@ -64,14 +64,6 @@ const PolygonPlain = ({
         setPolygonArea(polygonCoordinates);
     };
 
-    const onMapPolygonEdited = (e: any) => {
-        const polygonCoordinates = e.layers
-            .getLayers()[0]
-            .toGeoJSON()
-            .geometry.coordinates[0].map(c => [c[1], c[0]]);
-        setPolygonArea(polygonCoordinates);
-    };
-
     const onMapPolygonDelete = () => {
         setPolygonArea(null);
     };
@@ -117,7 +109,6 @@ const PolygonPlain = ({
             >
                 <EditControl
                     position="topright"
-                    onEdited={onMapPolygonEdited}
                     onCreated={onMapPolygonCreated}
                     onDeleted={onMapPolygonDelete}
                     draw={{
@@ -129,6 +120,7 @@ const PolygonPlain = ({
                     }}
                     edit={{
                         remove: false,
+                        edit: false,
                     }}
                 />
                 <DeleteControl onClick={onMapPolygonDelete} disabled={!polygonArea} />
