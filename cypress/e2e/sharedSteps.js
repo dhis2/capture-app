@@ -2,8 +2,13 @@ import {
     Given,
     When,
     Then,
-    defineStep as And,
+    defineStep as And, Before,
 } from '@badeball/cypress-cucumber-preprocessor';
+import { filterInstanceVersion } from '../support/tagUtils';
+
+Before(function callback() {
+    filterInstanceVersion(() => this.skip());
+});
 
 Given('you are in the main page with no selections made', () => {
     cy.visit('/#/');

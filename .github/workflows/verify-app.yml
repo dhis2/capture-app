@@ -91,7 +91,7 @@ jobs:
 
       - name: Unit tests
         run: yarn test
-  
+
   instance-version:
     runs-on: ubuntu-latest
     needs: [lint, flow, unit-tests]
@@ -105,11 +105,10 @@ jobs:
           instance-url: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}/ca-test-dev
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
-  
+
   cypress-dev:
     runs-on: ubuntu-latest
     needs: instance-version
-    container: cypress/browsers:node14.7.0-chrome84
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -125,7 +124,7 @@ jobs:
           node-version: 14.x
 
       - name: Cypress run
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v6
         with:
           record: true
           parallel: true

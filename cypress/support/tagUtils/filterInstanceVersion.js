@@ -35,8 +35,7 @@ export const filterInstanceVersion = (skip) => {
             return test;
         });
 
-    cy.log(`Instance version: ${currentInstanceVersion}`);
-    cy.log(`Test version: ${versionTags.map(versionTag => versionTag[0]).join(', ')}`);
-
-    !shouldRun && skip();
+    if (!shouldRun) {
+        skip();
+    }
 };
