@@ -168,16 +168,6 @@ When('you set the enrollment date to a relative range', () => {
         .type('1000');
 });
 
-When('you set the enrollment status filter to active', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Enrollment status')
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Active')
-        .click();
-});
-
 When('you set the event status filter to completed', () => {
     cy.get('[data-test="tei-working-lists"]')
         .contains('Event status')
@@ -210,12 +200,6 @@ When('you set the assginee filter to none', () => {
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('None')
         .click();
-});
-
-Then('the enrollment status filter button should show that the active filter is in effect', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Enrollment status: Active')
-        .should('exist');
 });
 
 Then('the assignee filter button should show that unassigned filter is in effect', () => {
@@ -438,8 +422,8 @@ When('you save the list with the name My custom list', () => {
         .click();
     cy.get('[data-test="view-name-content"]')
         .type('My custom list');
-    cy.server();
-    cy.route('POST', '**/trackedEntityInstanceFilters**').as('newTrackedEntityInstanceFilters');
+
+    cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackedEntityInstanceFilters');
     cy.get('button')
         .contains('Save')
         .click();
@@ -453,8 +437,8 @@ When('you save the list with the name Custom Program stage list', () => {
         .click();
     cy.get('[data-test="view-name-content"]')
         .type('Custom Program stage list');
-    cy.server();
-    cy.route('POST', '**/programStageWorkingLists**').as('newProgramStageWorkingLists');
+
+    cy.intercept('POST', '**/programStageWorkingLists**').as('newProgramStageWorkingLists');
     cy.get('button')
         .contains('Save')
         .click();
@@ -464,8 +448,8 @@ When('you save the list with the name Custom Program stage list', () => {
 When('you update the list with the name My custom list', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
-    cy.server();
-    cy.route('PUT', '**/trackedEntityInstanceFilters/**').as('editTrackedEntityInstanceFilters');
+
+    cy.intercept('PUT', '**/trackedEntityInstanceFilters/**').as('editTrackedEntityInstanceFilters');
     cy.contains('Update view')
         .click();
     cy.wait('@editTrackedEntityInstanceFilters', { timeout: 30000 });
@@ -474,8 +458,8 @@ When('you update the list with the name My custom list', () => {
 When('you update the list with the name Custom Program stage list', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
-    cy.server();
-    cy.route('PUT', '**/programStageWorkingLists/**').as('editProgramStageWorkingLists');
+
+    cy.intercept('PUT', '**/programStageWorkingLists/**').as('editProgramStageWorkingLists');
     cy.contains('Update view')
         .click();
     cy.wait('@editProgramStageWorkingLists', { timeout: 30000 });
@@ -493,8 +477,8 @@ When('you delete the name My custom list', () => {
         .click();
     cy.contains('Delete view')
         .click();
-    cy.server();
-    cy.route('DELETE', '**/trackedEntityInstanceFilters/**').as('deleteTrackedEntityInstanceFilters');
+
+    cy.intercept('DELETE', '**/trackedEntityInstanceFilters/**').as('deleteTrackedEntityInstanceFilters');
     cy.get('button')
         .contains('Confirm')
         .click();
@@ -506,8 +490,8 @@ When('you delete the name Custom Program stage list', () => {
         .click();
     cy.contains('Delete view')
         .click();
-    cy.server();
-    cy.route('DELETE', '**/programStageWorkingLists/**').as('deleteProgramStageWorkingLists');
+
+    cy.intercept('DELETE', '**/programStageWorkingLists/**').as('deleteProgramStageWorkingLists');
     cy.get('button')
         .contains('Confirm')
         .click();

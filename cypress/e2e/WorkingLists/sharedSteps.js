@@ -108,14 +108,14 @@ When('you set the assginee filter to none', () => {
         .click();
 });
 
-When('you set the first name filter to John', () => {
+When(/^you set the first name filter to (.*)$/, (name) => {
     cy.get('[data-test="tei-working-lists"]')
         .contains('First name')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
         .find('input')
-        .type('John')
+        .type(name)
         .blur();
 });
 
