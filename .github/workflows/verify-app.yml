@@ -14,8 +14,6 @@ env:
   GIT_COMMITTER_EMAIL: 'apps@dhis2.org'
   GH_TOKEN: ${{ secrets.DHIS2_BOT_GITHUB_TOKEN }}
   CI: true
-  # TODO - remove this once we have upgraded Webpack to v5
-  NODE_OPTIONS: --openssl-legacy-provider
 
 jobs:
   install:
@@ -27,6 +25,7 @@ jobs:
         with:
           node-version: 18.x
 
+      # TODO - remove this once we have upgraded Webpack to v5
       - name: Set NODE_OPTIONS
         run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
 
