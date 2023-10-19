@@ -2,21 +2,10 @@ const { chromeAllowXSiteCookies } = require('@dhis2/cypress-plugins');
 const { defineConfig } = require('cypress');
 const getCypressEnvVariables = require('./cypress/support/getCypressEnvVariables');
 const cucumberPreprocessor = require('./cypress/support/cucumberPreprocessor');
-const path = require('path');
 
 async function setupNodeEvents(on, config) {
     await chromeAllowXSiteCookies(on);
     await cucumberPreprocessor(on, config);
-
-    on('before:browser:launch', (browser, launchOptions) => {
-        if (browser.family === 'chromium' && browser.name !== 'electron') {
-            launchOptions.extensions.push(path.join(__dirname, '/ignore-x-frame-headers'));
-            launchOptions
-                .args
-                .push('--disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,SameSiteDefaultChecksMethodRigorously');
-        }
-        return launchOptions;
-    });
 
     config.env = getCypressEnvVariables(config);
     return config;
