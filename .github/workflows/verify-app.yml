@@ -25,10 +25,6 @@ jobs:
         with:
           node-version: 18.x
 
-      # TODO - remove this once we have upgraded Webpack to v5
-      - name: Set NODE_OPTIONS
-        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
-
       - uses: actions/cache@v2
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -112,7 +108,7 @@ jobs:
 
   cypress-dev:
     runs-on: ubuntu-latest
-    needs: instance-version
+    needs: install
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
