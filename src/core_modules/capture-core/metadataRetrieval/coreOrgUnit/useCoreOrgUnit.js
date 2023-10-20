@@ -28,7 +28,7 @@ export function useCoreOrgUnit(orgUnitId: string): {
         return { error: { groupError, errorComponent } };
     }
 
-    if (orgUnit && orgUnitGroups) {
+    if (orgUnitId && orgUnit && orgUnitGroups) {
         const { displayName, ...restOrgUnit } = orgUnit;
         const coreOrgUnit = {
             ...restOrgUnit,
