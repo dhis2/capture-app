@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { getOrgUnit } from 'capture-core/redux/organisationUnits';
+import { getCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
 import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
 
@@ -43,7 +43,7 @@ export const getEventOpeningFromEventListEpic = (
                     return openViewEventPageFailed(
                         i18n.t('Event could not be loaded. Are you sure it exists?'));
                 }
-                return getOrgUnit({
+                return getCoreOrgUnit({
                     orgUnitId: eventContainer.event.orgUnitId,
                     onSuccess: orgUnit => startOpenEventForView(eventContainer, orgUnit),
                     onError: (error) => {
@@ -105,7 +105,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
         ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED),
         map((action) => {
             const eventContainer = action.payload.eventContainer;
-            return getOrgUnit({
+            return getCoreOrgUnit({
                 orgUnitId: eventContainer.event.orgUnitId,
                 onSuccess: orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer),
                 onError: (error) => {

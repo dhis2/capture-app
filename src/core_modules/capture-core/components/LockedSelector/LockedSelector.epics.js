@@ -16,7 +16,7 @@ import {
 import { programCollection } from '../../metaDataMemoryStores';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { getLocationQuery } from '../../utils/routing';
-import { getOrgUnit } from '../../redux/organisationUnits';
+import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -28,7 +28,7 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable, sto
             if (organisationUnits[orgUnitId]) {
                 return of(completeUrlUpdate());
             }
-            return of(startLoading(), getOrgUnit({
+            return of(startLoading(), getCoreOrgUnit({
                 orgUnitId,
                 onSuccess: setCurrentOrgUnitBasedOnUrl,
                 onError: () => errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),

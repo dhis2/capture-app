@@ -9,7 +9,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
-import { useReduxOrgUnit } from '../../../redux/organisationUnits';
+import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { withSaveHandler } from '../../DataEntry';
@@ -56,7 +56,7 @@ const TeiRegistrationEntryPlain =
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
       const orgUnitId = useCurrentOrgUnitId();
-      const { orgUnit } = useReduxOrgUnit(orgUnitId); // Tony: [DHIS2-15814] Change this to new hook
+      const { orgUnit } = useCoreOrgUnit(orgUnitId); // Tony: [DHIS2-15814] Change this to new hook
       const orgUnitName = orgUnit ? orgUnit.name : '';
 
       const handleOnCancel = () => {

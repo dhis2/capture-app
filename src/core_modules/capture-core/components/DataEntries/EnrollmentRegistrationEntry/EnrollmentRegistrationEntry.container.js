@@ -6,7 +6,7 @@ import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEn
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
 import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
-import { useReduxOrgUnit } from '../../../redux/organisationUnits';
+import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
@@ -18,7 +18,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     ...passOnProps
 }) => {
     const orgUnitId = useCurrentOrgUnitId();
-    const { orgUnit, error } = useReduxOrgUnit(orgUnitId);
+    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const {
         teiId,
         ready,

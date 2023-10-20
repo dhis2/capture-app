@@ -7,7 +7,7 @@ import { DataEntry } from './DataEntry/DataEntry.container';
 import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
-import { useReduxOrgUnit } from '../../../../redux/organisationUnits';
+import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { useLocationQuery } from '../../../../utils/routing';
 import { useRulesEngine } from './useRulesEngine';
 import type { PlainProps } from './NewEventDataEntryWrapper.types';
@@ -48,7 +48,7 @@ const NewEventDataEntryWrapperPlain = ({
 }: PlainProps) => {
     const { id: programId } = useCurrentProgramInfo();
     const orgUnitId = useLocationQuery().orgUnitId;
-    const { orgUnit, error } = useReduxOrgUnit(orgUnitId);
+    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const rulesReady = useRulesEngine({ programId, orgUnit, formFoundation });
     const titleText = useScopeTitleText(programId);
 

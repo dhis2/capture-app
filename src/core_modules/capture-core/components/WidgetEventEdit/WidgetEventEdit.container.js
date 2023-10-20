@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
 import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
-import { useReduxOrgUnit } from 'capture-core/redux/organisationUnits';
+import { useCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import type { Props } from './widgetEventEdit.types';
 import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
@@ -61,7 +61,7 @@ export const WidgetEventEditPlain = ({
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
-    const { orgUnit, error } = useReduxOrgUnit(orgUnitId);
+    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
 

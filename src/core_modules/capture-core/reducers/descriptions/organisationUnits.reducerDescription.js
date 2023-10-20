@@ -1,11 +1,11 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as initActionTypes } from '../../init/init.actions';
-import { actionTypes as reduxOrgunitActionTypes } from '../../redux/organisationUnits/organisationUnits.actions';
-import type { ReduxOrgUnit } from '../../redux/organisationUnits';
+import { actionTypes as coreOrgunitActionTypes } from '../../metadataRetrieval/coreOrgUnit/coreOrgUnit.actions';
+import type { CoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
 
 export const organisationUnitDesc = createReducerDescription({
-    [reduxOrgunitActionTypes.ORG_UNIT_FETCHED]: (state: ReduxState, action: { payload: ReduxOrgUnit }) => ({
+    [coreOrgunitActionTypes.ORG_UNIT_FETCHED]: (state: ReduxState, action: { payload: CoreOrgUnit }) => ({
         ...state,
         [action.payload.id]: action.payload,
     }),

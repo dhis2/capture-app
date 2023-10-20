@@ -1,13 +1,13 @@
 // @flow
 import { getAssociatedOrgUnitGroups } from 'capture-core/MetaDataStoreUtils/getAssociatedOrgUnitGroups';
-import type { ReduxOrgUnit } from './organisationUnits.types';
+import type { CoreOrgUnit } from './coreOrgUnit.types';
 import type { QuerySingleResource } from '../../utils/api/api.types';
 
-// Builds new ReduxOrgUnit by fetching data from the api and index db
-export async function fetchReduxOrgUnit(
+// Builds new CoreOrgUnit by fetching data from the api and index db
+export async function fetchCoreOrgUnit(
     orgUnitId: string,
     querySingleResource: QuerySingleResource,
-): Promise<ReduxOrgUnit> {
+): Promise<CoreOrgUnit> {
     return Promise.all([
         querySingleResource({
             resource: `organisationUnits/${orgUnitId}`,

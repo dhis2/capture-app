@@ -2,10 +2,11 @@
 import { ofType } from 'redux-observable';
 import { catchError, mergeMap, concatMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
-import { actionTypes, orgUnitFetched, type FetchOrgUnitPayload } from './organisationUnits.actions';
-import { fetchReduxOrgUnit } from './fetchReduxOrgUnit';
+import { actionTypes, orgUnitFetched } from './coreOrgUnit.actions';
+import { fetchCoreOrgUnit } from './fetchCoreOrgUnit';
+import type { FetchOrgUnitPayload } from './coreOrgUnit.types';
 
-export const getReduxOrgUnitEpic = (
+export const getCoreOrgUnitEpic = (
     action$: InputObservable,
     store: ReduxStore,
     { querySingleResource }: ApiUtils,
@@ -17,7 +18,7 @@ export const getReduxOrgUnitEpic = (
         if (organisationUnits[payload.orgUnitId]) {
             return of(payload.onSuccess(organisationUnits[payload.orgUnitId]));
         }
-        return from(fetchReduxOrgUnit(payload.orgUnitId, querySingleResource))
+        return from(fetchCoreOrgUnit(payload.orgUnitId, querySingleResource))
             .pipe(
                 mergeMap(orgUnit =>
                     of(orgUnitFetched(orgUnit), payload.onSuccess(orgUnit))),

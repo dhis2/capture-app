@@ -4,19 +4,19 @@ import i18n from '@dhis2/d2-i18n';
 import { useSelector, useDispatch } from 'react-redux';
 import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
 import { useOrganisationUnit } from '../../dataQueries';
-import { orgUnitFetched } from './organisationUnits.actions';
-import { type ReduxOrgUnit } from './organisationUnits.types';
+import { orgUnitFetched } from './coreOrgUnit.actions';
+import { type CoreOrgUnit } from './coreOrgUnit.types';
 
-export function useReduxOrgUnit(orgUnitId: string): {
-    orgUnit?: ReduxOrgUnit,
+export function useCoreOrgUnit(orgUnitId: string): {
+    orgUnit?: CoreOrgUnit,
     error?: any,
 } {
     const dispatch = useDispatch();
     const reduxOrgUnit = useSelector(({ organisationUnits }) => organisationUnits && organisationUnits[orgUnitId]);
-    const id = reduxOrgUnit ? undefined : orgUnitId;
+    const fetchId = reduxOrgUnit ? undefined : orgUnitId;
     // These hooks do no work when id is undefined
-    const { orgUnit, error } = useOrganisationUnit(id, 'displayName,code,path');
-    const { orgUnitGroups, error: groupError } = useOrgUnitGroups(id);
+    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,code,path');
+    const { orgUnitGroups, error: groupError } = useOrgUnitGroups(fetchId);
 
     if (reduxOrgUnit) {
         return { orgUnit: reduxOrgUnit };
@@ -29,11 +29,14 @@ export function useReduxOrgUnit(orgUnitId: string): {
     }
 
     if (orgUnit && orgUnitGroups) {
-        orgUnit.name = orgUnit.displayName;
-        orgUnit.groups = orgUnitGroups;
-        delete orgUnit.displayName;
-        dispatch(orgUnitFetched(orgUnit));
-        return { orgUnit };
+        const { displayName, ...restOrgUnit } = orgUnit;
+        const coreOrgUnit = {
+            ...restOrgUnit,
+            name: displayName,
+            groups: orgUnitGroups,
+        };
+        dispatch(orgUnitFetched(coreOrgUnit));
+        return { orgUnit: coreOrgUnit };
     }
 
     return {};
