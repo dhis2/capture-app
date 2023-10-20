@@ -717,12 +717,6 @@ Then('the working list configuration was kept', () => {
         .should('exist');
 });
 
-Then('the working list configuration was kept', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Event status: Completed')
-        .should('exist');
-});
-
 Then('the program stage custom working list filters are loaded', () => {
     cy.get('[data-test="tei-working-lists"]')
         .find('[data-test="more-filters"]')

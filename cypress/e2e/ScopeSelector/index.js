@@ -232,12 +232,6 @@ Then('you are navigated to the search page with the same org unit and program Ch
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/search?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW`);
 });
 
-And('there should be Child Programme domain forms visible to search with', () => {
-    cy.get('[data-test="search-page-content"]')
-        .find('[data-test="capture-ui-input"]')
-        .should('have.length', 1);
-});
-
 const selectedChildProgram = ['Program', 'Child Programme'];
 const selectedMalariaProgram = ['Program', 'Malaria case diagnosis'];
 const selectedEventProgram = ['Program', 'Antenatal care visit'];

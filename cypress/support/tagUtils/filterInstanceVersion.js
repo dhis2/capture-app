@@ -31,8 +31,7 @@ export const filterInstanceVersion = (skip) => {
                 return false;
             }
 
-            const test = operation[operator](currentInstanceVersion, version);
-            return test;
+            return operation[operator](currentInstanceVersion, version);
         });
 
     if (!shouldRun) {

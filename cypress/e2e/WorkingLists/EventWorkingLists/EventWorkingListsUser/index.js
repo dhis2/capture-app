@@ -459,7 +459,7 @@ Then('the admission filter should be in effect', () => {
     // clean up
     cy.get('@newEventResult')
         .then((result) => {
-            expect(result.status).to.equal(201);
+            expect(result.response.statusCode).to.equal(201);
             const id = result.response.body.response.uid;
             cy.buildApiUrl('eventFilters', id)
                 .then((eventFiltersUrl) => {
@@ -495,8 +495,7 @@ When('you delete the name toDeleteWorkingList', () => {
         .click();
     cy.contains('Delete view')
         .click();
-    cy.server();
-    cy.route('DELETE', '**/eventFilters/**').as('deleteEventFilters');
+    cy.intercept('DELETE', '**/eventFilters/**').as('deleteEventFilters');
     cy.get('button')
         .contains('Confirm')
         .click();
