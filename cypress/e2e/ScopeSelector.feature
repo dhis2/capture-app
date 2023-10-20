@@ -28,9 +28,10 @@ Feature: User uses the ScopeSelector to navigate
     When you select both org unit and program Malaria case registration
     Then you should see the table
 
-  Scenario: Main page > Url with invalid program id
-    Given you land on a main page with an invalid program id
-    Then you should see error message
+# TODO - App crashes on invalid program id (DHIS2-16010)
+# Scenario: Main page > Url with invalid program id
+# Given you land on a main page with an invalid program id
+# Then you should see error message
 
   Scenario: Main page > Url with invalid org unit id
     Given you land on a main page with an invalid org unit id

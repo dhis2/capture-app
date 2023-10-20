@@ -6,5 +6,5 @@ export const shouldClearCookies = () => {
     }
 
     return tags
-        .any(({ name }) => name === '@skip-login');
+        .some(({ name }) => name === '@skip-login');
 };
