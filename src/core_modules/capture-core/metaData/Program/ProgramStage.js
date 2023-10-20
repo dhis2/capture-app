@@ -20,6 +20,7 @@ export class ProgramStage {
     _openAfterEnrollment: boolean;
     _allowGenerateNextVisit: boolean;
     _generatedByEnrollmentDate: boolean;
+    _repeatable: boolean;
     _hideDueDate: boolean;
     _reportDateToUse: string;
     _minDaysFromStart: number;
@@ -155,5 +156,13 @@ export class ProgramStage {
     }
     get programRules(): Array<ProgramRule> {
         return this._programRules;
+    }
+
+    set repeatable(repeatable: boolean) {
+        this._repeatable = repeatable;
+    }
+
+    get repeatable(): boolean {
+        return this._repeatable;
     }
 }

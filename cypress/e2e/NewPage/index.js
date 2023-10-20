@@ -503,6 +503,13 @@ And('you fill the Child programme registration form with a first name with value
         .blur();
 });
 
+And('you fill in the birth report date', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(7)
+        .type('2023-01-01')
+        .blur();
+});
+
 And('you are in the WNCH PNC program registration page', () => {
     cy.visit('/#/new?programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
 });
@@ -562,11 +569,9 @@ And('you fill the Malaria case diagnosis registration form with values', () => {
         .blur();
 });
 
-Then('you see the enrollment event New page', () => {
-    cy.url().should('include', '/#/enrollmentEventNew?');
-    cy.url().should('include', 'stageId=hYyB7FUS5eR');
+Then('you see the enrollment event Edit page', () => {
+    cy.url().should('include', '/#/enrollmentEventEdit?');
 });
-
 
 And('you fill in multiple Allergies options', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {
@@ -584,5 +589,15 @@ Then('you can see the multiple selections in the form', () => {
         cy.contains('Penicillin and related antibiotics').should('exist');
         cy.contains('Anticonvulsants').should('exist');
         cy.contains('Other').should('exist');
+    });
+});
+
+Then('the first stage appears on registration page', () => {
+    cy.get('[data-test="registration-page-content"]').within(() => {
+        cy.contains('Birth - Basic info').should('exist');
+        cy.contains('Birth - Details').should('exist');
+        cy.contains('Birth - Status').should('exist');
+        cy.contains('Report date').should('exist');
+        cy.contains('Apgar Score').should('exist');
     });
 });

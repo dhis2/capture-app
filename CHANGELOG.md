@@ -1,3 +1,31 @@
+## [100.41.3](https://github.com/dhis2/capture-app/compare/v100.41.2...v100.41.3) (2023-10-16)
+
+
+### Bug Fixes
+
+* [DHIS2-15782] navigation with program stage filter ([#3431](https://github.com/dhis2/capture-app/issues/3431)) ([8f7a017](https://github.com/dhis2/capture-app/commit/8f7a017c5860104620c6b7fc8c20916b00037302))
+
+## [100.41.2](https://github.com/dhis2/capture-app/compare/v100.41.1...v100.41.2) (2023-10-12)
+
+
+### Bug Fixes
+
+* [DHIS2-15827] remove effects of 'Prevent adding new events to stage' action from the form ([#3418](https://github.com/dhis2/capture-app/issues/3418)) ([f17d087](https://github.com/dhis2/capture-app/commit/f17d087f368cf4d6b26923fd5cf4fb15d7795ba2))
+
+## [100.41.1](https://github.com/dhis2/capture-app/compare/v100.41.0...v100.41.1) (2023-10-09)
+
+
+### Bug Fixes
+
+* [DHIS2-15734] assign effect dynamic formId object key ([#3422](https://github.com/dhis2/capture-app/issues/3422)) ([85f242b](https://github.com/dhis2/capture-app/commit/85f242b2b0c6092b46e92f087e21e102a2e1e19d))
+
+# [100.41.0](https://github.com/dhis2/capture-app/compare/v100.40.1...v100.41.0) (2023-10-03)
+
+
+### Features
+
+* [DHIS2-9661][DHIS2-14830] first stage on registration page  ([#3267](https://github.com/dhis2/capture-app/issues/3267)) ([6e5f6fe](https://github.com/dhis2/capture-app/commit/6e5f6fea7b6ab043800e806c7459210f10ef608a))
+
 ## [100.40.1](https://github.com/dhis2/capture-app/compare/v100.40.0...v100.40.1) (2023-09-30)
 
 

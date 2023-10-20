@@ -116,11 +116,21 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
             id,
             classes,
             isFormInReduxStore,
+            getCustomContent,
             ...passOnProps
         } = this.props;
         const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(entry => entry[1]);
 
-        const sections = metaDataSectionsAsArray.map(section => (passOnProps.formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps)));
+        const sections = metaDataSectionsAsArray.map(section => (
+            passOnProps.formHorizontal
+                ? this.renderHorizontal(section, passOnProps)
+                : (
+                    <>
+                        {getCustomContent && getCustomContent(section.id) }
+                        {this.renderVertical(section, passOnProps)}
+                    </>
+                )
+        ));
 
         return (
             <>

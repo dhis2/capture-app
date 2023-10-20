@@ -8,8 +8,10 @@ import { useLocationQuery } from '../../../../utils/routing';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
+import { useBuildFirstStageRegistration } from './useBuildFirstStageRegistration';
 import { useMetadataForRegistrationForm } from '../../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import { useMergeFormFoundationsIfApplicable } from './useMergeFormFoundationsIfApplicable';
 
 export const useLifecycle = (
     selectedScopeId: string,
@@ -24,7 +26,14 @@ export const useLifecycle = (
     const ready = useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]) && !!orgUnit;
     const searchTerms = useSelector(({ searchDomain }) => searchDomain.currentSearchInfo.currentSearchTerms);
     const { scopeType } = useScopeInfo(selectedScopeId);
-    const { formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
+    const { firstStageMetaData } = useBuildFirstStageRegistration(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
+    const {
+        formId,
+        registrationMetaData: enrollmentMetadata,
+        formFoundation: enrollmentFormFoundation,
+    } = useMetadataForRegistrationForm({ selectedScopeId });
+
+    const { formFoundation } = useMergeFormFoundationsIfApplicable(enrollmentFormFoundation, firstStageMetaData);
     const { programCategory } = useCategoryCombinations(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
@@ -43,7 +52,8 @@ export const useLifecycle = (
             dataEntryReadyRef.current === false &&
             formValuesReadyRef.current === true &&
             orgUnit &&
-            scopeType === scopeTypes.TRACKER_PROGRAM
+            scopeType === scopeTypes.TRACKER_PROGRAM &&
+            formFoundation
         ) {
             dataEntryReadyRef.current = true;
             dispatch(
@@ -54,10 +64,32 @@ export const useLifecycle = (
                     formValues,
                     clientValues,
                     programCategory,
+                    firstStage: firstStageMetaData?.stage,
+                    formFoundation,
                 }),
             );
         }
-    }, [scopeType, dataEntryId, selectedScopeId, orgUnit, formValuesReadyRef, formValues, clientValues, programCategory, dispatch]);
+    }, [
+        formFoundation,
+        scopeType,
+        dataEntryId,
+        selectedScopeId,
+        orgUnit,
+        formValuesReadyRef,
+        formValues,
+        clientValues,
+        programCategory,
+        firstStageMetaData,
+        dispatch,
+    ]);
 
-    return { teiId, ready, skipDuplicateCheck: !!teiId };
+    return {
+        teiId,
+        ready,
+        skipDuplicateCheck: !!teiId,
+        firstStageMetaData,
+        formId,
+        enrollmentMetadata,
+        formFoundation,
+    };
 };

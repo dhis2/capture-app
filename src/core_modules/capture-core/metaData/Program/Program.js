@@ -25,6 +25,7 @@ export class Program {
     _programRuleVariables: Array<ProgramRuleVariable>;
     _icon: Icon | void;
     _displayFrontPageList: boolean;
+    _useFirstStageDuringRegistration: boolean;
     _onlyEnrollOnce: boolean;
 
     constructor(initFn: ?(_this: Program) => void) {
@@ -113,6 +114,14 @@ export class Program {
 
     get displayFrontPageList() {
         return this._displayFrontPageList;
+    }
+
+    set useFirstStageDuringRegistration(useFirstStageDuringRegistration: boolean) {
+        this._useFirstStageDuringRegistration = useFirstStageDuringRegistration;
+    }
+
+    get useFirstStageDuringRegistration() {
+        return this._useFirstStageDuringRegistration;
     }
 
     set onlyEnrollOnce(onlyEnrollOnce: boolean) {

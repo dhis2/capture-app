@@ -32,6 +32,10 @@ And('you create a new tei in Child programme from Ngelehun CHC', () => {
         .eq(1)
         .type('TheGlass')
         .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(7)
+        .type('2023-09-01')
+        .blur();
 
     clickSave();
 });

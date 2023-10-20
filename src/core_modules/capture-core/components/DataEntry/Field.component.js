@@ -24,7 +24,7 @@ type Props = {
     ...CssClasses
 }
 
-const FieldSectionPlain = (props: Props) => {
+const FieldPlain = (props: Props) => {
     const { formHorizontal, index, fieldContainer, total, classes } = props;
 
     const className = !formHorizontal ? index % 2 !== 0 && classes.evenNumbers : null;
@@ -44,4 +44,4 @@ const FieldSectionPlain = (props: Props) => {
     );
 };
 
-export const FieldSection = withStyles(styles)(FieldSectionPlain);
+export const Field = withStyles(styles)(FieldPlain);
