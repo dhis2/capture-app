@@ -4,10 +4,11 @@ import {
     Then,
     defineStep as And, Before,
 } from '@badeball/cypress-cucumber-preprocessor';
-import { filterInstanceVersion } from '../support/tagUtils';
+import { filterInstanceVersion, shouldLogin } from '../support/tagUtils';
 
 Before(function callback() {
     filterInstanceVersion(() => this.skip());
+    !shouldLogin() && cy.clearAllCookies();
 });
 
 Given('you are in the main page with no selections made', () => {

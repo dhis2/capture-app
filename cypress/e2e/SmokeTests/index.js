@@ -1,4 +1,5 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import '../sharedSteps';
 
 Then('you should see the app main selections', () => {
     cy.get('[data-test="org-unit-selector-container"]');
@@ -6,7 +7,6 @@ Then('you should see the app main selections', () => {
 });
 
 Given('you open the App without auth cookie', () => {
-    cy.clearCookies();
     cy.visit('/');
 });
 

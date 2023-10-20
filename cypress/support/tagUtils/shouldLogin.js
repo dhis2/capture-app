@@ -1,5 +1,6 @@
 export const shouldLogin = () => {
-    const { tags } = window.testState.currentScenario;
+    const { tags } = window.testState.pickle;
+
     if (!tags || !tags.length) {
         return true;
     }
