@@ -1,3 +1,10 @@
+## [100.41.3](https://github.com/dhis2/capture-app/compare/v100.41.2...v100.41.3) (2023-10-16)
+
+
+### Bug Fixes
+
+* [DHIS2-15782] navigation with program stage filter ([#3431](https://github.com/dhis2/capture-app/issues/3431)) ([8f7a017](https://github.com/dhis2/capture-app/commit/8f7a017c5860104620c6b7fc8c20916b00037302))
+
 ## [100.41.2](https://github.com/dhis2/capture-app/compare/v100.41.1...v100.41.2) (2023-10-12)
 
 
