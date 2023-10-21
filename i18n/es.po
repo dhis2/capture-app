@@ -741,7 +741,7 @@ msgid "View enrollment"
 msgstr "Ver inscripción"
 
 msgid "Create for"
-msgstr "Crear para"
+msgstr "Crear"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
