@@ -33,7 +33,8 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment, getProgramThrowIfNotFound } from '../../../metaData';
+import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
+import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
     attributeOptionsKey,
@@ -41,7 +42,6 @@ import {
     withAOCFieldBuilder,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
-import { shouldUseNewDashboard } from '../../../utils/routing';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -290,40 +290,35 @@ const getCategoryOptionsSettingsFn = () => {
         getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
         getFieldIds: (props: Object) => props.categories?.map(category => category.id),
         getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
-        getMeta: (props: Object) => ({
-            section: AOCsectionKey,
-            placement: placements.BOTTOM,
-            sectionName: props.programCategory?.displayName,
-        }),
+        getMeta: (props: Object) => {
+            const { firstStageMetaData, programCategory } = props;
+
+            return {
+                section: AOCsectionKey,
+                placement: placements.BOTTOM,
+                sectionName: firstStageMetaData
+                    ? `${firstStageMetaData.stage.name} - ${programCategory?.displayName}`
+                    : programCategory?.displayName,
+            };
+        },
     };
 
     return categoryOptionsSettings;
 };
 
 const getAOCSettingsFn = () => ({
-    hideAOC: ({ programId, newDashboardConfig }) => {
-        const { stages: stagesMap } = getProgramThrowIfNotFound(programId);
+    hideAOC: ({ programId }) => {
+        const { stages: stagesMap, useFirstStageDuringRegistration } = getProgramThrowIfNotFound(programId);
 
         /*
         Show AOC selection if:
-        - There are any program stages in the program with “Auto-generate" event and NOT “Open data entry form after enrollment”.
-        - There are multiple program stages with "Auto-generate" event and "Open data entry form after enrollment"
-            (in this scenario we are currently generating events for the program stages that are not the first one)
-        - Using the old dashboard and we have a stage with auto generate event.
+        - There are any program stages in the program with “Auto-generate"
+        - The "Show first stage on registration page" is selected for the program
         */
 
         const stages = [...stagesMap.values()];
 
-        const usingNewDashboardForProgram = shouldUseNewDashboard(
-            newDashboardConfig.userDataStore,
-            newDashboardConfig.dataStore,
-            newDashboardConfig.temp,
-            programId,
-        );
-
-        const shouldShowAOC = (!usingNewDashboardForProgram && stages.some(stage => stage.autoGenerateEvent)) ||
-        stages.some(stage => stage.autoGenerateEvent && !stage.openAfterEnrollment) ||
-            stages.filter(stage => stage.autoGenerateEvent && stage.openAfterEnrollment).length > 1;
+        const shouldShowAOC = stages.some(stage => stage.autoGenerateEvent) || useFirstStageDuringRegistration;
 
         return !shouldShowAOC;
     },
@@ -336,7 +331,9 @@ type FinalTeiDataEntryProps = {
     orgUnitId: string,
     onUpdateDataEntryField: Function,
     onUpdateFormFieldAsync: Function,
-    onUpdateFormField: Function
+    onUpdateFormField: Function,
+    firstStageMetaData?: ?{ stage: ProgramStage },
+    formFoundation: RenderFoundation,
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -355,14 +352,21 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     };
 
     render() {
-        const { enrollmentMetadata, ...passOnProps } = this.props;
+        const { enrollmentMetadata, firstStageMetaData, ...passOnProps } = this.props;
+
         return (
         // $FlowFixMe[cannot-spread-inexact] automated comment
-            <DataEntry
-                {...passOnProps}
-                dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
-                formFoundation={enrollmentMetadata.enrollmentForm}
-            />
+            firstStageMetaData ? (
+                <EnrollmentWithFirstStageDataEntry
+                    {...passOnProps}
+                    firstStageMetaData={firstStageMetaData}
+                />
+            ) : (
+                <DataEntry
+                    {...passOnProps}
+                    dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
+                />
+            )
         );
     }
 }
@@ -385,6 +389,8 @@ type PreEnrollmentDataEntryProps = {
     onStartAsyncUpdateField: Function,
     onGetUnsavedAttributeValues?: ?Function,
     teiId?: ?string,
+    firstStageMetaData?: ?{ stage: ProgramStage },
+    formFoundation: RenderFoundation,
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
@@ -409,18 +415,18 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     }
 
     handleUpdateField = (...args: Array<any>) => {
-        const { programId, orgUnit } = this.props;
-        this.props.onUpdateField(...args, programId, orgUnit);
+        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        this.props.onUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
     }
 
     handleUpdateDataEntryField = (...args: Array<any>) => {
-        const { programId, orgUnit } = this.props;
-        this.props.onUpdateDataEntryField(...args, programId, orgUnit);
+        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        this.props.onUpdateDataEntryField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
     }
 
     handleStartAsyncUpdateField = (...args: Array<any>) => {
-        const { programId, orgUnit } = this.props;
-        this.props.onStartAsyncUpdateField(...args, programId, orgUnit);
+        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        this.props.onStartAsyncUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
     }
 
     render() {
@@ -432,6 +438,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
             onGetUnsavedAttributeValues,
             ...passOnProps
         } = this.props;
+
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <PreEnrollmentDataEntryPure

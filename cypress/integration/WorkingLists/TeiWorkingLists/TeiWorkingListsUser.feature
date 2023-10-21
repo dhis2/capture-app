@@ -186,6 +186,13 @@ And you select the events scheduled today
 And you apply the current filter
 Then you see the selected option in the scheduledAt filter
 
+@v>=39
+Scenario: The program stage working list configureation is kept when navigating
+Given you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list
+When you open an enrollment event from the working list
+And you go back using the browser button
+Then the program stage working list is loaded
+
 @v>=40
 Scenario: The user creates, updates and deletes a Program stage custom working list
 Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
@@ -233,7 +240,7 @@ And the Custom Program stage list is deleted
 
 @v>=40
 Scenario: The user can save a program stage working list, based on a TEI working list configuration
-Given you open the main page with Ngelehun and Malaria focus investigation context
+Given you open a clean main page with Ngelehun and Malaria focus investigation context
 Then you see the custom TEI working lists
 And you can load the view with the name Ongoing foci responses
 And you open the program stage filters from the more filters dropdown menu

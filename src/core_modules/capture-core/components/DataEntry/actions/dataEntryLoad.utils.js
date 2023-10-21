@@ -17,7 +17,8 @@ type DataEntryPropToIncludeSpecial = {|
     clientId: string,
     dataEntryId: string,
     onConvertIn: (value: any) => any,
-    onConvertOut: (dataEntryValue: any, prevValue: any, foundation: RenderFoundation) => any,
+    onConvertOut: (dataEntryValue: any, foundation: RenderFoundation, customFeatureType: string) => any,
+    featureType?: string,
     validatorContainers?: ?Array<ValidatorContainer>,
 |};
 
@@ -30,7 +31,11 @@ export function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToI
             if (propToInclude.type) {
                 propMeta = { type: propToInclude.type };
             } else if (propToInclude.onConvertOut) {
-                propMeta = { onConvertOut: propToInclude.onConvertOut.toString(), clientId: propToInclude.clientId };
+                propMeta = {
+                    onConvertOut: propToInclude.onConvertOut.toString(),
+                    clientId: propToInclude.clientId,
+                    featureType: propToInclude.featureType,
+                };
             } else {
                 propMeta = {};
             }
