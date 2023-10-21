@@ -104,3 +104,4 @@ const MainPage = ({
 };
 
 export const MainPageComponent = withLoadingIndicator()(MainPage);
+
