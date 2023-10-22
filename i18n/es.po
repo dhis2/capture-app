@@ -397,7 +397,7 @@ msgid "to"
 msgstr "a"
 
 msgid "From"
-msgstr "De"
+msgstr "Desde"
 
 msgid "To"
 msgstr "Para"
@@ -765,7 +765,7 @@ msgid "View dashboard"
 msgstr "Ver tablero"
 
 msgid "Create for"
-msgstr "Crear para"
+msgstr "Crear"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
