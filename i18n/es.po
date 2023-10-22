@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-29T14:14:34.330Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -172,6 +172,15 @@ msgstr "Coordenada"
 msgid "Enrollment"
 msgstr "Inscripción"
 
+msgid "Complete event"
+msgstr "Completar el evento"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr "Seleccione {{categoryName}}"
 
@@ -192,14 +201,17 @@ msgstr "Cancelar"
 msgid "Metadata error. see log for details"
 msgstr "Error de metadatos. ver registro para más detalles"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Usuario asignado"
 
 msgid "Search for user"
 msgstr "Buscar usuario"
-
-msgid "Complete event"
-msgstr "Completar el evento"
 
 msgid "Basic info"
 msgstr "Información básica"
@@ -438,13 +450,13 @@ msgid "Days in the future"
 msgstr "Días en el futuro"
 
 msgid "From"
-msgstr "De"
+msgstr "Desde"
 
 msgid "Days in the past"
 msgstr "Días en el pasado"
 
 msgid "To"
-msgstr "Para"
+msgstr "Hasta"
 
 msgid "This week"
 msgstr "Esta semana"
@@ -791,7 +803,7 @@ msgid "There was an error loading the page"
 msgstr "Hubo un error al cargar la página"
 
 msgid "Choose a registering unit to start reporting"
-msgstr "Elija una unidad de registro para comenzar a informar"
+msgstr "Seleccione una unidad de registro para comenzar a informar"
 
 msgid "There are no feedbacks for this event"
 msgstr "No hay comentarios para este evento."
@@ -866,7 +878,7 @@ msgid "View enrollment"
 msgstr "Ver inscripción"
 
 msgid "Create for"
-msgstr "Crear para"
+msgstr "Crear"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
