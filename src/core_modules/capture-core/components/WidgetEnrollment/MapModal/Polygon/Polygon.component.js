@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core';
 import type { PolygonProps, FeatureCollection } from './Polygon.types';
 import { convertPolygonToServer } from './converters';
 import { DeleteControl } from './DeleteControl.component';
+import { ConditionalTooltip } from './ConditionalTooltip.component';
 
 const styles = () => ({
     modalContent: {
@@ -18,6 +19,9 @@ const styles = () => ({
     map: {
         width: '100%',
         height: 'calc(100vh - 380px)',
+    },
+    setAreaButton: {
+        marginLeft: '5px',
     },
 });
 
@@ -42,6 +46,11 @@ const coordsToFeatureCollection = (inputCoordinates: any): ?FeatureCollection =>
     };
 };
 
+const drawing = {
+    STARTED: 'STARTED',
+    FINISHED: 'FINISHED',
+};
+
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
 const PolygonPlain = ({
@@ -53,6 +62,7 @@ const PolygonPlain = ({
 }: PolygonProps) => {
     const [polygonArea, setPolygonArea] = useState(defaultValues);
     const [center, setCenter] = useState(initialCenter);
+    const [drawingState, setDrawingState] = useState(undefined);
 
     const resetToDefaultValues = () => {
         setCenter(initialCenter);
@@ -66,6 +76,7 @@ const PolygonPlain = ({
 
     const onMapPolygonDelete = () => {
         setPolygonArea(null);
+        setDrawingState(drawing.FINISHED);
     };
 
     const onSearch = (searchPosition: any) => {
@@ -111,6 +122,8 @@ const PolygonPlain = ({
                     position="topright"
                     onCreated={onMapPolygonCreated}
                     onDeleted={onMapPolygonDelete}
+                    onDrawStart={() => setDrawingState(drawing.STARTED)}
+                    onDrawStop={() => setDrawingState(drawing.FINISHED)}
                     draw={{
                         rectangle: false,
                         polyline: false,
@@ -148,26 +161,48 @@ const PolygonPlain = ({
 
     const renderActions = () => (
         <ButtonStrip end>
-            <Button
-                onClick={() => {
-                    resetToDefaultValues();
-                    setOpen(false);
-                }}
-                secondary
-            >
-                {i18n.t('Cancel')}
-            </Button>
-            <Button
-                onClick={() => {
-                    const clientValue = polygonArea;
-                    const convertedCoordinates = convertPolygonToServer(clientValue);
-                    onSetCoordinates(convertedCoordinates);
-                    setOpen(false);
-                }}
-                primary
-            >
-                {i18n.t('Set area')}
-            </Button>
+            {!drawingState && (
+                <Button
+                    onClick={() => {
+                        resetToDefaultValues();
+                        setOpen(false);
+                    }}
+                    secondary
+                >
+                    {i18n.t('Close')}
+                </Button>
+            )}
+            {drawingState && (
+                <>
+                    <Button
+                        onClick={() => {
+                            resetToDefaultValues();
+                            setOpen(false);
+                        }}
+                        secondary
+                    >
+                        {i18n.t('Close without saving')}
+                    </Button>
+                    <ConditionalTooltip
+                        content={i18n.t('Finish drawing before saving')}
+                        enabled={drawingState === drawing.STARTED}
+                    >
+                        <Button
+                            disabled={drawingState === drawing.STARTED}
+                            className={classes.setAreaButton}
+                            onClick={() => {
+                                const clientValue = polygonArea;
+                                const convertedCoordinates = convertPolygonToServer(clientValue);
+                                onSetCoordinates(convertedCoordinates);
+                                setOpen(false);
+                            }}
+                            primary
+                        >
+                            {i18n.t('Set area')}
+                        </Button>
+                    </ConditionalTooltip>
+                </>
+            )}
         </ButtonStrip>
     );
 

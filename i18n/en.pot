@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-29T14:14:34.330Z\n"
-"PO-Revision-Date: 2023-09-29T14:14:34.330Z\n"
+"POT-Creation-Date: 2023-10-19T06:07:55.501Z\n"
+"PO-Revision-Date: 2023-10-19T06:07:55.501Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1190,6 +1190,12 @@ msgstr "Coordinates"
 
 msgid "Delete polygon"
 msgstr "Delete polygon"
+
+msgid "Close without saving"
+msgstr "Close without saving"
+
+msgid "Finish drawing before saving"
+msgstr "Finish drawing before saving"
 
 msgid "Set area"
 msgstr "Set area"
