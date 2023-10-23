@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
@@ -63,6 +63,7 @@ const PolygonPlain = ({
     const [polygonArea, setPolygonArea] = useState(defaultValues);
     const [center, setCenter] = useState(initialCenter);
     const [drawingState, setDrawingState] = useState(undefined);
+    const prevDrawingState = useRef(undefined);
 
     const resetToDefaultValues = () => {
         setCenter(initialCenter);
@@ -72,11 +73,14 @@ const PolygonPlain = ({
     const onMapPolygonCreated = (e: any) => {
         const polygonCoordinates = e.layer.toGeoJSON().geometry.coordinates[0].map(c => [c[1], c[0]]);
         setPolygonArea(polygonCoordinates);
+        setDrawingState(drawing.FINISHED);
+        prevDrawingState.current = drawing.FINISHED;
     };
 
     const onMapPolygonDelete = () => {
         setPolygonArea(null);
         setDrawingState(drawing.FINISHED);
+        prevDrawingState.current = drawing.FINISHED;
     };
 
     const onSearch = (searchPosition: any) => {
@@ -123,7 +127,7 @@ const PolygonPlain = ({
                     onCreated={onMapPolygonCreated}
                     onDeleted={onMapPolygonDelete}
                     onDrawStart={() => setDrawingState(drawing.STARTED)}
-                    onDrawStop={() => setDrawingState(drawing.FINISHED)}
+                    onDrawStop={() => setDrawingState(prevDrawingState.current)}
                     draw={{
                         rectangle: false,
                         polyline: false,
@@ -136,7 +140,10 @@ const PolygonPlain = ({
                         edit: false,
                     }}
                 />
-                <DeleteControl onClick={onMapPolygonDelete} disabled={!polygonArea} />
+                <DeleteControl
+                    onClick={onMapPolygonDelete}
+                    disabled={!polygonArea || drawingState === drawing.STARTED}
+                />
             </FeatureGroup>
         </Map>
     );
