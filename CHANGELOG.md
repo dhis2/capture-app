@@ -1,3 +1,10 @@
+# [100.42.0](https://github.com/dhis2/capture-app/compare/v100.41.4...v100.42.0) (2023-10-24)
+
+
+### Features
+
+* [DHIS2-12361] Tracked Entity Relationships widget ([cafed8d](https://github.com/dhis2/capture-app/commit/cafed8d8aac3fe9955739b1a8ee2cdde57722967))
+
 ## [100.41.4](https://github.com/dhis2/capture-app/compare/v100.41.3...v100.41.4) (2023-10-22)
 
 
