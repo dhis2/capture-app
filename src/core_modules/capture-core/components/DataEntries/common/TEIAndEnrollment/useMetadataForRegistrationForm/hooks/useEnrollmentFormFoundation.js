@@ -30,6 +30,7 @@ export const useEnrollmentFormFoundation = ({
     locale,
 }: Props) => {
     const { data: enrollment, isLoading, error } = useIndexedDBQuery(
+        // $FlowFixMe - QueryKey can be undefined
         ['enrollmentForm', program?.id],
         () => buildEnrollmentForm({
             // $FlowFixMe - Flow does not understand that the values are not null here

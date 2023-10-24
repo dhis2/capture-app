@@ -28,7 +28,7 @@ export function getRelationshipsForEvent(
     const stage = program instanceof EventProgram ? program.stage : program.getStage(programStageId);
     const relationshipTypes = stage?.relationshipTypes || [];
     return getRelationships(
-        { event: eventId, fields: ['from,to,relationshipType,relationship'] },
+        { event: eventId, fields: ['from,to,relationshipType,relationship,createdAt'] },
         relationshipTypes,
         querySingleResource,
     );
