@@ -255,7 +255,7 @@ Then('the list should display data ordered descendingly by report date', () => {
     cy.get('input[placeholder="To"]').click();
 
     cy.contains('Update')
-        .click();
+        .click({ force: true });
 
     const rows = combineDataAndYear(lastYear, {
         '01-01': ['14 Female'],
