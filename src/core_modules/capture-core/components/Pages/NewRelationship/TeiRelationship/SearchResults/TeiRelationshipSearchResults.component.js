@@ -13,6 +13,7 @@ import { SearchResultsHeader } from '../../../../SearchResultsHeader';
 import { type SearchGroup } from '../../../../../metaData';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
 import type { ListItem } from '../../../../CardList/CardList.types';
+import { convertClientValuesToServer } from '../../../../../converters/helpers/clientToServer';
 
 const SearchResultsPager = withNavigation()(Pagination);
 
@@ -77,7 +78,8 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
     }
 
     onAddRelationship = (item) => {
-        this.props.onAddRelationship(item.id, item.values);
+        const serverValues = convertClientValuesToServer(item.values, this.props.searchGroup.searchForm);
+        this.props.onAddRelationship(item.id, serverValues);
     }
 
     renderResults = () => {
