@@ -203,8 +203,12 @@ You can set multiple program stages within a program to be auto-generating (this
 A program can be configured to automatically take the user to register a new event immediately after enrolling a tracked entity instance. To enable this behavior, the program must have at least one program stage with the "Open data entry form after registration" option checked. If more than one program stage has this option enabled, the first stage will be used.
 
 To configure it, you must follow the steps described in the [Enrollment with auto generated events](#enrollment-with-auto-generated-events) section and then check the option "Open data entry form after enrollment".
- 
-![](resources/images/open-data-entry-form-after-enrollment.png)
+
+### Enrollment with first stage on registration page
+
+For tracker programs enable the "First stage appears on registration page" flag in the Maintenance. The enrollment registration page will now display the first program stage the user has access to.
+
+![](resources/images/first-stage-during-registration.png)
 
 #### Active type of event
 

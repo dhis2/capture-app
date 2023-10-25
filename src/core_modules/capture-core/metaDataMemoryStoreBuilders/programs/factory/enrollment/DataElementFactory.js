@@ -15,6 +15,7 @@ import {
     DataElementUnique,
     dataElementUniqueScope,
     dataElementTypes,
+    Section,
 } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
@@ -37,8 +38,9 @@ export class DataElementFactory {
             'could not create the metadata because a MULIT_TEXT without associated option sets was found',
     };
 
-    static buildtetFeatureType(featureType: 'POINT' | 'POLYGON') {
+    static buildtetFeatureType(featureType: 'POINT' | 'POLYGON', section: Section) {
         const dataElement = new DataElement((o) => {
+            o.section = section;
             o.id = `FEATURETYPE_${featureType}`;
             o.name = featureType === 'POINT' ? i18n.t('Coordinate') : i18n.t('Area');
             o.formName = o.name;
@@ -206,8 +208,10 @@ export class DataElementFactory {
     async _buildBaseDataElement(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
+        section?: Section,
     ) {
         const dataElement = new DataElement();
+        dataElement.section = section;
         dataElement.type = cachedTrackedEntityAttribute.valueType;
         await this._setBaseProperties(
             dataElement,
@@ -224,10 +228,12 @@ export class DataElementFactory {
     async _buildDateDataElement(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
+        section?: Section,
     ) {
         const dateDataElement = new DateDataElement();
         dateDataElement.type = dataElementTypes.DATE;
         dateDataElement.allowFutureDate = cachedProgramTrackedEntityAttribute.allowFutureDate;
+        dateDataElement.section = section;
         await this._setBaseProperties(
             dateDataElement,
             cachedProgramTrackedEntityAttribute,
@@ -238,6 +244,7 @@ export class DataElementFactory {
 
     build(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
+        section?: Section,
     ) {
         const cachedTrackedEntityAttribute = cachedProgramTrackedEntityAttribute.trackedEntityAttributeId &&
             this.cachedTrackedEntityAttributes.get(
@@ -253,7 +260,7 @@ export class DataElementFactory {
         }
 
         return cachedTrackedEntityAttribute.valueType === dataElementTypes.DATE ?
-            this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute) :
-            this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute);
+            this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section) :
+            this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section);
     }
 }

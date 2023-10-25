@@ -103,7 +103,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
             cancelEditEventDataEntry(),
             ...(isScheduled ? [] : [setCurrentDataEntry(props.dataEntryId, dataEntryKeys.VIEW)]),
         ]));
-        isScheduled && onCancelEditEvent && onCancelEditEvent();
+        onCancelEditEvent && onCancelEditEvent(isScheduled);
     },
     onDelete: () => {
         const { enrollmentId } = props;

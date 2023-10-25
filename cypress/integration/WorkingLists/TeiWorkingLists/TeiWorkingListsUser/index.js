@@ -2,6 +2,19 @@ import { v4 as uuid } from 'uuid';
 import '../../sharedSteps';
 import '../../../sharedSteps';
 
+const cleanUpIfApplicable = (programId) => {
+    cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const workingList = body.programStageWorkingLists?.find(e => e.displayName === 'Custom Program stage list');
+            if (!workingList) {
+                return null;
+            }
+            return cy
+                .buildApiUrl('programStageWorkingLists', workingList.id)
+                .then(workingListUrl => cy.request('DELETE', workingListUrl));
+        });
+};
 Given('you open the main page with Ngelehun and child programme context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
@@ -42,6 +55,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis context',
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context', () => {
+    cleanUpIfApplicable('qDkgAbB5Jlk');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 
     cy.get('[data-test="tei-working-lists"]')
@@ -58,6 +72,11 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
+});
+
+Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
+    cleanUpIfApplicable('M3xtLkYBlKI');
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
@@ -739,4 +758,44 @@ Then('the program stage custom working list filters are loaded', () => {
     cy.get('[data-test="tei-working-lists"]')
         .find('[data-test="more-filters"]')
         .should('have.length', 2);
+});
+
+Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list', () => {
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="template-selector-create-list"]')
+        .click();
+
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+            cy.contains('Program stage')
+                .click();
+        });
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Postpartum care visit')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});
+
+When('you open an enrollment event from the working list', () => {
+    cy.contains('Linda')
+        .click();
+});
+
+When('you go back using the browser button', () => {
+    cy.go('back');
+});
+
+Then('the program stage working list is loaded', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .find('[data-test="more-filters"]')
+        .should('have.length', 2);
+
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('WHOMCH Hemoglobin value')
+        .should('exist');
 });

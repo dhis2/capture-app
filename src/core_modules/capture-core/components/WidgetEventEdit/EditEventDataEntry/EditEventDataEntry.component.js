@@ -397,7 +397,7 @@ type Props = {
     },
     theme: Theme,
     dataEntryId: string,
-    onCancelEditEvent?: () => void,
+    onCancelEditEvent?: (isScheduled: boolean) => void,
     eventStatus?: string,
     enrollmentId?: string,
     isCompleted?: boolean,
