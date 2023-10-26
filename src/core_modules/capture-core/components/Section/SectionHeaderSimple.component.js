@@ -71,11 +71,13 @@ class SectionHeaderSimplePlain extends Component<Props> {
                 style={accContainerStyle}
                 {...containerProps}
             >
-                <div
-                    className={classes.title}
-                    style={titleStyle}
-                >
-                    {this.props.title}
+                <div>
+                    <div
+                        className={classes.title}
+                        style={titleStyle}
+                    >
+                        {this.props.title}
+                    </div>
                 </div>
                 <div
                     className={classes.children}

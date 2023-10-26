@@ -16,7 +16,7 @@ export const deriveFirstStageDuringRegistrationEvent = ({
     fieldsValue,
     attributeCategoryOptions,
 }: {
-    firstStageMetadata: ProgramStage,
+    firstStageMetadata: ?ProgramStage,
     programId: string,
     orgUnitId: string,
     currentEventValues?: { [id: string]: any },

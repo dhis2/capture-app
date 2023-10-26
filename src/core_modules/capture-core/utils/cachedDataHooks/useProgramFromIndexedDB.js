@@ -1,7 +1,6 @@
 // @flow
 import type { UseQueryOptions } from 'react-query';
-import { userStores } from '../../storageControllers/stores';
-import { getUserStorageController } from '../../storageControllers';
+import { userStores, getUserStorageController } from '../../storageControllers';
 import { useIndexedDBQuery } from '../reactQueryHelpers';
 
 
@@ -10,6 +9,7 @@ export const useProgramFromIndexedDB = (programId: ?string, QueryOptions?: UseQu
     const { enabled = true } = QueryOptions ?? {};
 
     const { data, isLoading, isError } = useIndexedDBQuery(
+        // $FlowFixMe - only gets called when programId is defined because of enabled
         ['programs', programId],
         () => storageController.get(userStores.PROGRAMS, programId),
         {

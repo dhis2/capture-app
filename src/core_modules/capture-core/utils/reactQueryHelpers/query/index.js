@@ -1,2 +1,3 @@
 // @flow
-export { useIndexedDBQuery } from './useMetadataQuery';
+export { useIndexedDBQuery, useCustomMetadataQuery, useApiMetadataQuery } from './useMetadataQuery';
+export { useApiDataQuery } from './useApiDataQuery';

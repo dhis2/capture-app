@@ -1,3 +1,24 @@
+# [100.42.0](https://github.com/dhis2/capture-app/compare/v100.41.4...v100.42.0) (2023-10-24)
+
+
+### Features
+
+* [DHIS2-12361] Tracked Entity Relationships widget ([cafed8d](https://github.com/dhis2/capture-app/commit/cafed8d8aac3fe9955739b1a8ee2cdde57722967))
+
+## [100.41.4](https://github.com/dhis2/capture-app/compare/v100.41.3...v100.41.4) (2023-10-22)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c82ce9f](https://github.com/dhis2/capture-app/commit/c82ce9f69159878f5ca9cc2e6ca9944544099368))
+
+## [100.41.3](https://github.com/dhis2/capture-app/compare/v100.41.2...v100.41.3) (2023-10-16)
+
+
+### Bug Fixes
+
+* [DHIS2-15782] navigation with program stage filter ([#3431](https://github.com/dhis2/capture-app/issues/3431)) ([8f7a017](https://github.com/dhis2/capture-app/commit/8f7a017c5860104620c6b7fc8c20916b00037302))
+
 ## [100.41.2](https://github.com/dhis2/capture-app/compare/v100.41.1...v100.41.2) (2023-10-12)
 
 
