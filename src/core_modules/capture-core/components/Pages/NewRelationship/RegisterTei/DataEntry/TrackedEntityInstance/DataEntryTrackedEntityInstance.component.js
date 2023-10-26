@@ -6,7 +6,7 @@ import { DATA_ENTRY_ID } from '../../registerTei.const';
 import teiClasses from './trackedEntityInstance.module.css';
 import { TeiRegistrationEntry } from '../../../../../DataEntries';
 import type { Props } from './dataEntryTrackedEntityInstance.types';
-import { useCurrentOrgUnitInfo } from '../../../../../../hooks/useCurrentOrgUnitInfo';
+import { useCurrentOrgUnitId } from '../../../../../../hooks/useCurrentOrgUnitId';
 
 const RelationshipTrackedEntityInstancePlain =
     ({
@@ -18,7 +18,7 @@ const RelationshipTrackedEntityInstancePlain =
         renderDuplicatesCardActions,
         ExistingUniqueValueDialogActions,
     }: Props) => {
-        const { id: orgUnitId } = useCurrentOrgUnitInfo();
+        const orgUnitId = useCurrentOrgUnitId();
         const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
         const { trackedEntityType } = teiRegistrationMetadata || {};
         const trackedEntityTypeNameLC = trackedEntityType.name.toLocaleLowerCase();
