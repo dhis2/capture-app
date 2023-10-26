@@ -252,3 +252,5 @@ export type CachedRelationshipType = {
     fromConstraint: CachedRelationshipConstraint,
     toConstraint: CachedRelationshipConstraint,
 }
+
+export type CachedRelationshipTypes = Array<CachedRelationshipType>;

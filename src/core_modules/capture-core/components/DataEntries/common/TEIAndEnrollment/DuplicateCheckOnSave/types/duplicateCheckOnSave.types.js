@@ -1,7 +1,7 @@
 // @flow
-import { ProgramStage, RenderFoundation } from '../../../../../../metaData';
+import type { EnrollmentPayload } from '../../../../EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.types';
+import type { TeiPayload } from '../../../../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
 
 export type SaveForDuplicateCheck = (
-    formFoundation?: RenderFoundation,
-    firstStageMetaData?: { stage: ProgramStage },
+    teiWithEnrollment: EnrollmentPayload | TeiPayload,
 ) => void;

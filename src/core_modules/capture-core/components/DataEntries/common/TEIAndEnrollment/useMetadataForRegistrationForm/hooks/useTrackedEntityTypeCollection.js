@@ -26,6 +26,7 @@ export const useTrackedEntityTypeCollection = ({
     locale,
 }: Props): ReturnValues => {
     const { data: trackedEntityAttributes } = useIndexedDBQuery(
+        // $FlowFixMe - QueryKey can be undefined
         ['trackedEntityAttributes', trackedEntityType?.id],
         () => getTrackedEntityAttributes(
             trackedEntityType
@@ -40,6 +41,7 @@ export const useTrackedEntityTypeCollection = ({
     );
 
     const { data: trackedEntityTypeCollection } = useIndexedDBQuery(
+        // $FlowFixMe - QueryKey can be undefined
         ['trackedEntityTypeCollection', trackedEntityType?.id],
         () => buildTrackedEntityTypeCollection({
             // $FlowFixMe
