@@ -48,7 +48,7 @@ Feature: User interacts with the Enrollment New Event Workspace
 
   Scenario: User should be asked to create new event after completing a stage and choose to cancel
     Given you open the main page with Ngelehun and Malaria focus investigation context
-    And you opt in to use the new enrollment Dashboard for Malaria focus investigation     
+    And you opt in to use the new enrollment Dashboard for Malaria focus investigation
     Then you land on the enrollment new event page by having typed #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&stageId=CWaAcQYKVpq&teiId=S3JjTA4QMNe
     Then you see the following Enrollment: New Event
     And you see the widget header Foci investigation & classification
@@ -72,3 +72,9 @@ Feature: User interacts with the Enrollment New Event Workspace
     When you choose option Yes, create new event in the modal
     Then you will be navigate to page #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&teiId=S3JjTA4QMNe
 
+  Scenario: User is able to schedule an event with a note
+    Given you land on the enrollment new event page by having typed /#/enrollmentEventNew?enrollmentId=qcFFRp7DpcX&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&stageId=edqlbukwRfQ&teiId=erqa3phUfpI
+    And you see the following Enrollment: New Event
+    And you select the schedule tab
+    When you add a comment to the event
+    And the events saves successfully

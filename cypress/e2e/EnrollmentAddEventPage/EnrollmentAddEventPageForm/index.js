@@ -1,4 +1,4 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import '../sharedSteps';
 
 const showAllEventsInProgramStage = () => {
@@ -28,6 +28,32 @@ When(/^you opt in to use the new enrollment Dashboard for (.*)$/, (program) => {
 
 Given(/^you land on the enrollment new event page by having typed (.*)$/, (url) => {
     cy.visit(url);
+});
+
+Given('you select the schedule tab', () => {
+    cy.get('[data-test="new-event-schedule-tab"]')
+        .click();
+});
+
+When('you add a comment to the event', () => {
+    cy.get('[data-test="comment-textfield"]')
+        .type('This is a comment')
+        .blur();
+
+    cy.get('[data-test="add-comment-btn"]')
+        .click();
+});
+
+And('the events saves successfully', () => {
+    cy.intercept('POST', '**/tracker?async=false').as('postEvent');
+
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains('Schedule')
+        .click();
+
+    cy.wait('@postEvent')
+        .its('response.statusCode')
+        .should('eq', 200);
 });
 
 When(/^you click the create new button number (.*)$/, (eq) => {
