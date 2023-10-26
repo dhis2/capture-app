@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
-import { useRulesEngineOrgUnit } from '../../../hooks';
+import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import {
     useBuildEnrollmentPayload,
@@ -21,7 +21,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     onSave,
     ...passOnProps
 }) => {
-    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const {
         ready,
         skipDuplicateCheck,

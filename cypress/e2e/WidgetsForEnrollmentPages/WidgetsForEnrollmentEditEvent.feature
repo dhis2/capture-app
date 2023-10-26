@@ -16,13 +16,16 @@ Feature: The user interacts with the widgets on the enrollment edit event
 
   Scenario: User can close the Enrollment Widget
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
+    And the enrollment widget should be opened
     When you click the enrollment widget toggle open close button
     Then the enrollment widget should be closed
 
   Scenario: User can close and reopen the Enrollment Widget
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
+    And the enrollment widget should be opened
     When you click the enrollment widget toggle open close button
-    And you click the enrollment widget toggle open close button
+    Then the enrollment widget should be closed
+    When you click the enrollment widget toggle open close button
     Then the enrollment widget should be opened
 
   Scenario: User can see the enrollment details

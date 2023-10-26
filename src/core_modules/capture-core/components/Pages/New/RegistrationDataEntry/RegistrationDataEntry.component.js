@@ -15,7 +15,7 @@ import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
-import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
+import { useCurrentOrgUnitId } from '../../../../hooks/useCurrentOrgUnitId';
 
 const getStyles = ({ typography }) => ({
     container: {
@@ -97,7 +97,7 @@ const RegistrationDataEntryPlain = ({
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
-    const { id: reduxOrgUnitId } = useCurrentOrgUnitInfo();
+    const currentOrgUnitId = useCurrentOrgUnitId();
 
     const handleRegistrationScopeSelection = (id) => {
         setScopeId(id);
@@ -176,7 +176,7 @@ const RegistrationDataEntryPlain = ({
                             <Grid item md sm={9} xs={9} >
                                 <EnrollmentRegistrationEntryWrapper
                                     id={dataEntryId}
-                                    orgUnitId={reduxOrgUnitId}
+                                    orgUnitId={currentOrgUnitId}
                                     teiId={teiId}
                                     selectedScopeId={selectedScopeId}
                                     onSave={onSaveWithEnrollment}
@@ -231,7 +231,7 @@ const RegistrationDataEntryPlain = ({
                                 <TeiRegistrationEntry
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
-                                    orgUnitId={reduxOrgUnitId}
+                                    orgUnitId={currentOrgUnitId}
                                     saveButtonText={i18n.t('Save {{trackedEntityName}}', {
                                         trackedEntityName,
                                         interpolation: { escapeValue: false },

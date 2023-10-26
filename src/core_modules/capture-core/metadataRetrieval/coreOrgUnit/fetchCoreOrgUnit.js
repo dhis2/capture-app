@@ -1,13 +1,18 @@
 // @flow
 import { getAssociatedOrgUnitGroups } from 'capture-core/MetaDataStoreUtils/getAssociatedOrgUnitGroups';
-import type { QuerySingleResource } from '../utils/api/api.types';
+import type { CoreOrgUnit } from './coreOrgUnit.types';
+import type { QuerySingleResource } from '../../utils/api/api.types';
 
-export async function getRulesEngineOrgUnit(orgUnitId: string, querySingleResource: QuerySingleResource) {
+// Builds new CoreOrgUnit by fetching data from the api and index db
+export async function fetchCoreOrgUnit(
+    orgUnitId: string,
+    querySingleResource: QuerySingleResource,
+): Promise<CoreOrgUnit> {
     return Promise.all([
         querySingleResource({
             resource: `organisationUnits/${orgUnitId}`,
             params: {
-                fields: 'displayName,code',
+                fields: 'displayName,code,path',
             },
         }),
         getAssociatedOrgUnitGroups(orgUnitId),
@@ -15,6 +20,7 @@ export async function getRulesEngineOrgUnit(orgUnitId: string, querySingleResour
         id: orgUnitId,
         name: orgUnit.displayName,
         code: orgUnit.code,
+        path: orgUnit.path,
         groups,
     }));
 }
