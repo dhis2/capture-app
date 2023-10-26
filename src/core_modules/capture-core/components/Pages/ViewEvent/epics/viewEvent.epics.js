@@ -4,8 +4,7 @@ import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { getRulesEngineOrgUnit } from 'capture-core/rules/getRulesEngineOrgUnit';
-import { getAssociatedOrgUnitGroups } from 'capture-core/MetaDataStoreUtils/getAssociatedOrgUnitGroups';
+import { getCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
 import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
 
@@ -39,18 +38,24 @@ export const getEventOpeningFromEventListEpic = (
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
         switchMap(({ payload: { eventId } }) => getEvent(eventId, absoluteApiPath, querySingleResource)
-            .then(eventContainer =>
-                (eventContainer
-                    ? Promise.all(
-                        [eventContainer, getRulesEngineOrgUnit(eventContainer.event.orgUnitId, querySingleResource)],
-                    )
-                    : []))
-            .then(([eventContainer, orgUnit]) => {
+            .then((eventContainer) => {
                 if (!eventContainer) {
                     return openViewEventPageFailed(
                         i18n.t('Event could not be loaded. Are you sure it exists?'));
                 }
-                return startOpenEventForView(eventContainer, orgUnit);
+                return getCoreOrgUnit({
+                    orgUnitId: eventContainer.event.orgUnitId,
+                    onSuccess: orgUnit => startOpenEventForView(eventContainer, orgUnit),
+                    onError: (error) => {
+                        const { message, details } = getErrorMessageAndDetails(error);
+                        log.error(
+                            errorCreator(
+                                message ||
+                                i18n.t('Organisation unit could not be loaded'))(details));
+                        return openViewEventPageFailed(
+                            i18n.t('Could not get organisation unit'));
+                    },
+                });
             })
             .catch((error) => {
                 const { message, details } = getErrorMessageAndDetails(error);
@@ -95,28 +100,22 @@ export const getEventFromUrlEpic = (
                 });
         }));
 
-export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable, _: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED),
-        switchMap((action) => {
+        map((action) => {
             const eventContainer = action.payload.eventContainer;
-            // change from organisationUnitGroups -> groups
-            return Promise.all(
-                [
-                    querySingleResource({ resource: `organisationUnits/${eventContainer.event.orgUnitId}` }),
-                    getAssociatedOrgUnitGroups(eventContainer.event.orgUnitId),
-                ])
-                .then(([orgUnit, groups]) => {
-                    orgUnit.groups = groups;
-                    return orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer);
-                })
-                .catch((error) => {
+            return getCoreOrgUnit({
+                orgUnitId: eventContainer.event.orgUnitId,
+                onSuccess: orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer),
+                onError: (error) => {
                     const { message, details } = getErrorMessageAndDetails(error);
                     log.error(errorCreator(
                         message ||
                         i18n.t('Organisation unit could not be loaded'))(details));
                     return orgUnitCouldNotBeRetrievedOnUrlUpdate(eventContainer);
-                });
+                },
+            });
         }));
 
 export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
