@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import type { KeyboardManager } from 'capture-ui/HOC/withKeyboardNavigation';
 import classNames from 'classnames';
 import defaultClasses from './singleSelectBox.module.css';
 import type { OptionRendererInputData } from '../../selectBoxes.types';
+import type { KeyboardManager } from '../../../../internal/SelectionBoxes/withKeyboardNavigation';
 
 type Props = {
     optionData: OptionRendererInputData,
@@ -30,6 +30,9 @@ const keys = {
     ARROW_DOWN: 'ArrowDown',
 };
 
+// Pressing space triggers an automatic onClick event.
+// We do not want this event to be processed, as we already do all required work in the keyboard event.
+// This ignoreFlag variable makes it possible to determine if a given onClick event is of automatic origin.
 let ignoreFlag = false;
 
 export class SingleSelectBox extends React.Component<Props> {
@@ -52,7 +55,7 @@ export class SingleSelectBox extends React.Component<Props> {
             event.preventDefault();
             return;
         }
-        if (event.key == keys.TAB) {
+        if (event.key === keys.TAB) {
             keyboardManager.clear();
             ignoreFlag = false;
         } else if ([keys.SPACE, keys.ENTER].includes(event.key)) {

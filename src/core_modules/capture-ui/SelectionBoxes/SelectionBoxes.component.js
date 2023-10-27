@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { MultiSelectionsBoxes } from '../internal/SelectionBoxes/MultiSelectionsBoxes/MultiSelectionsBoxes.component';
 import { SingleSelectionBoxes } from '../internal/SelectionBoxes/SingleSelectionBoxes/SingleSelectionBoxes.component';
-import { withKeyboardNavigation } from '../HOC/withKeyboardNavigation';
+import { withKeyboardNavigation } from '../internal/SelectionBoxes/withKeyboardNavigation';
 
 import { orientations } from '../constants/orientations.const';
 

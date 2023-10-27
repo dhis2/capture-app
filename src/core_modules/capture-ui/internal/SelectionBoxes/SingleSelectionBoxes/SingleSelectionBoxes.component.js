@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-import type { KeyboardManager } from 'capture-ui/HOC/withKeyboardNavigation';
 import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from '../../../Icons';
 import { SingleSelectBox } from './SingleSelectBox/SingleSelectBox.component';
 import { withFocusHandler } from './SingleSelectBox/withFocusHandler';
 import { orientations } from '../../../constants/orientations.const';
 import defaultClasses from './singleSelectionBoxes.module.css';
 import type { OptionRendererInputData, OptionsArray, OptionRenderer } from '../selectBoxes.types';
+import type { KeyboardManager } from '../../../internal/SelectionBoxes/withKeyboardNavigation';
 
 const SingleSelectBoxWrapped = withFocusHandler()(SingleSelectBox);
 
