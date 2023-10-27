@@ -13,6 +13,7 @@ import { searchScopes } from '../SearchBox';
 import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
 import { dataElementTypes, getTrackerProgramThrowIfNotFound } from '../../metaData';
+import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 
@@ -96,24 +97,24 @@ const deriveEnrollmentType =
       return enrollmentTypes.DONT_SHOW_TAG;
   };
 
-const deriveEnrollmentOrgUnitAndDate = (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrolledAt?: string} => {
+const deriveEnrollmentOrgUnitIdAndDate = (enrollments, enrollmentType, currentProgramId): {orgUnitId?: string, enrolledAt?: string} => {
     if (!enrollments?.length) { return {}; }
     if (!currentProgramId && enrollments.length) {
-        const { orgUnitName, enrolledAt } = enrollments[0];
+        const { orgUnit: orgUnitId, enrolledAt } = enrollments[0];
 
         return {
-            orgUnitName,
+            orgUnitId,
             enrolledAt,
         };
     }
-    const { orgUnitName, enrolledAt } =
+    const { orgUnit: orgUnitId, enrolledAt } =
         enrollments
             .filter(({ program }) => program === currentProgramId)
             .filter(({ status }) => status === enrollmentType)
             .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0]
         || {};
 
-    return { orgUnitName, enrolledAt };
+    return { orgUnitId, enrolledAt };
 };
 
 const deriveProgramFromEnrollment = (enrollments, currentSearchScopeType) => {
@@ -137,7 +138,8 @@ const CardListItemIndex = ({
 }: Props) => {
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
-    const { orgUnitName, enrolledAt } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
+    const { orgUnitId, enrolledAt } = deriveEnrollmentOrgUnitIdAndDate(enrollments, enrollmentType, currentProgramId);
+    const { displayName: orgUnitName } = useOrgUnitName(orgUnitId);
     const program = enrollments && enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
         : undefined;
