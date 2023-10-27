@@ -8,7 +8,8 @@ import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
+import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
+import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { withSaveHandler } from '../../DataEntry';
@@ -54,7 +55,9 @@ const TeiRegistrationEntryPlain =
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
-      const orgUnit = useCurrentOrgUnitInfo();
+      const orgUnitId = useCurrentOrgUnitId();
+      const { orgUnit } = useCoreOrgUnit(orgUnitId); // Tony: [DHIS2-15814] Change this to new hook
+      const orgUnitName = orgUnit ? orgUnit.name : '';
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
@@ -68,9 +71,9 @@ const TeiRegistrationEntryPlain =
           const url =
             scopeType === scopeTypes.TRACKER_PROGRAM
                 ?
-                buildUrlQueryString({ programId: selectedScopeId, orgUnitId: orgUnit.id })
+                buildUrlQueryString({ programId: selectedScopeId, orgUnitId })
                 :
-                buildUrlQueryString({ orgUnitId: orgUnit.id });
+                buildUrlQueryString({ orgUnitId });
           return push(`/?${url}`);
       };
 
@@ -79,9 +82,8 @@ const TeiRegistrationEntryPlain =
               {
                   scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
                   <>
-                      {/* $FlowFixMe */}
                       <TrackedEntityInstanceDataEntry
-                          orgUnit={orgUnit}
+                          orgUnitId={orgUnitId}
                           formFoundation={formFoundation}
                           trackedEntityTypeId={selectedScopeId}
                           teiRegistrationMetadata={teiRegistrationMetadata}
@@ -114,7 +116,7 @@ const TeiRegistrationEntryPlain =
                           </Button>
                       </div>
                       <InfoIconText>
-                          {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
+                          {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnitName)}
                       </InfoIconText>
 
                       <DiscardDialog
