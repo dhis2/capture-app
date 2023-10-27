@@ -50,10 +50,11 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
         };
     }
 
-    onBlur = (event: SyntheticFocusEvent<HTMLInputElement>, value: any) => {
+    onBlur = (event: SyntheticFocusEvent<HTMLInputElement>) => {
         if (!this.state.refList.includes(event.relatedTarget)) {
             this.props.keyboardManager.clear();
-            this.props.onSelect(value);
+            const foundRef = this.state.refList.find(ref => ref.checked);
+            this.props.onSelect(foundRef ? foundRef.value : null);
         }
     }
 
