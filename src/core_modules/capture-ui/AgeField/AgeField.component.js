@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton } from 'capture-ui';
 import { IconCross24 } from '@dhis2/ui';
 import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
 import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
@@ -249,7 +249,7 @@ class D2AgeFieldPlain extends Component<Props> {
                 {this.renderNumberInput(currentValues, 'months', 'Months')}
                 {this.renderNumberInput(currentValues, 'days', 'Days')}
                 <div className={ageClearClass}>
-                    <IconButton style={{ width: 42, height: 42 }} disabled={!!disabled} onClick={this.onClear}>
+                    <IconButton disabled={!!disabled} onClick={this.onClear}>
                         <IconCross24 />
                     </IconButton>
 
