@@ -28,6 +28,10 @@ type Props = {
     mutate: (data: any) => Promise<any>
 }
 
+type State = {
+    fileSelectorOpen: boolean,
+};
+
 const styles = theme => ({
     horizontalContainer: {
         display: 'flex',
@@ -74,10 +78,18 @@ const styles = theme => ({
     },
 });
 
-class D2FilePlain extends Component<Props> {
+class D2FilePlain extends Component<Props, State> {
     hiddenFileSelectorRef: any;
+    fileSelectorOpen: boolean;
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            fileSelectorOpen: false,
+        };
+    }
 
     handleFileChange = (e: Object) => {
+        this.setState((state) => { state.fileSelectorOpen = false; });
         e.preventDefault();
         const file = e.target.files[0];
         e.target.value = null;
@@ -100,6 +112,11 @@ class D2FilePlain extends Component<Props> {
     }
     handleButtonClick = () => {
         this.hiddenFileSelectorRef.click();
+        this.setState((state) => { state.fileSelectorOpen = true; });
+    }
+
+    handleCancel = () => {
+        this.setState((state) => { state.fileSelectorOpen = false; });
     }
 
     handleRemoveClick = () => {
@@ -107,7 +124,9 @@ class D2FilePlain extends Component<Props> {
     }
 
     handleBlur = () => {
-        this.props.onBlur(this.getFileUrl());
+        if (!this.state.fileSelectorOpen) {
+            this.props.onBlur(this.getFileUrl());
+        }
     }
 
     getFileUrl = () => {
@@ -134,6 +153,7 @@ class D2FilePlain extends Component<Props> {
                         this.hiddenFileSelectorRef = hiddenFileSelector;
                     }}
                     onChange={e => this.handleFileChange(e)}
+                    onCancel={this.handleCancel} // eslint-disable-line react/no-unknown-property
                 />
                 {
                     (() => {

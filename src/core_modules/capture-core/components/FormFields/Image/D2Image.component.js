@@ -27,6 +27,10 @@ type Props = {
     mutate: (data: any) => Promise<any>
 }
 
+type State = {
+    imageSelectorOpen: boolean,
+};
+
 const styles = theme => ({
     horizontalContainer: {
         display: 'flex',
@@ -72,10 +76,18 @@ const styles = theme => ({
     },
 });
 
-class D2ImagePlain extends Component<Props> {
+class D2ImagePlain extends Component<Props, State> {
     hiddenimageSelectorRef: any;
+    imageSelectorOpen: boolean;
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            imageSelectorOpen: false,
+        };
+    }
 
     handleImageChange = (e: Object) => {
+        this.setState((state) => { state.imageSelectorOpen = false; });
         e.preventDefault();
         const image = e.target.files[0];
         e.target.value = null;
@@ -98,6 +110,11 @@ class D2ImagePlain extends Component<Props> {
     }
     handleButtonClick = () => {
         this.hiddenimageSelectorRef.click();
+        this.setState((state) => { state.imageSelectorOpen = true; });
+    }
+
+    handleCancel = () => {
+        this.setState((state) => { state.imageSelectorOpen = false; });
     }
 
     handleRemoveClick = () => {
@@ -105,7 +122,9 @@ class D2ImagePlain extends Component<Props> {
     }
 
     handleBlur = () => {
-        this.props.onBlur(this.getImageUrl());
+        if (!this.state.imageSelectorOpen) {
+            this.props.onBlur(this.getImageUrl());
+        }
     }
 
     getImageUrl = () => {
@@ -135,6 +154,7 @@ class D2ImagePlain extends Component<Props> {
                         this.hiddenimageSelectorRef = hiddenimageSelector;
                     }}
                     onChange={e => this.handleImageChange(e)}
+                    onCancel={this.handleCancel} // eslint-disable-line react/no-unknown-property
                 />
                 {
                     (() => {
