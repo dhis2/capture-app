@@ -85,7 +85,7 @@ export const WidgetEnrollmentPlain = ({
                 )}
                 {loading && <LoadingMaskElementCenter />}
                 {!initError && !loading && (
-                    <div className={classes.enrollment}>
+                    <div className={classes.enrollment} data-test="widget-enrollment-contents">
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag className={classes.followup} negative>
