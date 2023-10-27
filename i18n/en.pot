@@ -1404,9 +1404,6 @@ msgstr "Working list could not be loaded"
 msgid "Download as JSON"
 msgstr "Download as JSON"
 
-msgid "Download as XML"
-msgstr "Download as XML"
-
 msgid "Download as CSV"
 msgstr "Download as CSV"
 
