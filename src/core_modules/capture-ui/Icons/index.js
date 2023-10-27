@@ -6,4 +6,5 @@ export { MultiSelectionUncheckedIcon } from './MultiSelectionUncheckedIcon.compo
 export { SingleSelectionCheckedIcon } from './SingleSelectionCheckedIcon.component';
 export { SingleSelectionUncheckedIcon } from './SingleSelectionUncheckedIcon.component';
 export { BookmarkAddIcon } from './BookmarkAddIcon.component';
+export { ChevronIcon } from './ChevronIcon.component';
 
