@@ -21,6 +21,7 @@ export type Stage = {
     description?: ?string,
     icon?: Icon,
     dataElements: Array<StageDataElement>,
+    enableUserAssignment: boolean,
     hideDueDate?: boolean,
     repeatable?: boolean
 }

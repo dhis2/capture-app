@@ -8,7 +8,7 @@ const query = {
         id: ({ id }) => id,
         params: {
             fields:
-            ['programStages[id,repeatable,hideDueDate,programStageDataElements[displayInReports,dataElement[id,valueType,displayName,displayFormName,optionSet[options[code,name]]]'],
+            ['programStages[id,repeatable,hideDueDate,enableUserAssignment,programStageDataElements[displayInReports,dataElement[id,valueType,displayName,displayFormName,optionSet[options[code,name]]]'],
         },
     },
 };
