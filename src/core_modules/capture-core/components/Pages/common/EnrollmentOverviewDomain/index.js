@@ -3,6 +3,8 @@ export type { HideWidgets, WidgetEffects } from './enrollmentOverviewDomain.type
 export {
     enrollmentSiteActionTypes,
     updateEnrollmentEvent,
+    updateEnrollmentDate,
+    updateIncidentDate,
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
     addEnrollmentEvents,
@@ -10,3 +12,4 @@ export {
     showEnrollmentError,
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';
+export { useRuleEffects } from './useRuleEffects';

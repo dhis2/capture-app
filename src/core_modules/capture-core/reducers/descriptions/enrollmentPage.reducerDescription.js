@@ -20,6 +20,7 @@ const {
     MISSING_MESSAGE_VIEW,
     DELETE_ENROLLMENT,
     UPDATE_TEI_DISPLAY_NAME,
+    UPDATE_ENROLLMENT_DATE,
 } = enrollmentPageActionTypes;
 
 export const enrollmentPageDesc = createReducerDescription({
@@ -73,6 +74,16 @@ export const enrollmentPageDesc = createReducerDescription({
            ...state,
            teiDisplayName,
        }),
+    [UPDATE_ENROLLMENT_DATE]:
+        (state, { payload: { enrollmentId, enrollmentDate } }) => ({
+            ...state,
+            enrollments: state.enrollments.map((enrollment) => {
+                if (enrollment.enrollment === enrollmentId) {
+                    enrollment.enrolledAt = enrollmentDate;
+                }
+                return enrollment;
+            }),
+        }),
     [PAGE_CLEAN]: () => initialReducerValue,
     [DELETE_ENROLLMENT]: (state, { payload: { enrollmentId } }) => ({
         ...state,
@@ -82,4 +93,5 @@ export const enrollmentPageDesc = createReducerDescription({
             ),
         ],
     }),
+
 }, 'enrollmentPage', initialReducerValue);

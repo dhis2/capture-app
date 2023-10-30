@@ -8,6 +8,8 @@ type Translation = {
     value: string,
 };
 
+export type CachedAttributeValue = { attribute: { id: string }, value: any };
+
 export type CachedOptionTranslation = Translation;
 
 export type CachedOptionSetTranslation = Translation;
@@ -17,6 +19,7 @@ export type CachedAttributeTranslation = Translation;
 export type CachedTrackedEntityAttribute = {
     id: string,
     displayName: string,
+    code: string,
     displayShortName: string,
     displayFormName: string,
     description: string,
@@ -27,6 +30,7 @@ export type CachedTrackedEntityAttribute = {
     unique: ?boolean,
     orgunitScope: ?boolean,
     pattern: ?string,
+    attributeValues: Array<CachedAttributeValue>
 }
 
 export type CachedProgramTrackedEntityAttribute = {
@@ -52,6 +56,7 @@ export type CachedStyle = {
 export type CachedDataElement = {
     id: string,
     displayName: string,
+    code: string,
     displayShortName: string,
     displayFormName: string,
     valueType: string,
@@ -61,6 +66,7 @@ export type CachedDataElement = {
     optionSet: { id: string },
     style: CachedStyle,
     url: string,
+    attributeValues: Array<CachedAttributeValue>
 };
 
 export type CachedProgramStageDataElement = {
@@ -113,6 +119,7 @@ export type CachedProgramStage = {
     generatedByEnrollmentDate?: ?boolean,
     hideDueDate?: ?boolean,
     reportDateToUse: string,
+    repeatable: boolean,
     minDaysFromStart: number,
     style?: ?CachedStyle,
 };
@@ -198,6 +205,7 @@ export type CachedProgram = {
     selectIncidentDatesInFuture: boolean,
     displayIncidentDate: boolean,
     onlyEnrollOnce: boolean,
+    useFirstStageDuringRegistration: boolean,
 };
 
 export type CachedProgramStageDataElementsAsObject = {
@@ -210,6 +218,7 @@ export type CachedOption = {
     displayName: string,
     style?: ?CachedStyle,
     translations: Array<CachedOptionTranslation>,
+    attributeValues: Array<CachedAttributeValue>,
 };
 
 export type CachedOptionGroup = {
@@ -221,10 +230,12 @@ export type CachedOptionGroup = {
 export type CachedOptionSet = {
     id: string,
     displayName: string,
+    code: string,
     valueType: string,
     options: Array<CachedOption>,
     optionGroups: Array<CachedOptionGroup>,
     translations: Array<CachedOptionSetTranslation>,
+    attributeValues: Array<CachedAttributeValue>,
 };
 
 export type CachedRelationshipConstraint = {
@@ -241,3 +252,5 @@ export type CachedRelationshipType = {
     fromConstraint: CachedRelationshipConstraint,
     toConstraint: CachedRelationshipConstraint,
 }
+
+export type CachedRelationshipTypes = Array<CachedRelationshipType>;

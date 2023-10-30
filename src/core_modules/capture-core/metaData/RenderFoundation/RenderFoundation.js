@@ -4,11 +4,13 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
-import type { Section } from './Section';
-import type { DataElement, ConvertFn } from '../DataElement/DataElement';
+import { Section } from './Section';
+import type { ConvertFn } from '../DataElement/DataElement';
 import type { Access } from '../Access';
 import { convertDataElementsValues } from '../helpers';
 import type { ValuesType } from '../helpers/DataElements/convertValues';
+import { DataElement } from '../DataElement';
+import { FormFieldPluginConfig } from '../FormFieldPluginConfig';
 
 export class RenderFoundation {
     static errorMessages = {
@@ -120,7 +122,17 @@ export class RenderFoundation {
     getElements(): Array<DataElement> {
         return Array.from(this.sections.entries()).map(entry => entry[1])
             .reduce((accElements, section) => {
-                const elementsInSection = Array.from(section.elements.entries()).map(entry => entry[1]);
+                const elementsInSection = Array.from(section.elements.entries())
+                    .reduce((acc, entry) => {
+                        const dataEntryElement = entry[1];
+                        if (dataEntryElement instanceof FormFieldPluginConfig) {
+                            acc.push(...Array.from(dataEntryElement.fields.entries())
+                                .map(fieldEntry => fieldEntry[1]));
+                        } else if (dataEntryElement instanceof DataElement) {
+                            acc.push(dataEntryElement);
+                        }
+                        return acc;
+                    }, []);
                 return [...accElements, ...elementsInSection];
             }, []);
     }
@@ -130,7 +142,17 @@ export class RenderFoundation {
             .reduce((accElements, section) => {
                 const elementsInSection =
                     Array.from(section.elements.entries()).reduce((accElementsInSection, elementEntry) => {
-                        accElementsInSection[elementEntry[0]] = elementEntry[1];
+                        const dataEntryElement = elementEntry[1];
+                        if (dataEntryElement instanceof FormFieldPluginConfig) {
+                            accElementsInSection[dataEntryElement.id] = Array.from(dataEntryElement.fields.entries())
+                                .reduce((accFields, fieldEntry) => {
+                                    const field = fieldEntry[1];
+                                    accFields[field.id] = field;
+                                    return accFields;
+                                }, {});
+                        } else if (dataEntryElement instanceof DataElement) {
+                            accElementsInSection[elementEntry[0]] = dataEntryElement;
+                        }
                         return accElementsInSection;
                     }, {});
                 return { ...accElements, ...elementsInSection };
@@ -140,5 +162,21 @@ export class RenderFoundation {
     convertValues<T: ?ValuesType | Array<ValuesType>>(values: T, onConvert: ConvertFn): T {
         const dataElements = this.getElements();
         return convertDataElementsValues(values, dataElements, onConvert);
+    }
+
+    convertAndGroupBySection(currentFormData: {[id: string]: any}, onConvert: ConvertFn) {
+        const metaElements = [...this.getElements().values()];
+
+        return Object.keys(currentFormData).reduce((acc, id) => {
+            const metaElement = metaElements.find(o => o.id === id);
+            const rawValue = currentFormData[id];
+            const convertedValue = metaElement ? metaElement.convertValue(rawValue, onConvert) : rawValue;
+            const group = metaElement?.section?.group;
+            if (group) {
+                acc[group] = { ...acc[group], [id]: convertedValue };
+                return acc;
+            }
+            return { ...acc, [id]: convertedValue };
+        }, {});
     }
 }

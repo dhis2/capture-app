@@ -67,12 +67,8 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
 
 const getEventsMetaDataConfig = (programStage): Array<MetadataColumnConfig> => {
     const stageForm = programStage.stageForm;
-    const sections = stageForm?.sections ? [...stageForm.sections?.values()] : [];
-
-    return sections.reduce((acc, section) => {
-        const dataElements = [...section.elements.values()];
-        return [...acc, ...getDataValuesMetaDataConfig(dataElements)];
-    }, []);
+    const dataElements = stageForm ? [...stageForm?.getElements()] : [];
+    return getDataValuesMetaDataConfig(dataElements);
 };
 
 const getTEIMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: ?string): Array<MetadataColumnConfig> =>

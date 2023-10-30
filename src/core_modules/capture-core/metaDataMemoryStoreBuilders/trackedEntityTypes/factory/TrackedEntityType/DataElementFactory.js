@@ -18,6 +18,8 @@ import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import type { ConstructorInput } from './dataElementFactory.types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { isNotValidOptionSet } from '../../../../utils/isNotValidOptionSet';
+import { escapeString } from '../../../../utils/escapeString';
 
 export class DataElementFactory {
     static translationPropertyNames = {
@@ -29,6 +31,8 @@ export class DataElementFactory {
 
     static errorMessages = {
         TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'TrackedEntityAttributeId missing from trackedEntityTypeAttribute or trackedEntityAttribute not found',
+        MULIT_TEXT_WITH_NO_OPTIONS_SET:
+            'could not create the metadata because a MULIT_TEXT without associated option sets was found',
     };
 
     static buildtetFeatureType(featureType: 'POINT' | 'POLYGON') {
@@ -90,6 +94,7 @@ export class DataElementFactory {
         const dataElement = new DataElement((o) => {
             o.id = cachedAttribute.id;
             o.compulsory = cachedTrackedEntityTypeAttribute.mandatory;
+            o.code = cachedAttribute.code;
             o.name =
                 this._getAttributeTranslation(
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.NAME) ||
@@ -147,7 +152,7 @@ export class DataElementFactory {
                             params: {
                                 trackedEntityType: contextProps.trackedEntityTypeId,
                                 orgUnit: orgUnitId,
-                                filter: `${dataElement.id}:EQ:${serverValue}`,
+                                filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                             },
                         });
                     } else {
@@ -156,7 +161,7 @@ export class DataElementFactory {
                             params: {
                                 trackedEntityType: contextProps.trackedEntityTypeId,
                                 ouMode: 'ACCESSIBLE',
-                                filter: `${dataElement.id}:EQ:${serverValue}`,
+                                filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                             },
                         });
                     }
@@ -190,6 +195,12 @@ export class DataElementFactory {
                 null,
                 value => value,
             );
+            if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
+                log.error(
+                    errorCreator(DataElementFactory.errorMessages.MULIT_TEXT_WITH_NO_OPTIONS_SET)({ dataElement }),
+                );
+                return null;
+            }
         }
 
         return dataElement;

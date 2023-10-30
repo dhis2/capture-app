@@ -3,10 +3,10 @@
 import * as React from 'react';
 import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
 import { withStyles } from '@material-ui/core';
-import { colors, spacersNum, Tooltip, Menu, MenuItem } from '@dhis2/ui';
+import { colors, spacersNum, Menu, MenuItem, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withFocusSaver } from 'capture-ui';
-import { Button } from '../Buttons';
+import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
 import { TextField } from '../FormFields/New';
 import type { Note } from './notes.types';
 
@@ -182,26 +182,18 @@ class NotesPlain extends React.Component<Props, State> {
                 className={classes.newNoteButtonContainer}
                 data-test="new-comment-button"
             >
-                <Button
-                    onClick={this.toggleIsOpen}
-                    disabled={!canAddComment}
-                    small={smallMainButton}
+                <ConditionalTooltip
+                    content={i18n.t('You don\'t have access to write comments')}
+                    enabled={!canAddComment}
                 >
-                    <Tooltip content={i18n.t('You don\'t have access to write comments')}>
-                        {({ onMouseOver, onMouseOut, ref }) => (
-                            <div ref={(divRef) => {
-                                if (divRef && !canAddComment) {
-                                    divRef.onmouseover = onMouseOver;
-                                    divRef.onmouseout = onMouseOut;
-                                    ref.current = divRef;
-                                }
-                            }}
-                            >
-                                {i18n.t('Write comment')}
-                            </div>
-                        )}
-                    </Tooltip>
-                </Button>
+                    <Button
+                        onClick={this.toggleIsOpen}
+                        disabled={!canAddComment}
+                        small={smallMainButton}
+                    >
+                        {i18n.t('Write comment')}
+                    </Button>
+                </ConditionalTooltip>
             </div>
         );
     }

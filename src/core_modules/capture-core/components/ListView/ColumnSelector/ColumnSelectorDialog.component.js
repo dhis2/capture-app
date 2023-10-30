@@ -1,13 +1,11 @@
 // @flow
 import React, { useState, useEffect } from 'react';
 import { isEqual } from 'lodash';
+import { Button } from '@dhis2/ui';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
-import Button from '@material-ui/core/Button';
-
 import i18n from '@dhis2/d2-i18n';
 
 import { DragDropList } from './DragDropList';
@@ -54,7 +52,7 @@ export const ColumnSelectorDialog = ({ columns, open, onClose, onSave }: Props) 
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleSave} color="primary" autoFocus>
+                    <Button onClick={handleSave} primary initialFocus>
                         {i18n.t('Save')}
                     </Button>
                 </DialogActions>

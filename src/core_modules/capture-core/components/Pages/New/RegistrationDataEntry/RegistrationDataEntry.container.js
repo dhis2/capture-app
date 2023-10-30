@@ -26,15 +26,15 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
     const { teiId } = useLocationQuery();
 
     const dispatchOnSaveWithoutEnrollment = useCallback(
-        (formFoundation) => { dispatch(startSavingNewTrackedEntityInstance(formFoundation)); },
+        (teiPayload) => { dispatch(startSavingNewTrackedEntityInstance(teiPayload)); },
         [dispatch]);
 
     const dispatchOnSaveWithEnrollment = useCallback(
-        (formFoundation) => {
+        (enrollmentPayload) => {
             const uid = uuid();
-            dispatch(startSavingNewTrackedEntityInstanceWithEnrollment(formFoundation, teiId, uid));
+            dispatch(startSavingNewTrackedEntityInstanceWithEnrollment(enrollmentPayload, uid));
         },
-        [dispatch, teiId]);
+        [dispatch]);
 
     const dataEntryIsReady = useSelector(({ dataEntries }) => (!!dataEntries[dataEntryId]));
 

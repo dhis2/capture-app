@@ -47,6 +47,7 @@ import {
     withAOCFieldBuilder,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers/';
+import { getProgramThrowIfNotFound, EventProgram } from '../../../metaData';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -345,6 +346,13 @@ const getCategoryOptionsSettingsFn = () => {
     return categoryOptionsSettings;
 };
 
+const AOCSettings = {
+    hideAOC: ({ programId }) => {
+        const program = getProgramThrowIfNotFound(programId);
+        return program instanceof EventProgram;
+    },
+};
+
 const saveHandlerConfig = {
     onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
     onFilterProps: (props: Object) => {
@@ -353,7 +361,7 @@ const saveHandlerConfig = {
     },
 };
 
-const AOCFieldBuilderHOC = withAOCFieldBuilder({})(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
+const AOCFieldBuilderHOC = withAOCFieldBuilder(AOCSettings)(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
 const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
@@ -386,7 +394,7 @@ type Props = {
     },
     theme: Theme,
     dataEntryId: string,
-    onCancelEditEvent?: () => void,
+    onCancelEditEvent?: (isScheduled: boolean) => void,
     eventStatus?: string,
     enrollmentId?: string,
     isCompleted?: boolean,

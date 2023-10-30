@@ -203,8 +203,12 @@ You can set multiple program stages within a program to be auto-generating (this
 A program can be configured to automatically take the user to register a new event immediately after enrolling a tracked entity instance. To enable this behavior, the program must have at least one program stage with the "Open data entry form after registration" option checked. If more than one program stage has this option enabled, the first stage will be used.
 
 To configure it, you must follow the steps described in the [Enrollment with auto generated events](#enrollment-with-auto-generated-events) section and then check the option "Open data entry form after enrollment".
- 
-![](resources/images/open-data-entry-form-after-enrollment.png)
+
+### Enrollment with first stage on registration page
+
+For tracker programs enable the "First stage appears on registration page" flag in the Maintenance. The enrollment registration page will now display the first program stage the user has access to.
+
+![](resources/images/first-stage-during-registration.png)
 
 #### Active type of event
 
@@ -981,6 +985,39 @@ You can delete the enrollment by clicking the delete button and confirming the a
 The enrollment comment widget displays comments and allows addition of comments, associated with the current enrollment. 
 
 By clicking in the text field, you will be able to enter new text and see action buttons **Save comment** and **Cancel**. Note that Enrollment comments are attributed to a user and cannot be deleted. 
+
+### Relationship widget
+
+The Relationships widget on the enrollment dashboard is used for viewing the record’s linked relationships to other records.
+The number next to the title signifies the total number of relationships
+
+![](resources/images/enrollment-dash-relationship-widget.png)
+
+For tracked entity instance relationships, the key attributes shown in the widget are the attributes that have been selected to be displayed on the relationship type page in Maintenance.
+
+If no attributes are selected, it will just show a row per record with tracked entity type name and relationship creation date.
+
+When clicking a tracked entity instance you should be taken to the Enrollment Dashboard. If the relationship type includes a program, you should be taken to the latest enrollment for that program. If no program is specified, you should still be sent to the enrollment dashboard, but without a program.
+
+Click the **Add new** button to add a new relationship. Adding a new relationship opens a dialog where you can select the applicable relationship type.
+
+![](resources/images/enrollment-dash-relationship-widget-add.png)
+
+Choose between linking to an existing tracked entity instance or creating a new one.
+
+![](resources/images/enrollment-dash-relationship-widget-add-choose.png)
+
+#### Existing tracked entity instance
+
+Use the search form to find any existing record to link to.
+
+![](resources/images/enrollment-dash-relationship-widget-add-existing.png)
+
+#### New tracked entity instance
+
+Use the form to create a new record and link.
+
+![](resources/images/enrollment-dash-relationship-widget-add-new.png)
 
 ### Tracked entity instance profile widget
 

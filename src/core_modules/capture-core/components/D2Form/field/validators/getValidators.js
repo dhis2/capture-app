@@ -32,7 +32,7 @@ import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 type Validator = (value: any) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any};
 
-type ValidatorContainer = {
+export type ValidatorContainer = {
     validator: Validator,
     message: string,
     type?: string,
@@ -205,7 +205,7 @@ const validatorsForTypes = {
     }],
 };
 
-function buildTypeValidators(metaData: DataElement | DateDataElement): Array<?ValidatorContainer> {
+function buildTypeValidators(metaData: DataElement | DateDataElement): ?Array<ValidatorContainer> {
     // $FlowFixMe dataElementTypes flow error
     let validatorContainersForType = validatorsForTypes[metaData.type] ? validatorsForTypes[metaData.type] : [];
 

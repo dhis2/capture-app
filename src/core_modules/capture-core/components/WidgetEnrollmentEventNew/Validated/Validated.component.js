@@ -55,11 +55,7 @@ const ValidatedPlain = ({
                     onCancel={onCancel}
                     id={id}
                 />
-                <SavingText
-                    programName={programName}
-                    stageName={stage.name}
-                    orgUnitName={orgUnit.name}
-                />
+                <SavingText programName={programName} stageName={stage.name} orgUnitName={orgUnit.name} />
             </div>
         )}
     </Widget>

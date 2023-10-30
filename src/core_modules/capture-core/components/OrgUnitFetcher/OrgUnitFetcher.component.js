@@ -6,13 +6,7 @@ import { fetchOrgUnit } from './OrgUnitFetcher.actions';
 
 export const OrgUnitFetcher = (({ orgUnitId, children, error }: Object) => {
     const dispatch = useDispatch();
-    const { orgUnit } = useSelector(
-        ({
-            organisationUnits,
-        }) => ({
-            orgUnit: organisationUnits[orgUnitId],
-        }),
-    );
+    const orgUnit = useSelector(({ organisationUnits }) => organisationUnits[orgUnitId]);
 
     useEffect(() => {
         if (!orgUnit && orgUnitId) {

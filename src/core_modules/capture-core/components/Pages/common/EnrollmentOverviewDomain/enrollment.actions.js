@@ -4,6 +4,8 @@ import type { EventReducerProps } from '../../../WidgetEnrollment/enrollment.typ
 
 export const enrollmentSiteActionTypes = {
     COMMON_ENROLLMENT_SITE_DATA_SET: 'EnrollmentSite.SetCommonData',
+    UPDATE_ENROLLMENT_DATE: 'Enrollment.UpdateEnrollmentDate',
+    UPDATE_INCIDENT_DATE: 'Enrollment.UpdateIncidentDate',
     UPDATE_ENROLLMENT_EVENT: 'Enrollment.UpdateEnrollmentEvent',
     ADD_ENROLLMENT_EVENTS: 'Enrollment.AddEnrollmentEvents',
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES: 'Enrollment.UpdateEnrollmentAttributeValues',
@@ -17,6 +19,16 @@ export const enrollmentSiteActionTypes = {
 
 export const setCommonEnrollmentSiteData = (enrollment: ApiEnrollment, attributeValues: ApiAttributeValues) =>
     actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({ enrollment, attributeValues });
+
+export const updateEnrollmentDate = (enrollmentDate: string) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_DATE)({
+        enrollmentDate,
+    });
+
+export const updateIncidentDate = (incidentDate: string) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_INCIDENT_DATE)({
+        incidentDate,
+    });
 
 export const updateEnrollmentEvent = (eventId: string, eventData: Object) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENT)({

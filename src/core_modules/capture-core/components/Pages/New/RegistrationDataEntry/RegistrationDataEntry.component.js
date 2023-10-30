@@ -8,7 +8,6 @@ import type { Props } from './RegistrationDataEntry.types';
 import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
@@ -16,6 +15,7 @@ import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
+import { useCurrentOrgUnitId } from '../../../../hooks/useCurrentOrgUnitId';
 
 const getStyles = ({ typography }) => ({
     container: {
@@ -96,8 +96,8 @@ const RegistrationDataEntryPlain = ({
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
+    const currentOrgUnitId = useCurrentOrgUnitId();
 
     const handleRegistrationScopeSelection = (id) => {
         setScopeId(id);
@@ -176,13 +176,14 @@ const RegistrationDataEntryPlain = ({
                             <Grid item md sm={9} xs={9} >
                                 <EnrollmentRegistrationEntryWrapper
                                     id={dataEntryId}
+                                    orgUnitId={currentOrgUnitId}
+                                    teiId={teiId}
                                     selectedScopeId={selectedScopeId}
-                                    enrollmentMetadata={registrationMetaData}
-                                    saveButtonText={i18n.t('Save {{trackedEntityName}}', {
-                                        trackedEntityName,
+                                    onSave={onSaveWithEnrollment}
+                                    saveButtonText={(trackedEntityTypeNameLC: string) => i18n.t('Save {{trackedEntityTypeName}}', {
+                                        trackedEntityTypeName: trackedEntityTypeNameLC,
                                         interpolation: { escapeValue: false },
                                     })}
-                                    onSave={() => onSaveWithEnrollment(formFoundation)}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}
@@ -230,12 +231,12 @@ const RegistrationDataEntryPlain = ({
                                 <TeiRegistrationEntry
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
-                                    teiRegistrationMetadata={registrationMetaData}
+                                    orgUnitId={currentOrgUnitId}
                                     saveButtonText={i18n.t('Save {{trackedEntityName}}', {
                                         trackedEntityName,
                                         interpolation: { escapeValue: false },
                                     })}
-                                    onSave={() => onSaveWithoutEnrollment(formFoundation)}
+                                    onSave={onSaveWithoutEnrollment}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}

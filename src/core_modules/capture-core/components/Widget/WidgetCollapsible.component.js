@@ -39,7 +39,6 @@ const styles = {
         borderColor: colors.grey400,
         borderWidth: 1,
         borderTopWidth: 0,
-        overflow: 'hidden',
         '&.open': {
             animation: 'slidein 200ms normal forwards ease-in-out',
             transformOrigin: '50% 0%',

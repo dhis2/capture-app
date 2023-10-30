@@ -1,16 +1,16 @@
 # 
 # Translators:
-# phil_dhis2, 2022
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
+# Philip Larsen Donnelly, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
+"Last-Translator: Philip Larsen Donnelly, 2023\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,6 +74,16 @@ msgstr "Ngày đăng ký"
 
 msgid "Last updated"
 msgstr "Lần cập nhật cuối"
+
+msgid "error encountered during field validation"
+msgstr "gặp lỗi trong quá trình xác thực trường"
+
+msgid "error"
+msgstr "lỗi"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "Giá trị này đang xác thực"
@@ -150,6 +160,15 @@ msgstr "Tọa độ"
 msgid "Enrollment"
 msgstr "Đăng ký"
 
+msgid "Complete event"
+msgstr "Hoàn tất chương trình"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -168,14 +187,17 @@ msgstr "Hủy"
 msgid "Metadata error. see log for details"
 msgstr "Lỗi siêu dữ liệu. xem nhật ký để biết chi tiết"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Người dùng được chỉ định"
 
 msgid "Search for user"
 msgstr "Tìm kiếm người dùng"
-
-msgid "Complete event"
-msgstr "Hoàn tất chương trình"
 
 msgid "Basic info"
 msgstr "Thông tin cơ bản"
@@ -261,8 +283,8 @@ msgstr "Thêm kiểu quan hệ vào sự kiện."
 msgid "Go back to event without saving relationship"
 msgstr "Quay lại sự kiện mà không lưu mối quan hệ"
 
-msgid "Unsaved changes"
-msgstr "Các thay đổi chưa được lưu"
+msgid "Discard unsaved changes?"
+msgstr "Hủy bỏ các thay đổi?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -271,11 +293,11 @@ msgstr ""
 "Rời khỏi trang này sẽ hủy các lựa chọn bạn đã thực hiện cho một mối quan hệ "
 "mới"
 
-msgid "Yes, discard"
-msgstr "Có, loại bỏ"
+msgid "Yes, discard changes"
+msgstr ""
 
-msgid "No, stay here"
-msgstr "Không, ở lại đây"
+msgid "No, cancel"
+msgstr "Không"
 
 msgid "New event"
 msgstr "Sự kiện mới"
@@ -348,21 +370,8 @@ msgstr "Tạo sự kiện mới"
 msgid "Do you want to create another event?"
 msgstr "Bạn có muốn tạo một sự kiện khác không?"
 
-msgid "No, cancel"
-msgstr "Không"
-
 msgid "Yes, create new event"
 msgstr ""
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Rời khỏi trang ngày sẽ hủy các thay đổi bạn đã thực hiện cho sự kiện này."
-
-msgid "Warnings found"
-msgstr "Cảnh báo đã tìm thấy"
-
-msgid "Abort"
-msgstr "Hủy bỏ"
 
 msgid "Back to form"
 msgstr "Quay lại biểu mẫu"
@@ -385,8 +394,10 @@ msgstr "Một số hoạt động vẫn đang chạy. Vui lòng đợi .."
 msgid "Operations running"
 msgstr "Hoạt động đang chạy"
 
-msgid "Sort"
-msgstr "Sắp xếp"
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr "Không có sự kiện để hiển thị"
@@ -496,6 +507,12 @@ msgstr "Đang tải ảnh lên"
 msgid "Select image"
 msgstr "Chọn ảnh"
 
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
+msgstr ""
+
 msgid "Search"
 msgstr "Tìm kiếm"
 
@@ -592,10 +609,40 @@ msgstr ""
 msgid "Write comment"
 msgstr "Viết bình luận"
 
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
+
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
 
 msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
 msgstr ""
 
 msgid "Yes, opt in"
@@ -731,7 +778,7 @@ msgstr "Lịch biểu"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -793,6 +840,9 @@ msgid ""
 msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
@@ -892,6 +942,18 @@ msgstr "Không thể tải sự kiện"
 msgid "Organisation unit could not be loaded"
 msgstr "Không thể tải đơn vị"
 
+msgid "Selected program"
+msgstr "Chương trình đã chọn"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Tìm kiếm {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Tìm kiếm theo thuộc tính"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Có thể tìm thấy các bản sao"
 
@@ -952,18 +1014,11 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr "Chọn một loại để bắt đầu tìm kiếm"
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-
 msgid "Search {{name}}"
 msgstr "Tim kiêm {{name}}"
 
 msgid "Search by {{name}}"
 msgstr ""
-
-msgid "Search by attributes"
-msgstr "Tìm kiếm theo thuộc tính"
 
 msgid "all programs"
 msgstr ""
@@ -1019,12 +1074,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr "Kết quả tìm thấy"
-
-msgid "Selected program"
-msgstr "Chương trình đã chọn"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Tìm kiếm {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1111,6 +1160,9 @@ msgstr ""
 
 msgid "Mark for follow-up"
 msgstr "Đánh dấu để theo-dõi"
+
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
 
 msgid "Enrollment date"
 msgstr "Ngày ghi vào"
@@ -1249,9 +1301,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "thực thể được theo dõi"
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1264,10 +1313,13 @@ msgstr ""
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
+msgid "tracked entity instance"
+msgstr "thực thể được theo dõi"
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
-msgid "This event is not yet preserved and cannot be edited"
+msgid "To open this event, please wait until saving is complete"
 msgstr ""
 
 msgid "Show {{ rest }} more"
@@ -1297,14 +1349,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Loại"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Tên giai đoạn chương trình"
+
 msgid "Working list could not be loaded"
 msgstr "Không thể tải danh sách làm việc"
 
 msgid "Download as JSON"
 msgstr "Tải về dạng JSON"
-
-msgid "Download as XML"
-msgstr "Tải về dạng XML"
 
 msgid "Download as CSV"
 msgstr "Tải xuống với CSV"
@@ -1318,6 +1404,9 @@ msgstr "Tải xuống dữ liệu ..."
 msgid "an error occurred loading working lists"
 msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
 
+msgid "Assigned to"
+msgstr "Đã gán cho"
+
 msgid "Registration Date"
 msgstr "Ngày đăng ký"
 
@@ -1327,10 +1416,16 @@ msgstr "Không kích hoạt"
 msgid "Enrollment status"
 msgstr "Trạng thái đăng ký"
 
-msgid "Assigned to"
-msgstr "Đã gán cho"
-
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1444,9 +1539,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "Đặt tọa độ"
 
-msgid "Page {{currentPage}}"
-msgstr "Trang {{currentPage}}"
-
 msgid "Date"
 msgstr "Ngày"
 
@@ -1465,17 +1557,17 @@ msgstr "Đến ngày"
 msgid "To time"
 msgstr "Đến "
 
-msgid "error encountered during field validation"
-msgstr "gặp lỗi trong quá trình xác thực trường"
-
-msgid "error"
-msgstr "lỗi"
+msgid "Page {{currentPage}}"
+msgstr "Trang {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "Xóa đa giác"
 
 msgid "Set area"
 msgstr "Đặt khu vực"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "Chế độ tương thích"

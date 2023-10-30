@@ -5,7 +5,7 @@ import log from 'loglevel';
 import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator, buildUrl } from 'capture-core-utils';
-import { dataElementTypes } from '../../../../../../metaData';
+import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../../../metaData';
 import type { StageDataElement } from '../../../../types/common.types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
@@ -15,7 +15,8 @@ import {
     getValueByKeyFromEvent,
     groupRecordsByType,
 } from './helpers';
-import { SORT_DIRECTION } from './constants';
+import { SORT_DIRECTION, MULIT_TEXT_WITH_NO_OPTIONS_SET } from './constants';
+import { isNotValidOptionSet } from '../../../../../../utils/isNotValidOptionSet';
 
 const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'comments' }];
 const basedFieldTypes = [
@@ -112,9 +113,13 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
 const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, formFoundation: Object) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
-            const { id, name, type } = currDataElement;
+            const { id, name, formName, type, optionSet } = currDataElement;
             if (!acc.find(item => item.id === id)) {
-                acc.push({ id, header: name, type, sortDirection: SORT_DIRECTION.DEFAULT });
+                if (isNotValidOptionSet(type, optionSet)) {
+                    log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ currDataElement }));
+                    return acc;
+                }
+                acc.push({ id, header: formName || name, type, sortDirection: SORT_DIRECTION.DEFAULT });
             }
             return acc;
         }, []);
@@ -126,16 +131,43 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
     return headerColumns;
 };
 
+const getDataElement = (stageDataElement, type) => {
+    if (!stageDataElement) {
+        return null;
+    }
+
+    const dataElement = new DataElement((o) => {
+        o.id = stageDataElement.id;
+        o.type = type;
+    });
+
+    if (stageDataElement.options) {
+        const options = Object.keys(stageDataElement.options).map(
+            (code: string) =>
+                new Option((o) => {
+                    // $FlowFixMe
+                    o.text = stageDataElement.options[code];
+                    o.value = code;
+                }),
+        );
+        const optionSet = new OptionSet(stageDataElement.id, options);
+        dataElement.optionSet = optionSet;
+    }
+    return dataElement;
+};
+
 const formatRowForView = (row: Object, dataElements: Array<StageDataElement>) => Object.keys(row).reduce((acc, id) => {
     const { type: predefinedType } = baseFields.find(f => f.id === id) || {};
-    const { type } = dataElements.find(el => el.id === id) || {};
+    const stageDataElement = dataElements.find(el => el.id === id);
+    const { type } = stageDataElement || {};
     const value = row[id];
     if (predefinedType) {
         acc[id] = convertClientToList(value, predefinedType);
     } else if (!type) {
         acc[id] = value;
     } else {
-        acc[id] = convertClientToList(value, type);
+        const dataElement = getDataElement(stageDataElement, type);
+        acc[id] = convertClientToList(value, type, dataElement);
     }
     return acc;
 }, {});

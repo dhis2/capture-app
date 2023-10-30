@@ -1,16 +1,16 @@
 # 
 # Translators:
-# phil_dhis2, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
 # Saysamone Sibounma, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
+# Philip Larsen Donnelly, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-15T10:06:53.276Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
+"Last-Translator: Philip Larsen Donnelly, 2023\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,6 +68,16 @@ msgstr "Date of enrollment"
 
 msgid "Last updated"
 msgstr "ປັບປຸງ​ຄັ້ງຫລ້າສຸດ"
+
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr ""
@@ -144,6 +154,15 @@ msgstr "ເສັ້ນສະແດງ"
 msgid "Enrollment"
 msgstr "ການລົງທະບຽນ"
 
+msgid "Complete event"
+msgstr "Complete event"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -162,14 +181,17 @@ msgstr "ຍົກເລີກ"
 msgid "Metadata error. see log for details"
 msgstr ""
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
 msgstr ""
-
-msgid "Complete event"
-msgstr "Complete event"
 
 msgid "Basic info"
 msgstr ""
@@ -253,18 +275,18 @@ msgstr ""
 msgid "Go back to event without saving relationship"
 msgstr ""
 
-msgid "Unsaved changes"
-msgstr ""
+msgid "Discard unsaved changes?"
+msgstr "ຈະລຶບການປ່ຽນແປງທີ່ບໍ່ທັນໄດ້ບັນທຶກບໍ່?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
 
-msgid "Yes, discard"
+msgid "Yes, discard changes"
 msgstr ""
 
-msgid "No, stay here"
+msgid "No, cancel"
 msgstr ""
 
 msgid "New event"
@@ -334,19 +356,7 @@ msgstr "ປ້ອນກໍລະນີໃໝ່"
 msgid "Do you want to create another event?"
 msgstr "ທ່ານຕ້ອງການປ້ອນຂໍ້ມູນກໍລະນີອື່ນບໍ?"
 
-msgid "No, cancel"
-msgstr ""
-
 msgid "Yes, create new event"
-msgstr ""
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-
-msgid "Warnings found"
-msgstr ""
-
-msgid "Abort"
 msgstr ""
 
 msgid "Back to form"
@@ -370,8 +380,10 @@ msgstr ""
 msgid "Operations running"
 msgstr ""
 
-msgid "Sort"
-msgstr "Sort"
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr ""
@@ -470,7 +482,7 @@ msgid "Delete"
 msgstr "ລົບ"
 
 msgid "Select file"
-msgstr ""
+msgstr "ເລືອກຟາຍ"
 
 msgid "No"
 msgstr "ບໍ່ແມນ"
@@ -479,6 +491,12 @@ msgid "Uploading image"
 msgstr ""
 
 msgid "Select image"
+msgstr ""
+
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
 msgstr ""
 
 msgid "Search"
@@ -577,10 +595,40 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
+
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
 
 msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
 msgstr ""
 
 msgid "Yes, opt in"
@@ -716,7 +764,7 @@ msgstr "ກຳນົດເວລາ"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -780,6 +828,9 @@ msgstr ""
 msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr ""
 
+msgid "Save {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Save {{trackedEntityName}}"
 msgstr ""
 
@@ -828,99 +879,8 @@ msgstr ""
 msgid "Register"
 msgstr "ລົົງທະບຽນ"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-
-msgid "Search {{name}}"
-msgstr ""
-
-msgid "Search by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr ""
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-
-msgid "Register a user"
-msgstr ""
-
-msgid "Back to search"
-msgstr ""
-
-msgid "An error has occurred"
-msgstr ""
-
-msgid "Too many results"
-msgstr "ຜົນໄດ້ຮັບຫຼາຍເກີນໄປ"
-
-msgid "Cannot search in all programs"
-msgstr ""
-
 msgid "Back"
 msgstr "​ກັບ​ຄືນ"
-
-msgid "Search for {{titleText}}"
-msgstr ""
-
-msgid "Search for"
-msgstr "ຄົ້ນຫາສໍາລັບ"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-
-msgid "Choose a type to start searching"
-msgstr ""
-
-msgid "all programs"
-msgstr ""
-
-msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr ""
-
-msgid "Search in all programs"
-msgstr ""
-
-msgid "If none of search results match, you can create a new "
-msgstr ""
-
-msgid "Create new"
-msgstr "ສ້າງໃໝ່"
-
-msgid "Saved lists in this program"
-msgstr ""
-
-msgid "Saved lists offer quick access to your most used views in a program."
-msgstr ""
-
-msgid ""
-"There are no saved lists in this program yet, create one using the button "
-"below."
-msgstr ""
-
-msgid "Create saved list"
-msgstr ""
 
 msgid "events"
 msgstr "ກໍລະນີ"
@@ -966,7 +926,22 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
+msgid "Selected program"
+msgstr "ເລືອກສາຍງານ"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
+msgstr ""
+
+msgid "No results found"
 msgstr ""
 
 msgid "An error occurred loading possible duplicates"
@@ -1008,16 +983,88 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr "ຄົ້ນຫາສໍາລັບ"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Search by {{name}}"
+msgstr ""
+
+msgid "all programs"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr ""
+
+msgid "If none of search results match, you can create a new "
+msgstr ""
+
+msgid "Create new"
+msgstr "ສ້າງໃໝ່"
+
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid "Too many results"
+msgstr "ຜົນໄດ້ຮັບຫຼາຍເກີນໄປ"
+
+msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Missing search criteria"
+msgstr ""
+
 msgid "Results found"
 msgstr ""
 
-msgid "Selected program"
-msgstr "ເລືອກສາຍງານ"
-
-msgid "Search {{uniqueAttrName}}"
+msgid "Saved lists in this program"
 msgstr ""
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Saved lists offer quick access to your most used views in a program."
+msgstr ""
+
+msgid ""
+"There are no saved lists in this program yet, create one using the button "
+"below."
+msgstr ""
+
+msgid "Create saved list"
 msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
@@ -1091,6 +1138,9 @@ msgstr ""
 
 msgid "Mark for follow-up"
 msgstr "ໝາຍໄວ້ເພື່ອຕິດຕາມ"
+
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
 
 msgid "Enrollment date"
 msgstr "ວັນທີ່ລົງທະບຽນ"
@@ -1180,21 +1230,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1239,9 +1279,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr ""
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1254,10 +1291,13 @@ msgstr ""
 msgid "Edit"
 msgstr "ແກ້ໄຂ"
 
+msgid "tracked entity instance"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
-msgid "This event is not yet preserved and cannot be edited"
+msgid "To open this event, please wait until saving is complete"
 msgstr ""
 
 msgid "Show {{ rest }} more"
@@ -1287,14 +1327,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Program stage name"
+
 msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "Download as JSON"
 msgstr "Download as JSON"
-
-msgid "Download as XML"
-msgstr "Download as XML"
 
 msgid "Download as CSV"
 msgstr "ດາວໂຫຼດເປັນ CSV"
@@ -1308,6 +1382,9 @@ msgstr ""
 msgid "an error occurred loading working lists"
 msgstr ""
 
+msgid "Assigned to"
+msgstr "Assigned to"
+
 msgid "Registration Date"
 msgstr ""
 
@@ -1317,10 +1394,16 @@ msgstr "ບໍ່ໄດ້ໃຊ້ງານ"
 msgid "Enrollment status"
 msgstr "ສະຖານະການລົງທະບຽນ"
 
-msgid "Assigned to"
-msgstr "Assigned to"
-
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1434,9 +1517,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
 
-msgid "Page {{currentPage}}"
-msgstr ""
-
 msgid "Date"
 msgstr "ວັນທີ່"
 
@@ -1455,16 +1535,16 @@ msgstr "ເຖີງວັນທີ່"
 msgid "To time"
 msgstr ""
 
-msgid "error encountered during field validation"
-msgstr ""
-
-msgid "error"
+msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Delete polygon"
 msgstr ""
 
 msgid "Set area"
+msgstr ""
+
+msgid "Area on map saved"
 msgstr ""
 
 msgid "Compatibility mode"

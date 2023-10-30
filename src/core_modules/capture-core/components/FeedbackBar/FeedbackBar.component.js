@@ -6,15 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import { IconCross24 } from '@dhis2/ui';
+import { IconButton } from 'capture-ui';
+import { IconCross24, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import isDefined from 'd2-utilizr/lib/isDefined';
-import { Button } from '../Buttons';
 
-const styles = theme => ({
+const styles = () => ({
     closeButton: {
-        height: theme.spacing.unit * 4,
+        marginTop: '5px',
     },
     actionContainer: {
         paddingRight: 2,
@@ -59,7 +58,7 @@ class Index extends React.Component<Props> {
         const { feedback, classes } = this.props;
 
         return (
-            <span>
+            <>
                 {
                     (() => {
                         if (!feedback.action) {
@@ -76,15 +75,12 @@ class Index extends React.Component<Props> {
                     })()
                 }
                 <IconButton
-                    key="close"
-                    aria-label="Close"
-                    color="inherit"
                     className={classes.closeButton}
                     onClick={this.handleClose}
                 >
                     <IconCross24 />
                 </IconButton>
-            </span>
+            </>
         );
     }
 

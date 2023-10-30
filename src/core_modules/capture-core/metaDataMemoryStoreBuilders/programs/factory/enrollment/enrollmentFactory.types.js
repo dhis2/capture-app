@@ -15,4 +15,5 @@ export type ConstructorInput = {|
     cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
     locale: ?string,
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
+    dataEntryFormConfig?: ?Object,
 |};

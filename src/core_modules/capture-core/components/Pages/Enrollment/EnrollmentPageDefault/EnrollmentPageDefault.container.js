@@ -7,27 +7,35 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
     useCommonEnrollmentDomainData,
+    useRuleEffects,
     updateEnrollmentAttributeValues,
+    updateEnrollmentDate,
+    updateIncidentDate,
     showEnrollmentError,
 } from '../../common/EnrollmentOverviewDomain';
+import {
+    updateEnrollmentDate as updateTopBarEnrollmentDate,
+    deleteEnrollment,
+    updateTeiDisplayName,
+} from '../EnrollmentPage.actions';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
-import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
+import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
     useProgramMetadata,
     useHideWidgetByRuleLocations,
     useProgramStages,
-    useRuleEffects,
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
-import { deleteEnrollment, updateTeiDisplayName } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
+import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
+    const { onLinkedRecordClick } = useLinkedRecordClick();
 
     const program = useTrackerProgram(programId);
     const {
@@ -74,6 +82,7 @@ export const EnrollmentPageDefault = () => {
     const onEventClick = (eventId: string) => {
         history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
     };
+
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
         dispatch(updateEnrollmentAttributeValues(updatedAttributeValues
             .map(({ attribute, value }) => ({ id: attribute, value })),
@@ -81,11 +90,21 @@ export const EnrollmentPageDefault = () => {
         dispatch(updateTeiDisplayName(teiDisplayName));
     }, [dispatch]);
 
+    const onUpdateEnrollmentDate = useCallback((enrollmentDate) => {
+        dispatch(updateEnrollmentDate(enrollmentDate));
+        dispatch(updateTopBarEnrollmentDate({ enrollmentId, enrollmentDate }));
+    }, [dispatch, enrollmentId]);
+
+    const onUpdateIncidentDate = useCallback((incidentDate) => {
+        dispatch(updateIncidentDate(incidentDate));
+    }, [dispatch]);
+
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
 
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+
     if (error) {
         return error.errorComponent;
     }
@@ -106,8 +125,12 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
+            onLinkedRecordClick={onLinkedRecordClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
+            onUpdateEnrollmentDate={onUpdateEnrollmentDate}
+            onUpdateIncidentDate={onUpdateIncidentDate}
             onEnrollmentError={onEnrollmentError}
+            ruleEffects={ruleEffects}
         />
     );
 };

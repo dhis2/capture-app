@@ -15,11 +15,14 @@ import {
     DataElementUnique,
     dataElementUniqueScope,
     dataElementTypes,
+    Section,
 } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import type { ConstructorInput } from './dataElementFactory.types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { isNotValidOptionSet } from '../../../../utils/isNotValidOptionSet';
+import { escapeString } from '../../../../utils/escapeString';
 
 export class DataElementFactory {
     static translationPropertyNames = {
@@ -31,10 +34,13 @@ export class DataElementFactory {
 
     static errorMessages = {
         TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'TrackedEntityAttributeId missing from programTrackedEntityAttribute or trackedEntityAttribute not found',
+        MULIT_TEXT_WITH_NO_OPTIONS_SET:
+            'could not create the metadata because a MULIT_TEXT without associated option sets was found',
     };
 
-    static buildtetFeatureType(featureType: 'POINT' | 'POLYGON') {
+    static buildtetFeatureType(featureType: 'POINT' | 'POLYGON', section: Section) {
         const dataElement = new DataElement((o) => {
+            o.section = section;
             o.id = `FEATURETYPE_${featureType}`;
             o.name = featureType === 'POINT' ? i18n.t('Coordinate') : i18n.t('Area');
             o.formName = o.name;
@@ -85,7 +91,7 @@ export class DataElementFactory {
                         params: {
                             program: contextProps.programId,
                             orgUnit: orgUnitId,
-                            filter: `${dataElement.id}:EQ:${serverValue}`,
+                            filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                         },
                     });
                 } else {
@@ -94,7 +100,7 @@ export class DataElementFactory {
                         params: {
                             program: contextProps.programId,
                             ouMode: 'ACCESSIBLE',
-                            filter: `${dataElement.id}:EQ:${serverValue}`,
+                            filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                         },
                     });
                 }
@@ -156,6 +162,8 @@ export class DataElementFactory {
     ) {
         dataElement.id = cachedTrackedEntityAttribute.id;
         dataElement.compulsory = cachedProgramTrackedEntityAttribute.mandatory;
+        dataElement.code = cachedTrackedEntityAttribute.code;
+        dataElement.attributeValues = cachedTrackedEntityAttribute.attributeValues;
         dataElement.name =
             this._getAttributeTranslation(
                 cachedTrackedEntityAttribute.translations,
@@ -200,24 +208,32 @@ export class DataElementFactory {
     async _buildBaseDataElement(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
+        section?: Section,
     ) {
         const dataElement = new DataElement();
+        dataElement.section = section;
         dataElement.type = cachedTrackedEntityAttribute.valueType;
         await this._setBaseProperties(
             dataElement,
             cachedProgramTrackedEntityAttribute,
             cachedTrackedEntityAttribute,
         );
+        if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
+            log.error(errorCreator(DataElementFactory.errorMessages.MULIT_TEXT_WITH_NO_OPTIONS_SET)({ dataElement }));
+            return null;
+        }
         return dataElement;
     }
 
     async _buildDateDataElement(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
+        section?: Section,
     ) {
         const dateDataElement = new DateDataElement();
         dateDataElement.type = dataElementTypes.DATE;
         dateDataElement.allowFutureDate = cachedProgramTrackedEntityAttribute.allowFutureDate;
+        dateDataElement.section = section;
         await this._setBaseProperties(
             dateDataElement,
             cachedProgramTrackedEntityAttribute,
@@ -228,6 +244,7 @@ export class DataElementFactory {
 
     build(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
+        section?: Section,
     ) {
         const cachedTrackedEntityAttribute = cachedProgramTrackedEntityAttribute.trackedEntityAttributeId &&
             this.cachedTrackedEntityAttributes.get(
@@ -243,7 +260,7 @@ export class DataElementFactory {
         }
 
         return cachedTrackedEntityAttribute.valueType === dataElementTypes.DATE ?
-            this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute) :
-            this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute);
+            this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section) :
+            this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section);
     }
 }

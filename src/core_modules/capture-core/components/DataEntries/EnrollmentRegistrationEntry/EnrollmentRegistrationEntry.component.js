@@ -7,17 +7,16 @@ import { compose } from 'redux';
 import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
-import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
+import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
-import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
-import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
-import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 
 const styles = () => ({
     actions: {
@@ -47,6 +46,8 @@ const EnrollmentRegistrationEntryPlain =
   ({
       id,
       selectedScopeId,
+      formId,
+      formFoundation,
       enrollmentMetadata,
       saveButtonText,
       classes,
@@ -62,7 +63,6 @@ const EnrollmentRegistrationEntryPlain =
       const { push } = useHistory();
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
-      const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
@@ -106,7 +106,7 @@ const EnrollmentRegistrationEntryPlain =
                               <Button
                                   dataTest="create-and-link-button"
                                   primary
-                                  onClick={onSave}
+                                  onClick={() => onSave()}
                                   loading={isSavingInProgress}
                               >
                                   {saveButtonText}
@@ -128,9 +128,9 @@ const EnrollmentRegistrationEntryPlain =
                       </InfoIconText>
                   </>
               }
-              <ConfirmDialog
+              <DiscardDialog
                   {...defaultDialogProps}
-                  onConfirm={navigateToWorkingListsPage}
+                  onDestroy={navigateToWorkingListsPage}
                   open={!!showWarning}
                   onCancel={() => { setShowWarning(false); }}
               />

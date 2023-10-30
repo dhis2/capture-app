@@ -29,7 +29,7 @@ env:
     BASE_URL_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}
     NAME_PATTERN_LEGACY_INSTANCES: ca-test-{version}
     NAME_PATTERN_DEV_INSTANCE: ca-test-dev
-    CYPRESS_CONTAINERS: 8
+    CYPRESS_CONTAINERS: 5
     TRIGGER_LABELS: e2e-tests, testing
 
 defaults:
@@ -78,18 +78,17 @@ jobs:
         needs: prerequisites
         if: contains(fromJson(needs.prerequisites.outputs.json-labels), github.event.label.name)
         runs-on: ubuntu-latest
-        container: cypress/browsers:node14.7.0-chrome84
         strategy:
             fail-fast: false
             matrix:
                 versions: ${{ fromJSON(needs.prerequisites.outputs.versions) }}
                 containers: ${{ fromJSON(needs.prerequisites.outputs.matrix-containers) }}
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
-            - uses: actions/setup-node@v1
+            - uses: actions/setup-node@v3
               with:
-                  node-version: 14.x
+                  node-version: 18.x
 
             - name: compute-instance-url
               id: instance-url
@@ -98,7 +97,7 @@ jobs:
                   version: ${{ matrix.versions }}
 
             - name: Cypress run
-              uses: cypress-io/github-action@v4
+              uses: cypress-io/github-action@v6
               with:
                   record: true
                   parallel: true
@@ -115,6 +114,7 @@ jobs:
                   CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
                   CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
                   CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
+                  NODE_OPTIONS: "--openssl-legacy-provider"
 
     call-e2e-tests-result:
         needs: cypress

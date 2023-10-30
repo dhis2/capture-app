@@ -1,10 +1,9 @@
 // @flow
 import * as React from 'react';
-import { colors } from '@dhis2/ui';
+import { colors, Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
-import { Button } from '../../../Buttons/Button.component';
 import { NewTemplateTextField } from './NewTemplateTextField.component';
 
 const getStyles = (theme: Theme) => ({

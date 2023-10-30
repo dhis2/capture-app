@@ -9,9 +9,10 @@ import type {
     CachedProgramStageDataElement,
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
-import { DataElement, DateDataElement, dataElementTypes } from '../../../../metaData';
+import { DataElement, DateDataElement, dataElementTypes, Section } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { OptionSetFactory } from '../../../common/factory';
+import { isNotValidOptionSet } from '../../../../utils/isNotValidOptionSet';
 
 export class DataElementFactory {
     static propertyNames = {
@@ -19,6 +20,11 @@ export class DataElementFactory {
         DESCRIPTION: 'DESCRIPTION',
         SHORT_NAME: 'SHORT_NAME',
         FORM_NAME: 'FORM_NAME',
+    };
+
+    static errorMessages = {
+        MULIT_TEXT_WITH_NO_OPTIONS_SET:
+            'could not create the metadata because a MULIT_TEXT without associated option sets was found',
     };
 
     static _getDataElementType(cachedValueType: string) {
@@ -59,6 +65,7 @@ export class DataElementFactory {
         dataElement.id = cachedDataElement.id;
         dataElement.name = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.NAME) ||
             cachedDataElement.displayName;
+        dataElement.code = cachedDataElement.code;
         dataElement.shortName =
             this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.SHORT_NAME) ||
             cachedDataElement.displayShortName;
@@ -92,10 +99,16 @@ export class DataElementFactory {
         cachedProgramStageDataElement: CachedProgramStageDataElement,
         cachedDataElement: CachedDataElement,
         dataElementType: $Keys<typeof dataElementTypes>,
+        section: ?Section,
     ) {
         const dataElement = new DataElement();
+        dataElement.section = section;
         dataElement.type = dataElementType;
         await this._setBaseProperties(dataElement, cachedProgramStageDataElement, cachedDataElement);
+        if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
+            log.error(errorCreator(DataElementFactory.errorMessages.MULIT_TEXT_WITH_NO_OPTIONS_SET)({ dataElement }));
+            return null;
+        }
         return dataElement;
     }
 
@@ -112,6 +125,7 @@ export class DataElementFactory {
 
     async build(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
+        section: ?Section,
     ): Promise<?DataElement> {
         const cachedDataElement =
             await getUserStorageController().get(userStores.DATA_ELEMENTS, cachedProgramStageDataElement.dataElementId);
@@ -128,6 +142,6 @@ export class DataElementFactory {
 
         return dataElementType === dataElementTypes.DATE ?
             this._buildDateDataElement(cachedProgramStageDataElement, cachedDataElement) :
-            this._buildBaseDataElement(cachedProgramStageDataElement, cachedDataElement, dataElementType);
+            this._buildBaseDataElement(cachedProgramStageDataElement, cachedDataElement, dataElementType, section);
     }
 }

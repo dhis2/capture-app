@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
@@ -21,6 +21,7 @@ import { useEvent } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { cleanUpDataEntry } from '../../DataEntry';
+import { useLinkedRecordClick } from '../common/TEIRelationshipsWidget';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
 
@@ -53,7 +54,7 @@ export const EnrollmentEditEventPage = () => {
     const error = useSelector(({ activePage }) => activePage.viewEventLoadError?.error);
     const { loading, event } = useEvent(eventId);
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
-    const { orgUnitId, eventId: urlEventId } = useLocationQuery();
+    const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
 
     useEffect(() => {
         if (!urlEventId) {
@@ -73,13 +74,24 @@ export const EnrollmentEditEventPage = () => {
             orgUnitId={orgUnitId}
             eventId={eventId}
             error={error}
+            initMode={initMode}
         />
     ) : <LoadingMaskForPage />;
 };
 
-const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, enrollmentId, orgUnitId, eventId }: Props) => {
+const EnrollmentEditEventPageWithContextPlain = ({
+    programId,
+    stageId,
+    teiId,
+    enrollmentId,
+    orgUnitId,
+    eventId,
+    initMode,
+}: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const { onLinkedRecordClick } = useLinkedRecordClick();
 
     useEffect(() => () => {
         dispatch(cleanUpDataEntry(dataEntryIds.ENROLLMENT_EVENT));
@@ -98,10 +110,16 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
-    const onCancelEditEvent = () => {
-        history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
-    };
+    const onCancelEditEvent = useCallback((isScheduled: boolean) => {
+        if (isScheduled) {
+            history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
+        }
+        if (initMode) {
+            history.push(`/enrollmentEventEdit?${buildUrlQueryString({ eventId, orgUnitId })}`);
+        }
+    }, [initMode, enrollmentId, eventId, orgUnitId, history]);
 
+    const { enrollment: enrollmentSite } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const onGoBack = () =>
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
 
@@ -109,10 +127,9 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
         dispatch(updateEnrollmentEvent(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
-    const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
-    const trackedEntityName = program?.trackedEntityType?.name;
+    const { name: trackedEntityName, id: trackedEntityTypeId } = program?.trackedEntityType;
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
@@ -120,6 +137,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
+
 
     const pageStatus = getPageStatus({
         orgUnitId,
@@ -140,6 +158,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
             hideWidgets={hideWidgets}
             teiId={teiId}
             enrollmentId={enrollmentId}
+            trackedEntityTypeId={trackedEntityTypeId}
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}
             trackedEntityName={trackedEntityName}
@@ -148,6 +167,7 @@ const EnrollmentEditEventPageWithContextPlain = ({ programId, stageId, teiId, en
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            onLinkedRecordClick={onLinkedRecordClick}
             onEnrollmentError={onEnrollmentError}
             onEnrollmentSuccess={onEnrollmentSuccess}
             eventStatus={event?.status}

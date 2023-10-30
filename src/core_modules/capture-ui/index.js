@@ -24,24 +24,11 @@ export { withLabel } from './HOC/withLabel';
 export { withShrinkLabel } from './HOC/withShrinkLabel';
 export { withTextFieldFocusHandler } from './internal/TextInput/withFocusHandler';
 
-// Datatable
-export { Body } from './DataTable/Body.component';
-export { Cell } from './DataTable/Cell.component';
-export { Footer } from './DataTable/Footer.component';
-export { Head } from './DataTable/Head.component';
-export { HeaderCell } from './DataTable/HeaderCell.component';
-export { Pagination } from './DataTable/Pagination.component';
-export { Row } from './DataTable/Row.component';
-export { SortLabel } from './DataTable/SortLabel.component';
-export { Table } from './DataTable/Table.component';
-export {
-    directions as sortLabelDirections,
-    placements as sorLabelPlacements,
-} from './DataTable/sortLabel.const';
+export { Pagination } from './Pagination/Pagination.component';
 
 // UI-Elements
 export { DividerHorizontal } from './Divider/DividerHorizontal.component';
-export { Button } from './Buttons/Button.component';
 export { IconButton } from './IconButton';
+export { ChevronIcon } from './Icons';
 export { NonBundledIcon } from './NonBundledIcon';
 export { FlatList } from './FlatList';

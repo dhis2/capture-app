@@ -22,7 +22,8 @@ export const rulesEffectsHiddenFieldsDesc = createReducerDescription({
         const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.HIDE_FIELD];
         newState[action.payload.formId] = hideEffects ?
             Object.keys(hideEffects).reduce((accState, key) => {
-                accState[key] = true;
+                const [value] = hideEffects[key];
+                accState[key] = { content: value.content, name: value.name, hadValue: value.hadValue };
                 return accState;
             }, {}) :
             null;
@@ -63,6 +64,23 @@ export const rulesEffectsHiddenSectionsDesc = createReducerDescription({
     },
 }, 'rulesEffectsHiddenSections');
 
+export const rulesEffectsHiddenProgramStageDesc = createReducerDescription({
+    [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+        const newState = { ...state };
+
+        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.HIDE_PROGRAM_STAGE];
+        newState[action.payload.formId] = hideEffects ?
+            Object.keys(hideEffects).reduce((accState, key) => {
+                accState[key] = true;
+                return accState;
+            }, {}) :
+            null;
+
+        return newState;
+    },
+}, 'rulesEffectsHiddenProgramStageDesc');
+
+
 const mapMessageEffectTypeToStateKey = {
     [effectActions.SHOW_ERROR]: messageStateKeys.ERROR,
     [effectActions.SHOW_WARNING]: messageStateKeys.WARNING,
@@ -74,10 +92,10 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const errorEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
-        const warningEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
-        const errorEffectsOnComplete: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR_ONCOMPLETE];
-        const warningEffectsOnComplete: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING_ONCOMPLETE];
+        const errorEffects: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
+        const warningEffects: { [id: string]: Array<GeneralWarningEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
+        const errorEffectsOnComplete: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR_ONCOMPLETE];
+        const warningEffectsOnComplete: { [id: string]: Array<GeneralWarningEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING_ONCOMPLETE];
 
         const messageEffectsArray = [errorEffects, warningEffects, errorEffectsOnComplete, warningEffectsOnComplete];
         newState[action.payload.formId] = messageEffectsArray.reduce((accMessagesById, effects) => {
@@ -92,7 +110,15 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
                 // $FlowFixMe[prop-missing] automated comment
                 const typeKey = mapMessageEffectTypeToStateKey[effectsByKey[0].type];
                 // $FlowFixMe[prop-missing] automated comment
-                accMessagesByIdInCurrentEffects[key][typeKey] = effectsByKey.map(effect => effect.message);
+                accMessagesByIdInCurrentEffects[key][typeKey] = effectsByKey.map((effect: any) => {
+                    if (effect.error) {
+                        return effect.error.message;
+                    }
+                    if (effect.warning) {
+                        return effect.warning.message;
+                    }
+                    return effect.message;
+                });
                 return accMessagesByIdInCurrentEffects;
             }, accMessagesById);
         }, {});

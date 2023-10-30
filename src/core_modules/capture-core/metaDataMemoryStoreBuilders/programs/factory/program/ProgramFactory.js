@@ -118,7 +118,9 @@ export class ProgramFactory {
         });
 
         const attributes = await Promise.all(attributePromises);
-        return attributes;
+
+        // $FlowFixMe[missing-annot]
+        return attributes.filter(attribute => attribute);
     }
 
     async build(cachedProgram: CachedProgram) {
@@ -173,6 +175,7 @@ export class ProgramFactory {
         program.icon = buildIcon(cachedProgram.style);
         program.displayFrontPageList = cachedProgram.displayFrontPageList;
         program.onlyEnrollOnce = cachedProgram.onlyEnrollOnce;
+        program.useFirstStageDuringRegistration = cachedProgram.useFirstStageDuringRegistration;
 
         return program;
     }

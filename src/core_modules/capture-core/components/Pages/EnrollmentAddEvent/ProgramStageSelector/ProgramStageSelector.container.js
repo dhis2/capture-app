@@ -6,22 +6,33 @@ import log from 'loglevel';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 import { Widget } from '../../../Widget';
 import { errorCreator } from '../../../../../capture-core-utils';
-import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
+import { useCommonEnrollmentDomainData, useRuleEffects } from '../../common/EnrollmentOverviewDomain';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
+import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
+import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const history = useHistory();
     const { tab } = useLocationQuery();
-    const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+    const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const {
         program,
         isLoading: programLoading,
         isError: programError,
     } = useProgramFromIndexedDB(programId);
 
+    const { orgUnit } = useCoreOrgUnit(orgUnitId);
+    const programRules = useTrackerProgram(programId);
+
+    const ruleEffects = useRuleEffects({
+        orgUnit,
+        program: programRules,
+        apiEnrollment: enrollment,
+        apiAttributeValues: attributeValues,
+    });
 
     useEffect(() => {
         if (enrollmentsError || programError) {
@@ -42,9 +53,12 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
             displayName: currentStage.displayName,
             style: currentStage.style,
             repeatable: currentStage.repeatable,
+            hiddenProgramStage: ruleEffects?.find(
+                ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === currentStage.id,
+            ),
         });
         return accStage;
-    }, []), [enrollment?.events, program?.programStages, programLoading]);
+    }, []), [enrollment?.events, program?.programStages, programLoading, ruleEffects]);
 
     const onSelectProgramStage = (newStageId: string) =>
         history.push(`enrollmentEventNew?${buildUrlQueryString({

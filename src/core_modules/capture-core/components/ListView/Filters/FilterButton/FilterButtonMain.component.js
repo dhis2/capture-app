@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
-import { IconChevronDown16, IconChevronUp16, Tooltip } from '@dhis2/ui';
-import { Button } from '../../../Buttons';
+import { IconChevronDown16, IconChevronUp16, Button } from '@dhis2/ui';
+import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';
@@ -166,34 +166,22 @@ class FilterButtonMainPlain extends Component<Props, State> {
     renderWithoutAppliedFilter() {
         const { selectorVisible, classes, title, disabled, tooltipContent } = this.props;
 
-        return disabled ? (
-            <Tooltip content={tooltipContent} closeDelay={50}>
-                {({ onMouseOver, onMouseOut, ref }) => (
-                    <div
-                        ref={(divRef) => {
-                            if (divRef && disabled) {
-                                divRef.onmouseover = onMouseOver;
-                                divRef.onmouseout = onMouseOut;
-                                ref.current = divRef;
-                            }
-                        }}
-                    >
-                        <Button disabled={disabled}>
-                            {title}
-                            <span className={classes.icon}>
-                                {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
-                            </span>
-                        </Button>
-                    </div>
-                )}
-            </Tooltip>
-        ) : (
-            <Button onClick={this.openFilterSelector}>
-                {title}
-                <span className={classes.icon}>
-                    {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
-                </span>
-            </Button>
+        return (
+            <ConditionalTooltip
+                content={tooltipContent}
+                enabled={disabled}
+                closeDelay={50}
+            >
+                <Button
+                    disabled={disabled}
+                    onClick={this.openFilterSelector}
+                >
+                    {title}
+                    <span className={classes.icon}>
+                        {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
+                    </span>
+                </Button>
+            </ConditionalTooltip>
         );
     }
 

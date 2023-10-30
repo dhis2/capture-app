@@ -2,15 +2,15 @@
 # Translators:
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
-# Rica Zamora Duchateau, 2023
 # Charel van den Elsen, 2023
+# Rica Zamora Duchateau, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-08T11:11:29.783Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Charel van den Elsen, 2023\n"
+"Last-Translator: Rica Zamora Duchateau, 2023\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,10 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Kies één of meerdere data..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Kies een datum..."
 
 msgid "Today"
 msgstr "Vandaag"
@@ -31,6 +31,8 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"Een mogelijke reden hiervoor is dat de browser of modus (bijvoorbeeld "
+"privacymodus) niet wordt ondersteund. Zie logboek voor details."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -38,75 +40,90 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Je hebt een andere versie van de Capture App geopend in hetzelfde domein. "
+"Momenteel ondersteunt de Capture App slechts één versie tegelijkertijd (in "
+"hetzelfde domein). Vernieuw deze pagina als u deze versie opnieuw wilt "
+"gebruiken, maar houd er rekening mee dat hierdoor andere versies worden "
+"gesloten."
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "Bekijk het {{programNaam}}-dashboard"
 
 msgid "View dashboard"
-msgstr ""
+msgstr "Dashboard bekijken"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "Bekijk actieve inschrijving"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "Opnieuw inschrijven"
 
 msgid "in"
 msgstr "in"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "Ingeschreven"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "Eerder ingeschreven"
 
 msgid "Organisation unit"
 msgstr "Organisatieëenheid"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "Datum van inschrijving"
 
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
 
-msgid "This value is validating"
+msgid "error encountered during field validation"
+msgstr "fout opgetreden tijdens veldvalidatie"
+
+msgid "error"
+msgstr "fout"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
 msgstr ""
+
+msgid "This value is validating"
+msgstr "Deze waarde is validerend"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "Asynchrone veldupdate is mislukt"
 
 msgid "A value is required"
-msgstr ""
+msgstr "Een waarde is verplicht"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Geef een geldig nummer op"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Geef een geldig geheel getal op"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Geef een positief geheel getal op"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Geef nul of een positief geheel getal op"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Geef een negatief geheel getal op"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Geef een geldige datum op"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Een datum in de toekomst is niet toegestaan"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Geef een geldige datum en tijd op"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "Geef een geldige tijd op"
 
 msgid "Please provide an integer between 0 and 100"
-msgstr ""
+msgstr "Geef een geheel getal tussen 0 en 100 op"
 
 msgid "Please provide a valid url"
 msgstr "Geef een geldige URL op"
@@ -115,25 +132,25 @@ msgid "Please provide a valid email address"
 msgstr "geef alstublieft een geldig email adres"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "Geef een geldige leeftijd op"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "Gelieve een geldig telefoonnummer op te geven"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "Geef een geldige organisatie-eenheid op"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "Geef geldige coördinaten op"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "Deze waarde bestaat al"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "\"Van\" kan niet groter zijn dan \"Naar\""
 
 msgid "Checking..."
-msgstr ""
+msgstr "Controleren..."
 
 msgid "Area"
 msgstr "Oppervlakte"
@@ -144,63 +161,80 @@ msgstr "Coördineren"
 msgid "Enrollment"
 msgstr "Inschrijving"
 
-msgid "Please select {{categoryName}}"
+msgid "Complete event"
+msgstr "Compleet evenement"
+
+msgid "{{ stageName }} - Basic info"
 msgstr ""
 
-msgid "A future date is not allowed"
+msgid "{{ stageName }} - Status"
 msgstr ""
+
+msgid "Please select {{categoryName}}"
+msgstr "Selecteer {{categorieNaam}}"
+
+msgid "A future date is not allowed"
+msgstr "Een datum in de toekomst is niet toegestaan"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
+"Een nieuwe inschrijving opslaan in {{programmaNaam}} in {{orgUnitNaam}}."
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
+"Een {{trackedEntityNaam}} opslaan in {{programmaNaam}} in {{orgUnitNaam}}."
 
 msgid "Cancel"
 msgstr "Annuleer"
 
 msgid "Metadata error. see log for details"
+msgstr "Metadatafout. zie logboek voor details"
+
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
 msgstr ""
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Toegewezen gebruiker"
 
 msgid "Search for user"
-msgstr ""
-
-msgid "Complete event"
-msgstr ""
+msgstr "Zoek naar gebruiker"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Basis informatie"
 
 msgid "Status"
 msgstr "status"
 
 msgid "Comments"
-msgstr ""
+msgstr "Opmerkingen"
 
 msgid "Relationships"
 msgstr "Relaties"
 
 msgid "Assignee"
-msgstr ""
+msgstr "Cessionaris"
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Opslaan naar {{programmaNaam}} in {{orgUnitNaam}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Dit is geen evenementprogramma of de metagegevens zijn beschadigd. Zie "
+"logboek voor details."
 
 msgid "This event"
-msgstr ""
+msgstr "Dit evenement"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
+"Relatie van het type {{relationshipTypeName}} met {{entityName}} bestaat al"
 
 msgid "Active"
 msgstr "Actief"
@@ -210,111 +244,122 @@ msgstr "Voltooid"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
+"Voeg een opmerking toe of annuleer deze voordat u het evenement opslaat"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Sla op en voeg er nog een toe"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Opslaan en afsluiten"
 
 msgid "Finish"
-msgstr ""
+msgstr "Finish"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "Opslaan zonder af te ronden"
 
 msgid "Complete"
 msgstr "Compleet"
 
 msgid "No write access"
-msgstr ""
+msgstr "Geen schrijfrechten"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "Nieuwe {{titelTekst}}"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Schakel over naar formulierweergave"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Schakel over naar rijweergave"
 
 msgid "events added"
-msgstr ""
+msgstr "evenementen toegevoegd"
 
 msgid "No events added"
-msgstr ""
+msgstr "Geen evenementen toegevoegd"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "Nieuwe evenementrelatie"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "Relatie toevoegen aan evenement."
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "Ga terug naar het evenement zonder de relatie op te slaan"
 
-msgid "Unsaved changes"
-msgstr ""
+msgid "Discard unsaved changes?"
+msgstr "Niet opgeslaagde veranderingen verwerpen?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
+"Als u deze pagina verlaat, worden de selecties die u voor een nieuwe relatie"
+" hebt gemaakt, verwijderd"
 
-msgid "Yes, discard"
-msgstr ""
+msgid "Yes, discard changes"
+msgstr "Ja, wijzigingen negeren"
 
-msgid "No, stay here"
-msgstr "Nee, blijf hier"
+msgid "No, cancel"
+msgstr "Nee, annuleer"
 
 msgid "New event"
 msgstr "Nieuw evenement"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
+"Je hebt geen toegang om een evenement te maken in de huidige selecties"
 
 msgid "Save"
 msgstr "Sla op"
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr ""
+msgstr "Een {{trackedEntityNaam}} opslaan"
 
 msgid "without"
-msgstr ""
+msgstr "zonder"
 
 msgid "enrollment"
-msgstr ""
+msgstr "inschrijving"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
+"Schrijf je in voor een programma door een programma te selecteren in de "
+"bovenste balk."
 
 msgid "An error has occurred. See log for details"
-msgstr ""
+msgstr "Er is een fout opgetreden. Zie logboek voor details"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"Er bestaat een duplicaat (maar er waren enkele fouten, zie logboek voor "
+"details"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"Een item met deze {{attribuutNaam}} is al geregistreerd, maar je hebt er "
+"geen toegang toe"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "Je hebt deze {{attribuutNaam}} al geregistreerd"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
+"Een {{trackedEntityTypeNaam}} met deze {{attribuutNaam}} is al geregistreerd"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Toon geregistreerde {{trackedEntityTypeNaam}}"
 
 msgid "Registered person"
-msgstr ""
+msgstr "Geregistreerde persoon"
 
 msgid "validation failed"
-msgstr ""
+msgstr "validatie mislukt"
 
 msgid "Errors"
 msgstr "Fouten"
@@ -326,88 +371,78 @@ msgid "Indicators"
 msgstr "Indicatoren"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Waarschuwingen"
 
 msgid "Generate new event"
-msgstr ""
+msgstr "Nieuw evenement genereren"
 
 msgid "Do you want to create another event?"
-msgstr ""
-
-msgid "No, cancel"
-msgstr "Nee, annuleer"
+msgstr "Wil je nog een evenement aanmaken?"
 
 msgid "Yes, create new event"
-msgstr ""
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-
-msgid "Warnings found"
-msgstr ""
-
-msgid "Abort"
-msgstr ""
+msgstr "Ja, maak een nieuw evenement aan"
 
 msgid "Back to form"
-msgstr ""
+msgstr "Terug naar vorm"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "Toch opslaan"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "Validatiefouten en waarschuwingen"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "Validatie fouten"
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "Validatiewaarschuwingen"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "Sommige operaties lopen nog. Even geduld aub.."
 
 msgid "Operations running"
-msgstr ""
+msgstr "Operaties lopen"
 
-msgid "Sort"
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
 msgstr ""
 
 msgid "No events to display"
-msgstr ""
+msgstr "Geen evenementen om weer te geven"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Gegevens voor offline lijst niet aanwezig"
 
 msgid "Close"
 msgstr "Sluit"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "Selecteer alstublieft de gebruiker"
 
 msgid "Me"
-msgstr ""
+msgstr "Mij"
 
 msgid "Anyone"
-msgstr ""
+msgstr "Iedereen"
 
 msgid "None"
 msgstr "Geen"
 
 msgid "Select user"
-msgstr ""
+msgstr "Selecteer gebruiker"
 
 msgid "to"
-msgstr ""
+msgstr "naar"
 
 msgid "Days in the future"
-msgstr ""
+msgstr "Dagen in de toekomst"
 
 msgid "From"
 msgstr "Van"
 
 msgid "Days in the past"
-msgstr ""
+msgstr "Dagen in het verleden"
 
 msgid "To"
 msgstr "Naar"
@@ -419,7 +454,7 @@ msgid "This month"
 msgstr "Deze maand"
 
 msgid "This Year"
-msgstr ""
+msgstr "Dit jaar"
 
 msgid "Last week"
 msgstr "Laatste week"
@@ -431,10 +466,10 @@ msgid "Last 3 months"
 msgstr "Laatste 3 maanden"
 
 msgid "Absolute range"
-msgstr ""
+msgstr "Absoluut bereik"
 
 msgid "Relative range"
-msgstr ""
+msgstr "Relatief bereik"
 
 msgid "Max"
 msgstr "Max"
@@ -443,13 +478,13 @@ msgid "Min"
 msgstr "Min"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Bevat tekst"
 
 msgid "Yes"
 msgstr "Ja"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/jjjj"
 
 msgid "Years"
 msgstr "Jaren"
@@ -461,7 +496,7 @@ msgid "Days"
 msgstr "Dagen"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Bestand uploaden"
 
 msgid "selected"
 msgstr "geselecteerd"
@@ -470,15 +505,21 @@ msgid "Delete"
 msgstr "Verwijderen"
 
 msgid "Select file"
-msgstr ""
+msgstr "Selecteer bestand"
 
 msgid "No"
 msgstr "Nee"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Afbeelding uploaden"
 
 msgid "Select image"
+msgstr "Selecteer afbeelding"
+
+msgid "Type to filter options"
+msgstr "Typ om opties te filteren"
+
+msgid "No match found"
 msgstr ""
 
 msgid "Search"
@@ -488,7 +529,7 @@ msgid "Clear"
 msgstr "Duidelijk"
 
 msgid "No results"
-msgstr ""
+msgstr "Geen resultaten"
 
 msgid "Description"
 msgstr "Beschrijving"
@@ -497,22 +538,22 @@ msgid "URL"
 msgstr "URL"
 
 msgid "Icon for {{field}}"
-msgstr ""
+msgstr "Icoon voor {{veld}}"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "begin met typen om te zoeken"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "suggesties konden niet worden opgehaald"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Geen items om weer te geven"
 
 msgid "Select columns"
-msgstr ""
+msgstr "Selecteer kolommen"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Kolommen om in tabel weer te geven"
 
 msgid "Column"
 msgstr "Kolom"
@@ -521,43 +562,45 @@ msgid "Update"
 msgstr "Bijwerken"
 
 msgid "Reset filter"
-msgstr ""
+msgstr "Filter resetten"
 
 msgid "Remove filter"
 msgstr "Verwijder filter"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
+msgstr "{{vanDatum}} tot {{totDatum}}"
 
 msgid "after or equal to {{date}}"
-msgstr ""
+msgstr "na of gelijk aan {{datum}}"
 
 msgid "before or equal to {{date}}"
-msgstr ""
+msgstr "voor of gelijk aan {{datum}}"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "groter dan of gelijk aan"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "minder dan of gelijk aan"
 
 msgid "More filters"
-msgstr ""
+msgstr "Meer filters"
 
 msgid "Stage filters"
-msgstr ""
+msgstr "Fase filters"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Rijen per pagina"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Kan organisatie-eenheid niet ophalen"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Programma bestaat niet"
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
+"Het geselecteerde programma is ongeldig voor de geselecteerde registratie-"
+"eenheid"
 
 msgid "Online"
 msgstr "Online"
@@ -566,22 +609,31 @@ msgid "Offline"
 msgstr "offline"
 
 msgid "Syncing"
-msgstr ""
+msgstr "synchroniseren"
 
 msgid "Add comment"
-msgstr ""
+msgstr "Voeg opmerking toe"
 
 msgid "You don't have access to write comments"
-msgstr ""
+msgstr "U heeft geen toegang om opmerkingen te schrijven"
 
 msgid "Write comment"
+msgstr "Schrijf commentaar"
+
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
 msgstr ""
 
 msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr ""
+msgstr "Gebruik nieuw inschrijvingsdashboard voor {{programmaNaam}}"
 
 msgid "Opt in for {{programName}}"
-msgstr ""
+msgstr "Aanmelden voor {{programmaNaam}}"
 
 msgid ""
 "By clicking opt-in below, you will start using the new enrollment dashboard "
@@ -591,142 +643,170 @@ msgid ""
 "functionality in Capture is ongoing and will be added in upcoming app "
 "releases."
 msgstr ""
+"Door hieronder op opt-in te klikken, gaat u het nieuwe "
+"inschrijvingsdashboard in de Capture-app voor dit Tracker-programma "
+"gebruiken. Op dit moment is er bepaalde functionaliteit van Tracker Capture "
+"die nog niet is toegevoegd, waaronder relatie- en "
+"verwijzingsfunctionaliteit. Het werk om deze Tracker-functionaliteit in "
+"Capture op te nemen is aan de gang en zal worden toegevoegd in aankomende "
+"app-releases."
 
 msgid ""
 "The core team appreciates any feedback on this new functionality which is "
 "currently being beta tested, please report any issues and feedback in the "
 "DHIS2 JIRA project."
 msgstr ""
+"Het kernteam stelt alle feedback op prijs over deze nieuwe functionaliteit "
+"die momenteel in bèta wordt getest. Meld eventuele problemen en feedback in "
+"het DHIS2 JIRA-project."
 
 msgid ""
 "Click the button below to opt-in to the new enrollment dashboard "
 "functionality in the Capture app (beta) for this Tracker program for all "
 "users."
 msgstr ""
+"Klik op de onderstaande knop om u aan te melden voor de nieuwe "
+"functionaliteit van het inschrijvingsdashboard in de Capture-app (bèta) voor"
+" dit Tracker-programma voor alle gebruikers."
 
 msgid "Yes, opt in"
-msgstr ""
+msgstr "Ja, opt-in"
 
 msgid "Stop using new Enrollment dashboard for {{programName}}"
 msgstr ""
+"Stop met het gebruik van het nieuwe inschrijvingsdashboard voor "
+"{{programmaNaam}}"
 
 msgid "Opt out for {{programName}}"
-msgstr ""
+msgstr "Afmelden voor {{programmaNaam}}"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
+msgstr "Bijgehouden entiteitsinstantie met id \"{{teiId}}\" bestaat niet"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
+"Er is een fout opgetreden bij het openen van deze inschrijving. Voer een "
+"geldige URL in."
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
+"Er is een fout opgetreden bij het ophalen van inschrijvingen. Voer een "
+"geldige URL in."
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "Inschrijvingsdashboard"
 
 msgid "No indicator output for this enrollment yet"
-msgstr ""
+msgstr "Nog geen indicatoroutput voor deze inschrijving"
 
 msgid "No feedback for this enrollment yet"
-msgstr ""
+msgstr "Nog geen feedback voor deze inschrijving"
 
 msgid "Quick actions"
-msgstr ""
+msgstr "Snelle acties"
 
 msgid "New Event"
-msgstr ""
+msgstr "Nieuw evenement"
 
 msgid "Schedule an event"
-msgstr ""
+msgstr "Plan een evenement"
 
 msgid "Make referral"
 msgstr "Doorverwijzen"
 
 msgid "No available program stages"
-msgstr ""
+msgstr "Geen beschikbare programmafasen"
 
 msgid "Program stage not found"
-msgstr ""
+msgstr "Programmafase niet gevonden"
 
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
 msgstr ""
+"Kies een programma om nieuwe toe te voegen of bekijk bestaande "
+"inschrijvingen voor {{teiDisplayNaam}}"
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
+"{{programmaNaam}} heeft categorieën. Kies alle categorieën om het dashboard "
+"te bekijken."
 
 msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
+msgstr "Ongeldig inschrijvings-ID {{enrollmentId}}."
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr ""
+msgstr "Kies een inschrijving om het dashboard te bekijken."
 
 msgid "There are no active enrollments."
-msgstr ""
+msgstr "Er zijn geen actieve inschrijvingen."
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
+"Voeg een nieuwe inschrijving toe voor {{teiDisplayNaam}} in dit programma."
 
 msgid "No access to program owner."
-msgstr ""
+msgstr "Geen toegang tot programma-eigenaar."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "{{teiDisplayNaam}} is niet ingeschreven voor dit programma."
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "Schrijf {{teiDisplayNaam}} in voor dit programma."
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
+"{{teiDisplayNaam}} is een {{tetNaam}} en kan niet worden ingeschreven in de "
+"{{programmaNaam}}. Kies een ander programma dat {{tetNaam}} inschrijving "
+"toestaat."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr ""
+msgstr "Schrijf een nieuwe {{selectedTetNaam}} in voor dit programma."
 
 msgid "{{programName}} is an event program and does not have enrollments."
 msgstr ""
+"{{programmaNaam}} is een evenementprogramma en heeft geen inschrijvingen."
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "Maak een nieuw evenement aan in dit programma."
 
 msgid "View working list in this program."
-msgstr ""
+msgstr "Bekijk werklijst in dit programma."
 
 msgid "Page is missing required values from URL"
-msgstr ""
+msgstr "Pagina mist vereiste waarden van URL"
 
 msgid "Program is not valid"
-msgstr ""
+msgstr "Programma is niet geldig"
 
 msgid "Org unit is not valid with current program"
-msgstr ""
+msgstr "Organisatie-eenheid is niet geldig met het huidige programma"
 
 msgid "There was an error opening the Page"
-msgstr ""
+msgstr "Er is een fout opgetreden bij het openen van de pagina"
 
 msgid "Enrollment{{escape}} New Event"
-msgstr ""
+msgstr "Inschrijving{{escape}} Nieuw evenement"
 
 msgid "There was an error loading the page"
-msgstr ""
+msgstr "Er is een fout opgetreden bij het laden van de pagina"
 
 msgid "Choose a registering unit to start reporting"
-msgstr ""
+msgstr "Kies een registratie-eenheid om rapportage te starten"
 
 msgid "There are no feedbacks for this event"
-msgstr ""
+msgstr "Er zijn geen feedbacks voor dit evenement"
 
 msgid "There are no indicators for this event"
-msgstr ""
+msgstr "Er zijn geen indicatoren voor dit evenement"
 
 msgid "Program stage is invalid"
-msgstr ""
+msgstr "Programmafase is ongeldig"
 
 msgid "Report"
 msgstr "Rapport"
@@ -735,86 +815,93 @@ msgid "Schedule"
 msgstr "Schema"
 
 msgid "Refer"
-msgstr ""
+msgstr "Refereren"
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
-msgstr ""
+msgstr "Annuleer zonder op te slaan"
 
 msgid "Choose a stage for a new event"
-msgstr ""
+msgstr "Kies een stadium voor een nieuw evenement"
 
 msgid "Program Stages could not be loaded"
-msgstr ""
+msgstr "Programmafasen konden niet worden geladen"
 
 msgid "Stage"
 msgstr "Stadium"
 
 msgid "Enrollment{{escape}} View Event"
-msgstr ""
+msgstr "Inschrijving{{escape}} Evenement bekijken"
 
 msgid "Enrollment{{escape}} Edit Event"
-msgstr ""
+msgstr "Inschrijving{{escape}} Evenement bewerken"
 
 msgid "The enrollment event data could not be found"
 msgstr ""
+"De gegevens van de inschrijvingsgebeurtenis konden niet worden gevonden"
 
 msgid "There are no feedback for this event"
-msgstr ""
+msgstr "Er is geen feedback voor dit evenement"
 
 msgid "Registered events"
-msgstr ""
+msgstr "Geregistreerde evenementen"
 
 msgid "Please select {{category}}."
-msgstr ""
+msgstr "Selecteer {{categorie}}."
 
 msgid "Or see all records accessible to you in {{program}} "
-msgstr ""
+msgstr "Of bekijk alle records die voor u toegankelijk zijn in {{programma}}"
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr ""
+"Of bekijk alle evenementen die voor jou toegankelijk zijn in {{programma}}"
 
 msgid "Please select an organisation unit."
-msgstr ""
+msgstr "Selecteer een organisatie-eenheid."
 
 msgid "New"
 msgstr "Nieuw"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
+msgstr "Kies de {{missende Categorieën}} om te beginnen met rapporteren"
 
 msgid "Save as new"
-msgstr ""
+msgstr "Opslaan als nieuw"
 
 msgid "View enrollment"
-msgstr ""
+msgstr "Inschrijving bekijken"
 
 msgid "Create for"
-msgstr ""
+msgstr "Creëer voor"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
+"U kunt ook een programma uit de bovenste balk kiezen en in dat programma "
+"aanmaken"
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr "Nieuwe inschrijving voor programma{{escape}} {{programmaNaam}}"
+
+msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
-msgstr ""
+msgstr "Bewaar {{trackedEntityNaam}}"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "Sla nieuwe {{trackedEntityTypeNaam}} en link op"
 
 msgid "Link"
 msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "Opslaan als nieuwe {{trackedEntityNaam}}"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Sommige programma's worden gefilterd."
 
 msgid "Show all"
 msgstr "Toon alles"
@@ -829,120 +916,135 @@ msgid "Registration"
 msgstr "Registratie"
 
 msgid "Search results"
-msgstr ""
+msgstr "Zoekresultaten"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "Geen {{trackedEntityTypeNaam}} gevonden."
 
 msgid "New search"
-msgstr ""
+msgstr "Nieuwe zoekopdracht"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Zoekopdracht bewerken"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "Link naar een bestaande {{trackedEntityType}}"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Nieuwe {{trackedEntityType}} maken"
 
 msgid "Register"
-msgstr "Register"
+msgstr "Registreren"
 
 msgid "Back"
 msgstr "Terug"
 
 msgid "events"
-msgstr ""
+msgstr "evenementen"
 
 msgid "event"
-msgstr "gebeurtenis"
+msgstr "evenement"
 
 msgid "You don't have access to edit this event"
-msgstr ""
+msgstr "Je hebt geen toegangsrechten om dit evenement te bewerken"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Evenement bewerken"
 
 msgid "Event details"
-msgstr ""
+msgstr "Evenement details"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
+"Als u deze pagina verlaat, worden alle selecties die u voor een nieuwe "
+"relatie hebt gemaakt, verwijderd"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "Er is niemand toegewezen aan dit evenement"
 
 msgid "Assign"
-msgstr ""
+msgstr "Toewijzen"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "Evenement toegewezen aan {{naam}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "Feedbacks"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Toon alle evenementen"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Evenement kan niet worden geladen. Weet je zeker dat het bestaat?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Evenement kan niet worden geladen"
 
 msgid "Organisation unit could not be loaded"
+msgstr "Organisatie-eenheid kan niet worden geladen"
+
+msgid "Selected program"
+msgstr "Geselecteerd programma"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Zoek {{uniqueAttrNaam}}"
+
+msgid "Search by attributes"
+msgstr "Zoek op attributen"
+
+msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "Mogelijke duplicaten gevonden"
 
 msgid "No results found"
 msgstr "Geen resultaten gevonden"
 
 msgid "An error occurred loading possible duplicates"
-msgstr ""
+msgstr "Er is een fout opgetreden bij het laden van mogelijke duplicaten"
 
 msgid "You don't have access to delete this relationship"
-msgstr ""
+msgstr "U heeft geen toegang om deze relatie te verwijderen"
 
 msgid "You don't have access to create any relationships"
-msgstr ""
+msgstr "U heeft geen toegang om relaties aan te maken"
 
 msgid "Add relationship"
 msgstr "Relatie toevoegen"
 
 msgid "No results found for "
-msgstr ""
+msgstr "Geen resultaten gevonden voor"
 
 msgid "Registering unit"
 msgstr "Eenheid registreren"
 
 msgid "Choose a registering unit"
-msgstr ""
+msgstr "Kies een registratie-eenheid"
 
 msgid "Clear selection"
-msgstr ""
+msgstr "Duidelijke selectie"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Geen programma's beschikbaar."
 
 msgid "Search for a program"
-msgstr ""
+msgstr "Zoek een programma"
 
 msgid "Some programs are being filtered by the chosen registering unit"
 msgstr ""
+"Sommige programma's worden gefilterd door de gekozen registratie-eenheid"
 
 msgid "Show all programs"
-msgstr ""
+msgstr "Toon alle programma's"
 
 msgid "Choose a program"
-msgstr ""
+msgstr "Kies een programma"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Zoeken naar {{titel tekst}}"
 
 msgid "Search for"
 msgstr "Zoeken"
@@ -950,149 +1052,151 @@ msgstr "Zoeken"
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
+"U kunt ook een programma uit de bovenste balk kiezen en in dat programma "
+"zoeken"
 
 msgid "Choose a type to start searching"
-msgstr ""
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
+msgstr "Kies een type om te beginnen met zoeken"
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Zoek {{naam}}"
 
 msgid "Search by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr ""
+msgstr "Zoek op {{naam}}"
 
 msgid "all programs"
-msgstr ""
+msgstr "alle programma's"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 msgstr ""
+"Vindt u niet de resultaten waarnaar u op zoek was? Probeer alle programma's "
+"te doorzoeken die dit type gebruiken"
 
 msgid "Search in all programs"
-msgstr ""
+msgstr "Zoek in alle programma's"
 
 msgid "If none of search results match, you can create a new "
-msgstr ""
+msgstr "Als geen van de zoekresultaten overeenkomt, kunt u een nieuwe maken"
 
 msgid "Create new"
-msgstr ""
+msgstr "Maak nieuw"
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
+msgstr "Vul deze velden in om te zoeken{{escape}} {{ searchableAttributes }}"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
 "search{{escape}} {{searchableAttributes}}"
 msgstr ""
+"Vul minimaal {{minAttributesRequiredToSearch}} van deze velden in om te "
+"zoeken{{escape}} {{searchableAttributes}}"
 
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
+msgstr "Vul dit veld in om te zoeken{{escape}} {{searchableAttributes}}"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 msgstr ""
+"U kunt uw zoektermen wijzigen en opnieuw zoeken om te vinden wat u zoekt."
 
 msgid "Back to search"
-msgstr ""
+msgstr "Terug naar zoeken"
 
 msgid "An error has occurred"
-msgstr ""
+msgstr "er is een fout opgetreden"
 
 msgid "Too many results"
-msgstr ""
+msgstr "Te veel resultaten"
 
 msgid "Cannot search in all programs"
-msgstr ""
+msgstr "Kan niet in alle programma's zoeken"
 
 msgid "Missing search criteria"
-msgstr ""
+msgstr "Ontbrekende zoekcriteria"
 
 msgid "Results found"
-msgstr ""
-
-msgid "Selected program"
-msgstr "Geselecteerd programma"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Gevonden resultaten"
 
 msgid "Saved lists in this program"
-msgstr ""
+msgstr "Opgeslagen lijsten in dit programma"
 
 msgid "Saved lists offer quick access to your most used views in a program."
 msgstr ""
+"Opgeslagen lijsten bieden snelle toegang tot uw meest gebruikte weergaven in"
+" een programma."
 
 msgid ""
 "There are no saved lists in this program yet, create one using the button "
 "below."
 msgstr ""
+"Er zijn nog geen opgeslagen lijsten in dit programma, maak er een aan via de"
+" onderstaande knop."
 
 msgid "Create saved list"
-msgstr ""
+msgstr "Maak opgeslagen lijst"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Nieuwe {{trackedEntityNaam}} in {{programmaNaam}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Zoek naar een {{trackedEntityNaam}} in {{programmaNaam}}"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "Om met het geselecteerde programma te werken,"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "open de Tracker Capture-app"
 
 msgid "This program is protected"
-msgstr ""
+msgstr "Dit programma is beveiligd"
 
 msgid "Reason to check for enrollments"
-msgstr ""
+msgstr "Reden om te controleren op inschrijvingen"
 
 msgid ""
 "Describe the reason you are checking for enrollments in this protected "
 "program"
 msgstr ""
+"Beschrijf de reden waarom u controleert op inschrijvingen voor dit "
+"beveiligde programma"
 
 msgid "Check for enrollments"
-msgstr ""
+msgstr "Controleer op inschrijvingen"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
 msgstr ""
+"U moet een reden opgeven om te controleren op inschrijvingen voor dit "
+"beschermde programma. Alle activiteiten worden geregistreerd."
 
 msgid "Save comment"
-msgstr ""
+msgstr "Opmerking opslaan"
 
 msgid "Enrollment actions"
-msgstr ""
+msgstr "Inschrijving acties"
 
 msgid "We are processing your request."
-msgstr ""
+msgstr "We zijn je verzoek aan het verwerken."
 
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
+"Er is slechts één inschrijving per {{tetNaam}} toegestaan voor dit programma"
 
 msgid "Add new"
 msgstr "Nieuw toevoegen"
 
 msgid "Reactivate"
-msgstr ""
+msgstr "Opnieuw activeren"
 
 msgid "Mark as cancelled"
-msgstr ""
+msgstr "Markeren als geannuleerd"
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "Markering onvolledig"
 
 msgid "Delete enrollment"
 msgstr "Inschrijving verwijderen"
@@ -1101,15 +1205,20 @@ msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
 msgstr ""
+"Weet u zeker dat u deze inschrijving wilt verwijderen? Hiermee wordt de "
+"huidige inschrijving permanent verwijderd."
 
 msgid "Yes, delete enrollment."
-msgstr ""
+msgstr "Ja, inschrijving verwijderen."
 
 msgid "Remove mark for follow-up"
-msgstr ""
+msgstr "Markering verwijderen voor vervolg"
 
 msgid "Mark for follow-up"
 msgstr "Markeer voor vervolg"
+
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
 
 msgid "Enrollment date"
 msgstr "Inschrijvingsdatum"
@@ -1119,39 +1228,41 @@ msgstr "Incident datum"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
+"Inschrijvingswidget kan niet worden geladen. Probeer het later opnieuw"
 
 msgid "Follow-up"
-msgstr ""
+msgstr "Opvolgen"
 
 msgid "Started at {{orgUnitName}}"
-msgstr ""
+msgstr "Gestart bij {{orgUnitNaam}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
+msgstr "Eigendom van {{eigenaarOrgUnit}}"
 
 msgid "Last updated {{date}}"
-msgstr ""
+msgstr "Laatst bijgewerkt {{datum}}"
 
 msgid "Cancelled"
 msgstr "Geannuleerd"
 
 msgid "Comments about this enrollment"
-msgstr ""
+msgstr "Opmerkingen over deze inschrijving"
 
 msgid "Write a comment about this enrollment"
-msgstr ""
+msgstr "Schrijf een opmerking over deze inschrijving"
 
 msgid "This enrollment doesn't have any comments"
-msgstr ""
+msgstr "Deze inschrijving heeft geen opmerkingen"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
+"organisatie-eenheid kan niet worden opgehaald. Probeer het later opnieuw."
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Opslaan in {{stageNaam}} voor {{programmaNaam}} in {{orgUnitNaam}}"
 
 msgid "program or stage is invalid"
-msgstr ""
+msgstr "programma of fase is ongeldig"
 
 msgid "Error"
 msgstr "Fout"
@@ -1160,87 +1271,83 @@ msgid "Warning"
 msgstr "Waarschuwing"
 
 msgid "Comments about this event"
-msgstr ""
+msgstr "Opmerkingen over dit evenement"
 
 msgid "Write a comment about this event"
-msgstr ""
+msgstr "Schrijf een reactie over dit evenement"
 
 msgid "This event doesn't have any comments"
-msgstr ""
+msgstr "Dit evenement heeft geen opmerkingen"
 
 msgid "stage not found in rules execution"
-msgstr ""
+msgstr "stadium niet gevonden in uitvoering van regels"
 
 msgid "Delete event"
-msgstr ""
+msgstr "evenement verwijderen"
 
 msgid "Yes, delete event"
-msgstr ""
+msgstr "Ja, evenement verwijderen"
 
 msgid "Go to “Schedule” tab to reschedule this event"
-msgstr ""
+msgstr "Ga naar het tabblad \"Planning\" om dit evenement opnieuw te plannen"
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
+"Geplande datum kan niet worden gewijzigd voor {{ eventStatus }} evenementen"
 
 msgid "Event completed"
-msgstr ""
+msgstr "Evenement voltooid"
 
 msgid "Back to all stages and events"
-msgstr ""
+msgstr "Terug naar alle stadium en evenementen"
 
 msgid "Schedule date info"
-msgstr ""
+msgstr "Plan datum info"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
-msgstr ""
+msgstr "Automatisch gepland voor {{suggestedScheduleDate}}"
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
-
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
+"De geplande datum komt overeen met de voorgestelde datum, maar kan indien "
+"nodig worden gewijzigd."
 
 msgid "after"
-msgstr ""
+msgstr "na"
 
 msgid "before"
-msgstr ""
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
+msgstr "voor"
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
+"Een evenement plannen in {{stageName}} voor {{programName}} in "
+"{{orgUnitName}}"
 
 msgid "Schedule info"
-msgstr ""
+msgstr "Schema info"
 
 msgid "Schedule date / Due date"
-msgstr ""
+msgstr "Schemadatum / Vervaldatum"
 
 msgid "Event comments"
-msgstr ""
+msgstr "Evenement opmerkingen"
 
 msgid "Write a comment about this scheduled event"
-msgstr ""
+msgstr "Schrijf een opmerking over dit geplande evenement"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
 "information about this enrollment, use the Edit button in the in the "
 "Enrollment box on this dashboard"
 msgstr ""
+"Wijzig hier informatie over deze {{trackedEntityName}}. Gebruik de knop "
+"Bewerken in het vak Inschrijving op dit dashboard om informatie over deze "
+"inschrijving te wijzigen"
 
 msgid " Loading..."
-msgstr ""
+msgstr " Bezig met laden..."
 
 msgid "Save changes"
 msgstr "Wijzigingen opslaan"
@@ -1249,91 +1356,128 @@ msgid "Profile"
 msgstr "Profiel"
 
 msgid "There is a problem with this form"
-msgstr ""
+msgstr "Er is een probleem met dit formulier"
 
 msgid "There are warnings in this form"
-msgstr ""
+msgstr "Er zijn waarschuwingen in dit formulier"
 
 msgid "There was a problem saving changes"
-msgstr ""
+msgstr "Er is een probleem opgetreden bij het opslaan van wijzigingen"
 
 msgid "Try again or contact your system administrator for support"
 msgstr ""
-
-msgid "tracked entity instance"
-msgstr ""
+"Probeer het opnieuw of neem contact op met uw systeembeheerder voor "
+"ondersteuning"
 
 msgid "Fix errors in the form to continue."
-msgstr ""
+msgstr "Corrigeer fouten in het formulier om door te gaan."
 
 msgid "Profile widget could not be loaded. Please try again later"
-msgstr ""
+msgstr "Profielwidget kan niet worden geladen. Probeer het later opnieuw"
 
 msgid "{{TETName}} profile"
-msgstr ""
+msgstr "{{TETNaam}} profiel"
 
 msgid "Edit"
 msgstr "Bewerk"
 
+msgid "tracked entity instance"
+msgstr "gevolgd entiteitsexemplaar"
+
 msgid "New {{ eventName }} event"
-msgstr ""
+msgstr "Nieuwe {{ evenementNaam }} evenement"
 
 msgid "To open this event, please wait until saving is complete"
-msgstr ""
+msgstr "Wacht tot het opslaan is voltooid om dit evenement te openen"
 
 msgid "Show {{ rest }} more"
-msgstr ""
+msgstr "Toon {{ rest }} meer"
 
 msgid "Reset list"
-msgstr ""
+msgstr "Lijst resetten"
 
 msgid "Go to full {{ eventName }}"
-msgstr ""
+msgstr "Ga naar volledige {{ eventName }}"
 
 msgid "This stage can only have one event"
-msgstr ""
+msgstr "Deze fase kan maar één evenement hebben"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
+"Gebeurtenissen kunnen niet worden opgehaald. Probeer het later opnieuw."
 
 msgid "{{ totalEvents }} events"
-msgstr ""
+msgstr "{{ totaleEvenementen}} evenementen"
 
 msgid "{{ overdueEvents }} overdue"
-msgstr ""
+msgstr "{{ lateEvenementen }} te laat"
 
 msgid "{{ scheduledEvents }} scheduled"
-msgstr ""
+msgstr "{{ geplandeEvenementen}} gepland"
 
 msgid "Stages and Events"
+msgstr "stadiums en evenementen"
+
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Soort"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
 msgstr ""
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "Werklijst kon niet worden geladen"
 
 msgid "Download as JSON"
-msgstr ""
-
-msgid "Download as XML"
-msgstr ""
+msgstr "Downloaden als JSON"
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "Downloaden als CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "Downloaden met huidige filters"
 
 msgid "Download data..."
-msgstr ""
+msgstr "Gegevens downloaden..."
 
 msgid "an error occurred loading working lists"
-msgstr ""
+msgstr "er is een fout opgetreden bij het laden van werklijsten"
 
 msgid "Assigned to"
-msgstr ""
+msgstr "Toegewezen aan"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "registratie datum"
 
 msgid "Inactive"
 msgstr "Inactief"
@@ -1342,70 +1486,72 @@ msgid "Enrollment status"
 msgstr "Inschrijving Status"
 
 msgid "Choose a program stage to filter by {{label}}"
-msgstr ""
+msgstr "Kies een programmafase om op te filteren {{label}}"
 
 msgid "Active enrollments"
-msgstr ""
+msgstr "Actieve inschrijvingen"
 
 msgid "Completed enrollments"
-msgstr ""
+msgstr "Voltooide inschrijvingen"
 
 msgid "Cancelled enrollments"
-msgstr ""
+msgstr "Geannuleerde inschrijvingen"
 
 msgid "Working list could not be updated"
-msgstr ""
+msgstr "Werklijst kon niet worden bijgewerkt"
 
 msgid "an error occurred loading the working lists"
-msgstr ""
+msgstr "er is een fout opgetreden bij het laden van de werklijsten"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
+"er is een fout opgetreden bij het laden van lijsten met instanties van "
+"bijgehouden entiteiten"
 
 msgid "Update view"
-msgstr ""
+msgstr "Weergave bijwerken"
 
 msgid "Save current view..."
-msgstr ""
+msgstr "Huidige weergave opslaan..."
 
 msgid "Save current view as..."
-msgstr ""
+msgstr "Huidige weergave opslaan als..."
 
 msgid "Delete view"
-msgstr ""
+msgstr "Weergave verwijderen"
 
 msgid "Share view..."
-msgstr ""
+msgstr "Weergave delen..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
+msgstr "Weet u zeker dat u de weergave '{{templateNaam}}' wilt verwijderen?"
 
 msgid "Confirm"
 msgstr "Bevestigen"
 
 msgid "Save As view"
-msgstr ""
+msgstr "Opslaan als weergave"
 
 msgid "View name"
-msgstr ""
+msgstr "Naam bekijken"
 
 msgid "Show Less"
-msgstr ""
+msgstr "Laat minder zien"
 
 msgid "Show All"
-msgstr ""
+msgstr "Toon alles"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Er is een fout opgetreden. Zie logboek voor details"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "Gepland{{ ontsnapping }} vanwege {{ tijd }}"
 
 msgid "Scheduled"
 msgstr "Gepland"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "Te laat{{ ontsnappen }} vanwege {{ tijd }}"
 
 msgid "Overdue"
 msgstr "Verlopen"
@@ -1414,88 +1560,87 @@ msgid "Skipped"
 msgstr "Overgeslaten"
 
 msgid "Visited"
-msgstr ""
+msgstr "Bezocht"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{trackedEntityNaam}} in programma{{escape}} {{programmaNaam}}"
 
 msgid "Program not found"
-msgstr ""
+msgstr "Programma niet gevonden"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "Programma is geen tracker-programma"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Fout bij opslaan van evenement"
 
 msgid "Could not save event"
-msgstr ""
+msgstr "Kon evenement niet opslaan"
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "Kan evenement niet verwijderen"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "Kan werklijst niet opslaan"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "Kan werklijst niet toevoegen"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "Kan werklijst niet verwijderen"
 
 msgid "Organisation unit search failed."
-msgstr ""
+msgstr "Zoeken naar organisatie-eenheid is mislukt."
 
 msgid "Error saving tracked entity instance"
-msgstr ""
+msgstr "Fout bij opslaan van gevolgde entiteitsinstantie"
 
 msgid "Error saving enrollment"
-msgstr ""
+msgstr "Fout bij opslaan van inschrijving"
 
 msgid "Error saving the enrollment event"
-msgstr ""
+msgstr "Fout bij het opslaan van het inschrijvingsevenement"
 
 msgid "Error deleting the enrollment event"
-msgstr ""
+msgstr "Fout bij het verwijderen van de inschrijvingsgebeurtenis"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr ""
+"Fout bij het bewerken van het evenement, de aangebrachte wijzigingen zijn "
+"niet opgeslagen"
 
 msgid "Set coordinate"
 msgstr "Coördinaat instellen"
 
-msgid "Page {{currentPage}}"
-msgstr ""
-
 msgid "Date"
-msgstr "Datum\n"
+msgstr "Datum"
 
 msgid "Time"
-msgstr ""
+msgstr "Tijd"
 
 msgid "From date"
-msgstr ""
+msgstr "Van datum"
 
 msgid "From time"
-msgstr ""
+msgstr "Van tijd"
 
 msgid "To date"
-msgstr ""
+msgstr "Daten"
 
 msgid "To time"
-msgstr ""
+msgstr "Timen"
 
-msgid "error encountered during field validation"
-msgstr ""
-
-msgid "error"
-msgstr ""
+msgid "Page {{currentPage}}"
+msgstr "Pagina {{huidigePagina}}"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Polygoon verwijderen"
 
 msgid "Set area"
-msgstr ""
+msgstr "Gebied instellen"
+
+msgid "Area on map saved"
+msgstr "Gebied op kaart opgeslagen"
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "Compatibiliteitsmodus"

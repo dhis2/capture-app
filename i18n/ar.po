@@ -1,16 +1,16 @@
 # 
 # Translators:
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
-# phil_dhis2, 2022
-# Hamza Assada <7amza.it@gmail.com>, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
+# Hamza Assada <7amza.it@gmail.com>, 2023
+# Philip Larsen Donnelly, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-05-29T07:35:17.403Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
+"Last-Translator: Philip Larsen Donnelly, 2023\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,6 +74,16 @@ msgstr "تاريخ التسجيل"
 
 msgid "Last updated"
 msgstr "آخر تحديث"
+
+msgid "error encountered during field validation"
+msgstr "حدث خطأ أثناء التحقق من صحة الحقل"
+
+msgid "error"
+msgstr "خطأ"
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr "يتم التحقق من القيمة"
@@ -150,6 +160,15 @@ msgstr "الإحداثية"
 msgid "Enrollment"
 msgstr "التسجيل"
 
+msgid "Complete event"
+msgstr "إكمال الحدث"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -168,14 +187,17 @@ msgstr "إلغاء"
 msgid "Metadata error. see log for details"
 msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "المستخدم المعين"
 
 msgid "Search for user"
 msgstr "البحث عن مستخدم"
-
-msgid "Complete event"
-msgstr "إكمال الحدث"
 
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
@@ -262,19 +284,19 @@ msgstr "إضافة علاقة للحدث."
 msgid "Go back to event without saving relationship"
 msgstr "ارجع إلى الحدث بدون حفظ العلاقة"
 
-msgid "Unsaved changes"
-msgstr "تعديلات لم يتم حفظها"
+msgid "Discard unsaved changes?"
+msgstr "تجاهل التغييرات غير المحفوظة؟"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
 
-msgid "Yes, discard"
-msgstr "نعم ، تجاهل"
+msgid "Yes, discard changes"
+msgstr "نعم ، تجاهل التغييرات"
 
-msgid "No, stay here"
-msgstr "لا ، ابق هنا"
+msgid "No, cancel"
+msgstr "لا، الغاء"
 
 msgid "New event"
 msgstr "حدث جديد"
@@ -344,21 +366,8 @@ msgstr "توليد حدث جديد"
 msgid "Do you want to create another event?"
 msgstr "هل تريد إنشاء حدث جديد"
 
-msgid "No, cancel"
-msgstr "لا، الغاء"
-
 msgid "Yes, create new event"
 msgstr ""
-
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"ستؤدي مغادرة هذه الصفحة إلى تجاهل التغييرات التي أجريتها على هذا الحدث."
-
-msgid "Warnings found"
-msgstr "تم العثور على إشعارات تحذيرية"
-
-msgid "Abort"
-msgstr "إحباط"
 
 msgid "Back to form"
 msgstr "العودة اللنموذج"
@@ -381,8 +390,10 @@ msgstr "لا تزال بعض العمليات قيد التشغيل. يرجى ا
 msgid "Operations running"
 msgstr "العمليات الجارية"
 
-msgid "Sort"
-msgstr "فرز"
+msgid ""
+"This event has unsaved changes. Leaving this page without saving will lose "
+"these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
 
 msgid "No events to display"
 msgstr "لايوجد احداث للعرض"
@@ -492,6 +503,12 @@ msgstr "تحميل الصورة"
 msgid "Select image"
 msgstr "حدد الصورة"
 
+msgid "Type to filter options"
+msgstr "اكتب لتصفية الخيارات"
+
+msgid "No match found"
+msgstr ""
+
 msgid "Search"
 msgstr "البحث"
 
@@ -588,10 +605,40 @@ msgstr ""
 msgid "Write comment"
 msgstr "اكتب تعليقاً"
 
+msgid "was blanked out and hidden by your last action"
+msgstr ""
+
+msgid "Notice"
+msgstr ""
+
+msgid "Close the notice"
+msgstr ""
+
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr ""
 
 msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
 msgstr ""
 
 msgid "Yes, opt in"
@@ -727,7 +774,7 @@ msgstr "المجدولة زمنياً"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -789,6 +836,9 @@ msgid ""
 msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
@@ -886,6 +936,18 @@ msgstr "تعذر تحميل الحدث"
 msgid "Organisation unit could not be loaded"
 msgstr "تعذر تحميل الوحدة التنظيمية"
 
+msgid "Selected program"
+msgstr "البرنامج المحدد"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "بحث {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "البحث حسب السمة"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
 
@@ -944,23 +1006,11 @@ msgstr "يمكنك أيضًا اختيار برنامج من الشريط الع
 msgid "Choose a type to start searching"
 msgstr "اختر نوعًا لبدء البحث"
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
 msgid "Search {{name}}"
 msgstr "البحث عن {{name}}"
 
 msgid "Search by {{name}}"
 msgstr ""
-
-msgid "Search by attributes"
-msgstr "البحث حسب السمة"
 
 msgid "all programs"
 msgstr ""
@@ -1014,12 +1064,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr "العثور على نتائج"
-
-msgid "Selected program"
-msgstr "البرنامج المحدد"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "بحث {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1106,6 +1150,9 @@ msgstr ""
 
 msgid "Mark for follow-up"
 msgstr "اشر من أجل الملحق"
+
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
 
 msgid "Enrollment date"
 msgstr "تاريخ التسجيل"
@@ -1244,9 +1291,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "نموذج الكيان المتتبع"
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1259,10 +1303,13 @@ msgstr ""
 msgid "Edit"
 msgstr "تعديل"
 
+msgid "tracked entity instance"
+msgstr "نموذج الكيان المتتبع"
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
-msgid "This event is not yet preserved and cannot be edited"
+msgid "To open this event, please wait until saving is complete"
 msgstr ""
 
 msgid "Show {{ rest }} more"
@@ -1292,14 +1339,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "اسم مرحلة البرنامج"
+
 msgid "Working list could not be loaded"
 msgstr "تعذر تحميل قائمة العمل"
 
 msgid "Download as JSON"
 msgstr "تنزيل كملف JSON"
-
-msgid "Download as XML"
-msgstr "تنزيل كملف XML"
 
 msgid "Download as CSV"
 msgstr "تنزيل كملف CSV"
@@ -1313,6 +1394,9 @@ msgstr "تنزيل البيانات"
 msgid "an error occurred loading working lists"
 msgstr "حدث خطأ اثناء تحميل قوائم العمل"
 
+msgid "Assigned to"
+msgstr "مسندة إلى"
+
 msgid "Registration Date"
 msgstr "تاريخ التسجيل"
 
@@ -1322,10 +1406,16 @@ msgstr "الغير نشطة"
 msgid "Enrollment status"
 msgstr "حالة التسجيل"
 
-msgid "Assigned to"
-msgstr "مسندة إلى"
-
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1439,9 +1529,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"
 
-msgid "Page {{currentPage}}"
-msgstr "صفحة {{currentPage}}"
-
 msgid "Date"
 msgstr "التاريخ"
 
@@ -1460,17 +1547,17 @@ msgstr "حتى تاريخ"
 msgid "To time"
 msgstr "إلى وقت"
 
-msgid "error encountered during field validation"
-msgstr "حدث خطأ أثناء التحقق من صحة الحقل"
-
-msgid "error"
-msgstr "خطأ"
+msgid "Page {{currentPage}}"
+msgstr "صفحة {{currentPage}}"
 
 msgid "Delete polygon"
 msgstr "حذف المضلع"
 
 msgid "Set area"
 msgstr "عين المساحة"
+
+msgid "Area on map saved"
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "وضع التوافق"

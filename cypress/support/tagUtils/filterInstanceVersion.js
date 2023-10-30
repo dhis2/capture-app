@@ -1,5 +1,5 @@
 export const filterInstanceVersion = (skip) => {
-    const { tags } = window.testState.currentScenario;
+    const { tags } = window.testState.pickle;
     if (!tags || !tags.length) {
         return;
     }
@@ -26,8 +26,15 @@ export const filterInstanceVersion = (skip) => {
         .some((versionTag) => {
             const version = Number(versionTag[2]);
             const operator = versionTag[1] || '=';
-            return operation[operator]?.(currentInstanceVersion, version) ?? false;
+
+            if (!operation[operator] || !currentInstanceVersion) {
+                return false;
+            }
+
+            return operation[operator](currentInstanceVersion, version);
         });
 
-    !shouldRun && skip();
+    if (!shouldRun) {
+        skip();
+    }
 };
