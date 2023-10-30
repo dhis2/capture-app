@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Caroline Hesthagen Holen <caroline@devotta.no>, 2022
 # Karoline Tufte Lien <karoline@dhis2.org>, 2023
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2023\n"
+"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2023\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,6 +82,7 @@ msgstr "Feil"
 msgid ""
 "Plugins are not yet available - Please contact your system administrator"
 msgstr ""
+"Plugins er ikke tilgjengelig ennå - Ta kontakt med systemadministratoren din"
 
 msgid "This value is validating"
 msgstr "Denne verdien validerer"
@@ -158,8 +159,17 @@ msgstr "Koordinater"
 msgid "Enrollment"
 msgstr "Registrering"
 
+msgid "Complete event"
+msgstr "Fullfør hendelse"
+
+msgid "{{ stageName }} - Basic info"
+msgstr "{{ stageName }} - Grunnleggende informasjon"
+
+msgid "{{ stageName }} - Status"
+msgstr "{{ stageName }} - Status"
+
 msgid "Please select {{categoryName}}"
-msgstr ""
+msgstr "Velg {{categoryName}}"
 
 msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
@@ -176,14 +186,17 @@ msgstr "Avbryt"
 msgid "Metadata error. see log for details"
 msgstr "Metadata feil, se logg for detaljer"
 
+msgid "{{ stageName }} - Details"
+msgstr "{{ stageName }} - Detaljer"
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr "{{ stageName }} - {{ sectionName }}"
+
 msgid "Assigned user"
 msgstr "Tildelt programbruker"
 
 msgid "Search for user"
 msgstr "Søk etter bruker"
-
-msgid "Complete event"
-msgstr "Fullfør hendelse"
 
 msgid "Basic info"
 msgstr "Grunnleggende informasjon"
@@ -281,7 +294,7 @@ msgstr ""
 "relasjon"
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "Ja, forkast endringer"
 
 msgid "No, cancel"
 msgstr "Nei, avbryt"
@@ -385,6 +398,9 @@ msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
 msgstr ""
+"Denne hendelsen har ulagrede endringer. Hvis du forlater denne siden uten å "
+"lagre, mister du disse endringene. Er du sikker på at du vil forkaste "
+"ulagrede endringer?"
 
 msgid "No events to display"
 msgstr "Ingen hendelser å vise"
@@ -498,7 +514,7 @@ msgid "Type to filter options"
 msgstr "Skriv for å filtrere alternativer"
 
 msgid "No match found"
-msgstr ""
+msgstr "Ingen treff funnet"
 
 msgid "Search"
 msgstr "Søk"
@@ -597,13 +613,13 @@ msgid "Write comment"
 msgstr "Skriv kommentar"
 
 msgid "was blanked out and hidden by your last action"
-msgstr ""
+msgstr "ble tømt og skjult av den siste handlingen din"
 
 msgid "Notice"
-msgstr ""
+msgstr "Merknad"
 
 msgid "Close the notice"
-msgstr ""
+msgstr "Lukk merknaden"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "Bruk nytt registreringsdashbord for {{programName}}"
@@ -619,18 +635,30 @@ msgid ""
 "functionality in Capture is ongoing and will be added in upcoming app "
 "releases."
 msgstr ""
+"Ved å klikke på \"meld på\" nedenfor, vil du begynne å bruke det nye "
+"registreringsdashbordet i Capture-appen for dette Tracker-programmet. For "
+"øyeblikket er det noe funksjonalitet fra Tracker Capture som ennå ikke er "
+"lagt til, inkludert relasjons- og henvisningsfunksjonalitet. Arbeidet med å "
+"inkludere denne Tracker-funksjonaliteten i Capture pågår og vil bli lagt til"
+" i kommende apputgivelser."
 
 msgid ""
 "The core team appreciates any feedback on this new functionality which is "
 "currently being beta tested, please report any issues and feedback in the "
 "DHIS2 JIRA project."
 msgstr ""
+"Kjerneteamet setter pris på all tilbakemelding på denne nye funksjonaliteten"
+" som for øyeblikket blir betatestet, vennligst rapporter eventuelle "
+"problemer og tilbakemeldinger i DHIS2 JIRA-prosjektet."
 
 msgid ""
 "Click the button below to opt-in to the new enrollment dashboard "
 "functionality in the Capture app (beta) for this Tracker program for all "
 "users."
 msgstr ""
+"Klikk på knappen nedenfor for å melde deg på den nye funksjonen for "
+"registreringsdashbord i Capture-appen (beta) for dette Tracker-programmet "
+"for alle brukere."
 
 msgid "Yes, opt in"
 msgstr "Ja, meld på"
@@ -653,6 +681,8 @@ msgstr ""
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
+"Det oppsto en feil under henting av registreringer. Vennligst skriv inn en "
+"gyldig url."
 
 msgid "Enrollment Dashboard"
 msgstr "Registreringsdashbord"
@@ -694,19 +724,19 @@ msgstr ""
 "{{programName}} har kategorier. Velg alle kategorier for å se dashbordet."
 
 msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
+msgstr "Ugyldig registrerings-ID {{enrollmentId}}"
 
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Velg en registrering for å se dashbordet."
 
 msgid "There are no active enrollments."
-msgstr ""
+msgstr "Det er ingen aktive registreringer."
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "Legg til ny registrering for {{teiDisplayName}} i dette programmet."
 
 msgid "No access to program owner."
-msgstr ""
+msgstr "Ingen tilgang til programeier."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
@@ -774,7 +804,7 @@ msgid "Refer"
 msgstr "Henvis"
 
 msgid "You can't add any more {{ programStageName }} events"
-msgstr ""
+msgstr "Du kan ikke legge til flere {{ programStageName }}-hendelser"
 
 msgid "Cancel without saving"
 msgstr "Avbryt uten å lagre"
@@ -839,7 +869,7 @@ msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Ny registrering i programmet{{escape}} {{programName}}"
 
 msgid "Save {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Lagre {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Lagre {{trackedEntityName}}"
@@ -938,6 +968,18 @@ msgstr "Hendelse kunne ikke lastes inn"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisasjonsenhet kunne ikke lastes inn"
 
+msgid "Selected program"
+msgstr "Valgt program"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Søk {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Søk etter attributter"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
 
@@ -957,13 +999,13 @@ msgid "Add relationship"
 msgstr "Legg til relasjon"
 
 msgid "No results found for "
-msgstr ""
+msgstr "Ingen resultater funnet for"
 
 msgid "Registering unit"
 msgstr "Registreringsenhet"
 
 msgid "Choose a registering unit"
-msgstr ""
+msgstr "Velg en registreringsenhet"
 
 msgid "Clear selection"
 msgstr "Fjern valg"
@@ -972,13 +1014,13 @@ msgid "No programs available."
 msgstr "Ingen programmer tilgjengelig."
 
 msgid "Search for a program"
-msgstr ""
+msgstr "Søk for et program"
 
 msgid "Some programs are being filtered by the chosen registering unit"
-msgstr ""
+msgstr "Noen programmer blir filtrert av den valgte registreringsenheten"
 
 msgid "Show all programs"
-msgstr ""
+msgstr "Vis alle programmer"
 
 msgid "Choose a program"
 msgstr "Velg et program"
@@ -1001,9 +1043,6 @@ msgstr "Søk {{name}}"
 
 msgid "Search by {{name}}"
 msgstr "Søk etter {{name}}"
-
-msgid "Search by attributes"
-msgstr "Søk etter attributter"
 
 msgid "all programs"
 msgstr "alle programmer"
@@ -1055,16 +1094,10 @@ msgid "Cannot search in all programs"
 msgstr "Kan ikke søke i alle programmer"
 
 msgid "Missing search criteria"
-msgstr ""
+msgstr "Manglende søkekriterier"
 
 msgid "Results found"
 msgstr "Resultater funnet"
-
-msgid "Selected program"
-msgstr "Valgt program"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Søk {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr "Lagrede lister i dette programmet"
@@ -1096,23 +1129,27 @@ msgid "open the Tracker Capture app"
 msgstr "åpne Tracker Capture app"
 
 msgid "This program is protected"
-msgstr ""
+msgstr "Dette programmet er beskyttet"
 
 msgid "Reason to check for enrollments"
-msgstr ""
+msgstr "Grunn til å sjekke for registreringer"
 
 msgid ""
 "Describe the reason you are checking for enrollments in this protected "
 "program"
 msgstr ""
+"Beskriv årsaken til at du ser etter registreringer i dette beskyttede "
+"programmet"
 
 msgid "Check for enrollments"
-msgstr ""
+msgstr "Se etter registreringer"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
 msgstr ""
+"Du må oppgi en grunn for å se etter registreringer i dette beskyttede "
+"programmet. All aktivitet vil bli logget."
 
 msgid "Save comment"
 msgstr "Lagre kommentar"
@@ -1159,6 +1196,8 @@ msgstr "Merk for oppfølging"
 
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
+"Eksisterende datoer for automatisk genererte hendelser vil ikke bli "
+"oppdatert."
 
 msgid "Enrollment date"
 msgstr "Registreringsdato"
@@ -1322,7 +1361,7 @@ msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"
 
 msgid "To open this event, please wait until saving is complete"
-msgstr ""
+msgstr "For å åpne denne hendelsen, vennligst vent til lagringen er fullført"
 
 msgid "Show {{ rest }} more"
 msgstr "Vis {{ rest }} flere"
@@ -1351,14 +1390,48 @@ msgstr "{{ scheduledEvents }} planlagt"
 msgid "Stages and Events"
 msgstr "Faser og hendelser"
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Programfase navn"
+
 msgid "Working list could not be loaded"
 msgstr "Arbeidslisten kunne ikke lastes inn"
 
 msgid "Download as JSON"
 msgstr "Last ned i JSON format"
-
-msgid "Download as XML"
-msgstr "Last ned i XML format"
 
 msgid "Download as CSV"
 msgstr "Last ned i CSV format"
@@ -1388,19 +1461,19 @@ msgid "Choose a program stage to filter by {{label}}"
 msgstr "Velg en programfase å filtrere etter {{label}}"
 
 msgid "Active enrollments"
-msgstr ""
+msgstr "Aktive registreringer"
 
 msgid "Completed enrollments"
-msgstr ""
+msgstr "Fullførte registreringer"
 
 msgid "Cancelled enrollments"
-msgstr ""
+msgstr "Avbrutte registreringer"
 
 msgid "Working list could not be updated"
 msgstr "Arbeidslisten kunne ikke oppdateres"
 
 msgid "an error occurred loading the working lists"
-msgstr ""
+msgstr "det oppstod en feil ved lasting av arbeidslistene"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "det oppstod en feil ved lasting av lister over sporede enheter"
@@ -1535,7 +1608,7 @@ msgid "Set area"
 msgstr "Sett område"
 
 msgid "Area on map saved"
-msgstr ""
+msgstr "Området på kartet er lagret"
 
 msgid "Compatibility mode"
 msgstr "Kompabilitetsmodus"

@@ -3,17 +3,17 @@
 # David Júnior <davidjr.mondlane@gmail.com>, 2021
 # Philip Larsen Donnelly, 2022
 # Ge Joao <gsimango@saudigitus.org>, 2022
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2023
 # Fernando Jorge Bade, 2023
 # Sheila André <sandre@saudigitus.org>, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Sheila André <sandre@saudigitus.org>, 2023\n"
+"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -163,6 +163,15 @@ msgstr "Coordenada"
 msgid "Enrollment"
 msgstr "Inscrição"
 
+msgid "Complete event"
+msgstr "Evento completo"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr "Por Favor Selecione {{categoryName}}"
 
@@ -182,14 +191,17 @@ msgstr "Cancelar"
 msgid "Metadata error. see log for details"
 msgstr "Erro de metadados. veja o log para detalhes"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Utilizador atribuído"
 
 msgid "Search for user"
 msgstr "Pesquisar por utilizador"
-
-msgid "Complete event"
-msgstr "Evento completo"
 
 msgid "Basic info"
 msgstr "Informação básica"
@@ -964,6 +976,18 @@ msgstr "O evento não pôde ser carregado"
 msgid "Organisation unit could not be loaded"
 msgstr "Não foi possível carregar a unidade organizacional"
 
+msgid "Selected program"
+msgstr "Programa selecionado"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Pesquise {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Pesquisa por atributos"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Possíveis duplicatas encontradas"
 
@@ -1031,9 +1055,6 @@ msgstr "Pesquise {{name}}"
 msgid "Search by {{name}}"
 msgstr "Procura por {{nome}}"
 
-msgid "Search by attributes"
-msgstr "Pesquisa por atributos"
-
 msgid "all programs"
 msgstr "todos os programas"
 
@@ -1091,12 +1112,6 @@ msgstr "Critérios de pesquisa ausentes"
 
 msgid "Results found"
 msgstr "Resultados encontrados"
-
-msgid "Selected program"
-msgstr "Programa selecionado"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Pesquise {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr "Listas gravadas neste programa"
@@ -1398,14 +1413,48 @@ msgstr "{{scheduleEvents}} agendado"
 msgid "Stages and Events"
 msgstr "Fases e Eventos"
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Nome do estágio do programa"
+
 msgid "Working list could not be loaded"
 msgstr "A lista de trabalho não pôde ser carregada"
 
 msgid "Download as JSON"
 msgstr "Baixar como JSON"
-
-msgid "Download as XML"
-msgstr "Baixar como XML"
 
 msgid "Download as CSV"
 msgstr "Baixar como CSV"

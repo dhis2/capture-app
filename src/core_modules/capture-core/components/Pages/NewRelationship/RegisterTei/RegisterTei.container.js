@@ -34,6 +34,7 @@ export const RegisterTei = ({ onLink, onSave, onGetUnsavedAttributeValues }: Own
             trackedEntityName={trackedEntityName}
             newRelationshipProgramId={newRelationshipProgramId}
             error={error}
-        />);
+        />
+    );
 };
 

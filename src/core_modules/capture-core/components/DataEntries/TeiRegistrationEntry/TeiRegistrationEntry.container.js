@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { Enrollment, scopeTypes } from '../../../metaData';
 import { startNewTeiDataEntryInitialisation } from './TeiRegistrationEntry.actions';
 import type { OwnProps } from './TeiRegistrationEntry.types';
@@ -11,11 +10,11 @@ import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component'
 import { useFormValuesFromSearchTerms } from './hooks/useFormValuesFromSearchTerms';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
+import { useBuildTeiPayload } from './hooks/useBuildTeiPayload';
 
-const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
+const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId, orgUnitId) => {
     const dispatch = useDispatch();
     const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
     const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
     const formValues = useFormValuesFromSearchTerms();
     const registrationFormReady = !!formId;
@@ -24,18 +23,18 @@ const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
         if (registrationFormReady && scopeType === scopeTypes.TRACKED_ENTITY_TYPE) {
             dispatch(
                 startNewTeiDataEntryInitialisation(
-                    { selectedOrgUnitId, selectedScopeId, dataEntryId, formFoundation, formValues },
+                    { selectedOrgUnitId: orgUnitId, selectedScopeId, dataEntryId, formFoundation, formValues },
                 ));
         }
     }, [
         scopeType,
         dataEntryId,
         selectedScopeId,
-        selectedOrgUnitId,
         registrationFormReady,
         formFoundation,
         formValues,
         dispatch,
+        orgUnitId,
     ]);
 
     return {
@@ -44,13 +43,18 @@ const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
 };
 
 
-export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, ...rest }) => {
-    const { trackedEntityName } = useInitialiseTeiRegistration(selectedScopeId, id);
+export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, orgUnitId, onSave, ...rest }) => {
+    const { trackedEntityName } = useInitialiseTeiRegistration(selectedScopeId, id, orgUnitId);
     const ready = useSelector(({ dataEntries }) => (!!dataEntries[id]));
     const dataEntry = useSelector(({ dataEntries }) => (dataEntries[id]));
     const {
         registrationMetaData: teiRegistrationMetadata,
     } = useMetadataForRegistrationForm({ selectedScopeId });
+    const { buildTeiWithoutEnrollment } = useBuildTeiPayload({
+        trackedEntityTypeId: selectedScopeId,
+        dataEntryId: id,
+        orgUnitId,
+    });
 
     const dataEntryKey = useMemo(() => {
         if (dataEntry) {
@@ -68,14 +72,21 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId,
         return null;
     }
 
+    const onSaveWithoutEnrollment = () => {
+        const teiPayload = buildTeiWithoutEnrollment();
+        onSave(teiPayload);
+    };
+
     return (
         <TeiRegistrationEntryComponent
             id={id}
+            orgUnitId={orgUnitId}
             teiRegistrationMetadata={teiRegistrationMetadata}
             selectedScopeId={teiRegistrationMetadata.form?.id}
             ready={ready && !!teiRegistrationMetadata}
             trackedEntityName={trackedEntityName}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            onSave={onSaveWithoutEnrollment}
             {...rest}
         />
     );

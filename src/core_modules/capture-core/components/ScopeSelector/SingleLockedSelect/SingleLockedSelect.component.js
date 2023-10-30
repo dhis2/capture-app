@@ -14,13 +14,19 @@ import type { Icon } from '../../../metaData';
 
 type Props = {|
     isUserInteractionInProgress?: boolean,
-    options: Array<{| label: string, value: any, icon?: Icon |}>,
+    options: Array<Option>,
     onClear?: () => void,
     onSelect?: (value: string) => void,
     title: string,
     selectedValue: string,
     displayOnly?: boolean,
     ...CssClasses,
+|};
+
+type Option = {|
+    label: string,
+    value: any,
+    icon?: Icon,
 |};
 
 type ReadyProp = {|
