@@ -16,7 +16,7 @@ import {
     groupRecordsByType,
 } from './helpers';
 import { SORT_DIRECTION, MULIT_TEXT_WITH_NO_OPTIONS_SET } from './constants';
-import { isNotValidOptionSet } from '../../../../../../utils/isNotValidOptionSet';
+import { isMultiTextWithoutOptionset } from '../../../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 
 const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'comments' }];
 const basedFieldTypes = [
@@ -115,7 +115,7 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;
             if (!acc.find(item => item.id === id)) {
-                if (isNotValidOptionSet(type, optionSet)) {
+                if (isMultiTextWithoutOptionset(type, optionSet)) {
                     log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ currDataElement }));
                     return acc;
                 }

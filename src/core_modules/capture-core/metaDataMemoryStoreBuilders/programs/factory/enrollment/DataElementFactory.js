@@ -21,7 +21,9 @@ import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import type { ConstructorInput } from './dataElementFactory.types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
-import { isNotValidOptionSet } from '../../../../utils/isNotValidOptionSet';
+import {
+    handleUnsupportedMultiText,
+} from '../../../common/helpers/dataElement/unsupportedMultiText';
 import { escapeString } from '../../../../utils/escapeString';
 
 export class DataElementFactory {
@@ -130,10 +132,12 @@ export class DataElementFactory {
     locale: ?string;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+    minorServerVersion: number;
     constructor({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
         locale,
+        minorServerVersion,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.locale = locale;
@@ -141,6 +145,7 @@ export class DataElementFactory {
             cachedOptionSets,
             locale,
         );
+        this.minorServerVersion = minorServerVersion;
     }
 
     _getAttributeTranslation(
@@ -218,11 +223,7 @@ export class DataElementFactory {
             cachedProgramTrackedEntityAttribute,
             cachedTrackedEntityAttribute,
         );
-        if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
-            log.error(errorCreator(DataElementFactory.errorMessages.MULIT_TEXT_WITH_NO_OPTIONS_SET)({ dataElement }));
-            return null;
-        }
-        return dataElement;
+        return handleUnsupportedMultiText(dataElement, this.minorServerVersion);
     }
 
     async _buildDateDataElement(

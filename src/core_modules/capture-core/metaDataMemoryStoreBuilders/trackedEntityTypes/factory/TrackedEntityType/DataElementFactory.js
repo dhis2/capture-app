@@ -18,8 +18,10 @@ import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import type { ConstructorInput } from './dataElementFactory.types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
-import { isNotValidOptionSet } from '../../../../utils/isNotValidOptionSet';
 import { escapeString } from '../../../../utils/escapeString';
+import {
+    handleUnsupportedMultiText,
+} from '../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 
 export class DataElementFactory {
     static translationPropertyNames = {
@@ -51,10 +53,12 @@ export class DataElementFactory {
     locale: ?string;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+    minorServerVersion: number;
     constructor({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
         locale,
+        minorServerVersion,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.locale = locale;
@@ -62,6 +66,7 @@ export class DataElementFactory {
             cachedOptionSets,
             locale,
         );
+        this.minorServerVersion = minorServerVersion;
     }
 
     _getAttributeTranslation(
@@ -77,7 +82,7 @@ export class DataElementFactory {
 
     async build(
         cachedTrackedEntityTypeAttribute: CachedTrackedEntityTypeAttribute,
-    ) {
+    ): Promise<DataElement | null> {
         const cachedAttribute = cachedTrackedEntityTypeAttribute.trackedEntityAttributeId &&
             this.cachedTrackedEntityAttributes.get(
                 cachedTrackedEntityTypeAttribute.trackedEntityAttributeId,
@@ -195,14 +200,8 @@ export class DataElementFactory {
                 null,
                 value => value,
             );
-            if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
-                log.error(
-                    errorCreator(DataElementFactory.errorMessages.MULIT_TEXT_WITH_NO_OPTIONS_SET)({ dataElement }),
-                );
-                return null;
-            }
         }
 
-        return dataElement;
+        return handleUnsupportedMultiText(dataElement, this.minorServerVersion);
     }
 }
