@@ -1,3 +1,16 @@
+# [100.43.0](https://github.com/dhis2/capture-app/compare/v100.42.0...v100.43.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9636ea1](https://github.com/dhis2/capture-app/commit/9636ea1e8f54685b2c5ca65fd7b49cd3f5d5f846))
+* [DHIS2-15879] Unable to schedule event with note ([#3421](https://github.com/dhis2/capture-app/issues/3421)) ([e017ac8](https://github.com/dhis2/capture-app/commit/e017ac8e3df69c4803d2e6f73aa9a585984a008f))
+
+
+### Features
+
+* [DHIS-14012] removed download as XML button ([#3434](https://github.com/dhis2/capture-app/issues/3434)) ([7b0e387](https://github.com/dhis2/capture-app/commit/7b0e3871c76478aabfd6696a8e7ac27339254299))
+
 # [100.42.0](https://github.com/dhis2/capture-app/compare/v100.41.4...v100.42.0) (2023-10-24)
 
 
