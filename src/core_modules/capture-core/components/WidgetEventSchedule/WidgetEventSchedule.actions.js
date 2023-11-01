@@ -21,6 +21,7 @@ export const requestScheduleEvent = ({
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
+    assignedUser,
 }: {
     scheduleDate: string,
     comments: Array<{value: string}>,
@@ -34,6 +35,7 @@ export const requestScheduleEvent = ({
     onSaveExternal: (eventServerValues: Object, uid: string) => void,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
+    assignedUser?: {uid: string},
 }) =>
     actionCreator(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST)({
         scheduleDate,
@@ -48,6 +50,7 @@ export const requestScheduleEvent = ({
         onSaveExternal,
         onSaveSuccessActionType,
         onSaveErrorActionType,
+        assignedUser,
     });
 
 export const scheduleEvent = (

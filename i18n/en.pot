@@ -530,6 +530,9 @@ msgstr "start typing to search"
 msgid "suggestions could not be retrieved"
 msgstr "suggestions could not be retrieved"
 
+msgid "No results found"
+msgstr "No results found"
+
 msgid "No items to display"
 msgstr "No items to display"
 
@@ -952,9 +955,6 @@ msgstr "Could not retrieve metadata. Please try again later."
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
-
-msgid "No results found"
-msgstr "No results found"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
