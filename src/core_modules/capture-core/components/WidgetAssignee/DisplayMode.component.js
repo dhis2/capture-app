@@ -3,7 +3,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconEdit24, Button, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import type { UserFormField } from '../FormFields/UserField';
+import type { Assignee } from './WidgetAssignee.types';
 
 const styles = () => ({
     wrapper: {
@@ -19,7 +19,7 @@ const styles = () => ({
 });
 
 type Props = {
-    assignee: UserFormField | null,
+    assignee: Assignee | null,
     onEdit: () => {},
     ...CssClasses,
 };

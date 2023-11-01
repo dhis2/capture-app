@@ -12,11 +12,35 @@ import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
-import { assigneeSectionActionTypes } from '../../components/WidgetAssignee';
 import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
 import {
     actionTypes as widgetEventEditActionTypes,
 } from '../../components/WidgetEventEdit/WidgetEventEdit.actions';
+import { enrollmentEditEventActionTypes } from '../../components/Pages/EnrollmentEditEvent';
+
+const setAssignee = (state, action) => {
+    const { assignee, eventId } = action.payload;
+    if (eventId !== state.eventId) {
+        return state;
+    }
+
+    const newState = {
+        ...state,
+        saveInProgress: true,
+        loadedValues: {
+            ...state.loadedValues,
+            eventContainer: {
+                ...state.loadedValues.eventContainer,
+                event: {
+                    ...state.loadedValues.eventContainer.event,
+                    assignee,
+                },
+            },
+        },
+    };
+
+    return newState;
+};
 
 export const viewEventPageDesc = createReducerDescription({
     [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {
@@ -144,56 +168,8 @@ export const viewEventPageDesc = createReducerDescription({
             eventHasChanged: true,
         };
     },
-    [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SET]: (state, action) => {
-        const { assignee } = action.payload;
-
-        const newState = {
-            ...state,
-            saveInProgress: true,
-            loadedValues: {
-                ...state.loadedValues,
-                eventContainer: {
-                    ...state.loadedValues.eventContainer,
-                    event: {
-                        ...state.loadedValues.eventContainer.event,
-                        assignee,
-                    },
-                },
-            },
-        };
-
-        return newState;
-    },
-    [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SAVE_COMPLETED]: (state, action) => {
-        if (action.meta.eventId !== state.eventId) {
-            return state;
-        }
-
-        return {
-            ...state,
-            saveInProgress: false,
-            eventHasChanged: true,
-        };
-    },
-    [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SAVE_FAILED]: (state, action) => {
-        const { assignee, eventId } = action.meta;
-        if (eventId !== state.eventId) {
-            return state;
-        }
-
-        return {
-            ...state,
-            saveInProgress: false,
-            loadedValues: {
-                ...state.loadedValues,
-                eventContainer: {
-                    ...state.loadedValues.eventContainer,
-                    event: {
-                        ...state.loadedValues.eventContainer.event,
-                        assignee,
-                    },
-                },
-            },
-        };
-    },
+    [viewEventActionTypes.ASSIGNEE_SET]: setAssignee,
+    [viewEventActionTypes.ASSIGNEE_SAVE_FAILED]: setAssignee,
+    [enrollmentEditEventActionTypes.ASSIGNEE_SET]: setAssignee,
+    [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: setAssignee,
 }, 'viewEventPage');

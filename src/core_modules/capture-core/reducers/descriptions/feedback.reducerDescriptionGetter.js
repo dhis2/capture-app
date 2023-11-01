@@ -25,7 +25,8 @@ import { workingListsCommonActionTypes } from '../../components/WorkingLists/Wor
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
-import { assigneeSectionActionTypes } from '../../components/WidgetAssignee';
+import { enrollmentEditEventActionTypes } from '../../components/Pages/EnrollmentEditEvent';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?Node) {
     const newState = [...state];
@@ -120,7 +121,9 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, i18n.t('Error editing the event, the changes made were not saved')),
     [enrollmentSiteActionTypes.ERROR_ENROLLMENT]: (state, action) =>
         addErrorFeedback(state, i18n.t(action.payload.message)),
-    [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SAVE_FAILED]: state =>
+    [viewEventActionTypes.ASSIGNEE_SAVE_FAILED]: state =>
+        addErrorFeedback(state, i18n.t('Error updating the Assignee')),
+    [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error updating the Assignee')),
 }, 'feedbacks', []);
 

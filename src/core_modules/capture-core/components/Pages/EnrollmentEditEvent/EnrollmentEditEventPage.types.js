@@ -30,12 +30,10 @@ export type PlainProps = {|
         read: boolean,
         write: boolean,
     |} | null,
-    onGetAssignedUserSaveContext: (assignee: UserFormField) => {
-        eventId: string,
-        events: Array<ApiEnrollmentEvent>,
-        assignedUser?: ApiAssignedUser,
-    },
+    onGetAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
     assignee: UserFormField | null,
+    onSaveAssignee: (newAssignee: UserFormField) => void,
+    onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
     ...CssClasses,
 |};
 
@@ -45,6 +43,7 @@ export type Props = {|
     teiId: string,
     enrollmentId: string,
     orgUnitId: string,
-    eventId: string,
+    event: ApiEnrollmentEvent,
+    enrollmentSite: ApiEnrollment,
     initMode?: string,
 |};

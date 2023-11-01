@@ -1,31 +1,44 @@
 // @flow
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { batchActions } from 'redux-batched-actions';
-import type { Props } from './WidgetAssignee.types';
+import React, { useCallback, useRef } from 'react';
+import { useDataMutation } from '@dhis2/app-runtime';
+import type { Props, Assignee } from './WidgetAssignee.types';
 import { WidgetAssigneeComponent } from './WidgetAssignee.component';
-import { saveAssignee, setAssignee } from './assignee.actions';
-import type { UserFormField } from '../FormFields/UserField';
+import { convertClientToServer } from './converter';
+
+const WidgetAssigneeWithHooks = (props: Props) => {
+    const { assignee, eventAccess, onGetSaveContext, onSave, onSaveError } = props;
+    const prevAssignee = useRef(assignee);
+
+    const [updateMutation] = useDataMutation(
+        {
+            resource: 'tracker?async=false&importStrategy=UPDATE',
+            type: 'create',
+            data: event => ({ events: [event] }),
+        },
+        {
+            onError: () => {
+                onSaveError(prevAssignee.current);
+            },
+        },
+    );
+
+    const onSet = useCallback(
+        async (newAssignee: Assignee) => {
+            const { event } = onGetSaveContext();
+            prevAssignee.current = assignee;
+            onSave(newAssignee);
+            await updateMutation({ ...event, assignedUser: convertClientToServer(newAssignee) });
+        },
+        [updateMutation, onGetSaveContext, onSave, assignee],
+    );
+
+    return <WidgetAssigneeComponent assignee={assignee} eventAccess={eventAccess} onSet={onSet} />;
+};
 
 export const WidgetAssignee = (props: Props) => {
-    const dispatch = useDispatch();
-    const { programStage, assignee, eventAccess, onGetSaveContext } = props;
-
-    if (!programStage?.enableUserAssignment) {
+    if (!props.programStage?.enableUserAssignment) {
         return null;
     }
 
-    const onSet = (newAssignee: UserFormField) => {
-        const { eventId, events, assignedUser } = onGetSaveContext(newAssignee);
-        const serverData = { events };
-
-        dispatch(
-            batchActions([
-                setAssignee(eventId, serverData, newAssignee),
-                saveAssignee({ eventId, serverData, assignee, assignedUser }),
-            ]),
-        );
-    };
-
-    return <WidgetAssigneeComponent assignee={assignee} eventAccess={eventAccess} onSet={onSet} />;
+    return <WidgetAssigneeWithHooks {...props} />;
 };

@@ -49,7 +49,9 @@ type Props = {
         showAllEvents: string,
     },
     assignee: UserFormField,
-    onGetAssignedUserSaveContext: (assignee: UserFormField) => { eventId: string, events: Array<ApiEnrollmentEvent> },
+    onGetAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
+    onSaveAssignee: (newAssignee: UserFormField) => void,
+    onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
 };
 
 type State = {
@@ -72,7 +74,17 @@ class ViewEventPlain extends Component<Props, State> {
     }
 
     render() {
-        const { classes, programStage, currentDataEntryKey, eventAccess, assignee, onGetAssignedUserSaveContext } = this.props;
+        const {
+            classes,
+            programStage,
+            currentDataEntryKey,
+            eventAccess,
+            assignee,
+            onGetAssignedUserSaveContext,
+            onSaveAssignee,
+            onSaveAssigneeError,
+        } = this.props;
+
         return (
             <div className={classes.container}>
                 <Button
@@ -93,6 +105,8 @@ class ViewEventPlain extends Component<Props, State> {
                         dataEntryKey={currentDataEntryKey}
                         assignee={assignee}
                         onGetSaveContext={onGetAssignedUserSaveContext}
+                        onSave={onSaveAssignee}
+                        onSaveError={onSaveAssigneeError}
                     />
                 </div>
                 <DiscardDialog

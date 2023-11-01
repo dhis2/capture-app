@@ -133,6 +133,8 @@ class UserSearchPlain extends React.Component<Props, State> {
                         id: au.id,
                         name: au.displayName,
                         username: au.username,
+                        firstName: au.firstName,
+                        surname: au.surname,
                     }));
             });
 

@@ -4,6 +4,8 @@ declare type ApiAssignedUser = {|
     uid: string,
     username: string,
     displayName: string,
+    firstName: string,
+    surname: string,
 |};
 
 declare type ApiDataValue = {

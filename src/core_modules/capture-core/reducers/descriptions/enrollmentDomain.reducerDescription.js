@@ -4,7 +4,7 @@ import { enrollmentSiteActionTypes } from '../../components/Pages/common/Enrollm
 import { actionTypes as enrollmentNoteActionTypes }
     from '../../components/WidgetEnrollmentComment/WidgetEnrollmentComment.actions';
 import { actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
-import { assigneeSectionActionTypes } from '../../components/WidgetAssignee';
+import { enrollmentEditEventActionTypes } from '../../components/Pages/EnrollmentEditEvent';
 
 const initialReducerValue = {};
 const {
@@ -19,6 +19,17 @@ const {
     COMMIT_ENROLLMENT_EVENT,
     COMMIT_ENROLLMENT_EVENT_WITHOUT_ID,
 } = enrollmentSiteActionTypes;
+
+const setAssignee = (state, action) => {
+    const { assignedUser, eventId } = action.payload;
+
+    const events = state.enrollment.events.reduce(
+        (acc, e) => (e.event === eventId ? [...acc, { ...e, assignedUser }] : [...acc, e]),
+        [],
+    );
+
+    return { ...state, enrollment: { ...state.enrollment, events } };
+};
 
 export const enrollmentDomainDesc = createReducerDescription(
     {
@@ -144,29 +155,8 @@ export const enrollmentDomainDesc = createReducerDescription(
             });
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
-        [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SET]: (state, action) => {
-            const { serverData, eventId } = action.payload;
-            const event = state.enrollment?.events?.find(e => e.event === eventId);
-            if (!event) {
-                return state;
-            }
-
-            return { ...state, enrollment: { ...state.enrollment, events: serverData.events } };
-        },
-        [assigneeSectionActionTypes.WIDGET_ASSIGNEE_SAVE_FAILED]: (state, action) => {
-            const { assignedUser, eventId } = action.meta;
-            const events = state.enrollment?.events;
-            if (!events) {
-                return state;
-            }
-            return {
-                ...state,
-                enrollment: {
-                    ...state.enrollment,
-                    events: events.map(e => (e.event === eventId ? { ...e, assignedUser } : e)),
-                },
-            };
-        },
+        [enrollmentEditEventActionTypes.ASSIGNEE_SET]: setAssignee,
+        [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: setAssignee,
     },
     'enrollmentDomain',
     initialReducerValue,

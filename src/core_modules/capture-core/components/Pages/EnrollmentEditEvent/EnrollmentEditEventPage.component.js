@@ -75,6 +75,8 @@ const EnrollmentEditEventPagePain = ({
     onCancelEditEvent,
     onHandleScheduleSave,
     onGetAssignedUserSaveContext,
+    onSaveAssignee,
+    onSaveAssigneeError,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -127,6 +129,8 @@ const EnrollmentEditEventPagePain = ({
                         assignee={assignee}
                         onGetSaveContext={onGetAssignedUserSaveContext}
                         eventAccess={eventAccess}
+                        onSave={onSaveAssignee}
+                        onSaveError={onSaveAssigneeError}
                     />
                     <WidgetEventComment dataEntryKey={mode} dataEntryId={dataEntryIds.ENROLLMENT_EVENT} />
                     <WidgetError error={widgetEffects.errors} />

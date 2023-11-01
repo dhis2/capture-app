@@ -24,6 +24,8 @@ import { cleanUpDataEntry } from '../../DataEntry';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
 import { getProgramEventAccess } from '../../../metaData';
+import { setAssignee, rollbackAssignee } from './EnrollmentEditEventPage.actions';
+import { convertAssigneeToServer } from '../../../converters';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -55,6 +57,8 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId);
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
+    const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
+    const storedEvent = enrollmentSite?.events?.find(item => item.event === eventId);
 
     useEffect(() => {
         if (!urlEventId) {
@@ -65,16 +69,17 @@ export const EnrollmentEditEventPage = () => {
         }
     }, [dispatch, history, eventId, urlEventId, orgUnitId]);
 
-    return (!loading && eventId === urlEventId) || error ? (
+    return ((!loading && eventId === urlEventId) || error) && storedEvent ? (
         <EnrollmentEditEventPageWithContext
             programId={programId}
             stageId={stageId}
             teiId={teiId}
             enrollmentId={enrollmentId}
             orgUnitId={orgUnitId}
-            eventId={eventId}
             error={error}
             initMode={initMode}
+            enrollmentSite={enrollmentSite}
+            event={storedEvent}
         />
     ) : <LoadingMaskForPage />;
 };
@@ -85,11 +90,13 @@ const EnrollmentEditEventPageWithContextPlain = ({
     teiId,
     enrollmentId,
     orgUnitId,
-    eventId,
     initMode,
+    enrollmentSite,
+    event,
 }: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { event: eventId } = event;
 
     useEffect(() => () => {
         dispatch(cleanUpDataEntry(dataEntryIds.ENROLLMENT_EVENT));
@@ -124,12 +131,10 @@ const EnrollmentEditEventPageWithContextPlain = ({
         dispatch(updateEnrollmentEvents(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
-    const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name;
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
-    const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
@@ -146,7 +151,15 @@ const EnrollmentEditEventPageWithContextPlain = ({
         event,
     });
     const assignee = useAssignee(event);
-    const onGetAssignedUserSaveContext = useAssignedUserSaveContext(enrollmentSite, event, eventId);
+    const onGetAssignedUserSaveContext = useAssignedUserSaveContext(event);
+    const onSaveAssignee = (newAssignee) => {
+        const assignedUser = convertAssigneeToServer(newAssignee);
+        dispatch(setAssignee(assignedUser, newAssignee, eventId));
+    };
+    const onSaveAssigneeError = (prevAssignee) => {
+        const assignedUser = prevAssignee ? convertAssigneeToServer(prevAssignee) : undefined;
+        dispatch(rollbackAssignee(assignedUser, prevAssignee, eventId));
+    };
 
     return (
         <EnrollmentEditEventPageComponent
@@ -175,6 +188,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}
             onGetAssignedUserSaveContext={onGetAssignedUserSaveContext}
+            onSaveAssignee={onSaveAssignee}
+            onSaveAssigneeError={onSaveAssigneeError}
         />
     );
 };

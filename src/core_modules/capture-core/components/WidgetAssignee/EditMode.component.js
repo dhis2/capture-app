@@ -3,7 +3,8 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import { UserSearch, type UserFormField } from '../FormFields/UserField';
+import type { Assignee } from './WidgetAssignee.types';
+import { UserSearch } from '../FormFields/UserField';
 
 const styles = () => ({
     container: {
@@ -23,7 +24,7 @@ const styles = () => ({
 
 type Props = {
     onCancel: () => {},
-    onSet: (user: UserFormField) => void,
+    onSet: (user: Assignee) => void,
     ...CssClasses,
 };
 

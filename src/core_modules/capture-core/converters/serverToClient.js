@@ -61,3 +61,16 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
+
+export const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) => {
+    if (!assignedUser) {
+        return null;
+    }
+    return {
+        id: assignedUser.uid,
+        name: assignedUser.displayName,
+        username: assignedUser.username,
+        firstName: assignedUser.firstName,
+        surname: assignedUser.surname,
+    };
+};

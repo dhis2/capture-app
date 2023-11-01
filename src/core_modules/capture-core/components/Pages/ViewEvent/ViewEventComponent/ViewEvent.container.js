@@ -1,9 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
-import {
-    startGoBackToMainPage,
-} from './viewEvent.actions';
+import { startGoBackToMainPage, setAssignee, rollbackAssignee } from './viewEvent.actions';
 import { ViewEventComponent } from './ViewEvent.component';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 
@@ -34,7 +32,8 @@ const makeMapStateToProps = () => {
             currentDataEntryKey,
             isUserInteractionInProgress,
             assignee: state.viewEventPage.loadedValues?.eventContainer.event.assignee,
-            onGetAssignedUserSaveContext: assignee => assignedUserContextSelector(state)(assignee),
+            onGetAssignedUserSaveContext: () => assignedUserContextSelector(state),
+            eventId: state.viewEventPage.eventId,
         };
     };
 };
@@ -43,10 +42,26 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onBackToAllEvents: () => {
         dispatch(startGoBackToMainPage());
     },
+    dispatch,
 });
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    const mergedProps = {
+        onSaveAssignee: (newAssignee) => {
+            dispatchProps.dispatch(setAssignee(newAssignee, stateProps.eventId));
+        },
+        onSaveAssigneeError: (prevAssignee) => {
+            dispatchProps.dispatch(rollbackAssignee(prevAssignee, stateProps.eventId));
+        },
+    };
+
+    return Object.assign({}, ownProps, stateProps, dispatchProps, mergedProps);
+};
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export const ViewEvent = connect(makeMapStateToProps, mapDispatchToProps)(
-    withErrorMessageHandler()(ViewEventComponent),
-);
+export const ViewEvent = connect(
+    makeMapStateToProps,
+    mapDispatchToProps,
+    mergeProps,
+)(withErrorMessageHandler()(ViewEventComponent));
