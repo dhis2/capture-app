@@ -1,3 +1,10 @@
+# [100.44.0](https://github.com/dhis2/capture-app/compare/v100.43.0...v100.44.0) (2023-11-01)
+
+
+### Features
+
+* [DHIS2-15483] assign an user when scheduling an enrollment event ([#3419](https://github.com/dhis2/capture-app/issues/3419)) ([556884f](https://github.com/dhis2/capture-app/commit/556884f7302215c31b7be433bbeb24503ea9b12d))
+
 # [100.43.0](https://github.com/dhis2/capture-app/compare/v100.42.0...v100.43.0) (2023-10-31)
 
 
