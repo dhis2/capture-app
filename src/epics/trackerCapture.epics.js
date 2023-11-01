@@ -213,6 +213,13 @@ import {
 import {
     orgUnitFetcherEpic,
 } from '../core_modules/capture-core/components/OrgUnitFetcher';
+import {
+    getCoreOrgUnitEpic,
+} from '../core_modules/capture-core/metadataRetrieval/coreOrgUnit';
+import {
+    openRelationshipTeiSearchWidgetEpic,
+    openRelationshipTeiRegisterWidgetEpic,
+} from '../core_modules/capture-core/components/Pages/common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -224,6 +231,8 @@ export const epics = combineEpics(
     initEventListEpic,
     initTeiViewEpic,
     updateTeiListEpic,
+    openRelationshipTeiSearchWidgetEpic,
+    openRelationshipTeiRegisterWidgetEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
     updateTemplateEpic,
@@ -337,6 +346,7 @@ export const epics = combineEpics(
     navigateToEnrollmentOverviewEpic,
     scheduleEnrollmentEventEpic,
     orgUnitFetcherEpic,
+    getCoreOrgUnitEpic,
     updateTeiEpic,
     updateTeiSucceededEpic,
     updateTeiFailedEpic,

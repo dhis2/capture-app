@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -154,6 +154,15 @@ msgstr "坐标"
 msgid "Enrollment"
 msgstr "报名"
 
+msgid "Complete event"
+msgstr "完成事件"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr "请选择{{categoryName}}"
 
@@ -172,14 +181,17 @@ msgstr "取消"
 msgid "Metadata error. see log for details"
 msgstr "元数据错误"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "分配的用户"
 
 msgid "Search for user"
 msgstr "搜索用户 "
-
-msgid "Complete event"
-msgstr "完成事件"
 
 msgid "Basic info"
 msgstr "基本信息"
@@ -485,7 +497,7 @@ msgid "Type to filter options"
 msgstr ""
 
 msgid "No match found"
-msgstr ""
+msgstr "未找到匹配项"
 
 msgid "Search"
 msgstr "搜索"
@@ -917,6 +929,18 @@ msgstr "事件不能载入"
 msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
 
+msgid "Selected program"
+msgstr "选择的项目"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "搜索 {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "按属性搜索"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
 
@@ -981,9 +1005,6 @@ msgstr "搜索{{name}}"
 msgid "Search by {{name}}"
 msgstr "按{{name}}搜索"
 
-msgid "Search by attributes"
-msgstr "按属性搜索"
-
 msgid "all programs"
 msgstr "所有程序"
 
@@ -1036,12 +1057,6 @@ msgstr "缺少搜索条件"
 
 msgid "Results found"
 msgstr "找到的结果"
-
-msgid "Selected program"
-msgstr "选择的项目"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "搜索 {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr "此程序中的保存列表"
@@ -1317,14 +1332,48 @@ msgstr "{{scheduledEvents}} 已调度"
 msgid "Stages and Events"
 msgstr "阶段与活动"
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "项目阶段名称"
+
 msgid "Working list could not be loaded"
 msgstr "工作列表不能载入"
 
 msgid "Download as JSON"
 msgstr "下载为JSON"
-
-msgid "Download as XML"
-msgstr "下载为xml"
 
 msgid "Download as CSV"
 msgstr "获取CSV格式报表"

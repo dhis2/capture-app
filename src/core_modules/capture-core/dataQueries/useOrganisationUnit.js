@@ -4,6 +4,7 @@ import { useDataQuery } from '@dhis2/app-runtime';
 import log from 'loglevel';
 import { errorCreator } from '../../capture-core-utils';
 
+// Skips fetching if orgUnitId is falsy
 export const useOrganisationUnit = (orgUnitId: string, fields?: string) => {
     const [orgUnit, setOrgUnit] = useState();
     const { error, loading, data, refetch, called } = useDataQuery(
@@ -24,7 +25,7 @@ export const useOrganisationUnit = (orgUnitId: string, fields?: string) => {
     );
 
     useEffect(() => {
-        refetch({ variables: { orgUnitId } });
+        orgUnitId && refetch({ variables: { orgUnitId } });
     }, [refetch, orgUnitId]);
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export const useOrganisationUnit = (orgUnitId: string, fields?: string) => {
 
     useEffect(() => {
         const organisationUnit = data?.organisationUnits;
-        setOrgUnit(
+        orgUnitId && setOrgUnit(
             (loading || !called || error) ?
                 undefined : {
                     id: orgUnitId,

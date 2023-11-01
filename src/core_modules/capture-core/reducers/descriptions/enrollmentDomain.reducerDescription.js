@@ -77,7 +77,7 @@ export const enrollmentDomainDesc = createReducerDescription(
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
         [COMMIT_ENROLLMENT_EVENT]: (state, { payload: { eventId } }) => {
-            const events = state.enrollment.events?.map((event) => {
+            const events = state.enrollment?.events?.map((event) => {
                 if (event.event === eventId) {
                     const {
                         pendingApiResponse,
@@ -105,7 +105,7 @@ export const enrollmentDomainDesc = createReducerDescription(
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
         [COMMIT_ENROLLMENT_EVENT_WITHOUT_ID]: (state, { payload: { eventId, uid } }) => {
-            const events = state.enrollment.events?.map((event) => {
+            const events = state.enrollment?.events?.map((event) => {
                 if (event.uid === uid) {
                     const { pendingApiResponse, uid: uidToRemove, ...dataToCommit } = event;
                     return { ...dataToCommit, event: eventId };

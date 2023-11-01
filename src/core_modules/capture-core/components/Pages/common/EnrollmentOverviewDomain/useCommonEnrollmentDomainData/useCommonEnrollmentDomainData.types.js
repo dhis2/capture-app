@@ -1,5 +1,4 @@
 // @flow
-
 export type DataValue = {
     dataElement: string,
     value: string,
@@ -49,6 +48,7 @@ export type AttributeValue = {|
     id: string,
     value: string,
 |};
+
 
 export type Output = {|
     error?: any,

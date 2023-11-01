@@ -3,16 +3,18 @@ import type { Node } from 'react';
 import type { TeiRegistration } from '../../../../../../metaData';
 import type { RenderCustomCardActions } from '../../../../../CardList';
 import type {
-    SaveForEnrollmentAndTeiRegistration,
     ExistingUniqueValueDialogActionsComponent,
 } from '../../../../../DataEntries';
+import type {
+    TeiPayload,
+} from '../../../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
 
 export type Props = {|
     theme: Theme,
-    onSave: SaveForEnrollmentAndTeiRegistration,
+    onSave: (TeiPayload) => void,
     teiRegistrationMetadata?: TeiRegistration,
     duplicatesReviewPageSize: number,
     renderDuplicatesCardActions?: RenderCustomCardActions,
-    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForEnrollmentAndTeiRegistration) => Node,
+    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: (TeiPayload) => void) => Node,
     ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
 |};

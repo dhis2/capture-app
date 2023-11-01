@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2023\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -157,6 +157,15 @@ msgstr "Мувофиқлаштириш"
 msgid "Enrollment"
 msgstr "Рўйхатга олиш"
 
+msgid "Complete event"
+msgstr "Ҳодиса/тадбирни якунлаш"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -175,14 +184,17 @@ msgstr "Бекор қилиш"
 msgid "Metadata error. see log for details"
 msgstr "МетаМаълумотда хатолик. Тафсилотлар учун журналга қаранг."
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Тавсия этилган фойдаланувчи"
 
 msgid "Search for user"
 msgstr "Фойдаланувчини излаш"
-
-msgid "Complete event"
-msgstr "Ҳодиса/тадбирни якунлаш"
 
 msgid "Basic info"
 msgstr "Асосий маълумот"
@@ -940,6 +952,18 @@ msgstr "Ҳодиса/тадбирни юклаб бўлмади"
 msgid "Organisation unit could not be loaded"
 msgstr "Ташкилий бўлимни юклаб бўлмади"
 
+msgid "Selected program"
+msgstr "Танланган дастур"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "{{uniqueAttrName}} орқали қидириш"
+
+msgid "Search by attributes"
+msgstr "Атрибут орқали қидириш"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Бўлиши мумкин бўлган нусхалар топилди"
 
@@ -1006,9 +1030,6 @@ msgstr "{{name}} орқали қидириш"
 msgid "Search by {{name}}"
 msgstr "{{name}} орқали қидириш"
 
-msgid "Search by attributes"
-msgstr "Атрибут орқали қидириш"
-
 msgid "all programs"
 msgstr ""
 
@@ -1063,12 +1084,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr "Натижалар топилди"
-
-msgid "Selected program"
-msgstr "Танланган дастур"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "{{uniqueAttrName}} орқали қидириш"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1346,14 +1361,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Босқичлар ва Ҳодиса/тадбирлар"
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Тури"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Дастур босқичи номи"
+
 msgid "Working list could not be loaded"
 msgstr "Ишчи рўйхатни юклаб бўлмади"
 
 msgid "Download as JSON"
 msgstr "JSON сифатида юклаш"
-
-msgid "Download as XML"
-msgstr "XML сифатида юклаш"
 
 msgid "Download as CSV"
 msgstr "CSV сифатида юкланг"

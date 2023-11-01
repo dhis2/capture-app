@@ -21,6 +21,7 @@ import { useEvent, useAssignee, useAssignedUserSaveContext } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { cleanUpDataEntry } from '../../DataEntry';
+import { useLinkedRecordClick } from '../common/TEIRelationshipsWidget';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
 import { getProgramEventAccess } from '../../../metaData';
@@ -98,6 +99,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const dispatch = useDispatch();
     const { event: eventId } = event;
 
+    const { onLinkedRecordClick } = useLinkedRecordClick();
+
     useEffect(() => () => {
         dispatch(cleanUpDataEntry(dataEntryIds.ENROLLMENT_EVENT));
     }, [dispatch]);
@@ -133,7 +136,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     };
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
-    const trackedEntityName = program?.trackedEntityType?.name;
+    const { name: trackedEntityName, id: trackedEntityTypeId } = program?.trackedEntityType;
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
@@ -141,6 +144,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
     const eventAccess = getProgramEventAccess(programId, programStage?.id);
+
 
     const pageStatus = getPageStatus({
         orgUnitId,
@@ -171,6 +175,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             hideWidgets={hideWidgets}
             teiId={teiId}
             enrollmentId={enrollmentId}
+            trackedEntityTypeId={trackedEntityTypeId}
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}
             trackedEntityName={trackedEntityName}
@@ -180,6 +185,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             orgUnitId={orgUnitId}
             eventDate={eventDate}
             assignee={assignee}
+            onLinkedRecordClick={onLinkedRecordClick}
             onEnrollmentError={onEnrollmentError}
             onEnrollmentSuccess={onEnrollmentSuccess}
             eventStatus={event?.status}
