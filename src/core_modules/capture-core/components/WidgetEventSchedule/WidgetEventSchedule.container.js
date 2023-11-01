@@ -18,6 +18,7 @@ import {
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import { convertAssigneeToServer } from '../../converters';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -43,6 +44,7 @@ export const WidgetEventSchedule = ({
     const { currentUser, noteId } = useCommentDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [comments, setComments] = useState([]);
+    const [assignee, setAssignee] = useState();
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events
@@ -80,6 +82,7 @@ export const WidgetEventSchedule = ({
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
+            ...(assignee && { assignedUser: convertAssigneeToServer(assignee) }),
         }));
     }, [
         dispatch,
@@ -96,6 +99,7 @@ export const WidgetEventSchedule = ({
         onSaveSuccessActionType,
         onSaveErrorActionType,
         programCategory,
+        assignee,
     ]);
 
     React.useEffect(() => {
@@ -119,6 +123,7 @@ export const WidgetEventSchedule = ({
         setComments([...comments, newComment]);
     };
 
+    const onSetAssignee = useCallback(user => setAssignee(user), []);
     const onClickCategoryOption = useCallback((optionId: string, categoryId: string) => {
         setSelectedCategories(prevCategoryOptions => ({
             ...prevCategoryOptions,
@@ -159,11 +164,13 @@ export const WidgetEventSchedule = ({
 
     return (
         <WidgetEventScheduleComponent
+            assignee={assignee}
             stageId={stageId}
             stageName={stage.name}
             programId={programId}
             programCategory={programCategory}
             programName={program.name}
+            enableUserAssignment={stage?.enableUserAssignment}
             scheduleDate={scheduleDate}
             displayDueDateLabel={programStageScheduleConfig.displayDueDateLabel}
             suggestedScheduleDate={suggestedScheduleDate}
@@ -178,6 +185,7 @@ export const WidgetEventSchedule = ({
             categoryOptionsError={categoryOptionsError}
             onClickCategoryOption={onClickCategoryOption}
             onResetCategoryOption={onResetCategoryOption}
+            onSetAssignee={onSetAssignee}
             {...passOnProps}
         />
 
