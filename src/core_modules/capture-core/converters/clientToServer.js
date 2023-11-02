@@ -8,6 +8,13 @@ type RangeValue = {
     to: number,
 }
 
+type Assignee = {
+    id: string,
+    username: string,
+    name: string,
+    firstName: string,
+    surname: string,
+}
 
 function convertDate(rawValue: string): string {
     const editedDate = rawValue;
@@ -65,4 +72,14 @@ export function convertCategoryOptionsToServer(value: {[categoryId: string]: str
         }, []).join(';');
     }
     return value;
+}
+
+export function convertAssigneeToServer(assignee: Assignee): ApiAssignedUser {
+    return {
+        uid: assignee.id,
+        displayName: assignee.name,
+        username: assignee.username,
+        firstName: assignee.firstName,
+        surname: assignee.surname,
+    };
 }
