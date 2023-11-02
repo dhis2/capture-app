@@ -1,3 +1,10 @@
+## [100.44.1](https://github.com/dhis2/capture-app/compare/v100.44.0...v100.44.1) (2023-11-02)
+
+
+### Bug Fixes
+
+* [DHIS2-15945] translations in enrollment widget ([#3433](https://github.com/dhis2/capture-app/issues/3433)) ([c188767](https://github.com/dhis2/capture-app/commit/c1887673e56f2f73cfc594b682d471c10858c0fd))
+
 # [100.44.0](https://github.com/dhis2/capture-app/compare/v100.43.0...v100.44.0) (2023-11-01)
 
 
