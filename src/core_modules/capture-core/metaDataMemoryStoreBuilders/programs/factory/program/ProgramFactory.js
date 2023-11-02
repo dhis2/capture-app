@@ -110,10 +110,13 @@ export class ProgramFactory {
         });
     }
 
-    async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
+    async _buildProgramAttributes(
+        cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
+        trackedEntityType: TrackedEntityType,
+    ) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
             // $FlowFixMe[incompatible-call] automated comment
-            const dataElement = await this.dataElementFactory.build(ptea);
+            const dataElement = await this.dataElementFactory.build(ptea, trackedEntityType);
             return dataElement;
         });
 
@@ -124,6 +127,8 @@ export class ProgramFactory {
     }
 
     async build(cachedProgram: CachedProgram) {
+        const trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId || '');
+
         let program;
         if (cachedProgram.programType === 'WITHOUT_REGISTRATION') {
             program = new EventProgram((o) => {
@@ -146,7 +151,7 @@ export class ProgramFactory {
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
                 // $FlowFixMe
-                o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
+                o.trackedEntityType = trackedEntityType;
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {
@@ -156,7 +161,7 @@ export class ProgramFactory {
                 );
 
                 // $FlowFixMe
-                program.attributes = await this._buildProgramAttributes(cachedProgram.programTrackedEntityAttributes);
+                program.attributes = await this._buildProgramAttributes(cachedProgram.programTrackedEntityAttributes, trackedEntityType);
             }
 
             // $FlowFixMe
