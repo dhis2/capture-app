@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2022\n"
 "Language-Team: Central Kurdish (https://app.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -159,6 +159,15 @@ msgstr "هیڵی ستوونی و ئاسۆیی زەوی"
 msgid "Enrollment"
 msgstr "تۆمارکردن"
 
+msgid "Complete event"
+msgstr ""
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -177,14 +186,17 @@ msgstr "لابردن"
 msgid "Metadata error. see log for details"
 msgstr "هەڵەیەک لە مێتا داتا هەیە، سەیری لۆگ فایل بکە بۆ زانیاری زیاتر"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "بەکارهێنەری دەستنیشانکراو"
 
 msgid "Search for user"
 msgstr "بۆ بەکاربەرەکە بگەرێ"
-
-msgid "Complete event"
-msgstr ""
 
 msgid "Basic info"
 msgstr "زانیاریە سەرەتاییەکان"
@@ -931,6 +943,18 @@ msgstr "حاڵەتەکە نەتواندرا بهێندرێت"
 msgid "Organisation unit could not be loaded"
 msgstr "ئۆرگانیزەیشن یونتەکە نەتواندرا بهێندرێت"
 
+msgid "Selected program"
+msgstr "پرۆگرامە هەڵبژێردراوەکە"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "بە پێ ئاتریبیوت بگەڕێ"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 
@@ -995,9 +1019,6 @@ msgstr ""
 msgid "Search by {{name}}"
 msgstr ""
 
-msgid "Search by attributes"
-msgstr "بە پێ ئاتریبیوت بگەڕێ"
-
 msgid "all programs"
 msgstr ""
 
@@ -1048,12 +1069,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr ""
-
-msgid "Selected program"
-msgstr "پرۆگرامە هەڵبژێردراوەکە"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1329,14 +1344,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr ""
+
 msgid "Working list could not be loaded"
 msgstr "لیستی کارکردن نەتواندرا بهێندرێت"
 
 msgid "Download as JSON"
 msgstr "دایبەزێنە وەکو JSON"
-
-msgid "Download as XML"
-msgstr "دایبەزێنە وەکو XML"
 
 msgid "Download as CSV"
 msgstr "دایبەزێنە وەکو CSV"

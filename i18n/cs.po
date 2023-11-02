@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký, 2023\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -157,6 +157,15 @@ msgstr "Souřadnice"
 msgid "Enrollment"
 msgstr "Zápis"
 
+msgid "Complete event"
+msgstr "Dokončit událost"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -175,14 +184,17 @@ msgstr "Zrušit"
 msgid "Metadata error. see log for details"
 msgstr "Chyba metadat. viz log pro podrobnosti"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Přiřazený uživatel"
 
 msgid "Search for user"
 msgstr "Hledat uživatele"
-
-msgid "Complete event"
-msgstr "Dokončit událost"
 
 msgid "Basic info"
 msgstr "Základní informace"
@@ -934,6 +946,18 @@ msgstr "Událost se nepodařilo načíst"
 msgid "Organisation unit could not be loaded"
 msgstr "Organizační jednotku se nepodařilo načíst"
 
+msgid "Selected program"
+msgstr "Vybraný program"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Hledat {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Hledání podle atributů"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
 
@@ -998,9 +1022,6 @@ msgstr "Hledat {{name}}"
 msgid "Search by {{name}}"
 msgstr "Hledat podle {{name}}"
 
-msgid "Search by attributes"
-msgstr "Hledání podle atributů"
-
 msgid "all programs"
 msgstr "všechny programy"
 
@@ -1057,12 +1078,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr "Nalezeny výsledky"
-
-msgid "Selected program"
-msgstr "Vybraný program"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Hledat {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr "Uložené seznamy v tomto programu"
@@ -1350,14 +1365,48 @@ msgstr "{{ scheduledEvents }} naplánováno"
 msgid "Stages and Events"
 msgstr "Fáze a události"
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Název fáze programu"
+
 msgid "Working list could not be loaded"
 msgstr "Pracovní seznam nelze načíst"
 
 msgid "Download as JSON"
 msgstr "Stáhnout jako JSON"
-
-msgid "Download as XML"
-msgstr "Stáhnout jako XML"
 
 msgid "Download as CSV"
 msgstr "Stáhnout jako CSV"

@@ -1,8 +1,9 @@
 // @flow
 import React, { useCallback, memo, type ComponentType } from 'react';
+import { IconButton } from 'capture-ui';
 import { withStyles } from '@material-ui/core/styles';
 import { Divider, IconMore24 } from '@dhis2/ui';
-import { IconButton, Paper, MenuList, MenuItem } from '@material-ui/core';
+import { Paper, MenuList, MenuItem } from '@material-ui/core';
 
 import { MenuPopper } from '../../Popper/Popper.component';
 import type { Props } from './listViewMenu.types';
@@ -32,7 +33,7 @@ const getStyles = () => ({
 const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
     const renderPopperAction = useCallback((togglePopper: Function) => (
         <IconButton
-            data-test="list-view-menu-button"
+            dataTest="list-view-menu-button"
             onClick={togglePopper}
         >
             <IconMore24 />
