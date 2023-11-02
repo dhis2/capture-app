@@ -25,9 +25,9 @@ type OptionGroup = {
 };
 
 type TrackedEntityTypeAttribute = {
-    trackedEntityAttributeId: string,
+    trackedEntityAttribute: { id: string },
     displayInList: boolean,
-    mandatory: boolean,
+    mandatory: ?boolean,
     searchable: boolean,
     renderOptionsAsRadio: ?boolean,
 };

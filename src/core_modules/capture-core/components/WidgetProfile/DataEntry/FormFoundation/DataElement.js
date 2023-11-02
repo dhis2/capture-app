@@ -4,7 +4,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { pipe, errorCreator } from 'capture-core-utils';
 
-import type { ProgramTrackedEntityAttribute, TrackedEntityAttribute, OptionSet as OptionSetType } from './types';
+import type { ProgramTrackedEntityAttribute, TrackedEntityAttribute, TrackedEntityType, OptionSet as OptionSetType } from './types';
 import {
     DataElement,
     DateDataElement,
@@ -101,21 +101,39 @@ const buildDataElementUnique = (
         }
     });
 
+const isCompulsoryAttribute = (
+    id: string,
+    mandatory: boolean,
+    trackedEntityType: TrackedEntityType,
+) => {
+    if (mandatory || !trackedEntityType.trackedEntityTypeAttributes) {
+        return mandatory;
+    }
+    for (const attribute of trackedEntityType.trackedEntityTypeAttributes) {
+        if (id === attribute.trackedEntityAttribute.id) {
+            return attribute.mandatory;
+        }
+    }
+    return false;
+};
+
 const setBaseProperties = async ({
     dataElement,
     optionSets,
     programTrackedEntityAttribute,
     trackedEntityAttribute,
+    trackedEntityType,
     querySingleResource,
 }: {
     dataElement: DataElement,
     optionSets: Array<OptionSetType>,
     programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
     trackedEntityAttribute: TrackedEntityAttribute,
+    trackedEntityType: TrackedEntityType,
     querySingleResource: QuerySingleResource,
 }) => {
     dataElement.id = trackedEntityAttribute.id;
-    dataElement.compulsory = programTrackedEntityAttribute.mandatory;
+    dataElement.compulsory = isCompulsoryAttribute(dataElement.id, programTrackedEntityAttribute.mandatory, trackedEntityType);
     dataElement.name = trackedEntityAttribute.displayName;
     dataElement.shortName = trackedEntityAttribute.displayShortName;
     dataElement.formName = trackedEntityAttribute.displayFormName;
@@ -144,6 +162,7 @@ const buildBaseDataElement = async (
     optionSets: Array<OptionSetType>,
     programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
     trackedEntityAttribute: TrackedEntityAttribute,
+    trackedEntityType: TrackedEntityType,
     querySingleResource: QuerySingleResource,
 ) => {
     const dataElement = new DataElement();
@@ -153,6 +172,7 @@ const buildBaseDataElement = async (
         optionSets,
         programTrackedEntityAttribute,
         trackedEntityAttribute,
+        trackedEntityType,
         querySingleResource,
     });
     if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
@@ -166,6 +186,7 @@ const buildDateDataElement = async (
     optionSets: Array<OptionSetType>,
     programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
     trackedEntityAttribute: TrackedEntityAttribute,
+    trackedEntityType: TrackedEntityType,
     querySingleResource: QuerySingleResource,
 ) => {
     const dateDataElement = new DateDataElement();
@@ -176,6 +197,7 @@ const buildDateDataElement = async (
         optionSets,
         programTrackedEntityAttribute,
         trackedEntityAttribute,
+        trackedEntityType,
         querySingleResource,
     });
     return dateDataElement;
@@ -247,6 +269,7 @@ export const buildTetFeatureType = (featureType: 'POINT' | 'POLYGON') => {
 export const buildDataElement = (
     programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    trackedEntityType: TrackedEntityType,
     optionSets: Array<OptionSetType>,
     querySingleResource: QuerySingleResource,
 ) => {
@@ -267,6 +290,6 @@ export const buildDataElement = (
     }
 
     return trackedEntityAttribute.valueType === dataElementTypes.DATE
-        ? buildDateDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute, querySingleResource)
-        : buildBaseDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute, querySingleResource);
+        ? buildDateDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute, trackedEntityType, querySingleResource)
+        : buildBaseDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute, trackedEntityType, querySingleResource);
 };
