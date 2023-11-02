@@ -8,6 +8,7 @@ export const useScheduledLabel = (programId: string, programStageId?: string) =>
     const storageController = getUserStorageController();
 
     const { data, error, isLoading } = useIndexedDBQuery(
+        // $FlowFixMe - react-query types are not up-to-date
         ['ScheduledAtLabel', programStageId],
         () =>
             storageController.get(userStores.PROGRAMS, programId, {

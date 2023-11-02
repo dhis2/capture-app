@@ -20,6 +20,7 @@ const ValidatedPlain = ({
     stage,
     programName,
     programId,
+    eventSaveInProgress,
     formFoundation,
     classes,
     referralRef,
@@ -49,10 +50,13 @@ const ValidatedPlain = ({
                     ref={referralRef}
                     programId={programId}
                     programStageId={stage?.id}
+                    currentStageLabel={stage.name}
                 />
                 <FinishButtons
                     onSave={onSave}
                     onCancel={onCancel}
+                    isLoading={eventSaveInProgress}
+                    cancelButtonIsDisabled={eventSaveInProgress}
                     id={id}
                 />
                 <SavingText programName={programName} stageName={stage.name} orgUnitName={orgUnit.name} />

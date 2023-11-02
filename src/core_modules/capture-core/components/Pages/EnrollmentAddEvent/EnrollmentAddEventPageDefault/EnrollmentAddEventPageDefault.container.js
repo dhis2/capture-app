@@ -12,6 +12,7 @@ import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentPage.actions';
+import { actions as ReferralModes } from '../../../WidgetReferral/constants';
 
 import { useWidgetDataFromStore } from '../hooks';
 import {
@@ -38,7 +39,9 @@ export const EnrollmentAddEventPageDefault = ({
     }, [history, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
-        ({ events }) => {
+        ({ events, referralMode }) => {
+            if (referralMode && referralMode === ReferralModes.ENTER_DATA) return;
+
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());
             const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
@@ -51,7 +54,7 @@ export const EnrollmentAddEventPageDefault = ({
             dispatch(addEnrollmentEvents({ events: eventsWithUpdatedDate }));
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [dispatch, history, programId, orgUnitId, teiId, enrollmentId, fromClientDate],
+        [fromClientDate, dispatch, history, programId, orgUnitId, teiId, enrollmentId],
     );
     const handleAddNew = useCallback(() => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);

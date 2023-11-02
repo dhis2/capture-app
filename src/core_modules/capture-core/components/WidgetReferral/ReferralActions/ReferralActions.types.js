@@ -38,5 +38,6 @@ export type Props = {|
     constraint: ?Constraint,
     addErrorMessage: (ErrorMessagesForReferral) => void,
     setReferralDataValues: (() => Object) => void,
+    currentStageLabel: string,
     ...CssClasses
 |}

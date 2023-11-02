@@ -1,9 +1,9 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Radio, colors, spacers, spacersNum } from '@dhis2/ui';
+import { Radio, colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { actions as ReferalActionTypes, mainOptionTranslatedTexts, referralStatus } from '../constants';
+import { actions as ReferralActionTypes, mainOptionTranslatedTexts, referralStatus } from '../constants';
 import { DataSection } from '../../DataSection';
 import { ReferToOrgUnit } from '../ReferToOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
@@ -30,17 +30,37 @@ const styles = () => ({
         flexGrow: 1,
         flexShrink: 0,
     },
+    infoBox: {
+        margin: '8px 8px',
+        display: 'flex',
+        fontSize: '14px',
+        gap: '5px',
+        background: colors.grey100,
+        padding: '12px 8px',
+        border: `1px solid ${colors.grey600}`,
+    },
 });
 
 export const ReferralActionsPlain = ({
     classes,
     type,
     selectedType,
+    referralDataValues,
+    setReferralDataValues,
     constraint,
+    currentStageLabel,
     ...passOnProps
 }: Props) => {
-    const [selectedAction, setSelectedAction] = useState();
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
+
+    const selectedAction = useMemo(() => referralDataValues.referralMode, [referralDataValues.referralMode]);
+
+    const updateSelectedAction = (action: $Values<typeof ReferralActionTypes>) => {
+        setReferralDataValues(prevState => ({
+            ...prevState,
+            referralMode: action,
+        }));
+    };
 
     if (!programStage) {
         return null;
@@ -58,7 +78,7 @@ export const ReferralActionsPlain = ({
                         name={`referral-action-${key}`}
                         checked={key === selectedAction}
                         label={mainOptionTranslatedTexts[key](programStage.stageForm.name)}
-                        onChange={(e: Object) => setSelectedAction(e.value)}
+                        onChange={(e: Object) => updateSelectedAction(e.value)}
                         value={key}
                     />
                 )) : null}
@@ -68,10 +88,24 @@ export const ReferralActionsPlain = ({
                 }
             </div>
 
-            {selectedAction === ReferalActionTypes.REFER_ORG && (
+            {selectedAction === ReferralActionTypes.REFER_ORG && (
                 <ReferToOrgUnit
+                    referralDataValues={referralDataValues}
+                    setReferralDataValues={setReferralDataValues}
                     {...passOnProps}
                 />
+            )}
+
+            {selectedAction === ReferralActionTypes.ENTER_DATA && (
+                <div
+                    className={classes.infoBox}
+                >
+                    <IconInfo16 />
+                    {i18n.t('Enter {{referralProgramStageLabel}} details in the next step after completing this {{currentStageLabel}}.', {
+                        referralProgramStageLabel: programStage.stageForm.name,
+                        currentStageLabel,
+                    })}
+                </div>
             )}
         </DataSection>);
 };

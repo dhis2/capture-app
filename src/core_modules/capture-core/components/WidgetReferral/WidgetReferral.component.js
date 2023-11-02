@@ -8,7 +8,7 @@ import { useScheduledLabel } from './hooks/useScheduledLabel';
 import type { ErrorMessagesForReferral } from './ReferralActions';
 import { referralWidgetIsValid } from './referralEventIsValid/referralEventIsValid';
 
-const WidgetReferralPlain = ({ programId, programStageId, ...passOnProps }: Props, ref) => {
+const WidgetReferralPlain = ({ programId, programStageId, currentStageLabel, ...passOnProps }: Props, ref) => {
     const { currentReferralStatus, selectedRelationshipType, constraint } = useReferral(programStageId);
     const [saveAttempted, setSaveAttempted] = useState(false);
     const [errorMessages, setErrorMessages] = useState({});
@@ -34,8 +34,9 @@ const WidgetReferralPlain = ({ programId, programStageId, ...passOnProps }: Prop
     };
 
     const formIsValid = useCallback(() => {
-        const { scheduledAt, orgUnit } = referralDataValues;
+        const { scheduledAt, orgUnit, referralMode } = referralDataValues;
         return referralWidgetIsValid({
+            referralMode,
             scheduledAt,
             orgUnit,
             setErrorMessages: addErrorMessage,
@@ -43,6 +44,7 @@ const WidgetReferralPlain = ({ programId, programStageId, ...passOnProps }: Prop
     }, [referralDataValues]);
 
     const getReferralValues = () => ({
+        referralMode: referralDataValues.referralMode,
         referralValues: referralDataValues,
         referralType: selectedRelationshipType,
     });
@@ -75,6 +77,7 @@ const WidgetReferralPlain = ({ programId, programStageId, ...passOnProps }: Prop
             saveAttempted={saveAttempted}
             errorMessages={errorMessages}
             constraint={constraint}
+            currentStageLabel={currentStageLabel}
             {...passOnProps}
         />
     );

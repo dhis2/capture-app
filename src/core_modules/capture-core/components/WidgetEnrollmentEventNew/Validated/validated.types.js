@@ -4,25 +4,31 @@ import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import { typeof addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import type {
     CommonValidatedProps,
-    ExternalSaveHandler,
     RulesExecutionDependenciesClientFormatted,
 } from '../common.types';
 
 
 export type RequestEvent = {
-    dataEntryItemId: string,
-    dataEntryId: string,
-    formFoundation: Object,
-    programId: string,
-    orgUnitId: string,
+    event: string,
+    program: string,
+    programStage: string,
+    orgUnit: string,
     orgUnitName: string,
-    teiId: string,
-    enrollmentId: string,
-    completed?: boolean,
-    onSaveExternal?: ExternalSaveHandler,
-    onSaveSuccessActionType?: string,
-    onSaveErrorActionType?: string,
+    trackedEntity: string,
+    enrollment: string,
+    scheduledAt: string,
+    occurredAt: string,
+    dataValues: Array<{ dataElement: string, value: any }>,
+    notes: Array<{ value: string }>,
+    status: ?string,
+    completedAt: ?string,
 }
+
+export type ReferralRefPayload = {|
+    getReferralValues: (eventId: string) => any,
+    eventHasReferralRelationship: () => boolean,
+    formIsValidOnSave: () => boolean,
+|}
 
 export type ContainerProps = {|
     ...CommonValidatedProps,
@@ -32,6 +38,7 @@ export type ContainerProps = {|
 export type Props = {|
     programName: string,
     programId: string,
+    eventSaveInProgress: boolean,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
     orgUnit: OrgUnit,
