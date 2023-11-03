@@ -41,7 +41,7 @@ export type Props = {|
    categoryOptionsError?: ?{[categoryId: string]: { touched: boolean, valid: boolean} },
    enableUserAssignment?: boolean,
    onSchedule: () => void,
-   onSetAssignee: (user: UserFormField) => void,
+   onSetAssignee: () => void,
    assignee?: UserFormField,
    onCancel: () => void,
    setScheduleDate: (date: string) => void,

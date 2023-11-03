@@ -11,6 +11,19 @@ function convertTime(d2Value: string) {
     return parseData.momentTime;
 }
 
+const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) => {
+    if (!assignedUser) {
+        return null;
+    }
+    return {
+        id: assignedUser.uid,
+        name: assignedUser.displayName,
+        username: assignedUser.username,
+        firstName: assignedUser.firstName,
+        surname: assignedUser.surname,
+    };
+};
+
 const optionSetConvertersForType = {
     [dataElementTypes.NUMBER]: parseNumber,
     [dataElementTypes.INTEGER]: parseNumber,
@@ -51,6 +64,7 @@ const valueConvertersForType = {
         return { latitude: arr[1], longitude: arr[0] };
     },
     [dataElementTypes.POLYGON]: () => 'Polygon',
+    [dataElementTypes.ASSIGNEE]: convertAssignedUserToClient,
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
@@ -61,16 +75,3 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
-
-export const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) => {
-    if (!assignedUser) {
-        return null;
-    }
-    return {
-        id: assignedUser.uid,
-        name: assignedUser.displayName,
-        username: assignedUser.username,
-        firstName: assignedUser.firstName,
-        surname: assignedUser.surname,
-    };
-};

@@ -26,7 +26,7 @@ import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
 import { getProgramEventAccess } from '../../../metaData';
 import { setAssignee, rollbackAssignee } from './EnrollmentEditEventPage.actions';
-import { convertAssigneeToServer } from '../../../converters';
+import { convertClientToServer } from '../../../converters';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -157,11 +157,15 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const assignee = useAssignee(event);
     const onGetAssignedUserSaveContext = useAssignedUserSaveContext(event);
     const onSaveAssignee = (newAssignee) => {
-        const assignedUser = convertAssigneeToServer(newAssignee);
+        // $FlowFixMe dataElementTypes flow error
+        const assignedUser: ApiAssignedUser = convertClientToServer(newAssignee, dataElementTypes.ASSIGNEE);
         dispatch(setAssignee(assignedUser, newAssignee, eventId));
     };
     const onSaveAssigneeError = (prevAssignee) => {
-        const assignedUser = prevAssignee ? convertAssigneeToServer(prevAssignee) : undefined;
+        const assignedUser: ApiAssignedUser | typeof undefined = prevAssignee
+            // $FlowFixMe dataElementTypes flow error
+            ? convertClientToServer(prevAssignee, dataElementTypes.ASSIGNEE)
+            : undefined;
         dispatch(rollbackAssignee(assignedUser, prevAssignee, eventId));
     };
 

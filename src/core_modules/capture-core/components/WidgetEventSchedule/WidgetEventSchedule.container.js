@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess } from '../../metaData';
+import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess, dataElementTypes } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';
 import { useLocationQuery } from '../../utils/routing';
 import type { ContainerProps } from './widgetEventSchedule.types';
@@ -18,7 +18,7 @@ import {
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
-import { convertAssigneeToServer } from '../../converters';
+import { convertClientToServer } from '../../converters';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -82,7 +82,7 @@ export const WidgetEventSchedule = ({
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
-            ...(assignee && { assignedUser: convertAssigneeToServer(assignee) }),
+            ...(assignee && { assignedUser: convertClientToServer(assignee, dataElementTypes.ASSIGNEE) }),
         }));
     }, [
         dispatch,

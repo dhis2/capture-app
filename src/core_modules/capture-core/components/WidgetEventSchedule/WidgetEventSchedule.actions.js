@@ -35,7 +35,7 @@ export const requestScheduleEvent = ({
     onSaveExternal: (eventServerValues: Object, uid: string) => void,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
-    assignedUser?: {uid: string},
+    assignedUser?: ApiAssignedUser,
 }) =>
     actionCreator(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST)({
         scheduleDate,
