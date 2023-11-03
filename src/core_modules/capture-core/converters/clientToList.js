@@ -92,7 +92,7 @@ const valueConvertersForType = {
     [dataElementTypes.FILE_RESOURCE]: convertResourceForDisplay,
     [dataElementTypes.IMAGE]: convertResourceForDisplay,
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
-    [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name || rawValue.displayName} (${rawValue.username})`,
+    [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
     [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
     [dataElementTypes.STATUS]: convertStatusForDisplay,
 };
