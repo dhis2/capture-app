@@ -121,7 +121,7 @@ Then('all pagination is disabled', () => {
 
 And('you click search', () => {
     // click outside of the input for the values to be updated
-    cy.get('[data-test="d2-form-component"]')
+    cy.get('[data-test="d2-section-vertical"]')
         .click();
 
     cy.get('button')

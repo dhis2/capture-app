@@ -73,7 +73,7 @@ class D2SectionPlain extends React.PureComponent<Props> {
     }
 
     renderSection(sectionProps) {
-        const { sectionMetaData, classes, sectionId, ...passOnProps } = sectionProps;
+        const { sectionMetaData, applyCustomFormClass, classes, sectionId, ...passOnProps } = sectionProps;
 
         if (!sectionMetaData.showContainer || this.props.formHorizontal) {
             return (
@@ -87,7 +87,10 @@ class D2SectionPlain extends React.PureComponent<Props> {
             );
         }
         return (
-            <div>
+            <div
+                data-test="d2-section-vertical"
+                className={applyCustomFormClass ? this.props.classes.containerCustomForm : ''}
+            >
                 <Section
                     header={this.renderSectionHeader()}
                     description={this.renderSectionDescription()}
@@ -109,20 +112,13 @@ class D2SectionPlain extends React.PureComponent<Props> {
     }
 
     render() {
-        const { isHidden, applyCustomFormClass, ...passOnProps } = this.props;
+        const { isHidden, ...passOnProps } = this.props;
 
         if (isHidden) {
             return null;
         }
 
-        return (<div
-            data-test="d2-form-component"
-            className={applyCustomFormClass ? this.props.classes.containerCustomForm : ''}
-        >
-            {
-                this.renderSection(passOnProps)
-            }
-        </div>);
+        return this.renderSection(passOnProps);
     }
 }
 
