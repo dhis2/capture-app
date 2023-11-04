@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Radio, colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
+import { Radio, colors, spacers, spacersNum, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { actions as ReferralActionTypes, mainOptionTranslatedTexts, referralStatus } from '../constants';
 import { DataSection } from '../../DataSection';
@@ -106,10 +106,13 @@ export const ReferralActionsPlain = ({
                     className={classes.infoBox}
                 >
                     <IconInfo16 />
-                    {i18n.t('Enter {{referralProgramStageLabel}} details in the next step after completing this {{currentStageLabel}}.', {
-                        referralProgramStageLabel: programStage.stageForm.name,
-                        currentStageLabel,
-                    })}
+                    {i18n.t(
+                        'Enter {{referralProgramStageLabel}} details in the next step after completing this {{currentStageLabel}}.',
+                        {
+                            referralProgramStageLabel: programStage.stageForm.name,
+                            currentStageLabel,
+                        },
+                    )}
                 </div>
             )}
 
@@ -121,6 +124,21 @@ export const ReferralActionsPlain = ({
                     referralProgramStageLabel={programStage.stageForm.name}
                     {...passOnProps}
                 />
+            )}
+
+            {selectedAction === ReferralActionTypes.DO_NOT_LINK_RESPONSE && (
+                <div
+                    className={classes.infoBox}
+                >
+                    <IconWarning16 />
+                    {i18n.t(
+                        'This {{currentStageLabel}} will be created without a link to {{referralProgramStageLabel}}',
+                        {
+                            referralProgramStageLabel: programStage.stageForm.name,
+                            currentStageLabel,
+                        },
+                    )}
+                </div>
             )}
         </DataSection>);
 };

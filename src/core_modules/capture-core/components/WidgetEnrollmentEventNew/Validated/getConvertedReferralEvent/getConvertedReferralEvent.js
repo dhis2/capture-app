@@ -53,6 +53,11 @@ const getEventDetailsByReferralMode = ({
             referralEvent: null,
             linkedEventId,
         };
+    } else if (referralMode === ReferralModes.DO_NOT_LINK_RESPONSE) {
+        return {
+            referralEvent: null,
+            linkedEventId: null,
+        };
     }
 
     log.error(errorCreator(`Referral mode ${referralMode} is not supported`)());
@@ -85,7 +90,7 @@ export const getConvertedReferralEvent = ({
         clientRequestEvent,
     });
 
-    const relationship = {
+    const relationship = linkedEventId && {
         relationshipType: referralType.id,
         from: {
             event: {
