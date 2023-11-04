@@ -50,7 +50,7 @@ const linkToExistingResponse = (props) => {
 
     if (!linkedEventIdIsValid) {
         setErrorMessages({
-            linkedEventId: i18n.t('Please provide a valid event'),
+            linkedEventId: i18n.t('Please select a valid event'),
         });
     } else {
         setErrorMessages({

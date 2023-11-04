@@ -30,6 +30,8 @@ export const LinkToExistingPlain = ({
     setReferralDataValues,
     linkableEvents,
     referralProgramStageLabel,
+    errorMessages,
+    saveAttempted,
     classes,
 }: LinkToExistingProps) => {
     const onChange = (value) => {
@@ -53,6 +55,8 @@ export const LinkToExistingPlain = ({
                     referralProgramStageLabel,
                 })}
                 className={classes.singleSelectField}
+                error={saveAttempted && !!errorMessages.linkedEventId}
+                validationText={saveAttempted && errorMessages.linkedEventId}
             >
                 {linkableEvents.map(event => (
                     <SingleSelectOption

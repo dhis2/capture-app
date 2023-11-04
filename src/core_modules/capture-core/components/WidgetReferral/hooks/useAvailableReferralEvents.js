@@ -6,7 +6,7 @@ import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 
 type Props = {
     stageId: ?string,
-    teiId: string,
+    enrollmentId: string,
     scheduledLabel: string,
     occurredLabel: string,
     relationshipTypeId: ?string,
@@ -22,7 +22,7 @@ type ReturnType = {
 
 export const useAvailableReferralEvents = ({
     stageId,
-    teiId,
+    enrollmentId,
     relationshipTypeId,
     scheduledLabel,
     occurredLabel,
@@ -32,19 +32,20 @@ export const useAvailableReferralEvents = ({
         resource: 'tracker/events',
         params: {
             programStage: stageId,
-            trackedEntity: teiId,
-            fields: 'event,occurredAt,scheduledAt,relationships',
+            enrollments: enrollmentId,
+            fields: 'event,occurredAt,scheduledAt,status,relationships',
         },
-    }), [stageId, teiId]);
+    }), [stageId, enrollmentId]);
     const { data, isLoading, isError } = useApiDataQuery<Array<LinkableEvent>>(
-        ['availableReferralEvents', stageId, teiId, relationshipTypeId],
+        ['availableReferralEvents', stageId, enrollmentId, relationshipTypeId],
         query,
         {
             enabled: !!stageId && enabled,
             cacheTime: 0,
             staleTime: 0,
             select: (response: any) => {
-                const events = response?.instances;
+                const events = response?.instances.filter(instance => ['SCHEDULE', 'ACTIVE'].includes(instance.status));
+
                 if (events.length === 0) return [];
 
                 return events.reduce((acc, event) => {

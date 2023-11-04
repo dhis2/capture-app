@@ -38,7 +38,7 @@ export type ContainerProps = {|
 export type Props = {|
     programName: string,
     programId: string,
-    teiId: string,
+    enrollmentId: string,
     eventSaveInProgress: boolean,
     stage: ProgramStage,
     formFoundation: RenderFoundation,

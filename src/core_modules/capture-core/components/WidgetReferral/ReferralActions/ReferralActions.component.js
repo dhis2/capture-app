@@ -46,13 +46,13 @@ export const ReferralActionsPlain = ({
     classes,
     type,
     scheduledLabel,
-    selectedType,
     linkableEvents,
     referralDataValues,
     setReferralDataValues,
     constraint,
     currentStageLabel,
-    ...passOnProps
+    errorMessages,
+    saveAttempted,
 }: Props) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
@@ -97,7 +97,8 @@ export const ReferralActionsPlain = ({
                     referralDataValues={referralDataValues}
                     setReferralDataValues={setReferralDataValues}
                     scheduledLabel={scheduledLabel}
-                    {...passOnProps}
+                    saveAttempted={saveAttempted}
+                    errorMessages={errorMessages}
                 />
             )}
 
@@ -122,7 +123,8 @@ export const ReferralActionsPlain = ({
                     setReferralDataValues={setReferralDataValues}
                     linkableEvents={linkableEvents}
                     referralProgramStageLabel={programStage.stageForm.name}
-                    {...passOnProps}
+                    errorMessages={errorMessages}
+                    saveAttempted={saveAttempted}
                 />
             )}
 

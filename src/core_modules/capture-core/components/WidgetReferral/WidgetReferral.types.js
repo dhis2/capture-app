@@ -3,7 +3,7 @@ import { actions as ReferralModes } from './constants';
 
 export type Props = {|
     programId: string,
-    teiId: string,
+    enrollmentId: string,
     programStageId: string,
     currentStageLabel: string,
 |}

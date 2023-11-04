@@ -11,7 +11,7 @@ import { useAvailableReferralEvents } from './hooks/useAvailableReferralEvents';
 
 const WidgetReferralPlain = ({
     programId,
-    teiId,
+    enrollmentId,
     programStageId,
     currentStageLabel,
     ...passOnProps
@@ -23,7 +23,7 @@ const WidgetReferralPlain = ({
         relationshipTypeId: selectedRelationshipType?.id,
         scheduledLabel,
         occurredLabel,
-        teiId,
+        enrollmentId,
     });
     const [saveAttempted, setSaveAttempted] = useState(false);
     const [errorMessages, setErrorMessages] = useState({});
@@ -85,7 +85,6 @@ const WidgetReferralPlain = ({
     return (
         <ReferralActions
             scheduledLabel={scheduledLabel}
-            selectedType={selectedRelationshipType}
             type={currentReferralStatus}
             linkableEvents={linkableEvents}
             referralDataValues={referralDataValues}

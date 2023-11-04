@@ -1,21 +1,6 @@
 // @flow
 import type { ReferralDataValueStates } from '../WidgetReferral.types';
 
-type ReferralRelationshipType = {|
-    id: string,
-    fromConstraint: {
-        entity: string,
-        programStageId?: {
-            id: string,
-        }
-    },
-    toConstraint: {
-        programStage?: {
-            id: string,
-        },
-    },
-|}
-
 type Constraint = {
     programStage: {
         id: string,
@@ -26,6 +11,7 @@ type Constraint = {
 export type ErrorMessagesForReferral = {|
     scheduledAt?: ?string,
     orgUnit?: ?string,
+    linkedEventId?: ?string,
 |}
 
 export type LinkableEvent = {
@@ -35,7 +21,6 @@ export type LinkableEvent = {
 
 export type Props = {|
     type: string,
-    selectedType: ReferralRelationshipType,
     referralDataValues: ReferralDataValueStates,
     linkableEvents: Array<LinkableEvent>,
     scheduledLabel: string,
