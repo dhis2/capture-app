@@ -17,11 +17,11 @@ export const useApiDataQuery = <TResultData>(
         [ReactQueryAppNamespace, ...queryKey],
         queryFn,
         {
-            ...queryOptions,
             refetchOnWindowFocus: false,
             refetchOnMount: false,
             refetchOnReconnect: false,
             staleTime: 2 * 60 * 1000,
             cacheTime: 5 * 60 * 1000,
+            ...queryOptions,
         });
 };

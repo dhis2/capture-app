@@ -31,22 +31,34 @@ const getEventDetailsByReferralMode = ({
         const { scheduledAt: referralScheduledAt, orgUnit: referralOrgUnit } = referralDataValues;
 
         return ({
-            ...baseEventDetails,
-            scheduledAt: referralScheduledAt,
-            orgUnit: referralOrgUnit?.id,
+            referralEvent: {
+                ...baseEventDetails,
+                scheduledAt: referralScheduledAt,
+                orgUnit: referralOrgUnit?.id,
+            },
+            linkedEventId: baseEventDetails.event,
         });
     } else if (referralMode === ReferralModes.ENTER_DATA) {
         return ({
-            ...baseEventDetails,
-            scheduledAt: clientRequestEvent.occurredAt,
-            orgUnit: clientRequestEvent.orgUnit,
+            referralEvent: {
+                ...baseEventDetails,
+                scheduledAt: clientRequestEvent.occurredAt,
+                orgUnit: clientRequestEvent.orgUnit,
+            },
+            linkedEventId: baseEventDetails.event,
         });
+    } else if (referralMode === ReferralModes.LINK_EXISTING_RESPONSE) {
+        const { linkedEventId } = referralDataValues;
+        return {
+            referralEvent: null,
+            linkedEventId,
+        };
     }
 
     log.error(errorCreator(`Referral mode ${referralMode} is not supported`)());
     return {
-        ...baseEventDetails,
-        orgUnit: '',
+        referralEvent: null,
+        linkedEventId: null,
     };
 };
 
@@ -62,7 +74,7 @@ export const getConvertedReferralEvent = ({
 }: ConvertedReferralEventProps) => {
     const requestEventIsFromConstraint = referralType.fromConstraint.programStage.id === currentProgramStageId;
 
-    const referralEvent = getEventDetailsByReferralMode({
+    const { referralEvent, linkedEventId } = getEventDetailsByReferralMode({
         referralDataValues,
         requestEventIsFromConstraint,
         referralMode,
@@ -77,12 +89,12 @@ export const getConvertedReferralEvent = ({
         relationshipType: referralType.id,
         from: {
             event: {
-                event: requestEventIsFromConstraint ? clientRequestEvent.event : referralEvent.event,
+                event: requestEventIsFromConstraint ? clientRequestEvent.event : linkedEventId,
             },
         },
         to: {
             event: {
-                event: requestEventIsFromConstraint ? referralEvent.event : clientRequestEvent.event,
+                event: requestEventIsFromConstraint ? linkedEventId : clientRequestEvent.event,
             },
         },
     };

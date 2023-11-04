@@ -41,6 +41,8 @@ export const useAvailableReferralEvents = ({
         query,
         {
             enabled: !!stageId && enabled,
+            cacheTime: 0,
+            staleTime: 0,
             select: (response: any) => {
                 const events = response?.instances;
                 if (events.length === 0) return [];
