@@ -20,6 +20,7 @@ const ValidatedPlain = ({
     stage,
     programName,
     programId,
+    teiId,
     eventSaveInProgress,
     formFoundation,
     classes,
@@ -48,6 +49,7 @@ const ValidatedPlain = ({
                 />
                 <WidgetReferral
                     ref={referralRef}
+                    teiId={teiId}
                     programId={programId}
                     programStageId={stage?.id}
                     currentStageLabel={stage.name}

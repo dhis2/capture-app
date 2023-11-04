@@ -4,19 +4,34 @@ import { useReferral } from './useReferral';
 import type { Props, ReferralDataValueStates } from './WidgetReferral.types';
 import { ReferralActions } from './ReferralActions';
 import { actions as ReferralModes, referralStatus } from './constants';
-import { useScheduledLabel } from './hooks/useScheduledLabel';
+import { useStageLabels } from './hooks/useStageLabels';
 import type { ErrorMessagesForReferral } from './ReferralActions';
 import { referralWidgetIsValid } from './referralEventIsValid/referralEventIsValid';
+import { useAvailableReferralEvents } from './hooks/useAvailableReferralEvents';
 
-const WidgetReferralPlain = ({ programId, programStageId, currentStageLabel, ...passOnProps }: Props, ref) => {
+const WidgetReferralPlain = ({
+    programId,
+    teiId,
+    programStageId,
+    currentStageLabel,
+    ...passOnProps
+}: Props, ref) => {
     const { currentReferralStatus, selectedRelationshipType, constraint } = useReferral(programStageId);
+    const { scheduledLabel, occurredLabel } = useStageLabels(programId, constraint?.programStage?.id);
+    const { linkableEvents, isLoading: isLoadingEvents } = useAvailableReferralEvents({
+        stageId: constraint?.programStage?.id,
+        relationshipTypeId: selectedRelationshipType?.id,
+        scheduledLabel,
+        occurredLabel,
+        teiId,
+    });
     const [saveAttempted, setSaveAttempted] = useState(false);
     const [errorMessages, setErrorMessages] = useState({});
-    const { scheduledLabel } = useScheduledLabel(programId, constraint?.programStage?.id);
     const [referralDataValues, setReferralDataValues] = useState<ReferralDataValueStates>({
         referralMode: ReferralModes.REFER_ORG,
         scheduledAt: '',
         orgUnit: undefined,
+        linkedEventId: undefined,
     });
 
     const addErrorMessage = (message: ErrorMessagesForReferral) => {
@@ -34,11 +49,12 @@ const WidgetReferralPlain = ({ programId, programStageId, currentStageLabel, ...
     };
 
     const formIsValid = useCallback(() => {
-        const { scheduledAt, orgUnit, referralMode } = referralDataValues;
+        const { scheduledAt, orgUnit, linkedEventId, referralMode } = referralDataValues;
         return referralWidgetIsValid({
             referralMode,
             scheduledAt,
             orgUnit,
+            linkedEventId,
             setErrorMessages: addErrorMessage,
         });
     }, [referralDataValues]);
@@ -62,7 +78,7 @@ const WidgetReferralPlain = ({ programId, programStageId, currentStageLabel, ...
         }
     }, [formIsValid, referralDataValues]);
 
-    if (!currentReferralStatus || !selectedRelationshipType) {
+    if (!currentReferralStatus || !selectedRelationshipType || isLoadingEvents) {
         return null;
     }
 
@@ -71,6 +87,7 @@ const WidgetReferralPlain = ({ programId, programStageId, currentStageLabel, ...
             scheduledLabel={scheduledLabel}
             selectedType={selectedRelationshipType}
             type={currentReferralStatus}
+            linkableEvents={linkableEvents}
             referralDataValues={referralDataValues}
             setReferralDataValues={setReferralDataValues}
             addErrorMessage={addErrorMessage}

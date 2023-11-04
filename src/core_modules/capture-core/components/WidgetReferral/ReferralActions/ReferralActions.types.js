@@ -28,10 +28,16 @@ export type ErrorMessagesForReferral = {|
     orgUnit?: ?string,
 |}
 
+export type LinkableEvent = {
+    id: string,
+    label: string,
+}
+
 export type Props = {|
     type: string,
     selectedType: ReferralRelationshipType,
     referralDataValues: ReferralDataValueStates,
+    linkableEvents: Array<LinkableEvent>,
     scheduledLabel: string,
     saveAttempted: boolean,
     errorMessages: ErrorMessagesForReferral,

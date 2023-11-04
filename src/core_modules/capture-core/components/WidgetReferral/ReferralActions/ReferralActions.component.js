@@ -8,6 +8,7 @@ import { DataSection } from '../../DataSection';
 import { ReferToOrgUnit } from '../ReferToOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
 import type { Props } from './ReferralActions.types';
+import { LinkToExisting } from '../LinkToExisting';
 
 const styles = () => ({
     wrapper: {
@@ -44,7 +45,9 @@ const styles = () => ({
 export const ReferralActionsPlain = ({
     classes,
     type,
+    scheduledLabel,
     selectedType,
+    linkableEvents,
     referralDataValues,
     setReferralDataValues,
     constraint,
@@ -77,6 +80,7 @@ export const ReferralActionsPlain = ({
                         key={key}
                         name={`referral-action-${key}`}
                         checked={key === selectedAction}
+                        disabled={key === ReferralActionTypes.LINK_EXISTING_RESPONSE && !linkableEvents.length}
                         label={mainOptionTranslatedTexts[key](programStage.stageForm.name)}
                         onChange={(e: Object) => updateSelectedAction(e.value)}
                         value={key}
@@ -92,6 +96,7 @@ export const ReferralActionsPlain = ({
                 <ReferToOrgUnit
                     referralDataValues={referralDataValues}
                     setReferralDataValues={setReferralDataValues}
+                    scheduledLabel={scheduledLabel}
                     {...passOnProps}
                 />
             )}
@@ -106,6 +111,16 @@ export const ReferralActionsPlain = ({
                         currentStageLabel,
                     })}
                 </div>
+            )}
+
+            {selectedAction === ReferralActionTypes.LINK_EXISTING_RESPONSE && linkableEvents.length > 0 && (
+                <LinkToExisting
+                    referralDataValues={referralDataValues}
+                    setReferralDataValues={setReferralDataValues}
+                    linkableEvents={linkableEvents}
+                    referralProgramStageLabel={programStage.stageForm.name}
+                    {...passOnProps}
+                />
             )}
         </DataSection>);
 };

@@ -7,6 +7,7 @@ import { actions as ReferralModes } from '../constants';
 type Props = {
     scheduledAt: ?string,
     orgUnit: ?Object,
+    linkedEventId: ?string,
     setErrorMessages: (messages: Object) => void,
 };
 
@@ -43,11 +44,28 @@ const referToOrgUnit = (props) => {
     return scheduledAtIsValid && orgUnitIsValid;
 };
 
+const linkToExistingResponse = (props) => {
+    const { linkedEventId, setErrorMessages } = props ?? {};
+    const linkedEventIdIsValid = !!linkedEventId;
+
+    if (!linkedEventIdIsValid) {
+        setErrorMessages({
+            linkedEventId: i18n.t('Please provide a valid event'),
+        });
+    } else {
+        setErrorMessages({
+            linkedEventId: null,
+        });
+    }
+
+    return linkedEventIdIsValid;
+};
+
 
 export const ValidationFunctionsByReferralMode: { [key: string]: (props: ?Props) => boolean } = {
     [ReferralModes.REFER_ORG]: props => referToOrgUnit(props),
     [ReferralModes.ENTER_DATA]: () => true,
-    [ReferralModes.LINK_EXISTING_RESPONSE]: () => true,
+    [ReferralModes.LINK_EXISTING_RESPONSE]: props => linkToExistingResponse(props),
     [ReferralModes.DO_NOT_LINK_RESPONSE]: () => true,
 };
 

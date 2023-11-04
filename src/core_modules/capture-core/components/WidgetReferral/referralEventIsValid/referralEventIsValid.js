@@ -9,6 +9,7 @@ export const referralWidgetIsValid = ({
     referralMode,
     scheduledAt,
     orgUnit,
+    linkedEventId,
     setErrorMessages,
 }: ReferralIsValidProps): boolean => {
     const validationFunction = ValidationFunctionsByReferralMode[referralMode];
@@ -21,6 +22,7 @@ export const referralWidgetIsValid = ({
     return validationFunction({
         scheduledAt,
         orgUnit,
+        linkedEventId,
         setErrorMessages,
     });
 };

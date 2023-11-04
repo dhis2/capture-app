@@ -130,6 +130,7 @@ export const Validated = ({
             ready={ready}
             id={dataEntryId}
             itemId={itemId}
+            teiId={teiId}
             formFoundation={formFoundation}
             referralRef={referralRef}
             onSave={handleSave}

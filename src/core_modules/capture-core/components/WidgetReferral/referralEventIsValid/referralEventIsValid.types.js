@@ -10,5 +10,6 @@ export type ReferralIsValidProps = {|
         name: string,
         path: string,
     },
+    linkedEventId: ?string,
     setErrorMessages: (message: ErrorMessagesForReferral) => void,
 |}
