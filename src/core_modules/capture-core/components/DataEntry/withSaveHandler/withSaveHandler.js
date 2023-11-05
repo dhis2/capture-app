@@ -1,10 +1,7 @@
 // @flow
 import * as React from 'react';
 import log from 'loglevel';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Modal, ModalContent, ModalTitle } from '@dhis2/ui';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -248,8 +245,8 @@ const getSaveHandler = (
                         onSave={this.handleSaveAttempt}
                         {...filteredProps}
                     />
-                    <Dialog
-                        open={this.state.messagesDialogOpen}
+                    <Modal
+                        hide={!this.state.messagesDialogOpen}
                         onClose={this.handleAbortDialog}
                     >
                         <MessagesDialogContents
@@ -261,19 +258,17 @@ const getSaveHandler = (
                             isCompleting={this.isCompleting}
                             validationStrategy={calculatedFoundation.validationStrategy}
                         />
-                    </Dialog>
-                    <Dialog
-                        open={this.state.waitForPromisesDialogOpen}
+                    </Modal>
+                    <Modal
+                        hide={!this.state.waitForPromisesDialogOpen}
                     >
-                        <DialogTitle>
+                        <ModalTitle>
                             {i18n.t('Operations running')}
-                        </DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                {this.getDialogWaitForUploadContents()}
-                            </DialogContentText>
-                        </DialogContent>
-                    </Dialog>
+                        </ModalTitle>
+                        <ModalContent>
+                            {this.getDialogWaitForUploadContents()}
+                        </ModalContent>
+                    </Modal>
                 </div>
             );
         }

@@ -1,13 +1,9 @@
 // @flow
 import * as React from 'react';
 import SnackBar from '@material-ui/core/Snackbar';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 import { IconButton } from 'capture-ui';
-import { IconCross24, Button } from '@dhis2/ui';
+import { IconCross24, Button, Modal, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import isDefined from 'd2-utilizr/lib/isDefined';
 
@@ -100,25 +96,25 @@ class Index extends React.Component<Props> {
                     message={<span>{message}</span>}
                     action={this.getAction()}
                 />
-                <Dialog
-                    open={isDefined(message) && displayType === 'dialog'}
+                <Modal
+                    hide={!isDialogOpen}
                 >
-                    <DialogTitle>
+                    <ModalTitle>
                         {
                             // $FlowFixMe[prop-missing] automated comment
                             isDialogOpen ? message && message.title : ''}
-                    </DialogTitle>
-                    <DialogContent>
+                    </ModalTitle>
+                    <ModalContent>
                         {
                             // $FlowFixMe[prop-missing] automated comment
                             isDialogOpen ? message && message.content : ''}
-                    </DialogContent>
-                    <DialogActions>
+                    </ModalContent>
+                    <ModalActions>
                         <Button onClick={this.handleClose} primary>
                             {i18n.t('Close')}
                         </Button>
-                    </DialogActions>
-                </Dialog>
+                    </ModalActions>
+                </Modal>
             </React.Fragment>
         );
     }

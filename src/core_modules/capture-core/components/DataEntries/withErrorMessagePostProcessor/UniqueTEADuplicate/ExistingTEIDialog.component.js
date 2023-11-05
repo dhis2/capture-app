@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
+import { Modal } from '@dhis2/ui';
 import { ExistingTEILoader } from './ExistingTEILoader.container';
 
 type Props = {
@@ -11,15 +11,13 @@ type Props = {
 export const ExistingTEIDialog = (props: Props) => {
     const { open, ...passOnProps } = props;
     return (
-        <Dialog
-            fullWidth
-            maxWidth={'md'}
-            open={open}
+        <Modal
+            hide={!open}
             onClose={props.onCancel}
         >
             <ExistingTEILoader
                 {...passOnProps}
             />
-        </Dialog>
+        </Modal>
     );
 };
