@@ -11,7 +11,9 @@ export const DiscardDialog = ({
             {header}
         </ModalTitle>
         <ModalContent>
-            {text}
+            <div style={{ margin: '5px 0' }}>
+                {text}
+            </div>
         </ModalContent>
         <ModalActions>
             <ButtonStrip end>

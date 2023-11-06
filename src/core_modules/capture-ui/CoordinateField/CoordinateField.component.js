@@ -56,6 +56,13 @@ export class CoordinateField extends React.Component<Props, State> {
         };
     }
 
+    componentDidUpdate() {
+        // Invalidate map size to fix rendering bug
+        if (this.mapInstance && this.state.showMap) {
+            this.mapInstance.leafletElement.invalidateSize();
+        }
+    }
+
     toSixDecimal = (value: string) => (parseFloat(value) ? parseFloat(value).toFixed(6) : null)
 
     handleBlur = (key: string, value: any) => {
