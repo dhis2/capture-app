@@ -79,7 +79,6 @@ const buildMainSection = async ({
     await buildElementsForSection({
         programTrackedEntityAttributes,
         trackedEntityAttributes,
-        trackedEntityType,
         optionSets,
         section,
         querySingleResource,
@@ -90,14 +89,12 @@ const buildMainSection = async ({
 const buildElementsForSection = async ({
     programTrackedEntityAttributes,
     trackedEntityAttributes,
-    trackedEntityType,
     optionSets,
     section,
     querySingleResource,
 }: {
     programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute>,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
-    trackedEntityType: TrackedEntityType,
     optionSets: Array<OptionSet>,
     section: Section,
     querySingleResource: QuerySingleResource,
@@ -107,7 +104,6 @@ const buildElementsForSection = async ({
         const element = await buildDataElement(
             trackedEntityAttribute,
             trackedEntityAttributes,
-            trackedEntityType,
             optionSets,
             querySingleResource,
         );
@@ -119,7 +115,6 @@ const buildElementsForSection = async ({
 const buildSection = async ({
     programTrackedEntityAttributes,
     trackedEntityAttributes,
-    trackedEntityType,
     optionSets,
     sectionCustomLabel,
     sectionCustomId,
@@ -127,7 +122,6 @@ const buildSection = async ({
 }: {
     programTrackedEntityAttributes?: Array<ProgramTrackedEntityAttribute>,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
-    trackedEntityType: TrackedEntityType,
     optionSets: Array<OptionSet>,
     sectionCustomLabel: string,
     sectionCustomId: string,
@@ -145,7 +139,6 @@ const buildSection = async ({
     await buildElementsForSection({
         programTrackedEntityAttributes,
         trackedEntityAttributes,
-        trackedEntityType,
         optionSets,
         section,
         querySingleResource,
@@ -192,7 +185,6 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
                 section = await buildSection({
                     programTrackedEntityAttributes: builtProgramSection.map(id => trackedEntityAttributeDictionary[id]),
                     trackedEntityAttributes,
-                    trackedEntityType,
                     optionSets,
                     sectionCustomLabel: programSection.displayFormName,
                     sectionCustomId: programSection.id,
