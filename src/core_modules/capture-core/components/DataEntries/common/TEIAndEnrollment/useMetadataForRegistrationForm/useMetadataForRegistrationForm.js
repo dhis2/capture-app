@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
 import { useOptionSetsForAttributes } from './hooks/useOptionSetsForAttributes';
-import { scopeTypes, Section } from '../../../../../metaData';
+import { scopeTypes } from '../../../../../metaData';
 import { useProgramFromIndexedDB } from '../../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useScopeInfo } from '../../../../../hooks/useScopeInfo';
 import { useTrackedEntityTypeCollection } from './hooks/useTrackedEntityTypeCollection';
@@ -71,20 +71,6 @@ export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
         configIsFetched,
         locale,
     });
-
-    if (trackedEntityType && enrollment) {
-        for (const tetAttribute of trackedEntityType.trackedEntityTypeAttributes) {
-            if (tetAttribute.mandatory) {
-                const section = enrollment.enrollmentForm.getSection(Section.MAIN_SECTION_ID);
-                if (section) {
-                    const enrollmentAttribute = section.elements && section.elements.get(tetAttribute.trackedEntityAttributeId);
-                    if (enrollmentAttribute) {
-                        enrollmentAttribute.compulsory = true;
-                    }
-                }
-            }
-        }
-    }
 
     if (scopeType === scopeTypes.TRACKED_ENTITY_TYPE && trackedEntityTypeCollection && tetId) {
         return {
