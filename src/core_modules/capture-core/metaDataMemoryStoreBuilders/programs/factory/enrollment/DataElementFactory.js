@@ -16,7 +16,6 @@ import {
     dataElementUniqueScope,
     dataElementTypes,
     Section,
-    TrackedEntityType,
 } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
@@ -128,21 +127,6 @@ export class DataElementFactory {
         });
     }
 
-    static _isCompulsoryAttribute(
-        cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
-        trackedEntityType: TrackedEntityType,
-    ) {
-        if (cachedProgramTrackedEntityAttribute.mandatory) {
-            return true;
-        }
-        for (const attribute of trackedEntityType._attributes) {
-            if (attribute.id === cachedProgramTrackedEntityAttribute.trackedEntityAttributeId) {
-                return attribute.compulsory;
-            }
-        }
-        return false;
-    }
-
     locale: ?string;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
@@ -175,10 +159,9 @@ export class DataElementFactory {
         dataElement: DataElement,
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
-        trackedEntityType: TrackedEntityType,
     ) {
         dataElement.id = cachedTrackedEntityAttribute.id;
-        dataElement.compulsory = DataElementFactory._isCompulsoryAttribute(cachedProgramTrackedEntityAttribute, trackedEntityType);
+        dataElement.compulsory = cachedProgramTrackedEntityAttribute.mandatory;
         dataElement.code = cachedTrackedEntityAttribute.code;
         dataElement.attributeValues = cachedTrackedEntityAttribute.attributeValues;
         dataElement.name =
@@ -225,7 +208,6 @@ export class DataElementFactory {
     async _buildBaseDataElement(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
-        trackedEntityType: TrackedEntityType,
         section?: Section,
     ) {
         const dataElement = new DataElement();
@@ -235,7 +217,6 @@ export class DataElementFactory {
             dataElement,
             cachedProgramTrackedEntityAttribute,
             cachedTrackedEntityAttribute,
-            trackedEntityType,
         );
         if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
             log.error(errorCreator(DataElementFactory.errorMessages.MULIT_TEXT_WITH_NO_OPTIONS_SET)({ dataElement }));
@@ -247,7 +228,6 @@ export class DataElementFactory {
     async _buildDateDataElement(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
-        trackedEntityType: TrackedEntityType,
         section?: Section,
     ) {
         const dateDataElement = new DateDataElement();
@@ -258,14 +238,12 @@ export class DataElementFactory {
             dateDataElement,
             cachedProgramTrackedEntityAttribute,
             cachedTrackedEntityAttribute,
-            trackedEntityType,
         );
         return dateDataElement;
     }
 
     build(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
-        trackedEntityType: TrackedEntityType,
         section?: Section,
     ) {
         const cachedTrackedEntityAttribute = cachedProgramTrackedEntityAttribute.trackedEntityAttributeId &&
@@ -282,7 +260,7 @@ export class DataElementFactory {
         }
 
         return cachedTrackedEntityAttribute.valueType === dataElementTypes.DATE ?
-            this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, trackedEntityType, section) :
-            this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, trackedEntityType, section);
+            this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section) :
+            this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section);
     }
 }
