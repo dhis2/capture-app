@@ -182,7 +182,7 @@ export class CoordinateField extends React.Component<Props, State> {
                     key="map"
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <WrappedLeafletSearch position="topright" inputPlaceholder="Search" closeResultsOnClick search={null} mapStateModifier={this.search} showMarker={false} />
+                    <WrappedLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick search={null} mapStateModifier={this.search} showMarker={false} />
                     <TileLayer
                         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"

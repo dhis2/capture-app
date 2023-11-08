@@ -2,7 +2,7 @@
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { PolygonField as UIPolygonField } from 'capture-ui';
-import { Dialog, DialogTitle } from '@material-ui/core';
+import { Modal, ModalTitle } from '@dhis2/ui';
 import { typeof orientations } from '../../../New';
 
 const getStyles = () => ({
@@ -44,11 +44,12 @@ class PolygonFieldPlain extends React.Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <UIPolygonField
                 mapDialog={
-                    <Dialog
+                    <Modal
                         classes={this.dialogClasses}
+                        large
                     >
-                        <DialogTitle key="title">{dialogLabel}</DialogTitle>
-                    </Dialog>
+                        <ModalTitle key="title">{dialogLabel}</ModalTitle>
+                    </Modal>
                 }
                 {...passOnProps}
             />

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Dialog } from '@material-ui/core';
+import { Modal } from '@dhis2/ui';
 import { ExistingTemplateContents } from './ExistingTemplateContents.component';
 
 type Props = {
@@ -17,15 +17,15 @@ export const ExistingTemplateDialog = (props: Props) => {
     } = props;
 
     return (
-        <Dialog
-            open={open}
+        <Modal
+            hide={!open}
             onClose={onClose}
-            fullWidth
+            position={'center'}
         >
             <ExistingTemplateContents
                 onSaveTemplate={onSaveTemplate}
                 onClose={onClose}
             />
-        </Dialog>
+        </Modal>
     );
 };

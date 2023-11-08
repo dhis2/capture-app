@@ -3,8 +3,7 @@
 import React, { PureComponent, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
-import { Button } from '@dhis2/ui';
+import { Button, Modal, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 import type { Props } from './downloadDialog.types';
 
 const getStyles = () => ({
@@ -82,21 +81,21 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
         const { open, onClose } = this.props;
         return (
             <span>
-                <Dialog
-                    open={!!open}
+                <Modal
+                    hide={!open}
                     onClose={onClose}
-                    fullWidth
+                    position={'center'}
                 >
-                    <DialogTitle>{i18n.t('Download with current filters')}</DialogTitle>
-                    <DialogContent>
+                    <ModalTitle>{i18n.t('Download with current filters')}</ModalTitle>
+                    <ModalContent>
                         {this.renderButtons()}
-                    </DialogContent>
-                    <DialogActions>
+                    </ModalContent>
+                    <ModalActions>
                         <Button onClick={onClose} color="primary">
                             {i18n.t('Close')}
                         </Button>
-                    </DialogActions>
-                </Dialog>
+                    </ModalActions>
+                </Modal>
             </span>
         );
     }

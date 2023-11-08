@@ -557,7 +557,7 @@ When('you create a copy of the working list', () => {
 
     cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackerFilter');
 
-    cy.get('button')
+    cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Save')
         .click();
 
