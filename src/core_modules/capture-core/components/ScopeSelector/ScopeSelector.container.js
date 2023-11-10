@@ -3,15 +3,15 @@ import React, { type ComponentType, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
 import type { OwnProps } from './ScopeSelector.types';
-import { useOrganizationUnit } from './hooks';
+import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
 
 
-const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName) => {
+const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName, displayName) => {
     // because we want the orgUnit to be fetched and stored
     // before allowing the user to view the locked selector
-    if (selectedOrgUnitId && selectedOrgUnitName) {
-        return true;
+    if (selectedOrgUnitId && (!selectedOrgUnitName || selectedOrgUnitName !== displayName)) {
+        return false;
     }
     return !lockedSelectorLoads;
 };
@@ -32,21 +32,20 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     children,
 }) => {
     const dispatch = useDispatch();
-    const { refetch: refetchOrganisationUnit, displayName } = useOrganizationUnit();
-    const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: displayName, id: selectedOrgUnitId });
+    const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: undefined, id: selectedOrgUnitId });
+    const { displayName } = useOrgUnitName(selectedOrgUnit.id);
 
     useEffect(() => {
-        const missName = !selectedOrgUnit.name;
-        const hasDifferentId = selectedOrgUnit.id !== selectedOrgUnitId;
-
-        selectedOrgUnitId &&
-            (hasDifferentId || missName) &&
-            refetchOrganisationUnit({ variables: { selectedOrgUnitId } });
-    }, [selectedOrgUnitId]); // eslint-disable-line react-hooks/exhaustive-deps
+        if (displayName && selectedOrgUnit.name !== displayName) {
+            setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, name: displayName }));
+        }
+    }, [displayName, selectedOrgUnit, setSelectedOrgUnit]);
 
     useEffect(() => {
-        displayName && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, name: displayName }));
-    }, [displayName, setSelectedOrgUnit]);
+        if (selectedOrgUnitId && !selectedOrgUnit.id) {
+            selectedOrgUnitId && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, id: selectedOrgUnitId }));
+        }
+    }, [selectedOrgUnitId, selectedOrgUnit, setSelectedOrgUnit]);
 
     const handleSetOrgUnit = (orgUnitId, orgUnitObject) => {
         setSelectedOrgUnit(orgUnitObject);
@@ -59,7 +58,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
             previousOrgUnitId: app.previousOrgUnitId,
         }
     ));
-    const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnit.name);
+    const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnit.id, selectedOrgUnit.name, displayName);
 
     return (
         <ScopeSelectorComponent

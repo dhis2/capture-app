@@ -20,7 +20,6 @@ type EventMain = {
     +programStageId?: string,
     +programStageName?: string,
     +orgUnitId?: string,
-    +orgUnitName?: string,
     +trackedEntityInstanceId?: string,
     +enrollmentId?: string,
     +enrollmentStatus?: string,
