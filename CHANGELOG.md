@@ -1,3 +1,10 @@
+## [100.44.5](https://github.com/dhis2/capture-app/compare/v100.44.4...v100.44.5) (2023-11-10)
+
+
+### Bug Fixes
+
+* [TECH-1627] use only valid combinations of orgUnit and ouMode ([#3405](https://github.com/dhis2/capture-app/issues/3405)) ([20d05f1](https://github.com/dhis2/capture-app/commit/20d05f1602840e8ac1241ee305b796d58f616802))
+
 ## [100.44.4](https://github.com/dhis2/capture-app/compare/v100.44.3...v100.44.4) (2023-11-10)
 
 
