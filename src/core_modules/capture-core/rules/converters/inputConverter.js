@@ -8,6 +8,7 @@ const dateMomentFormat = 'YYYY-MM-DD';
 
 const convertStringValue = (value: ?string): ?string => (value || null);
 const convertNumericValue = (value: any): ?number => (typeof value === 'number' ? value : null);
+const convertObjectToString = (value: ?{ name: string }) => (value ? value.name : null);
 
 export const inputConverter: IConvertInputRulesValue = {
     convertText: convertStringValue,
@@ -38,24 +39,12 @@ export const inputConverter: IConvertInputRulesValue = {
         log.warn('convertTrackerAssociate not implemented', value);
         return null;
     },
-    convertUserName: (value: any): ?string => {
-        log.warn('convertUserName not implemented', value);
-        return null;
-    },
+    convertUserName: convertStringValue,
     convertCoordinate: (value: any): ?string => (
         (value && value.latitude && value.longitude) ? `[${value.latitude},${value.longitude}]` : null),
-    convertOrganisationUnit: (value: any): ?string => {
-        log.warn('convertOrganisationUnit not implemented', value);
-        return null;
-    },
+    convertOrganisationUnit: convertObjectToString,
     convertAge: (value: any): ?string => inputConverter.convertDate(value),
     convertUrl: convertStringValue,
-    convertFile(value: any): ?string {
-        log.warn('convertFile not implemented', value);
-        return null;
-    },
-    convertImage(value: any): ?string {
-        log.warn('convertImage not implemented', value);
-        return null;
-    },
+    convertFile: convertObjectToString,
+    convertImage: convertObjectToString,
 };

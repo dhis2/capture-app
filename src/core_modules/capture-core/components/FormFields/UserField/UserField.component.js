@@ -53,6 +53,11 @@ const UserFieldPlain = (props: Props) => {
         focusSelectedInput.current = true;
     };
 
+    const handleBlur = () => {
+        // $FlowExpectedError
+        onSet(value);
+    };
+
     if (value) {
         return (
             <Selected
@@ -66,7 +71,7 @@ const UserFieldPlain = (props: Props) => {
     }
 
     return (
-        <div>
+        <div onBlur={handleBlur}>
             <UserSearch
                 onSet={handleSet}
                 inputWrapperClasses={classes}
