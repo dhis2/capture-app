@@ -1,3 +1,10 @@
+## [100.44.3](https://github.com/dhis2/capture-app/compare/v100.44.2...v100.44.3) (2023-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-15814] missing orgunit names ([#3449](https://github.com/dhis2/capture-app/issues/3449)) ([488f8c0](https://github.com/dhis2/capture-app/commit/488f8c090680ad47ed693214478a7ef2919b82e7))
+
 ## [100.44.2](https://github.com/dhis2/capture-app/compare/v100.44.1...v100.44.2) (2023-11-05)
 
 
