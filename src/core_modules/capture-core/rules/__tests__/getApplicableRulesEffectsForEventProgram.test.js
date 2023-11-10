@@ -1,3 +1,4 @@
+import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
 import {
     EventProgram,
     ProgramStage,
@@ -78,7 +79,7 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
                 displayName: 'Test',
                 id: 'PUQZWgmQ0jx',
                 programId: 'IpHINAT79UW',
-                programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+                programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
                 useNameForOptionSet: true,
             },
             {
@@ -86,7 +87,7 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
                 displayName: 'apgarcomment',
                 id: 'aKpfPKSRQnv',
                 programId: 'IpHINAT79UW',
-                programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+                programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
                 useNameForOptionSet: true,
             },
             {
@@ -94,7 +95,7 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
                 displayName: 'apgarscore',
                 id: 'g2GooOydipB',
                 programId: 'IpHINAT79UW',
-                programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+                programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
                 useNameForOptionSet: true,
             },
         ];
@@ -145,5 +146,17 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
         });
 
         expect(effects.DISPLAYTEXT).toBeDefined();
+    });
+
+    test('RulesEngine called without programRules', () => {
+        const effects = getApplicableRuleEffectsForEventProgram({
+            program: new EventProgram((initProgram) => {
+                initProgram.programRules = [];
+            }),
+            orgUnit,
+            currentEvent,
+        });
+
+        expect(effects).toStrictEqual([]);
     });
 });

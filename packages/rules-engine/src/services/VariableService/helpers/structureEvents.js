@@ -38,7 +38,7 @@ export const getStructureEvents = (compareDates: CompareDates) => {
                     event.eventId !== currentEvent.eventId,
             );
 
-        const events = [...otherEventsFiltered, currentEvent]
+        const events = [...otherEventsFiltered, ...(Object.keys(currentEvent).length !== 0 ? [currentEvent] : [])]
             .sort(compareEvents);
 
         return createEventsContainer(events);

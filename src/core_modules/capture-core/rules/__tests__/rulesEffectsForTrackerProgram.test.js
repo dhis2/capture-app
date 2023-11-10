@@ -1,3 +1,4 @@
+import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
 import { rulesEngine } from '../rulesEngine';
 
 test('expressions with d2Functions in tracker program', () => {
@@ -8,6 +9,13 @@ test('expressions with d2Functions in tracker program', () => {
         zDhUuAYrxNC: { id: 'zDhUuAYrxNC', valueType: 'TEXT' },
         cejWyOfXge6: { id: 'cejWyOfXge6', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' },
         lZGmxYbs97q: { id: 'lZGmxYbs97q', valueType: 'NUMBER' },
+        Z5z8vFQy0w0: { id: 'Z5z8vFQy0w0', valueType: 'URL' },
+        TzqawmlPkI5: { id: 'TzqawmlPkI5', valueType: 'AGE' },
+        f8j4XDEozvj: { id: 'f8j4XDEozvj', valueType: 'FILE_RESOURCE' },
+        jBBkFuPKctq: { id: 'jBBkFuPKctq', valueType: 'ORGANISATION_UNIT' },
+        A4Fg6jgWauf: { id: 'A4Fg6jgWauf', valueType: 'IMAGE' },
+        CUbZcLm9LyN: { id: 'CUbZcLm9LyN', valueType: 'USERNAME' },
+        p8htbyJHydl: { id: 'p8htbyJHydl', valueType: 'COORDINATE' },
     };
     const programRules = [
         {
@@ -38,6 +46,202 @@ test('expressions with d2Functions in tracker program', () => {
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
+                    id: 'polhYpVRDyj',
+                    displayContent: "d2:daysBetween( '2020-01-28', V{enrollment_date}) = ",
+                    data: "d2:daysBetween( '2020-01-28', V{enrollment_date})",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FkeGdlkYAVr',
+                    displayContent: "d2:validatePattern('d2:daysBetween( '2020-01-28', V{enrollment_date})', 108)",
+                    data: "d2:validatePattern(d2:daysBetween( '2020-01-28', V{enrollment_date}), 108)",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'Foc3PhzoAVr',
+                    displayContent: 'd2:count(#{undefinedVariable}) = ',
+                    data: 'd2:count(#{unknow})',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FjkwPhzoAVr',
+                    displayContent: "d2:countIfValue(#{undefinedVariable}, 'Male') = ",
+                    data: "d2:countIfValue(#{undefinedVariable}, 'Male') = ",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'TkgrHcLselM',
+                    displayContent: 'd2:countIfZeroPos(100) = ',
+                    data: 'd2:countIfZeroPos(100)',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'Foc3PhzoAVr',
+                    displayContent: 'd2:hasValue(#{undefinedVariable})',
+                    data: 'd2:hasValue(#{undefinedVariable})',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FoljdkeoAVr',
+                    displayContent: "d2:validatePattern('Male', 'a')",
+                    data: "d2:validatePattern('Male','a')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FoljdlkYAVr',
+                    displayContent: "d2:validatePattern('Male', 'Male')",
+                    data: "d2:validatePattern('Male','Male')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'kpljdlkYAVr',
+                    displayContent: 'd2:validatePattern()',
+                    data: 'd2:validatePattern()',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FoljdjkRAVr',
+                    displayContent: "d2:hasUserRole('admin')",
+                    data: "d2:hasUserRole('admin')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FoljdkLRAVr',
+                    displayContent: "d2:extractDataMatrixValue('batch number', 3)",
+                    data: "d2:extractDataMatrixValue('batch number', 3)",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FollkyLRAVr',
+                    displayContent: "d2:extractDataMatrixValue('batch number', 'unknow')",
+                    data: "d2:extractDataMatrixValue('batch number', 'unknow')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'lkEUdkLRAVr',
+                    displayContent: "d2:extractDataMatrixValue('gtin', ']d2')",
+                    data: "d2:extractDataMatrixValue('gtin', ']d2')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FlkodkLRAVr',
+                    displayContent: "d2:extractDataMatrixValue('batch number', ']d2')",
+                    data: "d2:extractDataMatrixValue('batch number', ']d2')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'kuYodkLRAVr',
+                    displayContent: "d2:extractDataMatrixValue('production date', ']Q3unknown')",
+                    data: "d2:extractDataMatrixValue('production date', ']Q3unknown')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'kuYookLRAVr',
+                    displayContent: "d2:extractDataMatrixValue('lot number', ']Q3703')",
+                    data: "d2:extractDataMatrixValue('lot number', ']Q3703')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'lkyodkLRAVr',
+                    displayContent: "d2:extractDataMatrixValue('best before date', ']Q3369')",
+                    data: "d2:extractDataMatrixValue('best before date', ']Q3369')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'lkpyodkLRAVr',
+                    displayContent: "d2:extractDataMatrixValue('expiration date', ']Q3369')",
+                    data: "d2:extractDataMatrixValue('expiration date', ']Q3369')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'lkyohgyRAVr',
+                    displayContent: "d2:extractDataMatrixValue('serial number', ']Q3369')",
+                    data: "d2:extractDataMatrixValue('serial number', ']Q3369')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'lkyolktRAVr',
+                    displayContent: "d2:extractDataMatrixValue('unknow key', ']d2')",
+                    data: "d2:extractDataMatrixValue('unknow key', ']d2')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FolpqkLRAVr',
+                    displayContent: 'd2:lastEventDate(V{event_id})',
+                    data: 'd2:lastEventDate(V{event_id})',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FolkokLRAVr',
+                    displayContent: 'd2:lastEventDate(V{enrollment_date})',
+                    data: 'd2:lastEventDate(V{enrollment_date})',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FolkwkLRAVr',
+                    displayContent: 'd2:lastEventDate(#{undefinedVariable})',
+                    data: 'd2:lastEventDate(#{undefinedVariable})',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'llokowfRAVr',
+                    displayContent: "d2:addControlDigits('2')",
+                    data: "d2:addControlDigits('2')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'lloksfegwAVr',
+                    displayContent: "d2:addControlDigits('7')",
+                    data: "d2:addControlDigits('7')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'lkyksfegwAVr',
+                    displayContent: "d2:addControlDigits('9')",
+                    data: "d2:addControlDigits('9')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'llolkyfRAVr',
+                    displayContent: "d2:addControlDigits('12345678912')",
+                    data: "d2:addControlDigits('12345678912')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'FollowfRAVr',
+                    displayContent: 'd2:checkControlDigits(1)',
+                    data: 'd2:checkControlDigits(1)',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
                     id: 'AFkfzcDf4Fs',
                     displayContent: "d2:inOrgUnitGroup('CHC') = ",
                     data: "d2:inOrgUnitGroup('CHC')",
@@ -46,8 +250,8 @@ test('expressions with d2Functions in tracker program', () => {
                 },
                 {
                     id: 'wmAQnxbs7V8',
-                    displayContent: 'd2:round( 12.5 ) = ',
-                    data: 'd2:round( 12.5 )',
+                    displayContent: 'd2:round( 12.5, 1 ) = ',
+                    data: 'd2:round( 12.5, 1 )',
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -95,8 +299,8 @@ test('expressions with d2Functions in tracker program', () => {
                 },
                 {
                     id: 'NLsawa3P5hc',
-                    displayContent: "d2:substring('hello dhis 2', 6, 10) = ",
-                    data: "d2:substring('hello dhis 2', 6, 10)",
+                    displayContent: "d2:substring('hello dhis 2', -1, 10) = ",
+                    data: "d2:substring('hello dhis 2', -1, 10)",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -164,23 +368,130 @@ test('expressions with d2Functions in tracker program', () => {
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 { id: 'nKNmayYigcy', programStageId: 'PUZaKR0Jh2k', programRuleActionType: 'HIDEPROGRAMSTAGE' },
+                {
+                    id: 'nKNmayYigcy',
+                    programStageSectionId: 'SWfdBhglX0fk',
+                    programRuleActionType: 'HIDESECTION',
+                },
+                {
+                    id: 'lJOYxhjupxz',
+                    data: 'true',
+                    trackedEntityAttributeId: 'w75KJ2mc4zz',
+                    programRuleActionType: 'ASSIGN',
+                },
+                {
+                    id: 'lJOdxhjupxz',
+                    data: 'true',
+                    trackedEntityAttributeId: 'w75KJ2mc4zz',
+                    programRuleActionType: 'ERRORONCOMPLETE',
+                },
+                {
+                    id: 'ljlYxhjupxz',
+                    data: 'true',
+                    trackedEntityAttributeId: 'w75KJ2mc4zz',
+                    programRuleActionType: 'WARNINGONCOMPLETE',
+                },
+                {
+                    id: 'lljoxhjupxz',
+                    data: 'true',
+                    trackedEntityAttributeId: 'w75KJ2mc4zz',
+                    programRuleActionType: 'SETMANDATORYFIELD',
+                },
+                {
+                    id: 'lgjoxhjupxz',
+                    data: 'true',
+                    optionGroupId: 'w75KJ2mc4zz',
+                    programRuleActionType: 'HIDEOPTIONGROUP',
+                },
+                {
+                    id: 'lljljhjupxz',
+                    data: 'true',
+                    optionGroupId: 'w75KJ2mc4zz',
+                    programRuleActionType: 'SHOWOPTIONGROUP',
+                },
+                { id: 'hwgyO59SSxu', trackedEntityAttributeId: 'zDhUuAYrxNC', programRuleActionType: 'HIDEFIELD' },
+                { id: 'khygyO59Sxu', trackedEntityAttributeId: 'unknown', programRuleActionType: 'HIDEFIELD' },
+                { id: 'khtgyO5SSxu', trackedEntityAttributeId: 'Z5z8vFQy0w0', programRuleActionType: 'HIDEFIELD' },
+                { id: 'hwgyOgy4Sxu', trackedEntityAttributeId: 'TzqawmlPkI5', programRuleActionType: 'HIDEFIELD' },
+                { id: 'hwgyloeSSxu', trackedEntityAttributeId: 'f8j4XDEozvj', programRuleActionType: 'HIDEFIELD' },
+                { id: 'lkoeO59SSxu', trackedEntityAttributeId: 'jBBkFuPKctq', programRuleActionType: 'HIDEFIELD' },
+                { id: 'poe4O59SSxu', trackedEntityAttributeId: 'A4Fg6jgWauf', programRuleActionType: 'HIDEFIELD' },
+                { id: 'gtyyO59SSxu', trackedEntityAttributeId: 'CUbZcLm9LyN', programRuleActionType: 'HIDEFIELD' },
+                { id: 'kopyO59SSxu', trackedEntityAttributeId: 'p8htbyJHydl', programRuleActionType: 'HIDEFIELD' },
+                { id: 'dsfsdfsw4rh', dataElementId: 'unknown', programRuleActionType: 'HIDEFIELD' },
+                {
+                    id: 'khy8GmlwpgZ',
+                    displayContent: "d2:weeksBetween('2020-01-28', V{unknown} ) = ",
+                    data: "d2:weeksBetween('2020-01-28', V{unknown} )",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYKEYVALUEPAIR',
+                },
             ],
         },
     ];
-    const programRulesVariables = [];
+    const programRuleVariables = [
+        {
+            id: 'DoRHHfNPccb',
+            trackedEntityAttributeId: 'w75KJ2mc4zz',
+            displayName: 'INFECTION_SOURCE',
+            programId: 'IpHINAT79UW',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
+            useNameForOptionSet: false,
+        },
+        {
+            id: 'lokHHfNPccb',
+            trackedEntityAttributeId: 'w75KJ2mc4zz',
+            displayName: 'INFECTION_SOURCE',
+            programId: 'IpHINAT79UW',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
+            useNameForOptionSet: false,
+        },
+        {
+            id: 'Zj7UnCAulEk',
+            displayName: 'Zj7UnCAulEk',
+            programRuleVariableSourceType: variableSourceTypes.TEI_ATTRIBUTE,
+            trackedEntityAttributeId: 'w75KJ2mc4zz',
+            programId: 'IpHINAT79UW',
+        },
+    ];
     const optionSets = {};
-    const teiValues = {};
+    const teiValues = {
+        zDhUuAYrxNC: 'value',
+        Z5z8vFQy0w0: 'https://www.google.com/',
+        TzqawmlPkI5: '30',
+        f8j4XDEozvj: 'FILE_RESOURCE',
+        jBBkFuPKctq: 'ORGANISATION_UNIT',
+        A4Fg6jgWauf: 'IMAGE',
+        CUbZcLm9LyN: 'USERNAME',
+        p8htbyJHydl: { latitude: '12.4353', longitude: '67.34534' },
+    };
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
     const enrollmentData = { enrolledAt: '2020-05-14T22:00:00.000Z' };
+    const currentEvent = {
+        occurredAt: '2020-07-14T22:00:00.000Z',
+        da1Id: 'currentEventText',
+        dueDate: '2021-05-31T09:51:38.134',
+        enrollmentId: 'vVtmDlsu3me',
+        enrollmentStatus: 'ACTIVE',
+        eventDate: '2021-05-31T00:00:00.000',
+        eventId: 'BxGzDJK3JqN',
+        orgUnitId: 'DiszpKrYNg8',
+        orgUnitName: 'Ngelehun CHC',
+        programId: 'IpHINAT79UW',
+        programStageId: 'A03MvHHogjR',
+        status: 'ACTIVE',
+        trackedEntityInstanceId: 'vCGpQAWG17I',
+    };
 
     // when
     const rulesEffects = rulesEngine.getProgramRuleEffects({
-        programRulesContainer: { programRulesVariables, programRules, constants },
+        programRulesContainer: { programRuleVariables, programRules, constants },
         trackedEntityAttributes,
         selectedEntity: teiValues,
         selectedEnrollment: enrollmentData,
         selectedOrgUnit: orgUnit,
         optionSets,
+        currentEvent,
     });
 
     // then
@@ -199,9 +510,187 @@ test('expressions with d2Functions in tracker program', () => {
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
+            displayText: { id: 'polhYpVRDyj', message: "d2:daysBetween( '2020-01-28', V{enrollment_date}) =  108" },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'FkeGdlkYAVr',
+                message: "d2:validatePattern('d2:daysBetween( '2020-01-28', V{enrollment_date})', 108) true",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'Foc3PhzoAVr', message: 'd2:count(#{undefinedVariable}) =  0' },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'FjkwPhzoAVr', message: "d2:countIfValue(#{undefinedVariable}, 'Male') =  " },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'TkgrHcLselM', message: 'd2:countIfZeroPos(100) =  0' },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'Foc3PhzoAVr', message: 'd2:hasValue(#{undefinedVariable}) ' },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'FoljdkeoAVr', message: "d2:validatePattern('Male', 'a') " },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'FoljdlkYAVr', message: "d2:validatePattern('Male', 'Male') true" },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'kpljdlkYAVr', message: 'd2:validatePattern() ' },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'FoljdjkRAVr', message: "d2:hasUserRole('admin') " },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'FoljdkLRAVr',
+                message: "d2:extractDataMatrixValue('batch number', 3) Incomplete DataMatrix input",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'FollkyLRAVr',
+                message:
+                    "d2:extractDataMatrixValue('batch number', 'unknow') Unsupported GS1 identifier: {gs1Identifier}",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'lkEUdkLRAVr',
+                message: "d2:extractDataMatrixValue('gtin', ']d2') ",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'FlkodkLRAVr',
+                message: "d2:extractDataMatrixValue('batch number', ']d2') ",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'kuYodkLRAVr',
+                message: "d2:extractDataMatrixValue('production date', ']Q3unknown') ",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'kuYookLRAVr',
+                message: "d2:extractDataMatrixValue('lot number', ']Q3703') ",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'lkyodkLRAVr',
+                message: "d2:extractDataMatrixValue('best before date', ']Q3369') ",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'lkpyodkLRAVr',
+                message: "d2:extractDataMatrixValue('expiration date', ']Q3369') ",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'lkyohgyRAVr',
+                message: "d2:extractDataMatrixValue('serial number', ']Q3369') ",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'lkyolktRAVr',
+                message: "d2:extractDataMatrixValue('unknow key', ']d2') ",
+            },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'FolpqkLRAVr', message: 'd2:lastEventDate(V{event_id}) 2020-07-15' },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'FolkokLRAVr', message: 'd2:lastEventDate(V{enrollment_date}) ' },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'FolkwkLRAVr', message: 'd2:lastEventDate(#{undefinedVariable}) ' },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'llokowfRAVr', message: "d2:addControlDigits('2') 261" },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'lloksfegwAVr', message: "d2:addControlDigits('7') 709" },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'lkyksfegwAVr', message: "d2:addControlDigits('9') 950" },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'llolkyfRAVr', message: "d2:addControlDigits('12345678912') 1234567891200" },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'FollowfRAVr', message: 'd2:checkControlDigits(1) 1' },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
             displayText: { id: 'AFkfzcDf4Fs', message: "d2:inOrgUnitGroup('CHC') =  " },
         },
-        { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'wmAQnxbs7V8', message: 'd2:round( 12.5 ) =  13' } },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'wmAQnxbs7V8', message: 'd2:round( 12.5, 1 ) =  12.5' },
+        },
         { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'tFGwyDBQk3b', message: 'd2:round( 0 ) =  0' } },
         {
             type: 'DISPLAYTEXT',
@@ -226,7 +715,7 @@ test('expressions with d2Functions in tracker program', () => {
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'NLsawa3P5hc', message: "d2:substring('hello dhis 2', 6, 10) =  dhis" },
+            displayText: { id: 'NLsawa3P5hc', message: "d2:substring('hello dhis 2', -1, 10) =  " },
         },
         {
             type: 'DISPLAYTEXT',
@@ -272,7 +761,103 @@ test('expressions with d2Functions in tracker program', () => {
             type: 'DISPLAYTEXT',
             id: 'feedback',
             displayText: { id: 'Eeb7Ixr4Pv6', message: 'd2:floor((5+5) / 2) =  5' },
-        }, // check double parentheses
+        },
         { type: 'HIDEPROGRAMSTAGE', id: 'PUZaKR0Jh2k' },
+        { id: 'SWfdBhglX0fk', type: 'HIDESECTION' },
+        { id: 'w75KJ2mc4zz', targetDataType: 'trackedEntityAttribute', type: 'ASSIGN', value: 'true' },
+        {
+            id: 'w75KJ2mc4zz',
+            message: ' true',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'ERRORONCOMPLETE',
+        },
+        {
+            id: 'w75KJ2mc4zz',
+            message: ' true',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'WARNINGONCOMPLETE',
+        },
+        {
+            id: 'w75KJ2mc4zz',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'SETMANDATORYFIELD',
+        },
+        {
+            content: undefined,
+            id: 'zDhUuAYrxNC',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'HIDEFIELD',
+            hadValue: true,
+            name: undefined,
+        },
+        {
+            content: undefined,
+            id: 'unknown',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'HIDEFIELD',
+        },
+        {
+            content: undefined,
+            id: 'Z5z8vFQy0w0',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'HIDEFIELD',
+            hadValue: true,
+            name: undefined,
+        },
+        {
+            content: undefined,
+            id: 'TzqawmlPkI5',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'HIDEFIELD',
+            hadValue: true,
+            name: undefined,
+        },
+        {
+            content: undefined,
+            id: 'f8j4XDEozvj',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'HIDEFIELD',
+        },
+        {
+            content: undefined,
+            id: 'jBBkFuPKctq',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'HIDEFIELD',
+        },
+        {
+            content: undefined,
+            id: 'A4Fg6jgWauf',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'HIDEFIELD',
+        },
+        {
+            content: undefined,
+            id: 'CUbZcLm9LyN',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'HIDEFIELD',
+        },
+        {
+            content: undefined,
+            id: 'p8htbyJHydl',
+            targetDataType: 'trackedEntityAttribute',
+            type: 'HIDEFIELD',
+            hadValue: true,
+            name: undefined,
+        },
+        {
+            content: undefined,
+            id: 'unknown',
+            targetDataType: 'dataElement',
+            type: 'HIDEFIELD',
+        },
+        {
+            displayKeyValuePair: {
+                id: 'khy8GmlwpgZ',
+                key: "d2:weeksBetween('2020-01-28', V{unknown} ) = ",
+                value: '',
+            },
+            id: 'feedback',
+            type: 'DISPLAYKEYVALUEPAIR',
+        },
     ]);
 });

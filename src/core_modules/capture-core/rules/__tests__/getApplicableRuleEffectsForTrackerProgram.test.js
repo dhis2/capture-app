@@ -1,3 +1,4 @@
+import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
 import {
     TrackerProgram,
     ProgramStage,
@@ -122,6 +123,7 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
                 element3.id = 'lZGmxYbs96q';
                 element3.name = 'SomeDate';
                 element3.type = dataElementTypes.DATE;
+                element3.optionSet = { id: 'optionSet', name: 'optionSet', code: 'optionSet' };
             }),
             new DataElement((element4) => {
                 element4.id = 'w75KJ2mc4zz';
@@ -136,7 +138,7 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
                 displayName: 'Test',
                 id: 'PUQZWgmQ0jx',
                 programId: 'IpHINAT79UW',
-                programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+                programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
                 useNameForOptionSet: true,
             },
             {
@@ -144,7 +146,7 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
                 displayName: 'apgarcomment',
                 id: 'aKpfPKSRQnv',
                 programId: 'IpHINAT79UW',
-                programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+                programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
                 useNameForOptionSet: true,
             },
             {
@@ -152,7 +154,7 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
                 displayName: 'apgarscore',
                 id: 'g2GooOydipB',
                 programId: 'IpHINAT79UW',
-                programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+                programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
                 useNameForOptionSet: true,
             },
         ];
@@ -235,5 +237,37 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
         );
 
         expect(Array.isArray(effects)).toBe(true);
+    });
+
+    test('RulesEngine called without programRules', () => {
+        const effects = getApplicableRuleEffectsForTrackerProgram({
+            program: new TrackerProgram((initProgram) => {
+                initProgram.programRules = [];
+            }),
+            stage: new ProgramStage((stage) => {
+                stage.programRules = [];
+            }),
+            orgUnit,
+            currentEvent,
+            otherEvents,
+            attributeValues,
+            enrollmentData,
+        });
+
+        expect(effects).toStrictEqual([]);
+    });
+
+    test('currentEvent without a programStageId', () => {
+        const effects = getApplicableRuleEffectsForTrackerProgram({
+            program,
+            stage: programStage,
+            orgUnit,
+            currentEvent: {},
+            otherEvents,
+            attributeValues,
+            enrollmentData,
+        });
+
+        expect(effects.DISPLAYTEXT).toBeDefined();
     });
 });

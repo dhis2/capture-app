@@ -1,5 +1,6 @@
-import { rulesEngineEffectTargetDataTypes } from '@dhis2/rules-engine-javascript';
+import { rulesEngineEffectTargetDataTypes, variableSourceTypes } from '@dhis2/rules-engine-javascript';
 import { rulesEngine } from '../rulesEngine';
+import { systemSettingsStore } from '../../metaDataMemoryStores';
 
 describe('Event Event rules engine', () => {
     // these variables are shared between each test
@@ -62,7 +63,7 @@ describe('Event Event rules engine', () => {
             dataElementId: 'sWoqcoByYmD',
             displayName: 'womanSmoking',
             programId: 'lxAQ7Zs9VYR',
-            programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
             useNameForOptionSet: true,
         },
         {
@@ -70,7 +71,7 @@ describe('Event Event rules engine', () => {
             dataElementId: 'vANAXwtLwcT',
             displayName: 'hemoglobin',
             programId: 'lxAQ7Zs9VYR',
-            programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
             useNameForOptionSet: true,
         },
     ];
@@ -171,7 +172,7 @@ describe('Event rules engine', () => {
     ];
     const dataElementsInProgram = {
         oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' },
-        SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN', optionSetId: undefined },
+        SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'TRUE_ONLY', optionSetId: undefined },
         qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER', optionSetId: undefined },
         GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER', optionSetId: undefined },
         vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE', optionSetId: undefined },
@@ -222,7 +223,7 @@ describe('Event rules engine', () => {
             dataElementId: 'qrur9Dvnyt5',
             displayName: 'age',
             programId: 'eBAyeGv0exc',
-            programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
             useNameForOptionSet: true,
         },
         {
@@ -230,27 +231,27 @@ describe('Event rules engine', () => {
             dataElementId: 'oZg33kd9taw',
             displayName: 'gender',
             programId: 'eBAyeGv0exc',
-            programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
             useNameForOptionSet: true,
         },
         {
             id: 'Zj7UnCAulEk.vV9UWAZohSf',
             displayName: 'Zj7UnCAulEk.vV9UWAZohSf',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             dataElementId: 'vV9UWAZohSf',
             programId: 'eBAyeGv0exc',
         },
         {
             id: 'Zj7UnCAulEk.GieVkTxp4HH',
             displayName: 'Zj7UnCAulEk.GieVkTxp4HH',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             dataElementId: 'GieVkTxp4HH',
             programId: 'eBAyeGv0exc',
         },
         {
             id: 'Zj7UnCAulEk.GieVkTxp4HH',
             displayName: 'Zj7UnCAulEk.GieVkTxp4HH',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             dataElementId: 'GieVkTxp4HH',
             programId: 'eBAyeGv0exc',
         },
@@ -262,10 +263,7 @@ describe('Event rules engine', () => {
             displayName: 'Gender',
             version: 0,
             valueType: 'TEXT',
-            options: [
-                { id: 'rBvjJYbMCVx', displayName: 'Male', code: 'Male', translations: [] },
-                { id: 'Mnp3oXrpAbK', displayName: 'Female', code: 'Female', translations: [] },
-            ],
+            options: undefined,
         },
     };
 
@@ -706,7 +704,7 @@ describe('Event rules engine', () => {
             dataElementId: 'f8j4XDEozvj',
             displayName: 'INFECTION_SOURCE',
             programId: 'PNClHaZARtz',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             useNameForOptionSet: false,
         },
         {
@@ -714,7 +712,7 @@ describe('Event rules engine', () => {
             dataElementId: 'TzqawmlPkI5',
             displayName: 'TRAVEL_HISTORY',
             programId: 'PNClHaZARtz',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             useNameForOptionSet: true,
         },
         {
@@ -722,14 +720,14 @@ describe('Event rules engine', () => {
             dataElementId: 'CUbZcLm9LyN',
             displayName: 'HOSPITALISED',
             programId: 'PNClHaZARtz',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             useNameForOptionSet: true,
         },
         {
             id: 'LAaPMTz69L7',
             displayName: 'CASE_CLASSIFICATION',
             programId: 'PNClHaZARtz',
-            programRuleVariableSourceType: 'CALCULATED_VALUE',
+            programRuleVariableSourceType: variableSourceTypes.CALCULATED_VALUE,
             useNameForOptionSet: true,
             valueType: 'TEXT',
         },
@@ -738,7 +736,7 @@ describe('Event rules engine', () => {
             dataElementId: 'ovY6E8BSdto',
             displayName: 'TEST_RESULT',
             programId: 'PNClHaZARtz',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             useNameForOptionSet: true,
         },
         {
@@ -746,7 +744,7 @@ describe('Event rules engine', () => {
             dataElementId: 'QQLXTXVidW2',
             displayName: 'LAB_TEST',
             programId: 'PNClHaZARtz',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             useNameForOptionSet: true,
         },
         {
@@ -754,7 +752,7 @@ describe('Event rules engine', () => {
             dataElementId: 's3eoonJ8OJb',
             displayName: 'ONSET_DATE',
             programId: 'PNClHaZARtz',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             useNameForOptionSet: true,
         },
         {
@@ -762,7 +760,7 @@ describe('Event rules engine', () => {
             dataElementId: 'dyfYIsTFTjG',
             displayName: 'PATIENT_ID',
             programId: 'PNClHaZARtz',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             useNameForOptionSet: true,
         },
         {
@@ -770,7 +768,7 @@ describe('Event rules engine', () => {
             dataElementId: 'JGnHr6WI3AY',
             displayName: 'SYMPTOMS',
             programId: 'PNClHaZARtz',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             useNameForOptionSet: false,
         },
     ];
@@ -812,7 +810,6 @@ describe('Event rules engine', () => {
                 },
                 {
                     id: 'pqxvAQU1z9W',
-                    displayName: 'Unknown',
                     code: 'Unknown',
                     translations: [
                         { property: 'NAME', locale: 'es', value: 'DEsconocido' },
@@ -834,7 +831,6 @@ describe('Event rules engine', () => {
             options: [
                 {
                     id: 'B44lkxTWbGO',
-                    displayName: 'Inconclusive',
                     code: 'Inconclusive',
                     translations: [
                         { property: 'NAME', locale: 'fr', value: 'Non concluant' },
@@ -1808,7 +1804,7 @@ describe('Event rules engine effects with functions and effects', () => {
             dataElementId: 'qrur9Dvnyt5',
             displayName: 'age',
             programId: 'eBAyeGv0exc',
-            programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
             useNameForOptionSet: true,
         },
         {
@@ -1816,27 +1812,27 @@ describe('Event rules engine effects with functions and effects', () => {
             dataElementId: 'oZg33kd9taw',
             displayName: 'gender',
             programId: 'eBAyeGv0exc',
-            programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
             useNameForOptionSet: true,
         },
         {
             id: 'Zj7UnCAulEk.vV9UWAZohSf',
             displayName: 'Zj7UnCAulEk.vV9UWAZohSf',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_PREVIOUS_EVENT,
             dataElementId: 'vV9UWAZohSf',
             programId: 'eBAyeGv0exc',
         },
         {
             id: 'Zj7UnCAulEk.GieVkTxp4HH',
             displayName: 'Zj7UnCAulEk.GieVkTxp4HH',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: variableSourceTypes.TEI_ATTRIBUTE,
             dataElementId: 'GieVkTxp4HH',
             programId: 'eBAyeGv0exc',
         },
         {
             id: 'Zj7UnCAulEk.GieVkTxp4HH',
             displayName: 'Zj7UnCAulEk.GieVkTxp4HH',
-            programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
+            programRuleVariableSourceType: 'UNKNOWN',
             dataElementId: 'GieVkTxp4HH',
             programId: 'eBAyeGv0exc',
         },
@@ -2534,5 +2530,395 @@ describe('Event rules engine', () => {
 
             expect(rulesEffects).toEqual(expected);
         });
+    });
+});
+
+describe('Assign effects', () => {
+    // these variables are shared between each test
+    const constants = [];
+    const dataElementsInProgram = {
+        qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'NUMBER' },
+        hrur9Dvnyt5: { id: 'hrur9Dvnyt5', valueType: 'TRUE_ONLY' },
+        g67r9Dvnyt5: { id: 'g67r9Dvnyt5', valueType: 'TRUE_ONLY' },
+        sfer9Dvnyt5: { id: 'sfer9Dvnyt5', valueType: 'LONG_TEXT' },
+        oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'BOOLEAN' },
+        hjrr9Dvnyt5: { id: 'hjrr9Dvnyt5', valueType: 'LETTER' },
+        lowr9Dvnyt5: { id: 'lowr9Dvnyt5', valueType: 'PHONE_NUMBER' },
+        kht29Dvnyt5: { id: 'kht29Dvnyt5', valueType: 'EMAIL' },
+        hyrt9Dvnyt5: { id: 'hyrt9Dvnyt5', valueType: 'DATE' },
+        loir9Dvnyt5: { id: 'loir9Dvnyt5', valueType: 'DATETIME' },
+        sldkjfjfjfe: { id: 'sldkjfjfjfe', valueType: 'TIME' },
+        kyt49Dvnyt5: { id: 'kyt49Dvnyt5', valueType: 'PERCENTAGE' },
+        kiyu9Dvnyt5: { id: 'kiyu9Dvnyt5', valueType: 'INTEGER' },
+        frt59Dvnyt5: { id: 'frt59Dvnyt5', valueType: 'INTEGER_POSITIVE' },
+        jhty9Dvnyt5: { id: 'jhty9Dvnyt5', valueType: 'INTEGER_NEGATIVE' },
+        jhrr9Dvnyt5: { id: 'jhrr9Dvnyt5', valueType: 'INTEGER_ZERO_OR_POSITIVE' },
+        plor9Dvnyt5: { id: 'plor9Dvnyt5', valueType: 'USERNAME' },
+        frg39Dvnyt5: { id: 'frg39Dvnyt5', valueType: 'COORDINATE' },
+        kjyu9Dvnyt5: { id: 'kjyu9Dvnyt5', valueType: 'ORGANISATION_UNIT' },
+        kjfr9Dvnyt5: { id: 'kjfr9Dvnyt5', valueType: 'AGE' },
+        lqwr9Dvnyt5: { id: 'lqwr9Dvnyt5', valueType: 'URL' },
+        mjus9Dvnyt5: { id: 'mjus9Dvnyt5', valueType: 'FILE_RESOURCE' },
+        fgrr9Dvnyt5: { id: 'fgrr9Dvnyt5', valueType: 'IMAGE' },
+        oZ3fhkd9taw: { id: 'oZ3fhkd9taw', valueType: 'UNKNOWN' },
+    };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const optionSets = {};
+    const currentEvent = {};
+
+    test('Assign effect corner cases', () => {
+        const programRules = [
+            {
+                id: 'cq1dwUY4lVU',
+                condition: 'true',
+                displayName: 'testing assign actions',
+                programId: 'eBAyeGv0exc',
+                programRuleActions: [
+                    {
+                        id: 'lJOYxhjupx2',
+                        data: "'string'",
+                        dataElementId: 'qrur9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    { id: 'lJOYxkjupx2', data: "'10'", dataElementId: 'qrur9Dvnyt5', programRuleActionType: 'ASSIGN' },
+                    {
+                        id: 'lJhYxhjupxz',
+                        data: "'string'",
+                        dataElementId: 'oZg33kd9taw',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'lJfYxhjupxz',
+                        data: "'string'",
+                        dataElementId: 'oZ3fhkd9taw',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'sdfsd34567h',
+                        data: 'value',
+                        dataElementId: 'hrur9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'g67rgyvnyt5',
+                        data: null,
+                        dataElementId: 'g67r9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'fsafYxhjux2',
+                        data: "'LONG_TEXT'",
+                        dataElementId: 'sfer9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'o8rr9Dvnyt5',
+                        data: "'LETTER'",
+                        dataElementId: 'hjrr9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'lsdjlks4ffs',
+                        data: '34535353',
+                        dataElementId: 'lowr9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'hsjd7574jfj',
+                        data: 'test@test.com',
+                        dataElementId: 'kht29Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'sdf57549jco',
+                        data: '11-11-2013',
+                        dataElementId: 'hyrt9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'gtir9Dvnyt5',
+                        data: '2021-05-31',
+                        dataElementId: 'loir9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 's678jfjfjfe',
+                        data: '11:11',
+                        dataElementId: 'sldkjfjfjfe',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'sdhsfjks35f',
+                        data: '30',
+                        dataElementId: 'kyt49Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'kjosfjks35f',
+                        data: '30',
+                        dataElementId: 'kiyu9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'kjyofjks35f',
+                        data: '30',
+                        dataElementId: 'frt59Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'jhkj9Dvnyt5',
+                        data: '-30',
+                        dataElementId: 'jhty9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'hjyur9Dvnyt5',
+                        data: '-30',
+                        dataElementId: 'jhrr9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'lopr9Dvnyt5',
+                        data: 'username',
+                        dataElementId: 'plor9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'kjy39Dvnyt5',
+                        data: "'12,4343'",
+                        dataElementId: 'frg39Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'loiu9Dvnyt5',
+                        data: 'ORGANISATION_UNIT',
+                        dataElementId: 'kjyu9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'kjfr9Dvnyt5',
+                        data: 'Invalid date',
+                        dataElementId: 'kjfr9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'hywr9Dvnyt5',
+                        data: 'urlPath',
+                        dataElementId: 'lqwr9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'gt769Dvnyt5',
+                        data: 'FILE_RESOURCE',
+                        dataElementId: 'mjus9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'gt659Dvnyt5',
+                        data: 'IMAGE',
+                        dataElementId: 'fgrr9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                ],
+            },
+        ];
+        const programRuleVariables = [];
+        systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD' });
+        // when
+        const rulesEffects = rulesEngine.getProgramRuleEffects({
+            programRulesContainer: { programRuleVariables, programRules, constants },
+            currentEvent,
+            dataElements: dataElementsInProgram,
+            selectedOrgUnit: orgUnit,
+            optionSets,
+        });
+
+        // then
+        expect(rulesEffects).toEqual([
+            { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: null, targetDataType: 'dataElement' },
+            { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: '10', targetDataType: 'dataElement' },
+            { type: 'ASSIGN', id: 'oZg33kd9taw', value: 'false', targetDataType: 'dataElement' },
+            { type: 'ASSIGN', id: 'oZ3fhkd9taw', value: '', targetDataType: 'dataElement' },
+            {
+                id: 'hrur9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: 'false',
+            },
+            {
+                id: 'g67r9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: null,
+            },
+            {
+                id: 'sfer9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: 'LONG_TEXT',
+            },
+            {
+                id: 'hjrr9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: 'LETTER',
+            },
+            {
+                id: 'lowr9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: 34535353,
+            },
+            {
+                id: 'kht29Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: false,
+            },
+            {
+                id: 'hyrt9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: '2013-01-01',
+            },
+            {
+                id: 'loir9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: {
+                    date: 'Invalid date',
+                    time: 'Invalid date',
+                },
+            },
+            {
+                id: 'sldkjfjfjfe',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: false,
+            },
+            {
+                id: 'kyt49Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: '30',
+            },
+            {
+                id: 'kiyu9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: '30',
+            },
+            {
+                id: 'frt59Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: '30',
+            },
+            {
+                id: 'jhty9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: '-30',
+            },
+            {
+                id: 'jhrr9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: '-30',
+            },
+            {
+                id: 'plor9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: '',
+            },
+            {
+                id: 'frg39Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: {
+                    latitude: 2,
+                    longitude: 434,
+                },
+            },
+            {
+                id: 'kjyu9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: '',
+            },
+            {
+                id: 'kjfr9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: {
+                    date: 'Invalid date',
+                    days: 'NaN',
+                    months: 'NaN',
+                    years: 'NaN',
+                },
+            },
+            {
+                id: 'lqwr9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: false,
+            },
+            {
+                id: 'mjus9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: '',
+            },
+            {
+                id: 'fgrr9Dvnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: '',
+            },
+        ]);
+    });
+
+    test('Assign effect with the program rule variable id found in the content key', () => {
+        const programRules = [
+            {
+                id: 'cq1dwUY4lVU',
+                condition: 'true',
+                displayName: 'testing assign actions',
+                programId: 'eBAyeGv0exc',
+                programRuleActions: [
+                    {
+                        id: 'lJOYxhjupx2',
+                        data: 'rowExpresion',
+                        dataElementId: 'qrur9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                        content: 'Hemoglobin value lower than normal RycV5uDi66i',
+                    },
+                ],
+            },
+        ];
+        const programRuleVariables = [
+            {
+                id: 'RycV5uDi66i',
+                dataElementId: 'qrur9Dvnyt5',
+                displayName: 'age',
+                programId: 'eBAyeGv0exc',
+                programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
+                useNameForOptionSet: true,
+            },
+        ];
+        // when
+        const rulesEffects = rulesEngine.getProgramRuleEffects({
+            programRulesContainer: { programRuleVariables, programRules, constants },
+            currentEvent,
+            dataElements: dataElementsInProgram,
+            selectedOrgUnit: orgUnit,
+            optionSets,
+        });
+
+        // then
+        expect(rulesEffects).toEqual([
+            { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: 'false', targetDataType: 'dataElement' },
+        ]);
     });
 });
