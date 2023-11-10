@@ -1,3 +1,10 @@
+## [100.44.4](https://github.com/dhis2/capture-app/compare/v100.44.3...v100.44.4) (2023-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-15383] align mandatory behaviour for all value types ([#3413](https://github.com/dhis2/capture-app/issues/3413)) ([b0eddc7](https://github.com/dhis2/capture-app/commit/b0eddc76b674ceb20df0eb5bcd0672a3c42d3954))
+
 ## [100.44.3](https://github.com/dhis2/capture-app/compare/v100.44.2...v100.44.3) (2023-11-10)
 
 
