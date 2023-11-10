@@ -466,9 +466,9 @@ test('expressions with d2Functions in tracker program', () => {
         p8htbyJHydl: { latitude: '12.4353', longitude: '67.34534' },
     };
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
-    const enrollmentData = { enrolledAt: '2020-05-14T22:00:00.000Z' };
+    const enrollmentData = { enrolledAt: '2020-05-14T10:00:00.000Z' };
     const currentEvent = {
-        occurredAt: '2020-07-14T22:00:00.000Z',
+        occurredAt: '2020-07-14T10:00:00.000Z',
         da1Id: 'currentEventText',
         dueDate: '2021-05-31T09:51:38.134',
         enrollmentId: 'vVtmDlsu3me',
@@ -510,14 +510,14 @@ test('expressions with d2Functions in tracker program', () => {
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'polhYpVRDyj', message: "d2:daysBetween( '2020-01-28', V{enrollment_date}) =  108" },
+            displayText: { id: 'polhYpVRDyj', message: "d2:daysBetween( '2020-01-28', V{enrollment_date}) =  107" },
         },
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
             displayText: {
                 id: 'FkeGdlkYAVr',
-                message: "d2:validatePattern('d2:daysBetween( '2020-01-28', V{enrollment_date})', 108) true",
+                message: "d2:validatePattern('d2:daysBetween( '2020-01-28', V{enrollment_date})', 108) ",
             },
         },
         {
@@ -644,7 +644,7 @@ test('expressions with d2Functions in tracker program', () => {
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'FolpqkLRAVr', message: 'd2:lastEventDate(V{event_id}) 2020-07-15' },
+            displayText: { id: 'FolpqkLRAVr', message: 'd2:lastEventDate(V{event_id}) 2020-07-14' },
         },
         {
             type: 'DISPLAYTEXT',
