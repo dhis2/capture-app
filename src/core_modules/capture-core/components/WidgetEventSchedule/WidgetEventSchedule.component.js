@@ -10,7 +10,7 @@ import { ScheduleText } from './ScheduleText';
 import { CommentSection } from '../WidgetComment';
 import type { Props } from './widgetEventSchedule.types';
 import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
-
+import { Assignee } from './Assignee';
 
 const styles = () => ({
     wrapper: {
@@ -66,9 +66,12 @@ const WidgetEventSchedulePlain = ({
     suggestedScheduleDate,
     comments,
     programCategory,
+    enableUserAssignment,
     selectedCategories,
     onClickCategoryOption,
     onResetCategoryOption,
+    onSetAssignee,
+    assignee,
     categoryOptionsError,
     ...passOnProps
 }: Props) => (
@@ -119,6 +122,11 @@ const WidgetEventSchedulePlain = ({
                 handleAddComment={onAddComment}
             />
         </DataSection>
+        {enableUserAssignment && (
+            <DataSection dataTest="assignee-section" sectionName={i18n.t('Assignee')}>
+                <Assignee onSet={onSetAssignee} assignee={assignee} />
+            </DataSection>
+        )}
         <ScheduleButtons
             hasChanges={scheduleDate !== suggestedScheduleDate}
             onCancel={onCancel}

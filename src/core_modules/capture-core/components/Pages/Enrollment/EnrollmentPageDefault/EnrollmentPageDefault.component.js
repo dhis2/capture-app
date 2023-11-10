@@ -75,7 +75,7 @@ export const EnrollmentPageDefaultPlain = ({
 }: PlainProps) => {
     const [mainContentVisible, setMainContentVisibility] = useState(true);
     const [addRelationShipContainerElement, setAddRelationshipContainerElement] =
-        useState<?HTMLDivElement>(undefined);
+        useState<HTMLDivElement | void>(undefined);
 
     const toggleVisibility = useCallback(() => setMainContentVisibility(current => !current), []);
 
