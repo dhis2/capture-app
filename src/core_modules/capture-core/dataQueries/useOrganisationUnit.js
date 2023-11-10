@@ -5,9 +5,14 @@ import log from 'loglevel';
 import { errorCreator } from '../../capture-core-utils';
 
 // Skips fetching if orgUnitId is falsy
-export const useOrganisationUnit = (orgUnitId: string, fields?: string) => {
+export const useOrganisationUnit = (orgUnitId: string, fields?: string): {
+    orgUnit: any,
+    error: any,
+} => {
     const [orgUnit, setOrgUnit] = useState();
-    const { error, loading, data, refetch, called } = useDataQuery(
+    const [requestedOrgUnitId, setRequestedOrgUnitId] = useState();
+    const [fetchingInProgress, setFetchingInProgress] = useState(false);
+    const { error, data, loading, refetch } = useDataQuery(
         useMemo(
             () => ({
                 organisationUnits: {
@@ -25,8 +30,13 @@ export const useOrganisationUnit = (orgUnitId: string, fields?: string) => {
     );
 
     useEffect(() => {
-        orgUnitId && refetch({ variables: { orgUnitId } });
-    }, [refetch, orgUnitId]);
+        if (!fetchingInProgress && orgUnitId && orgUnitId !== requestedOrgUnitId) {
+            setFetchingInProgress(true);
+            setRequestedOrgUnitId(orgUnitId);
+            setOrgUnit(undefined);
+            refetch({ variables: { orgUnitId } });
+        }
+    }, [fetchingInProgress, orgUnitId, requestedOrgUnitId, setFetchingInProgress, setRequestedOrgUnitId, refetch]);
 
     useEffect(() => {
         if (error) {
@@ -35,20 +45,19 @@ export const useOrganisationUnit = (orgUnitId: string, fields?: string) => {
     }, [error]);
 
     useEffect(() => {
-        const organisationUnit = data?.organisationUnits;
-        orgUnitId && setOrgUnit(
-            (loading || !called || error) ?
-                undefined : {
+        if (fetchingInProgress && !loading) {
+            setFetchingInProgress(false);
+            if (orgUnitId === requestedOrgUnitId && !error) {
+                setOrgUnit({
                     id: orgUnitId,
-                    name: organisationUnit?.displayName,
-                    code: organisationUnit?.code,
-                    ...organisationUnit,
-                },
-        );
-    }, [orgUnitId, data, loading, called, error]);
+                    ...data.organisationUnits,
+                });
+            }
+        }
+    }, [data, loading, error, fetchingInProgress, setFetchingInProgress, orgUnitId, requestedOrgUnitId]);
 
-    return {
+    return (orgUnitId && orgUnitId === requestedOrgUnitId) ? {
         error,
         orgUnit,
-    };
+    } : {};
 };

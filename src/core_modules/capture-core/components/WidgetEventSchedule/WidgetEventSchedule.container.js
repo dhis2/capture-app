@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess } from '../../metaData';
-import { useOrganisationUnit } from '../../dataQueries';
+import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useLocationQuery } from '../../utils/routing';
 import type { ContainerProps } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
@@ -35,7 +35,7 @@ export const WidgetEventSchedule = ({
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
     const dispatch = useDispatch();
-    const { orgUnit } = useOrganisationUnit(orgUnitId, 'displayName');
+    const orgUnit = { id: orgUnitId, name: useOrgUnitName(orgUnitId).displayName };
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({

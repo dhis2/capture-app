@@ -15,7 +15,7 @@ Then('the enrollment widget should be closed', () => {
 
 Then('the enrollment widget should be opened', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
-        cy.get('[data-test="widget-contents"]').children().should('exist');
+        cy.get('[data-test="widget-enrollment-contents"]').children().should('exist');
     });
 });
 
