@@ -286,8 +286,8 @@ const SearchFormIndex = ({
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ alignItems: 'center' }}
-                                            title={searchByText}
                                             titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
+                                            title={searchByText}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}

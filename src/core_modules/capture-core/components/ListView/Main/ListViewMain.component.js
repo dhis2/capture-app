@@ -25,6 +25,7 @@ const getStyles = (theme: Theme) => ({
     },
     topBarButtonContainer: {
         display: 'flex',
+        gap: '6px',
         alignItems: 'center',
     },
     paginationContainer: {

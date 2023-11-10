@@ -29,5 +29,6 @@ export { Pagination } from './Pagination/Pagination.component';
 // UI-Elements
 export { DividerHorizontal } from './Divider/DividerHorizontal.component';
 export { IconButton } from './IconButton';
+export { ChevronIcon } from './Icons';
 export { NonBundledIcon } from './NonBundledIcon';
 export { FlatList } from './FlatList';

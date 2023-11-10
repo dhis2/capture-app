@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-29T14:14:34.330Z\n"
-"PO-Revision-Date: 2023-09-29T14:14:34.330Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
+"PO-Revision-Date: 2023-09-12T06:24:49.265Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -530,6 +530,9 @@ msgstr "start typing to search"
 msgid "suggestions could not be retrieved"
 msgstr "suggestions could not be retrieved"
 
+msgid "No results found"
+msgstr "No results found"
+
 msgid "No items to display"
 msgstr "No items to display"
 
@@ -947,11 +950,20 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
+msgid "Selected program"
+msgstr "Selected program"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Search {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Search by attributes"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr "Could not retrieve metadata. Please try again later."
+
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
-
-msgid "No results found"
-msgstr "No results found"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
@@ -1010,9 +1022,6 @@ msgstr "Search {{name}}"
 msgid "Search by {{name}}"
 msgstr "Search by {{name}}"
 
-msgid "Search by attributes"
-msgstr "Search by attributes"
-
 msgid "all programs"
 msgstr "all programs"
 
@@ -1069,12 +1078,6 @@ msgstr "Missing search criteria"
 
 msgid "Results found"
 msgstr "Results found"
-
-msgid "Selected program"
-msgstr "Selected program"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Search {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr "Saved lists in this program"
@@ -1359,14 +1362,47 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
+msgid "New TEI Relationship"
+msgstr "New TEI Relationship"
+
+msgid "Missing implementation step"
+msgstr "Missing implementation step"
+
+msgid "Go back without saving relationship"
+msgstr "Go back without saving relationship"
+
+msgid "New Relationship"
+msgstr "New Relationship"
+
+msgid "Link to an existing {{tetName}}"
+msgstr "Link to an existing {{tetName}}"
+
+msgid "An error occurred while adding the relationship"
+msgstr "An error occurred while adding the relationship"
+
+msgid "Something went wrong while loading relationships. Please try again later."
+msgstr "Something went wrong while loading relationships. Please try again later."
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr "{{trackedEntityTypeName}} relationships"
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr "To open this relationship, please wait until saving is complete"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Created date"
+msgstr "Created date"
+
+msgid "Program stage name"
+msgstr "Program stage name"
+
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"
 
 msgid "Download as JSON"
 msgstr "Download as JSON"
-
-msgid "Download as XML"
-msgstr "Download as XML"
 
 msgid "Download as CSV"
 msgstr "Download as CSV"

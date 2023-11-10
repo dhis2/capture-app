@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2022
-# Philip Larsen Donnelly, 2022
+# Viktor Varland <viktor@dhis2.org>, 2023
+# Philip Larsen Donnelly, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2022\n"
+"Last-Translator: Philip Larsen Donnelly, 2023\n"
 "Language-Team: Tajik (https://app.transifex.com/hisp-uio/teams/100509/tg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -152,6 +152,15 @@ msgstr ""
 msgid "Enrollment"
 msgstr ""
 
+msgid "Complete event"
+msgstr "Рӯйдоди анҷомёфта"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -170,14 +179,17 @@ msgstr "Бекор кардан"
 msgid "Metadata error. see log for details"
 msgstr ""
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
 msgstr ""
-
-msgid "Complete event"
-msgstr "Рӯйдоди анҷомёфта"
 
 msgid "Basic info"
 msgstr ""
@@ -507,6 +519,9 @@ msgid "start typing to search"
 msgstr ""
 
 msgid "suggestions could not be retrieved"
+msgstr ""
+
+msgid "No results found"
 msgstr ""
 
 msgid "No items to display"
@@ -912,10 +927,19 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
-msgid "Possible duplicates found"
+msgid "Selected program"
 msgstr ""
 
-msgid "No results found"
+msgid "Search {{uniqueAttrName}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
+msgid "Possible duplicates found"
 msgstr ""
 
 msgid "An error occurred loading possible duplicates"
@@ -976,9 +1000,6 @@ msgstr ""
 msgid "Search by {{name}}"
 msgstr ""
 
-msgid "Search by attributes"
-msgstr ""
-
 msgid "all programs"
 msgstr ""
 
@@ -1028,12 +1049,6 @@ msgid "Missing search criteria"
 msgstr ""
 
 msgid "Results found"
-msgstr ""
-
-msgid "Selected program"
-msgstr ""
-
-msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Saved lists in this program"
@@ -1310,13 +1325,47 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Навъ"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Номи марҳилаи барнома"
+
 msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr ""
-
-msgid "Download as XML"
 msgstr ""
 
 msgid "Download as CSV"

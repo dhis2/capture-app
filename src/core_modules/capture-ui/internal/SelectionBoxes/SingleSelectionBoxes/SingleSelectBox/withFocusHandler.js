@@ -2,6 +2,7 @@
 import * as React from 'react';
 
 type Props = {
+    setInputRef: (element: HTMLInputElement) => void,
     onSetFocus?: () => void,
     onRemoveFocus?: () => void,
     inFocus: boolean,
@@ -66,10 +67,11 @@ export const withFocusHandler = () => (InnerComponent: React.ComponentType<any>)
 
         setInputInstance = (instance: HTMLInputElement) => {
             this.inputInstance = instance;
+            this.props.setInputRef(instance);
         }
 
         render() {
-            const { onSetFocus, onRemoveFocus, inFocus, ...passOnProps } = this.props;
+            const { setInputRef, onSetFocus, onRemoveFocus, inFocus, ...passOnProps } = this.props;
             return (
                 // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent

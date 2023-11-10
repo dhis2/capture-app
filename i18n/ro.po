@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -158,6 +158,15 @@ msgstr "Coordonate"
 msgid "Enrollment"
 msgstr "Înrolare"
 
+msgid "Complete event"
+msgstr "Eveniment complet"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -177,14 +186,17 @@ msgstr "Anulare"
 msgid "Metadata error. see log for details"
 msgstr ""
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Utilizatorul atribuit"
 
 msgid "Search for user"
 msgstr "Căutare utilizator"
-
-msgid "Complete event"
-msgstr "Eveniment complet"
 
 msgid "Basic info"
 msgstr "Informații de bază"
@@ -928,6 +940,18 @@ msgstr "Evenimentul nu a putut fi încărcat"
 msgid "Organisation unit could not be loaded"
 msgstr "Unitatea organizațională nu a putut fi încărcată"
 
+msgid "Selected program"
+msgstr "Programul selectat"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Căutare {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Căutare după atribute"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "S-au găsit posibile duplicate"
 
@@ -994,9 +1018,6 @@ msgstr "Căutare {{name}}"
 msgid "Search by {{name}}"
 msgstr "Căutare după {{name}}"
 
-msgid "Search by attributes"
-msgstr "Căutare după atribute"
-
 msgid "all programs"
 msgstr ""
 
@@ -1049,12 +1070,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr "Rezultate găsite"
-
-msgid "Selected program"
-msgstr "Programul selectat"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Căutare {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1331,14 +1346,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Etape și Evenimente"
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr ""
+
 msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "Download as JSON"
 msgstr "Descărcare ca JSON"
-
-msgid "Download as XML"
-msgstr "Descărcare ca XML"
 
 msgid "Download as CSV"
 msgstr "Descărcare ca CSV"

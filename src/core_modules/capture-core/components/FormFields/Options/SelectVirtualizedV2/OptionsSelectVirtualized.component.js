@@ -193,6 +193,10 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
         );
     }
 
+    onBlur = () => {
+        this.props.onSelect(this.props.value);
+    }
+
     render() {
         const {
             options,
@@ -220,6 +224,7 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
             >
                 <div
                     data-test={dataTest}
+                    onBlur={this.onBlur}
                 >
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <VirtualizedSelect

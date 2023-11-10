@@ -27,10 +27,11 @@
 .mapIconContainerWithMargin {
     position: relative;
     display: flex;
+    overflow: hidden;
     align-items: center;
     justify-content: center;
-    height: 41px;
-    width: 41px;
+    height: 40.5px;
+    width: 40.5px;
     border: 1px solid #a0adba;
     border-radius: 4px 0px 0px 4px;
     color: #212934;
