@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2022\n"
 "Language-Team: Arabic (Iraq) (https://app.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -157,6 +157,15 @@ msgstr "الإحداثية"
 msgid "Enrollment"
 msgstr "التسجيل"
 
+msgid "Complete event"
+msgstr ""
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -175,14 +184,17 @@ msgstr "إلغاء"
 msgid "Metadata error. see log for details"
 msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "المستخدم المعين"
 
 msgid "Search for user"
 msgstr "البحث عن مستخدم"
-
-msgid "Complete event"
-msgstr ""
 
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
@@ -921,6 +933,18 @@ msgstr "تعذر تحميل الحدث"
 msgid "Organisation unit could not be loaded"
 msgstr "تعذر تحميل الوحدة التنظيمية"
 
+msgid "Selected program"
+msgstr "البرنامج المحدد"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "بحث {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "البحث حسب السمة"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
 
@@ -985,9 +1009,6 @@ msgstr ""
 msgid "Search by {{name}}"
 msgstr ""
 
-msgid "Search by attributes"
-msgstr "البحث حسب السمة"
-
 msgid "all programs"
 msgstr ""
 
@@ -1038,12 +1059,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr ""
-
-msgid "Selected program"
-msgstr "البرنامج المحدد"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "بحث {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1319,14 +1334,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr ""
+
 msgid "Working list could not be loaded"
 msgstr "تعذر تحميل قائمة العمل"
 
 msgid "Download as JSON"
 msgstr "تنزيل كملف JSON"
-
-msgid "Download as XML"
-msgstr "تنزيل كملف XML"
 
 msgid "Download as CSV"
 msgstr "تنزيل كملف CSV"

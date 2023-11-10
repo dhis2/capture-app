@@ -7,7 +7,7 @@ import { UserField } from '../../../FormFields/UserField/UserField.component';
 const getStyles = () => ({
     container: {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'baseline',
         padding: '8px 8px 8px 12px',
     },
     containerVertical: {
