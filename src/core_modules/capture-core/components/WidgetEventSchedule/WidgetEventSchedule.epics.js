@@ -28,6 +28,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
                 onSaveExternal,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
+                assignedUser,
             } = action.payload;
 
             const { events } = store.value;
@@ -46,6 +47,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
                 programStage: stageId,
                 status: 'SCHEDULE',
                 notes: comments ?? [],
+                assignedUser,
             }] };
 
             if (attributeCategoryOptions) {

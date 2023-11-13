@@ -47,7 +47,6 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
             payload: {
                 page,
                 pageSize,
-                orgUnitId,
                 selectedScopeId,
                 scopeType,
                 dataEntryId,
@@ -73,7 +72,6 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
 
                 const contextParam = scopeType === scopeTypes.TRACKER_PROGRAM ? { program: selectedScopeId } : { trackedEntityType: selectedScopeId };
                 const queryArgs = {
-                    ou: orgUnitId,
                     ouMode: 'ACCESSIBLE',
                     pageSize,
                     page,

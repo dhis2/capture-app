@@ -1,5 +1,6 @@
 // @flow
 import type { ProgramCategory, CategoryOption } from './CategoryOptions/CategoryOptions.types';
+import type { UserFormField } from '../FormFields/UserField';
 
 export type ContainerProps = {|
    programId: string,
@@ -38,7 +39,10 @@ export type Props = {|
    selectedCategories?: ?{ [categoryId: string]: CategoryOption },
    programCategory?: ProgramCategory,
    categoryOptionsError?: ?{[categoryId: string]: { touched: boolean, valid: boolean} },
+   enableUserAssignment?: boolean,
    onSchedule: () => void,
+   onSetAssignee: (user: UserFormField) => void,
+   assignee?: UserFormField,
    onCancel: () => void,
    setScheduleDate: (date: string) => void,
    onAddComment: (comment: string) => void,

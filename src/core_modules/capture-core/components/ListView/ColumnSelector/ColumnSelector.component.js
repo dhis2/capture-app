@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { IconButton } from '@material-ui/core';
+import { IconButton } from 'capture-ui';
 import { IconSettings24, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { ColumnSelectorDialog } from './ColumnSelectorDialog.component';

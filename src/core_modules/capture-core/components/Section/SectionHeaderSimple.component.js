@@ -1,8 +1,8 @@
 // @flow
-import { IconChevronDown24, IconChevronUp24, colors } from '@dhis2/ui';
+import { colors } from '@dhis2/ui';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
+import { ChevronIcon } from 'capture-ui';
 
 const styles = () => ({
     container: {
@@ -71,11 +71,13 @@ class SectionHeaderSimplePlain extends Component<Props> {
                 style={accContainerStyle}
                 {...containerProps}
             >
-                <div
-                    className={classes.title}
-                    style={titleStyle}
-                >
-                    {this.props.title}
+                <div>
+                    <div
+                        className={classes.title}
+                        style={titleStyle}
+                    >
+                        {this.props.title}
+                    </div>
                 </div>
                 <div
                     className={classes.children}
@@ -85,14 +87,13 @@ class SectionHeaderSimplePlain extends Component<Props> {
                         (() => {
                             if (onChangeCollapseState) {
                                 return (
-                                    <IconButton
-                                        data-test="collapsible-button"
+                                    <ChevronIcon
+                                        open={!this.props.isCollapsed}
+                                        onOpen={this.handleChangeCollapse}
+                                        onClose={this.handleChangeCollapse}
                                         disabled={!this.props.isCollapseButtonEnabled}
-                                        title={this.props.isCollapsed ? 'Open' : 'Close'}
-                                        onClick={this.handleChangeCollapse}
-                                    >
-                                        {this.props.isCollapsed ? <IconChevronDown24 /> : <IconChevronUp24 />}
-                                    </IconButton>
+                                        dataTest={'collapsible-button'}
+                                    />
                                 );
                             }
                             return null;

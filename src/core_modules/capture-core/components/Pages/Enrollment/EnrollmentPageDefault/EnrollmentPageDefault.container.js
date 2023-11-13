@@ -19,7 +19,7 @@ import {
     updateTeiDisplayName,
 } from '../EnrollmentPage.actions';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
-import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
+import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
     useProgramMetadata,
@@ -28,12 +28,14 @@ import {
 } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
+import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
+    const { onLinkedRecordClick } = useLinkedRecordClick();
 
     const program = useTrackerProgram(programId);
     const {
@@ -102,6 +104,7 @@ export const EnrollmentPageDefault = () => {
     };
 
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+
     if (error) {
         return error.errorComponent;
     }
@@ -122,6 +125,7 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
+            onLinkedRecordClick={onLinkedRecordClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
             onUpdateEnrollmentDate={onUpdateEnrollmentDate}
             onUpdateIncidentDate={onUpdateIncidentDate}

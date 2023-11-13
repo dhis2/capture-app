@@ -1,8 +1,8 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
-import { catchError, filter, flatMap, map, startWith, switchMap } from 'rxjs/operators';
-import { from, of } from 'rxjs';
+import { filter, map, concatMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import {
     lockedSelectorActionTypes,
     invalidSelectionsFromUrl,
@@ -16,32 +16,25 @@ import {
 import { programCollection } from '../../metaDataMemoryStores';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { getLocationQuery } from '../../utils/routing';
+import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
 
-const orgUnitsQuery = id => ({ resource: 'organisationUnits', id });
-
-export const getOrgUnitDataBasedOnUrlUpdateEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { querySingleResource }: ApiUtils) =>
+export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.FROM_URL_UPDATE),
         filter(action => action.payload.nextProps.orgUnitId),
-        switchMap((action) => {
+        concatMap((action) => {
             const { organisationUnits } = store.value;
             const { orgUnitId } = action.payload.nextProps;
             if (organisationUnits[orgUnitId]) {
                 return of(completeUrlUpdate());
             }
-            return from(querySingleResource(orgUnitsQuery(action.payload.nextProps.orgUnitId)))
-                .pipe(
-                    flatMap(response =>
-                        of(setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName, code: response.code }))),
-                    catchError(() =>
-                        of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
-                    startWith(startLoading()),
-                );
-        },
-        ));
+            return of(startLoading(), getCoreOrgUnit({
+                orgUnitId,
+                onSuccess: setCurrentOrgUnitBasedOnUrl,
+                onError: () => errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
+            }));
+        }),
+    );
 
 export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
@@ -76,4 +69,3 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable)
 
             return validSelectionsFromUrl();
         }));
-
