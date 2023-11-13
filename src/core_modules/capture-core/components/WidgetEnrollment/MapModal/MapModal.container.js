@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useGeometry } from '../hooks/useGeometry';
 import type { MapModalProps } from './MapModal.types';
 import { MapModal as MapModalComponent } from './MapModal.component';
@@ -15,15 +15,10 @@ export const MapModal = ({
 }: MapModalProps) => {
     const { geometryType, dataElementType } = useGeometry(enrollment);
 
-    const onSetCoordinates = (coordinates) => {
-        if (enrollment && !coordinates) {
-            const copyEnrollment = { ...enrollment };
-            delete copyEnrollment.geometry;
-            onUpdate(copyEnrollment);
-            return;
-        }
-        onUpdate({ ...enrollment, geometry: { type: geometryType, coordinates } });
-    };
+    const onSetCoordinates = useCallback((coordinates) => {
+        const geometry = coordinates ? { type: geometryType, coordinates } : null;
+        onUpdate({ ...enrollment, geometry });
+    }, [enrollment, geometryType, onUpdate]);
 
     return (
         <MapModalComponent
