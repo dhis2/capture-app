@@ -11,18 +11,14 @@ function convertTime(d2Value: string) {
     return parseData.momentTime;
 }
 
-const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) => {
-    if (!assignedUser) {
-        return null;
-    }
-    return {
+const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) =>
+    ((assignedUser && assignedUser.uid) ? {
         id: assignedUser.uid,
         name: assignedUser.displayName,
         username: assignedUser.username,
         firstName: assignedUser.firstName,
         surname: assignedUser.surname,
-    };
-};
+    } : null);
 
 const optionSetConvertersForType = {
     [dataElementTypes.NUMBER]: parseNumber,
