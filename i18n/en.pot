@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-11-01T08:10:43.456Z\n"
-"PO-Revision-Date: 2023-11-01T08:10:43.456Z\n"
+"POT-Creation-Date: 2023-11-14T07:52:45.978Z\n"
+"PO-Revision-Date: 2023-11-14T07:52:45.978Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1101,11 +1101,17 @@ msgstr "open the Tracker Capture app"
 msgid "Event assigned to {{name}}"
 msgstr "Event assigned to {{name}}"
 
-msgid "Assign"
-msgstr "Assign"
+msgid "You don't have access to edit this assignee"
+msgstr "You don't have access to edit this assignee"
 
 msgid "No one is assigned to this event"
 msgstr "No one is assigned to this event"
+
+msgid "You don't have access to assign an assignee"
+msgstr "You don't have access to assign an assignee"
+
+msgid "Assign"
+msgstr "Assign"
 
 msgid "This program is protected"
 msgstr "This program is protected"

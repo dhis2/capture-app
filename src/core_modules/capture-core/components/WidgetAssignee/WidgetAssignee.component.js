@@ -30,15 +30,6 @@ const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, classes }: PlainPro
         [onSet],
     );
 
-    const renderNoAccess = () => i18n.t('No one is assigned to this event');
-
-    const renderContent = () =>
-        (editMode ? (
-            <EditMode onCancel={() => setEditMode(false)} onSet={handleSet} />
-        ) : (
-            <DisplayMode assignee={assignee} onEdit={() => setEditMode(true)} />
-        ));
-
     return (
         <div data-test="widget-assignee">
             <Widget
@@ -51,7 +42,13 @@ const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, classes }: PlainPro
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                <div className={classes.wrapper}>{writeAccess ? renderContent() : renderNoAccess()}</div>
+                <div className={classes.wrapper}>
+                    {editMode ? (
+                        <EditMode onCancel={() => setEditMode(false)} onSet={handleSet} />
+                    ) : (
+                        <DisplayMode assignee={assignee} onEdit={() => setEditMode(true)} writeAccess={writeAccess} />
+                    )}
+                </div>
             </Widget>
         </div>
     );
