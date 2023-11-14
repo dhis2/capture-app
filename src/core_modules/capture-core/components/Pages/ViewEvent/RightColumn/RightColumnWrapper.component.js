@@ -8,7 +8,7 @@ import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container'
 import { IndicatorsSection } from './IndicatorsSection/IndicatorsSection.container';
 import { RelationshipsSection } from './RelationshipsSection/RelationshipsSection.container';
 import { NotesSection } from './NotesSection/NotesSection.container';
-import { WidgetAssignee } from '../../../WidgetAssignee';
+import { AssigneeSection } from './AssigneeSection';
 
 type Props = {
     classes: {
@@ -29,7 +29,7 @@ const componentContainers = [
     { id: 'WarningsSection', Component: WarningsSection },
     { id: 'FeedbacksSection', Component: FeedbacksSection },
     { id: 'IndicatorsSection', Component: IndicatorsSection },
-    { id: 'WidgetAssignee', Component: WidgetAssignee },
+    { id: 'AssigneeSection', Component: AssigneeSection },
     { id: 'RelationshipsSection', Component: RelationshipsSection },
     { id: 'NotesSection', Component: NotesSection },
 ];

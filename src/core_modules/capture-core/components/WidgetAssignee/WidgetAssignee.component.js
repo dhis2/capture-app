@@ -18,7 +18,7 @@ const styles = () => ({
     },
 });
 
-const WidgetAssigneePlain = ({ assignee, eventAccess, onSet, classes }: PlainProps) => {
+const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, classes }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const [editMode, setEditMode] = useState(false);
 
@@ -51,7 +51,7 @@ const WidgetAssigneePlain = ({ assignee, eventAccess, onSet, classes }: PlainPro
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                <div className={classes.wrapper}>{eventAccess?.write ? renderContent() : renderNoAccess()}</div>
+                <div className={classes.wrapper}>{writeAccess ? renderContent() : renderNoAccess()}</div>
             </Widget>
         </div>
     );

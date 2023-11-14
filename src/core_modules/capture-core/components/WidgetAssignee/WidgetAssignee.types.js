@@ -1,5 +1,4 @@
 // @flow
-import type { ProgramStage } from '../../metaData';
 import type { UserFormField } from '../FormFields/UserField';
 
 export type Assignee = {
@@ -12,11 +11,8 @@ export type Assignee = {
 
 export type Props = {|
     assignee: UserFormField | null,
-    programStage: ?ProgramStage,
-    eventAccess: {|
-        read: boolean,
-        write: boolean,
-    |} | null,
+    enabled: boolean,
+    writeAccess: boolean,
     onGetSaveContext: () => { event: ApiEnrollmentEvent },
     onSave: (newAssignee: UserFormField) => void,
     onSaveError: (prevAssignee: UserFormField | null) => void,
@@ -24,10 +20,7 @@ export type Props = {|
 
 export type PlainProps = {|
     assignee: UserFormField | null,
-    eventAccess: {|
-        read: boolean,
-        write: boolean,
-    |} | null,
+    writeAccess: boolean,
     onSet: (user: UserFormField) => void,
     ...CssClasses,
 |};

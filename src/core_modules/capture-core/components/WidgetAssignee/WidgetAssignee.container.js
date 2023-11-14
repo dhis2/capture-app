@@ -6,7 +6,7 @@ import { WidgetAssigneeComponent } from './WidgetAssignee.component';
 import { convertClientToServer } from './converter';
 
 const WidgetAssigneeWithHooks = (props: Props) => {
-    const { assignee, eventAccess, onGetSaveContext, onSave, onSaveError } = props;
+    const { assignee, writeAccess, onGetSaveContext, onSave, onSaveError } = props;
     const prevAssignee = useRef(assignee);
 
     const [updateMutation] = useDataMutation(
@@ -32,11 +32,11 @@ const WidgetAssigneeWithHooks = (props: Props) => {
         [updateMutation, onGetSaveContext, onSave, assignee],
     );
 
-    return <WidgetAssigneeComponent assignee={assignee} eventAccess={eventAccess} onSet={onSet} />;
+    return <WidgetAssigneeComponent assignee={assignee} writeAccess={writeAccess} onSet={onSet} />;
 };
 
 export const WidgetAssignee = (props: Props) => {
-    if (!props.programStage?.enableUserAssignment) {
+    if (!props.enabled) {
         return null;
     }
 

@@ -119,10 +119,10 @@ const EnrollmentEditEventPageRight = ({
 }) => (
     <>
         <WidgetAssignee
-            programStage={programStage}
+            enabled={programStage?.enableUserAssignment || false}
             assignee={assignee}
             onGetSaveContext={onGetAssignedUserSaveContext}
-            eventAccess={eventAccess}
+            writeAccess={eventAccess?.write || false}
             onSave={onSaveAssignee}
             onSaveError={onSaveAssigneeError}
         />
