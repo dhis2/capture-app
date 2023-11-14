@@ -4,13 +4,13 @@
  */
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton } from 'capture-ui';
 import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
 
 const styles = (theme: Theme) => ({
     root: {
         flexShrink: 0,
+        display: 'flex',
         color: theme.palette.text.secondary,
     },
 });
@@ -81,7 +81,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                     className={classes.root}
                 >
                     <IconButton
-                        data-test={'search-pagination-first-page'}
+                        dataTest={'search-pagination-first-page'}
                         onClick={this.handleFirstPageButtonClick}
                         disabled={currentPage <= 1}
                         aria-label="First Page"
@@ -89,7 +89,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
                     </IconButton>
                     <IconButton
-                        data-test={'search-pagination-previous-page'}
+                        dataTest={'search-pagination-previous-page'}
                         onClick={this.handleBackButtonClick}
                         disabled={currentPage <= 1}
                         aria-label="Previous Page"
@@ -97,7 +97,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         {theme.direction === 'rtl' ? <IconChevronRight24 /> : <IconChevronLeft24 />}
                     </IconButton>
                     <IconButton
-                        data-test={'search-pagination-next-page'}
+                        dataTest={'search-pagination-next-page'}
                         onClick={this.handleNextButtonClick}
                         disabled={nextPageButtonDisabled}
                         aria-label="Next Page"

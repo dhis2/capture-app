@@ -39,22 +39,27 @@ const MultiSelectFieldComponentPlain = (props: Props) => {
         onSelect(multiSelectSelected.join(MULTI_TEXT_SEPARATOR));
     };
 
+    const handleBlur = () => {
+        onBlur(selected ? selected.join(MULTI_TEXT_SEPARATOR) : null);
+    };
+
     return (
-        <MultiSelectFieldUI
-            dataTest="multi-select-field"
-            onChange={onHandleChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onKeyDown={onFocus}
-            selected={selected}
-            filterable
-            filterPlaceholder={translations.filterPlaceholder}
-            noMatchText={translations.noMatchText}
-        >
-            {options.map(option => (
-                <MultiSelectOption key={option.id} label={option.label} value={option.value} />
-            ))}
-        </MultiSelectFieldUI>
+        <div onBlur={handleBlur}>
+            <MultiSelectFieldUI
+                dataTest="multi-select-field"
+                onChange={onHandleChange}
+                onFocus={onFocus}
+                onKeyDown={onFocus}
+                selected={selected}
+                filterable
+                filterPlaceholder={translations.filterPlaceholder}
+                noMatchText={translations.noMatchText}
+            >
+                {options.map(option => (
+                    <MultiSelectOption key={option.id} label={option.label} value={option.value} />
+                ))}
+            </MultiSelectFieldUI>
+        </div>
     );
 };
 

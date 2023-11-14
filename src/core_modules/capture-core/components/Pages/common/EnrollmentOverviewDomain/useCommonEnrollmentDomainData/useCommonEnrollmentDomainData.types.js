@@ -1,5 +1,4 @@
 // @flow
-
 export type DataValue = {
     dataElement: string,
     value: string,
@@ -15,7 +14,6 @@ export type Event = {|
     occurredAt: string,
     updatedAt: string,
     orgUnit: string,
-    orgUnitName: string,
     program: string,
     programStage: string,
     status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
@@ -35,7 +33,6 @@ export type EnrollmentData = {|
     updatedAt: string,
     updatedAtClient: string,
     orgUnit: string,
-    orgUnitName: string,
     program: string,
     status: string,
     storedBy: string,
@@ -49,6 +46,7 @@ export type AttributeValue = {|
     id: string,
     value: string,
 |};
+
 
 export type Output = {|
     error?: any,

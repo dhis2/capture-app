@@ -12,6 +12,6 @@ export type Props = {|
     eventCountInOrgUnit: number,
     suggestedScheduleDate?: ?string,
     hideDueDate?: boolean,
-    orgUnit: Object,
+    orgUnit: { id: string, name: string },
     ...CssClasses,
 |};

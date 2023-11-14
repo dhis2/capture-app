@@ -11,7 +11,7 @@ type MultiSelectOptionConfig = {
 export type Props = {
     onSelect: (value?: string) => void,
     onFocus: () => void,
-    onBlur: () => void,
+    onBlur: (value: ?string) => void,
     options: Array<MultiSelectOptionConfig>,
     value?: string,
     translations: {

@@ -42,7 +42,7 @@ class PreTeiDataEntryPure extends React.PureComponent<Object> {
 }
 
 type PreTeiDataEntryProps = {
-    orgUnit: Object,
+    orgUnitId: string,
     trackedEntityTypeId: string,
     onUpdateField: Function,
     onStartAsyncUpdateField: Function,
@@ -52,17 +52,17 @@ type PreTeiDataEntryProps = {
 
 export class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit, onGetUnsavedAttributeValues, trackedEntityTypeId } = this.props;
+        const { orgUnitId, onGetUnsavedAttributeValues, trackedEntityTypeId } = this.props;
         return {
             trackedEntityTypeId,
-            orgUnitId: orgUnit.id,
+            orgUnitId,
             onGetUnsavedAttributeValues,
         };
     }
 
     render() {
         const {
-            orgUnit,
+            orgUnitId,
             trackedEntityTypeId,
             onUpdateField,
             onStartAsyncUpdateField,

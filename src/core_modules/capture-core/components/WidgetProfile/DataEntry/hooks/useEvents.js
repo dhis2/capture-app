@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 import { convertValue } from '../../../../converters/serverToClient';
 import { dataElementTypes } from '../../../../metaData';
+import { useOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
 
 const convertDate = date => convertValue(date, dataElementTypes.DATE);
 
@@ -14,16 +15,26 @@ const getClientFormattedDataValuesAsObject = (dataValues, elementsById) =>
         return acc;
     }, {});
 
-export const useEvents = (enrollment: any, elementsById: Array<any>) =>
-    useMemo(
+const getOrgUnitIds = (enrollment: any): Array<string> =>
+    (enrollment ? enrollment.events.reduce((acc, event) => {
+        if (event.orgUnit) {
+            acc.push(event.orgUnit);
+        }
+        return acc;
+    }, []) : []);
+
+export const useEvents = (enrollment: any, elementsById: Array<any>) => {
+    const orgUnitIds = useMemo(() => getOrgUnitIds(enrollment), [enrollment]);
+    const { orgUnitNames } = useOrgUnitNames(orgUnitIds);
+    return useMemo(
         () =>
-            enrollment &&
+            enrollment && orgUnitNames &&
             enrollment.events.map(event => ({
                 eventId: event.event,
                 programId: event.program,
                 programStageId: event.programStage,
                 orgUnitId: event.orgUnit,
-                orgUnitName: event.orgUnitName,
+                orgUnitName: orgUnitNames[event.orgUnit],
                 trackedEntityInstanceId: event.trackedEntityInstance,
                 enrollmentId: event.enrollment,
                 enrollmentStatus: event.enrollmentStatus,
@@ -32,5 +43,6 @@ export const useEvents = (enrollment: any, elementsById: Array<any>) =>
                 dueDate: convertDate(event.dueDate),
                 ...getClientFormattedDataValuesAsObject(event.dataValues, elementsById),
             })),
-        [elementsById, enrollment],
+        [elementsById, enrollment, orgUnitNames],
     );
+};
