@@ -38,7 +38,11 @@ export const ColumnSelectorDialog = ({ columns, open, onClose, onSave }: Props) 
 
     return (
         <span>
-            <Modal hide={!open} onClose={onClose}>
+            <Modal
+                hide={!open}
+                onClose={onClose}
+                dataTest={'column-selector-dialog'}
+            >
                 <ModalTitle>{i18n.t('Columns to show in table')}</ModalTitle>
                 <ModalContent>
                     <DragDropList

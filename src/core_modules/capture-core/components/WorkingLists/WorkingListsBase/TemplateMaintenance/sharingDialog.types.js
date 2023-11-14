@@ -6,5 +6,6 @@ export type Props = {|
     open: boolean,
     templateId: string,
     templateSharingType: string,
+    dataTest: string,
     ...CssClasses,
 |};

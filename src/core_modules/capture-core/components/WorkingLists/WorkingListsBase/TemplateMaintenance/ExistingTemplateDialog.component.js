@@ -21,6 +21,7 @@ export const ExistingTemplateDialog = (props: Props) => {
             hide={!open}
             onClose={onClose}
             position={'center'}
+            dataTest={'existing-template-dialog'}
         >
             <ExistingTemplateContents
                 onSaveTemplate={onSaveTemplate}

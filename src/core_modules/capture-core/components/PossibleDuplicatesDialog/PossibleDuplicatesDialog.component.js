@@ -20,6 +20,7 @@ class ReviewDialogClass extends React.Component<Props > {
         return (
             <Modal
                 hide={!open}
+                dataTest={'duplicates-modal'}
                 onClose={onCancel}
             >
                 <ReviewDialogContents
