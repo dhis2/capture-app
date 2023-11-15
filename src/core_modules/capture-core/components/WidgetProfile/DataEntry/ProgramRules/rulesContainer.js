@@ -1,13 +1,12 @@
 // @flow
 import type { ProgramRulesContainer } from '@dhis2/rules-engine-javascript';
-import { getTrackedEntityAttributeId, getProgramId, getProgramRuleActions, getProgramStageId } from '../helpers';
+import { getProgramId, getProgramRuleActions, getProgramStageId } from '../helpers';
 import { getRulesAndVariablesFromProgramIndicators } from '../../../../metaDataMemoryStoreBuilders/programs/getRulesAndVariablesFromIndicators';
 
 const addProgramVariables = (program, programRuleVariables) => {
     program.programRuleVariables = programRuleVariables.map(programRulesVariable => ({
         ...programRulesVariable,
         programId: getProgramId(programRulesVariable),
-        trackedEntityAttributeId: getTrackedEntityAttributeId(programRulesVariable),
     }));
 };
 
