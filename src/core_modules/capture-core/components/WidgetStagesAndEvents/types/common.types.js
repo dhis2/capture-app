@@ -49,7 +49,6 @@ export type Event = {|
     occurredAt: string,
     updatedAt: string,
     orgUnit: string,
-    orgUnitName: string,
     program: string,
     programStage: string,
     status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',

@@ -1,3 +1,45 @@
+## [100.44.5](https://github.com/dhis2/capture-app/compare/v100.44.4...v100.44.5) (2023-11-10)
+
+
+### Bug Fixes
+
+* [TECH-1627] use only valid combinations of orgUnit and ouMode ([#3405](https://github.com/dhis2/capture-app/issues/3405)) ([20d05f1](https://github.com/dhis2/capture-app/commit/20d05f1602840e8ac1241ee305b796d58f616802))
+
+## [100.44.4](https://github.com/dhis2/capture-app/compare/v100.44.3...v100.44.4) (2023-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-15383] align mandatory behaviour for all value types ([#3413](https://github.com/dhis2/capture-app/issues/3413)) ([b0eddc7](https://github.com/dhis2/capture-app/commit/b0eddc76b674ceb20df0eb5bcd0672a3c42d3954))
+
+## [100.44.3](https://github.com/dhis2/capture-app/compare/v100.44.2...v100.44.3) (2023-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-15814] missing orgunit names ([#3449](https://github.com/dhis2/capture-app/issues/3449)) ([488f8c0](https://github.com/dhis2/capture-app/commit/488f8c090680ad47ed693214478a7ef2919b82e7))
+
+## [100.44.2](https://github.com/dhis2/capture-app/compare/v100.44.1...v100.44.2) (2023-11-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0076449](https://github.com/dhis2/capture-app/commit/0076449e545803fa8b5e36b0663d807bb6c7d410))
+
+## [100.44.1](https://github.com/dhis2/capture-app/compare/v100.44.0...v100.44.1) (2023-11-02)
+
+
+### Bug Fixes
+
+* [DHIS2-15945] translations in enrollment widget ([#3433](https://github.com/dhis2/capture-app/issues/3433)) ([c188767](https://github.com/dhis2/capture-app/commit/c1887673e56f2f73cfc594b682d471c10858c0fd))
+
+# [100.44.0](https://github.com/dhis2/capture-app/compare/v100.43.0...v100.44.0) (2023-11-01)
+
+
+### Features
+
+* [DHIS2-15483] assign an user when scheduling an enrollment event ([#3419](https://github.com/dhis2/capture-app/issues/3419)) ([556884f](https://github.com/dhis2/capture-app/commit/556884f7302215c31b7be433bbeb24503ea9b12d))
+
 # [100.43.0](https://github.com/dhis2/capture-app/compare/v100.42.0...v100.43.0) (2023-10-31)
 
 

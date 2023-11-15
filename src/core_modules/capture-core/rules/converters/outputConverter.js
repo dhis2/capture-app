@@ -5,6 +5,9 @@ import moment from 'moment';
 import type { IConvertOutputRulesEffectsValue } from '@dhis2/rules-engine-javascript';
 import { convertMomentToDateFormatString } from '../../utils/converters/date';
 
+
+// These functions are only used for creating assignment effects
+
 const dateMomentFormat = 'YYYY-MM-DD';
 
 export const outputConverter: IConvertOutputRulesEffectsValue = {
