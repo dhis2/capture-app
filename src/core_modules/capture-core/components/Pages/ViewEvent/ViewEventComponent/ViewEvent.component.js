@@ -104,9 +104,9 @@ class ViewEventPlain extends Component<Props, State> {
                         programStage={programStage}
                         dataEntryKey={currentDataEntryKey}
                         assignee={assignee}
-                        onGetSaveContext={onGetAssignedUserSaveContext}
-                        onSave={onSaveAssignee}
-                        onSaveError={onSaveAssigneeError}
+                        onGetAssignedUserSaveContext={onGetAssignedUserSaveContext}
+                        onSaveAssignee={onSaveAssignee}
+                        onSaveAssigneeError={onSaveAssigneeError}
                     />
                 </div>
                 <DiscardDialog

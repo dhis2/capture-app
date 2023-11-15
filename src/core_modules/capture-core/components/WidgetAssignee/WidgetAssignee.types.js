@@ -1,5 +1,4 @@
 // @flow
-import type { UserFormField } from '../FormFields/UserField';
 
 export type Assignee = {
     id: string,
@@ -10,17 +9,17 @@ export type Assignee = {
 }
 
 export type Props = {|
-    assignee: UserFormField | null,
+    assignee: Assignee | null,
     enabled: boolean,
     writeAccess: boolean,
     onGetSaveContext: () => { event: ApiEnrollmentEvent },
-    onSave: (newAssignee: UserFormField) => void,
-    onSaveError: (prevAssignee: UserFormField | null) => void,
+    onSave: (newAssignee: Assignee) => void,
+    onSaveError: (prevAssignee: Assignee | null) => void,
 |};
 
 export type PlainProps = {|
-    assignee: UserFormField | null,
+    assignee: Assignee | null,
     writeAccess: boolean,
-    onSet: (user: UserFormField) => void,
+    onSet: (user: Assignee | null) => void,
     ...CssClasses,
 |};

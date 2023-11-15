@@ -1,10 +1,10 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
+import { Button, ButtonStrip, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import type { Assignee } from './WidgetAssignee.types';
-import { UserSearch } from '../FormFields/UserField';
+import { UserField } from '../FormFields/UserField';
 
 const styles = () => ({
     container: {
@@ -17,34 +17,44 @@ const styles = () => ({
         paddingRight: 5,
     },
     buttonContainer: {
-        flexGrow: 0,
-        flexShrink: 0,
+        marginTop: spacers.dp8,
     },
 });
 
 type Props = {
+    assignee: Assignee | null,
     onCancel: () => {},
-    onSet: (user: Assignee) => void,
+    onSet: (user: Assignee | null) => void,
     ...CssClasses,
 };
 
 const EditModePlain = (props: Props) => {
-    const { onCancel, onSet, classes } = props;
+    const { onCancel, onSet, assignee, classes } = props;
+    const [tempUser, setTempUser] = useState(assignee);
+
+    const onHandleSet = (user) => {
+        setTempUser(user);
+    };
+
     return (
         <div className={classes.container}>
             <div className={classes.searchContainer}>
-                <UserSearch
+                <UserField
+                    inputPlaceholderText={i18n.t('Search for user')}
+                    value={tempUser}
                     inputWrapperClasses={{}}
                     focusInputOnMount
                     exitBehaviour="doNothing"
-                    inputPlaceholderText={i18n.t('Search for user')}
-                    onSet={onSet}
+                    onSet={onHandleSet}
                 />
-            </div>
-            <div className={classes.buttonContainer}>
-                <Button onClick={onCancel} small>
-                    {i18n.t('Cancel')}
-                </Button>
+                <ButtonStrip className={classes.buttonContainer}>
+                    <Button onClick={() => onSet(tempUser)} small primary dataTest="widget-assignee-save">
+                        {i18n.t('Save')}
+                    </Button>
+                    <Button onClick={onCancel} small secondary>
+                        {i18n.t('Cancel')}
+                    </Button>
+                </ButtonStrip>
             </div>
         </div>
     );

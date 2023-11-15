@@ -30,15 +30,16 @@ function convertRange(parser: (value: any) => any, rangeValue: RangeValue) {
     };
 }
 
-function convertAssigneeToServer(assignee: Assignee): ApiAssignedUser {
-    return {
-        uid: assignee.id,
-        displayName: assignee.name,
-        username: assignee.username,
-        firstName: assignee.firstName,
-        surname: assignee.surname,
-    };
-}
+const convertAssigneeToServer = (assignee?: Assignee): ApiAssignedUser | null =>
+    (assignee
+        ? {
+            uid: assignee.id,
+            displayName: assignee.name,
+            username: assignee.username,
+            firstName: assignee.firstName,
+            surname: assignee.surname,
+        }
+        : null);
 
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,

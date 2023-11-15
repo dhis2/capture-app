@@ -44,7 +44,7 @@ const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, classes }: PlainPro
             >
                 <div className={classes.wrapper}>
                     {editMode ? (
-                        <EditMode onCancel={() => setEditMode(false)} onSet={handleSet} />
+                        <EditMode onCancel={() => setEditMode(false)} onSet={handleSet} assignee={assignee} />
                     ) : (
                         <DisplayMode assignee={assignee} onEdit={() => setEditMode(true)} writeAccess={writeAccess} />
                     )}
