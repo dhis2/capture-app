@@ -20,6 +20,7 @@ export const NewTemplateDialog = (props: Props) => {
         <Modal
             hide={!open}
             onClose={onClose}
+            dataTest={'new-template-dialog'}
             position={'center'}
         >
             <NewTemplateContents

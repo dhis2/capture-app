@@ -522,7 +522,9 @@ When('you change the sharing settings', () => {
     cy.contains('Select a level').click();
     cy.get('[data-test="dhis2-uicore-popper"]').contains('View and edit').click({ force: true });
     cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
+    cy.get('[data-test="sharing-dialog"]').within(() => {
+        cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
+    });
 });
 
 Then('you see the new sharing settings', () => {
@@ -559,9 +561,10 @@ When('you create a copy of the working list',
         cy.intercept('POST', '**/trackedEntityInstanceFilters**')
             .as('newTrackerFilter');
 
-        cy.get('[data-test="column-selector-dialog"]')
+        cy.get('[data-test="new-template-dialog"]')
             .within(() => {
                 cy.get('[data-test="dhis2-uicore-button"]')
+                    .contains('Save')
                     .click();
             });
 
