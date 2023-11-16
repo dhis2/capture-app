@@ -20,8 +20,8 @@ export const RegisterTei = ({
     const { trackedEntityName } = useScopeInfo(selectedScopeId);
     const {
         inheritedAttributes,
-        originTeiId,
-        isLoading: isLoadingAttributes } = useInheritedAttributeValues({
+        isLoading: isLoadingAttributes,
+    } = useInheritedAttributeValues({
         teiId,
         trackedEntityTypeId,
     });
@@ -41,7 +41,6 @@ export const RegisterTei = ({
             selectedScopeId={selectedScopeId}
             error={error}
             trackedEntityTypeId={trackedEntityTypeId}
-            originTeiId={originTeiId}
             inheritedAttributes={inheritedAttributes}
         />
     );

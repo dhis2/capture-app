@@ -19,7 +19,6 @@ export type ComponentProps = {|
     error: string,
     dataEntryId: string,
     trackedEntityName: ?string,
-    originTeiId: ?string,
     inheritedAttributes: Array<InputAttribute>,
     onSaveWithEnrollment: () => void,
     onSaveWithoutEnrollment: () => void,

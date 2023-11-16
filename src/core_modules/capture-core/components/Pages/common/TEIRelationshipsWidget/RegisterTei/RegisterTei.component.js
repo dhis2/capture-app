@@ -58,7 +58,6 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
 const RegisterTeiPlain = ({
     dataEntryId,
     onLink,
-    originTeiId,
     onSaveWithoutEnrollment,
     onSaveWithEnrollment,
     onGetUnsavedAttributeValues,
@@ -112,7 +111,6 @@ const RegisterTeiPlain = ({
                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                     renderDuplicatesCardActions={renderDuplicatesCardActions}
                     ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
-                    originTeiId={originTeiId}
                     inheritedAttributes={inheritedAttributes}
                 />
             </div>

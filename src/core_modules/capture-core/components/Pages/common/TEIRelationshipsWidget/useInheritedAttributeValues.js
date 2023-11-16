@@ -10,17 +10,15 @@ type Props = {
 
 type Return = {
     inheritedAttributes: Array<InputAttribute>,
-    originTeiId: ?string,
     isLoading: boolean,
 };
 export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Props): Return => {
     const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
-    const inheritedAttributeIds = trackedEntityType.attributes.reduce((acc, attribute) => {
-        if (attribute.inherit) {
-            acc.push(attribute.id);
-        }
-        return acc;
-    }, []);
+    const inheritedAttributeIds = new Set<string>(
+        trackedEntityType.attributes
+            .filter(attribute => attribute.inherit)
+            .map(attribute => attribute.id),
+    );
 
     const { data, isLoading } = useApiDataQuery(
         ['inheritedAttributeValues', teiId],
@@ -35,13 +33,12 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Prop
             select: (response) => {
                 const attributes = response.attributes || [];
                 return attributes
-                    .filter(attribute => inheritedAttributeIds.includes(attribute.attribute));
+                    .filter(attribute => inheritedAttributeIds.has(attribute.attribute));
             },
         });
 
     return {
         inheritedAttributes: data ?? [],
-        originTeiId: null,
         isLoading,
     };
 };

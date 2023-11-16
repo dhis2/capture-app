@@ -14,14 +14,17 @@ export const useFormValuesFromSearchTerms = ({ inheritedAttributes }: Props) => 
     return useMemo(() => {
         if (inheritedAttributes) {
             return inheritedAttributes
-                ?.reduce((acc, item) => ({
-                    ...acc,
-                    [item.attribute]: convertClientToForm(item.value, item.valueType),
-                }), {});
+                ?.reduce((acc, item) => {
+                    acc[item.attribute] = convertClientToForm(item.value, item.valueType);
+                    return acc;
+                }, {});
         }
         if (searchTerms) {
             return searchTerms
-                ?.reduce((acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }), {});
+                ?.reduce((acc, item) => {
+                    acc[item.id] = convertClientToForm(item.value, item.type);
+                    return acc;
+                }, {});
         }
 
         return null;

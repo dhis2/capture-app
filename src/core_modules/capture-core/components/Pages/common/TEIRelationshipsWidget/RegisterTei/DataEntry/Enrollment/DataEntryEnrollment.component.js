@@ -12,7 +12,6 @@ const NewEnrollmentRelationshipPlain =
         theme,
         onSave,
         programId,
-        originTeiId,
         inheritedAttributes,
         orgUnitId,
         duplicatesReviewPageSize,
@@ -37,7 +36,6 @@ const NewEnrollmentRelationshipPlain =
                 renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                 renderDuplicatesCardActions={renderDuplicatesCardActions}
                 ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
-                teiId={originTeiId}
                 trackedEntityInstanceAttributes={inheritedAttributes}
             />
         );
