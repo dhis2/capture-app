@@ -1,3 +1,10 @@
+## [100.44.6](https://github.com/dhis2/capture-app/compare/v100.44.5...v100.44.6) (2023-11-16)
+
+
+### Bug Fixes
+
+* [DHIS2-15967] allow enrolling TEIs with mandatory TET attributes ([#3455](https://github.com/dhis2/capture-app/issues/3455)) ([cc87a8a](https://github.com/dhis2/capture-app/commit/cc87a8a993001d5b4cea8493a84a6798f481cc5a))
+
 ## [100.44.5](https://github.com/dhis2/capture-app/compare/v100.44.4...v100.44.5) (2023-11-10)
 
 
