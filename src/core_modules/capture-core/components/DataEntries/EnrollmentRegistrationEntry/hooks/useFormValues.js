@@ -50,7 +50,7 @@ type StaticPatternValues = {
 
 const useClientAttributesWithSubvalues = (program: InputProgramData, attributes: Array<InputAttribute>) => {
     const dataEngine = useDataEngine();
-    const [listAttributes, setListAttributes] = useState([]);
+    const [listAttributes, setListAttributes] = useState(null);
 
     const getListAttributes = useCallback(async () => {
         if (program && attributes) {
@@ -139,8 +139,6 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
     const formValuesReadyRef = useRef<any>(false);
     const [formValues, setFormValues] = useState<any>({});
     const [clientValues, setClientValues] = useState<any>({});
-    const areAttributesWithSubvaluesReady =
-        (teiId && clientAttributesWithSubvalues.length > 0) || (!teiId && clientAttributesWithSubvalues.length === 0);
 
     useEffect(() => {
         formValuesReadyRef.current = false;
@@ -152,7 +150,7 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
             formFoundation &&
             Object.entries(formFoundation).length > 0 &&
             formValuesReadyRef.current === false &&
-            areAttributesWithSubvaluesReady
+            !!clientAttributesWithSubvalues
         ) {
             const staticPatternValues = { orgUnitCode: orgUnit.code };
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
@@ -172,7 +170,6 @@ export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUni
         clientAttributesWithSubvalues,
         formValuesReadyRef,
         orgUnit,
-        areAttributesWithSubvaluesReady,
         searchTerms,
         dataEngine,
     ]);

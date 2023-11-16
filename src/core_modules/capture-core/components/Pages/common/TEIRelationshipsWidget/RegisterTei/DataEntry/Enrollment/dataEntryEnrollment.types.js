@@ -6,11 +6,14 @@ import type {
     SaveForEnrollmentAndTeiRegistration,
     ExistingUniqueValueDialogActionsComponent,
 } from '../../../../../../DataEntries';
+import type { InputAttribute } from '../../../../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
 
 export type Props = {|
     theme: Theme,
     programId: string,
     orgUnitId: string,
+    originTeiId: ?string,
+    inheritedAttributes: Array<InputAttribute>,
     enrollmentMetadata?: Enrollment,
     onSave: SaveForEnrollmentAndTeiRegistration,
     duplicatesReviewPageSize: number,

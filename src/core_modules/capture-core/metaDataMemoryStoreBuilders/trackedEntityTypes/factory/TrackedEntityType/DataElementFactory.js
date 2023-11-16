@@ -112,6 +112,7 @@ export class DataElementFactory {
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.DESCRIPTION) ||
                     cachedAttribute.description;
             o.displayInForms = true;
+            o.inherit = cachedAttribute.inherit;
             o.displayInReports = cachedTrackedEntityTypeAttribute.displayInList;
             o.disabled = false;
             o.type = cachedAttribute.valueType;

@@ -1,0 +1,47 @@
+// @flow
+import type { InputAttribute } from '../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
+import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
+import { getTrackedEntityTypeThrowIfNotFound } from '../../../../metaData';
+
+type Props = {
+    teiId: string,
+    trackedEntityTypeId: string,
+};
+
+type Return = {
+    inheritedAttributes: Array<InputAttribute>,
+    originTeiId: ?string,
+    isLoading: boolean,
+};
+export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Props): Return => {
+    const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
+    const inheritedAttributeIds = trackedEntityType.attributes.reduce((acc, attribute) => {
+        if (attribute.inherit) {
+            acc.push(attribute.id);
+        }
+        return acc;
+    }, []);
+
+    const { data, isLoading } = useApiDataQuery(
+        ['inheritedAttributeValues', teiId],
+        {
+            resource: 'tracker/trackedEntities',
+            id: teiId,
+            params: {
+                fields: ['attributes'],
+            },
+        }, {
+            enabled: !!teiId,
+            select: (response) => {
+                const attributes = response.attributes || [];
+                return attributes
+                    .filter(attribute => inheritedAttributeIds.includes(attribute.attribute));
+            },
+        });
+
+    return {
+        inheritedAttributes: data ?? [],
+        originTeiId: null,
+        isLoading,
+    };
+};
