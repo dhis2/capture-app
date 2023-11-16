@@ -35,26 +35,5 @@ export const useProgram = (programId: string) => {
         ),
     );
 
-    const program = useMemo(() => {
-        if (data) {
-            const adaptedProgram = data.programs;
-            if (adaptedProgram.programRuleVariables) {
-                adaptedProgram.programRuleVariables = adaptedProgram.programRuleVariables.map(
-                    ({ trackedEntityAttribute, dataElement, ...variable }) => {
-                        if (dataElement) {
-                            variable.dataElementId = dataElement.id;
-                        }
-                        if (trackedEntityAttribute) {
-                            variable.trackedEntityAttributeId = trackedEntityAttribute.id;
-                        }
-                        return variable;
-                    },
-                );
-            }
-            return adaptedProgram;
-        }
-        return data;
-    }, [data]);
-
-    return { error, loading, program: !loading && program };
+    return { error, loading, program: !loading && data?.programs };
 };
