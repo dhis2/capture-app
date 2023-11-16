@@ -8,6 +8,7 @@ import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToForm, convertServerToClient } from '../../../../converters';
 import { subValueGetterByElementType } from './getSubValueForTei';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { dataElementTypes } from '../../../../metaData';
 
 type InputProgramData = {
     attributes: Array<{
@@ -32,7 +33,7 @@ export type InputAttribute = {
     displayName: string,
     lastUpdated: string,
     value: string,
-    valueType: string,
+    valueType: $Keys<typeof dataElementTypes>,
 };
 
 type InputForm = {

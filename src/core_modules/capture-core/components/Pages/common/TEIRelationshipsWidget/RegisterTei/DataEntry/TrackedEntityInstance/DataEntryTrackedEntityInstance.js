@@ -14,6 +14,7 @@ const RelationshipTrackedEntityInstancePlain =
         theme,
         onSave,
         trackedEntityTypeId,
+        inheritedAttributes,
         duplicatesReviewPageSize,
         renderDuplicatesDialogActions,
         renderDuplicatesCardActions,
@@ -36,6 +37,7 @@ const RelationshipTrackedEntityInstancePlain =
                 orgUnitId={orgUnitId}
                 teiRegistrationMetadata={teiRegistrationMetadata}
                 selectedScopeId={teiRegistrationMetadata.form.id}
+                inheritedAttributes={inheritedAttributes}
                 saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', {
                     trackedEntityTypeName: trackedEntityTypeNameLC, interpolation: { escapeValue: false },
                 })}
