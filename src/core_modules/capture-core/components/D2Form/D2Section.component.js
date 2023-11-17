@@ -75,7 +75,7 @@ class D2SectionPlain extends React.PureComponent<Props> {
     renderSection(sectionProps) {
         const { sectionMetaData, applyCustomFormClass, classes, sectionId, ...passOnProps } = sectionProps;
 
-        if (sectionMetaData.showContainer || this.props.formHorizontal) {
+        if (!sectionMetaData.showContainer || this.props.formHorizontal) {
             return (
                 // $FlowFixMe[cannot-spread-inexact] automated comment
                 <D2SectionFields
@@ -86,7 +86,6 @@ class D2SectionPlain extends React.PureComponent<Props> {
                 />
             );
         }
-
         return (
             <div
                 data-test="d2-section-vertical"
