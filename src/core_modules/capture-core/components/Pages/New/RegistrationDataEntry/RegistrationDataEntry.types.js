@@ -15,7 +15,7 @@ export type OwnProps = $ReadOnly<{|
   selectedScopeId: string,
   dataEntryId: string,
   teiId?: ?string,
-  trackedEntityInstanceAttributes?: Array<InputAttribute>
+  trackedEntityInstanceAttributes?: Array<InputAttribute>,
 |}>;
 
 type ContainerProps = {|

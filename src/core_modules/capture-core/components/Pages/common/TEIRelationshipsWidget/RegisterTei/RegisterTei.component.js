@@ -58,6 +58,7 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
 const RegisterTeiPlain = ({
     dataEntryId,
     onLink,
+    onCancel,
     onSaveWithoutEnrollment,
     onSaveWithEnrollment,
     onGetUnsavedAttributeValues,
@@ -76,9 +77,9 @@ const RegisterTeiPlain = ({
         />
     ), [onLink]);
 
-    const renderDuplicatesDialogActions = useCallback((onCancel, onSaveArgument) => (
+    const renderDuplicatesDialogActions = useCallback((callbackOnCancel, onSaveArgument) => (
         <DialogButtons
-            onCancel={onCancel}
+            onCancel={callbackOnCancel}
             onSave={onSaveArgument}
             trackedEntityName={trackedEntityName}
         />
@@ -102,6 +103,7 @@ const RegisterTeiPlain = ({
                 />
                 <RegisterTeiDataEntry
                     onLink={onLink}
+                    onCancel={onCancel}
                     onSaveWithoutEnrollment={onSaveWithoutEnrollment}
                     onSaveWithEnrollment={onSaveWithEnrollment}
                     trackedEntityTypeId={trackedEntityTypeId}

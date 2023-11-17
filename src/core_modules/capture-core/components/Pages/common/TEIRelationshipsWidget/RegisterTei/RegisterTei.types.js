@@ -3,6 +3,7 @@ export type SharedProps = {|
     onLink: (teiId: string, values: Object) => void,
     onGetUnsavedAttributeValues?: ?Function,
     trackedEntityTypeId: string,
+    onCancel: () => void,
 |};
 
 export type ContainerProps = {|

@@ -22,6 +22,7 @@ export type Props = {|
     theme: Theme,
     trackedEntityTypeId: string,
     onSave: TeiPayload => void,
+    onCancel: () => void,
     teiRegistrationMetadata?: TeiRegistration,
     duplicatesReviewPageSize: number,
     renderDuplicatesCardActions?: RenderCustomCardActions,
