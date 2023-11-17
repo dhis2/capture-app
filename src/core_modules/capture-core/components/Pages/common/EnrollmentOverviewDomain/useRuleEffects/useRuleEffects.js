@@ -33,7 +33,6 @@ const useEventsData = (enrollment, program) => {
         programId: event.program,
         programStageId: event.programStage,
         orgUnitId: event.orgUnit,
-        orgUnitName: event.orgUnitName,
         trackedEntityInstanceId: event.trackedEntityInstance,
         enrollmentId: event.enrollment,
         enrollmentStatus: event.enrollmentStatus,

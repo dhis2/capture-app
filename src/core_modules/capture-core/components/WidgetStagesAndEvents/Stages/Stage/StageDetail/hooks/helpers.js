@@ -8,6 +8,7 @@ import type { StageDataElement } from '../../../../types/common.types';
 import { Comments } from '../Comments.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
+import { getCachedOrgUnitName } from '../../../../../../metadataRetrieval/orgUnitName';
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
@@ -57,6 +58,8 @@ const convertStatusForView = (event: ApiEnrollmentEvent) => {
     };
 };
 
+const convertOrgUnitForView = (event: ApiEnrollmentEvent) => getCachedOrgUnitName(event.orgUnit);
+
 const convertCommentForView = (event: ApiEnrollmentEvent) => <Comments event={event} />;
 
 const groupRecordsByType = async (
@@ -92,6 +95,7 @@ export {
     isEventOverdue,
     getEventStatus,
     convertStatusForView,
+    convertOrgUnitForView,
     convertCommentForView,
     getValueByKeyFromEvent,
     groupRecordsByType,
