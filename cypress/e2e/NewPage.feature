@@ -94,6 +94,13 @@ Feature: User creates a new entries from the registration page
     Then you are navigated to the Antenatal care visit registration page
     Then program and organisation unit is still selected in top bar
 
+  Scenario: Clicking the cancel button should navigate with correct context
+    Given you are in the main page with no selections made
+    And you select org unit
+    And you select Child Programme
+    When you click the cancel button
+    Then you are navigated to the working list with programId IpHINAT79UW
+
 
 ### New event in Antenatal care visit
   Scenario: New event in Antenatal care visit > Submitting the form with empty visit date throws validation error
