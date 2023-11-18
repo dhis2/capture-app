@@ -502,7 +502,7 @@ msgid "Update"
 msgstr "Янгилаш"
 
 msgid "Reset filter"
-msgstr ""
+msgstr "Фильтрни қайта созлаш"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} дан {{toDate}} га"
