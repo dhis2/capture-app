@@ -124,7 +124,7 @@ export class SearchGroupFactory {
     async _buildSection(searchGroupAttributes: Array<SearchAttribute>) {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
-            o.showContainer = false;
+            o.showContainer = true;
         });
 
         // $FlowFixMe
