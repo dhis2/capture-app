@@ -512,7 +512,7 @@ msgid "Type to filter options"
 msgstr ""
 
 msgid "No match found"
-msgstr ""
+msgstr "Ҳеч нима топилмади"
 
 msgid "Search"
 msgstr "Излаш"
@@ -538,6 +538,9 @@ msgstr "қидириш учун ёзишни бошланг"
 msgid "suggestions could not be retrieved"
 msgstr "таклифлар қабул қилинмади"
 
+msgid "No results found"
+msgstr "Ҳеч қандай натижа топилмади"
+
 msgid "No items to display"
 msgstr "Кўрсатиладиган ахборот йўқ"
 
@@ -554,7 +557,7 @@ msgid "Update"
 msgstr "Янгилаш"
 
 msgid "Reset filter"
-msgstr ""
+msgstr "Фильтрни қайта созлаш"
 
 msgid "Remove filter"
 msgstr "Фильтрни олиб ташлаш"
@@ -966,9 +969,6 @@ msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Бўлиши мумкин бўлган нусхалар топилди"
-
-msgid "No results found"
-msgstr "Ҳеч қандай натижа топилмади"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "Эҳтимолий нусхаларни юклашда хатолик юз берди"
