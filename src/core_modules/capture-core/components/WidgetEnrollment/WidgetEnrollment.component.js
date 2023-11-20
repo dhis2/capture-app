@@ -4,7 +4,6 @@ import moment from 'moment';
 import {
     IconClock16,
     IconDimensionOrgUnit16,
-    IconLocation16,
     colors,
     Tag,
     spacersNum,
@@ -16,12 +15,11 @@ import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
-import { convertValue as convertValueClientToView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
 import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
 import { Actions } from './Actions';
+import { MiniMap } from './MiniMap';
 
 const styles = {
     enrollment: {
@@ -152,13 +150,14 @@ export const WidgetEnrollmentPlain = ({
 
                         {enrollment.geometry && (
                             <div className={classes.row}>
-                                <span className={classes.icon} data-test="widget-enrollment-icon-clock">
-                                    <IconLocation16 color={colors.grey600} />
-                                </span>
-                                {convertValueClientToView(
-                                    convertValueServerToClient(enrollment.geometry.coordinates, geometryType),
-                                    geometryType,
-                                )}
+                                <MiniMap
+                                    coordinates={enrollment.geometry.coordinates}
+                                    geometryType={geometryType}
+                                    enrollment={enrollment}
+                                    refetchEnrollment={refetchEnrollment}
+                                    refetchTEI={refetchTEI}
+                                    onError={onError}
+                                />
                             </div>
                         )}
                         <Actions
