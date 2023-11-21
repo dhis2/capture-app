@@ -11,18 +11,20 @@ import { convertValue as convertClientToList } from '../../../../../../converter
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
 import {
     convertStatusForView,
+    convertOrgUnitForView,
     convertCommentForView,
     getValueByKeyFromEvent,
     groupRecordsByType,
 } from './helpers';
 import { SORT_DIRECTION, MULIT_TEXT_WITH_NO_OPTIONS_SET } from './constants';
 import { isNotValidOptionSet } from '../../../../../../utils/isNotValidOptionSet';
+import { useOrgUnitNames } from '../../../../../../metadataRetrieval/orgUnitName';
 
 const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'comments' }];
 const basedFieldTypes = [
     { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
-    { type: dataElementTypes.TEXT },
+    { type: dataElementTypes.TEXT, resolveValue: convertOrgUnitForView },
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.UNKNOWN, resolveValue: convertCommentForView },
 ];
@@ -71,6 +73,8 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
     const [loading, setLoading] = useState(true);
     const dataEngine = useDataEngine();
     const { baseUrl, apiVersion } = useConfig();
+    const orgUnits = useMemo(() => events.map(({ orgUnit }) => orgUnit), [events]);
+    const { orgUnitNames, error: orgUnitNamesError } = useOrgUnitNames(orgUnits);
     const computeData = useCallback(async () => {
         try {
             setLoading(true);
@@ -103,8 +107,12 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
     }, [events, dataElements, dataEngine, baseUrl, apiVersion]);
 
     useEffect(() => {
-        computeData();
-    }, [computeData]);
+        if (orgUnitNames) {
+            computeData();
+        } else if (orgUnitNamesError) {
+            setError(orgUnitNamesError);
+        }
+    }, [orgUnitNames, computeData, setError, orgUnitNamesError]);
 
     return { value, error, loading };
 };

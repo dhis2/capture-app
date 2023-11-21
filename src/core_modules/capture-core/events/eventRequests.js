@@ -17,7 +17,6 @@ type ApiTEIEvent = {
     program: string,
     programStage: string,
     orgUnit: string,
-    orgUnitName: string,
     trackedEntityInstance?: string,
     enrollment?: string,
     enrollmentStatus?: string,

@@ -45,7 +45,6 @@ declare type CaptureClientEvent = {
     programId: string,
     programStageId: string,
     orgUnitId: string,
-    orgUnitName: string,
     trackedEntityInstanceId?: string,
     enrollmentId?: string,
     enrollmentStatus?: string,

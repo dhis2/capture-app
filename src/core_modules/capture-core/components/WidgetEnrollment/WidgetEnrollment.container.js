@@ -3,7 +3,7 @@ import React from 'react';
 import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import { WidgetEnrollment as WidgetEnrollmentComponent } from './WidgetEnrollment.component';
-import { useOrganizationUnit } from './hooks/useOrganizationUnit';
+import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
@@ -42,7 +42,7 @@ export const WidgetEnrollment = ({
         enrollments,
         refetch: refetchTEI,
     } = useTrackedEntityInstances(teiId, programId);
-    const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
+    const { error: errorOrgUnit, displayName } = useOrgUnitName(typeof ownerOrgUnit === 'string' ? ownerOrgUnit : undefined);
     const { error: errorLocale, locale } = useUserLocale();
     const canAddNew = enrollments
         .filter(item => item.program === programId)

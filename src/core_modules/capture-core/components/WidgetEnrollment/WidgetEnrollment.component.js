@@ -4,7 +4,6 @@ import moment from 'moment';
 import {
     IconClock16,
     IconDimensionOrgUnit16,
-    IconLocation16,
     colors,
     Tag,
     spacersNum,
@@ -16,11 +15,11 @@ import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
-import { convertValue as convertValueClientToView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
+import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
 import { Actions } from './Actions';
+import { MiniMap } from './MiniMap';
 
 const styles = {
     enrollment: {
@@ -68,6 +67,7 @@ export const WidgetEnrollmentPlain = ({
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const geometryType = getGeometryType(enrollment?.geometry?.type);
+    const { displayName: orgUnitName } = useOrgUnitName(enrollment.orgUnit);
 
     return (
         <div data-test="widget-enrollment">
@@ -84,7 +84,7 @@ export const WidgetEnrollmentPlain = ({
                 )}
                 {loading && <LoadingMaskElementCenter />}
                 {!initError && !loading && (
-                    <div className={classes.enrollment}>
+                    <div className={classes.enrollment} data-test="widget-enrollment-contents">
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag className={classes.followup} negative>
@@ -125,7 +125,7 @@ export const WidgetEnrollmentPlain = ({
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
                             {i18n.t('Started at {{orgUnitName}}', {
-                                orgUnitName: enrollment.orgUnitName,
+                                orgUnitName,
                                 interpolation: { escapeValue: false },
                             })}
                         </div>
@@ -150,13 +150,14 @@ export const WidgetEnrollmentPlain = ({
 
                         {enrollment.geometry && (
                             <div className={classes.row}>
-                                <span className={classes.icon} data-test="widget-enrollment-icon-clock">
-                                    <IconLocation16 color={colors.grey600} />
-                                </span>
-                                {convertValueClientToView(
-                                    convertValueServerToClient(enrollment.geometry.coordinates, geometryType),
-                                    geometryType,
-                                )}
+                                <MiniMap
+                                    coordinates={enrollment.geometry.coordinates}
+                                    geometryType={geometryType}
+                                    enrollment={enrollment}
+                                    refetchEnrollment={refetchEnrollment}
+                                    refetchTEI={refetchTEI}
+                                    onError={onError}
+                                />
                             </div>
                         )}
                         <Actions

@@ -10,7 +10,7 @@ export const useProgram = (programId: string) => {
                     resource: `programs/${programId}`,
                     params: {
                         fields: [
-                            'displayIncidentDate,displayIncidentDateLabel,displayEnrollmentDateLabel,onlyEnrollOnce,trackedEntityType[displayName],programStages[autoGenerateEvent],access',
+                            'displayIncidentDate,displayIncidentDateLabel,displayEnrollmentDateLabel,onlyEnrollOnce,trackedEntityType[displayName],programStages[autoGenerateEvent],access,featureType',
                         ],
                     },
                 },
@@ -18,5 +18,5 @@ export const useProgram = (programId: string) => {
             [programId],
         ),
     );
-    return { error, program: !loading && data?.program };
+    return { error, loading, program: data?.program };
 };
