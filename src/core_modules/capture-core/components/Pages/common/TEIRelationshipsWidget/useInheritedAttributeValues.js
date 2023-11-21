@@ -14,11 +14,12 @@ type Return = {
 };
 export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Props): Return => {
     const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
-    const inheritedAttributeIds = new Set<string>(
-        trackedEntityType.attributes
-            .filter(attribute => attribute.inherit)
-            .map(attribute => attribute.id),
-    );
+    const inheritedAttributeIds = trackedEntityType.attributes?.reduce((acc, attribute) => {
+        if (attribute.inherit) {
+            acc.add(attribute.id);
+        }
+        return acc;
+    }, new Set());
 
     const { data, isLoading } = useApiDataQuery(
         ['inheritedAttributeValues', teiId],
