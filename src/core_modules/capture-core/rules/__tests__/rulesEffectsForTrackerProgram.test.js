@@ -835,6 +835,8 @@ test('expressions with d2Functions in tracker program', () => {
             id: 'CUbZcLm9LyN',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
+            hadValue: true,
+            name: undefined,
         },
         {
             content: undefined,
