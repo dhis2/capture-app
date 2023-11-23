@@ -43,7 +43,7 @@ msgstr ""
 "mějte však na paměti, že se tím zavřou další verze."
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "Zobrazit {{programName}} ovládací panel"
 
 msgid "View dashboard"
 msgstr "Zobrazit ovládací panel"
@@ -80,7 +80,7 @@ msgstr "chyba"
 
 msgid ""
 "Plugins are not yet available - Please contact your system administrator"
-msgstr ""
+msgstr "Pluginy zatím nejsou k dispozici – obraťte se na správce systému"
 
 msgid "This value is validating"
 msgstr "Tato hodnota se ověřuje"
@@ -161,13 +161,13 @@ msgid "Complete event"
 msgstr "Dokončit událost"
 
 msgid "{{ stageName }} - Basic info"
-msgstr ""
+msgstr "{{ stageName }} - Základní informace"
 
 msgid "{{ stageName }} - Status"
-msgstr ""
+msgstr "{{ stageName }} - Stav"
 
 msgid "Please select {{categoryName}}"
-msgstr ""
+msgstr "Vyberte prosím {{categoryName}}"
 
 msgid "A future date is not allowed"
 msgstr "Budoucí datum není povoleno"
@@ -185,10 +185,10 @@ msgid "Metadata error. see log for details"
 msgstr "Chyba metadat. viz log pro podrobnosti"
 
 msgid "{{ stageName }} - Details"
-msgstr ""
+msgstr "{{ stageName }} - Podrobnosti"
 
 msgid "{{ stageName }} - {{ sectionName }}"
-msgstr ""
+msgstr "{{ stageName }} - {{ sectionName }}"
 
 msgid "Assigned user"
 msgstr "Přiřazený uživatel"
@@ -395,6 +395,8 @@ msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
 msgstr ""
+"Tato událost obsahuje neuložené změny. Opuštěním této stránky bez uložení "
+"tyto změny ztratíte. Opravdu chcete zahodit neuložené změny?"
 
 msgid "No events to display"
 msgstr "Žádné události k zobrazení"
@@ -534,6 +536,9 @@ msgstr "začněte psát pro vyhledávání"
 msgid "suggestions could not be retrieved"
 msgstr "návrhy nelze načíst"
 
+msgid "No results found"
+msgstr "Nenalezeny žádné výsledky"
+
 msgid "No items to display"
 msgstr "Žádné položky k zobrazení"
 
@@ -607,13 +612,13 @@ msgid "Write comment"
 msgstr "Napsat komentář"
 
 msgid "was blanked out and hidden by your last action"
-msgstr ""
+msgstr "byla vymazána a skryta vaší poslední akcí"
 
 msgid "Notice"
-msgstr ""
+msgstr "Oznámení"
 
 msgid "Close the notice"
-msgstr ""
+msgstr "Zavřít oznámení"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "Použít nový ovládací panel zápisu pro {{programName}}"
@@ -629,18 +634,29 @@ msgid ""
 "functionality in Capture is ongoing and will be added in upcoming app "
 "releases."
 msgstr ""
+"Kliknutím na přihlášení níže začnete používat nový ovládací panel registrace"
+" v aplikaci Capture pro tento program Tracker. V současné době existuje "
+"určitá funkce z aplikace Tracker Capture, která ještě nebyla přidána, včetně"
+" funkcí vztahů a doporučení. Práce na zahrnutí této funkce sledování do "
+"Capture pokračují a budou přidány v nadcházejících vydáních aplikace."
 
 msgid ""
 "The core team appreciates any feedback on this new functionality which is "
 "currently being beta tested, please report any issues and feedback in the "
 "DHIS2 JIRA project."
 msgstr ""
+"Základní tým oceňuje jakoukoli zpětnou vazbu k této nové funkcionalitě, "
+"která je v současné době beta testována, nahlaste prosím jakékoli problémy a"
+" zpětnou vazbu v projektu DHIS2 JIRA."
 
 msgid ""
 "Click the button below to opt-in to the new enrollment dashboard "
 "functionality in the Capture app (beta) for this Tracker program for all "
 "users."
 msgstr ""
+"Kliknutím na tlačítko níže se přihlásíte k nové funkci ovládacího panelu "
+"registrace v aplikaci Capture (beta) pro tento program Tracker pro všechny "
+"uživatele."
 
 msgid "Yes, opt in"
 msgstr "Ano, přihlásit se"
@@ -662,6 +678,7 @@ msgstr ""
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
+"Při načítání registrací došlo k chybě. Zadejte prosím platnou adresu URL."
 
 msgid "Enrollment Dashboard"
 msgstr "Ovládací panel zápisu"
@@ -704,19 +721,19 @@ msgstr ""
 "vyberte všechny kategorie."
 
 msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
+msgstr "Neplatné id zápisu {{enrollmentId}}."
 
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Chcete-li zobrazit ovládací panel, vyberte zápis."
 
 msgid "There are no active enrollments."
-msgstr ""
+msgstr "Nejsou žádné aktivní zápisy."
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "Přidejte nový zápis pro {{teiDisplayName}} v tomto programu."
 
 msgid "No access to program owner."
-msgstr ""
+msgstr "Žádný přístup k vlastníkovi programu."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} není v tomto programu zapsán."
@@ -783,7 +800,7 @@ msgid "Refer"
 msgstr "Odkazovat"
 
 msgid "You can't add any more {{ programStageName }} events"
-msgstr ""
+msgstr "Nemůžete přidat žádné další události {{ programStageName }}"
 
 msgid "Cancel without saving"
 msgstr "Zrušit bez uložení"
@@ -847,7 +864,7 @@ msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nový zápis do programu{{escape}} {{programName}}"
 
 msgid "Save {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Uložit {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Uložit {{trackedEntityName}}"
@@ -956,13 +973,10 @@ msgid "Search by attributes"
 msgstr "Hledání podle atributů"
 
 msgid "Could not retrieve metadata. Please try again later."
-msgstr ""
+msgstr "Nepodařilo se načíst metadata. Prosím zkuste to znovu později."
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
-
-msgid "No results found"
-msgstr "Nenalezeny žádné výsledky"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "Při načítání možných duplikátů došlo k chybě"
@@ -977,28 +991,28 @@ msgid "Add relationship"
 msgstr "Přidat vztah"
 
 msgid "No results found for "
-msgstr ""
+msgstr "Pro dotaz nebyly nalezeny žádné výsledky"
 
 msgid "Registering unit"
 msgstr "Registrační jednotka"
 
 msgid "Choose a registering unit"
-msgstr ""
+msgstr "Vyberte registrační jednotku"
 
 msgid "Clear selection"
-msgstr ""
+msgstr "Vymazat výběr"
 
 msgid "No programs available."
 msgstr "Nejsou k dispozici žádné programy."
 
 msgid "Search for a program"
-msgstr ""
+msgstr "Vyhledat program"
 
 msgid "Some programs are being filtered by the chosen registering unit"
-msgstr ""
+msgstr "Některé programy jsou filtrovány vybranou registrační jednotkou"
 
 msgid "Show all programs"
-msgstr ""
+msgstr "Zobrazit všechny programy"
 
 msgid "Choose a program"
 msgstr "Vyberte program"
@@ -1074,7 +1088,7 @@ msgid "Cannot search in all programs"
 msgstr "Nelze vyhledávat ve všech programech"
 
 msgid "Missing search criteria"
-msgstr ""
+msgstr "Chybí kritéria vyhledávání"
 
 msgid "Results found"
 msgstr "Nalezeny výsledky"
@@ -1113,20 +1127,22 @@ msgid "This program is protected"
 msgstr "Tento program je chráněn"
 
 msgid "Reason to check for enrollments"
-msgstr ""
+msgstr "Důvod ke kontrole zápisů"
 
 msgid ""
 "Describe the reason you are checking for enrollments in this protected "
 "program"
-msgstr ""
+msgstr "Popište důvod, proč kontrolujete zápisy v tomto chráněném programu"
 
 msgid "Check for enrollments"
-msgstr ""
+msgstr "Zkontrolujte zápisy"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
 msgstr ""
+"Pro kontrolu zápisů v tomto chráněném programu musíte uvést důvod. Veškerá "
+"aktivita bude zaznamenána."
 
 msgid "Save comment"
 msgstr "Uložit komentář"
@@ -1173,6 +1189,7 @@ msgstr "Označit pro další sledování"
 
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
+"Stávající data pro automaticky generované události nebudou aktualizována."
 
 msgid "Enrollment date"
 msgstr "Datum zápisu"
@@ -1336,7 +1353,7 @@ msgid "New {{ eventName }} event"
 msgstr "Nová událost {{ eventName }}"
 
 msgid "To open this event, please wait until saving is complete"
-msgstr ""
+msgstr "Chcete-li otevřít tuto událost, počkejte na dokončení ukládání"
 
 msgid "Show {{ rest }} more"
 msgstr "Zobrazit {{rest}} více"
@@ -1366,38 +1383,38 @@ msgid "Stages and Events"
 msgstr "Fáze a události"
 
 msgid "New TEI Relationship"
-msgstr ""
+msgstr "Nový vztah TEI"
 
 msgid "Missing implementation step"
-msgstr ""
+msgstr "Chybí krok implementace"
 
 msgid "Go back without saving relationship"
-msgstr ""
+msgstr "Vraťte se zpět bez uložení vztahu"
 
 msgid "New Relationship"
-msgstr ""
+msgstr "Nový vztah"
 
 msgid "Link to an existing {{tetName}}"
-msgstr ""
+msgstr "Odkaz na existující {{tetName}}"
 
 msgid "An error occurred while adding the relationship"
-msgstr ""
+msgstr "Při přidávání vztahu došlo k chybě"
 
 msgid ""
 "Something went wrong while loading relationships. Please try again later."
-msgstr ""
+msgstr "Při načítání vztahů se něco pokazilo. Prosím zkuste to znovu později."
 
 msgid "{{trackedEntityTypeName}} relationships"
-msgstr ""
+msgstr "{{trackedEntityTypeName}} vztahy"
 
 msgid "To open this relationship, please wait until saving is complete"
-msgstr ""
+msgstr "Chcete-li otevřít tento vztah, počkejte na dokončení ukládání"
 
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 msgid "Created date"
-msgstr ""
+msgstr "Datum vytvoření"
 
 msgid "Program stage name"
 msgstr "Název fáze programu"
@@ -1436,19 +1453,19 @@ msgid "Choose a program stage to filter by {{label}}"
 msgstr "Vyberte fázi programu, kterou chcete filtrovat podle {{label}}"
 
 msgid "Active enrollments"
-msgstr ""
+msgstr "Aktivní zápisy"
 
 msgid "Completed enrollments"
-msgstr ""
+msgstr "Dokončené zápisy"
 
 msgid "Cancelled enrollments"
-msgstr ""
+msgstr "Zrušené zápisy"
 
 msgid "Working list could not be updated"
 msgstr "Pracovní seznam nelze aktualizovat"
 
 msgid "an error occurred loading the working lists"
-msgstr ""
+msgstr "došlo k chybě při načítání pracovních seznamů"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "došlo k chybě při načítání seznamů instancí trasovaných entit"
@@ -1583,7 +1600,7 @@ msgid "Set area"
 msgstr "Nastavit oblast"
 
 msgid "Area on map saved"
-msgstr ""
+msgstr "Oblast na mapě byla uložena"
 
 msgid "Compatibility mode"
 msgstr "Režim kompatibility"
