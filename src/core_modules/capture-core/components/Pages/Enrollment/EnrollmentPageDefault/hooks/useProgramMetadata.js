@@ -74,7 +74,6 @@ export const useProgramMetadata = (programId: string) => {
                 programStageDataElements: stage.programStageDataElements
                     .map((programStageDataElement) => {
                         const dataElement = dataElementDictionary[programStageDataElement.dataElementId];
-                        const optionSet = dataElement.optionSetValue ? optionSetDictionary[dataElement.optionSet.id] : {};
                         return {
                             displayInReports: programStageDataElement.displayInReports,
                             dataElement: {
@@ -82,7 +81,7 @@ export const useProgramMetadata = (programId: string) => {
                                 valueType: dataElement.valueType,
                                 displayName: dataElement.displayName,
                                 displayFormName: dataElement.displayFormName,
-                                ...optionSet,
+                                optionSet: dataElement.optionSetValue ? optionSetDictionary[dataElement.optionSet.id] : {},
                             },
                         };
                     }),
