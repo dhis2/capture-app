@@ -213,7 +213,7 @@ msgid "Finish"
 msgstr "Тугатиш"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "Тугалланмасдан сақлаш"
 
 msgid "Complete"
 msgstr "Тўлдириш"
@@ -617,21 +617,23 @@ msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "\"{{enrollmentId}}\" идентификатори билан қайд қилиш имконсиз"
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "Қайд этиш панели"
 
 msgid "No indicator output for this enrollment yet"
-msgstr ""
+msgstr "Ушбу қайд этишда индикатор ахбороти мавжуд эмас"
 
 msgid "No feedback for this enrollment yet"
-msgstr ""
+msgstr "Ушбу қайд этишда қайта алоқа ахбороти мавжуд эмас"
 
 msgid "Program stage not found"
-msgstr ""
+msgstr "Дастур босқичлари топилмади"
 
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
 msgstr ""
+" {{teiDisplayName}} учун янги рўйхатга ёки мавжуд рўйхатга олишларини кўриш "
+"учун дастурни танланг."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -639,7 +641,7 @@ msgstr ""
 "{{programName}} тоифаларга эга. Панелни кўриш учун барча тоифаларни танланг."
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr ""
+msgstr "бошқарув панелини кўриш учун рўйхатдан ўтишни танланг."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} ушбу дастурда қайд этилмаган."
@@ -668,7 +670,7 @@ msgid "View working list in this program."
 msgstr "Ушбу дастурдаги ишчи рўйхатни кўриб чиқиш"
 
 msgid "Enrollment{{escape}} New Event"
-msgstr ""
+msgstr "Рўйхатга олишда {{escape}} Янги Ҳодиса/Ҳолат"
 
 msgid "There was an error loading the page"
 msgstr ""
