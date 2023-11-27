@@ -95,7 +95,7 @@ Feature: User creates a new entries from the registration page
     Then program and organisation unit is still selected in top bar
 
   Scenario: Clicking the cancel button should navigate with correct context
-    Given you are in the main page with no selections made
+    Given you are on the default registration page
     And you select org unit
     And you select Child Programme
     When you click the cancel button
