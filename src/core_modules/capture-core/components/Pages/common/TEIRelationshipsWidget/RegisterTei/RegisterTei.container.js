@@ -18,12 +18,10 @@ export const RegisterTei = ({
     const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
     const selectedScopeId = suggestedProgramId || trackedEntityTypeId;
     const { trackedEntityName } = useScopeInfo(selectedScopeId);
-    const {
-        inheritedAttributes,
-        isLoading: isLoadingAttributes,
-    } = useInheritedAttributeValues({
+    const { inheritedAttributes, isLoading: isLoadingAttributes } = useInheritedAttributeValues({
         teiId,
         trackedEntityTypeId,
+        programId: suggestedProgramId,
     });
 
     if (isLoadingAttributes) {
