@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Chip } from '@dhis2/ui';
+import { Chip, Tooltip } from '@dhis2/ui';
 import { TemplateSelectorChipContent } from './TemplateSelectorChipContent.component';
 import type { WorkingListTemplate } from './workingListsBase.types';
 
@@ -27,16 +27,23 @@ export const TemplateSelectorChip = (props: Props) => {
     ]);
 
     return (
-        <Chip
-            dataTest="workinglist-template-selector-chip"
-            selected={id === currentTemplateId}
-            onClick={selectTemplateHandler}
+        <Tooltip
+            content={name}
+            placement={'top'}
+            openDelay={800}
         >
-            <TemplateSelectorChipContent
-                {...passOnProps}
-                text={name}
-                isSelectedTemplate={id === currentTemplateId}
-            />
-        </Chip>
+            <Chip
+                dataTest="workinglist-template-selector-chip"
+                tabIndex="0"
+                selected={id === currentTemplateId}
+                onClick={selectTemplateHandler}
+            >
+                <TemplateSelectorChipContent
+                    {...passOnProps}
+                    text={name}
+                    isSelectedTemplate={id === currentTemplateId}
+                />
+            </Chip>
+        </Tooltip>
     );
 };
