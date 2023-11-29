@@ -1,3 +1,10 @@
+## [100.45.2](https://github.com/dhis2/capture-app/compare/v100.45.1...v100.45.2) (2023-11-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15693] Rules not triggered on program update ([#3472](https://github.com/dhis2/capture-app/issues/3472)) ([2dbca1e](https://github.com/dhis2/capture-app/commit/2dbca1efe36ed0e166d4aea803505c30c79cb35d))
+
 ## [100.45.1](https://github.com/dhis2/capture-app/compare/v100.45.0...v100.45.1) (2023-11-26)
 
 
