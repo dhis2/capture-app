@@ -1,24 +1,8 @@
 // @flow
-import { useDataMutation } from '@dhis2/app-runtime';
 import React from 'react';
 import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';
-import { processErrorReports } from '../processErrorReports';
-
-const enrollmentUpdate = {
-    resource: 'tracker?async=false&importStrategy=UPDATE',
-    type: 'create',
-    data: enrollment => ({
-        enrollments: [enrollment],
-    }),
-};
-const enrollmentDelete = {
-    resource: 'tracker?async=false&importStrategy=DELETE',
-    type: 'create',
-    data: enrollment => ({
-        enrollments: [enrollment],
-    }),
-};
+import { useUpdateEnrollment, useDeleteEnrollment } from '../dataMutation/dataMutation';
 
 export const Actions = ({
     enrollment = {},
@@ -29,31 +13,8 @@ export const Actions = ({
     onSuccess,
     ...passOnProps
 }: Props) => {
-    const [updateMutation, { loading: updateLoading }] = useDataMutation(
-        enrollmentUpdate,
-        {
-            onComplete: () => {
-                refetchEnrollment();
-                refetchTEI();
-                onSuccess && onSuccess();
-            },
-            onError: (e) => {
-                onError && onError(processErrorReports(e));
-            },
-        },
-    );
-    const [deleteMutation, { loading: deleteLoading }] = useDataMutation(
-        enrollmentDelete,
-        {
-            onComplete: () => {
-                onDelete();
-                onSuccess && onSuccess();
-            },
-            onError: (e) => {
-                onError && onError(processErrorReports(e));
-            },
-        },
-    );
+    const { updateMutation, updateLoading } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError);
+    const { deleteMutation, deleteLoading } = useDeleteEnrollment(onDelete, onError);
 
     return (
         <ActionsComponent

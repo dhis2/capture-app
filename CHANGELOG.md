@@ -1,3 +1,59 @@
+## [100.45.2](https://github.com/dhis2/capture-app/compare/v100.45.1...v100.45.2) (2023-11-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15693] Rules not triggered on program update ([#3472](https://github.com/dhis2/capture-app/issues/3472)) ([2dbca1e](https://github.com/dhis2/capture-app/commit/2dbca1efe36ed0e166d4aea803505c30c79cb35d))
+
+## [100.45.1](https://github.com/dhis2/capture-app/compare/v100.45.0...v100.45.1) (2023-11-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8f28703](https://github.com/dhis2/capture-app/commit/8f28703ae8b56cfee283ec1ce0ec2b13dfd91e30))
+
+# [100.45.0](https://github.com/dhis2/capture-app/compare/v100.44.7...v100.45.0) (2023-11-20)
+
+
+### Features
+
+* [DHIS2-13237] Enrollment coordinates in enrollment widget ([#3141](https://github.com/dhis2/capture-app/issues/3141)) ([2f2e52c](https://github.com/dhis2/capture-app/commit/2f2e52c3103e9cb48e77766701a9a5fc9af6ad48))
+
+## [100.44.7](https://github.com/dhis2/capture-app/compare/v100.44.6...v100.44.7) (2023-11-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([46fb227](https://github.com/dhis2/capture-app/commit/46fb2270b21c4dec57f4447232608d8dd3cfb9af))
+
+## [100.44.6](https://github.com/dhis2/capture-app/compare/v100.44.5...v100.44.6) (2023-11-16)
+
+
+### Bug Fixes
+
+* [DHIS2-15967] allow enrolling TEIs with mandatory TET attributes ([#3455](https://github.com/dhis2/capture-app/issues/3455)) ([cc87a8a](https://github.com/dhis2/capture-app/commit/cc87a8a993001d5b4cea8493a84a6798f481cc5a))
+
+## [100.44.5](https://github.com/dhis2/capture-app/compare/v100.44.4...v100.44.5) (2023-11-10)
+
+
+### Bug Fixes
+
+* [TECH-1627] use only valid combinations of orgUnit and ouMode ([#3405](https://github.com/dhis2/capture-app/issues/3405)) ([20d05f1](https://github.com/dhis2/capture-app/commit/20d05f1602840e8ac1241ee305b796d58f616802))
+
+## [100.44.4](https://github.com/dhis2/capture-app/compare/v100.44.3...v100.44.4) (2023-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-15383] align mandatory behaviour for all value types ([#3413](https://github.com/dhis2/capture-app/issues/3413)) ([b0eddc7](https://github.com/dhis2/capture-app/commit/b0eddc76b674ceb20df0eb5bcd0672a3c42d3954))
+
+## [100.44.3](https://github.com/dhis2/capture-app/compare/v100.44.2...v100.44.3) (2023-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-15814] missing orgunit names ([#3449](https://github.com/dhis2/capture-app/issues/3449)) ([488f8c0](https://github.com/dhis2/capture-app/commit/488f8c090680ad47ed693214478a7ef2919b82e7))
+
 ## [100.44.2](https://github.com/dhis2/capture-app/compare/v100.44.1...v100.44.2) (2023-11-05)
 
 
