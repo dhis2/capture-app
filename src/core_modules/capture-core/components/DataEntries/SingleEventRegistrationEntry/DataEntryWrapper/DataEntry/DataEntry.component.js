@@ -18,7 +18,6 @@ import {
     withSaveHandler,
     placements,
     withCleanUp,
-    withCenterPoint,
 } from '../../../../DataEntry';
 import {
     withInternalChangeHandler,
@@ -232,7 +231,7 @@ const buildGeometrySettingsFn = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-                center: props.center,
+                orgUnit: props.orgUnit,
             });
         }
 
@@ -243,7 +242,7 @@ const buildGeometrySettingsFn = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
-            center: props.center,
+            orgUnit: props.orgUnit,
         });
     },
     getPropName: () => 'geometry',
@@ -413,7 +412,7 @@ const CleanUpHOC = withCleanUp()(withFilterProps(dataEntryFilterProps)(DataEntry
 const AssigneeField = withDataEntryFieldIfApplicable(buildAssigneeSettingsFn())(CleanUpHOC);
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AssigneeField);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
-const GeometryField = withCenterPoint()(withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField));
+const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const FeedbackOutput = withFeedbackOutput()(ReportDateField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);

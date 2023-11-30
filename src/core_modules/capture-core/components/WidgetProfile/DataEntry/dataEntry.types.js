@@ -17,6 +17,7 @@ export type PlainProps = {|
     errorsMessages: Array<{ id: string, message: string }>,
     warningsMessages: Array<{ id: string, message: string }>,
     center?: ?Array<number>,
+    orgUnit: { id: string },
 |};
 
 export type Props = {|

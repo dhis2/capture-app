@@ -12,7 +12,6 @@ import { type RenderFoundation, type ProgramStage } from '../../../metaData';
 import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
 import {
     placements,
-    withCenterPoint,
     withCleanUp,
 } from '../../DataEntry';
 import {
@@ -224,7 +223,7 @@ const buildGeometrySettingsFn = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-                center: props.center,
+                orgUnit: props.orgUnit,
             });
         }
 
@@ -235,7 +234,7 @@ const buildGeometrySettingsFn = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
-            center: props.center,
+            orgUnit: props.orgUnit,
         });
     },
     getPropName: () => 'geometry',
@@ -360,7 +359,6 @@ const WrappedDataEntry = compose(
     withDataEntryFields(getCategoryOptionsSettingsFn()),
     withDataEntryField(buildReportDateSettingsFn()),
     withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
-    withCenterPoint(),
     withDataEntryField(buildNotesSettingsFn()),
     withDataEntryFieldIfApplicable(buildAssigneeSettingsFn()),
     withCleanUp(),

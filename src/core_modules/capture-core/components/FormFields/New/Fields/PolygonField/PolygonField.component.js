@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { PolygonField as UIPolygonField } from 'capture-ui';
 import { Dialog, DialogTitle } from '@material-ui/core';
 import { typeof orientations } from '../../../New';
+import { withCenterPoint } from '../../HOC';
 
 const getStyles = () => ({
     dialogPaper: {
@@ -56,4 +57,4 @@ class PolygonFieldPlain extends React.Component<Props> {
     }
 }
 
-export const PolygonField = withStyles(getStyles)(PolygonFieldPlain);
+export const PolygonField = withStyles(getStyles)(withCenterPoint()(PolygonFieldPlain));

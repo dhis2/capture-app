@@ -19,7 +19,6 @@ import {
     placements,
     withCleanUp,
     withBrowserBackWarning,
-    withCenterPoint,
 } from '../../../components/DataEntry';
 import {
     withInternalChangeHandler,
@@ -253,7 +252,7 @@ const buildGeometrySettingsFn = () => ({
                 label: i18n.t('Area'),
                 dialogLabel: i18n.t('Area'),
                 required: false,
-                center: props.center,
+                orgUnit: props.orgUnit,
             });
         }
         return createComponentProps(props, {
@@ -261,7 +260,7 @@ const buildGeometrySettingsFn = () => ({
             label: i18n.t('Coordinate'),
             dialogLabel: i18n.t('Coordinate'),
             required: false,
-            center: props.center,
+            orgUnit: props.orgUnit,
         });
     },
     getPropName: () => 'geometry',
@@ -366,7 +365,7 @@ const saveHandlerConfig = {
 
 const AOCFieldBuilderHOC = withAOCFieldBuilder(AOCSettings)(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
 const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
-const GeometryField = withCenterPoint()(withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC));
+const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));

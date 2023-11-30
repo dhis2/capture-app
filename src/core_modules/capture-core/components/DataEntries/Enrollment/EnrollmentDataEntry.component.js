@@ -33,7 +33,6 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { withCenterPoint } from '../../DataEntry/withCenterPoint';
 import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
@@ -240,7 +239,7 @@ const getGeometrySettings = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-                center: props.center,
+                orgUnit: props.orgUnit,
             });
         }
 
@@ -251,7 +250,7 @@ const getGeometrySettings = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
-            center: props.center,
+            orgUnit: props.orgUnit,
         });
     },
     getPropName: () => 'geometry',
@@ -379,8 +378,7 @@ const AOCFieldBuilderHOC = withAOCFieldBuilder(getAOCSettingsFn())(
         getCategoryOptionsSettingsFn(),
     )(FinalEnrollmentDataEntry));
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);
-const CenterPointHOC = withCenterPoint()(LocationHOC);
-const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(CenterPointHOC);
+const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 
