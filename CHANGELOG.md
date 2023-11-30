@@ -1,3 +1,10 @@
+## [100.46.1](https://github.com/dhis2/capture-app/compare/v100.46.0...v100.46.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* [DHIS2-15686] fix program rule variables for edit profile mode ([#3463](https://github.com/dhis2/capture-app/issues/3463)) ([a24bb27](https://github.com/dhis2/capture-app/commit/a24bb2723f06cd4a3ca87bbbb22977b097377b3c))
+
 # [100.46.0](https://github.com/dhis2/capture-app/compare/v100.45.2...v100.46.0) (2023-11-30)
 
 
