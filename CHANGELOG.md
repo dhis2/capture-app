@@ -1,3 +1,17 @@
+## [100.46.1](https://github.com/dhis2/capture-app/compare/v100.46.0...v100.46.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* [DHIS2-15686] fix program rule variables for edit profile mode ([#3463](https://github.com/dhis2/capture-app/issues/3463)) ([a24bb27](https://github.com/dhis2/capture-app/commit/a24bb2723f06cd4a3ca87bbbb22977b097377b3c))
+
+# [100.46.0](https://github.com/dhis2/capture-app/compare/v100.45.2...v100.46.0) (2023-11-30)
+
+
+### Features
+
+* [DHIS2-14275] Support custom icons ([#3473](https://github.com/dhis2/capture-app/issues/3473)) ([2404fca](https://github.com/dhis2/capture-app/commit/2404fca8085965e699ae518cfe816f2f3d38dea7))
+
 ## [100.45.2](https://github.com/dhis2/capture-app/compare/v100.45.1...v100.45.2) (2023-11-29)
 
 

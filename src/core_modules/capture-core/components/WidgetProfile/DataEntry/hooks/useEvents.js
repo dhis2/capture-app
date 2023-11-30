@@ -10,7 +10,7 @@ const getClientFormattedDataValuesAsObject = (dataValues, elementsById) =>
     dataValues.reduce((acc, { dataElement: id, value }) => {
         const dataElement = elementsById[id];
         if (dataElement) {
-            acc[id] = convertValue(value, elementsById[id].type);
+            acc[id] = convertValue(value, dataElement.valueType);
         }
         return acc;
     }, {});
@@ -39,8 +39,8 @@ export const useEvents = (enrollment: any, elementsById: Array<any>) => {
                 enrollmentId: event.enrollment,
                 enrollmentStatus: event.enrollmentStatus,
                 status: event.status,
-                eventDate: convertDate(event.eventDate),
-                dueDate: convertDate(event.dueDate),
+                occurredAt: convertDate(event.occurredAt),
+                scheduledAt: convertDate(event.scheduledAt),
                 ...getClientFormattedDataValuesAsObject(event.dataValues, elementsById),
             })),
         [elementsById, enrollment, orgUnitNames],
