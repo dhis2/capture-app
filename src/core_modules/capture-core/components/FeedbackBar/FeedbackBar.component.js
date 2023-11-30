@@ -96,25 +96,27 @@ class Index extends React.Component<Props> {
                     message={<span>{message}</span>}
                     action={this.getAction()}
                 />
-                <Modal
-                    hide={!isDialogOpen}
-                >
-                    <ModalTitle>
-                        {
+                {isDialogOpen && (
+                    <Modal
+                        hide={!isDialogOpen}
+                    >
+                        <ModalTitle>
+                            {
                             // $FlowFixMe[prop-missing] automated comment
-                            isDialogOpen ? message && message.title : ''}
-                    </ModalTitle>
-                    <ModalContent>
-                        {
+                                isDialogOpen ? message && message.title : ''}
+                        </ModalTitle>
+                        <ModalContent>
+                            {
                             // $FlowFixMe[prop-missing] automated comment
-                            isDialogOpen ? message && message.content : ''}
-                    </ModalContent>
-                    <ModalActions>
-                        <Button onClick={this.handleClose} primary>
-                            {i18n.t('Close')}
-                        </Button>
-                    </ModalActions>
-                </Modal>
+                                isDialogOpen ? message && message.content : ''}
+                        </ModalContent>
+                        <ModalActions>
+                            <Button onClick={this.handleClose} primary>
+                                {i18n.t('Close')}
+                            </Button>
+                        </ModalActions>
+                    </Modal>
+                )}
             </React.Fragment>
         );
     }

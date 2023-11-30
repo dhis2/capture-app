@@ -246,12 +246,12 @@ When('you open the column selector', () => {
 });
 
 When('you select the registering unit and save from the column selector', () => {
-    cy.get('[data-test="dhis2-uicore-modal"]')
+    cy.get('aside[role="dialog"]')
         .contains('Registering unit')
         .find('input')
         .click();
 
-    cy.get('[data-test="dhis2-uicore-modal"]')
+    cy.get('aside[role="dialog"]')
         .contains('Save')
         .click();
 });
@@ -522,9 +522,7 @@ When('you change the sharing settings', () => {
     cy.contains('Select a level').click();
     cy.get('[data-test="dhis2-uicore-popper"]').contains('View and edit').click({ force: true });
     cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
-    cy.get('[data-test="sharing-dialog"]').within(() => {
-        cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
-    });
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
 });
 
 Then('you see the new sharing settings', () => {

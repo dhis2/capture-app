@@ -10,6 +10,10 @@ type Props = {
 
 export const ExistingTEIDialog = (props: Props) => {
     const { open, ...passOnProps } = props;
+    if (!open) {
+        return null;
+    }
+
     return (
         <Modal
             hide={!open}

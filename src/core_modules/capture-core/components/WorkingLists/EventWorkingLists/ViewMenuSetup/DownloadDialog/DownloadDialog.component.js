@@ -79,6 +79,11 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
     }
     render() {
         const { open, onClose } = this.props;
+
+        if (!open) {
+            return null;
+        }
+
         return (
             <span>
                 <Modal

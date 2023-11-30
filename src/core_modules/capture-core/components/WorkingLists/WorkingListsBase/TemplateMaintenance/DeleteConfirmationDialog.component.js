@@ -28,6 +28,10 @@ const DeleteConfirmationDialogPlain = (props: Props) => {
         classes,
     } = props;
 
+    if (!open) {
+        return null;
+    }
+
     return (
         <Modal
             hide={!open}

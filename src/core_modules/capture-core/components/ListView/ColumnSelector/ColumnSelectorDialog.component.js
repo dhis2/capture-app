@@ -36,6 +36,10 @@ export const ColumnSelectorDialog = ({ columns, open, onClose, onSave }: Props) 
         setColumnList(sortedList);
     };
 
+    if (!open) {
+        return null;
+    }
+
     return (
         <span>
             <Modal

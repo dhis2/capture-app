@@ -16,6 +16,10 @@ export const ExistingTemplateDialog = (props: Props) => {
         onSaveTemplate,
     } = props;
 
+    if (!open) {
+        return null;
+    }
+
     return (
         <Modal
             hide={!open}

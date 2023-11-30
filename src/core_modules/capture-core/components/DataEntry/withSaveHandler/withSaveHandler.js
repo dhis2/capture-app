@@ -245,30 +245,34 @@ const getSaveHandler = (
                         onSave={this.handleSaveAttempt}
                         {...filteredProps}
                     />
-                    <Modal
-                        hide={!this.state.messagesDialogOpen}
-                        onClose={this.handleAbortDialog}
-                    >
-                        <MessagesDialogContents
-                            open={this.state.messagesDialogOpen}
-                            onAbort={this.handleAbortDialog}
-                            onSave={this.handleSaveDialog}
-                            errors={errors}
-                            warnings={warnings}
-                            isCompleting={this.isCompleting}
-                            validationStrategy={calculatedFoundation.validationStrategy}
-                        />
-                    </Modal>
-                    <Modal
-                        hide={!this.state.waitForPromisesDialogOpen}
-                    >
-                        <ModalTitle>
-                            {i18n.t('Operations running')}
-                        </ModalTitle>
-                        <ModalContent>
-                            {this.getDialogWaitForUploadContents()}
-                        </ModalContent>
-                    </Modal>
+                    {this.state.messagesDialogOpen && (
+                        <Modal
+                            hide={!this.state.messagesDialogOpen}
+                            onClose={this.handleAbortDialog}
+                        >
+                            <MessagesDialogContents
+                                open={this.state.messagesDialogOpen}
+                                onAbort={this.handleAbortDialog}
+                                onSave={this.handleSaveDialog}
+                                errors={errors}
+                                warnings={warnings}
+                                isCompleting={this.isCompleting}
+                                validationStrategy={calculatedFoundation.validationStrategy}
+                            />
+                        </Modal>
+                    )}
+                    {this.state.waitForPromisesDialogOpen && (
+                        <Modal
+                            hide={!this.state.waitForPromisesDialogOpen}
+                        >
+                            <ModalTitle>
+                                {i18n.t('Operations running')}
+                            </ModalTitle>
+                            <ModalContent>
+                                {this.getDialogWaitForUploadContents()}
+                            </ModalContent>
+                        </Modal>
+                    )}
                 </div>
             );
         }

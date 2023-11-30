@@ -17,6 +17,10 @@ class ReviewDialogClass extends React.Component<Props > {
     render() {
         const { open, onCancel, extraActions, selectedScopeId, dataEntryId, renderCardActions } = this.props;
 
+        if (!open) {
+            return null;
+        }
+
         return (
             <Modal
                 hide={!open}
