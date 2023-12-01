@@ -6,6 +6,7 @@ import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMess
 import type {
     TeiPayload,
 } from '../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+import type { InputAttribute } from '../EnrollmentRegistrationEntry/hooks/useFormValues';
 
 export type OwnProps = $ReadOnly<{|
     id: string,
@@ -16,6 +17,7 @@ export type OwnProps = $ReadOnly<{|
     onSave: (TeiPayload) => void,
     duplicatesReviewPageSize: number,
     isSavingInProgress?: boolean,
+    inheritedAttributes?: Array<InputAttribute>,
     renderDuplicatesCardActions?: RenderCustomCardActions,
     renderDuplicatesDialogActions?: (onCancel: () => void, onSave: (TeiPayload) => void) => Node,
     ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,

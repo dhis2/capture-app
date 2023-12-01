@@ -1,5 +1,7 @@
 // @flow
 
+import { dataElementTypes } from '../../../../metaData';
+
 type InputAttribute = {
   attribute: string,
   code: string,
@@ -7,7 +9,7 @@ type InputAttribute = {
   displayName: string,
   lastUpdated: string,
   value: string,
-  valueType: string,
+  valueType: $Keys<typeof dataElementTypes>,
 };
 
 export type OwnProps = $ReadOnly<{|

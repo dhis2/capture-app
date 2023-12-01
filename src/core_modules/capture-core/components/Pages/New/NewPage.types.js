@@ -1,5 +1,6 @@
 // @flow
 import { typeof newPageStatuses } from './NewPage.constants';
+import { dataElementTypes } from '../../../metaData';
 
 type ProgramCategories = Array<{|name: string, id: string|}>
 
@@ -10,7 +11,7 @@ type InputAttribute = {
   displayName: string,
   lastUpdated: string,
   value: string,
-  valueType: string,
+  valueType: $Keys<typeof dataElementTypes>,
 };
 
 export type ContainerProps = $ReadOnly<{|
