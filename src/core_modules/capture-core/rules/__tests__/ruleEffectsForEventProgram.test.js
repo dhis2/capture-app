@@ -80,7 +80,7 @@ describe('Event Event rules engine', () => {
 
     describe.each([
         [
-            { vANAXwtLwcT: 0, occurredAt: '2020-04-30T22:00:00.000Z' },
+            { vANAXwtLwcT: 0 },
             [
                 {
                     id: 'vANAXwtLwcT',
@@ -92,15 +92,15 @@ describe('Event Event rules engine', () => {
             ],
         ],
         [
-            { vANAXwtLwcT: 9, occurredAt: '2020-04-30T22:00:00.000Z' },
+            { vANAXwtLwcT: 9 },
             [{ id: 'Ok9OQpitjQr', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' }],
         ],
         [
-            { vANAXwtLwcT: 99, occurredAt: '2020-04-30T22:00:00.000Z' },
+            { vANAXwtLwcT: 99 },
             [{ id: 'Ok9OQpitjQr', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' }],
         ],
         [
-            { vANAXwtLwcT: 100, occurredAt: '2020-04-30T22:00:00.000Z' },
+            { vANAXwtLwcT: 100 },
             [
                 {
                     id: 'vANAXwtLwcT',
@@ -127,7 +127,7 @@ describe('Event Event rules engine', () => {
 
     describe.each([
         [
-            { sWoqcoByYmD: true, occurredAt: '2020-04-30T22:00:00.000Z' },
+            { sWoqcoByYmD: true },
             [
                 {
                     id: 'vANAXwtLwcT',
@@ -138,7 +138,7 @@ describe('Event Event rules engine', () => {
             ],
         ],
         [
-            { sWoqcoByYmD: false, occurredAt: '2020-04-30T22:00:00.000Z' },
+            { sWoqcoByYmD: false },
             [
                 {
                     id: 'vANAXwtLwcT',
@@ -269,7 +269,7 @@ describe('Event rules engine', () => {
 
     describe.each([
         [
-            { oZg33kd9taw: 'Female', SWfdB5lX0fk: null, occurredAt: '2020-04-30T22:00:00.000Z' },
+            { oZg33kd9taw: 'Female', SWfdB5lX0fk: null },
             [
                 {
                     displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
@@ -279,7 +279,7 @@ describe('Event rules engine', () => {
             ],
         ],
         [
-            { oZg33kd9taw: 'Male', SWfdB5lX0fk: null, occurredAt: '2020-04-30T22:00:00.000Z' },
+            { oZg33kd9taw: 'Male', SWfdB5lX0fk: null },
             [
                 { id: 'SWfdB5lX0fk', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' },
                 {
@@ -290,7 +290,7 @@ describe('Event rules engine', () => {
             ],
         ],
         [
-            { oZg33kd9taw: null, SWfdB5lX0fk: null, occurredAt: '2020-04-30T22:00:00.000Z' },
+            { oZg33kd9taw: null, SWfdB5lX0fk: null },
             [
                 {
                     displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
