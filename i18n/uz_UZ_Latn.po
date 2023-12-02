@@ -541,6 +541,9 @@ msgstr "qidirish uchun yozishni boshlang"
 msgid "suggestions could not be retrieved"
 msgstr "takliflar qabul qilinmadi"
 
+msgid "No results found"
+msgstr "Hech qanday natija topilmadi"
+
 msgid "No items to display"
 msgstr "Koʼrsatiladigan axborot yoʼq"
 
@@ -963,9 +966,6 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
 
-msgid "No results found"
-msgstr "Hech qanday natija topilmadi"
-
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1168,6 +1168,33 @@ msgstr "Kuzatuv uchun belgilang"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Kenglik"
+
+msgid "Longitude"
+msgstr "Kenglik"
+
+msgid "Edit"
+msgstr "Tahrirlash"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Координаталар"
+
+msgid "Delete polygon"
+msgstr "Poligon (koʼpburchak) ni oʼchirib tashlash"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Hududni belgilang"
+
 msgid "Enrollment date"
 msgstr "Qayd qilingan sana"
 
@@ -1191,6 +1218,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "Bekor qilindi"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1313,9 +1346,6 @@ msgstr ""
 
 msgid "{{TETName}} profile"
 msgstr ""
-
-msgid "Edit"
-msgstr "Tahrirlash"
 
 msgid "tracked entity instance"
 msgstr "kuzatilayotgan obʼekt namunasi"
@@ -1564,12 +1594,6 @@ msgstr "Shu vaqtgacha"
 
 msgid "Page {{currentPage}}"
 msgstr "{{currentPage}} sahifasi"
-
-msgid "Delete polygon"
-msgstr "Poligon (koʼpburchak) ni oʼchirib tashlash"
-
-msgid "Set area"
-msgstr "Hududni belgilang"
 
 msgid "Area on map saved"
 msgstr ""

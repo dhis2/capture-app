@@ -2,16 +2,16 @@
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2021
 # Nadiia <semchuk@aph.org.ua>, 2023
-# Viktor Varland <viktor@dhis2.org>, 2023
 # Éva Tamási, 2023
 # Philip Larsen Donnelly, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2023\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1143,6 +1143,33 @@ msgstr "Позначте для подальших дій"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Широта"
+
+msgid "Longitude"
+msgstr "Довгота"
+
+msgid "Edit"
+msgstr "Редагувати"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr ""
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Дата реєстрації"
 
@@ -1166,6 +1193,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "Скасовано"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1288,9 +1321,6 @@ msgstr ""
 
 msgid "{{TETName}} profile"
 msgstr ""
-
-msgid "Edit"
-msgstr "Редагувати"
 
 msgid "tracked entity instance"
 msgstr ""
@@ -1537,12 +1567,6 @@ msgid "To time"
 msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
 msgstr ""
 
 msgid "Area on map saved"
