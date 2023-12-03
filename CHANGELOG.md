@@ -1,3 +1,15 @@
+# [100.47.0](https://github.com/dhis2/capture-app/compare/v100.46.1...v100.47.0) (2023-12-03)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e20fb8c](https://github.com/dhis2/capture-app/commit/e20fb8c551aefb0546c5973dd87940d56e3018be))
+
+
+### Features
+
+* [DHIS2-16123] Add inheritable TEAs to Relationships ([#3464](https://github.com/dhis2/capture-app/issues/3464)) ([620b008](https://github.com/dhis2/capture-app/commit/620b00832da7c4951d6e905b40317dd0acca0aa6))
+
 ## [100.46.1](https://github.com/dhis2/capture-app/compare/v100.46.0...v100.46.1) (2023-11-30)
 
 
