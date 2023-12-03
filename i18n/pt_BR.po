@@ -1141,6 +1141,33 @@ msgstr ""
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Coordenadas"
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Enrollment date"
 msgstr ""
 
@@ -1163,6 +1190,12 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
+msgstr ""
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
 msgstr ""
 
 msgid "Comments about this enrollment"
@@ -1286,9 +1319,6 @@ msgstr ""
 
 msgid "{{TETName}} profile"
 msgstr ""
-
-msgid "Edit"
-msgstr "Editar"
 
 msgid "tracked entity instance"
 msgstr ""
@@ -1535,12 +1565,6 @@ msgid "To time"
 msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
 msgstr ""
 
 msgid "Area on map saved"

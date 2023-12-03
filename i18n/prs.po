@@ -520,6 +520,9 @@ msgstr ""
 msgid "suggestions could not be retrieved"
 msgstr ""
 
+msgid "No results found"
+msgstr "هیج نتیجه ی یافت نشد"
+
 msgid "No items to display"
 msgstr ""
 
@@ -938,9 +941,6 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
-msgid "No results found"
-msgstr "هیج نتیجه ی یافت نشد"
-
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1139,6 +1139,33 @@ msgstr "نشانی برای پیگیری"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "عرض البلد"
+
+msgid "Longitude"
+msgstr "طول البلد"
+
+msgid "Edit"
+msgstr "تجدید"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "ځانګړتیاوې"
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "تاریخ شمولیت"
 
@@ -1161,6 +1188,12 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
+msgstr ""
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
 msgstr ""
 
 msgid "Comments about this enrollment"
@@ -1284,9 +1317,6 @@ msgstr ""
 
 msgid "{{TETName}} profile"
 msgstr ""
-
-msgid "Edit"
-msgstr "تجدید"
 
 msgid "tracked entity instance"
 msgstr ""
@@ -1533,12 +1563,6 @@ msgid "To time"
 msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
 msgstr ""
 
 msgid "Area on map saved"

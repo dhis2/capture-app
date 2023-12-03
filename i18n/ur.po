@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2023
 # Philip Larsen Donnelly, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2023\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Urdu (https://app.transifex.com/hisp-uio/teams/100509/ur/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -521,6 +521,9 @@ msgstr ""
 msgid "suggestions could not be retrieved"
 msgstr ""
 
+msgid "No results found"
+msgstr "کوئی نتیجہ نہیں ملا"
+
 msgid "No items to display"
 msgstr ""
 
@@ -939,9 +942,6 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
-msgid "No results found"
-msgstr "کوئی نتیجہ نہیں ملا"
-
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1140,6 +1140,33 @@ msgstr "اپ کے لئے نشان زد کریں"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "طول"
+
+msgid "Longitude"
+msgstr "لمبائی"
+
+msgid "Edit"
+msgstr "ترمیم"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "سماج"
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "اندراج کی تاریخ"
 
@@ -1163,6 +1190,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "منسوخ"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1285,9 +1318,6 @@ msgstr ""
 
 msgid "{{TETName}} profile"
 msgstr ""
-
-msgid "Edit"
-msgstr "ترمیم"
 
 msgid "tracked entity instance"
 msgstr ""
@@ -1534,12 +1564,6 @@ msgid "To time"
 msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
 msgstr ""
 
 msgid "Area on map saved"

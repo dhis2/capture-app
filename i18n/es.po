@@ -6,20 +6,20 @@
 # Philip Larsen Donnelly, 2022
 # Marta Vila <marta@dhis2.org>, 2022
 # Pablo Pajuelo Cabezas <pablo@dhis2.org>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2023
 # Alison Andrade <aandrade@ippfwhr.org>, 2023
 # Janeth Cruz, 2023
 # Prabhjot Singh, 2023
 # Christian Atavillos, 2023
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2023
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2023\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -557,6 +557,9 @@ msgstr "Empiece a escribir para buscar"
 msgid "suggestions could not be retrieved"
 msgstr "No se pudieron recuperar las sugerencias"
 
+msgid "No results found"
+msgstr "No results found"
+
 msgid "No items to display"
 msgstr "No hay elementos para mostrar"
 
@@ -1004,9 +1007,6 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados"
 
-msgid "No results found"
-msgstr "No results found"
-
 msgid "An error occurred loading possible duplicates"
 msgstr "Se produjo un error al cargar posibles duplicados"
 
@@ -1226,6 +1226,33 @@ msgstr "Marcar para seguimiento"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Latitud"
+
+msgid "Longitude"
+msgstr "Longitud"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Coordenadas"
+
+msgid "Delete polygon"
+msgstr "Eliminar polígono"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Establecer área"
+
 msgid "Enrollment date"
 msgstr "Fecha de inscripción"
 
@@ -1251,6 +1278,12 @@ msgstr "Última actualización {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelar"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr "Comentarios sobre esta inscripción"
@@ -1387,9 +1420,6 @@ msgstr ""
 
 msgid "{{TETName}} profile"
 msgstr "Perfil de {{TETName}} "
-
-msgid "Edit"
-msgstr "Editar"
 
 msgid "tracked entity instance"
 msgstr "instancia de entidad rastreada"
@@ -1641,12 +1671,6 @@ msgstr "Hasta la hora"
 
 msgid "Page {{currentPage}}"
 msgstr "Página {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Eliminar polígono"
-
-msgid "Set area"
-msgstr "Establecer área"
 
 msgid "Area on map saved"
 msgstr "Área en el mapa guardada"

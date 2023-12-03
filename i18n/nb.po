@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Karoline Tufte Lien <karoline@dhis2.org>, 2023
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2023
+# Karoline Tufte Lien <karoline@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2023\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2023\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -540,6 +540,9 @@ msgstr "begynn å skrive for å søke"
 msgid "suggestions could not be retrieved"
 msgstr "forslag kunne ikke hentes"
 
+msgid "No results found"
+msgstr "Ingen resultater funnet"
+
 msgid "No items to display"
 msgstr "Ingen elementer å vise"
 
@@ -983,9 +986,6 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
 
-msgid "No results found"
-msgstr "Ingen resultater funnet"
-
 msgid "An error occurred loading possible duplicates"
 msgstr "En feil oppsto ved lasting av mulige duplikater"
 
@@ -1199,6 +1199,33 @@ msgstr ""
 "Eksisterende datoer for automatisk genererte hendelser vil ikke bli "
 "oppdatert."
 
+msgid "Latitude"
+msgstr "Breddegrad"
+
+msgid "Longitude"
+msgstr "Lengdegrad"
+
+msgid "Edit"
+msgstr "Rediger"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Koordinater"
+
+msgid "Delete polygon"
+msgstr "Slett polygon"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Sett område"
+
 msgid "Enrollment date"
 msgstr "Registreringsdato"
 
@@ -1222,6 +1249,12 @@ msgstr "Sist oppdatert {{date}}"
 
 msgid "Cancelled"
 msgstr "Kansellert"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr "Kommentarer om denne registreringen"
@@ -1350,9 +1383,6 @@ msgstr "Profil -widgeten kunne ikke lastes inn. Prøv igjen senere"
 
 msgid "{{TETName}} profile"
 msgstr "{{TETName}} profil"
-
-msgid "Edit"
-msgstr "Rediger"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
@@ -1600,12 +1630,6 @@ msgstr "Til klokkeslett"
 
 msgid "Page {{currentPage}}"
 msgstr "Side {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Slett polygon"
-
-msgid "Set area"
-msgstr "Sett område"
 
 msgid "Area on map saved"
 msgstr "Området på kartet er lagret"
