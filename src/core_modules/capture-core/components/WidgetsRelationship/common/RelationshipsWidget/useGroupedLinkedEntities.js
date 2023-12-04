@@ -8,7 +8,7 @@ import { dataElementTypes } from '../../../../metaData';
 import { RELATIONSHIP_ENTITIES } from '../constants';
 import { convertClientToList, convertServerToClient } from '../../../../converters';
 import type { GroupedLinkedEntities, LinkedEntityData } from './types';
-import type { InputRelationshipData, RelationshipTypes } from '../Types';
+import type { ApiLinkedEntity, InputRelationshipData, RelationshipTypes } from '../Types';
 
 
 const getFallbackFieldsByRelationshipEntity = {
@@ -137,7 +137,7 @@ const getLinkedEntityData = (apiLinkedEntity, relationshipCreatedAt, pendingApiR
     return null;
 };
 
-const determineLinkedEntity = (fromEntity, toEntity, sourceId) => {
+export const determineLinkedEntity = (fromEntity: ApiLinkedEntity, toEntity: ApiLinkedEntity, sourceId: string) => {
     if (fromEntity.trackedEntity?.trackedEntity === sourceId || fromEntity.event?.event === sourceId) {
         return toEntity;
     }
@@ -181,6 +181,10 @@ export const useGroupedLinkedEntities = (
 
             const apiLinkedEntity = determineLinkedEntity(fromEntity, toEntity, sourceId);
             if (!apiLinkedEntity) {
+                return accGroupedLinkedEntities;
+            }
+
+            if (!relationshipType.bidirectional && apiLinkedEntity === fromEntity) {
                 return accGroupedLinkedEntities;
             }
 

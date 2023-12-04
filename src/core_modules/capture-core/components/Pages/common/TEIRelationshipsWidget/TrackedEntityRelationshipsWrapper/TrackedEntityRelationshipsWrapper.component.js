@@ -47,7 +47,7 @@ export const TrackedEntityRelationshipsWrapper = ({
         );
     }
 
-    if (!relationshipTypes || !addRelationshipRenderElement) {
+    if (!relationshipTypes?.length || !addRelationshipRenderElement) {
         return null;
     }
 
