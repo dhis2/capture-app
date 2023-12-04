@@ -10,7 +10,7 @@ export function convertMainEventClientToServer(event: Object) {
         programId: 'program',
         programStageId: 'programStage',
         orgUnitId: 'orgUnit',
-        trackedEntityInstanceId: 'trackedEntityInstance',
+        trackedEntityId: 'trackedEntity',
         enrollmentId: 'enrollment',
         assignee: 'assignedUser',
     };
