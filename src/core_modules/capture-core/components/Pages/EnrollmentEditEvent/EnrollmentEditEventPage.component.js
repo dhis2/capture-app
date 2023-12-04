@@ -67,6 +67,7 @@ const EnrollmentEditEventPageLeft = ({
     pageStatus,
     onCancelEditEvent,
     onHandleScheduleSave,
+    assignee,
 }) => (
     <>
         {pageStatus === pageStatuses.DEFAULT && programStage && (
@@ -81,6 +82,7 @@ const EnrollmentEditEventPageLeft = ({
                 initialScheduleDate={scheduleDate}
                 onCancelEditEvent={onCancelEditEvent}
                 onHandleScheduleSave={onHandleScheduleSave}
+                assignee={assignee}
             />
         )}
         {pageStatus === pageStatuses.MISSING_DATA && (
@@ -244,6 +246,7 @@ const EnrollmentEditEventPagePain = ({
                             pageStatus={pageStatus}
                             onCancelEditEvent={onCancelEditEvent}
                             onHandleScheduleSave={onHandleScheduleSave}
+                            assignee={assignee}
                         />
                     </div>
                     <div className={classes.rightColumn}>

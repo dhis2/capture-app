@@ -19,6 +19,8 @@ export type ContainerProps = {|
    onSaveSuccessActionType: string,
    onSaveErrorActionType: string,
    onCancel: () => void,
+   assignee?: UserFormField | null,
+   enableUserAssignment?: boolean,
 |};
 
 export type Props = {|
@@ -42,7 +44,7 @@ export type Props = {|
    enableUserAssignment?: boolean,
    onSchedule: () => void,
    onSetAssignee: () => void,
-   assignee?: UserFormField,
+   assignee?: UserFormField | null,
    onCancel: () => void,
    setScheduleDate: (date: string) => void,
    onAddComment: (comment: string) => void,

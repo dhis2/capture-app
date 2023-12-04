@@ -30,7 +30,7 @@ function convertRange(parser: (value: any) => any, rangeValue: RangeValue) {
     };
 }
 
-const convertAssigneeToServer = (assignee?: Assignee): ApiAssignedUser | null =>
+const convertAssigneeToServer = (assignee?: Assignee | null): ApiAssignedUser | null =>
     (assignee
         ? {
             uid: assignee.id,
