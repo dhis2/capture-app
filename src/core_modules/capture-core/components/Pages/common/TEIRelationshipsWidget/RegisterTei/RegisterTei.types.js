@@ -1,4 +1,6 @@
 // @flow
+import type { InputAttribute } from '../../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
+
 export type SharedProps = {|
     onLink: (teiId: string, values: Object) => void,
     onGetUnsavedAttributeValues?: ?Function,
@@ -7,6 +9,7 @@ export type SharedProps = {|
 
 export type ContainerProps = {|
     suggestedProgramId: string,
+    teiId: string,
     onSave: (teiPayload: Object) => void,
     ...SharedProps,
 |};
@@ -16,6 +19,7 @@ export type ComponentProps = {|
     error: string,
     dataEntryId: string,
     trackedEntityName: ?string,
+    inheritedAttributes: Array<InputAttribute>,
     onSaveWithEnrollment: () => void,
     onSaveWithoutEnrollment: () => void,
     ...SharedProps,

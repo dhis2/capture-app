@@ -64,6 +64,7 @@ const RegisterTeiPlain = ({
     trackedEntityName,
     trackedEntityTypeId,
     selectedScopeId,
+    inheritedAttributes,
     classes,
 }: ComponentProps) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
@@ -110,6 +111,7 @@ const RegisterTeiPlain = ({
                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                     renderDuplicatesCardActions={renderDuplicatesCardActions}
                     ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
+                    inheritedAttributes={inheritedAttributes}
                 />
             </div>
             <DataEntryWidgetOutput

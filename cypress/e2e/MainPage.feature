@@ -42,3 +42,15 @@ Feature: User interacts with Main page
         Then you see the opt out component for Child Programme
         When you opt out to use the new enrollment Dashboard for Child Programme
         Then you see the opt in component for Child Programme
+
+    @v<41
+    Scenario: The icon is rendered as an svg
+        Given you are in the main page with no selections made
+        When you select Child Programme
+        Then the icon is rendered as an svg
+
+    @v>=41
+    Scenario: The icon is rendered as a custom icon
+        Given you are in the main page with no selections made
+        When you select Child Programme
+        Then the icon is rendered as a custom icon

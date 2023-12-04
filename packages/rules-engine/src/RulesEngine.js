@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import { VariableService } from './services/VariableService/VariableService';
+import { VariableService } from './services/VariableService';
 import { ValueProcessor } from './processors/ValueProcessor';
 import { executeExpression } from './services/expressionService';
 import { getD2Functions } from './d2Functions';

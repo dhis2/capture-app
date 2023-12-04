@@ -543,6 +543,9 @@ msgstr "Начинайте вводить для поиска"
 msgid "suggestions could not be retrieved"
 msgstr "Подсказка не может быть найдена"
 
+msgid "No results found"
+msgstr "Результаты не найдены"
+
 msgid "No items to display"
 msgstr "Нет элементов для отображения"
 
@@ -964,9 +967,6 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты"
 
-msgid "No results found"
-msgstr "Результаты не найдены"
-
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1165,6 +1165,33 @@ msgstr "Отметить для последующего наблюдения"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Широта"
+
+msgid "Longitude"
+msgstr "Долгота"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Координаты"
+
+msgid "Delete polygon"
+msgstr "Удалить полигон"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Установить площадь"
+
 msgid "Enrollment date"
 msgstr "Дата зачисления"
 
@@ -1188,6 +1215,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "Отмененный"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1310,9 +1343,6 @@ msgstr ""
 
 msgid "{{TETName}} profile"
 msgstr ""
-
-msgid "Edit"
-msgstr "Редактировать"
 
 msgid "tracked entity instance"
 msgstr "Элемент отслеживаемого объекта"
@@ -1560,12 +1590,6 @@ msgstr "ко времени"
 
 msgid "Page {{currentPage}}"
 msgstr "Страница {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Удалить полигон"
-
-msgid "Set area"
-msgstr "Установить площадь"
 
 msgid "Area on map saved"
 msgstr ""

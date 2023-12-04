@@ -76,6 +76,7 @@ export const TrackedEntityRelationshipsWrapper = ({
                             suggestedProgramId={suggestedProgramId}
                             onLink={onLinkToTrackedEntityFromSearch}
                             onSave={onLinkToTrackedEntityFromRegistration}
+                            teiId={teiId}
                             onGetUnsavedAttributeValues={() => console.log('get unsaved')}
                             trackedEntityTypeId={selectedTrackedEntityTypeId}
                         />
