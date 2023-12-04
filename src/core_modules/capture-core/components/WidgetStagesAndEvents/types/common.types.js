@@ -52,8 +52,9 @@ export type Event = {|
     program: string,
     programStage: string,
     status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
-    trackedEntityInstance: string,
+    trackedEntity: string,
     notes?: Array<Object>,
     pendingApiResponse?: ?boolean,
     assignedUser?: ApiAssignedUser,
+    followUp?: boolean,
 |};
