@@ -547,6 +547,9 @@ msgstr "comece a digitar para pesquisar"
 msgid "suggestions could not be retrieved"
 msgstr "sugestões não puderam ser recuperadas"
 
+msgid "No results found"
+msgstr "Nenhum resultado encontrado"
+
 msgid "No items to display"
 msgstr "Nenhum item para exibir"
 
@@ -991,9 +994,6 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr "Possíveis duplicatas encontradas"
 
-msgid "No results found"
-msgstr "Nenhum resultado encontrado"
-
 msgid "An error occurred loading possible duplicates"
 msgstr "Ocorreu um erro ao carregar possíveis duplicatas"
 
@@ -1211,6 +1211,33 @@ msgstr "Marcar para acompanhamento"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Coordenadas"
+
+msgid "Delete polygon"
+msgstr "Excluir polígono"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Definir área"
+
 msgid "Enrollment date"
 msgstr "Data de inscrição"
 
@@ -1236,6 +1263,12 @@ msgstr "Última atualização em {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelado"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr "Comentários sobre esta inscrição"
@@ -1370,9 +1403,6 @@ msgstr ""
 
 msgid "{{TETName}} profile"
 msgstr "{{TETName}} perfil"
-
-msgid "Edit"
-msgstr "Editar"
 
 msgid "tracked entity instance"
 msgstr "instância de entidade rastreada"
@@ -1624,12 +1654,6 @@ msgstr "Para o tempo"
 
 msgid "Page {{currentPage}}"
 msgstr "Página {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Excluir polígono"
-
-msgid "Set area"
-msgstr "Definir área"
 
 msgid "Area on map saved"
 msgstr "Área no mapa gravada"

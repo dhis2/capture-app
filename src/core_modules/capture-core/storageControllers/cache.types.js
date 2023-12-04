@@ -26,6 +26,7 @@ export type CachedTrackedEntityAttribute = {
     translations: Array<CachedAttributeTranslation>,
     valueType: string,
     optionSetValue: boolean,
+    inherit: boolean,
     optionSet: { id: string },
     unique: ?boolean,
     orgunitScope: ?boolean,

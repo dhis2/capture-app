@@ -11,19 +11,37 @@ import { useFormValuesFromSearchTerms } from './hooks/useFormValuesFromSearchTer
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 import { useBuildTeiPayload } from './hooks/useBuildTeiPayload';
+import type { InputAttribute } from '../EnrollmentRegistrationEntry/hooks/useFormValues';
 
-const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId, orgUnitId) => {
+type Props = {
+    selectedScopeId: string,
+    dataEntryId: string,
+    orgUnitId: string,
+    inheritedAttributes: ?Array<InputAttribute>,
+}
+const useInitialiseTeiRegistration = ({
+    selectedScopeId,
+    dataEntryId,
+    orgUnitId,
+    inheritedAttributes,
+}: Props) => {
     const dispatch = useDispatch();
     const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
     const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
-    const formValues = useFormValuesFromSearchTerms();
+    const formValues = useFormValuesFromSearchTerms({ inheritedAttributes });
     const registrationFormReady = !!formId;
 
     useEffect(() => {
         if (registrationFormReady && scopeType === scopeTypes.TRACKED_ENTITY_TYPE) {
             dispatch(
                 startNewTeiDataEntryInitialisation(
-                    { selectedOrgUnitId: orgUnitId, selectedScopeId, dataEntryId, formFoundation, formValues },
+                    {
+                        selectedOrgUnitId: orgUnitId,
+                        selectedScopeId,
+                        dataEntryId,
+                        formFoundation,
+                        formValues,
+                    },
                 ));
         }
     }, [
@@ -43,8 +61,20 @@ const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId, orgUnitId) =
 };
 
 
-export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, orgUnitId, onSave, ...rest }) => {
-    const { trackedEntityName } = useInitialiseTeiRegistration(selectedScopeId, id, orgUnitId);
+export const TeiRegistrationEntry: ComponentType<OwnProps> = ({
+    selectedScopeId,
+    id,
+    orgUnitId,
+    onSave,
+    inheritedAttributes,
+    ...rest
+}) => {
+    const { trackedEntityName } = useInitialiseTeiRegistration({
+        selectedScopeId,
+        dataEntryId: id,
+        orgUnitId,
+        inheritedAttributes,
+    });
     const ready = useSelector(({ dataEntries }) => (!!dataEntries[id]));
     const dataEntry = useSelector(({ dataEntries }) => (dataEntries[id]));
     const {

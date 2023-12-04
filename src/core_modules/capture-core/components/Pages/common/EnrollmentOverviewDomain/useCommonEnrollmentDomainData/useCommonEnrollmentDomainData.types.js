@@ -39,6 +39,7 @@ export type EnrollmentData = {|
     scheduledAt: string,
     trackedEntity: string,
     trackedEntityType: string,
+    geometry?: ?{ type: string, coordinates: [number, number] | Array<[number, number]>}
 |};
 
 export type AttributeValue = {|

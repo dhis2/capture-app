@@ -1,3 +1,64 @@
+# [100.47.0](https://github.com/dhis2/capture-app/compare/v100.46.1...v100.47.0) (2023-12-03)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e20fb8c](https://github.com/dhis2/capture-app/commit/e20fb8c551aefb0546c5973dd87940d56e3018be))
+
+
+### Features
+
+* [DHIS2-16123] Add inheritable TEAs to Relationships ([#3464](https://github.com/dhis2/capture-app/issues/3464)) ([620b008](https://github.com/dhis2/capture-app/commit/620b00832da7c4951d6e905b40317dd0acca0aa6))
+
+## [100.46.1](https://github.com/dhis2/capture-app/compare/v100.46.0...v100.46.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* [DHIS2-15686] fix program rule variables for edit profile mode ([#3463](https://github.com/dhis2/capture-app/issues/3463)) ([a24bb27](https://github.com/dhis2/capture-app/commit/a24bb2723f06cd4a3ca87bbbb22977b097377b3c))
+
+# [100.46.0](https://github.com/dhis2/capture-app/compare/v100.45.2...v100.46.0) (2023-11-30)
+
+
+### Features
+
+* [DHIS2-14275] Support custom icons ([#3473](https://github.com/dhis2/capture-app/issues/3473)) ([2404fca](https://github.com/dhis2/capture-app/commit/2404fca8085965e699ae518cfe816f2f3d38dea7))
+
+## [100.45.2](https://github.com/dhis2/capture-app/compare/v100.45.1...v100.45.2) (2023-11-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15693] Rules not triggered on program update ([#3472](https://github.com/dhis2/capture-app/issues/3472)) ([2dbca1e](https://github.com/dhis2/capture-app/commit/2dbca1efe36ed0e166d4aea803505c30c79cb35d))
+
+## [100.45.1](https://github.com/dhis2/capture-app/compare/v100.45.0...v100.45.1) (2023-11-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8f28703](https://github.com/dhis2/capture-app/commit/8f28703ae8b56cfee283ec1ce0ec2b13dfd91e30))
+
+# [100.45.0](https://github.com/dhis2/capture-app/compare/v100.44.7...v100.45.0) (2023-11-20)
+
+
+### Features
+
+* [DHIS2-13237] Enrollment coordinates in enrollment widget ([#3141](https://github.com/dhis2/capture-app/issues/3141)) ([2f2e52c](https://github.com/dhis2/capture-app/commit/2f2e52c3103e9cb48e77766701a9a5fc9af6ad48))
+
+## [100.44.7](https://github.com/dhis2/capture-app/compare/v100.44.6...v100.44.7) (2023-11-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([46fb227](https://github.com/dhis2/capture-app/commit/46fb2270b21c4dec57f4447232608d8dd3cfb9af))
+
+## [100.44.6](https://github.com/dhis2/capture-app/compare/v100.44.5...v100.44.6) (2023-11-16)
+
+
+### Bug Fixes
+
+* [DHIS2-15967] allow enrolling TEIs with mandatory TET attributes ([#3455](https://github.com/dhis2/capture-app/issues/3455)) ([cc87a8a](https://github.com/dhis2/capture-app/commit/cc87a8a993001d5b4cea8493a84a6798f481cc5a))
+
 ## [100.44.5](https://github.com/dhis2/capture-app/compare/v100.44.4...v100.44.5) (2023-11-10)
 
 

@@ -12,7 +12,13 @@ type Props = {
 
 export class RegisterTeiDataEntryComponent extends React.Component<Props> {
     render() {
-        const { showDataEntry, programId, onSaveWithoutEnrollment, onSaveWithEnrollment, ...passOnProps } = this.props;
+        const {
+            showDataEntry,
+            programId,
+            onSaveWithoutEnrollment,
+            onSaveWithEnrollment,
+            ...passOnProps
+        } = this.props;
 
         if (!showDataEntry) {
             return null;

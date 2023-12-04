@@ -13,6 +13,7 @@ const NewEnrollmentRelationshipPlain =
         onSave,
         onCancel,
         programId,
+        inheritedAttributes,
         orgUnitId,
         duplicatesReviewPageSize,
         renderDuplicatesDialogActions,
@@ -37,6 +38,7 @@ const NewEnrollmentRelationshipPlain =
                 renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                 renderDuplicatesCardActions={renderDuplicatesCardActions}
                 ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
+                trackedEntityInstanceAttributes={inheritedAttributes}
             />
         );
     };
