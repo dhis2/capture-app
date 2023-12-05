@@ -1,3 +1,11 @@
+## [100.47.1](https://github.com/dhis2/capture-app/compare/v100.47.0...v100.47.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* [DHIS2-15694] Cancel button in Relationship ([#3471](https://github.com/dhis2/capture-app/issues/3471)) ([c1dfbdb](https://github.com/dhis2/capture-app/commit/c1dfbdb3352388bba7d51b8bc2b9d033d10967c3))
+* [DHIS2-15983] Enrollment date not assigned on form init ([#3475](https://github.com/dhis2/capture-app/issues/3475)) ([a13a766](https://github.com/dhis2/capture-app/commit/a13a766ea463514dfdd090b8d40db6406dac80bb))
+
 # [100.47.0](https://github.com/dhis2/capture-app/compare/v100.46.1...v100.47.0) (2023-12-03)
 
 
