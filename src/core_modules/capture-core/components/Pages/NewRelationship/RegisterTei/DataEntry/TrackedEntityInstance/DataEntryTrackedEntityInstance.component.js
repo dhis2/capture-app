@@ -12,6 +12,7 @@ const RelationshipTrackedEntityInstancePlain =
     ({
         theme,
         onSave,
+        onCancel,
         teiRegistrationMetadata = {},
         duplicatesReviewPageSize,
         renderDuplicatesDialogActions,
@@ -35,6 +36,7 @@ const RelationshipTrackedEntityInstancePlain =
                 })}
                 fieldOptions={fieldOptions}
                 onSave={onSave}
+                onCancel={onCancel}
                 duplicatesReviewPageSize={duplicatesReviewPageSize}
                 renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                 renderDuplicatesCardActions={renderDuplicatesCardActions}

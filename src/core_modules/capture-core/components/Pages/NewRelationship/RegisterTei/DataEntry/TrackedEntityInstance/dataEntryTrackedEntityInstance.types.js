@@ -12,6 +12,7 @@ import type {
 export type Props = {|
     theme: Theme,
     onSave: (TeiPayload) => void,
+    onCancel: () => void,
     teiRegistrationMetadata?: TeiRegistration,
     duplicatesReviewPageSize: number,
     renderDuplicatesCardActions?: RenderCustomCardActions,

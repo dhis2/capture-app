@@ -70,6 +70,7 @@ export const TrackedEntityRelationshipsWrapper = ({
                     suggestedProgramId,
                     onLinkToTrackedEntityFromRegistration,
                     onLinkToTrackedEntityFromSearch,
+                    onCancel,
                 ) => (
                     <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
                         <RegisterTei
@@ -79,6 +80,7 @@ export const TrackedEntityRelationshipsWrapper = ({
                             teiId={teiId}
                             onGetUnsavedAttributeValues={() => console.log('get unsaved')}
                             trackedEntityTypeId={selectedTrackedEntityTypeId}
+                            onCancel={onCancel}
                         />
                     </ResultsPageSizeContext.Provider>
                 )}
