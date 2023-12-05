@@ -337,7 +337,7 @@ const SearchFormIndex = ({
     },
     [
         classes.searchButtonContainer,
-        classes.searchDomainSelectorSection,
+        classes.searchDomainsContainer,
         classes.searchRowSelectElement,
         classes.searchRow,
         classes.textInfo,

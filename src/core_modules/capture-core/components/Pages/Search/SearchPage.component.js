@@ -22,14 +22,16 @@ const getStyles = () => ({
     },
     half: {
         flex: 1,
+    },
+    quarter: {
+        flex: 0.4,
+    },
+    searchBoxWrapper: {
         padding: spacers.dp16,
         background: colors.white,
         border: '1px solid',
         borderColor: colors.grey400,
         borderRadius: 3,
-    },
-    quarter: {
-        flex: 0.4,
     },
 });
 
@@ -41,7 +43,7 @@ const SearchPagePlain = ({ programId, orgUnitId, onNavigateToMainPage, classes }
         </Button>
 
         <div className={classes.container}>
-            <div className={classes.half}>
+            <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
                 <SearchBox programId={programId} />
             </div>
             <div className={classes.quarter}>
