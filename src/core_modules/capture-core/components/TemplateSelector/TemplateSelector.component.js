@@ -79,7 +79,10 @@ const TemplateSelectorPlain = (props: Props) => {
         const { id } = customTemplate;
         return (
             <div className={classes.chipContainer} key={id}>
-                <TemplateSelectorChip template={customTemplate} onSelectTemplate={onSelectTemplate} />
+                <TemplateSelectorChip
+                    template={customTemplate}
+                    onSelectTemplate={onSelectTemplate}
+                />
             </div>
         );
     });

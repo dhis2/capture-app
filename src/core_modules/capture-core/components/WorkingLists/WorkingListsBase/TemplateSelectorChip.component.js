@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import { Chip, Tooltip } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/';
+import { Chip } from '@dhis2/ui';
 import { TemplateSelectorChipContent } from './TemplateSelectorChipContent.component';
 import type { WorkingListTemplate } from './workingListsBase.types';
+import { ConditionalTooltipForChip } from '../../ConditionalTooltipForChip';
 
 type PassOnProps = {
     currentListIsModified: boolean,
@@ -14,27 +14,10 @@ type Props = {
     template: WorkingListTemplate,
     currentTemplateId: string,
     onSelectTemplate: Function,
-    ...CssClasses,
 };
 
-const styles = {
-    // button style reset
-    button: {
-        border: 'none',
-        backgroundColor: 'transparent',
-        borderRadius: '16px',
-        padding: 0,
-        margin: 0,
-        minWidth: 0,
-        minHeight: 0,
-        '&:hover': {
-            backgroundColor: 'transparent',
-        },
-    },
-};
-
-export const TemplateSelectorChipPlain = (props: Props) => {
-    const { template, currentTemplateId, onSelectTemplate, classes, ...passOnProps } = props;
+export const TemplateSelectorChip = (props: Props) => {
+    const { template, currentTemplateId, onSelectTemplate, ...passOnProps } = props;
     const { name, id } = template;
 
     const selectTemplateHandler = React.useCallback(() => {
@@ -45,39 +28,28 @@ export const TemplateSelectorChipPlain = (props: Props) => {
     ]);
 
     return (
-        <Tooltip
+        <ConditionalTooltipForChip
             content={name}
             placement={'top'}
             openDelay={800}
+            enabled={name.length > 30}
+            onClick={selectTemplateHandler}
         >
-            {({ ref, onMouseOver, onMouseOut }) => (
-                <button
-                    ref={ref}
-                    onClick={selectTemplateHandler}
-                    className={classes.button}
-                    onMouseOver={onMouseOver}
-                    onMouseOut={onMouseOut}
-                    onFocus={onMouseOver}
-                    onBlur={onMouseOut}
-                >
-                    <Chip
-                        marginTop="0"
-                        marginBottom="0"
-                        marginLeft="0"
-                        marginRight="0"
-                        dataTest="workinglist-template-selector-chip"
-                        selected={id === currentTemplateId}
-                    >
-                        <TemplateSelectorChipContent
-                            {...passOnProps}
-                            text={name}
-                            isSelectedTemplate={id === currentTemplateId}
-                        />
-                    </Chip>
-                </button>
-            )}
-        </Tooltip>
+            <Chip
+                marginTop="0"
+                marginBottom="0"
+                marginLeft="0"
+                marginRight="0"
+                dataTest="workinglist-template-selector-chip"
+                selected={id === currentTemplateId}
+            >
+                <TemplateSelectorChipContent
+                    {...passOnProps}
+                    text={name}
+                    isSelectedTemplate={id === currentTemplateId}
+                />
+            </Chip>
+        </ConditionalTooltipForChip>
     );
 };
 
-export const TemplateSelectorChip = withStyles(styles)(TemplateSelectorChipPlain);
