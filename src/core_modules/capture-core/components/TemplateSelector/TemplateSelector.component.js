@@ -18,7 +18,6 @@ const getStyles = () => ({
         padding: 0,
         gap: '4px',
         marginBottom: spacers.dp8,
-        overflow: 'hidden',
     },
     chipContainer: {
         padding: 0,

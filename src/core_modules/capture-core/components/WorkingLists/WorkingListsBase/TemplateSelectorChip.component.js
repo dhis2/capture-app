@@ -31,14 +31,6 @@ const styles = {
             backgroundColor: 'transparent',
         },
     },
-    // Override default chip margin
-    chip: {
-        marginTop: '0 !important',
-        marginBottom: '0 !important',
-        marginRight: '0 !important',
-        marginLeft: '0 !important',
-        backgroundColor: 'red',
-    },
 };
 
 export const TemplateSelectorChipPlain = (props: Props) => {
@@ -69,9 +61,11 @@ export const TemplateSelectorChipPlain = (props: Props) => {
                     onBlur={onMouseOut}
                 >
                     <Chip
+                        marginTop="0"
+                        marginBottom="0"
+                        marginLeft="0"
+                        marginRight="0"
                         dataTest="workinglist-template-selector-chip"
-                        tabIndex="0"
-                        className={classes.chip}
                         selected={id === currentTemplateId}
                     >
                         <TemplateSelectorChipContent
