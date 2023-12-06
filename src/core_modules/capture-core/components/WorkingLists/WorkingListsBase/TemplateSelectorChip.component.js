@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Chip } from '@dhis2/ui';
 import { TemplateSelectorChipContent } from './TemplateSelectorChipContent.component';
 import type { WorkingListTemplate } from './workingListsBase.types';
-import { ConditionalTooltipForChip } from '../../ConditionalTooltipForChip';
+import { ConditionalTooltipForChip } from '../../Tooltips/ConditionalTooltipForChip';
 
 type PassOnProps = {
     currentListIsModified: boolean,
@@ -14,10 +14,17 @@ type Props = {
     template: WorkingListTemplate,
     currentTemplateId: string,
     onSelectTemplate: Function,
+    maxCharacters?: number,
 };
 
 export const TemplateSelectorChip = (props: Props) => {
-    const { template, currentTemplateId, onSelectTemplate, ...passOnProps } = props;
+    const {
+        template,
+        currentTemplateId,
+        onSelectTemplate,
+        maxCharacters = 30,
+        ...passOnProps
+    } = props;
     const { name, id } = template;
 
     const selectTemplateHandler = React.useCallback(() => {
@@ -32,7 +39,7 @@ export const TemplateSelectorChip = (props: Props) => {
             content={name}
             placement={'top'}
             openDelay={800}
-            enabled={name.length > 30}
+            enabled={name.length > maxCharacters}
             onClick={selectTemplateHandler}
         >
             <Chip
@@ -46,6 +53,7 @@ export const TemplateSelectorChip = (props: Props) => {
                 <TemplateSelectorChipContent
                     {...passOnProps}
                     text={name}
+                    maxCharacters={maxCharacters}
                     isSelectedTemplate={id === currentTemplateId}
                 />
             </Chip>

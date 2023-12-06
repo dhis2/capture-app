@@ -38,8 +38,8 @@ const ConditionalTooltipForChipPlain = (props: Props) => {
                         ref={ref}
                         onClick={onClick}
                         className={classes.button}
-                        onMouseOver={onMouseOver}
-                        onMouseOut={onMouseOut}
+                        onPointerEnter={onMouseOver}
+                        onPointerLeave={onMouseOut}
                         onFocus={onMouseOver}
                         onBlur={onMouseOut}
                     >

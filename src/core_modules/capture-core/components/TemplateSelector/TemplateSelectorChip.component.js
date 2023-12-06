@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react';
 import { Chip } from '@dhis2/ui';
 import type { WorkingListTemplate } from './workingListsBase.types';
-import { ConditionalTooltipForChip } from '../ConditionalTooltipForChip';
+import { ConditionalTooltipForChip } from '../Tooltips/ConditionalTooltipForChip';
 
 type Props = {
     template: WorkingListTemplate,
