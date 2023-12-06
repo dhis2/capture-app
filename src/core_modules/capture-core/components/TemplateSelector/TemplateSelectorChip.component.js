@@ -28,10 +28,10 @@ export const TemplateSelectorChip = (props: Props) => {
             onClick={selectTemplateHandler}
         >
             <Chip
-                marginTop="0"
-                marginBottom="0"
-                marginLeft="0"
-                marginRight="0"
+                marginTop={0}
+                marginBottom={0}
+                marginLeft={0}
+                marginRight={0}
                 dataTest="workinglist-template-selector-chip"
             >
                 {text}
