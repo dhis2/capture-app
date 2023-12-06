@@ -29,14 +29,14 @@ export class RulesEngine {
         outputConverter: IConvertOutputRulesEffectsValue,
         dateUtils: IDateUtils,
         environment: $Values<environmentTypes>,
-        flags: Flag,
+        flags?: Flag,
     ) {
         this.inputConverter = inputConverter;
         this.outputConverter = outputConverter;
         this.valueProcessor = new ValueProcessor(inputConverter);
         this.variableService = new VariableService(this.valueProcessor.processValue, dateUtils, environment);
         this.dateUtils = dateUtils;
-        this.flags = flags;
+        this.flags = flags ?? {};
     }
 
     /**

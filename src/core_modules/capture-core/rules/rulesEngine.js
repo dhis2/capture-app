@@ -11,5 +11,4 @@ export const rulesEngine = new RulesEngine(
     outputConverter,
     dateUtils,
     environmentTypes.WebClient,
-    { verbose: true },
 );
