@@ -9,6 +9,7 @@ import { RelationshipNavigation } from './RelationshipNavigation/RelationshipNav
 
 type Props = {
     onAddRelationship: (relationshipType: { id: string, name: string }, entity: Object, entityType: string) => void,
+    onCancel: () => {},
     classes: {
         container: string,
     },

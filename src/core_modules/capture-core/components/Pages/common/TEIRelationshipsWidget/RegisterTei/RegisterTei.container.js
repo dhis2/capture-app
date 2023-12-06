@@ -10,6 +10,7 @@ export const RegisterTei = ({
     onLink,
     onSave,
     onGetUnsavedAttributeValues,
+    onCancel,
     teiId,
     trackedEntityTypeId,
     suggestedProgramId,
@@ -32,6 +33,7 @@ export const RegisterTei = ({
         <RegisterTeiComponent
             dataEntryId={dataEntryId}
             onLink={onLink}
+            onCancel={onCancel}
             onSaveWithoutEnrollment={onSave}
             onSaveWithEnrollment={onSave}
             onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}

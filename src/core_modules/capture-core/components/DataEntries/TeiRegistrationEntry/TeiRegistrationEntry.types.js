@@ -15,6 +15,7 @@ export type OwnProps = $ReadOnly<{|
     saveButtonText: string,
     fieldOptions?: Object,
     onSave: (TeiPayload) => void,
+    onCancel: () => void,
     duplicatesReviewPageSize: number,
     isSavingInProgress?: boolean,
     inheritedAttributes?: Array<InputAttribute>,

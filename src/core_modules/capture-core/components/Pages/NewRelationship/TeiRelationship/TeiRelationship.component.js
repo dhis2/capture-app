@@ -20,6 +20,7 @@ type Props = {
     onOpenSearch: (trackedEntityTypeId: string, programId: ?string) => void,
     onSelectFindMode: (findMode: $Values<typeof findModes>) => void,
     onAddRelationship: (entity: Object) => void,
+    onCancel: () => void,
     selectedRelationshipType: SelectedRelationshipType,
     classes: {
         container: string,
@@ -143,6 +144,7 @@ class TeiRelationshipPlain extends React.Component<Props> {
             <RegisterTei
                 onLink={this.handleAddRelationship}
                 onSave={this.handleAddRelationshipWithNewTei}
+                onCancel={this.props.onCancel}
                 onGetUnsavedAttributeValues={this.props.onGetUnsavedAttributeValues}
             />
         </ResultsPageSizeContext.Provider>

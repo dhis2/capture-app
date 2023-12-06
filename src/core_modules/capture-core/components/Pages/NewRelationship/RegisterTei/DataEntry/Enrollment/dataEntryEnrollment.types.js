@@ -12,6 +12,7 @@ export type Props = {|
     programId: string,
     enrollmentMetadata?: Enrollment,
     onSave: SaveForEnrollmentAndTeiRegistration,
+    onCancel: () => void,
     duplicatesReviewPageSize: number,
     renderDuplicatesCardActions?: RenderCustomCardActions,
     renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForEnrollmentAndTeiRegistration) => Node,
