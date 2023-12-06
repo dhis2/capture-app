@@ -124,7 +124,7 @@ export class RulesEngine {
                             `Original condition was: ${expression} - ` +
                             `Evaluation ended up as:${injectedExpression} - error message:${error}`),
                         onVerboseLog: injectedExpression => log.info(
-                            `Expression with id: ${rule.id} was run. ` +
+                            `Expression with id rule:${rule.id} was run. ` +
                             `Original condition was: ${expression} - ` +
                             `Evaluation ended up as:${injectedExpression}`),
                     });
@@ -158,14 +158,15 @@ export class RulesEngine {
                                 expression: actionExpression,
                                 dhisFunctions,
                                 variablesHash,
+                                flags: this.flags,
                                 onError: (error, injectedExpression) => log.warn(
                                     `Expression with id rule: action:${id} could not be run. ` +
                                     `Original condition was: ${actionExpression} - ` +
                                     `Evaluation ended up as:${injectedExpression} - error message:${error}`),
                                 onVerboseLog: injectedExpression => log.info(
-                                    `Expression with id: ${id} was run. ` +
+                                    `Expression with id rule: action:${id} was run. ` +
                                     `Original condition was: ${actionExpression} - ` +
-                                    `Evaluation ended up as:${injectedExpression}`),
+                                    `Evaluation ended up as: ${injectedExpression}`),
                             });
                         }
 
