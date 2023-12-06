@@ -25,7 +25,7 @@ const styles = {
         },
     },
 };
-const ConditionalTooltipForChipPlain = (props: Props) => {
+const TooltipForChipPlain = (props: Props) => {
     const { enabled, children, classes, onClick, ...passOnProps } = props;
 
     return enabled ?
@@ -57,4 +57,4 @@ const ConditionalTooltipForChipPlain = (props: Props) => {
         );
 };
 
-export const ConditionalTooltipForChip = withStyles(styles)(ConditionalTooltipForChipPlain);
+export const TooltipForChip = withStyles(styles)(TooltipForChipPlain);

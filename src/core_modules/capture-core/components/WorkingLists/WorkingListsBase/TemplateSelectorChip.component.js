@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Chip } from '@dhis2/ui';
 import { TemplateSelectorChipContent } from './TemplateSelectorChipContent.component';
 import type { WorkingListTemplate } from './workingListsBase.types';
-import { ConditionalTooltipForChip } from '../../Tooltips/ConditionalTooltipForChip';
+import { TooltipForChip } from '../../Tooltips/TooltipForChip';
 
 type PassOnProps = {
     currentListIsModified: boolean,
@@ -35,7 +35,7 @@ export const TemplateSelectorChip = (props: Props) => {
     ]);
 
     return (
-        <ConditionalTooltipForChip
+        <TooltipForChip
             content={name}
             placement={'top'}
             openDelay={800}
@@ -57,7 +57,7 @@ export const TemplateSelectorChip = (props: Props) => {
                     isSelectedTemplate={id === currentTemplateId}
                 />
             </Chip>
-        </ConditionalTooltipForChip>
+        </TooltipForChip>
     );
 };
 
