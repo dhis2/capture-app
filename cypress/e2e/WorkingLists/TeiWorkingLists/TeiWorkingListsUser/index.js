@@ -246,12 +246,12 @@ When('you open the column selector', () => {
 });
 
 When('you select the registering unit and save from the column selector', () => {
-    cy.get('div[role="dialog"]')
+    cy.get('aside[role="dialog"]')
         .contains('Registering unit')
         .find('input')
         .click();
 
-    cy.get('div[role="dialog"]')
+    cy.get('aside[role="dialog"]')
         .contains('Save')
         .click();
 });
@@ -544,27 +544,32 @@ Then('you see the new sharing settings', () => {
         .click();
 });
 
-When('you create a copy of the working list', () => {
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
+When('you create a copy of the working list',
+    () => {
+        cy.get('[data-test="list-view-menu-button"]')
+            .click();
 
-    cy.contains('Save current view as')
-        .click();
+        cy.contains('Save current view as')
+            .click();
 
-    const id = uuid();
-    cy.get('[data-test="view-name-content"]')
-        .type(id);
+        const id = uuid();
+        cy.get('[data-test="view-name-content"]')
+            .type(id);
 
-    cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackerFilter');
+        cy.intercept('POST', '**/trackedEntityInstanceFilters**')
+            .as('newTrackerFilter');
 
-    cy.get('button')
-        .contains('Save')
-        .click();
+        cy.get('[data-test="new-template-dialog"]')
+            .within(() => {
+                cy.get('[data-test="dhis2-uicore-button"]')
+                    .contains('Save')
+                    .click();
+            });
 
-    cy.wait('@newTrackerFilter', { timeout: 30000 });
+        cy.wait('@newTrackerFilter', { timeout: 30000 });
 
-    cy.reload();
-});
+        cy.reload();
+    });
 
 When('you open the program stage filters from the more filters dropdown menu', () => {
     cy.get('[data-test="tei-working-lists"]')
@@ -602,12 +607,12 @@ When('you select the Foci response program stage', () => {
 });
 
 When('you select a data element columns and save from the column selector', () => {
-    cy.get('div[role="dialog"]')
+    cy.get('aside[role="dialog"]')
         .contains('People included')
         .find('input')
         .click();
 
-    cy.get('div[role="dialog"]')
+    cy.get('aside[role="dialog"]')
         .contains('Save')
         .click();
 });
@@ -663,12 +668,12 @@ Then('you see scheduledAt filter', () => {
 });
 
 When('you select a scheduledAt column and save from the column selector', () => {
-    cy.get('div[role="dialog"]')
+    cy.get('aside[role="dialog"]')
         .contains('Appointment date')
         .find('input')
         .click();
 
-    cy.get('div[role="dialog"]')
+    cy.get('aside[role="dialog"]')
         .contains('Save')
         .click();
 });
