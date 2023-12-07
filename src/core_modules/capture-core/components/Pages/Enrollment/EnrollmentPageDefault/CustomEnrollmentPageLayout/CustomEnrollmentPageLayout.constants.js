@@ -1,5 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import type { WidgetConfig } from './CustomEnrollmentPageLayout.types';
 
 // import components
 import { EnrollmentQuickActions } from '../EnrollmentQuickActions';
@@ -30,13 +31,7 @@ import type {
 import type { Props as WidgetProfileProps } from '../../../../WidgetProfile/widgetProfile.types';
 import type { Props as WidgetEnrollmentProps } from '../../../../WidgetEnrollment/enrollment.types';
 
-type Widget = {
-    Component: React$ComponentType<any>,
-    shouldHideWidget?: (props: Object) => boolean,
-    getProps: Function,
-};
-
-export const WidgetsForCustomLayout: $ReadOnly<{ [key: string]: Widget }> = Object.freeze({
+export const WidgetsForCustomLayout: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
     QuickActions: {
         Component: EnrollmentQuickActions,
         getProps: ({ stages, events, ruleEffects }: ComponentProps) => ({

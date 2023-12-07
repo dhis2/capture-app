@@ -24,6 +24,7 @@ export const getEnrollmentPageDefaultStyles = () => ({
     },
     columns: {
         display: 'flex',
+        gap: spacers.dp16,
     },
     leftColumn: {
         flexGrow: 3,
@@ -36,7 +37,6 @@ export const getEnrollmentPageDefaultStyles = () => ({
     rightColumn: {
         flexGrow: 1,
         flexShrink: 1,
-        paddingLeft: spacersNum.dp16,
         width: 360,
         display: 'flex',
         flexDirection: 'column',

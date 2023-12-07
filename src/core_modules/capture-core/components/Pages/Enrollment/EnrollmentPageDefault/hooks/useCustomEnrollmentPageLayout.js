@@ -1,6 +1,6 @@
 // @flow
-
 import { useApiMetadataQuery } from '../../../../../utils/reactQueryHelpers';
+import type { CustomPageLayoutConfig } from '../CustomEnrollmentPageLayout/CustomEnrollmentPageLayout.types';
 
 type Props = {
     selectedScopeId: string,
@@ -13,12 +13,17 @@ export const useCustomEnrollmentPageLayout = ({ selectedScopeId }: Props) => {
         },
         {
             enabled: !!selectedScopeId,
-            select: enrollmentPageConfig => enrollmentPageConfig[selectedScopeId],
+            select: (enrollmentPageConfig) => {
+                if (!enrollmentPageConfig) return null;
+                const enrollmentPageConfigForScope: ?CustomPageLayoutConfig = enrollmentPageConfig[selectedScopeId];
+
+                return enrollmentPageConfigForScope;
+            },
         },
     );
 
     return {
-        customPageLayoutConfig: data,
+        customPageLayoutConfig: !isError ? data : undefined,
         isLoading,
         isError,
     };

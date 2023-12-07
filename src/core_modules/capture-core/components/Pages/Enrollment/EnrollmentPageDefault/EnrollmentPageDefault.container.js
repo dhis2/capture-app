@@ -38,7 +38,9 @@ export const EnrollmentPageDefault = () => {
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
-    const { customPageLayoutConfig } = useCustomEnrollmentPageLayout({ selectedScopeId: programId });
+    const {
+        customPageLayoutConfig,
+    } = useCustomEnrollmentPageLayout({ selectedScopeId: programId });
 
     const program = useTrackerProgram(programId);
     const {
@@ -109,7 +111,7 @@ export const EnrollmentPageDefault = () => {
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
 
     if (error) {
-        return error.errorComponent;
+        return error?.errorComponent;
     }
 
     if (customPageLayoutConfig) {

@@ -42,12 +42,16 @@ export const CustomEnrollmentPageLayoutPlain = ({
         toggleVisibility,
     }), [addRelationShipContainerElement, passOnProps, toggleVisibility]);
 
-    const { leftColumn, rightColumn } = customPageLayoutConfig;
+    const {
+        leftColumn,
+        rightColumn,
+    } = customPageLayoutConfig;
+
     const leftColumnWidgets = useMemo(
-        () => leftColumn.map(({ component }) => renderWidget(component, allProps)), [allProps, leftColumn],
+        () => leftColumn?.map(({ component }) => renderWidget(component, allProps)), [allProps, leftColumn],
     );
     const rightColumnWidgets = useMemo(
-        () => rightColumn.map(({ component }) => renderWidget(component, allProps)), [allProps, rightColumn],
+        () => rightColumn?.map(({ component }) => renderWidget(component, allProps)), [allProps, rightColumn],
     );
 
     return (
@@ -59,12 +63,16 @@ export const CustomEnrollmentPageLayoutPlain = ({
             >
                 <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
                 <div className={classes.columns}>
-                    <div className={classes.leftColumn}>
-                        {leftColumnWidgets}
-                    </div>
-                    <div className={classes.rightColumn}>
-                        {rightColumnWidgets}
-                    </div>
+                    {leftColumn && (
+                        <div className={classes.leftColumn}>
+                            {leftColumnWidgets}
+                        </div>
+                    )}
+                    {rightColumn && (
+                        <div className={classes.rightColumn}>
+                            {rightColumnWidgets}
+                        </div>
+                    )}
                 </div>
             </div>
         </>

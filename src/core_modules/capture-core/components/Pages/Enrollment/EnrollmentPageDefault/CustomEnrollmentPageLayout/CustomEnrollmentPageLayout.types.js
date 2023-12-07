@@ -15,10 +15,16 @@ type ColumnConfig = {
     component: LeftColumnComponents | RightColumnComponents,
 }
 
-type CustomPageLayoutConfig = {
+export type CustomPageLayoutConfig = {
     leftColumn: Array<ColumnConfig>,
     rightColumn: Array<ColumnConfig>,
 }
+
+export type WidgetConfig = {
+    Component: React$ComponentType<any>,
+    shouldHideWidget?: (props: Object) => boolean,
+    getProps: Function,
+};
 
 export type Props = {
     customPageLayoutConfig: CustomPageLayoutConfig,
