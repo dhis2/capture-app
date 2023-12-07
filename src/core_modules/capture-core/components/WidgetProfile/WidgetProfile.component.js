@@ -11,7 +11,7 @@ import { errorCreator } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
-import type { Props } from './widgetProfile.types';
+import type { PlainProps } from './widgetProfile.types';
 import {
     useProgram,
     useTrackedEntityInstances,
@@ -44,7 +44,7 @@ const WidgetProfilePlain = ({
     orgUnitId = '',
     onUpdateTeiAttributeValues,
     classes,
-}: Props) => {
+}: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
@@ -158,4 +158,4 @@ const WidgetProfilePlain = ({
     );
 };
 
-export const WidgetProfile: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetProfilePlain);
+export const WidgetProfile: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(WidgetProfilePlain);

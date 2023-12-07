@@ -29,6 +29,8 @@ import {
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
+import { useCustomEnrollmentPageLayout } from './hooks/useCustomEnrollmentPageLayout';
+import { CustomEnrollmentPageLayout } from './CustomEnrollmentPageLayout';
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
@@ -36,6 +38,7 @@ export const EnrollmentPageDefault = () => {
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
+    const { customPageLayoutConfig } = useCustomEnrollmentPageLayout({ selectedScopeId: programId });
 
     const program = useTrackerProgram(programId);
     const {
@@ -107,6 +110,36 @@ export const EnrollmentPageDefault = () => {
 
     if (error) {
         return error.errorComponent;
+    }
+
+    if (customPageLayoutConfig) {
+        return (
+            <CustomEnrollmentPageLayout
+                customPageLayoutConfig={customPageLayoutConfig}
+
+                // Props from common enrollment page
+                teiId={teiId}
+                orgUnitId={orgUnitId}
+                program={program}
+                // $FlowFixMe
+                stages={stages}
+                events={enrollment?.events}
+                enrollmentId={enrollmentId}
+                onAddNew={onAddNew}
+                onDelete={onDelete}
+                onViewAll={onViewAll}
+                onCreateNew={onCreateNew}
+                widgetEffects={outputEffects}
+                hideWidgets={hideWidgets}
+                onEventClick={onEventClick}
+                onLinkedRecordClick={onLinkedRecordClick}
+                onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
+                onUpdateEnrollmentDate={onUpdateEnrollmentDate}
+                onUpdateIncidentDate={onUpdateIncidentDate}
+                onEnrollmentError={onEnrollmentError}
+                ruleEffects={ruleEffects}
+            />
+        );
     }
 
     return (

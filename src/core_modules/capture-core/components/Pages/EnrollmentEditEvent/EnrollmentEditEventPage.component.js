@@ -163,7 +163,6 @@ const EnrollmentEditEventPagePain = ({
                                 addRelationshipRenderElement={addRelationShipContainerElement}
                                 onOpenAddRelationship={toggleVisibility}
                                 onCloseAddRelationship={toggleVisibility}
-                                onAddRelationship={() => {}}
                                 onLinkedRecordClick={onLinkedRecordClick}
                             />
                         }

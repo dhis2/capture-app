@@ -18,7 +18,7 @@ import {
 } from '../../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 import { AddRelationshipRefWrapper } from '../../EnrollmentEditEvent/AddRelationshipRefWrapper';
 
-const getStyles = () => ({
+export const getEnrollmentPageDefaultStyles = () => ({
     container: {
         position: 'relative',
     },
@@ -111,7 +111,6 @@ export const EnrollmentPageDefaultPlain = ({
                                 programId={program.id}
                                 orgUnitId={orgUnitId}
                                 addRelationshipRenderElement={addRelationShipContainerElement}
-                                onAddRelationship={() => {}}
                                 onOpenAddRelationship={toggleVisibility}
                                 onCloseAddRelationship={toggleVisibility}
                                 teiId={teiId}
@@ -159,5 +158,5 @@ export const EnrollmentPageDefaultPlain = ({
 
 
 export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(
-    getStyles,
+    getEnrollmentPageDefaultStyles,
 )(EnrollmentPageDefaultPlain);
