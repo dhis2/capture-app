@@ -1,4 +1,5 @@
 // @flow
+import { WidgetTypes } from './CustomEnrollmentPageLayout.constants';
 
 type LeftColumnComponents = 'QuickActions' | 'StagesAndEvents';
 type RightColumnComponents = 'TrackedEntityRelationship'
@@ -10,14 +11,14 @@ type RightColumnComponents = 'TrackedEntityRelationship'
     | 'ProfileWidget'
     | 'EnrollmentWidget';
 
-type ColumnConfig = {
-    type: 'component' | 'plugin',
-    component: LeftColumnComponents | RightColumnComponents,
+export type ColumnConfig = {
+    type: $Values<typeof WidgetTypes>,
+    name: LeftColumnComponents | RightColumnComponents,
 }
 
 export type CustomPageLayoutConfig = {
-    leftColumn: Array<ColumnConfig>,
-    rightColumn: Array<ColumnConfig>,
+    leftColumn: ?Array<ColumnConfig>,
+    rightColumn: ?Array<ColumnConfig>,
 }
 
 export type WidgetConfig = {

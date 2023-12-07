@@ -31,6 +31,11 @@ import type {
 import type { Props as WidgetProfileProps } from '../../../../WidgetProfile/widgetProfile.types';
 import type { Props as WidgetEnrollmentProps } from '../../../../WidgetEnrollment/enrollment.types';
 
+export const WidgetTypes = Object.freeze({
+    COMPONENT: 'component',
+    PLUGIN: 'plugin',
+});
+
 export const WidgetsForCustomLayout: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
     QuickActions: {
         Component: EnrollmentQuickActions,

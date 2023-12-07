@@ -18,7 +18,7 @@ import {
 } from '../../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 import { AddRelationshipRefWrapper } from '../../EnrollmentEditEvent/AddRelationshipRefWrapper';
 
-export const getEnrollmentPageDefaultStyles = () => ({
+const getEnrollmentPageDefaultStyles = () => ({
     container: {
         position: 'relative',
     },

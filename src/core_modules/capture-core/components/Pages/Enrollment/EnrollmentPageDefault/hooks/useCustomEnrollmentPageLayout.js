@@ -17,6 +17,13 @@ export const useCustomEnrollmentPageLayout = ({ selectedScopeId }: Props) => {
                 if (!enrollmentPageConfig) return null;
                 const enrollmentPageConfigForScope: ?CustomPageLayoutConfig = enrollmentPageConfig[selectedScopeId];
 
+                if (!enrollmentPageConfigForScope) return null;
+                const { leftColumn, rightColumn } = enrollmentPageConfigForScope;
+
+                if (!leftColumn && !rightColumn) {
+                    throw new Error('Invalid enrollment page layout configuration');
+                }
+
                 return enrollmentPageConfigForScope;
             },
         },

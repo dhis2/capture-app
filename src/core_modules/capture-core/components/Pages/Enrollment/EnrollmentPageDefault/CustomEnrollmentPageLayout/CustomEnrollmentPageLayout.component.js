@@ -1,30 +1,44 @@
 // @flow
 import React, { useCallback, useMemo, useState } from 'react';
+import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './CustomEnrollmentPageLayout.types';
-import { WidgetsForCustomLayout } from './CustomEnrollmentPageLayout.constants';
-import { getEnrollmentPageDefaultStyles } from '../EnrollmentPageDefault.component';
 import { AddRelationshipRefWrapper } from '../../../EnrollmentEditEvent/AddRelationshipRefWrapper';
+import { useCustomColumns } from './hooks/useCustomColumns';
 
-const renderWidget = (component, passOnProps) => {
-    const Widget = WidgetsForCustomLayout[component];
-
-    if (!Widget) return null;
-    const { getProps, shouldHideWidget } = Widget;
-
-    const widgetProps = getProps(passOnProps);
-    const hideWidget = shouldHideWidget && shouldHideWidget(passOnProps);
-
-    if (hideWidget) return null;
-
-    return (
-        <Widget.Component
-            {...widgetProps}
-            key={component}
-        />
-    );
-};
+const getEnrollmentPageDefaultStyles = () => ({
+    container: {
+        position: 'relative',
+    },
+    columns: {
+        display: 'flex',
+        gap: spacers.dp16,
+    },
+    leftColumn: {
+        flexGrow: 3,
+        flexShrink: 1,
+        width: 872,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp16,
+    },
+    rightColumn: {
+        flexGrow: 1,
+        flexShrink: 1,
+        width: 360,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp16,
+    },
+    title: {
+        fontSize: '1.25rem',
+        color: colors.grey900,
+        fontWeight: 500,
+        paddingTop: spacersNum.dp8,
+        paddingBottom: spacersNum.dp16,
+    },
+});
 
 export const CustomEnrollmentPageLayoutPlain = ({
     customPageLayoutConfig,
@@ -35,24 +49,15 @@ export const CustomEnrollmentPageLayoutPlain = ({
     const [addRelationShipContainerElement, setAddRelationshipContainerElement] =
         useState<HTMLDivElement | void>(undefined);
     const toggleVisibility = useCallback(() => setMainContentVisibility(current => !current), []);
-
     const allProps = useMemo(() => ({
         ...passOnProps,
         addRelationShipContainerElement,
         toggleVisibility,
     }), [addRelationShipContainerElement, passOnProps, toggleVisibility]);
-
     const {
-        leftColumn,
-        rightColumn,
-    } = customPageLayoutConfig;
-
-    const leftColumnWidgets = useMemo(
-        () => leftColumn?.map(({ component }) => renderWidget(component, allProps)), [allProps, leftColumn],
-    );
-    const rightColumnWidgets = useMemo(
-        () => rightColumn?.map(({ component }) => renderWidget(component, allProps)), [allProps, rightColumn],
-    );
+        leftColumnWidgets,
+        rightColumnWidgets,
+    } = useCustomColumns({ customPageLayoutConfig, allProps });
 
     return (
         <>
@@ -63,12 +68,12 @@ export const CustomEnrollmentPageLayoutPlain = ({
             >
                 <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
                 <div className={classes.columns}>
-                    {leftColumn && (
+                    {customPageLayoutConfig.leftColumn && (
                         <div className={classes.leftColumn}>
                             {leftColumnWidgets}
                         </div>
                     )}
-                    {rightColumn && (
+                    {customPageLayoutConfig.rightColumn && (
                         <div className={classes.rightColumn}>
                             {rightColumnWidgets}
                         </div>
