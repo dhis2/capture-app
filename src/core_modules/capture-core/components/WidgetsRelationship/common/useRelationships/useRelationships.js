@@ -47,6 +47,10 @@ export const useRelationships = ({ entityId, searchMode, relationshipTypes }: Pr
                     const { from, to } = relationship;
                     const apiLinkedEntity = determineLinkedEntity(from, to, entityId);
 
+                    if (!apiLinkedEntity) {
+                        return acc;
+                    }
+
                     if (!relationshipType.bidirectional && apiLinkedEntity === from) {
                         return acc;
                     }

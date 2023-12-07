@@ -137,18 +137,19 @@ const getLinkedEntityData = (apiLinkedEntity, relationshipCreatedAt, pendingApiR
     return null;
 };
 
-export const determineLinkedEntity = (fromEntity: ApiLinkedEntity, toEntity: ApiLinkedEntity, sourceId: string) => {
-    if (fromEntity.trackedEntity?.trackedEntity === sourceId || fromEntity.event?.event === sourceId) {
-        return toEntity;
-    }
+export const determineLinkedEntity =
+    (fromEntity: ApiLinkedEntity, toEntity: ApiLinkedEntity, sourceId: string): ApiLinkedEntity | null => {
+        if (fromEntity.trackedEntity?.trackedEntity === sourceId || fromEntity.event?.event === sourceId) {
+            return toEntity;
+        }
 
-    if (toEntity.trackedEntity?.trackedEntity === sourceId || toEntity.event?.event === sourceId) {
-        return fromEntity;
-    }
+        if (toEntity.trackedEntity?.trackedEntity === sourceId || toEntity.event?.event === sourceId) {
+            return fromEntity;
+        }
 
-    log.error(errorCreator('Could not determine linked entity')({ fromEntity, toEntity, sourceId }));
-    return null;
-};
+        log.error(errorCreator('Could not determine linked entity')({ fromEntity, toEntity, sourceId }));
+        return null;
+    };
 
 export const useGroupedLinkedEntities = (
     sourceId: string,
