@@ -17,7 +17,7 @@ const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
     const { type } = widget;
 
     if (type.toLowerCase() === WidgetTypes.COMPONENT) {
-        const { name } = widget;
+        const { name, settings = {} } = widget;
         const widgetConfig = availableWidgets[name];
 
         if (!widgetConfig) {
@@ -25,12 +25,13 @@ const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
             return null;
         }
 
-        const { getProps, shouldHideWidget } = widgetConfig;
+        const { getProps, shouldHideWidget, getCustomSettings } = widgetConfig;
 
         const hideWidget = shouldHideWidget && shouldHideWidget(props);
         if (hideWidget) return null;
 
         const widgetProps = getProps(props);
+        const customSettings = getCustomSettings && getCustomSettings(settings);
 
         let Widget = MemoizedWidgets[name];
 
@@ -42,6 +43,7 @@ const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
         return (
             <Widget
                 {...widgetProps}
+                {...customSettings}
                 key={name}
             />
         );

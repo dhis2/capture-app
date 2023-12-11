@@ -106,24 +106,28 @@ export const Notes: WidgetConfig = {
 
 export const ProfileWidget: WidgetConfig = {
     Component: WidgetProfile,
+    getCustomSettings: ({ showEdit = true }) => ({
+        showEdit,
+    }),
     getProps: ({
         teiId,
         program,
         orgUnitId,
         onUpdateTeiAttributeValues,
-        showEditProfileWidget = true,
     }): WidgetProfileProps => ({
         teiId,
         programId: program.id,
         orgUnitId,
         onUpdateTeiAttributeValues,
-        showEdit: showEditProfileWidget,
     }),
 };
 
 export const EnrollmentWidget: WidgetConfig = {
     Component: WidgetEnrollment,
     shouldHideWidget: ({ enrollmentId }) => enrollmentId === 'AUTO',
+    getCustomSettings: ({ readOnlyMode }) => ({
+        readOnlyMode,
+    }),
     getProps: ({ teiId, enrollmentId, program, onDelete, onAddNew, onUpdateEnrollmentDate, onUpdateIncidentDate, onEnrollmentError }): WidgetEnrollmentProps => ({
         teiId,
         enrollmentId,

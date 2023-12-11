@@ -61,10 +61,12 @@ export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
         {
             type: WidgetTypes.COMPONENT,
             name: 'ProfileWidget',
+            settings: { showEdit: true },
         },
         {
             type: WidgetTypes.COMPONENT,
             name: 'EnrollmentWidget',
+            settings: { readOnlyMode: false },
         },
     ],
 });

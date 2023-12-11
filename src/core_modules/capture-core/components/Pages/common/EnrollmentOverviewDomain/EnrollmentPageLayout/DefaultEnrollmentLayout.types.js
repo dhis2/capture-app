@@ -17,6 +17,7 @@ type DefaultComponents = 'QuickActions'
 export type ColumnConfig = {
     type: $Values<typeof WidgetTypes>,
     name: DefaultComponents,
+    settings?: Object,
 }
 
 export type PageLayoutConfig = {
@@ -31,4 +32,5 @@ export type WidgetConfig = {
     Component: React$ComponentType<any>,
     shouldHideWidget?: (props: Object) => boolean,
     getProps: Function,
+    getCustomSettings?: Function,
 };
