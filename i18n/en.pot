@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-12-07T14:24:55.225Z\n"
-"PO-Revision-Date: 2023-12-07T14:24:55.225Z\n"
+"POT-Creation-Date: 2023-12-11T14:06:16.448Z\n"
+"PO-Revision-Date: 2023-12-11T14:06:16.448Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -674,12 +674,6 @@ msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 msgid "Enrollment Dashboard"
 msgstr "Enrollment Dashboard"
 
-msgid "No feedback for this enrollment yet"
-msgstr "No feedback for this enrollment yet"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "No indicator output for this enrollment yet"
-
 msgid "Quick actions"
 msgstr "Quick actions"
 
@@ -949,6 +943,12 @@ msgstr "Event could not be loaded"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
+
+msgid "No feedback for this enrollment yet"
+msgstr "No feedback for this enrollment yet"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "No indicator output for this enrollment yet"
 
 msgid "Selected program"
 msgstr "Selected program"

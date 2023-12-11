@@ -5,6 +5,9 @@ import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import type { LinkedRecordClick } from '../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
+import type {
+    PageLayoutConfig,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 
 export type Props = {|
     program: TrackerProgram,
@@ -29,6 +32,7 @@ export type Props = {|
 |};
 
 export type PlainProps = {|
+    pageLayout: PageLayoutConfig,
     ...Props,
     ...CssClasses,
 |};

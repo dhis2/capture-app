@@ -1,8 +1,11 @@
 // @flow
-import { WidgetTypes } from './CustomEnrollmentPageLayout.constants';
 
-type LeftColumnComponents = 'QuickActions' | 'StagesAndEvents';
-type RightColumnComponents = 'TrackedEntityRelationship'
+
+import { WidgetTypes } from './DefaultEnrollmentLayout.constants';
+
+type DefaultComponents = 'QuickActions'
+    | 'StagesAndEvents'
+    | 'TrackedEntityRelationship'
     | 'ErrorWidget'
     | 'WarningWidget'
     | 'FeedbackWidget'
@@ -13,21 +16,19 @@ type RightColumnComponents = 'TrackedEntityRelationship'
 
 export type ColumnConfig = {
     type: $Values<typeof WidgetTypes>,
-    name: LeftColumnComponents | RightColumnComponents,
+    name: DefaultComponents,
 }
 
-export type CustomPageLayoutConfig = {
+export type PageLayoutConfig = {
+    title: ?string,
     leftColumn: ?Array<ColumnConfig>,
     rightColumn: ?Array<ColumnConfig>,
 }
+
+export type DefaultPageLayoutConfig = $Exact<PageLayoutConfig>;
 
 export type WidgetConfig = {
     Component: React$ComponentType<any>,
     shouldHideWidget?: (props: Object) => boolean,
     getProps: Function,
 };
-
-export type Props = {
-    customPageLayoutConfig: CustomPageLayoutConfig,
-    ...CssClasses,
-}

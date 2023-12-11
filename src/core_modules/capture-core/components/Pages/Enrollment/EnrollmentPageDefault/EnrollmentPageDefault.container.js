@@ -29,8 +29,13 @@ import {
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
-import { useCustomEnrollmentPageLayout } from './hooks/useCustomEnrollmentPageLayout';
-import { CustomEnrollmentPageLayout } from './CustomEnrollmentPageLayout';
+import {
+    useEnrollmentPageLayout,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
+import { DefaultPageLayout } from './DefaultPageLayout';
+import { LoadingMaskForPage } from '../../../LoadingMasks';
+
+import { DataStoreKeyByPage } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
@@ -39,8 +44,13 @@ export const EnrollmentPageDefault = () => {
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
     const {
-        customPageLayoutConfig,
-    } = useCustomEnrollmentPageLayout({ selectedScopeId: programId });
+        pageLayout,
+        isLoading,
+    } = useEnrollmentPageLayout({
+        selectedScopeId: programId,
+        defaultPageLayout: DefaultPageLayout,
+        dataStoreKey: DataStoreKeyByPage.ENROLLMENT_OVERVIEW,
+    });
 
     const program = useTrackerProgram(programId);
     const {
@@ -110,42 +120,19 @@ export const EnrollmentPageDefault = () => {
 
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
 
+    if (isLoading) {
+        return (
+            <LoadingMaskForPage />
+        );
+    }
+
     if (error) {
         return error?.errorComponent;
     }
 
-    if (customPageLayoutConfig) {
-        return (
-            <CustomEnrollmentPageLayout
-                customPageLayoutConfig={customPageLayoutConfig}
-
-                // Props from common enrollment page
-                teiId={teiId}
-                orgUnitId={orgUnitId}
-                program={program}
-                // $FlowFixMe
-                stages={stages}
-                events={enrollment?.events}
-                enrollmentId={enrollmentId}
-                onAddNew={onAddNew}
-                onDelete={onDelete}
-                onViewAll={onViewAll}
-                onCreateNew={onCreateNew}
-                widgetEffects={outputEffects}
-                hideWidgets={hideWidgets}
-                onEventClick={onEventClick}
-                onLinkedRecordClick={onLinkedRecordClick}
-                onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
-                onUpdateEnrollmentDate={onUpdateEnrollmentDate}
-                onUpdateIncidentDate={onUpdateIncidentDate}
-                onEnrollmentError={onEnrollmentError}
-                ruleEffects={ruleEffects}
-            />
-        );
-    }
-
     return (
         <EnrollmentPageDefaultComponent
+            pageLayout={pageLayout}
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}
