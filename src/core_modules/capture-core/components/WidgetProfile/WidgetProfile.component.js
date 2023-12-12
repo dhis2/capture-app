@@ -40,7 +40,7 @@ const showEditModal = (loading, error, showEdit, modalState) =>
 const WidgetProfilePlain = ({
     teiId,
     programId,
-    showEdit = false,
+    readOnlyMode = false,
     orgUnitId = '',
     onUpdateTeiAttributeValues,
     classes,
@@ -67,8 +67,8 @@ const WidgetProfilePlain = ({
     } = useUserRoles();
 
     const isEditable = useMemo(() =>
-        trackedEntityInstanceAttributes.length > 0 && showEdit,
-    [trackedEntityInstanceAttributes, showEdit]);
+        trackedEntityInstanceAttributes.length > 0 && !readOnlyMode,
+    [trackedEntityInstanceAttributes, readOnlyMode]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
     const error = programsError || trackedEntityInstancesError || userRolesError;

@@ -6,28 +6,26 @@ import type {
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 import {
     DefaultWidgetsForEnrollmentOverview,
-    NewEventWorkspace,
+    EditEventWorkspace,
+    EventComment,
     WidgetTypes,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
-export const WidgetsForEnrollmentEventNew: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
-    NewEventWorkspace,
+export const WidgetsForEnrollmentEventEdit: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
+    EditEventWorkspace,
+    EventComment,
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
-export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
-    title: i18n.t('Enrollment{{escape}} Add Event', { escape: ':' }),
+export const DefaultPageLayout: DefaultPageLayoutConfig = {
+    title: i18n.t('Enrollment{{escape}} Edit event', { escape: ':' }),
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'NewEventWorkspace',
+            name: 'EditEventWorkspace',
         },
     ],
     rightColumn: [
-        {
-            type: WidgetTypes.COMPONENT,
-            name: 'TrackedEntityRelationship',
-        },
         {
             type: WidgetTypes.COMPONENT,
             name: 'ErrorWidget',
@@ -35,6 +33,10 @@ export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
         {
             type: WidgetTypes.COMPONENT,
             name: 'WarningWidget',
+        },
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'EventComment',
         },
         {
             type: WidgetTypes.COMPONENT,
@@ -46,8 +48,12 @@ export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
         },
         {
             type: WidgetTypes.COMPONENT,
+            name: 'TrackedEntityRelationship',
+        },
+        {
+            type: WidgetTypes.COMPONENT,
             name: 'ProfileWidget',
-            settings: { readOnlyMode: true },
+            settings: { readOnlyMode: false },
         },
         {
             type: WidgetTypes.COMPONENT,
@@ -55,4 +61,4 @@ export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
             settings: { readOnlyMode: true },
         },
     ],
-});
+};

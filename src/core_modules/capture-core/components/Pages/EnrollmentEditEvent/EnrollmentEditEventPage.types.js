@@ -2,14 +2,19 @@
 import type { ProgramStage } from '../../../metaData';
 import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
 import type { LinkedRecordClick } from '../../WidgetsRelationship/WidgetTrackedEntityRelationship';
+import type {
+    PageLayoutConfig,
+} from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
+import { Program } from '../../../metaData';
 
 export type PlainProps = {|
+    pageLayout: ?PageLayoutConfig,
     programStage: ?ProgramStage,
     widgetEffects: WidgetEffects,
     hideWidgets: HideWidgets,
     teiId: string,
     enrollmentId: string,
-    programId: string,
+    program: Program,
     trackedEntityTypeId: string,
     mode: string,
     orgUnitId: string,
@@ -28,7 +33,6 @@ export type PlainProps = {|
     onHandleScheduleSave: (eventData: Object) => void,
     pageStatus: string,
     eventStatus?: string,
-    ...CssClasses,
 |};
 
 export type Props = {|

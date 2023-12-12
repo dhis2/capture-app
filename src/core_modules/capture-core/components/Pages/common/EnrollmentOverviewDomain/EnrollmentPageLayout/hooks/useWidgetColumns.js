@@ -34,8 +34,15 @@ const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
 
         const hideWidget = shouldHideWidget && shouldHideWidget(props);
         if (hideWidget) return null;
+        let widgetProps = {};
 
-        const widgetProps = getProps(props);
+        // In case the widget is not supported, we don't want to crash the app
+        try {
+            widgetProps = getProps(props);
+        } catch (error) {
+            log.error(errorCreator(`Error while getting widget props for widget ${name}`)({ error, props }));
+            return null;
+        }
         const customSettings = getCustomSettings && getCustomSettings(settings);
 
         let Widget = MemoizedWidgets[name];

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-12-12T13:37:37.511Z\n"
-"PO-Revision-Date: 2023-12-12T13:37:37.511Z\n"
+"POT-Creation-Date: 2023-12-12T15:49:38.445Z\n"
+"PO-Revision-Date: 2023-12-12T15:49:38.445Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -790,20 +790,8 @@ msgstr "Program Stages could not be loaded"
 msgid "Stage"
 msgstr "Stage"
 
-msgid "Enrollment{{escape}} View Event"
-msgstr "Enrollment{{escape}} View Event"
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr "Enrollment{{escape}} Edit Event"
-
-msgid "The enrollment event data could not be found"
-msgstr "The enrollment event data could not be found"
-
-msgid "There are no feedback for this event"
-msgstr "There are no feedback for this event"
-
-msgid "There are no indicators for this event"
-msgstr "There are no indicators for this event"
+msgid "Enrollment{{escape}} Edit event"
+msgstr "Enrollment{{escape}} Edit event"
 
 msgid "Registered events"
 msgstr "Registered events"
@@ -958,6 +946,9 @@ msgstr "Search by attributes"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
+
+msgid "The enrollment event data could not be found"
+msgstr "The enrollment event data could not be found"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"

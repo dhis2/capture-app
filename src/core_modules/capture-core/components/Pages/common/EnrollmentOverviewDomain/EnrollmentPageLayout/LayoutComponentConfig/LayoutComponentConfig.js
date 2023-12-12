@@ -23,6 +23,8 @@ import { WidgetEnrollment } from '../../../../../WidgetEnrollment';
 import type { Props as WidgetEnrollmentProps } from '../../../../../WidgetEnrollment/enrollment.types';
 import type { WidgetConfig } from '../DefaultEnrollmentLayout.types';
 import { NewEventWorkspaceWrapper } from '../../../NewEventWorkspaceWrapper';
+import { WidgetEventEditWrapper } from '../../../WidgetEventEditWrapper';
+import { WidgetEventComment } from '../../../../../WidgetEventComment';
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
@@ -100,15 +102,15 @@ export const IndicatorWidget: WidgetConfig = {
     }),
 };
 
-export const Notes: WidgetConfig = {
+export const EnrollmentComment: WidgetConfig = {
     Component: WidgetEnrollmentComment,
     getProps: (): void => {},
 };
 
 export const ProfileWidget: WidgetConfig = {
     Component: WidgetProfile,
-    getCustomSettings: ({ showEdit = true }) => ({
-        showEdit,
+    getCustomSettings: ({ readOnlyMode = true }) => ({
+        readOnlyMode,
     }),
     getProps: ({
         teiId,
@@ -165,5 +167,43 @@ export const EnrollmentWidget: WidgetConfig = {
         onUpdateEnrollmentDate,
         onUpdateIncidentDate,
         onError: onEnrollmentError,
+    }),
+};
+
+export const EditEventWorkspace: WidgetConfig = {
+    Component: WidgetEventEditWrapper,
+    getProps: ({
+        programStage,
+        onGoBack,
+        program,
+        orgUnitId,
+        teiId,
+        enrollmentId,
+        eventStatus,
+        onCancelEditEvent,
+        onHandleScheduleSave,
+        scheduleDate,
+    }) => ({
+        programStage,
+        onGoBack,
+        programId: program.id,
+        orgUnitId,
+        teiId,
+        enrollmentId,
+        eventStatus,
+        onCancelEditEvent,
+        onHandleScheduleSave,
+        initialScheduleDate: scheduleDate,
+    }),
+};
+
+export const EventComment: WidgetConfig = {
+    Component: WidgetEventComment,
+    getProps: ({
+        dataEntryKey,
+        dataEntryId,
+    }) => ({
+        dataEntryKey,
+        dataEntryId,
     }),
 };

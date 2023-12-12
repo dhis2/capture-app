@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import {
     QuickActions,
     StagesAndEvents,
-    Notes,
+    EnrollmentComment,
     DefaultWidgetsForEnrollmentOverview,
     WidgetTypes,
 } from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
@@ -15,7 +15,7 @@ import type {
 export const WidgetsForEnrollmentPageDefault: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
     QuickActions,
     StagesAndEvents,
-    Notes,
+    Notes: EnrollmentComment,
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
@@ -42,7 +42,7 @@ export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'Notes',
+            name: 'EnrollmentComment',
         },
         {
             type: WidgetTypes.COMPONENT,

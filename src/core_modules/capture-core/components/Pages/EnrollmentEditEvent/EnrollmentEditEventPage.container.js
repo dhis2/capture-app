@@ -24,6 +24,11 @@ import { cleanUpDataEntry } from '../../DataEntry';
 import { useLinkedRecordClick } from '../common/TEIRelationshipsWidget';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
+import {
+    useEnrollmentPageLayout,
+} from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
+import { DataStoreKeyByPage } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
+import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -37,7 +42,10 @@ const getEventScheduleDate = (event) => {
     return eventDataConvertValue?.toString();
 };
 
-const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, event }) => {
+const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event }) => {
+    if (isLoading) {
+        return pageStatuses.LOADING;
+    }
     if (orgUnitId) {
         return enrollmentSite && teiDisplayName && trackedEntityName && programStage && event
             ? pageStatuses.DEFAULT
@@ -90,6 +98,12 @@ const EnrollmentEditEventPageWithContextPlain = ({
 }: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { pageLayout, isLoading } = useEnrollmentPageLayout({
+        selectedScopeId: programId,
+        dataStoreKey: DataStoreKeyByPage.ENROLLMENT_EVENT_EDIT,
+        defaultPageLayout: DefaultPageLayout,
+    });
+
 
     const { onLinkedRecordClick } = useLinkedRecordClick();
 
@@ -146,10 +160,16 @@ const EnrollmentEditEventPageWithContextPlain = ({
         trackedEntityName,
         programStage,
         event,
+        isLoading,
     });
+
+    if (pageStatus === pageStatuses.LOADING) {
+        return <LoadingMaskForPage />;
+    }
 
     return (
         <EnrollmentEditEventPageComponent
+            pageLayout={pageLayout}
             mode={currentPageMode}
             pageStatus={pageStatus}
             programStage={programStage}
@@ -162,7 +182,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}
             trackedEntityName={trackedEntityName}
-            programId={programId}
+            program={program}
             onDelete={onDelete}
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}

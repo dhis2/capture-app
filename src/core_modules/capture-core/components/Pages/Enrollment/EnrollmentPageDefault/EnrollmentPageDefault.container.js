@@ -20,7 +20,7 @@ import {
 } from '../EnrollmentPage.actions';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
-import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
+import { EnrollmentPageLayout, DataStoreKeyByPage } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import {
     useProgramMetadata,
     useHideWidgetByRuleLocations,
@@ -35,7 +35,6 @@ import {
 import { DefaultPageLayout, WidgetsForEnrollmentPageDefault } from './DefaultPageLayout';
 import { LoadingMaskForPage } from '../../../LoadingMasks';
 
-import { DataStoreKeyByPage } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
@@ -131,9 +130,10 @@ export const EnrollmentPageDefault = () => {
     }
 
     return (
-        <EnrollmentPageDefaultComponent
+        <EnrollmentPageLayout
             pageLayout={pageLayout}
             availableWidgets={WidgetsForEnrollmentPageDefault}
+
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}

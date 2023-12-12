@@ -5,7 +5,7 @@ import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPageDefault.types';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
-import { EnrollmentPageDefaultComponent } from '../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.component';
+import { EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
 const styles = ({ typography }) => ({
     container: {
@@ -74,7 +74,7 @@ const EnrollmentAddEventPagePain = ({
     }
     return (
         <div>
-            <EnrollmentPageDefaultComponent
+            <EnrollmentPageLayout
                 {...passOnProps}
                 program={program}
                 pageLayout={pageLayout}

@@ -2,11 +2,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import { useWidgetColumns } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useWidgetColumns';
-import { AddRelationshipRefWrapper } from '../../EnrollmentEditEvent/AddRelationshipRefWrapper';
-import type { PlainProps } from './EnrollmentPageDefault.types';
+import { useWidgetColumns } from './hooks/useWidgetColumns';
+import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
+import type { PlainProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 
-const getEnrollmentPageDefaultStyles = () => ({
+const getEnrollmentPageStyles = () => ({
     container: {
         padding: '16px 24px 16px 24px',
     },
@@ -42,7 +42,7 @@ const getEnrollmentPageDefaultStyles = () => ({
     },
 });
 
-export const EnrollmentPageDefaultPlain = ({
+const EnrollmentPageLayoutPlain = ({
     pageLayout,
     availableWidgets,
     classes,
@@ -77,12 +77,12 @@ export const EnrollmentPageDefaultPlain = ({
             >
                 <div className={classes.title}>{pageLayout.title}</div>
                 <div className={classes.columns}>
-                    {pageLayout.leftColumn && (
+                    {pageLayout.leftColumn && !!leftColumnWidgets?.length && (
                         <div className={classes.leftColumn}>
                             {leftColumnWidgets}
                         </div>
                     )}
-                    {pageLayout.rightColumn && (
+                    {pageLayout.rightColumn && !!rightColumnWidgets?.length && (
                         <div className={classes.rightColumn}>
                             {rightColumnWidgets}
                         </div>
@@ -93,6 +93,6 @@ export const EnrollmentPageDefaultPlain = ({
     );
 };
 
-export const EnrollmentPageDefaultComponent = withStyles(
-    getEnrollmentPageDefaultStyles,
-)(EnrollmentPageDefaultPlain);
+export const EnrollmentPageLayout = withStyles(
+    getEnrollmentPageStyles,
+)(EnrollmentPageLayoutPlain);

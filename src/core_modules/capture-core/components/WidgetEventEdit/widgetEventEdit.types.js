@@ -13,5 +13,9 @@ export type Props = {|
     enrollmentId: string,
     teiId: string,
     initialScheduleDate?: string,
-    ...CssClasses,
 |};
+
+export type PlainProps = {|
+    ...Props,
+    ...CssClasses,
+|}

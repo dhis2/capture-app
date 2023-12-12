@@ -6,12 +6,14 @@ import { WidgetTypes } from './DefaultEnrollmentLayout.constants';
 type DefaultComponents = 'QuickActions'
     | 'StagesAndEvents'
     | 'NewEventWorkspace'
+    | 'EditEventWorkspace'
+    | 'EnrollmentComment'
+    | 'EventComment'
     | 'TrackedEntityRelationship'
     | 'ErrorWidget'
     | 'WarningWidget'
     | 'FeedbackWidget'
     | 'IndicatorWidget'
-    | 'Notes'
     | 'ProfileWidget'
     | 'EnrollmentWidget';
 
