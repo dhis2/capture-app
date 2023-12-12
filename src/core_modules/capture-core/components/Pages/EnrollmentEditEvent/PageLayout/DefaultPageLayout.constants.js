@@ -53,7 +53,7 @@ export const DefaultPageLayout: DefaultPageLayoutConfig = {
         {
             type: WidgetTypes.COMPONENT,
             name: 'ProfileWidget',
-            settings: { readOnlyMode: false },
+            settings: { readOnlyMode: true },
         },
         {
             type: WidgetTypes.COMPONENT,
