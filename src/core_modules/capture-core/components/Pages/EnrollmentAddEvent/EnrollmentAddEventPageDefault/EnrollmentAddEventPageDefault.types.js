@@ -1,9 +1,13 @@
 // @flow
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
+import type {
+    PageLayoutConfig, WidgetConfig,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
+import { Program } from '../../../../metaData';
 
 export type Props = {|
-    programId: string,
+    program: Program,
     stageId: string,
     orgUnitId: string,
     teiId: string,
@@ -21,10 +25,13 @@ export type Props = {|
     pageFailure: boolean,
     ready: boolean,
     widgetReducerName: string,
+    pageLayout: PageLayoutConfig,
+    availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
     ...CssClasses,
 |};
 
 export type ContainerProps = {|
+    pageLayout: PageLayoutConfig,
     enrollment: ?Object,
     attributeValues: ?Object,
     commonDataError: boolean,

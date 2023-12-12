@@ -22,6 +22,7 @@ import type { Props as WidgetProfileProps } from '../../../../../WidgetProfile/w
 import { WidgetEnrollment } from '../../../../../WidgetEnrollment';
 import type { Props as WidgetEnrollmentProps } from '../../../../../WidgetEnrollment/enrollment.types';
 import type { WidgetConfig } from '../DefaultEnrollmentLayout.types';
+import { NewEventWorkspaceWrapper } from '../../../NewEventWorkspaceWrapper';
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
@@ -119,6 +120,33 @@ export const ProfileWidget: WidgetConfig = {
         programId: program.id,
         orgUnitId,
         onUpdateTeiAttributeValues,
+    }),
+};
+
+export const NewEventWorkspace: WidgetConfig = {
+    Component: NewEventWorkspaceWrapper,
+    getProps: ({
+        program,
+        stageId,
+        orgUnitId,
+        teiId,
+        enrollmentId,
+        dataEntryHasChanges,
+        widgetReducerName,
+        rulesExecutionDependencies,
+        onSave,
+        onCancel,
+    }) => ({
+        programId: program.id,
+        stageId,
+        orgUnitId,
+        teiId,
+        enrollmentId,
+        dataEntryHasChanges,
+        widgetReducerName,
+        rulesExecutionDependencies,
+        onSave,
+        onCancel,
     }),
 };
 

@@ -5,6 +5,7 @@ import { WidgetTypes } from './DefaultEnrollmentLayout.constants';
 
 type DefaultComponents = 'QuickActions'
     | 'StagesAndEvents'
+    | 'NewEventWorkspace'
     | 'TrackedEntityRelationship'
     | 'ErrorWidget'
     | 'WarningWidget'

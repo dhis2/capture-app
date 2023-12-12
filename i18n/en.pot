@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-12-11T14:06:16.448Z\n"
-"PO-Revision-Date: 2023-12-11T14:06:16.448Z\n"
+"POT-Creation-Date: 2023-12-12T13:37:37.511Z\n"
+"PO-Revision-Date: 2023-12-12T13:37:37.511Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -754,20 +754,11 @@ msgstr "Org unit is not valid with current program"
 msgid "There was an error opening the Page"
 msgstr "There was an error opening the Page"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr "Enrollment{{escape}} New Event"
-
 msgid "There was an error loading the page"
 msgstr "There was an error loading the page"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Choose a registering unit to start reporting"
-
-msgid "There are no feedbacks for this event"
-msgstr "There are no feedbacks for this event"
-
-msgid "There are no indicators for this event"
-msgstr "There are no indicators for this event"
 
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
@@ -780,6 +771,9 @@ msgstr "Schedule"
 
 msgid "Refer"
 msgstr "Refer"
+
+msgid "Enrollment{{escape}} Add Event"
+msgstr "Enrollment{{escape}} Add Event"
 
 msgid "You can't add any more {{ programStageName }} events"
 msgstr "You can't add any more {{ programStageName }} events"
@@ -807,6 +801,9 @@ msgstr "The enrollment event data could not be found"
 
 msgid "There are no feedback for this event"
 msgstr "There are no feedback for this event"
+
+msgid "There are no indicators for this event"
+msgstr "There are no indicators for this event"
 
 msgid "Registered events"
 msgstr "Registered events"

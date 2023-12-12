@@ -32,7 +32,7 @@ import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
 import {
     useEnrollmentPageLayout,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
-import { DefaultPageLayout } from './DefaultPageLayout';
+import { DefaultPageLayout, WidgetsForEnrollmentPageDefault } from './DefaultPageLayout';
 import { LoadingMaskForPage } from '../../../LoadingMasks';
 
 import { DataStoreKeyByPage } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
@@ -133,6 +133,7 @@ export const EnrollmentPageDefault = () => {
     return (
         <EnrollmentPageDefaultComponent
             pageLayout={pageLayout}
+            availableWidgets={WidgetsForEnrollmentPageDefault}
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}

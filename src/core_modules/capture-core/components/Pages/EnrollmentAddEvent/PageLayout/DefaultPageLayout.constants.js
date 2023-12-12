@@ -1,37 +1,32 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import {
-    QuickActions,
-    StagesAndEvents,
-    Notes,
-    DefaultWidgetsForEnrollmentOverview,
-    WidgetTypes,
-} from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import type {
     DefaultPageLayoutConfig,
     WidgetConfig,
-} from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
+import {
+    DefaultWidgetsForEnrollmentOverview,
+    NewEventWorkspace, WidgetTypes,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
-export const WidgetsForEnrollmentPageDefault: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
-    QuickActions,
-    StagesAndEvents,
-    Notes,
+export const WidgetsForEnrollmentEventNew: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
+    NewEventWorkspace,
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
 export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
-    title: i18n.t('Enrollment Dashboard'),
+    title: i18n.t('Enrollment{{escape}} Add Event', { escape: ':' }),
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'QuickActions',
-        },
-        {
-            type: WidgetTypes.COMPONENT,
-            name: 'StagesAndEvents',
+            name: 'NewEventWorkspace',
         },
     ],
     rightColumn: [
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'TrackedEntityRelationship',
+        },
         {
             type: WidgetTypes.COMPONENT,
             name: 'ErrorWidget',
@@ -42,19 +37,11 @@ export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'Notes',
-        },
-        {
-            type: WidgetTypes.COMPONENT,
             name: 'FeedbackWidget',
         },
         {
             type: WidgetTypes.COMPONENT,
             name: 'IndicatorWidget',
-        },
-        {
-            type: WidgetTypes.COMPONENT,
-            name: 'TrackedEntityRelationship',
         },
         {
             type: WidgetTypes.COMPONENT,

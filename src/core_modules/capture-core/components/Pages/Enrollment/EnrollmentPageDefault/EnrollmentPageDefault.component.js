@@ -5,10 +5,12 @@ import { withStyles } from '@material-ui/core/styles';
 import { useWidgetColumns } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from '../../EnrollmentEditEvent/AddRelationshipRefWrapper';
 import type { PlainProps } from './EnrollmentPageDefault.types';
-import { WidgetsForEnrollmentPageDefault } from './DefaultPageLayout';
 
 const getEnrollmentPageDefaultStyles = () => ({
     container: {
+        padding: '16px 24px 16px 24px',
+    },
+    contentContainer: {
         position: 'relative',
     },
     columns: {
@@ -42,6 +44,7 @@ const getEnrollmentPageDefaultStyles = () => ({
 
 export const EnrollmentPageDefaultPlain = ({
     pageLayout,
+    availableWidgets,
     classes,
     ...passOnProps
 }: PlainProps) => {
@@ -61,15 +64,15 @@ export const EnrollmentPageDefaultPlain = ({
         rightColumnWidgets,
     } = useWidgetColumns({
         pageLayout,
-        availableWidgets: WidgetsForEnrollmentPageDefault,
+        availableWidgets,
         props: allProps,
     });
 
     return (
-        <>
+        <div className={classes.container}>
             <AddRelationshipRefWrapper setRelationshipRef={setAddRelationshipContainerElement} />
             <div
-                className={classes.container}
+                className={classes.contentContainer}
                 style={!mainContentVisible ? { display: 'none' } : undefined}
             >
                 <div className={classes.title}>{pageLayout.title}</div>
@@ -86,7 +89,7 @@ export const EnrollmentPageDefaultPlain = ({
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

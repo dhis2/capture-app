@@ -6,7 +6,7 @@ import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverview
 import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import type { LinkedRecordClick } from '../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import type {
-    PageLayoutConfig,
+    PageLayoutConfig, WidgetConfig,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 
 export type Props = {|
@@ -29,10 +29,11 @@ export type Props = {|
     onUpdateIncidentDate: (incidentDate: string) => void,
     onEnrollmentError: (message: string) => void,
     ruleEffects?: Array<{id: string, type: $Values<effectActions>}>;
+    pageLayout: PageLayoutConfig,
+    availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
 |};
 
 export type PlainProps = {|
-    pageLayout: PageLayoutConfig,
     ...Props,
     ...CssClasses,
 |};

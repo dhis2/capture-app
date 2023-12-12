@@ -3,7 +3,7 @@ import { useApiMetadataQuery } from '../../../../../../utils/reactQueryHelpers';
 import type { DefaultPageLayoutConfig, PageLayoutConfig } from '../DefaultEnrollmentLayout.types';
 
 type Props = {
-    selectedScopeId: string,
+    selectedScopeId: ?string,
     defaultPageLayout: DefaultPageLayoutConfig,
     dataStoreKey: string,
 }

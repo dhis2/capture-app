@@ -13,6 +13,8 @@ type Props = {
 };
 
 const MemoizedWidgets: { [key: string]: React$ComponentType<any> } = {};
+const UnsupportedWidgets: { [key: string]: boolean } = {};
+
 const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
     const { type } = widget;
 
@@ -21,7 +23,10 @@ const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
         const widgetConfig = availableWidgets[name];
 
         if (!widgetConfig) {
-            log.error(errorCreator(`Widget ${name} is not supported`)({ name }));
+            if (!UnsupportedWidgets[name]) {
+                log.error(errorCreator(`Widget ${name} is not supported`)({ name }));
+                UnsupportedWidgets[name] = true;
+            }
             return null;
         }
 
