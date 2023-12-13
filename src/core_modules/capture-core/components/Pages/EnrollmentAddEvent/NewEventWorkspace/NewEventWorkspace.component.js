@@ -58,7 +58,7 @@ const NewEventWorkspacePlain = ({
                     <WidgetStageHeader stage={stage} />
                 }
             >
-                <div className={classes.innerWrapper}>
+                <div data-test={'add-event-enrollment-page-content'} className={classes.innerWrapper}>
                     <TabBar dataTest="new-event-tab-bar">
                         <Tab
                             key="report-tab"

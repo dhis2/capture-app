@@ -16,7 +16,7 @@ export const WidgetsForEnrollmentEventNew: $ReadOnly<{ [key: string]: WidgetConf
 });
 
 export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
-    title: i18n.t('Enrollment{{escape}} Add Event', { escape: ':' }),
+    title: i18n.t('Enrollment{{escape}} New Event', { escape: ':' }),
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
