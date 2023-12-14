@@ -6,6 +6,7 @@ import { RelationshipsWidget } from '../common/RelationshipsWidget';
 import { RelationshipSearchEntities, useRelationships } from '../common/useRelationships';
 import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 import { useTrackedEntityTypeName } from './hooks/useTrackedEntityTypeName';
+import { useRelationshipTypes } from '../common/RelationshipsWidget/useRelationshipTypes';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,
@@ -21,8 +22,17 @@ export const WidgetTrackedEntityRelationship = ({
     renderTrackedEntitySearch,
     renderTrackedEntityRegistration,
 }: WidgetTrackedEntityRelationshipProps) => {
-    const { data: relationships, isError, isLoading: isLoadingRelationships } = useRelationships(teiId, RelationshipSearchEntities.TRACKED_ENTITY);
+    const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
+    const {
+        data: relationships,
+        isError,
+        isLoading: isLoadingRelationships,
+    } = useRelationships({
+        entityId: teiId,
+        searchMode: RelationshipSearchEntities.TRACKED_ENTITY,
+        relationshipTypes,
+    });
 
     const isLoading = useMemo(() => isLoadingRelationships || isLoadingTEType,
         [isLoadingRelationships, isLoadingTEType],
@@ -36,6 +46,10 @@ export const WidgetTrackedEntityRelationship = ({
         );
     }
 
+    if (!relationshipTypes?.length) {
+        return null;
+    }
+
     return (
         <RelationshipsWidget
             title={i18n.t('{{trackedEntityTypeName}} relationships', {
@@ -44,27 +58,23 @@ export const WidgetTrackedEntityRelationship = ({
             })}
             isLoading={isLoading}
             relationships={relationships}
-            cachedRelationshipTypes={cachedRelationshipTypes}
+            relationshipTypes={relationshipTypes}
             sourceId={teiId}
             onLinkedRecordClick={onLinkedRecordClick}
         >
-            {
-                relationshipTypes => (
-                    <NewTrackedEntityRelationship
-                        teiId={teiId}
-                        renderElement={addRelationshipRenderElement}
-                        relationshipTypes={relationshipTypes}
-                        trackedEntityTypeId={trackedEntityTypeId}
-                        programId={programId}
-                        orgUnitId={orgUnitId}
-                        onOpenAddRelationship={onOpenAddRelationship}
-                        onCloseAddRelationship={onCloseAddRelationship}
-                        onSelectFindMode={onSelectFindMode}
-                        renderTrackedEntitySearch={renderTrackedEntitySearch}
-                        renderTrackedEntityRegistration={renderTrackedEntityRegistration}
-                    />
-                )
-            }
+            <NewTrackedEntityRelationship
+                teiId={teiId}
+                renderElement={addRelationshipRenderElement}
+                relationshipTypes={relationshipTypes}
+                trackedEntityTypeId={trackedEntityTypeId}
+                programId={programId}
+                orgUnitId={orgUnitId}
+                onOpenAddRelationship={onOpenAddRelationship}
+                onCloseAddRelationship={onCloseAddRelationship}
+                onSelectFindMode={onSelectFindMode}
+                renderTrackedEntitySearch={renderTrackedEntitySearch}
+                renderTrackedEntityRegistration={renderTrackedEntityRegistration}
+            />
         </RelationshipsWidget>
     );
 };
