@@ -1,3 +1,10 @@
+## [100.47.3](https://github.com/dhis2/capture-app/compare/v100.47.2...v100.47.3) (2023-12-14)
+
+
+### Bug Fixes
+
+* [DHIS2-16084] Filter unidirectional relationship types ([#3477](https://github.com/dhis2/capture-app/issues/3477)) ([3579fc0](https://github.com/dhis2/capture-app/commit/3579fc05d02f6210f381f93414d07b60a0cfea53))
+
 ## [100.47.2](https://github.com/dhis2/capture-app/compare/v100.47.1...v100.47.2) (2023-12-10)
 
 
