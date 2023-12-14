@@ -1,5 +1,5 @@
 // @flow
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useLocationQuery } from '../utils/routing';
 import { rulesEngine } from './rulesEngine';
 
@@ -13,7 +13,7 @@ export const useRuleEngineFlags = () => {
         rulesEngine.setFlags({ ...rulesEngine.getFlags(), ...flags });
     };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (verbose === 'true') {
             updateFlags({ verbose: true });
         } else {
