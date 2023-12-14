@@ -1,10 +1,12 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
 import log from 'loglevel';
+import { Plugin } from '@dhis2/app-runtime';
 import { errorCreator } from '../../../../../../../capture-core-utils';
 
 import { WidgetTypes } from '../DefaultEnrollmentLayout.constants';
 import type { ColumnConfig, PageLayoutConfig, WidgetConfig } from '../DefaultEnrollmentLayout.types';
+import { Widget } from '../../../../../Widget';
 
 type Props = {
     pageLayout: PageLayoutConfig,
@@ -59,6 +61,16 @@ const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
                 key={name}
             />
         );
+    } else if (type.toLowerCase() === WidgetTypes.PLUGIN) {
+        const { source } = widget;
+        let PluginWidget = MemoizedWidgets[source];
+
+        if (!PluginWidget) {
+            PluginWidget = Plugin;
+            MemoizedWidgets[source] = (PluginWidget);
+        }
+
+        return <PluginWidget key={source} pluginSource={source} />
     }
 
     log.error(errorCreator(`Widget type ${type} is not supported`)({ type }));
