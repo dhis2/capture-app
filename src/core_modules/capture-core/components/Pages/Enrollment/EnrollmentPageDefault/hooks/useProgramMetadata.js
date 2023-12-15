@@ -4,6 +4,8 @@ import { useProgramFromIndexedDB } from '../../../../../utils/cachedDataHooks/us
 import { useDataElementsFromIndexedDB } from '../../../../../utils/cachedDataHooks/useDataElementsFromIndexedDB';
 import { useOptionSetsFromIndexedDB } from '../../../../../utils/cachedDataHooks/useOptionSetsFromIndexedDB';
 
+const queryKey = 'useProgramMetadata';
+
 export const useProgramMetadata = (programId: string) => {
     const { program, isLoading, isError } = useProgramFromIndexedDB(programId, { enabled: !!programId });
 
@@ -17,10 +19,10 @@ export const useProgramMetadata = (programId: string) => {
             new Set) : undefined), [program]);
 
     const {
-        loading: loadingDataElements,
+        isLoading: loadingDataElements,
         dataElements,
-        error: dataElementsError,
-    } = useDataElementsFromIndexedDB(dataElementIds);
+        isError: dataElementsError,
+    } = useDataElementsFromIndexedDB([queryKey, programId], dataElementIds);
 
     const derivedDataElementValues = useMemo(() =>
         (dataElements ? ({
@@ -37,10 +39,10 @@ export const useProgramMetadata = (programId: string) => {
         }) : undefined), [dataElements]);
 
     const {
-        loading: loadingOptionSets,
+        isLoading: loadingOptionSets,
         optionSets,
-        error: optionSetsError,
-    } = useOptionSetsFromIndexedDB(derivedDataElementValues && derivedDataElementValues.optionSetIds);
+        isError: optionSetsError,
+    } = useOptionSetsFromIndexedDB([queryKey, programId], derivedDataElementValues && derivedDataElementValues.optionSetIds);
 
     const optionSetDictionary = useMemo(
         () => (optionSets ? optionSets.reduce(

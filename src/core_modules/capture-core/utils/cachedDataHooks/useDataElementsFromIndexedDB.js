@@ -1,28 +1,32 @@
 // @flow
-import { useCallback } from 'react';
+import type { UseQueryOptions } from 'react-query';
 import { userStores, getUserStorageController } from '../../storageControllers';
-import { useQueryStyleEvaluation } from '../api/useQueryStyleEvaluation';
+import { useIndexedDBQuery } from '../reactQueryHelpers';
 import type { CachedDataElement } from '../../storageControllers/';
 
-export const useDataElementsFromIndexedDB = (dataElementIds: ?Set<string>): {
+export const useDataElementsFromIndexedDB = (queryKey: Array<string | number>, dataElementIds: ?Set<string>, queryOptions?: UseQueryOptions<>): {
     dataElements: ?Array<CachedDataElement>,
-    loading: boolean,
-    error: any,
+    isLoading: boolean,
+    isError: boolean,
 } => {
     const storageController = getUserStorageController();
+    const { enabled = !!dataElementIds } = queryOptions ?? {};
 
-    const getDataElements = useCallback(requestedIds =>
-        storageController.getAll(
+    const { data, isLoading, isError } = useIndexedDBQuery(
+        ['dataElements', ...queryKey],
+        () => storageController.getAll(
             userStores.DATA_ELEMENTS, {
-                predicate: dataElement => requestedIds.has(dataElement.id),
+                // $FlowIgnore - the enabled prop guarantees that dataElementIds will be defined
+                predicate: dataElement => dataElementIds.has(dataElement.id),
             },
-        ), [storageController]);
-
-    const { loading, data, error } = useQueryStyleEvaluation(getDataElements, dataElementIds);
+        ), {
+            enabled,
+        },
+    );
 
     return {
         dataElements: data,
-        loading,
-        error,
+        isLoading,
+        isError,
     };
 };

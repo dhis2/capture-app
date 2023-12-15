@@ -1,28 +1,32 @@
 // @flow
-import { useCallback } from 'react';
+import type { UseQueryOptions } from 'react-query';
 import { userStores, getUserStorageController } from '../../storageControllers';
-import { useQueryStyleEvaluation } from '../api/useQueryStyleEvaluation';
+import { useIndexedDBQuery } from '../reactQueryHelpers';
 import type { CachedOptionSet } from '../../storageControllers/';
 
-export const useOptionSetsFromIndexedDB = (optionSetIds: ?Set<string>): {
+export const useOptionSetsFromIndexedDB = (queryKey: Array<string | number>, optionSetIds: ?Set<string>, queryOptions?: UseQueryOptions<>): {
     optionSets: ?Array<CachedOptionSet>,
-    loading: boolean,
-    error: any,
+    isLoading: boolean,
+    isError: boolean,
 } => {
     const storageController = getUserStorageController();
+    const { enabled = !!optionSetIds } = queryOptions ?? {};
 
-    const getOptionSets = useCallback(requestedIds =>
-        storageController.getAll(
+    const { data, isLoading, isError } = useIndexedDBQuery(
+        ['optionSets', ...queryKey],
+        () => storageController.getAll(
             userStores.OPTION_SETS, {
-                predicate: optionSet => requestedIds.has(optionSet.id),
+                // $FlowIgnore - the enabled prop guarantees that optionSetIds will be defined
+                predicate: optionSet => optionSetIds.has(optionSet.id),
             },
-        ), [storageController]);
-
-    const { loading, data, error } = useQueryStyleEvaluation(getOptionSets, optionSetIds);
+        ), {
+            enabled,
+        },
+    );
 
     return {
         optionSets: data,
-        loading,
-        error,
+        isLoading,
+        isError,
     };
 };
