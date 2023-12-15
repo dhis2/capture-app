@@ -5,26 +5,25 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import D2UIApp from '@dhis2/d2-ui-app';
 import { AppContents } from './AppContents.component';
-import { useRuleEngineFlags } from '../../core_modules/capture-core/rules/useRuleEngineFlags';
+import {
+    RulesEngineVerboseInitializer,
+} from '../../core_modules/capture-core/components/RulesEngineVerboseInitializer';
 
-const MemoizedAppContents = React.memo(AppContents);
 
 type Props = {
     store: ReduxStore,
 };
 
-export const App = ({ store }: Props) => {
-    useRuleEngineFlags();
-
-    return (
-        <React.Fragment>
-            <Provider
-                store={store}
-            >
-                <D2UIApp>
-                    <MemoizedAppContents />
-                </D2UIApp>
-            </Provider>
-        </React.Fragment>
-    );
-};
+export const App = ({ store }: Props) => (
+    <React.Fragment>
+        <Provider
+            store={store}
+        >
+            <D2UIApp>
+                <RulesEngineVerboseInitializer>
+                    <AppContents />
+                </RulesEngineVerboseInitializer>
+            </D2UIApp>
+        </Provider>
+    </React.Fragment>
+);
