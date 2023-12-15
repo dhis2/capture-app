@@ -1,3 +1,10 @@
+# [100.48.0](https://github.com/dhis2/capture-app/compare/v100.47.3...v100.48.0) (2023-12-15)
+
+
+### Features
+
+* [DHIS2-15783] Tooltip on long working list names ([#3474](https://github.com/dhis2/capture-app/issues/3474)) ([6263aa8](https://github.com/dhis2/capture-app/commit/6263aa8a2114b028afff3b78c39f699c0946e682))
+
 ## [100.47.3](https://github.com/dhis2/capture-app/compare/v100.47.2...v100.47.3) (2023-12-14)
 
 
