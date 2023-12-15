@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core';
 import { colors, spacersNum, Menu, MenuItem, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withFocusSaver } from 'capture-ui';
-import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { TextField } from '../FormFields/New';
 import type { Note } from './notes.types';
 

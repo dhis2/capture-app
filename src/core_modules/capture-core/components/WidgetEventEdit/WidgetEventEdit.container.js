@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
 import { useCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import type { Props } from './widgetEventEdit.types';
