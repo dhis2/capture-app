@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-12-13T09:06:59.302Z\n"
-"PO-Revision-Date: 2023-12-13T09:06:59.302Z\n"
+"POT-Creation-Date: 2023-12-15T14:56:37.592Z\n"
+"PO-Revision-Date: 2023-12-15T14:56:37.592Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -671,9 +671,6 @@ msgstr "There is an error while opening this enrollment. Please enter a valid ur
 msgid "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 
-msgid "Enrollment Dashboard"
-msgstr "Enrollment Dashboard"
-
 msgid "Quick actions"
 msgstr "Quick actions"
 
@@ -772,9 +769,6 @@ msgstr "Schedule"
 msgid "Refer"
 msgstr "Refer"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr "Enrollment{{escape}} New Event"
-
 msgid "You can't add any more {{ programStageName }} events"
 msgstr "You can't add any more {{ programStageName }} events"
 
@@ -789,9 +783,6 @@ msgstr "Program Stages could not be loaded"
 
 msgid "Stage"
 msgstr "Stage"
-
-msgid "Enrollment{{escape}} Edit event"
-msgstr "Enrollment{{escape}} Edit event"
 
 msgid "Registered events"
 msgstr "Registered events"
@@ -928,6 +919,12 @@ msgstr "Event could not be loaded"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "View event"
+msgstr "View event"
 
 msgid "No feedback for this enrollment yet"
 msgstr "No feedback for this enrollment yet"

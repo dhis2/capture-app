@@ -1,5 +1,5 @@
 // @flow
-
+import i18n from '@dhis2/d2-i18n';
 import {
     EnrollmentWidget,
     ErrorWidget,
@@ -9,6 +9,20 @@ import {
     TrackedEntityRelationship,
     WarningWidget,
 } from './LayoutComponentConfig';
+
+export const EnrollmentPageKeys = Object.freeze({
+    OVERVIEW: 'overview',
+    NEW_EVENT: 'newEvent',
+    EDIT_EVENT: 'editEvent',
+    VIEW_EVENT: 'viewEvent',
+});
+
+export const DefaultPageTitle = {
+    OVERVIEW: i18n.t('Dashboard'),
+    NEW_EVENT: i18n.t('New event'),
+    EDIT_EVENT: i18n.t('Edit event'),
+    VIEW_EVENT: i18n.t('View event'),
+};
 
 // Default components are available across all Enrollment Pages
 export const DefaultWidgetsForEnrollmentOverview = {

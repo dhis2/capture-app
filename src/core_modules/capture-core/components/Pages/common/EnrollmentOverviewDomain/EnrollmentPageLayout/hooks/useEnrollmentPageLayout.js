@@ -1,10 +1,10 @@
 // @flow
 import { useApiMetadataQuery } from '../../../../../../utils/reactQueryHelpers';
-import type { DefaultPageLayoutConfig, PageLayoutConfig } from '../DefaultEnrollmentLayout.types';
+import type { PageLayoutConfig } from '../DefaultEnrollmentLayout.types';
 
 type Props = {
     selectedScopeId: ?string,
-    defaultPageLayout: DefaultPageLayoutConfig,
+    defaultPageLayout: PageLayoutConfig,
     dataStoreKey: string,
 }
 export const useEnrollmentPageLayout = ({ selectedScopeId, defaultPageLayout, dataStoreKey }: Props) => {

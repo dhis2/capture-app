@@ -34,6 +34,9 @@ import {
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
 import { DefaultPageLayout, WidgetsForEnrollmentPageDefault } from './DefaultPageLayout';
 import { LoadingMaskForPage } from '../../../LoadingMasks';
+import {
+    EnrollmentPageKeys,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
 
 export const EnrollmentPageDefault = () => {
@@ -132,6 +135,7 @@ export const EnrollmentPageDefault = () => {
     return (
         <EnrollmentPageLayout
             pageLayout={pageLayout}
+            currentPage={EnrollmentPageKeys.OVERVIEW}
             availableWidgets={WidgetsForEnrollmentPageDefault}
 
             teiId={teiId}

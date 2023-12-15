@@ -1,7 +1,6 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import type {
-    DefaultPageLayoutConfig,
+    PageLayoutConfig,
     WidgetConfig,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 import {
@@ -15,8 +14,7 @@ export const WidgetsForEnrollmentEventNew: $ReadOnly<{ [key: string]: WidgetConf
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
-export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
-    title: i18n.t('Enrollment{{escape}} New Event', { escape: ':' }),
+export const DefaultPageLayout: PageLayoutConfig = Object.freeze({
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,

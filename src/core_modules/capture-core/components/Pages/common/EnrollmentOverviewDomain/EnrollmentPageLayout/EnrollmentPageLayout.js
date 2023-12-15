@@ -1,10 +1,12 @@
 // @flow
 import React, { useCallback, useMemo, useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { PlainProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
+import { DefaultPageTitle, EnrollmentPageKeys } from './DefaultEnrollmentLayout.constants';
 
 const getEnrollmentPageStyles = () => ({
     container: {
@@ -42,9 +44,21 @@ const getEnrollmentPageStyles = () => ({
     },
 });
 
+const getTitle = (inputTitle, page) => {
+    const title = inputTitle || i18n.t('Enrollment');
+    const titles = {
+        [EnrollmentPageKeys.OVERVIEW]: !inputTitle ? `${title} ${DefaultPageTitle.OVERVIEW}` : title,
+        [EnrollmentPageKeys.NEW_EVENT]: `${title}: ${DefaultPageTitle.NEW_EVENT}`,
+        [EnrollmentPageKeys.EDIT_EVENT]: `${title}: ${DefaultPageTitle.EDIT_EVENT}`,
+        [EnrollmentPageKeys.VIEW_EVENT]: `${title}: ${DefaultPageTitle.VIEW_EVENT}`,
+    };
+    return titles[page] || title;
+};
+
 const EnrollmentPageLayoutPlain = ({
     pageLayout,
     availableWidgets,
+    currentPage,
     classes,
     ...passOnProps
 }: PlainProps) => {
@@ -75,7 +89,7 @@ const EnrollmentPageLayoutPlain = ({
                 className={classes.contentContainer}
                 style={!mainContentVisible ? { display: 'none' } : undefined}
             >
-                <div className={classes.title}>{pageLayout.title}</div>
+                <div className={classes.title}>{getTitle(pageLayout.title, currentPage)}</div>
                 <div className={classes.columns}>
                     {pageLayout.leftColumn && !!leftColumnWidgets?.length && (
                         <div className={classes.leftColumn}>

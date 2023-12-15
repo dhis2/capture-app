@@ -1,7 +1,6 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import type {
-    DefaultPageLayoutConfig,
+    PageLayoutConfig,
     WidgetConfig,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 import {
@@ -17,8 +16,7 @@ export const WidgetsForEnrollmentEventEdit: $ReadOnly<{ [key: string]: WidgetCon
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
-export const DefaultPageLayout: DefaultPageLayoutConfig = {
-    title: i18n.t('Enrollment{{escape}} Edit event', { escape: ':' }),
+export const DefaultPageLayout: PageLayoutConfig = {
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,

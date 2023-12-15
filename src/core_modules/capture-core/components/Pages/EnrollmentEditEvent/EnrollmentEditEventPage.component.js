@@ -7,6 +7,9 @@ import { TopBar } from './TopBar.container';
 import { NoticeBox } from '../../NoticeBox';
 import { EnrollmentPageLayout } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { WidgetsForEnrollmentEventEdit } from './PageLayout/DefaultPageLayout.constants';
+import {
+    EnrollmentPageKeys,
+} from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
 export const EnrollmentEditEventPageComponent = ({
     pageLayout,
@@ -51,6 +54,7 @@ export const EnrollmentEditEventPageComponent = ({
         />
         <EnrollmentPageLayout
             pageLayout={pageLayout}
+            currentPage={mode === EnrollmentPageKeys.EDIT_EVENT ? EnrollmentPageKeys.EDIT_EVENT : EnrollmentPageKeys.VIEW_EVENT}
             availableWidgets={WidgetsForEnrollmentEventEdit}
 
             trackedEntityTypeId={trackedEntityTypeId}
