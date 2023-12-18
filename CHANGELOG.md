@@ -1,3 +1,10 @@
+# [100.50.0](https://github.com/dhis2/capture-app/compare/v100.49.0...v100.50.0) (2023-12-18)
+
+
+### Features
+
+* [DHIS-11419] display assigned users on events in enrollment overview page ([#3453](https://github.com/dhis2/capture-app/issues/3453)) ([44fb2be](https://github.com/dhis2/capture-app/commit/44fb2bedf0e2f9d394c58d5a588087cff2c8fa3c))
+
 # [100.49.0](https://github.com/dhis2/capture-app/compare/v100.48.0...v100.49.0) (2023-12-18)
 
 
