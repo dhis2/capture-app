@@ -3,11 +3,11 @@ import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Radio, colors, spacers, spacersNum, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { actions as ReferralActionTypes, mainOptionTranslatedTexts, referralStatus } from '../constants';
+import { actions as RelatedStagesActionTypes, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
 import { DataSection } from '../../DataSection';
-import { ReferToOrgUnit } from '../ReferToOrgUnit';
+import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import type { Props } from './ReferralActions.types';
+import type { Props } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 
 const styles = () => ({
@@ -42,13 +42,13 @@ const styles = () => ({
     },
 });
 
-export const ReferralActionsPlain = ({
+export const RelatedStagesActionsPlain = ({
     classes,
     type,
     scheduledLabel,
     linkableEvents,
-    referralDataValues,
-    setReferralDataValues,
+    relatedStagesDataValues,
+    setRelatedStagesDataValues,
     constraint,
     currentStageLabel,
     errorMessages,
@@ -56,12 +56,12 @@ export const ReferralActionsPlain = ({
 }: Props) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
-    const selectedAction = useMemo(() => referralDataValues.referralMode, [referralDataValues.referralMode]);
+    const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
 
-    const updateSelectedAction = (action: $Values<typeof ReferralActionTypes>) => {
-        setReferralDataValues(prevState => ({
+    const updateSelectedAction = (action: $Values<typeof RelatedStagesActionTypes>) => {
+        setRelatedStagesDataValues(prevState => ({
             ...prevState,
-            referralMode: action,
+            linkMode: action,
         }));
     };
 
@@ -71,72 +71,72 @@ export const ReferralActionsPlain = ({
 
     return (
         <DataSection
-            dataTest="referral-section"
-            sectionName={i18n.t('Referral actions')}
+            dataTest="related-stages-section"
+            sectionName={i18n.t('Related stages')}
         >
             <div className={classes.wrapper}>
-                {type === referralStatus.REFERRABLE ? Object.keys(mainOptionTranslatedTexts).map(key => (
+                {type === relatedStageStatus.LINKABLE ? Object.keys(mainOptionTranslatedTexts).map(key => (
                     <Radio
                         key={key}
-                        name={`referral-action-${key}`}
+                        name={`related-stage-action-${key}`}
                         checked={key === selectedAction}
-                        disabled={key === ReferralActionTypes.LINK_EXISTING_RESPONSE && !linkableEvents.length}
+                        disabled={key === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && !linkableEvents.length}
                         label={mainOptionTranslatedTexts[key](programStage.stageForm.name)}
                         onChange={(e: Object) => updateSelectedAction(e.value)}
                         value={key}
                     />
                 )) : null}
-                {type === referralStatus.AMBIGUOUS_REFERRALS ?
-                    <div>{i18n.t('Ambiguous referrals, contact system administrator')}</div>
+                {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS ?
+                    <div>{i18n.t('Ambiguous relationships, contact system administrator')}</div>
                     : null
                 }
             </div>
 
-            {selectedAction === ReferralActionTypes.REFER_ORG && (
-                <ReferToOrgUnit
-                    referralDataValues={referralDataValues}
-                    setReferralDataValues={setReferralDataValues}
+            {selectedAction === RelatedStagesActionTypes.SCHEDULE_IN_ORG && (
+                <ScheduleInOrgUnit
+                    relatedStagesDataValues={relatedStagesDataValues}
+                    setRelatedStagesDataValues={setRelatedStagesDataValues}
                     scheduledLabel={scheduledLabel}
                     saveAttempted={saveAttempted}
                     errorMessages={errorMessages}
                 />
             )}
 
-            {selectedAction === ReferralActionTypes.ENTER_DATA && (
+            {selectedAction === RelatedStagesActionTypes.ENTER_DATA && (
                 <div
                     className={classes.infoBox}
                 >
                     <IconInfo16 />
                     {i18n.t(
-                        'Enter {{referralProgramStageLabel}} details in the next step after completing this {{currentStageLabel}}.',
+                        'Enter {{linkableStageLabel}} details in the next step after completing this {{currentStageLabel}}.',
                         {
-                            referralProgramStageLabel: programStage.stageForm.name,
+                            linkableStageLabel: programStage.stageForm.name,
                             currentStageLabel,
                         },
                     )}
                 </div>
             )}
 
-            {selectedAction === ReferralActionTypes.LINK_EXISTING_RESPONSE && linkableEvents.length > 0 && (
+            {selectedAction === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && linkableEvents.length > 0 && (
                 <LinkToExisting
-                    referralDataValues={referralDataValues}
-                    setReferralDataValues={setReferralDataValues}
+                    relatedStagesDataValues={relatedStagesDataValues}
+                    setRelatedStagesDataValues={setRelatedStagesDataValues}
                     linkableEvents={linkableEvents}
-                    referralProgramStageLabel={programStage.stageForm.name}
+                    linkedStageLabel={programStage.stageForm.name}
                     errorMessages={errorMessages}
                     saveAttempted={saveAttempted}
                 />
             )}
 
-            {selectedAction === ReferralActionTypes.DO_NOT_LINK_RESPONSE && (
+            {selectedAction === RelatedStagesActionTypes.DO_NOT_LINK_RESPONSE && (
                 <div
                     className={classes.infoBox}
                 >
                     <IconWarning16 />
                     {i18n.t(
-                        'This {{currentStageLabel}} will be created without a link to {{referralProgramStageLabel}}',
+                        'This {{currentStageLabel}} will be created without a link to {{linkableStageLabel}}',
                         {
-                            referralProgramStageLabel: programStage.stageForm.name,
+                            linkableStageLabel: programStage.stageForm.name,
                             currentStageLabel,
                         },
                     )}
@@ -145,4 +145,4 @@ export const ReferralActionsPlain = ({
         </DataSection>);
 };
 
-export const ReferralActions: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ReferralActionsPlain);
+export const RelatedStagesActions: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(RelatedStagesActionsPlain);

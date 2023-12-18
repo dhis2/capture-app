@@ -11,20 +11,20 @@ import {
     rollbackEnrollmentEvents,
     saveFailed,
 } from '../common/EnrollmentOverviewDomain/enrollment.actions';
-import { actions as ReferralActions } from '../../WidgetReferral/constants';
+import { actions as RelatedStageActions } from '../../WidgetRelatedStages/constants';
 import { buildUrlQueryString } from '../../../utils/routing';
 
-const shouldNavigateWithReferral = ({
-    referralMode,
-    referralEventId,
-    referralOrgUnitId,
+const shouldNavigateWithRelatedStage = ({
+    linkMode,
+    linkedEventId,
+    linkedOrgUnitId,
     history,
 }) => {
-    if (referralMode && referralEventId) {
-        if (referralMode === ReferralActions.ENTER_DATA) {
+    if (linkMode && linkedEventId) {
+        if (linkMode === RelatedStageActions.ENTER_DATA) {
             const navigate = () => history.push(`/enrollmentEventEdit?${buildUrlQueryString({
-                eventId: referralEventId,
-                orgUnitId: referralOrgUnitId,
+                eventId: linkedEventId,
+                orgUnitId: linkedOrgUnitId,
             })}`);
             return { navigate };
         }
@@ -71,18 +71,18 @@ export const saveNewEventSucceededEpic = (action$: InputObservable, state: Redux
 
             if (enrollmentDomain.eventSaveInProgress) {
                 const {
-                    referralMode,
+                    linkMode,
                     requestEventId,
-                    referralEventId,
-                    referralOrgUnitId,
+                    linkedEventId,
+                    linkedOrgUnitId,
                 } = enrollmentDomain.eventSaveInProgress;
                 const requestEvent = eventsFromApi.find(event => event.uid === requestEventId);
 
                 if (requestEvent) {
-                    const { navigate } = shouldNavigateWithReferral({
-                        referralMode,
-                        referralEventId,
-                        referralOrgUnitId,
+                    const { navigate } = shouldNavigateWithRelatedStage({
+                        linkMode,
+                        linkedEventId,
+                        linkedOrgUnitId,
                         history,
                     });
 

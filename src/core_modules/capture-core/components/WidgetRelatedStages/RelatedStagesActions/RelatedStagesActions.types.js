@@ -1,5 +1,5 @@
 // @flow
-import type { ReferralDataValueStates } from '../WidgetReferral.types';
+import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
 type Constraint = {
     programStage: {
@@ -8,7 +8,7 @@ type Constraint = {
     relationshipEntity: 'PROGRAM_STAGE_INSTANCE',
 }
 
-export type ErrorMessagesForReferral = {|
+export type ErrorMessagesForRelatedStages = {|
     scheduledAt?: ?string,
     orgUnit?: ?string,
     linkedEventId?: ?string,
@@ -21,14 +21,14 @@ export type LinkableEvent = {
 
 export type Props = {|
     type: string,
-    referralDataValues: ReferralDataValueStates,
+    relatedStagesDataValues: RelatedStageDataValueStates,
     linkableEvents: Array<LinkableEvent>,
     scheduledLabel: string,
     saveAttempted: boolean,
-    errorMessages: ErrorMessagesForReferral,
+    errorMessages: ErrorMessagesForRelatedStages,
     constraint: ?Constraint,
-    addErrorMessage: (ErrorMessagesForReferral) => void,
-    setReferralDataValues: (() => Object) => void,
+    addErrorMessage: (ErrorMessagesForRelatedStages) => void,
+    setRelatedStagesDataValues: (() => Object) => void,
     currentStageLabel: string,
     ...CssClasses
 |}

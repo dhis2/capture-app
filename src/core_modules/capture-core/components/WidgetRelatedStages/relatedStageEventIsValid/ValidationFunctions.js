@@ -2,7 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import { isValidDate, isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
-import { actions as ReferralModes } from '../constants';
+import { actions as RelatedStageModes } from '../constants';
 
 type Props = {
     scheduledAt: ?string,
@@ -16,7 +16,7 @@ export const isScheduledDateValid = (scheduledDate: string) => {
     return isValidDate(scheduledDate, dateFormat);
 };
 
-const referToOrgUnit = (props) => {
+const scheduleInOrgUnit = (props) => {
     const { scheduledAt, orgUnit, setErrorMessages } = props ?? {};
     const scheduledAtIsValid = !!scheduledAt && isScheduledDateValid(scheduledAt);
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
@@ -62,10 +62,10 @@ const linkToExistingResponse = (props) => {
 };
 
 
-export const ValidationFunctionsByReferralMode: { [key: string]: (props: ?Props) => boolean } = {
-    [ReferralModes.REFER_ORG]: props => referToOrgUnit(props),
-    [ReferralModes.ENTER_DATA]: () => true,
-    [ReferralModes.LINK_EXISTING_RESPONSE]: props => linkToExistingResponse(props),
-    [ReferralModes.DO_NOT_LINK_RESPONSE]: () => true,
+export const ValidationFunctionsByLinkMode: { [key: string]: (props: ?Props) => boolean } = {
+    [RelatedStageModes.SCHEDULE_IN_ORG]: props => scheduleInOrgUnit(props),
+    [RelatedStageModes.ENTER_DATA]: () => true,
+    [RelatedStageModes.LINK_EXISTING_RESPONSE]: props => linkToExistingResponse(props),
+    [RelatedStageModes.DO_NOT_LINK_RESPONSE]: () => true,
 };
 

@@ -5,8 +5,8 @@ import { getAddEventEnrollmentServerData } from './getConvertedAddEvent';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { generateUID } from '../../../utils/uid/generateUID';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
-import { getConvertedReferralEvent } from './getConvertedReferralEvent';
-import type { ReferralRefPayload } from './validated.types';
+import { getConvertedRelatedStageEvent } from './getConvertedRelatedStageEvent';
+import type { RelatedStageRefPayload } from './validated.types';
 
 type Props = {
     dataEntryId: string,
@@ -35,30 +35,30 @@ export const useBuildNewEventPayload = ({
     const dataEntryValuesMeta = useSelector(({ dataEntriesFieldsMeta }) => dataEntriesFieldsMeta[dataEntryKey]);
     const notes = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[dataEntryKey]);
 
-    const buildReferralEventPayload = (clientRequestEvent, saveType: ?$Values<typeof addEventSaveTypes>, referralRef) => {
+    const buildRelatedStageEventPayload = (clientRequestEvent, saveType: ?$Values<typeof addEventSaveTypes>, relatedStageRef) => {
         if (
-            referralRef.current
+            relatedStageRef.current
             && saveType === addEventSaveTypes.COMPLETE
-            && referralRef.current.eventHasReferralRelationship()
+            && relatedStageRef.current.eventHasLinkableStageRelationship()
         ) {
-            const isValid = referralRef.current.formIsValidOnSave();
-            if (!isValid || !referralRef.current?.getReferralValues) {
+            const isValid = relatedStageRef.current.formIsValidOnSave();
+            if (!isValid || !relatedStageRef.current?.getLinkedStageValues) {
                 return {
                     formHasError: true,
-                    referralEvent: null,
+                    linkedEvent: null,
                     relationship: null,
-                    referralMode: null,
+                    linkMode: null,
                 };
             }
 
-            const { referralType, referralValues, referralMode } = referralRef.current
-                .getReferralValues(clientRequestEvent.event);
+            const { selectedRelationshipType, relatedStageDataValues, linkMode } = relatedStageRef.current
+                .getLinkedStageValues(clientRequestEvent.event);
 
-            const { referralEvent, relationship } = getConvertedReferralEvent({
-                referralMode,
-                referralDataValues: referralValues,
+            const { linkedEvent, relationship } = getConvertedRelatedStageEvent({
+                linkMode,
+                relatedStageDataValues,
                 clientRequestEvent,
-                referralType,
+                relatedStageType: selectedRelationshipType,
                 programId,
                 currentProgramStageId: formFoundation.id,
                 teiId,
@@ -67,22 +67,22 @@ export const useBuildNewEventPayload = ({
 
             return {
                 formHasError: false,
-                referralEvent,
+                linkedEvent,
                 relationship,
-                referralMode,
+                linkMode,
             };
         }
         return {
             formHasError: false,
-            referralEvent: null,
+            linkedEvent: null,
             relationship: null,
-            referralMode: null,
+            linkMode: null,
         };
     };
 
     const buildNewEventPayload = (
         saveType: ?$Values<typeof addEventSaveTypes>,
-        referralRef: {| current: (ReferralRefPayload | null) |},
+        relatedStageRef: {| current: (RelatedStageRefPayload | null) |},
     ) => {
         const requestEventId = generateUID();
 
@@ -109,17 +109,17 @@ export const useBuildNewEventPayload = ({
 
         const {
             formHasError,
-            referralEvent,
+            linkedEvent,
             relationship,
-            referralMode,
-        } = buildReferralEventPayload(clientRequestEvent, saveType, referralRef);
+            linkMode,
+        } = buildRelatedStageEventPayload(clientRequestEvent, saveType, relatedStageRef);
 
         return {
             formHasError,
             clientRequestEvent,
-            referralEvent,
+            linkedEvent,
             relationship,
-            referralMode,
+            linkMode,
         };
     };
 

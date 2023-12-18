@@ -1,7 +1,7 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
-import { actions as ReferralModes } from '../../WidgetReferral/constants';
+import { actions as RelatedStageModes } from '../../WidgetRelatedStages/constants';
 import type { RequestEvent } from './validated.types';
 import type { ExternalSaveHandler } from '../common.types';
 
@@ -23,26 +23,26 @@ export const newEventWidgetActionTypes = {
 
 export const requestSaveEvent = ({
     requestEvent,
-    referralEvent,
+    linkedEvent,
     relationship,
-    referralMode,
+    linkMode,
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
 }: {
     requestEvent: RequestEvent,
-    referralEvent?: Object,
+    linkedEvent?: Object,
     relationship?: Object,
-    referralMode: ?$Keys<typeof ReferralModes>,
+    linkMode: ?$Keys<typeof RelatedStageModes>,
     onSaveExternal: ?ExternalSaveHandler,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
 }) =>
     actionCreator(newEventWidgetActionTypes.EVENT_SAVE_REQUEST)({
         requestEvent,
-        referralEvent,
+        linkedEvent,
         relationship,
-        referralMode,
+        linkMode,
         onSaveExternal,
         onSaveSuccessActionType,
         onSaveErrorActionType,
@@ -50,19 +50,19 @@ export const requestSaveEvent = ({
 
 export const setSaveEnrollmentEventInProgress = ({
     requestEventId,
-    referralEventId,
-    referralOrgUnitId,
-    referralMode,
+    linkedEventId,
+    linkedOrgUnitId,
+    linkMode,
 }: {
     requestEventId: string,
-    referralEventId: ?string,
-    referralOrgUnitId: ?string,
-    referralMode: ?$Keys<typeof ReferralModes>,
+    linkedEventId: ?string,
+    linkedOrgUnitId: ?string,
+    linkMode: ?$Keys<typeof RelatedStageModes>,
 }) => actionCreator(newEventWidgetActionTypes.SET_SAVE_ENROLLMENT_EVENT_IN_PROGRESS)({
     requestEventId,
-    referralEventId,
-    referralOrgUnitId,
-    referralMode,
+    linkedEventId,
+    linkedOrgUnitId,
+    linkMode,
 });
 
 export const saveEvents = ({ serverData, onSaveErrorActionType, onSaveSuccessActionType }: Object) =>

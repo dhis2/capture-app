@@ -16,22 +16,22 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable) =>
         map((action) => {
             const {
                 requestEvent,
-                referralEvent,
+                linkedEvent,
                 relationship,
-                referralMode,
+                linkMode,
                 onSaveExternal,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
             } = action.payload;
 
-            const serverData = referralEvent ? {
-                events: [requestEvent, referralEvent],
+            const serverData = linkedEvent ? {
+                events: [requestEvent, linkedEvent],
                 relationships: [relationship],
             } : {
                 events: [requestEvent],
             };
 
-            onSaveExternal && onSaveExternal({ referralMode, ...serverData });
+            onSaveExternal && onSaveExternal({ linkMode, ...serverData });
             return saveEvents({
                 serverData,
                 onSaveSuccessActionType,

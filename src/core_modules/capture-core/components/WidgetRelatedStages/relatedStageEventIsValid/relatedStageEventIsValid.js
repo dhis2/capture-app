@@ -1,18 +1,18 @@
 // @flow
 import log from 'loglevel';
-import type { ReferralIsValidProps } from './referralEventIsValid.types';
+import type { RelatedStageIsValidProps } from './relatedStageEventIsValid.types';
 import { errorCreator } from '../../../../capture-core-utils';
-import { ValidationFunctionsByReferralMode } from './ValidationFunctions';
+import { ValidationFunctionsByLinkMode } from './ValidationFunctions';
 
 
-export const referralWidgetIsValid = ({
-    referralMode,
+export const relatedStageWidgetIsValid = ({
+    linkMode,
     scheduledAt,
     orgUnit,
     linkedEventId,
     setErrorMessages,
-}: ReferralIsValidProps): boolean => {
-    const validationFunction = ValidationFunctionsByReferralMode[referralMode];
+}: RelatedStageIsValidProps): boolean => {
+    const validationFunction = ValidationFunctionsByLinkMode[linkMode];
 
     if (!validationFunction) {
         log.error(errorCreator('No validation function found for referral mode'));

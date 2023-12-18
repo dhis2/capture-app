@@ -24,9 +24,9 @@ export type RequestEvent = {
     completedAt: ?string,
 }
 
-export type ReferralRefPayload = {|
-    getReferralValues: (eventId: string) => any,
-    eventHasReferralRelationship: () => boolean,
+export type RelatedStageRefPayload = {|
+    getLinkedStageValues: (eventId: string) => any,
+    eventHasLinkableStageRelationship: () => boolean,
     formIsValidOnSave: () => boolean,
 |}
 
@@ -49,7 +49,7 @@ export type Props = {|
     onSave: (saveType: $Keys<addEventSaveTypes>) => void,
     onCancel: () => void,
     formRef: (formInstance: any) => void,
-    referralRef: (referralInstance: any) => void,
+    relatedStageRef: (relatedStageInstance: any) => void,
     dataEntryFieldRef: (instance: any, id: string) => void,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
     ...CssClasses,

@@ -1,5 +1,5 @@
 // @flow
-import { actions as ReferralModes } from './constants';
+import { actions as LinkModes } from './constants';
 
 export type Props = {|
     programId: string,
@@ -7,8 +7,8 @@ export type Props = {|
     programStageId: string,
     currentStageLabel: string,
 |}
-export type ReferralDataValueStates = {|
-    referralMode: typeof ReferralModes.REFER_ORG,
+export type RelatedStageDataValueStates = {|
+    linkMode: typeof LinkModes.SCHEDULE_IN_ORG,
     scheduledAt: string,
     orgUnit: ?{
         path: string,

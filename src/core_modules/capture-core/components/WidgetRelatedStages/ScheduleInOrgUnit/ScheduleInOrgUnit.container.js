@@ -4,9 +4,9 @@ import type { ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { convertStringToDateFormat } from '../../../utils/converters/date';
-import { DateFieldForReferral, OrgUnitSelectorForReferral } from '../FormComponents';
-import type { ErrorMessagesForReferral } from '../ReferralActions';
-import type { ReferralDataValueStates } from '../WidgetReferral.types';
+import { DateFieldForRelatedStages, OrgUnitSelectorForRelatedStages } from '../FormComponents';
+import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
+import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
 const styles = {
     wrapper: {
@@ -36,24 +36,24 @@ const styles = {
 };
 
 type Props = {
-    referralDataValues: ReferralDataValueStates,
-    setReferralDataValues: (() => Object) => void,
-    errorMessages: ErrorMessagesForReferral,
+    relatedStagesDataValues: RelatedStageDataValueStates,
+    setRelatedStagesDataValues: (() => Object) => void,
+    errorMessages: ErrorMessagesForRelatedStages,
     scheduledLabel: string,
     saveAttempted: boolean,
     ...CssClasses,
 }
 
-export const ReferToOrgUnitContainerPlain = ({
-    referralDataValues,
-    setReferralDataValues,
+export const ScheduleInOrgUnitPlain = ({
+    relatedStagesDataValues,
+    setRelatedStagesDataValues,
     saveAttempted,
     errorMessages,
     scheduledLabel,
     classes,
 }: Props) => {
     const onBlurDateField = (e) => {
-        setReferralDataValues(prevValues => ({
+        setRelatedStagesDataValues(prevValues => ({
             ...prevValues,
             scheduledAt: convertStringToDateFormat(e),
         }));
@@ -66,14 +66,14 @@ export const ReferToOrgUnitContainerPlain = ({
             path: e.path,
         };
 
-        setReferralDataValues(prevValues => ({
+        setRelatedStagesDataValues(prevValues => ({
             ...prevValues,
             orgUnit,
         }));
     };
 
     const onDeselectOrgUnit = () => {
-        setReferralDataValues(prevValues => ({
+        setRelatedStagesDataValues(prevValues => ({
             ...prevValues,
             orgUnit: null,
         }));
@@ -82,18 +82,18 @@ export const ReferToOrgUnitContainerPlain = ({
     return (
         <div className={classes.wrapper}>
             <div>
-                <DateFieldForReferral
+                <DateFieldForRelatedStages
                     scheduledLabel={scheduledLabel}
                     errorMessages={errorMessages}
                     saveAttempted={saveAttempted}
                     onBlurDateField={onBlurDateField}
-                    referralDataValues={referralDataValues}
+                    relatedStagesDataValues={relatedStagesDataValues}
                 />
             </div>
 
             <div>
-                <OrgUnitSelectorForReferral
-                    referralDataValues={referralDataValues}
+                <OrgUnitSelectorForRelatedStages
+                    relatedStagesDataValues={relatedStagesDataValues}
                     onSelectOrgUnit={onSelectOrgUnit}
                     onDeselectOrgUnit={onDeselectOrgUnit}
                     errorMessages={errorMessages}
@@ -104,4 +104,4 @@ export const ReferToOrgUnitContainerPlain = ({
     );
 };
 
-export const ReferToOrgUnit: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ReferToOrgUnitContainerPlain);
+export const ScheduleInOrgUnit: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ScheduleInOrgUnitPlain);

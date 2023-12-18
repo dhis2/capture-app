@@ -10,8 +10,8 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
-import type { ErrorMessagesForReferral } from '../ReferralActions';
-import type { ReferralDataValueStates } from '../WidgetReferral.types';
+import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
+import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
 type OrgUnitValue = {|
     checked: boolean,
@@ -23,11 +23,11 @@ type OrgUnitValue = {|
 |}
 
 type Props = {
-    referralDataValues: ReferralDataValueStates,
+    relatedStagesDataValues: RelatedStageDataValueStates,
     onSelectOrgUnit: (orgUnit: OrgUnitValue) => void,
     onDeselectOrgUnit: () => void,
     saveAttempted: boolean,
-    errorMessages: ErrorMessagesForReferral,
+    errorMessages: ErrorMessagesForRelatedStages,
 };
 
 const OrgUnitFieldForForm = withDefaultFieldContainer()(
@@ -42,8 +42,8 @@ const OrgUnitFieldForForm = withDefaultFieldContainer()(
     ),
 );
 
-export const OrgUnitSelectorForReferral = ({
-    referralDataValues,
+export const OrgUnitSelectorForRelatedStages = ({
+    relatedStagesDataValues,
     onSelectOrgUnit,
     onDeselectOrgUnit,
     errorMessages,
@@ -66,7 +66,7 @@ export const OrgUnitSelectorForReferral = ({
     return (
         <OrgUnitFieldForForm
             label={i18n.t('Organisation unit')}
-            value={referralDataValues.orgUnit}
+            value={relatedStagesDataValues.orgUnit}
             required
             onSelectClick={handleSelect}
             onBlur={handleDeselect}

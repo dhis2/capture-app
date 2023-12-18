@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
 import { convertDateObjectToDateFormatString } from '../../../utils/converters/date';
-import type { LinkableEvent } from '../ReferralActions/ReferralActions.types';
+import type { LinkableEvent } from '../RelatedStagesActions/ReferralActions.types';
 import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 
 type Props = {
@@ -20,7 +20,7 @@ type ReturnType = {
     isError: boolean,
 }
 
-export const useAvailableReferralEvents = ({
+export const useAvailableRelatedStageEvents = ({
     stageId,
     enrollmentId,
     relationshipTypeId,
@@ -37,7 +37,7 @@ export const useAvailableReferralEvents = ({
         },
     }), [stageId, enrollmentId]);
     const { data, isLoading, isError } = useApiDataQuery<Array<LinkableEvent>>(
-        ['availableReferralEvents', stageId, enrollmentId, relationshipTypeId],
+        ['availableRelatedStageEvents', stageId, enrollmentId, relationshipTypeId],
         query,
         {
             enabled: !!stageId && enabled,

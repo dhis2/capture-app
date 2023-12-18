@@ -6,7 +6,7 @@ import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
 import { SavingText } from '../SavingText';
-import { WidgetReferral } from '../../WidgetReferral';
+import { WidgetRelatedStages } from '../../WidgetRelatedStages';
 import type { Props } from './validated.types';
 
 const styles = () => ({
@@ -24,7 +24,7 @@ const ValidatedPlain = ({
     eventSaveInProgress,
     formFoundation,
     classes,
-    referralRef,
+    relatedStageRef,
     onSave,
     onCancel,
     orgUnit,
@@ -47,8 +47,8 @@ const ValidatedPlain = ({
                     id={id}
                     orgUnit={orgUnit}
                 />
-                <WidgetReferral
-                    ref={referralRef}
+                <WidgetRelatedStages
+                    ref={relatedStageRef}
                     enrollmentId={enrollmentId}
                     programId={programId}
                     programStageId={stage?.id}

@@ -13,7 +13,7 @@ import {
     setSaveEnrollmentEventInProgress,
     startCreateNewAfterCompleting,
 } from './validated.actions';
-import type { ContainerProps, ReferralRefPayload } from './validated.types';
+import type { ContainerProps, RelatedStageRefPayload } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
@@ -37,7 +37,7 @@ export const Validated = ({
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
-    const referralRef = useRef<ReferralRefPayload | null>(null);
+    const relatedStageRef = useRef<RelatedStageRefPayload | null>(null);
     const eventSaveInProgress = useSelector(
         ({ enrollmentDomain }) => !!enrollmentDomain.eventSaveInProgress?.requestEventId,
     );
@@ -79,19 +79,19 @@ export const Validated = ({
         const {
             clientRequestEvent,
             formHasError,
-            referralEvent,
+            linkedEvent,
             relationship,
-            referralMode,
-        } = buildNewEventPayload(saveType, referralRef);
+            linkMode,
+        } = buildNewEventPayload(saveType, relatedStageRef);
 
         if (formHasError) return;
 
         dispatch(batchActions([
             requestSaveEvent({
                 requestEvent: clientRequestEvent,
-                referralEvent,
+                linkedEvent,
                 relationship,
-                referralMode,
+                linkMode,
                 onSaveExternal,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
@@ -99,9 +99,9 @@ export const Validated = ({
             // stores meta in redux to be used when navigating after save
             setSaveEnrollmentEventInProgress({
                 requestEventId: clientRequestEvent?.event,
-                referralEventId: referralEvent?.event,
-                referralOrgUnitId: referralEvent?.orgUnit,
-                referralMode,
+                linkedEventId: linkedEvent?.event,
+                linkedOrgUnitId: linkedEvent?.orgUnit,
+                linkMode,
             }),
         ], newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS),
         );
@@ -132,7 +132,7 @@ export const Validated = ({
             itemId={itemId}
             enrollmentId={enrollmentId}
             formFoundation={formFoundation}
-            referralRef={referralRef}
+            relatedStageRef={relatedStageRef}
             onSave={handleSave}
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}

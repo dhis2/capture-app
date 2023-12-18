@@ -12,7 +12,7 @@ import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentPage.actions';
-import { actions as ReferralModes } from '../../../WidgetReferral/constants';
+import { actions as RelatedStageModes } from '../../../WidgetRelatedStages/constants';
 
 import { useWidgetDataFromStore } from '../hooks';
 import {
@@ -39,8 +39,8 @@ export const EnrollmentAddEventPageDefault = ({
     }, [history, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
-        ({ events, referralMode }) => {
-            if (referralMode && referralMode === ReferralModes.ENTER_DATA) return;
+        ({ events, linkMode }) => {
+            if (linkMode && linkMode === RelatedStageModes.ENTER_DATA) return;
 
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());

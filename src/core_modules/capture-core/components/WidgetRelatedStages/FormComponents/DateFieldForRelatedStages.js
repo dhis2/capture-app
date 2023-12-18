@@ -10,15 +10,15 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
-import type { ErrorMessagesForReferral } from '../ReferralActions';
-import type { ReferralDataValueStates } from '../WidgetReferral.types';
+import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
+import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
 type Props = {|
     scheduledLabel: string,
-    referralDataValues: ReferralDataValueStates,
+    relatedStagesDataValues: RelatedStageDataValueStates,
     onBlurDateField: (value: string) => void,
     saveAttempted: boolean,
-    errorMessages: ErrorMessagesForReferral,
+    errorMessages: ErrorMessagesForRelatedStages,
 |}
 
 const DateFieldForForm =
@@ -34,9 +34,9 @@ const DateFieldForForm =
         ),
     );
 
-export const DateFieldForReferral = ({
+export const DateFieldForRelatedStages = ({
     scheduledLabel,
-    referralDataValues,
+    relatedStagesDataValues,
     onBlurDateField,
     saveAttempted,
     errorMessages,
@@ -52,7 +52,7 @@ export const DateFieldForReferral = ({
     return (
         <DateFieldForForm
             label={scheduledLabel}
-            value={referralDataValues.scheduledAt ? convertStringToDateFormat(referralDataValues.scheduledAt) : ''}
+            value={relatedStagesDataValues.scheduledAt ? convertStringToDateFormat(relatedStagesDataValues.scheduledAt) : ''}
             required
             onSetFocus={() => {}}
             onFocus={() => {}}
