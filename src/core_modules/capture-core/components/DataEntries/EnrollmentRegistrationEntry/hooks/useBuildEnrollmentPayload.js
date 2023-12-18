@@ -156,13 +156,15 @@ export const useBuildEnrollmentPayload = ({
             ? [firstStageDuringRegistrationEvent, ...autoGenerateEvents]
             : autoGenerateEvents;
 
+        const attributes = deriveAttributesFromFormValues(formServerValues);
+
         const enrollment = {
             program: programId,
             status: 'ACTIVE',
             orgUnit: orgUnitId,
             occurredAt,
             enrolledAt,
-            attributes: deriveAttributesFromFormValues(formServerValues),
+            attributes,
             events: allEventsToBeCreated,
         };
 
@@ -177,6 +179,7 @@ export const useBuildEnrollmentPayload = ({
             trackedEntity: teiId || generateUID(),
             orgUnit: orgUnitId,
             trackedEntityType: trackedEntityTypeId,
+            attributes,
             geometry,
             enrollments: [enrollment],
         };

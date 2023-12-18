@@ -49,7 +49,7 @@ export const useLifecycle = ({
     const state = useSelector(stateArg => stateArg);
     const enrollment = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const dataElements: DataElements = useDataElements(programAPI);
-    const otherEvents = useEvents(enrollment, programAPI);
+    const otherEvents = useEvents(enrollment, dataElements);
     const orgUnit: ?OrgUnit = useOrganisationUnit(orgUnitId).orgUnit;
     const rulesContainer: ProgramRulesContainer = useRulesContainer(programAPI);
     const formFoundation: RenderFoundation = useFormFoundation(programAPI);

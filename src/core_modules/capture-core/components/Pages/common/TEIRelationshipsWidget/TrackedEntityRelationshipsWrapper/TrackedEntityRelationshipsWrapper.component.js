@@ -47,7 +47,7 @@ export const TrackedEntityRelationshipsWrapper = ({
         );
     }
 
-    if (!relationshipTypes || !addRelationshipRenderElement) {
+    if (!relationshipTypes?.length || !addRelationshipRenderElement) {
         return null;
     }
 
@@ -70,14 +70,17 @@ export const TrackedEntityRelationshipsWrapper = ({
                     suggestedProgramId,
                     onLinkToTrackedEntityFromRegistration,
                     onLinkToTrackedEntityFromSearch,
+                    onCancel,
                 ) => (
                     <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
                         <RegisterTei
                             suggestedProgramId={suggestedProgramId}
                             onLink={onLinkToTrackedEntityFromSearch}
                             onSave={onLinkToTrackedEntityFromRegistration}
+                            teiId={teiId}
                             onGetUnsavedAttributeValues={() => console.log('get unsaved')}
                             trackedEntityTypeId={selectedTrackedEntityTypeId}
+                            onCancel={onCancel}
                         />
                     </ResultsPageSizeContext.Provider>
                 )}

@@ -1,11 +1,12 @@
 // @flow
+import { useMemo } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
 import type { apiProgramStage } from 'capture-core/metaDataStoreLoaders/programs/quickStoreOperations/types';
 import { Program } from '../../../../../metaData';
 
-export const useProgramStages = (program: Program, programStages?: Array<apiProgramStage>) => {
+export const useProgramStages = (program: Program, programStages?: Array<apiProgramStage>) => useMemo(() => {
     const stages = [];
     if (program && programStages) {
         program.stages.forEach((item) => {
@@ -48,4 +49,4 @@ export const useProgramStages = (program: Program, programStages?: Array<apiProg
 
 
     return stages;
-};
+}, [program, programStages]);

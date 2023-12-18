@@ -1,7 +1,9 @@
 // @flow
 import * as React from 'react';
 import { v4 as uuid } from 'uuid';
+import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import { colors } from '@dhis2/ui';
 import { makeCancelablePromise } from 'capture-core-utils';
 import { Input } from './Input.component';
 import { SearchSuggestions } from './SearchSuggestions.component';
@@ -9,6 +11,13 @@ import { SearchContext } from './Search.context';
 import type { User } from './types';
 import { withApiUtils } from '../../../HOC';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
+
+const getStyles = (theme: Theme) => ({
+    noMatchFound: {
+        color: colors.red600,
+        fontSize: theme.typography.pxToRem(14),
+    },
+});
 
 type Props = {
     onSet: (user: User) => void,
@@ -18,6 +27,7 @@ type Props = {
     inputPlaceholderText?: ?string,
     useUpwardList?: ?boolean,
     querySingleResource: QuerySingleResource,
+    ...CssClasses,
 };
 
 type State = {
@@ -26,6 +36,7 @@ type State = {
     suggestionsError?: ?string,
     highlightedSuggestion?: ?User,
     inputKey: number,
+    noMatch: boolean,
 };
 
 const exitBehaviours = {
@@ -46,6 +57,7 @@ class UserSearchPlain extends React.Component<Props, State> {
             suggestions: [],
             searchValue: '',
             inputKey: 0,
+            noMatch: false,
         };
 
         this.domNames = {
@@ -82,6 +94,7 @@ class UserSearchPlain extends React.Component<Props, State> {
             suggestions,
             highlightedSuggestion: undefined,
             searchValue,
+            noMatch: suggestions.length === 0,
         });
     }
 
@@ -90,6 +103,7 @@ class UserSearchPlain extends React.Component<Props, State> {
             suggestions: [],
             highlightedSuggestion: undefined,
             searchValue: '',
+            noMatch: false,
         });
     }
 
@@ -133,11 +147,14 @@ class UserSearchPlain extends React.Component<Props, State> {
                         id: au.id,
                         name: au.displayName,
                         username: au.username,
+                        firstName: au.firstName,
+                        surname: au.surname,
                     }));
             });
 
     handleInputChange = (value: string) => {
         this.cancelablePromise && this.cancelablePromise.cancel();
+        this.setState({ noMatch: false });
 
         if (value.length > 1) {
             const searchPromise = this.search(value);
@@ -294,6 +311,15 @@ class UserSearchPlain extends React.Component<Props, State> {
         );
     }
 
+    renderNoMatchFound() {
+        const { noMatch } = this.state;
+        const { classes } = this.props;
+
+        return noMatch ? (
+            <span className={classes.noMatchFound} >{i18n.t('No results found')}</span>
+        ) : null;
+    }
+
     render() {
         return (
             <div>
@@ -301,6 +327,7 @@ class UserSearchPlain extends React.Component<Props, State> {
                     value={this.domNames}
                 >
                     {this.renderInput()}
+                    {this.renderNoMatchFound()}
                     {this.renderSuggestions()}
                 </SearchContext.Provider>
             </div>
@@ -308,4 +335,4 @@ class UserSearchPlain extends React.Component<Props, State> {
     }
 }
 
-export const UserSearch = withApiUtils(UserSearchPlain);
+export const UserSearch = withStyles(getStyles)(withApiUtils(UserSearchPlain));

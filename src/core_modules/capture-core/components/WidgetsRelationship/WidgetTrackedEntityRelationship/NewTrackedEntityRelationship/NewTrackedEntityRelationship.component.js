@@ -235,6 +235,7 @@ const NewTrackedEntityRelationshipPlain = ({
                     linkedEntityProgramId,
                     onLinkToTrackedEntityFromRegistration,
                     onLinkToTrackedEntityFromSearch,
+                    onCancel,
                 );
             }
         }
@@ -249,6 +250,7 @@ const NewTrackedEntityRelationshipPlain = ({
         handleLinkedEntityMetadataSelection,
         handleNewRetrieverModeSelected,
         handleSearchRetrieverModeSelected,
+        onCancel,
         onLinkToTrackedEntityFromRegistration,
         onLinkToTrackedEntityFromSearch,
         programId,

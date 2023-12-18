@@ -34,9 +34,9 @@ import { getSearchFormId } from '../getSearchFormId';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
 
 const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
-    (orgUnitScope !== 'ACCESSIBLE' ?
-        { orgUnit: orgUnit && orgUnit.id, ouMode: orgUnitScope } :
-        { ouMode: orgUnitScope });
+    (['ACCESSIBLE', 'CAPTURE', 'ALL'].includes(orgUnitScope) ?
+        { ouMode: orgUnitScope } :
+        { orgUnit: orgUnit && orgUnit.id, ouMode: orgUnitScope });
 
 const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>
     (programId ? { program: programId } : { trackedEntityType: trackedEntityTypeId });

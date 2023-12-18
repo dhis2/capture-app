@@ -4,18 +4,16 @@ import { compose } from 'redux';
 import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
-import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
+import { useOrgUnitName } from '../../../metadataRetrieval/orgUnitName';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
-import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
@@ -49,32 +47,21 @@ const TeiRegistrationEntryPlain =
       trackedEntityName,
       isUserInteractionInProgress,
       isSavingInProgress,
+      onCancel,
       ...rest
   }: PlainProps) => {
-      const { push } = useHistory();
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
       const orgUnitId = useCurrentOrgUnitId();
-      const { orgUnit } = useCoreOrgUnit(orgUnitId); // Tony: [DHIS2-15814] Change this to new hook
-      const orgUnitName = orgUnit ? orgUnit.name : '';
+      const { displayName: orgUnitName } = useOrgUnitName(orgUnitId);
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
-              navigateToWorkingListsPage();
+              onCancel();
           } else {
               setShowWarning(true);
           }
-      };
-
-      const navigateToWorkingListsPage = () => {
-          const url =
-            scopeType === scopeTypes.TRACKER_PROGRAM
-                ?
-                buildUrlQueryString({ programId: selectedScopeId, orgUnitId })
-                :
-                buildUrlQueryString({ orgUnitId });
-          return push(`/?${url}`);
       };
 
       return (
@@ -121,7 +108,7 @@ const TeiRegistrationEntryPlain =
 
                       <DiscardDialog
                           {...defaultDialogProps}
-                          onDestroy={navigateToWorkingListsPage}
+                          onDestroy={onCancel}
                           open={!!showWarning}
                           onCancel={() => { setShowWarning(false); }}
                       />

@@ -530,6 +530,9 @@ msgstr "start typing to search"
 msgid "suggestions could not be retrieved"
 msgstr "suggestions could not be retrieved"
 
+msgid "No results found"
+msgstr "No results found"
+
 msgid "No items to display"
 msgstr "No items to display"
 
@@ -962,9 +965,6 @@ msgstr "Could not retrieve metadata. Please try again later."
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
 
-msgid "No results found"
-msgstr "No results found"
-
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
@@ -1176,6 +1176,33 @@ msgstr "Mark for follow-up"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr "Existing dates for auto-generated events will not be updated."
 
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Set coordinates"
+msgstr "Set coordinates"
+
+msgid "Coordinates"
+msgstr "Coordinates"
+
+msgid "Delete polygon"
+msgstr "Delete polygon"
+
+msgid "Close without saving"
+msgstr "Close without saving"
+
+msgid "Finish drawing before saving"
+msgstr "Finish drawing before saving"
+
+msgid "Set area"
+msgstr "Set area"
+
 msgid "Enrollment date"
 msgstr "Enrollment date"
 
@@ -1199,6 +1226,12 @@ msgstr "Last updated {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"
+
+msgid "Add coordinates"
+msgstr "Add coordinates"
+
+msgid "Add area"
+msgstr "Add area"
 
 msgid "Comments about this enrollment"
 msgstr "Comments about this enrollment"
@@ -1322,9 +1355,6 @@ msgstr "Profile widget could not be loaded. Please try again later"
 
 msgid "{{TETName}} profile"
 msgstr "{{TETName}} profile"
-
-msgid "Edit"
-msgstr "Edit"
 
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
@@ -1618,12 +1648,6 @@ msgstr "To time"
 
 msgid "Page {{currentPage}}"
 msgstr "Page {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Delete polygon"
-
-msgid "Set area"
-msgstr "Set area"
 
 msgid "Area on map saved"
 msgstr "Area on map saved"

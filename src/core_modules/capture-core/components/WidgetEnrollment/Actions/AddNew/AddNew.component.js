@@ -2,7 +2,7 @@
 import { IconAdd16, MenuItem } from '@dhis2/ui';
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { Props } from './addNew.types';
 
 export const AddNew = ({ canAddNew, onlyEnrollOnce, tetName, onAddNew }: Props) => {

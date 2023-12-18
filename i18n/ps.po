@@ -1,12 +1,12 @@
 # 
 # Translators:
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-06-27T06:20:33.460Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Pashto (https://app.transifex.com/hisp-uio/teams/100509/ps/)\n"
@@ -66,6 +66,16 @@ msgstr ""
 
 msgid "Last updated"
 msgstr "د وروستي ځل لپاره تجدید شوې"
+
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid ""
+"Plugins are not yet available - Please contact your system administrator"
+msgstr ""
 
 msgid "This value is validating"
 msgstr ""
@@ -142,6 +152,15 @@ msgstr "همغږي کول"
 msgid "Enrollment"
 msgstr "شاملول یا نوم لیکنه"
 
+msgid "Complete event"
+msgstr ""
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -160,13 +179,16 @@ msgstr "رد یې کړئ [ ژباړه ـ ردول ]"
 msgid "Metadata error. see log for details"
 msgstr ""
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
-msgstr ""
-
-msgid "Complete event"
 msgstr ""
 
 msgid "Basic info"
@@ -356,9 +378,6 @@ msgstr ""
 msgid "Operations running"
 msgstr ""
 
-msgid "Sort"
-msgstr ""
-
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
@@ -472,6 +491,12 @@ msgstr ""
 msgid "Select image"
 msgstr ""
 
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No match found"
+msgstr ""
+
 msgid "Search"
 msgstr "جستجو"
 
@@ -495,6 +520,9 @@ msgstr ""
 
 msgid "suggestions could not be retrieved"
 msgstr ""
+
+msgid "No results found"
+msgstr "هېڅ پایله ترلاسه نه شوه"
 
 msgid "No items to display"
 msgstr ""
@@ -737,7 +765,7 @@ msgstr "مهالوېش یې وټاکئ"
 msgid "Refer"
 msgstr ""
 
-msgid "You can’t add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
 msgid "Cancel without saving"
@@ -799,6 +827,9 @@ msgid ""
 msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
@@ -896,11 +927,20 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
-msgid "Possible duplicates found"
+msgid "Selected program"
+msgstr "انتخاب شوی پروګرام"
+
+msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
-msgid "No results found"
-msgstr "هېڅ پایله ترلاسه نه شوه"
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
+msgid "Possible duplicates found"
+msgstr ""
 
 msgid "An error occurred loading possible duplicates"
 msgstr ""
@@ -954,18 +994,10 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr ""
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "Search {{name}}"
 msgstr ""
 
 msgid "Search by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
 msgstr ""
 
 msgid "all programs"
@@ -1017,12 +1049,6 @@ msgid "Missing search criteria"
 msgstr ""
 
 msgid "Results found"
-msgstr ""
-
-msgid "Selected program"
-msgstr "انتخاب شوی پروګرام"
-
-msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Saved lists in this program"
@@ -1111,6 +1137,36 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "د تعقيب لپاره يې په نښه کړئ"
 
+msgid "Existing dates for auto-generated events will not be updated."
+msgstr ""
+
+msgid "Latitude"
+msgstr "لېټېټيوډ"
+
+msgid "Longitude"
+msgstr "لانګېټيوډ"
+
+msgid "Edit"
+msgstr "درست یې کړئ"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "مختصات"
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "د نوم ثبتونې نېټه"
 
@@ -1134,6 +1190,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "لغوه شوی"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1199,23 +1261,11 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
-msgid "The scheduled date is {{count}} days {{position}} the suggested date."
-msgid_plural ""
-"The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
-
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
-msgstr[1] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1260,9 +1310,6 @@ msgstr ""
 msgid "Try again or contact your system administrator for support"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr ""
-
 msgid "Fix errors in the form to continue."
 msgstr ""
 
@@ -1272,8 +1319,8 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "درست یې کړئ"
+msgid "tracked entity instance"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr ""
@@ -1308,13 +1355,47 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "نمونه/ډول"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "د پروګرام د پړاو یا مرحلې نوم"
+
 msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr ""
-
-msgid "Download as XML"
 msgstr ""
 
 msgid "Download as CSV"
@@ -1464,9 +1545,6 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "همغږي ترتیب کړئ"
 
-msgid "Page {{currentPage}}"
-msgstr ""
-
 msgid "Date"
 msgstr "نېټه"
 
@@ -1485,16 +1563,7 @@ msgstr ""
 msgid "To time"
 msgstr ""
 
-msgid "error encountered during field validation"
-msgstr ""
-
-msgid "error"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
+msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Area on map saved"

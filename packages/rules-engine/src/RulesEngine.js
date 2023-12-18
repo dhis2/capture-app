@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import { VariableService } from './services/VariableService/VariableService';
+import { VariableService } from './services/VariableService';
 import { ValueProcessor } from './processors/ValueProcessor';
 import { executeExpression } from './services/expressionService';
 import { getD2Functions } from './d2Functions';
@@ -10,6 +10,7 @@ import type {
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
     IDateUtils,
+    Flag,
 } from './rulesEngine.types';
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
 import { effectActions, typeof environmentTypes } from './constants';
@@ -21,18 +22,21 @@ export class RulesEngine {
     variableService: VariableService;
     dateUtils: IDateUtils;
     userRoles: Array<string>;
+    flags: Flag;
 
     constructor(
         inputConverter: IConvertInputRulesValue,
         outputConverter: IConvertOutputRulesEffectsValue,
         dateUtils: IDateUtils,
         environment: $Values<environmentTypes>,
+        flags?: Flag,
     ) {
         this.inputConverter = inputConverter;
         this.outputConverter = outputConverter;
         this.valueProcessor = new ValueProcessor(inputConverter);
         this.variableService = new VariableService(this.valueProcessor.processValue, dateUtils, environment);
         this.dateUtils = dateUtils;
+        this.flags = flags ?? {};
     }
 
     /**
@@ -114,10 +118,15 @@ export class RulesEngine {
                         expression,
                         dhisFunctions,
                         variablesHash,
+                        flags: this.flags,
                         onError: (error, injectedExpression) => log.warn(
                             `Expression with id rule:${rule.id} could not be run. ` +
                             `Original condition was: ${expression} - ` +
                             `Evaluation ended up as:${injectedExpression} - error message:${error}`),
+                        onVerboseLog: injectedExpression => console.log(
+                            `Expression with id rule:${rule.id} was run. ` +
+                            `Original condition was: ${expression} - ` +
+                            `Evaluation ended up as:${injectedExpression}`),
                     });
                 } else {
                     log.warn(`Rule id:'${rule.id}' and name:'${rule.displayName}' ` +
@@ -149,10 +158,15 @@ export class RulesEngine {
                                 expression: actionExpression,
                                 dhisFunctions,
                                 variablesHash,
+                                flags: this.flags,
                                 onError: (error, injectedExpression) => log.warn(
                                     `Expression with id rule: action:${id} could not be run. ` +
                                     `Original condition was: ${actionExpression} - ` +
                                     `Evaluation ended up as:${injectedExpression} - error message:${error}`),
+                                onVerboseLog: injectedExpression => log.info(
+                                    `Expression with id rule: action:${id} was run. ` +
+                                    `Original condition was: ${actionExpression} - ` +
+                                    `Evaluation ended up as: ${injectedExpression}`),
                             });
                         }
 
@@ -195,5 +209,13 @@ export class RulesEngine {
 
     setSelectedUserRoles(userRoles: Array<string>) {
         this.userRoles = userRoles;
+    }
+
+    setFlags(flags: Flag) {
+        this.flags = flags;
+    }
+
+    getFlags(): Flag {
+        return this.flags;
     }
 }

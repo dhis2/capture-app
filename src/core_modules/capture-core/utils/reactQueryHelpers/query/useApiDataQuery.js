@@ -6,7 +6,7 @@ import type { Result } from './useMetadataQuery.types';
 import { ReactQueryAppNamespace } from '../reactQueryHelpers.const';
 
 export const useApiDataQuery = <TResultData>(
-    queryKey: Array<?string | number>,
+    queryKey: Array<string | number | null | void>,
     queryObject: ResourceQuery,
     queryOptions: UseQueryOptions<TResultData>,
 ): Result<TResultData> => {

@@ -24,6 +24,7 @@ export type PlainProps = {|
     enrollment: Object,
     program: Object,
     ownerOrgUnit: Object,
+    locale: string,
     refetchEnrollment: QueryRefetchFunction,
     refetchTEI: QueryRefetchFunction,
     initError?: FetchError,

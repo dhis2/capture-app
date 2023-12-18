@@ -14,7 +14,6 @@ export type Event = {|
     occurredAt: string,
     updatedAt: string,
     orgUnit: string,
-    orgUnitName: string,
     program: string,
     programStage: string,
     status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
@@ -34,13 +33,13 @@ export type EnrollmentData = {|
     updatedAt: string,
     updatedAtClient: string,
     orgUnit: string,
-    orgUnitName: string,
     program: string,
     status: string,
     storedBy: string,
     scheduledAt: string,
     trackedEntity: string,
     trackedEntityType: string,
+    geometry?: ?{ type: string, coordinates: [number, number] | Array<[number, number]>}
 |};
 
 export type AttributeValue = {|

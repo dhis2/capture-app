@@ -1,16 +1,16 @@
 # 
 # Translators:
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
-# Viktor Varland <viktor@dhis2.org>, 2023
-# Hamza Assada <7amza.it@gmail.com>, 2023
 # Philip Larsen Donnelly, 2023
+# Hamza Assada <7amza.it@gmail.com>, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2023\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -533,6 +533,9 @@ msgstr "ابدأ الكتابة للبحث"
 msgid "suggestions could not be retrieved"
 msgstr "تعذر استرداد الاقتراحات"
 
+msgid "No results found"
+msgstr "لم يتم العثور على أي نتائج"
+
 msgid "No items to display"
 msgstr "لا توجد عناصر للعرض"
 
@@ -951,9 +954,6 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
 
-msgid "No results found"
-msgstr "لم يتم العثور على أي نتائج"
-
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1154,6 +1154,33 @@ msgstr "اشر من أجل الملحق"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "خط العرض"
+
+msgid "Longitude"
+msgstr "خط الطول"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "الإحداثيات"
+
+msgid "Delete polygon"
+msgstr "حذف المضلع"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "عين المساحة"
+
 msgid "Enrollment date"
 msgstr "تاريخ التسجيل"
 
@@ -1177,6 +1204,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "الملغية"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1300,9 +1333,6 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "تعديل"
-
 msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
 
@@ -1368,7 +1398,7 @@ msgid "To open this relationship, please wait until saving is complete"
 msgstr ""
 
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 msgid "Created date"
 msgstr ""
@@ -1549,12 +1579,6 @@ msgstr "إلى وقت"
 
 msgid "Page {{currentPage}}"
 msgstr "صفحة {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "حذف المضلع"
-
-msgid "Set area"
-msgstr "عين المساحة"
 
 msgid "Area on map saved"
 msgstr ""

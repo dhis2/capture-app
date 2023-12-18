@@ -16,7 +16,7 @@ import { colors,
     IconAdd16,
     Tooltip,
 } from '@dhis2/ui';
-import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { sortDataFromEvent } from './hooks/sortFuntions';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
@@ -103,6 +103,11 @@ const StageDetailPlain = (props: Props) => {
         onCreateNew(stageId);
     }, [onCreateNew, stageId]);
 
+    const handleShowMore = useCallback(() => {
+        const nextRowIndex = Math.min(events.length, displayedRowNumber + DEFAULT_NUMBER_OF_ROW);
+        setDisplayedRowNumber(nextRowIndex);
+    }, [events, displayedRowNumber, setDisplayedRowNumber]);
+
     function renderHeader() {
         const headerCells = headerColumns
             .map(column => (
@@ -181,16 +186,14 @@ const StageDetailPlain = (props: Props) => {
     }
 
     function renderFooter() {
-        const renderShowMoreButton = () => (events.length > DEFAULT_NUMBER_OF_ROW
+        const renderShowMoreButton = () => (dataSource && !loading
+            && events.length > DEFAULT_NUMBER_OF_ROW
             && displayedRowNumber < events.length ? <Button
                 small
                 secondary
                 dataTest="show-more-button"
                 className={classes.button}
-                onClick={() => {
-                    const nextRowIndex = Math.min(events.length, displayedRowNumber + DEFAULT_NUMBER_OF_ROW);
-                    setDisplayedRowNumber(nextRowIndex);
-                }}
+                onClick={handleShowMore}
             >
                 {i18n.t('Show {{ rest }} more', {
                     rest: Math.min(events.length - displayedRowNumber, DEFAULT_NUMBER_OF_ROW),
