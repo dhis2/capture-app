@@ -1,9 +1,9 @@
 // @flow
-import type { ReferralDataValueStates } from '../../../WidgetReferral';
-import { actions as ReferralModes } from '../../../WidgetReferral/constants';
+import type { RelatedStageDataValueStates } from '../../../WidgetRelatedStages';
+import { actions as LinkModes } from '../../../WidgetRelatedStages/constants';
 import type { RequestEvent } from '../validated.types';
 
-type ReferralType = {|
+type RelatedStageType = {|
     id: string,
     fromConstraint: {|
         programStage: {
@@ -17,13 +17,13 @@ type ReferralType = {|
     }
 |}
 
-export type ConvertedReferralEventProps = {|
-    referralMode: $Keys<typeof ReferralModes>,
-    referralDataValues: ReferralDataValueStates,
+export type ConvertedRelatedStageEventProps = {|
+    linkMode: $Keys<typeof LinkModes>,
+    relatedStageDataValues: RelatedStageDataValueStates,
     programId: string,
     teiId: string,
     currentProgramStageId: string,
     enrollmentId: string,
-    referralType: ReferralType,
+    relatedStageType: RelatedStageType,
     clientRequestEvent: RequestEvent,
 |}

@@ -1,15 +1,15 @@
 // @flow
 import log from 'loglevel';
 import { generateUID } from '../../../../utils/uid/generateUID';
-import { actions as ReferralModes } from '../../../WidgetReferral/constants';
-import type { ConvertedReferralEventProps } from './getConvertedReferralEvent.types';
+import { actions as RelatedStageModes } from '../../../WidgetRelatedStages/constants';
+import type { ConvertedRelatedStageEventProps } from './getConvertedRelatedStageEvent.types';
 import { errorCreator } from '../../../../../capture-core-utils';
 
-const getEventDetailsByReferralMode = ({
-    referralDataValues,
+const getEventDetailsByLinkMode = ({
+    relatedStageDataValues,
     requestEventIsFromConstraint,
-    referralMode,
-    referralType,
+    linkMode,
+    relatedStageType,
     programId,
     teiId,
     enrollmentId,
@@ -19,71 +19,71 @@ const getEventDetailsByReferralMode = ({
         event: generateUID(),
         program: programId,
         programStage: requestEventIsFromConstraint ?
-            referralType.toConstraint.programStage.id
-            : referralType.fromConstraint.programStage.id,
+            relatedStageType.toConstraint.programStage.id
+            : relatedStageType.fromConstraint.programStage.id,
         trackedEntity: teiId,
         enrollment: enrollmentId,
         dataValues: [],
         status: 'SCHEDULE',
     };
 
-    if (referralMode === ReferralModes.REFER_ORG) {
-        const { scheduledAt: referralScheduledAt, orgUnit: referralOrgUnit } = referralDataValues;
+    if (linkMode === RelatedStageModes.SCHEDULE_IN_ORG) {
+        const { scheduledAt: linkedEventScheduledAt, orgUnit: linkedEventOrgUnit } = relatedStageDataValues;
 
         return ({
-            referralEvent: {
+            linkedEvent: {
                 ...baseEventDetails,
-                scheduledAt: referralScheduledAt,
-                orgUnit: referralOrgUnit?.id,
+                scheduledAt: linkedEventScheduledAt,
+                orgUnit: linkedEventOrgUnit?.id,
             },
             linkedEventId: baseEventDetails.event,
         });
-    } else if (referralMode === ReferralModes.ENTER_DATA) {
+    } else if (linkMode === RelatedStageModes.ENTER_DATA) {
         return ({
-            referralEvent: {
+            linkedEvent: {
                 ...baseEventDetails,
                 scheduledAt: clientRequestEvent.occurredAt,
                 orgUnit: clientRequestEvent.orgUnit,
             },
             linkedEventId: baseEventDetails.event,
         });
-    } else if (referralMode === ReferralModes.LINK_EXISTING_RESPONSE) {
-        const { linkedEventId } = referralDataValues;
+    } else if (linkMode === RelatedStageModes.LINK_EXISTING_RESPONSE) {
+        const { linkedEventId } = relatedStageDataValues;
         return {
-            referralEvent: null,
+            linkedEvent: null,
             linkedEventId,
         };
-    } else if (referralMode === ReferralModes.DO_NOT_LINK_RESPONSE) {
+    } else if (linkMode === RelatedStageModes.DO_NOT_LINK_RESPONSE) {
         return {
-            referralEvent: null,
+            linkedEvent: null,
             linkedEventId: null,
         };
     }
 
-    log.error(errorCreator(`Referral mode ${referralMode} is not supported`)());
+    log.error(errorCreator(`Referral mode ${linkMode} is not supported`)());
     return {
-        referralEvent: null,
+        linkedEvent: null,
         linkedEventId: null,
     };
 };
 
-export const getConvertedReferralEvent = ({
-    referralMode,
-    referralDataValues,
+export const getConvertedRelatedStageEvent = ({
+    linkMode,
+    relatedStageDataValues,
     programId,
     teiId,
     currentProgramStageId,
     clientRequestEvent,
     enrollmentId,
-    referralType,
-}: ConvertedReferralEventProps) => {
-    const requestEventIsFromConstraint = referralType.fromConstraint.programStage.id === currentProgramStageId;
+    relatedStageType,
+}: ConvertedRelatedStageEventProps) => {
+    const requestEventIsFromConstraint = relatedStageType.fromConstraint.programStage.id === currentProgramStageId;
 
-    const { referralEvent, linkedEventId } = getEventDetailsByReferralMode({
-        referralDataValues,
+    const { linkedEvent, linkedEventId } = getEventDetailsByLinkMode({
+        relatedStageDataValues,
         requestEventIsFromConstraint,
-        referralMode,
-        referralType,
+        linkMode,
+        relatedStageType,
         programId,
         teiId,
         enrollmentId,
@@ -91,7 +91,7 @@ export const getConvertedReferralEvent = ({
     });
 
     const relationship = linkedEventId && {
-        relationshipType: referralType.id,
+        relationshipType: relatedStageType.id,
         from: {
             event: {
                 event: requestEventIsFromConstraint ? clientRequestEvent.event : linkedEventId,
@@ -105,7 +105,7 @@ export const getConvertedReferralEvent = ({
     };
 
     return {
-        referralEvent,
+        linkedEvent,
         relationship,
     };
 };

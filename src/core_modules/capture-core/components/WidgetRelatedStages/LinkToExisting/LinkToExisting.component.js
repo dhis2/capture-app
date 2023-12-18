@@ -26,17 +26,17 @@ const styles = () => ({
 });
 
 export const LinkToExistingPlain = ({
-    referralDataValues,
-    setReferralDataValues,
+    relatedStagesDataValues,
+    setRelatedStagesDataValues,
     linkableEvents,
-    referralProgramStageLabel,
+    linkableStageLabel,
     errorMessages,
     saveAttempted,
     classes,
 }: LinkToExistingProps) => {
     const onChange = (value) => {
-        setReferralDataValues({
-            ...referralDataValues,
+        setRelatedStagesDataValues({
+            ...relatedStagesDataValues,
             linkedEventId: value,
         });
     };
@@ -44,15 +44,15 @@ export const LinkToExistingPlain = ({
     return (
         <div className={classes.searchRow}>
             <p className={classes.label}>
-                {i18n.t('Link to an existing {{referralProgramStageLabel}}', {
-                    referralProgramStageLabel,
+                {i18n.t('Link to an existing {{linkableStageLabel}}', {
+                    linkableStageLabel,
                 })}
             </p>
             <SingleSelectField
-                selected={referralDataValues.linkedEventId}
+                selected={relatedStagesDataValues.linkedEventId}
                 onChange={({ selected }) => onChange(selected)}
-                placeholder={i18n.t('Choose a {{referralProgramStageLabel}}', {
-                    referralProgramStageLabel,
+                placeholder={i18n.t('Choose a {{linkableStageLabel}}', {
+                    linkableStageLabel,
                 })}
                 className={classes.singleSelectField}
                 error={saveAttempted && !!errorMessages.linkedEventId}

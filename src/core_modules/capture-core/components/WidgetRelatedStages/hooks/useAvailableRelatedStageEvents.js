@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
 import { convertDateObjectToDateFormatString } from '../../../utils/converters/date';
-import type { LinkableEvent } from '../RelatedStagesActions/ReferralActions.types';
+import type { LinkableEvent } from '../RelatedStagesActions/RelatedStagesActions.types';
 import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 
 type Props = {
