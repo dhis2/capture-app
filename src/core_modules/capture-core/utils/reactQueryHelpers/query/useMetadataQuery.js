@@ -5,7 +5,7 @@ import { useDataEngine, type ResourceQuery } from '@dhis2/app-runtime';
 import type { QueryFunction, UseQueryOptions } from 'react-query';
 import { IndexedDBError } from '../../../../capture-core-utils/storage/IndexedDBError/IndexedDBError';
 import type { Result } from './useMetadataQuery.types';
-import { ReactQueryAppNamespace } from '../reactQueryHelpers.const';
+import { ReactQueryAppNamespace, IndexedDBNamespace } from '../reactQueryHelpers.const';
 
 const throwErrorForIndexedDB = (error) => {
     if (error instanceof IndexedDBError) {
@@ -43,7 +43,7 @@ export const useIndexedDBQuery = <TResultData>(
     queryFn: QueryFunction<TResultData>,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> =>
-        useAsyncMetadata(queryKey, queryFn, {
+        useAsyncMetadata([IndexedDBNamespace, ...queryKey], queryFn, {
             cacheTime: 0,
             ...queryOptions,
             onError: (error) => {
