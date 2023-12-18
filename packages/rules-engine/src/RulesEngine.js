@@ -123,7 +123,7 @@ export class RulesEngine {
                             `Expression with id rule:${rule.id} could not be run. ` +
                             `Original condition was: ${expression} - ` +
                             `Evaluation ended up as:${injectedExpression} - error message:${error}`),
-                        onVerboseLog: injectedExpression => log.info(
+                        onVerboseLog: injectedExpression => console.log(
                             `Expression with id rule:${rule.id} was run. ` +
                             `Original condition was: ${expression} - ` +
                             `Evaluation ended up as:${injectedExpression}`),
