@@ -1,3 +1,10 @@
+# [100.49.0](https://github.com/dhis2/capture-app/compare/v100.48.0...v100.49.0) (2023-12-18)
+
+
+### Features
+
+* [DHIS2-12544] Add verbose logging to rules engine ([#3480](https://github.com/dhis2/capture-app/issues/3480)) ([2a6d4a8](https://github.com/dhis2/capture-app/commit/2a6d4a839ae0daed7b2ddbf09a401c29dbb3cfd7))
+
 # [100.48.0](https://github.com/dhis2/capture-app/compare/v100.47.3...v100.48.0) (2023-12-15)
 
 
