@@ -3,7 +3,9 @@ import { actions as ReferralModes } from './constants';
 
 export type Props = {|
     programId: string,
+    enrollmentId: string,
     programStageId: string,
+    currentStageLabel: string,
 |}
 export type ReferralDataValueStates = {|
     referralMode: typeof ReferralModes.REFER_ORG,
@@ -13,4 +15,5 @@ export type ReferralDataValueStates = {|
         id: string,
         name: string,
     },
+    linkedEventId: ?string,
 |}

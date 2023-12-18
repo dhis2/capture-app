@@ -1,13 +1,14 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Radio, colors, spacers, spacersNum } from '@dhis2/ui';
+import { Radio, colors, spacers, spacersNum, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { actions as ReferalActionTypes, mainOptionTranslatedTexts, referralStatus } from '../constants';
+import { actions as ReferralActionTypes, mainOptionTranslatedTexts, referralStatus } from '../constants';
 import { DataSection } from '../../DataSection';
 import { ReferToOrgUnit } from '../ReferToOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
 import type { Props } from './ReferralActions.types';
+import { LinkToExisting } from '../LinkToExisting';
 
 const styles = () => ({
     wrapper: {
@@ -30,17 +31,39 @@ const styles = () => ({
         flexGrow: 1,
         flexShrink: 0,
     },
+    infoBox: {
+        margin: '8px 8px',
+        display: 'flex',
+        fontSize: '14px',
+        gap: '5px',
+        background: colors.grey100,
+        padding: '12px 8px',
+        border: `1px solid ${colors.grey600}`,
+    },
 });
 
 export const ReferralActionsPlain = ({
     classes,
     type,
-    selectedType,
+    scheduledLabel,
+    linkableEvents,
+    referralDataValues,
+    setReferralDataValues,
     constraint,
-    ...passOnProps
+    currentStageLabel,
+    errorMessages,
+    saveAttempted,
 }: Props) => {
-    const [selectedAction, setSelectedAction] = useState();
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
+
+    const selectedAction = useMemo(() => referralDataValues.referralMode, [referralDataValues.referralMode]);
+
+    const updateSelectedAction = (action: $Values<typeof ReferralActionTypes>) => {
+        setReferralDataValues(prevState => ({
+            ...prevState,
+            referralMode: action,
+        }));
+    };
 
     if (!programStage) {
         return null;
@@ -57,8 +80,9 @@ export const ReferralActionsPlain = ({
                         key={key}
                         name={`referral-action-${key}`}
                         checked={key === selectedAction}
+                        disabled={key === ReferralActionTypes.LINK_EXISTING_RESPONSE && !linkableEvents.length}
                         label={mainOptionTranslatedTexts[key](programStage.stageForm.name)}
-                        onChange={(e: Object) => setSelectedAction(e.value)}
+                        onChange={(e: Object) => updateSelectedAction(e.value)}
                         value={key}
                     />
                 )) : null}
@@ -68,10 +92,55 @@ export const ReferralActionsPlain = ({
                 }
             </div>
 
-            {selectedAction === ReferalActionTypes.REFER_ORG && (
+            {selectedAction === ReferralActionTypes.REFER_ORG && (
                 <ReferToOrgUnit
-                    {...passOnProps}
+                    referralDataValues={referralDataValues}
+                    setReferralDataValues={setReferralDataValues}
+                    scheduledLabel={scheduledLabel}
+                    saveAttempted={saveAttempted}
+                    errorMessages={errorMessages}
                 />
+            )}
+
+            {selectedAction === ReferralActionTypes.ENTER_DATA && (
+                <div
+                    className={classes.infoBox}
+                >
+                    <IconInfo16 />
+                    {i18n.t(
+                        'Enter {{referralProgramStageLabel}} details in the next step after completing this {{currentStageLabel}}.',
+                        {
+                            referralProgramStageLabel: programStage.stageForm.name,
+                            currentStageLabel,
+                        },
+                    )}
+                </div>
+            )}
+
+            {selectedAction === ReferralActionTypes.LINK_EXISTING_RESPONSE && linkableEvents.length > 0 && (
+                <LinkToExisting
+                    referralDataValues={referralDataValues}
+                    setReferralDataValues={setReferralDataValues}
+                    linkableEvents={linkableEvents}
+                    referralProgramStageLabel={programStage.stageForm.name}
+                    errorMessages={errorMessages}
+                    saveAttempted={saveAttempted}
+                />
+            )}
+
+            {selectedAction === ReferralActionTypes.DO_NOT_LINK_RESPONSE && (
+                <div
+                    className={classes.infoBox}
+                >
+                    <IconWarning16 />
+                    {i18n.t(
+                        'This {{currentStageLabel}} will be created without a link to {{referralProgramStageLabel}}',
+                        {
+                            referralProgramStageLabel: programStage.stageForm.name,
+                            currentStageLabel,
+                        },
+                    )}
+                </div>
             )}
         </DataSection>);
 };

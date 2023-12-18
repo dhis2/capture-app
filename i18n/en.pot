@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-10-30T08:21:47.926Z\n"
-"PO-Revision-Date: 2023-10-30T08:21:47.926Z\n"
+"POT-Creation-Date: 2023-11-04T16:21:37.396Z\n"
+"PO-Revision-Date: 2023-11-04T16:21:37.396Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1329,11 +1329,31 @@ msgstr "Edit"
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
+msgid "Link to an existing {{referralProgramStageLabel}}"
+msgstr "Link to an existing {{referralProgramStageLabel}}"
+
+msgid "Choose a {{referralProgramStageLabel}}"
+msgstr "Choose a {{referralProgramStageLabel}}"
+
 msgid "Referral actions"
 msgstr "Referral actions"
 
 msgid "Ambiguous referrals, contact system administrator"
 msgstr "Ambiguous referrals, contact system administrator"
+
+msgid ""
+"Enter {{referralProgramStageLabel}} details in the next step after "
+"completing this {{currentStageLabel}}."
+msgstr ""
+"Enter {{referralProgramStageLabel}} details in the next step after "
+"completing this {{currentStageLabel}}."
+
+msgid ""
+"This {{currentStageLabel}} will be created without a link to "
+"{{referralProgramStageLabel}}"
+msgstr ""
+"This {{currentStageLabel}} will be created without a link to "
+"{{referralProgramStageLabel}}"
 
 msgid "Schedule in {{displayName}}"
 msgstr "Schedule in {{displayName}}"
@@ -1349,6 +1369,12 @@ msgstr "Don't link to a {{displayName}}"
 
 msgid "Scheduled date"
 msgstr "Scheduled date"
+
+msgid "Report date"
+msgstr "Report date"
+
+msgid "Please select a valid event"
+msgstr "Please select a valid event"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"

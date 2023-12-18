@@ -3,7 +3,12 @@ import { createReducerDescription } from '../../trackerRedux';
 import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
 import { actionTypes as enrollmentNoteActionTypes }
     from '../../components/WidgetEnrollmentComment/WidgetEnrollmentComment.actions';
-import { actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
+import {
+    actionTypes as editEventActionTypes,
+} from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
+import {
+    newEventWidgetActionTypes,
+} from '../../components/WidgetEnrollmentEventNew/Validated/validated.actions';
 
 const initialReducerValue = {};
 const {
@@ -17,6 +22,7 @@ const {
     ROLLBACK_ENROLLMENT_EVENTS,
     COMMIT_ENROLLMENT_EVENT,
     COMMIT_ENROLLMENT_EVENTS,
+    ADD_PERSISTED_ENROLLMENT_EVENTS,
 } = enrollmentSiteActionTypes;
 
 export const enrollmentDomainDesc = createReducerDescription(
@@ -88,6 +94,14 @@ export const enrollmentDomainDesc = createReducerDescription(
 
             return { ...state, enrollment: { ...state.enrollment, events: enrollmentEvents } };
         },
+        [ADD_PERSISTED_ENROLLMENT_EVENTS]: (
+            state,
+            { payload: { events } },
+        ) => {
+            const enrollmentEvents = [...state.enrollment.events, ...events];
+
+            return { ...state, enrollment: { ...state.enrollment, events: enrollmentEvents } };
+        },
         [ROLLBACK_ENROLLMENT_EVENTS]: (state, { payload: { events } }) => {
             const comittedEventIds = events.map(event => event.event);
             const enrollmentEvents = state.enrollment.events.filter(event => !comittedEventIds.includes(event.event));
@@ -145,6 +159,14 @@ export const enrollmentDomainDesc = createReducerDescription(
                 return event;
             });
             return { ...state, enrollment: { ...state.enrollment, events } };
+        },
+        [newEventWidgetActionTypes.SET_SAVE_ENROLLMENT_EVENT_IN_PROGRESS]: (state, { payload }) => ({
+            ...state,
+            eventSaveInProgress: payload,
+        }),
+        [newEventWidgetActionTypes.CLEAN_UP_EVENT_SAVE_IN_PROGRESS]: (state) => {
+            const { eventSaveInProgress, ...newState } = state;
+            return newState;
         },
     },
     'enrollmentDomain',

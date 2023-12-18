@@ -6,7 +6,7 @@ import type { Result } from './useMetadataQuery.types';
 import { ReactQueryAppNamespace } from '../reactQueryHelpers.const';
 
 export const useApiDataQuery = <TResultData>(
-    queryKey: Array<string | number>,
+    queryKey: Array<?string | number>,
     queryObject: ResourceQuery,
     queryOptions: UseQueryOptions<TResultData>,
 ): Result<TResultData> => {
@@ -17,11 +17,11 @@ export const useApiDataQuery = <TResultData>(
         [ReactQueryAppNamespace, ...queryKey],
         queryFn,
         {
-            ...queryOptions,
             refetchOnWindowFocus: false,
             refetchOnMount: false,
             refetchOnReconnect: false,
             staleTime: 2 * 60 * 1000,
             cacheTime: 5 * 60 * 1000,
+            ...queryOptions,
         });
 };

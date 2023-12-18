@@ -11,7 +11,8 @@ const getRelationshipTypeFromIndexedDB = () => {
 };
 
 export const useReferral = (programStageId: string) => {
-    const { data: relationshipTypes } = useIndexedDBQuery('relationshipTypes',
+    const { data: relationshipTypes } = useIndexedDBQuery(
+        ['relationshipTypes'],
         () => getRelationshipTypeFromIndexedDB(), {
             select: allRelationshipTypes => allRelationshipTypes
                 ?.filter(relationshipType => relationshipType.referral && relationshipType.access.data.write) ?? [],

@@ -6,20 +6,91 @@ import {
     addEnrollmentEventPageDefaultActionTypes,
 } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import {
+    addPersistedEnrollmentEvents,
     commitEnrollmentEvents,
     rollbackEnrollmentEvents,
     saveFailed,
 } from '../common/EnrollmentOverviewDomain/enrollment.actions';
+import { actions as ReferralActions } from '../../WidgetReferral/constants';
+import { buildUrlQueryString } from '../../../utils/routing';
 
-export const saveNewEventSucceededEpic = (action$: InputObservable) =>
+const shouldNavigateWithReferral = ({
+    referralMode,
+    referralEventId,
+    referralOrgUnitId,
+    history,
+}) => {
+    if (referralMode && referralEventId) {
+        if (referralMode === ReferralActions.ENTER_DATA) {
+            const navigate = () => history.push(`/enrollmentEventEdit?${buildUrlQueryString({
+                eventId: referralEventId,
+                orgUnitId: referralOrgUnitId,
+            })}`);
+            return { navigate };
+        }
+    }
+    return {};
+};
+
+export const saveNewEventSucceededEpic = (action$: InputObservable, state: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS,
             addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_SUCCESS,
         ),
         map((action) => {
-            const events = action.payload.bundleReport.typeReportMap.EVENT.objectReports;
-            return commitEnrollmentEvents({ events });
+            const actions = [];
+            const { enrollmentDomain } = state.value;
+            const eventsFromApi = action.payload.bundleReport.typeReportMap.EVENT.objectReports;
+            const serverDataEvents = action.meta.serverData.events;
+            const enrollmentEvents = enrollmentDomain.enrollment.events;
+
+            const { eventsToCommit, eventsToAdd } = serverDataEvents.reduce((acc, event) => {
+                const eventFromRedux = enrollmentEvents.find(e => e.event === event.event);
+
+                if (!eventFromRedux) {
+                    acc.eventsToAdd.push(event);
+                } else if (eventFromRedux.pendingApiResponse) {
+                    const eventToCommit = eventsFromApi.find(e => e.uid === event.event);
+                    acc.eventsToCommit.push(eventToCommit);
+                }
+                return acc;
+            }, { eventsToCommit: [], eventsToAdd: [] });
+
+            if (eventsToAdd.length > 0) {
+                actions.push(
+                    addPersistedEnrollmentEvents({ events: eventsToAdd }),
+                );
+            }
+
+            if (eventsToCommit.length > 0) {
+                actions.push(
+                    commitEnrollmentEvents({ events: eventsToCommit }),
+                );
+            }
+
+            if (enrollmentDomain.eventSaveInProgress) {
+                const {
+                    referralMode,
+                    requestEventId,
+                    referralEventId,
+                    referralOrgUnitId,
+                } = enrollmentDomain.eventSaveInProgress;
+                const requestEvent = eventsFromApi.find(event => event.uid === requestEventId);
+
+                if (requestEvent) {
+                    const { navigate } = shouldNavigateWithReferral({
+                        referralMode,
+                        referralEventId,
+                        referralOrgUnitId,
+                        history,
+                    });
+
+                    navigate && navigate();
+                }
+            }
+
+            return batchActions(actions);
         }),
     );
 
