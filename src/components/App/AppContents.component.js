@@ -1,6 +1,6 @@
 
 // @flow
-import React from 'react';
+import React, { memo } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import { FeedbackBar } from 'capture-core/components/FeedbackBar';
@@ -30,4 +30,4 @@ const Index = ({ classes }: Props) => (
 );
 Index.displayName = 'AppContents';
 
-export const AppContents = withStyles(getStyles)(Index);
+export const AppContents = withStyles(getStyles)(memo(Index));

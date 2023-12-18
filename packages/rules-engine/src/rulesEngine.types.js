@@ -230,5 +230,5 @@ export type IConvertOutputRulesEffectsValue = {|
 |};
 
 export type Flag = {
-    debug: boolean
+    verbose: boolean,
 }
