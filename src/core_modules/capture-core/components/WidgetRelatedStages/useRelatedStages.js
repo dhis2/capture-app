@@ -18,7 +18,7 @@ type Props = {|
 
 export const useRelatedStages = ({ programStageId, programId }: Props) => {
     const { data: relationshipTypes } = useIndexedDBQuery(
-        ['RelatedStages', 'relationshipTypes'],
+        ['RelatedStages', 'relationshipTypes', programId, programStageId],
         () => getRelationshipTypeFromIndexedDB(), {
             select: allRelationshipTypes => allRelationshipTypes
                 ?.filter((relationshipType) => {

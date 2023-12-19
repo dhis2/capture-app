@@ -5,11 +5,12 @@ import { withStyles } from '@material-ui/core';
 import type { Props } from './dataSection.type';
 
 
-const styles = {
+const styles = theme => ({
     sectionWrapper: {
         border: `1px solid ${colors.grey300}`,
         borderRadius: '3px',
         marginBottom: spacersNum.dp16,
+        maxWidth: theme.typography.pxToRem(892),
     },
     sectionHeader: {
         color: colors.grey900,
@@ -20,7 +21,7 @@ const styles = {
         marginBottom: '8px',
         width: 'fit-content',
     },
-};
+});
 
 const DataSectionPlain = ({ sectionName, children, classes, dataTest }: Props) => (
     <div

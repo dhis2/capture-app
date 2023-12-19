@@ -38,7 +38,6 @@ export const useBuildNewEventPayload = ({
     const buildRelatedStageEventPayload = (clientRequestEvent, saveType: ?$Values<typeof addEventSaveTypes>, relatedStageRef) => {
         if (
             relatedStageRef.current
-            && saveType === addEventSaveTypes.COMPLETE
             && relatedStageRef.current.eventHasLinkableStageRelationship()
         ) {
             const isValid = relatedStageRef.current.formIsValidOnSave();
@@ -53,6 +52,15 @@ export const useBuildNewEventPayload = ({
 
             const { selectedRelationshipType, relatedStageDataValues, linkMode } = relatedStageRef.current
                 .getLinkedStageValues(clientRequestEvent.event);
+
+            if (!linkMode) {
+                return {
+                    formHasError: false,
+                    linkedEvent: null,
+                    relationship: null,
+                    linkMode: null,
+                };
+            }
 
             const { linkedEvent, relationship } = getConvertedRelatedStageEvent({
                 linkMode,

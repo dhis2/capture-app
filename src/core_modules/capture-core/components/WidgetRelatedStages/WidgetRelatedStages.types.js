@@ -8,7 +8,7 @@ export type Props = {|
     currentStageLabel: string,
 |}
 export type RelatedStageDataValueStates = {|
-    linkMode: typeof LinkModes.SCHEDULE_IN_ORG,
+    linkMode: ?$Keys<typeof LinkModes>,
     scheduledAt: string,
     orgUnit: ?{
         path: string,

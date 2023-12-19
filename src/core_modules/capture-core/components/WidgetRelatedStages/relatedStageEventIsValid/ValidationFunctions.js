@@ -66,6 +66,5 @@ export const ValidationFunctionsByLinkMode: { [key: string]: (props: ?Props) => 
     [RelatedStageModes.SCHEDULE_IN_ORG]: props => scheduleInOrgUnit(props),
     [RelatedStageModes.ENTER_DATA]: () => true,
     [RelatedStageModes.LINK_EXISTING_RESPONSE]: props => linkToExistingResponse(props),
-    [RelatedStageModes.DO_NOT_LINK_RESPONSE]: () => true,
 };
 

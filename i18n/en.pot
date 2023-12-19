@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-12-18T20:04:11.694Z\n"
-"PO-Revision-Date: 2023-12-18T20:04:11.694Z\n"
+"POT-Creation-Date: 2023-12-19T14:17:13.334Z\n"
+"PO-Revision-Date: 2023-12-19T14:17:13.334Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1365,9 +1365,6 @@ msgstr "Link to an existing {{linkableStageLabel}}"
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Choose a {{linkableStageLabel}}"
 
-msgid "Related stages"
-msgstr "Related stages"
-
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"
 
@@ -1378,24 +1375,11 @@ msgstr ""
 "Enter {{linkableStageLabel}} details in the next step after completing this "
 "{{currentStageLabel}}."
 
-msgid ""
-"This {{currentStageLabel}} will be created without a link to "
-"{{linkableStageLabel}}"
-msgstr ""
-"This {{currentStageLabel}} will be created without a link to "
-"{{linkableStageLabel}}"
+msgid "Report now"
+msgstr "Report now"
 
-msgid "Schedule in {{displayName}}"
-msgstr "Schedule in {{displayName}}"
-
-msgid "Link to an existing {{displayName}}"
-msgstr "Link to an existing {{displayName}}"
-
-msgid "Enter {{displayName}} details now"
-msgstr "Enter {{displayName}} details now"
-
-msgid "Don't link to a {{displayName}}"
-msgstr "Don't link to a {{displayName}}"
+msgid "Link to an existing"
+msgstr "Link to an existing"
 
 msgid "Scheduled date"
 msgstr "Scheduled date"

@@ -53,11 +53,6 @@ const getEventDetailsByLinkMode = ({
             linkedEvent: null,
             linkedEventId,
         };
-    } else if (linkMode === RelatedStageModes.DO_NOT_LINK_RESPONSE) {
-        return {
-            linkedEvent: null,
-            linkedEventId: null,
-        };
     }
 
     log.error(errorCreator(`Referral mode ${linkMode} is not supported`)());

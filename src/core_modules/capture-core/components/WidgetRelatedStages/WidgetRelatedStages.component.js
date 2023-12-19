@@ -3,7 +3,7 @@ import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useStat
 import { useRelatedStages } from './useRelatedStages';
 import type { Props, RelatedStageDataValueStates } from './WidgetRelatedStages.types';
 import { RelatedStagesActions } from './RelatedStagesActions';
-import { actions as LinkModes, relatedStageStatus } from './constants';
+import { relatedStageStatus } from './constants';
 import { useStageLabels } from './hooks/useStageLabels';
 import type { ErrorMessagesForRelatedStages } from './RelatedStagesActions';
 import { relatedStageWidgetIsValid } from './relatedStageEventIsValid/relatedStageEventIsValid';
@@ -31,7 +31,7 @@ const WidgetRelatedStagesPlain = ({
     const [saveAttempted, setSaveAttempted] = useState(false);
     const [errorMessages, setErrorMessages] = useState({});
     const [relatedStageDataValues, setRelatedStageDataValues] = useState<RelatedStageDataValueStates>({
-        linkMode: LinkModes.SCHEDULE_IN_ORG,
+        linkMode: undefined,
         scheduledAt: '',
         orgUnit: undefined,
         linkedEventId: undefined,

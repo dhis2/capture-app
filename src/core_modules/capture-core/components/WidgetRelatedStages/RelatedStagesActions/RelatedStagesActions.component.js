@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Radio, colors, spacers, spacersNum, IconInfo16, IconWarning16 } from '@dhis2/ui';
+import { Radio, colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { actions as RelatedStagesActionTypes, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
 import { DataSection } from '../../DataSection';
@@ -72,7 +72,7 @@ export const RelatedStagesActionsPlain = ({
     return (
         <DataSection
             dataTest="related-stages-section"
-            sectionName={i18n.t('Related stages')}
+            sectionName={i18n.t('Actions: {{linkedStageLabel}}', { linkedStageLabel: programStage.stageForm.name })}
         >
             <div className={classes.wrapper}>
                 {type === relatedStageStatus.LINKABLE ? Object.keys(mainOptionTranslatedTexts).map(key => (
@@ -81,7 +81,7 @@ export const RelatedStagesActionsPlain = ({
                         name={`related-stage-action-${key}`}
                         checked={key === selectedAction}
                         disabled={key === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && !linkableEvents.length}
-                        label={mainOptionTranslatedTexts[key](programStage.stageForm.name)}
+                        label={mainOptionTranslatedTexts[key]}
                         onChange={(e: Object) => updateSelectedAction(e.value)}
                         value={key}
                     />
@@ -122,25 +122,10 @@ export const RelatedStagesActionsPlain = ({
                     relatedStagesDataValues={relatedStagesDataValues}
                     setRelatedStagesDataValues={setRelatedStagesDataValues}
                     linkableEvents={linkableEvents}
-                    linkedStageLabel={programStage.stageForm.name}
+                    linkableStageLabel={programStage.stageForm.name}
                     errorMessages={errorMessages}
                     saveAttempted={saveAttempted}
                 />
-            )}
-
-            {selectedAction === RelatedStagesActionTypes.DO_NOT_LINK_RESPONSE && (
-                <div
-                    className={classes.infoBox}
-                >
-                    <IconWarning16 />
-                    {i18n.t(
-                        'This {{currentStageLabel}} will be created without a link to {{linkableStageLabel}}',
-                        {
-                            linkableStageLabel: programStage.stageForm.name,
-                            currentStageLabel,
-                        },
-                    )}
-                </div>
             )}
         </DataSection>);
 };

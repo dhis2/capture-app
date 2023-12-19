@@ -12,6 +12,10 @@ export const relatedStageWidgetIsValid = ({
     linkedEventId,
     setErrorMessages,
 }: RelatedStageIsValidProps): boolean => {
+    if (!linkMode) {
+        return true;
+    }
+
     const validationFunction = ValidationFunctionsByLinkMode[linkMode];
 
     if (!validationFunction) {
