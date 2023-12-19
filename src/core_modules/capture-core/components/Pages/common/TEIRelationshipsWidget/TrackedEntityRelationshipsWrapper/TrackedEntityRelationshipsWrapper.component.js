@@ -15,7 +15,7 @@ import {
 } from '../../../NewRelationship/TeiRelationship/SearchResults/TeiRelationshipSearchResults.component';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
 import { RegisterTei } from '../RegisterTei';
-import { useOrganisationUnit } from '../../../../../dataQueries';
+import { useCoreOrgUnit } from '../../../../../metadataRetrieval/coreOrgUnit';
 
 export const TrackedEntityRelationshipsWrapper = ({
     trackedEntityTypeId,
@@ -29,7 +29,7 @@ export const TrackedEntityRelationshipsWrapper = ({
 }: Props) => {
     const dispatch = useDispatch();
     const { relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
-    const { orgUnit: initialOrgUnit } = useOrganisationUnit(orgUnitId, 'id,displayName,code');
+    const { orgUnit: initialOrgUnit } = useCoreOrgUnit(orgUnitId);
 
     const onSelectFindMode = ({ findMode, relationshipConstraint }: OnSelectFindModeProps) => {
         dispatch(selectFindMode({
