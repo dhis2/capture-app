@@ -567,6 +567,7 @@ When('you create a copy of the working list',
             });
 
         cy.wait('@newTrackerFilter', { timeout: 30000 });
+        cy.url({ timeout: 30000 }).should('not.include', 'selectedTemplateId=PpGINOT00UX');
 
         cy.reload();
     });
