@@ -29,7 +29,8 @@ export const TrackedEntityRelationshipsWrapper = ({
 }: Props) => {
     const dispatch = useDispatch();
     const { relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
-    const { orgUnit: initialOrgUnit } = useCoreOrgUnit(orgUnitId);
+    const { orgUnit } = useCoreOrgUnit(orgUnitId);
+    const initialOrgUnit = orgUnit ? { id: orgUnitId, name: orgUnit.name, path: orgUnit.path } : null;
 
     const onSelectFindMode = ({ findMode, relationshipConstraint }: OnSelectFindModeProps) => {
         dispatch(selectFindMode({
