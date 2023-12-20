@@ -1,3 +1,10 @@
+## [100.50.1](https://github.com/dhis2/capture-app/compare/v100.50.0...v100.50.1) (2023-12-20)
+
+
+### Bug Fixes
+
+* [DHIS2-16317] Incorrect error message on orgUnit type data element ([#3484](https://github.com/dhis2/capture-app/issues/3484)) ([ef30449](https://github.com/dhis2/capture-app/commit/ef304499fda3296320ca71fae72d33f2dfad88fa))
+
 # [100.50.0](https://github.com/dhis2/capture-app/compare/v100.49.0...v100.50.0) (2023-12-18)
 
 
