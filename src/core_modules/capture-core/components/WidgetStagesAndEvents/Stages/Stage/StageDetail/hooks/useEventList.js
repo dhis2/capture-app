@@ -127,7 +127,6 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;
             if (!acc.find(item => item.id === id)) {
-                debugger;
                 if (isMultiTextWithoutOptionset(type, optionSet)) {
                     log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ currDataElement }));
                     return acc;
