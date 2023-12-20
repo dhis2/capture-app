@@ -1,3 +1,10 @@
+## [100.50.2](https://github.com/dhis2/capture-app/compare/v100.50.1...v100.50.2) (2023-12-20)
+
+
+### Bug Fixes
+
+* [TECH-1676] cypress test deleting wrong working list template ([#3489](https://github.com/dhis2/capture-app/issues/3489)) ([b5e038b](https://github.com/dhis2/capture-app/commit/b5e038b823128386f7106da46025a2a38a00db1b))
+
 ## [100.50.1](https://github.com/dhis2/capture-app/compare/v100.50.0...v100.50.1) (2023-12-20)
 
 
