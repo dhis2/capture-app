@@ -5,13 +5,13 @@ import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from '@material-ui/core/';
 import { spacers, IconFileDocument24, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
 import type { ProgramStage } from '../../../../metaData';
-import { useRulesEngineOrgUnit } from '../../../../hooks/useRulesEngineOrgUnit';
+import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
 
 const getStyles = () => ({
@@ -60,7 +60,7 @@ const EventDetailsSectionPlain = (props: Props) => {
         eventAccess,
         ...passOnProps } = props;
     const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
-    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
 
     if (error) {
         return error.errorComponent;

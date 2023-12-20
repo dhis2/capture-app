@@ -1,6 +1,7 @@
 // @flow
 import React, { type ComponentType, useContext, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers } from '@dhis2/ui';
 import { Grid, withStyles } from '@material-ui/core';
@@ -13,11 +14,9 @@ import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { useLocationQuery } from '../../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
-import {
-    useMetadataForRegistrationForm,
-} from '../../../DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
+import { useCurrentOrgUnitId } from '../../../../hooks/useCurrentOrgUnitId';
 
 const getStyles = ({ typography }) => ({
     container: {
@@ -96,18 +95,29 @@ const RegistrationDataEntryPlain = ({
     teiId,
     trackedEntityInstanceAttributes,
 }: Props) => {
+    const { push } = useHistory();
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
-    const { formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
+    const currentOrgUnitId = useCurrentOrgUnitId();
+
+    const onCancel = useCallback(() => {
+        let url;
+        if (scopeType === scopeTypes.TRACKER_PROGRAM) {
+            url = buildUrlQueryString({ programId: selectedScopeId, orgUnitId: currentOrgUnitId });
+        } else {
+            url = buildUrlQueryString({ orgUnitId: currentOrgUnitId });
+        }
+        return push(`/?${url}`);
+    }, [currentOrgUnitId, push, scopeType, selectedScopeId]);
 
     const handleRegistrationScopeSelection = (id) => {
         setScopeId(id);
     };
 
-    const renderDuplicatesDialogActions = useCallback((onCancel, onSave) => (
+    const renderDuplicatesDialogActions = useCallback((callbackOnCancel, onSave) => (
         <DialogButtons
-            onCancel={onCancel}
+            onCancel={callbackOnCancel}
             onSave={onSave}
         />
     ), []);
@@ -178,10 +188,11 @@ const RegistrationDataEntryPlain = ({
                             <Grid item md sm={9} xs={9} >
                                 <EnrollmentRegistrationEntryWrapper
                                     id={dataEntryId}
+                                    orgUnitId={currentOrgUnitId}
+                                    teiId={teiId}
                                     selectedScopeId={selectedScopeId}
-                                    onSave={(customFormFoundation, firstStageMetaData) =>
-                                        onSaveWithEnrollment(customFormFoundation, firstStageMetaData?.stage)
-                                    }
+                                    onSave={onSaveWithEnrollment}
+                                    onCancel={onCancel}
                                     saveButtonText={(trackedEntityTypeNameLC: string) => i18n.t('Save {{trackedEntityTypeName}}', {
                                         trackedEntityTypeName: trackedEntityTypeNameLC,
                                         interpolation: { escapeValue: false },
@@ -233,11 +244,13 @@ const RegistrationDataEntryPlain = ({
                                 <TeiRegistrationEntry
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
+                                    orgUnitId={currentOrgUnitId}
+                                    onCancel={onCancel}
                                     saveButtonText={i18n.t('Save {{trackedEntityName}}', {
                                         trackedEntityName,
                                         interpolation: { escapeValue: false },
                                     })}
-                                    onSave={() => onSaveWithoutEnrollment(formFoundation)}
+                                    onSave={onSaveWithoutEnrollment}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                                     renderDuplicatesCardActions={renderDuplicatesCardActions}

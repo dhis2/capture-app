@@ -116,7 +116,7 @@ declare module '@dhis2/app-runtime' {
         message: string,
         details: any,
     |};
-    
+
     declare export type ApiAccessError = {|
         type: 'access',
         message: string,
@@ -127,15 +127,15 @@ declare module '@dhis2/app-runtime' {
             status: string,
         },
     |};
-    
+
     declare export type ApiUnknownError = {|
         type: 'unknown',
         message: string,
         details: any,
     |};
-    
+
     declare export type ApiError = ApiNetworkError | ApiAccessError | ApiUnknownError;
-    
+
     declare type QueryRenderInput = {|
         called: boolean,
         loading: boolean,
@@ -148,4 +148,11 @@ declare module '@dhis2/app-runtime' {
     declare export function useDataQuery(resourceQueries: ResourceQueries, queryOptions?: QueryOptions): QueryRenderInput;
 
     declare export function useDataMutation(mutation: Mutation, mutationOptions?: QueryOptions): MutationRenderInput;
+
+    declare type AlertOptions = { [key: string]: mixed };
+
+    declare export function useAlert(message: string | ((props: any) => string), options?: AlertOptions | ((props: any) => AlertOptions)): {
+        show: (props?: any) => void;
+        hide: () => void;
+    };
 }

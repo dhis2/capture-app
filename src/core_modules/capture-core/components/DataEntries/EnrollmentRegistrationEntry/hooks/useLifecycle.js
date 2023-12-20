@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { startNewEnrollmentDataEntryInitialisation } from '../EnrollmentRegistrationEntry.actions';
 import { scopeTypes, getProgramThrowIfNotFound } from '../../../../metaData';
-import { useLocationQuery } from '../../../../utils/routing';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
@@ -18,8 +17,9 @@ export const useLifecycle = (
     dataEntryId: string,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
     orgUnit: ?OrgUnit,
+    teiId: ?string,
+    programId: string,
 ) => {
-    const { teiId, programId } = useLocationQuery();
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
     const program = programId && getProgramThrowIfNotFound(programId);
@@ -45,7 +45,7 @@ export const useLifecycle = (
     });
     useEffect(() => {
         dataEntryReadyRef.current = false;
-    }, [teiId]);
+    }, [teiId, selectedScopeId]);
 
     useEffect(() => {
         if (

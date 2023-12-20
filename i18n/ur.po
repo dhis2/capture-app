@@ -1,12 +1,12 @@
 # 
 # Translators:
-# Philip Larsen Donnelly, 2022
+# Philip Larsen Donnelly, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Urdu (https://app.transifex.com/hisp-uio/teams/100509/ur/)\n"
@@ -152,6 +152,15 @@ msgstr "کورڈینیٹ"
 msgid "Enrollment"
 msgstr "اندراج"
 
+msgid "Complete event"
+msgstr "مکمل ایونٹ"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -170,14 +179,17 @@ msgstr "منسوخ"
 msgid "Metadata error. see log for details"
 msgstr ""
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
 msgstr ""
-
-msgid "Complete event"
-msgstr "مکمل ایونٹ"
 
 msgid "Basic info"
 msgstr ""
@@ -508,6 +520,9 @@ msgstr ""
 
 msgid "suggestions could not be retrieved"
 msgstr ""
+
+msgid "No results found"
+msgstr "کوئی نتیجہ نہیں ملا"
 
 msgid "No items to display"
 msgstr ""
@@ -912,11 +927,20 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
-msgid "Possible duplicates found"
+msgid "Selected program"
+msgstr "منتخب کردہ پروگرام"
+
+msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
-msgid "No results found"
-msgstr "کوئی نتیجہ نہیں ملا"
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
+msgid "Possible duplicates found"
+msgstr ""
 
 msgid "An error occurred loading possible duplicates"
 msgstr ""
@@ -976,9 +1000,6 @@ msgstr ""
 msgid "Search by {{name}}"
 msgstr ""
 
-msgid "Search by attributes"
-msgstr ""
-
 msgid "all programs"
 msgstr ""
 
@@ -1028,12 +1049,6 @@ msgid "Missing search criteria"
 msgstr ""
 
 msgid "Results found"
-msgstr ""
-
-msgid "Selected program"
-msgstr "منتخب کردہ پروگرام"
-
-msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Saved lists in this program"
@@ -1125,6 +1140,33 @@ msgstr "اپ کے لئے نشان زد کریں"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "طول"
+
+msgid "Longitude"
+msgstr "لمبائی"
+
+msgid "Edit"
+msgstr "ترمیم"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "سماج"
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "اندراج کی تاریخ"
 
@@ -1148,6 +1190,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "منسوخ"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1271,9 +1319,6 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "ترمیم"
-
 msgid "tracked entity instance"
 msgstr ""
 
@@ -1310,14 +1355,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "ٹائپ"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "پروگرام مرحلے کا نام"
+
 msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "Download as JSON"
 msgstr "JSON کے طور پر ڈاؤن لوڈ کریں"
-
-msgid "Download as XML"
-msgstr "XML کے طور پر ڈاؤن لوڈ کریں"
 
 msgid "Download as CSV"
 msgstr "CSV کے طور پر ڈاؤن لوڈ کریں"
@@ -1485,12 +1564,6 @@ msgid "To time"
 msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
 msgstr ""
 
 msgid "Area on map saved"

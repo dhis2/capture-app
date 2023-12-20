@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2023\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -159,6 +159,15 @@ msgstr "Muvofiqlashtirish"
 msgid "Enrollment"
 msgstr "Roʼyxatga olish"
 
+msgid "Complete event"
+msgstr ""
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -177,14 +186,17 @@ msgstr "Bekor qilish"
 msgid "Metadata error. see log for details"
 msgstr "MetaMaʼlumotda xatolik. Tafsilotlar uchun jurnalga qarang."
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Tavsiya etilgan foydalanuvchi"
 
 msgid "Search for user"
 msgstr "Foydalanuvchini izlash"
-
-msgid "Complete event"
-msgstr ""
 
 msgid "Basic info"
 msgstr "Аsosiy maʼlumot"
@@ -528,6 +540,9 @@ msgstr "qidirish uchun yozishni boshlang"
 
 msgid "suggestions could not be retrieved"
 msgstr "takliflar qabul qilinmadi"
+
+msgid "No results found"
+msgstr "Hech qanday natija topilmadi"
 
 msgid "No items to display"
 msgstr "Koʼrsatiladigan axborot yoʼq"
@@ -936,11 +951,20 @@ msgstr "Hodisa/tadbirni yuklab boʼlmadi"
 msgid "Organisation unit could not be loaded"
 msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
 
+msgid "Selected program"
+msgstr "Tanlangan dastur"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "{{uniqueAttrName}} orqali qidirish"
+
+msgid "Search by attributes"
+msgstr "Аtribut orqali qidirish"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
-
-msgid "No results found"
-msgstr "Hech qanday natija topilmadi"
 
 msgid "An error occurred loading possible duplicates"
 msgstr ""
@@ -1002,9 +1026,6 @@ msgstr "{{name}} orqali qidirish"
 msgid "Search by {{name}}"
 msgstr ""
 
-msgid "Search by attributes"
-msgstr "Аtribut orqali qidirish"
-
 msgid "all programs"
 msgstr ""
 
@@ -1057,12 +1078,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr "Natijalar topildi"
-
-msgid "Selected program"
-msgstr "Tanlangan dastur"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "{{uniqueAttrName}} orqali qidirish"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1153,6 +1168,33 @@ msgstr "Kuzatuv uchun belgilang"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Kenglik"
+
+msgid "Longitude"
+msgstr "Kenglik"
+
+msgid "Edit"
+msgstr "Tahrirlash"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Координаталар"
+
+msgid "Delete polygon"
+msgstr "Poligon (koʼpburchak) ni oʼchirib tashlash"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Hududni belgilang"
+
 msgid "Enrollment date"
 msgstr "Qayd qilingan sana"
 
@@ -1176,6 +1218,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "Bekor qilindi"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1299,9 +1347,6 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "Tahrirlash"
-
 msgid "tracked entity instance"
 msgstr "kuzatilayotgan obʼekt namunasi"
 
@@ -1338,14 +1383,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Turi"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Dastur bosqichi nomi"
+
 msgid "Working list could not be loaded"
 msgstr "Ishchi roʼyxatni yuklab boʼlmadi"
 
 msgid "Download as JSON"
 msgstr "JSON sifatida yuklash"
-
-msgid "Download as XML"
-msgstr "XML sifatida yuklash"
 
 msgid "Download as CSV"
 msgstr "CSV sifatida yuklang"
@@ -1515,12 +1594,6 @@ msgstr "Shu vaqtgacha"
 
 msgid "Page {{currentPage}}"
 msgstr "{{currentPage}} sahifasi"
-
-msgid "Delete polygon"
-msgstr "Poligon (koʼpburchak) ni oʼchirib tashlash"
-
-msgid "Set area"
-msgstr "Hududni belgilang"
 
 msgid "Area on map saved"
 msgstr ""

@@ -59,7 +59,7 @@ export const getOutputEffectsWithPreviousValueCheck = ({
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
 }) =>
     outputEffects.reduce((acc, outputEffect) => {
-        if (formValues && outputEffect.targetDataType) {
+        if (formValues && Object.keys(formValues).length !== 0 && outputEffect.targetDataType) {
             const formValue = formValues[outputEffect.id];
             const rawValue = mapByTargetDataTypes[outputEffect.targetDataType]({
                 dataElementId,

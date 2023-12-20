@@ -5,29 +5,39 @@ import { useSelector } from 'react-redux';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import { useRulesEngineOrgUnit } from '../../../hooks';
+import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import {
+    useBuildEnrollmentPayload,
+} from './hooks/useBuildEnrollmentPayload';
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
     id,
     saveButtonText,
     trackedEntityInstanceAttributes,
+    orgUnitId,
+    teiId,
     onSave,
+    onCancel,
     ...passOnProps
 }) => {
-    const orgUnitId = useCurrentOrgUnitInfo().id;
-    const { orgUnit, error } = useRulesEngineOrgUnit(orgUnitId);
+    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const {
-        teiId,
         ready,
         skipDuplicateCheck,
         firstStageMetaData,
         formId,
         enrollmentMetadata,
         formFoundation,
-    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit);
+    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit, teiId, selectedScopeId);
+    const { buildTeiWithEnrollment } = useBuildEnrollmentPayload({
+        programId: selectedScopeId,
+        dataEntryId: id,
+        orgUnitId,
+        teiId,
+        trackedEntityTypeId: enrollmentMetadata?.trackedEntityType?.id,
+    });
 
     const isUserInteractionInProgress: boolean = useSelector(
         state =>
@@ -41,9 +51,15 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     const isSavingInProgress = useSelector(({ possibleDuplicates, newPage }) =>
         possibleDuplicates.isLoading || possibleDuplicates.isUpdating || !!newPage.uid);
 
+
     if (error) {
         return error.errorComponent;
     }
+
+    const onSaveWithEnrollment = () => {
+        const teiWithEnrollment = buildTeiWithEnrollment();
+        onSave(teiWithEnrollment);
+    };
 
     return (
         <EnrollmentRegistrationEntryComponent
@@ -53,6 +69,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             formId={formId}
             formFoundation={formFoundation}
             id={id}
+            onCancel={onCancel}
             saveButtonText={saveButtonText(trackedEntityTypeNameLC)}
             ready={ready && !!enrollmentMetadata}
             teiId={teiId}
@@ -62,7 +79,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             orgUnit={orgUnit}
             isUserInteractionInProgress={isUserInteractionInProgress}
             isSavingInProgress={isSavingInProgress}
-            onSave={() => onSave(formFoundation, firstStageMetaData)}
+            onSave={onSaveWithEnrollment}
         />
     );
 };

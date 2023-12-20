@@ -8,11 +8,39 @@ import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMess
 import type { InputAttribute } from './hooks/useFormValues';
 import { RenderFoundation, ProgramStage } from '../../../metaData';
 
+type TrackedEntityAttributes = Array<{
+    attribute: string,
+    value: any,
+}>;
+
+export type EnrollmentPayload = {|
+    trackedEntity: string,
+    trackedEntityType: string,
+    orgUnit: string,
+    geometry: any,
+    attributes: TrackedEntityAttributes,
+    enrollments: [
+        {|
+            occurredAt: string,
+            orgUnit: string,
+            program: string,
+            status: string,
+            enrolledAt: string,
+            events: Array<{
+                orgUnit: string,
+            }>,
+            attributes: TrackedEntityAttributes,
+        |}
+    ]
+|}
+
 export type OwnProps = $ReadOnly<{|
     id: string,
+    orgUnitId: string,
     selectedScopeId: string,
     fieldOptions?: Object,
     onSave: SaveForDuplicateCheck,
+    onCancel: () => void,
     duplicatesReviewPageSize: number,
     renderDuplicatesCardActions?: RenderCustomCardActions,
     renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
@@ -28,6 +56,7 @@ type ContainerProps = {|
     ready: boolean,
     orgUnitId: string,
     orgUnit: ?OrgUnit,
+    onCancel: () => void,
     isUserInteractionInProgress: boolean,
     isSavingInProgress: boolean,
     enrollmentMetadata: RegistrationFormMetadata,

@@ -2,16 +2,16 @@
 # Translators:
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
 # Wanda <wanda@frontlineaids.org>, 2021
-# Philip Larsen Donnelly, 2022
 # Valeriu Plesca <vplesca@gmail.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2023
+# Philip Larsen Donnelly, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
+"Last-Translator: Philip Larsen Donnelly, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,6 +162,15 @@ msgstr "Координата"
 msgid "Enrollment"
 msgstr "Регистрация"
 
+msgid "Complete event"
+msgstr "Завершить событие"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -180,14 +189,17 @@ msgstr "Отмена"
 msgid "Metadata error. see log for details"
 msgstr "Ошибка в метаданных. Смотрите детали в лог-файле."
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Назначенный пользователь"
 
 msgid "Search for user"
 msgstr "Поиск пользователя"
-
-msgid "Complete event"
-msgstr "Завершить событие"
 
 msgid "Basic info"
 msgstr "Начальные сведения"
@@ -530,6 +542,9 @@ msgstr "Начинайте вводить для поиска"
 
 msgid "suggestions could not be retrieved"
 msgstr "Подсказка не может быть найдена"
+
+msgid "No results found"
+msgstr "Результаты не найдены"
 
 msgid "No items to display"
 msgstr "Нет элементов для отображения"
@@ -937,11 +952,20 @@ msgstr "Событие не может быть загружено"
 msgid "Organisation unit could not be loaded"
 msgstr "Не могу загрузить Организационную единицу"
 
+msgid "Selected program"
+msgstr "Выбранная программа"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Поиск {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Поиск по атрибутам"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты"
-
-msgid "No results found"
-msgstr "Результаты не найдены"
 
 msgid "An error occurred loading possible duplicates"
 msgstr ""
@@ -1001,9 +1025,6 @@ msgstr "Искать {{name}}"
 msgid "Search by {{name}}"
 msgstr ""
 
-msgid "Search by attributes"
-msgstr "Поиск по атрибутам"
-
 msgid "all programs"
 msgstr ""
 
@@ -1054,12 +1075,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr "Найдены результаты"
-
-msgid "Selected program"
-msgstr "Выбранная программа"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Поиск {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1150,6 +1165,33 @@ msgstr "Отметить для последующего наблюдения"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Широта"
+
+msgid "Longitude"
+msgstr "Долгота"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Координаты"
+
+msgid "Delete polygon"
+msgstr "Удалить полигон"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Установить площадь"
+
 msgid "Enrollment date"
 msgstr "Дата зачисления"
 
@@ -1173,6 +1215,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "Отмененный"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1296,9 +1344,6 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "Редактировать"
-
 msgid "tracked entity instance"
 msgstr "Элемент отслеживаемого объекта"
 
@@ -1335,14 +1380,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Название стадии программы"
+
 msgid "Working list could not be loaded"
 msgstr "Не могу загрузить Рабочий список "
 
 msgid "Download as JSON"
 msgstr "Скачать как JSON"
-
-msgid "Download as XML"
-msgstr "Скачать как XML"
 
 msgid "Download as CSV"
 msgstr "Загрузить в формате CSV"
@@ -1511,12 +1590,6 @@ msgstr "ко времени"
 
 msgid "Page {{currentPage}}"
 msgstr "Страница {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Удалить полигон"
-
-msgid "Set area"
-msgstr "Установить площадь"
 
 msgid "Area on map saved"
 msgstr ""

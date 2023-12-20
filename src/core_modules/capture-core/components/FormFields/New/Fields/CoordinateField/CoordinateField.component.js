@@ -2,8 +2,7 @@
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { CoordinateField as UICoordinateField } from 'capture-ui';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Modal, ModalTitle } from '@dhis2/ui';
 import { typeof orientations } from '../../../New';
 
 const getStyles = (theme: Theme) => ({
@@ -80,11 +79,12 @@ class CoordinateFieldPlain extends React.Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <UICoordinateField
                 mapDialog={
-                    <Dialog
-                        classes={this.dialogClasses}
+                    <Modal
+                        className={this.dialogClasses}
+                        large
                     >
-                        <DialogTitle key="title">{dialogLabel}</DialogTitle>
-                    </Dialog>
+                        <ModalTitle>{dialogLabel}</ModalTitle>
+                    </Modal>
                 }
                 {...passOnProps}
                 classes={this.passOnClasses}

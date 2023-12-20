@@ -11,24 +11,30 @@ import { convertValue as convertClientToList } from '../../../../../../converter
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
 import {
     convertStatusForView,
+    convertOrgUnitForView,
     convertCommentForView,
     getValueByKeyFromEvent,
     groupRecordsByType,
 } from './helpers';
 import { SORT_DIRECTION, MULIT_TEXT_WITH_NO_OPTIONS_SET } from './constants';
-import { isMultiTextWithoutOptionset } from '../../../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
+import {
+    isMultiTextWithoutOptionset,
+} from '../../../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
+import { useOrgUnitNames } from '../../../../../../metadataRetrieval/orgUnitName';
 
-const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'comments' }];
+const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'comments' }];
 const basedFieldTypes = [
     { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
-    { type: dataElementTypes.TEXT },
+    { type: 'ASSIGNEE' },
+    { type: dataElementTypes.TEXT, resolveValue: convertOrgUnitForView },
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.UNKNOWN, resolveValue: convertCommentForView },
 ];
 const getBaseColumnHeaders = props => [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('occurredAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
+    { header: i18n.t('Assigned to'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Registering unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('scheduledAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: '', sortDirection: null, isPredefined: true },
@@ -71,6 +77,8 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
     const [loading, setLoading] = useState(true);
     const dataEngine = useDataEngine();
     const { baseUrl, apiVersion } = useConfig();
+    const orgUnits = useMemo(() => events.map(({ orgUnit }) => orgUnit), [events]);
+    const { orgUnitNames, error: orgUnitNamesError } = useOrgUnitNames(orgUnits);
     const computeData = useCallback(async () => {
         try {
             setLoading(true);
@@ -103,18 +111,23 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
     }, [events, dataElements, dataEngine, baseUrl, apiVersion]);
 
     useEffect(() => {
-        computeData();
-    }, [computeData]);
+        if (orgUnitNames) {
+            computeData();
+        } else if (orgUnitNamesError) {
+            setError(orgUnitNamesError);
+        }
+    }, [orgUnitNames, computeData, setError, orgUnitNamesError]);
 
     return { value, error, loading };
 };
 
 
-const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, formFoundation: Object) => {
+const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, enableUserAssignment: boolean, formFoundation: Object) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;
             if (!acc.find(item => item.id === id)) {
+                debugger;
                 if (isMultiTextWithoutOptionset(type, optionSet)) {
                     log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ currDataElement }));
                     return acc;
@@ -124,9 +137,10 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
             return acc;
         }, []);
         return [
-            ...getBaseColumns({ formFoundation }).filter(col => (hideDueDate ? col.id !== 'scheduledAt' : true)),
+            ...getBaseColumns({ formFoundation })
+                .filter(col => (enableUserAssignment || col.id !== 'assignedUser') && (!hideDueDate || col.id !== 'scheduledAt')),
             ...dataElementHeaders];
-    }, [dataElements, hideDueDate, formFoundation]);
+    }, [dataElements, hideDueDate, enableUserAssignment, formFoundation]);
 
     return headerColumns;
 };

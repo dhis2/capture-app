@@ -296,26 +296,23 @@ export function getRulesEffectsProcessor(
         formValues,
         onProcessValue,
     }: {
-        effects: ?Array<ProgramRuleEffect>,
+        effects: Array<ProgramRuleEffect>,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
         formValues?: ?{ [key: string]: any },
         onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
     }): OutputEffects {
-        if (effects) {
-            return effects
-                .filter(({ action }) => mapActionsToProcessor[action])
-                .flatMap(effect => mapActionsToProcessor[effect.action](
-                    effect,
-                    dataElements,
-                    trackedEntityAttributes,
-                    formValues,
-                    onProcessValue,
-                ))
-            // when mapActionsToProcessor function returns `null` we filter those value out.
-                .filter(keepTruthyValues => keepTruthyValues);
-        }
-        return [];
+        return effects
+            .filter(({ action }) => mapActionsToProcessor[action])
+            .flatMap(effect => mapActionsToProcessor[effect.action](
+                effect,
+                dataElements,
+                trackedEntityAttributes,
+                formValues,
+                onProcessValue,
+            ))
+        // when mapActionsToProcessor function returns `null` we filter those value out.
+            .filter(keepTruthyValues => keepTruthyValues);
     }
 
     return processRulesEffects;

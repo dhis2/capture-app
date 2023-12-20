@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-29T14:14:34.330Z\n"
-"PO-Revision-Date: 2023-09-29T14:14:34.330Z\n"
+"POT-Creation-Date: 2023-12-20T11:54:40.091Z\n"
+"PO-Revision-Date: 2023-12-20T11:54:40.091Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -530,6 +530,9 @@ msgstr "start typing to search"
 msgid "suggestions could not be retrieved"
 msgstr "suggestions could not be retrieved"
 
+msgid "No results found"
+msgstr "No results found"
+
 msgid "No items to display"
 msgstr "No items to display"
 
@@ -947,11 +950,20 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
+msgid "Selected program"
+msgstr "Selected program"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Search {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Search by attributes"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr "Could not retrieve metadata. Please try again later."
+
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
-
-msgid "No results found"
-msgstr "No results found"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
@@ -1010,9 +1022,6 @@ msgstr "Search {{name}}"
 msgid "Search by {{name}}"
 msgstr "Search by {{name}}"
 
-msgid "Search by attributes"
-msgstr "Search by attributes"
-
 msgid "all programs"
 msgstr "all programs"
 
@@ -1069,12 +1078,6 @@ msgstr "Missing search criteria"
 
 msgid "Results found"
 msgstr "Results found"
-
-msgid "Selected program"
-msgstr "Selected program"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Search {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr "Saved lists in this program"
@@ -1173,6 +1176,33 @@ msgstr "Mark for follow-up"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr "Existing dates for auto-generated events will not be updated."
 
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Set coordinates"
+msgstr "Set coordinates"
+
+msgid "Coordinates"
+msgstr "Coordinates"
+
+msgid "Delete polygon"
+msgstr "Delete polygon"
+
+msgid "Close without saving"
+msgstr "Close without saving"
+
+msgid "Finish drawing before saving"
+msgstr "Finish drawing before saving"
+
+msgid "Set area"
+msgstr "Set area"
+
 msgid "Enrollment date"
 msgstr "Enrollment date"
 
@@ -1196,6 +1226,12 @@ msgstr "Last updated {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"
+
+msgid "Add coordinates"
+msgstr "Add coordinates"
+
+msgid "Add area"
+msgstr "Add area"
 
 msgid "Comments about this enrollment"
 msgstr "Comments about this enrollment"
@@ -1320,9 +1356,6 @@ msgstr "Profile widget could not be loaded. Please try again later"
 msgid "{{TETName}} profile"
 msgstr "{{TETName}} profile"
 
-msgid "Edit"
-msgstr "Edit"
-
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
@@ -1347,6 +1380,9 @@ msgstr "This stage can only have one event"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
 
+msgid "Assigned to"
+msgstr "Assigned to"
+
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"
 
@@ -1359,14 +1395,47 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
+msgid "New TEI Relationship"
+msgstr "New TEI Relationship"
+
+msgid "Missing implementation step"
+msgstr "Missing implementation step"
+
+msgid "Go back without saving relationship"
+msgstr "Go back without saving relationship"
+
+msgid "New Relationship"
+msgstr "New Relationship"
+
+msgid "Link to an existing {{tetName}}"
+msgstr "Link to an existing {{tetName}}"
+
+msgid "An error occurred while adding the relationship"
+msgstr "An error occurred while adding the relationship"
+
+msgid "Something went wrong while loading relationships. Please try again later."
+msgstr "Something went wrong while loading relationships. Please try again later."
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr "{{trackedEntityTypeName}} relationships"
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr "To open this relationship, please wait until saving is complete"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Created date"
+msgstr "Created date"
+
+msgid "Program stage name"
+msgstr "Program stage name"
+
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"
 
 msgid "Download as JSON"
 msgstr "Download as JSON"
-
-msgid "Download as XML"
-msgstr "Download as XML"
 
 msgid "Download as CSV"
 msgstr "Download as CSV"
@@ -1379,9 +1448,6 @@ msgstr "Download data..."
 
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
-
-msgid "Assigned to"
-msgstr "Assigned to"
 
 msgid "Registration Date"
 msgstr "Registration Date"
@@ -1535,12 +1601,6 @@ msgstr "To time"
 
 msgid "Page {{currentPage}}"
 msgstr "Page {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Delete polygon"
-
-msgid "Set area"
-msgstr "Set area"
 
 msgid "Area on map saved"
 msgstr "Area on map saved"

@@ -3,19 +3,19 @@
 # Carwoto Sa'an <carwoto@gmail.com>, 2021
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2022
-# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2023
 # Philip Larsen Donnelly, 2023
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2023
 # Raja Fathurrahim, 2023
 # Farida Sibuea <farida_sibuea@yahoo.com>, 2023
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
+# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Farida Sibuea <farida_sibuea@yahoo.com>, 2023\n"
+"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2023\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,6 +166,15 @@ msgstr "Koordinat"
 msgid "Enrollment"
 msgstr "Pendaftaran"
 
+msgid "Complete event"
+msgstr "Even lengkap"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -184,14 +193,17 @@ msgstr "batal"
 msgid "Metadata error. see log for details"
 msgstr "Kesalahan metadata. lihat log untuk detailnya"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Pengguna yang ditetapkan"
 
 msgid "Search for user"
 msgstr "Cari pengguna"
-
-msgid "Complete event"
-msgstr "Even lengkap"
 
 msgid "Basic info"
 msgstr "Info dasar"
@@ -531,6 +543,9 @@ msgstr "mulai mengetik untuk mencari"
 
 msgid "suggestions could not be retrieved"
 msgstr "saran tidak dapat diambil"
+
+msgid "No results found"
+msgstr "Tidak ada hasil ditemukan"
 
 msgid "No items to display"
 msgstr "Tidak ada item untuk ditampilkan"
@@ -945,11 +960,20 @@ msgstr "Even tidak dapat dimuat"
 msgid "Organisation unit could not be loaded"
 msgstr "Unit organisasi tidak dapat dimuat"
 
+msgid "Selected program"
+msgstr "Program yang dipilih"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Telusuri {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Cari berdasarkan atribut"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Kemungkinan duplikat ditemukan"
-
-msgid "No results found"
-msgstr "Tidak ada hasil ditemukan"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "Terjadi kesalahan saat memuat kemungkinan duplikat"
@@ -1011,9 +1035,6 @@ msgstr "Telusuri {{nama}}"
 msgid "Search by {{name}}"
 msgstr "Cari berdasarkan {{nama}}"
 
-msgid "Search by attributes"
-msgstr "Cari berdasarkan atribut"
-
 msgid "all programs"
 msgstr ""
 
@@ -1068,12 +1089,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr "Hasil ditemukan"
-
-msgid "Selected program"
-msgstr "Program yang dipilih"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Telusuri {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1166,6 +1181,33 @@ msgstr "Tandai untuk follow up"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Garis lintang"
+
+msgid "Longitude"
+msgstr "Garis bujur"
+
+msgid "Edit"
+msgstr "Sunting"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Koordinat"
+
+msgid "Delete polygon"
+msgstr "Hapus poligon"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Setel luas"
+
 msgid "Enrollment date"
 msgstr "Tanggal pendaftaran"
 
@@ -1189,6 +1231,12 @@ msgstr "Terakhir diperbarui {{date}}"
 
 msgid "Cancelled"
 msgstr "Dibatalkan"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr "Komentar tentang pendaftaran ini"
@@ -1312,9 +1360,6 @@ msgstr "Widget profil tidak dapat dimuat. Silakan coba lagi nanti"
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "Sunting"
-
 msgid "tracked entity instance"
 msgstr "contoh entitas yang dilacak"
 
@@ -1351,14 +1396,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Tahapan dan Even"
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Tipe"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Nama tahapan program"
+
 msgid "Working list could not be loaded"
 msgstr "Daftar kerja tidak dapat dimuat"
 
 msgid "Download as JSON"
 msgstr "Download dalam bentuk JSON"
-
-msgid "Download as XML"
-msgstr "Download dalam bentuk XML"
 
 msgid "Download as CSV"
 msgstr "Download dalam bentuk CSV"
@@ -1527,12 +1606,6 @@ msgstr "Ke waktu"
 
 msgid "Page {{currentPage}}"
 msgstr "Halaman {{Halaman saat ini}}"
-
-msgid "Delete polygon"
-msgstr "Hapus poligon"
-
-msgid "Set area"
-msgstr "Setel luas"
 
 msgid "Area on map saved"
 msgstr ""

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2023\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -157,6 +157,15 @@ msgstr "Мувофиқлаштириш"
 msgid "Enrollment"
 msgstr "Рўйхатга олиш"
 
+msgid "Complete event"
+msgstr "Ҳодиса/тадбирни якунлаш"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -168,6 +177,7 @@ msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
+"Сақланмоқда {{trackedEntityName}} да {{programName}} да {{orgUnitName}}."
 
 msgid "Cancel"
 msgstr "Бекор қилиш"
@@ -175,14 +185,17 @@ msgstr "Бекор қилиш"
 msgid "Metadata error. see log for details"
 msgstr "МетаМаълумотда хатолик. Тафсилотлар учун журналга қаранг."
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Тавсия этилган фойдаланувчи"
 
 msgid "Search for user"
 msgstr "Фойдаланувчини излаш"
-
-msgid "Complete event"
-msgstr "Ҳодиса/тадбирни якунлаш"
 
 msgid "Basic info"
 msgstr "Асосий маълумот"
@@ -200,7 +213,7 @@ msgid "Assignee"
 msgstr "Ваколат берилган шахс"
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Сақланади {{programName}} да {{orgUnitName}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -238,7 +251,7 @@ msgid "Finish"
 msgstr "Тугатиш"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "Тугалланмасдан сақлаш"
 
 msgid "Complete"
 msgstr "Тўлдириш"
@@ -281,7 +294,7 @@ msgstr ""
 " қилинади."
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "Ҳа, ўзгартиришлар бекор қилинсин"
 
 msgid "No, cancel"
 msgstr "Йўқ, бекор қилинг"
@@ -500,7 +513,7 @@ msgid "Type to filter options"
 msgstr ""
 
 msgid "No match found"
-msgstr ""
+msgstr "Ҳеч нима топилмади"
 
 msgid "Search"
 msgstr "Излаш"
@@ -526,6 +539,9 @@ msgstr "қидириш учун ёзишни бошланг"
 msgid "suggestions could not be retrieved"
 msgstr "таклифлар қабул қилинмади"
 
+msgid "No results found"
+msgstr "Ҳеч қандай натижа топилмади"
+
 msgid "No items to display"
 msgstr "Кўрсатиладиган ахборот йўқ"
 
@@ -542,7 +558,7 @@ msgid "Update"
 msgstr "Янгилаш"
 
 msgid "Reset filter"
-msgstr ""
+msgstr "Фильтрни қайта созлаш"
 
 msgid "Remove filter"
 msgstr "Фильтрни олиб ташлаш"
@@ -658,36 +674,38 @@ msgid ""
 msgstr ""
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "Қайд этиш панели"
 
 msgid "No indicator output for this enrollment yet"
-msgstr ""
+msgstr "Ушбу қайд этишда индикатор ахбороти мавжуд эмас"
 
 msgid "No feedback for this enrollment yet"
-msgstr ""
+msgstr "Ушбу қайд этишда қайта алоқа ахбороти мавжуд эмас"
 
 msgid "Quick actions"
-msgstr ""
+msgstr "Тезкор харакатлар"
 
 msgid "New Event"
-msgstr ""
+msgstr "Янги Ҳодиса/Ҳолат"
 
 msgid "Schedule an event"
-msgstr ""
+msgstr "Ҳодиса/Ҳолатни режалаш"
 
 msgid "Make referral"
 msgstr "Йўналиш яратинг"
 
 msgid "No available program stages"
-msgstr ""
+msgstr "Дастур босқичлари мавжуд эмас"
 
 msgid "Program stage not found"
-msgstr ""
+msgstr "Дастур босқичлари топилмади"
 
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
 msgstr ""
+" {{teiDisplayName}} учун янги рўйхатга ёки мавжуд рўйхатга олишларини кўриш "
+"учун дастурни танланг."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -698,7 +716,7 @@ msgid "Invalid enrollment id {{enrollmentId}}."
 msgstr ""
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr ""
+msgstr "бошқарув панелини кўриш учун рўйхатдан ўтишни танланг."
 
 msgid "There are no active enrollments."
 msgstr ""
@@ -736,19 +754,19 @@ msgid "View working list in this program."
 msgstr "Ушбу дастурдаги ишчи рўйхатни кўриб чиқиш"
 
 msgid "Page is missing required values from URL"
-msgstr ""
+msgstr "URL саҳифасида керакли қийматлар йўқ"
 
 msgid "Program is not valid"
-msgstr ""
+msgstr "Дастур яроқли эмас"
 
 msgid "Org unit is not valid with current program"
-msgstr ""
+msgstr "Жорий дастур учун ташкилий бирлик яроқли эмас"
 
 msgid "There was an error opening the Page"
-msgstr ""
+msgstr "Саҳифани очишда хатолик мавжуд"
 
 msgid "Enrollment{{escape}} New Event"
-msgstr ""
+msgstr "Рўйхатга олишда {{escape}} Янги Ҳодиса/Ҳолат"
 
 msgid "There was an error loading the page"
 msgstr ""
@@ -940,11 +958,20 @@ msgstr "Ҳодиса/тадбирни юклаб бўлмади"
 msgid "Organisation unit could not be loaded"
 msgstr "Ташкилий бўлимни юклаб бўлмади"
 
+msgid "Selected program"
+msgstr "Танланган дастур"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "{{uniqueAttrName}} орқали қидириш"
+
+msgid "Search by attributes"
+msgstr "Атрибут орқали қидириш"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Бўлиши мумкин бўлган нусхалар топилди"
-
-msgid "No results found"
-msgstr "Ҳеч қандай натижа топилмади"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "Эҳтимолий нусхаларни юклашда хатолик юз берди"
@@ -1006,9 +1033,6 @@ msgstr "{{name}} орқали қидириш"
 msgid "Search by {{name}}"
 msgstr "{{name}} орқали қидириш"
 
-msgid "Search by attributes"
-msgstr "Атрибут орқали қидириш"
-
 msgid "all programs"
 msgstr ""
 
@@ -1063,12 +1087,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr "Натижалар топилди"
-
-msgid "Selected program"
-msgstr "Танланган дастур"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "{{uniqueAttrName}} орқали қидириш"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1159,6 +1177,33 @@ msgstr "Кузатув учун белгиланг"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Кенглик"
+
+msgid "Longitude"
+msgstr "Узунлик"
+
+msgid "Edit"
+msgstr "Таҳрирлаш"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Координаталар"
+
+msgid "Delete polygon"
+msgstr "Полигон (кўпбурчак) ни ўчириб ташлаш"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Ҳудудни белгиланг"
+
 msgid "Enrollment date"
 msgstr "Қайд этилган сана"
 
@@ -1183,6 +1228,12 @@ msgstr " {{date}}да охирги марта янгиланган"
 
 msgid "Cancelled"
 msgstr "Бекор қилинди"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1307,9 +1358,6 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "Таҳрирлаш"
-
 msgid "tracked entity instance"
 msgstr "кузатилаётган объект намунаси"
 
@@ -1346,14 +1394,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Босқичлар ва Ҳодиса/тадбирлар"
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Тури"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Дастур босқичи номи"
+
 msgid "Working list could not be loaded"
 msgstr "Ишчи рўйхатни юклаб бўлмади"
 
 msgid "Download as JSON"
 msgstr "JSON сифатида юклаш"
-
-msgid "Download as XML"
-msgstr "XML сифатида юклаш"
 
 msgid "Download as CSV"
 msgstr "CSV сифатида юкланг"
@@ -1522,12 +1604,6 @@ msgstr "Шу вақтгача"
 
 msgid "Page {{currentPage}}"
 msgstr "{{currentPage}} саҳифаси"
-
-msgid "Delete polygon"
-msgstr "Полигон (кўпбурчак) ни ўчириб ташлаш"
-
-msgid "Set area"
-msgstr "Ҳудудни белгиланг"
 
 msgid "Area on map saved"
 msgstr ""

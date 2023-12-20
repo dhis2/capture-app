@@ -2,23 +2,30 @@
 import type { Node } from 'react';
 import type { RegistrationFormMetadata } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 import type { RenderCustomCardActions } from '../../CardList';
-import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
+import type {
+    TeiPayload,
+} from '../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+import type { InputAttribute } from '../EnrollmentRegistrationEntry/hooks/useFormValues';
 
 export type OwnProps = $ReadOnly<{|
     id: string,
+    orgUnitId: string,
     selectedScopeId: string,
     saveButtonText: string,
     fieldOptions?: Object,
-    onSave: SaveForDuplicateCheck,
+    onSave: (TeiPayload) => void,
+    onCancel: () => void,
     duplicatesReviewPageSize: number,
     isSavingInProgress?: boolean,
+    inheritedAttributes?: Array<InputAttribute>,
     renderDuplicatesCardActions?: RenderCustomCardActions,
-    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
+    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: (TeiPayload) => void) => Node,
     ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent,
 |}>;
 
 type ContainerProps = {|
+    orgUnitId: string,
     teiRegistrationMetadata: RegistrationFormMetadata,
     ready: boolean,
     trackedEntityName: string,
@@ -37,9 +44,9 @@ type PropsAddedInHOC = {|
 |};
 type PropsRemovedInHOC = {|
     renderDuplicatesCardActions?: RenderCustomCardActions,
-    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
+    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: (TeiPayload) => void) => Node,
     duplicatesReviewPageSize: number,
-    onSave: SaveForDuplicateCheck,
+    onSave: (TeiPayload) => void,
 |};
 
 export type PlainProps = {|

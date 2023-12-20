@@ -141,12 +141,12 @@ export type OrgUnitGroup = $ReadOnly<{|
     code: string,
 |}>;
 
-export type OrgUnit = $ReadOnly<{|
+export type OrgUnit = $ReadOnly<{
     id: string,
     name: string,
     code: string,
     groups: Array<OrgUnitGroup>,
-|}>;
+}>;
 
 export type RulesEngineInput = {|
     programRulesContainer: ProgramRulesContainer,
@@ -230,5 +230,5 @@ export type IConvertOutputRulesEffectsValue = {|
 |};
 
 export type Flag = {
-    debug: boolean
+    verbose: boolean,
 }

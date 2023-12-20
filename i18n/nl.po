@@ -2,15 +2,15 @@
 # Translators:
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
-# Rica Zamora Duchateau, 2023
 # Charel van den Elsen, 2023
+# Rica Zamora Duchateau, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Charel van den Elsen, 2023\n"
+"Last-Translator: Rica Zamora Duchateau, 2023\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -161,6 +161,15 @@ msgstr "Coördineren"
 msgid "Enrollment"
 msgstr "Inschrijving"
 
+msgid "Complete event"
+msgstr "Compleet evenement"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr "Selecteer {{categorieNaam}}"
 
@@ -181,14 +190,17 @@ msgstr "Annuleer"
 msgid "Metadata error. see log for details"
 msgstr "Metadatafout. zie logboek voor details"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Toegewezen gebruiker"
 
 msgid "Search for user"
 msgstr "Zoek naar gebruiker"
-
-msgid "Complete event"
-msgstr "Compleet evenement"
 
 msgid "Basic info"
 msgstr "Basis informatie"
@@ -533,6 +545,9 @@ msgstr "begin met typen om te zoeken"
 
 msgid "suggestions could not be retrieved"
 msgstr "suggesties konden niet worden opgehaald"
+
+msgid "No results found"
+msgstr "Geen resultaten gevonden"
 
 msgid "No items to display"
 msgstr "Geen items om weer te geven"
@@ -973,11 +988,20 @@ msgstr "Evenement kan niet worden geladen"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisatie-eenheid kan niet worden geladen"
 
+msgid "Selected program"
+msgstr "Geselecteerd programma"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Zoek {{uniqueAttrNaam}}"
+
+msgid "Search by attributes"
+msgstr "Zoek op attributen"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Mogelijke duplicaten gevonden"
-
-msgid "No results found"
-msgstr "Geen resultaten gevonden"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "Er is een fout opgetreden bij het laden van mogelijke duplicaten"
@@ -1040,9 +1064,6 @@ msgstr "Zoek {{naam}}"
 msgid "Search by {{name}}"
 msgstr "Zoek op {{naam}}"
 
-msgid "Search by attributes"
-msgstr "Zoek op attributen"
-
 msgid "all programs"
 msgstr "alle programma's"
 
@@ -1098,12 +1119,6 @@ msgstr "Ontbrekende zoekcriteria"
 
 msgid "Results found"
 msgstr "Gevonden resultaten"
-
-msgid "Selected program"
-msgstr "Geselecteerd programma"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Zoek {{uniqueAttrNaam}}"
 
 msgid "Saved lists in this program"
 msgstr "Opgeslagen lijsten in dit programma"
@@ -1205,6 +1220,33 @@ msgstr "Markeer voor vervolg"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Breedtegraad"
+
+msgid "Longitude"
+msgstr "Lengtegraad"
+
+msgid "Edit"
+msgstr "Bewerk"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr ""
+
+msgid "Delete polygon"
+msgstr "Polygoon verwijderen"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Gebied instellen"
+
 msgid "Enrollment date"
 msgstr "Inschrijvingsdatum"
 
@@ -1229,6 +1271,12 @@ msgstr "Laatst bijgewerkt {{datum}}"
 
 msgid "Cancelled"
 msgstr "Geannuleerd"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr "Opmerkingen over deze inschrijving"
@@ -1363,9 +1411,6 @@ msgstr "Profielwidget kan niet worden geladen. Probeer het later opnieuw"
 msgid "{{TETName}} profile"
 msgstr "{{TETNaam}} profiel"
 
-msgid "Edit"
-msgstr "Bewerk"
-
 msgid "tracked entity instance"
 msgstr "gevolgd entiteitsexemplaar"
 
@@ -1403,14 +1448,48 @@ msgstr "{{ geplandeEvenementen}} gepland"
 msgid "Stages and Events"
 msgstr "stadiums en evenementen"
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Soort"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr ""
+
 msgid "Working list could not be loaded"
 msgstr "Werklijst kon niet worden geladen"
 
 msgid "Download as JSON"
 msgstr "Downloaden als JSON"
-
-msgid "Download as XML"
-msgstr "Downloaden als XML"
 
 msgid "Download as CSV"
 msgstr "Downloaden als CSV"
@@ -1583,12 +1662,6 @@ msgstr "Timen"
 
 msgid "Page {{currentPage}}"
 msgstr "Pagina {{huidigePagina}}"
-
-msgid "Delete polygon"
-msgstr "Polygoon verwijderen"
-
-msgid "Set area"
-msgstr "Gebied instellen"
 
 msgid "Area on map saved"
 msgstr "Gebied op kaart opgeslagen"

@@ -2,6 +2,7 @@
 import log from 'loglevel';
 import { createSelector } from 'reselect';
 import { errorCreator } from 'capture-core-utils';
+import { getOrgUnitNames } from '../../../../../../../metadataRetrieval/orgUnitName';
 import { dataElementTypes } from '../../../../../../../metaData';
 import type {
     SubvalueKeysByType,
@@ -30,29 +31,20 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
             }, {});
     };
 
-    const getOrganisationUnitSubvalue = async (keys: Array<string>) => {
-        const ids = keys
-            .join(',');
+    const getOrganisationUnitSubvalue = async (keys: Array<string>) =>
+        getOrgUnitNames(keys, querySingleResource);
 
-        const { organisationUnits = [] } = await querySingleResource({ resource: 'organisationUnits', params: { filter: `id:in:[${ids}]` } });
-
-        return organisationUnits
-            .reduce((acc, { id, displayName: name }) => {
-                acc[id] = {
-                    id,
-                    name,
-                };
-                return acc;
-            }, {});
-    };
-
-    const subvalueGetterByType: {|[string]: any |} = {
+    const subvalueGetterByType: {|
+        [string]: any,
+    |} = {
         [dataElementTypes.ORGANISATION_UNIT]: getOrganisationUnitSubvalue,
         [dataElementTypes.IMAGE]: getImageOrFileResourceSubvalue,
         [dataElementTypes.FILE_RESOURCE]: getImageOrFileResourceSubvalue,
     };
 
-    const subvaluePostProcessorByType: {|[string]: any |} = {
+    const subvaluePostProcessorByType: {|
+        [string]: any,
+    |} = {
         [dataElementTypes.IMAGE]: ({
             subvalueKey: value,
             subvalue: name,

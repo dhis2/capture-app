@@ -71,6 +71,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage.stageForm);
+    const defaultDataEntryValues = { enrolledAt: convertDateObjectToDateFormatString(new Date()) };
     const dataEntryPropsToInclude = [
         ...enrollmentDataEntryPropsToInclude,
         ...extraDataEntryProps,
@@ -88,7 +89,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
                 dataEntryId,
                 itemId,
                 dataEntryPropsToInclude,
-                { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
+                defaultDataEntryValues,
             );
 
     const effects = getApplicableRuleEffectsForTrackerProgram({
@@ -96,6 +97,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         orgUnit,
         stage: firstStage,
         attributeValues: clientValues,
+        enrollmentData: defaultDataEntryValues,
         formFoundation,
     });
 

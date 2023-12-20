@@ -4,22 +4,22 @@
 # ericbp <ericbarredap@gmail.com>, 2021
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2021
 # Philip Larsen Donnelly, 2022
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2022
 # Marta Vila <marta@dhis2.org>, 2022
 # Pablo Pajuelo Cabezas <pablo@dhis2.org>, 2022
-# Viktor Varland <viktor@dhis2.org>, 2023
 # Alison Andrade <aandrade@ippfwhr.org>, 2023
 # Janeth Cruz, 2023
 # Prabhjot Singh, 2023
 # Christian Atavillos, 2023
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2023
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-29T14:14:34.330Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2023\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -557,6 +557,9 @@ msgstr "Empiece a escribir para buscar"
 msgid "suggestions could not be retrieved"
 msgstr "No se pudieron recuperar las sugerencias"
 
+msgid "No results found"
+msgstr "No results found"
+
 msgid "No items to display"
 msgstr "No hay elementos para mostrar"
 
@@ -989,11 +992,20 @@ msgstr "No se pudo cargar el evento"
 msgid "Organisation unit could not be loaded"
 msgstr "No se pudo cargar la unidad organizativa"
 
+msgid "Selected program"
+msgstr "Programa seleccionado"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Buscar {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Buscar por atributos de {{trackedEntityName}}"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados"
-
-msgid "No results found"
-msgstr "No results found"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "Se produjo un error al cargar posibles duplicados"
@@ -1056,9 +1068,6 @@ msgstr "Buscar {{name}}"
 msgid "Search by {{name}}"
 msgstr "Buscar por {{name}}"
 
-msgid "Search by attributes"
-msgstr "Buscar por atributos de {{trackedEntityName}}"
-
 msgid "all programs"
 msgstr "todos los programas"
 
@@ -1117,12 +1126,6 @@ msgstr "Faltan criterios de búsqueda"
 
 msgid "Results found"
 msgstr "Resultados encontrados"
-
-msgid "Selected program"
-msgstr "Programa seleccionado"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Buscar {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr "Listas guardadas en este programa"
@@ -1223,6 +1226,33 @@ msgstr "Marcar para seguimiento"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Latitud"
+
+msgid "Longitude"
+msgstr "Longitud"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Coordenadas"
+
+msgid "Delete polygon"
+msgstr "Eliminar polígono"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Establecer área"
+
 msgid "Enrollment date"
 msgstr "Fecha de inscripción"
 
@@ -1248,6 +1278,12 @@ msgstr "Última actualización {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelar"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr "Comentarios sobre esta inscripción"
@@ -1385,9 +1421,6 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr "Perfil de {{TETName}} "
 
-msgid "Edit"
-msgstr "Editar"
-
 msgid "tracked entity instance"
 msgstr "instancia de entidad rastreada"
 
@@ -1426,14 +1459,48 @@ msgstr "{{ eventos programados }} programado(s)"
 msgid "Stages and Events"
 msgstr "Etapas y eventos"
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr ""
+
 msgid "Working list could not be loaded"
 msgstr "No se pudo cargar la lista de trabajo"
 
 msgid "Download as JSON"
 msgstr "Descargar como JSON"
-
-msgid "Download as XML"
-msgstr "Descargar como XML"
 
 msgid "Download as CSV"
 msgstr "Descargar como CSV"
@@ -1604,12 +1671,6 @@ msgstr "Hasta la hora"
 
 msgid "Page {{currentPage}}"
 msgstr "Página {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Eliminar polígono"
-
-msgid "Set area"
-msgstr "Establecer área"
 
 msgid "Area on map saved"
 msgstr "Área en el mapa guardada"

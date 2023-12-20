@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Philip Larsen Donnelly, 2022
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2023
+# Philip Larsen Donnelly, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -160,6 +160,15 @@ msgstr "Tọa độ"
 msgid "Enrollment"
 msgstr "Đăng ký"
 
+msgid "Complete event"
+msgstr "Hoàn tất chương trình"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -178,14 +187,17 @@ msgstr "Hủy"
 msgid "Metadata error. see log for details"
 msgstr "Lỗi siêu dữ liệu. xem nhật ký để biết chi tiết"
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr "Người dùng được chỉ định"
 
 msgid "Search for user"
 msgstr "Tìm kiếm người dùng"
-
-msgid "Complete event"
-msgstr "Hoàn tất chương trình"
 
 msgid "Basic info"
 msgstr "Thông tin cơ bản"
@@ -524,6 +536,9 @@ msgstr "bắt đầu nhập để tìm kiếm"
 
 msgid "suggestions could not be retrieved"
 msgstr "đề xuất không thể được truy xuất"
+
+msgid "No results found"
+msgstr "Không tìm thấy kết quả nào"
 
 msgid "No items to display"
 msgstr "Không có mục để hiển thị"
@@ -930,11 +945,20 @@ msgstr "Không thể tải sự kiện"
 msgid "Organisation unit could not be loaded"
 msgstr "Không thể tải đơn vị"
 
+msgid "Selected program"
+msgstr "Chương trình đã chọn"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Tìm kiếm {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Tìm kiếm theo thuộc tính"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "Có thể tìm thấy các bản sao"
-
-msgid "No results found"
-msgstr "Không tìm thấy kết quả nào"
 
 msgid "An error occurred loading possible duplicates"
 msgstr ""
@@ -996,9 +1020,6 @@ msgstr "Tim kiêm {{name}}"
 msgid "Search by {{name}}"
 msgstr ""
 
-msgid "Search by attributes"
-msgstr "Tìm kiếm theo thuộc tính"
-
 msgid "all programs"
 msgstr ""
 
@@ -1053,12 +1074,6 @@ msgstr ""
 
 msgid "Results found"
 msgstr "Kết quả tìm thấy"
-
-msgid "Selected program"
-msgstr "Chương trình đã chọn"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "Tìm kiếm {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1149,6 +1164,33 @@ msgstr "Đánh dấu để theo-dõi"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Vĩ độ"
+
+msgid "Longitude"
+msgstr "Kinh độ"
+
+msgid "Edit"
+msgstr "Chỉnh sửa"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Toạ độ"
+
+msgid "Delete polygon"
+msgstr "Xóa đa giác"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Đặt khu vực"
+
 msgid "Enrollment date"
 msgstr "Ngày ghi vào"
 
@@ -1172,6 +1214,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "Đã hủy"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1295,9 +1343,6 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "Chỉnh sửa"
-
 msgid "tracked entity instance"
 msgstr "thực thể được theo dõi"
 
@@ -1334,14 +1379,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Loại"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "Tên giai đoạn chương trình"
+
 msgid "Working list could not be loaded"
 msgstr "Không thể tải danh sách làm việc"
 
 msgid "Download as JSON"
 msgstr "Tải về dạng JSON"
-
-msgid "Download as XML"
-msgstr "Tải về dạng XML"
 
 msgid "Download as CSV"
 msgstr "Tải xuống với CSV"
@@ -1510,12 +1589,6 @@ msgstr "Đến "
 
 msgid "Page {{currentPage}}"
 msgstr "Trang {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Xóa đa giác"
-
-msgid "Set area"
-msgstr "Đặt khu vực"
 
 msgid "Area on map saved"
 msgstr ""

@@ -65,6 +65,7 @@ const TemplateMaintenancePlain = (props: Props, ref) => {
                 templateId={currentTemplate.id}
                 onClose={handleSetSharingSettings}
                 templateSharingType={templateSharingType}
+                dataTest={'sharing-dialog'}
             />
         </>
     );

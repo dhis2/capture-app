@@ -1,8 +1,7 @@
 // @flow
 import React, { type ComponentType, useContext } from 'react';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
+import { ModalTitle, ModalContent } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { CardList } from '../../CardList';
 import { ReviewDialogContentsPager } from './ReviewDialogContentsPager.container';
@@ -30,10 +29,10 @@ const ReviewDialogContentsPlain = ({
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     return (
         <React.Fragment>
-            <DialogContent data-test="duplicates-modal">
-                <DialogTitle className={classes.title}>
+            <ModalContent data-test="duplicates-modal">
+                <ModalTitle className={classes.title}>
                     {i18n.t('Possible duplicates found')}
-                </DialogTitle>
+                </ModalTitle>
                 <CardList
                     noItemsText={i18n.t('No results found')}
                     items={teis}
@@ -46,7 +45,7 @@ const ReviewDialogContentsPlain = ({
                     selectedScopeId={selectedScopeId}
                     nextPageButtonDisabled={teis.length < resultsPageSize}
                 />
-            </DialogContent>
+            </ModalContent>
         </React.Fragment>
     );
 };

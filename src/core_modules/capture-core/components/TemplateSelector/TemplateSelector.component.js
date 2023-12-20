@@ -18,7 +18,6 @@ const getStyles = () => ({
         padding: 0,
         gap: '4px',
         marginBottom: spacers.dp8,
-        overflow: 'hidden',
     },
     chipContainer: {
         padding: 0,
@@ -80,7 +79,10 @@ const TemplateSelectorPlain = (props: Props) => {
         const { id } = customTemplate;
         return (
             <div className={classes.chipContainer} key={id}>
-                <TemplateSelectorChip template={customTemplate} onSelectTemplate={onSelectTemplate} />
+                <TemplateSelectorChip
+                    template={customTemplate}
+                    onSelectTemplate={onSelectTemplate}
+                />
             </div>
         );
     });

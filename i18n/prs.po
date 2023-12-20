@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2023\n"
 "Language-Team: Persian (Afghanistan) (https://app.transifex.com/hisp-uio/teams/100509/fa_AF/)\n"
@@ -151,6 +151,15 @@ msgstr "مختصات"
 msgid "Enrollment"
 msgstr "ثبت نام"
 
+msgid "Complete event"
+msgstr "تکمیلی رویداد"
+
+msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Status"
+msgstr ""
+
 msgid "Please select {{categoryName}}"
 msgstr ""
 
@@ -169,14 +178,17 @@ msgstr "انصراف"
 msgid "Metadata error. see log for details"
 msgstr ""
 
+msgid "{{ stageName }} - Details"
+msgstr ""
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr ""
+
 msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
 msgstr ""
-
-msgid "Complete event"
-msgstr "تکمیلی رویداد"
 
 msgid "Basic info"
 msgstr ""
@@ -507,6 +519,9 @@ msgstr ""
 
 msgid "suggestions could not be retrieved"
 msgstr ""
+
+msgid "No results found"
+msgstr "هیج نتیجه ی یافت نشد"
 
 msgid "No items to display"
 msgstr ""
@@ -911,11 +926,20 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
-msgid "Possible duplicates found"
+msgid "Selected program"
+msgstr "برنامه های انتخاب شده"
+
+msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
-msgid "No results found"
-msgstr "هیج نتیجه ی یافت نشد"
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
+msgid "Possible duplicates found"
+msgstr ""
 
 msgid "An error occurred loading possible duplicates"
 msgstr ""
@@ -975,9 +999,6 @@ msgstr ""
 msgid "Search by {{name}}"
 msgstr ""
 
-msgid "Search by attributes"
-msgstr ""
-
 msgid "all programs"
 msgstr ""
 
@@ -1027,12 +1048,6 @@ msgid "Missing search criteria"
 msgstr ""
 
 msgid "Results found"
-msgstr ""
-
-msgid "Selected program"
-msgstr "برنامه های انتخاب شده"
-
-msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Saved lists in this program"
@@ -1124,6 +1139,33 @@ msgstr "نشانی برای پیگیری"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "عرض البلد"
+
+msgid "Longitude"
+msgstr "طول البلد"
+
+msgid "Edit"
+msgstr "تجدید"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "ځانګړتیاوې"
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "تاریخ شمولیت"
 
@@ -1146,6 +1188,12 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
+msgstr ""
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
 msgstr ""
 
 msgid "Comments about this enrollment"
@@ -1270,9 +1318,6 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "تجدید"
-
 msgid "tracked entity instance"
 msgstr ""
 
@@ -1309,14 +1354,48 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "New TEI Relationship"
+msgstr ""
+
+msgid "Missing implementation step"
+msgstr ""
+
+msgid "Go back without saving relationship"
+msgstr ""
+
+msgid "New Relationship"
+msgstr ""
+
+msgid "Link to an existing {{tetName}}"
+msgstr ""
+
+msgid "An error occurred while adding the relationship"
+msgstr ""
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "Type"
+msgstr "نمونه/ډول"
+
+msgid "Created date"
+msgstr ""
+
+msgid "Program stage name"
+msgstr "نام مرحله پروگرام"
+
 msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "Download as JSON"
 msgstr "داونلود به فارمت JSON"
-
-msgid "Download as XML"
-msgstr "داونلود به فارمت XML"
 
 msgid "Download as CSV"
 msgstr "داونلود به فارمت سی اس وی"
@@ -1484,12 +1563,6 @@ msgid "To time"
 msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
 msgstr ""
 
 msgid "Area on map saved"

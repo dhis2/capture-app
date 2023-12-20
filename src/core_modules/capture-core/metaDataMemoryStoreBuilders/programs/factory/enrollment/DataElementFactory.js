@@ -169,6 +169,7 @@ export class DataElementFactory {
         dataElement.compulsory = cachedProgramTrackedEntityAttribute.mandatory;
         dataElement.code = cachedTrackedEntityAttribute.code;
         dataElement.attributeValues = cachedTrackedEntityAttribute.attributeValues;
+        dataElement.inherit = cachedTrackedEntityAttribute.inherit;
         dataElement.name =
             this._getAttributeTranslation(
                 cachedTrackedEntityAttribute.translations,

@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Philip Larsen Donnelly, 2022
 # 晓东 林 <13981924470@126.com>, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
 # easylin <lin_xd@126.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-04T07:07:59.195Z\n"
+"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2023\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -156,6 +156,15 @@ msgstr "坐标"
 msgid "Enrollment"
 msgstr "报名"
 
+msgid "Complete event"
+msgstr "完成事件"
+
+msgid "{{ stageName }} - Basic info"
+msgstr "{{ stageName }} - 基本信息"
+
+msgid "{{ stageName }} - Status"
+msgstr "{{ stageName }} - 状态"
+
 msgid "Please select {{categoryName}}"
 msgstr "请选择{{categoryName}}"
 
@@ -174,14 +183,17 @@ msgstr "取消"
 msgid "Metadata error. see log for details"
 msgstr "元数据错误"
 
+msgid "{{ stageName }} - Details"
+msgstr "{{ stageName }} - 详细信息"
+
+msgid "{{ stageName }} - {{ sectionName }}"
+msgstr "{{ 阶段名称 }} - {{ 部分名称 }}"
+
 msgid "Assigned user"
 msgstr "分配的用户"
 
 msgid "Search for user"
 msgstr "搜索用户 "
-
-msgid "Complete event"
-msgstr "完成事件"
 
 msgid "Basic info"
 msgstr "基本信息"
@@ -512,6 +524,9 @@ msgstr "开始输入搜索内容"
 
 msgid "suggestions could not be retrieved"
 msgstr "建议不能提取"
+
+msgid "No results found"
+msgstr "没有结果"
 
 msgid "No items to display"
 msgstr "无条目可显示"
@@ -919,11 +934,20 @@ msgstr "事件不能载入"
 msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
 
+msgid "Selected program"
+msgstr "选择的项目"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "搜索 {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "按属性搜索"
+
+msgid "Could not retrieve metadata. Please try again later."
+msgstr "无法检索元数据。请稍后再试。"
+
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
-
-msgid "No results found"
-msgstr "没有结果"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
@@ -983,9 +1007,6 @@ msgstr "搜索{{name}}"
 msgid "Search by {{name}}"
 msgstr "按{{name}}搜索"
 
-msgid "Search by attributes"
-msgstr "按属性搜索"
-
 msgid "all programs"
 msgstr "所有项目"
 
@@ -1038,12 +1059,6 @@ msgstr "缺少搜索条件"
 
 msgid "Results found"
 msgstr "找到的结果"
-
-msgid "Selected program"
-msgstr "选择的项目"
-
-msgid "Search {{uniqueAttrName}}"
-msgstr "搜索 {{uniqueAttrName}}"
 
 msgid "Saved lists in this program"
 msgstr "此项目中保存的列表"
@@ -1134,6 +1149,33 @@ msgstr "后续标记"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr "自动生成的事件的现有日期将不会更新。"
 
+msgid "Latitude"
+msgstr "维度"
+
+msgid "Longitude"
+msgstr "经度"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Set coordinates"
+msgstr "设置坐标"
+
+msgid "Coordinates"
+msgstr "坐标"
+
+msgid "Delete polygon"
+msgstr "删除多边形"
+
+msgid "Close without saving"
+msgstr "关闭而不保存"
+
+msgid "Finish drawing before saving"
+msgstr "保存前完成绘制"
+
+msgid "Set area"
+msgstr "设置区域"
+
 msgid "Enrollment date"
 msgstr "报名日期"
 
@@ -1157,6 +1199,12 @@ msgstr "最近更新的{{date}}"
 
 msgid "Cancelled"
 msgstr "已取消"
+
+msgid "Add coordinates"
+msgstr "添加坐标"
+
+msgid "Add area"
+msgstr "添加区域"
 
 msgid "Comments about this enrollment"
 msgstr "关于本次报名的评论"
@@ -1280,9 +1328,6 @@ msgstr "无法加载个人资料窗口小部件。请稍后再试"
 msgid "{{TETName}} profile"
 msgstr "{{TETName}} 基本信息"
 
-msgid "Edit"
-msgstr "编辑"
-
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
 
@@ -1319,14 +1364,48 @@ msgstr "{{ ScheduledEvents }} 已安排"
 msgid "Stages and Events"
 msgstr "阶段与活动"
 
+msgid "New TEI Relationship"
+msgstr "新加TEI 关系"
+
+msgid "Missing implementation step"
+msgstr "缺少实施步骤"
+
+msgid "Go back without saving relationship"
+msgstr "不保存关系返回"
+
+msgid "New Relationship"
+msgstr "新建关系"
+
+msgid "Link to an existing {{tetName}}"
+msgstr "链接到现有的 {{tetName}}"
+
+msgid "An error occurred while adding the relationship"
+msgstr "添加关系时出错"
+
+msgid ""
+"Something went wrong while loading relationships. Please try again later."
+msgstr "加载关系时出现问题。请稍后再试。"
+
+msgid "{{trackedEntityTypeName}} relationships"
+msgstr "{{trackedEntityTypeName}} 关系"
+
+msgid "To open this relationship, please wait until saving is complete"
+msgstr "要打开此关系，请等待保存完成"
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Created date"
+msgstr "创建日期"
+
+msgid "Program stage name"
+msgstr "项目阶段名称"
+
 msgid "Working list could not be loaded"
 msgstr "工作列表不能载入"
 
 msgid "Download as JSON"
 msgstr "下载为JSON"
-
-msgid "Download as XML"
-msgstr "下载为xml"
 
 msgid "Download as CSV"
 msgstr "获取CSV格式报表"
@@ -1495,12 +1574,6 @@ msgstr "到时间"
 
 msgid "Page {{currentPage}}"
 msgstr "第{{currentPage}}页"
-
-msgid "Delete polygon"
-msgstr "删除多边形"
-
-msgid "Set area"
-msgstr "设置区域"
 
 msgid "Area on map saved"
 msgstr "地图上的区域已保存"

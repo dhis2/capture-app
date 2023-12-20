@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import { IconChevronDown16, IconChevronUp16, Button } from '@dhis2/ui';
-import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';

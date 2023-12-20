@@ -1,3 +1,169 @@
+# [100.50.0](https://github.com/dhis2/capture-app/compare/v100.49.0...v100.50.0) (2023-12-18)
+
+
+### Features
+
+* [DHIS-11419] display assigned users on events in enrollment overview page ([#3453](https://github.com/dhis2/capture-app/issues/3453)) ([44fb2be](https://github.com/dhis2/capture-app/commit/44fb2bedf0e2f9d394c58d5a588087cff2c8fa3c))
+
+# [100.49.0](https://github.com/dhis2/capture-app/compare/v100.48.0...v100.49.0) (2023-12-18)
+
+
+### Features
+
+* [DHIS2-12544] Add verbose logging to rules engine ([#3480](https://github.com/dhis2/capture-app/issues/3480)) ([2a6d4a8](https://github.com/dhis2/capture-app/commit/2a6d4a839ae0daed7b2ddbf09a401c29dbb3cfd7))
+
+# [100.48.0](https://github.com/dhis2/capture-app/compare/v100.47.3...v100.48.0) (2023-12-15)
+
+
+### Features
+
+* [DHIS2-15783] Tooltip on long working list names ([#3474](https://github.com/dhis2/capture-app/issues/3474)) ([6263aa8](https://github.com/dhis2/capture-app/commit/6263aa8a2114b028afff3b78c39f699c0946e682))
+
+## [100.47.3](https://github.com/dhis2/capture-app/compare/v100.47.2...v100.47.3) (2023-12-14)
+
+
+### Bug Fixes
+
+* [DHIS2-16084] Filter unidirectional relationship types ([#3477](https://github.com/dhis2/capture-app/issues/3477)) ([3579fc0](https://github.com/dhis2/capture-app/commit/3579fc05d02f6210f381f93414d07b60a0cfea53))
+
+## [100.47.2](https://github.com/dhis2/capture-app/compare/v100.47.1...v100.47.2) (2023-12-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1a4e748](https://github.com/dhis2/capture-app/commit/1a4e7482467656e19ce58f34862a306e6ae008cc))
+
+## [100.47.1](https://github.com/dhis2/capture-app/compare/v100.47.0...v100.47.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* [DHIS2-15694] Cancel button in Relationship ([#3471](https://github.com/dhis2/capture-app/issues/3471)) ([c1dfbdb](https://github.com/dhis2/capture-app/commit/c1dfbdb3352388bba7d51b8bc2b9d033d10967c3))
+* [DHIS2-15983] Enrollment date not assigned on form init ([#3475](https://github.com/dhis2/capture-app/issues/3475)) ([a13a766](https://github.com/dhis2/capture-app/commit/a13a766ea463514dfdd090b8d40db6406dac80bb))
+
+# [100.47.0](https://github.com/dhis2/capture-app/compare/v100.46.1...v100.47.0) (2023-12-03)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e20fb8c](https://github.com/dhis2/capture-app/commit/e20fb8c551aefb0546c5973dd87940d56e3018be))
+
+
+### Features
+
+* [DHIS2-16123] Add inheritable TEAs to Relationships ([#3464](https://github.com/dhis2/capture-app/issues/3464)) ([620b008](https://github.com/dhis2/capture-app/commit/620b00832da7c4951d6e905b40317dd0acca0aa6))
+
+## [100.46.1](https://github.com/dhis2/capture-app/compare/v100.46.0...v100.46.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* [DHIS2-15686] fix program rule variables for edit profile mode ([#3463](https://github.com/dhis2/capture-app/issues/3463)) ([a24bb27](https://github.com/dhis2/capture-app/commit/a24bb2723f06cd4a3ca87bbbb22977b097377b3c))
+
+# [100.46.0](https://github.com/dhis2/capture-app/compare/v100.45.2...v100.46.0) (2023-11-30)
+
+
+### Features
+
+* [DHIS2-14275] Support custom icons ([#3473](https://github.com/dhis2/capture-app/issues/3473)) ([2404fca](https://github.com/dhis2/capture-app/commit/2404fca8085965e699ae518cfe816f2f3d38dea7))
+
+## [100.45.2](https://github.com/dhis2/capture-app/compare/v100.45.1...v100.45.2) (2023-11-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15693] Rules not triggered on program update ([#3472](https://github.com/dhis2/capture-app/issues/3472)) ([2dbca1e](https://github.com/dhis2/capture-app/commit/2dbca1efe36ed0e166d4aea803505c30c79cb35d))
+
+## [100.45.1](https://github.com/dhis2/capture-app/compare/v100.45.0...v100.45.1) (2023-11-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8f28703](https://github.com/dhis2/capture-app/commit/8f28703ae8b56cfee283ec1ce0ec2b13dfd91e30))
+
+# [100.45.0](https://github.com/dhis2/capture-app/compare/v100.44.7...v100.45.0) (2023-11-20)
+
+
+### Features
+
+* [DHIS2-13237] Enrollment coordinates in enrollment widget ([#3141](https://github.com/dhis2/capture-app/issues/3141)) ([2f2e52c](https://github.com/dhis2/capture-app/commit/2f2e52c3103e9cb48e77766701a9a5fc9af6ad48))
+
+## [100.44.7](https://github.com/dhis2/capture-app/compare/v100.44.6...v100.44.7) (2023-11-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([46fb227](https://github.com/dhis2/capture-app/commit/46fb2270b21c4dec57f4447232608d8dd3cfb9af))
+
+## [100.44.6](https://github.com/dhis2/capture-app/compare/v100.44.5...v100.44.6) (2023-11-16)
+
+
+### Bug Fixes
+
+* [DHIS2-15967] allow enrolling TEIs with mandatory TET attributes ([#3455](https://github.com/dhis2/capture-app/issues/3455)) ([cc87a8a](https://github.com/dhis2/capture-app/commit/cc87a8a993001d5b4cea8493a84a6798f481cc5a))
+
+## [100.44.5](https://github.com/dhis2/capture-app/compare/v100.44.4...v100.44.5) (2023-11-10)
+
+
+### Bug Fixes
+
+* [TECH-1627] use only valid combinations of orgUnit and ouMode ([#3405](https://github.com/dhis2/capture-app/issues/3405)) ([20d05f1](https://github.com/dhis2/capture-app/commit/20d05f1602840e8ac1241ee305b796d58f616802))
+
+## [100.44.4](https://github.com/dhis2/capture-app/compare/v100.44.3...v100.44.4) (2023-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-15383] align mandatory behaviour for all value types ([#3413](https://github.com/dhis2/capture-app/issues/3413)) ([b0eddc7](https://github.com/dhis2/capture-app/commit/b0eddc76b674ceb20df0eb5bcd0672a3c42d3954))
+
+## [100.44.3](https://github.com/dhis2/capture-app/compare/v100.44.2...v100.44.3) (2023-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-15814] missing orgunit names ([#3449](https://github.com/dhis2/capture-app/issues/3449)) ([488f8c0](https://github.com/dhis2/capture-app/commit/488f8c090680ad47ed693214478a7ef2919b82e7))
+
+## [100.44.2](https://github.com/dhis2/capture-app/compare/v100.44.1...v100.44.2) (2023-11-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0076449](https://github.com/dhis2/capture-app/commit/0076449e545803fa8b5e36b0663d807bb6c7d410))
+
+## [100.44.1](https://github.com/dhis2/capture-app/compare/v100.44.0...v100.44.1) (2023-11-02)
+
+
+### Bug Fixes
+
+* [DHIS2-15945] translations in enrollment widget ([#3433](https://github.com/dhis2/capture-app/issues/3433)) ([c188767](https://github.com/dhis2/capture-app/commit/c1887673e56f2f73cfc594b682d471c10858c0fd))
+
+# [100.44.0](https://github.com/dhis2/capture-app/compare/v100.43.0...v100.44.0) (2023-11-01)
+
+
+### Features
+
+* [DHIS2-15483] assign an user when scheduling an enrollment event ([#3419](https://github.com/dhis2/capture-app/issues/3419)) ([556884f](https://github.com/dhis2/capture-app/commit/556884f7302215c31b7be433bbeb24503ea9b12d))
+
+# [100.43.0](https://github.com/dhis2/capture-app/compare/v100.42.0...v100.43.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9636ea1](https://github.com/dhis2/capture-app/commit/9636ea1e8f54685b2c5ca65fd7b49cd3f5d5f846))
+* [DHIS2-15879] Unable to schedule event with note ([#3421](https://github.com/dhis2/capture-app/issues/3421)) ([e017ac8](https://github.com/dhis2/capture-app/commit/e017ac8e3df69c4803d2e6f73aa9a585984a008f))
+
+
+### Features
+
+* [DHIS-14012] removed download as XML button ([#3434](https://github.com/dhis2/capture-app/issues/3434)) ([7b0e387](https://github.com/dhis2/capture-app/commit/7b0e3871c76478aabfd6696a8e7ac27339254299))
+
+# [100.42.0](https://github.com/dhis2/capture-app/compare/v100.41.4...v100.42.0) (2023-10-24)
+
+
+### Features
+
+* [DHIS2-12361] Tracked Entity Relationships widget ([cafed8d](https://github.com/dhis2/capture-app/commit/cafed8d8aac3fe9955739b1a8ee2cdde57722967))
+
 ## [100.41.4](https://github.com/dhis2/capture-app/compare/v100.41.3...v100.41.4) (2023-10-22)
 
 

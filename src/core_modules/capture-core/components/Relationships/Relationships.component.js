@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconButton, withStyles } from '@material-ui/core';
 import { IconArrowRight16, IconCross24, Button } from '@dhis2/ui';
-import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 
@@ -117,7 +117,8 @@ class RelationshipsPlain extends React.Component<Props> {
         return numberOfChanges > 0;
     }
 
-    renderRelationships = () => this.props.relationships.map(r => this.renderRelationship(r))
+    renderRelationships = () => this.props.relationships.map(relationship => relationship &&
+        this.renderRelationship(relationship))
 
     renderRelationship = (relationship: Relationship) => {
         const { classes, onRemoveRelationship } = this.props;
