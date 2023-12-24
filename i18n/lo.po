@@ -1,7 +1,7 @@
 # 
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2022
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
 # Saysamone Sibounma, 2023
 # 
@@ -575,7 +575,7 @@ msgid "Offline"
 msgstr "ບໍ່ມີການເຊື່ອມຕໍ່"
 
 msgid "Syncing"
-msgstr ""
+msgstr "ກຳລັງອັບເດດຂໍ້ມູນໃຫ້ຄືກັນ"
 
 msgid "Add comment"
 msgstr ""
@@ -992,7 +992,7 @@ msgid "stage not found in rules execution"
 msgstr ""
 
 msgid "Event completed"
-msgstr ""
+msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 
 msgid "Back to all stages and events"
 msgstr ""
