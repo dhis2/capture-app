@@ -1,6 +1,6 @@
 # 
 # Translators:
-# phil_dhis2, 2021
+# Philip Larsen Donnelly, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
 # Saysamone Sibounma, 2023
@@ -376,7 +376,7 @@ msgid "Offline"
 msgstr "ບໍ່ມີການເຊື່ອມຕໍ່"
 
 msgid "Syncing"
-msgstr ""
+msgstr "ກຳລັງອັບເດດຂໍ້ມູນໃຫ້ຄືກັນ"
 
 msgid "Add comment"
 msgstr ""
@@ -703,7 +703,7 @@ msgid "Event details"
 msgstr "ລາຍລະອຽດເຫດການ"
 
 msgid "Event completed"
-msgstr ""
+msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
