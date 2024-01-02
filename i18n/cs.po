@@ -1191,6 +1191,33 @@ msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 "Stávající data pro automaticky generované události nebudou aktualizována."
 
+msgid "Latitude"
+msgstr "Zeměpisná šířka"
+
+msgid "Longitude"
+msgstr "Zeměpisná délka"
+
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "Set coordinates"
+msgstr "Nastavit souřadnice"
+
+msgid "Coordinates"
+msgstr "Souřadnice"
+
+msgid "Delete polygon"
+msgstr "Smazat polygon"
+
+msgid "Close without saving"
+msgstr "Zavřít bez uložení"
+
+msgid "Finish drawing before saving"
+msgstr "Před uložením dokončete kreslení"
+
+msgid "Set area"
+msgstr "Nastavit oblast"
+
 msgid "Enrollment date"
 msgstr "Datum zápisu"
 
@@ -1214,6 +1241,12 @@ msgstr "Poslední aktualizace {{date}}"
 
 msgid "Cancelled"
 msgstr "Zrušeno"
+
+msgid "Add coordinates"
+msgstr "Přidat souřadnice"
+
+msgid "Add area"
+msgstr "Přidat oblast"
 
 msgid "Comments about this enrollment"
 msgstr "Komentáře k tomuto zápisu"
@@ -1342,9 +1375,6 @@ msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
 
 msgid "{{TETName}} profile"
 msgstr "profil {{TETName}}"
-
-msgid "Edit"
-msgstr "Upravit"
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
@@ -1592,12 +1622,6 @@ msgstr "Na čas"
 
 msgid "Page {{currentPage}}"
 msgstr "Stránka {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Smazat polygon"
-
-msgid "Set area"
-msgstr "Nastavit oblast"
 
 msgid "Area on map saved"
 msgstr "Oblast na mapě byla uložena"

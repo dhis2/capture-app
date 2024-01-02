@@ -47,41 +47,47 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
             }
         }
 
-        renderAskToCreateNewModal = () => (
-            <Modal
-                hide={!this.state.isOpen}
-                dataTest="modal-ask-to-create-new"
-            >
-                <ModalTitle>
-                    {i18n.t('Generate new event')}
-                </ModalTitle>
-                <ModalContent>
-                    {i18n.t('Do you want to create another event?')}
-                </ModalContent>
-                <ModalActions>
-                    <ButtonStrip end>
-                        <Button
-                            onClick={() => {
-                                this.props.onCancelCreateNew(this.props.itemId);
-                                this.setState({ isOpen: false });
-                            }}
-                            secondary
-                        >
-                            {i18n.t('No, cancel')}
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                this.props.onConfirmCreateNew(this.props.itemId);
-                                this.setState({ isOpen: false });
-                            }}
-                            primary
-                        >
-                            {i18n.t('Yes, create new event')}
-                        </Button>
-                    </ButtonStrip>
-                </ModalActions>
-            </Modal>
-        )
+        renderAskToCreateNewModal = () => {
+            if (!this.state.isOpen) {
+                return null;
+            }
+
+            return (
+                <Modal
+                    hide={!this.state.isOpen}
+                    dataTest="modal-ask-to-create-new"
+                >
+                    <ModalTitle>
+                        {i18n.t('Generate new event')}
+                    </ModalTitle>
+                    <ModalContent>
+                        {i18n.t('Do you want to create another event?')}
+                    </ModalContent>
+                    <ModalActions>
+                        <ButtonStrip end>
+                            <Button
+                                onClick={() => {
+                                    this.props.onCancelCreateNew(this.props.itemId);
+                                    this.setState({ isOpen: false });
+                                }}
+                                secondary
+                            >
+                                {i18n.t('No, cancel')}
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    this.props.onConfirmCreateNew(this.props.itemId);
+                                    this.setState({ isOpen: false });
+                                }}
+                                primary
+                            >
+                                {i18n.t('Yes, create new event')}
+                            </Button>
+                        </ButtonStrip>
+                    </ModalActions>
+                </Modal>
+            );
+        }
 
         render() {
             const { onSave, ...passOnProps } = this.props;

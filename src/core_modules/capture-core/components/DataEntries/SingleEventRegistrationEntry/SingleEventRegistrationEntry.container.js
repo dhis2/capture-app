@@ -24,8 +24,7 @@ const makeMapStateToProps = (): MapStateToProps => {
     });
 };
 
-const mapDispatchToProps = () => ({
-});
+const mapDispatchToProps = () => ({});
 
 const mergeProps = (stateProps: StateProps): StateProps => (stateProps);
 

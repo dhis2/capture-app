@@ -125,7 +125,7 @@ Object {
   "trackedEntityAttributes": Object {
     "lZGmxYbs96q": Object {
       "id": "lZGmxYbs96q",
-      "optionSetId": undefined,
+      "optionSetId": "optionSet",
       "valueType": "DATE",
     },
     "lZGmxYbs97q": Object {

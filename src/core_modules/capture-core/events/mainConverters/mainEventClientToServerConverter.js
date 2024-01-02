@@ -1,5 +1,5 @@
 // @flow
-import { convertClientToServer } from '../../converters';
+import { convertClientToServer, convertAssigneeToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
 import { convertEventAttributeOptions } from '../convertEventAttributeOptions';
@@ -26,7 +26,7 @@ export function convertMainEventClientToServer(event: Object) {
             convertedValue = convertClientToServer(value, dataElementTypes.DATE);
             break;
         case 'assignee':
-            convertedValue = value && ({ uid: value.id });
+            convertedValue = value && convertAssigneeToServer(value);
             break;
         default:
             convertedValue = value;

@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
-import { Button } from '@dhis2/ui';
+import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 
 const getStyles = () => ({
     buttonContainer: {
@@ -22,9 +21,9 @@ const ExistingTemplateContentsPlain = (props: Props) => {
     const { onSaveTemplate, onClose, classes } = props;
     return (
         <React.Fragment>
-            <DialogTitle>{i18n.t('Save')}</DialogTitle>
-            <DialogContent />
-            <DialogActions
+            <ModalTitle>{i18n.t('Save')}</ModalTitle>
+            <ModalContent />
+            <ModalActions
                 className={classes.buttonContainer}
             >
                 <Button onClick={onClose}>
@@ -33,7 +32,7 @@ const ExistingTemplateContentsPlain = (props: Props) => {
                 <Button onClick={onSaveTemplate} primary>
                     {i18n.t('Save')}
                 </Button>
-            </DialogActions>
+            </ModalActions>
         </React.Fragment>
     );
 };

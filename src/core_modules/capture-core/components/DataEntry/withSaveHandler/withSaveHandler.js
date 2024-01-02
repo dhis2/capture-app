@@ -1,10 +1,7 @@
 // @flow
 import * as React from 'react';
 import log from 'loglevel';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Modal, ModalContent, ModalTitle } from '@dhis2/ui';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -248,32 +245,34 @@ const getSaveHandler = (
                         onSave={this.handleSaveAttempt}
                         {...filteredProps}
                     />
-                    <Dialog
-                        open={this.state.messagesDialogOpen}
-                        onClose={this.handleAbortDialog}
-                    >
-                        <MessagesDialogContents
-                            open={this.state.messagesDialogOpen}
-                            onAbort={this.handleAbortDialog}
-                            onSave={this.handleSaveDialog}
-                            errors={errors}
-                            warnings={warnings}
-                            isCompleting={this.isCompleting}
-                            validationStrategy={calculatedFoundation.validationStrategy}
-                        />
-                    </Dialog>
-                    <Dialog
-                        open={this.state.waitForPromisesDialogOpen}
-                    >
-                        <DialogTitle>
-                            {i18n.t('Operations running')}
-                        </DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
+                    {this.state.messagesDialogOpen && (
+                        <Modal
+                            hide={!this.state.messagesDialogOpen}
+                            onClose={this.handleAbortDialog}
+                        >
+                            <MessagesDialogContents
+                                open={this.state.messagesDialogOpen}
+                                onAbort={this.handleAbortDialog}
+                                onSave={this.handleSaveDialog}
+                                errors={errors}
+                                warnings={warnings}
+                                isCompleting={this.isCompleting}
+                                validationStrategy={calculatedFoundation.validationStrategy}
+                            />
+                        </Modal>
+                    )}
+                    {this.state.waitForPromisesDialogOpen && (
+                        <Modal
+                            hide={!this.state.waitForPromisesDialogOpen}
+                        >
+                            <ModalTitle>
+                                {i18n.t('Operations running')}
+                            </ModalTitle>
+                            <ModalContent>
                                 {this.getDialogWaitForUploadContents()}
-                            </DialogContentText>
-                        </DialogContent>
-                    </Dialog>
+                            </ModalContent>
+                        </Modal>
+                    )}
                 </div>
             );
         }

@@ -177,7 +177,9 @@ export const executeExpression = ({
     expression,
     dhisFunctions,
     variablesHash,
+    flags = {},
     onError,
+    onVerboseLog,
 }: ExecuteExpressionInput) => {
     const expressionWithInjectedVariableValues = injectVariableValues(expression, variablesHash);
 
@@ -191,6 +193,10 @@ export const executeExpression = ({
             removeNewLinesFromNonStrings(expressionWithInjectedVariableValues, expressionModuloStrings),
             onError,
         );
+
+        if (flags.verbose) {
+            onVerboseLog(expressionWithInjectedVariableValues);
+        }
     } catch (error) {
         onError(error.message, expressionWithInjectedVariableValues);
     }
