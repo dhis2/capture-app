@@ -2,7 +2,7 @@ import { When, defineStep as And } from '@badeball/cypress-cucumber-preprocessor
 import '../sharedSteps';
 
 And('you fill in the first name with values that have duplicates', () => {
-    cy.get('[data-test="d2-section-vertical"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .wait(500)
@@ -11,12 +11,12 @@ And('you fill in the first name with values that have duplicates', () => {
 });
 
 And('you fill in the first name with values that have less than 5 duplicates', () => {
-    cy.get('[data-test="d2-section-vertical"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Sarah')
         .blur();
-    cy.get('[data-test="d2-section-vertical"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(2)
         .type('Fis')
@@ -24,13 +24,13 @@ And('you fill in the first name with values that have less than 5 duplicates', (
 });
 
 And('you fill in the first name with values that have exactly 5 duplicates', () => {
-    cy.get('[data-test="d2-section-vertical"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .wait(500)
         .type('Tesmi')
         .blur();
-    cy.get('[data-test="d2-section-vertical"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(2)
         .type('Abel')
