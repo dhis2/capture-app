@@ -144,7 +144,7 @@ const EnrollmentEditEventPagePain = ({
                         <WidgetWarning warning={widgetEffects.warnings} />
                         {!hideWidgets.feedback && (
                             <WidgetFeedback
-                                emptyText={i18n.t('There are no feedback for this event')}
+                                emptyText={i18n.t('There is no feedback for this event')}
                                 feedback={widgetEffects.feedbacks}
                             />
                         )}

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
-"PO-Revision-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-01-02T15:05:21.040Z\n"
+"PO-Revision-Date: 2024-01-02T15:05:21.040Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -769,8 +769,8 @@ msgstr "There was an error loading the page"
 msgid "Choose a registering unit to start reporting"
 msgstr "Choose a registering unit to start reporting"
 
-msgid "There are no feedbacks for this event"
-msgstr "There are no feedbacks for this event"
+msgid "There is no feedback for this event"
+msgstr "There is no feedback for this event"
 
 msgid "There are no indicators for this event"
 msgstr "There are no indicators for this event"
@@ -811,20 +811,11 @@ msgstr "Enrollment{{escape}} Edit Event"
 msgid "The enrollment event data could not be found"
 msgstr "The enrollment event data could not be found"
 
-msgid "There are no feedback for this event"
-msgstr "There are no feedback for this event"
-
 msgid "Registered events"
 msgstr "Registered events"
 
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
-
-msgid "Or see all records accessible to you in {{program}} "
-msgstr "Or see all records accessible to you in {{program}} "
-
-msgid "Or see all events accessible to you in {{program}}"
-msgstr "Or see all events accessible to you in {{program}}"
 
 msgid "Please select an organisation unit."
 msgstr "Please select an organisation unit."
@@ -934,9 +925,6 @@ msgstr "Assign"
 
 msgid "Event assigned to {{name}}"
 msgstr "Event assigned to {{name}}"
-
-msgid "Feedbacks"
-msgstr "Feedbacks"
 
 msgid "Show all events"
 msgstr "Show all events"
@@ -1380,6 +1368,9 @@ msgstr "This stage can only have one event"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
 
+msgid "Assigned to"
+msgstr "Assigned to"
+
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"
 
@@ -1445,9 +1436,6 @@ msgstr "Download data..."
 
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
-
-msgid "Assigned to"
-msgstr "Assigned to"
 
 msgid "Registration Date"
 msgstr "Registration Date"

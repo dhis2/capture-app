@@ -13,7 +13,7 @@ type Props = {
     feedbacks: ?{ displayTexts: ?Array<string>, displayKeyValuePairs: ?Array<{ key: string, value: string }>},
 }
 
-const headerText = i18n.t('Feedbacks');
+const headerText = i18n.t('Feedback');
 
 const getStyles = (theme: Theme) => ({
     badge: {
