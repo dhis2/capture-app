@@ -73,52 +73,49 @@ class D2SectionPlain extends React.PureComponent<Props> {
     }
 
     renderSection(sectionProps) {
-        const { sectionMetaData, applyCustomFormClass, classes, sectionId, ...passOnProps } = sectionProps;
+        const { sectionMetaData, classes, sectionId, ...passOnProps } = sectionProps;
 
-        if (!sectionMetaData.showContainer || this.props.formHorizontal) {
-            return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
-                <D2SectionFields
-                    ref={(instance) => { this.sectionFieldsInstance = instance; }}
-                    fieldsMetaData={sectionMetaData.elements}
-                    customForm={sectionMetaData.customForm}
-                    {...passOnProps}
-                />
-            );
-        }
-        return (
-            <div
-                data-test="d2-section-vertical"
-                className={applyCustomFormClass ? this.props.classes.containerCustomForm : ''}
-            >
+        const sectionFields = (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
+            <D2SectionFields
+                ref={(instance) => { this.sectionFieldsInstance = instance; }}
+                fieldsMetaData={sectionMetaData.elements}
+                customForm={sectionMetaData.customForm}
+                {...passOnProps}
+            />
+        );
+
+        if (sectionMetaData.showContainer) {
+            <div>
                 <Section
                     header={this.renderSectionHeader()}
                     description={this.renderSectionDescription()}
                     elevation={2}
                     className={classes.section}
                 >
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                    <D2SectionFields
-                        ref={(instance) => {
-                            this.sectionFieldsInstance = instance;
-                        }}
-                        fieldsMetaData={sectionMetaData.elements}
-                        {...passOnProps}
-                    />
-
+                    {sectionFields}
                 </Section>
-            </div>
-        );
+            </div>;
+        }
+        return sectionFields;
     }
 
+
     render() {
-        const { isHidden, ...passOnProps } = this.props;
+        const { isHidden, applyCustomFormClass, ...passOnProps } = this.props;
 
         if (isHidden) {
             return null;
         }
 
-        return this.renderSection(passOnProps);
+        return (<div
+            data-test="d2-section"
+            className={applyCustomFormClass ? this.props.classes.containerCustomForm : ''}
+        >
+            {
+                this.renderSection(passOnProps)
+            }
+        </div>);
     }
 }
 
