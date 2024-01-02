@@ -1,13 +1,21 @@
 // @flow
 import React, { useEffect, useRef, useState } from 'react';
-// $FlowFixMe - Export will be part of the next release
+// $FlowFixMe - Export will be available in next app-runtime release
 import { Plugin } from '@dhis2/app-runtime';
-import type { ComponentProps } from './FormFieldPlugin.types';
+import { useHistory } from 'react-router-dom';
 
-export const FormFieldPluginComponent = (props: ComponentProps) => {
-    const { pluginSource, ...passOnProps } = props;
-    const containerRef = useRef<?HTMLDivElement>(null);
-    const [pluginWidth, setPluginWidth] = useState(0);
+type EnrollmentPluginProps = {|
+    enrollmentId: string,
+    programId?: string,
+    teiId: string,
+    orgUnitId: string,
+    pluginSource: string,
+|};
+
+export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPluginProps) => {
+    const [pluginWidth, setPluginWidth] = useState(undefined);
+    const history = useHistory();
+    const containerRef = useRef<?HTMLDivElement>();
 
     useEffect(() => {
         const { current: container } = containerRef;
@@ -27,12 +35,12 @@ export const FormFieldPluginComponent = (props: ComponentProps) => {
         };
     }, [containerRef]);
 
-
     return (
         <div ref={containerRef}>
             <Plugin
                 pluginSource={pluginSource}
                 width={pluginWidth}
+                navigate={history.push}
                 {...passOnProps}
             />
         </div>

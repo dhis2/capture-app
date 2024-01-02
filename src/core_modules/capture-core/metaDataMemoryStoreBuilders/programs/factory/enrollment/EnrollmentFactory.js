@@ -20,9 +20,6 @@ import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunc
 import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
-import {
-    formatPluginConfig,
-} from '../../../../components/D2Form/FormFieldPlugin/formatPluginConfig';
 
 export class EnrollmentFactory {
     static errorMessages = {
@@ -141,13 +138,6 @@ export class EnrollmentFactory {
         // $FlowFixMe
         await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
             if (trackedEntityAttribute?.type === FormFieldTypes.PLUGIN) {
-                const element = new FormFieldPluginConfig((o) => {
-                    o.id = trackedEntityAttribute.id;
-                    o.name = trackedEntityAttribute.name;
-                    o.pluginSource = trackedEntityAttribute.pluginSource;
-                    o.fields = new Map();
-                });
-
                 const attributes = trackedEntityAttribute.fieldMap
                     .filter(attributeField => attributeField.objectType === 'Attribute')
                     .reduce((acc, attribute) => {
@@ -155,14 +145,20 @@ export class EnrollmentFactory {
                         return acc;
                     }, {});
 
+                const element = new FormFieldPluginConfig((o) => {
+                    o.id = trackedEntityAttribute.id;
+                    o.name = trackedEntityAttribute.name;
+                    o.pluginSource = trackedEntityAttribute.pluginSource;
+                    o.fields = new Map();
+                    o.customAttributes = attributes;
+                });
+
                 await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
-                    if (field.objectType) {
-                        const fieldElement = await this.dataElementFactory.build(field);
+                    if (field.objectType && field.objectType === 'dataElement') {
+                        const fieldElement = await this.dataElementFactory.build(field, section);
                         if (!fieldElement) return;
 
-                        const fieldMetadata = formatPluginConfig(fieldElement, { attributes });
-
-                        element.addField(field.IdFromPlugin, fieldMetadata);
+                        element.addField(field.IdFromPlugin, fieldElement);
                     }
                 });
 

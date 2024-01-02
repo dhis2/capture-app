@@ -1,11 +1,11 @@
 const config = {
-    name: 'capture-1312',
-    title: 'Capture - 1312',
+    name: 'capture',
+    title: 'Capture',
     type: 'app',
 
     id: '92b75fd0-34cc-451c-942f-3dd0f283bcbd',
     minDHIS2Version: '2.38',
-    coreApp: false,
+    coreApp: true,
 
     entryPoints: {
         app: './src/index',

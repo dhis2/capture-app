@@ -1,12 +1,17 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
 import log from 'loglevel';
-import { Plugin } from '@dhis2/app-runtime';
 import { errorCreator } from '../../../../../../../capture-core-utils';
 
 import { WidgetTypes } from '../DefaultEnrollmentLayout.constants';
-import type { ColumnConfig, PageLayoutConfig, WidgetConfig } from '../DefaultEnrollmentLayout.types';
-import { Widget } from '../../../../../Widget';
+import { EnrollmentPlugin } from '../../../EnrollmentPlugin';
+import type {
+    ColumnConfig,
+    PageLayoutConfig,
+    WidgetConfig,
+    DefaultWidgetColumnComfig,
+    PluginWidgetColumnConfig,
+} from '../DefaultEnrollmentLayout.types';
 
 type Props = {
     pageLayout: PageLayoutConfig,
@@ -21,7 +26,8 @@ const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
     const { type } = widget;
 
     if (type.toLowerCase() === WidgetTypes.COMPONENT) {
-        const { name, settings = {} } = widget;
+        // Manually casting type to DefaultWidgetColumnComfig
+        const { name, settings = {} } = ((widget: any): DefaultWidgetColumnComfig);
         const widgetConfig = availableWidgets[name];
 
         if (!widgetConfig) {
@@ -62,15 +68,31 @@ const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
             />
         );
     } else if (type.toLowerCase() === WidgetTypes.PLUGIN) {
-        const { source } = widget;
+        // Manually casting type to PluginWidgetColumnConfig
+        const { source } = ((widget: any): PluginWidgetColumnConfig);
         let PluginWidget = MemoizedWidgets[source];
 
         if (!PluginWidget) {
-            PluginWidget = Plugin;
+            PluginWidget = EnrollmentPlugin;
             MemoizedWidgets[source] = (PluginWidget);
         }
 
-        return <PluginWidget key={source} pluginSource={source} />
+        const getProps = ({ program, enrollmentId, teiId, orgUnitId }) => ({
+            programId: program.id,
+            enrollmentId,
+            teiId,
+            orgUnitId,
+        });
+
+        const widgetProps = getProps(props);
+
+        return (
+            <PluginWidget
+                key={source}
+                pluginSource={source}
+                {...widgetProps}
+            />
+        );
     }
 
     log.error(errorCreator(`Widget type ${type} is not supported`)({ type }));
