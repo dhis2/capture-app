@@ -808,7 +808,7 @@ msgstr "Hubo un error al cargar la página"
 msgid "Choose a registering unit to start reporting"
 msgstr "Seleccione una unidad de registro para comenzar a informar"
 
-msgid "There are no feedbacks for this event"
+msgid "There is no feedback for this event"
 msgstr "No hay comentarios para este evento."
 
 msgid "There are no indicators for this event"
@@ -859,7 +859,7 @@ msgstr "Eventos registrados"
 msgid "Please select {{category}}."
 msgstr "Seleccione {{categoría}}."
 
-msgid "Or see all records accessible to you in {{program}} "
+msgid "Or see all [TET] accessible to you in {{program}} "
 msgstr "O vea todos los registros a los que puede acceder en {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -977,7 +977,7 @@ msgstr "Asignar"
 msgid "Event assigned to {{name}}"
 msgstr "Evento asignado a {{name}}"
 
-msgid "Feedbacks"
+msgid "Feedback"
 msgstr "Retroalimentaciones"
 
 msgid "Show all events"

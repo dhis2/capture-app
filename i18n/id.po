@@ -777,7 +777,7 @@ msgstr "Telah terjadi sebuah kesalahan saat memuat halaman"
 msgid "Choose a registering unit to start reporting"
 msgstr "Pilih unit pendaftaran untuk memulai pelaporan"
 
-msgid "There are no feedbacks for this event"
+msgid "There is no feedback for this event"
 msgstr "Tidak ada umpan balik untuk acara ini"
 
 msgid "There are no indicators for this event"
@@ -828,7 +828,7 @@ msgstr "Even terdaftar"
 msgid "Please select {{category}}."
 msgstr ""
 
-msgid "Or see all records accessible to you in {{program}} "
+msgid "Or see all [TET] accessible to you in {{program}} "
 msgstr ""
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -945,7 +945,7 @@ msgstr "Daftarkan"
 msgid "Event assigned to {{name}}"
 msgstr "Even ditugaskan ke {{name}}"
 
-msgid "Feedbacks"
+msgid "Feedback"
 msgstr "Umpan balik"
 
 msgid "Show all events"

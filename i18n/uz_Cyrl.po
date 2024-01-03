@@ -772,7 +772,7 @@ msgstr ""
 msgid "Event assigned to {{name}}"
 msgstr ""
 
-msgid "Feedbacks"
+msgid "Feedback"
 msgstr ""
 
 msgid "You dont have access to delete this relationship"

@@ -758,7 +758,7 @@ msgstr "A apărut o eroare la încărcarea paginii"
 msgid "Choose a registering unit to start reporting"
 msgstr "Alegeți o unitate de înregistrare pentru a începe raportarea"
 
-msgid "There are no feedbacks for this event"
+msgid "There is no feedback for this event"
 msgstr "Nu există feedback pentru acest eveniment"
 
 msgid "There are no indicators for this event"
@@ -809,7 +809,7 @@ msgstr "Evenimente înregistrate"
 msgid "Please select {{category}}."
 msgstr "Selectați {{category}}."
 
-msgid "Or see all records accessible to you in {{program}} "
+msgid "Or see all [TET] accessible to you in {{program}} "
 msgstr "Sau vedeți toate înregistrările accesibile dvs. în {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -925,7 +925,7 @@ msgstr "Atribuire"
 msgid "Event assigned to {{name}}"
 msgstr "Eveniment atribuit lui {{name}}"
 
-msgid "Feedbacks"
+msgid "Feedback"
 msgstr "Feedback-uri"
 
 msgid "Show all events"

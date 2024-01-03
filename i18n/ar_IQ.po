@@ -753,7 +753,7 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "There are no feedbacks for this event"
+msgid "There is no feedback for this event"
 msgstr ""
 
 msgid "There are no indicators for this event"
@@ -804,7 +804,7 @@ msgstr "الأحداث المسجلة"
 msgid "Please select {{category}}."
 msgstr ""
 
-msgid "Or see all records accessible to you in {{program}} "
+msgid "Or see all [TET] accessible to you in {{program}} "
 msgstr ""
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -918,7 +918,7 @@ msgstr "إسناد"
 msgid "Event assigned to {{name}}"
 msgstr "تم تعيين الحدث إلى {{name}}"
 
-msgid "Feedbacks"
+msgid "Feedback"
 msgstr "تغذيات راجعة"
 
 msgid "Show all events"

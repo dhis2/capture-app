@@ -740,7 +740,7 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr "Xisobot boshlash uchun roʼyxatdan oʼtishni tanlang"
 
-msgid "There are no feedbacks for this event"
+msgid "There is no feedback for this event"
 msgstr ""
 
 msgid "There are no indicators for this event"
@@ -791,7 +791,7 @@ msgstr "Roʼyxatdan oʼtgan hodisa/tadbirlar"
 msgid "Please select {{category}}."
 msgstr ""
 
-msgid "Or see all records accessible to you in {{program}} "
+msgid "Or see all [TET] accessible to you in {{program}} "
 msgstr ""
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -904,7 +904,7 @@ msgstr "Tayinlangan"
 msgid "Event assigned to {{name}}"
 msgstr "Hodisa/tadbir {{name}} ga biriktirildi"
 
-msgid "Feedbacks"
+msgid "Feedback"
 msgstr "Qayta aloqalar"
 
 msgid "Show all events"
