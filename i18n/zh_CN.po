@@ -804,7 +804,8 @@ msgid "Please select {{category}}."
 msgstr "请选择 {{category}}."
 
 msgid "Or see all [TET] accessible to you in {{program}} "
-msgstr "或者在{{program}}中查看您可以访问的所有记录"
+msgstr "或者在{{program}}中查看您可以访问的所有[TET]"
+
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr "或者在{{program}}中查看您可以访问的所有事件"

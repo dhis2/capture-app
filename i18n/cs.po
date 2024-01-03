@@ -832,8 +832,8 @@ msgstr "Registrované události"
 msgid "Please select {{category}}."
 msgstr "Vyberte prosím {{category}}."
 
-msgid "Or see all [TET] accessible to you in {{program}} "
-msgstr "Nebo zobrazit všechny záznamy, které máte k dispozici v {{program}}"
+msgid "Or see all [TET] accessible to you in {{program}}"
+msgstr "Nebo zobrazit všechny [TET], které jsou pro vás dostupné v {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr "Nebo zobrazit všechny události, které máte k dispozici v {{program}}"
