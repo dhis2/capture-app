@@ -802,8 +802,8 @@ msgstr "Er is een fout opgetreden bij het laden van de pagina"
 msgid "Choose a registering unit to start reporting"
 msgstr "Kies een registratie-eenheid om rapportage te starten"
 
-msgid "There is no feedback for this event"
-msgstr "Er zijn geen feedback voor dit evenement"
+msgid "There are no feedbacks for this event"
+msgstr "Er zijn geen feedbacks voor dit evenement"
 
 msgid "There are no indicators for this event"
 msgstr "Er zijn geen indicatoren voor dit evenement"
@@ -854,7 +854,7 @@ msgstr "Geregistreerde evenementen"
 msgid "Please select {{category}}."
 msgstr "Selecteer {{categorie}}."
 
-msgid "Or see all [TET] accessible to you in {{program}} "
+msgid "Or see all records accessible to you in {{program}} "
 msgstr "Of bekijk alle records die voor u toegankelijk zijn in {{programma}}"
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -973,8 +973,8 @@ msgstr "Toewijzen"
 msgid "Event assigned to {{name}}"
 msgstr "Evenement toegewezen aan {{naam}}"
 
-msgid "Feedback"
-msgstr "Feedback"
+msgid "Feedbacks"
+msgstr "Feedbacks"
 
 msgid "Show all events"
 msgstr "Toon alle evenementen"

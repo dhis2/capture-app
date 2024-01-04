@@ -781,7 +781,7 @@ msgstr "Při načítání stránky došlo k chybě"
 msgid "Choose a registering unit to start reporting"
 msgstr "Vyberte registraci jednotky a začněte hlásit"
 
-msgid "There is no feedback for this event"
+msgid "There are no feedbacks for this event"
 msgstr "Pro tuto událost neexistují žádné zpětné vazby"
 
 msgid "There are no indicators for this event"
@@ -832,7 +832,7 @@ msgstr "Registrované události"
 msgid "Please select {{category}}."
 msgstr "Vyberte prosím {{category}}."
 
-msgid "Or see all [TET] accessible to you in {{program}} "
+msgid "Or see all records accessible to you in {{program}} "
 msgstr "Nebo zobrazit všechny záznamy, které máte k dispozici v {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -948,7 +948,7 @@ msgstr "Přiřadit"
 msgid "Event assigned to {{name}}"
 msgstr "Událost přiřazená uživateli {{name}}"
 
-msgid "Feedback"
+msgid "Feedbacks"
 msgstr "Zpětná vazba"
 
 msgid "Show all events"

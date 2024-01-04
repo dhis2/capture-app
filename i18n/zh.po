@@ -754,7 +754,7 @@ msgstr "加载页面时出错"
 msgid "Choose a registering unit to start reporting"
 msgstr "选择一个注册机构开始填报"
 
-msgid "There is no feedback for this event"
+msgid "There are no feedbacks for this event"
 msgstr "本次事件暂无反馈"
 
 msgid "There are no indicators for this event"
@@ -805,7 +805,7 @@ msgstr "注册的事件"
 msgid "Please select {{category}}."
 msgstr "请选择 {{category}}."
 
-msgid "Or see all [TET] accessible to you in {{program}} "
+msgid "Or see all records accessible to you in {{program}} "
 msgstr "或者在{{program}}中查看您可以访问的所有记录"
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -919,7 +919,7 @@ msgstr "分配"
 msgid "Event assigned to {{name}}"
 msgstr "事件被分配到  {{name}}"
 
-msgid "Feedback"
+msgid "Feedbacks"
 msgstr "反馈"
 
 msgid "Show all events"

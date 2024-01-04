@@ -748,7 +748,7 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "There is no feedback for this event"
+msgid "There are no feedbacks for this event"
 msgstr ""
 
 msgid "There are no indicators for this event"
@@ -799,7 +799,7 @@ msgstr ""
 msgid "Please select {{category}}."
 msgstr ""
 
-msgid "Or see all [TET] accessible to you in {{program}} "
+msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -913,7 +913,7 @@ msgstr "Atribuir"
 msgid "Event assigned to {{name}}"
 msgstr ""
 
-msgid "Feedback"
+msgid "Feedbacks"
 msgstr ""
 
 msgid "Show all events"

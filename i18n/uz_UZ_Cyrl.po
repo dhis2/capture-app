@@ -774,7 +774,7 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr "Хисобот бошлаш учун рўйхатдан ўтишни танланг"
 
-msgid "There is no feedback for this event"
+msgid "There are no feedbacks for this event"
 msgstr ""
 
 msgid "There are no indicators for this event"
@@ -825,7 +825,7 @@ msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
 msgid "Please select {{category}}."
 msgstr ""
 
-msgid "Or see all [TET] accessible to you in {{program}} "
+msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -943,7 +943,7 @@ msgstr "Тайинланган"
 msgid "Event assigned to {{name}}"
 msgstr "Ҳодиса/тадбир {{name}} га бириктирилди"
 
-msgid "Feedback"
+msgid "Feedbacks"
 msgstr "Қайта алоқалар"
 
 msgid "Show all events"

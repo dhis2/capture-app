@@ -788,7 +788,7 @@ msgstr "Det oppsto en feil under lasting av siden"
 msgid "Choose a registering unit to start reporting"
 msgstr "Velg en registreringsenhet for å starte rapportering"
 
-msgid "There is no feedback for this event"
+msgid "There are no feedbacks for this event"
 msgstr "Det er ingen tilbakemeldinger for denne hendelsen"
 
 msgid "There are no indicators for this event"
@@ -839,7 +839,7 @@ msgstr "Registrerte hendelser"
 msgid "Please select {{category}}."
 msgstr "Velg {{kategori}}."
 
-msgid "Or see all [TET] accessible to you in {{program}} "
+msgid "Or see all records accessible to you in {{program}} "
 msgstr "Eller se alle opptegnelser som er tilgjengelige for deg i {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
@@ -956,7 +956,7 @@ msgstr "Tildel"
 msgid "Event assigned to {{name}}"
 msgstr "Hendelse er tildelt til {{name}}"
 
-msgid "Feedback"
+msgid "Feedbacks"
 msgstr "Tilbakemeldinger"
 
 msgid "Show all events"
