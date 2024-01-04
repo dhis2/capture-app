@@ -840,7 +840,7 @@ msgid "Please select {{category}}."
 msgstr "Velg {{kategori}}."
 
 msgid "Or see all [TET] accessible to you in {{program}} "
-msgstr "Eller se alle [TET] som er tilgjengelige for deg i {{program}}"
+msgstr "Eller se alle opptegnelser som er tilgjengelige for deg i {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr "Eller se alle hendelser som er tilgjengelige for deg i {{program}}"

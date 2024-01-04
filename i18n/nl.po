@@ -855,7 +855,7 @@ msgid "Please select {{category}}."
 msgstr "Selecteer {{categorie}}."
 
 msgid "Or see all [TET] accessible to you in {{program}} "
-msgstr "Of bekijk alle [TET] die voor u toegankelijk zijn in {{programma}}"
+msgstr "Of bekijk alle records die voor u toegankelijk zijn in {{programma}}"
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr ""

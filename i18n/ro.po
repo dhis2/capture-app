@@ -810,7 +810,7 @@ msgid "Please select {{category}}."
 msgstr "Selectați {{category}}."
 
 msgid "Or see all [TET] accessible to you in {{program}} "
-msgstr "Sau vedeți toate [TET]-urile accesibile dumneavoastră în {{program}}"
+msgstr "Sau vedeți toate înregistrările accesibile dvs. în {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr "Sau vedeți toate evenimentele accesibile dvs. în {{program}}"
