@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 import { programTypes } from '../../../../metaData';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
@@ -38,17 +39,23 @@ type Props = {|
     ...CssClasses,
 |}
 
-const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, classes }: Props) => {
+const WithoutOrgUnitSelectedMessagePlain = (
+    { programId, setShowAccessible, classes }: Props) => {
     // TODO - this hook breaks the app when the program is not found
     const { program, programType } = useProgramInfo(programId);
 
-    const messageKey = programType === programTypes.TRACKER_PROGRAM ? '[TEI]' : 'events';
+    const selectedProgram = programCollection.get(programId);
+    // $FlowFixMe[prop-missing]
+    const trackedEntityTypeName = (selectedProgram?.trackedEntityType?.name || '').toLowerCase();
+
+    const resourceType = programType === programTypes.TRACKER_PROGRAM ? `${trackedEntityTypeName}s` : 'events';
     const IncompleteSelectionMessage = useMemo(() => (
-        i18n.t(`Or see all ${messageKey} accessible to you in {{program}}`, {
+        i18n.t('Or see all {{resourceType}} accessible to you in {{program}}', {
+            resourceType,
             program: program.name,
             interpolation: { escapeValue: false },
         })
-    ), [messageKey, program.name]);
+    ), [resourceType, program.name]);
 
     return (
         <div
