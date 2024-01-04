@@ -850,10 +850,12 @@ msgid "Please select {{category}}."
 msgstr "Veuillez sélectionner {{catégorie}}."
 
 msgid "Or see all [TET] accessible to you in {{program}} "
-msgstr "Ou voir tous les [TET] auxquels vous avez accès dans {{programme}}"
+msgstr ""
+"Ou voir tous les enregistrements auxquels vous avez accès dans {{programme}}"
 
 msgid "Or see all events accessible to you in {{program}}"
-msgstr "Ou voir tous les événements auxquels vous avez accès dans {{programme}}"
+msgstr ""
+"Ou voir tous les événements auxquels vous avez accès dans {{programme}}"
 
 msgid "Please select an organisation unit."
 msgstr "Veuillez sélectionner une unité d'organisation."
