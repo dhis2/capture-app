@@ -859,8 +859,8 @@ msgstr "Eventos registrados"
 msgid "Please select {{category}}."
 msgstr "Seleccione {{categoría}}."
 
-msgid "Or see all [TET] accessible to you in {{program}} "
-msgstr "O vea todos los registros a los que puede acceder en {{program}}"
+msgid "Or see all [TET] accessible to you in {{program}}"
+msgstr "O vea todos los [TET] a los que puede acceder en {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr "O vea todos los eventos a los que puede acceder en {{program}}"
