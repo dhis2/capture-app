@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
-"PO-Revision-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-01-05T11:12:17.180Z\n"
+"PO-Revision-Date: 2024-01-05T11:12:17.180Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1173,6 +1173,9 @@ msgstr "Remove mark for follow-up"
 msgid "Mark for follow-up"
 msgstr "Mark for follow-up"
 
+msgid "Transfer"
+msgstr "Transfer"
+
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr "Existing dates for auto-generated events will not be updated."
 
@@ -1202,6 +1205,19 @@ msgstr "Finish drawing before saving"
 
 msgid "Set area"
 msgstr "Set area"
+
+msgid "Search for an organisation unit"
+msgstr "Search for an organisation unit"
+
+msgid "Transfer Ownership"
+msgstr "Transfer Ownership"
+
+msgid ""
+"Choose the organisation unit to which enrollment ownership should be "
+"transferred."
+msgstr ""
+"Choose the organisation unit to which enrollment ownership should be "
+"transferred."
 
 msgid "Enrollment date"
 msgstr "Enrollment date"
@@ -1380,6 +1396,9 @@ msgstr "This stage can only have one event"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
 
+msgid "Assigned to"
+msgstr "Assigned to"
+
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"
 
@@ -1445,9 +1464,6 @@ msgstr "Download data..."
 
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
-
-msgid "Assigned to"
-msgstr "Assigned to"
 
 msgid "Registration Date"
 msgstr "Registration Date"

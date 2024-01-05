@@ -12,6 +12,8 @@ import { AddLocation } from './AddLocation';
 import type { PlainProps } from './actions.types';
 import { LoadingMaskForButton } from '../../LoadingMasks';
 import { MapModal } from '../MapModal';
+import { Transfer } from './Transfer';
+import { TransferModal } from '../TransferModal';
 
 const styles = {
     actions: {
@@ -39,6 +41,7 @@ export const ActionsPlain = ({
 }: PlainProps) => {
     const [isOpenActions, setOpenActions] = useState(false);
     const [isOpenMap, setOpenMap] = useState(false);
+    const [isOpenTransfer, setOpenTransfer] = useState(false);
     const handleOnUpdate = (arg) => {
         setOpenActions(false);
         onUpdate(arg);
@@ -75,6 +78,13 @@ export const ActionsPlain = ({
                                 enrollment={enrollment}
                                 onUpdate={handleOnUpdate}
                             />
+                            <Transfer
+                                enrollment={enrollment}
+                                setOpenTransfer={() => {
+                                    setOpenTransfer(true);
+                                    setOpenActions(false);
+                                }}
+                            />
                             <AddLocation
                                 enrollment={enrollment}
                                 setOpenMap={() => {
@@ -110,6 +120,13 @@ export const ActionsPlain = ({
                 onUpdate={handleOnUpdate}
                 setOpenMap={setOpenMap}
             />}
+            {isOpenTransfer && (
+                <TransferModal
+                    enrollment={enrollment}
+                    onUpdate={handleOnUpdate}
+                    setOpenTransfer={setOpenTransfer}
+                />
+            )}
         </>
     );
 };
