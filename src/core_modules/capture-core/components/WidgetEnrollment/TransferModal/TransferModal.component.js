@@ -9,7 +9,7 @@ import {
     Button,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { TransferModalProps } from './TransferModal.types';
 import { OrgUnitField } from './OrgUnitField/OrgUnitField.component';
 
