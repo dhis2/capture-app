@@ -1,19 +1,32 @@
 // @flow
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { convertClientToForm } from '../../../../converters';
+import type { InputAttribute } from '../../EnrollmentRegistrationEntry/hooks/useFormValues';
 
+type Props = {
+    inheritedAttributes: ?Array<InputAttribute>,
+};
 
-export const useFormValuesFromSearchTerms = () => {
+export const useFormValuesFromSearchTerms = ({ inheritedAttributes }: Props) => {
     const searchTerms = useSelector(({ searchDomain }) => searchDomain.currentSearchInfo.currentSearchTerms);
-    const [formValues, setFormValues] = useState();
-    useEffect(() => {
-        if (searchTerms) {
-            const searchFormValues = searchTerms
-                ?.reduce((acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }), {});
-            setFormValues(searchFormValues);
-        }
-    }, [searchTerms]);
 
-    return formValues;
+    return useMemo(() => {
+        if (inheritedAttributes) {
+            return inheritedAttributes
+                ?.reduce((acc, item) => {
+                    acc[item.attribute] = convertClientToForm(item.value, item.valueType);
+                    return acc;
+                }, {});
+        }
+        if (searchTerms) {
+            return searchTerms
+                ?.reduce((acc, item) => {
+                    acc[item.id] = convertClientToForm(item.value, item.type);
+                    return acc;
+                }, {});
+        }
+
+        return null;
+    }, [inheritedAttributes, searchTerms]);
 };

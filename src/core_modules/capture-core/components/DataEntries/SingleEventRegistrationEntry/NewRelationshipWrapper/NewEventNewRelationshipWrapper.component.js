@@ -115,6 +115,7 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
                     <NewRelationship
                         header={i18n.t('New event relationship')}
                         onGetUnsavedAttributeValues={this.onGetUnsavedAttributeValues}
+                        onCancel={onCancel}
                         {...passOnProps}
                     />
                 </Paper>

@@ -1,16 +1,16 @@
 # 
 # Translators:
-# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
-# Saysamone Sibounma, 2023
-# Viktor Varland <viktor@dhis2.org>, 2023
 # Philip Larsen Donnelly, 2023
+# Viktor Varland <viktor@dhis2.org>, 2023
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2023
+# Saysamone Sibounma, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2023\n"
+"Last-Translator: Saysamone Sibounma, 2023\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -523,6 +523,9 @@ msgstr ""
 msgid "suggestions could not be retrieved"
 msgstr ""
 
+msgid "No results found"
+msgstr ""
+
 msgid "No items to display"
 msgstr ""
 
@@ -584,7 +587,7 @@ msgid "Offline"
 msgstr "ບໍ່ມີການເຊື່ອມຕໍ່"
 
 msgid "Syncing"
-msgstr ""
+msgstr "ກຳລັງອັບເດດຂໍ້ມູນໃຫ້ຄືກັນ"
 
 msgid "Add comment"
 msgstr ""
@@ -941,9 +944,6 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
-msgid "No results found"
-msgstr ""
-
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -1142,6 +1142,33 @@ msgstr "ໝາຍໄວ້ເພື່ອຕິດຕາມ"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "ເສັ້ນຂະໜານ"
+
+msgid "Longitude"
+msgstr "ເສັ້ນແວງ"
+
+msgid "Edit"
+msgstr "ແກ້ໄຂ"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr "Coordinates"
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "ວັນທີ່ລົງທະບຽນ"
 
@@ -1165,6 +1192,12 @@ msgstr ""
 
 msgid "Cancelled"
 msgstr "ຍົກເລີກແລ້ວ"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1215,7 +1248,7 @@ msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
 msgid "Event completed"
-msgstr ""
+msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 
 msgid "Back to all stages and events"
 msgstr ""
@@ -1287,9 +1320,6 @@ msgstr ""
 
 msgid "{{TETName}} profile"
 msgstr ""
-
-msgid "Edit"
-msgstr "ແກ້ໄຂ"
 
 msgid "tracked entity instance"
 msgstr ""
@@ -1536,12 +1566,6 @@ msgid "To time"
 msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
 msgstr ""
 
 msgid "Area on map saved"

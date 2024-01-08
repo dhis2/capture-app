@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
-import { Button } from '@dhis2/ui';
+import { Button, Modal, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 
 const getStyles = () => ({
     buttonContainer: {
@@ -29,18 +28,20 @@ const DeleteConfirmationDialogPlain = (props: Props) => {
         classes,
     } = props;
 
+    if (!open) {
+        return null;
+    }
+
     return (
-        <Dialog
-            open={open}
+        <Modal
+            hide={!open}
             onClose={onClose}
         >
-            <DialogTitle>{i18n.t('Delete view')}</DialogTitle>
-            <DialogContent>
-                <DialogContentText>
-                    {i18n.t('Do you really want to delete the \'{{templateName}}\' view?', { templateName })}
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions
+            <ModalTitle>{i18n.t('Delete view')}</ModalTitle>
+            <ModalContent>
+                {i18n.t('Do you really want to delete the \'{{templateName}}\' view?', { templateName })}
+            </ModalContent>
+            <ModalActions
                 className={classes.buttonContainer}
             >
                 <Button onClick={onClose}>
@@ -49,8 +50,8 @@ const DeleteConfirmationDialogPlain = (props: Props) => {
                 <Button onClick={onDeleteTemplate} primary>
                     {i18n.t('Confirm')}
                 </Button>
-            </DialogActions>
-        </Dialog>
+            </ModalActions>
+        </Modal>
     );
 };
 

@@ -35,6 +35,7 @@ export class DataElement {
     _displayInReports: boolean;
     _icon: Icon | void;
     _unique: ?Unique;
+    _inherit: boolean;
     _searchable: ?boolean;
     _url: ?string;
     _attributeValues: Array<CachedAttributeValue>
@@ -155,6 +156,14 @@ export class DataElement {
     }
     get unique(): ?Unique {
         return this._unique;
+    }
+
+    get inherit(): boolean {
+        return this._inherit;
+    }
+
+    set inherit(value: boolean) {
+        this._inherit = value;
     }
 
     set searchable(searchable: boolean) {

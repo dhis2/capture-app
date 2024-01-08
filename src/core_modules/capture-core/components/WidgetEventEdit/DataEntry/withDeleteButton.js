@@ -39,33 +39,40 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                     {i18n.t('Delete')}
                 </Button>
 
-                <Modal
-                    hide={!this.state.isOpen}
-                >
-                    <ModalTitle>
-                        {i18n.t('Delete event')}
-                    </ModalTitle>
-                    <ModalContent>
-                        {i18n.t('Deleting an event is permanent and cannot be undone.' + ' ' +
-                        'Are you sure you want to delete this event? ')}
-                    </ModalContent>
-                    <ModalActions>
-                        <ButtonStrip end>
-                            <Button onClick={() => { this.setState({ isOpen: false }); }} secondary>
-                                {i18n.t('No, cancel')}
-                            </Button>
-                            <Button
-                                onClick={() => {
-                                    this.props.onDelete();
-                                    this.setState({ isOpen: false });
-                                }}
-                                destructive
-                            >
-                                {i18n.t('Yes, delete event')}
-                            </Button>
-                        </ButtonStrip>
-                    </ModalActions>
-                </Modal>
+                {this.state.isOpen && (
+                    <Modal
+                        hide={!this.state.isOpen}
+                    >
+                        <ModalTitle>
+                            {i18n.t('Delete event')}
+                        </ModalTitle>
+                        <ModalContent>
+                            {i18n.t('Deleting an event is permanent and cannot be undone.' + ' ' +
+                                'Are you sure you want to delete this event? ')}
+                        </ModalContent>
+                        <ModalActions>
+                            <ButtonStrip end>
+                                <Button
+                                    onClick={() => {
+                                        this.setState({ isOpen: false });
+                                    }}
+                                    secondary
+                                >
+                                    {i18n.t('No, cancel')}
+                                </Button>
+                                <Button
+                                    onClick={() => {
+                                        this.props.onDelete();
+                                        this.setState({ isOpen: false });
+                                    }}
+                                    destructive
+                                >
+                                    {i18n.t('Yes, delete event')}
+                                </Button>
+                            </ButtonStrip>
+                        </ModalActions>
+                    </Modal>
+                )}
             </div>
             ) : null
         )

@@ -6,4 +6,9 @@ import {
     dateUtils,
 } from './converters';
 
-export const rulesEngine = new RulesEngine(inputConverter, outputConverter, dateUtils, environmentTypes.WebClient);
+export const rulesEngine = new RulesEngine(
+    inputConverter,
+    outputConverter,
+    dateUtils,
+    environmentTypes.WebClient,
+);

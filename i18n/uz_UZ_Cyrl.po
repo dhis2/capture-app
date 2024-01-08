@@ -294,7 +294,7 @@ msgstr ""
 " қилинади."
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "Ҳа, ўзгартиришлар бекор қилинсин"
 
 msgid "No, cancel"
 msgstr "Йўқ, бекор қилинг"
@@ -1181,7 +1181,7 @@ msgid "Latitude"
 msgstr "Кенглик"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Узунлик"
 
 msgid "Edit"
 msgstr "Таҳрирлаш"

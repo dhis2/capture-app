@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { IconCheckmark16, IconLocation16, colors, Button } from '@dhis2/ui';
+import { IconCheckmark16, IconLocation16, colors, Button, ModalContent, ModalActions } from '@dhis2/ui';
 import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
@@ -63,6 +63,8 @@ function coordsToFeatureCollection(coordinates): ?FeatureCollection {
 }
 
 export class PolygonField extends React.Component<Props, State> {
+    mapInstance: ?any;
+
     constructor(props: Props) {
         super(props);
 
@@ -70,6 +72,13 @@ export class PolygonField extends React.Component<Props, State> {
             showMap: false,
             zoom: 13,
         };
+    }
+
+    componentDidUpdate() {
+        // Invalidate map size to fix rendering bug
+        if (this.mapInstance && this.state.showMap) {
+            this.mapInstance.leafletElement.invalidateSize();
+        }
     }
 
     onFeatureGroupReady = (reactFGref: any, featureCollection: ?FeatureCollection) => {
@@ -132,19 +141,25 @@ export class PolygonField extends React.Component<Props, State> {
         this.closeMap();
     }
 
+    setMapInstance = (mapInstance: any) => {
+        this.mapInstance = mapInstance;
+    }
+
     renderMapDialog = () => {
         const clonedDialog = React.cloneElement(
 
             // $FlowFixMe[incompatible-type] automated comment
             this.props.mapDialog,
-            { open: this.state.showMap, onClose: this.closeMap },
+            { hide: !this.state.showMap, onClose: this.closeMap },
 
             // $FlowFixMe[incompatible-use] automated comment
             [...React.Children.toArray(this.props.mapDialog.props.children), (
-                <div className={defaultClasses.dialogContent} key="dialogContent">
-                    {this.renderMap()}
+                <>
+                    <ModalContent className={defaultClasses.dialogContent} key="dialogContent">
+                        {this.renderMap()}
+                    </ModalContent>
                     {this.renderDialogActions()}
-                </div>
+                </>
             )],
         );
         return clonedDialog;
@@ -157,7 +172,13 @@ export class PolygonField extends React.Component<Props, State> {
         const center = this.getCenter(featureCollection);
         return (
             <div className={defaultClasses.mapContainer}>
-                <Map zoom={zoom} center={center} className={defaultClasses.map} key="map">
+                <Map
+                    zoom={zoom}
+                    center={center}
+                    className={defaultClasses.map}
+                    key="map"
+                    ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
+                >
                     <WrappedLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick />
                     <TileLayer
                         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
@@ -188,7 +209,7 @@ export class PolygonField extends React.Component<Props, State> {
     }
 
     renderDialogActions = () => (
-        <div className={defaultClasses.dialogActionOuterContainer}>
+        <ModalActions className={defaultClasses.dialogActionOuterContainer}>
             <div className={defaultClasses.dialogActionInnerContainer}>
                 {/* $FlowFixMe[prop-missing] automated comment */}
                 <Button secondary onClick={this.closeMap}>
@@ -201,7 +222,7 @@ export class PolygonField extends React.Component<Props, State> {
                     {i18n.t('Set area')}
                 </Button>
             </div>
-        </div>
+        </ModalActions>
     );
 
     render() {

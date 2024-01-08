@@ -3,7 +3,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { QuickActionButtonTypes } from './QuickActionButton.types';
 
 const styles = {

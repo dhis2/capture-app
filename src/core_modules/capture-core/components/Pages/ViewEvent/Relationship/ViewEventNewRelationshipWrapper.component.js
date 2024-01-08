@@ -102,6 +102,7 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <NewRelationship
                         header={i18n.t('New event relationship')}
+                        onCancel={onCancel}
                         {...passOnProps}
                     />
                 </Paper>
@@ -110,7 +111,7 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
                     text={i18n.t('Leaving this page will discard any selections you made for a new relationship')}
                     destructiveText={i18n.t('Yes, discard changes')}
                     cancelText={i18n.t('No, cancel')}
-                    onDestroy={this.props.onCancel}
+                    onDestroy={onCancel}
                     open={!!this.state.discardDialogOpen}
                     onCancel={this.handleCancelDiscard}
                 />
